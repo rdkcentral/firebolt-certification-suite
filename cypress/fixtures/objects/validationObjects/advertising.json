@@ -1,0 +1,123 @@
+{
+    "POLICY_TRUE": {
+        "type": "fixture",
+        "method": "advertising.policy",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "TRUE",
+                "description": "Validation of the Advertising Policy for Param equal to True Format"
+            }
+        ]
+    },
+    "POLICY_FALSE": {
+        "type": "fixture",
+        "method": "advertising.policy",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "FALSE",
+                "description": "Validation of the Advertising for Param Policy equal to False Format"
+            }
+        ]
+    },
+    "POLICY_NONE": {
+        "type": "fixture",
+        "method": "advertising.policy",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "NONE",
+                "description": "Validation of the Advertising for Param Policy equal to None Format"
+            }
+        ]
+    },
+    "POLICY_ADSUNWATCHED": {
+        "type": "fixture",
+        "method": "advertising.policy",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "ADSUNWATCHED",
+                "description": "Validation of the Advertising Policy for Ads Unwatched Format"
+            }
+        ]
+    },
+    "POLICY_ADSALL": {
+        "type": "fixture",
+        "method": "advertising.policy",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "ADSALL",
+                "description": "Validation of the Advertising Policy for All Ads Format"
+            }
+        ]
+    },
+    "POLICY_ALL": {
+        "type": "fixture",
+        "method": "advertising.policy",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "ALL",
+                "description": "Validation of the Advertising Policy for Param All Format"
+            }
+        ]
+    },
+    "DEVICEATTRIBUTES": {
+        "type": "fixture",
+        "method": "advertising.deviceAttributes",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "ADVERTISING_DEVICEATTRIBUTES",
+                "description": "Validation of the Advertising DeviceAttributes Format"
+            }
+        ]
+    },
+    "APPBUNDLEID": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "ADVERTISING_APPBUNDLEID",
+                "description": "Validation of the Advertising appBundleId Format"
+            }
+        ]
+    },
+
+    "CONFIG_ZERO": {
+        "type": "fixture",
+        "method": "advertising.config",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "INTEGER0",
+                "description": "Validation of the Advertising Config when Coppa equals O Format"
+            }
+        ]
+    },
+    "CONFIG_ONE": {
+        "type": "fixture",
+        "method": "advertising.config",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "INTEGER1",
+                "description": "Validation of the Advertising Config when Coppa equals 1 Format"
+            }
+        ]
+    },
+    "SKIPRESTRICTION": {
+        "type": "fixture",
+        "method": "advertising.setSkipRestriction",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "ALL",
+                "description": "Validation of the Advertising skipRestriction Format"
+            }
+        ]
+    }
+}

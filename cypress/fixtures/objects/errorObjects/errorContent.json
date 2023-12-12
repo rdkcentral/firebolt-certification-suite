@@ -1,0 +1,33 @@
+{
+  "isNotSupported": {
+    "errorMessage": ["Unsupported", "Not supported", "not supported", "not available"],
+    "errorCode": [-50100, -40300]
+  },
+  "isInvalidTypeParams": {
+    "errorMessage": [
+      "Invalid Parameters",
+      "Invalid params",
+      "Invalid capability",
+      "invalid length",
+      "The length of the items must be `>= 1`",
+      "invalid type",
+      "Invalid value",
+      "missing field",
+      "unknown variant",
+      "Field not in expected",
+      "code is not of the format specified",
+      "expected value",
+      "Invalid parameters",
+      "must not contain any numbers to the right of the decimal point",
+      "out of range",
+      "Invalid key",
+      "not a valid OpenRPC date-time format",
+      "data did not match any variant of untagged enum NavigationIntent "
+    ],
+    "errorCode": [-32602, -32400, -40300]
+  },
+  "isCustomError": {
+    "errorMessage": ["Custom error", "reserved app id"],
+    "errorCode": [-32001, -32602, -40400]
+  }
+}

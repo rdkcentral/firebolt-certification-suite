@@ -1,0 +1,109 @@
+{
+    "FETCH_DEVICE_ID": {
+        "method": "device.id"
+    },
+    "FETCH_DEVICE_DISTRIBUTOR": {
+        "method": "device.distributor"
+    },
+    "FETCH_DEVICE_PLATFORM": {
+        "method": "device.platform"
+    },
+    "FETCH_DEVICE_UID": {
+        "method": "device.uid"
+    },
+    "FETCH_DEVICE_TYPE": {
+        "method": "device.type"
+    },
+    "FETCH_DEVICE_MODEL": {
+        "method": "device.model"
+    },
+    "FETCH_DEVICE_SKU": {
+        "method": "device.sku"
+    },
+    "FETCH_DEVICE_MAKE": {
+        "method": "device.make"
+    },
+    "FETCH_DEVICE_VERSION": {
+        "method": "device.version"
+    },
+    "EXPECTED_DEVICE_ID": {
+        "method": "device.id",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_ID"
+    },
+    "EXPECTED_DEVICE_DISTRIBUTOR": {
+        "method": "device.distributor",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_DISTRIBUTOR"
+    },
+    "EXPECTED_DEVICE_PLATFORM": {
+        "method": "device.platform",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_PLATFORM"
+    },
+    "EXPECTED_DEVICE_UID": {
+        "method": "device.uid",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_UID"
+    },
+    "EXPECTED_DEVICE_TYPE": {
+        "method": "device.type",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_TYPE"
+    },
+    "EXPECTED_DEVICE_MODEL": {
+        "method": "device.model",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_MODEL"
+    },
+    "EXPECTED_DEVICE_SKU": {
+        "method": "device.sku",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_SKU"
+    },
+    "EXPECTED_DEVICE_MAKE": {
+        "method": "device.make",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_MAKE"
+    },
+    "EXPECTED_DEVICE_VERSION": {
+        "method": "device.version",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_VERSION"
+    },
+    "DEVICE_ONNAMECHANGED": {
+        "method": "device.onNameChanged"
+    },
+    "SET_DEVICE_NAME_TO_LIVING_HALL": {
+        "method": "manage_device.setName",
+        "params": "DEVICE_DEVICENAME_LIVING_HALL"
+    },
+    "GET_DEVICE_NAME": {
+        "method": "device.name"
+    },
+    "LIVING_HALL_FOR_DEVICE_NAME": {
+        "method": "device.name",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_DEVICENAME_LIVING_HALL",
+        "expectingError": false
+    },
+    "LIVING_HALL_FOR_DEVICE_NAME_EVENT": {
+        "method": null,
+        "event": "device.onNameChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse",
+        "expected": "DEVICE_DEVICENAME_LIVING_HALL",
+        "expectingError": false
+    }
+}

@@ -1,0 +1,243 @@
+{
+  "FONTFAMILY_MONOSPACE": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTFAMILY_MONOSPACE",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTFAMILY_CURSIVE": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTFAMILY_CURSIVE",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTFAMILY_PROPORTIONAL_SERIF": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SERIF",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTFAMILY_MONOSPACED_SERIF": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTFAMILY_PROPORTIONAL_SANSERIF": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SANSERIF",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTFAMILY_SMALLCAPS": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTFAMILY_SMALLCAPS",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTFAMILY_CASUAL": {
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTFAMILY_CASUAL",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTFAMILY_SANSERIF": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTFAMILY_SANS_SERIF",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTCOLOR": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTCOLOR",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTEDGE_RAISED": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTEDGE_RAISED",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTEDGE_NONE": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTEDGE_NONE",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTEDGE_DEPRESSED": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTEDGE_DEPRESSED",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTEDGE_UNIFORM": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTEDGE_UNIFORM",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTEDGE_DROPSHADOW_LEFT": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_LEFT",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTEDGE_DROPSHADOW_RIGHT": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_RIGHT",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTEDGE_COLOR": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTEDGE_COLOR",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "BACKGROUNDCOLOR": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_BACKGROUNDCOLOR",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "PREFERREDLANGUAGES_ENGLISH": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_PREFERREDLANGUAGES_ENGLISH",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTCOLOR_FFFFFF": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTCOLOR_FFFFFF",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "FONTEDGECOLOR_7F7F7F": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "BACKGROUNDCOLOR_000000": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_BACKGROUNDCOLOR_000000",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  },
+  "WINDOWCOLOR_000000": {
+    "type": "fixture",
+    "method": "accessibility.closedCaptionsSettings",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "ACCESSIBILITY_WINDOWCOLOR_000000",
+        "description": "Validation of the accessibility fontfamily monospace"
+      }
+    ]
+  }
+}

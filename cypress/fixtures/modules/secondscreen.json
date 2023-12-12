@@ -1,0 +1,13 @@
+{
+    "TEST": {
+        "type": "test"
+    },
+    "TRUE": {
+        "type": true
+    },
+    "INTEGER_123": {
+        "type": 123
+    },
+    "FRIENDLYNAME": "Guest Room",
+    "DIAL2":{"dial2": true}
+}

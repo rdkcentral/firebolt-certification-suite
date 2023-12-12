@@ -1,0 +1,35 @@
+{
+    "DEVICE": {
+        "type": "fixture",
+        "method": "secondscreen.device",
+        "validations": [
+            {
+                "mode": "deviceContentValidation",
+                "type": "DEVICEID",
+                "description": "Validation of the Secondscreen device Format"
+            }
+        ]
+      },
+      "FRIENDLYNAME": {
+          "type": "fixture",
+          "method": "secondscreen.friendlyName",
+          "validations": [
+              {
+                  "mode": "staticContentValidation",
+                  "type": "SECONDSCREEN_FRIENDLYNAME",
+                  "description": "Validation of the Secondscreen friendlyName Format"
+              }
+          ]
+      },
+      "PROTOCOLS": {
+          "type": "fixture",
+          "method": "secondscreen.protocols",
+          "validations": [
+              {
+                  "mode": "staticContentValidation",
+                  "type": "SECONDSCREEN_DIAL2",
+                  "description": "Validation of the Secondscreen protocols Format"
+              }
+          ]
+      }
+}

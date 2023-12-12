@@ -1,0 +1,24 @@
+{
+    "INITIALIZATION_TRUE": {
+        "type": "fixture",
+        "method": "parameters.initialization",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "PARAMETERS_INITIALIZATION_TRUE",
+                "description": "Validation of the Parameters initialization Format"
+            }
+        ]
+      },
+      "INITIALIZATION": {
+        "type": "fixture",
+        "method": "parameters.initialization",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "PARAMETERS_INITIALIZATION",
+                "description": "Validation of the Parameters initialization for homeIntent Format"
+            }
+        ]
+      }
+}

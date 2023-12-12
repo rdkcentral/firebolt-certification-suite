@@ -1,0 +1,1140 @@
+{
+    "CLOSEDCAPTIONS_SETTINGS":{
+        "method": "accessibility.onClosedCaptionsSettingsChanged"
+    },
+    "GET_CLOSEDCAPTIONS_SETTINGS":{
+        "method": "accessibility.closedCaptionsSettings"
+    },
+    "GET_AUDIODESCRIPTIONSETTINGS_SETTINGS":{
+        "method": "accessibility.audioDescriptionSettings"
+    },
+    "DISABLE_CLOSEDCAPTIONS":{
+        "method": "manage_closedcaptions.setEnabled",
+		"params": "FALSE"
+    },
+    "ENABLE_CLOSEDCAPTIONS":{
+        "method": "manage_closedcaptions.setEnabled",
+		"params": "TRUE"
+    },
+    "SET_FONTFAMILY_TO_MONOSPACED_SANSERIF":{
+        "method": "manage_closedcaptions.setFontFamily",
+		"params": "ACCESSIBILITY_FONTFAMILY_MONOSPACE"
+    },
+    "SET_FONTFAMILY_TO_CURSIVE":{
+        "method": "manage_closedcaptions.setFontFamily",
+		"params": "ACCESSIBILITY_FONTFAMILY_CURSIVE"
+    },
+    "SET_FONTFAMILY_TO_PROPORTIONAL_SERIF":{
+        "method": "manage_closedcaptions.setFontFamily",
+		"params": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SERIF"
+    },
+    "SET_FONTFAMILY_TO_MONOSPACED_SERIF":{
+        "method": "manage_closedcaptions.setFontFamily",
+		"params": "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF"
+    },
+    "SET_FONTFAMILY_TO_PROPORTIONAL_SANSERIF":{
+        "method": "manage_closedcaptions.setFontFamily",
+		"params": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SANSERIF"
+    },
+    "SET_FONTFAMILY_TO_SMALLCAPS":{
+        "method": "manage_closedcaptions.setFontFamily",
+		"params": "ACCESSIBILITY_FONTFAMILY_SMALLCAPS"
+    },
+    "SET_FONTFAMILY_TO_CASUAL":{
+        "method": "manage_closedcaptions.setFontFamily",
+		"params": "ACCESSIBILITY_FONTFAMILY_CASUAL"
+    },
+    "SET_FONTSIZE_TO_1":{
+        "method": "manage_closedcaptions.setFontSize",
+		"params": "INTEGER1"
+    },
+    "SET_FONTCOLOR_TO_#FF00FF":{
+        "method": "manage_closedcaptions.setFontColor",
+		"params": "ACCESSIBILITY_FONTCOLOR"
+    },
+    "SET_FONTEDGE_TO_RAISED":{
+        "method": "manage_closedcaptions.setFontEdge",
+		"params": "ACCESSIBILITY_FONTEDGE_RAISED"
+    },
+    "SET_FONTEDGE_TO_NONE":{
+        "method": "manage_closedcaptions.setFontEdge",
+		"params": "NONE"
+    },
+    "SET_FONTEDGE_TO_DEPRESSED":{
+        "method": "manage_closedcaptions.setFontEdge",
+		"params": "ACCESSIBILITY_FONTEDGE_DEPRESSED"
+    },
+    "SET_FONTEDGE_TO_UNIFORM":{
+        "method": "manage_closedcaptions.setFontEdge",
+		"params": "ACCESSIBILITY_FONTEDGE_UNIFORM"
+    },
+    "SET_FONTEDGE_TO_DROPSHADOW_LEFT":{
+        "method": "manage_closedcaptions.setFontEdge",
+		"params": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_LEFT"
+    },
+    "SET_FONTEDGE_TO_DROPSHADOW_RIGHT":{
+        "method": "manage_closedcaptions.setFontEdge",
+		"params": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_RIGHT"
+    },
+    "SET_FONTEDGECOLOR_TO_#FFFFFF":{
+        "method": "manage_closedcaptions.setFontEdgeColor",
+		"params": "ACCESSIBILITY_FONTEDGE_COLOR"
+    },
+    "SET_BACKGROUNDCOLOR_TO_#7F7F7F":{
+        "method": "manage_closedcaptions.setBackgroundColor",
+		"params": "ACCESSIBILITY_BACKGROUNDCOLOR"
+    },
+    "SET_FONTOPACITY_TO_75":{
+        "method": "manage_closedcaptions.setFontOpacity",
+		"params": "INTEGER75"
+    },
+    "SET_BACKGROUNDOPACITY_TO_75":{
+        "method": "manage_closedcaptions.setBackgroundOpacity",
+		"params": "INTEGER75"
+    },
+    "SET_TEXTALIGN_TO_LEFT":{
+        "method": "manage_closedcaptions.setTextAlign",
+		"params": "LEFT"
+    },
+    "SET_TEXTALIGN_TO_CENTER":{
+        "method": "manage_closedcaptions.setTextAlign",
+		"params": "CENTER"
+    },
+    "SET_TEXTALIGN_TO_RIGHT":{
+        "method": "manage_closedcaptions.setTextAlign",
+		"params": "RIGHT"
+    },
+    "SET_TEXTALIGNVERTICAL_TO_TOP":{
+        "method": "manage_closedcaptions.setTextAlignVertical",
+		"params": "TOP"
+    },
+    "SET_TEXTALIGNVERTICAL_TO_MIDDLE":{
+        "method": "manage_closedcaptions.setTextAlignVertical",
+		"params": "MIDDLE"
+    },
+    "SET_TEXTALIGNVERTICAL_TO_BOTTOM":{
+        "method": "manage_closedcaptions.setTextAlignVertical",
+		"params": "BOTTOM"
+    },
+    "SET_WINDOWCOLOR_TO_WHITE":{
+        "method": "manage_closedcaptions.setWindowColor",
+		"params": "WHITE"
+    },
+    "SET_WINDOWOPACITY_TO_50":{
+        "method": "manage_closedcaptions.setWindowOpacity",
+		"params": "INTEGER50"
+    },
+    "SET_FONTSIZE_TO_0.5":{
+        "method": "manage_closedcaptions.setFontSize",
+		"params": "VALUE05"
+    },
+    "SET_FONTSIZE_TO_1.5":{
+        "method": "manage_closedcaptions.setFontSize",
+		"params": "VALUE1.5"
+    },
+    "SET_LANGUAGES_TO_ENGLISH_SPANISH":{
+        "method": "manage_closedcaptions.setPreferredLanguages",
+		"params": "ACCESSIBILITY_PREFERRED_LANGUAGES"
+    },
+    "ENABLE_CLOSEDCAPTIONS_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setEnabled"
+    },
+    "SET_FONTFAMILY_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setFontFamily"
+    },
+    "SET_FONTSIZE_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setFontSize"
+    },
+    "SET_FONTCOLOR_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setFontColor"
+    },
+    "SET_FONTEDGE_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setFontEdge"
+    },
+    "SET_FONTEDGECOLOR_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setFontEdgeColor"
+    },
+    "SET_FONTOPACITY_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setFontOpacity"
+    },
+    "SET_BACKGROUNDCOLOR_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setBackgroundColor"
+    },
+    "SET_BACKGROUNDOPACITY_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setBackgroundOpacity"
+    },
+    "SET_TEXTALIGN_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setTextAlign"
+    },
+    "SET_TEXTALIGNVERTICAL_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setTextAlignVertical"
+    },
+    "SET_WINDOWCOLOR_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setWindowColor"
+    },
+    "SET_WINDOWOPACITY_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setWindowOpacity"
+    },
+    "SET_PREFERREDLANGUAGES_WITH_NO_PARAMETERS":{
+        "method": "manage_closedcaptions.setPreferredLanguages"
+    },
+    "SET_FONTFAMILY_AS_NULL":{
+        "method": "manage_closedcaptions.setFontFamily",
+		"params": "ACCESSIBILITY_VALUE_NULL"
+    },
+    "SET_FONTSIZE_AS_NULL":{
+        "method": "manage_closedcaptions.setFontSize",
+		"params": "ACCESSIBILITY_VALUE_NULL"
+    },
+    "SET_FONTCOLOR_AS_NULL":{
+        "method": "manage_closedcaptions.setFontColor",
+		"params": "ACCESSIBILITY_VALUE_NULL"
+    },
+    "SET_FONTEDGE_AS_NULL":{
+        "method": "manage_closedcaptions.setFontEdge",
+		"params": "ACCESSIBILITY_VALUE_NULL"
+    },
+    "SET_FONTEDGECOLOR_AS_NULL":{
+        "method": "manage_closedcaptions.setFontEdgeColor",
+		"params": "ACCESSIBILITY_VALUE_NULL"
+    },
+    "SET_FONTOPACITY_AS_NULL":{
+        "method": "manage_closedcaptions.setFontOpacity",
+		"params": "ACCESSIBILITY_VALUE_NULL"
+    },
+    "SET_BACKGROUNDCOLOR_AS_NULL":{
+        "method": "manage_closedcaptions.setBackgroundColor",
+		"params": "ACCESSIBILITY_VALUE_NULL"
+    },
+    "SET_BACKGROUNDOPACITY_AS_NULL":{
+        "method": "manage_closedcaptions.setBackgroundOpacity",
+		"params": "ACCESSIBILITY_VALUE_NULL"
+    },
+    "SET_TEXTALIGN_AS_NULL":{
+        "method": "manage_closedcaptions.setTextAlign",
+		"params": "ACCESSIBILITY_VALUE_NULL"
+    },
+    "SET_TEXTALIGNVERTICAL_AS_NULL":{
+        "method": "manage_closedcaptions.setTextAlignVertical",
+		"params": "ACCESSIBILITY_VALUE_NULL"
+    },
+    "SET_WINDOWCOLOR_AS_NULL":{
+        "method": "manage_closedcaptions.setWindowColor",
+		"params": "ACCESSIBILITY_VALUE_NULL"
+    },
+    "SET_WINDOWOPACITY_AS_NULL":{
+        "method": "manage_closedcaptions.setWindowOpacity",
+		"params": "ACCESSIBILITY_VALUE_NULL"
+    },
+    "VOICEGUIDANCE_SETTINGS":{
+        "method": "accessibility.onVoiceGuidanceSettingsChanged"
+    },
+    "GET_VOICEGUIDANCE_SETTINGS":{
+        "method": "accessibility.voiceGuidanceSettings"
+    },
+    "DISABLE_VOICEGUIDANCE":{
+        "method": "manage_voiceguidance.setEnabled",
+        "params": "FALSE"
+    },
+    "ENABLE_VOICEGUIDANCE":{
+        "method": "manage_voiceguidance.setEnabled",
+		"params": "TRUE"
+    },
+    "SET_SPEED_AS_1":{
+        "method": "manage_voiceguidance.setSpeed",
+		"params": "INTEGER1"
+    },
+    "SET_SPEED_AS_0.5":{
+        "method": "manage_voiceguidance.setSpeed",
+		"params": "VALUE05"
+    },
+    "SET_SPEED_AS_2":{
+        "method": "manage_voiceguidance.setSpeed",
+		"params": "INTEGER2"
+    },
+    "AUDIODESCRIPTION_SETTINGS":{
+        "method": "accessibility.onAudioDescriptionSettingsChanged"
+    },
+    "GET_AUDIODESCRIPTION_SETTINGS":{
+        "method": "accessibility.audioDescriptionSettings"
+    },
+    "DISABLE_AUDIODESCRIPTION":{
+        "method": "manage_audiodescriptions.setEnabled",
+		"params": "FALSE"
+    },
+    "ENABLE_AUDIODESCRIPTION":{
+        "method": "manage_audiodescriptions.setEnabled",
+		"params": "TRUE"
+    },
+    "ENABLE_VOICEGUIDANCE_WITH_NO_PARAMETERS":{
+        "method": "manage_voiceguidance.setEnabled"
+    },
+    "SET_SPEED_AS_2_WITH_NO_PARAMETERS":{
+        "method": "manage_voiceguidance.setSpeed"
+    },
+    "ENABLE_CLOSEDCAPTIONS_WITH_TEST_PARAMETER":{
+        "method": "manage_closedcaptions.setEnabled",
+		"params": "TEST",
+        "expected": "error"
+    },
+    "ENABLE_CLOSEDCAPTIONS_WITH_INTEGER_PARAMETER":{
+        "method": "manage_closedcaptions.setEnabled",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "SET_FONTFAMILY_TO_123":{
+        "method": "manage_closedcaptions.setFontFamily",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "SET_FONTFAMILY_TO_TRUE":{
+        "method": "manage_closedcaptions.setFontFamily",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "SET_FONTSIZE_TO_TEST":{
+        "method": "manage_closedcaptions.setFontSize",
+		"params": "TEST",
+        "expected": "error"
+    },
+    "SET_FONTSIZE_TO_TRUE":{
+        "method": "manage_closedcaptions.setFontSize",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "SET_FONTSIZE_TO_0.25":{
+        "method": "manage_closedcaptions.setFontSize",
+		"params": "VALUE025",
+        "expected": "error"
+    },
+    "SET_FONTCOLOR_TO_123":{
+        "method": "manage_closedcaptions.setFontColor",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "SET_FONTCOLOR_TO_TRUE":{
+        "method": "manage_closedcaptions.setFontColor",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "SET_FONTEDGE_TO_123":{
+        "method": "manage_closedcaptions.setFontEdge",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "SET_FONTEDGE_TO_TRUE":{
+        "method": "manage_closedcaptions.setFontEdge",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "SET_FONTEDGECOLOR_TO_123":{
+        "method": "manage_closedcaptions.setFontEdgeColor",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "SET_FONTEDGECOLOR_TO_TRUE":{
+        "method": "manage_closedcaptions.setFontEdgeColor",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "SET_BACKGROUNDCOLOR_TO_123":{
+        "method": "manage_closedcaptions.setBackgroundColor",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "SET_BACKGROUNDCOLOR_TO_TRUE":{
+        "method": "manage_closedcaptions.setBackgroundColor",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "SET_FONTOPACITY_TO_120":{
+        "method": "manage_closedcaptions.setFontOpacity",
+		"params": "INTEGER120",
+        "expected": "error"
+    },
+    "SET_FONTOPACITY_TO_TEST":{
+        "method": "manage_closedcaptions.setFontOpacity",
+		"params": "TEST",
+        "expected": "error"
+    },
+    "SET_FONTOPACITY_TO_TRUE":{
+        "method": "manage_closedcaptions.setFontOpacity",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "SET_BACKGROUNDOPACITY_TO_120":{
+        "method": "manage_closedcaptions.setBackgroundOpacity",
+		"params": "INTEGER120",
+        "expected": "error"
+    },
+    "SET_BACKGROUNDOPACITY_TO_TEST":{
+        "method": "manage_closedcaptions.setBackgroundOpacity",
+		"params": "TEST",
+        "expected": "error"
+    },
+    "SET_BACKGROUNDOPACITY_TO_TRUE":{
+        "method": "manage_closedcaptions.setBackgroundOpacity",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "SET_TEXTALIGN_TO_123":{
+        "method": "manage_closedcaptions.setTextAlign",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "SET_TEXTALIGN_TO_TRUE":{
+        "method": "manage_closedcaptions.setTextAlign",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "SET_TEXTALIGNVERTICAL_TO_123":{
+        "method": "manage_closedcaptions.setTextAlignVertical",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "SET_TEXTALIGNVERTICAL_TO_TRUE":{
+        "method": "manage_closedcaptions.setTextAlignVertical",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "SET_WINDOWCOLOR_TO_123":{
+        "method": "manage_closedcaptions.setWindowColor",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "SET_WINDOWOPACITY_TO_TRUE":{
+        "method": "manage_closedcaptions.setWindowOpacity",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "SET_FONTFAMILY_TO_SANS_SERIF":{
+        "method": "manage_closedcaptions.setFontFamily",
+		"params": "ACCESSIBILITY_FONTFAMILY_SANS_SERIF",
+        "expected": "error"
+    },
+    "SET_FONTEDGE_TO_SOLID":{
+        "method": "manage_closedcaptions.setFontEdge",
+		"params": "ACCESSIBILITY_FONTEDGE_SOLID",
+        "expected": "error"
+    },
+    "SET_PREFERREDLANGUAGES_TO_TRUE":{
+        "method": "manage_closedcaptions.setPreferredLanguages",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "SET_PREFERREDLANGUAGES_TO_123":{
+        "method": "manage_closedcaptions.setPreferredLanguages",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "ENABLE_VOICEGUIDANCE_WITH_TEST_PARAMETER":{
+        "method": "manage_voiceguidance.setEnabled",
+		"params": "TEST",
+        "expected": "error"
+    },
+    "ENABLE_VOICEGUIDANCE_WITH_INTEGER_PARAMETER":{
+        "method": "manage_voiceguidance.setEnabled",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "SET_SPEED_AS_TEST":{
+        "method": "manage_voiceguidance.setSpeed",
+		"params": "TEST",
+        "expected": "error"
+    },
+    "SET_SPEED_AS_TRUE":{
+        "method": "manage_voiceguidance.setSpeed",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "ENABLE_AUDIODESCRIPTION_WITH_TEST_PARAMETER":{
+        "method": "manage_audiodescriptions.setEnabled",
+		"params": "TEST",
+        "expected": "error"
+    },
+    "ENABLE_AUDIODESCRIPTION_WITH_INTEGER_PARAMETER":{
+        "method": "manage_audiodescriptions.setEnabled",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "DISABLED_FOR_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result.enabled",
+        "expected": "FALSE",
+        "expectingError": false
+    },
+    "ENABLED_FOR_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result.enabled",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "DISABLED_FOR_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+		"context": "noContext",
+        "validationJsonPath": "eventResponse.enabled",
+        "expected": "FALSE",
+        "expectingError": false
+    },
+    "ENABLED_FOR_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+		"context": "noContext",
+        "validationJsonPath": "eventResponse.enabled",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "MONOSPACE_SANSERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_MONOSPACE",
+        "expectingError": false
+    },
+    "MONOSPACE_SANSERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_MONOSPACE",
+        "expectingError": false
+    },
+    "CURSIVE_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_CURSIVE",
+        "expectingError": false
+    },
+    "CURSIVE_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_CURSIVE",
+        "expectingError": false
+    },
+    "PROPORTIONAL_SERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SERIF",
+        "expectingError": false
+    },
+    "PROPORTIONAL_SERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SERIF",
+        "expectingError": false
+    },
+    "MONOSPACED_SERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF",
+        "expectingError": false
+    },
+    "MONOSPACED_SERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF",
+        "expectingError": false
+    },
+    "PROPORTIONAL_SANSERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SANSERIF",
+        "expectingError": false
+    },
+    "PROPORTIONAL_SANSERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SANSERIF",
+        "expectingError": false
+    },
+    "SMALLCAPS_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_SMALLCAPS",
+        "expectingError": false
+    },
+    "SMALLCAPS_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_SMALLCAPS",
+        "expectingError": false
+    },
+    "CASUAL_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_CASUAL",
+        "expectingError": false
+    },
+    "CASUAL_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontFamily",
+        "expected": "ACCESSIBILITY_FONTFAMILY_CASUAL",
+        "expectingError": false
+    },
+    "1_FOR_FONTSIZE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontSize",
+        "expected": "INTEGER1",
+        "expectingError": false
+    },
+    "1_FOR_FONTSIZE_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontSize",
+        "expected": "INTEGER1",
+        "expectingError": false
+    },
+    "#FF00FF_FOR_FONTCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontColor",
+        "expected": "ACCESSIBILITY_FONTCOLOR",
+        "expectingError": false
+    },
+    "#FF00FF_FOR_FONTCOLOR_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontColor",
+        "expected": "ACCESSIBILITY_FONTCOLOR",
+        "expectingError": false
+    },
+    "RAISED_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontEdge",
+        "expected": "ACCESSIBILITY_FONTEDGE_RAISED",
+        "expectingError": false
+    },
+    "RAISED_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontEdge",
+        "expected": "ACCESSIBILITY_FONTEDGE_RAISED",
+        "expectingError": false
+    },
+    "NONE_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontEdge",
+        "expected": "ACCESSIBILITY_FONTEDGE_NONE",
+        "expectingError": false
+    },
+    "NONE_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontEdge",
+        "expected": "ACCESSIBILITY_FONTEDGE_NONE",
+        "expectingError": false
+    },
+    "DEPRESSED_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontEdge",
+        "expected": "ACCESSIBILITY_FONTEDGE_DEPRESSED",
+        "expectingError": false
+    },
+    "DEPRESSED_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontEdge",
+        "expected": "ACCESSIBILITY_FONTEDGE_DEPRESSED",
+        "expectingError": false
+    },
+    "UNIFORM_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontEdge",
+        "expected": "ACCESSIBILITY_FONTEDGE_UNIFORM",
+        "expectingError": false
+    },
+    "UNIFORM_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontEdge",
+        "expected": "ACCESSIBILITY_FONTEDGE_UNIFORM",
+        "expectingError": false
+    },
+    "DROPSHADOWLEFT_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontEdge",
+        "expected": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_LEFT",
+        "expectingError": false
+    },
+    "DROPSHADOWLEFT_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontEdge",
+        "expected": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_LEFT",
+        "expectingError": false
+    },
+    "DROPSHADOWRIGHT_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontEdge",
+        "expected": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_RIGHT",
+        "expectingError": false
+    },
+    "DROPSHADOWRIGHT_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontEdge",
+        "expected": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_RIGHT",
+        "expectingError": false
+    },
+    "#FFFFFF_FOR_FONTEDGECOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontEdgeColor",
+        "expected": "ACCESSIBILITY_FONTEDGE_COLOR",
+        "expectingError": false
+    },
+    "#FFFFFF_FOR_FONTEDGECOLOR_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontEdgeColor",
+        "expected": "ACCESSIBILITY_FONTEDGE_COLOR",
+        "expectingError": false
+    },
+    "#7F7F7F_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.backgroundColor",
+        "expected": "ACCESSIBILITY_BACKGROUNDCOLOR",
+        "expectingError": false
+    },
+    "#7F7F7F_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.backgroundColor",
+        "expected": "ACCESSIBILITY_BACKGROUNDCOLOR",
+        "expectingError": false
+    },
+    "75_FOR_FONTOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontOpacity",
+        "expected": "INTEGER75",
+        "expectingError": false
+    },
+    "75_FOR_FONTOPACITY_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontOpacity",
+        "expected": "INTEGER75",
+        "expectingError": false
+    },
+    "75_FOR_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.backgroundOpacity",
+        "expected": "INTEGER75",
+        "expectingError": false
+    },
+    "75_FOR_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.backgroundOpacity",
+        "expected": "INTEGER75",
+        "expectingError": false
+    },
+    "LEFT_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.textAlign",
+        "expected": "LEFT",
+        "expectingError": false
+    },
+    "LEFT_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.textAlign",
+        "expected": "LEFT",
+        "expectingError": false
+    },
+    "CENTER_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.textAlign",
+        "expected": "CENTER",
+        "expectingError": false
+    },
+    "CENTER_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.textAlign",
+        "expected": "CENTER",
+        "expectingError": false
+    },
+    "RIGHT_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.textAlign",
+        "expected": "RIGHT",
+        "expectingError": false
+    },
+    "RIGHT_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.textAlign",
+        "expected": "RIGHT",
+        "expectingError": false
+    },
+    "TOP_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.textAlignVertical",
+        "expected": "TOP",
+        "expectingError": false
+    },
+    "TOP_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.textAlignVertical",
+        "expected": "TOP",
+        "expectingError": false
+    },
+    "MIDDLE_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.textAlignVertical",
+        "expected": "MIDDLE",
+        "expectingError": false
+    },
+    "MIDDLE_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.textAlignVertical",
+        "expected": "MIDDLE",
+        "expectingError": false
+    },
+    "BOTTOM_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.textAlignVertical",
+        "expected": "BOTTOM",
+        "expectingError": false
+    },
+    "BOTTOM_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.textAlignVertical",
+        "expected": "BOTTOM",
+        "expectingError": false
+    },
+    "WHITE_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.windowColor",
+        "expected": "WHITE",
+        "expectingError": false
+    },
+    "WHITE_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.windowColor",
+        "expected": "WHITE",
+        "expectingError": false
+    },
+    "50_FOR_WINDOWOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.windowOpacity",
+        "expected": "INTEGER50",
+        "expectingError": false
+    },
+    "50_FOR_WINDOWOPACITY_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.windowOpacity",
+        "expected": "INTEGER50",
+        "expectingError": false
+    },
+    "0.5_FOR_FONTSIZE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontSize",
+        "expected": "VALUE05",
+        "expectingError": false
+    },
+    "0.5_FOR_FONTSIZE_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontSize",
+        "expected": "VALUE05",
+        "expectingError": false
+    },
+    "1.5_FOR_FONTSIZE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontSize",
+        "expected": "VALUE1.5",
+        "expectingError": false
+    },
+    "1.5_FOR_FONTSIZE_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.styles.fontSize",
+        "expected": "VALUE1.5",
+        "expectingError": false
+    },
+    "ENGLISH_FOR_PREFERREDLANGUAGES_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.preferredLanguages",
+        "expected": "ACCESSIBILITY_PREFERREDLANGUAGES_ENGLISH",
+        "expectingError": false
+    },
+    "ENGLISH_FOR_PREFERREDLANGUAGES_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.preferredLanguages",
+        "expected": "ACCESSIBILITY_PREFERREDLANGUAGES_ENGLISH",
+        "expectingError": false
+    },
+    "DISABLED_VOICEGUIDANCE_SETTINGS": {
+        "method": "accessibility.voiceGuidanceSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.enabled",
+        "expected": "FALSE",
+        "expectingError": false
+    },
+    "DISABLED_VOICEGUIDANCE_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onVoiceGuidanceSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.enabled",
+        "expected": "FALSE",
+        "expectingError": false
+    },
+    "ENABLED_VOICEGUIDANCE_SETTINGS": {
+        "method": "accessibility.voiceGuidanceSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.enabled",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "ENABLED_VOICEGUIDANCE_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onVoiceGuidanceSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.enabled",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "1_FOR_SPEED_IN_VOICEGUIDANCE_SETTINGS": {
+        "method": "accessibility.voiceGuidanceSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.speed",
+        "expected": "INTEGER1",
+        "expectingError": false
+    },
+    "1_FOR_SPEED_IN_VOICEGUIDANCE_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onVoiceGuidanceSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.speed",
+        "expected": "INTEGER1",
+        "expectingError": false
+    },
+    "0.5_FOR_SPEED_IN_VOICEGUIDANCE_SETTINGS": {
+        "method": "accessibility.voiceGuidanceSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.speed",
+        "expected": "VALUE05",
+        "expectingError": false
+    },
+    "0.5_FOR_SPEED_IN_VOICEGUIDANCE_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onVoiceGuidanceSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.speed",
+        "expected": "VALUE05",
+        "expectingError": false
+    },
+    "2_FOR_SPEED_IN_VOICEGUIDANCE_SETTINGS": {
+        "method": "accessibility.voiceGuidanceSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.speed",
+        "expected": "INTEGER2",
+        "expectingError": false
+    },
+    "2_FOR_SPEED_IN_VOICEGUIDANCE_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onVoiceGuidanceSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.speed",
+        "expected": "INTEGER2",
+        "expectingError": false
+    },
+    "DISABLED_AUDIODESCRIPTION_SETTINGS": {
+        "method": "accessibility.audioDescriptionSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.enabled",
+        "expected": "FALSE",
+        "expectingError": false
+    },
+    "DISABLED_AUDIODESCRIPTION_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onAudioDescriptionSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.enabled",
+        "expected": "FALSE",
+        "expectingError": false
+    },
+    "ENABLED_AUDIODESCRIPTION_SETTINGS": {
+        "method": "accessibility.audioDescriptionSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.enabled",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "ENABLED_AUDIODESCRIPTION_SETTINGS_EVENT": {
+        "method": null,
+        "event": "accessibility.onAudioDescriptionSettingsChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse.enabled",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "#FFFFFF_FOR_FONTCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontColor",
+        "expected": "FONTCOLOR_FFFFFF",
+        "expectingError": false
+    },
+    "#7F7F7F_FOR_FONTEDGECOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontEdgeColor",
+        "expected": "FONTEDGECOLOR_7F7F7F",
+        "expectingError": false
+    },
+    "100_FOR_FONTOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontOpacity",
+        "expected": "INTEGER100",
+        "expectingError": false
+    },
+    "12_FOR_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.backgroundOpacity",
+        "expected": "INTEGER12",
+        "expectingError": false
+    },
+    "#000000_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.backgroundOpacity",
+        "expected": "BACKGROUNDCOLOR_000000",
+        "expectingError": false
+    },
+    "#000000_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.windowColor",
+        "expected": "WINDOWCOLOR_000000",
+        "expectingError": false
+    },
+    "0_FOR_WINDOWOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.windowOpacity",
+        "expected": "INTEGER0",
+        "expectingError": false
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "NULL_FOR_AUDIODESCRIPTION_SETENABLED": {
+        "method": "audiodescriptions.setEnabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "NULL",
+        "expectingError": false
+    },
+    "INVALID_PARAMS_FOR_AUDIODESCRIPTIONS_SETENABLED": {
+        "method": "audiodescriptions.setEnabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    }
+}

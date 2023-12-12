@@ -1,0 +1,36 @@
+{
+    "FETCH_ACCOUNT_ID":{
+        "method": "account.id"
+    },
+    "FETCH_ACCOUNT_UID":{
+        "method": "account.uid"
+    },
+    "GET_ACCOUNT_ID":{
+        "method": "account.id",
+        "expected": "error"
+    },
+    "ACCOUNT_ID": {
+		"method": "account.id",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "ACCOUNT_ID"
+	},
+    "ACCOUNT_UID": {
+		"method": "account.uid",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "ACCOUNT_UID"
+	},
+    "INVALID_PARAMETER_ERROR_FOR_ACCOUNT_ID": {
+		"method": "account.id",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "INVALID_TYPE_PARAMS"
+	},
+    "INVALID_PARAMETER_ERROR_FOR_ACCOUNT_UID": {
+		"method": "account.uid",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "INVALID_TYPE_PARAMS"
+	}
+}

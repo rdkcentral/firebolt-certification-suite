@@ -1,0 +1,18 @@
+{
+    "NULL_FOR_PRIVACY_SETALLOWPERSONALIZATION": {
+        "method": "privacy.setAllowPersonalization",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "NULL",
+        "expectingError": false
+    },
+    "NULL_FOR_PRIVACY_SETALLOWWATCHHISTORY": {
+        "method": "privacy.setAllowWatchHistory",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "NULL",
+        "expectingError": false
+    }
+}

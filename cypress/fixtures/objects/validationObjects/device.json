@@ -1,0 +1,121 @@
+{
+  "ID": {
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "deviceContentValidation",
+        "type": "DEVICEID",
+        "description": "Validation of the Device Id Format"
+      }
+    ]
+  },
+  "DISTRIBUTOR":{
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "DEVICE_DISTRIBUTOR",
+        "description": "Validation of the Device Distributor Format"
+      }
+    ]
+  },
+  "PLATFORM":{
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "DEVICE_PLATFORM",
+        "description": "Validation of the Device Platform Format"
+      }
+    ]
+  },
+  "UID":{
+    "type": "regEx",
+    "validations": [
+      {
+        "type": "UID",
+        "description": "Validation of the Device uid"
+      }
+    ]
+  },
+  "TYPE":{
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "deviceContentValidation",
+        "type": "DEVICE_TYPE",
+        "description": "Validation of the Device Type Format"
+      }
+    ]
+  },
+  "MODEL":{
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "deviceContentValidation",
+        "type": "DEVICE_MODEL",
+        "description": "Validation of the Device Model Format"
+      }
+    ]
+  },
+  "SKU":{
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "deviceContentValidation",
+        "type": "DEVICE_SKU",
+        "description": "Validation of the Device SKU Format"
+      }
+    ]
+  },
+  "MAKE":{
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "deviceContentValidation",
+        "type": "DEVICE_MAKE",
+        "description": "Validation of the Device Make Format"
+      }
+    ]
+  },
+  "VERSION":{
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "deviceContentValidation",
+        "type": "DEVICE_VERSION",
+        "description": "Validation of the Device Version Format"
+      }
+    ]
+  },
+  "NAME":{
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "deviceContentValidation",
+        "type": "DEVICE_NAME",
+        "description": "Validation of the Device Name Format"
+      }
+    ]
+  },
+  "AUDIO":{
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "deviceContentValidation",
+        "type": "DEVICE_AUDIO",
+        "description": "Validation of the Device Audio Format"
+      }
+    ]
+  },
+  "DEVICENAME_LIVING_HALL":{
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "staticContentValidation",
+        "type": "DEVICE_DEVICENAME_LIVING_HALL",
+        "description": "Validation of the Device Name as Living hall"
+      }
+    ]
+  }
+}

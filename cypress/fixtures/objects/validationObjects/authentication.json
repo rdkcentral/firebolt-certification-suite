@@ -1,0 +1,87 @@
+{
+    "DECODE_BASE64_AUTHENTICATION_TOKEN": {
+        "type": "decode",
+        "method": "authentication.token",
+        "specialCase": "base64",
+        "validations": [
+            {
+                "field": "issueDate",
+                "mode": "regex",
+                "format": "TOKEN_REGEXP",
+                "type": "DATEAUTHENTICATION_REGEXP",
+                "description": "Validation of the Authentication Token issueDate Format"
+            },
+            {
+                "field": "partner",
+                "mode": "regex",
+                "format": "TOKEN_REGEXP",
+                "type": "STRING_REGEXP",
+                "description": "Validation of the Authentication Token partner Format"
+            }
+        ]
+    },
+    "DECODE_JWT_AUTHENTICATION_TOKEN": {
+        "type": "decode",
+        "method": "authentication.token",
+        "specialCase": "jwt",
+        "validations": [
+            {
+                "field": "iat",
+                "mode": "regex",
+                "format": "TOKEN_JWT_REGEXP",
+                "type": "NUMERIC_REGEXP",
+                "description": "Validation of the Authentication Token issueDate Format"
+            },
+            {
+                "field": "partnerId",
+                "mode": "regex",
+                "format": "TOKEN_JWT_REGEXP",
+                "type": "STRING_REGEXP",
+                "description": "Validation of the Authentication Token partner Format"
+            }
+        ]
+    },
+
+    "DECODE_BASE64_AUTHENTICATION_DEVICE_TOKEN": {
+        "type": "decode",
+        "method": "authentication.device",
+        "specialCase": "base64",
+        "validations": [
+            {
+                "field": "issueDate",
+                "mode": "regex",
+                "format": "TOKEN_REGEXP",
+                "type": "DATEAUTHENTICATION_REGEXP",
+                "description": "Validation of the Authentication Token issueDate Format"
+            }
+        ]
+    },
+    "DECODE_BASE64_AUTHENTICATION_SESSION_TOKEN": {
+        "type": "decode",
+        "method": "authentication.session",
+        "specialCase": "base64",
+        "validations": [
+            {
+                "field": "issueDate",
+                "mode": "regex",
+                "format": "TOKEN_REGEXP",
+                "type": "DATEAUTHENTICATION_REGEXP",
+                "description": "Validation of the Authentication Token issueDate Format"
+            }
+        ]
+    },
+    "DECODE_BASE64_AUTHENTICATION_ROOT_TOKEN": {
+        "type": "decode",
+        "method": "authentication.root",
+        "specialCase": "base64",
+        "validations": [
+            {
+                "field": "issueDate",
+                "mode": "regex",
+                "format": "TOKEN_REGEXP",
+                "type": "DATEAUTHENTICATION_REGEXP",
+                "description": "Validation of the Authentication Token issueDate Format"
+            }
+        ]
+    }
+}

@@ -1,0 +1,251 @@
+{
+    "ADVERTISING_POLICYCHANGED":{
+        "method": "advertising.onPolicyChanged"
+    },
+    "GET_ADVERTISING_POLICY":{
+        "method": "advertising.policy"
+    },
+    "DISABLE_LIMITADTRACKING":{
+        "method": "manage_privacy.setAllowAppContentAdTargeting",
+        "params": "FALSE"
+    },
+    "ENABLE_LIMITADTRACKING":{
+        "method": "manage_privacy.setAllowAppContentAdTargeting",
+        "params": "TRUE"
+    },
+    "SET_SKIPRESTRICTION_AS_NONE":{
+        "method": "manage_advertising.setSkipRestriction",
+        "params": "NONE"
+    },
+    "SET_SKIPRESTRICTION_AS_ADSUNWATCHED":{
+        "method": "manage_advertising.setSkipRestriction",
+        "params": "ADVERTISING_SKIPRESTRICTION_ADSUNWATCHED"
+    },
+    "SET_SKIPRESTRICTION_AS_ADSALL":{
+        "method": "manage_advertising.setSkipRestriction",
+        "params": "ADVERTISING_SKIPRESTRICTION_ADSALL"
+    },
+    "SET_SKIPRESTRICTION_AS_ALL":{
+        "method": "manage_advertising.setSkipRestriction",
+        "params": "ADVERTISING_SKIPRESTRICTION_ALL"
+    },
+    "GET_DEVICEATTRIBUTES":{
+        "method": "advertising.deviceAttributes"
+    },
+    "GET_APPBUNDLEID":{
+        "method": "advertising.appBundleId"
+    },
+    "GET_ADVERTISINGID":{
+        "method": "advertising.advertisingId"
+    },
+    "GET_INITIALIZATION_PARAMETERS":{
+        "method": "parameters.initialization"
+    },
+    "SET_LIMITADTRACKING_OFF":{
+        "method": "manage_privacy.setAllowAppContentAdTargeting",
+        "params": "TRUE"
+    },
+    "SET_LIMITADTRACKING_ON":{
+        "method": "manage_privacy.setAllowAppContentAdTargeting",
+        "params": "FALSE"
+    },
+    "GET_NO_COPPA":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_NO_COPPA"
+    },
+    "GET_COPPA_AS_TRUE":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_COPPA_TRUE"
+    },
+    "GET_COPPA_AS_FALSE":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_COPPA_FALSE"
+    },
+    "GET_NO_COPPA_WITH_ENVIRONMENT_VALUE_TEST":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_NO_COPPA_ENVIRONMENT_TEST"
+    },
+    "GET_COPPA_AS_TRUE_WITH_ENVIRONMENT_VALUE_TEST":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_COPPA_TRUE_ENVIRONMENT_TEST"
+    },
+    "GET_COPPA_AS_FALSE_WITH_ENVIRONMENT_VALUE_TEST":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_COPPA_FALSE_ENVIRONMENT_TEST"
+    },
+    "GET_ONLY_COPPA":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_ONLY_COPPA"
+    },
+    "GET_EMPTY_PARAMETER":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_EMPTY_PARAMS"
+    },
+    "GET_CONFIG_WITH_EMPTY_PARAMETER":{
+        "method": "advertising.config",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "GET_CONFIG_WITH_INVALID_COPPA":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_INVALID_CONFIG_COPPA",
+        "expected": "error"
+    },
+    "GET_CONFIG_WITH_INVALID_AUTHENTICATIONENTITY":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_INVALID_CONFIG_AUTHENTICATIONENTITY",
+        "expected": "error"
+    },
+    "GET_CONFIG_WITH_INVALID_ENVIRONMENT_DATATYPE":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_INVALID_CONFIG_ENVIRONMENT_DATATYPE",
+        "expected": "error"
+    },
+    "GET_CONFIG_WITH_INVALID_ENVIRONMENT":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_INVALID_CONFIG_ENVIRONMENT",
+        "expected": "error"
+    },
+    "GET_CONFIG_WITH_INTEGER_PARAMETER":{
+        "method": "advertising.config",
+        "params": "ADVERTISING_INTEGER_PARAM",
+        "expected": "error"
+    },
+    "SET_SKIPRESTRICTION_WITH_UNDEFINED_PARAMETER":{
+        "method": "manage_advertising.setSkipRestriction"
+    },
+    "GET_ADVERTISINGID_FOR_SCOPE_BROWSER":{
+        "method": "advertising.advertisingId",
+        "params": "ADVERTISING_ADVERTISINGID_SCOPE_BROWSER"
+    },
+    "GET_ADVERTISINGID_FOR_SCOPE_CONTENT":{
+        "method": "advertising.advertisingId",
+        "params": "ADVERTISING_ADVERTISINGID_SCOPE_CONTENT"
+    },
+    "INVALID_ADVERTISINGID_TYPE":{
+        "method": "advertising.advertisingId",
+        "params": "ADVERTISING_ADVERTISINGID_INVALID_TYPE",
+        "expected": "error"
+    },
+    "INVALID_ADVERTISINGID_ID":{
+        "method": "advertising.advertisingId",
+        "params": "ADVERTISING_ADVERTISINGID_INVALID_ID",
+        "expected": "error"
+    },
+    "ADVERTISING_POLICY_LIMITADTRACKING_AS_TRUE": {
+		"method": "advertising.policy",
+		"context": "noContext",
+		"validationJsonPath": "result.limitAdTracking",
+		"expected": "ADVERTISING_POLICY_TRUE"
+	},
+    "ADVERTISING_POLICY_LIMITADTRACKING_AS_FALSE": {
+		"method": "advertising.policy",
+		"context": "noContext",
+		"validationJsonPath": "result.limitAdTracking",
+		"expected": "ADVERTISING_POLICY_FALSE"
+	},
+    "ADVERTISING_ONPOLICY_CHANGED_LIMITADTRACKING_AS_TRUE": {
+		"event": "advertising.onPolicyChanged",
+		"context": "noContext",
+		"validationJsonPath": "eventResponse.limitAdTracking",
+		"expected": "ADVERTISING_POLICY_TRUE"
+	},
+    "ADVERTISING_ONPOLICY_CHANGED_LIMITADTRACKING_AS_FALSE": {
+		"event": "advertising.onPolicyChanged",
+		"context": "noContext",
+		"validationJsonPath": "eventResponse.limitAdTracking",
+		"expected": "ADVERTISING_POLICY_FALSE"
+	},
+    "ADVERTISING_POLICY_SKIPRESTRICTION_AS_NONE": {
+		"method": "advertising.policy",
+		"context": "noContext",
+		"validationJsonPath": "result.skipRestriction",
+		"expected": "ADVERTISING_POLICY_NONE"
+	},
+    "ADVERTISING_POLICY_SKIPRESTRICTION_AS_ADSUNWATCHED": {
+		"method": "advertising.policy",
+		"context": "noContext",
+		"validationJsonPath": "result.skipRestriction",
+		"expected": "ADVERTISING_POLICY_ADSUNWATCHED"
+	},
+    "ADVERTISING_POLICY_SKIPRESTRICTION_AS_ADSALL": {
+		"method": "advertising.policy",
+		"context": "noContext",
+		"validationJsonPath": "result.skipRestriction",
+		"expected": "ADVERTISING_POLICY_ADSALL"
+	},
+    "ADVERTISING_POLICY_SKIPRESTRICTION_AS_ALL": {
+		"method": "advertising.policy",
+		"context": "noContext",
+		"validationJsonPath": "result.skipRestriction",
+		"expected": "ADVERTISING_POLICY_ALL"
+	},
+    "ADVERTISING_ONPOLICY_CHANGED_SKIPRESTRICTION_AS_NONE": {
+		"event": "advertising.onPolicyChanged",
+		"context": "noContext",
+		"validationJsonPath": "eventResponse.skipRestriction",
+		"expected": "ADVERTISING_POLICY_NONE"
+	},
+    "ADVERTISING_ONPOLICY_CHANGED_SKIPRESTRICTION_AS_ADSUNWATCHED": {
+		"event": "advertising.onPolicyChanged",
+		"context": "noContext",
+		"validationJsonPath": "eventResponse.skipRestriction",
+		"expected": "ADVERTISING_POLICY_ADSUNWATCHED"
+	},
+    "ADVERTISING_ONPOLICY_CHANGED_SKIPRESTRICTION_AS_ADSALL": {
+		"event": "advertising.onPolicyChanged",
+		"context": "noContext",
+		"validationJsonPath": "eventResponse.skipRestriction",
+		"expected": "ADVERTISING_POLICY_ADSALL"
+	},
+    "ADVERTISING_ONPOLICY_CHANGED_SKIPRESTRICTION_AS_ALL": {
+		"event": "advertising.onPolicyChanged",
+		"context": "noContext",
+		"validationJsonPath": "eventResponse.skipRestriction",
+		"expected": "ADVERTISING_POLICY_ALL"
+	},
+    "ADVERTISING_DEVICE_ATTRIBUTES": {
+		"method": "advertising.deviceAttributes",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "ADVERTISING_DEVICEATTRIBUTES"
+	},
+    "ADVERTISING_APPBUNDLEID": {
+		"method": "advertising.appBundleId",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "ADVERTISING_APPBUNDLEID"
+	},
+    "ADVERTISING_CONFIG_COPPA_AS_ZERO": {
+		"method": "advertising.config",
+		"context": "noContext",
+		"validationJsonPath": "result.coppa",
+		"expected": "ADVERTISING_CONFIG_ZERO"
+	},
+    "ADVERTISING_CONFIG_COPPA_AS_ONE": {
+		"method": "advertising.config",
+		"context": "noContext",
+		"validationJsonPath": "result.coppa",
+		"expected": "ADVERTISING_CONFIG_ONE"
+	},
+    "INVALID_PARAMETER_ERROR_ADVERTISING_CONFIG": {
+		"method": "advertising.config",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+	},
+    "ADVERTISING_SKIPRESTRICTION": {
+        "method": "advertising.setSkipRestriction",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "ADVERTISING_SKIPRESTRICTION"
+    },
+    "INVALID_PARAMETER_ERROR_ADVERTISING_ADVERTISINGID": {
+		"method": "advertising.advertisingId",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+	}
+}

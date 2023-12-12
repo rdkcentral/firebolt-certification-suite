@@ -1,0 +1,619 @@
+{
+    "NOTIFY_THAT_CONTENT_HAS_STARTED": {
+        "method": "metrics.startContent"
+    },
+    "NOTIFY_THAT_CONTENT_HAS_STOPPED": {
+        "method": "metrics.stopContent"
+    },
+    "TRUE_FOR_STARTCONTENT_IN_METRICS": {
+        "method": "metrics.startContent",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_STOPCONTENT_IN_METRICS": {
+        "method": "metrics.stopContent",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "NOTIFY_THAT_PAGE_HAS_NAVIGATED_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.page",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.action",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_TYPE_NULL": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_TYPE_NULL",
+        "expected": "error"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_TYPE_MAXLENGTH_256": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_TYPE_256",
+        "expected": "error"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_DIFFERENT_CATEGORY": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_DFRNT_CATEGORY",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.error",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "INFER_LOAD_TIME_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.mediaLoadStart",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "START_PLAYBACK_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.mediaPlay",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_HAS_STARTED_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.mediaPlaying",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_HAS_PAUSED_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.mediaPause",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_HAS_HALTED_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.mediaWaiting",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_IS_PROGRESSING_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.mediaProgress",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_SEEK_IS_INITIATED_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.mediaSeeking",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_SEEK_IS_COMPLETED_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.mediaSeeked",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_RATE_IS_CHANGED_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.mediaRateChange",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_RENDITION_IS_CHANGED_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.mediaRenditionChange",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_HAS_STOPPED_WITH_EMPTY_PARAMETER": {
+        "method": "metrics.mediaEnded",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "INVALID_PARAMS_FOR_METRICS_STARTCONTENT": {
+        "method": "metrics.startContent",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_STOPCONTENT": {
+        "method": "metrics.stopContent",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_PAGE": {
+        "method": "metrics.page",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_ACTION": {
+        "method": "metrics.action",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_ERROR": {
+        "method": "metrics.error",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_MEDIALOADSTART": {
+        "method": "metrics.mediaLoadStart",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_MEDIAPLAY": {
+        "method": "metrics.mediaPlay",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_MEDIAPLAYING": {
+        "method": "metrics.mediaPlaying",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_MEDIAPAUSE": {
+        "method": "metrics.mediaPause",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_MEDIAWAITING": {
+        "method": "metrics.mediaWaiting",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_MEDIAPROGRESS": {
+        "method": "metrics.mediaProgress",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_MEDIASEEKING": {
+        "method": "metrics.mediaSeeking",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_MEDIASEEKED": {
+        "method": "metrics.mediaSeeked",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_MEDIARATECHANGE": {
+        "method": "metrics.mediaRateChange",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_MEDIARENDITIONCHANGE": {
+        "method": "metrics.mediaRenditionChange",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_METRICS_MEDIAENDED": {
+        "method": "metrics.mediaEnded",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "NOTIFY_THAT_CONTENT_HAS_STARTED_WITH_ENTITYID": {
+        "method": "metrics.startContent",
+        "params": "METRICS_ENTITYID"
+    },
+    "NOTIFY_THAT_CONTENT_HAS_STOPPED_WITH_ENTITYID": {
+        "method": "metrics.stopContent",
+        "params": "METRICS_ENTITYID"
+    },
+    "NOTIFY_THAT_PAGE_HAS_NAVIGATED_WITH_PAGEID": {
+        "method": "metrics.page",
+        "params": "METRICS_PAGE_ENTITYID"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_USERMETRICS": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_USERMETRICS"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_APPMETRICS": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_APPMETRICS"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_PARAMETERSMETRICS": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_PARAMETERS_METRICS"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED": {
+        "method": "metrics.error",
+        "params": "METRICS_ERROR_MEDIASTALLED"
+    },
+    "INFER_LOAD_TIME_WITH_ENTITYID": {
+        "method": "metrics.mediaLoadStart",
+        "params": "METRICS_ENTITYID"
+    },
+    "START_PLAYBACK_WITH_ENTITYID": {
+        "method": "metrics.mediaPlay",
+        "params": "METRICS_ENTITYID"
+    },
+    "NOTIFY_THAT_PLAYBACK_HAS_STARTED_WITH_ENTITYID": {
+        "method": "metrics.mediaPlaying",
+        "params": "METRICS_ENTITYID"
+    },
+    "NOTIFY_THAT_PLAYBACK_HAS_PAUSED_WITH_ENTITYID": {
+        "method": "metrics.mediaPause",
+        "params": "METRICS_ENTITYID"
+    },
+    "NOTIFY_THAT_PLAYBACK_HAS_HALTED_WITH_ENTITYID": {
+        "method": "metrics.mediaWaiting",
+        "params": "METRICS_MEDIAWAITING"
+    },
+    "NOTIFY_THAT_PLAYBACK_IS_PROGRESSING_WITH_MEDIAPOSITION": {
+        "method": "metrics.mediaProgress",
+        "params": "METRICS_MEDIAPROGRESS"
+    },
+    "NOTIFY_THAT_PLAYBACK_SEEK_IS_INITIATED_WITH_MEDIAPOSITION": {
+        "method": "metrics.mediaSeeking",
+        "params": "METRICS_MEDIASEEKING"
+    },
+    "NOTIFY_THAT_PLAYBACK_SEEK_IS_COMPLETED_WITH_MEDIAPOSITION": {
+        "method": "metrics.mediaSeeked",
+        "params": "METRICS_MEDIASEEKED"
+    },
+    "NOTIFY_THAT_PLAYBACK_RATE_IS_CHANGED_WITH_PLAYBACKRATE": {
+        "method": "metrics.mediaRateChange",
+        "params": "METRICS_MEDIARATECHANGE"
+    },
+    "NOTIFY_THAT_PLAYBACK_RENDITION_IS_CHANGED_WITH_BITRATEPROFILE": {
+        "method": "metrics.mediaRenditionChange",
+        "params": "METRICS_MEDIARENDITIONCHANGE"
+    },
+    "NOTIFY_THAT_PLAYBACK_HAS_STOPPED_WITH_ENTITYID": {
+        "method": "metrics.mediaEnded",
+        "params": "METRICS_ENTITYID"
+    },
+    "TRUE_FOR_PAGE_IN_METRICS": {
+        "method": "metrics.page",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_ACTION_IN_METRICS": {
+        "method": "metrics.action",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_ERROR_IN_METRICS": {
+        "method": "metrics.error",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_MEDIALOADSTART_IN_METRICS": {
+        "method": "metrics.mediaLoadStart",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_MEDIAPLAY_IN_METRICS": {
+        "method": "metrics.mediaPlay",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_MEDIAPLAYING_IN_METRICS": {
+        "method": "metrics.mediaPlaying",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_MEDIAPAUSE_IN_METRICS": {
+        "method": "metrics.mediaPause",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_MEDIAWAITING_IN_METRICS": {
+        "method": "metrics.mediaWaiting",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_MEDIAPROGRESS_IN_METRICS": {
+        "method": "metrics.mediaProgress",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_MEDIASEEKING_IN_METRICS": {
+        "method": "metrics.mediaSeeking",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_MEDIASEEKED_IN_METRICS": {
+        "method": "metrics.mediaSeeked",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_MEDIARATECHANGE_IN_METRICS": {
+        "method": "metrics.mediaRateChange",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_MEDIARENDITIONCHANGE_IN_METRICS": {
+        "method": "metrics.mediaRenditionChange",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "TRUE_FOR_MEDIAENDED_IN_METRICS": {
+        "method": "metrics.mediaEnded",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "NOTIFY_THAT_CONTENT_HAS_STARTED_WITH_NUMERIC_ENTITYID": {
+        "method": "metrics.startContent",
+        "params": "METRICS_INTEGER_12",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_CONTENT_HAS_STOPPED_WITH_NUMERIC_ENTITYID": {
+        "method": "metrics.stopContent",
+        "params": "METRICS_INTEGER_12",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PAGE_HAS_NAVIGATED_WITH_NUMERIC_PAGEID": {
+        "method": "metrics.page",
+        "params": "METRICS_PAGEID_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_NUMERIC_USERMETRICS": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_USERMETRICS_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_NUMERIC_APPMETRICS": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_USERMETRICS_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_NUMERIC_TYPEMETRICS": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_TYPEMETRICS_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_NUMERIC_PARAMMETRICS": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_PARAMETERS_METRICS_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_NUMERIC_TYPE": {
+        "method": "metrics.error",
+        "params": "METRICS_ERROR_TYPE_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_STRING_TYPE": {
+        "method": "metrics.error",
+        "params": "METRICS_ERROR_TYPE_STRING_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_NUMERIC_CODE": {
+        "method": "metrics.error",
+        "params": "METRICS_ERROR_CODE_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_NUMERIC_DESCRIPTION": {
+        "method": "metrics.error",
+        "params": "METRICS_ERROR_DESC_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_NUMERIC_VISIBLE": {
+        "method": "metrics.error",
+        "params": "METRICS_ERROR_VISIBLE_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_NUMERIC_PARAMETERS": {
+        "method": "metrics.error",
+        "params": "METRICS_ERROR_PARAM_ERROR",
+        "expected": "error"
+    },
+    "INFER_LOAD_TIME_WITH_NUMERIC_ENTITYID": {
+        "method": "metrics.mediaLoadStart",
+        "params": "METRICS_INTEGER_12",
+        "expected": "error"
+    },
+    "START_PLAYBACK_WITH_NUMERIC_ENTITYID": {
+        "method": "metrics.mediaPlay",
+        "params": "METRICS_INTEGER_12",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_HAS_STARTED_WITH_NUMERIC_ENTITYID": {
+        "method": "metrics.mediaPlaying",
+        "params": "METRICS_INTEGER_12",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_HAS_PAUSED_WITH_NUMERIC_ENTITYID": {
+        "method": "metrics.mediaPause",
+        "params": "METRICS_INTEGER_12",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_HAS_HALTED_WITH_NUMERIC_ENTITYID": {
+        "method": "metrics.mediaWaiting",
+        "params": "METRICS_INTEGER_12",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_IS_PROGRESSING_WITH_STRING_MEDIAPOSITION": {
+        "method": "metrics.mediaProgress",
+        "params": "METRICS_MEDIAPROGRESS_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_IS_PROGRESSING_WITH_STRING_PROGRESS": {
+        "method": "metrics.mediaProgress",
+        "params": "METRICS_MEDIAPROGRESS_PROGRESS_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_IS_PROGRESSING_WITH_INVALID_PROGRESS": {
+        "method": "metrics.mediaProgress",
+        "params": "METRICS_MEDIAPROGRESS_INVALID_PROGRESS_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_IS_PROGRESSING_WITH_DECIMAL_PROGRESS": {
+        "method": "metrics.mediaProgress",
+        "params": "METRICS_MEDIAPROGRESS_DECIMAL_PROGRESS_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_SEEK_IS_INITIATED_WITH_NUMERIC_ENTITYID": {
+        "method": "metrics.mediaSeeking",
+        "params": "METRICS_MEDIASEEKING_ENTITYID_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_SEEK_IS_INITIATED_WITH_DECIMAL_TARGET": {
+        "method": "metrics.mediaSeeking",
+        "params": "METRICS_MEDIASEEKING_DECIMAL_TARGET_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_SEEK_IS_INITIATED_WITH_INVALID_TARGET": {
+        "method": "metrics.mediaSeeking",
+        "params": "METRICS_MEDIASEEKING_INVALID_TARGET_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_SEEK_IS_INITIATED_WITH_STRING_TARGET": {
+        "method": "metrics.mediaSeeking",
+        "params": "METRICS_MEDIASEEKING_STRING_TARGET_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_SEEK_IS_COMPLETED_WITH_NUMERIC_ENTITYID": {
+        "method": "metrics.mediaSeeked",
+        "params": "METRICS_MEDIASEEKED_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_SEEK_IS_COMPLETED_WITH_INVALID_POSITION": {
+        "method": "metrics.mediaSeeked",
+        "params": "METRICS_MEDIASEEKED_INVALID_POSITION_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_SEEK_IS_COMPLETED_WITH_STRING_POSITION": {
+        "method": "metrics.mediaSeeked",
+        "params": "METRICS_MEDIASEEKED_STRING_POSITION_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_SEEK_IS_COMPLETED_WITH_DECIMAL_POSITION": {
+        "method": "metrics.mediaSeeked",
+        "params": "METRICS_MEDIASEEKED_DECIMAL_POSITION_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_RATE_IS_CHANGED_WITH_NUMERIC_ENTITYID": {
+        "method": "metrics.mediaRateChange",
+        "params": "METRICS_MEDIARATECHANGE_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_RATE_IS_CHANGED_WITH_STRING_RATE": {
+        "method": "metrics.mediaRateChange",
+        "params": "METRICS_MEDIARATECHANGE_WITH_STRING_RATE_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_RENDITION_IS_CHANGED_WITH_NUMERIC_BITRATE": {
+        "method": "metrics.mediaRenditionChange",
+        "params": "METRICS_MEDIARENDITIONCHANGE_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_PLAYBACK_HAS_STOPPED_WITH_NUMERIC_ENTITYID": {
+        "method": "metrics.mediaEnded",
+        "params": "METRICS_INTEGER_12",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_APP_IS_MINIMALLY_USABLE": {
+        "method": "metrics.ready"
+    },
+    "LOG_A_SIGN_IN_EVENT": {
+        "method": "metrics.signIn"
+    },
+    "LOG_A_SIGN_OUT_EVENT": {
+        "method": "metrics.signOut"
+    },
+    "TRUE_FOR_READY_IN_METRICS": {
+        "method": "metrics.ready",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE"
+    },
+    "TRUE_FOR_SIGNIN_IN_METRICS": {
+        "method": "metrics.signIn",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE"
+    },
+    "TRUE_FOR_SIGNOUT_IN_METRICS": {
+        "method": "metrics.signOut",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE"
+    },
+    "INITIALIZE_SESSION": {
+        "method": "internal.initialize",
+        "params": {
+            "version": {
+                "major": 0,
+                "minor": 13,
+                "patch": 0,
+                "readable": "Firebolt Core SDK 0.13.0"
+            }
+        }
+    },
+    "CONTENT_FOR_INTERNAL_INITIALIZE": {
+        "method": "internal.initialize",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INTERNAL_INITIALIZATION"
+    }
+}

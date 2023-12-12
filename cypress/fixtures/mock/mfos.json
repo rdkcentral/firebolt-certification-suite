@@ -1,0 +1,372 @@
+{
+    "AUTHENTICATION_TOKEN": {
+        "attributes": [
+            {
+                "result": {
+                    "type": "device",
+                    "value": "<XACT Token>"
+                }
+            }
+        ]
+    },
+    "ADVT_APPBUNDLEID_METHOD": {
+        "attributes": [
+            {
+                "result": "comcast_firebolt_reference.comcast"
+            }
+        ]
+    },
+    "ACCOUNT_ID_PROVISION_ERROR": {
+        "methodName": "account.id",
+        "type": "error",
+        "attributes": [
+            {
+                "error": {
+                    "code": -32888,
+                    "message": "Invalid Parameters"
+                }
+            }
+        ]
+    },
+    "ACCOUNT_UID_PROVISION_ERROR": {
+        "methodName": "account.uid",
+        "type": "error",
+        "attributes": [
+            {
+                "error": {
+                    "code": -32888,
+                    "message": "Invalid Parameters"
+                }
+            }
+        ]
+    },
+    "ACCOUNT_ID_RETRIEVAL_ERROR": {
+        "methodName": "account.id",
+        "type": "error",
+        "attributes": [
+            {
+                "error": {
+                    "code": -32888,
+                    "message": "Invalid Parameters"
+                }
+            }
+        ]
+    },
+    "ACCOUNT_UID_RETRIEVAL_ERROR": {
+        "methodName": "account.uid",
+        "type": "error",
+        "attributes": [
+            {
+                "error": {
+                    "code": -32888,
+                    "message": "Invalid Parameters"
+                }
+            }
+        ]
+    },
+    "DEVICE_AUDIO_METHOD": {
+        "methodName" : "device.audio",
+        "type" : "method",
+        "attributes":[{
+            "result": {
+                "stereo": true,
+                "dolbyDigital5.1": true,
+                "dolbyDigital5.1+": true,
+                "dolbyAtmos": true
+            }
+        }]
+    },
+    "DEVICE_ID_METHOD": {
+        "methodName" : "device.id",
+        "type" : "method",
+        "attributes":[{
+            "result": "123"
+        }]
+    },
+    "DEVICE_DISTRIBUTOR_METHOD": {
+        "methodName" : "device.distributor",
+        "type" : "method",
+        "attributes":[{
+            "result": "Company"
+        }]
+    },
+    "DEVICE_PLATFORM_METHOD": {
+        "methodName" : "device.platform",
+        "type" : "method",
+        "attributes":[{
+            "result":  "WPE"
+        }]
+    },
+    "DEVICE_TYPE_METHOD": {
+        "methodName" : "device.type",
+        "type" : "method",
+        "attributes":[{
+            "result":  "STB"
+        }]
+    },
+    "DEVICE_MODEL_METHOD": {
+        "methodName" : "device.model",
+        "type" : "method",
+        "attributes":[{
+            "result":  "xi6"
+        }]
+    },
+    "DEVICE_SKU_METHOD": {
+        "methodName" : "device.sku",
+        "type" : "method",
+        "attributes":[{
+            "result": "AX061AEI"
+        }]
+    },
+    "DEVICE_MAKE_METHOD": {
+        "methodName" : "device.make",
+        "type" : "method",
+        "attributes":[{
+            "result": "Arris"
+        }]
+    },
+    "DEVICE_UID_METHOD": {
+        "methodName" : "device.uid",
+        "type" : "method",
+        "attributes":[{
+            "result": ""
+        }]
+    },
+    "DEVICE_VERSION_METHOD": {
+        "methodName" : "device.version",
+        "type" : "method",
+        "attributes":[{
+            "result": {
+                    "sdk": {
+                        "major": 0,
+                        "minor": 7,
+                        "patch": 0,
+                        "readable": "Firebolt JS SDK v0.5.0"
+                    },
+                    "os": {
+                        "major": 0,
+                        "minor": 1,
+                        "patch": 0,
+                        "readable": "Firebolt OS v0.1.0"
+                    },
+                    "debug": ""
+                }
+            }]
+    },
+    "DEVICE_HDCP_METHOD": {
+        "methodName" : "device.hdcp",
+        "type" : "method",
+        "attributes":[{
+            "result": {
+                "hdcp1.4": true,
+                "hdcp2.2": true
+            }
+        }]
+    },
+    "DEVICE_HDR_METHOD": {
+        "methodName" : "device.hdr",
+        "type" : "method",
+        "attributes":[{
+            "result": {
+                "hdr10": true,
+                "hdr10Plus": true,
+                "dolbyVision": true,
+                "hlg": true
+            }
+        }]
+    },
+    "DEVICE_SCREENRESOLUTION_METHOD": {
+        "methodName" : "device.screenResolution",
+        "type" : "method",
+        "attributes":[{
+            "result": [
+                1920,
+                1080
+            ]
+        }]
+    },
+    "DEVICE_VIDEORESOLUTION_METHOD": {
+        "methodName" : "device.videoResolution",
+        "type" : "method",
+        "attributes":[{
+            "result": [
+                1920,
+                1080
+            ]
+        }]
+    },
+    "DEVICE_NETWORKWIFI_CONNECTED": {
+        "methodName" : "device.network",
+        "type" : "method",
+        "attributes":[{
+            "result":{
+            "state": "connected",
+            "type": "wifi"
+            }
+        }]
+    },
+    "DEVICE_NETWORKWIFI_DISCONNECTED": {
+        "methodName" : "device.network",
+        "type" : "method",
+        "attributes":[{
+            "result":{
+            "state": "disconnected",
+            "type": "wifi"
+            }
+        }]
+    },
+    "DEVICE_NETWORKETHERNET_CONNECTED": {
+        "methodName" : "device.network",
+        "type" : "method",
+        "attributes":[{
+            "result":{
+            "state": "connected",
+            "type": "ethernet"
+            }
+        }]
+    },
+    "DEVICE_NETWORKETHERNET_DISCONNECTED": {
+        "methodName" : "device.network",
+        "type" : "method",
+        "attributes":[{
+            "result":{
+            "state": "disconnected",
+            "type": "ethernet"
+            }
+        }]
+    },
+    "DEVICE_NETWORKHYBRID_CONNECTED": {
+        "methodName" : "device.network",
+        "type" : "method",
+        "attributes":[{
+            "result":{
+            "state": "connected",
+            "type": "hybrid"
+            }
+        }]
+    },
+    "DEVICE_NETWORKHYBRID_DISCONNECTED": {
+        "methodName" : "device.network",
+        "type" : "method",
+        "attributes":[{
+            "result":{
+            "state": "disconnected",
+            "type": "hybrid"
+            }
+        }]
+    },
+    "ADVERTISINGID_LIMITADTRACKINGOFF": {
+        "methodName" : "advertising.advertisingId",
+        "type" : "method",
+        "attributes":[{
+            "result": {
+                "ifa": "1234567ABCDEF89OFF",
+                "ifa_type": "sspid",
+                "lmt": "0"
+            }
+        }]
+    },
+    "ADVERTISINGID_LIMITADTRACKINGON": {
+        "methodName" : "advertising.advertisingId",
+        "type" : "method",
+        "attributes":[{
+            "result": {
+                "ifa": "1234567ABCDEF89ON",
+                "ifa_type": "sessionId",
+                "lmt": "1"
+            }
+        }]
+    },
+    "CONFIG_COPPA_NONE_ZERO_LIMITADTRACKING_TRUE": {
+        "methodName" : "advertising.config",
+        "type" : "method",
+        "attributes":[{
+            "result": {
+                "adNetworkID": "",
+                "adOptOut": true,
+                "adProfileID": "",
+                "adServerUrl": "",
+                "adServerUrlTemplate": "",
+                "adSiteSectionID": "",
+                "appBundleID": "comcast_firebolt_reference.Comcast",
+                "appName": "comcast_firebolt_reference",
+                "authenticationEntity": "",
+                "coppa": "0",
+                "deviceAdAttributes": "eyJib0F0dHJpYnV0ZXNGb3JSZXZTaGFyZUlkIjoiMTExMiJ9",
+                "distributorAppID": "1001",
+                "ifa": "eyJ2YWx1ZSI6IjYzYzU4OGQ3LTU2NzQtNDhiYy04MDFmLTY2MTQyNDA1YjU2YSIsImlmYV90eXBlIjoic2Vzc2lvbklkIiwibG10IjoiMSJ9",
+                "ifaValue": "63c588d7-5674-48bc-801f-66142405b56a",
+                "privacyData": "eyJ1c19wcml2YWN5IjoiMS1ZLSIsInBkdCI6ImdkcDp2MSIsImxtdCI6IjEifQ=="
+            }
+        }]
+    },
+    "CONFIG_COPPA_ONE_LIMITADTRACKING_TRUE": {
+        "methodName" : "advertising.config",
+        "type" : "method",
+        "attributes":[{
+            "result": {
+                "adNetworkID": "",
+                "adOptOut": true,
+                "adProfileID": "",
+                "adServerUrl": "",
+                "adServerUrlTemplate": "",
+                "adSiteSectionID": "",
+                "appBundleID": "comcast_firebolt_reference.Comcast",
+                "appName": "comcast_firebolt_reference",
+                "authenticationEntity": "",
+                "coppa": "1",
+                "deviceAdAttributes": "eyJib0F0dHJpYnV0ZXNGb3JSZXZTaGFyZUlkIjoiMTExMiJ9",
+                "distributorAppID": "1001",
+                "ifa": "eyJ2YWx1ZSI6IjYzYzU4OGQ3LTU2NzQtNDhiYy04MDFmLTY2MTQyNDA1YjU2YSIsImlmYV90eXBlIjoic2Vzc2lvbklkIiwibG10IjoiMSJ9",
+                "ifaValue": "63c588d7-5674-48bc-801f-66142405b56a",
+                "privacyData": "eyJ1c19wcml2YWN5IjoiMS1ZLSIsInBkdCI6ImdkcDp2MSIsImxtdCI6IjEifQ=="
+            }
+        }]
+    },
+    "CONFIG_COPPA_NONE_ZERO_LIMITADTRACKING_FALSE": {
+        "methodName" : "advertising.config",
+        "type" : "method",
+        "attributes":[{
+            "result": {
+                "adNetworkID": "",
+                "adOptOut": false,
+                "adProfileID": "",
+                "adServerUrl": "",
+                "adServerUrlTemplate": "",
+                "adSiteSectionID": "",
+                "appBundleID": "comcast_firebolt_reference.Comcast",
+                "appName": "comcast_firebolt_reference",
+                "authenticationEntity": "",
+                "coppa": "0",
+                "deviceAdAttributes": "eyJib0F0dHJpYnV0ZXNGb3JSZXZTaGFyZUlkIjoiMTExMiJ9",
+                "distributorAppID": "1001",
+                "ifa": "eyJ2YWx1ZSI6Ijk2NWZjNDEwLTRhYjYtNGU4Ny1iYzFiLTJiZTg2YTQ3OTBmZCIsImlmYV90eXBlIjoic3NwaWQiLCJsbXQiOiIwIn0=",
+                "ifaValue": "965fc410-4ab6-4e87-bc1b-2be86a4790fd",
+                "privacyData": "eyJ1c19wcml2YWN5IjoiMS1OLSIsInBkdCI6ImdkcDp2MSIsImxtdCI6IjAifQ=="
+            }
+        }]
+    },
+    "CONFIG_COPPA_ONE_LIMITADTRACKING_FALSE": {
+        "methodName" : "advertising.config",
+        "type" : "method",
+        "attributes":[{
+            "result": {
+                "adNetworkID": "",
+                "adOptOut": false,
+                "adProfileID": "",
+                "adServerUrl": "",
+                "adServerUrlTemplate": "",
+                "adSiteSectionID": "",
+                "appBundleID": "comcast_firebolt_reference.Comcast",
+                "appName": "comcast_firebolt_reference",
+                "authenticationEntity": "",
+                "coppa": "1",
+                "deviceAdAttributes": "eyJib0F0dHJpYnV0ZXNGb3JSZXZTaGFyZUlkIjoiMTExMiJ9",
+                "distributorAppID": "1001",
+                "ifa": "eyJ2YWx1ZSI6Ijk2NWZjNDEwLTRhYjYtNGU4Ny1iYzFiLTJiZTg2YTQ3OTBmZCIsImlmYV90eXBlIjoic3NwaWQiLCJsbXQiOiIwIn0=",
+                "ifaValue": "965fc410-4ab6-4e87-bc1b-2be86a4790fd",
+                "privacyData": "eyJ1c19wcml2YWN5IjoiMS1OLSIsInBkdCI6ImdkcDp2MSIsImxtdCI6IjAifQ=="
+            }
+        }]
+    }
+}

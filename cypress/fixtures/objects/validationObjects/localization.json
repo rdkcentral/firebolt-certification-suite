@@ -1,0 +1,93 @@
+{
+    "COUNTRYCODE": {
+        "type": "regEx",
+        "validations": [
+            {
+                "type": "COUNTRYCODE",
+                "description": "Validation of the localization countrycode"
+            }
+        ]
+    },
+    "LANGUAGE": {
+        "type": "regEx",
+        "validations": [
+            {
+                "type": "LANGUAGE",
+                "description": "Validation of the localization language"
+            }
+        ]
+    },
+    "LOCALE": {
+        "type": "regEx",
+        "validations": [
+            {
+                "type": "LANGUAGE",
+                "description": "Validation of the localization locale"
+            }
+        ]
+    },
+    "LATLON": {
+        "type": "fixture",
+        "method": "localization.latlon",
+        "validations": [
+            {
+                "mode": "deviceContentValidation",
+                "type": "LOCALIZATION_LATLON",
+                "description": "Validation of the Localization latlon Format"
+            }
+        ]
+    },
+    "LOCALITY": {
+        "type": "regEx",
+        "validations": [
+            {
+                "type": "STRING",
+                "description": "Validation of the Localization locality Format"
+            }
+        ]
+    },
+    "POSTALCODE": {
+        "type": "regEx",
+        "validations": [
+            {
+                "type": "NUMERIC",
+                "description": "Validation of the Localization postalCode Format"
+            }
+        ]
+    },
+
+    "ADD_ADDITIONALINFO_AS_STRING": {
+        "type": "fixture",
+        "method": "localization.additionalInfo",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "LOCALIZATION_ADD_ADDITIONALINFO_RESPONSE_AS_STRING",
+                "description": "Validation of the Localization add additionalInfo key as string Format"
+            }
+        ]
+    },
+    "ADD_ADDITIONALINFO_AS_EMPTY": {
+        "type": "fixture",
+        "method": "localization.additionalInfo",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "LOCALIZATION_ADD_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING",
+                "description": "Validation of the Localization add additionalInfo key as empty string Format"
+            }
+        ]
+    },
+    "REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING": {
+        "type": "fixture",
+        "method": "localization.additionalInfo",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "LOCALIZATION_REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING",
+                "description": "Validation of the Localization additionalInfo key as empty string Format"
+            }
+        ]
+    }
+
+}

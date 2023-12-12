@@ -1,0 +1,21 @@
+{
+  "ID": {
+    "type": "fixture",
+    "validations": [
+      {
+        "mode": "deviceContentValidation",
+        "type": "ACCOUNTID",
+        "description": "Validation of the Account Id"
+      }
+    ]
+  },
+  "UID": {
+      "type": "regEx",
+      "validations": [
+        {
+          "type": "UID",
+          "description": "Validation of the Account uid"
+        }
+      ]
+  }
+}
