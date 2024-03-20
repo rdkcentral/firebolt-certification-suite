@@ -7,6 +7,7 @@
   "INTEGER2": 2,
   "INTEGER12": 12,
   "INTEGER75": 75,
+  "INTEGER40": 40,
   "INTEGER50": 50,
   "INTEGER100": 100,
   "INTEGER123": 123,
@@ -16,6 +17,7 @@
   "VALUE025": 0.25,
   "INTEGER_12345": 12345,
   "STRING_12345": "12345",
+  "STRING19103": "19103",
   "NONE": "none",
   "LEFT": "left",
   "CENTER": "center",
@@ -32,5 +34,9 @@
   "ALL": "all",
   "stringZero": "0",
   "stringOne": "1",
-  "EMPTYARRAY": []
+  "EMPTYARRAY": [],
+  "APIVERSION": "1.0.0",
+  "DEVICERESOLUTION" : [[1280,720],[1920,1080],[3840,2160]],
+  "STRING123456": "123456",
+  "FOREGROUND": "foreground"
 }

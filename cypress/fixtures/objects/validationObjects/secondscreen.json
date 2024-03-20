@@ -1,35 +1,48 @@
 {
-    "DEVICE": {
-        "type": "fixture",
+    "SECONDSCREEN_DEVICE": {
         "method": "secondscreen.device",
-        "validations": [
+        "data": [
             {
-                "mode": "deviceContentValidation",
-                "type": "DEVICEID",
-                "description": "Validation of the Secondscreen device Format"
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DEVICEID",
+                        "description": "Validation of the Secondscreen device Format"
+                                }
+                ]
             }
         ]
-      },
-      "FRIENDLYNAME": {
-          "type": "fixture",
-          "method": "secondscreen.friendlyName",
-          "validations": [
-              {
-                  "mode": "staticContentValidation",
-                  "type": "SECONDSCREEN_FRIENDLYNAME",
-                  "description": "Validation of the Secondscreen friendlyName Format"
-              }
-          ]
-      },
-      "PROTOCOLS": {
-          "type": "fixture",
-          "method": "secondscreen.protocols",
-          "validations": [
-              {
-                  "mode": "staticContentValidation",
-                  "type": "SECONDSCREEN_DIAL2",
-                  "description": "Validation of the Secondscreen protocols Format"
-              }
-          ]
-      }
+    },
+    "SECONDSCREEN_FRIENDLYNAME": {
+        "method": "secondscreen.friendlyName",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "SECONDSCREEN_FRIENDLYNAME",
+                        "description": "Validation of the Secondscreen friendlyName Format"
+                                            }
+                ]
+            }
+        ]
+    },
+    "SECONDSCREEN_PROTOCOLS": {
+        "method": "secondscreen.protocols",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "SECONDSCREEN_DIAL2",
+                        "description": "Validation of the Secondscreen protocols Format"
+                                                        }
+                ]
+            }
+        ]
+    }
+
 }

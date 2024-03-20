@@ -6,7 +6,7 @@ Feature: Metrics
         And 3rd party 'certification' app is launched
 
     @Metrics @coreSDK @sdk @transport
-    Scenario Outline: Validate Metrics.<Method> - Positive Scenario: <Scenario>
+    Scenario Outline: Metrics.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
 
@@ -16,7 +16,7 @@ Feature: Metrics
             | Metrics stopContent   | stopContent    | notify that content has stopped  | true for stopContent in metrics  |
 
     @Metrics @coreSDK @sdk @transport
-    Scenario Outline: Validate Metrics.<Method> - Negative Scenario: <Scenario> expecting error
+    Scenario Outline: Metrics.<Method> - Negative Scenario: <Scenario> expecting error
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
 
@@ -41,7 +41,7 @@ Feature: Metrics
             | mediaEnded with emptyParam             | mediaEnded              | notify that playback has stopped with empty parameter             | invalid params for metrics mediaEnded          |
 
     @Metrics @coreSDK @sdk @transport
-    Scenario Outline: Validate Metrics.<Method> - Positive Scenario: <Scenario>
+    Scenario Outline: Metrics.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
 
@@ -52,7 +52,6 @@ Feature: Metrics
             | page with pageId                          | page                 | notify that page has navigated with pageId                      | true for page in metrics                 |
             | action with userMetrics                   | action               | notify about action with userMetrics                            | true for action in metrics               |
             | action with appMetrics                    | action               | notify about action with appMetrics                             | true for action in metrics               |
-            | action with parametersMetrics             | action               | notify about action with parametersMetrics                      | true for action in metrics               |
             | error with mediaStalled                   | error                | notify that error has occured with mediaStalled                 | true for error in metrics                |
             | mediaLoadStart with entityId              | mediaLoadStart       | infer load time with entityId                                   | true for mediaLoadStart in metrics       |
             | mediaPlay with entityId                   | mediaPlay            | start playback with entityId                                    | true for mediaPlay in metrics            |
@@ -65,9 +64,18 @@ Feature: Metrics
             | mediaRateChange with playbackRate         | mediaRateChange      | notify that playback rate is changed with playbackRate          | true for mediaRateChange in metrics      |
             | mediaRenditionChange with bitrateProfile  | mediaRenditionChange | notify that playback rendition is Changed with bitrateProfile   | true for mediaRenditionChange in metrics |
             | mediaEnded with entityId                  | mediaEnded           | notify that playback has stopped with entityId                  | true for mediaEnded in metrics           |
+            | action with parametersMetrics as string   | action               | notify about action with parametersMetrics as string            | true for action in metrics               |
+            | action with parametersMetrics as boolean  | action               | notify about action with parametersMetrics as boolean           | true for action in metrics               |
+            | action with parametersMetrics as number   | action               | notify about action with parametersMetrics as number            | true for action in metrics               |
+            | action with parametersMetrics             | action               | notify about action with parametersMetrics                      | true for action in metrics               |
+            | error with mediaStalled parameter         | error                | notify that error has occured with mediaStalled parameter             | true for error in metrics                |
+            | error with mediaStalled parameter as string   | error            | notify that error has occured with mediaStalled parameter as string   | true for error in metrics                |
+            | error with mediaStalled parameter as boolean  | error            | notify that error has occured with mediaStalled parameter as boolean  | true for error in metrics                |
+            | error with mediaStalled parameter as number   | error            | notify that error has occured with mediaStalled parameter as number   | true for error in metrics                |
+
 
      @Metrics @coreSDK @sdk @transport
-     Scenario Outline: Validate Metrics.<Method> - Negative Scenario: <Scenario> expecting error
+     Scenario Outline: Metrics.<Method> - Negative Scenario: <Scenario> expecting error
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
 
@@ -80,12 +88,14 @@ Feature: Metrics
             | action with numeric-appMetrics            | action                 | notify about action with numeric appMetrics                       | invalid params for metrics action               |
             | action with numeric-typeMetrics           | action                 | notify about action with numeric typeMetrics                      | invalid params for metrics action               |
             | action with numeric-paramMetrics          | action                 | notify about action with numeric paramMetrics                     | invalid params for metrics action               |
+            | action with paramMetrics nested object    | action                 | notify about action with paramMetrics for nested object           | invalid params for metrics action               |
             | error with numeric-type                   | error                  | notify that error has occured with numeric type                   | invalid params for metrics error                |
             | error with string-type                    | error                  | notify that error has occured with string type                    | invalid params for metrics error                |
             | error with numeric-code                   | error                  | notify that error has occured with numeric code                   | invalid params for metrics error                |
             | error with numeric-description            | error                  | notify that error has occured with numeric description            | invalid params for metrics error                |
             | error with numeric-visible                | error                  | notify that error has occured with numeric visible                | invalid params for metrics error                |
             | error with numeric-parameters             | error                  | notify that error has occured with numeric parameters             | invalid params for metrics error                |
+            | invalid parameter error for metrics error | error                  | notify that error has occured with parameters for nested object   | invalid params for metrics error                |
             | mediaLoadStart with numeric-entityId      | mediaLoadStart         | infer load time with numeric entityId                             | invalid params for metrics mediaLoadStart       |
             | mediaPlay with numeric-entityId           | mediaPlay              | start playback with numeric entityId                              | invalid params for metrics mediaPlay            |
             | mediaPlaying with numeric-entityId        | mediaPlaying           | notify that playback has started with numeric entityId            | invalid params for metrics mediaPlaying         |
@@ -107,17 +117,3 @@ Feature: Metrics
             | mediaRateChange with string-rate          | mediaRateChange        | notify that playback rate is changed with string rate             | invalid params for metrics mediaRateChange      |
             | mediaRenditionChange with numeric-bitRate | mediaRenditionChange   | notify that playback rendition is Changed with numeric bitRate    | invalid params for metrics mediaRenditionChange |
             | mediaEnded with numeric-entityId          | mediaEnded             | notify that playback has stopped with numeric entityId            | invalid params for metrics mediaEnded           |
-
-
-     @transport
-     Scenario Outline: Positive Scenario: Validating rpc method <Scenario> 
-        Given the environment has been set up for 'Metrics' tests
-        And 3rd party 'certification' app is launched
-        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_key>'
-
-        Examples:
-            | Scenario        | API_Key                             | Validation_key              | 
-            | Metrics ready   | notify that app is minimally usable | true for ready in metrics   | 
-            | Metrics signIn  | log a sign in event                 | true for signIn in metrics  |
-            | Metrics signOut | log a sign out event                | true for signOut in metrics | 

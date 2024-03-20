@@ -1,7 +1,6 @@
 {
     "advertising.config": [
         "privacyData",
-        "ifaValue",
         "ifa"
     ],
     "authentication.token": [
@@ -14,12 +13,6 @@
         "value"
     ],
     "authentication.root": [
-        "value"
-    ],
-    "badger.refreshPlatformAuthToken" : [
-        "value"
-    ],
-    "badger.getXact": [
         "value"
     ]
 }

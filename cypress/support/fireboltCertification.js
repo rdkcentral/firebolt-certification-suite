@@ -1,3 +1,21 @@
+/**
+ * Copyright 2024 Comcast Cable Communications Management, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 // ***********************************************************
 // This example support/fireboltCertification.js is processed and
 // loaded automatically before your test files.
@@ -19,11 +37,9 @@ import * as configModule from 'configModule';
 import addContext from 'mochawesome/addContext';
 import { attach } from '@badeball/cypress-cucumber-preprocessor';
 import './commands';
-import './validations/regExValidation';
-import './validations/decodeValidation';
+import './validations/index';
 
-
-configModule.cypressAddons.default()
+configModule.cypressAddons.default();
 genericModule.default(configModule); // Question: do i need this if i dont have a configModule? e.g. Mock firebolt? if not i should be allowed to just start genericModule.default()
 
 // Alternatively you can use CommonJS syntax:

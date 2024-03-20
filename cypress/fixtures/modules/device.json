@@ -1,3 +1,25 @@
 {
-    "DEVICENAME_LIVING_HALL": "Living hall"
+    "PROVISION_DEFAULT_VALUES": {
+        "accountId": "1234",
+        "deviceId": "1234"
+    },
+    "PROVISION_WITH_DISTRIBUTOR_ID": {
+        "accountId": "1234",
+        "deviceId": "1234",
+        "distributorId": "global_partner"
+    },
+    "PROVISION_DEVICE_ID": "1234",
+    "PROVISION_ACCOUNT_ID": "1234",
+    "PROVISION_DISTRIBUTOR_WITH_ID": {
+        "accountId": "1234",
+        "deviceId": "1234",
+        "distributorId": "global_partner"
+    },
+    "PROVISION_WITHOUT_DEVICEID": {
+        "accountId": "12345678910"
+    },
+    "PROVISION_EMPTY_PARAMS": {},
+    "PROVISION_WITHOUT_ACCOUNTID": {
+        "deviceId": "1234"
+    }
 }

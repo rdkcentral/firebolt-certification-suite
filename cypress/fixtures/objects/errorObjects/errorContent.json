@@ -22,12 +22,17 @@
       "out of range",
       "Invalid key",
       "not a valid OpenRPC date-time format",
-      "data did not match any variant of untagged enum NavigationIntent "
+      "data did not match any variant of untagged enum NavigationIntent ",
+      "Invalid Value for set speed"
     ],
     "errorCode": [-32602, -32400, -40300]
   },
   "isCustomError": {
     "errorMessage": ["Custom error", "reserved app id"],
     "errorCode": [-32001, -32602, -40400]
+  },
+  "lifecycleFininshedError":{
+    "errorMessage": ["Custom error","Cannot call finished"],
+    "errorCode": [-32001]
   }
 }

@@ -32,5 +32,64 @@
 		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "INVALID_TYPE_PARAMS"
-	}
+	},
+    "PUSH_SESSION_TOKEN":{
+        "method": "manage_account.session",
+		"params": "ACCOUNT_SESSION"
+    },
+    "NULL_FOR_ACCOUNT_SESSION":{
+        "method": "account.session",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "NULL"
+    },
+    "GET_ADVERTISINGID_WITH_CUSTOM_ERROR":{
+        "method": "advertising.advertisingId",
+		"params": "TRUE",
+		"expected": "error"
+    },
+    "SET_ACCOUNT_SESSION_WITH_INVALID_TOKEN":{
+        "method": "manage_account.session",
+		"params": "ACCOUNT_SESSION_INVALID_TOKEN",
+		"expected": "error"
+    },
+	"INVALID_PARAMETERS_FOR_ACCOUNT_SESSION": {
+		"method": "account.session",
+        "event": null,
+        "context": "noContext",
+		"validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+	},
+    "SET_ACCOUNT_SESSION_WITH_INVALID_EXPIRESIN":{
+        "method": "manage_account.session",
+		"params": "ACCOUNT_SESSION_INVALID_EXPIRESIN",
+		"expected": "error"
+    },
+    "SET_ACCOUNT_SESSION_WITH_INVALID_EXPIRESIN_VALUE":{
+        "method": "manage_account.session",
+		"params": "ACCOUNT_EXPIRESIN_INVALID_VALUE",
+		"expected": "error"
+    },
+    "SET_ACCOUNT_SESSION_WITHOUT_PARAMETERS":{
+        "method": "manage_account.session",
+		"params": "EMPTYPARAM",
+		"expected": "error"
+    },
+    "FETCH_ACCOUNT_ID_WHEN_DEVICE_IS_NOT_PROVISIONED": {
+        "method": "account.id",
+        "expected": "error"
+    },
+    "FETCH_ACCOUNT_UID_WHEN_DEVICE_IS_NOT_PROVISIONED": {
+        "method": "account.uid",
+        "expected": "error"
+    },
+    "FETCH_ACCOUNT_ID_WHEN_ACCOUNT_IS_NOT_PROVISIONED": {
+        "method": "account.id",
+        "expected": "error"
+    },
+    "FETCH_ACCOUNT_UID_WHEN_ACCOUNT_IS_NOT_PROVISIONED": {
+        "method": "account.uid",
+        "expected": "error"
+    }
 }

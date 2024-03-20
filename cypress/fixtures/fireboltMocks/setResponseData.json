@@ -1,0 +1,18 @@
+{
+  "SET_CLOSEDCAPTIONS_AS_TRUE": {
+    "fireboltCall": "ENABLE_CLOSEDCAPTIONS",
+    "firstParty": true
+  },
+  "GET_CLOSEDCAPTIONS_SETTINGS": {
+    "fireboltCall": "GET_CLOSEDCAPTIONS_SETTINGS",
+    "firstParty": false
+  },
+  "SET_KEYBOARD_RESPONSE_IN_PLATFORM": {
+    "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI",
+    "firstParty": true
+  },
+  "SET_KEYBOARD_RESPONSE_IN_APP": {
+    "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI",
+    "firstParty": false
+  }
+}

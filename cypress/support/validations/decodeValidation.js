@@ -1,3 +1,20 @@
+/**
+ * Copyright 2024 Comcast Cable Communications Management, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 const REGEXFORMATS = require('../constants/regexformats');
 const CONSTANTS = require('../constants/constants');
 
@@ -10,7 +27,7 @@ const CONSTANTS = require('../constants/constants');
  * @param {Object} result - result
  * @param {Object} contentData - Details of which fields to validate, regex type of validation,
  * @param {Object} field - Feild to be validated in response
- * 
+ *
  * @example
  * cy.decodeValidation('Authentication.token','jwt',{'value': '13asd2'},{"field": "iat","mode": "regex","format": "TOKEN_JWTREGEXP","type": "NUMERIC_REGEXP"})
  */
@@ -87,11 +104,10 @@ Cypress.Commands.add('decodeValidation', (method, decodeType, result, contentDat
  * @module decodeValidation
  * @class decodeValidations
  * @description Decode validation is to validate the tokens
- * @example 
+ * @example
  * const validation = new decodeValidations()
  */
 class decodeValidations {
-
   /**
    * @module decodeValidation
    * @function decodeBase64AndJwtToken
@@ -105,7 +121,6 @@ class decodeValidations {
    */
   decodeBase64AndJwtToken(token, param, regexFormat, decodeType) {
     if (token) {
-
       // Check whether decodeType is BASE64 and decode the token and get the param values from decoded object and validating it
       if (decodeType == CONSTANTS.BASE64) {
         const decode = atob(token);
@@ -123,13 +138,11 @@ class decodeValidations {
           ).then(() => {
             assert.equal(true, resultSet, 'RegEx Validation:');
           });
-
         } else {
           cy.log(`Decode base64: Expected ${param} field not present in Decoded data`).then(() => {
             assert(false, `Decode base64: Expected ${param} field not present in Decoded data`);
           });
         }
-
       } else if (decodeType == CONSTANTS.JWT) {
         // Check whether decodeType is JWT and decode the token and get the param values from decoded object and validating it
         const decode = JSON.parse(atob(token.split('.')[1]));

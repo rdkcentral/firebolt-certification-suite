@@ -1,5 +1,5 @@
 {
-    "ADVERTISING_POLICYCHANGED":{
+    "ADVERTISING_ONPOLICYCHANGED":{
         "method": "advertising.onPolicyChanged"
     },
     "GET_ADVERTISING_POLICY":{
@@ -40,14 +40,6 @@
     },
     "GET_INITIALIZATION_PARAMETERS":{
         "method": "parameters.initialization"
-    },
-    "SET_LIMITADTRACKING_OFF":{
-        "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "TRUE"
-    },
-    "SET_LIMITADTRACKING_ON":{
-        "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "FALSE"
     },
     "GET_NO_COPPA":{
         "method": "advertising.config",
@@ -122,12 +114,12 @@
         "method": "advertising.advertisingId",
         "params": "ADVERTISING_ADVERTISINGID_SCOPE_CONTENT"
     },
-    "INVALID_ADVERTISINGID_TYPE":{
+    "GET_ADVERTISINGID_WITH_INVALID_TYPE":{
         "method": "advertising.advertisingId",
         "params": "ADVERTISING_ADVERTISINGID_INVALID_TYPE",
         "expected": "error"
     },
-    "INVALID_ADVERTISINGID_ID":{
+    "GET_ADVERTISINGID_WITH_INVALID_ID":{
         "method": "advertising.advertisingId",
         "params": "ADVERTISING_ADVERTISINGID_INVALID_ID",
         "expected": "error"
@@ -144,13 +136,13 @@
 		"validationJsonPath": "result.limitAdTracking",
 		"expected": "ADVERTISING_POLICY_FALSE"
 	},
-    "ADVERTISING_ONPOLICY_CHANGED_LIMITADTRACKING_AS_TRUE": {
+    "ONPOLICYCHANGED_FOR_ADVERTISING_LIMITADTRACKING_WITH_TRUE": {
 		"event": "advertising.onPolicyChanged",
 		"context": "noContext",
 		"validationJsonPath": "eventResponse.limitAdTracking",
 		"expected": "ADVERTISING_POLICY_TRUE"
 	},
-    "ADVERTISING_ONPOLICY_CHANGED_LIMITADTRACKING_AS_FALSE": {
+    "ONPOLICYCHANGED_FOR_ADVERTISING_LIMITADTRACKING_WITH_FALSE": {
 		"event": "advertising.onPolicyChanged",
 		"context": "noContext",
 		"validationJsonPath": "eventResponse.limitAdTracking",
@@ -180,25 +172,25 @@
 		"validationJsonPath": "result.skipRestriction",
 		"expected": "ADVERTISING_POLICY_ALL"
 	},
-    "ADVERTISING_ONPOLICY_CHANGED_SKIPRESTRICTION_AS_NONE": {
+    "ONPOLICYCHANGED_FOR_ADVERTISING_SKIPRESTRICTION_WITH_NONE": {
 		"event": "advertising.onPolicyChanged",
 		"context": "noContext",
 		"validationJsonPath": "eventResponse.skipRestriction",
 		"expected": "ADVERTISING_POLICY_NONE"
 	},
-    "ADVERTISING_ONPOLICY_CHANGED_SKIPRESTRICTION_AS_ADSUNWATCHED": {
+    "ONPOLICYCHANGED_FOR_ADVERTISING_SKIPRESTRICTION_WITH_ADSUNWATCHED": {
 		"event": "advertising.onPolicyChanged",
 		"context": "noContext",
 		"validationJsonPath": "eventResponse.skipRestriction",
 		"expected": "ADVERTISING_POLICY_ADSUNWATCHED"
 	},
-    "ADVERTISING_ONPOLICY_CHANGED_SKIPRESTRICTION_AS_ADSALL": {
+    "ONPOLICYCHANGED_FOR_ADVERTISING_SKIPRESTRICTION_WITH_ADSALL": {
 		"event": "advertising.onPolicyChanged",
 		"context": "noContext",
 		"validationJsonPath": "eventResponse.skipRestriction",
 		"expected": "ADVERTISING_POLICY_ADSALL"
 	},
-    "ADVERTISING_ONPOLICY_CHANGED_SKIPRESTRICTION_AS_ALL": {
+    "ONPOLICYCHANGED_FOR_ADVERTISING_SKIPRESTRICTION_WITH_ALL": {
 		"event": "advertising.onPolicyChanged",
 		"context": "noContext",
 		"validationJsonPath": "eventResponse.skipRestriction",
@@ -241,11 +233,159 @@
 		"validationJsonPath": "result",
 		"expected": "ADVERTISING_SKIPRESTRICTION"
     },
-    "INVALID_PARAMETER_ERROR_ADVERTISING_ADVERTISINGID": {
+    "INVALID_PARAMETER_FOR_ADVERTISING_ADVERTISINGID": {
 		"method": "advertising.advertisingId",
 		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
-	}
+	},
+    "ADVERTISING_CONFIG": {
+		"method": "advertising.config",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "ADVERTISING_CONFIGURATION"
+	},
+    "LIMITADTRACKING_OFF_FOR_ADVERTISINGID": {
+		"method": "advertising.advertisingId",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "ADVERTISING_ADVERTISINGID_ADOFF"
+	},
+    "LIMITADTRACKING_ON_FOR_ADVERTISINGID": {
+		"method": "advertising.advertisingId",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "ADVERTISING_ADVERTISINGID_ADON"
+    },
+    "RESET_IDENTIFIER_FOR_ADVERTISING":{
+        "method": "manage_advertising.resetIdentifier"
+    },
+    "NULL_FOR_ADVERTISING_RESETIDENTIFIER":{
+        "method": "advertising.resetIdentifier",
+        "context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "NULL"
+    },
+    "ADVERTISING_ONSKIPRESTRICTIONCHANGED":{
+        "method": "manage_advertising.onSkipRestrictionChanged"
+    },
+    "GET_ADVERTISING_SKIPRESTRICTION":{
+        "method": "manage_advertising.skipRestriction"
+    },
+    "NONE_FOR_SKIPRESTRICTION":{
+        "method": "advertising.skipRestriction",
+        "context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "ADVERTISING_POLICY_NONE"
+    },
+    "ADSUNWATCHED_FOR_SKIPRESTRICTION":{
+        "method": "advertising.skipRestriction",
+        "context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "ADVERTISING_POLICY_ADSUNWATCHED"
+    },
+    "ADSALL_FOR_SKIPRESTRICTION":{
+        "method": "advertising.skipRestriction",
+        "context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "ADVERTISING_POLICY_ADSALL"
+    },
+    "ALL_FOR_SKIPRESTRICTION":{
+        "method": "advertising.skipRestriction",
+        "context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "ADVERTISING_POLICY_ALL"
+    },
+    "ONSKIPRESTRICTIONCHANGED_WITH_NONE":{
+        "event": "advertising.onSkipRestrictionChanged",
+        "context": "noContext",
+		"validationJsonPath": "eventResponse",
+		"expected": "ADVERTISING_POLICY_NONE"
+    },
+    "ONSKIPRESTRICTIONCHANGED_WITH_ADSUNWATCHED":{
+        "event": "advertising.onSkipRestrictionChanged",
+        "context": "noContext",
+		"validationJsonPath": "eventResponse",
+		"expected": "ADVERTISING_POLICY_ADSUNWATCHED"
+    },
+    "ONSKIPRESTRICTIONCHANGED_WITH_ADSALL":{
+        "event": "advertising.onSkipRestrictionChanged",
+        "context": "noContext",
+		"validationJsonPath": "eventResponse",
+		"expected": "ADVERTISING_POLICY_ADSALL"
+    },
+    "ONSKIPRESTRICTIONCHANGED_WITH_ALL":{
+        "event": "advertising.onSkipRestrictionChanged",
+        "context": "noContext",
+		"validationJsonPath": "eventResponse",
+		"expected": "ADVERTISING_POLICY_ALL"
+    },
+    "SET_SKIPRESTRICTION_WITH_INTEGER":{
+        "method": "manage_advertising.setSkipRestriction",
+        "params": "ADVERTISING_SKIPRESTRICTION_INTEGER_VALUE",
+        "expected": "error"
+    },
+    "INVALID_PARAMETERS_FOR_SKIPRESTRICTION": {
+		"method": "advertising.setSkipRestriction",
+		"context": "noContext",
+		"validationJsonPath": "result",
+		"expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+	},
+    "GET_ADVERTISINGID_WITHOUT_SCOPE":{
+        "method": "advertising.advertisingId",
+        "params": "ADVERTISING_ADVERTISINGID_WITHOUT_SCOPE"
+    },
+    "GET_ADVERTISINGID_WITH_SCOPE_ID_AS_RANDOM_STRING":{
+        "method": "advertising.advertisingId",
+        "params": "ADVERTISING_ADVERTISINGID_WITH_RANDOM_STRING_SCOPE_ID"
+    },
+    "GET_ADVERTISINGID_WITH_SCOPE_ID_AS_EMPTY_STRING":{
+        "method": "advertising.advertisingId",
+        "params": "ADVERTISING_ADVERTISINGID_WITH_EMPTY_STRING_SCOPE_ID"
+    },
+    "GET_ADVERTISINGID_WITH_INVALID_SCOPE_TYPE":{
+        "method": "advertising.advertisingId",
+        "params": "ADVERTISING_ADVERTISINGID_SCOPE_TYPE_INVALID_STRING",
+        "expected": "error"
+    },
+    "GET_ADVERTISINGID_WITHOUT_SCOPE_TYPE_AND_ID":{
+        "method": "advertising.advertisingId",
+        "params": "ADVERTISING_ADVERTISINGID_WITHOUT_SCOPE_TYPE_ID",
+        "expected": "error"
+    },
+    "GET_ADVERTISINGID_WITHOUT_SCOPE_ID":{
+        "method": "advertising.advertisingId",
+        "params": "ADVERTISING_ADVERTISINGID_WITHOUT_SCOPE_ID",
+        "expected": "error"
+    },
+    "GET_ADVERTISINGID_WITHOUT_SCOPE_TYPE":{
+        "method": "advertising.advertisingId",
+        "params": "ADVERTISING_ADVERTISINGID_WITHOUT_SCOPE_TYPE",
+        "expected": "error"
+    },
+    "GET_ADVERTISINGID_WITH_INVALID_SCOPE":{
+        "method": "advertising.advertisingId",
+        "params": "ADVERTISING_ADVERTISINGID_WITHOUT_SCOPE_TYPE",
+        "expected": "error"
+    },
+    "SET_TRUE_FOR_ALLOWAPPCONTENTADTARGETING":{
+        "method": "manage_privacy.setAllowAppContentAdTargeting",
+        "params": "TRUE"
+    },
+    "NULL_FOR_ADVERTISING_ONPOLICYCHANGED_EVENT": {
+        "event": "advertising.onPolicyChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "NULL",
+        "expectingError": false
+    },
+    "NULL_FOR_ADVERTISING_SETSKIPRESTRICTION": {
+        "method": "advertising.setSkipRestriction",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "NULL",
+        "expectingError": false
+    }
 }
