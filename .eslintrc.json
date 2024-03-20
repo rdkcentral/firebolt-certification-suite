@@ -12,17 +12,18 @@
   },
   "plugins": ["prettier"],
   "rules": {
-    "eqeqeq":"warn",
     "func-names": "off",
+    "max-len": "off",
+    "no-async-promise-executor": "off",
     "no-case-declarations": "off",
     "no-console": "off",
-    "no-eval":"error",
+    "no-global-assign": "off",
     "no-prototype-builtins": "off",
     "no-undef": "off",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "no-var": "error",
     "prefer-const": "error",
-    "prettier/prettier": "warn",
+    "prettier/prettier": "error",
     "spaced-comment":"error"
   }
 }

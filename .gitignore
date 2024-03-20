@@ -2,6 +2,10 @@
 cypress/cucumber-json
 cypress/reports
 cypress/videos
+reports/
+
+#External Testcases
+cypress/TestCases/external
 
 #Lock Files
 yarn.lock
@@ -142,3 +146,6 @@ supportConfig.json
 
 # Ignores from cypress-support
 .DS_Store
+
+# Ignore package.json file
+package.json
