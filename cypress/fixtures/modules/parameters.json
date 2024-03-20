@@ -1,0 +1,10 @@
+{
+    "NULLINTENT": {
+        "navigateTo": {
+            "action": "home",
+            "context": {
+                "source": "device"
+            }
+        }
+    }
+}

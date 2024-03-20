@@ -1,4 +1,71 @@
+
 {
+    "SEND_METRICS_EVENT_WITH_SCHEMA_AND_FOO_DATA": {
+        "method": "manage_metrics.event",
+        "params": "METRICS_FOO_DATA_AND_SCHEMA"
+    },
+    "SEND_METRICS_EVENT_WITH_SCHEMA_AND_NULL_FOO_DATA": {
+        "method": "manage_metrics.event",
+        "params": "METRICS_NULL_FOO_DATA_AND_SCHEMA"
+    },
+    "SEND_METRICS_EVENT_WITH_SCHEMA_AND_BOOLEAN_FOO_DATA": {
+        "method": "manage_metrics.event",
+        "params": "METRICS_BOOLEAN_FOO_DATA_AND_SCHEMA"
+    },
+    "SEND_METRICS_EVENT_WITH_EMPTY_DATA": {
+        "method": "manage_metrics.event",
+        "params": "METRICS_EMPTY_DATA_OBJECT"
+    },
+    "SEND_METRICS_EVENT_WITH_EMPTY_SCHEMA": {
+        "method": "manage_metrics.event",
+        "params": "METRICS_EMPTY_SCHEMA"
+    },
+    "SEND_METRICS_EVENT_WITH_SCHEMA_AS_BOOLEAN": {
+        "method": "manage_metrics.event",
+        "params": "METRICS_SCHEMA_AS_BOOLEAN",
+        "expected": "error"
+    },
+    "SEND_METRICS_EVENT_WITH_SCHEMA_AS_INTEGER": {
+        "method": "manage_metrics.event",
+        "params": "METRICS_SCHEMA_AS_INTEGER",
+        "expected": "error"
+    },
+    "SEND_METRICS_EVENT_WITH_INVALID_SCHEMA_URI": {
+        "method": "manage_metrics.event",
+        "params": "METRICS_SCHEMA_AS_INVALID_URI",
+        "expected": "error"
+    },
+    "SEND_METRICS_EVENT_WITH_DATA_AS_STRING": {
+        "method": "manage_metrics.event",
+        "params": "METRICS_DATA_AS_STRING",
+        "expected": "error"
+    },
+    "SEND_METRICS_EVENT_WITH_DATA_AS_BOOLEAN": {
+        "method": "manage_metrics.event",
+        "params": "METRICS_DATA_AS_BOOLEAN",
+        "expected": "error"
+    },
+    "SEND_METRICS_EVENT_WITH_DATA_AS_INTEGER": {
+        "method": "manage_metrics.event",
+        "params": "METRICS_DATA_AS_INTEGER",
+        "expected": "error"
+    },
+    "NULL_FOR_METRICS_EVENT": {
+        "method": "metrics.event",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "NULL",
+        "expectingError": false
+    },
+    "INVALID_PARAMS_FOR_METRICS_EVENT":{
+        "method": "metrics.event",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
     "NOTIFY_THAT_CONTENT_HAS_STARTED": {
         "method": "metrics.startContent"
     },
@@ -242,9 +309,37 @@
         "method": "metrics.action",
         "params": "METRICS_ACTION_PARAMETERS_METRICS"
     },
+    "NOTIFY_ABOUT_ACTION_WITH_PARAMETERSMETRICS_AS_STRING": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_PARAMETERS_METRICS_AS_STRING"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_PARAMETERSMETRICS_AS_BOOLEAN": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_PARAMETERS_METRICS_AS_BOOLEAN"
+    },
+    "NOTIFY_ABOUT_ACTION_WITH_PARAMETERSMETRICS_AS_NUMBER": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_PARAMETERS_METRICS_AS_NUMBER"
+    },
     "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED": {
         "method": "metrics.error",
         "params": "METRICS_ERROR_MEDIASTALLED"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED_PARAMETER": {
+        "method": "metrics.error",
+        "params": "METRICS_ERROR_MEDIASTALLED_WITH_PARAMETERS"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED_PARAMETER_AS_STRING": {
+        "method": "metrics.error",
+        "params": "METRICS_ERROR_MEDIASTALLED_WITH_PARAMETERS_AS_STRING"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED_PARAMETER_AS_BOOLEAN": {
+        "method": "metrics.error",
+        "params": "METRICS_ERROR_MEDIASTALLED_WITH_PARAMETERS_AS_BOOLEAN"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED_PARAMETER_AS_NUMBER": {
+        "method": "metrics.error",
+        "params": "METRICS_ERROR_MEDIASTALLED_WITH_PARAMETERS_AS_NUMBER"
     },
     "INFER_LOAD_TIME_WITH_ENTITYID": {
         "method": "metrics.mediaLoadStart",
@@ -437,6 +532,11 @@
         "params": "METRICS_ACTION_PARAMETERS_METRICS_ERROR",
         "expected": "error"
     },
+    "NOTIFY_ABOUT_ACTION_WITH_PARAMMETRICS_FOR_NESTED_OBJECT": {
+        "method": "metrics.action",
+        "params": "METRICS_ACTION_PARAMETERS_METRICS_NESTED_OBJECT_ERROR",
+        "expected": "error"
+    },
     "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_NUMERIC_TYPE": {
         "method": "metrics.error",
         "params": "METRICS_ERROR_TYPE_ERROR",
@@ -465,6 +565,11 @@
     "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_NUMERIC_PARAMETERS": {
         "method": "metrics.error",
         "params": "METRICS_ERROR_PARAM_ERROR",
+        "expected": "error"
+    },
+    "NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_PARAMETERS_FOR_NESTED_OBJECT": {
+        "method": "metrics.error",
+        "params": "METRICS_ERROR_PARAM_NESTED_OBJECT_ERROR",
         "expected": "error"
     },
     "INFER_LOAD_TIME_WITH_NUMERIC_ENTITYID": {
@@ -614,6 +719,6 @@
         "method": "internal.initialize",
         "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "INTERNAL_INITIALIZATION"
+        "expected": "METRICS_INTERNAL_INITIALIZATION"
     }
 }

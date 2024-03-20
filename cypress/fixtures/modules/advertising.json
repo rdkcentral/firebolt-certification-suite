@@ -20,5 +20,13 @@
     "ADVERTISINGID_INVALID_ID": {"options": {"scope":{ "type": "browse" ,"id": true}}},
     "EMPTY_PARAMS": {"options": {}},
     "DEVICEATTRIBUTES": {},
-    "APPBUNDLEID": ""
+    "APPBUNDLEID": "",
+    "SKIPRESTRICTION_INTEGER_VALUE" : 898756,
+    "ADVERTISINGID_WITHOUT_SCOPE": {"options": {}},
+    "ADVERTISINGID_WITH_RANDOM_STRING_SCOPE_ID": {"options": {"scope":{ "type": "browse" ,"id": "test"}}},
+    "ADVERTISINGID_WITH_EMPTY_STRING_SCOPE_ID": {"options": {"scope":{ "type": "browse" ,"id": ""}}},
+    "ADVERTISINGID_SCOPE_TYPE_INVALID_STRING": {"options": {"scope":{ "type": "test" ,"id": "paidPlacement"}}},
+    "ADVERTISINGID_WITHOUT_SCOPE_TYPE_ID": {"options": {"scope":{}}},
+    "ADVERTISINGID_WITHOUT_SCOPE_ID": {"options": {"scope":{ "type": "test" }}},
+    "ADVERTISINGID_WITHOUT_SCOPE_TYPE": {"options": {"scope":{"id": "paidPlacement"}}}
 }

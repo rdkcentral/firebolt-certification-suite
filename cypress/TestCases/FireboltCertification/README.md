@@ -4,7 +4,7 @@ Feature files for Firebolt Certification Modules.
 
 ## Setup
 
-Refer [setup instructions](https://github.com/comcast-fireboltCertification/firebolt-certification-suite/blob/main/README.md#setup) to complete the required setup and execute test cases against any platform.
+Refer [setup instructions](https://github.com/rdkcentral/firebolt-certification-suite) to complete the required setup and execute test cases against any platform.
 
 ## General Instruction
 

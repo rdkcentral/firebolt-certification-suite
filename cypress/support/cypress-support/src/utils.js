@@ -1,8 +1,25 @@
-const CONSTANTS = require('./constants.js');
+/**
+ * Copyright 2024 Comcast Cable Communications Management, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+const CONSTANTS = require('../../constants/constants');
 const { _ } = Cypress;
-import axios from 'axios';
-const $RefParser = require('@apidevtools/json-schema-ref-parser');
-const MESSAGE = 'message'
+const MESSAGE = 'message';
+const Validator = require('jsonschema').Validator;
+const validator = new Validator();
 
 /**
  * @module utils
@@ -19,8 +36,8 @@ const MESSAGE = 'message'
 function replaceJsonStringWithEnvVar(jsonString) {
   if (jsonString.includes('<') && jsonString.includes('>')) {
     const splitString = jsonString.split('<')[1].split('>')[0];
-    if (Cypress.env(`${splitString}`) !== undefined) {
-      jsonString = jsonString.replaceAll(`<${splitString}>`, Cypress.env(splitString));
+    if (getEnvVariable(`${splitString}`, false) !== undefined) {
+      jsonString = jsonString.replaceAll(`<${splitString}>`, getEnvVariable(splitString));
     }
   }
   return jsonString;
@@ -78,29 +95,31 @@ function createIntentMessage(task, jsonParams, map = null) {
  **/
 function parseExceptionList() {
   // Cypress.env('exceptionMethods') env having exception methods list defined in configModule.
-  const exceptionListForSanity = Cypress.env('exceptionMethods');
-  try {
-    // Cypress.env('exceptionMethods') list may having (NOT_SUPPORTED_METHODS, NOT_AVAILABLE_METHODS, NOT_PERMITTED_METHODS), if present assigning the values to corresponding env variable.
-    if (exceptionListForSanity.hasOwnProperty('NOT_SUPPORTED_METHODS')) {
-      Cypress.env('NOT_SUPPORTED_METHODS', exceptionListForSanity.NOT_SUPPORTED_METHODS);
+  const exceptionListForSanity = getEnvVariable('exceptionMethods', false);
+  if (exceptionListForSanity != null && exceptionListForSanity != undefined) {
+    try {
+      // Cypress.env('exceptionMethods') list may having (NOT_SUPPORTED_METHODS, NOT_AVAILABLE_METHODS, NOT_PERMITTED_METHODS), if present assigning the values to corresponding env variable.
+      if (exceptionListForSanity.hasOwnProperty('NOT_SUPPORTED_METHODS')) {
+        Cypress.env('NOT_SUPPORTED_METHODS', exceptionListForSanity.NOT_SUPPORTED_METHODS);
+      }
+      if (exceptionListForSanity.hasOwnProperty('NOT_AVAILABLE_METHODS')) {
+        Cypress.env('NOT_AVAILABLE_METHODS', exceptionListForSanity.NOT_AVAILABLE_METHODS);
+      }
+      if (exceptionListForSanity.hasOwnProperty('NOT_PERMITTED_METHODS')) {
+        Cypress.env('NOT_PERMITTED_METHODS', exceptionListForSanity.NOT_PERMITTED_METHODS);
+      }
+    } catch (error) {
+      cy.log('Error occured during exception list parsing -' + error);
     }
-    if (exceptionListForSanity.hasOwnProperty('NOT_AVAILABLE_METHODS')) {
-      Cypress.env('NOT_AVAILABLE_METHODS', exceptionListForSanity.NOT_AVAILABLE_METHODS);
-    }
-    if (exceptionListForSanity.hasOwnProperty('NOT_PERMITTED_METHODS')) {
-      Cypress.env('NOT_PERMITTED_METHODS', exceptionListForSanity.NOT_PERMITTED_METHODS);
-    }
-  } catch (error) {
-    cy.log('Error occured during exception list parsing -' + error);
   }
   // If the above different exception lists not there, overriding with empty value.
-  if (Cypress.env('NOT_SUPPORTED_METHODS') === undefined) {
+  if (getEnvVariable('NOT_SUPPORTED_METHODS', false) === undefined) {
     Cypress.env('NOT_SUPPORTED_METHODS', []);
   }
-  if (Cypress.env('NOT_AVAILABLE_METHODS') === undefined) {
+  if (getEnvVariable('NOT_AVAILABLE_METHODS', false) === undefined) {
     Cypress.env('NOT_AVAILABLE_METHODS', []);
   }
-  if (Cypress.env('NOT_PERMITTED_METHODS') === undefined) {
+  if (getEnvVariable('NOT_PERMITTED_METHODS', false) === undefined) {
     Cypress.env('NOT_PERMITTED_METHODS', []);
   }
 }
@@ -113,11 +132,21 @@ function parseExceptionList() {
  */
 function generateExceptionListForSanity() {
   // After parseExceptionList() concatenating (Not Supported, Not Available and Not Permitted) list and passing concatenated list while creating intent message sanity runs.
-  let exemptedListForSanity = Cypress.env('NOT_SUPPORTED_METHODS');
+  let exemptedListForSanity = getEnvVariable('NOT_SUPPORTED_METHODS', false)
+    ? getEnvVariable('NOT_SUPPORTED_METHODS')
+    : [];
   try {
     exemptedListForSanity = exemptedListForSanity
-      .concat(Cypress.env('NOT_AVAILABLE_METHODS'))
-      .concat(Cypress.env('NOT_PERMITTED_METHODS'));
+      .concat(
+        getEnvVariable('NOT_AVAILABLE_METHODS', false)
+          ? getEnvVariable('NOT_AVAILABLE_METHODS')
+          : []
+      )
+      .concat(
+        getEnvVariable('NOT_PERMITTED_METHODS', false)
+          ? getEnvVariable('NOT_PERMITTED_METHODS')
+          : []
+      );
   } catch (err) {
     cy.log('Error occured during exception list parsing -' + error);
   }
@@ -131,11 +160,11 @@ function generateExceptionListForSanity() {
  */
 function overideParamsFromConfigModule(overrideParams) {
   // If excluded methods and modules list present in configModule, overriding it else using the existing one defined in constants.
-  overrideParams.methodsToBeExcluded = Cypress.env('excludedMethods')
-    ? Cypress.env('excludedMethods')
+  overrideParams.methodsToBeExcluded = getEnvVariable('excludedMethods', false)
+    ? getEnvVariable('excludedMethods')
     : CONSTANTS.EXCLUDED_METHODS;
-  overrideParams.modulesToBeExcluded = Cypress.env('excludedModules')
-    ? Cypress.env('excludedModules')
+  overrideParams.modulesToBeExcluded = getEnvVariable('excludedModules', false)
+    ? getEnvVariable('excludedModules')
     : CONSTANTS.EXCLUDED_METHODS;
   return overrideParams;
 }
@@ -148,7 +177,7 @@ function overideParamsFromConfigModule(overrideParams) {
 
 function getTopic(appIdentifier = null, operation = null) {
   let topic;
-  let deviceMac = Cypress.env(CONSTANTS.DEVICE_MAC);
+  let deviceMac = getEnvVariable(CONSTANTS.DEVICE_MAC);
   expect(deviceMac.length).to.be.greaterThan(5);
   // Remove colons from mac address if not removed
   deviceMac = deviceMac.replaceAll(':', '');
@@ -157,7 +186,7 @@ function getTopic(appIdentifier = null, operation = null) {
     topic = deviceMac + '_' + appIdentifier;
   } else {
     // Appending default appId to device mac
-    topic = deviceMac + '_' + Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID);
+    topic = deviceMac + '_' + getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
   }
   if (operation == CONSTANTS.SUBSCRIBE) {
     return topic + CONSTANTS.TOPIC_SUBSCRIBE_SUFFIX;
@@ -176,8 +205,8 @@ function getTopic(appIdentifier = null, operation = null) {
 function getCommunicationMode() {
   let mode = CONSTANTS.MODE_SDK;
 
-  if (Cypress.env(CONSTANTS.COMMUNICATION_MODE)) {
-    mode = Cypress.env(CONSTANTS.COMMUNICATION_MODE);
+  if (getEnvVariable(CONSTANTS.COMMUNICATION_MODE, false)) {
+    mode = getEnvVariable(CONSTANTS.COMMUNICATION_MODE);
   }
   return mode;
 }
@@ -201,10 +230,10 @@ function extractModuleName(dataIdentifier) {
     moduleName = dataIdentifier.method.split('.')[0];
   } else if (moduleName.includes('_')) {
     moduleName = dataIdentifier.split('_')[0];
-  } else if(moduleName.includes('.')) {
+  } else if (moduleName.includes('.')) {
     moduleName = dataIdentifier.split('.')[0];
   } else {
-    return moduleName
+    return moduleName;
   }
 
   moduleName = moduleName.toLowerCase();
@@ -227,18 +256,20 @@ function getApiOrEventObjectFromGlobalList(method, context, appId, validationTyp
   // Obtaining a method or event object list based on the validationType
   const methodOrEventObjectList =
     validationType === CONSTANTS.EVENT
-      ? Cypress.env(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST)
-      : Cypress.env(CONSTANTS.GLOBAL_API_OBJECT_LIST);
+      ? getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST)
+      : getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST);
 
   let extractedObject;
 
   // The key can be taken as either 'eventName' or 'apiName' according to validationType.
   const methodOrEventKey =
     validationType === CONSTANTS.EVENT ? CONSTANTS.EVENT_NAME : CONSTANTS.API_NAME;
+  appId = appId == undefined ? getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) : appId;
 
   // Retrieve the response from the methodOrEventObjectList based on the method or event name and appId.
-  let filteredObjectList = methodOrEventObjectList.filter(
-    (apiOrEventObject) => apiOrEventObject[methodOrEventKey] === method && apiOrEventObject.app === appId
+  const filteredObjectList = methodOrEventObjectList.filter(
+    (apiOrEventObject) =>
+      apiOrEventObject[methodOrEventKey] === method && apiOrEventObject.app === appId
   );
 
   // Failing when the filteredObjectList is empty.
@@ -266,38 +297,6 @@ function getApiOrEventObjectFromGlobalList(method, context, appId, validationTyp
 }
 
 /**
- * @module utils
- * @function getAndDeferenceOpenRPC
- * @description To get and dereference the OpenRPC json. If version is provided, get version specific openRPC from URL (https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json) and dereference it. 
- * Else, get the latest openRPC from URL (https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json) by default and dereference it
- * Note: Currently, the openRPC supports both core and manage sdk modules
- * @param {String} version- version
- * @example
- * getAndDeferenceOpenRPC('0.17.0')
- * getAndDeferenceOpenRPC()
- * @return {Object} Dereferenced OpenRPC json
- **/
-async function getAndDeferenceOpenRPC(version) {
-  try {
-    let deSchemaList;
-    let url;
-    if (version) {
-      url = `https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json`;
-    } else {
-      // If no version is provided, get the latest
-      url = `https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json`;
-    }
-    const response = await axios.get(url);
-    deSchemaList = await $RefParser.dereference(response.data);
-    return deSchemaList;
-  
-  } catch (error) {
-    console.error("Error fetching data:", error.message);
-    return null;
-  }
-}
-
-/**
  * @function unsubscribe
  * @description Unsubscribes from a WebSocket channel using the provided WebSocket client.
  * @param {WebSocket|null} webSocketClient - The WebSocket client instance to use for unsubscribing.
@@ -306,12 +305,160 @@ async function getAndDeferenceOpenRPC(version) {
  * unsubscribe(myWebSocketClient);
  **/
 
- function unsubscribe(webSocketClient = null) {
-  if(!webSocketClient) {
-      throw new Error("Websocket client not established")
+function unsubscribe(webSocketClient = null) {
+  if (!webSocketClient) {
+    throw new Error('Websocket client not established');
   }
-  webSocketClient.unsubscribe(MESSAGE)
-  console.log("Websocket connection closed Successfully")
+  webSocketClient.unsubscribe(MESSAGE);
+  console.log('Websocket connection closed Successfully');
+}
+
+/**
+ * @function isScenarioExempted
+ * @description Function to check if method and param combination is part of exception list.
+ * @param {String} method - The method to be checked in exception list.
+ * @param {String} param - The corresponding parameters for method to be checked in exception list.
+ * @example
+ * isScenarioExempted("advertising.setSkipRestriction");
+ **/
+function isScenarioExempted(method, param) {
+  let isInList = false;
+  const methodInExceptionList = getEnvVariable('NOT_SUPPORTED_METHODS').find((object) => {
+    if (
+      object.hasOwnProperty('param') &&
+      object.method.toLowerCase() === method.toLowerCase() &&
+      _.isEqual(object.param, param)
+    ) {
+      return true;
+    } else if (
+      !object.hasOwnProperty('param') &&
+      object.method &&
+      object.method.toLowerCase() === method.toLowerCase()
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  if (methodInExceptionList) {
+    isInList = true;
+  }
+  return isInList;
+}
+
+/**
+ * @module utils
+ * @function getEnvVariable
+ * @description Get the value of an environment variable
+ * @param {string} variable - The name of the environment variable
+ * @param {boolean} isRequired - Whether the variable is required (defaults to true)
+ * @return {string | null | undefined} - The value of the environment variable
+ * @throws {Error} - If the variable is required and not found or undefined
+ **/
+
+function getEnvVariable(variable, isRequired = true) {
+  const envValue = Cypress.env(variable);
+
+  if (envValue !== null && envValue !== undefined) {
+    return envValue;
+  }
+
+  if (isRequired) {
+    const errorMessage = `Required environment variable "${variable}" is missing or undefined.`;
+    console.error(errorMessage);
+    // To include stackTrace in the console
+    console.error(stackTrace());
+    throw new Error(errorMessage);
+  }
+  return envValue;
+}
+
+/**
+ * @module utils
+ * @function stackTrace
+ * @description Returns the stack trace of an Error object.
+ * @returns {string} - The stack trace as a string.
+ */
+function stackTrace() {
+  const err = new Error();
+  return err.stack;
+}
+
+/**
+ * @module utils
+ * @function lifecycleHistorySchemaValidation
+ * @description Function to do schema validation for lifecycle history recording
+ * @param {object} result - Response to do schema validation
+ * @param {object} schema - Lifecycle history schema
+ * @param {string} lifecycleHistoryRecordType - record task type name startLifecycleRecording/stopLifecycleRecording
+ * @param {string} envKey - The name of the environment variable
+ */
+function lifecycleHistorySchemaValidation(result, schema, lifecycleHistoryRecordType, envKey) {
+  const schemaValidationResult = validator.validate(result, schema);
+
+  if (
+    lifecycleHistoryRecordType == CONSTANTS.TASK.STOPLIFECYCLERECORDING &&
+    schemaValidationResult &&
+    schemaValidationResult.valid == false &&
+    schemaValidationResult.errors &&
+    schemaValidationResult.errors.length > 0
+  ) {
+    assert(
+      false,
+      `Schema Validation Failed: Response must follow the format specified in "cypress/fixtures/schemas/lifecycleHistorySchema.json", Errors: ${schemaValidationResult.errors} `
+    );
+  }
+
+  // Assigning history value to envirnoment variable for further validation
+  if (result.appId && result.history) {
+    Cypress.env(envKey, result.history);
+  }
+}
+
+/**
+ * @module utils
+ * @function getSetupDetails
+ * @description Function to check if the env variables and params are provided in the required format for testing
+ */
+function getSetupDetails() {
+  // To check if deviceIp environment variable is defined
+  const deviceIp = getEnvVariable(CONSTANTS.DEVICE_IP);
+  if (!deviceIp || deviceIp == undefined) {
+    cy.log(
+      `${CONSTANTS.DEVICE_IP} environment variable not defined. Update the DEVICE_IP in cypress/support/common.js or pass in command line. Ip address of the device under test to be updated here`
+    ).then(() => {
+      assert(
+        false,
+        `${CONSTANTS.DEVICE_IP} environment variable not defined. Update the DEVICE_IP in cypress/support/common.js or pass in command line. Ip address of the device under test to be updated here`
+      );
+    });
+  } else {
+    cy.log(
+      `Checking mandatory configuration values - ${CONSTANTS.DEVICE_IP} environment variable is defined.`
+    );
+  }
+
+  // To check if setUpValues json is present and it's corresponding params are defined
+  const undefinedParams = [];
+  cy.task(CONSTANTS.READFILEIFEXISTS, CONSTANTS.SETUPVALUES_FILEPATH).then((setupValuesJson) => {
+    if (setupValuesJson) {
+      setupValues = JSON.parse(setupValuesJson);
+      setupValues.param.forEach(function (param) {
+        if (!getEnvVariable(param.name, false) || getEnvVariable(param.name, false) == undefined) {
+          undefinedParams.push(param.name);
+        } else {
+          cy.log(`Checking mandatory configuration values - ${param.name} is defined.`);
+        }
+      });
+      if (undefinedParams.length > 0) {
+        cy.log(`${undefinedParams} should be defined. `).then(() => {
+          assert(false, `${undefinedParams} should be defined. `);
+        });
+      }
+    } else {
+      cy.log(`setupValues json is not present in Firebolt Certification Suite. `);
+    }
+  });
 }
 
 module.exports = {
@@ -324,6 +471,9 @@ module.exports = {
   getCommunicationMode,
   extractModuleName,
   getApiOrEventObjectFromGlobalList,
-  getAndDeferenceOpenRPC,
-  unsubscribe
-}
+  unsubscribe,
+  isScenarioExempted,
+  getEnvVariable,
+  lifecycleHistorySchemaValidation,
+  getSetupDetails,
+};

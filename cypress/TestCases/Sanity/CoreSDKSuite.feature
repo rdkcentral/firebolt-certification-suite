@@ -1,5 +1,5 @@
 Feature: Firebolt Certification Core-SDK validation
-  @mfos @ripple @sanity @coreSDK @Suite @sdk  @transport
+  @mfos @sanity @coreSDK @Suite @sdk  @transport
   Scenario: Firebolt Certification Core-SDK validation
     #check with kurt on multiple befores
     Given the environment has been set up for 'Firebolt Sanity' tests

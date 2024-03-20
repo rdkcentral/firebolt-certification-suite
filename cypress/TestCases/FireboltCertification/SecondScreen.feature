@@ -28,8 +28,27 @@ Feature: Secondscreen
 
    @Secondscreen @coreSDK @sdk @transport
    Scenario: Secondscreen.FriendlyName - Positive Scenario: Validate Set friendlyName
-      Given '3rd party app' registers for the 'friendlyName onChanged' event using the 'Firebolt' API
+      Given '3rd party app' registers for the 'secondscreen onFriendlyNameChanged' event using the 'Firebolt' API
       When 1st party app invokes the 'Firebolt' API to 'set friendlyName to guest room'
       And '3rd party app' invokes the 'Firebolt' API to 'get secondscreen friendlyName'
       Then 'Firebolt' platform responds with 'guest room for secondscreen friendlyName'
-      Then 'Firebolt' platform responds with 'guest room for secondscreen friendlyName event'
+      And 'Firebolt' platform triggers event 'onFriendlyNameChanged for secondscreen with guest room'
+
+   @Secondscreen @coreSDK @regression @sdk
+   Scenario: Secondscreen.onFriendlyNameChanged - Positive Scenario: Validating event clearing listeners
+      Given '3rd party app' registers for the 'secondscreen onFriendlyNameChanged' event using the 'Firebolt' API
+      And I clear 'secondscreen onFriendlyNameChanged event' listeners
+      And 1st party app invokes the 'Firebolt' API to 'set friendlyName to guest room'
+      Then 'Firebolt' platform responds to '1st party app' with 'null for device setName'
+      And 'Firebolt' platform responds with 'null for secondscreen onfriendlynamechanged event'
+
+   @Secondscreen @coreSDK @regression @sdk @notSupported
+   Scenario Outline: Secondscreen.<Event_Name> - Positive Scenario: Validating event Clearing listeners
+      When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
+      And I clear '<Clear_Event_Name>' listeners
+      # Then User triggers event with value as '<Event_Params>'
+      Then 'Firebolt' platform responds with '<Event_Validation_Key>'
+      Examples:
+         | Event_Name      | Registered_Event             | Clear_Event_Name                   | Event_Validation_Key                        |
+         | onLaunchRequest | secondscreen onLaunchRequest | secondscreen onLaunchRequest event | null for secondscreen onLaunchRequest event |
+         | onCloseRequest  | secondscreen onCloseRequest  | secondscreen onCloseRequest event  | null for secondscreen onCloseRequest event  |

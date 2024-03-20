@@ -35,7 +35,11 @@ describe('test validateSchema', () => {
     const invalidJSONString = '{"key":"invalid json string"}';
     const sdkVersion = null;
     const openRPCModuleMethod = 'accessibility.closedCaptionsSettings';
-    const result = await validation.validateSchema(invalidJSONString, sdkVersion, openRPCModuleMethod);
+    const result = await validation.validateSchema(
+      invalidJSONString,
+      sdkVersion,
+      openRPCModuleMethod
+    );
 
     expect(result.status).toBe(false);
     expect(result.message).toContain('Following error received during schema validation');
@@ -63,7 +67,8 @@ describe('test validateSchema', () => {
       ],
     });
 
-    const validJSONString = '{"enabled":true,"styles":{"fontFamily":"Monospace sans-serif","fontSize":1,"fontColor":"#FFFFFF","fontEdge":"none","fontEdgeColor":"#7F7F7F","fontOpacity":100,"backgroundColor":"#000000","backgroundOpacity":100,"textAlign":"center","textAlignVertical":"middle"}}';
+    const validJSONString =
+      '{"enabled":true,"styles":{"fontFamily":"Monospace sans-serif","fontSize":1,"fontColor":"#FFFFFF","fontEdge":"none","fontEdgeColor":"#7F7F7F","fontOpacity":100,"backgroundColor":"#000000","backgroundOpacity":100,"textAlign":"center","textAlignVertical":"middle"}}';
     const sdkVersion = null;
     const openRPCModuleMethod = 'accessibility.closedCaptionsSettings';
 
@@ -102,10 +107,15 @@ describe('test validateSchema', () => {
       ],
     });
 
-    const validationSchemaJSONString = '{"enabled":true,"styles":{"fontFamily":"Monospace sans-serif","fontSize":1,"fontColor":"#FFFFFF","fontEdge":"none","fontEdgeColor":"#7F7F7F","fontOpacity":100,"backgroundColor":"#000000","backgroundOpacity":100,"textAlign":"center","textAlignVertical":"middle"}}';
+    const validationSchemaJSONString =
+      '{"enabled":true,"styles":{"fontFamily":"Monospace sans-serif","fontSize":1,"fontColor":"#FFFFFF","fontEdge":"none","fontEdgeColor":"#7F7F7F","fontOpacity":100,"backgroundColor":"#000000","backgroundOpacity":100,"textAlign":"center","textAlignVertical":"middle"}}';
     const sdkVersion = null;
     const openRPCModuleMethod = 'accessibility.closedCaptionsSettings';
-    const result = await validation.validateSchema(validationSchemaJSONString, sdkVersion, openRPCModuleMethod);
+    const result = await validation.validateSchema(
+      validationSchemaJSONString,
+      sdkVersion,
+      openRPCModuleMethod
+    );
 
     expect(result.status).toBe(true);
     expect(result.message).toBe('');
@@ -116,10 +126,15 @@ describe('test validateSchema', () => {
     // Mocking the getAndDeferenceOpenRPC function to reject with an error
     utils.getAndDeferenceOpenRPC.mockRejectedValue(new Error('Dereference error'));
 
-    const validationSchemaJSONString = '{"enabled":true,"styles":{"fontFamily":"Monospace sans-serif","fontSize":1,"fontColor":"#FFFFFF","fontEdge":"none","fontEdgeColor":"#7F7F7F","fontOpacity":100,"backgroundColor":"#000000","backgroundOpacity":100,"textAlign":"center","textAlignVertical":"middle"}}';
+    const validationSchemaJSONString =
+      '{"enabled":true,"styles":{"fontFamily":"Monospace sans-serif","fontSize":1,"fontColor":"#FFFFFF","fontEdge":"none","fontEdgeColor":"#7F7F7F","fontOpacity":100,"backgroundColor":"#000000","backgroundOpacity":100,"textAlign":"center","textAlignVertical":"middle"}}';
     const sdkVersion = null;
     const openRPCModuleMethod = 'accessibility.closedCaptionsSettings';
-    const result = await validation.validateSchema(validationSchemaJSONString, sdkVersion, openRPCModuleMethod);
+    const result = await validation.validateSchema(
+      validationSchemaJSONString,
+      sdkVersion,
+      openRPCModuleMethod
+    );
 
     expect(result.status).toBe(false);
     expect(result.message).toContain('Following error occurred while dereferencing schema');
@@ -127,7 +142,6 @@ describe('test validateSchema', () => {
     expect(result.schemaMap).toBe('');
   });
 });
-
 
 describe('test formatResultAfterSchemaValidation', () => {
   let task;
@@ -181,7 +195,14 @@ describe('test formatResultAfterSchemaValidation', () => {
         disableFormat: false,
       },
     };
-    let result = validation.formatResultAfterSchemaValidation(task, response, err, schemaValidationResult, params, schemaMap);
+    let result = validation.formatResultAfterSchemaValidation(
+      task,
+      response,
+      err,
+      schemaValidationResult,
+      params,
+      schemaMap
+    );
     console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
 
@@ -212,7 +233,14 @@ describe('test formatResultAfterSchemaValidation', () => {
         disableFormat: false,
       },
     };
-    result = validation.formatResultAfterSchemaValidation(task, response, err, schemaValidationResult, params, schemaMap);
+    result = validation.formatResultAfterSchemaValidation(
+      task,
+      response,
+      err,
+      schemaValidationResult,
+      params,
+      schemaMap
+    );
     console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
@@ -265,7 +293,14 @@ describe('test formatResultAfterSchemaValidation', () => {
         disableFormat: false,
       },
     };
-    result = validation.formatResultAfterSchemaValidation(task, response, err, schemaValidationResult, params, schemaMap);
+    result = validation.formatResultAfterSchemaValidation(
+      task,
+      response,
+      err,
+      schemaValidationResult,
+      params,
+      schemaMap
+    );
     console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
@@ -318,7 +353,14 @@ describe('test formatResultAfterSchemaValidation', () => {
         disableFormat: false,
       },
     };
-    result = validation.formatResultAfterSchemaValidation(task, response, err, schemaValidationResult, params, schemaMap);
+    result = validation.formatResultAfterSchemaValidation(
+      task,
+      response,
+      err,
+      schemaValidationResult,
+      params,
+      schemaMap
+    );
     console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
@@ -351,7 +393,14 @@ describe('test formatResultAfterSchemaValidation', () => {
         disableFormat: false,
       },
     };
-    result = validation.formatResultAfterSchemaValidation(task, response, err, schemaValidationResult, params, schemaMap);
+    result = validation.formatResultAfterSchemaValidation(
+      task,
+      response,
+      err,
+      schemaValidationResult,
+      params,
+      schemaMap
+    );
     console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
@@ -376,7 +425,14 @@ describe('test formatResultAfterSchemaValidation', () => {
       schemaValidationStatus: 'PASS',
       schemaValidationResponse: schemaValidationResult,
     };
-    const result = validation.formatResultAfterSchemaValidation(task, response, err, schemaValidationResult, params, schemaMap);
+    const result = validation.formatResultAfterSchemaValidation(
+      task,
+      response,
+      err,
+      schemaValidationResult,
+      params,
+      schemaMap
+    );
     console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
@@ -404,7 +460,14 @@ describe('test formatResultAfterSchemaValidation', () => {
       schemaValidationStatus: 'PASS',
       schemaValidationResponse: schemaValidationResult,
     };
-    result = validation.formatResultAfterSchemaValidation(task, response, err, schemaValidationResult, params, schemaMap);
+    result = validation.formatResultAfterSchemaValidation(
+      task,
+      response,
+      err,
+      schemaValidationResult,
+      params,
+      schemaMap
+    );
     console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
@@ -420,7 +483,14 @@ describe('test formatResultAfterSchemaValidation', () => {
       schemaValidationStatus: 'SKIPPED',
       schemaValidationResponse: null,
     };
-    result = validation.formatResultAfterSchemaValidation(task, response, err, schemaValidationResult, params, schemaMap);
+    result = validation.formatResultAfterSchemaValidation(
+      task,
+      response,
+      err,
+      schemaValidationResult,
+      params,
+      schemaMap
+    );
     console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
@@ -456,7 +526,14 @@ describe('test formatResultAfterSchemaValidation', () => {
       schemaValidationStatus: 'FAIL',
       schemaValidationResponse: schemaValidationResult,
     };
-    result = validation.formatResultAfterSchemaValidation(task, response, err, schemaValidationResult, params, schemaMap);
+    result = validation.formatResultAfterSchemaValidation(
+      task,
+      response,
+      err,
+      schemaValidationResult,
+      params,
+      schemaMap
+    );
     console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
@@ -471,7 +548,7 @@ describe('test errorSchemaCheck', () => {
   it('should validate error against error schema (object)', () => {
     const validError = {
       code: 404,
-      message: 'Not Found'
+      message: 'Not Found',
     };
     const result = validation.errorSchemaCheck(validError);
     expect(result).toBeTruthy();
@@ -484,7 +561,7 @@ describe('test errorSchemaCheck', () => {
   it('should validate error against error schema (invalid object)', () => {
     const invalidError = {
       code: 'invalid',
-      message: 123 // Field with invalid data type
+      message: 123, // Field with invalid data type
     };
     const result = validation.errorSchemaCheck(invalidError);
     expect(result.errors.length).not.toEqual(0);
@@ -496,11 +573,10 @@ describe('test errorSchemaCheck', () => {
   });
   it('should validate error against error schema (missing required property)', () => {
     const invalidError = {
-      code: 404
+      code: 404,
       // Missing the "message" property
     };
     const result = validation.errorSchemaCheck(invalidError);
     expect(result.errors.length).not.toEqual(0);
   });
 });
-

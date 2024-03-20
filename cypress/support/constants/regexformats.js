@@ -1,6 +1,23 @@
+/**
+ * Copyright 2024 Comcast Cable Communications Management, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 module.exports = {
   NUMERIC_REGEXP: new RegExp('^[0-9]+$'),
-  PASSWORD_REGEXP: new RegExp('^(?:.*[a-z])(?:.*[A-Z])(?:.*[0-9])(?:.*[!@#$%^&*])(?:.{8,})'),
+  PASSWORD_REGEXP: new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'),
   TOKEN_REGEXP: new RegExp('^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'),
   UID_REGEXP: new RegExp(/^(?:.*\d)(?:.*[a-zA-Z]).{2,}$/),
   LANGUAGE_REGEXP: new RegExp('^[a-z]{2}(-[A-Z]{2})?$'),

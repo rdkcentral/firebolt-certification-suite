@@ -1,6 +1,23 @@
+/**
+ * Copyright 2024 Comcast Cable Communications Management, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 import FireboltInvoker from './FireboltInvoker.js';
-import modularTransportClient from 'modularTransportClient';
-const CONSTANTS = require('./constants.js');
+import modularTransportClient from '../../modularTransportClient';
+const CONSTANTS = require('../../constants/constants');
 
 export default class Transport {
   constructor() {
@@ -18,12 +35,12 @@ export default class Transport {
       // Expected format: {"action": "CORE", "method": "closedCaptions.setEnabled", "params": "", "paramsArray": ""}
       const methodResponse = await this.fireboltInvoker.invoke(
         messageObject.method,
-        messageObject.param
+        messageObject.params
       );
       return methodResponse;
     } else if (this.isMTC(messageObject)) {
       // Object contains "transport" and "options" fields, consider it as MTC call.
-      let transportClient = await modularTransportClient(messageObject.transport, {
+      const transportClient = await modularTransportClient(messageObject.transport, {
         ...messageObject.options,
       });
       // If given transportClient exists, initialize the client else throw error.

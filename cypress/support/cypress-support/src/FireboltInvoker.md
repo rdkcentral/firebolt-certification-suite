@@ -6,7 +6,7 @@ This module implements a Firebolt invoker for handling WebSocket communication. 
 
 The FireboltInvoker class relies on environment variables for configuring the WebSocket connection. Make sure to set the following environment variables.
 
-* deviceHost: Hostname of the WebSocket server.
+* deviceIp: Ip or Hostname of the WebSocket server.
 * wsUrlProtocol: Protocol (e.g., 'ws' or 'wss').
 * wsPort: Port number for the WebSocket connection.
 * wsUrlPath: Path for the WebSocket connection.

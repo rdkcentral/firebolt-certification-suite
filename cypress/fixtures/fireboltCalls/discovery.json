@@ -17,7 +17,7 @@
         "expected": "TRUE",
         "expectingError": false
     },
-    "TRUE_FOR_HISTORY_BASED_RECOMMENDATIONS_IN_POLICY_EVENT": {
+    "ONPOLICYCHANGED_FOR_DISCOVERY_ENABLERECOMMENDATIONS_WITH_TRUE": {
         "method": null,
         "event": "discovery.onPolicyChanged",
         "context": "noContext",
@@ -37,7 +37,7 @@
         "expected": "FALSE",
         "expectingError": false
     },
-    "FALSE_FOR_HISTORY_BASED_RECOMMENDATIONS_IN_POLICY_EVENT": {
+    "ONPOLICYCHANGED_FOR_DISCOVERY_ENABLERECOMMENDATIONS_WITH_FALSE": {
         "method": null,
         "event": "discovery.onPolicyChanged",
         "context": "noContext",
@@ -57,7 +57,7 @@
         "expected": "TRUE",
         "expectingError": false
     },
-    "TRUE_FOR_REMEMBER_WATCHED_PROGRAMS_IN_POLICY_EVENT": {
+    "ONPOLICYCHANGED_FOR_DISCOVERY_REMEMBERWATCHEDPROGRAMS_WITH_TRUE": {
         "method": null,
         "event": "discovery.onPolicyChanged",
         "context": "noContext",
@@ -77,7 +77,7 @@
         "expected": "FALSE",
         "expectingError": false
     },
-    "FALSE_FOR_REMEMBER_WATCHED_PROGRAMS_IN_POLICY_EVENT": {
+    "ONPOLICYCHANGED_FOR_DISCOVERY_REMEMBERWATCHEDPROGRAMS_WITH_FALSE": {
         "method": null,
         "event": "discovery.onPolicyChanged",
         "context": "noContext",
@@ -447,5 +447,64 @@
         "method": "discovery.contentAccess",
         "params": "DISCOVERY_CONTENTACCESS_ENTITLEMENTS_INVALID_END_TIME",
         "expected": "error"
+    },
+    "DISCOVERY_ONSIGNIN":{
+        "method": "manage_discovery.onSignIn"
+    },
+    "NOTIFY_SIGNED_IN_WITH_ENTITLEMENTS":{
+        "method": "discovery.signIn",
+		"params": "DISCOVERY_SIGNIN_ENTITLEMENTS"
+    },
+    "NOTIFY_SIGNED_IN_WITHOUT_ENTITLEMENTS":{
+        "method": "discovery.signIn",
+		"params": "EMPTYPARAM"
+    },
+    "ONSIGNIN_FOR_DISCOVERY_WITH_APPID": {
+        "method": null,
+        "event": "discovery.onSignIn",
+		"context": "noContext",
+        "validationJsonPath": "eventResponse",
+        "expected": "DISCOVERY_ONSIGNIN_APPID",
+        "expectingError": false
+    },
+    "SIGNIN_FOR_DISCOVERY": {
+        "method": "discovery.signIn",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DISCOVERY_SIGNIN_TRUE",
+        "expectingError": false
+    },
+    "DISCOVERY_ONSIGNOUT":{
+        "method": "manage_discovery.onSignOut"
+    },
+    "NOTIFY_SIGNED_OUT":{
+        "method": "discovery.signOut"
+    },
+    "ONSIGNOUT_FOR_DISCOVERY_WITH_APPID": {
+        "method": null,
+        "event": "discovery.onSignOut",
+		"context": "noContext",
+        "validationJsonPath": "eventResponse",
+        "expected": "DISCOVERY_ONSIGNOUT_APPID",
+        "expectingError": false
+    },
+    "SIGNOUT_FOR_DISCOVERY": {
+        "method": "discovery.signOut",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DISCOVERY_SIGNOUT_TRUE",
+        "expectingError": false
+    },
+    "SET_ALLOWPERSONALIZATION_TO_TRUE":{
+        "method": "manage_privacy.setAllowPersonalization",
+        "params": "TRUE"
+    },
+    "NULL_FOR_DISCOVERY_ONPOLICYCHANGED_EVENT": {
+        "event": "discovery.onPolicyChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "NULL",
+        "expectingError": false
     }
 }

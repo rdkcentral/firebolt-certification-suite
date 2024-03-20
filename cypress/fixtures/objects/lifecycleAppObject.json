@@ -1,0 +1,12 @@
+{
+    "allowedStateTransitions": {
+        "initializing" : ["inactive"],
+        "inactive" : ["foreground", "background", "suspended"],
+        "foreground" : ["inactive", "background"],
+        "background" : ["foreground", "inactive"],
+        "unloading" : [],
+        "suspended" : ["inactive"],
+        "unloaded" : [],
+        "terminated" : []
+    }
+}

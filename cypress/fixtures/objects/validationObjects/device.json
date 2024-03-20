@@ -1,121 +1,321 @@
 {
-  "ID": {
-    "type": "fixture",
-    "validations": [
-      {
-        "mode": "deviceContentValidation",
-        "type": "DEVICEID",
-        "description": "Validation of the Device Id Format"
-      }
-    ]
-  },
-  "DISTRIBUTOR":{
-    "type": "fixture",
-    "validations": [
-      {
-        "mode": "staticContentValidation",
-        "type": "DEVICE_DISTRIBUTOR",
-        "description": "Validation of the Device Distributor Format"
-      }
-    ]
-  },
-  "PLATFORM":{
-    "type": "fixture",
-    "validations": [
-      {
-        "mode": "staticContentValidation",
-        "type": "DEVICE_PLATFORM",
-        "description": "Validation of the Device Platform Format"
-      }
-    ]
-  },
-  "UID":{
-    "type": "regEx",
-    "validations": [
-      {
-        "type": "UID",
-        "description": "Validation of the Device uid"
-      }
-    ]
-  },
-  "TYPE":{
-    "type": "fixture",
-    "validations": [
-      {
-        "mode": "deviceContentValidation",
-        "type": "DEVICE_TYPE",
-        "description": "Validation of the Device Type Format"
-      }
-    ]
-  },
-  "MODEL":{
-    "type": "fixture",
-    "validations": [
-      {
-        "mode": "deviceContentValidation",
-        "type": "DEVICE_MODEL",
-        "description": "Validation of the Device Model Format"
-      }
-    ]
-  },
-  "SKU":{
-    "type": "fixture",
-    "validations": [
-      {
-        "mode": "deviceContentValidation",
-        "type": "DEVICE_SKU",
-        "description": "Validation of the Device SKU Format"
-      }
-    ]
-  },
-  "MAKE":{
-    "type": "fixture",
-    "validations": [
-      {
-        "mode": "deviceContentValidation",
-        "type": "DEVICE_MAKE",
-        "description": "Validation of the Device Make Format"
-      }
-    ]
-  },
-  "VERSION":{
-    "type": "fixture",
-    "validations": [
-      {
-        "mode": "deviceContentValidation",
-        "type": "DEVICE_VERSION",
-        "description": "Validation of the Device Version Format"
-      }
-    ]
-  },
-  "NAME":{
-    "type": "fixture",
-    "validations": [
-      {
-        "mode": "deviceContentValidation",
-        "type": "DEVICE_NAME",
-        "description": "Validation of the Device Name Format"
-      }
-    ]
-  },
-  "AUDIO":{
-    "type": "fixture",
-    "validations": [
-      {
-        "mode": "deviceContentValidation",
-        "type": "DEVICE_AUDIO",
-        "description": "Validation of the Device Audio Format"
-      }
-    ]
-  },
-  "DEVICENAME_LIVING_HALL":{
-    "type": "fixture",
-    "validations": [
-      {
-        "mode": "staticContentValidation",
-        "type": "DEVICE_DEVICENAME_LIVING_HALL",
-        "description": "Validation of the Device Name as Living hall"
-      }
-    ]
-  }
+    "DEVICE_ID": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DEVICEID",
+                        "description": "Validation of the Device Id Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VERSION": {
+        "method": "device.version",
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "mode": "fixture",
+                        "type": "APIVERSION",
+                        "description": "Validation of the Device version  API Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_HDCP": {
+        "method": "device.hdcp",
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "mode": "fixture",
+                        "type": "HDCP",
+                        "description": "Validation of the Device hdcp"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_HDR": {
+        "method": "device.hdr",
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "mode": "fixture",
+                        "type": "HDR",
+                        "description": "Validation of the Device hdr"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_SCREENRESOLUTION": {
+        "method": "device.screenResolution",
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "mode": "fixture",
+                        "type": "SCREENRESOLUTION",
+                        "description": "Validation of the Device screenResolution"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEORESOLUTION": {
+        "method": "device.videoResolution",
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "mode": "fixture",
+                        "type": "VIDEORESOLUTION",
+                        "description": "Validation of the Device videoResolution"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_AUDIO": {
+        "method": "device.audio",
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "mode": "fixture",
+                        "type": "AUDIO",
+                        "description": "Validation of the Device audio"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_DISTRIBUTOR": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_DISTRIBUTOR",
+                        "description": "Validation of the Device Distributor Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_PLATFORM": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_PLATFORM",
+                        "description": "Validation of the Device Platform Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_UID": {
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "UID",
+                        "description": "Validation of the Device uid"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_TYPE": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DEVICE_TYPE",
+                        "description": "Validation of the Device Type Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_MODEL": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DEVICE_MODEL",
+                        "description": "Validation of the Device Model Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_SKU": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DEVICE_SKU",
+                        "description": "Validation of the Device SKU Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_MAKE": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DEVICE_MAKE",
+                        "description": "Validation of the Device Make Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_NAME": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DEVICE_NAME",
+                        "description": "Validation of the Device Name Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_NAME_LIVING_HALL": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_NAME_LIVING_HALL",
+                        "description": "Validation of the Device Name as Living hall"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_PROVISION_DEFAULT_CONTENT": {
+        "method": "device.provision",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "NULL",
+                        "description": "Validation of the Device provision Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_PROVISION_WITH_DISTRIBUTOR_ID_CONTENT": {
+        "method": "device.provision",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_DISTRIBUTOR",
+                        "description": "Validation of the Device provision Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_PROVISION_DEVICE_ID": {
+        "method": "device.id",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_PROVISION_DEVICE_ID",
+                        "description": "Validation of the Device provision Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_PROVISION_ACCOUNT_ID": {
+        "method": "account.id",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_PROVISION_ACCOUNT_ID",
+                        "description": "Validation of the Device provision Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_DEVICE_PROVISION_DISTRIBUTOR_ID": {
+        "method": "device.distributor",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "userContentValidation",
+                        "type": "DEVICE_PROVISION_DISTRIBUTOR_ID",
+                        "description": "Validation of the Device distributor while invoking device.provision Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_BEDROOM_NAME": {
+        "method": "device.distributor",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_NAME_BEDROOM",
+                        "description": "Validation of the Device distributor while invoking device.provision Format"
+                    }
+                ]
+            }
+        ]
+    }
 }

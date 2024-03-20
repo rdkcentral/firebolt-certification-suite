@@ -1,3 +1,20 @@
+/**
+ * Copyright 2024 Comcast Cable Communications Management, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 const common = require('./common');
 const createBundler = require('@bahmutov/cypress-esbuild-preprocessor');
 const preprocessor = require('@badeball/cypress-cucumber-preprocessor');
@@ -8,14 +25,17 @@ const GlobalsPolyfills =
   require('@esbuild-plugins/node-globals-polyfill').NodeGlobalsPolyfillPlugin;
 const Formatter = require('cucumber-json-report-formatter').Formatter;
 const fs = require('fs');
-const report = require('multiple-cucumber-html-reporter');
-const reportEnv = require('../../reportEnv.json');
 const shell = require('shell-exec');
 const jsonMerger = require('json-merger');
 const { merge } = require('mochawesome-merge');
 const Event = require('events');
 const eventEmitter = new Event();
 const CONSTANTS = require('../support/constants/constants');
+const util = require('util');
+const { DateTime } = require('luxon');
+const { generateLocalReport } = require('./localReportGenerator');
+
+let metaDataArr = [];
 
 module.exports = async (on, config) => {
   await preprocessor.addCucumberPreprocessorPlugin(on, config);
@@ -81,10 +101,20 @@ module.exports = async (on, config) => {
         try {
           files = fs.readdirSync(directory);
         } catch (err) {
-          console.log(`"${directory}" path does not exist - readFilesFromDir`);
           resolve(null);
         }
         resolve(files);
+      });
+    },
+    /* Check whether Directory Exist
+    @param path - directory path
+    Usage:
+      cy.task('checkDirectoryExist', "/tmp")
+    */
+    checkDirectoryExist(path) {
+      return new Promise((resolve) => {
+        const exists = fs.existsSync(path);
+        resolve(exists);
       });
     },
     /* merge multiple json files
@@ -109,6 +139,22 @@ module.exports = async (on, config) => {
         }
       });
     },
+    /* deleteFolder and files recursively
+    @param  - path to the folder
+    Usage:
+      cy.task('deleteFolder', path)
+    */
+    deleteFolder(folderPath) {
+      return new Promise((resolve, reject) => {
+        fs.rmdir(folderPath, { recursive: true }, (error) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(true);
+          }
+        });
+      });
+    },
     executeShell(command) {
       return new Promise((resolve) => {
         shell(command).then((commandOutput) => {
@@ -129,7 +175,6 @@ module.exports = async (on, config) => {
           files = fs.readFileSync(directory, 'utf8');
           resolve(files);
         } else {
-          console.log('Could not find file at ' + directory, 'readFileIfExists');
           resolve(null);
         }
       });
@@ -141,6 +186,17 @@ module.exports = async (on, config) => {
     // Calling reportProcessor default function with instance of event
     const reportProcessor = importReportProcessor();
     reportProcessor.defaultMethod(eventEmitter);
+
+    // Update run metadata
+    const updatedMetadata = [
+      { name: CONSTANTS.REPORT_COMMUNICATION_MODE, value: config.env.communicationMode },
+      {
+        name: CONSTANTS.REPORT_DATE,
+        value: DateTime.utc().toFormat('yyyy-MM-dd HH:mm:ss') + ' UTC',
+      },
+    ];
+
+    metaDataArr = updatedMetadata;
   });
 
   /* After the run do the following
@@ -190,7 +246,6 @@ module.exports = async (on, config) => {
       if (err) throw err;
       console.log('The file has been deleted!');
     });
-    // await afterRunHook();
 
     const reportType = config.env.reportType;
     // Reading sanity suite file name.
@@ -213,17 +268,28 @@ module.exports = async (on, config) => {
             // Convert merged json object to a buffer
             jsonReport = Buffer.from(JSON.stringify(mergedJson));
           } else {
+            // To add custom metadata to the generated cucumber JSON
+            await addCustomMetaData(outputFile, metaDataArr);
             // Reading data from mochawesome or cucumber json file as a buffer
             jsonReport = readDataFromFile(filePath + fileName);
           }
-
+          const reportProperties = {};
+          reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
           // Add the report to the reportObj
           if (reportType === CONSTANTS.CUCUMBER) {
             reportObj.cucumberReport = jsonReport;
+            // Pass fileName and filePath as well for local report generation
+            reportObj.cucumberReportFilePath = filePath;
           } else if (reportType === CONSTANTS.MOCHAWESOME) {
             reportObj.mochawesomeReport = jsonReport;
           }
+          reportObj.reportProperties = reportProperties;
         }
+      }
+
+      // Genereate local report if generateLocalReport is set to true
+      if (config.env.generateLocalReport) {
+        await generateLocalReport(reportObj, jobId);
       }
 
       // Emit the 'reports' event once after the loop and reportObj is populated.
@@ -238,7 +304,11 @@ module.exports = async (on, config) => {
       const files = readFileName(filePath);
       if (files) {
         for (const file of files) {
-          deleteFile(filePath + file);
+          const fullPath = filePath + file;
+          // Check if the path is not a directory
+          if (!fs.statSync(fullPath).isDirectory()) {
+            deleteFile(filePath + file);
+          }
         }
       }
     }
@@ -315,4 +385,31 @@ function deleteFile(sourceFile) {
     }
     console.log(`The ${sourceFile} file has been deleted`);
   });
+}
+
+async function addCustomMetaData(outputFile, metaDataArr) {
+  try {
+    // Promisify the fs.readFile and fs.writeFile functions
+    const readFileAsync = util.promisify(fs.readFile);
+    const writeFileAsync = util.promisify(fs.writeFile);
+
+    // Read the JSON data from the file
+    const reportData = await readFileAsync(outputFile, 'utf8');
+    const existingData = JSON.parse(reportData);
+
+    // Append the metaDataArr to each item from the global metadata array
+    existingData.forEach((item) => {
+      item.metadata = metaDataArr;
+    });
+
+    const updatedJsonData = JSON.stringify(existingData, null, 2);
+
+    // Write the updated JSON data back to the file
+    await writeFileAsync(outputFile, updatedJsonData, 'utf8');
+    console.log('Metadata array appended to existing JSON successfully.');
+
+    return Promise.resolve();
+  } catch (err) {
+    console.error('Error in appending the metadata to the existing JSON:', err.message);
+  }
 }

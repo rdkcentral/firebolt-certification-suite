@@ -1,166 +1,27 @@
-import { getAndDeferenceOpenRPC } from './utils';
+/**
+ * Copyright 2024 Comcast Cable Communications Management, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 const JSON_PATH_VALIDATOR = require('jsonpath');
-const Validator = require('jsonschema').Validator;
 
-const validator = new Validator();
-import errorSchema from '../errorSchema.json';
-import { CONSTANTS } from './constants';
-
-export default class Validation {
+class Validation {
   constructor(validationModule) {
     this.validationModule = validationModule;
   }
 
-  /**
-     * @module validation
-     * @function validateSchema
-     * @description validate json response string received when invoking <Module.Method>, against corresponding schema
-     * @param {string} validationSchemaJSONString - JSON response string
-     * @param {string} sdkVersion - SDK version
-     * @param {string} openRPCModuleMethod - String containing the Module and Method called as "<Module.Method>" (Ex: accessibility.closedCaptionsSettings)
-     * @example
-     * validateSchema('{"enabled":true,"styles":{"fontFamily":"Monospace sans-serif","fontSize":1,"fontColor":"#ffffff","fontEdge":"none","fontEdgeColor":"#7F7F7F","fontOpacity":100,"backgroundColor":"#000000","backgroundOpacity":100,"textAlign":"center","textAlignVertical":"middle"}}'
-    , "core", "accessibility.closedCaptionsSettings")
-     */
-  async validateSchema(validationSchemaJSONString, sdkVersion=null, openRPCModuleMethod) {
-    let deSchemaList;
-    const response = { status: true, message: '', schemaValidationResult: '', schemaMap: '' };
-    if (!validationSchemaJSONString || !openRPCModuleMethod) {
-      response.status = false;
-      response.message = 'Either json string or module method cannot be empty';
-      response.schemaValidationResult = ''
-      response.schemaMap = ''
-      return response;
-    }
-    try {
-      deSchemaList = await getAndDeferenceOpenRPC();
-    } catch (error) {
-      response.status = false;
-      response.message =
-        'Following error occurred while dereferencing schema - ' + JSON.stringify(error);
-      response.schemaValidationResult = ''
-      response.schemaMap = ''
-      return response;
-    }
-    // extracting schema for <Module.Method> and perform validation
-    for (
-      let methodIndex = 0;
-      deSchemaList !== undefined && methodIndex < deSchemaList.methods.length;
-      methodIndex++
-    ) {
-      const methodsArray = deSchemaList.methods;
-      const methodObject = methodsArray.find((obj) => {
-        return (obj.name).toLowerCase() === openRPCModuleMethod.toLowerCase();
-      });
-      const schemaMap = methodObject.result.schema;
-      const schemaValidationResult = validator.validate(
-        JSON.parse(validationSchemaJSONString),
-        schemaMap
-      );
-      response.schemaValidationResult = schemaValidationResult
-      response.schemaMap = schemaMap
-      if (JSON.stringify(schemaValidationResult.errors) === '[]') {
-        return response;
-      } else {
-        response.status = false;
-        response.message =
-          'Following error received during schema validation - ' +
-          JSON.stringify(schemaValidationResult.errors);
-        response.schemaValidationResult = ''
-        response.schemaMap = ''
-        return response;
-      }
-    }
-  }
-
-   /*
-   * @module validation
-   * @function errorSchemaCheck
-   * @description Validate error against error schema
-   * @param {Object} err - error
-   * @example
-   * cy.errorSchemaCheck(err)
-   */
-  errorSchemaCheck(err) {
-    let schemaValidationResult;
-    if (errorSchema) {
-      schemaValidationResult = validator.validate(err, errorSchema);
-    }
-    return schemaValidationResult;
-  }
-  
-  /*
-   * @module validation
-   * @function formatResultAfterSchemaValidation
-   * @description Format result with the fields required to be sent back to publisher
-   * @param {String} task - Task/Handler name provided in incoming message that needs to be sent to subscriber to perform corresponding function
-   * @param {Object} response - Response 
-   * @param {Object} err - Error
-   * @param {Object} schemaValidationResult - Result obtained on validating response with corresponding schema map
-   * @param {Object} params - params
-   * @param {Object} schemaMap - Schema map
-   * @example
-   * cy.formatResultAfterSchemaValidation(task, response, err, schemaValidationResult, params, schemaMap)
-   */
-  formatResultAfterSchemaValidation(task, response, err, schemaValidationResult, params, schemaMap) {
-    let apiResponse, responseCode, schemaValidationStatus;
-    if (err) {
-      apiResponse = { result: null, error: err };
-      schemaValidationResult = this.errorSchemaCheck(err);
-      if (schemaValidationResult && schemaValidationResult.errors && schemaValidationResult.errors.length > 0) {
-        if (err.message != undefined && CONSTANTS.ERROR_LIST.includes(err.message)) {
-          responseCode = CONSTANTS.STATUS_CODE[3];
-          schemaValidationStatus = CONSTANTS.SCHEMA_VALIDATION_STATUS_CODE[1];
-        } else {
-          responseCode = CONSTANTS.STATUS_CODE[1];
-          schemaValidationStatus = CONSTANTS.SCHEMA_VALIDATION_STATUS_CODE[1];
-        }
-      } else {
-        if (err.message != undefined && CONSTANTS.ERROR_LIST.includes(err.message)) {
-          responseCode = CONSTANTS.STATUS_CODE[3];
-          schemaValidationStatus = CONSTANTS.SCHEMA_VALIDATION_STATUS_CODE[0];
-        } else {
-          responseCode = CONSTANTS.STATUS_CODE[0];
-          schemaValidationStatus = CONSTANTS.SCHEMA_VALIDATION_STATUS_CODE[0];
-        }
-      }
-    } else {
-      if (response == undefined || (schemaValidationResult && schemaValidationResult.errors && schemaValidationResult.errors.length > 0)) {
-        // Handling expected null scenarios from Open RPC
-        if (response === null && schemaMap && (Object.values(schemaMap).includes('null') || Object.values(schemaMap).includes(null) || findTypeInOneOF(schemaMap))) {
-          apiResponse = { result: response, error: null };
-          responseCode = CONSTANTS.STATUS_CODE[0];
-          schemaValidationStatus = CONSTANTS.SCHEMA_VALIDATION_STATUS_CODE[0];
-        } else if (schemaMap == undefined) {
-          apiResponse = { result: response, error: null };
-          responseCode = CONSTANTS.STATUS_CODE[0];
-          schemaValidationStatus = CONSTANTS.SCHEMA_VALIDATION_STATUS_CODE[0];
-        } else if (response == undefined) {
-          apiResponse = { result: null, error: 'undefined' };
-          responseCode = CONSTANTS.STATUS_CODE[2];
-          schemaValidationStatus = CONSTANTS.SCHEMA_VALIDATION_STATUS_CODE[2];
-        } else {
-          apiResponse = { result: response, error: null };
-          responseCode = CONSTANTS.STATUS_CODE[1];
-          schemaValidationStatus = CONSTANTS.SCHEMA_VALIDATION_STATUS_CODE[1];
-        }
-      } else {
-        apiResponse = { result: response, error: null };
-        responseCode = CONSTANTS.STATUS_CODE[0];
-        schemaValidationStatus = CONSTANTS.SCHEMA_VALIDATION_STATUS_CODE[0];
-      }
-    }
-
-    return {
-      method: task,
-      params: params,
-      responseCode: responseCode,
-      apiResponse: apiResponse,
-      schemaValidationStatus: schemaValidationStatus,
-      schemaValidationResponse: schemaValidationResult,
-    };
-  }
-  
   /*
    * @module validation
    * @function validateJSON
@@ -241,3 +102,4 @@ export default class Validation {
     return response;
   }
 }
+module.exports = Validation;

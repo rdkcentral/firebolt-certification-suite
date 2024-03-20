@@ -68,7 +68,7 @@ Currently supported requestType is Params, Context and Content.
       - `module.json` files reside in `fixtures/modules/` or `fixtures/external/modules/`
    * Device Content Validation
       - Content will be fetched from `devicMac.json` file when devicMac is present. 
-      - `deviceMac.json` present in `fixtures/external/devices/` after moved by the `fixtureSetup` script.
+      - `deviceMac.json` present in `fixtures/external/devices/` after moved by the `setup` script.
       - deviceMac is not present content will be taken from `defaultDeviceData` json file.
       - Default device data present in this path `fixtures/defaultDeviceData.json`
 
@@ -126,4 +126,14 @@ request: cy.getDataFromTestDataJson("modules/accessibility.json","CLOSEDCAPTIONS
 ```
 ```
 response: {value: true}
+```
+
+#### > cy.destroyGlobalObjects()
+
+This command will destroy global objects and recursively clear the environment variables whose name is stored in the list if present, before test execution
+
+Ex:
+
+```
+request: cy.destroyGlobalObjects(['lifecycleAppObjectList'])
 ```

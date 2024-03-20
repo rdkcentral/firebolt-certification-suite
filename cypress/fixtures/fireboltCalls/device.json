@@ -23,9 +23,6 @@
     "FETCH_DEVICE_MAKE": {
         "method": "device.make"
     },
-    "FETCH_DEVICE_VERSION": {
-        "method": "device.version"
-    },
     "EXPECTED_DEVICE_ID": {
         "method": "device.id",
         "context": "noContext",
@@ -85,7 +82,11 @@
     },
     "SET_DEVICE_NAME_TO_LIVING_HALL": {
         "method": "manage_device.setName",
-        "params": "DEVICE_DEVICENAME_LIVING_HALL"
+        "params": "Living hall"
+    },
+    "SET_DEVICE_NAME_TO_LIVING_ROOM": {
+        "method": "manage_device.setName",
+        "params": "Living Room"
     },
     "GET_DEVICE_NAME": {
         "method": "device.name"
@@ -95,15 +96,231 @@
         "event": null,
         "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "DEVICE_DEVICENAME_LIVING_HALL",
+        "expected": "Living hall",
         "expectingError": false
     },
-    "LIVING_HALL_FOR_DEVICE_NAME_EVENT": {
+    "ONDEVICENAMECHANGED_WITH_LIVING_HALL": {
         "method": null,
         "event": "device.onNameChanged",
         "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "DEVICE_DEVICENAME_LIVING_HALL",
+        "expected": "Living hall",
+        "expectingError": false
+    },
+    "FETCH_DEVICE_VERSION": {
+        "method": "device.version"
+    },
+    "FETCH_HDCP": {
+        "method": "device.hdcp"
+    },
+    "FETCH_HDR": {
+        "method": "device.hdr"
+    },
+    "FETCH_SCREENRESOLUTION": {
+        "method": "device.screenResolution"
+    },
+    "FETCH_VIDEORESOLUTION": {
+        "method": "device.videoResolution"
+    },
+    "FETCH_AUDIO": {
+        "method": "device.audio"
+    },
+    "EXPECTED_HDCP": {
+        "method": "device.hdcp",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_HDCP"
+    },
+    "EXPECTED_HDR": {
+        "method": "device.hdr",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_HDR"
+    },
+    "EXPECTED_SCREENRESOLUTION": {
+        "method": "device.screenResolution",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_SCREENRESOLUTION"
+    },
+    "EXPECTED_VIDEORESOLUTION": {
+        "method": "device.videoResolution",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_VIDEORESOLUTION"
+    },
+    "EXPECTED_AUDIO": {
+        "method": "device.audio",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_AUDIO"
+    },
+    "SET_DEVICE_NAME_TO_BEDROOM":{
+        "method": "manage_device.setName",
+		"params": "Bedroom"
+    },
+    "GET_MANAGE_DEVICE_NAME":{
+        "method": "manage_device.name"
+    },
+    "NULL_FOR_DEVICE_SETNAME": {
+        "method": "device.setName",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "NULL",
+        "expectingError": false
+    },
+    "BEDROOM_FOR_DEVICE_NAME": {
+        "method": "device.name",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_BEDROOM_NAME",
+        "expectingError": false
+    },
+    "ONNAMECHANGED_FOR_DEVICE_WITH_BEDROOM": {
+        "method": null,
+        "event": "device.onNameChanged",
+		"context": "noContext",
+        "validationJsonPath": "eventResponse",
+        "expected": "DEVICE_BEDROOM_NAME",
+        "expectingError": false
+    },
+    "PROVISION_DEVICE_WITH_DEFAULT_VALUES":{
+        "method": "manage_device.provision",
+		"params": "DEVICE_PROVISION_DEFAULT_VALUES"
+    },
+    "DEFAULT_VALUES_FOR_DEVICE_PROVISION": {
+        "method": "device.provision",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_PROVISION_DEFAULT_CONTENT",
+        "expectingError": false
+    },
+    "PROVISION_DEVICE_WITH_DISTRIBUTOR_ID":{
+        "method": "manage_device.provision",
+		"params": "DEVICE_PROVISION_WITH_DISTRIBUTOR_ID"
+    },
+    "DISTRIBUTOR_ID_FOR_DEVICE_PROVISION": {
+        "method": "device.provision",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_PROVISION_WITH_DISTRIBUTOR_ID_CONTENT",
+        "expectingError": false
+    },
+    "GET_DEVICE_ID":{
+        "method": "device.id"
+    },
+    "GET_ACCOUNT_ID":{
+        "method": "account.id"
+    },
+    "EXPECTED_PROVISION_DEVICE_ID": {
+        "method": "device.id",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_PROVISION_DEVICE_ID",
+        "expectingError": false
+    },
+    "EXPECTED_PROVISION_ACCOUNT_ID": {
+        "method": "account.id",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_PROVISION_ACCOUNT_ID",
+        "expectingError": false
+    },
+    "DEFAULT_VALUE_FOR_DEVICE_PROVISION": {
+        "method": "device.provision",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_PROVISION_DEFAULT_CONTENT",
+        "expectingError": false
+    },
+    "GET_DEVICE_DISTRIBUTOR":{
+        "method": "device.distributor"
+    },
+    "GET_DEVICE_PROVISION_DISTRIBUTOR_ID": {
+        "method": "device.distributor",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "DEVICE_DISTRIBUTOR",
+        "expectingError": false
+    },
+    "SET_DEVICE_NAME_WITH_INTEGER":{
+        "method": "manage_device.setName",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "SET_DEVICE_NAME_WITH_BOOLEAN":{
+        "method": "manage_device.setName",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "INVALID_PARAMETERS_FOR_DEVICE":{
+        "method": "device.setName",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMETERS_FOR_DEVICE_PROVISION":{
+        "method": "device.provision",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "PROVISION_DEVICE_WITH_INTEGER":{
+        "method": "manage_device.provision",
+		"params": "INTEGER123",
+        "expected": "error"
+    },
+    "PROVISION_DEVICE_WITH_BOOLEAN":{
+        "method": "manage_device.provision",
+		"params": "TRUE",
+        "expected": "error"
+    },
+    "PROVISION_DEVICE_WITHOUT_DEVICEID":{
+        "method": "manage_device.provision",
+		"params": "DEVICE_PROVISION_WITHOUT_DEVICEID",
+        "expected": "error"
+    },
+    "PROVISION_DEVICE_WITH_EMPTY_PARAMS":{
+        "method": "manage_device.provision",
+		"params": "DEVICE_PROVISION_EMPTY_PARAMS",
+        "expected": "error"
+    },
+    "PROVISION_DEVICE_WITHOUT_ACCOUNTID":{
+        "method": "manage_device.provision",
+		"params": "DEVICE_PROVISION_WITHOUT_ACCOUNTID",
+        "expected": "error"
+    },
+    "SET_DEVICE_NAME_WITHOUT_PARAMETERS": {
+        "method": "manage_device.setName"
+    },
+    "EXPECTED_DEVICE_NAME": {
+        "method": "device.setName",
+        "event": null,
+		"context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "Bedroom",
+        "expectingError": false
+    },
+    "SET_DEVICE_NAME_TO_KITCHEN": {
+        "method": "manage_device.setName",
+        "params": "Kitchen"
+    },
+    "NULL_FOR_DEVICE_ONNAMECHANGED_EVENT": {
+        "event": "device.onNameChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "NULL",
         "expectingError": false
     }
 }

@@ -1,0 +1,618 @@
+{
+    "scenarioNames": {
+        "Account": {
+            "Positive Scenario: Validate account ID": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Account 1.1",
+                            "description": "Positive Scenario: Validating account.id"
+                        }
+                    }
+                ]
+            },
+            "Positive Scenario: Validate account UID": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Account 1.2",
+                            "description": "Positive Scenario: Validating account.Uid"
+                        }
+                    }
+                ]
+            }
+        },
+        "Authentication": {
+            "Authentication.token - Positive Scenario: Get Platform token type": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Authentication 1.1",
+                            "description": "Positive Scenario: Validating authentication.token for type platform token"
+                        }
+                    }
+                ]
+            },
+            "Authentication.token - Positive Scenario: Get Device token type": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Authentication 1.2",
+                            "description": "Positive Scenario: Validating authentication.token for type device token"
+                        }
+                    }
+                ]
+            },
+            "Authentication.token - Positive Scenario: Get Distributor token type": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Authentication 1.3",
+                            "description": "Positive Scenario: Validating authentication.token for type Distributor token"
+                        }
+                    }
+                ]
+            },
+            "Authentication.token - Positive Scenario: Get Distributor-CIMA token type": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Authentication 1.4",
+                            "description": "Positive Scenario: Validating authentication.token for type Distributor-CIMA token"
+                        }
+                    }
+                ]
+            },
+            "Authentication.token - Positive Scenario: Get Distributor-OAT token type": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Authentication 1.5",
+                            "description": "Positive Scenario: Validating authentication.token for type Distributor-OAT token"
+                        }
+                    }
+                ]
+            },
+            "Authentication.device - Positive Scenario: Get Device token type": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Authentication 1.6",
+                            "description": "Positive Scenario: Validating authentication.device"
+                        }
+                    }
+                ]
+            },
+            "Authentication.session - Positive Scenario: Get Session token type": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Authentication 1.7",
+                            "description": "Positive Scenario: Validating authentication.session"
+                        }
+                    }
+                ]
+            },
+            "Authentication.root - Positive Scenario: Get Root token type": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Authentication 1.8",
+                            "description": "Positive Scenario: Validating authentication.root"
+                        }
+                    }
+                ]
+            },
+            "Authentication.token - Negative Scenario: Invalid Parameter Platform1 expecting error": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Authentication 1.9",
+                            "description": "Negative Scenario: Validating authentication.token for invalid platform value"
+                        }
+                    }
+                ]
+            },
+            "Authentication.token - Negative Scenario: Invalid Parameter type Boolean expecting error": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Authentication 1.10",
+                            "description": "Negative Scenario: Validating authentication.token for invalid platform type(boolean)"
+                        }
+                    }
+                ]
+            },
+            "Authentication.token - Negative Scenario: Invalid Parameter type Integer expecting error": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Authentication 1.11",
+                            "description": "Negative Scenario: Validating authentication.token for invalid platform type(integer)"
+                        }
+                    }
+                ]
+            }
+        },
+        "Advertising": {
+            "Advertising.advertisingId - Positive Scenario: Special Validation limitAdTracking_ON": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.advertisingId - Positive Scenario: Special Validation limitAdTracking_OFF": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.config Coppa value - Positive Scenario: Coppa None": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.3",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.config Coppa value - Positive Scenario: Coppa TRUE": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.4",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.config Coppa value - Positive Scenario: Coppa FALSE": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.5",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.config Coppa value - Positive Scenario: Coppa None with environment value test": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.6",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.config Coppa value - Positive Scenario: Coppa TRUE with environment value test": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.7",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.config Coppa value - Positive Scenario: Coppa FALSE with environment value test": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.8",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.config - special Validation limitAdTrackingON limitAdTracking_ON With param True": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.9",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.config - special Validation limitAdTrackingOFF limitAdTracking_OFF With param True": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.10",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.config - special Validation limitAdTrackingON limitAdTracking_ON With param False": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.11",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.config - special Validation limitAdTrackingOFF limitAdTracking_OFF With param False": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.12",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.config - special Validation Only coppa as params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.13",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.config - special Validation Empty params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.14",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.advertisingId - Positive Scenario: limitAdTracking_OFF_SCOPE_BROWSER": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.15",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.advertisingId - Positive Scenario: limitAdTracking_ON_SCOPE_BROWSER": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.16",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.advertisingId - Positive Scenario: limitAdTracking_OFF_SCOPE_CONTENT": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.17",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.advertisingId - Positive Scenario: limitAdTracking_ON_SCOPE_CONTENT": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.18",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.advertisingId - Positive Scenario: limitAdTracking_ON_WITHOUT_SCOPE": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.19",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.advertisingId - Positive Scenario: limitAdTracking_ON_WITH_RANDOM_STRING_SCOPE_ID": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.20",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Advertising.advertisingId - Positive Scenario: limitAdTracking_ON_WITH_EMPTY_STRING_SCOPE_ID": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Advertising 1.21",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            }
+        },
+        "Keyboard": {
+            "Keyboard.email - Positive Scenario: email with signIn type without UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Account 1.1",
+                            "description": "Positive Scenario: Validating account.id"
+                        }
+                    }
+                ],
+                "beforeOperation": [
+                    {
+                        "firstParty": true,
+                        "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI"
+                    }
+                ]
+            },
+            "Keyboard.email - Positive Scenario: email with signUp type without UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Account 1.2",
+                            "description": "Positive Scenario: Validating account.Uid"
+                        }
+                    }
+                ],
+                "beforeOperation": [
+                    {
+                        "firstParty": true,
+                        "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI"
+                    }
+                ]
+            },
+            "Keyboard.email - Positive Scenario: email with signIn with type alone without UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Account 1.2",
+                            "description": "Positive Scenario: Validating account.Uid"
+                        }
+                    }
+                ],
+                "beforeOperation": [
+                    {
+                        "firstParty": true,
+                        "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI"
+                    }
+                ]
+            },
+            "Keyboard.password - Positive Scenario: password without UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Account 1.2",
+                            "description": "Positive Scenario: Validating account.Uid"
+                        }
+                    }
+                ],
+                "beforeOperation": [
+                    {
+                        "firstParty": true,
+                        "fireboltMock": "KEYBOARD_PASSWORD_WITHOUT_UI"
+                    }
+                ]
+            },
+            "Keyboard.password - Positive Scenario: password as empty without UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Account 1.2",
+                            "description": "Positive Scenario: Validating account.Uid"
+                        }
+                    }
+                ],
+                "beforeOperation": [
+                    {
+                        "firstParty": true,
+                        "fireboltMock": "KEYBOARD_PASSWORD_WITHOUT_UI"
+                    }
+                ]
+            },
+            "Keyboard.standard - Positive Scenario: standard platform without UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Account 1.2",
+                            "description": "Positive Scenario: Validating account.Uid"
+                        }
+                    }
+                ],
+                "beforeOperation": [
+                    {
+                        "firstParty": true,
+                        "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI"
+                    }
+                ]
+            },
+            "Keyboard.email - Positive Scenario: email from keyboard with UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Account 1.2",
+                            "description": "Positive Scenario: Validating account.Uid"
+                        }
+                    }
+                ],
+                "beforeOperation": [
+                    {
+                        "firstParty": true,
+                        "fireboltMock": "KEYBOARD_EMAIL_WITH_UI"
+                    }
+                ]
+            },
+            "Keyboard.password - Positive Scenario: password from keyboard with UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Account 1.2",
+                            "description": "Positive Scenario: Validating account.Uid"
+                        }
+                    }
+                ],
+                "beforeOperation": [
+                    {
+                        "firstParty": true,
+                        "fireboltMock": "KEYBOARD_PASSWORD_WITH_UI"
+                    }
+                ]
+            },
+            "Keyboard.standard - Positive Scenario: standard platform from keyboard with UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Account 1.2",
+                            "description": "Positive Scenario: Validating account.Uid"
+                        }
+                    }
+                ],
+                "beforeOperation": [
+                    {
+                        "firstParty": true,
+                        "fireboltMock": "KEYBOARD_EMAIL_WITH_UI"
+                    }
+                ]
+            }
+        },
+        "Profile": {
+            "Profile.approveContentRating - Positive Scenario: Correct-PIN without UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Profile 1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Profile.approveContentRating - Positive Scenario: Wrong-PIN without UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Profile 1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Profile.approveContentRating - Positive Scenario: Cancelling-PIN without UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Profile 1.3",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Profile.approveContentRating - Positive Scenario: Correct-PIN with UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Profile 1.4",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Profile.approveContentRating - Positive Scenario: Wrong-PIN with UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Profile 1.5",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Profile.approveContentRating - Positive Scenario: Cancelling-PIN with UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Profile 1.6",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Profile.approvePurchase - Positive Scenario: Correct-PIN without UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Profile 1.7",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Profile.approvePurchase - Positive Scenario: Wrong-PIN without UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Profile 1.8",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Profile.approvePurchase - Positive Scenario: Cancelling-PIN without UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Profile 1.9",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Profile.approvePurchase - Positive Scenario: Correct-PIN with UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Profile 1.10",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Profile.approvePurchase - Positive Scenario: Wrong-PIN with UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Profile 1.11",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Profile.approvePurchase - Positive Scenario: Cancelling-PIN with UI": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Profile 1.12",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,93 +1,154 @@
 {
-    "COUNTRYCODE": {
-        "type": "regEx",
-        "validations": [
+    "LOCALIZATION_COUNTRYCODE": {
+        "data": [
             {
-                "type": "COUNTRYCODE",
-                "description": "Validation of the localization countrycode"
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "COUNTRYCODE",
+                        "description": "Validation of the localization countrycode"
+                    }
+                ]
             }
         ]
     },
-    "LANGUAGE": {
-        "type": "regEx",
-        "validations": [
+    "LOCALIZATION_LANGUAGE": {
+        "data": [
             {
-                "type": "LANGUAGE",
-                "description": "Validation of the localization language"
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "LANGUAGE",
+                        "description": "Validation of the localization language"
+                    }
+                ]
             }
         ]
     },
-    "LOCALE": {
-        "type": "regEx",
-        "validations": [
+    "LOCALIZATION_LOCALE": {
+        "data": [
             {
-                "type": "LANGUAGE",
-                "description": "Validation of the localization locale"
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "LANGUAGE",
+                        "description": "Validation of the localization locale"
+                    }
+                ]
             }
         ]
     },
-    "LATLON": {
-        "type": "fixture",
-        "method": "localization.latlon",
-        "validations": [
+    "LOCALIZATION_LATLON": {
+        "data": [
             {
-                "mode": "deviceContentValidation",
-                "type": "LOCALIZATION_LATLON",
-                "description": "Validation of the Localization latlon Format"
+                "type": "regEx",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "LOCALIZATION_LATLON",
+                        "description": "Validation of the Localization latlon Format"
+                    }
+                ]
             }
         ]
     },
-    "LOCALITY": {
-        "type": "regEx",
-        "validations": [
+    "LOCALIZATION_LOCALITY": {
+        "data": [
             {
-                "type": "STRING",
-                "description": "Validation of the Localization locality Format"
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "STRING",
+                        "description": "Validation of the Localization locality Format"
+                    }
+                ]
             }
         ]
     },
-    "POSTALCODE": {
-        "type": "regEx",
-        "validations": [
+    "LOCALIZATION_POSTALCODE": {
+        "data": [
             {
-                "type": "NUMERIC",
-                "description": "Validation of the Localization postalCode Format"
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "NUMERIC",
+                        "description": "Validation of the Localization postalCode Format"
+                    }
+                ]
             }
         ]
     },
-
-    "ADD_ADDITIONALINFO_AS_STRING": {
-        "type": "fixture",
+    "LOCALIZATION_ADD_ADDITIONALINFO_AS_STRING": {
         "method": "localization.additionalInfo",
-        "validations": [
+        "data": [
             {
-                "mode": "staticContentValidation",
-                "type": "LOCALIZATION_ADD_ADDITIONALINFO_RESPONSE_AS_STRING",
-                "description": "Validation of the Localization add additionalInfo key as string Format"
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_ADD_ADDITIONALINFO_RESPONSE_AS_STRING",
+                        "description": "Validation of the Localization add additionalInfo key as string Format"
+                    }
+                ]
             }
         ]
     },
-    "ADD_ADDITIONALINFO_AS_EMPTY": {
-        "type": "fixture",
+    "LOCALIZATION_ADD_ADDITIONALINFO_AS_EMPTY": {
         "method": "localization.additionalInfo",
-        "validations": [
+        "data": [
             {
-                "mode": "staticContentValidation",
-                "type": "LOCALIZATION_ADD_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING",
-                "description": "Validation of the Localization add additionalInfo key as empty string Format"
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_ADD_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING",
+                        "description": "Validation of the Localization add additionalInfo key as empty string Format"
+                    }
+                ]
             }
         ]
     },
-    "REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING": {
-        "type": "fixture",
+    "LOCALIZATION_REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING": {
         "method": "localization.additionalInfo",
-        "validations": [
+        "data": [
             {
-                "mode": "staticContentValidation",
-                "type": "LOCALIZATION_REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING",
-                "description": "Validation of the Localization additionalInfo key as empty string Format"
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING",
+                        "description": "Validation of the Localization additionalInfo key as empty string Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_TIMEZONE": {
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "TIMEZONE",
+                        "description": "Validation of the localization timezone format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_PREFERREDAUDIOLANGUAGES": {
+        "method": "localization.preferredAudioLanguages",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_PREFERREDAUDIOLANGUAGES_RESPONSE_SPA_ENG",
+                        "description": "Validation of the Localization preferredAudioLanguages Format"
+                    }
+                ]
             }
         ]
     }
-
 }

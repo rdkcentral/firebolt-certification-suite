@@ -21,7 +21,7 @@
         "params": "SECONDSCREEN_INTEGER_123",
         "expected": "error"
     },
-    "FRIENDLYNAME_ONCHANGED": {
+    "SECONDSCREEN_ONFRIENDLYNAMECHANGED": {
         "method": "secondscreen.onFriendlyNameChanged"
     },
     "SET_FRIENDLYNAME_TO_GUEST_ROOM": {
@@ -56,11 +56,35 @@
         "validationJsonPath": "result",
         "expected": "SECONDSCREEN_FRIENDLYNAME"
     },
-    "GUEST_ROOM_FOR_SECONDSCREEN_FRIENDLYNAME_EVENT": {
+    "ONFRIENDLYNAMECHANGED_FOR_SECONDSCREEN_WITH_GUEST_ROOM": {
         "method": null,
         "event": "secondscreen.onFriendlyNameChanged",
         "context": "noContext",
         "validationJsonPath": "eventResponse",
         "expected": "SECONDSCREEN_FRIENDLYNAME"
+    },
+    "NULL_FOR_SECONDSCREEN_ONFRIENDLYNAMECHANGED_EVENT": {
+        "event": "secondscreen.onFriendlyNameChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "NULL",
+        "expectingError": false
+    },
+    "SECONDSCREEN_ONLAUNCHREQUEST": {
+        "method": "secondscreen.onLaunchRequest"
+    },
+    "SECONDSCREEN_ONCLOSEREQUEST": {
+        "method": "secondscreen.onCloseRequest"
+    },
+    "NULL_FOR_SECONDSCREEN_ONLAUNCHREQUEST_EVENT": {
+        "event": "secondscreen.onLaunchRequest",
+        "validationJsonPath": "eventResponse",
+        "expected": "NULL",
+        "expectingError": false
+    },
+    "NULL_FOR_SECONDSCREEN_ONCLOSEREQUEST_EVENT": {
+        "event": "secondscreen.onCloseRequest",
+        "validationJsonPath": "eventResponse",
+        "expected": "NULL",
+        "expectingError": false
     }
 }

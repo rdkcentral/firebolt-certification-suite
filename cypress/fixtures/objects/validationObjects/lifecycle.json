@@ -1,0 +1,15 @@
+{
+    "FINISHED_ERROR":{
+        "data" :[
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "lifecycleFinishedError",
+                        "description": "Validation of the lifecycle finished"
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -104,10 +104,95 @@ request - `cy.getApiOrEventObjectFromGlobalList('device.id', {}, 'test.test.test
 ### Note: Currently, the openRPC supports both core and manage sdk modules
 
 ### Params:
-| Param | Definition| Type |
-| --- | --- | --- |
-| version | version | string |
+
+| Param   | Definition | Type   |
+| ------- | ---------- | ------ |
+| version | version    | string |
 
 ### Examples:
-* `getAndDeferenceOpenRPC('0.17.0')`
-* `getAndDeferenceOpenRPC()`
+
+- `getAndDeferenceOpenRPC('0.17.0')`
+- `getAndDeferenceOpenRPC()`
+
+## getEnvVariable
+
+### Purpose:
+
+The `getEnvVariable` function is a utility for retrieving values of Cypress environment variables. It allows you to get the value of a specified environment variable.
+
+- If the retrieved value is not null, undefined, or an empty string and returns it.
+
+- If the variable is required and not found, it throws an error with a descriptive message along with stack trace.
+
+- If the variable is not required and not found, returns the retrieved value (which might be null or undefined).
+
+### Params:
+
+| Param      | Definition | Type    |
+| ---------- | ---------- | ------- |
+| variable   | variable   | String  |
+| isRequired | isRequired | Boolean |
+
+### Examples:
+
+const variableValue = UTILS.getEnvVariable('YOUR_ENV_VARIABLE');
+
+## lifecycleHistorySchemaValidation
+### Purpose: Function to do schema validation for lifecycle history recording
+
+### Params:
+
+| Param   | Definition                           | Type   |
+| ------- | ----------                           | ------ |
+| result  | Response to do schema validation     | object |
+| schema  | Lifecycle history schema             | object |
+| lifecycleHistoryRecordType  | record task type name startLifecycleRecording/stopLifecycleRecording | string |
+| envKey  | The name of the environment variable | string |
+
+
+## getSetupDetails
+### Purpose: Function to check if the platform specific env variables and params are provided in the required format for testing
+
+### PreRequisites: 
+- A json file with all required mandatory parameters should be placed with corresponding configModule's testData folder.
+- The json file should contain a list of params with each object having name and result as the keys. Within result, there should be the param's name, summary and schema with   which it should be validated
+- The json file should be in the following format :
+```
+{
+    "info": {
+        "title": "PreRequisite"
+    },
+    "param": [
+        {
+            "name": "deviceMac",
+            "result": {
+                "name": "deviceMAC",
+                "summary": "Device Mac Address",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "name": "deviceIp",
+            "result": {
+                "name": "deviceIp",
+                "summary": "Device IP Address",
+                "schema": {
+                    "$ref": "#/components/schemas/DeviceIDDescription"
+                }
+            }
+        }
+    ],
+    "components": {
+        "schemas": {
+            "DeviceIDDescription": {
+                "title": "DeviceIDDescription",
+                "type": "string",
+                "required": true,
+                "properties": {}
+            }
+        }
+    }
+}
+```

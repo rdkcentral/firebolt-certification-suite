@@ -1,8 +1,25 @@
+/**
+ * Copyright 2024 Comcast Cable Communications Management, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 const requestModules = 'requestModules';
 const responseModules = 'responseModules';
 const defaultModule = 'defaultModule';
 const defaultMethod = 'defaultMethod';
-
+const CONSTANTS = require('../../constants/constants');
 export default class Config {
   constructor(configModule) {
     this.configModule = configModule;
@@ -25,7 +42,6 @@ export default class Config {
   }
 
   /* get request override config from configuration module.
-   * ex: https://github.comcast.com/lightning-automation/XRE-Config-Module
    * ex: {"method": "closedcaptions.setEnabled", "params": { "value": true }}
    * If config not present, return same command as is to caller
    * If config present, return the object to caller.
@@ -81,8 +97,17 @@ export default class Config {
         '.' +
         methodName +
         ' and  params: ' +
-        JSON.stringify(fireboltObject.param)
+        JSON.stringify(fireboltObject.params)
     );
+
+    // Failing the test when module name is fcs and corresponding request module override not found
+    if (moduleName === CONSTANTS.FCS && !methodConfig) {
+      cy.log(
+        ` ${fireboltObject.method} is a required requestModule override in config module`
+      ).then(() => {
+        assert(false, ` ${fireboltObject.method} is a required requestModule override`);
+      });
+    }
 
     // If we don't, check for a default
     if (methodConfig === null) {
@@ -109,7 +134,6 @@ export default class Config {
   }
 
   /* get response override config from configuration module.
-   * ex: https://github.comcast.com/lightning-automation/XRE-Config-Module
    * If config not present, return same response as is to caller
    * If config present, return the modified response to caller.
    *
@@ -156,6 +180,10 @@ export default class Config {
       );
       return fireboltResponse;
     }
+    cy.log(
+      'Original Response to be converted to firebolt equivalent: ' +
+        JSON.stringify(fireboltResponse)
+    );
     // If we've gotten to this point, we have a config override. Call it and return its response
     return methodConfig(fireboltResponse);
   }

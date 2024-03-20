@@ -2,16 +2,16 @@
   "jsonDir": "cypress/cucumber-json",
   "reportPath": "./reports/cucumber-htmlreport.html",
   "displayDuration": true,
-  "hideMetadata": true,
-  "displayReportTime": true,
+  "pageFooter": "<div></div>",
+  "customMetadata": true,
   "customData": {
       "title": "Run info",
       "data": [
           { "label": "Project", "value": "Reference Device" },
-          { "label": "Platform", "value": "Ripple" },
-          { "label": "Platform Release", "value": "e56f139" },
-          { "label": "Device", "value": "Sercomm XiOne" },
-          { "label": "Device Firmware", "value": "SCXI11AIC_VBN_topic_xione_flexiglass_20220925222609sdy_FC_EDGE_NG" }
+          { "label": "Platform", "value": "N/A" },
+          { "label": "Platform Release", "value": "N/A" },
+          { "label": "Device", "value": "N/A" },
+          { "label": "Device Firmware", "value": "N/A" }
       ]
   }
 }

@@ -1,26 +1,49 @@
+/**
+ * Copyright 2024 Comcast Cable Communications Management, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 import Config from './config';
 import Validation from './validation';
 import TransportLayer from './transport';
 import Queue from './queue';
 const { v4: uuidv4 } = require('uuid');
-const CONSTANTS = require('./constants.js');
+const CONSTANTS = require('../../constants/constants');
 const defaultDirectory = CONSTANTS.DEFAULT_DIRECTORY;
 const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 const UTILS = require('./utils');
 let appTransport;
 const path = require('path');
+const EXTERNAL_DIR = 'cypress/TestCases/external';
 
 export default function (module) {
   const config = new Config(module);
   const validationModule = new Validation(module);
   const transport = new TransportLayer();
   let clientCreated = false;
+  Cypress.env(CONSTANTS.RESPONSE_TOPIC_LIST, []);
+
   // Fetch the required appTransport from config module
   appTransport = module.appTransport;
 
   // before All
   before(() => {
-    cy.wrap(pubSubClientCreation(), { timeout: CONSTANTS.LINCHPIN_TIMEOUT }).then((result) => {
+    // Added below cypress commands to clear local browser cache and to reload browser
+    cy.clearLocalStorage();
+    cy.reload(true);
+    cy.wrap(pubSubClientCreation(), { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then((result) => {
       if (result) {
         cy.log('Successfully established a pub/sub connection.');
       } else {
@@ -32,19 +55,96 @@ export default function (module) {
     const messageQueue = new Queue();
     Cypress.env(CONSTANTS.MESSAGE_QUEUE, messageQueue);
     UTILS.parseExceptionList();
+    cy.getModuleReqIdJson();
+    if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) == true) {
+      cy.startOrStopPerformanceService(CONSTANTS.START).then((response) => {
+        if (response) {
+          Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, true);
+        }
+      });
+    } else {
+      cy.log(
+        'Performance metrics service not active. To use perforance metrics service, pass performanceMetrics environment variable as true'
+      );
+    }
+    destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+  });
+
+  // beforeEach
+  beforeEach(() => {
+    cy.testDataHandler(CONSTANTS.BEFORE_OPERATION);
+  });
+
+  /**
+   * @module main
+   * @function getModuleReqIdJson
+   * @description Combine the moduleReqId json present in FCS and configmodules.
+   * @example
+   * getModuleReqIdJson()
+   */
+  Cypress.Commands.add('getModuleReqIdJson', () => {
+    cy.task(CONSTANTS.READFILEIFEXISTS, CONSTANTS.FCS_MODULEREQID_PATH).then((fcsData) => {
+      cy.task(CONSTANTS.READFILEIFEXISTS, CONSTANTS.EXTERNAL_MODULEREQID_PATH).then(
+        (externalData) => {
+          if (fcsData && externalData) {
+            fcsData = JSON.parse(fcsData);
+            externalData = JSON.parse(externalData);
+            if (fcsData.scenarioNames && externalData.scenarioNames) {
+              const FCS = Object.keys(fcsData.scenarioNames);
+              const config = Object.keys(externalData.scenarioNames);
+              let fcsModulesData, configModulesData;
+
+              // Loop through all the modules from moduleReqId json
+              FCS.map((module) => {
+                // Check whether the module present in FCS moduleReqId present in external moduleReqId
+                if (config?.includes(module)) {
+                  fcsModulesData = Object.keys(fcsData.scenarioNames[module]);
+                  configModulesData = Object.keys(externalData.scenarioNames[module]);
+                  fcsModulesData.map((scenario) => {
+                    // Check whether the scenario present in FCS moduleReqId present in external moduleReqId
+                    if (configModulesData?.includes(scenario)) {
+                      const scenarioValueKeys = Object.keys(
+                        externalData.scenarioNames[module][scenario]
+                      );
+                      // Combine both the scenario objects
+                      scenarioValueKeys.map((key) => {
+                        fcsData.scenarioNames[module][scenario][key] =
+                          externalData.scenarioNames[module][scenario][key];
+                      });
+                    }
+                    Cypress.env(CONSTANTS.MODULEREQIDJSON, fcsData);
+                  });
+                } else {
+                  Cypress.env(CONSTANTS.MODULEREQIDJSON, fcsData);
+                }
+              });
+            } else {
+              assert(
+                false,
+                'scenarioNames is missing in module requirementId json in FCS/ external module'
+              );
+            }
+          } else {
+            if (!fcsData) {
+              assert(false, 'Module requirementId json file is missing in fixtures');
+            }
+            fcsData = JSON.parse(fcsData);
+            Cypress.env(CONSTANTS.MODULEREQIDJSON, fcsData);
+          }
+        }
+      );
+    });
   });
 
   /**
    * @module main
    * @function pubSubClientCreation
-   * @description Establishing the linchpin connection and subscribing the response topic.
+   * @description Establishing the pubsub connection and subscribing to the response topic.
    * @example
    * pubSubClientCreation()
    */
   function pubSubClientCreation() {
-    return new Promise(async (resolve) => {
-      const responseTopicsList = [];
-
+    return new Promise(async (resolve, reject) => {
       if (!clientCreated && appTransport.init) {
         try {
           const responseTopic = UTILS.getTopic(null, CONSTANTS.SUBSCRIBE);
@@ -52,16 +152,19 @@ export default function (module) {
           // Initialize required client
           await appTransport.init();
 
-          if (responseTopic != undefined && !responseTopicsList.includes(responseTopic)) {
+          if (
+            responseTopic != undefined &&
+            !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
+          ) {
             // Subscribe to topic and pass the results to the callback function
             appTransport.subscribe(responseTopic, subscribeResults);
-            responseTopicsList.push(responseTopic);
+            UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
           }
           clientCreated = true;
           resolve(true);
         } catch (error) {
           // If an error occurs, reject the promise with the error
-          reject(error);
+          reject('Failed to initiate PubSubClient' + error);
         }
       } else {
         resolve(false);
@@ -73,14 +176,32 @@ export default function (module) {
   after(() => {
     (async () => {
       try {
-        const responseTopic = UTILS.getTopic(null, CONSTANTS.SUBSCRIBE);
-        appTransport.unsubscribe(responseTopic);
-        // Unsubscribe from WebSocket if the client is available   
-        const webSocketClient = Cypress.env("webSocketClient");
+        if (UTILS.getEnvVariable(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false) == true) {
+          cy.startOrStopPerformanceService(CONSTANTS.STOP).then((response) => {
+            if (response) {
+              Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false);
+            }
+          });
+        }
+        // unsubscribing the list of topics
+        appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
+
+        // Unsubscribe from WebSocket if the client is available
+        const webSocketClient = UTILS.getEnvVariable('webSocketClient', false);
         if (webSocketClient) {
           UTILS.unsubscribe(webSocketClient);
-          Cypress.env("webSocketClient", null); // Clear the WebSocket client from Cypress environment
+          Cypress.env('webSocketClient', null); // Clear the WebSocket client from Cypress environment
         }
+        // Delete the external TestCase directory if exist
+        cy.task('checkDirectoryExist', EXTERNAL_DIR).then((directoryExists) => {
+          if (directoryExists) {
+            cy.task('deleteFolder', EXTERNAL_DIR).then(() => {
+              cy.log(`Folder ${EXTERNAL_DIR} has been deleted.`);
+            });
+          } else {
+            cy.log(`External directory ${EXTERNAL_DIR} does not exist.`);
+          }
+        });
       } catch (err) {
         cy.log(`Something went wrong when attempting to unsubscribe: ${err}`);
       }
@@ -96,16 +217,15 @@ export default function (module) {
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
    */
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
-    cy.wrap(requestMap).then(async (requestMap) => {
+    cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
       return new Promise(async (resolve) => {
-        let message = await config.getRequestOverride(requestMap);
+        const message = await config.getRequestOverride(requestMap);
         // perform MTC call/FB call only if the message is not null
-        if(message != null){
-          let response = await transport.sendMessage(message);
+        if (message != null) {
+          const response = await transport.sendMessage(message);
           const result = config.getResponseOverride(response);
           resolve(result);
-        }
-        else {
+        } else {
           resolve(null);
         }
       });
@@ -141,28 +261,6 @@ export default function (module) {
 
   /**
    * @module main
-   * @function validateSchema
-   * @description validate json response string received when invoking <Module.Method>, against corresponding schema
-   * @param {string} validationSchemaJSONString - JSON response string
-   * @param {string} sdkVersion - SDK version
-   * @param {string} openRPCModuleMethod - String containing the Module and Method called as "<Module.Method>" (Ex: accessibility.closedCaptionsSettings)
-   * @example
-   * validateSchema('{"enabled":true,"styles":{"fontFamily":"Monospace sans-serif","fontSize":1,"fontColor":"#ffffff","fontEdge":"none","fontEdgeColor":"#7F7F7F","fontOpacity":100,"backgroundColor":"#000000","backgroundOpacity":100,"textAlign":"center","textAlignVertical":"middle"}}'
-  , "core", "accessibility.closedCaptionsSettings")
-   */
-  Cypress.Commands.add(
-    'validateSchema',
-    (validationSchemaJSONString, sdkVersion, openRPCModuleMethod) => {
-      return validationModule.validateSchema(
-        validationSchemaJSONString,
-        sdkVersion,
-        openRPCModuleMethod
-      );
-    }
-  );
-
-  /**
-   * @module main
    * @function startTest
    * @description Start the sanity test using datable.
    * @param {Object} datatables - Contains the input variable to override default value to run suite files (Ex: appId, SDK mode)
@@ -170,7 +268,7 @@ export default function (module) {
    * startTest({"rawTable": [ ["paramType","variableName","value"], ["INPUT","asynchronous","false"]]})
    */
   Cypress.Commands.add('startTest', (datatables) => {
-    let additionalParams = {};
+    const additionalParams = {};
     let overrideParams = {};
     let appId;
 
@@ -185,42 +283,44 @@ export default function (module) {
           }
         }
         if (datatable.paramType == CONSTANTS.CONFIG) {
-          if (datatable.variableName == CONSTANTS.APPID) {
-            appId = datatable.value;
+          if (datatable.variableName == CONSTANTS.APP_ID) {
+            appId = UTILS.getEnvVariable(datatable.value);
           }
         } else {
-          appId = Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID);
+          appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
         }
       });
     }
 
     // Overriding default value for mode, if input is not there from feature file or cli.
-    let mode = CONSTANTS.MODE_SDK; // default to SDK
+    const mode = CONSTANTS.MODE_SDK; // default to SDK
     if (
       !additionalParams[CONSTANTS.COMMUNICATION_MODE] &&
-      !Cypress.env(CONSTANTS.COMMUNICATION_MODE)
+      !UTILS.getEnvVariable(CONSTANTS.COMMUNICATION_MODE, false)
     ) {
       additionalParams[CONSTANTS.COMMUNICATION_MODE] = mode;
     } else if (
       (!additionalParams[CONSTANTS.COMMUNICATION_MODE] ||
         additionalParams[CONSTANTS.COMMUNICATION_MODE]) &&
-      Cypress.env(CONSTANTS.COMMUNICATION_MODE)
+      UTILS.getEnvVariable(CONSTANTS.COMMUNICATION_MODE, false)
     ) {
-      additionalParams[CONSTANTS.COMMUNICATION_MODE] = Cypress.env(CONSTANTS.COMMUNICATION_MODE);
+      additionalParams[CONSTANTS.COMMUNICATION_MODE] = UTILS.getEnvVariable(
+        CONSTANTS.COMMUNICATION_MODE
+      );
     }
 
     // Overriding default value for action, if input is not there from feature file or cli.
-    let action = CONSTANTS.ACTION_CORE; // default to CORE
-    if (!additionalParams[CONSTANTS.ACTION] && !Cypress.env(CONSTANTS.ACTION)) {
+    const action = CONSTANTS.ACTION_CORE; // default to CORE
+    if (!additionalParams[CONSTANTS.ACTION] && !UTILS.getEnvVariable(CONSTANTS.ACTION, false)) {
       additionalParams[CONSTANTS.ACTION] = action;
     } else if (
       (!additionalParams[CONSTANTS.ACTION] || additionalParams[CONSTANTS.ACTION]) &&
-      Cypress.env(CONSTANTS.ACTION)
+      UTILS.getEnvVariable(CONSTANTS.ACTION, false)
     ) {
-      additionalParams[CONSTANTS.ACTION] = Cypress.env(CONSTANTS.ACTION);
+      additionalParams[CONSTANTS.ACTION] = UTILS.getEnvVariable(CONSTANTS.ACTION);
     }
 
-    overrideParams.certification = Cypress.env(CONSTANTS.CERTIFICATION);
+    overrideParams.certification = UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false);
     overrideParams.exceptionMethods = UTILS.generateExceptionListForSanity();
 
     // If certification is true override excluded methods and modules from config module if it is present else use the default lists in constants.
@@ -229,17 +329,20 @@ export default function (module) {
     }
 
     cy.runIntentAddon(CONSTANTS.TASK.RUNTEST, additionalParams).then((parsedIntent) => {
-      let intent = UTILS.createIntentMessage(CONSTANTS.TASK.RUNTEST, overrideParams, parsedIntent);
+      const intent = UTILS.createIntentMessage(
+        CONSTANTS.TASK.RUNTEST,
+        overrideParams,
+        parsedIntent
+      );
       const requestTopic = UTILS.getTopic(appId);
       const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
 
-      if (!Cypress.env(CONSTANTS.DEVICE_MAC)) {
+      if (!UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)) {
         cy.log(CONSTANTS.DEVICE_MAC_UNAVAILABLE).then(() => {
           assert(false, CONSTANTS.DEVICE_MAC_UNAVAILABLE);
         });
       }
 
-      cy.wait(30000); // TO DO: Static wait to be removed once healthcheck is available
       cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
         cy.log('Response from Firebolt Implementation: ' + response);
 
@@ -254,7 +357,7 @@ export default function (module) {
           assert.exists(response.report, CONSTANTS.INVALID_RESPONSE);
 
           // Writing sanity mochawesome json to file when jobId is present.
-          if (Cypress.env(CONSTANTS.JOBID)) {
+          if (UTILS.getEnvVariable(CONSTANTS.JOBID, false)) {
             const reportPath = CONSTANTS.SANITY_REPORT_FILE_PATH;
             cy.task(CONSTANTS.WRITE_TO_FILE, {
               fileName: reportPath,
@@ -297,19 +400,29 @@ export default function (module) {
    * cy.sendMessagetoApp('900218FFD490_appId_FCS',900218FFD490_appId_FCA,{"asynchronous": "false","communicationMode": "SDK","isAsync": false,"action": "search"}, 1000)
    */
   Cypress.Commands.add('sendMessagetoApp', async (requestTopic, responseTopic, intent) => {
-    let headers = { id: uuidv4() };
+    const headers = { id: uuidv4() };
 
     // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
-    let longPollTimeout = Cypress.env(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT)
-      ? Cypress.env(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT)
+    const longPollTimeout = UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, false)
+      ? UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT)
       : CONSTANTS.LONGPOLL_TIMEOUT;
+
+    // Subscribing to the topic when the topic is not subscribed.
+    if (
+      responseTopic != undefined &&
+      !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
+    ) {
+      // Subscribe to topic and pass the results to the callback function
+      appTransport.subscribe(responseTopic, subscribeResults);
+      UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
+    }
 
     if (appTransport) {
       // Publish the message on topic
       appTransport.publish(requestTopic, JSON.stringify(intent), headers);
 
       // Returns the response after polling when data is available in queue
-      return Cypress.env(CONSTANTS.MESSAGE_QUEUE)
+      return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
         .LongPollQueue(headers.id, longPollTimeout)
         .then((results) => {
           if (results) {
@@ -334,11 +447,29 @@ export default function (module) {
    * subscribeResults('{ "result": { "type": "device", "value": "PD54331.." } }', headers:{id:1232435, client:fca})
    **/
   function subscribeResults(data, metaData) {
-    let queueInput = {};
+    const queueInput = {};
     queueInput.data = data;
     queueInput.metaData = metaData;
     // Push the data and metadata as an object to queue
-    Cypress.env(CONSTANTS.MESSAGE_QUEUE).enqueue(queueInput);
+    UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE).enqueue(queueInput);
+  }
+
+  /**
+   * @module main
+   * @function destroyGlobalObjects
+   * @description Destroy global objects and recursively clear the environment variables whose name is stored in the list if present, before test execution. List of names of global object to be cleared can be passed
+   *  @param {object} objectNameList - list of objects to be cleared
+   *  @example
+   * destroyGlobalObjects(['lifecycleAppObjectList'])
+   **/
+  function destroyGlobalObjects(objectNameList) {
+    for (const objectName of objectNameList) {
+      const objectListEnv = Cypress.env(objectName);
+      for (const appObject in objectListEnv) {
+        Cypress.env(objectListEnv[appObject], null);
+      }
+      Cypress.env(objectName, []);
+    }
   }
 
   /**
@@ -423,6 +554,7 @@ export default function (module) {
    * cy.testDataHandler("Content","Device_Id");
    */
   Cypress.Commands.add('testDataHandler', (requestType, dataIdentifier) => {
+    const defaultRetVal = dataIdentifier;
     switch (requestType) {
       case CONSTANTS.PARAMS:
         const moduleName = UTILS.extractModuleName(dataIdentifier);
@@ -436,8 +568,15 @@ export default function (module) {
         // Fetching the context value from apiObjectContext json based on dataIdentifier.
         cy.getDataFromTestDataJson(contextImportFile, dataIdentifier, requestType).then(
           (context) => {
-            assert.notEqual(CONSTANTS.NO_DATA, context, CONSTANTS.TEST_HANDLER_DATA_UNDEFINED);
-            return context;
+            if (context === CONSTANTS.NO_DATA) {
+              cy.log(
+                `Expected context not found for ${dataIdentifier}. Returning ${dataIdentifier} as is.`
+              ).then(() => {
+                return defaultRetVal;
+              });
+            } else {
+              return context;
+            }
           }
         );
         break;
@@ -449,7 +588,6 @@ export default function (module) {
             dataIdentifier.validations[0].mode &&
             dataIdentifier.validations[0].mode == CONSTANTS.STATIC_CONTENT_VALIDATION)
         ) {
-
           // If dataIdentifier is object reading validations[0].type else using dataIdentifier as-is.
           dataIdentifier =
             typeof dataIdentifier == CONSTANTS.OBJECT
@@ -466,9 +604,10 @@ export default function (module) {
           dataIdentifier.validations[0].mode &&
           dataIdentifier.validations[0].mode == CONSTANTS.DEVICE_CONTENT_VALIDATION
         ) {
-          const deviceMAC = Cypress.env(CONSTANTS.DEVICE_MAC);
+          let deviceMAC = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC);
+          deviceMAC = deviceMAC.replaceAll(':', '');
 
-          // deviceMAC is present reading the data from the deviceMAC.json file else reading it from defaultDeviceData.json.
+          // If <deviceMAC> is present reading the data from the <deviceMAC>.json file. Else, reading it from defaultDeviceData.json
           const deviceDataPath = deviceMAC
             ? CONSTANTS.EXTERNAL_DEVICES_PATH + deviceMAC + '.json'
             : CONSTANTS.DEFAULT_DEVICE_DATA_PATH;
@@ -482,15 +621,33 @@ export default function (module) {
             dataIdentifier.validations[0].type,
             requestType
           ).then((data) => {
-            assert.notEqual(CONSTANTS.NO_DATA, data, CONSTANTS.TEST_HANDLER_DATA_UNDEFINED);
-            return data;
+            if (data === CONSTANTS.NO_DATA) {
+              cy.log(
+                `Expected content not found for dataIdentifier.validations[0].type. Returning ${dataIdentifier} as is.`
+              ).then(() => {
+                return defaultRetVal;
+              });
+            } else {
+              return data;
+            }
           });
         } else {
-          assert(false, 'Invalid dataIdentifier for Content');
+          cy.log(
+            `No Content special handling logic for ${dataIdentifier}. Returning ${dataIdentifier} as is.`
+          ).then(() => {
+            return defaultRetVal;
+          });
         }
         break;
+      case CONSTANTS.BEFORE_OPERATION:
+        cy.getBeforeOperationObject();
+        break;
       default:
-        expect(requestType).to.be.oneOf([CONSTANTS.PARAMS, CONSTANTS.CONTEXT, CONSTANTS.CONTENT]);
+        cy.log(
+          `Expected requestType - ${requestType} to be one of ${CONSTANTS.TEST_DATA_HANDLER_REQUESTTYPE}`
+        ).then(() => {
+          expect(requestType).to.be.oneOf(CONSTANTS.TEST_DATA_HANDLER_REQUESTTYPE);
+        });
     }
   });
 
@@ -509,14 +666,15 @@ export default function (module) {
    */
   Cypress.Commands.add('testDataParser', (requestType, dataIdentifier, moduleName) => {
     const defaultImportFile = CONSTANTS.DEFAULT_PATH;
+    let defaultRetVal = dataIdentifier;
+    if (requestType == CONSTANTS.PARAMS) {
+      defaultRetVal = { value: dataIdentifier };
+    }
 
     // Check for the data in defaultTestData.json
     cy.getDataFromTestDataJson(defaultImportFile, dataIdentifier, requestType).then(
       (defaultImportData) => {
         let paramData = defaultImportData;
-        if(defaultImportData == CONSTANTS.NO_DATA){
-          cy.log(`Expected data ${dataIdentifier} Not Found in default file`)
-        }
 
         // Variables that come from a module will be formatted as '<Module>_<Variable>'
         // Ex: "Device_Model" should go to "Device.json" and look up variable "Model"
@@ -529,7 +687,7 @@ export default function (module) {
           // Data in modules directory has high priority than defaultTestData, if data is found it will be replaced with data found in defaultTestData.json
           cy.getDataFromTestDataJson(moduleImportPath, dataIdentifier, requestType).then(
             (moduleData) => {
-              paramData = (moduleData != CONSTANTS.NO_DATA) ? moduleData : paramData;
+              paramData = moduleData != CONSTANTS.NO_DATA ? moduleData : paramData;
 
               // Checking the data from the external json file only if it is present.
               cy.task(CONSTANTS.READ_FILES_FROM_DIRECTORY, CONSTANTS.CYPRESS_MODULES_PATH).then(
@@ -541,27 +699,43 @@ export default function (module) {
                       dataIdentifier,
                       requestType
                     ).then((externalModuleData) => {
-                      paramData = (externalModuleData != CONSTANTS.NO_DATA) ? externalModuleData : paramData;
-                      if(paramData == CONSTANTS.NO_DATA){
-                        assert(false, `Expected data ${dataIdentifier} was not found in the default file, FCS module JSON file, or external module JSON file.`);
+                      paramData =
+                        externalModuleData != CONSTANTS.NO_DATA ? externalModuleData : paramData;
+                      if (paramData == CONSTANTS.NO_DATA) {
+                        cy.log(
+                          `Expected data ${dataIdentifier} was not found in the default file, FCS module JSON file, or external module JSON file. Returning ${dataIdentifier} as is.`
+                        ).then(() => {
+                          return defaultRetVal;
+                        });
+                      } else {
+                        return paramData;
                       }
-                      return paramData;
                     });
                   } else {
-                    if(paramData == CONSTANTS.NO_DATA){
-                      assert(false, `Expected data ${dataIdentifier} was not found in default file or module JSON file.`);
+                    if (paramData == CONSTANTS.NO_DATA) {
+                      cy.log(
+                        `Expected data ${dataIdentifier} was not found in default file or module JSON file. Returning ${dataIdentifier} as is.`
+                      ).then(() => {
+                        return defaultRetVal;
+                      });
+                    } else {
+                      return paramData;
                     }
-                    return paramData;
                   }
                 }
               );
             }
           );
         } else {
-          if(paramData == CONSTANTS.NO_DATA){
-            assert(false, `Expected data ${dataIdentifier} was not found in default file.`);
+          if (paramData == CONSTANTS.NO_DATA) {
+            cy.log(
+              `Expected data ${dataIdentifier} was not found in default file. Returning ${dataIdentifier} as is.`
+            ).then(() => {
+              return defaultRetVal;
+            });
+          } else {
+            return paramData;
           }
-          return paramData;
         }
       }
     );
@@ -608,10 +782,10 @@ export default function (module) {
    * cy.getDataFromTestDataJson("modules/accessibility.json","ACCESSIBILITY_CLOSEDCAPTIONS_TRUE", "Params")
    */
   Cypress.Commands.add('getDataFromTestDataJson', (modulePath, dataIdentifier, requestType) => {
-    cy.task("readFileIfExists",modulePath).then((data) => {
-      if(data){
-        data = JSON.parse(data)
-        let response = parseDataFromTestDataJson(data, dataIdentifier, requestType);
+    cy.task('readFileIfExists', modulePath).then((data) => {
+      if (data) {
+        data = JSON.parse(data);
+        const response = parseDataFromTestDataJson(data, dataIdentifier, requestType);
 
         if (response !== undefined) {
           return response;
@@ -621,5 +795,50 @@ export default function (module) {
       }
       return CONSTANTS.NO_DATA;
     });
+  });
+
+  /**
+   * @module main
+   * @function customValidation
+   * @description Command to execute the custom validations in configModule
+   * @param {*} functionName - The name of custom validation function
+   * @param {*} apiOrEventObject - The response of the method or event
+   * @example
+   * cy.customValidation("customMethod1","apiResponseObject")
+   */
+
+  Cypress.Commands.add('customValidation', (fcsValidationObjectData, apiOrEventObject) => {
+    // to check whether validationObject has assertionDef as the field
+    if (fcsValidationObjectData && fcsValidationObjectData.assertionDef) {
+      const functionName = fcsValidationObjectData.assertionDef;
+      // to check whether config module has customValidations function
+      if (module && module.customValidations) {
+        // to check whether customValidations has a function as the functionName passed
+        if (
+          module.customValidations[functionName] &&
+          typeof module.customValidations[functionName] === 'function'
+        ) {
+          message = module.customValidations[functionName](apiOrEventObject);
+        } else if (
+          // if customValidations doesn't have a function as the functionName passed
+          !module.customValidations[functionName] ||
+          typeof module.customValidations[functionName] != 'function'
+        ) {
+          assert(
+            false,
+            `Expected customValidationMethod ${functionName} was not found in the validationFunctions file.`
+          );
+        }
+      } else {
+        // if config module doesn't have customValidations function
+        assert(
+          false,
+          `Expected customValidationMethod ${functionName} was not found in the validationFunctions file.`
+        );
+      }
+    } else {
+      // if config module doesn't have customValidations function
+      assert(false, `Expected customValidationMethod was not found in the validationObject.`);
+    }
   });
 }
