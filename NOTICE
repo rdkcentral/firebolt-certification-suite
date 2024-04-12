@@ -24,3 +24,7 @@ within this component.
 This repository uses the Cypress testing framework.  Any examples from Cypress are:
 Copyright (c) 2020 Cypress.io
 Licensed under the MIT License
+
+scenarios-original.tmpl is taken from https://github.com/WasiqB/multiple-cucumber-html-reporter which is:
+Copyright (c) 2023 Wasiq Bhamla
+Licensed under the MIT License

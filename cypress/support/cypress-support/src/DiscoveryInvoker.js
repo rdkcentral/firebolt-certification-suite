@@ -27,9 +27,9 @@ const MOCK_PURCHASED_CONTENT = {
         },
         entityType: 'program',
         programType: 'movie',
-        title: 'Cool Runnings',
+        title: 'Lorem Ipsum the Movie',
         synopsis:
-          'When a Jamaican sprinter is disqualified from the Olympic Games, he enlists the help of a dishonored coach to start the first Jamaican Bobsled Team.',
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.',
         releaseDate: '1993-01-01T00:00:00.000Z',
         contentRatings: [
           {
@@ -54,7 +54,7 @@ const MOCK_ENITY_INFO = {
     },
     entityType: 'program',
     programType: 'movie',
-    title: 'Cool Runnings',
+    title: 'Lorem Ipsum the Movie',
     synopsis:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.',
     releaseDate: '1993-01-01T00:00:00.000Z',
