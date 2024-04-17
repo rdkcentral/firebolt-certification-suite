@@ -1,0 +1,154 @@
+{
+    "LOCALIZATION_COUNTRYCODE": {
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "COUNTRYCODE",
+                        "description": "Validation of the localization countrycode"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_LANGUAGE": {
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "LANGUAGE",
+                        "description": "Validation of the localization language"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_LOCALE": {
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "LANGUAGE",
+                        "description": "Validation of the localization locale"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_LATLON": {
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "LOCALIZATION_LATLON",
+                        "description": "Validation of the Localization latlon Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_LOCALITY": {
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "STRING",
+                        "description": "Validation of the Localization locality Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_POSTALCODE": {
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "NUMERIC",
+                        "description": "Validation of the Localization postalCode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_ADD_ADDITIONALINFO_AS_STRING": {
+        "method": "localization.additionalInfo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_ADD_ADDITIONALINFO_RESPONSE_AS_STRING",
+                        "description": "Validation of the Localization add additionalInfo key as string Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_ADD_ADDITIONALINFO_AS_EMPTY": {
+        "method": "localization.additionalInfo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_ADD_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING",
+                        "description": "Validation of the Localization add additionalInfo key as empty string Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING": {
+        "method": "localization.additionalInfo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING",
+                        "description": "Validation of the Localization additionalInfo key as empty string Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_TIMEZONE": {
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "TIMEZONE",
+                        "description": "Validation of the localization timezone format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_PREFERREDAUDIOLANGUAGES": {
+        "method": "localization.preferredAudioLanguages",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_PREFERREDAUDIOLANGUAGES_RESPONSE_SPA_ENG",
+                        "description": "Validation of the Localization preferredAudioLanguages Format"
+                    }
+                ]
+            }
+        ]
+    }
+}

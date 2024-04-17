@@ -1,0 +1,41 @@
+{
+    "CAPABILITIES_INFO": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "info",
+                        "description": "Validation of capabilities.info to check the capabilities info"
+                    }
+                ]
+            }
+        ]
+    },
+    "CAPABILITIES_SUPPORTED": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "supported",
+                        "description": "Validation of capabilities.supported to check if the capabilities are supported"
+                    }
+                ]
+            }
+        ]
+    },
+    "CAPABILITIES_REQUEST": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "description": "Validation of capabilities.request to check the capability requested"
+                    }
+                ]
+            }
+        ]
+    }
+}

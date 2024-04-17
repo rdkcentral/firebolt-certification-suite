@@ -1,0 +1,20 @@
+{
+    "SCAN_WITH_20_SECONDS_TIMEOUT": {
+        "timeout": 20
+    },
+
+    "SCAN_TIMEOUT_BOOLEAN_VALUE": {
+        "timeout": true
+    },
+    "CONNECT_INTEGER_SSID": {
+        "ssid": 123456,
+        "passphrase": "",
+        "security": "none"
+    },
+    "WPS_CONNECT_BOOLEAN_VALUE": {
+        "security": true
+    },
+    "WPS_CONNECT_PUSHBUTTON": {
+        "security": "pushButton"
+    }
+}

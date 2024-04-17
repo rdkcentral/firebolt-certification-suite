@@ -1,0 +1,46 @@
+{
+    "ACCESSIBILITY_ONCLOSEDCAPTIONSSETTINGSCHANGED_EVENT":{
+        "event": "accessibility.onClosedCaptionsSettingsChanged",
+        "firstParty": false
+    },
+    "ADVERTISING_ONPOLICYCHANGED_EVENT":{
+        "event": "advertising.onPolicyChanged",
+        "firstParty": false
+    },
+    "DEVICE_ONNAMECHANGED_EVENT":{
+        "event": "device.onNameChanged",
+        "firstParty": false
+    },
+    "DISCOVERY_ONPOLICYCHANGED_EVENT":{
+        "event": "discovery.onPolicyChanged",
+        "firstParty": false
+    },
+    "LOCALIZATION_ONLOCALITYCHANGED_EVENT":{
+        "event": "localization.onLocalityChanged",
+        "firstParty": false
+    },
+    "LOCALIZATION_ONCOUNTRYCODECHANGED_EVENT":{
+        "event": "localization.onCountryCodeChanged",
+        "firstParty": false
+    },
+    "LOCALIZATION_ONLOCALECHANGED_EVENT":{
+        "event": "localization.onLocaleChanged",
+        "firstParty": false
+    },
+    "LOCALIZATION_ONLANGUAGECHANGED_EVENT":{
+        "event": "localization.onLanguageChanged",
+        "firstParty": false
+    },
+    "SECONDSCREEN_ONFRIENDLYNAMECHANGED_EVENT":{
+        "event": "localization.onLanguageChanged",
+        "firstParty": false
+    },
+    "SECONDSCREEN_ONLAUNCHREQUEST_EVENT":{
+        "event": "secondscreen.onLaunchRequest",
+        "firstParty": false
+    },
+    "SECONDSCREEN_ONCLOSEREQUEST_EVENT":{
+        "event": "secondscreen.onCloseRequest",
+        "firstParty": false
+    }
+}

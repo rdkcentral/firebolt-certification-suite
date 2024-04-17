@@ -1,0 +1,207 @@
+{
+    "NULL_FOR_VOICEGUIDANCE_SETENABLED": {
+        "method": "voiceguidance.setEnabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "NULL",
+        "expectingError": false
+    },
+    "NULL_FOR_VOICEGUIDANCE_SETSPEED": {
+        "method": "voiceguidance.setSpeed",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "NULL",
+        "expectingError": false
+    },
+    "ENABLED_FOR_VOICEGUIDANCE_SETENABLED": {
+        "method": "voiceguidance.setEnabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "2_FOR_SPEED_IN_VOICEGUIDANCE_SETSPEED": {
+        "method": "voiceguidance.setEnabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "INVALID_PARAMS_FOR_VOICEGUIDANCE_SETENABLED": {
+        "method": "voiceguidance.setEnabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_VOICEGUIDANCE_SETSPEED": {
+        "method": "voiceguidance.setSpeed",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "VOICEGUIDANCE_ONENABLEDCHANGED": {
+        "method": "manage_voiceguidance.onEnabledChanged"
+    },
+    "VOICEGUIDANCE_ONSPEEDCHANGED": {
+        "method": "manage_voiceguidance.onSpeedChanged"
+    },
+    "ENABLE_VOICEGUIDANCE": {
+        "method": "manage_voiceguidance.setEnabled",
+        "params": "TRUE"
+    },
+    "DISABLE_VOICEGUIDANCE": {
+        "method": "manage_voiceguidance.setEnabled",
+        "params": "FALSE"
+    },
+    "SET_VOICEGUIDANCE_SPEED_TO_1": {
+        "method": "manage_voiceguidance.setSpeed",
+        "params": "INTEGER1"
+    },
+    "SET_VOICEGUIDANCE_SPEED_TO_2": {
+        "method": "manage_voiceguidance.setSpeed",
+        "params": "INTEGER2"
+    },
+    "GET_VOICEGUIDANCE_ENABLED": {
+        "method": "manage_voiceguidance.enabled"
+    },
+    "GET_VOICEGUIDANCE_SPEED": {
+        "method": "manage_voiceguidance.speed"
+    },
+    "TRUE_FOR_VOICEGUIDANCE_ENABLED": {
+        "method": "voiceguidance.enabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "FALSE_FOR_VOICEGUIDANCE_ENABLED": {
+        "method": "voiceguidance.enabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "FALSE",
+        "expectingError": false
+    },
+    "1_FOR_VOICEGUIDANCE_SPEED": {
+        "method": "voiceguidance.speed",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INTEGER1",
+        "expectingError": false
+    },
+    "2_FOR_VOICEGUIDANCE_SPEED": {
+        "method": "voiceguidance.speed",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INTEGER2",
+        "expectingError": false
+    },
+    "ONENABLEDCHANGED_FOR_VOICEGUIDANCE_WITH_TRUE": {
+        "method": null,
+        "event": "voiceguidance.onEnabledChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "ONENABLEDCHANGED_FOR_VOICEGUIDANCE_WITH_FALSE": {
+        "method": null,
+        "event": "voiceguidance.onEnabledChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse",
+        "expected": "FALSE",
+        "expectingError": false
+    },
+    "ONSPEEDCHANGED_FOR_VOICEGUIDANCE_WITH_1": {
+        "method": null,
+        "event": "voiceguidance.onSpeedChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse",
+        "expected": "INTEGER1",
+        "expectingError": false
+    },
+    "ONSPEEDCHANGED_FOR_VOICEGUIDANCE_WITH_2": {
+        "method": null,
+        "event": "voiceguidance.onSpeedChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse",
+        "expected": "INTEGER2",
+        "expectingError": false
+    },
+    "SET_VOICEGUIDANCE_ENABLED_WITH_TEST_STRING": {
+        "method": "manage_voiceguidance.setEnabled",
+        "params": "TEST",
+        "expected": "error"
+    },
+    "SET_VOICEGUIDANCE_ENABLED_WITH_INTEGER": {
+        "method": "manage_voiceguidance.setEnabled",
+        "params": "INTEGER1",
+        "expected": "error"
+    },
+    "SET_VOICEGUIDANCE_SPEED_TO_TEST_STRING": {
+        "method": "manage_voiceguidance.setSpeed",
+        "params": "TEST",
+        "expected": "error"
+    },
+    "SET_VOICEGUIDANCE_SPEED_TO_TRUE": {
+        "method": "manage_voiceguidance.setSpeed",
+        "params": "TRUE",
+        "expected": "error"
+    },
+    "SET_VOICEGUIDANCE_SPEED_TO_INTEGER": {
+        "method": "manage_voiceguidance.setSpeed",
+        "params": "INTEGER12",
+        "expected": "error"
+    },
+    "INVALID_TEST_STING_FOR_VOICEGUIDANCE_ENABLED": {
+        "method": "voiceguidance.setEnabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_INTEGER_FOR_VOICEGUIDANCE_ENABLED": {
+        "method": "voiceguidance.setEnabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_TEST_STING_FOR_VOICEGUIDANCE_SPEED": {
+        "method": "voiceguidance.setSpeed",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_TRUE_FOR_VOICEGUIDANCE_SPEED": {
+        "method": "voiceguidance.setSpeed",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_INTEGER_FOR_VOICEGUIDANCE_SPEED": {
+        "method": "voiceguidance.setSpeed",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    }
+}

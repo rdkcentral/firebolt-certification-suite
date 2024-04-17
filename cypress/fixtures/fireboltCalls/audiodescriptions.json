@@ -1,0 +1,62 @@
+{
+    "NULL_FOR_AUDIODESCRIPTIONS_SETENABLED": {
+        "method": "audiodescriptions.setEnabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "NULL",
+        "expectingError": false
+    },
+    "INVALID_PARAMS_FOR_AUDIODESCRIPTIONS_SETENABLED": {
+        "method": "audiodescriptions.setEnabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "AUDIODESCRIPTIONS_ONENABLEDCHANGED":{
+        "method": "manage_audiodescriptions.onEnabledChanged"
+    },
+    "GET_AUDIODESCRIPTIONS":{
+        "method": "manage_audiodescriptions.enabled"
+    },
+    "DISABLE_AUDIODESCRIPTIONS":{
+        "method": "manage_audiodescriptions.setEnabled",
+        "params": "AUDIODESCRIPTIONS_DISABLED"
+    },
+    "ENABLE_AUDIODESCRIPTIONS":{
+        "method": "manage_audiodescriptions.setEnabled",
+        "params": "AUDIODESCRIPTIONS_ENABLED"
+    },
+    "DISABLED_FOR_AUDIODESCRIPTIONS": {
+        "method": "audiodescriptions.enabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "AUDIODESCRIPTIONS_DISABLED"
+    },
+    "ENABLED_FOR_AUDIODESCRIPTIONS": {
+        "method": "audiodescriptions.enabled",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "AUDIODESCRIPTIONS_ENABLED"
+    },
+    "ONENABLEDCHANGED_FOR_AUDIODESCRIPTIONS_WITH_DISABLE": {
+        "event": "audiodescriptions.onEnabledChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse",
+        "expected": "AUDIODESCRIPTIONS_DISABLED"
+    },
+    "ONENABLEDCHANGED_FOR_AUDIODESCRIPTIONS_WITH_ENABLE": {
+        "event": "audiodescriptions.onEnabledChanged",
+        "context": "noContext",
+        "validationJsonPath": "eventResponse",
+        "expected": "AUDIODESCRIPTIONS_ENABLED"
+    },
+    "SET_AUDIODESCRIPTIONS_ENABLED_FALSE": {
+        "method": "manage_audiodescriptions.setEnabled",
+        "params": "FALSE"
+    }
+}

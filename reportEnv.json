@@ -1,0 +1,17 @@
+{
+  "jsonDir": "cypress/cucumber-json",
+  "reportPath": "./reports/cucumber-htmlreport.html",
+  "displayDuration": true,
+  "pageFooter": "<div></div>",
+  "customMetadata": true,
+  "customData": {
+      "title": "Run info",
+      "data": [
+          { "label": "Project", "value": "Reference Device" },
+          { "label": "Platform", "value": "N/A" },
+          { "label": "Platform Release", "value": "N/A" },
+          { "label": "Device", "value": "N/A" },
+          { "label": "Device Firmware", "value": "N/A" }
+      ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+    "SCAN_WIFI_WITH_EMPTY_PARAMS": {
+        "method": "manage_wifi.scan",
+        "params": "noParam"
+    },
+    "SCAN_WIFI_WITH_20_SECONDS_TIMEOUT": {
+        "method": "manage_wifi.scan",
+        "params": "WIFI_SCAN_WITH_20_SECONDS_TIMEOUT"
+    },
+
+    "SCAN_WIFI_WITH_BOOLEAN": {
+        "method": "manage_wifi.scan",
+        "params": "WIFI_SCAN_TIMEOUT_BOOLEAN_VALUE",
+        "expected": "error"
+    },
+    "CONNECT_WIFI_WITH_INTEGER": {
+        "method": "manage_wifi.connect",
+        "params": "WIFI_CONNECT_INTEGER_SSID",
+        "expected": "error"
+    },
+    "CONNECT_WPS_WITH_BOOLEAN": {
+        "method": "manage_wifi.wps",
+        "params": "WIFI_WPS_CONNECT_BOOLEAN_VALUE",
+        "expected": "error"
+    },
+    "INVALID_BOOLEAN_PARAMS_FOR_WIFI_SCAN": {
+        "method": "wifi.scan",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_INTEGER_PARAMS_FOR_WIFI_CONNECT": {
+        "method": "wifi.connect",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_VALUE_PARAMS_FOR_WIFI_WPS": {
+        "method": "wifi.wps",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "WIFI_DISCONNECT": {
+        "method": "manage_wifi.disconnect"
+    },
+    "WIFI_SET_WPS_DEVICE": {
+        "method": "manage_wifi.wps",
+        "params": "WIFI_WPS_CONNECT_PUSHBUTTON"
+    }
+}
