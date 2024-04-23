@@ -1,7 +1,6 @@
 Feature: Device_Manage
 
-    @initialization
-    Scenario: Launch FCA for 'Device'
+    Background: Launch FCA for 'Device'
         Given the environment has been set up for 'Device' tests
         And 3rd party 'certification' app is launched
 
@@ -37,7 +36,7 @@ Feature: Device_Manage
 
     # @Device @manageSDK @sdk @transport @notSupported
     # Scenario: Device.provision - Positive Scenario: with distributor id including device.id account.id and device.distributor
-    #     When '3rd party app' invokes the 'Firebolt' API to 'get device distributor'
+    #     When '3rd party app' invokes the 'Firebolt' API to 'fetch device distributor'
     #     And 1st party app invokes the 'Firebolt' API to 'provision device with distributor id'
     #     And '3rd party app' invokes the 'Firebolt' API to 'get device id'
     #     And '3rd party app' invokes the 'Firebolt' API to 'get account id'

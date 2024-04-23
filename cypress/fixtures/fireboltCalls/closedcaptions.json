@@ -1,379 +1,257 @@
 {
     "NULL_FOR_CLOSEDCAPTIONS_SETENABLED": {
         "method": "closedcaptions.setEnabled",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETFONTFAMILY": {
         "method": "closedcaptions.setFontFamily",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETFONTSIZE": {
         "method": "closedcaptions.setFontSize",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETFONTCOLOR": {
         "method": "closedcaptions.setFontColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETFONTEDGE": {
         "method": "closedcaptions.setFontEdge",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETFONTEDGECOLOR": {
         "method": "closedcaptions.setFontEdgeColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETBACKGROUNDCOLOR": {
         "method": "closedcaptions.setBackgroundColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETFONTOPACITY": {
         "method": "closedcaptions.setFontOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETBACKGROUNDOPACITY": {
         "method": "closedcaptions.setBackgroundOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETTEXTALIGN": {
         "method": "closedcaptions.setTextAlign",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETTEXTALIGNVERTICAL": {
         "method": "closedcaptions.setTextAlignVertical",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETWINDOWCOLOR": {
         "method": "closedcaptions.setWindowColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETWINDOWOPACITY": {
         "method": "closedcaptions.setWindowOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_CLOSEDCAPTIONS_SETPREFERREDLANGUAGES": {
         "method": "closedcaptions.setPreferredLanguages",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETENABLED":{
         "method": "closedcaptions.setEnabled",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETFONTFAMILY":{
         "method": "closedcaptions.setFontFamily",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETFONTSIZE":{
         "method": "closedcaptions.setFontSize",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETFONTCOLOR":{
         "method": "closedcaptions.setFontColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETFONTEDGE":{
         "method": "closedcaptions.setFontEdge",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_CLOSEDCAPTIONS_SETFONTEDGE":{
         "method": "closedcaptions.setFontEdge",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "CUSTOM_ERROR",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETFONTEDGECOLOR":{
         "method": "closedcaptions.setFontEdgeColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETBACKGROUNDCOLOR":{
         "method": "closedcaptions.setBackgroundColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_CLOSEDCAPTIONS_SETFONTOPACITY":{
         "method": "closedcaptions.setFontOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "CUSTOM_ERROR",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETFONTOPACITY":{
         "method": "closedcaptions.setFontOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_CLOSEDCAPTIONS_SETBACKGROUNDOPACITY":{
         "method": "closedcaptions.setBackgroundOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "CUSTOM_ERROR",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETBACKGROUNDOPACITY":{
         "method": "closedcaptions.setBackgroundOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETTEXTALIGN":{
         "method": "closedcaptions.setTextAlign",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETTEXTALIGNVERTICAL":{
         "method": "closedcaptions.setTextAlignVertical",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETWINDOWCOLOR":{
         "method": "closedcaptions.setWindowColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETWINDOWOPACITY":{
         "method": "closedcaptions.setWindowOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETPREFERREDLANGUAGES":{
         "method": "closedcaptions.setPreferredLanguages",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_CLOSEDCAPTIONS_SETFONTSIZE":{
         "method": "closedcaptions.setFontSize",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "CUSTOM_ERROR",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_CLOSEDCAPTIONS_SETFONTFAMILY":{
         "method": "closedcaptions.setFontFamily",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "CUSTOM_ERROR",
         "expectingError": true
     },
     "ENABLED_FOR_CLOSEDCAPTIONS_SETENABLED": {
         "method": "closedcaptions.setEnabled",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "CASUAL_FOR_CLOSEDCAPTIONS_SETFONTFAMILY": {
         "method": "closedcaptions.setFontFamily",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_CASUAL",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_CASUAL"
     },
     "1.5_FOR_CLOSEDCAPTIONS_SETFONTSIZE": {
         "method": "closedcaptions.setFontSize",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "VALUE1.5",
-        "expectingError": false
+        "expected": "VALUE1.5"
     },
     "#FF00FF_FOR_CLOSEDCAPTIONS_SETFONTCOLOR": {
         "method": "closedcaptions.setFontColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTCOLOR",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTCOLOR"
     },
     "DROPSHADOW_RIGHT_FOR_CLOSEDCAPTIONS_SETFONTEDGE": {
         "method": "closedcaptions.setFontEdge",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_RIGHT",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_RIGHT"
     },
     "#FFFFFF_FOR_CLOSEDCAPTIONS_SETFONTEDGECOLOR": {
         "method": "closedcaptions.setFontEdgeColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "ACCESSIBILITY_FONTEDGE_COLOR",
-        "expectingError": false
+        "expected": "ACCESSIBILITY_FONTEDGE_COLOR"
     },
     "75_FOR_CLOSEDCAPTIONS_SETFONTOPACITY": {
         "method": "closedcaptions.setFontOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "INTEGER75",
-        "expectingError": false
+        "expected": "INTEGER75"
     },
     "#7F7F7F_FOR_CLOSEDCAPTIONS_SETBACKGROUNDCOLOR": {
         "method": "closedcaptions.setBackgroundColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_COLOR_#7F7F7F",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_COLOR_#7F7F7F"
     },
     "75_FOR_CLOSEDCAPTIONS_SETBACKGROUNDOPACITY": {
         "method": "closedcaptions.setBackgroundOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "INTEGER75",
-        "expectingError": false
+        "expected": "INTEGER75"
     },
     "RIGHT_FOR_CLOSEDCAPTIONS_SETTEXTALIGN": {
         "method": "closedcaptions.setTextAlign",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "RIGHT",
-        "expectingError": false
+        "expected": "RIGHT"
     },
     "BOTTOM_FOR_CLOSEDCAPTIONS_SETTEXTALIGNVERTICAL": {
         "method": "closedcaptions.setTextAlignVertical",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "BOTTOM",
-        "expectingError": false
+        "expected": "BOTTOM"
     },
     "WHITE_FOR_CLOSEDCAPTIONS_SETWINDOWCOLOR": {
         "method": "closedcaptions.setWindowColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "WHITE",
-        "expectingError": false
+        "expected": "WHITE"
     },
     "50_FOR_CLOSEDCAPTIONS_SETWINDOWOPACITY": {
         "method": "closedcaptions.setWindowOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "INTEGER50",
-        "expectingError": false
+        "expected": "INTEGER50"
     },
     "SPANISH_FOR_CLOSEDCAPTIONS_SETPREFERREDLANGUAGES": {
         "method": "closedcaptions.setPreferredLanguages",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_PREFERREDLANGUAGES_ARRAY",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_PREFERREDLANGUAGES_ARRAY"
     },
     "CLOSEDCAPTIONS_ONBACKGROUNDCOLORCHANGED":{
         "method": "manage_closedcaptions.onBackgroundColorChanged"
@@ -589,643 +467,404 @@
     },
     "#FF00FF_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.backgroundColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR"
     },
     "#000000_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.backgroundColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR_#000000",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR_#000000"
     },
     "ONBACKGROUNDCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#FF00FF": {
-        "method": null,
         "event": "closedcaptions.onBackgroundColorChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR"
     },
     "ONBACKGROUNDCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#000000": {
-        "method": null,
         "event": "closedcaptions.onBackgroundColorChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR_#000000",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR_#000000"
     },
     "75_FOR_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.backgroundOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_BACKGROUNDOPACITY",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_BACKGROUNDOPACITY"
     },
     "12_FOR_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.backgroundOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_BACKGROUNDOPACITY_12",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_BACKGROUNDOPACITY_12"
     },
     "ONBACKGROUNDOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_75": {
-        "method": null,
         "event": "closedcaptions.onBackgroundOpacityChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_BACKGROUNDOPACITY",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_BACKGROUNDOPACITY"
     },
     "ONBACKGROUNDOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_12": {
-        "method": null,
         "event": "closedcaptions.onBackgroundOpacityChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "INTEGER12",
-        "expectingError": false
+        "expected": "INTEGER12"
     },
     "DISABLED_FOR_CLOSEDCAPTIONS":{
         "method": "closedcaptions.enabled",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "ONENABLEDCHANGED_FOR_CLOSEDCAPTIONS_WITH_DISABLE":{
-        "method": null,
         "event": "closedcaptions.onEnabledChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "ENABLED_FOR_CLOSEDCAPTIONS":{
         "method": "closedcaptions.enabled",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "ONENABLEDCHANGED_FOR_CLOSEDCAPTIONS_WITH_ENABLE":{
-        "method": null,
         "event": "closedcaptions.onEnabledChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "#FF00FF_FOR_FONTCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTCOLOR",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTCOLOR"
     },
     "#FFFFFF_FOR_FONTCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTCOLOR_FFFFFF",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTCOLOR_FFFFFF"
     },
     "ONFONTCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#FF00FF": {
-        "method": null,
         "event": "closedcaptions.onFontColorChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTCOLOR",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTCOLOR"
     },
     "ONFONTCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#FFFFFF": {
-        "method": null,
         "event": "closedcaptions.onFontColorChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_COLOR_#FFFFFF",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_COLOR_#FFFFFF"
     },
     "RAISED_FOR_FONTEDGE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdge",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_RAISED",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_RAISED"
     },
     "ONFONTEDGECHANGED_FOR_CLOSEDCAPTIONS_WITH_RAISED": {
-        "method": null,
         "event": "closedcaptions.onFontEdgeChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_RAISED",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_RAISED"
     },
     "NONE_FOR_FONTEDGE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdge",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_NONE",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_NONE"
     },
     "ONFONTEDGECHANGED_FOR_CLOSEDCAPTIONS_WITH_NONE": {
-        "method": null,
         "event": "closedcaptions.onFontEdgeChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_NONE",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_NONE"
     },
     "DEPRESSED_FOR_FONTEDGE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdge",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_DEPRESSED",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_DEPRESSED"
     },
     "ONFONTEDGECHANGED_FOR_CLOSEDCAPTIONS_WITH_DEPRESSED": {
-        "method": null,
         "event": "closedcaptions.onFontEdgeChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_DEPRESSED",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_DEPRESSED"
     },
     "UNIFORM_FOR_FONTEDGE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdge",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_UNIFORM",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_UNIFORM"
     },
     "ONFONTEDGECHANGED_FOR_CLOSEDCAPTIONS_WITH_UNIFORM": {
-        "method": null,
         "event": "closedcaptions.onFontEdgeChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_UNIFORM",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_UNIFORM"
     },
     "DROPSHADOW_LEFT_FOR_FONTEDGE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdge",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_LEFT",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_LEFT"
     },
     "ONFONTEDGECHANGED_FOR_CLOSEDCAPTIONS_WITH_DROPSHADOW_LEFT": {
-        "method": null,
         "event": "closedcaptions.onFontEdgeChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_LEFT",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_LEFT"
     },
     "DROPSHADOW_RIGHT_FOR_FONTEDGE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdge",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_RIGHT",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_RIGHT"
     },
     "ONFONTEDGECHANGED_FOR_CLOSEDCAPTIONS_WITH_DROPSHADOW_RIGHT": {
-        "method": null,
         "event": "closedcaptions.onFontEdgeChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_RIGHT",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_RIGHT"
     },
     "#FFFFFF_FOR_FONTEDGECOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdgeColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_COLOR_#FFFFFF",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_COLOR_#FFFFFF"
     },
     "#7F7F7F_FOR_FONTEDGECOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdgeColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F",
-        "expectingError": false
+        "expected": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F"
     },
     "ONFONTEDGECOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#FFFFFF": {
-        "method": null,
         "event": "closedcaptions.onFontEdgeColorChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTEDGECOLOR_#7F7F7F",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGECOLOR_#7F7F7F"
     },
     "ONFONTEDGECOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#7F7F7F": {
-        "method": null,
         "event": "closedcaptions.onFontEdgeColorChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTEDGECOLOR_#7F7F7F",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGECOLOR_#7F7F7F"
     },
     "CURSIVE_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontFamily",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_CURSIVE",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_CURSIVE"
     },
     "ONFONTFAMILYCHANGED_FOR_CLOSEDCAPTIONS_WITH_CURSIVE": {
-        "method": null,
         "event": "closedcaptions.onFontFamilyChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_CURSIVE",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_CURSIVE"
     },
     "75_FOR_FONTOPACITY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTOPACITY",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTOPACITY"
     },
     "100_FOR_FONTOPACITY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTOPACITY_100",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTOPACITY_100"
     },
     "ONFONTOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_75": {
-        "method": null,
         "event": "closedcaptions.onFontOpacityChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTOPACITY",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTOPACITY"
     },
     "ONFONTOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_100": {
-        "method": null,
         "event": "closedcaptions.onFontOpacityChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "INTEGER100",
-        "expectingError": false
+        "expected": "INTEGER100"
     },
     "1_FOR_FONTSIZE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontSize",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTSIZE",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTSIZE"
     },
     "ONFONTSIZECHANGED_FOR_CLOSEDCAPTIONS_WITH_1": {
-        "method": null,
         "event": "closedcaptions.onFontSizeChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTSIZE",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTSIZE"
     },
     "LEFT_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlign",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGN_LEFT",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGN_LEFT"
     },
     "ONTEXTALIGNCHANGED_FOR_CLOSEDCAPTIONS_WITH_LEFT": {
-        "method": null,
         "event": "closedcaptions.onTextAlignChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGN_LEFT",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGN_LEFT"
     },
     "RIGHT_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlign",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGN_RIGHT",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGN_RIGHT"
     },
     "ONTEXTALIGNCHANGED_FOR_CLOSEDCAPTIONS_WITH_RIGHT": {
-        "method": null,
         "event": "closedcaptions.onTextAlignChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGN_RIGHT",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGN_RIGHT"
     },
     "CENTER_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlign",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGN_CENTER",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGN_CENTER"
     },
     "ONTEXTALIGNCHANGED_FOR_CLOSEDCAPTIONS_WITH_CENTER": {
-        "method": null,
         "event": "closedcaptions.onTextAlignChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGN_CENTER",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGN_CENTER"
     },
     "TOP_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlignVertical",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_TOP",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_TOP"
     },
     "ONTEXTALIGNVERTICALCHANGED_FOR_CLOSEDCAPTIONS_WITH_TOP": {
-        "method": null,
         "event": "closedcaptions.onTextAlignVerticalChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_TOP",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_TOP"
     },
     "MIDDLE_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlignVertical",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_MIDDLE",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_MIDDLE"
     },
     "ONTEXTALIGNVERTICALCHANGED_FOR_CLOSEDCAPTIONS_WITH_MIDDLE": {
-        "method": null,
         "event": "closedcaptions.onTextAlignVerticalChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_MIDDLE",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_MIDDLE"
     },
     "BOTTOM_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlignVertical",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_BOTTOM",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_BOTTOM"
     },
     "ONTEXTALIGNVERTICALCHANGED_FOR_CLOSEDCAPTIONS_WITH_BOTTOM": {
-        "method": null,
         "event": "closedcaptions.onTextAlignVerticalChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_BOTTOM",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_BOTTOM"
     },
     "0.5_FOR_FONTSIZE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontSize",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTSIZE_VALUE_05",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTSIZE_VALUE_05"
     },
     "ONFONTSIZECHANGED_FOR_CLOSEDCAPTIONS_WITH_0.5": {
-        "method": null,
         "event": "closedcaptions.onFontSizeChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTSIZE_VALUE_05",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTSIZE_VALUE_05"
     },
     "1.5_FOR_FONTSIZE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontSize",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTSIZE_VALUE_1.5",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTSIZE_VALUE_1.5"
     },
     "ONFONTSIZECHANGED_FOR_CLOSEDCAPTIONS_WITH_1.5": {
-        "method": null,
         "event": "closedcaptions.onFontSizeChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTSIZE_VALUE_1.5",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTSIZE_VALUE_1.5"
     },
     "MONOSPACED_SANSERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontFamily",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SANSERIF",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SANSERIF"
     },
     "ONFONTFAMILYCHANGED_FOR_CLOSEDCAPTIONS_WITH_MONOSPACED_SANSERIF": {
-        "method": null,
         "event": "closedcaptions.onFontFamilyChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SANSERIF",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SANSERIF"
     },
     "PROPORTIONAL_SERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontFamily",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SERIF",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SERIF"
     },
     "ONFONTFAMILYCHANGED_FOR_CLOSEDCAPTIONS_WITH_PROPORTIONAL_SERIF": {
-        "method": null,
         "event": "closedcaptions.onFontFamilyChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SERIF",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SERIF"
     },
     "MONOSPACED_SERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontFamily",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SERIF",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SERIF"
     },
     "ONFONTFAMILYCHANGED_FOR_CLOSEDCAPTIONS_WITH_MONOSPACED_SERIF": {
-        "method": null,
         "event": "closedcaptions.onFontFamilyChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SERIF",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SERIF"
     },
     "PROPORTIONAL_SANSERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontFamily",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SANSERIF",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SANSERIF"
     },
     "ONFONTFAMILYCHANGED_FOR_CLOSEDCAPTIONS_WITH_PROPORTIONAL_SANSERIF": {
-        "method": null,
         "event": "closedcaptions.onFontFamilyChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SANSERIF",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SANSERIF"
     },
     "SMALLCAPS_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontFamily",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_SMALLCAPS",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_SMALLCAPS"
     },
     "ONFONTFAMILYCHANGED_FOR_CLOSEDCAPTIONS_WITH_SMALLCAPS": {
-        "method": null,
         "event": "closedcaptions.onFontFamilyChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_SMALLCAPS",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_SMALLCAPS"
     },
     "CASUAL_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontFamily",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_CASUAL",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_CASUAL"
     },
     "ONFONTFAMILYCHANGED_FOR_CLOSEDCAPTIONS_WITH_CASUAL": {
-        "method": null,
         "event": "closedcaptions.onFontFamilyChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_CASUAL",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_CASUAL"
     },
     "ENGLISH_FOR_PREFERREDLANGUAGES_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.preferredLanguages",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_PREFERREDLANGUAGES",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_PREFERREDLANGUAGES"
     },
     "ONPREFERREDLANGUAGESCHANGED_FOR_CLOSEDCAPTIONS_WITH_ENGLISH": {
-        "method": null,
         "event": "closedcaptions.onPreferredLanguagesChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_PREFERREDLANGUAGES",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_PREFERREDLANGUAGES"
     },
     "SPANISH_FOR_PREFERREDLANGUAGES_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.preferredLanguages",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_PREFERREDLANGUAGES_ARRAY",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_PREFERREDLANGUAGES_ARRAY"
     },
     "ONPREFERREDLANGUAGESCHANGED_FOR_CLOSEDCAPTIONS_WITH_SPANISH": {
-        "method": null,
         "event": "closedcaptions.onPreferredLanguagesChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_PREFERREDLANGUAGES_ARRAY",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_PREFERREDLANGUAGES_ARRAY"
     },
     "#000000_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.windowColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_WINDOWCOLOR_#000000",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_WINDOWCOLOR_#000000"
     },
     "WHITE_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.windowColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_WINDOWCOLOR_WHITE",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_WINDOWCOLOR_WHITE"
     },
     "ONWINDOWCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#000000": {
-        "method": null,
         "event": "closedcaptions.onWindowColorChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_WINDOWCOLOR_WHITE",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_WINDOWCOLOR_WHITE"
     },
     "WHITE_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS_EVENT": {
-        "method": null,
         "event": "closedcaptions.onWindowColorChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_WINDOWCOLOR_WHITE",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_WINDOWCOLOR_WHITE"
     },
     "50_FOR_WINDOWOPACITY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.windowOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_WINDOWOPACITY_50",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_WINDOWOPACITY_50"
     },
     "0_FOR_WINDOWOPACITY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.windowOpacity",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "CLOSEDCAPTIONS_WINDOWOPACITY_0",
         "expectingError": false
     },
     "ONWINDOWOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_50": {
-        "method": null,
         "event": "closedcaptions.onWindowOpacityChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_WINDOWOPACITY_50",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_WINDOWOPACITY_50"
     },
     "ONWINDOWOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_0": {
-        "method": null,
         "event": "closedcaptions.onWindowOpacityChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "INTEGER0",
-        "expectingError": false
+        "expected": "INTEGER0"
     },
     "ENABLE_CLOSEDCAPTIONS_WITH_NO_PARAMETERS":{
         "method": "manage_closedcaptions.setEnabled"
@@ -1370,82 +1009,52 @@
     },
     "TEST_FOR_FONTEDGECOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdgeColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTEDGECOLOR_TEST",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGECOLOR_TEST"
     },
     "ONFONTEDGECHANGED_FOR_CLOSEDCAPTIONS_WITH_TEST": {
-        "method": null,
         "event": "closedcaptions.onFontEdgeColorChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTEDGECOLOR_TEST",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTEDGECOLOR_TEST"
     },
     "TEST_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.backgroundColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR_TEST",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR_TEST"
     },
     "ONBACKGROUNDCOLORCHANGE_FOR_CLOSEDCAPTIONS_WITH_TEST": {
-        "method": null,
         "event": "closedcaptions.onBackgroundColorChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR_TEST",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR_TEST"
     },
     "TOP_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlign",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGN_TOP",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGN_TOP"
     },
     "ONTEXTALIGNCHANGED_FOR_CLOSEDCAPTIONS_WITH_TOP": {
-        "method": null,
         "event": "closedcaptions.onTextAlignChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGN_TOP",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGN_TOP"
     },
     "RIGHT_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlignVertical",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_RIGHT",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_RIGHT"
     },
     "ONTEXTALIGNVERTICALCHANGED_FOR_CLOSEDCAPTIONS_WITH_RIGHT": {
-        "method": null,
         "event": "closedcaptions.onTextAlignVerticalChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_RIGHT",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_RIGHT"
     },
     "TEST_FOR_FONTCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontColor",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTCOLOR_TEST",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTCOLOR_TEST"
     },
     "ONFONTCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_TEST": {
-        "method": null,
         "event": "closedcaptions.onFontColorChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "CLOSEDCAPTIONS_FONTCOLOR_TEST",
-        "expectingError": false
+        "expected": "CLOSEDCAPTIONS_FONTCOLOR_TEST"
     }
 }

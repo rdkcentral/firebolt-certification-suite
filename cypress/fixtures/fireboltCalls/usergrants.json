@@ -1,0 +1,82 @@
+{
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_DEVICE_DISTRIBUTOR": {
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_DEVICE_DISTRIBUTOR"
+    },
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_ACCOUNT_ID": {
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_ACCOUNT_ID"
+    },
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_DEVICE_MAKE": {
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_DEVICE_MAKE"
+    },
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_POSTALCODE": {
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_POSTALCODE"
+    },
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_LOCALIZATION_COUNTRYCODE": {
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_COUNTRYCODE"
+    },
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_DISCOVERY_WATCHED": {
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_DISCOVERY_WATCHED"
+    },
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_LOCALITY": {
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_LOCALITY"
+    },
+    "CHECK_IF_LOCALIZATION_LOCALE_CAPABILITY_IS_GRANTED_WITH_ROLE_USE": {
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_LOCALIZATION_LOCALE_ROLE_USE"
+    },
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_DEVICE_NAME":{
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_DEVICE_NAME"     
+    },
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_DEVICE_ID":{
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_DEVICE_ID"     
+    },
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_DEVICE_MODEL":{
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_DEVICE_MODEL"     
+    },
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_LOCALIZATION_LANGUAGE":{
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_LOCALIZATION_LANGUAGE"     
+    },
+    "CHECK_IF_ACCESSIBILITY_CLOSEDCAPTIONS_CAPABILITY_IS_GRANTED_WITH_ROLE_AS_USE":{
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CLOSEDCAPTION_ROLE_USE"     
+    },
+    "CHECK_IF_ACCESSIBILITY_VOICEGUIDANCE_CAPABILITY_IS_GRANTED_WITH_ROLE_AS_USE":{
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_VOICEGUIDANCE_ROLE_USE"     
+    },
+    "CHECK_IF_AUTHENTICATION_TOKEN_DEVICE_CAPABILITY_IS_GRANTED_WITH_ROLE_USE":{
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_AUTHENTICATION_DEVICE_ROLE_USE"     
+    },
+    "CHECK_IF_SECONDSCREEN_DEVICE_CAPABILITY_IS_GRANTED_WITH_ROLE_USE":{
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_SECONDSCREEN_DEVICE_ROLE_USE"     
+    },
+    "CHECK_IF_PROFILE_FLAGS_CAPABILITY_IS_GRANTED_WITH_ROLE_USE":{
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_PROFILE_FLAGS_ROLE_USE"     
+    },
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_PRIVACY_ADVERTISING":{
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_PRIVACY_ADVERTISING"     
+    },
+    "CHECK_IF_CAPABILITIES_IS_GRANTED_FOR_DISCOVERY_WATCHNEXT":{
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_CAPABILITIES_GRANTED_DISCOVERY_WATCH_NEXT"     
+    },
+    "CLEAR_APP_LEVEL_DATA_APP_USAGE_CAPABILITY_WITH_ROLE_USE":{
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_LEVEL_DATA_APP_USAGE_ROLE_USE"     
+    }
+}

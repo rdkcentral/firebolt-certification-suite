@@ -45,39 +45,43 @@
     },
     "PLATFORM_AUTHENTICATION_TOKEN": {
 		"method": "authentication.token",
-		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "AUTHENTICATION_DECODE_JWT_AUTHENTICATION_TOKEN"
 	},
     "DECODE_BASE64_AUTHENTICATION_TOKEN": {
 		"method": "authentication.token",
-		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_TOKEN"
 	},
     "AUTHENTICATION_DEVICE": {
 		"method": "authentication.device",
-		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_DEVICE_TOKEN"
 	},
     "AUTHENTICATION_SESSION": {
 		"method": "authentication.session",
-		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_SESSION_TOKEN"
 	},
     "AUTHENTICATION_ROOT": {
 		"method": "authentication.root",
-		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_ROOT_TOKEN"
 	},
     "INVALID_PARAMETER_ERROR_AUTHENTICATION_TOKEN": {
 		"method": "authentication.token",
-		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
-	}
+	},
+    "EXPECT_ERROR_FOR_DEVICE_TOKEN":{
+        "method": "authentication.device",
+        "expected": "error"    
+    },
+    "INVALID_REQUEST_FOR_AUTHENTICATION_DEVICE": {
+        "method": "authentication.device",
+        "validationJsonPath": "result",
+        "expected": "INVALID_REQUEST",
+        "expectingError": true
+    }
 }

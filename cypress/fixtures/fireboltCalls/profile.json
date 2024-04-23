@@ -4,13 +4,11 @@
     },
     "TRUE_FOR_PROFILE_APPROVECONTENTRATING": {
         "method": "profile.approveContentRating",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "TRUE"
     },
     "FALSE_FOR_PROFILE_APPROVECONTENTRATING": {
         "method": "profile.approveContentRating",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "FALSE"
     },
@@ -19,13 +17,11 @@
     },
     "TRUE_FOR_PROFILE_APPROVEPURCHASE": {
         "method": "profile.approvePurchase",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "TRUE"
     },
     "FALSE_FOR_PROFILE_APPROVEPURCHASE": {
         "method": "profile.approvePurchase",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "FALSE"
     },
@@ -34,8 +30,17 @@
     },
     "EXPECTED_PROFILE_FLAGS_FOR_THE_CURRENT_SESSION": {
         "method": "profile.flags",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "PROFILE_FLAGS"
+    },
+    "EXPECT_ERROR_FOR_ALLOW_PROFILE_FLAGS": {
+        "method": "profile.flags",
+        "expected": "error"
+    },
+    "INVALID_REQUEST_FOR_PROFILE_FLAGS": {
+        "method": "profile.flags",
+        "validationJsonPath": "result",
+        "expected": "INVALID_REQUEST",
+        "expectingError": true
     }
 }

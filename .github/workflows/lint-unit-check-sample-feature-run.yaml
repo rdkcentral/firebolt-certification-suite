@@ -1,4 +1,4 @@
-name: Lint and Unit Tests
+name: Lint Unit Tests and Sample Feature Run
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,12 +21,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Modify package.json
-        run: |
-          # Remove the dependencies using jq
-          jq 'del(.dependencies.configModule)' package.json > tmp_package.json && mv tmp_package.json package.json
-        working-directory: ${{ github.workspace }}
-
       - name: Install dependencies
         run: yarn install
 
@@ -39,6 +33,7 @@ jobs:
       #   run: yarn run test || echo "TESTS_FAILED=true" >> $GITHUB_ENV
 
       # NOTE - Make sure to Remove TESTS_FAILED=false from next step once unit tests are fixed
+     
       - name: Determine comment based on linting and test results
         id: comment
         if: ${{ github.event_name == 'pull_request' }}
@@ -82,6 +77,70 @@ jobs:
         run: |
           if [[ "${{ github.event_name }}" == 'pull_request' && "$PR_COMMENT" != 'Linting and unit tests succeeded.' ]]; then
             JSON_PAYLOAD=$(jq -n --arg body "$PR_COMMENT" '{"body": $body}')
+
+            echo "Generated JSON payload:"
+            echo "$JSON_PAYLOAD"
+
+            curl -X POST \
+              -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H "Content-Type: application/json" \
+              -d "$JSON_PAYLOAD" \
+              "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments"
+          fi
+
+  run_testcase:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run Hello feature
+        run: yarn run cy:run -- --spec "cypress/TestCases/Sample/Hello.feature" --env testSuite="sample",generateLocalReport="false" > samplRunOutput.txt || true
+
+      # To remove ANSI escape characters
+      - name: Remove ANSI escape codes from samplRunOutput.txt
+        run: sed -i "s/\x1B\[[0-9;]*[JKmsu]//g" samplRunOutput.txt
+           
+      - name: Determine comment based on test results
+        id: comment
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          if grep -q "0 passing" samplRunOutput.txt; then
+            FAILURE_REASON=$(sed -n '/1 failing/,/\[mochawesome\]/ {
+                            /1 failing/b
+                            /\[mochawesome\]/b
+                            p
+                            }' samplRunOutput.txt > failure_reason.txt)
+            echo "PR_COMMENT=Hello feature Run failed" >> "$GITHUB_OUTPUT"
+          else
+            echo "PR_COMMENT=Hello feature Run Passed." >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Fail if run testcase failed
+        if: steps.comment.outputs.PR_COMMENT != 'Hello feature Run Passed.'
+        run: exit 1
+
+      - name: Comment on PR
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_COMMENT: ${{ steps.comment.outputs.PR_COMMENT }}
+        run: |
+          if [[ "${{ github.event_name }}" == 'pull_request' && "$PR_COMMENT" != 'Hello feature Run Passed.' ]]; then
+            # Read the content of failure_reason.txt into a variable
+            FAILURE_REASON_CONTENT=$(cat failure_reason.txt)
+            JSON_PAYLOAD=$(jq -n --arg body "$PR_COMMENT :: $FAILURE_REASON_CONTENT" '{"body": $body}')
 
             echo "Generated JSON payload:"
             echo "$JSON_PAYLOAD"

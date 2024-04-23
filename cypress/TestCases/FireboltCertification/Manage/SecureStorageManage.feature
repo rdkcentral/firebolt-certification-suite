@@ -1,7 +1,6 @@
 Feature: SecureStorage_Manage
 
-    @initialization
-    Scenario: Launch FCA for 'SecureStorage'
+    Background: Launch FCA for 'SecureStorage'
         Given the environment has been set up for 'securestorage' tests
         And 3rd party 'certification' app is launched
 

@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const winston = require('winston');
-const CONSTANTS = require('../support/constants/constants');
+const CONSTANTS = require('./constants/constants');
 
 const logConfiguration = {
   transports: [new winston.transports.Console({ level: CONSTANTS.LOGGER_LEVEL })],
@@ -26,7 +26,9 @@ const logConfiguration = {
     }),
     winston.format.printf((options) => {
       const args = options[Symbol.for('splat')];
-      return `[${options.timestamp}][${options.level}][${options.moduleName}][${args}][${options.message}]`;
+      const argsString = args ? ` [${args}]` : '';
+      const moduleNameString = options.moduleName ? ` [${options.moduleName}]` : '';
+      return `[${options.timestamp}] [${options.level}]${moduleNameString}${argsString}: [${JSON.stringify(options.message) || ''}]`;
     })
   ),
 };

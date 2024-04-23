@@ -65,7 +65,7 @@ function applyDependencyOverrides() {
   } else {
     console.warn(
       '\x1b[32m%s\x1b[0m',
-      'configModule is not found. Please add it to your dependencies in package.json if required.'
+      'configModule is set to default module. Please add it to your dependencies in package.json if required.'
     );
   }
 }

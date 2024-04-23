@@ -17,7 +17,7 @@
  */
 
 // ***********************************************************
-// This example support/fireboltCertification.js is processed and
+// This example support/e2e.js is processed and
 // loaded automatically before your test files.
 //
 // This is a great place to put global configuration and
@@ -36,7 +36,7 @@ import * as genericModule from './cypress-support/src/main';
 import * as configModule from 'configModule';
 import addContext from 'mochawesome/addContext';
 import { attach } from '@badeball/cypress-cucumber-preprocessor';
-import './commands';
+import './cypress-commands/index';
 import './validations/index';
 
 configModule.cypressAddons.default();

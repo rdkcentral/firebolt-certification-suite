@@ -28,23 +28,30 @@ import UTILS from '../cypress-support/src/utils';
  * Given the environment has been set up for 'Firebolt Sanity' tests
  */
 Given('the environment has been set up for {string} tests', (test) => {
-  Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
-  Cypress.env(CONSTANTS.TEST_TYPE, test);
-  if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
-    Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
-  }
+  if (
+    !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
+    CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES.includes(test) ||
+    UTILS.isTestTypeChanged(test)
+  ) {
+    Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
+    Cypress.env(CONSTANTS.TEST_TYPE, test);
+    if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
+      Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
+    }
 
-  if (test == CONSTANTS.SETUPCHECK) {
-    UTILS.getSetupDetails();
-  }
+    if (test == CONSTANTS.SETUPCHECK) {
+      UTILS.getSetupDetails();
+    }
 
-  cy.getSdkVersion().then(() => {
-    cy.getFireboltJsonData().then((data) => {
-      Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
+    cy.getSdkVersion().then(() => {
+      cy.getFireboltJsonData().then((data) => {
+        Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
+      });
     });
-  });
-  cy.getCapabilities();
-  destroyAppInstance(test);
+    cy.getCapabilities();
+    destroyAppInstance(test);
+    Cypress.env(CONSTANTS.ENV_SETUP_STATUS, true);
+  }
 });
 
 /**
@@ -94,6 +101,7 @@ function destroyAppInstance(testType) {
         } else {
           cy.log('Failed to close the 3rd party app: Response Not Recieved');
         }
+        cy.wait(5000);
       });
     } catch (error) {
       cy.log('Failed to close the 3rd party app: ', error);

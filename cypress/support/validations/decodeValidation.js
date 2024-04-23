@@ -19,7 +19,7 @@ const REGEXFORMATS = require('../constants/regexformats');
 const CONSTANTS = require('../constants/constants');
 
 /**
- * @module commands
+ * @module decodeValidation
  * @function decodeValidation
  * @description Decode validation is to validate the content based on decoding the result obtained
  * @param {String} Method - Method name needs to be send eg. Account.id

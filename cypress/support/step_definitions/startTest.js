@@ -65,18 +65,23 @@ Given(/Set default values of platform/, () => {
 
           // Looping through each data and setting the default value in platform.
           combinedData.forEach((preRequisiteData) => {
-            cy.fireboltDataParser(preRequisiteData).then((parsedData) => {
-              const { method, params, action } = parsedData;
-              const requestMap = {
-                method: method,
-                params: params,
-                action: action,
-              };
-              cy.log(
-                'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params)
-              );
-              cy.sendMessagetoPlatforms(requestMap).then((result) => {
-                cy.log('Response from Firebolt platform: ' + JSON.stringify(result));
+            cy.fireboltDataParser(preRequisiteData).then((parsedDataArr) => {
+              parsedDataArr.forEach((parsedData) => {
+                const { method, params, action } = parsedData;
+                const requestMap = {
+                  method: method,
+                  params: params,
+                  action: action,
+                };
+                cy.log(
+                  'Call from 1st party App, method: ' +
+                    method +
+                    ' params: ' +
+                    JSON.stringify(params)
+                );
+                cy.sendMessagetoPlatforms(requestMap).then((result) => {
+                  cy.log('Response from Firebolt platform: ' + JSON.stringify(result));
+                });
               });
             });
           });

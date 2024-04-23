@@ -1,7 +1,6 @@
 Feature: AudioDescriptions_Manage
 
-   @initialization
-   Scenario: Launch FCA for 'AudioDescriptions'
+   Background: Launch FCA for 'AudioDescriptions'
       Given the environment has been set up for 'AudioDescriptions' tests
       And 3rd party 'certification' app is launched
 

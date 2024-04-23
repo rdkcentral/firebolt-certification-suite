@@ -21,5 +21,38 @@
     "PROVISION_EMPTY_PARAMS": {},
     "PROVISION_WITHOUT_ACCOUNTID": {
         "deviceId": "1234"
+    },
+    
+    "NETWORK_WIFI_CONNECTED": {
+        "state": "connected",
+        "type": "wifi"
+    },
+    "NETWORK_WIFI_DISCONNECTED": {
+        "state": "connected",
+        "type": "ethernet"
+    },
+    "NETWORK_ETHERNET_CONNECTED": {
+        "state": "connected",
+        "type": "ethernet"
+    },
+    "NETWORK_ETHERNET_DISCONNECTED": {
+        "state": "connected",
+        "type": "wifi"
+    },
+    "NETWORK_HYBRID_CONNECTED": {
+        "state": "connected",
+        "type": "hybrid"
+    },
+    "NETWORK_HYBRID_DISCONNECTED": {
+        "state": "disconnected",
+        "type": "hybrid"
+    },
+    "NETWORK_WIFI_DISCONNECTED_EVENT": {
+        "state": "disconnected",
+        "type": "wifi"
+    },
+    "NETWORK_ETHERNET_DISCONNECTED_EVENT": {
+        "state": "disconnected",
+        "type": "ethernet"
     }
 }

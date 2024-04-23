@@ -37,5 +37,57 @@
                 ]
             }
         ]
+    },
+    "ONAVAILABLE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "onavailable",
+                        "description": "Validation of capabilities.onAvailable to check the capabilities event response"
+                    }
+                ]
+            }
+        ]
+    },
+    "ONUNAVAILABLE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "onUnavailable",
+                        "description": "Validation of capabilities.onUnavailable to check the capabilities event response"
+                    }
+                ]
+            }
+        ]
+    },
+    "ONGRANTED": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "onGranted",
+                        "description": "Validation of capabilities.onGranted to check the capabilities event response"
+                    }
+                ]
+            }
+        ]
+    },
+    "ONREVOKED": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "onUnavailable",
+                        "description": "Validation of capabilities.onRevoked to check the capabilities event response"
+                    }
+                ]
+            }
+        ]
     }
 }

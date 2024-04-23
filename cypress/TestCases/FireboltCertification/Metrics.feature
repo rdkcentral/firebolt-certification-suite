@@ -1,7 +1,6 @@
 Feature: Metrics
 
-    @initialization
-    Scenario: Launch FCA for 'Metrics'
+    Background: Launch FCA for 'Metrics'
         Given the environment has been set up for 'Metrics' tests
         And 3rd party 'certification' app is launched
 
@@ -52,6 +51,7 @@ Feature: Metrics
             | page with pageId                          | page                 | notify that page has navigated with pageId                      | true for page in metrics                 |
             | action with userMetrics                   | action               | notify about action with userMetrics                            | true for action in metrics               |
             | action with appMetrics                    | action               | notify about action with appMetrics                             | true for action in metrics               |
+            | action with parametersMetrics             | action               | notify about action with parametersMetrics                      | true for action in metrics               |
             | error with mediaStalled                   | error                | notify that error has occured with mediaStalled                 | true for error in metrics                |
             | mediaLoadStart with entityId              | mediaLoadStart       | infer load time with entityId                                   | true for mediaLoadStart in metrics       |
             | mediaPlay with entityId                   | mediaPlay            | start playback with entityId                                    | true for mediaPlay in metrics            |

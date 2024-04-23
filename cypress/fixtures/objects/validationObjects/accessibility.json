@@ -52,7 +52,7 @@
                 "validations": [
                     {
                         "mode": "staticContentValidation",
-                        "type": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SERIF",
+                        "type": "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF",
                         "description": "Validation of the accessibility fontfamily monospaced serif"
                     }
                 ]

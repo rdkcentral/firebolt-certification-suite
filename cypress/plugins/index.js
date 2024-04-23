@@ -34,10 +34,24 @@ const CONSTANTS = require('../support/constants/constants');
 const util = require('util');
 const { DateTime } = require('luxon');
 const { generateLocalReport } = require('./localReportGenerator');
-
+const getSpecPattern = require('../../specHelperConfig.js');
 let metaDataArr = [];
 
 module.exports = async (on, config) => {
+  // To set the specPattern dynamically based on the testSuite
+  const testsuite = config.env.testSuite;
+  const specPattern = getSpecPattern(testsuite);
+  if (specPattern !== undefined) {
+    config.specPattern = specPattern;
+  }
+
+  // Set certification to true for the appropriate test suite
+  if (testsuite == CONSTANTS.CERTIFICATION) {
+    config.env.certification = true;
+  }
+  // To overwrite the reporter options
+  config.reporterOptions.reportDir = `./reports/${config.env.jobId}`;
+
   await preprocessor.addCucumberPreprocessorPlugin(on, config);
   on(
     'file:preprocessor',

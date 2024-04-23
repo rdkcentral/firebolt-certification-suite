@@ -20,10 +20,10 @@
 ### Examples:
 
 ```
-request: createIntentMessage('runTest',{ "certification": true}, {"asynchronous": "false","communicationMode": "SDK","isAsync": false,"action": "CORE"})
+request: createIntentMessage('runTest',{ "certification": true}, {"communicationMode": "SDK","action": "CORE"})
 
 response: {
-   "action": "search","data": {"query": "{\"task\":\"runTest\",\"params\":{\"certification\":true},\"action\":\"CORE\",\"context\":{\"communicationMode\":\"SDK\"},\"asynchronous\":false}"},"context": {"source": "device"}}
+   "action": "search","data": {"query": "{\"task\":\"runTest\",\"params\":{\"certification\":true},\"action\":\"CORE\",\"context\":{\"communicationMode\":\"SDK\"}}"},"context": {"source": "device"}}
 ```
 
 ## parseExceptionList
@@ -33,11 +33,11 @@ response: {
 ### Examples:
 * `parseExceptionList()`
 
-## generateExceptionListForSanity
+## generateCombinedExceptionList
 
 ### Purpose: Function to concat all the exception list(Ex: Not Supported, Not Available and Not Permitted) created in parseExceptionList() and passing this concatenated list while creating intent message of sanity runs.
 ### Examples:
-* `generateExceptionListForSanity()`
+* `generateCombinedExceptionList()`
 
 ## overideParamsFromConfigModule
 
@@ -97,6 +97,22 @@ result - `'accessibility'`
 ### Examples:
 request - `cy.getApiOrEventObjectFromGlobalList('device.id', {}, 'test.test.test', 'method')`
 
+
+
+
+## writeJsonToFileForReporting
+
+### Purpose: Writes JSON data to a file.
+
+### Params:
+| Param | Definition| Type |
+| --- | --- | --- |
+| jsonData | The JSON data to write to the file | string |
+| defaultDirectory | The default directory where the file will be saved | string |
+| fileNamePrefix | The prefix to be used for the file name | string |
+
+### Examples:
+request - `cy.writeJsonToFileForReporting({ "key": "value" }, "/path/to/directory/", "report_");
 ## getAndDeferenceOpenRPC
 
 ### Purpose: To get and dereference the OpenRPC json. If version is provided, get version specific openRPC from URL (https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json) and dereference it. Else, get the latest openRPC from URL (https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json) by default and dereference it
@@ -149,6 +165,23 @@ const variableValue = UTILS.getEnvVariable('YOUR_ENV_VARIABLE');
 | lifecycleHistoryRecordType  | record task type name startLifecycleRecording/stopLifecycleRecording | string |
 | envKey  | The name of the environment variable | string |
 
+## assertWithRequirementLogs
+### Purpose: Asserts the equality of expected and actual values and logs the result with additional information.  If an error object is provided, the assertion fails with the error object logged.
+
+### Params:
+
+| Param      | Definition                                                                                                   | Type    |
+| -------    | ----------                                                                                                   | ------  |
+| pretext    |  Additional information to be logged before the assertion result                                             | string  |
+| expected   | The expected value for comparison                                                                            | *       |
+| actual     | The actual value for comparison                                                                              | *       |
+| equateDeep | Optional. If true, performs a deep equality check using assert.deepEqual(), otherwise uses assert.equal()    | boolean |
+| errorObject| Optional. Error object for which assertion should fail                                                       | *       |
+
+
+### Examples:
+
+`assertWithRequirementLogs('Checking foreground state', 'foreground', 'foreground', true, { message: 'Invalid state' })`
 
 ## getSetupDetails
 ### Purpose: Function to check if the platform specific env variables and params are provided in the required format for testing
@@ -196,3 +229,50 @@ const variableValue = UTILS.getEnvVariable('YOUR_ENV_VARIABLE');
     }
 }
 ```
+## pubSubClientCreation
+
+### Purpose: Establishes a Pub/Sub connection and subscribes to the response topic.
+
+### Params:
+| Param | Definition| Type |
+| --- | --- | --- |
+| appTransport | Application transport object used for initialization | string |
+### Examples:
+request - `cy.pubSubClientCreation(appTranport);`
+
+## subscribeResults
+
+### Purpose: A callback function that fetches the required response from a subscription and pushes it to a global queue.
+
+### Params:
+| Param | Definition| Type |
+| --- | --- | --- |
+| data | Response payload from the subscription call | string |
+| metaData |  Response headers from the subscription call | string |
+
+### Examples:
+request - `cy.subscribeResults('{ "result": { "type": "device", "value": "PD54331.." } }', { id: 1232435, client: 'clientName' });
+
+## destroyGlobalObjects
+
+### Purpose: Destroys global objects and recursively clears the environment variables whose names are stored in the list before test execution.
+
+### Params:
+| Param | Definition| Type |
+| --- | --- | --- |
+| objectNameList | List of objects to be cleared | string |
+
+### Examples:
+request - `cy.destroyGlobalObjects(['lifecycleAppObjectList']);
+
+## checkForTags
+
+### Purpose: Checks whether the tags in the beforeOperation object and the tag passed in the CLI have anything in common.
+
+### Params:
+| Param | Definition| Type |
+| --- | --- | --- |
+| tags | An array of tags to check | string |
+
+### Examples:
+request - `cy.checkForTags(["TAG1","TAG2"]);

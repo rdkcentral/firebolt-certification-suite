@@ -1,7 +1,6 @@
 Feature: Wifi_Manage
 
-    @initialization
-    Scenario: Launch FCA for 'Wifi'
+    Background: Launch FCA for 'Wifi'
         Given the environment has been set up for 'Wifi' tests
         And 3rd party 'certification' app is launched
 

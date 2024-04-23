@@ -15,9 +15,63 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-const defaultConfig = require('./cypress.fireboltCertification.js');
-console.log(
-  'NOTE: Since no config file is provided in the command, using cypress.fireboltCertification.js as the default config file\nPlease refer README.md to know more on overriding config'
-);
 
-module.exports = defaultConfig;
+const { defineConfig } = require('cypress');
+const setupNodeEvents = require('./cypress/plugins/index.js');
+const reporter = 'mochawesome';
+
+const reporterOptions = {
+  reportTitle: 'TestSuiteReport',
+  reportPageTitle: 'TestSuiteReport',
+  charts: true,
+  reportDir: 'cypress/reports',
+  overwrite: false,
+  html: false,
+  json: true,
+  timestamp: 'mmddyyyy_HHMMss',
+};
+
+const env = {
+  deviceIp: '',
+  deviceMac: '',
+  default3rdPartyAppId: '',
+  deviceCommPort: '3474',
+  mock: false,
+  wsUrlPath: '456~A',
+  firstPartyMockUser: '123~A',
+  thirdPartyMockUser: '456~A',
+  MFOS_base_url: 'http://localhost:3333/api/v1/',
+  firstPartyAppId: 'firstPartyAppId',
+  certification: false,
+  reportType: 'cucumber',
+  deleteReport: false,
+  apiObjectList: [],
+  eventObjectList: [],
+  firebolt_specification_url:
+    'https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-specification.json',
+  firebolt_specification_next_url:
+    'https://rdkcentral.github.io/firebolt/requirements/next/specifications/firebolt-specification.json',
+  firebolt_specification_proposed_url:
+    'https://rdkcentral.github.io/firebolt/requirements/proposed/specifications/firebolt-specification.json',
+  healthCheckRetries: 8,
+  skipContentValidation: false,
+  communicationMode: 'SDK',
+  performanceMetrics: false,
+  generateLocalReport: true,
+  testSuite: '',
+};
+
+module.exports = {
+  e2e: {
+    setupNodeEvents,
+    env,
+    reporterOptions,
+    reporter,
+    specPattern: '**/Sanity/*.feature', // This will be overridden dynamically, Please refer specHelperConfig.js to update specPattern mapping
+    testIsolation: false,
+  },
+  defaultCommandTimeout: 30000,
+  chromeWebSecurity: false, // If intending to disable web security
+  video: false,
+  screenshotOnRunFailure: false,
+};

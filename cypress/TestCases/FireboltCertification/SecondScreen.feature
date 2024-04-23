@@ -1,7 +1,6 @@
 Feature: Secondscreen
 
-   @initialization
-   Scenario: Launch FCA for 'Secondscreen'
+   Background: Launch FCA for 'Secondscreen'
       Given the environment has been set up for 'Secondscreen' tests
       And 3rd party 'certification' app is launched
 
@@ -29,7 +28,8 @@ Feature: Secondscreen
    @Secondscreen @coreSDK @sdk @transport
    Scenario: Secondscreen.FriendlyName - Positive Scenario: Validate Set friendlyName
       Given '3rd party app' registers for the 'secondscreen onFriendlyNameChanged' event using the 'Firebolt' API
-      When 1st party app invokes the 'Firebolt' API to 'set friendlyName to guest room'
+      When '3rd party app' invokes the 'Firebolt' API to 'get secondscreen friendlyName'
+      And 1st party app invokes the 'Firebolt' API to 'set friendlyName to guest room'
       And '3rd party app' invokes the 'Firebolt' API to 'get secondscreen friendlyName'
       Then 'Firebolt' platform responds with 'guest room for secondscreen friendlyName'
       And 'Firebolt' platform triggers event 'onFriendlyNameChanged for secondscreen with guest room'

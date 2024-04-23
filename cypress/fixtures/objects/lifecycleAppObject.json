@@ -1,12 +1,54 @@
 {
-    "allowedStateTransitions": {
-        "initializing" : ["inactive"],
-        "inactive" : ["foreground", "background", "suspended"],
-        "foreground" : ["inactive", "background"],
-        "background" : ["foreground", "inactive"],
-        "unloading" : [],
-        "suspended" : ["inactive"],
-        "unloaded" : [],
-        "terminated" : []
+  "validationConfig": {
+    "initializing": {
+      "stateValidation": { "req": "1.1.1 & 3.5" },
+      "historyValidation": { "req": "1.1.2" },
+      "notificationValidation": { "req": "" }
+    },
+    "inactive": {
+      "stateValidation": { "req": "1.2.2 & 3.5" },
+      "historyValidation": { "req": "1.1.2" },
+      "notificationValidation": { "req": ["1.2.1", "1.2.2"] }
+    },
+    "foreground": {
+      "stateValidation": { "req": "3.5" },
+      "historyValidation": { "req": "" },
+      "notificationValidation": { "req": ["1.3.6", "1.3.6"] }
+    },
+    "background": {
+      "stateValidation": { "req": "3.5" },
+      "historyValidation": { "req": "" },
+      "notificationValidation": { "req": ["1.4.6", "1.3.6"] }
+    },
+    "unloading": {
+      "stateValidation": { "req": "1.5.1 & 3.5" },
+      "historyValidation": { "req": "1.5.2" },
+      "notificationValidation": { "req": "" }
+    },
+    "suspended": {
+      "stateValidation": { "req": "3.5" },
+      "historyValidation": { "req": "" },
+      "notificationValidation": { "req": ["1.6.4", "1.6.3"] }
+    },
+    "unloaded": {
+      "stateValidation": { "req": "" },
+      "historyValidation": { "req": "" },
+      "notificationValidation": { "req": "" }
+    },
+    "terminated": {
+      "stateValidation": { "req": "" },
+      "historyValidation": { "req": "" },
+      "notificationValidation": { "req": "" }
     }
+  },
+  "allowedStateTransitions": {
+    "initializing": ["inactive"],
+    "inactive": ["foreground", "background", "suspended"],
+    "foreground": ["inactive", "background"],
+    "background": ["foreground", "inactive"],
+    "unloading": [],
+    "suspended": ["inactive"],
+    "unloaded": [],
+    "terminated": []
+  }
 }

@@ -26,7 +26,8 @@ Firebolt certification suite has the following dependencies.
 To execute the certification suite against any platform, the following setup must be completed:
 
 - Configure optional dependencies
-  - [ ] Configuration module relevant to the platform under test
+  - [ ] Configuration module relevant to the platform under test. Refer to the  [Config Module Setup](#config-module-setup) section for more information.
+
   - [ ] Validation module relevant to the platform under test
 - Install the dependencies
 
@@ -65,34 +66,43 @@ To execute the certification suite against any platform, the following setup mus
 | communicationMode                   | string  | 'SDK' or 'Transport'              | Set communicationMode as SDK/transport. Default mode is SDK                                                                                                                                                         |
 | performanceMetrics                  | boolean | true                              | Makes a call to platform to start/stop the recording of performance metrics if value is true                                                                                                                        |
 
+
+- Provide the specPattern mapping details. 
+Update the specHelperConfig.js with the specPattern mapping details.
+
+
+#### Config Module Setup
+
+By default, the project uses a predefined configuration module referred to as the `defaultModule`. To utilize a custom config module, you will need to update the project's dependency settings within the `package.json` file.
+
+```
+"dependencies": {
+  "configModule": "git+ssh://<URL of Config Module>",
+}
+```
+
+Once complete, continue following the rest of the [Setup Instructions](#setup).
+
 ## Execution
 
 Following are the supported runtime environments -
 
 - module
   - [ ] environment to support module feature runs
-- fireboltCertification
+- certification
   - [ ] environment to support certification/sanity feature runs
 - sample
   - [ ] environment to support sample feature runs
-
-Note -
+- all
+  - [ ] environment to support all the feature runs
 
 ### Run the certification suite with the browser
 
-`npx cypress open --browser electron --config-file cypress.module.js` (With runtime environment as module)
-
-`npx cypress open --browser electron --config-file cypress.fireboltCertification.js` (With runtime environment as fireboltCertification)
-
-`npx cypress open --browser electron --config-file cypress.sample.js` (With runtime environment as sample)
+`npx cypress open --browser electron -- env testSuite = <runtime-environment>
 
 ### Run the certification suite in cli
 
-`npx cypress run --config-file cypress.module.js` (With runtime environment as module)
-
-`npx cypress run --config-file cypress.fireboltCertification.js` (With runtime environment as fireboltCertification)
-
-`npx cypress run --config-file cypress.sample.js` (With runtime environment as sample)
+`npx cypress run -- env testSuite = <runtime-environment>
 
 ### Run the certification suite in cli with overriding reporter-options
 
@@ -100,7 +110,7 @@ Note -
 
 ### NOTE:
 
-`cypress/support/common.js` stores the default config. To override config based on the runtime environment, modify the corresponding config file `cypress.<runtimeEnvironment>.js` in root folder
+To override config based on the runtime environment, modify the `cypress.config.js` in root folder
 
 ### Options
 
@@ -134,8 +144,8 @@ Other cypress command line can also be passed
     To override the default response for a firebolt call.
     Set pre-requisite values for UI operations like automating the UI actions.
 
-- Before operation also works based on tags provided in cli. This tags can be send as env values from cli command using the key **beforeOperationTags**. Based on the tags specified in cli and the beforeOperation, corresponding configModule would perform necessary action steps. Currently, only active tag is thunderProxy. We can send the tags in below format.<br/>
-  **--env beforeOperationTags='thunderProxy'**
+- Before operation also works based on tags provided in cli. This tags can be send as env values from cli command using the key **beforeOperationTags**. Based on the tags specified in cli and the beforeOperation, corresponding configModule would perform necessary action steps. We can send the tags in below format.<br/>
+  **--env beforeOperationTags='tag'**
 
 ### Setup -
 
@@ -233,6 +243,82 @@ HTTP call to the platform:<br/>
   "firstParty": true
 }
 ```
+
+## Request overrides
+
+### fetchPerformanceThreshold:
+
+- Request:<br>
+  Makes an HTTP request to graphite with deviceMac, processType with how much percentile, and from what time to fetch the metrics.<br>
+  Format:
+  ```
+   {
+     method: 'performance.fetchPerformanceThreshold',
+     params: {'type': '<(device|process|all)>', process: '<(memory|load|set size|required)>', percentile: 70, threshold: '<Threshold to use as source of truth>'}
+   }
+  ```
+  Examples:
+  ```
+   {
+     method: 'performance.fetchPerformanceThreshold',
+     params: {'type': 'device', process: 'memory', percentile: 70, threshold: '35000000'}
+   }
+   {
+     method: 'performance.fetchPerformanceThreshold',
+     params: {'type': 'process', process: 'set size', percentile: 70, threshold: '75000000'}
+   }
+   {
+     method: 'performance.fetchPerformanceThreshold',
+     params: {'type': 'all', process: 'required', percentile: 70, threshold: '75000000'}
+   }
+  ```
+- Response:<br>
+  Receives an array of objects, which contains success and message properties, success defines the execution is a success or failure and message defines either response or any custom message that descibes the pass/fail.
+  Example:
+  ```
+   [
+      {
+        "success": true,
+        "message": "Expected received threshold for set sizeRSS is 37748736 to be less than the expected threshold of 1073741824"
+      },
+      {
+        "success": true,
+        "message": "Expected received threshold for set sizePSS is 41964544 to be less than the expected threshold of 1073741824"
+      }
+   ]
+  ```
+### createMarker:
+
+- Request:<br>
+  Making an HTTP call to grafana to create a marker on dashboard with given description.<br>
+  Format:
+  ```
+   {
+     method: 'performance.createMarker',
+     params: <Scenario name>
+   }
+  ```
+  Examples:
+  ```
+   {
+     method: 'performance.createMarker',
+     params: 'Account.id - Positive Scenario: Validate account ID'
+   }
+  ```
+- Response:<br>
+  Recieves an object with success and message properties.
+  Example:
+  ```
+  {
+    "success": true,
+    "message": "Marker has been created successfully"
+  }
+  {
+    "success": false,
+    "message": `Unable to create marker, failed with status code- 200 and error- unable to find the dashboard`
+  }
+  ```
+
 
 ## Data in fixture folder is segregated as per below configurations
 

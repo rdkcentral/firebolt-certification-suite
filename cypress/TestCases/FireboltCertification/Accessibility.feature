@@ -1,13 +1,13 @@
 Feature: Accessibility
 
-   @initialization
-   Scenario: Launch FCA for 'Accessibility'
+   Background: Launch FCA for 'Accessibility'
       Given the environment has been set up for 'Accessibility' tests
       And 3rd party 'certification' app is launched
 
    @Accessibility @coreSDK @sdk @transport
    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
+      And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
       And 1st party app invokes the 'Firebolt' API to '<Key>'
       Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
       When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
@@ -52,6 +52,7 @@ Feature: Accessibility
    @Accessibility @coreSDK @sdk @transport
    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario> with 'null' params
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
+      And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
       And 1st party app invokes the 'Firebolt' API to '<Key>'
       Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
       When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
@@ -76,6 +77,7 @@ Feature: Accessibility
    @Accessibility @coreSDK @sdk @transport
    Scenario Outline: Accessibility.voiceGuidanceSettings - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onVoiceGuidanceSettingsChanged' event using the 'Firebolt' API
+      And '3rd party app' invokes the 'Firebolt' API to 'get voiceGuidance settings'
       And 1st party app invokes the 'Firebolt' API to '<Key>'
       Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
       When '3rd party app' invokes the 'Firebolt' API to 'get voiceGuidance settings'
@@ -94,6 +96,7 @@ Feature: Accessibility
    @Accessibility @coreSDK @sdk @transport
    Scenario Outline: Accessibility.audioDescriptionSettings - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onAudioDescriptionSettingsChanged' event using the 'Firebolt' API
+      And '3rd party app' invokes the 'Firebolt' API to 'get audioDescriptionSettings settings'
       And 1st party app invokes the 'Firebolt' API to '<Key>'
       Then 'Firebolt' platform responds to '1st party app' with 'null for audioDescriptions setEnabled'
       When '3rd party app' invokes the 'Firebolt' API to 'get audioDescriptionSettings settings'
@@ -112,3 +115,43 @@ Feature: Accessibility
       And 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
       Then 'Firebolt' platform responds to '1st party app' with 'null for closedCaptions setEnabled'  
       And 'Firebolt' platform triggers event 'onclosedCaptionsSettingsChanged with null'
+
+   @Accessibility @coreSDK @sdk @transport
+   Scenario Outline: Accessibility.closedCaptions - Positive Scenario: <Scenario>
+      When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
+      And 1st party app invokes the 'Firebolt' API to '<Set_Method_Key>'
+      Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+      When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions'
+      Then 'Firebolt' platform responds with '<Method_Content>'
+      And 'Firebolt' platform triggers event '<Event_Content>'
+
+      Examples:
+         | Scenario                           | Set_Method_Key                        | Method_Content                                                    | Event_Content                                                          | Set_Method_Content                           |
+         | Disable closedcaptions             | disable closedCaptions                | disabled for accessibility closedCaptions                         | onclosedCaptionsSettingsChanged with disabled                          | null for closedCaptions setEnabled           |
+         | Set fontFamily-monospaced_sanserif | set fontFamily to monospaced_sanserif | monospace sanserif for fontfamily in accessibility closedcaptions | onclosedCaptionsSettingsChanged with monospace sanserif for fontfamily | null for closedCaptions setFontFamily        |
+         | Set fontSize-1                     | set fontSize to 1                     | 1 for fontSize in accessibility closedcaptions                    | onclosedCaptionsSettingsChanged with 1 for fontSize                    | null for closedCaptions setFontSize          |
+         | Set fontColor-#ffffff              | set fontColor to #ffffff              | #ffffff for fontColor in accessibility closedcaptions             | onclosedCaptionsSettingsChanged with #ffffff for fontColor             | null for closedCaptions setFontColor         |
+         | Set fontEdge-raised                | set fontEdge to raised                | raised for fontEdge in accessibility closedcaptions               | onclosedCaptionsSettingsChanged with raised for fontEdge               | null for closedCaptions setFontEdge          |
+         | Set fontEdgeColor-#7f7f7f          | set fontEdgeColor to #7f7f7f          | #7f7f7f for fontEdgeColor in accessibility closedcaptions         | onclosedCaptionsSettingsChanged with #7f7f7f for fontEdgeColor         | null for closedCaptions setFontEdgeColor     |
+         | Set backgroundColor-#000000        | set backgroundColor to #000000        | #000000 for backgroundColor in accessibility closedcaptions       | onclosedCaptionsSettingsChanged with #000000 for backgroundColor       | null for closedCaptions setBackgroundColor   |
+         | Set fontOpacity-100                | set fontOpacity to 100                | 100 for fontOpacity in accessibility closedcaptions               | onclosedCaptionsSettingsChanged with 100 for fontOpacity               | null for closedCaptions setFontOpacity       |
+         | Set backgroundOpacity-100          | set backgroundOpacity to 100          | 100 for backgroundOpacity in accessibility closedcaptions         | onclosedCaptionsSettingsChanged with 100 for backgroundOpacity         | null for closedCaptions setBackgroundOpacity |
+         | Set textAlign-left                 | set textAlign to left                 | left for textAlign in accessibility closedcaptions                | onclosedCaptionsSettingsChanged with left for textAlign                | null for closedCaptions setTextAlign         |
+         | Set textAlignVertical-top          | set textAlignVertical to top          | top for textAlignVertical in accessibility closedcaptions         | onclosedCaptionsSettingsChanged with top for textAlignVertical         | null for closedCaptions setTextAlignVertical |
+         | Set windowColor-#7f7f7f            | set windowColor to #7f7f7f            | #7f7f7f for windowColor in accessibility closedcaptions           | onclosedCaptionsSettingsChanged with #7f7f7f for windowColor           | null for closedCaptions setWindowColor       |
+         | Set windowOpacity-40               | set windowOpacity to 40               | 40 for windowOpacity in accessibility closedcaptions              | onclosedCaptionsSettingsChanged with 40 for windowOpacity              | null for closedCaptions setWindowOpacity     |
+
+   @Accessibility @coreSDK @sdk @transport
+   Scenario Outline: Accessibility.voiceGuidance - Positive Scenario: <Scenario>
+      When '3rd party app' registers for the 'accessibility onVoiceGuidanceSettingsChanged' event using the 'Firebolt' API
+      And 1st party app invokes the 'Firebolt' API to '<Set_Method_Key>'
+      Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+      When '3rd party app' invokes the 'Firebolt' API to 'get voiceGuidance'
+      Then 'Firebolt' platform responds with '<Method_Content>'
+      And 'Firebolt' platform triggers event '<Event_Content>'
+
+      Examples:
+         | Scenario              | Set_Method_Key        | Method_Content               | Event_Content                            | Set_Method_Content                |
+         | Disable voiceguidance | disable voiceGuidance | disabled voiceGuidance       | onvoiceGuidanceSettings with disabled    | null for voiceGuidance setEnabled |
+         | Enable voiceguidance  | enable voiceGuidance  | enabled voiceGuidance        | onvoiceGuidanceSettings with enabled     | null for voiceGuidance setEnabled |
+         | Set speed-1           | set speed as 1        | 1 for speed in voiceGuidance | onvoiceGuidanceSettings with 1 for speed | null for voiceGuidance setSpeed   |

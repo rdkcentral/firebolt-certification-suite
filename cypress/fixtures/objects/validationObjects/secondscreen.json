@@ -43,6 +43,36 @@
                 ]
             }
         ]
+    },
+    "ONLAUNCHREQUEST": {
+        "method": "secondscreen.onLaunchRequest",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "SECONDSCREEN_ONLAUNCHREQUEST_TYPE_DIAL_WITH_DATA",
+                        "description": "Validation of the Secondscreen protocols Format"
+                                }
+                ]
+            }
+        ]
+    },
+    "ONCLOSEREQUEST": {
+        "method": "secondscreen.onCloseRequest",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "SECONDSCREEN_ONCLOSEREQUEST_TYPE_DIAL",
+                        "description": "Validation of the Secondscreen protocols Format"
+                                }
+                ]
+            }
+        ]
     }
 
 }

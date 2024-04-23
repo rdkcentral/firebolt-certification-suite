@@ -1,7 +1,6 @@
 Feature: Privacy_Manage
 
-   @initialization
-   Scenario: Launch FCA for 'Privacy'
+   Background: Launch FCA for 'Privacy'
       Given the environment has been set up for 'Privacy' tests
       And 3rd party 'certification' app is launched
 

@@ -5,7 +5,6 @@
     },
     "THE_ENTERED_EMAIL_ADDRESS": {
         "method": "keyboard.email",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "KEYBOARD_EMAIL"
     },
@@ -22,12 +21,10 @@
         "params": "KEYBOARD_PASSWORD_PARAMS"
     },
     "PROMPT_THE_USER_FOR_THEIR_PASSWORD_AS_EMPTY": {
-        "method": "keyboard.password",
-        "params": "EMPTYPARAM"
+        "method": "keyboard.password"
     },
     "THE_ENTERED_USER_PASSWORD": {
         "method": "keyboard.password",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "KEYBOARD_PASSWORD"
     },
@@ -37,7 +34,6 @@
     },
     "THE_ENTERED_STANDARD_USER_VALUE": {
         "method": "keyboard.standard",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "KEYBOARD_STANDARD"
     },
@@ -65,7 +61,6 @@
     },
     "PROMPT_THE_USER_FOR_THEIR_EMAIL_WITH_TYPE_AS_EMPTY": {
         "method": "keyboard.email",
-        "params": "EMPTYPARAM",
         "expected": "error"
     },
     "PROMPT_THE_USER_FOR_THEIR_INVALID_PASSWORD_AS_INTEGER": {
@@ -80,26 +75,22 @@
     },
     "PROMPT_THE_USER_FOR_THEIR_STANDARD_AS_EMPTY": {
         "method": "keyboard.standard",
-        "params": "EMPTYPARAM",
         "expected": "error"
     },
     "INVALID_PARAMETER_FOR_EMAIL": {
         "method": "keyboard.email",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETER_PASSWORD": {
         "method": "keyboard.password",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETER_STANDARD": {
         "method": "keyboard.standard",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
