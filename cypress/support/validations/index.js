@@ -19,3 +19,4 @@ import './miscellaneousValidation';
 import './decodeValidation';
 import './regExValidation';
 import './schemaValidation';
+import './customValidation';

@@ -1,7 +1,6 @@
 Feature: Metrics_Manage
 
-    @initialization
-    Scenario: Launch FCA for 'Metrics'
+    Background: Launch FCA for 'Metrics'
         Given the environment has been set up for 'Metrics' tests
         And 3rd party 'certification' app is launched
         

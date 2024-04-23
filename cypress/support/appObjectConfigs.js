@@ -15,6 +15,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
+
+const CONSTANTS = require('./constants/constants');
+
 class apiObject {
   constructor(apiName, params, context, response, expected, appId) {
     this.apiName = apiName;
@@ -46,8 +49,12 @@ class eventObject {
     this.app = appId;
   }
 
+  // Function to update the event response in event object.
   setEventResponseData(response) {
-    if ((response.eventListenerId && response.eventSchemaResult) || response.eventResponse) {
+    if (
+      (response.eventListenerId && response.eventSchemaResult) ||
+      response.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
+    ) {
       this.eventResponse = response.eventResponse;
       this.eventSchemaResult = response.eventSchemaResult;
       this.eventTime = response.eventTime;

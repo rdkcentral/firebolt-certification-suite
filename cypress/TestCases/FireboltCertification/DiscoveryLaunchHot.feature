@@ -5,7 +5,7 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And 3rd party 'certification' app is launched
         And Test runner waits for 10 'seconds'
-        And '3rd party app' is in 'forground' state
+        And '3rd party app' transitions to state 'foreground'
         And '3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
 
     @DiscoveryLaunch @coreSDK @sdk @transport
@@ -65,7 +65,7 @@ Feature: Discovery.launch_HotLaunch
     @DiscoveryLaunch @coreSDK @sdk @transport
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in inactive
         Given the environment has been set up for 'DiscoveryLaunch' tests
-        And '3rd party app' is in 'inactive' state
+        And '3rd party app' transitions to state 'inactive'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
         When Test runner waits for 10 'seconds'
@@ -93,7 +93,7 @@ Feature: Discovery.launch_HotLaunch
     @DiscoveryLaunch @coreSDK @sdk @transport
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in background
         Given the environment has been set up for 'DiscoveryLaunch' tests
-        And '3rd party app' is in 'background' state
+        And '3rd party app' transitions to state 'background'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
         When Test runner waits for 10 'seconds'
@@ -121,7 +121,7 @@ Feature: Discovery.launch_HotLaunch
     @DiscoveryLaunch @coreSDK @sdk @transport
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: Null intent and app in <state>
         Given the environment has been set up for 'DiscoveryLaunch' tests
-        And '3rd party app' is in '<State>' state
+        And '3rd party app' transitions to state '<State>'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
         When Test runner waits for 10 'seconds'
@@ -138,7 +138,7 @@ Feature: Discovery.launch_HotLaunch
     @DiscoveryLaunch @coreSDK @sdk @transport @suspended
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in suspended
         Given the environment has been set up for 'DiscoveryLaunch' tests
-        And '3rd party app' is in 'suspended' state
+        And '3rd party app' transitions to state 'suspended'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
         When Test runner waits for 10 'seconds'
@@ -165,7 +165,7 @@ Feature: Discovery.launch_HotLaunch
     @DiscoveryLaunch @coreSDK @sdk @transport
     Scenario Outline: Discovery.Launch Hot Launch - Negative Scenario: <Scenario> expecting error
         Given the environment has been set up for 'DiscoveryLaunch' tests
-        And '3rd party app' is in 'forground' state
+        And '3rd party app' transitions to state 'forground'
         When '3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<Error_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
@@ -209,6 +209,6 @@ Feature: Discovery.launch_HotLaunch
     @DiscoveryLaunch @coreSDK @sdk @transport
     Scenario: Discovery.Launch Hot Launch - Negative Scenario: Invalid context source expecting error
         Given the environment has been set up for 'DiscoveryLaunch' tests
-        And '3rd party app' is in 'forground' state
+        And '3rd party app' transitions to state 'forground'
         When 1st party app invokes the 'Firebolt' API to 'launch app with search intent int source'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'

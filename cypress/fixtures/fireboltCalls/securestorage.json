@@ -41,61 +41,51 @@
     },
     "NULL_FOR_UPDATING_A_SECURE_DATA_VALUE": {
         "method": "securestorage.set",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "NULL"
     },
     "NULL_FOR_REMOVING_STORED_VALUE": {
         "method": "securestorage.remove",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "NULL"
     },
     "NULL_FOR_GETTING_STORED_VALUE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "NULL"
     },
     "NULL_FOR_REMOVING_STORED_VALUE_FOR_AN_APP": {
         "method": "securestorage.removeForApp",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "NULL"
     },
     "EXPECTED_VALUE_FOR_AUTHTESTTOKENDEVICE_STORED_DATA_IN_SECURESTORAGE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_DEFAULT_VALUE"
     },
     "EXPECTED_VALUE_FOR_AUTHTESTTOKENACCOUNT_STORED_DATA_IN_SECURESTORAGE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_DEFAULT_VALUE"
     },
     "EXPECTED_VALUE_FOR_ACCOUNT_SCOPED_AUTHTESTTOKENDEVICE_STORED_DATA_IN_SECURESTORAGE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_SCOPE_UPDATED_VALUE"
     },
     "EXPECTED_VALUE_FOR_DEVICE_SCOPED_AUTHTESTTOKENACCOUNT_STORED_DATA_IN_SECURESTORAGE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_SCOPE_UPDATED_VALUE"
     },
     "AUTHTESTTOKENVALUE1_FOR_STORED_VALUE_IN_SECURESTORAGE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_VALUE1"
     },
     "AUTHTESTTOKENVALUE2_FOR_STORED_VALUE_IN_SECURESTORAGE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_VALUE2"
     },
@@ -133,25 +123,21 @@
     },
     "EXPECTED_SECURESTORAGE_WITH_CURRENT_DEVICE_SCOPE_VALUE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_VALUE1"
     },
     "EXPECTED_SECURESTORAGE_WITH_CURRENT_ACCOUNT_SCOPE_VALUE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_VALUE1"
     },
     "EXPECTED_SECURESTORAGE_CURRENT_SCOPE_AS_DEVICE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_DEFAULT_VALUE"
     },
     "EXPECTED_SECURESTORAGE_CURRENT_SCOPE_AS_ACCOUNT": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_DEFAULT_VALUE"
     },
@@ -177,7 +163,6 @@
     },
     "EXPECTED_VALUE_FOR_AUTHTESTTOKENDEVICE2_STORED_DATA_IN_SECURESTORAGE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_GET_DEVICE2"
     },
@@ -211,25 +196,21 @@
     },
     "EXPECTED_VALUE_FOR_AUTHTESTTOKENACCOUNT2_STORED_DATA_IN_SECURESTORAGE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_GET_ACCOUNT2"
     },
     "EXPECTED_VALUE_FOR_AUTHTESTTOKENACCOUNT1_STORED_DATA_IN_SECURESTORAGE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_GET_ACCOUNT1"
     },
     "EXPECTED_VALUE_FOR_AUTHTESTTOKENDEVICE1_STORED_DATA_IN_SECURESTORAGE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_GET_DEVICE1"
     },
     "INVALID_PARAMETERS_FOR_SECURESTORAGE_GET": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
@@ -252,19 +233,13 @@
     },
     "AUTHTESTTOKENVALUE1_FOR_STORED_DATA_IN_SECURESTORAGE": {
         "method": "securestorage.get",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "SECURESTORAGE_VALUE1",
-        "expectingError": false
+        "expected": "SECURESTORAGE_VALUE1"
     },
     "NULL_FOR_SETTING_A_DATA_VALUE": {
         "method": "securestorage.setForApp",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     }, 
     "REMOVE_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_DEVICE": {
         "method": "manage_securestorage.removeForApp",
@@ -300,7 +275,6 @@
     },
     "NULL_FOR_CLEARING_ALL_DATA_FOR_AN_APP": {
         "method": "securestorage.clearForApp",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "NULL"
     },
@@ -336,38 +310,30 @@
     },
     "INVALID_PARAMS_FOR_SETTING_A_DATA_VALUE_IN_SECURESTORAGE":{
         "method": "securestorage.setForApp",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETERS_FOR_SECURESTORAGE_SET": {
         "method": "securestorage.set",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_REMOVING_STORED_VALUE_IN_SECURESTORAGE":{
         "method": "securestorage.removeForApp",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETERS_FOR_SECURESTORAGE_REMOVE": {
         "method": "securestorage.remove",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLEARING_ALL_DATA_FOR_AN_APP_IN_SECURESTORAGE":{
         "method": "securestorage.clearForApp",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
@@ -583,7 +549,6 @@
     },
     "AUTHTESTTOKENVALUETTL_FOR_STORED_VALUE_IN_SECURESTORAGE": {
         "method": "securestorage.get",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECURESTORAGE_VALUE_TTL"
     },
@@ -597,7 +562,6 @@
     },
     "NULL_FOR_CLEARING_STORED_VALUE": {
         "method": "securestorage.clear",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "NULL"
     },
@@ -628,14 +592,45 @@
     },
     "CLEAR_STORED_VALUE_WITHOUT_SCOPE": {
         "method": "securestorage.clear",
-        "params": "EMPTYPARAM",
         "expected": "error"
     },
     "INVALID_PARAMETERS_FOR_SECURESTORAGE_CLEAR": {
         "method": "securestorage.clear",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "GET_STORED_VALUE_WITH_KEY_AS_EMPTY": {
+        "method": "securestorage.get",
+        "params": "SECURESTORAGE_KEY_EMPTY",
+        "expected": "error"
+    },
+    "SET_SECURE_VALUE_WITH_EMPTY_KEY": {
+        "method": "securestorage.set",
+        "params": "SECURESTORAGE_SET_KEY_EMPTY",
+        "expected": "error"
+    },
+    "REMOVE_STORED_VALUE_WITH_EMPTY_KEY": {
+        "method": "securestorage.remove",
+        "params": "SECURESTORAGE_KEY_EMPTY",
+        "expected": "error"
+    },
+    "CUSTOM_ERROR_FOR_SECURESTORAGE_REMOVE": {
+        "method": "securestorage.remove",
+        "validationJsonPath": "result",
+        "expected": "CUSTOM_ERROR",
+        "expectingError": true
+    },
+    "CUSTOM_ERROR_FOR_SECURESTORAGE_SET": {
+        "method": "securestorage.set",
+        "validationJsonPath": "result",
+        "expected": "CUSTOM_ERROR",
+        "expectingError": true
+    },
+    "CUSTOM_ERROR_FOR_SECURESTORAGE_GET": {
+        "method": "securestorage.get",
+        "validationJsonPath": "result",
+        "expected": "CUSTOM_ERROR",
         "expectingError": true
     }
 }

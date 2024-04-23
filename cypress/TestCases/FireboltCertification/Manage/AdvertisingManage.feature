@@ -1,7 +1,6 @@
 Feature: Advertising_Manage
 
-   @initialization
-   Scenario: Launch FCA for 'Advertising'
+   Background: Launch FCA for 'Advertising'
       Given the environment has been set up for 'Advertising' tests
       And 3rd party 'certification' app is launched
 
@@ -37,4 +36,15 @@ Feature: Advertising_Manage
    Scenario: Advertising.policy - Positive Scenario: SkipRestriction with undefined params
       When 1st party app invokes the 'Firebolt' API to 'set skipRestriction with undefined parameter'
       Then 'Firebolt' platform responds to '1st party app' with 'advertising skipRestriction'
+
+   @Advertising @manageSDK @sdk @transport @notSupported
+   Scenario: Advertising.resetIdentifier - Positive Scenario: Reset Identifier method
+      When '3rd party app' invokes the 'Firebolt' API to 'get no coppa'
+      And '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
+      And 1st party app invokes the 'Firebolt' API to 'reset identifier for advertising'
+      And '3rd party app' invokes the 'Firebolt' API to 'get no coppa'
+      And '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
+      Then I validate last '2' response are different for 'advertising.config' API method
+      And I validate last '2' response are different for 'advertising.advertisingId' API method
+
 

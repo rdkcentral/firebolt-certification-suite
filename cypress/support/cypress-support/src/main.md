@@ -27,7 +27,7 @@ This command will send message to App to start the sanity test, from the datatab
 Ex:
 
 ```
-request: cy.startTest({"rawTable": [ ["paramType","variableName","value"], ["INPUT","asynchronous","false"]]})
+request: cy.startTest({"rawTable": [ ["paramType","variableName","value"]]})
 ```
 
 #### > cy.runIntentAddon(command, intent)
@@ -37,9 +37,9 @@ This command will look for any add-ons present for passed command in config modu
 Ex:
 
 ```
-request: cy.runIntentAddon("RunTest", {"asynchronous": "false","communicationMode": "SDK","isAsync": false,"action": "CORE"})
+request: cy.runIntentAddon("RunTest", {"communicationMode": "SDK","action": "CORE"})
 
-response: {"asynchronous": "false","communicationMode": "SDK","isAsync": false,"action": "CORE", metadata:{...}}
+response: {"communicationMode": "SDK","action": "CORE", metadata:{...}}
 ```
 #### > cy.sendMessagetoApp(requestTopic, responseTopic, intent, longPollTimeout)
 
@@ -48,7 +48,7 @@ This command will initialize a transport client, publish a message on a topic, s
 Ex:
 
 ```
-request: cy.sendMessagetoApp('900218FFD490_appId_FCS',900218FFD490_appId_FCA,{"asynchronous": "false","communicationMode": "SDK","isAsync": false,"action": "search"}, 1000)
+request: cy.sendMessagetoApp('mac_appId_FCS',mac_appId_FCA,{"communicationMode": "SDK","action": "search"}, 1000)
 ```
 
 Note: Response can vary depending on the execution.
@@ -60,6 +60,11 @@ This command is used mainly for parsing and fetching test data from various fixt
 Currently supported requestType is Params, Context and Content.
 
 - Params - Represent the parameters to be sent for a firebolt call.
+
+  For the Params request type, the dataIdentifier can have two types.
+   * Key - Returns the value associated with the key `param_key` from the test data.
+   * Environment Variable Key - Returns the value of the environment variable `env_variable`.
+
 - Context - Represent the data that needs to be stored in api/event object that helps to search specific object in a global list.
 - Content - Represent the expected value used for validating against a firebolt api response.
 
@@ -90,7 +95,12 @@ request: cy.testDataHandler("Content","Device_ID")
 ```
 response: 1234
 ```
-
+```
+request: cy.testDataHandler("Params","CYPRESSENV-capabilitiesList")
+```
+```
+response: {\"capabilities\":[\"xrn:firebolt:capability:lifecycle:initialize\",\"xrn:firebolt:capability:lifecycle:ready\",\"xrn:firebolt:capability:storage:secure\"]}
+```
 #### > cy.parseDataFromTestDataJson(requestType, dataIdentifier)
 
 Function to format the data fetched from fixtures.
@@ -128,12 +138,3 @@ request: cy.getDataFromTestDataJson("modules/accessibility.json","CLOSEDCAPTIONS
 response: {value: true}
 ```
 
-#### > cy.destroyGlobalObjects()
-
-This command will destroy global objects and recursively clear the environment variables whose name is stored in the list if present, before test execution
-
-Ex:
-
-```
-request: cy.destroyGlobalObjects(['lifecycleAppObjectList'])
-```

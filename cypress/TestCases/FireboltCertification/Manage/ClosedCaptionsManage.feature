@@ -1,7 +1,6 @@
 Feature: ClosedCaptions_Manage
 
-    @initialization
-    Scenario: Launch FCA for 'ClosedCaptions'
+    Background: Launch FCA for 'ClosedCaptions'
         Given the environment has been set up for 'ClosedCaptions' tests
         And 3rd party 'certification' app is launched
 

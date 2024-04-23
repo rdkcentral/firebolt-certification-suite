@@ -16,8 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import { Given, When } from '@badeball/cypress-cucumber-preprocessor';
-import UTILS from '../cypress-support/src/utils';
 const CONSTANTS = require('../constants/constants');
+import UTILS from '../cypress-support/src/utils';
 
 /**
  * @function 3rd party {string} is launched with {string} appId and {string} state
@@ -28,55 +28,59 @@ const CONSTANTS = require('../constants/constants');
  *  @example
  * Given 3rd party 'certification' app is launched
  * Given 3rd party 'firebolt' app is launched with 'foo' appId
- * Given 3rd party 'certification' app is launched with 'foo' appId and with 'foreground' state
+ * Given 3rd party 'certification' app is launched with 'foo' appId with 'foreground' state
  */
 Given(
-  /3rd party '(.+)' app is launched(?: with(?: '(.+)' appId)?(?: and with(?: '(.+)' state)?)?)?$/,
+  /3rd party '(.+)' app is launched(?: with '(.+)' appId)?(?: with '(.+)' state)?$/,
   (appType, appCallSign, state) => {
-    if (!state) {
-      state = CONSTANTS.LIFECYCLE_STATES.FOREGROUND;
+    if (
+      !UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) ||
+      CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES.includes(UTILS.getEnvVariable(CONSTANTS.TEST_TYPE)) ||
+      UTILS.isTestTypeChanged(CONSTANTS.TEST_TYPE)
+    ) {
+      if (!state) {
+        state = CONSTANTS.LIFECYCLE_STATES.FOREGROUND;
+      }
+      cy.launchApp(appType, appCallSign);
+      cy.lifecycleSetup(appCallSign, state);
+      Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, true);
     }
-    cy.launchApp(appType, appCallSign);
-    cy.lifecycleSetup(appCallSign, state);
   }
 );
 
 /**
- * @function 3rd party app|1st party app|differentAppId)' is in'(.+)' state
- * @description move app to specified state
- * @param {String} app - app type
- * @param {String} state - state to be set in app
- * @example
- * Given '3rd party app' is in 'inactive' state
- * Given '1st party app' is in 'background' state
- * Given 'test.test.test' is in 'background' state
- */
-Given(/'(3rd party app|1st party app)' is in '(.+)' state$/, (app, state) => {
-  const appId =
-    app === CONSTANTS.THIRD_PARTY_APP
-      ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-      : app === CONSTANTS.FIRST_PARTY_APP
-        ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
-        : app;
-  cy.setLifecycleState(state, appId);
-});
-
-/**
- * @function {string} attempts to transition to app state {string}
+ * @function {string} transitions to state {string}
  * @description Set state of 3rd party app as well as state inside appObject to use as source of truth
  * @param {String} app - app type
  * @param {String} state - State to be set
  * @example
- *  When '3rd party app' attempts to transition to app state 'foreground'
+ *  When '3rd party app' transitions to state 'foreground'
  */
-When('{string} attempts to transition to app state {string}', (app, state) => {
-  const appId =
-    app === CONSTANTS.THIRD_PARTY_APP
-      ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-      : app === CONSTANTS.FIRST_PARTY_APP
-        ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
-        : app;
-  cy.setAppState(state, appId).then(() => {
-    // TODO: Checks for platform support
+When('{string} transitions to state {string}', (app, state) => {
+  cy.setAppIdFromAppType(app).then((appId) => {
+    if (
+      UTILS.getEnvVariable(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
+    ) {
+      cy.setAppState(state, appId).then(() => {
+        // TODO: Checks for platform support
+      });
+    }
+    cy.setLifecycleState(state, appId);
+  });
+});
+
+/**
+ * @module launchapp
+ * @function AppObject state is set for {string} to {string}
+ * @description Set appObject state of 3rd party app explicitly for validating as source of truth
+ * @param {String} app - App type
+ * @param {String} state - State to be set in appObject
+ * When AppObject state for '3rd party App' is set to 'foreground'
+ */
+When('AppObject state for {string} is set to {string}', (app, state) => {
+  cy.setAppIdFromAppType(app).then((appId) => {
+    const appObject = Cypress.env(appId);
+    appObject.setAppObjectState(state);
+    cy.log('Setting ' + appId + ' appObject state to ' + state);
   });
 });

@@ -22,6 +22,7 @@ import { advertisingMiscValidation } from './moduleValidations/advertisingMiscVa
 import { parametersMiscValidation } from './moduleValidations/parametersMiscValidation';
 import { lifecycleMiscValidation } from './moduleValidations/lifecycleMiscValidation';
 import { capabilitiesMiscValidation } from './moduleValidations/capabilitiesMiscValidation';
+import { usergrantsMiscValidation } from './moduleValidations/usergrantsMiscValidation';
 
 /**
  * @module miscellaneousValidation
@@ -53,6 +54,9 @@ Cypress.Commands.add(
         break;
       case CONSTANTS.MODULE_NAMES.CAPABILITIES:
         capabilitiesMiscValidation(method, validationTypeObject, apiOrEventObject);
+        break;
+      case CONSTANTS.MODULE_NAMES.USERGRANTS:
+        usergrantsMiscValidation(method, validationTypeObject, apiOrEventObject);
         break;
     }
   }

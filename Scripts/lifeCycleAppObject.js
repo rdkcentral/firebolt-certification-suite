@@ -17,8 +17,7 @@
  */
 const CONSTANTS = require('../cypress/support/constants/constants');
 class notificationConfig {
-  constructor(attempt, message) {
-    this.attempt = attempt;
+  constructor(message) {
     this.time = Date.now();
     this.message = message;
   }
@@ -28,7 +27,6 @@ class stateConfig {
   constructor(state) {
     this.state = state;
     this.tStartTime = Date.now();
-    this.attempt = 1;
     this.notification = [];
   }
 
@@ -36,30 +34,24 @@ class stateConfig {
   // Only generate an event if the current state and new state satisfies the allowedStateTransitions look up table
   // TODO Optimization: Use allowedStateTransitions check from history logic to determine if events should be generated. Currently allowedStateTransitions is used in both places.
   setNotification(currentState, previousState) {
-    cy.fixture(CONSTANTS.ALLOWED_STATE_TRANSITION_OBJECT_LOCATION).then((appObjectConfigData) => {
-      const stateTransition = appObjectConfigData.allowedStateTransitions[previousState];
-      if (stateTransition.includes(currentState) && currentState != previousState) {
-        cy.log('New event pushed to notifications list', 'setNotification');
-        const message = { state: currentState, previous: previousState };
-        cy.log('Lifecycle appObject transition: ' + JSON.stringify(message), 'setNotification');
-        const tempNotification = new notificationConfig(this.attempt, message);
-        this.notification.push(tempNotification);
-      } else {
-        cy.log(
-          !stateTransition.includes(currentState)
-            ? 'No events pushed to notifications list. Requested state transition is not supported'
-            : currentState === previousState
-              ? 'No events pushed to notifications list as current and previous lifecycle states are same'
-              : 'No events pushed to notifications list'
-        );
+    cy.fixture(CONSTANTS.STATE_TRANSITION_AND_VALIDATION_CONFIG_LOCATION).then(
+      (appObjectConfigData) => {
+        const stateTransition = appObjectConfigData.allowedStateTransitions[previousState];
+
+        // If currentState and previousState are not equal and allowed state transition supports currentState, generate an event and push to notification list
+        if (stateTransition.includes(currentState) && currentState != previousState) {
+          const message = { state: currentState, previous: previousState };
+          console.log('Lifecycle appObject transition: ' + JSON.stringify(message));
+          const tempNotification = new notificationConfig(message);
+          this.notification.push(tempNotification);
+        }
       }
-    });
+    );
   }
 }
 
 class appConfig {
   constructor(appId) {
-    cy.log('constructor in appConfig class');
     this.appId = appId;
     this.state = {};
     this.history = [];
@@ -74,34 +66,52 @@ class appConfig {
   setAppObjectState(newState) {
     const currentState = this.state;
     this.state = new stateConfig(newState);
+    Cypress.env(CONSTANTS.IS_SAME_APP_TRANSITION, false);
 
     // lifecycleAppObjectConfigData contains the look up table describing a list of possible states that the appObject can transition to from the current state
-    cy.fixture(CONSTANTS.ALLOWED_STATE_TRANSITION_OBJECT_LOCATION).then((appObjectConfigData) => {
-      const stateTransition = appObjectConfigData.allowedStateTransitions[currentState.state];
-      if (newState == 'initializing' && this.history.length === 0) {
-        cy.log(
-          'New appState ' +
-            newState +
-            ' not pushed to history. If history list is empty and app tries to transition to initializing state, the state will not be pushed to history',
-          'setAppObjectState'
-        );
-      } else {
-        if (stateTransition.includes(newState) && currentState.state != newState) {
-          if (currentState.state == 'initializing' && this.history.length === 0) {
-            cy.log(
-              'Current appState ' + currentState.state + ' pushed to history',
-              'setAppObjectState'
-            );
-            this.history.push(currentState);
+    cy.fixture(CONSTANTS.STATE_TRANSITION_AND_VALIDATION_CONFIG_LOCATION).then(
+      (appObjectConfigData) => {
+        const stateTransition = appObjectConfigData.allowedStateTransitions[currentState.state];
+
+        // If newState is initializing and app object history is empty, the state is not pushed to history
+        if (newState == CONSTANTS.LIFECYCLE_STATES.INITIALIZING && this.history.length === 0) {
+          console.log(
+            'New appState ' +
+              newState +
+              ' not pushed to history. If history list is empty and app tries to transition to initializing state, the state will not be pushed to history',
+            'setAppObjectState'
+          );
+        } else {
+          // If newState and currentState are not equal and allowed state transition supports newState, perform below logic
+          if (stateTransition.includes(newState) && currentState.state != newState) {
+            this.state = new stateConfig(newState);
+            // If currentState is initializing and app object history is empty, the state is then pushed to history
+            if (
+              currentState.state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING &&
+              this.history.length === 0
+            ) {
+              console.log('Current appState ' + currentState.state + ' pushed to history');
+              this.history.push(currentState);
+            }
+            // Next push the new state object to app object history
+            this.history.push(this.state);
+            console.log('New appState pushed to history: ' + newState);
           }
-          this.history.push(this.state);
-          cy.log('New appState pushed to history: ' + newState, 'setAppObjectState');
+          if (currentState.state == newState) {
+            Cypress.env(CONSTANTS.IS_SAME_APP_TRANSITION, true);
+          }
+          if (!stateTransition.includes(newState)) {
+            cy.log('Requested state transition for application is not supported');
+            this.state = currentState;
+          }
+        }
+
+        // If app object history is not empty, set notification object using current and new states
+        if (this.history.length > 1) {
+          this.state.setNotification(newState, currentState.state);
         }
       }
-      if (this.history.length > 1) {
-        this.state.setNotification(newState, currentState.state);
-      }
-    });
+    );
   }
 
   getAppObjectState() {
@@ -114,7 +124,9 @@ class appConfig {
 
   getPrevAppObjectState() {
     const historyList = this.history;
-    return historyList.length > 0 ? historyList[historyList.length - 1] : 'history list is empty';
+    return historyList.length > 0
+      ? historyList[historyList.length - 1].state
+      : 'history list is empty';
   }
 
   getHistory() {
@@ -122,11 +134,7 @@ class appConfig {
   }
 
   setListeners() {
-    cy.log('setListeners method in appConfig class', 'setListeners');
     // To be implemented. Dependent on LifecycleManagement APIs which show the current status of app states in device.
-  }
-  incrementAppStateAttempt() {
-    return this.state.attempt++;
   }
 }
 

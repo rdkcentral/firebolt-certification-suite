@@ -1,7 +1,6 @@
 Feature: Localization_Manage
 
-    @initialization
-    Scenario: Launch FCA for 'Localization'
+    Background: Launch FCA for 'Localization'
         Given the environment has been set up for 'Localization' tests
         And 3rd party 'certification' app is launched
 

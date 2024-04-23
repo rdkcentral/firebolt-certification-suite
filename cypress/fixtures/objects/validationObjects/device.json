@@ -317,5 +317,140 @@
                 ]
             }
         ]
+    },
+    "NETWORK_WIFICONNECTED": {
+        "method": "device.network",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_NETWORK_WIFI_CONNECTED",
+                        "description": "Validation of the Device for Wi-Fi network Connected Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "NETWORK_WIFIDISCONNECTED": {
+        "method": "device.network",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_NETWORK_WIFI_DISCONNECTED",
+                        "description": "Validation of the Device for Wi-Fi network Disconnected Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "NETWORK_ETHERNETCONNECTED": {
+        "method": "device.network",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_NETWORK_ETHERNET_CONNECTED",
+                        "description": "Validation of the Device for Ethernet network Connected Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "NETWORK_ETHERNETDISCONNECTED": {
+        "method": "device.network",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_NETWORK_ETHERNET_DISCONNECTED",
+                        "description": "Validation of the Device for Ethernet network Disconnected Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "NETWORK_HYBRIDCONNECTED": {
+        "method": "device.network",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_NETWORK_HYBRID_CONNECTED",
+                        "description": "Validation of the Device for Hybrid network Connected Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "NETWORK_HYBRIDDISCONNECTED": {
+        "method": "device.network",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_NETWORK_HYBRID_DISCONNECTED",
+                        "description": "Validation of the Device for Hybrid network Disconnected Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "NETWORK_WIFIDISCONNECTED_EVENT": {
+        "method": "device.network",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_NETWORK_WIFI_DISCONNECTED_EVENT",
+                        "description": "Validation of the Device for Wi-Fi network Disconnected Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "NETWORK_ETHERNETDISCONNECTED_EVENT": {
+        "method": "device.network",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_NETWORK_ETHERNET_DISCONNECTED_EVENT",
+                        "description": "Validation of the Device for Ethernet network Disconnected Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "NETWORKHYBRIDDISCONNECTED_EVENT": {
+        "method": "device.network",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_NETWORK_ETHERNET_DISCONNECTED_EVENT",
+                        "description": "Validation of the Device for Ethernet network Disconnected Format"
+                    }
+                ]
+            }
+        ]
     }
 }

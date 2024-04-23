@@ -101,7 +101,7 @@ export default class Config {
     );
 
     // Failing the test when module name is fcs and corresponding request module override not found
-    if (moduleName === CONSTANTS.FCS && !methodConfig) {
+    if (CONSTANTS.MODULE_OVERRIDES.includes(moduleName) && !methodConfig) {
       cy.log(
         ` ${fireboltObject.method} is a required requestModule override in config module`
       ).then(() => {

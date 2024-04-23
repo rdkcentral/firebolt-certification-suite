@@ -257,502 +257,316 @@
     },
     "TRUE_FOR_PRIVACY_ALLOW_RESUMEPOINTS": {
         "method": "privacy.allowResumePoints",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "TRUE_FOR_ALLOW_RESUMEPOINTS_IN_PRIVACY": {
         "method": "privacy.setAllowResumePoints",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "FALSE_FOR_PRIVACY_ALLOW_RESUMEPOINTS": {
         "method": "privacy.allowResumePoints",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "TRUE_FOR_PRIVACY_ALLOW_UNENTITLEDRESUMEPOINTS": {
         "method": "privacy.allowUnentitledResumePoints",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "TRUE_FOR_ALLOW_UNENTITLEDRESUMEPOINTS_IN_PRIVACY": {
         "method": "privacy.setAllowUnentitledResumePoints",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "FALSE_FOR_PRIVACY_ALLOW_UNENTITLEDRESUMEPOINTS": {
         "method": "privacy.allowUnentitledResumePoints",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "TRUE_FOR_PRIVACY_ALLOW_WATCHHISTORY": {
         "method": "privacy.allowWatchHistory",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "TRUE_FOR_ALLOW_WATCHHISTORY_IN_PRIVACY": {
         "method": "privacy.setAllowWatchHistory",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "FALSE_FOR_PRIVACY_ALLOW_WATCHHISTORY": {
         "method": "privacy.allowWatchHistory",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "TRUE_FOR_PRIVACY_ALLOW_PRODUCTANALYTICS": {
         "method": "privacy.allowProductAnalytics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "TRUE_FOR_ALLOW_PRODUCTANALYTICS_IN_PRIVACY": {
         "method": "privacy.setAllowProductAnalytics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "FALSE_FOR_PRIVACY_ALLOW_PRODUCTANALYTICS": {
         "method": "privacy.allowProductAnalytics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "TRUE_FOR_PRIVACY_ALLOW_PERSONALIZATION": {
         "method": "privacy.allowPersonalization",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "TRUE_FOR_ALLOW_PERSONALIZATION_IN_PRIVACY": {
         "method": "privacy.setAllowPersonalization",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "FALSE_FOR_PRIVACY_ALLOW_PERSONALIZATION": {
         "method": "privacy.allowPersonalization",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "TRUE_FOR_PRIVACY_ALLOW_UNENTITLEDPERSONALIZATION": {
         "method": "privacy.allowUnentitledPersonalization",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "TRUE_FOR_ALLOW_UNENTITLEDPERSONALIZATION_IN_PRIVACY": {
         "method": "privacy.setAllowUnentitledPersonalization",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "FALSE_FOR_PRIVACY_ALLOW_UNENTITLEDPERSONALIZATION": {
         "method": "privacy.allowUnentitledPersonalization",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "TRUE_FOR_PRIVACY_ALLOW_REMOTEDIAGNOSTICS": {
         "method": "privacy.allowRemoteDiagnostics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "TRUE_FOR_ALLOW_REMOTEDIAGNOSTICS_IN_PRIVACY": {
         "method": "privacy.setAllowRemoteDiagnostics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "FALSE_FOR_PRIVACY_ALLOW_REMOTEDIAGNOSTICS": {
         "method": "privacy.allowRemoteDiagnostics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "TRUE_FOR_PRIVACY_ALLOW_PRIMARYCONTENTADTARGETING": {
         "method": "privacy.allowPrimaryContentAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "TRUE_FOR_ALLOW_PRIMARYCONTENTADTARGETING_IN_PRIVACY": {
         "method": "privacy.setAllowPrimaryContentAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "FALSE_FOR_PRIVACY_ALLOW_PRIMARYCONTENTADTARGETING": {
         "method": "privacy.allowPrimaryContentAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "TRUE_FOR_PRIVACY_ALLOW_PRIMARYBROWSEADTARGETING": {
         "method": "privacy.allowPrimaryBrowseAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "TRUE_FOR_ALLOW_PRIMARYBROWSEADTARGETING_IN_PRIVACY": {
         "method": "privacy.setAllowPrimaryBrowseAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "FALSE_FOR_PRIVACY_ALLOW_PRIMARYBROWSEADTARGETING": {
         "method": "privacy.allowPrimaryBrowseAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "TRUE_FOR_PRIVACY_ALLOW_APPCONTENTADTARGETING": {
         "method": "privacy.allowAppContentAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "TRUE_FOR_ALLOW_APPCONTENTADTARGETING_IN_PRIVACY": {
         "method": "privacy.setAllowAppContentAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "FALSE_FOR_PRIVACY_ALLOW_APPCONTENTADTARGETING": {
         "method": "privacy.allowAppContentAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "TRUE_FOR_PRIVACY_ALLOW_ACRCOLLECTION": {
         "method": "privacy.allowACRCollection",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "TRUE_FOR_ALLOW_ACRCOLLECTION_IN_PRIVACY": {
         "method": "privacy.setAllowACRCollection",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "FALSE_FOR_PRIVACY_ALLOW_ACRCOLLECTION": {
         "method": "privacy.allowACRCollection",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "FALSE_FOR_PRIVACY_ALLOWACRCOLLECTION": {
         "method": "privacy.allowACRCollection",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "TRUE_FOR_PRIVACY_ALLOW_CAMERAANALYTICS": {
         "method": "privacy.allowCameraAnalytics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "TRUE_FOR_ALLOW_CAMERAANALYTICS_IN_PRIVACY": {
         "method": "privacy.setAllowCameraAnalytics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "FALSE_FOR_PRIVACY_ALLOW_CAMERAANALYTICS": {
         "method": "privacy.allowCameraAnalytics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "ONALLOWRESUMEPOINTSCHANGED_FOR_PRIVACY_TRUE": {
-        "method": null,
         "event": "privacy.onAllowResumePointsChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "ONALLOWRESUMEPOINTSCHANGED_FOR_PRIVACY_FALSE": {
-        "method": null,
         "event": "privacy.onAllowResumePointsChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "ONALLOWUNENTITLEDRESUMEPOINTSCHANGED_FOR_PRIVACY_TRUE": {
-        "method": null,
         "event": "privacy.onAllowUnentitledResumePointsChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "ONALLOWUNENTITLEDRESUMEPOINTSCHANGED_FOR_PRIVACY_FALSE": {
-        "method": null,
         "event": "privacy.onAllowUnentitledResumePointsChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "ONALLOWWATCHHISTORYCHANGED_FOR_PRIVACY_TRUE": {
-        "method": null,
         "event": "privacy.onAllowWatchHistoryChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "ONALLOWWATCHHISTORYCHANGED_FOR_PRIVACY_FALSE": {
-        "method": null,
         "event": "privacy.onAllowWatchHistoryChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "ONALLOWPRODUCTANALYTICSCHANGED_FOR_PRIVACY_TRUE": {
-        "method": null,
         "event": "privacy.onAllowProductAnalyticsChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "ONALLOWPRODUCTANALYTICSCHANGED_FOR_PRIVACY_FALSE": {
-        "method": null,
         "event": "privacy.onAllowProductAnalyticsChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "ONALLOWPERSONALIZATIONCHANGED_FOR_PRIVACY_TRUE": {
-        "method": null,
         "event": "privacy.onAllowPersonalizationChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "ONALLOWPERSONALIZATIONCHANGED_FOR_PRIVACY_FALSE": {
-        "method": null,
         "event": "privacy.onAllowPersonalizationChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "ONALLOWUNENTITLEDPERSONALIZATIONCHANGED_FOR_PRIVACY_TRUE": {
-        "method": null,
         "event": "privacy.onAllowUnentitledPersonalizationChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "ONALLOWUNENTITLEDPERSONALIZATIONCHANGED_FOR_PRIVACY_FALSE": {
-        "method": null,
         "event": "privacy.onAllowUnentitledPersonalizationChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "ONALLOWREMOTEDIAGNOSTICSCHANGED_FOR_PRIVACY_TRUE": {
-        "method": null,
         "event": "privacy.onAllowRemoteDiagnosticsChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "ONALLOWREMOTEDIAGNOSTICSCHANGED_FOR_PRIVACY_FALSE": {
-        "method": null,
         "event": "privacy.onAllowRemoteDiagnosticsChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "ONALLOWPRIMARYCONTENTADTARGETINGCHANGED_FOR_PRIVACY_TRUE": {
-        "method": null,
         "event": "privacy.onAllowPrimaryContentAdTargetingChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "ONALLOWPRIMARYCONTENTADTARGETINGCHANGED_FOR_PRIVACY_FALSE": {
-        "method": null,
         "event": "privacy.onAllowPrimaryContentAdTargetingChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "ONALLOWPRIMARYBROWSEADTARGETINGCHANGED_FOR_PRIVACY_TRUE": {
-        "method": null,
         "event": "privacy.onAllowPrimaryBrowseAdTargetingChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "ONALLOWPRIMARYBROWSEADTARGETINGCHANGED_FOR_PRIVACY_FALSE": {
-        "method": null,
         "event": "privacy.onAllowPrimaryBrowseAdTargetingChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "ONALLOWAPPCONTENTADTARGETINGCHANGED_FOR_PRIVACY_TRUE": {
-        "method": null,
         "event": "privacy.onAllowAppContentAdTargetingChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "ONALLOWAPPCONTENTADTARGETINGCHANGED_FOR_PRIVACY_FALSE": {
-        "method": null,
         "event": "privacy.onAllowAppContentAdTargetingChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "ONALLOWACRCOLLECTIONCHANGED_FOR_PRIVACY_TRUE": {
-        "method": null,
         "event": "privacy.onAllowACRCollectionChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "ONALLOWACRCOLLECTIONCHANGED_FOR_PRIVACY_FALSE": {
-        "method": null,
         "event": "privacy.onAllowACRCollectionChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "ONALLOWCAMERAANALYTICSCHANGED_FOR_PRIVACY_TRUE": {
-        "method": null,
         "event": "privacy.onAllowCameraAnalyticsChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE" 
     },
     "ONALLOWCAMERAANALYTICSCHANGED_FOR_PRIVACY_FALSE": {
-        "method": null,
         "event": "privacy.onAllowCameraAnalyticsChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE" 
     },
     "GET_PRIVACY_SETTINGS": {
         "method": "manage_privacy.settings"
     },
     "EXPECTED_PRIVACY_SETTINGS": {
         "method": "privacy.settings",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "PRIVACY_SETTINGS_METHOD",
-        "expectingError": false
+        "expected": "PRIVACY_SETTINGS_METHOD"
     },
     "SET_PRIVACY_ALLOWRESUMEPOINTS_WITH_INVALID_PARAMS_INTEGER": {
         "method": "manage_privacy.setAllowResumePoints",
@@ -876,192 +690,143 @@
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWRESUMEPOINTS": {
         "method": "privacy.setAllowResumePoints",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWRESUMEPOINTS": {
         "method": "privacy.setAllowResumePoints",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWUNENTITLEDRESUMEPOINTS": {
         "method": "privacy.setAllowUnentitledResumePoints",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWUNENTITLEDRESUMEPOINTS": {
         "method": "privacy.setAllowUnentitledResumePoints",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWWATCHHISTORY": {
         "method": "privacy.setAllowWatchHistory",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWWATCHHISTORY": {
         "method": "privacy.setAllowWatchHistory",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWPRODUCTANALYTICS": {
         "method": "privacy.setAllowProductAnalytics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWPRODUCTANALYTICS": {
         "method": "privacy.setAllowProductAnalytics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWPERSONALIZATION": {
         "method": "privacy.setAllowPersonalization",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWPERSONALIZATION": {
         "method": "privacy.setAllowPersonalization",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWUNENTITLEDPERSONALIZATION": {
         "method": "privacy.setAllowUnentitledPersonalization",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWUNENTITLEDPERSONALIZATION": {
         "method": "privacy.setAllowUnentitledPersonalization",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWREMOTEDIAGNOSTICS": {
         "method": "privacy.setAllowRemoteDiagnostics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWREMOTEDIAGNOSTICS": {
         "method": "privacy.setAllowRemoteDiagnostics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWPRIMARYCONTENTADTARGETING": {
         "method": "privacy.setAllowPrimaryContentAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWPRIMARYCONTENTADTARGETING": {
         "method": "privacy.setAllowPrimaryContentAdTargeting",
-        "event": null,
-        "context": "noContext",
-        "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWPRIMARYBROWSEADTARGETING": {
         "method": "privacy.setAllowPrimaryBrowseAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWPRIMARYBROWSEADTARGETING": {
         "method": "privacy.setAllowPrimaryBrowseAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWAPPCONTENTADTARGETING": {
         "method": "privacy.setAllowAppContentAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWAPPCONTENTADTARGETING": {
         "method": "privacy.setAllowAppContentAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWACRCOLLECTION": {
         "method": "privacy.setAllowACRCollection",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWACRCOLLECTION": {
         "method": "privacy.setAllowACRCollection",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWCAMERAANALYTICS": {
         "method": "privacy.setAllowCameraAnalytics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWCAMERAANALYTICS": {
         "method": "privacy.setAllowCameraAnalytics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
@@ -1104,98 +869,62 @@
     },
     "NULL_FOR_PRIVACY_SETALLOWAPPCONTENTADTARGETING": {
         "method": "privacy.setAllowAppContentAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL" 
     },
     "NULL_FOR_PRIVACY_SETALLOWRESUMEPOINTS": {
         "method": "privacy.setAllowResumePoints",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL" 
     },
     "NULL_FOR_PRIVACY_SETALLOWUNENTITLEDRESUMEPOINTS": {
         "method": "privacy.setAllowUnentitledResumePoints",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL" 
     },
     "NULL_FOR_PRIVACY_SETALLOWWATCHHISTORY": {
         "method": "privacy.setAllowWatchHistory",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL" 
     },
     "NULL_FOR_PRIVACY_SETALLOWPERSONALIZATION": {
         "method": "privacy.setAllowPersonalization",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL" 
     },
     "NULL_FOR_PRIVACY_SETALLOWPRODUCTANALYTICS": {
         "method": "privacy.setAllowProductAnalytics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL" 
     },
     "NULL_FOR_PRIVACY_SETALLOWUNENTITLEDPERSONALIZATION": {
         "method": "privacy.setAllowUnentitledPersonalization",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL" 
     },
     "NULL_FOR_PRIVACY_SETALLOWREMOTEDIAGNOSTICS": {
         "method": "privacy.setAllowRemoteDiagnostics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_PRIVACY_SETALLOWPRIMARYCONTENTADTARGETING": {
         "method": "privacy.setAllowPrimaryContentAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL" 
     },
     "NULL_FOR_PRIVACY_SETALLOWPRIMARYBROWSEADTARGETING": {
         "method": "privacy.setAllowPrimaryBrowseAdTargeting",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL" 
     },
     "NULL_FOR_PRIVACY_SETALLOWCAMERAANALYTICS": {
         "method": "privacy.setAllowCameraAnalytics",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL" 
     },
     "NULL_FOR_PRIVACY_SETALLOWACRCOLLECTION": {
         "method": "privacy.setAllowACRCollection",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL" 
     }
 }

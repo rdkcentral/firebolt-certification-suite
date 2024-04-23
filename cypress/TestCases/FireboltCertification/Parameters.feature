@@ -4,7 +4,8 @@ Feature: Parameters
    Scenario Outline: Parameters.initialization - Positive Scenario: <Scenario>
       Given the environment has been set up for 'Parameters' tests
       And 3rd party 'certification' app is launched
-      When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
+      When '3rd party app' invokes the 'Firebolt' API to 'get parameters initialization'
+      And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
       Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowAppContentAdTargeting'
       When '3rd party app' invokes the 'Firebolt' API to 'get parameters initialization'
       Then 'Firebolt' platform responds with '<Validation_Key>'

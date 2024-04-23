@@ -1,13 +1,18 @@
-#Reports
+# Reports
 cypress/cucumber-json
 cypress/reports
 cypress/videos
+cypress/fixtures/external
 reports/
 
-#External Testcases
+# External Testcases
 cypress/TestCases/external
+cypress/TestCases/Distributor
 
-#Lock Files
+# External Testdata
+cypress/fixtures/external
+
+# Lock Files
 yarn.lock
 
 # Logs

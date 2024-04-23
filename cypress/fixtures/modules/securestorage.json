@@ -339,5 +339,14 @@
     },
     "CLEAR_SCOPE_BOOLEAN": {
         "scope": false
+    },
+    "KEY_EMPTY": {
+        "scope": "device",
+        "key": ""
+    },
+    "SET_KEY_EMPTY": {
+        "scope": "device",
+        "key": "",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
     }
 }

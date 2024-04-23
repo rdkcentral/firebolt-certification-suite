@@ -4,16 +4,11 @@
     },
     "EXPECTED_LIFECYCLE_STATE_AS_FOREGROUND": {
         "method": "lifecycle.state",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FOREGROUND",
-        "expectingError": false
+        "expected": "FOREGROUND"
     },
     "CUSTOM_ERROR_FOR_LIFECYCLE_READY_CAPABILITY": {
         "method": "lifecycle.ready",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "CUSTOM_ERROR",
         "expectingError": true
@@ -92,5 +87,9 @@
         "method": "lifecycle.finished",
         "validationJsonPath": "result",
         "expected": "LIFECYCLE_FINISHED_ERROR"
+    },
+    "FETCH_LIFECYCLE_BACKGROUND_EXPECTING_ERROR": {
+        "method": "lifecycle.background",
+        "expected": "error"
     }
 }

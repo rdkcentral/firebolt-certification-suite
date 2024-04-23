@@ -18,7 +18,7 @@ Then Firebolt platform responds for 'accessibility.closedCaptionsSettings' metho
 * [Location of modules](../../fixtures/modules/)
 * [Location of fireboltCalls](../../fixtures/fireboltCalls/)
 * [Location of defaultTestData json](../../fixtures/defaultTestData.json)
-* [Location of cypress commands](../../support/commands.js)
+* [Location of cypress commands](../../support/cypress-commands)
 ## Tagging
 
 Tagging is implemented to effectively categorize the test cases and indicate the set of commands supported by test cases. We suggest the following pattern when adding tags:

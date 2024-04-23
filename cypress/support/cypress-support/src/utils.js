@@ -20,6 +20,8 @@ const { _ } = Cypress;
 const MESSAGE = 'message';
 const Validator = require('jsonschema').Validator;
 const validator = new Validator();
+const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
+let clientCreated = false;
 
 /**
  * @module utils
@@ -51,10 +53,10 @@ function replaceJsonStringWithEnvVar(jsonString) {
  * @param {Object} jsonParams - Params that needs to be sent to App(Ex: methodName and methodParams to invoke)
  * @param {Object} map - additional params that needs to be sent(Ex: communicationMode, action etc)
  * @example
- * createIntentMessage('runTest',{ "certification": true}, {"asynchronous": "false","communicationMode": "SDK","isAsync": false,"action": "CORE"})
+ * createIntentMessage('runTest',{ "certification": true}, {"communicationMode": "SDK","action": "CORE"})
  * @return {Object} { "result":{
  * "action": "search",
- * "data": {"query": "{\"task\":\"runTest\",\"params\":{\"certification\":true},\"action\":\"CORE\",\"context\":{\"communicationMode\":\"SDK\"},\"asynchronous\":false}"},
+ * "data": {"query": "{\"task\":\"runTest\",\"params\":{\"certification\":true},\"action\":\"CORE\",\"context\":{\"communicationMode\":\"SDK\"}}"},
  * "context": {"source": "device"}
  * } }
  **/
@@ -126,11 +128,11 @@ function parseExceptionList() {
 
 /**
  * @module utils
- * @function generateExceptionListForSanity
+ * @function generateCombinedExceptionList
  * @description Function to combine all the exception list to send to FCA for sanity suite runs.
  * @returns exemptedListForSanity
  */
-function generateExceptionListForSanity() {
+function generateCombinedExceptionList() {
   // After parseExceptionList() concatenating (Not Supported, Not Available and Not Permitted) list and passing concatenated list while creating intent message sanity runs.
   let exemptedListForSanity = getEnvVariable('NOT_SUPPORTED_METHODS', false)
     ? getEnvVariable('NOT_SUPPORTED_METHODS')
@@ -323,7 +325,8 @@ function unsubscribe(webSocketClient = null) {
  **/
 function isScenarioExempted(method, param) {
   let isInList = false;
-  const methodInExceptionList = getEnvVariable('NOT_SUPPORTED_METHODS').find((object) => {
+  const combinedExceptionList = generateCombinedExceptionList();
+  const methodInExceptionList = combinedExceptionList.find((object) => {
     if (
       object.hasOwnProperty('param') &&
       object.method.toLowerCase() === method.toLowerCase() &&
@@ -417,6 +420,38 @@ function lifecycleHistorySchemaValidation(result, schema, lifecycleHistoryRecord
 
 /**
  * @module utils
+ * @function assertWithRequirementLogs
+ * @description Asserts the equality of expected and actual values and logs the result with additional information.
+ * If an error object is provided, the assertion fails with the error object logged.
+ * @param {string} pretext - Additional information to be logged before the assertion result.
+ * @param {*} expected - The expected value for comparison.
+ * @param {*} actual - The actual value for comparison.
+ * @param {boolean} [equateDeep=false] - Optional. If true, performs a deep equality check using assert.deepEqual(), otherwise uses assert.equal().
+ * @param {*} errorObject - Optional. Error object for which assertion should fail
+ * @example
+ * assertWithRequirementLogs('Checking foreground state', 'foreground', 'foreground', true, { message: 'Invalid state' });
+ */
+function assertWithRequirementLogs(pretext, expected, actual, equateDeep = false, errorObject) {
+  if (errorObject) {
+    cy.log(pretext + ': ' + JSON.stringify(errorObject)).then(() => {
+      assert(false, pretext + ': ' + JSON.stringify(errorObject));
+    });
+  } else {
+    cy.log(
+      pretext + ': Expected : ' + expected + ' , Actual : ' + actual,
+      'assertWithRequirementLogs'
+    ).then(() => {
+      if (equateDeep) {
+        assert.deepEqual(expected, actual, pretext);
+      } else {
+        assert.equal(expected, actual, pretext);
+      }
+    });
+  }
+}
+
+/**
+ * @module utils
  * @function getSetupDetails
  * @description Function to check if the env variables and params are provided in the required format for testing
  */
@@ -425,11 +460,11 @@ function getSetupDetails() {
   const deviceIp = getEnvVariable(CONSTANTS.DEVICE_IP);
   if (!deviceIp || deviceIp == undefined) {
     cy.log(
-      `${CONSTANTS.DEVICE_IP} environment variable not defined. Update the DEVICE_IP in cypress/support/common.js or pass in command line. Ip address of the device under test to be updated here`
+      `${CONSTANTS.DEVICE_IP} environment variable not defined. Update the DEVICE_IP in cypress.config.js or pass in command line. Ip address of the device under test to be updated here`
     ).then(() => {
       assert(
         false,
-        `${CONSTANTS.DEVICE_IP} environment variable not defined. Update the DEVICE_IP in cypress/support/common.js or pass in command line. Ip address of the device under test to be updated here`
+        `${CONSTANTS.DEVICE_IP} environment variable not defined. Update the DEVICE_IP in cypress.config.js or pass in command line. Ip address of the device under test to be updated here`
       );
     });
   } else {
@@ -461,11 +496,131 @@ function getSetupDetails() {
   });
 }
 
+/**
+ * @module utils
+ * @function isTestTypeChanged
+ * @description To check if the test type has changed.
+ * @returns {currentTest} - Current test type.
+ */
+function isTestTypeChanged(currentTest) {
+  return (
+    getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != currentTest &&
+    getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != undefined
+  );
+}
+
+/**
+ * @module utils
+ * @function pubSubClientCreation
+ * @description Establishing the pubsub connection and subscribing to the response topic.
+ * @example
+ * pubSubClientCreation()
+ */
+function pubSubClientCreation(appTransport) {
+  return new Promise(async (resolve, reject) => {
+    if (!clientCreated && appTransport.init) {
+      try {
+        const responseTopic = getTopic(null, CONSTANTS.SUBSCRIBE);
+
+        // Initialize required client
+        await appTransport.init();
+
+        if (
+          responseTopic != undefined &&
+          !getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
+        ) {
+          // Subscribe to topic and pass the results to the callback function
+          appTransport.subscribe(responseTopic, subscribeResults);
+          getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
+        }
+        clientCreated = true;
+        resolve(true);
+      } catch (error) {
+        // If an error occurs, reject the promise with the error
+        reject('Failed to initiate PubSubClient' + error);
+      }
+    } else {
+      resolve(false);
+    }
+  });
+}
+
+/**
+ * @module utils
+ * @function subscribeResults
+ * @description Callback function to fetch the required response from subscribe and push it to a global queue
+ * @param {object} data - Response payload from subscribe call
+ * @param {object} metaData - Response headers from subscribe call
+ * @example
+ * subscribeResults('{ "result": { "type": "device", "value": "PD54331.." } }', headers:{id:1232435, client:fca})
+ **/
+function subscribeResults(data, metaData) {
+  const queueInput = {};
+  queueInput.data = data;
+  queueInput.metaData = metaData;
+  // Push the data and metadata as an object to queue
+  getEnvVariable(CONSTANTS.MESSAGE_QUEUE).enqueue(queueInput);
+}
+
+/**
+ * @module utils
+ * @function destroyGlobalObjects
+ * @description Destroy global objects and recursively clear the environment variables whose name is stored in the list if present, before test execution. List of names of global object to be cleared can be passed
+ *  @param {object} objectNameList - list of objects to be cleared
+ *  @example
+ * destroyGlobalObjects(['lifecycleAppObjectList'])
+ **/
+function destroyGlobalObjects(objectNameList) {
+  for (const objectName of objectNameList) {
+    const objectListEnv = Cypress.env(objectName);
+    for (const appObject in objectListEnv) {
+      Cypress.env(objectListEnv[appObject], null);
+    }
+    Cypress.env(objectName, []);
+  }
+}
+
+/**
+ * @module utils
+ * @function writeJsonToFileForReporting
+ * @description Write JSON to the file
+ * @example
+ * writeJsonToFileForReporting({ "key": "value" }, "/path/to/directory/", "report_")
+ */
+async function writeJsonToFileForReporting(jsonData, defaultDirectory, fileNamePrefix) {
+  const jsonObj = jsonData;
+  const jsonContent = JSON.stringify(jsonObj, null, 4);
+  const fileName = fileNamePrefix + jsonFile;
+
+  cy.task(CONSTANTS.WRITE_TO_FILE, {
+    fileName: defaultDirectory + fileName,
+    data: jsonContent,
+  }).then((isWritten) => {
+    return isWritten;
+  });
+}
+
+/**
+ * @module utils
+ * @function checkForTags
+ * @description Check whether the tags in beforeOperation object and tag passed in cli has anything common
+ * @example
+ * checkForTags(["TAG1","TAG2"])
+ */
+function checkForTags(tags) {
+  if (Cypress.env(CONSTANTS.BEFORE_OPERATION_TAGS)) {
+    const beforeOperationTags = Cypress.env(CONSTANTS.BEFORE_OPERATION_TAGS).split(',');
+    return tags.some((tag) => beforeOperationTags.includes(tag));
+  } else {
+    return false;
+  }
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
   parseExceptionList,
-  generateExceptionListForSanity,
+  generateCombinedExceptionList,
   overideParamsFromConfigModule,
   getTopic,
   getCommunicationMode,
@@ -475,5 +630,12 @@ module.exports = {
   isScenarioExempted,
   getEnvVariable,
   lifecycleHistorySchemaValidation,
+  assertWithRequirementLogs,
   getSetupDetails,
+  isTestTypeChanged,
+  pubSubClientCreation,
+  subscribeResults,
+  destroyGlobalObjects,
+  writeJsonToFileForReporting,
+  checkForTags,
 };
