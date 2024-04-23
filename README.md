@@ -196,7 +196,7 @@ Other cypress command line can also be passed
 
           2) "firstParty" : Set value as **true** if the call is to firstParty, set it as **false** if the value is to 3rd party. If no firstparty property is added, it will take **false** as default value.
 
-          3) "tags" : Based on the tags specified here and the cli , corresponding configModule would perform necessary action steps. Currently, only active tag is **thunderProxy**.
+          3) "tags" : Based on the tags specified here and the cli , corresponding configModule would perform necessary action steps.
 
 ### Usage -
 
