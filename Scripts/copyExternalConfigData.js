@@ -17,20 +17,20 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 
-console.log('Copying Config TestData into fixtures and Testcases into TestCases/external');
+console.log(
+  'Copying Config TestData into fixtures/external and Testcases into TestCases/Distributor'
+);
 
 // Config for testCase
-const EXTERNAL_DIR_TESTCASE = path.join(__dirname, '..', 'cypress', 'TestCases', 'external');
+const EXTERNAL_DIR_TESTCASE = path.join(__dirname, '..', 'cypress', 'TestCases', 'Distributor');
 const CONFIG_DIR_TESTCASE = path.join(__dirname, '..', 'node_modules', 'configModule', 'TestCases');
 
 // Config for testData
 const EXTERNAL_DIR_TESTDATA = path.join(__dirname, '..', 'cypress', 'fixtures', 'external');
 const CONFIG_DIR_TESTDATA = path.join(__dirname, '..', 'node_modules', 'configModule', 'testData');
 
-// config for config.json
-
+// Config for config.json
 const SOURCE_CONFIG_FILE = path.join(
   __dirname,
   '..',
@@ -41,14 +41,21 @@ const SOURCE_CONFIG_FILE = path.join(
 );
 const DEST_CONFIG_FILE = path.join(__dirname, '..', 'supportConfig.json');
 
+// Function to delete directory
+function deleteDirectory(directory) {
+  if (fs.existsSync(directory)) {
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+}
+
 // Function to copy files
 function copyFiles(configDir, externalDir) {
+  // Ensure the externalDir is fresh
+  deleteDirectory(externalDir);
+  fs.mkdirSync(externalDir, { recursive: true });
+
   const entries = fs.readdirSync(configDir, { withFileTypes: true });
 
-  // Create externalDir if it doesn't exist
-  if (!fs.existsSync(externalDir)) {
-    fs.mkdirSync(externalDir, { recursive: true });
-  }
   // Copy files from configDir to externalDir
   for (const entry of entries) {
     const srcPath = path.join(configDir, entry.name);

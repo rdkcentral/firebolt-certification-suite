@@ -5,7 +5,6 @@
     },
     "CAPABILITIES_SUPPORTED":{
         "method": "capabilities.supported",
-        "context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "CAPABILITIES_SUPPORTED"
     },
@@ -15,7 +14,6 @@
     },
     "CAPABILITIES_INFO":{
         "method": "capabilities.info",
-        "context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "CAPABILITIES_INFO"
     },
@@ -25,7 +23,6 @@
     },
     "TRUE_FOR_KEYBOARD_CAPABILITY_AVAILABILITY":{
         "method": "capabilities.available",
-        "context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "TRUE"
     },
@@ -35,7 +32,6 @@
     },
     "TRUE_FOR_ACKNOWLEDGECHALLENGE_CAPABILITY_AVAILABILITY":{
         "method": "capabilities.available",
-        "context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "TRUE"
     },
@@ -45,7 +41,6 @@
     },
     "TRUE_FOR_PINCHALLENGE_CAPABILITY_AVAILABILITY":{
         "method": "capabilities.available",
-        "context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "TRUE"
     },
@@ -55,7 +50,6 @@
     },
     "TRUE_FOR_GRANTED_CAPABILITY_WITH_PASSED_ROLE":{
         "method": "capabilities.granted",
-        "context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "TRUE"
     },
@@ -137,25 +131,21 @@
     },
     "EXPECTED_VALUE_FOR_SUPPORTED_API":{
         "method": "capabilities.supported",
-        "context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "CAPABILITIES_SUPPORTED"
     },
     "EXPECTED_VALUE_FOR_INFO_API":{
         "method": "capabilities.info",
-        "context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "CAPABILITIES_INFO"
     },
     "EXPECTED_CAPABILITY_IS_REQUESTED":{
-        "method": "capabilities.request",
-        "context": "noContext",
+        "method": "capabilities.request", 
 		"validationJsonPath": "result",
 		"expected": "CAPABILITIES_REQUEST"
     },
     "EXPECTED_VALUE_FOR_PERMITTED_API":{
-        "method": "capabilities.permitted",
-        "context": "noContext",
+        "method": "capabilities.permitted", 
 		"validationJsonPath": "result",
 		"expected": "CAPABILITIES_PERMITTED"
     },
@@ -230,6 +220,41 @@
     "CHECK_IF_ACCOUNT_UID_CAPABILITY_IS_PERMITTED":{
         "method": "capabilities.permitted",
         "params": "CAPABILITIES_PERMITTED_ACCOUNT_UID_USE_ROLE_PARAM"
+    },
+    "CHECK_IF_ACCOUNT_UID_CAPABILITY_IS_GRANTED_WITH_CONTEXT_ROLE_USE":{
+        "method": "capabilities.granted",
+        "params": "CAPABILITIES_PERMITTED_ACCOUNT_UID_USE_ROLE_PARAM",
+        "context": "CAPABILITIES_GRANTED_USE"
+    },
+    "CHECK_IF_ACCOUNT_UID_CAPABILITY_IS_GRANTED_WITH_CONTEXT_ROLE_MANAGE":{
+        "method": "capabilities.granted",
+        "params": "CAPABILITIES_GRANTED_ACCOUNT_UID_ROLE_MANAGE",
+        "context": "CAPABILITIES_GRANTED_MANAGE"
+    },
+    "CHECK_IF_ACCOUNT_UID_CAPABILITY_IS_GRANTED_WITH_CONTEXT_ROLE_PROVIDE":{
+        "method": "capabilities.granted",
+        "params": "CAPABILITIES_GRANTED_ACCOUNT_UID_ROLE_PROVIDE",
+        "context": "CAPABILITIES_GRANTED_PROVIDE"
+    },
+    "CHECK_IF_SECURE_STORAGE_CAPABILITY_IS_GRANTED_WITH_CONTEXT_ROLE_USE":{
+        "method": "capabilities.granted",
+        "params": "CAPABILITIES_GRANTED_SECURE_STORAGE_ROLE_USE",
+        "context": "CAPABILITIES_GRANTED_USE"
+    },
+    "CHECK_IF_SECURE_STORAGE_CAPABILITY_IS_GRANTED_WITH_CONTEXT_ROLE_MANAGE":{
+        "method": "capabilities.granted",
+        "params": "CAPABILITIES_GRANTED_SECURE_STORAGE_ROLE_MANAGE",
+        "context": "CAPABILITIES_GRANTED_MANAGE"
+    },
+    "CHECK_IF_SECURE_DEVICE_INFO_IS_GRANTED_WITH_CONTEXT_ROLE_USE":{
+        "method": "capabilities.granted",
+        "params": "CAPABILITIES_GRANTED_DEVICE_INFO_ROLE_USE",
+        "context": "CAPABILITIES_GRANTED_USE"
+    },
+    "CHECK_IF_SECURE_DEVICE_INFO_IS_GRANTED_WITH_CONTEXT_ROLE_MANAGE":{
+        "method": "capabilities.granted",
+        "params": "CAPABILITIES_GRANTED_DEVICE_INFO_ROLE_MANAGE",
+        "context": "CAPABILITIES_GRANTED_MANAGE"
     },
     "GET_INFO_OF_CAPABILITIES_FOR_DISCOVERY_ENTITLEMENTS":{
         "method": "capabilities.info",
@@ -758,7 +783,6 @@
     },
     "GET_INFO_OF_CAPABILITIES_WITH_EMPTY_PARAM": {
         "method": "capabilities.info",
-        "params": "noParam",
         "expected": "error"
     },
     "GET_INFO_OF_CAPABILITIES_WITH_EMPTY_CAPABILITIES": {
@@ -783,12 +807,10 @@
     },
     "CHECK_AVAILABILITY_OF_CAPABILITIES_WITH_EMPTY_PARAM": {
         "method": "capabilities.available",
-        "params": "noParam",
         "expected": "error"
     },
     "GET_SUPPORTED_CAPABILITIES_WITH_EMPTY_PARAM": {
         "method": "capabilities.supported",
-        "params": "noParam",
         "expected": "error"
     },
     "GET_SUPPORTED_CAPABILITIES_MULTIPLE_CAPABILITY": {
@@ -850,6 +872,10 @@
         "method": "capabilities.request",
         "params": "CAPABILITIES_REQUEST_NULL_ROLE_AND_CAPABILITY",
         "expected": "error"
+    },
+    "CAPABILITIES_REQUEST_LOCALIZATION_COUNTRYCODE": {
+        "method": "capabilities.request",
+        "params": "CAPABILITIES_REQUEST_LOCALIZATION_COUNTRYCODE"
     },
     "GET_GRANTED_CAPABILITIES_WITHOUT_CAPABILITY": {
         "method": "capabilities.granted",
@@ -928,56 +954,42 @@
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_INFO": {
         "method": "capabilities.info",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_CAPABILITIES_INFO": {
         "method": "capabilities.info",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "CUSTOM_ERROR",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_PERMITTED": {
         "method": "capabilities.permitted",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_AVAILABLE": {
         "method": "capabilities.available",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_SUPPORTED": {
         "method": "capabilities.supported",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_CAPABILITIES_REQUEST": {
         "method": "capabilities.request",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_GRANTED": {
         "method": "capabilities.granted",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
@@ -999,6 +1011,68 @@
         "method": "capabilities.permitted",
         "params": "CAPABILITIES_PERMITTED_ACCOUNT_UID_USE_ROLE_PARAM"
     },
+    "FALSE_FOR_CAPABLITIES_REQUEST_GRANTED": {
+        "method": "capabilities.request",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result[0].use.granted",
+        "expected": "FALSE",
+        "expectingError": false
+    },
+    "TRUE_FOR_CAPABLITIES_REQUEST_GRANTED": {
+        "method": "capabilities.request",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result[0].use.granted",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "FALSE_FOR_CAPABLITIES_INFO_GRANTED": {
+        "method": "capabilities.info",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result[0].use.granted",
+        "expected": "FALSE",
+        "expectingError": false
+    },
+    "TRUE_FOR_CAPABLITIES_INFO_GRANTED": {
+        "method": "capabilities.info",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result[0].use.granted",
+        "expected": "TRUE",
+        "expectingError": false
+    },
+    "NULL_FOR_CAPABILITIES_INFO_GRANTED": {
+        "method": "capabilities.info",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result[0].use.granted",
+        "expected": "NULL",
+        "expectingError": false
+    },
+    "NULL_FOR_CAPABILITIES_GRANTED": {
+        "method": "capabilities.granted",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "NULL",
+        "expectingError": false
+    },
+    "TRUE_FOR_CAPABILITIES_GRANTED": {
+        "method": "capabilities.granted",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "TRUE"
+    },
+    "FALSE_FOR_CAPABILITIES_GRANTED": {
+        "method": "capabilities.granted",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "expected": "FALSE"
+    },
     "GET_INFO_OF_CAPABILITY_REQUEST_CAPABILITY": {
         "method": "capabilities.info",
         "params": "CAPABILITIES_REQUEST_INFO_PARAM"
@@ -1014,5 +1088,91 @@
     "CHECK_IF_CAPABILITY_REQUEST_CAPABILITY_IS_SUPPORTED": {
         "method": "capabilities.supported",
         "params": "CAPABILITIES_SUPPORTED_CAPABILITY_REQUEST"
+    },
+    "GET_CAPABILITY_INFO":{
+        "method": "capabilities.info",
+        "params": "CYPRESSENV-capabilitiesList"
+    },
+    "CHECK_IF_AUTHENTICATION_TOKEN_DEVICE_CAPABILITY_IS_PERMITTED_WITH_ROLE_USE":{
+        "method": "capabilities.permitted",
+        "params": "CAPABILITIES_PERMITTED_TOKEN_DEVICE_USE_ROLE_PARAM"
+    },
+    "CHECK_IF_AUTHENTICATION_TOKEN_PLATFORM_CAPABILITY_IS_PERMITTED_WITH_ROLE_USE":{
+        "method": "capabilities.permitted",
+        "params": "CAPABILITIES_PERMITTED_TOKEN_PLATFORM_USE_ROLE_PARAM"
+    },
+    "CHECK_IF_AUTHENTICATION_TOKEN_ROOT_CAPABILITY_IS_PERMITTED_WITH_ROLE_USE":{
+        "method": "capabilities.permitted",
+        "params": "CAPABILITIES_PERMITTED_TOKEN_ROOT_USE_ROLE_PARAM"
+    },
+    "CHECK_IF_AUTHENTICATION_TOKEN_SESSION_CAPABILITY_IS_PERMITTED_WITH_ROLE_USE":{
+        "method": "capabilities.permitted",
+        "params": "CAPABILITIES_PERMITTED_TOKEN_SESSION_USE_ROLE_PARAM"
+    },
+    "CHECK_IF_DEVICE_MAKE_CAPABILITY_IS_PERMITTED_WITH_ROLE_USE":{
+        "method": "capabilities.permitted",
+        "params": "CAPABILITIES_PERMITTED_DEVICE_MAKE_USE_ROLE_PARAM"
+    },
+    "CHECK_IF_DEVICE_MODEL_CAPABILITY_IS_PERMITTED_WITH_ROLE_USE":{
+        "method": "capabilities.permitted",
+        "params": "CAPABILITIES_PERMITTED_DEVICE_MODEL_USE_ROLE_PARAM"
+    },
+    "CHECK_IF_DEVICE_SKU_CAPABILITY_IS_PERMITTED_WITH_ROLE_USE":{
+        "method": "capabilities.permitted",
+        "params": "CAPABILITIES_PERMITTED_DEVICE_SKU_USE_ROLE_PARAM"
+    },
+    "CHECK_IF_DEVICE_UID_CAPABILITY_IS_PERMITTED_WITH_ROLE_USE":{
+        "method": "capabilities.permitted",
+        "params": "CAPABILITIES_PERMITTED_DEVICE_UID_USE_ROLE_PARAM"
+    },
+    "CAPABILITIES_ONAVAILABLE": {
+        "method": "capabilities.onAvailable",
+        "params": "CAPABILITIES_ONAVAILBLE_KEYBOARD"
+    },
+    "EXPECTED_VALUE_FOR_CAPABILITIES_ONAVAILABLE": {
+        "event": "capabilities.onAvailable",
+        "validationJsonPath": "eventResponse",
+        "expected": "CAPABILITIES_ONAVAILABLE"
+    },
+    "FALSE_FOR_KEYBOARD_CAPABILITY_AVAILABILITY":{
+        "method": "capabilities.available", 
+		"validationJsonPath": "result",
+		"expected": "FALSE"
+    },
+    "CAPABILITIES_ONUNAVAILABLE": {
+        "method": "capabilities.onUnavailable",
+        "params": "CAPABILITIES_ONUNAVAILBLE_KEYBOARD"
+    },
+    "EXPECTED_VALUE_FOR_CAPABILITIES_ONUNAVAILABLE": {
+        "event": "capabilities.onUnavailable", 
+        "validationJsonPath": "eventResponse",
+        "expected": "CAPABILITIES_ONUNAVAILABLE"
+    },
+    "CAPABILITIES_ONGRANTED": {
+        "method": "capabilities.onGranted",
+        "params": "CAPABILITIES_ONGRANTED_DEVICE_ID_ROLE_USE"
+    },
+    "CHECK_IF_DEVICE_ID_CAPABILITY_IS_GRANTED":{
+        "method": "capabilities.granted",
+        "params": "USERGRANTS_DEVICE_ID"
+    },
+    "FALSE_FOR_GRANTED_CAPABILITY_WITH_PASSED_ROLE":{
+        "method": "capabilities.granted", 
+		"validationJsonPath": "result",
+		"expected": "FALSE"
+    },
+    "CAPABILITIES_ONREVOKED": {
+        "method": "capabilities.onRevoked",
+        "params": "CAPABILITIES_ONREVOKED_DEVICE_ID_ROLE_USE"
+    },
+    "EXPECTED_VALUE_FOR_CAPABILITIES_ONGRANTED": {
+        "event": "capabilities.onGranted", 
+        "validationJsonPath": "eventResponse",
+        "expected": "CAPABILITIES_ONGRANTED"
+    },
+    "EXPECTED_VALUE_FOR_CAPABILITIES_ONREVOKED": {
+        "event": "capabilities.onRevoked", 
+        "validationJsonPath": "eventResponse",
+        "expected": "CAPABILITIES_ONREVOKED"
     }
 }

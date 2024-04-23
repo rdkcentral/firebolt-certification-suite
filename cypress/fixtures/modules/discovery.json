@@ -429,5 +429,9 @@
                 }
             ]
         }
-    }
+    },
+    "HOME_INTENT": {
+        "appId": "foo",
+        "intent": { "action": "home", "context": { "source": "voice" } }
+      }
 }

@@ -27,8 +27,8 @@ Feature: Keyboard
         And User 'starts' recording lifecycle history for '3rd party app'
         And Framework registers 'keyboard' test provider
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        And User 'stop' recording lifecycle history for '1st party app'
-        And User 'stop' recording lifecycle history for '3rd party app'
+        And User 'stops' recording lifecycle history for '1st party app'
+        And User 'stops' recording lifecycle history for '3rd party app'
         Then 'Firebolt' platform responds with '<Content>'
         And User validates lifecycle history for '1st party app' with 'background:foreground:background'
         And User validates lifecycle history for '3rd party app' with 'background:foreground'

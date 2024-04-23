@@ -49,9 +49,9 @@ class regExValidations {
         : expression.test(response);
 
       cy.log(
-        `RegEx Validation ${method}: expected ${
+        `RegEx Validation : Expected ${method} response ${
           extractedResponse ? extractedResponse : response
-        } to be a ${scenario}`,
+        } to be in a valid regex format`,
         'regexResultValidator'
       ).then(() => {
         assert.equal(true, validationResult, 'RegEx Validation:');
@@ -67,25 +67,30 @@ class regExValidations {
  * @function regExValidation
  * @description Regex validation is to validate the content based on the regular expression
  * @param {String} Method - Method name needs to be send eg. Account.id
- * @param {String} scenario - scenario needs to be numeric,string,decimal
+ * @param {String} validationType - validationType needs to be numeric,string,decimal
  * @example
  * cy.regExValidation('Account.uid', 'UID', 'result', '12a3g')
  */
-Cypress.Commands.add('regExValidation', (method, scenario, validationPath, response) => {
+Cypress.Commands.add('regExValidation', (method, validationType, validationPath, response) => {
   const regularExpressionValidation = new regExValidations();
-  const regexType = scenario + '_REGEXP';
+  const regexType = validationType + '_REGEXP';
 
   if (REGEXFORMATS[regexType]) {
     regularExpressionValidation.regexResultValidator(
       method,
       REGEXFORMATS[regexType],
-      scenario,
+      validationType,
       validationPath,
       response
     );
   } else {
-    cy.log('Regular Expression Not Found', 'regExValidation').then(() => {
-      assert(false, 'Regular Expression Not Found');
-    });
+    const reg = new RegExp(validationType);
+    regularExpressionValidation.regexResultValidator(
+      method,
+      reg,
+      validationType,
+      validationPath,
+      response
+    );
   }
 });

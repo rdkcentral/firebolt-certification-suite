@@ -761,5 +761,77 @@
         "options": {
             "role": []
         }
-    }
+    },
+    "PERMITTED_LIFECYCLE_READY_USE_ROLE_PARAM":{
+        "capability":"xrn:firebolt:capability:lifecycle:ready",
+        "options" : {
+            "role":"use"
+        }
+    },
+    "PERMITTED_LIFECYCLE_STATE_USE_ROLE_PARAM":{
+        "capability":"xrn:firebolt:capability:lifecycle:state",
+        "options" : {
+            "role":"use"
+        }
+    },
+    "PERMITTED_ACCOUNT_ID_USE_ROLE_PARAM":{
+        "capability":"xrn:firebolt:capability:account:id",
+        "options" : {
+            "role":"use"
+        }
+    },
+    "PERMITTED_ACCOUNT_UID_USE_ROLE_PARAM":{
+        "capability":"xrn:firebolt:capability:account:uid",
+        "options" : {
+            "role":"use"
+        }
+    },
+    "GRANTED_ACCOUNT_UID_ROLE_MANAGE": {
+        "capability": "xrn:firebolt:capability:account:uid",
+        "options": {
+            "role": "manage"
+        }
+    },
+    "GRANTED_SECURE_STORAGE_ROLE_USE": {
+        "capability": "xrn:firebolt:capability:storage:secure",
+        "options": {
+            "role": "use"
+        }
+    },
+    "GRANTED_SECURE_STORAGE_ROLE_MANAGE": {
+        "capability": "xrn:firebolt:capability:storage:secure",
+        "options": {
+            "role": "manage"
+        }
+    },
+    "GRANTED_DEVICE_INFO_ROLE_USE": {
+        "capability": "xrn:firebolt:capability:device:info",
+        "options": {
+            "role": "use"
+        }
+    },
+    "GRANTED_DEVICE_INFO_ROLE_MANAGE": {
+        "capability": "xrn:firebolt:capability:device:info",
+        "options": {
+            "role": "manage"
+        }
+    },
+    "ONAVAILBLE_KEYBOARD":{
+       "capability": "xrn:firebolt:capability:input:keyboard",
+       "listen": true
+   },
+   "ONUNAVAILBLE_KEYBOARD":{
+       "capability": "xrn:firebolt:capability:input:keyboard",
+       "listen": true
+   },
+   "ONGRANTED_DEVICE_ID_ROLE_USE":{
+       "role": "use",
+       "capability": "xrn:firebolt:capability:device:id",
+       "listen": true
+   },
+   "ONREVOKED_DEVICE_ID_ROLE_USE":{
+       "role": "use",
+       "capability": "xrn:firebolt:capability:device:id",
+       "listen": true
+   }
 }

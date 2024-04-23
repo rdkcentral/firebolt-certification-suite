@@ -26,13 +26,11 @@ const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 const UTILS = require('./utils');
 let appTransport;
 const path = require('path');
-const EXTERNAL_DIR = 'cypress/TestCases/external';
 
 export default function (module) {
   const config = new Config(module);
   const validationModule = new Validation(module);
   const transport = new TransportLayer();
-  let clientCreated = false;
   Cypress.env(CONSTANTS.RESPONSE_TOPIC_LIST, []);
 
   // Fetch the required appTransport from config module
@@ -43,12 +41,30 @@ export default function (module) {
     // Added below cypress commands to clear local browser cache and to reload browser
     cy.clearLocalStorage();
     cy.reload(true);
-    cy.wrap(pubSubClientCreation(), { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then((result) => {
+    cy.wrap(UTILS.pubSubClientCreation(appTransport), {
+      timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT,
+    }).then((result) => {
       if (result) {
         cy.log('Successfully established a pub/sub connection.');
       } else {
         cy.log('Unable to establish a pub/sub connection.');
       }
+    });
+
+    // mergeFireboltCallsAndFireboltMocks
+    cy.mergeFireboltCallsAndFireboltMocks();
+
+    // combine validation jsons
+    cy.combineValidationJson(
+      CONSTANTS.VALIDATION_OBJECTS_PATH,
+      CONSTANTS.CONFIG_VALIDATION_OBJECTS_PATH
+    );
+    // combine defaultTestData jsons
+    cy.mergeJsonFilesData(
+      `${CONSTANTS.FCS_DEFAULTTESTDATA_PATH}`,
+      `${CONSTANTS.CONFIG_DEFAULTTESTDATA_PATH}`
+    ).then((response) => {
+      Cypress.env(CONSTANTS.COMBINEDDEFAULTTESTDATA, response);
     });
 
     // Create an instance of global queue
@@ -57,7 +73,7 @@ export default function (module) {
     UTILS.parseExceptionList();
     cy.getModuleReqIdJson();
     if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) == true) {
-      cy.startOrStopPerformanceService(CONSTANTS.START).then((response) => {
+      cy.startOrStopPerformanceService(CONSTANTS.INITIATED).then((response) => {
         if (response) {
           Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, true);
         }
@@ -67,7 +83,7 @@ export default function (module) {
         'Performance metrics service not active. To use perforance metrics service, pass performanceMetrics environment variable as true'
       );
     }
-    destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+    UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
   });
 
   // beforeEach
@@ -136,48 +152,12 @@ export default function (module) {
     });
   });
 
-  /**
-   * @module main
-   * @function pubSubClientCreation
-   * @description Establishing the pubsub connection and subscribing to the response topic.
-   * @example
-   * pubSubClientCreation()
-   */
-  function pubSubClientCreation() {
-    return new Promise(async (resolve, reject) => {
-      if (!clientCreated && appTransport.init) {
-        try {
-          const responseTopic = UTILS.getTopic(null, CONSTANTS.SUBSCRIBE);
-
-          // Initialize required client
-          await appTransport.init();
-
-          if (
-            responseTopic != undefined &&
-            !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
-          ) {
-            // Subscribe to topic and pass the results to the callback function
-            appTransport.subscribe(responseTopic, subscribeResults);
-            UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
-          }
-          clientCreated = true;
-          resolve(true);
-        } catch (error) {
-          // If an error occurs, reject the promise with the error
-          reject('Failed to initiate PubSubClient' + error);
-        }
-      } else {
-        resolve(false);
-      }
-    });
-  }
-
   // after All
   after(() => {
     (async () => {
       try {
         if (UTILS.getEnvVariable(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false) == true) {
-          cy.startOrStopPerformanceService(CONSTANTS.STOP).then((response) => {
+          cy.startOrStopPerformanceService(CONSTANTS.STOPPED).then((response) => {
             if (response) {
               Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false);
             }
@@ -192,16 +172,6 @@ export default function (module) {
           UTILS.unsubscribe(webSocketClient);
           Cypress.env('webSocketClient', null); // Clear the WebSocket client from Cypress environment
         }
-        // Delete the external TestCase directory if exist
-        cy.task('checkDirectoryExist', EXTERNAL_DIR).then((directoryExists) => {
-          if (directoryExists) {
-            cy.task('deleteFolder', EXTERNAL_DIR).then(() => {
-              cy.log(`Folder ${EXTERNAL_DIR} has been deleted.`);
-            });
-          } else {
-            cy.log(`External directory ${EXTERNAL_DIR} does not exist.`);
-          }
-        });
       } catch (err) {
         cy.log(`Something went wrong when attempting to unsubscribe: ${err}`);
       }
@@ -265,7 +235,7 @@ export default function (module) {
    * @description Start the sanity test using datable.
    * @param {Object} datatables - Contains the input variable to override default value to run suite files (Ex: appId, SDK mode)
    * @example
-   * startTest({"rawTable": [ ["paramType","variableName","value"], ["INPUT","asynchronous","false"]]})
+   * startTest({"rawTable": [ ["paramType","variableName","value"]]})
    */
   Cypress.Commands.add('startTest', (datatables) => {
     const additionalParams = {};
@@ -321,7 +291,7 @@ export default function (module) {
     }
 
     overrideParams.certification = UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false);
-    overrideParams.exceptionMethods = UTILS.generateExceptionListForSanity();
+    overrideParams.exceptionMethods = UTILS.generateCombinedExceptionList();
 
     // If certification is true override excluded methods and modules from config module if it is present else use the default lists in constants.
     if (overrideParams.certification == true) {
@@ -379,7 +349,7 @@ export default function (module) {
    * @param {string} command - Add-on function name present in config module.
    * @param {Object} intent - Basic intent message that will applicable to ALL platforms to start the test on FCA.
    * @example
-   * runIntentAddon("runTest", {"asynchronous": "false","communicationMode": "SDK","isAsync": false,"action": "CORE"})
+   * runIntentAddon("runTest", {"communicationMode": "SDK","action": "CORE"})
    */
   Cypress.Commands.add('runIntentAddon', (command, message) => {
     if (module && module.intentAddons && typeof module.intentAddons[command] === 'function') {
@@ -397,7 +367,7 @@ export default function (module) {
    * @param {string} responseTopic - Topic used to subscribe message
    * @param {Object} intent - Basic intent message that will applicable to ALL platforms to start the test on FCA.
    * @example
-   * cy.sendMessagetoApp('900218FFD490_appId_FCS',900218FFD490_appId_FCA,{"asynchronous": "false","communicationMode": "SDK","isAsync": false,"action": "search"}, 1000)
+   * cy.sendMessagetoApp('mac_appId_FCS',mac_appId_FCA,{"communicationMode": "SDK","action": "search"}, 1000)
    */
   Cypress.Commands.add('sendMessagetoApp', async (requestTopic, responseTopic, intent) => {
     const headers = { id: uuidv4() };
@@ -413,7 +383,7 @@ export default function (module) {
       !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
     ) {
       // Subscribe to topic and pass the results to the callback function
-      appTransport.subscribe(responseTopic, subscribeResults);
+      appTransport.subscribe(responseTopic, UTILS.subscribeResults);
       UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
     }
 
@@ -439,41 +409,6 @@ export default function (module) {
 
   /**
    * @module main
-   * @function subscribeResults
-   * @description Callback function to fetch the required response from subscribe and push it to a global queue
-   * @param {object} data - Response payload from subscribe call
-   * @param {object} metaData - Response headers from subscribe call
-   * @example
-   * subscribeResults('{ "result": { "type": "device", "value": "PD54331.." } }', headers:{id:1232435, client:fca})
-   **/
-  function subscribeResults(data, metaData) {
-    const queueInput = {};
-    queueInput.data = data;
-    queueInput.metaData = metaData;
-    // Push the data and metadata as an object to queue
-    UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE).enqueue(queueInput);
-  }
-
-  /**
-   * @module main
-   * @function destroyGlobalObjects
-   * @description Destroy global objects and recursively clear the environment variables whose name is stored in the list if present, before test execution. List of names of global object to be cleared can be passed
-   *  @param {object} objectNameList - list of objects to be cleared
-   *  @example
-   * destroyGlobalObjects(['lifecycleAppObjectList'])
-   **/
-  function destroyGlobalObjects(objectNameList) {
-    for (const objectName of objectNameList) {
-      const objectListEnv = Cypress.env(objectName);
-      for (const appObject in objectListEnv) {
-        Cypress.env(objectListEnv[appObject], null);
-      }
-      Cypress.env(objectName, []);
-    }
-  }
-
-  /**
-   * @module main
    * @function generateAndPushReports
    * @description Generate required reports once test is executed
    * @param {object} jsonObj - JSON response from third party app
@@ -484,7 +419,7 @@ export default function (module) {
     if (CONSTANTS.GENERATE_HTML_REPORT) {
       const fileNamePrefix = uuidv4();
       const outputDirectory = defaultDirectory + fileNamePrefix + path.sep;
-      const isWritten = writeJsonToFileForReporting(jsonObj, outputDirectory, fileNamePrefix);
+      const isWritten = UTILS.writeJsonToFileForReporting(jsonObj, outputDirectory, fileNamePrefix);
       if (isWritten) {
         cy.convertJsonToHTML(outputDirectory, fileNamePrefix + jsonFile).then((isConverted) => {
           if (isConverted) {
@@ -503,46 +438,6 @@ export default function (module) {
     }
   });
 
-  async function writeJsonToFileForReporting(jsonData, defaultDirectory, fileNamePrefix) {
-    const jsonObj = jsonData;
-    const jsonContent = JSON.stringify(jsonObj, null, 4);
-    const fileName = fileNamePrefix + jsonFile;
-
-    cy.task(CONSTANTS.WRITE_TO_FILE, {
-      fileName: defaultDirectory + fileName,
-      data: jsonContent,
-    }).then((isWritten) => {
-      return isWritten;
-    });
-  }
-
-  // Convert mochawesome json to html report
-  Cypress.Commands.add('convertJsonToHTML', (defaultDirectory, fileName) => {
-    const command =
-      'npx marge ' +
-      defaultDirectory +
-      fileName +
-      ' -f report -t "' +
-      'TestSuiteReport' +
-      '" -p "' +
-      'TestSuiteReport' +
-      '" -o ' +
-      defaultDirectory;
-    try {
-      // run command to generate html report
-      cy.task(CONSTANTS.EXECUTE_SHELL, command).then((response) => {
-        if (response.stdout.includes('Reports saved')) {
-          return true;
-        }
-        console.log(response);
-        return false;
-      });
-    } catch (err) {
-      console.log(err);
-      return false;
-    }
-  });
-
   /**
    * @module main
    * @function testDataHandler
@@ -557,6 +452,11 @@ export default function (module) {
     const defaultRetVal = dataIdentifier;
     switch (requestType) {
       case CONSTANTS.PARAMS:
+        // Fetching the value of environment variable based on dataIdentifier
+        if (/CYPRESSENV/.test(dataIdentifier)) {
+          const envParam = dataIdentifier.split('-')[1];
+          return UTILS.getEnvVariable(envParam);
+        }
         const moduleName = UTILS.extractModuleName(dataIdentifier);
 
         // Fetching the params from json files based on dataIdentifier.
@@ -665,81 +565,65 @@ export default function (module) {
    * cy.testDataParser("Params","Account_Id", "account");
    */
   Cypress.Commands.add('testDataParser', (requestType, dataIdentifier, moduleName) => {
-    const defaultImportFile = CONSTANTS.DEFAULT_PATH;
     let defaultRetVal = dataIdentifier;
+    let response;
     if (requestType == CONSTANTS.PARAMS) {
       defaultRetVal = { value: dataIdentifier };
     }
 
     // Check for the data in defaultTestData.json
-    cy.getDataFromTestDataJson(defaultImportFile, dataIdentifier, requestType).then(
-      (defaultImportData) => {
-        let paramData = defaultImportData;
+    const defaultTestData = UTILS.getEnvVariable(CONSTANTS.COMBINEDDEFAULTTESTDATA);
+    let paramData = parseDataFromTestDataJson(defaultTestData, dataIdentifier, requestType);
 
-        // Variables that come from a module will be formatted as '<Module>_<Variable>'
-        // Ex: "Device_Model" should go to "Device.json" and look up variable "Model"
-        if (dataIdentifier.includes('_')) {
-          moduleName = !moduleName ? UTILS.extractModuleName(dataIdentifier) : moduleName;
-          dataIdentifier = dataIdentifier.slice(dataIdentifier.indexOf('_') + 1);
-          const moduleImportPath = `${CONSTANTS.MODULES_PATH}${moduleName}.json`;
-          const externalModulePath = `${CONSTANTS.EXTERNAL_PATH}${moduleName}.json`;
+    // Variables that come from a module will be formatted as '<Module>_<Variable>'
+    // Ex: "Device_Model" should go to "Device.json" and look up variable "Model"
+    if (dataIdentifier.includes('_')) {
+      moduleName = !moduleName ? UTILS.extractModuleName(dataIdentifier) : moduleName;
+      dataIdentifier = dataIdentifier.slice(dataIdentifier.indexOf('_') + 1);
+      const moduleImportPath = `${CONSTANTS.MODULES_PATH}${moduleName}.json`;
+      const externalModulePath = `${CONSTANTS.EXTERNAL_PATH}${moduleName}.json`;
 
-          // Data in modules directory has high priority than defaultTestData, if data is found it will be replaced with data found in defaultTestData.json
-          cy.getDataFromTestDataJson(moduleImportPath, dataIdentifier, requestType).then(
-            (moduleData) => {
-              paramData = moduleData != CONSTANTS.NO_DATA ? moduleData : paramData;
+      // Data in modules directory has high priority than defaultTestData, if data is found it will be replaced with data found in defaultTestData.json
+      cy.getDataFromTestDataJson(moduleImportPath, dataIdentifier, requestType).then(
+        (moduleData) => {
+          paramData = moduleData != CONSTANTS.NO_DATA ? moduleData : paramData;
 
-              // Checking the data from the external json file only if it is present.
-              cy.task(CONSTANTS.READ_FILES_FROM_DIRECTORY, CONSTANTS.CYPRESS_MODULES_PATH).then(
-                (data) => {
-                  if (data && data.includes(`${moduleName}.json`)) {
-                    // Data in external/modules directory has high priority than defaultTestData and modules, if data is found it will be replaced with data found in modules directry/defaultTestData.json
-                    cy.getDataFromTestDataJson(
-                      externalModulePath,
-                      dataIdentifier,
-                      requestType
-                    ).then((externalModuleData) => {
-                      paramData =
-                        externalModuleData != CONSTANTS.NO_DATA ? externalModuleData : paramData;
-                      if (paramData == CONSTANTS.NO_DATA) {
-                        cy.log(
-                          `Expected data ${dataIdentifier} was not found in the default file, FCS module JSON file, or external module JSON file. Returning ${dataIdentifier} as is.`
-                        ).then(() => {
-                          return defaultRetVal;
-                        });
-                      } else {
-                        return paramData;
-                      }
-                    });
-                  } else {
-                    if (paramData == CONSTANTS.NO_DATA) {
-                      cy.log(
-                        `Expected data ${dataIdentifier} was not found in default file or module JSON file. Returning ${dataIdentifier} as is.`
-                      ).then(() => {
-                        return defaultRetVal;
-                      });
-                    } else {
-                      return paramData;
-                    }
+          // Checking the data from the external json file only if it is present.
+          cy.task(CONSTANTS.READ_FILES_FROM_DIRECTORY, CONSTANTS.CYPRESS_MODULES_PATH).then(
+            (data) => {
+              if (data && data.includes(`${moduleName}.json`)) {
+                // Data in external/modules directory has high priority than defaultTestData and modules, if data is found it will be replaced with data found in modules directry/defaultTestData.json
+                cy.getDataFromTestDataJson(externalModulePath, dataIdentifier, requestType).then(
+                  (externalModuleData) => {
+                    paramData =
+                      externalModuleData != CONSTANTS.NO_DATA ? externalModuleData : paramData;
+                    response = paramDatalogs(paramData, dataIdentifier, defaultRetVal);
+                    return response;
                   }
-                }
-              );
+                );
+              } else {
+                response = paramDatalogs(paramData, dataIdentifier, defaultRetVal);
+                return response;
+              }
             }
           );
-        } else {
-          if (paramData == CONSTANTS.NO_DATA) {
-            cy.log(
-              `Expected data ${dataIdentifier} was not found in default file. Returning ${dataIdentifier} as is.`
-            ).then(() => {
-              return defaultRetVal;
-            });
-          } else {
-            return paramData;
-          }
         }
-      }
-    );
+      );
+    } else {
+      response = paramDatalogs(paramData, dataIdentifier, defaultRetVal);
+      return response;
+    }
   });
+
+  function paramDatalogs(paramData, dataIdentifier, defaultRetVal) {
+    if (paramData == CONSTANTS.NO_DATA) {
+      cy.log(eval(CONSTANTS.EXPECTED_DATA_NOT_FOUND_IN_MODULE_JSONS)).then(() => {
+        return defaultRetVal;
+      });
+    } else {
+      return paramData;
+    }
+  }
 
   /**
    * @module main
@@ -752,23 +636,24 @@ export default function (module) {
    */
   function parseDataFromTestDataJson(paramData, dataIdentifier, requestType) {
     let returnData;
-    if (requestType == CONSTANTS.PARAMS) {
-      if (paramData[dataIdentifier] !== undefined) {
-        if (
-          typeof paramData[dataIdentifier] == CONSTANTS.STRING ||
-          typeof paramData[dataIdentifier] == CONSTANTS.BOOLEAN ||
-          typeof paramData[dataIdentifier] == CONSTANTS.NUMBER ||
-          paramData[dataIdentifier] === null
-        ) {
+    if (paramData[dataIdentifier] !== undefined) {
+      if (
+        typeof paramData[dataIdentifier] == CONSTANTS.STRING ||
+        typeof paramData[dataIdentifier] == CONSTANTS.BOOLEAN ||
+        typeof paramData[dataIdentifier] == CONSTANTS.NUMBER ||
+        paramData[dataIdentifier] === null
+      ) {
+        if (requestType == CONSTANTS.PARAMS) {
           returnData = { value: paramData[dataIdentifier] };
         } else {
           returnData = paramData[dataIdentifier];
         }
+      } else {
+        returnData = paramData[dataIdentifier];
       }
     } else {
-      returnData = paramData[dataIdentifier];
+      returnData = CONSTANTS.NO_DATA;
     }
-
     return returnData;
   }
 
@@ -785,60 +670,10 @@ export default function (module) {
     cy.task('readFileIfExists', modulePath).then((data) => {
       if (data) {
         data = JSON.parse(data);
-        const response = parseDataFromTestDataJson(data, dataIdentifier, requestType);
-
-        if (response !== undefined) {
-          return response;
-        } else {
-          return CONSTANTS.NO_DATA;
-        }
+        const parsedTestData = parseDataFromTestDataJson(data, dataIdentifier, requestType);
+        return parsedTestData;
       }
       return CONSTANTS.NO_DATA;
     });
-  });
-
-  /**
-   * @module main
-   * @function customValidation
-   * @description Command to execute the custom validations in configModule
-   * @param {*} functionName - The name of custom validation function
-   * @param {*} apiOrEventObject - The response of the method or event
-   * @example
-   * cy.customValidation("customMethod1","apiResponseObject")
-   */
-
-  Cypress.Commands.add('customValidation', (fcsValidationObjectData, apiOrEventObject) => {
-    // to check whether validationObject has assertionDef as the field
-    if (fcsValidationObjectData && fcsValidationObjectData.assertionDef) {
-      const functionName = fcsValidationObjectData.assertionDef;
-      // to check whether config module has customValidations function
-      if (module && module.customValidations) {
-        // to check whether customValidations has a function as the functionName passed
-        if (
-          module.customValidations[functionName] &&
-          typeof module.customValidations[functionName] === 'function'
-        ) {
-          message = module.customValidations[functionName](apiOrEventObject);
-        } else if (
-          // if customValidations doesn't have a function as the functionName passed
-          !module.customValidations[functionName] ||
-          typeof module.customValidations[functionName] != 'function'
-        ) {
-          assert(
-            false,
-            `Expected customValidationMethod ${functionName} was not found in the validationFunctions file.`
-          );
-        }
-      } else {
-        // if config module doesn't have customValidations function
-        assert(
-          false,
-          `Expected customValidationMethod ${functionName} was not found in the validationFunctions file.`
-        );
-      }
-    } else {
-      // if config module doesn't have customValidations function
-      assert(false, `Expected customValidationMethod was not found in the validationObject.`);
-    }
   });
 }

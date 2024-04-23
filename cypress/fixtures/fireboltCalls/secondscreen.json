@@ -33,41 +33,34 @@
     },
     "EXPECTED_SECONDSCREEN_DEVICE": {
         "method": "secondscreen.device",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECONDSCREEN_DEVICE"
     },
     "EXPECTED_SECONDSCREEN_PROTOCOLS": {
         "method": "secondscreen.protocols",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECONDSCREEN_PROTOCOLS"
     },
     "INVALID_PARAMETERS_FOR_SECONDSCREEN_DEVICE": {
         "method": "secondscreen.device",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "GUEST_ROOM_FOR_SECONDSCREEN_FRIENDLYNAME": {
         "method": "secondscreen.friendlyName",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "SECONDSCREEN_FRIENDLYNAME"
     },
     "ONFRIENDLYNAMECHANGED_FOR_SECONDSCREEN_WITH_GUEST_ROOM": {
-        "method": null,
         "event": "secondscreen.onFriendlyNameChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse",
         "expected": "SECONDSCREEN_FRIENDLYNAME"
     },
     "NULL_FOR_SECONDSCREEN_ONFRIENDLYNAMECHANGED_EVENT": {
         "event": "secondscreen.onFriendlyNameChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "SECONDSCREEN_ONLAUNCHREQUEST": {
         "method": "secondscreen.onLaunchRequest"
@@ -78,13 +71,35 @@
     "NULL_FOR_SECONDSCREEN_ONLAUNCHREQUEST_EVENT": {
         "event": "secondscreen.onLaunchRequest",
         "validationJsonPath": "eventResponse",
-        "expected": "NULL",
-        "expectingError": false
+        "expected": "NULL"
     },
     "NULL_FOR_SECONDSCREEN_ONCLOSEREQUEST_EVENT": {
         "event": "secondscreen.onCloseRequest",
         "validationJsonPath": "eventResponse",
         "expected": "NULL",
         "expectingError": false
+    },
+    "GET_SECONDSCREEN_DEVICE": {
+        "method": "secondscreen.device"
+    },
+    "EXPECT_ERROR_FOR_SECONDSCREEN_DEVICE": {
+        "method": "secondscreen.device",
+        "expected": "error"
+    },
+    "INVALID_REQUEST_FOR_SECONDSCREEN_DEVICE": {
+        "method": "secondscreen.device",
+        "validationJsonPath": "result",
+        "expected": "INVALID_REQUEST",
+        "expectingError": true
+    },
+    "EXPECTED_SECONDSCREEN_ONLAUNCHREQUEST_EVENT": {
+        "event": "secondscreen.onLaunchRequest",
+        "validationJsonPath": "eventResponse",
+        "expected": "SECONDSCREEN_ONLAUNCHREQUEST"
+    },
+    "EXPECTED_SECONDSCREEN_ONCLOSEREQUEST_EVENT": {
+        "event": "secondscreen.onCloseRequest",
+        "validationJsonPath": "eventResponse",
+        "expected": "SECONDSCREEN_ONCLOSEREQUEST"
     }
 }

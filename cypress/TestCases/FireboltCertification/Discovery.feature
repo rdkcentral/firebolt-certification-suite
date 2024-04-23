@@ -1,13 +1,13 @@
 Feature: Discovery
 
-   @initialization
-   Scenario: Launch FCA for 'Discovery'
+   Background: Launch FCA for 'Discovery'
       Given the environment has been set up for 'Discovery' tests
       And 3rd party 'certification' app is launched
 
    @Discovery @coreSDK @sdk @transport
    Scenario Outline: Discovery.policy - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'discovery onPolicyChanged' event using the 'Firebolt' API
+      And '3rd party app' invokes the 'Firebolt' API to 'get value of policy'
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
       When '3rd party app' invokes the 'Firebolt' API to 'get value of policy'
@@ -57,21 +57,6 @@ Feature: Discovery
          | Scenario                | API_Key                                     |
          | With valid params       | notify entitlements                         |
          | With only entitlementId | notify entitlements with entitlementid only |
-
-   @Discovery @coreSDK @sdk @transport
-   Scenario Outline: Discovery.signIn - Positive Scenario: <Scenario>
-      When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds with 'true for user signedIn in discovery'
-
-      Examples:
-         | Scenario             | API_Key                                        |
-         | With entitlements    | notify user has signed In with entitlements    |
-         | Without entitlements | notify user has signed In without entitlements |
-
-   @Discovery @coreSDK @sdk @transport
-   Scenario: Discovery.signOut - Positive Scenario: Validate discovery signOut
-      When '3rd party app' invokes the 'Firebolt' API to 'notify user has signed out'
-      Then 'Firebolt' platform responds with 'true for user signed out in discovery'
 
    @Discovery @coreSDK @sdk @transport
    Scenario Outline: Discovery.watched - Negative Scenario: <Scenario> expecting error

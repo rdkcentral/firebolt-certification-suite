@@ -11,27 +11,29 @@
     },
     "ACCOUNT_ID": {
 		"method": "account.id",
-		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "ACCOUNT_ID"
 	},
     "ACCOUNT_UID": {
 		"method": "account.uid",
-		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "ACCOUNT_UID"
 	},
     "INVALID_PARAMETER_ERROR_FOR_ACCOUNT_ID": {
 		"method": "account.id",
-		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "INVALID_TYPE_PARAMS"
 	},
     "INVALID_PARAMETER_ERROR_FOR_ACCOUNT_UID": {
 		"method": "account.uid",
-		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "INVALID_TYPE_PARAMS"
+	},
+    "INVALID_REQUEST_ERROR_FOR_ACCOUNT_UID": {
+		"method": "account.uid",
+		"validationJsonPath": "result",
+		"expected": "INVALID_REQUEST",
+        "expectingError": true
 	},
     "PUSH_SESSION_TOKEN":{
         "method": "manage_account.session",
@@ -39,7 +41,6 @@
     },
     "NULL_FOR_ACCOUNT_SESSION":{
         "method": "account.session",
-		"context": "noContext",
 		"validationJsonPath": "result",
 		"expected": "NULL"
     },
@@ -55,8 +56,6 @@
     },
 	"INVALID_PARAMETERS_FOR_ACCOUNT_SESSION": {
 		"method": "account.session",
-        "event": null,
-        "context": "noContext",
 		"validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
@@ -73,7 +72,6 @@
     },
     "SET_ACCOUNT_SESSION_WITHOUT_PARAMETERS":{
         "method": "manage_account.session",
-		"params": "EMPTYPARAM",
 		"expected": "error"
     },
     "FETCH_ACCOUNT_ID_WHEN_DEVICE_IS_NOT_PROVISIONED": {

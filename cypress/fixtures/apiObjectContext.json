@@ -9,5 +9,8 @@
     "DISCOVERY_LAUNCH_SECTION" : {"type":"section"},
     "DISCOVERY_LAUNCH_TUNE" : {"type":"tune"},
     "DISCOVERY_LAUNCH_PLAYENTITY" : {"type":"play-entity"},
-    "DISCOVERY_LAUNCH_PLAYQUERY" : {"type":"play-query"}
+    "DISCOVERY_LAUNCH_PLAYQUERY" : {"type":"play-query"},
+    "CAPABILITIES_GRANTED_USE": {"role": "use"},
+    "CAPABILITIES_GRANTED_MANAGE": {"role": "manage"},
+    "CAPABILITIES_GRANTED_PROVIDE": {"role": "provide"}
 }

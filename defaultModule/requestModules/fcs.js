@@ -84,4 +84,9 @@ function setTestProvider(parsedData) {
   cy.log(parsedData.params + ' Provider is not required for MF');
 }
 
-module.exports = { setResponse, setTestProvider };
+function setLifecycleState(parsedData) {
+  cy.log(CONSTANTS.SET_LIFECYCLE_STATE_MISSING).then(() => {
+    throw new Error(CONSTANTS.SET_LIFECYCLE_STATE_MISSING);
+  });
+}
+module.exports = { setResponse, setTestProvider, setLifecycleState };

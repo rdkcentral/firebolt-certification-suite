@@ -104,7 +104,7 @@ export CYPRESS_isCombinedTestRun=$isCombinedTest
 
 # Function to execute cypress run with reporter-options
 run() {
-  command="cypress run --e2e --reporter-options reportDir=./reports/$jobId,overwrite=false"
+  command="cypress run --e2e"
   # modify params if they contain spaces and add it to finalCommand
   modifyParams $params
   finalCommand="$command $params"

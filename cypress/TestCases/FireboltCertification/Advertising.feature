@@ -1,13 +1,13 @@
 Feature: Advertising
 
-   @initialization
-   Scenario: Launch FCA for 'Advertising'
+   Background: Launch FCA for 'Advertising'
       Given the environment has been set up for 'Advertising' tests
       And 3rd party 'certification' app is launched
 
    @Advertising @coreSDK @sdk @transport
    Scenario Outline: Advertising.policy - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
+      And '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowAppContentAdTargeting'
       When '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
@@ -22,6 +22,7 @@ Feature: Advertising
    @Advertising @coreSDK @sdk @transport
    Scenario Outline: Advertising.policy - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
+      And '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds to '1st party app' with 'null for advertising setSkipRestriction'
       When '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
@@ -47,6 +48,8 @@ Feature: Advertising
 
    @Advertising @coreSDK @sdk @transport
    Scenario Outline: Advertising.advertisingId - Positive Scenario: Special Validation <Scenario>
+      When '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
+      And '3rd party app' invokes the 'Firebolt' API to 'get initialization parameters'
       When 1st party app invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowAppContentAdTargeting'
       When '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
@@ -75,7 +78,8 @@ Feature: Advertising
 
    @Advertising @coreSDK @sdk @transport
    Scenario Outline: Advertising.config - special Scenario: Validation <Scenario>
-      When 1st party app invokes the 'Firebolt' API to '<MANAGE_API_Key>'
+      When '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
+      And 1st party app invokes the 'Firebolt' API to '<MANAGE_API_Key>'
       Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowAppContentAdTargeting'
       When '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
       Then 'Firebolt' platform responds with '<Method_Validation_key>'
@@ -107,6 +111,7 @@ Feature: Advertising
    @Advertising @coreSDK @sdk @transport
    Scenario Outline: Advertising.advertisingId - Positive Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<MANAGE_API_Key>'
+      And '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
       Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowAppContentAdTargeting'
       When '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'

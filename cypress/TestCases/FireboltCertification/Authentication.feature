@@ -1,7 +1,6 @@
 Feature: Authentication
 
-   @initialization
-   Scenario: Launch FCA for 'Authentication'
+   Background: Launch FCA for 'Authentication'
       Given the environment has been set up for 'Authentication' tests
       And 3rd party 'certification' app is launched
 
@@ -30,7 +29,7 @@ Feature: Authentication
          | Get Root token type    | fetch root token    | authentication root    | root    |
 
    @Authentication @coreSDK @sdk @transport
-   Scenario Outline: Authentication.token - Negative Scenario: <Scenario>
+   Scenario Outline: Authentication.token - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
 

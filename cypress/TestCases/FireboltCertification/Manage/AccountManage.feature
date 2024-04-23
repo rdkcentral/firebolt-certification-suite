@@ -1,7 +1,6 @@
 Feature: Account_Manage
 
-   @initialization
-   Scenario: Launch FCA for 'Account'
+   Background: Launch FCA for 'Account'
       Given the environment has been set up for 'Account' tests
       And 3rd party 'certification' app is launched
 

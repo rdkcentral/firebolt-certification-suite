@@ -32,7 +32,7 @@
         "firstParty": false
     },
     "SECONDSCREEN_ONFRIENDLYNAMECHANGED_EVENT":{
-        "event": "localization.onLanguageChanged",
+        "event": "secondscreen.onFriendlyNameChanged",
         "firstParty": false
     },
     "SECONDSCREEN_ONLAUNCHREQUEST_EVENT":{

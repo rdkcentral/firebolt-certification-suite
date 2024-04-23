@@ -15,27 +15,6 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-const { defineConfig } = require('cypress');
-const setupNodeEvents = require('./cypress/plugins/cucumber.js');
-const {
-  reporter,
-  reporterOptions,
-  env,
-  e2e,
-  chromeWebSecurity,
-} = require('./cypress/support/common');
-
-module.exports = defineConfig({
-  reporter,
-  reporterOptions,
-  env,
-  e2e: {
-    ...e2e,
-    setupNodeEvents,
-    specPattern: '**/Sanity/*.feature',
-  },
-  defaultCommandTimeout: 30000,
-  chromeWebSecurity,
-  video: false,
-  screenshotOnRunFailure: false,
-});
+import './commands';
+import './assertion';
+import './lifecycle';

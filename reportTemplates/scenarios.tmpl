@@ -159,7 +159,7 @@ SPDX-License-Identifier: Apache-2.0
                                             for (var i = 0; i < step.embeddings.length; i++) {
                                                 var embedding = step.embeddings[i];
                                                
-                                                if (embedding.data !== undefined && embedding.data.includes("ConfigModule")) { %>
+                                                if (embedding.data !== undefined && (embedding.data.includes("ConfigModule") || embedding.data.includes("NotSupported"))) { %>
                                                     <pre class="info" id="output<%= scenarioCounter %>"></pre>
                                                     <script>
                                                         var inputString = '<%= embedding.data %>';

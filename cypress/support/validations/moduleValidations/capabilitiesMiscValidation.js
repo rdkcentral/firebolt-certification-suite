@@ -56,7 +56,9 @@ export function capabilitiesMiscValidation(method, validationTypeObject, apiOrEv
 function validateCapabilitiesInfo(method, validationTypeObject, apiOrEventObject) {
   const capabilityInfoResponse = apiOrEventObject.response.result;
   const fireboltConfig = UTILS.getEnvVariable(CONSTANTS.FIREBOLTCONFIG);
-  const deviceManifest = UTILS.getEnvVariable(CONSTANTS.DEVICEMANIFESTDATA);
+  const notSupportedCapabilitiesList = UTILS.getEnvVariable(
+    CONSTANTS.NOT_SUPPORTED_CAPABILITIES_LIST
+  );
   const passedList = [];
   const failureList = [];
 
@@ -71,14 +73,14 @@ function validateCapabilitiesInfo(method, validationTypeObject, apiOrEventObject
           ? passedList.push(capabilityResponseObject.capability)
           : failureList.push(capabilityResponseObject.capability);
       } else if (CONSTANTS.LEVEL_LIST.includes(capability.level)) {
-        if (deviceManifest.includes(capabilityResponseObject.capability)) {
-          // if level is could or should and if capability is defined in device-manifest it will be pushed to passedList else in failureList
+        if (notSupportedCapabilitiesList.includes(capabilityResponseObject.capability)) {
+          // if level is could or should and if capability is present in not supported capabilities list it will be pushed to failureList else in passedList
           capabilityResponseObject.supported == true
-            ? passedList.push(capabilityResponseObject.capability)
-            : failureList.push(capabilityResponseObject.capability);
+            ? failureList.push(capabilityResponseObject.capability)
+            : passedList.push(capabilityResponseObject.capability);
         } else {
-          // if level is could or should and if capability is not defined in device-manifest it will be pushed to passedList else in failureList
-          capabilityResponseObject.supported == false
+          // if level is could or should and if capability is not present in not supported capabilities list it will be pushed to passedList else in failureList
+          capabilityResponseObject.supported == true
             ? passedList.push(capabilityResponseObject.capability)
             : failureList.push(capabilityResponseObject.capability);
         }
@@ -113,31 +115,29 @@ function validateCapabilitiesInfo(method, validationTypeObject, apiOrEventObject
 function validateCapabilitiesSupported(method, validationTypeObject, apiOrEventObject) {
   const capabilityResponse = apiOrEventObject.response.result;
   const capabilityParam = apiOrEventObject.params.value;
-  const notSupportedCapabilitiesList = UTILS.getEnvVariable('notSupportedCapabilitiesList');
+  const notSupportedCapabilitiesList = UTILS.getEnvVariable(
+    CONSTANTS.NOT_SUPPORTED_CAPABILITIES_LIST
+  );
 
-  // Passed capability is not present in the not supported capabilities list, and the response is true considering the capability as supported.
-  if (!notSupportedCapabilitiesList.includes(capabilityParam) && capabilityResponse == true) {
-    cy.log(`Capability '${capabilityParam}' is supported`, 'validateCapabilitiesSupported').then(
-      () => {
-        assert.equal(true, true, `Capability '${capabilityParam}' is supported`);
-      }
-    );
-  }
-  // Passed capability is present in the not supported capabilities list, and the response is false considering the capability as not supported.
-  else if (notSupportedCapabilitiesList.includes(capabilityParam) && capabilityResponse == false) {
-    cy.log(
-      `Capability '${capabilityParam}' is not supported`,
-      'validateCapabilitiesSupported'
-    ).then(() => {
-      assert.equal(true, true, `Capability '${capabilityParam}' is not supported`);
-    });
+  const fireboltConfig = UTILS.getEnvVariable(CONSTANTS.FIREBOLTCONFIG);
+  const capability = fireboltConfig.capabilities[capabilityParam];
+  let capabilityStatus;
+
+  // check if level is must and supported is true/false
+  if (CONSTANTS.LEVEL_MUST.includes(capability.level)) {
+    capabilityStatus = capabilityResponse == true ? CONSTANTS.SUPPORTED : CONSTANTS.NOTSUPPORTED;
+    capabilitiesSupportedLogs(capabilityParam, capabilityStatus);
+  } else if (CONSTANTS.LEVEL_LIST.includes(capability.level)) {
+    // if level is could/should and supported is true/false
+    if (!notSupportedCapabilitiesList.includes(capabilityParam)) {
+      capabilityStatus = capabilityResponse == true ? CONSTANTS.SUPPORTED : CONSTANTS.NOTSUPPORTED;
+      capabilitiesSupportedLogs(capabilityParam, capabilityStatus);
+    } else {
+      capabilityStatus = capabilityResponse == false ? CONSTANTS.SUPPORTED : CONSTANTS.NOTSUPPORTED;
+      capabilitiesSupportedLogs(capabilityParam, capabilityStatus);
+    }
   } else {
-    cy.log(
-      `Device has an issue with the Capability : ${capabilityParam}`,
-      'validateCapabilitiesSupported'
-    ).then(() => {
-      assert.isTrue(false, `Device has an issue with the Capability : ${capabilityParam}`);
-    });
+    capabilityStatus = capabilitiesSupportedLogs(capabilityParam);
   }
 }
 
@@ -146,21 +146,21 @@ function validateCapabilitiesSupported(method, validationTypeObject, apiOrEventO
  * @function capabilitiesSupportedLogs
  * @description get logs based on param values passed for capabilities
  * @param {String} capabilityParam - capability
- * @param {String} paramVal - param value passed for capabilities
+ * @param {String} capabilityStatus - param value passed for capabilities
  * @example
  * capabilitiesSupportedLogs("xrn:firebolt:capability:lifecycle:initialize","supported")
  */
 // TODO: Planning to move it out of FCS and keep it in configModule
-function capabilitiesSupportedLogs(capabilityParam, paramVal) {
-  switch (paramVal) {
+function capabilitiesSupportedLogs(capabilityParam, capabilityStatus) {
+  switch (capabilityStatus) {
     case CONSTANTS.SUPPORTED:
-      cy.log(`Capability '${capabilityParam}' is not supported`, 'capabilitiesSupportedLogs').then(
+      cy.log(`Capability '${capabilityParam}' is supported`, 'capabilitiesSupportedLogs').then(
         () => {
-          assert.equal(true, true, 'capability not Supported');
+          assert.equal(true, true, `Capability '${capabilityParam}' is supported`);
         }
       );
       break;
-    case CONSTANTS.NOT_AVAILABLE:
+    case CONSTANTS.NOTAVAILABLE:
       cy.log(`Capability '${capabilityParam}' is not available`, 'capabilitiesSupportedLogs').then(
         () => {
           assert.isTrue(
@@ -173,7 +173,7 @@ function capabilitiesSupportedLogs(capabilityParam, paramVal) {
     case CONSTANTS.NOTSUPPORTED:
       cy.log(`Capability '${capabilityParam}' is not supported`, 'capabilitiesSupportedLogs').then(
         () => {
-          assert.equal(true, true, 'capability not Supported');
+          assert.equal(true, true, `Capability '${capabilityParam}' is not supported`);
         }
       );
       break;
@@ -223,6 +223,7 @@ function validateCapabilitiesRequest(method, validationTypeObject, apiOrEventObj
 Cypress.Commands.add('specialValidation', (validationObject) => {
   const { method, validationPath, expected, appId } = validationObject;
   let context = validationObject.context;
+  const skipCheck = validationObject.skipChecks ? validationObject.skipChecks : false;
   context = context ? context : CONSTANTS.NO_CONTEXT;
   cy.testDataHandler(CONSTANTS.CONTEXT, context).then((parsedContext) => {
     // const extractedApiObject = getAppObjectData(method, parsedContext);
@@ -231,16 +232,20 @@ Cypress.Commands.add('specialValidation', (validationObject) => {
       parsedContext,
       appId
     );
-    const apiResponseContent = eval('methodOrEventObject.response.' + validationPath);
-    const message = Object.keys(parsedContext).length
-      ? parsedContext
-      : { role: validationPath.split('.')[1] };
-    cy.log(
-      `Method content validation for ${method} for ${JSON.stringify(
-        message
-      )} expected ${expected} to be ${apiResponseContent}`
-    ).then(() => {
-      assert.equal(expected, apiResponseContent, 'Equal to be');
-    });
+    cy.validateResponseErrorAndSchemaResult(methodOrEventObject, CONSTANTS.METHOD, skipCheck).then(
+      () => {
+        const apiResponseContent = eval('methodOrEventObject.response.' + validationPath);
+        const message = Object.keys(parsedContext).length
+          ? parsedContext
+          : { role: validationPath.split('.')[1] };
+        cy.log(
+          `Method content validation for ${method} for ${JSON.stringify(
+            message
+          )} expected ${expected} to be ${apiResponseContent}`
+        ).then(() => {
+          assert.equal(expected, apiResponseContent, 'Equal to be');
+        });
+      }
+    );
   });
 });

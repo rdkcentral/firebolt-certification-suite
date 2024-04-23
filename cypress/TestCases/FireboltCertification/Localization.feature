@@ -1,7 +1,6 @@
 Feature: Localization
 
-    @initialization
-    Scenario: Launch FCA for 'Localization'
+    Background: Launch FCA for 'Localization'
         Given the environment has been set up for 'Localization' tests
         And 3rd party 'certification' app is launched
 
@@ -12,7 +11,8 @@ Feature: Localization
 
     @Localization @coreSDK @sdk @transport
     Scenario Outline: Localization.addAdditionalInfo - Positive Scenario: <Scenario>
-        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
+        When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
+        And 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'null for localization addAdditionalInfo'
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         Then 'Firebolt' platform responds with '<Validation_Key>'
@@ -24,7 +24,8 @@ Feature: Localization
 
     @Localization @coreSDK @sdk @transport
     Scenario Outline: Localization.removeAdditionalInfo - Positive Scenario: <Scenario>
-        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
+        When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
+        And 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'null for localization removeAdditionalInfo'
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         Then 'Firebolt' platform responds with '<Validation_Key>'
@@ -35,7 +36,7 @@ Feature: Localization
             | with key and value as empty string | set localization removeAdditionalInfo with empty string | empty response for localization additionalInfo  |
 
     @Localization @coreSDK @sdk @transport
-    Scenario Outline: localization.<Scenario> - Positive Scenario: Get <Scenario>
+    Scenario Outline: Localization.<Scenario> - Positive Scenario: Get <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
 
@@ -49,6 +50,7 @@ Feature: Localization
     @Localization @coreSDK @sdk @transport
     Scenario Outline: <Method> - Positive Scenario: Validate <Scenario>
         When '3rd party app' registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
+        And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
@@ -57,14 +59,14 @@ Feature: Localization
 
         Examples:
             | Scenario                                   | Method                               | Event_Registration_Key                        | Set_API_Key                             | Get_API_Key                              | Method_Validation_Key                            | Event_Validation_Key                                               | Set_Method_Content                               |
-            | Set & get locality                         | localization.locality                | localization onLocalityChanged                | set localization locality to washington | get localization locality                | washington for localization locality             | onlocalitychanged for localization locality with washington        | null for localization setLocality                |
-            | Set & get countrycode                      | localization.countrycode             | localization onCountryCodeChanged             | set countrycode to PH                   | get localization countrycode             | PH for localization countrycode                  | oncountrycodechanged for localization with ph                      | null for localization setCountrycode             |
-            | Set & get locale                           | localization.locale                  | localization onLocaleChanged                  | set locale to enUK                      | get localization locale                  | enUK for localization locale                     | onlocalechanged for localization with enUK                         | null for localization setLocale                  |
-            | Set & get Language es                      | localization.language                | localization onLanguageChanged                | set language to es                      | get localization language                | es for localization language                     | onlanguagechanged for localization with es                         | null for localization setLanguage                |
-            | Set & get Language en                      | localization.language                | localization onLanguageChanged                | set language to en                      | get localization language                | en for localization language                     | onlanguagechanged for localization with en                         | null for localization setLanguage                |
-            | Set & get preferredAudioLanguages(spa-eng) | localization.preferredAudioLanguages | localization onPreferredAudioLanguagesChanged | set preferredaudiolanguages to spa eng  | get localization preferredaudiolanguages | spa eng for localization preferredaudiolanguages | onpreferredaudiolanguageschanged for localization with eng spa     | null for localization setPreferredAudioLanguages |
-            | Set & get preferredAudioLanguages(eng-spa) | localization.preferredAudioLanguages | localization onPreferredAudioLanguagesChanged | set preferredaudiolanguages to eng spa  | get localization preferredaudiolanguages | eng spa for localization preferredaudiolanguages | onpreferredaudiolanguageschanged for localization with eng and spa | null for localization setPreferredAudioLanguages |
-            | Set & get PostalCode                       | localization.postalCode              | localization onPostalCodeChanged              | set postalcode to 12345                 | get postalcode                           | 12345 for localization postalcode                | onpostalcodechanged for localization with 123456                   | null for localization setPostalCode              |
+            | Set & get locality                         | Localization.locality                | localization onLocalityChanged                | set localization locality to washington | get localization locality                | washington for localization locality             | onlocalitychanged for localization locality with washington        | null for localization setLocality                |
+            | Set & get countrycode                      | Localization.countrycode             | localization onCountryCodeChanged             | set countrycode to PH                   | get localization countrycode             | PH for localization countrycode                  | oncountrycodechanged for localization with ph                      | null for localization setCountrycode             |
+            | Set & get locale                           | Localization.locale                  | localization onLocaleChanged                  | set locale to enUK                      | get localization locale                  | enUK for localization locale                     | onlocalechanged for localization with enUK                         | null for localization setLocale                  |
+            | Set & get Language es                      | Localization.language                | localization onLanguageChanged                | set language to es                      | get localization language                | es for localization language                     | onlanguagechanged for localization with es                         | null for localization setLanguage                |
+            | Set & get Language en                      | Localization.language                | localization onLanguageChanged                | set language to en                      | get localization language                | en for localization language                     | onlanguagechanged for localization with en                         | null for localization setLanguage                |
+            | Set & get preferredAudioLanguages(spa-eng) | Localization.preferredAudioLanguages | localization onPreferredAudioLanguagesChanged | set preferredaudiolanguages to spa eng  | get localization preferredaudiolanguages | spa eng for localization preferredaudiolanguages | onpreferredaudiolanguageschanged for localization with eng spa     | null for localization setPreferredAudioLanguages |
+            | Set & get preferredAudioLanguages(eng-spa) | Localization.preferredAudioLanguages | localization onPreferredAudioLanguagesChanged | set preferredaudiolanguages to eng spa  | get localization preferredaudiolanguages | eng spa for localization preferredaudiolanguages | onpreferredaudiolanguageschanged for localization with eng and spa | null for localization setPreferredAudioLanguages |
+            | Set & get PostalCode                       | Localization.postalCode              | localization onPostalCodeChanged              | set postalcode to 12345                 | get postalcode                           | 12345 for localization postalcode                | onpostalcodechanged for localization postalCode with 12345                   | null for localization setPostalCode              |
 
     @Device @coreSDK @regression @sdk
     Scenario Outline: Localization.<Method_Name> - Positive Scenario: Clearing event listeners

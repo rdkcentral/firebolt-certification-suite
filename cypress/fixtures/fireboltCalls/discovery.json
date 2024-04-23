@@ -11,19 +11,21 @@
     },
     "TRUE_FOR_HISTORY_BASED_RECOMMENDATIONS_IN_POLICY": {
         "method": "discovery.policy",
+        "validationJsonPath": "result.enableRecommendations",
+        "expected": "TRUE"
+    },
+    "FALSE_FOR_HISTORY_BASED_SHAREWATCHHISTORY_IN_POLICY": {
+        "method": "discovery.policy",
         "event": null,
         "context": "noContext",
-        "validationJsonPath": "result.enableRecommendations",
-        "expected": "TRUE",
+        "validationJsonPath": "result.shareWatchHistory",
+        "expected": "FALSE",
         "expectingError": false
     },
     "ONPOLICYCHANGED_FOR_DISCOVERY_ENABLERECOMMENDATIONS_WITH_TRUE": {
-        "method": null,
         "event": "discovery.onPolicyChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse.enableRecommendations",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "DISABLE_RECOMMENDATIONS": {
         "method": "manage_privacy.setAllowPersonalization",
@@ -31,19 +33,13 @@
     },
     "FALSE_FOR_HISTORY_BASED_RECOMMENDATIONS_IN_POLICY": {
         "method": "discovery.policy",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result.enableRecommendations",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "ONPOLICYCHANGED_FOR_DISCOVERY_ENABLERECOMMENDATIONS_WITH_FALSE": {
-        "method": null,
         "event": "discovery.onPolicyChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse.enableRecommendations",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "ENABLE_REMEMBER_WATCHED_PROGRAMS": {
         "method": "manage_privacy.setAllowWatchHistory",
@@ -51,19 +47,13 @@
     },
     "TRUE_FOR_REMEMBER_WATCHED_PROGRAMS_IN_POLICY": {
         "method": "discovery.policy",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result.rememberWatchedPrograms",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "ONPOLICYCHANGED_FOR_DISCOVERY_REMEMBERWATCHEDPROGRAMS_WITH_TRUE": {
-        "method": null,
         "event": "discovery.onPolicyChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse.rememberWatchedPrograms",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "DISABLE_REMEMBER_WATCHED_PROGRAMS": {
         "method": "manage_privacy.setAllowWatchHistory",
@@ -71,21 +61,19 @@
     },
     "FALSE_FOR_REMEMBER_WATCHED_PROGRAMS_IN_POLICY": {
         "method": "discovery.policy",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result.rememberWatchedPrograms",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "ONPOLICYCHANGED_FOR_DISCOVERY_REMEMBERWATCHEDPROGRAMS_WITH_FALSE": {
-        "method": null,
         "event": "discovery.onPolicyChanged",
-        "context": "noContext",
         "validationJsonPath": "eventResponse.rememberWatchedPrograms",
-        "expected": "FALSE",
-        "expectingError": false
+        "expected": "FALSE"
     },
     "NOTIFY_WATCHED_CONTENT_WITH_ONLY_ENTITYID": {
+        "method": "discovery.watched",
+        "params": "DISCOVERY_WATCHED_ONLY_ENTITY_ID"
+    },
+    "EXPECT_ERROR_WHILE_NOTIFYING_WATCHED_CONTENT_WITH_ONLY_ENTITYID": {
         "method": "discovery.watched",
         "params": "DISCOVERY_WATCHED_ONLY_ENTITY_ID"
     },
@@ -103,11 +91,8 @@
     },
     "TRUE_FOR_WATCHED_CONTENT_IN_DISCOVERY": {
         "method": "discovery.watched",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "SUGGEST_WATCHNEXT_TILE_WITH_ENTITYID": {
         "method": "discovery.watchNext",
@@ -139,19 +124,13 @@
     },
     "TRUE_FOR_WATCHNEXT_TILE_IN_DISCOVERY": {
         "method": "discovery.watchNext",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "TRUE_FOR_ENTITLEMENTS_IN_DISCOVERY": {
         "method": "discovery.entitlements",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
+        "expected": "TRUE"
     },
     "NOTIFY_ENTITLEMENTS": {
         "method": "discovery.entitlements",
@@ -161,43 +140,30 @@
         "method": "discovery.entitlements",
         "params": "DISCOVERY_ENTITLEMENTS_ENTITLEMENTID_ONLY"
     },
-    "TRUE_FOR_USER_SIGNEDIN_IN_DISCOVERY": {
-        "method": "discovery.signIn",
-        "event": null,
-        "context": "noContext",
-        "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
-    },
     "NOTIFY_USER_HAS_SIGNED_IN_WITH_ENTITLEMENTS": {
         "method": "discovery.signIn",
         "params": "DISCOVERY_SIGNIN_ENTITLEMENTS"
     },
     "NOTIFY_USER_HAS_SIGNED_IN_WITHOUT_ENTITLEMENTS": {
-        "method": "discovery.signIn",
-        "params": "EMPTYPARAM"
+        "method": "discovery.signIn"
     },
     "NOTIFY_USER_HAS_SIGNED_OUT": {
         "method": "discovery.signOut"
     },
-    "TRUE_FOR_USER_SIGNED_OUT_IN_DISCOVERY": {
-        "method": "discovery.signOut",
-        "event": null,
-        "context": "noContext",
-        "validationJsonPath": "result",
-        "expected": "TRUE",
-        "expectingError": false
-    },
     "NOTIFY_WATCHED_CONTENT_WITH_EMPTY_PARAMETER": {
         "method": "discovery.watched",
-        "params": "EMPTYPARAM",
         "expected": "error"
     },
     "INVALID_PARAMS_FOR_DISCOVERY_WATCHED": {
         "method": "discovery.watched",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_REQUEST_FOR_DISCOVERY_WATCHED": {
+        "method": "discovery.watched",
+        "validationJsonPath": "result",
+        "expected": "INVALID_REQUEST",
         "expectingError": true
     },
     "NOTIFY_WATCHED_CONTENT_WITH_INVALID_ENTITYID_NUMBER": {
@@ -227,7 +193,6 @@
     },
     "INVALID_PARAMS_FOR_DISCOVERY_WATCHNEXT": {
         "method": "discovery.watchNext",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
@@ -289,7 +254,6 @@
     },
     "INVALID_PARAMS_FOR_DISCOVERY_ENTITLEMENTS": {
         "method": "discovery.entitlements",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
@@ -306,7 +270,6 @@
     },
     "INVALID_PARAMS_FOR_DISCOVERY_SIGNIN": {
         "method": "discovery.signIn",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
@@ -366,26 +329,22 @@
     },
     "INVALID_PARAMETER_ERROR_FOR_DISCOVERY_CONTENTACCESS": {
         "method": "discovery.contentAccess",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "NULL_FOR_DISCOVERY_CLEARCONTENTACCESS": {
         "method": "discovery.clearContentAccess",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "NULL"
     },
     "NULL_FOR_DISCOVERY_CONTENTACCESS": {
         "method": "discovery.contentAccess",
-        "context": "noContext",
         "validationJsonPath": "result",
         "expected": "NULL"
     },
     "NOTIFY_CONTENT_ACCESS_WITHOUT_PARAMS": {
         "method": "discovery.contentAccess",
-        "params": "EMPTYPARAM",
         "expected": "error"
     },
     "NOTIFY_CONTENT_ACCESS_WITHOUT_AVAILABILITIES_TYPE_VALUE": {
@@ -451,51 +410,28 @@
     "DISCOVERY_ONSIGNIN":{
         "method": "manage_discovery.onSignIn"
     },
-    "NOTIFY_SIGNED_IN_WITH_ENTITLEMENTS":{
-        "method": "discovery.signIn",
-		"params": "DISCOVERY_SIGNIN_ENTITLEMENTS"
-    },
-    "NOTIFY_SIGNED_IN_WITHOUT_ENTITLEMENTS":{
-        "method": "discovery.signIn",
-		"params": "EMPTYPARAM"
-    },
     "ONSIGNIN_FOR_DISCOVERY_WITH_APPID": {
-        "method": null,
         "event": "discovery.onSignIn",
-		"context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERY_ONSIGNIN_APPID",
-        "expectingError": false
+        "expected": "DISCOVERY_ONSIGNIN_APPID"
     },
     "SIGNIN_FOR_DISCOVERY": {
         "method": "discovery.signIn",
-        "event": null,
-		"context": "noContext",
         "validationJsonPath": "result",
-        "expected": "DISCOVERY_SIGNIN_TRUE",
-        "expectingError": false
+        "expected": "DISCOVERY_SIGNIN_TRUE"
     },
     "DISCOVERY_ONSIGNOUT":{
         "method": "manage_discovery.onSignOut"
     },
-    "NOTIFY_SIGNED_OUT":{
-        "method": "discovery.signOut"
-    },
     "ONSIGNOUT_FOR_DISCOVERY_WITH_APPID": {
-        "method": null,
         "event": "discovery.onSignOut",
-		"context": "noContext",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERY_ONSIGNOUT_APPID",
-        "expectingError": false
+        "expected": "DISCOVERY_ONSIGNOUT_APPID"
     },
     "SIGNOUT_FOR_DISCOVERY": {
         "method": "discovery.signOut",
-        "event": null,
-		"context": "noContext",
         "validationJsonPath": "result",
-        "expected": "DISCOVERY_SIGNOUT_TRUE",
-        "expectingError": false
+        "expected": "DISCOVERY_SIGNOUT_TRUE"
     },
     "SET_ALLOWPERSONALIZATION_TO_TRUE":{
         "method": "manage_privacy.setAllowPersonalization",
@@ -506,5 +442,15 @@
         "validationJsonPath": "eventResponse",
         "expected": "NULL",
         "expectingError": false
+    },
+    "GET_HOME_INTENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERY_HOME_INTENT"
+    },
+    "INVALID_REQUEST_FOR_DISCOVERY_WATCHNEXT": {
+        "method": "discovery.watchNext",
+        "validationJsonPath": "result",
+        "expected": "INVALID_REQUEST",
+        "expectingError": true
     }
 }
