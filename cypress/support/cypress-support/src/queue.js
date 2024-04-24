@@ -72,8 +72,8 @@ export default class Queue {
       }, 1000); // Poll every 1 second
 
       setTimeout(() => {
-        resolve(CONSTANTS.RESPONSE_NOT_FOUND); // Timeout reached, resolve with response not found
         clearInterval(interval);
+        resolve(CONSTANTS.RESPONSE_NOT_FOUND); // Timeout reached, resolve with response not found
       }, longPollTimeout);
     });
   }
