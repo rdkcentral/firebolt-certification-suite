@@ -59,24 +59,23 @@ export default class Queue {
 
   // Parse the queue and fetch the corresponding item that matches the given id within a given timeout
   LongPollQueue(id, longPollTimeout) {
-    let availableResponse = null;
     return new Promise((resolve) => {
-      const interval = setTimeout(function () {
-        const messageQueue = UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE);
-        if (messageQueue.items) {
-          for (let i = 0; i < messageQueue.items.length; i++) {
-            if (messageQueue.items[i] && messageQueue.items[i].metaData.id === id) {
-              availableResponse = messageQueue.items[i].data;
-            }
-          }
-        }
-        if (availableResponse) {
-          clearTimeout(interval);
-          resolve(availableResponse);
-        } else {
-          resolve(CONSTANTS.RESPONSE_NOT_FOUND);
-        }
+      const timeout = setTimeout(() => {
+        clearInterval(interval);
+        resolve(CONSTANTS.RESPONSE_NOT_FOUND); // Timeout reached, resolve with response not found
       }, longPollTimeout);
+
+      const interval = setInterval(() => {
+        const messageQueue = UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE);
+        const item =
+          messageQueue.items && messageQueue.items.find((item) => item && item.metaData.id === id);
+
+        if (item) {
+          clearTimeout(timeout);
+          clearInterval(interval);
+          resolve(item.data);
+        }
+      }, 1000); // Poll every 1 second
     });
   }
 
