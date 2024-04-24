@@ -651,47 +651,47 @@ class FireLog {
     return FireLog.instance;
   }
 
-  isNotNull(value, message, log) {
+  isNotNull(value, message) {
     assert.isNotNull(value, message);
   }
 
-  isTrue(value, message, log) {
+  isTrue(value, message) {
     assert.isTrue(value, message);
   }
 
-  isFalse(value, message, log) {
+  isFalse(value, message) {
     assert.isFalse(value, message);
   }
 
-  isOk(value, message, log) {
+  isOk(value, message) {
     assert.isOk(value, message);
   }
 
-  isNotEmpty(object, message, log) {
+  isNotEmpty(object, message) {
     assert.isNotEmpty(object, message);
   }
 
-  isBoolean(value, message, log) {
+  isBoolean(value, message) {
     assert.isBoolean(value, message);
   }
 
-  deepEqual(actual, expected, message, log) {
+  deepEqual(actual, expected, message) {
     assert.deepEqual(actual, expected, message);
   }
 
-  equal(actual, expected, message, log) {
+  equal(actual, expected, message) {
     assert.equal(actual, expected, message);
   }
 
-  strictEqual(actual, expected, message, log) {
+  strictEqual(actual, expected, message) {
     assert.strictEqual(actual, expected, message);
   }
 
-  include(haystack, needle, message, log) {
+  include(haystack, needle, message) {
     assert.include(haystack, needle, message);
   }
 
-  exists(value, message, log) {
+  exists(value, message) {
     assert.exists(value, message);
   }
 }
