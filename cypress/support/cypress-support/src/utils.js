@@ -616,6 +616,89 @@ function checkForTags(tags) {
   }
 }
 
+/**
+ * FireLog class provides assertion methods with logging using Cypress's cy.log().
+ * It wraps Cypress's assertion methods, allowing logging of messages for each assertion.
+ * @class
+ *
+ * @example
+ * // Usage example
+ * fireLog.isNotNull(someValue, "Some message", "Log message");
+ * fireLog.isTrue(isTrueValue, "True message", "Log message");
+ * fireLog.isFalse(isFalseValue, "False message", "Log message");
+ * fireLog.deepEqual(actual, expected, "deepEqual message", "Log message");
+ */
+
+class FireLog {
+  constructor() {
+    if (!FireLog.instance) {
+      FireLog.instance = this;
+    }
+
+    // Use cy.log(message) for every method in the class
+    const prototype = Object.getPrototypeOf(this);
+    Object.getOwnPropertyNames(prototype).forEach((method) => {
+      if (method !== 'constructor' && typeof this[method] === 'function') {
+        const originalMethod = this[method];
+        this[method] = function (...args) {
+          const message = args[args.length - 1];
+          cy.log(message);
+          return originalMethod.apply(this, args);
+        };
+      }
+    });
+
+    return FireLog.instance;
+  }
+
+  isNotNull(value, message, log) {
+    assert.isNotNull(value, message);
+  }
+
+  isTrue(value, message, log) {
+    assert.isTrue(value, message);
+  }
+
+  isFalse(value, message, log) {
+    assert.isFalse(value, message);
+  }
+
+  isOk(value, message, log) {
+    assert.isOk(value, message);
+  }
+
+  isNotEmpty(object, message, log) {
+    assert.isNotEmpty(object, message);
+  }
+
+  isBoolean(value, message, log) {
+    assert.isBoolean(value, message);
+  }
+
+  deepEqual(actual, expected, message, log) {
+    assert.deepEqual(actual, expected, message);
+  }
+
+  equal(actual, expected, message, log) {
+    assert.equal(actual, expected, message);
+  }
+
+  strictEqual(actual, expected, message, log) {
+    assert.strictEqual(actual, expected, message);
+  }
+
+  include(haystack, needle, message, log) {
+    assert.include(haystack, needle, message);
+  }
+
+  exists(value, message, log) {
+    assert.exists(value, message);
+  }
+}
+
+const fireLog = new FireLog();
+global.fireLog = fireLog;
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -638,4 +721,5 @@ module.exports = {
   destroyGlobalObjects,
   writeJsonToFileForReporting,
   checkForTags,
+  fireLog,
 };
