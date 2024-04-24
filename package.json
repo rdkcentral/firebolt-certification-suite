@@ -29,7 +29,7 @@
     "@firebolt-js/manage-sdk": "1.0.0",
     "@firebolt-js/sdk": "1.0.0",
     "axios": "^1.3.4",
-    "configModule": "./defaultModule",
+    "configModule": "git+ssh://git@github.com-ghec:comcast-firebolt/ripple-remote-config-module",
     "cucumber-json-report-formatter": "^0.1.4",
     "cypress": "^12.0.0",
     "esbuild": "^0.17.0",

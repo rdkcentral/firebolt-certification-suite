@@ -73,5 +73,6 @@ module.exports = {
   defaultCommandTimeout: 30000,
   chromeWebSecurity: false, // If intending to disable web security
   video: false,
+  watchForFileChanges: false,
   screenshotOnRunFailure: false,
 };
