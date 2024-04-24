@@ -3,7 +3,7 @@
 Feature: Lifecycle_Unloading
 
     @Lifecycle @coreSDK @notSupported
-    Scenario: Lifecycle 3.4.4 Duplicate finished events while unloading
+    Scenario: Lifecycle 3.4.4 No impact of multiple Finished events while unloading
         Given the environment has been set up for 'lifecycle' tests
         When 3rd party 'certification' app is launched with 'unloading' state
         Then '3rd party app' invokes the 'Firebolt' API to 'call lifecycle finished'
