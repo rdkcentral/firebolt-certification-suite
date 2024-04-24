@@ -623,10 +623,10 @@ function checkForTags(tags) {
  *
  * @example
  * // Usage example
- * fireLog.isNotNull(someValue, "Some message", "Log message");
- * fireLog.isTrue(isTrueValue, "True message", "Log message");
- * fireLog.isFalse(isFalseValue, "False message", "Log message");
- * fireLog.deepEqual(actual, expected, "deepEqual message", "Log message");
+ * fireLog.isNotNull(someValue, "Some message");
+ * fireLog.isTrue(isTrueValue, "True message");
+ * fireLog.isFalse(isFalseValue, "False message");
+ * fireLog.deepEqual(actual, expected, "deepEqual message");
  */
 
 class FireLog {
