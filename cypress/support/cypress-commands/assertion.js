@@ -99,7 +99,7 @@ Cypress.Commands.add(
                     : apiOrEventObject.response.error;
 
                 cy.log(
-                  `Expected Errorcode: ${apiErrorResponse.code} to be oneof [${errorContentObject.errorCode}]`
+                  `Actual error code ${apiErrorResponse.code} expected to be present in list of expected error codes`
                 ).then(() => {
                   assert.include(
                     errorContentObject.errorCode,
@@ -111,7 +111,7 @@ Cypress.Commands.add(
                   apiErrorResponse.message.includes(errorMessage)
                 );
                 cy.log(
-                  `Expected Error Message ${apiErrorResponse.message} to be oneof [${errorContentObject.errorMessage}] `
+                  `Actual error message ${apiErrorResponse.message} expected to be present in list of expected error messages`
                 ).then(() => {
                   assert.equal(checkErrorMessage, true, 'Error Message Validation: ');
                 });
