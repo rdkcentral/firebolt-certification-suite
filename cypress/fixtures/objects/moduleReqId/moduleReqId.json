@@ -2258,6 +2258,331 @@
               }
             ]
           }
+        },
+        "Lifecycle_Suspended": {
+            "Lifecycle 1.6.1 App should subscribe to onSuspended listener regardless of capability": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "1.6.1"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.5.4 Suspend App from Inactive state": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.5.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.2.4 Relaunch a previously Suspended app after Unsuspend": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.2.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.5.3 Cannot Suspend a suspended App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.5.3"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.5.1 Cannot Suspend a unloaded App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.5.1"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.5.5 Cannot relaunch Suspended App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.5.5"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.5.2 Cannot Suspend foreground app": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.5.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.5.2 Cannot Suspend background app": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.5.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.3.2 Cannot Close Suspended App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.3.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.6, 2.6.2 Unsuspending App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ["2.6", "2.6.2"]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.6.1 Cannot Unsuspend in initializing State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.6.1"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.6.1 Cannot Unsuspend in foreground State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.6.1"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.6.1 Cannot Unsuspend in background State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.6.1"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.6.1 Cannot Unsuspend in inactive State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.6.1"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.6.1 Cannot Unsuspend in unloading State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.6.1"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 4.3 Unsuspend unloaded app": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "4.3"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            },
+            "Lifecycle 2.5.6 Try to suspend an app that doesn't exist": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "2.5.6"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ["1.6.4", "1.6.3"]
+                        }
+                    }
+                ]
+            }
         }
     }
 }
