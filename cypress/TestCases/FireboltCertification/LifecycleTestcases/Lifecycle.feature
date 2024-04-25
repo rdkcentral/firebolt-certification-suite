@@ -15,6 +15,8 @@ Feature: Lifecycle
         Then 'Firebolt' platform responds with 'null for lifecycle ready'
         When '3rd party app' invokes the 'Firebolt' API to 'check if lifecycle ready expecting error'
         Then 'Firebolt' platform responds with 'custom error for lifecycle ready'
+        When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
     @Lifecycle @sdk @transport @coreSDK @regression
     Scenario: Validate lifecycle.state - Get the current state
@@ -29,6 +31,8 @@ Feature: Lifecycle
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Method_Content>'
+        When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
         Examples:
             | Scenario       | API_Key                            | Method_Content                              |
@@ -61,6 +65,5 @@ Feature: Lifecycle
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'notify that the app is done unloading'
         Then 'Firebolt' platform responds with 'error for lifecycle finished'
-
-
-
+        When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'

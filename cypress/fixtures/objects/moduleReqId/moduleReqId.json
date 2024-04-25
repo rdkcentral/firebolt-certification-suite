@@ -1712,11 +1712,417 @@
               },
               {
                 "event": {
-                  "id": ["1.4.6", "1.3.6"]
+                  "id": ["1.3.6", "1.3.6"]
                 }
               }
             ]
           }
+        },
+        "Lifecycle_Initializing": {
+            "Cannot Close an app from initializing": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.1.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.1.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            }
+        },
+        "Lifecycle_Terminated": {
+            "Terminate app in foreground State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Terminate app in background State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Terminate app in initializing State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Terminate app in inactive State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Terminate app in suspended State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Terminate app in unloading State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            }
+        },
+        "Lifecycle_Unloading": {
+            "No impact of multiple Finished events while unloading": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Unloading from Inactive state": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Cannot Close an Unloading App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "finished from unloading state": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Should not unload from active state (foreground)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Cannot Suspend Unloaded app": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Should not finish from state other than unloading (initializing)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Should not finish from state other than unloading (foreground)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Should not finish from state other than unloading (background)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Should not finish from state other than unloading (inactive)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Should not finish from state other than unloading (suspended)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Cannot Close an app that is not loaded": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            }
         },
         "Lifecycle_Background": {
           "Background an app from foreground": {

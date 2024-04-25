@@ -129,7 +129,7 @@ module.exports = {
   EXTRACTEDAPI_PATH: 'extractedApiObject.response.',
   FAIL: 'FAIL',
   FAILED_TO_PARSE_LIEFECYCLE_ERROR:
-    'Failed to parse error object from response while setting lifecycle state',
+    'Failed to parse error object from response while setting lifecycle state. Response received : ',
   FAILED_TO_SET_LIFECYCLE_STATE:
     'Failed to set lifecycle state due to the following error received from platform: ',
   FCS: 'fcs',
@@ -176,9 +176,11 @@ module.exports = {
   LEVEL_LIST: ['should', 'could'],
   LEVEL_MUST: ['must'],
   LIFECYCLE_APIS: {
-    READY: 'Lifecycle.ready',
     CLOSE: 'Lifecycle.close',
+    FINISHED: 'Lifecycle.finished',
     HISTORY: 'Lifecycle.history',
+    READY: 'Lifecycle.ready',
+    SUSPEND: 'Lifecycle.suspend',
     UNSUSPEND: 'Lifecycle.unsuspend',
   },
   LIFECYCLE_APP_OBJECT_LIST: 'lifecycleAppObjectList',
@@ -197,6 +199,8 @@ module.exports = {
   LIFECYCLE_HISTORY_RESPONSE: 'Lifecycle history response fetched from application: ',
   LIFECYCLE_HISTORY_SCHEMA_PATH: 'schemas/lifecycleHistorySchema',
   LIFECYCLE_INTENT: 'Lifecycle intent sent to application: ',
+  LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle notification generated Req #',
+  LIFECYCLE_NOTIFICATION_NOT_GENERATED: 'Lifecycle notification not generated Req #',
   LIFECYCLE_STATE: 'Lifecycle.state',
   LIFECYCLE_STATES: {
     FOREGROUND: 'foreground',
@@ -258,6 +262,7 @@ module.exports = {
   NOTIFICATION_CONTENT_VALIDATION_REQ: 'Lifecycle notification content validation Req # ',
   NOTIFICATION_EXISTS_REQ: 'Lifecycle notification exists Req # ',
   NOTIFICATION_SCHEMA_VALIDATION_REQ: 'Lifecycle notification schema validation Req # ',
+  NULL: 'null',
   NULL_CHECK: 'Null Check requirement SKIPPED as schema validation is PASSED',
   NUMBER: 'number',
   OPENRPC_ERROR_SCHEMA_PATH: 'schemas/errorSchema.json',

@@ -42,12 +42,12 @@
     }
   },
   "allowedStateTransitions": {
-    "initializing": ["inactive"],
-    "inactive": ["foreground", "background", "suspended"],
+    "initializing": ["inactive", "terminated"],
+    "inactive": ["foreground", "background", "suspended", "unloading"],
     "foreground": ["inactive", "background"],
     "background": ["foreground", "inactive"],
-    "unloading": [],
-    "suspended": ["inactive"],
+    "unloading": ["unloaded"],
+    "suspended": ["inactive", "terminated"],
     "unloaded": [],
     "terminated": []
   }
