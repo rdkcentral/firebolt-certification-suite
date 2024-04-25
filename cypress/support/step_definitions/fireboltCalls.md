@@ -12,6 +12,7 @@
 
 ### Examples:
 * `Given 1st party app invokes the 'Firebolt' API to 'get device id'`
+* `Given 1st party app invokes the API to 'get device id'`
 
 
 ## '(.+)' invokes the '(.+)' API to '(.+)

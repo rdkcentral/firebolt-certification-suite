@@ -431,7 +431,7 @@ function lifecycleHistorySchemaValidation(result, schema, lifecycleHistoryRecord
  * @example
  * assertWithRequirementLogs('Checking foreground state', 'foreground', 'foreground', true, { message: 'Invalid state' });
  */
-function assertWithRequirementLogs(pretext, expected, actual, equateDeep = false, errorObject) {
+function assertWithRequirementLogs(pretext, actual, expected, equateDeep = false, errorObject) {
   if (errorObject) {
     cy.log(pretext + ': ' + JSON.stringify(errorObject)).then(() => {
       assert(false, pretext + ': ' + JSON.stringify(errorObject));

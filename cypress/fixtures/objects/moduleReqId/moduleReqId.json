@@ -1,866 +1,5 @@
 {
     "scenarioNames": {
-        "Account": {
-            "Positive Scenario: Validate account ID": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Account 1.1",
-                            "description": "Positive Scenario: Validating account.id"
-                        }
-                    }
-                ]
-            },
-            "Positive Scenario: Validate account UID": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Account 1.2",
-                            "description": "Positive Scenario: Validating account.Uid"
-                        }
-                    }
-                ]
-            }
-        },
-        "Authentication": {
-            "Authentication.token - Positive Scenario: Get Platform token type": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Authentication 1.1",
-                            "description": "Positive Scenario: Validating authentication.token for type platform token"
-                        }
-                    }
-                ]
-            },
-            "Authentication.token - Positive Scenario: Get Device token type": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Authentication 1.2",
-                            "description": "Positive Scenario: Validating authentication.token for type device token"
-                        }
-                    }
-                ]
-            },
-            "Authentication.token - Positive Scenario: Get Distributor token type": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Authentication 1.3",
-                            "description": "Positive Scenario: Validating authentication.token for type Distributor token"
-                        }
-                    }
-                ]
-            },
-            "Authentication.token - Positive Scenario: Get Distributor-CIMA token type": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Authentication 1.4",
-                            "description": "Positive Scenario: Validating authentication.token for type Distributor-CIMA token"
-                        }
-                    }
-                ]
-            },
-            "Authentication.token - Positive Scenario: Get Distributor-OAT token type": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Authentication 1.5",
-                            "description": "Positive Scenario: Validating authentication.token for type Distributor-OAT token"
-                        }
-                    }
-                ]
-            },
-            "Authentication.device - Positive Scenario: Get Device token type": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Authentication 1.6",
-                            "description": "Positive Scenario: Validating authentication.device"
-                        }
-                    }
-                ]
-            },
-            "Authentication.session - Positive Scenario: Get Session token type": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Authentication 1.7",
-                            "description": "Positive Scenario: Validating authentication.session"
-                        }
-                    }
-                ]
-            },
-            "Authentication.root - Positive Scenario: Get Root token type": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Authentication 1.8",
-                            "description": "Positive Scenario: Validating authentication.root"
-                        }
-                    }
-                ]
-            },
-            "Authentication.token - Negative Scenario: Invalid Parameter Platform1 expecting error": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Authentication 1.9",
-                            "description": "Negative Scenario: Validating authentication.token for invalid platform value"
-                        }
-                    }
-                ]
-            },
-            "Authentication.token - Negative Scenario: Invalid Parameter type Boolean expecting error": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Authentication 1.10",
-                            "description": "Negative Scenario: Validating authentication.token for invalid platform type(boolean)"
-                        }
-                    }
-                ]
-            },
-            "Authentication.token - Negative Scenario: Invalid Parameter type Integer expecting error": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Authentication 1.11",
-                            "description": "Negative Scenario: Validating authentication.token for invalid platform type(integer)"
-                        }
-                    }
-                ]
-            }
-        },
-        "Advertising": {
-            "Advertising.advertisingId - Positive Scenario: Special Validation limitAdTracking_ON": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.advertisingId - Positive Scenario: Special Validation limitAdTracking_OFF": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.2",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.config Coppa value - Positive Scenario: Coppa None": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.3",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Advertising.config Coppa value - Positive Scenario: Coppa TRUE": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.4",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Advertising.config Coppa value - Positive Scenario: Coppa FALSE": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.5",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Advertising.config Coppa value - Positive Scenario: Coppa None with environment value test": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.6",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Advertising.config Coppa value - Positive Scenario: Coppa TRUE with environment value test": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.7",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Advertising.config Coppa value - Positive Scenario: Coppa FALSE with environment value test": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.8",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Advertising.config - special Validation limitAdTrackingON limitAdTracking_ON With param True": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.9",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Advertising.config - special Validation limitAdTrackingOFF limitAdTracking_OFF With param True": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.10",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Advertising.config - special Validation limitAdTrackingON limitAdTracking_ON With param False": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.11",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Advertising.config - special Validation limitAdTrackingOFF limitAdTracking_OFF With param False": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.12",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Advertising.config - special Validation Only coppa as params": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.13",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Advertising.config - special Validation Empty params": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.14",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Advertising.advertisingId - Positive Scenario: limitAdTracking_OFF_SCOPE_BROWSER": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.15",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.advertisingId - Positive Scenario: limitAdTracking_ON_SCOPE_BROWSER": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.16",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.advertisingId - Positive Scenario: limitAdTracking_OFF_SCOPE_CONTENT": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.17",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.advertisingId - Positive Scenario: limitAdTracking_ON_SCOPE_CONTENT": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.18",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.advertisingId - Positive Scenario: limitAdTracking_ON_WITHOUT_SCOPE": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.19",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.advertisingId - Positive Scenario: limitAdTracking_ON_WITH_RANDOM_STRING_SCOPE_ID": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.20",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.advertisingId - Positive Scenario: limitAdTracking_ON_WITH_EMPTY_STRING_SCOPE_ID": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.21",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.policy - Positive Scenario: Disable limitAdTracking": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.22",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.policy - Positive Scenario: Enable limitAdTracking": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.23",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.policy - Positive Scenario: SkipRestriction none": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.24",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_SKIPRESTRICTION_AS_ADSUNWATCHED",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.policy - Positive Scenario: SkipRestriction adsUnwatched": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.25",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_SKIPRESTRICTION_AS_NONE",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.policy - Positive Scenario: SkipRestriction adsAll": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.26",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_SKIPRESTRICTION_AS_ADSUNWATCHED",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.policy - Positive Scenario: SkipRestriction all": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.27",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_SKIPRESTRICTION_AS_ADSUNWATCHED",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.config - special Scenario: Validation limitAdTracking_ON With param True": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.27",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.config - special Scenario: Validation limitAdTracking_OFF With param True": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.27",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.config - special Scenario: Validation limitAdTracking_ON With param False": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.27",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.config - special Scenario: Validation limitAdTracking_OFF With param False": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.27",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.config - special Scenario: Validation Only coppa as params": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.27",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Advertising.config - special Scenario: Validation Empty params": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Advertising 1.27",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_LIMITADTRACKING",
-                        "firstParty": true
-                    }
-                ]
-            }
-
-        },
-        "Keyboard": {
-            "Keyboard.email - Positive Scenario: email with signIn type without UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Account 1.1",
-                            "description": "Positive Scenario: Validating account.id"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "firstParty": true,
-                        "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI"
-                    }
-                ]
-            },
-            "Keyboard.email - Positive Scenario: email with signUp type without UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Account 1.2",
-                            "description": "Positive Scenario: Validating account.Uid"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "firstParty": true,
-                        "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI"
-                    }
-                ]
-            },
-            "Keyboard.email - Positive Scenario: email with signIn with type alone without UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Account 1.2",
-                            "description": "Positive Scenario: Validating account.Uid"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "firstParty": true,
-                        "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI"
-                    }
-                ]
-            },
-            "Keyboard.password - Positive Scenario: password without UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Account 1.2",
-                            "description": "Positive Scenario: Validating account.Uid"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "firstParty": true,
-                        "fireboltMock": "KEYBOARD_PASSWORD_WITHOUT_UI"
-                    }
-                ]
-            },
-            "Keyboard.password - Positive Scenario: password as empty without UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Account 1.2",
-                            "description": "Positive Scenario: Validating account.Uid"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "firstParty": true,
-                        "fireboltMock": "KEYBOARD_PASSWORD_WITHOUT_UI"
-                    }
-                ]
-            },
-            "Keyboard.standard - Positive Scenario: standard platform without UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Account 1.2",
-                            "description": "Positive Scenario: Validating account.Uid"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "firstParty": true,
-                        "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI"
-                    }
-                ]
-            },
-            "Keyboard.email - Positive Scenario: email from keyboard with UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Account 1.2",
-                            "description": "Positive Scenario: Validating account.Uid"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "firstParty": true,
-                        "fireboltMock": "KEYBOARD_EMAIL_WITH_UI"
-                    }
-                ]
-            },
-            "Keyboard.password - Positive Scenario: password from keyboard with UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Account 1.2",
-                            "description": "Positive Scenario: Validating account.Uid"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "firstParty": true,
-                        "fireboltMock": "KEYBOARD_PASSWORD_WITH_UI"
-                    }
-                ]
-            },
-            "Keyboard.standard - Positive Scenario: standard platform from keyboard with UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Account 1.2",
-                            "description": "Positive Scenario: Validating account.Uid"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "firstParty": true,
-                        "fireboltMock": "KEYBOARD_EMAIL_WITH_UI"
-                    }
-                ]
-            }
-        },
-        "Profile": {
-            "Profile.approveContentRating - Positive Scenario: Correct-PIN without UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Profile 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Profile.approveContentRating - Positive Scenario: Wrong-PIN without UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Profile 1.2",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Profile.approveContentRating - Positive Scenario: Cancelling-PIN without UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Profile 1.3",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Profile.approveContentRating - Positive Scenario: Correct-PIN with UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Profile 1.4",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Profile.approveContentRating - Positive Scenario: Wrong-PIN with UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Profile 1.5",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Profile.approveContentRating - Positive Scenario: Cancelling-PIN with UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Profile 1.6",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Profile.approvePurchase - Positive Scenario: Correct-PIN without UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Profile 1.7",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Profile.approvePurchase - Positive Scenario: Wrong-PIN without UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Profile 1.8",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Profile.approvePurchase - Positive Scenario: Cancelling-PIN without UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Profile 1.9",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Profile.approvePurchase - Positive Scenario: Correct-PIN with UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Profile 1.10",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Profile.approvePurchase - Positive Scenario: Wrong-PIN with UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Profile 1.11",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Profile.approvePurchase - Positive Scenario: Cancelling-PIN with UI": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Profile 1.12",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            }
-        },
         "Accessibility": {
             "Accessibility.closedCaptionsSettings - Positive Scenario: Disable closedcaptions": {
                 "req": [
@@ -869,12 +8,6 @@
                             "id": "Accessibility 1.1",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_CLOSEDCAPTIONS",
-                        "firstParty": true
                     }
                 ]
             },
@@ -886,12 +19,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_CLOSEDCAPTIONS",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontFamily-monospaced_sanserif": {
@@ -901,12 +28,6 @@
                             "id": "Accessibility 1.3",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTFAMILY_TO_PROPORTIONAL_SANSERIF",
-                        "firstParty": true
                     }
                 ]
             },
@@ -918,12 +39,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTFAMILY_TO_PROPORTIONAL_SANSERIF",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontFamily-proportional_serif": {
@@ -933,12 +48,6 @@
                             "id": "Accessibility 1.5",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTFAMILY_TO_PROPORTIONAL_SANSERIF",
-                        "firstParty": true
                     }
                 ]
             },
@@ -950,12 +59,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTFAMILY_TO_PROPORTIONAL_SANSERIF",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontFamily-proportional_sanserif": {
@@ -965,12 +68,6 @@
                             "id": "Accessibility 1.7",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTFAMILY_TO_MONOSPACED_SANSERIF",
-                        "firstParty": true
                     }
                 ]
             },
@@ -982,12 +79,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTFAMILY_TO_CASUAL",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontFamily-casual": {
@@ -997,12 +88,6 @@
                             "id": "Accessibility 1.9",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTFAMILY_TO_SMALLCAPS",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1024,12 +109,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTSIZE_TO_2",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontSize-0.5": {
@@ -1039,12 +118,6 @@
                             "id": "Accessibility 1.12",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTSIZE_TO_2",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1056,12 +129,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTSIZE_TO_2",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontColor-#ff00ff": {
@@ -1071,12 +138,6 @@
                             "id": "Accessibility 1.14",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTCOLOR_TO_#FFFFFF",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1088,12 +149,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTEDGE_TO_NONE",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontEdge-none": {
@@ -1103,12 +158,6 @@
                             "id": "Accessibility 1.16",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTEDGE_TO_RAISED",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1120,12 +169,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTEDGE_TO_RAISED",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontEdge-uniform": {
@@ -1135,12 +178,6 @@
                             "id": "Accessibility 1.18",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTEDGE_TO_RAISED",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1152,12 +189,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTEDGE_TO_RAISED",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontEdge-dropShadow-right": {
@@ -1167,12 +198,6 @@
                             "id": "Accessibility 1.20",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTEDGE_TO_RAISED",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1184,12 +209,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTEDGECOLOR_TO_#7F7F7F",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set backgroundColor-#7f7f7f": {
@@ -1199,12 +218,6 @@
                             "id": "Accessibility 1.22",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_BACKGROUNDCOLOR_TO_#000000",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1216,12 +229,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTOPACITY_TO_100",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set backgroundOpacity-75": {
@@ -1231,12 +238,6 @@
                             "id": "Accessibility 1.24",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_BACKGROUNDOPACITY_TO_100",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1248,12 +249,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_TEXTALIGN_TO_CENTER",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set textAlign-center": {
@@ -1263,12 +258,6 @@
                             "id": "Accessibility 1.26",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_TEXTALIGN_TO_LEFT",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1280,12 +269,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_TEXTALIGN_TO_LEFT",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set textAlignVertical-top": {
@@ -1295,12 +278,6 @@
                             "id": "Accessibility 1.28",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_TEXTALIGNVERTICAL_TO_MIDDLE",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1312,12 +289,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_TEXTALIGNVERTICAL_TO_BOTTOM",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set textAlignVertical-bottom": {
@@ -1327,12 +298,6 @@
                             "id": "Accessibility 1.30",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_TEXTALIGNVERTICAL_TO_MIDDLE",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1344,12 +309,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_WINDOWCOLOR_TO_#7F7F7F",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: Set windowOpacity-50": {
@@ -1359,12 +318,6 @@
                             "id": "Accessibility 1.32",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_WINDOWOPACITY_TO_40",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1376,12 +329,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_PREFERREDLANGUAGES_TO_ENGLISH_SPANISH",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: fontFamily with 'null' params": {
@@ -1391,12 +338,6 @@
                             "id": "Accessibility 1.34",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTFAMILY_TO_PROPORTIONAL_SANSERIF",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1408,12 +349,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTSIZE_TO_2",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: fontColor with 'null' params": {
@@ -1423,12 +358,6 @@
                             "id": "Accessibility 1.36",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTCOLOR_TO_#FF00FF",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1440,12 +369,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTEDGE_TO_RAISED",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: fontEdgeColor with 'null' params": {
@@ -1455,12 +378,6 @@
                             "id": "Accessibility 1.38",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTEDGECOLOR_TO_#FFFFFF",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1472,12 +389,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_BACKGROUNDCOLOR_TO_#7F7F7F",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: backgroundOpacity with 'null' params": {
@@ -1487,12 +398,6 @@
                             "id": "Accessibility 1.40",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_BACKGROUNDOPACITY_TO_75",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1504,12 +409,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_TEXTALIGN_TO_LEFT",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: textAlignVertical with 'null' params": {
@@ -1519,12 +418,6 @@
                             "id": "Accessibility 1.42",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_TEXTALIGNVERTICAL_TO_TOP",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1536,12 +429,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_WINDOWCOLOR_TO_WHITE",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptionsSettings - Positive Scenario: windowOpacity with 'null' params": {
@@ -1551,12 +438,6 @@
                             "id": "Accessibility 1.44",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_WINDOWOPACITY_TO_50",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1568,12 +449,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_VOICEGUIDANCE",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.voiceGuidanceSettings - Positive Scenario: Enable voiceguidance": {
@@ -1583,12 +458,6 @@
                             "id": "Accessibility 1.46",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_VOICEGUIDANCE",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1600,12 +469,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_SPEED_AS_2",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.voiceGuidanceSettings - Positive Scenario: Set speed-0.5": {
@@ -1615,12 +478,6 @@
                             "id": "Accessibility 1.48",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_SPEED_AS_1",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1632,12 +489,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_SPEED_AS_1",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.audioDescriptionSettings - Positive Scenario: Disable audioDescriptionSettings": {
@@ -1648,12 +499,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_AUDIODESCRIPTION",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.audioDescriptionSettings - Positive Scenario: Enable audioDescriptionSettings": {
@@ -1663,12 +508,6 @@
                             "id": "Accessibility 1.51",
                             "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_AUDIODESCRIPTION",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1690,12 +529,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_CLOSEDCAPTIONS",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptions - Positive Scenario: Set fontFamily-monospaced_sanserif": {
@@ -1705,12 +538,6 @@
                             "id": "Accessibility 1.54",
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTFAMILY_TO_SMALLCAPS",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1722,12 +549,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTSIZE_TO_2",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptions - Positive Scenario: Set fontColor-#ffffff": {
@@ -1737,12 +558,6 @@
                             "id": "Accessibility 1.56",
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTCOLOR_TO_#FF00FF",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1754,12 +569,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTEDGE_TO_NONE",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptions - Positive Scenario: Set fontEdgeColor-#7f7f7f": {
@@ -1770,27 +579,15 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTEDGECOLOR_TO_#FFFFFF",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptions - Positive Scenario: Set backgroundColor-#000000": {
                 "req": [
-                    { 
+                    {
                         "method": {
                             "id": "Accessibility 1.59",
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_BACKGROUNDCOLOR_TO_#7F7F7F",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1802,12 +599,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_FONTOPACITY_TO_75",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptions - Positive Scenario: Set backgroundOpacity-100": {
@@ -1817,12 +608,6 @@
                             "id": "Accessibility 1.61",
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_BACKGROUNDOPACITY_TO_75",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1834,12 +619,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_TEXTALIGN_TO_CENTER",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptions - Positive Scenario: Set textAlignVertical-top": {
@@ -1849,12 +628,6 @@
                             "id": "Accessibility 1.63",
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_TEXTALIGNVERTICAL_TO_MIDDLE",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1866,12 +639,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_WINDOWCOLOR_TO_WHITE",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.closedCaptions - Positive Scenario: Set windowOpacity-40": {
@@ -1881,12 +648,6 @@
                             "id": "Accessibility 1.65",
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_WINDOWOPACITY_TO_50",
-                        "firstParty": true
                     }
                 ]
             },
@@ -1898,12 +659,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_VOICEGUIDANCE",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.voiceGuidance - Positive Scenario: Enable voiceguidance": {
@@ -1914,12 +669,6 @@
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
                     }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_VOICEGUIDANCE",
-                        "firstParty": true
-                    }
                 ]
             },
             "Accessibility.voiceGuidance - Positive Scenario: Set speed-1": {
@@ -1929,245 +678,6 @@
                             "id": "Accessibility 1.66",
                             "description": "Positive Scenario: Validating accessibility.closedCaptions"
                         }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_SPEED_AS_2",
-                        "firstParty": true
-                    }
-                ]
-            }
-        },
-        "Device": {
-            "Device.name - Positive Scenario: Validate device name change": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Device 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_DEVICE_NAME_TO_LIVING_ROOM",
-                        "firstParty": true
-                    }
-                ]
-            }
-        },
-        "Discovery": {
-            "Discovery.policy - Positive Scenario: enable Recommendations": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Discovery 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_RECOMMENDATIONS",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Discovery.policy - Positive Scenario: disable Recommendations": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Discovery 1.2",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_RECOMMENDATIONS",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Discovery.policy - Positive Scenario: enable remember watched programs": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Discovery 1.3",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "DISABLE_REMEMBER_WATCHED_PROGRAMS",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "Discovery.policy - Positive Scenario: disable remember watched programs": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Discovery 1.4",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "ENABLE_REMEMBER_WATCHED_PROGRAMS",
-                        "firstParty": true
-                    }
-                ]
-            }
-        },
-        "SecondScreen": {
-            "Secondscreen.FriendlyName - Positive Scenario: Validate Set friendlyName": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Secondscreen 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_DEVICE_NAME_TO_LIVING_ROOM",
-                        "firstParty": true
-                    }
-                ]
-            }
-
-        },
-        "Localization":{
-            "localization.locality - Positive Scenario: Validate Set & get locality": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Localization 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_LOCALIZATION_LOCALITY_TO_PHILADELPHIA",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "localization.countrycode - Positive Scenario: Validate Set & get countrycode": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Localization 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_COUNTRYCODE_TO_US",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "localization.locale - Positive Scenario: Validate Set & get locale": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Localization 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_LOCALE_TO_ENUS",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "localization.locality - Positive Scenario: Validate Set & get Language es": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Localization 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_LANGUAGE_TO_EN",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "localization.locality - Positive Scenario: Validate Set & get Language en": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Localization 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_LANGUAGE_TO_ES",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "localization.preferredAudioLanguages - Positive Scenario: Validate Set & get preferredAudioLanguages(spa-eng)": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Localization 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_PREFERREDAUDIOLANGUAGES_TO_ENG_SPA",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "localization.locality - Positive Scenario: Validate Set & get preferredAudioLanguages(eng-spa)": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Localization 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_PREFERREDAUDIOLANGUAGES_TO_SPA_ENG",
-                        "firstParty": true
-                    }
-                ]
-            },
-            "localization.postalCode - Positive Scenario: Validate Set & get PostalCode": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Localization 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ],
-                "beforeOperation": [
-                    {
-                        "fireboltCall": "SET_POSTALCODE_TO_19103",
-                        "firstParty": true
                     }
                 ]
             }
@@ -3202,11 +1712,417 @@
               },
               {
                 "event": {
-                  "id": ["1.4.6", "1.3.6"]
+                  "id": ["1.3.6", "1.3.6"]
                 }
               }
             ]
           }
+        },
+        "Lifecycle_Initializing": {
+            "Cannot Close an app from initializing": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.1.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.1.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            }
+        },
+        "Lifecycle_Terminated": {
+            "Terminate app in foreground State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Terminate app in background State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Terminate app in initializing State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Terminate app in inactive State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Terminate app in suspended State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Terminate app in unloading State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            }
+        },
+        "Lifecycle_Unloading": {
+            "No impact of multiple Finished events while unloading": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Unloading from Inactive state": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Cannot Close an Unloading App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "finished from unloading state": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Should not unload from active state (foreground)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Cannot Suspend Unloaded app": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Should not finish from state other than unloading (initializing)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Should not finish from state other than unloading (foreground)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Should not finish from state other than unloading (background)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Should not finish from state other than unloading (inactive)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Should not finish from state other than unloading (suspended)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            },
+            "Cannot Close an app that is not loaded": {
+                "req": [
+                    {
+                        "state": {
+                            "id": [
+                                "1.5.1",
+                                "3.5"
+                            ]
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "1.5.2"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": ""
+                        }
+                    }
+                ]
+            }
         },
         "Lifecycle_Background": {
           "Background an app from foreground": {
@@ -3342,38 +2258,6 @@
               }
             ]
           }
-        },
-        "Parameters": {
-            "Parameters.initialization - Positive Scenario: Passing params - TRUE": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Parameters 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Parameters.initialization - Positive Scenario: Passing params - FALSE": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Parameters 1.2",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "Parameters.initialization - Positive Scenario: Validate NavigationIntent - Home": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "Parameters 1.3",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            }
         }
     }
 }
