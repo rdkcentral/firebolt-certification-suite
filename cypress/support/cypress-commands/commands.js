@@ -450,65 +450,54 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
  * cy.setResponse({"fireboltCall":"USERGRANTS_CLEAR_REFUI", "firstParty": true})
  */
 Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
-  if (!beforeOperation) {
-    assert(false, 'Before operation object is null/undefined - setResponse');
-  }
-  let firstParty;
-  if (beforeOperation.hasOwnProperty('firstParty')) {
-    firstParty = beforeOperation.firstParty;
-  } else {
-    firstParty = false;
-    cy.log(
-      'firstParty property is missing in beforeOperation block, so using default as firstParty=false'
-    );
-  }
-
   if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTCALL)) {
-    cy.fireboltDataParser(beforeOperation[CONSTANTS.FIREBOLTCALL]).then((parsedData) => {
-      if (firstParty) {
-        const { method, params, action } = parsedData[0];
-        const requestMap = {
-          method: method,
-          params: params,
-          action: action,
-        };
+    cy.fireboltDataParser(beforeOperation[CONSTANTS.FIREBOLTCALL]).then((parsedDataArr) => {
+      parsedDataArr.forEach((parsedData) => {
+        if (firstParty) {
+          const { method, params, action } = parsedData;
+          const requestMap = {
+            method: method,
+            params: params,
+            action: action,
+          };
 
-        cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
-        cy.sendMessagetoPlatforms(requestMap).then((result) => {
-          cy.log('Response from 1st party App: ' + result);
-        });
-      } else {
-        const communicationMode = UTILS.getCommunicationMode();
-        const { method, params, action } = parsedData[0];
-        const additionalParams = {
-          communicationMode: communicationMode,
-          action: action,
-          isNotSupportedApi: false,
-        };
-        const methodParams = { method: method, methodParams: params };
-        intentMessage = UTILS.createIntentMessage(
-          CONSTANTS.TASK.CALLMETHOD,
-          methodParams,
-          additionalParams
-        );
-
-        const requestTopic = UTILS.getTopic(Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID));
-        const responseTopic = UTILS.getTopic(
-          Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID),
-          CONSTANTS.SUBSCRIBE
-        );
-
-        // Sending message to 3rd party app.
-        cy.log(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
-        cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
-          result = JSON.parse(result);
-          cy.log(
-            `Response from 3rd party App ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(
-              result
-            )}`
+          cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
+          cy.sendMessagetoPlatforms(requestMap).then((result) => {
+            cy.log('Response from 1st party App: ' + result);
+          });
+        } else {
+          const communicationMode = UTILS.getCommunicationMode();
+          const { method, params, action } = parsedData;
+          const additionalParams = {
+            communicationMode: communicationMode,
+            action: action,
+            isNotSupportedApi: false,
+          };
+          const methodParams = { method: method, methodParams: params };
+          intentMessage = UTILS.createIntentMessage(
+            CONSTANTS.TASK.CALLMETHOD,
+            methodParams,
+            additionalParams
           );
-        });
-      }
+
+          const requestTopic = UTILS.getTopic(Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID));
+          const responseTopic = UTILS.getTopic(
+            Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID),
+            CONSTANTS.SUBSCRIBE
+          );
+
+          // Sending message to 3rd party app.
+          cy.log(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
+          cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
+            result = JSON.parse(result);
+            cy.log(
+              `Response from 3rd party App ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(
+                result
+              )}`
+            );
+          });
+        }
+      });
     });
   } else if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTMOCK)) {
     cy.getFireboltData(
