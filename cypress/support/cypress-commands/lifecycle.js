@@ -526,7 +526,10 @@ function validateVisibilityState(state) {
               result.report +
               CONSTANTS.VISIBILITYSTATE_FAILURE_FIX_LOG
           ).then(() => {
-            assert.equal(visibilityState[state], result.report + CONSTANTS.VISIBILITYSTATE_FAILURE_LOG);
+            assert.equal(
+              visibilityState[state],
+              result.report + CONSTANTS.VISIBILITYSTATE_FAILURE_LOG
+            );
           });
         }
         cy.log(
