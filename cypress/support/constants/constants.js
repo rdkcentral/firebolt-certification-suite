@@ -397,9 +397,12 @@ module.exports = {
   ENV_SETUP_STATUS: 'environmentLaunched',
   APP_LAUNCH_STATUS: 'appLaunched',
   VISIBILITYSTATE_VALIDATION_REQ: 'Lifecycle visibility state validation Req # ',
-  LIFECYCLE_VISIBILITYSTATE_SKIP_MESSAGE: '`App is not reachable to fetch visibility state. Skipping Visibility state validation.`',
-  VISIBILITYSTATE_FAILURE_FIX_LOG: '`, How to fix: If the visibility state response is correct for the current platform, but the expected value needs to be changed, add the expected value in configModule file ( cypress.config.js) in the format visibilityState: { ${state} : ${result.report}}`',
-  VISIBILITYSTATE_FAILURE_LOG: '`. If the visibility state response is correct for the current platform, but the expected value needs to be changed, add the expected value in configModule file ( cypress.config.js) in the format visibilityState: { ${state} : ${result.report}}`',
+  LIFECYCLE_VISIBILITYSTATE_SKIP_MESSAGE: 
+    '`App is not reachable to fetch visibility state. Skipping Visibility state validation.`',
+  VISIBILITYSTATE_FAILURE_FIX_LOG:
+    '`, How to fix: If the visibility state response is correct for the current platform, but the expected value needs to be changed, add the expected value in configModule file ( cypress.config.js) in the format visibilityState: { ${state} : ${result.report}}`',
+  VISIBILITYSTATE_FAILURE_LOG:
+    '`. If the visibility state response is correct for the current platform, but the expected value needs to be changed, add the expected value in configModule file ( cypress.config.js) in the format visibilityState: { ${state} : ${result.report}}`',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
