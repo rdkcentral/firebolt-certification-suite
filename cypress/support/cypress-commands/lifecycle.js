@@ -202,16 +202,16 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId) => {
       if (lifecycleEventRequirementId && lifecycleEventRequirementId.event) {
         const appHistoryPrevious = UTILS.getEnvVariable(CONSTANTS.APP_LIFECYCLE_HISTORY);
         const appHistoryCount = appHistory.length - appHistoryPrevious.length;
-        let pretext = CONSTANTS.NOTIFICATION_EXISTS_REQ + lifecycleEventRequirementId?.event?.id[0];
+        let pretext;
         // If no lifecycle events expected, validate app history value is also empty
         if (
           UTILS.getEnvVariable(CONSTANTS.IS_SAME_APP_TRANSITION, false) ||
           state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING
         ) {
-          UTILS.assertWithRequirementLogs(CONSTANTS.LIFECYCLE_NOTIFICATION_NOT_GENERATED, appHistoryCount == 0, true);
+          UTILS.assertWithRequirementLogs(CONSTANTS.LIFECYCLE_NOTIFICATION_NOT_GENERATED + lifecycleEventRequirementId?.event?.id[0], appHistoryCount == 0, true);
         } else {
           // Else if lifecycle events expected, get app event data and app object event data
-          UTILS.assertWithRequirementLogs(CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED, appHistoryCount >= 1, true);
+          UTILS.assertWithRequirementLogs(CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED + lifecycleEventRequirementId?.event?.id[0], appHistoryCount >= 1, true);
           for (let eventIndex = 1; eventIndex <= appHistoryCount; eventIndex++) {
             const newAppEvent = appHistory[appHistory.length - eventIndex];
             let appObjectEvent;
