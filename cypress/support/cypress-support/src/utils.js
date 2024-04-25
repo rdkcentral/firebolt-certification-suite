@@ -180,7 +180,12 @@ function overideParamsFromConfigModule(overrideParams) {
 function getTopic(appIdentifier = null, operation = null) {
   let topic;
   let deviceMac = getEnvVariable(CONSTANTS.DEVICE_MAC);
-  expect(deviceMac.length).to.be.greaterThan(5);
+  if (deviceMac.length <= 5 || !deviceMac || deviceMac == undefined) {
+    assert(
+      false,
+      `Provided deviceMac ${deviceMac} is in improper format. Expected format : F046XXXXXXXX.`
+    );
+  }
   // Remove colons from mac address if not removed
   deviceMac = deviceMac.replaceAll(':', '');
   if (appIdentifier) {
