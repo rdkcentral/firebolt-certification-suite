@@ -91,5 +91,19 @@
     "FETCH_LIFECYCLE_BACKGROUND_EXPECTING_ERROR": {
         "method": "lifecycle.background",
         "expected": "error"
+    },
+    "CALL_LIFECYCLE_TERMINATE": {
+        "method": "lifecycle.terminate"
+    },
+    "CALL_LIFECYCLE_FINISHED": {
+        "method": "lifecycle.finished"
+    },
+    "CALL_LIFECYCLE_FINISHED_AND_EXPECTS_ERROR": {
+        "method": "lifecycle.finished",
+        "expected": "error"
+    },
+    "CALL_LIFECYCLE_SUSPEND_AND_EXPECTS_ERROR": {
+        "method": "lifecycle.suspend",
+        "expected": "error"
     }
 }
