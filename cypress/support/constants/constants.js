@@ -395,6 +395,7 @@ module.exports = {
   FCS_DEFAULTTESTDATA_PATH: './cypress/fixtures/defaultTestData.json',
   ENV_SETUP_STATUS: 'environmentLaunched',
   APP_LAUNCH_STATUS: 'appLaunched',
+  NO_EVENT_TRIGGERED: 'Expecting no event to be triggered from platform',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
