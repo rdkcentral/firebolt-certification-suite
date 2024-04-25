@@ -38,6 +38,7 @@ module.exports = {
   ALPHANUMERIC_REGEXP: new RegExp(/^(?:.*\d)(?:.*[a-zA-Z]).{2,}$/),
   DEVICE_MODEL_REGEXP: new RegExp('^[a-zA-Z0-9_-]*$'),
   issueDate: [11, 31],
+  notOnOrAfter: [14, 34],
   partner: [9, 16],
   lmt: [6, 7],
   TOKEN_JWT_REGEXP: new RegExp('^[A-Za-z0-9_-]{2,}(?:.[A-Za-z0-9_-]{2,}){2}$'),
