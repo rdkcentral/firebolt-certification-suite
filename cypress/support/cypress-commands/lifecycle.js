@@ -518,17 +518,18 @@ function validateVisibilityState(state) {
         const pretext =
           CONSTANTS.VISIBILITYSTATE_VALIDATION_REQ + lifecycleStateRequirementId.visible_check.id;
         if (visibilityState[state] != result.report) {
-          const fixLog = eval(CONSTANTS.VISIBILITYSTATE_FAILURE_FIX_LOG);
-          const assertLog = eval(CONSTANTS.VISIBILITYSTATE_FAILURE_LOG);
           cy.log(
             pretext +
               ': Expected : ' +
               visibilityState[state] +
               ' , Actual : ' +
               result.report +
-              fixLog
+              CONSTANTS.VISIBILITYSTATE_FAILURE_FIX_LOG
           ).then(() => {
-            assert.equal(visibilityState[state], result.report + assertLog);
+            assert.equal(
+              visibilityState[state],
+              result.report + CONSTANTS.VISIBILITYSTATE_FAILURE_LOG
+            );
           });
         }
         cy.log(
