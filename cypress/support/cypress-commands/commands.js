@@ -904,18 +904,19 @@ Cypress.Commands.add('mergeFireboltCallsAndFireboltMocks', () => {
   ).then((response) => {
     Cypress.env(CONSTANTS.COMBINEDFIREBOLTMOCKS, response);
   });
-  /**
-   * @module commands
-   * @function clearCache
-   * @description To clear cypress cache and reload the browser.
-   * @example
-   * cy.clearCache()
-   */
-  Cypress.Commands.add('clearCache', () => {
-    cy.clearCookies();
-    cy.clearAllCookies;
-    cy.clearLocalStorage();
-    cy.clearAllSessionStorage();
-    cy.reload(true);
-  });
+});
+
+/**
+ * @module commands
+ * @function clearCache
+ * @description To clear cypress cache and reload the browser.
+ * @example
+ * cy.clearCache()
+ */
+Cypress.Commands.add('clearCache', () => {
+  cy.clearCookies();
+  cy.clearAllCookies;
+  cy.clearLocalStorage();
+  cy.clearAllSessionStorage();
+  cy.reload(true);
 });
