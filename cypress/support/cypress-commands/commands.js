@@ -466,7 +466,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
   if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTCALL)) {
     cy.fireboltDataParser(beforeOperation[CONSTANTS.FIREBOLTCALL]).then((parsedData) => {
       if (firstParty) {
-        const { method, params, action } = parsedData;
+        const { method, params, action } = parsedData[0];
         const requestMap = {
           method: method,
           params: params,
@@ -479,7 +479,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
         });
       } else {
         const communicationMode = UTILS.getCommunicationMode();
-        const { method, params, action } = parsedData;
+        const { method, params, action } = parsedData[0];
         const additionalParams = {
           communicationMode: communicationMode,
           action: action,
