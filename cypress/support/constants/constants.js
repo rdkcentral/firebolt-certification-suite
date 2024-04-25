@@ -115,7 +115,7 @@ module.exports = {
   EXCLUDED_VALUES: [null, undefined],
   EXECUTE_SHELL: 'executeShell',
   EXPECTED_DATA_NOT_FOUND_IN_MODULE_JSONS:
-    '`Expected data ${dataIdentifier} was not found in the default file, FCS module JSON file, or external module JSON file. Returning ${dataIdentifier} as is.`',
+    '`Expected data ${dataIdentifier} was not found in fixtures. Returning ${dataIdentifier} as is.`',
   EXPECTED_DEFAULT_TESTDATA_MESSAGE:
     'Expected JSON data should be defined in fixtures/objects/defaultTestData.json',
   EXPECTED_ERROR_RESPONSE: 'Expected error in response:',

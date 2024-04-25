@@ -156,24 +156,22 @@ function capabilitiesSupportedLogs(capabilityParam, capabilityStatus) {
     case CONSTANTS.SUPPORTED:
       cy.log(`Capability '${capabilityParam}' is supported`, 'capabilitiesSupportedLogs').then(
         () => {
-          assert.equal(true, true, `Capability '${capabilityParam}' is supported`);
+          assert(true, `Capability '${capabilityParam}' is supported`);
         }
       );
       break;
     case CONSTANTS.NOTAVAILABLE:
-      cy.log(`Capability '${capabilityParam}' is not available`, 'capabilitiesSupportedLogs').then(
-        () => {
-          assert.isTrue(
-            false,
-            'Passed capability is unavailable in firebolt.json but available in device manifest'
-          );
-        }
-      );
+      cy.log(
+        `Capability '${capabilityParam}' is not available in firebolt.json`,
+        'capabilitiesSupportedLogs'
+      ).then(() => {
+        assert(false, `Capability '${capabilityParam}' is not available in firebolt.json`);
+      });
       break;
     case CONSTANTS.NOTSUPPORTED:
       cy.log(`Capability '${capabilityParam}' is not supported`, 'capabilitiesSupportedLogs').then(
         () => {
-          assert.equal(true, true, `Capability '${capabilityParam}' is not supported`);
+          assert(true, `Capability '${capabilityParam}' is not supported`);
         }
       );
       break;
@@ -182,7 +180,7 @@ function capabilitiesSupportedLogs(capabilityParam, capabilityStatus) {
         `Device has an issue with the Capability : ${capabilityParam}`,
         'capabilitiesSupportedLogs'
       ).then(() => {
-        assert.isTrue(false, 'Device has an issue with the Capability');
+        assert(false, 'Device has an issue with the Capability');
       });
   }
 }
@@ -241,9 +239,9 @@ Cypress.Commands.add('specialValidation', (validationObject) => {
         cy.log(
           `Method content validation for ${method} for ${JSON.stringify(
             message
-          )} expected ${expected} to be ${apiResponseContent}`
+          )} expected ${apiResponseContent} to be ${expected}`
         ).then(() => {
-          assert.equal(expected, apiResponseContent, 'Equal to be');
+          assert.equal(apiResponseContent, expected, 'Equal to be');
         });
       }
     );
