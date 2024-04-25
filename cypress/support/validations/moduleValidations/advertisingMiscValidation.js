@@ -48,38 +48,34 @@ export function advertisingMiscValidation(method, validationTypeObject, apiOrEve
 function validateAdvertisingAdvertisingId(method, validationTypeObject, apiOrEventObject) {
   const response = apiOrEventObject.response.result;
   const ScenarioType = validationTypeObject.type;
-  const pretext = `${CONSTANTS.METHOD_CONTENT} for ${method} method : `;
+  const pretext = `${CONSTANTS.METHOD_CONTENT} for ${method} : `;
 
   // Ifa is an advertising identifier and it should not be empty.
   cy.log(
     `${pretext} Ifa is not null or undefined: *******`,
     'validateAdvertisingAdvertisingId'
   ).then(() => {
-    assert.exists(response.ifa, `${pretext} : Is not null or undefined`);
+    assert.exists(response.ifa, `${pretext} Is not null or undefined`);
   });
 
   switch (ScenarioType) {
     case CONSTANTS.LIMITADTRACKING_ON:
       // lmt value equal to 1 when limitAdTracking is on
       cy.log(
-        `${pretext} Lmt equal to be 1: ` + response.lmt,
+        `${pretext} Expected lmt value: 1, Actual value: ` + response.lmt,
         'validateAdvertisingAdvertisingId'
       ).then(() => {
-        assert.equal(
-          CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT,
-          response.lmt,
-          `${pretext} Equal to be  `
-        );
+        assert.equal(response.lmt, CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT, `${pretext} `);
       });
       if (response.ifa_type) {
         cy.log(
-          `${pretext} Ifa_type equal to be sessionId : ` + response.ifa_type,
+          `${pretext} Expected Ifa_type value: sessionId, Actual value: ` + response.ifa_type,
           'validateAdvertisingAdvertisingId'
         ).then(() => {
           assert.equal(
-            CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_IFA_TYPE,
             response.ifa_type,
-            `${pretext} Equal to be `
+            CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_IFA_TYPE,
+            `${pretext} `
           );
         });
       }
@@ -87,24 +83,20 @@ function validateAdvertisingAdvertisingId(method, validationTypeObject, apiOrEve
     case CONSTANTS.LIMITADTRACKING_OFF:
       // lmt value equal to 0 when limitAdTracking is off
       cy.log(
-        `${pretext} Lmt equal to be 0 : ` + response.lmt,
+        `${pretext} Expected lmt value: 0, Actual value:  ` + response.lmt,
         'validateAdvertisingAdvertisingId'
       ).then(() => {
-        assert.equal(
-          CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT,
-          response.lmt,
-          `${pretext} Equal to be `
-        );
+        assert.equal(response.lmt, CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT, `${pretext} `);
       });
       if (response.ifa_type) {
         cy.log(
-          `${pretext} Ifa_type equal to be sessionId: ` + response.ifa_type,
+          `${pretext} Expected Ifa_type value: sessionId, Actual value:  ` + response.ifa_type,
           'validateAdvertisingAdvertisingId'
         ).then(() => {
           assert.equal(
-            CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_IFA_TYPE,
             response.ifa_type,
-            `${pretext} Equal to be`
+            CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_IFA_TYPE,
+            `${pretext} `
           );
         });
       }
