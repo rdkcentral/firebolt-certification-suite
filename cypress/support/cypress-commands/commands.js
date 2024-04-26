@@ -450,6 +450,18 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
  * cy.setResponse({"fireboltCall":"USERGRANTS_CLEAR_REFUI", "firstParty": true})
  */
 Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
+  if (!beforeOperation) {
+    assert(false, 'Before operation object is null/undefined - setResponse');
+  }
+  let firstParty;
+  if (beforeOperation.hasOwnProperty('firstParty')) {
+    firstParty = beforeOperation.firstParty;
+  } else {
+    firstParty = false;
+    cy.log(
+      'firstParty property is missing in beforeOperation block, so using default as firstParty=false'
+    );
+  }
   if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTCALL)) {
     cy.fireboltDataParser(beforeOperation[CONSTANTS.FIREBOLTCALL]).then((parsedDataArr) => {
       parsedDataArr.forEach((parsedData) => {
