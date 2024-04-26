@@ -7,7 +7,7 @@ Feature: Metrics
     @Metrics @coreSDK @sdk @transport
     Scenario Outline: Metrics.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_key>'
+        Then 'Firebolt' platform responds for '<Validation_key>'
 
         Examples:
             | Scenario              | Method         | API_Key                          | Validation_key                   |
@@ -17,7 +17,7 @@ Feature: Metrics
     @Metrics @coreSDK @sdk @transport
     Scenario Outline: Metrics.<Method> - Negative Scenario: <Scenario> expecting error
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_key>'
+        Then 'Firebolt' platform responds for '<Validation_key>'
 
         Examples:
             | Scenario                               | Method                  | API_Key                                                           | Validation_key                                 |
@@ -42,7 +42,7 @@ Feature: Metrics
     @Metrics @coreSDK @sdk @transport
     Scenario Outline: Metrics.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_key>'
+        Then 'Firebolt' platform responds for '<Validation_key>'
 
         Examples: 
             | Scenario                                  | Method               | API_Key                                                         | Validation_key                           |
@@ -77,7 +77,7 @@ Feature: Metrics
      @Metrics @coreSDK @sdk @transport
      Scenario Outline: Metrics.<Method> - Negative Scenario: <Scenario> expecting error
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_key>'
+        Then 'Firebolt' platform responds for '<Validation_key>'
 
         Examples:
             | Scenario                                  | Method                 | API_Key                                                           | Validation_key                                  |

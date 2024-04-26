@@ -9,16 +9,16 @@ Feature: Device_Manage
     Scenario: Device.name - Positive Scenario: set device name - Bedroom
         When 1st party app registers for the 'device onNameChanged' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to 'set device name to Bedroom'
-        Then 'Firebolt' platform responds to '1st party app' with 'null for device setName'
+        Then 'Firebolt' platform responds to '1st party app' for 'null for device setName'
         When 1st party app invokes the 'Firebolt' API to 'get manage device name'
-        Then 'Firebolt' platform responds to '1st party app' with 'Bedroom for device name'
+        Then 'Firebolt' platform responds to '1st party app' for 'Bedroom for device name'
         And 'Firebolt' platform triggers to '1st party app' event 'onNameChanged for device with Bedroom'
-        And 'Firebolt' platform responds to '1st party app' with 'null for device setname'
+        And 'Firebolt' platform responds to '1st party app' for 'null for device setname'
 
     # @Device @manageSDK @sdk @transport @notSupported
     # Scenario Outline: Device.provision - Positive Scenario: <Scenario>
     #     When 1st party app invokes the 'Firebolt' API to '<Key>'
-    #     Then 'Firebolt' platform responds to '1st party app' with '<MethodContent>'
+    #     Then 'Firebolt' platform responds to '1st party app' for '<MethodContent>'
 
     # Examples:
     #         | Scenario                                 | Key                                  | MethodContent                       |
@@ -30,9 +30,9 @@ Feature: Device_Manage
     #     When 1st party app invokes the 'Firebolt' API to 'provision device with default values'
     #     And '3rd party app' invokes the 'Firebolt' API to 'get device id'
     #     And '3rd party app' invokes the 'Firebolt' API to 'get account id'
-    #     Then 'Firebolt' platform responds with 'expected provision device id'
-    #     Then 'Firebolt' platform responds with 'expected provision account id'
-    #     Then 'Firebolt' platform responds with 'default value for device provision'
+    #     Then 'Firebolt' platform responds for 'expected provision device id'
+    #     Then 'Firebolt' platform responds for 'expected provision account id'
+    #     Then 'Firebolt' platform responds for 'default value for device provision'
 
     # @Device @manageSDK @sdk @transport @notSupported
     # Scenario: Device.provision - Positive Scenario: with distributor id including device.id account.id and device.distributor
@@ -40,15 +40,15 @@ Feature: Device_Manage
     #     And 1st party app invokes the 'Firebolt' API to 'provision device with distributor id'
     #     And '3rd party app' invokes the 'Firebolt' API to 'get device id'
     #     And '3rd party app' invokes the 'Firebolt' API to 'get account id'
-    #     Then 'Firebolt' platform responds with 'expected provision device id'
-    #     Then 'Firebolt' platform responds with 'expected provision account id'
-    #     Then 'Firebolt' platform responds with 'distributor id for device provision'
-    #     Then 'Firebolt' platform responds with 'default value for device provision'
+    #     Then 'Firebolt' platform responds for 'expected provision device id'
+    #     Then 'Firebolt' platform responds for 'expected provision account id'
+    #     Then 'Firebolt' platform responds for 'distributor id for device provision'
+    #     Then 'Firebolt' platform responds for 'default value for device provision'
 
     @Device @manageSDK @sdk @transport
     Scenario Outline: Device.name - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for device'
+        Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for device'
 
         Examples:
             | Scenario                     | Key                          |
@@ -58,7 +58,7 @@ Feature: Device_Manage
     @Device @manageSDK @sdk @transport
     Scenario Outline: Device.provision - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for device provision'
+        Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for device provision'
 
         Examples:
             | Scenario                               | Key                                |
@@ -71,5 +71,5 @@ Feature: Device_Manage
     @Device @manageSDK @sdk @transport
     Scenario: Device.name - Positive Scenario: setName with undefined params
         When 1st party app invokes the 'Firebolt' API to 'set device name without parameters'
-        Then 'Firebolt' platform responds to '1st party app' with 'expected device name'
+        Then 'Firebolt' platform responds to '1st party app' for 'expected device name'
 

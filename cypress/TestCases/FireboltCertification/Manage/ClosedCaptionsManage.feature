@@ -8,9 +8,9 @@ Feature: ClosedCaptions_Manage
     Scenario Outline: ClosedCaptions.<Method> - Positive Scenario: <Scenario>
         When 1st party app registers for the '<Event>' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Method_Validation_Key>'
         And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
 
         Examples:
@@ -51,7 +51,7 @@ Feature: ClosedCaptions_Manage
     @ClosedCaptions @manageSDK
     Scenario Outline: ClosedCaptions.<Method> - Positive Scenario: <Scenario> with undefined params
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Method_Validation_Key>'
 
         Examples:
             | Scenario               | Method                | API_Key                                   | Method_Validation_Key                            |
@@ -74,10 +74,10 @@ Feature: ClosedCaptions_Manage
     Scenario Outline: Closedcaptions.<Method> - Positive Scenario: <Scenario> with 'null' params
         When 1st party app registers for the '<Event>' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
-        And 'Firebolt' platform triggers to '1st party app' with '<Event_Validation_Key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Method_Validation_Key>'
+        And 'Firebolt' platform triggers to '1st party app' for '<Event_Validation_Key>'
 
         Examples:
             | Scenario          | Method            | Set_API_Key                   | API_Key               | Method_Validation_Key                             | Event_Validation_Key                                         | Set_Method_Content                           | Event                                     |
@@ -97,7 +97,7 @@ Feature: ClosedCaptions_Manage
     @ClosedCaptions @manageSDK
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Method_Validation_key>'
 
         Examples:
             | Scenario                    | Method                | API_Key                                      | Method_Validation_key                                   |

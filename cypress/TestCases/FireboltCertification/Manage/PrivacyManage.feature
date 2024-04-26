@@ -8,9 +8,9 @@ Feature: Privacy_Manage
    Scenario Outline: Privacy.<Method> - Positive Scenario: <Scenario>
       When 1st party app registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<API_Set_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
       When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Method_Validation_Key>'
       And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
 
       Examples:
@@ -43,36 +43,36 @@ Feature: Privacy_Manage
    @Privacy @manageSDK @sdk @transport
    Scenario: Privacy.settings - Positive Scenario: Settings
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow resumePoints as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowResumePoints'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowResumePoints'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow unentitledResumePoints as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowUnentitledResumePoints'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowUnentitledResumePoints'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow watchHistory as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowWatchHistory'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowWatchHistory'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow productAnalytics as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowProductAnalytics'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowProductAnalytics'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow personalization as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowPersonalization'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowPersonalization'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow unentitledPersonalization as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowUnentitledPersonalization'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowUnentitledPersonalization'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow remoteDiagnostics as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowRemoteDiagnostics'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowRemoteDiagnostics'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow primaryContentAdTargeting as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowPrimaryContentAdTargeting'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowPrimaryContentAdTargeting'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow primaryBrowseAdTargeting as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowPrimaryBrowseAdTargeting'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowPrimaryBrowseAdTargeting'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow appContentAdTargeting as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowAppContentAdTargeting'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowAppContentAdTargeting'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow ACRCollection as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowACRCollection'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowACRCollection'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow cameraAnalytics as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowCameraAnalytics'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowCameraAnalytics'
       When 1st party app invokes the 'Firebolt' API to 'get privacy settings'
-      Then 'Firebolt' platform responds to '1st party app' with 'expected privacy settings'
+      Then 'Firebolt' platform responds to '1st party app' for 'expected privacy settings'
 
    @Privacy @manageSDK @sdk @transport
    Scenario Outline: Privacy.<Set_Method> - Positive Scenario: <Scenario> with undefined params
       When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Method_validation_Key>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Method_validation_Key>'
 
       Examples:
          | Scenario                           | Set_Method                        | API_Key                                                    | Method_validation_Key                               |
@@ -92,7 +92,7 @@ Feature: Privacy_Manage
    @Privacy @manageSDK @sdk @transport
    Scenario Outline: Privacy.<Method> - Negative Scenario: <Scenario> and expecting error
       When 1st party app invokes the 'Firebolt' API to '<Error_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Error_Object>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Error_Object>'
 
       Examples:
          | Scenario          | Method                         | Error_Key                                                              | Error_Object                                                      |

@@ -9,7 +9,7 @@ Feature: Discovery_Manage
     Scenario Outline: Discovery.onSignIn event - Positive Scenario: '<Scenario>'
         When 1st party app registers for the 'discovery onSignIn' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to '<Key>'
-        Then 'Firebolt' platform responds with 'signIn for discovery'
+        Then 'Firebolt' platform responds for 'signIn for discovery'
         And 'Firebolt' platform triggers to '1st party app' event 'onSignIn for discovery with appid'
 
         Examples:
@@ -21,5 +21,5 @@ Feature: Discovery_Manage
     Scenario: Discovery.onSignOut event - Positive Scenario: Validating discovery onSignOut event
         When 1st party app registers for the 'discovery onSignOut' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'notify user has signed out'
-        Then 'Firebolt' platform responds with 'signOut for discovery'
+        Then 'Firebolt' platform responds for 'signOut for discovery'
         And 'Firebolt' platform triggers to '1st party app' event 'onSignOut for discovery with appid'

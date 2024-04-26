@@ -22,22 +22,22 @@ import UTILS from '../cypress-support/src/utils';
 
 /**
  * @module validations
- * @function And '(.+)' platform responds(:? to '(.+)')? with '(.+)'
+ * @function And '(.+)' platform responds(:? to '(.+)')? for '(.+)'
  * @description Performing a validation against the source of truth for the given API or Event response
  * @param {String} sdk - name of the sdk.
  * @param {String} appId - The object was retrieved by using the appId.
  * @param {String} key - The key name of the Firebolt data contains method, context, or expected value, etc.
  * @example
- * Given 'Firebolt' platform responds with 'Validate device id'
- * Given 'Firebolt' platform responds to '1st party app' with 'Validate device id'
- * Given 'Firebolt' platform responds to 'test.test.test' with 'Validate device id'
+ * Given 'Firebolt' platform responds for 'Validate device id'
+ * Given 'Firebolt' platform responds to '1st party app' for 'Validate device id'
+ * Given 'Firebolt' platform responds to 'test.test.test' for 'Validate device id'
  * Given 'Firebolt' platform triggers event 'Validate device id'
  * Given 'Firebolt' platform triggers to '1st party app' event 'Validate device id'
  * Given 'Firebolt' platform triggers to 'test.test.test' event 'Validate device id'
  */
 
 Given(
-  /'(.+)' platform (responds|triggers)(?: to '(.+)')? (with|event) '(.+)'$/,
+  /'(.+)' platform (responds|triggers)(?: to '(.+)')? (for|event) '(.+)'$/,
   async (sdk, eventcall, appId, event, key) => {
     if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
       key = key.replaceAll(' ', '_').toUpperCase();
