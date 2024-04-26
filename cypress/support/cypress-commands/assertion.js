@@ -656,15 +656,10 @@ Cypress.Commands.add(
 
     if (eventExpected) {
       methodOrEventObject.setEventResponseData(response);
-    } else if (!eventExpected) {
+    } else {
       cy.log(CONSTANTS.NO_EVENT_TRIGGERED).then(() => {
         assert.isNull(response[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
       });
-    } else {
-      assert(
-        false,
-        'Response does not match any of the expected criteria - ' + JSON.stringify(response)
-      );
     }
   }
 );
