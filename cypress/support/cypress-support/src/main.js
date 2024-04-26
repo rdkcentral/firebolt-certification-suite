@@ -38,7 +38,7 @@ export default function (module) {
 
   // before All
   before(() => {
-    // Added below cypress commands to clear cache and to reload browser
+    // Added below custom commands to clear cache and to reload browser
     cy.clearCache();
     cy.wrap(UTILS.pubSubClientCreation(appTransport), {
       timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT,
