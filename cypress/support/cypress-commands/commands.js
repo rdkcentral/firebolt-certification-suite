@@ -915,7 +915,6 @@ Cypress.Commands.add('mergeFireboltCallsAndFireboltMocks', () => {
  */
 Cypress.Commands.add('clearCache', () => {
   cy.clearCookies();
-  cy.clearAllCookies;
   cy.clearLocalStorage();
   cy.clearAllSessionStorage();
   cy.reload(true);
