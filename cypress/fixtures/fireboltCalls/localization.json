@@ -588,22 +588,22 @@
         "method": "manage_localization.setTimeZone",
         "params": "LOCALIZATION_SETTIMEZONE_AMERICA_LOSANGELES"
     },
-    "NULL_FOR_LOCALIZATION_ONLOCALITYCHANGED_EVENT": {
+    "ONLOCALITYCHANGED": {
         "event": "localization.onLocalityChanged",
         "validationJsonPath": "eventResponse",
         "expected": "NULL"  
     },
-    "NULL_FOR_LOCALIZATION_ONCOUNTRYCODECHANGED_EVENT": {
+    "ONCOUNTRYCODECHANGED": {
         "event": "localization.onCountryCodeChanged",
         "validationJsonPath": "eventResponse",
         "expected": "NULL"  
     },
-    "NULL_FOR_LOCALIZATION_ONLOCALECHANGED_EVENT": {
+    "ONLOCALECHANGED": {
         "event": "localization.onLocaleChanged",
         "validationJsonPath": "eventResponse",
         "expected": "NULL"  
     },
-    "NULL_FOR_LOCALIZATION_ONLANGUAGECHANGED_EVENT": {
+    "ONLANGUAGECHANGED": {
         "event": "localization.onLanguageChanged",
         "validationJsonPath": "eventResponse",
         "expected": "NULL"  

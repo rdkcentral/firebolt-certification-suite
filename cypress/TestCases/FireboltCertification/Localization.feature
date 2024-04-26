@@ -74,11 +74,11 @@ Feature: Localization
         And I clear '<Clear_Event_Name>' listeners
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
-        And 'Firebolt' platform responds with '<Event_Validation_Key>'
+        And 'Firebolt' platform does not trigger event for '<Event_Validation_Key>'
 
         Examples:
-            | Method_Name    | Registered_Event                  | Clear_Event_Name                        | Set_API_Key                | Event_Validation_Key                             | Set_Method_Content                   |
-            | setLocality    | localization onLocalityChanged    | localization onLocalityChanged event    | set locality to Washington | null for localization onLocalityChanged event    | null for localization setLocality    |
-            | setCountryCode | localization onCountryCodeChanged | localization onCountryCodeChanged event | set countrycode to PH      | null for localization onCountryCodeChanged event | null for localization setCountryCode |
-            | setLocale      | localization onlocalechanged      | localization onLocaleChanged event      | set locale to enUS         | null for localization onLocaleChanged event      | null for localization setLocale      |
-            | setLanguage    | localization onlanguagechanged    | localization onLanguageChanged event    | set language to en         | null for localization onLanguageChanged event    | null for localization setLanguage    |
+            | Method_Name    | Registered_Event                  | Clear_Event_Name                        | Set_API_Key                | Event_Validation_Key | Set_Method_Content                   |
+            | setLocality    | localization onLocalityChanged    | localization onLocalityChanged event    | set locality to Washington | onLocalityChanged    | null for localization setLocality    |
+            | setCountryCode | localization onCountryCodeChanged | localization onCountryCodeChanged event | set countrycode to PH      | onCountryCodeChanged | null for localization setCountryCode |
+            | setLocale      | localization onlocalechanged      | localization onLocaleChanged event      | set locale to enUS         | onLocaleChanged      | null for localization setLocale      |
+            | setLanguage    | localization onlanguagechanged    | localization onLanguageChanged event    | set language to en         | onLanguageChanged    | null for localization setLanguage    |
