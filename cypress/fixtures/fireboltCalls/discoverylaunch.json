@@ -716,5 +716,189 @@
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
         "expected": "DISCOVERYLAUNCH_SEARCH_INTENT_SOURCE"
+    },
+    "LAUNCH_APP_WITH_POWER_INTENT": {
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_POWER_INTENT"
+    },
+    "LAUNCH_APP_WITH_VOLUME_INTENT": {
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_VOLUME_INTENT"
+    },
+    "LAUNCH_APP_WITH_MUTE_INTENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_MUTE_INTENT"
+    },
+    "LAUNCH_APP_WITH_CHANNEL_INTENT_WITH_CHANNEL_NEXT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_CHANNEL_INTENT_WITH_CHANNEL_NEXT"
+    },
+    "LAUNCH_APP_WITH_CHANNEL_INTENT_WITH_CHANNEL_PREVIOUS":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_CHANNEL_INTENT_WITH_CHANNEL_PREVIOUS"
+    },
+    "LAUNCH_APP_WITH_PAUSE_INTENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_PAUSE_INTENT"
+    },
+    "LAUNCH_APP_WITH_RESUME_INTENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_RESUME_INTENT"
+    },
+    "LAUNCH_APP_WITH_REPLAY_INTENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_REPLAY_INTENT"
+    },
+    "LAUNCH_APP_WITH_STOP_INTENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_STOP_INTENT"
+    },
+    "LAUNCH_APP_WITH_SEEK_INTENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SEEK_INTENT" 
+    },
+    "LAUNCH_APP_WITH_SEEK_INTENT_WITH_RELATIVE_TRUE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SEEK_INTENT_WITH_RELATIVE_TRUE" 
+    },
+    "LAUNCH_APP_WITH_TRICK_PLAY_INTENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_TRICK_PLAY_INTENT" 
+    },
+    "LAUNCH_APP_WITH_CLOSED_CAPTIONS_INTENT_WITH_TRUE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_CLOSED_CAPTIONS_INTENT_WITH_TRUE" 
+    },
+    "LAUNCH_APP_WITH_CLOSED_CAPTIONS_INTENT_WITH_FALSE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_CLOSED_CAPTIONS_INTENT_WITH_FALSE" 
+    },
+    "LAUNCH_APP_WITH_VOICE_GUIDANCE_INTENT_WITH_TRUE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_VOICE_GUIDANCE_INTENT_WITH_TRUE" 
+    },
+    "LAUNCH_APP_WITH_VOICE_GUIDANCE_INTENT_WITH_FALSE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_VOICE_GUIDANCE_INTENT_WITH_FALSE" 
+    },
+    "LAUNCH_APP_WITH_VOICE_GUIDANCE_INTENT_WITH_SPEED_2":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_VOICE_GUIDANCE_INTENT_WITH_SPEED_2" 
+    },
+    "LAUNCH_APP_WITH_VOICE_GUIDANCE_INTENT_WITH_SPEED_-1_AND_RELATIVE_TRUE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_VOICE_GUIDANCE_INTENT_WITH_SPEED_-1_AND_RELATIVE_TRUE" 
+    },
+    "LAUNCH_APP_WITH_VOICE_GUIDANCE_INTENT_WITH_TRUE_AND_VERBOSITY_LOW":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_VOICE_GUIDANCE_INTENT_WITH_TRUE_AND_VERBOSITY_LOW" 
+    },
+    "LAUNCH_APP_WITH_VOICE_GUIDANCE_INTENT_WITH_TRUE_AND_VERBOSITY_HIGH":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_VOICE_GUIDANCE_INTENT_WITH_TRUE_AND_VERBOSITY_HIGH" 
+    },
+    "LAUNCH_APP_WITH_AUDIO_DESCRITIONS_INTENT_WITH_TRUE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_AUDIO_DESCRITIONS_INTENT_WITH_TRUE" 
+    },
+    "LAUNCH_APP_WITH_AUDIO_DESCRITIONS_INTENT_WITH_FALSE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_AUDIO_DESCRITIONS_INTENT_WITH_FALSE" 
+    },
+    "LAUNCH_APP_WITH_HIGH_CONTRAST_INTENT_WITH_HIGH_CONTRAST_MODE_ON":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_HIGH_CONTRAST_INTENT_WITH_HIGH_CONTRAST_MODE_ON" 
+    },
+    "LAUNCH_APP_WITH_HIGH_CONTRAST_INTENT_WITH_HIGH_CONTRAST_MODE_OFF":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_HIGH_CONTRAST_INTENT_WITH_HIGH_CONTRAST_MODE_OFF" 
+    },
+    "LAUNCH_APP_WITH_SCREEN_MAGNIFICATION_INTENT_WITH_SCREEN_MAGNIFICATION_TURNED_ON":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCREEN_MAGNIFICATION_INTENT_WITH_SCREEN_MAGNIFICATION_TURNED_ON" 
+    },
+    "LAUNCH_APP_WITH_SCREEN_MAGNIFICATION_INTENT_WITH_SCREEN_MAGNIFICATION_TURNED_OFF":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCREEN_MAGNIFICATION_INTENT_WITH_SCREEN_MAGNIFICATION_TURNED_OFF" 
+    },
+    "LAUNCH_APP_WITH_SCREEN_MAGNIFICATION_INTENT_WITH_MAGNIFICATION_SCALE_2.5":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCREEN_MAGNIFICATION_INTENT_WITH_MAGNIFICATION_SCALE_2.5" 
+    },
+    "LAUNCH_APP_WITH_FOCUS_INTENT_CURSOR_UP":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_FOCUS_INTENT_CURSOR_UP" 
+    },
+    "LAUNCH_APP_WITH_FOCUS_INTENT_CURSOR_DOWN":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_FOCUS_INTENT_CURSOR_DOWN" 
+    },
+    "LAUNCH_APP_WITH_FOCUS_INTENT_CURSOR_RIGHT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_FOCUS_INTENT_CURSOR_RIGHT" 
+    },
+    "LAUNCH_APP_WITH_FOCUS_INTENT_CURSOR_LEFT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_FOCUS_INTENT_CURSOR_LEFT" 
+    },
+    "LAUNCH_APP_WITH_SELECT_INTENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SELECT_INTENT" 
+    },
+    "LAUNCH_APP_WITH_SCROLL_INTENT_UP_WITH_UNIT_PAGE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCROLL_INTENT_UP_WITH_UNIT_PAGE" 
+    },
+    "LAUNCH_APP_WITH_SCROLL_INTENT_DOWN_WITH_UNIT_PAGE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCROLL_INTENT_DOWN_WITH_UNIT_PAGE" 
+    },
+    "LAUNCH_APP_WITH_SCROLL_INTENT_LEFT_WITH_UNIT_PAGE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCROLL_INTENT_LEFT_WITH_UNIT_PAGE" 
+    },
+    "LAUNCH_APP_WITH_SCROLL_INTENT_RIGHT_WITH_UNIT_PAGE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCROLL_INTENT_RIGHT_WITH_UNIT_PAGE" 
+    },
+    "LAUNCH_APP_WITH_SCROLL_INTENT_UP_WITH_UNIT_LINE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCROLL_INTENT_UP_WITH_UNIT_LINE" 
+    },
+    "LAUNCH_APP_WITH_SCROLL_INTENT_DOWN_WITH_UNIT_LINE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCROLL_INTENT_DOWN_WITH_UNIT_LINE" 
+    },
+    "LAUNCH_APP_WITH_SCROLL_INTENT_LEFT_WITH_UNIT_LINE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCROLL_INTENT_LEFT_WITH_UNIT_LINE" 
+    },
+    "LAUNCH_APP_WITH_SCROLL_INTENT_RIGHT_WITH_UNIT_LINE":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCROLL_INTENT_RIGHT_WITH_UNIT_LINE" 
+    },
+    "LAUNCH_APP_WITH_SCROLL_INTENT_UP_WITH_UNIT_PERCENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCROLL_INTENT_UP_WITH_UNIT_PERCENT" 
+    },
+    "LAUNCH_APP_WITH_SCROLL_INTENT_DOWN_WITH_UNIT_PERCENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCROLL_INTENT_DOWN_WITH_UNIT_PERCENT" 
+    },
+    "LAUNCH_APP_WITH_SCROLL_INTENT_LEFT_WITH_UNIT_PERCENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCROLL_INTENT_LEFT_WITH_UNIT_PERCENT" 
+    },
+    "LAUNCH_APP_WITH_SCROLL_INTENT_RIGHT_WITH_UNIT_PERCENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_SCROLL_INTENT_RIGHT_WITH_UNIT_PERCENT" 
+    },
+    "LAUNCH_APP_WITH_BACK_INTENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_BACK_INTENT" 
+    },
+    "LAUNCH_APP_WITH_EXIT_INTENT":{
+        "method": "discovery.launch",
+        "params": "DISCOVERYLAUNCH_EXIT_INTENT" 
     }
 }
