@@ -12,7 +12,7 @@ Feature: Discovery.launch_HotLaunch
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in foreground
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for 'true for discoverylaunch'
+        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
         When Test runner waits for 30 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         Then 'Firebolt' platform responds for 'foreground for lifecycle state'
@@ -67,7 +67,7 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'inactive'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for 'true for discoverylaunch'
+        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
         When Test runner waits for 10 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         Then 'Firebolt' platform responds for 'foreground for lifecycle state'
@@ -95,7 +95,7 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'background'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for 'true for discoverylaunch'
+        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
         When Test runner waits for 10 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         Then 'Firebolt' platform responds for 'foreground for lifecycle state'
@@ -123,7 +123,7 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state '<State>'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for 'true for discoverylaunch'
+        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
         When Test runner waits for 10 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         Then 'Firebolt' platform responds for 'foreground for lifecycle state'
@@ -140,7 +140,7 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'suspended'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for 'true for discoverylaunch'
+        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
         When Test runner waits for 10 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         Then 'Firebolt' platform responds for 'foreground for lifecycle state'
@@ -195,7 +195,7 @@ Feature: Discovery.launch_HotLaunch
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> for context source
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for 'true for discoverylaunch'
+        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
         When Test runner waits for 30 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         Then 'Firebolt' platform responds for 'foreground for lifecycle state'

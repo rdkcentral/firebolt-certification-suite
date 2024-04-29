@@ -4,7 +4,9 @@
     },
     "ENABLE_RECOMMENDATIONS": {
         "method": "manage_privacy.setAllowPersonalization",
-        "params": "TRUE"
+        "params": "TRUE",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "GET_VALUE_OF_POLICY": {
         "method": "discovery.policy"
@@ -29,7 +31,9 @@
     },
     "DISABLE_RECOMMENDATIONS": {
         "method": "manage_privacy.setAllowPersonalization",
-        "params": "FALSE"
+        "params": "FALSE",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "FALSE_FOR_HISTORY_BASED_RECOMMENDATIONS_IN_POLICY": {
         "method": "discovery.policy",
@@ -435,7 +439,9 @@
     },
     "SET_ALLOWPERSONALIZATION_TO_TRUE":{
         "method": "manage_privacy.setAllowPersonalization",
-        "params": "TRUE"
+        "params": "TRUE",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "ONDISCOVERYPOLICYCHANGED": {
         "event": "discovery.onPolicyChanged",

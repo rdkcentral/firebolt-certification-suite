@@ -2,23 +2,33 @@
 {
     "SEND_METRICS_EVENT_WITH_SCHEMA_AND_FOO_DATA": {
         "method": "manage_metrics.event",
-        "params": "METRICS_FOO_DATA_AND_SCHEMA"
+        "params": "METRICS_FOO_DATA_AND_SCHEMA",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SEND_METRICS_EVENT_WITH_SCHEMA_AND_NULL_FOO_DATA": {
         "method": "manage_metrics.event",
-        "params": "METRICS_NULL_FOO_DATA_AND_SCHEMA"
+        "params": "METRICS_NULL_FOO_DATA_AND_SCHEMA",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SEND_METRICS_EVENT_WITH_SCHEMA_AND_BOOLEAN_FOO_DATA": {
         "method": "manage_metrics.event",
-        "params": "METRICS_BOOLEAN_FOO_DATA_AND_SCHEMA"
+        "params": "METRICS_BOOLEAN_FOO_DATA_AND_SCHEMA",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SEND_METRICS_EVENT_WITH_EMPTY_DATA": {
         "method": "manage_metrics.event",
-        "params": "METRICS_EMPTY_DATA_OBJECT"
+        "params": "METRICS_EMPTY_DATA_OBJECT",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SEND_METRICS_EVENT_WITH_EMPTY_SCHEMA": {
         "method": "manage_metrics.event",
-        "params": "METRICS_EMPTY_SCHEMA"
+        "params": "METRICS_EMPTY_SCHEMA",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SEND_METRICS_EVENT_WITH_SCHEMA_AS_BOOLEAN": {
         "method": "manage_metrics.event",

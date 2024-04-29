@@ -18,11 +18,15 @@
     },
     "DISABLE_AUDIODESCRIPTIONS":{
         "method": "manage_audiodescriptions.setEnabled",
-        "params": "AUDIODESCRIPTIONS_DISABLED"
+        "params": "AUDIODESCRIPTIONS_DISABLED",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "ENABLE_AUDIODESCRIPTIONS":{
         "method": "manage_audiodescriptions.setEnabled",
-        "params": "AUDIODESCRIPTIONS_ENABLED"
+        "params": "AUDIODESCRIPTIONS_ENABLED",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "DISABLED_FOR_AUDIODESCRIPTIONS": {
         "method": "audiodescriptions.enabled",

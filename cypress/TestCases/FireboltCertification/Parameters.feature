@@ -6,7 +6,7 @@ Feature: Parameters
       And 3rd party 'certification' app is launched
       When '3rd party app' invokes the 'Firebolt' API to 'get parameters initialization'
       And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' for 'null for privacy setAllowAppContentAdTargeting'
+      Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get parameters initialization'
       Then 'Firebolt' platform responds for '<Validation_Key>'
 
@@ -20,7 +20,7 @@ Feature: Parameters
       Given the environment has been set up for 'Parameters' tests
       When 1st party app invokes the 'Firebolt' API to 'discovery launch with home intent'
       And Test runner waits for 30 'seconds'
-      Then 'Firebolt' platform responds to '1st party app' for 'true for discoveryLaunch'
+      Then 'Firebolt' platform responds to '1st party app' for 'discovery launch with home intent'
       When '3rd party app' invokes the 'Firebolt' API to 'get parameters initialization'
       Then 'Firebolt' platform responds for 'home intent for parameters initialization'
 

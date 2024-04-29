@@ -1,74 +1,4 @@
 {
-    "NULL_FOR_CLOSEDCAPTIONS_SETENABLED": {
-        "method": "closedcaptions.setEnabled",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETFONTFAMILY": {
-        "method": "closedcaptions.setFontFamily",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETFONTSIZE": {
-        "method": "closedcaptions.setFontSize",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETFONTCOLOR": {
-        "method": "closedcaptions.setFontColor",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETFONTEDGE": {
-        "method": "closedcaptions.setFontEdge",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETFONTEDGECOLOR": {
-        "method": "closedcaptions.setFontEdgeColor",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETBACKGROUNDCOLOR": {
-        "method": "closedcaptions.setBackgroundColor",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETFONTOPACITY": {
-        "method": "closedcaptions.setFontOpacity",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETBACKGROUNDOPACITY": {
-        "method": "closedcaptions.setBackgroundOpacity",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETTEXTALIGN": {
-        "method": "closedcaptions.setTextAlign",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETTEXTALIGNVERTICAL": {
-        "method": "closedcaptions.setTextAlignVertical",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETWINDOWCOLOR": {
-        "method": "closedcaptions.setWindowColor",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETWINDOWOPACITY": {
-        "method": "closedcaptions.setWindowOpacity",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETPREFERREDLANGUAGES": {
-        "method": "closedcaptions.setPreferredLanguages",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETENABLED":{
         "method": "closedcaptions.setEnabled",
         "validationJsonPath": "result",
@@ -297,79 +227,117 @@
     },
     "SET_BACKGROUNDCOLOR_TO_#7F7F7F":{
         "method": "manage_closedcaptions.setBackgroundColor",
-		"params": "CLOSEDCAPTIONS_COLOR_#7F7F7F"
+        "params": "CLOSEDCAPTIONS_COLOR_#7F7F7F",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_BACKGROUNDOPACITY_TO_75":{
         "method": "manage_closedcaptions.setBackgroundOpacity",
-		"params": "INTEGER75"
+        "params": "INTEGER75",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_ENABLED_CLOSEDCAPTIONS_TO_FALSE":{
         "method": "manage_closedcaptions.setEnabled",
-		"params": "FALSE"
+        "params": "FALSE",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_ENABLED_CLOSEDCAPTIONS_TO_TRUE":{
         "method": "manage_closedcaptions.setEnabled",
-		"params": "TRUE"
+        "params": "TRUE",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTCOLOR_TO_#FF00FF":{
         "method": "manage_closedcaptions.setFontColor",
-		"params": "CLOSEDCAPTIONS_FONTCOLOR"
+        "params": "CLOSEDCAPTIONS_FONTCOLOR",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTEDGE_TO_RAISED":{
         "method": "manage_closedcaptions.setFontEdge",
-		"params": "CLOSEDCAPTIONS_FONTEDGE_RAISED"
+        "params": "CLOSEDCAPTIONS_FONTEDGE_RAISED",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTEDGE_TO_NONE":{
         "method": "manage_closedcaptions.setFontEdge",
-		"params": "NONE"
+        "params": "NONE",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTEDGE_TO_DEPRESSED":{
         "method": "manage_closedcaptions.setFontEdge",
-		"params": "CLOSEDCAPTIONS_FONTEDGE_DEPRESSED"
+        "params": "CLOSEDCAPTIONS_FONTEDGE_DEPRESSED",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTEDGE_TO_UNIFORM":{
         "method": "manage_closedcaptions.setFontEdge",
-		"params": "CLOSEDCAPTIONS_FONTEDGE_UNIFORM"
+        "params": "CLOSEDCAPTIONS_FONTEDGE_UNIFORM",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTEDGE_TO_DROPSHADOW_LEFT":{
         "method": "manage_closedcaptions.setFontEdge",
-		"params": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_LEFT"
+        "params": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_LEFT",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTEDGE_TO_DROPSHADOW_RIGHT":{
         "method": "manage_closedcaptions.setFontEdge",
-		"params": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_RIGHT"
+        "params": "CLOSEDCAPTIONS_FONTEDGE_DROPSHADOW_RIGHT",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTFAMILY_TO_CURSIVE":{
         "method": "manage_closedcaptions.setFontFamily",
-		"params": "CLOSEDCAPTIONS_FONTFAMILY_CURSIVE"
+        "params": "CLOSEDCAPTIONS_FONTFAMILY_CURSIVE",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTOPACITY_TO_75":{
         "method": "manage_closedcaptions.setFontOpacity",
-		"params": "INTEGER75"
+        "params": "INTEGER75",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTOSIZE_TO_1":{
         "method": "manage_closedcaptions.setFontSize",
-		"params": "INTEGER1"
+        "params": "INTEGER1",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_TEXTALIGN_TO_LEFT":{
         "method": "manage_closedcaptions.setTextAlign",
-		"params": "LEFT"
+        "params": "LEFT",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_TEXTALIGN_TO_CENTER":{
         "method": "manage_closedcaptions.setTextAlign",
-		"params": "CENTER"
+        "params": "CENTER",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_TEXTALIGN_TO_RIGHT":{
         "method": "manage_closedcaptions.setTextAlign",
-		"params": "RIGHT"
+        "params": "RIGHT",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_TEXTALIGNVERTICAL_TO_TOP":{
         "method": "manage_closedcaptions.setTextAlignVertical",
-		"params": "TOP"
+        "params": "TOP",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_TEXTALIGNVERTICAL_TO_MIDDLE":{
         "method": "manage_closedcaptions.setTextAlignVertical",
-		"params": "MIDDLE"
+        "params": "MIDDLE",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_TEXTALIGNVERTICAL_TO_BOTTOM":{
         "method": "manage_closedcaptions.setTextAlignVertical",
@@ -377,51 +345,75 @@
     },
     "SET_FONTSIZE_TO_0.5":{
         "method": "manage_closedcaptions.setFontSize",
-		"params": "VALUE05"
+        "params": "VALUE05",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTSIZE_TO_1.5":{
         "method": "manage_closedcaptions.setFontSize",
-		"params": "VALUE1.5"
+        "params": "VALUE1.5",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTFAMILY_TO_MONOSPACED_SANSERIF":{
         "method": "manage_closedcaptions.setFontFamily",
-		"params": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SANSERIF"
+        "params": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SANSERIF",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTFAMILY_TO_PROPORTIONAL_SERIF":{
         "method": "manage_closedcaptions.setFontFamily",
-		"params": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SERIF"
+        "params": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SERIF",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTFAMILY_TO_MONOSPACED_SERIF":{
         "method": "manage_closedcaptions.setFontFamily",
-		"params": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SERIF"
+        "params": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SERIF",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTFAMILY_TO_PROPORTIONAL_SANSERIF":{
         "method": "manage_closedcaptions.setFontFamily",
-		"params": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SANSERIF"
+        "params": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SANSERIF",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTFAMILY_TO_SMALLCAPS":{
         "method": "manage_closedcaptions.setFontFamily",
-		"params": "CLOSEDCAPTIONS_FONTFAMILY_SMALLCAPS"
+        "params": "CLOSEDCAPTIONS_FONTFAMILY_SMALLCAPS",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_FONTFAMILY_TO_CASUAL":{
         "method": "manage_closedcaptions.setFontFamily",
-		"params": "CLOSEDCAPTIONS_FONTFAMILY_CASUAL"
+        "params": "CLOSEDCAPTIONS_FONTFAMILY_CASUAL",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_PREFERREDLANGUAGES_TO_ENGLISH":{
         "method": "manage_closedcaptions.setPreferredLanguages",
-		"params": "CLOSEDCAPTIONS_PREFERRED_LANG_ENG"
+        "params": "CLOSEDCAPTIONS_PREFERRED_LANG_ENG",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_PREFERREDLANGUAGES_TO_SPANISH":{
         "method": "manage_closedcaptions.setPreferredLanguages",
-		"params": "CLOSEDCAPTIONS_PREFERRED_LANG_SPA"
+        "params": "CLOSEDCAPTIONS_PREFERRED_LANG_SPA",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_WINDOWCOLOR_TO_WHITE":{
         "method": "manage_closedcaptions.setWindowColor",
-		"params": "WHITE"
+        "params": "WHITE",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "SET_WINDOWOPACITY_TO_50":{
         "method": "manage_closedcaptions.setWindowOpacity",
-		"params": "INTEGER50"
+        "params": "INTEGER50",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     },
     "GET_BACKGROUNDCOLOR":{
         "method": "manage_closedcaptions.backgroundColor"

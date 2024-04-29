@@ -8,7 +8,7 @@ Feature: ClosedCaptions_Manage
     Scenario Outline: ClosedCaptions.<Method> - Positive Scenario: <Scenario>
         When 1st party app registers for the '<Event>' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Method_Validation_Key>'
         And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'

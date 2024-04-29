@@ -49,10 +49,13 @@ Given(
         fireboltItems.forEach((item) => {
           const validationType = item.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
 
-          const methodOrEvent = item[validationType];
+          let methodOrEvent = item[validationType];
+          methodOrEvent = methodOrEvent.includes('manage_')
+            ? methodOrEvent.replace('manage_', '')
+            : methodOrEvent;
           const context = item.context ? item.context : CONSTANTS.NO_CONTEXT;
-          const validationJsonPath = item.validationJsonPath;
-          const expected = item.expected;
+          const validationJsonPath = item.validationJsonPath ? item.validationJsonPath : 'result';
+          const expected = item.expected ? item.expected : 'NULL';
           const expectingError = item.expectingError;
 
           let fCSValidationjson;

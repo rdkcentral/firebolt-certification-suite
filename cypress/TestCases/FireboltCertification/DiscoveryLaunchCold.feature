@@ -9,7 +9,7 @@ Feature: Discovery.launch_ColdLaunch
     Scenario Outline: Discovery.Launch Cold Launch - Positive Scenario: <Scenario> intent with context
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for 'true for discoverylaunch'
+        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
         When Test runner waits for 30 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         And '3rd party app' invokes the 'Firebolt' API to '<Call_Parameters_Initialization_With_Context_Key>'
@@ -105,7 +105,7 @@ Feature: Discovery.launch_ColdLaunch
     Scenario Outline: Discovery.Launch Cold Launch - Positive Scenario: <Scenario> for context source
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for 'true for discoverylaunch'
+        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
         When Test runner waits for 30 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         And '3rd party app' invokes the 'Firebolt' API to '<Call_Parameters_Initialization_With_Context_Key>'

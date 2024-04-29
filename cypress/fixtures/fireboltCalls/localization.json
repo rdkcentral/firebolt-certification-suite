@@ -9,7 +9,9 @@
     },
     "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_STRING": {
         "method": "manage_localization.addAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_AS_STRING"
+        "params": "LOCALIZATION_ADD_ADDITIONALINFO_AS_STRING",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "STRING_FOR_LOCALIZATION_ADDITIONALINFO": {
         "method": "localization.additionalInfo",
@@ -18,7 +20,9 @@
     },
     "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_EMPTY_STRING": {
         "method": "manage_localization.addAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_AS_EMPTY"
+        "params": "LOCALIZATION_ADD_ADDITIONALINFO_AS_EMPTY",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "EMPTY_STRING_FOR_LOCALIZATION_ADDITIONALINFO": {
         "method": "localization.additionalInfo",  
@@ -27,11 +31,15 @@
     },
     "SET_LOCALIZATION_REMOVEADDITIONALINFO_WITH_STRING": {
         "method": "manage_localization.removeAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_KEY_AS_STRING"
+        "params": "LOCALIZATION_ADD_ADDITIONALINFO_KEY_AS_STRING",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "SET_LOCALIZATION_REMOVEADDITIONALINFO_WITH_EMPTY_STRING": {
         "method": "manage_localization.removeAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_KEY_AS_EMPTY_STRING"
+        "params": "LOCALIZATION_ADD_ADDITIONALINFO_KEY_AS_EMPTY_STRING",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "EMPTY_KEY/VALUE_FOR_LOCALIZATION_ADDITIONALINFO": {
         "method": "localization.additionalInfo", 
@@ -139,11 +147,15 @@
     },
     "SET_LOCALIZATION_LOCALITY_TO_WASHINGTON": {
         "method": "manage_localization.setLocality",
-        "params": "LOCALIZATION_LOCALITY_WASHINGTON"
+        "params": "LOCALIZATION_LOCALITY_WASHINGTON",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "SET_LOCALIZATION_LOCALITY_TO_PHILADELPHIA": {
         "method": "manage_localization.setLocality",
-        "params": "LOCALIZATION_LOCALITY_PHILADELPHIA"
+        "params": "LOCALIZATION_LOCALITY_PHILADELPHIA",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "GET_LOCALIZATION_LOCALITY": {
         "method": "localization.locality"
@@ -180,31 +192,45 @@
     },
     "SET_COUNTRYCODE_TO_US": {
         "method": "manage_localization.setCountryCode",
-        "params": "LOCALIZATION_COUNTRYCODE_US"
+        "params": "LOCALIZATION_COUNTRYCODE_US",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "SET_LOCALE_TO_ENUS": {
         "method": "manage_localization.setLocale",
-        "params": "LOCALIZATION_LOCALE"
+        "params": "LOCALIZATION_LOCALE",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "SET_LOCALE_TO_ENUK": {
         "method": "manage_localization.setLocale",
-        "params": "LOCALIZATION_LOCALE_UK"
+        "params": "LOCALIZATION_LOCALE_UK",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "SET_LANGUAGE_TO_ES": {
         "method": "manage_localization.setLanguage",
-        "params": "LOCALIZATION_LANGUAGE_ES"
+        "params": "LOCALIZATION_LANGUAGE_ES",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "SET_LANGUAGE_TO_EN": {
         "method": "manage_localization.setLanguage",
-        "params": "LOCALIZATION_LANGUAGE_EN"
+        "params": "LOCALIZATION_LANGUAGE_EN",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "SET_PREFERREDAUDIOLANGUAGES_TO_SPA_ENG": {
         "method": "manage_localization.setPreferredAudioLanguages",
-        "params": "LOCALIZATION_PREFERRED_AUDIO_LANGUAGES_VALUE_SPA_ENG"
+        "params": "LOCALIZATION_PREFERRED_AUDIO_LANGUAGES_VALUE_SPA_ENG",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "SET_PREFERREDAUDIOLANGUAGES_TO_ENG_SPA": {
         "method": "manage_localization.setPreferredAudioLanguages",
-        "params": "LOCALIZATION_PREFERRED_AUDIO_LANGUAGES_VALUE_ENG_SPA"
+        "params": "LOCALIZATION_PREFERRED_AUDIO_LANGUAGES_VALUE_ENG_SPA",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "SPA_ENG_FOR_LOCALIZATION_PREFERREDAUDIOLANGUAGES": {
         "method": "localization.preferredAudioLanguages",  
@@ -263,11 +289,15 @@
     },
     "SET_POSTALCODE_TO_12345": {
         "method": "manage_localization.setPostalCode",
-        "params": "STRING_12345"
+        "params": "STRING_12345",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "SET_POSTALCODE_TO_19103": {
         "method": "manage_localization.setPostalCode",
-        "params": "STRING19103"
+        "params": "STRING19103",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "GET_POSTALCODE": {
         "method": "localization.postalCode"
@@ -341,7 +371,9 @@
     },
     "SET_LOCALITY_TO_WASHINGTON": {
         "method": "manage_localization.setLocality",
-        "params": "LOCALIZATION_LOCALITY_WASHINGTON"
+        "params": "LOCALIZATION_LOCALITY_WASHINGTON",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "GET_LOCALITY": {
         "method": "manage_localization.locality"
@@ -367,7 +399,9 @@
     },
     "SET_POSTALCODE_TO_123456": {
         "method": "manage_localization.setPostalCode",
-        "params": "STRING123456"
+        "params": "STRING123456",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "GET_MANAGE_POSTALCODE": {
         "method": "manage_localization.postalCode"
@@ -382,7 +416,9 @@
     },
     "SET_TIMEZONE_TO_AMERICA/NEWYORK": {
         "method": "manage_localization.setTimeZone",
-        "params": "LOCALIZATION_TIMEZONE_AMERICA_NEWYORK"
+        "params": "LOCALIZATION_TIMEZONE_AMERICA_NEWYORK",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "GET_TIMEZONE": {
         "method": "manage_localization.timeZone"

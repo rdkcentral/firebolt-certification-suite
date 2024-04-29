@@ -19,7 +19,9 @@
     },
     "CHECK_AVAILABILITY_OF_KEYBOARD_CAPABILITY":{
         "method": "capabilities.available",
-        "params": "CAPABILITIES_GET_KEYBOARD"
+        "params": "CAPABILITIES_GET_KEYBOARD",
+        "validationJsonPath": "result",
+		"expected": "TRUE"
     },
     "TRUE_FOR_KEYBOARD_CAPABILITY_AVAILABILITY":{
         "method": "capabilities.available",
@@ -28,7 +30,9 @@
     },
     "CHECK_AVAILABILITY_OF_ACKNOWLEDGECHALLENGE_CAPABILITY":{
         "method": "capabilities.available",
-        "params": "CAPABILITIES_GET_ACKNOWLEDGECHALLENGE"
+        "params": "CAPABILITIES_GET_ACKNOWLEDGECHALLENGE",
+        "validationJsonPath": "result",
+		"expected": "TRUE"
     },
     "TRUE_FOR_ACKNOWLEDGECHALLENGE_CAPABILITY_AVAILABILITY":{
         "method": "capabilities.available",
@@ -37,7 +41,9 @@
     },
     "CHECK_AVAILABILITY_OF_PINCHALLENGE_CAPABILITY":{
         "method": "capabilities.available",
-        "params": "CAPABILITIES_GET_PINCHALLENGE"
+        "params": "CAPABILITIES_GET_PINCHALLENGE",
+        "validationJsonPath": "result",
+		"expected": "TRUE"
     },
     "TRUE_FOR_PINCHALLENGE_CAPABILITY_AVAILABILITY":{
         "method": "capabilities.available",

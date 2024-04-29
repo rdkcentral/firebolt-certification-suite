@@ -1,11 +1,15 @@
 {
     "SET_PRIVACY_ALLOWAPPCONTENTADTARGETING_WITH_TRUE": {
         "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "TRUE"
+        "params": "TRUE",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "SET_PRIVACY_ALLOWAPPCONTENTADTARGETING_WITH_FALSE": {
         "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "FALSE"
+        "params": "FALSE",
+        "validationJsonPath": "result",
+        "expected": "NULL"  
     },
     "GET_PARAMETERS_INITIALIZATION": {
         "method": "parameters.initialization"
@@ -22,7 +26,9 @@
     },
     "DISCOVERY_LAUNCH_WITH_HOME_INTENT": {
         "method": "discovery.launch",
-        "params": "PARAMETERS_HOME_INTENT"
+        "params": "PARAMETERS_HOME_INTENT",
+        "validationJsonPath": "result",
+        "expected": "TRUE"
     },
     "HOME_INTENT_FOR_PARAMETERS_INITIALIZATION": {
         "method": "parameters.initialization",
