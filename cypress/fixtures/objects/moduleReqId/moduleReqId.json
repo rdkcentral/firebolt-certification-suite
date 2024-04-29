@@ -1736,8 +1736,8 @@
                 ]
             }
         },
-        "Lifecycle 2.3.2 Cannot Close an app from initializing": {
-            "Cannot Close an app from initializing": {
+        "Lifecycle_Initializing": {
+            "Lifecycle 2.3.2 Cannot Close an app from initializing": {
                 "req": [
                     {
                         "state": {

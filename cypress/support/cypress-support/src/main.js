@@ -83,12 +83,12 @@ export default function (module) {
         'Performance metrics service not active. To use perforance metrics service, pass performanceMetrics environment variable as true'
       );
     }
-    UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
   });
 
   // beforeEach
   beforeEach(() => {
     cy.testDataHandler(CONSTANTS.BEFORE_OPERATION);
+    UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
   });
 
   /**
