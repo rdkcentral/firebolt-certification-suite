@@ -147,4 +147,4 @@ Feature: Advertising
       And I clear 'advertising onPolicyChanged event' listeners
       And 1st party app invokes the 'Firebolt' API to 'set true for allowAppContentAdTargeting'
       Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowAppContentAdTargeting'
-      And 'Firebolt' platform responds with 'null for advertising onPolicyChanged event'
+      And 'Firebolt' platform does not trigger event for 'onAdvertisingPolicyChanged'

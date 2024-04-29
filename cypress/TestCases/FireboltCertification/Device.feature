@@ -49,7 +49,7 @@ Feature: Device
         And I clear 'device onNameChanged event' listeners
         And 1st party app invokes the 'Firebolt' API to 'set device name to kitchen'
         Then 'Firebolt' platform responds to '1st party app' with 'null for device setName'
-        And 'Firebolt' platform responds with 'null for device onNameChanged event'
+        And 'Firebolt' platform does not trigger event for 'onDeviceNameChanged'
 
     @Device @coreSDK @sdk @transport @notSupported
     Scenario Outline: Device.network - Positive Scenario: <Scenario>

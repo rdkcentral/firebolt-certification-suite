@@ -59,7 +59,7 @@ function validateLifecycleFinished(method, validationTypeObject, apiOrEventObjec
         cy.getDataFromTestDataJson(fixtureFile, ScenarioType).then((errorContentObject) => {
           if (communicationMode && communicationMode == CONSTANTS.MODE_TRANSPORT) {
             cy.log(
-              `Expected Errorcode for ${method}: ${apiErrorResponse.code} to be oneof [${errorContentObject.errorCode}]`
+              `Actual error code for ${method}: ${apiErrorResponse.code} expected to be present in list of expected error codes`
             ).then(() => {
               assert.include(
                 errorContentObject.errorCode,
@@ -71,7 +71,7 @@ function validateLifecycleFinished(method, validationTypeObject, apiOrEventObjec
               apiErrorResponse.message.includes(errorMessage)
             );
             cy.log(
-              `Expected Error Message ${apiErrorResponse.message} to be oneof [${errorContentObject.errorMessage}] `
+              `Actual error message ${apiErrorResponse.message} expected to be present in list of expected error messages`
             ).then(() => {
               assert.equal(checkErrorMessage, true, 'Error Message Validation: ');
             });
