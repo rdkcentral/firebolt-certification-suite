@@ -576,7 +576,10 @@ function validateVisibilityState(state) {
       req.hasOwnProperty('visible_check')
     );
 
-    if (Cypress.env(CONSTANTS.VISIBILITYSTATE) != undefined || Cypress.env(CONSTANTS.VISIBILITYSTATE) != null) {
+    if (
+      Cypress.env(CONSTANTS.VISIBILITYSTATE) != undefined ||
+      Cypress.env(CONSTANTS.VISIBILITYSTATE) != null
+    ) {
       const intentMessage = UTILS.createIntentMessage(CONSTANTS.TASK.VISIBILITYSTATE, {
         params: CONSTANTS.VISIBILITYSTATE,
       });
@@ -599,11 +602,11 @@ function validateVisibilityState(state) {
           const assertLog = eval(CONSTANTS.VISIBILITYSTATE_FAILURE_LOG);
           cy.log(
             pretext +
-              ': Expected : ' +
-              visibilityState[state] +
-              ' , Actual : ' +
-              result.report +
-              fixLog
+            ': Expected : ' +
+            visibilityState[state] +
+            ' , Actual : ' +
+            result.report +
+            fixLog
           ).then(() => {
             assert.equal(visibilityState[state], result.report + assertLog);
           });
