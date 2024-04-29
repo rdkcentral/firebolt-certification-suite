@@ -9,7 +9,7 @@ Feature: Accessibility
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
       And 1st party app invokes the 'Firebolt' API to '<Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
       Then 'Firebolt' platform responds for '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
@@ -79,34 +79,34 @@ Feature: Accessibility
       When '3rd party app' registers for the 'accessibility onVoiceGuidanceSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get voiceGuidance settings'
       And 1st party app invokes the 'Firebolt' API to '<Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get voiceGuidance settings'
       Then 'Firebolt' platform responds for '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
 
       Examples:
-         | Scenario              | Key                   | Method_Content                          | Event_Content                              | Set_Method_Content            |
-         | Disable voiceguidance | disable voiceGuidance | disabled voiceGuidance settings         | onvoiceGuidanceSettings with disabled      | disable voiceGuidance         |
-         | Enable voiceguidance  | enable voiceGuidance  | enabled voiceGuidance settings          | onvoiceGuidanceSettings with enabled       | enable voiceGuidance          |
-         | Set speed-1           | set speed as 1        | 1 for speed in voiceGuidance settings   | onvoiceGuidanceSettings with 1 for speed   | set speed as 1                |
-         | Set speed-0.5         | set speed as 0.5      | 0.5 for speed in voiceGuidance settings | onvoiceGuidanceSettings with 0.5 for speed | set speed as 0.5              |
-         | Set speed-2           | set speed as 2        | 2 for speed in voiceGuidance settings   | onvoiceGuidanceSettings with 2 for speed   | set speed as 2                |
+         | Scenario              | Key                   | Method_Content                          | Event_Content                              |
+         | Disable voiceguidance | disable voiceGuidance | disabled voiceGuidance settings         | onvoiceGuidanceSettings with disabled      |
+         | Enable voiceguidance  | enable voiceGuidance  | enabled voiceGuidance settings          | onvoiceGuidanceSettings with enabled       |
+         | Set speed-1           | set speed as 1        | 1 for speed in voiceGuidance settings   | onvoiceGuidanceSettings with 1 for speed   |
+         | Set speed-0.5         | set speed as 0.5      | 0.5 for speed in voiceGuidance settings | onvoiceGuidanceSettings with 0.5 for speed |
+         | Set speed-2           | set speed as 2        | 2 for speed in voiceGuidance settings   | onvoiceGuidanceSettings with 2 for speed   |
 
    @Accessibility @coreSDK @sdk @transport
    Scenario Outline: Accessibility.audioDescriptionSettings - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onAudioDescriptionSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get audioDescriptionSettings settings'
       And 1st party app invokes the 'Firebolt' API to '<Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get audioDescriptionSettings settings'
       Then 'Firebolt' platform responds for '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
       Examples:
-         | Scenario                         | Key                      | Method_Content                     | Event_Content                            | Set_Method_Content            |
-         | Disable audioDescriptionSettings | disable audioDescription | disabled audioDescription settings | onaudioDescriptionSettings with disabled | disable audioDescription      |
-         | Enable audioDescriptionSettings  | enable audioDescription  | enabled audioDescription settings  | onaudioDescriptionSettings with enabled  | enable audioDescription       |
+         | Scenario                         | Key                      | Method_Content                     | Event_Content                            |
+         | Disable audioDescriptionSettings | disable audioDescription | disabled audioDescription settings | onaudioDescriptionSettings with disabled |
+         | Enable audioDescriptionSettings  | enable audioDescription  | enabled audioDescription settings  | onaudioDescriptionSettings with enabled  |
 
    @Accessibility @coreSDK @sdk @transport
    Scenario: Accessibility.onClosedCaptionsSettingsChanged event - Positive Scenario: Clear listeners
@@ -120,38 +120,38 @@ Feature: Accessibility
    Scenario Outline: Accessibility.closedCaptions - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<Set_Method_Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions'
       Then 'Firebolt' platform responds for '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
       Examples:
-         | Scenario                           | Set_Method_Key                        | Method_Content                                                    | Event_Content                                                          | Set_Method_Content                           |
-         | Enable closedcaptions              | enable closedCaptions                 | enabled for accessibility closedCaptions                          | onclosedCaptionsSettingsChanged with enabled                           | enable closedCaptions                        |
-         | Set fontFamily-monospaced_sanserif | set fontFamily to monospaced_sanserif | monospace sanserif for fontfamily in accessibility closedcaptions | onclosedCaptionsSettingsChanged with monospace sanserif for fontfamily | set fontFamily to monospaced_sanseri         |
-         | Set fontSize-1                     | set fontSize to 1                     | 1 for fontSize in accessibility closedcaptions                    | onclosedCaptionsSettingsChanged with 1 for fontSize                    | set fontSize to 1                            |
-         | Set fontColor-#ffffff              | set fontColor to #ffffff              | #ffffff for fontColor in accessibility closedcaptions             | onclosedCaptionsSettingsChanged with #ffffff for fontColor             | set fontColor to #ffffff                     |
-         | Set fontEdge-raised                | set fontEdge to raised                | raised for fontEdge in accessibility closedcaptions               | onclosedCaptionsSettingsChanged with raised for fontEdge               | set fontEdge to raised                       |
-         | Set fontEdgeColor-#7f7f7f          | set fontEdgeColor to #7f7f7f          | #7f7f7f for fontEdgeColor in accessibility closedcaptions         | onclosedCaptionsSettingsChanged with #7f7f7f for fontEdgeColor         | set fontEdgeColor to #7f7f7f                 |
-         | Set backgroundColor-#000000        | set backgroundColor to #000000        | #000000 for backgroundColor in accessibility closedcaptions       | onclosedCaptionsSettingsChanged with #000000 for backgroundColor       | set backgroundColor to #000000               |
-         | Set fontOpacity-100                | set fontOpacity to 100                | 100 for fontOpacity in accessibility closedcaptions               | onclosedCaptionsSettingsChanged with 100 for fontOpacity               | set fontOpacity to 100                       |
-         | Set backgroundOpacity-100          | set backgroundOpacity to 100          | 100 for backgroundOpacity in accessibility closedcaptions         | onclosedCaptionsSettingsChanged with 100 for backgroundOpacity         | set backgroundOpacity to 100                 |
-         | Set textAlign-left                 | set textAlign to left                 | left for textAlign in accessibility closedcaptions                | onclosedCaptionsSettingsChanged with left for textAlign                | set textAlign to left                        |
-         | Set textAlignVertical-top          | set textAlignVertical to top          | top for textAlignVertical in accessibility closedcaptions         | onclosedCaptionsSettingsChanged with top for textAlignVertical         | set textAlignVertical to top                 |
-         | Set windowColor-#7f7f7f            | set windowColor to #7f7f7f            | #7f7f7f for windowColor in accessibility closedcaptions           | onclosedCaptionsSettingsChanged with #7f7f7f for windowColor           | set windowColor to #7f7f7f                   |
-         | Set windowOpacity-40               | set windowOpacity to 40               | 40 for windowOpacity in accessibility closedcaptions              | onclosedCaptionsSettingsChanged with 40 for windowOpacity              | set windowOpacity to 40                      |
+         | Scenario                           | Set_Method_Key                        | Method_Content                                                    | Event_Content                                                          |
+         | Enable closedcaptions              | enable closedCaptions                 | enabled for accessibility closedCaptions                          | onclosedCaptionsSettingsChanged with enabled                           |
+         | Set fontFamily-monospaced_sanserif | set fontFamily to monospaced_sanserif | monospace sanserif for fontfamily in accessibility closedcaptions | onclosedCaptionsSettingsChanged with monospace sanserif for fontfamily |
+         | Set fontSize-1                     | set fontSize to 1                     | 1 for fontSize in accessibility closedcaptions                    | onclosedCaptionsSettingsChanged with 1 for fontSize                    |
+         | Set fontColor-#ffffff              | set fontColor to #ffffff              | #ffffff for fontColor in accessibility closedcaptions             | onclosedCaptionsSettingsChanged with #ffffff for fontColor             |
+         | Set fontEdge-raised                | set fontEdge to raised                | raised for fontEdge in accessibility closedcaptions               | onclosedCaptionsSettingsChanged with raised for fontEdge               |
+         | Set fontEdgeColor-#7f7f7f          | set fontEdgeColor to #7f7f7f          | #7f7f7f for fontEdgeColor in accessibility closedcaptions         | onclosedCaptionsSettingsChanged with #7f7f7f for fontEdgeColor         |
+         | Set backgroundColor-#000000        | set backgroundColor to #000000        | #000000 for backgroundColor in accessibility closedcaptions       | onclosedCaptionsSettingsChanged with #000000 for backgroundColor       |
+         | Set fontOpacity-100                | set fontOpacity to 100                | 100 for fontOpacity in accessibility closedcaptions               | onclosedCaptionsSettingsChanged with 100 for fontOpacity               |
+         | Set backgroundOpacity-100          | set backgroundOpacity to 100          | 100 for backgroundOpacity in accessibility closedcaptions         | onclosedCaptionsSettingsChanged with 100 for backgroundOpacity         |
+         | Set textAlign-left                 | set textAlign to left                 | left for textAlign in accessibility closedcaptions                | onclosedCaptionsSettingsChanged with left for textAlign                |
+         | Set textAlignVertical-top          | set textAlignVertical to top          | top for textAlignVertical in accessibility closedcaptions         | onclosedCaptionsSettingsChanged with top for textAlignVertical         |
+         | Set windowColor-#7f7f7f            | set windowColor to #7f7f7f            | #7f7f7f for windowColor in accessibility closedcaptions           | onclosedCaptionsSettingsChanged with #7f7f7f for windowColor           |
+         | Set windowOpacity-40               | set windowOpacity to 40               | 40 for windowOpacity in accessibility closedcaptions              | onclosedCaptionsSettingsChanged with 40 for windowOpacity              |
 
    @Accessibility @coreSDK @sdk @transport
    Scenario Outline: Accessibility.voiceGuidance - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onVoiceGuidanceSettingsChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<Set_Method_Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get voiceGuidance'
       Then 'Firebolt' platform responds for '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
       Examples:
-         | Scenario              | Set_Method_Key        | Method_Content               | Event_Content                            | Set_Method_Content                |
-         | Disable voiceguidance | disable voiceGuidance | disabled voiceGuidance       | onvoiceGuidanceSettings with disabled    | disable voiceGuidance             |
-         | Enable voiceguidance  | enable voiceGuidance  | enabled voiceGuidance        | onvoiceGuidanceSettings with enabled     | enable voiceGuidance              |
-         | Set speed-1           | set speed as 1        | 1 for speed in voiceGuidance | onvoiceGuidanceSettings with 1 for speed | set speed as 1                    |
+         | Scenario              | Set_Method_Key        | Method_Content               | Event_Content                            |
+         | Disable voiceguidance | disable voiceGuidance | disabled voiceGuidance       | onvoiceGuidanceSettings with disabled    |
+         | Enable voiceguidance  | enable voiceGuidance  | enabled voiceGuidance        | onvoiceGuidanceSettings with enabled     |
+         | Set speed-1           | set speed as 1        | 1 for speed in voiceGuidance | onvoiceGuidanceSettings with 1 for speed |
