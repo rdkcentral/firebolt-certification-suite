@@ -57,7 +57,7 @@
         "validationJsonPath": "eventResponse",
         "expected": "SECONDSCREEN_FRIENDLYNAME"
     },
-    "NULL_FOR_SECONDSCREEN_ONFRIENDLYNAMECHANGED_EVENT": {
+    "ONFRIENDLYNAMECHANGED": {
         "event": "secondscreen.onFriendlyNameChanged",
         "validationJsonPath": "eventResponse",
         "expected": "NULL"

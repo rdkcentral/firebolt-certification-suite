@@ -115,7 +115,7 @@ module.exports = {
   EXCLUDED_VALUES: [null, undefined],
   EXECUTE_SHELL: 'executeShell',
   EXPECTED_DATA_NOT_FOUND_IN_MODULE_JSONS:
-    '`Expected data ${dataIdentifier} was not found in the default file, FCS module JSON file, or external module JSON file. Returning ${dataIdentifier} as is.`',
+    '`Expected data ${dataIdentifier} was not found in fixtures. Returning ${dataIdentifier} as is.`',
   EXPECTED_DEFAULT_TESTDATA_MESSAGE:
     'Expected JSON data should be defined in fixtures/objects/defaultTestData.json',
   EXPECTED_ERROR_RESPONSE: 'Expected error in response:',
@@ -399,6 +399,7 @@ module.exports = {
   FCS_DEFAULTTESTDATA_PATH: './cypress/fixtures/defaultTestData.json',
   ENV_SETUP_STATUS: 'environmentLaunched',
   APP_LAUNCH_STATUS: 'appLaunched',
+  NO_EVENT_TRIGGERED: 'Expecting no event to be triggered from platform',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

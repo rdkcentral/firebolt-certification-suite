@@ -905,3 +905,17 @@ Cypress.Commands.add('mergeFireboltCallsAndFireboltMocks', () => {
     Cypress.env(CONSTANTS.COMBINEDFIREBOLTMOCKS, response);
   });
 });
+
+/**
+ * @module commands
+ * @function clearCache
+ * @description To clear cypress cache and reload the browser.
+ * @example
+ * cy.clearCache()
+ */
+Cypress.Commands.add('clearCache', () => {
+  cy.clearCookies();
+  cy.clearLocalStorage();
+  cy.clearAllSessionStorage();
+  cy.reload(true);
+});
