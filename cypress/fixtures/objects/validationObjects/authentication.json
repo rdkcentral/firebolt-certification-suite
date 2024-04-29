@@ -20,11 +20,11 @@
                 "specialCase": "base64",
                 "validations": [
                     {
-                        "field": "EndDate",
+                        "field": "notOnOrAfter",
                         "mode": "regex",
                         "format": "TOKEN_REGEXP",
                         "type": "DATEAUTHENTICATION_REGEXP",
-                        "description": "Validation of the Authentication Token issueDate Format"
+                        "description": "Validation of the Authentication Token notOnOrAfter Format"
                     }
                 ]
             }
