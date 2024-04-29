@@ -1,0 +1,8 @@
+{
+    "PORT_HDMI1": {
+        "portId": "HDMI1"
+    },
+    "PORT_HDMI2": {
+        "portId": "HDMI2"
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "GET_HDMI_INPUT_PORTS_LIST":{
+        "method": "manage_hdmiinput.ports"
+    },
+    "EXPECTED_HDMI_INPUT_PORTS":{
+        "method": "hdmiinput.ports",
+        "validationJsonPath": "result",
+        "expected": "HDMIINPUT_PORTS"
+    },
+    "GET_HDMI_INPUT_PORT_WITH_PORTID_HDMI1":{
+        "method": "manage_hdmiinput.port",
+        "params": "HDMIINPUT_PORT_HDMI1"
+    },
+    "GET_HDMI_INPUT_PORT_WITH_PORTID_HDMI2":{
+        "method": "manage_hdmiinput.port",
+        "params": "HDMIINPUT_PORT_HDMI2"
+    },
+    "EXPECTED_HDMI_INPUT_PORT":{
+        "method": "hdmiinput.port",
+        "validationJsonPath": "result",
+        "expected": "HDMIINPUT_PORT"
+    }
+}

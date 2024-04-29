@@ -1,0 +1,30 @@
+{
+    "HDMIINPUT_PORTS": {
+        "method": "hdmiinput.ports",
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "object",
+                        "description": "Validation of the HdmiInput ports format"
+                    }
+                ]
+            }
+        ]
+    },
+    "HDMIINPUT_PORT": {
+        "method": "hdmiinput.port",
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "object",
+                        "description": "Validation of the HdmiInput port format"
+                    }
+                ]
+            }
+        ]
+    }
+}
