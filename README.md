@@ -351,3 +351,7 @@ Below data apply to Account module, so data will go into cypress/fixtures/module
 - eg:<br/>
   "Id": "123456",<br/>
   "Uid": "98654",
+
+## Manual Cache Deletion for Cypress
+
+If you encounter any caching issues while executing test cases, please refer to this document [Cache_Deletion.md](Cache_Deletion.md)
