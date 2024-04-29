@@ -16,7 +16,7 @@ Feature: Wifi_Manage
     @Wifi @manageSDK @sdk @transport
     Scenario Outline: Wifi.<Method> - Negative Scenario: <Scenario> and expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Error_Object>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Error_Object>'
         
         Examples:
             | Scenario                                        | Method  | API_Key                   | Error_Object                            |

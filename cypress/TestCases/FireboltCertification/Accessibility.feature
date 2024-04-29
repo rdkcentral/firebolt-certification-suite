@@ -9,9 +9,9 @@ Feature: Accessibility
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
       And 1st party app invokes the 'Firebolt' API to '<Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
       When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
-      Then 'Firebolt' platform responds with '<Method_Content>'
+      Then 'Firebolt' platform responds for '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
       Examples:
@@ -54,9 +54,9 @@ Feature: Accessibility
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
       And 1st party app invokes the 'Firebolt' API to '<Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
       When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
-      Then 'Firebolt' platform responds with '<Method_Content>'
+      Then 'Firebolt' platform responds for '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
       Examples:
@@ -79,9 +79,9 @@ Feature: Accessibility
       When '3rd party app' registers for the 'accessibility onVoiceGuidanceSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get voiceGuidance settings'
       And 1st party app invokes the 'Firebolt' API to '<Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
       When '3rd party app' invokes the 'Firebolt' API to 'get voiceGuidance settings'
-      Then 'Firebolt' platform responds with '<Method_Content>'
+      Then 'Firebolt' platform responds for '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
 
@@ -98,9 +98,9 @@ Feature: Accessibility
       When '3rd party app' registers for the 'accessibility onAudioDescriptionSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get audioDescriptionSettings settings'
       And 1st party app invokes the 'Firebolt' API to '<Key>'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for audioDescriptions setEnabled'
+      Then 'Firebolt' platform responds to '1st party app' for 'null for audioDescriptions setEnabled'
       When '3rd party app' invokes the 'Firebolt' API to 'get audioDescriptionSettings settings'
-      Then 'Firebolt' platform responds with '<Method_Content>'
+      Then 'Firebolt' platform responds for '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
       Examples:
@@ -113,16 +113,16 @@ Feature: Accessibility
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And I clear 'accessibility onClosedCaptionsSettingsChanged event' listeners
       And 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for closedCaptions setEnabled'  
+      Then 'Firebolt' platform responds to '1st party app' for 'null for closedCaptions setEnabled'  
       And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
 
    @Accessibility @coreSDK @sdk @transport
    Scenario Outline: Accessibility.closedCaptions - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<Set_Method_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
       When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions'
-      Then 'Firebolt' platform responds with '<Method_Content>'
+      Then 'Firebolt' platform responds for '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
       Examples:
@@ -145,9 +145,9 @@ Feature: Accessibility
    Scenario Outline: Accessibility.voiceGuidance - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onVoiceGuidanceSettingsChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<Set_Method_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
       When '3rd party app' invokes the 'Firebolt' API to 'get voiceGuidance'
-      Then 'Firebolt' platform responds with '<Method_Content>'
+      Then 'Firebolt' platform responds for '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
       Examples:

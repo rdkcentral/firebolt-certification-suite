@@ -21,4 +21,4 @@ Feature: Lifecycle_Inactive
         When '3rd party app' invokes the 'Firebolt' API to 'close app with remote button'
         # And 1st party app invokes the API to 'get lifecycle management state'
         Then '3rd party app' is in 'inactive' state        
-        # Then 'Firebolt' platform responds with 'last two responses for lifecycleManagement state'
+        # Then 'Firebolt' platform responds for 'last two responses for lifecycleManagement state'

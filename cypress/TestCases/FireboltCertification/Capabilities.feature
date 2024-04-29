@@ -7,12 +7,12 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario: Capabilities.info - Positive Scenario: Validate passing all the capabilities list
     When '3rd party app' invokes the 'Firebolt' API to 'get capability info'
-    Then 'Firebolt' platform responds with 'expected value for info api'
+    Then 'Firebolt' platform responds for 'expected value for info api'
 
   @Capabilities @coreSDK
   Scenario Outline: Capabilities.available - Positive Scenario: <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-    Then 'Firebolt' platform responds with '<Validation_key>'
+    Then 'Firebolt' platform responds for '<Validation_key>'
 
     Examples:
       | Scenario                                                            | API_Key                                               | Validation_key                                        |
@@ -23,7 +23,7 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario Outline: Capabilities.available - Positive Scenario: <Scenario>
     When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-    Then 'Firebolt' platform responds to '1st party app' with '<Validation_key>'
+    Then 'Firebolt' platform responds to '1st party app' for '<Validation_key>'
 
     Examples:
       | Scenario                                                       | API_Key                                               | Validation_key                                        |
@@ -35,7 +35,7 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario Outline: Capabilities.granted - Positive Scenario: <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-    Then 'Firebolt' platform responds with 'true for granted capability with passed role'
+    Then 'Firebolt' platform responds for 'true for granted capability with passed role'
 
     Examples:
       | Scenario                              | API_Key                                             |
@@ -47,9 +47,9 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario Outline: Capabilities api - Positive Scenario: <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<Info_API_Key>'
-    Then 'Firebolt' platform responds with 'expected value for info api'
+    Then 'Firebolt' platform responds for 'expected value for info api'
     When '3rd party app' invokes the 'Firebolt' API to '<Supported_API_Key>'
-    Then 'Firebolt' platform responds with 'expected value for supported api'
+    Then 'Firebolt' platform responds for 'expected value for supported api'
 
     Examples:
       | Scenario                                     | Info_API_Key                                          | Supported_API_Key                                               |
@@ -66,11 +66,11 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario Outline: Capabilities api - Positive Scenario: <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<Info_API_Key>'
-    Then 'Firebolt' platform responds with 'expected value for info api'
+    Then 'Firebolt' platform responds for 'expected value for info api'
     When '3rd party app' invokes the 'Firebolt' API to '<Permitted_API_Key>'
-    Then 'Firebolt' platform responds with 'expected value for permitted api'
+    Then 'Firebolt' platform responds for 'expected value for permitted api'
     When '3rd party app' invokes the 'Firebolt' API to '<Supported_API_Key>'
-    Then 'Firebolt' platform responds with 'expected value for supported api'
+    Then 'Firebolt' platform responds for 'expected value for supported api'
 
     Examples:
       | Scenario                               | Info_API_Key                                         | Supported_API_Key                                              | Permitted_API_Key                                              |
@@ -122,16 +122,16 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario: Capabilities.permitted - Negative Scenario: lifecycle ready capability and expecting error
     When '3rd party app' invokes the 'Firebolt' API to 'check if lifecycle ready capability is permitted'
-    Then 'Firebolt' platform responds with 'expected value for permitted api'
+    Then 'Firebolt' platform responds for 'expected value for permitted api'
     When '3rd party app' invokes the 'Firebolt' API to 'check if lifecycle ready capability expecting error'
-    Then 'Firebolt' platform responds with 'custom error for lifecycle ready capability'
+    Then 'Firebolt' platform responds for 'custom error for lifecycle ready capability'
 
   @Capabilities @coreSDK
   Scenario Outline: Capabilities.permitted - Positive Scenario: <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<Permitted_API_Key>'
-    Then 'Firebolt' platform responds with 'expected value for permitted api'
+    Then 'Firebolt' platform responds for 'expected value for permitted api'
     When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-    Then 'Firebolt' platform responds with '<Validation_Key>'
+    Then 'Firebolt' platform responds for '<Validation_Key>'
     Examples:
       | Scenario                            | Permitted_API_Key                                              | API_Key               | Validation_Key                         |
       | Validate lifecycle state capability | check if lifecycle state capability is permitted with role use | fetch lifecycle state | expected lifecycle state as foreground |
@@ -141,9 +141,9 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario Outline: Capabilities.permitted - Positive Scenario: <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<Permitted_API_Key>'
-    Then 'Firebolt' platform responds with 'expected value for permitted api'
+    Then 'Firebolt' platform responds for 'expected value for permitted api'
     When '3rd party app' invokes the 'Firebolt' API to '<Discovery_API_Key>'
-    Then 'Firebolt' platform responds with '<Discovery_Validation_Key>'
+    Then 'Firebolt' platform responds for '<Discovery_Validation_Key>'
     Examples:
       | Scenario                                   | Permitted_API_Key                                                     | Discovery_API_Key                         | Discovery_Validation_Key              |
       | Validate discovery entitlements capability | check if discovery entitlements capability is permitted with role use | notify entitlements                       | true for entitlements in discovery    |
@@ -153,7 +153,7 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario Outline: Capabilities.<Method> - Negative Scenario: <Scenario> and expecting error
     When '3rd party app' invokes the 'Firebolt' API to '<Error_Key>'
-    Then 'Firebolt' platform responds with '<Error_Validation_Key>'
+    Then 'Firebolt' platform responds for '<Error_Validation_Key>'
     Examples:
       | Method    | Scenario                               | Error_Key                                                  | Error_Validation_Key                      |
       | info      | Validate Invalid capabilities category | get info of capabilities with invalid category             | invalid params for capabilities info      |
@@ -184,20 +184,20 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario: Capabilities api - Positive Scenario: Validate capability request
     When '3rd party app' invokes the 'Firebolt' API to 'get info of capability request capability'
-    Then 'Firebolt' platform responds with 'expected value for info api'
+    Then 'Firebolt' platform responds for 'expected value for info api'
     When '3rd party app' invokes the 'Firebolt' API to 'get capabilityInfo of request capability'
-    Then 'Firebolt' platform responds with 'expected capability is requested'
+    Then 'Firebolt' platform responds for 'expected capability is requested'
     When '3rd party app' invokes the 'Firebolt' API to 'check if capability request capability is permitted'
-    Then 'Firebolt' platform responds with 'expected value for permitted api'
+    Then 'Firebolt' platform responds for 'expected value for permitted api'
     When '3rd party app' invokes the 'Firebolt' API to 'check if capability request capability is supported'
-    Then 'Firebolt' platform responds with 'expected value for supported api'
+    Then 'Firebolt' platform responds for 'expected value for supported api'
 
   @Capabilities @sdk @transport @coreSDK
   Scenario Outline: Capabilities.permitted - Positive Scenario:  <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<Permitted_Api_Key>'
-    Then 'Firebolt' platform responds with 'expected value for permitted api'
+    Then 'Firebolt' platform responds for 'expected value for permitted api'
     When '3rd party app' invokes the 'Firebolt' API to '<Api_Key>'
-    Then 'Firebolt' platform responds with '<Validation_Key>'
+    Then 'Firebolt' platform responds for '<Validation_Key>'
 
     Examples:
       | Scenario                                          | Permitted_Api_Key                                                            | Api_Key                                   | Validation_Key                     |
@@ -207,9 +207,9 @@ Feature: Capabilities
   @Capabilities @sdk @transport @coreSDK
   Scenario Outline: Capabilities.permitted - Positive Scenario:  <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<Permitted_Api_Key>'
-    Then 'Firebolt' platform responds with 'expected value for permitted api'
+    Then 'Firebolt' platform responds for 'expected value for permitted api'
     When '3rd party app' invokes the 'Firebolt' API to '<Api_Key>'
-    Then 'Firebolt' platform responds with '<Validation_Key>'
+    Then 'Firebolt' platform responds for '<Validation_Key>'
 
     Examples:
       | Scenario                                         | Permitted_Api_Key                                                           | Api_Key             | Validation_Key         |
@@ -226,7 +226,7 @@ Feature: Capabilities
     And User set response for 'set keyboard response in platform'
     And Framework registers 'keyboard' test provider
     When 1st party app invokes the 'Firebolt' API to 'check availability of keyboard capability'
-    Then 'Firebolt' platform responds to '1st party app' with 'true for keyboard capability availability'
+    Then 'Firebolt' platform responds to '1st party app' for 'true for keyboard capability availability'
     And 'Firebolt' platform triggers to '1st party app' event 'expected value for capabilities onAvailable'
 
   @Capabilities @sdk @transport @coreSDK @notSupported
@@ -236,7 +236,7 @@ Feature: Capabilities
     And User set response for 'set keyboard response in platform'
     When Framework registers 'keyboard' test provider
     And 1st party app invokes the 'Firebolt' API to 'check availability of keyboard capability'
-    Then 'Firebolt' platform responds to '1st party app' with 'false for keyboard capability availability'
+    Then 'Firebolt' platform responds to '1st party app' for 'false for keyboard capability availability'
     And 'Firebolt' platform triggers to '1st party app' event 'expected value for capabilities onUnAvailable'
 
   @Capabilities @sdk @transport @coreSDK @notSupported
@@ -247,9 +247,9 @@ Feature: Capabilities
     When User set response for 'set acknowledge granted'
     And Framework registers 'ackchallenge' test provider
     When '3rd party app' invokes the 'Firebolt' API to 'fetch device id'
-    Then 'Firebolt' platform responds with 'expected device id'
+    Then 'Firebolt' platform responds for 'expected device id'
     When '3rd party app' invokes the 'Firebolt' API to 'check if device id capability is granted'
-    Then 'Firebolt' platform responds with 'true for granted capability with passed role'
+    Then 'Firebolt' platform responds for 'true for granted capability with passed role'
     And 'Firebolt' platform triggers event 'expected value for capabilities OnGranted'
 
   @Capabilities @sdk @transport @coreSDK @notSupported
@@ -260,7 +260,7 @@ Feature: Capabilities
     When User set response for 'set acknowledge granted'
     And Framework registers 'ackchallenge' test provider
     When '3rd party app' invokes the 'Firebolt' API to 'expect error for device id'
-    Then 'Firebolt' platform responds with 'invalid request for device id'
+    Then 'Firebolt' platform responds for 'invalid request for device id'
     When '3rd party app' invokes the 'Firebolt' API to 'check if device id capability is granted'
-    Then 'Firebolt' platform responds with 'false for granted capability with passed role'
+    Then 'Firebolt' platform responds for 'false for granted capability with passed role'
     And 'Firebolt' platform triggers event 'expected value for capabilities OnRevoked'

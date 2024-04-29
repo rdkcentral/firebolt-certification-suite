@@ -7,7 +7,7 @@ Feature: Device
     @Device @coreSDK @sdk @transport
     Scenario Outline:Device.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_Key>'
+        Then 'Firebolt' platform responds for '<Validation_Key>'
         Examples:
             | Scenario                    | API_Key                  | Validation_Key              | Method      |
             | Validate Device id          | fetch device id          | expected device id          | id          |
@@ -24,15 +24,15 @@ Feature: Device
         When '3rd party app' registers for the 'device onNameChanged' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'get device name'
         And 1st party app invokes the 'Firebolt' API to 'set device name to living hall'
-        Then 'Firebolt' platform responds to '1st party app' with 'null for device setName'
+        Then 'Firebolt' platform responds to '1st party app' for 'null for device setName'
         When '3rd party app' invokes the 'Firebolt' API to 'get device name'
-        Then 'Firebolt' platform responds with 'living hall for device name'
+        Then 'Firebolt' platform responds for 'living hall for device name'
         And 'Firebolt' platform triggers event 'onDeviceNameChanged with living hall'
 
     @Device @mfos @coreSDK @regression @sdk
     Scenario Outline: Device.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<validation_key>'
+        Then 'Firebolt' platform responds for '<validation_key>'
 
         Examples:
             | Scenario                  | Method           | API_Key                | validation_key            |
@@ -48,14 +48,14 @@ Feature: Device
         When '3rd party app' registers for the 'device onNameChanged' event using the 'Firebolt' API
         And I clear 'device onNameChanged event' listeners
         And 1st party app invokes the 'Firebolt' API to 'set device name to kitchen'
-        Then 'Firebolt' platform responds to '1st party app' with 'null for device setName'
+        Then 'Firebolt' platform responds to '1st party app' for 'null for device setName'
         And 'Firebolt' platform does not trigger event for 'onDeviceNameChanged'
 
     @Device @coreSDK @sdk @transport @notSupported
     Scenario Outline: Device.network - Positive Scenario: <Scenario>
         When '3rd party app' registers for the 'device onNetworkChanged' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'fetch device network'
-        Then 'Firebolt' platform responds with '<Method_Validation_Key>'
+        Then 'Firebolt' platform responds for '<Method_Validation_Key>'
         When User triggers event with value as '<Event_Params>'
         Then 'Firebolt' platform triggers event '<Event_Validation_Key>'
         

@@ -9,12 +9,12 @@ Feature: Discovery.launch_ColdLaunch
     Scenario Outline: Discovery.Launch Cold Launch - Positive Scenario: <Scenario> intent with context
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
+        Then 'Firebolt' platform responds to '1st party app' for 'true for discoverylaunch'
         When Test runner waits for 30 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         And '3rd party app' invokes the 'Firebolt' API to '<Call_Parameters_Initialization_With_Context_Key>'
-        Then 'Firebolt' platform responds with '<Validation_Key_For_Parameters_Initialization_With_Intent>'
-        And 'Firebolt' platform responds with 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds for '<Validation_Key_For_Parameters_Initialization_With_Intent>'
+        And 'Firebolt' platform responds for 'foreground for lifecycle state'
 
         Examples:
             | Scenario                                                                            | Discovery_Launch_Key                                                                                | Call_Parameters_Initialization_With_Context_Key     | Validation_Key_For_Parameters_Initialization_With_Intent                        |
@@ -50,7 +50,7 @@ Feature: Discovery.launch_ColdLaunch
     Scenario Outline: Discovery.Launch Cold Launch - Negative Scenario: <Scenario> and expecting error
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Error_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discoverylaunch'
+        Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for discoverylaunch'
 
         Examples:
             | Scenario                                                   | Error_Key                                                              |
@@ -105,12 +105,12 @@ Feature: Discovery.launch_ColdLaunch
     Scenario Outline: Discovery.Launch Cold Launch - Positive Scenario: <Scenario> for context source
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
+        Then 'Firebolt' platform responds to '1st party app' for 'true for discoverylaunch'
         When Test runner waits for 30 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         And '3rd party app' invokes the 'Firebolt' API to '<Call_Parameters_Initialization_With_Context_Key>'
-        Then 'Firebolt' platform responds with '<Validation_Key_For_Parameters_Initialization_With_Intent>'
-        And 'Firebolt' platform responds with 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds for '<Validation_Key_For_Parameters_Initialization_With_Intent>'
+        And 'Firebolt' platform responds for 'foreground for lifecycle state'
 
         Examples:
             | Scenario              | Discovery_Launch_Key                   | Call_Parameters_Initialization_With_Context_Key   | Validation_Key_For_Parameters_Initialization_With_Intent |

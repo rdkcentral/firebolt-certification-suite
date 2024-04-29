@@ -7,15 +7,15 @@ Feature: Localization
     @Localization @coreSDK @sdk @transport
     Scenario: Localization.additionalInfo - Positive Scenario: Get additional info
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
-        Then 'Firebolt' platform responds with 'expected localization additionalInfo'
+        Then 'Firebolt' platform responds for 'expected localization additionalInfo'
 
     @Localization @coreSDK @sdk @transport
     Scenario Outline: Localization.addAdditionalInfo - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'null for localization addAdditionalInfo'
+        Then 'Firebolt' platform responds to '1st party app' for 'null for localization addAdditionalInfo'
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
-        Then 'Firebolt' platform responds with '<Validation_Key>'
+        Then 'Firebolt' platform responds for '<Validation_Key>'
 
         Examples:
             | Scenario                           | API_Key                                              | Validation_Key                               |
@@ -26,9 +26,9 @@ Feature: Localization
     Scenario Outline: Localization.removeAdditionalInfo - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'null for localization removeAdditionalInfo'
+        Then 'Firebolt' platform responds to '1st party app' for 'null for localization removeAdditionalInfo'
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
-        Then 'Firebolt' platform responds with '<Validation_Key>'
+        Then 'Firebolt' platform responds for '<Validation_Key>'
 
         Examples:
             | Scenario                           | API_Key                                                 | Validation_Key                                  |
@@ -38,7 +38,7 @@ Feature: Localization
     @Localization @coreSDK @sdk @transport
     Scenario Outline: Localization.<Scenario> - Positive Scenario: Get <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_Key>'
+        Then 'Firebolt' platform responds for '<Validation_Key>'
 
         Examples:
             | Scenario    | API_Key                      | Validation_Key                    |
@@ -52,9 +52,9 @@ Feature: Localization
         When '3rd party app' registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
-        Then 'Firebolt' platform responds with '<Method_Validation_Key>'
+        Then 'Firebolt' platform responds for '<Method_Validation_Key>'
         And 'Firebolt' platform triggers event '<Event_Validation_Key>'
 
         Examples:
@@ -73,7 +73,7 @@ Feature: Localization
         When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
         And I clear '<Clear_Event_Name>' listeners
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Set_Method_Content>'
         And 'Firebolt' platform does not trigger event for '<Event_Validation_Key>'
 
         Examples:

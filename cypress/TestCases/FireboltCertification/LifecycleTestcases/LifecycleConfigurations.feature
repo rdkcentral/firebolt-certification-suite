@@ -21,7 +21,7 @@ Feature: Lifecycle_Configuration
     Scenario: Lifecycle 6.2 appFinishedTimeout data type
         Given the environment has been set up for 'lifecycle' tests
         # And 1st party app invokes API methods using below datatable
-        # Then 'Firebolt' platform responds with 'message and code for lifecycle appFinishedTimeout'
+        # Then 'Firebolt' platform responds for 'message and code for lifecycle appFinishedTimeout'
         #     | key                          | value  |
         #     | Lifecycle.appFinishedTimeout | "abcd" |
         #     | Lifecycle.appFinishedTimeout | 'a'    |
@@ -32,7 +32,7 @@ Feature: Lifecycle_Configuration
     Scenario: Lifecycle 6.1 appReadyTimeout data type
         Given the environment has been set up for 'lifecycle' tests
         # And 1st party app invokes API methods using below datatable
-        # Then 'Firebolt' platform responds with 'message and code for lifecycle appReadyTimeout'
+        # Then 'Firebolt' platform responds for 'message and code for lifecycle appReadyTimeout'
         #     | key                       | value  |
         #     | Lifecycle.appReadyTimeout | "abcd" |
         #     | Lifecycle.appReadyTimeout | 'a'    |

@@ -7,8 +7,8 @@ Feature: Keyboard
         And Framework registers 'keyboard' test provider
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-        Then 'Firebolt' platform responds with '<Content>'
-        And 'Firebolt' platform responds with 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds for '<Content>'
+        And 'Firebolt' platform responds for 'foreground for lifecycle state'
 
         Examples:
             | Method   | Scenario                          | API_Key                                                        | Content                         |
@@ -29,9 +29,9 @@ Feature: Keyboard
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         And User 'stops' recording lifecycle history for '1st party app'
         And User 'stops' recording lifecycle history for '3rd party app'
-        Then 'Firebolt' platform responds with '<Content>'
-        And User validates lifecycle history for '1st party app' with 'background:foreground:background'
-        And User validates lifecycle history for '3rd party app' with 'background:foreground'
+        Then 'Firebolt' platform responds for '<Content>'
+        And User validates lifecycle history for '1st party app' for 'background:foreground:background'
+        And User validates lifecycle history for '3rd party app' for 'background:foreground'
 
         Examples:
             | Method   | Scenario                        | API_Key                                                  | Content                         |
@@ -45,7 +45,7 @@ Feature: Keyboard
         And 3rd party 'certification' app is launched
         And Framework registers 'keyboard' test provider
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_key>'
+        Then 'Firebolt' platform responds for '<Validation_key>'
 
         Examples:
             | Mehtod   | Scenario                             | API_Key                                                      | Validation_key              |
@@ -65,7 +65,7 @@ Feature: Keyboard
         And User 'starts' recording lifecycle history for '3rd party app'
         And Framework registers 'keyboard' test provider
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_key>'
+        Then 'Firebolt' platform responds for '<Validation_key>'
 
         Examples:
             | Method   | Scenario                             | API_Key                                                      | Validation_key              |
