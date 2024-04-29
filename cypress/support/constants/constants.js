@@ -200,7 +200,6 @@ module.exports = {
   LIFECYCLE_HISTORY_SCHEMA_PATH: 'schemas/lifecycleHistorySchema',
   LIFECYCLE_INTENT: 'Lifecycle intent sent to application: ',
   LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle events generated Req #',
-  LIFECYCLE_NOTIFICATION_NOT_GENERATED: 'Lifecycle events not generated Req #',
   LIFECYCLE_STATE: 'Lifecycle.state',
   LIFECYCLE_STATES: {
     FOREGROUND: 'foreground',
