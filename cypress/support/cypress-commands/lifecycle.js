@@ -602,11 +602,11 @@ function validateVisibilityState(state) {
           const assertLog = eval(CONSTANTS.VISIBILITYSTATE_FAILURE_LOG);
           cy.log(
             pretext +
-            ': Expected : ' +
-            visibilityState[state] +
-            ' , Actual : ' +
-            result.report +
-            fixLog
+              ': Expected : ' +
+              visibilityState[state] +
+              ' , Actual : ' +
+              result.report +
+              fixLog
           ).then(() => {
             assert.equal(visibilityState[state], result.report + assertLog);
           });
