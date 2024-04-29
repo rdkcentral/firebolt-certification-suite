@@ -409,6 +409,7 @@ module.exports = {
   VISIBILITYSTATE_FAILURE_LOG:
     '`. If the visibility state response is correct for the current platform, but the expected value needs to be changed, add the expected value in configModule file ( cypress.config.js) in the format visibilityState: { ${state} : ${result.report}}`',
   NO_EVENT_TRIGGERED: 'Expecting no event to be triggered from platform',
+  VISIBILITYSTATE: 'visibilityState',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

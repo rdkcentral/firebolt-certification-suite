@@ -566,7 +566,7 @@ Cypress.Commands.add('lifecycleSchemaChecks', (response, state) => {
  */
 function validateVisibilityState(state) {
   // Fetching the visibilityState for the states from env.
-  const visibilityState = Cypress.env('visibilityState');
+  const visibilityState = Cypress.env(CONSTANTS.VISIBILITYSTATE);
   if (visibilityState.hasOwnProperty(state)) {
     // Get validation requirements for the current scenario from the moduleReqId JSON
     const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
@@ -576,9 +576,9 @@ function validateVisibilityState(state) {
       req.hasOwnProperty('visible_check')
     );
 
-    if (Cypress.env('visibilityState') != undefined || Cypress.env('visibilityState') != null) {
+    if (Cypress.env(CONSTANTS.VISIBILITYSTATE) != undefined || Cypress.env(CONSTANTS.VISIBILITYSTATE) != null) {
       const intentMessage = UTILS.createIntentMessage(CONSTANTS.TASK.VISIBILITYSTATE, {
-        params: 'visibilityState',
+        params: CONSTANTS.VISIBILITYSTATE,
       });
       const requestTopic = UTILS.getTopic(null);
       const responseTopic = UTILS.getTopic(null, CONSTANTS.SUBSCRIBE);
