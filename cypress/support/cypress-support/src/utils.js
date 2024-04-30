@@ -280,7 +280,7 @@ function getApiOrEventObjectFromGlobalList(method, context, appId, validationTyp
   );
 
   // Failing when the filteredObjectList is empty.
-  assert.isNotEmpty(filteredObjectList, 'filteredObjectList is not to be empty');
+  assert.isNotEmpty(filteredObjectList, 'No event/response found for method ' + method);
 
   // When the context is empty, the most recent apiOrEventObject is obtained from the filtered list.
   // If the context is not empty, the filtered list is iterated, and the API object that has the same context is retrieved.

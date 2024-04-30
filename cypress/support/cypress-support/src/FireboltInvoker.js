@@ -94,7 +94,7 @@ export default class FireboltInvoker {
       const response = await currentInstance.send(JSON.stringify(fireboltMessage));
 
       if (response) {
-        return response;
+        return typeof response == 'string' ? JSON.parse(response) : response;
       }
     } catch (error) {
       console.error('Error occurred during invoking Firebolt:', error);

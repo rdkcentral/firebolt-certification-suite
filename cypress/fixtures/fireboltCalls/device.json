@@ -26,7 +26,7 @@
     "EXPECTED_DEVICE_ID": {
         "method": "device.id",
         "validationJsonPath": "result",
-        "expected": "DEVICE_ID"
+        "expected": "12345"
     },
     "EXPECTED_DEVICE_DISTRIBUTOR": {
         "method": "device.distributor",
