@@ -50,12 +50,11 @@ Given(
           const validationType = item.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
 
           let methodOrEvent = item[validationType];
-          methodOrEvent = methodOrEvent.split('_')[1]
-          // methodOrEvent = methodOrEvent.includes('manage_')
-          //   ? methodOrEvent.replace('manage_', '')
-          //   : methodOrEvent;
+          methodOrEvent = methodOrEvent.split('_')[1];
           const context = item.context ? item.context : CONSTANTS.NO_CONTEXT;
-          const validationJsonPath = item.validationJsonPath ? item.validationJsonPath : CONSTANTS.RESULT;
+          const validationJsonPath = item.validationJsonPath
+            ? item.validationJsonPath
+            : CONSTANTS.RESULT;
           const expected = item.expected ? item.expected : CONSTANTS.NULL_RESPONSE;
           const expectingError = item.expectingError;
 
