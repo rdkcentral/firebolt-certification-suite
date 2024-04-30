@@ -463,5 +463,695 @@
                 ]
             }
         ]
+    },
+    "PARAMETERS_INITIALIZATION_POWERINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_POWERINTENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_VOLUMEINTEMT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_VOLUMEINTEMT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_MUTEINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_MUTEINTENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_CHANNELINTENT_NEXT_CHANNEL": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_CHANNELINTENT_NEXT_CHANNEL",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_CHANNELINTENT_PREVIOUS_CHANNEL": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_CHANNELINTENT_PREVIOUS_CHANNEL",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_PAUSEINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_PAUSEINTENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_RESUMEINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_RESUMEINTENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_REPLAYINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_REPLAYINTENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_STOPINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_STOPINTENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SEEKINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SEEKINTENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SEEKINTENT_RELATIVE_TRUE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SEEKINTENT_RELATIVE_TRUE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_TRICK_PLAYINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_TRICK_PLAYINTENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_CLOSEDCAPTIONSINTENT_TRUE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_CLOSEDCAPTIONSINTENT_TRUE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_CLOSEDCAPTIONSINTENT_FALSE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_CLOSEDCAPTIONSINTENT_FALSE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_VOICEGUIDANCEINTENT_TRUE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_VOICEGUIDANCEINTENT_TRUE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_VOICEGUIDANCEINTENT_FALSE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_VOICEGUIDANCEINTENT_FALSE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_VOICEGUIDANCEINTENT_WITH_SPEED_2": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_VOICEGUIDANCEINTENT_WITH_SPEED_2",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_VOICEGUIDANCEINTENT_WITH_SPEED_-1_AND_RELATIVE_TRUE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_VOICEGUIDANCEINTENT_WITH_SPEED_-1_AND_RELATIVE_TRUE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_VOICEGUIDANCEINTENT_TRUE_VERBOSITY_LOW": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_VOICEGUIDANCEINTENT_TRUE_VERBOSITY_LOW",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_VOICEGUIDANCEINTENT_TRUE_VERBOSITY_HIGH": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_VOICEGUIDANCEINTENT_TRUE_VERBOSITY_HIGH",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_AUDIODESCRITIONSINTENT_TRUE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_AUDIODESCRITIONSINTENT_TRUE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_AUDIODESCRITIONSINTENT_FALSE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_AUDIODESCRITIONSINTENT_FALSE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_HIGHCONTRASTINTENT_MODE_OFF": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_HIGHCONTRASTINTENT_MODE_OFF",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERY_LAUNCH_HIGHCONTRASTINTENT_MODE_ON": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_HIGHCONTRASTINTENT_MODE_ON",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCREENMAGNIFICATIONINTENT_TURNED_OFF": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCREENMAGNIFICATIONINTENT_TURNED_OFF",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCREENMAGNIFICATIONINTENT_TURNED_ON": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCREENMAGNIFICATIONINTENT_TURNED_ON",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCREENMAGNIFICATIONINTENT_MAGNIFICATION_SCALE_2.5": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCREENMAGNIFICATIONINTENT_MAGNIFICATION_SCALE_2.5",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_FOCUSINTENT_CURSOR_UP": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_FOCUSINTENT_CURSOR_UP",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_FOCUSINTENT_CURSOR_DOWN": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_FOCUSINTENT_CURSOR_DOWN",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_FOCUSINTENT_CURSOR_LEFT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_FOCUSINTENT_CURSOR_LEFT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_FOCUSINTENT_CURSOR_RIGHT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_FOCUSINTENT_CURSOR_RIGHT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SELECTINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SELECTINTENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCROLLINTENT_UP_UNIT_PAGE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCROLLINTENT_UP_UNIT_PAGE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCROLLINTENT_DOWN_UNIT_PAGE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCROLLINTENT_DOWN_UNIT_PAGE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCROLLINTENT_LEFT_UNIT_PAGE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCROLLINTENT_LEFT_UNIT_PAGE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCROLLINTENT_RIGHT_UNIT_PAGE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCROLLINTENT_RIGHT_UNIT_PAGE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCROLLINTENT_UP_UNIT_LINE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCROLLINTENT_UP_UNIT_LINE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCROLLINTENT_DOWN_UNIT_LINE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCROLLINTENT_DOWN_UNIT_LINE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCROLLINTENT_LEFT_UNIT_LINE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCROLLINTENT_LEFT_UNIT_LINE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCROLLINTENT_RIGHT_UNIT_LINE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCROLLINTENT_RIGHT_UNIT_LINE",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCROLLINTENT_UP_UNIT_PERCENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCROLLINTENT_UP_UNIT_PERCENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCROLLINTENT_DOWN_UNIT_PERCENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCROLLINTENT_DOWN_UNIT_PERCENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCROLLINTENT_LEFT_UNIT_PERCENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCROLLINTENT_LEFT_UNIT_PERCENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_SCROLLINTENT_RIGHT_UNIT_PERCENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SCROLLINTENT_RIGHT_UNIT_PERCENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_BACKINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_BACKINTENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "PARAMETERS_INITIALIZATION_EXITINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_EXITINTENT",
+                        "description": "Validation of the Parameters initialization for powerIntent Format"
+                    }
+                ]
+            }
+        ]
     }
 }
