@@ -29,8 +29,9 @@ import UTILS from '../cypress-support/src/utils';
  * @param {String} key - key name of the request data.
  * @example
  * Given 1st party app invokes the 'Firebolt' API to 'get device id'
+ * Given 1st party app invokes the API to 'get device id
  */
-Given(/1st party app invokes the '(.+)' API to '(.+)'$/, async (sdk, key) => {
+Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) => {
   // Fetching the data like method, param, context and action etc.
   cy.fireboltDataParser(key, sdk).then((parsedDataArr) => {
     parsedDataArr.forEach((parsedData) => {
@@ -127,7 +128,10 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
       if (UTILS.isScenarioExempted(method, param)) {
         isNotSupportedApi = true;
       }
-      if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE) {
+      if (
+        Cypress.env(CONSTANTS.TEST_TYPE) &&
+        Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
+      ) {
         cy.fetchLifecycleHistory(appId);
         cy.setAppObjectStateFromMethod(method, appId);
       }

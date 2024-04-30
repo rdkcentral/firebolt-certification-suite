@@ -437,7 +437,7 @@
         "method": "manage_privacy.setAllowPersonalization",
         "params": "TRUE"
     },
-    "NULL_FOR_DISCOVERY_ONPOLICYCHANGED_EVENT": {
+    "ONDISCOVERYPOLICYCHANGED": {
         "event": "discovery.onPolicyChanged",
         "validationJsonPath": "eventResponse",
         "expected": "NULL",

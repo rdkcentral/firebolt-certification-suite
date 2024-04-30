@@ -84,17 +84,16 @@ function validateDeviceVersion(method, validationTypeObject, apiOrEventObject) {
       apiVersionvalue
     );
     cy.log(
-      'Miscellaneous Validation' +
-        ' : [Requirement validated for ' +
+      'Miscellaneous Validation for ' +
         method +
-        ' method with API Version ] : Actual value is ' +
+        ': Expected value: ' +
+        apiVersionvalue +
+        ', Actual value: ' +
         response.api.major +
         '.' +
         response.api.minor +
         '.' +
-        response.api.patch +
-        ' and expected value is ' +
-        apiVersionvalue
+        response.api.patch
     );
   } else {
     // Validating the current response against the default value.
@@ -105,17 +104,16 @@ function validateDeviceVersion(method, validationTypeObject, apiOrEventObject) {
         version
       );
       cy.log(
-        'Miscellaneous Validation' +
-          ' : [Requirement validated for ' +
+        'Miscellaneous Validation for ' +
           method +
-          ' method with API Version ] : Actual value is ' +
+          ': Expected value: ' +
+          version +
+          ', Actual value: ' +
           response.api.major +
           '.' +
           response.api.minor +
           '.' +
-          response.api.patch +
-          ' and expected value is ' +
-          version
+          response.api.patch
       );
     });
   }

@@ -180,7 +180,12 @@ function overideParamsFromConfigModule(overrideParams) {
 function getTopic(appIdentifier = null, operation = null) {
   let topic;
   let deviceMac = getEnvVariable(CONSTANTS.DEVICE_MAC);
-  expect(deviceMac.length).to.be.greaterThan(5);
+  if (deviceMac.length <= 5 || !deviceMac || deviceMac == undefined) {
+    assert(
+      false,
+      `Provided deviceMac ${deviceMac} is in improper format. Expected format : F046XXXXXXXX.`
+    );
+  }
   // Remove colons from mac address if not removed
   deviceMac = deviceMac.replaceAll(':', '');
   if (appIdentifier) {
@@ -431,7 +436,7 @@ function lifecycleHistorySchemaValidation(result, schema, lifecycleHistoryRecord
  * @example
  * assertWithRequirementLogs('Checking foreground state', 'foreground', 'foreground', true, { message: 'Invalid state' });
  */
-function assertWithRequirementLogs(pretext, expected, actual, equateDeep = false, errorObject) {
+function assertWithRequirementLogs(pretext, actual, expected, equateDeep = false, errorObject) {
   if (errorObject) {
     cy.log(pretext + ': ' + JSON.stringify(errorObject)).then(() => {
       assert(false, pretext + ': ' + JSON.stringify(errorObject));

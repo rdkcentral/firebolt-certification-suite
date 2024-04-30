@@ -48,56 +48,47 @@ export function parametersMiscValidation(method, validationTypeObject, apiOrEven
 function validateParametersInitialization(method, validationTypeObject, apiOrEventObject) {
   const response = apiOrEventObject.response.result;
   const ScenarioType = validationTypeObject.type;
-  const pretext = `${CONSTANTS.METHOD_CONTENT} for ${method} method : `;
-
+  const pretext = `${CONSTANTS.METHOD_CONTENT} for ${method} :`;
   switch (ScenarioType) {
     case CONSTANTS.LIMITADTRACKING_ON:
       // lmt value equal to 1 and us_privacy value equal to 1-Y- when limitAdTracking is on
       cy.log(
-        `${pretext} : lmt value and us privacy : ` + JSON.stringify(response),
+        `${pretext} lmt value and us privacy : ` + JSON.stringify(response),
         'validateParametersInitialization'
       );
       cy.log(
-        `Miscellaneous Validation: Expected ${response.lmt} to be equal to ${CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT}`
+        `Miscellaneous Validation for ${method}: Expected lmt value : ${CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT}, Actual value : ${response.lmt}`
       ).then(() => {
-        assert.equal(
-          CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT,
-          response.lmt,
-          `${pretext} Equal to be`
-        );
+        assert.equal(response.lmt, CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT, `${pretext} `);
       });
       cy.log(
-        `Miscellaneous Validation: Expected ${response.us_privacy} to be equal to ${CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_US_PRIVACY}`
+        `Miscellaneous Validation for ${method}: Expected us_privacy value : ${CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_US_PRIVACY}, Actual value : ${response.us_privacy}`
       ).then(() => {
         assert.equal(
-          CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_US_PRIVACY,
           response.us_privacy,
-          `${pretext} Equal to be`
+          CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_US_PRIVACY,
+          `${pretext} `
         );
       });
       break;
     case CONSTANTS.LIMITADTRACKING_OFF:
       // lmt value equal to 0 and us_privacy value equal to 1-N- when limitAdTracking is off
       cy.log(
-        `${pretext} : lmt value and us privacy ` + JSON.stringify(response),
+        `${pretext} lmt value and us privacy ` + JSON.stringify(response),
         'validateParametersInitialization'
       );
       cy.log(
-        `Miscellaneous Validation: Expected ${response.lmt} to be equal to ${CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT}`
+        `Miscellaneous Validation for ${method}: Expected lmt value : ${CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT}, Actual value ${response.lmt}`
       ).then(() => {
-        assert.equal(
-          CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT,
-          response.lmt,
-          `${pretext} Equal to be`
-        );
+        assert.equal(response.lmt, CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT, `${pretext} `);
       });
       cy.log(
-        `Miscellaneous Validation: Expected ${response.us_privacy} to be equal to ${CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_US_PRIVACY}`
+        `Miscellaneous Validation for ${method}: Expected us_privacy value : ${CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_US_PRIVACY}, Actual value : ${response.us_privacy}`
       ).then(() => {
         assert.equal(
-          CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_US_PRIVACY,
           response.us_privacy,
-          `${pretext} Equal to be`
+          CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_US_PRIVACY,
+          `${pretext} `
         );
       });
       break;

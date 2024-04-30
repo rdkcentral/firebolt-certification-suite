@@ -64,8 +64,9 @@ When('{string} transitions to state {string}', (app, state) => {
       cy.setAppState(state, appId).then(() => {
         // TODO: Checks for platform support
       });
+    } else {
+      cy.setLifecycleState(state, appId);
     }
-    cy.setLifecycleState(state, appId);
   });
 });
 
