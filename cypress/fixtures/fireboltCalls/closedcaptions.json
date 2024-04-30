@@ -395,7 +395,7 @@
     "GET_WINDOWOPACITY":{
         "method": "manage_closedcaptions.windowOpacity"
     },
-    "#FF00FF_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS": {
+    "#7F7F7F_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.backgroundColor",
         "validationJsonPath": "result",
         "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR"
