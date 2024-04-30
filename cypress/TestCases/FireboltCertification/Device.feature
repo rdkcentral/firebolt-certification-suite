@@ -50,21 +50,3 @@ Feature: Device
         And 1st party app invokes the 'Firebolt' API to 'set device name to kitchen'
         Then 'Firebolt' platform responds to '1st party app' with 'null for device setName'
         And 'Firebolt' platform does not trigger event for 'onDeviceNameChanged'
-
-    @Device @coreSDK @sdk @transport @notSupported
-    Scenario Outline: Device.network - Positive Scenario: <Scenario>
-        When '3rd party app' registers for the 'device onNetworkChanged' event using the 'Firebolt' API
-        And '3rd party app' invokes the 'Firebolt' API to 'fetch device network'
-        Then 'Firebolt' platform responds with '<Method_Validation_Key>'
-        When User triggers event with value as '<Event_Params>'
-        Then 'Firebolt' platform triggers event '<Event_Validation_Key>'
-        
-        Examples:
-            | Scenario                               | Method_Validation_Key                   | Event_Validation_Key                        |
-            | Validate network_wifi_connected        | device network as wifi connected        | onNetworkChanged with wifi connected        |
-            | Validate network_wifi_disconnected     | device network as wifi disconnected     | onNetworkChanged with wifi disconnected     |
-            | Validate network_Ethernet_connected    | device network as ethernet connected    | onNetworkChanged with ethernet connected    |
-            | Validate network_Ethernet_disconnected | device network as ethernet disconnected | onNetworkChanged with ethernet disconnected |
-            | Validate network_Hybrid_connected      | device network as hybrid connected      | onNetworkChanged with hybrid connected      |
-            | Validate network_Hybrid_disconnected   | device network as hybrid disconnected   | onNetworkChanged with hybrid disconnected   |
-

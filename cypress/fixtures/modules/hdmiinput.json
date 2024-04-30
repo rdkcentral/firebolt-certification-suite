@@ -4,5 +4,25 @@
     },
     "PORT_HDMI2": {
         "portId": "HDMI2"
+    },
+    "SETAUTOLOWLATENCYMODECAPABLE_TRUE": {
+        "port": "HDMI1",
+        "value": true
+    },
+    "SETAUTOLOWLATENCYMODECAPABLE_FALSE": {
+        "port": "HDMI1",
+        "value": false
+    },
+    "EDIDVERSION_1_4_HDMI1": {
+        "port": "HDMI1",
+        "value": "1.4"
+    },
+    "EDIDVERSION_2_0_HDMI1": {
+        "port": "HDMI1",
+        "value": "2.0"
+    },
+    "EDIDVERSION_UNKNOWN_HDMI1": {
+        "port": "HDMI1",
+        "value": "unknown"
     }
 }

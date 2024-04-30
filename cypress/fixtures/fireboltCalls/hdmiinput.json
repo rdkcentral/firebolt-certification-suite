@@ -19,5 +19,87 @@
         "method": "hdmiinput.port",
         "validationJsonPath": "result",
         "expected": "HDMIINPUT_PORT"
+    },
+    "SET_AUTOLOWLATENCYMODECAPABLE_WITH_TRUE": {
+        "method": "manage_hdmiinput.setAutoLowLatencyModeCapable",
+        "params": "HDMIINPUT_SETAUTOLOWLATENCYMODECAPABLE_TRUE"
+    },
+    "TRUE_FOR_AUTOLOWLATENCYMODECAPABLE_PORT":{
+        "method": "hdmiinput.port",
+        "validationJsonPath": "result.autoLowLatencyModeCapable",
+        "expected": "TRUE"
+    },
+    "SET_AUTOLOWLATENCYMODECAPABLE_WITH_FALSE": {
+        "method": "manage_hdmiinput.setAutoLowLatencyModeCapable",
+        "params": "HDMIINPUT_SETAUTOLOWLATENCYMODECAPABLE_FALSE"
+    },
+    "FALSE_FOR_AUTOLOWLATENCYMODECAPABLE_PORT":{
+        "method": "hdmiinput.port",
+        "validationJsonPath": "result.autoLowLatencyModeCapable",
+        "expected": "FALSE"
+    },
+    "SET_EDIDVERSION_TO_1.4": {
+        "method": "manage_hdmiinput.setEdidVersion",
+        "params": "HDMIINPUT_EDIDVERSION_1_4_HDMI1"
+    },
+    "1.4_FOR_EDIDVERSION_PORT":{
+        "method": "hdmiinput.port",
+        "validationJsonPath": "result.edidVersion",
+        "expected": "HDMIINPUT_EDIDVERSION_1_4"
+    },
+    "SET_EDIDVERSION_TO_2.0": {
+        "method": "manage_hdmiinput.setEdidVersion",
+        "params": "HDMIINPUT_EDIDVERSION_2_0_HDMI1"
+    },
+    "2.0_FOR_EDIDVERSION_PORT":{
+        "method": "hdmiinput.port",
+        "validationJsonPath": "result.edidVersion",
+        "expected": "HDMIINPUT_EDIDVERSION_2_0"
+    },
+    "SET_EDIDVERSION_TO_UNKNOWN": {
+        "method": "manage_hdmiinput.setEdidVersion",
+        "params": "HDMIINPUT_EDIDVERSION_UNKNOWN_HDMI1"
+    },
+    "TRUE_FOR_AUTOLOWLATENCYMODECAPABLE_PORTS":{
+        "method": "hdmiinput.ports",
+        "validationJsonPath": "result[0].autoLowLatencyModeCapable",
+        "expected": "TRUE"
+    },
+    "FALSE_FOR_AUTOLOWLATENCYMODECAPABLE_PORTS":{
+        "method": "hdmiinput.ports",
+        "validationJsonPath": "result[0].autoLowLatencyModeCapable",
+        "expected": "FALSE"
+    },
+    "1.4_FOR_EDIDVERSION_PORTS":{
+        "method": "hdmiinput.ports",
+        "validationJsonPath": "result[0].edidVersion",
+        "expected": "HDMIINPUT_EDIDVERSION_1_4"
+    },
+    "2.0_FOR_EDIDVERSION_PORTS":{
+        "method": "hdmiinput.ports",
+        "validationJsonPath": "result[0].edidVersion",
+        "expected": "HDMIINPUT_EDIDVERSION_2_0"
+    },
+    "FALSE_FOR_AUTOLOWLATENCYMODESIGNALLED_PORTS":{
+        "method": "hdmiinput.ports",
+        "validationJsonPath": "result[0].autoLowLatencyModeSignalled",
+        "expected": "FALSE"
+    },
+    "OPEN_HDMI1_PORT":{
+        "method": "manage_hdmiinput.open",        
+        "params": "HDMIINPUT_PORT_HDMI1"
+    },
+    "NULL_FOR_HDMI_INPUT_OPEN":{
+        "method": "hdmiinput.open",
+        "validationJsonPath": "result",
+        "expected": "NULL"
+    },
+    "CLOSE_HDMI_PORT":{
+        "method": "manage_hdmiinput.close"
+    },
+    "NULL_FOR_HDMI_INPUT_CLOSE":{
+        "method": "hdmiinput.close",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     }
 }

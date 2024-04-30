@@ -41,14 +41,3 @@ Feature: Secondscreen
       And 1st party app invokes the 'Firebolt' API to 'set friendlyName to guest room'
       Then 'Firebolt' platform responds to '1st party app' with 'null for device setName'
       And 'Firebolt' platform does not trigger event for 'onFriendlyNameChanged'
-
-   @Secondscreen @coreSDK @regression @sdk @notSupported
-   Scenario Outline: Secondscreen.<Event_Name> - Positive Scenario: Validating event Clearing listeners
-      When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
-      And I clear '<Clear_Event_Name>' listeners
-      # Then User triggers event with value as '<Event_Params>'
-      Then 'Firebolt' platform does not trigger event for '<Event_Validation_Key>'
-      Examples:
-         | Event_Name      | Registered_Event             | Clear_Event_Name                   | Event_Validation_Key                        |
-         | onLaunchRequest | secondscreen onLaunchRequest | secondscreen onLaunchRequest event | null for secondscreen onLaunchRequest event |
-         | onCloseRequest  | secondscreen onCloseRequest  | secondscreen onCloseRequest event  | null for secondscreen onCloseRequest event  |
