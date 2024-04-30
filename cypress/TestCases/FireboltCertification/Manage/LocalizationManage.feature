@@ -9,7 +9,7 @@ Feature: Localization_Manage
     Scenario Outline: Localization.<Scenario> - Positive Scenario: <Scenario>
         When 1st party app registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
         When 1st party app invokes the 'Firebolt' API to '<Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
         And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
@@ -28,7 +28,7 @@ Feature: Localization_Manage
     @Localization @manageSDK @sdk @transport
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Validation_Key>'
 
         Examples:
             | Scenario            | API_Key                     | Method     | Validation_Key                   |
@@ -43,7 +43,7 @@ Feature: Localization_Manage
     @Localization @manageSDK @sdk @transport
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Validation_Key>'
 
         Examples:
             | Scenario                         | API_Key                             | Method                     | Validation_Key                                |
@@ -59,7 +59,7 @@ Feature: Localization_Manage
     @Localization @manageSDK @sdk @transport
     Scenario Outline: Localization.<SetMethod> - Positive Scenario: <Scenario> with undefined params
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Validation_Key>'
         
         Examples:
             | Scenario                | SetMethod                  | API_Key                                    | Validation_Key                                |

@@ -39,7 +39,7 @@ Feature: Secondscreen
       Given '3rd party app' registers for the 'secondscreen onFriendlyNameChanged' event using the 'Firebolt' API
       And I clear 'secondscreen onFriendlyNameChanged event' listeners
       And 1st party app invokes the 'Firebolt' API to 'set friendlyName to guest room'
-      Then 'Firebolt' platform responds to '1st party app' with 'set friendlyName to guest room'
+      Then 'Firebolt' platform responds to '1st party app' for 'set friendlyName to guest room'
       And 'Firebolt' platform does not trigger event for 'onFriendlyNameChanged'
 
    @Secondscreen @coreSDK @regression @sdk @notSupported

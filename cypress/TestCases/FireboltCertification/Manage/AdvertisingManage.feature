@@ -14,7 +14,7 @@ Feature: Advertising_Manage
    Scenario Outline: Advertising.skipRestriction - Positive Scenario: <Scenario>
       When 1st party app registers for the 'advertising onSkipRestrictionChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
+      Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
       When 1st party app invokes the 'Firebolt' API to 'get advertising skipRestriction'
       Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
       And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
@@ -30,12 +30,12 @@ Feature: Advertising_Manage
    @Advertising @manageSDK @sdk @transport
    Scenario: Advertising.setSkipRestriction - Negative Scenario: SkipRestriction expecting error
       When 1st party app invokes the 'Firebolt' API to 'set skipRestriction with integer'
-      Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for skipRestriction'
+      Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for skipRestriction'
 
    @Advertising @coreSDK @sdk @transport
    Scenario: Advertising.policy - Positive Scenario: SkipRestriction with undefined params
       When 1st party app invokes the 'Firebolt' API to 'set skipRestriction with undefined parameter'
-      Then 'Firebolt' platform responds to '1st party app' with 'advertising skipRestriction'
+      Then 'Firebolt' platform responds to '1st party app' for 'advertising skipRestriction'
 
    @Advertising @manageSDK @sdk @transport @notSupported
    Scenario: Advertising.resetIdentifier - Positive Scenario: Reset Identifier method

@@ -7,12 +7,12 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario: Capabilities.info - Positive Scenario: Validate passing all the capabilities list
     When '3rd party app' invokes the 'Firebolt' API to 'get capability info'
-    Then 'Firebolt' platform responds for 'expected value for info api'
+    Then 'Firebolt' platform responds with 'expected value for info api'
 
   @Capabilities @coreSDK
   Scenario Outline: Capabilities.available - Positive Scenario: <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-    Then 'Firebolt' platform responds for '<Validation_key>'
+    Then 'Firebolt' platform responds with '<Validation_key>'
 
     Examples:
       | Scenario                                                            | API_Key                                               | Validation_key                                        |
@@ -23,14 +23,13 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario Outline: Capabilities.available - Positive Scenario: <Scenario>
     When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-    Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
+    Then 'Firebolt' platform responds to '1st party app' with '<Validation_key>'
 
     Examples:
-      | Scenario                                                       | API_Key                                               |
-      | Validate keyboard capability available in platform             | check availability of keyboard capability             |
-      | Validate acknowledgechallenge capability available in platform | check availability of acknowledgechallenge capability |
-      | Validate pinchallenge capability available in platform         | check availability of pinchallenge capability         |
-
+      | Scenario                                                       | API_Key                                               | Validation_key                                        |
+      | Validate keyboard capability available in platform             | check availability of keyboard capability             | true for keyboard capability availability             |
+      | Validate acknowledgechallenge capability available in platform | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
+      | Validate pinchallenge capability available in platform         | check availability of pinchallenge capability         | true for pinchallenge capability availability         |
 
   @Capabilities @coreSDK
   Scenario Outline: Capabilities.granted - Positive Scenario: <Scenario>

@@ -9,7 +9,7 @@ Feature: AudioDescriptions_Manage
    Scenario Outline: AudioDescriptions.enabled - Positive Scenario: <Scenario>
       When 1st party app registers for the 'audioDescriptions onEnabledChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
+      Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
       When 1st party app invokes the 'Firebolt' API to 'get audioDescriptions'
       Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
       And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
@@ -22,7 +22,7 @@ Feature: AudioDescriptions_Manage
    @AudioDescriptions @manageSDK @sdk @transport
    Scenario Outline: AudioDescriptions.enabled - Negative Scenario: <Scenario> expecting error
       When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with 'invalid params for audiodescriptions setEnabled'
+      Then 'Firebolt' platform responds to '1st party app' for 'invalid params for audiodescriptions setEnabled'
 
       Examples:
          | Scenario                      | API_Key                                        |

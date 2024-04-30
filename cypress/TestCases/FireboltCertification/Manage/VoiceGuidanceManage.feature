@@ -8,7 +8,7 @@ Feature: VoiceGuidance_Manage
     Scenario Outline: Voiceguidance.<Method> - Positive Scenario: <Scenario>
         When 1st party app registers for the '<Event_registration_Key>' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<API_Set_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<API_Set_Key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<API_Set_Key>'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
         And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
@@ -33,7 +33,7 @@ Feature: VoiceGuidance_Manage
     @VoiceGuidance @manageSDK @sdk @transport
     Scenario Outline: Voiceguidance.<Method> - Negative Scenario: <Scenario> and expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Error_Object>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Error_Object>'
 
         Examples:
             | Scenario          | Method  | API_Key                                     | Error_Object                                 |

@@ -8,7 +8,7 @@ Feature: Privacy_Manage
    Scenario Outline: Privacy.<Method> - Positive Scenario: <Scenario>
       When 1st party app registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<API_Set_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<API_Set_Key>'
+      Then 'Firebolt' platform responds to '1st party app' for '<API_Set_Key>'
       When 1st party app invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
       And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
@@ -43,36 +43,36 @@ Feature: Privacy_Manage
    @Privacy @manageSDK @sdk @transport
    Scenario: Privacy.settings - Positive Scenario: Settings
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow resumePoints as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'set privacy allow resumePoints as true'
+      Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow resumePoints as true'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow unentitledResumePoints as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'set privacy allow unentitledResumePoints as true'
+      Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow unentitledResumePoints as true'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow watchHistory as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'set privacy allow watchHistory as true'
+      Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow watchHistory as true'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow productAnalytics as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'set privacy allow productAnalytics as true'
+      Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow productAnalytics as true'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow personalization as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'set privacy allow personalization as true'
+      Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow personalization as true'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow unentitledPersonalization as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'set privacy allow unentitledPersonalization as true'
+      Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow unentitledPersonalization as true'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow remoteDiagnostics as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'set privacy allow remoteDiagnostics as true'
+      Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow remoteDiagnostics as true'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow primaryContentAdTargeting as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'set privacy allow primaryContentAdTargeting as true'
+      Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow primaryContentAdTargeting as true'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow primaryBrowseAdTargeting as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'set privacy allow primaryBrowseAdTargeting as true'
+      Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow primaryBrowseAdTargeting as true'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow appContentAdTargeting as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'set privacy allow appContentAdTargeting as true'
+      Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow appContentAdTargeting as true'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow ACRCollection as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'set privacy allow ACRCollection as true'
+      Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow ACRCollection as true'
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow cameraAnalytics as true'
-      Then 'Firebolt' platform responds to '1st party app' with 'set privacy allow cameraAnalytics as true'
+      Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow cameraAnalytics as true'
       When 1st party app invokes the 'Firebolt' API to 'get privacy settings'
-      Then 'Firebolt' platform responds to '1st party app' with 'expected privacy settings'
+      Then 'Firebolt' platform responds to '1st party app' for 'expected privacy settings'
 
    @Privacy @manageSDK @sdk @transport
    Scenario Outline: Privacy.<Set_Method> - Positive Scenario: <Scenario> with undefined params
       When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Method_validation_Key>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Method_validation_Key>'
 
       Examples:
          | Scenario                           | Set_Method                        | API_Key                                                    | Method_validation_Key                               |
@@ -92,7 +92,7 @@ Feature: Privacy_Manage
    @Privacy @manageSDK @sdk @transport
    Scenario Outline: Privacy.<Method> - Negative Scenario: <Scenario> and expecting error
       When 1st party app invokes the 'Firebolt' API to '<Error_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Error_Object>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Error_Object>'
 
       Examples:
          | Scenario          | Method                         | Error_Key                                                              | Error_Object                                                      |

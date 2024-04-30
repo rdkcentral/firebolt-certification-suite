@@ -9,7 +9,7 @@ Feature: Device_Manage
     Scenario: Device.name - Positive Scenario: set device name - Bedroom
         When 1st party app registers for the 'device onNameChanged' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to 'set device name to Bedroom'
-        Then 'Firebolt' platform responds to '1st party app' with 'set device name to Bedroom'
+        Then 'Firebolt' platform responds to '1st party app' for 'set device name to Bedroom'
         When 1st party app invokes the 'Firebolt' API to 'get manage device name'
         Then 'Firebolt' platform responds to '1st party app' with 'Bedroom for device name'
         And 'Firebolt' platform triggers to '1st party app' event 'onNameChanged for device with Bedroom'
@@ -48,7 +48,7 @@ Feature: Device_Manage
     @Device @manageSDK @sdk @transport
     Scenario Outline: Device.name - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for device'
+        Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for device'
 
         Examples:
             | Scenario                     | Key                          |
@@ -58,7 +58,7 @@ Feature: Device_Manage
     @Device @manageSDK @sdk @transport
     Scenario Outline: Device.provision - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for device provision'
+        Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for device provision'
 
         Examples:
             | Scenario                               | Key                                |
@@ -71,4 +71,4 @@ Feature: Device_Manage
     @Device @manageSDK @sdk @transport
     Scenario: Device.name - Positive Scenario: setName with undefined params
         When 1st party app invokes the 'Firebolt' API to 'set device name without parameters'
-        Then 'Firebolt' platform responds to '1st party app' with 'expected device name'
+        Then 'Firebolt' platform responds to '1st party app' for 'expected device name'
