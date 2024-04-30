@@ -18,6 +18,7 @@
 
 import Validation from '../../src/validation';
 import * as utils from '../../src/utils';
+const logger = require('../../../logger')("schema.test.js");
 
 jest.mock('../../src/utils', () => ({
   getAndDeferenceOpenRPC: jest.fn(),
@@ -221,7 +222,7 @@ describe('test formatResultAfterSchemaValidation', () => {
       params,
       schemaMap
     );
-    console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
+    logger.info(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
 
     // testing for Method Not Implemented
@@ -259,7 +260,7 @@ describe('test formatResultAfterSchemaValidation', () => {
       params,
       schemaMap
     );
-    console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
+    logger.info(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
 
@@ -319,7 +320,7 @@ describe('test formatResultAfterSchemaValidation', () => {
       params,
       schemaMap
     );
-    console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
+    logger.info(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
 
@@ -379,7 +380,7 @@ describe('test formatResultAfterSchemaValidation', () => {
       params,
       schemaMap
     );
-    console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
+    logger.info(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
 
@@ -419,7 +420,7 @@ describe('test formatResultAfterSchemaValidation', () => {
       params,
       schemaMap
     );
-    console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
+    logger.info(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
 
@@ -451,7 +452,7 @@ describe('test formatResultAfterSchemaValidation', () => {
       params,
       schemaMap
     );
-    console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
+    logger.info(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
 
@@ -486,7 +487,7 @@ describe('test formatResultAfterSchemaValidation', () => {
       params,
       schemaMap
     );
-    console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
+    logger.info(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
 
@@ -509,7 +510,7 @@ describe('test formatResultAfterSchemaValidation', () => {
       params,
       schemaMap
     );
-    console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
+    logger.info(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
 
@@ -552,7 +553,7 @@ describe('test formatResultAfterSchemaValidation', () => {
       params,
       schemaMap
     );
-    console.log(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
+    logger.info(expect.getState().currentTestName + ' : ' + JSON.stringify(result));
     expect(result).toEqual(expectedResponse);
   });
 });

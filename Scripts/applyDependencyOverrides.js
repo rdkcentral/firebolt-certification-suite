@@ -18,6 +18,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const logger = require('../cypress/support/logger')("index.js") 
 
 // Paths to the relevant package.json files and temporary backup
 const fcsPackagePath = path.join(__dirname, '..', 'package.json');
@@ -29,7 +30,7 @@ function applyDependencyOverrides() {
     const configModulePackage = require(configModulePath);
 
     if (configModulePackage.dependencyOverrides) {
-      console.log('Applying dependency overrides...');
+      logger.info('Applying dependency overrides...');
 
       // Backup the original package.json
       fs.copyFileSync(fcsPackagePath, tmpPackagePath);
@@ -38,7 +39,7 @@ function applyDependencyOverrides() {
 
       for (const [pkg, version] of Object.entries(configModulePackage.dependencyOverrides)) {
         if (fcsPackage.dependencies && fcsPackage.dependencies[pkg]) {
-          console.log(`Overriding ${pkg} to version ${version}...`);
+          logger.info(`Overriding ${pkg} to version ${version}...`);
           fcsPackage.dependencies[pkg] = version;
           hasOverrides = true;
         }
@@ -46,21 +47,21 @@ function applyDependencyOverrides() {
 
       if (hasOverrides) {
         fs.writeFileSync(fcsPackagePath, JSON.stringify(fcsPackage, null, 2));
-        console.log('Updated package.json with dependency overrides.');
+        logger.info('Updated package.json with dependency overrides.');
 
         // Run yarn install with the updated package.json
         execSync(`yarn install --ignore-scripts`, { stdio: 'inherit' });
-        console.log('Dependency overrides applied.');
+        logger.info('Dependency overrides applied.');
       } else {
-        console.log('No relevant dependency overrides found.');
+        logger.error('No relevant dependency overrides found.');
       }
 
       // Revert to the original package.json
       fs.copyFileSync(tmpPackagePath, fcsPackagePath);
       fs.unlinkSync(tmpPackagePath);
-      console.log('Reverted to the original package.json.');
+      logger.info('Reverted to the original package.json.');
     } else {
-      console.log('No dependency overrides found.');
+      logger.info('No dependency overrides found.');
     }
   } else {
     console.warn(

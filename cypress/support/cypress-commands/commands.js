@@ -18,6 +18,7 @@
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS from '../cypress-support/src/utils';
+const logger = require('../logger')("command.js");
 
 /**
  * @module commands
@@ -778,11 +779,11 @@ Cypress.Commands.add('convertJsonToHTML', (defaultDirectory, fileName) => {
       if (response.stdout.includes('Reports saved')) {
         return true;
       }
-      console.log(response);
+      logger.info(response);
       return false;
     });
   } catch (err) {
-    console.log(err);
+    logger.error(err);
     return false;
   }
 });

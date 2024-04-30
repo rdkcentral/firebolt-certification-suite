@@ -15,6 +15,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
+ const logger = require('../../cypress/support/logger')("index.js")
 
 const client = {
   ws: null,
@@ -34,7 +35,7 @@ const client = {
  * });
  */
 function init() {
-  console.log('Establishing pubsub connection');
+  logger.info('Establishing pubsub connection');
 
   return new Promise((resolve, reject) => {
     // Enter a valid WebSocket URL
@@ -73,7 +74,7 @@ function init() {
  */
 function publish(topic, message, headers) {
   if (!topic) {
-    console.log('No topic provided...');
+    logger.error('No topic provided...');
     return false;
   }
 
@@ -96,7 +97,7 @@ function publish(topic, message, headers) {
     client.ws.send(JSON.stringify(publishMsg));
     return true;
   } catch (err) {
-    console.log('Failed to publish message...', err);
+    logger.error('Failed to publish message...', err);
     return false;
   }
 }
@@ -121,7 +122,7 @@ function subscribe(topic, callback) {
 
   // Listen for incoming messages
   client.ws.addEventListener('message', (event) => {
-    console.log('Received notification on topic "' + topic + '"');
+    logger.info('Received notification on topic "' + topic + '"','subscribe');
     const data = JSON.parse(event.data);
 
     // Format received message by removing headers from payload object
@@ -138,7 +139,7 @@ function subscribe(topic, callback) {
     }
     // If a callback function is provided, call it with the formattedMsg payload and headers
     if (typeof callback == 'function') {
-      console.log('Incoming notification is valid. Calling callback:' + JSON.stringify(data));
+      logger.info('Incoming notification is valid. Calling callback:' + JSON.stringify(data), 'sunscribe');
       callback(formattedMsg.payload, formattedMsg.headers);
     }
   });

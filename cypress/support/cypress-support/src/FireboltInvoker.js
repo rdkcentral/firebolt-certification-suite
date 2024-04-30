@@ -18,6 +18,7 @@
 
 import modularTransportClient from '../../modularTransportClient';
 import { getEnvVariable } from './utils';
+const logger = require('../../logger')("FireboltInvoker.js");
 
 const WEBSOCKET = 'WebSocket';
 const DEFAULT_WS_URL_PROTOCOL = 'ws://';
@@ -29,7 +30,7 @@ let singletonInstance = null;
 export default class FireboltInvoker {
   constructor() {
     if (singletonInstance) {
-      console.log('Singleton instance already exists');
+      logger.debug('Singleton instance already exists');
       return singletonInstance;
     }
 
@@ -55,13 +56,13 @@ export default class FireboltInvoker {
         getEnvVariable('wsPort', false),
         getEnvVariable('wsUrlPath', false)
       );
-      console.log('Creating WebSocket connection for URL: ' + JSON.stringify(wsUrl));
+      logger.info('Creating WebSocket connection for URL: ' + JSON.stringify(wsUrl),'get');
       try {
         this.instance = await modularTransportClient(WEBSOCKET, {
           url: wsUrl,
         });
         await this.instance.initialize();
-        console.log('WebSocket client initialized');
+        logger.info('WebSocket client initialized');
         if (this.instance) {
           Cypress.env('webSocketClient', this.instance);
           return this.instance;
@@ -69,7 +70,7 @@ export default class FireboltInvoker {
           Cypress.env('webSocketClient', null);
         }
       } catch (err) {
-        console.error('Error occurred during initializing WebSocket client:', err);
+        logger.error('Error occurred during initializing WebSocket client:', err ,'get');
         throw new Error('WebSocket initialization failed.');
       }
     }
@@ -87,7 +88,7 @@ export default class FireboltInvoker {
       fireboltMessage.params = params;
     }
 
-    console.log('Firebolt Message in the invoke:' + JSON.stringify(fireboltMessage));
+    logger.info('Firebolt Message in the invoke:' + JSON.stringify(fireboltMessage),'invoke');
 
     try {
       const currentInstance = await this.get();
@@ -97,7 +98,7 @@ export default class FireboltInvoker {
         return response;
       }
     } catch (error) {
-      console.error('Error occurred during invoking Firebolt:', error);
+      logger.error('Error occurred during invoking Firebolt:', error, 'invoke');
       throw error;
     }
   }

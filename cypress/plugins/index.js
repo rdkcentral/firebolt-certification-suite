@@ -35,12 +35,15 @@ const util = require('util');
 const { DateTime } = require('luxon');
 const { generateLocalReport } = require('./localReportGenerator');
 const getSpecPattern = require('../../specHelperConfig.js');
+const logger = require('../support/logger')("index.js");
 let metaDataArr = [];
 
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
   const testsuite = config.env.testSuite;
+  console.log("testSuite"+testsuite)
   const specPattern = getSpecPattern(testsuite);
+  logger.info("SpecPattern:"+specPattern)
   if (specPattern !== undefined) {
     config.specPattern = specPattern;
   }
@@ -74,7 +77,7 @@ module.exports = async (on, config) => {
 
   on('task', {
     log(message) {
-      console.log(message);
+      logger.info(message);
       return null;
     },
     /* write json or string to file
@@ -93,7 +96,7 @@ module.exports = async (on, config) => {
           }
           fs.writeFile(fileName, data, 'utf-8', function (err) {
             if (err) {
-              console.log('An error occured while writing content to File.', 'writeToFile');
+              logger.error('An error occured while writing content to File.', 'writeToFile');
               reject(false);
             }
             resolve(true);
@@ -144,7 +147,7 @@ module.exports = async (on, config) => {
           try {
             combinedJson = jsonMerger.mergeFiles(files);
           } catch (err) {
-            console.log(err);
+            logger.error('Error in merging the multiple JSON', err);
             resolve(null);
           }
           resolve(combinedJson);
@@ -219,7 +222,7 @@ module.exports = async (on, config) => {
       - generate the html report (TBD)
   */
   on('after:run', async (results) => {
-    console.log('override after:run');
+    logger.info('override after:run');
 
     const reportObj = {};
     const formatter = new Formatter();
@@ -239,9 +242,9 @@ module.exports = async (on, config) => {
     if (!fs.existsSync(filePath)) {
       try {
         fs.mkdirSync(filePath);
-        console.log('Cucumber-json folder created successfully.');
+        logger.info('Cucumber-json folder created successfully.');
       } catch (error) {
-        console.log(error);
+        logger.error(error);
       }
     }
 
@@ -258,7 +261,7 @@ module.exports = async (on, config) => {
     // delete the messages.ndjson file.
     fs.unlink(sourceFile, (err) => {
       if (err) throw err;
-      console.log('The file has been deleted!');
+      logger.debug('The file has been deleted!');
     });
 
     const reportType = config.env.reportType;
@@ -349,7 +352,7 @@ function importReportProcessor() {
     const reportProcessor = require('../../node_modules/configModule/reportProcessor/index');
     return reportProcessor;
   } catch (error) {
-    console.log(error);
+    logger.error(error);
   }
 }
 
@@ -368,7 +371,7 @@ function readFileName(filePath, fileName) {
       files = files.find((name) => name.includes(fileName));
     }
   } catch (err) {
-    console.log(`${filePath} Path does not exist`);
+   logger.info(`${filePath} Path does not exist`,`readFileName`);
   }
   return files;
 }
@@ -382,7 +385,7 @@ function readDataFromFile(filePath) {
   try {
     return fs.readFileSync(filePath);
   } catch (err) {
-    console.log(`Unable to read data from ${filePath}`);
+    logger.error(`Unable to read data from ${filePath}`);
   }
 }
 
@@ -395,9 +398,9 @@ function readDataFromFile(filePath) {
 function deleteFile(sourceFile) {
   fs.unlink(sourceFile, (err) => {
     if (err) {
-      console.log(`Error while deleting the file ${err}`);
+      logger.error(`Error while deleting the file ${err}`,`deleteFile`);
     }
-    console.log(`The ${sourceFile} file has been deleted`);
+    logger.info(`The ${sourceFile} file has been deleted`);
   });
 }
 
@@ -420,10 +423,10 @@ async function addCustomMetaData(outputFile, metaDataArr) {
 
     // Write the updated JSON data back to the file
     await writeFileAsync(outputFile, updatedJsonData, 'utf8');
-    console.log('Metadata array appended to existing JSON successfully.');
+    logger.info('Metadata array appended to existing JSON successfully.');
 
     return Promise.resolve();
   } catch (err) {
-    console.error('Error in appending the metadata to the existing JSON:', err.message);
+    logger.error('Error in appending the metadata to the existing JSON:', err.message);
   }
 }

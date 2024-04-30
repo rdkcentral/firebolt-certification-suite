@@ -35,7 +35,6 @@ class apiObject {
 
 class eventObject {
   constructor(eventName, params, context, response, appId, expectedResult) {
-    console.log('constructor in eventConfig class');
     this.eventName = eventName;
     this.params = params;
     this.context = context;
