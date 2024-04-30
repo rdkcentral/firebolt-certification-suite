@@ -32,7 +32,7 @@ const reporterOptions = {
 };
 
 const env = {
-  deviceIp: '',
+  deviceIp: '127.0.0.1',
   deviceMac: '',
   default3rdPartyAppId: '',
   deviceCommPort: '3474',

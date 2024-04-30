@@ -26,6 +26,7 @@ const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 const UTILS = require('./utils');
 let appTransport;
 const path = require('path');
+const v2TestData = require('../../../fixtures/fireboltCallsJS/index.js');
 
 export default function (module) {
   const config = new Config(module);
@@ -38,6 +39,8 @@ export default function (module) {
 
   // before All
   before(() => {
+    console.log(JSON.stringify(v2TestData));
+
     // Added below custom commands to clear cache and to reload browser
     cy.clearCache();
     cy.wrap(UTILS.pubSubClientCreation(appTransport), {
@@ -51,7 +54,22 @@ export default function (module) {
     });
 
     // mergeFireboltCallsAndFireboltMocks
-    cy.mergeFireboltCallsAndFireboltMocks();
+    cy.mergeFireboltCallsAndFireboltMocks().then(() => {
+      const v1TestData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS);
+      let processedV2TestData = {};
+
+      for (const key in v2TestData) {
+        const data = v2TestData[key];
+        processedV2TestData = {
+          processedV2TestData,
+          ...data,
+        };
+      }
+
+      const final = { ...v1TestData, ...processedV2TestData };
+
+      Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, { ...v1TestData, ...processedV2TestData });
+    });
 
     // combine validation jsons
     cy.combineValidationJson(

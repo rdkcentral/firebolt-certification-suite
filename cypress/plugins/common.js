@@ -21,6 +21,30 @@ const fs = require('fs');
 function genericSupport(config) {
   // Read additional config.
   try {
+    // Convert V1 to V2
+    const configModuleFireboltCalls = 'cypress/fixtures/fireboltCallsJS';
+    const v1TestData = [];
+    const v2TestFiles = [];
+
+    const testDataFiles = fs.readdirSync(configModuleFireboltCalls);
+
+    testDataFiles.forEach((dataFile) => {
+      if (dataFile && !dataFile.includes('index.js') && dataFile.endsWith('.js')) {
+        v2TestFiles.push(dataFile.slice(0, -3));
+      }
+    });
+
+    // Create index file
+    let indexFile = '';
+
+    v2TestFiles.forEach((moduleName) => {
+      indexFile += `const ${moduleName} = require('./${moduleName}');` + '\n';
+    });
+
+    indexFile += `module.exports = {${v2TestFiles.join(',')}};`;
+
+    fs.writeFileSync(`${configModuleFireboltCalls}/index.js`, indexFile);
+
     const data = JSON.parse(fs.readFileSync('supportConfig.json'));
 
     // Get the arguments passed from command line during run time.
@@ -36,6 +60,8 @@ function genericSupport(config) {
       ...config.env,
       ...data,
       ...commandLineArgs,
+      v1TestData: v1TestData,
+      v2TestFiles: v2TestFiles,
     };
 
     return config;
