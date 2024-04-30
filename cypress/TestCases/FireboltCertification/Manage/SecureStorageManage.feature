@@ -7,7 +7,7 @@ Feature: SecureStorage_Manage
     @SecureStorage @manageSDK
     Scenario Outline: SecureStorage.setForApp - Positive Scenario: <Scenario>
         When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'null for setting a data value'
+        Then 'Firebolt' platform responds to '1st party app' with '<Set_API_Key>'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
 
@@ -21,7 +21,7 @@ Feature: SecureStorage_Manage
     @SecureStorage @manageSDK
     Scenario Outline: SecureStorage.removeForApp - Positive Scenario: <Scenario>
         When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'null for removing stored value for an app'
+        Then 'Firebolt' platform responds to '1st party app' with '<Set_API_Key>'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'null for getting stored value'
 
@@ -33,7 +33,7 @@ Feature: SecureStorage_Manage
     @SecureStorage @manageSDK
     Scenario Outline: SecureStorage.clearForApp - Positive Scenario: <Scenario>
         When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'null for clearing all data for an app'
+        Then 'Firebolt' platform responds to '1st party app' with '<Set_API_Key>'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'null for getting stored value'
 

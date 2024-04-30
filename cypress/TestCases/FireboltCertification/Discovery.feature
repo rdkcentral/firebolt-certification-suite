@@ -155,11 +155,10 @@ Feature: Discovery
          | Invalid entitlements invalid startTime     | notify content access with invalid entitlements invalid startTime     |
          | Invalid entitlements invalid endTime       | notify content access with invalid entitlements invalid endTime       |
 
-
    @Device @coreSDK @regression @sdk
    Scenario: Discovery.onPolicyChanged - Positive Scenario: Clearing event listeners
       When '3rd party app' registers for the 'discovery onPolicyChanged' event using the 'Firebolt' API
       And I clear 'discovery onPolicyChanged event' listeners
       And 1st party app invokes the 'Firebolt' API to 'set allowPersonalization to true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowPersonalization'
+      Then 'Firebolt' platform responds to '1st party app' with 'set allowPersonalization to true'
       And 'Firebolt' platform does not trigger event for 'onDiscoveryPolicyChanged'

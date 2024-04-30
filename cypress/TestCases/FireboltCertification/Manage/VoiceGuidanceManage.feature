@@ -8,17 +8,17 @@ Feature: VoiceGuidance_Manage
     Scenario Outline: Voiceguidance.<Method> - Positive Scenario: <Scenario>
         When 1st party app registers for the '<Event_registration_Key>' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<API_Set_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+        Then 'Firebolt' platform responds to '1st party app' with '<API_Set_Key>'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
         And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
 
         Examples:
-            | Scenario              | Method  | Event_registration_Key         | API_Set_Key                  | API_Key                   | Method_Validation_Key           | Event_Validation_Key                          | Set_Method_Content                |
-            | Disable voiceguidance | enabled | voiceguidance onenabledchanged | disable voiceguidance        | get voiceguidance enabled | false for voiceguidance enabled | onenabledchanged for voiceguidance with false | null for voiceguidance setEnabled |
-            | Enable voiceguidance  | enabled | voiceguidance onenabledchanged | enable voiceguidance         | get voiceguidance enabled | true for voiceguidance enabled  | onenabledchanged for voiceguidance with true  | null for voiceguidance setEnabled |
-            | Set speed-1           | speed   | voiceguidance onspeedchanged   | set voiceguidance speed to 1 | get voiceguidance speed   | 1 for voiceguidance speed       | onSpeedChanged for voiceguidance with 1       | null for voiceguidance setSpeed   |
-            | Set speed-2           | speed   | voiceguidance onspeedchanged   | set voiceguidance speed to 2 | get voiceguidance speed   | 2 for voiceguidance speed       | onSpeedChanged for voiceguidance with 2       | null for voiceguidance setSpeed   |
+            | Scenario              | Method  | Event_registration_Key         | API_Set_Key                  | API_Key                   | Method_Validation_Key           | Event_Validation_Key                          |
+            | Disable voiceguidance | enabled | voiceguidance onenabledchanged | disable voiceguidance        | get voiceguidance enabled | false for voiceguidance enabled | onenabledchanged for voiceguidance with false |
+            | Enable voiceguidance  | enabled | voiceguidance onenabledchanged | enable voiceguidance         | get voiceguidance enabled | true for voiceguidance enabled  | onenabledchanged for voiceguidance with true  |
+            | Set speed-1           | speed   | voiceguidance onspeedchanged   | set voiceguidance speed to 1 | get voiceguidance speed   | 1 for voiceguidance speed       | onSpeedChanged for voiceguidance with 1       |
+            | Set speed-2           | speed   | voiceguidance onspeedchanged   | set voiceguidance speed to 2 | get voiceguidance speed   | 2 for voiceguidance speed       | onSpeedChanged for voiceguidance with 2       |
 
     @ClosedCaptions @coreSDK @sdk @transport
     Scenario Outline: Voiceguidance.<Method> - Positive Scenario: <Scenario> with undefined params

@@ -9,7 +9,7 @@ Feature: Advertising
       When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowAppContentAdTargeting'
+      Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
       Then 'Firebolt' platform responds with '<Method_Validation_key>'
       And 'Firebolt' platform triggers event '<Event_Validation_key>'
@@ -24,7 +24,7 @@ Feature: Advertising
       When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for advertising setSkipRestriction'
+      Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
       Then 'Firebolt' platform responds with '<Method_Validation_key>'
       And 'Firebolt' platform triggers event '<Event_Validation_key>'
@@ -51,7 +51,7 @@ Feature: Advertising
       When '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
       And '3rd party app' invokes the 'Firebolt' API to 'get initialization parameters'
       When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowAppContentAdTargeting'
+      Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
       And '3rd party app' invokes the 'Firebolt' API to 'get initialization parameters'
       Then 'Firebolt' platform responds with '<AdvertidingId_Validation_key>'
@@ -80,7 +80,7 @@ Feature: Advertising
    Scenario Outline: Advertising.config - special Scenario: Validation <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
       And 1st party app invokes the 'Firebolt' API to '<MANAGE_API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowAppContentAdTargeting'
+      Then 'Firebolt' platform responds to '1st party app' with '<MANAGE_API_Key>'
       When '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
       Then 'Firebolt' platform responds with '<Method_Validation_key>'
 
@@ -107,12 +107,11 @@ Feature: Advertising
          | Invalid environment value                   | get config with invalid environment          | invalid parameter error advertising config |
          | Integer values for params                   | get config with integer parameter            | invalid parameter error advertising config |
 
-
    @Advertising @coreSDK @sdk @transport
    Scenario Outline: Advertising.advertisingId - Positive Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<MANAGE_API_Key>'
       And '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowAppContentAdTargeting'
+      Then 'Firebolt' platform responds to '1st party app' with '<MANAGE_API_Key>'
       When '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
 
@@ -146,5 +145,5 @@ Feature: Advertising
       When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
       And I clear 'advertising onPolicyChanged event' listeners
       And 1st party app invokes the 'Firebolt' API to 'set true for allowAppContentAdTargeting'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowAppContentAdTargeting'
+      Then 'Firebolt' platform responds to '1st party app' with 'set true for allowAppContentAdTargeting'
       And 'Firebolt' platform does not trigger event for 'onAdvertisingPolicyChanged'

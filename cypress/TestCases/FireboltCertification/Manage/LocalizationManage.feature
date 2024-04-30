@@ -9,21 +9,21 @@ Feature: Localization_Manage
     Scenario Outline: Localization.<Scenario> - Positive Scenario: <Scenario>
         When 1st party app registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+        Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
         When 1st party app invokes the 'Firebolt' API to '<Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
         And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
 
         Examples:
-            | Scenario                | Event_Registration_Key                               | API_Key                                | Key                         | Method_Validation_Key               | Event_Validation_Key                                           | Set_Method_Content                               |
-            | Locality                | manage localization onLocalityChanged                | set locality to washington             | get locality                | washington for locality             | onLocalityChanged for localization with washington             | null for localization setLocality                |
-            | PostalCode              | manage localization onPostalCodeChanged              | set postalCode to 123456               | get manage postalCode       | 123456 for postalCode               | onPostalCodeChanged for localization with 123456               | null for localization setPostalCode              |
-            | CountryCode             | manage localization onCountryCodeChanged             | set countrycode to PH                  | get countrycode             | PH for localization countrycode     | onCountryCodeChanged for localization with PH                  | null for localization setCountryCode             |
-            | Language es             | manage localization onLanguageChanged                | set language to es                     | get language                | es for localization language        | onLanguageChanged for localization with es                     | null for localization setLanguage                |
-            | Language en             | manage localization onLanguageChanged                | set language to en                     | get language                | en for localization language        | onLanguageChanged for localization with en                     | null for localization setLanguage                |
-            | Locale                  | manage localization onLocaleChanged                  | set locale to enUK                     | get locale                  | enUK for localization locale        | onLocaleChanged for localization with enUK                     | null for localization setLocale                  |
-            | Time-Zone               | manage localization onTimeZoneChanged                | set timeZone to America/NewYork        | get timeZone                | America/NewYork for timeZone        | onTimeZoneChanged for localization with America/NewYork        | null for localization setTimeZone                |
-            | PreferredAudioLanguages | manage localization onPreferredAudioLanguagesChanged | set preferredAudioLanguages to spa eng | get preferredAudioLanguages | spa eng for preferredAudioLanguages | onPreferredAudioLanguagesChanged for localization with spa eng | null for localization setPreferredAudioLanguages |
+            | Scenario                | Event_Registration_Key                               | API_Key                                | Key                         | Method_Validation_Key               | Event_Validation_Key                                           |
+            | Locality                | manage localization onLocalityChanged                | set locality to washington             | get locality                | washington for locality             | onLocalityChanged for localization with washington             |
+            | PostalCode              | manage localization onPostalCodeChanged              | set postalCode to 123456               | get manage postalCode       | 123456 for postalCode               | onPostalCodeChanged for localization with 123456               |
+            | CountryCode             | manage localization onCountryCodeChanged             | set countrycode to PH                  | get countrycode             | PH for localization countrycode     | onCountryCodeChanged for localization with PH                  |
+            | Language es             | manage localization onLanguageChanged                | set language to es                     | get language                | es for localization language        | onLanguageChanged for localization with es                     |
+            | Language en             | manage localization onLanguageChanged                | set language to en                     | get language                | en for localization language        | onLanguageChanged for localization with en                     |
+            | Locale                  | manage localization onLocaleChanged                  | set locale to enUK                     | get locale                  | enUK for localization locale        | onLocaleChanged for localization with enUK                     |
+            | Time-Zone               | manage localization onTimeZoneChanged                | set timeZone to America/NewYork        | get timeZone                | America/NewYork for timeZone        | onTimeZoneChanged for localization with America/NewYork        |
+            | PreferredAudioLanguages | manage localization onPreferredAudioLanguagesChanged | set preferredAudioLanguages to spa eng | get preferredAudioLanguages | spa eng for preferredAudioLanguages | onPreferredAudioLanguagesChanged for localization with spa eng |
 
     @Localization @manageSDK @sdk @transport
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
