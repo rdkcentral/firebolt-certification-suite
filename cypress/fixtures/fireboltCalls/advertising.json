@@ -238,6 +238,11 @@
     "RESET_IDENTIFIER_FOR_ADVERTISING":{
         "method": "manage_advertising.resetIdentifier"
     },
+    "NULL_FOR_ADVERTISING_RESETIDENTIFIER":{
+        "method": "advertising.resetIdentifier",
+		"validationJsonPath": "result",
+		"expected": "NULL"
+    },
     "ADVERTISING_ONSKIPRESTRICTIONCHANGED":{
         "method": "manage_advertising.onSkipRestrictionChanged"
     },

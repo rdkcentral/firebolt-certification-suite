@@ -7,7 +7,7 @@ Feature: Advertising_Manage
    @Advertising @manageSDK @sdk @transport
    Scenario: Advertising.resetIdentifier - Positive Scenario: Reset Identifier
       When 1st party app invokes the 'Firebolt' API to 'reset identifier for advertising'
-      Then 'Firebolt' platform responds to '1st party app' with 'reset identifier for advertising'
+      Then 'Firebolt' platform responds to '1st party app' with 'null for advertising resetIdentifier'
 
    # Since the "refui" app validation is not designed, the event validation step is commented out.
    @Advertising @manageSDK @sdk @transport
@@ -30,7 +30,7 @@ Feature: Advertising_Manage
    @Advertising @manageSDK @sdk @transport
    Scenario: Advertising.setSkipRestriction - Negative Scenario: SkipRestriction expecting error
       When 1st party app invokes the 'Firebolt' API to 'set skipRestriction with integer'
-      Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for skipRestriction'
+      Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for skipRestriction'
 
    @Advertising @coreSDK @sdk @transport
    Scenario: Advertising.policy - Positive Scenario: SkipRestriction with undefined params

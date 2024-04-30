@@ -28,7 +28,7 @@ Feature: Localization_Manage
     @Localization @manageSDK @sdk @transport
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<Validation_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
 
         Examples:
             | Scenario            | API_Key                     | Method     | Validation_Key                   |
@@ -43,7 +43,7 @@ Feature: Localization_Manage
     @Localization @manageSDK @sdk @transport
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<Validation_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
 
         Examples:
             | Scenario                         | API_Key                             | Method                     | Validation_Key                                |

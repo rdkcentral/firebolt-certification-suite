@@ -225,7 +225,7 @@ Feature: Capabilities
     And User set response for 'set keyboard response in platform'
     And Framework registers 'keyboard' test provider
     When 1st party app invokes the 'Firebolt' API to 'check availability of keyboard capability'
-    Then 'Firebolt' platform responds to '1st party app' for 'check availability of keyboard capability'
+    Then 'Firebolt' platform responds to '1st party app' with 'true for keyboard capability availability'
     And 'Firebolt' platform triggers to '1st party app' event 'expected value for capabilities onAvailable'
 
   @Capabilities @sdk @transport @coreSDK @notSupported
@@ -235,7 +235,7 @@ Feature: Capabilities
     And User set response for 'set keyboard response in platform'
     When Framework registers 'keyboard' test provider
     And 1st party app invokes the 'Firebolt' API to 'check availability of keyboard capability'
-    Then 'Firebolt' platform responds to '1st party app' for 'false for keyboard capability availability'
+    Then 'Firebolt' platform responds to '1st party app' with 'false for keyboard capability availability'
     And 'Firebolt' platform triggers to '1st party app' event 'expected value for capabilities onUnAvailable'
 
   @Capabilities @sdk @transport @coreSDK @notSupported

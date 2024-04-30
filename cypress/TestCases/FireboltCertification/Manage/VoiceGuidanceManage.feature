@@ -33,7 +33,7 @@ Feature: VoiceGuidance_Manage
     @VoiceGuidance @manageSDK @sdk @transport
     Scenario Outline: Voiceguidance.<Method> - Negative Scenario: <Scenario> and expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<Error_Object>'
+        Then 'Firebolt' platform responds to '1st party app' with '<Error_Object>'
 
         Examples:
             | Scenario          | Method  | API_Key                                     | Error_Object                                 |

@@ -92,7 +92,7 @@ Feature: Privacy_Manage
    @Privacy @manageSDK @sdk @transport
    Scenario Outline: Privacy.<Method> - Negative Scenario: <Scenario> and expecting error
       When 1st party app invokes the 'Firebolt' API to '<Error_Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<Error_Object>'
+      Then 'Firebolt' platform responds to '1st party app' with '<Error_Object>'
 
       Examples:
          | Scenario          | Method                         | Error_Key                                                              | Error_Object                                                      |

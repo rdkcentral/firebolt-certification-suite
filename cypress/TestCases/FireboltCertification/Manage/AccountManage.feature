@@ -18,7 +18,7 @@ Feature: Account_Manage
    @Account @manageSDK @sdk @transport
    Scenario Outline: Account.session - Negative Scenario: <Scenario> expecting error
       When 1st party app invokes the 'Firebolt' API to '<Key>'
-      Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for account session'
+      Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for account session'
 
       Examples:
          | Scenario                             | Key                                              |

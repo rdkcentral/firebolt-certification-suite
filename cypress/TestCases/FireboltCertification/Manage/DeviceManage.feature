@@ -48,7 +48,7 @@ Feature: Device_Manage
     @Device @manageSDK @sdk @transport
     Scenario Outline: Device.name - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<Key>'
-        Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for device'
+        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for device'
 
         Examples:
             | Scenario                     | Key                          |
@@ -58,7 +58,7 @@ Feature: Device_Manage
     @Device @manageSDK @sdk @transport
     Scenario Outline: Device.provision - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<Key>'
-        Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for device provision'
+        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for device provision'
 
         Examples:
             | Scenario                               | Key                                |

@@ -22,7 +22,7 @@ Feature: AudioDescriptions_Manage
    @AudioDescriptions @manageSDK @sdk @transport
    Scenario Outline: AudioDescriptions.enabled - Negative Scenario: <Scenario> expecting error
       When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' for 'invalid params for audiodescriptions setEnabled'
+      Then 'Firebolt' platform responds to '1st party app' with 'invalid params for audiodescriptions setEnabled'
 
       Examples:
          | Scenario                      | API_Key                                        |

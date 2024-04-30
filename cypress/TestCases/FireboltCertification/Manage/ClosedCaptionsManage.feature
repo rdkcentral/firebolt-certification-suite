@@ -97,7 +97,7 @@ Feature: ClosedCaptions_Manage
     @ClosedCaptions @manageSDK
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<Method_Validation_key>'
+        Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_key>'
 
         Examples:
             | Scenario                    | Method                | API_Key                                      | Method_Validation_key                                   |
