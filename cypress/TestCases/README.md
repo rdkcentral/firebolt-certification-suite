@@ -31,6 +31,5 @@ Here are some examples of tags for different categories:
 
 ## Directory strucute:
 Within the `cypress/TestCases` folder we have the following sub-folders:
-- Distributor: Contains Plaform specific test cases.
 - FireboltCertification: Contains core and manage feature files.
 - Sanity: Contains core and manage sanity tests.
