@@ -7,13 +7,13 @@ Feature: SecureStorage
     @Securestorage @coreSDK @sdk @transport
     Scenario Outline: SecureStorage.set - Positive Scenario: Validate <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Clear_API_Key>'
-        And 'Firebolt' platform responds for 'null for clearing stored value'
+        And 'Firebolt' platform responds with 'null for clearing stored value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
-        And 'Firebolt' platform responds for 'null for getting stored value'
+        And 'Firebolt' platform responds with 'null for getting stored value'
         When '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key>'
-        Then 'Firebolt' platform responds for 'null for updating a secure data value'
+        Then 'Firebolt' platform responds with 'null for updating a secure data value'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
-        Then 'Firebolt' platform responds for '<Validation_Key>'
+        Then 'Firebolt' platform responds with '<Validation_Key>'
 
         Examples:
             | Scenario                                    | Get_API_Key                                                             | Set_API_Key                                                    | Validation_Key                                                       | Clear_API_Key                            |
@@ -25,13 +25,13 @@ Feature: SecureStorage
     @Securestorage @coreSDK @sdk @transport
     Scenario Outline: SecureStorage.set - Positive Scenario: Validate <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Initial_Set_API_Key>'
-        And 'Firebolt' platform responds for 'null for updating a secure data value'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        And 'Firebolt' platform responds for '<Initial_Validation_Key>'
+        And 'Firebolt' platform responds with '<Initial_Validation_Key>'
         When '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key>'
-        Then 'Firebolt' platform responds for 'null for updating a secure data value'
+        Then 'Firebolt' platform responds with 'null for updating a secure data value'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
-        Then 'Firebolt' platform responds for '<Validation_Key>'
+        Then 'Firebolt' platform responds with '<Validation_Key>'
 
         Examples:
             | Scenario                              | Get_API_Key1                                                            | Set_API_Key                                       | Get_API_Key2                                                            | Validation_Key                                        | Initial_Validation_Key                                | Initial_Set_API_Key                                            | Clear_API_Key                            |
@@ -41,15 +41,15 @@ Feature: SecureStorage
     @Securestorage @coreSDK @sdk @transport
     Scenario Outline: SecureStorage.set - Positive Scenario: Validate <Scenario>
         Given  '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key1>'
-        And 'Firebolt' platform responds for 'null for updating a secure data value'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        And 'Firebolt' platform responds for '<Validation_Key1>'
+        And 'Firebolt' platform responds with '<Validation_Key1>'
         When '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key2>'
-        Then 'Firebolt' platform responds for 'null for updating a secure data value'
+        Then 'Firebolt' platform responds with 'null for updating a secure data value'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        Then 'Firebolt' platform responds for '<Validation_Key1>'
+        Then 'Firebolt' platform responds with '<Validation_Key1>'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
-        Then 'Firebolt' platform responds for '<Validation_Key2>'
+        Then 'Firebolt' platform responds with '<Validation_Key2>'
 
         Examples:
             | Scenario                                                   | Get_API_Key1                                                           | Set_API_Key2                                                             | Get_API_Key2                                                          | Validation_Key1                                                      | Validation_Key2                                                                    | Set_API_Key1                                     |
@@ -59,19 +59,19 @@ Feature: SecureStorage
     @Securestorage @coreSDK @sdk @transport
     Scenario Outline: SecureStorage.remove - Positive Scenario: Validate <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key1>'
-        And 'Firebolt' platform responds for 'null for updating a secure data value'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        And 'Firebolt' platform responds for '<Validation_Key1>'
+        And 'Firebolt' platform responds with '<Validation_Key1>'
         And '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key2>'
-        And 'Firebolt' platform responds for 'null for updating a secure data value'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
-        And 'Firebolt' platform responds for '<Validation_Key2>'
+        And 'Firebolt' platform responds with '<Validation_Key2>'
         When '3rd party app' invokes the 'Firebolt' API to '<Remove_API_Key>'
-        Then 'Firebolt' platform responds for 'null for removing stored value'
+        Then 'Firebolt' platform responds with 'null for removing stored value'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        Then 'Firebolt' platform responds for 'null for getting stored value'
+        Then 'Firebolt' platform responds with 'null for getting stored value'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
-        Then 'Firebolt' platform responds for '<Validation_Key2>'
+        Then 'Firebolt' platform responds with '<Validation_Key2>'
 
         Examples:
             | Scenario               | Set_API_Key1                                   | Set_API_Key2                                   | Remove_API_Key                                                   | Get_API_Key1                                                 | Get_API_Key2                                                 | Validation_Key2                                                       | Validation_Key1                                                       | Clear_API_Key                            |
@@ -82,7 +82,7 @@ Feature: SecureStorage
     @Securestorage @coreSDK @sdk @transport
     Scenario Outline: SecureStorage.get - Negative Scenario: Validate <Scenario> expecting errorr
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds for '<Validation_Key>'
+        Then 'Firebolt' platform responds with '<Validation_Key>'
 
         Examples:
             | Scenario                                        | API_Key                                     | Validation_Key                           |
@@ -101,13 +101,13 @@ Feature: SecureStorage
     @Securestorage @coreSDK @sdk @transport
     Scenario Outline: SecureStorage.set - Negative Scenario: Validate <Scenario> expecting error
         Given '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenDevice'
-        And 'Firebolt' platform responds for 'null for updating a secure data value'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
-        And 'Firebolt' platform responds for 'expected value for authTestTokenDevice stored data in securestorage'
+        And 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds for '<Validation_Key>'
+        Then 'Firebolt' platform responds with '<Validation_Key>'
         When '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
-        Then 'Firebolt' platform responds for 'expected value for authTestTokenDevice stored data in securestorage'
+        Then 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
 
         Examples:
             | Scenario                        | API_Key                                       | Validation_Key                           |
@@ -133,13 +133,13 @@ Feature: SecureStorage
     @Securestorage @coreSDK @sdk @transport
     Scenario Outline: SecureStorage.remove - Negative Scenario: Validate <Scenario> expecting error
         Given '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenDevice'
-        And 'Firebolt' platform responds for 'null for updating a secure data value'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
-        And 'Firebolt' platform responds for 'expected value for authTestTokenDevice stored data in securestorage'
+        And 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds for '<Validation_Key>'
+        Then 'Firebolt' platform responds with '<Validation_Key>'
         When '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
-        Then 'Firebolt' platform responds for 'expected value for authTestTokenDevice stored data in securestorage'
+        Then 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
 
         Examples:
             | Scenario                      | API_Key                                        | Validation_Key                              |
@@ -158,20 +158,20 @@ Feature: SecureStorage
     @Securestorage @coreSDK @sdk @transport
     Scenario Outline: SecureStorage.remove - Positive Scenario: Validate get and remove <Scenario> after TTL
         Given '3rd party app' invokes the 'Firebolt' API to '<Clear_API_Key>'
-        And 'Firebolt' platform responds for 'null for clearing stored value'
+        And 'Firebolt' platform responds with 'null for clearing stored value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
-        And 'Firebolt' platform responds for 'null for getting stored value'
+        And 'Firebolt' platform responds with 'null for getting stored value'
         And '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key>'
-        And 'Firebolt' platform responds for 'null for updating a secure data value'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
-        And 'Firebolt' platform responds for 'authTestTokenValueTTL for stored value in securestorage'
+        And 'Firebolt' platform responds with 'authTestTokenValueTTL for stored value in securestorage'
         And Test runner waits for 60 'seconds'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
-        Then 'Firebolt' platform responds for 'null for getting stored value'
+        Then 'Firebolt' platform responds with 'null for getting stored value'
         When '3rd party app' invokes the 'Firebolt' API to '<Remove_API_Key>'
-        Then 'Firebolt' platform responds for 'null for removing stored value'
+        Then 'Firebolt' platform responds with 'null for removing stored value'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
-        Then 'Firebolt' platform responds for 'null for getting stored value'
+        Then 'Firebolt' platform responds with 'null for getting stored value'
 
         Examples:
             | Scenario           | Get_API_Key                                                               | Set_API_Key                                          | Remove_API_Key                                          | Clear_API_Key                            |
@@ -181,19 +181,19 @@ Feature: SecureStorage
     @Securestorage @coreSDK @sdk @transport
     Scenario Outline: SecureStorage.clear - Positive Scenario: Clears all the data values <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key1>'
-        And 'Firebolt' platform responds for 'null for updating a secure data value'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key2>'
-        And 'Firebolt' platform responds for 'null for updating a secure data value'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        And 'Firebolt' platform responds for '<Validation_Key1>'
+        And 'Firebolt' platform responds with '<Validation_Key1>'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
-        And 'Firebolt' platform responds for '<Validation_Key2>'
+        And 'Firebolt' platform responds with '<Validation_Key2>'
         When '3rd party app' invokes the 'Firebolt' API to '<Clear_API_Key>'
-        Then 'Firebolt' platform responds for 'null for clearing stored value'
+        Then 'Firebolt' platform responds with 'null for clearing stored value'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        Then 'Firebolt' platform responds for 'null for getting stored value'
+        Then 'Firebolt' platform responds with 'null for getting stored value'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
-        Then 'Firebolt' platform responds for 'null for getting stored value'
+        Then 'Firebolt' platform responds with 'null for getting stored value'
 
         Examples:
             | Scenario           | Clear_API_Key                            | Get_API_Key1                                                           | Get_API_Key2                                                            | Set_API_Key1                                     | Set_API_Key2                                      | Validation_Key1                                                      | Validation_Key2                                       |
@@ -203,19 +203,19 @@ Feature: SecureStorage
     @SecureStorage @mfos @coreSDK @regression @sdk @transport
     Scenario Outline: SecureStorage.clear - Negative Scenario: Validate <Scenario> expecting error
         Given '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenDevice'
-        And 'Firebolt' platform responds for 'null for updating a secure data value'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
-        And 'Firebolt' platform responds for 'expected value for authTestTokenDevice stored data in securestorage'
+        And 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
         And '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenAccount'
-        And 'Firebolt' platform responds for 'null for updating a secure data value'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as account and key as authTestTokenAccount'
-        And 'Firebolt' platform responds for 'expected value for authTestTokenAccount stored data in securestorage'
+        And 'Firebolt' platform responds with 'expected value for authTestTokenAccount stored data in securestorage'
         When '3rd party app' invokes the 'Firebolt' API to '<Clear_API_key>'
-        Then 'Firebolt' platform responds for 'invalid parameters for securestorage clear'
+        Then 'Firebolt' platform responds with 'invalid parameters for securestorage clear'
         When '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
-        Then 'Firebolt' platform responds for 'expected value for authTestTokenDevice stored data in securestorage'
+        Then 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
         When '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as account and key as authTestTokenAccount'
-        Then 'Firebolt' platform responds for 'expected value for authTestTokenAccount stored data in securestorage'
+        Then 'Firebolt' platform responds with 'expected value for authTestTokenAccount stored data in securestorage'
 
         Examples:
             | Scenario                      | Clear_API_key                                 |
@@ -225,5 +225,3 @@ Feature: SecureStorage
             | Passing scope as null         | clear stored value with scope as null         |
             | Passing scope as boolean      | clear stored value with scope as boolean      |
             | without scope                 | clear stored value without scope              |
-
-

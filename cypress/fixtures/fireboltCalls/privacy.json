@@ -89,87 +89,59 @@
     },
     "SET_PRIVACY_ALLOW_RESUMEPOINTS_AS_TRUE": {
         "method": "manage_privacy.setAllowResumePoints",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "TRUE"
     },
     "SET_PRIVACY_ALLOW_RESUMEPOINTS_AS_FALSE": {
         "method": "manage_privacy.setAllowResumePoints",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "SET_PRIVACY_ALLOW_UNENTITLEDRESUMEPOINTS_AS_TRUE": {
         "method": "manage_privacy.setAllowUnentitledResumePoints",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "TRUE"
     },
     "SET_PRIVACY_ALLOW_UNENTITLEDRESUMEPOINTS_AS_FALSE": {
         "method": "manage_privacy.setAllowUnentitledResumePoints",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "SET_PRIVACY_ALLOW_WATCHHISTORY_AS_TRUE": {
         "method": "manage_privacy.setAllowWatchHistory",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "TRUE"
     },
     "SET_PRIVACY_ALLOW_WATCHHISTORY_AS_FALSE": {
         "method": "manage_privacy.setAllowWatchHistory",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "SET_PRIVACY_ALLOW_PRODUCTANALYTICS_AS_TRUE": {
         "method": "manage_privacy.setAllowProductAnalytics",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "TRUE"
     },
     "SET_PRIVACY_ALLOW_PRODUCTANALYTICS_AS_FALSE": {
         "method": "manage_privacy.setAllowProductAnalytics",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "SET_PRIVACY_ALLOW_PERSONALIZATION_AS_TRUE": {
         "method": "manage_privacy.setAllowPersonalization",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "TRUE"
     },
     "SET_PRIVACY_ALLOW_PERSONALIZATION_AS_FALSE": {
         "method": "manage_privacy.setAllowPersonalization",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "SET_PRIVACY_ALLOW_UNENTITLEDPERSONALIZATION_AS_TRUE": {
         "method": "manage_privacy.setAllowUnentitledPersonalization",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "TRUE"
     },
     "SET_PRIVACY_ALLOW_UNENTITLEDPERSONALIZATION_AS_FALSE": {
         "method": "manage_privacy.setAllowUnentitledPersonalization",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "SET_PRIVACY_ALLOW_REMOTEDIAGNOSTICS_AS_TRUE": {
         "method": "manage_privacy.setAllowRemoteDiagnostics",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "TRUE"
     },
     "SET_PRIVACY_ALLOW_REMOTEDIAGNOSTICS_AS_FALSE": {
         "method": "manage_privacy.setAllowRemoteDiagnostics",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "SET_PRIVACY_ALLOW_PRIMARYCONTENTADTARGETING_AS_TRUE": {
         "method": "manage_privacy.setAllowPrimaryContentAdTargeting",
@@ -177,57 +149,39 @@
     },
     "SET_PRIVACY_ALLOW_PRIMARYCONTENTADTARGETING_AS_FALSE": {
         "method": "manage_privacy.setAllowPrimaryContentAdTargeting",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "SET_PRIVACY_ALLOW_PRIMARYBROWSEADTARGETING_AS_TRUE": {
         "method": "manage_privacy.setAllowPrimaryBrowseAdTargeting",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "TRUE"
     },
     "SET_PRIVACY_ALLOW_PRIMARYBROWSEADTARGETING_AS_FALSE": {
         "method": "manage_privacy.setAllowPrimaryBrowseAdTargeting",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "SET_PRIVACY_ALLOW_APPCONTENTADTARGETING_AS_TRUE": {
         "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "TRUE"
     },
     "SET_PRIVACY_ALLOW_APPCONTENTADTARGETING_AS_FALSE": {
         "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "SET_PRIVACY_ALLOW_ACRCOLLECTION_AS_TRUE": {
         "method": "manage_privacy.setAllowACRCollection",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "TRUE"
     },
     "SET_PRIVACY_ALLOW_ACRCOLLECTION_AS_FALSE": {
         "method": "manage_privacy.setAllowACRCollection",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "SET_PRIVACY_ALLOW_CAMERAANALYTICS_AS_TRUE": {
         "method": "manage_privacy.setAllowCameraAnalytics",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "TRUE"
     },
     "SET_PRIVACY_ALLOW_CAMERAANALYTICS_AS_FALSE": {
         "method": "manage_privacy.setAllowCameraAnalytics",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "GET_PRIVACY_ALLOW_RESUMEPOINTS": {
         "method": "manage_privacy.allowResumePoints"
@@ -912,5 +866,65 @@
     },
     "SET_PRIVACY_ALLOWCAMERAANALYTICS": {
         "method": "privacy.setAllowCameraAnalytics"
+    },
+    "NULL_FOR_PRIVACY_SETALLOWAPPCONTENTADTARGETING": {
+        "method": "privacy.setAllowAppContentAdTargeting",
+        "validationJsonPath": "result",
+        "expected": "NULL" 
+    },
+    "NULL_FOR_PRIVACY_SETALLOWRESUMEPOINTS": {
+        "method": "privacy.setAllowResumePoints",
+        "validationJsonPath": "result",
+        "expected": "NULL" 
+    },
+    "NULL_FOR_PRIVACY_SETALLOWUNENTITLEDRESUMEPOINTS": {
+        "method": "privacy.setAllowUnentitledResumePoints",
+        "validationJsonPath": "result",
+        "expected": "NULL" 
+    },
+    "NULL_FOR_PRIVACY_SETALLOWWATCHHISTORY": {
+        "method": "privacy.setAllowWatchHistory",
+        "validationJsonPath": "result",
+        "expected": "NULL" 
+    },
+    "NULL_FOR_PRIVACY_SETALLOWPERSONALIZATION": {
+        "method": "privacy.setAllowPersonalization",
+        "validationJsonPath": "result",
+        "expected": "NULL" 
+    },
+    "NULL_FOR_PRIVACY_SETALLOWPRODUCTANALYTICS": {
+        "method": "privacy.setAllowProductAnalytics",
+        "validationJsonPath": "result",
+        "expected": "NULL" 
+    },
+    "NULL_FOR_PRIVACY_SETALLOWUNENTITLEDPERSONALIZATION": {
+        "method": "privacy.setAllowUnentitledPersonalization",
+        "validationJsonPath": "result",
+        "expected": "NULL" 
+    },
+    "NULL_FOR_PRIVACY_SETALLOWREMOTEDIAGNOSTICS": {
+        "method": "privacy.setAllowRemoteDiagnostics",
+        "validationJsonPath": "result",
+        "expected": "NULL"
+    },
+    "NULL_FOR_PRIVACY_SETALLOWPRIMARYCONTENTADTARGETING": {
+        "method": "privacy.setAllowPrimaryContentAdTargeting",
+        "validationJsonPath": "result",
+        "expected": "NULL" 
+    },
+    "NULL_FOR_PRIVACY_SETALLOWPRIMARYBROWSEADTARGETING": {
+        "method": "privacy.setAllowPrimaryBrowseAdTargeting",
+        "validationJsonPath": "result",
+        "expected": "NULL" 
+    },
+    "NULL_FOR_PRIVACY_SETALLOWCAMERAANALYTICS": {
+        "method": "privacy.setAllowCameraAnalytics",
+        "validationJsonPath": "result",
+        "expected": "NULL" 
+    },
+    "NULL_FOR_PRIVACY_SETALLOWACRCOLLECTION": {
+        "method": "privacy.setAllowACRCollection",
+        "validationJsonPath": "result",
+        "expected": "NULL" 
     }
 }

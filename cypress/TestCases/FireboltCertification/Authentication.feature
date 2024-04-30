@@ -7,7 +7,7 @@ Feature: Authentication
    @Authentication @coreSDK @sdk @transport
    Scenario Outline: Authentication.token - Positive Scenario: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for '<Validation_key>'
+      Then 'Firebolt' platform responds with '<Validation_key>'
 
       Examples:
          | Scenario                        | API_Key                                           | Validation_key                     |
@@ -20,7 +20,7 @@ Feature: Authentication
    @Authentication @coreSDK @sdk @transport
    Scenario Outline: Authentication.<Method> - Positive Scenario: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for '<Validation_key>'
+      Then 'Firebolt' platform responds with '<Validation_key>'
 
       Examples:
          | Scenario               | API_Key             | Validation_key         | Method  |
@@ -31,7 +31,7 @@ Feature: Authentication
    @Authentication @coreSDK @sdk @transport
    Scenario Outline: Authentication.token - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for '<Validation_key>'
+      Then 'Firebolt' platform responds with '<Validation_key>'
 
       Examples:
          | Scenario                       | API_Key                            | Validation_key                               |

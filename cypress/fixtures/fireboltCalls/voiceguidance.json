@@ -39,27 +39,19 @@
     },
     "ENABLE_VOICEGUIDANCE": {
         "method": "manage_voiceguidance.setEnabled",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "TRUE"
     },
     "DISABLE_VOICEGUIDANCE": {
         "method": "manage_voiceguidance.setEnabled",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "FALSE"
     },
     "SET_VOICEGUIDANCE_SPEED_TO_1": {
         "method": "manage_voiceguidance.setSpeed",
-        "params": "INTEGER1",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "INTEGER1"
     },
     "SET_VOICEGUIDANCE_SPEED_TO_2": {
         "method": "manage_voiceguidance.setSpeed",
-        "params": "INTEGER2",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "INTEGER2"
     },
     "GET_VOICEGUIDANCE_ENABLED": {
         "method": "manage_voiceguidance.enabled"

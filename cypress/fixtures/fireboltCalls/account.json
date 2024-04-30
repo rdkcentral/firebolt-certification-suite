@@ -37,9 +37,7 @@
 	},
     "PUSH_SESSION_TOKEN":{
         "method": "manage_account.session",
-        "params": "ACCOUNT_SESSION",
-        "validationJsonPath": "result",
-		"expected": "NULL"
+		"params": "ACCOUNT_SESSION"
     },
     "NULL_FOR_ACCOUNT_SESSION":{
         "method": "account.session",

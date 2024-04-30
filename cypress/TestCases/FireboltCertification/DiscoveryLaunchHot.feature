@@ -12,10 +12,10 @@ Feature: Discovery.launch_HotLaunch
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in foreground
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
         When Test runner waits for 30 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-        Then 'Firebolt' platform responds for 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
         And 'Firebolt' platform triggers event '<Event_Content>'
 
         Examples:
@@ -67,10 +67,10 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'inactive'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
         When Test runner waits for 10 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-        Then 'Firebolt' platform responds for 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
         And 'Firebolt' platform triggers event '<Event_Content>'
 
         Examples:
@@ -95,10 +95,10 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'background'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
         When Test runner waits for 10 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-        Then 'Firebolt' platform responds for 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
         And 'Firebolt' platform triggers event '<Event_Content>'
 
         Examples:
@@ -123,10 +123,10 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state '<State>'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
         When Test runner waits for 10 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-        Then 'Firebolt' platform responds for 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
         Examples:
             | Discovery_Launch_Key        | State      |
@@ -140,10 +140,10 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'suspended'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
         When Test runner waits for 10 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-        Then 'Firebolt' platform responds for 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
         Examples:
             | Scenario                                                     | Discovery_Launch_Key                                                     |
@@ -168,7 +168,7 @@ Feature: Discovery.launch_HotLaunch
         And '3rd party app' transitions to state 'forground'
         When '3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<Error_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for discovery launch'
+        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
 
         Examples:
             | Scenario          | Error_Key                             |
@@ -189,16 +189,16 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'Discovery.Launch' tests
         And 3rd party 'certification' app is launched
         When 1st party app invokes the 'Firebolt' API to 'launch app with invalid appId type'
-        Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for discovery launch'
+        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
 
     @DiscoveryLaunch @coreSDK @sdk @transport
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> for context source
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<Discovery_Launch_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
         When Test runner waits for 30 'seconds'
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-        Then 'Firebolt' platform responds for 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
         And 'Firebolt' platform triggers event '<Event_Content>'
 
         Examples:
@@ -211,4 +211,4 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'forground'
         When 1st party app invokes the 'Firebolt' API to 'launch app with search intent int source'
-        Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for discovery launch'
+        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'

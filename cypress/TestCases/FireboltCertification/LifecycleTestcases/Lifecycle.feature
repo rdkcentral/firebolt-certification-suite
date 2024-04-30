@@ -5,34 +5,34 @@ Feature: Lifecycle
         Given the environment has been set up for 'lifeCycleApi' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'notify that the app is ready'
-        Then 'Firebolt' platform responds for 'null for lifecycle ready'
+        Then 'Firebolt' platform responds with 'null for lifecycle ready'
 
     @Lifecycle @sdk @transport @coreSDK @regression
     Scenario: Validate 'lifecycle.ready' - expecting error
         Given the environment has been set up for 'lifeCycleApi' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'notify that the app is ready'
-        Then 'Firebolt' platform responds for 'null for lifecycle ready'
+        Then 'Firebolt' platform responds with 'null for lifecycle ready'
         When '3rd party app' invokes the 'Firebolt' API to 'check if lifecycle ready expecting error'
-        Then 'Firebolt' platform responds for 'custom error for lifecycle ready'
+        Then 'Firebolt' platform responds with 'custom error for lifecycle ready'
         When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-        Then 'Firebolt' platform responds for 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
     @Lifecycle @sdk @transport @coreSDK @regression
     Scenario: Validate lifecycle.state - Get the current state
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-        Then 'Firebolt' platform responds for 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
     @Lifecycle @coreSDK @regression @sdk @transport
     Scenario Outline: Validate lifecycle.close - '<Scenario>' expecting error
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds for '<Method_Content>'
+        Then 'Firebolt' platform responds with '<Method_Content>'
         When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-        Then 'Firebolt' platform responds for 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
         Examples:
             | Scenario       | API_Key                            | Method_Content                              |
@@ -50,7 +50,7 @@ Feature: Lifecycle
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds for 'null for lifecycle close'
+        Then 'Firebolt' platform responds with 'null for lifecycle close'
 
         Examples:
             | Scenario           | API_Key                      |
@@ -64,6 +64,6 @@ Feature: Lifecycle
         Given the environment has been set up for 'lifeCycleApi' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'notify that the app is done unloading'
-        Then 'Firebolt' platform responds for 'error for lifecycle finished'
+        Then 'Firebolt' platform responds with 'error for lifecycle finished'
         When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-        Then 'Firebolt' platform responds for 'foreground for lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'

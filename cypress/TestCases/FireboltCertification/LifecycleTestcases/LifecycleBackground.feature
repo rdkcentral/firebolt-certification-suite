@@ -26,8 +26,8 @@ Feature: Lifecycle_Background
         # And 1st party app invokes the API to 'get lifecycle management state'
         When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle background expecting error'
         # And 1st party app invokes the API to 'get lifecycle management state'
-        # Then 'Firebolt' platform responds for 'last two responses for lifecycleManagement state'
-        # Then 'Firebolt' platform responds for 'message and code for lifecycle background'
+        # Then 'Firebolt' platform responds with 'last two responses for lifecycleManagement state'
+        # Then 'Firebolt' platform responds with 'message and code for lifecycle background'
     
     # Keeping this as notSupported because there is no support to background an already backgrounded app using lifecycle.background method
     @Lifecycle @coreSDK @notSupported

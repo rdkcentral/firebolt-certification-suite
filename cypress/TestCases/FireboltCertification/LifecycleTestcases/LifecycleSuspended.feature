@@ -62,8 +62,8 @@ Feature: Lifecycle_Suspended
         And '3rd party app' invokes the 'Firebolt' API to 'close app with remote button'
         # And 1st party app invokes the API to 'get lifecycle management state'
         Then '3rd party app' is in 'suspended' state
-        # Then 'Firebolt' platform responds for 'last two responses for lifecycleManagement state'
-        Then 'Firebolt' platform responds for 'message and code for lifecycle close'
+        # Then 'Firebolt' platform responds with 'last two responses for lifecycleManagement state'
+        Then 'Firebolt' platform responds with 'message and code for lifecycle close'
 
     @Lifecycle @coreSDK @notSupported
     Scenario: Lifecycle 2.6, 2.6.2 Unsuspending App
@@ -80,7 +80,7 @@ Feature: Lifecycle_Suspended
         And '3rd party app' invokes the 'Firebolt' API to 'unsuspend app'
         # And 1st party app invokes the API to 'get lifecycle management state'
         Then '3rd party app' is in '<state>' state
-        # Then 'Firebolt' platform responds for 'message and code for lifecycle unsuspend'
+        # Then 'Firebolt' platform responds with 'message and code for lifecycle unsuspend'
 
         Examples:
             | state        |
@@ -98,8 +98,8 @@ Feature: Lifecycle_Suspended
         And '3rd party app' invokes the 'Firebolt' API to 'unsuspend app'
         # And 1st party app invokes the API to 'get lifecycle management state'
         Then '3rd party app' is in 'unloaded' state
-        # Then 'Firebolt' platform responds for 'message and code for lifecycle unsuspend'
-        # Then 'Firebolt' platform responds for 'last two responses for lifecycleManagement state'
+        # Then 'Firebolt' platform responds with 'message and code for lifecycle unsuspend'
+        # Then 'Firebolt' platform responds with 'last two responses for lifecycleManagement state'
 
     @Lifecycle @coreSDK @notSupported
     Scenario: Lifecycle 2.5.6 Try to suspend an app that doesn't exist
@@ -107,5 +107,5 @@ Feature: Lifecycle_Suspended
         # And 1st party app invokes the API to 'get lifecycle management state'
         And '3rd party app' invokes the 'Firebolt' API to 'suspend an app that does not exist'
         # And 1st party app invokes the API to 'get lifecycle management state'
-        # Then 'Firebolt' platform responds for 'message and code for lifecycle suspend'
-        # Then 'Firebolt' platform responds for 'last two responses for lifecycleManagement state'
+        # Then 'Firebolt' platform responds with 'message and code for lifecycle suspend'
+        # Then 'Firebolt' platform responds with 'last two responses for lifecycleManagement state'

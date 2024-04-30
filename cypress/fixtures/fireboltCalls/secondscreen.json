@@ -26,9 +26,7 @@
     },
     "SET_FRIENDLYNAME_TO_GUEST_ROOM": {
         "method": "manage_device.setName",
-        "params": "SECONDSCREEN_FRIENDLYNAME",
-        "validationJsonPath": "result",
-        "expected": "NULL"  
+        "params": "SECONDSCREEN_FRIENDLYNAME"
     },
     "GET_SECONDSCREEN_FRIENDLYNAME": {
         "method": "secondscreen.friendlyName"

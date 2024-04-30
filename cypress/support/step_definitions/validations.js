@@ -38,7 +38,7 @@ import UTILS from '../cypress-support/src/utils';
  */
 
 Given(
-  /'(.+)' platform (responds|triggers|does not trigger)(?: to '(.+)')? (for|event)(?: for)? '(.+)'$/,
+  /'(.+)' platform (responds|triggers|does not trigger)(?: to '(.+)')? (with|for|event)(?: for)? '(.+)'$/,
   async (sdk, eventExpected, appId, event, key) => {
     if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
       key = key.replaceAll(' ', '_').toUpperCase();
@@ -50,12 +50,13 @@ Given(
           const validationType = item.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
 
           let methodOrEvent = item[validationType];
-          methodOrEvent = methodOrEvent.includes('manage_')
-            ? methodOrEvent.replace('manage_', '')
-            : methodOrEvent;
+          methodOrEvent = methodOrEvent.split('_')[1]
+          // methodOrEvent = methodOrEvent.includes('manage_')
+          //   ? methodOrEvent.replace('manage_', '')
+          //   : methodOrEvent;
           const context = item.context ? item.context : CONSTANTS.NO_CONTEXT;
-          const validationJsonPath = item.validationJsonPath ? item.validationJsonPath : 'result';
-          const expected = item.expected ? item.expected : 'NULL';
+          const validationJsonPath = item.validationJsonPath ? item.validationJsonPath : CONSTANTS.RESULT;
+          const expected = item.expected ? item.expected : CONSTANTS.NULL_RESPONSE;
           const expectingError = item.expectingError;
 
           let fCSValidationjson;

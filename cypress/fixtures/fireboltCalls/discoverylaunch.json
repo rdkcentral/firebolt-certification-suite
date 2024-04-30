@@ -1,166 +1,113 @@
 {
     "LAUNCH_APP_WITH_NULL_INTENT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_NULL_INTENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_NULL_INTENT"
     },
     "LAUNCH_APP_WITH_HOME_INTENT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_HOME_INTENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_HOME_INTENT"
     },
     "LAUNCH_APP_WITH_PLAYBACK_INTENT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYBACK_INTENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYBACK_INTENT"
     },
     "LAUNCH_APP_WITH_ENTITY_INTENT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_ENTITY_INTENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_ENTITY_INTENT"
     },
     "LAUNCH_APP_WITH_INTENT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_INTENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_INTENT"
     },
     "LAUNCH_APP_WITH_SEARCH_INTENT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_SEARCH_INTENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_SEARCH_INTENT"
     },
     "LAUNCH_APP_WITH_SECTION_INTENT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_SECTION_INTENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_SECTION_INTENT"
     },
     "LAUNCH_APP_WITH_TUNE_INTENT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_TUNE_INTENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_TUNE_INTENT"
     },
     "LAUNCH_APP_WITH_PLAYENTITY_INTENT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_CONCERT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_CONCERT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_CONCERT"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_SPORTINGEVENT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_SPORTINGEVENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_SPORTINGEVENT"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_PREVIEW": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_PREVIEW",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_PREVIEW"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_OTHER": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_OTHER",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_OTHER"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_ADVERTISEMENT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_ADVERTISEMENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_ADVERTISEMENT"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MUSICVIDEO": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MUSICVIDEO",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MUSICVIDEO"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MINISODE": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MINISODE",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MINISODE"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_EXTRA": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_EXTRA",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_EXTRA"
     },
     "LAUNCH_APP_WITH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_MOVIE": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_MOVIE",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_MOVIE"
     },
     "LAUNCH_APP_WITH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_EPISODE": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_EPISODE",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_EPISODE"
     },
     "LAUNCH_APP_WITH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_CONCERT": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_CONCERT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_CONCERT"
     },
     "LAUNCH_APP_WITH_PLAYENTITY_INTENT_WITHOUT_OPTIONS": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_OPTIONS",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_OPTIONS"
     },
     "LAUNCH_APP_WITH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE"
     },
     "LAUNCH_APP_WITH_PLAYENTITY_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE_FOR_MOVIEENTITY": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE_FOR_MOVIEENTITY",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE_FOR_MOVIEENTITY"
     },
     "LAUNCH_APP_WITH_PLAYENTITY_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE_FOR_TVEPISODEENTITY": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE_FOR_TVEPISODEENTITY",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE_FOR_TVEPISODEENTITY"
     },
+
     "TRUE_FOR_DISCOVERYLAUNCH": {
         "method": "discovery.launch",
         "validationJsonPath": "result",
@@ -412,23 +359,21 @@
         "params": "DISCOVERYLAUNCH_SEARCH_INTENT_INT_DATA",
         "expected": "error"
     },
+
     "INVALID_PARAMETERS_FOR_DISCOVERYLAUNCH": {
         "method": "discovery.launch",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
+
     "LAUNCH_APP_WITH_NULL_INTENT_SOURCE": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE"
     },
     "LAUNCH_APP_WITH_PLAYBACK_INTENT_SOURCE": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYBACK_INTENT_SOURCE",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYBACK_INTENT_SOURCE"
     },
     "DISCOVERY_ONNAVIGATETO": {
         "method": "discovery.onNavigateTo"
@@ -448,105 +393,71 @@
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_CONCERT":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_CONCERT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_CONCERT"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_SPORTINGEVENT":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_SPORTINGEVENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_SPORTINGEVENT"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_PREVIEW":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_PREVIEW",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_PREVIEW"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_OTHER":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_OTHER",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_OTHER"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_ADVERTISEMENT":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_ADVERTISEMENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_ADVERTISEMENT"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MUSICVIDEO":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MUSICVIDEO",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MUSICVIDEO"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MINISODE":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MINISODE",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MINISODE"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_CONCERT":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_CONCERT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_CONCERT"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_SPORTINGEVENT":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_SPORTINGEVENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_SPORTINGEVENT"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_PREVIEW":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_PREVIEW",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_PREVIEW"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_OTHER":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_OTHER",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_OTHER"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_ADVERTISEMENT":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_ADVERTISEMENT",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_ADVERTISEMENT"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MUSICVIDEO":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MUSICVIDEO",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MUSICVIDEO"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MINISODE":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MINISODE",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MINISODE"
     },
     "LAUNCH_APP_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_EXTRA":{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_EXTRA",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_EXTRA"
     },
     "LAUNCH_APP_WITH_INVALID_APPID_VALUE" : {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_LAUNCH_APP_WITH_INVALID_APPID_VALUE",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_LAUNCH_APP_WITH_INVALID_APPID_VALUE"
     },
     "LAUNCH_APP_WITH_INVALID_APPID_TYPE" : {
         "method": "discovery.launch",
@@ -555,15 +466,11 @@
     },
     "LAUNCH_APP_WITH_RANDOM_STRING_SOURCE": {
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_LAUNCH_APP_WITH_RANDOM_STRING_SOURCE",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_LAUNCH_APP_WITH_RANDOM_STRING_SOURCE"
     },
     "LAUNCH_APP_WITH_SEARCH_INTENT_SOURCE" :{
         "method": "discovery.launch",
-        "params": "DISCOVERYLAUNCH_LAUNCH_APP_WITH_SEARCH_INTENT_SOURCE",
-        "validationJsonPath": "result",
-        "expected": "TRUE"
+        "params": "DISCOVERYLAUNCH_LAUNCH_APP_WITH_SEARCH_INTENT_SOURCE"
     },
     "LAUNCH_APP_WITH_SEARCH_INTENT_INT_SOURCE": {
         "method": "discovery.launch",

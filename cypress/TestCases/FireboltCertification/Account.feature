@@ -7,7 +7,7 @@ Feature: Account
    @Account @coreSDK @sdk @transport
    Scenario Outline: Account.<method> - Positive Scenario: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for '<Validation_key>'
+      Then 'Firebolt' platform responds with '<Validation_key>'
 
       Examples:
          | Scenario             | API_Key           | Validation_key | method |

@@ -7,39 +7,27 @@
     },
     "DISABLE_LIMITADTRACKING":{
         "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "FALSE",
-        "validationJsonPath": "result",
-        "expected": "NULL" 
+        "params": "FALSE"
     },
     "ENABLE_LIMITADTRACKING":{
         "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL" 
+        "params": "TRUE"
     },
     "SET_SKIPRESTRICTION_AS_NONE":{
         "method": "manage_advertising.setSkipRestriction",
-        "params": "NONE",
-        "validationJsonPath": "result",
-        "expected": "NULL" 
+        "params": "NONE"
     },
     "SET_SKIPRESTRICTION_AS_ADSUNWATCHED":{
         "method": "manage_advertising.setSkipRestriction",
-        "params": "ADVERTISING_SKIPRESTRICTION_ADSUNWATCHED",
-        "validationJsonPath": "result",
-        "expected": "NULL" 
+        "params": "ADVERTISING_SKIPRESTRICTION_ADSUNWATCHED"
     },
     "SET_SKIPRESTRICTION_AS_ADSALL":{
         "method": "manage_advertising.setSkipRestriction",
-        "params": "ADVERTISING_SKIPRESTRICTION_ADSALL",
-        "validationJsonPath": "result",
-        "expected": "NULL" 
+        "params": "ADVERTISING_SKIPRESTRICTION_ADSALL"
     },
     "SET_SKIPRESTRICTION_AS_ALL":{
         "method": "manage_advertising.setSkipRestriction",
-        "params": "ADVERTISING_SKIPRESTRICTION_ALL",
-        "validationJsonPath": "result",
-        "expected": "NULL" 
+        "params": "ADVERTISING_SKIPRESTRICTION_ALL"
     },
     "GET_DEVICEATTRIBUTES":{
         "method": "advertising.deviceAttributes"
@@ -115,9 +103,7 @@
         "expected": "error"
     },
     "SET_SKIPRESTRICTION_WITH_UNDEFINED_PARAMETER":{
-        "method": "manage_advertising.setSkipRestriction",
-        "validationJsonPath": "result",
-		"expected": "ADVERTISING_SKIPRESTRICTION"
+        "method": "manage_advertising.setSkipRestriction"
     },
     "GET_ADVERTISINGID_FOR_SCOPE_BROWSER":{
         "method": "advertising.advertisingId",
@@ -223,6 +209,11 @@
 		"expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
 	},
+    "ADVERTISING_SKIPRESTRICTION": {
+        "method": "advertising.setSkipRestriction",
+		"validationJsonPath": "result",
+		"expected": "ADVERTISING_SKIPRESTRICTION"
+    },
     "INVALID_PARAMETER_FOR_ADVERTISING_ADVERTISINGID": {
 		"method": "advertising.advertisingId",
 		"validationJsonPath": "result",
@@ -245,9 +236,7 @@
 		"expected": "ADVERTISING_ADVERTISINGID_ADON"
     },
     "RESET_IDENTIFIER_FOR_ADVERTISING":{
-        "method": "manage_advertising.resetIdentifier",
-        "validationJsonPath": "result",
-		"expected": "NULL"
+        "method": "manage_advertising.resetIdentifier"
     },
     "NULL_FOR_ADVERTISING_RESETIDENTIFIER":{
         "method": "advertising.resetIdentifier",
@@ -350,9 +339,7 @@
     },
     "SET_TRUE_FOR_ALLOWAPPCONTENTADTARGETING":{
         "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "TRUE",
-        "validationJsonPath": "result",
-        "expected": "NULL" 
+        "params": "TRUE"
     },
     "ONADVERTISINGPOLICYCHANGED": {
         "event": "advertising.onPolicyChanged",
@@ -368,5 +355,10 @@
         "validationJsonPath": "result",
         "expected": "INVALID_REQUEST",
         "expectingError": true
+    },
+    "NULL_FOR_ADVERTISING_SETSKIPRESTRICTION": {
+        "method": "advertising.setSkipRestriction",
+        "validationJsonPath": "result",
+        "expected": "NULL"
     }
 }

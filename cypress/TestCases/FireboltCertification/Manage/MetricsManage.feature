@@ -7,7 +7,7 @@ Feature: Metrics_Manage
     @Metrics @manageSDK
     Scenario Outline: Metrics.event - Positive Scenario: <Scenario>
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with 'null for metrics event'
 
         Examples:
             | Scenario                          | API_Key                                             |
@@ -21,7 +21,7 @@ Feature: Metrics_Manage
     @Metrics @manageSDK
     Scenario Outline: Metrics.event - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for 'invalid params for metrics event'
+        Then 'Firebolt' platform responds to '1st party app' with 'invalid params for metrics event'
 
         Examples:
             | Scenario                | API_Key                                    |

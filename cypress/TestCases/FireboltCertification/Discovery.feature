@@ -9,22 +9,22 @@ Feature: Discovery
       When '3rd party app' registers for the 'discovery onPolicyChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get value of policy'
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
+      Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
       When '3rd party app' invokes the 'Firebolt' API to 'get value of policy'
-      Then 'Firebolt' platform responds for '<Method_Content>'
+      Then 'Firebolt' platform responds with '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
       Examples:
-         | Scenario                          | API_Key                           | Method_Content                                      | Event_Content                                                      |
-         | enable Recommendations            | enable recommendations            | true for history based recommendations in policy    | onPolicyChanged for discovery enableRecommendations with true      |
-         | disable Recommendations           | disable recommendations           | false for history based recommendations in policy   | onPolicyChanged for discovery enableRecommendations with false     |
-         | enable remember watched programs  | enable remember watched programs  | true for remember watched programs in policy        | onPolicyChanged for discovery rememberWatchedPrograms with true    |
-         | disable remember watched programs | disable remember watched programs | false for remember watched programs in policy       | onPolicyChanged for discovery rememberWatchedPrograms with false   |
+         | Scenario                          | API_Key                           | Method_Content                                      | Event_Content                                                      | Set_Method_Content                       |
+         | enable Recommendations            | enable recommendations            | true for history based recommendations in policy    | onPolicyChanged for discovery enableRecommendations with true      | null for privacy setAllowPersonalization |
+         | disable Recommendations           | disable recommendations           | false for history based recommendations in policy   | onPolicyChanged for discovery enableRecommendations with false     | null for privacy setAllowPersonalization |
+         | enable remember watched programs  | enable remember watched programs  | true for remember watched programs in policy        | onPolicyChanged for discovery rememberWatchedPrograms with true    | null for privacy setAllowWatchHistory    |
+         | disable remember watched programs | disable remember watched programs | false for remember watched programs in policy       | onPolicyChanged for discovery rememberWatchedPrograms with false   | null for privacy setAllowWatchHistory    |
 
    @Discovery @coreSDK @sdk @transport
    Scenario Outline: Discovery.watched - Positive Scenario: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for 'true for watched content in discovery'
+      Then 'Firebolt' platform responds with 'true for watched content in discovery'
 
       Examples:
          | Scenario                                                   | API_Key                                                   |
@@ -36,7 +36,7 @@ Feature: Discovery
    @Discovery @coreSDK @sdk @transport
    Scenario Outline: Discovery.watchNext - Positive Scenario: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for 'true for watchnext tile in discovery'
+      Then 'Firebolt' platform responds with 'true for watchnext tile in discovery'
 
       Examples:
          | Scenario                                                                              | API_Key                                                                        |
@@ -51,7 +51,7 @@ Feature: Discovery
    @Discovery @coreSDK @sdk @transport
    Scenario Outline: Discovery.entitlements - Positive Scenario: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for 'true for entitlements in discovery'
+      Then 'Firebolt' platform responds with 'true for entitlements in discovery'
 
       Examples:
          | Scenario                | API_Key                                     |
@@ -61,7 +61,7 @@ Feature: Discovery
    @Discovery @coreSDK @sdk @transport
    Scenario Outline: Discovery.watched - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for 'invalid params for discovery watched'
+      Then 'Firebolt' platform responds with 'invalid params for discovery watched'
 
       Examples:
          | Scenario                 | API_Key                                             | 
@@ -75,7 +75,7 @@ Feature: Discovery
    @Discovery @coreSDK @sdk @transport
    Scenario Outline: Discovery.watchNext - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for 'invalid params for discovery watchnext'
+      Then 'Firebolt' platform responds with 'invalid params for discovery watchnext'
 
       Examples:
          | Scenario                           | API_Key                                                        | 
@@ -94,7 +94,7 @@ Feature: Discovery
    @Discovery @coreSDK @sdk @transport
    Scenario Outline: Discovery.entitlements - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for 'invalid params for discovery entitlements'
+      Then 'Firebolt' platform responds with 'invalid params for discovery entitlements'
 
       Examples:
          | Scenario                              | API_Key                                 | 
@@ -104,7 +104,7 @@ Feature: Discovery
    @Discovery @coreSDK @sdk @transport
    Scenario Outline: Discovery.signIn - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for 'invalid params for discovery signIn'
+      Then 'Firebolt' platform responds with 'invalid params for discovery signIn'
 
       Examples:
          | Scenario                              | API_Key                                      | 
@@ -114,7 +114,7 @@ Feature: Discovery
    @Discovery @coreSDK @sdk @transport
    Scenario Outline: Discovery.contentAccess - Positive Scenario: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for 'null for discovery contentAccess'
+      Then 'Firebolt' platform responds with 'null for discovery contentAccess'
 
       Examples:
          | Scenario                                                     | API_Key                                                                                         |
@@ -132,12 +132,12 @@ Feature: Discovery
    @Discovery @coreSDK @sdk @transport
    Scenario: Discovery.clearContentAccess - Positive Scenario: Clear both availabilities and entitlements from the subscriber
       When '3rd party app' invokes the 'Firebolt' API to 'clear ContentAccess'
-      Then 'Firebolt' platform responds for 'null for discovery clearContentAccess'
+      Then 'Firebolt' platform responds with 'null for discovery clearContentAccess'
 
    @Discovery @coreSDK @sdk @transport
    Scenario Outline: Discovery.contentAccess - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds for 'invalid parameter error for discovery contentAccess'
+      Then 'Firebolt' platform responds with 'invalid parameter error for discovery contentAccess'
 
       Examples:
          | Scenario                                   | API_Key                                                               |
@@ -161,9 +161,5 @@ Feature: Discovery
       When '3rd party app' registers for the 'discovery onPolicyChanged' event using the 'Firebolt' API
       And I clear 'discovery onPolicyChanged event' listeners
       And 1st party app invokes the 'Firebolt' API to 'set allowPersonalization to true'
-      Then 'Firebolt' platform responds to '1st party app' for 'set allowPersonalization to true'
+      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowPersonalization'
       And 'Firebolt' platform does not trigger event for 'onDiscoveryPolicyChanged'
-
-
-
-

@@ -79,15 +79,11 @@
     },
     "SET_DEVICE_NAME_TO_LIVING_HALL": {
         "method": "manage_device.setName",
-        "params": "Living hall",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "Living hall"
     },
     "SET_DEVICE_NAME_TO_LIVING_ROOM": {
         "method": "manage_device.setName",
-        "params": "Living Room",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "Living Room"
     },
     "GET_DEVICE_NAME": {
         "method": "device.name"
@@ -149,17 +145,15 @@
     },
     "SET_DEVICE_NAME_TO_BEDROOM":{
         "method": "manage_device.setName",
-        "params": "Bedroom",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+		"params": "Bedroom"
+    },
+    "GET_MANAGE_DEVICE_NAME":{
+        "method": "manage_device.name"
     },
     "NULL_FOR_DEVICE_SETNAME": {
         "method": "device.setName",
         "validationJsonPath": "result",
         "expected": "NULL"
-    },
-    "GET_MANAGE_DEVICE_NAME":{
-        "method": "manage_device.name"
     },
     "BEDROOM_FOR_DEVICE_NAME": {
         "method": "device.name",
@@ -283,9 +277,7 @@
     },
     "SET_DEVICE_NAME_TO_KITCHEN": {
         "method": "manage_device.setName",
-        "params": "Kitchen",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+        "params": "Kitchen"
     },
     "ONDEVICENAMECHANGED": {
         "event": "device.onNameChanged",

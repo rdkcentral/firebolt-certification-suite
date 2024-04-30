@@ -217,27 +217,19 @@
     },
     "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_DEVICE": {
         "method": "manage_securestorage.setForApp",
-        "params": "SECURESTORAGE_SETFORAPP_DEVICE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+		"params": "SECURESTORAGE_SETFORAPP_DEVICE"
     },
     "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_ACCOUNT": {
         "method": "manage_securestorage.setForApp",
-        "params": "SECURESTORAGE_SETFORAPP_ACCOUNT",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+		"params": "SECURESTORAGE_SETFORAPP_ACCOUNT"
     },
     "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_DEVICE_WITH_OPTIONAL_PARAMETER": {
         "method": "manage_securestorage.setForApp",
-        "params": "SECURESTORAGE_SETFORAPP_DEVICE_OPTIONAL",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+		"params": "SECURESTORAGE_SETFORAPP_DEVICE_OPTIONAL"
     },
     "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_ACCOUNT_WITH_OPTIONAL_PARAMETER": {
         "method": "manage_securestorage.setForApp",
-        "params": "SECURESTORAGE_SETFORAPP_ACCOUNT_OPTIONAL",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+		"params": "SECURESTORAGE_SETFORAPP_ACCOUNT_OPTIONAL"
     },
     "AUTHTESTTOKENVALUE1_FOR_STORED_DATA_IN_SECURESTORAGE": {
         "method": "securestorage.get",
@@ -251,15 +243,11 @@
     }, 
     "REMOVE_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_DEVICE": {
         "method": "manage_securestorage.removeForApp",
-        "params": "SECURESTORAGE_REMOVEFORAPP_DEVICE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+		"params": "SECURESTORAGE_REMOVEFORAPP_DEVICE"
     },
     "REMOVE_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_ACCOUNT": {
         "method": "manage_securestorage.removeForApp",
-        "params": "SECURESTORAGE_REMOVEFORAPP_ACCOUNT",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+		"params": "SECURESTORAGE_REMOVEFORAPP_ACCOUNT"
     },
     "GET_STORED_VALUE_FOR_AUTHTESTTOKENDEVICE_WITH_SCOPE_DEVICE": {
         "method": "securestorage.get",
@@ -271,15 +259,11 @@
     },
     "CLEAR_SECURE_DATA_VALUES_FOR_AN_APP_WITH_SCOPE_DEVICE": {
         "method": "manage_securestorage.clearForApp",
-        "params": "SECURESTORAGE_CLEARFORAPP_DEVICE",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+		"params": "SECURESTORAGE_CLEARFORAPP_DEVICE"
     },
     "CLEAR_SECURE_DATA_VALUES_FOR_AN_APP_WITH_SCOPE_ACCOUNT": {
         "method": "manage_securestorage.clearForApp",
-        "params": "SECURESTORAGE_CLEARFORAPP_ACCOUNT",
-        "validationJsonPath": "result",
-        "expected": "NULL"
+		"params": "SECURESTORAGE_CLEARFORAPP_ACCOUNT"
     },
     "GET_STORED_VALUE_FOR_AN_APP_WITH_SCOPE_DEVICE": {
         "method": "securestorage.get",

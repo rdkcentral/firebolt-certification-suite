@@ -23,7 +23,7 @@ Feature: Lifecycle_Foreground
         And 3rd party 'certification' app is launched with 'foreground' state
         When '3rd party app' invokes the 'Firebolt' API to 'get home intent'
         # And 1st party app invokes the API to 'get lifecycle management state' # Launched app may not establish Linchpin connection. State validation possible through LifecycleManagement APIs.
-        # Then 'Firebolt' platform responds for 'message for lifecycleManagement state' # LifecycleManagement APIs not implemented. Expected response TBD
+        # Then 'Firebolt' platform responds with 'message for lifecycleManagement state' # LifecycleManagement APIs not implemented. Expected response TBD
         # Then '3rd party app' is in 'foreground' state  #TO BE REPLACED BY ABOVE LINE
         And AppObject state for '3rd party App' is set to 'background'
         Then '3rd party app' is in 'background' state
