@@ -642,8 +642,9 @@ class FireLog {
         const originalMethod = this[method];
         this[method] = function (...args) {
           const message = args[args.length - 1];
-          cy.log(message);
-          return originalMethod.apply(this, args);
+          return cy.log(message).then(() => {
+            return originalMethod.apply(this, args);
+          });
         };
       }
     });
@@ -693,6 +694,10 @@ class FireLog {
 
   exists(value, message) {
     assert.exists(value, message);
+  }
+
+  assert(expression, message) {
+    assert(expression, message);
   }
 }
 
