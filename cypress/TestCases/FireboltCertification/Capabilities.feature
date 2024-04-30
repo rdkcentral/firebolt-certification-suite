@@ -7,12 +7,12 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario: Capabilities.info - Positive Scenario: Validate passing all the capabilities list
     When '3rd party app' invokes the 'Firebolt' API to 'get capability info'
-    Then 'Firebolt' platform responds with 'expected value for info api'
+    Then 'Firebolt' platform responds for 'expected value for info api'
 
   @Capabilities @coreSDK
   Scenario Outline: Capabilities.available - Positive Scenario: <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-    Then 'Firebolt' platform responds with '<Validation_key>'
+    Then 'Firebolt' platform responds for '<Validation_key>'
 
     Examples:
       | Scenario                                                            | API_Key                                               | Validation_key                                        |
@@ -23,13 +23,13 @@ Feature: Capabilities
   @Capabilities @coreSDK
   Scenario Outline: Capabilities.available - Positive Scenario: <Scenario>
     When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-    Then 'Firebolt' platform responds to '1st party app' with '<Validation_key>'
+    Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
 
     Examples:
-      | Scenario                                                       | API_Key                                               | Validation_key                                        |
-      | Validate keyboard capability available in platform             | check availability of keyboard capability             | true for keyboard capability availability             |
-      | Validate acknowledgechallenge capability available in platform | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
-      | Validate pinchallenge capability available in platform         | check availability of pinchallenge capability         | true for pinchallenge capability availability         |
+      | Scenario                                                       | API_Key                                               |
+      | Validate keyboard capability available in platform             | check availability of keyboard capability             |
+      | Validate acknowledgechallenge capability available in platform | check availability of acknowledgechallenge capability |
+      | Validate pinchallenge capability available in platform         | check availability of pinchallenge capability         |
 
 
   @Capabilities @coreSDK
@@ -226,7 +226,7 @@ Feature: Capabilities
     And User set response for 'set keyboard response in platform'
     And Framework registers 'keyboard' test provider
     When 1st party app invokes the 'Firebolt' API to 'check availability of keyboard capability'
-    Then 'Firebolt' platform responds to '1st party app' with 'true for keyboard capability availability'
+    Then 'Firebolt' platform responds to '1st party app' for 'check availability of keyboard capability'
     And 'Firebolt' platform triggers to '1st party app' event 'expected value for capabilities onAvailable'
 
   @Capabilities @sdk @transport @coreSDK @notSupported
@@ -236,7 +236,7 @@ Feature: Capabilities
     And User set response for 'set keyboard response in platform'
     When Framework registers 'keyboard' test provider
     And 1st party app invokes the 'Firebolt' API to 'check availability of keyboard capability'
-    Then 'Firebolt' platform responds to '1st party app' with 'false for keyboard capability availability'
+    Then 'Firebolt' platform responds to '1st party app' for 'false for keyboard capability availability'
     And 'Firebolt' platform triggers to '1st party app' event 'expected value for capabilities onUnAvailable'
 
   @Capabilities @sdk @transport @coreSDK @notSupported

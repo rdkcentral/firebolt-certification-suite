@@ -1,9 +1,4 @@
 {
-    "NULL_FOR_AUDIODESCRIPTIONS_SETENABLED": {
-        "method": "audiodescriptions.setEnabled",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
     "INVALID_PARAMS_FOR_AUDIODESCRIPTIONS_SETENABLED": {
         "method": "audiodescriptions.setEnabled",
         "validationJsonPath": "result",
