@@ -50,7 +50,7 @@ Given(
           const validationType = item.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
 
           let methodOrEvent = item[validationType];
-          methodOrEvent = methodOrEvent.split('_')[1];
+          methodOrEvent = methodOrEvent.includes('_') ? methodOrEvent.split('_')[1] : methodOrEvent;
           const context = item.context ? item.context : CONSTANTS.NO_CONTEXT;
           const validationJsonPath = item.validationJsonPath
             ? item.validationJsonPath
