@@ -25,7 +25,8 @@ const defaultDirectory = CONSTANTS.DEFAULT_DIRECTORY;
 const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 const UTILS = require('./utils');
 const path = require('path');
-const logger = require('../../logger')("main.js");
+const logger = require('../../logger')('main.js');
+const setimmediate = require('setimmediate');
 let appTransport;
 
 export default function (module) {
@@ -434,7 +435,8 @@ export default function (module) {
       }
     } else {
       logger.info(
-        'CONSTANTS.GENERATE_HTML_REPORT should be set to true in order to generate html report','generateAndPushReports'
+        'CONSTANTS.GENERATE_HTML_REPORT should be set to true in order to generate html report',
+        'generateAndPushReports'
       );
     }
   });

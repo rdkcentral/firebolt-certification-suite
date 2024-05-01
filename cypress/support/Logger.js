@@ -17,6 +17,7 @@
  */
 const winston = require('winston');
 const CONSTANTS = require('./constants/constants');
+const setImmediate = require('setimmediate');
 
 const logConfiguration = {
   transports: [new winston.transports.Console({ level: CONSTANTS.LOGGER_LEVEL })],

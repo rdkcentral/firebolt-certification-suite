@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const CONSTANTS = require('../../constants/constants');
-const logger = require('../../logger')("utils.js");
+const logger = require('../../logger')('utils.js');
 const { _ } = Cypress;
 const MESSAGE = 'message';
 const Validator = require('jsonschema').Validator;
@@ -313,7 +313,7 @@ function unsubscribe(webSocketClient = null) {
     throw new Error('Websocket client not established');
   }
   webSocketClient.unsubscribe(MESSAGE);
-  logger.info('Websocket connection closed Successfully','unsubscribe');
+  logger.info('Websocket connection closed Successfully', 'unsubscribe');
 }
 
 /**
@@ -369,7 +369,7 @@ function getEnvVariable(variable, isRequired = true) {
 
   if (isRequired) {
     const errorMessage = `Required environment variable "${variable}" is missing or undefined.`;
-    logger.error(errorMessage,'getEnvVariable');
+    logger.error(errorMessage, 'getEnvVariable');
     // To include stackTrace in the console
     logger.error(stackTrace());
     throw new Error(errorMessage);

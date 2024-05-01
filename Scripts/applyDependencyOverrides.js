@@ -18,7 +18,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-const logger = require('../cypress/support/logger')("index.js") 
+const logger = require('../cypress/support/logger')('index.js');
 
 // Paths to the relevant package.json files and temporary backup
 const fcsPackagePath = path.join(__dirname, '..', 'package.json');
@@ -64,7 +64,7 @@ function applyDependencyOverrides() {
       logger.info('No dependency overrides found.');
     }
   } else {
-    console.warn(
+    logger.warn(
       '\x1b[32m%s\x1b[0m',
       'configModule is set to default module. Please add it to your dependencies in package.json if required.'
     );

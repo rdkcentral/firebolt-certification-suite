@@ -21,7 +21,7 @@ const validator = new Validator();
 import axios from 'axios';
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 import UTILS from '../cypress-support/src/utils';
-const logger = require('../logger')("schemaValidation.js")
+const logger = require('../logger')('schemaValidation.js');
 
 /**
  * @module schemaValidation
@@ -49,7 +49,7 @@ async function getAndDeferenceOpenRPC(version) {
     Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, deSchemaList);
     return deSchemaList;
   } catch (error) {
-    logger.error('Error fetching data:', error.message);
+    logger.error('Error fetching data:', error.message, 'getAndDeferenceOpenRPC');
     return null;
   }
 }

@@ -35,15 +35,13 @@ const util = require('util');
 const { DateTime } = require('luxon');
 const { generateLocalReport } = require('./localReportGenerator');
 const getSpecPattern = require('../../specHelperConfig.js');
-const logger = require('../support/logger')("index.js");
+const logger = require('../support/logger')('index.js');
 let metaDataArr = [];
 
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
   const testsuite = config.env.testSuite;
-  console.log("testSuite"+testsuite)
   const specPattern = getSpecPattern(testsuite);
-  logger.info("SpecPattern:"+specPattern)
   if (specPattern !== undefined) {
     config.specPattern = specPattern;
   }
@@ -242,7 +240,7 @@ module.exports = async (on, config) => {
     if (!fs.existsSync(filePath)) {
       try {
         fs.mkdirSync(filePath);
-        logger.info('Cucumber-json folder created successfully.');
+        logger.debug('Cucumber-json folder created successfully.');
       } catch (error) {
         logger.error(error);
       }
@@ -371,7 +369,7 @@ function readFileName(filePath, fileName) {
       files = files.find((name) => name.includes(fileName));
     }
   } catch (err) {
-   logger.info(`${filePath} Path does not exist`,`readFileName`);
+    logger.info(`${filePath} Path does not exist`, `readFileName`);
   }
   return files;
 }
@@ -385,7 +383,7 @@ function readDataFromFile(filePath) {
   try {
     return fs.readFileSync(filePath);
   } catch (err) {
-    logger.error(`Unable to read data from ${filePath}`);
+    logger.error(`Unable to read data from ${filePath}`, `readDataFromFile`);
   }
 }
 
@@ -398,9 +396,9 @@ function readDataFromFile(filePath) {
 function deleteFile(sourceFile) {
   fs.unlink(sourceFile, (err) => {
     if (err) {
-      logger.error(`Error while deleting the file ${err}`,`deleteFile`);
+      logger.error(`Error while deleting the file ${err}`, `deleteFile`);
     }
-    logger.info(`The ${sourceFile} file has been deleted`);
+    logger.info(`The ${sourceFile} file has been deleted`, `deleteFile`);
   });
 }
 
@@ -423,10 +421,14 @@ async function addCustomMetaData(outputFile, metaDataArr) {
 
     // Write the updated JSON data back to the file
     await writeFileAsync(outputFile, updatedJsonData, 'utf8');
-    logger.info('Metadata array appended to existing JSON successfully.');
+    logger.debug('Metadata array appended to existing JSON successfully.', 'addCustomMetaData');
 
     return Promise.resolve();
   } catch (err) {
-    logger.error('Error in appending the metadata to the existing JSON:', err.message);
+    logger.error(
+      'Error in appending the metadata to the existing JSON:',
+      err.message,
+      'addCustomMetaData'
+    );
   }
 }

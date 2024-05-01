@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import { TransportClient } from './parent';
-const logger = require('../../logger')("httpClient.js")
+const logger = require('../../logger')('httpClient.js');
 const axios = require('axios');
 
 const defaultTimeout = Cypress.env('httpTransportTimeout')

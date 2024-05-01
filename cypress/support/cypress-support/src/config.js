@@ -20,7 +20,7 @@ const responseModules = 'responseModules';
 const defaultModule = 'defaultModule';
 const defaultMethod = 'defaultMethod';
 const CONSTANTS = require('../../constants/constants');
-const logger = require('../../logger')("config.js");
+const logger = require('../../logger')('config.js');
 export default class Config {
   constructor(configModule) {
     this.configModule = configModule;
@@ -55,18 +55,18 @@ export default class Config {
   getRequestOverride(fireboltObject) {
     // If config module is invalid or absent
     if (this.configModule === null || this.configModule === undefined || !this.configModule) {
-      logger.info(`config module is not provided`,`getRequestOverride`);
+      logger.info(`config module is not provided`, `getRequestOverride`);
       return fireboltObject;
     }
     if (!fireboltObject || !fireboltObject.method) {
-      logger.info(`firebolt object does not contain method param`,`getRequestOverride`);
+      logger.info(`firebolt object does not contain method param`, `getRequestOverride`);
       return fireboltObject;
     }
     // firebolt method format <module>.<method>
     const moduleMethodArray = fireboltObject.method.split('.');
 
     if (moduleMethodArray.length !== 2) {
-      logger.error(`Invalid module/method. Expected format '<Module.Method>'`,`getRequestOverride`);
+      logger.info(`Invalid module/method. Expected format '<Module.Method>'`, `getRequestOverride`);
       return fireboltObject;
     }
 

@@ -16,6 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const CONSTANTS = require('../cypress/support/constants/constants');
+const logger = require('../cypress/support/logger')('lifeCycleAppObject.js');
 class notificationConfig {
   constructor(message) {
     this.time = Date.now();
@@ -41,7 +42,7 @@ class stateConfig {
         // If currentState and previousState are not equal and allowed state transition supports currentState, generate an event and push to notification list
         if (stateTransition.includes(currentState) && currentState != previousState) {
           const message = { state: currentState, previous: previousState };
-          console.log('Lifecycle appObject transition: ' + JSON.stringify(message));
+          logger.info('Lifecycle appObject transition: ' + JSON.stringify(message));
           const tempNotification = new notificationConfig(message);
           this.notification.push(tempNotification);
         }
@@ -75,7 +76,7 @@ class appConfig {
 
         // If newState is initializing and app object history is empty, the state is not pushed to history
         if (newState == CONSTANTS.LIFECYCLE_STATES.INITIALIZING && this.history.length === 0) {
-          console.log(
+          logger.info(
             'New appState ' +
               newState +
               ' not pushed to history. If history list is empty and app tries to transition to initializing state, the state will not be pushed to history',
@@ -90,12 +91,12 @@ class appConfig {
               currentState.state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING &&
               this.history.length === 0
             ) {
-              console.log('Current appState ' + currentState.state + ' pushed to history');
+              logger.info('Current appState ' + currentState.state + ' pushed to history');
               this.history.push(currentState);
             }
             // Next push the new state object to app object history
             this.history.push(this.state);
-            console.log('New appState pushed to history: ' + newState);
+            logger.info('New appState pushed to history: ' + newState);
           }
           if (currentState.state == newState) {
             Cypress.env(CONSTANTS.IS_SAME_APP_TRANSITION, true);

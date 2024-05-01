@@ -18,7 +18,6 @@
 const CONSTANTS = require('../../constants/constants');
 import UTILS from '../../cypress-support/src/utils';
 
-
 /**
  * @module capabilitiesMiscValidation
  * @function capabilitiesMiscValidation

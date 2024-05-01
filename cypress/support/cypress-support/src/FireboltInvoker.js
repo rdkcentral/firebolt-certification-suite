@@ -18,7 +18,7 @@
 
 import modularTransportClient from '../../modularTransportClient';
 import { getEnvVariable } from './utils';
-const logger = require('../../logger')("FireboltInvoker.js");
+const logger = require('../../logger')('FireboltInvoker.js');
 
 const WEBSOCKET = 'WebSocket';
 const DEFAULT_WS_URL_PROTOCOL = 'ws://';
@@ -56,13 +56,13 @@ export default class FireboltInvoker {
         getEnvVariable('wsPort', false),
         getEnvVariable('wsUrlPath', false)
       );
-      logger.info('Creating WebSocket connection for URL: ' + JSON.stringify(wsUrl),'get');
+      logger.info('Creating WebSocket connection for URL: ' + JSON.stringify(wsUrl), 'get');
       try {
         this.instance = await modularTransportClient(WEBSOCKET, {
           url: wsUrl,
         });
         await this.instance.initialize();
-        logger.info('WebSocket client initialized');
+        logger.info('WebSocket client initialized', 'get');
         if (this.instance) {
           Cypress.env('webSocketClient', this.instance);
           return this.instance;
@@ -70,7 +70,7 @@ export default class FireboltInvoker {
           Cypress.env('webSocketClient', null);
         }
       } catch (err) {
-        logger.error('Error occurred during initializing WebSocket client:', err ,'get');
+        logger.error('Error occurred during initializing WebSocket client:', err, 'get');
         throw new Error('WebSocket initialization failed.');
       }
     }
@@ -88,7 +88,7 @@ export default class FireboltInvoker {
       fireboltMessage.params = params;
     }
 
-    logger.info('Firebolt Message in the invoke:' + JSON.stringify(fireboltMessage),'invoke');
+    logger.info('Firebolt Message in the invoke:' + JSON.stringify(fireboltMessage), 'invoke');
 
     try {
       const currentInstance = await this.get();
