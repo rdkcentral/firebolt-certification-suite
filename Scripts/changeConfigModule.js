@@ -25,7 +25,7 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const logger = require('../cypress/support/Logger')('changeConfigModule');
+const logger = require('../cypress/support/Logger')('changeConfigModule.js');
 
 const packagePath = path.join(__dirname, '..', 'package.json');
 
