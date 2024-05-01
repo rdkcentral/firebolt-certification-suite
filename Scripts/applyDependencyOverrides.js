@@ -53,7 +53,7 @@ function applyDependencyOverrides() {
         execSync(`yarn install --ignore-scripts`, { stdio: 'inherit' });
         logger.info('Dependency overrides applied.');
       } else {
-        logger.error('No relevant dependency overrides found.');
+        logger.info('No relevant dependency overrides found.');
       }
 
       // Revert to the original package.json

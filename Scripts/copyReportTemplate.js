@@ -42,7 +42,7 @@ function copyFileIfExist(source, destination) {
     fs.copyFileSync(source, destination);
     logger.info(`Copied  Report template from "${source}" to "${destination}"`);
   } catch (error) {
-    logger.error('Error:', error.message);
+    logger.info('Error:', error.message);
   }
 }
 

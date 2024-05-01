@@ -51,7 +51,7 @@ function addOrChangeConfigModule(configModuleUrl) {
 
 // argv[0] is "node". argv[1] is the path to this file
 if (process.argv.length != 3) {
-  logger.error(
+  logger.info(
     'Invalid format. Required script format: "node ./changeConfigModule.js <configModuleUrl>"\n' +
       'Ex: "node ./changeConfigModule.js git//git@github.com/myOrg/myConfigModule.git"'
   );

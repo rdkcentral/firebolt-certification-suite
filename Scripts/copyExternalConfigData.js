@@ -77,7 +77,7 @@ if (fs.existsSync(CONFIG_DIR_TESTCASE)) {
 if (fs.existsSync(CONFIG_DIR_TESTDATA)) {
   copyFiles(CONFIG_DIR_TESTDATA, EXTERNAL_DIR_TESTDATA);
 } else {
-  logger.error('TestData is not available in configModule');
+  logger.info('TestData is not available in configModule');
 }
 
 // Copy config.json file
