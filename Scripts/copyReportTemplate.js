@@ -45,5 +45,5 @@ function copyFileIfExist(source, destination) {
   }
 }
 
-// Copy report template file
+// Copy template of report file
 copyFileIfExist(SOURCE_REPORT_TEMPLATE, DEST_REPORT_TEMPLATE);
