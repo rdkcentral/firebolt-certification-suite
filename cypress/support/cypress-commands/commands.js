@@ -18,7 +18,7 @@
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS from '../cypress-support/src/utils';
-const logger = require('../logger')('command.js');
+const logger = require('../Logger')('command.js');
 
 /**
  * @module commands

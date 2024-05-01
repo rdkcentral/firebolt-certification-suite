@@ -21,7 +21,7 @@ const validator = new Validator();
 import axios from 'axios';
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 import UTILS from '../cypress-support/src/utils';
-const logger = require('../logger')('schemaValidation.js');
+const logger = require('../Logger')('schemaValidation.js');
 
 /**
  * @module schemaValidation

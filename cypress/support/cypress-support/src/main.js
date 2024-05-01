@@ -25,7 +25,7 @@ const defaultDirectory = CONSTANTS.DEFAULT_DIRECTORY;
 const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 const UTILS = require('./utils');
 const path = require('path');
-const logger = require('../../logger')('main.js');
+const logger = require('../../Logger')('main.js');
 const setimmediate = require('setimmediate');
 let appTransport;
 

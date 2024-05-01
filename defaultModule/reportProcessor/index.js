@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-const logger = require('../../cypress/support/logger')('index.js');
+const logger = require('../../cypress/support/Logger')('index.js');
 /**
  * Helper function to process a report
  * @param {string} reportType - Type of the report

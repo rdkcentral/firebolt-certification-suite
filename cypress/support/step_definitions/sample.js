@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
-const logger = require('../logger')('sample.js');
+const logger = require('../Logger')('sample.js');
 
 Given('I say {string}', (echo) => {
   logger.info(`You said ${echo}`);
