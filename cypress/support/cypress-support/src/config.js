@@ -20,7 +20,7 @@ const responseModules = 'responseModules';
 const defaultModule = 'defaultModule';
 const defaultMethod = 'defaultMethod';
 const CONSTANTS = require('../../constants/constants');
-const logger = require('../../logger')('config.js');
+const logger = require('../../Logger')('config.js');
 export default class Config {
   constructor(configModule) {
     this.configModule = configModule;

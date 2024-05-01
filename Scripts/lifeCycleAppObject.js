@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const CONSTANTS = require('../cypress/support/constants/constants');
-const logger = require('../cypress/support/logger')('lifeCycleAppObject.js');
+const logger = require('../cypress/support/Logger')('lifeCycleAppObject.js');
 class notificationConfig {
   constructor(message) {
     this.time = Date.now();

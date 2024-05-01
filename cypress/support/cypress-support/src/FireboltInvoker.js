@@ -18,7 +18,7 @@
 
 import modularTransportClient from '../../modularTransportClient';
 import { getEnvVariable } from './utils';
-const logger = require('../../logger')('FireboltInvoker.js');
+const logger = require('../../Logger')('FireboltInvoker.js');
 
 const WEBSOCKET = 'WebSocket';
 const DEFAULT_WS_URL_PROTOCOL = 'ws://';

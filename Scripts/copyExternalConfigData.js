@@ -17,7 +17,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const logger = require('../cypress/support/logger')('copyExternalConfigData');
+const logger = require('../cypress/support/Logger')('copyExternalConfigData');
 
 logger.info(
   'Copying Config TestData into fixtures/external and Testcases into TestCases/Distributor'

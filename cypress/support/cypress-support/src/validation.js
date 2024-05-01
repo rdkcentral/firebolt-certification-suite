@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const JSON_PATH_VALIDATOR = require('jsonpath');
-const logger = require('../../logger')('validation.js');
+const logger = require('../../Logger')('validation.js');
 
 class Validation {
   constructor(validationModule) {

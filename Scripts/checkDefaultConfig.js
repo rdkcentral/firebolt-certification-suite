@@ -20,7 +20,7 @@ const path = require('path');
 
 const defaultModulePath = path.join(__dirname, '../defaultModule');
 const configModulePath = path.join(__dirname, '../node_modules', 'configModule');
-const logger = require('../cypress/support/logger')('checkDefaultConfig.js');
+const logger = require('../cypress/support/Logger')('checkDefaultConfig.js');
 
 const ensureConfigModule = async () => {
   try {

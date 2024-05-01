@@ -18,7 +18,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-const logger = require('../cypress/support/logger')('applyDependencyOverrides.js');
+const logger = require('../cypress/support/Logger')('applyDependencyOverrides.js');
 
 // Paths to the relevant package.json files and temporary backup
 const fcsPackagePath = path.join(__dirname, '..', 'package.json');

@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-const logger = require('./cypress/support/logger')('specHelperConfig.js');
+const logger = require('./cypress/support/Logger')('specHelperConfig.js');
 
 /**
 @function getSpecPattern

@@ -23,7 +23,7 @@ const { JSDOM } = require('jsdom');
 const mochawesomeReportGenerator = require('mochawesome-report-generator');
 const cucumberReportGenerator = require('multiple-cucumber-html-reporter');
 const reportEnv = require('../../reportEnv.json');
-const logger = require('../support/logger')('localReportGenerator.js');
+const logger = require('../support/Logger')('localReportGenerator.js');
 
 const rename = util.promisify(fs.rename);
 const readdir = util.promisify(fs.readdir);

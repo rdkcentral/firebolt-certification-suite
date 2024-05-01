@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const CONSTANTS = require('../../constants/constants');
-const logger = require('../../logger')('utils.js');
+const logger = require('../../Logger')('utils.js');
 const { _ } = Cypress;
 const MESSAGE = 'message';
 const Validator = require('jsonschema').Validator;

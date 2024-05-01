@@ -35,7 +35,7 @@ const util = require('util');
 const { DateTime } = require('luxon');
 const { generateLocalReport } = require('./localReportGenerator');
 const getSpecPattern = require('../../specHelperConfig.js');
-const logger = require('../support/logger')('index.js');
+const logger = require('../support/Logger')('index.js');
 let metaDataArr = [];
 
 module.exports = async (on, config) => {

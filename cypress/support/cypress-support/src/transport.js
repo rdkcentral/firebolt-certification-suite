@@ -18,7 +18,7 @@
 import FireboltInvoker from './FireboltInvoker.js';
 import modularTransportClient from '../../modularTransportClient';
 const CONSTANTS = require('../../constants/constants');
-const logger = require('../../logger')('transport.js');
+const logger = require('../../Logger')('transport.js');
 export default class Transport {
   constructor() {
     // Initialize FireboltInvoker once

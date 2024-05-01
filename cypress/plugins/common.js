@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const fs = require('fs');
-const logger = require('../support/logger')('common.js');
+const logger = require('../support/Logger')('common.js');
 
 // If "genericSupport" is set to a falsy value (false, null, etc), take no further action. Simply "return"
 function genericSupport(config) {

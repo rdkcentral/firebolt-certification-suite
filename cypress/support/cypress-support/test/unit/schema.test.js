@@ -18,7 +18,7 @@
 
 import Validation from '../../src/validation';
 import * as utils from '../../src/utils';
-const logger = require('../../../logger')('schema.test.js');
+const logger = require('../../../Logger')('schema.test.js');
 
 jest.mock('../../src/utils', () => ({
   getAndDeferenceOpenRPC: jest.fn(),

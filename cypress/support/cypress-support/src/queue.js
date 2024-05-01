@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../../constants/constants');
 const UTILS = require('./utils.js');
-const logger = require('../../logger')('queue.js');
+const logger = require('../../Logger')('queue.js');
 const timestamp = new Date();
 
 export default class Queue {

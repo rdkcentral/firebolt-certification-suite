@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-const logger = require('../../cypress/support/logger')('index.js');
+const logger = require('../../cypress/support/Logger')('index.js');
 
 const client = {
   ws: null,
