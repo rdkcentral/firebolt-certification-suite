@@ -17,7 +17,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const logger = require('../cypress/support/Logger')('copyReportTemplate.js');
+const logger = require('../cypress/support/Logger');
 const SOURCE_REPORT_TEMPLATE = path.join(__dirname, '..', 'reportTemplates', 'scenarios.tmpl');
 const DEST_REPORT_TEMPLATE = path.join(
   __dirname,
