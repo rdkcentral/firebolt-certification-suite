@@ -212,3 +212,64 @@ Feature: Discovery.launch_HotLaunch
         And '3rd party app' transitions to state 'forground'
         When 1st party app invokes the 'Firebolt' API to 'launch app with search intent int source'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
+    
+    @DiscoveryLaunch @coreSDK @sdk @transport
+    Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in foreground
+        Given the environment has been set up for 'DiscoveryLaunch' tests
+        When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
+        When Test runner waits for 30 'seconds'
+        And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
+        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
+        And 'Firebolt' platform triggers event '<Event_Content>'
+
+        Examples:
+            | Scenario                                                         | Discovery_Launch_Key                                                             | Event_Content                                                                     | 
+            | Power Intent                                                     | launch app with power Intent                                                     | onNavigateTo with power intent                                                    | 
+            | Volume Intent                                                    | launch app with volume Intent                                                    | onNavigateTo with volume intent                                                   |
+            | Mute Intent                                                      | launch app with mute Intent                                                      | onNavigateTo with mute intent                                                     |      
+            | Channel Intent with channel next                                 | launch app with channel Intent with channel next                                 | onNavigateTo with channel Intent with channel next                                |
+            | Channel Intent with channel previous                             | launch app with channel Intent with channel previous                             | onNavigateTo with channel Intent with channel previous                            |
+            | Pause Intent                                                     | launch app with pause Intent                                                     | onNavigateTo with pause intent                                                    |
+            | Resume Intent                                                    | launch app with resume Intent                                                    | onNavigateTo with resume intent                                                   |
+            | Replay Intent                                                    | launch app with replay Intent                                                    | onNavigateTo with replay intent                                                   |
+            | Stop Intent                                                      | launch app with stop Intent                                                      | onNavigateTo with stop intent                                                     |
+            | Seek Intent                                                      | launch app with seek Intent                                                      | onNavigateTo with seek intent                                                     |
+            | Seek Intent with relative true                                   | launch app with seek Intent with relative true                                   | onNavigateTo with seek Intent with relative true                                  |
+            | Trick Play Intent                                                | launch app with trick play Intent                                                | onNavigateTo with trick play Intent                                               |
+            | Closed Captions Intent with true                                 | launch app with closed captions Intent with true                                 | onNavigateTo with closed captions Intent with true                                |
+            | closed Captions Intent with false                                | launch app with closed captions Intent with false                                | onNavigateTo with closed captions Intent with false                               |
+            | Voice Guidance Intent with true                                  | launch app with voice guidance Intent with true                                  | onNavigateTo with voice guidance Intent with true                                 |
+            | Voice Guidance Intent with false                                 | launch app with voice guidance Intent with false                                 | onNavigateTo with voice guidance Intent with false                                |
+            | Voice Guidance Intent with speed 2                               | launch app with voice guidance Intent with speed 2                               | onNavigateTo with voice guidance Intent with speed 2                              |
+            | Voice Guidance Intent with speed -1 and relative true            | launch app with voice guidance Intent with speed -1 and relative true            | onNavigateTo with voice guidance Intent with speed -1 and relative true           |
+            | Voice Guidance Intent with true and verbosity low                | launch app with voice guidance Intent with true and verbosity low                | onNavigateTo with voice guidance Intent with true and verbosity low               |
+            | Voice Guidance Intent with true and verbosity high               | launch app with voice guidance Intent with true and verbosity high               | onNavigateTo with voice guidance Intent with true and verbosity high              |
+            | Audio Descritions Intent with true                               | launch app with audio descritions Intent with true                               | onNavigateTo with audio descritions Intent with true                              |
+            | Audio Descritions Intent with false                              | launch app with audio descritions Intent with false                              | onNavigateTo with audio descritions Intent with false                             |
+            | High Contrast Intent with high contrast mode on                  | launch app with high contrast Intent with high contrast mode on                  | onNavigateTo with high contrast Intent with high contrast mode on                 |
+            | High Contrast Intent with high contrast mode off                 | launch app with high contrast Intent with high contrast mode off                 | onNavigateTo with high contrast Intent with high contrast mode off                |
+            | Screen Magnification Intent with screen magnification turned on  | launch app with screen magnification Intent with screen magnification turned on  | onNavigateTo with screen magnification Intent with screen magnification turned on |
+            | Screen Magnification Intent with screen magnification turned off | launch app with screen magnification Intent with screen magnification turned off | onNavigateTo with screen magnification Intent with screen magnification turned off|
+            | Screen Magnification Intent with magnification scale 2.5         | launch app with screen magnification Intent with magnification scale 2.5         | onNavigateTo with screen magnification Intent with magnification scale 2.5        |
+            | Focus Intent with cursor up                                      | launch app with focus Intent cursor up                                           | onNavigateTo with focus Intent cursor up                                          |
+            | Focus Intent with cursor down                                    | launch app with focus Intent cursor down                                         | onNavigateTo with focus Intent cursor down                                        |
+            | Focus Intent with cursor left                                    | launch app with focus Intent cursor left                                         | onNavigateTo with focus Intent cursor left                                        |
+            | Focus Intent with cursor right                                   | launch app with focus Intent cursor right                                        | onNavigateTo with focus Intent cursor right                                       |
+            | Select Intent                                                    | launch app with Select Intent                                                    | onNavigateTo with Select Intent                                                   |
+            | Scroll Intent up with unit page                                  | launch app with Scroll Intent up with unit page                                  | onNavigateTo with Scroll Intent up with unit page                                 |
+            | Scroll Intent down with unit page                                | launch app with Scroll Intent down with unit page                                | onNavigateTo with Scroll Intent down with unit page                               |
+            | Scroll Intent left with unit page                                | launch app with Scroll Intent left with unit page                                | onNavigateTo with Scroll Intent left with unit page                               |
+            | Scroll Intent right with unit page                               | launch app with Scroll Intent right with unit page                               | onNavigateTo with Scroll Intent right with unit page                              |
+            | Scroll Intent up with unit line                                  | launch app with Scroll Intent up with unit line                                  | onNavigateTo with Scroll Intent up with unit line                                 |
+            | Scroll Intent down with unit line                                | launch app with Scroll Intent down with unit line                                | onNavigateTo with Scroll Intent down with unit line                               |
+            | Scroll Intent left with unit line                                | launch app with Scroll Intent left with unit line                                | onNavigateTo with Scroll Intent left with unit line                               |
+            | Scroll Intent right with unit line                               | launch app with Scroll Intent right with unit line                               | onNavigateTo with Scroll Intent right with unit line                              |
+            | Scroll Intent up with unit percent                               | launch app with Scroll Intent up with unit percent                               | onNavigateTo with Scroll Intent up with unit percent                              |
+            | Scroll Intent down with unit percent                             | launch app with Scroll Intent down with unit percent                             | onNavigateTo with Scroll Intent down with unit percent                            |
+            | Scroll Intent left with unit percent                             | launch app with Scroll Intent left with unit percent                             | onNavigateTo with Scroll Intent left with unit percent                            |
+            | Scroll Intent right with unit percent                            | launch app with Scroll Intent right with unit percent                            | onNavigateTo with Scroll Intent right with unit percent                           |
+            | Back Intent                                                      | launch app with back Intent                                                      | onNavigateTo with back Intent                                                     |
+            | Exit Intent                                                      | launch app with exit Intent                                                      | onNavigateTo with exit Intent                                                     |
+
+

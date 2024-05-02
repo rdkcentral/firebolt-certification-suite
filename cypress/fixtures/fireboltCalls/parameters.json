@@ -256,5 +256,358 @@
         "context": "DISCOVERY_LAUNCH_PLAYBACK",
         "validationJsonPath": "result.discovery",
         "expected": "PARAMETERS_PLAYBACKINTENT_SOURCE"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_POWER_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_POWER"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_VOLUME_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_VOLUME"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_MUTE_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_MUTE"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_CHANNEL_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_CHANNEL"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_PAUSE_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PAUSE"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_RESUME_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_RESUME"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_REPLAY_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_REPLAY"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_STOP_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_STOP"
+    }, 
+    "GET_INITIALIZATION_PARAMETERS_FOR_SEEK_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SEEK"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_CLOSED_CAPTIONS_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_CLOSED_CAPTIONS"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_VOICE_GUIDANCE_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_VOICE_GUIDANCE"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_AUDIO_DESCRITIONS_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_AUDIO_DESCRITIONS"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_HIGH_CONTRAST_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HIGH_CONTRAST"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_SCREEN_MAGNIFICATION_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCREEN_MAGNIFICATION"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_FOCUS_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_FOCUS"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_SELECT_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SELECT"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_SCROLL_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLL"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_BACK_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_BACK"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_EXIT_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_EXIT"
+    },
+
+    "POWERINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_POWER",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_POWERINTENT"
+    },
+    "VOLUMEINTEMT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_VOLUME",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_VOLUMEINTEMT"
+    },
+    "MUTEINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_MUTE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_MUTEINTENT"
+    }, 
+    "CHANNELINTENT_NEXT_CHANNEL_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_CHANNELINTENT_NEXT_CHANNEL",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_CHANNELINTENT_NEXT_CHANNEL"
+    },
+    "CHANNELINTENT_PREVIOUS_CHANNEL_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_CHANNELINTENT_PREVIOUS_CHANNEL",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_CHANNELINTENT_PREVIOUS_CHANNEL"
+    },
+    "PAUSEINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PAUSE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_PAUSEINTENT"
+    },
+    "RESUMEINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_RESUME",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_RESUMEINTENT"
+    },
+    "REPLAYINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_REPLAY",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_REPLAYINTENT"
+    },
+    "STOPINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_STOP",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_STOPINTENT"
+    },
+    "SEEKINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SEEK",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SEEKINTENT"
+    },
+    "SEEKINTENT_RELATIVE_TRUE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SEEKINTENT_RELATIVE_TRUE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SEEKINTENT_RELATIVE_TRUE"
+    },
+    "TRICK_PLAY_INTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_TRICK_PLAY",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_TRICK_PLAYINTENT"
+    },
+    "CLOSEDCAPTIONSINTENT_TRUE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_CLOSEDCAPTIONSINTENT_TRUE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_CLOSEDCAPTIONSINTENT_TRUE"
+    },
+    "CLOSEDCAPTIONSINTENT_FALSE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_CLOSEDCAPTIONSINTENT_FALSE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_CLOSEDCAPTIONSINTENT_FALSE"
+    },
+    "VOICEGUIDANCEINTENT_TRUE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_VOICEGUIDANCEINTENT_TRUE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_VOICEGUIDANCEINTENT_TRUE"
+    },
+    "VOICEGUIDANCEINTENT_FALSE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_VOICEGUIDANCEINTENT_FALSE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_VOICEGUIDANCEINTENT_FALSE"
+    },
+    "VOICEGUIDANCEINTENT_WITH_SPEED_2_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_VOICEGUIDANCEINTENT_WITH_SPEED_2",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_VOICEGUIDANCEINTENT_WITH_SPEED_2"
+    },
+    "VOICEGUIDANCEINTENT_WITH_SPEED_-1_AND_RELATIVE_TRUE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_VOICEGUIDANCEINTENT_WITH_SPEED_-1_AND_RELATIVE_TRUE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_VOICEGUIDANCEINTENT_WITH_SPEED_-1_AND_RELATIVE_TRUE"
+    },
+    "VOICEGUIDANCEINTENT_TRUE_VERBOSITY_LOW_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_VOICEGUIDANCEINTENT_TRUE_VERBOSITY_LOW",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_VOICEGUIDANCEINTENT_TRUE_VERBOSITY_LOW"
+    },
+    "VOICEGUIDANCEINTENT_TRUE_AND_VERBOSITY_HIGH_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_VOICEGUIDANCEINTENT_TRUE_VERBOSITY_HIGH",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_VOICEGUIDANCEINTENT_TRUE_VERBOSITY_HIGH"
+    },
+    "AUDIODESCRITIONSINTENT_TRUE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_AUDIODESCRITIONSINTENT_TRUE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_AUDIODESCRITIONSINTENT_TRUE"
+    },
+    "AUDIODESCRITIONSINTENT_FALSE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_AUDIODESCRITIONSINTENT_FALSE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_AUDIODESCRITIONSINTENT_FALSE"
+    },
+    "HIGHCONTRASTINTENT_MODE_ON_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HIGHCONTRASTINTENT_MODE_ON",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_HIGHCONTRASTINTENT_MODE_ON"
+    },
+    "HIGHCONTRASTINTENT_MODE_OFF_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HIGHCONTRASTINTENT_MODE_OFF",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_HIGHCONTRASTINTENT_MODE_OFF"
+    },
+    "SCREENMAGNIFICATIONINTENT_TURNED_ON_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCREENMAGNIFICATIONINTENT_TURNED_ON",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCREENMAGNIFICATIONINTENT_TURNED_ON"
+    },
+    "SCREENMAGNIFICATIONINTENT_TURNED_OFF_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCREENMAGNIFICATIONINTENT_TURNED_OFF",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCREENMAGNIFICATIONINTENT_TURNED_OFF"
+    },
+    "SCREENMAGNIFICATIONINTENT_MAGNIFICATION_SCALE_2.5_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCREENMAGNIFICATIONINTENT_MAGNIFICATION_SCALE_2.5",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCREENMAGNIFICATIONINTENT_MAGNIFICATION_SCALE_2.5"
+    },
+    "FOCUSINTENT_CURSOR_UP_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_FOCUSINTENT_CURSOR_UP",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_FOCUSINTENT_CURSOR_UP"
+    },
+    "FOCUSINTENT_CURSOR_DOWN_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_FOCUSINTENT_CURSOR_DOWN",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_FOCUSINTENT_CURSOR_DOWN"
+    },
+    "FOCUSINTENT_CURSOR_LEFT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_FOCUSINTENT_CURSOR_LEFT",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_FOCUSINTENT_CURSOR_LEFT"
+    },
+    "FOCUSINTENT_CURSOR_RIGHT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_FOCUSINTENT_CURSOR_RIGHT",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_FOCUSINTENT_CURSOR_RIGHT"
+    },
+    "SELECTINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SELECTINTENT",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SELECTINTENT"
+    },
+    "SCROLLINTENT_UP_UNIT_PAGE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLLINTENT_UP_UNIT_PAGE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCROLLINTENT_UP_UNIT_PAGE"
+    },
+    "SCROLLINTENT_DOWN_UNIT_PAGE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLLINTENT_DOWN_UNIT_PAGE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCROLLINTENT_DOWN_UNIT_PAGE"
+    },
+    "SCROLLINTENT_LEFT_UNIT_PAGE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLLINTENT_LEFT_UNIT_PAGE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCROLLINTENT_LEFT_UNIT_PAGE"
+    },
+    "SCROLLINTENT_RIGHT_UNIT_PAGE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLLINTENT_RIGHT_UNIT_PAGE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCROLLINTENT_RIGHT_UNIT_PAGE"
+    },
+    "SCROLLINTENT_UP_UNIT_LINE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLLINTENT_UP_UNIT_LINE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCROLLINTENT_UP_UNIT_LINE"
+    },
+    "SCROLLINTENT_DOWN_UNIT_LINE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLLINTENT_DOWN_UNIT_LINE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCROLLINTENT_DOWN_UNIT_LINE"
+    },
+    "SCROLLINTENT_LEFT_UNIT_LINE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLLINTENT_LEFT_UNIT_LINE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCROLLINTENT_LEFT_UNIT_LINE"
+    },
+    "SCROLLINTENT_RIGHT_UNIT_LINE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLLINTENT_RIGHT_UNIT_LINE",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCROLLINTENT_RIGHT_UNIT_LINE"
+    },
+    "SCROLLINTENT_UP_UNIT_PERCENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLLINTENT_UP_UNIT_PERCENT",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCROLLINTENT_UP_UNIT_PERCENT"
+    },
+    "SCROLLINTENT_DOWN_UNIT_PERCENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLLINTENT_DOWN_UNIT_PERCENT",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCROLLINTENT_DOWN_UNIT_PERCENT"
+    },
+    "SCROLLINTENT_LEFT_UNIT_PERCENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLLINTENT_LEFT_UNIT_PERCENT",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCROLLINTENT_LEFT_UNIT_PERCENT"
+    },
+    "SCROLLINTENT_RIGHT_UNIT_PERCENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SCROLLINTENT_RIGHT_UNIT_PERCENT",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_SCROLLINTENT_RIGHT_UNIT_PERCENT"
+    },
+    "BACKINTENT_FOR_INITIALIZATION_PARAMETERS" :{
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_BACKINTENT",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_BACKINTENT"
+    },
+    "EXITINTENT_FOR_INITIALIZATION_PARAMETERS" :{
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_EXITINTENT",
+        "validationJsonPath": "result.discovery",
+        "expected": "PARAMETERS_INITIALIZATION_EXITINTENT"
     }
 }
