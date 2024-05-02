@@ -360,7 +360,7 @@
         "expected": "error"
     },
 
-    "INVALID_PARAMETERS_FOR_DISCOVERYLAUNCH": {
+    "INVALID_PARAMETERS_FOR_DISCOVERY_LAUNCH": {
         "method": "discovery.launch",
         "validationJsonPath": "result",
         "expected": "INVALID_TYPE_PARAMS",
