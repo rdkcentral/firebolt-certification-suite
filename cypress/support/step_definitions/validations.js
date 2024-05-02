@@ -52,6 +52,7 @@ Given(
           let methodOrEvent = item[validationType];
           methodOrEvent = methodOrEvent.includes('_') ? methodOrEvent.split('_')[1] : methodOrEvent;
           const context = item.context ? item.context : CONSTANTS.NO_CONTEXT;
+          // if the validationObject doesn't have "validationJsonPath" or "expected" field, assign default values.
           const validationJsonPath = item.validationJsonPath
             ? item.validationJsonPath
             : CONSTANTS.RESULT;

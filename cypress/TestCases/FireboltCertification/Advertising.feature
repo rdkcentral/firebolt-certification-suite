@@ -24,7 +24,7 @@ Feature: Advertising
       When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
+      Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
       Then 'Firebolt' platform responds with '<Method_Validation_key>'
       And 'Firebolt' platform triggers event '<Event_Validation_key>'
