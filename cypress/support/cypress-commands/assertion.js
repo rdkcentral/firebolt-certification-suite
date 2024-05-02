@@ -512,7 +512,10 @@ Cypress.Commands.add(
             JSON.stringify(extractEventObject),
             CONSTANTS.PASS,
             CONSTANTS.PASS,
-            CONSTANTS.FAIL + '. Content validation Failed,' + ' Actual: ' + JSON.stringify(eventResponse)
+            CONSTANTS.FAIL +
+              '. Content validation Failed,' +
+              ' Actual: ' +
+              JSON.stringify(eventResponse)
           );
           cy.assertValidationsForEvent(
             extractEventObject,
