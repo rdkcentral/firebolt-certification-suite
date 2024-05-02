@@ -18,71 +18,7 @@
 const CONSTANTS = require('../constants/constants');
 const Validator = require('jsonschema').Validator;
 const validator = new Validator();
-import axios from 'axios';
-const $RefParser = require('@apidevtools/json-schema-ref-parser');
 import UTILS from '../cypress-support/src/utils';
-
-/**
- * @module schemaValidation
- * @function getAndDeferenceOpenRPC
- * @description To get and dereference the OpenRPC json. If version is provided, get version specific openRPC from URL (https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json) and dereference it.
- * Else, get the latest openRPC from URL (https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json) by default and dereference it.
- * Additionally, it loads OpenRPC documents from external URLs specified in the "externalOpenRpcUrls" environment variable and from JSON files in the "constants/openRPC" directory of the config module.
- * Note: Currently, the openRPC supports both core and manage sdk modules
- * @param {String} version- version
- * @example
- * getAndDeferenceOpenRPC('0.17.0')
- * getAndDeferenceOpenRPC()
- * @return {Array} Array of dereferenced OpenRPC json
- **/
-async function getAndDeferenceOpenRPC(version) {
-  const openRpcDocuments = [];
-
-  try {
-    // Load default or version-specific openRPC
-    const url = version
-      ? `https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json`
-      : 'https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json';
-
-    const response = await axios.get(url);
-    const deSchemaList = await $RefParser.dereference(response.data);
-    openRpcDocuments.push(deSchemaList);
-
-    // Load external openRPCs
-    const externalUrls = Cypress.env('externalOpenRpcUrls');
-    if (externalUrls && externalUrls.length > 0) {
-      console.log(externalUrls);
-      for (const url of externalUrls) {
-        const externalResponse = await axios.get(url.trim());
-        const externalDeSchemaList = await $RefParser.dereference(externalResponse.data);
-        openRpcDocuments.push(externalDeSchemaList);
-      }
-    }
-
-    // Load openRPCs from local files
-    // const openRpcDir = '../../../node_modules/configModule/constants/openRPC';
-    // if (fs.existsSync(openRpcDir)) {
-    //   console.log('DIR DIR DIR');
-    //   const files = await fs.readdir(openRpcDir);
-    //   for (const file of files) {
-    //     if (file.endsWith('.json')) {
-    //       const filePath = path.join(openRpcDir, file);
-    //       const fileData = await fs.readFile(filePath, 'utf8');
-    //       const localDeSchemaList = await $RefParser.dereference(JSON.parse(fileData));
-    //       openRpcDocuments.push(localDeSchemaList);
-    //     }
-    //   }
-    // }
-
-    Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, openRpcDocuments);
-    console.log('============================================');
-    console.log(openRpcDocuments);
-    return openRpcDocuments;
-  } catch (error) {
-    console.error('Error fetching data:', error.message);
-    return null;
-  }
-}
 
 /**
  * @module schemaValidation
@@ -219,13 +155,7 @@ Cypress.Commands.add(
  */
 Cypress.Commands.add('getSchema', (methodOrEvent, params, sdkVersion = null, schemaType) => {
   cy.wrap().then(async () => {
-    let schemaList;
-    if (UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, false)) {
-      schemaList = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, false);
-    } else {
-      schemaList = await getAndDeferenceOpenRPC(sdkVersion);
-    }
-
+    const schemaList = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, true);
     let schemaMap = null;
 
     if (schemaType == CONSTANTS.ERROR) {
@@ -248,14 +178,11 @@ Cypress.Commands.add('getSchema', (methodOrEvent, params, sdkVersion = null, sch
 
       for (let docIndex = 0; docIndex < schemaList.length; docIndex++) {
         const doc = schemaList[docIndex];
-        console.log('1st loop');
-
         for (
           let methodIndex = 0;
           doc != undefined && doc.methods && methodIndex < doc.methods.length;
           methodIndex++
         ) {
-          console.log('2nd loop');
           const eventName = doc.methods[methodIndex].name;
           if (eventName.toLowerCase() == methodOrEvent.toLowerCase()) {
             const methodObj = doc.methods[methodIndex];
@@ -269,8 +196,6 @@ Cypress.Commands.add('getSchema', (methodOrEvent, params, sdkVersion = null, sch
         }
       }
 
-      console.log('#########################');
-      console.log(schemaMap);
       return schemaMap;
     }
   });

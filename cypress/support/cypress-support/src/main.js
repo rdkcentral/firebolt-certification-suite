@@ -26,6 +26,7 @@ const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 const UTILS = require('./utils');
 let appTransport;
 const path = require('path');
+const flatted = require('flatted');
 
 export default function (module) {
   const config = new Config(module);
@@ -83,6 +84,11 @@ export default function (module) {
       );
     }
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+
+    // Unflatten the openRPC data
+    const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, false);
+    const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
+    Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
   });
 
   // beforeEach
