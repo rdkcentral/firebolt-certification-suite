@@ -59,7 +59,7 @@ class eventObject {
       this.eventSchemaResult = response.eventSchemaResult;
       this.eventTime = response.eventTime;
     } else {
-      assert(false, 'Event Response should be defined');
+      assert(false, 'Unable to find the event response');
     }
   }
 }
