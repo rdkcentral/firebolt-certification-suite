@@ -86,7 +86,7 @@ export default function (module) {
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
 
     // Unflatten the openRPC data
-    const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, false);
+    const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
     const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
     Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
   });
