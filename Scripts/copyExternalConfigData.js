@@ -33,7 +33,7 @@ const CONFIG_DIR_TESTCASE = path.join(
   'TestCases'
 );
 
-// Config for testData
+// Config for fixtures
 const EXTERNAL_DIR_TESTDATA = path.join(__dirname, '..', 'cypress', 'fixtures', 'external');
 const CONFIG_DIR_TESTDATA = path.join(
   __dirname,
@@ -90,7 +90,7 @@ if (fs.existsSync(CONFIG_DIR_TESTCASE)) {
 if (fs.existsSync(CONFIG_DIR_TESTDATA)) {
   copyFiles(CONFIG_DIR_TESTDATA, EXTERNAL_DIR_TESTDATA);
 } else {
-  console.log('TestData is not available in configModule');
+  console.log('fixtures is not available in configModule');
 }
 
 // Copy config.json file

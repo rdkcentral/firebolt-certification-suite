@@ -435,7 +435,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
     } else {
       assert(
         false,
-        'Before operation object is not in proper array format, recheck the before objects in fixture/external/moduleReqId - getBeforeOperationObject'
+        'Before operation object is not in proper array format, recheck the before objects in fixture/external/objects/moduleReqId - getBeforeOperationObject'
       );
     }
   }
