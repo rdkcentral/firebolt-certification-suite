@@ -58,6 +58,7 @@ const env = {
   communicationMode: 'SDK',
   performanceMetrics: false,
   generateLocalReport: true,
+  loggerLevel: 'debug',
   testSuite: '',
 };
 

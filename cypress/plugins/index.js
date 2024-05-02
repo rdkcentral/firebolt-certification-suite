@@ -36,6 +36,8 @@ const { DateTime } = require('luxon');
 const { generateLocalReport } = require('./localReportGenerator');
 const getSpecPattern = require('../../specHelperConfig.js');
 const logger = require('../support/Logger')('index.js');
+// Import the updateLoggerLevel function
+const updateLoggerLevel = require('../support/Logger').updateLoggerLevel;
 let metaDataArr = [];
 
 module.exports = async (on, config) => {
@@ -45,6 +47,9 @@ module.exports = async (on, config) => {
   if (specPattern !== undefined) {
     config.specPattern = specPattern;
   }
+  const loggerLevel = config.env.loggerLevel;
+  // Update logger level dynamically
+  updateLoggerLevel(loggerLevel);
 
   // Set certification to true for the appropriate test suite
   if (testsuite == CONSTANTS.CERTIFICATION) {

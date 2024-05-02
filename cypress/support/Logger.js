@@ -16,11 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const winston = require('winston');
-const CONSTANTS = require('./constants/constants');
-const setImmediate = require('setimmediate');
 
 const logConfiguration = {
-  transports: [new winston.transports.Console({ level: CONSTANTS.LOGGER_LEVEL })],
+  transports: [new winston.transports.Console({ level: 'debug' })],
   format: winston.format.combine(
     winston.format.timestamp({
       format: 'MMM-DD-YYYY HH:mm:ss',
@@ -35,6 +33,13 @@ const logConfiguration = {
 };
 const logger = winston.createLogger(logConfiguration);
 
+// Export the logger function
 module.exports = function (name) {
   return logger.child({ moduleName: name });
+};
+
+// Export the function to update the logger level
+module.exports.updateLoggerLevel = function (level) {
+  logConfiguration.transports[0].level = level;
+  logger.configure(logConfiguration);
 };
