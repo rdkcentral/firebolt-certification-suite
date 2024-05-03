@@ -355,3 +355,15 @@ Below data apply to Account module, so data will go into cypress/fixtures/module
 ## Manual Cache Deletion for Cypress
 
 If you encounter any caching issues while executing testcases, please refer to this document [Cache_Deletion.md](Docs/Cache_Deletion.md)
+
+## Using Winston Logger for Better Debugging
+
+We have added Winston logger to FCS to make debugging easier. Instead of using console logs,use a different types of loggers (info, debug, error) based on the nature of the message.  Optionally, appending the module name to the logger message would furnish more precise information for debugging purposes.To know more about winston implementation refer [logger.md](cypress/support/logger.md)
+
+Example Usage:
+  ```
+  logger.info('This is an informational message', 'moduleName');
+  logger.debug('This is a debugging message');
+  logger.error('This is an error message');
+
+  ```
