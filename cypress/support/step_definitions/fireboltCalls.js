@@ -188,7 +188,6 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
                 method,
                 param,
                 context,
-                //result.report,
                 updatedResponse,
                 expected,
                 appId
@@ -276,7 +275,6 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
                 event,
                 param,
                 context,
-                //result.report,
                 updatedResponse,
                 appId,
                 expected
