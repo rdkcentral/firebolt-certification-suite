@@ -28,6 +28,7 @@ const path = require('path');
 const logger = require('../../Logger')('main.js');
 const setimmediate = require('setimmediate');
 let appTransport;
+const flatted = require('flatted');
 
 export default function (module) {
   const config = new Config(module);
@@ -84,12 +85,17 @@ export default function (module) {
         'Performance metrics service not active. To use perforance metrics service, pass performanceMetrics environment variable as true'
       );
     }
-    UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+
+    // Unflatten the openRPC data
+    const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
+    const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
+    Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
   });
 
   // beforeEach
   beforeEach(() => {
     cy.testDataHandler(CONSTANTS.BEFORE_OPERATION);
+    UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
   });
 
   /**

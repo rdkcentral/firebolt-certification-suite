@@ -18,8 +18,6 @@
 const CONSTANTS = require('../constants/constants');
 const Validator = require('jsonschema').Validator;
 const validator = new Validator();
-import axios from 'axios';
-const $RefParser = require('@apidevtools/json-schema-ref-parser');
 import UTILS from '../cypress-support/src/utils';
 const logger = require('../Logger')('schemaValidation.js');
 
@@ -189,13 +187,7 @@ Cypress.Commands.add(
  */
 Cypress.Commands.add('getSchema', (methodOrEvent, params, sdkVersion = null, schemaType) => {
   cy.wrap().then(async () => {
-    let schemaList;
-    if (UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, false)) {
-      schemaList = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, false);
-    } else {
-      schemaList = await getAndDeferenceOpenRPC(sdkVersion);
-    }
-
+    const schemaList = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, true);
     let schemaMap = null;
 
     if (schemaType == CONSTANTS.ERROR) {
@@ -216,17 +208,26 @@ Cypress.Commands.add('getSchema', (methodOrEvent, params, sdkVersion = null, sch
         methodOrEvent = removeSetInMethodName(methodOrEvent);
       }
 
-      for (
-        let methodIndex = 0;
-        schemaList != undefined && schemaList.methods && methodIndex < schemaList.methods.length;
-        methodIndex++
-      ) {
-        const eventName = schemaList.methods[methodIndex].name;
-        if (eventName.toLowerCase() == methodOrEvent.toLowerCase()) {
-          const methodObj = schemaList.methods[methodIndex];
-          schemaMap = methodObj.result.schema;
+      for (let docIndex = 0; docIndex < schemaList.length; docIndex++) {
+        const doc = schemaList[docIndex];
+        for (
+          let methodIndex = 0;
+          doc != undefined && doc.methods && methodIndex < doc.methods.length;
+          methodIndex++
+        ) {
+          const eventName = doc.methods[methodIndex].name;
+          if (eventName.toLowerCase() == methodOrEvent.toLowerCase()) {
+            const methodObj = doc.methods[methodIndex];
+            schemaMap = methodObj[schemaType].schema;
+            break;
+          }
+        }
+
+        if (schemaMap) {
+          break;
         }
       }
+
       return schemaMap;
     }
   });
