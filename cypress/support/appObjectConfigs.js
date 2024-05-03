@@ -59,7 +59,7 @@ class eventObject {
       this.eventSchemaResult = response.eventSchemaResult;
       this.eventTime = response.eventTime;
     } else {
-      assert(false, 'Unable to find the event response');
+      assert(false, 'platform does not trigger event');
     }
   }
 }
