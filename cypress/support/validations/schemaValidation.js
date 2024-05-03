@@ -18,40 +18,7 @@
 const CONSTANTS = require('../constants/constants');
 const Validator = require('jsonschema').Validator;
 const validator = new Validator();
-import axios from 'axios';
-const $RefParser = require('@apidevtools/json-schema-ref-parser');
 import UTILS from '../cypress-support/src/utils';
-
-/**
- * @module schemaValidation
- * @function getAndDeferenceOpenRPC
- * @description To get and dereference the OpenRPC json. If version is provided, get version specific openRPC from URL (https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json) and dereference it.
- * Else, get the latest openRPC from URL (https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json) by default and dereference it
- * Note: Currently, the openRPC supports both core and manage sdk modules
- * @param {String} version- version
- * @example
- * getAndDeferenceOpenRPC('0.17.0')
- * getAndDeferenceOpenRPC()
- * @return {Object} Dereferenced OpenRPC json
- **/
-async function getAndDeferenceOpenRPC(version) {
-  try {
-    let url;
-    if (version) {
-      url = `https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json`;
-    } else {
-      // If no version is provided, get the latest
-      url = `https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json`;
-    }
-    const response = await axios.get(url);
-    const deSchemaList = await $RefParser.dereference(response.data);
-    Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, deSchemaList);
-    return deSchemaList;
-  } catch (error) {
-    console.error('Error fetching data:', error.message);
-    return null;
-  }
-}
 
 /**
  * @module schemaValidation
@@ -188,13 +155,7 @@ Cypress.Commands.add(
  */
 Cypress.Commands.add('getSchema', (methodOrEvent, params, sdkVersion = null, schemaType) => {
   cy.wrap().then(async () => {
-    let schemaList;
-    if (UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, false)) {
-      schemaList = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, false);
-    } else {
-      schemaList = await getAndDeferenceOpenRPC(sdkVersion);
-    }
-
+    const schemaList = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, true);
     let schemaMap = null;
 
     if (schemaType == CONSTANTS.ERROR) {
@@ -215,17 +176,26 @@ Cypress.Commands.add('getSchema', (methodOrEvent, params, sdkVersion = null, sch
         methodOrEvent = removeSetInMethodName(methodOrEvent);
       }
 
-      for (
-        let methodIndex = 0;
-        schemaList != undefined && schemaList.methods && methodIndex < schemaList.methods.length;
-        methodIndex++
-      ) {
-        const eventName = schemaList.methods[methodIndex].name;
-        if (eventName.toLowerCase() == methodOrEvent.toLowerCase()) {
-          const methodObj = schemaList.methods[methodIndex];
-          schemaMap = methodObj.result.schema;
+      for (let docIndex = 0; docIndex < schemaList.length; docIndex++) {
+        const doc = schemaList[docIndex];
+        for (
+          let methodIndex = 0;
+          doc != undefined && doc.methods && methodIndex < doc.methods.length;
+          methodIndex++
+        ) {
+          const eventName = doc.methods[methodIndex].name;
+          if (eventName.toLowerCase() == methodOrEvent.toLowerCase()) {
+            const methodObj = doc.methods[methodIndex];
+            schemaMap = methodObj[schemaType].schema;
+            break;
+          }
+        }
+
+        if (schemaMap) {
+          break;
         }
       }
+
       return schemaMap;
     }
   });

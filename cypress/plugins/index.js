@@ -33,8 +33,10 @@ const eventEmitter = new Event();
 const CONSTANTS = require('../support/constants/constants');
 const util = require('util');
 const { DateTime } = require('luxon');
+const flatted = require('flatted');
 const { generateLocalReport } = require('./localReportGenerator');
 const getSpecPattern = require('../../specHelperConfig.js');
+const { getAndDereferenceOpenRpc } = require('./pluginUtils');
 let metaDataArr = [];
 
 module.exports = async (on, config) => {
@@ -52,6 +54,11 @@ module.exports = async (on, config) => {
   // To overwrite the reporter options
   config.reporterOptions.reportDir = `./reports/${config.env.jobId}`;
 
+  // Get and dereference OpenRPC
+  const openRpcs = await getAndDereferenceOpenRpc(config.env.externalOpenRpcUrls);
+  // Set env equal to strigified openRpcs due to circular references
+  config.env.dereferenceOpenRPC = flatted.stringify(openRpcs);
+
   await preprocessor.addCucumberPreprocessorPlugin(on, config);
   on(
     'file:preprocessor',
@@ -66,7 +73,6 @@ module.exports = async (on, config) => {
       ],
     })
   );
-
   config = await common.genericSupport(config);
   if (config == null) {
     throw Error('Unable to use genericSupport file');
@@ -196,7 +202,6 @@ module.exports = async (on, config) => {
   });
 
   on('before:run', async () => {
-    // run some before code
     // Calling reportProcessor default function with instance of event
     const reportProcessor = importReportProcessor();
     reportProcessor.defaultMethod(eventEmitter);
