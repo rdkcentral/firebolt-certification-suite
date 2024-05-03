@@ -59,7 +59,7 @@ class eventObject {
       this.eventSchemaResult = response.eventSchemaResult;
       this.eventTime = response.eventTime;
     } else {
-      assert(false, 'platform does not trigger event');
+      assert(false, 'Platform does not trigger event');
     }
   }
 }
