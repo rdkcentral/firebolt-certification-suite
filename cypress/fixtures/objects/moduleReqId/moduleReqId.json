@@ -682,7 +682,7 @@
                 ]
             }
         },
-        "UserGrants" :{
+        "UserGrants": {
             "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with two options, first option(with fingerprint) is not supported and second option(with pinChallenge and acknowledge) is supported": {
                 "req": [
                     {
@@ -1749,7 +1749,7 @@
           }
         },
         "Lifecycle_Initializing": {
-            "Cannot Close an app from initializing": {
+            "Lifecycle 2.3.2 Cannot Close an app from initializing": {
                 "req": [
                     {
                         "state": {
@@ -1773,7 +1773,7 @@
             }
         },
         "Lifecycle_Terminated": {
-            "Terminate app in foreground State": {
+            "Lifecycle 2.8 Terminate app in foreground State": {
                 "req": [
                     {
                         "state": {
@@ -1792,7 +1792,7 @@
                     }
                 ]
             },
-            "Terminate app in background State": {
+            "Lifecycle 2.8 Terminate app in background State": {
                 "req": [
                     {
                         "state": {
@@ -1811,7 +1811,7 @@
                     }
                 ]
             },
-            "Terminate app in initializing State": {
+            "Lifecycle 2.8 Terminate app in initializing State": {
                 "req": [
                     {
                         "state": {
@@ -1830,7 +1830,7 @@
                     }
                 ]
             },
-            "Terminate app in inactive State": {
+            "Lifecycle 2.8 Terminate app in inactive State": {
                 "req": [
                     {
                         "state": {
@@ -1849,7 +1849,7 @@
                     }
                 ]
             },
-            "Terminate app in suspended State": {
+            "Lifecycle 2.8 Terminate app in suspended State": {
                 "req": [
                     {
                         "state": {
@@ -1868,7 +1868,7 @@
                     }
                 ]
             },
-            "Terminate app in unloading State": {
+            "Lifecycle 2.8 Terminate app in unloading State": {
                 "req": [
                     {
                         "state": {
@@ -1889,7 +1889,7 @@
             }
         },
         "Lifecycle_Unloading": {
-            "No impact of multiple Finished events while unloading": {
+            "Lifecycle 3.4.4 No impact of multiple Finished events while unloading": {
                 "req": [
                     {
                         "state": {
@@ -1911,7 +1911,7 @@
                     }
                 ]
             },
-            "Unloading from Inactive state": {
+            "Lifecycle 2.7.1 Unloading from Inactive state": {
                 "req": [
                     {
                         "state": {
@@ -1933,7 +1933,7 @@
                     }
                 ]
             },
-            "Cannot Close an Unloading App": {
+            "Lifecycle 2.3.2 Cannot Close an Unloading App": {
                 "req": [
                     {
                         "state": {
@@ -1955,7 +1955,7 @@
                     }
                 ]
             },
-            "finished from unloading state": {
+            "Lifecycle 3.4.3 finished from unloading state": {
                 "req": [
                     {
                         "state": {
@@ -1977,7 +1977,7 @@
                     }
                 ]
             },
-            "Should not unload from active state (foreground)": {
+            "Lifecycle 2.7.2 Should not unload from active state (foreground)": {
                 "req": [
                     {
                         "state": {
@@ -1999,7 +1999,7 @@
                     }
                 ]
             },
-            "Cannot Suspend Unloaded app": {
+            "Lifecycle 2.5.1 Cannot Suspend Unloaded app": {
                 "req": [
                     {
                         "state": {
@@ -2021,7 +2021,7 @@
                     }
                 ]
             },
-            "Should not finish from state other than unloading (initializing)": {
+            "Lifecycle 3.4.1 Should not finish from state other than unloading (initializing)": {
                 "req": [
                     {
                         "state": {
@@ -2043,7 +2043,7 @@
                     }
                 ]
             },
-            "Should not finish from state other than unloading (foreground)": {
+            "Lifecycle 3.4.1 Should not finish from state other than unloading (foreground)": {
                 "req": [
                     {
                         "state": {
@@ -2065,7 +2065,7 @@
                     }
                 ]
             },
-            "Should not finish from state other than unloading (background)": {
+            "Lifecycle 3.4.1 Should not finish from state other than unloading (background)": {
                 "req": [
                     {
                         "state": {
@@ -2087,7 +2087,7 @@
                     }
                 ]
             },
-            "Should not finish from state other than unloading (inactive)": {
+            "Lifecycle 3.4.1 Should not finish from state other than unloading (inactive)": {
                 "req": [
                     {
                         "state": {
@@ -2109,7 +2109,7 @@
                     }
                 ]
             },
-            "Should not finish from state other than unloading (suspended)": {
+            "Lifecycle 3.4.1 Should not finish from state other than unloading (suspended)": {
                 "req": [
                     {
                         "state": {
@@ -2131,7 +2131,7 @@
                     }
                 ]
             },
-            "Cannot Close an app that is not loaded": {
+            "Lifecycle 2.3.2 Cannot Close an app that is not loaded": {
                 "req": [
                     {
                         "state": {
@@ -2339,7 +2339,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2358,7 +2361,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2377,7 +2383,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2396,7 +2405,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2415,7 +2427,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2434,7 +2449,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2453,7 +2471,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2472,7 +2493,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2491,7 +2515,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2500,7 +2527,10 @@
                 "req": [
                     {
                         "state": {
-                            "id": ["2.6", "2.6.2"]
+                            "id": [
+                                "2.6",
+                                "2.6.2"
+                            ]
                         }
                     },
                     {
@@ -2510,7 +2540,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2529,7 +2562,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2548,7 +2584,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2567,7 +2606,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2586,7 +2628,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2605,7 +2650,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2624,7 +2672,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]
@@ -2643,7 +2694,10 @@
                     },
                     {
                         "event": {
-                            "id": ["1.6.4", "1.6.3"]
+                            "id": [
+                                "1.6.4",
+                                "1.6.3"
+                            ]
                         }
                     }
                 ]

@@ -35,12 +35,14 @@ Cypress.Commands.add('lifecycleSetup', (appCallSign, state) => {
 
   if (Cypress.env(CONSTANTS.TEST_TYPE) == CONSTANTS.MODULE_NAMES.LIFECYCLE) {
     // create lifecycleAppObject to mimic all the state transition for an app and also go through the same state histories
-    const lifeCycleAppObject = new lifeCycleAppConfig(appId);
-    // set the state to initialising
-    lifeCycleAppObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INITIALIZING);
-    // store the lifecycleAppObject in global object and push it to a global list
-    Cypress.env(appId, lifeCycleAppObject);
-    Cypress.env(CONSTANTS.LIFECYCLE_APP_OBJECT_LIST).push(appId);
+    if (!Cypress.env(CONSTANTS.LIFECYCLE_APP_OBJECT_LIST).includes(appId)) {
+      const lifeCycleAppObject = new lifeCycleAppConfig(appId);
+      // set the state to initialising
+      lifeCycleAppObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INITIALIZING);
+      // store the lifecycleAppObject in global object and push it to a global list
+      Cypress.env(appId, lifeCycleAppObject);
+      Cypress.env(CONSTANTS.LIFECYCLE_APP_OBJECT_LIST).push(appId);
+    }
 
     if (state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
       Cypress.env(CONSTANTS.APP_LIFECYCLE_HISTORY, []);
@@ -201,32 +203,24 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId) => {
       if (lifecycleEventRequirementId && lifecycleEventRequirementId.event) {
         const appHistoryPrevious = UTILS.getEnvVariable(CONSTANTS.APP_LIFECYCLE_HISTORY);
         const appHistoryCount = appHistory.length - appHistoryPrevious.length;
-        let pretext = CONSTANTS.NOTIFICATION_EXISTS_REQ + lifecycleEventRequirementId?.event?.id[0];
+        let pretext;
         // If no lifecycle events expected, validate app history value is also empty
         if (
           UTILS.getEnvVariable(CONSTANTS.IS_SAME_APP_TRANSITION, false) ||
           state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING
         ) {
-          if (lifecycleEventRequirementId?.event?.id[0]) {
-            UTILS.assertWithRequirementLogs(pretext, appHistoryCount == 0, true);
-          } else {
-            UTILS.assertWithRequirementLogs(
-              CONSTANTS.LIFECYCLE_NOTIFICATION_NOT_GENERATED,
-              appHistoryCount == 0,
-              true
-            );
-          }
+          UTILS.assertWithRequirementLogs(
+            CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED + lifecycleEventRequirementId?.event?.id[0],
+            appHistoryCount >= 1,
+            false
+          );
         } else {
           // Else if lifecycle events expected, get app event data and app object event data
-          if (lifecycleEventRequirementId?.event?.id[0]) {
-            UTILS.assertWithRequirementLogs(pretext, appHistoryCount >= 1, true);
-          } else {
-            UTILS.assertWithRequirementLogs(
-              CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED,
-              appHistoryCount >= 1,
-              true
-            );
-          }
+          UTILS.assertWithRequirementLogs(
+            CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED + lifecycleEventRequirementId?.event?.id[0],
+            appHistoryCount >= 1,
+            true
+          );
           for (let eventIndex = 1; eventIndex <= appHistoryCount; eventIndex++) {
             const newAppEvent = appHistory[appHistory.length - eventIndex];
             let appObjectEvent;
@@ -355,6 +349,7 @@ Cypress.Commands.add('setAppState', (state, appId) => {
           if (response) {
             cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
           }
+          appObject.setAppObjectState(state);
           cy.lifecycleSchemaChecks(response, state);
           // TODO: Checks for platform support
         });
@@ -364,6 +359,9 @@ Cypress.Commands.add('setAppState', (state, appId) => {
         currentAppState.state != CONSTANTS.LIFECYCLE_STATES.FOREGROUND
       ) {
         cy.launchApp((appType = CONSTANTS.CERTIFICATION), appId);
+        appObject.setAppObjectState(state);
+      } else {
+        appObject.setAppObjectState(state);
       }
       break;
 
@@ -375,7 +373,9 @@ Cypress.Commands.add('setAppState', (state, appId) => {
         currentAppState.state != CONSTANTS.LIFECYCLE_STATES.INITIALIZING
       ) {
         // If current app state is not background, send message to platform to set app state to background
-        cy.setLifecycleState(state, appId);
+        cy.setLifecycleState(state, appId).then(() => {
+          appObject.setAppObjectState(state);
+        });
       }
       break;
 
@@ -388,6 +388,7 @@ Cypress.Commands.add('setAppState', (state, appId) => {
           if (response) {
             cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
           }
+          appObject.setAppObjectState(state);
           cy.lifecycleSchemaChecks(response, state);
           // TODO: Checks for platform support
         });
@@ -400,7 +401,9 @@ Cypress.Commands.add('setAppState', (state, appId) => {
           cy.setAppState(CONSTANTS.LIFECYCLE_STATES.FOREGROUND, appId);
         }
         // Finally, send message to platform to set app state to inactive
-        cy.setLifecycleState(state, appId);
+        cy.setLifecycleState(state, appId).then(() => {
+          appObject.setAppObjectState(state);
+        });
       }
       break;
 
@@ -416,6 +419,7 @@ Cypress.Commands.add('setAppState', (state, appId) => {
           if (response) {
             cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
           }
+          appObject.setAppObjectState(state);
           cy.lifecycleSchemaChecks(response, state);
           // TODO: Checks for platform support
         });
@@ -435,6 +439,7 @@ Cypress.Commands.add('setAppState', (state, appId) => {
         if (response) {
           cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
         }
+        appObject.setAppObjectState(state);
         cy.lifecycleSchemaChecks(response, state);
         // TODO: Checks for platform support
         // cy.fireBoltApi(LifecycleManagement.unload())
@@ -455,16 +460,13 @@ Cypress.Commands.add('setAppState', (state, appId) => {
           if (response) {
             cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
           }
+          appObject.setAppObjectState(state);
         });
       }
       break;
 
     default:
       break;
-  }
-  if (state != CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
-    // Set app object state to provided state
-    appObject.setAppObjectState(state);
   }
 });
 
