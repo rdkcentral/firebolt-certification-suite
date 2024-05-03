@@ -128,6 +128,7 @@ export default function (module) {
                       });
                     }
                   });
+                  // Add scenario from external moduleReqId to FCS moduleReqId if they are missing in FCS 
                   configModulesData.map((scenario) => {
                     if (!fcsModulesData.includes(scenario)) {
                       fcsData.scenarioNames[module][scenario] =
@@ -136,6 +137,7 @@ export default function (module) {
                   });
                 }
               });
+              // Add modules from external moduleReqId to FCS moduleReqId if they are missing in FCS
               config.map((module) => {
                 if (!FCS.includes(module)) {
                   fcsData.scenarioNames[module] = externalData.scenarioNames[module];
