@@ -83,7 +83,6 @@ export default function (module) {
         'Performance metrics service not active. To use perforance metrics service, pass performanceMetrics environment variable as true'
       );
     }
-    UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
 
     // Unflatten the openRPC data
     const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
@@ -94,6 +93,7 @@ export default function (module) {
   // beforeEach
   beforeEach(() => {
     cy.testDataHandler(CONSTANTS.BEFORE_OPERATION);
+    UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
   });
 
   /**
