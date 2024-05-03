@@ -567,37 +567,49 @@ Cypress.Commands.add('lifecycleSchemaChecks', (response, state) => {
 function validateVisibilityState(state) {
   // Fetching the visibilityState for the states from env.
   const visibilityState = Cypress.env(CONSTANTS.VISIBILITYSTATE);
-  if (visibilityState.hasOwnProperty(state)) {
+
+  if (visibilityState != null && visibilityState.hasOwnProperty(state)) {    
     // Get validation requirements for the current scenario from the moduleReqId JSON
     const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
 
     // Fetching the requirement IDs for the "visiblilityState" from the scenarioRequirement.
     const lifecycleStateRequirementId = scenarioRequirement.find((req) =>
-      req.hasOwnProperty('visible_check')
+      req.hasOwnProperty(CONSTANTS.VISIBLE_CHECK)
     );
 
+    // checking for visibilityState value from env not be undefined or null.
     if (
       Cypress.env(CONSTANTS.VISIBILITYSTATE) != undefined ||
       Cypress.env(CONSTANTS.VISIBILITYSTATE) != null
     ) {
+      // Creating intent message with visibilityState task to send it to 3rd party app.
       const intentMessage = UTILS.createIntentMessage(CONSTANTS.TASK.VISIBILITYSTATE, {
         params: CONSTANTS.VISIBILITYSTATE,
       });
+      // Topic to publish message
       const requestTopic = UTILS.getTopic(null);
+      // Topic to subscribe message
       const responseTopic = UTILS.getTopic(null, CONSTANTS.SUBSCRIBE);
       // Sending message to third party app
       cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
         result = JSON.parse(result);
+
+        // checking for response, if no response, fail the test
         if (result.report === CONSTANTS.RESPONSE_NOT_FOUND) {
           cy.log(CONSTANTS.NO_MATCHED_RESPONSE).then(() => {
             assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
           });
-        } else if (result.error) {
+        }
+        // checking for response, if error, fail the test with error message
+        else if (result.error) {
           assert(false, result.error.message);
         }
+
         const pretext =
           CONSTANTS.VISIBILITYSTATE_VALIDATION_REQ + lifecycleStateRequirementId.visible_check.id;
+        // checking if actual value is different from the default value
         if (visibilityState[state] != result.report) {
+          // log to print a reason for failure and how to fix it
           cy.log(
             pretext +
               ': Expected : ' +

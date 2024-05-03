@@ -353,7 +353,6 @@ module.exports = {
     SETAPIRESPONSE: 'setApiResponse',
     CLEAREVENTHANDLER: 'clearEventHandler',
     PERFORMANCETESTHANDLER: 'performanceTestHandler',
-    VISIBILITYSTATE: 'visibilityState',
   },
   TEST_HANDLER_DATA_UNDEFINED: 'Expected parsed data from fixtures to be defined',
   TEST_DATA_HANDLER_REQUESTTYPE: ['Params', 'Context', 'Content', 'beforeOperation'],
@@ -410,6 +409,7 @@ module.exports = {
     '. If the visibility state response is as per the platform, add the expected value in configModule. More details is present in footer',
   NO_EVENT_TRIGGERED: 'Expecting no event to be triggered from platform',
   VISIBILITYSTATE: 'visibilityState',
+  VISIBLE_CHECK: 'visible_check',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
