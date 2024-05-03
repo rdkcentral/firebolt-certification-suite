@@ -20,7 +20,6 @@ const path = require('path');
 
 const defaultModulePath = path.join(__dirname, '../defaultModule');
 const configModulePath = path.join(__dirname, '../node_modules', 'configModule');
-const logger = require('../cypress/support/Logger')('checkDefaultConfig.js');
 
 const ensureConfigModule = async () => {
   try {
@@ -29,7 +28,7 @@ const ensureConfigModule = async () => {
     if (!existsConfigModule) {
       // If the whole configModule doesn't exist, copy the defaultModule.
       await fs.copy(defaultModulePath, configModulePath);
-      logger.info('Default configModule created.');
+      console.log('Default configModule created.');
       return;
     }
 
@@ -44,11 +43,11 @@ const ensureConfigModule = async () => {
       if (!existsSubDir) {
         // Copy missing subdirectory from defaultModule.
         await fs.copy(defaultSubDirPath, targetSubDirPath);
-        logger.info(`Default subdirectory ${dir} created.`);
+        console.log(`Default subdirectory ${dir} created.`);
       }
     }
   } catch (err) {
-    logger.info('Error ensuring config module:', err);
+    console.log('Error ensuring config module:', err);
     process.exit(1);
   }
 };
