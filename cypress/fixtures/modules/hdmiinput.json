@@ -24,5 +24,46 @@
     "EDIDVERSION_UNKNOWN_HDMI1": {
         "port": "HDMI1",
         "value": "unknown"
-    }
+    },
+    "AUTOLOWLATENCYMODECAPABLE_TRUE_HDMI1": {
+        "port": "HDMI1",
+        "value": true
+    },
+    "AUTOLOWLATENCYMODECAPABLE_FALSE_HDMI1": {
+        "port": "HDMI1",
+        "value": false
+    },
+    "PORTVALUE_HDMI1": {
+        "port": "HDMI1"
+    },
+    "AUTOLOWLATENCYMODECAPABLE_INTEGER_HDMI1": {
+        "port": "HDMI1",
+        "enabled": 123
+    },
+    "AUTOLOWLATENCYMODECAPABLE_STRING_HDMI1": {
+        "port": "HDMI1",
+        "enabled": "test"
+    },
+    "AUTOLOWLATENCYMODECAPABLE_TRUE_WITHOUT_PORT": {
+        "enabled": "true"
+    },
+    "EDIDVERSION_INTEGER": {
+        "port": "HDMI1",
+        "edidVersion": 123
+    },
+    "EDIDVERSION_BOOLEAN": {
+        "port": "HDMI1",
+        "edidVersion": true
+    },
+    "EDIDVERSION_1_4_WITHOUT_PORT": {
+        "edidVersion": "1.4"
+    },
+    "PORT_INTEGER": {
+        "portId": 123
+    },
+    "PORT_BOOLEAN": {
+        "portId": true
+    },
+    "EDIDVERSION_1_4": "1.4",
+    "EDIDVERSION_2_0": "2.0"
 }
