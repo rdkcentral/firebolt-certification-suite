@@ -21,7 +21,6 @@ const path = require('path');
 const defaultModulePath = path.join(__dirname, '../defaultModule');
 const configModulePath = path.join(__dirname, '../node_modules', 'configModule');
 
-
 const ensureConfigModule = async () => {
   try {
     const existsConfigModule = await fs.pathExists(configModulePath);
