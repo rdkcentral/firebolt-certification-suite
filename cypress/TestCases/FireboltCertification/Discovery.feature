@@ -162,7 +162,7 @@ Feature: Discovery
       And I clear 'discovery onPolicyChanged event' listeners
       And 1st party app invokes the 'Firebolt' API to 'set allowPersonalization to true'
       Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowPersonalization'
-      And 'Firebolt' platform responds with 'null for discovery onPolicyChanged event'
+      And 'Firebolt' platform does not trigger event for 'onDiscoveryPolicyChanged'
 
 
 

@@ -34,11 +34,12 @@ import UTILS from '../cypress-support/src/utils';
  * Given 'Firebolt' platform triggers event 'Validate device id'
  * Given 'Firebolt' platform triggers to '1st party app' event 'Validate device id'
  * Given 'Firebolt' platform triggers to 'test.test.test' event 'Validate device id'
+ * Given 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
  */
 
 Given(
-  /'(.+)' platform (responds|triggers)(?: to '(.+)')? (with|event) '(.+)'$/,
-  async (sdk, eventcall, appId, event, key) => {
+  /'(.+)' platform (responds|triggers|does not trigger)(?: to '(.+)')? (with|event)(?: for)? '(.+)'$/,
+  async (sdk, eventExpected, appId, event, key) => {
     if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
       key = key.replaceAll(' ', '_').toUpperCase();
 
@@ -114,7 +115,8 @@ Given(
                               updatedResponse,
                               methodOrEventObject,
                               eventName,
-                              expected
+                              expected,
+                              eventExpected === 'triggers' ? true : false
                             );
                           }
                         );
@@ -132,7 +134,13 @@ Given(
                         (response) => {
                           response = JSON.parse(response);
                           response = response.report;
-                          cy.saveEventResponse(response, methodOrEventObject, eventName, expected);
+                          cy.saveEventResponse(
+                            response,
+                            methodOrEventObject,
+                            eventName,
+                            expected,
+                            eventExpected === 'triggers' ? true : false
+                          );
                         }
                       );
                     }

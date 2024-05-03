@@ -276,3 +276,12 @@ request - `cy.destroyGlobalObjects(['lifecycleAppObjectList']);
 
 ### Examples:
 request - `cy.checkForTags(["TAG1","TAG2"]);
+
+## FireLog
+
+### Purpose: Provides assertion methods with logging using Cypress's cy.log(). It wraps Cypress's assertion methods, allowing logging of messages for each assertion.
+
+### Examples:
+`fireLog.isTrue(isTrueValue, "True message");`
+`fireLog.isFalse(isFalseValue, "False message");`
+`fireLog.deepEqual(actual, expected, "deepEqual message");`

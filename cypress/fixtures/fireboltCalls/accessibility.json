@@ -941,7 +941,7 @@
         "validationJsonPath": "result.styles.windowOpacity",
         "expected": "INTEGER0"
     },
-    "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_NULL": {
+    "ONCLOSEDCAPTIONSSETTINGSCHANGED": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse",
         "expected": "NULL",
