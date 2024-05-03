@@ -11,7 +11,7 @@
     "copyReportTemplate": "node ./Scripts/copyReportTemplate.js",
     "copyExternalConfigData": "node ./Scripts/copyExternalConfigData.js",
     "applyDependencyOverrides": "node ./Scripts/applyDependencyOverrides.js",
-    "setup": "npm run copyExternalConfigData && npm run applyDependencyOverrides && npm run copyReportTemplate",
+    "setup": "npm run copyExternalConfigData && npm run applyDependencyOverrides && npm run copyCukeReportTemplate",
     "postinstall": "npm run setup",
     "format": "prettier --write \"**/*.js\"",
     "lint": "eslint .",
