@@ -66,7 +66,7 @@ async function getAndDeferenceOpenRPC(version) {
  */
 Cypress.Commands.add(
   'updateResponseForFCS',
-  (methodOrEvent, params, response, sdkVersion = null) => {
+  (methodOrEvent, params, response, sdkVersion) => {
     if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
       let formattedResponse = {};
       let result;
@@ -161,7 +161,7 @@ Cypress.Commands.add(
   */
 Cypress.Commands.add(
   'validateSchema',
-  (response, methodOrEvent, params, sdkVersion = null, schemaType) => {
+  (response, methodOrEvent, params, sdkVersion, schemaType) => {
     cy.getSchema(methodOrEvent, params, sdkVersion, schemaType).then((schemaMap) => {
       if (schemaMap) {
         return validator.validate(response, schemaMap);
@@ -186,7 +186,7 @@ Cypress.Commands.add(
  * getSchema("accessibility.closedCaptionsSettings", {}, "0.17.0", "result")
  * getSchema("accessibility.onClosedCaptionsSettingsChanged", {}, null, "result")
  */
-Cypress.Commands.add('getSchema', (methodOrEvent, params, sdkVersion = null, schemaType) => {
+Cypress.Commands.add('getSchema', (methodOrEvent, params, sdkVersion, schemaType) => {
   cy.wrap().then(async () => {
     let schemaList;
     if (UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, false)) {

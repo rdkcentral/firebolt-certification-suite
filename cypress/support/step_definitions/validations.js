@@ -109,7 +109,7 @@ Given(
                       };
 
                       cy.sendMessagetoPlatforms(requestMap).then((result) => {
-                        cy.updateResponseForFCS(methodOrEvent, null, result).then(
+                        cy.updateResponseForFCS(methodOrEvent, null, result, Cypress.env(CONSTANTS.SDK_VERSION)).then(
                           (updatedResponse) => {
                             cy.saveEventResponse(
                               updatedResponse,
