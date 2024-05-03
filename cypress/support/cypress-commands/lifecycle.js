@@ -568,7 +568,7 @@ function validateVisibilityState(state) {
   // Fetching the visibilityState for the states from env.
   const visibilityState = Cypress.env(CONSTANTS.VISIBILITYSTATE);
 
-  if (visibilityState != null && visibilityState.hasOwnProperty(state)) {    
+  if (visibilityState != null && visibilityState.hasOwnProperty(state)) {
     // Get validation requirements for the current scenario from the moduleReqId JSON
     const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
 
