@@ -16,12 +16,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const fs = require('fs');
+const testDataProcessor = require('./testDataProcessor');
 
 // If "genericSupport" is set to a falsy value (false, null, etc), take no further action. Simply "return"
 function genericSupport(config) {
   // Read additional config.
   try {
     const data = JSON.parse(fs.readFileSync('supportConfig.json'));
+    const testDataEnv = testDataProcessor.testDataProcessor();
 
     // Get the arguments passed from command line during run time.
     const commandLineArgs = Object.entries(config.resolved.env)
