@@ -358,7 +358,7 @@ If you encounter any caching issues while executing testcases, please refer to t
 
 ## Using Winston Logger for Better Debugging
 
-We have added Winston logger to FCS to make debugging easier. Instead of using console logs, use a different types of loggers (info, debug, error) based on the nature of the message.  Optionally, appending the module name to the logger message would furnish more precise information for debugging purposes. To know more about winston implementation refer [logger.md](cypress/support/logger.md)
+We have added Winston logger to FCS to make debugging easier. Instead of using console logs, use different types of loggers (info, debug, error) based on the nature of the message.  Optionally, appending the module name to the logger message would furnish more precise information for debugging purposes. To know more about winston implementation refer [logger.md](cypress/support/logger.md)
 
 Example Usage:
   ```
