@@ -24,5 +24,104 @@
     "EDIDVERSION_UNKNOWN_HDMI1": {
         "port": "HDMI1",
         "value": "unknown"
-    }
+    },
+    "CONNECTED_TRUE": {
+        "port": "HDMI1",
+        "connected": true,
+        "signal": "stable",
+        "arcCapable": true,
+        "arcConnected": true,
+        "edidVersion": "2.0",
+        "autoLowLatencyModeCapable": true,
+        "autoLowLatencyModeSignalled": true
+    },
+    "CONNECTED_FALSE": {
+        "port": "HDMI1",
+        "connected": false,
+        "signal": "stable",
+        "arcCapable": true,
+        "arcConnected": true,
+        "edidVersion": "2.0",
+        "autoLowLatencyModeCapable": true,
+        "autoLowLatencyModeSignalled": true
+    },
+    "SIGNAL_UNKNOWN": {
+        "port": "HDMI1",
+        "connected": false,
+        "signal": "unknown",
+        "arcCapable": true,
+        "arcConnected": true,
+        "edidVersion": "2.0",
+        "autoLowLatencyModeCapable": true,
+        "autoLowLatencyModeSignalled": true
+    },
+    "SIGNAL_NONE": {
+        "port": "HDMI1",
+        "connected": false,
+        "signal": "none",
+        "arcCapable": true,
+        "arcConnected": true,
+        "edidVersion": "2.0",
+        "autoLowLatencyModeCapable": true,
+        "autoLowLatencyModeSignalled": true
+    },
+    "SIGNAL_STABLE": {
+        "port": "HDMI1",
+        "connected": false,
+        "signal": "stable",
+        "arcCapable": true,
+        "arcConnected": true,
+        "edidVersion": "2.0",
+        "autoLowLatencyModeCapable": true,
+        "autoLowLatencyModeSignalled": true
+    },
+    "SIGNAL_UNSTABLE": {
+        "port": "HDMI1",
+        "connected": false,
+        "signal": "unstable",
+        "arcCapable": true,
+        "arcConnected": true,
+        "edidVersion": "2.0",
+        "autoLowLatencyModeCapable": true,
+        "autoLowLatencyModeSignalled": true
+    },
+    "SIGNAL_UNSUPPORTED": {
+        "port": "HDMI1",
+        "connected": false,
+        "signal": "unsupported",
+        "arcCapable": true,
+        "arcConnected": true,
+        "edidVersion": "2.0",
+        "autoLowLatencyModeCapable": true,
+        "autoLowLatencyModeSignalled": true
+    },
+    "AUTOLOWLATENCYMODESIGNALLED_TRUE": {
+        "port": "HDMI1",
+        "connected": false,
+        "signal": "unsupported",
+        "arcCapable": true,
+        "arcConnected": true,
+        "edidVersion": "2.0",
+        "autoLowLatencyModeCapable": true,
+        "autoLowLatencyModeSignalled": true
+    },
+    "AUTOLOWLATENCYMODESIGNALLED_FALSE": {
+        "port": "HDMI1",
+        "connected": false,
+        "signal": "unsupported",
+        "arcCapable": true,
+        "arcConnected": true,
+        "edidVersion": "2.0",
+        "autoLowLatencyModeCapable": true,
+        "autoLowLatencyModeSignalled": false
+    },
+    "HDMIINPUT_ONCONNECTIONCHANGED_TRUE" : {"port": "HDMI1","connected": true},
+    "HDMIINPUT_ONCONNECTIONCHANGED_FALSE" : {"port": "HDMI1","connected": false},
+    "HDMIINPUT_ONSIGNALCHANGED_UNKNOWN": {"port": "HDMI1","signal": "unknown"},
+    "HDMIINPUT_ONSIGNALCHANGED_NONE" : {"port": "HDMI1","signal": "none"}, 
+    "HDMIINPUT_ONSIGNALCHANGED_STABLE" : {"port": "HDMI1","signal": "stable"},
+    "HDMIINPUT_ONSIGNALCHANGED_UNSTABLE": {"port": "HDMI1","signal": "unstable"},
+    "HDMIINPUT_ONSIGNALCHANGED_UNSUPPORTED": {"port": "HDMI1","signal": "unsupported"},
+    "HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_TRUE" : {"port": "HDMI1","autoLowLatencyModeSignalled": true},
+    "HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_FALSE" : {"port": "HDMI1","autoLowLatencyModeSignalled": false}
 }
