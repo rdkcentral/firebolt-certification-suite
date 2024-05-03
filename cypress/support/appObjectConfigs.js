@@ -51,7 +51,7 @@ class eventObject {
   // Function to update the event response in event object.
   setEventResponseData(response) {
     if (
-      (response.eventListenerId && response.eventSchemaResult) ||
+      (response.eventListenerId && response.eventSchemaResult && response.eventResponse != null) ||
       response.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
     ) {
       this.eventResponse = response.eventResponse;

@@ -51,7 +51,7 @@ class regExValidations {
       cy.log(
         `RegEx Validation : Expected ${method} response ${
           extractedResponse ? extractedResponse : response
-        } to be in a valid regex format`,
+        } to be in ${expression} regex format`,
         'regexResultValidator'
       ).then(() => {
         assert.equal(true, validationResult, 'RegEx Validation:');

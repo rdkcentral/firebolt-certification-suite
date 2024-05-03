@@ -279,7 +279,7 @@
         "method": "manage_device.setName",
         "params": "Kitchen"
     },
-    "NULL_FOR_DEVICE_ONNAMECHANGED_EVENT": {
+    "ONDEVICENAMECHANGED": {
         "event": "device.onNameChanged",
         "validationJsonPath": "eventResponse",
         "expected": "NULL",
