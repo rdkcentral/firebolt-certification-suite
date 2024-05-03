@@ -64,23 +64,16 @@ async function getAndDeferenceOpenRPC(version) {
  * @example
  * cy.updateResponseForFCS(method, params, response, sdkVersion = null)
  */
-Cypress.Commands.add(
-  'updateResponseForFCS',
-  (methodOrEvent, params, response, sdkVersion) => {
-    if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
-      let formattedResponse = {};
-      let result;
-      const responseType = response.hasOwnProperty(CONSTANTS.ERROR)
-        ? CONSTANTS.ERROR
-        : CONSTANTS.RESULT;
+Cypress.Commands.add('updateResponseForFCS', (methodOrEvent, params, response, sdkVersion) => {
+  if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
+    let formattedResponse = {};
+    let result;
+    const responseType = response.hasOwnProperty(CONSTANTS.ERROR)
+      ? CONSTANTS.ERROR
+      : CONSTANTS.RESULT;
 
-      cy.validateSchema(
-        response[responseType],
-        methodOrEvent,
-        params,
-        sdkVersion,
-        responseType
-      ).then((schemaValidation) => {
+    cy.validateSchema(response[responseType], methodOrEvent, params, sdkVersion, responseType).then(
+      (schemaValidation) => {
         if (methodOrEvent.includes('.on')) {
           let formattedSchemaValidationResult;
 
@@ -139,12 +132,12 @@ Cypress.Commands.add(
         }
 
         return formattedResponse;
-      });
-    } else {
-      cy.log(`Response does not have a valid result or error field - ${response}`);
-    }
+      }
+    );
+  } else {
+    cy.log(`Response does not have a valid result or error field - ${response}`);
   }
-);
+});
 
 /**
   * @module schemaValidation
