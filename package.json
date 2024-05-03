@@ -8,7 +8,7 @@
     "cy:run": "node ./Scripts/checkDefaultConfig.js && yarn cache clean && bash ./Scripts/run.sh run",
     "softRefresh": "yarn install && yarn upgrade",
     "hardRefresh": "rm -rf node_modules && yarn cache clean && yarn softRefresh",
-    "copyReportTemplate": "node ./Scripts/copyReportTemplate.js",
+    "copyCukeReportTemplate": "node ./Scripts/copyCukeReportTemplate.js",
     "copyExternalConfigData": "node ./Scripts/copyExternalConfigData.js",
     "applyDependencyOverrides": "node ./Scripts/applyDependencyOverrides.js",
     "setup": "npm run copyExternalConfigData && npm run applyDependencyOverrides && npm run copyCukeReportTemplate",
