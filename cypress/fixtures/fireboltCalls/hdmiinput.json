@@ -348,5 +348,95 @@
     "GET_HDMIINPUT_PORT_WITH_ERROR":{
         "method": "manage_hdmiinput.port",
         "expected": "error"
+    },
+    "HDMIINPUT_ONCONNECTIONCHANGED":{
+        "method": "manage_hdmiinput.onConnectionChanged"
+    },
+    "HDMIINPUT_ONSIGNALCHANGED":{
+        "method": "manage_hdmiinput.onSignalChanged"
+    },
+    "HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED":{
+        "method": "manage_hdmiinput.onAutoLowLatencyModeSignalChanged"
+    },
+    "TRUE_FOR_HDMIINPUT_PORT_CONNECTED":{
+        "method": "manage_hdmiinput.port",
+		"params": "HDMIINPUT_CONNECTED_TRUE"
+    },
+    "FALSE_FOR_HDMIINPUT_PORT_CONNECTED":{
+        "method": "manage_hdmiinput.port",
+		"params": "HDMIINPUT_CONNECTED_TRUE"
+    },
+    "UNKNOWN_FOR_HDMIINPUT_PORT_SIGNAL":{
+        "method": "manage_hdmiinput.port",
+		"params": "HDMIINPUT_SIGNAL_UNKNOWN"
+    },
+    "NONE_FOR_HDMIINPUT_PORT_SIGNAL":{
+        "method": "manage_hdmiinput.port",
+		"params": "HDMIINPUT_SIGNAL_NONE"
+    },
+    "STABLE_FOR_HDMIINPUT_PORT_SIGNAL":{
+        "method": "manage_hdmiinput.port",
+		"params": "HDMIINPUT_SIGNAL_STABLE"
+    },
+    "UNSTABLE_FOR_HDMIINPUT_PORT_SIGNAL":{
+        "method": "manage_hdmiinput.port",
+		"params": "HDMIINPUT_SIGNAL_UNSTABLE"
+    },
+    "UNSUPPORTED_FOR_HDMIINPUT_PORT_SIGNAL":{
+        "method": "manage_hdmiinput.port",
+		"params": "HDMIINPUT_SIGNAL_UNSUPPORTED"
+    },
+    "TRUE_FOR_HDMIINPUT_PORT_AUTOLOWLATENCYMODESIGNALLED":{
+        "method": "manage_hdmiinput.port",
+		"params": "HDMIINPUT_AUTOLOWLATENCYMODESIGNALLED_TRUE"
+    },
+    "FALSE_FOR_HDMIINPUT_PORT_AUTOLOWLATENCYMODESIGNALLED":{
+        "method": "manage_hdmiinput.port",
+		"params": "HDMIINPUT_AUTOLOWLATENCYMODESIGNALLED_FALSE"
+    },
+    "TRUE_FOR_HDMIINPUT_ONCONNECTIONCHANGED_EVENT":{
+        "event": "manage_hdmiinput.onConnectionChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_ONCONNECTIONCHANGED_TRUE"
+    },
+    "FALSE_FOR_HDMIINPUT_ONCONNECTIONCHANGED_EVENT":{
+        "event": "manage_hdmiinput.onConnectionChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_ONCONNECTIONCHANGED_FALSE"
+    },
+    "UNKNOWN_FOR_HDMIINPUT_ONSIGNALCHANGED_EVENT":{
+        "event": "manage_hdmiinput.onSignalChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_ONSIGNALCHANGED_UNKNOWN"
+    },
+    "NONE_FOR_HDMIINPUT_ONSIGNALCHANGED_EVENT":{
+        "event": "manage_hdmiinput.onSignalChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_ONSIGNALCHANGED_NONE"
+    },
+    "STABLE_FOR_HDMIINPUT_ONSIGNALCHANGED_EVENT":{
+        "event": "manage_hdmiinput.onSignalChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_ONSIGNALCHANGED_STABLE"
+    },
+    "UNSTABLE_FOR_HDMIINPUT_ONSIGNALCHANGED_EVENT":{
+        "event": "manage_hdmiinput.onSignalChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_ONSIGNALCHANGED_UNSTABLE"
+    },
+    "UNSUPPORTED_FOR_HDMIINPUT_ONCONNECTIONCHANGED_EVENT":{
+        "event": "manage_hdmiinput.onSignalChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_ONSIGNALCHANGED_UNSUPPORTED"
+    },
+    "TRUE_FOR_HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_EVENT":{
+        "event": "manage_hdmiinput.onAutoLowLatencyModeSignalChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_TRUE"
+    },
+    "FALSE_FOR_HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_EVENT":{
+        "event": "manage_hdmiinput.onAutoLowLatencyModeSignalChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_FALSE"
     }
 }
