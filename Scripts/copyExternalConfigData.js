@@ -17,8 +17,9 @@
  */
 const fs = require('fs');
 const path = require('path');
+const logger = require('../cypress/support/Logger')('copyExternalConfigData.js');
 
-console.log(
+logger.info(
   'Copying Config TestData into fixtures/external and Testcases into TestCases/Distributor'
 );
 
@@ -69,21 +70,21 @@ function copyFiles(configDir, externalDir) {
 if (fs.existsSync(CONFIG_DIR_TESTCASE)) {
   copyFiles(CONFIG_DIR_TESTCASE, EXTERNAL_DIR_TESTCASE);
 } else {
-  console.log('TestCases data is not available in configModule');
+  logger.info('TestCases data is not available in configModule');
 }
 
 // Copy testData files
 if (fs.existsSync(CONFIG_DIR_TESTDATA)) {
   copyFiles(CONFIG_DIR_TESTDATA, EXTERNAL_DIR_TESTDATA);
 } else {
-  console.log('TestData is not available in configModule');
+  logger.info('TestData is not available in configModule');
 }
 
 // Copy config.json file
 if (fs.existsSync(SOURCE_CONFIG_FILE)) {
   fs.copyFileSync(SOURCE_CONFIG_FILE, DEST_CONFIG_FILE);
-  console.log(`Copied config json from ${SOURCE_CONFIG_FILE} to ${DEST_CONFIG_FILE}`);
+  logger.info(`Copied config json from ${SOURCE_CONFIG_FILE} to ${DEST_CONFIG_FILE}`);
 } else {
   // Source file does not exist, do nothing
-  console.log(`${SOURCE_CONFIG_FILE} config file doesn't exist`);
+  logger.info(`${SOURCE_CONFIG_FILE} config file doesn't exist`);
 }
