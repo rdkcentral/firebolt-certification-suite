@@ -89,5 +89,37 @@
                 ]
             }
         ]
+    },
+    "CAPABILITIES_REQUEST_USE": {
+        "data":[
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "description": "Validation of capabilities.request to check the capability requested",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.request",
+                                "validationPath": "result[0].use.granted",
+                                "expected": null
+                            },
+                            {
+                                "method": "capabilities.request",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": null,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.request",
+                                "validationPath": "result[0].provide.granted",
+                                "expected": null,
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 }
