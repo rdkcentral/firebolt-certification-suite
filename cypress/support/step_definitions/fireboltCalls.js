@@ -171,7 +171,8 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
           cy.updateResponseForFCS(method, params, result, Cypress.env(CONSTANTS.SDK_VERSION)).then(
             (updatedResponse) => {
               // Create a deep copy to avoid reference mutation
-              const dataToBeCensored = _.cloneDeep(result.report.apiResponse);
+              let responseType = result.error !== null ? 'error' : 'result';
+              const dataToBeCensored = _.cloneDeep(result[responseType]);
 
               // Call the 'censorData' command to hide sensitive data
               cy.censorData(method, dataToBeCensored).then((maskedResult) => {
@@ -262,7 +263,14 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
             assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
           }
           result = JSON.parse(result);
-          cy.log(`Response from ${appId}: ${JSON.stringify(result.report.eventListenerResponse)}`);
+          cy.log(`Response from ${appId}: ${JSON.stringify(result.result)}`);
+          if (result?.result?.hasOwnProperty('listening')) {
+            let eventResponse = {
+              eventListenerId: result.result.event + '-' + response.id,
+              eventListenerResponse: result.result,
+            };
+            result.result = eventResponse;
+          }
           cy.updateResponseForFCS(event, params, result, Cypress.env(CONSTANTS.SDK_VERSION)).then(
             (updatedResponse) => {
               // If event and params are not supported setting isScenarioExempted as true for further validation.

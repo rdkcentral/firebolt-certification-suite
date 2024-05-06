@@ -109,6 +109,9 @@ Given(
                       };
 
                       cy.sendMessagetoPlatforms(requestMap).then((result) => {
+                        if (result?.result?.hasOwnProperty('eventResponse')) {
+                          result.result = result.result.eventResponse;
+                        }
                         cy.updateResponseForFCS(
                           methodOrEvent,
                           null,
@@ -136,14 +139,23 @@ Given(
                       cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then(
                         (response) => {
                           response = JSON.parse(response);
-                          response = response.report;
-                          cy.saveEventResponse(
+                          if (response?.result?.hasOwnProperty('eventResponse')) {
+                            response.result = response.result.eventResponse;
+                          }
+                          cy.updateResponseForFCS(
+                            methodOrEvent,
+                            null,
                             response,
-                            methodOrEventObject,
-                            eventName,
-                            expected,
-                            eventExpected === 'triggers' ? true : false
-                          );
+                            Cypress.env(CONSTANTS.SDK_VERSION)
+                          ).then((updatedResponse) => {
+                            cy.saveEventResponse(
+                              updatedResponse,
+                              methodOrEventObject,
+                              eventName,
+                              expected,
+                              eventExpected === 'triggers' ? true : false
+                            );
+                          });
                         }
                       );
                     }

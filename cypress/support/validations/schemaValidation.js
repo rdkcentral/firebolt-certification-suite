@@ -128,7 +128,7 @@ Cypress.Commands.add('updateResponseForFCS', (methodOrEvent, params, response, s
             formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
           }
 
-          formattedResponse.apiResponse = result;
+          formattedResponse.response = result;
         }
 
         return formattedResponse;

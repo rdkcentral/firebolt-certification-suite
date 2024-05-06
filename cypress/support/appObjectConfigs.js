@@ -24,7 +24,7 @@ class apiObject {
     this.params = params;
     this.context = context;
     this.expected = expected;
-    response.apiResponse ? (this.response = response.apiResponse) : (this.response = response);
+    this.response = response;
     this.apiSchemaResult = {
       validationStatus: response.schemaValidationStatus,
       validationResponse: response.schemaValidationResponse,
