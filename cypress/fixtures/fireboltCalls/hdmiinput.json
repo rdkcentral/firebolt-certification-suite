@@ -170,33 +170,33 @@
         "expected": "FALSE"
     },
     "TRUE_FOR_ONAUTOLOWLATENCYMODECAPABLECHANGED":{
-        "method": "hdmiinput.autoLowLatencyModeCapable",
-        "validationJsonPath": "result",
+        "event": "hdmiinput.onAutoLowLatencyModeCapableChanged",
+        "validationJsonPath": "eventResponse",
         "expected": "TRUE"
     },
     "FALSE_FOR_ONAUTOLOWLATENCYMODECAPABLECHANGED":{
-        "method": "hdmiinput.autoLowLatencyModeCapable",
-        "validationJsonPath": "result",
+        "event": "hdmiinput.onAutoLowLatencyModeCapableChanged",
+        "validationJsonPath": "eventResponse",
         "expected": "FALSE"
     },
     "1.4_FOR_ONEDIDVERSIONCHANGED":{
-        "method": "hdmiinput.edidVersion",
-        "validationJsonPath": "result",
+        "event": "hdmiinput.onEdidVersionChanged",
+        "validationJsonPath": "eventResponse",
         "expected": "HDMIINPUT_EDIDVERSION_1_4"
     },
     "2.0_FOR_ONEDIDVERSIONCHANGED":{
-        "method": "hdmiinput.edidVersion",
-        "validationJsonPath": "result",
+        "event": "hdmiinput.onEdidVersionChanged",
+        "validationJsonPath": "eventResponse",
         "expected": "HDMIINPUT_EDIDVERSION_2_0"
     },
     "TRUE_FOR_ONLOWLATENCYMODECHANGED":{
-        "method": "hdmiinput.lowLatencyMode",
-        "validationJsonPath": "result",
+        "event": "hdmiinput.onLowLatencyModeChanged",
+        "validationJsonPath": "eventResponse",
         "expected": "TRUE"
     },
     "FALSE_FOR_ONLOWLATENCYMODECHANGED":{
-        "method": "hdmiinput.lowLatencyMode",
-        "validationJsonPath": "result",
+        "event": "hdmiinput.onLowLatencyModeChanged",
+        "validationJsonPath": "eventResponse",
         "expected": "FALSE"
     },
     "SET_HDMIINPUT_WITH_INTEGER":{

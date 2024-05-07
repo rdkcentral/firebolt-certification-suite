@@ -22,6 +22,7 @@ Feature: HdmiInput_Manage
    @HdmiInput @manageSDK @sdk @transport
    Scenario Outline: HDMIInput.port - Positive Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<Key>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Key>'
       When 1st party app invokes the 'Firebolt' API to 'get hdmiinput port with portId HDMI1'
       Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
 
@@ -36,6 +37,7 @@ Feature: HdmiInput_Manage
    @HdmiInput @manageSDK @sdk @transport
    Scenario Outline: HDMIInput.ports - Positive Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<Key>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Key>'
       When 1st party app invokes the 'Firebolt' API to 'get hdmiinput ports list'
       Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
 
@@ -51,6 +53,7 @@ Feature: HdmiInput_Manage
    @HdmiInput @manageSDK @sdk @transport
    Scenario: HDMIInput.ports - Positive Scenario: Validate HDMIInput ports with edidVersion 1.4
       When 1st party app invokes the 'Firebolt' API to 'set edidVersion to 1.4'
+      Then 'Firebolt' platform responds to '1st party app' for 'set edidVersion to 1.4'
       When 1st party app invokes the 'Firebolt' API to 'get hdmiinput ports list'
       Then 'Firebolt' platform responds to '1st party app' with 'false for autoLowLatencyModeCapable ports'
       Then 'Firebolt' platform responds to '1st party app' with 'false for autoLowLatencyModeSignalled ports'
@@ -138,6 +141,7 @@ Feature: HdmiInput_Manage
    @HdmiInput @manageSDK @sdk @transport
    Scenario: HDMIInput.ports - Negative Scenario: Validate HDMIInput ports with edidVersion 1.4 and autoLowLatencyModeCapable - true
       When 1st party app invokes the 'Firebolt' API to 'set edidVersion to 1.4'
+      Then 'Firebolt' platform responds to '1st party app' for 'set edidVersion to 1.4'
       When 1st party app invokes the 'Firebolt' API to 'set autoLowLatencyModeCapable with true'
       When 1st party app invokes the 'Firebolt' API to 'get hdmiinput ports list with error'
       Then 'Firebolt' platform responds to '1st party app' with 'Invalid parameters for hdmiInput ports'
@@ -145,6 +149,7 @@ Feature: HdmiInput_Manage
    @HdmiInput @manageSDK @sdk @transport
    Scenario: HDMIInput.port - Negative Scenario: Validate HDMIInput port with edidVersion 1.4 and autoLowLatencyModeCapable - true
       When 1st party app invokes the 'Firebolt' API to 'set edidVersion to 1.4'
+      Then 'Firebolt' platform responds to '1st party app' for 'set edidVersion to 1.4'
       When 1st party app invokes the 'Firebolt' API to 'set autoLowLatencyModeCapable with true'
       When 1st party app invokes the 'Firebolt' API to 'get hdmiinput port with error'
       Then 'Firebolt' platform responds to '1st party app' with 'Invalid parameters for hdmiInput port'

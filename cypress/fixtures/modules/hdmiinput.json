@@ -164,5 +164,11 @@
     "HDMIINPUT_ONSIGNALCHANGED_UNSTABLE": {"port": "HDMI1","signal": "unstable"},
     "HDMIINPUT_ONSIGNALCHANGED_UNSUPPORTED": {"port": "HDMI1","signal": "unsupported"},
     "HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_TRUE" : {"port": "HDMI1","autoLowLatencyModeSignalled": true},
-    "HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_FALSE" : {"port": "HDMI1","autoLowLatencyModeSignalled": false}
+    "HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_FALSE" : {"port": "HDMI1","autoLowLatencyModeSignalled": false},
+    "SETLOWLATENCYMODE_TRUE": {
+        "value": true
+    },
+    "SETLOWLATENCYMODE_FALSE": {
+        "value": false
+    }
 }
