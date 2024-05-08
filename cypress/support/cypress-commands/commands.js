@@ -822,16 +822,12 @@ Cypress.Commands.add('mergeJsonFilesData', (fcsJson, configJson) => {
  * mergeFcsAndConfigJsons(CONSTANTS.FIREBOLTCALLS_FROM_FCS,CONSTANTS.FIREBOLTCALLS_FROM_CONFIGMODULE)
  */
 Cypress.Commands.add('mergeFcsAndConfigJsons', (fcsJson, configJson) => {
-  console.log("Divya Inside mergeFcsAndConfigJsons")
   let combinedJson;
   cy.mergeJsonfiles(fcsJson).then((fireboltCallsFCSjson) => {
-    console.log("fireboltCallsFCSjson"+JSON.stringify(fireboltCallsFCSjson))
     assert.isNotNull(fireboltCallsFCSjson, CONSTANTS.EXPECTED_JSON_IN_FIREBOLTCALLS);
 
     cy.mergeJsonfiles(configJson).then((fireboltCallsConfigModulejson) => {
       combinedJson = Object.assign(fireboltCallsFCSjson, fireboltCallsConfigModulejson);
-      console.log("fireboltCallsConfigModulejson"+JSON.stringify(fireboltCallsConfigModulejson))
-      console.log("combinedJson after Merge"+JSON.stringify(combinedJson))
       return combinedJson;
     });
   });
@@ -901,7 +897,7 @@ Cypress.Commands.add('mergeFireboltCallsAndFireboltMocks', () => {
     `${CONSTANTS.FIREBOLTCALLS_FROM_FCS}${CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS}/`,
     `${CONSTANTS.FIREBOLTCALLS_FROM_CONFIGMODULE}${CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS}/`
   ).then((response) => {
-    console.log("Divya Response"+JSON.stringify(response))
+    console.log('Divya Response' + JSON.stringify(response));
     Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, response);
   });
   // merge fireboltMocks jsons
@@ -916,11 +912,12 @@ Cypress.Commands.add('mergeFireboltCallsAndFireboltMocks', () => {
 /**
  * @module commands
  * @function mergeFireboltCallJsons
- * @description merge the JSONs into one.
- * @param {*} v1DataJson - The path of jsons in fcs
- * @param {*} v2DataJson - The path of jsons in config module
+ * @description Merges properties of two JSON objects into one, prioritizing the values from the second JSON object.
+ * @param {*} v1DataJson - JSON object
+ * @param {*} v2DataJson - The JSON object to merge with the first JSON object and that takes precedence.
+ * @returns {Object} The merged JSON object.
  * @example
- * mergeFireboltCallJsons(v1JSON,v2DataJSON)
+ * mergeFireboltCallJsons(v1JSON, v2DataJSON);
  */
 
 Cypress.Commands.add('mergeFireboltCallJsons', (v1DataJson, v2DataJson) => {
@@ -928,12 +925,13 @@ Cypress.Commands.add('mergeFireboltCallJsons', (v1DataJson, v2DataJson) => {
   for (const key in v2DataJson) {
     if (v2DataJson.hasOwnProperty(key)) {
       // Merge v1DataJson's properties if the key exists in v1DataJson
-      combinedJsonData[key] = combinedJsonData[key] ? { ...combinedJsonData[key], ...v2DataJson[key] } : v2DataJson[key];
-    } 
+      combinedJsonData[key] = combinedJsonData[key]
+        ? { ...combinedJsonData[key], ...v2DataJson[key] }
+        : v2DataJson[key];
+    }
   }
   return combinedJsonData;
 });
-
 
 /**
  * @module commands
