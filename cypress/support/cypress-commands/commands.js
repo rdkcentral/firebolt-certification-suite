@@ -897,7 +897,6 @@ Cypress.Commands.add('mergeFireboltCallsAndFireboltMocks', () => {
     `${CONSTANTS.FIREBOLTCALLS_FROM_FCS}${CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS}/`,
     `${CONSTANTS.FIREBOLTCALLS_FROM_CONFIGMODULE}${CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS}/`
   ).then((response) => {
-    console.log('Divya Response' + JSON.stringify(response));
     Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, response);
   });
   // merge fireboltMocks jsons
