@@ -23,7 +23,7 @@ function genericSupport(config) {
   // Read additional config.
   try {
     const data = JSON.parse(fs.readFileSync('supportConfig.json'));
-    const testDataEnv = testDataProcessor.testDataProcessor();
+    
 
     // Get the arguments passed from command line during run time.
     const commandLineArgs = Object.entries(config.resolved.env)
@@ -32,13 +32,17 @@ function genericSupport(config) {
         acc[key] = value.value;
         return acc;
       }, {});
-
+ 
     // The sequence of override - the default config in the config.js file, overriden by supportConfig.json and then by the command line arguments.
     config.env = {
       ...config.env,
       ...data,
-      ...commandLineArgs,
+      ...commandLineArgs
     };
+     
+    // TODO: Verify once regarding usage of configs
+    const testDataEnv = testDataProcessor.testDataProcessor(config.env); 
+    Object.assign(config.env, testDataEnv);
 
     return config;
   } catch (error) {

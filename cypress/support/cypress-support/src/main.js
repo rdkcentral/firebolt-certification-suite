@@ -50,22 +50,6 @@ export default function (module) {
       }
     });
 
-    // mergeFireboltCallsAndFireboltMocks
-    cy.mergeFireboltCallsAndFireboltMocks();
-
-    // combine validation jsons
-    cy.combineValidationJson(
-      CONSTANTS.VALIDATION_OBJECTS_PATH,
-      CONSTANTS.CONFIG_VALIDATION_OBJECTS_PATH
-    );
-    // combine defaultTestData jsons
-    cy.mergeJsonFilesData(
-      `${CONSTANTS.FCS_DEFAULTTESTDATA_PATH}`,
-      `${CONSTANTS.CONFIG_DEFAULTTESTDATA_PATH}`
-    ).then((response) => {
-      Cypress.env(CONSTANTS.COMBINEDDEFAULTTESTDATA, response);
-    });
-
     // Create an instance of global queue
     const messageQueue = new Queue();
     Cypress.env(CONSTANTS.MESSAGE_QUEUE, messageQueue);
@@ -447,97 +431,9 @@ export default function (module) {
    * cy.testDataHandler("Params","Account_Id");
    * cy.testDataHandler("Content","Device_Id");
    */
+  // TODO: changes function name 
   Cypress.Commands.add('testDataHandler', (requestType, dataIdentifier) => {
-    const defaultRetVal = dataIdentifier;
     switch (requestType) {
-      case CONSTANTS.PARAMS:
-        // Fetching the value of environment variable based on dataIdentifier
-        if (/CYPRESSENV/.test(dataIdentifier)) {
-          const envParam = dataIdentifier.split('-')[1];
-          return UTILS.getEnvVariable(envParam);
-        }
-        const moduleName = UTILS.extractModuleName(dataIdentifier);
-
-        // Fetching the params from json files based on dataIdentifier.
-        cy.testDataParser(requestType, dataIdentifier, moduleName);
-        break;
-      case CONSTANTS.CONTEXT:
-        const contextImportFile = CONSTANTS.CONTEXT_FILE_PATH;
-
-        // Fetching the context value from apiObjectContext json based on dataIdentifier.
-        cy.getDataFromTestDataJson(contextImportFile, dataIdentifier, requestType).then(
-          (context) => {
-            if (context === CONSTANTS.NO_DATA) {
-              cy.log(
-                `Expected context not found for ${dataIdentifier}. Returning ${dataIdentifier} as is.`
-              ).then(() => {
-                return defaultRetVal;
-              });
-            } else {
-              return context;
-            }
-          }
-        );
-        break;
-      case CONSTANTS.CONTENT:
-        if (
-          typeof dataIdentifier == CONSTANTS.STRING ||
-          (dataIdentifier &&
-            dataIdentifier.validations &&
-            dataIdentifier.validations[0].mode &&
-            dataIdentifier.validations[0].mode == CONSTANTS.STATIC_CONTENT_VALIDATION)
-        ) {
-          // If dataIdentifier is object reading validations[0].type else using dataIdentifier as-is.
-          dataIdentifier =
-            typeof dataIdentifier == CONSTANTS.OBJECT
-              ? dataIdentifier.validations[0].type
-              : dataIdentifier;
-
-          const moduleName = UTILS.extractModuleName(dataIdentifier);
-
-          // Fetching the content value from JSON files based on dataIdentifier.
-          cy.testDataParser(requestType, dataIdentifier, moduleName);
-        } else if (
-          dataIdentifier &&
-          dataIdentifier.validations &&
-          dataIdentifier.validations[0].mode &&
-          dataIdentifier.validations[0].mode == CONSTANTS.DEVICE_CONTENT_VALIDATION
-        ) {
-          let deviceMAC = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC);
-          deviceMAC = deviceMAC.replaceAll(':', '');
-
-          // If <deviceMAC> is present reading the data from the <deviceMAC>.json file. Else, reading it from defaultDeviceData.json
-          const deviceDataPath = deviceMAC
-            ? CONSTANTS.EXTERNAL_DEVICES_PATH + deviceMAC + '.json'
-            : CONSTANTS.DEFAULT_DEVICE_DATA_PATH;
-
-          if (!deviceMAC) {
-            cy.log('Falling back to default device data path');
-          }
-
-          cy.getDataFromTestDataJson(
-            deviceDataPath,
-            dataIdentifier.validations[0].type,
-            requestType
-          ).then((data) => {
-            if (data === CONSTANTS.NO_DATA) {
-              cy.log(
-                `Expected content not found for dataIdentifier.validations[0].type. Returning ${dataIdentifier} as is.`
-              ).then(() => {
-                return defaultRetVal;
-              });
-            } else {
-              return data;
-            }
-          });
-        } else {
-          cy.log(
-            `No Content special handling logic for ${dataIdentifier}. Returning ${dataIdentifier} as is.`
-          ).then(() => {
-            return defaultRetVal;
-          });
-        }
-        break;
       case CONSTANTS.BEFORE_OPERATION:
         cy.getBeforeOperationObject();
         break;

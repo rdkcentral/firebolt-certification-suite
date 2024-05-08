@@ -355,7 +355,7 @@ module.exports = {
     PERFORMANCETESTHANDLER: 'performanceTestHandler',
   },
   TEST_HANDLER_DATA_UNDEFINED: 'Expected parsed data from fixtures to be defined',
-  TEST_DATA_HANDLER_REQUESTTYPE: ['Params', 'Context', 'Content', 'beforeOperation'],
+  TEST_DATA_HANDLER_REQUESTTYPE: ['beforeOperation'],
   TEST_TYPE: 'testType',
   THIRD_PARTY_APP: '3rd party app',
   THIRD_PARTY_APP_ID: 'default3rdPartyAppId',
