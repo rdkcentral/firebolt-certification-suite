@@ -241,3 +241,59 @@ function removeSetInMethodName(apiName) {
   }
   return apiName.split('.')[0] + '.' + updatedMethod;
 }
+
+/**
+ * @module schemaValidation
+ * @function validateLifecycleSchema
+ * @description validate lifecycle response against corresponding schema and return schema validation result
+ * @param {string} response - lifecycle response
+ * @param {string} methodSchema - schema against which validation needs to be performed
+ * @example
+ * validateLifecycleSchema(response, methodSchema)
+ */
+Cypress.Commands.add('validateLifecycleSchema', (response, methodSchema) => {
+  let validationResult;
+  const schemaMapResult = validator.validate(response, methodSchema);
+  if (schemaMapResult.errors.length > 0 || response === undefined) {
+    validationResult = {
+      status: CONSTANTS.FAIL,
+      schemaValidationResult: schemaMapResult,
+    };
+  } else {
+    validationResult = {
+      status: CONSTANTS.PASS,
+      schemaValidationResult: schemaMapResult,
+    };
+  }
+  return validationResult;
+});
+
+/**
+ * @module schemaValidation
+ * @function validateLifecycleSchema
+ * @description update raw lifecycle response from 3rd party app with schema validation fields
+ * @param {string} response - lifecycle response
+ * @param {string} method - method name
+ * @example
+ * updateLifecycleResponse(response, method)
+ */
+Cypress.Commands.add('updateLifecycleResponse', (response, method) => {
+  let schemaResult, error;
+  const responseType = response.hasOwnProperty(CONSTANTS.ERROR)
+    ? CONSTANTS.ERROR
+    : CONSTANTS.RESULT;
+    try {
+      const stateSchema = cy.getSchema(
+       method,
+        '',
+        Cypress.env(CONSTANTS.SDK_VERSION),
+        responseType
+      );
+      schemaResult = cy.validateLifecycleSchema(response, stateSchema);
+      response.schemaResult = schemaResult;
+    } catch (err) {
+      error = err;
+      response.error = error;
+    }
+  return response;
+});

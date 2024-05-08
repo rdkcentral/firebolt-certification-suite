@@ -199,6 +199,11 @@ module.exports = {
   LIFECYCLE_HISTORY_RESPONSE: 'Lifecycle history response fetched from application: ',
   LIFECYCLE_HISTORY_SCHEMA_PATH: 'schemas/lifecycleHistorySchema',
   LIFECYCLE_INTENT: 'Lifecycle intent sent to application: ',
+  LIFECYCLE_METHOD_LIST: [
+    'Lifecycle.ready',
+    'Lifecycle.state',
+    'Lifecycle.close'
+  ],
   LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle notification generated Req #',
   LIFECYCLE_NOTIFICATION_NOT_GENERATED: 'Lifecycle notification not generated Req #',
   LIFECYCLE_STATE: 'Lifecycle.state',
