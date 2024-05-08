@@ -131,7 +131,7 @@ class appConfig {
   }
 
   setListeners() {
-    // To be implemented. Dependent on LifecycleManagement APIs which show the current status of app states in device.
+     // To be implemented. Dependent on LifecycleManagement APIs which show the current status of app states in device.
   }
 }
 

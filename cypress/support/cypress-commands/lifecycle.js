@@ -200,14 +200,16 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, conditi
       );
 
       // Lifecycle event validation
-      if (condition == CONSTANTS.BE && lifecycleEventRequirementId && lifecycleEventRequirementId.event) {
+      if (
+        condition == CONSTANTS.BE &&
+        lifecycleEventRequirementId &&
+        lifecycleEventRequirementId.event
+      ) {
         const appHistoryPrevious = UTILS.getEnvVariable(CONSTANTS.APP_LIFECYCLE_HISTORY);
         const appHistoryCount = appHistory.length - appHistoryPrevious.length;
         let pretext;
         // If no lifecycle events expected, validate app history value is also empty
-        if (
-          state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING
-        ) {
+        if (state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
           UTILS.assertWithRequirementLogs(
             CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED + lifecycleEventRequirementId?.event?.id[0],
             appHistoryCount >= 1,
