@@ -263,7 +263,7 @@ module.exports = {
   NOTIFICATION_EXISTS_REQ: 'Lifecycle notification exists Req # ',
   NOTIFICATION_SCHEMA_VALIDATION_REQ: 'Lifecycle notification schema validation Req # ',
   NULL: 'null',
-  NULL_CHECK: 'Null Check requirement SKIPPED as schema validation is PASSED',
+  NULL_CHECK: 'Null Check requirement SKIPPED as schema validation is PASSED. ',
   NUMBER: 'number',
   OPENRPC_ERROR_SCHEMA_PATH: 'schemas/errorSchema.json',
   OBJECT: 'object',

@@ -85,7 +85,7 @@ Cypress.Commands.add(
             cy.getDataFromTestDataJson(errorContentFilePath, validationObject.type).then(
               (errorContentObject) => {
                 if (errorContentObject == CONSTANTS.NO_DATA) {
-                  assert(false, `Expected error content not found in ${errorContentFilePath}`);
+                  fireLog(false, `Expected error content not found in ${errorContentFilePath}`);
                 }
                 const apiOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
                   method,
@@ -101,7 +101,7 @@ Cypress.Commands.add(
                 cy.log(
                   `Actual error code ${apiErrorResponse.code} expected to be present in list of expected error codes`
                 ).then(() => {
-                  assert.include(
+                  fireLog.include(
                     errorContentObject.errorCode,
                     apiErrorResponse.code,
                     CONSTANTS.ERROR_CODE
@@ -113,20 +113,20 @@ Cypress.Commands.add(
                 cy.log(
                   `Actual error message ${apiErrorResponse.message} expected to be present in list of expected error messages`
                 ).then(() => {
-                  assert.equal(checkErrorMessage, true, 'Error Message Validation: ');
+                  fireLog.equal(checkErrorMessage, true, 'Error Message Validation: ');
                 });
               }
             );
           });
         } else {
           cy.log('Unable to find data for Error validation').then(() => {
-            assert(false, 'Unable to find data for Error validation');
+            fireLog(false, 'Unable to find data for Error validation');
           });
         }
       });
     } catch (error) {
       cy.log('Failed to validate error: ', error).then(() => {
-        assert(false, 'Failed to validate error: ' + error);
+        fireLog(false, 'Failed to validate error: ' + error);
       });
     }
   }
@@ -158,19 +158,18 @@ Cypress.Commands.add(
       cy.validateEvent(extractedApiObject, context, validationPath, expected, appId);
     } else {
       const apiResponseContent = eval(CONSTANTS.EXTRACTEDAPI_PATH + validationPath);
-      const pretext = CONSTANTS.METHOD_CONTENT;
-      cy.log(
-        pretext +
-          ' expected ' +
-          JSON.stringify(apiResponseContent) +
-          ' to be ' +
-          JSON.stringify(expected)
-      ).then(() => {
-        assert.deepEqual(apiResponseContent, expected, pretext);
-      });
+      const pretext =
+        CONSTANTS.METHOD_CONTENT +
+        ' expected ' +
+        JSON.stringify(apiResponseContent) +
+        ' to be ' +
+        JSON.stringify(expected);
+      // Executing fireLog.deepEqual() after logging
+      fireLog.deepEqual(apiResponseContent, expected, pretext);
     }
   }
 );
+
 
 /**
  * @module assertion
@@ -422,25 +421,47 @@ function loggingValidationCheckResult(validationCheck) {
     }
   });
 
-  // Printing the status of all checks in the report.
-  cy.get(validationCheck)
-    .each((logging) => {
-      cy.log(
-        `${logging.validationPoint}: ${logging.validationStatus}. ${logging.message}`,
-        'loggingValidationCheckResult'
+  // Constructing the logString to pass to fireLog
+  // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
+  validationCheck.forEach((assertion) => {
+    let logString = `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`;
+    if (assertion.validationStatus == CONSTANTS.SKIPPED) {
+      fireLog.equal(
+        CONSTANTS.SKIPPED,
+        assertion.validationStatus,
+        assertion.validationPoint,
+        logString
       );
-    })
-    .then(() => {
-      // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
-      validationCheck.forEach((assertion) => {
-        if (assertion.validationStatus == CONSTANTS.SKIPPED) {
-          assert.equal(assertion.validationStatus, CONSTANTS.SKIPPED, assertion.validationPoint);
-        } else {
-          assert.equal(assertion.validationStatus, CONSTANTS.PASS, assertion.validationPoint);
-        }
-      });
-    });
+    } else {
+      fireLog.equal(
+        CONSTANTS.PASS,
+        assertion.validationStatus,
+        assertion.validationPoint,
+        logString
+      );
+    }
+  });
 }
+
+//  // Printing the status of all checks in the report.
+//  cy.get(validationCheck)
+//    .each((logging) => {
+//      cy.log(
+//        `${logging.validationPoint}: ${logging.validationStatus}. ${logging.message}`,
+//        'loggingValidationCheckResult'
+//      );
+//    })
+//    .then(() => {
+//      // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
+//      validationCheck.forEach((assertion) => {
+//        if (assertion.validationStatus == CONSTANTS.SKIPPED) {
+//          fireLog.equal(assertion.validationStatus, CONSTANTS.SKIPPED, assertion.validationPoint);
+//        } else {
+//          fireLog.equal(assertion.validationStatus, CONSTANTS.PASS, assertion.validationPoint);
+//        }
+//      });
+//    });
+//}
 
 /**
  * @module assertion
@@ -471,7 +492,7 @@ Cypress.Commands.add(
         const pretext = 'Event Not Received : ';
 
         cy.log(pretext + ': expected ' + eventResponse + ' to be ' + content).then(() => {
-          assert.strictEqual(eventResponse, content, pretext);
+          fireLog.strictEqual(eventResponse, content, pretext);
         });
       });
     } else if (eventResponse !== null) {
@@ -541,7 +562,7 @@ Cypress.Commands.add(
           const pretext = 'Event Not Received : ';
 
           cy.log(pretext + ': expected ' + eventResponse + ' to be ' + content);
-          assert.equal(eventResponse, content, pretext);
+          fireLog.equal(eventResponse, content, pretext);
         });
       } else if (content === null) {
         cy.logValidationResult(
@@ -553,7 +574,7 @@ Cypress.Commands.add(
           const pretext = 'Event Not Received : ';
 
           cy.log(pretext + ': expected ' + eventResponse + ' to be ' + content);
-          assert.strictEqual(eventResponse, content, pretext);
+          fireLog.strictEqual(eventResponse, content, pretext);
         });
       }
     }
@@ -593,7 +614,7 @@ Cypress.Commands.add(
     typeof expected == 'object' ? (expected = JSON.stringify(expected)) : expected;
     typeof actual == 'object' ? (actual = JSON.stringify(actual)) : actual;
     cy.log(pretext + ' : expected ' + expected + ' to be ' + actual);
-    assert.deepEqual(expectedValue, actualValue, pretext);
+    fireLog.deepEqual(expectedValue, actualValue, pretext);
   }
 );
 
@@ -645,12 +666,12 @@ Cypress.Commands.add(
     const eventNameForLog = eventName.split('-')[0];
     if (!response) {
       cy.log(`Event response not received for ${eventNameForLog}`).then(() => {
-        assert(false, `Event response not received for ${eventNameForLog}`);
+        fireLog(false, `Event response not received for ${eventNameForLog}`);
       });
     }
     if (response.error) {
       cy.log('Expected event response.error to be null').then(() => {
-        assert.isNull(response.error, 'Expected event response.error to be null');
+        fireLog.isNull(response.error, 'Expected event response.error to be null');
       });
     }
 
@@ -658,7 +679,7 @@ Cypress.Commands.add(
       methodOrEventObject.setEventResponseData(response);
     } else {
       cy.log(CONSTANTS.NO_EVENT_TRIGGERED).then(() => {
-        assert.isNull(response[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
+        fireLog.isNull(response[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
       });
     }
   }
