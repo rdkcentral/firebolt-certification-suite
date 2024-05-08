@@ -17,12 +17,20 @@
  */
 const fs = require('fs');
 const logger = require('../support/Logger')('common.js');
+const { generateFirboltCallsIndexFile } = require('./pluginUtils');
 
 // If "genericSupport" is set to a falsy value (false, null, etc), take no further action. Simply "return"
 function genericSupport(config) {
   // Read additional config.
   try {
     const data = JSON.parse(fs.readFileSync('supportConfig.json'));
+
+    // Get fireboltCalls data from default path
+    // ***TODO: UPDATE TO CORRECT PATH**
+    generateFirboltCallsIndexFile('cypress/fixtures/fireboltCallsJS');
+    // Get fireboltCalls data from configModule
+    // ***TODO: UPDATE TO CORRECT PATH**
+    generateFirboltCallsIndexFile('node_modules/configModule/testData/fireboltCallsJS');
 
     // Get the arguments passed from command line during run time.
     const commandLineArgs = Object.entries(config.resolved.env)

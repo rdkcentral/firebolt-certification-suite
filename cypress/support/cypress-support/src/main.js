@@ -29,6 +29,9 @@ const logger = require('../../Logger')('main.js');
 const setimmediate = require('setimmediate');
 let appTransport;
 const flatted = require('flatted');
+// ***TODO: UPDATE TO CORRECT PATH**
+const internalFireboltCallsData = require('../../../fixtures/fireboltCallsJS/index');
+const externalFireboltCallsData = require('configModule/testData/fireboltCallsJS/index');
 
 export default function (module) {
   const config = new Config(module);
@@ -90,6 +93,10 @@ export default function (module) {
     const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
     const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
     Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
+
+    // Update the line below to call custom merge function
+    const mergedFireboltCalls = { ...internalFireboltCallsData, ...externalFireboltCallsData };
+    console.log(JSON.stringify(mergedFireboltCalls));
   });
 
   // beforeEach
