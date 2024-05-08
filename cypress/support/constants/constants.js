@@ -204,8 +204,7 @@ module.exports = {
     'Lifecycle.state',
     'Lifecycle.close'
   ],
-  LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle notification generated Req #',
-  LIFECYCLE_NOTIFICATION_NOT_GENERATED: 'Lifecycle notification not generated Req #',
+  LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle events generated Req #',
   LIFECYCLE_STATE: 'Lifecycle.state',
   LIFECYCLE_STATES: {
     FOREGROUND: 'foreground',
@@ -221,7 +220,6 @@ module.exports = {
   LIFECYCLE_VALIDATION_METHOD: 'Lifecycle.validation',
   LIMITADTRACKING_OFF: 'limitAdTrackingOFF',
   LIMITADTRACKING_ON: 'limitAdTrackingON',
-  LOGGER_LEVEL: 'debug',
   LONGPOLL_TIMEOUT: 15000,
   MESSAGE_QUEUE: 'messageQueue',
   MESSAGE_QUEUE_SIZE: 100,
