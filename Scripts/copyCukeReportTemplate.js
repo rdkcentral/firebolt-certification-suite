@@ -17,7 +17,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-
+const logger = require('../cypress/support/Logger')('copyCukeReportTemplate.js');
 const SOURCE_REPORT_TEMPLATE = path.join(__dirname, '..', 'reportTemplates', 'scenarios.tmpl');
 const DEST_REPORT_TEMPLATE = path.join(
   __dirname,
@@ -39,9 +39,9 @@ function copyFileIfExist(source, destination) {
       throw new Error(`Report template in nodeModules: "${destination}" does not exist.`);
     }
     fs.copyFileSync(source, destination);
-    console.log(`Copied  Report template from "${source}" to "${destination}"`);
+    logger.info(`Copied  Report template from "${source}" to "${destination}"`);
   } catch (error) {
-    console.error('Error:', error.message);
+    logger.info('Error:', error.message);
   }
 }
 

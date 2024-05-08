@@ -16,6 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+const logger = require('../../cypress/support/Logger')('index.js');
 /**
  * Helper function to process a report
  * @param {string} reportType - Type of the report
@@ -23,7 +24,7 @@
  * @param {string} jobId - Job ID
  **/
 async function processReport(report, jobId, eventEmitter) {
-  console.log(`Event received! Processing report for job ${jobId}.`);
+  logger.info(`Event received! Processing report for job ${jobId}.`);
   // Add custom reporting logic here
 
   eventEmitter.emit('reportProcessed');
