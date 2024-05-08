@@ -315,9 +315,10 @@ Given(
  * @param {String} app - App type
  * @param {String} state - Expected state to be used for validation
  * @example
- * Then '3rd party app' is in 'foreground' state
+ * Then '3rd party app' will stay in 'foreground' state
+ * Then '3rd party app' will be in 'background' state
  */
-Then('{string} is in {string} state', (app, state) => {
+Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
   const appId =
     app === CONSTANTS.THIRD_PARTY_APP
       ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
@@ -327,7 +328,7 @@ Then('{string} is in {string} state', (app, state) => {
   const appObject = UTILS.getEnvVariable(appId);
 
   cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
-  cy.validateLifecycleHistoryAndEvents(appObject.getAppObjectState().state, appId);
+  cy.validateLifecycleHistoryAndEvents(appObject.getAppObjectState().state, appId, condition);
 });
 
 /**

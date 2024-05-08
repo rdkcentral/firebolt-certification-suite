@@ -153,7 +153,7 @@ Cypress.Commands.add('setLifecycleState', (state, appId) => {
  * @example
  * cy.validateLifecycleHistoryAndEvents('foreground', 'foo')
  */
-Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId) => {
+Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, condition) => {
   // Extract appObject based on appId
   const appObject = UTILS.getEnvVariable(appId);
   // Get validation requirements for the current scenario from the moduleReqId JSON
@@ -200,13 +200,12 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId) => {
       );
 
       // Lifecycle event validation
-      if (lifecycleEventRequirementId && lifecycleEventRequirementId.event) {
+      if (condition == CONSTANTS.BE && lifecycleEventRequirementId && lifecycleEventRequirementId.event) {
         const appHistoryPrevious = UTILS.getEnvVariable(CONSTANTS.APP_LIFECYCLE_HISTORY);
         const appHistoryCount = appHistory.length - appHistoryPrevious.length;
         let pretext;
         // If no lifecycle events expected, validate app history value is also empty
         if (
-          UTILS.getEnvVariable(CONSTANTS.IS_SAME_APP_TRANSITION, false) ||
           state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING
         ) {
           UTILS.assertWithRequirementLogs(
