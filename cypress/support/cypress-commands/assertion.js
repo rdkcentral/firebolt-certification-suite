@@ -170,7 +170,6 @@ Cypress.Commands.add(
   }
 );
 
-
 /**
  * @module assertion
  * @function validationChecksForResponseAndSchemaResult
@@ -442,26 +441,6 @@ function loggingValidationCheckResult(validationCheck) {
     }
   });
 }
-
-//  // Printing the status of all checks in the report.
-//  cy.get(validationCheck)
-//    .each((logging) => {
-//      cy.log(
-//        `${logging.validationPoint}: ${logging.validationStatus}. ${logging.message}`,
-//        'loggingValidationCheckResult'
-//      );
-//    })
-//    .then(() => {
-//      // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
-//      validationCheck.forEach((assertion) => {
-//        if (assertion.validationStatus == CONSTANTS.SKIPPED) {
-//          fireLog.equal(assertion.validationStatus, CONSTANTS.SKIPPED, assertion.validationPoint);
-//        } else {
-//          fireLog.equal(assertion.validationStatus, CONSTANTS.PASS, assertion.validationPoint);
-//        }
-//      });
-//    });
-//}
 
 /**
  * @module assertion
