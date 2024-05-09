@@ -21,7 +21,7 @@
 import modularTransportClient from '../../../cypress/support/modularTransportClient';
 const CONSTANTS = require('../../../cypress/support/constants/constants');
 const UTILS = require('../../../cypress/support/cypress-support/src/utils');
-const logger = require('../../cypress/support/Logger')('index.js');
+const logger = require('../../../cypress/support/Logger')('discovery.js');
 const MESSAGE = 'message';
 const WEBSOCKET = 'WebSocket';
 
