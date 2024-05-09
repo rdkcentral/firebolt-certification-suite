@@ -264,7 +264,7 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
           }
           result = JSON.parse(result);
           cy.log(`Response from ${appId}: ${JSON.stringify(result.result)}`);
-          if (result?.result?.hasOwnProperty('listening')) {
+          if (result && result.result && result.result.hasOwnProperty(CONSTANTS.LISTENING)) {
             const eventResponse = {
               eventListenerId: result.result.event + '-' + response.id,
               eventListenerResponse: result.result,
@@ -279,7 +279,7 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
               }
 
               // Creating object with event name, params and response etc and storing it in a global list for further validation.
-              const eventAppObject = new eventObject(
+              const eventAppObject = new pprovider(
                 event,
                 param,
                 context,

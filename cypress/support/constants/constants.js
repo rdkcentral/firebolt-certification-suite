@@ -220,6 +220,7 @@ module.exports = {
   LIFECYCLE_VALIDATION_METHOD: 'Lifecycle.validation',
   LIMITADTRACKING_OFF: 'limitAdTrackingOFF',
   LIMITADTRACKING_ON: 'limitAdTrackingON',
+  LISTENING: 'listening',
   LONGPOLL_TIMEOUT: 15000,
   MESSAGE_QUEUE: 'messageQueue',
   MESSAGE_QUEUE_SIZE: 100,

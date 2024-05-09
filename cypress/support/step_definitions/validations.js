@@ -109,7 +109,11 @@ Given(
                       };
 
                       cy.sendMessagetoPlatforms(requestMap).then((result) => {
-                        if (result?.result?.hasOwnProperty('eventResponse')) {
+                        if (
+                          result &&
+                          result.result &&
+                          result.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
+                        ) {
                           result.result = result.result.eventResponse;
                         }
                         cy.updateResponseForFCS(
@@ -139,7 +143,11 @@ Given(
                       cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then(
                         (response) => {
                           response = JSON.parse(response);
-                          if (response?.result?.hasOwnProperty('eventResponse')) {
+                          if (
+                            result &&
+                            result.result &&
+                            result.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
+                          ) {
                             response.result = response.result.eventResponse;
                           }
                           cy.updateResponseForFCS(
