@@ -35,7 +35,6 @@ import UTILS from '../cypress-support/src/utils';
 Cypress.Commands.add(
   'validateErrorObject',
   (method, expectedContent, validationType, context = CONSTANTS.NO_CONTEXT, appId, param) => {
-
     const fetchErrorValidationObjectForExceptionmethod = (method, param) => {
       const exceptionMethods = UTILS.getEnvVariable('exceptionMethods');
       for (const [exceptionType, exceptionList] of Object.entries(exceptionMethods)) {

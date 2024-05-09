@@ -22,18 +22,24 @@ function testDataProcessor(configEnv) {
   let configModuleFireboltMocksMergedJson = fetchMergedJsonFromDirectory(configModuleFireboltMocks);
 
   // Combining the FCS and config module JSON Data
-  const combinedFireboltCallsJson = Object.assign(fcsFireboltCallsMergedJson, configFireboltCallsModuleMergedJson);
-  const combinedFireboltMocksJson = Object.assign(fcsFireboltMocksMergedJson, configModuleFireboltMocksMergedJson);
+  const combinedFireboltCallsJson = Object.assign(
+    fcsFireboltCallsMergedJson,
+    configFireboltCallsModuleMergedJson
+  );
+  const combinedFireboltMocksJson = Object.assign(
+    fcsFireboltMocksMergedJson,
+    configModuleFireboltMocksMergedJson
+  );
 
   // Resolving the variables in the JSON
   const resolvedFireboltCallsJson = processfireboltJson(combinedFireboltCallsJson);
   const resolvedFireboltMocksJson = processfireboltJson(combinedFireboltMocksJson);
   return {
-    'resolvedFireboltCallsJson': resolvedFireboltCallsJson,
-    'resolvedFireboltMocksJson': resolvedFireboltMocksJson
+    resolvedFireboltCallsJson: resolvedFireboltCallsJson,
+    resolvedFireboltMocksJson: resolvedFireboltMocksJson,
   };
 }
- 
+
 // Function to resolve the data in the JSON.
 function processfireboltJson(jsonData) {
   // Looping through each file
@@ -41,7 +47,7 @@ function processfireboltJson(jsonData) {
     if (Object.hasOwnProperty.call(jsonData, key)) {
       const object = jsonData[key];
       // Distinguishing between the firebolt object utilized for making a API calls or for validation purpose.
-      if(!object.hasOwnProperty('validationJsonPath')){
+      if (!object.hasOwnProperty('validationJsonPath')) {
         // Updating the default value when the firebolt object does not have.
         object.params = object.params ? object.params : CONSTANTS.NO_PARAMS;
         object.expected = object.expected ? object.expected : CONSTANTS.RESULT;
@@ -76,8 +82,10 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
       //   const envParam = dataIdentifier.split('-')[1];
       //   return UTILS.getEnvVariable(envParam);
       // }
-      
-      return typeof dataIdentifier === 'string' ? testDataParser(dataIdentifier, requestType) : dataIdentifier;
+
+      return typeof dataIdentifier === 'string'
+        ? testDataParser(dataIdentifier, requestType)
+        : dataIdentifier;
 
     case 'context':
       const contextImportFile = CONSTANTS.CONTEXT_FILE_PATH;
@@ -117,7 +125,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
           });
           return errorSchemaObject;
         } else {
-          console.log(`Unable to find data for Error validation for ${dataIdentifier}`)
+          console.log(`Unable to find data for Error validation for ${dataIdentifier}`);
         }
       } else {
         // Combining validation objects from FCS and config module into single JSON
@@ -129,7 +137,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
             if (object.validations && object.validations.length > 0) {
               // Iterating through the validations array and resolving the value of type.
               object.validations.forEach((data) => {
-                if(typeof data.type !== CONSTANTS.STRING){
+                if (typeof data.type !== CONSTANTS.STRING) {
                   return data.type;
                 }
                 switch (data.mode) {
@@ -175,17 +183,17 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
   }
 }
 
-/** 
-  *  @function testDataParser
-  *  @description Fetching the data from json files based on the priority as shown below
-  *    - External <module>.json from configModule (If applicable)
-  *    - Internal <module>.json from fixtures (If applicable)
-  *    - default.json
-  *  @param {*} requestType - Type of request. param or content
-  *  @param {*} dataIdentifier - Key to be used to fetch param or content data from the fixtures
-  *  @example
-  *    cy.testDataParser("Params","Account_Id");
-  */
+/**
+ *  @function testDataParser
+ *  @description Fetching the data from json files based on the priority as shown below
+ *    - External <module>.json from configModule (If applicable)
+ *    - Internal <module>.json from fixtures (If applicable)
+ *    - default.json
+ *  @param {*} requestType - Type of request. param or content
+ *  @param {*} dataIdentifier - Key to be used to fetch param or content data from the fixtures
+ *  @example
+ *    cy.testDataParser("Params","Account_Id");
+ */
 function testDataParser(dataIdentifier, requestType) {
   let defaultRetVal = dataIdentifier;
   if (requestType == 'params') {
@@ -214,8 +222,11 @@ function testDataParser(dataIdentifier, requestType) {
 
     // Checking the external module json file is present.
     if (fs.existsSync(externalModulePath)) {
-
-      const parsedExternalModuleData = fetchAndParseDataFromJSON(externalModulePath, dataIdentifier, requestType);
+      const parsedExternalModuleData = fetchAndParseDataFromJSON(
+        externalModulePath,
+        dataIdentifier,
+        requestType
+      );
       paramData =
         parsedExternalModuleData != CONSTANTS.NO_DATA ? parsedExternalModuleData : paramData;
       response = paramDatalogs(paramData, dataIdentifier, defaultRetVal);
