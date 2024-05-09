@@ -109,13 +109,6 @@ Given(
                       };
 
                       cy.sendMessagetoPlatforms(requestMap).then((result) => {
-                        if (
-                          result &&
-                          result.result &&
-                          result.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
-                        ) {
-                          result.result = result.result.eventResponse;
-                        }
                         cy.updateResponseForFCS(
                           methodOrEvent,
                           null,

@@ -272,7 +272,7 @@ Cypress.Commands.add('validateLifecycleSchema', (response, methodSchema) => {
 
 /**
  * @module schemaValidation
- * @function validateLifecycleSchema
+ * @function updateLifecycleResponse
  * @description update raw lifecycle response from 3rd party app with schema validation fields
  * @param {string} response - lifecycle response
  * @param {string} method - method name
