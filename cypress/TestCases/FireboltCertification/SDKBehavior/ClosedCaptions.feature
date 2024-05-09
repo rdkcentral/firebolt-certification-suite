@@ -1,6 +1,6 @@
 Feature: ClosedCaptions_SDK
 
- @ClosedCaptions @manageSDK
+    @ClosedCaptions @manageSDK
     Scenario Outline: ClosedCaptions.<Method> - Positive Scenario: <Scenario> with undefined params
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
