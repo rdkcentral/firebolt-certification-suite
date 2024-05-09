@@ -16,6 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const fs = require('fs');
+const logger = require('../support/Logger')('common.js');
 
 // If "genericSupport" is set to a falsy value (false, null, etc), take no further action. Simply "return"
 function genericSupport(config) {
@@ -40,7 +41,7 @@ function genericSupport(config) {
 
     return config;
   } catch (error) {
-    console.log('Received following error while trying to read supportConfig json', error);
+    logger.error('Received following error while trying to read supportConfig json', error);
     return config;
   }
 }

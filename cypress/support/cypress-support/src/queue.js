@@ -17,6 +17,7 @@
  */
 const CONSTANTS = require('../../constants/constants');
 const UTILS = require('./utils.js');
+const logger = require('../../Logger')('queue.js');
 const timestamp = new Date();
 
 export default class Queue {
@@ -31,7 +32,7 @@ export default class Queue {
     if (this.items.length >= CONSTANTS.MESSAGE_QUEUE_SIZE) {
       this.dequeue();
     }
-    console.log(JSON.stringify(element) + 'pushed to the queue at' + timestamp.toDateString());
+    logger.info(JSON.stringify(element) + 'pushed to the queue at' + timestamp.toDateString());
     element.time = Math.round(timestamp.getTime() / 1000);
     return this.items.push(element);
   }
@@ -39,7 +40,7 @@ export default class Queue {
   // Pops the items from queue based on given conditions
   dequeue() {
     if (this.items.length > 0) {
-      console.log(
+      logger.info(
         this.items[this.items.length - 1] + 'popped from the queue at' + timestamp.toDateString()
       );
       return this.items.shift();
@@ -59,23 +60,21 @@ export default class Queue {
 
   // Parse the queue and fetch the corresponding item that matches the given id within a given timeout
   LongPollQueue(id, longPollTimeout) {
-    let availableResponse = null;
     return new Promise((resolve) => {
-      const interval = setTimeout(function () {
+      const interval = setInterval(() => {
         const messageQueue = UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE);
-        if (messageQueue.items) {
-          for (let i = 0; i < messageQueue.items.length; i++) {
-            if (messageQueue.items[i] && messageQueue.items[i].metaData.id === id) {
-              availableResponse = messageQueue.items[i].data;
-            }
-          }
+        const item =
+          messageQueue.items && messageQueue.items.find((item) => item && item.metaData.id === id);
+
+        if (item) {
+          clearInterval(interval);
+          resolve(item.data); // Resolve with item's data if found
         }
-        if (availableResponse) {
-          clearTimeout(interval);
-          resolve(availableResponse);
-        } else {
-          resolve(CONSTANTS.RESPONSE_NOT_FOUND);
-        }
+      }, 1000); // Poll every 1 second
+
+      setTimeout(() => {
+        clearInterval(interval);
+        resolve(CONSTANTS.RESPONSE_NOT_FOUND); // Timeout reached, resolve with response not found
       }, longPollTimeout);
     });
   }

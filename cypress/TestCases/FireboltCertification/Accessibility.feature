@@ -114,7 +114,7 @@ Feature: Accessibility
       And I clear 'accessibility onClosedCaptionsSettingsChanged event' listeners
       And 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
       Then 'Firebolt' platform responds to '1st party app' with 'null for closedCaptions setEnabled'  
-      And 'Firebolt' platform triggers event 'onclosedCaptionsSettingsChanged with null'
+      And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
 
    @Accessibility @coreSDK @sdk @transport
    Scenario Outline: Accessibility.closedCaptions - Positive Scenario: <Scenario>
@@ -127,7 +127,7 @@ Feature: Accessibility
 
       Examples:
          | Scenario                           | Set_Method_Key                        | Method_Content                                                    | Event_Content                                                          | Set_Method_Content                           |
-         | Disable closedcaptions             | disable closedCaptions                | disabled for accessibility closedCaptions                         | onclosedCaptionsSettingsChanged with disabled                          | null for closedCaptions setEnabled           |
+         | Enable closedcaptions              | enable closedCaptions                 | enabled for accessibility closedCaptions                          | onclosedCaptionsSettingsChanged with enabled                           | null for closedCaptions setEnabled           |
          | Set fontFamily-monospaced_sanserif | set fontFamily to monospaced_sanserif | monospace sanserif for fontfamily in accessibility closedcaptions | onclosedCaptionsSettingsChanged with monospace sanserif for fontfamily | null for closedCaptions setFontFamily        |
          | Set fontSize-1                     | set fontSize to 1                     | 1 for fontSize in accessibility closedcaptions                    | onclosedCaptionsSettingsChanged with 1 for fontSize                    | null for closedCaptions setFontSize          |
          | Set fontColor-#ffffff              | set fontColor to #ffffff              | #ffffff for fontColor in accessibility closedcaptions             | onclosedCaptionsSettingsChanged with #ffffff for fontColor             | null for closedCaptions setFontColor         |

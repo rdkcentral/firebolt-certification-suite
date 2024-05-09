@@ -99,7 +99,7 @@ Cypress.Commands.add(
                     : apiOrEventObject.response.error;
 
                 cy.log(
-                  `Expected Errorcode: ${apiErrorResponse.code} to be oneof [${errorContentObject.errorCode}]`
+                  `Actual error code ${apiErrorResponse.code} expected to be present in list of expected error codes`
                 ).then(() => {
                   assert.include(
                     errorContentObject.errorCode,
@@ -111,7 +111,7 @@ Cypress.Commands.add(
                   apiErrorResponse.message.includes(errorMessage)
                 );
                 cy.log(
-                  `Expected Error Message ${apiErrorResponse.message} to be oneof [${errorContentObject.errorMessage}] `
+                  `Actual error message ${apiErrorResponse.message} expected to be present in list of expected error messages`
                 ).then(() => {
                   assert.equal(checkErrorMessage, true, 'Error Message Validation: ');
                 });
@@ -637,26 +637,32 @@ Cypress.Commands.add(
  * @param {String} expected - expected response to validate
  * @example
  * cy.saveEventResponse({"result": "Kitched","error": null},{"eventListenerId":"deice.name-8","eventListenerSchemeResult": "pass"},"device.name", "null")
+ * cy.saveEventResponse({"result": "Kitched","error": null}, {"eventListenerId":"deice.name-8", "eventListenerSchemeResult": "pass"}, "device.name", "null", true)
  */
-Cypress.Commands.add('saveEventResponse', (response, methodOrEventObject, eventName, expected) => {
-  if (response) {
-    if (response.eventResponse != null) {
+Cypress.Commands.add(
+  'saveEventResponse',
+  (response, methodOrEventObject, eventName, expected, eventExpected) => {
+    const eventNameForLog = eventName.split('-')[0];
+    if (!response) {
+      cy.log(`Event response not received for ${eventNameForLog}`).then(() => {
+        assert(false, `Event response not received for ${eventNameForLog}`);
+      });
+    }
+    if (response.error) {
+      cy.log('Expected event response.error to be null').then(() => {
+        assert.isNull(response.error, 'Expected event response.error to be null');
+      });
+    }
+
+    if (eventExpected) {
       methodOrEventObject.setEventResponseData(response);
     } else {
-      if (response[eventName] === null && expected == 'NULL') {
-        cy.log(
-          'Expected event response to be null, since event listener is cleared and no event will be triggered'
-        );
-      } else if (response.error) {
-        assert.isTrue(JSON.stringify(response.error).includes('Received error'), true);
-      } else {
-        assert.equal(false, true, 'No eventObject is found');
-      }
+      cy.log(CONSTANTS.NO_EVENT_TRIGGERED).then(() => {
+        assert.isNull(response[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
+      });
     }
-  } else {
-    assert.isOk(false, 'Event response not received');
   }
-});
+);
 
 /**
  * @module assertion

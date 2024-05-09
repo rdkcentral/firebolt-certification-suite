@@ -20,6 +20,7 @@ const responseModules = 'responseModules';
 const defaultModule = 'defaultModule';
 const defaultMethod = 'defaultMethod';
 const CONSTANTS = require('../../constants/constants');
+const logger = require('../../Logger')('config.js');
 export default class Config {
   constructor(configModule) {
     this.configModule = configModule;
@@ -54,18 +55,18 @@ export default class Config {
   getRequestOverride(fireboltObject) {
     // If config module is invalid or absent
     if (this.configModule === null || this.configModule === undefined || !this.configModule) {
-      console.log('config module is not provided');
+      logger.info(`config module is not provided`, `getRequestOverride`);
       return fireboltObject;
     }
     if (!fireboltObject || !fireboltObject.method) {
-      console.log('firebolt object does not contain method param');
+      logger.info(`firebolt object does not contain method param`, `getRequestOverride`);
       return fireboltObject;
     }
     // firebolt method format <module>.<method>
     const moduleMethodArray = fireboltObject.method.split('.');
 
     if (moduleMethodArray.length !== 2) {
-      console.log("Invalid module/method. Expected format '<Module.Method>'");
+      logger.info(`Invalid module/method. Expected format '<Module.Method>'`, `getRequestOverride`);
       return fireboltObject;
     }
 
@@ -91,7 +92,7 @@ export default class Config {
           : null;
     }
 
-    console.log(
+    logger.info(
       'Firebolt Method: ' +
         moduleName +
         '.' +
@@ -119,7 +120,7 @@ export default class Config {
           : null;
       // If we STILL don't, return the firebolt object
       if (methodConfig === null) {
-        console.log(
+        logger.info(
           'No config request override found for ' +
             fireboltObject.method +
             '. Using unmodified firebolt command'
@@ -171,7 +172,7 @@ export default class Config {
     }
     if (methodConfig === null) {
       // If none existed return response
-      console.log(
+      logger.info(
         'No config response override found for ' +
           moduleName +
           '.' +
@@ -180,10 +181,11 @@ export default class Config {
       );
       return fireboltResponse;
     }
-    cy.log(
-      'Original Response to be converted to firebolt equivalent: ' +
-        JSON.stringify(fireboltResponse)
-    );
+    typeof fireboltResponse == 'object'
+      ? (fireboltResponse = JSON.stringify(fireboltResponse))
+      : fireboltResponse;
+
+    cy.log('Original Response to be converted to firebolt equivalent: ' + fireboltResponse);
     // If we've gotten to this point, we have a config override. Call it and return its response
     return methodConfig(fireboltResponse);
   }
