@@ -6,7 +6,7 @@
     "CAPABILITIES_SUPPORTED":{
         "method": "capabilities.supported",
 		"validationJsonPath": "result",
-		"expected": "CAPABILITIES_SUPPORTED"
+		"content": "CAPABILITIES_SUPPORTED"
     },
     "GET_CAPABILITIES_INFO":{
         "method": "capabilities.info",
@@ -15,7 +15,7 @@
     "CAPABILITIES_INFO":{
         "method": "capabilities.info",
 		"validationJsonPath": "result",
-		"expected": "CAPABILITIES_INFO"
+		"content": "CAPABILITIES_INFO"
     },
     "CHECK_AVAILABILITY_OF_KEYBOARD_CAPABILITY":{
         "method": "capabilities.available",
@@ -24,7 +24,7 @@
     "TRUE_FOR_KEYBOARD_CAPABILITY_AVAILABILITY":{
         "method": "capabilities.available",
 		"validationJsonPath": "result",
-		"expected": "TRUE"
+		"content": "TRUE"
     },
     "CHECK_AVAILABILITY_OF_ACKNOWLEDGECHALLENGE_CAPABILITY":{
         "method": "capabilities.available",
@@ -33,7 +33,7 @@
     "TRUE_FOR_ACKNOWLEDGECHALLENGE_CAPABILITY_AVAILABILITY":{
         "method": "capabilities.available",
 		"validationJsonPath": "result",
-		"expected": "TRUE"
+		"content": "TRUE"
     },
     "CHECK_AVAILABILITY_OF_PINCHALLENGE_CAPABILITY":{
         "method": "capabilities.available",
@@ -42,7 +42,7 @@
     "TRUE_FOR_PINCHALLENGE_CAPABILITY_AVAILABILITY":{
         "method": "capabilities.available",
 		"validationJsonPath": "result",
-		"expected": "TRUE"
+		"content": "TRUE"
     },
     "CHECK_IF_PASSED_CAPABILITY_IS_GRANTED":{
         "method": "capabilities.granted",
@@ -51,7 +51,7 @@
     "TRUE_FOR_GRANTED_CAPABILITY_WITH_PASSED_ROLE":{
         "method": "capabilities.granted",
 		"validationJsonPath": "result",
-		"expected": "TRUE"
+		"content": "TRUE"
     },
     "CHECK_IF_CAPABILITY_IS_GRANTED_WITH_ROLE_AS_USE":{
         "method": "capabilities.granted",
@@ -132,22 +132,22 @@
     "EXPECTED_VALUE_FOR_SUPPORTED_API":{
         "method": "capabilities.supported",
 		"validationJsonPath": "result",
-		"expected": "CAPABILITIES_SUPPORTED"
+		"content": "CAPABILITIES_SUPPORTED"
     },
     "EXPECTED_VALUE_FOR_INFO_API":{
         "method": "capabilities.info",
 		"validationJsonPath": "result",
-		"expected": "CAPABILITIES_INFO"
+		"content": "CAPABILITIES_INFO"
     },
     "EXPECTED_CAPABILITY_IS_REQUESTED":{
         "method": "capabilities.request", 
 		"validationJsonPath": "result",
-		"expected": "CAPABILITIES_REQUEST"
+		"content": "CAPABILITIES_REQUEST"
     },
     "EXPECTED_VALUE_FOR_PERMITTED_API":{
         "method": "capabilities.permitted", 
 		"validationJsonPath": "result",
-		"expected": "CAPABILITIES_PERMITTED"
+		"content": "CAPABILITIES_PERMITTED"
     },
     "GET_INFO_OF_LIFECYCLE_READY_CAPABILITY":{
         "method": "capabilities.info",
@@ -955,43 +955,43 @@
     "INVALID_PARAMS_FOR_CAPABILITIES_INFO": {
         "method": "capabilities.info",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_CAPABILITIES_INFO": {
         "method": "capabilities.info",
         "validationJsonPath": "result",
-        "expected": "CUSTOM_ERROR",
+        "content": "CUSTOM_ERROR",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_PERMITTED": {
         "method": "capabilities.permitted",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_AVAILABLE": {
         "method": "capabilities.available",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_SUPPORTED": {
         "method": "capabilities.supported",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_CAPABILITIES_REQUEST": {
         "method": "capabilities.request",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_GRANTED": {
         "method": "capabilities.granted",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CHECK_IF_LIFECYCLE_READY_CAPABILITY_EXPECTING_ERROR": {
@@ -1016,7 +1016,7 @@
         "event": null,
         "context": "noContext",
         "validationJsonPath": "result[0].use.granted",
-        "expected": "FALSE",
+        "content": "FALSE",
         "expectingError": false
     },
     "TRUE_FOR_CAPABLITIES_REQUEST_GRANTED": {
@@ -1024,7 +1024,7 @@
         "event": null,
         "context": "noContext",
         "validationJsonPath": "result[0].use.granted",
-        "expected": "TRUE",
+        "content": "TRUE",
         "expectingError": false
     },
     "FALSE_FOR_CAPABLITIES_INFO_GRANTED": {
@@ -1032,7 +1032,7 @@
         "event": null,
         "context": "noContext",
         "validationJsonPath": "result[0].use.granted",
-        "expected": "FALSE",
+        "content": "FALSE",
         "expectingError": false
     },
     "TRUE_FOR_CAPABLITIES_INFO_GRANTED": {
@@ -1040,7 +1040,7 @@
         "event": null,
         "context": "noContext",
         "validationJsonPath": "result[0].use.granted",
-        "expected": "TRUE",
+        "content": "TRUE",
         "expectingError": false
     },
     "NULL_FOR_CAPABILITIES_INFO_GRANTED": {
@@ -1048,7 +1048,7 @@
         "event": null,
         "context": "noContext",
         "validationJsonPath": "result[0].use.granted",
-        "expected": "NULL",
+        "content": "NULL",
         "expectingError": false
     },
     "NULL_FOR_CAPABILITIES_GRANTED": {
@@ -1056,7 +1056,7 @@
         "event": null,
         "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
+        "content": "NULL",
         "expectingError": false
     },
     "TRUE_FOR_CAPABILITIES_GRANTED": {
@@ -1064,14 +1064,14 @@
         "event": null,
         "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "FALSE_FOR_CAPABILITIES_GRANTED": {
         "method": "capabilities.granted",
         "event": null,
         "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "FALSE"
+        "content": "FALSE"
     },
     "GET_INFO_OF_CAPABILITY_REQUEST_CAPABILITY": {
         "method": "capabilities.info",
@@ -1132,12 +1132,12 @@
     "EXPECTED_VALUE_FOR_CAPABILITIES_ONAVAILABLE": {
         "event": "capabilities.onAvailable",
         "validationJsonPath": "eventResponse",
-        "expected": "CAPABILITIES_ONAVAILABLE"
+        "content": "CAPABILITIES_ONAVAILABLE"
     },
     "FALSE_FOR_KEYBOARD_CAPABILITY_AVAILABILITY":{
         "method": "capabilities.available", 
 		"validationJsonPath": "result",
-		"expected": "FALSE"
+		"content": "FALSE"
     },
     "CAPABILITIES_ONUNAVAILABLE": {
         "method": "capabilities.onUnavailable",
@@ -1146,7 +1146,7 @@
     "EXPECTED_VALUE_FOR_CAPABILITIES_ONUNAVAILABLE": {
         "event": "capabilities.onUnavailable", 
         "validationJsonPath": "eventResponse",
-        "expected": "CAPABILITIES_ONUNAVAILABLE"
+        "content": "CAPABILITIES_ONUNAVAILABLE"
     },
     "CAPABILITIES_ONGRANTED": {
         "method": "capabilities.onGranted",
@@ -1159,7 +1159,7 @@
     "FALSE_FOR_GRANTED_CAPABILITY_WITH_PASSED_ROLE":{
         "method": "capabilities.granted", 
 		"validationJsonPath": "result",
-		"expected": "FALSE"
+		"content": "FALSE"
     },
     "CAPABILITIES_ONREVOKED": {
         "method": "capabilities.onRevoked",
@@ -1168,11 +1168,11 @@
     "EXPECTED_VALUE_FOR_CAPABILITIES_ONGRANTED": {
         "event": "capabilities.onGranted", 
         "validationJsonPath": "eventResponse",
-        "expected": "CAPABILITIES_ONGRANTED"
+        "content": "CAPABILITIES_ONGRANTED"
     },
     "EXPECTED_VALUE_FOR_CAPABILITIES_ONREVOKED": {
         "event": "capabilities.onRevoked", 
         "validationJsonPath": "eventResponse",
-        "expected": "CAPABILITIES_ONREVOKED"
+        "content": "CAPABILITIES_ONREVOKED"
     }
 }

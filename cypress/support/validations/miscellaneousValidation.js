@@ -50,6 +50,7 @@ Cypress.Commands.add(
         parametersMiscValidation(method, validationTypeObject, apiOrEventObject);
         break;
       case CONSTANTS.MODULE_NAMES.LIFECYCLE:
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         lifecycleMiscValidation(method, validationTypeObject, apiOrEventObject);
         break;
       case CONSTANTS.MODULE_NAMES.CAPABILITIES:

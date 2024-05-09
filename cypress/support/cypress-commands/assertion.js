@@ -35,8 +35,6 @@ import UTILS from '../cypress-support/src/utils';
 Cypress.Commands.add(
   'validateErrorObject',
   (method, expectedContent, validationType, context = CONSTANTS.NO_CONTEXT, appId, param) => {
-    const errorSchemaFilePath = CONSTANTS.ERROR_SCHEMA_OBJECTS_PATH;
-    const errorContentFilePath = CONSTANTS.ERROR_CONTENT_OBJECTS_PATH;
 
     const fetchErrorValidationObjectForExceptionmethod = (method, param) => {
       const exceptionMethods = UTILS.getEnvVariable('exceptionMethods');
@@ -71,58 +69,38 @@ Cypress.Commands.add(
       }
     };
 
-    expectedContent =
+    errorSchemaObject =
       expectedContent == CONSTANTS.EXCEPTION_ERROR_OBJECT
         ? fetchErrorValidationObjectForExceptionmethod(method, param)
         : expectedContent;
     try {
-      cy.getDataFromTestDataJson(errorSchemaFilePath, expectedContent).then((errorSchemaObject) => {
-        if (
-          typeof errorSchemaObject == CONSTANTS.TYPE_OBJECT &&
-          errorSchemaObject.type == CONSTANTS.VALIDATION_FUNCTION
-        ) {
-          errorSchemaObject.validations.forEach((validationObject) => {
-            cy.getDataFromTestDataJson(errorContentFilePath, validationObject.type).then(
-              (errorContentObject) => {
-                if (errorContentObject == CONSTANTS.NO_DATA) {
-                  assert(false, `Expected error content not found in ${errorContentFilePath}`);
-                }
-                const apiOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
-                  method,
-                  context,
-                  appId,
-                  validationType
-                );
-                const apiErrorResponse =
-                  validationType == CONSTANTS.EVENT
-                    ? apiOrEventObject.eventListenerResponse.error
-                    : apiOrEventObject.response.error;
+      errorSchemaObject.validations.forEach((errorContentObject) => {
+        errorContentObject = errorContentObject.type;
 
-                cy.log(
-                  `Actual error code ${apiErrorResponse.code} expected to be present in list of expected error codes`
-                ).then(() => {
-                  assert.include(
-                    errorContentObject.errorCode,
-                    apiErrorResponse.code,
-                    CONSTANTS.ERROR_CODE
-                  );
-                });
-                const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
-                  apiErrorResponse.message.includes(errorMessage)
-                );
-                cy.log(
-                  `Actual error message ${apiErrorResponse.message} expected to be present in list of expected error messages`
-                ).then(() => {
-                  assert.equal(checkErrorMessage, true, 'Error Message Validation: ');
-                });
-              }
-            );
-          });
-        } else {
-          cy.log('Unable to find data for Error validation').then(() => {
-            assert(false, 'Unable to find data for Error validation');
-          });
-        }
+        const apiOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
+          method,
+          context,
+          appId,
+          validationType
+        );
+        const apiErrorResponse =
+          validationType == CONSTANTS.EVENT
+            ? apiOrEventObject.eventListenerResponse.error
+            : apiOrEventObject.response.error;
+
+        cy.log(
+          `Actual error code ${apiErrorResponse.code} expected to be present in list of expected error codes`
+        ).then(() => {
+          assert.include(errorContentObject.errorCode, apiErrorResponse.code, CONSTANTS.ERROR_CODE);
+        });
+        const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
+          apiErrorResponse.message.includes(errorMessage)
+        );
+        cy.log(
+          `Actual error message ${apiErrorResponse.message} expected to be present in list of expected error messages`
+        ).then(() => {
+          assert.equal(checkErrorMessage, true, 'Error Message Validation: ');
+        });
       });
     } catch (error) {
       cy.log('Failed to validate error: ', error).then(() => {

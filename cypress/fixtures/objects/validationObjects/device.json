@@ -137,6 +137,7 @@
                 "type": "regEx",
                 "validations": [
                     {
+                        "mode": "regex",
                         "type": "UID",
                         "description": "Validation of the Device uid"
                     }

@@ -454,497 +454,497 @@
     "DISABLED_FOR_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.enabled",
-        "expected": "FALSE"
+        "content": "FALSE"
     },
     "ENABLED_FOR_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
-        "validationJsonPath": "result.enabled",
+        "content": "result.enabled",
         "expected": "TRUE"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_DISABLED": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.enabled",
-        "expected": "FALSE"
+        "content": "FALSE"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_ENABLED": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.enabled",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "MONOSPACE_SANSERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_MONOSPACE"
+        "content": "ACCESSIBILITY_FONTFAMILY_MONOSPACE"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_MONOSPACE_SANSERIF_FOR_FONTFAMILY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_MONOSPACE"
+        "content": "ACCESSIBILITY_FONTFAMILY_MONOSPACE"
     },
     "CURSIVE_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_CURSIVE"
+        "content": "ACCESSIBILITY_FONTFAMILY_CURSIVE"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_CURSIVE_FOR_FONTFAMILY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_CURSIVE"
+        "content": "ACCESSIBILITY_FONTFAMILY_CURSIVE"
     },
     "PROPORTIONAL_SERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SERIF"
+        "content": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SERIF"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_PROPORTIONAL_SERIF_FOR_FONTFAMILY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SERIF"
+        "content": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SERIF"
     },
     "MONOSPACED_SERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF"
+        "content": "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_MONOSPACED_SERIF_FOR_FONTFAMILY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF"
+        "content": "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF"
     },
     "PROPORTIONAL_SANSERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SANSERIF"
+        "content": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SANSERIF"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_PROPORTIONAL_SANSERIF_FOR_FONTFAMILY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SANSERIF"
+        "content": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SANSERIF"
     },
     "SMALLCAPS_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_SMALLCAPS"
+        "content": "ACCESSIBILITY_FONTFAMILY_SMALLCAPS"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_SMALLCAPS_FOR_FONTFAMILY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_SMALLCAPS"
+        "content": "ACCESSIBILITY_FONTFAMILY_SMALLCAPS"
     },
     "CASUAL_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_CASUAL"
+        "content": "ACCESSIBILITY_FONTFAMILY_CASUAL"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_CASUAL_FOR_FONTFAMILY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_CASUAL"
+        "content": "ACCESSIBILITY_FONTFAMILY_CASUAL"
     },
     "1_FOR_FONTSIZE_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontSize",
-        "expected": "INTEGER1"
+        "content": "INTEGER1"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_1_FOR_FONTSIZE": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontSize",
-        "expected": "INTEGER1"
+        "content": "INTEGER1"
     },
     "#FF00FF_FOR_FONTCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontColor",
-        "expected": "ACCESSIBILITY_FONTCOLOR"
+        "content": "ACCESSIBILITY_FONTCOLOR"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_#FF00FF_FOR_FONTCOLOR": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontColor",
-        "expected": "ACCESSIBILITY_FONTCOLOR"
+        "content": "ACCESSIBILITY_FONTCOLOR"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_#FFFFFF_FOR_FONTCOLOR": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontColor",
-        "expected": "ACCESSIBILITY_FONTCOLOR_FFFFFF"
+        "content": "ACCESSIBILITY_FONTCOLOR_FFFFFF"
     },
     "RAISED_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_RAISED"
+        "content": "ACCESSIBILITY_FONTEDGE_RAISED"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_RAISED_FOR_FONTEDGE": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_RAISED"
+        "content": "ACCESSIBILITY_FONTEDGE_RAISED"
     },
     "NONE_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_NONE"
+        "content": "ACCESSIBILITY_FONTEDGE_NONE"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_NONE_FOR_FONTEDGE": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_NONE"
+        "content": "ACCESSIBILITY_FONTEDGE_NONE"
     },
     "DEPRESSED_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_DEPRESSED"
+        "content": "ACCESSIBILITY_FONTEDGE_DEPRESSED"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_DEPRESSED_FOR_FONTEDGE": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_DEPRESSED"
+        "content": "ACCESSIBILITY_FONTEDGE_DEPRESSED"
     },
     "UNIFORM_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_UNIFORM"
+        "content": "ACCESSIBILITY_FONTEDGE_UNIFORM"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_UNIFORM_FOR_FONTEDGE": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_UNIFORM"
+        "content": "ACCESSIBILITY_FONTEDGE_UNIFORM"
     },
     "DROPSHADOWLEFT_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_LEFT"
+        "content": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_LEFT"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_DROPSHADOWLEFT_FOR_FONTEDGE": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_LEFT"
+        "content": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_LEFT"
     },
     "DROPSHADOWRIGHT_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_RIGHT"
+        "content": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_RIGHT"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_DROPSHADOWRIGHT_FOR_FONTEDGE": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_RIGHT"
+        "content": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_RIGHT"
     },
     "#FFFFFF_FOR_FONTEDGECOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontEdgeColor",
-        "expected": "ACCESSIBILITY_FONTEDGE_COLOR"
+        "content": "ACCESSIBILITY_FONTEDGE_COLOR"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_#FFFFFF_FOR_FONTEDGECOLOR": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontEdgeColor",
-        "expected": "ACCESSIBILITY_FONTEDGE_COLOR"
+        "content": "ACCESSIBILITY_FONTEDGE_COLOR"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_#7F7F7F_FOR_FONTEDGECOLOR": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontEdgeColor",
-        "expected": "ACCESSIBILITY_COLOR_#7F7F7F"
+        "content": "ACCESSIBILITY_COLOR_#7F7F7F"
     },
     "#7F7F7F_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.backgroundColor",
-        "expected": "ACCESSIBILITY_BACKGROUNDCOLOR"
+        "content": "ACCESSIBILITY_BACKGROUNDCOLOR"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_#7F7F7F_FOR_BACKGROUNDCOLOR": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.backgroundColor",
-        "expected": "ACCESSIBILITY_BACKGROUNDCOLOR"
+        "content": "ACCESSIBILITY_BACKGROUNDCOLOR"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_#000000_FOR_BACKGROUNDCOLOR": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.backgroundColor",
-        "expected": "ACCESSIBILITY_BACKGROUNDCOLOR_000000"
+        "content": "ACCESSIBILITY_BACKGROUNDCOLOR_000000"
     },
     "75_FOR_FONTOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontOpacity",
-        "expected": "INTEGER75"
+        "content": "INTEGER75"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_75_FOR_FONTOPACITY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontOpacity",
-        "expected": "INTEGER75"
+        "content": "INTEGER75"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_100_FOR_FONTOPACITY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontOpacity",
-        "expected": "INTEGER100"
+        "content": "INTEGER100"
     },
     "75_FOR_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.backgroundOpacity",
-        "expected": "INTEGER75"
+        "content": "INTEGER75"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_75_FOR_BACKGROUNDOPACITY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.backgroundOpacity",
-        "expected": "INTEGER75"
+        "content": "INTEGER75"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_12_FOR_BACKGROUNDOPACITY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.backgroundOpacity",
-        "expected": "INTEGER12"
+        "content": "INTEGER12"
     },
     "LEFT_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.textAlign",
-        "expected": "LEFT"
+        "content": "LEFT"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_LEFT_FOR_TEXTALIGN": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.textAlign",
-        "expected": "LEFT"
+        "content": "LEFT"
     },
     "CENTER_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.textAlign",
-        "expected": "CENTER"
+        "content": "CENTER"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_CENTER_FOR_TEXTALIGN": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.textAlign",
-        "expected": "CENTER"
+        "content": "CENTER"
     },
     "RIGHT_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.textAlign",
-        "expected": "RIGHT"
+        "content": "RIGHT"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_RIGHT_FOR_TEXTALIGN": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.textAlign",
-        "expected": "RIGHT"
+        "content": "RIGHT"
     },
     "TOP_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.textAlignVertical",
-        "expected": "TOP"
+        "content": "TOP"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_TOP_FOR_TEXTALIGNVERTICAL": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.textAlignVertical",
-        "expected": "TOP"
+        "content": "TOP"
     },
     "MIDDLE_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.textAlignVertical",
-        "expected": "MIDDLE"
+        "content": "MIDDLE"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_MIDDLE_FOR_TEXTALIGNVERTICAL": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.textAlignVertical",
-        "expected": "MIDDLE"
+        "content": "MIDDLE"
     },
     "BOTTOM_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.textAlignVertical",
-        "expected": "BOTTOM"
+        "content": "BOTTOM"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_BOTTOM_FOR_TEXTALIGNVERTICAL": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.textAlignVertical",
-        "expected": "BOTTOM"
+        "content": "BOTTOM"
     },
     "WHITE_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.windowColor",
-        "expected": "WHITE"
+        "content": "WHITE"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_WHITE_FOR_WINDOWCOLOR": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.windowColor",
-        "expected": "WHITE"
+        "content": "WHITE"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_#000000_FOR_WINDOWCOLOR": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.windowColor",
-        "expected": "ACCESSIBILITY_WINDOWCOLOR_000000"
+        "content": "ACCESSIBILITY_WINDOWCOLOR_000000"
     },
     "50_FOR_WINDOWOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.windowOpacity",
-        "expected": "INTEGER50"
+        "content": "INTEGER50"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_50_FOR_WINDOWOPACITY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.windowOpacity",
-        "expected": "INTEGER50"
+        "content": "INTEGER50"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_0_FOR_WINDOWOPACITY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.windowOpacity",
-        "expected": "INTEGER0"
+        "content": "INTEGER0"
     },
     "0.5_FOR_FONTSIZE_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontSize",
-        "expected": "VALUE05"
+        "content": "VALUE05"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_0.5_FOR_FONTSIZE": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontSize",
-        "expected": "VALUE05"
+        "content": "VALUE05"
     },
     "1.5_FOR_FONTSIZE_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontSize",
-        "expected": "VALUE1.5"
+        "content": "VALUE1.5"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_1.5_FOR_FONTSIZE": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontSize",
-        "expected": "VALUE1.5"
+        "content": "VALUE1.5"
     },
     "ENGLISH_FOR_PREFERREDLANGUAGES_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.preferredLanguages",
-        "expected": "ACCESSIBILITY_PREFERREDLANGUAGES_ENGLISH"
+        "content": "ACCESSIBILITY_PREFERREDLANGUAGES_ENGLISH"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_ENGLISH_FOR_PREFERREDLANGUAGES": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.preferredLanguages",
-        "expected": "ACCESSIBILITY_PREFERREDLANGUAGES_ENGLISH"
+        "content": "ACCESSIBILITY_PREFERREDLANGUAGES_ENGLISH"
     },
     "SPANISH_FOR_PREFERREDLANGUAGES_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.preferredLanguages",
-        "expected": "ACCESSIBILITY_PREFERREDLANGUAGES_SPANISH"
+        "content": "ACCESSIBILITY_PREFERREDLANGUAGES_SPANISH"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_SPANISH_FOR_PREFERREDLANGUAGES": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.preferredLanguages",
-        "expected": "ACCESSIBILITY_PREFERREDLANGUAGES_SPANISH"
+        "content": "ACCESSIBILITY_PREFERREDLANGUAGES_SPANISH"
     },
     "DISABLED_VOICEGUIDANCE_SETTINGS": {
         "method": "accessibility.voiceGuidanceSettings",
         "validationJsonPath": "result.enabled",
-        "expected": "FALSE"
+        "content": "FALSE"
     },
     "ONVOICEGUIDANCESETTINGS_WITH_DISABLED": {
         "event": "accessibility.onVoiceGuidanceSettingsChanged",
         "validationJsonPath": "eventResponse.enabled",
-        "expected": "FALSE"
+        "content": "FALSE"
     },
     "ENABLED_VOICEGUIDANCE_SETTINGS": {
         "method": "accessibility.voiceGuidanceSettings",
         "validationJsonPath": "result.enabled",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "ONVOICEGUIDANCESETTINGS_WITH_ENABLED": {
         "event": "accessibility.onVoiceGuidanceSettingsChanged",
         "validationJsonPath": "eventResponse.enabled",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "1_FOR_SPEED_IN_VOICEGUIDANCE_SETTINGS": {
         "method": "accessibility.voiceGuidanceSettings",
         "validationJsonPath": "result.speed",
-        "expected": "INTEGER1"
+        "content": "INTEGER1"
     },
     "ONVOICEGUIDANCESETTINGS_WITH_1_FOR_SPEED": {
         "event": "accessibility.onVoiceGuidanceSettingsChanged",
         "validationJsonPath": "eventResponse.speed",
-        "expected": "INTEGER1"
+        "content": "INTEGER1"
     },
     "0.5_FOR_SPEED_IN_VOICEGUIDANCE_SETTINGS": {
         "method": "accessibility.voiceGuidanceSettings",
         "validationJsonPath": "result.speed",
-        "expected": "VALUE05"
+        "content": "VALUE05"
     },
     "ONVOICEGUIDANCESETTINGS_WITH_0.5_FOR_SPEED": {
         "event": "accessibility.onVoiceGuidanceSettingsChanged",
         "validationJsonPath": "eventResponse.speed",
-        "expected": "VALUE05"
+        "content": "VALUE05"
     },
     "2_FOR_SPEED_IN_VOICEGUIDANCE_SETTINGS": {
         "method": "accessibility.voiceGuidanceSettings",
         "validationJsonPath": "result.speed",
-        "expected": "INTEGER2"
+        "content": "INTEGER2"
     },
     "ONVOICEGUIDANCESETTINGS_WITH_2_FOR_SPEED": {
         "event": "accessibility.onVoiceGuidanceSettingsChanged",
         "validationJsonPath": "eventResponse.speed",
-        "expected": "INTEGER2"
+        "content": "INTEGER2"
     },
     "DISABLED_AUDIODESCRIPTION_SETTINGS": {
         "method": "accessibility.audioDescriptionSettings",
         "validationJsonPath": "result.enabled",
-        "expected": "FALSE"
+        "content": "FALSE"
     },
     "ONAUDIODESCRIPTIONSETTINGS_WITH_DISABLED": {
         "event": "accessibility.onAudioDescriptionSettingsChanged",
         "validationJsonPath": "eventResponse.enabled",
-        "expected": "FALSE"
+        "content": "FALSE"
     },
     "ENABLED_AUDIODESCRIPTION_SETTINGS": {
         "method": "accessibility.audioDescriptionSettings",
         "validationJsonPath": "result.enabled",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "ONAUDIODESCRIPTIONSETTINGS_WITH_ENABLED": {
         "event": "accessibility.onAudioDescriptionSettingsChanged",
         "validationJsonPath": "eventResponse.enabled",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "#FFFFFF_FOR_FONTCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontColor",
-        "expected": "ACCESSIBILITY_FONTCOLOR_FFFFFF"
+        "content": "ACCESSIBILITY_FONTCOLOR_FFFFFF"
     },
     "#FFFFFF_FOR_FONTCOLOR_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontColor",
-        "expected": "ACCESSIBILITY_FONTCOLOR_FFFFFF"
+        "content": "ACCESSIBILITY_FONTCOLOR_FFFFFF"
     },
     "#7F7F7F_FOR_FONTEDGECOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontEdgeColor",
-        "expected": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F"
+        "content": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F"
     },
     "#7F7F7F_FOR_FONTEDGECOLOR_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.fontEdgeColor",
-        "expected": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F"
+        "content": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F"
     },
     "100_FOR_FONTOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontOpacity",
-        "expected": "INTEGER100"
+        "content": "INTEGER100"
     },
     "12_FOR_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.backgroundOpacity",
-        "expected": "INTEGER12"
+        "content": "INTEGER12"
     },
     "#000000_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.backgroundColor",
-        "expected": "ACCESSIBILITY_BACKGROUNDCOLOR_000000"
+        "content": "ACCESSIBILITY_BACKGROUNDCOLOR_000000"
     },
     "#000000_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.windowColor",
-        "expected": "ACCESSIBILITY_WINDOWCOLOR_000000"
+        "content": "ACCESSIBILITY_WINDOWCOLOR_000000"
     },
     "#000000_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.windowColor",
-        "expected": "ACCESSIBILITY_WINDOWCOLOR_000000"
+        "content": "ACCESSIBILITY_WINDOWCOLOR_000000"
     },
     "#000000_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.backgroundColor",
-        "expected": "ACCESSIBILITY_BACKGROUNDCOLOR_000000"
+        "content": "ACCESSIBILITY_BACKGROUNDCOLOR_000000"
     },
     "0_FOR_WINDOWOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.windowOpacity",
-        "expected": "INTEGER0"
+        "content": "INTEGER0"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "NULL",
+        "content": "NULL",
         "expectingError": false
     },
     "EXPECT_ERROR_FOR_CLOSEDCAPTIONS_SETTINGS":{
@@ -958,13 +958,13 @@
     "INVALID_REQUEST_FOR_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result",
-        "expected": "INVALID_REQUEST",
+        "content": "INVALID_REQUEST",
         "expectingError": true
     },
     "INVALID_REQUEST_FOR_VOICEGUIDANCE_SETTINGS": {
         "method": "accessibility.voiceGuidanceSettings",
         "validationJsonPath": "result",
-        "expected": "INVALID_REQUEST",
+        "content": "INVALID_REQUEST",
         "expectingError": true
     },
     "GET_CLOSEDCAPTIONS":{
@@ -973,67 +973,67 @@
     "DISABLED_FOR_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.enabled",
-        "expected": "FALSE"
+        "content": "FALSE"
     },
     "ENABLED_FOR_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.enabled",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "MONOSPACE_SANSERIF_FOR_FONTFAMILY_IN_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.styles.fontFamily",
-        "expected": "ACCESSIBILITY_FONTFAMILY_MONOSPACE"
+        "content": "ACCESSIBILITY_FONTFAMILY_MONOSPACE"
     },
     "1_FOR_FONTSIZE_IN_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.styles.fontSize",
-        "expected": "INTEGER1"
+        "content": "INTEGER1"
     },
     "#FFFFFF_FOR_FONTCOLOR_IN_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.styles.fontColor",
-        "expected": "ACCESSIBILITY_FONTCOLOR_FFFFFF"
+        "content": "ACCESSIBILITY_FONTCOLOR_FFFFFF"
     },
     "RAISED_FOR_FONTEDGE_IN_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.styles.fontEdge",
-        "expected": "ACCESSIBILITY_FONTEDGE_RAISED"
+        "content": "ACCESSIBILITY_FONTEDGE_RAISED"
     },
     "#7F7F7F_FOR_FONTEDGECOLOR_IN_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.styles.fontEdgeColor",
-        "expected": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F"
+        "content": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F"
     },
     "#000000_FOR_BACKGROUNDCOLOR_IN_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.styles.backgroundColor",
-        "expected": "ACCESSIBILITY_BACKGROUNDCOLOR_000000"
+        "content": "ACCESSIBILITY_BACKGROUNDCOLOR_000000"
     },
     "100_FOR_FONTOPACITY_IN_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.styles.fontOpacity",
-        "expected": "INTEGER100"
+        "content": "INTEGER100"
     },
     "100_FOR_BACKGROUNDOPACITY_IN_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.styles.backgroundOpacity",
-        "expected": "INTEGER100"
+        "content": "INTEGER100"
     },
     "LEFT_FOR_TEXTALIGN_IN_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.styles.textAlign",
-        "expected": "LEFT"
+        "content": "LEFT"
     },
     "TOP_FOR_TEXTALIGNVERTICAL_IN_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.styles.textAlignVertical",
-        "expected": "TOP"
+        "content": "TOP"
     },
     "40_FOR_WINDOWOPACITY_IN_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.styles.windowOpacity",
-        "expected": "INTEGER40"
+        "content": "INTEGER40"
     },
     "GET_VOICEGUIDANCE":{
         "method": "accessibility.voiceGuidance"
@@ -1041,36 +1041,36 @@
     "DISABLED_VOICEGUIDANCE": {
         "method": "accessibility.voiceGuidance",
         "validationJsonPath": "result.enabled",
-        "expected": "FALSE"
+        "content": "FALSE"
     },
     "ENABLED_VOICEGUIDANCE": {
         "method": "accessibility.voiceGuidance",
         "validationJsonPath": "result.enabled",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "1_FOR_SPEED_IN_VOICEGUIDANCE": {
         "method": "accessibility.voiceGuidance",
         "validationJsonPath": "result.speed",
-        "expected": "INTEGER1"
+        "content": "INTEGER1"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_100_FOR_BACKGROUNDOPACITY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.backgroundOpacity",
-        "expected": "INTEGER100"
+        "content": "INTEGER100"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_40_FOR_WINDOWOPACITY": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.windowOpacity",
-        "expected": "INTEGER40"
+        "content": "INTEGER40"
     },
     "#7F7F7F_FOR_WINDOWCOLOR_IN_ACCESSIBILITY_CLOSEDCAPTIONS": {
         "method": "accessibility.closedCaptions",
         "validationJsonPath": "result.styles.windowColor",
-        "expected": "ACCESSIBILITY_COLOR_#7F7F7F"
+        "content": "ACCESSIBILITY_COLOR_#7F7F7F"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_#7F7F7F_FOR_WINDOWCOLOR": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse.styles.windowColor",
-        "expected": "ACCESSIBILITY_COLOR_#7F7F7F"
+        "content": "ACCESSIBILITY_COLOR_#7F7F7F"
     }
 }

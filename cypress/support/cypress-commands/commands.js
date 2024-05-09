@@ -36,9 +36,9 @@ Cypress.Commands.add(
     // Reading the data from combinedJson based on key.
     let fireboltData;
     if (callType == CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS) {
-      // fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTMOCKS)[key];
+      fireboltData = UTILS.getEnvVariable('resolvedFireboltMocksJson')[key];
     } else {
-      fireboltData = UTILS.getEnvVariable('resolvedFireboltJson')[key];
+      fireboltData = UTILS.getEnvVariable('resolvedFireboltCallsJson')[key];
     }
     if (!fireboltData) {
       cy.log(CONSTANTS.NO_DATA_FOR_THE_KEY + key).then(() => {

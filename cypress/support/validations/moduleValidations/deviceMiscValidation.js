@@ -97,24 +97,21 @@ function validateDeviceVersion(method, validationTypeObject, apiOrEventObject) {
     );
   } else {
     // Validating the current response against the default value.
-    cy.fixture(defaultImportFile).then((defaultData) => {
-      const version = defaultData[expected];
-      assert.equal(
-        response.api.major + '.' + response.api.minor + '.' + response.api.patch,
-        version
-      );
-      cy.log(
-        'Miscellaneous Validation for ' +
-          method +
-          ': Expected value: ' +
-          version +
-          ', Actual value: ' +
-          response.api.major +
-          '.' +
-          response.api.minor +
-          '.' +
-          response.api.patch
-      );
-    });
+    assert.equal(
+      response.api.major + '.' + response.api.minor + '.' + response.api.patch,
+      expected
+    );
+    cy.log(
+      'Miscellaneous Validation for ' +
+        method +
+        ': Expected value: ' +
+        expected +
+        ', Actual value: ' +
+        response.api.major +
+        '.' +
+        response.api.minor +
+        '.' +
+        response.api.patch
+    );
   }
 }

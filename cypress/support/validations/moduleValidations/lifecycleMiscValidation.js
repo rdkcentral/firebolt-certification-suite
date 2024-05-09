@@ -30,7 +30,7 @@ const UTILS = require('../../cypress-support/src/utils');
  */
 export function lifecycleMiscValidation(method, validationTypeObject, apiOrEventObject) {
   switch (method) {
-    case CONSTANTS.LIFECYCLE_APIS.CLOSE:
+    case CONSTANTS.LIFECYCLE_APIS.FINISHED.toLowerCase():
       validateLifecycleFinished(method, validationTypeObject, apiOrEventObject);
       break;
   }
@@ -47,16 +47,14 @@ export function lifecycleMiscValidation(method, validationTypeObject, apiOrEvent
  * validateLifecycleFinished('lifecycle.finished',  {"type": "lifecycleFinishedError"},{response:{result: '', error: null, ...}});
  */
 function validateLifecycleFinished(method, validationTypeObject, apiOrEventObject) {
+  console.log('@@@validationTypeObject', validationTypeObject)
   const communicationMode = UTILS.getEnvVariable(CONSTANTS.COMMUNICATION_MODE);
   const apiErrorResponse = apiOrEventObject.response.error;
-  const ScenarioType = validationTypeObject.type;
+  const errorContentObject = validationTypeObject.type;
 
-  switch (ScenarioType) {
+  switch (validationTypeObject.mode) {
     case CONSTANTS.LIFECYCLE_FINISHED_ERROR:
       try {
-        const fixtureFile = CONSTANTS.ERROR_CONTENT_JSON_PATH;
-
-        cy.getDataFromTestDataJson(fixtureFile, ScenarioType).then((errorContentObject) => {
           if (communicationMode && communicationMode == CONSTANTS.MODE_TRANSPORT) {
             cy.log(
               `Actual error code for ${method}: ${apiErrorResponse.code} expected to be present in list of expected error codes`
@@ -85,7 +83,6 @@ function validateLifecycleFinished(method, validationTypeObject, apiOrEventObjec
               assert.equal(checkErrorMessage, true, 'Error Message Validation: ');
             });
           }
-        });
       } catch (error) {
         cy.log('Failed to validate Lifecycle.finished', error).then(() => {
           assert(false, `Failed to validate Lifecycle.finished - ${error}`);

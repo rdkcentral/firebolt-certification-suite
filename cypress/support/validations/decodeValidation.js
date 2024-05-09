@@ -17,6 +17,7 @@
  */
 const REGEXFORMATS = require('../constants/regexformats');
 const CONSTANTS = require('../constants/constants');
+const RegexParser = require('regex-parser');
 
 /**
  * @module decodeValidation
@@ -43,6 +44,8 @@ Cypress.Commands.add('decodeValidation', (method, decodeType, result, contentDat
   } else {
     assert(false, `Decode Validation: Expected Validation Object contentData Not found`);
   }
+
+  regexType = RegexParser(regexType)
 
   // Checks for the extracted api object
   if (result) {
@@ -130,7 +133,7 @@ class decodeValidations {
             decode.indexOf(param) + REGEXFORMATS[param][0],
             decode.indexOf(param) + REGEXFORMATS[param][1]
           );
-          const resultSet = REGEXFORMATS[regexFormat].test(extractedData);
+          const resultSet = regexFormat.test(extractedData);
 
           cy.log(
             `Regular Expression Validation: expected ${param} to be in a valid ${regexFormat} format`,
@@ -149,7 +152,7 @@ class decodeValidations {
 
         if (decode[param]) {
           const extractedData = decode[param];
-          const resultSet = REGEXFORMATS[regexFormat].test(extractedData);
+          const resultSet = regexFormat.test(extractedData);
 
           cy.log(
             `Regular Expression Validation: expected ${param} to be in a valid ${regexFormat} format`,
