@@ -284,18 +284,13 @@ Cypress.Commands.add('updateLifecycleResponse', (response, method) => {
   const responseType = response.hasOwnProperty(CONSTANTS.ERROR)
     ? CONSTANTS.ERROR
     : CONSTANTS.RESULT;
-    try {
-      const stateSchema = cy.getSchema(
-       method,
-        '',
-        Cypress.env(CONSTANTS.SDK_VERSION),
-        responseType
-      );
-      schemaResult = cy.validateLifecycleSchema(response, stateSchema);
-      response.schemaResult = schemaResult;
-    } catch (err) {
-      error = err;
-      response.error = error;
-    }
+  try {
+    const stateSchema = cy.getSchema(method, '', Cypress.env(CONSTANTS.SDK_VERSION), responseType);
+    schemaResult = cy.validateLifecycleSchema(response, stateSchema);
+    response.schemaResult = schemaResult;
+  } catch (err) {
+    error = err;
+    response.error = error;
+  }
   return response;
 });
