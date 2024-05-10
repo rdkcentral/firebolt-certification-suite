@@ -135,12 +135,23 @@ export default function (module) {
                           externalData.scenarioNames[module][scenario][key];
                       });
                     }
-                    Cypress.env(CONSTANTS.MODULEREQIDJSON, fcsData);
                   });
-                } else {
-                  Cypress.env(CONSTANTS.MODULEREQIDJSON, fcsData);
+                  // Add scenario from external moduleReqId to FCS moduleReqId if they are missing in FCS
+                  configModulesData.map((scenario) => {
+                    if (!fcsModulesData.includes(scenario)) {
+                      fcsData.scenarioNames[module][scenario] =
+                        externalData.scenarioNames[module][scenario];
+                    }
+                  });
                 }
               });
+              // Add modules from external moduleReqId to FCS moduleReqId if they are missing in FCS
+              config.map((module) => {
+                if (!FCS.includes(module)) {
+                  fcsData.scenarioNames[module] = externalData.scenarioNames[module];
+                }
+              });
+              Cypress.env(CONSTANTS.MODULEREQIDJSON, fcsData);
             } else {
               assert(
                 false,
