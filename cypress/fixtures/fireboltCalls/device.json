@@ -158,12 +158,12 @@
     "BEDROOM_FOR_DEVICE_NAME": {
         "method": "device.name",
         "validationJsonPath": "result",
-        "expected": "DEVICE_BEDROOM_NAME"
+        "expected": "Bedroom"
     },
     "ONNAMECHANGED_FOR_DEVICE_WITH_BEDROOM": {
         "event": "device.onNameChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "DEVICE_BEDROOM_NAME"
+        "expected": "Bedroom"
     },
     "PROVISION_DEVICE_WITH_DEFAULT_VALUES":{
         "method": "manage_device.provision",
