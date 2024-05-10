@@ -40,7 +40,6 @@ function genericSupport(config) {
       ...commandLineArgs,
     };
 
-    // TODO: Verify once regarding usage of configs
     const testDataEnv = testDataProcessor.testDataProcessor(config.env);
     Object.assign(config.env, testDataEnv);
 

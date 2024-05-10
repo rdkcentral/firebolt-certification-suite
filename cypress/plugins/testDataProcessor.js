@@ -15,11 +15,11 @@ function testDataProcessor(configEnv) {
   const configModuleFireboltMocks = './node_modules/configModule/testData/fireboltMocks/';
 
   // Merging all JSON files from the directory.
-  let fcsFireboltCallsMergedJson = fetchMergedJsonFromDirectory(fcsFireboltCalls);
-  let configFireboltCallsModuleMergedJson = fetchMergedJsonFromDirectory(configModuleFireboltCalls);
+  const fcsFireboltCallsMergedJson = fetchMergedJsonFromDirectory(fcsFireboltCalls);
+  const configFireboltCallsModuleMergedJson = fetchMergedJsonFromDirectory(configModuleFireboltCalls);
 
-  let fcsFireboltMocksMergedJson = fetchMergedJsonFromDirectory(fcsFireboltMocks);
-  let configModuleFireboltMocksMergedJson = fetchMergedJsonFromDirectory(configModuleFireboltMocks);
+  const fcsFireboltMocksMergedJson = fetchMergedJsonFromDirectory(fcsFireboltMocks);
+  const configModuleFireboltMocksMergedJson = fetchMergedJsonFromDirectory(configModuleFireboltMocks);
 
   // Combining the FCS and config module JSON Data
   const combinedFireboltCallsJson = Object.assign(
@@ -114,7 +114,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
           errorSchemaObject.type == CONSTANTS.VALIDATION_FUNCTION
         ) {
           errorSchemaObject.validations.forEach((validationObject) => {
-            let errorContentObject = fetchAndParseDataFromJSON(
+            const errorContentObject = fetchAndParseDataFromJSON(
               errorContentFilePath,
               validationObject.type
             );
@@ -129,7 +129,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
         }
       } else {
         // Combining validation objects from FCS and config module into single JSON
-        let validationObjects = combineValidationObjectsJson();
+        const validationObjects = combineValidationObjectsJson();
         let validationObject = validationObjects[dataIdentifier];
 
         if (validationObject && validationObject.data) {
@@ -142,7 +142,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                 }
                 switch (data.mode) {
                   case 'regex':
-                    let regexType = data.type.includes('_REGEXP')
+                    const regexType = data.type.includes('_REGEXP')
                       ? data.type
                       : data.type + '_REGEXP';
                     let parsedRegexExp;
@@ -199,7 +199,7 @@ function testDataParser(dataIdentifier, requestType) {
   if (requestType == 'params') {
     defaultRetVal = { value: dataIdentifier };
   }
-  let defaultData = mergeJsonFilesData([
+  const defaultData = mergeJsonFilesData([
     `${CONSTANTS.FCS_DEFAULTTESTDATA_PATH}`,
     `${CONSTANTS.CONFIG_DEFAULTTESTDATA_PATH}`,
   ]);
@@ -248,8 +248,8 @@ function fetchAndParseDataFromJSON(filePath, dataIdentifier, requestType) {
 
 // Function to combine all validation JSON files from FCS and config module.
 function combineValidationObjectsJson() {
-  let fcsValidationObjectsJson = fetchMergedJsonFromDirectory(CONSTANTS.VALIDATION_OBJECTS_PATH);
-  let configModuleValidationObjectsJson = fetchMergedJsonFromDirectory(
+  const fcsValidationObjectsJson = fetchMergedJsonFromDirectory(CONSTANTS.VALIDATION_OBJECTS_PATH);
+  const configModuleValidationObjectsJson = fetchMergedJsonFromDirectory(
     CONSTANTS.CONFIG_VALIDATION_OBJECTS_PATH
   );
   let combinedValidationObjects = fcsValidationObjectsJson;

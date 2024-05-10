@@ -45,7 +45,7 @@ Cypress.Commands.add('decodeValidation', (method, decodeType, result, contentDat
     assert(false, `Decode Validation: Expected Validation Object contentData Not found`);
   }
 
-  regexType = RegexParser(regexType)
+  regexType = RegexParser(regexType);
 
   // Checks for the extracted api object
   if (result) {

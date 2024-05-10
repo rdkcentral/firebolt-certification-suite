@@ -81,7 +81,7 @@
                 "validations": [
                     {
                         "mode": "fixture",
-                        "type": "VIDEORESOLUTION",
+                        "type": "DEVICERESOLUTION",
                         "description": "Validation of the Device videoResolution"
                     }
                 ]

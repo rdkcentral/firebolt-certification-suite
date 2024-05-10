@@ -47,7 +47,6 @@ export function lifecycleMiscValidation(method, validationTypeObject, apiOrEvent
  * validateLifecycleFinished('lifecycle.finished',  {"type": "lifecycleFinishedError"},{response:{result: '', error: null, ...}});
  */
 function validateLifecycleFinished(method, validationTypeObject, apiOrEventObject) {
-  console.log('@@@validationTypeObject', validationTypeObject);
   const communicationMode = UTILS.getEnvVariable(CONSTANTS.COMMUNICATION_MODE);
   const apiErrorResponse = apiOrEventObject.response.error;
   const errorContentObject = validationTypeObject.type;

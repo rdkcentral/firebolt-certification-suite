@@ -26,7 +26,7 @@ import UTILS from '../cypress-support/src/utils';
  * @description Performing a validation against the source of truth for the given API or Event response
  * @param {String} sdk - name of the sdk.
  * @param {String} appId - The object was retrieved by using the appId.
- * @param {String} key - The key name of the Firebolt data contains method, context, or expected value, etc.
+ * @param {String} key - The key name of the Firebolt data contains method, context, or content value, etc.
  * @example
  * Given 'Firebolt' platform responds with 'Validate device id'
  * Given 'Firebolt' platform responds to '1st party app' with 'Validate device id'
@@ -110,7 +110,6 @@ Given(
                         updatedResponse,
                         methodOrEventObject,
                         eventName,
-                        expected,
                         eventExpected === 'triggers' ? true : false
                       );
                     });
@@ -132,7 +131,6 @@ Given(
                         response,
                         methodOrEventObject,
                         eventName,
-                        expected,
                         eventExpected === 'triggers' ? true : false
                       );
                     }
@@ -205,7 +203,6 @@ Given(
                     }
                   });
                 } else {
-                  // TODO: default content validation
                   cy.validateContent(
                     methodOrEvent,
                     context,

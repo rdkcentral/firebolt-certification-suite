@@ -46,16 +46,14 @@ export function deviceMiscValidation(method, validationTypeObject, apiOrEventObj
       break;
     case CONSTANTS.DEVICE_SCREENRESOLUTION:
     case CONSTANTS.DEVICE_VIDEORESOLUTION:
-      cy.fixture(CONSTANTS.DEFAULT_TEST_DATA).then((data) => {
-        const deviceResolution = data[CONSTANTS.DEVICE_RESOLUTION]
-          .map((resolution) => `[${resolution.join(',')}]`)
-          .join(',');
-        const isPresent = data[CONSTANTS.DEVICE_RESOLUTION].some((resolution) => {
-          return resolution[0] === response[0] && resolution[1] === response[1];
-        });
-        cy.log(`Expected [${response}] to be present in [${deviceResolution}]`).then(() => {
-          assert.equal(true, isPresent, 'Expected to be present');
-        });
+      const deviceResolution = validationTypeObject.type
+        .map((resolution) => `[${resolution.join(',')}]`)
+        .join(',');
+      const isPresent = validationTypeObject.type.some((resolution) => {
+        return resolution[0] === response[0] && resolution[1] === response[1];
+      });
+      cy.log(`Expected [${response}] to be present in [${deviceResolution}]`).then(() => {
+        assert.equal(true, isPresent, 'Expected to be present');
       });
       break;
   }
@@ -72,7 +70,6 @@ export function deviceMiscValidation(method, validationTypeObject, apiOrEventObj
  * validateDeviceVersion('device.verion',  {"mode": "fixture", "type": "APIVERSION", "description": "Validation of the Device version  API Format"},{response:{result: '', error: null, ...}});
  */
 function validateDeviceVersion(method, validationTypeObject, apiOrEventObject) {
-  const defaultImportFile = CONSTANTS.DEFAULT_TEST_DATA;
   const expected = validationTypeObject.type;
   const response = apiOrEventObject.response.result;
   const apiVersionvalue = UTILS.getEnvVariable(CONSTANTS.API_VERSION, false);
