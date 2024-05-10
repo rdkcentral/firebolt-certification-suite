@@ -33,8 +33,8 @@ const reporterOptions = {
 
 const env = {
   deviceIp: '',
-  deviceMac: '',
-  default3rdPartyAppId: '',
+  deviceMac: 'F0463B1372A4',
+  default3rdPartyAppId: 'comcast.test.firecert',
   deviceCommPort: '3474',
   mock: false,
   wsUrlPath: '456~A',
@@ -53,7 +53,6 @@ const env = {
     'https://rdkcentral.github.io/firebolt/requirements/next/specifications/firebolt-specification.json',
   firebolt_specification_proposed_url:
     'https://rdkcentral.github.io/firebolt/requirements/proposed/specifications/firebolt-specification.json',
-  sdkVersion: null,
   externalOpenRpcUrls: [],
   healthCheckRetries: 8,
   skipContentValidation: false,
