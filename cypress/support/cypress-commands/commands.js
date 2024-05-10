@@ -73,9 +73,15 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
 
       // Process each firebolt call item
       const promises = fireboltItems.map((item) => {
+        let params = item.params;
+        // Fetching the value of environment variable based on dataIdentifier
+        if (/CYPRESSENV/.test(params)) {
+          const envParam = params.split('-')[1];
+          params = UTILS.getEnvVariable(envParam, false);
+        }
         return results.push({
           method: item.method,
-          params: item.params,
+          params: params,
           context: item.context,
           action: item.action,
           expected: item.expected,

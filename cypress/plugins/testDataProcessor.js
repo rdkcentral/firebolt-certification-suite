@@ -76,13 +76,9 @@ function processfireboltJson(jsonData) {
 function testDataHandler(requestType, dataIdentifier, fireboltObject) {
   switch (requestType) {
     case 'params':
-      // TODO: Moving this inside cypress code
-      // Fetching the value of environment variable based on dataIdentifier
-      // if (/CYPRESSENV/.test(dataIdentifier)) {
-      //   const envParam = dataIdentifier.split('-')[1];
-      //   return UTILS.getEnvVariable(envParam);
-      // }
-
+      if (/CYPRESSENV/.test(dataIdentifier)) {
+        return dataIdentifier;
+      }
       return typeof dataIdentifier === 'string'
         ? testDataParser(dataIdentifier, requestType)
         : dataIdentifier;
