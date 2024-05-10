@@ -16,10 +16,12 @@ function testDataProcessor(configEnv) {
 
   // Merging all JSON files from the directory.
   const fcsFireboltCallsMergedJson = fetchMergedJsonFromDirectory(fcsFireboltCalls);
-  const configFireboltCallsModuleMergedJson = fetchMergedJsonFromDirectory(configModuleFireboltCalls);
+  const configFireboltCallsModuleMergedJson =
+    fetchMergedJsonFromDirectory(configModuleFireboltCalls);
 
   const fcsFireboltMocksMergedJson = fetchMergedJsonFromDirectory(fcsFireboltMocks);
-  const configModuleFireboltMocksMergedJson = fetchMergedJsonFromDirectory(configModuleFireboltMocks);
+  const configModuleFireboltMocksMergedJson =
+    fetchMergedJsonFromDirectory(configModuleFireboltMocks);
 
   // Combining the FCS and config module JSON Data
   const combinedFireboltCallsJson = Object.assign(
@@ -126,7 +128,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
       } else {
         // Combining validation objects from FCS and config module into single JSON
         const validationObjects = combineValidationObjectsJson();
-        let validationObject = validationObjects[dataIdentifier];
+        const validationObject = validationObjects[dataIdentifier];
 
         if (validationObject && validationObject.data) {
           validationObject.data.forEach((object, index) => {
