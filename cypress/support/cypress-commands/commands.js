@@ -476,7 +476,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
 
           cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
           cy.sendMessagetoPlatforms(requestMap).then((result) => {
-            cy.log('Response from 1st party App: ' + result);
+            cy.log('Response from 1st party App: ' + JSON.stringify(result));
           });
         } else {
           const communicationMode = UTILS.getCommunicationMode();
