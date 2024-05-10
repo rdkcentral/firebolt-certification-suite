@@ -19,38 +19,6 @@ const CONSTANTS = require('../constants/constants');
 const Validator = require('jsonschema').Validator;
 const validator = new Validator();
 import UTILS from '../cypress-support/src/utils';
-const logger = require('../Logger')('schemaValidation.js');
-
-/**
- * @module schemaValidation
- * @function getAndDeferenceOpenRPC
- * @description To get and dereference the OpenRPC json. If version is provided, get version specific openRPC from URL (https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json) and dereference it.
- * Else, get the latest openRPC from URL (https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json) by default and dereference it
- * Note: Currently, the openRPC supports both core and manage sdk modules
- * @param {String} version- version
- * @example
- * getAndDeferenceOpenRPC('0.17.0')
- * getAndDeferenceOpenRPC()
- * @return {Object} Dereferenced OpenRPC json
- **/
-async function getAndDeferenceOpenRPC(version) {
-  try {
-    let url;
-    if (version) {
-      url = `https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json`;
-    } else {
-      // If no version is provided, get the latest
-      url = `https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json`;
-    }
-    const response = await axios.get(url);
-    const deSchemaList = await $RefParser.dereference(response.data);
-    Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, deSchemaList);
-    return deSchemaList;
-  } catch (error) {
-    logger.error('Error fetching data:', error.message, 'getAndDeferenceOpenRPC');
-    return null;
-  }
-}
 
 /**
  * @module schemaValidation
