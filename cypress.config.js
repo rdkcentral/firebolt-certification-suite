@@ -33,8 +33,8 @@ const reporterOptions = {
 
 const env = {
   deviceIp: '',
-  deviceMac: 'F0463B1372A4',
-  default3rdPartyAppId: 'comcast.test.firecert',
+  deviceMac: '',
+  default3rdPartyAppId: '',
   deviceCommPort: '3474',
   mock: false,
   wsUrlPath: '456~A',
