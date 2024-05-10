@@ -59,11 +59,10 @@ async function getAndDeferenceOpenRPC(version) {
  * @param {String} method - method name in the format <module.method>
  * @param {*} params - API params
  * @param {Object} response - API response received
- * @param {String} sdkVersion - version of SDK
  * @example
- * cy.updateResponseForFCS(method, params, response, sdkVersion = null)
+ * cy.updateResponseForFCS(method, params, response)
  */
-Cypress.Commands.add('updateResponseForFCS', (methodOrEvent, params, response, sdkVersion) => {
+Cypress.Commands.add('updateResponseForFCS', (methodOrEvent, params, response) => {
   if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
     let formattedResponse = {};
     let result;
@@ -71,7 +70,7 @@ Cypress.Commands.add('updateResponseForFCS', (methodOrEvent, params, response, s
       ? CONSTANTS.ERROR
       : CONSTANTS.RESULT;
 
-    cy.validateSchema(response[responseType], methodOrEvent, params, sdkVersion, responseType).then(
+    cy.validateSchema(response[responseType], methodOrEvent, params, responseType).then(
       (schemaValidation) => {
         if (methodOrEvent.includes('.on')) {
           let formattedSchemaValidationResult;
@@ -145,26 +144,22 @@ Cypress.Commands.add('updateResponseForFCS', (methodOrEvent, params, response, s
   * @param {Object} response - JSON response string
   * @param {string} methodOrEvent - String containing the method/event in the format "<Module.Method>" or "<Module.Event>"(Ex: accessibility.closedCaptionsSettings, 'accessibility.onClosedCaptionsSettingsChanged')
   * @param {*} params - API params
-  * @param {string} sdkVersion - SDK version
   * @param {string} schemaType - schema type determines which schema should fetch result/error
   * @example
   * validateSchema('"accessibility.closedCaptionsSettings",{"enabled":true,"styles":{"fontFamily":"Monospace sans-serif","fontSize":1,"fontColor":"#ffffff","fontEdge":"none","fontEdgeColor":"#7F7F7F","fontOpacity":100,"backgroundColor":"#000000","backgroundOpacity":100,"textAlign":"center","textAlignVertical":"middle"}}'
    {}, "0.17.0", "result")
   */
-Cypress.Commands.add(
-  'validateSchema',
-  (response, methodOrEvent, params, sdkVersion, schemaType) => {
-    cy.getSchema(methodOrEvent, params, sdkVersion, schemaType).then((schemaMap) => {
-      if (schemaMap) {
-        return validator.validate(response, schemaMap);
-      } else {
-        cy.log(`Failed to fetch schema, validateSchema`).then(() => {
-          assert(false, 'Failed to fetch schema, validateSchema');
-        });
-      }
-    });
-  }
-);
+Cypress.Commands.add('validateSchema', (response, methodOrEvent, params, schemaType) => {
+  cy.getSchema(methodOrEvent, params, schemaType).then((schemaMap) => {
+    if (schemaMap) {
+      return validator.validate(response, schemaMap);
+    } else {
+      cy.log(`Failed to fetch schema, validateSchema`).then(() => {
+        assert(false, 'Failed to fetch schema, validateSchema');
+      });
+    }
+  });
+});
 
 /**
  * @module schemaValidation
@@ -172,13 +167,12 @@ Cypress.Commands.add(
  * @description get schema for a method or event from dereferenced openRPC
  * @param {string} methodOrEvent - String containing the method/event in the format "<Module.Method>" or "<Module.Event>"(Ex: accessibility.closedCaptionsSettings, 'accessibility.onClosedCaptionsSettingsChanged')
  * @param {*} params - API params
- * @param {string} sdkVersion - SDK version
  * @param {string} schemaType - schema type determines which schema should fetch result/error
  * @example
  * getSchema("accessibility.closedCaptionsSettings", {}, "0.17.0", "result")
  * getSchema("accessibility.onClosedCaptionsSettingsChanged", {}, null, "result")
  */
-Cypress.Commands.add('getSchema', (methodOrEvent, params, sdkVersion, schemaType) => {
+Cypress.Commands.add('getSchema', (methodOrEvent, params, schemaType) => {
   cy.wrap().then(async () => {
     const schemaList = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, true);
     let schemaMap = null;
@@ -285,7 +279,7 @@ Cypress.Commands.add('updateLifecycleResponse', (response, method) => {
     ? CONSTANTS.ERROR
     : CONSTANTS.RESULT;
   try {
-    const stateSchema = cy.getSchema(method, '', Cypress.env(CONSTANTS.SDK_VERSION), responseType);
+    const stateSchema = cy.getSchema(method, '', responseType);
     schemaResult = cy.validateLifecycleSchema(response, stateSchema);
     response.schemaResult = schemaResult;
   } catch (err) {

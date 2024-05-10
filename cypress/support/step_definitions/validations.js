@@ -109,20 +109,17 @@ Given(
                       };
 
                       cy.sendMessagetoPlatforms(requestMap).then((result) => {
-                        cy.updateResponseForFCS(
-                          methodOrEvent,
-                          null,
-                          result,
-                          Cypress.env(CONSTANTS.SDK_VERSION)
-                        ).then((updatedResponse) => {
-                          cy.saveEventResponse(
-                            updatedResponse,
-                            methodOrEventObject,
-                            eventName,
-                            expected,
-                            eventExpected === 'triggers' ? true : false
-                          );
-                        });
+                        cy.updateResponseForFCS(methodOrEvent, null, result).then(
+                          (updatedResponse) => {
+                            cy.saveEventResponse(
+                              updatedResponse,
+                              methodOrEventObject,
+                              eventName,
+                              expected,
+                              eventExpected === 'triggers' ? true : false
+                            );
+                          }
+                        );
                       });
                     } else {
                       const params = { event: eventName };
@@ -143,20 +140,17 @@ Given(
                           ) {
                             response.result = response.result.eventResponse;
                           }
-                          cy.updateResponseForFCS(
-                            methodOrEvent,
-                            null,
-                            response,
-                            Cypress.env(CONSTANTS.SDK_VERSION)
-                          ).then((updatedResponse) => {
-                            cy.saveEventResponse(
-                              updatedResponse,
-                              methodOrEventObject,
-                              eventName,
-                              expected,
-                              eventExpected === 'triggers' ? true : false
-                            );
-                          });
+                          cy.updateResponseForFCS(methodOrEvent, null, response).then(
+                            (updatedResponse) => {
+                              cy.saveEventResponse(
+                                updatedResponse,
+                                methodOrEventObject,
+                                eventName,
+                                expected,
+                                eventExpected === 'triggers' ? true : false
+                              );
+                            }
+                          );
                         }
                       );
                     }
