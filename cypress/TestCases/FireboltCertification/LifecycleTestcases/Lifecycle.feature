@@ -61,7 +61,7 @@ Feature: Lifecycle
 
     @Lifecycle @sdk @transport @coreSDK @regression
     Scenario: Validate 'lifecycle.finished' - expecting error
-        Given the environment has been set up for 'lifeCycleApi' tests
+        Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'notify that the app is done unloading'
         Then 'Firebolt' platform responds with 'error for lifecycle finished'
