@@ -435,7 +435,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
     } else {
       fireLog(
         false,
-        'Before operation object is not in proper array format, recheck the before objects in fixture/external/moduleReqId - getBeforeOperationObject'
+        CONSTANTS.BEFORE_OPERATION_FORMAT
       );
     }
   }
@@ -847,7 +847,7 @@ Cypress.Commands.add(
     cy.mergeJsonfiles(fireboltCallsValidationPathFromFCS).then((fCSFixturesValidationjson) => {
       fireLog.isNotNull(
         fCSFixturesValidationjson,
-        'Expected JSON data should be defined in fixtures/objects/validationObjects/'
+        CONSTANTS.FIXTURE_DEFINED_PATH
       );
       cy.mergeJsonfiles(fireboltCallsValidationPathFromConfigModule).then(
         (configModuleValidationjson) => {

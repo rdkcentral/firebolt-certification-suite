@@ -98,36 +98,24 @@ Cypress.Commands.add(
                     ? apiOrEventObject.eventListenerResponse.error
                     : apiOrEventObject.response.error;
 
-                cy.log(
-                  `Actual error code ${apiErrorResponse.code} expected to be present in list of expected error codes`
-                ).then(() => {
                   fireLog.include(
                     errorContentObject.errorCode,
                     apiErrorResponse.code,
                     CONSTANTS.ERROR_CODE
                   );
-                });
                 const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
                   apiErrorResponse.message.includes(errorMessage)
                 );
-                cy.log(
-                  `Actual error message ${apiErrorResponse.message} expected to be present in list of expected error messages`
-                ).then(() => {
                   fireLog.equal(checkErrorMessage, true, 'Error Message Validation: ');
-                });
               }
             );
           });
         } else {
-          cy.log('Unable to find data for Error validation').then(() => {
             fireLog(false, 'Unable to find data for Error validation');
-          });
         }
       });
     } catch (error) {
-      cy.log('Failed to validate error: ', error).then(() => {
         fireLog(false, 'Failed to validate error: ' + error);
-      });
     }
   }
 );
@@ -470,9 +458,7 @@ Cypress.Commands.add(
       ).then(() => {
         const pretext = 'Event Not Received : ';
 
-        cy.log(pretext + ': expected ' + eventResponse + ' to be ' + content).then(() => {
-          fireLog.strictEqual(eventResponse, content, pretext);
-        });
+        fireLog.strictEqual(eventResponse, content, pretext);
       });
     } else if (eventResponse !== null) {
       // Checking for schema validation status, if schema status is pass, then check for content validation
