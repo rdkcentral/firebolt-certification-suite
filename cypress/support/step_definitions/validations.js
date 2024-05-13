@@ -109,7 +109,7 @@ Given(
                       };
 
                       cy.sendMessagetoPlatforms(requestMap).then((result) => {
-                        cy.updateResponseForFCS(methodOrEvent, null, result).then(
+                        cy.updateResponseForFCS(methodOrEvent, null, result, true).then(
                           (updatedResponse) => {
                             cy.saveEventResponse(
                               updatedResponse,
@@ -140,7 +140,7 @@ Given(
                           ) {
                             response.result = response.result.eventResponse;
                           }
-                          cy.updateResponseForFCS(methodOrEvent, null, response).then(
+                          cy.updateResponseForFCS(methodOrEvent, null, response, true).then(
                             (updatedResponse) => {
                               cy.saveEventResponse(
                                 updatedResponse,

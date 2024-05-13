@@ -27,19 +27,27 @@ import UTILS from '../cypress-support/src/utils';
  * @param {String} method - method name in the format <module.method>
  * @param {*} params - API params
  * @param {Object} response - API response received
+ * @param {boolean} isValidation - flag to determine if response is updated as part of invocation or validation glue step. For former case, flag is set to false by default, else for latter case flag is set to true
  * @example
  * cy.updateResponseForFCS(method, params, response)
  */
-Cypress.Commands.add('updateResponseForFCS', (methodOrEvent, params, response) => {
-  if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
-    let formattedResponse = {};
-    let result;
-    const responseType = response.hasOwnProperty(CONSTANTS.ERROR)
-      ? CONSTANTS.ERROR
-      : CONSTANTS.RESULT;
+Cypress.Commands.add(
+  'updateResponseForFCS',
+  (methodOrEvent, params, response, isValidation = false) => {
+    if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
+      let formattedResponse = {};
+      let result;
+      const responseType = response.hasOwnProperty(CONSTANTS.ERROR)
+        ? CONSTANTS.ERROR
+        : CONSTANTS.RESULT;
 
-    cy.validateSchema(response[responseType], methodOrEvent, params, responseType).then(
-      (schemaValidation) => {
+      cy.validateSchema(
+        response[responseType],
+        methodOrEvent,
+        params,
+        responseType,
+        isValidation
+      ).then((schemaValidation) => {
         if (methodOrEvent.includes('.on')) {
           let formattedSchemaValidationResult;
 
@@ -98,12 +106,12 @@ Cypress.Commands.add('updateResponseForFCS', (methodOrEvent, params, response) =
         }
 
         return formattedResponse;
-      }
-    );
-  } else {
-    cy.log(`Response does not have a valid result or error field - ${response}`);
+      });
+    } else {
+      cy.log(`Response does not have a valid result or error field - ${response}`);
+    }
   }
-});
+);
 
 /**
   * @module schemaValidation
@@ -113,21 +121,28 @@ Cypress.Commands.add('updateResponseForFCS', (methodOrEvent, params, response) =
   * @param {string} methodOrEvent - String containing the method/event in the format "<Module.Method>" or "<Module.Event>"(Ex: accessibility.closedCaptionsSettings, 'accessibility.onClosedCaptionsSettingsChanged')
   * @param {*} params - API params
   * @param {string} schemaType - schema type determines which schema should fetch result/error
+  * @param {boolean} isValidation - flag to determine if response is updated as part of invocation or validation glue. For former case, flag is set to false by default, else for latter case flag is set to true
   * @example
   * validateSchema('"accessibility.closedCaptionsSettings",{"enabled":true,"styles":{"fontFamily":"Monospace sans-serif","fontSize":1,"fontColor":"#ffffff","fontEdge":"none","fontEdgeColor":"#7F7F7F","fontOpacity":100,"backgroundColor":"#000000","backgroundOpacity":100,"textAlign":"center","textAlignVertical":"middle"}}'
    {}, "0.17.0", "result")
   */
-Cypress.Commands.add('validateSchema', (response, methodOrEvent, params, schemaType) => {
-  cy.getSchema(methodOrEvent, params, schemaType).then((schemaMap) => {
-    if (schemaMap) {
-      return validator.validate(response, schemaMap);
-    } else {
-      cy.log(`Failed to fetch schema, validateSchema`).then(() => {
-        assert(false, 'Failed to fetch schema, validateSchema');
-      });
-    }
-  });
-});
+Cypress.Commands.add(
+  'validateSchema',
+  (response, methodOrEvent, params, schemaType, isValidation) => {
+    cy.getSchema(methodOrEvent, params, schemaType).then((schemaMap) => {
+      if (schemaMap) {
+        return validator.validate(response, schemaMap);
+      } else {
+        if (isValidation) {
+          // Normal calls need to go through and response needs to get stored in global list even if they don't adhere to the schema. Schema failure should only be thrown during validation step
+          cy.log(`Failed to fetch schema, validateSchema`).then(() => {
+            assert(false, 'Failed to fetch schema, validateSchema');
+          });
+        }
+      }
+    });
+  }
+);
 
 /**
  * @module schemaValidation
