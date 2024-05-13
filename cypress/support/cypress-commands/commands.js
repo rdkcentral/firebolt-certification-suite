@@ -60,9 +60,7 @@ Cypress.Commands.add(
       fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
     if (!fireboltData) {
-      cy.log(CONSTANTS.NO_DATA_FOR_THE_KEY + key).then(() => {
-        fireLog(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
-      });
+      fireLog(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
     return fireboltData;
   }
@@ -568,9 +566,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       cy.log('Response for marker creation: ' + JSON.stringify(result)).then(() => {
-        cy.log(result.message).then(() => {
-          fireLog.isTrue(result.success, result.message);
-        });
+        fireLog.isTrue(result.success, result.message);
       });
     });
   }
@@ -602,14 +598,10 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
   // Sending message to the platform to call performance test handler
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     if (result?.success) {
-      cy.log(eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE)).then(() => {
-        fireLog(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
-        return true;
-      });
+      fireLog(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
+      return true;
     } else {
-      cy.log(eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE)).then(() => {
-        fireLog(false, eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
-      });
+      fireLog(false, eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
     }
   });
 });
