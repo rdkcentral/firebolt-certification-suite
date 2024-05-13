@@ -630,22 +630,16 @@ Cypress.Commands.add(
   (response, methodOrEventObject, eventName, expected, eventExpected) => {
     const eventNameForLog = eventName.split('-')[0];
     if (!response) {
-      cy.log(`Event response not received for ${eventNameForLog}`).then(() => {
-        fireLog(false, `Event response not received for ${eventNameForLog}`);
-      });
+      fireLog(false, `Event response not received for ${eventNameForLog}`);
     }
     if (response.error) {
-      cy.log('Expected event response.error to be null').then(() => {
-        fireLog.isNull(response.error, 'Expected event response.error to be null');
-      });
+      fireLog.isNull(response.error, 'Expected event response.error to be null');
     }
 
     if (eventExpected) {
       methodOrEventObject.setEventResponseData(response);
     } else {
-      cy.log(CONSTANTS.NO_EVENT_TRIGGERED).then(() => {
-        fireLog.isNull(response[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
-      });
+      fireLog.isNull(response[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
     }
   }
 );
