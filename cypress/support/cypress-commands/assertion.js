@@ -98,24 +98,24 @@ Cypress.Commands.add(
                     ? apiOrEventObject.eventListenerResponse.error
                     : apiOrEventObject.response.error;
 
-                  fireLog.include(
-                    errorContentObject.errorCode,
-                    apiErrorResponse.code,
-                    CONSTANTS.ERROR_CODE
-                  );
+                fireLog.include(
+                  errorContentObject.errorCode,
+                  apiErrorResponse.code,
+                  CONSTANTS.ERROR_CODE
+                );
                 const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
                   apiErrorResponse.message.includes(errorMessage)
                 );
-                  fireLog.equal(checkErrorMessage, true, 'Error Message Validation: ');
+                fireLog.equal(checkErrorMessage, true, 'Error Message Validation: ');
               }
             );
           });
         } else {
-            fireLog(false, 'Unable to find data for Error validation');
+          fireLog(false, 'Unable to find data for Error validation');
         }
       });
     } catch (error) {
-        fireLog(false, 'Failed to validate error: ' + error);
+      fireLog(false, 'Failed to validate error: ' + error);
     }
   }
 );

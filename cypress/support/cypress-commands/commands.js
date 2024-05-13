@@ -433,10 +433,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
         }
       });
     } else {
-      fireLog(
-        false,
-        CONSTANTS.BEFORE_OPERATION_FORMAT
-      );
+      fireLog(false, CONSTANTS.BEFORE_OPERATION_FORMAT);
     }
   }
 });
@@ -845,10 +842,7 @@ Cypress.Commands.add(
   'combineValidationJson',
   (fireboltCallsValidationPathFromFCS, fireboltCallsValidationPathFromConfigModule) => {
     cy.mergeJsonfiles(fireboltCallsValidationPathFromFCS).then((fCSFixturesValidationjson) => {
-      fireLog.isNotNull(
-        fCSFixturesValidationjson,
-        CONSTANTS.FIXTURE_DEFINED_PATH
-      );
+      fireLog.isNotNull(fCSFixturesValidationjson, CONSTANTS.FIXTURE_DEFINED_PATH);
       cy.mergeJsonfiles(fireboltCallsValidationPathFromConfigModule).then(
         (configModuleValidationjson) => {
           if (configModuleValidationjson) {
