@@ -165,7 +165,7 @@ Feature: Discovery.launch_HotLaunch
     @DiscoveryLaunch @coreSDK @sdk @transport
     Scenario Outline: Discovery.Launch Hot Launch - Negative Scenario: <Scenario> expecting error
         Given the environment has been set up for 'DiscoveryLaunch' tests
-        And '3rd party app' transitions to state 'forground'
+        And '3rd party app' transitions to state 'foreground'
         When '3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<Error_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
@@ -209,6 +209,6 @@ Feature: Discovery.launch_HotLaunch
     @DiscoveryLaunch @coreSDK @sdk @transport
     Scenario: Discovery.Launch Hot Launch - Negative Scenario: Invalid context source expecting error
         Given the environment has been set up for 'DiscoveryLaunch' tests
-        And '3rd party app' transitions to state 'forground'
+        And '3rd party app' transitions to state 'foreground'
         When 1st party app invokes the 'Firebolt' API to 'launch app with search intent int source'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
