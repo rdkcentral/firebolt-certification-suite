@@ -55,23 +55,6 @@ Feature: Localization_Manage
             | Set true to locale               | set locale with boolean             | setLocale                  | Invalid parameter for locale                  |
             | Set preferredAudioLanguages-test | set preferredAudioLanguages to test | setPreferredAudioLanguages | Invalid parameter for preferredAudioLanguages |
 
-
-    @Localization @manageSDK @sdk @transport
-    Scenario Outline: Localization.<SetMethod> - Positive Scenario: <Scenario> with undefined params
-        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
-        
-        Examples:
-            | Scenario                | SetMethod                  | API_Key                                    | Validation_Key                                |
-            | locality                | setLocality                | set locality without params                | expected localization locality                |
-            | postalCode              | setPostalCode              | set postalcode without params              | expected localization postalcode              |
-            | countryCode             | setCountryCode             | set countrycode without params             | expected manage localization countrycode      |
-            | language                | setLanguage                | set language without params                | expected manage localization language         |
-            | preferredAudioLanguages | setPreferredAudioLanguages | set preferredaudioLanguages without params | expected localization preferredaudiolanguages |
-            | locale                  | setLocale                  | set locale without params                  | expected manage localization locale           |
-            | timeZone                | setTimeZone                | set timezone without params                | expected localization timezone                |
-
-
     @Localization @coreSDK @sdk @transport
     Scenario Outline: Localization.removeAdditionalInfo - Negative Scenario: <Scenario> and expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'

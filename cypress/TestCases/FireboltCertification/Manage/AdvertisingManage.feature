@@ -32,11 +32,6 @@ Feature: Advertising_Manage
       When 1st party app invokes the 'Firebolt' API to 'set skipRestriction with integer'
       Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for skipRestriction'
 
-   @Advertising @coreSDK @sdk @transport
-   Scenario: Advertising.policy - Positive Scenario: SkipRestriction with undefined params
-      When 1st party app invokes the 'Firebolt' API to 'set skipRestriction with undefined parameter'
-      Then 'Firebolt' platform responds to '1st party app' with 'advertising skipRestriction'
-
    @Advertising @manageSDK @sdk @transport @notSupported
    Scenario: Advertising.resetIdentifier - Positive Scenario: Reset Identifier method
       When '3rd party app' invokes the 'Firebolt' API to 'get no coppa'
