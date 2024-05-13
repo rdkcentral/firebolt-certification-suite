@@ -526,7 +526,6 @@ Cypress.Commands.add(
         ).then(() => {
           const pretext = 'Event Not Received : ';
 
-          cy.log(pretext + ': expected ' + eventResponse + ' to be ' + content);
           fireLog.equal(eventResponse, content, pretext);
         });
       } else if (content === null) {
@@ -538,7 +537,6 @@ Cypress.Commands.add(
         ).then(() => {
           const pretext = 'Event Not Received : ';
 
-          cy.log(pretext + ': expected ' + eventResponse + ' to be ' + content);
           fireLog.strictEqual(eventResponse, content, pretext);
         });
       }
@@ -578,7 +576,6 @@ Cypress.Commands.add(
     const actualValue = actual;
     typeof expected == 'object' ? (expected = JSON.stringify(expected)) : expected;
     typeof actual == 'object' ? (actual = JSON.stringify(actual)) : actual;
-    cy.log(pretext + ' : expected ' + expected + ' to be ' + actual);
     fireLog.deepEqual(expectedValue, actualValue, pretext);
   }
 );
