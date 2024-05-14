@@ -1,0 +1,17 @@
+{
+    "GET_DISCOVERY_ENTITYINFO":{
+        "method": "discovery.entityInfo"
+    },
+    "GET_DISCOVERY_PURCHASEDCONTENT":{
+        "method": "discovery.purchasedContent"
+    },
+    "GET_ENTITYINFO_DATA":{
+        "method": "discovery_content.requestDetails",
+        "params": "ENTITYINFO_WAY_TO_WATCH"
+    },
+    "EXPECTED_ENTITYINFO_DATA":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "ENTITYINFO_INFOWATCH"
+    }
+}

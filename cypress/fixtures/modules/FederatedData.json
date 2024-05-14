@@ -1,0 +1,60 @@
+{
+    "ENTITYINFO_WAY_TO_WATCH": {
+        "entityId": "345"
+    },
+    "ENTITYINFO_INFOWATCH": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "345",
+                "entityType": "program",
+                "programType": "movie"
+            },
+            "info": {
+                "title": "Cool Runnings",
+                "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                "releaseDate": "1993-01-01T00:00:00.000Z",
+                "contentRatings": [
+                    {
+                        "scheme": "US-Movie",
+                        "rating": "PG"
+                    },
+                    {
+                        "scheme": "CA-Movie",
+                        "rating": "G"
+                    }
+                ]
+            },
+            "waysToWatch": [
+                {
+                    "identifiers": {
+                        "assetId": "123"
+                    },
+                    "expires": "2025-01-01T00:00:00.000Z",
+                    "entitled": true,
+                    "entitledExpires": "2025-01-01T00:00:00.000Z",
+                    "offeringType": "buy",
+                    "price": 2.99,
+                    "videoQuality": [
+                        "UHD"
+                    ],
+                    "audioProfile": [
+                        "dolbyAtmos"
+                    ],
+                    "audioLanguages": [
+                        "en"
+                    ],
+                    "closedCaptions": [
+                        "en"
+                    ],
+                    "subtitles": [
+                        "es"
+                    ],
+                    "audioDescriptions": [
+                        "en"
+                    ]
+                }
+            ]
+        }
+    }
+}

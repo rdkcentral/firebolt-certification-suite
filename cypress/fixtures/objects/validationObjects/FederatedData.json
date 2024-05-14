@@ -1,0 +1,17 @@
+{
+    "ENTITYINFO_INFOWATCH": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "ENTITYINFO_INFOWATCH",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    }
+}
