@@ -18,4 +18,3 @@ Feature: Localization_SDK
             | preferredAudioLanguages | setPreferredAudioLanguages | set preferredaudioLanguages without params | expected localization preferredaudiolanguages |
             | locale                  | setLocale                  | set locale without params                  | expected manage localization locale           |
             | timeZone                | setTimeZone                | set timezone without params                | expected localization timezone                |
-

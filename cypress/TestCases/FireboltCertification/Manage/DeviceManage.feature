@@ -8,11 +8,10 @@ Feature: Device_Manage
     Scenario: Device.name - Positive Scenario: set device name - Bedroom
         When 1st party app registers for the 'device onNameChanged' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to 'set device name to Bedroom'
-        Then 'Firebolt' platform responds to '1st party app' with 'null for device setName'
+        Then 'Firebolt' platform responds to '1st party app' for 'set device name to Bedroom'
         When 1st party app invokes the 'Firebolt' API to 'get manage device name'
         Then 'Firebolt' platform responds to '1st party app' with 'Bedroom for device name'
         And 'Firebolt' platform triggers to '1st party app' event 'onNameChanged for device with Bedroom'
-        And 'Firebolt' platform responds to '1st party app' with 'null for device setname'
 
     @Device @manageSDK @sdk @transport @notSupported
     Scenario Outline: Device.provision - Positive Scenario: <Scenario>
@@ -66,5 +65,3 @@ Feature: Device_Manage
             | set deviceProvision without deviceId   | provision device without deviceid  |
             | set deviceProvision with emptyParams   | provision device with empty params |
             | set deviceProvision without account id | provision device without accountid |
-
-

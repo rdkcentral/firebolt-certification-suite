@@ -14,7 +14,7 @@ Feature: Advertising_Manage
    Scenario Outline: Advertising.skipRestriction - Positive Scenario: <Scenario>
       When 1st party app registers for the 'advertising onSkipRestrictionChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for advertising setSkipRestriction'
+      Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
       When 1st party app invokes the 'Firebolt' API to 'get advertising skipRestriction'
       Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
       And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
@@ -41,5 +41,3 @@ Feature: Advertising_Manage
       And '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
       Then I validate last '2' response are different for 'advertising.config' API method
       And I validate last '2' response are different for 'advertising.advertisingId' API method
-
-

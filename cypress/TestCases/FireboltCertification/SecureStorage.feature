@@ -225,5 +225,3 @@ Feature: SecureStorage
             | Passing scope as null         | clear stored value with scope as null         |
             | Passing scope as boolean      | clear stored value with scope as boolean      |
             | without scope                 | clear stored value without scope              |
-
-
