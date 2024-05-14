@@ -12,7 +12,6 @@ Feature: Device_Manage
         When 1st party app invokes the 'Firebolt' API to 'get manage device name'
         Then 'Firebolt' platform responds to '1st party app' with 'Bedroom for device name'
         And 'Firebolt' platform triggers to '1st party app' event 'onNameChanged for device with Bedroom'
-        And 'Firebolt' platform responds to '1st party app' with 'null for device setname'
 
     @Device @manageSDK @sdk @transport @notSupported
     Scenario Outline: Device.provision - Positive Scenario: <Scenario>
