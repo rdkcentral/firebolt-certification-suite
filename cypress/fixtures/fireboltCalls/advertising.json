@@ -355,10 +355,5 @@
         "validationJsonPath": "result",
         "content": "INVALID_REQUEST",
         "expectingError": true
-    },
-    "NULL_FOR_ADVERTISING_SETSKIPRESTRICTION": {
-        "method": "advertising.setSkipRestriction",
-        "validationJsonPath": "result",
-        "content": "NULL"
     }
 }

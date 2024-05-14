@@ -44,13 +44,17 @@ IFS=',' read -ra param_value_pairs <<< "$env_section"
 
 # Loop through parameter-value pairs and remove pair from params if it contains spaces
 for pair in "${param_value_pairs[@]}"; do
-    if [[ "$pair" == *" "* ]]; then
-        key=$(echo "$pair" | cut -d'=' -f1)
-        value=$(echo "$pair" | cut -d'=' -f2-)
-        export CYPRESS_$key="$value"
-        # Remove the pair from params
+  if [[ "$pair" == *" "* ]]; then
+    key=$(echo "$pair" | cut -d'=' -f1)
+    value=$(echo "$pair" | cut -d'=' -f2-)
+    export CYPRESS_$key="$value"
+    # Remove the pair from params
+    if [[ "${pair}" == "${param_value_pairs[-1]}" ]]; then
+        params=$(echo "$params" | sed "s/,$pair//")
+    else
         params=$(echo "$params" | sed "s/$pair,//")
     fi
+  fi
 done
 }
 

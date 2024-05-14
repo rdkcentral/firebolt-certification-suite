@@ -150,11 +150,6 @@
     "GET_MANAGE_DEVICE_NAME":{
         "method": "manage_device.name"
     },
-    "NULL_FOR_DEVICE_SETNAME": {
-        "method": "device.setName",
-        "validationJsonPath": "result",
-        "content": "NULL"
-    },
     "BEDROOM_FOR_DEVICE_NAME": {
         "method": "device.name",
         "validationJsonPath": "result",

@@ -1174,5 +1174,10 @@
         "event": "capabilities.onRevoked", 
         "validationJsonPath": "eventResponse",
         "content": "CAPABILITIES_ONREVOKED"
+    },
+    "EXPECTED_VALUE_FOR_CAPABILITY_REQUEST":{
+        "method": "capabilities.request",
+        "validationJsonPath": "result",
+        "expected": "CAPABILITIES_REQUEST_USE"
     }
 }

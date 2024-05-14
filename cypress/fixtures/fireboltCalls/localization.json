@@ -637,41 +637,5 @@
         "method": "localization.removeAdditionalInfo",
         "validationJsonPath": "result",
         "content": "NULL"  
-    },
-    "NULL_FOR_LOCALIZATION_SETLOCALITY": {
-        "method": "localization.setLocality",  
-        "validationJsonPath": "result",
-        "content": "NULL"  
-    },
-    "NULL_FOR_LOCALIZATION_SETCOUNTRYCODE": {
-        "method": "localization.setCountryCode",
-        "validationJsonPath": "result",
-        "content": "NULL"  
-    },
-    "NULL_FOR_LOCALIZATION_SETLOCALE": {
-        "method": "localization.setLocale",
-        "validationJsonPath": "result",
-        "content": "NULL"  
-    },
-    "NULL_FOR_LOCALIZATION_SETPOSTALCODE": {
-        "method": "localization.setPostalCode",
-        "validationJsonPath": "result",
-        "content": "NULL"  
-    },
-    "NULL_FOR_LOCALIZATION_SETPREFERREDAUDIOLANGUAGES": {
-        "method": "localization.setPreferredAudioLanguages",  
-        "validationJsonPath": "result",
-        "content": "NULL"  
-    },
-    "NULL_FOR_LOCALIZATION_SETLANGUAGE": {
-        "method": "localization.setLanguage",
-        "validationJsonPath": "result",
-        "content": "NULL"  
-    },
-    "NULL_FOR_LOCALIZATION_SETTIMEZONE": {
-        "method": "localization.setTimeZone",
-        "validationJsonPath": "result",
-        "content": "NULL"
-  
     }
 }
