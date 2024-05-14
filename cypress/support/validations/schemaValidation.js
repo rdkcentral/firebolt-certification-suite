@@ -89,8 +89,8 @@ Cypress.Commands.add(
                 formattedResponse = Object.assign(formattedResponse, response.result);
                 formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
               } else if (
-                !response &&
-                !response.result &&
+                response &&
+                response.result &&
                 !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
               ) {
                 formattedResponse.eventResponse = response.result;
