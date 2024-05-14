@@ -191,7 +191,7 @@ Given(
                                 validationType == CONSTANTS.EVENT
                                   ? methodOrEventResponse
                                   : validationType == CONSTANTS.METHOD
-                                    ? methodOrEventResponse.result
+                                    ? methodOrEventResponse.response.result
                                     : null;
 
                               cy.decodeValidation(

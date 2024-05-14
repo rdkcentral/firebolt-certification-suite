@@ -96,7 +96,7 @@ Cypress.Commands.add(
                 const apiErrorResponse =
                   validationType == CONSTANTS.EVENT
                     ? apiOrEventObject.eventListenerResponse.error
-                    : apiOrEventObject.response.error;
+                    : apiOrEventObject.response.response.error;
 
                 cy.log(
                   `Actual error code ${apiErrorResponse.code} expected to be present in list of expected error codes`
@@ -680,7 +680,8 @@ Cypress.Commands.add(
       return;
     }
     if (validationType == CONSTANTS.METHOD) {
-      const { response, expected, apiSchemaResult } = methodOrEventObject;
+      const { expected, apiSchemaResult } = methodOrEventObject;
+      const response = methodOrEventObject.response.response;
 
       cy.validationChecksForResponseAndSchemaResult(
         response,
