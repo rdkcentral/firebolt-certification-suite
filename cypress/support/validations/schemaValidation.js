@@ -81,16 +81,28 @@ Cypress.Commands.add(
               };
             }
             if (response.hasOwnProperty(CONSTANTS.RESULT)) {
-              if (response?.result?.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) {
+              if (
+                response &&
+                response.result &&
+                response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+              ) {
                 formattedResponse = Object.assign(formattedResponse, response.result);
                 formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
-              } else if (!response?.result?.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) {
+              } else if (
+                !response &&
+                !response.result &&
+                !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+              ) {
                 formattedResponse.eventResponse = response.result;
                 formattedResponse.eventSchemaResult = formattedSchemaValidationResult;
                 formattedResponse.eventTime = null;
               }
             } else if (response.hasOwnProperty(CONSTANTS.ERROR)) {
-              if (response?.result?.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) {
+              if (
+                response &&
+                response.result &&
+                response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+              ) {
                 formattedResponse = Object.assign(formattedResponse, response.error);
                 formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
               } else if (!response?.result?.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) {
