@@ -408,26 +408,44 @@ function loggingValidationCheckResult(validationCheck) {
     }
   });
 
-  // Constructing the logString to pass to fireLog
-  // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
-  validationCheck.forEach((assertion) => {
-    const logString = `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`;
-    if (assertion.validationStatus == CONSTANTS.SKIPPED) {
-      fireLog.equal(
-        CONSTANTS.SKIPPED,
-        assertion.validationStatus,
-        assertion.validationPoint,
-        logString
+  // Printing the status of all checks in the report.
+  cy.get(validationCheck)
+    .each((logging) => {
+      cy.log(
+        `${logging.validationPoint}: ${logging.validationStatus}. ${logging.message}`,
+        'loggingValidationCheckResult'
       );
-    } else {
-      fireLog.equal(
-        CONSTANTS.PASS,
-        assertion.validationStatus,
-        assertion.validationPoint,
-        logString
-      );
-    }
-  });
+    })
+    .then(() => {
+      // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
+      validationCheck.forEach((assertion) => {
+        if (assertion.validationStatus == CONSTANTS.SKIPPED) {
+          assert.equal(assertion.validationStatus, CONSTANTS.SKIPPED, assertion.validationPoint);
+        } else {
+          assert.equal(assertion.validationStatus, CONSTANTS.PASS, assertion.validationPoint);
+        }
+      });
+    });
+  //  // Constructing the logString to pass to fireLog
+  //  // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
+  //  validationCheck.forEach((assertion) => {
+  //    const logString = `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`;
+  //    if (assertion.validationStatus == CONSTANTS.SKIPPED) {
+  //      fireLog.equal(
+  //        CONSTANTS.SKIPPED,
+  //        assertion.validationStatus,
+  //        assertion.validationPoint,
+  //        logString
+  //      );
+  //    } else {
+  //      fireLog.equal(
+  //        CONSTANTS.PASS,
+  //        assertion.validationStatus,
+  //        assertion.validationPoint,
+  //        logString
+  //      );
+  //    }
+  //  });
 }
 
 /**
