@@ -49,10 +49,10 @@ Given(
         fireboltItems.forEach((item) => {
           const validationType = item.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
 
-          const methodOrEvent = item[validationType];
+          const methodOrEvent = item[validationType].includes('_') ? item[validationType].split('_')[1] : item[validationType];
           const context = item.context;
-          const validationJsonPath = item.validationJsonPath;
-          const contentObject = item.content;
+          const validationJsonPath = item.validationJsonPath ? item.validationJsonPath: CONSTANTS.RESULT;
+          const contentObject = item.content ? item.content : CONSTANTS.NULL_RESPONSE; 
           const expectingError = item.expectingError;
 
           // If the app ID is not passed from the feature, the default app ID will be retrieved.

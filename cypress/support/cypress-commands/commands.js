@@ -79,6 +79,15 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
           const envParam = params.split('-')[1];
           params = UTILS.getEnvVariable(envParam, false);
         }
+        item.expected = item.expected ? item.expected : CONSTANTS.RESULT;
+        item.action = CONSTANTS.ACTION_CORE.toLowerCase();
+
+        // If a method has prefix with an underscore, the value is taken as the action.
+        if (item.method && item.method.includes('_')) {
+          item.action = item.method.split('_')[0];
+          item.method = item.method.split('_')[1];
+        }
+
         return results.push({
           method: item.method,
           params: params,
@@ -462,6 +471,10 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
       });
     });
   } else if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTMOCK)) {
+    // {
+    //   "firstParty": true,
+    //   "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI"
+    // }
     cy.getFireboltData(
       beforeOperation[CONSTANTS.FIREBOLTMOCK],
       CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS

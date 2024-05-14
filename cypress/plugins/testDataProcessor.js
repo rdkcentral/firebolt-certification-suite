@@ -4,6 +4,7 @@ const CONSTANTS = require('../support/constants/constants');
 const REGEXFORMATS = require('../support/constants/regexformats');
 let envVariables;
 const path = require('path');
+const _ = require('lodash');
 
 function testDataProcessor(configEnv) {
   envVariables = configEnv;
@@ -34,8 +35,8 @@ function testDataProcessor(configEnv) {
   );
 
   // Resolving the variables in the JSON
-  const resolvedFireboltCallsJson = processfireboltJson(combinedFireboltCallsJson);
-  const resolvedFireboltMocksJson = processfireboltJson(combinedFireboltMocksJson);
+  const resolvedFireboltCallsJson = processFireboltJson(combinedFireboltCallsJson);
+  const resolvedFireboltMocksJson = processFireboltJson(combinedFireboltMocksJson);
   return {
     resolvedFireboltCallsJson: resolvedFireboltCallsJson,
     resolvedFireboltMocksJson: resolvedFireboltMocksJson,
@@ -43,25 +44,15 @@ function testDataProcessor(configEnv) {
 }
 
 // Function to resolve the data in the JSON.
-function processfireboltJson(jsonData) {
+function processFireboltJson(jsonData) {
   // Looping through each file
   for (const key in jsonData) {
     if (Object.hasOwnProperty.call(jsonData, key)) {
       const object = jsonData[key];
-      // Distinguishing between the firebolt object utilized for making a API calls or for validation purpose.
-      if (!object.hasOwnProperty('validationJsonPath')) {
-        // Updating the default value when the firebolt object does not have.
+      // Updating the default value for params and context, when the firebolt object does not have.
         object.params = object.params ? object.params : CONSTANTS.NO_PARAMS;
-        object.expected = object.expected ? object.expected : CONSTANTS.RESULT;
-        object.action = CONSTANTS.ACTION_CORE.toLowerCase();
-      }
-      object.context = object.context ? object.context : CONSTANTS.NO_CONTEXT;
+        object.context = object.context ? object.context : CONSTANTS.NO_CONTEXT;
 
-      // If a method has prefix with an underscore, the value is taken as the action.
-      if (object.method && object.method.includes('_')) {
-        object.action = object.method.split('_')[0];
-        object.method = object.method.split('_')[1];
-      }
 
       // Iterating over the object, resolving the data when the params, context and content fields are found.
       for (const prop in object) {
