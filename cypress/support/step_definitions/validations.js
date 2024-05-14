@@ -134,9 +134,9 @@ Given(
                         (response) => {
                           response = JSON.parse(response);
                           if (
-                            result &&
-                            result.result &&
-                            result.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
+                            response &&
+                            response.result &&
+                            response.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
                           ) {
                             response.result = response.result.eventResponse;
                           }

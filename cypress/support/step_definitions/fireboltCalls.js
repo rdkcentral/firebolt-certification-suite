@@ -165,8 +165,7 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
           result = JSON.parse(result);
           cy.updateResponseForFCS(method, params, result).then((updatedResponse) => {
             // Create a deep copy to avoid reference mutation
-            const responseType = result.error !== null ? 'error' : 'result';
-            const dataToBeCensored = _.cloneDeep(result[responseType]);
+            const dataToBeCensored = _.cloneDeep(result);
 
             // Call the 'censorData' command to hide sensitive data
             cy.censorData(method, dataToBeCensored).then((maskedResult) => {

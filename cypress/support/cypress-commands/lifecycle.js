@@ -312,7 +312,7 @@ Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) 
       return false;
     }
     if (CONSTANTS.LIFECYCLE_METHOD_LIST.includes(method)) {
-      cy.updateLifecycleResponse(response, method).then((updatedResponse) => {
+      cy.updateResponseForFCS(method, '', response).then((updatedResponse) => {
         return updatedResponse;
       });
     }

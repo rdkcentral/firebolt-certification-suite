@@ -126,7 +126,7 @@ module.exports = {
   EXTERNAL_MODULEREQID_PATH: 'cypress/fixtures/external/moduleReqId/moduleReqId.json',
   EXTERNAL_PATH: 'cypress/fixtures/external/modules/',
   EXTERNAL_PREREQUISITE_DATA: './cypress/fixtures/external/PreRequisiteData.json',
-  EXTRACTEDAPI_PATH: 'extractedApiObject.response.',
+  EXTRACTEDAPI_PATH: 'extractedApiObject.response.response.',
   FAIL: 'FAIL',
   FAILED_TO_PARSE_LIEFECYCLE_ERROR:
     'Failed to parse error object from response while setting lifecycle state. Response received : ',
