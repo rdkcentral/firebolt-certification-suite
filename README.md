@@ -33,6 +33,11 @@ To execute the certification suite against any platform, the following setup mus
 
   `yarn install`
 
+  Note: 
+  - If any dependency overrides exist in the remote config module, they will be applied during the post-install phase.
+  - The original versions of overridden dependencies will be stored in `originalPkgVersion.json` to avoid package.json and yarn.lock getting out of sync.
+  - To restore the `package.json` to its original state, run `node Scripts/restorePkgJson.js`. This will restore the original `package.json` and delete `originalPkgVersion.json`.
+  
 - Pull the configurations (if applicable)
 
   `yarn run setup`
