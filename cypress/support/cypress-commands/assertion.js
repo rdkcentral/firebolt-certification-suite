@@ -37,12 +37,12 @@ Cypress.Commands.add(
   (method, expectedContent, validationType, context = CONSTANTS.NO_CONTEXT, appId, param) => {
     const fetchErrorValidationObjectForExceptionmethod = (method, param) => {
       return new Promise((resolve) => {
-        const exceptionMethods = UTILS.getEnvVariable('exceptionMethods');
+        const exceptionMethods = UTILS.getEnvVariable(CONSTANTS.EXCEPTION_METHODS);
         let exceptionType, methodInExceptionList, errorType;
         for (const [type, list] of Object.entries(exceptionMethods)) {
           methodInExceptionList = list.find((obj) => {
             if (obj.method && obj.method.toLowerCase() === method.toLowerCase()) {
-              if (obj.hasOwnProperty('param')) {
+              if (obj.hasOwnProperty(CONSTANTS.PARAM)) {
                 return _.isEqual(obj.param, param);
               } else {
                 return true;
@@ -59,10 +59,10 @@ Cypress.Commands.add(
 
         if (methodInExceptionList) {
           switch (exceptionType) {
-            case 'NOT_AVAILABLE_METHODS':
+            case CONSTANTS.NOT_AVAILABLE_METHODS:
               errorType = CONSTANTS.NOT_AVAILABLE;
               break;
-            case 'NOT_PERMITTED_METHODS':
+            case CONSTANTS.NOT_PERMITTED_METHODS:
               errorType = CONSTANTS.NOT_PERMITTED;
               break;
             default:
@@ -72,7 +72,7 @@ Cypress.Commands.add(
         const errorSchemaFilePath = CONSTANTS.ERROR_SCHEMA_OBJECTS_PATH;
         const errorContentFilePath = CONSTANTS.ERROR_CONTENT_OBJECTS_PATH;
 
-        cy.task('readFileIfExists', errorSchemaFilePath).then((errorSchema) => {
+        cy.task(CONSTANTS.READFILEIFEXISTS, errorSchemaFilePath).then((errorSchema) => {
           if (errorSchema) {
             errorSchema = JSON.parse(errorSchema);
             errorSchema = errorSchema[errorType];
@@ -81,7 +81,7 @@ Cypress.Commands.add(
               errorSchema.type == CONSTANTS.VALIDATION_FUNCTION
             ) {
               errorSchema.validations.forEach((validationObject) => {
-                cy.task('readFileIfExists', errorContentFilePath).then((errorContent) => {
+                cy.task(CONSTANTS.READFILEIFEXISTS, errorContentFilePath).then((errorContent) => {
                   errorContent = JSON.parse(errorContent);
                   validationObject.type = errorContent[validationObject.type];
                   resolve(errorSchema);

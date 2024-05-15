@@ -5,15 +5,14 @@ const REGEXFORMATS = require('../support/constants/regexformats');
 let envVariables;
 const path = require('path');
 const _ = require('lodash');
+const logger = require('../support/Logger')('testDataProcessor.js');
 
 function testDataProcessor(configEnv) {
   envVariables = configEnv;
-  console.log('Inside testDataProcessor function');
-
-  const fcsFireboltCalls = './cypress/fixtures/fireboltCalls/';
-  const configModuleFireboltCalls = './node_modules/configModule/testData/fireboltCalls/';
-  const fcsFireboltMocks = './cypress/fixtures/fireboltMocks/';
-  const configModuleFireboltMocks = './node_modules/configModule/testData/fireboltMocks/';
+  const fcsFireboltCalls = CONSTANTS.FIREBOLTCALLS_FROM_FCS;
+  const configModuleFireboltCalls = CONSTANTS.FIREBOLTCALLS_FROM_CONFIGMODULE;
+  const fcsFireboltMocks = CONSTANTS.FIREBOLTMOCK_FROM_FCS;
+  const configModuleFireboltMocks = CONSTANTS.FIREBOLTMOCK_FROM_CONFIGMODULE;
 
   // Merging all JSON files from the directory.
   const fcsFireboltCallsMergedJson = fetchMergedJsonFromDirectory(fcsFireboltCalls);
@@ -50,13 +49,18 @@ function processFireboltJson(jsonData) {
     if (Object.hasOwnProperty.call(jsonData, key)) {
       const object = jsonData[key];
       // Updating the default value for params and context, when the firebolt object does not have.
-        object.params = object.params ? object.params : CONSTANTS.NO_PARAMS;
-        object.context = object.context ? object.context : CONSTANTS.NO_CONTEXT;
-
+      object.params = object.params ? object.params : CONSTANTS.NO_PARAMS;
+      object.context = object.context ? object.context : CONSTANTS.NO_CONTEXT;
 
       // Iterating over the object, resolving the data when the params, context and content fields are found.
       for (const prop in object) {
-        if (['params', 'context', 'content'].includes(prop)) {
+        if (
+          [
+            CONSTANTS.PARAMS.toLowerCase(),
+            CONSTANTS.CONTEXT.toLowerCase(),
+            CONSTANTS.CONTENT.toLowerCase(),
+          ].includes(prop)
+        ) {
           const value = testDataHandler(prop, object[prop], object);
           jsonData[key][prop] = value;
         }
@@ -68,19 +72,19 @@ function processFireboltJson(jsonData) {
 
 function testDataHandler(requestType, dataIdentifier, fireboltObject) {
   switch (requestType) {
-    case 'params':
+    case CONSTANTS.PARAMS.toLowerCase():
       if (/CYPRESSENV/.test(dataIdentifier)) {
         return dataIdentifier;
       }
-      return typeof dataIdentifier === 'string'
+      return typeof dataIdentifier === CONSTANTS.TYPE_STRING
         ? testDataParser(dataIdentifier, requestType)
         : dataIdentifier;
 
-    case 'context':
+    case CONSTANTS.CONTEXT.toLowerCase():
       const contextImportFile = CONSTANTS.CONTEXT_FILE_PATH;
       const contextValue = fetchAndParseDataFromJSON(contextImportFile, dataIdentifier);
       if (contextValue === CONSTANTS.NO_DATA) {
-        console.log(
+        logger.info(
           `Expected context not found for ${dataIdentifier}. Returning ${dataIdentifier} as is.`
         );
         return dataIdentifier;
@@ -88,10 +92,10 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
         return contextValue;
       }
 
-    case 'content':
+    case CONSTANTS.CONTENT.toLowerCase():
       // Checking if an error is expected; if so, retrieving the error content objects.
       if (
-        fireboltObject.hasOwnProperty('expectingError') &&
+        fireboltObject.hasOwnProperty(CONSTANTS.EXPECTING_ERROR) &&
         fireboltObject.expectingError == true
       ) {
         const errorSchemaFilePath = CONSTANTS.ERROR_SCHEMA_OBJECTS_PATH;
@@ -108,13 +112,16 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
               validationObject.type
             );
             if (errorContentObject == CONSTANTS.NO_DATA) {
-              console.log(`Expected error content not found in ${errorContentFilePath}`);
+              logger.info(
+                `Expected error content object not found in ${errorContentFilePath} for ${validationObject.type}`
+              );
             }
             return (validationObject.type = errorContentObject);
           });
           return errorSchemaObject;
         } else {
-          console.log(`Unable to find data for Error validation for ${dataIdentifier}`);
+          logger.info(`Unable to find data for Error validation for ${dataIdentifier}`);
+          return dataIdentifier;
         }
       } else {
         // Combining validation objects from FCS and config module into single JSON
@@ -130,7 +137,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                   return data.type;
                 }
                 switch (data.mode) {
-                  case 'regex':
+                  case CONSTANTS.REGEX.toLowerCase():
                     const regexType = data.type.includes('_REGEXP')
                       ? data.type
                       : data.type + '_REGEXP';
@@ -143,8 +150,8 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                     }
                     return (data.type = parsedRegexExp.toString());
 
-                  case 'deviceContentValidation':
-                    let deviceMac = envVariables['deviceMac'];
+                  case CONSTANTS.DEVICE_CONTENT_VALIDATION:
+                    let deviceMac = envVariables[CONSTANTS.DEVICE_MAC];
                     deviceMac = deviceMac.replaceAll(':', '');
 
                     const deviceDataPath = deviceMac
@@ -152,7 +159,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                       : CONSTANTS.DEFAULT_DEVICE_DATA_PATH;
 
                     if (!deviceMac) {
-                      console.log('Falling back to default device data path');
+                      logger.info('Falling back to default device data path');
                     }
                     return (data.type = fetchAndParseDataFromJSON(deviceDataPath, data.type));
 
@@ -185,7 +192,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
  */
 function testDataParser(dataIdentifier, requestType) {
   let defaultRetVal = dataIdentifier;
-  if (requestType == 'params') {
+  if (requestType == CONSTANTS.PARAMS.toLowerCase()) {
     defaultRetVal = { value: dataIdentifier };
   }
   const defaultData = mergeJsonFilesData([
@@ -218,14 +225,14 @@ function testDataParser(dataIdentifier, requestType) {
       );
       paramData =
         parsedExternalModuleData != CONSTANTS.NO_DATA ? parsedExternalModuleData : paramData;
-      response = paramDatalogs(paramData, dataIdentifier, defaultRetVal);
+      response = paramDatalogs(paramData, dataIdentifier, defaultRetVal, requestType);
       return response;
     } else {
-      response = paramDatalogs(paramData, dataIdentifier, defaultRetVal);
+      response = paramDatalogs(paramData, dataIdentifier, defaultRetVal, requestType);
       return response;
     }
   } else {
-    response = paramDatalogs(paramData, dataIdentifier, defaultRetVal);
+    response = paramDatalogs(paramData, dataIdentifier, defaultRetVal, requestType);
     return response;
   }
 }
@@ -246,7 +253,7 @@ function combineValidationObjectsJson() {
     for (const key in configModuleValidationObjectsJson) {
       if (fcsValidationObjectsJson.hasOwnProperty(key)) {
         configModuleValidationObjectsJson[key].data.map((configObjectValue) => {
-          if (!configObjectValue.hasOwnProperty('override')) {
+          if (!configObjectValue.hasOwnProperty(CONSTANTS.OVERRIDE)) {
             fcsValidationObjectsJson[key].data.push(configObjectValue);
           } else {
             overrideValue = configObjectValue.override;
@@ -270,9 +277,11 @@ function combineValidationObjectsJson() {
   return combinedValidationObjects;
 }
 
-function paramDatalogs(paramData, dataIdentifier, defaultRetVal) {
+function paramDatalogs(paramData, dataIdentifier, defaultRetVal, requestType) {
   if (paramData == CONSTANTS.NO_DATA) {
-    // console.log(eval(CONSTANTS.EXPECTED_DATA_NOT_FOUND_IN_MODULE_JSONS))
+    logger.info(
+      `Expected ${requestType || 'data'} ${dataIdentifier} was not found in fixtures. Returning ${dataIdentifier} as is.`
+    );
     return defaultRetVal;
   } else {
     return paramData;
@@ -307,7 +316,7 @@ function parseDataFromJson(data, dataIdentifier, requestType) {
         typeof data[dataIdentifier] == CONSTANTS.NUMBER ||
         data[dataIdentifier] === null
       ) {
-        if (requestType == 'params') {
+        if (requestType == CONSTANTS.PARAMS.toLowerCase()) {
           return { value: data[dataIdentifier] };
         } else {
           return data[dataIdentifier];
