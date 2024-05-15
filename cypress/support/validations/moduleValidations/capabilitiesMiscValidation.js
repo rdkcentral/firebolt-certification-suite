@@ -196,11 +196,8 @@ function capabilitiesSupportedLogs(capabilityParam, capabilityStatus) {
  * validateCapabilitiesRequest('capabilities.request',  {"type": "request", "specialValidationObject":[{"method":"capabilities.request","expected": true,"validationPath":"result[0].use.granted", "appId": "test.test"}]},{response:{result: '', error: null, ...}});
  */
 function validateCapabilitiesRequest(method, validationTypeObject, apiOrEventObject) {
-  console.log('validationTypeObject', validationTypeObject);
-  console.log('apiOrEventObject', apiOrEventObject);
   if (validationTypeObject && validationTypeObject.specialValidationObject) {
     cy.get(Object.values(validationTypeObject.specialValidationObject)).each((validationObject) => {
-      console.log('validationObject', validationObject);
       cy.specialValidation(validationObject);
     });
   } else {

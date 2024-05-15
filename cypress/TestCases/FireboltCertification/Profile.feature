@@ -78,4 +78,3 @@ Feature: Profile
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'allow profile flags'
         Then 'Firebolt' platform responds with 'expected profile flags for the current session'
-
