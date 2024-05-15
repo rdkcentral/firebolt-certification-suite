@@ -346,7 +346,7 @@ module.exports = {
   STRING_LOCALE_FORMAT: 'stringLocaleFormat',
   SUBSCRIBE: 'subscribe',
   SUPPORTED: 'supported',
-  SUPPORTED_CALLTYPES: { FIREBOLTCALLS: 'fireboltCalls', FIREBOLTMOCKS: 'fireboltMocks' },
+  SUPPORTED_CALLTYPES: { FIREBOLTCALLS: 'fireboltCalls', FIREBOLTMOCKS: 'fireboltMocks', SET_RESPONSE_JSON: 'setResponseJson' },
   SUPPORTED_SDK: ['Firebolt'],
   TASK: {
     CALLLIFECYCLE: 'callLifecycle',

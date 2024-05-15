@@ -33,12 +33,20 @@ function testDataProcessor(configEnv) {
     configModuleFireboltMocksMergedJson
   );
 
+  const fcsSetResponseJson = './cypress/fixtures/setResponseData.json';
+  const ConfigModuleSetResponseJson = './node_modules/configModule/testData/setResponseData.json';
+  const mergedSetResponseJson = mergeJsonFilesData([
+    fcsSetResponseJson,
+    ConfigModuleSetResponseJson,
+  ]);
+
   // Resolving the variables in the JSON
   const resolvedFireboltCallsJson = processFireboltJson(combinedFireboltCallsJson);
-  const resolvedFireboltMocksJson = processFireboltJson(combinedFireboltMocksJson);
+
   return {
-    resolvedFireboltCallsJson: resolvedFireboltCallsJson,
-    resolvedFireboltMocksJson: resolvedFireboltMocksJson,
+    fireboltCallsJson: resolvedFireboltCallsJson,
+    fireboltMocksJson: combinedFireboltMocksJson,
+    setResponseJson: mergedSetResponseJson 
   };
 }
 

@@ -36,9 +36,12 @@ Cypress.Commands.add(
     // Reading the data from combinedJson based on key.
     let fireboltData;
     if (callType == CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS) {
-      fireboltData = UTILS.getEnvVariable('resolvedFireboltMocksJson')[key];
+      fireboltData = UTILS.getEnvVariable('fireboltMocksJson')[key];
+    }
+    else if (callType == CONSTANTS.SUPPORTED_CALLTYPES.SET_RESPONSE_JSON) {
+      fireboltData = UTILS.getEnvVariable('setResponseJson')[key];
     } else {
-      fireboltData = UTILS.getEnvVariable('resolvedFireboltCallsJson')[key];
+      fireboltData = UTILS.getEnvVariable('fireboltCallsJson')[key];
     }
     if (!fireboltData) {
       cy.log(CONSTANTS.NO_DATA_FOR_THE_KEY + key).then(() => {
@@ -471,10 +474,6 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
       });
     });
   } else if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTMOCK)) {
-    // {
-    //   "firstParty": true,
-    //   "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI"
-    // }
     cy.getFireboltData(
       beforeOperation[CONSTANTS.FIREBOLTMOCK],
       CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS
