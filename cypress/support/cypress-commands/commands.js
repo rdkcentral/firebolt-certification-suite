@@ -76,14 +76,14 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
       // Process each firebolt call item
       const promises = fireboltItems.map((item) => {
         let params = item.params;
-        let method, action, expected;
+        let method, action;
         // Fetching the value of environment variable based on dataIdentifier
         if (/CYPRESSENV/.test(params)) {
           const envParam = params.split('-')[1];
           params = UTILS.getEnvVariable(envParam, false);
         }
         method = item.method;
-        expected = item.expected ? item.expected : CONSTANTS.RESULT;
+        const expected = item.expected ? item.expected : CONSTANTS.RESULT;
         action = CONSTANTS.ACTION_CORE.toLowerCase();
 
         // If a method has prefix with an underscore, the value is taken as the action.
