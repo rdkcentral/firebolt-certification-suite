@@ -56,7 +56,9 @@ Given(
           const validationJsonPath = item.validationJsonPath
             ? item.validationJsonPath
             : CONSTANTS.RESULT;
-          const contentObject = item.content ? item.content : CONSTANTS.NULL_RESPONSE;
+          const contentObject = item.hasOwnProperty(CONSTANTS.CONTENT.toLowerCase())
+            ? item.content
+            : CONSTANTS.NULL_RESPONSE;
           const expectingError = item.expectingError;
 
           // If the app ID is not passed from the feature, the default app ID will be retrieved.
