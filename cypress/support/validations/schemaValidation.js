@@ -37,21 +37,23 @@ Cypress.Commands.add(
     const responseType = response.hasOwnProperty(CONSTANTS.ERROR)
       ? CONSTANTS.ERROR
       : CONSTANTS.RESULT;
-    if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
-      if (
-        Cypress.env(CONSTANTS.TEST_TYPE) &&
-        Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
-      ) {
-        let schemaResult, error;
-        try {
-          schemaResult = cy.validateSchema(response, methodOrEvent, '', responseType);
-          response.schemaResult = schemaResult;
-        } catch (err) {
-          error = err;
-          response.error = error;
-        }
-        return response;
-      } else {
+    if (
+      Cypress.env(CONSTANTS.TEST_TYPE) &&
+      Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
+    ) {
+      try {
+        cy.validateSchema(response[responseType], methodOrEvent, '', responseType).then(
+          (schemaValidation) => {
+            response.schemaResult = schemaValidation;
+            return response;
+          }
+        );
+      } catch (err) {
+        let error = err;
+        response.error = error;
+      }
+    } else {
+      if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
         let formattedResponse = {};
         let result;
 
@@ -133,9 +135,9 @@ Cypress.Commands.add(
 
           return formattedResponse;
         });
+      } else {
+        cy.log(`Response does not have a valid result or error field - ${response}`);
       }
-    } else {
-      cy.log(`Response does not have a valid result or error field - ${response}`);
     }
   }
 );
@@ -163,7 +165,7 @@ Cypress.Commands.add(
           Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
         ) {
           let validationResult;
-          const schemaMapResult = validator.validate(response, methodSchema);
+          const schemaMapResult = validator.validate(response, schemaMap);
           if (schemaMapResult.errors.length > 0 || response === undefined) {
             validationResult = {
               status: CONSTANTS.FAIL,
