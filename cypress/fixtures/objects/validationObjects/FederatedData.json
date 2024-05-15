@@ -1,14 +1,239 @@
 {
-    "ENTITYINFO_INFOWATCH": {
+    "FEDERATEDDATA_ENTITYINFO_INFOWATCH": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "ENTITYINFO_INFOWATCH",
+                        "type": "FEDERATEDDATA_ENTITYINFO_INFOWATCH",
                         "mode": "staticContentValidation",
                         "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_ENTITYINFO_CONTENTRATING": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_ENTITYINFO_INFOWATCH",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_ENTITYINFO_WAYTOWATCH": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_ENTITYINFO_WAYTOWATCH",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_ENTITYINFO_ASSETID": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_ENTITYINFO_ASSETID",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_ENTITYINFO_SEASONID": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_ENTITYINFO_SEASONID",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_ENTITYINFO_SERIESID": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_ENTITYINFO_SERIESID",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_ENTITYINFO_APPCONTENTDATA": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_ENTITYINFO_APPCONTENTDATA",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_ENTITYINFO_EPISODENUMBER": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_ENTITYINFO_EPISODENUMBER",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_ENTITYINFO_SEASONNUMBER": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_ENTITYINFO_SEASONNUMBER",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_ENTITYINFO_SYNOPSIS": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_ENTITYINFO_SYNOPSIS",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_ENTITYINFO_RELEASEDATA": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_ENTITYINFO_RELEASEDATA",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_ENTITYINFO_ALL_VALUES": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_ENTITYINFO_ALL_VALUES",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_WITHOUT_ENTITY_TYPE": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_WITHOUT_ENTITY_TYPE",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_WITH_ENTITY_TYPE": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_WITH_ENTITY_TYPE",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_WITHOUT_PROGRAM_TYPE": {
+        "method": "content.requestDetails",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_WITHOUT_PROGRAM_TYPE",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of entityInfo data"
+                    }
+                ]
+            }
+        ]
+    },
+    "FEDERATEDDATA_REQUEST_PURCHASES": {
+        "method": "content.requestPurchases",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "FEDERATEDDATA_REQUEST_PURCHASES",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of purchased content data"
                     }
                 ]
             }

@@ -1,12 +1,62 @@
 {
     "ENTITYINFO_WAY_TO_WATCH": {
-        "entityId": "345"
+        "entityId": "3450"
     },
+    "ENTITYINFO_RATINGS": {
+        "entityId": "129"
+    },
+    "ENTITYINFO_WAY_TO_WATCH_WITHTWOENTRIES": {
+        "entityId": "128"
+    },
+    "ENTITYINFO_ENTITY_WITH_ASSETID": {
+        "entityId": "236"
+    },
+    "ENTITYINFO_ENTITY_WITH_SEASONID": {
+        "entityId": "235"
+    },
+    "ENTITYINFO_ENTITY_WITH_SERIESID": {
+        "entityId": "234"
+    },
+    "ENTITYINFO_ENTITY_WITH_APPCONTENTDATA": {
+        "entityId": "233"
+    },
+    "ENTITYINFO_ENTITY_WITH_EPISODENUMBER": {
+        "entityId": "231"
+    },
+    "ENTITYINFO_ENTITY_WITH_SEASONNUMBER": {
+        "entityId": "230"
+    },
+    "ENTITYINFO_ENTITY_WITH_SYNOPSIS": {
+        "entityId": "249"
+    },
+    "ENTITYINFO_ENTITY_WITH_RELEASEDATA": {
+        "entityId": "248"
+    },
+    "ENTITYINFO_ENTITY_WITH_ALL_VALUES": {
+        "entityId": "268"
+    },
+    "ENTITYINFO_WITHOUT_ENTITY_TYPE": {
+        "entityId": "246"
+    },
+    "ENTITYINFO_WITH_ENTITY_TYPE": {
+        "entityId": "246"
+    },
+    "ENTITYINFO_WITHOUT_PROGRAM_TYPE": {
+        "entityId": "246"
+    },
+    "PURCHASEDCONTENT_WITH_INTEGER": 123,
+    "ENTITYINFO_ENTITY_WITHOUT_EXPIRES": {
+        "entityId": "127"
+    },
+    "ENTITYINFO_ENTITY_INVALID_ENTITYID": {
+        "entityId": "127"
+    },
+    "ENTITYINFO_ENTITY_INVALID_PARAMETERS": false,
     "ENTITYINFO_INFOWATCH": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
-                "entityId": "345",
+                "entityId": "3450",
                 "entityType": "program",
                 "programType": "movie"
             },
@@ -55,6 +105,385 @@
                     ]
                 }
             ]
+        }
+    },
+    "ENTITYINFO_RATINGS_CONTENT": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "129",
+                "entityType": "program",
+                "programType": "movie"
+            },
+            "info": {
+                "title": "CONTENT RATINGS",
+                "contentRatings": [
+                    {
+                        "scheme": "US-Movie",
+                        "rating": "PG",
+                        "advisories": []
+                    }
+                ]
+            }
+        }
+    },
+    "ENTITYINFO_WAYTOWATCH": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "128",
+                "entityType": "program",
+                "programType": "movie"
+            },
+            "info": {
+                "title": "Cool Runnings",
+                "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                "releaseDate": "1993-01-01T00:00:00.000Z",
+                "contentRatings": [
+                    {
+                        "scheme": "US-Movie",
+                        "rating": "PG"
+                    },
+                    {
+                        "scheme": "CA-Movie",
+                        "rating": "G"
+                    }
+                ]
+            },
+            "waysToWatch": [
+                {
+                    "identifiers": {
+                        "assetId": "123"
+                    },
+                    "expires": "2025-01-01T00:00:00.000Z",
+                    "entitled": true,
+                    "entitledExpires": "2025-01-01T00:00:00.000Z",
+                    "offeringType": "buy",
+                    "price": 2.99,
+                    "videoQuality": [
+                        "UHD"
+                    ],
+                    "audioProfile": [
+                        "dolbyAtmos"
+                    ],
+                    "audioLanguages": [
+                        "en"
+                    ],
+                    "closedCaptions": [
+                        "en"
+                    ],
+                    "subtitles": [
+                        "es"
+                    ],
+                    "audioDescriptions": [
+                        "en"
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "assetId": "1456"
+                    },
+                    "expires": "2023-06-01T00:00:00.000Z",
+                    "entitled": true,
+                    "entitledExpires": "2023-06-01T00:00:00.000Z",
+                    "offeringType": "buy",
+                    "price": 4.99,
+                    "audioProfile": [
+                        "dolbyAtmos"
+                    ]
+                }
+            ]
+        }
+    },
+    "ENTITYINFO_ASSETID": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "236",
+                "entityType": "program",
+                "programType": "movie",
+                "assetId": "123"
+            },
+            "info": {
+                "title": "Cool Runnings"
+            }
+        }
+    },
+    "ENTITYINFO_SEASONID": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "235",
+                "entityType": "program",
+                "programType": "movie",
+                "assetId": "123",
+                "seasonId": "321"
+            },
+            "info": {
+                "title": "Cool Runnings"
+            }
+        }
+    },
+    "ENTITYINFO_SERIESID": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "234",
+                "entityType": "program",
+                "programType": "movie",
+                "assetId": "123",
+                "seasonId": "321",
+                "seriesId": "1230"
+            },
+            "info": {
+                "title": "Cool Runnings"
+            }
+        }
+    },
+    "ENTITYINFO_APPCONTENTDATA": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "233",
+                "entityType": "program",
+                "programType": "movie",
+                "assetId": "123",
+                "seasonId": "321",
+                "seriesId": "1230",
+                "appContentData": "FCA app to run test suites"
+            },
+            "info": {
+                "title": "Cool Runnings"
+            }
+        }
+    },
+    "ENTITYINFO_EPISODENUMBER": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "231",
+                "entityType": "program",
+                "programType": "movie",
+                "assetId": "123",
+                "seasonId": "321",
+                "seriesId": "1230",
+                "appContentData": "FCA app to run test suites"
+            },
+            "info": {
+                "episodeNumber": 4
+            }
+        }
+    },
+    "ENTITYINFO_SEASONNUMBER": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "230",
+                "entityType": "program",
+                "programType": "movie",
+                "assetId": "123",
+                "seasonId": "321",
+                "seriesId": "1230",
+                "appContentData": "FCA app to run test suites"
+            },
+            "info": {
+                "episodeNumber": 4,
+                "seasonNumber": 2
+            }
+        }
+    },
+    "ENTITYINFO_SYNOPSIS": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "249",
+                "entityType": "program",
+                "programType": "movie",
+                "assetId": "123",
+                "seasonId": "321",
+                "seriesId": "1230",
+                "appContentData": "FCA app to run test suites"
+            },
+            "info": {
+                "episodeNumber": 4,
+                "seasonNumber": 2,
+                "synopsis": "Verifing schema and contents"
+            }
+        }
+    },
+    "ENTITYINFO_RELEASEDATA": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "248",
+                "entityType": "program",
+                "programType": "movie",
+                "assetId": "123",
+                "seasonId": "321",
+                "seriesId": "1230",
+                "appContentData": "FCA app to run test suites"
+            },
+            "info": {
+                "episodeNumber": 4,
+                "seasonNumber": 2,
+                "synopsis": "Verifing schema and contents",
+                "releaseDate": "2023-05-01T00:00:00.000Z"
+            }
+        }
+    },
+    "ENTITYINFO_ALL_VALUES": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "268",
+                "entityType": "program",
+                "programType": "movie",
+                "assetId": "123",
+                "seasonId": "321",
+                "seriesId": "1230",
+                "appContentData": "FCA app to run test suites"
+            },
+            "info": {
+                "title": "ENTITY INFO",
+                "entityType": "program",
+                "programType": "other",
+                "synopsis": "ALL ENTITYINFO VALUES",
+                "seasonNumber": 1,
+                "episodeNumber": 2,
+                "releaseDate": "1993-01-01T00:00:00.000Z",
+                "contentRatings": [
+                    {
+                        "scheme": "US-Movie",
+                        "rating": "PG",
+                        "advisories": []
+                    },
+                    {
+                        "scheme": "CA-Movie",
+                        "rating": "G",
+                        "advisories": []
+                    }
+                ],
+                "waysToWatch": [
+                    {
+                        "identifiers": {
+                            "assetId": "123"
+                        },
+                        "expires": "2025-01-01T00:00:00.000Z",
+                        "entitled": true,
+                        "entitledExpires": "2025-01-01T00:00:00.000Z",
+                        "offeringType": "buy",
+                        "price": 2.99,
+                        "videoQuality": [
+                            "UHD"
+                        ],
+                        "audioProfile": [
+                            "dolbyAtmos"
+                        ],
+                        "audioLanguages": [
+                            "en"
+                        ],
+                        "closedCaptions": [
+                            "en"
+                        ],
+                        "subtitles": [
+                            "es"
+                        ],
+                        "audioDescriptions": [
+                            "en"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "WITHOUT_ENTITY_TYPE": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "249",
+                "entityType": "program",
+                "programType": "movie",
+                "assetId": "123",
+                "seasonId": "321",
+                "seriesId": "1230",
+                "appContentData": "FCA app to run test suites"
+            },
+            "info": {
+                "episodeNumber": 4,
+                "seasonNumber": 2,
+                "synopsis": "Verifing schema and contents"
+            }
+        }
+    },
+    "REQUEST_PURCHASES": {
+        "totalCount": 10,
+        "expires": "2025-01-01T00:00:00.000Z",
+        "entries": [
+            {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ]
+                },
+                "waysToWatch": [
+                    {
+                        "identifiers": {
+                            "assetId": "123"
+                        },
+                        "expires": "2025-01-01T00:00:00.000Z",
+                        "entitled": true,
+                        "entitledExpires": "2025-01-01T00:00:00.000Z",
+                        "offeringType": "buy",
+                        "price": 2.99,
+                        "videoQuality": [
+                            "UHD"
+                        ],
+                        "audioProfile": [
+                            "dolbyAtmos"
+                        ],
+                        "audioLanguages": [
+                            "en"
+                        ],
+                        "closedCaptions": [
+                            "en"
+                        ],
+                        "subtitles": [
+                            "es"
+                        ],
+                        "audioDescriptions": [
+                            "en"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "WITH_ENTITY_TYPE": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "246",
+                "entityType": "program",
+                "programType": "movie"
+            },
+            "info": {
+                "title": "ENTITYINFO_WITH_ENTITYTYPE"
+            }
         }
     }
 }
