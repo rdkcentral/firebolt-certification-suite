@@ -1,6 +1,6 @@
 {
     "ENTITYINFO_WAY_TO_WATCH": {
-        "entityId": "3450"
+        "entityId": "345"
     },
     "ENTITYINFO_RATINGS": {
         "entityId": "129"
@@ -29,7 +29,7 @@
     "ENTITYINFO_ENTITY_WITH_SYNOPSIS": {
         "entityId": "249"
     },
-    "ENTITYINFO_ENTITY_WITH_RELEASEDATA": {
+    "ENTITYINFO_ENTITY_WITH_RELEASEDATE": {
         "entityId": "248"
     },
     "ENTITYINFO_ENTITY_WITH_ALL_VALUES": {
@@ -56,7 +56,7 @@
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
-                "entityId": "3450",
+                "entityId": "345",
                 "entityType": "program",
                 "programType": "movie"
             },
@@ -311,7 +311,7 @@
             }
         }
     },
-    "ENTITYINFO_RELEASEDATA": {
+    "ENTITYINFO_RELEASEDATE": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -484,6 +484,135 @@
             "info": {
                 "title": "ENTITYINFO_WITH_ENTITYTYPE"
             }
+        }
+    },
+    "WITHOUT_PROGRAM_TYPE": {
+        "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "246",
+                "entityType": "program"
+            },
+            "info": {
+                "title": "ENTITYINFO_WITH_PROGRAMTYPE"
+            }
+        }
+    },
+    "DETAILS": {
+        "entityId": "345", "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+        "details": {
+            "identifiers": {
+                "entityId": "345",
+                "entityType": "program",
+                "programType": "movie"
+            },
+            "info": {
+                "title": "Cool Runnings",
+                "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                "releaseDate": "1993-01-01T00:00:00.000Z",
+                "contentRatings": [
+                    {
+                        "scheme": "US-Movie",
+                        "rating": "PG"
+                    },
+                    {
+                        "scheme": "CA-Movie",
+                        "rating": "G"
+                    }
+                ]
+            },
+            "waysToWatch": [
+                {
+                    "identifiers": {
+                        "assetId": "123"
+                    },
+                    "expires": "2025-01-01T00:00:00.000Z",
+                    "entitled": true,
+                    "entitledExpires": "2025-01-01T00:00:00.000Z",
+                    "offeringType": "buy",
+                    "price": 2.99,
+                    "videoQuality": [
+                        "UHD"
+                    ],
+                    "audioProfile": [
+                        "dolbyAtmos"
+                    ],
+                    "audioLanguages": [
+                        "en"
+                    ],
+                    "closedCaptions": [
+                        "en"
+                    ],
+                    "subtitles": [
+                        "es"
+                    ],
+                    "audioDescriptions": [
+                        "en"
+                    ]
+                }
+            ]
+        }
+        }
+    },
+    "PURCHASEDCONTENT": {
+        "purchases": {
+            "totalCount": 10,
+								"expires": "2025-01-01T00:00:00.000Z",
+								"entries": [
+									{
+										"identifiers": {
+											"entityId": "345",
+											"entityType": "program",
+											"programType": "movie"
+										},
+										"info": {
+											"title": "Cool Runnings",
+											"synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+											"releaseDate": "1993-01-01T00:00:00.000Z",
+											"contentRatings": [
+												{
+													"scheme": "US-Movie",
+													"rating": "PG"
+												},
+												{
+													"scheme": "CA-Movie",
+													"rating": "G"
+												}
+											]
+										},
+										"waysToWatch": [
+											{
+												"identifiers": {
+													"assetId": "123"
+												},
+												"expires": "2025-01-01T00:00:00.000Z",
+												"entitled": true,
+												"entitledExpires": "2025-01-01T00:00:00.000Z",
+												"offeringType": "buy",
+												"price": 2.99,
+												"videoQuality": [
+													"UHD"
+												],
+												"audioProfile": [
+													"dolbyAtmos"
+												],
+												"audioLanguages": [
+													"en"
+												],
+												"closedCaptions": [
+													"en"
+												],
+												"subtitles": [
+													"es"
+												],
+												"audioDescriptions": [
+													"en"
+												]
+											}
+										]
+									}
+								]
         }
     }
 }

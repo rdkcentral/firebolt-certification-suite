@@ -1,16 +1,18 @@
 {
     "GET_DISCOVERY_ENTITYINFO":{
-        "method": "discovery.details"
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_DETAILS"
     },
     "GET_DISCOVERY_PURCHASEDCONTENT":{
-        "method": "discovery.purchases"
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASEDCONTENT"
     },
     "GET_ENTITYINFO_WITH_WAY_TO_WATCH":{
         "method": "discovery_content.requestDetails",
         "params": "FEDERATEDDATA_ENTITYINFO_WAY_TO_WATCH"
     },
     "EXPECTED_WAY_TO_WATCH_DATA":{
-        "method": "discovery_content.requestDetails",
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_ENTITYINFO_INFOWATCH"
     },
@@ -19,16 +21,16 @@
         "params": "FEDERATEDDATA_ENTITYINFO_RATINGS"
     },
     "EXPECTED_CONTENT_RATINGS":{
-        "method": "discovery_content.requestDetails",
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_ENTITYINFO_CONTENTRATING"
     },
-    "GET_WAY_TO_WATCH_DATA_WITH_TWO_ENTRIES":{
+    "GET_WAY_TO_WATCH_DATA_WITH_TWO_ENTIRES":{
         "method": "discovery_content.requestDetails",
         "params": "FEDERATEDDATA_ENTITYINFO_WAY_TO_WATCH_WITHTWOENTRIES"
     },
-    "EXPECTED_WAY_TO_WATCH_DATA_WITH_TWO_ENTRIES":{
-        "method": "discovery_content.requestDetails",
+    "EXPECTED_WAY_TO_WATCH_DATA_WITH_TWO_ENTIRES":{
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_ENTITYINFO_WAYTOWATCH"
     },
@@ -37,7 +39,7 @@
         "params": "FEDERATEDDATA_ENTITYINFO_ENTITY_WITH_ASSETID"
     },
     "EXPECTED_IDENTIFIERS_ASSETID":{
-        "method": "discovery_content.requestDetails",
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_ENTITYINFO_ASSETID"
     },    
@@ -46,7 +48,7 @@
         "params": "FEDERATEDDATA_ENTITYINFO_ENTITY_WITH_SEASONID"
     },
     "EXPECTED_IDENTIFIERS_SEASONID":{
-        "method": "discovery_content.requestDetails",
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_ENTITYINFO_SEASONID"
     },
@@ -55,7 +57,7 @@
         "params": "FEDERATEDDATA_ENTITYINFO_ENTITY_WITH_SERIESID"
     },
     "EXPECTED_IDENTIFIERS_SERIESID":{
-        "method": "discovery_content.requestDetails",
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_ENTITYINFO_SERIESID"
     },
@@ -64,7 +66,7 @@
         "params": "FEDERATEDDATA_ENTITYINFO_ENTITY_WITH_APPCONTENTDATA"
     },
     "EXPECTED_IDENTIFIERS_APPCONTENTDATA":{
-        "method": "discovery_content.requestDetails",
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_ENTITYINFO_APPCONTENTDATA"
     },
@@ -73,7 +75,7 @@
         "params": "FEDERATEDDATA_ENTITYINFO_ENTITY_WITH_EPISODENUMBER"
     },
     "EXPECTED_ENTITY_EPISODENUMBER":{
-        "method": "discovery_content.requestDetails",
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_ENTITYINFO_EPISODENUMBER"
     },
@@ -82,7 +84,7 @@
         "params": "FEDERATEDDATA_ENTITYINFO_ENTITY_WITH_SEASONNUMBER"
     },
     "EXPECTED_ENTITY_SEASONNUMBER":{
-        "method": "discovery_content.requestDetails",
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_ENTITYINFO_SEASONNUMBER"
     },
@@ -91,25 +93,25 @@
         "params": "FEDERATEDDATA_ENTITYINFO_ENTITY_WITH_SYNOPSIS"
     },
     "EXPECTED_ENTITY_SYNOPSIS":{
-        "method": "discovery_content.requestDetails",
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_ENTITYINFO_SYNOPSIS"
     },
-    "GET_ENTITYINFO_WITH_RELEASEDATA":{
+    "GET_ENTITYINFO_WITH_RELEASEDATE":{
         "method": "discovery_content.requestDetails",
-        "params": "FEDERATEDDATA_ENTITYINFO_ENTITY_WITH_RELEASEDATA"
+        "params": "FEDERATEDDATA_ENTITYINFO_ENTITY_WITH_RELEASEDATE"
     },
-    "EXPECTED_ENTITY_RELEASEDATA":{
-        "method": "discovery_content.requestDetails",
+    "EXPECTED_ENTITY_RELEASEDATE":{
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
-		"expected": "FEDERATEDDATA_ENTITYINFO_RELEASEDATA"
+		"expected": "FEDERATEDDATA_ENTITYINFO_RELEASEDATE"
     },
     "GET_ENTITYINFO_WITH_ALL_VALUES":{
         "method": "discovery_content.requestDetails",
         "params": "FEDERATEDDATA_ENTITYINFO_ENTITY_WITH_ALL_VALUES"
     },
-    "EXPECTED_ENTITY_WITH_ALL_VALUES":{
-        "method": "discovery_content.requestDetails",
+    "EXPECTED_ENTITYINFO_WITH_ALL_VALUES":{
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_ENTITYINFO_ALL_VALUES"
     },
@@ -117,8 +119,8 @@
         "method": "discovery_content.requestDetails",
         "params": "FEDERATEDDATA_ENTITYINFO_WITHOUT_ENTITY_TYPE"
     },
-    "EXPECTED_ENTITY_WITHOUT_ENTITY_TYPE":{
-        "method": "discovery_content.requestDetails",
+    "EXPECTED_ENTITYINFO_WITHOUT_ENTITY_TYPE":{
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_WITHOUT_ENTITY_TYPE"
     },
@@ -126,8 +128,8 @@
         "method": "discovery_content.requestDetails",
         "params": "FEDERATEDDATA_ENTITYINFO_WITH_ENTITY_TYPE"
     },
-    "EXPECTED_ENTITY_WITH_ENTITY_TYPE":{
-        "method": "discovery_content.requestDetails",
+    "EXPECTED_ENTITYINFO_WITH_ENTITY_TYPE":{
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_WITH_ENTITY_TYPE"
     },
@@ -135,8 +137,8 @@
         "method": "discovery_content.requestDetails",
         "params": "FEDERATEDDATA_ENTITYINFO_WITHOUT_PROGRAM_TYPE"
     },
-    "EXPECTED_ENTITY_WITHOUT_PROGRAM_TYPE":{
-        "method": "discovery_content.requestDetails",
+    "EXPECTED_ENTITYINFO_WITHOUT_PROGRAM_TYPE":{
+        "method": "content.requestDetails",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_WITHOUT_PROGRAM_TYPE"
     },
@@ -144,7 +146,7 @@
         "method": "discovery_content.requestPurchases"
     },
     "EXPECTED_PURCHASED_CONTENT_LIST":{
-        "method": "discovery_content.requestPurchases",
+        "method": "content.requestPurchases",
 		"validationJsonPath": "result",
 		"expected": "FEDERATEDDATA_REQUEST_PURCHASES"
     },

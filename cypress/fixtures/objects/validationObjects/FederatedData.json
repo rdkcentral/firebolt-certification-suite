@@ -21,7 +21,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_INFOWATCH",
+                        "type": "FEDERATEDDATA_ENTITYINFO_RATINGS_CONTENT",
                         "mode": "staticContentValidation",
                         "description": "Validation of entityInfo data"
                     }
