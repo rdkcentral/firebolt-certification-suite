@@ -426,26 +426,6 @@ function loggingValidationCheckResult(validationCheck) {
         }
       });
     });
-  //  // Constructing the logString to pass to fireLog
-  //  // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
-  //  validationCheck.forEach((assertion) => {
-  //    const logString = `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`;
-  //    if (assertion.validationStatus == CONSTANTS.SKIPPED) {
-  //      fireLog.equal(
-  //        CONSTANTS.SKIPPED,
-  //        assertion.validationStatus,
-  //        assertion.validationPoint,
-  //        logString
-  //      );
-  //    } else {
-  //      fireLog.equal(
-  //        CONSTANTS.PASS,
-  //        assertion.validationStatus,
-  //        assertion.validationPoint,
-  //        logString
-  //      );
-  //    }
-  //  });
 }
 
 /**
