@@ -49,7 +49,7 @@ Cypress.Commands.add(
           }
         );
       } catch (err) {
-        let error = err;
+        const error = err;
         response.error = error;
       }
     } else {
