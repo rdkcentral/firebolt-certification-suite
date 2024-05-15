@@ -46,7 +46,7 @@ function testDataProcessor(configEnv) {
   return {
     fireboltCallsJson: resolvedFireboltCallsJson,
     fireboltMocksJson: combinedFireboltMocksJson,
-    setResponseJson: mergedSetResponseJson 
+    setResponseJson: mergedSetResponseJson,
   };
 }
 

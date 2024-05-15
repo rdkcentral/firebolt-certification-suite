@@ -37,8 +37,7 @@ Cypress.Commands.add(
     let fireboltData;
     if (callType == CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS) {
       fireboltData = UTILS.getEnvVariable('fireboltMocksJson')[key];
-    }
-    else if (callType == CONSTANTS.SUPPORTED_CALLTYPES.SET_RESPONSE_JSON) {
+    } else if (callType == CONSTANTS.SUPPORTED_CALLTYPES.SET_RESPONSE_JSON) {
       fireboltData = UTILS.getEnvVariable('setResponseJson')[key];
     } else {
       fireboltData = UTILS.getEnvVariable('fireboltCallsJson')[key];
