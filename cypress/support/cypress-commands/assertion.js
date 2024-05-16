@@ -35,11 +35,14 @@ import UTILS from '../cypress-support/src/utils';
 Cypress.Commands.add(
   'validateErrorObject',
   (method, expectedContent, validationType, context = CONSTANTS.NO_CONTEXT, appId, param) => {
+    // Function to extract the error validation objects for the passed method and parameters from the exception list.
     const fetchErrorValidationObjectForExceptionmethod = (method, param) => {
       return new Promise((resolve) => {
         const exceptionMethods = UTILS.getEnvVariable(CONSTANTS.EXCEPTION_METHODS);
         let exceptionType, methodInExceptionList, errorType;
+        // Looping through the different types of exceptions lists.
         for (const [type, list] of Object.entries(exceptionMethods)) {
+          // Looking for the method and params in each list, if matched returning that exception method.
           methodInExceptionList = list.find((obj) => {
             if (obj.method && obj.method.toLowerCase() === method.toLowerCase()) {
               if (obj.hasOwnProperty(CONSTANTS.PARAM)) {
@@ -51,6 +54,7 @@ Cypress.Commands.add(
             return false;
           });
 
+          // If method is prsent in the list, exiting the loop.
           if (methodInExceptionList) {
             exceptionType = type;
             break;
@@ -72,6 +76,7 @@ Cypress.Commands.add(
         const errorSchemaFilePath = CONSTANTS.ERROR_SCHEMA_OBJECTS_PATH;
         const errorContentFilePath = CONSTANTS.ERROR_CONTENT_OBJECTS_PATH;
 
+        // Extracting the error validation object from the above files based on obtained errorType.
         cy.task(CONSTANTS.READFILEIFEXISTS, errorSchemaFilePath).then((errorSchema) => {
           if (errorSchema) {
             errorSchema = JSON.parse(errorSchema);
@@ -104,6 +109,7 @@ Cypress.Commands.add(
       validateErrorObjects(expectedContent);
     }
 
+    // Function to do content validation for the error objects.
     function validateErrorObjects(errorSchemaObject) {
       try {
         errorSchemaObject.validations.forEach((errorContentObject) => {

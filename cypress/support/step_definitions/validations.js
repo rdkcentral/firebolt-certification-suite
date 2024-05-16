@@ -143,9 +143,8 @@ Given(
                   );
                 }
               }
-              // checking whether fcsvalidationObject is having the required validation key and data
+
               try {
-                // fCSValidationjson = UTILS.getEnvVariable(CONSTANTS.FCS_VALIDATION_JSON);
                 if (contentObject && contentObject.data) {
                   contentObject.data.forEach((object) => {
                     if (object.validations) {

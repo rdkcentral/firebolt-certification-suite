@@ -7,12 +7,21 @@ const path = require('path');
 const _ = require('lodash');
 const logger = require('../support/Logger')('testDataProcessor.js');
 
+/**
+ *  @function testDataProcessor
+ *  Merge the all JSON files from fcs and config module and finally return the resolved JSON.
+ *
+ *  @example
+ *  testDataProcessor()
+ */
 function testDataProcessor(configEnv) {
   envVariables = configEnv;
   const fcsFireboltCalls = CONSTANTS.FIREBOLTCALLS_FROM_FCS;
   const configModuleFireboltCalls = CONSTANTS.FIREBOLTCALLS_FROM_CONFIGMODULE;
   const fcsFireboltMocks = CONSTANTS.FIREBOLTMOCK_FROM_FCS;
   const configModuleFireboltMocks = CONSTANTS.FIREBOLTMOCK_FROM_CONFIGMODULE;
+  const fcsSetResponseJson = CONSTANTS.FCS_SETRESPONSE_PATH;
+  const configModuleSetResponseJson = CONSTANTS.CONFIG_MODULE_SETRESPONSE_PATH;
 
   // Merging all JSON files from the directory.
   const fcsFireboltCallsMergedJson = fetchMergedJsonFromDirectory(fcsFireboltCalls);
@@ -33,16 +42,15 @@ function testDataProcessor(configEnv) {
     configModuleFireboltMocksMergedJson
   );
 
-  const fcsSetResponseJson = './cypress/fixtures/setResponseData.json';
-  const ConfigModuleSetResponseJson = './node_modules/configModule/testData/setResponseData.json';
   const mergedSetResponseJson = mergeJsonFilesData([
     fcsSetResponseJson,
-    ConfigModuleSetResponseJson,
+    configModuleSetResponseJson,
   ]);
 
   // Resolving the variables in the JSON
   const resolvedFireboltCallsJson = processFireboltJson(combinedFireboltCallsJson);
 
+  // Below key names are converted into environment variables.
   return {
     fireboltCallsJson: resolvedFireboltCallsJson,
     fireboltMocksJson: combinedFireboltMocksJson,
@@ -50,9 +58,22 @@ function testDataProcessor(configEnv) {
   };
 }
 
-// Function to resolve the data in the JSON.
+/**
+ *  @function processFireboltJson
+ *  Iterating over the provided JSON and each object, resolve the values of params, context, or content if present, then returning the JSON with the updated value.
+ *
+ *  @example
+ *  processFireboltJson({'abc': {'method': 'method_name', 'params': 'TRUE'}})
+ *  processFireboltJson({'abc': {'method': 'method_name', 'params': 'TRUE', 'context': 'no_context'}})
+ *  processFireboltJson({'abc': {'method': 'method_name', 'validationJsonPath': 'result', 'content': 'TRUE'}})
+ *
+ *  @returns
+ *  {'abc': {'method': 'method_name', 'params': true}}
+ *  {'abc': {'method': 'method_name', 'params': true, 'context': {}}}
+ *  {'abc': {'method': 'method_name', 'validationJsonPath': 'result', 'content': true}}
+ */
 function processFireboltJson(jsonData) {
-  // Looping through each file
+  // Looping through json data
   for (const key in jsonData) {
     if (Object.hasOwnProperty.call(jsonData, key)) {
       const object = jsonData[key];
@@ -60,7 +81,7 @@ function processFireboltJson(jsonData) {
       object.params = object.params ? object.params : CONSTANTS.NO_PARAMS;
       object.context = object.context ? object.context : CONSTANTS.NO_CONTEXT;
 
-      // Iterating over the object, resolving the data when the params, context and content fields are found.
+      // Iterating over the object, resolve the values of params, context or content fields if present.
       for (const prop in object) {
         if (
           [
@@ -78,12 +99,30 @@ function processFireboltJson(jsonData) {
   return jsonData;
 }
 
+/**
+ *  @function testDataHandler
+ *  This command is used mainly for parsing and fetching test data from various fixture files depending on the requestType passed to the command.
+ *  RequestType can have different values based on what type of data need to be parsed and fetched from test data file
+ *
+ *  @param {*} requestType - Type of request. param or content
+ *  @param {*} dataIdentifier - Key to be used to fetch param, context or content data from the fixtures.
+ *  @param {*} fireboltObject - firebolt object passed as parameters
+ *
+ *  @example
+ *  processFireboltJson({'abc': {'method': 'method_name', 'params': 'TRUE'}})
+ *  processFireboltJson({'abc': {'method': 'method_name', 'params': 'TRUE', 'context': 'no_context'}})
+ *  processFireboltJson({'abc': {'method': 'method_name', 'validationJsonPath': 'result', 'content': 'TRUE'}})
+ *
+ */
 function testDataHandler(requestType, dataIdentifier, fireboltObject) {
   switch (requestType) {
     case CONSTANTS.PARAMS.toLowerCase():
+      // If parameter contains CYPRESSENV returning the dataIdentifier as is.
       if (/CYPRESSENV/.test(dataIdentifier)) {
         return dataIdentifier;
       }
+
+      // If parameter is type object returning the dataIdentifier as is else calling the testDataParser to fetch the actual param.
       return typeof dataIdentifier === CONSTANTS.TYPE_STRING
         ? testDataParser(dataIdentifier, requestType)
         : dataIdentifier;
@@ -110,10 +149,14 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
         const errorContentFilePath = CONSTANTS.ERROR_CONTENT_OBJECTS_PATH;
         const errorSchemaObject = fetchAndParseDataFromJSON(errorSchemaFilePath, dataIdentifier);
 
+        // If error schema object having the type as validationFunction and validations field
         if (
           typeof errorSchemaObject == CONSTANTS.TYPE_OBJECT &&
-          errorSchemaObject.type == CONSTANTS.VALIDATION_FUNCTION
+          errorSchemaObject.type == CONSTANTS.VALIDATION_FUNCTION &&
+          errorSchemaObject.hasOwnProperty('validations') &&
+          Array.isArray(errorSchemaObject.validations)
         ) {
+          // Looping through the validations array, obtaining and updating the field type with error content data.
           errorSchemaObject.validations.forEach((validationObject) => {
             const errorContentObject = fetchAndParseDataFromJSON(
               errorContentFilePath,
@@ -139,8 +182,9 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
         if (validationObject && validationObject.data) {
           validationObject.data.forEach((object, index) => {
             if (object.validations && object.validations.length > 0) {
-              // Iterating through the validations array and resolving the value of type.
+              // Iterating through the validations array, retrieving and updating the value of the type field based on mode.
               object.validations.forEach((data) => {
+                // When the data.type is not string, returning the data as is
                 if (typeof data.type !== CONSTANTS.STRING) {
                   return data.type;
                 }
@@ -159,6 +203,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                     return (data.type = parsedRegexExp.toString());
 
                   case CONSTANTS.DEVICE_CONTENT_VALIDATION:
+                    // Extracting the device mac from the environment JSON.
                     let deviceMac = envVariables[CONSTANTS.DEVICE_MAC];
                     deviceMac = deviceMac.replaceAll(':', '');
 
@@ -169,7 +214,14 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                     if (!deviceMac) {
                       logger.info('Falling back to default device data path');
                     }
-                    return (data.type = fetchAndParseDataFromJSON(deviceDataPath, data.type));
+                    let deviceData = fetchAndParseDataFromJSON(deviceDataPath, data.type);
+                    if (deviceData === CONSTANTS.NO_DATA) {
+                      logger.info(
+                        `Expected deviceData not found for ${data.type}. Returning ${data.type} as is.`
+                      );
+                      deviceData = data.type;
+                    }
+                    return (data.type = deviceData);
 
                   default:
                     return (data.type = testDataParser(data.type));
@@ -188,31 +240,42 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
 }
 
 /**
- *  @function testDataParser
- *  @description Fetching the data from json files based on the priority as shown below
+ * @function testDataParser
+ *  Fetching the data from json files based on the priority as shown below
  *    - External <module>.json from configModule (If applicable)
  *    - Internal <module>.json from fixtures (If applicable)
  *    - default.json
+ *
  *  @param {*} requestType - Type of request. param or content
  *  @param {*} dataIdentifier - Key to be used to fetch param or content data from the fixtures
+ *
  *  @example
- *    cy.testDataParser("Params","Account_Id");
+ *    @request testDataParser('TRUE', 'params');
+ *    @returns true
+ *
+ *    @request testDataParser('ACCESSIBILITY_FONTFAMILY_MONOSPACE', 'params');
+ *    @returns {"value": "monospaced_sanserif"}
  */
 function testDataParser(dataIdentifier, requestType) {
   let defaultRetVal = dataIdentifier;
   if (requestType == CONSTANTS.PARAMS.toLowerCase()) {
     defaultRetVal = { value: dataIdentifier };
   }
+
+  // Mering the fcs and config module default test data.
   const defaultData = mergeJsonFilesData([
     `${CONSTANTS.FCS_DEFAULTTESTDATA_PATH}`,
     `${CONSTANTS.CONFIG_DEFAULTTESTDATA_PATH}`,
   ]);
 
+  // Extracting the data from the merged default test data json, if not found returning as 'no data'.
   let paramData = parseDataFromJson(defaultData, dataIdentifier, requestType);
 
+  // Checking passed dataIdentifier as underscore, if present spliting it and taking first part as a module name and second part keeping it as key to find the data.
   if (dataIdentifier.includes('_')) {
     moduleName = extractModuleName(dataIdentifier);
     dataIdentifier = dataIdentifier.slice(dataIdentifier.indexOf('_') + 1);
+    // Creating a file paths using the module name for both fcs and config module.
     const moduleImportPath = `${CONSTANTS.MODULES_PATH}${moduleName}.json`;
     const externalModulePath = `${CONSTANTS.EXTERNAL_PATH}${moduleName}.json`;
 
@@ -222,6 +285,7 @@ function testDataParser(dataIdentifier, requestType) {
       requestType
     );
 
+    // If data found in fcs module, taking the data as is else assigning the data from the default test data.
     paramData = parsedModuleData != CONSTANTS.NO_DATA ? parsedModuleData : paramData;
 
     // Checking the external module json file is present.
@@ -231,6 +295,7 @@ function testDataParser(dataIdentifier, requestType) {
         dataIdentifier,
         requestType
       );
+      // If data not found in config module, taking the previously fetched data.
       paramData =
         parsedExternalModuleData != CONSTANTS.NO_DATA ? parsedExternalModuleData : paramData;
       response = paramDatalogs(paramData, dataIdentifier, defaultRetVal, requestType);
@@ -245,12 +310,29 @@ function testDataParser(dataIdentifier, requestType) {
   }
 }
 
+/**
+ *  @function fetchAndParseDataFromJSON
+ *  Function used to fetch the data from the file and parse the data based on passed key.
+ *
+ *  @param {string} filePath - file path
+ *  @param {*} dataIdentifier - Key to be used to fetch data from the file.
+ *  @param {*} requestType - request type contains params, context or content.
+ *
+ *  @example
+ *  fetchAndParseDataFromJSON('./example.json', 'abc' , 'params')
+ */
 function fetchAndParseDataFromJSON(filePath, dataIdentifier, requestType) {
   const data = fetchDataFromFile(filePath);
   return parseDataFromJson(data, dataIdentifier, requestType);
 }
 
-// Function to combine all validation JSON files from FCS and config module.
+/**
+ *  @function combineValidationObjectsJson
+ *  Function to combine all validation JSON files from FCS and config module.
+ *
+ *  @example
+ *  combineValidationObjectsJson()
+ */
 function combineValidationObjectsJson() {
   const fcsValidationObjectsJson = fetchMergedJsonFromDirectory(CONSTANTS.VALIDATION_OBJECTS_PATH);
   const configModuleValidationObjectsJson = fetchMergedJsonFromDirectory(
@@ -285,6 +367,7 @@ function combineValidationObjectsJson() {
   return combinedValidationObjects;
 }
 
+// Function to print logs when data is having "no data" else returning as is.
 function paramDatalogs(paramData, dataIdentifier, defaultRetVal, requestType) {
   if (paramData == CONSTANTS.NO_DATA) {
     logger.info(
@@ -296,6 +379,18 @@ function paramDatalogs(paramData, dataIdentifier, defaultRetVal, requestType) {
   }
 }
 
+/**
+ *  @function extractModuleName
+ *  Parsing the module name from the dataIdentifier passed.
+ *
+ *  @param {string} dataIdentifier - Key to be used to extranct the module name.
+ *
+ *  @example
+ *  cy.extractModuleName("ACCESSIBILITY_CLOSEDCAPTIONS_TRUE")
+ *
+ *  @result
+ *  accessibility
+ */
 function extractModuleName(dataIdentifier) {
   let moduleName = dataIdentifier;
 
@@ -314,7 +409,20 @@ function extractModuleName(dataIdentifier) {
   return moduleName;
 }
 
-// Function to fecth the value from the JSON
+/**
+ *  @function parseDataFromJson
+ *  Function to fetch the data from the passed JSON.
+ *
+ *  @param {object} data - JSON data needed to parse based on key.
+ *  @param {string} dataIdentifier - Key to be used to find value from JSON.
+ *  @param {string} requestType - request type contains params, context or content.
+ *
+ *  @example
+ *  parseDataFromJson({"ACCESSIBILITY_CLOSEDCAPTIONS_TRUE":"true"},"ACCESSIBILITY_CLOSEDCAPTIONS_TRUE", "Params")
+ *
+ *  @result
+ *  true
+ */
 function parseDataFromJson(data, dataIdentifier, requestType) {
   try {
     if (data[dataIdentifier] !== undefined) {
@@ -340,7 +448,15 @@ function parseDataFromJson(data, dataIdentifier, requestType) {
   }
 }
 
-// Function to fetch data from file
+/**
+ *  @function fetchDataFromFile
+ *  Function to fetch data from file.
+ *
+ *  @param {string} filePath - file path.
+ *
+ *  @example
+ *  fetchDataFromFile('./filepath.json')
+ */
 function fetchDataFromFile(filePath) {
   if (fs.existsSync(filePath)) {
     data = fs.readFileSync(filePath, 'utf8');
@@ -351,6 +467,15 @@ function fetchDataFromFile(filePath) {
   }
 }
 
+/**
+ *  @function mergeJsonFilesData
+ *  Function to merge the data from the array of files.
+ *
+ *  @param {array} filePath - array of files path.
+ *
+ *  @example
+ *  mergeJsonFilesData(['./filepath.json'])
+ */
 function mergeJsonFilesData(paths) {
   const files = [];
   paths.forEach((file) => {
@@ -361,7 +486,15 @@ function mergeJsonFilesData(paths) {
   return jsonMerger.mergeFiles(files);
 }
 
-// Function to merge JSON files ferom the give directory
+/**
+ *  @function fetchMergedJsonFromDirectory
+ *  Function to merge JSON files ferom the given directory.
+ *
+ *  @param {string} directoryPath - direcotory path
+ *
+ *  @example
+ *  fetchMergedJsonFromDirectory('./cypress/fixtures/fireboltCalls')
+ */
 function fetchMergedJsonFromDirectory(directoryPath) {
   try {
     // Get list of files in the directory
