@@ -198,18 +198,22 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, conditi
       const lifecycleEventRequirementId = scenarioRequirement.find((req) =>
         req.hasOwnProperty('event')
       );
+      const appHistoryPrevious = UTILS.getEnvVariable(CONSTANTS.APP_LIFECYCLE_HISTORY);
+      const appHistoryCount = appHistory.length - appHistoryPrevious.length;
 
       // Lifecycle event validation
-      if (
-        condition == CONSTANTS.BE &&
-        lifecycleEventRequirementId &&
-        lifecycleEventRequirementId.event
-      ) {
-        const appHistoryPrevious = UTILS.getEnvVariable(CONSTANTS.APP_LIFECYCLE_HISTORY);
-        const appHistoryCount = appHistory.length - appHistoryPrevious.length;
+      if (condition == CONSTANTS.STAY) {
+        UTILS.assertWithRequirementLogs(
+          CONSTANTS.LIFECYCLE_NOTIFICATION_NOT_GENERATED,
+          appHistoryCount < 1,
+          true
+        );
+      } else if (lifecycleEventRequirementId && lifecycleEventRequirementId.event) {
         let pretext;
-        // If no lifecycle events expected, validate app history value is also empty
-        if (state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
+        if (
+          UTILS.getEnvVariable(CONSTANTS.IS_SAME_APP_TRANSITION, false) ||
+          state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING
+        ) {
           UTILS.assertWithRequirementLogs(
             CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED + lifecycleEventRequirementId?.event?.id[0],
             appHistoryCount >= 1,
@@ -255,8 +259,6 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, conditi
             );
           }
         }
-      } else {
-        cy.log('Skipping lifecycle event validation');
       }
     } else {
       // Fail test if no valid history response received from 3rd party application

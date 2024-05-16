@@ -40,7 +40,6 @@ module.exports = {
   ARRAY: 'array',
   ASYNCHRONOUS: 'asynchronous',
   BASE64: 'base64',
-  BE: 'be',
   BEFORE_OPERATION: 'beforeOperation',
   BEFORE_OPERATION_TAGS: 'beforeOperationTags',
   BOOLEAN: 'boolean',
@@ -200,6 +199,7 @@ module.exports = {
   LIFECYCLE_HISTORY_SCHEMA_PATH: 'schemas/lifecycleHistorySchema',
   LIFECYCLE_INTENT: 'Lifecycle intent sent to application: ',
   LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle events generated Req #',
+  LIFECYCLE_NOTIFICATION_NOT_GENERATED: 'Lifecycle events not generated',
   LIFECYCLE_STATE: 'Lifecycle.state',
   LIFECYCLE_STATES: {
     FOREGROUND: 'foreground',
@@ -331,6 +331,7 @@ module.exports = {
   STATE_SCHEMA_VALIDATION_REQ: 'Lifecycle state schema validation Req #',
   STATIC_CONTENT_VALIDATION: 'staticContentValidation',
   STATUS_CODE: [0, 1, 2, 3],
+  STAY: 'stay',
   STEP_IMPLEMENTATION_MISSING: 'Step implementation missing',
   STRING: 'string',
   STRING_LANGUAGE_FORMAT: 'stringLanguageFormat',
