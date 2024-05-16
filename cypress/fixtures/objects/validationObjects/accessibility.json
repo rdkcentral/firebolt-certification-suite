@@ -52,8 +52,6 @@
                 "validations": [
                     {
                         "field": "result.styles.fontFamily",
-                        "mode": "",
-                        "type": "",
                         "description": "Validation of the accessibility fontfamily undefined"
                     }
                 ]
@@ -83,8 +81,6 @@
                 "validations": [
                     {
                         "field": "result.styles.fontSize",
-                        "mode": "",
-                        "type": "",
                         "description": "Validation of the accessibility fontSize undefined"
                     }
                 ]
@@ -295,8 +291,6 @@
                 "validations": [
                     {
                         "field": "result.styles.fontColor",
-                        "mode": "",
-                        "type": "",
                         "description": "Validation of the accessibility fontColor undefined"
                     }
                 ]
@@ -327,8 +321,6 @@
                 "validations": [
                     {
                         "field": "result.styles.fontOpacity",
-                        "mode": "",
-                        "type": "",
                         "description": "Validation of the accessibility fontEdgeOpacity undefined"
                     }
                 ]
@@ -343,8 +335,6 @@
                 "validations": [
                     {
                         "field": "result.styles.backgroundColor",
-                        "mode": "",
-                        "type": "",
                         "description": "Validation of the accessibility backgroundColor undefined"
                     }
                 ]
@@ -359,8 +349,6 @@
                 "validations": [
                     {
                         "field": "result.styles.backgroundOpacity",
-                        "mode": "",
-                        "type": "",
                         "description": "Validation of the accessibility backgroundOpacity undefined"
                     }
                 ]
@@ -375,8 +363,6 @@
                 "validations": [
                     {
                         "field": "result.styles.textAlign",
-                        "mode": "",
-                        "type": "",
                         "description": "Validation of the accessibility textAlign undefined"
                     }
                 ]
@@ -391,8 +377,6 @@
                 "validations": [
                     {
                         "field": "result.styles.textAlignVertical",
-                        "mode": "",
-                        "type": "",
                         "description": "Validation of the accessibility textAlignVertical undefined"
                     }
                 ]
@@ -407,8 +391,6 @@
                 "validations": [
                     {
                         "field": "result.styles.windowColor",
-                        "mode": "",
-                        "type": "",
                         "description": "Validation of the accessibility windowcolor undefined"
                     }
                 ]
@@ -423,8 +405,6 @@
                 "validations": [
                     {
                         "field": "result.styles.windowOpacity",
-                        "mode": "",
-                        "type": "",
                         "description": "Validation of the accessibility windowopacity undefined"
                     }
                 ]
