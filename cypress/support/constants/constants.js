@@ -42,6 +42,8 @@ module.exports = {
   BASE64: 'base64',
   BEFORE_OPERATION: 'beforeOperation',
   BEFORE_OPERATION_TAGS: 'beforeOperationTags',
+  BEFORE_OPERATION_FORMAT:
+    'Before operation object is not in proper array format, recheck the before objects in fixture/external/moduleReqId - getBeforeOperationObject',
   BOOLEAN: 'boolean',
   CAPABILITIES_INFO: 'capabilities.info',
   CAPABILITIES_PERMITTED: 'capabilities.permitted',
@@ -148,6 +150,8 @@ module.exports = {
   VALIDATION_OBJECTS_PATH: 'cypress/fixtures/objects/validationObjects/',
   CONFIG_VALIDATION_OBJECTS_PATH: 'cypress/fixtures/external/objects/validationObjects/',
   FIXTURE: 'fixture',
+  FIXTURE_DEFINED_PATH:
+    'Expected JSON data should be defined in fixtures/objects/validationObjects/',
   CUSTOM: 'custom',
   VALIDATION_FUNCTION: 'validationFunction',
   NOT_SUPPORTED: 'NOT_SUPPORTED',
@@ -261,8 +265,8 @@ module.exports = {
   NOTIFICATION_EXISTS_REQ: 'Lifecycle notification exists Req # ',
   NOTIFICATION_SCHEMA_VALIDATION_REQ: 'Lifecycle notification schema validation Req # ',
   NULL: 'null',
+  NULL_CHECK: 'Null Check requirement SKIPPED as schema validation is PASSED. ',
   NULL_RESPONSE: 'NULL',
-  NULL_CHECK: 'Null Check requirement SKIPPED as schema validation is PASSED',
   NUMBER: 'number',
   OPENRPC_ERROR_SCHEMA_PATH: 'schemas/errorSchema.json',
   OBJECT: 'object',
