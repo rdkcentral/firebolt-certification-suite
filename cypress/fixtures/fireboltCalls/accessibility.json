@@ -501,7 +501,7 @@
         "validationJsonPath": "eventResponse.styles.fontFamily",
         "expected": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SERIF"
     },
-    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_FONTFAMILY": {
+    "DEFAULT_VALUE_FOR_FONTFAMILY": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontFamily",
         "expected": "ACCESSIBILITY_FONTFAMILY_UNDEFINED"
@@ -541,7 +541,7 @@
         "validationJsonPath": "eventResponse.styles.fontFamily",
         "expected": "ACCESSIBILITY_FONTFAMILY_CASUAL"
     },
-    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_FONTSIZE": {
+    "DEFAULT_VALUE_FOR_FONTSIZE": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontSize",
         "expected": "ACCESSIBILITY_FONTSIZE_UNDEFINED"
@@ -576,7 +576,7 @@
         "validationJsonPath": "eventResponse.styles.fontEdge",
         "expected": "ACCESSIBILITY_FONTEDGE_RAISED"
     },
-    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_FONTEDGE": {
+    "DEFAULT_VALUE_FOR_FONTEDGE": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontEdge",
         "expected": "ACCESSIBILITY_FONTEDGE_UNDEFINED"
@@ -696,7 +696,7 @@
         "validationJsonPath": "eventResponse.styles.textAlign",
         "expected": "LEFT"
     },
-    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_TEXTALIGN": {
+    "DEFAULT_VALUE_FOR_TEXTALIGN": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.textAlign",
         "expected": "ACCESSIBILITY_TEXTALIGN_UNDEFINED"
@@ -726,7 +726,7 @@
         "validationJsonPath": "eventResponse.styles.textAlignVertical",
         "expected": "TOP"
     },
-    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_TEXTALIGNVERTICAL": {
+    "DEFAULT_VALUE_FOR_TEXTALIGNVERTICAL": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.textAlignVertical",
         "expected": "ACCESSIBILITY_TEXTALIGNVERTICAL_UNDEFINED"
@@ -886,7 +886,7 @@
         "validationJsonPath": "eventResponse.enabled",
         "expected": "TRUE"
     },
-    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_FONTCOLOR": {
+    "DEFAULT_VALUE_FOR_FONTCOLOR": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontColor",
         "expected": "ACCESSIBILITY_FONTCOLOR_UNDEFINED"
@@ -896,7 +896,7 @@
         "validationJsonPath": "eventResponse.styles.fontColor",
         "expected": "ACCESSIBILITY_FONTCOLOR_FFFFFF"
     },
-    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_FONTEDGECOLOR": {
+    "DEFAULT_VALUE_FOR_FONTEDGECOLOR": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontEdgeColor",
         "expected": "ACCESSIBILITY_FONTEDGECOLOR_UNDEFINED"
@@ -906,22 +906,22 @@
         "validationJsonPath": "eventResponse.styles.fontEdgeColor",
         "expected": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F"
     },
-    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_FONTOPACITY": {
+    "DEFAULT_VALUE_FOR_FONTOPACITY": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.fontOpacity",
         "expected": "ACCESSIBILITY_FONTOPACITY_UNDEFINED"
     },
-    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_BACKGROUNDOPACITY": {
+    "DEFAULT_VALUE_FOR_BACKGROUNDOPACITY": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.backgroundOpacity",
         "expected": "ACCESSIBILITY_BACKGROUNDOPACITY_UNDEFINED"
     },
-    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_BACKGROUNDCOLOR": {
+    "DEFAULT_VALUE_FOR_BACKGROUNDCOLOR": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.backgroundColor",
         "expected": "ACCESSIBILITY_BACKGROUNDCOLOR_UNDEFINED"
     },
-    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_WINDOWCOLOR": {
+    "DEFAULT_VALUE_FOR_WINDOWCOLOR": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.windowColor",
         "expected": "ACCESSIBILITY_WINDOWCOLOR_UNDEFINED"
@@ -936,7 +936,7 @@
         "validationJsonPath": "eventResponse.styles.backgroundColor",
         "expected": "ACCESSIBILITY_BACKGROUNDCOLOR_000000"
     },
-    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_WINDOWOPACITY": {
+    "DEFAULT_VALUE_FOR_WINDOWOPACITY": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.windowOpacity",
         "expected": "ACCESSIBILITY_WINDOWOPACITY_UNDEFINED"

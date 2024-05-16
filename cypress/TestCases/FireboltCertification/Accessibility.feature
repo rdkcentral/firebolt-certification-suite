@@ -60,19 +60,19 @@ Feature: Accessibility
       And 'Firebolt' platform triggers event '<Event_Content>'
 
       Examples:
-         | Scenario          | Key                           | Method_Content                                                      | Event_Content                                                        |
-         | fontFamily        | set fontFamily as null        | firebolt platform responds with default value for fontFamily        | onclosedCaptionsSettingsChanged with monospaced serif for fontfamily |
-         | fontSize          | set fontSize as null          | firebolt platform responds with default value for fontSize          | onclosedCaptionsSettingsChanged with 1 for fontSize                  |
-         | fontColor         | set fontColor as null         | firebolt platform responds with default value for fontColor         | onclosedCaptionsSettingsChanged with #ff00ff for fontColor           |
-         | fontEdge          | set fontEdge as null          | firebolt platform responds with default value for fontEdge          | onclosedCaptionsSettingsChanged with none for fontEdge               |
-         | fontEdgeColor     | set fontEdgeColor as null     | firebolt platform responds with default value for fontEdgeColor     | onclosedCaptionsSettingsChanged with #ffffff for fontEdgeColor       |
-         | fontOpacity       | set fontOpacity as null       | firebolt platform responds with default value for fontOpacity       | onclosedCaptionsSettingsChanged with 75 for fontOpacity              |
-         | backgroundColor   | set backgroundColor as null   | firebolt platform responds with default value for backgroundColor   | onclosedCaptionsSettingsChanged with #000000 for backgroundColor     |
-         | backgroundOpacity | set backgroundOpacity as null | firebolt platform responds with default value for backgroundOpacity | onclosedCaptionsSettingsChanged with 12 for backgroundOpacity        |
-         | textAlign         | set textAlign as null         | firebolt platform responds with default value for textAlign         | onclosedCaptionsSettingsChanged with center for textAlign            |
-         | textAlignVertical | set textAlignVertical as null | firebolt platform responds with default value for textAlignVertical | onclosedCaptionsSettingsChanged with middle for textAlignVertical    |
-         | windowColor       | set windowColor as null       | firebolt platform responds with default value for windowColor       | onclosedCaptionsSettingsChanged with white for windowColor           |
-         | windowOpacity     | set windowOpacity as null     | firebolt platform responds with default value for windowOpacity     | onclosedCaptionsSettingsChanged with 0 for windowOpacity             |
+         | Scenario          | Key                           | Method_Content                      | Event_Content                                                        |
+         | fontFamily        | set fontFamily as null        | default value for fontFamily        | onclosedCaptionsSettingsChanged with monospaced serif for fontfamily |
+         | fontSize          | set fontSize as null          | default value for fontSize          | onclosedCaptionsSettingsChanged with 1 for fontSize                  |
+         | fontColor         | set fontColor as null         | default value for fontColor         | onclosedCaptionsSettingsChanged with #ff00ff for fontColor           |
+         | fontEdge          | set fontEdge as null          | default value for fontEdge          | onclosedCaptionsSettingsChanged with none for fontEdge               |
+         | fontEdgeColor     | set fontEdgeColor as null     | default value for fontEdgeColor     | onclosedCaptionsSettingsChanged with #ffffff for fontEdgeColor       |
+         | fontOpacity       | set fontOpacity as null       | default value for fontOpacity       | onclosedCaptionsSettingsChanged with 75 for fontOpacity              |
+         | backgroundColor   | set backgroundColor as null   | default value for backgroundColor   | onclosedCaptionsSettingsChanged with #000000 for backgroundColor     |
+         | backgroundOpacity | set backgroundOpacity as null | default value for backgroundOpacity | onclosedCaptionsSettingsChanged with 12 for backgroundOpacity        |
+         | textAlign         | set textAlign as null         | default value for textAlign         | onclosedCaptionsSettingsChanged with center for textAlign            |
+         | textAlignVertical | set textAlignVertical as null | default value for textAlignVertical | onclosedCaptionsSettingsChanged with middle for textAlignVertical    |
+         | windowColor       | set windowColor as null       | default value for windowColor       | onclosedCaptionsSettingsChanged with white for windowColor           |
+         | windowOpacity     | set windowOpacity as null     | default value for windowOpacity     | onclosedCaptionsSettingsChanged with 0 for windowOpacity             |
 
    @Accessibility @coreSDK @sdk @transport
    Scenario Outline: Accessibility.voiceGuidanceSettings - Positive Scenario: <Scenario>
