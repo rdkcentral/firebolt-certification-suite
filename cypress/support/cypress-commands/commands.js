@@ -921,14 +921,15 @@ Cypress.Commands.add('mergeFireboltCallsAndFireboltMocks', () => {
 
 Cypress.Commands.add('mergeFireboltCallJsons', (v1DataJson, v2DataJson) => {
   const combinedJsonData = { ...v1DataJson };
-  for (const key in v2DataJson) {
-    if (v2DataJson.hasOwnProperty(key) && !combinedJsonData.hasOwnProperty(key)) {
-      combinedJsonData[key] = v2DataJson[key];
-    } else if (combinedJsonData.hasOwnProperty(key)) {
-      combinedJsonData[key] = { ...combinedJsonData[key], ...v2DataJson[key] };
+  for (const [key, value] of Object.entries(v2DataJson)) {
+    // If the key exists in combinedJsonData, merge the objects
+    if (combinedJsonData.hasOwnProperty(key)) {
+      combinedJsonData[key] = { ...combinedJsonData[key], ...value };
+    } else {
+      // Otherwise, simply assign the value
+      combinedJsonData[key] = value;
     }
   }
-  console.log('combinedJsonData:', combinedJsonData);
   return combinedJsonData;
 });
 
