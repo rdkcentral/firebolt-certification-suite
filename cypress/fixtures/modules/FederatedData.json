@@ -52,6 +52,267 @@
         "entityId": "127"
     },
     "ENTITYINFO_ENTITY_INVALID_PARAMETERS": false,
+    "ENTITYINFO_WITHOUT_ENTITYID": {
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "ENTITYINFO_ENTITYID_WITH_INTEGER": {
+        "entityId": 456,
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "ENTITYINFO_ENTITYID_WITH_BOOLEAN": {
+        "entityId": true,
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "ENTITYINFO_WITHOUT_EXPIRES": {
+        "entityId": "345",
+        "details": {
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "ENTITYINFO_WITHOUT_DETAILS": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z"
+        }
+    },
+    "ENTITYINFO_WITHOUT_INFO": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie"
+                }
+            }
+        }
+    },
+    "ENTITYINFO_WITHOUT_IDENTIFIERS": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "ENTITYINFO_WITHOUT_IDENTIFIERS_ENTITYTYPE": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "ENTITYINFO_WITHOUT_IDENTIFIERS_PROGRAMTYPE": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "ENTITYINFO_WITH_INVALID_TITLE": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie"
+                },
+                "info": {
+                    "title": false,
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "ENTITYINFO_WITH_INVALID_IDENTIFIERS_ENTITYTYPE": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "test",
+                    "programType": "movie"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ]
+                }
+            }
+        }
+    },
     "ENTITYINFO_INFOWATCH": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
@@ -499,120 +760,209 @@
         }
     },
     "DETAILS": {
-        "entityId": "345", "details": {
-            "expires": "2025-01-01T00:00:00.000Z",
+        "entityId": "345",
         "details": {
-            "identifiers": {
-                "entityId": "345",
-                "entityType": "program",
-                "programType": "movie"
-            },
-            "info": {
-                "title": "Cool Runnings",
-                "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
-                "releaseDate": "1993-01-01T00:00:00.000Z",
-                "contentRatings": [
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ]
+                },
+                "waysToWatch": [
                     {
-                        "scheme": "US-Movie",
-                        "rating": "PG"
-                    },
-                    {
-                        "scheme": "CA-Movie",
-                        "rating": "G"
+                        "identifiers": {
+                            "assetId": "123"
+                        },
+                        "expires": "2025-01-01T00:00:00.000Z",
+                        "entitled": true,
+                        "entitledExpires": "2025-01-01T00:00:00.000Z",
+                        "offeringType": "buy",
+                        "price": 2.99,
+                        "videoQuality": [
+                            "UHD"
+                        ],
+                        "audioProfile": [
+                            "dolbyAtmos"
+                        ],
+                        "audioLanguages": [
+                            "en"
+                        ],
+                        "closedCaptions": [
+                            "en"
+                        ],
+                        "subtitles": [
+                            "es"
+                        ],
+                        "audioDescriptions": [
+                            "en"
+                        ]
                     }
                 ]
-            },
-            "waysToWatch": [
-                {
-                    "identifiers": {
-                        "assetId": "123"
-                    },
-                    "expires": "2025-01-01T00:00:00.000Z",
-                    "entitled": true,
-                    "entitledExpires": "2025-01-01T00:00:00.000Z",
-                    "offeringType": "buy",
-                    "price": 2.99,
-                    "videoQuality": [
-                        "UHD"
-                    ],
-                    "audioProfile": [
-                        "dolbyAtmos"
-                    ],
-                    "audioLanguages": [
-                        "en"
-                    ],
-                    "closedCaptions": [
-                        "en"
-                    ],
-                    "subtitles": [
-                        "es"
-                    ],
-                    "audioDescriptions": [
-                        "en"
-                    ]
-                }
-            ]
-        }
+            }
         }
     },
     "PURCHASEDCONTENT": {
         "purchases": {
             "totalCount": 10,
-								"expires": "2025-01-01T00:00:00.000Z",
-								"entries": [
-									{
-										"identifiers": {
-											"entityId": "345",
-											"entityType": "program",
-											"programType": "movie"
-										},
-										"info": {
-											"title": "Cool Runnings",
-											"synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
-											"releaseDate": "1993-01-01T00:00:00.000Z",
-											"contentRatings": [
-												{
-													"scheme": "US-Movie",
-													"rating": "PG"
-												},
-												{
-													"scheme": "CA-Movie",
-													"rating": "G"
-												}
-											]
-										},
-										"waysToWatch": [
-											{
-												"identifiers": {
-													"assetId": "123"
-												},
-												"expires": "2025-01-01T00:00:00.000Z",
-												"entitled": true,
-												"entitledExpires": "2025-01-01T00:00:00.000Z",
-												"offeringType": "buy",
-												"price": 2.99,
-												"videoQuality": [
-													"UHD"
-												],
-												"audioProfile": [
-													"dolbyAtmos"
-												],
-												"audioLanguages": [
-													"en"
-												],
-												"closedCaptions": [
-													"en"
-												],
-												"subtitles": [
-													"es"
-												],
-												"audioDescriptions": [
-													"en"
-												]
-											}
-										]
-									}
-								]
+            "expires": "2025-01-01T00:00:00.000Z",
+            "entries": [
+                {
+                    "identifiers": {
+                        "entityId": "345",
+                        "entityType": "program",
+                        "programType": "movie"
+                    },
+                    "info": {
+                        "title": "Cool Runnings",
+                        "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                        "releaseDate": "1993-01-01T00:00:00.000Z",
+                        "contentRatings": [
+                            {
+                                "scheme": "US-Movie",
+                                "rating": "PG"
+                            },
+                            {
+                                "scheme": "CA-Movie",
+                                "rating": "G"
+                            }
+                        ]
+                    },
+                    "waysToWatch": [
+                        {
+                            "identifiers": {
+                                "assetId": "123"
+                            },
+                            "expires": "2025-01-01T00:00:00.000Z",
+                            "entitled": true,
+                            "entitledExpires": "2025-01-01T00:00:00.000Z",
+                            "offeringType": "buy",
+                            "price": 2.99,
+                            "videoQuality": [
+                                "UHD"
+                            ],
+                            "audioProfile": [
+                                "dolbyAtmos"
+                            ],
+                            "audioLanguages": [
+                                "en"
+                            ],
+                            "closedCaptions": [
+                                "en"
+                            ],
+                            "subtitles": [
+                                "es"
+                            ],
+                            "audioDescriptions": [
+                                "en"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "PURCHASEDCONTENT_LIST_WITHOUT_EXPIRES": {
+        "purchases": {
+            "totalCount": 10,
+            "entries": [
+                {
+                    "identifiers": {
+                        "entityId": "345",
+                        "entityType": "program",
+                        "programType": "movie"
+                    },
+                    "info": {
+                        "title": "Cool Runnings",
+                        "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                        "releaseDate": "1993-01-01T00:00:00.000Z",
+                        "contentRatings": [
+                            {
+                                "scheme": "US-Movie",
+                                "rating": "PG"
+                            },
+                            {
+                                "scheme": "CA-Movie",
+                                "rating": "G"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "PURCHASEDCONTENT_LIST_WITHOUT_TOTALCOUNT": {
+        "purchases": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "entries": [
+                {
+                    "identifiers": {
+                        "entityId": "345",
+                        "entityType": "program",
+                        "programType": "movie"
+                    },
+                    "info": {
+                        "title": "Cool Runnings",
+                        "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                        "releaseDate": "1993-01-01T00:00:00.000Z",
+                        "contentRatings": [
+                            {
+                                "scheme": "US-Movie",
+                                "rating": "PG"
+                            },
+                            {
+                                "scheme": "CA-Movie",
+                                "rating": "G"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "PURCHASEDCONTENT_LIST_WITHOUT_ENTRIES": {
+        "purchases": {
+            "totalCount": 10,
+            "expires": "2025-01-01T00:00:00.000Z",
+            "entries": [
+                {
+                    "identifiers": {
+                        "entityId": "345",
+                        "entityType": "program",
+                        "programType": "movie"
+                    },
+                    "info": {
+                        "title": "Cool Runnings",
+                        "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                        "releaseDate": "1993-01-01T00:00:00.000Z",
+                        "contentRatings": [
+                            {
+                                "scheme": "US-Movie",
+                                "rating": "PG"
+                            },
+                            {
+                                "scheme": "CA-Movie",
+                                "rating": "G"
+                            }
+                        ]
+                    }
+                }
+            ]
         }
     }
 }

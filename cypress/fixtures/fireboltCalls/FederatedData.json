@@ -1,11 +1,21 @@
 {
-    "GET_DISCOVERY_ENTITYINFO":{
+    "PUSH_ENTITYINFO_DATA":{
         "method": "discovery.details",
         "params": "FEDERATEDDATA_DETAILS"
     },
-    "GET_DISCOVERY_PURCHASEDCONTENT":{
+    "EXPECTED_ENTITY_INFO":{
+        "method": "discovery.details",
+		"validationJsonPath": "result",
+		"expected": "NULL"
+    },
+    "PUSH_PURCHASEDCONTENT_LIST":{
         "method": "discovery.purchases",
         "params": "FEDERATEDDATA_PURCHASEDCONTENT"
+    },
+    "EXPECTED_PURCHASEDCONTENT":{
+        "method": "discovery.purchases",
+		"validationJsonPath": "result",
+		"expected": "NULL"
     },
     "GET_ENTITYINFO_WITH_WAY_TO_WATCH":{
         "method": "discovery_content.requestDetails",
@@ -187,5 +197,95 @@
         "method": "discovery_content.requestDetails",
         "params": "FEDERATEDDATA_ENTITYINFO_ENTITY_INVALID_PARAMETERS",
         "expected": "error"
-    }
+    },
+    "INVALID_PARAMETERS_FOR_DISCOVERY_DETAILS":{
+        "method": "discovery.details",
+		"validationJsonPath": "result",
+		"expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "PUSH_ENTITYINFO_WITHOUT_PARAMETERS": {
+        "method": "discovery.details",
+        "expected": "error"
+    },
+    "PUSH_ENTITYINFO_WITHOUT_ENTITYID": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITYINFO_WITHOUT_ENTITYID",
+        "expected": "error"
+    },
+    "PUSH_ENTITYINFO_ENTITYID_WITH_INTEGER": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITYINFO_ENTITYID_WITH_INTEGER",
+        "expected": "error"
+    },
+    "PUSH_ENTITYINFO_ENTITYID_WITH_BOOLEAN": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITYINFO_ENTITYID_WITH_BOOLEAN",
+        "expected": "error"
+    },
+    "PUSH_ENTITYINFO_WITHOUT_EXPIRES": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITYINFO_WITHOUT_EXPIRES",
+        "expected": "error"
+    },
+    "PUSH_ENTITYINFO_WITHOUT_DETAILS": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITYINFO_WITHOUT_DETAILS",
+        "expected": "error"
+    },
+    "PUSH_ENTITYINFO_WITHOUT_INFO": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITYINFO_WITHOUT_INFO",
+        "expected": "error"
+    },
+    "PUSH_ENTITYINFO_WITHOUT_IDENTIFIERS": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITYINFO_WITHOUT_IDENTIFIERS",
+        "expected": "error"
+    },
+    "PUSH_ENTITYINFO_WITHOUT_IDENTIFIERS_ENTITYTYPE": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITYINFO_WITHOUT_IDENTIFIERS_ENTITYTYPE",
+        "expected": "error"
+    },
+    "PUSH_ENTITYINFO_WITHOUT_IDENTIFIERS_PROGRAMTYPE": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITYINFO_WITHOUT_IDENTIFIERS_PROGRAMTYPE",
+        "expected": "error"
+    },
+    "PUSH_ENTITYINFO_WITH_INVALID_TITLE": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITYINFO_WITH_INVALID_TITLE",
+        "expected": "error"
+    },
+    "PUSH_ENTITYINFO_WITH_INVALID_IDENTIFIERS_ENTITYTYPE": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITYINFO_WITH_INVALID_IDENTIFIERS_ENTITYTYPE",
+        "expected": "error"
+    },
+    "INVALID_PARAMETERS_FOR_DISCOVERY_PURCHASES":{
+        "method": "discovery.purchases",
+		"validationJsonPath": "result",
+		"expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "PUSH_PURCHASEDCONTENT_LIST_WITHOUT_PARAMETERS": {
+        "method": "discovery.purchases",
+        "expected": "error"
+    },
+    "PUSH_PURCHASEDCONTENT_LIST_WITHOUT_EXPIRES": {
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASEDCONTENT_LIST_WITHOUT_EXPIRES",
+        "expected": "error"
+    },
+    "PUSH_PURCHASEDCONTENT_LIST_WITHOUT_TOTALCOUNT": {
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASEDCONTENT_LIST_WITHOUT_TOTALCOUNT",
+        "expected": "error"
+    },
+    "PUSH_PURCHASEDCONTENT_LIST_WITHOUT_ENTRIES": {
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASEDCONTENT_LIST_WITHOUT_ENTRIES",
+        "expected": "error"
+    }  
 }
