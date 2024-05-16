@@ -425,7 +425,7 @@ function extractModuleName(dataIdentifier) {
  */
 function parseDataFromJson(data, dataIdentifier, requestType) {
   try {
-    if (data[dataIdentifier] !== undefined) {
+    if (data && data[dataIdentifier] !== undefined) {
       if (
         typeof data[dataIdentifier] == CONSTANTS.STRING ||
         typeof data[dataIdentifier] == CONSTANTS.BOOLEAN ||

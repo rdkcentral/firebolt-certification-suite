@@ -52,7 +52,7 @@ module.exports = {
   COMBINEDFIREBOLTMOCKS: 'combinedFireboltMocks',
   COMMUNICATION_MODE: 'communicationMode',
   CONFIG: 'CONFIG',
-  CONFIG_MODULE_SETRESPONSE_PATH : './node_modules/configModule/testData/setResponseData.json',
+  CONFIG_MODULE_SETRESPONSE_PATH: './node_modules/configModule/testData/setResponseData.json',
   CONTENT: 'Content',
   CONTEXT: 'Context',
   CONTEXT_FILE_PATH: 'cypress/fixtures/apiObjectContext.json',
@@ -125,7 +125,7 @@ module.exports = {
   EXPECTED_JSON_IN_VALIDATION_OBJECTS:
     'Expected JSON data should be defined in fixtures/objects/validationObjects/',
   EXPECTING_ERROR: 'expectingError',
-  EXTERNAL_DEVICES_PATH: 'cypress/fixtures/external/devices/',
+  EXTERNAL_DEVICES_PATH: './node_modules/configModule/testData/devices/',
   EXTERNAL_MODULEREQID_PATH: 'cypress/fixtures/external/moduleReqId/moduleReqId.json',
   EXTERNAL_PATH: 'cypress/fixtures/external/modules/',
   EXTERNAL_PREREQUISITE_DATA: './cypress/fixtures/external/PreRequisiteData.json',
