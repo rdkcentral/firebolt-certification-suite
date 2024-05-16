@@ -22,7 +22,7 @@ Feature: Account_Manage
 
       Examples:
          | Scenario                             | Key                                              |
-         | Invalid session token                | set account session with invalid token           |
+         | Invalid session tokens                | set account session with invalid token           |
          | Invalid session ExpiresIn            | set account session with invalid ExpiresIn       |
          | Passing ExpiresIn Invalid value      | set account session with invalid ExpiresIn value |
          | Without session token - Empty params | set account session without parameters           |
