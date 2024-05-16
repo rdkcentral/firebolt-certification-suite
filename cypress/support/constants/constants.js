@@ -42,6 +42,8 @@ module.exports = {
   BASE64: 'base64',
   BEFORE_OPERATION: 'beforeOperation',
   BEFORE_OPERATION_TAGS: 'beforeOperationTags',
+  BEFORE_OPERATION_FORMAT:
+    'Before operation object is not in proper array format, recheck the before objects in fixture/external/moduleReqId - getBeforeOperationObject',
   BOOLEAN: 'boolean',
   CAPABILITIES_INFO: 'capabilities.info',
   CAPABILITIES_PERMITTED: 'capabilities.permitted',
@@ -115,7 +117,7 @@ module.exports = {
   EXCLUDED_VALUES: [null, undefined],
   EXECUTE_SHELL: 'executeShell',
   EXPECTED_DATA_NOT_FOUND_IN_MODULE_JSONS:
-    '`Expected data ${dataIdentifier} was not found in the default file, FCS module JSON file, or external module JSON file. Returning ${dataIdentifier} as is.`',
+    '`Expected data ${dataIdentifier} was not found in fixtures. Returning ${dataIdentifier} as is.`',
   EXPECTED_DEFAULT_TESTDATA_MESSAGE:
     'Expected JSON data should be defined in fixtures/objects/defaultTestData.json',
   EXPECTED_ERROR_RESPONSE: 'Expected error in response:',
@@ -123,13 +125,13 @@ module.exports = {
   EXPECTED_JSON_IN_VALIDATION_OBJECTS:
     'Expected JSON data should be defined in fixtures/objects/validationObjects/',
   EXTERNAL_DEVICES_PATH: 'cypress/fixtures/external/devices/',
-  EXTERNAL_MODULEREQID_PATH: 'cypress/fixtures/external/moduleReqId/moduleReqId.json',
+  EXTERNAL_MODULEREQID_PATH: 'cypress/fixtures/external/objects/moduleReqId/moduleReqId.json',
   EXTERNAL_PATH: 'cypress/fixtures/external/modules/',
   EXTERNAL_PREREQUISITE_DATA: './cypress/fixtures/external/PreRequisiteData.json',
   EXTRACTEDAPI_PATH: 'extractedApiObject.response.',
   FAIL: 'FAIL',
   FAILED_TO_PARSE_LIEFECYCLE_ERROR:
-    'Failed to parse error object from response while setting lifecycle state',
+    'Failed to parse error object from response while setting lifecycle state. Response received : ',
   FAILED_TO_SET_LIFECYCLE_STATE:
     'Failed to set lifecycle state due to the following error received from platform: ',
   FCS: 'fcs',
@@ -148,6 +150,8 @@ module.exports = {
   VALIDATION_OBJECTS_PATH: 'cypress/fixtures/objects/validationObjects/',
   CONFIG_VALIDATION_OBJECTS_PATH: 'cypress/fixtures/external/objects/validationObjects/',
   FIXTURE: 'fixture',
+  FIXTURE_DEFINED_PATH:
+    'Expected JSON data should be defined in fixtures/objects/validationObjects/',
   CUSTOM: 'custom',
   VALIDATION_FUNCTION: 'validationFunction',
   NOT_SUPPORTED: 'NOT_SUPPORTED',
@@ -176,9 +180,11 @@ module.exports = {
   LEVEL_LIST: ['should', 'could'],
   LEVEL_MUST: ['must'],
   LIFECYCLE_APIS: {
-    READY: 'Lifecycle.ready',
     CLOSE: 'Lifecycle.close',
+    FINISHED: 'Lifecycle.finished',
     HISTORY: 'Lifecycle.history',
+    READY: 'Lifecycle.ready',
+    SUSPEND: 'Lifecycle.suspend',
     UNSUSPEND: 'Lifecycle.unsuspend',
   },
   LIFECYCLE_APP_OBJECT_LIST: 'lifecycleAppObjectList',
@@ -197,6 +203,7 @@ module.exports = {
   LIFECYCLE_HISTORY_RESPONSE: 'Lifecycle history response fetched from application: ',
   LIFECYCLE_HISTORY_SCHEMA_PATH: 'schemas/lifecycleHistorySchema',
   LIFECYCLE_INTENT: 'Lifecycle intent sent to application: ',
+  LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle events generated Req #',
   LIFECYCLE_STATE: 'Lifecycle.state',
   LIFECYCLE_STATES: {
     FOREGROUND: 'foreground',
@@ -212,7 +219,6 @@ module.exports = {
   LIFECYCLE_VALIDATION_METHOD: 'Lifecycle.validation',
   LIMITADTRACKING_OFF: 'limitAdTrackingOFF',
   LIMITADTRACKING_ON: 'limitAdTrackingON',
-  LOGGER_LEVEL: 'debug',
   LONGPOLL_TIMEOUT: 15000,
   MESSAGE_QUEUE: 'messageQueue',
   MESSAGE_QUEUE_SIZE: 100,
@@ -258,7 +264,9 @@ module.exports = {
   NOTIFICATION_CONTENT_VALIDATION_REQ: 'Lifecycle notification content validation Req # ',
   NOTIFICATION_EXISTS_REQ: 'Lifecycle notification exists Req # ',
   NOTIFICATION_SCHEMA_VALIDATION_REQ: 'Lifecycle notification schema validation Req # ',
-  NULL_CHECK: 'Null Check requirement SKIPPED as schema validation is PASSED',
+  NULL: 'null',
+  NULL_CHECK: 'Null Check requirement SKIPPED as schema validation is PASSED. ',
+  NULL_RESPONSE: 'NULL',
   NUMBER: 'number',
   OPENRPC_ERROR_SCHEMA_PATH: 'schemas/errorSchema.json',
   OBJECT: 'object',
@@ -395,6 +403,7 @@ module.exports = {
   FCS_DEFAULTTESTDATA_PATH: './cypress/fixtures/defaultTestData.json',
   ENV_SETUP_STATUS: 'environmentLaunched',
   APP_LAUNCH_STATUS: 'appLaunched',
+  NO_EVENT_TRIGGERED: 'Expecting no event to be triggered from platform',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

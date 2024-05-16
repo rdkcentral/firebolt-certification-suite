@@ -150,11 +150,6 @@
     "GET_MANAGE_DEVICE_NAME":{
         "method": "manage_device.name"
     },
-    "NULL_FOR_DEVICE_SETNAME": {
-        "method": "device.setName",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
     "BEDROOM_FOR_DEVICE_NAME": {
         "method": "device.name",
         "validationJsonPath": "result",
@@ -279,7 +274,7 @@
         "method": "manage_device.setName",
         "params": "Kitchen"
     },
-    "NULL_FOR_DEVICE_ONNAMECHANGED_EVENT": {
+    "ONDEVICENAMECHANGED": {
         "event": "device.onNameChanged",
         "validationJsonPath": "eventResponse",
         "expected": "NULL",

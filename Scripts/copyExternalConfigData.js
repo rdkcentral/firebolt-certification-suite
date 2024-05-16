@@ -17,18 +17,33 @@
  */
 const fs = require('fs');
 const path = require('path');
+const logger = require('../cypress/support/Logger')('copyExternalConfigData.js');
 
-console.log(
-  'Copying Config TestData into fixtures/external and Testcases into TestCases/Distributor'
+logger.info(
+  'Copying Config fixtures into fixtures/external and Testcases into TestCases/Distributor'
 );
 
 // Config for testCase
 const EXTERNAL_DIR_TESTCASE = path.join(__dirname, '..', 'cypress', 'TestCases', 'Distributor');
-const CONFIG_DIR_TESTCASE = path.join(__dirname, '..', 'node_modules', 'configModule', 'TestCases');
+const CONFIG_DIR_TESTCASE = path.join(
+  __dirname,
+  '..',
+  'node_modules',
+  'configModule',
+  'cypress',
+  'TestCases'
+);
 
-// Config for testData
+// Config for fixtures
 const EXTERNAL_DIR_TESTDATA = path.join(__dirname, '..', 'cypress', 'fixtures', 'external');
-const CONFIG_DIR_TESTDATA = path.join(__dirname, '..', 'node_modules', 'configModule', 'testData');
+const CONFIG_DIR_TESTDATA = path.join(
+  __dirname,
+  '..',
+  'node_modules',
+  'configModule',
+  'cypress',
+  'fixtures'
+);
 
 // Config for config.json
 const SOURCE_CONFIG_FILE = path.join(
@@ -69,21 +84,21 @@ function copyFiles(configDir, externalDir) {
 if (fs.existsSync(CONFIG_DIR_TESTCASE)) {
   copyFiles(CONFIG_DIR_TESTCASE, EXTERNAL_DIR_TESTCASE);
 } else {
-  console.log('TestCases data is not available in configModule');
+  logger.info('TestCases data is not available in configModule');
 }
 
 // Copy testData files
 if (fs.existsSync(CONFIG_DIR_TESTDATA)) {
   copyFiles(CONFIG_DIR_TESTDATA, EXTERNAL_DIR_TESTDATA);
 } else {
-  console.log('TestData is not available in configModule');
+  logger.info('fixtures is not available in configModule');
 }
 
 // Copy config.json file
 if (fs.existsSync(SOURCE_CONFIG_FILE)) {
   fs.copyFileSync(SOURCE_CONFIG_FILE, DEST_CONFIG_FILE);
-  console.log(`Copied config json from ${SOURCE_CONFIG_FILE} to ${DEST_CONFIG_FILE}`);
+  logger.info(`Copied config json from ${SOURCE_CONFIG_FILE} to ${DEST_CONFIG_FILE}`);
 } else {
   // Source file does not exist, do nothing
-  console.log(`${SOURCE_CONFIG_FILE} config file doesn't exist`);
+  logger.info(`${SOURCE_CONFIG_FILE} config file doesn't exist`);
 }

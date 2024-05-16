@@ -29,16 +29,17 @@ import UTILS from '../cypress-support/src/utils';
  * @param {String} key - The key name of the Firebolt data contains method, context, or expected value, etc.
  * @example
  * Given 'Firebolt' platform responds with 'Validate device id'
- * Given 'Firebolt' platform responds to '1st party app' with 'Validate device id'
- * Given 'Firebolt' platform responds to 'test.test.test' with 'Validate device id'
+ * Given 'Firebolt' platform responds to '1st party app' for 'Validate device id'
+ * Given 'Firebolt' platform responds to 'test.test.test' for 'Validate device id'
  * Given 'Firebolt' platform triggers event 'Validate device id'
  * Given 'Firebolt' platform triggers to '1st party app' event 'Validate device id'
  * Given 'Firebolt' platform triggers to 'test.test.test' event 'Validate device id'
+ * Given 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
  */
 
 Given(
-  /'(.+)' platform (responds|triggers)(?: to '(.+)')? (with|event) '(.+)'$/,
-  async (sdk, eventcall, appId, event, key) => {
+  /'(.+)' platform (responds|triggers|does not trigger)(?: to '(.+)')? (with|for|event)(?: for)? '(.+)'$/,
+  async (sdk, eventExpected, appId, event, key) => {
     if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
       key = key.replaceAll(' ', '_').toUpperCase();
 
@@ -48,10 +49,14 @@ Given(
         fireboltItems.forEach((item) => {
           const validationType = item.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
 
-          const methodOrEvent = item[validationType];
+          let methodOrEvent = item[validationType];
+          methodOrEvent = methodOrEvent.includes('_') ? methodOrEvent.split('_')[1] : methodOrEvent;
           const context = item.context ? item.context : CONSTANTS.NO_CONTEXT;
-          const validationJsonPath = item.validationJsonPath;
-          const expected = item.expected;
+          // if the validationObject doesn't have "validationJsonPath" or "expected" field, assign default values.
+          const validationJsonPath = item.validationJsonPath
+            ? item.validationJsonPath
+            : CONSTANTS.RESULT;
+          const expected = item.expected ? item.expected : CONSTANTS.NULL_RESPONSE;
           const expectingError = item.expectingError;
 
           let fCSValidationjson;
@@ -114,7 +119,8 @@ Given(
                               updatedResponse,
                               methodOrEventObject,
                               eventName,
-                              expected
+                              expected,
+                              eventExpected === 'triggers' ? true : false
                             );
                           }
                         );
@@ -132,7 +138,13 @@ Given(
                         (response) => {
                           response = JSON.parse(response);
                           response = response.report;
-                          cy.saveEventResponse(response, methodOrEventObject, eventName, expected);
+                          cy.saveEventResponse(
+                            response,
+                            methodOrEventObject,
+                            eventName,
+                            expected,
+                            eventExpected === 'triggers' ? true : false
+                          );
                         }
                       );
                     }

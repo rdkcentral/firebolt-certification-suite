@@ -1,74 +1,4 @@
 {
-    "NULL_FOR_CLOSEDCAPTIONS_SETENABLED": {
-        "method": "closedcaptions.setEnabled",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETFONTFAMILY": {
-        "method": "closedcaptions.setFontFamily",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETFONTSIZE": {
-        "method": "closedcaptions.setFontSize",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETFONTCOLOR": {
-        "method": "closedcaptions.setFontColor",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETFONTEDGE": {
-        "method": "closedcaptions.setFontEdge",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETFONTEDGECOLOR": {
-        "method": "closedcaptions.setFontEdgeColor",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETBACKGROUNDCOLOR": {
-        "method": "closedcaptions.setBackgroundColor",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETFONTOPACITY": {
-        "method": "closedcaptions.setFontOpacity",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETBACKGROUNDOPACITY": {
-        "method": "closedcaptions.setBackgroundOpacity",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETTEXTALIGN": {
-        "method": "closedcaptions.setTextAlign",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETTEXTALIGNVERTICAL": {
-        "method": "closedcaptions.setTextAlignVertical",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETWINDOWCOLOR": {
-        "method": "closedcaptions.setWindowColor",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETWINDOWOPACITY": {
-        "method": "closedcaptions.setWindowOpacity",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_CLOSEDCAPTIONS_SETPREFERREDLANGUAGES": {
-        "method": "closedcaptions.setPreferredLanguages",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETENABLED":{
         "method": "closedcaptions.setEnabled",
         "validationJsonPath": "result",
@@ -465,7 +395,7 @@
     "GET_WINDOWOPACITY":{
         "method": "manage_closedcaptions.windowOpacity"
     },
-    "#FF00FF_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS": {
+    "#7F7F7F_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.backgroundColor",
         "validationJsonPath": "result",
         "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR"

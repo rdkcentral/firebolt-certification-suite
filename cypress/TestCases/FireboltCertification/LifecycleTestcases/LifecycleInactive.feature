@@ -1,7 +1,9 @@
+# Commented step definitions to be implemented once not supported methods are implemented and tested    
+# Validation objects are not added for not supported methods
 Feature: Lifecycle_Inactive
 
     @Lifecycle @coreSDK
-    Scenario Outline: Close an app from <state>
+    Scenario Outline: Lifecycle 2.3.1 Close an app from <state>
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with '<state>' state
         When '3rd party app' transitions to state 'inactive'
@@ -11,13 +13,12 @@ Feature: Lifecycle_Inactive
             | foreground |
             | background |
 
-    # Commented step definitions to be implemented once design is worked out
     @Lifecycle @coreSDK @lifecycleManagement
-    Scenario: No impact on closing app from inactive state
+    Scenario: Lifecycle 2.3.3 No impact on closing app from inactive state
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'inactive' state
-        #And I call 'LifecycleManagement.state' api
+        # And 1st party app invokes the API to 'get lifecycle management state'
         When '3rd party app' invokes the 'Firebolt' API to 'close app with remote button'
-        #And I call 'LifecycleManagement.state' api
-        Then '3rd party app' is in 'inactive' state
-        #And I validate last '2' response are same for 'LifecycleManagement.state' API method
+        # And 1st party app invokes the API to 'get lifecycle management state'
+        Then '3rd party app' is in 'inactive' state        
+        # Then 'Firebolt' platform responds with 'last two responses for lifecycleManagement state'

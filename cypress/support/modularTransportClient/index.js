@@ -20,8 +20,6 @@ const externalTransport = require('configModule').externalTransport;
 
 export default async (transportClient, options) => {
   const createAndInitializeObject = async (transportType) => {
-    console.log(transportType[transportClient]);
-
     if (!process.env.transportObject) {
       const object = new transportType[transportClient].default(options);
       await object.initialize();

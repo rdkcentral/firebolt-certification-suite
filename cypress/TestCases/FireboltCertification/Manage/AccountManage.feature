@@ -7,13 +7,13 @@ Feature: Account_Manage
    @Account @manageSDK @sdk @transport
    Scenario: Account.session - Positive Scenario: Push session token
       When 1st party app invokes the 'Firebolt' API to 'push session token'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for account session'
+      Then 'Firebolt' platform responds to '1st party app' with 'push session token'
 
    @Account @manageSDK @sdk @transport
    Scenario: Account.session - Negative Scenario: Push session token expecting error
       When 1st party app invokes the 'Firebolt' API to 'push session token'
       And '3rd party app' invokes the 'Firebolt' API to 'get advertisingId with custom error'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for account session'
+      Then 'Firebolt' platform responds to '1st party app' for 'push session token'
 
    @Account @manageSDK @sdk @transport
    Scenario Outline: Account.session - Negative Scenario: <Scenario> expecting error

@@ -18,6 +18,7 @@
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS from '../cypress-support/src/utils';
+const logger = require('../Logger')('command.js');
 
 /**
  * @module commands
@@ -60,9 +61,7 @@ Cypress.Commands.add(
       fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
     if (!fireboltData) {
-      cy.log(CONSTANTS.NO_DATA_FOR_THE_KEY + key).then(() => {
-        assert(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
-      });
+      fireLog(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
     return fireboltData;
   }
@@ -143,7 +142,7 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
       });
     });
   } else {
-    assert(false, `${sdk} SDK not Supported`);
+    fireLog(false, `${sdk} SDK not Supported`);
   }
 });
 
@@ -268,7 +267,7 @@ Cypress.Commands.add('getLatestFireboltJsonFromFixtures', () => {
 
       return version;
     } catch (err) {
-      assert.equal(true, err, 'Error while fetching latest version from the fixtures');
+      fireLog.equal(true, err, 'Error while fetching latest version from the fixtures');
     }
   });
 });
@@ -433,10 +432,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
         }
       });
     } else {
-      assert(
-        false,
-        'Before operation object is not in proper array format, recheck the before objects in fixture/external/moduleReqId - getBeforeOperationObject'
-      );
+      fireLog(false, CONSTANTS.BEFORE_OPERATION_FORMAT);
     }
   }
 });
@@ -451,7 +447,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
  */
 Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
   if (!beforeOperation) {
-    assert(false, 'Before operation object is null/undefined - setResponse');
+    fireLog(false, 'Before operation object is null/undefined - setResponse');
   }
   let firstParty;
   if (beforeOperation.hasOwnProperty('firstParty')) {
@@ -462,53 +458,54 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
       'firstParty property is missing in beforeOperation block, so using default as firstParty=false'
     );
   }
-
   if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTCALL)) {
-    cy.fireboltDataParser(beforeOperation[CONSTANTS.FIREBOLTCALL]).then((parsedData) => {
-      if (firstParty) {
-        const { method, params, action } = parsedData;
-        const requestMap = {
-          method: method,
-          params: params,
-          action: action,
-        };
+    cy.fireboltDataParser(beforeOperation[CONSTANTS.FIREBOLTCALL]).then((parsedDataArr) => {
+      parsedDataArr.forEach((parsedData) => {
+        if (firstParty) {
+          const { method, params, action } = parsedData;
+          const requestMap = {
+            method: method,
+            params: params,
+            action: action,
+          };
 
-        cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
-        cy.sendMessagetoPlatforms(requestMap).then((result) => {
-          cy.log('Response from 1st party App: ' + result);
-        });
-      } else {
-        const communicationMode = UTILS.getCommunicationMode();
-        const { method, params, action } = parsedData;
-        const additionalParams = {
-          communicationMode: communicationMode,
-          action: action,
-          isNotSupportedApi: false,
-        };
-        const methodParams = { method: method, methodParams: params };
-        intentMessage = UTILS.createIntentMessage(
-          CONSTANTS.TASK.CALLMETHOD,
-          methodParams,
-          additionalParams
-        );
-
-        const requestTopic = UTILS.getTopic(Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID));
-        const responseTopic = UTILS.getTopic(
-          Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID),
-          CONSTANTS.SUBSCRIBE
-        );
-
-        // Sending message to 3rd party app.
-        cy.log(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
-        cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
-          result = JSON.parse(result);
-          cy.log(
-            `Response from 3rd party App ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(
-              result
-            )}`
+          cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
+          cy.sendMessagetoPlatforms(requestMap).then((result) => {
+            cy.log('Response from 1st party App: ' + JSON.stringify(result));
+          });
+        } else {
+          const communicationMode = UTILS.getCommunicationMode();
+          const { method, params, action } = parsedData;
+          const additionalParams = {
+            communicationMode: communicationMode,
+            action: action,
+            isNotSupportedApi: false,
+          };
+          const methodParams = { method: method, methodParams: params };
+          intentMessage = UTILS.createIntentMessage(
+            CONSTANTS.TASK.CALLMETHOD,
+            methodParams,
+            additionalParams
           );
-        });
-      }
+
+          const requestTopic = UTILS.getTopic(Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID));
+          const responseTopic = UTILS.getTopic(
+            Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID),
+            CONSTANTS.SUBSCRIBE
+          );
+
+          // Sending message to 3rd party app.
+          cy.log(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
+          cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
+            result = JSON.parse(result);
+            cy.log(
+              `Response from 3rd party App ${Cypress.env(
+                CONSTANTS.THIRD_PARTY_APP_ID
+              )}: ${JSON.stringify(result)}`
+            );
+          });
+        }
+      });
     });
   } else if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTMOCK)) {
     cy.getFireboltData(
@@ -551,9 +548,9 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
         cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
           result = JSON.parse(result);
           cy.log(
-            `Response from 3rd party App ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(
-              result
-            )}`
+            `Response from 3rd party App ${Cypress.env(
+              CONSTANTS.THIRD_PARTY_APP_ID
+            )}: ${JSON.stringify(result)}`
           );
         });
       }
@@ -570,9 +567,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       cy.log('Response for marker creation: ' + JSON.stringify(result)).then(() => {
-        cy.log(result.message).then(() => {
-          assert.isTrue(result.success, result.message);
-        });
+        fireLog.isTrue(result.success, result.message);
       });
     });
   }
@@ -604,14 +599,10 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
   // Sending message to the platform to call performance test handler
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     if (result?.success) {
-      cy.log(eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE)).then(() => {
-        assert(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
-        return true;
-      });
+      fireLog(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
+      return true;
     } else {
-      cy.log(eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE)).then(() => {
-        assert(false, eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
-      });
+      fireLog(false, eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
     }
   });
 });
@@ -778,11 +769,11 @@ Cypress.Commands.add('convertJsonToHTML', (defaultDirectory, fileName) => {
       if (response.stdout.includes('Reports saved')) {
         return true;
       }
-      console.log(response);
+      logger.info(response);
       return false;
     });
   } catch (err) {
-    console.log(err);
+    logger.error(err);
     return false;
   }
 });
@@ -799,7 +790,7 @@ Cypress.Commands.add('convertJsonToHTML', (defaultDirectory, fileName) => {
 Cypress.Commands.add('mergeJsonFilesData', (fcsJson, configJson) => {
   cy.task('readFileIfExists', fcsJson).then((fireboltCallsFCSjson) => {
     const fcsDefaultTestData = JSON.parse(fireboltCallsFCSjson);
-    assert.isNotNull(fcsDefaultTestData, CONSTANTS.EXPECTED_DEFAULT_TESTDATA_MESSAGE);
+    fireLog.isNotNull(fcsDefaultTestData, CONSTANTS.EXPECTED_DEFAULT_TESTDATA_MESSAGE);
 
     // Merging all json files
     cy.task('readFileIfExists', configJson).then((fireboltCallsConfigModulejson) => {
@@ -822,7 +813,7 @@ Cypress.Commands.add('mergeJsonFilesData', (fcsJson, configJson) => {
 Cypress.Commands.add('mergeFcsAndConfigJsons', (fcsJson, configJson) => {
   let combinedJson;
   cy.mergeJsonfiles(fcsJson).then((fireboltCallsFCSjson) => {
-    assert.isNotNull(fireboltCallsFCSjson, CONSTANTS.EXPECTED_JSON_IN_FIREBOLTCALLS);
+    fireLog.isNotNull(fireboltCallsFCSjson, CONSTANTS.EXPECTED_JSON_IN_FIREBOLTCALLS);
 
     cy.mergeJsonfiles(configJson).then((fireboltCallsConfigModulejson) => {
       combinedJson = Object.assign(fireboltCallsFCSjson, fireboltCallsConfigModulejson);
@@ -844,10 +835,7 @@ Cypress.Commands.add(
   'combineValidationJson',
   (fireboltCallsValidationPathFromFCS, fireboltCallsValidationPathFromConfigModule) => {
     cy.mergeJsonfiles(fireboltCallsValidationPathFromFCS).then((fCSFixturesValidationjson) => {
-      assert.isNotNull(
-        fCSFixturesValidationjson,
-        'Expected JSON data should be defined in fixtures/objects/validationObjects/'
-      );
+      fireLog.isNotNull(fCSFixturesValidationjson, CONSTANTS.FIXTURE_DEFINED_PATH);
       cy.mergeJsonfiles(fireboltCallsValidationPathFromConfigModule).then(
         (configModuleValidationjson) => {
           if (configModuleValidationjson) {
@@ -904,4 +892,18 @@ Cypress.Commands.add('mergeFireboltCallsAndFireboltMocks', () => {
   ).then((response) => {
     Cypress.env(CONSTANTS.COMBINEDFIREBOLTMOCKS, response);
   });
+});
+
+/**
+ * @module commands
+ * @function clearCache
+ * @description To clear cypress cache and reload the browser.
+ * @example
+ * cy.clearCache()
+ */
+Cypress.Commands.add('clearCache', () => {
+  cy.clearCookies();
+  cy.clearLocalStorage();
+  cy.clearAllSessionStorage();
+  cy.reload(true);
 });

@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-const REGEXFORMATS = require('../constants/regexformats');
+const REGEXFORMATS = require('../../fixtures/regexformats');
 const CONSTANTS = require('../constants/constants');
 
 /**
@@ -51,7 +51,7 @@ class regExValidations {
       cy.log(
         `RegEx Validation : Expected ${method} response ${
           extractedResponse ? extractedResponse : response
-        } to be in a valid regex format`,
+        } to be in ${expression} regex format`,
         'regexResultValidator'
       ).then(() => {
         assert.equal(true, validationResult, 'RegEx Validation:');

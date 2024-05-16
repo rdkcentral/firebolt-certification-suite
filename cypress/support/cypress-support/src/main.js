@@ -24,8 +24,11 @@ const CONSTANTS = require('../../constants/constants');
 const defaultDirectory = CONSTANTS.DEFAULT_DIRECTORY;
 const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 const UTILS = require('./utils');
-let appTransport;
 const path = require('path');
+const logger = require('../../Logger')('main.js');
+const setimmediate = require('setimmediate');
+let appTransport;
+const flatted = require('flatted');
 
 export default function (module) {
   const config = new Config(module);
@@ -38,9 +41,8 @@ export default function (module) {
 
   // before All
   before(() => {
-    // Added below cypress commands to clear local browser cache and to reload browser
-    cy.clearLocalStorage();
-    cy.reload(true);
+    // Added below custom commands to clear cache and to reload browser
+    cy.clearCache();
     cy.wrap(UTILS.pubSubClientCreation(appTransport), {
       timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT,
     }).then((result) => {
@@ -83,12 +85,17 @@ export default function (module) {
         'Performance metrics service not active. To use perforance metrics service, pass performanceMetrics environment variable as true'
       );
     }
-    UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+
+    // Unflatten the openRPC data
+    const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
+    const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
+    Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
   });
 
   // beforeEach
   beforeEach(() => {
     cy.testDataHandler(CONSTANTS.BEFORE_OPERATION);
+    UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
   });
 
   /**
@@ -128,12 +135,23 @@ export default function (module) {
                           externalData.scenarioNames[module][scenario][key];
                       });
                     }
-                    Cypress.env(CONSTANTS.MODULEREQIDJSON, fcsData);
                   });
-                } else {
-                  Cypress.env(CONSTANTS.MODULEREQIDJSON, fcsData);
+                  // Add scenario from external moduleReqId to FCS moduleReqId if they are missing in FCS
+                  configModulesData.map((scenario) => {
+                    if (!fcsModulesData.includes(scenario)) {
+                      fcsData.scenarioNames[module][scenario] =
+                        externalData.scenarioNames[module][scenario];
+                    }
+                  });
                 }
               });
+              // Add modules from external moduleReqId to FCS moduleReqId if they are missing in FCS
+              config.map((module) => {
+                if (!FCS.includes(module)) {
+                  fcsData.scenarioNames[module] = externalData.scenarioNames[module];
+                }
+              });
+              Cypress.env(CONSTANTS.MODULEREQIDJSON, fcsData);
             } else {
               assert(
                 false,
@@ -432,8 +450,9 @@ export default function (module) {
         });
       }
     } else {
-      console.log(
-        'CONSTANTS.GENERATE_HTML_REPORT should be set to true in order to generate html report'
+      logger.info(
+        'CONSTANTS.GENERATE_HTML_REPORT should be set to true in order to generate html report',
+        'generateAndPushReports'
       );
     }
   });
@@ -675,5 +694,50 @@ export default function (module) {
       }
       return CONSTANTS.NO_DATA;
     });
+  });
+
+  /**
+   * @module customValidation
+   * @function customValidation
+   * @description Command to execute the custom validations in configModule
+   * @param {*} functionName - The name of custom validation function
+   * @param {*} apiOrEventObject - The response of the method or event
+   * @example
+   * cy.customValidation("customMethod1","apiResponseObject")
+   */
+
+  Cypress.Commands.add('customValidation', (fcsValidationObjectData, apiOrEventObject) => {
+    // to check whether validationObject has assertionDef as the field
+    if (fcsValidationObjectData && fcsValidationObjectData.assertionDef) {
+      const functionName = fcsValidationObjectData.assertionDef;
+      // to check whether config module has customValidations function
+      if (module && module.customValidations) {
+        // to check whether customValidations has a function as the functionName passed
+        if (
+          module.customValidations[functionName] &&
+          typeof module.customValidations[functionName] === 'function'
+        ) {
+          message = module.customValidations[functionName](apiOrEventObject);
+        } else if (
+          // if customValidations doesn't have a function as the functionName passed
+          !module.customValidations[functionName] ||
+          typeof module.customValidations[functionName] != 'function'
+        ) {
+          assert(
+            false,
+            `Expected customValidationMethod ${functionName} was not found in the validationFunctions file.`
+          );
+        }
+      } else {
+        // if config module doesn't have customValidations function
+        assert(
+          false,
+          `Expected customValidationMethod ${functionName} was not found in the validationFunctions file.`
+        );
+      }
+    } else {
+      // if config module doesn't have customValidations function
+      assert(false, `Expected customValidationMethod was not found in the validationObject.`);
+    }
   });
 }

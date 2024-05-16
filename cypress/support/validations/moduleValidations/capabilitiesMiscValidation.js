@@ -156,24 +156,22 @@ function capabilitiesSupportedLogs(capabilityParam, capabilityStatus) {
     case CONSTANTS.SUPPORTED:
       cy.log(`Capability '${capabilityParam}' is supported`, 'capabilitiesSupportedLogs').then(
         () => {
-          assert.equal(true, true, `Capability '${capabilityParam}' is supported`);
+          assert(true, `Capability '${capabilityParam}' is supported`);
         }
       );
       break;
     case CONSTANTS.NOTAVAILABLE:
-      cy.log(`Capability '${capabilityParam}' is not available`, 'capabilitiesSupportedLogs').then(
-        () => {
-          assert.isTrue(
-            false,
-            'Passed capability is unavailable in firebolt.json but available in device manifest'
-          );
-        }
-      );
+      cy.log(
+        `Capability '${capabilityParam}' is not available in firebolt.json`,
+        'capabilitiesSupportedLogs'
+      ).then(() => {
+        assert(false, `Capability '${capabilityParam}' is not available in firebolt.json`);
+      });
       break;
     case CONSTANTS.NOTSUPPORTED:
       cy.log(`Capability '${capabilityParam}' is not supported`, 'capabilitiesSupportedLogs').then(
         () => {
-          assert.equal(true, true, `Capability '${capabilityParam}' is not supported`);
+          assert(true, `Capability '${capabilityParam}' is not supported`);
         }
       );
       break;
@@ -182,7 +180,7 @@ function capabilitiesSupportedLogs(capabilityParam, capabilityStatus) {
         `Device has an issue with the Capability : ${capabilityParam}`,
         'capabilitiesSupportedLogs'
       ).then(() => {
-        assert.isTrue(false, 'Device has an issue with the Capability');
+        assert(false, 'Device has an issue with the Capability');
       });
   }
 }
@@ -198,11 +196,8 @@ function capabilitiesSupportedLogs(capabilityParam, capabilityStatus) {
  * validateCapabilitiesRequest('capabilities.request',  {"type": "request", "specialValidationObject":[{"method":"capabilities.request","expected": true,"validationPath":"result[0].use.granted", "appId": "test.test"}]},{response:{result: '', error: null, ...}});
  */
 function validateCapabilitiesRequest(method, validationTypeObject, apiOrEventObject) {
-  console.log('validationTypeObject', validationTypeObject);
-  console.log('apiOrEventObject', apiOrEventObject);
   if (validationTypeObject && validationTypeObject.specialValidationObject) {
     cy.get(Object.values(validationTypeObject.specialValidationObject)).each((validationObject) => {
-      console.log('validationObject', validationObject);
       cy.specialValidation(validationObject);
     });
   } else {
@@ -238,13 +233,23 @@ Cypress.Commands.add('specialValidation', (validationObject) => {
         const message = Object.keys(parsedContext).length
           ? parsedContext
           : { role: validationPath.split('.')[1] };
-        cy.log(
-          `Method content validation for ${method} for ${JSON.stringify(
-            message
-          )} expected ${expected} to be ${apiResponseContent}`
-        ).then(() => {
-          assert.equal(expected, apiResponseContent, 'Equal to be');
-        });
+        if (Array.isArray(expected)) {
+          cy.log(
+            `Method content validation for ${method} for ${JSON.stringify(
+              message
+            )} expected ${apiResponseContent} to be oneof ${JSON.stringify(expected)}`
+          ).then(() => {
+            assert.oneOf(apiResponseContent, expected, 'Equal to be oneOf');
+          });
+        } else {
+          cy.log(
+            `Method content validation for ${method} for ${JSON.stringify(
+              message
+            )} expected ${apiResponseContent} to be ${expected}`
+          ).then(() => {
+            assert.equal(apiResponseContent, expected, 'Equal to be');
+          });
+        }
       }
     );
   });
