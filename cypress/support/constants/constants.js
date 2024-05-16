@@ -125,7 +125,7 @@ module.exports = {
   EXPECTED_JSON_IN_VALIDATION_OBJECTS:
     'Expected JSON data should be defined in fixtures/objects/validationObjects/',
   EXTERNAL_DEVICES_PATH: 'cypress/fixtures/external/devices/',
-  EXTERNAL_MODULEREQID_PATH: 'cypress/fixtures/external/moduleReqId/moduleReqId.json',
+  EXTERNAL_MODULEREQID_PATH: 'cypress/fixtures/external/objects/moduleReqId/moduleReqId.json',
   EXTERNAL_PATH: 'cypress/fixtures/external/modules/',
   EXTERNAL_PREREQUISITE_DATA: './cypress/fixtures/external/PreRequisiteData.json',
   EXTRACTEDAPI_PATH: 'extractedApiObject.response.',
