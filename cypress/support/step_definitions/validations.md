@@ -11,9 +11,9 @@
 | key | key name of the firebolt data contains method/context/expected |
 
 ### Examples:
-* `Given 'Firebolt' platform responds with 'Validate device id'`
-* `Given 'Firebolt' platform responds to '1st party appt' with 'Validate device id'`
-* `Given 'Firebolt' platform responds to 'test.test.test' with 'Validate device id'`
+* `Given 'Firebolt' platform responds for 'Validate device id'`
+* `Given 'Firebolt' platform responds to '1st party appt' for 'Validate device id'`
+* `Given 'Firebolt' platform responds to 'test.test.test' for 'Validate device id'`
 
 ## User validates lifecycle history for '(.+)' with '(.+)'
 ### Purpose: Validating explicitly recorded lifecycle history against source of truth from feature.
