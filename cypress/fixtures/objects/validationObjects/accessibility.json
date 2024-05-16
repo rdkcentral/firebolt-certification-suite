@@ -383,16 +383,49 @@
             }
         ]
     },
-    "ACCESSIBILITY_WINDOWCOLOR_000000": {
+    "ACCESSIBILITY_TEXTALIGNVERTICAL_UNDEFINED": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
-                        "type": "ACCESSIBILITY_WINDOWCOLOR_000000",
-                        "description": "Validation of the accessibility windowColor 000000"
+                        "field": "result.styles.textAlignVertical",
+                        "mode": "",
+                        "type": "",
+                        "description": "Validation of the accessibility textAlignVertical undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_WINDOWCOLOR_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.windowColor",
+                        "mode": "",
+                        "type": "",
+                        "description": "Validation of the accessibility windowcolor undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_WINDOWOPACITY_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.windowOpacity",
+                        "mode": "",
+                        "type": "",
+                        "description": "Validation of the accessibility windowopacity undefined"
                     }
                 ]
             }

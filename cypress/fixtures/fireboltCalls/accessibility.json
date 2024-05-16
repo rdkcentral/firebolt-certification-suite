@@ -726,10 +726,10 @@
         "validationJsonPath": "eventResponse.styles.textAlignVertical",
         "expected": "TOP"
     },
-    "MIDDLE_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS_SETTINGS": {
+    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_TEXTALIGNVERTICAL": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.textAlignVertical",
-        "expected": "MIDDLE"
+        "expected": "ACCESSIBILITY_TEXTALIGNVERTICAL_UNDEFINED"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_MIDDLE_FOR_TEXTALIGNVERTICAL": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
@@ -921,10 +921,10 @@
         "validationJsonPath": "result.styles.backgroundColor",
         "expected": "ACCESSIBILITY_BACKGROUNDCOLOR_UNDEFINED"
     },
-    "#000000_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
+    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_WINDOWCOLOR": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.windowColor",
-        "expected": "ACCESSIBILITY_WINDOWCOLOR_000000"
+        "expected": "ACCESSIBILITY_WINDOWCOLOR_UNDEFINED"
     },
     "#000000_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS_SETTINGS_EVENT": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
@@ -936,10 +936,10 @@
         "validationJsonPath": "eventResponse.styles.backgroundColor",
         "expected": "ACCESSIBILITY_BACKGROUNDCOLOR_000000"
     },
-    "0_FOR_WINDOWOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
+    "FIREBOLT_PLATFORM_RESPONDS_WITH_DEFAULT_VALUE_FOR_WINDOWOPACITY": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result.styles.windowOpacity",
-        "expected": "INTEGER0"
+        "expected": "ACCESSIBILITY_WINDOWOPACITY_UNDEFINED"
     },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
