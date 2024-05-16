@@ -12,7 +12,7 @@ Feature: Lifecycle
         Given the environment has been set up for 'lifeCycleApi' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'notify that the app is ready'
-        Then 'Firebolt' platform responds with 'null for lifecycle ready'
+        Then 'Firebolt ' platform responds with 'null for lifecycle ready'
         When '3rd party app' invokes the 'Firebolt' API to 'check if lifecycle ready expecting error'
         Then 'Firebolt' platform responds with 'custom error for lifecycle ready'
         When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
