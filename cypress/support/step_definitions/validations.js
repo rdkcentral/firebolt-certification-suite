@@ -217,6 +217,12 @@ Given(
                                 methodOrEventObject
                               );
                               break;
+                            case CONSTANTS.UNDEFINED:
+                              cy.undefinedValidation(
+                                fCSValidationjson[expected].data[i],
+                                methodOrEventResponse
+                              );
+                              break;
                             default:
                               assert(false, 'Unsupported validation type');
                               break;

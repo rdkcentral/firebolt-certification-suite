@@ -44,16 +44,17 @@
             }
         ]
     },
-    "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF": {
+    "ACCESSIBILITY_FONTFAMILY_UNDEFINED": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
-                        "type": "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF",
-                        "description": "Validation of the accessibility fontfamily monospaced serif"
+                        "field": "result.styles.fontFamily",
+                        "mode": "",
+                        "type": "",
+                        "description": "Validation of the accessibility fontfamily undefined"
                     }
                 ]
             }
@@ -69,6 +70,22 @@
                         "mode": "staticContentValidation",
                         "type": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SANSERIF",
                         "description": "Validation of the accessibility fontfamily proportional sanserif"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTSIZE_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontSize",
+                        "mode": "",
+                        "type": "",
+                        "description": "Validation of the accessibility fontSize undefined"
                     }
                 ]
             }
@@ -153,12 +170,13 @@
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
-                        "type": "ACCESSIBILITY_FONTEDGE_NONE",
-                        "description": "Validation of the accessibility fontEdge none"
+                        "field": "result.styles.fontEdge",
+                        "mode": "",
+                        "type": "",
+                        "description": "Validation of the accessibility fontEdge undefined"
                     }
                 ]
             }
@@ -269,46 +287,97 @@
             }
         ]
     },
-    "ACCESSIBILITY_FONTCOLOR_FFFFFF": {
+    "ACCESSIBILITY_FONTCOLOR_UNDEFINED": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
-                        "type": "ACCESSIBILITY_FONTCOLOR_FFFFFF",
-                        "description": "Validation of the accessibility fontColor ffffff"
+                        "field": "result.styles.fontColor",
+                        "mode": "",
+                        "type": "",
+                        "description": "Validation of the accessibility fontColor undefined"
                     }
                 ]
             }
         ]
     },
-    "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F": {
+    "ACCESSIBILITY_FONTEDGECOLOR_UNDEFINED": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
-                        "type": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F",
-                        "description": "Validation of the accessibility fontEdgeColor 7f7f7f"
+                        "field": "result.styles.fontEdgeColor",
+                        "mode": "",
+                        "type": "",
+                        "description": "Validation of the accessibility fontEdgeColor undefined"
                     }
                 ]
             }
         ]
     },
-    "ACCESSIBILITY_BACKGROUNDCOLOR_000000": {
+    "ACCESSIBILITY_FONTOPACITY_UNDEFINED": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
-                        "type": "ACCESSIBILITY_BACKGROUNDCOLOR_000000",
-                        "description": "Validation of the accessibility backgroundColor 000000"
+                        "field": "result.styles.fontOpacity",
+                        "mode": "",
+                        "type": "",
+                        "description": "Validation of the accessibility fontEdgeOpacity undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_BACKGROUNDCOLOR_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.backgroundColor",
+                        "mode": "",
+                        "type": "",
+                        "description": "Validation of the accessibility backgroundColor undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_BACKGROUNDOPACITY_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.backgroundOpacity",
+                        "mode": "",
+                        "type": "",
+                        "description": "Validation of the accessibility backgroundOpacity undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_TEXTALIGN_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.textAlign",
+                        "mode": "",
+                        "type": "",
+                        "description": "Validation of the accessibility textAlign undefined"
                     }
                 ]
             }

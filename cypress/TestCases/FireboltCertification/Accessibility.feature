@@ -60,19 +60,19 @@ Feature: Accessibility
       And 'Firebolt' platform triggers event '<Event_Content>'
 
       Examples:
-         | Scenario          | Key                           | Method_Content                                             | Event_Content                                                        |
-         | fontFamily        | set fontFamily as null        | monospaced serif for fontfamily in closedcaptions settings | onclosedCaptionsSettingsChanged with monospaced serif for fontfamily |
-         | fontSize          | set fontSize as null          | 1 for fontSize in closedcaptions settings                  | onclosedCaptionsSettingsChanged with 1 for fontSize                  |
-         | fontColor         | set fontColor as null         | #ffffff for fontColor in closedcaptions settings           | onclosedCaptionsSettingsChanged with #ff00ff for fontColor           |
-         | fontEdge          | set fontEdge as null          | none for fontEdge in closedcaptions settings               | onclosedCaptionsSettingsChanged with none for fontEdge               |
-         | fontEdgeColor     | set fontEdgeColor as null     | #7f7f7f for fontEdgeColor in closedcaptions settings       | onclosedCaptionsSettingsChanged with #ffffff for fontEdgeColor       |
-         | fontOpacity       | set fontOpacity as null       | 100 for fontOpacity in closedcaptions settings             | onclosedCaptionsSettingsChanged with 75 for fontOpacity              |
-         | backgroundColor   | set backgroundColor as null   | #000000 for backgroundColor in closedcaptions settings     | onclosedCaptionsSettingsChanged with #000000 for backgroundColor     |
-         | backgroundOpacity | set backgroundOpacity as null | 12 for backgroundOpacity in closedcaptions settings        | onclosedCaptionsSettingsChanged with 12 for backgroundOpacity        |
-         | textAlign         | set textAlign as null         | center for textAlign in closedcaptions settings            | onclosedCaptionsSettingsChanged with center for textAlign            |
-         | textAlignVertical | set textAlignVertical as null | middle for textAlignVertical in closedcaptions settings    | onclosedCaptionsSettingsChanged with middle for textAlignVertical    |
-         | windowColor       | set windowColor as null       | #000000 for windowColor in closedcaptions settings         | onclosedCaptionsSettingsChanged with white for windowColor           |
-         | windowOpacity     | set windowOpacity as null     | 0 for windowOpacity in closedcaptions settings             | onclosedCaptionsSettingsChanged with 0 for windowOpacity             |
+         | Scenario          | Key                           | Method_Content                                                      | Event_Content                                                        |
+         | fontFamily        | set fontFamily as null        | firebolt platform responds with default value for fontFamily        | onclosedCaptionsSettingsChanged with monospaced serif for fontfamily |
+         | fontSize          | set fontSize as null          | firebolt platform responds with default value for fontSize          | onclosedCaptionsSettingsChanged with 1 for fontSize                  |
+         | fontColor         | set fontColor as null         | firebolt platform responds with default value for fontColor         | onclosedCaptionsSettingsChanged with #ff00ff for fontColor           |
+         | fontEdge          | set fontEdge as null          | firebolt platform responds with default value for fontEdge          | onclosedCaptionsSettingsChanged with none for fontEdge               |
+         | fontEdgeColor     | set fontEdgeColor as null     | firebolt platform responds with default value for fontEdgeColor     | onclosedCaptionsSettingsChanged with #ffffff for fontEdgeColor       |
+         | fontOpacity       | set fontOpacity as null       | firebolt platform responds with default value for fontOpacity       | onclosedCaptionsSettingsChanged with 75 for fontOpacity              |
+         | backgroundColor   | set backgroundColor as null   | firebolt platform responds with default value for backgroundColor   | onclosedCaptionsSettingsChanged with #000000 for backgroundColor     |
+         | backgroundOpacity | set backgroundOpacity as null | firebolt platform responds with default value for backgroundOpacity | onclosedCaptionsSettingsChanged with 12 for backgroundOpacity        |
+         | textAlign         | set textAlign as null         | firebolt platform responds with default value for textAlign         | onclosedCaptionsSettingsChanged with center for textAlign            |
+         | textAlignVertical | set textAlignVertical as null | firebolt platform responds with default value for textAlignVertical | onclosedCaptionsSettingsChanged with middle for textAlignVertical    |
+         | windowColor       | set windowColor as null       | firebolt platform responds with default value for windowColor       | onclosedCaptionsSettingsChanged with white for windowColor           |
+         | windowOpacity     | set windowOpacity as null     | firebolt platform responds with default value for windowOpacity     | onclosedCaptionsSettingsChanged with 0 for windowOpacity             |
 
    @Accessibility @coreSDK @sdk @transport
    Scenario Outline: Accessibility.voiceGuidanceSettings - Positive Scenario: <Scenario>
@@ -113,7 +113,7 @@ Feature: Accessibility
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And I clear 'accessibility onClosedCaptionsSettingsChanged event' listeners
       And 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
-      Then 'Firebolt' platform responds to '1st party app' for 'disable closedCaptions'  
+      Then 'Firebolt' platform responds to '1st party app' for 'disable closedCaptions'
       And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
 
    @Accessibility @coreSDK @sdk @transport
