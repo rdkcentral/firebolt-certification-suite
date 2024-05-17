@@ -91,7 +91,6 @@ Cypress.Commands.add(
                   validationObject.type = errorContent[validationObject.type];
                   resolve(errorSchema);
                 });
-                // return (validationObject.type = errorContentObject);
               });
             }
           } else {
@@ -112,42 +111,41 @@ Cypress.Commands.add(
     // Function to do content validation for the error objects.
     function validateErrorObjects(errorSchemaObject) {
       try {
-        errorSchemaObject.validations.forEach((errorContentObject) => {
-          errorContentObject = errorContentObject.type;
+        if (
+          errorSchemaObject &&
+          errorSchemaObject.hasOwnProperty('validations') &&
+          Array.isArray(errorSchemaObject.validations)
+        ) {
+          errorSchemaObject.validations.forEach((errorContentObject) => {
+            errorContentObject = errorContentObject.type;
 
-          const apiOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
-            method,
-            context,
-            appId,
-            validationType
-          );
-          const apiErrorResponse =
-            validationType == CONSTANTS.EVENT
-              ? apiOrEventObject.eventListenerResponse.error
-              : apiOrEventObject.response.error;
+            const apiOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
+              method,
+              context,
+              appId,
+              validationType
+            );
+            const apiErrorResponse =
+              validationType == CONSTANTS.EVENT
+                ? apiOrEventObject.eventListenerResponse.error
+                : apiOrEventObject.response.error;
 
-          cy.log(
-            `Actual error code ${apiErrorResponse.code} expected to be present in list of expected error codes`
-          ).then(() => {
-            assert.include(
+            fireLog.include(
               errorContentObject.errorCode,
               apiErrorResponse.code,
               CONSTANTS.ERROR_CODE
             );
+
+            const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
+              apiErrorResponse.message.includes(errorMessage)
+            );
+            fireLog.equal(checkErrorMessage, true, 'Error Message Validation: ');
           });
-          const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
-            apiErrorResponse.message.includes(errorMessage)
-          );
-          cy.log(
-            `Actual error message ${apiErrorResponse.message} expected to be present in list of expected error messages`
-          ).then(() => {
-            assert.equal(checkErrorMessage, true, 'Error Message Validation: ');
-          });
-        });
+        } else {
+          fireLog(false, `Expected error content not found in fixtures`);
+        }
       } catch (error) {
-        cy.log('Failed to validate error: ', error).then(() => {
-          assert(false, 'Failed to validate error: ' + error);
-        });
+        fireLog(false, 'Failed to validate error: ' + error);
       }
     }
   }
@@ -180,16 +178,14 @@ Cypress.Commands.add(
       cy.validateEvent(extractedApiObject, context, validationPath, expected, appId);
     } else {
       const apiResponseContent = eval(CONSTANTS.EXTRACTEDAPI_PATH + validationPath);
-      const pretext = CONSTANTS.METHOD_CONTENT;
-      cy.log(
-        pretext +
-          ' expected ' +
-          JSON.stringify(apiResponseContent) +
-          ' to be ' +
-          JSON.stringify(expected)
-      ).then(() => {
-        assert.deepEqual(apiResponseContent, expected, pretext);
-      });
+      const pretext =
+        CONSTANTS.METHOD_CONTENT +
+        ' expected ' +
+        JSON.stringify(apiResponseContent) +
+        ' to be ' +
+        JSON.stringify(expected);
+      // Executing fireLog.deepEqual() after logging
+      fireLog.deepEqual(apiResponseContent, expected, pretext);
     }
   }
 );
@@ -492,9 +488,7 @@ Cypress.Commands.add(
       ).then(() => {
         const pretext = 'Event Not Received : ';
 
-        cy.log(pretext + ': expected ' + eventResponse + ' to be ' + content).then(() => {
-          assert.strictEqual(eventResponse, content, pretext);
-        });
+        fireLog.strictEqual(eventResponse, content, pretext);
       });
     } else if (eventResponse !== null) {
       // Checking for schema validation status, if schema status is pass, then check for content validation
@@ -565,8 +559,7 @@ Cypress.Commands.add(
         ).then(() => {
           const pretext = 'Event Not Received : ';
 
-          cy.log(pretext + ': expected ' + eventResponse + ' to be ' + content);
-          assert.equal(eventResponse, content, pretext);
+          fireLog.equal(eventResponse, content, pretext);
         });
       } else if (content === null) {
         cy.logValidationResult(
@@ -577,8 +570,7 @@ Cypress.Commands.add(
         ).then(() => {
           const pretext = 'Event Not Received : ';
 
-          cy.log(pretext + ': expected ' + eventResponse + ' to be ' + content);
-          assert.strictEqual(eventResponse, content, pretext);
+          fireLog.strictEqual(eventResponse, content, pretext);
         });
       }
     }
@@ -617,8 +609,7 @@ Cypress.Commands.add(
     const actualValue = actual;
     typeof expected == 'object' ? (expected = JSON.stringify(expected)) : expected;
     typeof actual == 'object' ? (actual = JSON.stringify(actual)) : actual;
-    cy.log(pretext + ' : expected ' + expected + ' to be ' + actual);
-    assert.deepEqual(expectedValue, actualValue, pretext);
+    fireLog.deepEqual(expectedValue, actualValue, pretext);
   }
 );
 
@@ -669,22 +660,16 @@ Cypress.Commands.add(
   (response, methodOrEventObject, eventName, eventExpected) => {
     const eventNameForLog = eventName.split('-')[0];
     if (!response) {
-      cy.log(`Event response not received for ${eventNameForLog}`).then(() => {
-        assert(false, `Event response not received for ${eventNameForLog}`);
-      });
+      fireLog(false, `Event response not received for ${eventNameForLog}`);
     }
     if (response.error) {
-      cy.log('Expected event response.error to be null').then(() => {
-        assert.isNull(response.error, 'Expected event response.error to be null');
-      });
+      fireLog.isNull(response.error, 'Expected event response.error to be null');
     }
 
     if (eventExpected) {
       methodOrEventObject.setEventResponseData(response);
     } else {
-      cy.log(CONSTANTS.NO_EVENT_TRIGGERED).then(() => {
-        assert.isNull(response[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
-      });
+      fireLog.isNull(response[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
     }
   }
 );

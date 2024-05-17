@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-const REGEXFORMATS = require('../constants/regexformats');
+const REGEXFORMATS = require('../../fixtures/regexformats');
 const CONSTANTS = require('../constants/constants');
 const RegexParser = require('regex-parser');
 

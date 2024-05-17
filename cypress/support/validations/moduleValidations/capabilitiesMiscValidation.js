@@ -228,13 +228,23 @@ Cypress.Commands.add('specialValidation', (validationObject) => {
       const message = Object.keys(context).length
         ? context
         : { role: validationPath.split('.')[1] };
-      cy.log(
-        `Method content validation for ${method} for ${JSON.stringify(
-          message
-        )} expected ${apiResponseContent} to be ${content}`
-      ).then(() => {
-        assert.equal(apiResponseContent, content, 'Equal to be');
-      });
+      if (Array.isArray(content)) {
+        cy.log(
+          `Method content validation for ${method} for ${JSON.stringify(
+            message
+          )} expected ${apiResponseContent} to be oneof ${JSON.stringify(content)}`
+        ).then(() => {
+          assert.oneOf(apiResponseContent, content, 'Equal to be oneOf');
+        });
+      } else {
+        cy.log(
+          `Method content validation for ${method} for ${JSON.stringify(
+            message
+          )} expected ${apiResponseContent} to be ${content}`
+        ).then(() => {
+          assert.equal(apiResponseContent, content, 'Equal to be');
+        });
+      }
     }
   );
 });

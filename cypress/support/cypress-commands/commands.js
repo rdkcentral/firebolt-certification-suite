@@ -43,9 +43,7 @@ Cypress.Commands.add(
       fireboltData = UTILS.getEnvVariable('fireboltCallsJson')[key];
     }
     if (!fireboltData) {
-      cy.log(CONSTANTS.NO_DATA_FOR_THE_KEY + key).then(() => {
-        assert(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
-      });
+      fireLog(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
     return fireboltData;
   }
@@ -106,7 +104,7 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
       });
     });
   } else {
-    assert(false, `${sdk} SDK not Supported`);
+    fireLog(false, `${sdk} SDK not Supported`);
   }
 });
 
@@ -231,7 +229,7 @@ Cypress.Commands.add('getLatestFireboltJsonFromFixtures', () => {
 
       return version;
     } catch (err) {
-      assert.equal(true, err, 'Error while fetching latest version from the fixtures');
+      fireLog.equal(true, err, 'Error while fetching latest version from the fixtures');
     }
   });
 });
@@ -396,10 +394,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
         }
       });
     } else {
-      assert(
-        false,
-        'Before operation object is not in proper array format, recheck the before objects in fixture/external/moduleReqId - getBeforeOperationObject'
-      );
+      fireLog(false, CONSTANTS.BEFORE_OPERATION_FORMAT);
     }
   }
 });
@@ -414,7 +409,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
  */
 Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
   if (!beforeOperation) {
-    assert(false, 'Before operation object is null/undefined - setResponse');
+    fireLog(false, 'Before operation object is null/undefined - setResponse');
   }
   let firstParty;
   if (beforeOperation.hasOwnProperty('firstParty')) {
@@ -466,9 +461,9 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
           cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
             result = JSON.parse(result);
             cy.log(
-              `Response from 3rd party App ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(
-                result
-              )}`
+              `Response from 3rd party App ${Cypress.env(
+                CONSTANTS.THIRD_PARTY_APP_ID
+              )}: ${JSON.stringify(result)}`
             );
           });
         }
@@ -515,9 +510,9 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
         cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
           result = JSON.parse(result);
           cy.log(
-            `Response from 3rd party App ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(
-              result
-            )}`
+            `Response from 3rd party App ${Cypress.env(
+              CONSTANTS.THIRD_PARTY_APP_ID
+            )}: ${JSON.stringify(result)}`
           );
         });
       }
@@ -534,9 +529,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       cy.log('Response for marker creation: ' + JSON.stringify(result)).then(() => {
-        cy.log(result.message).then(() => {
-          assert.isTrue(result.success, result.message);
-        });
+        fireLog.isTrue(result.success, result.message);
       });
     });
   }
@@ -568,14 +561,10 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
   // Sending message to the platform to call performance test handler
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     if (result?.success) {
-      cy.log(eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE)).then(() => {
-        assert(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
-        return true;
-      });
+      fireLog(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
+      return true;
     } else {
-      cy.log(eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE)).then(() => {
-        assert(false, eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
-      });
+      fireLog(false, eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
     }
   });
 });
