@@ -135,12 +135,23 @@ export default function (module) {
                           externalData.scenarioNames[module][scenario][key];
                       });
                     }
-                    Cypress.env(CONSTANTS.MODULEREQIDJSON, fcsData);
                   });
-                } else {
-                  Cypress.env(CONSTANTS.MODULEREQIDJSON, fcsData);
+                  // Add scenario from external moduleReqId to FCS moduleReqId if they are missing in FCS
+                  configModulesData.map((scenario) => {
+                    if (!fcsModulesData.includes(scenario)) {
+                      fcsData.scenarioNames[module][scenario] =
+                        externalData.scenarioNames[module][scenario];
+                    }
+                  });
                 }
               });
+              // Add modules from external moduleReqId to FCS moduleReqId if they are missing in FCS
+              config.map((module) => {
+                if (!FCS.includes(module)) {
+                  fcsData.scenarioNames[module] = externalData.scenarioNames[module];
+                }
+              });
+              Cypress.env(CONSTANTS.MODULEREQIDJSON, fcsData);
             } else {
               assert(
                 false,
@@ -683,5 +694,50 @@ export default function (module) {
       }
       return CONSTANTS.NO_DATA;
     });
+  });
+
+  /**
+   * @module customValidation
+   * @function customValidation
+   * @description Command to execute the custom validations in configModule
+   * @param {*} functionName - The name of custom validation function
+   * @param {*} apiOrEventObject - The response of the method or event
+   * @example
+   * cy.customValidation("customMethod1","apiResponseObject")
+   */
+
+  Cypress.Commands.add('customValidation', (fcsValidationObjectData, apiOrEventObject) => {
+    // to check whether validationObject has assertionDef as the field
+    if (fcsValidationObjectData && fcsValidationObjectData.assertionDef) {
+      const functionName = fcsValidationObjectData.assertionDef;
+      // to check whether config module has customValidations function
+      if (module && module.customValidations) {
+        // to check whether customValidations has a function as the functionName passed
+        if (
+          module.customValidations[functionName] &&
+          typeof module.customValidations[functionName] === 'function'
+        ) {
+          message = module.customValidations[functionName](apiOrEventObject);
+        } else if (
+          // if customValidations doesn't have a function as the functionName passed
+          !module.customValidations[functionName] ||
+          typeof module.customValidations[functionName] != 'function'
+        ) {
+          assert(
+            false,
+            `Expected customValidationMethod ${functionName} was not found in the validationFunctions file.`
+          );
+        }
+      } else {
+        // if config module doesn't have customValidations function
+        assert(
+          false,
+          `Expected customValidationMethod ${functionName} was not found in the validationFunctions file.`
+        );
+      }
+    } else {
+      // if config module doesn't have customValidations function
+      assert(false, `Expected customValidationMethod was not found in the validationObject.`);
+    }
   });
 }

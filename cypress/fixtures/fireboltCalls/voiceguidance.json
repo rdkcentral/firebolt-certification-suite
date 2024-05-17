@@ -1,14 +1,4 @@
 {
-    "NULL_FOR_VOICEGUIDANCE_SETENABLED": {
-        "method": "voiceguidance.setEnabled",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
-    "NULL_FOR_VOICEGUIDANCE_SETSPEED": {
-        "method": "voiceguidance.setSpeed",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
     "ENABLED_FOR_VOICEGUIDANCE_SETENABLED": {
         "method": "voiceguidance.setEnabled",
         "validationJsonPath": "result",

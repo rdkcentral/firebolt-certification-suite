@@ -20,16 +20,30 @@ const path = require('path');
 const logger = require('../cypress/support/Logger')('copyExternalConfigData.js');
 
 logger.info(
-  'Copying Config TestData into fixtures/external and Testcases into TestCases/Distributor'
+  'Copying Config fixtures into fixtures/external and Testcases into TestCases/Distributor'
 );
 
 // Config for testCase
 const EXTERNAL_DIR_TESTCASE = path.join(__dirname, '..', 'cypress', 'TestCases', 'Distributor');
-const CONFIG_DIR_TESTCASE = path.join(__dirname, '..', 'node_modules', 'configModule', 'TestCases');
+const CONFIG_DIR_TESTCASE = path.join(
+  __dirname,
+  '..',
+  'node_modules',
+  'configModule',
+  'cypress',
+  'TestCases'
+);
 
-// Config for testData
+// Config for fixtures
 const EXTERNAL_DIR_TESTDATA = path.join(__dirname, '..', 'cypress', 'fixtures', 'external');
-const CONFIG_DIR_TESTDATA = path.join(__dirname, '..', 'node_modules', 'configModule', 'testData');
+const CONFIG_DIR_TESTDATA = path.join(
+  __dirname,
+  '..',
+  'node_modules',
+  'configModule',
+  'cypress',
+  'fixtures'
+);
 
 // Config for config.json
 const SOURCE_CONFIG_FILE = path.join(
@@ -77,7 +91,7 @@ if (fs.existsSync(CONFIG_DIR_TESTCASE)) {
 if (fs.existsSync(CONFIG_DIR_TESTDATA)) {
   copyFiles(CONFIG_DIR_TESTDATA, EXTERNAL_DIR_TESTDATA);
 } else {
-  logger.info('TestData is not available in configModule');
+  logger.info('fixtures is not available in configModule');
 }
 
 // Copy config.json file
