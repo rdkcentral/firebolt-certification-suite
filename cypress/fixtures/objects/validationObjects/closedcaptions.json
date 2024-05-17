@@ -14,16 +14,15 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_BACKGROUNDCOLOR_#000000": {
+    "CLOSEDCAPTIONS_BACKGROUNDCOLOR_UNDEFINED": {
         "method": "closedcaptions.backgroundColor",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "type": "CLOSEDCAPTIONS_BACKGROUNDCOLOR_#000000",
-                        "mode": "staticContentValidation",
-                        "description": "Validation of ClosedCaptions backgroundColor Format"
+                        "field": "result",
+                        "description": "Validation of the closedCaptions backgroundColor undefined"
                     }
                 ]
             }
@@ -44,31 +43,29 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_BACKGROUNDOPACITY_12": {
+    "CLOSEDCAPTIONS_BACKGROUNDOPACITY_UNDEFINED": {
         "method": "closedcaptions.backgroundOpacity",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "type": "INTEGER12",
-                        "mode": "staticContentValidation",
-                        "description": "Validation of ClosedCaptions backgroundOpacity Format"
+                        "field": "result",
+                        "description": "Validation of the closedCaptions backgroundOpacity undefined"
                     }
                 ]
             }
         ]
     },
-    "CLOSEDCAPTIONS_FONTCOLOR_#FFFFFF": {
+    "CLOSEDCAPTIONS_FONTCOLOR_UNDEFINED": {
         "method": "closedcaptions.fontColor",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "type": "CLOSEDCAPTIONS_COLOR_#FFFFFF",
-                        "mode": "staticContentValidation",
-                        "description": "Validation of ClosedCaptions fontColor Format"
+                        "field": "result",
+                        "description": "Validation of the closedCaptions fontColor undefined"
                     }
                 ]
             }
@@ -104,16 +101,15 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_FONTEDGE_NONE": {
+    "CLOSEDCAPTIONS_FONTEDGE_UNDEFINED": {
         "method": "closedcaptions.fontEdge",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "type": "CLOSEDCAPTIONS_FONTEDGE_NONE",
-                        "mode": "staticContentValidation",
-                        "description": "Validation of ClosedCaptions fontEdge Format"
+                        "field": "result",
+                        "description": "Validation of the closedCaptions fontEdge undefined"
                     }
                 ]
             }
@@ -194,6 +190,20 @@
             }
         ]
     },
+    "CLOSEDCAPTIONS_FONTEDGECOLOR_UNDEFINED": {
+        "method": "closedcaptions.fontEdgeColor",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result",
+                        "description": "Validation of the closedCaptions fontEdgeColor undefined"
+                    }
+                ]
+            }
+        ]
+    },
     "CLOSEDCAPTIONS_FONTEDGECOLOR_TEST": {
         "method": "closedcaptions.fontEdgeColor",
         "data": [
@@ -254,31 +264,29 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_FONTOPACITY_100": {
+    "CLOSEDCAPTIONS_FONTOPACITY_UNDEFINED": {
         "method": "closedcaptions.fontOpacity",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "type": "INTEGER100",
-                        "mode": "staticContentValidation",
-                        "description": "Validation of ClosedCaptions fontOpacity Format"
+                        "field": "result",
+                        "description": "Validation of the closedCaptions fontOpacity undefined"
                     }
                 ]
             }
         ]
     },
-    "CLOSEDCAPTIONS_FONTSIZE": {
+    "CLOSEDCAPTIONS_FONTSIZE_UNDEFINED": {
         "method": "closedcaptions.fontSize",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "type": "INTEGER1",
-                        "mode": "staticContentValidation",
-                        "description": "Validation of ClosedCaptions fontSize Format"
+                        "field": "result",
+                        "description": "Validation of the closedCaptions fontSize undefined"
                     }
                 ]
             }
@@ -299,16 +307,15 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_TEXTALIGN_CENTER": {
+    "CLOSEDCAPTIONS_TEXTALIGN_UNDEFINED": {
         "method": "closedcaptions.textAlign",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "type": "CENTER",
-                        "mode": "staticContentValidation",
-                        "description": "Validation of ClosedCaptions textAlign Format"
+                        "field": "result",
+                        "description": "Validation of the closedCaptions textAlign undefined"
                     }
                 ]
             }
@@ -344,16 +351,15 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_MIDDLE": {
+    "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_UNDEFINED": {
         "method": "closedcaptions.textAlignVertical",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "type": "MIDDLE",
-                        "mode": "staticContentValidation",
-                        "description": "Validation of ClosedCaptions textAlignVertical Format"
+                        "field": "result",
+                        "description": "Validation of the closedCaptions textAlignVertical undefined"
                     }
                 ]
             }
@@ -434,16 +440,15 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SERIF": {
+    "CLOSEDCAPTIONS_FONTFAMILY_UNDEFINED": {
         "method": "closedcaptions.fontFamily",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "type": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SERIF",
-                        "mode": "staticContentValidation",
-                        "description": "Validation of ClosedCaptions fontFamily Format"
+                        "field": "result",
+                        "description": "Validation of the closedCaptions fontFamily undefined"
                     }
                 ]
             }
@@ -509,16 +514,15 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_WINDOWCOLOR_#000000": {
+    "CLOSEDCAPTIONS_WINDOWCOLOR_UNDEFINED": {
         "method": "closedcaptions.windowColor",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
-                        "type": "CLOSEDCAPTIONS_WINDOW_COLOR",
-                        "description": "Validation of the closedCaptions for windowColor"
+                        "field": "result",
+                        "description": "Validation of the closedCaptions windowColor undefined"
                     }
                 ]
             }
@@ -554,16 +558,15 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_WINDOWOPACITY_0": {
+    "CLOSEDCAPTIONS_WINDOWOPACITY_UNDEFINED": {
         "method": "closedcaptions.windowColor",
         "data": [
             {
-                "type": "fixture",
+                "type": "undefined",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
-                        "type": "INTEGER0",
-                        "description": "Validation of the closedCaptions for windowOpacity"
+                        "field": "result",
+                        "description": "Validation of the closedCaptions windowOpacity undefined"
                     }
                 ]
             }

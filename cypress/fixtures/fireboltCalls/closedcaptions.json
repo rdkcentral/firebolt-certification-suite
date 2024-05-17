@@ -400,10 +400,10 @@
         "validationJsonPath": "result",
         "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR"
     },
-    "#000000_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS": {
+    "DEFAULT_VALUE_FOR_BACKGROUNDCOLOR": {
         "method": "closedcaptions.backgroundColor",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR_#000000"
+        "expected": "CLOSEDCAPTIONS_BACKGROUNDCOLOR_UNDEFINED"
     },
     "ONBACKGROUNDCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#FF00FF": {
         "event": "closedcaptions.onBackgroundColorChanged",
@@ -420,10 +420,10 @@
         "validationJsonPath": "result",
         "expected": "CLOSEDCAPTIONS_BACKGROUNDOPACITY"
     },
-    "12_FOR_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS": {
+    "DEFAULT_VALUE_FOR_BACKGROUNDOPACITY": {
         "method": "closedcaptions.backgroundOpacity",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_BACKGROUNDOPACITY_12"
+        "expected": "CLOSEDCAPTIONS_BACKGROUNDOPACITY_UNDEFINED"
     },
     "ONBACKGROUNDOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_75": {
         "event": "closedcaptions.onBackgroundOpacityChanged",
@@ -460,10 +460,10 @@
         "validationJsonPath": "result",
         "expected": "CLOSEDCAPTIONS_FONTCOLOR"
     },
-    "#FFFFFF_FOR_FONTCOLOR_IN_CLOSEDCAPTIONS": {
+    "DEFAULT_VALUE_FOR_FONTCOLOR": {
         "method": "closedcaptions.fontColor",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTCOLOR_FFFFFF"
+        "expected": "CLOSEDCAPTIONS_FONTCOLOR_UNDEFINED"
     },
     "ONFONTCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#FF00FF": {
         "event": "closedcaptions.onFontColorChanged",
@@ -485,10 +485,10 @@
         "validationJsonPath": "eventResponse",
         "expected": "CLOSEDCAPTIONS_FONTEDGE_RAISED"
     },
-    "NONE_FOR_FONTEDGE_IN_CLOSEDCAPTIONS": {
+    "DEFAULT_VALUE_FOR_FONTEDGE": {
         "method": "closedcaptions.fontEdge",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTEDGE_NONE"
+        "expected": "CLOSEDCAPTIONS_FONTEDGE_UNDEFINED"
     },
     "ONFONTEDGECHANGED_FOR_CLOSEDCAPTIONS_WITH_NONE": {
         "event": "closedcaptions.onFontEdgeChanged",
@@ -540,10 +540,10 @@
         "validationJsonPath": "result",
         "expected": "CLOSEDCAPTIONS_COLOR_#FFFFFF"
     },
-    "#7F7F7F_FOR_FONTEDGECOLOR_IN_CLOSEDCAPTIONS": {
+    "DEFAULT_VALUE_FOR_FONTEDGECOLOR": {
         "method": "closedcaptions.fontEdgeColor",
         "validationJsonPath": "result",
-        "expected": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F"
+        "expected": "CLOSEDCAPTIONS_FONTEDGECOLOR_UNDEFINED"
     },
     "ONFONTEDGECOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#FFFFFF": {
         "event": "closedcaptions.onFontEdgeColorChanged",
@@ -570,10 +570,10 @@
         "validationJsonPath": "result",
         "expected": "CLOSEDCAPTIONS_FONTOPACITY"
     },
-    "100_FOR_FONTOPACITY_IN_CLOSEDCAPTIONS": {
+    "DEFAULT_VALUE_FOR_FONTOPACITY": {
         "method": "closedcaptions.fontOpacity",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTOPACITY_100"
+        "expected": "CLOSEDCAPTIONS_FONTOPACITY_UNDEFINED"
     },
     "ONFONTOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_75": {
         "event": "closedcaptions.onFontOpacityChanged",
@@ -585,10 +585,10 @@
         "validationJsonPath": "eventResponse",
         "expected": "INTEGER100"
     },
-    "1_FOR_FONTSIZE_IN_CLOSEDCAPTIONS": {
+    "DEFAULT_VALUE_FOR_FONTSIZE": {
         "method": "closedcaptions.fontSize",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTSIZE"
+        "expected": "CLOSEDCAPTIONS_FONTSIZE_UNDEFINED"
     },
     "ONFONTSIZECHANGED_FOR_CLOSEDCAPTIONS_WITH_1": {
         "event": "closedcaptions.onFontSizeChanged",
@@ -615,10 +615,10 @@
         "validationJsonPath": "eventResponse",
         "expected": "CLOSEDCAPTIONS_TEXTALIGN_RIGHT"
     },
-    "CENTER_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS": {
+    "DEFAULT_VALUE_FOR_TEXTALIGN": {
         "method": "closedcaptions.textAlign",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGN_CENTER"
+        "expected": "CLOSEDCAPTIONS_TEXTALIGN_UNDEFINED"
     },
     "ONTEXTALIGNCHANGED_FOR_CLOSEDCAPTIONS_WITH_CENTER": {
         "event": "closedcaptions.onTextAlignChanged",
@@ -635,10 +635,10 @@
         "validationJsonPath": "eventResponse",
         "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_TOP"
     },
-    "MIDDLE_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS": {
+    "DEFAULT_VALUE_FOR_TEXTALIGNVERTICAL": {
         "method": "closedcaptions.textAlignVertical",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_MIDDLE"
+        "expected": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_UNDEFINED"
     },
     "ONTEXTALIGNVERTICALCHANGED_FOR_CLOSEDCAPTIONS_WITH_MIDDLE": {
         "event": "closedcaptions.onTextAlignVerticalChanged",
@@ -695,10 +695,10 @@
         "validationJsonPath": "eventResponse",
         "expected": "CLOSEDCAPTIONS_FONTFAMILY_PROPORTIONAL_SERIF"
     },
-    "MONOSPACED_SERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
+    "DEFAULT_VALUE_FOR_FONTFAMILY": {
         "method": "closedcaptions.fontFamily",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SERIF"
+        "expected": "CLOSEDCAPTIONS_FONTFAMILY_UNDEFINED"
     },
     "ONFONTFAMILYCHANGED_FOR_CLOSEDCAPTIONS_WITH_MONOSPACED_SERIF": {
         "event": "closedcaptions.onFontFamilyChanged",
@@ -755,10 +755,10 @@
         "validationJsonPath": "eventResponse",
         "expected": "CLOSEDCAPTIONS_PREFERREDLANGUAGES_ARRAY"
     },
-    "#000000_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS": {
+    "DEFAULT_VALUE_FOR_WINDOWCOLOR": {
         "method": "closedcaptions.windowColor",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_WINDOWCOLOR_#000000"
+        "expected": "CLOSEDCAPTIONS_WINDOWCOLOR_UNDEFINED"
     },
     "WHITE_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.windowColor",
@@ -780,10 +780,10 @@
         "validationJsonPath": "result",
         "expected": "CLOSEDCAPTIONS_WINDOWOPACITY_50"
     },
-    "0_FOR_WINDOWOPACITY_IN_CLOSEDCAPTIONS": {
+    "DEFAULT_VALUE_FOR_WINDOWOPACITY": {
         "method": "closedcaptions.windowOpacity",
         "validationJsonPath": "result",
-        "expected": "CLOSEDCAPTIONS_WINDOWOPACITY_0",
+        "expected": "CLOSEDCAPTIONS_WINDOWOPACITY_UNDEFINED",
         "expectingError": false
     },
     "ONWINDOWOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_50": {

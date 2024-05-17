@@ -170,8 +170,6 @@
                 "validations": [
                     {
                         "field": "result.styles.fontEdge",
-                        "mode": "",
-                        "type": "",
                         "description": "Validation of the accessibility fontEdge undefined"
                     }
                 ]
@@ -305,8 +303,6 @@
                 "validations": [
                     {
                         "field": "result.styles.fontEdgeColor",
-                        "mode": "",
-                        "type": "",
                         "description": "Validation of the accessibility fontEdgeColor undefined"
                     }
                 ]
