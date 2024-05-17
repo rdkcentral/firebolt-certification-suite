@@ -150,10 +150,11 @@ Cypress.Commands.add('setLifecycleState', (state, appId) => {
  * The app history and events obtained by sending message to 3rd party app is validated against corresponding data extracted from the appObject
  * @param {String} state - State to be used for validation
  * @param {String} appId - The appId used to launch the app which is identified by the firebolt platform servicing the request
+ * @param {String} isEventsExpected - The boolean value to check if event is expected or not
  * @example
- * cy.validateLifecycleHistoryAndEvents('foreground', 'foo')
+ * cy.validateLifecycleHistoryAndEvents('foreground', 'foo', true)
  */
-Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, condition) => {
+Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEventsExpected) => {
   // Extract appObject based on appId
   const appObject = UTILS.getEnvVariable(appId);
   // Get validation requirements for the current scenario from the moduleReqId JSON
@@ -198,22 +199,14 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, conditi
       const lifecycleEventRequirementId = scenarioRequirement.find((req) =>
         req.hasOwnProperty('event')
       );
-      const appHistoryPrevious = UTILS.getEnvVariable(CONSTANTS.APP_LIFECYCLE_HISTORY);
-      const appHistoryCount = appHistory.length - appHistoryPrevious.length;
 
       // Lifecycle event validation
-      if (condition == CONSTANTS.STAY) {
-        UTILS.assertWithRequirementLogs(
-          CONSTANTS.LIFECYCLE_NOTIFICATION_NOT_GENERATED,
-          appHistoryCount < 1,
-          true
-        );
-      } else if (lifecycleEventRequirementId && lifecycleEventRequirementId.event) {
+      if (lifecycleEventRequirementId && lifecycleEventRequirementId.event) {
+        const appHistoryPrevious = UTILS.getEnvVariable(CONSTANTS.APP_LIFECYCLE_HISTORY);
+        const appHistoryCount = appHistory.length - appHistoryPrevious.length;
         let pretext;
-        if (
-          UTILS.getEnvVariable(CONSTANTS.IS_SAME_APP_TRANSITION, false) ||
-          state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING
-        ) {
+        // If no lifecycle events expected, validate app history value is also empty
+        if (isEventsExpected == false || state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
           UTILS.assertWithRequirementLogs(
             CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED + lifecycleEventRequirementId?.event?.id[0],
             appHistoryCount >= 1,
@@ -259,6 +252,8 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, conditi
             );
           }
         }
+      } else {
+        cy.log('Skipping lifecycle event validation');
       }
     } else {
       // Fail test if no valid history response received from 3rd party application
