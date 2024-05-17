@@ -1,58 +1,58 @@
 {
-    "ENTITYINFO_WAY_TO_WATCH": {
+    "ENTITY_DETAILS_WAY_TO_WATCH": {
         "entityId": "345"
     },
-    "ENTITYINFO_RATINGS": {
+    "ENTITY_DETAILS_RATINGS": {
         "entityId": "129"
     },
-    "ENTITYINFO_WAY_TO_WATCH_WITHTWOENTRIES": {
+    "ENTITY_DETAILS_WAY_TO_WATCH_WITHTWOENTRIES": {
         "entityId": "128"
     },
-    "ENTITYINFO_ENTITY_WITH_ASSETID": {
+    "ENTITY_DETAILS_ENTITY_WITH_ASSETID": {
         "entityId": "236"
     },
-    "ENTITYINFO_ENTITY_WITH_SEASONID": {
+    "ENTITY_DETAILS_ENTITY_WITH_SEASONID": {
         "entityId": "235"
     },
-    "ENTITYINFO_ENTITY_WITH_SERIESID": {
+    "ENTITY_DETAILS_ENTITY_WITH_SERIESID": {
         "entityId": "234"
     },
-    "ENTITYINFO_ENTITY_WITH_APPCONTENTDATA": {
+    "ENTITY_DETAILS_ENTITY_WITH_APPCONTENTDATA": {
         "entityId": "233"
     },
-    "ENTITYINFO_ENTITY_WITH_EPISODENUMBER": {
+    "ENTITY_DETAILS_ENTITY_WITH_EPISODENUMBER": {
         "entityId": "231"
     },
-    "ENTITYINFO_ENTITY_WITH_SEASONNUMBER": {
+    "ENTITY_DETAILS_ENTITY_WITH_SEASONNUMBER": {
         "entityId": "230"
     },
-    "ENTITYINFO_ENTITY_WITH_SYNOPSIS": {
+    "ENTITY_DETAILS_ENTITY_WITH_SYNOPSIS": {
         "entityId": "249"
     },
-    "ENTITYINFO_ENTITY_WITH_RELEASEDATE": {
+    "ENTITY_DETAILS_ENTITY_WITH_RELEASEDATE": {
         "entityId": "248"
     },
-    "ENTITYINFO_ENTITY_WITH_ALL_VALUES": {
+    "ENTITY_DETAILS_ENTITY_WITH_ALL_VALUES": {
         "entityId": "268"
     },
-    "ENTITYINFO_WITHOUT_ENTITY_TYPE": {
+    "ENTITY_DETAILS_WITHOUT_ENTITY_TYPE": {
         "entityId": "246"
     },
-    "ENTITYINFO_WITH_ENTITY_TYPE": {
+    "ENTITY_DETAILS_WITH_ENTITY_TYPE": {
         "entityId": "246"
     },
-    "ENTITYINFO_WITHOUT_PROGRAM_TYPE": {
+    "ENTITY_DETAILS_WITHOUT_PROGRAM_TYPE": {
         "entityId": "246"
     },
-    "PURCHASEDCONTENT_WITH_INTEGER": 123,
-    "ENTITYINFO_ENTITY_WITHOUT_EXPIRES": {
+    "PURCHASES_WITH_INTEGER": 123,
+    "ENTITY_DETAILS_ENTITY_WITHOUT_EXPIRES": {
         "entityId": "127"
     },
-    "ENTITYINFO_ENTITY_INVALID_ENTITYID": {
+    "ENTITY_DETAILS_ENTITY_INVALID_ENTITYID": {
         "entityId": "127"
     },
-    "ENTITYINFO_ENTITY_INVALID_PARAMETERS": false,
-    "ENTITYINFO_WITHOUT_ENTITYID": {
+    "ENTITY_DETAILS_ENTITY_INVALID_PARAMETERS": false,
+    "ENTITY_DETAILS_WITHOUT_ENTITYID": {
         "details": {
             "expires": "2025-01-01T00:00:00.000Z",
             "details": {
@@ -79,7 +79,7 @@
             }
         }
     },
-    "ENTITYINFO_ENTITYID_WITH_INTEGER": {
+    "ENTITY_DETAILS_ENTITYID_WITH_INTEGER": {
         "entityId": 456,
         "details": {
             "expires": "2025-01-01T00:00:00.000Z",
@@ -107,7 +107,7 @@
             }
         }
     },
-    "ENTITYINFO_ENTITYID_WITH_BOOLEAN": {
+    "ENTITY_DETAILS_ENTITYID_WITH_BOOLEAN": {
         "entityId": true,
         "details": {
             "expires": "2025-01-01T00:00:00.000Z",
@@ -135,7 +135,7 @@
             }
         }
     },
-    "ENTITYINFO_WITHOUT_EXPIRES": {
+    "ENTITY_DETAILS_WITHOUT_EXPIRES": {
         "entityId": "345",
         "details": {
             "details": {
@@ -162,13 +162,13 @@
             }
         }
     },
-    "ENTITYINFO_WITHOUT_DETAILS": {
+    "ENTITY_DETAILS_WITHOUT_DETAILS": {
         "entityId": "345",
         "details": {
             "expires": "2025-01-01T00:00:00.000Z"
         }
     },
-    "ENTITYINFO_WITHOUT_INFO": {
+    "ENTITY_DETAILS_WITHOUT_INFO": {
         "entityId": "345",
         "details": {
             "expires": "2025-01-01T00:00:00.000Z",
@@ -181,7 +181,7 @@
             }
         }
     },
-    "ENTITYINFO_WITHOUT_IDENTIFIERS": {
+    "ENTITY_DETAILS_WITHOUT_IDENTIFIERS": {
         "entityId": "345",
         "details": {
             "expires": "2025-01-01T00:00:00.000Z",
@@ -204,7 +204,7 @@
             }
         }
     },
-    "ENTITYINFO_WITHOUT_IDENTIFIERS_ENTITYTYPE": {
+    "ENTITY_DETAILS_WITHOUT_IDENTIFIERS_ENTITYTYPE": {
         "entityId": "345",
         "details": {
             "expires": "2025-01-01T00:00:00.000Z",
@@ -230,7 +230,7 @@
             }
         }
     },
-    "ENTITYINFO_WITHOUT_IDENTIFIERS_PROGRAMTYPE": {
+    "ENTITY_DETAILS_WITHOUT_IDENTIFIERS_PROGRAMTYPE": {
         "entityId": "345",
         "details": {
             "expires": "2025-01-01T00:00:00.000Z",
@@ -257,7 +257,7 @@
             }
         }
     },
-    "ENTITYINFO_WITH_INVALID_TITLE": {
+    "ENTITY_DETAILS_WITH_INVALID_TITLE": {
         "entityId": "345",
         "details": {
             "expires": "2025-01-01T00:00:00.000Z",
@@ -285,7 +285,7 @@
             }
         }
     },
-    "ENTITYINFO_WITH_INVALID_IDENTIFIERS_ENTITYTYPE": {
+    "ENTITY_DETAILS_WITH_INVALID_IDENTIFIERS_ENTITYTYPE": {
         "entityId": "345",
         "details": {
             "expires": "2025-01-01T00:00:00.000Z",
@@ -313,7 +313,7 @@
             }
         }
     },
-    "ENTITYINFO_INFOWATCH": {
+    "ENTITY_DETAILS_INFOWATCH": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -368,7 +368,7 @@
             ]
         }
     },
-    "ENTITYINFO_RATINGS_CONTENT": {
+    "ENTITY_DETAILS_RATINGS_CONTENT": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -388,7 +388,7 @@
             }
         }
     },
-    "ENTITYINFO_WAYTOWATCH": {
+    "ENTITY_DETAILS_WAYTOWATCH": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -456,7 +456,7 @@
             ]
         }
     },
-    "ENTITYINFO_ASSETID": {
+    "ENTITY_DETAILS_ASSETID": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -470,7 +470,7 @@
             }
         }
     },
-    "ENTITYINFO_SEASONID": {
+    "ENTITY_DETAILS_SEASONID": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -485,7 +485,7 @@
             }
         }
     },
-    "ENTITYINFO_SERIESID": {
+    "ENTITY_DETAILS_SERIESID": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -501,7 +501,7 @@
             }
         }
     },
-    "ENTITYINFO_APPCONTENTDATA": {
+    "ENTITY_DETAILS_APPCONTENTDATA": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -518,7 +518,7 @@
             }
         }
     },
-    "ENTITYINFO_EPISODENUMBER": {
+    "ENTITY_DETAILS_EPISODENUMBER": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -535,7 +535,7 @@
             }
         }
     },
-    "ENTITYINFO_SEASONNUMBER": {
+    "ENTITY_DETAILS_SEASONNUMBER": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -553,7 +553,7 @@
             }
         }
     },
-    "ENTITYINFO_SYNOPSIS": {
+    "ENTITY_DETAILS_SYNOPSIS": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -572,7 +572,7 @@
             }
         }
     },
-    "ENTITYINFO_RELEASEDATE": {
+    "ENTITY_DETAILS_RELEASEDATE": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -592,7 +592,7 @@
             }
         }
     },
-    "ENTITYINFO_ALL_VALUES": {
+    "ENTITY_DETAILS_ALL_VALUES": {
         "expires": "2025-01-01T00:00:00.000Z",
         "details": {
             "identifiers": {
@@ -608,7 +608,7 @@
                 "title": "ENTITY INFO",
                 "entityType": "program",
                 "programType": "other",
-                "synopsis": "ALL ENTITYINFO VALUES",
+                "synopsis": "ALL ENTITY_DETAILS VALUES",
                 "seasonNumber": 1,
                 "episodeNumber": 2,
                 "releaseDate": "1993-01-01T00:00:00.000Z",
@@ -743,7 +743,7 @@
                 "programType": "movie"
             },
             "info": {
-                "title": "ENTITYINFO_WITH_ENTITYTYPE"
+                "title": "ENTITY_DETAILS_WITH_ENTITYTYPE"
             }
         }
     },
@@ -755,7 +755,7 @@
                 "entityType": "program"
             },
             "info": {
-                "title": "ENTITYINFO_WITH_PROGRAMTYPE"
+                "title": "ENTITY_DETAILS_WITH_PROGRAMTYPE"
             }
         }
     },
@@ -817,7 +817,7 @@
             }
         }
     },
-    "PURCHASEDCONTENT": {
+    "PURCHASES": {
         "purchases": {
             "totalCount": 10,
             "expires": "2025-01-01T00:00:00.000Z",
@@ -877,7 +877,7 @@
             ]
         }
     },
-    "PURCHASEDCONTENT_LIST_WITHOUT_EXPIRES": {
+    "PURCHASES_WITHOUT_EXPIRES": {
         "purchases": {
             "totalCount": 10,
             "entries": [
@@ -906,7 +906,7 @@
             ]
         }
     },
-    "PURCHASEDCONTENT_LIST_WITHOUT_TOTALCOUNT": {
+    "PURCHASES_WITHOUT_TOTALCOUNT": {
         "purchases": {
             "expires": "2025-01-01T00:00:00.000Z",
             "entries": [
@@ -935,7 +935,278 @@
             ]
         }
     },
-    "PURCHASEDCONTENT_LIST_WITHOUT_ENTRIES": {
+    "PURCHASES_WITHOUT_ENTRIES": {
+        "purchases": {
+            "totalCount": 10,
+            "expires": "2025-01-01T00:00:00.000Z"
+        }
+    },
+    "ENTITY_DETAILS_WITH_WAYSTOWATCH": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc."
+                },
+                "waysToWatch": [
+                    {
+                        "identifiers": {
+                            "assetId": "123"
+                        },
+                        "expires": "2025-01-01T00:00:00.000Z",
+                        "entitled": true,
+                        "entitledExpires": "2025-01-01T00:00:00.000Z",
+                        "offeringType": "buy",
+                        "price": 2.99,
+                        "videoQuality": [
+                            "UHD"
+                        ],
+                        "audioProfile": [
+                            "dolbyAtmos"
+                        ],
+                        "audioLanguages": [
+                            "en"
+                        ],
+                        "closedCaptions": [
+                            "en"
+                        ],
+                        "subtitles": [
+                            "es"
+                        ],
+                        "audioDescriptions": [
+                            "en"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "ENTITY_DETAILS_WITH_CONTENTRATINGS": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "ENTITY_DETAILS_WITH_IDENTIFIERS_ASSETID": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie",
+                    "assetId": "123"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc."
+                }
+            }
+        }
+    },
+    "ENTITY_DETAILS_WITH_IDENTIFIERS_APPCONTENTDATA": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie",
+                    "assetId": "123",
+                    "appContentData": "FCA app to run test suites"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc."
+                }
+            }
+        }
+    },
+    "ENTITY_DETAILS_WITH_INFO_RELEASEDATE": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie",
+                    "assetId": "123",
+                    "appContentData": "FCA app to run test suites"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z"
+                }
+            }
+        }
+    },
+    "ENTITY_DETAILS_WITH_INFO_SEASONNUMBER": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie",
+                    "assetId": "123",
+                    "appContentData": "FCA app to run test suites"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "seasonNumber": 2
+                }
+            }
+        }
+    },
+    "ENTITY_DETAILS_WITH_INFO_EPISODENUMBER": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie",
+                    "assetId": "123",
+                    "appContentData": "FCA app to run test suites"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "seasonNumber": 2,
+                    "episodeNumber": 4
+                }
+            }
+        }
+    },
+    "PURCHASES_WITH_IDENTIFIERS_ASSETID": {
+        "purchases": {
+            "totalCount": 10,
+            "expires": "2025-01-01T00:00:00.000Z",
+            "entries": [
+                {
+                    "identifiers": {
+                        "entityId": "345",
+                        "entityType": "program",
+                        "programType": "movie",
+                        "assetId": "123"
+                    },
+                    "info": {
+                        "title": "Cool Runnings",
+                        "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc."
+                    }
+                }
+            ]
+        }
+    },
+    "PURCHASES_WITH_IDENTIFIERS_APPCONTENTDATA": {
+        "purchases": {
+            "totalCount": 10,
+            "expires": "2025-01-01T00:00:00.000Z",
+            "entries": [
+                {
+                    "identifiers": {
+                        "entityId": "345",
+                        "entityType": "program",
+                        "programType": "movie",
+                        "assetId": "123",
+                        "appContentData": "FCA app to run test suites"
+                    },
+                    "info": {
+                        "title": "Cool Runnings",
+                        "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc."
+                    }
+                }
+            ]
+        }
+    },
+    "PURCHASES_WITH_WAYSTOWATCH": {
+        "purchases": {
+            "totalCount": 10,
+            "expires": "2025-01-01T00:00:00.000Z",
+            "entries": [
+                {
+                    "identifiers": {
+                        "entityId": "345",
+                        "entityType": "program",
+                        "programType": "movie"
+                    },
+                    "info": {
+                        "title": "Cool Runnings",
+                        "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc."
+                    },
+                    "waysToWatch": [
+                        {
+                            "identifiers": {
+                                "assetId": "123"
+                            },
+                            "expires": "2025-01-01T00:00:00.000Z",
+                            "entitled": true,
+                            "entitledExpires": "2025-01-01T00:00:00.000Z",
+                            "offeringType": "buy",
+                            "price": 2.99,
+                            "videoQuality": [
+                                "UHD"
+                            ],
+                            "audioProfile": [
+                                "dolbyAtmos"
+                            ],
+                            "audioLanguages": [
+                                "en"
+                            ],
+                            "closedCaptions": [
+                                "en"
+                            ],
+                            "subtitles": [
+                                "es"
+                            ],
+                            "audioDescriptions": [
+                                "en"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    
+    },
+    "PURCHASES_WITH_CONTENTRATINGS": {
         "purchases": {
             "totalCount": 10,
             "expires": "2025-01-01T00:00:00.000Z",
@@ -949,7 +1220,6 @@
                     "info": {
                         "title": "Cool Runnings",
                         "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
-                        "releaseDate": "1993-01-01T00:00:00.000Z",
                         "contentRatings": [
                             {
                                 "scheme": "US-Movie",
@@ -960,6 +1230,26 @@
                                 "rating": "G"
                             }
                         ]
+                    }
+                }
+            ]
+        }
+    },
+    "PURCHASES_WITH_RELEASEDATE": {
+        "purchases": {
+            "totalCount": 10,
+            "expires": "2025-01-01T00:00:00.000Z",
+            "entries": [
+                {
+                    "identifiers": {
+                        "entityId": "345",
+                        "entityType": "program",
+                        "programType": "movie"
+                    },
+                    "info": {
+                        "title": "Cool Runnings",
+                        "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                        "releaseDate": "1993-01-01T00:00:00.000Z"
                     }
                 }
             ]

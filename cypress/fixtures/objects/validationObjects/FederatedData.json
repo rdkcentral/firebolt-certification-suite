@@ -1,179 +1,179 @@
 {
-    "FEDERATEDDATA_ENTITYINFO_INFOWATCH": {
+    "FEDERATEDDATA_ENTITY_DETAILS_INFOWATCH": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_INFOWATCH",
+                        "type": "FEDERATEDDATA_ENTITY_DETAILS_INFOWATCH",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
         ]
     },
-    "FEDERATEDDATA_ENTITYINFO_CONTENTRATING": {
+    "FEDERATEDDATA_ENTITY_DETAILS_CONTENTRATING": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_RATINGS_CONTENT",
+                        "type": "FEDERATEDDATA_ENTITY_DETAILS_RATINGS_CONTENT",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
         ]
     },
-    "FEDERATEDDATA_ENTITYINFO_WAYTOWATCH": {
+    "FEDERATEDDATA_ENTITY_DETAILS_WAYTOWATCH": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_WAYTOWATCH",
+                        "type": "FEDERATEDDATA_ENTITY_DETAILS_WAYTOWATCH",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
         ]
     },
-    "FEDERATEDDATA_ENTITYINFO_ASSETID": {
+    "FEDERATEDDATA_ENTITY_DETAILS_ASSETID": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_ASSETID",
+                        "type": "FEDERATEDDATA_ENTITY_DETAILS_ASSETID",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
         ]
     },
-    "FEDERATEDDATA_ENTITYINFO_SEASONID": {
+    "FEDERATEDDATA_ENTITY_DETAILS_SEASONID": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_SEASONID",
+                        "type": "FEDERATEDDATA_ENTITY_DETAILS_SEASONID",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
         ]
     },
-    "FEDERATEDDATA_ENTITYINFO_SERIESID": {
+    "FEDERATEDDATA_ENTITY_DETAILS_SERIESID": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_SERIESID",
+                        "type": "FEDERATEDDATA_ENTITY_DETAILS_SERIESID",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
         ]
     },
-    "FEDERATEDDATA_ENTITYINFO_APPCONTENTDATA": {
+    "FEDERATEDDATA_ENTITY_DETAILS_APPCONTENTDATA": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_APPCONTENTDATA",
+                        "type": "FEDERATEDDATA_ENTITY_DETAILS_APPCONTENTDATA",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
         ]
     },
-    "FEDERATEDDATA_ENTITYINFO_EPISODENUMBER": {
+    "FEDERATEDDATA_ENTITY_DETAILS_EPISODENUMBER": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_EPISODENUMBER",
+                        "type": "FEDERATEDDATA_ENTITY_DETAILS_EPISODENUMBER",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
         ]
     },
-    "FEDERATEDDATA_ENTITYINFO_SEASONNUMBER": {
+    "FEDERATEDDATA_ENTITY_DETAILS_SEASONNUMBER": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_SEASONNUMBER",
+                        "type": "FEDERATEDDATA_ENTITY_DETAILS_SEASONNUMBER",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
         ]
     },
-    "FEDERATEDDATA_ENTITYINFO_SYNOPSIS": {
+    "FEDERATEDDATA_ENTITY_DETAILS_SYNOPSIS": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_SYNOPSIS",
+                        "type": "FEDERATEDDATA_ENTITY_DETAILS_SYNOPSIS",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
         ]
     },
-    "FEDERATEDDATA_ENTITYINFO_RELEASEDATA": {
+    "FEDERATEDDATA_ENTITY_DETAILS_RELEASEDATA": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_RELEASEDATA",
+                        "type": "FEDERATEDDATA_ENTITY_DETAILS_RELEASEDATA",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
         ]
     },
-    "FEDERATEDDATA_ENTITYINFO_ALL_VALUES": {
+    "FEDERATEDDATA_ENTITY_DETAILS_ALL_VALUES": {
         "method": "content.requestDetails",
         "data": [
             {
                 "type": "fixture",
                 "validations": [
                     {
-                        "type": "FEDERATEDDATA_ENTITYINFO_ALL_VALUES",
+                        "type": "FEDERATEDDATA_ENTITY_DETAILS_ALL_VALUES",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
@@ -188,7 +188,7 @@
                     {
                         "type": "FEDERATEDDATA_WITHOUT_ENTITY_TYPE",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
@@ -203,7 +203,7 @@
                     {
                         "type": "FEDERATEDDATA_WITH_ENTITY_TYPE",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
@@ -218,7 +218,7 @@
                     {
                         "type": "FEDERATEDDATA_WITHOUT_PROGRAM_TYPE",
                         "mode": "staticContentValidation",
-                        "description": "Validation of entityInfo data"
+                        "description": "Validation of ENTITY_DETAILS data"
                     }
                 ]
             }
