@@ -44,7 +44,7 @@
             }
         ]
     },
-    "ACCESSIBILITY_FONTFAMILY_UNDEFINED": {
+    "ACCESSIBILITY_FONTFAMILY_VALUE_FOR_NULL_PARAMS": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
@@ -73,7 +73,7 @@
             }
         ]
     },
-    "ACCESSIBILITY_FONTSIZE_UNDEFINED": {
+    "ACCESSIBILITY_FONTSIZE_VALUE_FOR_NULL_PARAMS": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
@@ -281,7 +281,7 @@
             }
         ]
     },
-    "ACCESSIBILITY_FONTCOLOR_UNDEFINED": {
+    "ACCESSIBILITY_FONTCOLOR_VALUE_FOR_NULL_PARAMS": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
@@ -295,7 +295,7 @@
             }
         ]
     },
-    "ACCESSIBILITY_FONTEDGECOLOR_UNDEFINED": {
+    "ACCESSIBILITY_FONTEDGECOLOR_VALUE_FOR_NULL_PARAMS": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
@@ -309,7 +309,7 @@
             }
         ]
     },
-    "ACCESSIBILITY_FONTOPACITY_UNDEFINED": {
+    "ACCESSIBILITY_FONTOPACITY_VALUE_FOR_NULL_PARAMS": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
@@ -323,7 +323,7 @@
             }
         ]
     },
-    "ACCESSIBILITY_BACKGROUNDCOLOR_UNDEFINED": {
+    "ACCESSIBILITY_BACKGROUNDCOLOR_VALUE_FOR_NULL_PARAMS": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
@@ -337,7 +337,7 @@
             }
         ]
     },
-    "ACCESSIBILITY_BACKGROUNDOPACITY_UNDEFINED": {
+    "ACCESSIBILITY_BACKGROUNDOPACITY_VALUE_FOR_NULL_PARAMS": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
@@ -351,7 +351,7 @@
             }
         ]
     },
-    "ACCESSIBILITY_TEXTALIGN_UNDEFINED": {
+    "ACCESSIBILITY_TEXTALIGN_VALUE_FOR_NULL_PARAMS": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
@@ -365,7 +365,7 @@
             }
         ]
     },
-    "ACCESSIBILITY_TEXTALIGNVERTICAL_UNDEFINED": {
+    "ACCESSIBILITY_TEXTALIGNVERTICAL_VALUE_FOR_NULL_PARAMS": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
@@ -379,7 +379,7 @@
             }
         ]
     },
-    "ACCESSIBILITY_WINDOWCOLOR_UNDEFINED": {
+    "ACCESSIBILITY_WINDOWCOLOR_VALUE_FOR_NULL_PARAMS": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
@@ -393,7 +393,7 @@
             }
         ]
     },
-    "ACCESSIBILITY_WINDOWOPACITY_UNDEFINED": {
+    "ACCESSIBILITY_WINDOWOPACITY_VALUE_FOR_NULL_PARAMS": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {

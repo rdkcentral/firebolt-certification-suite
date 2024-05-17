@@ -12,12 +12,16 @@ Cypress.Commands.add('undefinedValidation', (validationTypeObject, apiOrEventObj
   if (apiOrEventObject != null && validationTypeObject != null) {
     try {
       validationTypeObject.validations.forEach((validation) => {
-        const fieldPath = validation.field.replace('result.', '');
-        const fieldParts = fieldPath.split('.');
-        const fieldValue = fieldParts.reduce((obj, part) => {
-          return obj && obj[part];
-        }, apiOrEventObject);
-        assert.isUndefined(fieldValue, validation.description);
+        if (validation.field == 'result') {
+          assert.isUndefined(apiOrEventObject, validation.description);
+        } else {
+          const fieldPath = validation.field.replace('result.', '');
+          const fieldParts = fieldPath.split('.');
+          const fieldValue = fieldParts.reduce((obj, part) => {
+            return obj && obj[part];
+          }, apiOrEventObject);
+          assert.isUndefined(fieldValue, validation.description);
+        }
       });
     } catch (error) {
       cy.log(

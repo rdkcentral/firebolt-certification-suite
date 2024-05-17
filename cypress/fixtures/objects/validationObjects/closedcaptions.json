@@ -14,7 +14,7 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_BACKGROUNDCOLOR_UNDEFINED": {
+    "CLOSEDCAPTIONS_BACKGROUNDCOLOR_VALUE_FOR_NULL_PARAMS": {
         "method": "closedcaptions.backgroundColor",
         "data": [
             {
@@ -43,7 +43,7 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_BACKGROUNDOPACITY_UNDEFINED": {
+    "CLOSEDCAPTIONS_BACKGROUNDOPACITY_VALUE_FOR_NULL_PARAMS": {
         "method": "closedcaptions.backgroundOpacity",
         "data": [
             {
@@ -57,7 +57,7 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_FONTCOLOR_UNDEFINED": {
+    "CLOSEDCAPTIONS_FONTCOLOR_VALUE_FOR_NULL_PARAMS": {
         "method": "closedcaptions.fontColor",
         "data": [
             {
@@ -101,7 +101,7 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_FONTEDGE_UNDEFINED": {
+    "CLOSEDCAPTIONS_FONTEDGE_VALUE_FOR_NULL_PARAMS": {
         "method": "closedcaptions.fontEdge",
         "data": [
             {
@@ -190,7 +190,7 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_FONTEDGECOLOR_UNDEFINED": {
+    "CLOSEDCAPTIONS_FONTEDGECOLOR_VALUE_FOR_NULL_PARAMS": {
         "method": "closedcaptions.fontEdgeColor",
         "data": [
             {
@@ -264,7 +264,7 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_FONTOPACITY_UNDEFINED": {
+    "CLOSEDCAPTIONS_FONTOPACITY_VALUE_FOR_NULL_PARAMS": {
         "method": "closedcaptions.fontOpacity",
         "data": [
             {
@@ -278,7 +278,7 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_FONTSIZE_UNDEFINED": {
+    "CLOSEDCAPTIONS_FONTSIZE_VALUE_FOR_NULL_PARAMS": {
         "method": "closedcaptions.fontSize",
         "data": [
             {
@@ -307,7 +307,7 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_TEXTALIGN_UNDEFINED": {
+    "CLOSEDCAPTIONS_TEXTALIGN_VALUE_FOR_NULL_PARAMS": {
         "method": "closedcaptions.textAlign",
         "data": [
             {
@@ -351,7 +351,7 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_UNDEFINED": {
+    "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_VALUE_FOR_NULL_PARAMS": {
         "method": "closedcaptions.textAlignVertical",
         "data": [
             {
@@ -440,7 +440,7 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_FONTFAMILY_UNDEFINED": {
+    "CLOSEDCAPTIONS_FONTFAMILY_VALUE_FOR_NULL_PARAMS": {
         "method": "closedcaptions.fontFamily",
         "data": [
             {
@@ -514,7 +514,7 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_WINDOWCOLOR_UNDEFINED": {
+    "CLOSEDCAPTIONS_WINDOWCOLOR_VALUE_FOR_NULL_PARAMS": {
         "method": "closedcaptions.windowColor",
         "data": [
             {
@@ -558,7 +558,7 @@
             }
         ]
     },
-    "CLOSEDCAPTIONS_WINDOWOPACITY_UNDEFINED": {
+    "CLOSEDCAPTIONS_WINDOWOPACITY_VALUE_FOR_NULL_PARAMS": {
         "method": "closedcaptions.windowColor",
         "data": [
             {
