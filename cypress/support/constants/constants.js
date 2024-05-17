@@ -154,7 +154,8 @@ module.exports = {
   FIREBOLT_SPECIFICATION_URL: 'firebolt_specification_url',
   FIRST_PARTY_APP: '1st party app',
   VALIDATION_OBJECTS_PATH: 'cypress/fixtures/objects/validationObjects/',
-  CONFIG_VALIDATION_OBJECTS_PATH: './node_modules/configModule/cypress/fixtures/objects/validationObjects/',
+  CONFIG_VALIDATION_OBJECTS_PATH:
+    './node_modules/configModule/cypress/fixtures/objects/validationObjects/',
   FIXTURE: 'fixture',
   FIXTURE_DEFINED_PATH:
     'Expected JSON data should be defined in fixtures/objects/validationObjects/',
