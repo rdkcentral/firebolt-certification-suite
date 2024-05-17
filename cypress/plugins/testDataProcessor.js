@@ -1,7 +1,7 @@
 const fs = require('fs');
 const jsonMerger = require('json-merger');
 const CONSTANTS = require('../support/constants/constants');
-const REGEXFORMATS = require('../support/constants/regexformats');
+const REGEXFORMATS = require('../fixtures/regexformats');
 let envVariables;
 const path = require('path');
 const _ = require('lodash');
