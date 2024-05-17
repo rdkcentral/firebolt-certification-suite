@@ -162,7 +162,7 @@
             }
         ]
     },
-    "ACCESSIBILITY_FONTEDGE_NONE": {
+    "ACCESSIBILITY_FONTEDGE_VALUE_FOR_NULL_PARAMS": {
         "method": "accessibility.closedCaptionsSettings",
         "data": [
             {
