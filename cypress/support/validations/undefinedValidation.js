@@ -9,7 +9,7 @@
  */
 
 Cypress.Commands.add('undefinedValidation', (validationTypeObject, apiOrEventObject) => {
-  if (apiOrEventObject != null && validationTypeObject != null) {
+  if (validationTypeObject != null) {
     try {
       validationTypeObject.validations.forEach((validation) => {
         if (validation.field == 'result') {
@@ -30,9 +30,6 @@ Cypress.Commands.add('undefinedValidation', (validationTypeObject, apiOrEventObj
       );
     }
   } else {
-    logger.info(
-      validationTypeObject == null ? 'Validation object is undefined' : 'Api response is undefined',
-      'undefinedValidation'
-    );
+    logger.info('Validation object is undefined', 'undefinedValidation');
   }
 });
