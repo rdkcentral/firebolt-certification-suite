@@ -69,7 +69,7 @@ For first party app the response is as per the templete defined below. If the re
 ### Note: setResponseKey value is an object and it can contains data as below
 | Field | Definition |
 | --- | --- |
-| fireboltCall/fireboltMock | FireboltCall as a key will be used to make firebolt calls to the 1st party app or 3rd party app. FireboltMock as a key will be used to override the default response or set the responses. Data of fireboltMock / fireboltCall keys should be added in config module `testData/fireboltMocks/FeatureFileName.json` or FCS `fixtures/fireboltCalls/FeatureFileName.json` |
+| fireboltCall/fireboltMock | FireboltCall as a key will be used to make firebolt calls to the 1st party app or 3rd party app. FireboltMock as a key will be used to override the default response or set the responses. Data of fireboltMock / fireboltCall keys should be added in config module `fixtures/fireboltMocks/FeatureFileName.json` or FCS `fixtures/fireboltCalls/FeatureFileName.json` |
 | firstParty | Ensure that the value is set to true when sending messages to the 1st party app, otherwise, it should be set to false for third party app |
 | tags | Based on the tags specified here and the cli , corresponding configModule would perform necessary action steps. `tags` is optional field. |
 
