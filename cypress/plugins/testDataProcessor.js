@@ -9,7 +9,9 @@ const logger = require('../support/Logger')('testDataProcessor.js');
 
 /**
  *  @function testDataProcessor
- *  Merge the all JSON files from fcs and config module and finally return the resolved JSON.
+ *  The Test Data Processor performs the following operations:
+ *  - Merges all JSON files located within a specified directory.
+ *  - Resolves the value for a specified key in each JSON object.
  *
  *  @example
  *  testDataProcessor()
@@ -60,7 +62,10 @@ function testDataProcessor(configEnv) {
 
 /**
  *  @function processFireboltJson
- *  Iterating over the provided JSON and each object, resolve the values of params, context, or content if present, then returning the JSON with the updated value.
+ *  processFireboltJson function will perform following operations
+ *  - Iterate over each key in the provided JSON
+ *  - Resolve the values of params, context, or content if present
+ *  - Return the JSON with the updated value.
  *
  *  @example
  *  processFireboltJson({'abc': {'method': 'method_name', 'params': 'TRUE'}})
@@ -129,7 +134,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
 
     case CONSTANTS.CONTEXT.toLowerCase():
       const contextImportFile = CONSTANTS.CONTEXT_FILE_PATH;
-      const contextValue = fetchAndParseDataFromJSON(contextImportFile, dataIdentifier);
+      const contextValue = fetchAndParseDataFromJson(contextImportFile, dataIdentifier);
       if (contextValue === CONSTANTS.NO_DATA) {
         logger.info(
           `Expected context not found for ${dataIdentifier}. Returning ${dataIdentifier} as is.`
@@ -147,7 +152,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
       ) {
         const errorSchemaFilePath = CONSTANTS.ERROR_SCHEMA_OBJECTS_PATH;
         const errorContentFilePath = CONSTANTS.ERROR_CONTENT_OBJECTS_PATH;
-        const errorSchemaObject = fetchAndParseDataFromJSON(errorSchemaFilePath, dataIdentifier);
+        const errorSchemaObject = fetchAndParseDataFromJson(errorSchemaFilePath, dataIdentifier);
 
         // If error schema object having the type as validationFunction and validations field
         if (
@@ -158,7 +163,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
         ) {
           // Looping through the validations array, obtaining and updating the field type with error content data.
           errorSchemaObject.validations.forEach((validationObject) => {
-            const errorContentObject = fetchAndParseDataFromJSON(
+            const errorContentObject = fetchAndParseDataFromJson(
               errorContentFilePath,
               validationObject.type
             );
@@ -214,7 +219,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                     if (!deviceMac) {
                       logger.info('Falling back to default device data path');
                     }
-                    let deviceData = fetchAndParseDataFromJSON(deviceDataPath, data.type);
+                    let deviceData = fetchAndParseDataFromJson(deviceDataPath, data.type);
                     if (deviceData === CONSTANTS.NO_DATA) {
                       logger.info(
                         `Expected deviceData not found for ${data.type}. Returning ${data.type} as is.`
@@ -241,7 +246,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
 
 /**
  * @function testDataParser
- *  Fetching the data from json files based on the priority as shown below
+ *  testDataParser will fetch data from json files based on priority as shown below
  *    - External <module>.json from configModule (If applicable)
  *    - Internal <module>.json from fixtures (If applicable)
  *    - default.json
@@ -279,7 +284,7 @@ function testDataParser(dataIdentifier, requestType) {
     const moduleImportPath = `${CONSTANTS.MODULES_PATH}${moduleName}.json`;
     const externalModulePath = `${CONSTANTS.EXTERNAL_PATH}${moduleName}.json`;
 
-    const parsedModuleData = fetchAndParseDataFromJSON(
+    const parsedModuleData = fetchAndParseDataFromJson(
       moduleImportPath,
       dataIdentifier,
       requestType
@@ -290,7 +295,7 @@ function testDataParser(dataIdentifier, requestType) {
 
     // Checking the external module json file is present.
     if (fs.existsSync(externalModulePath)) {
-      const parsedExternalModuleData = fetchAndParseDataFromJSON(
+      const parsedExternalModuleData = fetchAndParseDataFromJson(
         externalModulePath,
         dataIdentifier,
         requestType
@@ -298,37 +303,37 @@ function testDataParser(dataIdentifier, requestType) {
       // If data not found in config module, taking the previously fetched data.
       paramData =
         parsedExternalModuleData != CONSTANTS.NO_DATA ? parsedExternalModuleData : paramData;
-      response = paramDatalogs(paramData, dataIdentifier, defaultRetVal, requestType);
+      response = paramDataLogs(paramData, dataIdentifier, defaultRetVal, requestType);
       return response;
     } else {
-      response = paramDatalogs(paramData, dataIdentifier, defaultRetVal, requestType);
+      response = paramDataLogs(paramData, dataIdentifier, defaultRetVal, requestType);
       return response;
     }
   } else {
-    response = paramDatalogs(paramData, dataIdentifier, defaultRetVal, requestType);
+    response = paramDataLogs(paramData, dataIdentifier, defaultRetVal, requestType);
     return response;
   }
 }
 
 /**
- *  @function fetchAndParseDataFromJSON
- *  Function used to fetch the data from the file and parse the data based on passed key.
+ *  @function fetchAndParseDataFromJson
+ *  fetchAndParseDataFromJson will read the data and parse the data based on the passed key.
  *
  *  @param {string} filePath - file path
  *  @param {*} dataIdentifier - Key to be used to fetch data from the file.
  *  @param {*} requestType - request type contains params, context or content.
  *
  *  @example
- *  fetchAndParseDataFromJSON('./example.json', 'abc' , 'params')
+ *  fetchAndParseDataFromJson('./example.json', 'abc' , 'params')
  */
-function fetchAndParseDataFromJSON(filePath, dataIdentifier, requestType) {
+function fetchAndParseDataFromJson(filePath, dataIdentifier, requestType) {
   const data = fetchDataFromFile(filePath);
   return parseDataFromJson(data, dataIdentifier, requestType);
 }
 
 /**
  *  @function combineValidationObjectsJson
- *  Function to combine all validation JSON files from FCS and config module.
+ *  combineValidationObjectsJson will combine all validation objects JSON files from the FCS and config module.
  *
  *  @example
  *  combineValidationObjectsJson()
@@ -368,7 +373,7 @@ function combineValidationObjectsJson() {
 }
 
 // Function to print logs when data is having "no data" else returning as is.
-function paramDatalogs(paramData, dataIdentifier, defaultRetVal, requestType) {
+function paramDataLogs(paramData, dataIdentifier, defaultRetVal, requestType) {
   if (paramData == CONSTANTS.NO_DATA) {
     logger.info(
       `Expected ${requestType || 'data'} ${dataIdentifier} was not found in fixtures. Returning ${dataIdentifier} as is.`
@@ -381,7 +386,7 @@ function paramDatalogs(paramData, dataIdentifier, defaultRetVal, requestType) {
 
 /**
  *  @function extractModuleName
- *  Parsing the module name from the dataIdentifier passed.
+ *  extractModuleName will extract the module name from the passed key.
  *
  *  @param {string} dataIdentifier - Key to be used to extranct the module name.
  *
@@ -411,7 +416,7 @@ function extractModuleName(dataIdentifier) {
 
 /**
  *  @function parseDataFromJson
- *  Function to fetch the data from the passed JSON.
+ *  parseDataFromJson will fetch the data from the passed JSON data based on key.
  *
  *  @param {object} data - JSON data needed to parse based on key.
  *  @param {string} dataIdentifier - Key to be used to find value from JSON.
@@ -450,7 +455,7 @@ function parseDataFromJson(data, dataIdentifier, requestType) {
 
 /**
  *  @function fetchDataFromFile
- *  Function to fetch data from file.
+ *  fetchDataFromFile will read the data from the file.
  *
  *  @param {string} filePath - file path.
  *
@@ -469,7 +474,7 @@ function fetchDataFromFile(filePath) {
 
 /**
  *  @function mergeJsonFilesData
- *  Function to merge the data from the array of files.
+ *  mergeJsonFilesData will read and merge the data from the passed array of file paths.
  *
  *  @param {array} filePath - array of files path.
  *
@@ -488,7 +493,7 @@ function mergeJsonFilesData(paths) {
 
 /**
  *  @function fetchMergedJsonFromDirectory
- *  Function to merge JSON files ferom the given directory.
+ *  fetchMergedJsonFromDirectory will merge all JSON files from the given directory.
  *
  *  @param {string} directoryPath - direcotory path
  *

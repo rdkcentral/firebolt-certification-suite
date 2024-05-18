@@ -1,7 +1,7 @@
 # Test Data Processor Documentation
  
 ## Overview
-This Markdown document provides documentation for the Test Data Processor. The Test Data Processor is designed to merge multiple test data JSON files located within a specified directory and resolve the value for a specified key in each object.
+Test Data Processor contains all logic for processing the JSON test data before test execution starts. It is designed to merge multiple test data JSON files located within a specified directory and resolve all variables which is then pushed to Cypress Env variables used by the test cases.
  
  ## Functions
  
@@ -17,7 +17,10 @@ testDataProcessor()
 ```
 
 ### > processFireboltJson
-Iterating over the provided JSON and each object, resolve the values of params, context, or content if present, then returning the JSON with the updated value.
+processFireboltJson function will perform following operations
+- Iterate over each key in the provided JSON
+- Resolve the values of params, context, or content if present
+- Return the JSON with the updated value.
 
 ##### Params:
 | Param | Definition|
@@ -61,18 +64,15 @@ Currently supported requestType is params, context and content.
    * Error validation
    * Result validation
     - Static Content Validation - Required content will be fetched from combined(fcs and config module) `default json` or from the corresponding `module json` files based on the precedence.
-      - `module.json` files reside in `fixtures/modules/` or `nodemodules/configModule/testData/modules/`
+      - `module.json` files reside in `fixtures/modules/` or `fixtures/external/modules/`
 
     - Device Content Validation
       - Content will be fetched from `devicMac.json` file when devicMac is present. 
-      - `deviceMac.json` present in `nodemodules/configModule/testData/devices/`.
+      - `deviceMac.json` present in `fixtures/external/devices/`.
       - deviceMac is not present content will be taken from `defaultDeviceData` json file.
 
 Note:
  - When data is not present in the fixtures, returning the passed the key as is.
- - `Mock Firebolt` is the default device and mac addressed is not required.
-   
-   
 
 Ex:
 
@@ -96,10 +96,8 @@ response: "CYPRESSENV-capabilitiesList"
 ```
 
 
-+++++++++++++++++++++++++
-
 ### > testDataParser
-Fetching the data from json files based on the priority as shown below
+testDataParser will fetch data from json files based on priority as shown below
   - External <module>.json from configModule (If applicable)
   - Internal <module>.json from fixtures (If applicable)
   - default.json
@@ -125,8 +123,8 @@ request: testDataParser('ACCESSIBILITY_FONTFAMILY_MONOSPACE', 'params');
 response: {"value": "monospaced_sanserif"}
 ```
 
-### > fetchAndParseDataFromJSON
-Function used to fetch the data from the file and parse the data based on passed key.
+### > fetchAndParseDataFromJson
+fetchAndParseDataFromJson will read the data and parse the data based on the passed key.
    
 ##### Params:
 | Param | Definition|
@@ -138,10 +136,10 @@ Function used to fetch the data from the file and parse the data based on passed
 Ex:
 
 ```
-fetchAndParseDataFromJSON('./example.json', 'abc' , 'params')
+fetchAndParseDataFromJson('./example.json', 'abc' , 'params')
 ```
 ### > combineValidationObjectsJson
-Function to combine all validation JSON files from FCS and config module.
+combineValidationObjectsJson will combine all validation objects JSON files from the FCS and config module.
 
 Ex:
 
@@ -151,12 +149,12 @@ combineValidationObjectsJson()
 
 ### > extractModuleName
 
-Parsing the module name from the dataIdentifier passed.
+extractModuleName will extract the module name from the passed key.
 
 ##### Params:
 | Param | Definition|
 | --- | --- |
-| dataIdentifier | Key to be used to extranct the module name. |
+| dataIdentifier | Key to be used to extract the module name. |
 
 Ex:
 
@@ -169,7 +167,7 @@ response: accessibility
 
 ### > parseDataFromJson
 
-Function to fetch the data from the passed JSON.
+parseDataFromJson will fetch the data from the passed JSON data based on key.
 
 ##### Params:
 | Param | Definition|
@@ -189,7 +187,7 @@ response: true
 
 ### > fetchDataFromFile
 
-Function to fetch the data from the passed JSON.
+fetchDataFromFile will read the data from the file.
 
 ##### Params:
 | Param | Definition|
@@ -204,7 +202,7 @@ fetchDataFromFile('./filepath.json')
 
 ### > mergeJsonFilesData
 
-Function to fetch the data from the passed JSON.
+mergeJsonFilesData will read and merge the data from the passed array of file paths.
 
 ##### Params:
 | Param | Definition|
@@ -219,7 +217,7 @@ mergeJsonFilesData(['./filepath.json'])
 
 ### > fetchMergedJsonFromDirectory
 
-Function to merge JSON files ferom the given directory.
+fetchMergedJsonFromDirectory will merge all JSON files from the given directory.
 
 ##### Params:
 | Param | Definition|
