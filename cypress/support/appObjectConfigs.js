@@ -35,7 +35,6 @@ class apiObject {
 
 class eventObject {
   constructor(eventName, params, context, response, appId, expectedResult) {
-    console.log('constructor in eventConfig class');
     this.eventName = eventName;
     this.params = params;
     this.context = context;
@@ -59,7 +58,7 @@ class eventObject {
       this.eventSchemaResult = response.eventSchemaResult;
       this.eventTime = response.eventTime;
     } else {
-      assert(false, 'Event Response should be defined');
+      assert(false, 'Platform does not trigger event');
     }
   }
 }

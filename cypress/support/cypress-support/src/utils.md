@@ -187,7 +187,7 @@ const variableValue = UTILS.getEnvVariable('YOUR_ENV_VARIABLE');
 ### Purpose: Function to check if the platform specific env variables and params are provided in the required format for testing
 
 ### PreRequisites: 
-- A json file with all required mandatory parameters should be placed with corresponding configModule's testData folder.
+- A json file with all required mandatory parameters should be placed with corresponding configModule's fixtures folder.
 - The json file should contain a list of params with each object having name and result as the keys. Within result, there should be the param's name, summary and schema with   which it should be validated
 - The json file should be in the following format :
 ```
@@ -276,3 +276,12 @@ request - `cy.destroyGlobalObjects(['lifecycleAppObjectList']);
 
 ### Examples:
 request - `cy.checkForTags(["TAG1","TAG2"]);
+
+## FireLog
+
+### Purpose: Provides assertion methods with logging using Cypress's cy.log(). It wraps Cypress's assertion methods, allowing logging of messages for each assertion.
+
+### Examples:
+`fireLog.isTrue(isTrueValue, "True message");`
+`fireLog.isFalse(isFalseValue, "False message");`
+`fireLog.deepEqual(actual, expected, "deepEqual message");`

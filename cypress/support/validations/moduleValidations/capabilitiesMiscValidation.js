@@ -196,11 +196,8 @@ function capabilitiesSupportedLogs(capabilityParam, capabilityStatus) {
  * validateCapabilitiesRequest('capabilities.request',  {"type": "request", "specialValidationObject":[{"method":"capabilities.request","expected": true,"validationPath":"result[0].use.granted", "appId": "test.test"}]},{response:{result: '', error: null, ...}});
  */
 function validateCapabilitiesRequest(method, validationTypeObject, apiOrEventObject) {
-  console.log('validationTypeObject', validationTypeObject);
-  console.log('apiOrEventObject', apiOrEventObject);
   if (validationTypeObject && validationTypeObject.specialValidationObject) {
     cy.get(Object.values(validationTypeObject.specialValidationObject)).each((validationObject) => {
-      console.log('validationObject', validationObject);
       cy.specialValidation(validationObject);
     });
   } else {
@@ -236,13 +233,23 @@ Cypress.Commands.add('specialValidation', (validationObject) => {
         const message = Object.keys(parsedContext).length
           ? parsedContext
           : { role: validationPath.split('.')[1] };
-        cy.log(
-          `Method content validation for ${method} for ${JSON.stringify(
-            message
-          )} expected ${apiResponseContent} to be ${expected}`
-        ).then(() => {
-          assert.equal(apiResponseContent, expected, 'Equal to be');
-        });
+        if (Array.isArray(expected)) {
+          cy.log(
+            `Method content validation for ${method} for ${JSON.stringify(
+              message
+            )} expected ${apiResponseContent} to be oneof ${JSON.stringify(expected)}`
+          ).then(() => {
+            assert.oneOf(apiResponseContent, expected, 'Equal to be oneOf');
+          });
+        } else {
+          cy.log(
+            `Method content validation for ${method} for ${JSON.stringify(
+              message
+            )} expected ${apiResponseContent} to be ${expected}`
+          ).then(() => {
+            assert.equal(apiResponseContent, expected, 'Equal to be');
+          });
+        }
       }
     );
   });

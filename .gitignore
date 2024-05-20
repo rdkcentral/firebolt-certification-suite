@@ -154,3 +154,6 @@ supportConfig.json
 
 # Ignore package.json file
 package.json
+
+# originalPkgVersion.json added to store the dependencies version of the original package.json
+originalPkgVersion.json
