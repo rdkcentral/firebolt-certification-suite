@@ -133,7 +133,6 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
         Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
       ) {
         cy.fetchLifecycleHistory(appId);
-        cy.setAppObjectStateFromMethod(method, appId);
       }
       const communicationMode = UTILS.getCommunicationMode();
       const additionalParams = {
