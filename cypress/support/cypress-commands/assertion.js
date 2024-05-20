@@ -85,7 +85,10 @@ Cypress.Commands.add(
             cy.getDataFromTestDataJson(errorContentFilePath, validationObject.type).then(
               (errorContentObject) => {
                 if (errorContentObject == CONSTANTS.NO_DATA) {
-                  fireLog(false, `Expected error content not found in ${errorContentFilePath}`);
+                  fireLog.assert(
+                    false,
+                    `Expected error content not found in ${errorContentFilePath}`
+                  );
                 }
                 const apiOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
                   method,
@@ -111,11 +114,11 @@ Cypress.Commands.add(
             );
           });
         } else {
-          fireLog(false, 'Unable to find data for Error validation');
+          fireLog.assert(false, 'Unable to find data for Error validation');
         }
       });
     } catch (error) {
-      fireLog(false, 'Failed to validate error: ' + error);
+      fireLog.assert(false, 'Failed to validate error: ' + error);
     }
   }
 );
@@ -628,7 +631,7 @@ Cypress.Commands.add(
   (response, methodOrEventObject, eventName, expected, eventExpected) => {
     const eventNameForLog = eventName.split('-')[0];
     if (!response) {
-      fireLog(false, `Event response not received for ${eventNameForLog}`);
+      fireLog.assert(false, `Event response not received for ${eventNameForLog}`);
     }
     if (response.error) {
       fireLog.isNull(response.error, 'Expected event response.error to be null');
