@@ -658,10 +658,6 @@ class FireLog {
     return FireLog.instance;
   }
 
-  isNull(value, message) {
-    assert.isNull(value, message);
-  }
-
   isNotNull(value, message) {
     assert.isNotNull(value, message);
   }
