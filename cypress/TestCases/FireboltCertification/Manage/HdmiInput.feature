@@ -151,3 +151,44 @@ Feature: HdmiInput_Manage
       And 1st party app invokes the 'Firebolt' API to 'set autoLowLatencyModeCapable with true'
       And 1st party app invokes the 'Firebolt' API to 'get hdmiinput port with error'
       Then 'Firebolt' platform responds to '1st party app' with 'Invalid parameters for hdmiInput port'
+
+   ## ThunderProxy scenario.
+   @HdmiInput @sdk @thunderProxy @notsupported
+   Scenario Outline: HdmiInput.<Event> - Positive Scenario: Validate <Scenario>
+      When 1st party app registers for the '<Event_Key>' event using the 'Firebolt' API
+      And 1st party app invokes the 'Firebolt' API to 'get hdmiinput port with portId HDMI1'
+      Then 'Firebolt' platform responds to '1st party app' with '<Method_content>'
+      When User triggers event with value as '<Event_Params>'
+      Then 'Firebolt' platform triggers event '<Event_Validation_Key>'
+
+      Examples:
+         | Scenario                                  | Event                             | Event_Key                                   | Method_content                                        | Event_Validation_Key                                        |
+         | Hdmi1 - connected true                    | onConnectionChanged               | hdmiinput onConnectionChanged               | true for hdmiinput port connected                    | true for hdmiinput onConnectionChanged event                |
+         | Hdmi1 - connected false                   | onConnectionChanged               | hdmiinput onConnectionChanged               | false for hdmiinput port connected                   | false for hdmiinput onConnectionChanged event               |
+         | Hdmi1 - signal unknown                    | onSignalChanged                   | hdmiinput onSignalChanged                   | unknown for hdmiinput port signal                    | unknown for hdmiinput onSignalChanged event                 |
+         | Hdmi1 - signal none                       | onSignalChanged                   | hdmiinput onSignalChanged                   | none for hdmiinput port signal                       | none for hdmiinput onSignalChanged event                    |
+         | Hdmi1 - signal stable                     | onSignalChanged                   | hdmiinput onSignalChanged                   | stable for hdmiinput port signal                     | stable for hdmiinput onSignalChanged event                  |
+         | Hdmi1 - signal unstable                   | onSignalChanged                   | hdmiinput onSignalChanged                   | unstable for hdmiinput port signal                   | unstable for hdmiinput onSignalChanged event                |
+         | Hdmi1 - signal unsupported                | onSignalChanged                   | hdmiinput onSignalChanged                   | unsupported for hdmiinput port signal                | unsupported for hdmiinput onSignalChanged event             |
+         | Hdmi1 - autoLowLatencyModeSignalled true  | onAutoLowLatencyModeSignalChanged | hdmiinput onAutoLowLatencyModeSignalChanged | true for hdmiinput port autoLowLatencyModeSignalled  | true for hdmiinput onAutoLowLatencyModeSignalChanged event  |
+         | Hdmi1 - autoLowLatencyModeSignalled false | onAutoLowLatencyModeSignalChanged | hdmiinput onAutoLowLatencyModeSignalChanged | false for hdmiinput port autoLowLatencyModeSignalled | false for hdmiinput onAutoLowLatencyModeSignalChanged event |
+
+   ## ThunderProxy scenario.
+   # Needs to confirm whether the event gets triggered
+   @HdmiInput @sdk @thunderProxy @notsupported
+   Scenario Outline: HdmiInput.onConnectionChanged - Positive Scenario: Validate Hdmi1 - hdmiinput.open
+      When 1st party app registers for the 'hdmiinput onConnectionChanged' event using the 'Firebolt' API
+      And 1st party app invokes the 'Firebolt' API to 'open HDMI1 port'
+      Then 'Firebolt' platform responds to '1st party app' with 'null for hdmi input open'
+      When User triggers event with value as '<Event_Params>'
+      Then 'Firebolt' platform triggers event 'true for hdmiinput onConnectionChanged event'
+
+   ## ThunderProxy scenario.
+   # Needs to confirm whether the event gets triggered
+   @HdmiInput @sdk @thunderProxy @notsupported
+   Scenario Outline: HdmiInput.onConnectionChanged - Positive Scenario: Validate Hdmi1 - hdmiinput.close
+      When 1st party app registers for the 'hdmiinput onConnectionChanged' event using the 'Firebolt' API
+      And 1st party app invokes the 'Firebolt' API to 'close HDMI port'
+      Then 'Firebolt' platform responds to '1st party app' with 'null for hdmi input close'
+      When User triggers event with value as '<Event_Params>'
+      Then 'Firebolt' platform triggers event 'false for hdmiinput onConnectionChanged event'

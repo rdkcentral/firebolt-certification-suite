@@ -318,7 +318,7 @@
             }
         ]
     },
-    "NETWORK_WIFICONNECTED": {
+    "DEVICE_NETWORK_WIFICONNECTED": {
         "method": "device.network",
         "data": [
             {
@@ -333,7 +333,7 @@
             }
         ]
     },
-    "NETWORK_WIFIDISCONNECTED": {
+    "DEVICE_NETWORK_WIFIDISCONNECTED": {
         "method": "device.network",
         "data": [
             {
@@ -348,7 +348,7 @@
             }
         ]
     },
-    "NETWORK_ETHERNETCONNECTED": {
+    "DEVICE_NETWORK_ETHERNETCONNECTED": {
         "method": "device.network",
         "data": [
             {
@@ -363,7 +363,7 @@
             }
         ]
     },
-    "NETWORK_ETHERNETDISCONNECTED": {
+    "DEVICE_NETWORK_ETHERNETDISCONNECTED": {
         "method": "device.network",
         "data": [
             {
@@ -378,7 +378,7 @@
             }
         ]
     },
-    "NETWORK_HYBRIDCONNECTED": {
+    "DEVICE_NETWORK_HYBRIDCONNECTED": {
         "method": "device.network",
         "data": [
             {
@@ -393,7 +393,7 @@
             }
         ]
     },
-    "NETWORK_HYBRIDDISCONNECTED": {
+    "DEVICE_NETWORK_HYBRIDDISCONNECTED": {
         "method": "device.network",
         "data": [
             {
@@ -408,7 +408,7 @@
             }
         ]
     },
-    "NETWORK_WIFIDISCONNECTED_EVENT": {
+    "DEVICE_NETWORK_WIFIDISCONNECTED_EVENT": {
         "method": "device.network",
         "data": [
             {
@@ -423,7 +423,7 @@
             }
         ]
     },
-    "NETWORK_ETHERNETDISCONNECTED_EVENT": {
+    "DEVICE_NETWORK_ETHERNETDISCONNECTED_EVENT": {
         "method": "device.network",
         "data": [
             {
@@ -438,7 +438,7 @@
             }
         ]
     },
-    "NETWORKHYBRIDDISCONNECTED_EVENT": {
+    "DEVICE_NETWORKHYBRIDDISCONNECTED_EVENT": {
         "method": "device.network",
         "data": [
             {

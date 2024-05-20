@@ -101,5 +101,13 @@
         "event": "secondscreen.onCloseRequest",
         "validationJsonPath": "eventResponse",
         "expected": "SECONDSCREEN_ONCLOSEREQUEST"
+    },
+    "ONLAUNCHREQUEST_EVENT": {
+        "method": "secondscreen.onLaunchRequest",
+        "params": "SECONDSCREEN_ONLAUNCHREQUEST_EVENT"
+    },
+    "ONCLOSEREQUEST_EVENT": {
+        "method": "secondscreen.onCloseRequest",
+        "params": "SECONDSCREEN_ONCLOSEREQUEST_EVENT"
     }
 }
