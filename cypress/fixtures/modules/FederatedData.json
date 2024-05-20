@@ -1,4 +1,119 @@
 {
+    "ENTITYINFO": {
+        "correlationId": null,
+        "result": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "entity": {
+                "identifiers": {
+                    "entityId": "345"
+                },
+                "entityType": "program",
+                "programType": "movie",
+                "title": "Cool Runnings",
+                "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                "releaseDate": "1993-01-01T00:00:00.000Z",
+                "contentRatings": [
+                    {
+                        "scheme": "US-Movie",
+                        "rating": "PG"
+                    },
+                    {
+                        "scheme": "CA-Movie",
+                        "rating": "G"
+                    }
+                ],
+                "waysToWatch": [
+                    {
+                        "identifiers": {
+                            "assetId": "123"
+                        },
+                        "expires": "2025-01-01T00:00:00.000Z",
+                        "entitled": true,
+                        "entitledExpires": "2025-01-01T00:00:00.000Z",
+                        "offeringType": "buy",
+                        "price": 2.99,
+                        "videoQuality": [
+                            "UHD"
+                        ],
+                        "audioProfile": [
+                            "dolbyAtmos"
+                        ],
+                        "audioLanguages": [
+                            "en"
+                        ],
+                        "closedCaptions": [
+                            "en"
+                        ],
+                        "subtitles": [
+                            "es"
+                        ],
+                        "audioDescriptions": [
+                            "en"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "PURCHASEDCONTENT": {
+        "correlationId": null,
+        "result": {
+            "totalCount": 10,
+            "expires": "2025-01-01T00:00:00.000Z",
+            "entries": [
+                {
+                    "identifiers": {
+                        "entityId": "345"
+                    },
+                    "entityType": "program",
+                    "programType": "movie",
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "contentRatings": [
+                        {
+                            "scheme": "US-Movie",
+                            "rating": "PG"
+                        },
+                        {
+                            "scheme": "CA-Movie",
+                            "rating": "G"
+                        }
+                    ],
+                    "waysToWatch": [
+                        {
+                            "identifiers": {
+                                "assetId": "123"
+                            },
+                            "expires": "2025-01-01T00:00:00.000Z",
+                            "entitled": true,
+                            "entitledExpires": "2025-01-01T00:00:00.000Z",
+                            "offeringType": "buy",
+                            "price": 2.99,
+                            "videoQuality": [
+                                "UHD"
+                            ],
+                            "audioProfile": [
+                                "dolbyAtmos"
+                            ],
+                            "audioLanguages": [
+                                "en"
+                            ],
+                            "closedCaptions": [
+                                "en"
+                            ],
+                            "subtitles": [
+                                "es"
+                            ],
+                            "audioDescriptions": [
+                                "en"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
     "ENTITY_DETAILS_WAY_TO_WATCH": {
         "entityId": "345"
     },
@@ -1204,7 +1319,6 @@
                 }
             ]
         }
-    
     },
     "PURCHASES_WITH_CONTENTRATINGS": {
         "purchases": {

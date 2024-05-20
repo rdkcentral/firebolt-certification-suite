@@ -1,4 +1,12 @@
 {
+    "PUSH_ENTITYINFO":{
+        "method": "discovery.entityInfo",
+        "params": "FEDERATEDDATA_ENTITYINFO"
+    },
+    "PUSH_PURCHASEDCONTENT":{
+        "method": "discovery.purchasedContent",
+        "params": "FEDERATEDDATA_PURCHASEDCONTENT"
+    },
     "PUSH_ENTITY_DETAILS_DATA":{
         "method": "discovery.details",
         "params": "FEDERATEDDATA_DETAILS"
