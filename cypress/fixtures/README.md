@@ -27,3 +27,60 @@ It contains two json files as : errorContent.json and errorSchemaObject.json. Er
   **errorSchema.json**: Contains error schemas for SDK and Transport mode which include fields for error codes, messages and additional data.
   **lifecycleHistorySchema.json**: Contains lifecycle schema for appID and lifecycle history.
 - versions: Contains different versions of firebolt.json includes versioning, capabilities and openrpc.
+
+### fireboltCalls
+fireboltCalls object has two types as shown below.
+
+1. For making API Calls
+   - method - Name of the API to make a API call
+   - params - Represent the parameters to be sent for a firebolt call.
+   - context - Represent the data that needs to be stored in api/event object that helps to search specific object in a global list.
+   - expected - Determines whether we expect a "result" or an "error."
+
+   Ex:
+   ``` 
+   "KEY_NAME":{
+      "method": "manage_audiodescriptions.setEnabled",
+		  "params": "INTEGER123",
+      "context": "noContext",
+      "expected": "error"
+    }
+   ```
+
+2. For content validation
+   - method or event - Name of the API or Event, which is used to extract the response object from global list for content validation.
+   - validationJsonPath - Represent the JSON path used to obtain a specific value.
+   - context - Represent the data that needs to be stored in api/event object that helps to search specific object in a global list.
+   - expected - Represent the expected value used for validating against a firebolt api response.
+   - expectingError - Determines whether we are performing result or error content validation.
+   Ex:
+   ``` 
+   "ENABLE_AUDIODESCRIPTION_WITH_INTEGER_PARAMETER":{
+      "method": "accessibility.closedCaptionsSettings",
+      "context": "noContext",
+      "validationJsonPath": "result.enabled",
+      "content": "TRUE"
+    }
+
+    "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_DISABLED": {
+      "event": "accessibility.onClosedCaptionsSettingsChanged",
+      "context": "noContext",
+      "validationJsonPath": "eventResponse.enabled",
+      "content": "FALSE"
+    }
+
+    "ONCLOSEDCAPTIONSSETTINGSCHANGED": {
+      "event": "accessibility.onClosedCaptionsSettingsChanged",
+      "validationJsonPath": "eventResponse",
+      "content": "NULL",
+      "expectingError": false
+    }
+   ```
+
+  Note: 
+    - The fields listed below are optional; if any of them are missing, the default values listed below will be added during runtime.
+      - context  - {}
+      - params - {}
+      - validationJsonPath - "result"
+      - content - null
+    - If the firebolt validation object has a'method' field, it validates the method; otherwise, it validates the event.
