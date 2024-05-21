@@ -443,8 +443,17 @@ function assertWithRequirementLogs(pretext, actual, expected, equateDeep = false
       assert(false, pretext + ': ' + JSON.stringify(errorObject));
     });
   } else {
+    let expectedLog = expected;
+    let actualLog = actual;
+    if (Array.isArray(actual) && actual.length < 1) {
+      actualLog = JSON.stringify(actual);
+    }
+    if (Array.isArray(expected) && expected.length < 1) {
+      expectedLog = JSON.stringify(expected);
+    }
+
     cy.log(
-      pretext + ': Expected : ' + expected + ' , Actual : ' + actual,
+      pretext + ': Expected : ' + expectedLog + ' , Actual : ' + actualLog,
       'assertWithRequirementLogs'
     ).then(() => {
       if (equateDeep) {
