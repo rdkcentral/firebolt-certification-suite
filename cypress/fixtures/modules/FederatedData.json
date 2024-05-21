@@ -1225,7 +1225,54 @@
                     "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
                     "releaseDate": "1993-01-01T00:00:00.000Z",
                     "seasonNumber": 2,
+                    "seasonCount": 12,
                     "episodeNumber": 4
+                }
+            }
+        }
+    },
+    "ENTITY_DETAILS_WITH_INFO_SEASONCOUNT": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie",
+                    "assetId": "123",
+                    "appContentData": "FCA app to run test suites"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "seasonNumber": 2,
+                    "seasonCount": 12
+                }
+            }
+        }
+    },
+    "ENTITY_DETAILS_WITH_INFO_EPISODECOUNT": {
+        "entityId": "345",
+        "details": {
+            "expires": "2025-01-01T00:00:00.000Z",
+            "details": {
+                "identifiers": {
+                    "entityId": "345",
+                    "entityType": "program",
+                    "programType": "movie",
+                    "assetId": "123",
+                    "appContentData": "FCA app to run test suites"
+                },
+                "info": {
+                    "title": "Cool Runnings",
+                    "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                    "releaseDate": "1993-01-01T00:00:00.000Z",
+                    "seasonNumber": 2,
+                    "seasonCount": 12,
+                    "episodeNumber": 4,
+                    "episodeCount": 200
                 }
             }
         }

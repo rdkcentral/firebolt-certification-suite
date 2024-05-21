@@ -324,6 +324,14 @@
         "method": "discovery.details",
         "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_INFO_EPISODENUMBER"
     },
+    "PUSH_ENTITY_DETAILS_WITH_INFO_SEASONCOUNT": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_INFO_SEASONCOUNT"
+    },
+    "PUSH_ENTITY_DETAILS_WITH_INFO_EPISODECOUNT": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_INFO_EPISODECOUNT"
+    },
     "PUSH_PURCHASES_WITH_IDENTIFIERS_ASSETID": {
         "method": "discovery.purchases",
         "params": "FEDERATEDDATA_PURCHASES_WITH_IDENTIFIERS_ASSETID"

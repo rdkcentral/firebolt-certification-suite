@@ -66,7 +66,9 @@ Feature: FederatedData
             | Push details with identifiers app content data | push entity details with identifiers appcontentData |
             | Push details with info release date            | push entity details with info releaseDate           |
             | Push details with info Season number           | push entity details with info SeasonNumber          |
+            | Push details with info Season count            | push entity details with info SeasonCount           |
             | Push details with info episode number          | push entity details with info episodeNumber         |
+            | Push details with info episode count           | push entity details with info episodeCount          |
 
     @FederatedData @coreSDK @sdk @transport
     Scenario Outline: Discovery.details - Negative Scenario: <Scenario> expecting error
