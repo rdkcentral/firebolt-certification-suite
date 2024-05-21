@@ -220,7 +220,8 @@ Given(
                             case CONSTANTS.UNDEFINED:
                               cy.undefinedValidation(
                                 fCSValidationjson[expected].data[i],
-                                methodOrEventResponse
+                                methodOrEventObject,
+                                validationType
                               );
                               break;
                             default:
