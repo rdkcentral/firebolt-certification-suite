@@ -78,7 +78,7 @@ fireboltCalls object has two types as shown below.
    ```
 
   Note: 
-    - The fields listed below are optional; if any of them are missing, the default values listed below will be added during runtime.
+    - The fields listed below are optional; if any of them are missing, default values listed below will be added during runtime.
       - context  - {}
       - params - {}
       - validationJsonPath - "result"
