@@ -147,7 +147,7 @@ Cypress.Commands.add('setLifecycleState', (state, appId) => {
  * The app history and events obtained by sending message to 3rd party app is validated against corresponding data extracted from the appObject
  * @param {String} state - State to be used for validation
  * @param {String} appId - The appId used to launch the app which is identified by the firebolt platform servicing the request
- * @param {String} isEventsExpected -
+ * @param {String} isEventsExpected - The boolean value to check if event is expected or not
  * @example
  * cy.validateLifecycleHistoryAndEvents('foreground', 'foo', true)
  */
@@ -201,10 +201,14 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
       if (lifecycleEventRequirementId && lifecycleEventRequirementId.event) {
         const appHistoryPrevious = UTILS.getEnvVariable(CONSTANTS.APP_LIFECYCLE_HISTORY);
         const appHistoryCount = appHistory.length - appHistoryPrevious.length;
-        let pretext = CONSTANTS.NOTIFICATION_EXISTS_REQ + lifecycleEventRequirementId.event.id[0];
+        let pretext;
         // If no lifecycle events expected, validate app history value is also empty
         if (isEventsExpected == false || state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
-          UTILS.assertWithRequirementLogs(pretext, appHistoryCount == 0, true);
+          UTILS.assertWithRequirementLogs(
+            CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED + lifecycleEventRequirementId?.event?.id[0],
+            appHistoryCount >= 1,
+            false
+          );
         } else {
           // Else if lifecycle events expected, get app event data and app object event data
           UTILS.assertWithRequirementLogs(pretext, appHistoryCount >= 1, true);
