@@ -19,6 +19,7 @@ const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS from '../cypress-support/src/utils';
 import lifeCycleAppConfig from '../../../Scripts/lifeCycleAppObject.js';
+const logger = require('../Logger')('lifecycle.js');
 
 /**
  * @module lifecycle
@@ -135,8 +136,8 @@ Cypress.Commands.add('setLifecycleState', (state, appId) => {
   };
   cy.log(CONSTANTS.SET_LIFECYCLE_STATE_REQUEST + JSON.stringify(requestMap)).then(() => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
-      if (result !== false) {
-        console.log(CONSTANTS.SET_APP_STATE + state);
+      if (result) {
+        logger.info(CONSTANTS.SET_APP_STATE + state);
       }
     });
   });
@@ -205,8 +206,7 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
         const appHistoryCount = appHistory.length - appHistoryPrevious.length;
         let pretext;
         // If no lifecycle events expected, validate app history value is also empty
-        if (isEventsExpected == false || state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
-          UTILS.assertWithRequirementLogs(
+        if (isEventsExpected == false || state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {          UTILS.assertWithRequirementLogs(
             CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED + lifecycleEventRequirementId?.event?.id[0],
             appHistoryCount >= 1,
             false
@@ -214,7 +214,7 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
         } else {
           // Else if lifecycle events expected, get app event data and app object event data
           UTILS.assertWithRequirementLogs(
-            CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED,
+            CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED + lifecycleEventRequirementId?.event?.id[0],
             appHistoryCount >= 1,
             true
           );
@@ -293,8 +293,8 @@ Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) 
     try {
       errorObject = JSON.parse(response).report.error;
     } catch (error) {
-      cy.log(CONSTANTS.FAILED_TO_PARSE_LIEFECYCLE_ERROR).then(() => {
-        assert(false, CONSTANTS.FAILED_TO_PARSE_LIEFECYCLE_ERROR);
+      cy.log(CONSTANTS.FAILED_TO_PARSE_LIEFECYCLE_ERROR + response).then(() => {
+        assert(false, CONSTANTS.FAILED_TO_PARSE_LIEFECYCLE_ERROR + response);
       });
       return false;
     }
@@ -346,6 +346,7 @@ Cypress.Commands.add('setAppState', (state, appId) => {
           if (response) {
             cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
           }
+          appObject.setAppObjectState(state);
           cy.lifecycleSchemaChecks(response, state);
           // TODO: Checks for platform support
         });
@@ -355,6 +356,9 @@ Cypress.Commands.add('setAppState', (state, appId) => {
         currentAppState.state != CONSTANTS.LIFECYCLE_STATES.FOREGROUND
       ) {
         cy.launchApp((appType = CONSTANTS.CERTIFICATION), appId);
+        appObject.setAppObjectState(state);
+      } else {
+        appObject.setAppObjectState(state);
       }
       break;
 
@@ -366,7 +370,9 @@ Cypress.Commands.add('setAppState', (state, appId) => {
         currentAppState.state != CONSTANTS.LIFECYCLE_STATES.INITIALIZING
       ) {
         // If current app state is not background, send message to platform to set app state to background
-        cy.setLifecycleState(state, appId);
+        cy.setLifecycleState(state, appId).then(() => {
+          appObject.setAppObjectState(state);
+        });
       }
       break;
 
@@ -379,6 +385,7 @@ Cypress.Commands.add('setAppState', (state, appId) => {
           if (response) {
             cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
           }
+          appObject.setAppObjectState(state);
           cy.lifecycleSchemaChecks(response, state);
           // TODO: Checks for platform support
         });
@@ -391,16 +398,72 @@ Cypress.Commands.add('setAppState', (state, appId) => {
           cy.setAppState(CONSTANTS.LIFECYCLE_STATES.FOREGROUND, appId);
         }
         // Finally, send message to platform to set app state to inactive
-        cy.setLifecycleState(state, appId);
+        cy.setLifecycleState(state, appId).then(() => {
+          appObject.setAppObjectState(state);
+        });
+      }
+      break;
+
+    // Set state to suspended
+    case CONSTANTS.LIFECYCLE_STATES.SUSPENDED:
+      // If current app state is not suspended or inactive,  set app state to inactive first to comply with allowed transitions
+      if (currentAppState.state != CONSTANTS.LIFECYCLE_STATES.SUSPENDED) {
+        if (currentAppState.state != CONSTANTS.LIFECYCLE_STATES.INACTIVE) {
+          cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, appId);
+        }
+        // Send lifecycle.suspend API call to 3rd party app
+        cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.SUSPEND, {}).then((response) => {
+          if (response) {
+            cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
+          }
+          appObject.setAppObjectState(state);
+          cy.lifecycleSchemaChecks(response, state);
+          // TODO: Checks for platform support
+        });
+      }
+      break;
+
+    // Set state to unloading
+    case CONSTANTS.LIFECYCLE_STATES.UNLOADING:
+      // If current app state is initializing or null,  set app state to inactive first
+      if (currentAppState.state !== CONSTANTS.LIFECYCLE_STATES.INACTIVE) {
+        cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, appId);
+      }
+      // Send lifecycle.close API call to 3rd party app
+      cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.CLOSE, {
+        reason: CONSTANTS.ERROR,
+      }).then((response) => {
+        if (response) {
+          cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
+        }
+        appObject.setAppObjectState(state);
+        cy.lifecycleSchemaChecks(response, state);
+        // TODO: Checks for platform support
+        // cy.fireBoltApi(LifecycleManagement.unload())
+      });
+      break;
+
+    // Set state to unloaded/terminated
+    case CONSTANTS.LIFECYCLE_STATES.UNLOADED:
+    case CONSTANTS.LIFECYCLE_STATES.TERMINATED:
+      // If current app state is initializing or null,  set app state to unloading first
+      if (
+        currentAppState.state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING ||
+        currentAppState.state == CONSTANTS.NULL
+      ) {
+        cy.setAppState(CONSTANTS.LIFECYCLE_STATES.UNLOADING, appId);
+        // Send lifecycle.finished API call to 3rd party app
+        cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.FINISHED, {}).then((response) => {
+          if (response) {
+            cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
+          }
+          appObject.setAppObjectState(state);
+        });
       }
       break;
 
     default:
       break;
-  }
-  if (state != CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
-    // Set app object state to provided state
-    appObject.setAppObjectState(state);
   }
 });
 
@@ -418,7 +481,7 @@ Cypress.Commands.add('fetchLifecycleHistory', (appId) => {
       cy.log(CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + response);
       const historyValue = _.get(JSON.parse(response), 'report.result._history._value', null);
       _.isEmpty(historyValue)
-        ? console.log(CONSTANTS.APP_HISTORY_EMPTY)
+        ? logger.info(CONSTANTS.APP_HISTORY_EMPTY)
         : Cypress.env(CONSTANTS.APP_LIFECYCLE_HISTORY, historyValue);
     });
   } catch (error) {
@@ -460,7 +523,13 @@ Cypress.Commands.add('setAppObjectStateFromMethod', (method, appId) => {
   switch (method) {
     case CONSTANTS.LIFECYCLE_APIS.CLOSE.toLowerCase():
       const appObject = Cypress.env(appId);
-      appObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INACTIVE);
+      if (
+        appObject.getAppObjectState().state !== CONSTANTS.LIFECYCLE_STATES.UNLOADING &&
+        appObject.getAppObjectState().state !== CONSTANTS.LIFECYCLE_STATES.SUSPENDED &&
+        appObject.getAppObjectState().state !== CONSTANTS.LIFECYCLE_STATES.INITIALIZING
+      ) {
+        appObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INACTIVE);
+      }
       break;
     // Support for other methods can be added in future if needed
     default:
