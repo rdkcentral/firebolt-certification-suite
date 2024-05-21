@@ -142,10 +142,7 @@ Cypress.Commands.add(
             fireLog.equal(checkErrorMessage, true, 'Error Message Validation: ');
           });
         } else {
-          fireLog.assert(
-            false,
-            `Expected error content not found in ${errorContentFilePath}`
-          );
+          fireLog.assert(false, `Expected error content not found in ${errorContentFilePath}`);
         }
       } catch (error) {
         fireLog.assert(false, 'Failed to validate error: ' + error);
@@ -153,8 +150,6 @@ Cypress.Commands.add(
     }
   }
 );
-
-
 
 /**
  * @module assertion
