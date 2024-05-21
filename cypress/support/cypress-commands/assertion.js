@@ -142,14 +142,19 @@ Cypress.Commands.add(
             fireLog.equal(checkErrorMessage, true, 'Error Message Validation: ');
           });
         } else {
-          fireLog(false, `Expected error content not found in fixtures`);
+          fireLog.assert(
+            false,
+            `Expected error content not found in ${errorContentFilePath}`
+          );
         }
       } catch (error) {
-        fireLog(false, 'Failed to validate error: ' + error);
+        fireLog.assert(false, 'Failed to validate error: ' + error);
       }
     }
   }
 );
+
+
 
 /**
  * @module assertion
@@ -660,7 +665,7 @@ Cypress.Commands.add(
   (response, methodOrEventObject, eventName, eventExpected) => {
     const eventNameForLog = eventName.split('-')[0];
     if (!response) {
-      fireLog(false, `Event response not received for ${eventNameForLog}`);
+      fireLog.assert(false, `Event response not received for ${eventNameForLog}`);
     }
     if (response.error) {
       fireLog.isNull(response.error, 'Expected event response.error to be null');
