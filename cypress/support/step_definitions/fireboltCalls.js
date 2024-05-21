@@ -419,5 +419,7 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
  * And User triggers event with value as ' DEVICE_ONHDCPCHANGED_EVENTS'
  */
 Given(/User triggers event with value as '(.+)'/, (key) => {
-  throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+  cy.log(CONSTANTS.STEP_DEFINITION_NEEDS_TO_IMPLEMENT).then(() => {
+    throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+  });
 });
