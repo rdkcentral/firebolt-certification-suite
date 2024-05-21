@@ -566,8 +566,8 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
 
     cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
-      message='Response for marker creation: '
-        fireLog.isTrue(result.success, result.message);
+      let message = 'Response for marker creation: ' + JSON.stringify(result);
+      fireLog.isTrue(result.success, result.message);
     });
   }
 });
