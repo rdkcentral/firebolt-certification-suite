@@ -35,12 +35,14 @@ Cypress.Commands.add('lifecycleSetup', (appCallSign, state) => {
 
   if (Cypress.env(CONSTANTS.TEST_TYPE) == CONSTANTS.MODULE_NAMES.LIFECYCLE) {
     // create lifecycleAppObject to mimic all the state transition for an app and also go through the same state histories
-    const lifeCycleAppObject = new lifeCycleAppConfig(appId);
-    // set the state to initialising
-    lifeCycleAppObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INITIALIZING);
-    // store the lifecycleAppObject in global object and push it to a global list
-    Cypress.env(appId, lifeCycleAppObject);
-    Cypress.env(CONSTANTS.LIFECYCLE_APP_OBJECT_LIST).push(appId);
+    if (!Cypress.env(CONSTANTS.LIFECYCLE_APP_OBJECT_LIST).includes(appId)) {
+      const lifeCycleAppObject = new lifeCycleAppConfig(appId);
+      // set the state to initialising
+      lifeCycleAppObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INITIALIZING);
+      // store the lifecycleAppObject in global object and push it to a global list
+      Cypress.env(appId, lifeCycleAppObject);
+      Cypress.env(CONSTANTS.LIFECYCLE_APP_OBJECT_LIST).push(appId);
+    }
 
     if (state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
       Cypress.env(CONSTANTS.APP_LIFECYCLE_HISTORY, []);
@@ -211,7 +213,11 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
           );
         } else {
           // Else if lifecycle events expected, get app event data and app object event data
-          UTILS.assertWithRequirementLogs(pretext, appHistoryCount >= 1, true);
+          UTILS.assertWithRequirementLogs(
+            CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED,
+            appHistoryCount >= 1,
+            true
+          );
           for (let eventIndex = 1; eventIndex <= appHistoryCount; eventIndex++) {
             const newAppEvent = appHistory[appHistory.length - eventIndex];
             let appObjectEvent;

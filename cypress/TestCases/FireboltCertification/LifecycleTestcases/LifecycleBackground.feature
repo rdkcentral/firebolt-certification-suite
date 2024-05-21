@@ -57,4 +57,4 @@ Feature: Lifecycle_Background
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'initializing' state
         When '3rd party app' transitions to state 'background'
-        Then '3rd party app' will be in 'initializing' state
+        Then '3rd party app' will stay in 'initializing' state
