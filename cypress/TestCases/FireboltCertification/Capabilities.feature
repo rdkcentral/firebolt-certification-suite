@@ -31,7 +31,6 @@ Feature: Capabilities
       | Validate acknowledgechallenge capability available in platform | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
       | Validate pinchallenge capability available in platform         | check availability of pinchallenge capability         | true for pinchallenge capability availability         |
 
-
   @Capabilities @coreSDK
   Scenario Outline: Capabilities.granted - Positive Scenario: <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'

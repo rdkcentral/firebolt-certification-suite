@@ -187,7 +187,7 @@ const variableValue = UTILS.getEnvVariable('YOUR_ENV_VARIABLE');
 ### Purpose: Function to check if the platform specific env variables and params are provided in the required format for testing
 
 ### PreRequisites: 
-- A json file with all required mandatory parameters should be placed with corresponding configModule's testData folder.
+- A json file with all required mandatory parameters should be placed with corresponding configModule's fixtures folder.
 - The json file should contain a list of params with each object having name and result as the keys. Within result, there should be the param's name, summary and schema with   which it should be validated
 - The json file should be in the following format :
 ```

@@ -19,24 +19,8 @@
     "fireboltMock": "PINCHALLENGE_CORRECT_PIN",
     "firstParty": true
   },
-  "ACKNOWLEDGE_DENY": {
-    "fireboltMock": "SET_ACKNOWLEDGE_DENY",
-    "firstParty": true
-  },
-  "ACKNOWLEDGE_GRANTED": {
-    "fireboltMock": "SET_ACKNOWLEDGE_GRANTED",
-    "firstParty": true
-  },
   "WRONG_PINCHALLENGE_PIN": {
     "fireboltMock": "PINCHALLENGE_WRONG_PIN",
-    "firstParty": true
-  },
-  "ACKNOWLEDGE_DEFERRED": {
-    "fireboltMock": "SET_ACKNOWLEDGE_DEFERRED",
-    "firstParty": true
-  },
-  "ACKNOWLEDGE_TIMEOUT": {
-    "fireboltMock": "SET_ACKNOWLEDGE_TIMEOUT",
     "firstParty": true
   },
   "SET_WIFI_WITH_WPA2PSK_SECURITY": {
@@ -51,16 +35,32 @@
     "fireboltMock": "PINCHALLENGE_CORRECT_PIN",
     "firstParty": true
   },
+  "SET_PINCHALLENGE_WRONG_PIN": {
+    "fireboltMock": "PINCHALLENGE_WRONG_PIN",
+    "firstParty": true
+  },
   "SET_ACKNOWLEDGE_DENY": {
-    "fireboltMock": "ACKNOWLEDGE_DENY",
+    "fireboltMock": "SET_ACKNOWLEDGE_DENY",
     "firstParty": true
   },
   "SET_ACKNOWLEDGE_GRANTED": {
-    "fireboltMock": "ACKNOWLEDGE_GRANTED",
+    "fireboltMock": "SET_ACKNOWLEDGE_GRANTED",
     "firstParty": true
   },
-  "SET_PINCHALLENGE_WRONG_PIN": {
-    "fireboltMock": "PINCHALLENGE_WRONG_PIN",
+  "SET_ACKNOWLEDGE_DEFERRED": {
+    "fireboltMock": "SET_ACKNOWLEDGE_DEFERRED",
+    "firstParty": true
+  },
+  "SET_ACKNOWLEDGE_TIMEOUT": {
+    "fireboltMock": "SET_ACKNOWLEDGE_TIMEOUT",
+    "firstParty": true
+  },
+  "ACKNOWLEDGE_DENY": {
+    "fireboltMock": "SET_ACKNOWLEDGE_DENY",
+    "firstParty": true
+  },
+  "ACKNOWLEDGE_GRANTED": {
+    "fireboltMock": "SET_ACKNOWLEDGE_GRANTED",
     "firstParty": true
   }
 }

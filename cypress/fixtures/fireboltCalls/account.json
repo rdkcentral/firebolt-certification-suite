@@ -39,11 +39,6 @@
         "method": "manage_account.session",
 		"params": "ACCOUNT_SESSION"
     },
-    "NULL_FOR_ACCOUNT_SESSION":{
-        "method": "account.session",
-		"validationJsonPath": "result",
-		"expected": "NULL"
-    },
     "GET_ADVERTISINGID_WITH_CUSTOM_ERROR":{
         "method": "advertising.advertisingId",
 		"params": "TRUE",

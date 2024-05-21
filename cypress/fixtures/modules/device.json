@@ -54,5 +54,6 @@
     "NETWORK_ETHERNET_DISCONNECTED_EVENT": {
         "state": "disconnected",
         "type": "ethernet"
-    }
+    },
+    "NAME_BEDROOM": "Bedroom"
 }
