@@ -457,9 +457,9 @@ function assertWithRequirementLogs(pretext, actual, expected, equateDeep = false
       'assertWithRequirementLogs'
     ).then(() => {
       if (equateDeep) {
-        assert.deepEqual(actual, expected, pretext);
+        fireLog.deepEqual(actual, expected, pretext);
       } else {
-        assert.equal(actual, expected, pretext);
+        fireLog.equal(actual, expected, pretext);
       }
     });
   }

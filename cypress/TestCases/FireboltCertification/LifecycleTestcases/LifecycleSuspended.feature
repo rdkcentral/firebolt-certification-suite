@@ -47,7 +47,7 @@ Feature: Lifecycle_Suspended
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with '<state>' state
         When '3rd party app' transitions to state 'suspended'
-        Then '3rd party app' will be in '<state>' state
+        Then '3rd party app' will stay in '<state>' state
 
         Examples:
             | state      |

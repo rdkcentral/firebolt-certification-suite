@@ -329,8 +329,7 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
       : app === CONSTANTS.FIRST_PARTY_APP
         ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
         : app;
-  let isEventsExpected;
-  condition == CONSTANTS.STAY ? (isEventsExpected = false) : (isEventsExpected = true);
+  const isEventsExpected = condition == CONSTANTS.STAY ? false : true;
   const appObject = UTILS.getEnvVariable(appId);
   cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
   cy.validateLifecycleHistoryAndEvents(
