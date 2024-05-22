@@ -1751,7 +1751,7 @@
             "albumId": "album/xyz"
         }
     },
-    "REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_RESPONSE": {
+    "REQUESTUSERINTEREST_WITH_REASON_PLAYLIST_RESPONSE": {
         "identifiers": {
             "entityId": "345",
             "entityType": "playlist"
@@ -1772,7 +1772,7 @@
             ]
         }
     },
-    "REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_RESPONSE": {
+    "REQUESTUSERINTEREST_WITH_REASON_REACTION_RESPONSE": {
         "identifiers": {
             "entityId": "123",
             "entityType": "channel",
@@ -1790,6 +1790,24 @@
                 {
                     "scheme": "CA-Movie",
                     "rating": "G"
+                }
+            ]
+        }
+    },
+    "REQUESTUSERINTEREST_WITH_REASON_RECORDING_RESPONSE": {
+        "identifiers": {
+            "entityId": "981",
+            "entityType": "music",
+            "musicType": "song" 
+        },
+        "info": {
+            "title": "User Interest",
+            "synopsis": "User Interest request provider",
+            "releaseDate": "1993-01-01T00:00:00.000Z",
+            "contentRatings": [
+                {
+                    "scheme": "US-TV",
+                    "rating": "PG"
                 }
             ]
         }

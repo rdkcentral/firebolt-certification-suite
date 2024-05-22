@@ -437,15 +437,20 @@
         "validationJsonPath": "eventResponse.request",
         "expected": "DISCOVERY_TYPE_DISINTEREST_REASON_RECORDING"
     },
-    "REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST": {
+    "REQUESTUSERINTEREST_WITH_REASON_PLAYLIST": {
         "method": "content.requestUserInterest",
         "validationJsonPath": "result",
-        "expected": "DISCOVERY_REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_RESPONSE"
+        "expected": "DISCOVERY_REQUESTUSERINTEREST_WITH_REASON_PLAYLIST_RESPONSE"
     },
-    "REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION": {
+    "REQUESTUSERINTEREST_WITH_REASON_REACTION": {
         "method": "content.requestUserInterest",
         "validationJsonPath": "result",
-        "expected": "DISCOVERY_REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_RESPONSE"
+        "expected": "DISCOVERY_REQUESTUSERINTEREST_WITH_REASON_REACTION_RESPONSE"
+    },
+    "REQUESTUSERINTEREST_WITH_REASON_RECORDING": {
+        "method": "content.requestUserInterest",
+        "validationJsonPath": "result",
+        "expected": "DISCOVERY_REQUESTUSERINTEREST_WITH_REASON_RECORDING_RESPONSE"
     },
     "GET_USERINTEREST_WITH_TYPE_INTEREST_WITH_MUSIC_SONG_ENTITY_DATA": {
         "method": "discovery.userInterest",

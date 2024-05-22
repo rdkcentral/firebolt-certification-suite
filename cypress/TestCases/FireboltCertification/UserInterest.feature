@@ -157,13 +157,13 @@ Feature: UserInterest
         Then 'Firebolt' platform responds to '1st party app' with '<method_Content>'
 
         Examples:
-            | Scenario                         | setParam                     | method_Content                                         |
-            | interest and reason playlist     | interest reason playlist     | requestUserInterest with type interest reason playlist |
-            | interest and reason reaction     | interest reason reaction     | requestUserInterest with type interest reason reaction |
-            | interest and reason recording    | interest reason recording    | requestUserInterest with type interest reason playlist |
-            | disinterest and reason playlist  | disinterest reason playlist  | requestUserInterest with type interest reason playlist |
-            | disinterest and reason reaction  | disinterest reason reaction  | requestUserInterest with type interest reason playlist |
-            | disinterest and reason recording | disinterest reason recording | requestUserInterest with type interest reason playlist |
+            | Scenario                         | setParam                     | method_Content                            |
+            | interest and reason playlist     | interest reason playlist     | requestUserInterest with reason playlist  |
+            | interest and reason reaction     | interest reason reaction     | requestUserInterest with reason reaction  |
+            | interest and reason recording    | interest reason recording    | requestUserInterest with reason recording |
+            | disinterest and reason playlist  | disinterest reason playlist  | requestUserInterest with reason playlist  |
+            | disinterest and reason reaction  | disinterest reason reaction  | requestUserInterest with reason reaction  |
+            | disinterest and reason recording | disinterest reason recording | requestUserInterest with reason recording |
 
     @coreSDK @sdk @transport @userinterest
     Scenario Outline: Content.requestUserInterest - Negative Scenario: <Scenario> expecting error
