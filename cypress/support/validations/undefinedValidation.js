@@ -10,6 +10,7 @@
  */
 
 const CONSTANTS = require('../constants/constants');
+const { fireLog } = require('../cypress-support/src/utils');
 
 Cypress.Commands.add(
   'undefinedValidation',
@@ -32,9 +33,9 @@ Cypress.Commands.add(
         validationTypeObject.validations.forEach((validation) => {
           // If the field to be validated is result, directly assert if result stored in response is undefined
           if (validation.field === CONSTANTS.RESULT) {
-            firelog.isUndefined(
+            fireLog.isUndefined(
               methodOrEventResponse.result,
-              `Expected ${methodOrEventName} response to have the field "${validation.field} as undefined`
+              `Undefined Validation : Expected ${methodOrEventName} response to have the field ${validation.field} as undefined`
             );
           } else {
             // Else recursilvely access the nested field properties and verify the corresponding value in response is undefined
@@ -44,29 +45,46 @@ Cypress.Commands.add(
             for (let i = 0; i < fieldParts.length - 1; i++) {
               const part = fieldParts[i];
               if (!currentObject || typeof currentObject[part] === CONSTANTS.UNDEFINED) {
-                logger.error(
-                  `Expected ${methodOrEventName} response to have property ${part} in the field "${validation.field}`,
-                  'undefinedValidation'
-                );
+                cy.log(
+                  `Undefined Validation : Expected ${methodOrEventName} response to have property ${part} in the field ${validation.field}`
+                ).then(() => {
+                  assert(
+                    false,
+                    `Expected ${methodOrEventName} response to have property ${part} in the field ${validation.field}`
+                  );
+                });
               }
               currentObject = currentObject[part];
             }
             // Else assert if provided field is undefined
             const finalPart = fieldParts[fieldParts.length - 1];
-            firelog.isUndefined(
+            fireLog.isUndefined(
               currentObject[finalPart],
-              `Expected ${methodOrEventName} response to have the field "${validation.field} as undefined`
+              `Undefined Validation : Expected ${methodOrEventName} response to have the field ${validation.field} as undefined`
             );
           }
         });
       } catch (error) {
         cy.log(
-          'Received following error while performing validation of type undefined on response',
-          JSON.stringify(error)
-        );
+          `Undefined Validation : Received following error while performing validation of type undefined on response',
+        ${JSON.stringify(error)}`
+        ).then(() => {
+          assert(
+            false,
+            `Undefined Validation : Received following error while performing validation of type undefined on response',
+          ${JSON.stringify(error)}`
+          );
+        });
       }
     } else {
-      logger.info('Validation object or object in global list is undefined', 'undefinedValidation');
+      cy.log(
+        `Undefined Validation : Expected validation object or api/event object stored in global list to not be undefined`
+      ).then(() => {
+        assert(
+          false,
+          'Undefined Validation : Expected validation object or api/event object stored in global list to not be undefined'
+        );
+      });
     }
   }
 );
