@@ -1754,12 +1754,33 @@
     "REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_RESPONSE": {
         "identifiers": {
             "entityId": "345",
-            "entityType": "program",
-            "programType": "movie"
+            "entityType": "playlist"
         },
         "info": {
-            "title": "Cool Runnings",
-            "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+            "title": "User Interest",
+            "synopsis": "User Interest request provider",
+            "releaseDate": "1993-01-01T00:00:00.000Z",
+            "contentRatings": [
+                {
+                    "scheme": "US-Movie",
+                    "rating": "PG"
+                },
+                {
+                    "scheme": "CA-Movie",
+                    "rating": "G"
+                }
+            ]
+        }
+    },
+    "REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_RESPONSE": {
+        "identifiers": {
+            "entityId": "123",
+            "entityType": "channel",
+            "channelType": "streaming"
+        },
+        "info": {
+            "title": "User Interest",
+            "synopsis": "User Interest request provider",
             "releaseDate": "1993-01-01T00:00:00.000Z",
             "contentRatings": [
                 {

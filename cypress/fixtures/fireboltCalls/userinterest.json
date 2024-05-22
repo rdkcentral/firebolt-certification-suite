@@ -439,8 +439,13 @@
     },
     "REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST": {
         "method": "content.requestUserInterest",
-        "validationJsonPath": "result.entity",
+        "validationJsonPath": "result",
         "expected": "DISCOVERY_REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_RESPONSE"
+    },
+    "REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION": {
+        "method": "content.requestUserInterest",
+        "validationJsonPath": "result",
+        "expected": "DISCOVERY_REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_RESPONSE"
     },
     "GET_USERINTEREST_WITH_TYPE_INTEREST_WITH_MUSIC_SONG_ENTITY_DATA": {
         "method": "discovery.userInterest",

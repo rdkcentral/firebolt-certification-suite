@@ -2676,6 +2676,28 @@
                     }
                 ]
             }
+        },
+        "UserInterest": {
+          "Content.requestUserInterest - Positive Scenario: with type interest and reason playlist": {
+            "req": [
+              {
+                "method": {
+                  "id": "UserInterest 1.0",
+                  "description": "Positive Scenario: with type interest and reason playlist"
+                }
+              }
+            ]
+          },
+          "Content.requestUserInterest - Positive Scenario: with type interest and reason reaction": {
+            "req": [
+              {
+                "method": {
+                  "id": "UserInterest 1.1",
+                  "description": "Positive Scenario: with type interest and reason playlist"
+                }
+              }
+            ]
+          }
         }
     }
 }
