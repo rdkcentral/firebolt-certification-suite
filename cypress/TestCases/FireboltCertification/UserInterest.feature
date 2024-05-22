@@ -7,7 +7,7 @@ Feature: UserInterest
 
     @coreSDK @sdk @transport @userinterest
     Scenario Outline: Discovery.userInterest - Positive Scenario: with interest type <Scenario>
-        When 1st party app invokes the 'Firebolt' API to 'discovery onRequestUserInterest'
+        When 1st party app invokes the 'Firebolt' API to 'Content onUserInterest'
         And '3rd party app' invokes the 'Firebolt' API to 'get userInterest with <GetParam>'
         Then 'Firebolt' platform responds with 'null for discovery userInterest'
         And 'Firebolt' platform triggers event '<Event_Content>'
@@ -151,21 +151,21 @@ Feature: UserInterest
             | Invalid programType for program entity with seriesId    | with invalid programType for program entity with seriesId    |
             | Invalid programType for program entity with seasonId    | with invalid programType for program entity with seasonId    |
 
-    # @coreSDK @sdk @transport @userinterest
+    @coreSDK @sdk @userinterest
     Scenario Outline: 'Discovery_content.requestUserInterest - Positive Scenario: with type <Scenario>
         When '3rd party app' registers for the 'discovery onRequestUserInterest' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to 'get requestUserInterest with type <setParam>'
-        Then 'Firebolt' platform responds with '<method_Content>'
+        Then 'Firebolt' platform responds to '1st party app' with '<method_Content>'
         #     And 'Firebolt' platform triggers event '<Event_Content>'
 
         Examples:
-            | Scenario                         | setParam                     | method_Content                                         | Event_Content                                              |
-            | interest and reason playlist     | interest reason playlist     | requestUserInterest with type interest reason playlist | onRequestUserInterest with type interest reason playlist   |
-            | interest and reason reaction     | interest reason reaction     | requestUserInterest with type interest reason playlist | onRequestUserInterest with type interest reason reaction   |
-            | interest and reason recording    | interest reason recording    | requestUserInterest with type interest reason playlist | onRequestUserInterest with type interest reason recording  |
-            | disinterest and reason playlist  | disinterest reason playlist  | requestUserInterest with type interest reason playlist | onRequestUserInterest with type dinterest reason playlist  |
-            | disinterest and reason reaction  | disinterest reason reaction  | requestUserInterest with type interest reason playlist | onRequestUserInterest with type dinterest reason reaction  |
-            | disinterest and reason recording | disinterest reason recording | requestUserInterest with type interest reason playlist | onRequestUserInterest with type dinterest reason recording |
+            | Scenario                         | setParam                     | method_Content                                                  | Event_Content                                              |
+            | interest and reason playlist     | interest reason playlist     | requestUserInterest with type interest reason playlist response | onRequestUserInterest with type interest reason playlist   |
+            | interest and reason reaction     | interest reason reaction     | requestUserInterest with type interest reason playlist          | onRequestUserInterest with type interest reason reaction   |
+            | interest and reason recording    | interest reason recording    | requestUserInterest with type interest reason playlist          | onRequestUserInterest with type interest reason recording  |
+            | disinterest and reason playlist  | disinterest reason playlist  | requestUserInterest with type interest reason playlist          | onRequestUserInterest with type dinterest reason playlist  |
+            | disinterest and reason reaction  | disinterest reason reaction  | requestUserInterest with type interest reason playlist          | onRequestUserInterest with type dinterest reason reaction  |
+            | disinterest and reason recording | disinterest reason recording | requestUserInterest with type interest reason playlist          | onRequestUserInterest with type dinterest reason recording |
 
     @coreSDK @sdk @transport @userinterest
     Scenario Outline: Discovery_content.requestUserInterest - Negative Scenario: <Scenario> expecting error
