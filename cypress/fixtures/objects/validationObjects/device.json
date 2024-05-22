@@ -81,7 +81,7 @@
                 "validations": [
                     {
                         "mode": "fixture",
-                        "type": "VIDEORESOLUTION",
+                        "type": "DEVICERESOLUTION",
                         "description": "Validation of the Device videoResolution"
                     }
                 ]
@@ -137,6 +137,7 @@
                 "type": "regEx",
                 "validations": [
                     {
+                        "mode": "regex",
                         "type": "UID",
                         "description": "Validation of the Device uid"
                     }

@@ -12,27 +12,27 @@
     "ACCOUNT_ID": {
 		"method": "account.id",
 		"validationJsonPath": "result",
-		"expected": "ACCOUNT_ID"
+		"content": "ACCOUNT_ID"
 	},
     "ACCOUNT_UID": {
 		"method": "account.uid",
 		"validationJsonPath": "result",
-		"expected": "ACCOUNT_UID"
+		"content": "ACCOUNT_UID"
 	},
     "INVALID_PARAMETER_ERROR_FOR_ACCOUNT_ID": {
 		"method": "account.id",
 		"validationJsonPath": "result",
-		"expected": "INVALID_TYPE_PARAMS"
+		"content": "INVALID_TYPE_PARAMS"
 	},
     "INVALID_PARAMETER_ERROR_FOR_ACCOUNT_UID": {
 		"method": "account.uid",
 		"validationJsonPath": "result",
-		"expected": "INVALID_TYPE_PARAMS"
+		"content": "INVALID_TYPE_PARAMS"
 	},
     "INVALID_REQUEST_ERROR_FOR_ACCOUNT_UID": {
 		"method": "account.uid",
 		"validationJsonPath": "result",
-		"expected": "INVALID_REQUEST",
+		"content": "INVALID_REQUEST",
         "expectingError": true
 	},
     "PUSH_SESSION_TOKEN":{
@@ -52,7 +52,7 @@
 	"INVALID_PARAMETERS_FOR_ACCOUNT_SESSION": {
 		"method": "account.session",
 		"validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
 	},
     "SET_ACCOUNT_SESSION_WITH_INVALID_EXPIRESIN":{

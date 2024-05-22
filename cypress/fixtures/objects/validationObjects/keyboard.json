@@ -6,6 +6,7 @@
                 "type": "regEx",
                 "validations": [
                     {
+                        "mode": "regex",
                         "type": "EMAIL",
                         "description": "Validation of the Keyboard email Format"
                     }
@@ -20,6 +21,7 @@
                 "type": "regEx",
                 "validations": [
                     {
+                        "mode": "regex",
                         "type": "PASSWORD",
                         "description": "Validation of the Keyboard password Format"
                     }
@@ -34,6 +36,7 @@
                 "type": "regEx",
                 "validations": [
                     {
+                        "mode": "regex",
                         "type": "EMAIL",
                         "description": "Validation of the Keyboard Standard Format"
                     }
