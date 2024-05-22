@@ -29,6 +29,8 @@ const logger = require('../../Logger')('main.js');
 const setimmediate = require('setimmediate');
 let appTransport;
 const flatted = require('flatted');
+const internalV2FireboltCallsData = require('../../../fixtures/fireboltCalls/index');
+const externalV2FireboltCallsData = require('../../../fixtures/external/fireboltCalls/index');
 
 export default function (module) {
   const config = new Config(module);
@@ -69,6 +71,15 @@ export default function (module) {
         'Performance metrics service not active. To use perforance metrics service, pass performanceMetrics environment variable as true'
       );
     }
+
+    const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
+    const v2FireboltCallsData = { ...internalV2FireboltCallsData, ...externalV2FireboltCallsData };
+
+    cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
+      (mergedFireboltCalls) => {
+        Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
+      }
+    );
 
     // Unflatten the openRPC data
     const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
