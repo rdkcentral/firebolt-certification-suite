@@ -46,32 +46,32 @@
     "PLATFORM_AUTHENTICATION_TOKEN": {
 		"method": "authentication.token",
 		"validationJsonPath": "result",
-		"expected": "AUTHENTICATION_DECODE_JWT_AUTHENTICATION_TOKEN"
+		"content": "AUTHENTICATION_DECODE_JWT_AUTHENTICATION_TOKEN"
 	},
     "DECODE_BASE64_AUTHENTICATION_TOKEN": {
 		"method": "authentication.token",
 		"validationJsonPath": "result",
-		"expected": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_TOKEN"
+		"content": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_TOKEN"
 	},
     "AUTHENTICATION_DEVICE": {
 		"method": "authentication.device",
 		"validationJsonPath": "result",
-		"expected": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_DEVICE_TOKEN"
+		"content": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_DEVICE_TOKEN"
 	},
     "AUTHENTICATION_SESSION": {
 		"method": "authentication.session",
 		"validationJsonPath": "result",
-		"expected": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_SESSION_TOKEN"
+		"content": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_SESSION_TOKEN"
 	},
     "AUTHENTICATION_ROOT": {
 		"method": "authentication.root",
 		"validationJsonPath": "result",
-		"expected": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_ROOT_TOKEN"
+		"content": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_ROOT_TOKEN"
 	},
     "INVALID_PARAMETER_ERROR_AUTHENTICATION_TOKEN": {
 		"method": "authentication.token",
 		"validationJsonPath": "result",
-		"expected": "INVALID_TYPE_PARAMS",
+		"content": "INVALID_TYPE_PARAMS",
         "expectingError": true
 	},
     "EXPECT_ERROR_FOR_DEVICE_TOKEN":{
@@ -81,7 +81,7 @@
     "INVALID_REQUEST_FOR_AUTHENTICATION_DEVICE": {
         "method": "authentication.device",
         "validationJsonPath": "result",
-        "expected": "INVALID_REQUEST",
+        "content": "INVALID_REQUEST",
         "expectingError": true
     }
 }

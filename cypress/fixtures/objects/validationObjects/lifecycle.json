@@ -5,7 +5,11 @@
                 "type": "miscellaneous",
                 "validations": [
                     {
-                        "type": "lifecycleFinishedError",
+                        "mode": "lifecycleFinishedError",
+                        "type": {
+                            "errorMessage": ["Custom error","Cannot call finished"],
+                            "errorCode": [-32001]
+                          },
                         "description": "Validation of the lifecycle finished"
                     }
                 ]
