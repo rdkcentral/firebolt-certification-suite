@@ -466,7 +466,8 @@
         "expectingError": false
     },
     "GET_USERINTEREST_WITHOUT_ANY_PARAMS": {
-        "method": "discovery.userInterest"
+        "method": "discovery.userInterest",
+        "expected": "error"
     },
     "GET_USERINTEREST_WITHOUT_INTEREST_TYPE": {
         "method": "discovery.userInterest",

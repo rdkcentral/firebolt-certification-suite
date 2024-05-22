@@ -170,10 +170,10 @@ Feature: UserInterest
     @coreSDK @sdk @transport @userinterest
     Scenario Outline: Discovery_content.requestUserInterest - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to 'get requestUserInterest with <param>'
-        Then 'Firebolt' platform responds with 'invalid params for content requestUserInterest'
+        Then 'Firebolt' platform responds to '1st party app' with 'invalid params for content requestUserInterest'
 
         Examples:
-            | Scenario                               | Param                |
+            | Scenario                               | param                |
             | Invalid Interest value - test params   | invalid interestType |
             | Invalid Interest type - boolean params | boolean interestType |
             | Invalid reason value - test params     | invalid reasonType   |
