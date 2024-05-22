@@ -40,7 +40,7 @@ Cypress.Commands.add(
     } else if (callType == CONSTANTS.SUPPORTED_CALLTYPES.SET_RESPONSE_JSON) {
       fireboltData = UTILS.getEnvVariable('setResponseJson')[key];
     } else {
-      fireboltData = UTILS.getEnvVariable('fireboltCallsJson')[key];
+      fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
     if (!fireboltData) {
       fireLog.assert(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
