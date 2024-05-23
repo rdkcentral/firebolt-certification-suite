@@ -2,6 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
+const logger = require('../support/Logger')('pluginUtils.js');
 
 /**
  * Fetches and dereferences OpenRPC documents from various sources including a Firebolt URL, local files, and external URLs.
@@ -58,8 +59,59 @@ async function getAndDereferenceOpenRpc(externalUrls, version = null) {
     }
     return openRpcDocs;
   } catch (err) {
-    console.log(err);
+    logger.error(err, 'getAndDereferenceOpenRpc');
   }
 }
 
-module.exports = { getAndDereferenceOpenRpc };
+/**
+ * Generates an index.js file that requires all JavaScript files in a specified directory.
+ * @param {string} path - The path to the directory containing the FireboltCalls V2 data.
+ * @throws {Error} If an error occurs while reading the directory or writing the file.
+ */
+function generateFirboltCallsIndexFile(path) {
+  // Define variables
+  const v2TestFiles = [];
+  // let indexFileContent = '';
+  let indexFileContent = 'let fireboltCalls = {};\n';
+
+  try {
+    // First check if the provided path exists
+    if (fs.existsSync(path)) {
+      // Read files in the directory
+      const files = fs.readdirSync(path);
+
+      // Filter out non-JavaScript files and the index file itself,
+      // then slice off the .js extension and push the file names to the v2TestFiles array
+      files.forEach((file) => {
+        if (file && file.endsWith('.js') && !file.includes('index')) {
+          v2TestFiles.push(file.slice(0, -3));
+        }
+      });
+
+      // Loop through the test files and require them in the index file
+      v2TestFiles.forEach((moduleName) => {
+        indexFileContent += `const ${moduleName} = require('./${moduleName}');\n`;
+        indexFileContent += `Object.assign(fireboltCalls, ${moduleName});\n`;
+      });
+    }
+
+    // Add exports at the bottom of the file
+    indexFileContent += 'module.exports = fireboltCalls;';
+
+    // Delete the index.js file if it already exists
+    if (fs.existsSync(`${path}/index.js`)) {
+      fs.unlinkSync(`${path}/index.js`);
+    }
+
+    // Write to the new index.js file
+    fs.writeFileSync(`${path}/index.js`, indexFileContent);
+  } catch (error) {
+    logger.error(
+      `An error occurred while generating the FireboltCalls index file: ${error}`,
+      'generateFirboltCallsIndexFile'
+    );
+    throw error;
+  }
+}
+
+module.exports = { getAndDereferenceOpenRpc, generateFirboltCallsIndexFile };

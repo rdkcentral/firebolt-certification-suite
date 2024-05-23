@@ -18,6 +18,8 @@
 const fs = require('fs');
 const testDataProcessor = require('./testDataProcessor');
 const logger = require('../support/Logger')('common.js');
+const { generateFirboltCallsIndexFile } = require('./pluginUtils');
+const CONSTANTS = require('../support/constants/constants');
 
 // If "genericSupport" is set to a falsy value (false, null, etc), take no further action. Simply "return"
 function genericSupport(config) {
@@ -32,6 +34,9 @@ function genericSupport(config) {
         acc[key] = value.value;
         return acc;
       }, {});
+
+    generateFirboltCallsIndexFile(CONSTANTS.FIREBOLTCALLS_FROM_FCS);
+    generateFirboltCallsIndexFile(CONSTANTS.FIREBOLTCALLS_FROM_CONFIGMODULE);
 
     // The sequence of override - the default config in the config.js file, overriden by supportConfig.json and then by the command line arguments.
     config.env = {
