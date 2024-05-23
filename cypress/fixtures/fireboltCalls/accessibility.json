@@ -941,6 +941,31 @@
         "validationJsonPath": "result.styles.windowOpacity",
         "content": "ACCESSIBILITY_WINDOWOPACITY_VALUE_FOR_NULL_PARAMS"
     },
+    "MONOSPACED_SERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "validationJsonPath": "result.styles.fontFamily",
+        "content": "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF"
+    },
+    "1_FOR_FONTSIZE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "validationJsonPath": "result.styles.fontSize",
+        "content": "INTEGER1"
+    },
+    "CENTER_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "validationJsonPath": "result.styles.textAlign",
+        "content": "CENTER"
+    },
+    "MIDDLE_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "validationJsonPath": "result.styles.textAlignVertical",
+        "content": "MIDDLE"
+    },
+    "NONE_FOR_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "validationJsonPath": "result.styles.fontEdge",
+        "content": "ACCESSIBILITY_FONTEDGE_NONE"
+    },
     "ONCLOSEDCAPTIONSSETTINGSCHANGED": {
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "validationJsonPath": "eventResponse",
