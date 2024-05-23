@@ -111,12 +111,12 @@
     "TRUE_FOR_DISCOVERYLAUNCH": {
         "method": "discovery.launch",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "FOREGROUND_FOR_LIFECYCLE_STATE": {
         "method": "lifecycle.state",
         "validationJsonPath": "result",
-        "expected": "FOREGROUND"
+        "content": "FOREGROUND"
     },
 
     "NO_ACTION_INTENT_FOR_DISCOVERYLAUNCH": {
@@ -360,10 +360,10 @@
         "expected": "error"
     },
 
-    "INVALID_PARAMETERS_FOR_DISCOVERYLAUNCH": {
+    "INVALID_PARAMETERS_FOR_DISCOVERY_LAUNCH": {
         "method": "discovery.launch",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
 
@@ -381,7 +381,7 @@
     "ONNAVIGATETO_WITH_HOME_INTENT": {
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT"
     },
     "LAUNCH_APP_WITH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE": {
         "method": "discovery.launch",
@@ -480,7 +480,7 @@
     "FALSE_FOR_DISCOVERYLAUNCH": {
         "method": "discovery.launch",
         "validationJsonPath": "result",
-        "expected": "FALSE"
+        "content": "FALSE"
     },
     "INVALID_DATA_INTENT_FOR_DISCOVERYLAUNCH": {
         "method": "discovery.launch",
@@ -490,231 +490,231 @@
     "ONNAVIGATETO_WITH_PLAYBACK_INTENT": {
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYBACK_INTENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYBACK_INTENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE": {
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE_CONTENT"
     },
     "ONNAVIGATETO_WITH_ENTITY_INTENT" : {
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_ENTITY_INTENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_ENTITY_INTENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_ENTITY_INTENT_WITHOUT_ENTITYTYPE":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_ENTITY_INTENT_WITHOUT_ENTITYTYPE_CONTENT"
+        "content": "DISCOVERYLAUNCH_ENTITY_INTENT_WITHOUT_ENTITYTYPE_CONTENT"
     },
     "ONNAVIGATETO_WITH_INTENT" :{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_INTENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_INTENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_SEARCH_INTENT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_SEARCH_INTENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_SEARCH_INTENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_SECTION_INTENT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_SECTION_INTENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_SECTION_INTENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_TUNE_INTENT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_TUNE_INTENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_TUNE_INTENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYENTITY_INTENT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG" :{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM" :{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_CONCERT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_CONCERT_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_CONCERT_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_SPORTINGEVENT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_SPORTINGEVENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_SPORTINGEVENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_PREVIEW":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_PREVIEW_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_PREVIEW_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_OTHER":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_OTHER_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_OTHER_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_ADVERTISEMENT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_ADVERTISEMENT_CONTENT" 
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_ADVERTISEMENT_CONTENT" 
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MUSICVIDEO":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MUSICVIDEO_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MUSICVIDEO_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MINISODE":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MINISODE_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MINISODE_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_EXTRA":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_EXTRA_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_EXTRA_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_CONCERT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_CONCERT_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_CONCERT_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_SPORTINGEVENT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_SPORTINGEVENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_SPORTINGEVENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_PREVIEW":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_PREVIEW_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_PREVIEW_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_OTHER":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_OTHER_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_OTHER_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_ADVERTISEMENT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_ADVERTISEMENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_ADVERTISEMENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MUSICVIDEO":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MUSICVIDEO_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MUSICVIDEO_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MINISODE":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MINISODE_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MINISODE_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_CONCERT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_CONCERT_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_CONCERT_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_SPORTINGEVENT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_SPORTINGEVENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_SPORTINGEVENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_PREVIEW":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_PREVIEW_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_PREVIEW_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_OTHER":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_OTHER_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_OTHER_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_ADVERTISEMENT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_ADVERTISEMENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_ADVERTISEMENT_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MUSICVIDEO":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MUSICVIDEO_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MUSICVIDEO_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MINISODE":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MINISODE_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MINISODE_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_EXTRA":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_EXTRA_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_EXTRA_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYENTITY_INTENT_WITHOUT_OPTIONS":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_OPTIONS_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_OPTIONS_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_MOVIE":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_MOVIE_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_MOVIE_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_EPISODE":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_EPISODE_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_EPISODE_CONTENT"
     },
     "ONNAVIGATETO_WITH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_CONCERT":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_CONCERT_CONTENT"
+        "content": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_CONCERT_CONTENT"
     },
     "HOME_INTENT_FOR_ONNAVIGATETO": {
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT"
+        "content": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT"
     },
     "NULL_FOR_ONNAVIGATETO": {
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "NULL"
+        "content": "NULL"
     },
     "ONNAVIGATETO_WITH_INVALID_APPID_VALUE": {
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "NULL"
+        "content": "NULL"
     },
     "ONNAVIGATETO_WITH_INVALID_APPID_TYPE": {
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "NULL"
+        "content": "NULL"
     },
     "ONNAVIGATETO_WITH_RANDOM_STRING_SOURCE":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_INTENT_RANDOM_STRING"
+        "content": "DISCOVERYLAUNCH_INTENT_RANDOM_STRING"
     },
     "ONNAVIGATETO_WITH_SEARCH_INTENT_SOURCE":{
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
-        "expected": "DISCOVERYLAUNCH_SEARCH_INTENT_SOURCE"
+        "content": "DISCOVERYLAUNCH_SEARCH_INTENT_SOURCE"
     }
 }
