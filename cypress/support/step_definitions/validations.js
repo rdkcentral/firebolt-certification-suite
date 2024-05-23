@@ -145,7 +145,6 @@ Given(
               }
 
               try {
-                console.log("2055 1", contentObject)
                 if (contentObject && contentObject.data) {
                   contentObject.data.forEach((object) => {
                     if (object.validations) {
@@ -203,11 +202,7 @@ Given(
                           cy.customValidation(object, methodOrEventObject);
                           break;
                         case CONSTANTS.UNDEFINED:
-                          cy.undefinedValidation(
-                            object,
-                            methodOrEventObject,
-                            validationType
-                          );
+                          cy.undefinedValidation(object, methodOrEventObject, validationType);
                           break;
                         default:
                           assert(false, 'Unsupported validation type');

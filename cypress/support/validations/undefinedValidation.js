@@ -15,8 +15,6 @@ const { fireLog } = require('../cypress-support/src/utils');
 Cypress.Commands.add(
   'undefinedValidation',
   (validationTypeObject, apiOrEventObject, validationType) => {
-    console.log("2055 2", validationTypeObject)
-
     if (validationTypeObject != null && apiOrEventObject != null) {
       try {
         const methodOrEventResponse =
