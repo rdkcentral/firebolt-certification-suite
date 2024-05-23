@@ -140,7 +140,7 @@ Given(
  */
 Given(/User set response for '(.+)'/, (setResponseKey) => {
   setResponseKey = setResponseKey.replaceAll(' ', '_').toUpperCase();
-  cy.getFireboltData(setResponseKey, CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS).then(
+  cy.getFireboltData(setResponseKey, CONSTANTS.SUPPORTED_CALLTYPES.SET_RESPONSE_JSON).then(
     (parsedSetResponseObject) => {
       // Check if parsedSetResponseObject is an array or an object
       const fireboltItems = Array.isArray(parsedSetResponseObject)

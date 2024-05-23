@@ -6,7 +6,7 @@
     "THE_ENTERED_EMAIL_ADDRESS": {
         "method": "keyboard.email",
         "validationJsonPath": "result",
-        "expected": "KEYBOARD_EMAIL"
+        "content": "KEYBOARD_EMAIL"
     },
     "PROMPT_THE_USER_FOR_THEIR_EMAIL_ADDRESS_WITH_SIGNUP_TYPE": {
         "method": "keyboard.email",
@@ -26,7 +26,7 @@
     "THE_ENTERED_USER_PASSWORD": {
         "method": "keyboard.password",
         "validationJsonPath": "result",
-        "expected": "KEYBOARD_PASSWORD"
+        "content": "KEYBOARD_PASSWORD"
     },
     "PROMPT_THE_USER_FOR_THEIR_STANDARD_PLATFORM": {
         "method": "keyboard.standard",
@@ -35,7 +35,7 @@
     "THE_ENTERED_STANDARD_USER_VALUE": {
         "method": "keyboard.standard",
         "validationJsonPath": "result",
-        "expected": "KEYBOARD_STANDARD"
+        "content": "KEYBOARD_STANDARD"
     },
     "SIGNIN_EMAIL_PARAM_FROM_KEYBOARD": {
         "method": "keyboard.email",
@@ -80,19 +80,19 @@
     "INVALID_PARAMETER_FOR_EMAIL": {
         "method": "keyboard.email",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETER_PASSWORD": {
         "method": "keyboard.password",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETER_STANDARD": {
         "method": "keyboard.standard",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "KEYBOARD_EMAIL": {

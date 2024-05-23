@@ -30,7 +30,7 @@ const UTILS = require('../../cypress-support/src/utils');
  */
 export function lifecycleMiscValidation(method, validationTypeObject, apiOrEventObject) {
   switch (method) {
-    case CONSTANTS.LIFECYCLE_APIS.CLOSE:
+    case CONSTANTS.LIFECYCLE_APIS.FINISHED.toLowerCase():
       validateLifecycleFinished(method, validationTypeObject, apiOrEventObject);
       break;
   }
@@ -49,43 +49,39 @@ export function lifecycleMiscValidation(method, validationTypeObject, apiOrEvent
 function validateLifecycleFinished(method, validationTypeObject, apiOrEventObject) {
   const communicationMode = UTILS.getEnvVariable(CONSTANTS.COMMUNICATION_MODE);
   const apiErrorResponse = apiOrEventObject.response.error;
-  const ScenarioType = validationTypeObject.type;
+  const errorContentObject = validationTypeObject.type;
 
-  switch (ScenarioType) {
+  switch (validationTypeObject.mode) {
     case CONSTANTS.LIFECYCLE_FINISHED_ERROR:
       try {
-        const fixtureFile = CONSTANTS.ERROR_CONTENT_JSON_PATH;
-
-        cy.getDataFromTestDataJson(fixtureFile, ScenarioType).then((errorContentObject) => {
-          if (communicationMode && communicationMode == CONSTANTS.MODE_TRANSPORT) {
-            cy.log(
-              `Actual error code for ${method}: ${apiErrorResponse.code} expected to be present in list of expected error codes`
-            ).then(() => {
-              assert.include(
-                errorContentObject.errorCode,
-                apiErrorResponse.code,
-                `Expected Errorcode for ${method}`
-              );
-            });
-            const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
-              apiErrorResponse.message.includes(errorMessage)
+        if (communicationMode && communicationMode == CONSTANTS.MODE_TRANSPORT) {
+          cy.log(
+            `Actual error code for ${method}: ${apiErrorResponse.code} expected to be present in list of expected error codes`
+          ).then(() => {
+            assert.include(
+              errorContentObject.errorCode,
+              apiErrorResponse.code,
+              `Expected Errorcode for ${method}`
             );
-            cy.log(
-              `Actual error message ${apiErrorResponse.message} expected to be present in list of expected error messages`
-            ).then(() => {
-              assert.equal(checkErrorMessage, true, 'Error Message Validation: ');
-            });
-          } else {
-            const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
-              apiErrorResponse.includes(errorMessage)
-            );
-            cy.log(
-              `Expected Error Message for ${method}: ${apiErrorResponse} to be oneof [${errorContentObject.errorMessage}] `
-            ).then(() => {
-              assert.equal(checkErrorMessage, true, 'Error Message Validation: ');
-            });
-          }
-        });
+          });
+          const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
+            apiErrorResponse.message.includes(errorMessage)
+          );
+          cy.log(
+            `Actual error message ${apiErrorResponse.message} expected to be present in list of expected error messages`
+          ).then(() => {
+            assert.equal(checkErrorMessage, true, 'Error Message Validation: ');
+          });
+        } else {
+          const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
+            apiErrorResponse.includes(errorMessage)
+          );
+          cy.log(
+            `Expected Error Message for ${method}: ${apiErrorResponse} to be oneof [${errorContentObject.errorMessage}] `
+          ).then(() => {
+            assert.equal(checkErrorMessage, true, 'Error Message Validation: ');
+          });
+        }
       } catch (error) {
         cy.log('Failed to validate Lifecycle.finished', error).then(() => {
           assert(false, `Failed to validate Lifecycle.finished - ${error}`);
