@@ -26,53 +26,53 @@
     "EXPECTED_DEVICE_ID": {
         "method": "device.id",
         "validationJsonPath": "result",
-        "expected": "DEVICE_ID"
+        "content": "DEVICE_ID"
     },
     "EXPECTED_DEVICE_DISTRIBUTOR": {
         "method": "device.distributor",
         "validationJsonPath": "result",
-        "expected": "DEVICE_DISTRIBUTOR"
+        "content": "DEVICE_DISTRIBUTOR"
     },
     "EXPECTED_DEVICE_PLATFORM": {
         "method": "device.platform",
         "validationJsonPath": "result",
-        "expected": "DEVICE_PLATFORM"
+        "content": "DEVICE_PLATFORM"
     },
     "EXPECTED_DEVICE_UID": {
         "method": "device.uid",
         "validationJsonPath": "result",
-        "expected": "DEVICE_UID"
+        "content": "DEVICE_UID"
     },
     "EXPECTED_DEVICE_TYPE": {
         "method": "device.type",
         "validationJsonPath": "result",
-        "expected": "DEVICE_TYPE"
+        "content": "DEVICE_TYPE"
     },
     "EXPECTED_DEVICE_MODEL": {
         "method": "device.model",
         "validationJsonPath": "result",
-        "expected": "DEVICE_MODEL"
+        "content": "DEVICE_MODEL"
     },
     "INVALID_REQUEST_FOR_DEVICE_MODEL": {
         "method": "device.model",
         "validationJsonPath": "result",
-        "expected": "INVALID_REQUEST",
+        "content": "INVALID_REQUEST",
         "expectingError": true
     },
     "EXPECTED_DEVICE_SKU": {
         "method": "device.sku",
         "validationJsonPath": "result",
-        "expected": "DEVICE_SKU"
+        "content": "DEVICE_SKU"
     },
     "EXPECTED_DEVICE_MAKE": {
         "method": "device.make",
         "validationJsonPath": "result",
-        "expected": "DEVICE_MAKE"
+        "content": "DEVICE_MAKE"
     },
     "EXPECTED_DEVICE_VERSION": {
         "method": "device.version",
         "validationJsonPath": "result",
-        "expected": "DEVICE_VERSION"
+        "content": "DEVICE_VERSION"
     },
     "DEVICE_ONNAMECHANGED": {
         "method": "device.onNameChanged"
@@ -91,13 +91,13 @@
     "LIVING_HALL_FOR_DEVICE_NAME": {
         "method": "device.name",
         "validationJsonPath": "result",
-        "expected": "Living hall",
+        "content": "Living hall",
         "expectingError": false
     },
     "ONDEVICENAMECHANGED_WITH_LIVING_HALL": {
         "event": "device.onNameChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "Living hall",
+        "content": "Living hall",
         "expectingError": false
     },
     "FETCH_DEVICE_VERSION": {
@@ -121,27 +121,27 @@
     "EXPECTED_HDCP": {
         "method": "device.hdcp",
         "validationJsonPath": "result",
-        "expected": "DEVICE_HDCP"
+        "content": "DEVICE_HDCP"
     },
     "EXPECTED_HDR": {
         "method": "device.hdr",
         "validationJsonPath": "result",
-        "expected": "DEVICE_HDR"
+        "content": "DEVICE_HDR"
     },
     "EXPECTED_SCREENRESOLUTION": {
         "method": "device.screenResolution",
         "validationJsonPath": "result",
-        "expected": "DEVICE_SCREENRESOLUTION"
+        "content": "DEVICE_SCREENRESOLUTION"
     },
     "EXPECTED_VIDEORESOLUTION": {
         "method": "device.videoResolution",
         "validationJsonPath": "result",
-        "expected": "DEVICE_VIDEORESOLUTION"
+        "content": "DEVICE_VIDEORESOLUTION"
     },
     "EXPECTED_AUDIO": {
         "method": "device.audio",
         "validationJsonPath": "result",
-        "expected": "DEVICE_AUDIO"
+        "content": "DEVICE_AUDIO"
     },
     "SET_DEVICE_NAME_TO_BEDROOM":{
         "method": "manage_device.setName",
@@ -150,20 +150,15 @@
     "GET_MANAGE_DEVICE_NAME":{
         "method": "manage_device.name"
     },
-    "NULL_FOR_DEVICE_SETNAME": {
-        "method": "device.setName",
-        "validationJsonPath": "result",
-        "expected": "NULL"
-    },
     "BEDROOM_FOR_DEVICE_NAME": {
         "method": "device.name",
         "validationJsonPath": "result",
-        "expected": "Bedroom"
+        "content": "Bedroom"
     },
     "ONNAMECHANGED_FOR_DEVICE_WITH_BEDROOM": {
         "event": "device.onNameChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "Bedroom"
+        "content": "Bedroom"
     },
     "PROVISION_DEVICE_WITH_DEFAULT_VALUES":{
         "method": "manage_device.provision",
@@ -172,7 +167,7 @@
     "DEFAULT_VALUES_FOR_DEVICE_PROVISION": {
         "method": "device.provision",
         "validationJsonPath": "result",
-        "expected": "DEVICE_PROVISION_DEFAULT_CONTENT"
+        "content": "DEVICE_PROVISION_DEFAULT_CONTENT"
     },
     "PROVISION_DEVICE_WITH_DISTRIBUTOR_ID":{
         "method": "manage_device.provision",
@@ -181,7 +176,7 @@
     "DISTRIBUTOR_ID_FOR_DEVICE_PROVISION": {
         "method": "device.provision",
         "validationJsonPath": "result",
-        "expected": "DEVICE_PROVISION_WITH_DISTRIBUTOR_ID_CONTENT"
+        "content": "DEVICE_PROVISION_WITH_DISTRIBUTOR_ID_CONTENT"
     },
     "GET_DEVICE_ID":{
         "method": "device.id"
@@ -192,17 +187,17 @@
     "EXPECTED_PROVISION_DEVICE_ID": {
         "method": "device.id",
         "validationJsonPath": "result",
-        "expected": "DEVICE_PROVISION_DEVICE_ID"
+        "content": "DEVICE_PROVISION_DEVICE_ID"
     },
     "EXPECTED_PROVISION_ACCOUNT_ID": {
         "method": "account.id",
         "validationJsonPath": "result",
-        "expected": "DEVICE_PROVISION_ACCOUNT_ID"
+        "content": "DEVICE_PROVISION_ACCOUNT_ID"
     },
     "DEFAULT_VALUE_FOR_DEVICE_PROVISION": {
         "method": "device.provision",
         "validationJsonPath": "result",
-        "expected": "DEVICE_PROVISION_DEFAULT_CONTENT"
+        "content": "DEVICE_PROVISION_DEFAULT_CONTENT"
     },
     "EXPECT_ERROR_FOR_DEVICE_DISTRIBUTOR": {
         "method": "device.distributor",
@@ -211,7 +206,7 @@
     "GET_DEVICE_PROVISION_DISTRIBUTOR_ID": {
         "method": "device.distributor",
         "validationJsonPath": "result",
-        "expected": "DEVICE_DISTRIBUTOR"
+        "content": "DEVICE_DISTRIBUTOR"
     },
     "SET_DEVICE_NAME_WITH_INTEGER":{
         "method": "manage_device.setName",
@@ -226,19 +221,19 @@
     "INVALID_PARAMETERS_FOR_DEVICE":{
         "method": "device.setName",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_REQUEST_FOR_DEVICE_DISTRIBUTOR":{
         "method": "device.distributor",
         "validationJsonPath": "result",
-        "expected": "INVALID_REQUEST",
+        "content": "INVALID_REQUEST",
         "expectingError": true
     },
     "INVALID_PARAMETERS_FOR_DEVICE_PROVISION":{
         "method": "device.provision",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "PROVISION_DEVICE_WITH_INTEGER":{
@@ -272,7 +267,7 @@
     "EXPECTED_DEVICE_NAME": {
         "method": "device.setName",
         "validationJsonPath": "result",
-        "expected": "Bedroom",
+        "content": "Bedroom",
         "expectingError": false
     },
     "SET_DEVICE_NAME_TO_KITCHEN": {
@@ -282,7 +277,7 @@
     "ONDEVICENAMECHANGED": {
         "event": "device.onNameChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "NULL",
+        "content": "NULL",
         "expectingError": false
     },
     "EXPECT_ERROR_FOR_DEVICE_NAME": {
@@ -292,7 +287,7 @@
     "INVALID_REQUEST_FOR_DEVICE_NAME": {
         "method": "device.name",
         "validationJsonPath": "result",
-        "expected": "INVALID_REQUEST",
+        "content": "INVALID_REQUEST",
         "expectingError": true
     },
     "DEVICE_ONNETWORKCHANGED": {
@@ -304,62 +299,62 @@
     "DEVICE_NETWORK_AS_WIFI_CONNECTED": {
         "method": "device.network",
         "validationJsonPath": "result",
-        "expected": "DEVICE_NETWORK_WIFICONNECTED"
+        "content": "DEVICE_NETWORK_WIFICONNECTED"
     },
     "DEVICE_NETWORK_AS_WIFI_DISCONNECTED": {
         "method": "device.network",
         "validationJsonPath": "result",
-        "expected": "DEVICE_NETWORK_WIFIDISCONNECTED"
+        "content": "DEVICE_NETWORK_WIFIDISCONNECTED"
     },
     "DEVICE_NETWORK_AS_ETHERNET_CONNECTED": {
         "method": "device.network",
         "validationJsonPath": "result",
-        "expected": "DEVICE_NETWORK_ETHERNETCONNECTED"
+        "content": "DEVICE_NETWORK_ETHERNETCONNECTED"
     },
     "DEVICE_NETWORK_AS_ETHERNET_DISCONNECTED": {
         "method": "device.network",
         "validationJsonPath": "result",
-        "expected": "DEVICE_NETWORK_ETHERNETDISCONNECTED"
+        "content": "DEVICE_NETWORK_ETHERNETDISCONNECTED"
     },
     "DEVICE_NETWORK_AS_HYBRID_CONNECTED": {
         "method": "device.network",
         "validationJsonPath": "result",
-        "expected": "DEVICE_NETWORK_HYBRIDCONNECTED"
+        "content": "DEVICE_NETWORK_HYBRIDCONNECTED"
     },
     "DEVICE_NETWORK_AS_HYBRID_DISCONNECTED": {
         "method": "device.network",
         "validationJsonPath": "result",
-        "expected": "DEVICE_NETWORK_HYBRIDDISCONNECTED"
+        "content": "DEVICE_NETWORK_HYBRIDDISCONNECTED"
     },
     "ONNETWORKCHANGED_WITH_WIFI_CONNECTED": {
         "event": "device.onNetworkChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "DEVICE_NETWORK_WIFICONNECTED"
+        "content": "DEVICE_NETWORK_WIFICONNECTED"
     },
     "ONNETWORKCHANGED_WITH_WIFI_DISCONNECTED": {
         "event": "device.onNetworkChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "DEVICE_NETWORK_WIFIDISCONNECTED_EVENT"
+        "content": "DEVICE_NETWORK_WIFIDISCONNECTED_EVENT"
     },
     "ONNETWORKCHANGED_WITH_ETHERNET_CONNECTED": {
         "event": "device.onNetworkChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "DEVICE_NETWORK_ETHERNETCONNECTED"
+        "content": "DEVICE_NETWORK_ETHERNETCONNECTED"
     },
     "ONNETWORKCHANGED_WITH_ETHERNET_DISCONNECTED": {
         "event": "device.onNetworkChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "DEVICE_NETWORK_ETHERNETDISCONNECTED_EVENT"
+        "content": "DEVICE_NETWORK_ETHERNETDISCONNECTED_EVENT"
     },
     "ONNETWORKCHANGED_WITH_HYBRID_CONNECTED": {
         "event": "device.onNetworkChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "DEVICE_NETWORK_HYBRIDCONNECTED"
+        "content": "DEVICE_NETWORK_HYBRIDCONNECTED"
     },
     "ONNETWORKCHANGED_WITH_HYBRID_DISCONNECTED": {
         "event": "device.onNetworkChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "DEVICE_NETWORK_HYBRIDDISCONNECTED"
+        "content": "DEVICE_NETWORK_HYBRIDDISCONNECTED"
     },
     "EXPECT_ERROR_FOR_DEVICE_ID": {
         "method": "device.id",
@@ -368,7 +363,7 @@
     "INVALID_REQUEST_FOR_DEVICE_ID": {
         "method": "device.id",
         "validationJsonPath": "result",
-        "expected": "INVALID_REQUEST",
+        "content": "INVALID_REQUEST",
         "expectingError": true
     },
     "EXPECT_ERROR_FOR_DEVICE_MODEL": {

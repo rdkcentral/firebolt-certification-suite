@@ -15,9 +15,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-const REGEXFORMATS = require('../constants/regexformats');
+const REGEXFORMATS = require('../../fixtures/regexformats');
 const CONSTANTS = require('../constants/constants');
-
+const RegexParser = require('regex-parser');
 /**
  * @module regExValidations
  * @class regExValidations
@@ -38,7 +38,7 @@ class regExValidations {
    * @example
    * regexValidation.regexResultValidator('Account.uid', new RegExp(/^(?=.*\d)(?=.*[a-zA-Z]).{2,}$/), 'uniqueid', 'result', {})
    */
-  regexResultValidator(method, expression, scenario, validationPath, response) {
+  regexResultValidator(method, expression, validationPath, response) {
     if (response) {
       // Get the response from the provided path
       const extractedResponse = validationPath ? eval('response.' + validationPath) : null;
@@ -73,24 +73,10 @@ class regExValidations {
  */
 Cypress.Commands.add('regExValidation', (method, validationType, validationPath, response) => {
   const regularExpressionValidation = new regExValidations();
-  const regexType = validationType + '_REGEXP';
-
-  if (REGEXFORMATS[regexType]) {
-    regularExpressionValidation.regexResultValidator(
-      method,
-      REGEXFORMATS[regexType],
-      validationType,
-      validationPath,
-      response
-    );
-  } else {
-    const reg = new RegExp(validationType);
-    regularExpressionValidation.regexResultValidator(
-      method,
-      reg,
-      validationType,
-      validationPath,
-      response
-    );
-  }
+  regularExpressionValidation.regexResultValidator(
+    method,
+    RegexParser(validationType),
+    validationPath,
+    response
+  );
 });

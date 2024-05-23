@@ -13,7 +13,7 @@ Feature: Localization
     Scenario Outline: Localization.addAdditionalInfo - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'null for localization addAdditionalInfo'
+        Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         Then 'Firebolt' platform responds with '<Validation_Key>'
 
@@ -26,7 +26,7 @@ Feature: Localization
     Scenario Outline: Localization.removeAdditionalInfo - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'null for localization removeAdditionalInfo'
+        Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         Then 'Firebolt' platform responds with '<Validation_Key>'
 
@@ -52,33 +52,33 @@ Feature: Localization
         When '3rd party app' registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
         Then 'Firebolt' platform responds with '<Method_Validation_Key>'
         And 'Firebolt' platform triggers event '<Event_Validation_Key>'
 
         Examples:
-            | Scenario                                   | Method                               | Event_Registration_Key                        | Set_API_Key                             | Get_API_Key                              | Method_Validation_Key                            | Event_Validation_Key                                               | Set_Method_Content                               |
-            | Set & get locality                         | Localization.locality                | localization onLocalityChanged                | set localization locality to washington | get localization locality                | washington for localization locality             | onlocalitychanged for localization locality with washington        | null for localization setLocality                |
-            | Set & get countrycode                      | Localization.countrycode             | localization onCountryCodeChanged             | set countrycode to PH                   | get localization countrycode             | PH for localization countrycode                  | oncountrycodechanged for localization with ph                      | null for localization setCountrycode             |
-            | Set & get locale                           | Localization.locale                  | localization onLocaleChanged                  | set locale to enUK                      | get localization locale                  | enUK for localization locale                     | onlocalechanged for localization with enUK                         | null for localization setLocale                  |
-            | Set & get Language es                      | Localization.language                | localization onLanguageChanged                | set language to es                      | get localization language                | es for localization language                     | onlanguagechanged for localization with es                         | null for localization setLanguage                |
-            | Set & get Language en                      | Localization.language                | localization onLanguageChanged                | set language to en                      | get localization language                | en for localization language                     | onlanguagechanged for localization with en                         | null for localization setLanguage                |
-            | Set & get preferredAudioLanguages(spa-eng) | Localization.preferredAudioLanguages | localization onPreferredAudioLanguagesChanged | set preferredaudiolanguages to spa eng  | get localization preferredaudiolanguages | spa eng for localization preferredaudiolanguages | onpreferredaudiolanguageschanged for localization with eng spa     | null for localization setPreferredAudioLanguages |
-            | Set & get preferredAudioLanguages(eng-spa) | Localization.preferredAudioLanguages | localization onPreferredAudioLanguagesChanged | set preferredaudiolanguages to eng spa  | get localization preferredaudiolanguages | eng spa for localization preferredaudiolanguages | onpreferredaudiolanguageschanged for localization with eng and spa | null for localization setPreferredAudioLanguages |
-            | Set & get PostalCode                       | Localization.postalCode              | localization onPostalCodeChanged              | set postalcode to 12345                 | get postalcode                           | 12345 for localization postalcode                | onpostalcodechanged for localization postalCode with 12345                   | null for localization setPostalCode              |
+            | Scenario                                   | Method                               | Event_Registration_Key                        | Set_API_Key                             | Get_API_Key                              | Method_Validation_Key                            | Event_Validation_Key                                               |
+            | Set & get locality                         | Localization.locality                | localization onLocalityChanged                | set localization locality to washington | get localization locality                | washington for localization locality             | onlocalitychanged for localization locality with washington        |
+            | Set & get countrycode                      | Localization.countrycode             | localization onCountryCodeChanged             | set countrycode to PH                   | get localization countrycode             | PH for localization countrycode                  | oncountrycodechanged for localization with ph                      |
+            | Set & get locale                           | Localization.locale                  | localization onLocaleChanged                  | set locale to enUK                      | get localization locale                  | enUK for localization locale                     | onlocalechanged for localization with enUK                         |
+            | Set & get Language es                      | Localization.language                | localization onLanguageChanged                | set language to es                      | get localization language                | es for localization language                     | onlanguagechanged for localization with es                         |
+            | Set & get Language en                      | Localization.language                | localization onLanguageChanged                | set language to en                      | get localization language                | en for localization language                     | onlanguagechanged for localization with en                         |
+            | Set & get preferredAudioLanguages(spa-eng) | Localization.preferredAudioLanguages | localization onPreferredAudioLanguagesChanged | set preferredaudiolanguages to spa eng  | get localization preferredaudiolanguages | spa eng for localization preferredaudiolanguages | onpreferredaudiolanguageschanged for localization with eng spa     |
+            | Set & get preferredAudioLanguages(eng-spa) | Localization.preferredAudioLanguages | localization onPreferredAudioLanguagesChanged | set preferredaudiolanguages to eng spa  | get localization preferredaudiolanguages | eng spa for localization preferredaudiolanguages | onpreferredaudiolanguageschanged for localization with eng and spa |
+            | Set & get PostalCode                       | Localization.postalCode              | localization onPostalCodeChanged              | set postalcode to 12345                 | get postalcode                           | 12345 for localization postalcode                | onpostalcodechanged for localization postalCode with 12345         |
 
     @Device @coreSDK @regression @sdk
     Scenario Outline: Localization.<Method_Name> - Positive Scenario: Clearing event listeners
         When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
         And I clear '<Clear_Event_Name>' listeners
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
         And 'Firebolt' platform does not trigger event for '<Event_Validation_Key>'
 
         Examples:
-            | Method_Name    | Registered_Event                  | Clear_Event_Name                        | Set_API_Key                | Event_Validation_Key | Set_Method_Content                   |
-            | setLocality    | localization onLocalityChanged    | localization onLocalityChanged event    | set locality to Washington | onLocalityChanged    | null for localization setLocality    |
-            | setCountryCode | localization onCountryCodeChanged | localization onCountryCodeChanged event | set countrycode to PH      | onCountryCodeChanged | null for localization setCountryCode |
-            | setLocale      | localization onlocalechanged      | localization onLocaleChanged event      | set locale to enUS         | onLocaleChanged      | null for localization setLocale      |
-            | setLanguage    | localization onlanguagechanged    | localization onLanguageChanged event    | set language to en         | onLanguageChanged    | null for localization setLanguage    |
+            | Method_Name    | Registered_Event                  | Clear_Event_Name                        | Set_API_Key                | Event_Validation_Key |
+            | setLocality    | localization onLocalityChanged    | localization onLocalityChanged event    | set locality to Washington | onLocalityChanged    |
+            | setCountryCode | localization onCountryCodeChanged | localization onCountryCodeChanged event | set countrycode to PH      | onCountryCodeChanged |
+            | setLocale      | localization onlocalechanged      | localization onLocaleChanged event      | set locale to enUS         | onLocaleChanged      |
+            | setLanguage    | localization onlanguagechanged    | localization onLanguageChanged event    | set language to en         | onLanguageChanged    |

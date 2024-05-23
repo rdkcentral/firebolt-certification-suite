@@ -9,17 +9,17 @@ Feature: Discovery
       When '3rd party app' registers for the 'discovery onPolicyChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get value of policy'
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Set_Method_Content>'
+      Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get value of policy'
       Then 'Firebolt' platform responds with '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
       Examples:
-         | Scenario                          | API_Key                           | Method_Content                                      | Event_Content                                                      | Set_Method_Content                       |
-         | enable Recommendations            | enable recommendations            | true for history based recommendations in policy    | onPolicyChanged for discovery enableRecommendations with true      | null for privacy setAllowPersonalization |
-         | disable Recommendations           | disable recommendations           | false for history based recommendations in policy   | onPolicyChanged for discovery enableRecommendations with false     | null for privacy setAllowPersonalization |
-         | enable remember watched programs  | enable remember watched programs  | true for remember watched programs in policy        | onPolicyChanged for discovery rememberWatchedPrograms with true    | null for privacy setAllowWatchHistory    |
-         | disable remember watched programs | disable remember watched programs | false for remember watched programs in policy       | onPolicyChanged for discovery rememberWatchedPrograms with false   | null for privacy setAllowWatchHistory    |
+         | Scenario                          | API_Key                           | Method_Content                                      | Event_Content                                                      |
+         | enable Recommendations            | enable recommendations            | true for history based recommendations in policy    | onPolicyChanged for discovery enableRecommendations with true      |
+         | disable Recommendations           | disable recommendations           | false for history based recommendations in policy   | onPolicyChanged for discovery enableRecommendations with false     |
+         | enable remember watched programs  | enable remember watched programs  | true for remember watched programs in policy        | onPolicyChanged for discovery rememberWatchedPrograms with true    |
+         | disable remember watched programs | disable remember watched programs | false for remember watched programs in policy       | onPolicyChanged for discovery rememberWatchedPrograms with false   |
 
    @Discovery @coreSDK @sdk @transport
    Scenario Outline: Discovery.watched - Positive Scenario: <Scenario>
@@ -155,15 +155,10 @@ Feature: Discovery
          | Invalid entitlements invalid startTime     | notify content access with invalid entitlements invalid startTime     |
          | Invalid entitlements invalid endTime       | notify content access with invalid entitlements invalid endTime       |
 
-
    @Device @coreSDK @regression @sdk
    Scenario: Discovery.onPolicyChanged - Positive Scenario: Clearing event listeners
       When '3rd party app' registers for the 'discovery onPolicyChanged' event using the 'Firebolt' API
       And I clear 'discovery onPolicyChanged event' listeners
       And 1st party app invokes the 'Firebolt' API to 'set allowPersonalization to true'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for privacy setAllowPersonalization'
+      Then 'Firebolt' platform responds to '1st party app' for 'set allowPersonalization to true'
       And 'Firebolt' platform does not trigger event for 'onDiscoveryPolicyChanged'
-
-
-
-
