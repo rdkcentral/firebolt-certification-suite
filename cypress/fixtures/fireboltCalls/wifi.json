@@ -25,19 +25,19 @@
     "INVALID_BOOLEAN_PARAMS_FOR_WIFI_SCAN": {
         "method": "wifi.scan",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_INTEGER_PARAMS_FOR_WIFI_CONNECT": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_VALUE_PARAMS_FOR_WIFI_WPS": {
         "method": "wifi.wps",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "WIFI_DISCONNECT": {
@@ -50,7 +50,7 @@
     "EXPECTED_WIFI_SCAN_RESPONSE": {
         "method": "wifi.scan",
         "validationJsonPath": "result",
-        "expected": "WIFI_SCAN_LIST" 
+        "content": "WIFI_SCAN_LIST" 
     },
     "WIFI_CONNECT_WITH_PASSWORD": {
         "method": "manage_wifi.connect",
@@ -59,7 +59,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_SECURITY_WPA2PSK"
+        "content": "WIFI_CONNECT_SECURITY_WPA2PSK"
     },
     "WIFI_CONNECT_WITHOUT_PASSWORD": {
         "method": "manage_wifi.connect",
@@ -68,7 +68,7 @@
     "WIFI_CONNECT_WITHOUT_PASSWORD_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_SECURITY_NONE" 
+        "content": "WIFI_CONNECT_SECURITY_NONE" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WEP64": {
         "method": "manage_wifi.connect",
@@ -77,7 +77,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WEP64_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_SECURITY_NONE" 
+        "content": "WIFI_CONNECT_SECURITY_NONE" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WEP128": {
         "method": "manage_wifi.connect",
@@ -86,7 +86,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WEP128_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_WITH_PASSWORD_WEP128" 
+        "content": "WIFI_CONNECT_WITH_PASSWORD_WEP128" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WPAPSKTKIP": {
         "method": "manage_wifi.connect",
@@ -95,7 +95,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WPAPSKTKIP_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_WITH_PASSWORD_WEP128" 
+        "content": "WIFI_CONNECT_WITH_PASSWORD_WEP128" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WPAPSKAES": {
         "method": "manage_wifi.connect",
@@ -104,7 +104,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WPAPSKAES_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_WITH_PASSWORD_WPAPSKAES" 
+        "content": "WIFI_CONNECT_WITH_PASSWORD_WPAPSKAES" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WPA2PSKTKIP": {
         "method": "manage_wifi.connect",
@@ -113,7 +113,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WPA2PSKTKIP_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_WITH_PASSWORD_WPA2PSKTKIP" 
+        "content": "WIFI_CONNECT_WITH_PASSWORD_WPA2PSKTKIP" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WPA2PSKAES": {
         "method": "manage_wifi.connect",
@@ -122,7 +122,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WPA2PSKAES_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_WITH_PASSWORD_WPA2PSKAES" 
+        "content": "WIFI_CONNECT_WITH_PASSWORD_WPA2PSKAES" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WPA_ENTERPRISETKIP": {
         "method": "manage_wifi.connect",
@@ -131,7 +131,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WPA_ENTERPRISETKIP_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_WITH_PASSWORD_WPA_ENTERPRISETKIP" 
+        "content": "WIFI_CONNECT_WITH_PASSWORD_WPA_ENTERPRISETKIP" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WPA_ENTERPRISEAES": {
         "method": "manage_wifi.connect",
@@ -140,7 +140,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WPA_ENTERPRISEAES_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_WITH_PASSWORD_WPA_ENTERPRISEAES" 
+        "content": "WIFI_CONNECT_WITH_PASSWORD_WPA_ENTERPRISEAES" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WPA2_ENTERPRISETKIP": {
         "method": "manage_wifi.connect",
@@ -149,7 +149,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WPA2_ENTERPRISETKIP_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_WITH_PASSWORD_WPA2_ENTERPRISETKIP" 
+        "content": "WIFI_CONNECT_WITH_PASSWORD_WPA2_ENTERPRISETKIP" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WPA2_ENTERPRISEAES": {
         "method": "manage_wifi.connect",
@@ -158,7 +158,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WPA2_ENTERPRISEAES_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_WITH_PASSWORD_WPA2_ENTERPRISEAES" 
+        "content": "WIFI_CONNECT_WITH_PASSWORD_WPA2_ENTERPRISEAES" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WPA2_ENTERPRISE": {
         "method": "manage_wifi.connect",
@@ -167,7 +167,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WPA2_ENTERPRISE_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_WITH_PASSWORD_WPA2_ENTERPRISE" 
+        "content": "WIFI_CONNECT_WITH_PASSWORD_WPA2_ENTERPRISE" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WPA3_PSKAES": {
         "method": "manage_wifi.connect",
@@ -176,7 +176,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WPA3_PSKAES_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_WITH_PASSWORD_WPA3_PSKAES" 
+        "content": "WIFI_CONNECT_WITH_PASSWORD_WPA3_PSKAES" 
     },
     "WIFI_CONNECT_WITH_PASSWORD_WPA3_SAE": {
         "method": "manage_wifi.connect",
@@ -185,7 +185,7 @@
     "WIFI_CONNECT_WITH_PASSWORD_WPA3_SAE_METHOD": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_WITH_PASSWORD_WPA3_SAE" 
+        "content": "WIFI_CONNECT_WITH_PASSWORD_WPA3_SAE" 
     },
     "WIFI_DISCONNECT_WITH_EMPTY_PARAMS": {
         "method": "manage_wifi.disconnect"
@@ -193,7 +193,7 @@
     "WIFI_DISCONNECT_WITH_EMPTY_PARAMS_METHOD": {
         "method": "wifi.disconnect",
         "validationJsonPath": "result",
-        "expected": "WIFI_DISCONNECT_METHOD" 
+        "content": "WIFI_DISCONNECT_METHOD" 
     },
     "WIFI_WPS_WITH_EMPTY_PARAMS": {
         "method": "manage_wifi.wps"
@@ -201,7 +201,7 @@
     "WIFI_WPS_WITH_EMPTY_PARAMS_METHOD": {
         "method": "wifi.wps",
         "validationJsonPath": "result",
-        "expected": "WIFI_WPS" 
+        "content": "WIFI_WPS" 
     },
     "WIFI_WPS_VIA_PUSHBUTTON": {
         "method": "manage_wifi.wps",
@@ -218,26 +218,26 @@
     "WPA2PSK_FOR_WIFI_CONNECT": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "expected": "WIFI_CONNECT_SECURITY_WPA2PSK" 
+        "content": "WIFI_CONNECT_SECURITY_WPA2PSK" 
     },
     "NOPARAMS_FOR_WIFI_DISCONNECT": {
         "method": "wifi.disconnect",
         "validationJsonPath": "result",
-        "expected": "NULL" 
-    },
+        "content": "NULL" 
+    }, 
     "WPSPUSHBUTTON_FOR_WIFI_WPS": {
         "method": "wifi.wps",
         "validationJsonPath": "result",
-        "expected": "WIFI_WPS_PUSHBUTTON"
+        "content": "WIFI_WPS_PUSHBUTTON"
     },
     "DEVICE_NETWORK_TO_BE_CONNECTED": {
         "method": "device.network",
         "validationJsonPath": "result",
-        "expected": "DEVICE_NETWORK_WIFICONNECTED"
+        "content": "DEVICE_NETWORK_WIFICONNECTED"
     },
     "DEVICE_NETWORK_TO_BE_DISCONNECTED": {
         "method": "device.network",
         "validationJsonPath": "result",
-        "expected": "DEVICE_NETWORK_WIFIDISCONNECTED"
+        "content": "DEVICE_NETWORK_WIFIDISCONNECTED"
     }
 }

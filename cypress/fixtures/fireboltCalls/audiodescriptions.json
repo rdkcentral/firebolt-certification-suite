@@ -2,7 +2,7 @@
     "INVALID_PARAMS_FOR_AUDIODESCRIPTIONS_SETENABLED": {
         "method": "audiodescriptions.setEnabled",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "AUDIODESCRIPTIONS_ONENABLEDCHANGED":{
@@ -22,22 +22,22 @@
     "DISABLED_FOR_AUDIODESCRIPTIONS": {
         "method": "audiodescriptions.enabled",
         "validationJsonPath": "result",
-        "expected": "AUDIODESCRIPTIONS_DISABLED"
+        "content": "AUDIODESCRIPTIONS_DISABLED"
     },
     "ENABLED_FOR_AUDIODESCRIPTIONS": {
         "method": "audiodescriptions.enabled",
         "validationJsonPath": "result",
-        "expected": "AUDIODESCRIPTIONS_ENABLED"
+        "content": "AUDIODESCRIPTIONS_ENABLED"
     },
     "ONENABLEDCHANGED_FOR_AUDIODESCRIPTIONS_WITH_DISABLE": {
         "event": "audiodescriptions.onEnabledChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "AUDIODESCRIPTIONS_DISABLED"
+        "content": "AUDIODESCRIPTIONS_DISABLED"
     },
     "ONENABLEDCHANGED_FOR_AUDIODESCRIPTIONS_WITH_ENABLE": {
         "event": "audiodescriptions.onEnabledChanged",
         "validationJsonPath": "eventResponse",
-        "expected": "AUDIODESCRIPTIONS_ENABLED"
+        "content": "AUDIODESCRIPTIONS_ENABLED"
     },
     "SET_AUDIODESCRIPTIONS_ENABLED_FALSE": {
         "method": "manage_audiodescriptions.setEnabled",

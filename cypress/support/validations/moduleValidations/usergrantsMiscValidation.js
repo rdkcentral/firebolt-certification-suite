@@ -38,13 +38,13 @@ export function usergrantsMiscValidation(method, validationTypeObject, apiOrEven
       const methodOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(method, context, appId);
       const userGrantsList = methodOrEventObject.response.result;
       const pretext = CONSTANTS.METHOD_CONTENT;
-      if (validationTypeObject.expected) {
+      if (validationTypeObject.content) {
         cy.log(
           pretext +
-            ` : Usergrants.request expected ${JSON.stringify(userGrantsList)} to equal ${JSON.stringify(validationTypeObject.expected)} since no capability is granted or denied and expected empty list`
+            ` : Usergrants.request expected ${JSON.stringify(userGrantsList)} to equal ${JSON.stringify(validationTypeObject.content)} since no capability is granted or denied and expected empty list`
         ).then(() => {
           assert.equal(
-            JSON.stringify(validationTypeObject.expected),
+            JSON.stringify(validationTypeObject.content),
             JSON.stringify(userGrantsList),
             `Equal to be`
           );
