@@ -7,10 +7,10 @@ Feature: UserInterest
 
     @coreSDK @sdk @transport @userinterest
     Scenario Outline: Discovery.userInterest - Positive Scenario: with interest type <Scenario>
-        When 1st party app invokes the 'Firebolt' API to 'Content onUserInterest'
+        When 1st party app registers for the 'Content onUserInterest' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'get userInterest with <GetParam>'
         Then 'Firebolt' platform responds with 'null for discovery userInterest'
-        And 'Firebolt' platform triggers event '<Event_Content>'
+        And 'Firebolt' platform triggers to '1st party app' event '<Event_Content>'
 
         Examples:
             | Scenario                                                                           | GetParam                                                                              | Event_Content                                                |

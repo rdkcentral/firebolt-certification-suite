@@ -410,47 +410,47 @@
     "ONREQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST": {
         "event": "discovery.onRequestUserInterest",
         "validationJsonPath": "eventResponse.request",
-        "expected": "DISCOVERY_TYPE_INTEREST_REASON_PLAYLIST"
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_PLAYLIST"
     },
     "ONREQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION": {
         "event": "discovery.onRequestUserInterest",
         "validationJsonPath": "eventResponse.request",
-        "expected": "DISCOVERY_TYPE_INTEREST_REASON_REACTION"
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_REACTION"
     },
     "ONREQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING": {
         "event": "discovery.onRequestUserInterest",
         "validationJsonPath": "eventResponse.request",
-        "expected": "DISCOVERY_TYPE_INTEREST_REASON_RECORDING"
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_RECORDING"
     },
     "ONREQUESTUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST": {
         "event": "discovery.onRequestUserInterest",
         "validationJsonPath": "eventResponse.request",
-        "expected": "DISCOVERY_TYPE_DISINTEREST_REASON_PLAYLIST"
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_PLAYLIST"
     },
     "ONREQUESTUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION": {
         "event": "discovery.onRequestUserInterest",
         "validationJsonPath": "eventResponse.request",
-        "expected": "DISCOVERY_TYPE_DISINTEREST_REASON_REACTION"
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_REACTION"
     },
     "ONREQUESTUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING": {
         "event": "discovery.onRequestUserInterest",
         "validationJsonPath": "eventResponse.request",
-        "expected": "DISCOVERY_TYPE_DISINTEREST_REASON_RECORDING"
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_RECORDING"
     },
     "REQUESTUSERINTEREST_WITH_REASON_PLAYLIST": {
         "method": "content.requestUserInterest",
         "validationJsonPath": "result",
-        "expected": "DISCOVERY_REQUESTUSERINTEREST_WITH_REASON_PLAYLIST_RESPONSE"
+        "content": "DISCOVERY_REQUESTUSERINTEREST_WITH_REASON_PLAYLIST_RESPONSE"
     },
     "REQUESTUSERINTEREST_WITH_REASON_REACTION": {
         "method": "content.requestUserInterest",
         "validationJsonPath": "result",
-        "expected": "DISCOVERY_REQUESTUSERINTEREST_WITH_REASON_REACTION_RESPONSE"
+        "content": "DISCOVERY_REQUESTUSERINTEREST_WITH_REASON_REACTION_RESPONSE"
     },
     "REQUESTUSERINTEREST_WITH_REASON_RECORDING": {
         "method": "content.requestUserInterest",
         "validationJsonPath": "result",
-        "expected": "DISCOVERY_REQUESTUSERINTEREST_WITH_REASON_RECORDING_RESPONSE"
+        "content": "DISCOVERY_REQUESTUSERINTEREST_WITH_REASON_RECORDING_RESPONSE"
     },
     "GET_USERINTEREST_WITH_TYPE_INTEREST_WITH_MUSIC_SONG_ENTITY_DATA": {
         "method": "discovery.userInterest",
@@ -472,7 +472,7 @@
         "method": "discovery.userInterest",
         "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "NULL",
+        "content": "NULL",
         "expectingError": false
     },
     "GET_USERINTEREST_WITHOUT_ANY_PARAMS": {
@@ -503,7 +503,7 @@
         "method": "discovery.userInterest",
         "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "GET_USERINTEREST_WITH_INVALID_CHANNELTYPE_IN_CHANNEL_ENTITY":{
@@ -658,7 +658,7 @@
         "method": "discovery_content.requestUserInterest",
         "context": "noContext",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "DISCOVERY_ONREQUESTUSERINTEREST":{
