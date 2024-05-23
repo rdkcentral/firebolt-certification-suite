@@ -48,7 +48,7 @@ Cypress.Commands.add(
                 cy.log(
                   `Undefined Validation : Expected ${methodOrEventName} response to have property ${part} in the field ${validation.field}`
                 ).then(() => {
-                  assert(
+                  fireLog.assert(
                     false,
                     `Expected ${methodOrEventName} response to have property ${part} in the field ${validation.field}`
                   );
@@ -69,7 +69,7 @@ Cypress.Commands.add(
           `Undefined Validation : Received following error while performing validation of type undefined on response',
         ${JSON.stringify(error)}`
         ).then(() => {
-          assert(
+          fireLog.assert(
             false,
             `Undefined Validation : Received following error while performing validation of type undefined on response',
           ${JSON.stringify(error)}`
@@ -80,7 +80,7 @@ Cypress.Commands.add(
       cy.log(
         `Undefined Validation : Expected validation object or api/event object stored in global list to not be undefined`
       ).then(() => {
-        assert(
+        fireLog.assert(
           false,
           'Undefined Validation : Expected validation object or api/event object stored in global list to not be undefined'
         );
