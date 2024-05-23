@@ -452,16 +452,12 @@ function assertWithRequirementLogs(pretext, actual, expected, equateDeep = false
       expectedLog = JSON.stringify(expected);
     }
 
-    cy.log(
-      pretext + ': Expected : ' + expectedLog + ' , Actual : ' + actualLog,
-      'assertWithRequirementLogs'
-    ).then(() => {
-      if (equateDeep) {
-        fireLog.deepEqual(actual, expected, pretext);
-      } else {
-        fireLog.equal(actual, expected, pretext);
-      }
-    });
+    const logMessage = pretext + ': Expected : ' + expectedLog + ' , Actual : ' + actualLog;
+    if (equateDeep) {
+      fireLog.deepEqual(actual, expected, logMessage);
+    } else {
+      fireLog.equal(actual, expected, logMessage);
+    }
   }
 }
 
