@@ -216,41 +216,35 @@ function validateCapabilitiesRequest(method, validationTypeObject, apiOrEventObj
  * cy.specialValidation({"capabilities.request", "result[0].use", true, context, test.test.test})
  */
 Cypress.Commands.add('specialValidation', (validationObject) => {
-  const { method, validationPath, expected, appId } = validationObject;
+  const { method, validationPath, content, appId } = validationObject;
   let context = validationObject.context;
   const skipCheck = validationObject.skipChecks ? validationObject.skipChecks : false;
-  context = context ? context : CONSTANTS.NO_CONTEXT;
-  cy.testDataHandler(CONSTANTS.CONTEXT, context).then((parsedContext) => {
-    // const extractedApiObject = getAppObjectData(method, parsedContext);
-    const methodOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
-      method,
-      parsedContext,
-      appId
-    );
-    cy.validateResponseErrorAndSchemaResult(methodOrEventObject, CONSTANTS.METHOD, skipCheck).then(
-      () => {
-        const apiResponseContent = eval('methodOrEventObject.response.' + validationPath);
-        const message = Object.keys(parsedContext).length
-          ? parsedContext
-          : { role: validationPath.split('.')[1] };
-        if (Array.isArray(expected)) {
-          cy.log(
-            `Method content validation for ${method} for ${JSON.stringify(
-              message
-            )} expected ${apiResponseContent} to be oneof ${JSON.stringify(expected)}`
-          ).then(() => {
-            assert.oneOf(apiResponseContent, expected, 'Equal to be oneOf');
-          });
-        } else {
-          cy.log(
-            `Method content validation for ${method} for ${JSON.stringify(
-              message
-            )} expected ${apiResponseContent} to be ${expected}`
-          ).then(() => {
-            assert.equal(apiResponseContent, expected, 'Equal to be');
-          });
-        }
+  context = context ? context : {};
+
+  const methodOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(method, context, appId);
+  cy.validateResponseErrorAndSchemaResult(methodOrEventObject, CONSTANTS.METHOD, skipCheck).then(
+    () => {
+      const apiResponseContent = eval('methodOrEventObject.response.' + validationPath);
+      const message = Object.keys(context).length
+        ? context
+        : { role: validationPath.split('.')[1] };
+      if (Array.isArray(content)) {
+        cy.log(
+          `Method content validation for ${method} for ${JSON.stringify(
+            message
+          )} expected ${apiResponseContent} to be oneof ${JSON.stringify(content)}`
+        ).then(() => {
+          assert.oneOf(apiResponseContent, content, 'Equal to be oneOf');
+        });
+      } else {
+        cy.log(
+          `Method content validation for ${method} for ${JSON.stringify(
+            message
+          )} expected ${apiResponseContent} to be ${content}`
+        ).then(() => {
+          assert.equal(apiResponseContent, content, 'Equal to be');
+        });
       }
-    );
-  });
+    }
+  );
 });

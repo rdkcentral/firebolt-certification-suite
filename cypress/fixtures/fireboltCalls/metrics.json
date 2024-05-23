@@ -53,12 +53,12 @@
     "NULL_FOR_METRICS_EVENT": {
         "method": "metrics.event",
         "validationJsonPath": "result",
-        "expected": "NULL"
+        "content": "NULL"
     },
     "INVALID_PARAMS_FOR_METRICS_EVENT":{
         "method": "metrics.event",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "NOTIFY_THAT_CONTENT_HAS_STARTED": {
@@ -70,12 +70,12 @@
     "TRUE_FOR_STARTCONTENT_IN_METRICS": {
         "method": "metrics.startContent",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_STOPCONTENT_IN_METRICS": {
         "method": "metrics.stopContent",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "NOTIFY_THAT_PAGE_HAS_NAVIGATED_WITH_EMPTY_PARAMETER": {
         "method": "metrics.page",
@@ -151,97 +151,97 @@
     "INVALID_PARAMS_FOR_METRICS_STARTCONTENT": {
         "method": "metrics.startContent",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_STOPCONTENT": {
         "method": "metrics.stopContent",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_PAGE": {
         "method": "metrics.page",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_ACTION": {
         "method": "metrics.action",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_ERROR": {
         "method": "metrics.error",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIALOADSTART": {
         "method": "metrics.mediaLoadStart",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIAPLAY": {
         "method": "metrics.mediaPlay",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIAPLAYING": {
         "method": "metrics.mediaPlaying",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIAPAUSE": {
         "method": "metrics.mediaPause",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIAWAITING": {
         "method": "metrics.mediaWaiting",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIAPROGRESS": {
         "method": "metrics.mediaProgress",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIASEEKING": {
         "method": "metrics.mediaSeeking",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIASEEKED": {
         "method": "metrics.mediaSeeked",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIARATECHANGE": {
         "method": "metrics.mediaRateChange",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIARENDITIONCHANGE": {
         "method": "metrics.mediaRenditionChange",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIAENDED": {
         "method": "metrics.mediaEnded",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "NOTIFY_THAT_CONTENT_HAS_STARTED_WITH_ENTITYID": {
@@ -347,72 +347,72 @@
     "TRUE_FOR_PAGE_IN_METRICS": {
         "method": "metrics.page",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_ACTION_IN_METRICS": {
         "method": "metrics.action",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_ERROR_IN_METRICS": {
         "method": "metrics.error",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_MEDIALOADSTART_IN_METRICS": {
         "method": "metrics.mediaLoadStart",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_MEDIAPLAY_IN_METRICS": {
         "method": "metrics.mediaPlay",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_MEDIAPLAYING_IN_METRICS": {
         "method": "metrics.mediaPlaying",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_MEDIAPAUSE_IN_METRICS": {
         "method": "metrics.mediaPause",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_MEDIAWAITING_IN_METRICS": {
         "method": "metrics.mediaWaiting",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_MEDIAPROGRESS_IN_METRICS": {
         "method": "metrics.mediaProgress",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_MEDIASEEKING_IN_METRICS": {
         "method": "metrics.mediaSeeking",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_MEDIASEEKED_IN_METRICS": {
         "method": "metrics.mediaSeeked",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_MEDIARATECHANGE_IN_METRICS": {
         "method": "metrics.mediaRateChange",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_MEDIARENDITIONCHANGE_IN_METRICS": {
         "method": "metrics.mediaRenditionChange",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_MEDIAENDED_IN_METRICS": {
         "method": "metrics.mediaEnded",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "NOTIFY_THAT_CONTENT_HAS_STARTED_WITH_NUMERIC_ENTITYID": {
         "method": "metrics.startContent",
@@ -606,17 +606,17 @@
     "TRUE_FOR_READY_IN_METRICS": {
         "method": "metrics.ready",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_SIGNIN_IN_METRICS": {
         "method": "metrics.signIn",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "TRUE_FOR_SIGNOUT_IN_METRICS": {
         "method": "metrics.signOut",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "INITIALIZE_SESSION": {
         "method": "internal.initialize",
@@ -632,7 +632,7 @@
     "CONTENT_FOR_INTERNAL_INITIALIZE": {
         "method": "internal.initialize",
         "validationJsonPath": "result",
-        "expected": "METRICS_INTERNAL_INITIALIZATION"
+        "content": "METRICS_INTERNAL_INITIALIZATION"
     },
     "METRICS_MEDIALOADSTART_WITH_ENTITY_345": {
         

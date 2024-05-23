@@ -19,6 +19,7 @@
                 "type": "regEx",
                 "validations": [
                     {
+                        "mode": "regex",
                         "type": "UID",
                         "description": "Validation of the Account uid"
                     }
