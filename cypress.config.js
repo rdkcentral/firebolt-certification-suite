@@ -61,6 +61,7 @@ const env = {
   generateLocalReport: true,
   loggerLevel: 'debug',
   testSuite: '',
+  visibilityState: { foreground: 'visible', background: 'visible', inactive: 'hidden' },
 };
 
 module.exports = {

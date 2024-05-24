@@ -415,7 +415,16 @@ module.exports = {
   FCS_DEFAULTTESTDATA_PATH: 'cypress/fixtures/defaultTestData.json',
   ENV_SETUP_STATUS: 'environmentLaunched',
   APP_LAUNCH_STATUS: 'appLaunched',
+  VISIBILITYSTATE_VALIDATION_REQ: 'Lifecycle visibility state validation Req # ',
+  LIFECYCLE_VISIBILITYSTATE_SKIP_MESSAGE:
+    'App is not reachable to fetch visibility state. Skipping Visibility state validation.',
+  VISIBILITYSTATE_FAILURE_FIX_LOG:
+    ', How to fix: If the visibility state response is as per the platform, add the expected value in configModule. More details is present in footer',
+  VISIBILITYSTATE_FAILURE_LOG:
+    '. If the visibility state response is as per the platform, add the expected value in configModule. More details is present in footer',
   NO_EVENT_TRIGGERED: 'Expecting no event to be triggered from platform',
+  VISIBILITYSTATE: 'visibilityState',
+  VISIBLE_CHECK: 'visible_check',
   STEP_DEFINITION_NEEDS_TO_IMPLEMENT: 'Step definition needs to be implemented',
 };
 function getSanityReportPath() {
