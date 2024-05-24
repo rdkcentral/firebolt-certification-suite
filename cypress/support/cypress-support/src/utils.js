@@ -627,6 +627,35 @@ function checkForTags(tags) {
   }
 }
 
+global.resolveDeviceVariable = function (key) {
+  const deviceMac = UTILS.getEnvVariable('deviceMac', false);
+  if (!deviceMac) {
+    console.error('deviceMac not defined in environment variables.');
+    return null;
+  }
+  const formattedDeviceMac = deviceMac.replace(/:/g, '').toUpperCase();
+  const jsonFilePath = path.join('../../external/', `${formattedDeviceMac}.json`);
+  // Check if the JSON file exists
+  if (!fs.existsSync(jsonFilePath)) {
+    console.error(`JSON file for deviceMac ${deviceMac} does not exist at ${jsonFilePath}.`);
+    return null;
+  }
+  let deviceData;
+  try {
+    deviceData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
+  } catch (error) {
+    console.error(`Error reading or parsing JSON file ${jsonFilePath}:`, error);
+    return null;
+  }
+  // Retrieve and return the value for the provided key/
+  if (!(key in deviceData)) {
+    console.error(`Key ${key} not found in JSON file ${jsonFilePath}.`);
+    return null;
+  }
+  console.log(`Divya Resolved device variable ${key}: ${deviceData[key]}`);
+  return deviceData[key];
+};
+
 /**
  * FireLog class provides assertion methods with logging using Cypress's cy.log().
  * It wraps Cypress's assertion methods, allowing logging of messages for each assertion.
@@ -741,5 +770,6 @@ module.exports = {
   destroyGlobalObjects,
   writeJsonToFileForReporting,
   checkForTags,
+  resolveDeviceVariable,
   fireLog,
 };
