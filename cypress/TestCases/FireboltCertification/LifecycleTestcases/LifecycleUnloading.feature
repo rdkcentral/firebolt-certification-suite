@@ -30,7 +30,7 @@ Feature: Lifecycle_Unloading
         # And firebolt config 'Lifecycle.appFinishedTimeout' is set to to 60 'seconds'
         When 3rd party 'certification' app is launched with 'unloading' state
         Then '3rd party app' transitions to state 'unloaded'
-        Then '3rd party app' will stay in 'unloaded' state
+        Then '3rd party app' will be in 'unloaded' state
         
     @Lifecycle @coreSDK @notSupported
     Scenario: Lifecycle 2.7.2 Should not unload from active state (foreground)
