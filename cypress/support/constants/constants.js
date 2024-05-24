@@ -416,6 +416,7 @@ module.exports = {
   ENV_SETUP_STATUS: 'environmentLaunched',
   APP_LAUNCH_STATUS: 'appLaunched',
   NO_EVENT_TRIGGERED: 'Expecting no event to be triggered from platform',
+  STEP_DEFINITION_NEEDS_TO_IMPLEMENT: 'Step definition needs to be implemented',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
