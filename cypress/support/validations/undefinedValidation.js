@@ -32,14 +32,18 @@ Cypress.Commands.add(
         // Loop through each item of validations array of validation object
         validationTypeObject.validations.forEach((validation) => {
           // If the field to be validated is result, directly assert if result stored in response is undefined
-          if (validation.field === CONSTANTS.RESULT || validation.field === EVENT_RESPONSE) {
+          if (
+            validation.field === CONSTANTS.RESULT ||
+            validation.field === CONSTANTS.EVENT_RESPONSE
+          ) {
             fireLog.isUndefined(
               methodOrEventResponse,
               `Undefined Validation : Expected ${methodOrEventName} response to have the field ${validation.field} as undefined`
             );
           } else {
             // Else recursively access the nested field properties and verify the corresponding value in response is undefined
-            const fieldParts = validation.field.split('.').shift();
+            const fieldParts = validation.field.split('.');
+            fieldParts.shift();
             let currentObject = methodOrEventResponse;
             // Throw error if any properties other than the provided field is undefined
             for (let i = 0; i < fieldParts.length - 1; i++) {
