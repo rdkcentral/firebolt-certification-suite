@@ -1,4 +1,4 @@
-Feature: ClosedCaptions_Manage
+ndefinedFeature: ClosedCaptions_Manage
 
     Background: Launch FCA for 'ClosedCaptions'
         Given the environment has been set up for 'ClosedCaptions' tests
@@ -59,17 +59,17 @@ Feature: ClosedCaptions_Manage
 
         Examples:
             | Scenario          | Method            | Set_API_Key                   | API_Key               | Method_Validation_Key                                 | Event_Validation_Key                                         | Event                                     |
-            | fontFamily        | fontFamily        | set fontFamily as null        | get fontFamily        | default value for fontFamily in closedcaptions        | onFontFamilyChanged for closedcaptions with monospaced serif | closedcaptions onFontFamilyChanged        |
-            | fontSize          | fontSize          | set fontSize as null          | get fontSize          | default value for fontSize in closedcaptions          | onFontSizeChanged for closedcaptions with 1                  | closedcaptions onFontSizeChanged          |
-            | fontColor         | fontColor         | set fontColor as null         | get fontColor         | default value for fontColor in closedcaptions         | onFontColorChanged for closedcaptions with #ffffff           | closedcaptions onFontColorChanged         |
-            | fontEdge          | fontEdge          | set fontEdge as null          | get fontEdge          | default value for fontEdge in closedcaptions          | onFontEdgeChanged for closedcaptions with none               | closedcaptions onFontEdgeChanged          |
-            | fontEdgeColor     | fontEdgeColor     | set fontEdgeColor as null     | get fontEdgeColor     | default value for fontEdgeColor in closedcaptions     | onFontEdgeColorChanged for closedcaptions with #7F7F7F       | closedcaptions onFontEdgeColorChanged     |
-            | fontOpacity       | fontOpacity       | set fontOpacity as null       | get fontOpacity       | default value for fontOpacity in closedcaptions       | onFontOpacityChanged for closedcaptions with 100             | closedcaptions onFontOpacityChanged       |
-            | backgroundColor   | backgroundColor   | set backgroundColor as null   | get backgroundColor   | default value for backgroundColor in closedcaptions   | onBackgroundColorChanged for closedcaptions with #000000     | closedcaptions onBackgroundColorChanged   |
-            | backgroundOpacity | backgroundOpacity | set backgroundOpacity as null | get backgroundOpacity | default value for backgroundOpacity in closedcaptions | onBackgroundOpacityChanged for closedcaptions with 12        | closedcaptions onBackgroundOpacityChanged |
-            | textAlign         | textAlign         | set textAlign as null         | get textAlign         | default value for textAlign in closedcaptions         | onTextAlignChanged for closedcaptions with center            | closedcaptions onTextAlignChanged         |
-            | textAlignVertical | textAlignVertical | set textAlignVertical as null | get textAlignVertical | default value for textAlignVertical in closedcaptions | onTextAlignVerticalChanged for closedcaptions with middle    | closedcaptions onTextAlignVerticalChanged |
-            | windowColor       | windowColor       | set windowColor as null       | get windowColor       | default value for windowColor in closedcaptions       | onWindowColorChanged for closedcaptions with #000000         | closedcaptions onWindowColorChanged       |
+            | fontFamily        | fontFamily        | set fontFamily as null        | get fontFamily        | default value for fontFamily in closedcaptions        | onFontFamilyChanged for closedcaptions with default value | closedcaptions onFontFamilyChanged        |
+            | fontSize          | fontSize          | set fontSize as null          | get fontSize          | default value for fontSize in closedcaptions          | onFontSizeChanged for closedcaptions with default value                | closedcaptions onFontSizeChanged          |
+            | fontColor         | fontColor         | set fontColor as null         | get fontColor         | default value for fontColor in closedcaptions         | onFontColorChanged for closedcaptions with default value           | closedcaptions onFontColorChanged         |
+            | fontEdge          | fontEdge          | set fontEdge as null          | get fontEdge          | default value for fontEdge in closedcaptions          | onFontEdgeChanged for closedcaptions with default value               | closedcaptions onFontEdgeChanged          |
+            | fontEdgeColor     | fontEdgeColor     | set fontEdgeColor as null     | get fontEdgeColor     | default value for fontEdgeColor in closedcaptions     | onFontEdgeColorChanged for closedcaptions with default value       | closedcaptions onFontEdgeColorChanged     |
+            | fontOpacity       | fontOpacity       | set fontOpacity as null       | get fontOpacity       | default value for fontOpacity in closedcaptions       | onFontOpacityChanged for closedcaptions with default value            | closedcaptions onFontOpacityChanged       |
+            | backgroundColor   | backgroundColor   | set backgroundColor as null   | get backgroundColor   | default value for backgroundColor in closedcaptions   | onBackgroundColorChanged for closedcaptions with default value     | closedcaptions onBackgroundColorChanged   |
+            | backgroundOpacity | backgroundOpacity | set backgroundOpacity as null | get backgroundOpacity | default value for backgroundOpacity in closedcaptions | onBackgroundOpacityChanged for closedcaptions with default value        | closedcaptions onBackgroundOpacityChanged |
+            | textAlign         | textAlign         | set textAlign as null         | get textAlign         | default value for textAlign in closedcaptions         | onTextAlignChanged for closedcaptions with default value            | closedcaptions onTextAlignChanged         |
+            | textAlignVertical | textAlignVertical | set textAlignVertical as null | get textAlignVertical | default value for textAlignVertical in closedcaptions | onTextAlignVerticalChanged for closedcaptions with default value    | closedcaptions onTextAlignVerticalChanged |
+            | windowColor       | windowColor       | set windowColor as null       | get windowColor       | default value for windowColor in closedcaptions       | onWindowColorChanged for closedcaptions with default value        | closedcaptions onWindowColorChanged       |
             | windowOpacity     | windowOpacity     | set windowOpacity as null     | get windowOpacity     | default value for windowOpacity in closedcaptions     | onWindowOpacityChanged for closedcaptions with 0             | closedcaptions onWindowOpacityChanged     |
 
     @ClosedCaptions @manageSDK

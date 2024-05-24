@@ -402,8 +402,7 @@
     },
     "DEFAULT_VALUE_FOR_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.backgroundColor",
-        "validationJsonPath": "result",
-        "content": "NULL"
+        "validationJsonPath": "result"
     },
     "ONBACKGROUNDCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#FF00FF": {
         "event": "closedcaptions.onBackgroundColorChanged",
@@ -415,6 +414,10 @@
         "validationJsonPath": "eventResponse",
         "content": "CLOSEDCAPTIONS_BACKGROUNDCOLOR_#000000"
     },
+    "ONBACKGROUNDCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
+        "event": "closedcaptions.onBackgroundColorChanged",
+        "validationJsonPath": "eventResponse"
+    },
     "75_FOR_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.backgroundOpacity",
         "validationJsonPath": "result",
@@ -422,8 +425,7 @@
     },
     "DEFAULT_VALUE_FOR_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.backgroundOpacity",
-        "validationJsonPath": "result",
-        "content": "NULL"
+        "validationJsonPath": "result"
     },
     "ONBACKGROUNDOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_75": {
         "event": "closedcaptions.onBackgroundOpacityChanged",
@@ -434,6 +436,10 @@
         "event": "closedcaptions.onBackgroundOpacityChanged",
         "validationJsonPath": "eventResponse",
         "content": "INTEGER12"
+    },
+    "ONBACKGROUNDOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
+        "event": "closedcaptions.onBackgroundOpacityChanged",
+        "validationJsonPath": "eventResponse"
     },
     "DISABLED_FOR_CLOSEDCAPTIONS":{
         "method": "closedcaptions.enabled",
@@ -462,8 +468,7 @@
     },
     "DEFAULT_VALUE_FOR_FONTCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontColor",
-        "validationJsonPath": "result",
-        "content": "NULL"
+        "validationJsonPath": "result"
     },
     "ONFONTCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#FF00FF": {
         "event": "closedcaptions.onFontColorChanged",
@@ -474,6 +479,10 @@
         "event": "closedcaptions.onFontColorChanged",
         "validationJsonPath": "eventResponse",
         "content": "CLOSEDCAPTIONS_COLOR_#FFFFFF"
+    },
+    "ONFONTCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
+        "event": "closedcaptions.onFontColorChanged",
+        "validationJsonPath": "eventResponse"
     },
     "RAISED_FOR_FONTEDGE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdge",
@@ -487,13 +496,16 @@
     },
     "DEFAULT_VALUE_FOR_FONTEDGE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdge",
-        "validationJsonPath": "result",
-        "content": "NULL"
+        "validationJsonPath": "result"
     },
     "ONFONTEDGECHANGED_FOR_CLOSEDCAPTIONS_WITH_NONE": {
         "event": "closedcaptions.onFontEdgeChanged",
         "validationJsonPath": "eventResponse",
         "content": "CLOSEDCAPTIONS_FONTEDGE_NONE"
+    },
+    "ONFONTEDGECHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
+        "event": "closedcaptions.onFontEdgeChanged",
+        "validationJsonPath": "eventResponse"
     },
     "DEPRESSED_FOR_FONTEDGE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdge",
@@ -567,8 +579,7 @@
     },
     "DEFAULT_VALUE_FOR_FONTEDGECOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdgeColor",
-        "validationJsonPath": "result",
-        "content": "NULL"
+        "validationJsonPath": "result"
     },
     "ONFONTEDGECOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#FFFFFF": {
         "event": "closedcaptions.onFontEdgeColorChanged",
@@ -579,6 +590,10 @@
         "event": "closedcaptions.onFontEdgeColorChanged",
         "validationJsonPath": "eventResponse",
         "content": "CLOSEDCAPTIONS_FONTEDGECOLOR_#7F7F7F"
+    },
+    "ONFONTEDGECOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
+        "event": "closedcaptions.onFontEdgeColorChanged",
+        "validationJsonPath": "eventResponse"
     },
     "CURSIVE_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontFamily",
@@ -597,8 +612,7 @@
     },
     "DEFAULT_VALUE_FOR_FONTOPACITY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontOpacity",
-        "validationJsonPath": "result",
-        "content": "NULL"
+        "validationJsonPath": "result"
     },
     "ONFONTOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_75": {
         "event": "closedcaptions.onFontOpacityChanged",
@@ -610,15 +624,22 @@
         "validationJsonPath": "eventResponse",
         "content": "INTEGER100"
     },
+    "ONFONTOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
+        "event": "closedcaptions.onFontOpacityChanged",
+        "validationJsonPath": "eventResponse"
+    },
     "DEFAULT_VALUE_FOR_FONTSIZE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontSize",
-        "validationJsonPath": "result",
-        "content": "NULL"
+        "validationJsonPath": "result"
     },
     "ONFONTSIZECHANGED_FOR_CLOSEDCAPTIONS_WITH_1": {
         "event": "closedcaptions.onFontSizeChanged",
         "validationJsonPath": "eventResponse",
         "content": "CLOSEDCAPTIONS_FONTSIZE"
+    },
+    "ONFONTSIZECHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
+        "event": "closedcaptions.onFontSizeChanged",
+        "validationJsonPath": "eventResponse"
     },
     "LEFT_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlign",
@@ -642,13 +663,16 @@
     },
     "DEFAULT_VALUE_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlign",
-        "validationJsonPath": "result",
-        "content": "NULL"
+        "validationJsonPath": "result"
     },
     "ONTEXTALIGNCHANGED_FOR_CLOSEDCAPTIONS_WITH_CENTER": {
         "event": "closedcaptions.onTextAlignChanged",
         "validationJsonPath": "eventResponse",
         "content": "CLOSEDCAPTIONS_TEXTALIGN_CENTER"
+    },
+    "ONTEXTALIGNCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
+        "event": "closedcaptions.onTextAlignChanged",
+        "validationJsonPath": "eventResponse"
     },
     "TOP_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlignVertical",
@@ -662,13 +686,16 @@
     },
     "DEFAULT_VALUE_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlignVertical",
-        "validationJsonPath": "result",
-        "content": "NULL"
+        "validationJsonPath": "result"
     },
     "ONTEXTALIGNVERTICALCHANGED_FOR_CLOSEDCAPTIONS_WITH_MIDDLE": {
         "event": "closedcaptions.onTextAlignVerticalChanged",
         "validationJsonPath": "eventResponse",
         "content": "CLOSEDCAPTIONS_TEXTALIGNVERTICAL_MIDDLE"
+    },
+    "ONTEXTALIGNVERTICALCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
+        "event": "closedcaptions.onTextAlignVerticalChanged",
+        "validationJsonPath": "eventResponse"
     },
     "BOTTOM_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlignVertical",
@@ -710,6 +737,10 @@
         "validationJsonPath": "eventResponse",
         "content": "CLOSEDCAPTIONS_FONTFAMILY_MONOSPACED_SANSERIF"
     },
+    "ONFONTFAMILYCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
+        "event": "closedcaptions.onFontFamilyChanged",
+        "validationJsonPath": "eventResponse"
+    },
     "PROPORTIONAL_SERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontFamily",
         "validationJsonPath": "result",
@@ -722,8 +753,7 @@
     },
     "DEFAULT_VALUE_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontFamily",
-        "validationJsonPath": "result",
-        "content": "NULL"
+        "validationJsonPath": "result"
     },
     "ONFONTFAMILYCHANGED_FOR_CLOSEDCAPTIONS_WITH_MONOSPACED_SERIF": {
         "event": "closedcaptions.onFontFamilyChanged",
@@ -782,8 +812,7 @@
     },
     "DEFAULT_VALUE_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.windowColor",
-        "validationJsonPath": "result",
-        "content": "NULL"
+        "validationJsonPath": "result"
     },
     "WHITE_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.windowColor",
@@ -794,6 +823,10 @@
         "event": "closedcaptions.onWindowColorChanged",
         "validationJsonPath": "eventResponse",
         "content": "CLOSEDCAPTIONS_WINDOWCOLOR_WHITE"
+    },
+    "ONWINDOWCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
+        "event": "closedcaptions.onWindowColorChanged",
+        "validationJsonPath": "eventResponse"
     },
     "WHITE_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS_EVENT": {
         "event": "closedcaptions.onWindowColorChanged",
@@ -808,7 +841,6 @@
     "DEFAULT_VALUE_FOR_WINDOWOPACITY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.windowOpacity",
         "validationJsonPath": "result",
-        "content": "NULL",
         "expectingError": false
     },
     "ONWINDOWOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_50": {
@@ -820,6 +852,10 @@
         "event": "closedcaptions.onWindowOpacityChanged",
         "validationJsonPath": "eventResponse",
         "content": "INTEGER0"
+    },
+    "ONWINDOWOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
+        "event": "closedcaptions.onWindowOpacityChanged",
+        "validationJsonPath": "eventResponse"
     },
     "ENABLE_CLOSEDCAPTIONS_WITH_NO_PARAMETERS":{
         "method": "manage_closedcaptions.setEnabled"

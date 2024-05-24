@@ -21,7 +21,7 @@ Cypress.Commands.add(
           validationType == CONSTANTS.EVENT
             ? apiOrEventObject.eventResponse
             : validationType == CONSTANTS.METHOD
-              ? apiOrEventObject.response
+              ? apiOrEventObject.response.result
               : null;
         const methodOrEventName =
           validationType == CONSTANTS.EVENT
@@ -32,27 +32,23 @@ Cypress.Commands.add(
         // Loop through each item of validations array of validation object
         validationTypeObject.validations.forEach((validation) => {
           // If the field to be validated is result, directly assert if result stored in response is undefined
-          if (validation.field === CONSTANTS.RESULT) {
+          if (validation.field === CONSTANTS.RESULT || validation.field === EVENT_RESPONSE) {
             fireLog.isUndefined(
-              methodOrEventResponse.result,
+              methodOrEventResponse,
               `Undefined Validation : Expected ${methodOrEventName} response to have the field ${validation.field} as undefined`
             );
           } else {
-            // Else recursilvely access the nested field properties and verify the corresponding value in response is undefined
-            const fieldParts = validation.field.split('.');
+            // Else recursively access the nested field properties and verify the corresponding value in response is undefined
+            const fieldParts = validation.field.split('.').shift();
             let currentObject = methodOrEventResponse;
             // Throw error if any properties other than the provided field is undefined
             for (let i = 0; i < fieldParts.length - 1; i++) {
               const part = fieldParts[i];
               if (!currentObject || typeof currentObject[part] === CONSTANTS.UNDEFINED) {
-                cy.log(
+                fireLog.assert(
+                  false,
                   `Undefined Validation : Expected ${methodOrEventName} response to have property ${part} in the field ${validation.field}`
-                ).then(() => {
-                  fireLog.assert(
-                    false,
-                    `Expected ${methodOrEventName} response to have property ${part} in the field ${validation.field}`
-                  );
-                });
+                );
               }
               currentObject = currentObject[part];
             }
@@ -65,26 +61,17 @@ Cypress.Commands.add(
           }
         });
       } catch (error) {
-        cy.log(
-          `Undefined Validation : Received following error while performing validation of type undefined on response',
-        ${JSON.stringify(error)}`
-        ).then(() => {
-          fireLog.assert(
-            false,
-            `Undefined Validation : Received following error while performing validation of type undefined on response',
-          ${JSON.stringify(error)}`
-          );
-        });
-      }
-    } else {
-      cy.log(
-        `Undefined Validation : Expected validation object or api/event object stored in global list to not be undefined`
-      ).then(() => {
         fireLog.assert(
           false,
-          'Undefined Validation : Expected validation object or api/event object stored in global list to not be undefined'
+          `Undefined Validation : Received following error while performing validation of type undefined on response',
+          ${JSON.stringify(error)}`
         );
-      });
+      }
+    } else {
+      fireLog.assert(
+        false,
+        'Undefined Validation : Expected validation object or api/event object stored in global list to not be undefined'
+      );
     }
   }
 );
