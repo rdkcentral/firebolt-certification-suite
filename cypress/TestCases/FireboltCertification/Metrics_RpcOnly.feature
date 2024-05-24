@@ -19,5 +19,3 @@
         And 3rd party 'certification' app is launched
         When 1st party app invokes the 'Firebolt' API to 'initialize session'
         Then 'Firebolt' platform responds to '1st party app' with 'content for internal initialize'
-
-

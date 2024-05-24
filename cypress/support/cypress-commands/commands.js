@@ -18,28 +18,7 @@
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS from '../cypress-support/src/utils';
-
-/**
- * @module commands
- * @function mergeJsonfiles
- * @description Merging json files from the provided path.
- * @param {*} path - Folder path of the json files.
- * @example
- * cy.mergeJsonfiles('tmp/');
- */
-Cypress.Commands.add('mergeJsonfiles', (path) => {
-  cy.task('readFilesFromDir', path).then((files) => {
-    // Appending file path to the list of file names
-    if (files != null) {
-      files.forEach((element, index) => (files[index] = path + element));
-
-      // Merging all json files
-      cy.task('mergeMultipleJson', files).then((result) => {
-        return result;
-      });
-    }
-  });
-});
+const logger = require('../Logger')('command.js');
 
 /**
  * @module commands
@@ -48,6 +27,8 @@ Cypress.Commands.add('mergeJsonfiles', (path) => {
  * @param {String} key - key name of the firebolt data.
  * @example
  * cy.getFireboltData('GET_DEVICE_ID');
+ * cy.getFireboltData('GET_DEVICE_ID', fireboltMocks);
+ * cy.getFireboltData('GET_DEVICE_ID', fireboltCalls);
  */
 Cypress.Commands.add(
   'getFireboltData',
@@ -55,37 +36,18 @@ Cypress.Commands.add(
     // Reading the data from combinedJson based on key.
     let fireboltData;
     if (callType == CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS) {
-      fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTMOCKS)[key];
+      fireboltData = UTILS.getEnvVariable('fireboltMocksJson')[key];
+    } else if (callType == CONSTANTS.SUPPORTED_CALLTYPES.SET_RESPONSE_JSON) {
+      fireboltData = UTILS.getEnvVariable('setResponseJson')[key];
     } else {
       fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
     if (!fireboltData) {
-      cy.log(CONSTANTS.NO_DATA_FOR_THE_KEY + key).then(() => {
-        assert(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
-      });
+      fireLog.assert(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
     return fireboltData;
   }
 );
-
-/**
- * @module commands
- * @function fetchParamBasedOnType
- * @description Fetching the params from testDataHandler or returning as it is if params is object.
- * @param {*} params - key name of the firebolt data.
- * @example
- * cy.fetchParamBasedOnType('GET_DEVICE_ID');
- * cy.fetchParamBasedOnType({});
- */
-Cypress.Commands.add('fetchParamBasedOnType', (params) => {
-  if (typeof params === CONSTANTS.TYPE_STRING) {
-    cy.testDataHandler(CONSTANTS.PARAMS, params).then((parsedTestData) => {
-      return parsedTestData;
-    });
-  } else if (typeof params === CONSTANTS.TYPE_OBJECT) {
-    return params;
-  }
-});
 
 /**
  * @module commands
@@ -111,30 +73,29 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
 
       // Process each firebolt call item
       const promises = fireboltItems.map((item) => {
-        let method = item.method;
-        const params = item.params ? item.params : CONSTANTS.NO_PARAMS;
-        const context = item.context ? item.context : CONSTANTS.NO_CONTEXT;
+        let params = item.params;
+        let method, action;
+        // Fetching the value of environment variable based on dataIdentifier
+        if (/CYPRESSENV/.test(params)) {
+          const envParam = params.split('-')[1];
+          params = UTILS.getEnvVariable(envParam, false);
+        }
+        method = item.method;
         const expected = item.expected ? item.expected : CONSTANTS.RESULT;
-        let action = CONSTANTS.ACTION_CORE.toLowerCase();
+        action = CONSTANTS.ACTION_CORE.toLowerCase();
 
-        // If method contains sdk name splitting it and updating action and method value. Ex: manage_device.name
+        // If a method has prefix with an underscore, the value is taken as the action.
         if (method && method.includes('_')) {
           action = method.split('_')[0];
           method = method.split('_')[1];
         }
 
-        // Reading the context value based on the context key name.
-        return cy.testDataHandler(CONSTANTS.CONTEXT, context).then((parsedContext) => {
-          // Fetching the Params based on type, If param is object using as-is else fetching it by using testDataHandler.
-          return cy.fetchParamBasedOnType(params).then((parsedTestData) => {
-            results.push({
-              method: method,
-              params: parsedTestData,
-              context: parsedContext,
-              action: action,
-              expected: expected,
-            });
-          });
+        return results.push({
+          method: method,
+          params: params,
+          context: item.context,
+          action: action,
+          expected: expected,
         });
       });
 
@@ -143,7 +104,7 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
       });
     });
   } else {
-    assert(false, `${sdk} SDK not Supported`);
+    fireLog.assert(false, `${sdk} SDK not Supported`);
   }
 });
 
@@ -268,7 +229,7 @@ Cypress.Commands.add('getLatestFireboltJsonFromFixtures', () => {
 
       return version;
     } catch (err) {
-      assert.equal(true, err, 'Error while fetching latest version from the fixtures');
+      fireLog.equal(true, err, 'Error while fetching latest version from the fixtures');
     }
   });
 });
@@ -433,10 +394,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
         }
       });
     } else {
-      assert(
-        false,
-        'Before operation object is not in proper array format, recheck the before objects in fixture/external/moduleReqId - getBeforeOperationObject'
-      );
+      fireLog.assert(false, CONSTANTS.BEFORE_OPERATION_FORMAT);
     }
   }
 });
@@ -451,7 +409,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
  */
 Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
   if (!beforeOperation) {
-    assert(false, 'Before operation object is null/undefined - setResponse');
+    fireLog.assert(false, 'Before operation object is null/undefined - setResponse');
   }
   let firstParty;
   if (beforeOperation.hasOwnProperty('firstParty')) {
@@ -475,7 +433,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
 
           cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
           cy.sendMessagetoPlatforms(requestMap).then((result) => {
-            cy.log('Response from 1st party App: ' + result);
+            cy.log('Response from 1st party App: ' + JSON.stringify(result));
           });
         } else {
           const communicationMode = UTILS.getCommunicationMode();
@@ -503,9 +461,9 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
           cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
             result = JSON.parse(result);
             cy.log(
-              `Response from 3rd party App ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(
-                result
-              )}`
+              `Response from 3rd party App ${Cypress.env(
+                CONSTANTS.THIRD_PARTY_APP_ID
+              )}: ${JSON.stringify(result)}`
             );
           });
         }
@@ -552,9 +510,9 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
         cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
           result = JSON.parse(result);
           cy.log(
-            `Response from 3rd party App ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(
-              result
-            )}`
+            `Response from 3rd party App ${Cypress.env(
+              CONSTANTS.THIRD_PARTY_APP_ID
+            )}: ${JSON.stringify(result)}`
           );
         });
       }
@@ -570,11 +528,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
 
     cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
-      cy.log('Response for marker creation: ' + JSON.stringify(result)).then(() => {
-        cy.log(result.message).then(() => {
-          assert.isTrue(result.success, result.message);
-        });
-      });
+      fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
   }
 });
@@ -605,14 +559,10 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
   // Sending message to the platform to call performance test handler
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     if (result?.success) {
-      cy.log(eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE)).then(() => {
-        assert(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
-        return true;
-      });
+      fireLog(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
+      return true;
     } else {
-      cy.log(eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE)).then(() => {
-        assert(false, eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
-      });
+      fireLog.assert(false, eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
     }
   });
 });
@@ -779,132 +729,38 @@ Cypress.Commands.add('convertJsonToHTML', (defaultDirectory, fileName) => {
       if (response.stdout.includes('Reports saved')) {
         return true;
       }
-      console.log(response);
+      logger.info(response);
       return false;
     });
   } catch (err) {
-    console.log(err);
+    logger.error(err);
     return false;
   }
 });
 
 /**
  * @module commands
- * @function mergeJsonFilesData
- * @description Combine defaultTestData jsons in fcs and configModule.
- * @param {*} fcsJson - The path of jsons in fcs
- * @param {*} configJson - The path of jsons in config module
+ * @function mergeFireboltCallJsons
+ * @description Merges properties of two JSON objects into one, prioritizing the values from the second JSON object.
+ * @param {*} v1DataJson - JSON object
+ * @param {*} v2DataJson - The JSON object to merge with the first JSON object and that takes precedence.
+ * @returns {Object} The merged JSON object.
  * @example
- * mergeJsonFilesData(CONSTANTS.DEFAULTTESTDATA_FROM_FCS,CONSTANTS.DEFAULTTESTDATA_FROM_CONFIGMODULE)
+ * mergeFireboltCallJsons(v1JSON, v2DataJSON);
  */
-Cypress.Commands.add('mergeJsonFilesData', (fcsJson, configJson) => {
-  cy.task('readFileIfExists', fcsJson).then((fireboltCallsFCSjson) => {
-    const fcsDefaultTestData = JSON.parse(fireboltCallsFCSjson);
-    assert.isNotNull(fcsDefaultTestData, CONSTANTS.EXPECTED_DEFAULT_TESTDATA_MESSAGE);
 
-    // Merging all json files
-    cy.task('readFileIfExists', configJson).then((fireboltCallsConfigModulejson) => {
-      const configDefaultTestData = JSON.parse(fireboltCallsConfigModulejson);
-      const combinedJson = Object.assign(fcsDefaultTestData, configDefaultTestData);
-      return combinedJson;
-    });
-  });
-});
-
-/**
- * @module commands
- * @function mergeFcsAndConfigJsons
- * @description Combine all the jsons in fcs and configModule .
- * @param {*} fcsJson - The path of jsons in fcs
- * @param {*} configJson - The path of jsons in config module
- * @example
- * mergeFcsAndConfigJsons(CONSTANTS.FIREBOLTCALLS_FROM_FCS,CONSTANTS.FIREBOLTCALLS_FROM_CONFIGMODULE)
- */
-Cypress.Commands.add('mergeFcsAndConfigJsons', (fcsJson, configJson) => {
-  let combinedJson;
-  cy.mergeJsonfiles(fcsJson).then((fireboltCallsFCSjson) => {
-    assert.isNotNull(fireboltCallsFCSjson, CONSTANTS.EXPECTED_JSON_IN_FIREBOLTCALLS);
-
-    cy.mergeJsonfiles(configJson).then((fireboltCallsConfigModulejson) => {
-      combinedJson = Object.assign(fireboltCallsFCSjson, fireboltCallsConfigModulejson);
-      return combinedJson;
-    });
-  });
-});
-
-/**
- * @module commands
- * @function combineValidationJson
- * @description Combine all the validation jsons in fcs and configModule with override and append functionality if needed .
- * @param {*} fireboltCallsValidationPathFromFCS - The path of validation jsons in fcs
- * @param {*} fireboltCallsValidationPathFromConfigModule - The path of validation jsons in config module
- * @example
- * combineValidationJson(CONSTANTS.VALIDATION_OBJECTS_PATH,CONSTANTS.CONFIG_VALIDATION_OBJECTS_PATH)
- */
-Cypress.Commands.add(
-  'combineValidationJson',
-  (fireboltCallsValidationPathFromFCS, fireboltCallsValidationPathFromConfigModule) => {
-    cy.mergeJsonfiles(fireboltCallsValidationPathFromFCS).then((fCSFixturesValidationjson) => {
-      assert.isNotNull(
-        fCSFixturesValidationjson,
-        'Expected JSON data should be defined in fixtures/objects/validationObjects/'
-      );
-      cy.mergeJsonfiles(fireboltCallsValidationPathFromConfigModule).then(
-        (configModuleValidationjson) => {
-          if (configModuleValidationjson) {
-            for (const key in configModuleValidationjson) {
-              if (fCSFixturesValidationjson.hasOwnProperty(key)) {
-                configModuleValidationjson[key].data.map((configObjectValue) => {
-                  if (!configObjectValue.hasOwnProperty('override')) {
-                    fCSFixturesValidationjson[key].data.push(configObjectValue);
-                  } else {
-                    overrideValue = configObjectValue.override;
-                    if (overrideValue == CONSTANTS.ALL) {
-                      fCSFixturesValidationjson[key].data = configObjectValue;
-                    } else {
-                      fCSFixturesValidationjson[key].data.map((fcsObjectValue, index) => {
-                        if (index == overrideValue) {
-                          fCSFixturesValidationjson[key].data[index] = configObjectValue;
-                        }
-                      });
-                    }
-                  }
-                });
-              } else {
-                fCSFixturesValidationjson[key] = configModuleValidationjson[key];
-              }
-            }
-            Cypress.env(CONSTANTS.FCS_VALIDATION_JSON, fCSFixturesValidationjson);
-          } else {
-            Cypress.env(CONSTANTS.FCS_VALIDATION_JSON, fCSFixturesValidationjson);
-          }
-        }
-      );
-    });
+Cypress.Commands.add('mergeFireboltCallJsons', (v1DataJson, v2DataJson) => {
+  const combinedJsonData = { ...v1DataJson };
+  for (const [key, value] of Object.entries(v2DataJson)) {
+    // If the key exists in combinedJsonData, merge the objects
+    if (combinedJsonData.hasOwnProperty(key)) {
+      combinedJsonData[key] = { ...combinedJsonData[key], ...value };
+    } else {
+      // Otherwise, simply assign the value
+      combinedJsonData[key] = value;
+    }
   }
-);
-/**
- * @module commands
- * @function mergeFireboltCallsAndFireboltMocks
- * @description Combine all the jsons of fireboltcalls and fireboltMocks in fcs n configModule .
- * @example
- * mergeFireboltCallsAndFireboltMocks(E)
- */
-Cypress.Commands.add('mergeFireboltCallsAndFireboltMocks', () => {
-  // merge fireboltCalls jsons
-  cy.mergeFcsAndConfigJsons(
-    `${CONSTANTS.FIREBOLTCALLS_FROM_FCS}${CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS}/`,
-    `${CONSTANTS.FIREBOLTCALLS_FROM_CONFIGMODULE}${CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS}/`
-  ).then((response) => {
-    Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, response);
-  });
-  // merge fireboltMocks jsons
-  cy.mergeFcsAndConfigJsons(
-    `${CONSTANTS.FIREBOLTCALLS_FROM_FCS}${CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS}/`,
-    `${CONSTANTS.FIREBOLTCALLS_FROM_CONFIGMODULE}${CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS}/`
-  ).then((response) => {
-    Cypress.env(CONSTANTS.COMBINEDFIREBOLTMOCKS, response);
-  });
+  return combinedJsonData;
 });
 
 /**

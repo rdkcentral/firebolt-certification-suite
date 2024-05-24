@@ -5,6 +5,7 @@
                 "type": "regEx",
                 "validations": [
                     {
+                        "mode": "regex",
                         "type": "COUNTRYCODE",
                         "description": "Validation of the localization countrycode"
                     }
@@ -18,6 +19,7 @@
                 "type": "regEx",
                 "validations": [
                     {
+                        "mode": "regex",
                         "type": "LANGUAGE",
                         "description": "Validation of the localization language"
                     }
@@ -31,6 +33,7 @@
                 "type": "regEx",
                 "validations": [
                     {
+                        "mode": "regex",
                         "type": "LANGUAGE",
                         "description": "Validation of the localization locale"
                     }
@@ -58,6 +61,7 @@
                 "type": "regEx",
                 "validations": [
                     {
+                        "mode": "regex",
                         "type": "STRING",
                         "description": "Validation of the Localization locality Format"
                     }
@@ -71,6 +75,7 @@
                 "type": "regEx",
                 "validations": [
                     {
+                        "mode": "regex",
                         "type": "NUMERIC",
                         "description": "Validation of the Localization postalCode Format"
                     }
@@ -129,6 +134,7 @@
                 "type": "regEx",
                 "validations": [
                     {
+                        "mode": "regex",
                         "type": "TIMEZONE",
                         "description": "Validation of the localization timezone format"
                     }

@@ -75,4 +75,3 @@ Feature: Keyboard
             | password | passing password as integer          | prompt the user for their invalid password as integer        | invalid parameter password  |
             | standard | passing standard as integer          | prompt the user for their invalid standard as integer        | invalid parameter password  |
             | standard | passing standard as empty            | prompt the user for their standard as empty                  | invalid parameter standard  |
-

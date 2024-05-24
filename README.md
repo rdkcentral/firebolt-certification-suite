@@ -33,6 +33,11 @@ To execute the certification suite against any platform, the following setup mus
 
   `yarn install`
 
+  Note: 
+  - If any dependency overrides exist in the remote config module, they will be applied during the post-install phase.
+  - The original versions of overridden dependencies will be stored in `originalPkgVersion.json` to avoid package.json and yarn.lock getting out of sync.
+  - To restore the `package.json` to its original state, run `yarn restoreDependencyOverrides`. This will restore the original `package.json` and delete `originalPkgVersion.json`.
+  
 - Pull the configurations (if applicable)
 
   `yarn run setup`
@@ -171,7 +176,7 @@ Other cypress command line can also be passed
       }
       ```
 
-  2.  In config module **testData/moduleReqId/moduleReqId.json**<br/>
+  2.  In config module **cypress/fixtures/objects/moduleReqId/moduleReqId.json**<br/>
       Stucture to be followed :
 
       ```json
@@ -192,7 +197,7 @@ Other cypress command line can also be passed
 
       Before Operation for each test case is an array of objects. This would enable us to make multiple before operations for each test case.<br/>
       Properties in before Operation :<br/> 1) "fireboltMock/fireboltCall" : FireboltCall as a key will be used to make firebolt calls to the platform/3rd party app. FireboltMock as a key will be used to override the default response or set the responses.<br/>
-      Data of fireboltMock/fireboltCall keys should be added in config module **testData/fireboltMocks/FeatureFileName.json** or **testData/fireboltCalls/FeatureFileName.json**
+      Data of fireboltMock/fireboltCall keys should be added in config module **fixtures/fireboltMocks/FeatureFileName.json** or **fixtures/fireboltCalls/FeatureFileName.json**
 
           2) "firstParty" : Set value as **true** if the call is to firstParty, set it as **false** if the value is to 3rd party. If no firstparty property is added, it will take **false** as default value.
 
@@ -344,7 +349,7 @@ Below data apply to Device module, so data will go into cypress/fixtures/modules
 - eg 2: <br/>
   "NAME": "living room"
 
-Variables that is specific to a platform add the test data in "testData/<module>.json" file in configmodule.
+Variables that is specific to a platform add the test data in "fixtures/<module>.json" file in configmodule.
 Module represents feature file.<br/>
 Below data apply to Account module, so data will go into cypress/fixtures/modules/Account.json<br/>
 
@@ -355,3 +360,15 @@ Below data apply to Account module, so data will go into cypress/fixtures/module
 ## Manual Cache Deletion for Cypress
 
 If you encounter any caching issues while executing testcases, please refer to this document [Cache_Deletion.md](Docs/Cache_Deletion.md)
+
+## Using Winston Logger for Better Debugging
+
+We have added Winston logger to FCS to make debugging easier. Instead of using console logs, use different types of loggers (info, debug, error) based on the nature of the message.  Optionally, appending the module name to the logger message would furnish more precise information for debugging purposes. To know more about winston implementation refer [logger.md](cypress/support/logger.md)
+
+Example Usage:
+  ```
+  logger.info('This is an informational message', 'moduleName');
+  logger.debug('This is a debugging message');
+  logger.error('This is an error message');
+
+  ```

@@ -47,7 +47,7 @@ const ensureConfigModule = async () => {
       }
     }
   } catch (err) {
-    console.error('Error ensuring config module:', err);
+    console.log('Error ensuring config module:', err);
     process.exit(1);
   }
 };

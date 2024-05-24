@@ -16,6 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const CONSTANTS = require('../../constants/constants');
+const logger = require('../../Logger')('utils.js');
 const { _ } = Cypress;
 const MESSAGE = 'message';
 const Validator = require('jsonschema').Validator;
@@ -317,7 +318,7 @@ function unsubscribe(webSocketClient = null) {
     throw new Error('Websocket client not established');
   }
   webSocketClient.unsubscribe(MESSAGE);
-  console.log('Websocket connection closed Successfully');
+  logger.info('Websocket connection closed Successfully', 'unsubscribe');
 }
 
 /**
@@ -373,9 +374,9 @@ function getEnvVariable(variable, isRequired = true) {
 
   if (isRequired) {
     const errorMessage = `Required environment variable "${variable}" is missing or undefined.`;
-    console.error(errorMessage);
+    logger.error(errorMessage, 'getEnvVariable');
     // To include stackTrace in the console
-    console.error(stackTrace());
+    logger.error(stackTrace());
     throw new Error(errorMessage);
   }
   return envValue;
@@ -442,16 +443,21 @@ function assertWithRequirementLogs(pretext, actual, expected, equateDeep = false
       assert(false, pretext + ': ' + JSON.stringify(errorObject));
     });
   } else {
-    cy.log(
-      pretext + ': Expected : ' + expected + ' , Actual : ' + actual,
-      'assertWithRequirementLogs'
-    ).then(() => {
-      if (equateDeep) {
-        assert.deepEqual(actual, expected, pretext);
-      } else {
-        assert.equal(actual, expected, pretext);
-      }
-    });
+    let expectedLog = expected;
+    let actualLog = actual;
+    if (Array.isArray(actual) && actual.length < 1) {
+      actualLog = JSON.stringify(actual);
+    }
+    if (Array.isArray(expected) && expected.length < 1) {
+      expectedLog = JSON.stringify(expected);
+    }
+
+    const logMessage = pretext + ': Expected : ' + expectedLog + ' , Actual : ' + actualLog;
+    if (equateDeep) {
+      fireLog.deepEqual(actual, expected, logMessage);
+    } else {
+      fireLog.equal(actual, expected, logMessage);
+    }
   }
 }
 
@@ -655,6 +661,10 @@ class FireLog {
     });
 
     return FireLog.instance;
+  }
+
+  isNull(value, message) {
+    assert.isNull(value, message);
   }
 
   isNotNull(value, message) {

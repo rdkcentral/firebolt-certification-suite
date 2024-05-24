@@ -5,12 +5,12 @@
     "TRUE_FOR_PROFILE_APPROVECONTENTRATING": {
         "method": "profile.approveContentRating",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "FALSE_FOR_PROFILE_APPROVECONTENTRATING": {
         "method": "profile.approveContentRating",
         "validationJsonPath": "result",
-        "expected": "FALSE"
+        "content": "FALSE"
     },
     "VERIFY_IF_CURRENT_PROFILE_HAVE_ACCESS_TO_PURCHASE": {
         "method": "profile.approvePurchase"
@@ -18,12 +18,12 @@
     "TRUE_FOR_PROFILE_APPROVEPURCHASE": {
         "method": "profile.approvePurchase",
         "validationJsonPath": "result",
-        "expected": "TRUE"
+        "content": "TRUE"
     },
     "FALSE_FOR_PROFILE_APPROVEPURCHASE": {
         "method": "profile.approvePurchase",
         "validationJsonPath": "result",
-        "expected": "FALSE"
+        "content": "FALSE"
     },
     "ALLOW_PROFILE_FLAGS": {
         "method": "profile.flags"
@@ -31,7 +31,7 @@
     "EXPECTED_PROFILE_FLAGS_FOR_THE_CURRENT_SESSION": {
         "method": "profile.flags",
         "validationJsonPath": "result",
-        "expected": "PROFILE_FLAGS"
+        "content": "PROFILE_FLAGS"
     },
     "EXPECT_ERROR_FOR_ALLOW_PROFILE_FLAGS": {
         "method": "profile.flags",
@@ -40,7 +40,7 @@
     "INVALID_REQUEST_FOR_PROFILE_FLAGS": {
         "method": "profile.flags",
         "validationJsonPath": "result",
-        "expected": "INVALID_REQUEST",
+        "content": "INVALID_REQUEST",
         "expectingError": true
     }
 }
