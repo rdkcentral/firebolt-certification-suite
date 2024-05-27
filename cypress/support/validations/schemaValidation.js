@@ -18,7 +18,7 @@
 const CONSTANTS = require('../constants/constants');
 const Validator = require('jsonschema').Validator;
 const validator = new Validator();
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module schemaValidation
@@ -37,107 +37,91 @@ Cypress.Commands.add(
     const responseType = response.hasOwnProperty(CONSTANTS.ERROR)
       ? CONSTANTS.ERROR
       : CONSTANTS.RESULT;
-    if (
-      Cypress.env(CONSTANTS.TEST_TYPE) &&
-      Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
-    ) {
-      try {
-        cy.validateSchema(response[responseType], methodOrEvent, '', responseType).then(
-          (schemaValidation) => {
-            response.schemaResult = schemaValidation;
-            return response;
-          }
-        );
-      } catch (err) {
-        const error = err;
-        response.error = error;
-      }
-    } else {
-      if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
-        let formattedResponse = {};
-        let result;
 
-        cy.validateSchema(
-          response[responseType],
-          methodOrEvent,
-          params,
-          responseType,
-          isValidation
-        ).then((schemaValidation) => {
-          if (methodOrEvent.includes('.on')) {
-            let formattedSchemaValidationResult;
+    if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
+      let formattedResponse = {};
+      let result;
 
-            if (
-              schemaValidation.errors &&
-              schemaValidation.errors.length > 0 &&
-              schemaValidation.errors[0].message
-            ) {
-              formattedSchemaValidationResult = {
-                status: CONSTANTS.FAIL,
-                eventSchemaResult: schemaValidation,
-              };
-            } else {
-              formattedSchemaValidationResult = {
-                status: CONSTANTS.PASS,
-                eventSchemaResult: schemaValidation,
-              };
-            }
-            if (response.hasOwnProperty(CONSTANTS.RESULT)) {
-              if (
-                response &&
-                response.result &&
-                response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
-              ) {
-                formattedResponse = Object.assign(formattedResponse, response.result);
-                formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
-              } else if (
-                response &&
-                response.result &&
-                !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
-              ) {
-                formattedResponse.eventResponse = response.result;
-                formattedResponse.eventSchemaResult = formattedSchemaValidationResult;
-                formattedResponse.eventTime = null;
-              }
-            } else if (response.hasOwnProperty(CONSTANTS.ERROR)) {
-              if (
-                response &&
-                response.result &&
-                response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
-              ) {
-                formattedResponse = Object.assign(formattedResponse, response.error);
-                formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
-              } else if (!response?.result?.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) {
-                formattedResponse = response.error;
-              }
-            }
+      cy.validateSchema(
+        response[responseType],
+        methodOrEvent,
+        params,
+        responseType,
+        isValidation
+      ).then((schemaValidation) => {
+        if (methodOrEvent.includes('.on')) {
+          let formattedSchemaValidationResult;
+
+          if (
+            schemaValidation.errors &&
+            schemaValidation.errors.length > 0 &&
+            schemaValidation.errors[0].message
+          ) {
+            formattedSchemaValidationResult = {
+              status: CONSTANTS.FAIL,
+              eventSchemaResult: schemaValidation,
+            };
           } else {
-            if (response.hasOwnProperty(CONSTANTS.ERROR)) {
-              result = { result: null, error: response.error };
-            } else if (response.hasOwnProperty(CONSTANTS.RESULT)) {
-              result = { result: response.result, error: null };
-            }
-
+            formattedSchemaValidationResult = {
+              status: CONSTANTS.PASS,
+              eventSchemaResult: schemaValidation,
+            };
+          }
+          if (response.hasOwnProperty(CONSTANTS.RESULT)) {
             if (
-              schemaValidation.errors &&
-              schemaValidation.errors.length > 0 &&
-              schemaValidation.errors[0].message
+              response &&
+              response.result &&
+              response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
             ) {
-              formattedResponse[CONSTANTS.SCHEMA_VALIDATION_STATUS] = CONSTANTS.FAIL;
-              formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
-            } else {
-              formattedResponse[CONSTANTS.SCHEMA_VALIDATION_STATUS] = CONSTANTS.PASS;
-              formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
+              formattedResponse = Object.assign(formattedResponse, response.result);
+              formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
+            } else if (
+              response &&
+              response.result &&
+              !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+            ) {
+              formattedResponse.eventResponse = response.result;
+              formattedResponse.eventSchemaResult = formattedSchemaValidationResult;
+              formattedResponse.eventTime = null;
             }
-
-            formattedResponse.response = result;
+          } else if (response.hasOwnProperty(CONSTANTS.ERROR)) {
+            if (
+              response &&
+              response.result &&
+              response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+            ) {
+              formattedResponse = Object.assign(formattedResponse, response.error);
+              formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
+            } else if (!response?.result?.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) {
+              formattedResponse = response.error;
+            }
+          }
+        } else {
+          if (response.hasOwnProperty(CONSTANTS.ERROR)) {
+            result = { result: null, error: response.error };
+          } else if (response.hasOwnProperty(CONSTANTS.RESULT)) {
+            result = { result: response.result, error: null };
           }
 
-          return formattedResponse;
-        });
-      } else {
-        cy.log(`Response does not have a valid result or error field - ${response}`);
-      }
+          if (
+            schemaValidation.errors &&
+            schemaValidation.errors.length > 0 &&
+            schemaValidation.errors[0].message
+          ) {
+            formattedResponse[CONSTANTS.SCHEMA_VALIDATION_STATUS] = CONSTANTS.FAIL;
+            formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
+          } else {
+            formattedResponse[CONSTANTS.SCHEMA_VALIDATION_STATUS] = CONSTANTS.PASS;
+            formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
+          }
+
+          formattedResponse.response = result;
+        }
+
+        return formattedResponse;
+      });
+    } else {
+      cy.log(`Response does not have a valid result or error field - ${response}`);
     }
   }
 );
@@ -160,33 +144,11 @@ Cypress.Commands.add(
   (response, methodOrEvent, params, schemaType, isValidation) => {
     cy.getSchema(methodOrEvent, params, schemaType).then((schemaMap) => {
       if (schemaMap) {
-        if (
-          Cypress.env(CONSTANTS.TEST_TYPE) &&
-          Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
-        ) {
-          let validationResult;
-          const schemaMapResult = validator.validate(response, schemaMap);
-          if (schemaMapResult.errors.length > 0 || response === undefined) {
-            validationResult = {
-              status: CONSTANTS.FAIL,
-              schemaValidationResult: schemaMapResult,
-            };
-          } else {
-            validationResult = {
-              status: CONSTANTS.PASS,
-              schemaValidationResult: schemaMapResult,
-            };
-          }
-          return validationResult;
-        } else {
-          return validator.validate(response, schemaMap);
-        }
+        return validator.validate(response, schemaMap);
       } else {
         if (isValidation) {
           // Normal calls need to go through and response needs to get stored in global list even if they don't adhere to the schema. Schema failure should only be thrown during validation step
-          cy.log(`Failed to fetch schema, validateSchema`).then(() => {
-            assert(false, 'Failed to fetch schema, validateSchema');
-          });
+          fireLog.assert(false, 'Failed to fetch schema, validateSchema');
         }
       }
     });

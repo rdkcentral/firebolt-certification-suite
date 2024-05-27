@@ -554,10 +554,10 @@ Cypress.Commands.add('setAppObjectStateFromMethod', (method, appId) => {
  * cy.lifecycleSchemaChecks({"result":null,"error":null,"schemaResult":{"status":"PASS","schemaValidationResult":{"instance":null,"schema":{"const":null}}, 'foreground');
  */
 Cypress.Commands.add('lifecycleSchemaChecks', (response, state) => {
-  result = JSON.parse(response).schemaResult;
+  result = JSON.parse(response);
   apiSchemaResult = {
-    validationStatus: result.status,
-    validationResponse: result.schemaValidationResult,
+    validationStatus: result[CONSTANTS.SCHEMA_VALIDATION_STATUS],
+    validationResponse: result[CONSTANTS.SCHEMA_VALIDATION_RESPONSE],
   };
   cy.validationChecksForResponseAndSchemaResult(response, false, apiSchemaResult, false);
 });
