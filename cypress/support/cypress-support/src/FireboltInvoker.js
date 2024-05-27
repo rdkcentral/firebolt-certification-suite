@@ -19,6 +19,8 @@
 import modularTransportClient from '../../modularTransportClient';
 import { getEnvVariable } from './utils';
 const logger = require('../../Logger')('FireboltInvoker.js');
+const responseMap = new Map();
+Cypress.env('responseMap', responseMap);
 
 const WEBSOCKET = 'WebSocket';
 const DEFAULT_WS_URL_PROTOCOL = 'ws://';
