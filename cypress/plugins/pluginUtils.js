@@ -68,7 +68,7 @@ async function getAndDereferenceOpenRpc(externalUrls, version = null) {
  * @param {string} path - The path to the directory containing the FireboltCalls V2 data.
  * @throws {Error} If an error occurs while reading the directory or writing the file.
  */
-function generateFirboltCallsIndexFile(path) {
+function generateFireboltCallsIndexFile(path) {
   // Define variables
   const v2TestFiles = [];
   // let indexFileContent = '';
@@ -114,4 +114,4 @@ function generateFirboltCallsIndexFile(path) {
   }
 }
 
-module.exports = { getAndDereferenceOpenRpc, generateFirboltCallsIndexFile };
+module.exports = { getAndDereferenceOpenRpc, generateFireboltCallsIndexFile };
