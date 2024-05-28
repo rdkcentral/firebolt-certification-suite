@@ -6,7 +6,7 @@
  * @param {Object} apiOrEventObject - Extracted API or Event object from global list.
  * @param {String} validationType - To check whether to validate event or method
  * @example
- * cy.undefinedValidation(validationTypeObject, apiOrEventObject)
+ * cy.undefinedValidation(validationTypeObject, apiOrEventObject, validationType)
  */
 
 const CONSTANTS = require('../constants/constants');
