@@ -495,295 +495,156 @@
         "type": "interest",
         "reason": "playlist",
         "entity": {
-            "entityType": "channel",
-            "channelType": "streaming",
-            "entityId": "streaming/xyz"
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "streaming",
+                "entityId": "streaming/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_CHANNEL_STREAMING": {
         "type": "disinterest",
         "reason": "playlist",
         "entity": {
-            "entityType": "channel",
-            "channelType": "streaming",
-            "entityId": "streaming/xyz"
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "streaming",
+                "entityId": "streaming/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_CHANNEL_OVERTHEAIR": {
         "type": "interest",
         "reason": "playlist",
         "entity": {
-            "entityType": "channel",
-            "channelType": "overTheAir",
-            "entityId": "streaming/xyz"
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "overTheAir",
+                "entityId": "streaming/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_CHANNEL_OVERTHEAIR": {
         "type": "disinterest",
         "reason": "playlist",
         "entity": {
-            "entityType": "channel",
-            "channelType": "overTheAir",
-            "entityId": "streaming/xyz"
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "overTheAir",
+                "entityId": "streaming/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_EPISODE": {
         "type": "interest",
         "reason": "playlist",
         "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "movie",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_EPISODE": {
         "type": "disinterest",
         "reason": "playlist",
         "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_SEASON": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "season",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_SEASON": {
-        "type": "disinterest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "season",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_SERIES": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "series",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_SERIES": {
-        "type": "disinterest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "series",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "movie",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_CONCERT": {
         "type": "interest",
         "reason": "playlist",
         "entity": {
-            "entityType": "program",
-            "programType": "concert",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "concert",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_CONCERT": {
         "type": "disinterest",
         "reason": "playlist",
         "entity": {
-            "entityType": "program",
-            "programType": "concert",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "concert",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_SPORTINGEVENT": {
         "type": "interest",
         "reason": "playlist",
         "entity": {
-            "entityType": "program",
-            "programType": "sportingEvent",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "sportingEvent",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_SPORTINGEVENT": {
         "type": "disinterest",
         "reason": "playlist",
         "entity": {
-            "entityType": "program",
-            "programType": "sportingEvent",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_PREVIEW": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "preview",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_PREVIEW": {
-        "type": "disinterest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "preview",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_OTHER": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "other",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_OTHER": {
-        "type": "disinterest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "other",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_ADVERTISEMENT": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "advertisement",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_ADVERTISEMENT": {
-        "type": "disinterest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "advertisement",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_MUSICVIDEO": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "musicVideo",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_MUSICVIDEO": {
-        "type": "disinterest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "musicVideo",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_MINISODE": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "minisode",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_MINISODE": {
-        "type": "disinterest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "minisode",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_EXTRA": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "extra",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_ADDITIONAL_EXTRA": {
-        "type": "disinterest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "extra",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "sportingEvent",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_MUSIC_SONG": {
         "type": "interest",
         "reason": "playlist",
         "entity": {
-            "entityType": "music",
-            "musicType": "song",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "music",
+                "musicType": "song",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_MUSIC_SONG": {
         "type": "disinterest",
         "reason": "playlist",
         "entity": {
-            "entityType": "music",
-            "musicType": "song",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "music",
+                "musicType": "song",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_MUSIC_ALBUM": {
         "type": "interest",
         "reason": "playlist",
         "entity": {
-            "entityType": "music",
-            "musicType": "album",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "music",
+                "musicType": "album",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_MUSIC_ALBUM": {
         "type": "disinterest",
         "reason": "playlist",
         "entity": {
-            "entityType": "music",
-            "musicType": "album",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "music",
+                "musicType": "album",
+                "entityId": "entity/xyz"
+            }
         }
     },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_TVEPISODE_WITH_SERIESID_AND_SEASONID": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "breaking-bad-pilot",
-            "seriesId": "breaking-bad",
-            "seasonId": "breaking-bad-season-1"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ENTITY_PROGRAM_TVEPISODE_WITH_SERIESID_AND_SEASONID": {
-        "type": "disinterest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "breaking-bad-pilot",
-            "seriesId": "breaking-bad",
-            "seasonId": "breaking-bad-season-1"
-        }
-    },
-
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM": {
         "type": "interest",
         "reason": "reaction",
@@ -840,296 +701,160 @@
         "type": "interest",
         "reason": "reaction",
         "entity": {
-            "entityType": "channel",
-            "channelType": "streaming",
-            "entityId": "streaming/xyz"
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "streaming",
+                "entityId": "streaming/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_CHANNEL_STREAMING": {
         "type": "disinterest",
         "reason": "reaction",
         "entity": {
-            "entityType": "channel",
-            "channelType": "streaming",
-            "entityId": "streaming/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_CHANNEL_OVERTHEAIR": {
-        "type": "interest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "channel",
-            "channelType": "overTheAir",
-            "entityId": "streaming/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_CHANNEL_OVERTHEAIR": {
-        "type": "disinterest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "channel",
-            "channelType": "overTheAir",
-            "entityId": "streaming/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_EPISODE": {
-        "type": "interest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_EPISODE": {
-        "type": "disinterest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_SEASON": {
-        "type": "interest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "program",
-            "programType": "season",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_SEASON": {
-        "type": "disinterest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "program",
-            "programType": "season",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_SERIES": {
-        "type": "interest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "program",
-            "programType": "series",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_SERIES": {
-        "type": "disinterest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "program",
-            "programType": "series",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_CONCERT": {
-        "type": "interest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "program",
-            "programType": "concert",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_CONCERT": {
-        "type": "disinterest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "program",
-            "programType": "concert",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_SPORTINGEVENT": {
-        "type": "interest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "program",
-            "programType": "sportingEvent",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_SPORTINGEVENT": {
-        "type": "disinterest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "program",
-            "programType": "sportingEvent",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "streaming",
+                "entityId": "streaming/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_PREVIEW": {
         "type": "interest",
         "reason": "reaction",
         "entity": {
-            "entityType": "program",
-            "programType": "preview",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "preview",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_PREVIEW": {
         "type": "disinterest",
         "reason": "reaction",
         "entity": {
-            "entityType": "program",
-            "programType": "preview",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_OTHER": {
-        "type": "interest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "program",
-            "programType": "other",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_OTHER": {
-        "type": "disinterest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "program",
-            "programType": "other",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "preview",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_ADVERTISEMENT": {
         "type": "interest",
         "reason": "reaction",
         "entity": {
-            "entityType": "program",
-            "programType": "advertisement",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "advertisement",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_ADVERTISEMENT": {
         "type": "disinterest",
         "reason": "reaction",
         "entity": {
-            "entityType": "program",
-            "programType": "advertisement",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "advertisement",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_MUSICVIDEO": {
         "type": "interest",
         "reason": "reaction",
         "entity": {
-            "entityType": "program",
-            "programType": "musicVideo",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "musicVideo",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_MUSICVIDEO": {
         "type": "disinterest",
         "reason": "reaction",
         "entity": {
-            "entityType": "program",
-            "programType": "musicVideo",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "musicVideo",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_MINISODE": {
         "type": "interest",
         "reason": "reaction",
         "entity": {
-            "entityType": "program",
-            "programType": "minisode",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "minisode",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_MINISODE": {
         "type": "disinterest",
         "reason": "reaction",
         "entity": {
-            "entityType": "program",
-            "programType": "minisode",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "minisode",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_EXTRA": {
         "type": "interest",
         "reason": "reaction",
         "entity": {
-            "entityType": "program",
-            "programType": "extra",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "extra",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_EXTRA": {
         "type": "disinterest",
         "reason": "reaction",
         "entity": {
-            "entityType": "program",
-            "programType": "extra",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_MUSIC_SONG": {
-        "type": "interest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "music",
-            "musicType": "song",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_MUSIC_SONG": {
-        "type": "disinterest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "music",
-            "musicType": "song",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_MUSIC_ALBUM": {
-        "type": "interest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "music",
-            "musicType": "album",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_MUSIC_ALBUM": {
-        "type": "disinterest",
-        "reason": "reaction",
-        "entity": {
-            "entityType": "music",
-            "musicType": "album",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "extra",
+                "entityId": "entity/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_TVEPISODE_WITH_SERIESID_AND_SEASONID": {
         "type": "interest",
         "reason": "reaction",
         "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "breaking-bad-pilot",
-            "seriesId": "breaking-bad",
-            "seasonId": "breaking-bad-season-1"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "episode",
+                "entityId": "breaking-bad-pilot",
+                "seriesId": "breaking-bad",
+                "seasonId": "breaking-bad-season-1"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_TVEPISODE_WITH_SERIESID_AND_SEASONID": {
         "type": "disinterest",
         "reason": "reaction",
         "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "breaking-bad-pilot",
-            "seriesId": "breaking-bad",
-            "seasonId": "breaking-bad-season-1"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "episode",
+                "entityId": "breaking-bad-pilot",
+                "seriesId": "breaking-bad",
+                "seasonId": "breaking-bad-season-1"
+            }
         }
     },
-
-   
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM": {
         "type": "interest",
         "reason": "recording",
@@ -1186,472 +911,94 @@
         "type": "interest",
         "reason": "recording",
         "entity": {
-            "entityType": "channel",
-            "channelType": "streaming",
-            "entityId": "streaming/xyz"
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "streaming",
+                "entityId": "streaming/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_CHANNEL_STREAMING": {
         "type": "disinterest",
         "reason": "recording",
         "entity": {
-            "entityType": "channel",
-            "channelType": "streaming",
-            "entityId": "streaming/xyz"
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "streaming",
+                "entityId": "streaming/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_CHANNEL_OVERTHEAIR": {
         "type": "interest",
         "reason": "recording",
         "entity": {
-            "entityType": "channel",
-            "channelType": "overTheAir",
-            "entityId": "streaming/xyz"
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "overTheAir",
+                "entityId": "streaming/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_CHANNEL_OVERTHEAIR": {
         "type": "disinterest",
         "reason": "recording",
         "entity": {
-            "entityType": "channel",
-            "channelType": "overTheAir",
-            "entityId": "streaming/xyz"
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "overTheAir",
+                "entityId": "streaming/xyz"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM_EPISODE": {
         "type": "interest",
         "reason": "recording",
         "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "episode",
+                "entityId": "entity/xyz",
+                "seriesId": "breaking-bad",
+                "seasonId": "breaking-bad-season-1"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_EPISODE": {
         "type": "disinterest",
         "reason": "recording",
         "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "episode",
+                "entityId": "entity/xyz",
+                "seriesId": "breaking-bad",
+                "seasonId": "breaking-bad-season-1"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM_SEASON": {
         "type": "interest",
         "reason": "recording",
         "entity": {
-            "entityType": "program",
-            "programType": "season",
-            "entityId": "entity/xyz"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "season",
+                "entityId": "entity/xyz",
+                "seriesId": "breaking-bad"
+            }
         }
     },
     "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_SEASON": {
         "type": "disinterest",
         "reason": "recording",
         "entity": {
-            "entityType": "program",
-            "programType": "season",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM_SERIES": {
-        "type": "interest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "series",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_SERIES": {
-        "type": "disinterest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "series",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_CONCERT": {
-        "type": "interest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "concert",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_CONCERT": {
-        "type": "disinterest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "concert",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_SPORTINGEVENT": {
-        "type": "interest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "sportingEvent",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_SPORTINGEVENT": {
-        "type": "disinterest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "sportingEvent",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_PREVIEW": {
-        "type": "interest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "preview",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_PREVIEW": {
-        "type": "disinterest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "preview",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_OTHER": {
-        "type": "interest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "other",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_OTHER": {
-        "type": "disinterest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "other",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_ADVERTISEMENT": {
-        "type": "interest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "advertisement",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_ADVERTISEMENT": {
-        "type": "disinterest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "advertisement",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_MUSICVIDEO": {
-        "type": "interest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "musicVideo",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_MUSICVIDEO": {
-        "type": "disinterest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "musicVideo",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_MINISODE": {
-        "type": "interest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "minisode",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_MINISODE": {
-        "type": "disinterest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "minisode",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_EXTRA": {
-        "type": "interest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "extra",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_ADDITIONAL_EXTRA": {
-        "type": "disinterest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "extra",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_MUSIC_SONG": {
-        "type": "interest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "music",
-            "musicType": "song",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_MUSIC_SONG": {
-        "type": "disinterest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "music",
-            "musicType": "song",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_MUSIC_ALBUM": {
-        "type": "interest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "music",
-            "musicType": "album",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_MUSIC_ALBUM": {
-        "type": "disinterest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "music",
-            "musicType": "album",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM_TVEPISODE_WITH_SERIESID_AND_SEASONID": {
-        "type": "interest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "breaking-bad-pilot",
-            "seriesId": "breaking-bad",
-            "seasonId": "breaking-bad-season-1"
-        }
-    },
-    "USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_TVEPISODE_WITH_SERIESID_AND_SEASONID": {
-        "type": "disinterest",
-        "reason": "recording",
-        "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "breaking-bad-pilot",
-            "seriesId": "breaking-bad",
-            "seasonId": "breaking-bad-season-1"
-        }
-    },
-    "USERINTEREST_WITHOUT_INTEREST_TYPE": {
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "extra",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_INVALID_INTERESTTYPE_INTEGER": {
-        "type": 123,
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "extra",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_INVALID_INTERESTTYPE_STRING": {
-        "type": "test",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "extra",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_INVALID_INTERESTTYPE_BOOLEAN": {
-        "type": true,
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "extra",
-            "entityId": "entity/xyz"
-        }
-    },
-    "USERINTEREST_WITH_INVALID_CHANNELTYPE_IN_CHANNEL_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "channel",
-            "channelType": "test",
-            "entityId": "broadcast/xyz"
-        }
-    },
-    "USERINTEREST_WITH_BOOLEAN_CHANNELTYPE_IN_CHANNEL_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "channel",
-            "channelType": true,
-            "entityId": "broadcast/xyz"
-        }
-    },
-    "USERINTEREST_WITH_INTEGER_CHANNELTYPE_IN_CHANNEL_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "channel",
-            "channelType": 123,
-            "entityId": "broadcast/xyz"
-        }
-    },
-    "USERINTEREST_WITH_INVALID_PROGRAMTYPE_IN_PROGRAM_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "test",
-            "entityId": "entity/abc"
-        }
-    },
-    "USERINTEREST_WITH_BOOLEAN_PROGRAMTYPE_IN_PROGRAM_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": true,
-            "entityId": "entity/abc"
-        }
-    },
-    "USERINTEREST_WITH_INTEGER_PROGRAMTYPE_IN_PROGRAM_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": 123,
-            "entityId": "entity/abc"
-        }
-    },
-    "USERINTEREST_WITH_INVALID_MUSICTYPE_IN_MUSIC_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "music",
-            "musicType": "test",
-            "entityId": "album/xyz"
-        }
-    },
-    "USERINTEREST_WITH_BOOLEAN_MUSICTYPE_IN_MUSIC_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "music",
-            "musicType": true,
-            "entityId": "album/xyz"
-        }
-    },
-    "USERINTEREST_WITH_INTEGER_MUSICTYPE_IN_MUSIC_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "music",
-            "musicType": 123,
-            "entityId": "album/xyz"
-        }
-    },
-    "USERINTEREST_WITH_INVALID_SERIESID_IN_PROGRAM_EPISODE_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "breaking-bad-pilot",
-            "seriesId": "breaking-bad",
-            "seasonId": "breaking-bad-season-1"
-        }
-    },
-    "USERINTEREST_WITH_INVALID_SEASONID_IN_PROGRAM_EPISODE_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "breaking-bad-pilot",
-            "seriesId": "breaking-bad",
-            "seasonId": 123
-        }
-    },
-    "USERINTEREST_WITH_INVALID_SERIESID_AND_SEASONID_IN_PROGRAM_EPISODE_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "episode",
-            "entityId": "entity/def",
-            "seriesId": 123,
-            "seasonId": 123
-        }
-    },
-    "USERINTEREST_WITH_INVALID_SERIESID_IN_PROGRAM_SEASON_ENTITY": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "season",
-            "entityId": "entity/klm",
-            "seriesId": 123,
-            "seasonId": "breaking-bad-season-1"
-        }
-    },
-    "USERINTEREST_WITH_INVALID_PROGRAMTYPE_FOR_PROGRAM_ENTITY_WITH_SERIESID": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "movie",
-            "entityId": "entity/klm",
-            "seriesId": "entity/hij"
-        }
-    },
-    "USERINTEREST_WITH_INVALID_PROGRAMTYPE_FOR_PROGRAM_ENTITY_WITH_SEASONID": {
-        "type": "interest",
-        "reason": "playlist",
-        "entity": {
-            "entityType": "program",
-            "programType": "movie",
-            "entityId": "entity/def",
-            "seasonId": "entity/klm"
+            "identifiers": {
+                "entityType": "program",
+                "programType": "season",
+                "entityId": "entity/xyz",
+                "seriesId": "breaking-bad"
+            }
         }
     },
     "REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION": {
@@ -1818,6 +1165,610 @@
                         "rating": "PG"
                     }
                 ]
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_PLAYLIST_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityId": "345",
+                "entityType": "program",
+                "programType": "movie"
+            },
+            "info": {
+                "title": "Cool Runnings",
+                "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                "releaseDate": "1993-01-01T00:00:00.000Z",
+                "contentRatings": [
+                    {
+                        "scheme": "US-Movie",
+                        "rating": "PG"
+                    },
+                    {
+                        "scheme": "CA-Movie",
+                        "rating": "G"
+                    }
+                ]
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_PLAYLIST_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityId": "345",
+                "entityType": "program",
+                "programType": "movie"
+            },
+            "info": {
+                "title": "Cool Runnings",
+                "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                "releaseDate": "1993-01-01T00:00:00.000Z",
+                "contentRatings": [
+                    {
+                        "scheme": "US-Movie",
+                        "rating": "PG"
+                    },
+                    {
+                        "scheme": "CA-Movie",
+                        "rating": "G"
+                    }
+                ]
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_PLAYLIST_CHANNEL_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "streaming",
+                "entityId": "streaming/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_PLAYLIST_CHANNEL_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "streaming",
+                "entityId": "streaming/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_PLAYLIST_OVERTHEAIR_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "overTheAir",
+                "entityId": "streaming/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_PLAYLIST_OVERTHEAIR_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "overTheAir",
+                "entityId": "streaming/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_PLAYLIST_PROGRAM_EPISODE_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "movie",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_PLAYLIST_PROGRAM_EPISODE_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "movie",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_PLAYLIST_ADDITIONAL_CONCERT_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "concert",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_PLAYLIST_ADDITIONAL_CONCERT_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "concert",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_PLAYLIST_SPORTINGEVENT_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "sportingEvent",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_PLAYLIST_SPORTINGEVENT_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "sportingEvent",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_PLAYLIST_MUSIC_SONG_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "music",
+                "musicType": "song",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_PLAYLIST_MUSIC_SONG_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "music",
+                "musicType": "song",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_PLAYLIST_MUSIC_ALBUM_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "music",
+                "musicType": "album",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_PLAYLIST_MUSIC_ALBUM_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "playlist",
+        "entity": {
+            "identifiers": {
+                "entityType": "music",
+                "musicType": "album",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_REACTION_PROGRAM_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityId": "345",
+                "entityType": "program",
+                "programType": "movie"
+            },
+            "info": {
+                "title": "Cool Runnings",
+                "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                "releaseDate": "1993-01-01T00:00:00.000Z",
+                "contentRatings": [
+                    {
+                        "scheme": "US-Movie",
+                        "rating": "PG"
+                    },
+                    {
+                        "scheme": "CA-Movie",
+                        "rating": "G"
+                    }
+                ]
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityId": "345",
+                "entityType": "program",
+                "programType": "movie"
+            },
+            "info": {
+                "title": "Cool Runnings",
+                "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                "releaseDate": "1993-01-01T00:00:00.000Z",
+                "contentRatings": [
+                    {
+                        "scheme": "US-Movie",
+                        "rating": "PG"
+                    },
+                    {
+                        "scheme": "CA-Movie",
+                        "rating": "G"
+                    }
+                ]
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_REACTION_CHANNEL_STREAMING_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "streaming",
+                "entityId": "streaming/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_REACTION_CHANNEL_STREAMING_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "streaming",
+                "entityId": "streaming/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_PREVIEW_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "preview",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_PREVIEW_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "preview",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_ADVERTISEMENT_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "advertisement",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_ADVERTISEMENT_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "advertisement",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_MUSICVIDEO_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "musicVideo",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_MUSICVIDEO_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "musicVideo",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_MINISODE_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "minisode",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_MINISODE_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "minisode",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_EXTRA_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "extra",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_EXTRA_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "extra",
+                "entityId": "entity/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_REACTION_PROGRAM_TVEPISODE_ENTITY_WITH_SERIESID_AND_SEASONID": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "episode",
+                "entityId": "breaking-bad-pilot",
+                "seriesId": "breaking-bad",
+                "seasonId": "breaking-bad-season-1"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_REACTION_PROGRAM_TVEPISODE_ENTITY_WITH_SERIESID_AND_SEASONID": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "reaction",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "episode",
+                "entityId": "breaking-bad-pilot",
+                "seriesId": "breaking-bad",
+                "seasonId": "breaking-bad-season-1"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_RECORDING_PROGRAM_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "recording",
+        "entity": {
+            "identifiers": {
+                "entityId": "345",
+                "entityType": "program",
+                "programType": "movie"
+            },
+            "info": {
+                "title": "Cool Runnings",
+                "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                "releaseDate": "1993-01-01T00:00:00.000Z",
+                "contentRatings": [
+                    {
+                        "scheme": "US-Movie",
+                        "rating": "PG"
+                    },
+                    {
+                        "scheme": "CA-Movie",
+                        "rating": "G"
+                    }
+                ]
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_RECORDING_PROGRAM_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "recording",
+        "entity": {
+            "identifiers": {
+                "entityId": "345",
+                "entityType": "program",
+                "programType": "movie"
+            },
+            "info": {
+                "title": "Cool Runnings",
+                "synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc.",
+                "releaseDate": "1993-01-01T00:00:00.000Z",
+                "contentRatings": [
+                    {
+                        "scheme": "US-Movie",
+                        "rating": "PG"
+                    },
+                    {
+                        "scheme": "CA-Movie",
+                        "rating": "G"
+                    }
+                ]
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_CHANNEL_STREAMING_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "recording",
+        "entity": {
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "streaming",
+                "entityId": "streaming/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_CHANNEL_STREAMING_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "recording",
+        "entity": {
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "streaming",
+                "entityId": "streaming/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_CHANNEL_OVERTHEAIR_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "recording",
+        "entity": {
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "overTheAir",
+                "entityId": "streaming/xyz"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_CHANNEL_OVERTHEAIR_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "recording",
+        "entity": {
+            "identifiers": {
+                "entityType": "channel",
+                "channelType": "overTheAir",
+                "entityId": "streaming/xyz"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_RECORDING_PROGRAM_EPISODE_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "recording",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "episode",
+                "entityId": "entity/xyz",
+                "seriesId": "breaking-bad",
+                "seasonId": "breaking-bad-season-1"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_RECORDING_PROGRAM_EPISODE_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "recording",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "episode",
+                "entityId": "entity/xyz",
+                "seriesId": "breaking-bad",
+                "seasonId": "breaking-bad-season-1"
+            }
+        }
+    },
+    "TYPE_INTEREST_REASON_RECORDING_PROGRAM_SEASON_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "interest",
+        "reason": "recording",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "season",
+                "entityId": "entity/xyz",
+                "seriesId": "breaking-bad"
+            }
+        }
+    },
+    "TYPE_DISINTEREST_REASON_RECORDING_PROGRAM_SEASON_ENTITY_RESPONSE": {
+        "appId":"foo-app",
+        "type": "disinterest",
+        "reason": "recording",
+        "entity": {
+            "identifiers": {
+                "entityType": "program",
+                "programType": "season",
+                "entityId": "entity/xyz",
+                "seriesId": "breaking-bad"
             }
         }
     }

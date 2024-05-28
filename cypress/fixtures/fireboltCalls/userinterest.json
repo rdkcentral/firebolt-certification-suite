@@ -207,14 +207,6 @@
         "method": "discovery.userInterest",
         "params": "DISCOVERY_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_PREVIEW"
     },
-    "GET_USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_OTHER_ENTITY": {
-        "method": "discovery.userInterest",
-        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_OTHER"
-    },
-    "GET_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_OTHER_ENTITY": {
-        "method": "discovery.userInterest",
-        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_OTHER"
-    },
     "GET_USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_ADVERTISEMENT_ENTITY": {
         "method": "discovery.userInterest",
         "params": "DISCOVERY_USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM_ADDITIONAL_ADVERTISEMENT"
@@ -273,27 +265,27 @@
     },
     "GET_USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_PROGRAM_ENTITY": {
         "method": "discovery.userInterest",
-        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_PROGRAM"
+        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_PROGRAM"
     },
     "GET_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_PROGRAM_ENTITY": {
         "method": "discovery.userInterest",
-        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_PROGRAM"
+        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM"
     },
     "GET_USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_CHANNEL_STREAMING_ENTITY": {
         "method": "discovery.userInterest",
-        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_CHANNEL_STREAMING"
+        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_CHANNEL_STREAMING"
     },
     "GET_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_CHANNEL_STREAMING_ENTITY": {
         "method": "discovery.userInterest",
-        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_CHANNEL_STREAMING"
+        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_CHANNEL_STREAMING"
     },
     "GET_USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_CHANNEL_OVERTHEAIR_ENTITY": {
         "method": "discovery.userInterest",
-        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_ENTITY_CHANNEL_OVERTHEAIR"
+        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_ENTITY_CHANNEL_OVERTHEAIR"
     },
     "GET_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_CHANNEL_OVERTHEAIR_ENTITY": {
         "method": "discovery.userInterest",
-        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_ENTITY_CHANNEL_OVERTHEAIR"
+        "params": "DISCOVERY_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_CHANNEL_OVERTHEAIR"
     },
     "GET_USERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_PROGRAM_EPISODE_ENTITY": {
         "method": "discovery.userInterest",
@@ -407,35 +399,215 @@
         "method": "discovery.userInterest",
         "params": "DISCOVERY_USERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_ENTITY_PROGRAM_TVEPISODE_WITH_SERIESID_AND_SEASONID"
     },
-    "ONREQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST": {
-        "event": "discovery.onRequestUserInterest",
-        "validationJsonPath": "eventResponse.request",
-        "content": "DISCOVERY_TYPE_INTEREST_REASON_PLAYLIST"
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_PLAYLIST_RESPONSE"
     },
-    "ONREQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION": {
-        "event": "discovery.onRequestUserInterest",
-        "validationJsonPath": "eventResponse.request",
-        "content": "DISCOVERY_TYPE_INTEREST_REASON_REACTION"
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_CHANNEL": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_PLAYLIST_CHANNEL_RESPONSE"
     },
-    "ONREQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING": {
-        "event": "discovery.onRequestUserInterest",
-        "validationJsonPath": "eventResponse.request",
-        "content": "DISCOVERY_TYPE_INTEREST_REASON_RECORDING"
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_CHANNEL": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_PLAYLIST_CHANNEL_RESPONSE"
     },
-    "ONREQUESTUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST": {
-        "event": "discovery.onRequestUserInterest",
-        "validationJsonPath": "eventResponse.request",
-        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_PLAYLIST"
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_PLAYLIST_RESPONSE"
     },
-    "ONREQUESTUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION": {
-        "event": "discovery.onRequestUserInterest",
-        "validationJsonPath": "eventResponse.request",
-        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_REACTION"
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_OVERTHEAIR": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_PLAYLIST_OVERTHEAIR_RESPONSE"
     },
-    "ONREQUESTUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING": {
-        "event": "discovery.onRequestUserInterest",
-        "validationJsonPath": "eventResponse.request",
-        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_RECORDING"
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_OVERTHEAIR": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_PLAYLIST_OVERTHEAIR_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_PROGRAM_EPISODE": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_PLAYLIST_PROGRAM_EPISODE_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_PROGRAM_EPISODE": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_PLAYLIST_PROGRAM_EPISODE_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ADDITIONAL_CONCERT_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_PLAYLIST_ADDITIONAL_CONCERT_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ADDITIONAL_CONCERT_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_PLAYLIST_ADDITIONAL_CONCERT_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_ADDITIONAL_SPORTINGEVENT_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_PLAYLIST_SPORTINGEVENT_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_ADDITIONAL_SPORTINGEVENT_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_PLAYLIST_SPORTINGEVENT_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_MUSIC_SONG_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_PLAYLIST_MUSIC_SONG_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_MUSIC_SONG_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_PLAYLIST_MUSIC_SONG_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST_MUSIC_ALBUM_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_PLAYLIST_MUSIC_ALBUM_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_PLAYLIST_MUSIC_ALBUM_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_PLAYLIST_MUSIC_ALBUM_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_PROGRAM_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_REACTION_PROGRAM_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_CHANNEL_STREAMING_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_REACTION_CHANNEL_STREAMING_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_CHANNEL_STREAMING_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_REACTION_CHANNEL_STREAMING_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_PREVIEW_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_PREVIEW_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_PREVIEW_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_PREVIEW_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_ADVERTISEMENT_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_ADVERTISEMENT_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_ADVERTISEMENT_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_ADVERTISEMENT_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_MUSICVIDEO_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_MUSICVIDEO_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_MUSICVIDEO_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_MUSICVIDEO_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_MINISODE_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_MINISODE_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_MINISODE_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_MINISODE_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_EXTRA_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_EXTRA_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_EXTRA_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_ADDITIONAL_EXTRA_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_REACTION_PROGRAM_TVEPISODE_ENTITY_WITH_SERIESID_AND_SEASONID": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_REACTION_PROGRAM_TVEPISODE_ENTITY_WITH_SERIESID_AND_SEASONID"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_TVEPISODE_ENTITY_WITH_SERIESID_AND_SEASONID": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_REACTION_PROGRAM_TVEPISODE_ENTITY_WITH_SERIESID_AND_SEASONID"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_PROGRAM_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_RECORDING_PROGRAM_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_PROGRAM_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_RECORDING_PROGRAM_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_CHANNEL_STREAMING_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_CHANNEL_STREAMING_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_CHANNEL_STREAMING_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_CHANNEL_STREAMING_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_CHANNEL_OVERTHEAIR_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_CHANNEL_OVERTHEAIR_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_CHANNEL_OVERTHEAIR_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_CHANNEL_OVERTHEAIR_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_PROGRAM_EPISODE_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_RECORDING_PROGRAM_EPISODE_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_PROGRAM_EPISODE_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_RECORDING_PROGRAM_EPISODE_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_INTEREST_REASON_RECORDING_PROGRAM_SEASON_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_INTEREST_REASON_RECORDING_PROGRAM_SEASON_ENTITY_RESPONSE"
+    },
+    "ONUSERINTEREST_WITH_TYPE_DISINTEREST_REASON_RECORDING_PROGRAM_SEASON_ENTITY": {
+        "event": "content.onUserInterest",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_TYPE_DISINTEREST_REASON_RECORDING_PROGRAM_SEASON_ENTITY_RESPONSE"
     },
     "REQUESTUSERINTEREST_WITH_REASON_PLAYLIST": {
         "method": "content.requestUserInterest",
