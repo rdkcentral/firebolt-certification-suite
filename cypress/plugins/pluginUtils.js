@@ -66,13 +66,14 @@ async function getAndDereferenceOpenRpc(externalUrls, version = null) {
 /**
  * Generates an index.js file that requires all JavaScript files in a specified directory.
  * @param {string} path - The path to the directory containing the FireboltCalls V2 data.
+ * @param {string} outputObj - The name of the output object.
  * @throws {Error} If an error occurs while reading the directory or writing the file.
  */
-function generateFireboltCallsIndexFile(path) {
+function generateIndexFile(path, outputObj) {
   // Define variables
-  const v2TestFiles = [];
+  const moduleFiles = [];
   // let indexFileContent = '';
-  let indexFileContent = 'let fireboltCalls = {};\n';
+  let indexFileContent = `let ${outputObj} = {};\n`;
 
   try {
     // First check if the provided path exists
@@ -84,19 +85,19 @@ function generateFireboltCallsIndexFile(path) {
       // then slice off the .js extension and push the file names to the v2TestFiles array
       files.forEach((file) => {
         if (file && file.endsWith('.js') && !file.includes('index')) {
-          v2TestFiles.push(file.slice(0, -3));
+          moduleFiles.push(file.slice(0, -3));
         }
       });
 
       // Loop through the test files and require them in the index file
-      v2TestFiles.forEach((moduleName) => {
+      moduleFiles.forEach((moduleName) => {
         indexFileContent += `const ${moduleName} = require('./${moduleName}');\n`;
-        indexFileContent += `Object.assign(fireboltCalls, ${moduleName});\n`;
+        indexFileContent += `Object.assign(${outputObj}, ${moduleName});\n`;
       });
     }
 
     // Add exports at the bottom of the file
-    indexFileContent += 'module.exports = fireboltCalls;';
+    indexFileContent += `module.exports = ${outputObj};`;
 
     // Delete the index.js file if it already exists
     if (fs.existsSync(`${path}/index.js`)) {
@@ -107,11 +108,11 @@ function generateFireboltCallsIndexFile(path) {
     fs.writeFileSync(`${path}/index.js`, indexFileContent);
   } catch (error) {
     logger.error(
-      `An error occurred while generating the FireboltCalls index file: ${error}`,
-      'generateFirboltCallsIndexFile'
+      `An error occurred while generating the index file: ${error}`,
+      'generateIndexFile'
     );
     throw error;
   }
 }
 
-module.exports = { getAndDereferenceOpenRpc, generateFireboltCallsIndexFile };
+module.exports = { getAndDereferenceOpenRpc, generateIndexFile };
