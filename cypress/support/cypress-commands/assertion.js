@@ -128,7 +128,7 @@ Cypress.Commands.add(
             const apiErrorResponse =
               validationType == CONSTANTS.EVENT
                 ? apiOrEventObject.eventListenerResponse.error
-                : apiOrEventObject.response.error;
+                : apiOrEventObject.response.response.error;
 
             fireLog.include(
               errorContentObject.errorCode,
@@ -669,7 +669,7 @@ Cypress.Commands.add(
     if (eventExpected) {
       methodOrEventObject.setEventResponseData(response);
     } else {
-      fireLog.isNull(response[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
+      fireLog.isNull(response.eventResponse[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
     }
   }
 );

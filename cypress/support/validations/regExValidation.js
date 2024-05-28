@@ -41,7 +41,7 @@ class regExValidations {
   regexResultValidator(method, expression, validationPath, response) {
     if (response) {
       // Get the response from the provided path
-      const extractedResponse = validationPath ? eval('response.' + validationPath) : null;
+      const extractedResponse = validationPath ? eval('response.response.' + validationPath) : null;
 
       // Validate the response with the mentioned expression
       const validationResult = extractedResponse
@@ -50,7 +50,7 @@ class regExValidations {
 
       cy.log(
         `RegEx Validation : Expected ${method} response ${
-          extractedResponse ? extractedResponse : response
+          extractedResponse ? JSON.stringify(extractedResponse) : JSON.stringify(response)
         } to be in ${expression} regex format`,
         'regexResultValidator'
       ).then(() => {
