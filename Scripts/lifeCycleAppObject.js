@@ -67,7 +67,6 @@ class appConfig {
   setAppObjectState(newState) {
     const currentState = this.state;
     this.state = new stateConfig(newState);
-    Cypress.env(CONSTANTS.IS_SAME_APP_TRANSITION, false);
 
     // lifecycleAppObjectConfigData contains the look up table describing a list of possible states that the appObject can transition to from the current state
     cy.fixture(CONSTANTS.STATE_TRANSITION_AND_VALIDATION_CONFIG_LOCATION).then(
@@ -97,9 +96,6 @@ class appConfig {
             // Next push the new state object to app object history
             this.history.push(this.state);
             logger.info('New appState pushed to history: ' + newState);
-          }
-          if (currentState.state == newState) {
-            Cypress.env(CONSTANTS.IS_SAME_APP_TRANSITION, true);
           }
           if (!stateTransition.includes(newState)) {
             cy.log('Requested state transition for application is not supported');
