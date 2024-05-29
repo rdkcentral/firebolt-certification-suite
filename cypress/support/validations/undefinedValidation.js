@@ -41,22 +41,22 @@ Cypress.Commands.add(
               `Undefined Validation : Expected ${methodOrEventName} response to have the field ${validation.field} as undefined`
             );
           } else {
-            // Else recursively access the nested field properties and verify the corresponding value in response is undefined
+            // Else recursively access the nested field properties
             const fieldParts = validation.field.split('.');
             fieldParts.shift();
             let currentObject = methodOrEventResponse;
-            // Throw error if any properties other than the provided field is undefined
+            // Throw error if any properties other than the last field is undefined
             for (let i = 0; i < fieldParts.length - 1; i++) {
               const part = fieldParts[i];
               if (!currentObject || typeof currentObject[part] === CONSTANTS.UNDEFINED) {
                 fireLog.assert(
                   false,
-                  `Undefined Validation : Expected ${methodOrEventName} response to have property ${part} in the field ${validation.field}`
+                  `Undefined Validation : Expected ${methodOrEventName} response to have property ${part}`
                 );
               }
               currentObject = currentObject[part];
             }
-            // Else assert if provided field is undefined
+            // Else assert that the last field is undefined
             const finalPart = fieldParts[fieldParts.length - 1];
             fireLog.isUndefined(
               currentObject[finalPart],
@@ -67,14 +67,14 @@ Cypress.Commands.add(
       } catch (error) {
         fireLog.assert(
           false,
-          `Undefined Validation : Received following error while performing validation of type undefined on response',
+          `Undefined Validation : Received following error while performing validation',
           ${JSON.stringify(error)}`
         );
       }
     } else {
       fireLog.assert(
         false,
-        'Undefined Validation : Expected validation object or api/event object stored in global list to not be undefined'
+        `Undefined Validation :  Unable to find ${methodOrEventName} object stored in global list`
       );
     }
   }
