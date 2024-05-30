@@ -6,7 +6,7 @@ Feature: UserInterest
         And 3rd party 'certification' app is launched
 
     @coreSDK @sdk @transport @userinterest
-    Scenario Outline: Discovery.userInterest - Positive Scenario: In-app UX Notify userInterest with type <Scenario>
+    Scenario Outline: Discovery.userInterest - Positive Scenario: In-app UX - Notify userInterest with type <Scenario>
         When 1st party app registers for the 'Content onUserInterest' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'notify userInterest with <GetParam>'
         Then 'Firebolt' platform responds with 'null for discovery userInterest'
@@ -87,7 +87,7 @@ Feature: UserInterest
             | Invalid programType for program entity with seasonId    | with invalid programType for program entity with seasonId    |
 
     @coreSDK @sdk @userinterest
-    Scenario Outline: Content.requestUserInterest - Positive Scenario: Platform-UX Notify requestUserInterest with type <Scenario>
+    Scenario Outline: Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type <Scenario>
         And 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type <setParam>'
         Then 'Firebolt' platform responds to '1st party app' with '<method_Content>'
 
