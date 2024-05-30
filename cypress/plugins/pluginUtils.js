@@ -127,7 +127,7 @@ function preprocessDeviceData(config) {
   const deviceMac = config.env.deviceMac;
   try {
     if (!deviceMac) {
-    logger.error('Device MAC address is required.');
+      logger.error('Device MAC address is required.');
     }
     const formattedDeviceMac = deviceMac.replace(/:/g, '').toUpperCase();
     const jsonFilePath = `cypress/fixtures/external/devices/${formattedDeviceMac}.json`;
