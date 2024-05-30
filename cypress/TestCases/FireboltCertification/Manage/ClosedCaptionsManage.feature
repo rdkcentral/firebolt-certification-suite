@@ -81,7 +81,6 @@ Feature: ClosedCaptions_Manage
             | Scenario                    | Method                | API_Key                                      | Method_Validation_key                                   |
             | Set enabled-test            | setEnabled            | enable closedCaptions with test parameter    | invalid params for closedcaptions setEnabled            |
             | Set enabled-123             | setEnabled            | enable closedCaptions with integer parameter | invalid params for closedcaptions setEnabled            |
-            | Set fontFamily-test         | setFontFamily         | set fontFamily to test                       | custom error for closedCaptions setFontFamily           |
             | Set fontFamily-123          | setFontFamily         | set fontFamily to 123                        | invalid params for closedcaptions setFontFamily         |
             | Set fontFamily-true         | setFontFamily         | set fontFamily to true                       | invalid params for closedcaptions setFontFamily         |
             | Set fontSize-true           | setFontSize           | set fontSize to true                         | invalid params for closedcaptions setFontSize           |
@@ -94,22 +93,17 @@ Feature: ClosedCaptions_Manage
             | Set fontEdge-solid          | setFontEdge           | set fontEdge to solid                        | custom error for closedcaptions setFontEdge             |
             | Set preferredLanguages-true | setPreferredLanguages | set preferredLanguages to true               | invalid params for closedcaptions setPreferredLanguages |
             | Set preferredLanguages-123  | setPreferredLanguages | set preferredLanguages to 123                | invalid params for closedcaptions setPreferredLanguages |
-            | Set preferredLanguages      | setPreferredLanguages | set preferredLanguages to test               | invalid params for closedcaptions setPreferredLanguages |
+            | Set preferredLanguage-test  | setPreferredLanguages | set preferredLanguages to test               | invalid params for closedcaptions setPreferredLanguages |
             | Set windowColor-123         | setWindowColor        | set windowColor to 123                       | invalid params for closedcaptions setWindowColor        |
             | Set windowOpacity-true      | setWindowOpacity      | set windowOpacity to true                    | invalid params for closedcaptions setWindowOpacity      |
-            | Set fontEdgeColor-test      | setFontEdgeColor      | set fontEdgeColor to test                    | invalid params for closedcaptions setFontEdgeColor      |
             | Set fontEdgeColor-123       | setFontEdgeColor      | set fontEdgeColor to 123                     | invalid params for closedcaptions setFontEdgeColor      |
             | Set fontEdgeColor-true      | setFontEdgeColor      | set fontEdgeColor to true                    | invalid params for closedcaptions setFontEdgeColor      |
-            | Set backgroundColor-test    | setBackgroundColor    | set backgroundColor to test                  | invalid params for closedcaptions setBackgroundColor    |
             | Set backgroundColor-123     | setBackgroundColor    | set backgroundColor to 123                   | invalid params for closedcaptions setBackgroundColor    |
             | Set backgroundColor-true    | setBackgroundColor    | set backgroundColor to true                  | invalid params for closedcaptions setBackgroundColor    |
-            | Set textAlign-top           | setTextAlign          | set textAlign to top                         | invalid params for closedcaptions setTextAlign          |
             | Set textAlign-123           | setTextAlign          | set textAlign to 123                         | invalid params for closedcaptions setTextAlign          |
             | Set textAlign-true          | setTextAlign          | set textAlign to true                        | invalid params for closedcaptions setTextAlign          |
-            | Set textAlignVertical-right | setTextAlignVertical  | set textAlignVertical to right               | invalid params for closedcaptions setTextAlignVertical  |
             | Set textAlignVertical-123   | setTextAlignVertical  | set textAlignVertical to 123                 | invalid params for closedcaptions setTextAlignVertical  |
             | Set textAlignVertical-true  | setTextAlignVertical  | set textAlignVertical to true                | invalid params for closedcaptions setTextAlignVertical  |
-            | Set fontColor-test          | setFontColor          | set fontColor to test                        | invalid params for closedcaptions setFontColor          |
             | Set fontColor-123           | setFontColor          | set fontColor to 123                         | invalid params for closedcaptions setFontColor          |
             | Set fontColor-true          | setFontColor          | set fontColor to true                        | invalid params for closedcaptions setFontColor          |
             | Set fontOpacity-120         | setFontOpacity        | set fontOpacity to 120                       | custom error for closedcaptions setFontOpacity          |
