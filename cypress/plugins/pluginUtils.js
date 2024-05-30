@@ -72,7 +72,6 @@ async function getAndDereferenceOpenRpc(externalUrls, version = null) {
 function generateIndexFile(path, outputObj) {
   // Define variables
   const moduleFiles = [];
-  // let indexFileContent = '';
   let indexFileContent = `let ${outputObj} = {};\n`;
 
   try {
@@ -99,13 +98,21 @@ function generateIndexFile(path, outputObj) {
     // Add exports at the bottom of the file
     indexFileContent += `module.exports = ${outputObj};`;
 
-    // Delete the index.js file if it already exists
-    if (fs.existsSync(`${path}/index.js`)) {
-      fs.unlinkSync(`${path}/index.js`);
+    // Define the path of the file to be created
+    const indexFilePath = `${path}index.js`;
+
+    // Check if the file exists and delete if it does
+    if (fs.existsSync(indexFilePath)) {
+      fs.unlinkSync(indexFilePath);
+    }
+
+    // Check if the directory exists, if not create it
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(path, { recursive: true });
     }
 
     // Write to the new index.js file
-    fs.writeFileSync(`${path}/index.js`, indexFileContent);
+    fs.writeFileSync(indexFilePath, indexFileContent);
   } catch (error) {
     logger.error(
       `An error occurred while generating the index file: ${error}`,
