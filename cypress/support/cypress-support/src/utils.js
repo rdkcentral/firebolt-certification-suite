@@ -23,6 +23,15 @@ const Validator = require('jsonschema').Validator;
 const validator = new Validator();
 const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 let clientCreated = false;
+const resolvedDeviceData = require('../../../fixtures/external/devices/resolvedDeviceData.json');
+
+global.resolveDeviceVariable = function (key) {
+  if (!(key in resolvedDeviceData)) {
+    console.error(`Key ${key} not found in preprocessed data.`);
+    return 123;
+  }
+  return resolvedDeviceData[key];
+};
 
 /**
  * @module utils

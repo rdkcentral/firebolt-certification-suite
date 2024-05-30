@@ -77,6 +77,8 @@ export default function (module) {
     // Merge fireboltCalls
     const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
     const v2FireboltCallsData = { ...internalV2FireboltCallsData, ...externalV2FireboltCallsData };
+    console.log('=====================');
+    console.log(v2FireboltCallsData);
 
     cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
       (mergedFireboltCalls) => {
