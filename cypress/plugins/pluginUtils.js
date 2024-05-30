@@ -115,4 +115,29 @@ function generateIndexFile(path, outputObj) {
   }
 }
 
-module.exports = { getAndDereferenceOpenRpc, generateIndexFile };
+// Add JSDoc
+function preprocessDeviceData(deviceMac) {
+  // Add error handling in case deviceMac is not passed
+  const formattedDeviceMac = deviceMac.replace(/:/g, '').toUpperCase();
+  const jsonFilePath = `cypress/fixtures/external/devices/${formattedDeviceMac}.json`;
+  // Add try/catch for error handling
+  const deviceData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
+
+  const resolvedVariables = {};
+  Object.keys(deviceData).forEach((key) => {
+    resolvedVariables[key] = deviceData[key];
+  });
+
+  // Define the path of the file to be created
+  const resolvedDataFilePath = 'cypress/fixtures/external/devices/resolvedDeviceData.json';
+
+  // Check if the file exists and delete it if it does
+  if (fs.existsSync(resolvedDataFilePath)) {
+    fs.unlinkSync(resolvedDataFilePath);
+  }
+
+  // Create the file with the resolved data
+  fs.writeFileSync(resolvedDataFilePath, JSON.stringify(resolvedVariables, null, 2));
+}
+
+module.exports = { getAndDereferenceOpenRpc, generateIndexFile, preprocessDeviceData };
