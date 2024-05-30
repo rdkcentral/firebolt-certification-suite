@@ -115,4 +115,29 @@ function generateIndexFile(path, outputObj) {
   }
 }
 
-module.exports = { getAndDereferenceOpenRpc, generateIndexFile };
+function preprocessDeviceData(config) {
+  const deviceMac = config.env.deviceMac;
+  try {
+    if (!deviceMac) {
+      throw new Error('Device MAC address is required.');
+    }
+    const formattedDeviceMac = deviceMac.replace(/:/g, '').toUpperCase();
+    const jsonFilePath = `cypress/fixtures/external/devices/${formattedDeviceMac}.json`;
+    let deviceData;
+
+    try {
+      deviceData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
+    } catch (readError) {
+      throw new Error(
+        `Error reading or parsing the JSON file at ${jsonFilePath}: ${readError.message}`
+      );
+    }
+
+    const resolvedDeviceData = { ...deviceData };
+    config.env = Object.assign({}, config.env, { resolvedDeviceData });
+  } catch (error) {
+    logger.error(`Error in preprocessDeviceData: ${error.message}`);
+  }
+}
+
+module.exports = { getAndDereferenceOpenRpc, generateIndexFile, preprocessDeviceData };
