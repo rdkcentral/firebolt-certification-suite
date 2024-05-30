@@ -603,5 +603,32 @@
     },
     "DISCOVERY_ONREQUESTUSERINTEREST":{
         "method": "Discovery.onRequestUserInterest"
+    },
+    "NOT_AVAILABLE_FOR_REQUESTUSERINTEREST": {
+		"method": "content.requestUserInterest",
+		"validationJsonPath": "result",
+		"content": "NOT_AVAILABLE",
+        "expectingError": true
+	},
+    "INVALID_PARAMETERS_FOR_REQUESTUSERINTEREST": {
+		"method": "content.requestUserInterest",
+		"validationJsonPath": "result",
+		"content": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+	},
+    "NOTIFY_REQUESTUSERINTEREST_WITH_TYPE_INTEREST_WITHOUT_PROVIDER": {
+        "method": "discovery_content.requestUserInterest",
+        "params": "DISCOVERY_REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST",
+        "expected": "error"
+    },
+    "NOTIFY_REQUESTUSERINTEREST_WITH_TYPE_INTEREST_TIMEOUT": {
+        "method": "discovery_content.requestUserInterest",
+        "params": "DISCOVERY_REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST",
+        "expected": "error"
+    },
+    "NOTIFY_REQUESTUSERINTEREST_WITH_TYPE_INTEREST_RETURNS_ERROR": {
+        "method": "discovery_content.requestUserInterest",
+        "params": "DISCOVERY_REQUESTUSERINTEREST_WITH_TYPE_INTEREST_REASON_PLAYLIST",
+        "expected": "error"
     }
 }

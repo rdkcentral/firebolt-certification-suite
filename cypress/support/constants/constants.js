@@ -398,7 +398,7 @@ module.exports = {
   STOPPED: 'stopped',
   START: 'start',
   STOP: 'stop',
-  FIRST_PARTY_MOCK_USER: 'firstPartyUserId',
+  FIRST_PARTY_MOCK_USER: 'firstPartyMockUser',
   THIRD_PARTY_MOCK_USER: 'thirdPartyMockUser',
   HTTP: 'HTTP',
   STATE_METHOD: 'state/method/',

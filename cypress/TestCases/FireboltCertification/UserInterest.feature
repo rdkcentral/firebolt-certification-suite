@@ -111,3 +111,20 @@ Feature: UserInterest
             | Invalid Interest type - boolean params | boolean interestType |
             | Invalid reason value - test params     | invalid reasonType   |
             | Invalid Interest type - boolean params | boolean reasonType   |
+    
+    @coreSDK @sdk @userinterest @notSupported
+    Scenario: Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but platform timeout without sending response
+        When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type interest timeout'
+        Then 'Firebolt' platform responds to '1st party app' with 'not available for requestUserInterest'
+
+    @coreSDK @sdk @userinterest @notSupported
+    Scenario: Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but 3rd party app return error
+        When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type interest returns error'
+        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for requestUserInterest'
+
+    @coreSDK @sdk @userinterest
+    Scenario: Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest without registering for providers
+        Given the environment has been set up for 'Userinterest' tests
+        And 3rd party 'certification' app is launched
+        When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type interest without provider'
+        Then 'Firebolt' platform responds to '1st party app' with 'not available for requestUserInterest'

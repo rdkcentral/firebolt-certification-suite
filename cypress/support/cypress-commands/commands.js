@@ -475,6 +475,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
       CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS
     ).then((parsedData) => {
       if (firstParty) {
+        parsedData.firstParty = firstParty;
         const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SETRESPONSE;
         const requestMap = {
           method: method,

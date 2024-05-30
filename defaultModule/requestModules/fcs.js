@@ -32,7 +32,7 @@ const UTILS = require('../../../cypress/support/cypress-support/src/utils');
 function setResponse(parsedParam) {
   try {
     parsedParam = parsedParam.params;
-    const { method } = parsedParam;
+    const { method, firstParty } = parsedParam;
     let requestJson, URLParam;
     let publishMessage = {};
     if (parsedParam.response) {
@@ -42,7 +42,7 @@ function setResponse(parsedParam) {
       requestJson = { error: parsedParam.error };
       URLParam = `${CONSTANTS.STATE_METHOD}${method}/error`;
     }
-    publishMessage = { requestJson, URLParam };
+    publishMessage = { requestJson, URLParam, firstParty };
     return createPublishMessage(publishMessage);
   } catch (error) {
     assert(false, `${error.message} in setResponse`);
@@ -58,7 +58,7 @@ function setResponse(parsedParam) {
  * createPublishMessage({"URLParam":"search","requestJson":{"result":"jeo@deo.com"},"userId":"456~A"})
  **/
 function createPublishMessage(publishMessage) {
-  const { URLParam, requestJson } = publishMessage;
+  const { URLParam, requestJson, firstParty } = publishMessage;
   return {
     transport: CONSTANTS.HTTP,
     options: {
@@ -66,7 +66,10 @@ function createPublishMessage(publishMessage) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-mockfirebolt-userid': UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_MOCK_USER),
+        'x-mockfirebolt-userid':
+          firstParty == true
+            ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_MOCK_USER)
+            : UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_MOCK_USER),
       },
       payload: requestJson,
     },
