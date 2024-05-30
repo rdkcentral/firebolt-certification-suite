@@ -279,7 +279,7 @@ request - `cy.checkForTags(["TAG1","TAG2"]);
 
 ## resolveDeviceVariable
 
-### Purpose: The global resolveDeviceVariable function retrieves a value from the preprocessed device data stored in Cypress environment variables based on a specified key and returns the value of the key.
+### Purpose: The global resolveDeviceVariable function retrieves a value from the preprocessed device data stored in Cypress environment variables called resolvedDeviceData based on a specified key and returns the value of the key. The preprocessDeviceData function reads and processes device-specific data from a fixture JSON file based on a given deviceMac address.
 
 ### Examples:
 resolveDeviceVariable("deviceId")

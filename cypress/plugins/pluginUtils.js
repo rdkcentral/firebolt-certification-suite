@@ -127,7 +127,7 @@ function preprocessDeviceData(config) {
   const deviceMac = config.env.deviceMac;
   try {
     if (!deviceMac) {
-      throw new Error('Device MAC address is required.');
+    logger.error('Device MAC address is required.');
     }
     const formattedDeviceMac = deviceMac.replace(/:/g, '').toUpperCase();
     const jsonFilePath = `cypress/fixtures/external/devices/${formattedDeviceMac}.json`;
@@ -136,7 +136,7 @@ function preprocessDeviceData(config) {
     try {
       deviceData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
     } catch (readError) {
-      throw new Error(
+      logger.error(
         `Error reading or parsing the JSON file at ${jsonFilePath}: ${readError.message}`
       );
     }
