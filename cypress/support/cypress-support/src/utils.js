@@ -627,6 +627,14 @@ function checkForTags(tags) {
   }
 }
 
+/**
+ * @module utils
+ * @globalfunction resolveDeviceVariable
+ * @description Resolve the device variable from the preprocessed data for the given key
+ * @example
+ * resolveDeviceVariable("deviceId")
+ */
+
 global.resolveDeviceVariable = function (key) {
   const resolvedDeviceData = Cypress.env('resolvedDeviceData');
   if (!(key in resolvedDeviceData)) {

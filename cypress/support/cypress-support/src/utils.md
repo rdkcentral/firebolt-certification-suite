@@ -277,6 +277,13 @@ request - `cy.destroyGlobalObjects(['lifecycleAppObjectList']);
 ### Examples:
 request - `cy.checkForTags(["TAG1","TAG2"]);
 
+## resolveDeviceVariable
+
+### Purpose: The global resolveDeviceVariable function retrieves a value from the preprocessed device data stored in Cypress environment variables based on a specified key and returns the value of the key.
+
+### Examples:
+resolveDeviceVariable("deviceId")
+
 ## FireLog
 
 ### Purpose: Provides assertion methods with logging using Cypress's cy.log(). It wraps Cypress's assertion methods, allowing logging of messages for each assertion.

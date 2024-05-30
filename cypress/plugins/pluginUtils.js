@@ -115,6 +115,14 @@ function generateIndexFile(path, outputObj) {
   }
 }
 
+/**
+ * @function preprocessDeviceData
+ * @description Reads the device data JSON file and adds it to the config object.
+ * @param {string} config - The config object.
+ * @example
+ * preprocessDeviceData(config);
+ */
+
 function preprocessDeviceData(config) {
   const deviceMac = config.env.deviceMac;
   try {
