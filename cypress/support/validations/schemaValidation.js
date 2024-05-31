@@ -34,9 +34,7 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
 Cypress.Commands.add(
   'updateResponseForFCS',
   (methodOrEvent, params, response, isValidation = false) => {
-    const responseType = response.hasOwnProperty(CONSTANTS.ERROR)
-      ? CONSTANTS.ERROR
-      : CONSTANTS.RESULT;
+    const responseType = response.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
 
     if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
       let formattedResponse = {};

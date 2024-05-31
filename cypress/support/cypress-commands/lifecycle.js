@@ -89,24 +89,24 @@ Cypress.Commands.add('validateLifecycleState', (state, appId) => {
     // Send message to 3rd party app to invoke lifecycle API to get state response
     cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
       try {
-        const result = JSON.parse(response)?.result ?? null;
+        const result = response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE].instance ?? null;
         if (result == null) {
           cy.log(CONSTANTS.INVALID_LIFECYCLE_STATE_RESPONSE).then(() => {
             assert(false, CONSTANTS.INVALID_LIFECYCLE_STATE_RESPONSE);
           });
         }
-        cy.log(CONSTANTS.APP_RESPONSE + response);
+        cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
         // Perform schema and content validation of state response against appObject state
         let pretext = CONSTANTS.STATE_SCHEMA_VALIDATION_REQ + lifecycleStateRequirementId.state.id;
         UTILS.assertWithRequirementLogs(
           pretext,
-          JSON.parse(response).schemaResult.status,
+          response[CONSTANTS.SCHEMA_VALIDATION_STATUS],
           CONSTANTS.PASS
         );
         pretext = CONSTANTS.STATE_CONTENT_VALIDATION_REQ + lifecycleStateRequirementId.state.id;
         UTILS.assertWithRequirementLogs(
           pretext,
-          JSON.parse(response).result,
+          response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE].instance,
           appObject.getAppObjectState().state
         );
       } catch (error) {
@@ -312,7 +312,7 @@ Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) 
       return false;
     }
     if (CONSTANTS.LIFECYCLE_METHOD_LIST.includes(method)) {
-      cy.updateResponseForFCS(method, '', response).then((updatedResponse) => {
+      cy.updateResponseForFCS(method, '', JSON.parse(response)).then((updatedResponse) => {
         return updatedResponse;
       });
     }
@@ -554,10 +554,10 @@ Cypress.Commands.add('setAppObjectStateFromMethod', (method, appId) => {
  * cy.lifecycleSchemaChecks({"result":null,"error":null,"schemaResult":{"status":"PASS","schemaValidationResult":{"instance":null,"schema":{"const":null}}, 'foreground');
  */
 Cypress.Commands.add('lifecycleSchemaChecks', (response, state) => {
-  result = JSON.parse(response);
+  typeof response == 'object' ? response : (response = JSON.parse(response));
   apiSchemaResult = {
-    validationStatus: result[CONSTANTS.SCHEMA_VALIDATION_STATUS],
-    validationResponse: result[CONSTANTS.SCHEMA_VALIDATION_RESPONSE],
+    validationStatus: response[CONSTANTS.SCHEMA_VALIDATION_STATUS],
+    validationResponse: response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE],
   };
   cy.validationChecksForResponseAndSchemaResult(response, false, apiSchemaResult, false);
 });
