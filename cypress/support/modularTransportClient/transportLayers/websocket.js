@@ -85,10 +85,14 @@ export default class Websocket extends AsyncTransportClient {
         const message = JSON.parse(msg.data);
         const requestMessage = JSON.parse(payload);
         // Updating the listenerResponse in the MAP when event response received.
-        if(message?.id && Cypress.env('eventResponseMap').has(message.id) && !message.result.hasOwnProperty('listening')){
+        if (
+          message?.id &&
+          Cypress.env('eventResponseMap').has(message.id) &&
+          !message.result.hasOwnProperty('listening')
+        ) {
           const obj = Cypress.env('eventResponseMap').get(message.id);
           obj.listenerResponse = message;
-          Cypress.env('eventResponseMap').set(message.id, obj)
+          Cypress.env('eventResponseMap').set(message.id, obj);
         }
 
         // Returning the message when response and request id matches.
