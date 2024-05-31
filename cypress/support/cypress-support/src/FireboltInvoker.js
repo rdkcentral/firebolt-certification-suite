@@ -19,8 +19,9 @@
 import modularTransportClient from '../../modularTransportClient';
 import { getEnvVariable } from './utils';
 const logger = require('../../Logger')('FireboltInvoker.js');
+const CONSTANTS = require('../../constants/constants');
 const responseMap = new Map();
-Cypress.env('responseMap', responseMap);
+Cypress.env(CONSTANTS.EVENT_RESPONSE_MAP, responseMap);
 
 const WEBSOCKET = 'WebSocket';
 const DEFAULT_WS_URL_PROTOCOL = 'ws://';
@@ -93,6 +94,18 @@ export default class FireboltInvoker {
     logger.info('Firebolt Message in the invoke:' + JSON.stringify(fireboltMessage), 'invoke');
 
     try {
+      // 
+      if (
+        fireboltMessage &&
+        fireboltMessage.params &&
+        fireboltMessage.params.hasOwnProperty('listen') &&
+        fireboltMessage.params.listen == true
+      ) {
+        Cypress.env(CONSTANTS.EVENT_RESPONSE_MAP).set(fireboltMessage.id, {
+          method: fireboltMessage.method,
+          listenerResponse: {},
+        });
+      }
       const currentInstance = await this.get();
       const response = await currentInstance.send(JSON.stringify(fireboltMessage));
 

@@ -100,11 +100,10 @@ function setLifecycleState(parsedData) {
  **/
 function fetchEventResponse(parsedParam) {
   let result;
-  const responseMap = Cypress.env('responseMap');
+  const responseMap = Cypress.env(CONSTANTS.EVENT_RESPONSE_MAP);
   if (responseMap && responseMap.has(parsedParam.params)) {
     result = responseMap.get(parsedParam.params);
-    console.log('qqqresult', result);
-    return result;
+    return result.listenerResponse;
   } else {
     return parsedParam;
   }
