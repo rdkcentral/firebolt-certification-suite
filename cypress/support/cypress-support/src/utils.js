@@ -443,16 +443,21 @@ function assertWithRequirementLogs(pretext, actual, expected, equateDeep = false
       assert(false, pretext + ': ' + JSON.stringify(errorObject));
     });
   } else {
-    cy.log(
-      pretext + ': Expected : ' + expected + ' , Actual : ' + actual,
-      'assertWithRequirementLogs'
-    ).then(() => {
-      if (equateDeep) {
-        assert.deepEqual(actual, expected, pretext);
-      } else {
-        assert.equal(actual, expected, pretext);
-      }
-    });
+    let expectedLog = expected;
+    let actualLog = actual;
+    if (Array.isArray(actual) && actual.length < 1) {
+      actualLog = JSON.stringify(actual);
+    }
+    if (Array.isArray(expected) && expected.length < 1) {
+      expectedLog = JSON.stringify(expected);
+    }
+
+    const logMessage = pretext + ': Expected : ' + expectedLog + ' , Actual : ' + actualLog;
+    if (equateDeep) {
+      fireLog.deepEqual(actual, expected, logMessage);
+    } else {
+      fireLog.equal(actual, expected, logMessage);
+    }
   }
 }
 

@@ -7,7 +7,7 @@ Feature: Lifecycle_Background
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with '<state>' state
         When '3rd party app' transitions to state 'background'
-        Then '3rd party app' is in 'background' state
+        Then '3rd party app' will be in 'background' state
 
         Examples:
             | state      |
@@ -35,7 +35,7 @@ Feature: Lifecycle_Background
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'background' state
         When '3rd party app' transitions to state 'background'
-        Then '3rd party app' is in 'background' state
+        Then '3rd party app' will stay in 'background' state
         
     @Lifecycle @coreSDK @notSupported
     Scenario: Lifecycle 2.4.3 Cannot Background app in Unloading state
@@ -43,18 +43,18 @@ Feature: Lifecycle_Background
         And 3rd party 'certification' app is launched with 'unloading' state
         When '3rd party app' transitions to state 'background'
         And AppObject state for '3rd party App' is set to 'unloading'
-        Then '3rd party app' is in 'unloading' state
+        Then '3rd party app' will stay in 'unloading' state
 
     @Lifecycle @coreSDK @notSupported
     Scenario: Lifecycle 2.4.3 Cannot background app from suspended state
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'suspended' state
         When '3rd party app' transitions to state 'background'
-        Then '3rd party app' is in 'suspended' state
+        Then '3rd party app' will stay in 'suspended' state
 
     @Lifecycle @coreSDK
     Scenario: Lifecycle 2.4.3 Should not Background app in initializing state
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'initializing' state
         When '3rd party app' transitions to state 'background'
-        Then '3rd party app' is in 'initializing' state
+        Then '3rd party app' will stay in 'initializing' state
