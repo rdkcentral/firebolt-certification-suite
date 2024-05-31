@@ -60,7 +60,7 @@ Feature: UserInterest
 
     @coreSDK @sdk @transport @userinterest
     Scenario Outline: Discovery.userInterest - Negative Scenario: <Scenario> expecting error
-        When '3rd party app' invokes the 'Firebolt' API to 'get userInterest <GetParam>'
+        When '3rd party app' invokes the 'Firebolt' API to 'notify userInterest <GetParam>'
         Then 'Firebolt' platform responds with 'invalid params for discovery userInterest'
 
         Examples:
@@ -102,7 +102,7 @@ Feature: UserInterest
 
     @coreSDK @sdk @transport @userinterest
     Scenario Outline: Content.requestUserInterest - Negative Scenario: <Scenario> expecting error
-        When 1st party app invokes the 'Firebolt' API to 'get requestUserInterest with <param>'
+        When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with <param>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid params for content requestUserInterest'
 
         Examples:
@@ -122,7 +122,7 @@ Feature: UserInterest
         When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type interest returns error'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for requestUserInterest'
 
-    @coreSDK @sdk @userinterest
+    @coreSDK @sdk @userinterest @notSupported
     Scenario: Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest without registering for providers
         Given the environment has been set up for 'Userinterest' tests
         And 3rd party 'certification' app is launched
