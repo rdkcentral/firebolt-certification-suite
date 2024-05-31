@@ -21,7 +21,7 @@
                 "validations": [
                     {
                         "mode": "fixture",
-                        "type": "APIVERSION",
+                        "type": "CYPRESSENV-defaultTestData-apiVersion",
                         "description": "Validation of the Device version  API Format"
                     }
                 ]
@@ -81,7 +81,7 @@
                 "validations": [
                     {
                         "mode": "fixture",
-                        "type": "DEVICERESOLUTION",
+                        "type": "CYPRESSENV-defaultTestData-deviceResolution",
                         "description": "Validation of the Device videoResolution"
                     }
                 ]
