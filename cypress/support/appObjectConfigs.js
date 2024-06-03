@@ -19,15 +19,15 @@
 const CONSTANTS = require('./constants/constants');
 
 class apiObject {
-  constructor(apiName, params, context, response, expected, appId) {
+  constructor(apiName, params, context, apiResponse, expected, appId) {
     this.apiName = apiName;
     this.params = params;
     this.context = context;
     this.expected = expected;
-    this.response = response;
+    this.apiResponse = apiResponse.response;
     this.apiSchemaResult = {
-      validationStatus: response.schemaValidationStatus,
-      validationResponse: response.schemaValidationResponse,
+      validationStatus: apiResponse.schemaValidationStatus,
+      validationResponse: apiResponse.schemaValidationResponse,
     };
     this.app = appId;
   }

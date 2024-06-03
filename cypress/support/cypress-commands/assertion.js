@@ -128,7 +128,7 @@ Cypress.Commands.add(
             const apiErrorResponse =
               validationType == CONSTANTS.EVENT
                 ? apiOrEventObject.eventListenerResponse.error
-                : apiOrEventObject.response.response.error;
+                : apiOrEventObject.apiResponse.error;
 
             fireLog.include(
               errorContentObject.errorCode,
@@ -691,7 +691,7 @@ Cypress.Commands.add(
     }
     if (validationType == CONSTANTS.METHOD) {
       const { expected, apiSchemaResult } = methodOrEventObject;
-      const response = methodOrEventObject.response.response;
+      const response = methodOrEventObject.apiResponse;
 
       cy.validationChecksForResponseAndSchemaResult(
         response,

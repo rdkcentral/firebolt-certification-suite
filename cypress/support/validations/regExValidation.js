@@ -41,7 +41,7 @@ class regExValidations {
   regexResultValidator(method, expression, validationPath, response) {
     if (response) {
       // Get the response from the provided path
-      const extractedResponse = validationPath ? eval('response.response.' + validationPath) : null;
+      const extractedResponse = validationPath ? eval('response.' + validationPath) : null;
 
       // Validate the response with the mentioned expression
       const validationResult = extractedResponse

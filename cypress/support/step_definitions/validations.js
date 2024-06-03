@@ -165,7 +165,7 @@ Given(
                         validationType == CONSTANTS.EVENT
                           ? methodOrEventObject.eventResponse
                           : validationType == CONSTANTS.METHOD
-                            ? methodOrEventObject.response
+                            ? methodOrEventObject.apiResponse
                             : null;
                       switch (scenario) {
                         case CONSTANTS.REGEX:
@@ -189,7 +189,7 @@ Given(
                             validationType == CONSTANTS.EVENT
                               ? methodOrEventResponse
                               : validationType == CONSTANTS.METHOD
-                                ? methodOrEventResponse.response.result
+                                ? methodOrEventResponse.result
                                 : null;
 
                           cy.decodeValidation(
