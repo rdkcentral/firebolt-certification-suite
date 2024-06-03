@@ -7,6 +7,9 @@ const path = require('path');
 const _ = require('lodash');
 const logger = require('../support/Logger')('testDataProcessor.js');
 
+// Combining validation objects from FCS and config module into single JSON
+const validationObjects = combineValidationObjectsJson();
+
 /**
  *  @function testDataProcessor
  *  The Test Data Processor performs the following operations:
@@ -180,8 +183,6 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
           return dataIdentifier;
         }
       } else {
-        // Combining validation objects from FCS and config module into single JSON
-        const validationObjects = combineValidationObjectsJson();
         const validationObject = validationObjects[dataIdentifier];
 
         if (validationObject && validationObject.data) {
