@@ -298,7 +298,7 @@ module.exports = async (on, config) => {
             jsonReport = readDataFromFile(filePath + fileName);
           }
           const reportProperties = {};
-          const customFooter = require("../fixtures/customFooter.json");
+          const customFooter = require('../fixtures/customFooter.json');
           reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
           reportProperties.customFooter = customFooter;
 
