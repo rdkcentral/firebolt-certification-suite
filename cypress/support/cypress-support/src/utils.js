@@ -628,6 +628,24 @@ function checkForTags(tags) {
 }
 
 /**
+ * @module utils
+ * @globalfunction resolveDeviceVariable
+ * @description Resolve the device variable from the preprocessed data for the given key
+ * @example
+ * resolveDeviceVariable("deviceId")
+ */
+
+global.resolveDeviceVariable = function (key) {
+  const resolvedDeviceData = Cypress.env('resolvedDeviceData');
+  if (!(key in resolvedDeviceData)) {
+    logger.error(`Key ${key} not found in preprocessed data.`);
+    return null;
+  }
+  logger.debug(`Resolved value for key ${key} is ${resolvedDeviceData[key]}`);
+  return resolvedDeviceData[key];
+};
+
+/**
  * FireLog class provides assertion methods with logging using Cypress's cy.log().
  * It wraps Cypress's assertion methods, allowing logging of messages for each assertion.
  * @class

@@ -122,4 +122,37 @@ function generateIndexFile(path, outputObj) {
   }
 }
 
-module.exports = { getAndDereferenceOpenRpc, generateIndexFile };
+/**
+ * @function preprocessDeviceData
+ * @description Reads the device data JSON file and adds it to the config object.
+ * @param {string} config - The config object.
+ * @example
+ * preprocessDeviceData(config);
+ */
+
+function preprocessDeviceData(config) {
+  const deviceMac = config.env.deviceMac;
+  try {
+    if (!deviceMac) {
+      logger.error('Device MAC address is required.');
+    }
+    const formattedDeviceMac = deviceMac.replace(/:/g, '').toUpperCase();
+    const jsonFilePath = `cypress/fixtures/external/devices/${formattedDeviceMac}.json`;
+    let deviceData;
+
+    try {
+      deviceData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
+    } catch (readError) {
+      logger.error(
+        `Error reading or parsing the JSON file at ${jsonFilePath}: ${readError.message}`
+      );
+    }
+
+    const resolvedDeviceData = { ...deviceData };
+    config.env = Object.assign({}, config.env, { resolvedDeviceData });
+  } catch (error) {
+    logger.error(`Error in preprocessDeviceData: ${error.message}`);
+  }
+}
+
+module.exports = { getAndDereferenceOpenRpc, generateIndexFile, preprocessDeviceData };
