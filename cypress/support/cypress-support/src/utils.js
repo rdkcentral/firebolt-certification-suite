@@ -646,13 +646,24 @@ class FireLog {
       FireLog.instance = this;
     }
 
+    // Helper function to remove backslashes
+    function removeBackslashes(str) {
+      return str.replace(/\\/g, '');
+    }
+
     // Use cy.log(message) for every method in the class
     const prototype = Object.getPrototypeOf(this);
     Object.getOwnPropertyNames(prototype).forEach((method) => {
       if (method !== 'constructor' && typeof this[method] === 'function') {
         const originalMethod = this[method];
         this[method] = function (...args) {
-          const message = args[args.length - 1];
+          let message = args[args.length - 1];
+
+          // Remove unwanted backslashes
+          if (typeof message === 'string') {
+            message = removeBackslashes(message);
+          }
+
           return cy.log(message).then(() => {
             return originalMethod.apply(this, args);
           });
