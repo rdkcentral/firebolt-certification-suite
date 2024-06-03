@@ -36,8 +36,6 @@
   "stringZero": "0",
   "stringOne": "1",
   "EMPTYARRAY": [],
-  "APIVERSION": "1.0.0",
-  "DEVICERESOLUTION" : [[1280,720],[1920,1080],[3840,2160]],
   "STRING123456": "123456",
   "FOREGROUND": "foreground"
 }
