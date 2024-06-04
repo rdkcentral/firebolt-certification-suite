@@ -8,12 +8,12 @@ Feature: UserInterest
     @coreSDK @sdk @transport @userinterest
     Scenario Outline: Discovery.userInterest - Positive Scenario: In-app UX - Notify userInterest with type <Scenario>
         When 1st party app registers for the 'Content onUserInterest' event using the 'Firebolt' API
-        And '3rd party app' invokes the 'Firebolt' API to 'notify userInterest with <GetParam>'
+        And '3rd party app' invokes the 'Firebolt' API to 'notify userInterest with <NotifyParam>'
         Then 'Firebolt' platform responds with 'null for discovery userInterest'
         And 'Firebolt' platform triggers to '1st party app' event 'onUserInterest with <Event_Content>'
 
         Examples:
-            | Scenario                                                                               | GetParam                                                                                      | Event_Content                                                                        |
+            | Scenario                                                                               | NotifyParam                                                                                   | Event_Content                                                                        |
             | interest & reason playlist with program entity                                         | type interest and reason playlist with program entity                                         | type interest reason playlist                                                        |
             | disinterest & reason playlist with program entity                                      | type disinterest and reason playlist with program entity                                      | type disinterest reason playlist                                                     |
             | interest & reason playlist with channel streaming entity                               | type interest and reason playlist with channel streaming entity                               | type interest reason playlist channel                                                |
@@ -60,11 +60,11 @@ Feature: UserInterest
 
     @coreSDK @sdk @transport @userinterest
     Scenario Outline: Discovery.userInterest - Negative Scenario: <Scenario> expecting error
-        When '3rd party app' invokes the 'Firebolt' API to 'notify userInterest <GetParam>'
+        When '3rd party app' invokes the 'Firebolt' API to 'notify userInterest <Param>'
         Then 'Firebolt' platform responds with 'invalid params for discovery userInterest'
 
         Examples:
-            | Scenario                                                | GetParam                                                     |
+            | Scenario                                                | Param                                                        |
             | Empty param                                             | without any params                                           |
             | Without Interest type                                   | without interest type                                        |
             | Invalid Interest type - integer params                  | with numeric interestType                                    |
@@ -88,11 +88,11 @@ Feature: UserInterest
 
     @coreSDK @sdk @userinterest
     Scenario Outline: Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type <Scenario>
-        And 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type <setParam>'
+        And 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type <NotifyParam>'
         Then 'Firebolt' platform responds to '1st party app' with '<method_Content>'
 
         Examples:
-            | Scenario                         | setParam                     | method_Content                            |
+            | Scenario                         | NotifyParam                  | method_Content                            |
             | interest and reason playlist     | interest reason playlist     | requestUserInterest with reason playlist  |
             | interest and reason reaction     | interest reason reaction     | requestUserInterest with reason reaction  |
             | interest and reason recording    | interest reason recording    | requestUserInterest with reason recording |
@@ -102,16 +102,16 @@ Feature: UserInterest
 
     @coreSDK @sdk @transport @userinterest
     Scenario Outline: Content.requestUserInterest - Negative Scenario: <Scenario> expecting error
-        When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with <param>'
+        When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with <Param>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid params for content requestUserInterest'
 
         Examples:
-            | Scenario                               | param                |
+            | Scenario                               | Param                |
             | Invalid Interest value - test params   | invalid interestType |
             | Invalid Interest type - boolean params | boolean interestType |
             | Invalid reason value - test params     | invalid reasonType   |
             | Invalid Interest type - boolean params | boolean reasonType   |
-    
+
     @coreSDK @sdk @userinterest @notSupported
     Scenario: Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but platform timeout without sending response
         When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type interest timeout'
