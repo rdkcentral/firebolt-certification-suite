@@ -380,6 +380,7 @@ module.exports = {
   TRANSPORT: 'transport',
   TYPE_OBJECT: 'object',
   TYPE_STRING: 'string',
+  UNDEFINED: 'undefined',
   UNIQUEID: 'uniqueid',
   UNLOADING_APP_TEST_TYPES: [
     'lifecycle',

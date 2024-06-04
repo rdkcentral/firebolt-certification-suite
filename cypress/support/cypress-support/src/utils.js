@@ -689,6 +689,10 @@ class FireLog {
     assert.isNotNull(value, message);
   }
 
+  isUndefined(value, message) {
+    assert.isUndefined(value, message);
+  }
+
   isTrue(value, message) {
     assert.isTrue(value, message);
   }
