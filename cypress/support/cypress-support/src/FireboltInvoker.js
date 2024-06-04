@@ -101,10 +101,13 @@ export default class FireboltInvoker {
         fireboltMessage.params.hasOwnProperty('listen') &&
         fireboltMessage.params.listen == true
       ) {
-        Cypress.env(CONSTANTS.EVENT_RESPONSE_MAP).set(fireboltMessage.id, {
-          method: fireboltMessage.method,
-          listenerResponse: {},
-        });
+        Cypress.env(CONSTANTS.EVENT_RESPONSE_MAP).set(
+          fireboltMessage.method + '-' + fireboltMessage.id,
+          {
+            method: fireboltMessage.method,
+            listenerResponse: {},
+          }
+        );
       }
       const currentInstance = await this.get();
       const response = await currentInstance.send(JSON.stringify(fireboltMessage));

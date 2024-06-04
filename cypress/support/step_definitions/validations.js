@@ -115,7 +115,7 @@ Given(
                       cy.saveEventResponse(
                         updatedResponse,
                         methodOrEventObject,
-                        methodOrEvent,
+                        eventName,
                         eventExpected === 'triggers' ? true : false
                       );
                     });
@@ -136,7 +136,7 @@ Given(
                       cy.saveEventResponse(
                         response,
                         methodOrEventObject,
-                        methodOrEvent,
+                        eventName,
                         eventExpected === 'triggers' ? true : false
                       );
                     }
