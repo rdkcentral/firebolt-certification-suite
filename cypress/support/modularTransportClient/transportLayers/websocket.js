@@ -93,7 +93,7 @@ export default class Websocket extends AsyncTransportClient {
           if (
             mapKey &&
             Cypress.env('eventResponseMap').has(mapKey) &&
-            !message.result.hasOwnProperty('listening')
+            !message?.result?.hasOwnProperty('listening')
           ) {
             const obj = Cypress.env('eventResponseMap').get(mapKey);
             obj.listenerResponse = message;
