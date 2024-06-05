@@ -78,5 +78,27 @@
     "CLEAR_APP_LEVEL_DATA_APP_USAGE_CAPABILITY_WITH_ROLE_USE":{
         "method": "manage_usergrants.clear",
         "params": "USERGRANTS_CLEAR_APP_LEVEL_DATA_APP_USAGE_ROLE_USE"     
+    },
+    "SET_USERGRANTS_ACKNOWLEDGECHALLENGE_GRANTED_RESPONSE":{
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_LEVEL_DATA_APP_USAGE_ROLE_USE"     
+    },
+    "ACKNOWLEDGECHALLENGE_ONREQUESTCHALLENGE_MANAGE":{
+        "method": "manage_acknowledgeChallenge.onRequestChallenge"
+    },
+    "ACKNOWLEDGECHALLENGE_ONREQUESTCHALLENGE":{
+        "method": "acknowledgeChallenge.onRequestChallenge"
+    },
+    "GET_ACKNOWLEDGECHALLENGE_CHALLENGEFOCUS":{
+        "method": "acknowledgeChallenge.challengeFocus",
+        "params": "ACKNOWLEDGECHALLENGE_CHALLENGEFOCUS_PARAMS"
+    },
+    "GET_ACKNOWLEDGECHALLENGE_CHALLENGERESPONSE":{
+        "method": "acknowledgeChallenge.challengeResponse",
+        "params": "ACKNOWLEDGECHALLENGE_CHALLENGERESPONSE_PARAMS"
+    },
+    "GET_ACKNOWLEDGECHALLENGE_CHALLENGEERROR":{
+        "method": "acknowledgeChallenge.challengeError",
+        "params": "ACKNOWLEDGECHALLENGE_CHALLENGEERROR_PARAMS"
     }
 }

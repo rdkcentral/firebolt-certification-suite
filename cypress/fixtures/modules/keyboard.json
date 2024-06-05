@@ -35,5 +35,68 @@
     },
     "PASSWORD": {
         "result": "Abc##123"
+    },
+    "EMAILFOCUS": {
+        "CYPRESSENV-correlationId": "123"
+    },
+    "STANDARDFOCUS": {
+        "CYPRESSENV-correlationId": "123"
+    },
+    "PASSWORDFOCUS": {
+        "CYPRESSENV-correlationId": "123"
+    },
+    "EMAILRESPONSE": {
+        "CYPRESSENV-correlationId": "123",
+        "result": {
+            "text": "email@address.com",
+            "canceled": false
+        }
+    },
+    "STANDARDRESPONSE": {
+        "CYPRESSENV-correlationId": "123",
+        "result": {
+            "text": "email@address.com",
+            "canceled": false
+        }
+    },
+    "PASSWORDRESPONSE": {
+        "CYPRESSENV-correlationId": "123",
+        "result": {
+            "text": "Abc##123",
+            "canceled": false
+        }
+    },
+    "KEYBOARD_EMAILERROR": {
+        "error": {
+            "CYPRESSENV-correlationId": "123",
+            "result": {
+                "code": 1,
+                "message": "Error"
+            }
+        }
+    },
+    "KEYBOARD_STANDARDERROR": {
+        "error": {
+            "CYPRESSENV-correlationId": "123",
+            "result": {
+                "name": "error",
+                "value": {
+                    "CYPRESSENV-correlationId": "123",
+                    "result": {
+                        "code": 1,
+                        "message": "Error"
+                    }
+                }
+            }
+        }
+    },
+    "KEYBOARD_PASSWORDERROR": {
+        "error": {
+            "CYPRESSENV-correlationId": "123",
+            "result": {
+                "code": 1,
+                "message": "Error"
+            }
+        }
     }
 }
