@@ -9,6 +9,8 @@ const logger = require('../support/Logger')('testDataProcessor.js');
 
 // Combining validation objects from FCS and config module into single JSON
 const validationObjects = combineValidationObjectsJson();
+let resolvedFireboltCallsJson;
+let combinedFireboltMocksJson
 
 /**
  *  @function testDataProcessor
@@ -42,7 +44,7 @@ function testDataProcessor(configEnv) {
     fcsFireboltCallsMergedJson,
     configFireboltCallsModuleMergedJson
   );
-  const combinedFireboltMocksJson = Object.assign(
+  combinedFireboltMocksJson = Object.assign(
     fcsFireboltMocksMergedJson,
     configModuleFireboltMocksMergedJson
   );
@@ -53,7 +55,7 @@ function testDataProcessor(configEnv) {
   ]);
 
   // Resolving the variables in the JSON
-  const resolvedFireboltCallsJson = processFireboltJson(combinedFireboltCallsJson);
+  resolvedFireboltCallsJson = processFireboltJson(combinedFireboltCallsJson);
 
   // Resolving the variables in the SetResponse JSON
   const resolvedSetResponseJson = processSetResponseJson(mergedSetResponseJson);
@@ -79,9 +81,8 @@ function processSetResponseJson(jsonData) {
       object.fireboltCall = resolvedFireboltCallsJson[object.fireboltCall];
     }
   }
-  return jsonData
+  return jsonData;
 }
-
 
 /**
  *  @function processFireboltJson
