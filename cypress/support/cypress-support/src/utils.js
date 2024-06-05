@@ -664,9 +664,9 @@ class FireLog {
       FireLog.instance = this;
     }
 
-    // Helper function to remove backslashes
+    // Helper function to remove "\"
     function removeBackslashes(str) {
-      return str.replace(/\\/g, '');
+      return str.replace(/[\\"]/g, '');
     }
 
     // Use cy.log(message) for every method in the class
@@ -680,6 +680,7 @@ class FireLog {
           // Remove unwanted backslashes
           if (typeof message === 'string') {
             message = removeBackslashes(message);
+            console.log('HEY INSIDE if', message);
           }
 
           return cy.log(message).then(() => {
