@@ -94,7 +94,7 @@ export default class FireboltInvoker {
     logger.info('Firebolt Message in the invoke:' + JSON.stringify(fireboltMessage), 'invoke');
 
     try {
-      // Adding method name and listenerResponse to MAP for event registration request message.
+      // Saving firebolt event to an env map with the event name and listener id
       if (
         fireboltMessage &&
         fireboltMessage.params &&
