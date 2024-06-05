@@ -31,9 +31,9 @@ Feature: Advertising
 
       Examples:
          | Scenario                     | API_Key                             | Method_Validation_key                              | Event_Validation_key                                              |
+         | SkipRestriction adsAll       | set skipRestriction as adsAll       | Advertising policy skipRestriction as adsAll       | onPolicyChanged for advertising skipRestriction with adsAll       |
          | SkipRestriction none         | set skipRestriction as none         | Advertising policy skipRestriction as none         | onPolicyChanged for advertising skipRestriction with none         |
          | SkipRestriction adsUnwatched | set skipRestriction as adsUnwatched | Advertising policy skipRestriction as adsUnwatched | onPolicyChanged for advertising skipRestriction with adsUnwatched |
-         | SkipRestriction adsAll       | set skipRestriction as adsAll       | Advertising policy skipRestriction as adsAll       | onPolicyChanged for advertising skipRestriction with adsAll       |
          | SkipRestriction all          | set skipRestriction as all          | Advertising policy skipRestriction as all          | onPolicyChanged for advertising skipRestriction with all          |
 
    @Advertising @coreSDK @sdk @transport
