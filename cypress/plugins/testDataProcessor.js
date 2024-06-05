@@ -55,13 +55,33 @@ function testDataProcessor(configEnv) {
   // Resolving the variables in the JSON
   const resolvedFireboltCallsJson = processFireboltJson(combinedFireboltCallsJson);
 
+  // Resolving the variables in the SetResponse JSON
+  const resolvedSetResponseJson = processSetResponseJson(mergedSetResponseJson);
+
   // Below key names are converted into environment variables.
   return {
     fireboltCallsJson: resolvedFireboltCallsJson,
     fireboltMocksJson: combinedFireboltMocksJson,
-    setResponseJson: mergedSetResponseJson,
+    setResponseJson: resolvedSetResponseJson,
   };
 }
+
+function processSetResponseJson(jsonData) {
+  // Looping through json data
+  for (const key in jsonData) {
+    const object = jsonData[key];
+    if (object.hasOwnProperty('fireboltMock') && combinedFireboltMocksJson[object.fireboltMock]) {
+      object.fireboltMock = combinedFireboltMocksJson[object.fireboltMock];
+    } else if (
+      object.hasOwnProperty('fireboltCall') &&
+      resolvedFireboltCallsJson[object.fireboltCall]
+    ) {
+      object.fireboltCall = resolvedFireboltCallsJson[object.fireboltCall];
+    }
+  }
+  return jsonData
+}
+
 
 /**
  *  @function processFireboltJson
