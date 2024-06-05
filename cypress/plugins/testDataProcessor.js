@@ -10,7 +10,7 @@ const logger = require('../support/Logger')('testDataProcessor.js');
 // Combining validation objects from FCS and config module into single JSON
 const validationObjects = combineValidationObjectsJson();
 let resolvedFireboltCallsJson;
-let combinedFireboltMocksJson
+let combinedFireboltMocksJson;
 
 /**
  *  @function testDataProcessor
