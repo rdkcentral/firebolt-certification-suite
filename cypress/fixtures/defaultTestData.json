@@ -37,5 +37,6 @@
   "stringOne": "1",
   "EMPTYARRAY": [],
   "STRING123456": "123456",
-  "FOREGROUND": "foreground"
+  "FOREGROUND": "foreground",
+  "SCREENRESOLUTION" : [[1280,720],[1920,1080],[3840,2160]]
 }
