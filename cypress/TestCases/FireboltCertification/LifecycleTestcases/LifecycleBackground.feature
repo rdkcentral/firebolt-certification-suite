@@ -3,8 +3,6 @@
 @Lifecycle @coreSDK
 Feature: Lifecycle_Background
 
-
-
     Scenario Outline: Lifecycle 2.4.2 Background an app from <state>
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with '<state>' state

@@ -25,7 +25,7 @@ Feature: Lifecycle_Configuration
         # Then 'Firebolt' platform responds with 'message and code for lifecycle appFinishedTimeout'
         #     | key                          | value  |
         #     | Lifecycle.appFinishedTimeout | "abcd" |
-         #     | Lifecycle.appFinishedTimeout | 'a'    |
+        #     | Lifecycle.appFinishedTimeout | 'a'    |
         #     | Lifecycle.appFinishedTimeout | true   |
         #     | Lifecycle.appFinishedTimeout |        |
 

@@ -3,7 +3,6 @@
 @Lifecycle @coreSDK
 Feature: Lifecycle_Foreground
 
-
     Scenario: Lifecycle 2.2 Loading & Launching an App (initializing -> foreground)
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'initializing' state
