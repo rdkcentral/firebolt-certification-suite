@@ -39,7 +39,7 @@ Feature: Lifecycle_Unloading
         When 3rd party 'certification' app is launched with 'foreground' state
         # When 1st party app invokes the API to 'call lifecycleManagement unload expecting error'
         Then '3rd party app' will stay in 'foreground' state
-    # Then 'Firebolt' platform responds with 'message and code for lifecycle unload'
+        # Then 'Firebolt' platform responds with 'message and code for lifecycle unload'
 
     @notSupported
     Scenario: Lifecycle 2.5.1 Cannot Suspend Unloaded app
@@ -49,8 +49,8 @@ Feature: Lifecycle_Unloading
         Then '3rd party app' invokes the 'Firebolt' API to 'call lifecycle suspend and expects error'
         # And 1st party app invokes the API to 'get lifecycle management state'
         Then '3rd party app' will stay in 'unloaded' state
-    # Then 'Firebolt' platform responds with 'message and code for lifecycle suspend'
-    # And 'Firebolt' platform responds with 'last two responses for lifecycleManagement state'
+        # Then 'Firebolt' platform responds with 'message and code for lifecycle suspend'
+        # And 'Firebolt' platform responds with 'last two responses for lifecycleManagement state'
 
     @notSupported
     Scenario Outline: Lifecycle 3.4.1 Should not finish from state other than unloading (<state>)
@@ -70,5 +70,5 @@ Feature: Lifecycle_Unloading
     @notSupported
     Scenario: Lifecycle 2.3.2 Cannot Close an app that is not loaded
         Given the environment has been set up for 'lifecycle' tests
-# When 1st party app invokes the API to 'call lifecycleManagement close expecting error'
-# Then 'Firebolt' platform responds with 'message and code for lifecycleManagement close'
+        # When 1st party app invokes the API to 'call lifecycleManagement close expecting error'
+        # Then 'Firebolt' platform responds with 'message and code for lifecycleManagement close'
