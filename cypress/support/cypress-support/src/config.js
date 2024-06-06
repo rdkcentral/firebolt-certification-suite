@@ -1,3 +1,4 @@
+
 /**
  * Copyright 2024 Comcast Cable Communications Management, LLC
  *
@@ -185,7 +186,7 @@ export default class Config {
       ? (fireboltResponse = JSON.stringify(fireboltResponse))
       : fireboltResponse;
 
-    cy.log('Original Response to be converted to firebolt equivalent: ' + fireboltResponse);
+    fireLog.assert('Original Response to be converted to firebolt equivalent: ' + fireboltResponse);
     // If we've gotten to this point, we have a config override. Call it and return its response
     return methodConfig(fireboltResponse);
   }
