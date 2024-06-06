@@ -39,7 +39,7 @@ function init() {
 
   return new Promise((resolve, reject) => {
     // Enter a valid WebSocket URL
-    client.ws = new WebSocket('ws://your-ws-url-here.com');
+    client.ws = new WebSocket('ws://localhost:8080');
 
     const websocket = client.ws;
 
@@ -129,19 +129,18 @@ function subscribe(topic, callback) {
     const formattedMsg = {
       operation: data.operation,
       topic: data.topic,
-      headers: data.payload?.headers,
-      payload: data.payload.message,
+      payload: data.payload?.message,
     };
 
     // Add headers to top level of formatted message if they exist
-    if (data.payload.headers) {
+    if (data.payload?.headers) {
       formattedMsg.headers = data.payload.headers;
     }
     // If a callback function is provided, call it with the formattedMsg payload and headers
     if (typeof callback == 'function') {
       logger.info(
         'Incoming notification is valid. Calling callback:' + JSON.stringify(data),
-        'sunscribe'
+        'subscribe'
       );
       callback(formattedMsg.payload, formattedMsg.headers);
     }
@@ -171,4 +170,4 @@ function unsubscribe(topic) {
 }
 
 // Uncomment the line below to get app transport working
-// module.exports = { init, publish, subscribe, unsubscribe };
+module.exports = { init, publish, subscribe, unsubscribe };

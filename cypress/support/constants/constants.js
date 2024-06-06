@@ -114,7 +114,7 @@ module.exports = {
   EVENT_SCHEMA_RESULT: 'eventSchemaResult',
   EXCEPTION_ERROR_OBJECT: 'exceptionErrorObject',
   EXCEPTION_METHODS: 'exceptionMethods',
-  EXCLUDED_METHODS: [],
+  EXCLUDED_METHODS: ['Lifecycle.close'],
   EXCLUDED_MODULES: [],
   EXCLUDED_VALUES: [null, undefined],
   EXECUTE_SHELL: 'executeShell',

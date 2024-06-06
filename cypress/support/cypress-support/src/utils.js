@@ -168,7 +168,7 @@ function overideParamsFromConfigModule(overrideParams) {
     : CONSTANTS.EXCLUDED_METHODS;
   overrideParams.modulesToBeExcluded = getEnvVariable('excludedModules', false)
     ? getEnvVariable('excludedModules')
-    : CONSTANTS.EXCLUDED_METHODS;
+    : CONSTANTS.EXCLUDED_MODULES;
   return overrideParams;
 }
 
