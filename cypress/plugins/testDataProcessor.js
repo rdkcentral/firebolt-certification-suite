@@ -68,6 +68,18 @@ function testDataProcessor(configEnv) {
   };
 }
 
+/**
+ *  @function processSetResponseJson
+ *  processSetResponseJson function will perform following operations
+ *  - Iterate over each key in the provided JSON
+ *  - Resolve the values of setResponse params
+ *  - Return the JSON with the updated value.
+ *
+ *  @example
+ *  processSetResponseJson({'abc': {'fireboltMock': 'ACKNOWLEDGE_CHALLENGE_GRANTED', 'firstParty': 'true'}})
+ *  @returns
+ *  {'abc': {fireboltMock: {'method': 'method_name', 'response': [{"isCancelled": false, "withUi": true, "result":{}}]}}, 'firstParty': 'true'}
+ */
 function processSetResponseJson(jsonData) {
   // Looping through json data
   for (const key in jsonData) {
