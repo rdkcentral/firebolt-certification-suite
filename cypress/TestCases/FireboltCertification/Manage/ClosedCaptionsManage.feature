@@ -1,10 +1,11 @@
+@ClosedCaptions @manageSDK
 Feature: ClosedCaptions_Manage
 
     Background: Launch FCA for 'ClosedCaptions'
         Given the environment has been set up for 'ClosedCaptions' tests
         And 3rd party 'certification' app is launched
 
-    @ClosedCaptions @manageSDK
+    @sdk @transport
     Scenario Outline: ClosedCaptions.<Method> - Positive Scenario: <Scenario>
         When 1st party app registers for the '<Event>' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
@@ -48,7 +49,7 @@ Feature: ClosedCaptions_Manage
             | Set windowColor-white                | windowColor        | closedcaptions onWindowColorChanged        | set windowColor to white                | get windowColor        | white for windowColor in closedCaptions                | onWindowColorChanged for closedcaptions with #000000              |
             | Set windowOpacity-50                 | windowOpacity      | closedcaptions onWindowOpacityChanged      | set windowOpacity to 50                 | get windowOpacity      | 50 for windowOpacity in closedCaptions                 | onWindowOpacityChanged for closedcaptions with 50                 |
 
-    @ClosedCaptions @manageSDK
+    @sdk @transport
     Scenario Outline: Closedcaptions.<Method> - Positive Scenario: <Scenario> with 'null' params
         When 1st party app registers for the '<Event>' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
@@ -72,7 +73,7 @@ Feature: ClosedCaptions_Manage
             | windowColor       | windowColor       | set windowColor as null       | get windowColor       | default value for windowColor in closedcaptions       | onWindowColorChanged for closedcaptions with default value       | closedcaptions onWindowColorChanged       |
             | windowOpacity     | windowOpacity     | set windowOpacity as null     | get windowOpacity     | default value for windowOpacity in closedcaptions     | onWindowOpacityChanged for closedcaptions with default value     | closedcaptions onWindowOpacityChanged     |
 
-    @ClosedCaptions @manageSDK
+    @sdk @transport
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_key>'

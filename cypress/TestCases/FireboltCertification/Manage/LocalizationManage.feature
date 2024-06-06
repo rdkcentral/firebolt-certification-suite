@@ -1,11 +1,11 @@
+@Localization @manageSDK
 Feature: Localization_Manage
 
     Background: Launch FCA for 'Localization'
         Given the environment has been set up for 'Localization' tests
         And 3rd party 'certification' app is launched
 
-    # Since the "refui" app validation is not designed, the event validation step is commented out.
-    @Localization @manageSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Localization.<Scenario> - Positive Scenario: <Scenario>
         When 1st party app registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<API_Key>'
@@ -25,7 +25,7 @@ Feature: Localization_Manage
             | Time-Zone               | manage localization onTimeZoneChanged                | set timeZone to America/NewYork        | get timeZone                | America/NewYork for timeZone        | onTimeZoneChanged for localization with America/NewYork        |
             | PreferredAudioLanguages | manage localization onPreferredAudioLanguagesChanged | set preferredAudioLanguages to spa eng | get preferredAudioLanguages | spa eng for preferredAudioLanguages | onPreferredAudioLanguagesChanged for localization with spa eng |
 
-    @Localization @manageSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
@@ -40,7 +40,7 @@ Feature: Localization_Manage
             | TimeZone-integer    | set timeZone with boolean   | timeZone   | Invalid parameter for timeZone   |
             | TimeZone-boolean    | set timeZone with boolean   | timeZone   | Invalid parameter for timeZone   |
 
-    @Localization @manageSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
@@ -59,7 +59,7 @@ Feature: Localization_Manage
     Scenario Outline: Localization.removeAdditionalInfo - Negative Scenario: <Scenario> and expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for localization removeAdditionalInfo'
-        
+
         Examples:
             | Scenario              | API_Key                                               |
             | with param as object  | set localization removeAdditionalInfo as integer      |
@@ -69,7 +69,7 @@ Feature: Localization_Manage
     Scenario Outline: Localization.addAdditionalInfo - Negative Scenario: <Scenario> and expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for localization addAdditionalInfo'
-        
+
         Examples:
             | Scenario                             | API_Key                                                             |
             | with key as string and value as null | set localization addAdditionalInfo with key as string value as null |

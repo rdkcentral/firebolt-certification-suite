@@ -1,15 +1,16 @@
+@Localization @coreSDK
 Feature: Localization
 
     Background: Launch FCA for 'Localization'
         Given the environment has been set up for 'Localization' tests
         And 3rd party 'certification' app is launched
 
-    @Localization @coreSDK @sdk @transport
+    @sdk @transport
     Scenario: Localization.additionalInfo - Positive Scenario: Get additional info
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         Then 'Firebolt' platform responds with 'expected localization additionalInfo'
 
-    @Localization @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Localization.addAdditionalInfo - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         And 1st party app invokes the 'Firebolt' API to '<API_Key>'
@@ -22,7 +23,7 @@ Feature: Localization
             | with key and value as string       | set localization addAdditionalInfo with string       | string for localization additionalInfo       |
             | with key and value as empty string | set localization addAdditionalInfo with empty string | empty string for localization additionalInfo |
 
-    @Localization @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Localization.removeAdditionalInfo - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         And 1st party app invokes the 'Firebolt' API to '<API_Key>'
@@ -35,7 +36,7 @@ Feature: Localization
             | with key and value as string       | set localization removeAdditionalInfo with string       | empty key/value for localization additionalInfo |
             | with key and value as empty string | set localization removeAdditionalInfo with empty string | empty response for localization additionalInfo  |
 
-    @Localization @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Localization.<Scenario> - Positive Scenario: Get <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
@@ -47,7 +48,7 @@ Feature: Localization
             | locale      | get localization locale      | expected localization locale      |
             | latlon      | get localization latlon      | expected localization latlon      |
 
-    @Localization @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: <Method> - Positive Scenario: Validate <Scenario>
         When '3rd party app' registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
@@ -68,7 +69,7 @@ Feature: Localization
             | Set & get preferredAudioLanguages(eng-spa) | Localization.preferredAudioLanguages | localization onPreferredAudioLanguagesChanged | set preferredaudiolanguages to eng spa  | get localization preferredaudiolanguages | eng spa for localization preferredaudiolanguages | onpreferredaudiolanguageschanged for localization with eng and spa |
             | Set & get PostalCode                       | Localization.postalCode              | localization onPostalCodeChanged              | set postalcode to 12345                 | get postalcode                           | 12345 for localization postalcode                | onpostalcodechanged for localization postalCode with 12345         |
 
-    @Device @coreSDK @regression @sdk
+    @Device  @regression @sdk
     Scenario Outline: Localization.<Method_Name> - Positive Scenario: Clearing event listeners
         When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
         And I clear '<Clear_Event_Name>' listeners

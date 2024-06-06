@@ -1,10 +1,11 @@
+@Metrics @manageSDK
 Feature: Metrics_Manage
 
     Background: Launch FCA for 'Metrics'
         Given the environment has been set up for 'Metrics' tests
         And 3rd party 'certification' app is launched
-        
-    @Metrics @manageSDK
+
+    @sdk @transport
     Scenario Outline: Metrics.event - Positive Scenario: <Scenario>
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
@@ -17,8 +18,7 @@ Feature: Metrics_Manage
             | Send data as empty object         | send metrics event with empty data                  |
             | Send schema as empty string       | send metrics event with empty schema                |
 
-
-    @Metrics @manageSDK
+    @sdk @transport
     Scenario Outline: Metrics.event - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid params for metrics event'

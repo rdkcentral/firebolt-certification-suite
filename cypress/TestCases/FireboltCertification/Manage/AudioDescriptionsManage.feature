@@ -1,11 +1,11 @@
+@AudioDescriptions @manageSDK
 Feature: AudioDescriptions_Manage
 
    Background: Launch FCA for 'AudioDescriptions'
       Given the environment has been set up for 'AudioDescriptions' tests
       And 3rd party 'certification' app is launched
 
-   # Since the "refui" app validation is not designed, the event validation step is commented out.
-   @AudioDescriptions @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: AudioDescriptions.enabled - Positive Scenario: <Scenario>
       When 1st party app registers for the 'audioDescriptions onEnabledChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'

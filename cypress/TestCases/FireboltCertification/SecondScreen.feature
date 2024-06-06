@@ -1,10 +1,11 @@
+@Secondscreen @coreSDK
 Feature: Secondscreen
 
    Background: Launch FCA for 'Secondscreen'
       Given the environment has been set up for 'Secondscreen' tests
       And 3rd party 'certification' app is launched
 
-   @Secondscreen @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Secondscreen.<Method> - Positive Scenario: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
@@ -15,7 +16,7 @@ Feature: Secondscreen
          | Validate passing device with string         | get secondscreen device with string      | expected secondscreen device    | device    |
          | Validate passing protocols with empty array | get secondscreen protocols               | expected secondscreen protocols | protocols |
 
-   @Secondscreen @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Secondscreen.device - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
@@ -25,7 +26,7 @@ Feature: Secondscreen
          | Validate passing device as boolean | get secondscreen device with boolean | invalid parameters for secondscreen device |
          | Validate passing device as integer | get secondscreen device with integer | invalid parameters for secondscreen device |
 
-   @Secondscreen @coreSDK @sdk @transport
+   @sdk @transport
    Scenario: Secondscreen.FriendlyName - Positive Scenario: Validate Set friendlyName
       Given '3rd party app' registers for the 'secondscreen onFriendlyNameChanged' event using the 'Firebolt' API
       When '3rd party app' invokes the 'Firebolt' API to 'get secondscreen friendlyName'
@@ -34,7 +35,7 @@ Feature: Secondscreen
       Then 'Firebolt' platform responds with 'guest room for secondscreen friendlyName'
       And 'Firebolt' platform triggers event 'onFriendlyNameChanged for secondscreen with guest room'
 
-   @Secondscreen @coreSDK @regression @sdk
+   @regression @sdk
    Scenario: Secondscreen.onFriendlyNameChanged - Positive Scenario: Validating event clearing listeners
       Given '3rd party app' registers for the 'secondscreen onFriendlyNameChanged' event using the 'Firebolt' API
       And I clear 'secondscreen onFriendlyNameChanged event' listeners
@@ -42,7 +43,7 @@ Feature: Secondscreen
       Then 'Firebolt' platform responds to '1st party app' for 'set friendlyName to guest room'
       And 'Firebolt' platform does not trigger event for 'onFriendlyNameChanged'
 
-   @Secondscreen @coreSDK @regression @sdk @notSupported
+   @regression @sdk @notSupported
    Scenario Outline: Secondscreen.<EventName> - Positive Scenario: Validating event name in response
       When '3rd party app' registers for the '<RegisteredEvent>' event using the 'Firebolt' API
       And User triggers event with value as '<EventParams>'
@@ -55,7 +56,7 @@ Feature: Secondscreen
          | onCloseRequest  | secondscreen onCloseRequest  | expected secondscreen onCloseRequest event  | onCloseRequest event  |
          | onCloseRequest  | secondscreen onCloseRequest  | expected secondscreen onCloseRequest event  | onCloseRequest event  |
 
-   @Secondscreen @coreSDK @regression @sdk @notSupported
+   @regression @sdk @notSupported
    Scenario Outline: Secondscreen.<Event_Name> - Positive Scenario: Validating event Clearing listeners
       When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
       And I clear '<Clear_Event_Name>' listeners
