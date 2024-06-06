@@ -431,9 +431,9 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
             action: action,
           };
 
-          fireLog.assert(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
+          fireLog.info(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
           cy.sendMessagetoPlatforms(requestMap).then((result) => {
-            fireLog.assert('Response from 1st party App: ' + JSON.stringify(result));
+            fireLog.info('Response from 1st party App: ' + JSON.stringify(result));
           });
         } else {
           const communicationMode = UTILS.getCommunicationMode();
@@ -457,10 +457,10 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
           );
 
           // Sending message to 3rd party app.
-          fireLog.assert(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
+          fireLog.info(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
           cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
             result = JSON.parse(result);
-            fireLog.assert(
+            fireLog.info(
               `Response from 3rd party App ${Cypress.env(
                 CONSTANTS.THIRD_PARTY_APP_ID
               )}: ${JSON.stringify(result)}`
@@ -509,7 +509,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
         cy.log(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
         cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
           result = JSON.parse(result);
-          fireLog.assert(
+          fireLog.info(
             `Response from 3rd party App ${Cypress.env(
               CONSTANTS.THIRD_PARTY_APP_ID
             )}: ${JSON.stringify(result)}`
@@ -526,7 +526,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
       params: scenarioName,
     };
 
-    fireLog.assert(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
+    fireLog.info(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
@@ -555,7 +555,7 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
     },
     task: CONSTANTS.TASK.PERFORMANCETESTHANDLER,
   };
-  fireLog.assert(
+  fireLog.info(
     'Request map to send intent to performance test handler: ' + JSON.stringify(requestMap)
   );
   // Sending message to the platform to call performance test handler
@@ -683,9 +683,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
   const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
 
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
-    fireLog.assert('Discovery launch intent: ' + JSON.stringify(parsedIntent));
+    fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
     cy.sendMessagetoPlatforms(parsedIntent).then((result) => {
-      fireLog.assert('Response from Firebolt platform: ' + JSON.stringify(result));
+      fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
 
       // checking the connection status of a third-party app.
       cy.thirdPartyAppHealthcheck(requestTopic, responseTopic).then((healthCheckResponse) => {

@@ -631,15 +631,15 @@ Cypress.Commands.add(
     if (eventReceived) {
       try {
         eventReceived = JSON.parse(eventReceived);
-        fireLog.assert('Event Response: ' + JSON.stringify(eventReceived.eventResponse));
+        fireLog.info('Event Response: ' + JSON.stringify(eventReceived.eventResponse));
       } catch (e) {
-        fireLog.assert('Event Response: ' + eventReceived);
+        fireLog.info('Event Response: ' + eventReceived);
       }
     }
 
-    fireLog.assert('Event Received Check : ' + eventReceivedCheck);
-    fireLog.assert('Event Schema Check : ' + schemaCheck);
-    fireLog.assert('Event Content Check : ' + contentCheck);
+    fireLog.info('Event Received Check : ' + eventReceivedCheck);
+    fireLog.info('Event Schema Check : ' + schemaCheck);
+    fireLog.info('Event Content Check : ' + contentCheck);
   }
 );
 
