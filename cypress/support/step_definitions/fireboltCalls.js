@@ -400,7 +400,7 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
 
         // Sending message to 3rd party app.
         cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
-          firelog.assert(
+          fireLog.assert(
             `Response from ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(result)}`
           );
         });
@@ -418,7 +418,7 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
  * And User triggers event with value as ' DEVICE_ONHDCPCHANGED_EVENTS'
  */
 Given(/User triggers event with value as '(.+)'/, (key) => {
-  firelog.assert(CONSTANTS.STEP_DEFINITION_NEEDS_TO_IMPLEMENT).then(() => {
+  fireLog.assert(CONSTANTS.STEP_DEFINITION_NEEDS_TO_IMPLEMENT).then(() => {
     throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
   });
 });
