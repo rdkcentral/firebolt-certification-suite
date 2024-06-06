@@ -404,7 +404,7 @@
         "method": "closedcaptions.backgroundColor",
         "validationJsonPath": "result"
     },
-    "ONBACKGROUNDCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#FF00FF": {
+    "ONBACKGROUNDCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_#7F7F7F": {
         "event": "closedcaptions.onBackgroundColorChanged",
         "validationJsonPath": "eventResponse",
         "content": "CLOSEDCAPTIONS_BACKGROUNDCOLOR"
