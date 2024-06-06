@@ -1,4 +1,3 @@
-
 /**
  * Copyright 2024 Comcast Cable Communications Management, LLC
  *
@@ -556,7 +555,9 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
     },
     task: CONSTANTS.TASK.PERFORMANCETESTHANDLER,
   };
-  fireLog.assert('Request map to send intent to performance test handler: ' + JSON.stringify(requestMap));
+  fireLog.assert(
+    'Request map to send intent to performance test handler: ' + JSON.stringify(requestMap)
+  );
   // Sending message to the platform to call performance test handler
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     if (result?.success) {

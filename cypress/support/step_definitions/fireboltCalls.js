@@ -47,7 +47,9 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
         action: action,
       };
 
-      fireLog.assert('Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params));
+      fireLog.assert(
+        'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params)
+      );
       cy.sendMessagetoPlatforms(requestMap).then((response) => {
         if (response && typeof response == CONSTANTS.TYPE_OBJECT) {
           // If error and the error message having 'Method not found' or 'Method not Implemented' mark the testcase as undefined.
@@ -60,9 +62,11 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
             if (UTILS.getEnvVariable(CONSTANTS.CERTIFICATION) == true) {
               assert(false, `${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${method}`);
             } else {
-              fireLog.assert(`NotSupported: ${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${method}`).then(() => {
-                throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
-              });
+              fireLog
+                .assert(`NotSupported: ${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${method}`)
+                .then(() => {
+                  throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+                });
             }
           }
 
@@ -116,8 +120,8 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
       appId = !appId
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appId === CONSTANTS.THIRD_PARTY_APP
-          ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-          : appId;
+        ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+        : appId;
       const method = parsedData.method;
       const param = parsedData.params;
       const context = parsedData.context;
@@ -211,8 +215,8 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
       appId = appId = !appId
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appId === CONSTANTS.THIRD_PARTY_APP
-          ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-          : appId;
+        ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+        : appId;
       const event = parsedData.method;
       const param = parsedData.params;
       const context = parsedData.context ? parsedData.context : CONSTANTS.NO_CONTEXT;
@@ -253,7 +257,9 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
             assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
           }
           result = JSON.parse(result);
-          fireLog.assert(`Response from ${appId}: ${JSON.stringify(result.report.eventListenerResponse)}`);
+          fireLog.assert(
+            `Response from ${appId}: ${JSON.stringify(result.report.eventListenerResponse)}`
+          );
 
           // If event and params are not supported setting isScenarioExempted as true for further validation.
           if (UTILS.isScenarioExempted(event, param)) {
@@ -325,9 +331,11 @@ Given(/1st party app registers for the '(.+)' event using the '(.+)' API$/, asyn
             if (UTILS.getEnvVariable(CONSTANTS.CERTIFICATION) == true) {
               assert(false, `${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${method}`);
             } else {
-              fireLog.assert(`NotSupported: ${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${method}`).then(() => {
-                throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
-              });
+              fireLog
+                .assert(`NotSupported: ${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${method}`)
+                .then(() => {
+                  throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+                });
             }
           } else if (response && response.error && response.error.message) {
             assert(
@@ -387,7 +395,9 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
           params: item,
         };
 
-        fireLog.assert('Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params));
+        fireLog.assert(
+          'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params)
+        );
         cy.sendMessagetoPlatforms(requestMap).then((result) => {
           fireLog.assert('Response from Firebolt platform: ' + JSON.stringify(result));
         });
