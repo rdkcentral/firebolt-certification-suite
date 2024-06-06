@@ -120,8 +120,8 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
       appId = !appId
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appId === CONSTANTS.THIRD_PARTY_APP
-        ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-        : appId;
+          ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+          : appId;
       const method = parsedData.method;
       const param = parsedData.params;
       const context = parsedData.context;
@@ -215,8 +215,8 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
       appId = appId = !appId
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appId === CONSTANTS.THIRD_PARTY_APP
-        ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-        : appId;
+          ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+          : appId;
       const event = parsedData.method;
       const param = parsedData.params;
       const context = parsedData.context ? parsedData.context : CONSTANTS.NO_CONTEXT;
