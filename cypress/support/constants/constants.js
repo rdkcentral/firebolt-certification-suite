@@ -110,6 +110,7 @@ module.exports = {
   EVENT_NAME: 'eventName',
   EVENT_PARAM: 'event_param',
   EVENT_RESPONSE: 'eventResponse',
+  EVENT_RESPONSE_MAP: 'eventResponseMap',
   EVENT_SCHEMA_MSG: 'Event listener schema validation',
   EVENT_SCHEMA_RESULT: 'eventSchemaResult',
   EXCEPTION_ERROR_OBJECT: 'exceptionErrorObject',
@@ -176,7 +177,6 @@ module.exports = {
   INVALID_RESPONSE: 'Invalid response',
   INVALID_HISTORY_RESPONSE: 'App history response does not contain expected fields',
   IS_NOT_SUPPORTED_API: 'isNotSupportedApi',
-  IS_SAME_APP_TRANSITION: 'isSameAppTransition',
   IS_SCENARIO_EXEMPTED: 'isScenarioExempted',
   JOBID: 'jobId',
   JSON_FILE_EXTENSION: '_CoreSuiteReport.json',
@@ -346,6 +346,7 @@ module.exports = {
   STATE_SCHEMA_VALIDATION_REQ: 'Lifecycle state schema validation Req #',
   STATIC_CONTENT_VALIDATION: 'staticContentValidation',
   STATUS_CODE: [0, 1, 2, 3],
+  STAY: 'stay',
   STEP_IMPLEMENTATION_MISSING: 'Step implementation missing',
   STRING: 'string',
   STRING_LANGUAGE_FORMAT: 'stringLanguageFormat',
@@ -381,6 +382,7 @@ module.exports = {
   TRANSPORT: 'transport',
   TYPE_OBJECT: 'object',
   TYPE_STRING: 'string',
+  UNDEFINED: 'undefined',
   UNIQUEID: 'uniqueid',
   UNLOADING_APP_TEST_TYPES: [
     'lifecycle',
@@ -416,7 +418,17 @@ module.exports = {
   FCS_DEFAULTTESTDATA_PATH: 'cypress/fixtures/defaultTestData.json',
   ENV_SETUP_STATUS: 'environmentLaunched',
   APP_LAUNCH_STATUS: 'appLaunched',
+  VISIBILITYSTATE_VALIDATION_REQ: 'Lifecycle visibility state validation Req # ',
+  LIFECYCLE_VISIBILITYSTATE_SKIP_MESSAGE:
+    'App is not reachable to fetch visibility state. Skipping Visibility state validation.',
+  VISIBILITYSTATE_FAILURE_FIX_LOG:
+    ', How to fix: If the visibility state response is as per the platform, add the expected value in configModule. More details is present in footer',
+  VISIBILITYSTATE_FAILURE_LOG:
+    '. If the visibility state response is as per the platform, add the expected value in configModule. More details is present in footer',
   NO_EVENT_TRIGGERED: 'Expecting no event to be triggered from platform',
+  VISIBILITYSTATE: 'visibilityState',
+  VISIBLE_CHECK: 'visible_check',
+  STEP_DEFINITION_NEEDS_TO_IMPLEMENT: 'Step definition needs to be implemented',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

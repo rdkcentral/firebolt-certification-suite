@@ -443,16 +443,21 @@ function assertWithRequirementLogs(pretext, actual, expected, equateDeep = false
       assert(false, pretext + ': ' + JSON.stringify(errorObject));
     });
   } else {
-    cy.log(
-      pretext + ': Expected : ' + expected + ' , Actual : ' + actual,
-      'assertWithRequirementLogs'
-    ).then(() => {
-      if (equateDeep) {
-        assert.deepEqual(actual, expected, pretext);
-      } else {
-        assert.equal(actual, expected, pretext);
-      }
-    });
+    let expectedLog = expected;
+    let actualLog = actual;
+    if (Array.isArray(actual) && actual.length < 1) {
+      actualLog = JSON.stringify(actual);
+    }
+    if (Array.isArray(expected) && expected.length < 1) {
+      expectedLog = JSON.stringify(expected);
+    }
+
+    const logMessage = pretext + ': Expected : ' + expectedLog + ' , Actual : ' + actualLog;
+    if (equateDeep) {
+      fireLog.deepEqual(actual, expected, logMessage);
+    } else {
+      fireLog.equal(actual, expected, logMessage);
+    }
   }
 }
 
@@ -623,6 +628,24 @@ function checkForTags(tags) {
 }
 
 /**
+ * @module utils
+ * @globalfunction resolveDeviceVariable
+ * @description Resolve the device variable from the preprocessed data for the given key
+ * @example
+ * resolveDeviceVariable("deviceId")
+ */
+
+global.resolveDeviceVariable = function (key) {
+  const resolvedDeviceData = Cypress.env('resolvedDeviceData');
+  if (!(key in resolvedDeviceData)) {
+    logger.error(`Key ${key} not found in preprocessed data.`);
+    return null;
+  }
+  logger.debug(`Resolved value for key ${key} is ${resolvedDeviceData[key]}`);
+  return resolvedDeviceData[key];
+};
+
+/**
  * FireLog class provides assertion methods with logging using Cypress's cy.log().
  * It wraps Cypress's assertion methods, allowing logging of messages for each assertion.
  * @class
@@ -664,6 +687,10 @@ class FireLog {
 
   isNotNull(value, message) {
     assert.isNotNull(value, message);
+  }
+
+  isUndefined(value, message) {
+    assert.isUndefined(value, message);
   }
 
   isTrue(value, message) {

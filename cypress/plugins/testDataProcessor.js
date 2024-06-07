@@ -193,6 +193,37 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                 if (typeof data.type !== CONSTANTS.STRING) {
                   return data.type;
                 }
+
+                // Resolve any cypress env variables
+                if (typeof data.type === 'string' && data.type.includes('CYPRESSENV')) {
+                  // Split into an array and remove CYPRESSENV
+                  const envSegments = data.type.split('-').slice(1);
+                  // Handle the case where the env variable is an object
+                  if (envSegments.length > 1) {
+                    const objectName = envSegments[0];
+                    const propertyName = envSegments[1];
+
+                    // Get object from envVariables
+                    const envValue = _.get(envVariables, [objectName, propertyName]);
+
+                    // Check if object exists and contains the specified property
+                    if (envValue !== undefined) {
+                      return (data.type = envValue);
+                    } else {
+                      logger.info(`Cypress env variable '${envKey}' does not exist`);
+                      return data.type;
+                    }
+                  } else {
+                    const envKey = envSegments[0];
+                    const envValue = _.get(envVariables, envKey);
+                    if (envValue !== undefined) {
+                      return (data.type = envValue);
+                    } else {
+                      logger.info(`Cypress env variable '${envKey}' does not exist`);
+                      return data.type;
+                    }
+                  }
+                }
                 switch (data.mode) {
                   case CONSTANTS.REGEX.toLowerCase():
                     const regexType = data.type.includes('_REGEXP')
