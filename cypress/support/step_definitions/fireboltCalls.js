@@ -69,10 +69,12 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
           cy.updateResponseForFCS(method, params, response).then((updatedResponse) => {
             // Create a deep copy to avoid reference mutation
             const dataToBeCensored = _.cloneDeep(response);
-
             // Call the 'censorData' command to hide sensitive data
             cy.censorData(method, dataToBeCensored).then((maskedResult) => {
-              cy.log(`Response from Firebolt platform: ${JSON.stringify(maskedResult)}`);
+              const responseType = response.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
+              cy.log(
+                `Response from Firebolt platform: ${JSON.stringify(maskedResult[responseType])}`
+              );
             });
             // If event and params are not supported setting isScenarioExempted as true for further validation.
             if (UTILS.isScenarioExempted(method, params)) {
@@ -168,7 +170,8 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
 
             // Call the 'censorData' command to hide sensitive data
             cy.censorData(method, dataToBeCensored).then((maskedResult) => {
-              cy.log(`Response from ${appId}: ${JSON.stringify(maskedResult)}`);
+              const responseType = result.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
+              cy.log(`Response from ${appId}: ${JSON.stringify(maskedResult[responseType])}`);
             });
 
             // If method and params are not supported setting isScenarioExempted as true for further validation.
