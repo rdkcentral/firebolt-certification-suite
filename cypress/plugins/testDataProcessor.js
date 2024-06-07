@@ -80,10 +80,10 @@ function testDataProcessor(configEnv) {
  *  @returns
  *  {'abc': {fireboltMock: {'method': 'method_name', 'response': [{"isCancelled": false, "withUi": true, "result":{}}]}}, 'firstParty': 'true'}
  */
-function processSetResponseJson(jsonData) {
+function processSetResponseJson(setResponseJsonData) {
   // Looping through json data
-  for (const key in jsonData) {
-    const object = jsonData[key];
+  for (const key in setResponseJsonData) {
+    const object = setResponseJsonData[key];
     if (object.hasOwnProperty('fireboltMock') && combinedFireboltMocksJson[object.fireboltMock]) {
       object.fireboltMock = combinedFireboltMocksJson[object.fireboltMock];
     } else if (
@@ -93,7 +93,7 @@ function processSetResponseJson(jsonData) {
       object.fireboltCall = resolvedFireboltCallsJson[object.fireboltCall];
     }
   }
-  return jsonData;
+  return setResponseJsonData;
 }
 
 /**
