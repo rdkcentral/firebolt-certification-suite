@@ -46,6 +46,7 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
         params: params,
         action: action,
       };
+      Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID, params.appId);
 
       cy.log('Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params));
       cy.sendMessagetoPlatforms(requestMap).then((response) => {
