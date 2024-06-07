@@ -749,8 +749,8 @@ global.fireLog = fireLog;
  * resolveAtRuntime(["result.{{attribute}}", "result.styles.{{attribute}}"])
  * resolveAtRuntime("manage_closedcaptions.set{{attribute.uppercaseFirstChar}}")
  * resolveAtRuntime("value")
- * 
- * @returns 
+ *
+ * @returns
  * ['result.fontSize', 'result.styles.fontSize']
  * "manage_closedcaptions.setFontSize"
  * "1.5"
