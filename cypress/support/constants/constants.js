@@ -370,6 +370,7 @@ module.exports = {
     SETAPIRESPONSE: 'setApiResponse',
     CLEAREVENTHANDLER: 'clearEventHandler',
     PERFORMANCETESTHANDLER: 'performanceTestHandler',
+    REGISTERPROVIDERHANDLER: 'registerProviderHandler',
   },
   TEST_TYPE: 'testType',
   THIRD_PARTY_APP: '3rd party app',
