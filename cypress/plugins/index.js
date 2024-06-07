@@ -298,10 +298,9 @@ module.exports = async (on, config) => {
             jsonReport = readDataFromFile(filePath + fileName);
           }
           const reportProperties = {};
-          const customFooter = require('../fixtures/customFooter.json');
+          const customReportData = require('../fixtures/customReportData.json');
           reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
-          reportProperties.customFooter = customFooter;
-
+          reportProperties.customReportData = customReportData;
           // Add the report to the reportObj
           if (reportType === CONSTANTS.CUCUMBER) {
             reportObj.cucumberReport = jsonReport;
