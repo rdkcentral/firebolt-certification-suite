@@ -744,7 +744,7 @@ global.fireLog = fireLog;
 /**
  * @module utils
  * @globalfunction resolveAtRuntime
- * @description Resolve the device variable from the preprocessed data for the given key
+ * @description Resolve the value for the passed input at runtime.
  * @example
  * resolveAtRuntime(["result.{{attribute}}", "result.styles.{{attribute}}"])
  * resolveAtRuntime("manage_closedcaptions.set{{attribute.uppercaseFirstChar}}")
@@ -753,7 +753,7 @@ global.fireLog = fireLog;
  * @returns 
  * ['result.fontSize', 'result.styles.fontSize']
  * "manage_closedcaptions.setFontSize"
- * "1.5"
+ * 1.5
  */
 const resolveAtRuntime = (input) => {
   const functions = {
@@ -802,6 +802,8 @@ const resolveAtRuntime = (input) => {
         return replacingPatternOccurenceWithValue(element);
       }
     });
+  } else {
+    logger.info(`Passed input ${input} must be an array or a string.`)
   }
 };
 
