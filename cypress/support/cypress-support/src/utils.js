@@ -658,27 +658,51 @@ global.resolveDeviceVariable = function (key) {
  * fireLog.deepEqual(actual, expected, "deepEqual message");
  */
 
-class FireLog {
+class FireLog extends Function {
   constructor() {
-    if (!FireLog.instance) {
-      FireLog.instance = this;
-    }
+    // Creating the function body dynamically
+    const functionBody = `
+      return function (...args) {
+        return this.log(...args);
+      }
+    `;
+    super('...args', functionBody);
+
+    const handler = {
+      apply: function (target, thisArg, argumentsList) {
+        const message = argumentsList[argumentsList.length - 1];
+        return cy.log(message).then(() => {
+          return Reflect.apply(target, thisArg, argumentsList);
+        });
+      },
+    };
+    // Proxy for the fireLog method
+    const instanceProxy = new Proxy(this, handler);
+    const fireLogProxy = new Proxy(instanceProxy, {
+      apply: function (target, thisArg, argumentsList) {
+        const message = argumentsList[argumentsList.length - 1];
+        return cy.log(message);
+      },
+    });
 
     // Use cy.log(message) for every method in the class
-    const prototype = Object.getPrototypeOf(this);
+    const prototype = Object.getPrototypeOf(instanceProxy);
     Object.getOwnPropertyNames(prototype).forEach((method) => {
-      if (method !== 'constructor' && typeof this[method] === 'function') {
-        const originalMethod = this[method];
-        this[method] = function (...args) {
-          const message = args[args.length - 1];
-          return cy.log(message).then(() => {
-            return originalMethod.apply(this, args);
-          });
-        };
+      if (
+        method !== 'constructor' &&
+        method !== 'fireLog' &&
+        typeof instanceProxy[method] === 'function'
+      ) {
+        instanceProxy[method] = new Proxy(instanceProxy[method], handler);
       }
     });
 
-    return FireLog.instance;
+    return fireLogProxy;
+  }
+
+  // Method to log a message without any assertion
+  log(message) {
+    return cy.log(message);
   }
 
   isNull(value, message) {
