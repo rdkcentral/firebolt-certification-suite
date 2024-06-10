@@ -803,7 +803,7 @@ const resolveAtRuntime = (input) => {
       }
     });
   } else {
-    logger.info(`Passed input ${input} must be an array or a string.`)
+    logger.info(`Passed input ${input} must be an array or a string.`);
   }
 };
 
