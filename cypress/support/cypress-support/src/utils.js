@@ -738,9 +738,7 @@ class FireLog {
     assert(expression, message);
   }
 
-  info(message) {
-  }
-
+  info(message) {}
 }
 
 const fireLog = new FireLog();
