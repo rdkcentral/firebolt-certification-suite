@@ -302,7 +302,7 @@ module.exports = async (on, config) => {
           try {
             customReportData = require('../../node_modules/configModule/cypress/fixtures/objects/customReportData.json');
           } catch (error) {
-              customReportData = require('../fixtures/customReportData.json');
+            customReportData = require('../fixtures/customReportData.json');
           }
           reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
           reportProperties.customReportData = customReportData;
