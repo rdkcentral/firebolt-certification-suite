@@ -72,7 +72,12 @@ async function generateLocalReport(reportObj, jobId) {
   if (reportObj.cucumberReport && reportObj.cucumberReportFilePath) {
     // Move cucumber json to a separate directory and get the path
     const cucumberDir = await filterCucumberJson(reportObj.cucumberReportFilePath);
-    const customReportData = require('../fixtures/customReportData.json');
+    let customReportData;
+    try {
+      customReportData = require('../../node_modules/configModule/cypress/fixtures/objects/customReportData.json');
+    } catch (error) {
+      customReportData = require('../fixtures/customReportData.json');
+    }
     // Configure cucumber report options
     reportEnv.jsonDir = cucumberDir;
     reportEnv.reportPath = `./reports/${jobId}/cucumber-html-report`;
@@ -210,7 +215,6 @@ async function updateCustomData(filePath, newCustomData, flag) {
 // Process each footer in html files
 async function processFeaturesFiles(reportDir, customData, customFlag) {
   try {
-    console.log(JSON.stringify(customData) + ' customData');
     const files = await readdir(reportDir);
 
     for (const file of files) {
@@ -229,7 +233,6 @@ async function processFeaturesFiles(reportDir, customData, customFlag) {
 async function getCustomData(fileName, customData) {
   for (const key in customData) {
     if (fileName.includes(`${key}.html`)) {
-      console.log(JSON.stringify(key) + ' key');
       return customData[key];
     }
   }
