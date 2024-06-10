@@ -71,10 +71,7 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
             const dataToBeCensored = _.cloneDeep(response);
             // Call the 'censorData' command to hide sensitive data
             cy.censorData(method, dataToBeCensored).then((maskedResult) => {
-              const responseType = response.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
-              cy.log(
-                `Response from Firebolt platform: ${JSON.stringify(maskedResult[responseType])}`
-              );
+              cy.log(`Response from Firebolt platform: ${JSON.stringify(maskedResult)}`);
             });
             // If event and params are not supported setting isScenarioExempted as true for further validation.
             if (UTILS.isScenarioExempted(method, params)) {
