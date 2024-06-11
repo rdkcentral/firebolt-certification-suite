@@ -252,7 +252,7 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
               appObjectEvent = appObjectStateItem.notification[0];
             }
             // Perform schema and content validation of app event data against app object event data
-            let id = lifecycleEventRequirementId.event.id[1];
+            const id = lifecycleEventRequirementId.event.id[1];
             let pretext = id === undefined ? ' : Schema ' : id + ' : Schema ';
 
             UTILS.assertWithRequirementLogs(
