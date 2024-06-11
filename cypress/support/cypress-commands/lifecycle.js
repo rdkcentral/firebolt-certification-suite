@@ -177,7 +177,10 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
       response.report.result._history._value
     ) {
       const pretext = CONSTANTS.HISTORY_VALIDATION_REQ + lifecycleHistoryRequirementId.history.id;
-      cy.log(CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + JSON.stringify(response));
+      cy.log(
+        CONSTANTS.LIFECYCLE_HISTORY_RESPONSE +
+          JSON.stringify(response.report.result._history._value)
+      );
       // Extract app history value
       const appHistory = response.report.result._history._value;
       // Lifecycle history validation
@@ -206,20 +209,39 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
         const appHistoryPrevious = UTILS.getEnvVariable(CONSTANTS.APP_LIFECYCLE_HISTORY);
         const appHistoryCount = appHistory.length - appHistoryPrevious.length;
         let pretext;
-        // If no lifecycle events expected, validate app history value is also empty
-        if (isEventsExpected == false || state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
+        // If events are not expected and not received
+        if (
+          (isEventsExpected == false && appHistoryCount == 0) ||
+          state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING
+        ) {
           UTILS.assertWithRequirementLogs(
-            CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED + lifecycleEventRequirementId?.event?.id[0],
-            appHistoryCount >= 1,
-            false
+            CONSTANTS.PLATFORM_NOT_TRIGGER_EVENT + lifecycleEventRequirementId?.event?.id[0],
+            CONSTANTS.PASS,
+            CONSTANTS.PASS
+          );
+          // If events are not expected but received
+        } else if (isEventsExpected == false && appHistoryCount > 0) {
+          UTILS.assertWithRequirementLogs(
+            CONSTANTS.PLATFORM_NOT_TRIGGER_EVENT + lifecycleEventRequirementId?.event?.id[0],
+            CONSTANTS.FAIL,
+            CONSTANTS.FAIL
           );
         } else {
-          // Else if lifecycle events expected, get app event data and app object event data
-          UTILS.assertWithRequirementLogs(
-            CONSTANTS.LIFECYCLE_NOTIFICATION_GENERATED + lifecycleEventRequirementId?.event?.id[0],
-            appHistoryCount >= 1,
-            true
-          );
+          // If events are expected and received
+          if (isEventsExpected == true && appHistoryCount > 0) {
+            UTILS.assertWithRequirementLogs(
+              CONSTANTS.PLATFORM_TRIGGER_EVENT + lifecycleEventRequirementId?.event?.id[0],
+              CONSTANTS.PASS,
+              CONSTANTS.PASS
+            );
+            // If events are expected and not received
+          } else if (isEventsExpected == true && appHistoryCount == 0) {
+            UTILS.assertWithRequirementLogs(
+              CONSTANTS.PLATFORM_TRIGGER_EVENT + lifecycleEventRequirementId?.event?.id[0],
+              CONSTANTS.FAIL,
+              CONSTANTS.FAIL
+            );
+          }
           for (let eventIndex = 1; eventIndex <= appHistoryCount; eventIndex++) {
             const newAppEvent = appHistory[appHistory.length - eventIndex];
             let appObjectEvent;
@@ -230,26 +252,19 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
               appObjectEvent = appObjectStateItem.notification[0];
             }
             // Perform schema and content validation of app event data against app object event data
-            pretext =
-              CONSTANTS.NOTIFICATION_SCHEMA_VALIDATION_REQ +
-              lifecycleEventRequirementId.event.id[1];
+            let id = lifecycleEventRequirementId.event.id[1];
+            let pretext = id === undefined ? ' : Schema ' : id + ' : Schema ';
+
             UTILS.assertWithRequirementLogs(
               pretext,
               newAppEvent.schemaValidationStatus,
               CONSTANTS.PASS
             );
-            pretext =
-              CONSTANTS.NOTIFICATION_CONTENT_VALIDATION_REQ +
-              lifecycleEventRequirementId.event.id[1];
+            pretext = id === undefined ? ' : Content ' : id + ' : Content ';
             UTILS.assertWithRequirementLogs(
               pretext,
-              newAppEvent.event.state,
-              appObjectEvent.message.state
-            );
-            UTILS.assertWithRequirementLogs(
-              pretext,
-              newAppEvent.event.previous,
-              appObjectEvent.message.previous
+              JSON.stringify(newAppEvent.event),
+              JSON.stringify(appObjectEvent.message)
             );
           }
         }
@@ -480,11 +495,11 @@ Cypress.Commands.add('setAppState', (state, appId) => {
 Cypress.Commands.add('fetchLifecycleHistory', (appId) => {
   try {
     cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}').then((response) => {
-      cy.log(CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + response);
       const historyValue = _.get(JSON.parse(response), 'report.result._history._value', null);
       _.isEmpty(historyValue)
         ? logger.info(CONSTANTS.APP_HISTORY_EMPTY)
         : Cypress.env(CONSTANTS.APP_LIFECYCLE_HISTORY, historyValue);
+      cy.log(CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + JSON.stringify(historyValue));
     });
   } catch (error) {
     assert(false, CONSTANTS.LIFECYCLE_HISTORY_FAILED + error);

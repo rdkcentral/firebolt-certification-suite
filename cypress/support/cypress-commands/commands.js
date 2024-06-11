@@ -186,7 +186,7 @@ Cypress.Commands.add('getDeviceVersion', () => {
     param: {},
     action: CONSTANTS.ACTION_CORE.toLowerCase(),
   };
-
+  cy.log('Device version intent: ' + JSON.stringify(requestMap));
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
       if (response && response.result) {
@@ -248,18 +248,15 @@ Cypress.Commands.add('getFireboltJsonData', () => {
   // Reading the path of the firebolt.json file from the environment variable based on the SDK version.
   if (envPlatformSdkVersion.includes(CONSTANTS.NEXT)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_NEXT_URL);
-    cy.log(`Using the next version of firebolt.json`);
   } else if (envPlatformSdkVersion.includes(CONSTANTS.PROPOSED)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(
       CONSTANTS.FIREBOLT_SPECIFICATION_PROPOSED_URL
     );
-    cy.log(`Using the proposed version of firebolt.json`);
   } else {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_URL).replace(
       CONSTANTS.LATEST,
       envPlatformSdkVersion
     );
-    cy.log(`Using the ${envPlatformSdkVersion} version of firebolt.json`);
   }
 
   cy.request({ url: FIREBOLT_SPECIFICATION_URL, failOnStatusCode: false }).then((data) => {

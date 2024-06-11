@@ -93,13 +93,14 @@ function destroyAppInstance(testType) {
       params,
       additionalParams
     );
+    cy.log('Lifecycle close intent: ' + JSON.stringify(intentMessage));
 
     try {
       cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
         if (response != CONSTANTS.NO_RESPONSE) {
-          cy.log('App closed with reason: ' + closeReason, 'destroyAppInstance');
+          fireLog.assert(false, 'App failed to unload, Reason: ' + closeReason);
         } else {
-          cy.log('Failed to close the 3rd party app: Response Not Recieved');
+          cy.log('App unloaded', 'destroyAppInstance');
         }
         cy.wait(5000);
       });
