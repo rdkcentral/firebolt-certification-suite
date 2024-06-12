@@ -214,32 +214,40 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
           (isEventsExpected == false && appHistoryCount == 0) ||
           state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING
         ) {
+          const updatedRequirement = lifecycleEventRequirementId?.event?.id.replace(
+            'triggered',
+            'not triggered'
+          );
           UTILS.assertWithRequirementLogs(
-            CONSTANTS.PLATFORM_NOT_TRIGGER_EVENT + lifecycleEventRequirementId?.event?.id[0],
+            CONSTANTS.PLATFORM_NOT_TRIGGER_EVENT + updatedRequirement,
             CONSTANTS.PASS,
             CONSTANTS.PASS
           );
           // If events are not expected but received
         } else if (isEventsExpected == false && appHistoryCount > 0) {
+          const updatedRequirement = lifecycleEventRequirementId?.event?.id.replace(
+            'triggered',
+            'not triggered'
+          );
           UTILS.assertWithRequirementLogs(
-            CONSTANTS.PLATFORM_NOT_TRIGGER_EVENT + lifecycleEventRequirementId?.event?.id[0],
+            CONSTANTS.PLATFORM_NOT_TRIGGER_EVENT + updatedRequirement,
             CONSTANTS.FAIL,
-            CONSTANTS.FAIL
+            CONSTANTS.PASS
           );
         } else {
           // If events are expected and received
           if (isEventsExpected == true && appHistoryCount > 0) {
             UTILS.assertWithRequirementLogs(
-              CONSTANTS.PLATFORM_TRIGGER_EVENT + lifecycleEventRequirementId?.event?.id[0],
+              CONSTANTS.PLATFORM_TRIGGER_EVENT + lifecycleEventRequirementId?.event?.id,
               CONSTANTS.PASS,
               CONSTANTS.PASS
             );
             // If events are expected and not received
           } else if (isEventsExpected == true && appHistoryCount == 0) {
             UTILS.assertWithRequirementLogs(
-              CONSTANTS.PLATFORM_TRIGGER_EVENT + lifecycleEventRequirementId?.event?.id[0],
+              CONSTANTS.PLATFORM_TRIGGER_EVENT + lifecycleEventRequirementId?.event?.id,
               CONSTANTS.FAIL,
-              CONSTANTS.FAIL
+              CONSTANTS.PASS
             );
           }
           for (let eventIndex = 1; eventIndex <= appHistoryCount; eventIndex++) {
@@ -252,7 +260,7 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
               appObjectEvent = appObjectStateItem.notification[0];
             }
             // Perform schema and content validation of app event data against app object event data
-            const id = lifecycleEventRequirementId.event.id[1];
+            const id = lifecycleEventRequirementId.event.id;
             let pretext = id === undefined ? ' : Schema ' : id + ' : Schema ';
 
             UTILS.assertWithRequirementLogs(

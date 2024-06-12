@@ -186,7 +186,12 @@ Cypress.Commands.add('getDeviceVersion', () => {
     param: {},
     action: CONSTANTS.ACTION_CORE.toLowerCase(),
   };
-  cy.log('Device version intent: ' + JSON.stringify(requestMap));
+  cy.log(
+    'Call from 1st party App, method: ' +
+      requestMap.method +
+      ' params: ' +
+      JSON.stringify(requestMap.param)
+  );
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
       if (response && response.result) {
