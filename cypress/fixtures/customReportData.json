@@ -1,23 +1,11 @@
 {
   "customFooter": {
     "PageFooter": "Custom footer for main page",
-    "Account": "<div><p><b>Custom footer for Account pages</b></p></div>",
-    "Device": "<div><p><b>Custom footer for Device pages</b></p></div>"
+    "Account": "<div><p><b>Custom for Account pages</b></p></div>",
+    "Device": "<div><p><b>Custom for Device pages</b></p></div>"
   },
   "customMetadata": {
-    "Account": {
-      "Setup": {
-        "PreReq1": "SetupAccount1",
-        "PreReq2": "SetupAccount2",
-        "PreReq3": "SetupAccount3"
-      }
-    },
-    "Device": {
-      "Setup": {
-        "PreReq1": "SetupDevice1",
-        "PreReq2": "SetupDevice2",
-        "PreReq3": "SetupDevice3"
-      }
-    }
+    "Account": "SetupAccount1</br>SetupAccount2",
+    "Device": "SetupDevice1</br>SetupDevice2"
   }
 }
