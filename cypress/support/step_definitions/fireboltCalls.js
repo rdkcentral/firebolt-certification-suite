@@ -422,7 +422,7 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
  * And Fetch response for 'profile approvePurchase' method from '3rd party app'
  */
 
-When(
+Given(
   /Fetch response for '(.+)' (method|event) from (3rd party app|1st party app)$/,
   (key, methodOrEvent, app) => {
     if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
@@ -440,7 +440,7 @@ When(
 
         let params;
         if (app == CONSTANTS.FIRST_PARTY_APP) {
-          let extractedEvent = getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).filter(
+          const extractedEvent = getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).filter(
             (element) => element.eventName == method
           );
           eventName = extractedEvent[extractedEvent.length - 1].eventObjectId;
@@ -465,7 +465,7 @@ When(
           params = { method: method };
 
           // Creating intent message using above details to send it to 3rd party app.
-          let parsedIntent = UTILS.createIntentMessage(CONSTANTS.TASK.GETMETHODRESPONSE, params);
+          const parsedIntent = UTILS.createIntentMessage(CONSTANTS.TASK.GETMETHODRESPONSE, params);
           // Fetching method response from third party app
           const requestTopic = UTILS.getTopic(appId);
           const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
