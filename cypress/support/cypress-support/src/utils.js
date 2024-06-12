@@ -745,13 +745,13 @@ global.fireLog = fireLog;
  * @module utils
  * @globalfunction resolveAtRuntime
  * @description Return the function which is having logic to resolve the value for the passed input at runtime.
- * @param {String || Array} 
+ * @param {String || Array}
  * @example
  * resolveAtRuntime(["result.{{attribute}}", "result.styles.{{attribute}}"])
  * resolveAtRuntime("manage_closedcaptions.set{{attribute.uppercaseFirstChar}}")
  * resolveAtRuntime("value")
- * 
- * @returns 
+ *
+ * @returns
  * ['result.fontSize', 'result.styles.fontSize']
  * "manage_closedcaptions.setFontSize"
  * 1.5
@@ -814,13 +814,13 @@ global.resolveAtRuntime = function (input) {
  * @module utils
  * @function parseValue
  * @description Function to parse the passed string
- * @param {String} 
- * 
- * @example 
- * - parseValue('123') 
+ * @param {String}
+ *
+ * @example
+ * - parseValue('123')
  * - parseValue('true')
- * 
- * @returns 
+ *
+ * @returns
  * 123
  * true
  */
@@ -865,5 +865,5 @@ module.exports = {
   writeJsonToFileForReporting,
   checkForTags,
   fireLog,
-  parseValue
+  parseValue,
 };

@@ -42,11 +42,11 @@ Cypress.Commands.add(
     } else {
       if (key) {
         fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
-        if(UTILS.getEnvVariable('runtime')){
-          UTILS.getEnvVariable('runtime').fireboltCall = fireboltData;
+        if (UTILS.getEnvVariable('runtime', false)) {
+          UTILS.getEnvVariable('runtime', false).fireboltCall = fireboltData;
         }
       } else {
-        fireboltData = UTILS.getEnvVariable('runtime')?.fireboltCall;
+        fireboltData = UTILS.getEnvVariable('runtime', false)?.fireboltCall;
       }
     }
 

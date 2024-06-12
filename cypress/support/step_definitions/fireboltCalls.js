@@ -448,7 +448,6 @@ Given(
       });
 
       cy.getFireboltData(fireboltCallKey).then((fireboltCallObject) => {
-
         let setMethod =
           typeof fireboltCallObject.setMethod === CONSTANTS.TYPE_FUNCTION
             ? fireboltCallObject.setMethod()
