@@ -53,7 +53,9 @@ const env = {
     'https://rdkcentral.github.io/firebolt/requirements/next/specifications/firebolt-specification.json',
   firebolt_specification_proposed_url:
     'https://rdkcentral.github.io/firebolt/requirements/proposed/specifications/firebolt-specification.json',
-  externalOpenRpcUrls: [],
+  externalOpenRpcUrls: [
+    'https://rdkcentral.github.io/firebolt/requirements/next/specifications/firebolt-open-rpc.json',
+  ],
   healthCheckRetries: 8,
   skipContentValidation: false,
   communicationMode: 'SDK',
