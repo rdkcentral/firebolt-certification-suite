@@ -469,7 +469,7 @@ Given(
         }
 
         const context = {};
-        //TODO: waiting for answer from jacob on expected
+        // TODO: waiting for answer from jacob on expected
         const expected = fireboltCallObject.expected;
         appId =
           appId === CONSTANTS.THIRD_PARTY_APP
