@@ -744,7 +744,8 @@ global.fireLog = fireLog;
 /**
  * @module utils
  * @globalfunction resolveAtRuntime
- * @description Resolve the value for the passed input at runtime.
+ * @description Return the function which is having logic to resolve the value for the passed input at runtime.
+ * @param {String || Array}
  * @example
  * resolveAtRuntime(["result.{{attribute}}", "result.styles.{{attribute}}"])
  * resolveAtRuntime("manage_closedcaptions.set{{attribute.uppercaseFirstChar}}")
