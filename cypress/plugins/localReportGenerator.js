@@ -74,7 +74,7 @@ async function generateLocalReport(reportObj, jobId) {
     const cucumberDir = await filterCucumberJson(reportObj.cucumberReportFilePath);
     let customReportData;
     try {
-      customReportData = require('../../node_modules/configModule/cypress/fixtures/objects/customReportData.json');
+      customReportData = require('../fixtures/external/objects/customReportData.json');
     } catch (error) {
       customReportData = require('../fixtures/customReportData.json');
     }
