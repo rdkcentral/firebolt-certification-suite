@@ -33,10 +33,10 @@ const reporterOptions = {
 
 const env = {
   deviceIp: '',
-  deviceMac: 'B03E51FFDFD8',
+  deviceMac: '',
   default3rdPartyAppId: '',
   deviceCommPort: '3474',
-  mock: true,
+  mock: false,
   wsUrlPath: '456~A',
   firstPartyMockUser: '123~A',
   thirdPartyMockUser: '456~A',
@@ -53,9 +53,7 @@ const env = {
     'https://rdkcentral.github.io/firebolt/requirements/next/specifications/firebolt-specification.json',
   firebolt_specification_proposed_url:
     'https://rdkcentral.github.io/firebolt/requirements/proposed/specifications/firebolt-specification.json',
-  externalOpenRpcUrls: [
-    'https://rdkcentral.github.io/firebolt/requirements/next/specifications/firebolt-open-rpc.json',
-  ],
+  externalOpenRpcUrls: [],
   healthCheckRetries: 8,
   skipContentValidation: false,
   communicationMode: 'SDK',
