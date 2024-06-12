@@ -529,7 +529,7 @@ Given(
                   cy.log(`Response from Firebolt platform: ${JSON.stringify(maskedResult)}`);
                 });
 
-                // Creating object with event name, params, and response etc and storing it in a global list for further validation.
+                // Creating object with method name, params, and response etc and storing it in a global list for further validation.
                 const apiAppObject = new apiObject(
                   setMethod,
                   setParams,
