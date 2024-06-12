@@ -684,7 +684,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
         },
       }),
     };
-    requestMap.params.intent.data = data;
+    const messageIntent = {
+      action: CONSTANTS.SEARCH,
+      data: data,
+      context: { source: CONSTANTS.DEVICE },
+    };
+    requestMap.params.intent = messageIntent;
   }
 
   Cypress.env(CONSTANTS.CURRENT_APP_ID, appId);
