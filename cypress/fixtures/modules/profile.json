@@ -1,5 +1,24 @@
 {
     "FLAGS": {
         "userExperience": "1001"
+    },
+    "PINCHALLENGE_CHALLENGEFOCUS_PARAMS": {
+        "CYPRESSENV-correlationId": "123"
+    },
+    "PINCHALLENGE_CHALLENGERESPONSE_PARAMS": {
+        "CYPRESSENV-correlationId": "123",
+        "result": {
+            "granted": true,
+            "reason": "correctPin"
+        }
+    },
+    "PINCHALLENGE_CHALLENGE_ERROR_PARAMS": {
+        "error": {
+            "CYPRESSENV-correlationId": "123",
+            "result": {
+                "code": 1,
+                "message": "Error"
+            }
+        }
     }
 }
