@@ -470,10 +470,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
       });
     });
   } else if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTMOCK)) {
-    cy.getFireboltData(
-      beforeOperation[CONSTANTS.FIREBOLTMOCK],
-      CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS
-    ).then((parsedData) => {
+    cy.parsedMockData(beforeOperation).then((parsedData) => {
       if (firstParty) {
         const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SETRESPONSE;
         const requestMap = {
@@ -530,6 +527,21 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
+  }
+});
+
+Cypress.Commands.add('parsedMockData', (beforeOperation) => {
+  if (beforeOperation.hasOwnProperty('fireboltMock')) {
+    if (typeof beforeOperation.fireboltMock === 'string') {
+      cy.getFireboltData(
+        beforeOperation[CONSTANTS.FIREBOLTMOCK],
+        CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS
+      ).then((response) => {
+        return response;
+      });
+    } else {
+      return beforeOperation.fireboltMock;
+    }
   }
 });
 
