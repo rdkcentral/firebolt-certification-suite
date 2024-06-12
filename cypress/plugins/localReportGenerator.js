@@ -191,23 +191,12 @@ async function updateCustomData(filePath, newCustomData, flag) {
     // Replace the found pattern with the new header content
     updatedData = data.replace(regex, '<h2>Setup & Metadata</h2>');
     regex = /(<ul class="quick-list">)([\s\S]*?)(<\/ul>)/;
+    // Prepare the "Setup" section and HTML content from newCustomData
+    const setupContent = `<li><span class="meta-data-title">Setup</span><ul class="prereq-list">`;
+    const metadataContent = Object.values(newCustomData).join('');
+    const finalContent = setupContent + metadataContent + '</ul></li>';
 
-    // Generate the new <li> elements for Setup
-    const setupItems = Object.entries(newCustomData.Setup)
-      .map(([key, value]) => {
-        return `<li class="prereq-item">- <span class="meta-data-data">${value}</span></li>`;
-      })
-      .join('\n');
-
-    const setupSection = `
-        <li>
-          <span class="meta-data-title">Setup</span>
-          <ul class="prereq-list">
-            ${setupItems}
-          </ul>
-        </li>`;
-
-    updatedData = updatedData.replace(regex, `$1$2\n${setupSection}$3`);
+    updatedData = data.replace(regex, `$1$2\n${finalContent}$3`);
   }
   await writeFileAsync(filePath, updatedData, 'utf8');
 }
