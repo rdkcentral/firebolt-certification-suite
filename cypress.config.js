@@ -33,10 +33,10 @@ const reporterOptions = {
 
 const env = {
   deviceIp: '',
-  deviceMac: '',
+  deviceMac: 'B03E51FFDFD8',
   default3rdPartyAppId: '',
   deviceCommPort: '3474',
-  mock: false,
+  mock: true,
   wsUrlPath: '456~A',
   firstPartyMockUser: '123~A',
   thirdPartyMockUser: '456~A',
