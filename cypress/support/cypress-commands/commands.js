@@ -40,8 +40,16 @@ Cypress.Commands.add(
     } else if (callType == CONSTANTS.SUPPORTED_CALLTYPES.SET_RESPONSE_JSON) {
       fireboltData = UTILS.getEnvVariable('setResponseJson')[key];
     } else {
-      fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
+      if (key) {
+        fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
+        if(UTILS.getEnvVariable('runtime')){
+          UTILS.getEnvVariable('runtime').fireboltCall = fireboltData;
+        }
+      } else {
+        fireboltData = UTILS.getEnvVariable('runtime')?.fireboltCall;
+      }
     }
+
     if (!fireboltData) {
       fireLog.assert(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
