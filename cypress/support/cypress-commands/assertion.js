@@ -18,7 +18,6 @@
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS from '../cypress-support/src/utils';
-
 /**
  * @module assertion
  * @function validateErrorObject
@@ -178,14 +177,7 @@ Cypress.Commands.add(
       cy.validateEvent(extractedApiObject, context, validationPath, expected, appId);
     } else {
       const apiResponseContent = eval(CONSTANTS.EXTRACTEDAPI_PATH + validationPath);
-      const pretext =
-        CONSTANTS.METHOD_CONTENT +
-        ' expected ' +
-        JSON.stringify(apiResponseContent) +
-        ' to be ' +
-        JSON.stringify(expected);
-      // Executing fireLog.deepEqual() after logging
-      fireLog.deepEqual(apiResponseContent, expected, pretext);
+      fireLog.deepEqual(apiResponseContent, expected, CONSTANTS.METHOD_CONTENT);
     }
   }
 );
