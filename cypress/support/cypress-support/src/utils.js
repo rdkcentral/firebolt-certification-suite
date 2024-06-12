@@ -656,6 +656,12 @@ global.resolveDeviceVariable = function (key) {
  * fireLog.isTrue(isTrueValue, "True message");
  * fireLog.isFalse(isFalseValue, "False message");
  * fireLog.deepEqual(actual, expected, "deepEqual message");
+ *
+ * fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
+ * fireLog.info() is being used to log the message without any assertion.
+ * Removing cy.log and replacing with fireLog.info() to get a cleaner report.
+ *
+ *
  */
 
 class FireLog {

@@ -48,15 +48,15 @@ Cypress.Commands.add('addContext', (context) => {
  * @returns void
  * @example cy.log(text, args)
  */
-Cypress.Commands.overwrite('log', (orig, string, options) => {
-  orig(string, options);
+Cypress.Commands.overwrite('log', (orig, message, options) => {
+  orig(message, options);
   const dateString = new Date().toLocaleString().replace(',', '');
 
-  typeof string == 'object' ? (string = JSON.stringify(string)) : string;
+  typeof message == 'object' ? (message = JSON.stringify(message)) : message;
 
-  cy.addContext('[' + dateString + '][' + options + ']:[' + string + ']');
+  cy.addContext('[' + dateString + '][' + options + ']:[' + message + ']');
 
   options
-    ? attach('[' + dateString + '][' + options + '][' + string + ']')
-    : attach('[' + dateString + '][' + string + ']');
+    ? attach('[' + dateString + '][' + options + '][' + message + ']')
+    : attach('[' + dateString + '][' + message + ']');
 });
