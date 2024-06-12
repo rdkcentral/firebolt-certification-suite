@@ -400,7 +400,9 @@ export default function (module) {
           if (results) {
             // Response recieved from queue
             return results;
-          }
+          }else if(Cypress.env("isRpcOnlyValidation") ){
+            return true
+         }
         });
     } else {
       cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {

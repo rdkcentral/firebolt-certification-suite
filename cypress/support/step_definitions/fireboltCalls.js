@@ -409,3 +409,87 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
     });
   });
 });
+
+/**
+ * @module fireboltCalls
+ * @function And Fetch response for '(.+)' (method|event) from (3rd party app|1st party app)
+ * @description Fetch the Method or Event response from the App
+ * @param {String} key - key name of the data contains event/method name and parameter.
+ * @param {String} methodOrEvent - Flag to differentiate between method or event
+ * @param {String} app - Flag to differentiate between 3rd party/ 1st party app
+ * @example
+ * And Fetch response for 'pinChallenge onRequestChallenge' event from '1st party app'
+ * And Fetch response for 'profile approvePurchase' method from '3rd party app'
+ */
+
+When(
+  /Fetch response for '(.+)' (method|event) from (3rd party app|1st party app)$/,
+  (key, methodOrEvent, app) => {
+    if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
+      Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
+    }
+
+    cy.fireboltDataParser(key).then((parsedDataArr) => {
+      parsedDataArr.forEach((parsedData) => {
+        const method = parsedData.method;
+        appId = !appId
+          ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+          : appId === CONSTANTS.FIRST_PARTY_APP
+            ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
+            : appId;
+
+        let params;
+        if (app == CONSTANTS.FIRST_PARTY_APP) {
+          let extractedEvent = getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).filter(
+            (element) => element.eventName == method
+          );
+          eventName = extractedEvent[extractedEvent.length - 1].eventObjectId;
+          const requestMap = {
+            method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCH_EVENT_RESPONSE,
+            params: eventName,
+          };
+          cy.log(
+            'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params)
+          );
+          cy.sendMessagetoPlatforms(requestMap).then((response) => {
+            cy.log('Response from Firebolt platform: ' + JSON.stringify(response));
+            if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
+              cy.log(CONSTANTS.NO_MATCHED_RESPONSE).then(() => {
+                assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+              });
+            }
+            cy.log(`correlationId - ${response.eventResponse.correlationId}`);
+            Cypress.env(CONSTANTS.correlationId, response.eventResponse.correlationId);
+          });
+        } else if (app == CONSTANTS.THIRD_PARTY_APP) {
+          params = { method: method };
+
+          // Creating intent message using above details to send it to 3rd party app.
+          let parsedIntent = UTILS.createIntentMessage(CONSTANTS.TASK.GETMETHODRESPONSE, params);
+          // Fetching method response from third party app
+          const requestTopic = UTILS.getTopic(appId);
+          const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+
+          // Sending message to 3rd party app.
+          cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent).then((response) => {
+            if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
+              cy.log(CONSTANTS.NO_MATCHED_RESPONSE).then(() => {
+                assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+              });
+            }
+            cy.log(`Updated response of ${method}: ${JSON.stringify(response)}`);
+            for (
+              let index = 0;
+              index < Cypress.env(CONSTANTS.GLOBAL_API_OBJECT_LIST).length;
+              index++
+            ) {
+              if (Cypress.env(CONSTANTS.GLOBAL_API_OBJECT_LIST)[index].apiName == method) {
+                Cypress.env(CONSTANTS.GLOBAL_API_OBJECT_LIST)[index].response = response;
+              }
+            }
+          });
+        }
+      });
+    });
+  }
+);
