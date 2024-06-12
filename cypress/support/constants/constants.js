@@ -110,6 +110,7 @@ module.exports = {
   EVENT_NAME: 'eventName',
   EVENT_PARAM: 'event_param',
   EVENT_RESPONSE: 'eventResponse',
+  EVENT_RESPONSE_MAP: 'eventResponseMap',
   EVENT_SCHEMA_MSG: 'Event listener schema validation',
   EVENT_SCHEMA_RESULT: 'eventSchemaResult',
   EXCEPTION_ERROR_OBJECT: 'exceptionErrorObject',
@@ -380,6 +381,7 @@ module.exports = {
   TRANSPORT: 'transport',
   TYPE_OBJECT: 'object',
   TYPE_STRING: 'string',
+  UNDEFINED: 'undefined',
   UNIQUEID: 'uniqueid',
   UNLOADING_APP_TEST_TYPES: [
     'lifecycle',
