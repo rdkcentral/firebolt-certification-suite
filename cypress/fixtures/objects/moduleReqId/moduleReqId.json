@@ -2702,6 +2702,78 @@
                     }
                 ]
             }
+        },
+        "UserInterest": {
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type interest and reason playlist": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.1",
+                            "description": "Positive Scenario: with type interest and reason playlist"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type interest and reason reaction": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.2",
+                            "description": "Positive Scenario: with type interest and reason reaction"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type interest and reason recording": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.3",
+                            "description": "Positive Scenario: with type interest and reason recording"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type disinterest and reason playlist": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.4",
+                            "description": "Positive Scenario: with type disinterest and reason playlist"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type disinterest and reason reaction": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.5",
+                            "description": "Positive Scenario: with type disinterest and reason reaction"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type disinterest and reason recording": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.6",
+                            "description": "Positive Scenario: with type disinterest and reason recording"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest without registering for providers": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.7",
+                            "description": "Negative Scenario: Notify requestUserInterest without registering for providers"
+                        }
+                    }
+                ]
+            }
         }
     }
 }
