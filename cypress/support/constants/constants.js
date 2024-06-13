@@ -203,7 +203,7 @@ module.exports = {
     'AcknowledgeChallenge',
     'userGrants',
     'lifeCycleApi',
-    'UserInterestProvider'
+    'UserInterestProvider',
   ],
   LIFECYCLE_FINISHED_ERROR: 'lifecycleFinishedError',
   LIFECYCLE_HISTORY_FAILED: 'Failed to fetch lifecycle history due to following error: ',

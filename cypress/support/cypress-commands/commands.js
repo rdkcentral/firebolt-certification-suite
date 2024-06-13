@@ -680,8 +680,8 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
       query: JSON.stringify({
         params: {
           [CONSTANTS.REGISTERPROVIDER]: false,
-        }
-      })
+        },
+      }),
     };
     requestMap.params.intent.data = data;
   }
