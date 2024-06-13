@@ -134,6 +134,7 @@ module.exports = {
   EXTERNAL_PREREQUISITE_DATA: './cypress/fixtures/external/PreRequisiteData.json',
   EXTRACTEDAPI_PATH: 'extractedApiObject.response.',
   FAIL: 'FAIL',
+  FAIL_ON_PUBSUB_CONNECTION_ERROR: 'failOnPubSubConnectionError',
   FAILED_TO_PARSE_LIEFECYCLE_ERROR:
     'Failed to parse error object from response while setting lifecycle state. Response received : ',
   FAILED_TO_SET_LIFECYCLE_STATE:
@@ -289,6 +290,7 @@ module.exports = {
     'Platform returned response in invalid format, which could lead to failures in validations. Response must be an object',
   PLATFORM_NOT_SUPPORT_LOG: 'Platform does not support method',
   PREREQUISITE_DATA: 'PreRequisiteData.json',
+  PUB_SUB_URL: 'pubSubUrl', // Env Var for the URL for the Default Module's pubSub implementation
   SETUPCHECK: 'Setup Check',
   SETUPVALUES: 'external/setupValues.json',
   SETUPVALUES_FILEPATH: 'cypress/fixtures/external/setupValues.json',

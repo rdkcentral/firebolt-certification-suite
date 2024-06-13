@@ -16,6 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const logger = require('../../../cypress/support/Logger')('index.js');
+const constants = require('../../cypress/support/constants/constants');
+const { getEnvVariable } = require('../../cypress/support/cypress-support/src/utils');
 
 const client = {
   ws: null,
@@ -39,7 +41,10 @@ function init() {
 
   return new Promise((resolve) => {
     // Enter a valid WebSocket URL
-    client.ws = new WebSocket('ws://localhost:8080');
+    const url = getEnvVariable(constants.PUB_SUB_URL, false)
+      ? getEnvVariable(constants.PUB_SUB_URL)
+      : 'ws://localhost:8080';
+    client.ws = new WebSocket(url);
 
     const websocket = client.ws;
 
@@ -51,7 +56,7 @@ function init() {
     // if WebSocket connection fails (error or close event), the errorHandler logs the error and resolves the promise with a default message instead of rejecting it.
     const errorHandler = function (event) {
       logger.info('WebSocket connection failed. Continuing execution...', event.data);
-      resolve('Default: Connection could not be established');
+      reject('Default: Connection could not be established');
     };
 
     client.ws.addEventListener('error', errorHandler);

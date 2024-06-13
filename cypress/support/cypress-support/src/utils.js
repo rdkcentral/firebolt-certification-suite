@@ -547,8 +547,12 @@ function pubSubClientCreation(appTransport) {
         clientCreated = true;
         resolve(true);
       } catch (error) {
-        // If an error occurs, reject the promise with the error
-        reject('Failed to initiate PubSubClient' + error);
+        if (getEnvVariable(CONSTANTS.FAIL_ON_PUBSUB_CONNECTION_ERROR, false)) {
+          // If an error occurs, reject the promise with the error
+          reject('Failed to initiate PubSubClient' + error);
+        } else {
+          resolve(false);
+        }
       }
     } else {
       resolve(false);
