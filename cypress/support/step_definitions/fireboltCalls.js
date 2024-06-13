@@ -424,7 +424,7 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
 
 Given(
   /Fetch response for '(.+)' (method|event) from (3rd party app|1st party app)$/,
-  (key, methodOrEvent, app) => {
+  async (key, methodOrEvent, app) => {
     if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
       Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
     }
@@ -432,6 +432,7 @@ Given(
     cy.fireboltDataParser(key).then((parsedDataArr) => {
       parsedDataArr.forEach((parsedData) => {
         const method = parsedData.method;
+        let appId;
         appId = !appId
           ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
           : appId === CONSTANTS.FIRST_PARTY_APP
@@ -440,7 +441,7 @@ Given(
 
         let params;
         if (app == CONSTANTS.FIRST_PARTY_APP) {
-          const extractedEvent = getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).filter(
+          const extractedEvent = UTILS.getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).filter(
             (element) => element.eventName == method
           );
           eventName = extractedEvent[extractedEvent.length - 1].eventObjectId;
@@ -458,8 +459,8 @@ Given(
                 assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
               });
             }
-            cy.log(`correlationId - ${response.eventResponse.correlationId}`);
-            Cypress.env(CONSTANTS.correlationId, response.eventResponse.correlationId);
+            cy.log(`correlationId - ${response.result.correlationId}`);
+            Cypress.env(CONSTANTS.CORRELATIONID, response.result.correlationId);
           });
         } else if (app == CONSTANTS.THIRD_PARTY_APP) {
           params = { method: method };
@@ -487,6 +488,7 @@ Given(
                 Cypress.env(CONSTANTS.GLOBAL_API_OBJECT_LIST)[index].response = response;
               }
             }
+            //create new api object to push to global list
           });
         }
       });

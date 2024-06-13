@@ -8,10 +8,10 @@ Feature: Keyboard_Manage_RpcOnly
         And 3rd party 'certification' app is launched
         When 1st party app registers for the '<ManageEventName>' event using the 'Firebolt' API
         When '3rd party app' invokes the 'Firebolt' API to '<MethodParam>'
-        And Fetch response for '<EventName>' event from '1st party app'
+        And Fetch response for '<EventName>' event from 1st party app
         And 1st party app invokes the 'Firebolt' API to '<FocusMethod>'
         And 1st party app invokes the 'Firebolt' API to '<ResponseMethod>'
-        And Fetch response for '<MethodName>' method from '3rd party app'
+        And Fetch response for '<MethodName>' method from 3rd party app
         Then 'Firebolt' platform responds with '<MethodResponse>'
         Examples:
             | Scenario          | ManageEventName                   | EventName                  |  MethodName        | MethodParam                                              | FocusMethod                | ResponseMethod                | MethodResponse        |
@@ -25,9 +25,9 @@ Feature: Keyboard_Manage_RpcOnly
         And 3rd party 'certification' app is launched
         When 1st party app registers for the '<ManageEventName>' event using the 'Firebolt' API
         When '3rd party app' invokes the 'Firebolt' API to '<MethodParam>'
-        And Fetch response for '<EventName>' event from '1st party app'
+        And Fetch response for '<EventName>' event from 1st party app
         And 1st party app invokes the 'Firebolt' API to '<FocusMethod>'
-        And Fetch response for '<MethodName>' method from '3rd party app'
+        And Fetch response for '<MethodName>' method from 3rd party app
         Then 'Firebolt' platform responds with '<MethodResponse>'
 
         Examples:
