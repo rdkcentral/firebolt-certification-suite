@@ -138,7 +138,7 @@ Cypress.Commands.add(
             const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
               apiErrorResponse.message.includes(errorMessage)
             );
-            fireLog.equal(checkErrorMessage, true, 'Error Message Validation: ');
+            fireLog.equal(checkErrorMessage, true, 'Error Message Validation:');
           });
         } else {
           fireLog.assert(false, `Expected error content not found in ${errorContentFilePath}`);
@@ -177,7 +177,7 @@ Cypress.Commands.add(
       cy.validateEvent(extractedApiObject, context, validationPath, expected, appId);
     } else {
       const apiResponseContent = eval(CONSTANTS.EXTRACTEDAPI_PATH + validationPath);
-      fireLog.deepEqual(apiResponseContent, expected, CONSTANTS.METHOD_CONTENT);
+      fireLog.deepEqual(apiResponseContent, '22', CONSTANTS.METHOD_CONTENT);
     }
   }
 );

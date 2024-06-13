@@ -680,7 +680,7 @@ class FireLog extends Function {
             ' to be ' +
             JSON.stringify(argumentsList[1]);
         else message = argumentsList[argumentsList.length - 1];
-        return cy.log(message + argumentsList.length + methodName + 'hand').then(() => {
+        return cy.log(message).then(() => {
           return Reflect.apply(target, thisArg, argumentsList);
         });
       },
@@ -690,7 +690,7 @@ class FireLog extends Function {
     const fireLogProxy = new Proxy(instanceProxy, {
       apply: function (target, thisArg, argumentsList) {
         const message = argumentsList[argumentsList.length - 1];
-        return cy.log(message + argumentsList.length + thisArg + ' fireProx');
+        return cy.log(message);
       },
     });
 
