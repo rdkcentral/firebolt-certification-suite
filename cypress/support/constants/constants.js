@@ -203,6 +203,7 @@ module.exports = {
     'AcknowledgeChallenge',
     'userGrants',
     'lifeCycleApi',
+    'UserInterestProvider'
   ],
   LIFECYCLE_FINISHED_ERROR: 'lifecycleFinishedError',
   LIFECYCLE_HISTORY_FAILED: 'Failed to fetch lifecycle history due to following error: ',
@@ -416,6 +417,8 @@ module.exports = {
   ENV_SETUP_STATUS: 'environmentLaunched',
   APP_LAUNCH_STATUS: 'appLaunched',
   NO_EVENT_TRIGGERED: 'Expecting no event to be triggered from platform',
+  REGISTERPROVIDER: 'registerprovider',
+  USERINTERESTPROVIDER: 'userinterestprovider',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

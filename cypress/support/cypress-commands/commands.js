@@ -675,6 +675,16 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     };
     requestMap.params.intent.data = data;
   }
+  if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.USERINTERESTPROVIDER) {
+    data = {
+      query: JSON.stringify({
+        params: {
+          [CONSTANTS.REGISTERPROVIDER]: false,
+        }
+      })
+    };
+    requestMap.params.intent.data = data;
+  }
 
   Cypress.env(CONSTANTS.CURRENT_APP_ID, appId);
 
