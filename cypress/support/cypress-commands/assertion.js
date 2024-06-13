@@ -177,7 +177,7 @@ Cypress.Commands.add(
       cy.validateEvent(extractedApiObject, context, validationPath, expected, appId);
     } else {
       const apiResponseContent = eval(CONSTANTS.EXTRACTEDAPI_PATH + validationPath);
-      fireLog.deepEqual(apiResponseContent, '22', CONSTANTS.METHOD_CONTENT);
+      fireLog.deepEqual(apiResponseContent, expected, CONSTANTS.METHOD_CONTENT);
     }
   }
 );
