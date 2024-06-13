@@ -52,7 +52,7 @@ function addOrChangeConfigModule(configModuleUrl) {
 if (process.argv.length != 3) {
   console.log(
     'Invalid format. Required script format: "node ./changeConfigModule.js <configModuleUrl>"\n' +
-      'Ex: "node ./changeConfigModule.js git//git@github.com/myOrg/myConfigModule.git"'
+      'Ex: "node ./changeConfigModule.js "git+ssh://git@github.com:myOrg/myConfigModule"'
   );
   process.exit(1);
 }

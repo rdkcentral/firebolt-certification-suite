@@ -1,6 +1,7 @@
+@Parameters @coreSDK
 Feature: Parameters
 
-   @Parameters @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Parameters.initialization - Positive Scenario: <Scenario>
       Given the environment has been set up for 'Parameters' tests
       And 3rd party 'certification' app is launched
@@ -15,7 +16,7 @@ Feature: Parameters
          | Passing params - TRUE  | set privacy allowAppContentAdTargeting with true  | true for parameters initialization  |
          | Passing params - FALSE | set privacy allowAppContentAdTargeting with false | false for parameters initialization |
 
-   @Parameters @coreSDK @sdk @transport
+   @sdk @transport
    Scenario: Parameters.initialization - Positive Scenario: Validate NavigationIntent - Home
       Given the environment has been set up for 'Parameters' tests
       When 1st party app invokes the 'Firebolt' API to 'discovery launch with home intent'

@@ -1,6 +1,7 @@
+@Lifecycle @coreSDK
 Feature: Lifecycle_Terminated
 
-    @Lifecycle @coreSDK @notSupported
+    @notSupported
     Scenario Outline: Lifecycle 2.8 Terminate app in <state> State
         Given the environment has been set up for 'lifecycle' tests
         When 3rd party 'certification' app is launched with '<state>' state

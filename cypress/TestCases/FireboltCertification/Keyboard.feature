@@ -1,6 +1,7 @@
+@Keyboard @coreSDK
 Feature: Keyboard
 
-    @Keyboard @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Keyboard.<Method> - Positive Scenario: <Scenario> without UI
         Given the environment has been set up for 'Keyboard' tests
         And 3rd party 'certification' app is launched
@@ -19,7 +20,7 @@ Feature: Keyboard
             | password | password as empty                 | prompt the user for their password as empty                    | the entered user password       |
             | standard | standard platform                 | prompt the user for their standard platform                    | the entered standard user value |
 
-    @Keyboard @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Keyboard.<Method> - Positive Scenario: <Scenario> with UI
         Given the environment has been set up for 'Keyboard' tests
         And User 'starts' recording lifecycle history for '1st party app'
@@ -39,7 +40,7 @@ Feature: Keyboard
             | password | password from keyboard          | prompt the user for their password                       | the entered user password       |
             | standard | standard platform from keyboard | prompt the user for their standard platform              | the entered standard user value |
 
-    @Keyboard @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Keyboard.<Method> - Negative Scenario: <Scenario> without UI expecting error
         Given the environment has been set up for 'Keyboard' tests
         And 3rd party 'certification' app is launched
@@ -57,7 +58,7 @@ Feature: Keyboard
             | standard | passing standard as empty            | prompt the user for their standard as empty                  | invalid parameter standard  |
 
 
-    @Keyboard @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Keyboard.<Method> - Negative Scenario: <Scenario> with UI expecting error
         Given the environment has been set up for 'Keyboard' tests
         And User 'starts' recording lifecycle history for '1st party app'

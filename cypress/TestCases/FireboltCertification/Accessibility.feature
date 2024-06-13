@@ -1,10 +1,11 @@
+@Accessibility @coreSDK
 Feature: Accessibility
 
    Background: Launch FCA for 'Accessibility'
       Given the environment has been set up for 'Accessibility' tests
       And 3rd party 'certification' app is launched
 
-   @Accessibility @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
@@ -49,7 +50,7 @@ Feature: Accessibility
          | Set windowOpacity-50                 | set windowOpacity to 50                   | 50 for windowOpacity in closedcaptions settings                 | onclosedCaptionsSettingsChanged with 50 for windowOpacity                 |
          | Set preferredLanguages               | set preferredLanguages to spanish english | spanish for preferredLanguages in closedcaptions settings       | onclosedCaptionsSettingsChanged with spanish for preferredLanguages       |
 
-   @Accessibility @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario> with 'null' params
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
@@ -74,7 +75,7 @@ Feature: Accessibility
          | windowColor       | set windowColor as null       | default value for windowColor       | onclosedCaptionsSettingsChanged with default value for windowColor       |
          | windowOpacity     | set windowOpacity as null     | default value for windowOpacity     | onclosedCaptionsSettingsChanged with default value for windowOpacity     |
 
-   @Accessibility @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Accessibility.voiceGuidanceSettings - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onVoiceGuidanceSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get voiceGuidance settings'
@@ -93,7 +94,7 @@ Feature: Accessibility
          | Set speed-0.5         | set speed as 0.5      | 0.5 for speed in voiceGuidance settings | onvoiceGuidanceSettings with 0.5 for speed |
          | Set speed-2           | set speed as 2        | 2 for speed in voiceGuidance settings   | onvoiceGuidanceSettings with 2 for speed   |
 
-   @Accessibility @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Accessibility.audioDescriptionSettings - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onAudioDescriptionSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get audioDescriptionSettings settings'
@@ -108,7 +109,7 @@ Feature: Accessibility
          | Disable audioDescriptionSettings | disable audioDescription | disabled audioDescription settings | onaudioDescriptionSettings with disabled |
          | Enable audioDescriptionSettings  | enable audioDescription  | enabled audioDescription settings  | onaudioDescriptionSettings with enabled  |
 
-   @Accessibility @coreSDK @sdk @transport
+   @sdk @transport
    Scenario: Accessibility.onClosedCaptionsSettingsChanged event - Positive Scenario: Clear listeners
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And I clear 'accessibility onClosedCaptionsSettingsChanged event' listeners
@@ -116,7 +117,7 @@ Feature: Accessibility
       Then 'Firebolt' platform responds to '1st party app' for 'disable closedCaptions'
       And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
 
-   @Accessibility @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Accessibility.closedCaptions - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<Set_Method_Key>'
@@ -141,7 +142,7 @@ Feature: Accessibility
          | Set windowColor-#7f7f7f            | set windowColor to #7f7f7f            | #7f7f7f for windowColor in accessibility closedcaptions           | onclosedCaptionsSettingsChanged with #7f7f7f for windowColor           |
          | Set windowOpacity-40               | set windowOpacity to 40               | 40 for windowOpacity in accessibility closedcaptions              | onclosedCaptionsSettingsChanged with 40 for windowOpacity              |
 
-   @Accessibility @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Accessibility.voiceGuidance - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onVoiceGuidanceSettingsChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<Set_Method_Key>'

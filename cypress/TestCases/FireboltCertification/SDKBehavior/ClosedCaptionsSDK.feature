@@ -1,10 +1,11 @@
+@ClosedCaptions @manageSDK
 Feature: ClosedCaptions_SDK
 
     Background: Launch FCA for 'ClosedCaptions'
         Given the environment has been set up for 'ClosedCaptions' tests
         And 3rd party 'certification' app is launched
 
-    @ClosedCaptions @manageSDK
+    @sdk
     Scenario Outline: ClosedCaptions.<Method> - Positive Scenario: <Scenario> with undefined params
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'

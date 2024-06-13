@@ -1,13 +1,14 @@
+@Lifecycle @coreSDK
 Feature: Lifecycle
 
-    @Lifecycle @sdk @transport @coreSDK @regression
+    @sdk @transport @regression
     Scenario: Validate lifecycle.ready - Notify the platform that the app is ready
         Given the environment has been set up for 'lifeCycleApi' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'notify that the app is ready'
         Then 'Firebolt' platform responds with 'null for lifecycle ready'
 
-    @Lifecycle @sdk @transport @coreSDK @regression
+    @sdk @transport @regression
     Scenario: Validate 'lifecycle.ready' - expecting error
         Given the environment has been set up for 'lifeCycleApi' tests
         And 3rd party 'certification' app is launched
@@ -18,14 +19,14 @@ Feature: Lifecycle
         When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
-    @Lifecycle @sdk @transport @coreSDK @regression
+    @sdk @transport @regression
     Scenario: Validate lifecycle.state - Get the current state
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
-    @Lifecycle @coreSDK @regression @sdk @transport
+    @regression @sdk @transport
     Scenario Outline: Validate lifecycle.close - '<Scenario>' expecting error
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched
@@ -35,17 +36,17 @@ Feature: Lifecycle
         Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
         Examples:
-            | Scenario       | API_Key                            | Method_Content                              |
-            | Empty params   | close app with empty parameter     | invalid parameter error for lifecycle close |
+            | Scenario     | API_Key                        | Method_Content                              |
+            | Empty params | close app with empty parameter | invalid parameter error for lifecycle close |
 
-        @Lifecycle @coreSDK @regression @sdk @transport @skipNegative
+        @regression @sdk @transport @skipNegative
         Examples:
-            | Scenario       | API_Key                            | Method_Content                              |
-            | Integer params | close app with integer parameter   | invalid parameter error for lifecycle close |
-            | Boolean params | close app with boolean parameter   | invalid parameter error for lifecycle close |
-            | Invalid params | close app with invalid parameter   | invalid parameter error for lifecycle close |
+            | Scenario       | API_Key                          | Method_Content                              |
+            | Integer params | close app with integer parameter | invalid parameter error for lifecycle close |
+            | Boolean params | close app with boolean parameter | invalid parameter error for lifecycle close |
+            | Invalid params | close app with invalid parameter | invalid parameter error for lifecycle close |
 
-    @Lifecycle @coreSDK @regression @sdk @transport
+    @regression @sdk @transport
     Scenario Outline: Validate lifecycle.close - Positive Scenario - '<Scenario>'
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched
@@ -59,7 +60,7 @@ Feature: Lifecycle
             | with close error   | close app with error         |
             | with done          | close app with done          |
 
-    @Lifecycle @sdk @transport @coreSDK @regression
+    @sdk @transport @regression
     Scenario: Validate 'lifecycle.finished' - expecting error
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched

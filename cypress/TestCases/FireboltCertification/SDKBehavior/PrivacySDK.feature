@@ -1,3 +1,4 @@
+@Privacy @manageSDK
 Feature: Privacy_SDK
 
 
@@ -5,7 +6,7 @@ Feature: Privacy_SDK
         Given the environment has been set up for 'Privacy' tests
         And 3rd party 'certification' app is launched
 
-    @Privacy @manageSDK @sdk @transport
+    @sdk
     Scenario Outline: Privacy.<Set_Method> - Positive Scenario: <Scenario> with undefined params
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Method_validation_Key>'

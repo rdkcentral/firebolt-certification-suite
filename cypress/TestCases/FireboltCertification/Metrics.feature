@@ -1,10 +1,11 @@
+@Metrics 
 Feature: Metrics
 
     Background: Launch FCA for 'Metrics'
         Given the environment has been set up for 'Metrics' tests
         And 3rd party 'certification' app is launched
 
-    @Metrics @coreSDK @sdk @transport
+    @coreSDK @sdk @transport
     Scenario Outline: Metrics.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
@@ -14,7 +15,7 @@ Feature: Metrics
             | Metrics startContent  | startContent   | notify that content has started  | true for startContent in metrics | 
             | Metrics stopContent   | stopContent    | notify that content has stopped  | true for stopContent in metrics  |
 
-    @Metrics @coreSDK @sdk @transport
+    @coreSDK @sdk @transport
     Scenario Outline: Metrics.<Method> - Negative Scenario: <Scenario> expecting error
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
@@ -39,7 +40,7 @@ Feature: Metrics
             | mediaRenditionChange with emptyParam   | mediaRenditionChange    | notify that playback rendition is Changed with empty parameter    | invalid params for metrics mediaRenditionChange|
             | mediaEnded with emptyParam             | mediaEnded              | notify that playback has stopped with empty parameter             | invalid params for metrics mediaEnded          |
 
-    @Metrics @coreSDK @sdk @transport
+    @coreSDK @sdk @transport
     Scenario Outline: Metrics.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
@@ -74,7 +75,7 @@ Feature: Metrics
             | error with mediaStalled parameter as number   | error            | notify that error has occured with mediaStalled parameter as number   | true for error in metrics                |
 
 
-     @Metrics @coreSDK @sdk @transport
+     @coreSDK @sdk @transport
      Scenario Outline: Metrics.<Method> - Negative Scenario: <Scenario> expecting error
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
