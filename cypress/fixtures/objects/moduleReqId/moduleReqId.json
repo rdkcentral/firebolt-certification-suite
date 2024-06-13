@@ -1601,7 +1601,7 @@
             }
         },
         "Lifecycle_Inactive": {
-          "Close an app from foreground": {
+          "Lifecycle 2.3.1 Close an app from foreground": {
             "req": [
               {
                 "state": {
@@ -1625,7 +1625,7 @@
               }
             ]
           },
-          "Close an app from background": {
+          "Lifecycle 2.3.1 Close an app from background": {
             "req": [
               {
                 "state": {
@@ -1649,7 +1649,7 @@
               }
             ]
           },
-          "No impact on closing app from inactive state": {
+          "Lifecycle 2.3.3 No impact on closing app from inactive state": {
             "req": [
               {
                 "state": {
@@ -1675,7 +1675,7 @@
           }
         },
         "Lifecycle_Foreground": {
-          "Loading & Launching an App (initializing -> foreground)": {
+          "Lifecycle 2.2 Loading & Launching an App (initializing -> foreground)": {
             "req": [
               {
                 "state": {
@@ -1699,7 +1699,7 @@
               }
             ]
           },
-          "Relaunch foreground app": {
+          "Lifecycle 2.2.1 Relaunch foreground app": {
             "req": [
               {
                 "state": {
@@ -1723,7 +1723,7 @@
               }
             ]
           },
-          "App Launching another app": {
+          "Lifecycle 2.2.5 App Launching another app": {
             "req": [
               {
                 "state": {
@@ -2155,7 +2155,7 @@
             }
         },
         "Lifecycle_Background": {
-          "Background an app from foreground": {
+          "Lifecycle 2.4.2 Background an app from foreground": {
             "req": [
               {
                 "state": {
@@ -2179,7 +2179,7 @@
               }
             ]
           },
-          "Background an app from inactive": {
+          "Lifecycle 2.4.2 Background an app from inactive": {
             "req": [
               {
                 "state": {
@@ -2203,7 +2203,7 @@
               }
             ]
           },
-          "Cannot Background app that is not loaded": {
+          "Lifecycle 2.4.3 Cannot Background app that is not loaded": {
             "req": [
               {
                 "state": {
@@ -2227,7 +2227,7 @@
               }
             ]
           },
-          "Cannot Background a Backgrounded App": {
+          "Lifecycle 2.4.1 Cannot Background a Backgrounded App": {
             "req": [
               {
                 "state": {
@@ -2251,7 +2251,7 @@
               }
             ]
           },
-          "Cannot Background app in Unloading state": {
+          "Lifecycle 2.4.3 Cannot Background app in Unloading state": {
             "req": [
               {
                 "state": {
@@ -2275,7 +2275,7 @@
               }
             ]
           },
-          "Cannot background app from suspended state": {
+          "Lifecycle 2.4.3 Cannot background app from suspended state": {
             "req": [
               {
                 "state": {
@@ -2299,7 +2299,7 @@
               }
             ]
           },
-          "Should not Background app in initializing state": {
+          "Lifecycle 2.4.3 Should not Background app in initializing state": {
             "req": [
               {
                 "state": {
