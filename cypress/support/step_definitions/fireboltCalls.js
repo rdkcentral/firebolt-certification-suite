@@ -432,8 +432,7 @@ Given(
     cy.fireboltDataParser(key).then((parsedDataArr) => {
       parsedDataArr.forEach((parsedData) => {
         const method = parsedData.method;
-        let appId;
-        appId = !appId
+        const appId = !appId
           ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
           : appId === CONSTANTS.FIRST_PARTY_APP
             ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
@@ -488,7 +487,7 @@ Given(
                 Cypress.env(CONSTANTS.GLOBAL_API_OBJECT_LIST)[index].response = response;
               }
             }
-            //create new api object to push to global list
+            // create new api object to push to global list
           });
         }
       });
