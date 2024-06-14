@@ -763,11 +763,6 @@ function parseValue(str) {
     if (str === 'false') return false;
 
     if (!isNaN(str)) return Number(str);
-    try {
-      return JSON.parse(value);
-    } catch (error) {
-      fireLog.assert(false, `Failed to parse value - ${error}`);
-    }
   }
 
   return str;
