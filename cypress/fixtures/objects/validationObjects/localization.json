@@ -128,6 +128,21 @@
             }
         ]
     },
+    "LOCALIZATION_REMOVE_ADDITIONALINFO_EMPTY_RESPONSE": {
+        "method": "localization.additionalInfo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_REMOVE_ADDITIONALINFO_EMPTY_RESPONSE",
+                        "description": "Validation of the Localization additionalInfo key as empty string Format"
+                    }
+                ]
+            }
+        ]
+    },
     "LOCALIZATION_TIMEZONE": {
         "data": [
             {
