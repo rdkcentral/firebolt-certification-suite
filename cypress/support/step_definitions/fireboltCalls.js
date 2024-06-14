@@ -425,16 +425,17 @@ Given(/User triggers event with value as '(.+)'/, (key) => {
 
 /**
  * @module fireboltCalls
- * @function And '(.+)' invokes the '(.+)' API '(.+)' to set '(.+)' to '(.+)'
- * @description send message to platform to make api call.
- * @param {String} appId - app identifier, determines for which App sending the message to make a API call.
+ * @function 1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'
+ * @description Sending a message to platform to set a value
  * @param {String} sdk - sdk name.
  * @param {String} fireboltCallKey - key name passed to look for firebolt call object in fireboltCallData.
  * @param {String} attribute - The attribute we are setting (ex. fontFamily).
- * @param {String} value - The value we set the attribute to (ex. monospaced_sanserif)
+ * @param {String} invalidValue - Determines whether expecting for an error or result.
+ * @param {String} value - The value used by the set method to set the value (ex. monospaced_sanserif)
  * @example
  * Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to 'true'
- * Given '3rd party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to 'true'
+ * Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to invalid 'test'
+ * Given '1st party app' invokes the 'Firebolt' API to set 'enable' to 'true'
  */
 Given(
   /1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'$/,
@@ -444,11 +445,13 @@ Given(
       let fireboltCallObject;
       let fireboltCallObjectErrorMessage = CONSTANTS.NO_DATA_FOR_THE_KEY + fireboltCallKey;
 
+      // runtime environment variable holds attribut and value
       Cypress.env('runtime', {
         attribute: attribute,
         value: value,
       });
 
+      // When fireboltCall object key passed fetching the object from the fireboltCalls data else reading it from environment variable
       if (fireboltCallKey) {
         cy.getFireboltData(fireboltCallKey).then((fireboltData) => {
           fireboltCallObject = fireboltData;
@@ -461,6 +464,7 @@ Given(
       }
 
       cy.then(() => {
+        // Failing the test when fireboltCall object not there
         if (!fireboltCallObject) {
           fireLog.assert(false, fireboltCallObjectErrorMessage);
         } else {
@@ -470,11 +474,13 @@ Given(
               : fireboltCallObject.setMethod;
           let setParams;
 
+          // Extracting the parameter from the fireboltCall object
           if (typeof fireboltCallObject.setParams === CONSTANTS.TYPE_FUNCTION) {
             setParams = { value: fireboltCallObject.setParams() };
           } else if (typeof fireboltCallObject.setParams === CONSTANTS.TYPE_OBJECT) {
             setParams = fireboltCallObject.setParams;
 
+            // Iterating through the object and invoking it if it is a function
             for (const key in setParams) {
               if (typeof setParams[key] === CONSTANTS.TYPE_FUNCTION) {
                 setParams[key] = setParams[key]();
@@ -488,6 +494,8 @@ Given(
           const expected = invalidValue ? 'error' : 'result';
           const appId = Cypress.env(CONSTANTS.FIRST_PARTY_APPID);
           let action = CONSTANTS.ACTION_CORE.toLowerCase();
+
+          // Splitting the method name if it contains an underscore and using the first part to determine the action that decides sdk.
           if (setMethod && setMethod.includes('_')) {
             action = setMethod.split('_')[0];
             setMethod = setMethod.split('_')[1];
