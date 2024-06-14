@@ -54,14 +54,14 @@
     },
     "GET_PINCHALLENGE_CHALLENGEFOCUS":{
         "method": "pinChallenge.challengeFocus",
-        "params": "PINCHALLENGE_CHALLENGEFOCUS_PARAMS"
+        "params": "PROFILE_PINCHALLENGE_CHALLENGEFOCUS_PARAMS"
     },
     "GET_PINCHALLENGE_CHALLENGERESPONSE":{
         "method": "pinChallenge.challengeResponse",
-        "params": "PINCHALLENGE_CHALLENGERESPONSE_PARAMS"
+        "params": "PROFILE_PINCHALLENGE_CHALLENGERESPONSE_PARAMS"
     },
     "GET_PINCHALLENGE_CHALLENGEERROR":{
         "method": "pinChallenge.challengeError",
-        "params": "PINCHALLENGE_CHALLENGE_ERROR_PARAMS"
+        "params": "PROFILE_PINCHALLENGE_CHALLENGE_ERROR_PARAMS"
     }
 }

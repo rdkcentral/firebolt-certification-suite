@@ -159,34 +159,36 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
 
         // Sending message to 3rd party app.
         cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent).then((result) => {
-          if (result === CONSTANTS.NO_RESPONSE) {
-            assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+          if (!Cypress.env('isRpcOnlyValidation')) {
+            if (result === CONSTANTS.NO_RESPONSE) {
+              assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+            }
+            result = JSON.parse(result);
+
+            // Create a deep copy to avoid reference mutation
+            const dataToBeCensored = _.cloneDeep(result.report.apiResponse);
+
+            // Call the 'censorData' command to hide sensitive data
+            cy.censorData(method, dataToBeCensored).then((maskedResult) => {
+              cy.log(`Response from ${appId}: ${JSON.stringify(maskedResult)}`);
+            });
+
+            // If method and params are not supported setting isScenarioExempted as true for further validation.
+            if (UTILS.isScenarioExempted(method, param)) {
+              Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
+            }
+
+            // Creating object with method name, params and response etc and storing it in a global list for further validation.
+            const apiAppObject = new apiObject(
+              method,
+              param,
+              context,
+              result.report,
+              expected,
+              appId
+            );
+            UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
           }
-          result = JSON.parse(result);
-
-          // Create a deep copy to avoid reference mutation
-          const dataToBeCensored = _.cloneDeep(result.report.apiResponse);
-
-          // Call the 'censorData' command to hide sensitive data
-          cy.censorData(method, dataToBeCensored).then((maskedResult) => {
-            cy.log(`Response from ${appId}: ${JSON.stringify(maskedResult)}`);
-          });
-
-          // If method and params are not supported setting isScenarioExempted as true for further validation.
-          if (UTILS.isScenarioExempted(method, param)) {
-            Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
-          }
-
-          // Creating object with method name, params and response etc and storing it in a global list for further validation.
-          const apiAppObject = new apiObject(
-            method,
-            param,
-            context,
-            result.report,
-            expected,
-            appId
-          );
-          UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
         });
       });
     });
@@ -432,7 +434,13 @@ Given(
     cy.fireboltDataParser(key).then((parsedDataArr) => {
       parsedDataArr.forEach((parsedData) => {
         const method = parsedData.method;
-        const appId = !appId
+        const param = parsedData.params;
+        const context = parsedData.context;
+        const action = parsedData.action;
+        const expected = parsedData.expected;
+
+        let appId = null;
+        appId = !appId
           ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
           : appId === CONSTANTS.FIRST_PARTY_APP
             ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
@@ -487,7 +495,19 @@ Given(
                 Cypress.env(CONSTANTS.GLOBAL_API_OBJECT_LIST)[index].response = response;
               }
             }
+            if (typeof response == 'string') {
+              response = JSON.parse(response);
+            }
             // create new api object to push to global list
+            const apiAppObject = new apiObject(
+              method,
+              param,
+              context,
+              response.report,
+              expected,
+              appId
+            );
+            UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
           });
         }
       });

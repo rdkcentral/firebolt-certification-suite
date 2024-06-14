@@ -20,6 +20,10 @@
         "method": "keyboard.password",
         "params": "KEYBOARD_PASSWORD_PARAMS"
     },
+    "PROMPT_THE_USER_FOR_THEIR_USERNAME": {
+        "method": "keyboard.standard",
+        "params": "KEYBOARD_STANDARD_PARAMS"
+    },
     "PROMPT_THE_USER_FOR_THEIR_PASSWORD_AS_EMPTY": {
         "method": "keyboard.password"
     },
@@ -98,6 +102,14 @@
     "KEYBOARD_EMAIL": {
         "method": "keyboard.email",
         "params": "KEYBOARD_EMAIL"
+    },
+    "KEYBOARD_STANDARD": {
+        "method": "keyboard.standard",
+        "params": "KEYBOARD_STANDARD_PARAMS"
+    },
+    "KEYBOARD_PASSWORD": {
+        "method": "keyboard.password",
+        "params": "KEYBOARD_PASSWORD_PARAMS"
     },
     "KEYBOARD_ONREQUESTEMAIL_MANAGE":{
         "method": "manage_keyboard.onRequestEmail"
