@@ -35,25 +35,15 @@ Cypress.Commands.add(
   (key, callType = CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS) => {
     // Reading the data from combinedJson based on key.
     let fireboltData;
-    let logMessage = CONSTANTS.NO_DATA_FOR_THE_KEY + key;
     if (callType == CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS) {
       fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTMOCKS)[key];
     } else if (callType == CONSTANTS.SUPPORTED_CALLTYPES.SET_RESPONSE_JSON) {
       fireboltData = UTILS.getEnvVariable('setResponseJson')[key];
     } else {
-      if (key) {
-        fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
-        if (UTILS.getEnvVariable('runtime', false)) {
-          UTILS.getEnvVariable('runtime', false).fireboltCall = fireboltData;
-        }
-      } else {
-        fireboltData = UTILS.getEnvVariable('runtime', false)?.fireboltCall;
-        logMessage = 'Unable to find the firebolt object in the runtime environment variable';
-      }
+      fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
-
     if (!fireboltData) {
-      fireLog.assert(false, logMessage);
+      fireLog.assert(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
     return fireboltData;
   }

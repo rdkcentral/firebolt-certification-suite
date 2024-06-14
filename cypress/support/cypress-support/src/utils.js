@@ -766,7 +766,7 @@ function parseValue(str) {
     try {
       return JSON.parse(value);
     } catch (error) {
-      fireLog.assert(false, `Failed to parse value - ${erorr}`);
+      fireLog.assert(false, `Failed to parse value - ${error}`);
     }
   }
 
