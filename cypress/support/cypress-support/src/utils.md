@@ -305,3 +305,24 @@ request
 response
 - `123`
 - `true`
+## resolveAtRuntime
+
+### Purpose: Return the function which is having logic to resolve the value for the passed input at runtime.
+
+### Params:
+| Param | Definition| Type |
+| --- | --- | --- |
+| input | value which need to resolved | string or Array |
+
+Note: Values of `attribute` and `value` will be stored in `runtime` environment variable while executing the glue
+
+### Examples:
+request
+- `resolveAtRuntime(["result.{{attribute}}", "result.styles.{{attribute}}"])`
+- `resolveAtRuntime("manage_closedcaptions.set{{attribute.uppercaseFirstChar}}")`
+- `resolveAtRuntime("value")`
+
+return
+- `['result.fontSize', 'result.styles.fontSize']`
+- `"manage_closedcaptions.setFontSize"`
+- `1.5`
