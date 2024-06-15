@@ -62,6 +62,8 @@
 |  decode           |  Used when the incoming response has to be decoded and validated. It can be base64 or JWT.                        |
 |  fixture          |  Used when the response value is to be validated against an expected value already provided.                      |
 |  custom           |  Used when the incoming response has to be validated using a customized function provided in the configModule.    |
+|  undefined        |  Used when the incoming response has to be validated against undefined value.                                     |
+
 
 ## regEx
 ### format:
@@ -239,6 +241,7 @@
             }
         ]
 }
+
 ## custom
 ### format:
 {
@@ -284,6 +287,49 @@
             }
         ]
 }
+
+
+## undefined
+### format:
+{
+        "method": "",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "",
+                        "description": ""
+                    }
+                ]
+            }
+        ]
+}
+
+### Params:
+| Param         | type   |  Description                                                                                               |
+| ------------  | ------ | ---------------------------------------------------------------------------------------------------------  |
+| method        | string |  The name of the method whose response is to be validated.                                                 |
+| data          | array  |  An array that holds the entire set of validation objects.                                                 |
+| type          | string |  The value which indicates the type of validation.                                                         |
+| validations   | array  |  The array that holds all the data for validation, like value, format, etc.                                |
+| field         | string |  The field to be validated ( depends on the validation function ).                                          |
+| description   | string |  The description of the validation executed with this type.                                                |
+
+### Example:
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.windowColor",
+                        "description": "Validation of the accessibility windowcolor undefined"
+                    }
+                ]
+            }
+        ]
+    
 
 # Validation Override
 
