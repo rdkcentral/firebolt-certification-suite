@@ -195,7 +195,7 @@ Cypress.Commands.add('getDeviceVersion', () => {
         throw 'Obtained response is null|undefined';
       }
     } catch (error) {
-      cy.log('Failed to fetch device.version', error);
+      fireLog.info('Failed to fetch device.version', error);
     }
   });
 });
@@ -315,7 +315,7 @@ Cypress.Commands.add('getCapabilities', () => {
       Cypress.env('capabilitiesList', capabilityObject);
     }
   } catch (error) {
-    cy.log('Error while getting capabilities from firebolt config: ', error);
+    fireLog.info('Error while getting capabilities from firebolt config: ', error);
   }
 });
 
@@ -416,7 +416,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     firstParty = beforeOperation.firstParty;
   } else {
     firstParty = false;
-    cy.log(
+    fireLog.info(
       'firstParty property is missing in beforeOperation block, so using default as firstParty=false'
     );
   }
@@ -480,9 +480,9 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
           method: method,
           params: parsedData,
         };
-        cy.log(`Set mock call to 1st party App: ${JSON.stringify(requestMap)} `);
+        fireLog.info(`Set mock call to 1st party App: ${JSON.stringify(requestMap)} `);
         cy.sendMessagetoPlatforms(requestMap).then((result) => {
-          cy.log('Response from 1st party App: ' + JSON.stringify(result));
+          fireLog.info('Response from 1st party App: ' + JSON.stringify(result));
         });
       } else {
         const params = {
@@ -612,7 +612,7 @@ Cypress.Commands.add('censorData', (method, response) => {
     });
   } catch (err) {
     // Log an error if the censorData JSON file is missing.
-    cy.log('Error occurred while loading censorData: ', err);
+    fireLog.info('Error occurred while loading censorData: ', err);
   }
 });
 
