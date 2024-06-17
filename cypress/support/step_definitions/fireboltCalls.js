@@ -429,7 +429,7 @@ Given(/User triggers event with value as '(.+)'/, (key) => {
  * @description Sending a message to platform to set a value
  * @param {String} sdk - sdk name.
  * @param {String} fireboltCallKey - key name passed to look for firebolt call object in fireboltCallData.
- * @param {String} attribute - The attribute we are setting (ex. fontFamily).
+ * @param {String} attribute - The attribute to which the value is going to be set (ex. fontFamily).
  * @param {String} invalidValue - Determines whether expecting for an error or result.
  * @param {String} value - The value used by the set method to set the value (ex. monospaced_sanserif)
  * @example
@@ -445,7 +445,7 @@ Given(
       let fireboltCallObject;
       let fireboltCallObjectErrorMessage = CONSTANTS.NO_DATA_FOR_THE_KEY + fireboltCallKey;
 
-      // runtime environment variable holds attribut and value
+      // runtime environment variable holds attribute and value
       Cypress.env('runtime', {
         attribute: attribute,
         value: value,
