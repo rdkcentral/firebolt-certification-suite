@@ -96,6 +96,9 @@
     "GET_LOCALIZATION_COUNTRYCODE": {
         "method": "localization.countryCode"
     },
+    "LOCALIZATION_COUNTRYCODE": {
+        "method": "localization.countryCode"
+    },
     "PH_FOR_LOCALIZATION_COUNTRYCODE": {
         "method": "localization.countryCode",  
         "validationJsonPath": "result",

@@ -427,10 +427,6 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
 Given(
   /Fetch response for '(.+)' (method|event) from (3rd party app|1st party app)$/,
   async (key, methodOrEvent, app) => {
-    if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
-      Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
-    }
-
     cy.fireboltDataParser(key).then((parsedDataArr) => {
       parsedDataArr.forEach((parsedData) => {
         const method = parsedData.method;
@@ -459,6 +455,7 @@ Given(
           cy.log(
             'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params)
           );
+          // Sending message to first party app.
           cy.sendMessagetoPlatforms(requestMap).then((response) => {
             cy.log('Response from Firebolt platform: ' + JSON.stringify(response));
             if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
@@ -466,8 +463,11 @@ Given(
                 assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
               });
             }
-            cy.log(`correlationId - ${response.result.correlationId}`);
-            Cypress.env(CONSTANTS.CORRELATIONID, response.result.correlationId);
+            // saving the correlationId of rpc-only methods
+            if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
+              cy.log(`correlationId - ${response.result.correlationId}`);
+              Cypress.env(CONSTANTS.CORRELATIONID, response.result.correlationId);
+            }
           });
         } else if (app == CONSTANTS.THIRD_PARTY_APP) {
           params = { method: method };
@@ -486,15 +486,6 @@ Given(
               });
             }
             cy.log(`Updated response of ${method}: ${JSON.stringify(response)}`);
-            for (
-              let index = 0;
-              index < Cypress.env(CONSTANTS.GLOBAL_API_OBJECT_LIST).length;
-              index++
-            ) {
-              if (Cypress.env(CONSTANTS.GLOBAL_API_OBJECT_LIST)[index].apiName == method) {
-                Cypress.env(CONSTANTS.GLOBAL_API_OBJECT_LIST)[index].response = response;
-              }
-            }
             if (typeof response == 'string') {
               response = JSON.parse(response);
             }

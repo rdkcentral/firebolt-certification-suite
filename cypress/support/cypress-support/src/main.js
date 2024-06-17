@@ -400,7 +400,7 @@ export default function (module) {
           if (results) {
             // Response recieved from queue
             return results;
-          } else if (Cypress.env('isRpcOnlyValidation')) {
+          } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
             return true;
           }
         });

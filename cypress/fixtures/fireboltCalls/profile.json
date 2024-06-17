@@ -52,15 +52,15 @@
     "PINCHALLENGE_ONREQUESTCHALLENGE":{
         "method": "pinChallenge.onRequestChallenge"
     },
-    "GET_PINCHALLENGE_CHALLENGEFOCUS":{
+    "REQUEST_FOCUS_FOR_PINCHALLENGE_PROVIDER":{
         "method": "pinChallenge.challengeFocus",
         "params": "PROFILE_PINCHALLENGE_CHALLENGEFOCUS_PARAMS"
     },
-    "GET_PINCHALLENGE_CHALLENGERESPONSE":{
+    "SEND_RESPONSE_FROM_PINCHALLENGE_PROVIDER":{
         "method": "pinChallenge.challengeResponse",
         "params": "PROFILE_PINCHALLENGE_CHALLENGERESPONSE_PARAMS"
     },
-    "GET_PINCHALLENGE_CHALLENGEERROR":{
+    "SEND_ERROR_FROM_PINCHALLENGE_PROVIDER":{
         "method": "pinChallenge.challengeError",
         "params": "PROFILE_PINCHALLENGE_CHALLENGE_ERROR_PARAMS"
     }

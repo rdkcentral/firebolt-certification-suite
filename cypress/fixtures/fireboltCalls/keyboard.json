@@ -129,27 +129,27 @@
     "KEYBOARD_ONREQUESTPASSWORD":{
         "method": "keyboard.onRequestPassword"
     },
-    "GET_KEYBOARD_EMAILFOCUS":{
+    "REQUEST_FOCUS_FOR_EMAIL_PROVIDER":{
         "method": "keyboard.emailFocus",
         "params": "KEYBOARD_EMAILFOCUS"
     },
-    "GET_KEYBOARD_STANDARDFOCUS":{
+    "REQUEST_FOCUS_FOR_STANDARD_PROVIDER":{
         "method": "keyboard.standardFocus",
         "params": "KEYBOARD_STANDARDFOCUS"
     },
-    "GET_KEYBOARD_PASSWORDFOCUS":{
+    "REQUEST_FOCUS_FOR_PASSWORD_PROVIDER":{
         "method": "keyboard.passwordFocus",
         "params": "KEYBOARD_PASSWORDFOCUS"
     },
-    "GET_KEYBOARD_EMAILRESPONSE":{
+    "SEND_RESPONSE_FROM_EMAIL_PROVIDER":{
         "method": "keyboard.emailResponse",
         "params": "KEYBOARD_EMAILRESPONSE"
     },
-    "GET_KEYBOARD_STANDARDRESPONSE":{
+    "SEND_RESPONSE_FROM_STANDARD_PROVIDER":{
         "method": "keyboard.standardResponse",
         "params": "KEYBOARD_STANDARDRESPONSE"
     },
-    "GET_KEYBOARD_PASSWORDRESPONSE":{
+    "SEND_RESPONSE_FROM_PASSWORD_PROVIDER":{
         "method": "keyboard.passwordResponse",
         "params": "KEYBOARD_PASSWORDRESPONSE"
     },
@@ -168,15 +168,15 @@
         "validationJsonPath": "result",
         "content": "KEYBOARD_PASSWORD"
     },
-    "GET_KEYBOARD_EMAILERROR":{
+    "SEND_ERROR_FROM_EMAIL_PROVIDER":{
         "method": "keyboard.emailError",
         "params": "KEYBOARD_EMAILERROR"
     },
-    "GET_KEYBOARD_STANDARDERROR":{
+    "SEND_ERROR_FROM_STANDARD_PROVIDER":{
         "method": "keyboard.standardError",
         "params": "KEYBOARD_STANDARDERROR"
     },
-    "GET_KEYBOARD_PASSWORDERROR":{
+    "SEND_ERROR_FROM_PASSWORD_PROVIDER":{
         "method": "keyboard.passwordError",
         "params": "KEYBOARD_PASSWORDERROR"
     }

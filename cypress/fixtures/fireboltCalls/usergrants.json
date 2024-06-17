@@ -89,16 +89,16 @@
     "ACKNOWLEDGECHALLENGE_ONREQUESTCHALLENGE":{
         "method": "acknowledgeChallenge.onRequestChallenge"
     },
-    "GET_ACKNOWLEDGECHALLENGE_CHALLENGEFOCUS":{
+    "REQUEST_FOCUS_FOR_CHALLENGE_PROVIDER":{
         "method": "acknowledgeChallenge.challengeFocus",
-        "params": "ACKNOWLEDGECHALLENGE_CHALLENGEFOCUS_PARAMS"
+        "params": "USERGRANTS_CHALLENGEFOCUS_PARAMS"
     },
-    "GET_ACKNOWLEDGECHALLENGE_CHALLENGERESPONSE":{
+    "SEND_RESPONSE_FROM_CHALLENGE_PROVIDER":{
         "method": "acknowledgeChallenge.challengeResponse",
-        "params": "ACKNOWLEDGECHALLENGE_CHALLENGERESPONSE_PARAMS"
+        "params": "USERGRANTS_CHALLENGERESPONSE_PARAMS"
     },
-    "GET_ACKNOWLEDGECHALLENGE_CHALLENGEERROR":{
+    "SEND_ERROR_FROM_CHALLENGE_PROVIDER":{
         "method": "acknowledgeChallenge.challengeError",
-        "params": "ACKNOWLEDGECHALLENGE_CHALLENGEERROR_PARAMS"
+        "params": "USERGRANTS_CHALLENGEERROR_PARAMS"
     }
 }

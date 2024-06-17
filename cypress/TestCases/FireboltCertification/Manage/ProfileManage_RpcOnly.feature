@@ -9,8 +9,8 @@ Feature: Profile_Manage_RpcOnly
         When 1st party app registers for the 'pinChallenge onRequestChallenge manage' event using the 'Firebolt' API
         When '3rd party app' invokes the 'Firebolt' API to 'profile approvePurchase'
         And Fetch response for 'pinChallenge onRequestChallenge' event from 1st party app
-        And 1st party app invokes the 'Firebolt' API to 'get pinChallenge challengeFocus'
-        And 1st party app invokes the 'Firebolt' API to 'get pinChallenge challengeResponse'
+        And 1st party app invokes the 'Firebolt' API to 'request focus for pinchallenge provider'
+        And 1st party app invokes the 'Firebolt' API to 'send response from pinchallenge provider'
         And Fetch response for 'profile approvePurchase' method from 3rd party app
         Then 'Firebolt' platform responds with 'true for profile approvepurchase'
 
@@ -22,6 +22,6 @@ Feature: Profile_Manage_RpcOnly
         When 1st party app registers for the 'pinChallenge onRequestChallenge manage' event using the 'Firebolt' API
         When '3rd party app' invokes the 'Firebolt' API to 'profile approvePurchase'
         And Fetch response for 'pinChallenge onRequestChallenge' event from 1st party app
-        And 1st party app invokes the 'Firebolt' API to 'get pinChallenge challengeError'
+        And 1st party app invokes the 'Firebolt' API to 'send error from pinchallenge provider'
         And Fetch response for 'profile approvePurchase' method from 3rd party app
         Then 'Firebolt' platform responds with 'true for profile approvepurchase'
