@@ -672,20 +672,20 @@ class FireLog extends Function {
       apply: function (target, thisArg, argumentsList) {
         let message;
         const methodName = target.name;
-        if (methodName.toLowerCase().includes('equal'))
-          message =
-            argumentsList[argumentsList.length - 1] +
-            ' expected ' +
-            JSON.stringify(argumentsList[0]) +
-            ' to be ' +
-            JSON.stringify(argumentsList[1]);
-        else if (methodName.toLowerCase().includes('include'))
+        if (methodName.toLowerCase().includes('include'))
           message =
             argumentsList[argumentsList.length - 1] +
             ' ' +
             JSON.stringify(argumentsList[1]) +
             ' expected to be present in the list of ' +
             JSON.stringify(argumentsList[0]);
+        else if (argumentsList.length > 2)
+          message =
+            argumentsList[argumentsList.length - 1] +
+            ' expected ' +
+            JSON.stringify(argumentsList[0]) +
+            ' to be ' +
+            JSON.stringify(argumentsList[1]);
         else
           message =
             argumentsList[argumentsList.length - 1] +
