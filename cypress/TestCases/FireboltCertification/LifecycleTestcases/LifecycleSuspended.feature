@@ -11,7 +11,7 @@ Feature: Lifecycle_Suspended
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'inactive' state
         When '3rd party app' transitions to state 'suspended'
-        Then '3rd party app' is in 'suspended' state
+        Then '3rd party app' will be in 'suspended' state
 
     @Lifecycle @coreSDK @notSupported @needsFurtherInformation
     Scenario: Lifecycle 2.2.4 Relaunch a previously Suspended app after Unsuspend
@@ -19,35 +19,35 @@ Feature: Lifecycle_Suspended
         And 3rd party 'certification' app is launched with 'suspended' state
         When '3rd party app' transitions to state 'inactive'
         Then '3rd party app' transitions to state 'foreground'
-        Then '3rd party app' is in 'foreground' state
+        Then '3rd party app' will be in 'foreground' state
 
     @Lifecycle @coreSDK @notSupported
     Scenario: Lifecycle 2.5.3 Cannot Suspend a suspended App
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'suspended' state
         When '3rd party app' transitions to state 'suspended'
-        Then '3rd party app' is in 'suspended' state
+        Then '3rd party app' will stay in 'suspended' state
 
     @Lifecycle @coreSDK @notSupported
     Scenario: Lifecycle 2.5.1 Cannot Suspend a unloaded App
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'unloaded' state
         When '3rd party app' transitions to state 'suspended'
-        Then '3rd party app' is in 'unloaded' state
+        Then '3rd party app' will stay in 'unloaded' state
     
     @Lifecycle @coreSDK @notSupported
     Scenario: Lifecycle 2.5.5 Cannot relaunch Suspended App
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'suspended' state
         When 3rd party 'certification' app is launched
-        Then '3rd party app' is in 'suspended' state
+        Then '3rd party app' will stay in 'suspended' state
 
     @Lifecycle @coreSDK @notSupported
     Scenario Outline: Lifecycle 2.5.2 Cannot Suspend <state> app
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with '<state>' state
         When '3rd party app' transitions to state 'suspended'
-        Then '3rd party app' is in '<state>' state
+        Then '3rd party app' will stay in '<state>' state
 
         Examples:
             | state      |
@@ -61,7 +61,7 @@ Feature: Lifecycle_Suspended
         # And 1st party app invokes the API to 'get lifecycle management state'
         And '3rd party app' invokes the 'Firebolt' API to 'close app with remote button'
         # And 1st party app invokes the API to 'get lifecycle management state'
-        Then '3rd party app' is in 'suspended' state
+        Then '3rd party app' will stay in 'suspended' state
         # Then 'Firebolt' platform responds with 'last two responses for lifecycleManagement state'
         Then 'Firebolt' platform responds with 'message and code for lifecycle close'
 
@@ -70,7 +70,7 @@ Feature: Lifecycle_Suspended
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'suspended' state
         When '3rd party app' transitions to state 'inactive'
-        Then '3rd party app' is in 'inactive' state
+        Then '3rd party app' will be in 'inactive' state
     
     @Lifecycle @coreSDK @notSupported
     Scenario Outline: Lifecycle 2.6.1 Cannot Unsuspend in <state> State
@@ -79,7 +79,7 @@ Feature: Lifecycle_Suspended
         # And 1st party app invokes the API to 'get lifecycle management state'
         And '3rd party app' invokes the 'Firebolt' API to 'unsuspend app'
         # And 1st party app invokes the API to 'get lifecycle management state'
-        Then '3rd party app' is in '<state>' state
+        Then '3rd party app' will stay in '<state>' state
         # Then 'Firebolt' platform responds with 'message and code for lifecycle unsuspend'
 
         Examples:
@@ -97,7 +97,7 @@ Feature: Lifecycle_Suspended
         # And 1st party app invokes the API to 'get lifecycle management state'
         And '3rd party app' invokes the 'Firebolt' API to 'unsuspend app'
         # And 1st party app invokes the API to 'get lifecycle management state'
-        Then '3rd party app' is in 'unloaded' state
+        Then '3rd party app' will stay in 'unloaded' state
         # Then 'Firebolt' platform responds with 'message and code for lifecycle unsuspend'
         # Then 'Firebolt' platform responds with 'last two responses for lifecycleManagement state'
 

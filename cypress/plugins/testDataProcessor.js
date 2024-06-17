@@ -7,6 +7,11 @@ const path = require('path');
 const _ = require('lodash');
 const logger = require('../support/Logger')('testDataProcessor.js');
 
+// Combining validation objects from FCS and config module into single JSON
+const validationObjects = combineValidationObjectsJson();
+let resolvedFireboltCallsJson;
+let combinedFireboltMocksJson;
+
 /**
  *  @function testDataProcessor
  *  The Test Data Processor performs the following operations:
@@ -39,7 +44,7 @@ function testDataProcessor(configEnv) {
     fcsFireboltCallsMergedJson,
     configFireboltCallsModuleMergedJson
   );
-  const combinedFireboltMocksJson = Object.assign(
+  combinedFireboltMocksJson = Object.assign(
     fcsFireboltMocksMergedJson,
     configModuleFireboltMocksMergedJson
   );
@@ -50,14 +55,45 @@ function testDataProcessor(configEnv) {
   ]);
 
   // Resolving the variables in the JSON
-  const resolvedFireboltCallsJson = processFireboltJson(combinedFireboltCallsJson);
+  resolvedFireboltCallsJson = processFireboltJson(combinedFireboltCallsJson);
+
+  // Resolving the variables in the SetResponse JSON
+  const resolvedSetResponseJson = processSetResponseJson(mergedSetResponseJson);
 
   // Below key names are converted into environment variables.
   return {
     fireboltCallsJson: resolvedFireboltCallsJson,
     fireboltMocksJson: combinedFireboltMocksJson,
-    setResponseJson: mergedSetResponseJson,
+    setResponseJson: resolvedSetResponseJson,
   };
+}
+
+/**
+ *  @function processSetResponseJson
+ *  processSetResponseJson function will perform following operations
+ *  - Iterate over each key in the provided JSON
+ *  - Resolve the values of setResponse params
+ *  - Return the JSON with the updated value.
+ *
+ *  @example
+ *  processSetResponseJson({'abc': {'fireboltMock': 'ACKNOWLEDGE_CHALLENGE_GRANTED', 'firstParty': 'true'}})
+ *  @returns
+ *  {'abc': {fireboltMock: {'method': 'method_name', 'response': [{"isCancelled": false, "withUi": true, "result":{}}]}}, 'firstParty': 'true'}
+ */
+function processSetResponseJson(setResponseJsonData) {
+  // Looping through json data
+  for (const key in setResponseJsonData) {
+    const object = setResponseJsonData[key];
+    if (object.hasOwnProperty('fireboltMock') && combinedFireboltMocksJson[object.fireboltMock]) {
+      object.fireboltMock = combinedFireboltMocksJson[object.fireboltMock];
+    } else if (
+      object.hasOwnProperty('fireboltCall') &&
+      resolvedFireboltCallsJson[object.fireboltCall]
+    ) {
+      object.fireboltCall = resolvedFireboltCallsJson[object.fireboltCall];
+    }
+  }
+  return setResponseJsonData;
 }
 
 /**
@@ -180,8 +216,6 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
           return dataIdentifier;
         }
       } else {
-        // Combining validation objects from FCS and config module into single JSON
-        const validationObjects = combineValidationObjectsJson();
         const validationObject = validationObjects[dataIdentifier];
 
         if (validationObject && validationObject.data) {
@@ -192,6 +226,37 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                 // When the data.type is not string, returning the data as is
                 if (typeof data.type !== CONSTANTS.STRING) {
                   return data.type;
+                }
+
+                // Resolve any cypress env variables
+                if (typeof data.type === 'string' && data.type.includes('CYPRESSENV')) {
+                  // Split into an array and remove CYPRESSENV
+                  const envSegments = data.type.split('-').slice(1);
+                  // Handle the case where the env variable is an object
+                  if (envSegments.length > 1) {
+                    const objectName = envSegments[0];
+                    const propertyName = envSegments[1];
+
+                    // Get object from envVariables
+                    const envValue = _.get(envVariables, [objectName, propertyName]);
+
+                    // Check if object exists and contains the specified property
+                    if (envValue !== undefined) {
+                      return (data.type = envValue);
+                    } else {
+                      logger.info(`Cypress env variable '${envKey}' does not exist`);
+                      return data.type;
+                    }
+                  } else {
+                    const envKey = envSegments[0];
+                    const envValue = _.get(envVariables, envKey);
+                    if (envValue !== undefined) {
+                      return (data.type = envValue);
+                    } else {
+                      logger.info(`Cypress env variable '${envKey}' does not exist`);
+                      return data.type;
+                    }
+                  }
                 }
                 switch (data.mode) {
                   case CONSTANTS.REGEX.toLowerCase():

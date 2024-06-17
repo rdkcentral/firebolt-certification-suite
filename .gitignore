@@ -12,6 +12,12 @@ cypress/TestCases/Distributor
 # External Testdata
 cypress/fixtures/external
 
+# Firebolt Calls Test Data
+cypress/fixtures/fireboltCalls/index.js
+
+# Firebolt Mock Test Data
+cypress/fixtures/fireboltMocks/index.js
+
 # Lock Files
 yarn.lock
 
