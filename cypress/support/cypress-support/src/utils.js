@@ -778,6 +778,75 @@ class FireLog extends Function {
 const fireLog = new FireLog();
 global.fireLog = fireLog;
 
+/**
+ * @module utils
+ * @globalfunction resolveAtRuntime
+ * @description Return the function which is having logic to resolve the value for the passed input at runtime.
+ * @param {String || Array}
+ * @example
+ * resolveAtRuntime(["result.{{attribute}}", "result.styles.{{attribute}}"])
+ * resolveAtRuntime("manage_closedcaptions.set{{attribute.uppercaseFirstChar}}")
+ * resolveAtRuntime("value")
+ *
+ * @returns
+ * ['result.fontSize', 'result.styles.fontSize']
+ * "manage_closedcaptions.setFontSize"
+ * 1.5
+ */
+global.resolveAtRuntime = function (input) {
+  return function () {
+    const functions = {
+      uppercaseFirstChar: function (str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      },
+      lowercaseFirstChar: function (str) {
+        return str.charAt(0).toLowerCase() + str.slice(1);
+      },
+    };
+
+    // Function to check the occurence of the pattern and updating the actual value
+    function replacingPatternOccurenceWithValue(text) {
+      return text.replace(/{{(.*?)}}/g, (match, pattern) => {
+        let functionName;
+
+        // Separating the function name from the pattern, if it exists,.
+        if (pattern.includes('.')) {
+          functionName = pattern.split('.')[1];
+          pattern = pattern.split('.')[0];
+        }
+
+        // If a function name is present in the pattern, call the function with pattern content as input.
+        // Reading the pattern content from the runtime environment variable
+        if (functionName && functions.hasOwnProperty(functionName)) {
+          return functions[functionName](getEnvVariable('runtime')[pattern] || match);
+        } else {
+          return getEnvVariable('runtime')[pattern] || match;
+        }
+      });
+    }
+
+    if (typeof input === CONSTANTS.TYPE_STRING) {
+      // Returning the actual pattern content for each occurrence of "{{"
+      if (input.includes('{{')) {
+        return replacingPatternOccurenceWithValue(input);
+      }
+      // If input not having "{{", returning content from runtime environment variable.
+      else if (!input.includes('{{')) {
+        return getEnvVariable('runtime')[input] || input;
+      }
+    } else if (Array.isArray(input) && input.length > 0) {
+      // input is an array; iterating through each element, it updates the actual value for that pattern if there is an occurrence of "{{".
+      return input.map((element) => {
+        if (element.includes('{{')) {
+          return replacingPatternOccurenceWithValue(element);
+        }
+      });
+    } else {
+      logger.info(`Passed input - ${input} must be an array or a string.`);
+    }
+  };
+};
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
