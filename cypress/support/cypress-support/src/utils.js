@@ -672,14 +672,18 @@ class FireLog extends Function {
       apply: function (target, thisArg, argumentsList) {
         let message;
         const methodName = target.name;
-        if (methodName.toLowerCase().includes('equal'))
+        if (argumentsList.length > 2)
           message =
             argumentsList[argumentsList.length - 1] +
             ' expected ' +
             JSON.stringify(argumentsList[0]) +
             ' to be ' +
             JSON.stringify(argumentsList[1]);
-        else message = argumentsList[argumentsList.length - 1];
+        else
+          message =
+            argumentsList[argumentsList.length - 1] +
+            ' Actual: ' +
+            JSON.stringify(argumentsList[0]);
         return cy.log(message).then(() => {
           return Reflect.apply(target, thisArg, argumentsList);
         });
