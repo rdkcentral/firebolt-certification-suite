@@ -36,11 +36,11 @@ Cypress.Commands.add(
     // Reading the data from combinedJson based on key.
     let fireboltData;
     if (callType == CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS) {
-      fireboltData = UTILS.getEnvVariable('fireboltMocksJson')[key];
+      fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTMOCKS)[key];
     } else if (callType == CONSTANTS.SUPPORTED_CALLTYPES.SET_RESPONSE_JSON) {
       fireboltData = UTILS.getEnvVariable('setResponseJson')[key];
     } else {
-      fireboltData = UTILS.getEnvVariable('fireboltCallsJson')[key];
+      fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
     if (!fireboltData) {
       fireLog.assert(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
@@ -478,10 +478,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
       });
     });
   } else if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTMOCK)) {
-    cy.getFireboltData(
-      beforeOperation[CONSTANTS.FIREBOLTMOCK],
-      CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS
-    ).then((parsedData) => {
+    cy.parsedMockData(beforeOperation).then((parsedData) => {
       if (firstParty) {
         const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SETRESPONSE;
         const requestMap = {
@@ -538,6 +535,21 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
+  }
+});
+
+Cypress.Commands.add('parsedMockData', (beforeOperation) => {
+  if (beforeOperation.hasOwnProperty('fireboltMock')) {
+    if (typeof beforeOperation.fireboltMock === 'string') {
+      cy.getFireboltData(
+        beforeOperation[CONSTANTS.FIREBOLTMOCK],
+        CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS
+      ).then((response) => {
+        return response;
+      });
+    } else {
+      return beforeOperation.fireboltMock;
+    }
   }
 });
 
@@ -744,6 +756,31 @@ Cypress.Commands.add('convertJsonToHTML', (defaultDirectory, fileName) => {
     logger.error(err);
     return false;
   }
+});
+
+/**
+ * @module commands
+ * @function mergeFireboltCallJsons
+ * @description Merges properties of two JSON objects into one, prioritizing the values from the second JSON object.
+ * @param {*} v1DataJson - JSON object
+ * @param {*} v2DataJson - The JSON object to merge with the first JSON object and that takes precedence.
+ * @returns {Object} The merged JSON object.
+ * @example
+ * mergeFireboltCallJsons(v1JSON, v2DataJSON);
+ */
+
+Cypress.Commands.add('mergeFireboltCallJsons', (v1DataJson, v2DataJson) => {
+  const combinedJsonData = { ...v1DataJson };
+  for (const [key, value] of Object.entries(v2DataJson)) {
+    // If the key exists in combinedJsonData, merge the objects
+    if (combinedJsonData.hasOwnProperty(key)) {
+      combinedJsonData[key] = { ...combinedJsonData[key], ...value };
+    } else {
+      // Otherwise, simply assign the value
+      combinedJsonData[key] = value;
+    }
+  }
+  return combinedJsonData;
 });
 
 /**

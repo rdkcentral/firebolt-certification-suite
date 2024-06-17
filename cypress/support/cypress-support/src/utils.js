@@ -445,16 +445,21 @@ function assertWithRequirementLogs(pretext, actual, expected, equateDeep = false
       assert(false, pretext + ': ' + JSON.stringify(errorObject));
     });
   } else {
-    cy.log(
-      pretext + ': Expected : ' + expected + ' , Actual : ' + actual,
-      'assertWithRequirementLogs'
-    ).then(() => {
-      if (equateDeep) {
-        assert.deepEqual(actual, expected, pretext);
-      } else {
-        assert.equal(actual, expected, pretext);
-      }
-    });
+    let expectedLog = expected;
+    let actualLog = actual;
+    if (Array.isArray(actual) && actual.length < 1) {
+      actualLog = JSON.stringify(actual);
+    }
+    if (Array.isArray(expected) && expected.length < 1) {
+      expectedLog = JSON.stringify(expected);
+    }
+
+    const logMessage = pretext + ': Expected : ' + expectedLog + ' , Actual : ' + actualLog;
+    if (equateDeep) {
+      fireLog.deepEqual(actual, expected, logMessage);
+    } else {
+      fireLog.equal(actual, expected, logMessage);
+    }
   }
 }
 
@@ -625,6 +630,24 @@ function checkForTags(tags) {
 }
 
 /**
+ * @module utils
+ * @globalfunction resolveDeviceVariable
+ * @description Resolve the device variable from the preprocessed data for the given key
+ * @example
+ * resolveDeviceVariable("deviceId")
+ */
+
+global.resolveDeviceVariable = function (key) {
+  const resolvedDeviceData = Cypress.env('resolvedDeviceData');
+  if (!(key in resolvedDeviceData)) {
+    logger.error(`Key ${key} not found in preprocessed data.`);
+    return null;
+  }
+  logger.debug(`Resolved value for key ${key} is ${resolvedDeviceData[key]}`);
+  return resolvedDeviceData[key];
+};
+
+/**
  * FireLog class provides assertion methods with logging using Cypress's cy.log().
  * It wraps Cypress's assertion methods, allowing logging of messages for each assertion.
  * @class
@@ -666,6 +689,10 @@ class FireLog {
 
   isNotNull(value, message) {
     assert.isNotNull(value, message);
+  }
+
+  isUndefined(value, message) {
+    assert.isUndefined(value, message);
   }
 
   isTrue(value, message) {
@@ -715,6 +742,75 @@ class FireLog {
 
 const fireLog = new FireLog();
 global.fireLog = fireLog;
+
+/**
+ * @module utils
+ * @globalfunction resolveAtRuntime
+ * @description Return the function which is having logic to resolve the value for the passed input at runtime.
+ * @param {String || Array}
+ * @example
+ * resolveAtRuntime(["result.{{attribute}}", "result.styles.{{attribute}}"])
+ * resolveAtRuntime("manage_closedcaptions.set{{attribute.uppercaseFirstChar}}")
+ * resolveAtRuntime("value")
+ *
+ * @returns
+ * ['result.fontSize', 'result.styles.fontSize']
+ * "manage_closedcaptions.setFontSize"
+ * 1.5
+ */
+global.resolveAtRuntime = function (input) {
+  return function () {
+    const functions = {
+      uppercaseFirstChar: function (str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      },
+      lowercaseFirstChar: function (str) {
+        return str.charAt(0).toLowerCase() + str.slice(1);
+      },
+    };
+
+    // Function to check the occurence of the pattern and updating the actual value
+    function replacingPatternOccurenceWithValue(text) {
+      return text.replace(/{{(.*?)}}/g, (match, pattern) => {
+        let functionName;
+
+        // Separating the function name from the pattern, if it exists,.
+        if (pattern.includes('.')) {
+          functionName = pattern.split('.')[1];
+          pattern = pattern.split('.')[0];
+        }
+
+        // If a function name is present in the pattern, call the function with pattern content as input.
+        // Reading the pattern content from the runtime environment variable
+        if (functionName && functions.hasOwnProperty(functionName)) {
+          return functions[functionName](getEnvVariable('runtime')[pattern] || match);
+        } else {
+          return getEnvVariable('runtime')[pattern] || match;
+        }
+      });
+    }
+
+    if (typeof input === CONSTANTS.TYPE_STRING) {
+      // Returning the actual pattern content for each occurrence of "{{"
+      if (input.includes('{{')) {
+        return replacingPatternOccurenceWithValue(input);
+      }
+      // If input not having "{{", returning content from runtime environment variable.
+      else if (!input.includes('{{')) {
+        return getEnvVariable('runtime')[input] || input;
+      }
+    } else if (Array.isArray(input) && input.length > 0) {
+      // input is an array; iterating through each element, it updates the actual value for that pattern if there is an occurrence of "{{".
+      return input.map((element) => {
+        if (element.includes('{{')) {
+          return replacingPatternOccurenceWithValue(element);
+        }
+      });
+    } else {
+      logger.info(`Passed input - ${input} must be an array or a string.`);
+    }
+  };
+};
 
 module.exports = {
   replaceJsonStringWithEnvVar,

@@ -51,7 +51,7 @@ fireboltCalls object has two types as shown below.
    - method or event - Name of the API or Event, which is used to extract the response object from global list for content validation.
    - validationJsonPath - Represent the JSON path used to obtain a specific value.
    - context - Represent the data that needs to be stored in api/event object that helps to search specific object in a global list.
-   - expected - Represent the expected value used for validating against a firebolt api response.
+   - content - Represent the expected value used for validating against a firebolt api response.
    - expectingError - Determines whether we are performing result or error content validation.
    Ex:
    ``` 

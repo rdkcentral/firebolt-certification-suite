@@ -1601,140 +1601,152 @@
             }
         },
         "Lifecycle_Inactive": {
-            "Lifecycle 2.3.1 Close an app from foreground": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "1.2.2 & 3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": "1.1.2"
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.2.1",
-                                "1.2.2"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.3.1 Close an app from background": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "1.2.2 & 3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": "1.1.2"
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.2.1",
-                                "1.2.2"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.3.3 No impact on closing app from inactive state": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "1.2.2 & 3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": "1.1.2"
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.2.1",
-                                "1.2.2"
-                            ]
-                        }
-                    }
-                ]
-            }
+          "Lifecycle 2.3.1 Close an app from foreground": {
+            "req": [
+              {
+                "state": {
+                  "id": "1.2.2 & 3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": "1.1.2"
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.2.1", "1.2.2"]
+                }
+              },
+              {
+                "visible_check": {
+                    "id": "1.2.3"
+                }
+              }
+            ]
+          },
+          "Lifecycle 2.3.1 Close an app from background": {
+            "req": [
+              {
+                "state": {
+                  "id": "1.2.2 & 3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": "1.1.2"
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.2.1", "1.2.2"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "1.2.3"
+                }
+              }
+            ]
+          },
+          "Lifecycle 2.3.3 No impact on closing app from inactive state": {
+            "req": [
+              {
+                "state": {
+                  "id": "1.2.2 & 3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": "1.1.2"
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.2.1", "1.2.2"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "1.2.3"
+                }
+              }
+            ]
+          }
         },
         "Lifecycle_Foreground": {
-            "Lifecycle 2.2 Loading & Launching an App (initializing -> foreground)": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.3.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.2.1 Relaunch foreground app": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.3.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.2.5 App Launching another app": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.3.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            }
+          "Lifecycle 2.2 Loading & Launching an App (initializing -> foreground)": {
+            "req": [
+              {
+                "state": {
+                  "id": "3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.3.6", "1.3.6"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "1.3.2"
+                }
+              }
+            ]
+          },
+          "Lifecycle 2.2.1 Relaunch foreground app": {
+            "req": [
+              {
+                "state": {
+                  "id": "3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.3.6", "1.3.6"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "1.3.2"
+                }
+              }
+            ]
+          },
+          "Lifecycle 2.2.5 App Launching another app": {
+            "req": [
+              {
+                "state": {
+                  "id": "3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.3.6", "1.3.6"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "1.3.2"
+                }
+              }
+            ]
+          }
         },
         "Lifecycle_Initializing": {
             "Lifecycle 2.3.2 Cannot Close an app from initializing": {
@@ -2143,160 +2155,174 @@
             }
         },
         "Lifecycle_Background": {
-            "Lifecycle 2.4.2 Background an app from foreground": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.4.2 Background an app from inactive": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.4.3 Cannot Background app that is not loaded": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.4.1 Cannot Background a Backgrounded App": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.4.3 Cannot Background app in Unloading state": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.4.3 Cannot background app from suspended state": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.4.3 Should not Background app in initializing state": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            }
+          "Lifecycle 2.4.2 Background an app from foreground": {
+            "req": [
+              {
+                "state": {
+                  "id": "3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.4.6", "1.3.6"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "1.4.3"
+                }
+              }
+            ]
+          },
+          "Lifecycle 2.4.2 Background an app from inactive": {
+            "req": [
+              {
+                "state": {
+                  "id": "3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.4.6", "1.3.6"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "1.4.3"
+                }
+              }
+            ]
+          },
+          "Lifecycle 2.4.3 Cannot Background app that is not loaded": {
+            "req": [
+              {
+                "state": {
+                  "id": "3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.4.6", "1.3.6"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "1.4.3"
+                }
+              }
+            ]
+          },
+          "Lifecycle 2.4.1 Cannot Background a Backgrounded App": {
+            "req": [
+              {
+                "state": {
+                  "id": "3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.4.6", "1.3.6"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "1.4.3"
+                }
+              }
+            ]
+          },
+          "Lifecycle 2.4.3 Cannot Background app in Unloading state": {
+            "req": [
+              {
+                "state": {
+                  "id": "3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.4.6", "1.3.6"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "1.4.3"
+                }
+              }
+            ]
+          },
+          "Lifecycle 2.4.3 Cannot background app from suspended state": {
+            "req": [
+              {
+                "state": {
+                  "id": "3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.4.6", "1.3.6"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "1.4.3"
+                }
+              }
+            ]
+          },
+          "Lifecycle 2.4.3 Should not Background app in initializing state": {
+            "req": [
+              {
+                "state": {
+                  "id": "3.5"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": ["1.4.6", "1.3.6"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "1.4.3"
+                }
+              }
+            ]
+          }
         },
         "Lifecycle_Suspended": {
             "Lifecycle 1.6.1 App should subscribe to onSuspended listener regardless of capability": {
