@@ -434,12 +434,7 @@ Given(
         const action = parsedData.action;
         const expected = parsedData.expected;
 
-        let appId = null;
-        appId = !appId
-          ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-          : appId === CONSTANTS.FIRST_PARTY_APP
-            ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
-            : appId;
+        const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
 
         let params;
         if (app == CONSTANTS.FIRST_PARTY_APP) {
