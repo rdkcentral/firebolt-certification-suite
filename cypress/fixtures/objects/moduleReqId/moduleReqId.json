@@ -1616,7 +1616,7 @@
               },
               {
                 "event": {
-                  "id": "R*2.2.2 [onInactive event triggered]"
+                  "id": "R*2.2.2 [Platform MUST trigger 'onInactive' event]"
                 }
               },
               {
@@ -1640,7 +1640,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.2.2 [onInactive event triggered]"
+                    "id": "R*2.2.2 [Platform MUST trigger 'onInactive' event]"
                   }
                 },
                 {
@@ -1664,7 +1664,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.2.2 [onInactive event triggered]"
+                    "id": ""
                   }
                 },
                 {
@@ -1690,7 +1690,7 @@
               },
               {
                 "event": {
-                  "id": "R*2.3.6 [onForeground event triggered]"
+                  "id": ["R*2.3.6 [Platform MUST trigger 'onForeground' event]", "R*2.2.2 [Platform MUST trigger 'onInactive' event]"]
                 }
               },
               {
@@ -1714,7 +1714,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.3.6 [onForeground event triggered]"
+                    "id": ""
                   }
                 },
                 {
@@ -1738,7 +1738,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.3.6 [onForeground event triggered]"
+                    "id": "R*2.3.6 [Platform MUST trigger 'onForeground' event]"
                   }
                 },
                 {
@@ -2183,7 +2183,7 @@
               },
               {
                 "event": {
-                  "id": "R*2.4.6 [onBackground event triggered]"
+                  "id": "R*2.4.6 [Platform MUST trigger 'onBackground' event]"
                 }
               },
               {
@@ -2207,7 +2207,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.4.6 [onBackground event triggered]"
+                    "id": "R*2.4.6 [Platform MUST trigger 'onBackground' event]"
                   }
                 },
                 {
@@ -2231,7 +2231,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.4.6 [onBackground event triggered]"
+                    "id": ""
                   }
                 },
                 {
@@ -2255,7 +2255,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.4.6 [onBackground event triggered]"
+                    "id": ""
                   }
                 },
                 {
@@ -2279,7 +2279,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.4.6 [onBackground event triggered]"
+                    "id": ""
                   }
                 },
                 {
@@ -2303,7 +2303,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.4.6 [onBackground event triggered]"
+                    "id": ""
                   }
                 },
                 {
@@ -2327,7 +2327,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.4.6 [onBackground event triggered]"
+                    "id": ""
                   }
                 },
                 {
@@ -2353,7 +2353,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
                         }
                     }
                 ]
@@ -2372,7 +2372,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
                         }
                     }
                 ]
@@ -2391,7 +2391,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
                         }
                     }
                 ]
@@ -2410,7 +2410,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]
@@ -2429,7 +2429,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]
@@ -2448,7 +2448,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]
@@ -2467,7 +2467,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]
@@ -2486,7 +2486,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]
@@ -2505,7 +2505,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]
@@ -2524,7 +2524,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
                         }
                     }
                 ]
@@ -2543,7 +2543,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]
@@ -2562,7 +2562,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]
@@ -2581,7 +2581,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]
@@ -2600,7 +2600,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]
@@ -2619,7 +2619,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]
@@ -2638,7 +2638,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]
@@ -2657,7 +2657,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [onSuspended event triggered]"
+                            "id": ""
                         }
                     }
                 ]

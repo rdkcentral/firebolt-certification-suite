@@ -8,17 +8,17 @@
     "inactive": {
       "stateValidation": { "req": "R*4.6" },
       "historyValidation": { "req": "" },
-      "notificationValidation": { "req": "R*2.2.2 [onInactive event triggered]" }
+      "notificationValidation": { "req": "R*2.2.2 [Platform MUST trigger 'onInactive' event]" }
     },
     "foreground": {
       "stateValidation": { "req": "R*4.6" },
       "historyValidation": { "req": "" },
-      "notificationValidation": { "req": "R*2.3.6 [onForeground event triggered]" }
+      "notificationValidation": { "req": "R*2.3.6 [Platform MUST trigger 'onForeground' event]" }
     },
     "background": {
       "stateValidation": { "req": "R*4.6" },
       "historyValidation": { "req": "" },
-      "notificationValidation": { "req": "R*2.4.6 [onBackground event triggered]" }
+      "notificationValidation": { "req": "R*2.4.6 [Platform MUST trigger 'onBackground' event]" }
     },
     "unloading": {
       "stateValidation": { "req": "R*2.5.1 & R*2.5.2 & R*4.6" },
@@ -28,7 +28,7 @@
     "suspended": {
       "stateValidation": { "req": "R*4.6" },
       "historyValidation": { "req": "" },
-      "notificationValidation": { "req": "R*2.6.6 [onSuspended event triggered]" }
+      "notificationValidation": { "req": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]" }
     },
     "unloaded": {
       "stateValidation": { "req": "" },
