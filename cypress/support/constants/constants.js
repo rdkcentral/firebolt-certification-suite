@@ -140,7 +140,6 @@ module.exports = {
   FCS: 'fcs',
   FCS_MODULEREQID_PATH: 'cypress/fixtures/objects/moduleReqId/moduleReqId.json',
   FCS_SETRESPONSE_PATH: 'cypress/fixtures/setResponseData.json',
-  FCS_VALIDATION_JSON: 'fCSValidationjson',
   FIREBOLT: 'firebolt',
   FIREBOLTCALL: 'fireboltCall',
   FIREBOLTCALLS_FROM_CONFIGMODULE: 'cypress/fixtures/external/fireboltCalls/',
