@@ -25,7 +25,7 @@ Cypress.env(CONSTANTS.EVENT_RESPONSE_MAP, responseMap);
 
 const WEBSOCKET = 'WebSocket';
 const DEFAULT_WS_URL_PROTOCOL = 'ws://';
-const DEFAULT_WS_PORT = 8080;
+const DEFAULT_WS_PORT = 9998;
 const DEFAULT_WS_URL_PATH = 'jsonrpc';
 let fbRequestId = 0;
 let singletonInstance = null;
