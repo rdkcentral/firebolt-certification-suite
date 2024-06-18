@@ -371,6 +371,7 @@ module.exports = {
     SETAPIRESPONSE: 'setApiResponse',
     CLEAREVENTHANDLER: 'clearEventHandler',
     PERFORMANCETESTHANDLER: 'performanceTestHandler',
+    VISIBILITYSTATE: 'visibilityState',
     REGISTERPROVIDERHANDLER: 'registerProviderHandler',
   },
   TEST_TYPE: 'testType',
