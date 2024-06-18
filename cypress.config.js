@@ -70,6 +70,7 @@ const env = {
       [3840, 2160],
     ],
   },
+  fcaAppList: [],
 };
 
 module.exports = {

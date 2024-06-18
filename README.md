@@ -71,6 +71,7 @@ To execute the certification suite against any platform, the following setup mus
 | communicationMode                   | string  | 'SDK' or 'Transport'              | Set communicationMode as SDK/transport. Default mode is SDK                                                                                                                                                         |
 | performanceMetrics                  | boolean | true                              | Makes a call to platform to start/stop the recording of performance metrics if value is true                                                                                                                        |
 
+| fcaAppList                  | array | true                              | Holds the list of fca app identifiers |
 
 - Provide the specPattern mapping details. 
 Update the specHelperConfig.js with the specPattern mapping details.

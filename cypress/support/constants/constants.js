@@ -138,6 +138,7 @@ module.exports = {
     'Failed to parse error object from response while setting lifecycle state. Response received : ',
   FAILED_TO_SET_LIFECYCLE_STATE:
     'Failed to set lifecycle state due to the following error received from platform: ',
+  FCA_APP_LIST: 'fcaAppList',
   FCS: 'fcs',
   FCS_MODULEREQID_PATH: 'cypress/fixtures/objects/moduleReqId/moduleReqId.json',
   FCS_SETRESPONSE_PATH: 'cypress/fixtures/setResponseData.json',
