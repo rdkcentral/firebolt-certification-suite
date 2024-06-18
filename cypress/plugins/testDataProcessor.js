@@ -267,7 +267,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                     if (REGEXFORMATS[regexType]) {
                       parsedRegexExp = REGEXFORMATS[regexType];
                     } else {
-                      const regExp = new RegExp(regexType);
+                      const regExp = new RegExp(data.type);
                       parsedRegexExp = regExp;
                     }
                     return (data.type = parsedRegexExp.toString());
