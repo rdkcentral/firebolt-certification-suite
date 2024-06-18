@@ -150,7 +150,11 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
       );
 
       cy.log(`Call from ${appId}, method: ${method} params: ${JSON.stringify(param)}`);
-
+      if (Cypress.env('isRpcOnlyValidation')) {
+        cy.log(
+          `${method} response will be retrieved in subsequent steps and validated when the rpc-only methods are invoked. Proceeding to the next step.`
+        );
+      }
       // Adding additional details to created intent if any platform specific data is present in configModule.
       cy.runIntentAddon(CONSTANTS.TASK.CALLMETHOD, intentMessage).then((parsedIntent) => {
         const requestTopic = UTILS.getTopic(appId);
@@ -479,7 +483,7 @@ Given(
                 assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
               });
             }
-            cy.log(`Updated response of ${method}: ${JSON.stringify(response)}`);
+            cy.log(`${method} response from ${appId}: ${JSON.stringify(response)}`);
             if (typeof response == 'string') {
               response = JSON.parse(response);
             }
