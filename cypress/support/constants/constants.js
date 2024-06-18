@@ -344,8 +344,8 @@ module.exports = {
   SKIPCONTENTVALIDATION: 'skipContentValidation',
   SKIPPED: 'SKIPPED',
   SOURCE: 'source',
-  STATE_CONTENT_VALIDATION_REQ: 'Lifecycle state content validation ',
-  STATE_SCHEMA_VALIDATION_REQ: 'Lifecycle state schema validation ',
+  STATE_CONTENT_VALIDATION_REQ: ' Lifecycle state content validation ',
+  STATE_SCHEMA_VALIDATION_REQ: ' Lifecycle state schema validation ',
   STATIC_CONTENT_VALIDATION: 'staticContentValidation',
   STATUS_CODE: [0, 1, 2, 3],
   STAY: 'stay',
@@ -420,7 +420,7 @@ module.exports = {
   FCS_DEFAULTTESTDATA_PATH: 'cypress/fixtures/defaultTestData.json',
   ENV_SETUP_STATUS: 'environmentLaunched',
   APP_LAUNCH_STATUS: 'appLaunched',
-  VISIBILITYSTATE_VALIDATION_REQ: 'Lifecycle visibility state validation ',
+  VISIBILITYSTATE_VALIDATION_REQ: ' Lifecycle visibility state validation ',
   LIFECYCLE_VISIBILITYSTATE_SKIP_MESSAGE:
     'App is not reachable to fetch visibility state. Skipping Visibility state validation.',
   VISIBILITYSTATE_FAILURE_FIX_LOG:

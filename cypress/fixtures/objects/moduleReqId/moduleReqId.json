@@ -1616,7 +1616,7 @@
               },
               {
                 "event": {
-                  "id": "R*2.2.2 [Platform MUST trigger 'onInactive' event]"
+                  "id": "R*2.2.2 ['onInactive' event triggered]"
                 }
               },
               {
@@ -1640,7 +1640,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.2.2 [Platform MUST trigger 'onInactive' event]"
+                    "id": "R*2.2.2 ['onInactive' event triggered]"
                   }
                 },
                 {
@@ -1664,7 +1664,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.2.2 [Platform MUST trigger 'onInactive' event]"
+                    "id": "R*2.2.2 ['onInactive' event triggered]"
                   }
                 },
                 {
@@ -1690,7 +1690,7 @@
               },
               {
                 "event": {
-                  "id": ["R*2.3.6 [Platform MUST trigger 'onForeground' event]", "R*2.2.2 [Platform MUST trigger 'onInactive' event]"]
+                  "id": ["R*2.3.6 ['onForeground' event triggered]", "R*2.2.2 ['onInactive' event triggered]"]
                 }
               },
               {
@@ -1714,7 +1714,7 @@
                 },
                 {
                   "event": {
-                    "id": ["R*2.3.6 [Platform MUST trigger 'onForeground' event]", "R*2.2.2 [Platform MUST trigger 'onInactive' event]"]
+                    "id": ["R*2.3.6 ['onForeground' event triggered]", "R*2.2.2 ['onInactive' event triggered]"]
                   }
                 },
                 {
@@ -1738,7 +1738,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.3.6 [Platform MUST trigger 'onForeground' event]"
+                    "id": "R*2.3.6 ['onForeground' event triggered]"
                   }
                 },
                 {
@@ -2173,7 +2173,9 @@
             "req": [
               {
                 "state": {
-                  "id": "R*4.6"
+                  "id": 
+                    "R*2.1.1, R*2.1.2"
+                
                 }
               },
               {
@@ -2183,7 +2185,7 @@
               },
               {
                 "event": {
-                  "id": "R*2.4.6 [Platform MUST trigger 'onBackground' event]"
+                  "id": "R*2.4.6 ['onBackground' event triggered]"
                 }
               },
               {
@@ -2207,7 +2209,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.4.6 [Platform MUST trigger 'onBackground' event]"
+                    "id": "R*2.4.6 ['onBackground' event triggered]"
                   }
                 },
                 {
@@ -2231,7 +2233,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.4.6 [Platform MUST trigger 'onBackground' event]"
+                    "id": "R*2.4.6 ['onBackground' event triggered]"
                   }
                 },
                 {
@@ -2255,7 +2257,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.4.6 [Platform MUST trigger 'onBackground' event]"
+                    "id": "R*2.4.6 ['onBackground' event triggered]"
                   }
                 },
                 {
@@ -2279,7 +2281,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.4.6 [Platform MUST trigger 'onBackground' event]"
+                    "id": "R*2.4.6 ['onBackground' event triggered]"
                   }
                 },
                 {
@@ -2303,7 +2305,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.4.6 [Platform MUST trigger 'onBackground' event]"
+                    "id": "R*2.4.6 ['onBackground' event triggered]"
                   }
                 },
                 {
@@ -2327,7 +2329,7 @@
                 },
                 {
                   "event": {
-                    "id": "R*2.4.6 [Platform MUST trigger 'onBackground' event]"
+                    "id": "R*2.4.6 ['onBackground' event triggered]"
                   }
                 },
                 {
@@ -2353,7 +2355,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2372,7 +2374,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2391,7 +2393,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2410,7 +2412,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2429,7 +2431,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2448,7 +2450,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2467,7 +2469,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2486,7 +2488,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2505,7 +2507,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2524,7 +2526,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2543,7 +2545,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2562,7 +2564,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2581,7 +2583,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2600,7 +2602,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2619,7 +2621,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2638,7 +2640,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
@@ -2657,7 +2659,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.6.6 [Platform MUST trigger 'onSuspended' event]"
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]

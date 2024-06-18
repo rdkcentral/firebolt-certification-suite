@@ -97,13 +97,14 @@ Cypress.Commands.add('validateLifecycleState', (state, appId) => {
         }
         cy.log(CONSTANTS.APP_RESPONSE + response);
         // Perform schema and content validation of state response against appObject state
-        let pretext = CONSTANTS.STATE_SCHEMA_VALIDATION_REQ + lifecycleStateRequirementId.state.id;
-        UTILS.assertWithRequirementLogs(
-          pretext,
-          JSON.parse(response).report.schemaResult.status,
-          CONSTANTS.PASS
-        );
-        pretext = CONSTANTS.STATE_CONTENT_VALIDATION_REQ + lifecycleStateRequirementId.state.id;
+        let pretext = lifecycleStateRequirementId.state.id + CONSTANTS.STATE_SCHEMA_VALIDATION_REQ;
+        if (JSON.parse(response).report.schemaResult.status == CONSTANTS.PASS) {
+          cy.log(pretext + ' : ' + CONSTANTS.PASS);
+        } else {
+          fireLog.assert(false, pretext + ' : ' + CONSTANTS.FAIL);
+        }
+
+        pretext = lifecycleStateRequirementId.state.id + CONSTANTS.STATE_CONTENT_VALIDATION_REQ;
         UTILS.assertWithRequirementLogs(
           pretext,
           JSON.parse(response).report.result,
@@ -214,27 +215,19 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
           (isEventsExpected == false && appHistoryCount == 0) ||
           state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING
         ) {
-          const updatedRequirement = lifecycleEventRequirementId?.event?.id.replace(
-            'trigger',
-            'not trigger'
-          );
-          cy.log(updatedRequirement + ' : ' + CONSTANTS.PASS);
+          cy.log(CONSTANTS.PLATFORM_NOT_TRIGGER_EVENT + ' : ' + CONSTANTS.PASS);
 
           // If events are not expected but received
         } else if (isEventsExpected == false && appHistoryCount > 0) {
-          const updatedRequirement = lifecycleEventRequirementId?.event?.id.replace(
-            'trigger',
-            'not trigger'
-          );
-          fireLog.assert(false, updatedRequirement + ' : ' + CONSTANTS.FAIL);
+          fireLog.assert(false, CONSTANTS.PLATFORM_NOT_TRIGGER_EVENT + ' : ' + CONSTANTS.FAIL);
         } else {
           // If events are expected and received
           if (isEventsExpected == true && appHistoryCount > 0) {
-            cy.log(lifecycleEventRequirementId?.event?.id + ' : ' + CONSTANTS.PASS);
+            cy.log(CONSTANTS.PLATFORM_TRIGGER_EVENT + ' : ' + CONSTANTS.PASS);
 
             // If events are expected and not received
           } else if (isEventsExpected == true && appHistoryCount == 0) {
-            fireLog.assert(false, lifecycleEventRequirementId?.event?.id + ' : ' + CONSTANTS.FAIL);
+            fireLog.assert(false, CONSTANTS.PLATFORM_TRIGGER_EVENT + ' : ' + CONSTANTS.FAIL);
           }
           const eventId = lifecycleEventRequirementId?.event?.id;
           for (let eventIndex = 1; eventIndex <= appHistoryCount; eventIndex++) {
@@ -618,7 +611,7 @@ function validateVisibilityState(state) {
         }
 
         const pretext =
-          CONSTANTS.VISIBILITYSTATE_VALIDATION_REQ + lifecycleStateRequirementId.visible_check.id;
+          lifecycleStateRequirementId.visible_check.id + CONSTANTS.VISIBILITYSTATE_VALIDATION_REQ;
         // checking if actual value is different from the default value
         if (visibilityState[state] != result.report) {
           // log to print a reason for failure and how to fix it
