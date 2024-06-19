@@ -19,7 +19,7 @@ import { Given } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
 const _ = require('lodash');
 import { apiObject, eventObject } from '../appObjectConfigs';
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module fireboltCalls
@@ -47,7 +47,9 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
         action: action,
       };
 
-      cy.log('Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params));
+      fireLog.info(
+        'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params)
+      );
       cy.sendMessagetoPlatforms(requestMap).then((response) => {
         if (response && typeof response == CONSTANTS.TYPE_OBJECT) {
           // If error and the error message having 'Method not found' or 'Method not Implemented' mark the testcase as undefined.
@@ -60,9 +62,11 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
             if (UTILS.getEnvVariable(CONSTANTS.CERTIFICATION) == true) {
               assert(false, `${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${method}`);
             } else {
-              cy.log(`NotSupported: ${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${method}`).then(() => {
-                throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
-              });
+              fireLog
+                .info(`NotSupported: ${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${method}`)
+                .then(() => {
+                  throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+                });
             }
           }
 
@@ -71,7 +75,7 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
             const dataToBeCensored = _.cloneDeep(response);
             // Call the 'censorData' command to hide sensitive data
             cy.censorData(method, dataToBeCensored).then((maskedResult) => {
-              cy.log(`Response from Firebolt platform: ${JSON.stringify(maskedResult)}`);
+              fireLog.info(`Response from Firebolt platform: ${JSON.stringify(maskedResult)}`);
             });
             // If event and params are not supported setting isScenarioExempted as true for further validation.
             if (UTILS.isScenarioExempted(method, params)) {
@@ -89,7 +93,7 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
             UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
           });
         } else {
-          cy.log(`${CONSTANTS.PLATFORM_INVALID_RESPONSE_LOG} - ${response}`);
+          fireLog.info(`${CONSTANTS.PLATFORM_INVALID_RESPONSE_LOG} - ${response}`);
         }
       });
     });
@@ -148,7 +152,7 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
         additionalParams
       );
 
-      cy.log(`Call from ${appId}, method: ${method} params: ${JSON.stringify(param)}`);
+      fireLog.info(`Call from ${appId}, method: ${method} params: ${JSON.stringify(param)}`);
 
       // Adding additional details to created intent if any platform specific data is present in configModule.
       cy.runIntentAddon(CONSTANTS.TASK.CALLMETHOD, intentMessage).then((parsedIntent) => {
@@ -168,7 +172,7 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
             // Call the 'censorData' command to hide sensitive data
             cy.censorData(method, dataToBeCensored).then((maskedResult) => {
               const responseType = result.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
-              cy.log(`Response from ${appId}: ${JSON.stringify(maskedResult[responseType])}`);
+              fireLog.info(`Response from ${appId}: ${JSON.stringify(maskedResult[responseType])}`);
             });
 
             // If method and params are not supported setting isScenarioExempted as true for further validation.
@@ -240,7 +244,7 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
         additionalParams
       );
 
-      cy.log(
+      fireLog.info(
         `Registering for the ${event} event using ${appId} with params : ${JSON.stringify(param)}`
       );
 
@@ -254,7 +258,7 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
             assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
           }
           result = JSON.parse(result);
-          cy.log(`Response from ${appId}: ${JSON.stringify(result.result)}`);
+          fireLog.info(`Response from ${appId}: ${JSON.stringify(result.result)}`);
           if (result && result.result && result.result.hasOwnProperty(CONSTANTS.LISTENING)) {
             const eventResponse = {
               eventListenerId: result.result.event + '-' + result.id,
@@ -315,7 +319,7 @@ Given(/1st party app registers for the '(.+)' event using the '(.+)' API$/, asyn
         // To Do :debug event_param issue by passing isrequired as false for getEnvVariable,need to debug further
         requestMap.params = UTILS.getEnvVariable(CONSTANTS.EVENT_PARAM, false);
       }
-      cy.log(
+      fireLog.info(
         `Registering for the ${event} event using 1st party App with params : ${JSON.stringify(
           params
         )}`
@@ -334,9 +338,11 @@ Given(/1st party app registers for the '(.+)' event using the '(.+)' API$/, asyn
             if (UTILS.getEnvVariable(CONSTANTS.CERTIFICATION) == true) {
               assert(false, `${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${method}`);
             } else {
-              cy.log(`NotSupported: ${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${method}`).then(() => {
-                throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
-              });
+              fireLog
+                .assert(`NotSupported: ${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${method}`)
+                .then(() => {
+                  throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+                });
             }
           } else if (response && response.error && response.error.message) {
             assert(
@@ -346,7 +352,7 @@ Given(/1st party app registers for the '(.+)' event using the '(.+)' API$/, asyn
           }
 
           cy.updateResponseForFCS(event, params, response).then((updatedResponse) => {
-            cy.log('Response from Firebolt platform: ' + JSON.stringify(response));
+            fireLog.info('Response from Firebolt platform: ' + JSON.stringify(response));
             // If event and params are not supported setting isScenarioExempted as true for further validation.
             if (UTILS.isScenarioExempted(event, params)) {
               Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
@@ -364,7 +370,7 @@ Given(/1st party app registers for the '(.+)' event using the '(.+)' API$/, asyn
             UTILS.getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).push(eventAppObject);
           });
         } else {
-          cy.log(`${CONSTANTS.PLATFORM_INVALID_RESPONSE_LOG} - ${response}`);
+          fireLog.info(`${CONSTANTS.PLATFORM_INVALID_RESPONSE_LOG} - ${response}`);
         }
       });
     });
@@ -396,9 +402,11 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
           params: item,
         };
 
-        cy.log('Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params));
+        fireLog.info(
+          'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params)
+        );
         cy.sendMessagetoPlatforms(requestMap).then((result) => {
-          cy.log('Response from Firebolt platform: ' + JSON.stringify(result));
+          fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
         });
       } else {
         const appId = item.appId ? item.appId : Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID);
@@ -409,7 +417,7 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
 
         // Sending message to 3rd party app.
         cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
-          cy.log(
+          fireLog.info(
             `Response from ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(result)}`
           );
         });
@@ -427,7 +435,7 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
  * And User triggers event with value as ' DEVICE_ONHDCPCHANGED_EVENTS'
  */
 Given(/User triggers event with value as '(.+)'/, (key) => {
-  cy.log(CONSTANTS.STEP_DEFINITION_NEEDS_TO_IMPLEMENT).then(() => {
+  fireLog.info(CONSTANTS.STEP_DEFINITION_NEEDS_TO_IMPLEMENT).then(() => {
     throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
   });
 });

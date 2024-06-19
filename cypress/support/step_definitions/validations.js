@@ -213,6 +213,9 @@ Given(
                         case CONSTANTS.CUSTOM:
                           cy.customValidation(object, methodOrEventObject);
                           break;
+                        case CONSTANTS.UNDEFINED:
+                          cy.undefinedValidation(object, methodOrEventObject, validationType);
+                          break;
                         default:
                           assert(false, 'Unsupported validation type');
                           break;

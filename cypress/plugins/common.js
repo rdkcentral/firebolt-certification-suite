@@ -18,7 +18,7 @@
 const fs = require('fs');
 const testDataProcessor = require('./testDataProcessor');
 const logger = require('../support/Logger')('common.js');
-const { generateFirboltCallsIndexFile } = require('./pluginUtils');
+const { generateIndexFile, preprocessDeviceData } = require('./pluginUtils');
 const CONSTANTS = require('../support/constants/constants');
 
 // If "genericSupport" is set to a falsy value (false, null, etc), take no further action. Simply "return"
@@ -35,8 +35,12 @@ function genericSupport(config) {
         return acc;
       }, {});
 
-    generateFirboltCallsIndexFile(CONSTANTS.FIREBOLTCALLS_FROM_FCS);
-    generateFirboltCallsIndexFile(CONSTANTS.FIREBOLTCALLS_FROM_CONFIGMODULE);
+    // fireboltCalls JSON
+    generateIndexFile(CONSTANTS.FIREBOLTCALLS_FROM_FCS, 'fireboltCalls');
+    generateIndexFile(CONSTANTS.FIREBOLTCALLS_FROM_CONFIGMODULE, 'fireboltCalls');
+    // fireboltMocks JSON
+    generateIndexFile(CONSTANTS.FIREBOLTMOCK_FROM_FCS, 'fireboltMocks');
+    generateIndexFile(CONSTANTS.FIREBOLTMOCK_FROM_CONFIGMODULE, 'fireboltMocks');
 
     // The sequence of override - the default config in the config.js file, overriden by supportConfig.json and then by the command line arguments.
     config.env = {
@@ -44,7 +48,8 @@ function genericSupport(config) {
       ...data,
       ...commandLineArgs,
     };
-
+    // To read device data JSON
+    preprocessDeviceData(config);
     const testDataEnv = testDataProcessor.testDataProcessor(config.env);
     Object.assign(config.env, testDataEnv);
 
