@@ -658,6 +658,12 @@ global.resolveDeviceVariable = function (key) {
  * fireLog.isTrue(isTrueValue, "True message");
  * fireLog.isFalse(isFalseValue, "False message");
  * fireLog.deepEqual(actual, expected, "deepEqual message");
+ *
+ * fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
+ * fireLog.info() is being used to log the message without any assertion.
+ * Removing cy.log and replacing with fireLog.info() to get a cleaner report.
+ *
+ *
  */
 
 class FireLog {
@@ -673,6 +679,7 @@ class FireLog {
         const originalMethod = this[method];
         this[method] = function (...args) {
           const message = args[args.length - 1];
+
           return cy.log(message).then(() => {
             return originalMethod.apply(this, args);
           });
@@ -738,6 +745,8 @@ class FireLog {
   assert(expression, message) {
     assert(expression, message);
   }
+
+  info(message) {}
 }
 
 const fireLog = new FireLog();
