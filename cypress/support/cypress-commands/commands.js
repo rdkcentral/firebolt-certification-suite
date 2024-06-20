@@ -700,7 +700,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     cy.sendMessagetoPlatforms(parsedIntent).then((result) => {
       cy.log('Response from Firebolt platform: ' + JSON.stringify(result));
 
-      if (UTILS.getEnvVariable(CONSTANTS.FCA_APP_LIST).includes(appId)) {
+      if (
+        UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) === appId ||
+        UTILS.getEnvVariable(CONSTANTS.FCA_APP_LIST).find(
+          (ele) => UTILS.getEnvVariable(ele, false) === appId
+        )
+      ) {
         // checking the connection status of a third-party app.
         cy.thirdPartyAppHealthcheck(requestTopic, responseTopic).then((healthCheckResponse) => {
           if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
