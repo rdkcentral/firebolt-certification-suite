@@ -373,6 +373,7 @@ module.exports = {
     CLEAREVENTHANDLER: 'clearEventHandler',
     PERFORMANCETESTHANDLER: 'performanceTestHandler',
     VISIBILITYSTATE: 'visibilityState',
+    REGISTERPROVIDERHANDLER: 'registerProviderHandler',
   },
   TEST_TYPE: 'testType',
   THIRD_PARTY_APP: '3rd party app',
