@@ -313,7 +313,30 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
         : app;
   const isEventsExpected = condition == CONSTANTS.STAY ? false : true;
   const appObject = UTILS.getEnvVariable(appId);
-  cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
+  const scenarioName = cy.state().test.title;
+  const moduleReqIdJson = Cypress.env(CONSTANTS.MODULEREQIDJSON);
+  const featureFileName = cy.state().test.parent.title;
+  const scenarioList = moduleReqIdJson.scenarioNames[featureFileName];
+  const validationObject = scenarioList[scenarioName].validationObject;
+  if (validationObject) {
+    if (Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON).hasOwnProperty(validationObject)) {
+      if (
+        Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject].data[0].type ==
+        'custom'
+      ) {
+        const validationObjectData = Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[
+          validationObject
+        ].data[0];
+        cy.customValidation(validationObjectData).then((response) => {
+          cy.log("Response from configModule for customValidation >>> ")
+        })
+      } else {
+        assert(false, `Expected validationObject to be of "custom" type. Current value : ${Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject].data[0].type}`);
+      }
+    }
+  } else {
+    cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
+  }
   cy.validateLifecycleHistoryAndEvents(
     appObject.getAppObjectState().state,
     appId,

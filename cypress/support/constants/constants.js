@@ -52,6 +52,7 @@ module.exports = {
   CERTIFICATION: 'certification',
   COMBINEDFIREBOLTCALLS: 'combinedFireboltCalls',
   COMBINEDFIREBOLTMOCKS: 'combinedFireboltMocks',
+  COMBINEVALIDATIONOBJECTSJSON: 'combineValidationObjectsJson',
   COMMUNICATION_MODE: 'communicationMode',
   CONFIG: 'CONFIG',
   CONFIG_MODULE_SETRESPONSE_PATH: 'cypress/fixtures/external/setResponseData.json',
