@@ -195,7 +195,7 @@ Cypress.Commands.add('getDeviceVersion', () => {
         throw 'Obtained response is null|undefined';
       }
     } catch (error) {
-      cy.log('Failed to fetch device.version', error);
+      fireLog.info('Failed to fetch device.version', error);
     }
   });
 });
@@ -315,7 +315,7 @@ Cypress.Commands.add('getCapabilities', () => {
       Cypress.env('capabilitiesList', capabilityObject);
     }
   } catch (error) {
-    cy.log('Error while getting capabilities from firebolt config: ', error);
+    fireLog.info('Error while getting capabilities from firebolt config: ', error);
   }
 });
 
@@ -416,7 +416,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     firstParty = beforeOperation.firstParty;
   } else {
     firstParty = false;
-    cy.log(
+    fireLog.info(
       'firstParty property is missing in beforeOperation block, so using default as firstParty=false'
     );
   }
@@ -431,9 +431,9 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
             action: action,
           };
 
-          cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
+          fireLog.info(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
           cy.sendMessagetoPlatforms(requestMap).then((result) => {
-            cy.log('Response from 1st party App: ' + JSON.stringify(result));
+            fireLog.info('Response from 1st party App: ' + JSON.stringify(result));
           });
         } else {
           const communicationMode = UTILS.getCommunicationMode();
@@ -457,10 +457,10 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
           );
 
           // Sending message to 3rd party app.
-          cy.log(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
+          fireLog.info(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
           cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
             result = JSON.parse(result);
-            cy.log(
+            fireLog.info(
               `Response from 3rd party App ${Cypress.env(
                 CONSTANTS.THIRD_PARTY_APP_ID
               )}: ${JSON.stringify(result)}`
@@ -477,9 +477,9 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
           method: method,
           params: parsedData,
         };
-        cy.log(`Set mock call to 1st party App: ${JSON.stringify(requestMap)} `);
+        fireLog.info(`Set mock call to 1st party App: ${JSON.stringify(requestMap)} `);
         cy.sendMessagetoPlatforms(requestMap).then((result) => {
-          cy.log('Response from 1st party App: ' + JSON.stringify(result));
+          fireLog.info('Response from 1st party App: ' + JSON.stringify(result));
         });
       } else {
         const params = {
@@ -506,7 +506,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
         cy.log(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
         cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
           result = JSON.parse(result);
-          cy.log(
+          fireLog.info(
             `Response from 3rd party App ${Cypress.env(
               CONSTANTS.THIRD_PARTY_APP_ID
             )}: ${JSON.stringify(result)}`
@@ -523,7 +523,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
       params: scenarioName,
     };
 
-    cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
+    fireLog.info(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
@@ -567,7 +567,9 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
     },
     task: CONSTANTS.TASK.PERFORMANCETESTHANDLER,
   };
-  cy.log('Request map to send intent to performance test handler: ' + JSON.stringify(requestMap));
+  fireLog.info(
+    'Request map to send intent to performance test handler: ' + JSON.stringify(requestMap)
+  );
   // Sending message to the platform to call performance test handler
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     if (result?.success) {
@@ -622,7 +624,7 @@ Cypress.Commands.add('censorData', (method, response) => {
     });
   } catch (err) {
     // Log an error if the censorData JSON file is missing.
-    cy.log('Error occurred while loading censorData: ', err);
+    fireLog.info('Error occurred while loading censorData: ', err);
   }
 });
 
@@ -693,9 +695,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
   const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
 
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
-    cy.log('Discovery launch intent: ' + JSON.stringify(parsedIntent));
+    fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
     cy.sendMessagetoPlatforms(parsedIntent).then((result) => {
-      cy.log('Response from Firebolt platform: ' + JSON.stringify(result));
+      fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
 
       // checking the connection status of a third-party app.
       cy.thirdPartyAppHealthcheck(requestTopic, responseTopic).then((healthCheckResponse) => {
