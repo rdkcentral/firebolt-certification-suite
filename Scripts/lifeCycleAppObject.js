@@ -97,8 +97,11 @@ class appConfig {
             this.history.push(this.state);
             logger.info('New appState pushed to history: ' + newState);
           }
-          if (!stateTransition.includes(newState)) {
+          if (!stateTransition.includes(newState) && currentState.state != newState) {
             cy.log('Requested state transition for application is not supported');
+            this.state = currentState;
+          }
+          if (currentState.state == newState) {
             this.state = currentState;
           }
         }
