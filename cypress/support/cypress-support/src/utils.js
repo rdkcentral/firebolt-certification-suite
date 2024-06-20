@@ -795,7 +795,7 @@ global.resolveAtRuntime = function (input) {
       }
       // If input not having "{{", returning content from runtime environment variable.
       else if (!input.includes('{{')) {
-        return getEnvVariable('runtime')[input] || input;
+        return getEnvVariable('runtime')[input] !== undefined? getEnvVariable('runtime')[input] : input;
       }
     } else if (Array.isArray(input) && input.length > 0) {
       // input is an array; iterating through each element, it updates the actual value for that pattern if there is an occurrence of "{{".
@@ -803,6 +803,7 @@ global.resolveAtRuntime = function (input) {
         if (element.includes('{{')) {
           return replacingPatternOccurenceWithValue(element);
         }
+        return element;
       });
     } else {
       logger.info(`Passed input - ${input} must be an array or a string.`);

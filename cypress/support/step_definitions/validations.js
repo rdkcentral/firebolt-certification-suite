@@ -390,3 +390,208 @@ Given(
     });
   }
 );
+
+
+//'<SDK>' platform validates '<APP_ID>' '<FB_CALL_KEY>' '(get|set)' API response (as '<ERROR>')
+
+/**
+ * @module validations
+ * @function And '(.+)' platform validates '(.+)' ('(.+)')? (get|set) API response(?: as '(.+)')?
+ * @description Performing a validation against the source of truth for the given API response
+ * @param {String} sdk - name of the sdk.
+ * @param {String} appId - The object was retrieved by using the appId.
+ * @param {String} fireboltCallKey - key name passed to look for firebolt call object in fireboltCallData Json.
+ * @param {String} methodType - Determines which method doing content validation Ex: set or get
+ * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS'
+ * @example
+ * And 'Firebolt' platform validates '1st party app' 'CLOSEDCAPTION_SETTINGS' get API response
+ * And 'Firebolt' platform validates '1st party app' 'CLOSEDCAPTION_SETTINGS' set API response
+ * And 'Firebolt' platform validates '3rd party app' 'CLOSEDCAPTION_SETTINGS' get API response
+ * And 'Firebolt' platform validates '1st party app' set API response
+ * And 'Firebolt' platform validates '1st party app' 'CLOSEDCAPTION_SETTINGS' set API response as 'INVALID_TYPE_PARAMS'
+ */
+// TODO: can we make appId as optional and fireboltCallKey as optional
+Given(
+  /'(.+)' platform validates '([^']*)'(?: '([^']*)')? (get|set) API response(?: as '(.+)')?$/,
+  async (sdk, appId, fireboltCallKey, methodType, errorContent) => {
+    if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
+      let fireboltCallObject;
+      appId = !appId
+        ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+        : appId === CONSTANTS.FIRST_PARTY_APP
+          ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
+          : appId;
+      const context = {};
+      const expectingError = errorContent ? errorContent : null;
+
+      // When fireboltCall object key passed fetching the object from the fireboltCalls data else reading it from environment variable
+      if (fireboltCallKey) {
+        cy.getFireboltData(fireboltCallKey).then((fireboltData) => {
+          fireboltCallObject = fireboltData;
+        });
+      } else {
+        fireboltCallObject = UTILS.getEnvVariable('runtime').fireboltCall;
+      }
+
+      cy.then(() => {
+        let method =
+          methodType === 'set'
+            ? typeof fireboltCallObject.setMethod == CONSTANTS.TYPE_FUNCTION
+              ? fireboltCallObject.setMethod()
+              : fireboltCallObject.setMethod
+            : typeof fireboltCallObject.method == CONSTANTS.TYPE_FUNCTION
+              ? fireboltCallObject.method()
+              : fireboltCallObject.method;
+        let validationJsonPath =
+          methodType === 'set'
+            ? typeof fireboltCallObject.setValidationJsonPath == CONSTANTS.TYPE_FUNCTION
+              ? fireboltCallObject.setValidationJsonPath()
+              : fireboltCallObject.setValidationJsonPath
+            : typeof fireboltCallObject.validationJsonPath == CONSTANTS.TYPE_FUNCTION
+              ? fireboltCallObject.validationJsonPath()
+              : fireboltCallObject.validationJsonPath;
+        let contentObject =
+          methodType === 'set'
+            ? resolveContentObject(fireboltCallObject.setContent)
+            : resolveContentObject(fireboltCallObject.content);
+
+        method = method.includes('_') ? method.split('_')[1] : method;
+
+        // Fetching the object from the global list.
+        const apiObject = UTILS.getApiOrEventObjectFromGlobalList(method, context, appId);
+        const param = apiObject.params;
+
+        // Function to do error null check, schema validation check and event listerner response checks
+        cy.validateResponseErrorAndSchemaResult(apiObject, CONSTANTS.METHOD).then(() => {
+          // If response of the method is not supported, checks in the not supported list for that method name, if it is present then pass else mark it as fail
+          // TODO: Need to add error content validation
+          if (
+            !Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION) &&
+            (UTILS.isScenarioExempted(method, param) || expectingError)
+          ) {
+            let errorExpected;
+
+            // If the expected error is false, we set "exceptionErrorObject" to the errorExpected variable, which will be used to retrieve the error content object based on the exception method type.
+            expectingError === true
+              ? (errorExpected = contentObject)
+              : (errorExpected = CONSTANTS.EXCEPTION_ERROR_OBJECT);
+
+            cy.validateErrorObject(method, errorExpected, CONSTANTS.METHOD, context, appId, param).then(
+              () => {
+                return true;
+              }
+            );
+          } else if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
+            try {
+              if (contentObject && contentObject.data) {
+                contentObject.data.forEach((object) => {
+                  if (object.validations) {
+                    const scenario = object.type;
+                    const methodResponse = apiObject?.response ? apiObject.response : null;
+
+                    if (validationJsonPath && Array.isArray(validationJsonPath)) {
+                      let validationPath = validationJsonPath.find((path) => {
+                        if (
+                          path
+                            .split('.')
+                            .reduce((acc, part) => acc && acc[part], methodResponse) !== undefined
+                        ) {
+                          return path;
+                        }
+                      });
+                      validationPath
+                        ? (validationJsonPath = validationPath)
+                        : fireLog.assert(
+                            false,
+                            'Could not find the valid validation path from the validationJsonPath list'
+                          );
+                    }
+
+                    switch (scenario) {
+                      case CONSTANTS.REGEX:
+                        cy.regExValidation(
+                          method,
+                          object.validations[0].type,
+                          validationJsonPath,
+                          methodResponse
+                        );
+                        break;
+                      case CONSTANTS.MISC:
+                        cy.miscellaneousValidation(method, object.validations[0], apiObject);
+                        break;
+                      case CONSTANTS.DECODE:
+                        const decodeType = object.specialCase;
+                        const responseForDecodeValidation = methodResponse?.result
+                          ? methodResponse.result
+                          : null;
+
+                        cy.decodeValidation(
+                          method,
+                          decodeType,
+                          responseForDecodeValidation,
+                          object.validations[0],
+                          null
+                        );
+                        break;
+                      case CONSTANTS.FIXTURE:
+                        cy.validateContent(
+                          method,
+                          context,
+                          validationJsonPath,
+                          object.validations[0].type,
+                          CONSTANTS.METHOD,
+                          appId
+                        );
+                        break;
+                      case CONSTANTS.CUSTOM:
+                        cy.customValidation(object, apiObject);
+                        break;
+                      case CONSTANTS.UNDEFINED:
+                        cy.undefinedValidation(object, apiObject, CONSTANTS.METHOD);
+                        break;
+                      default:
+                        assert(false, 'Unsupported validation type');
+                        break;
+                    }
+                  }
+                });
+              } else {
+                cy.validateContent(
+                  method,
+                  context,
+                  validationJsonPath,
+                  contentObject,
+                  CONSTANTS.METHOD,
+                  appId
+                );
+              }
+            } catch (error) {
+              assert(false, `Unable to validate the response: ${error}`);
+            }
+          } else {
+            cy.log('Content validation is skipped');
+          }
+        });
+      });
+    } else {
+      assert(false, `${sdk} SDK not Supported`);
+    }
+
+    // A Function that recursively check each fields and invokes if it's a function within an array or object.
+    function resolveContentObject(input) {
+      if (Array.isArray(input)) {
+        return input.map((item) => resolveContentObject(item));
+      } else if (typeof input == CONSTANTS.TYPE_OBJECT && input !== null) {
+        for (const key in input) {
+          if (Object.hasOwnProperty.call(input, key)) {
+            input[key] = resolveContentObject(input[key]);
+          }
+        }
+        return input;
+      } else if (typeof input === CONSTANTS.TYPE_FUNCTION) {
+        return input();
+      }
+      return input;
+    }
+  }
+);
