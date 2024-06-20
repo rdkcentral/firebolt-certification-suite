@@ -61,6 +61,15 @@ const env = {
   generateLocalReport: true,
   loggerLevel: 'debug',
   testSuite: '',
+  visibilityState: { foreground: 'visible', background: 'visible', inactive: 'hidden' },
+  defaultTestData: {
+    apiVersion: '1.0.0',
+    deviceResolution: [
+      [1280, 720],
+      [1920, 1080],
+      [3840, 2160],
+    ],
+  },
 };
 
 module.exports = {
