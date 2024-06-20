@@ -328,10 +328,13 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
           validationObject
         ].data[0];
         cy.customValidation(validationObjectData).then((response) => {
-          cy.log("Response from configModule for customValidation >>> ")
-        })
+          cy.log('Response from configModule for customValidation ');
+        });
       } else {
-        assert(false, `Expected validationObject to be of "custom" type. Current value : ${Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject].data[0].type}`);
+        assert(
+          false,
+          `Expected validationObject to be of "custom" type. Current value : ${Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject].data[0].type}`
+        );
       }
     }
   } else {
