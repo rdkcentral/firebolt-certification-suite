@@ -410,7 +410,6 @@ Given(
  * And 'Firebolt' platform validates '1st party app' set API response
  * And 'Firebolt' platform validates '1st party app' 'CLOSEDCAPTION_SETTINGS' set API response as 'INVALID_TYPE_PARAMS'
  */
-// TODO: can we make appId as optional and fireboltCallKey as optional
 Given(
   /'(.+)' platform validates '([^']*)'(?: '([^']*)')? (get|set) API response(?: as '(.+)')?$/,
   async (sdk, appId, fireboltCallKey, methodType, errorContent) => {
@@ -422,7 +421,7 @@ Given(
           ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
           : appId;
       const context = {};
-      const expectingError = errorContent ? errorContent : null;
+      const expectingError = errorContent ? true : false;
 
       // When fireboltCall object key passed fetching the object from the fireboltCalls data else reading it from environment variable
       if (fireboltCallKey) {
@@ -464,23 +463,31 @@ Given(
         // Function to do error null check, schema validation check and event listerner response checks
         cy.validateResponseErrorAndSchemaResult(apiObject, CONSTANTS.METHOD).then(() => {
           // If response of the method is not supported, checks in the not supported list for that method name, if it is present then pass else mark it as fail
-          // TODO: Need to add error content validation
           if (
             !Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION) &&
             (UTILS.isScenarioExempted(method, param) || expectingError)
           ) {
-            let errorExpected;
+            // TODO: Need to parse errorSchemaObject
+            cy.fixture('objects/errorObjects/errorSchemaObject').then((errorSchemaObject) => {
+              let errorExpected;
+              let errorObject = errorSchemaObject[errorContent];
 
-            // If the expected error is false, we set "exceptionErrorObject" to the errorExpected variable, which will be used to retrieve the error content object based on the exception method type.
-            expectingError === true
-              ? (errorExpected = contentObject)
-              : (errorExpected = CONSTANTS.EXCEPTION_ERROR_OBJECT);
+              // If the expected error is false, we set "exceptionErrorObject" to the errorExpected variable, which will be used to retrieve the error content object based on the exception method type.
+              expectingError === true
+                ? (errorExpected = errorObject)
+                : (errorExpected = CONSTANTS.EXCEPTION_ERROR_OBJECT);
 
-            cy.validateErrorObject(method, errorExpected, CONSTANTS.METHOD, context, appId, param).then(
-              () => {
+              cy.validateErrorObject(
+                method,
+                errorExpected,
+                CONSTANTS.METHOD,
+                context,
+                appId,
+                param
+              ).then(() => {
                 return true;
-              }
-            );
+              });
+            });
           } else if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
             try {
               if (contentObject && contentObject.data) {
