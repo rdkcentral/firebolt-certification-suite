@@ -486,7 +486,8 @@ export default function (module) {
           module.customValidations[functionName] &&
           typeof module.customValidations[functionName] === 'function'
         ) {
-          message = module.customValidations[functionName](apiOrEventObject);
+          let message = module.customValidations[functionName](fcsValidationObjectData, apiOrEventObject);
+          return message;
         } else if (
           // if customValidations doesn't have a function as the functionName passed
           !module.customValidations[functionName] ||

@@ -313,12 +313,42 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
         : app;
   const isEventsExpected = condition == CONSTANTS.STAY ? false : true;
   const appObject = UTILS.getEnvVariable(appId);
-  cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
+
+  cy.validateLifecycleState(state, appId);
   cy.validateLifecycleHistoryAndEvents(
     appObject.getAppObjectState().state,
     appId,
     isEventsExpected
   );
+
+  // TODO: ACCOMPANY WITH MODULE REQ ID INSTEAD OF SOLELY RELYING ON VALIDATION OBJECT
+  let expected = "LIFECYCLE_" + state.replaceAll(' ', '_').toUpperCase();
+  console.log(">>> expected: ", expected);
+  cy.getFireboltData(expected).then((fireboltData) => {
+    const fireboltItems = Array.isArray(fireboltData) ? fireboltData : [fireboltData];
+    fireboltItems.forEach((item) => {
+      const contentObject = item.hasOwnProperty(CONSTANTS.CONTENT.toLowerCase())
+            ? item.content
+            : CONSTANTS.NULL_RESPONSE;
+      if (contentObject && contentObject.data) {
+        contentObject.data.forEach((object) => {
+          if (object.validations) {
+            const scenario = object.type;
+            switch (scenario) {
+              case CONSTANTS.CUSTOM:
+                console.log(">>> CASE CUSTOM");
+                cy.customValidation(object);
+                break;
+              default:
+                console.log("Unsupported lifecycle validation type");
+                break;
+            }
+          }
+        })
+      }
+    })
+  })
+  
 });
 
 /**

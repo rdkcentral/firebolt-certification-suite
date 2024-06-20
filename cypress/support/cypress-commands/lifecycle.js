@@ -204,6 +204,7 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
       // Lifecycle event validation
       if (lifecycleEventRequirementId && lifecycleEventRequirementId.event) {
         const appHistoryPrevious = UTILS.getEnvVariable(CONSTANTS.APP_LIFECYCLE_HISTORY);
+        Cypress.env(CONSTANTS.APP_LIFECYCLE_HISTORY, appHistory);
         const appHistoryCount = appHistory.length - appHistoryPrevious.length;
         let pretext;
         // If no lifecycle events expected, validate app history value is also empty
@@ -408,20 +409,28 @@ Cypress.Commands.add('setAppState', (state, appId) => {
 
     // Set state to suspended
     case CONSTANTS.LIFECYCLE_STATES.SUSPENDED:
+      console.log(">>> setAppState SUSPENDED");
+      console.log(">>> setAppState currentAppState: ", currentAppState.state);
       // If current app state is not suspended or inactive,  set app state to inactive first to comply with allowed transitions
       if (currentAppState.state != CONSTANTS.LIFECYCLE_STATES.SUSPENDED) {
         if (currentAppState.state != CONSTANTS.LIFECYCLE_STATES.INACTIVE) {
+          console.log(">>> current state not inactive");
           cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, appId);
         }
+        cy.setLifecycleState(CONSTANTS.LIFECYCLE_STATES.SUSPENDED, appId).then(() => {
+          appObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.SUSPENDED);
+        })
         // Send lifecycle.suspend API call to 3rd party app
-        cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.SUSPEND, {}).then((response) => {
-          if (response) {
-            cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
-          }
-          appObject.setAppObjectState(state);
-          cy.lifecycleSchemaChecks(response, state);
-          // TODO: Checks for platform support
-        });
+        // cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.SUSPEND, {}).then((response) => {
+        //   if (response) {
+        //     cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
+        //   }
+        //   cy.lifecycleSchemaChecks(response, state);
+        //   // TODO: Checks for platform support
+        // });
+      }
+      else {
+        appObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.SUSPENDED);
       }
       break;
 
