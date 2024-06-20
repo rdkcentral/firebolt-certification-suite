@@ -1606,7 +1606,7 @@
             "req": [
               {
                 "state": {
-                  "id": "R*4.6, R*2.2.4"
+                  "id": "R*4.6, R*2.2.5, R*2.2.6"
                 }
               },
               {
@@ -1630,7 +1630,7 @@
             "req": [
                 {
                   "state": {
-                    "id": "R*4.6, R*2.2.5"
+                    "id": "R*4.6, R*2.2.5, R*2.2.6"
                   }
                 },
                 {
@@ -1754,7 +1754,7 @@
                 "req": [
                     {
                         "state": {
-                            "id": "R*4.6, R*2.1.1, R*2.1.2"
+                            "id": "R*4.6, R*2.1.1"
                         }
                     },
                     {
@@ -1764,7 +1764,7 @@
                     },
                     {
                         "event": {
-                            "id": "R.2.1.4"
+                            "id": "R.3.3.4"
                         }
                     }
                 ]
@@ -1906,7 +1906,7 @@
                     }
                 ]
             },
-            "Lifecycle R*3.7.5 Unloading from Inactive state": {
+            "Lifecycle R*3.7 Unloading from Inactive state": {
                 "req": [
                     {
                         "state": {
@@ -1982,11 +1982,11 @@
                     }
                 ]
             },
-            "Lifecycle R.3.5.3 Cannot Suspend Unloaded app": {
+            "Lifecycle R*2.6.5 Cannot Suspend Unloaded app": {
                 "req": [
                     {
                         "state": {
-                            "id": "R*4.6, R.3.5.3"
+                            "id": "R*4.6, R*2.6.5"
                         }
                     },
                     {
@@ -1996,7 +1996,7 @@
                     },
                     {
                         "event": {
-                            "id": "R.3.5.3"
+                            "id": "R*2.6.5"
                         }
                     }
                 ]
@@ -2195,7 +2195,7 @@
             "req": [
                 {
                   "state": {
-                    "id": "R*4.6, R*3.4.6"
+                    "id": "R*4.6, R*3.4.3"
                   }
                 },
                 {
@@ -2308,11 +2308,11 @@
                     }
                 ]
             },
-            "Lifecycle R*2.6.5, R*3.5.3 Suspend App from Inactive state": {
+            "Lifecycle R*2.6.5 Suspend App from Inactive state": {
                 "req": [
                     {
                         "state": {
-                            "id": "R*4.6, R*2.6.5.R*3.5.3"
+                            "id": "R*4.6, R*2.6.4"
                         }
                     },
                     {
@@ -2327,11 +2327,11 @@
                     }
                 ]
             },
-            "Lifecycle R*2.2.8, R*3.2.5, R*3.2.6, R*3.2.7 Relaunch a previously Suspended app after Unsuspend": {
+            "Lifecycle R*3.2.5, R*3.2.6, R*3.2.7 Relaunch a previously Suspended app after Unsuspend": {
                 "req": [
                     {
                         "state": {
-                            "id": "R*4.6, R*3.2.7"
+                            "id": "R*4.6, R*3.2.7, R*2.2.8"
                         }
                     },
                     {
@@ -2341,7 +2341,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.3.6"
+                            "id": "R*2.3.6, R*2.2.8"
                         }
                     }
                 ]
@@ -2365,11 +2365,11 @@
                     }
                 ]
             },
-            "Lifecycle R*2.5.3 Cannot Suspend a unloaded App": {
+            "Lifecycle R*2.6.5 Cannot Suspend a unloaded App": {
                 "req": [
                     {
                         "state": {
-                            "id": "R*4.6, R*2.5.3"
+                            "id": "R*4.6, R*2.6.5"
                         }
                     },
                     {
@@ -2379,7 +2379,7 @@
                     },
                     {
                         "event": {
-                            "id": "R*2.5.3"
+                            "id": "R*2.6.5"
                         }
                     }
                 ]
@@ -2464,7 +2464,7 @@
                 "req": [
                     {
                         "state": {
-                            "id": "R*4.6, R.3.3.4"
+                            "id": "R*4.6, R*2.2.8, R*3.6.7"
                         }
                     },
                     {
@@ -2474,7 +2474,7 @@
                     },
                     {
                         "event": {
-                            "id": "R.3.3.5"
+                            "id": "R*2.2.8"
                         }
                     }
                 ]
