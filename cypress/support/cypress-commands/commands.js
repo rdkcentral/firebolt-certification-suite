@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 
 /**
@@ -663,12 +663,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
         ? UTILS.getEnvVariable(CONSTANTS.APP_TYPE)
         : CONSTANTS.FIREBOLT; // appType defines in which mode app should be launched
     data = {
-      query: JSON.stringify({
+      query: {
         params: {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.APP_TYPE]: appCategory,
         },
-      }),
+      },
     };
     const messageIntent = {
       action: CONSTANTS.SEARCH,
@@ -686,19 +686,30 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
   ) {
     data = {
-      query: JSON.stringify({
+      query: {
         params: {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.LIFECYCLE_VALIDATION]: true,
           [CONSTANTS.APP_TYPE]: appCategory,
         },
-      }),
+      },
     };
     const messageIntent = {
       data: data,
     };
     requestMap.params.intent = messageIntent;
   }
+
+  // Add the PubSub URL if required
+  if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_URL] = getEnvVariable(CONSTANTS.PUB_SUB_URL);
+    if (getEnvVariable(CONSTANTS.DEVICE_MAC, false) {
+      data.query.params[CONSTANTS.MACADDRESS_PARAM] = getEnvVariable(CONSTANTS.DEVICE_MAC);
+    }
+  }
+
+  // Stringify the query (The intent requires it be a string)
+  data.query = JSON.stringify(data.query);
 
   Cypress.env(CONSTANTS.CURRENT_APP_ID, appId);
 
