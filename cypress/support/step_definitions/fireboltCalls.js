@@ -154,6 +154,11 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
       );
 
       fireLog.info(`Call from ${appId}, method: ${method} params: ${JSON.stringify(param)}`);
+      if (Cypress.env('isRpcOnlyValidation')) {
+        fireLog.info(
+          `${method} response will be retrieved in subsequent steps and validated when the rpc-only methods are invoked. Proceeding to the next step.`
+        );
+      }
 
       // Adding additional details to created intent if any platform specific data is present in configModule.
       cy.runIntentAddon(CONSTANTS.TASK.CALLMETHOD, intentMessage).then((parsedIntent) => {
@@ -162,34 +167,37 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
 
         // Sending message to 3rd party app.
         cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent).then((result) => {
-          if (result === CONSTANTS.NO_RESPONSE) {
-            assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+          if (!Cypress.env('isRpcOnlyValidation')) {
+            if (result === CONSTANTS.NO_RESPONSE) {
+              assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+            }
+
+            result = JSON.parse(result);
+
+            // Create a deep copy to avoid reference mutation
+            const dataToBeCensored = _.cloneDeep(result.report.apiResponse);
+
+            // Call the 'censorData' command to hide sensitive data
+            cy.censorData(method, dataToBeCensored).then((maskedResult) => {
+              fireLog.info(`Response from ${appId}: ${JSON.stringify(maskedResult)}`);
+            });
+
+            // If method and params are not supported setting isScenarioExempted as true for further validation.
+            if (UTILS.isScenarioExempted(method, param)) {
+              Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
+            }
+
+            // Creating object with method name, params and response etc and storing it in a global list for further validation.
+            const apiAppObject = new apiObject(
+              method,
+              param,
+              context,
+              result.report,
+              expected,
+              appId
+            );
+            UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
           }
-          result = JSON.parse(result);
-
-          // Create a deep copy to avoid reference mutation
-          const dataToBeCensored = _.cloneDeep(result.report.apiResponse);
-
-          // Call the 'censorData' command to hide sensitive data
-          cy.censorData(method, dataToBeCensored).then((maskedResult) => {
-            fireLog.info(`Response from ${appId}: ${JSON.stringify(maskedResult)}`);
-          });
-
-          // If method and params are not supported setting isScenarioExempted as true for further validation.
-          if (UTILS.isScenarioExempted(method, param)) {
-            Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
-          }
-
-          // Creating object with method name, params and response etc and storing it in a global list for further validation.
-          const apiAppObject = new apiObject(
-            method,
-            param,
-            context,
-            result.report,
-            expected,
-            appId
-          );
-          UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
         });
       });
     });
@@ -421,6 +429,94 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
 
 /**
  * @module fireboltCalls
+ * @function And Fetch response for '(.+)' (method|event) from (3rd party app|1st party app)
+ * @description Fetch the Method or Event response from the App
+ * @param {String} key - key name of the data contains event/method name and parameter.
+ * @param {String} methodOrEvent - Flag to differentiate between method or event
+ * @param {String} app - Flag to differentiate between 3rd party/ 1st party app
+ * @example
+ * And Fetch response for 'pinChallenge onRequestChallenge' event from '1st party app'
+ * And Fetch response for 'profile approvePurchase' method from '3rd party app'
+ */
+
+Given(
+  /Fetch response for '(.+)' (method|event) from (3rd party app|1st party app)$/,
+  async (key, methodOrEvent, app) => {
+    cy.fireboltDataParser(key).then((parsedDataArr) => {
+      parsedDataArr.forEach((parsedData) => {
+        const method = parsedData.method;
+        const param = parsedData.params;
+        const context = parsedData.context;
+        const action = parsedData.action;
+        const expected = parsedData.expected;
+
+        const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
+
+        let params;
+        if (app == CONSTANTS.FIRST_PARTY_APP) {
+          const extractedEvent = UTILS.getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).filter(
+            (element) => element.eventName == method
+          );
+          eventName = extractedEvent[extractedEvent.length - 1].eventObjectId;
+          const requestMap = {
+            method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCH_EVENT_RESPONSE,
+            params: eventName,
+          };
+          cy.log(
+            'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params)
+          );
+          // Sending message to first party app.
+          cy.sendMessagetoPlatforms(requestMap).then((response) => {
+            cy.log('Response from Firebolt platform: ' + JSON.stringify(response));
+            if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
+              cy.log(CONSTANTS.NO_MATCHED_RESPONSE).then(() => {
+                assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+              });
+            }
+            // saving the correlationId of rpc-only methods
+            if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
+              cy.log(`correlationId - ${response.result.correlationId}`);
+              Cypress.env(CONSTANTS.CORRELATIONID, response.result.correlationId);
+            }
+          });
+        } else if (app == CONSTANTS.THIRD_PARTY_APP) {
+          params = { method: method };
+
+          // Creating intent message using above details to send it to 3rd party app.
+          const parsedIntent = UTILS.createIntentMessage(CONSTANTS.TASK.GETMETHODRESPONSE, params);
+          // Fetching method response from third party app
+          const requestTopic = UTILS.getTopic(appId);
+          const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+
+          // Sending message to 3rd party app.
+          cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent).then((response) => {
+            if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
+              cy.log(CONSTANTS.NO_MATCHED_RESPONSE).then(() => {
+                assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+              });
+            }
+            cy.log(`${method} response from ${appId}: ${JSON.stringify(response)}`);
+            if (typeof response == 'string') {
+              response = JSON.parse(response);
+            }
+            // create new api object to push to global list
+            const apiAppObject = new apiObject(
+              method,
+              param,
+              context,
+              response.report,
+              expected,
+              appId
+            );
+            UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
+          });
+        }
+      });
+    });
+  }
+);
+
+/**
  * @function User triggers event with value '{}}'
  * @description sending message to platform to make post call to set values.
  * @param {String} key - Name of event to be called.
@@ -432,3 +528,149 @@ Given(/User triggers event with value as '(.+)'/, (key) => {
     throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
   });
 });
+
+/**
+ * @module fireboltCalls
+ * @function 1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'
+ * @description Sending a message to platform to set a value
+ * @param {String} sdk - sdk name.
+ * @param {String} fireboltCallKey - key name passed to look for firebolt call object in fireboltCallData.
+ * @param {String} attribute - The attribute to which the value is going to be set (ex. fontFamily).
+ * @param {String} invalidValue - Determines whether expecting for an error or result.
+ * @param {String} value - The value used by the set method to set the value (ex. monospaced_sanserif)
+ * @example
+ * Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to 'true'
+ * Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to invalid 'test'
+ * Given '1st party app' invokes the 'Firebolt' API to set 'enable' to 'true'
+ */
+Given(
+  /1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'$/,
+  async (sdk, fireboltCallKey, attribute, invalidValue, value) => {
+    if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
+      value = UTILS.parseValue(value);
+      let fireboltCallObject;
+      let fireboltCallObjectErrorMessage = CONSTANTS.NO_DATA_FOR_THE_KEY + fireboltCallKey;
+
+      // runtime environment variable holds attribute and value
+      Cypress.env('runtime', {
+        attribute: attribute,
+        value: value,
+      });
+
+      // When fireboltCall object key passed fetching the object from the fireboltCalls data else reading it from environment variable
+      if (fireboltCallKey) {
+        cy.getFireboltData(fireboltCallKey).then((fireboltData) => {
+          fireboltCallObject = fireboltData;
+          UTILS.getEnvVariable('runtime').fireboltCall = fireboltData;
+        });
+      } else {
+        fireboltCallObject = UTILS.getEnvVariable('runtime').fireboltCall;
+        fireboltCallObjectErrorMessage =
+          'Unable to find the firebolt object in the runtime environment variable';
+      }
+
+      cy.then(() => {
+        // Failing the test when fireboltCall object not there
+        if (!fireboltCallObject) {
+          fireLog.assert(false, fireboltCallObjectErrorMessage);
+        } else {
+          let setMethod =
+            typeof fireboltCallObject.setMethod === CONSTANTS.TYPE_FUNCTION
+              ? fireboltCallObject.setMethod()
+              : fireboltCallObject.setMethod;
+          let setParams;
+
+          // Extracting the parameter from the fireboltCall object
+          if (typeof fireboltCallObject.setParams === CONSTANTS.TYPE_FUNCTION) {
+            setParams = { value: fireboltCallObject.setParams() };
+          } else if (typeof fireboltCallObject.setParams === CONSTANTS.TYPE_OBJECT) {
+            setParams = fireboltCallObject.setParams;
+
+            // Iterating through the object and invoking it if it is a function
+            for (const key in setParams) {
+              if (typeof setParams[key] === CONSTANTS.TYPE_FUNCTION) {
+                setParams[key] = setParams[key]();
+              }
+            }
+          } else {
+            setParams = { value: fireboltCallObject.setParams };
+          }
+
+          const context = {};
+          const expected = invalidValue ? 'error' : 'result';
+          const appId = Cypress.env(CONSTANTS.FIRST_PARTY_APPID);
+          let action = CONSTANTS.ACTION_CORE.toLowerCase();
+
+          // Splitting the method name if it contains an underscore and using the first part to determine the action that decides sdk.
+          if (setMethod && setMethod.includes('_')) {
+            action = setMethod.split('_')[0];
+            setMethod = setMethod.split('_')[1];
+          }
+
+          // If method and params are not supported setting isScenarioExempted as true for further validation.
+          if (UTILS.isScenarioExempted(setMethod, setParams)) {
+            Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
+          }
+          const requestMap = {
+            method: setMethod,
+            params: setParams,
+            action: action,
+          };
+
+          cy.log(
+            'Call from 1st party App, method: ' +
+              setMethod +
+              ' params: ' +
+              JSON.stringify(setParams)
+          );
+          cy.sendMessagetoPlatforms(requestMap).then((response) => {
+            if (response && typeof response == CONSTANTS.TYPE_OBJECT) {
+              // If error and the error message having 'Method not found' or 'Method not Implemented' mark the testcase as undefined.
+              if (
+                response &&
+                response.error &&
+                response.error.message &&
+                CONSTANTS.ERROR_LIST.includes(response.error.message)
+              ) {
+                if (UTILS.getEnvVariable(CONSTANTS.CERTIFICATION) == true) {
+                  assert(false, `${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${setMethod}`);
+                } else {
+                  cy.log(`NotSupported: ${CONSTANTS.PLATFORM_NOT_SUPPORT_LOG}: ${setMethod}`).then(
+                    () => {
+                      throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+                    }
+                  );
+                }
+              }
+
+              cy.updateResponseForFCS(setMethod, setParams, response).then((updatedResponse) => {
+                // Create a deep copy to avoid reference mutation
+                const dataToBeCensored = _.cloneDeep(response);
+
+                // Call the 'censorData' command to hide sensitive data
+                cy.censorData(setMethod, dataToBeCensored).then((maskedResult) => {
+                  cy.log(`Response from Firebolt platform: ${JSON.stringify(maskedResult)}`);
+                });
+
+                // Creating object with method name, params, and response etc and storing it in a global list for further validation.
+                const apiAppObject = new apiObject(
+                  setMethod,
+                  setParams,
+                  context,
+                  updatedResponse,
+                  expected,
+                  appId
+                );
+                UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
+              });
+            } else {
+              cy.log(`${CONSTANTS.PLATFORM_INVALID_RESPONSE_LOG} - ${response}`);
+            }
+          });
+        }
+      });
+    } else {
+      fireLog.assert(false, `${sdk} SDK not Supported`);
+    }
+  }
+);

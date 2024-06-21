@@ -80,6 +80,14 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
           const envParam = params.split('-')[1];
           params = UTILS.getEnvVariable(envParam, false);
         }
+        // If params contain CYPRESSENV in any parameter assigning corresponding env value
+        const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
+        if (containEnv) {
+          const envParam = containEnv.split('-')[1];
+          params[envParam] = Cypress.env(envParam);
+          delete params[containEnv];
+        }
+
         method = item.method;
         const expected = item.expected ? item.expected : CONSTANTS.RESULT;
         action = CONSTANTS.ACTION_CORE.toLowerCase();
@@ -688,7 +696,10 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
         },
       }),
     };
-    requestMap.params.intent.data = data;
+    const messageIntent = {
+      data: data,
+    };
+    requestMap.params.intent = messageIntent;
   }
 
   Cypress.env(CONSTANTS.CURRENT_APP_ID, appId);
@@ -701,20 +712,29 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     cy.sendMessagetoPlatforms(parsedIntent).then((result) => {
       fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
 
-      // checking the connection status of a third-party app.
-      cy.thirdPartyAppHealthcheck(requestTopic, responseTopic).then((healthCheckResponse) => {
-        if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
-          throw Error(
-            'FCA not launched as 3rd party app or not subscribed to ' +
-              requestTopic +
-              '. Unable to get healthCheck response from FCA in ' +
-              UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
-              ' retries'
-          );
-        }
-        healthCheckResponse = JSON.parse(healthCheckResponse);
-        expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
-      });
+      if (
+        UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) === appId ||
+        UTILS.getEnvVariable(CONSTANTS.FCA_APP_LIST).find(
+          (ele) => UTILS.getEnvVariable(ele, false) === appId
+        )
+      ) {
+        // checking the connection status of a third-party app.
+        cy.thirdPartyAppHealthcheck(requestTopic, responseTopic).then((healthCheckResponse) => {
+          // checking whether valid healthCheck response is received
+          // if not received, throwing error with corresponding topic and retry count.
+          if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
+            throw Error(
+              'FCA not launched as 3rd party app or not subscribed to ' +
+                requestTopic +
+                '. Unable to get healthCheck response from FCA in ' +
+                UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
+                ' retries'
+            );
+          }
+          healthCheckResponse = JSON.parse(healthCheckResponse);
+          expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
+        });
+      }
     });
   });
 });
