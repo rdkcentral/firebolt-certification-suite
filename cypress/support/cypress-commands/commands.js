@@ -710,6 +710,8 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
       ) {
         // checking the connection status of a third-party app.
         cy.thirdPartyAppHealthcheck(requestTopic, responseTopic).then((healthCheckResponse) => {
+          // checking whether valid healthCheck response is received
+          // if not received, throwing error with corresponding topic and retry count.
           if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
             throw Error(
               'FCA not launched as 3rd party app or not subscribed to ' +
