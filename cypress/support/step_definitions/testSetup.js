@@ -93,7 +93,12 @@ function destroyAppInstance(testType) {
       params,
       additionalParams
     );
-    cy.log('Sending lifecycle close intent to unload app: ' + JSON.stringify(intentMessage));
+    cy.log(
+      'Sending lifecycle close intent to unload app, method: ' +
+        params.methodName +
+        ' params: ' +
+        JSON.stringify(params.methodParams)
+    );
 
     try {
       cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
