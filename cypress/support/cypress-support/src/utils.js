@@ -634,7 +634,7 @@ function checkForTags(tags) {
  * @example
  * checkForSecondaryAppId("appIdKey")
  */
-function checkForSecondaryAppId(appId){
+function checkForSecondaryAppId(appId) {
   let envAppIdKey;
   try {
     if (appId === CONSTANTS.SECONDARY_THIRD_PARTY_APP) {
@@ -644,9 +644,13 @@ function checkForSecondaryAppId(appId){
       return appId;
     }
   } catch (err) {
-    fireLog.info(`Unable to find the ${envAppIdKey} value in the env, please add the value in config module/constants/config.json`).then(() => {
-      throw new Error(`Unable to find the ${envAppIdKey} value in the env`);
-    });
+    fireLog
+      .info(
+        `Unable to find the ${envAppIdKey} value in the env, please add the value in config module/constants/config.json`
+      )
+      .then(() => {
+        throw new Error(`Unable to find the ${envAppIdKey} value in the env`);
+      });
   }
 }
 
