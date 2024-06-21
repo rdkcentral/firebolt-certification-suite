@@ -381,6 +381,7 @@ module.exports = {
   TOPIC_PUBLISH_SUFFIX: '_FCS',
   TOPIC_SUBSCRIBE_SUFFIX: '_FCA',
   TRANSPORT: 'transport',
+  TYPE_FUNCTION: 'function',
   TYPE_OBJECT: 'object',
   TYPE_STRING: 'string',
   UNDEFINED: 'undefined',

@@ -293,6 +293,18 @@ resolveDeviceVariable("deviceId")
 `fireLog.isFalse(isFalseValue, "False message");`
 `fireLog.deepEqual(actual, expected, "deepEqual message");`
 
+## parseValue
+
+### Purpose: Function to parse the passed string.
+
+### Examples:
+request
+- `parseValue('123') `
+- `parseValue('true')`
+
+response
+- `123`
+- `true`
 ## resolveAtRuntime
 
 ### Purpose: Return the function which is having logic to resolve the value for the passed input at runtime.
