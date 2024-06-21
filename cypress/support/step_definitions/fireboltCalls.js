@@ -121,7 +121,7 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appId === CONSTANTS.THIRD_PARTY_APP
           ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-          : appId;
+          : UTILS.checkForSecondaryAppId(appId);
       const method = parsedData.method;
       const param = parsedData.params;
       const context = parsedData.context;
@@ -216,7 +216,7 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appId === CONSTANTS.THIRD_PARTY_APP
           ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-          : appId;
+          : UTILS.checkForSecondaryAppId(appId);
       const event = parsedData.method;
       const param = parsedData.params;
       const context = parsedData.context ? parsedData.context : CONSTANTS.NO_CONTEXT;

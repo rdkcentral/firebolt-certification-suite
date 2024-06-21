@@ -430,6 +430,8 @@ module.exports = {
   VISIBILITYSTATE: 'visibilityState',
   VISIBLE_CHECK: 'visible_check',
   STEP_DEFINITION_NEEDS_TO_IMPLEMENT: 'Step definition needs to be implemented',
+  SECONDARY_THIRD_PARTY_APP: 'secondary 3rd party app',
+  SECONDARY_THIRD_PARTY_APP_ID: 'secondary3rdPartyAppId',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

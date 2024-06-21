@@ -629,6 +629,29 @@ function checkForTags(tags) {
 
 /**
  * @module utils
+ * @function checkForSecondaryAppId
+ * @description Checks whether the appId is available in env
+ * @example
+ * checkForSecondaryAppId("appIdKey")
+ */
+function checkForSecondaryAppId(appId){
+  let envAppIdKey;
+  try {
+    if (appId === CONSTANTS.SECONDARY_THIRD_PARTY_APP) {
+      envAppIdKey = CONSTANTS.SECONDARY_THIRD_PARTY_APP_ID;
+      return getEnvVariable(CONSTANTS.SECONDARY_THIRD_PARTY_APP_ID);
+    } else {
+      return appId;
+    }
+  } catch (err) {
+    fireLog.info(`Unable to find the ${envAppIdKey} value in the env, please add the value in config module/constants/config.json`).then(() => {
+      throw new Error(`Unable to find the ${envAppIdKey} value in the env`);
+    });
+  }
+}
+
+/**
+ * @module utils
  * @globalfunction resolveDeviceVariable
  * @description Resolve the device variable from the preprocessed data for the given key
  * @example
@@ -842,4 +865,5 @@ module.exports = {
   writeJsonToFileForReporting,
   checkForTags,
   fireLog,
+  checkForSecondaryAppId,
 };

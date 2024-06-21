@@ -66,7 +66,7 @@ Given(
             ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
             : appId === CONSTANTS.FIRST_PARTY_APP
               ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
-              : appId;
+              : UTILS.checkForSecondaryAppId(appId);
 
           // Fetching the object from the global list.
           const methodOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
