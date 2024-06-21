@@ -83,6 +83,10 @@ function createIntentMessage(task, jsonParams, map = null) {
   map && map.hasOwnProperty(CONSTANTS.IS_NOT_SUPPORTED_API)
     ? (jsonQueryParams.isNotSupportedApi = map.isNotSupportedApi)
     : false;
+
+  Cypress.env('isRpcOnlyValidation')
+    ? (jsonQueryParams.responseTimeout = CONSTANTS.RPC_ONLY_TIMEOUT)
+    : null;
   const intent = {
     action: queryParams.action,
     data: { query: JSON.stringify(jsonQueryParams) },

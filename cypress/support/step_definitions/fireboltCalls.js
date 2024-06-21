@@ -154,6 +154,11 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
       );
 
       fireLog.info(`Call from ${appId}, method: ${method} params: ${JSON.stringify(param)}`);
+      if (Cypress.env('isRpcOnlyValidation')) {
+        fireLog.info(
+          `${method} response will be retrieved in subsequent steps and validated when the rpc-only methods are invoked. Proceeding to the next step.`
+        );
+      }
 
       // Adding additional details to created intent if any platform specific data is present in configModule.
       cy.runIntentAddon(CONSTANTS.TASK.CALLMETHOD, intentMessage).then((parsedIntent) => {
@@ -162,34 +167,37 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
 
         // Sending message to 3rd party app.
         cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent).then((result) => {
-          if (result === CONSTANTS.NO_RESPONSE) {
-            assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+          if (!Cypress.env('isRpcOnlyValidation')) {
+            if (result === CONSTANTS.NO_RESPONSE) {
+              assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+            }
+
+            result = JSON.parse(result);
+
+            // Create a deep copy to avoid reference mutation
+            const dataToBeCensored = _.cloneDeep(result.report.apiResponse);
+
+            // Call the 'censorData' command to hide sensitive data
+            cy.censorData(method, dataToBeCensored).then((maskedResult) => {
+              fireLog.info(`Response from ${appId}: ${JSON.stringify(maskedResult)}`);
+            });
+
+            // If method and params are not supported setting isScenarioExempted as true for further validation.
+            if (UTILS.isScenarioExempted(method, param)) {
+              Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
+            }
+
+            // Creating object with method name, params and response etc and storing it in a global list for further validation.
+            const apiAppObject = new apiObject(
+              method,
+              param,
+              context,
+              result.report,
+              expected,
+              appId
+            );
+            UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
           }
-          result = JSON.parse(result);
-
-          // Create a deep copy to avoid reference mutation
-          const dataToBeCensored = _.cloneDeep(result.report.apiResponse);
-
-          // Call the 'censorData' command to hide sensitive data
-          cy.censorData(method, dataToBeCensored).then((maskedResult) => {
-            fireLog.info(`Response from ${appId}: ${JSON.stringify(maskedResult)}`);
-          });
-
-          // If method and params are not supported setting isScenarioExempted as true for further validation.
-          if (UTILS.isScenarioExempted(method, param)) {
-            Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
-          }
-
-          // Creating object with method name, params and response etc and storing it in a global list for further validation.
-          const apiAppObject = new apiObject(
-            method,
-            param,
-            context,
-            result.report,
-            expected,
-            appId
-          );
-          UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
         });
       });
     });
@@ -421,6 +429,94 @@ Given(/I clear '(.+)' listeners$/, async (key) => {
 
 /**
  * @module fireboltCalls
+ * @function And Fetch response for '(.+)' (method|event) from (3rd party app|1st party app)
+ * @description Fetch the Method or Event response from the App
+ * @param {String} key - key name of the data contains event/method name and parameter.
+ * @param {String} methodOrEvent - Flag to differentiate between method or event
+ * @param {String} app - Flag to differentiate between 3rd party/ 1st party app
+ * @example
+ * And Fetch response for 'pinChallenge onRequestChallenge' event from '1st party app'
+ * And Fetch response for 'profile approvePurchase' method from '3rd party app'
+ */
+
+Given(
+  /Fetch response for '(.+)' (method|event) from (3rd party app|1st party app)$/,
+  async (key, methodOrEvent, app) => {
+    cy.fireboltDataParser(key).then((parsedDataArr) => {
+      parsedDataArr.forEach((parsedData) => {
+        const method = parsedData.method;
+        const param = parsedData.params;
+        const context = parsedData.context;
+        const action = parsedData.action;
+        const expected = parsedData.expected;
+
+        const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
+
+        let params;
+        if (app == CONSTANTS.FIRST_PARTY_APP) {
+          const extractedEvent = UTILS.getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).filter(
+            (element) => element.eventName == method
+          );
+          eventName = extractedEvent[extractedEvent.length - 1].eventObjectId;
+          const requestMap = {
+            method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCH_EVENT_RESPONSE,
+            params: eventName,
+          };
+          cy.log(
+            'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params)
+          );
+          // Sending message to first party app.
+          cy.sendMessagetoPlatforms(requestMap).then((response) => {
+            cy.log('Response from Firebolt platform: ' + JSON.stringify(response));
+            if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
+              cy.log(CONSTANTS.NO_MATCHED_RESPONSE).then(() => {
+                assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+              });
+            }
+            // saving the correlationId of rpc-only methods
+            if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
+              cy.log(`correlationId - ${response.result.correlationId}`);
+              Cypress.env(CONSTANTS.CORRELATIONID, response.result.correlationId);
+            }
+          });
+        } else if (app == CONSTANTS.THIRD_PARTY_APP) {
+          params = { method: method };
+
+          // Creating intent message using above details to send it to 3rd party app.
+          const parsedIntent = UTILS.createIntentMessage(CONSTANTS.TASK.GETMETHODRESPONSE, params);
+          // Fetching method response from third party app
+          const requestTopic = UTILS.getTopic(appId);
+          const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+
+          // Sending message to 3rd party app.
+          cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent).then((response) => {
+            if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
+              cy.log(CONSTANTS.NO_MATCHED_RESPONSE).then(() => {
+                assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+              });
+            }
+            cy.log(`${method} response from ${appId}: ${JSON.stringify(response)}`);
+            if (typeof response == 'string') {
+              response = JSON.parse(response);
+            }
+            // create new api object to push to global list
+            const apiAppObject = new apiObject(
+              method,
+              param,
+              context,
+              response.report,
+              expected,
+              appId
+            );
+            UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
+          });
+        }
+      });
+    });
+  }
+);
+
+/**
  * @function User triggers event with value '{}}'
  * @description sending message to platform to make post call to set values.
  * @param {String} key - Name of event to be called.
