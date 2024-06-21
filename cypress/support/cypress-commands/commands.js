@@ -690,6 +690,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
   // Add the PubSub URL if required
   if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
     data.query.params[CONSTANTS.PUB_SUB_URL] = getEnvVariable(CONSTANTS.PUB_SUB_URL);
+    if (getEnvVariable(CONSTANTS.DEVICE_MAC, false) {
+      data.query.params[CONSTANTS.MACADDRESS_PARAM] = getEnvVariable(CONSTANTS.DEVICE_MAC);
+    }
   }
 
   // Stringify the query (The intent requires it be a string)

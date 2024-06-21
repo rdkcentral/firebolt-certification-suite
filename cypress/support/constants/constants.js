@@ -227,6 +227,7 @@ module.exports = {
   LIMITADTRACKING_OFF: 'limitAdTrackingOFF',
   LIMITADTRACKING_ON: 'limitAdTrackingON',
   LONGPOLL_TIMEOUT: 15000,
+  MACADDRESS_PARAM: 'macaddress',
   MESSAGE_QUEUE: 'messageQueue',
   MESSAGE_QUEUE_SIZE: 100,
   MESSAGE_QUEUE_TIME_DIFF: 150000,
