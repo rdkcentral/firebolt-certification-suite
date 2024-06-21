@@ -378,7 +378,7 @@ Example Usage:
 
 If you want to use simplePubSub server as the means of communication for 3rd party app calls follow these steps:
 
-1. Clone SimplePubSub [server](https://github.com/comcast-firebolt/simplePubSub).
+1. Clone SimplePubSub server.
 2. Setup SimplePubSub server (i.e. `npm install`) and start (i.e. `npm start`).
 3. Clone [firebolt-certification-app](https://github.com/rdkcentral/firebolt-certification-app). 
 4. In FCA hange the `host` in /webpack.dev.js to <YOUR_IP>.
