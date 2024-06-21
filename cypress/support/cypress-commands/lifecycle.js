@@ -362,12 +362,16 @@ Cypress.Commands.add('setAppState', (state, appId) => {
     // Set state to background
     case CONSTANTS.LIFECYCLE_STATES.BACKGROUND:
       // TODO: Checks for platform support
-      // Send message to platform to set app state to background
-      cy.setLifecycleState(state, appId).then(() => {
-        appObject.setAppObjectState(state);
-      });
+      if (
+        currentAppState.state != CONSTANTS.LIFECYCLE_STATES.BACKGROUND &&
+        currentAppState.state != CONSTANTS.LIFECYCLE_STATES.INITIALIZING
+      ) {
+        // If current app state is not background, send message to platform to set app state to background
+        cy.setLifecycleState(state, appId).then(() => {
+          appObject.setAppObjectState(state);
+        });
+      }
       break;
-
     // Set state to inactive
     case CONSTANTS.LIFECYCLE_STATES.INACTIVE:
       // If current app state is suspended, send lifecycle.unsuspend API call to 3rd party app
@@ -398,19 +402,21 @@ Cypress.Commands.add('setAppState', (state, appId) => {
 
     // Set state to suspended
     case CONSTANTS.LIFECYCLE_STATES.SUSPENDED:
-      // If current app state is not inactive,  set app state to inactive first to comply with allowed transitions
-      if (currentAppState.state != CONSTANTS.LIFECYCLE_STATES.INACTIVE) {
-        cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, appId);
-      }
-      // Send lifecycle.suspend API call to 3rd party app
-      cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.SUSPEND, {}).then((response) => {
-        if (response) {
-          cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
+      // If current app state is not suspended or inactive,  set app state to inactive first to comply with allowed transitions
+      if (currentAppState.state != CONSTANTS.LIFECYCLE_STATES.SUSPENDED) {
+        if (currentAppState.state != CONSTANTS.LIFECYCLE_STATES.INACTIVE) {
+          cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, appId);
         }
-        appObject.setAppObjectState(state);
-        cy.lifecycleSchemaChecks(response, state);
-        // TODO: Checks for platform support
-      });
+        // Send lifecycle.suspend API call to 3rd party app
+        cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.SUSPEND, {}).then((response) => {
+          if (response) {
+            cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
+          }
+          appObject.setAppObjectState(state);
+          cy.lifecycleSchemaChecks(response, state);
+          // TODO: Checks for platform support
+        });
+      }
       break;
 
     // Set state to unloading
