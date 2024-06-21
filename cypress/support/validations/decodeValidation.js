@@ -129,9 +129,10 @@ class decodeValidations {
         const decode = atob(token);
 
         if (decode.includes(param)) {
+          const indexOfParam = decode.indexOf(param);
           const extractedData = decode.slice(
-            decode.indexOf(param) + REGEXFORMATS[param][0],
-            decode.indexOf(param) + REGEXFORMATS[param][1]
+            indexOfParam + param.length + 2,
+            decode.indexOf('</', indexOfParam + 1)
           );
           const resultSet = regexFormat.test(extractedData);
 
