@@ -23,9 +23,14 @@ const CONSTANTS = require('../support/constants/constants');
 
 // If "genericSupport" is set to a falsy value (false, null, etc), take no further action. Simply "return"
 function genericSupport(config) {
+  let data;
   // Read additional config.
   try {
-    const data = JSON.parse(fs.readFileSync('supportConfig.json'));
+    data = JSON.parse(fs.readFileSync('supportConfig.json'));
+  } catch (error) {
+    logger.error('Received following error while trying to read supportConfig json', error);
+    return config;
+  }
 
     // Get the arguments passed from command line during run time.
     const commandLineArgs = Object.entries(config.resolved.env)
@@ -54,10 +59,6 @@ function genericSupport(config) {
     Object.assign(config.env, testDataEnv);
 
     return config;
-  } catch (error) {
-    logger.error('Received following error while trying to read supportConfig json', error);
-    return config;
-  }
 }
 
 module.exports = {
