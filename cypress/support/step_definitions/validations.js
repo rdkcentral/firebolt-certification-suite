@@ -318,8 +318,11 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
   const featureFileName = cy.state().test.parent.title;
   const scenarioList = moduleReqIdJson.scenarioNames[featureFileName];
   const validationObject = scenarioList[scenarioName].validationObject;
+  // custom validation in case of lifecycle test cases where app is not reachable
+  // if validationObject is present in the modReqId for the specific TC, we have to validate based on that value
   if (validationObject) {
     if (Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON).hasOwnProperty(validationObject)) {
+      // the validation type is expected to be "custom"
       if (
         Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject].data[0].type ==
         'custom'
@@ -327,9 +330,8 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
         const validationObjectData = Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[
           validationObject
         ].data[0];
-        cy.customValidation(validationObjectData).then((response) => {
-          cy.log('Response from configModule for customValidation ');
-        });
+        // passing the validationObject to perform customValidation
+        cy.customValidation(validationObjectData);
       } else {
         assert(
           false,
@@ -339,12 +341,12 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
     }
   } else {
     cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
+    cy.validateLifecycleHistoryAndEvents(
+      appObject.getAppObjectState().state,
+      appId,
+      isEventsExpected
+    );
   }
-  cy.validateLifecycleHistoryAndEvents(
-    appObject.getAppObjectState().state,
-    appId,
-    isEventsExpected
-  );
 });
 
 /**
