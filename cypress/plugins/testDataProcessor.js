@@ -68,7 +68,7 @@ function testDataProcessor(configEnv) {
     fireboltCallsJson: resolvedFireboltCallsJson,
     fireboltMocksJson: combinedFireboltMocksJson,
     setResponseJson: resolvedSetResponseJson,
-    errorContentValidationJson: resolvedErrorContentJson
+    errorContentValidationJson: resolvedErrorContentJson,
   };
 }
 
@@ -111,7 +111,7 @@ function processSetResponseJson(setResponseJsonData) {
  *  processErrorContentJson()
  */
 function processErrorContentJson() {
-  let errorSchemaJson = fetchDataFromFile(CONSTANTS.ERROR_SCHEMA_OBJECTS_PATH);
+  const errorSchemaJson = fetchDataFromFile(CONSTANTS.ERROR_SCHEMA_OBJECTS_PATH);
 
   // Looping through json data
   for (const key in errorSchemaJson) {
@@ -128,12 +128,10 @@ function processErrorContentJson() {
           CONSTANTS.ERROR_CONTENT_OBJECTS_PATH,
           validationObject.type
         );
-        if (errorContentObject == CONSTANTS.NO_DATA) {
+        if (errorContentObject !== CONSTANTS.NO_DATA) {
           logger.info(
             `Expected error content object not found in ${CONSTANTS.ERROR_CONTENT_OBJECTS_PATH} for ${validationObject.type}`
           );
-          validationObject.type = validationObject.type;
-        } else {
           validationObject.type = errorContentObject;
         }
       });
@@ -143,7 +141,6 @@ function processErrorContentJson() {
   }
   return errorSchemaJson;
 }
-
 
 /**
  *  @function processFireboltJson

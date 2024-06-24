@@ -391,9 +391,6 @@ Given(
   }
 );
 
-
-//'<SDK>' platform validates '<APP_ID>' '<FB_CALL_KEY>' '(get|set)' API response (as '<ERROR>')
-
 /**
  * @module validations
  * @function And '(.+)' platform validates '(.+)' ('(.+)')? (get|set) API response(?: as '(.+)')?
@@ -415,6 +412,7 @@ Given(
   async (sdk, appId, fireboltCallKey, methodType, errorContent) => {
     if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
       let fireboltCallObject;
+      // Reading the appId from the environment variable
       appId = !appId
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appId === CONSTANTS.THIRD_PARTY_APP
@@ -494,6 +492,7 @@ Given(
                     const scenario = object.type;
                     const methodResponse = apiObject?.response ? apiObject.response : null;
 
+                    // Looping through validationJsonPath to find the valid path for validation.
                     if (validationJsonPath && Array.isArray(validationJsonPath)) {
                       let validationPath = validationJsonPath.find((path) => {
                         if (
@@ -593,10 +592,11 @@ Given(
           }
         }
         return input;
-      } else if (typeof input === CONSTANTS.TYPE_FUNCTION) {
+      } else if (input && typeof input === CONSTANTS.TYPE_FUNCTION) {
         return input();
+      } else {
+        return input;
       }
-      return input;
     }
   }
 );
