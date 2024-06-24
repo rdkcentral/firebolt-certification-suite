@@ -449,7 +449,7 @@ Given(
             : typeof fireboltCallObject.validationJsonPath == CONSTANTS.TYPE_FUNCTION
               ? fireboltCallObject.validationJsonPath()
               : fireboltCallObject.validationJsonPath;
-        let contentObject =
+        const contentObject =
           methodType === 'set'
             ? resolveContentObject(fireboltCallObject.setContent)
             : resolveContentObject(fireboltCallObject.content);
@@ -494,7 +494,7 @@ Given(
 
                     // Looping through validationJsonPath to find the valid path for validation.
                     if (validationJsonPath && Array.isArray(validationJsonPath)) {
-                      let validationPath = validationJsonPath.find((path) => {
+                      const validationPath = validationJsonPath.find((path) => {
                         if (
                           path
                             .split('.')
