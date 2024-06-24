@@ -77,3 +77,22 @@ Note: Key name value is an object and it can contains data as below
 ### Examples:
 * `And I clear 'clear accessibility.onClosedCaptionsSettingsChanged' listeners`
 
+
+## 1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'
+
+### Purpose: Sending a message to platform to set a value
+
+### Params:
+| Param | Definition |
+| --- | --- |
+| sdk | sdk name |
+| fireboltCallKey | key name passed to look for firebolt call object in fireboltCallData |
+| attribute | The attribute we are setting (ex. fontFamily) |
+| invalidValue | Determines whether expecting for an error or result |
+| value | The value used by the set method to set the value (ex. monospaced_sanserif) |
+
+### Examples:
+* `Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to 'true'`
+* `Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to invalid 'test'`
+* `Given '1st party app' invokes the 'Firebolt' API to set 'enable' to 'true'`
+

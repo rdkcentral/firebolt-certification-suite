@@ -83,6 +83,10 @@ function createIntentMessage(task, jsonParams, map = null) {
   map && map.hasOwnProperty(CONSTANTS.IS_NOT_SUPPORTED_API)
     ? (jsonQueryParams.isNotSupportedApi = map.isNotSupportedApi)
     : false;
+
+  Cypress.env('isRpcOnlyValidation')
+    ? (jsonQueryParams.responseTimeout = CONSTANTS.RPC_ONLY_TIMEOUT)
+    : null;
   const intent = {
     action: queryParams.action,
     data: { query: JSON.stringify(jsonQueryParams) },
@@ -168,7 +172,7 @@ function overideParamsFromConfigModule(overrideParams) {
     : CONSTANTS.EXCLUDED_METHODS;
   overrideParams.modulesToBeExcluded = getEnvVariable('excludedModules', false)
     ? getEnvVariable('excludedModules')
-    : CONSTANTS.EXCLUDED_METHODS;
+    : CONSTANTS.EXCLUDED_MODULES;
   return overrideParams;
 }
 
@@ -547,8 +551,12 @@ function pubSubClientCreation(appTransport) {
         clientCreated = true;
         resolve(true);
       } catch (error) {
-        // If an error occurs, reject the promise with the error
-        reject('Failed to initiate PubSubClient' + error);
+        if (getEnvVariable(CONSTANTS.FAIL_ON_PUBSUB_CONNECTION_ERROR, false)) {
+          // If an error occurs, reject the promise with the error
+          reject('Failed to initiate PubSubClient' + error);
+        } else {
+          resolve(false);
+        }
       }
     } else {
       resolve(false);
@@ -752,6 +760,33 @@ global.fireLog = fireLog;
 
 /**
  * @module utils
+ * @function parseValue
+ * @description Function to parse the passed string
+ * @param {String}
+ *
+ * @example
+ * - parseValue('123')
+ * - parseValue('true')
+ *
+ * @returns
+ * 123
+ * true
+ */
+function parseValue(str) {
+  if (str === null || str === undefined) return str;
+
+  if (typeof str === 'string') {
+    if (str === 'true') return true;
+    if (str === 'false') return false;
+
+    if (!isNaN(str)) return Number(str);
+  }
+
+  return str;
+}
+
+/**
+ * @module utils
  * @globalfunction resolveAtRuntime
  * @description Return the function which is having logic to resolve the value for the passed input at runtime.
  * @param {String || Array}
@@ -842,4 +877,5 @@ module.exports = {
   writeJsonToFileForReporting,
   checkForTags,
   fireLog,
+  parseValue,
 };
