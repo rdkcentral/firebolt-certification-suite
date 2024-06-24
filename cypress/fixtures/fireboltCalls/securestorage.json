@@ -149,6 +149,14 @@
         "method": "securestorage.set",
         "params": "SECURESTORAGE_SET_DEVICE2"
     },
+    "SET_SECURE_VALUE_FOR_AN_APP_FOR_KEY_AUTHTESTTOKENDEVICE1": {
+        "method": "securestorage.setForApp",
+        "params": "SECURESTORAGE_SET_DEVICE1"
+    },
+    "SET_SECURE_VALUE_FOR_AN_APP_FOR_KEY_AUTHTESTTOKENDEVICE2": {
+        "method": "securestorage.setForApp",
+        "params": "SECURESTORAGE_SET_DEVICE2"
+    },
     "REMOVE_THE_STORED_VALUE_AUTHTESTTOKENDEVICE1_WITH_SCOPE_DEVICE": {
         "method": "securestorage.remove",
         "params": "SECURESTORAGE_REMOVE_DEVICE1"
@@ -158,6 +166,14 @@
         "params": "SECURESTORAGE_GET_DEVICE_KEY1"
     },
     "GET_STORED_VALUE_FOR_AUTHTESTTOKENDEVICE2_WITH_SCOPE_DEVICE": {
+        "method": "securestorage.get",
+        "params": "SECURESTORAGE_GET_DEVICE_KEY2"
+    },
+    "GET_STORED_VALUE_FOR_AN_APP_FOR_AUTHTESTTOKENDEVICE1_WITH_SCOPE_DEVICE": {
+        "method": "securestorage.get",
+        "params": "SECURESTORAGE_GET_DEVICE_KEY1"
+    },
+    "GET_STORED_VALUE_FOR_AN_APP_FOR_AUTHTESTTOKENDEVICE2_WITH_SCOPE_DEVICE": {
         "method": "securestorage.get",
         "params": "SECURESTORAGE_GET_DEVICE_KEY2"
     },
@@ -218,6 +234,70 @@
     "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_DEVICE": {
         "method": "manage_securestorage.setForApp",
 		"params": "SECURESTORAGE_SETFORAPP_DEVICE"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_INVALID_SCOPE": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_INVALID_SCOPE"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_INTEGER_SCOPE": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_INTEGER_SCOPE"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_NULL_SCOPE": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_NULL_SCOPE"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_BOOLEAN_SCOPE": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_BOOLEAN_SCOPE"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_EMPTY_SCOPE": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_EMPTY_SCOPE"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITHOUT_SCOPE": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_WITHOUT_SCOPE"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_INTEGER_KEY": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_WITH_INTEGER_KEY"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_NULL_KEY": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_WITH_NULL_KEY"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_BOOLEAN_KEY": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_WITH_BOOLEAN_KEY"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITHOUT_KEY": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_WITHOUT_KEY"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_INTEGER_VALUE": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_WITH_INTEGER_VALUE"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_NULL_VALUE": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_WITH_NULL_VALUE"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_BOOLEAN_VALUE": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_WITH_BOOLEAN_VALUE"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITHOUT_VALUE": {
+        "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_WITHOUT_VALUE"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_DEVICE1": {
+        "method": "manage_securestorage.setForApp",
+        "params": "SECURESTORAGE_SETFORAPP_DEVICE1"
+    },
+    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_DEVICE2": {
+        "method": "manage_securestorage.setForApp",
+        "params": "SECURESTORAGE_SETFORAPP_DEVICE2"
     },
     "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_ACCOUNT": {
         "method": "manage_securestorage.setForApp",
@@ -560,8 +640,21 @@
         "method": "securestorage.clear",
         "params": "SECURESTORAGE_CLEAR_ACCOUNT"
     },
+    "CLEAR_STORED_VALUE_WITH_SCOPE_AS_DEVICE_FOR_AN_APP": {
+        "method": "securestorage.clearForApp",
+        "params": "SECURESTORAGE_CLEARFORAPP_DEVICE"
+    },
+    "CLEAR_STORED_VALUE_WITH_SCOPE_AS_ACCOUNT_FOR_AN_APP": {
+        "method": "securestorage.clearForApp",
+        "params": "SECURESTORAGE_CLEARFORAPP_ACCOUNT"
+    },
     "NULL_FOR_CLEARING_STORED_VALUE": {
         "method": "securestorage.clear",
+        "validationJsonPath": "result",
+        "content": "NULL"
+    },
+    "NULL_FOR_CLEARING_STORED_VALUE_FOR_AN_APP": {
+        "method": "securestorage.clearForApp",
         "validationJsonPath": "result",
         "content": "NULL"
     },

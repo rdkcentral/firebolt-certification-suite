@@ -277,6 +277,99 @@
         "key": "authTestTokenDevice",
         "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
     },
+    "SETFORAPP_INVALID_SCOPE": {
+        "appId": "refui",
+        "scope": "test",
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SETFORAPP_INTEGER_SCOPE": {
+        "appId": "refui",
+        "scope": 123,
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SETFORAPP_NULL_SCOPE": {
+        "appId": "refui",
+        "scope": null,
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SETFORAPP_BOOLEAN_SCOPE": {
+        "appId": "refui",
+        "scope": true,
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SETFORAPP_EMPTY_SCOPE": {
+        "appId": "refui",
+        "scope": "",
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SETFORAPP_WITHOUT_SCOPE": {
+        "appId": "refui",
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SETFORAPP_WITH_INTEGER_KEY": {
+        "appId": "refui",
+        "scope": "device",
+        "key": 123,
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SETFORAPP_WITH_NULL_KEY": {
+        "appId": "refui",
+        "scope": "device",
+        "key": null,
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SETFORAPP_WITH_BOOLEAN_KEY": {
+        "appId": "refui",
+        "scope": "device",
+        "key": true,
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SETFORAPP_WITHOUT_KEY": {
+        "appId": "refui",
+        "scope": "device",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SETFORAPP_WITH_INTEGER_VALUE": {
+        "appId": "refui",
+        "scope": "device",
+        "key": "authTestTokenDevice",
+        "value": 123
+    },
+    "SETFORAPP_WITH_NULL_VALUE": {
+        "appId": "refui",
+        "scope": "device",
+        "key": "authTestTokenDevice",
+        "value": null
+    },
+    "SETFORAPP_WITH_BOOLEAN_VALUE": {
+        "appId": "refui",
+        "scope": "device",
+        "key": "authTestTokenDevice",
+        "value": true
+    },
+    "SETFORAPP_WITHOUT_VALUE": {
+        "appId": "refui",
+        "scope": "device",
+        "key": "authTestTokenDevice"
+    },
+    "SETFORAPP_DEVICE1": {
+        "appId": "refui",
+        "scope": "device",
+        "key": "authTestTokenDevice1",
+        "value": "authTestTokenDevice1"
+    },
+    "SETFORAPP_DEVICE2": {
+        "appId": "refui",
+        "scope": "device",
+        "key": "authTestTokenDevice2",
+        "value": "authTestTokenDevice2"
+    },
     "SETFORAPP_ACCOUNT": {
         "appId": "refui",
         "scope": "account",
