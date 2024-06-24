@@ -43,5 +43,10 @@
   "isNotAvailable": {
     "errorMessage": ["not available"],
     "errorCode": [-50300]
+  },
+  "isNotPermitted": {
+    "errorMessage": ["not permitted"],
+    "errorCode": []
   }
+
 }
