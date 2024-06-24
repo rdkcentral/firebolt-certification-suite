@@ -16,6 +16,7 @@
     "PREFERRED_AUDIO_LANGUAGES_SPA_ENG":["spa","eng"],
     "PREFERRED_AUDIO_LANGUAGES_ENG_SPA":["eng","spa"],
     "COUNTRYCODE_PH": "PH",
+    "COUNTRYCODE_UK": "UK",
     "LANGUAGE_EN": "en",
     "LANGUAGE_ES": "es",
     "LOCALE": "en-US",
