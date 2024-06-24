@@ -410,3 +410,22 @@ Here, the value of the key "assertionDef" will be the customMethod we use for va
             }
 		]
 }
+
+## '(.+)' platform validates '(.+)' ('(.+)')? (get|set) API response(?: as '(.+)')?
+### Purpose: Performing a validation against the source of truth for the given API response
+
+### Params:
+| Param | Definition |
+| --- | --- |
+| sdk | name of the sdk |
+| appId | The object was retrieved by using the appId |
+| fireboltCallKey | key name passed to look for firebolt call object in fireboltCallData Json |
+| methodType | Determines which method doing content validation Ex: set or get |
+| errorContent | Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS' |
+
+### Examples:
+* `And 'Firebolt' platform validates '1st party app' 'CLOSEDCAPTION_SETTINGS' get API response`
+* `And 'Firebolt' platform validates '1st party app' 'CLOSEDCAPTION_SETTINGS' set API response`
+* `And 'Firebolt' platform validates '3rd party app' 'CLOSEDCAPTION_SETTINGS' get API response`
+* `And 'Firebolt' platform validates '1st party app' set API response`
+* `And 'Firebolt' platform validates '1st party app' 'CLOSEDCAPTION_SETTINGS' set API response as 'INVALID_TYPE_PARAMS'`

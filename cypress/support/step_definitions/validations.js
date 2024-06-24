@@ -417,9 +417,11 @@ Given(
       let fireboltCallObject;
       appId = !appId
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-        : appId === CONSTANTS.FIRST_PARTY_APP
-          ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
-          : appId;
+        : appId === CONSTANTS.THIRD_PARTY_APP
+          ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+          : appId === CONSTANTS.FIRST_PARTY_APP
+            ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
+            : appId;
       const context = {};
       const expectingError = errorContent ? true : false;
 
@@ -467,26 +469,22 @@ Given(
             !Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION) &&
             (UTILS.isScenarioExempted(method, param) || expectingError)
           ) {
-            // TODO: Need to parse errorSchemaObject
-            cy.fixture('objects/errorObjects/errorSchemaObject').then((errorSchemaObject) => {
-              let errorExpected;
-              let errorObject = errorSchemaObject[errorContent];
+            let errorExpected;
 
-              // If the expected error is false, we set "exceptionErrorObject" to the errorExpected variable, which will be used to retrieve the error content object based on the exception method type.
-              expectingError === true
-                ? (errorExpected = errorObject)
-                : (errorExpected = CONSTANTS.EXCEPTION_ERROR_OBJECT);
+            // If the expected error is false, we set "exceptionErrorObject" to the errorExpected variable, which will be used to retrieve the error content object based on the exception method type.
+            expectingError === true
+              ? (errorExpected = UTILS.getEnvVariable('errorContentValidationJson')[errorContent])
+              : (errorExpected = CONSTANTS.EXCEPTION_ERROR_OBJECT);
 
-              cy.validateErrorObject(
-                method,
-                errorExpected,
-                CONSTANTS.METHOD,
-                context,
-                appId,
-                param
-              ).then(() => {
-                return true;
-              });
+            cy.validateErrorObject(
+              method,
+              errorExpected,
+              CONSTANTS.METHOD,
+              context,
+              appId,
+              param
+            ).then(() => {
+              return true;
             });
           } else if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
             try {
