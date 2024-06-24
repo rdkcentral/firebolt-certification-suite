@@ -83,6 +83,10 @@ function createIntentMessage(task, jsonParams, map = null) {
   map && map.hasOwnProperty(CONSTANTS.IS_NOT_SUPPORTED_API)
     ? (jsonQueryParams.isNotSupportedApi = map.isNotSupportedApi)
     : false;
+
+  Cypress.env('isRpcOnlyValidation')
+    ? (jsonQueryParams.responseTimeout = CONSTANTS.RPC_ONLY_TIMEOUT)
+    : null;
   const intent = {
     action: queryParams.action,
     data: { query: JSON.stringify(jsonQueryParams) },
@@ -168,7 +172,7 @@ function overideParamsFromConfigModule(overrideParams) {
     : CONSTANTS.EXCLUDED_METHODS;
   overrideParams.modulesToBeExcluded = getEnvVariable('excludedModules', false)
     ? getEnvVariable('excludedModules')
-    : CONSTANTS.EXCLUDED_METHODS;
+    : CONSTANTS.EXCLUDED_MODULES;
   return overrideParams;
 }
 
@@ -547,8 +551,12 @@ function pubSubClientCreation(appTransport) {
         clientCreated = true;
         resolve(true);
       } catch (error) {
-        // If an error occurs, reject the promise with the error
-        reject('Failed to initiate PubSubClient' + error);
+        if (getEnvVariable(CONSTANTS.FAIL_ON_PUBSUB_CONNECTION_ERROR, false)) {
+          // If an error occurs, reject the promise with the error
+          reject('Failed to initiate PubSubClient' + error);
+        } else {
+          resolve(false);
+        }
       }
     } else {
       resolve(false);
@@ -656,73 +664,36 @@ global.resolveDeviceVariable = function (key) {
  * fireLog.isTrue(isTrueValue, "True message");
  * fireLog.isFalse(isFalseValue, "False message");
  * fireLog.deepEqual(actual, expected, "deepEqual message");
+ *
+ * fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
+ * fireLog.info() is being used to log the message without any assertion.
+ * Removing cy.log and replacing with fireLog.info() to get a cleaner report.
+ *
+ *
  */
 
-class FireLog extends Function {
+class FireLog {
   constructor() {
-    // Creating the function body dynamically
-    const functionBody = `
-      return function (...args) {
-        return this.log(...args);
-      }
-    `;
-    super('...args', functionBody);
-
-    const handler = {
-      apply: function (target, thisArg, argumentsList) {
-        let message;
-        const methodName = target.name;
-        if (methodName.toLowerCase().includes('include'))
-          message =
-            argumentsList[argumentsList.length - 1] +
-            ' ' +
-            JSON.stringify(argumentsList[1]) +
-            ' expected to be present in the list of ' +
-            JSON.stringify(argumentsList[0]);
-        else if (argumentsList.length > 2)
-          message =
-            argumentsList[argumentsList.length - 1] +
-            ' expected ' +
-            JSON.stringify(argumentsList[0]) +
-            ' to be ' +
-            JSON.stringify(argumentsList[1]);
-        else
-          message =
-            argumentsList[argumentsList.length - 1] +
-            ' Actual: ' +
-            JSON.stringify(argumentsList[0]);
-        return cy.log(message).then(() => {
-          return Reflect.apply(target, thisArg, argumentsList);
-        });
-      },
-    };
-    // Proxy for the fireLog method
-    const instanceProxy = new Proxy(this, handler);
-    const fireLogProxy = new Proxy(instanceProxy, {
-      apply: function (target, thisArg, argumentsList) {
-        const message = argumentsList[argumentsList.length - 1];
-        return cy.log(message);
-      },
-    });
+    if (!FireLog.instance) {
+      FireLog.instance = this;
+    }
 
     // Use cy.log(message) for every method in the class
-    const prototype = Object.getPrototypeOf(instanceProxy);
+    const prototype = Object.getPrototypeOf(this);
     Object.getOwnPropertyNames(prototype).forEach((method) => {
-      if (
-        method !== 'constructor' &&
-        method !== 'fireLog' &&
-        typeof instanceProxy[method] === 'function'
-      ) {
-        instanceProxy[method] = new Proxy(instanceProxy[method], handler);
+      if (method !== 'constructor' && typeof this[method] === 'function') {
+        const originalMethod = this[method];
+        this[method] = function (...args) {
+          const message = args[args.length - 1];
+
+          return cy.log(message).then(() => {
+            return originalMethod.apply(this, args);
+          });
+        };
       }
     });
 
-    return fireLogProxy;
-  }
-
-  // Method to log a message without any assertion
-  log(message) {
-    return cy.log(message);
+    return FireLog.instance;
   }
 
   isNull(value, message) {
@@ -780,10 +751,39 @@ class FireLog extends Function {
   assert(expression, message) {
     assert(expression, message);
   }
+
+  info(message) {}
 }
 
 const fireLog = new FireLog();
 global.fireLog = fireLog;
+
+/**
+ * @module utils
+ * @function parseValue
+ * @description Function to parse the passed string
+ * @param {String}
+ *
+ * @example
+ * - parseValue('123')
+ * - parseValue('true')
+ *
+ * @returns
+ * 123
+ * true
+ */
+function parseValue(str) {
+  if (str === null || str === undefined) return str;
+
+  if (typeof str === 'string') {
+    if (str === 'true') return true;
+    if (str === 'false') return false;
+
+    if (!isNaN(str)) return Number(str);
+  }
+
+  return str;
+}
 
 /**
  * @module utils
@@ -877,4 +877,5 @@ module.exports = {
   writeJsonToFileForReporting,
   checkForTags,
   fireLog,
+  parseValue,
 };

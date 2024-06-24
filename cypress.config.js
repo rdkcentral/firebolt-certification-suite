@@ -42,6 +42,7 @@ const env = {
   thirdPartyMockUser: '456~A',
   MFOS_base_url: 'http://localhost:3333/api/v1/',
   firstPartyAppId: 'firstPartyAppId',
+  failOnPubSubConnectionError: false,
   certification: false,
   reportType: 'cucumber',
   deleteReport: false,
@@ -70,6 +71,7 @@ const env = {
       [3840, 2160],
     ],
   },
+  fcaAppList: ['default3rdPartyAppId'],
 };
 
 module.exports = {
