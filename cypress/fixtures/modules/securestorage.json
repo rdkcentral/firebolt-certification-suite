@@ -358,6 +358,12 @@
         "scope": "device",
         "key": "authTestTokenDevice"
     },
+    "SETFORAPP_WITH_EMPTY_KEY": {
+        "appId": "refui",
+        "scope": "device",
+        "key": "",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo"
+    },
     "SETFORAPP_DEVICE1": {
         "appId": "refui",
         "scope": "device",
@@ -399,6 +405,50 @@
         "scope": "device",
         "key": "authTestTokenDevice"
     },
+    "REMOVEFORAPP_WITH_INVALID_SCOPE": {
+        "appId": "refui",
+        "scope": "test",
+        "key": "authTestTokenDevice"
+    },
+    "REMOVEFORAPP_WITH_EMPTY_SCOPE": {
+        "appId": "refui",
+        "scope": "",
+        "key": "authTestTokenDevice"
+    },
+    "REMOVEFORAPP_WITH_INTEGER_SCOPE": {
+        "appId": "refui",
+        "scope": 123,
+        "key": "authTestTokenDevice"
+    },
+    "REMOVEFORAPP_WITH_NULL_SCOPE": {
+        "appId": "refui",
+        "scope": null,
+        "key": "authTestTokenDevice"
+    },
+    "REMOVEFORAPP_WITH_BOOLEAN_SCOPE": {
+        "appId": "refui",
+        "scope": true,
+        "key": "authTestTokenDevice"
+    },
+    "REMOVEFORAPP_WITH_INTEGER_KEY": {
+        "appId": "refui",
+        "scope": "device",
+        "key": 123
+    },
+    "REMOVEFORAPP_WITH_NULL_KEY": {
+        "appId": "refui",
+        "scope": "device",
+        "key": null
+    },
+    "REMOVEFORAPP_WITH_BOOLEAN_KEY": {
+        "appId": "refui",
+        "scope": "device",
+        "key": true
+    },
+    "REMOVEFORAPP_WITHOUT_KEY": {
+        "appId": "refui",
+        "scope": "device"
+    },
     "REMOVEFORAPP_ACCOUNT": {
         "appId": "refui",
         "scope": "account",
@@ -407,6 +457,29 @@
     "CLEARFORAPP_DEVICE": {
         "appId": "refui",
         "scope": "device"
+    },
+    "CLEARFORAPP_WITH_INVALID_SCOPE": {
+        "appId": "refui",
+        "scope": "test"
+    },
+    "CLEARFORAPP_WITH_EMPTY_SCOPE": {
+        "appId": "refui",
+        "scope": ""
+    },
+    "CLEARFORAPP_WITH_INTEGER_SCOPE": {
+        "appId": "refui",
+        "scope": 123
+    },
+    "CLEARFORAPP_WITH_NULL_SCOPE": {
+        "appId": "refui",
+        "scope": null
+    },
+    "CLEARFORAPP_WITH_BOOLEAN_SCOPE": {
+        "appId": "refui",
+        "scope": true
+    },
+    "CLEARFORAPP_WITHOUT_SCOPE": {
+        "appId": "refui"
     },
     "CLEARFORAPP_ACCOUNT": {
         "appId": "refui",
