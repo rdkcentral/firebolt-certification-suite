@@ -291,6 +291,48 @@ For the validation part, for the states when the app is not reachable for us to 
         ]
 }
 
+### Custom Validation
+## Format
+The basic structure of the validation object in configModule with customValidation will be as :
+{
+        "method": "",
+        "data": [
+            {
+                "type": "custom",
+                "override": <value>,
+                "assertionDef": "<custommethodName>",
+                "validations": [
+                    {
+                        "type": "",
+                        "description": ""
+                    }
+                ]
+            }
+		]
+}
+
+Here, the value of the key "assertionDef" will be the customMethod we use for validation. The customValidation method should be added in this file in configModule : customValidations/validationFunctions.js, and should be exported from "customValidations/index.js".
+
+### Example:
+{
+        "method": "authentication.token",
+        "data": [
+            {
+                "type": "custom",
+                "override": 1,
+                "assertionDef": "customMethod1",
+                "validations": [
+                    {
+                        "field": "issueDate1",
+                        "mode": "regex",
+                        "format": "TOKEN_REGEXP",
+                        "type": "DATEAUTHENTICATION_REGEXP",
+                        "description": "Validation of the Authentication Token issueDate Format"
+                    }
+                ]
+            }
+		]
+}
 
 ## undefined
 ### format:
@@ -369,47 +411,4 @@ While validating, if a key is present in both fcs-validation jsons (eg: cypress/
                 ]
             }
         ]
-}
-
-# Custom Validation
-## Format
-The basic structure of the validation object in configModule with customValidation will be as :
-{
-        "method": "",
-        "data": [
-            {
-                "type": "custom",
-                "override": <value>,
-                "assertionDef": "<custommethodName>",
-                "validations": [
-                    {
-                        "type": "",
-                        "description": ""
-                    }
-                ]
-            }
-		]
-}
-
-Here, the value of the key "assertionDef" will be the customMethod we use for validation. The customValidation method should be added in this file in configModule : customValidations/validationFunctions.js, and should be exported from "customValidations/index.js".
-
-### Example:
-{
-        "method": "authentication.token",
-        "data": [
-            {
-                "type": "custom",
-                "override": 1,
-                "assertionDef": "customMethod1",
-                "validations": [
-                    {
-                        "field": "issueDate1",
-                        "mode": "regex",
-                        "format": "TOKEN_REGEXP",
-                        "type": "DATEAUTHENTICATION_REGEXP",
-                        "description": "Validation of the Authentication Token issueDate Format"
-                    }
-                ]
-            }
-		]
 }

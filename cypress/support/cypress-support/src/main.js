@@ -494,19 +494,22 @@ export default function (module) {
         ) {
           assert(
             false,
-            `Expected customValidationMethod ${functionName} was not found in the validationFunctions file.`
+            `Expected customValidationMethod ${functionName} was not found in the validationFunctions file. More info - ${CONSTANTS.CUSTOM_METHOD_PATH}`
           );
         }
       } else {
         // if config module doesn't have customValidations function
         assert(
           false,
-          `Expected customValidationMethod ${functionName} was not found in the validationFunctions file.`
+          `Expected customValidationMethod ${functionName} was not found in the validationFunctions file. More info - ${CONSTANTS.CUSTOM_METHOD_PATH}`
         );
       }
     } else {
       // if config module doesn't have customValidations function
-      assert(false, `Expected customValidationMethod was not found in the validationObject.`);
+      assert(
+        false,
+        `Expected customValidationMethod was not found in the validationObject. More info - ${CONSTANTS.CUSTOM_METHOD_PATH}`
+      );
     }
   });
 }

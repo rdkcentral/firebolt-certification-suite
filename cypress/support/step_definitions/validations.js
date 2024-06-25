@@ -296,7 +296,7 @@ Given(
 
 /**
  * @module ValidationGlue
- * @function {string} is in {string} state
+ * @function '(.+)' will (be|stay) in '(.+)' state
  * @description To validate 3rd party app transitionss wrt state, event and history against appObject as the source of truth
  * @param {String} app - App type
  * @param {String} state - Expected state to be used for validation
