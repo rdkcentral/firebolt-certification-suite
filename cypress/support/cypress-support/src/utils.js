@@ -736,6 +736,10 @@ class FireLog {
   assert(expression, message) {
     assert(expression, message);
   }
+
+  isAtMost(actual, limit, message) {
+    assert.isAtMost(actual, limit, message)
+  }
 }
 
 const fireLog = new FireLog();
