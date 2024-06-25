@@ -43,5 +43,9 @@
   "isNotAvailable": {
     "errorMessage": ["not available"],
     "errorCode": [-50300]
+  },
+  "isNoIntentError": {
+    "errorMessage": ["An intent must be provided for new app running sessions"],
+    "errorCode": [-40000]
   }
 }

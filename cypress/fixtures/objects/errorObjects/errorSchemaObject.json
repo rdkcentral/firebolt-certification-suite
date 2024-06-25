@@ -49,5 +49,13 @@
               "type": "isNotPermitted"
           }
       ]
+  },
+  "NO_INTENT_ERROR": {
+    "type": "validationFunction",
+    "validations": [
+        {
+            "type": "isNoIntentError"
+        }
+    ]
   }
 }
