@@ -34,7 +34,9 @@ import UTILS from '../cypress-support/src/utils';
  * Given 'Firebolt' platform triggers event 'Validate device id'
  * Given 'Firebolt' platform triggers to '1st party app' event 'Validate device id'
  * Given 'Firebolt' platform triggers to 'test.test.test' event 'Validate device id'
+ * Given 'Firebolt' platform triggers to 'secondary 3rd party app' event 'Validate device id'
  * Given 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
+ * Given 'Firebolt' platform does not trigger to 'secondary 3rd party app' event for 'onclosedCaptionsSettingsChanged'
  */
 
 Given(

@@ -654,10 +654,10 @@ function checkForSecondaryAppId(appId) {
   } catch (err) {
     fireLog
       .info(
-        `Unable to find the ${envAppIdKey} value in the env, please add the value in config module/constants/config.json`
+        eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR)
       )
       .then(() => {
-        throw new Error(`Unable to find the ${envAppIdKey} value in the env`);
+        throw new Error(eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR));
       });
   }
 }
