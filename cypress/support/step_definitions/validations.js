@@ -449,7 +449,7 @@ Given(
             : typeof fireboltCallObject.validationJsonPath == CONSTANTS.TYPE_FUNCTION
               ? fireboltCallObject.validationJsonPath()
               : fireboltCallObject.validationJsonPath;
-        const contentObject =
+        let contentObject =
           methodType === CONSTANTS.SET
             ? resolveContentObject(fireboltCallObject.setContent)
             : resolveContentObject(fireboltCallObject.content);
