@@ -434,7 +434,7 @@ Given(
 
       cy.then(() => {
         let method =
-          methodType === 'set'
+          methodType === CONSTANTS.SET
             ? typeof fireboltCallObject.setMethod == CONSTANTS.TYPE_FUNCTION
               ? fireboltCallObject.setMethod()
               : fireboltCallObject.setMethod
@@ -442,7 +442,7 @@ Given(
               ? fireboltCallObject.method()
               : fireboltCallObject.method;
         let validationJsonPath =
-          methodType === 'set'
+          methodType === CONSTANTS.SET
             ? typeof fireboltCallObject.setValidationJsonPath == CONSTANTS.TYPE_FUNCTION
               ? fireboltCallObject.setValidationJsonPath()
               : fireboltCallObject.setValidationJsonPath
@@ -450,11 +450,13 @@ Given(
               ? fireboltCallObject.validationJsonPath()
               : fireboltCallObject.validationJsonPath;
         const contentObject =
-          methodType === 'set'
+          methodType === CONSTANTS.SET
             ? resolveContentObject(fireboltCallObject.setContent)
             : resolveContentObject(fireboltCallObject.content);
 
         method = method.includes('_') ? method.split('_')[1] : method;
+        contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
+        validationJsonPath = validationJsonPath ? validationJsonPath : CONSTANTS.RESULT;
 
         // Fetching the object from the global list.
         const apiObject = UTILS.getApiOrEventObjectFromGlobalList(method, context, appId);

@@ -342,6 +342,7 @@ module.exports = {
   SCHEMA_VALIDATION_STATUS: 'schemaValidationStatus',
   SCHEMA_VALIDATION_STATUS_CODE: ['PASS', 'FAIL', 'SKIPPED', 'PENDING'],
   SEARCH: 'search',
+  SET: 'set',
   SET_APP_STATE: 'Application state set to ',
   SET_LIFECYCLE_STATE_MISSING:
     'setLifecycleState function to send message to platform to set lifecycle state of application not implemented by underlying platform',
