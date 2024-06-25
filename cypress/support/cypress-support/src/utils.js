@@ -652,13 +652,9 @@ function checkForSecondaryAppId(appId) {
       return appId;
     }
   } catch (err) {
-    fireLog
-      .info(
-        eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR)
-      )
-      .then(() => {
-        throw new Error(eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR));
-      });
+    fireLog.info(eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR)).then(() => {
+      throw new Error(eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR));
+    });
   }
 }
 
