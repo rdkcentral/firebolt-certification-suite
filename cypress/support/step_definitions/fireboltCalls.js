@@ -22,27 +22,6 @@ import { apiObject, eventObject } from '../appObjectConfigs';
 import UTILS from '../cypress-support/src/utils';
 
 /**
- * @module fireboltCall settersGetters
- * @function Given we test the '(.+)' getters and setters
- * @description Define and cache the fireboltCall object to use for getters and setters scenario by saving the object in env variable.
- * @param {String} key - key name of the fireboltCall setter/getter data.
- * @example
- * Given we test the 'CLOSED_CAPTIONS' getters and setters
- */
-Given(/we test the '(.+)' getters and setters$/, async (key) => {
-  // Clear any current env.runtime variables
-  Cypress.env(CONSTANTS.RUNTIME, {});
-
-  // Look for the firebolt call key in firebolt data
-  cy.getFireboltData(key).then((parsedData) => {
-    // getFireboltData handles the case where the key is not found
-    // Save the object as env.runtime.fireboltCall
-    Cypress.env(CONSTANTS.RUNTIME, { fireboltCall: parsedData });
-  });
-
-});
-
-/**
  * @module fireboltCalls
  * @function And 1st party app invokes the '(.+)' API to '(.+)'
  * @description send message to platform to make api call.
