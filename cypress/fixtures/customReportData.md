@@ -1,5 +1,8 @@
 # Overview
-The JSON structure is used to define custom footer content and custom metadata for various pages in a web application.
+The JSON structure is used to define custom footer content and custom metadata for various pages in a report.
+
+## Loading the JSON Data
+The JSON data will be loaded first from `configModule/fixtures/external/objects/customReportData.json`. If it is not available in the `configModule`, it will be loaded from the local JSON file `cypress/fixtures/customReportData.json`.
 
 ## Fields
 `customFooter`
@@ -27,6 +30,6 @@ The JSON structure is used to define custom footer content and custom metadata f
 - The customFooter object is used to define HTML content for footers on various pages.
 - The customMetadata object is used to define HTML content for metadata sections on various pages.
 - Ensure that the HTML content is properly escaped to avoid any issues with rendering in the web application.
-- 
+
 # Additional Information
 - This JSON structure can be extended to include more pages by adding more keys(based on feature file name) to the customFooter and customMetadata objects as needed.
