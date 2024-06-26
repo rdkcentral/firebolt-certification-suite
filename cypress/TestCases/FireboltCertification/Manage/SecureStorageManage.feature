@@ -29,19 +29,20 @@ Feature: SecureStorage_Manage
         And 1st party app invokes the 'Firebolt' API to '<Get_API_Key1>'
         And 'Firebolt' platform responds to '1st party app' for '<Validation_Key1>'
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key2>'
-        And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value'
+        And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value for an app'
         And 1st party app invokes the 'Firebolt' API to '<Get_API_Key2>'
         And 'Firebolt' platform responds to '1st party app' for '<Validation_Key2>'
         When 1st party app invokes the 'Firebolt' API to '<Remove_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Remove_API_Key>'
         When 1st party app invokes the 'Firebolt' API to '<Get_API_Key1>'
+        Then 'Firebolt' platform responds to '1st party app' with 'null for getting stored value'
         When 1st party app invokes the 'Firebolt' API to '<Get_API_Key2>'
-        Then 'Firebolt' platform responds to '1st party app' with 'Validation_Key2'
+        Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key2>'
 
         Examples:
-            | Scenario                        | Remove_API_Key                                         | API_Key                                                      | Set_API_Key1                                        | Set_API_Key2                                        | Get_API_Key1                                                            | Get_API_Key2                                                            | Validation_Key2                                                       | Validation_Key1                                                       |
-            | removeForApp with device scope  | remove secure data value for an app with scope device  | get stored value for authTestTokenDevice with scope device   | set secure data value for an app with scope device1 | set secure data value for an app with scope device2 | get stored value for an app for authTestTokenDevice1 with scope device  | get stored value for an app for authTestTokenDevice2 with scope device  | expected value for authTestTokenDevice2 stored data in securestorage  | expected value for authTestTokenDevice1 stored data in securestorage  |
-            | removeForApp with account scope | remove secure data value for an app with scope account | get stored value for authTestTokenAccount with scope account | set secure data value for an app with scope account | set secure data value for an app with scope account | get stored value for an app for authTestTokenAccount1 with scope device | get stored value for an app for authTestTokenAccount2 with scope device | expected value for authTestTokenAccount2 stored data in securestorage | expected value for authTestTokenAccount1 stored data in securestorage |
+            | Scenario                        | Remove_API_Key                                         | Set_API_Key1                                        | Set_API_Key2                                        | Get_API_Key1                                                            | Get_API_Key2                                                              | Validation_Key2                                                       | Validation_Key1                                                       |
+            | removeForApp with device scope  | remove secure data value for an app with scope device  | set secure data value for an app with scope device1 | set secure data value for an app with scope device2 | get stored value for an app for authTestTokenDevice1 with scope device  | get stored value for an app for authTestTokenDevice2 with scope device    | expected value for authTestTokenDevice2 stored data in securestorage  | expected value for authTestTokenDevice1 stored data in securestorage  |
+            | removeForApp with account scope | remove secure data value for an app with scope account1 | set secure data value for an app with scope account1 | set secure data value for an app with scope account2 | get stored value for an app for authTestTokenAccount1 with scope account | get stored value for an app for authTestTokenAccount2 with scope account | expected value for authTestTokenAccount2 stored data in securestorage | expected value for authTestTokenAccount1 stored data in securestorage |
 
     @SecureStorage @manageSDK
     Scenario Outline: SecureStorage.clearForApp - Positive Scenario: <Scenario>
@@ -50,19 +51,20 @@ Feature: SecureStorage_Manage
         And 1st party app invokes the 'Firebolt' API to '<Get_API_Key1>'
         And 'Firebolt' platform responds to '1st party app' for '<Validation_Key1>'
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key2>'
-        And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value'
+        And 'Firebolt' platform responds to '1st party app' for '<Set_API_Key2>'
         And 1st party app invokes the 'Firebolt' API to '<Get_API_Key2>'
         And 'Firebolt' platform responds to '1st party app' for '<Validation_Key2>'
         When 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Clear_API_Key>'
         When 1st party app invokes the 'Firebolt' API to '<Get_API_Key1>'
+        Then 'Firebolt' platform responds to '1st party app' with 'null for getting stored value'
         When 1st party app invokes the 'Firebolt' API to '<Get_API_Key2>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key2>'
+        Then 'Firebolt' platform responds to '1st party app' with 'null for getting stored value'
 
         Examples:
             | Scenario                       | Clear_API_Key                                         | API_Key                                                      | Set_API_Key1                                        | Set_API_Key2                                        | Get_API_Key1                                                            | Get_API_Key2                                                            | Validation_Key2                                                       | Validation_Key1                                                       |
-            | clearForApp with device scope  | clear secure data value for an app with scope device  | get stored value for authTestTokenDevice with scope device   | set secure data value for an app with scope device1 | set secure data value for an app with scope device2 | get stored value for an app for authTestTokenDevice1 with scope device  | get stored value for an app for authTestTokenDevice2 with scope device  | expected value for authTestTokenDevice2 stored data in securestorage  | expected value for authTestTokenDevice1 stored data in securestorage  |
-            | clearForApp with account scope | clear secure data value for an app with scope account | get stored value for authTestTokenAccount with scope account | set secure data value for an app with scope account | set secure data value for an app with scope account | get stored value for an app for authTestTokenAccount1 with scope device | get stored value for an app for authTestTokenAccount2 with scope device | expected value for authTestTokenAccount2 stored data in securestorage | expected value for authTestTokenAccount1 stored data in securestorage |
+            | clearForApp with device scope  | clear secure data values for an app with scope device  | get stored value for authTestTokenDevice with scope device   | set secure data value for an app with scope device1 | set secure data value for an app with scope device2 | get stored value for an app for authTestTokenDevice1 with scope device  | get stored value for an app for authTestTokenDevice2 with scope device  | expected value for authTestTokenDevice2 stored data in securestorage  | expected value for authTestTokenDevice1 stored data in securestorage  |
+            | clearForApp with account scope | clear secure data values for an app with scope account | get stored value for authTestTokenAccount with scope account | set secure data value for an app with scope account1 | set secure data value for an app with scope account2 | get stored value for an app for authTestTokenAccount1 with scope account | get stored value for an app for authTestTokenAccount2 with scope account | expected value for authTestTokenAccount2 stored data in securestorage | expected value for authTestTokenAccount1 stored data in securestorage |
 
     @SecureStorage @manageSDK
     Scenario Outline: SecureStorage.setForApp - Negative Scenario: <Scenario>
@@ -73,7 +75,7 @@ Feature: SecureStorage_Manage
         When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for 'invalid params for setting a data value in securestorage'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with 'null for getting stored value'
 
         Examples:
             | Scenario                     | Set_API_Key                                         | API_Key                                                              | Method_Validation_Key                                               | Clear_API_Key                                      |
@@ -91,7 +93,6 @@ Feature: SecureStorage_Manage
             | setForApp with null value    | set secure data value for an app with null value    | get stored value with scope as device and key as authTestTokenDevice | expected value for authTestTokenDevice stored data in securestorage | clear stored value with scope as device for an app |
             | setForApp with boolean value | set secure data value for an app with boolean value | get stored value with scope as device and key as authTestTokenDevice | expected value for authTestTokenDevice stored data in securestorage | clear stored value with scope as device for an app |
             | setForApp without value      | set secure data value for an app without value      | get stored value with scope as device and key as authTestTokenDevice | expected value for authTestTokenDevice stored data in securestorage | clear stored value with scope as device for an app |
-            | setForApp with empty key     | set secure data value for an app with empty key     | get stored value with scope as device and key as authTestTokenDevice | expected value for authTestTokenDevice stored data in securestorage | clear stored value with scope as device for an app |
 
     @SecureStorage @manageSDK
     Scenario Outline: SecureStorage.removeForApp - Negative Scenario: <Scenario>
@@ -123,22 +124,22 @@ Feature: SecureStorage_Manage
         And 'Firebolt' platform responds to '1st party app' for 'set secure data value for an app with scope device1'
         And 1st party app invokes the 'Firebolt' API to 'get stored value for an app for authTestTokenDevice1 with scope device'
         And 'Firebolt' platform responds to '1st party app' for 'expected value for authTestTokenDevice1 stored data in securestorage'
-        Given 1st party app invokes the 'Firebolt' API to 'set secure data value for an app with scope account'
-        And 'Firebolt' platform responds to '1st party app' for 'set secure data value for an app with scope account'
-        And 1st party app invokes the 'Firebolt' API to 'get stored value for authTestTokenAccount with scope account'
+        Given 1st party app invokes the 'Firebolt' API to 'set secure data value for an app with scope account1'
+        And 'Firebolt' platform responds to '1st party app' for 'set secure data value for an app with scope account1'
+        And 1st party app invokes the 'Firebolt' API to 'get stored value for authTestTokenAccount1 with scope account'
         And 'Firebolt' platform responds to '1st party app' for 'expected value for authTestTokenAccount1 stored data in securestorage'
-        When 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
+        When 1st party app invokes the 'Firebolt' API to '<Clear_API_key>'
         Then 'Firebolt' platform responds to '1st party app' for 'invalid params for clearing all data for an app in securestorage'
         And 1st party app invokes the 'Firebolt' API to 'get stored value for an app for authTestTokenDevice1 with scope device'
         And 'Firebolt' platform responds to '1st party app' for 'expected value for authTestTokenDevice1 stored data in securestorage'
-        And 1st party app invokes the 'Firebolt' API to 'get stored value for authTestTokenAccount with scope account'
+        And 1st party app invokes the 'Firebolt' API to 'get stored value for authTestTokenAccount1 with scope account'
         And 'Firebolt' platform responds to '1st party app' for 'expected value for authTestTokenAccount1 stored data in securestorage'
 
         Examples:
             | Scenario                      | Clear_API_key                                         |
-            | Passing invalid scope         | clear secure data value for an app with invalid scope |
-            | Passing scope as empty string | clear secure data value for an app with empty scope   |
-            | Passing scope as integer      | clear secure data value for an app with integer scope |
-            | Passing scope as null         | clear secure data value for an app with null scope    |
-            | Passing scope as boolean      | clear secure data value for an app with boolean scope |
-            | without scope                 | clear secure data value for an app without scope      |
+            | Passing invalid scope         | clear secure data values for an app with invalid scope |
+            | Passing scope as empty string | clear secure data values for an app with empty scope   |
+            | Passing scope as integer      | clear secure data values for an app with integer scope |
+            | Passing scope as null         | clear secure data values for an app with null scope    |
+            | Passing scope as boolean      | clear secure data values for an app with boolean scope |
+            | without scope                 | clear secure data values for an app without scope      |
