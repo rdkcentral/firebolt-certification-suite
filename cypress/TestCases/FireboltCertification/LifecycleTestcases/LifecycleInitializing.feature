@@ -9,7 +9,7 @@ Feature: Lifecycle_Initializing
         # And 1st party app invokes the API to 'get lifecycle management state'
         When '3rd party app' invokes the 'Firebolt' API to 'close app with remote button'
         Then 'Firebolt' platform responds with 'null for lifecycle close'
-        And '3rd party app' is in 'initializing' state
+        And '3rd party app' will stay in 'initializing' state
         # And 1st party app invokes the API to 'get lifecycle management state'
         # Then 'Firebolt' platform responds with 'message and code for lifecycle close'
         # Then 'Firebolt' platform responds with 'last two responses for lifecycleManagement state'

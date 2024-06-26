@@ -51,6 +51,9 @@ Given('the environment has been set up for {string} tests', (test) => {
     cy.getCapabilities();
     destroyAppInstance(test);
     Cypress.env(CONSTANTS.ENV_SETUP_STATUS, true);
+    if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
+      Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
+    }
   }
 });
 

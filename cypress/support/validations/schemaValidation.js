@@ -140,7 +140,7 @@ Cypress.Commands.add(
         return formattedResponse;
       });
     } else {
-      cy.log(`Response does not have a valid result or error field - ${response}`);
+      cy.log(`Response does not have a valid result or error field - ${JSON.stringify(response)}`);
     }
   }
 );

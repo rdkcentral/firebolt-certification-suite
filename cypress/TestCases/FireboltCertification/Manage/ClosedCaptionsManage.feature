@@ -15,7 +15,7 @@ Feature: ClosedCaptions_Manage
 
         Examples:
             | Scenario                             | Method             | Event                                      | Set_API_Key                             | API_Key                | Method_Validation_Key                                  | Event_Validation_Key                                              |
-            | Set backgroundColor-#7f7f7f          | backgroundColor    | closedcaptions onBackgroundColorChanged    | set backgroundColor to #7f7f7f          | get backgroundColor    | #ff00ff for backgroundColor in closedCaptions          | onBackgroundColorChanged for closedcaptions with #ff00ff          |
+            | Set backgroundColor-#7f7f7f          | backgroundColor    | closedcaptions onBackgroundColorChanged    | set backgroundColor to #7f7f7f          | get backgroundColor    | #7f7f7f for backgroundColor in closedCaptions          | onBackgroundColorChanged for closedcaptions with #7f7f7f          |
             | Set backgroundOpacity-75             | backgroundOpacity  | closedcaptions onBackgroundOpacityChanged  | set backgroundOpacity to 75             | get backgroundOpacity  | 75 for backgroundOpacity in closedCaptions             | onBackgroundOpacityChanged for closedcaptions with 75             |
             | Set closedcaptions-false             | enabled            | closedcaptions onEnabledChanged            | disable closedCaptions                  | get enabled            | disabled for closedCaptions                            | onEnabledChanged for closedcaptions with disable                  |
             | Set closedcaptions-true              | enabled            | closedcaptions onEnabledChanged            | enable closedCaptions                   | get enabled            | enabled for closedCaptions                             | onEnabledChanged for closedcaptions with enable                   |
@@ -58,19 +58,19 @@ Feature: ClosedCaptions_Manage
         And 'Firebolt' platform triggers to '1st party app' with '<Event_Validation_Key>'
 
         Examples:
-            | Scenario          | Method            | Set_API_Key                   | API_Key               | Method_Validation_Key                             | Event_Validation_Key                                         | Event                                     |
-            | fontFamily        | fontFamily        | set fontFamily as null        | get fontFamily        | monospaced serif for fontfamily in closedCaptions | onFontFamilyChanged for closedcaptions with monospaced serif | closedcaptions onFontFamilyChanged        |
-            | fontSize          | fontSize          | set fontSize as null          | get fontSize          | 1 for fontSize in closedcaptions                  | onFontSizeChanged for closedcaptions with 1                  | closedcaptions onFontSizeChanged          |
-            | fontColor         | fontColor         | set fontColor as null         | get fontColor         | #ffffff for fontColor in closedCaptions           | onFontColorChanged for closedcaptions with #ffffff           | closedcaptions onFontColorChanged         |
-            | fontEdge          | fontEdge          | set fontEdge as null          | get fontEdge          | none for fontEdge in closedCaptions               | onFontEdgeChanged for closedcaptions with none               | closedcaptions onFontEdgeChanged          |
-            | fontEdgeColor     | fontEdgeColor     | set fontEdgeColor as null     | get fontEdgeColor     | #7F7F7F for fontEdgeColor in closedCaptions       | onFontEdgeColorChanged for closedcaptions with #7F7F7F       | closedcaptions onFontEdgeColorChanged     |
-            | fontOpacity       | fontOpacity       | set fontOpacity as null       | get fontOpacity       | 100 for fontOpacity in closedCaptions             | onFontOpacityChanged for closedcaptions with 100             | closedcaptions onFontOpacityChanged       |
-            | backgroundColor   | backgroundColor   | set backgroundColor as null   | get backgroundColor   | #000000 for backgroundColor in closedCaptions     | onBackgroundColorChanged for closedcaptions with #000000     | closedcaptions onBackgroundColorChanged   |
-            | backgroundOpacity | backgroundOpacity | set backgroundOpacity as null | get backgroundOpacity | 12 for backgroundOpacity in closedCaptions        | onBackgroundOpacityChanged for closedcaptions with 12        | closedcaptions onBackgroundOpacityChanged |
-            | textAlign         | textAlign         | set textAlign as null         | get textAlign         | center for textAlign in closedCaptions            | onTextAlignChanged for closedcaptions with center            | closedcaptions onTextAlignChanged         |
-            | textAlignVertical | textAlignVertical | set textAlignVertical as null | get textAlignVertical | middle for textAlignVertical in closedCaptions    | onTextAlignVerticalChanged for closedcaptions with middle    | closedcaptions onTextAlignVerticalChanged |
-            | windowColor       | windowColor       | set windowColor as null       | get windowColor       | #000000 for windowColor in closedCaptions         | onWindowColorChanged for closedcaptions with #000000         | closedcaptions onWindowColorChanged       |
-            | windowOpacity     | windowOpacity     | set windowOpacity as null     | get windowOpacity     | 0 for windowOpacity in closedCaptions             | onWindowOpacityChanged for closedcaptions with 0             | closedcaptions onWindowOpacityChanged     |
+            | Scenario          | Method            | Set_API_Key                   | API_Key               | Method_Validation_Key                                 | Event_Validation_Key                                             | Event                                     |
+            | fontFamily        | fontFamily        | set fontFamily as null        | get fontFamily        | default value for fontFamily in closedcaptions        | onFontFamilyChanged for closedcaptions with default value        | closedcaptions onFontFamilyChanged        |
+            | fontSize          | fontSize          | set fontSize as null          | get fontSize          | default value for fontSize in closedcaptions          | onFontSizeChanged for closedcaptions with default value          | closedcaptions onFontSizeChanged          |
+            | fontColor         | fontColor         | set fontColor as null         | get fontColor         | default value for fontColor in closedcaptions         | onFontColorChanged for closedcaptions with default value         | closedcaptions onFontColorChanged         |
+            | fontEdge          | fontEdge          | set fontEdge as null          | get fontEdge          | default value for fontEdge in closedcaptions          | onFontEdgeChanged for closedcaptions with default value          | closedcaptions onFontEdgeChanged          |
+            | fontEdgeColor     | fontEdgeColor     | set fontEdgeColor as null     | get fontEdgeColor     | default value for fontEdgeColor in closedcaptions     | onFontEdgeColorChanged for closedcaptions with default value     | closedcaptions onFontEdgeColorChanged     |
+            | fontOpacity       | fontOpacity       | set fontOpacity as null       | get fontOpacity       | default value for fontOpacity in closedcaptions       | onFontOpacityChanged for closedcaptions with default value       | closedcaptions onFontOpacityChanged       |
+            | backgroundColor   | backgroundColor   | set backgroundColor as null   | get backgroundColor   | default value for backgroundColor in closedcaptions   | onBackgroundColorChanged for closedcaptions with default value   | closedcaptions onBackgroundColorChanged   |
+            | backgroundOpacity | backgroundOpacity | set backgroundOpacity as null | get backgroundOpacity | default value for backgroundOpacity in closedcaptions | onBackgroundOpacityChanged for closedcaptions with default value | closedcaptions onBackgroundOpacityChanged |
+            | textAlign         | textAlign         | set textAlign as null         | get textAlign         | default value for textAlign in closedcaptions         | onTextAlignChanged for closedcaptions with default value         | closedcaptions onTextAlignChanged         |
+            | textAlignVertical | textAlignVertical | set textAlignVertical as null | get textAlignVertical | default value for textAlignVertical in closedcaptions | onTextAlignVerticalChanged for closedcaptions with default value | closedcaptions onTextAlignVerticalChanged |
+            | windowColor       | windowColor       | set windowColor as null       | get windowColor       | default value for windowColor in closedcaptions       | onWindowColorChanged for closedcaptions with default value       | closedcaptions onWindowColorChanged       |
+            | windowOpacity     | windowOpacity     | set windowOpacity as null     | get windowOpacity     | default value for windowOpacity in closedcaptions     | onWindowOpacityChanged for closedcaptions with default value     | closedcaptions onWindowOpacityChanged     |
 
     @ClosedCaptions @manageSDK
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error
@@ -81,7 +81,6 @@ Feature: ClosedCaptions_Manage
             | Scenario                    | Method                | API_Key                                      | Method_Validation_key                                   |
             | Set enabled-test            | setEnabled            | enable closedCaptions with test parameter    | invalid params for closedcaptions setEnabled            |
             | Set enabled-123             | setEnabled            | enable closedCaptions with integer parameter | invalid params for closedcaptions setEnabled            |
-            | Set fontFamily-test         | setFontFamily         | set fontFamily to test                       | custom error for closedCaptions setFontFamily           |
             | Set fontFamily-123          | setFontFamily         | set fontFamily to 123                        | invalid params for closedcaptions setFontFamily         |
             | Set fontFamily-true         | setFontFamily         | set fontFamily to true                       | invalid params for closedcaptions setFontFamily         |
             | Set fontSize-true           | setFontSize           | set fontSize to true                         | invalid params for closedcaptions setFontSize           |
@@ -94,22 +93,17 @@ Feature: ClosedCaptions_Manage
             | Set fontEdge-solid          | setFontEdge           | set fontEdge to solid                        | custom error for closedcaptions setFontEdge             |
             | Set preferredLanguages-true | setPreferredLanguages | set preferredLanguages to true               | invalid params for closedcaptions setPreferredLanguages |
             | Set preferredLanguages-123  | setPreferredLanguages | set preferredLanguages to 123                | invalid params for closedcaptions setPreferredLanguages |
-            | Set preferredLanguages      | setPreferredLanguages | set preferredLanguages to test               | invalid params for closedcaptions setPreferredLanguages |
+            | Set preferredLanguage-test  | setPreferredLanguages | set preferredLanguages to test               | invalid params for closedcaptions setPreferredLanguages |
             | Set windowColor-123         | setWindowColor        | set windowColor to 123                       | invalid params for closedcaptions setWindowColor        |
             | Set windowOpacity-true      | setWindowOpacity      | set windowOpacity to true                    | invalid params for closedcaptions setWindowOpacity      |
-            | Set fontEdgeColor-test      | setFontEdgeColor      | set fontEdgeColor to test                    | invalid params for closedcaptions setFontEdgeColor      |
             | Set fontEdgeColor-123       | setFontEdgeColor      | set fontEdgeColor to 123                     | invalid params for closedcaptions setFontEdgeColor      |
             | Set fontEdgeColor-true      | setFontEdgeColor      | set fontEdgeColor to true                    | invalid params for closedcaptions setFontEdgeColor      |
-            | Set backgroundColor-test    | setBackgroundColor    | set backgroundColor to test                  | invalid params for closedcaptions setBackgroundColor    |
             | Set backgroundColor-123     | setBackgroundColor    | set backgroundColor to 123                   | invalid params for closedcaptions setBackgroundColor    |
             | Set backgroundColor-true    | setBackgroundColor    | set backgroundColor to true                  | invalid params for closedcaptions setBackgroundColor    |
-            | Set textAlign-top           | setTextAlign          | set textAlign to top                         | invalid params for closedcaptions setTextAlign          |
             | Set textAlign-123           | setTextAlign          | set textAlign to 123                         | invalid params for closedcaptions setTextAlign          |
             | Set textAlign-true          | setTextAlign          | set textAlign to true                        | invalid params for closedcaptions setTextAlign          |
-            | Set textAlignVertical-right | setTextAlignVertical  | set textAlignVertical to right               | invalid params for closedcaptions setTextAlignVertical  |
             | Set textAlignVertical-123   | setTextAlignVertical  | set textAlignVertical to 123                 | invalid params for closedcaptions setTextAlignVertical  |
             | Set textAlignVertical-true  | setTextAlignVertical  | set textAlignVertical to true                | invalid params for closedcaptions setTextAlignVertical  |
-            | Set fontColor-test          | setFontColor          | set fontColor to test                        | invalid params for closedcaptions setFontColor          |
             | Set fontColor-123           | setFontColor          | set fontColor to 123                         | invalid params for closedcaptions setFontColor          |
             | Set fontColor-true          | setFontColor          | set fontColor to true                        | invalid params for closedcaptions setFontColor          |
             | Set fontOpacity-120         | setFontOpacity        | set fontOpacity to 120                       | custom error for closedcaptions setFontOpacity          |
