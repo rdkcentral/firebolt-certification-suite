@@ -15,40 +15,49 @@ Feature: Accessibility
       Then 'Firebolt' platform responds with '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
+      @Sev0
       Examples:
-         | Scenario                             | Key                                       | Method_Content                                                  | Event_Content                                                             |
-         | Disable closedcaptions               | disable closedCaptions                    | disabled for closedCaptions settings                            | onclosedCaptionsSettingsChanged with disabled                             |
-         | Enable closedcaptions                | enable closedCaptions                     | enabled for closedCaptions settings                             | onclosedCaptionsSettingsChanged with enabled                              |
-         | Set fontFamily-monospaced_sanserif   | set fontFamily to monospaced_sanserif     | monospace sanserif for fontfamily in closedcaptions settings    | onclosedCaptionsSettingsChanged with monospace sanserif for fontfamily    |
-         | Set fontFamily-cursive               | set fontFamily to cursive                 | cursive for fontfamily in closedcaptions settings               | onclosedCaptionsSettingsChanged with cursive for fontfamily               |
-         | Set fontFamily-proportional_serif    | set fontFamily to proportional_serif      | proportional serif for fontfamily in closedcaptions settings    | onclosedCaptionsSettingsChanged with proportional serif for fontfamily    |
-         | Set fontFamily-monospaced_serif      | set fontFamily to monospaced_serif        | monospaced serif for fontfamily in closedcaptions settings      | onclosedCaptionsSettingsChanged with monospaced serif for fontfamily      |
-         | Set fontFamily-proportional_sanserif | set fontFamily to proportional_sanserif   | proportional sanserif for fontfamily in closedcaptions settings | onclosedCaptionsSettingsChanged with proportional sanserif for fontfamily |
-         | Set fontFamily-smallcaps             | set fontFamily to smallcaps               | smallcaps for fontfamily in closedcaptions settings             | onclosedCaptionsSettingsChanged with smallcaps for fontfamily             |
-         | Set fontFamily-casual                | set fontFamily to casual                  | casual for fontfamily in closedcaptions settings                | onclosedCaptionsSettingsChanged with casual for fontfamily                |
-         | Set fontSize-1                       | set fontSize to 1                         | 1 for fontSize in closedcaptions settings                       | onclosedCaptionsSettingsChanged with 1 for fontSize                       |
-         | Set fontSize-0.5                     | set fontSize to 0.5                       | 0.5 for fontSize in closedcaptions settings                     | onclosedCaptionsSettingsChanged with 0.5 for fontSize                     |
-         | Set fontSize-1.5                     | set fontSize to 1.5                       | 1.5 for fontSize in closedcaptions settings                     | onclosedCaptionsSettingsChanged with 1.5 for fontSize                     |
-         | Set fontColor-#ff00ff                | set fontColor to #ff00ff                  | #ff00ff for fontColor in closedcaptions settings                | onclosedCaptionsSettingsChanged with #ff00ff for fontColor                |
-         | Set fontEdge-raised                  | set fontEdge to raised                    | raised for fontEdge in closedcaptions settings                  | onclosedCaptionsSettingsChanged with raised for fontEdge                  |
-         | Set fontEdge-none                    | set fontEdge to none                      | none for fontEdge in closedcaptions settings                    | onclosedCaptionsSettingsChanged with none for fontEdge                    |
-         | Set fontEdge-depressed               | set fontEdge to depressed                 | depressed for fontEdge in closedcaptions settings               | onclosedCaptionsSettingsChanged with depressed for fontEdge               |
-         | Set fontEdge-uniform                 | set fontEdge to uniform                   | uniform for fontEdge in closedcaptions settings                 | onclosedCaptionsSettingsChanged with uniform for fontEdge                 |
-         | Set fontEdge-dropShadow-left         | set fontEdge to dropShadow_left           | dropShadowLeft for fontEdge in closedcaptions settings          | onclosedCaptionsSettingsChanged with dropShadowLeft for fontEdge          |
-         | Set fontEdge-dropShadow-right        | set fontEdge to dropShadow_right          | dropShadowRight for fontEdge in closedcaptions settings         | onclosedCaptionsSettingsChanged with dropShadowRight for fontEdge         |
-         | Set fontEdgeColor-#FFFFFF            | set fontEdgeColor to #FFFFFF              | #ffffff for fontEdgeColor in closedcaptions settings            | onclosedCaptionsSettingsChanged with #ffffff for fontEdgeColor            |
-         | Set backgroundColor-#7f7f7f          | set backgroundColor to #7f7f7f            | #7f7f7f for backgroundColor in closedcaptions settings          | onclosedCaptionsSettingsChanged with #7f7f7f for backgroundColor          |
-         | Set fontOpacity-75                   | set fontOpacity to 75                     | 75 for fontOpacity in closedcaptions settings                   | onclosedCaptionsSettingsChanged with 75 for fontOpacity                   |
-         | Set backgroundOpacity-75             | set backgroundOpacity to 75               | 75 for backgroundOpacity in closedcaptions settings             | onclosedCaptionsSettingsChanged with 75 for backgroundOpacity             |
-         | Set textAlign-left                   | set textAlign to left                     | left for textAlign in closedcaptions settings                   | onclosedCaptionsSettingsChanged with left for textAlign                   |
-         | Set textAlign-center                 | set textAlign to center                   | center for textAlign in closedcaptions settings                 | onclosedCaptionsSettingsChanged with center for textAlign                 |
-         | Set textAlign-right                  | set textAlign to right                    | right for textAlign in closedcaptions settings                  | onclosedCaptionsSettingsChanged with right for textAlign                  |
-         | Set textAlignVertical-top            | set textAlignVertical to top              | top for textAlignVertical in closedcaptions settings            | onclosedCaptionsSettingsChanged with top for textAlignVertical            |
-         | Set textAlignVertical-middle         | set textAlignVertical to middle           | middle for textAlignVertical in closedcaptions settings         | onclosedCaptionsSettingsChanged with middle for textAlignVertical         |
-         | Set textAlignVertical-bottom         | set textAlignVertical to bottom           | bottom for textAlignVertical in closedcaptions settings         | onclosedCaptionsSettingsChanged with bottom for textAlignVertical         |
-         | Set windowColor-white                | set windowColor to white                  | white for windowColor in closedcaptions settings                | onclosedCaptionsSettingsChanged with white for windowColor                |
-         | Set windowOpacity-50                 | set windowOpacity to 50                   | 50 for windowOpacity in closedcaptions settings                 | onclosedCaptionsSettingsChanged with 50 for windowOpacity                 |
-         | Set preferredLanguages               | set preferredLanguages to spanish english | spanish for preferredLanguages in closedcaptions settings       | onclosedCaptionsSettingsChanged with spanish for preferredLanguages       |
+         | Scenario               | Key                    | Method_Content                       | Event_Content                                 |
+         | Disable closedcaptions | disable closedCaptions | disabled for closedCaptions settings | onclosedCaptionsSettingsChanged with disabled |
+         | Enable closedcaptions  | enable closedCaptions  | enabled for closedCaptions settings  | onclosedCaptionsSettingsChanged with enabled  |
+
+      @Sev1
+      Examples:
+         | Scenario                             | Key                                     | Method_Content                                                  | Event_Content                                                             |
+         | Set fontFamily-monospaced_sanserif   | set fontFamily to monospaced_sanserif   | monospace sanserif for fontfamily in closedcaptions settings    | onclosedCaptionsSettingsChanged with monospace sanserif for fontfamily    |
+         | Set fontFamily-cursive               | set fontFamily to cursive               | cursive for fontfamily in closedcaptions settings               | onclosedCaptionsSettingsChanged with cursive for fontfamily               |
+         | Set fontFamily-proportional_serif    | set fontFamily to proportional_serif    | proportional serif for fontfamily in closedcaptions settings    | onclosedCaptionsSettingsChanged with proportional serif for fontfamily    |
+         | Set fontFamily-monospaced_serif      | set fontFamily to monospaced_serif      | monospaced serif for fontfamily in closedcaptions settings      | onclosedCaptionsSettingsChanged with monospaced serif for fontfamily      |
+         | Set fontFamily-proportional_sanserif | set fontFamily to proportional_sanserif | proportional sanserif for fontfamily in closedcaptions settings | onclosedCaptionsSettingsChanged with proportional sanserif for fontfamily |
+         | Set fontFamily-smallcaps             | set fontFamily to smallcaps             | smallcaps for fontfamily in closedcaptions settings             | onclosedCaptionsSettingsChanged with smallcaps for fontfamily             |
+         | Set fontFamily-casual                | set fontFamily to casual                | casual for fontfamily in closedcaptions settings                | onclosedCaptionsSettingsChanged with casual for fontfamily                |
+         | Set fontSize-1                       | set fontSize to 1                       | 1 for fontSize in closedcaptions settings                       | onclosedCaptionsSettingsChanged with 1 for fontSize                       |
+         | Set fontSize-0.5                     | set fontSize to 0.5                     | 0.5 for fontSize in closedcaptions settings                     | onclosedCaptionsSettingsChanged with 0.5 for fontSize                     |
+         | Set fontSize-1.5                     | set fontSize to 1.5                     | 1.5 for fontSize in closedcaptions settings                     | onclosedCaptionsSettingsChanged with 1.5 for fontSize                     |
+         | Set fontColor-#ff00ff                | set fontColor to #ff00ff                | #ff00ff for fontColor in closedcaptions settings                | onclosedCaptionsSettingsChanged with #ff00ff for fontColor                |
+         | Set fontEdge-raised                  | set fontEdge to raised                  | raised for fontEdge in closedcaptions settings                  | onclosedCaptionsSettingsChanged with raised for fontEdge                  |
+         | Set fontEdge-none                    | set fontEdge to none                    | none for fontEdge in closedcaptions settings                    | onclosedCaptionsSettingsChanged with none for fontEdge                    |
+         | Set fontEdge-depressed               | set fontEdge to depressed               | depressed for fontEdge in closedcaptions settings               | onclosedCaptionsSettingsChanged with depressed for fontEdge               |
+         | Set fontEdge-uniform                 | set fontEdge to uniform                 | uniform for fontEdge in closedcaptions settings                 | onclosedCaptionsSettingsChanged with uniform for fontEdge                 |
+         | Set fontEdge-dropShadow-left         | set fontEdge to dropShadow_left         | dropShadowLeft for fontEdge in closedcaptions settings          | onclosedCaptionsSettingsChanged with dropShadowLeft for fontEdge          |
+         | Set fontEdge-dropShadow-right        | set fontEdge to dropShadow_right        | dropShadowRight for fontEdge in closedcaptions settings         | onclosedCaptionsSettingsChanged with dropShadowRight for fontEdge         |
+         | Set fontEdgeColor-#FFFFFF            | set fontEdgeColor to #FFFFFF            | #ffffff for fontEdgeColor in closedcaptions settings            | onclosedCaptionsSettingsChanged with #ffffff for fontEdgeColor            |
+         | Set backgroundColor-#7f7f7f          | set backgroundColor to #7f7f7f          | #7f7f7f for backgroundColor in closedcaptions settings          | onclosedCaptionsSettingsChanged with #7f7f7f for backgroundColor          |
+         | Set fontOpacity-75                   | set fontOpacity to 75                   | 75 for fontOpacity in closedcaptions settings                   | onclosedCaptionsSettingsChanged with 75 for fontOpacity                   |
+         | Set backgroundOpacity-75             | set backgroundOpacity to 75             | 75 for backgroundOpacity in closedcaptions settings             | onclosedCaptionsSettingsChanged with 75 for backgroundOpacity             |
+
+      @Sev2
+      Examples:
+         | Scenario                     | Key                                       | Method_Content                                            | Event_Content                                                       |
+         | Set textAlign-left           | set textAlign to left                     | left for textAlign in closedcaptions settings             | onclosedCaptionsSettingsChanged with left for textAlign             |
+         | Set textAlign-center         | set textAlign to center                   | center for textAlign in closedcaptions settings           | onclosedCaptionsSettingsChanged with center for textAlign           |
+         | Set textAlign-right          | set textAlign to right                    | right for textAlign in closedcaptions settings            | onclosedCaptionsSettingsChanged with right for textAlign            |
+         | Set textAlignVertical-top    | set textAlignVertical to top              | top for textAlignVertical in closedcaptions settings      | onclosedCaptionsSettingsChanged with top for textAlignVertical      |
+         | Set textAlignVertical-middle | set textAlignVertical to middle           | middle for textAlignVertical in closedcaptions settings   | onclosedCaptionsSettingsChanged with middle for textAlignVertical   |
+         | Set textAlignVertical-bottom | set textAlignVertical to bottom           | bottom for textAlignVertical in closedcaptions settings   | onclosedCaptionsSettingsChanged with bottom for textAlignVertical   |
+         | Set windowColor-white        | set windowColor to white                  | white for windowColor in closedcaptions settings          | onclosedCaptionsSettingsChanged with white for windowColor          |
+         | Set windowOpacity-50         | set windowOpacity to 50                   | 50 for windowOpacity in closedcaptions settings           | onclosedCaptionsSettingsChanged with 50 for windowOpacity           |
+         | Set preferredLanguages       | set preferredLanguages to spanish english | spanish for preferredLanguages in closedcaptions settings | onclosedCaptionsSettingsChanged with spanish for preferredLanguages |
 
    @sdk @transport
    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario> with 'null' params
