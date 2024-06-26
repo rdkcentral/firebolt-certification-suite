@@ -7,6 +7,11 @@ const path = require('path');
 const _ = require('lodash');
 const logger = require('../support/Logger')('testDataProcessor.js');
 
+// Combining validation objects from FCS and config module into single JSON
+const validationObjects = combineValidationObjectsJson();
+let resolvedFireboltCallsJson;
+let combinedFireboltMocksJson;
+
 /**
  *  @function testDataProcessor
  *  The Test Data Processor performs the following operations:
@@ -39,7 +44,7 @@ function testDataProcessor(configEnv) {
     fcsFireboltCallsMergedJson,
     configFireboltCallsModuleMergedJson
   );
-  const combinedFireboltMocksJson = Object.assign(
+  combinedFireboltMocksJson = Object.assign(
     fcsFireboltMocksMergedJson,
     configModuleFireboltMocksMergedJson
   );
@@ -50,14 +55,45 @@ function testDataProcessor(configEnv) {
   ]);
 
   // Resolving the variables in the JSON
-  const resolvedFireboltCallsJson = processFireboltJson(combinedFireboltCallsJson);
+  resolvedFireboltCallsJson = processFireboltJson(combinedFireboltCallsJson);
+
+  // Resolving the variables in the SetResponse JSON
+  const resolvedSetResponseJson = processSetResponseJson(mergedSetResponseJson);
 
   // Below key names are converted into environment variables.
   return {
     fireboltCallsJson: resolvedFireboltCallsJson,
     fireboltMocksJson: combinedFireboltMocksJson,
-    setResponseJson: mergedSetResponseJson,
+    setResponseJson: resolvedSetResponseJson,
   };
+}
+
+/**
+ *  @function processSetResponseJson
+ *  processSetResponseJson function will perform following operations
+ *  - Iterate over each key in the provided JSON
+ *  - Resolve the values of setResponse params
+ *  - Return the JSON with the updated value.
+ *
+ *  @example
+ *  processSetResponseJson({'abc': {'fireboltMock': 'ACKNOWLEDGE_CHALLENGE_GRANTED', 'firstParty': 'true'}})
+ *  @returns
+ *  {'abc': {fireboltMock: {'method': 'method_name', 'response': [{"isCancelled": false, "withUi": true, "result":{}}]}}, 'firstParty': 'true'}
+ */
+function processSetResponseJson(setResponseJsonData) {
+  // Looping through json data
+  for (const key in setResponseJsonData) {
+    const object = setResponseJsonData[key];
+    if (object.hasOwnProperty('fireboltMock') && combinedFireboltMocksJson[object.fireboltMock]) {
+      object.fireboltMock = combinedFireboltMocksJson[object.fireboltMock];
+    } else if (
+      object.hasOwnProperty('fireboltCall') &&
+      resolvedFireboltCallsJson[object.fireboltCall]
+    ) {
+      object.fireboltCall = resolvedFireboltCallsJson[object.fireboltCall];
+    }
+  }
+  return setResponseJsonData;
 }
 
 /**
@@ -180,8 +216,6 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
           return dataIdentifier;
         }
       } else {
-        // Combining validation objects from FCS and config module into single JSON
-        const validationObjects = combineValidationObjectsJson();
         const validationObject = validationObjects[dataIdentifier];
 
         if (validationObject && validationObject.data) {
@@ -233,7 +267,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                     if (REGEXFORMATS[regexType]) {
                       parsedRegexExp = REGEXFORMATS[regexType];
                     } else {
-                      const regExp = new RegExp(regexType);
+                      const regExp = new RegExp(data.type);
                       parsedRegexExp = regExp;
                     }
                     return (data.type = parsedRegexExp.toString());

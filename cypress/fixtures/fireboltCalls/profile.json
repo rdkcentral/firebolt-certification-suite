@@ -42,5 +42,26 @@
         "validationJsonPath": "result",
         "content": "INVALID_REQUEST",
         "expectingError": true
+    },
+    "PINCHALLENGE_ONREQUESTCHALLENGE_MANAGE":{
+        "method": "manage_pinChallenge.onRequestChallenge"
+    },
+    "PROFILE_APPROVEPURCHASE":{
+        "method": "profile.approvePurchase"
+    },
+    "PINCHALLENGE_ONREQUESTCHALLENGE":{
+        "method": "pinChallenge.onRequestChallenge"
+    },
+    "REQUEST_FOCUS_FOR_PINCHALLENGE_PROVIDER":{
+        "method": "pinChallenge.challengeFocus",
+        "params": "PROFILE_PINCHALLENGE_CHALLENGEFOCUS_PARAMS"
+    },
+    "SEND_RESPONSE_FROM_PINCHALLENGE_PROVIDER":{
+        "method": "pinChallenge.challengeResponse",
+        "params": "PROFILE_PINCHALLENGE_CHALLENGERESPONSE_PARAMS"
+    },
+    "SEND_ERROR_FROM_PINCHALLENGE_PROVIDER":{
+        "method": "pinChallenge.challengeError",
+        "params": "PROFILE_PINCHALLENGE_CHALLENGE_ERROR_PARAMS"
     }
 }

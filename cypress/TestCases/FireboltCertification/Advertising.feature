@@ -17,8 +17,8 @@ Feature: Advertising
 
       Examples:
          | Scenario                | API_Key                 | Method_Validation_key                       | Event_Validation_key                                       |
-         | Disable limitAdTracking | disable limitAdTracking | Advertising policy limitAdTracking as true  | onPolicyChanged for advertising limitAdTracking with true  |
          | Enable limitAdTracking  | enable limitAdTracking  | Advertising policy limitAdTracking as false | onPolicyChanged for advertising limitAdTracking with false |
+         | Disable limitAdTracking | disable limitAdTracking | Advertising policy limitAdTracking as true  | onPolicyChanged for advertising limitAdTracking with true  |
 
    @sdk @transport
    Scenario Outline: Advertising.policy - Positive Scenario: <Scenario>

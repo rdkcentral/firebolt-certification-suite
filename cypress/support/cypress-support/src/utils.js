@@ -83,6 +83,10 @@ function createIntentMessage(task, jsonParams, map = null) {
   map && map.hasOwnProperty(CONSTANTS.IS_NOT_SUPPORTED_API)
     ? (jsonQueryParams.isNotSupportedApi = map.isNotSupportedApi)
     : false;
+
+  Cypress.env('isRpcOnlyValidation')
+    ? (jsonQueryParams.responseTimeout = CONSTANTS.RPC_ONLY_TIMEOUT)
+    : null;
   const intent = {
     action: queryParams.action,
     data: { query: JSON.stringify(jsonQueryParams) },
@@ -168,7 +172,7 @@ function overideParamsFromConfigModule(overrideParams) {
     : CONSTANTS.EXCLUDED_METHODS;
   overrideParams.modulesToBeExcluded = getEnvVariable('excludedModules', false)
     ? getEnvVariable('excludedModules')
-    : CONSTANTS.EXCLUDED_METHODS;
+    : CONSTANTS.EXCLUDED_MODULES;
   return overrideParams;
 }
 
@@ -547,8 +551,12 @@ function pubSubClientCreation(appTransport) {
         clientCreated = true;
         resolve(true);
       } catch (error) {
-        // If an error occurs, reject the promise with the error
-        reject('Failed to initiate PubSubClient' + error);
+        if (getEnvVariable(CONSTANTS.FAIL_ON_PUBSUB_CONNECTION_ERROR, false)) {
+          // If an error occurs, reject the promise with the error
+          reject('Failed to initiate PubSubClient' + error);
+        } else {
+          resolve(false);
+        }
       }
     } else {
       resolve(false);
@@ -656,6 +664,12 @@ global.resolveDeviceVariable = function (key) {
  * fireLog.isTrue(isTrueValue, "True message");
  * fireLog.isFalse(isFalseValue, "False message");
  * fireLog.deepEqual(actual, expected, "deepEqual message");
+ *
+ * fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
+ * fireLog.info() is being used to log the message without any assertion.
+ * Removing cy.log and replacing with fireLog.info() to get a cleaner report.
+ *
+ *
  */
 
 class FireLog {
@@ -671,6 +685,7 @@ class FireLog {
         const originalMethod = this[method];
         this[method] = function (...args) {
           const message = args[args.length - 1];
+
           return cy.log(message).then(() => {
             return originalMethod.apply(this, args);
           });
@@ -736,10 +751,108 @@ class FireLog {
   assert(expression, message) {
     assert(expression, message);
   }
+
+  info(message) {}
 }
 
 const fireLog = new FireLog();
 global.fireLog = fireLog;
+
+/**
+ * @module utils
+ * @function parseValue
+ * @description Function to parse the passed string
+ * @param {String}
+ *
+ * @example
+ * - parseValue('123')
+ * - parseValue('true')
+ *
+ * @returns
+ * 123
+ * true
+ */
+function parseValue(str) {
+  if (str === null || str === undefined) return str;
+
+  if (typeof str === 'string') {
+    if (str === 'true') return true;
+    if (str === 'false') return false;
+
+    if (!isNaN(str)) return Number(str);
+  }
+
+  return str;
+}
+
+/**
+ * @module utils
+ * @globalfunction resolveAtRuntime
+ * @description Return the function which is having logic to resolve the value for the passed input at runtime.
+ * @param {String || Array}
+ * @example
+ * resolveAtRuntime(["result.{{attribute}}", "result.styles.{{attribute}}"])
+ * resolveAtRuntime("manage_closedcaptions.set{{attribute.uppercaseFirstChar}}")
+ * resolveAtRuntime("value")
+ *
+ * @returns
+ * ['result.fontSize', 'result.styles.fontSize']
+ * "manage_closedcaptions.setFontSize"
+ * 1.5
+ */
+global.resolveAtRuntime = function (input) {
+  return function () {
+    const functions = {
+      uppercaseFirstChar: function (str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      },
+      lowercaseFirstChar: function (str) {
+        return str.charAt(0).toLowerCase() + str.slice(1);
+      },
+    };
+
+    // Function to check the occurence of the pattern and updating the actual value
+    function replacingPatternOccurenceWithValue(text) {
+      return text.replace(/{{(.*?)}}/g, (match, pattern) => {
+        let functionName;
+
+        // Separating the function name from the pattern, if it exists,.
+        if (pattern.includes('.')) {
+          functionName = pattern.split('.')[1];
+          pattern = pattern.split('.')[0];
+        }
+
+        // If a function name is present in the pattern, call the function with pattern content as input.
+        // Reading the pattern content from the runtime environment variable
+        if (functionName && functions.hasOwnProperty(functionName)) {
+          return functions[functionName](getEnvVariable('runtime')[pattern] || match);
+        } else {
+          return getEnvVariable('runtime')[pattern] || match;
+        }
+      });
+    }
+
+    if (typeof input === CONSTANTS.TYPE_STRING) {
+      // Returning the actual pattern content for each occurrence of "{{"
+      if (input.includes('{{')) {
+        return replacingPatternOccurenceWithValue(input);
+      }
+      // If input not having "{{", returning content from runtime environment variable.
+      else if (!input.includes('{{')) {
+        return getEnvVariable('runtime')[input] || input;
+      }
+    } else if (Array.isArray(input) && input.length > 0) {
+      // input is an array; iterating through each element, it updates the actual value for that pattern if there is an occurrence of "{{".
+      return input.map((element) => {
+        if (element.includes('{{')) {
+          return replacingPatternOccurenceWithValue(element);
+        }
+      });
+    } else {
+      logger.info(`Passed input - ${input} must be an array or a string.`);
+    }
+  };
+};
 
 module.exports = {
   replaceJsonStringWithEnvVar,
@@ -764,4 +877,5 @@ module.exports = {
   writeJsonToFileForReporting,
   checkForTags,
   fireLog,
+  parseValue,
 };
