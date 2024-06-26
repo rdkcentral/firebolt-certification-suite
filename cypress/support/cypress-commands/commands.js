@@ -173,11 +173,69 @@ Cypress.Commands.add('getSdkVersion', () => {
                 ? readableSDKVersion
                 : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
             );
-            return;
+          } else {
+            Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
           }
-          Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
+          if (response?.firmware?.readable) {
+            let deviceFirmware = JSON.stringify(response.firmware.readable);
+            deviceFirmware = deviceFirmware.replace(/"/g, '');
+            Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+          }
         });
       });
+  }
+});
+/**
+ * @module commands
+ * @function updateRunInfo
+ * @description update Run Info in cucumber report dynamically
+ * @example
+ * updateRunInfo()
+ */
+Cypress.Commands.add('updateRunInfo', () => {
+  const fileName = './reportEnv.json';
+  if (fileName) {
+    try {
+      cy.readFile(fileName).then((reportEnv) => {
+        if (reportEnv) {
+          const isPlatformRipple = false;
+          if (
+            reportEnv.customData &&
+            reportEnv.customData.data &&
+            reportEnv.customData.data.length > 0
+          ) {
+            for (let i = 0; i < reportEnv.customData.data.length; i++) {
+              if (reportEnv.customData.data[i].label == CONSTANTS.PLATFORM) {
+                reportEnv.customData.data[i].value = Cypress.env(CONSTANTS.ENV_PLATFORM)
+                  ? Cypress.env(CONSTANTS.ENV_PLATFORM)
+                  : 'N/A';
+              }
+              if (reportEnv.customData.data[i].label == CONSTANTS.PLATFORM_RELEASE) {
+                reportEnv.customData.data[i].value = Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION)
+                  ? Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION)
+                  : 'N/A';
+              }
+              if (reportEnv.customData.data[i].label == CONSTANTS.DEVICE_FIRMWARE) {
+                reportEnv.customData.data[i].value = Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE)
+                  ? Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE)
+                  : 'N/A';
+              }
+            }
+          }
+          // write the merged object
+          cy.writeFile(fileName, reportEnv);
+        } else {
+          logger.info('Unable to read from reportEnv json file');
+          return false;
+        }
+      });
+    } catch (err) {
+      logger.info('Error in updating Run Info in cucumber report', err);
+      return false;
+    }
+  } else {
+    logger.info('Unable to update Run Info in cucumber report');
+    return false;
   }
 });
 
@@ -194,10 +252,11 @@ Cypress.Commands.add('getDeviceVersion', () => {
     param: {},
     action: CONSTANTS.ACTION_CORE.toLowerCase(),
   };
-
+  console.log(JSON.stringify(requestMap) + ' reqMAPPP');
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
       if (response && response.result) {
+        console.log(JSON.stringify(response) + 'RESPPPPPPP');
         return response.result;
       } else {
         throw 'Obtained response is null|undefined';

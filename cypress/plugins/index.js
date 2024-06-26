@@ -39,6 +39,7 @@ const getSpecPattern = require('../../specHelperConfig.js');
 const logger = require('../support/Logger')('index.js');
 const updateLoggerLevel = require('../support/Logger').updateLoggerLevel;
 const { getAndDereferenceOpenRpc } = require('./pluginUtils');
+const reportEnv = require('../../reportEnv.json');
 let metaDataArr = [];
 
 module.exports = async (on, config) => {
@@ -298,6 +299,8 @@ module.exports = async (on, config) => {
             jsonReport = readDataFromFile(filePath + fileName);
           }
           const reportProperties = {};
+          const reportEnv = require('../../reportEnv.json');
+          reportProperties.reportEnv = reportEnv;
           reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
           // Add the report to the reportObj
           if (reportType === CONSTANTS.CUCUMBER) {

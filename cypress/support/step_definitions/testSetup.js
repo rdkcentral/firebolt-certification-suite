@@ -48,6 +48,7 @@ Given('the environment has been set up for {string} tests', (test) => {
         Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
       });
     });
+    cy.updateRunInfo();
     cy.getCapabilities();
     destroyAppInstance(test);
     Cypress.env(CONSTANTS.ENV_SETUP_STATUS, true);
