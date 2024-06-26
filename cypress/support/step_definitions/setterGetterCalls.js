@@ -37,7 +37,8 @@ Given(/we test the '(.+)' getters and setters$/, async (key) => {
   cy.getFireboltData(key).then((parsedData) => {
     // getFireboltData handles the case where the key is not found
     // Save the object as env.runtime.fireboltCall
-    Cypress.env(CONSTANTS.RUNTIME, { fireboltCall: parsedData });
+    const runtime = { fireboltCall: parsedData };
+    Cypress.env(CONSTANTS.RUNTIME, runtime);
   });
 
 });
