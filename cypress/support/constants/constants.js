@@ -330,6 +330,7 @@ module.exports = {
   RESPONSE_TOPIC_LIST: 'responseTopicList',
   RESULT: 'result',
   RPC_ONLY_TIMEOUT: 200000,
+  RUNTIME: 'runtime',
   SANITY_REPORT_FILENAME: 'fca_sanity_suite',
   SANITY_REPORT_FILE_PATH: getSanityReportPath(),
   SANITY_REPORT_LONGPOLL_TIMEOUT: 200000,
