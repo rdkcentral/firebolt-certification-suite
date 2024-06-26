@@ -29,7 +29,7 @@ The JSON data will be loaded first from `configModule/fixtures/external/objects/
 # Usage Notes
 - The customFooter object is used to define HTML content for footers on various pages.
 - The customMetadata object is used to define HTML content for metadata sections on various pages.
-- Ensure that the HTML content is properly escaped to avoid any issues with rendering in the web application.
+- Ensure that the HTML content is properly escaped to avoid any issues with rendering.
 
 # Additional Information
 - This JSON structure can be extended to include more pages by adding more keys(based on feature file name) to the customFooter and customMetadata objects as needed.
