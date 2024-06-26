@@ -40,5 +40,4 @@ Given(/we test the '(.+)' getters and setters$/, async (key) => {
     const runtime = { fireboltCall: parsedData };
     Cypress.env(CONSTANTS.RUNTIME, runtime);
   });
-
 });
