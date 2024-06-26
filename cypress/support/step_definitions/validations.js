@@ -393,7 +393,7 @@ Given(
 
 /**
  * @module validations
- * @function And '(.+)' platform validates '(.+)' ('(.+)')? (get|set) API response(?: as '(.+)')?
+ * @function And '(.+)' platform responds to '([^']*)'(?: '([^']*)')? (get|set) API(?: with '(.+)')?
  * @description Performing a validation against the source of truth for the given API response
  * @param {String} sdk - name of the sdk.
  * @param {String} appId - The object was retrieved by using the appId.
@@ -401,14 +401,14 @@ Given(
  * @param {String} methodType - Determines which method doing content validation Ex: set or get
  * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS'
  * @example
- * And 'Firebolt' platform validates '1st party app' 'CLOSEDCAPTION_SETTINGS' get API response
- * And 'Firebolt' platform validates '1st party app' 'CLOSEDCAPTION_SETTINGS' set API response
- * And 'Firebolt' platform validates '3rd party app' 'CLOSEDCAPTION_SETTINGS' get API response
- * And 'Firebolt' platform validates '1st party app' set API response
- * And 'Firebolt' platform validates '1st party app' 'CLOSEDCAPTION_SETTINGS' set API response as 'INVALID_TYPE_PARAMS'
+ * And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' get API
+ * And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' set API
+ * And 'Firebolt' platform responds to '3rd party app' 'CLOSEDCAPTION_SETTINGS' get API
+ * And 'Firebolt' platform responds to '1st party app' set API
+ * And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' set API with 'INVALID_TYPE_PARAMS'
  */
 Given(
-  /'(.+)' platform validates '([^']*)'(?: '([^']*)')? (get|set) API response(?: as '(.+)')?$/,
+  /'(.+)' platform responds to '([^']*)'(?: '([^']*)')? (get|set) API(?: with '(.+)')?$/,
   async (sdk, appId, fireboltCallKey, methodType, errorContent) => {
     if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
       let fireboltCallObject;
