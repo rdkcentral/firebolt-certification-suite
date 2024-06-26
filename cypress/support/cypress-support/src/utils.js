@@ -726,7 +726,7 @@ class FireLog extends Function {
         typeof instanceProxy[method] === 'function'
       ) {
         instanceProxy[method] = new Proxy(instanceProxy[method], handler);
-        if (['include'].includes(method)) {
+        if (['include', 'fail'].includes(method)) {
           instanceProxy[method].hasOwnLog = true;
         }
       }
@@ -796,6 +796,11 @@ class FireLog extends Function {
 
   assert(expression, message) {
     assert(expression, message);
+  }
+
+  fail(message) {
+    cy.log(message);
+    assert.fail(message);
   }
 
   info(message) {}
