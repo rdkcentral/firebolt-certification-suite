@@ -726,9 +726,8 @@ class FireLog extends Function {
         typeof instanceProxy[method] === 'function'
       ) {
         instanceProxy[method] = new Proxy(instanceProxy[method], handler);
-        if (['includes'].includes(method) || ['fail'].includes(method)) {
-          instanceProxy[method].hasOwnLog = true;
-        }
+        const methodSource = instanceProxy[method].toString();
+        instanceProxy[method].hasOwnLog = methodSource.includes('cy.log');
       }
     });
 
