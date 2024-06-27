@@ -692,10 +692,9 @@ class FireLog extends Function {
         } else {
           if (argumentsList.length > 2)
             message =
-              argumentsList[argumentsList.length - 1] +
-              ' expected ' +
+              'Expected: ' +
               JSON.stringify(argumentsList[0]) +
-              ' to be ' +
+              'Actual: ' +
               JSON.stringify(argumentsList[1]);
           else
             message =
