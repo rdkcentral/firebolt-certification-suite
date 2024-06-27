@@ -694,7 +694,7 @@ class FireLog extends Function {
             message =
               'Expected: ' +
               JSON.stringify(argumentsList[0]) +
-              'Actual: ' +
+              ' Actual: ' +
               JSON.stringify(argumentsList[1]);
           else
             message =
