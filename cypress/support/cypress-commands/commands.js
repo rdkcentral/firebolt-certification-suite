@@ -193,10 +193,12 @@ Cypress.Commands.add('getSdkVersion', () => {
  * updateRunInfo()
  */
 Cypress.Commands.add('updateRunInfo', () => {
-  const fileName = './reportEnv.json';
-  if (fileName) {
+  const reportEnvFile = './reportEnv.json';
+  const tempReportEnvVile = 'tempReportEnv.json';
+
+  if (reportEnvFile) {
     try {
-      cy.readFile(fileName).then((reportEnv) => {
+      cy.readFile(reportEnvFile).then((reportEnv) => {
         if (reportEnv) {
           const isPlatformRipple = false;
           if (
@@ -223,7 +225,7 @@ Cypress.Commands.add('updateRunInfo', () => {
             }
           }
           // write the merged object
-          cy.writeFile(fileName, reportEnv);
+          cy.writeFile(tempReportEnvVile, reportEnv);
         } else {
           logger.info('Unable to read from reportEnv json file');
           return false;
@@ -252,11 +254,9 @@ Cypress.Commands.add('getDeviceVersion', () => {
     param: {},
     action: CONSTANTS.ACTION_CORE.toLowerCase(),
   };
-  console.log(JSON.stringify(requestMap) + ' reqMAPPP');
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
       if (response && response.result) {
-        console.log(JSON.stringify(response) + 'RESPPPPPPP');
         return response.result;
       } else {
         throw 'Obtained response is null|undefined';
