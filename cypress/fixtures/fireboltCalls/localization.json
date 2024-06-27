@@ -640,5 +640,11 @@
         "method": "localization.removeAdditionalInfo",
         "validationJsonPath": "result",
         "content": "NULL"  
+    },
+    "EXPECTED_LOCALIZATION_COUNTRYCODE_CHALLENGEERROR":{
+        "method": "localization.countryCode",
+        "validationJsonPath": "result",
+        "content": "CUSTOM_ERROR",
+        "expectingError": true
     }
 }
