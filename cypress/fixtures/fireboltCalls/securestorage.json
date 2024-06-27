@@ -779,7 +779,7 @@
         "params": "SECURESTORAGE_CLEAR_ACCOUNT"
     },
     "CLEAR_STORED_VALUE_WITH_SCOPE_AS_DEVICE_FOR_AN_APP": {
-        "method": "securestorage.clearForApp",
+        "method": "manage_securestorage.clearForApp",
         "params": "SECURESTORAGE_CLEARFORAPP_DEVICE"
     },
     "CLEAR_STORED_VALUE_WITH_SCOPE_AS_ACCOUNT_FOR_AN_APP": {
