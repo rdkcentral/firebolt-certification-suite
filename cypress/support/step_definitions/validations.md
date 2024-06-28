@@ -412,3 +412,22 @@ While validating, if a key is present in both fcs-validation jsons (eg: cypress/
             }
         ]
 }
+
+## '(.+)' platform responds to '([^']*)'(?: '([^']*)')? (get|set) API(?: with '(.+)')?
+### Purpose: Performing a validation against the source of truth for the given API response
+
+### Params:
+| Param | Definition |
+| --- | --- |
+| sdk | name of the sdk |
+| appId | The object was retrieved by using the appId |
+| fireboltCallKey | key name passed to look for firebolt call object in fireboltCallData Json |
+| methodType | Determines which method doing content validation Ex: set or get |
+| errorContent | Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS' |
+
+### Examples:
+ * `And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' get API`
+ * `And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' set API`
+ * `And 'Firebolt' platform responds to '3rd party app' 'CLOSEDCAPTION_SETTINGS' get API`
+ * `And 'Firebolt' platform responds to '1st party app' set API`
+ * `And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' set API with 'INVALID_TYPE_PARAMS'`
