@@ -323,13 +323,13 @@
 		"params": "SECURESTORAGE_SETFORAPP_WITH_EMPTY_KEY",
         "expected": "error"
     },
-    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_DEVICE1": {
+    "SET_SECURE_DATA_VALUE1_FOR_AN_APP_WITH_SCOPE_DEVICE": {
         "method": "manage_securestorage.setForApp",
-        "params": "SECURESTORAGE_SETFORAPP_DEVICE1"
+        "params": "SECURESTORAGE_SETFORAPP_DEVICE_KEY1"
     },
-    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_DEVICE2": {
+    "SET_SECURE_DATA_VALUE2_FOR_AN_APP_WITH_SCOPE_DEVICE": {
         "method": "manage_securestorage.setForApp",
-        "params": "SECURESTORAGE_SETFORAPP_DEVICE2"
+        "params": "SECURESTORAGE_SETFORAPP_DEVICE_KEY2"
     },
     "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_ACCOUNT": {
         "method": "manage_securestorage.setForApp",
@@ -337,11 +337,15 @@
     },
     "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_ACCOUNT1": {
         "method": "manage_securestorage.setForApp",
+		"params": "SECURESTORAGE_SETFORAPP_ACCOUNT_KEY1"
+    },
+    "SET_SECURE_DATA_VALUE1_FOR_AN_APP_WITH_SCOPE_ACCOUNT": {
+        "method": "manage_securestorage.setForApp",
 		"params": "SECURESTORAGE_SETFORAPP_ACCOUNT1"
     },
-    "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_ACCOUNT2": {
+    "SET_SECURE_DATA_VALUE2_FOR_AN_APP_WITH_SCOPE_ACCOUNT": {
         "method": "manage_securestorage.setForApp",
-		"params": "SECURESTORAGE_SETFORAPP_ACCOUNT2"
+		"params": "SECURESTORAGE_SETFORAPP_ACCOUNT_KEY2"
     },
     "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_DEVICE_WITH_OPTIONAL_PARAMETER": {
         "method": "manage_securestorage.setForApp",
@@ -419,9 +423,9 @@
         "method": "manage_securestorage.removeForApp",
 		"params": "SECURESTORAGE_REMOVEFORAPP_ACCOUNT"
     },
-    "REMOVE_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_ACCOUNT1": {
+    "REMOVE_SECURE_DATA_VALUE1_FOR_AN_APP_WITH_SCOPE_ACCOUNT": {
         "method": "manage_securestorage.removeForApp",
-		"params": "SECURESTORAGE_REMOVEFORAPP_ACCOUNT1"
+		"params": "SECURESTORAGE_REMOVEFORAPP_ACCOUNT_KEY1"
     },
     "GET_STORED_VALUE_FOR_AUTHTESTTOKENDEVICE_WITH_SCOPE_DEVICE": {
         "method": "securestorage.get",
