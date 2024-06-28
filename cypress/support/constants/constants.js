@@ -211,6 +211,7 @@ module.exports = {
     'AcknowledgeChallenge',
     'userGrants',
     'lifeCycleApi',
+    'UserInterestProvider',
   ],
   LIFECYCLE_FINISHED_ERROR: 'lifecycleFinishedError',
   LIFECYCLE_HISTORY_FAILED: 'Failed to fetch lifecycle history due to following error: ',
@@ -441,6 +442,8 @@ module.exports = {
   VISIBILITYSTATE_FAILURE_LOG:
     '. If the visibility state response is as per the platform, add the expected value in configModule. More details is present in footer',
   NO_EVENT_TRIGGERED: 'Expecting no event to be triggered from platform',
+  REGISTERPROVIDER: 'registerprovider',
+  USERINTERESTPROVIDER: 'userinterestprovider',
   VISIBILITYSTATE: 'visibilityState',
   VISIBLE_CHECK: 'visible_check',
   STEP_DEFINITION_NEEDS_TO_IMPLEMENT: 'Step definition needs to be implemented',

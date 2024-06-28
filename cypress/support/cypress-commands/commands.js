@@ -480,6 +480,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
   } else if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTMOCK)) {
     cy.parsedMockData(beforeOperation).then((parsedData) => {
       if (firstParty) {
+        parsedData.firstParty = firstParty;
         const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SETRESPONSE;
         const requestMap = {
           method: method,
@@ -706,6 +707,17 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     if (getEnvVariable(CONSTANTS.DEVICE_MAC, false)) {
       data.query.params[CONSTANTS.MACADDRESS_PARAM] = getEnvVariable(CONSTANTS.DEVICE_MAC);
     }
+  }
+  // If the testType is userInterestProvider, send the discovery.launch params with registerProvider = false, then certification app will not register for userInterest provider.
+  if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.USERINTERESTPROVIDER) {
+    data = {
+      query: JSON.stringify({
+        params: {
+          [CONSTANTS.REGISTERPROVIDER]: false,
+        },
+      }),
+    };
+    requestMap.params.intent.data = data;
   }
 
   // Stringify the query (The intent requires it be a string)

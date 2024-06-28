@@ -2764,11 +2764,31 @@
                     }
                 ]
             },
-            "Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest without registering for providers": {
+            "Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but platform timeout without sending response": {
                 "req": [
                     {
                         "method": {
                             "id": "UserInterest 4.7",
+                            "description": "Positive Scenario: with type disinterest and reason recording"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but 3rd party app return error": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.8",
+                            "description": "Negative Scenario: Notify requestUserInterest without registering for providers"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest without registering for providers": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.9",
                             "description": "Negative Scenario: Notify requestUserInterest without registering for providers"
                         }
                     }
