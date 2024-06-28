@@ -141,5 +141,17 @@
     },
     "DEVICE_DISTRIBUTOR": {
         "capability": "xrn:firebolt:capability:device:distributor"
+    },
+    "CLEAR_DEVICE_LEVEL_DIVICE_DISTRIBUTOR_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:device:distributor"
+    },
+    "CLEAR_DEVICE_ACCOUNT_ID_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:account:id"
+    },
+    "CLEAR_DEVICE_LEVEL_DISCOVERY_WATCHED": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:discovery:watched"
     }
 }

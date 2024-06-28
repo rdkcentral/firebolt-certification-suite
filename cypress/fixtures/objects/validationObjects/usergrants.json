@@ -82,5 +82,155 @@
                 ]
             }
         ]
+    },
+    "USERGRANTS_REQUEST_SECURESTORAGE_SET_GRANTED_ROLE_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "type": "request",
+                        "expected": []
+                    }
+                ]
+            },
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].use.granted",
+                                "expected": null
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": null,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": true,
+                                "context": "CAPABILITIES_GRANTED_USE"
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_MANAGE",
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+        ]
+    },
+    "USERGRANTS_REQUEST_INFO_GRANTED_DEVICE_INFO": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "type": "request",
+                        "expected": []
+                    }
+                ]
+            },
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].use.granted",
+                                "expected": null
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": null,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": true,
+                                "context": "CAPABILITIES_GRANTED_USE"
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": true,
+                                "context": "CAPABILITIES_GRANTED_MANAGE",
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+        ]
+    },
+    "USERGRANTS_REQUEST_INFO_GRANTED_DEFERRED_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "type": "request",
+                        "expected": []
+                    }
+                ]
+            },
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].use.granted",
+                                "expected": null
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": null,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_USE"
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_MANAGE",
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+        ]
     }
 }

@@ -389,5 +389,174 @@
     "GET_USERGRANTS_FOR_DEVICE_DISTRIBUTOR_CAPABILITY": {
         "method": "manage_usergrants.capability",
 		"params": "USERGRANTS_DEVICE_DISTRIBUTOR"
+    },
+    "USERGRANTS_CLEAR_APP_DEVICE_NAME_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_DEVICE_NAME_ROLE_USE"
+    },
+    "USERGRANTS_CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD"
+    },
+    "USERGRANTS_CLEAR_APP_LEVEL_DEVICE_MODEL_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_LEVEL_DEVICE_MODEL_ROLE_USE"
+    },
+    "USERGRANTS_CLEAR_APP_LOCALIZATION_LANGUAGE_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_LOCALIZATION_LANGUAGE_ROLE_USE"
+    },
+    "USERGRANTS_CLEAR_APP_LOCALIZATION_LATLON_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_LOCALIZATION_LATLON_ROLE_USE"
+    },
+    "USERGRANTS_CLEAR_WITH_APP_ID_CLOSEDCAPTIONS": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_WITH_APP_ID_CLOSEDCAPTIONS"
+    },
+    "USERGRANTS_CLEAR_WITH_APP_ID_AUTHENTICATION_DEVICE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_WITH_APP_ID_AUTHENTICATION_DEVICE"
+    },
+    "USERGRANTS_CLEAR_WITH_APP_ID_SECONDSCREEN_DEVICE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_WITH_APP_ID_SECONDSCREEN_DEVICE"
+    },
+    "USERGRANTS_CLEAR_WITH_APP_ID_PROTOCOL_DIAL": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_WITH_APP_ID_PROTOCOL_DIAL"
+    },
+    "USERGRANTS_CLEAR_APP_DATA_APP_USAGE_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_DATA_APP_USAGE_ROLE_USE"
+    },
+    "USERGRANTS_CLEAR_WITH_APP_ID_VOICEGUIDANCE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_WITH_APP_ID_VOICEGUIDANCE"
+    },
+    "USERGRANTS_CLEAR_DEVICE_LEVEL_DIVICE_DISTRIBUTOR_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_DEVICE_LEVEL_DIVICE_DISTRIBUTOR_ROLE_USE"
+    },
+    "USERGRANTS_CLEAR_DEVICE_ACCOUNT_ID_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_DEVICE_ACCOUNT_ID_ROLE_USE"
+    },
+    "USERGRANTS_CLEAR_APP_DEVICE_MAKE_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_DEVICE_MAKE_ROLE_USE"
+    },
+    "USERGRANTS_CLEAR_APP_POSTALCODE_ROLE_MANAGE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_POSTALCODE_ROLE_MANAGE"
+    },
+    "USERGRANTS_CLEAR_APP_POSTALCODE_ROLE_PROVIDE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_POSTALCODE_ROLE_PROVIDE"
+    },
+    "USERGRANTS_CLEAR_APP_POSTALCODE_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_POSTALCODE_ROLE_USE"
+    },
+    "USERGRANTS_CLEAR_APP_COUNTRY_CODE_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_COUNTRY_CODE_ROLE_USE"
+    },
+    "USERGRANTS_CLEAR_DEVICE_LEVEL_DISCOVERY_WATCHED": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_DEVICE_LEVEL_DISCOVERY_WATCHED"
+    },
+    "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_USE_REFUI": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_USE_REFUI"
+    },
+    "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_MANAGE_REFUI": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_MANAGE_REFUI"
+    },
+    "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_PROVIDE_REFUI": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_PROVIDE_REFUI"
+    },
+    "USERGRANTS_CLEAR_LIFESPAN_APPACTIVE_SECURESTORAGE_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_LIFESPAN_APPACTIVE_SECURESTORAGE_ROLE_USE"
+    },
+    "USERGRANTS_CLEAR_LIFESPAN_APPACTIVE_SECURESTORAGE_ROLE_MANAGE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_LIFESPAN_APPACTIVE_SECURESTORAGE_ROLE_MANAGE"
+    },
+    "USERGRANTS_CLEAR_APP_LOCALIZATION_LOCALITY_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_APP_LOCALIZATION_LOCALITY_ROLE_USE"
+    },
+    "USERGRANTS_CLEAR_LOCALIZATION_LOCALE_ROLE_USE": {
+        "method": "manage_usergrants.clear",
+        "params": "USERGRANTS_CLEAR_LOCALIZATION_LOCALE_ROLE_USE"
+    },
+    "REQUEST_GRANT_FOR_ACCOUNT_UID_CAPABILITY_WITH_ROLE_USE": {
+        "method": "manage_usergrants.request",
+        "params": "USERGRANTS_REQUEST_ACCOUNT_UID_ROLE_USE"
+    },
+    "GRANTED_FOR_ACCOUNT_UID_CAPABILITY_WITH_ROLE_USE": {
+        "method": "usergrants.request",
+        "validationJsonPath": "result",
+        "content": "USERGRANTS_REQUEST_INFO_GRANTED_USE_GRANT"
+    },
+    "REQUEST_GRANT_FOR_ACCOUNT_UID_CAPABILITY_WITH_ROLE_MANAGE": {
+        "method": "manage_usergrants.request",
+        "params": "USERGRANTS_REQUEST_ACCOUNT_UID_ROLE_MANAGE"
+    },
+    "GRANTED_FOR_ACCOUNT_UID_CAPABILITY_WITH_ROLE_MANAGE": {
+        "method": "usergrants.request",
+        "validationJsonPath": "result",
+        "content": "USERGRANTS_REQUEST_INFO_GRANTED_MANAGE_GRANT"
+    },
+    "DENIED_FOR_ACCOUNT_UID_CAPABILITY_WITH_ROLE_MANAGE": {
+        "method": "usergrants.request",
+        "validationJsonPath": "result",
+        "content": "USERGRANTS_REQUEST_INFO_GRANTED_MANAGE_DENY"
+    },
+    "DENIED_FOR_ACCOUNT_UID_CAPABILITY_WITH_ROLE_USE": {
+        "method": "usergrants.request",
+        "validationJsonPath": "result",
+        "content": "USERGRANTS_REQUEST_INFO_GRANTED_USE_DENY"
+    },
+    "REQUEST_GRANT_FOR_SECURE_STORAGE_CAPABILITY_WITH_ROLE_USE": {
+        "method": "manage_usergrants.request",
+        "params": "USERGRANTS_REQUEST_SECURESTORAGE_SET_ROLE_USE"
+    },
+    "GRANTED_FOR_SECURE_STORAGE_CAPABILITY_WITH_ROLE_USE": {
+        "method": "usergrants.request",
+        "validationJsonPath": "result",
+        "content": "USERGRANTS_REQUEST_SECURESTORAGE_SET_GRANTED_ROLE_USE"
+    },
+    "REQUEST_GRANT_FOR_DEVICE_INFO_CAPABILITY_WITH_ROLE_USE": {
+        "method": "manage_usergrants.request",
+        "params": "USERGRANTS_REQUEST_DEVICE_INFO"
+    },
+    "GRANTED_FOR_DEVICE_INFO_CAPABILITY_WITH_ROLE_USE": {
+        "method": "usergrants.request",
+        "validationJsonPath": "result",
+        "content": "USERGRANTS_REQUEST_INFO_GRANTED_DEVICE_INFO"
+    },
+    "DEFERRED_FOR_ACCOUNT_UID_CAPABILITY_WITH_ROLE_USE": {
+        "method": "usergrants.request",
+        "validationJsonPath": "result",
+        "content": "USERGRANTS_REQUEST_INFO_GRANTED_DEFERRED_USE"
+    },
+    "GRANTED_FOR_ACCOUNT_UID_CAPABILITY_WITH_ROLE_PROVIDE": {
+        "method": "usergrants.request",
+        "validationJsonPath": "result",
+        "content": "USERGRANTS_REQUEST_INFO_GRANTED_ACCOUNT_UID_PROVIDE_GRANT"
+    },
+    "DENIED_FOR_ACCOUNT_UID_CAPABILITY_WITH_ROLE_PROVIDE": {
+        "method": "usergrants.request",
+        "validationJsonPath": "result",
+        "content": "USERGRANTS_REQUEST_INFO_GRANTED_ACCOUNT_UID_PROVIDE_DENY"
+    },
+    "REQUEST_GRANT_FOR_ACCOUNT_UID_CAPABILITY_WITH_ROLE_PROVIDE": {
+        "method": "manage_usergrants.request",
+        "params": "USERGRANTS_REQUEST_ACCOUNT_UID_ROLE_PROVIDE"
     }
 }

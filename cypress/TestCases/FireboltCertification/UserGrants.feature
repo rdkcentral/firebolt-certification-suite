@@ -42,6 +42,7 @@ Feature: UserGrants
 
     # Testing with grantPolicy having with scope device and grant access, so all the apps in that device may have the access
     # provide access using any 3rd party and check in another 3rd party
+    # Added @notSupported as glue is not implemented yet.
     @Usergrants @coreSDK @sdk @transport @notSupported
     Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with scope device
         Given the environment has been set up for 'userGrants' tests
@@ -128,6 +129,7 @@ Feature: UserGrants
     # If lifespan value appActive it ask grant once when app is active and it ask again when app is closed and active again.
     # Case-1: Allowing grant when app is active and validating
     # Case-2: Closing and launching the app, allowing grant and validating ui is coming again
+    # Added @notSupported as glue is not implemented yet.
     @Usergrants @coreSDK @sdk @transport @notSupported
     Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan appActive
         Given the environment has been set up for 'userGrants' tests
@@ -154,6 +156,7 @@ Feature: UserGrants
     # If lifespan value appActive it ask grant once when app is active and it ask again when app is closed and active again.
     # Case-1: Denying grant when app is active and validating
     # Case-2: Closing and launching the app, denying grant and validating ui is coming again
+    # Added @notSupported as glue is not implemented yet.
     @Usergrants @coreSDK @sdk @transport @notSupported
     Scenario: UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan appActive
         Given the environment has been set up for 'userGrants' tests
