@@ -194,7 +194,12 @@ Cypress.Commands.add('getDeviceVersion', () => {
     param: {},
     action: CONSTANTS.ACTION_CORE.toLowerCase(),
   };
-
+  cy.log(
+    'Call from 1st party App, method: ' +
+      requestMap.method +
+      ' params: ' +
+      JSON.stringify(requestMap.param)
+  );
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
       if (response && response.result) {
@@ -256,18 +261,15 @@ Cypress.Commands.add('getFireboltJsonData', () => {
   // Reading the path of the firebolt.json file from the environment variable based on the SDK version.
   if (envPlatformSdkVersion.includes(CONSTANTS.NEXT)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_NEXT_URL);
-    cy.log(`Using the next version of firebolt.json`);
   } else if (envPlatformSdkVersion.includes(CONSTANTS.PROPOSED)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(
       CONSTANTS.FIREBOLT_SPECIFICATION_PROPOSED_URL
     );
-    cy.log(`Using the proposed version of firebolt.json`);
   } else {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_URL).replace(
       CONSTANTS.LATEST,
       envPlatformSdkVersion
     );
-    cy.log(`Using the ${envPlatformSdkVersion} version of firebolt.json`);
   }
 
   cy.request({ url: FIREBOLT_SPECIFICATION_URL, failOnStatusCode: false }).then((data) => {
@@ -480,6 +482,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
   } else if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTMOCK)) {
     cy.parsedMockData(beforeOperation).then((parsedData) => {
       if (firstParty) {
+        parsedData.firstParty = firstParty;
         const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SETRESPONSE;
         const requestMap = {
           method: method,
@@ -651,7 +654,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
   // else get the default app id from environment variable.
 
   const appId =
-    appCallSign == undefined ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) : appCallSign; // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
+    appCallSign == undefined
+      ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+      : UTILS.checkForSecondaryAppId(appCallSign); // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // create the request map
   // basic intent to be sent to the app on launch
@@ -706,6 +711,17 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     if (getEnvVariable(CONSTANTS.DEVICE_MAC, false)) {
       data.query.params[CONSTANTS.MACADDRESS_PARAM] = getEnvVariable(CONSTANTS.DEVICE_MAC);
     }
+  }
+  // If the testType is userInterestProvider, send the discovery.launch params with registerProvider = false, then certification app will not register for userInterest provider.
+  if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.USERINTERESTPROVIDER) {
+    data = {
+      query: JSON.stringify({
+        params: {
+          [CONSTANTS.REGISTERPROVIDER]: false,
+        },
+      }),
+    };
+    requestMap.params.intent.data = data;
   }
 
   // Stringify the query (The intent requires it be a string)

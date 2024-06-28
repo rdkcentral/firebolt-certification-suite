@@ -124,7 +124,7 @@ Feature: UserInterest
 
     @coreSDK @sdk @userinterest @notSupported
     Scenario: Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest without registering for providers
-        Given the environment has been set up for 'Userinterest' tests
+        Given the environment has been set up for 'UserInterestProvider' tests
         And 3rd party 'certification' app is launched
         When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type interest without provider'
         Then 'Firebolt' platform responds to '1st party app' with 'not available for requestUserInterest'

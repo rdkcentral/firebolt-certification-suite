@@ -34,7 +34,9 @@ import UTILS from '../cypress-support/src/utils';
  * Given 'Firebolt' platform triggers event 'Validate device id'
  * Given 'Firebolt' platform triggers to '1st party app' event 'Validate device id'
  * Given 'Firebolt' platform triggers to 'test.test.test' event 'Validate device id'
+ * Given 'Firebolt' platform triggers to 'secondary 3rd party app' event 'Validate device id'
  * Given 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
+ * Given 'Firebolt' platform does not trigger to 'secondary 3rd party app' event for 'onclosedCaptionsSettingsChanged'
  */
 
 Given(
@@ -66,7 +68,7 @@ Given(
             ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
             : appId === CONSTANTS.FIRST_PARTY_APP
               ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
-              : appId;
+              : UTILS.checkForSecondaryAppId(appId);
 
           // Fetching the object from the global list.
           const methodOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
@@ -296,7 +298,7 @@ Given(
 
 /**
  * @module ValidationGlue
- * @function {string} is in {string} state
+ * @function '(.+)' will (be|stay) in '(.+)' state
  * @description To validate 3rd party app transitionss wrt state, event and history against appObject as the source of truth
  * @param {String} app - App type
  * @param {String} state - Expected state to be used for validation
@@ -313,12 +315,40 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
         : app;
   const isEventsExpected = condition == CONSTANTS.STAY ? false : true;
   const appObject = UTILS.getEnvVariable(appId);
-  cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
-  cy.validateLifecycleHistoryAndEvents(
-    appObject.getAppObjectState().state,
-    appId,
-    isEventsExpected
-  );
+  const scenarioName = cy.state().test.title;
+  const moduleReqIdJson = Cypress.env(CONSTANTS.MODULEREQIDJSON);
+  const featureFileName = cy.state().test.parent.title;
+  const scenarioList = moduleReqIdJson.scenarioNames[featureFileName];
+  const validationObject = scenarioList[scenarioName].validationObject;
+  // custom validation in case of lifecycle test cases where app is not reachable
+  // if validationObject is present in the modReqId for the specific TC, we have to validate based on that value
+  if (validationObject) {
+    if (Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON).hasOwnProperty(validationObject)) {
+      // the validation type is expected to be "custom"
+      if (
+        Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject].data[0].type ==
+        'custom'
+      ) {
+        const validationObjectData = Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[
+          validationObject
+        ].data[0];
+        // passing the validationObject to perform customValidation
+        cy.customValidation(validationObjectData);
+      } else {
+        assert(
+          false,
+          `Expected validationObject to be of "custom" type. Current value : ${Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject].data[0].type}`
+        );
+      }
+    }
+  } else {
+    cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
+    cy.validateLifecycleHistoryAndEvents(
+      appObject.getAppObjectState().state,
+      appId,
+      isEventsExpected
+    );
+  }
 });
 
 /**

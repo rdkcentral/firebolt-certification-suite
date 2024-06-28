@@ -52,6 +52,7 @@ module.exports = {
   CERTIFICATION: 'certification',
   COMBINEDFIREBOLTCALLS: 'combinedFireboltCalls',
   COMBINEDFIREBOLTMOCKS: 'combinedFireboltMocks',
+  COMBINEVALIDATIONOBJECTSJSON: 'combineValidationObjectsJson',
   COMMUNICATION_MODE: 'communicationMode',
   CONFIG: 'CONFIG',
   CONFIG_MODULE_SETRESPONSE_PATH: 'cypress/fixtures/external/setResponseData.json',
@@ -63,6 +64,8 @@ module.exports = {
   COUNTRYCODE: 'countryCode',
   CUCUMBER: 'cucumber',
   CURRENT_APP_ID: 'currentAppId',
+  CUSTOM_METHOD_PATH:
+    'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/support/step_definitions/validations.md#custom',
   CYPRESS_MODULES_PATH: 'cypress/fixtures/external/modules',
   DATE: 'date',
   DECIMAL: 'decimal',
@@ -172,7 +175,7 @@ module.exports = {
   GLOBAL_EVENT_OBJECT_LIST: 'eventObjectList',
   HEALTH_CHECK_RETRIES: 'healthCheckRetries',
   HEXADECIMAL: 'hexaDecimal',
-  HISTORY_VALIDATION_REQ: 'Lifecycle history validation Req # ',
+  HISTORY_VALIDATION_REQ: 'Lifecycle history validation ',
   ID: 'id',
   INPUT: 'INPUT',
   INTENT: 'intent',
@@ -208,13 +211,14 @@ module.exports = {
     'AcknowledgeChallenge',
     'userGrants',
     'lifeCycleApi',
+    'UserInterestProvider',
   ],
   LIFECYCLE_FINISHED_ERROR: 'lifecycleFinishedError',
   LIFECYCLE_HISTORY_FAILED: 'Failed to fetch lifecycle history due to following error: ',
   LIFECYCLE_HISTORY_RESPONSE: 'Lifecycle history response fetched from application: ',
   LIFECYCLE_HISTORY_SCHEMA_PATH: 'schemas/lifecycleHistorySchema',
   LIFECYCLE_INTENT: 'Lifecycle intent sent to application: ',
-  LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle events generated Req #',
+  LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle events generated ',
   LIFECYCLE_STATE: 'Lifecycle.state',
   LIFECYCLE_STATES: {
     FOREGROUND: 'foreground',
@@ -275,9 +279,9 @@ module.exports = {
   NO_MATCHED_RESPONSE: 'Unable to find the response for the current request',
   NO_PARAMS: 'noParam',
   NO_RESPONSE: 'No_Response',
-  NOTIFICATION_CONTENT_VALIDATION_REQ: 'Lifecycle notification content validation Req # ',
-  NOTIFICATION_EXISTS_REQ: 'Lifecycle notification exists Req # ',
-  NOTIFICATION_SCHEMA_VALIDATION_REQ: 'Lifecycle notification schema validation Req # ',
+  NOTIFICATION_CONTENT_VALIDATION_REQ: 'Lifecycle notification content validation ',
+  NOTIFICATION_EXISTS_REQ: 'Lifecycle notification exists ',
+  NOTIFICATION_SCHEMA_VALIDATION_REQ: 'Lifecycle notification schema validation ',
   NULL: 'null',
   NULL_RESPONSE: null,
   NULL_CHECK: 'Null Check requirement SKIPPED as schema validation is PASSED. ',
@@ -294,6 +298,8 @@ module.exports = {
   PLATFORM_INVALID_RESPONSE_LOG:
     'Platform returned response in invalid format, which could lead to failures in validations. Response must be an object',
   PLATFORM_NOT_SUPPORT_LOG: 'Platform does not support method',
+  PLATFORM_NOT_TRIGGER_EVENT: 'Platform MUST not trigger event ',
+  PLATFORM_TRIGGER_EVENT: 'Platform MUST trigger event ',
   PREREQUISITE_DATA: 'PreRequisiteData.json',
   PUB_SUB_URL: 'pubSubUrl', // Env Var for the URL for the Default Module's pubSub implementation
   SETUPCHECK: 'Setup Check',
@@ -330,6 +336,7 @@ module.exports = {
   RESPONSE_TOPIC_LIST: 'responseTopicList',
   RESULT: 'result',
   RPC_ONLY_TIMEOUT: 200000,
+  RUNTIME: 'runtime',
   SANITY_REPORT_FILENAME: 'fca_sanity_suite',
   SANITY_REPORT_FILE_PATH: getSanityReportPath(),
   SANITY_REPORT_LONGPOLL_TIMEOUT: 200000,
@@ -351,8 +358,8 @@ module.exports = {
   SKIPCONTENTVALIDATION: 'skipContentValidation',
   SKIPPED: 'SKIPPED',
   SOURCE: 'source',
-  STATE_CONTENT_VALIDATION_REQ: 'Lifecycle state content validation Req # ',
-  STATE_SCHEMA_VALIDATION_REQ: 'Lifecycle state schema validation Req #',
+  STATE_CONTENT_VALIDATION_REQ: ' Lifecycle state content validation ',
+  STATE_SCHEMA_VALIDATION_REQ: ' Lifecycle state schema validation ',
   STATIC_CONTENT_VALIDATION: 'staticContentValidation',
   STATUS_CODE: [0, 1, 2, 3],
   STAY: 'stay',
@@ -430,7 +437,7 @@ module.exports = {
   FCS_DEFAULTTESTDATA_PATH: 'cypress/fixtures/defaultTestData.json',
   ENV_SETUP_STATUS: 'environmentLaunched',
   APP_LAUNCH_STATUS: 'appLaunched',
-  VISIBILITYSTATE_VALIDATION_REQ: 'Lifecycle visibility state validation Req # ',
+  VISIBILITYSTATE_VALIDATION_REQ: ' Lifecycle visibility state validation ',
   LIFECYCLE_VISIBILITYSTATE_SKIP_MESSAGE:
     'App is not reachable to fetch visibility state. Skipping Visibility state validation.',
   VISIBILITYSTATE_FAILURE_FIX_LOG:
@@ -438,9 +445,15 @@ module.exports = {
   VISIBILITYSTATE_FAILURE_LOG:
     '. If the visibility state response is as per the platform, add the expected value in configModule. More details is present in footer',
   NO_EVENT_TRIGGERED: 'Expecting no event to be triggered from platform',
+  REGISTERPROVIDER: 'registerprovider',
+  USERINTERESTPROVIDER: 'userinterestprovider',
   VISIBILITYSTATE: 'visibilityState',
   VISIBLE_CHECK: 'visible_check',
   STEP_DEFINITION_NEEDS_TO_IMPLEMENT: 'Step definition needs to be implemented',
+  SECONDARY_THIRD_PARTY_APP: 'secondary 3rd party app',
+  SECONDARY_THIRD_PARTY_APP_ID: 'secondary3rdPartyAppId',
+  SECONDARY_APPID_MISSING_ERROR:
+    '`Unable to find the ${envAppIdKey} value in the env, please add the value in configModule/constants/config.json`',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

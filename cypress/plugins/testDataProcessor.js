@@ -69,6 +69,7 @@ function testDataProcessor(configEnv) {
     fireboltMocksJson: combinedFireboltMocksJson,
     setResponseJson: resolvedSetResponseJson,
     errorContentValidationJson: resolvedErrorContentJson,
+    combineValidationObjectsJson: validationObjects,
   };
 }
 

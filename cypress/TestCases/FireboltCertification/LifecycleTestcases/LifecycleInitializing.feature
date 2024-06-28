@@ -3,7 +3,7 @@
 Feature: Lifecycle_Initializing
     
     @Lifecycle @coreSDK @notSupported
-    Scenario: Lifecycle 2.3.2 Cannot Close an app from initializing
+    Scenario: Lifecycle R.3.3.4 Cannot Close an app from initializing
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'initializing' state
         # And 1st party app invokes the API to 'get lifecycle management state'
