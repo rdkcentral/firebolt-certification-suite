@@ -393,5 +393,139 @@
     "ONNETWORKCHANGED_EVENTS_WITH_HYBRID_DISCONNECTED": {
         "method": "device.onNetworkChanged",
         "params": "DEVICE_ONNETWORKCHANGED_HYBRIDDISCONNECT_EVENTS"
-    }
+    },
+    "FETCH_HDCPVERSIONSUPPORTED": {
+        "method": "device.hdcpVersionSupported"
+    },
+    "FETCH_HDRPROFILE": {
+        "method": "device.hdrProfile"
+    },
+    "FETCH_HDRPROFILES": {
+        "method": "device.hdrProfiles"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED": {
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_ATMOS": {
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_ATMOS"
+    },
+    "FETCH_VIDEOFORMATSUPPORTED": {
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC"
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_RESOLUTION" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_RESOLUTION"  
+    },
+    "FETCH_AUDIOMODE": {
+        "method": "device.audioMode"
+    },
+    "FETCH_VIDEOMODE": {
+        "method": "device.videoMode"
+    },
+    "FETCH_VIDEOMODES": {
+        "method": "device.videoModes"
+    },
+    "FETCH_SOURCEFRAMERATEUSED": {
+        "method": "device.sourceFrameRateUsed"
+    },
+    "EXPECTED_HDCPVERSIONSUPPORTED": {
+        "method": "device.hdcpVersionSupported",
+        "validationJsonPath": "result",
+        "content": "DEVICE_HDCPVERSIONSUPPORTED"
+    },
+    "EXPECTED_HDRPROFILE": {
+        "method": "device.hdrProfile",
+        "validationJsonPath": "result",
+        "content": "DEVICE_HDRPROFILE"
+    },
+    "EXPECTED_HDRPROFILES": {
+        "method": "device.hdrProfiles",
+        "validationJsonPath": "result",
+        "content": "DEVICE_HDRPROFILES"
+    },
+    "EXPECTED_AUDIOFORMATSUPPORTED": {
+        "method": "device.audioFormatSupported",
+        "validationJsonPath": "result",
+        "content": "TRUE"
+    },
+    "EXPECTED_VIDEOFORMATSUPPORTED": {
+        "method": "device.videoFormatSupported",
+        "validationJsonPath": "result",
+        "content": "TRUE"
+    },
+    "EXPECTED_AUDIOMODE": {
+        "method": "device.audioMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_AUDIOMODE"
+    },
+    "EXPECTED_VIDEOMODE": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE"
+    },
+    "EXPECTED_VIDEOMODES": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES"
+    },
+    "EXPECTED_SOURCEFRAMERATEUSED": {
+        "method": "device.sourceFrameRateUsed",
+        "validationJsonPath": "result",
+        "content": "TRUE"
+    },
+    "GET_AUDIOFORMATSUPPORTED_WITH_INVALID_AUDIOCODEC_TYPE_INTEGER":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_INVALID_TYPE_INTEGER",
+        "expected": "error"
+    },
+    "GET_AUDIOFORMATSUPPORTED_WITH_INVALID_AUDIOCODEC_TYPE_BOOLEAN":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_INVALID_TYPE_BOOLEAN",
+        "expected": "error"
+    },
+    "GET_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_ATMOS_TYPE_INTERGER":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOFORMATOPTIONS_ATMOS_TYPE_INTERGER",
+        "expected": "error"
+    },
+    "GET_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_ATMOS_TYPE_STRING":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOFORMATOPTIONS_ATMOS_TYPE_STRING",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_INVALID_VIDEOCODEC_TYPE_INTEGER":{
+       "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_INVALID_TYPE_INTEGER",
+        "expected": "error" 
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_INVALID_VIDEOCODEC_TYPE_BOOLEAN":{
+       "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_INVALID_TYPE_BOOLEAN",
+        "expected": "error" 
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_RESOLUTION_TYPE_BOOLEAN":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_RESOLUTION_TYPE_BOOLEAN",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_RESOLUTION_TYPE_INTEGER":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_RESOLUTION_TYPE_INTEGER",
+        "expected": "error"
+    },
+    "INVALID_PARAMETER_ERROR_FOR_AUDIOFORMATSUPPORTED": {
+		"method": "device.audioFormatSupported",
+		"validationJsonPath": "result",
+		"content": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+	},
+    "INVALID_PARAMETER_ERROR_FOR_VIDEOFORMATSUPPORTED": {
+		"method": "device.videoFormatSupported",
+		"validationJsonPath": "result",
+		"content": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+	}
 }

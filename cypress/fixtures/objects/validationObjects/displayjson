@@ -1,0 +1,152 @@
+{
+    "DISPLAY_COLORDEPTH": {
+        "method": "display.colorDepth",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISPLAY_COLORDEPTH",
+                        "description": "Validation of the Display colorDepth"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_COLORIMETRY": {
+        "method": "display.colorimetry",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISPLAY_COLORIMETRY",
+                        "description": "Validation of the Display colorimetry"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_HDRPROFILES": {
+        "method": "display.hdrProfiles",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISPLAY_HDRPROFILES",
+                        "description": "Validation of the Display hdrProfiles"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_MANUFACTURER": {
+        "method": "display.manufacturer",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISPLAY_MANUFACTURER",
+                        "description": "Validation of the Display manufacturer"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_PRODUCTNAME": {
+        "method": "display.productName",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISPLAY_PRODUCTNAME",
+                        "description": "Validation of the Display productName"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_REFRESHRATE": {
+        "method": "display.refreshRate",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISPLAY_REFRESHRATE",
+                        "description": "Validation of the Display refreshRate"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_RESOLUTION": {
+        "method": "display.resolution",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISPLAY_RESOLUTION",
+                        "description": "Validation of the Display resolution"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_RESOLUTIONNAME": {
+        "method": "display.resolutionName",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISPLAY_RESOLUTIONNAME",
+                        "description": "Validation of the Display resolutionName"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_SIZE": {
+        "method": "display.size",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISPLAY_SIZE",
+                        "description": "Validation of the Display size"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_SOURCEPHYSICALADDRESS": {
+        "method": "display.sourcePhysicalAddress",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISPLAY_SOURCEPHYSICALADDRESS",
+                        "description": "Validation of the Display sourcePhysicalAddress"
+                    }
+                ]
+            }
+        ]
+    }
+}

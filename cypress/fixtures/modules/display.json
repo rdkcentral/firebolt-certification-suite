@@ -1,0 +1,12 @@
+{
+    "COLORDEPTH": 10,
+    "COLORIMETRY": ["BT2020RGB","BT2020YCC","xvYCC601", "xvYCC709"],
+    "HDRPROFILES": ["dolbyVision","hdr10","hdr10plus","hlg"],
+    "MANUFACTURER": "Samsung Electric Company",
+    "PRODUCTNAME": "Q80A",
+    "REFRESHRATE": 60,
+    "RESOLUTION": [1920,1080],
+    "RESOLUTIONNAME": "uhd",
+    "SIZE": [157,91],
+    "SOURCEPHYSICALADDRESS":  "3.0.0.0"
+}

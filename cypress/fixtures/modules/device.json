@@ -97,5 +97,23 @@
             "state": "disconnected",
             "type": "ethernet"
         }
-    }
+    },
+    "AUDIOCODEC": {"codec": "eac3"},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_ATMOS":{"codec": "eac3", "options": {"atmos": true}},
+    "VIDEOCODEC": {"codec": "avc"},
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_RESOLUTION":{"codec": "avc", "options": {"resolution": [1920,1080]}},
+    "HDCPVERSIONSUPPORTED": "2.2",
+    "HDRPROFILE": "hdr10",
+    "HDRPROFILES": ["hdr10","hdr10plus","hlg"],
+    "AUDIOMODE": "stereo",
+    "VIDEOMODE": "1080p60",
+    "VIDEOMODES": ["720p50","720p60","1080i50", "1080i60","1080p24","1080p30","1080p50","1080p60"],
+    "AUDIOCODEC_INVALID_TYPE_INTEGER": {"codec": 1234},
+    "AUDIOCODEC_INVALID_TYPE_BOOLEAN": {"codec": true},
+    "AUDIOFORMATOPTIONS_ATMOS_TYPE_INTERGER": {"codec": "eac3", "options": {"atmos": 1234}},
+    "AUDIOFORMATOPTIONS_ATMOS_TYPE_STRING": {"codec": "eac3", "options": {"atmos": "test"}},
+    "VIDEOCODEC_INVALID_TYPE_INTEGER":{"codec": 1234},
+    "VIDEOCODEC_INVALID_TYPE_BOOLEAN":{"codec": true},
+    "VIDEOFORMATOPTIONS_RESOLUTION_TYPE_BOOLEAN": {"codec": "avc", "options": {"resolution": true}},
+    "VIDEOFORMATOPTIONS_RESOLUTION_TYPE_INTEGER": {"codec": "avc", "options": {"resolution": 12345}}
 }

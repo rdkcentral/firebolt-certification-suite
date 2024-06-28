@@ -1,0 +1,82 @@
+{
+    "GET_DISPLAY_COLORDEPTH": {
+        "method": "display.colorDepth"
+    },
+    "GET_DISPLAY_COLORIMETRY": {
+        "method": "display.colorimetry"
+    },
+    "GET_DISPLAY_HDRPROFILES": {
+        "method": "display.hdrProfiles"
+    },
+    "GET_DISPLAY_MANUFACTURER": {
+        "method": "display.manufacturer"
+    },
+    "GET_DISPLAY_PRODUCTNAME": {
+        "method": "display.productName"
+    },
+    "GET_DISPLAY_REFRESHRATE": {
+        "method": "display.refreshRate"
+    },
+    "GET_DISPLAY_RESOLUTION": {
+        "method": "display.resolution"
+    },
+    "GET_DISPLAY_RESOLUTIONNAME": {
+        "method": "display.resolutionName"
+    },
+    "GET_DISPLAY_SIZE": {
+        "method": "display.size"
+    },
+    "GET_DISPLAY_SOURCEPHYSICALADDRESS": {
+        "method": "display.sourcePhysicalAddress"
+    },
+    "EXPECTED_DISPLAY_COLORDEPTH":{
+        "method": "display.colorDepth",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_COLORDEPTH"
+    },
+    "EXPECTED_DISPLAY_COLORIMETRY":{
+        "method": "display.colorimetry",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_COLORIMETRY"    
+    },
+    "EXPECTED_DISPLAY_HDRPROFILES":{
+        "method": "display.hdrProfiles",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_HDRPROFILES"      
+    },
+    "EXPECTED_DISPLAY_MANUFACTURER":{
+        "method": "display.manufacturer",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_MANUFACTURER"     
+    },
+    "EXPECTED_DISPLAY_PRODUCTNAME":{
+        "method": "display.productName",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_PRODUCTNAME"     
+    },
+    "EXPECTED_DISPLAY_REFRESHRATE":{
+        "method": "display.refreshRate",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_REFRESHRATE"        
+    },
+    "EXPECTED_DISPLAY_RESOLUTION":{
+        "method": "display.resolution",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_RESOLUTION"         
+    },
+    "EXPECTED_DISPLAY_RESOLUTIONNAME":{
+        "method": "display.resolutionName",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_RESOLUTIONNAME"        
+    },
+    "EXPECTED_DISPLAY_SIZE":{
+        "method": "display.size",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_SIZE"         
+    },
+    "EXPECTED_DISPLAY_SOURCEPHYSICALADDRESS":{
+        "method": "display.sourcePhysicalAddress",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_SOURCEPHYSICALADDRESS"       
+    }
+}

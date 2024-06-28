@@ -453,5 +453,95 @@
                 ]
             }
         ]
+    },
+    "DEVICE_HDCPVERSIONSUPPORTED": {
+        "method": "device.hdcpVersionSupported",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_HDCPVERSIONSUPPORTED",
+                        "description": "Validation of the Device hdcpVersionSupported"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_HDRPROFILE": {
+        "method": "device.hdrProfile",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_HDRPROFILE",
+                        "description": "Validation of the Device hdrProfile"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_HDRPROFILES": {
+        "method": "device.hdrProfiles",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_HDRPROFILES",
+                        "description": "Validation of the Device hdrProfiles"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_AUDIOMODE": {
+        "method": "device.audioMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_AUDIOMODE",
+                        "description": "Validation of the Device audioMode"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE",
+                        "description": "Validation of the Device videoMode"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODES",
+                        "description": "Validation of the Device videoModes"
+                    }
+                ]
+            }
+        ]
     }
 }
