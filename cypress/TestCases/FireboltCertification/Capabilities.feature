@@ -228,7 +228,7 @@ Feature: Capabilities
     Then 'Firebolt' platform responds to '1st party app' with 'true for keyboard capability availability'
     And 'Firebolt' platform triggers to '1st party app' event 'expected value for capabilities onAvailable'
 
-  @Capabilities @sdk @transport @coreSDK @requiresPlatformImplementation
+  @Capabilities @sdk @transport @coreSDK @requiresPlatformImplementation @notSupported
   Scenario: Validate Capabilities.OnUnavailable
     When 1st party app registers for the 'capabilities onUnavailable' event using the 'Firebolt' API
     # And App will be in 'closed' state
