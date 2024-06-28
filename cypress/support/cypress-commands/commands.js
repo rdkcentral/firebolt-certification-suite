@@ -694,10 +694,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
         },
       },
     };
-    const messageIntent = {
-      data: data,
-    };
-    requestMap.params.intent = messageIntent;
+    requestMap.params.intent.data = data;
   }
 
   // Add the PubSub URL if required
