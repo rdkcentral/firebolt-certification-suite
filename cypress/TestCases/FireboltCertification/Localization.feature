@@ -49,15 +49,15 @@ Feature: Localization
         Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to '<First_Get_API_Key>'
         Then 'Firebolt' platform responds with '<First_Method_Validation_Key>'
-        And 'Firebolt' platform triggers event '<First_Event_Validation_Key >'
+        And 'Firebolt' platform triggers event '<First_Event_Validation_Key>'
         When '3rd party app' invokes the 'Firebolt' API to '<Second_Get_API_Key>'
         Then 'Firebolt' platform responds with '<Second_Method_Validation_Key>'
-        And 'Firebolt' platform triggers event '<Second_Event_Validation_Key >'
+        And 'Firebolt' platform triggers event '<Second_Event_Validation_Key>'
 
         Examples:
             | Methods                                          | First_Event_Registration_Key | Second_Event_Registration_Key     | Set_API_Key        | First_Get_API_Key       | Second_Get_API_Key           | First_Method_Validation_Key  | Second_Method_Validation_Key    | First_Event_Validation_Key                 | Second_Event_Validation_Key                   |
             | Localization.locale and Localization.countrycode | localization onLocaleChanged | localization onCountryCodeChanged | set locale to enUK | get localization locale | get localization countrycode | enUK for localization locale | UK for localization countrycode | onlocalechanged for localization with enUK | oncountrycodechanged for localization with UK |
-            | Localization.locale and Localization.language    | localization onLocaleChanged | localization onLanguageChanged    | set locale to enUK | get localization locale | get localization language    | enUK for localization locale | en for localization language    | onlocalechanged for localization with enUK | onlanguagechanged for localization with en    |
+            | Localization.locale and Localization.language    | localization onLocaleChanged | localization onLanguageChanged    | set locale to esUK | get localization locale | get localization language    | esUK for localization locale | es for localization language    | onlocalechanged for localization with esUK | onlanguagechanged for localization with es    |
 
     @Localization @coreSDK @sdk @transport
     Scenario Outline: <Method> - Positive Scenario: Validate <Scenario>

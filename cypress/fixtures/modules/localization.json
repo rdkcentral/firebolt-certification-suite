@@ -21,6 +21,7 @@
     "LANGUAGE_ES": "es",
     "LOCALE": "en-US",
     "LOCALE_UK": "en-UK",
+    "LOCALE_UK_ES": "es-UK",
     "PREFERRED_AUDIO_LANGUAGES_VALUE_SPA_ENG":{"value": ["spa","eng"]},
     "PREFERRED_AUDIO_LANGUAGES_VALUE_ENG_SPA":{"value": ["eng","spa"]},
     "ADD_ADDITIONALINFO_RESPONSE_AS_STRING": {"defaultKey":"defaultValue="},
