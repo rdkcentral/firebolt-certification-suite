@@ -5,13 +5,15 @@
   "pageFooter": "<div></div>",
   "customMetadata": true,
   "customData": {
-      "title": "Run info",
-      "data": [
-          { "label": "Project", "value": "Reference Device" },
-          { "label": "Platform", "value": "N/A" },
-          { "label": "Platform Release", "value": "N/A" },
-          { "label": "Device", "value": "N/A" },
-          { "label": "Device Firmware", "value": "N/A" }
-      ]
+    "title": "Run info",
+    "data": [
+      { "label": "Product", "value": "N/A" },
+      { "label": "Firebolt Version", "value": "N/A" },
+      { "label": "Platform", "value": "N/A" },
+      { "label": "Release", "value": "N/A" },
+      { "label": "Device", "value": "N/A" },
+      { "label": "Device Firmware", "value": "N/A" },
+      { "label": "Partner", "value": "N/A" }
+    ]
   }
 }

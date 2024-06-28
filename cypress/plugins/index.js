@@ -25,6 +25,7 @@ const GlobalsPolyfills =
   require('@esbuild-plugins/node-globals-polyfill').NodeGlobalsPolyfillPlugin;
 const Formatter = require('cucumber-json-report-formatter').Formatter;
 const fs = require('fs');
+const path = require('path');
 const shell = require('shell-exec');
 const jsonMerger = require('json-merger');
 const { merge } = require('mochawesome-merge');
@@ -39,7 +40,7 @@ const getSpecPattern = require('../../specHelperConfig.js');
 const logger = require('../support/Logger')('index.js');
 const updateLoggerLevel = require('../support/Logger').updateLoggerLevel;
 const { getAndDereferenceOpenRpc } = require('./pluginUtils');
-const reportEnv = require('../../reportEnv.json');
+const tempReportEnvJson = '../../tempReportEnv.json';
 let metaDataArr = [];
 
 module.exports = async (on, config) => {
@@ -299,8 +300,9 @@ module.exports = async (on, config) => {
             jsonReport = readDataFromFile(filePath + fileName);
           }
           const reportProperties = {};
-          const reportEnv = require('../../reportEnv.json');
-          reportProperties.reportEnv = reportEnv;
+          const tempReportEnv = path.resolve(__dirname, tempReportEnvJson);
+          if (fs.existsSync(tempReportEnv)) reportProperties.reportEnv = require(tempReportEnv);
+
           reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
           // Add the report to the reportObj
           if (reportType === CONSTANTS.CUCUMBER) {
