@@ -449,6 +449,10 @@ module.exports = {
   VISIBILITYSTATE: 'visibilityState',
   VISIBLE_CHECK: 'visible_check',
   STEP_DEFINITION_NEEDS_TO_IMPLEMENT: 'Step definition needs to be implemented',
+  SECONDARY_THIRD_PARTY_APP: 'secondary 3rd party app',
+  SECONDARY_THIRD_PARTY_APP_ID: 'secondary3rdPartyAppId',
+  SECONDARY_APPID_MISSING_ERROR:
+    '`Unable to find the ${envAppIdKey} value in the env, please add the value in configModule/constants/config.json`',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
