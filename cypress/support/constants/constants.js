@@ -52,6 +52,7 @@ module.exports = {
   CERTIFICATION: 'certification',
   COMBINEDFIREBOLTCALLS: 'combinedFireboltCalls',
   COMBINEDFIREBOLTMOCKS: 'combinedFireboltMocks',
+  COMBINEVALIDATIONOBJECTSJSON: 'combineValidationObjectsJson',
   COMMUNICATION_MODE: 'communicationMode',
   CONFIG: 'CONFIG',
   CONFIG_MODULE_SETRESPONSE_PATH: 'cypress/fixtures/external/setResponseData.json',
@@ -63,6 +64,8 @@ module.exports = {
   COUNTRYCODE: 'countryCode',
   CUCUMBER: 'cucumber',
   CURRENT_APP_ID: 'currentAppId',
+  CUSTOM_METHOD_PATH:
+    'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/support/step_definitions/validations.md#custom',
   CYPRESS_MODULES_PATH: 'cypress/fixtures/external/modules',
   DATE: 'date',
   DECIMAL: 'decimal',
