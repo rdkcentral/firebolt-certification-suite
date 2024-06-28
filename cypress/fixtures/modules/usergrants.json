@@ -86,5 +86,60 @@
                 "message": "Error"
             }
         }
+    },
+    "GRANT_DEVICE_LEVEL_DEVICE_DISTRIBUTOR_ROLE_USE": {"role": "use", "capability": "xrn:firebolt:capability:device:distributor"},
+    "DENY_DEVICE_LEVEL_DEVICE_DISTRIBUTOR_ROLE_USE": {"role": "use", "capability": "xrn:firebolt:capability:device:distributor"},
+    "APP_INTEGER_VALUE": {
+        "appId": 1234
+    },
+    "APP_BOOLEAN_APP_ID": {
+        "appId": true
+    },
+    "CAPABILITY_INTEGER_CAPABILITY": {
+        "capability": 1234
+    },
+    "CAPABILITY_BOOLEAN_CAPABILITY": {
+        "capability": true
+    },
+    "GRANT_INVALID_ROLE": {
+        "role": "test",
+        "capability": "xrn:firebolt:capability:device:id"
+    },
+    "GRANT_INTEGER_CAPABILITY": {
+        "role": "use",
+        "capability": 1234
+    },
+    "GRANT_INTEGER_APP_ID": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:device:id",
+        "options": {
+            "appId": 1234
+        }
+    },
+    "GRANT_CAPABILITY_NOT_DEFINED_IN_MANIFEST": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:test:test"
+    },
+    "DENY_INVALID_ROLE": {
+        "role": "test",
+        "capability": "xrn:firebolt:capability:device:id"
+    },
+    "DENY_INTEGER_CAPABILITY": {
+        "role": "use",
+        "capability": 1234
+    },
+    "CLEAR_DEVICE_LEVEL_DEVICE_DISTRIBUTOR": {"role": "use", "capability": "xrn:firebolt:capability:device:distributor"},
+    "DENY_INTEGER_APP_ID": {"role": "use", "capability": "xrn:firebolt:capability:device:id", "options": {"appId": 1234}},
+    "DENY_CAPABILITY_NOT_DEFINED_IN_MANIFEST": {"role": "use", "capability": "xrn:firebolt:capability:test:test"},
+    "CLEAR_INVALID_ROLE": {"role": "test", "capability": "xrn:firebolt:capability:localization:postal-code"},
+    "CLEAR_INTEGER_CAPABILITY": {"role": "use", "capability": 1234},
+    "CLEAR_INTEGER_APP_ID": {"role": "use", "capability": "xrn:firebolt:capability:device:id", "options": {"appId": 1234}},
+    "REQUEST_INTEGER_APP_ID": {"appId": 1234, "permissions": [{"role": "use", "capability": "xrn:firebolt:capability:localization:country-code"}]},
+    "CLEAR_WITH_DEVICE_LEVEL_DEVICE_DISTRIBUTOR_ROLE_USE_METHOD": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:device:distributor"
+    },
+    "DEVICE_DISTRIBUTOR": {
+        "capability": "xrn:firebolt:capability:device:distributor"
     }
 }
