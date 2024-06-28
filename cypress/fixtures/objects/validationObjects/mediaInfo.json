@@ -1,0 +1,33 @@
+{
+    "MEDIAINFO_AUDIOFORMAT":{
+        "method": "mediaInfo.audioFormat",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_AUDIOFORMAT",
+                        "description": "Validation of the Display colorDepth"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_VIDEOFORMAT":{
+        "method": "mediaInfo.audioFormat",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_VIDEOFORMAT",
+                        "description": "Validation of the Display colorDepth"
+                    }
+                ]
+            }
+        ]
+
+    }
+}

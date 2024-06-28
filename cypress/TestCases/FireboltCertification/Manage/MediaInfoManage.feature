@@ -10,6 +10,6 @@ Feature: MediaInfo_Manage
         Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
 
         Examples:
-            | Scenario                          |  Method             | API_Key                            |
-            | Validate activeAudioFormats       | activeAudioFormats  | get a list of active audio formats |
-            | Validate activeVideoFormats       | activeVideoFormats  | get a list of active video formats |
+            | Scenario                      |  Method             | API_Key                            |
+            | Validate activeAudioFormats   | activeAudioFormats  | get a list of active audio formats |
+            | Validate activeVideoFormats   | activeVideoFormats  | get a list of active video formats |

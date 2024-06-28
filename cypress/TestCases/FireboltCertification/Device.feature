@@ -104,3 +104,6 @@ Feature: Device
             | Invalid VideoFormatOptions resolution type interger  | videoFormatSupported   | get videoFormatSupported with VideoFormatOptions resolution type interger  | invalid parameter error for videoFormatSupported   |
 
 
+ 
+
+

@@ -78,5 +78,95 @@
         "method": "display.sourcePhysicalAddress",
 		"validationJsonPath": "result",
 		"content": "DISPLAY_SOURCEPHYSICALADDRESS"       
+    },
+    "ONCOLORDEPTHCHANGED_EVENT":{
+        "method": "display.onColorDepthChanged",
+        "params": "DISPLAY_ONCOLORDEPTHCHANGED_EVENT"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT":{
+        "method": "display.onColorimetryChanged",
+        "params": "DISPLAY_ONCOLORIMETRYCHANGED_EVENT"
+    },
+    "ONHDRPROFILESCHANGED_EVENT":{
+        "method": "display.onHdrProfilesChanged",
+        "params": "DISPLAY_ONHDRPROFILESCHANGED_EVENT"
+    },
+    "ONMANUFACTURERCHANGED_EVENT":{
+        "method": "display.onManufacturerChanged",
+        "params": "DISPLAY_ONMANUFACTURERCHANGED_EVENT"
+    },
+    "ONPRODUCTNAMECHANGED_EVENT":{
+        "method": "display.onProductNameChanged",
+        "params": "DISPLAY_ONPRODUCTNAMECHANGED_EVENT"
+    },
+    "ONREFRESHRATECHANGED_EVENT":{
+        "method": "display.onRefreshRateChanged",
+        "params": "DISPLAY_ONREFRESHRATECHANGED_EVENT"
+    },
+    "ONRESOLUTIONCHANGED_EVENT":{
+        "method": "display.onResolutionChanged",
+        "params": "DISPLAY_ONRESOLUTIONCHANGED_EVENT"
+    },
+    "ONRESOLUTIONNAMECHANGED_EVENT":{
+        "method": "display.onResolutionNameChanged",
+        "params": "DISPLAY_ONRESOLUTIONNAMECHANGED_EVENT"
+    },
+    "ONSIZECHANGED_EVENT":{
+        "method": "display.onSizeChanged",
+        "params": "DISPLAY_ONSIZECHANGED_EVENT"
+    },
+    "ONSOURCEPHYSICALADDRESSCHANGED_EVENT":{
+        "method": "display.onSourcePhysicalAddressChanged",
+        "params": "DISPLAY_ONSOURCEPHYSICALADDRESSCHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONCOLORDEPTHCHANGED_EVENT":{
+        "event": "display.onColorDepthChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONCOLORDEPTHCHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONCOLORIMETRYCHANGED_EVENT":{
+        "event": "display.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONCOLORIMETRYCHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONHDRPROFILESCHANGED_EVENT":{
+        "event": "display.onHdrProfilesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONHDRPROFILESCHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONMANUFACTURERCHANGED_EVENT":{
+        "event": "display.onManufacturerChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONMANUFACTURERCHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONPRODUCTNAMECHANGED_EVENT":{
+        "event": "display.onProductNameChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONPRODUCTNAMECHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONREFRESHRATECHANGED_EVENT":{
+        "event": "display.onRefreshRateChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONREFRESHRATECHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONRESOLUTIONCHANGED_EVENT":{
+        "event": "display.onResolutionChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONRESOLUTIONCHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONRESOLUTIONNAMECHANGED_EVENT":{
+        "event": "display.onResolutionNameChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONRESOLUTIONNAMECHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONSIZECHANGED_EVENT":{
+        "event": "display.onSizeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONSIZECHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONSOURCEPHYSICALADDRESSCHANGED_EVENT":{
+        "event": "display.onSourcePhysicalAddressChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONSOURCEPHYSICALADDRESSCHANGED_EVENT"
     }
 }

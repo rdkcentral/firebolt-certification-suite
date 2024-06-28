@@ -1,0 +1,26 @@
+{
+    "GET_AUDIO_FORMAT":{
+        "method": "mediaInfo.audioFormat",
+        "params": "MEDIAINFO_PIPELINEID"
+    },
+    "GET_VIDEO_FORMAT":{
+        "method": "mediaInfo.videoFormat",
+        "params": "MEDIAINFO_PIPELINEID"
+    },
+    "EXPECTED_AUDIOFORMAT":{
+        "method": "mediaInfo.audioFormat",
+		"validationJsonPath": "result",
+		"content": "MEDIAINFO_AUDIOFORMAT"
+    },
+    "EXPECTED_VIDEOFORMAT":{
+        "method": "mediaInfo.videoFormat",
+		"validationJsonPath": "result",
+		"content": "MEDIAINFO_VIDEOFORMAT"
+    },
+    "GET_A_LIST_OF_ACTIVE_AUDIO_FORMATS":{
+        "method": "mediaInfo.activeAudioFormats"
+    },
+    "GET_A_LIST_OF_ACTIVE_VIDEO_FORMATS":{
+        "method": "mediaInfo.activeAudioFormats"
+    }
+}

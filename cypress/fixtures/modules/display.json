@@ -8,5 +8,61 @@
     "RESOLUTION": [1920,1080],
     "RESOLUTIONNAME": "uhd",
     "SIZE": [157,91],
-    "SOURCEPHYSICALADDRESS":  "3.0.0.0"
+    "SOURCEPHYSICALADDRESS":  "3.0.0.0",
+    "ONCOLORDEPTHCHANGED_EVENT":{
+        "method": "display.onColorDepthChanged",
+        "result": 10 
+    },
+    "ONCOLORIMETRYCHANGED_EVENT":{
+        "method": "display.onColorimetryChanged",
+        "result": [
+            "BT2020RGB",
+            "BT2020YCC",
+            "xvYCC601",
+            "xvYCC709"
+        ]
+    },
+    "ONHDRPROFILESCHANGED_EVENT":{
+        "method": "display.onHdrProfilesChanged",
+        "result": [
+            "dolbyVision",
+            "hdr10",
+            "hdr10plus",
+            "hlg"
+        ]
+    },
+    "ONMANUFACTURERCHANGED_EVENT":{
+        "method": "display.onManufacturerChanged",
+        "result": "Samsung Electric Company"
+    },
+    "ONPRODUCTNAMECHANGED_EVENT":{
+        "method": "display.onProductNameChanged",
+        "result": "Q80A"
+    },
+    "ONREFRESHRATECHANGED_EVENT":{
+        "method": "display.onRefreshRateChanged",
+        "result": 60
+    },
+    "ONRESOLUTIONCHANGED_EVENT":{
+        "method": "display.onResolutionChanged",
+        "result": [
+            1920,
+            1080
+        ]
+    },
+    "ONRESOLUTIONNAMECHANGED_EVENT":{
+        "method": "display.onResolutionNameChanged",
+        "result":  "uhd"
+    },
+    "ONSIZECHANGED_EVENT":{
+        "method": "display.onSizeChanged",
+        "result":[
+            157,
+            91
+        ]
+    },
+    "ONSOURCEPHYSICALADDRESSCHANGED_EVENT":{
+        "method": "display.onSourcePhysicalAddressChanged",
+        "result": "3.0.0.0"
+    }
 }
