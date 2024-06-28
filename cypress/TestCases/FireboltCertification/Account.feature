@@ -14,7 +14,7 @@ Feature: Account
          | Validate account ID  | fetch account ID  | account id     | id     |
          | Validate account UID | fetch account UID | account uid    | uid    |
 
-    @Account @coreSDK @sdk @transport @notSupported
+    @Account @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
     Scenario Outline: Account.<method> - Negative Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'

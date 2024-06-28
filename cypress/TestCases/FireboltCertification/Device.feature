@@ -43,7 +43,7 @@ Feature: Device
             | Validate videoResolution  | videoResolution  | fetch videoResolution  | expected videoResolution  |
             | Validate audio            | audio            | fetch audio            | expected audio            |
 
-    @Device @coreSDK @regression @sdk
+    @Device @coreSDK @regression @sdk @requiresPlatformImplementation
     Scenario: Device.onNameChanged - Positive Scenario: Clearing event listeners
         When '3rd party app' registers for the 'device onNameChanged' event using the 'Firebolt' API
         And I clear 'device onNameChanged event' listeners

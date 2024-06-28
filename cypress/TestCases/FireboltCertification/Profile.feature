@@ -1,6 +1,6 @@
 Feature: Profile
 
-    @Profile @coreSDK @sdk @transport
+    @Profile @coreSDK @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Profile.approveContentRating - Positive Scenario: <Scenario> without UI
         Given the environment has been set up for 'Profile' tests
         And 3rd party 'certification' app is launched
@@ -16,7 +16,7 @@ Feature: Profile
             | Wrong-PIN      | false for profile approveContentRating |
             | Cancelling-PIN | false for profile approveContentRating |
 
-    @Profile @coreSDK @sdk @transport
+    @Profile @coreSDK @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Profile.approveContentRating - Positive Scenario: <Scenario> with UI
         Given the environment has been set up for 'Profile' tests
         And User 'starts' recording lifecycle history for '1st party app'
@@ -36,7 +36,7 @@ Feature: Profile
             | Wrong-PIN      | false for profile approveContentRating |
             | Cancelling-PIN | false for profile approveContentRating |
 
-    @Profile @coreSDK @sdk @transport
+    @Profile @coreSDK @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Profile.approvePurchase - Positive Scenario: <Scenario> without UI
         Given the environment has been set up for 'Profile' tests
         And 3rd party 'certification' app is launched
@@ -52,7 +52,7 @@ Feature: Profile
             | Wrong-PIN      | false for profile approvePurchase |
             | Cancelling-PIN | false for profile approvePurchase |
 
-    @Profile @coreSDK @sdk @transport
+    @Profile @coreSDK @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Profile.approvePurchase - Positive Scenario: <Scenario> with UI
         Given the environment has been set up for 'Profile' tests
         And User 'starts' recording lifecycle history for '1st party app'
