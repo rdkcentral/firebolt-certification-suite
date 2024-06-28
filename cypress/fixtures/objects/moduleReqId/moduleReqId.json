@@ -1601,85 +1601,86 @@
             }
         },
         "Lifecycle_Inactive": {
-          "Lifecycle 2.3.1 Close an app from foreground": {
+            
+          "Lifecycle R*3.3 Close an app from foreground": {
             "req": [
               {
                 "state": {
-                  "id": "1.2.2 & 3.5"
+                  "id": "R*4.6, R*2.2.5, R*2.2.6"
                 }
               },
               {
                 "history": {
-                  "id": "1.1.2"
+                  "id": ""
                 }
               },
               {
                 "event": {
-                  "id": ["1.2.1", "1.2.2"]
+                  "id": "R*2.2.2 ['onInactive' event triggered]"
                 }
               },
               {
                 "visible_check": {
-                    "id": "1.2.3"
+                    "id": "R.2.2.1"
                 }
               }
             ]
           },
-          "Lifecycle 2.3.1 Close an app from background": {
+          "Lifecycle R*3.3 Close an app from background": {
             "req": [
-              {
-                "state": {
-                  "id": "1.2.2 & 3.5"
+                {
+                  "state": {
+                    "id": "R*4.6, R*2.2.5, R*2.2.6"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*2.2.2 ['onInactive' event triggered]"
+                  }
+                },
+                {
+                  "visible_check": {
+                      "id": "R.2.2.1"
+                  }
                 }
-              },
-              {
-                "history": {
-                  "id": "1.1.2"
-                }
-              },
-              {
-                "event": {
-                  "id": ["1.2.1", "1.2.2"]
-                }
-              },
-              {
-                "visible_check": {
-                  "id": "1.2.3"
-                }
-              }
-            ]
+              ]
           },
-          "Lifecycle 2.3.3 No impact on closing app from inactive state": {
+          "Lifecycle R*3.3.3 No impact on closing app from inactive state": {
             "req": [
-              {
-                "state": {
-                  "id": "1.2.2 & 3.5"
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.3.3"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*3.3.3"
+                  }
+                },
+                {
+                  "visible_check": {
+                      "id": "R.2.2.1"
+                  }
                 }
-              },
-              {
-                "history": {
-                  "id": "1.1.2"
-                }
-              },
-              {
-                "event": {
-                  "id": ["1.2.1", "1.2.2"]
-                }
-              },
-              {
-                "visible_check": {
-                  "id": "1.2.3"
-                }
-              }
-            ]
+              ]
           }
         },
         "Lifecycle_Foreground": {
-          "Lifecycle 2.2 Loading & Launching an App (initializing -> foreground)": {
+          "Lifecycle R*3.2 Loading & Launching an App (initializing -> foreground)": {
             "req": [
               {
                 "state": {
-                  "id": "3.5"
+                  "id": "R*4.6, R*3.2.7"
                 }
               },
               {
@@ -1689,95 +1690,92 @@
               },
               {
                 "event": {
-                  "id": ["1.3.6", "1.3.6"]
+                  "id": ["R*2.3.6 ['onForeground' event triggered]", "R*2.2.2 ['onInactive' event triggered]"]
                 }
               },
               {
                 "visible_check": {
-                  "id": "1.3.2"
+                  "id": "R*2.3.2"
                 }
               }
             ]
           },
-          "Lifecycle 2.2.1 Relaunch foreground app": {
+          "Lifecycle R*3.2.3 Relaunch foreground app": {
             "req": [
-              {
-                "state": {
-                  "id": "3.5"
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.2.3"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*3.2.3"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.3.2"
+                  }
                 }
-              },
-              {
-                "history": {
-                  "id": ""
-                }
-              },
-              {
-                "event": {
-                  "id": ["1.3.6", "1.3.6"]
-                }
-              },
-              {
-                "visible_check": {
-                  "id": "1.3.2"
-                }
-              }
-            ]
+              ]
           },
-          "Lifecycle 2.2.5 App Launching another app": {
+          "Lifecycle R.3.2.1 App Launching another app": {
             "req": [
-              {
-                "state": {
-                  "id": "3.5"
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.2.7"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*2.4.6 ['onBackground' event triggered]"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.3.2"
+                  }
                 }
-              },
-              {
-                "history": {
-                  "id": ""
-                }
-              },
-              {
-                "event": {
-                  "id": ["1.3.6", "1.3.6"]
-                }
-              },
-              {
-                "visible_check": {
-                  "id": "1.3.2"
-                }
-              }
-            ]
+              ]
           }
         },
         "Lifecycle_Initializing": {
-            "Lifecycle 2.3.2 Cannot Close an app from initializing": {
+            "Lifecycle R.3.3.4 Cannot Close an app from initializing": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.1.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R*2.1.1"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.1.2"
+                            "id": "R*2.1.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.3.3.4"
                         }
                     }
                 ]
             }
         },
         "Lifecycle_Terminated": {
-            "Lifecycle 2.8 Terminate app in foreground State": {
+            "Lifecycle R*3.8 Terminate app in foreground State": {
                 "req": [
                     {
                         "state": {
-                            "id": ""
+                            "id": "R*4.6, R*3.8"
                         }
                     },
                     {
@@ -1787,16 +1785,16 @@
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.8 Terminate app in background State": {
+            "Lifecycle R*3.8 Terminate app in background State": {
                 "req": [
                     {
                         "state": {
-                            "id": ""
+                            "id": "R*4.6, R*3.8"
                         }
                     },
                     {
@@ -1806,16 +1804,16 @@
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.8 Terminate app in initializing State": {
+            "Lifecycle R*3.8 Terminate app in initializing State": {
                 "req": [
                     {
                         "state": {
-                            "id": ""
+                            "id": "R*4.6, R*3.8"
                         }
                     },
                     {
@@ -1825,16 +1823,16 @@
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.8 Terminate app in inactive State": {
+            "Lifecycle R*3.8 Terminate app in inactive State": {
                 "req": [
                     {
                         "state": {
-                            "id": ""
+                            "id": "R*4.6, R*3.8"
                         }
                     },
                     {
@@ -1844,16 +1842,16 @@
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.8 Terminate app in suspended State": {
+            "Lifecycle R*3.8 Terminate app in suspended State": {
                 "req": [
                     {
                         "state": {
-                            "id": ""
+                            "id": "R*4.6, R*3.8"
                         }
                     },
                     {
@@ -1863,16 +1861,16 @@
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.8 Terminate app in unloading State": {
+            "Lifecycle R*3.8 Terminate app in unloading State": {
                 "req": [
                     {
                         "state": {
-                            "id": ""
+                            "id": "R*4.6, R*3.8"
                         }
                     },
                     {
@@ -1882,284 +1880,250 @@
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.8"
                         }
                     }
                 ]
             }
         },
         "Lifecycle_Unloading": {
-            "Lifecycle 3.4.4 No impact of multiple Finished events while unloading": {
+            "Lifecycle R.4.5.4 No impact of multiple Finished events while unloading": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.4.5.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.4.5.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.7.1 Unloading from Inactive state": {
+            "Lifecycle R*3.7 Unloading from Inactive state": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R*2.5.1, R*3.7.5"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.7.5, R*2.5.1"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.3.2 Cannot Close an Unloading App": {
+            "Lifecycle R.3.3.4 Cannot Close an Unloading App": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.3.3.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.3.3.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 3.4.3 finished from unloading state": {
+            "Lifecycle R*4.5.3 finished from unloading state": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R*4.5.3"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*4.5.3"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.7.2 Should not unload from active state (foreground)": {
+            "Lifecycle R*3.7.2 Should not unload from active state (foreground)": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R*3.7.2"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.7.2"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.1 Cannot Suspend Unloaded app": {
+            "Lifecycle R*2.6.5 Cannot Suspend Unloaded app": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R*2.6.5"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*2.6.5"
                         }
                     }
                 ]
             },
-            "Lifecycle 3.4.1 Should not finish from state other than unloading (initializing)": {
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (initializing)": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.4.5.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.4.5.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 3.4.1 Should not finish from state other than unloading (foreground)": {
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (foreground)": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.4.5.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.4.5.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 3.4.1 Should not finish from state other than unloading (background)": {
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (background)": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.4.5.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.4.5.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 3.4.1 Should not finish from state other than unloading (inactive)": {
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (inactive)": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.4.5.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.4.5.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 3.4.1 Should not finish from state other than unloading (suspended)": {
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (suspended)": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.4.5.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.4.5.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.3.2 Cannot Close an app that is not loaded": {
+            "Lifecycle R.3.3.4 Cannot Close an app that is not loaded": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.3.3.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.3.3.4"
                         }
                     }
                 ]
             }
         },
         "Lifecycle_Background": {
-          "Lifecycle 2.4.2 Background an app from foreground": {
+          "Lifecycle R*3.4 Background an app from foreground": {
             "req": [
               {
                 "state": {
-                  "id": "3.5"
+                  "id": 
+                    "R*4.6, R*3.4.6"
+                
                 }
               },
               {
@@ -2169,167 +2133,167 @@
               },
               {
                 "event": {
-                  "id": ["1.4.6", "1.3.6"]
+                  "id": "R*2.4.6 ['onBackground' event triggered]"
                 }
               },
               {
                 "visible_check": {
-                  "id": "1.4.3"
+                  "id": "R*2.4.2"
                 }
               }
             ]
           },
-          "Lifecycle 2.4.2 Background an app from inactive": {
+          "Lifecycle R*3.4 Background an app from inactive": {
             "req": [
-              {
-                "state": {
-                  "id": "3.5"
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.4.6"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*2.4.6 ['onBackground' event triggered]"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
                 }
-              },
-              {
-                "history": {
-                  "id": ""
-                }
-              },
-              {
-                "event": {
-                  "id": ["1.4.6", "1.3.6"]
-                }
-              },
-              {
-                "visible_check": {
-                  "id": "1.4.3"
-                }
-              }
-            ]
+              ]
           },
-          "Lifecycle 2.4.3 Cannot Background app that is not loaded": {
+          "Lifecycle R.3.4.4 Cannot Background app that is not loaded": {
             "req": [
-              {
-                "state": {
-                  "id": "3.5"
+                {
+                  "state": {
+                    "id": "R*4.6, R.3.4.4"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R.3.4.4"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
                 }
-              },
-              {
-                "history": {
-                  "id": ""
-                }
-              },
-              {
-                "event": {
-                  "id": ["1.4.6", "1.3.6"]
-                }
-              },
-              {
-                "visible_check": {
-                  "id": "1.4.3"
-                }
-              }
-            ]
+              ]
           },
-          "Lifecycle 2.4.1 Cannot Background a Backgrounded App": {
+          "Lifecycle R*3.4.3 Cannot Background a Backgrounded App": {
             "req": [
-              {
-                "state": {
-                  "id": "3.5"
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.4.3"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*3.4.3"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
                 }
-              },
-              {
-                "history": {
-                  "id": ""
-                }
-              },
-              {
-                "event": {
-                  "id": ["1.4.6", "1.3.6"]
-                }
-              },
-              {
-                "visible_check": {
-                  "id": "1.4.3"
-                }
-              }
-            ]
+              ]
           },
-          "Lifecycle 2.4.3 Cannot Background app in Unloading state": {
+          "Lifecycle R.3.4.4 Cannot Background app in Unloading state": {
             "req": [
-              {
-                "state": {
-                  "id": "3.5"
+                {
+                  "state": {
+                    "id": "R*4.6, R.3.4.4"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R.3.4.4"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
                 }
-              },
-              {
-                "history": {
-                  "id": ""
-                }
-              },
-              {
-                "event": {
-                  "id": ["1.4.6", "1.3.6"]
-                }
-              },
-              {
-                "visible_check": {
-                  "id": "1.4.3"
-                }
-              }
-            ]
+              ]
           },
-          "Lifecycle 2.4.3 Cannot background app from suspended state": {
+          "Lifecycle R.3.4.4 Cannot background app from suspended state": {
             "req": [
-              {
-                "state": {
-                  "id": "3.5"
+                {
+                  "state": {
+                    "id": "R*4.6, R.3.4.4"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R.3.4.4"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
                 }
-              },
-              {
-                "history": {
-                  "id": ""
-                }
-              },
-              {
-                "event": {
-                  "id": ["1.4.6", "1.3.6"]
-                }
-              },
-              {
-                "visible_check": {
-                  "id": "1.4.3"
-                }
-              }
-            ]
+              ]
           },
-          "Lifecycle 2.4.3 Should not Background app in initializing state": {
+          "Lifecycle R.3.4.4 Should not Background app in initializing state": {
             "req": [
-              {
-                "state": {
-                  "id": "3.5"
+                {
+                  "state": {
+                    "id": "R*4.6, R.3.4.4"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R.3.4.4"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
                 }
-              },
-              {
-                "history": {
-                  "id": ""
-                }
-              },
-              {
-                "event": {
-                  "id": ["1.4.6", "1.3.6"]
-                }
-              },
-              {
-                "visible_check": {
-                  "id": "1.4.3"
-                }
-              }
-            ]
+              ]
           }
         },
         "Lifecycle_Suspended": {
-            "Lifecycle 1.6.1 App should subscribe to onSuspended listener regardless of capability": {
+            "Lifecycle R*1.6.1 App should subscribe to onSuspended listener regardless of capability": {
                 "req": [
                     {
                         "state": {
-                            "id": "1.6.1"
+                            "id": "R*4.6, R*2.6.1"
                         }
                     },
                     {
@@ -2339,19 +2303,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*2.6.1"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.4 Suspend App from Inactive state": {
+            "Lifecycle R*2.6.5 Suspend App from Inactive state": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.5.4"
+                            "id": "R*4.6, R*2.6.4"
                         }
                     },
                     {
@@ -2361,19 +2322,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.2.4 Relaunch a previously Suspended app after Unsuspend": {
+            "Lifecycle R*3.2.5, R*3.2.6, R*3.2.7 Relaunch a previously Suspended app after Unsuspend": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.2.4"
+                            "id": "R*4.6, R*3.2.7, R*2.2.8"
                         }
                     },
                     {
@@ -2383,19 +2341,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*2.3.6, R*2.2.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.3 Cannot Suspend a suspended App": {
+            "Lifecycle R*3.5.2 Cannot Suspend a suspended App": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.5.3"
+                            "id": "R*4.6, R*3.5.2"
                         }
                     },
                     {
@@ -2405,19 +2360,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*3.5.2"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.1 Cannot Suspend a unloaded App": {
+            "Lifecycle R*2.6.5 Cannot Suspend a unloaded App": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.5.1"
+                            "id": "R*4.6, R*2.6.5"
                         }
                     },
                     {
@@ -2427,19 +2379,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*2.6.5"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.5 Cannot relaunch Suspended App": {
+            "Lifecycle R*3.2.5 Cannot relaunch Suspended App": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.5.5"
+                            "id": "R*4.6, R*3.2.5"
                         }
                     },
                     {
@@ -2449,19 +2398,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*3.2.5"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.2 Cannot Suspend foreground app": {
+            "Lifecycle R*2.6.5 Cannot Suspend foreground app": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.5.2"
+                            "id": "R*4.6, R*2.6.5"
                         }
                     },
                     {
@@ -2471,19 +2417,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*2.6.5"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.2 Cannot Suspend background app": {
+            "Lifecycle R*2.6.5 Cannot Suspend background app": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.5.2"
+                            "id": "R*4.6, R*2.6.5"
                         }
                     },
                     {
@@ -2493,19 +2436,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*2.6.5"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.3.2 Cannot Close Suspended App": {
+            "Lifecycle R.3.3.4 Cannot Close Suspended App": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.3.2"
+                            "id": "R*4.6, R.3.3.4"
                         }
                     },
                     {
@@ -2515,22 +2455,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R.3.3.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.6, 2.6.2 Unsuspending App": {
+            "Lifecycle R*3.6 Unsuspending App": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "2.6",
-                                "2.6.2"
-                            ]
+                            "id": "R*4.6, R*2.2.8, R*3.6.7"
                         }
                     },
                     {
@@ -2540,19 +2474,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*2.2.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.6.1 Cannot Unsuspend in initializing State": {
+            "Lifecycle R*3.6.2 Cannot Unsuspend in initializing State": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.6.1"
+                            "id": "R*4.6, R*3.6.2"
                         }
                     },
                     {
@@ -2562,19 +2493,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*3.6.2"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.6.1 Cannot Unsuspend in foreground State": {
+            "Lifecycle R*3.6.3 Cannot Unsuspend in foreground State": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.6.1"
+                            "id": "R*4.6, R*3.6.2"
                         }
                     },
                     {
@@ -2584,19 +2512,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*3.6.2"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.6.1 Cannot Unsuspend in background State": {
+            "Lifecycle R*3.6.3 Cannot Unsuspend in background State": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.6.1"
+                            "id": "R*4.6, R*3.6.2"
                         }
                     },
                     {
@@ -2606,19 +2531,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*3.6.2"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.6.1 Cannot Unsuspend in inactive State": {
+            "Lifecycle R*3.6.3 Cannot Unsuspend in inactive State": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.6.1"
+                            "id": "R*4.6, R*3.6.2"
                         }
                     },
                     {
@@ -2628,19 +2550,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*3.6.2"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.6.1 Cannot Unsuspend in unloading State": {
+            "Lifecycle R*3.6.3 Cannot Unsuspend in unloading State": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.6.1"
+                            "id": "R*4.6, R*3.6.2"
                         }
                     },
                     {
@@ -2650,19 +2569,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*3.6.2"
                         }
                     }
                 ]
             },
-            "Lifecycle 4.3 Unsuspend unloaded app": {
+            "Lifecycle R*3.6.2 Unsuspend unloaded app": {
                 "req": [
                     {
                         "state": {
-                            "id": "4.3"
+                            "id": "R*4.6, R*3.6.2"
                         }
                     },
                     {
@@ -2672,19 +2588,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R*3.6.2"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.6 Try to suspend an app that doesn't exist": {
+            "Lifecycle R.3.5.3 Try to suspend an app that doesn't exist": {
                 "req": [
                     {
                         "state": {
-                            "id": "2.5.6"
+                            "id": "R*4.6, R.3.5.3"
                         }
                     },
                     {
@@ -2694,10 +2607,7 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                            "id": "R.3.5.3"
                         }
                     }
                 ]
