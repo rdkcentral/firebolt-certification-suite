@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 
 /**
@@ -80,6 +80,14 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
           const envParam = params.split('-')[1];
           params = UTILS.getEnvVariable(envParam, false);
         }
+        // If params contain CYPRESSENV in any parameter assigning corresponding env value
+        const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
+        if (containEnv) {
+          const envParam = containEnv.split('-')[1];
+          params[envParam] = Cypress.env(envParam);
+          delete params[containEnv];
+        }
+
         method = item.method;
         const expected = item.expected ? item.expected : CONSTANTS.RESULT;
         action = CONSTANTS.ACTION_CORE.toLowerCase();
@@ -186,7 +194,12 @@ Cypress.Commands.add('getDeviceVersion', () => {
     param: {},
     action: CONSTANTS.ACTION_CORE.toLowerCase(),
   };
-
+  cy.log(
+    'Call from 1st party App, method: ' +
+      requestMap.method +
+      ' params: ' +
+      JSON.stringify(requestMap.param)
+  );
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
       if (response && response.result) {
@@ -248,18 +261,15 @@ Cypress.Commands.add('getFireboltJsonData', () => {
   // Reading the path of the firebolt.json file from the environment variable based on the SDK version.
   if (envPlatformSdkVersion.includes(CONSTANTS.NEXT)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_NEXT_URL);
-    cy.log(`Using the next version of firebolt.json`);
   } else if (envPlatformSdkVersion.includes(CONSTANTS.PROPOSED)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(
       CONSTANTS.FIREBOLT_SPECIFICATION_PROPOSED_URL
     );
-    cy.log(`Using the proposed version of firebolt.json`);
   } else {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_URL).replace(
       CONSTANTS.LATEST,
       envPlatformSdkVersion
     );
-    cy.log(`Using the ${envPlatformSdkVersion} version of firebolt.json`);
   }
 
   cy.request({ url: FIREBOLT_SPECIFICATION_URL, failOnStatusCode: false }).then((data) => {
@@ -472,6 +482,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
   } else if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTMOCK)) {
     cy.parsedMockData(beforeOperation).then((parsedData) => {
       if (firstParty) {
+        parsedData.firstParty = firstParty;
         const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SETRESPONSE;
         const requestMap = {
           method: method,
@@ -643,7 +654,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
   // else get the default app id from environment variable.
 
   const appId =
-    appCallSign == undefined ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) : appCallSign; // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
+    appCallSign == undefined
+      ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+      : UTILS.checkForSecondaryAppId(appCallSign); // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // create the request map
   // basic intent to be sent to the app on launch
@@ -655,12 +668,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
         ? UTILS.getEnvVariable(CONSTANTS.APP_TYPE)
         : CONSTANTS.FIREBOLT; // appType defines in which mode app should be launched
     data = {
-      query: JSON.stringify({
+      query: {
         params: {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.APP_TYPE]: appCategory,
         },
-      }),
+      },
     };
     const messageIntent = {
       action: CONSTANTS.SEARCH,
@@ -678,17 +691,38 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
   ) {
     data = {
-      query: JSON.stringify({
+      query: {
         params: {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.LIFECYCLE_VALIDATION]: true,
           [CONSTANTS.APP_TYPE]: appCategory,
+        },
+      },
+    };
+    requestMap.params.intent.data = data;
+  }
+
+  // Add the PubSub URL if required
+  if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_URL] = getEnvVariable(CONSTANTS.PUB_SUB_URL);
+    if (getEnvVariable(CONSTANTS.DEVICE_MAC, false)) {
+      data.query.params[CONSTANTS.MACADDRESS_PARAM] = getEnvVariable(CONSTANTS.DEVICE_MAC);
+    }
+  }
+  // If the testType is userInterestProvider, send the discovery.launch params with registerProvider = false, then certification app will not register for userInterest provider.
+  if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.USERINTERESTPROVIDER) {
+    data = {
+      query: JSON.stringify({
+        params: {
+          [CONSTANTS.REGISTERPROVIDER]: false,
         },
       }),
     };
     requestMap.params.intent.data = data;
   }
 
+  // Stringify the query (The intent requires it be a string)
+  data.query = JSON.stringify(data.query);
   Cypress.env(CONSTANTS.CURRENT_APP_ID, appId);
 
   const requestTopic = UTILS.getTopic(appId);
@@ -699,20 +733,29 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     cy.sendMessagetoPlatforms(parsedIntent).then((result) => {
       fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
 
-      // checking the connection status of a third-party app.
-      cy.thirdPartyAppHealthcheck(requestTopic, responseTopic).then((healthCheckResponse) => {
-        if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
-          throw Error(
-            'FCA not launched as 3rd party app or not subscribed to ' +
-              requestTopic +
-              '. Unable to get healthCheck response from FCA in ' +
-              UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
-              ' retries'
-          );
-        }
-        healthCheckResponse = JSON.parse(healthCheckResponse);
-        expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
-      });
+      if (
+        UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) === appId ||
+        UTILS.getEnvVariable(CONSTANTS.FCA_APP_LIST).find(
+          (ele) => UTILS.getEnvVariable(ele, false) === appId
+        )
+      ) {
+        // checking the connection status of a third-party app.
+        cy.thirdPartyAppHealthcheck(requestTopic, responseTopic).then((healthCheckResponse) => {
+          // checking whether valid healthCheck response is received
+          // if not received, throwing error with corresponding topic and retry count.
+          if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
+            throw Error(
+              'FCA not launched as 3rd party app or not subscribed to ' +
+                requestTopic +
+                '. Unable to get healthCheck response from FCA in ' +
+                UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
+                ' retries'
+            );
+          }
+          healthCheckResponse = JSON.parse(healthCheckResponse);
+          expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
+        });
+      }
     });
   });
 });

@@ -60,11 +60,16 @@ function testDataProcessor(configEnv) {
   // Resolving the variables in the SetResponse JSON
   const resolvedSetResponseJson = processSetResponseJson(mergedSetResponseJson);
 
+  // Resolving the variables in the SetResponse JSON
+  const resolvedErrorContentJson = processErrorContentJson();
+
   // Below key names are converted into environment variables.
   return {
     fireboltCallsJson: resolvedFireboltCallsJson,
     fireboltMocksJson: combinedFireboltMocksJson,
     setResponseJson: resolvedSetResponseJson,
+    errorContentValidationJson: resolvedErrorContentJson,
+    combineValidationObjectsJson: validationObjects,
   };
 }
 
@@ -94,6 +99,48 @@ function processSetResponseJson(setResponseJsonData) {
     }
   }
   return setResponseJsonData;
+}
+
+/**
+ *  @function processErrorContentJson
+ *  processErrorContentJson function will perform following operations
+ *  - Iterate over each key in the provided JSON
+ *  - Resolve the each type in the array of validations object.
+ *  - Return the JSON with the updated value.
+ *
+ *  @example
+ *  processErrorContentJson()
+ */
+function processErrorContentJson() {
+  const errorSchemaJson = fetchDataFromFile(CONSTANTS.ERROR_SCHEMA_OBJECTS_PATH);
+
+  // Looping through json data
+  for (const key in errorSchemaJson) {
+    const object = errorSchemaJson[key];
+    if (
+      typeof object == CONSTANTS.TYPE_OBJECT &&
+      object.type == CONSTANTS.VALIDATION_FUNCTION &&
+      object.hasOwnProperty('validations') &&
+      Array.isArray(object.validations)
+    ) {
+      // Looping through the validations array, obtaining and updating the field type with error content data.
+      object.validations.forEach((validationObject) => {
+        const errorContentObject = fetchAndParseDataFromJson(
+          CONSTANTS.ERROR_CONTENT_OBJECTS_PATH,
+          validationObject.type
+        );
+        if (errorContentObject !== CONSTANTS.NO_DATA) {
+          logger.info(
+            `Expected error content object not found in ${CONSTANTS.ERROR_CONTENT_OBJECTS_PATH} for ${validationObject.type}`
+          );
+          validationObject.type = errorContentObject;
+        }
+      });
+    } else {
+      logger.info(`Unable to find data for Error validation for ${key}`);
+    }
+  }
+  return errorSchemaJson;
 }
 
 /**
@@ -267,7 +314,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                     if (REGEXFORMATS[regexType]) {
                       parsedRegexExp = REGEXFORMATS[regexType];
                     } else {
-                      const regExp = new RegExp(regexType);
+                      const regExp = new RegExp(data.type);
                       parsedRegexExp = regExp;
                     }
                     return (data.type = parsedRegexExp.toString());
