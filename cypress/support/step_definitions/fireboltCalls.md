@@ -96,3 +96,21 @@ Note: Key name value is an object and it can contains data as below
 * `Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to invalid 'test'`
 * `Given '1st party app' invokes the 'Firebolt' API to set 'enable' to 'true'`
 
+
+## '(.+)' invokes the '(.+)' get API(?: '(.+)')
+
+### Purpose: Sending a message to platform or 3rd party app to get a value
+
+### Params:
+| Param | Definition |
+| --- | --- |
+| appId | app identifier. |
+| sdk | sdk name |
+| fireboltCallKey | key name passed to look for firebolt call object in fireboltCallData |
+
+### Examples:
+* `And '1st party app' invokes the 'Firebolt' get API 'CLOSEDCAPTION_SETTINGS'`
+* `And '3rd party app' invokes the 'Firebolt' get API 'CLOSEDCAPTION_SETTINGS'`
+* `And '3rd party app' invokes the 'Firebolt' get API`
+* `And 'test_app' invokes the 'Firebolt' get API 'CLOSEDCAPTION_SETTINGS'`
+
