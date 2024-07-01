@@ -88,5 +88,33 @@
                 ]
             }
         ]
-    }
+    },
+    "ACTIVEAUDIOFORMATS": [
+        {
+            "bitRate": 128,
+            "channels": "2",
+            "codec": "aac",
+            "codecProfile": "mp2lc",
+            "container": "audio/mp4",
+            "pipelineId": 1,
+            "sampleRate": 48
+        }
+    ],
+    "ACTIVEVIDEOFORMATS": [
+        {
+            "codec": "hevc",
+            "codecLevel": "4.2",
+            "codecProfile": "main",
+            "container": "video/mp4",
+            "frameRate": 30,
+            "hdr": [
+                "hdr10"
+            ],
+            "pipelineId": 1,
+            "resolution": [
+                1920,
+                1080
+            ]
+        }
+    ]
 }

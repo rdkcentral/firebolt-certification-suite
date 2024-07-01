@@ -88,5 +88,35 @@
                 ]
             }
         ]
+    },
+    "MEDIAINFO_ACTIVEAUDIOFORMATS": {
+        "method": "manage_mediaInfo.activeAudioFormats",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_ACTIVEAUDIOFORMATS",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ACTIVEVIDEOFORMATS": {
+        "method": "manage_mediaInfo.activeVideoFormats",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_ACTIVEVIDEOFORMATS",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
     }
 }

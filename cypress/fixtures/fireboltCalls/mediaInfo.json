@@ -24,10 +24,12 @@
         "method": "manage_mediaInfo.activeVideoFormats"
     },
     "MEDIAINFO_ONAUDIOFORMATCHANGED":{
-        "method": "mediaInfo.onAudioFormatChanged"
+        "method": "mediaInfo.onAudioFormatChanged",
+        "params": "MEDIAINFO_PIPELINEID"
     },
     "MEDIAINFO_ONVIDEOFORMATCHANGED":{
-        "method": "mediaInfo.onVideoFormatChanged"
+        "method": "mediaInfo.onVideoFormatChanged",
+        "params": "MEDIAINFO_PIPELINEID"
     },
     "EXPECTED_MEDIAINFO_ONAUDIOFORMATCHANGED_EVENT":{
         "event": "mediaInfo.onAudioFormatChanged",
@@ -70,5 +72,15 @@
         "method": "manage_mediaInfo.onActiveVideoFormatsChanged",
         "validationJsonPath": "eventResponse",
         "content": "MEDIAINFO_ONACTIVEVIDEOFORMATSCHANGED_EVENT"
+    },
+    "EXPECTED_ACTIVEAUDIOFORMATS":{
+        "method": "manage_mediaInfo.activeAudioFormats",
+		"validationJsonPath": "result",
+		"content": "MEDIAINFO_ACTIVEAUDIOFORMATS"
+    },
+    "EXPECTED_ACTIVEVIDEOFORMATS":{
+        "method": "manage_mediaInfo.activeVideoFormats",
+		"validationJsonPath": "result",
+		"content": "MEDIAINFO_ACTIVEVIDEOFORMATS"
     }
 }

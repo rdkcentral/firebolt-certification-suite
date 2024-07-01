@@ -101,7 +101,7 @@ Feature: Device
             | Invalid Video codec type integer                     | videoFormatSupported   | get videoFormatSupported with invalid Videocodec type integer              | invalid parameter error for videoFormatSupported   |
             | Invalid Video codec type boolean                     | videoFormatSupported   | get videoFormatSupported with invalid Videocodec type boolean              | invalid parameter error for videoFormatSupported   |
             | Invalid VideoFormatOptions resolution type boolean   | videoFormatSupported   | get videoFormatSupported with VideoFormatOptions resolution type boolean   | invalid parameter error for videoFormatSupported   |
-            | Invalid VideoFormatOptions resolution type interger  | videoFormatSupported   | get videoFormatSupported with VideoFormatOptions resolution type interger  | invalid parameter error for videoFormatSupported   |
+            | Invalid VideoFormatOptions resolution type interger  | videoFormatSupported   | get videoFormatSupported with VideoFormatOptions resolution type integer   | invalid parameter error for videoFormatSupported   |
 
     @Device @coreSDK @sdk @transport @notSupported
     Scenario Outline: Device.<method> - Positive Scenario: <Scenario>

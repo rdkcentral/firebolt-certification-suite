@@ -23,7 +23,7 @@ Feature: Display
 
     @Display @coreSDK @sdk @transport @notSupported
     Scenario Outline: Display.<method> - Positive Scenario: <Scenario>
-        When '3rd party app' registers for the  '<Event_Registration_Key>' event using the 'Firebolt' API
+        When '3rd party app' registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Method_Validation_Key>'
         When User triggers event with value as '<Event_Param>'
