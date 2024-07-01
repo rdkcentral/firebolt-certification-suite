@@ -40,18 +40,21 @@
  * `I 'start' performance metrics collection`
  * `I 'stop' performance metrics collection`
 
- ## {string} is in {string} state
+
+ ## '(.+)' will (be|stay) in '(.+)' state
 ### Purpose: To validate 3rd party app transitionss wrt state, event and history aagainst appObject as the source of truth
+Here, be/stay determines whether the app will get transitioned to new state or will be staying in the same state.
+For the validation part, for the states when the app is not reachable for us to get the status or history, we use customValidation , where we get the validation key name from the moduleReqId.json of the specific testcase. The customValidation function will be defined in the corresponding confiModule. Refer to the [custom] validation.
 
 ### Params:
-| Param | Definition |
-| --- | --- |
-| app | app type |
-| state | expected state to be used for validation |
+| Param | Definition                                |
+| ---   | ---                                       |
+| app   | app type                                  |
+| state | expected state to be used for validation  |
 
 ### Examples:
- * `'3rd party app' is in 'foreground' state`
-
+ * Then '3rd party app' will stay in 'foreground' state
+ * Then '3rd party app' will be in 'background' state
 
 # Supported Validations
 
@@ -288,6 +291,48 @@
         ]
 }
 
+### Custom Validation
+## Format
+The basic structure of the validation object in configModule with customValidation will be as :
+{
+        "method": "",
+        "data": [
+            {
+                "type": "custom",
+                "override": <value>,
+                "assertionDef": "<custommethodName>",
+                "validations": [
+                    {
+                        "type": "",
+                        "description": ""
+                    }
+                ]
+            }
+		]
+}
+
+Here, the value of the key "assertionDef" will be the customMethod we use for validation. The customValidation method should be added in this file in configModule : customValidations/validationFunctions.js, and should be exported from "customValidations/index.js".
+
+### Example:
+{
+        "method": "authentication.token",
+        "data": [
+            {
+                "type": "custom",
+                "override": 1,
+                "assertionDef": "customMethod1",
+                "validations": [
+                    {
+                        "field": "issueDate1",
+                        "mode": "regex",
+                        "format": "TOKEN_REGEXP",
+                        "type": "DATEAUTHENTICATION_REGEXP",
+                        "description": "Validation of the Authentication Token issueDate Format"
+                    }
+                ]
+            }
+		]
+}
 
 ## undefined
 ### format:
@@ -368,48 +413,24 @@ While validating, if a key is present in both fcs-validation jsons (eg: cypress/
         ]
 }
 
-# Custom Validation
-## Format
-The basic structure of the validation object in configModule with customValidation will be as :
-{
-        "method": "",
-        "data": [
-            {
-                "type": "custom",
-                "override": <value>,
-                "assertionDef": "<custommethodName>",
-                "validations": [
-                    {
-                        "type": "",
-                        "description": ""
-                    }
-                ]
-            }
-		]
-}
+## '(.+)' platform responds to '([^']*)'(?: '([^']*)')? (get|set) API(?: with '(.+)')?
+### Purpose: Performing a validation against the source of truth for the given API response
 
-Here, the value of the key "assertionDef" will be the customMethod we use for validation. The customValidation method should be added in this file in configModule : customValidations/validationFunctions.js, and should be exported from "customValidations/index.js".
+### Params:
+| Param | Definition |
+| --- | --- |
+| sdk | name of the sdk |
+| appId | The object was retrieved by using the appId |
+| fireboltCallKey | key name passed to look for firebolt call object in fireboltCallData Json |
+| methodType | Determines which method doing content validation Ex: set or get |
+| errorContent | Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS' |
 
-### Example:
-{
-        "method": "authentication.token",
-        "data": [
-            {
-                "type": "custom",
-                "override": 1,
-                "assertionDef": "customMethod1",
-                "validations": [
-                    {
-                        "field": "issueDate1",
-                        "mode": "regex",
-                        "format": "TOKEN_REGEXP",
-                        "type": "DATEAUTHENTICATION_REGEXP",
-                        "description": "Validation of the Authentication Token issueDate Format"
-                    }
-                ]
-            }
-		]
-}
+### Examples:
+ * `And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' get API`
+ * `And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' set API`
+ * `And 'Firebolt' platform responds to '3rd party app' 'CLOSEDCAPTION_SETTINGS' get API`
+ * `And 'Firebolt' platform responds to '1st party app' set API`
+ * `And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' set API with 'INVALID_TYPE_PARAMS'`
 
 ## '(.+)' platform (triggers|does not trigger) '(.*?)'(?: '(.*?)')? event(?: with '(.+)')?
 

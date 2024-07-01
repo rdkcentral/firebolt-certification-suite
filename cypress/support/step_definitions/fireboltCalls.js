@@ -111,6 +111,7 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
  * @example
  * Given '3rd party app' invokes the 'Firebolt' API to 'get device id'
  * Given 'test.test.test' invokes the 'Firebolt' API to 'get device id'
+ * Given 'secondary 3rd party app' invokes the 'Firebolt' API to 'get device id'
  */
 Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
   // Fetching the data like method, param, context and action etc.
@@ -121,7 +122,7 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appId === CONSTANTS.THIRD_PARTY_APP
           ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-          : appId;
+          : UTILS.checkForSecondaryAppId(appId);
       const method = parsedData.method;
       const param = parsedData.params;
       const context = parsedData.context;
@@ -214,6 +215,7 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
  * @example
  * Given '3rd party app' registers for the 'Closed Captions Settings' event using the 'Firebolt' API
  * Given 'test.test.test' registers for the 'Closed Captions Settings' event using the 'Firebolt' API
+ * Given 'secondary 3rd party app' registers for the 'Closed Captions Settings' event using the 'Firebolt' API
  */
 Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appId, key, sdk) => {
   // Fetching the data like method, param, context and action etc.
@@ -224,7 +226,7 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appId === CONSTANTS.THIRD_PARTY_APP
           ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-          : appId;
+          : UTILS.checkForSecondaryAppId(appId);
       const event = parsedData.method;
       const param = parsedData.params;
       const context = parsedData.context ? parsedData.context : CONSTANTS.NO_CONTEXT;
