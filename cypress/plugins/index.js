@@ -60,7 +60,10 @@ module.exports = async (on, config) => {
   config.reporterOptions.reportDir = `./reports/${config.env.jobId}`;
 
   // Get and dereference OpenRPC
-  const openRpcs = await getAndDereferenceOpenRpc(config.env.externalOpenRpcUrls);
+  const openRpcs = await getAndDereferenceOpenRpc(
+    config.env.externalOpenRpcUrls,
+    config.env.sdkVersion
+  );
   // Set env equal to strigified openRpcs due to circular references
   config.env.dereferenceOpenRPC = flatted.stringify(openRpcs);
 

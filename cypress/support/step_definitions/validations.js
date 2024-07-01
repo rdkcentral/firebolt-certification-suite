@@ -113,14 +113,16 @@ Given(
                   };
 
                   cy.sendMessagetoPlatforms(requestMap).then((result) => {
-                    cy.updateResponseForFCS(methodOrEvent, null, result).then((updatedResponse) => {
-                      cy.saveEventResponse(
-                        updatedResponse,
-                        methodOrEventObject,
-                        eventName,
-                        eventExpected === 'triggers' ? true : false
-                      );
-                    });
+                    cy.updateResponseForFCS(methodOrEvent, null, result, true).then(
+                      (updatedResponse) => {
+                        cy.saveEventResponse(
+                          updatedResponse,
+                          methodOrEventObject,
+                          eventName,
+                          eventExpected === 'triggers' ? true : false
+                        );
+                      }
+                    );
                   });
                 } else {
                   const params = { event: eventName };
@@ -134,12 +136,22 @@ Given(
                   cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then(
                     (response) => {
                       response = JSON.parse(response);
-                      response = response.report;
-                      cy.saveEventResponse(
-                        response,
-                        methodOrEventObject,
-                        eventName,
-                        eventExpected === 'triggers' ? true : false
+                      if (
+                        response &&
+                        response.result &&
+                        response.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
+                      ) {
+                        response.result = response.result.eventResponse;
+                      }
+                      cy.updateResponseForFCS(methodOrEvent, null, response, true).then(
+                        (updatedResponse) => {
+                          cy.saveEventResponse(
+                            updatedResponse,
+                            methodOrEventObject,
+                            eventName,
+                            eventExpected === 'triggers' ? true : false
+                          );
+                        }
                       );
                     }
                   );
@@ -155,7 +167,7 @@ Given(
                         validationType == CONSTANTS.EVENT
                           ? methodOrEventObject.eventResponse
                           : validationType == CONSTANTS.METHOD
-                            ? methodOrEventObject.response
+                            ? methodOrEventObject.apiResponse
                             : null;
                       switch (scenario) {
                         case CONSTANTS.REGEX:
