@@ -683,7 +683,7 @@
             }
         },
         "UserGrants": {
-            "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with two options, first option(with fingerprint) is not supported and second option(with pinChallenge and acknowledge) is supported": {
+            "UserGrants.Grant - Positive Scenario: Validate Capabilities with denied (pinChallenge) and lifespan once": {
                 "req": [
                     {
                         "method": {
@@ -693,7 +693,7 @@
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with two options, first option(with pinChallenge and acknowledge) is supported and second option(with fingerprint) is not supported": {
+            "UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with one step option(only acknowledgeChallenge)": {
                 "req": [
                     {
                         "method": {
@@ -703,7 +703,7 @@
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with role manage": {
+            "UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with scope device": {
                 "req": [
                     {
                         "method": {
@@ -713,7 +713,7 @@
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with role provide": {
+            "UserGrants.Capabilities - Negative Scenario: Validate Capability access denied for pinchallenge with scope device": {
                 "req": [
                     {
                         "method": {
@@ -723,7 +723,7 @@
                     }
                 ]
             },
-            "UserGrants.Capability - Negative Scenario: Validate Capabilities access denied for pinChallenge": {
+            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan forever": {
                 "req": [
                     {
                         "method": {
@@ -733,7 +733,7 @@
                     }
                 ]
             },
-            "UserGrants.Capability - Negative Scenario: Validate Capabilities access denied for ackChallenge": {
+            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan forever": {
                 "req": [
                     {
                         "method": {
@@ -743,71 +743,11 @@
                     }
                 ]
             },
-            "UserGrants.Grant - Positive Scenario: Validate Capabilities with denied (pinChallenge) and lifespan once": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.7",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with one step option(only acknowledgeChallenge)": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.7",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with scope device": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.8",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capability access denied for pinchallenge with scope device": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.9",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan forever": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.10",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan forever": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.11",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
             "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan appActive": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.12",
+                            "id": "UserGrants 1.7",
                             "description": "Should not be null"
                         }
                     }
@@ -817,7 +757,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.13",
+                            "id": "UserGrants 1.8",
                             "description": "Should not be null"
                         }
                     }
@@ -827,7 +767,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.14",
+                            "id": "UserGrants 1.9",
                             "description": "Should not be null"
                         }
                     }
@@ -837,7 +777,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.15",
+                            "id": "UserGrants 1.10",
                             "description": "Should not be null"
                         }
                     }
@@ -847,7 +787,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.16",
+                            "id": "UserGrants 1.11",
                             "description": "Should not be null"
                         }
                     }
@@ -857,7 +797,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.17",
+                            "id": "UserGrants 1.12",
                             "description": "Should not be null"
                         }
                     }
@@ -867,7 +807,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.18",
+                            "id": "UserGrants 1.13",
                             "description": "Should not be null"
                         }
                     }
@@ -877,17 +817,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.19",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capability Without supported capability expecting error": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.20",
+                            "id": "UserGrants 1.14",
                             "description": "Should not be null"
                         }
                     }
@@ -897,7 +827,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.21",
+                            "id": "UserGrants 1.15",
                             "description": "Should not be null"
                         }
                     }
@@ -907,7 +837,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.22",
+                            "id": "UserGrants 1.16",
                             "description": "Should not be null"
                         }
                     }
@@ -917,7 +847,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.23",
+                            "id": "UserGrants 1.17",
                             "description": "Should not be null"
                         }
                     }
@@ -927,7 +857,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.24",
+                            "id": "UserGrants 1.18",
                             "description": "Should not be null"
                         }
                     }
@@ -937,7 +867,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.25",
+                            "id": "UserGrants 1.19",
                             "description": "Should not be null"
                         }
                     }
@@ -947,7 +877,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.26",
+                            "id": "UserGrants 1.20",
                             "description": "Should not be null"
                         }
                     }
@@ -957,7 +887,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.27",
+                            "id": "UserGrants 1.21",
                             "description": "Should not be null"
                         }
                     }
@@ -967,7 +897,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.28",
+                            "id": "UserGrants 1.22",
                             "description": "Should not be null"
                         }
                     }
@@ -977,7 +907,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.29",
+                            "id": "UserGrants 1.23",
                             "description": "Should not be null"
                         }
                     }
@@ -987,7 +917,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.30",
+                            "id": "UserGrants 1.24",
                             "description": "Should not be null"
                         }
                     }
@@ -997,7 +927,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.31",
+                            "id": "UserGrants 1.25",
                             "description": "Should not be null"
                         }
                     }
@@ -1007,7 +937,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.32",
+                            "id": "UserGrants 1.26",
                             "description": "Should not be null"
                         }
                     }
@@ -1017,7 +947,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.33",
+                            "id": "UserGrants 1.27",
                             "description": "Should not be null"
                         }
                     }
@@ -1027,7 +957,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.34",
+                            "id": "UserGrants 1.28",
                             "description": "Should not be null"
                         }
                     }
@@ -1037,7 +967,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.35",
+                            "id": "UserGrants 1.29",
                             "description": "Should not be null"
                         }
                     }
@@ -1047,7 +977,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.36",
+                            "id": "UserGrants 1.30",
                             "description": "Should not be null"
                         }
                     }
@@ -1057,57 +987,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.37",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Allow grant for one API and all API's should have grant in group": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.38",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Allow grant for one API and clear grant, call another API it will ask for grant again": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.39",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Deny grant for one API and all API's shouldn't have grant in group": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.40",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capability - Positive Scenario: AcknowledgeChallenge Grant is deferred by exiting overlay": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.42",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capability - Positive Scenario: Acknowledgechallenge Grant is deferred based on the timeout (4 seconds)": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.43",
+                            "id": "UserGrants 1.31",
                             "description": "Should not be null"
                         }
                     }
@@ -1117,7 +997,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.44",
+                            "id": "UserGrants 1.32",
                             "description": "Should not be null"
                         }
                     }
@@ -1127,47 +1007,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.45",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:true property:Privacy.allowWatchHistory silently grant": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.46",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability permission in 2 diff devices": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.57",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Positive Scenario: Validate Capability.request granted(ackChallenge)": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.49",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Positive Scenario: Validate Capability.request Denied(ackChallenge)": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.50",
+                            "id": "UserGrants 1.33",
                             "description": "Should not be null"
                         }
                     }
@@ -1177,7 +1017,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.51",
+                            "id": "UserGrants 1.34",
                             "description": "Should not be null"
                         }
                     }
@@ -1187,7 +1027,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.52",
+                            "id": "UserGrants 1.35",
                             "description": "Should not be null"
                         }
                     }
@@ -1197,7 +1037,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.53",
+                            "id": "UserGrants 1.36",
                             "description": "Should not be null"
                         }
                     }
@@ -1207,7 +1047,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.54",
+                            "id": "UserGrants 1.37",
                             "description": "Should not be null"
                         }
                     }
@@ -1217,7 +1057,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.55",
+                            "id": "UserGrants 1.38",
                             "description": "Should not be null"
                         }
                     }
@@ -1227,7 +1067,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.56",
+                            "id": "UserGrants 1.39",
                             "description": "Should not be null"
                         }
                     }
@@ -1237,7 +1077,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.57",
+                            "id": "UserGrants 1.40",
                             "description": "Should not be null"
                         }
                     }
@@ -1247,7 +1087,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.58",
+                            "id": "UserGrants 1.41",
                             "description": "Should not be null"
                         }
                     }
@@ -1257,7 +1097,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.59",
+                            "id": "UserGrants 1.41",
                             "description": "Should not be null"
                         }
                     }
@@ -1267,7 +1107,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.60",
+                            "id": "UserGrants 1.43",
                             "description": "Should not be null"
                         }
                     }
