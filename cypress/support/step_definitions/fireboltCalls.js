@@ -724,7 +724,7 @@ Given(/'(.+)' invokes the '(.+)' get API(?: '(.+)')?$/, async (appId, sdk, fireb
           typeof fireboltCallObject.method === CONSTANTS.TYPE_FUNCTION
             ? fireboltCallObject.method()
             : fireboltCallObject.method;
-        let param =
+        const param =
           fireboltCallObject.params && typeof fireboltCallObject.params === CONSTANTS.TYPE_FUNCTION
             ? fireboltCallObject.params()
             : fireboltCallObject.params;
