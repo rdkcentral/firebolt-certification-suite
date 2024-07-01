@@ -543,5 +543,80 @@
                 ]
             }
         ]
+    },
+    "DEVICE_ONAUDIOMODECHANGED_EVENT": {
+        "method": "display.onAudioModeChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_AUDIOMODE",
+                        "description": "Validation of the Display audioMode changed"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_ONVIDEOMODECHANGED_EVENT": {
+        "method": "display.onVideoModeChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE",
+                        "description": "Validation of the Display videoMode changed"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_ONVIDEOMODESCHANGED_EVENT": {
+        "method": "display.onVideoModesChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODES",
+                        "description": "Validation of the Display videoModes changed"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_ONHDRPROFILECHANGED_EVENT": {
+        "method": "display.onHdrProfileChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_HDRPROFILE",
+                        "description": "Validation of the Display hdrProfile changed"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_ONAUDIOOUTPUTCHANGED_EVENT": {
+        "method": "display.onAudioOutputChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_AUDIOMODE",
+                        "description": "Validation of the Display audioMode changed"
+                    }
+                ]
+            }
+        ]
     }
 }
