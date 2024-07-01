@@ -316,7 +316,7 @@ Given(/1st party app registers for the '(.+)' event using the '(.+)' API$/, asyn
         action: action,
         task: CONSTANTS.TASK.REGISTEREVENT,
       };
-      const appId = UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID); 
+      const appId = UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID);
       // Assigning event_param env if param has empty object
       if (Object.keys(requestMap.params).length === 0) {
         // To Do :debug event_param issue by passing isrequired as false for getEnvVariable,need to debug further
