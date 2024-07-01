@@ -115,5 +115,38 @@
     "VIDEOCODEC_INVALID_TYPE_INTEGER":{"codec": 1234},
     "VIDEOCODEC_INVALID_TYPE_BOOLEAN":{"codec": true},
     "VIDEOFORMATOPTIONS_RESOLUTION_TYPE_BOOLEAN": {"codec": "avc", "options": {"resolution": true}},
-    "VIDEOFORMATOPTIONS_RESOLUTION_TYPE_INTEGER": {"codec": "avc", "options": {"resolution": 12345}}
+    "VIDEOFORMATOPTIONS_RESOLUTION_TYPE_INTEGER": {"codec": "avc", "options": {"resolution": 12345}},
+    "ONAUDIOMODECHANGED_EVENT":{
+        "method": "display.onAudioModeChanged",
+        "result": "stereo"
+    },
+    "ONVIDEOMODECHANGED_EVENT":{
+        "method": "display.onVideoModeChanged",
+        "result": "1080p60"
+    },
+    "ONVIDEOMODESCHANGED_EVENT":{
+        "method": "display.onVideoModesChanged",
+        "result": [
+            "720p50",
+            "720p60",
+            "1080i50",
+            "1080i60",
+            "1080p24",
+            "1080p30",
+            "1080p50",
+            "1080p60"
+        ]
+    },
+    "ONSOURCEFRAMERATEUSEDCHANGED_EVENT":{
+        "method": "display.onSourceFrameRateUsedChanged",
+        "result": true
+    },
+    "ONHDRPROFILECHANGED_EVENT":{
+        "method": "display.onHdrProfileChanged",
+        "result": "hdr10"
+    },
+    "ONAUDIOOUTPUTCHANGED_EVENT":{
+        "method": "display.onAudioOutputChanged",
+        "result": "stereo"
+    }
 }

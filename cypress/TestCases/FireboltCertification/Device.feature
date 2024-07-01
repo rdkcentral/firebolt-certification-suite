@@ -103,6 +103,22 @@ Feature: Device
             | Invalid VideoFormatOptions resolution type boolean   | videoFormatSupported   | get videoFormatSupported with VideoFormatOptions resolution type boolean   | invalid parameter error for videoFormatSupported   |
             | Invalid VideoFormatOptions resolution type interger  | videoFormatSupported   | get videoFormatSupported with VideoFormatOptions resolution type interger  | invalid parameter error for videoFormatSupported   |
 
+    @Device @coreSDK @sdk @transport @notSupported
+    Scenario Outline: Device.<method> - Positive Scenario: <Scenario>
+        When '3rd party app' registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
+        And '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with '<Method_Validation_Key>'
+        When User triggers event with value as '<Event_Param>'
+        Then 'Firebolt' platform triggers event '<Event_Validation_Key>'
+
+        Examples:
+            | Scenario                                     | method              | Event_Registration_Key              | API_Key                      | Method_Validation_Key        | Event_Validation_Key                               | Event_Param                         |
+            | validate device audioModeChanged             | audioMode           | device onAudioModeChanged           | fetch audioMode              | expected audioMode           | expected device onAudioModeChanged event           | onAudioModeChanged event            | 
+            | validate device videoModeChanged             | videoMode           | device onVideoModeChanged           | fetch videoMode              | expected videoMode           | expected device onVideoModeChanged event           | onVideoModeChanged event            |
+            | validate device videoModesChanged            | videoModes          | device onVideoModesChanged          | fetch videoModes             | expected videoModes          | expected device onVideoModesChanged event          | onVideoModesChanged event           |
+            | validate device sourceFrameRateUsedChanged   | sourceFrameRateUsed | device onSourceFrameRateUsedChanged | fetch sourceFrameRateUsed    | expected sourceFrameRateUsed | expected device onSourceFrameRateUsedChanged event | onSourceFrameRateUsedChanged event  |
+            | validate device hdrProfileChanged            | hdrProfile          | device onHdrProfileChanged          | fetch hdrProfile             | expected hdrProfile          | expected device onHdrProfileChanged event          | onHdrProfileChanged event           | 
+            | validate device audioOutputChanged           | audioMode           | device onAudioOutputChanged         | fetch audioMode              | expected audioMode           | expected device onAudioModeChanged event           | onAudioModeChanged event            | 
 
  
 

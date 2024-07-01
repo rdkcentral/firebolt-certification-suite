@@ -79,6 +79,36 @@
 		"validationJsonPath": "result",
 		"content": "DISPLAY_SOURCEPHYSICALADDRESS"       
     },
+    "DISPLAY_ONCOLORDEPTHCHANGED":{
+        "method": "display.onColorDepthChanged"
+    },
+    "DISPLAY_ONCOLORIMETRYCHANGED":{
+        "method": "display.onColorimetryChanged"
+    },
+    "DISPLAY_ONHDRPROFILESCHANGED":{
+        "method": "display.onHdrProfilesChanged"
+    },
+    "DISPLAY_ONMANUFACTURERCHANGED":{
+        "method": "display.onManufacturerChanged"
+    },
+    "DISPLAY_ONPRODUCTNAMECHANGED":{
+        "method": "display.onProductNameChanged"
+    },
+    "DISPLAY_ONREFRESHRATECHANGED":{
+        "method": "display.onRefreshRateChanged"
+    },
+    "DISPLAY_ONRESOLUTIONCHANGED":{
+        "method": "display.onResolutionChanged"
+    },
+    "DISPLAY_ONRESOLUTIONNAMECHANGED":{
+        "method": "display.onResolutionNameChanged"
+    },
+    "DISPLAY_ONSIZECHANGED":{
+        "method": "display.onSizeChanged"
+    },
+    "DISPLAY_ONSOURCEPHYSICALADDRESSCHANGED":{
+        "method": "display.onSourcePhysicalAddressChanged"
+    },
     "ONCOLORDEPTHCHANGED_EVENT":{
         "method": "display.onColorDepthChanged",
         "params": "DISPLAY_ONCOLORDEPTHCHANGED_EVENT"

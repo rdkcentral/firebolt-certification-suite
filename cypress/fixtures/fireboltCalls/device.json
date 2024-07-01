@@ -527,5 +527,77 @@
 		"validationJsonPath": "result",
 		"content": "INVALID_TYPE_PARAMS",
         "expectingError": true
-	}
+	},
+    "DEVICE_ONAUDIOMODECHANGED":{
+        "method": "device.onAudioModeChanged"
+    },
+    "DEVICE_ONVIDEOMODECHANGED":{
+        "method": "device.onVideoModeChanged"
+    },
+    "DEVICE_ONVIDEOMODESCHANGED":{
+        "method": "device.onVideoModesChanged"
+    },
+    "DEVICE_ONSOURCEFRAMERATEUSEDCHANGED":{
+        "method": "device.onSourceFrameRateUsedChanged"
+    },
+    "DEVICE_ONHDRPROFILECHANGED":{
+        "method": "device.onHdrProfileChanged"
+    },
+    "DEVICE_ONAUDIOOUTPUTCHANGED":{
+        "method": "device.onAudioOutputChanged"
+    },
+    "ONAUDIOMODECHANGED_EVENT":{ 
+        "method": "device.onAudioModeChanged",
+        "params": "DEVICE_ONAUDIOMODECHANGED_EVENT"
+    },
+    "ONVIDEOMODECHANGED_EVENT":{ 
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_EVENT"
+    },
+    "ONVIDEOMODESCHANGED_EVENT":{ 
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODESCHANGED_EVENT"
+    },
+    "ONSOURCEFRAMERATEUSEDCHANGED_EVENT":{ 
+        "method": "device.onSourceFrameRateUsedChanged",
+        "params": "DEVICE_ONSOURCEFRAMERATEUSEDCHANGED_EVENT"
+    },
+    "ONHDRPROFILECHANGED_EVENT":{ 
+        "method": "device.onHdrProfileChanged",
+        "params": "DEVICE_ONHDRPROFILECHANGED_EVENT"
+    },
+    "ONAUDIOOUTPUTCHANGED_EVENT":{ 
+        "method": "device.onAudioOutputChanged",
+        "params": "DEVICE_ONAUDIOOUTPUTCHANGED_EVENT"
+    },
+    "EXPECTED_DEVICE_ONAUDIOMODECHANGED_EVENT":{
+        "event": "device.onAudioModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_ONAUDIOMODECHANGED_EVENT"
+    },
+    "EXPECTED_DEVICE_ONVIDEOMODECHANGED_EVENT":{
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_ONVIDEOMODECHANGED_EVENT"
+    },
+    "EXPECTED_DEVICE_ONVIDEOMODESCHANGED_EVENT":{
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_ONVIDEOMODESCHANGED_EVENT"
+    },
+    "EXPECTED_DEVICE_ONSOURCEFRAMERATEUSEDCHANGED_EVENT":{
+        "event": "device.onSourceFrameRateUsedChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "TRUE"
+    },
+    "EXPECTED_DEVICE_ONHDRPROFILECHANGED_EVENT":{
+        "event": "device.onHdrProfileChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_ONHDRPROFILECHANGED_EVENT"
+    },
+    "EXPECTED_DEVICE_ONAUDIOOUTPUTCHANGED_EVENT":{
+        "event": "device.onAudioOutputChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_ONAUDIOOUTPUTCHANGED_EVENT"
+    }  
 }

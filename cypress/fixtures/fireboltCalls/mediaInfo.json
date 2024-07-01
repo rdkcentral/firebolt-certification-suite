@@ -18,9 +18,57 @@
 		"content": "MEDIAINFO_VIDEOFORMAT"
     },
     "GET_A_LIST_OF_ACTIVE_AUDIO_FORMATS":{
-        "method": "mediaInfo.activeAudioFormats"
+        "method": "manage_mediaInfo.activeAudioFormats"
     },
     "GET_A_LIST_OF_ACTIVE_VIDEO_FORMATS":{
-        "method": "mediaInfo.activeAudioFormats"
+        "method": "manage_mediaInfo.activeVideoFormats"
+    },
+    "MEDIAINFO_ONAUDIOFORMATCHANGED":{
+        "method": "mediaInfo.onAudioFormatChanged"
+    },
+    "MEDIAINFO_ONVIDEOFORMATCHANGED":{
+        "method": "mediaInfo.onVideoFormatChanged"
+    },
+    "EXPECTED_MEDIAINFO_ONAUDIOFORMATCHANGED_EVENT":{
+        "event": "mediaInfo.onAudioFormatChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "MEDIAINFO_ONAUDIOFORMATCHANGED_EVENT"
+    },
+    "EXPECTED_MEDIAINFO_ONVIDEOFORMATCHANGED_EVENT":{
+        "event": "mediaInfo.onVideoFormatChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "MEDIAINFO_ONVIDEOFORMATCHANGED_EVENT"
+    },
+    "ONAUDIOFORMATCHANGED_EVENT":{
+        "method": "mediaInfo.onAudioFormatChanged",
+        "params": "MEDIAINFO_ONAUDIOFORMATCHANGED_EVENT"
+    },
+    "ONVIDEOFORMATCHANGED_EVENT":{
+        "method": "mediaInfo.onVideoFormatChanged",
+        "params": "MEDIAINFO_ONVIDEOFORMATCHANGED_EVENT"
+    },
+    "MEDIAINFO_ONACTIVEAUDIOFORMATSCHANGED":{
+        "method": "manage_mediaInfo.onActiveAudioFormatsChanged"
+    },
+    "MEDIAINFO_ONACTIVEVIDEOFORMATSCHANGED":{
+        "method": "manage_mediaInfo.onActiveVideoFormatsChanged"
+    },
+    "ONACTIVEAUDIOFORMATSCHANGED_EVENT":{
+        "method": "manage_mediaInfo.onActiveAudioFormatsChanged",
+        "params": "MEDIAINFO_ONACTIVEAUDIOFORMATSCHANGED_EVENT"
+    },
+    "ONACTIVEVIDEOFORMATSCHANGED_EVENT":{
+        "method": "manage_mediaInfo.onActiveVideoFormatsChanged",
+        "params": "MEDIAINFO_ONACTIVEVIDEOFORMATSCHANGED_EVENT"     
+    },
+    "EXPECTED_MEDIAINFO_ONACTIVEAUDIOFORMATSCHANGED_EVENT":{
+        "method": "manage_mediaInfo.onActiveAudioFormatsChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "MEDIAINFO_ONACTIVEAUDIOFORMATSCHANGED_EVENT"
+    },
+    "EXPECTED_MEDIAINFO_ONACTIVEVIDEOFORMATSCHANGED_EVENT":{
+        "method": "manage_mediaInfo.onActiveVideoFormatsChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "MEDIAINFO_ONACTIVEVIDEOFORMATSCHANGED_EVENT"
     }
 }
