@@ -89,16 +89,16 @@ Cypress.Commands.add('validateLifecycleState', (state, appId) => {
     // Send message to 3rd party app to invoke lifecycle API to get state response
     cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
       try {
-        const result = JSON.parse(response)?.report?.result ?? null;
+        const result = response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE].instance ?? null;
         if (result == null) {
           cy.log(CONSTANTS.INVALID_LIFECYCLE_STATE_RESPONSE).then(() => {
             assert(false, CONSTANTS.INVALID_LIFECYCLE_STATE_RESPONSE);
           });
         }
-        cy.log(CONSTANTS.APP_RESPONSE + response);
+        cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
         // Perform schema and content validation of state response against appObject state
         let pretext = lifecycleStateRequirementId.state.id + CONSTANTS.STATE_SCHEMA_VALIDATION_REQ;
-        if (JSON.parse(response).report.schemaResult.status == CONSTANTS.PASS) {
+        if (response[CONSTANTS.SCHEMA_VALIDATION_STATUS] == CONSTANTS.PASS) {
           cy.log(pretext + ' : ' + CONSTANTS.PASS);
         } else {
           fireLog.assert(false, pretext + ' : ' + CONSTANTS.FAIL);
@@ -107,7 +107,7 @@ Cypress.Commands.add('validateLifecycleState', (state, appId) => {
         pretext = lifecycleStateRequirementId.state.id + CONSTANTS.STATE_CONTENT_VALIDATION_REQ;
         UTILS.assertWithRequirementLogs(
           pretext,
-          JSON.parse(response).report.result,
+          response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE].instance,
           appObject.getAppObjectState().state
         );
         validateVisibilityState(state);
@@ -172,10 +172,10 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
     // Perform a null check on history response and check if response has nested properties result, _history, _value
     response = JSON.parse(response ?? '{}');
     if (
-      response.report &&
-      response.report.result &&
-      response.report.result._history &&
-      response.report.result._history._value
+      response &&
+      response.result &&
+      response.result._history &&
+      response.result._history._value
     ) {
       const pretext = CONSTANTS.HISTORY_VALIDATION_REQ + lifecycleHistoryRequirementId.history.id;
       cy.log(
@@ -183,7 +183,7 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
           JSON.stringify(response.report.result._history._value)
       );
       // Extract app history value
-      const appHistory = response.report.result._history._value;
+      const appHistory = response.result._history._value;
       // Lifecycle history validation
       if (appHistory.length > 0) {
         // Construct an appHistoryList from app history data
@@ -297,7 +297,7 @@ Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) 
   cy.log(CONSTANTS.LIFECYCLE_INTENT + JSON.stringify(publishMessage));
   cy.sendMessagetoApp(requestTopic, responseTopic, publishMessage).then((response) => {
     try {
-      errorObject = JSON.parse(response).report.error;
+      errorObject = JSON.parse(response).error;
     } catch (error) {
       cy.log(CONSTANTS.FAILED_TO_PARSE_LIEFECYCLE_ERROR + response).then(() => {
         assert(false, CONSTANTS.FAILED_TO_PARSE_LIEFECYCLE_ERROR + response);
@@ -314,7 +314,11 @@ Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) 
       );
       return false;
     }
-    return response;
+    if (CONSTANTS.LIFECYCLE_METHOD_LIST.includes(method)) {
+      cy.updateResponseForFCS(method, '', JSON.parse(response)).then((updatedResponse) => {
+        return updatedResponse;
+      });
+    }
   });
 });
 
@@ -484,7 +488,7 @@ Cypress.Commands.add('setAppState', (state, appId) => {
 Cypress.Commands.add('fetchLifecycleHistory', (appId) => {
   try {
     cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}').then((response) => {
-      const historyValue = _.get(JSON.parse(response), 'report.result._history._value', null);
+      const historyValue = _.get(JSON.parse(response), 'result._history._value', null);
       _.isEmpty(historyValue)
         ? logger.info(CONSTANTS.APP_HISTORY_EMPTY)
         : Cypress.env(CONSTANTS.APP_LIFECYCLE_HISTORY, historyValue);
@@ -553,10 +557,10 @@ Cypress.Commands.add('setAppObjectStateFromMethod', (method, appId) => {
  * cy.lifecycleSchemaChecks({"result":null,"error":null,"schemaResult":{"status":"PASS","schemaValidationResult":{"instance":null,"schema":{"const":null}}, 'foreground');
  */
 Cypress.Commands.add('lifecycleSchemaChecks', (response, state) => {
-  result = JSON.parse(response).report.schemaResult;
+  typeof response == 'object' ? response : (response = JSON.parse(response));
   apiSchemaResult = {
-    validationStatus: result.status,
-    validationResponse: result.schemaValidationResult,
+    validationStatus: response[CONSTANTS.SCHEMA_VALIDATION_STATUS],
+    validationResponse: response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE],
   };
   cy.validationChecksForResponseAndSchemaResult(response, false, apiSchemaResult, false);
 });
