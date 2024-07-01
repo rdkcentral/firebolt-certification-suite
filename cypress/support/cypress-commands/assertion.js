@@ -36,6 +36,9 @@ Cypress.Commands.add(
   'validateErrorObject',
   (method, expectedContent, validationType, context = CONSTANTS.NO_CONTEXT, appId, param) => {
     // Function to extract the error validation objects for the passed method and parameters from the exception list.
+    const errorSchemaFilePath = CONSTANTS.ERROR_SCHEMA_OBJECTS_PATH;
+    const errorContentFilePath = CONSTANTS.ERROR_CONTENT_OBJECTS_PATH;
+
     const fetchErrorValidationObjectForExceptionmethod = (method, param) => {
       return new Promise((resolve) => {
         const exceptionMethods = UTILS.getEnvVariable(CONSTANTS.EXCEPTION_METHODS);
@@ -73,8 +76,6 @@ Cypress.Commands.add(
               errorType = CONSTANTS.NOT_SUPPORTED;
           }
         }
-        const errorSchemaFilePath = CONSTANTS.ERROR_SCHEMA_OBJECTS_PATH;
-        const errorContentFilePath = CONSTANTS.ERROR_CONTENT_OBJECTS_PATH;
 
         // Extracting the error validation object from the above files based on obtained errorType.
         cy.task(CONSTANTS.READFILEIFEXISTS, errorSchemaFilePath).then((errorSchema) => {
