@@ -31,7 +31,7 @@ Feature: Keyboard_Manage_RpcOnly
         Then 'Firebolt' platform responds with '<MethodResponse>'
 
         Examples:
-            | Scenario              | ManageEventName                   | EventName                  | MethodName        | MethodParam                                              | FocusMethod                       | MethodResponse                        |
-            | Validating rpc method | keyboard onRequestEmail manage    | keyboard onRequestEmail    | keyboard email    | prompt the user for their email address with signin type | send error from email provider    | entered email address provider error  |
-            | Validating rpc method | keyboard onRequestStandard manage | keyboard onRequestStandard | keyboard standard | prompt the user for their username                       | send error from standard provider | entered username provider error       |
-            | Validating rpc method | keyboard onRequestPassword manage | keyboard onRequestPassword | keyboard password | prompt the user for their password                       | send error from password provider | entered password provider error       |
+            | Scenario              | ManageEventName                   | EventName                  | MethodName        | MethodParam                                              | FocusMethod                       | MethodResponse |
+            | Validating rpc method | keyboard onRequestEmail manage    | keyboard onRequestEmail    | keyboard email    | prompt the user for their email address with signin type | send error from email provider    | custom error   |
+            | Validating rpc method | keyboard onRequestStandard manage | keyboard onRequestStandard | keyboard standard | prompt the user for their username                       | send error from standard provider | custom error   |
+            | Validating rpc method | keyboard onRequestPassword manage | keyboard onRequestPassword | keyboard password | prompt the user for their password                       | send error from password provider | custom error   |

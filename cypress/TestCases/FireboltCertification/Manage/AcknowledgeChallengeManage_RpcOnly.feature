@@ -1,4 +1,4 @@
- Feature: AcknowledgeChallenge_Manage_RpcOnly
+Feature: AcknowledgeChallenge_Manage_RpcOnly
 
     # Note: Reboot required after running this feature file
 
@@ -27,4 +27,4 @@
         And Fetch response for 'acknowledgeChallenge onRequestChallenge' event from 1st party app
         And 1st party app invokes the 'Firebolt' API to 'send error from challenge provider'
         And Fetch response for 'localization countryCode' method from 3rd party app
-        Then 'Firebolt' platform responds with 'expected localization countryCode challengeError'
+        Then 'Firebolt' platform responds with 'custom error'
