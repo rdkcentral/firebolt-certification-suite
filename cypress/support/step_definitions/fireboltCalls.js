@@ -724,23 +724,10 @@ Given(/'(.+)' invokes the '(.+)' get API(?: '(.+)')?$/, async (appId, sdk, fireb
           typeof fireboltCallObject.method === CONSTANTS.TYPE_FUNCTION
             ? fireboltCallObject.method()
             : fireboltCallObject.method;
-        let param;
-
-        // Extracting the parameter from the fireboltCall object
-        if (typeof fireboltCallObject.params === CONSTANTS.TYPE_FUNCTION) {
-          param = { value: fireboltCallObject.params() };
-        } else if (typeof fireboltCallObject.params === CONSTANTS.TYPE_OBJECT) {
-          param = fireboltCallObject.params;
-
-          // Iterating through the object and invoking it if it is a function
-          for (const key in param) {
-            if (typeof param[key] === CONSTANTS.TYPE_FUNCTION) {
-              param[key] = param[key]();
-            }
-          }
-        } else {
-          param = { value: fireboltCallObject.params };
-        }
+        let param =
+          fireboltCallObject.params && typeof fireboltCallObject.params === CONSTANTS.TYPE_FUNCTION
+            ? fireboltCallObject.params()
+            : fireboltCallObject.params;
 
         const context = {};
         const expected = CONSTANTS.RESULT;
