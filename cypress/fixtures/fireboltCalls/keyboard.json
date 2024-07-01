@@ -168,6 +168,24 @@
         "validationJsonPath": "result",
         "content": "KEYBOARD_PASSWORD"
     },
+    "ENTERED_EMAIL_ADDRESS_PROVIDER_ERROR": {
+        "method": "keyboard.email",
+        "validationJsonPath": "result",
+        "content": "CUSTOM_ERROR",
+        "expectingError": true
+    },
+    "ENTERED_USERNAME_PROVIDER_ERROR": {
+        "method": "keyboard.standard",
+        "validationJsonPath": "result",
+        "content": "CUSTOM_ERROR",
+        "expectingError": true
+    },
+    "ENTERED_PASSWORD_PROVIDER_ERROR": {
+        "method": "keyboard.password",
+        "validationJsonPath": "result",
+        "content": "CUSTOM_ERROR",
+        "expectingError": true
+    },
     "SEND_ERROR_FROM_EMAIL_PROVIDER":{
         "method": "keyboard.emailError",
         "params": "KEYBOARD_EMAILERROR"
