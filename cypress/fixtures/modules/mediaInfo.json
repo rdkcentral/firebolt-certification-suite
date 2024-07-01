@@ -22,5 +22,71 @@
             1920,
             1080
         ]
+    },
+    "ONAUDIOFORMATCHANGED_EVENT":{
+        "method": "mediaInfo.onAudioFormatChanged",
+        "result": [
+            {
+                "bitRate": 128,
+                "channels": "5.1",
+                "codec": "aac",
+                "container": "audio/mp4",
+                "pipelineId": 1,
+                "sampleRate": 48
+            }
+        ]
+    },
+    "ONVIDEOFORMATCHANGED_EVENT":{
+        "method": "mediaInfo.onVideoFormatChanged",
+        "result": [
+            {
+                "codec": "hevc",
+                "codecLevel": "4.2",
+                "codecProfile": "main",
+                "container": "video/mp4",
+                "frameRate": 30,
+                "hdr": [
+                    "hdr10"
+                ],
+                "pipelineId": 1,
+                "resolution": [
+                    1920,
+                    1080
+                ]
+            }
+        ]
+    },
+    "ONACTIVEAUDIOFORMATSCHANGED_EVENT":{
+        "method": "manage_mediaInfo.onActiveAudioFormatsChanged",
+        "result": [
+            {
+                "bitRate": 128,
+                "channels": "5.1",
+                "codec": "aac",
+                "container": "audio/mp4",
+                "pipelineId": 1,
+                "sampleRate": 48
+            }
+        ]
+    },
+    "ONACTIVEVIDEOFORMATSCHANGED_EVENT":{
+        "method": "manage_mediaInfo.onActiveVideoFormatsChanged",
+        "result": [
+            {
+                "codec": "hevc",
+                "codecLevel": "4.2",
+                "codecProfile": "main",
+                "container": "video/mp4",
+                "frameRate": 30,
+                "hdr": [
+                    "hdr10"
+                ],
+                "pipelineId": 1,
+                "resolution": [
+                    1920,
+                    1080
+                ]
+            }
+        ]
     }
 }
