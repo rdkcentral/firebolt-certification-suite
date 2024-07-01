@@ -19,7 +19,7 @@ import { Given } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
 const _ = require('lodash');
 import { apiObject, eventObject } from '../appObjectConfigs';
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module fireboltCalls
@@ -111,6 +111,7 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
  * @example
  * Given '3rd party app' invokes the 'Firebolt' API to 'get device id'
  * Given 'test.test.test' invokes the 'Firebolt' API to 'get device id'
+ * Given 'secondary 3rd party app' invokes the 'Firebolt' API to 'get device id'
  */
 Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
   // Fetching the data like method, param, context and action etc.
@@ -121,7 +122,7 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appId === CONSTANTS.THIRD_PARTY_APP
           ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-          : appId;
+          : UTILS.checkForSecondaryAppId(appId);
       const method = parsedData.method;
       const param = parsedData.params;
       const context = parsedData.context;
@@ -171,39 +172,41 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
             if (result === CONSTANTS.NO_RESPONSE) {
               assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
             }
-
             result = JSON.parse(result);
+            cy.updateResponseForFCS(method, params, result).then((updatedResponse) => {
+              // Create a deep copy to avoid reference mutation
+              const dataToBeCensored = _.cloneDeep(result);
 
-            // Create a deep copy to avoid reference mutation
-            const dataToBeCensored = _.cloneDeep(result.report.apiResponse);
+              // Call the 'censorData' command to hide sensitive data
+              cy.censorData(method, dataToBeCensored).then((maskedResult) => {
+                const responseType = result.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
+                fireLog.info(
+                  `Response from ${appId}: ${JSON.stringify(maskedResult[responseType])}`
+                );
+              });
 
-            // Call the 'censorData' command to hide sensitive data
-            cy.censorData(method, dataToBeCensored).then((maskedResult) => {
-              fireLog.info(`Response from ${appId}: ${JSON.stringify(maskedResult)}`);
+              // If method and params are not supported setting isScenarioExempted as true for further validation.
+              if (UTILS.isScenarioExempted(method, param)) {
+                Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
+              }
+
+              // Creating object with method name, params and response etc and storing it in a global list for further validation.
+              const apiAppObject = new apiObject(
+                method,
+                param,
+                context,
+                updatedResponse,
+                expected,
+                appId
+              );
+              UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
             });
-
-            // If method and params are not supported setting isScenarioExempted as true for further validation.
-            if (UTILS.isScenarioExempted(method, param)) {
-              Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
-            }
-
-            // Creating object with method name, params and response etc and storing it in a global list for further validation.
-            const apiAppObject = new apiObject(
-              method,
-              param,
-              context,
-              result.report,
-              expected,
-              appId
-            );
-            UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
           }
         });
       });
     });
   });
 });
-
 /**
  * @module fireboltCalls
  * @function And '(.+)' registers for the '(.+)' event using the '(.+)' API
@@ -214,6 +217,7 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
  * @example
  * Given '3rd party app' registers for the 'Closed Captions Settings' event using the 'Firebolt' API
  * Given 'test.test.test' registers for the 'Closed Captions Settings' event using the 'Firebolt' API
+ * Given 'secondary 3rd party app' registers for the 'Closed Captions Settings' event using the 'Firebolt' API
  */
 Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appId, key, sdk) => {
   // Fetching the data like method, param, context and action etc.
@@ -224,7 +228,7 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appId === CONSTANTS.THIRD_PARTY_APP
           ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-          : appId;
+          : UTILS.checkForSecondaryAppId(appId);
       const event = parsedData.method;
       const param = parsedData.params;
       const context = parsedData.context ? parsedData.context : CONSTANTS.NO_CONTEXT;
@@ -265,25 +269,31 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
             assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
           }
           result = JSON.parse(result);
-          fireLog.info(
-            `Response from ${appId}: ${JSON.stringify(result.report.eventListenerResponse)}`
-          );
-
-          // If event and params are not supported setting isScenarioExempted as true for further validation.
-          if (UTILS.isScenarioExempted(event, param)) {
-            Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
+          fireLog.info(`Response from ${appId}: ${JSON.stringify(result.result)}`);
+          if (result && result.result && result.result.hasOwnProperty(CONSTANTS.LISTENING)) {
+            const eventResponse = {
+              eventListenerId: result.result.event + '-' + result.id,
+              eventListenerResponse: result.result,
+            };
+            result.result = eventResponse;
           }
+          cy.updateResponseForFCS(event, params, result).then((updatedResponse) => {
+            // If event and params are not supported setting isScenarioExempted as true for further validation.
+            if (UTILS.isScenarioExempted(event, param)) {
+              Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
+            }
 
-          // Creating object with event name, params and response etc and storing it in a global list for further validation.
-          const eventAppObject = new eventObject(
-            event,
-            param,
-            context,
-            result.report,
-            appId,
-            expected
-          );
-          UTILS.getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).push(eventAppObject);
+            // Creating object with event name, params and response etc and storing it in a global list for further validation.
+            const eventAppObject = new eventObject(
+              event,
+              param,
+              context,
+              updatedResponse,
+              appId,
+              expected
+            );
+            UTILS.getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).push(eventAppObject);
+          });
         });
       });
     });

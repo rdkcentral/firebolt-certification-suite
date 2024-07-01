@@ -54,7 +54,7 @@ export function capabilitiesMiscValidation(method, validationTypeObject, apiOrEv
  */
 // TODO: Planning to move it out of FCS and keep it in configModule
 function validateCapabilitiesInfo(method, validationTypeObject, apiOrEventObject) {
-  const capabilityInfoResponse = apiOrEventObject.response.result;
+  const capabilityInfoResponse = apiOrEventObject.apiResponse.result;
   const fireboltConfig = UTILS.getEnvVariable(CONSTANTS.FIREBOLTCONFIG);
   const notSupportedCapabilitiesList = UTILS.getEnvVariable(
     CONSTANTS.NOT_SUPPORTED_CAPABILITIES_LIST
@@ -113,7 +113,7 @@ function validateCapabilitiesInfo(method, validationTypeObject, apiOrEventObject
  */
 // TODO: Planning to move it out of FCS and keep it in configModule
 function validateCapabilitiesSupported(method, validationTypeObject, apiOrEventObject) {
-  const capabilityResponse = apiOrEventObject.response.result;
+  const capabilityResponse = apiOrEventObject.apiResponse.result;
   const capabilityParam = apiOrEventObject.params.value;
   const notSupportedCapabilitiesList = UTILS.getEnvVariable(
     CONSTANTS.NOT_SUPPORTED_CAPABILITIES_LIST
@@ -224,7 +224,7 @@ Cypress.Commands.add('specialValidation', (validationObject) => {
   const methodOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(method, context, appId);
   cy.validateResponseErrorAndSchemaResult(methodOrEventObject, CONSTANTS.METHOD, skipCheck).then(
     () => {
-      const apiResponseContent = eval('methodOrEventObject.response.' + validationPath);
+      const apiResponseContent = eval('methodOrEventObject.apiResponse.' + validationPath);
       const message = Object.keys(context).length
         ? context
         : { role: validationPath.split('.')[1] };
