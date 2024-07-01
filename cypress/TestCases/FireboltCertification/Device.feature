@@ -67,3 +67,59 @@ Feature: Device
             | Validate network_Ethernet_disconnected | device network as ethernet disconnected | onNetworkChanged with ethernet disconnected | onNetworkChanged events with ethernet disconnected |
             | Validate network_Hybrid_connected      | device network as hybrid connected      | onNetworkChanged with hybrid connected      | onNetworkChanged events with hybrid connected      |
             | Validate network_Hybrid_disconnected   | device network as hybrid disconnected   | onNetworkChanged with hybrid disconnected   | onNetworkChanged events with hybrid disconnected   |
+
+    @Device @mfos @coreSDK @regression @sdk
+    Scenario Outline: Device.<Method> - Positive Scenario: <Scenario>
+        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with '<validation_key>'
+
+        Examples:
+            | Scenario                                                          | Method                    | API_Key                                                       | validation_key                         |
+            | Validate hdcpVersionSupported                                     | hdcpVersionSupported      | fetch hdcpVersionSupported                                    | expected hdcpVersionSupported          |
+            | Validate hdrProfile                                               | hdrProfile                | fetch hdrProfile                                              | expected hdrProfile                    |
+            | Validate hdrProfiles                                              | hdrProfiles               | fetch hdrProfiles                                             | expected hdrProfiles                   |
+            | Validate audioFormatSupported                                     | audioFormatSupported      | fetch audioFormatSupported                                    | expected audioFormatSupported          |
+            | Validate audioFormatSupported with audioFormatOptions atmos       | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions atmos      | expected audioFormatSupported          |
+            | Validate videoFormatSupported                                     | videoFormatSupported      | fetch videoFormatSupported                                    | expected videoFormatSupported          |
+            | Validate videoFormatSupported with VideoFormatOptions resolution  | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions resolution | expected videoFormatSupported          |
+            | Validate audioMode                                                | audioMode                 | fetch audioMode                                               | expected audioMode                     |
+            | Validate videoMode                                                | videoMode                 | fetch videoMode                                               | expected videoMode                     |    
+            | Validate videoModes                                               | videoModes                | fetch videoModes                                              | expected videoModes                    | 
+            | Validate sourceFrameRateUsed                                      | sourceFrameRateUsed       | fetch sourceFrameRateUsed                                     | expected sourceFrameRateUsed           |   
+
+    @Device @mfos @coreSDK @regression @sdk
+    Scenario Outline: Device.<Method> - Negative Scenario: <Scenario>
+        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with '<validation_key>'
+
+        Examples:
+            | Scenario                                             | Method                 |  API_Key                                                                   | validation_key                                     |
+            | Invalid Audio codec type integer                     | audioFormatSupported   | get audioFormatSupported with invalid Audiocodec type integer              | invalid parameter error for audioFormatSupported   | 
+            | Invalid Audio codec type boolean                     | audioFormatSupported   | get audioFormatSupported with invalid Audiocodec type boolean              | invalid parameter error for audioFormatSupported   |
+            | Invalid audioFormatOptions atmos type interger       | audioFormatSupported   | get audioFormatSupported with audioFormatOptions atmos type interger       | invalid parameter error for audioFormatSupported   |
+            | Invalid audioFormatOptions atmos type string         | audioFormatSupported   | get audioFormatSupported with audioFormatOptions atmos type string         | invalid parameter error for audioFormatSupported   |
+            | Invalid Video codec type integer                     | videoFormatSupported   | get videoFormatSupported with invalid Videocodec type integer              | invalid parameter error for videoFormatSupported   |
+            | Invalid Video codec type boolean                     | videoFormatSupported   | get videoFormatSupported with invalid Videocodec type boolean              | invalid parameter error for videoFormatSupported   |
+            | Invalid VideoFormatOptions resolution type boolean   | videoFormatSupported   | get videoFormatSupported with VideoFormatOptions resolution type boolean   | invalid parameter error for videoFormatSupported   |
+            | Invalid VideoFormatOptions resolution type interger  | videoFormatSupported   | get videoFormatSupported with VideoFormatOptions resolution type integer   | invalid parameter error for videoFormatSupported   |
+
+    @Device @coreSDK @sdk @transport @notSupported
+    Scenario Outline: Device.<method> - Positive Scenario: <Scenario>
+        When '3rd party app' registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
+        And '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with '<Method_Validation_Key>'
+        When User triggers event with value as '<Event_Param>'
+        Then 'Firebolt' platform triggers event '<Event_Validation_Key>'
+
+        Examples:
+            | Scenario                                     | method              | Event_Registration_Key              | API_Key                      | Method_Validation_Key        | Event_Validation_Key                               | Event_Param                         |
+            | validate device audioModeChanged             | audioMode           | device onAudioModeChanged           | fetch audioMode              | expected audioMode           | expected device onAudioModeChanged event           | onAudioModeChanged event            | 
+            | validate device videoModeChanged             | videoMode           | device onVideoModeChanged           | fetch videoMode              | expected videoMode           | expected device onVideoModeChanged event           | onVideoModeChanged event            |
+            | validate device videoModesChanged            | videoModes          | device onVideoModesChanged          | fetch videoModes             | expected videoModes          | expected device onVideoModesChanged event          | onVideoModesChanged event           |
+            | validate device sourceFrameRateUsedChanged   | sourceFrameRateUsed | device onSourceFrameRateUsedChanged | fetch sourceFrameRateUsed    | expected sourceFrameRateUsed | expected device onSourceFrameRateUsedChanged event | onSourceFrameRateUsedChanged event  |
+            | validate device hdrProfileChanged            | hdrProfile          | device onHdrProfileChanged          | fetch hdrProfile             | expected hdrProfile          | expected device onHdrProfileChanged event          | onHdrProfileChanged event           | 
+            | validate device audioOutputChanged           | audioMode           | device onAudioOutputChanged         | fetch audioMode              | expected audioMode           | expected device onAudioModeChanged event           | onAudioModeChanged event            | 
+
+ 
+
+

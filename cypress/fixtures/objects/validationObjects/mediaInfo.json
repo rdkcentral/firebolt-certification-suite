@@ -1,0 +1,122 @@
+{
+    "MEDIAINFO_AUDIOFORMAT": {
+        "method": "mediaInfo.audioFormat",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_AUDIOFORMAT",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_VIDEOFORMAT": {
+        "method": "mediaInfo.audioFormat",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_VIDEOFORMAT",
+                        "description": "Validation of the mediaInfo video formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ONAUDIOFORMATCHANGED_EVENT": {
+        "method": "mediaInfo.onAudioFormatChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_AUDIOFORMAT",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ONVIDEOFORMATCHANGED_EVENT": {
+        "method": "mediaInfo.onVideoFormatChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_VIDEOFORMAT",
+                        "description": "Validation of the mediaInfo video formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ONACTIVEAUDIOFORMATSCHANGED_EVENT":{
+        "method": "manage_mediaInfo.onActiveAudioFormatsChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_VIDEOFORMAT",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ONACTIVEVIDEOFORMATSCHANGED_EVENT":{
+        "method": "manage_mediaInfo.onActiveVideoFormatsChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_VIDEOFORMAT",
+                        "description": "Validation of the mediaInfo video formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ACTIVEAUDIOFORMATS": {
+        "method": "manage_mediaInfo.activeAudioFormats",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_ACTIVEAUDIOFORMATS",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ACTIVEVIDEOFORMATS": {
+        "method": "manage_mediaInfo.activeVideoFormats",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_ACTIVEVIDEOFORMATS",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    }
+}
