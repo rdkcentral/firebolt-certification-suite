@@ -118,9 +118,9 @@
         "key": "authTestTokenAccount2"
     },
     "GET_DEVICE2": "authTestTokenDevice2",
-    "GET_ACCOUNT2": "authTestTokenAccount2",
+    "GET_ACCOUNT2": "authTestTokenValue2",
     "GET_DEVICE1": "authTestTokenDevice1",
-    "GET_ACCOUNT1": "authTestTokenAccount1",
+    "GET_ACCOUNT1": "authTestTokenValue1",
     "INVALID_SCOPE": {
         "scope": "test",
         "key": "authTestTokenDevice"
@@ -271,54 +271,6 @@
         }
     },
     "VALUE_TTL": "authTestTokenValueTTL",
-    "SETFORAPP_DEVICE": {
-        "appId": "refui",
-        "scope": "device",
-        "key": "authTestTokenDevice",
-        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
-    },
-    "SETFORAPP_ACCOUNT": {
-        "appId": "refui",
-        "scope": "account",
-        "key": "authTestTokenAccount",
-        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
-    },
-    "SETFORAPP_DEVICE_OPTIONAL": {
-        "appId": "refui",
-        "scope": "device",
-        "key": "authTestTokenDevice1",
-        "value": "authTestTokenValue1",
-        "options": {
-            "ttl": 2000
-        }
-    },
-    "SETFORAPP_ACCOUNT_OPTIONAL": {
-        "appId": "refui",
-        "scope": "account",
-        "key": "authTestTokenAccount1",
-        "value": "authTestTokenValue1",
-        "options": {
-            "ttl": 2000
-        }
-    },
-    "REMOVEFORAPP_DEVICE": {
-        "appId": "refui",
-        "scope": "device",
-        "key": "authTestTokenDevice"
-    },
-    "REMOVEFORAPP_ACCOUNT": {
-        "appId": "refui",
-        "scope": "account",
-        "key": "authTestTokenAccount"
-    },
-    "CLEARFORAPP_DEVICE": {
-        "appId": "refui",
-        "scope": "device"
-    },
-    "CLEARFORAPP_ACCOUNT": {
-        "appId": "refui",
-        "scope": "account"
-    },
     "CLEAR_DEVICE": {
         "scope": "device"
     },
