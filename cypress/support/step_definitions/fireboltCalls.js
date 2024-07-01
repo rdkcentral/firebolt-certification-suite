@@ -561,7 +561,10 @@ Given(
       if (fireboltCallKey) {
         cy.getFireboltData(fireboltCallKey).then((fireboltData) => {
           fireboltCallObject = fireboltData;
-          UTILS.getEnvVariable('runtime').fireboltCall = fireboltData;
+          cy.wrap(UTILS.getEnvVariable('runtime')).then((object) => {
+            object.fireboltCall = fireboltData;
+            Cypress.env('runtime', object);
+          });
         });
       } else {
         fireboltCallObject = UTILS.getEnvVariable('runtime').fireboltCall;
@@ -704,7 +707,10 @@ Given(
       if (fireboltCallKey) {
         cy.getFireboltData(fireboltCallKey).then((fireboltData) => {
           fireboltCallObject = fireboltData;
-          UTILS.getEnvVariable('runtime').fireboltCall = fireboltData;
+          cy.wrap(UTILS.getEnvVariable('runtime')).then((object) => {
+            object.fireboltCall = fireboltData;
+            Cypress.env('runtime', object);
+          });
         });
       } else {
         fireboltCallObject = UTILS.getEnvVariable('runtime').fireboltCall;
