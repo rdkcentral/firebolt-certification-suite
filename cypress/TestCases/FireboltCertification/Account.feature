@@ -5,7 +5,7 @@ Feature: Account
       Given the environment has been set up for 'Account' tests
       And 3rd party 'certification' app is launched
 
-   @sdk @transport
+   @sdk @transport @Sev0
    Scenario Outline: Account.<method> - Positive Scenario: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
