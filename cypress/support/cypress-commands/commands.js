@@ -195,23 +195,6 @@ Cypress.Commands.add('getSdkVersion', () => {
  * updateRunInfo()
  */
 Cypress.Commands.add('updateRunInfo', () => {
-  // get data for runInfo
-  cy.getDeviceData(CONSTANTS.DEVICE_MODEL, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-    (response) => {
-      Cypress.env(CONSTANTS.ENV_DEVICE_MODEL, JSON.stringify(response).replace(/"/g, ''));
-    }
-  );
-  cy.getDeviceData(CONSTANTS.DEVICE_DISTRIBUTOR, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-    (response) => {
-      Cypress.env(CONSTANTS.ENV_DEVICE_DISTRIBUTOR, JSON.stringify(response).replace(/"/g, ''));
-    }
-  );
-  cy.getDeviceData(CONSTANTS.DEVICE_PLATFORM, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-    (response) => {
-      Cypress.env(CONSTANTS.ENV_PLATFORM, JSON.stringify(response).replace(/"/g, ''));
-    }
-  );
-
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
   const envOpt = './options.txt';
@@ -220,6 +203,29 @@ Cypress.Commands.add('updateRunInfo', () => {
       cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
         if (!tempFileExists) {
           try {
+            // get data for runInfo
+            cy.getDeviceData(CONSTANTS.DEVICE_MODEL, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+              (response) => {
+                Cypress.env(CONSTANTS.ENV_DEVICE_MODEL, JSON.stringify(response).replace(/"/g, ''));
+              }
+            );
+            cy.getDeviceData(
+              CONSTANTS.DEVICE_DISTRIBUTOR,
+              {},
+              CONSTANTS.ACTION_CORE.toLowerCase()
+            ).then((response) => {
+              Cypress.env(
+                CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                JSON.stringify(response).replace(/"/g, '')
+              );
+            });
+            cy.getDeviceData(
+              CONSTANTS.DEVICE_PLATFORM,
+              {},
+              CONSTANTS.ACTION_CORE.toLowerCase()
+            ).then((response) => {
+              Cypress.env(CONSTANTS.ENV_PLATFORM, JSON.stringify(response).replace(/"/g, ''));
+            });
             cy.readFile(reportEnvFile).then((reportEnv) => {
               if (reportEnv) {
                 const isPlatformRipple = false;
