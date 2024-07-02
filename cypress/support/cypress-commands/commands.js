@@ -153,135 +153,53 @@ Cypress.Commands.add('getSdkVersion', () => {
       })
       .then((latestSDKversion) => {
         // Calling device.version API
-        cy.getDeviceData(CONSTANTS.DEVICE_VERSION, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-          (response) => {
-            // If the response is invalid, assign the latest SDK version to the environment variable.
-            if (response?.api?.readable && response.sdk?.readable) {
-              // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
-              // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
-              // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
-              const deviceSDKversionJson =
-                UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
-                  ? response.api
-                  : response.sdk;
-              const readableSDKVersion = deviceSDKversionJson.readable;
+        cy.getDeviceVersion().then((response) => {
+          // If the response is invalid, assign the latest SDK version to the environment variable.
+          if (response?.api?.readable && response.sdk?.readable) {
+            // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
+            // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
+            // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
+            const deviceSDKversionJson =
+              UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
+                ? response.api
+                : response.sdk;
+            const readableSDKVersion = deviceSDKversionJson.readable;
 
-              // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
-              Cypress.env(
-                CONSTANTS.ENV_PLATFORM_SDK_VERSION,
-                readableSDKVersion.includes(CONSTANTS.NEXT) ||
-                  readableSDKVersion.includes(CONSTANTS.PROPOSED)
-                  ? readableSDKVersion
-                  : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
-              );
-            } else {
-              Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
-            }
-            if (response?.firmware?.readable) {
-              let deviceFirmware = JSON.stringify(response.firmware.readable);
-              deviceFirmware = deviceFirmware.replace(/"/g, '');
-              Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
-            }
+            // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
+            Cypress.env(
+              CONSTANTS.ENV_PLATFORM_SDK_VERSION,
+              readableSDKVersion.includes(CONSTANTS.NEXT) ||
+                readableSDKVersion.includes(CONSTANTS.PROPOSED)
+                ? readableSDKVersion
+                : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
+            );
+            return;
           }
-        );
+          Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
+        });
       });
   }
 });
-/**
- * @module commands
- * @function updateRunInfo
- * @description update Run Info in cucumber report dynamically
- * @example
- * updateRunInfo()
- */
-Cypress.Commands.add('updateRunInfo', () => {
-  // get data for runInfo
-  cy.getDeviceData(CONSTANTS.DEVICE_MODEL, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-    (response) => {
-      Cypress.env(CONSTANTS.ENV_DEVICE_MODEL, JSON.stringify(response).replace(/"/g, ''));
-    }
-  );
-  cy.getDeviceData(CONSTANTS.DEVICE_DISTRIBUTOR, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-    (response) => {
-      Cypress.env(CONSTANTS.ENV_DEVICE_DISTRIBUTOR, JSON.stringify(response).replace(/"/g, ''));
-    }
-  );
-  cy.getDeviceData(CONSTANTS.DEVICE_PLATFORM, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-    (response) => {
-      Cypress.env(CONSTANTS.ENV_PLATFORM, JSON.stringify(response).replace(/"/g, ''));
-    }
-  );
-
-  const reportEnvFile = './reportEnv.json';
-  const tempReportEnvFile = './tempReportEnv.json';
-  const envOpt = './options.txt';
-  cy.task('checkFileExists', reportEnvFile).then((exists) => {
-    if (exists) {
-      cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
-        if (!tempFileExists) {
-          try {
-            cy.readFile(reportEnvFile).then((reportEnv) => {
-              if (reportEnv) {
-                const isPlatformRipple = false;
-                if (
-                  reportEnv.customData &&
-                  reportEnv.customData.data &&
-                  reportEnv.customData.data.length > 0
-                ) {
-                  const labelToEnvMap = {
-                    [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
-                    [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_PLATFORM_SDK_VERSION,
-                    [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
-                    [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
-                    [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
-                    [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
-                    [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
-                  };
-
-                  reportEnv.customData.data.forEach((item) => {
-                    if (labelToEnvMap[item.label]) {
-                      item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
-                    }
-                  });
-                }
-                // write the merged object
-                cy.writeFile(tempReportEnvFile, reportEnv);
-              } else {
-                logger.info('Unable to read from reportEnv json file');
-                return false;
-              }
-            });
-          } catch (err) {
-            logger.info('Error in updating Run Info in cucumber report', err);
-            return false;
-          }
-        } else {
-          logger.info(
-            'Unable to update Run Info in cucumber report, tempReportEnv file already exists'
-          );
-          return false;
-        }
-      });
-    } else {
-      logger.info('Unable to update Run Info in cucumber report, reportEnv file doesnt exist');
-      return false;
-    }
-  });
-});
 
 /**
  * @module commands
- * @function getDeviceData
- * @description Making API call.
+ * @function getDeviceVersion
+ * @description Making device.version API call to get SDK version.
  * @example
- * cy.getDeviceData(method, param, action)
+ * cy.getDeviceVersion()
  */
-Cypress.Commands.add('getDeviceData', (method, param, action) => {
+Cypress.Commands.add('getDeviceVersion', () => {
   const requestMap = {
-    method: method,
-    param: param,
-    action: action,
+    method: CONSTANTS.DEVICE_VERSION,
+    param: {},
+    action: CONSTANTS.ACTION_CORE.toLowerCase(),
   };
+  cy.log(
+    'Call from 1st party App, method: ' +
+      requestMap.method +
+      ' params: ' +
+      JSON.stringify(requestMap.param)
+  );
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
       if (response && response.result) {
@@ -343,18 +261,15 @@ Cypress.Commands.add('getFireboltJsonData', () => {
   // Reading the path of the firebolt.json file from the environment variable based on the SDK version.
   if (envPlatformSdkVersion.includes(CONSTANTS.NEXT)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_NEXT_URL);
-    cy.log(`Using the next version of firebolt.json`);
   } else if (envPlatformSdkVersion.includes(CONSTANTS.PROPOSED)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(
       CONSTANTS.FIREBOLT_SPECIFICATION_PROPOSED_URL
     );
-    cy.log(`Using the proposed version of firebolt.json`);
   } else {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_URL).replace(
       CONSTANTS.LATEST,
       envPlatformSdkVersion
     );
-    cy.log(`Using the ${envPlatformSdkVersion} version of firebolt.json`);
   }
 
   cy.request({ url: FIREBOLT_SPECIFICATION_URL, failOnStatusCode: false }).then((data) => {
@@ -567,6 +482,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
   } else if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTMOCK)) {
     cy.parsedMockData(beforeOperation).then((parsedData) => {
       if (firstParty) {
+        parsedData.firstParty = firstParty;
         const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SETRESPONSE;
         const requestMap = {
           method: method,
@@ -738,7 +654,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
   // else get the default app id from environment variable.
 
   const appId =
-    appCallSign == undefined ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) : appCallSign; // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
+    appCallSign == undefined
+      ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+      : UTILS.checkForSecondaryAppId(appCallSign); // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // create the request map
   // basic intent to be sent to the app on launch
@@ -781,10 +699,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
         },
       },
     };
-    const messageIntent = {
-      data: data,
-    };
-    requestMap.params.intent = messageIntent;
+    requestMap.params.intent.data = data;
   }
 
   // Add the PubSub URL if required
@@ -793,6 +708,17 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     if (getEnvVariable(CONSTANTS.DEVICE_MAC, false)) {
       data.query.params[CONSTANTS.MACADDRESS_PARAM] = getEnvVariable(CONSTANTS.DEVICE_MAC);
     }
+  }
+  // If the testType is userInterestProvider, send the discovery.launch params with registerProvider = false, then certification app will not register for userInterest provider.
+  if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.USERINTERESTPROVIDER) {
+    data = {
+      query: JSON.stringify({
+        params: {
+          [CONSTANTS.REGISTERPROVIDER]: false,
+        },
+      }),
+    };
+    requestMap.params.intent.data = data;
   }
 
   // Stringify the query (The intent requires it be a string)

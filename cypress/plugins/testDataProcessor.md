@@ -45,6 +45,19 @@ Response
 - {'abc': {'method': 'method_name', 'validationJsonPath': 'result', 'content': true}}
 ```
 
+### > processErrorContentJson
+processErrorContentJson function will perform following operations
+- Iterate over each key in the provided JSON
+- Resolve the each type in the array of validations object.
+- Return the JSON with the updated value.
+
+Ex:
+
+```
+Request
+- processErrorContentJson()
+```
+
 ### > testDataHandler
 This command is used mainly for parsing and fetching test data from various fixture files depending on the requestType passed to the command. RequestType can have different values based on what type of data need to be parsed and fetched from test data file. DataIdentifier specifies the key of the test data which is used to identify and fetch the test data from different test data files.
 

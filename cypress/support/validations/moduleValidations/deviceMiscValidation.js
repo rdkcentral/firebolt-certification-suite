@@ -29,7 +29,7 @@ const UTILS = require('../../cypress-support/src/utils');
  * deviceMiscValidation('device.verion',  {"mode": "fixture", "type": "APIVERSION", "description": "Validation of the Device version  API Format"},{response:{result: '', error: null, ...}});
  */
 export function deviceMiscValidation(method, validationTypeObject, apiOrEventObject) {
-  const response = apiOrEventObject.response.result;
+  const response = apiOrEventObject.apiResponse.result;
 
   switch (method) {
     case CONSTANTS.DEVICE_VERSION:
@@ -71,7 +71,7 @@ export function deviceMiscValidation(method, validationTypeObject, apiOrEventObj
  */
 function validateDeviceVersion(method, validationTypeObject, apiOrEventObject) {
   const expected = validationTypeObject.type;
-  const response = apiOrEventObject.response.result;
+  const response = apiOrEventObject.apiResponse.result;
   const apiVersionvalue = UTILS.getEnvVariable(CONSTANTS.API_VERSION, false);
 
   // The APIVersionValue contains any value, directly validating with the obtained response.
