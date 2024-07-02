@@ -1,6 +1,6 @@
 ## Constants
 
-* Define all constants in `constants/constants.js` directory.
+* Define all constants in `const ants/constants.js` directory.
 * Using constants reduces spelling/case mistakes and duplicate values.
 ## Format:<br> 
  ```
