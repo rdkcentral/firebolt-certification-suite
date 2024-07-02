@@ -29,8 +29,7 @@ exports.CLOSEDCAPTION_SETTINGS = {
   },
 };
 
-exports.VOICEGUIDANCE_SETTINGS = () => {
-  return {
+exports.VOICEGUIDANCE_SETTINGS = {
     method: 'accessibility.voiceGuidanceSettings',
     params: null,
     validationJsonPath: resolveAtRuntime(['result.{{attribute}}']),
@@ -56,11 +55,9 @@ exports.VOICEGUIDANCE_SETTINGS = () => {
         },
       ],
     },
-  };
 };
 
-exports.AUDIODESCRIPTIONS_SETTINGS = () => {
-  return {
+exports.AUDIODESCRIPTIONS_SETTINGS = {
     method: 'accessibility.audioDescriptionSettings',
     params: null,
     validationJsonPath: resolveAtRuntime(['result.{{attribute}}']),
@@ -86,5 +83,63 @@ exports.AUDIODESCRIPTIONS_SETTINGS = () => {
         },
       ],
     },
-  };
+};
+
+exports.CLOSEDCAPTIONS = {
+  method: 'accessibility.closedCaptions',
+  params: null,
+  validationJsonPath: resolveAtRuntime(['result.{{attribute}}', 'result.styles.{{attribute}}']),
+  setMethod: resolveAtRuntime('manage_closedcaptions.set{{attribute.uppercaseFirstChar}}'),
+  setParams: resolveAtRuntime('value'),
+  setValidationJsonPath: 'result',
+  setContent: null,
+  event: 'accessibility.onClosedCaptionsSettingsChanged',
+  eventValidationJsonPath: resolveAtRuntime([
+    'eventResponse.{{attribute}}',
+    'eventResponse.styles.{{attribute}}',
+  ]),
+  content: {
+    data: [
+      {
+        type: 'fixture',
+        validations: [
+          {
+            mode: 'staticContentValidation',
+            type: resolveAtRuntime('value'),
+            description: resolveAtRuntime(
+              'Validating that accessibility.closedCaptions {{attribute}} is {{value}}'
+            ),
+          },
+        ],
+      },
+    ],
+  },
+};
+
+exports.VOICEGUIDANCE = {
+    method: 'accessibility.voiceGuidance',
+    params: null,
+    validationJsonPath: resolveAtRuntime(['result.{{attribute}}']),
+    setMethod: resolveAtRuntime('manage_voiceguidance.set{{attribute.uppercaseFirstChar}}'),
+    setParams: resolveAtRuntime('value'),
+    setValidationJsonPath: 'result',
+    setContent: null,
+    event: 'accessibility.onVoiceGuidanceSettingsChanged',
+    eventValidationJsonPath: resolveAtRuntime(['eventResponse.{{attribute}}']),
+    content: {
+      data: [
+        {
+          type: 'fixture',
+          validations: [
+            {
+              mode: 'staticContentValidation',
+              type: resolveAtRuntime('value'),
+              description: resolveAtRuntime(
+                'Validating that accessibility.voiceGuidance {{attribute}} is {{value}}'
+              ),
+            },
+          ],
+        },
+      ],
+    },
 };
