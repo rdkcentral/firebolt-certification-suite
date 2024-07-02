@@ -206,6 +206,9 @@ module.exports = async (on, config) => {
         }
       });
     },
+    checkFileExists(filePath) {
+      return fs.existsSync(filePath);
+    },
   });
 
   on('before:run', async () => {

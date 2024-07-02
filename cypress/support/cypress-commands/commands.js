@@ -184,23 +184,6 @@ Cypress.Commands.add('getSdkVersion', () => {
             }
           }
         );
-        cy.getDeviceData(CONSTANTS.DEVICE_MODEL, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-          (response) => {
-            Cypress.env(CONSTANTS.ENV_DEVICE_MODEL, JSON.stringify(response).replace(/"/g, ''));
-          }
-        );
-        cy.getDeviceData(
-          CONSTANTS.DEVICE_DISTRIBUTOR,
-          {},
-          CONSTANTS.ACTION_CORE.toLowerCase()
-        ).then((response) => {
-          Cypress.env(CONSTANTS.ENV_DEVICE_DISTRIBUTOR, JSON.stringify(response).replace(/"/g, ''));
-        });
-        cy.getDeviceData(CONSTANTS.DEVICE_PLATFORM, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-          (response) => {
-            Cypress.env(CONSTANTS.ENV_PLATFORM, JSON.stringify(response).replace(/"/g, ''));
-          }
-        );
       });
   }
 });
@@ -212,82 +195,92 @@ Cypress.Commands.add('getSdkVersion', () => {
  * updateRunInfo()
  */
 Cypress.Commands.add('updateRunInfo', () => {
+  // get data for runInfo
+  cy.getDeviceData(CONSTANTS.DEVICE_MODEL, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+    (response) => {
+      Cypress.env(CONSTANTS.ENV_DEVICE_MODEL, JSON.stringify(response).replace(/"/g, ''));
+    }
+  );
+  cy.getDeviceData(CONSTANTS.DEVICE_DISTRIBUTOR, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+    (response) => {
+      Cypress.env(CONSTANTS.ENV_DEVICE_DISTRIBUTOR, JSON.stringify(response).replace(/"/g, ''));
+    }
+  );
+  cy.getDeviceData(CONSTANTS.DEVICE_PLATFORM, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+    (response) => {
+      Cypress.env(CONSTANTS.ENV_PLATFORM, JSON.stringify(response).replace(/"/g, ''));
+    }
+  );
+
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
   const envOpt = './options.txt';
-  if (reportEnvFile) {
-    try {
-      cy.readFile(reportEnvFile).then((reportEnv) => {
-        if (reportEnv) {
-          const isPlatformRipple = false;
-          if (
-            reportEnv.customData &&
-            reportEnv.customData.data &&
-            reportEnv.customData.data.length > 0
-          ) {
-            const labelToEnvMap = {
-              [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
-              [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_PLATFORM_SDK_VERSION,
-              [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
-              [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
-              [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
-              [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
-              [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
-            };
+  cy.task('checkFileExists', reportEnvFile).then((exists) => {
+    if (exists) {
+      cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
+        if (!tempFileExists) {
+          try {
+            cy.readFile(reportEnvFile).then((reportEnv) => {
+              if (reportEnv) {
+                const isPlatformRipple = false;
+                if (
+                  reportEnv.customData &&
+                  reportEnv.customData.data &&
+                  reportEnv.customData.data.length > 0
+                ) {
+                  const labelToEnvMap = {
+                    [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
+                    [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_PLATFORM_SDK_VERSION,
+                    [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
+                    [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
+                    [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
+                    [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
+                    [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                  };
 
-            reportEnv.customData.data.forEach((item) => {
-              if (labelToEnvMap[item.label]) {
-                item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+                  reportEnv.customData.data.forEach((item) => {
+                    if (labelToEnvMap[item.label]) {
+                      item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+                    }
+                  });
+                }
+                // write the merged object
+                cy.writeFile(tempReportEnvFile, reportEnv);
+              } else {
+                logger.info('Unable to read from reportEnv json file');
+                return false;
               }
             });
+          } catch (err) {
+            logger.info('Error in updating Run Info in cucumber report', err);
+            return false;
           }
-          // write the merged object
-          cy.writeFile(tempReportEnvFile, reportEnv);
         } else {
-          logger.info('Unable to read from reportEnv json file');
+          logger.info(
+            'Unable to update Run Info in cucumber report, tempReportEnv file already exists'
+          );
           return false;
         }
       });
-    } catch (err) {
-      logger.info('Error in updating Run Info in cucumber report', err);
+    } else {
+      logger.info('Unable to update Run Info in cucumber report, reportEnv file doesnt exist');
       return false;
     }
-  } else {
-    logger.info('Unable to update Run Info in cucumber report');
-    return false;
-  }
+  });
 });
 
 /**
  * @module commands
  * @function getDeviceData
- * @description Making device.version API call to get SDK version.
+ * @description Making API call.
  * @example
- * cy.getDeviceVersion()
+ * cy.getDeviceData(method, param, action)
  */
 Cypress.Commands.add('getDeviceData', (method, param, action) => {
   const requestMap = {
     method: method,
     param: param,
     action: action,
-  };
-  cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    try {
-      if (response && response.result) {
-        return response.result;
-      } else {
-        throw 'Obtained response is null|undefined';
-      }
-    } catch (error) {
-      fireLog.info('Failed to fetch device.version', error);
-    }
-  });
-});
-Cypress.Commands.add('getDeviceModel', () => {
-  const requestMap = {
-    method: CONSTANTS.DEVICE_MODEL,
-    param: {},
-    action: CONSTANTS.ACTION_CORE.toLowerCase(),
   };
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
