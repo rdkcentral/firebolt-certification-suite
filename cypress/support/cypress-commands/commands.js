@@ -699,7 +699,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
         },
       },
     };
-     const messageIntent = {
+    const messageIntent = {
       action: CONSTANTS.SEARCH,
       data: data,
     };
