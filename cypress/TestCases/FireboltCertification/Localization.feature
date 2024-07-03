@@ -80,7 +80,7 @@ Feature: Localization
             | Set & get preferredAudioLanguages(eng-spa) | Localization.preferredAudioLanguages | localization onPreferredAudioLanguagesChanged | set preferredaudiolanguages to eng spa  | get localization preferredaudiolanguages | eng spa for localization preferredaudiolanguages | onpreferredaudiolanguageschanged for localization with eng and spa |
             | Set & get PostalCode                       | Localization.postalCode              | localization onPostalCodeChanged              | set postalcode to 12345                 | get postalcode                           | 12345 for localization postalcode                | onpostalcodechanged for localization postalCode with 12345         |
 
-    @Device @coreSDK @regression @sdk
+    @Device @coreSDK @regression @sdk @requiresPlatformImplementation
     Scenario Outline: Localization.<Method_Name> - Positive Scenario: Clearing event listeners
         When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
         And I clear '<Clear_Event_Name>' listeners
