@@ -856,10 +856,18 @@ Cypress.Commands.add('startOrStopInteractionsService', (action) => {
   // Sending message to the platform to call designated handler
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     if (result) {
-      // handle response
-      return true;
+      if (result?.success) {
+        assert(true, `Firebolt interactions collection service ${action} successfully`);
+        return true;
+      } else {
+        fireLog.assert(
+          false,
+          `Firebolt interactions collection service with action as ${action} has failed with error ${JSON.stringify(result.message)}`
+        );
+        return false;
+      }
     } else {
-      // handle error
+      fireLog.assert(false, CONSTANTS.INTERACTIONS_SERVICE_NO_RESPONSE);
       return false;
     }
   });

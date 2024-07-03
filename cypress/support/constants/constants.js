@@ -182,6 +182,7 @@ module.exports = {
   ID: 'id',
   INPUT: 'INPUT',
   INTENT: 'intent',
+  INTERACTIONS_SERVICE_NO_RESPONSE: 'Response not received from firebolt interactions service',
   INVALID_LIFECYCLE_STATE_RESPONSE: 'Invalid lifecycle state response',
   INVALID_RESPONSE: 'Invalid response',
   INVALID_HISTORY_RESPONSE: 'App history response does not contain expected fields',
