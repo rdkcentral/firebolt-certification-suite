@@ -51,6 +51,9 @@ Given('the environment has been set up for {string} tests', (test) => {
     cy.getCapabilities();
     destroyAppInstance(test);
     Cypress.env(CONSTANTS.ENV_SETUP_STATUS, true);
+    if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
+      Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
+    }
   }
 });
 
@@ -93,13 +96,19 @@ function destroyAppInstance(testType) {
       params,
       additionalParams
     );
+    cy.log(
+      'Sending lifecycle close intent to unload app, method: ' +
+        params.methodName +
+        ' params: ' +
+        JSON.stringify(params.methodParams)
+    );
 
     try {
       cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
         if (response != CONSTANTS.NO_RESPONSE) {
-          cy.log('App closed with reason: ' + closeReason, 'destroyAppInstance');
+          fireLog.assert(false, 'App failed to unload, Reason: ' + closeReason);
         } else {
-          cy.log('Failed to close the 3rd party app: Response Not Recieved');
+          cy.log('App unloaded', 'destroyAppInstance');
         }
         cy.wait(5000);
       });

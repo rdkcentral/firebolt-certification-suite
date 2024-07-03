@@ -81,7 +81,33 @@ export default class Websocket extends AsyncTransportClient {
         res(event.data);
       };
 
-      this.ws.addEventListener('message', sendCallback);
+      this.ws.onmessage = (msg) => {
+        if (msg && msg.data) {
+          const message = JSON.parse(msg.data);
+          const requestMessage = JSON.parse(payload);
+          const mapKey = Array.from(Cypress.env('eventResponseMap').keys()).find((key) =>
+            key.includes(message.id)
+          );
+
+          // Updating event response in the map when event is triggered by the platform
+          if (
+            mapKey &&
+            Cypress.env('eventResponseMap').has(mapKey) &&
+            !message?.result?.hasOwnProperty('listening')
+          ) {
+            const obj = Cypress.env('eventResponseMap').get(mapKey);
+            obj.listenerResponse = message;
+            Cypress.env('eventResponseMap').set(mapKey, obj);
+          }
+
+          // Returning the message when response and request id matches.
+          if (message.id == requestMessage.id) {
+            sendCallback(msg);
+          }
+        } else {
+          sendCallback(msg);
+        }
+      };
       this.ws.send(payload);
     });
 

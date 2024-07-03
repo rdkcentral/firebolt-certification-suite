@@ -42,6 +42,7 @@ const env = {
   thirdPartyMockUser: '456~A',
   MFOS_base_url: 'http://localhost:3333/api/v1/',
   firstPartyAppId: 'firstPartyAppId',
+  failOnPubSubConnectionError: false,
   certification: false,
   reportType: 'cucumber',
   deleteReport: false,
@@ -61,6 +62,16 @@ const env = {
   generateLocalReport: true,
   loggerLevel: 'debug',
   testSuite: '',
+  visibilityState: { foreground: 'visible', background: 'visible', inactive: 'hidden' },
+  defaultTestData: {
+    apiVersion: '1.0.0',
+    deviceResolution: [
+      [1280, 720],
+      [1920, 1080],
+      [3840, 2160],
+    ],
+  },
+  fcaAppList: ['default3rdPartyAppId'],
 };
 
 module.exports = {

@@ -55,5 +55,47 @@
         "state": "disconnected",
         "type": "ethernet"
     },
-    "NAME_BEDROOM": "Bedroom"
+    "NAME_BEDROOM": "Bedroom",
+    "ONNETWORKCHANGED_WIFICONNECT_EVENTS": {
+        "method": "device.onNetworkChanged",
+        "result": {
+            "state": "connected",
+            "type": "wifi"
+        }
+    },
+    "ONNETWORKCHANGED_WIFIDISCONNECT_EVENTS": {
+        "method": "device.onNetworkChanged",
+        "result": {
+            "state": "disconnected",
+            "type": "wifi"
+        }
+    },
+    "ONNETWORKCHANGED_ETHERNETCONNECT_EVENTS": {
+        "method": "device.onNetworkChanged",
+        "result": {
+            "state": "connected",
+            "type": "ethernet"
+        }
+    },
+    "ONNETWORKCHANGED_ETHERNETDISCONNECT_EVENTS": {
+        "method": "device.onNetworkChanged",
+        "result": {
+            "state": "disconnected",
+            "type": "ethernet"
+        }
+    },
+    "ONNETWORKCHANGED_HYBRIDCONNECT_EVENTS": {
+        "method": "device.onNetworkChanged",
+        "result": {
+            "state": "connected",
+            "type": "ethernet"
+        }
+    },
+    "ONNETWORKCHANGED_HYBRIDDISCONNECT_EVENTS": {
+        "method": "device.onNetworkChanged",
+        "result": {
+            "state": "disconnected",
+            "type": "ethernet"
+        }
+    }
 }

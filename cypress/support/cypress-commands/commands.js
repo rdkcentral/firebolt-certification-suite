@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 
 /**
@@ -36,11 +36,11 @@ Cypress.Commands.add(
     // Reading the data from combinedJson based on key.
     let fireboltData;
     if (callType == CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS) {
-      fireboltData = UTILS.getEnvVariable('fireboltMocksJson')[key];
+      fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTMOCKS)[key];
     } else if (callType == CONSTANTS.SUPPORTED_CALLTYPES.SET_RESPONSE_JSON) {
       fireboltData = UTILS.getEnvVariable('setResponseJson')[key];
     } else {
-      fireboltData = UTILS.getEnvVariable('fireboltCallsJson')[key];
+      fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
     if (!fireboltData) {
       fireLog.assert(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
@@ -80,6 +80,14 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
           const envParam = params.split('-')[1];
           params = UTILS.getEnvVariable(envParam, false);
         }
+        // If params contain CYPRESSENV in any parameter assigning corresponding env value
+        const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
+        if (containEnv) {
+          const envParam = containEnv.split('-')[1];
+          params[envParam] = Cypress.env(envParam);
+          delete params[containEnv];
+        }
+
         method = item.method;
         const expected = item.expected ? item.expected : CONSTANTS.RESULT;
         action = CONSTANTS.ACTION_CORE.toLowerCase();
@@ -186,7 +194,12 @@ Cypress.Commands.add('getDeviceVersion', () => {
     param: {},
     action: CONSTANTS.ACTION_CORE.toLowerCase(),
   };
-
+  cy.log(
+    'Call from 1st party App, method: ' +
+      requestMap.method +
+      ' params: ' +
+      JSON.stringify(requestMap.param)
+  );
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
       if (response && response.result) {
@@ -195,7 +208,7 @@ Cypress.Commands.add('getDeviceVersion', () => {
         throw 'Obtained response is null|undefined';
       }
     } catch (error) {
-      cy.log('Failed to fetch device.version', error);
+      fireLog.info('Failed to fetch device.version', error);
     }
   });
 });
@@ -248,18 +261,15 @@ Cypress.Commands.add('getFireboltJsonData', () => {
   // Reading the path of the firebolt.json file from the environment variable based on the SDK version.
   if (envPlatformSdkVersion.includes(CONSTANTS.NEXT)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_NEXT_URL);
-    cy.log(`Using the next version of firebolt.json`);
   } else if (envPlatformSdkVersion.includes(CONSTANTS.PROPOSED)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(
       CONSTANTS.FIREBOLT_SPECIFICATION_PROPOSED_URL
     );
-    cy.log(`Using the proposed version of firebolt.json`);
   } else {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_URL).replace(
       CONSTANTS.LATEST,
       envPlatformSdkVersion
     );
-    cy.log(`Using the ${envPlatformSdkVersion} version of firebolt.json`);
   }
 
   cy.request({ url: FIREBOLT_SPECIFICATION_URL, failOnStatusCode: false }).then((data) => {
@@ -315,7 +325,7 @@ Cypress.Commands.add('getCapabilities', () => {
       Cypress.env('capabilitiesList', capabilityObject);
     }
   } catch (error) {
-    cy.log('Error while getting capabilities from firebolt config: ', error);
+    fireLog.info('Error while getting capabilities from firebolt config: ', error);
   }
 });
 
@@ -416,7 +426,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     firstParty = beforeOperation.firstParty;
   } else {
     firstParty = false;
-    cy.log(
+    fireLog.info(
       'firstParty property is missing in beforeOperation block, so using default as firstParty=false'
     );
   }
@@ -431,9 +441,9 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
             action: action,
           };
 
-          cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
+          fireLog.info(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
           cy.sendMessagetoPlatforms(requestMap).then((result) => {
-            cy.log('Response from 1st party App: ' + JSON.stringify(result));
+            fireLog.info('Response from 1st party App: ' + JSON.stringify(result));
           });
         } else {
           const communicationMode = UTILS.getCommunicationMode();
@@ -457,10 +467,10 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
           );
 
           // Sending message to 3rd party app.
-          cy.log(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
+          fireLog.info(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
           cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
             result = JSON.parse(result);
-            cy.log(
+            fireLog.info(
               `Response from 3rd party App ${Cypress.env(
                 CONSTANTS.THIRD_PARTY_APP_ID
               )}: ${JSON.stringify(result)}`
@@ -470,19 +480,17 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
       });
     });
   } else if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTMOCK)) {
-    cy.getFireboltData(
-      beforeOperation[CONSTANTS.FIREBOLTMOCK],
-      CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS
-    ).then((parsedData) => {
+    cy.parsedMockData(beforeOperation).then((parsedData) => {
       if (firstParty) {
+        parsedData.firstParty = firstParty;
         const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SETRESPONSE;
         const requestMap = {
           method: method,
           params: parsedData,
         };
-        cy.log(`Set mock call to 1st party App: ${JSON.stringify(requestMap)} `);
+        fireLog.info(`Set mock call to 1st party App: ${JSON.stringify(requestMap)} `);
         cy.sendMessagetoPlatforms(requestMap).then((result) => {
-          cy.log('Response from 1st party App: ' + JSON.stringify(result));
+          fireLog.info('Response from 1st party App: ' + JSON.stringify(result));
         });
       } else {
         const params = {
@@ -509,7 +517,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
         cy.log(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
         cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
           result = JSON.parse(result);
-          cy.log(
+          fireLog.info(
             `Response from 3rd party App ${Cypress.env(
               CONSTANTS.THIRD_PARTY_APP_ID
             )}: ${JSON.stringify(result)}`
@@ -526,10 +534,25 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
       params: scenarioName,
     };
 
-    cy.log(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
+    fireLog.info(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
+  }
+});
+
+Cypress.Commands.add('parsedMockData', (beforeOperation) => {
+  if (beforeOperation.hasOwnProperty('fireboltMock')) {
+    if (typeof beforeOperation.fireboltMock === 'string') {
+      cy.getFireboltData(
+        beforeOperation[CONSTANTS.FIREBOLTMOCK],
+        CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS
+      ).then((response) => {
+        return response;
+      });
+    } else {
+      return beforeOperation.fireboltMock;
+    }
   }
 });
 
@@ -555,7 +578,9 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
     },
     task: CONSTANTS.TASK.PERFORMANCETESTHANDLER,
   };
-  cy.log('Request map to send intent to performance test handler: ' + JSON.stringify(requestMap));
+  fireLog.info(
+    'Request map to send intent to performance test handler: ' + JSON.stringify(requestMap)
+  );
   // Sending message to the platform to call performance test handler
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     if (result?.success) {
@@ -610,7 +635,7 @@ Cypress.Commands.add('censorData', (method, response) => {
     });
   } catch (err) {
     // Log an error if the censorData JSON file is missing.
-    cy.log('Error occurred while loading censorData: ', err);
+    fireLog.info('Error occurred while loading censorData: ', err);
   }
 });
 
@@ -629,7 +654,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
   // else get the default app id from environment variable.
 
   const appId =
-    appCallSign == undefined ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) : appCallSign; // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
+    appCallSign == undefined
+      ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+      : UTILS.checkForSecondaryAppId(appCallSign); // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // create the request map
   // basic intent to be sent to the app on launch
@@ -641,12 +668,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
         ? UTILS.getEnvVariable(CONSTANTS.APP_TYPE)
         : CONSTANTS.FIREBOLT; // appType defines in which mode app should be launched
     data = {
-      query: JSON.stringify({
+      query: {
         params: {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.APP_TYPE]: appCategory,
         },
-      }),
+      },
     };
     const messageIntent = {
       action: CONSTANTS.SEARCH,
@@ -664,41 +691,71 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
   ) {
     data = {
-      query: JSON.stringify({
+      query: {
         params: {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.LIFECYCLE_VALIDATION]: true,
           [CONSTANTS.APP_TYPE]: appCategory,
+        },
+      },
+    };
+    requestMap.params.intent.data = data;
+  }
+
+  // Add the PubSub URL if required
+  if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_URL] = getEnvVariable(CONSTANTS.PUB_SUB_URL);
+    if (getEnvVariable(CONSTANTS.DEVICE_MAC, false)) {
+      data.query.params[CONSTANTS.MACADDRESS_PARAM] = getEnvVariable(CONSTANTS.DEVICE_MAC);
+    }
+  }
+  // If the testType is userInterestProvider, send the discovery.launch params with registerProvider = false, then certification app will not register for userInterest provider.
+  if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.USERINTERESTPROVIDER) {
+    data = {
+      query: JSON.stringify({
+        params: {
+          [CONSTANTS.REGISTERPROVIDER]: false,
         },
       }),
     };
     requestMap.params.intent.data = data;
   }
 
+  // Stringify the query (The intent requires it be a string)
+  data.query = JSON.stringify(data.query);
   Cypress.env(CONSTANTS.CURRENT_APP_ID, appId);
 
   const requestTopic = UTILS.getTopic(appId);
   const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
 
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
-    cy.log('Discovery launch intent: ' + JSON.stringify(parsedIntent));
+    fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
     cy.sendMessagetoPlatforms(parsedIntent).then((result) => {
-      cy.log('Response from Firebolt platform: ' + JSON.stringify(result));
+      fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
 
-      // checking the connection status of a third-party app.
-      cy.thirdPartyAppHealthcheck(requestTopic, responseTopic).then((healthCheckResponse) => {
-        if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
-          throw Error(
-            'FCA not launched as 3rd party app or not subscribed to ' +
-              requestTopic +
-              '. Unable to get healthCheck response from FCA in ' +
-              UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
-              ' retries'
-          );
-        }
-        healthCheckResponse = JSON.parse(healthCheckResponse);
-        expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
-      });
+      if (
+        UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) === appId ||
+        UTILS.getEnvVariable(CONSTANTS.FCA_APP_LIST).find(
+          (ele) => UTILS.getEnvVariable(ele, false) === appId
+        )
+      ) {
+        // checking the connection status of a third-party app.
+        cy.thirdPartyAppHealthcheck(requestTopic, responseTopic).then((healthCheckResponse) => {
+          // checking whether valid healthCheck response is received
+          // if not received, throwing error with corresponding topic and retry count.
+          if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
+            throw Error(
+              'FCA not launched as 3rd party app or not subscribed to ' +
+                requestTopic +
+                '. Unable to get healthCheck response from FCA in ' +
+                UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
+                ' retries'
+            );
+          }
+          healthCheckResponse = JSON.parse(healthCheckResponse);
+          expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
+        });
+      }
     });
   });
 });
@@ -736,6 +793,31 @@ Cypress.Commands.add('convertJsonToHTML', (defaultDirectory, fileName) => {
     logger.error(err);
     return false;
   }
+});
+
+/**
+ * @module commands
+ * @function mergeFireboltCallJsons
+ * @description Merges properties of two JSON objects into one, prioritizing the values from the second JSON object.
+ * @param {*} v1DataJson - JSON object
+ * @param {*} v2DataJson - The JSON object to merge with the first JSON object and that takes precedence.
+ * @returns {Object} The merged JSON object.
+ * @example
+ * mergeFireboltCallJsons(v1JSON, v2DataJSON);
+ */
+
+Cypress.Commands.add('mergeFireboltCallJsons', (v1DataJson, v2DataJson) => {
+  const combinedJsonData = { ...v1DataJson };
+  for (const [key, value] of Object.entries(v2DataJson)) {
+    // If the key exists in combinedJsonData, merge the objects
+    if (combinedJsonData.hasOwnProperty(key)) {
+      combinedJsonData[key] = { ...combinedJsonData[key], ...value };
+    } else {
+      // Otherwise, simply assign the value
+      combinedJsonData[key] = value;
+    }
+  }
+  return combinedJsonData;
 });
 
 /**
