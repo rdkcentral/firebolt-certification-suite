@@ -649,7 +649,7 @@ Cypress.Commands.add('censorData', (method, response) => {
  * cy.launchApp('firebolt', 'foo')
  * cy.launchApp('certification', 'foo')
  */
-Cypress.Commands.add('launchApp', (appType, appCallSign) => {
+Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   // use the firebolt command Discovery.launch to launch the app. If app id given, use the app id
   // else get the default app id from environment variable.
 
@@ -660,7 +660,11 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // create the request map
   // basic intent to be sent to the app on launch
-  let requestMap = { method: CONSTANTS.DISCOVERY_LAUNCH, params: { appId: appId } };
+  let requestMap = {
+    method: CONSTANTS.DISCOVERY_LAUNCH,
+    params: { appId: appId },
+    deviceIdentifier: deviceIdentifier,
+  };
   let appCategory, data;
   if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
     appCategory =

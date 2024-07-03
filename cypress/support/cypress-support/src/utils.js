@@ -182,9 +182,9 @@ function overideParamsFromConfigModule(overrideParams) {
  * @description Function to fetch the required topics.
  */
 
-function getTopic(appIdentifier = null, operation = null) {
+function getTopic(appIdentifier = null, operation = null, deviceIdentifier) {
   let topic;
-  let deviceMac = getEnvVariable(CONSTANTS.DEVICE_MAC);
+  let deviceMac = deviceIdentifier ? deviceIdentifier : getEnvVariable(CONSTANTS.DEVICE_MAC);
   if (deviceMac.length <= 5 || !deviceMac || deviceMac == undefined) {
     assert(
       false,
