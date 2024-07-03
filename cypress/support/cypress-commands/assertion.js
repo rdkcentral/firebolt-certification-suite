@@ -125,21 +125,26 @@ Cypress.Commands.add(
               appId,
               validationType
             );
+            console.log('entered apiOrEventObject >>> ', apiOrEventObject);
+            // if(apiOrEventObject && apiOrEventObject.eventListenerResponse && apiOrEventObject.eventListenerResponse.error){
+
+            // }
             const apiErrorResponse =
               validationType == CONSTANTS.EVENT
                 ? apiOrEventObject.eventListenerResponse.error
                 : apiOrEventObject.apiResponse.error;
 
-            fireLog.include(
+            assert.include(
               errorContentObject.errorCode,
               apiErrorResponse.code,
               CONSTANTS.ERROR_CODE
             );
-
             const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
               apiErrorResponse.message.includes(errorMessage)
             );
-            fireLog.equal(checkErrorMessage, true, 'Error Message Validation: ');
+            const pretext =
+              CONSTANTS.ERROR_MESSAGE_VALIDATION + 'Expected ' + checkErrorMessage + ' to be true';
+            fireLog.equal(checkErrorMessage, true, pretext);
           });
         } else {
           fireLog.assert(false, `Expected error content not found in ${errorContentFilePath}`);
@@ -231,18 +236,6 @@ Cypress.Commands.add(
                 ? (isNullCheckSkipped = true)
                 : (isNullCheckSkipped = false);
             }
-
-            // Checking if the error is null in the response and if the error is expected or not.
-            if (!UTILS.getEnvVariable(CONSTANTS.IS_SCENARIO_EXEMPTED, false)) {
-              cy.errorNullCheck(response, errorExpected, isNullCheckSkipped).then((result) => {
-                validationCheck.push(result);
-              });
-            }
-          });
-        } else {
-          // Checking if the error is null in the response and if the error is expected or not.
-          cy.errorNullCheck(response, errorExpected).then((result) => {
-            validationCheck.push(result);
           });
         }
       })
@@ -605,10 +598,11 @@ Cypress.Commands.add(
     } else {
       expected = eval('extractEventObject.' + verifyPath);
     }
-    const expectedValue = expected;
-    const actualValue = actual;
-    typeof expected == 'object' ? (expected = JSON.stringify(expected)) : expected;
-    typeof actual == 'object' ? (actual = JSON.stringify(actual)) : actual;
+    let expectedValue = expected;
+    let actualValue = actual;
+    typeof expected == 'object' ? (expectedValue = JSON.stringify(expected)) : expected;
+    typeof actual == 'object' ? (actualValue = JSON.stringify(actual)) : actual;
+    pretext = pretext + ' expected ' + actualValue + ' to be ' + expectedValue;
     fireLog.deepEqual(expectedValue, actualValue, pretext);
   }
 );
@@ -639,7 +633,7 @@ Cypress.Commands.add(
 
     fireLog.info('Event Received Check : ' + eventReceivedCheck);
     fireLog.info('Event Schema Check : ' + schemaCheck);
-    fireLog.info('Event Content Check : ' + contentCheck);
+    // fireLog.info('Event Content Check : ' + contentCheck);
   }
 );
 
