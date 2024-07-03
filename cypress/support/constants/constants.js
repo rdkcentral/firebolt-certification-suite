@@ -139,7 +139,8 @@ module.exports = {
   EXTRACTEDAPI_PATH: 'extractedApiObject.apiResponse.',
   FAIL: 'FAIL',
   FAIL_ON_PUBSUB_CONNECTION_ERROR: 'failOnPubSubConnectionError',
-  FAILED_TO_INITIATE_INTERACTIONS_SERVICE: 'Failed to initiate firebolt interactions collection service',
+  FAILED_TO_INITIATE_INTERACTIONS_SERVICE:
+    'Failed to initiate firebolt interactions collection service',
   FAILED_TO_PARSE_LIEFECYCLE_ERROR:
     'Failed to parse error object from response while setting lifecycle state. Response received : ',
   FAILED_TO_SET_LIFECYCLE_STATE:
@@ -402,7 +403,8 @@ module.exports = {
     VISIBILITYSTATE: 'visibilityState',
     REGISTERPROVIDERHANDLER: 'registerProviderHandler',
   },
-  INTERACTIONS_SERVICE_ENABLED: 'Firebolt interactions collection service is already enabled in before hook',
+  INTERACTIONS_SERVICE_ENABLED:
+    'Firebolt interactions collection service is already enabled in before hook',
   INTERACTIONS_METRICS: 'interactionsMetrics',
   INTERACTIONS_SERVICE_NOT_ACTIVE:
     'Firebolt interactions collection service not active. To use the service, pass interactionsMetrics environment variable as true',
