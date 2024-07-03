@@ -435,6 +435,41 @@ Given(
 
 /**
  * @module validations
+ * @function Interactions metrics collection process is '(initiated|stopped)'
+ * @description To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
+ * @param {String} action - initiated or stopped
+ * @example
+ * Given Interactions metrics collection process is inititated
+ * Given Interactions metrics collection process is stopped
+ */
+Given(/Interactions metrics collection process is '(initiated|stopped)'/, (action) => {
+  if (
+    (action == CONSTANTS.INITIATED &&
+      UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) != true) ||
+    (action == CONSTANTS.STOPPED &&
+      UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED) == true)
+  ) {
+    cy.startOrStopInteractionsService(action).then((response) => {
+      if (response) {
+        Cypress.env(
+          CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED,
+          action == CONSTANTS.INITIATED ? true : false
+        );
+      } else {
+        const message =
+          action == CONSTANTS.INITIATED
+            ? CONSTANTS.FAILED_TO_INITIATE_INTERACTIONS_SERVICE
+            : CONSTANTS.FAILED_TO_STOP_INTERACTIONS_SERVICE;
+        fireLog.assert(false, message);
+      }
+    });
+  } else {
+    cy.log(CONSTANTS.INTERACTIONS_SERVICE_ENABLED);
+  }
+});
+
+/**
+ * @module validations
  * @function And '(.+)' platform responds to '([^']*)'(?: '([^']*)')? (get|set) API(?: with '(.+)')?
  * @description Performing a validation against the source of truth for the given API response
  * @param {String} sdk - name of the sdk.

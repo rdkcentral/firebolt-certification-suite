@@ -139,10 +139,12 @@ module.exports = {
   EXTRACTEDAPI_PATH: 'extractedApiObject.apiResponse.',
   FAIL: 'FAIL',
   FAIL_ON_PUBSUB_CONNECTION_ERROR: 'failOnPubSubConnectionError',
+  FAILED_TO_INITIATE_INTERACTIONS_SERVICE: 'Failed to initiate firebolt interactions collection service',
   FAILED_TO_PARSE_LIEFECYCLE_ERROR:
     'Failed to parse error object from response while setting lifecycle state. Response received : ',
   FAILED_TO_SET_LIFECYCLE_STATE:
     'Failed to set lifecycle state due to the following error received from platform: ',
+  FAILED_TO_STOP_INTERACTIONS_SERVICE: 'Failed to stop firebolt interactions collection service',
   FCA_APP_LIST: 'fcaAppList',
   FCS: 'fcs',
   FCS_MODULEREQID_PATH: 'cypress/fixtures/objects/moduleReqId/moduleReqId.json',
@@ -186,6 +188,7 @@ module.exports = {
   IS_RPC_ONLY: 'isRpcOnlyValidation',
   IS_SAME_APP_TRANSITION: 'isSameAppTransition',
   IS_SCENARIO_EXEMPTED: 'isScenarioExempted',
+  IS_INTERACTIONS_SERVICE_ENABLED: 'isInteractionsServiceEnabled',
   JOBID: 'jobId',
   JSON_FILE_EXTENSION: '_CoreSuiteReport.json',
   JWT: 'jwt',
@@ -297,6 +300,9 @@ module.exports = {
   PARAMS: 'Params',
   PASS: 'PASS',
   PASSWORD: 'password',
+  PERFORMANCE_METRICS: 'performanceMetrics',
+  PERFORMANCE_METRICS_NOT_ACTIVE:
+    'Performance metrics service not active. To use perforance metrics service, pass performanceMetrics environment variable as true',
   PLATFORM_INVALID_RESPONSE_LOG:
     'Platform returned response in invalid format, which could lead to failures in validations. Response must be an object',
   PLATFORM_NOT_SUPPORT_LOG: 'Platform does not support method',
@@ -327,9 +333,10 @@ module.exports = {
     SETLIFECYCLESTATE: 'fcs.setLifecycleState',
     FETCH_EVENT_RESPONSE: 'fcs.fetchEventResponse',
     PERFORMANCE_THRESHOLD_VALIDATOR: 'performance.fetchPerformanceThreshold',
+    SETFIREBOLTINTERACTIONSHANDLER: 'performance.setFireboltInteractionsHandler',
     CREATE_MARKER: 'performance.createMarker',
   },
-  PERFORMANCE_METRICS: 'performanceMetrics',
+  REQUEST_MAP_INTERACTIONS_SERVICE: 'Request map for firebolt interactions service : ',
   RESPONSE: 'Response: ',
   RESPONSE_NOT_FOUND: 'No_Response',
   RESPONSE_STATUS: {
@@ -381,6 +388,7 @@ module.exports = {
   TASK: {
     CALLLIFECYCLE: 'callLifecycle',
     CALLMETHOD: 'callMethod',
+    FIREBOLTINTERACTIONSHANDLER: 'fireboltInteractionsHandler',
     REGISTEREVENT: 'registerEvent',
     GETEVENTRESPONSE: 'getEventResponse',
     GETMETHODRESPONSE: 'getMethodResponse',
@@ -394,6 +402,10 @@ module.exports = {
     VISIBILITYSTATE: 'visibilityState',
     REGISTERPROVIDERHANDLER: 'registerProviderHandler',
   },
+  INTERACTIONS_SERVICE_ENABLED: 'Firebolt interactions collection service is already enabled in before hook',
+  INTERACTIONS_METRICS: 'interactionsMetrics',
+  INTERACTIONS_SERVICE_NOT_ACTIVE:
+    'Firebolt interactions collection service not active. To use the service, pass interactionsMetrics environment variable as true',
   TEST_TYPE: 'testType',
   THIRD_PARTY_APP: '3rd party app',
   THIRD_PARTY_APP_ID: 'default3rdPartyAppId',

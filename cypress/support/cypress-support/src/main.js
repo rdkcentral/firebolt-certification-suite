@@ -69,9 +69,16 @@ export default function (module) {
         }
       });
     } else {
-      cy.log(
-        'Performance metrics service not active. To use perforance metrics service, pass performanceMetrics environment variable as true'
-      );
+      cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
+    }
+    if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS) == true) {
+      cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
+        if (response) {
+          Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
+        }
+      });
+    } else {
+      cy.log(CONSTANTS.INTERACTIONS_SERVICE_NOT_ACTIVE);
     }
 
     // Merge fireboltCalls
@@ -186,6 +193,13 @@ export default function (module) {
           cy.startOrStopPerformanceService(CONSTANTS.STOPPED).then((response) => {
             if (response) {
               Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false);
+            }
+          });
+        }
+        if (UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED) == true) {
+          cy.startOrStopInteractionsService(CONSTANTS.STOPPED).then((response) => {
+            if (response) {
+              Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false);
             }
           });
         }
