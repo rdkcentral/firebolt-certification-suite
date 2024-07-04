@@ -58,7 +58,16 @@ class eventObject {
       this.eventSchemaResult = response.eventSchemaResult;
       this.eventTime = response.eventTime;
     } else {
-      assert(false, 'Platform does not trigger event');
+      cy.logValidationResult(
+        ' Did not receive eventResponse,' + ' Actual: ' + response.eventResponse,
+        CONSTANTS.FAIL,
+        CONSTANTS.SKIPPED,
+        CONSTANTS.SKIPPED
+      ).then(() => {
+        const pretext = 'Event Not Received : ';
+
+        fireLog.equal(response.eventResponse, content, pretext);
+      });
     }
   }
 }

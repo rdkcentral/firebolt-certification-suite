@@ -497,9 +497,9 @@ Cypress.Commands.add(
         );
         cy.assertValidationsForEvent(
           'Schema Validation Failed',
-          'FAIL',
+          verifyPath,
           'PASS',
-          'Event Schema Validation'
+          'Event Schema Validation :'
         );
       } else if (eventSchemaStatus && eventSchemaStatus.status === 'PASS') {
         // Doing event content validation

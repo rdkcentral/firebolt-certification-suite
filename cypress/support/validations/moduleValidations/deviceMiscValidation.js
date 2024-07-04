@@ -39,9 +39,11 @@ export function deviceMiscValidation(method, validationTypeObject, apiOrEventObj
     case CONSTANTS.DEVICE_HDCP:
     case CONSTANTS.DEVICE_HDR:
       for (const key in response) {
-        cy.log(`Expected ${key} value to be boolean`).then(() => {
-          assert.isBoolean(response[key], 'Expected to be');
-        });
+        cy.log(`Miscellaneous Validation for ${method}: Expected ${key} value to be boolean`).then(
+          () => {
+            assert.isBoolean(response[key], 'Expected to be');
+          }
+        );
       }
       break;
     case CONSTANTS.DEVICE_SCREENRESOLUTION:
@@ -52,7 +54,9 @@ export function deviceMiscValidation(method, validationTypeObject, apiOrEventObj
       const isPresent = validationTypeObject.type.some((resolution) => {
         return resolution[0] === response[0] && resolution[1] === response[1];
       });
-      cy.log(`Expected [${response}] to be present in [${deviceResolution}]`).then(() => {
+      cy.log(
+        `Miscellaneous Validation for ${method}: Expected [${response}] to be present in [${deviceResolution}]`
+      ).then(() => {
         assert.equal(true, isPresent, 'Expected to be present');
       });
       break;
