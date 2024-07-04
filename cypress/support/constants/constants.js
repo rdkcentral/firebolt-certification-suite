@@ -77,6 +77,7 @@ module.exports = {
   DEFAULT_TEST_DATA: 'defaultTestData.json',
   DEREFERENCE_OPENRPC: 'dereferenceOpenRPC',
   DEVICE: 'device',
+  DEVICE1: 'device1',
   DEVICEMANIFESTDATA: 'deviceManifestData',
   DEVICEMODULEFORMAT: 'deviceModelFormat',
   DEVICE_AUDIO: 'device.audio',

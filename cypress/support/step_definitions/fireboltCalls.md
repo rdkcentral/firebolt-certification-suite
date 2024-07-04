@@ -25,10 +25,12 @@
 | appId | 3rd party app id |
 | sdk | name of the sdk |
 | key | key name of the request data. |
+| deviceIdentifier | Contains environment variable name which is having device mac. |
 
 ### Examples:
 * `Given '3rd party app' invokes the 'Firebolt' API to 'get device id'`
 * `Given 'test.test.test' invokes the 'Firebolt' API to 'get device id'`
+* `And '3rd party app' invokes the 'Firebolt' API to 'get device id' on 'device1' device`
 
 ## '(.+)' registers for the '(.+)' event using the '(.+)' API
 

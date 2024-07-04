@@ -108,10 +108,12 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
  * @param {String} appId - 3rd party app id.
  * @param {String} sdk - sdk name.
  * @param {String} key - key name of the firebolt data contains method/param/context.
+ * @param {String} deviceIdentifier - Contains environment variable name which is having device mac.
  * @example
  * Given '3rd party app' invokes the 'Firebolt' API to 'get device id'
  * Given 'test.test.test' invokes the 'Firebolt' API to 'get device id'
  * Given 'secondary 3rd party app' invokes the 'Firebolt' API to 'get device id'
+ * And '3rd party app' invokes the 'Firebolt' API to 'get device id' on 'device1' device
  */
 Given(
   /'(.+)' invokes the '(.+)' API to '(.+)'(?: on '(.+)' device)?$/,
@@ -128,16 +130,16 @@ Given(
       if (
         deviceIdentifier &&
         !UTILS.getEnvVariable(deviceIdentifier, false) &&
-        deviceIdentifier != 'device1'
+        deviceIdentifier != CONSTANTS.DEVICE1
       ) {
         fireLog.assert(
           false,
-          `Unable to find the ${deviceIdentifier} envitonment value, Verify the value of ${deviceIdentifier} in configModule or cli command.}`
+          `Unable to find the ${deviceIdentifier} environment value, Verify the value of ${deviceIdentifier} in configModule or cli command.}`
         );
       } else if (deviceIdentifier && UTILS.getEnvVariable(deviceIdentifier, false)) {
         deviceIdentifier = UTILS.getEnvVariable(deviceIdentifier, false);
         cy.launchApp(CONSTANTS.CERTIFICATION, appId, deviceIdentifier);
-      } else if (deviceIdentifier === 'device1') {
+      } else if (deviceIdentifier === CONSTANTS.DEVICE1) {
         deviceIdentifier = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC);
       }
     }).then(() => {
@@ -179,7 +181,7 @@ Given(
           );
 
           fireLog.info(
-            `Call from app: ${appId}, device: ${deviceIdentifier} - method: ${method} params: ${JSON.stringify(param)}`
+            `Call from app: ${appId}, device: ${deviceIdentifier || UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)} - method: ${method} params: ${JSON.stringify(param)}`
           );
           if (Cypress.env('isRpcOnlyValidation')) {
             fireLog.info(
@@ -204,7 +206,7 @@ Given(
                   cy.censorData(method, dataToBeCensored).then((maskedResult) => {
                     const responseType = result.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
                     fireLog.info(
-                      `Response from app: ${appId}, device:  ${deviceIdentifier} - ${JSON.stringify(maskedResult[responseType])}`
+                      `Response from app: ${appId}, device:  ${deviceIdentifier || UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)} - ${JSON.stringify(maskedResult[responseType])}`
                     );
                   });
 
