@@ -42,8 +42,8 @@ Feature: UserGrants
 
     # Testing with grantPolicy having with scope device and grant access, so all the apps in that device may have the access
     # provide access using any 3rd party and check in another 3rd party
-    # Added @notSupported as glue is not implemented yet.
-    @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
+    # Involves 2 apps, Will be handled in FIRECERT-2194
+    @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
     Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with scope device
         Given the environment has been set up for 'userGrants' tests
         # 3rd party app
@@ -53,7 +53,7 @@ Feature: UserGrants
         Then 'Firebolt' platform responds with 'true for watched content in discovery'
         When 1st party app invokes the 'Firebolt' API to 'check if capabilities is granted for discovery watched'
         Then 'Firebolt' platform responds with 'true for capabilities granted'
-        ###### And App will be in 'closed' state
+        When '3rd party app' invokes the 'Firebolt' API to 'close app with user exit'
         # 1st part app
         ###### And 1st party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'notify watched content with only entityid'
@@ -63,6 +63,7 @@ Feature: UserGrants
 
     # Deny access with scope device, so all the apps in that device may not have the access
     # launch a 3rd party and provide acess using any 3rd party and check in another 3rd party
+    # Involves 2 apps, Will be handled in FIRECERT-2194
     @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
     Scenario: UserGrants.Capabilities - Negative Scenario: Validate Capability access denied for pinChallenge with scope device
         Given the environment has been set up for 'userGrants' tests
@@ -79,6 +80,27 @@ Feature: UserGrants
         Then 'Firebolt' platform responds with 'invalid request for discovery watched'
         When 1st party app invokes the 'Firebolt' API to 'check if capabilities is granted for discovery watched'
         Then 'Firebolt' platform responds with 'false for capabilities granted'
+
+    # Testing with grantPolicy having device level grant access and check in another device
+    # Involves multiple devices, Will be handled in FIRECERT-2195
+    @Usergrants @coreSDK @sdk @transport @notSupported
+    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capability permission in 2 diff devices
+        Given the environment has been set up for 'userGrants' tests
+        # 1st device
+        And 3rd party 'certification' app is launched
+        And Framework registers 'ackchallenge' test provider
+        When '3rd party app' invokes the 'Firebolt' API to 'fetch device distributor'
+        Then 'Firebolt' platform responds with 'expected device distributor'
+        When '3rd party app' invokes the 'Firebolt' API to 'check if capabilities is granted for device distributor'
+        Then 'Firebolt' platform responds with 'true for capabilities granted'
+        # 2nd device
+        When 3rd party 'certification' app is launched
+        # in another device
+        And '3rd party app' invokes the 'Firebolt' API to 'fetch device distributor'
+        Then 'Firebolt' platform responds with 'expect error for device distributor'
+        When '3rd party app' invokes the 'Firebolt' API to 'check if capabilities is granted for device distributor'
+        Then 'Firebolt' platform responds with 'true for capabilities granted'
+
 
     # If lifespan value forever only once ask for grant until we clear the given grant
     # Case-1: Allowing the grant and validating the result
@@ -144,7 +166,7 @@ Feature: UserGrants
         When User 'stops' recording lifecycle history for '3rd party app'
         Then User validates lifecycle history for '3rd party app' with 'background:foreground'
         #Case-2
-        ###### And App will be in 'closed' state
+        When '3rd party app' invokes the 'Firebolt' API to 'close app with user exit'
         When 3rd party 'certification' app is launched
         And User set response for 'set pinchallenge correct pin'
         And User 'starts' recording lifecycle history for '3rd party app'
@@ -171,7 +193,7 @@ Feature: UserGrants
         When User 'stops' recording lifecycle history for '3rd party app'
         Then User validates lifecycle history for '3rd party app' with 'background:foreground'
         #Case-2
-        ###### And App will be in 'closed' state
+        When '3rd party app' invokes the 'Firebolt' API to 'close app with user exit'
         When 3rd party 'certification' app is launched
         And User set response for 'set pinchallenge wrong pin'
         And User 'starts' recording lifecycle history for '3rd party app'
