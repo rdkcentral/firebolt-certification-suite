@@ -136,7 +136,7 @@ module.exports = {
   EXTERNAL_MODULEREQID_PATH: 'cypress/fixtures/external/objects/moduleReqId/moduleReqId.json',
   EXTERNAL_PATH: 'cypress/fixtures/external/modules/',
   EXTERNAL_PREREQUISITE_DATA: './cypress/fixtures/external/PreRequisiteData.json',
-  EXTRACTEDAPI_PATH: 'extractedApiObject.response.',
+  EXTRACTEDAPI_PATH: 'extractedApiObject.apiResponse.',
   FAIL: 'FAIL',
   FAIL_ON_PUBSUB_CONNECTION_ERROR: 'failOnPubSubConnectionError',
   FAILED_TO_PARSE_LIEFECYCLE_ERROR:
@@ -218,6 +218,7 @@ module.exports = {
   LIFECYCLE_HISTORY_RESPONSE: 'Lifecycle history response fetched from application: ',
   LIFECYCLE_HISTORY_SCHEMA_PATH: 'schemas/lifecycleHistorySchema',
   LIFECYCLE_INTENT: 'Lifecycle intent sent to application: ',
+  LIFECYCLE_METHOD_LIST: ['Lifecycle.ready', 'Lifecycle.state', 'Lifecycle.close'],
   LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle events generated ',
   LIFECYCLE_STATE: 'Lifecycle.state',
   LIFECYCLE_STATES: {
@@ -234,6 +235,7 @@ module.exports = {
   LIFECYCLE_VALIDATION_METHOD: 'Lifecycle.validation',
   LIMITADTRACKING_OFF: 'limitAdTrackingOFF',
   LIMITADTRACKING_ON: 'limitAdTrackingON',
+  LISTENING: 'listening',
   LONGPOLL_TIMEOUT: 15000,
   MACADDRESS_PARAM: 'macaddress',
   MESSAGE_QUEUE: 'messageQueue',
@@ -348,6 +350,7 @@ module.exports = {
   SCHEMA_VALIDATION_RESPONSE: 'schemaValidationResponse',
   SCHEMA_VALIDATION_STATUS: 'schemaValidationStatus',
   SCHEMA_VALIDATION_STATUS_CODE: ['PASS', 'FAIL', 'SKIPPED', 'PENDING'],
+  SDK_VERSION: 'sdkVersion',
   SEARCH: 'search',
   SET: 'set',
   SET_APP_STATE: 'Application state set to ',
