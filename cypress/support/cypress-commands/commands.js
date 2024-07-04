@@ -658,9 +658,6 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
       ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
       : UTILS.checkForSecondaryAppId(appCallSign); // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
-  // create the request map
-  // basic intent to be sent to the app on launch
-  let requestMap = { method: CONSTANTS.DISCOVERY_LAUNCH, params: { appId: appId } };
   let appCategory, data;
   if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
     appCategory =
@@ -674,16 +671,6 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
           [CONSTANTS.APP_TYPE]: appCategory,
         },
       },
-    };
-    const messageIntent = {
-      action: CONSTANTS.SEARCH,
-      data: data,
-      context: { source: CONSTANTS.DEVICE },
-    };
-
-    requestMap = {
-      method: CONSTANTS.DISCOVERY_LAUNCH,
-      params: { [CONSTANTS.APP_ID]: appId, [CONSTANTS.INTENT]: messageIntent },
     };
   }
   if (
@@ -699,12 +686,18 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
         },
       },
     };
-    const messageIntent = {
-      action: CONSTANTS.SEARCH,
-      data: data,
-    };
-    requestMap.params.intent = messageIntent;
   }
+  const messageIntent = {
+    action: CONSTANTS.SEARCH,
+    data: data,
+    context: { source: CONSTANTS.DEVICE },
+  };
+  // intent to be sent to the app on launch
+  // create the request map
+  const requestMap = {
+    method: CONSTANTS.DISCOVERY_LAUNCH,
+    params: { [CONSTANTS.APP_ID]: appId, [CONSTANTS.INTENT]: messageIntent },
+  };
 
   // Add the PubSub URL if required
   if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
