@@ -141,6 +141,7 @@ Given(
         cy.launchApp(CONSTANTS.CERTIFICATION, appId, deviceIdentifier);
       } else if (deviceIdentifier === CONSTANTS.DEVICE1) {
         deviceIdentifier = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC);
+        cy.launchApp(CONSTANTS.CERTIFICATION, appId, deviceIdentifier);
       }
     }).then(() => {
       const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
