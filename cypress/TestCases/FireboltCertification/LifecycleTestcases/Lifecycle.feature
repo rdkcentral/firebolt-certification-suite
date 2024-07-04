@@ -20,14 +20,14 @@ Feature: Lifecycle
 
     @Lifecycle @sdk @transport @coreSDK @regression
     Scenario: Lifecycle R*4.6 Validate lifecycle.state - Get the current state
-        Given the environment has been set up for 'lifecycle' tests
+        Given the environment has been set up for 'lifeCycleApi' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
     @Lifecycle @coreSDK @regression @sdk @transport
     Scenario Outline: Lifecycle R*4.3 Validate lifecycle.close - '<Scenario>' expecting error
-        Given the environment has been set up for 'lifecycle' tests
+        Given the environment has been set up for 'lifeCycleApi' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Method_Content>'
@@ -47,7 +47,7 @@ Feature: Lifecycle
 
     @Lifecycle @coreSDK @regression @sdk @transport
     Scenario Outline: Lifecycle R*4.3 Validate lifecycle.close - Positive Scenario - '<Scenario>'
-        Given the environment has been set up for 'lifecycle' tests
+        Given the environment has been set up for 'lifeCycleApi' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with 'null for lifecycle close'
@@ -61,7 +61,7 @@ Feature: Lifecycle
 
     @Lifecycle @sdk @transport @coreSDK @regression
     Scenario: Lifecycle R*4.5 Validate 'lifecycle.finished' - expecting error
-        Given the environment has been set up for 'lifecycle' tests
+        Given the environment has been set up for 'lifeCycleApi' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'notify that the app is done unloading'
         Then 'Firebolt' platform responds with 'error for lifecycle finished'
