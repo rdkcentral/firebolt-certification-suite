@@ -125,7 +125,11 @@ Given(
 
     // Unable to find the ${envAppIdKey} value in the env, please add the value in configModule/constants/config.json
     cy.then(() => {
-      if (deviceIdentifier && !UTILS.getEnvVariable(deviceIdentifier, false)) {
+      if (
+        deviceIdentifier &&
+        !UTILS.getEnvVariable(deviceIdentifier, false) &&
+        deviceIdentifier != 'device1'
+      ) {
         fireLog.assert(
           false,
           `Unable to find the ${deviceIdentifier} envitonment value, Verify the value of ${deviceIdentifier} in configModule or cli command.}`
@@ -133,6 +137,8 @@ Given(
       } else if (deviceIdentifier && UTILS.getEnvVariable(deviceIdentifier, false)) {
         deviceIdentifier = UTILS.getEnvVariable(deviceIdentifier, false);
         cy.launchApp(CONSTANTS.CERTIFICATION, appId, deviceIdentifier);
+      } else if (deviceIdentifier === 'device1') {
+        deviceIdentifier = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC);
       }
     }).then(() => {
       const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
