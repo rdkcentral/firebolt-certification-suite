@@ -564,12 +564,11 @@ Given(
       if (!UTILS.getEnvVariable('runtime', false)) {
         Cypress.env('runtime', {});
       }
-      let object = UTILS.getEnvVariable(CONSTANTS.RUNTIME)
+      let object = UTILS.getEnvVariable(CONSTANTS.RUNTIME);
       object = Object.assign(object, {
         attribute: attribute,
         value: value,
-      })
-
+      });
 
       // runtime environment variable holds attribute and value
       Cypress.env('runtime', object);
@@ -870,25 +869,25 @@ Given(/'(.+)' invokes the '(.+)' get API(?: '(.+)')?$/, async (appId, sdk, fireb
 
                 result = JSON.parse(result);
                 cy.updateResponseForFCS(method, params, result).then((updatedResponse) => {
-                // Create a deep copy to avoid reference mutation
-                const dataToBeCensored = _.cloneDeep(result);
+                  // Create a deep copy to avoid reference mutation
+                  const dataToBeCensored = _.cloneDeep(result);
 
-                // Call the 'censorData' command to hide sensitive data
-                cy.censorData(method, dataToBeCensored).then((maskedResult) => {
-                  fireLog.info(`Response from ${appId}: ${JSON.stringify(maskedResult)}`);
+                  // Call the 'censorData' command to hide sensitive data
+                  cy.censorData(method, dataToBeCensored).then((maskedResult) => {
+                    fireLog.info(`Response from ${appId}: ${JSON.stringify(maskedResult)}`);
+                  });
+
+                  // Creating object with method name, param and response etc and storing it in a global list for further validation.
+                  const apiAppObject = new apiObject(
+                    method,
+                    param,
+                    context,
+                    updatedResponse,
+                    expected,
+                    appId
+                  );
+                  UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
                 });
-
-                // Creating object with method name, param and response etc and storing it in a global list for further validation.
-                const apiAppObject = new apiObject(
-                  method,
-                  param,
-                  context,
-                  updatedResponse,
-                  expected,
-                  appId
-                );
-                UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
-              });
               }
             });
           });
@@ -1070,9 +1069,7 @@ Given(
                   assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
                 }
                 result = JSON.parse(result);
-                fireLog.info(
-                  `Response from ${appId}: ${JSON.stringify(result.result)}`
-                );
+                fireLog.info(`Response from ${appId}: ${JSON.stringify(result.result)}`);
                 if (result && result.result && result.result.hasOwnProperty(CONSTANTS.LISTENING)) {
                   const eventResponse = {
                     eventListenerId: result.result.event + '-' + result.id,
@@ -1081,22 +1078,22 @@ Given(
                   result.result = eventResponse;
                 }
                 cy.updateResponseForFCS(event, params, result).then((updatedResponse) => {
-                // If event and params are not supported setting isScenarioExempted as true for further validation.
-                if (UTILS.isScenarioExempted(event, eventParams)) {
-                  Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
-                }
+                  // If event and params are not supported setting isScenarioExempted as true for further validation.
+                  if (UTILS.isScenarioExempted(event, eventParams)) {
+                    Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
+                  }
 
-                // Creating object with event name, params and response etc and storing it in a global list for further validation.
-                const eventAppObject = new eventObject(
-                  event,
-                  eventParams,
-                  context,
-                  updatedResponse,
-                  appId
-                );
-                UTILS.getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).push(eventAppObject);
+                  // Creating object with event name, params and response etc and storing it in a global list for further validation.
+                  const eventAppObject = new eventObject(
+                    event,
+                    eventParams,
+                    context,
+                    updatedResponse,
+                    appId
+                  );
+                  UTILS.getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).push(eventAppObject);
+                });
               });
-            });
             });
           }
         }
