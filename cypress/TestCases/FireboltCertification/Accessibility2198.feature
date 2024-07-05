@@ -6,7 +6,7 @@ Feature: Accessibility
 
     @Accessibility @coreSDK @sdk @transport
     Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
-        Given we test the 'CLOSEDCAPTION_SETTINGS' getters and setters
+        Given we test the 'CLOSEDCAPTIONS_SETTINGS' getters and setters
         When '3rd party app' registers for the 'Firebolt' event
         When '3rd party app' invokes the 'Firebolt' get API
         Given 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
@@ -52,7 +52,7 @@ Feature: Accessibility
 
     @Accessibility @coreSDK @sdk @transport
     Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario> with 'null' params
-        Given we test the 'CLOSEDCAPTION_SETTINGS' getters and setters
+        Given we test the 'CLOSEDCAPTIONS_SETTINGS' getters and setters
         When '3rd party app' registers for the 'Firebolt' event
         When '3rd party app' invokes the 'Firebolt' get API
         Given 1st party app invokes the 'Firebolt' API to set '<Method>' to 'null'

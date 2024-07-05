@@ -561,11 +561,18 @@ Given(
       let fireboltCallObject;
       let fireboltCallObjectErrorMessage = CONSTANTS.NO_DATA_FOR_THE_KEY + fireboltCallKey;
 
-      // runtime environment variable holds attribute and value
-      Cypress.env('runtime', {
+      if (!UTILS.getEnvVariable('runtime', false)) {
+        Cypress.env('runtime', {});
+      }
+      let object = UTILS.getEnvVariable(CONSTANTS.RUNTIME)
+      object = Object.assign(object, {
         attribute: attribute,
         value: value,
-      });
+      })
+
+
+      // runtime environment variable holds attribute and value
+      Cypress.env('runtime', object);
 
       // When fireboltCall object key passed fetching the object from the fireboltCalls data else reading it from environment variable
       if (fireboltCallKey) {
@@ -862,9 +869,9 @@ Given(/'(.+)' invokes the '(.+)' get API(?: '(.+)')?$/, async (appId, sdk, fireb
                 }
 
                 result = JSON.parse(result);
-
+                cy.updateResponseForFCS(method, params, result).then((updatedResponse) => {
                 // Create a deep copy to avoid reference mutation
-                const dataToBeCensored = _.cloneDeep(result.report.apiResponse);
+                const dataToBeCensored = _.cloneDeep(result);
 
                 // Call the 'censorData' command to hide sensitive data
                 cy.censorData(method, dataToBeCensored).then((maskedResult) => {
@@ -876,11 +883,12 @@ Given(/'(.+)' invokes the '(.+)' get API(?: '(.+)')?$/, async (appId, sdk, fireb
                   method,
                   param,
                   context,
-                  result.report,
+                  updatedResponse,
                   expected,
                   appId
                 );
                 UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
+              });
               }
             });
           });
@@ -1063,9 +1071,16 @@ Given(
                 }
                 result = JSON.parse(result);
                 fireLog.info(
-                  `Response from ${appId}: ${JSON.stringify(result.report.eventListenerResponse)}`
+                  `Response from ${appId}: ${JSON.stringify(result.result)}`
                 );
-
+                if (result && result.result && result.result.hasOwnProperty(CONSTANTS.LISTENING)) {
+                  const eventResponse = {
+                    eventListenerId: result.result.event + '-' + result.id,
+                    eventListenerResponse: result.result,
+                  };
+                  result.result = eventResponse;
+                }
+                cy.updateResponseForFCS(event, params, result).then((updatedResponse) => {
                 // If event and params are not supported setting isScenarioExempted as true for further validation.
                 if (UTILS.isScenarioExempted(event, eventParams)) {
                   Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
@@ -1076,11 +1091,12 @@ Given(
                   event,
                   eventParams,
                   context,
-                  result.report,
+                  updatedResponse,
                   appId
                 );
                 UTILS.getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).push(eventAppObject);
               });
+            });
             });
           }
         }
