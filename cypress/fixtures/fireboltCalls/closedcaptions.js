@@ -1,13 +1,13 @@
-exports.CLOSEDCAPTIONS = {
-  method: 'ClosedCaptions.{{attribute}}',
+exports.CLOSED_CAPTIONS_SETTINGS = {
+  method: 'manage_closedcaptions.{{attribute}}',
   params: null,
-  validationJsonPath: resolveAtRuntime(['result']),
+  validationJsonPath: 'result',
   setMethod: resolveAtRuntime('manage_closedcaptions.set{{attribute.uppercaseFirstChar}}'),
   setParams: resolveAtRuntime('value'),
   setValidationJsonPath: 'result',
   setContent: null,
-  event: resolveAtRuntime('manage_closedcaptions.on{{event.uppercaseFirstChar}}'),
-  eventValidationJsonPath: resolveAtRuntime(['eventResponse']),
+  event: resolveAtRuntime('manage_closedcaptions.on{{attribute.uppercaseFirstChar}}Changed'),
+  eventValidationJsonPath: 'eventResponse',
   content: {
     data: [
       {
