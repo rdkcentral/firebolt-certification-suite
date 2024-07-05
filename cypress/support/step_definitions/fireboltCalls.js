@@ -240,7 +240,7 @@ Given(
         if (deviceIdentifier && deviceName !== CONSTANTS.DEVICE1) {
           const publishMessage = UTILS.createIntentMessage(
             CONSTANTS.TASK.CALLMETHOD,
-            { method: 'Lifecycle.close', methodParams: { reason: 'userExit' } },
+            { method: 'Lifecycle.close', methodParams: { reason: 'error' } },
             { communicationMode: UTILS.getCommunicationMode() }
           );
           cy.sendMessagetoApp(requestTopic, responseTopic, publishMessage);
