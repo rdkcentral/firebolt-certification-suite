@@ -1,0 +1,66 @@
+Feature: Device
+
+    Background: Launch FCA for 'Device'
+        Given the environment has been set up for 'Device' tests
+        And 3rd party 'certification' app is launched
+
+    @Device @mfos @coreSDK @regression @sdk
+    Scenario Outline: Device.<Method> - Positive Scenario: <Scenario>
+        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with '<validation_key>'
+
+        Examples:
+            | Scenario                                                                    | Method                    | API_Key                                                                       | validation_key                     |
+            | Validate audioFormatSupported with codec aac                                | audioFormatSupported      | fetch audioFormatSupported with codec aac                                     | expected audioFormatSupported      |
+            | Validate audioFormatSupported with codec aac                                | audioFormatSupported      | fetch audioFormatSupported with codec ac3                                     | expected audioFormatSupported      |
+            | Validate audioFormatSupported with codec ac4                                | audioFormatSupported      | fetch audioFormatSupported with codec ac4                                     | expected audioFormatSupported      |
+            | Validate audioFormatSupported with codec dts-x                              | audioFormatSupported      | fetch audioFormatSupported with codec dts-x                                   | expected audioFormatSupported      |
+            | Validate audioFormatSupported with codec mpeg3                              | audioFormatSupported      | fetch audioFormatSupported with codec mpeg3                                   | expected audioFormatSupported      |
+            | Validate audioFormatSupported with codec opus                               | audioFormatSupported      | fetch audioFormatSupported with codec opus                                    | expected audioFormatSupported      |
+            | Validate audioFormatSupported with codec truehd                             | audioFormatSupported      | fetch audioFormatSupported with codec truehd                                  | expected audioFormatSupported      |
+            | Validate audioFormatSupported with codec unknown                            | audioFormatSupported      | fetch audioFormatSupported with codec unknown                                 | expected audioFormatSupported      |
+            | Validate audioFormatSupported with codec vorbis                             | audioFormatSupported      | fetch audioFormatSupported with codec vorbis                                  | expected audioFormatSupported      |
+            | Validate audioFormatSupported with audioFormatOptions codecLevel 4.2        | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions codecLevel 4.2             | expected audioFormatSupported      |
+            | Validate audioFormatSupported with audioFormatOptions codecProfile high     | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions codecProfile high          | expected audioFormatSupported      |
+            | Validate audioFormatSupported with audioFormatOptions codecProfile main     | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions codecProfile main          | expected audioFormatSupported      |
+            | Validate audioFormatSupported with audioFormatOptions codecProfile main10   | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions codecProfile main10        | expected audioFormatSupported      |
+            | Validate audioFormatSupported with audioFormatOptions codecProfile mp2lc    | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions codecProfile mp2lc         | expected audioFormatSupported      |
+            | Validate audioFormatSupported with audioFormatOptions codecProfile mp4he    | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions codecProfile mp4he         | expected audioFormatSupported      |
+            | Validate audioFormatSupported with audioFormatOptions codecProfile p0       | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions codecProfile p0            | expected audioFormatSupported      |
+            | Validate audioFormatSupported with audioFormatOptions codecProfile p2       | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions codecProfile p2            | expected audioFormatSupported      |
+            | Validate audioFormatSupported with audioFormatOptions container audio/mpeg  | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions container audio/mpeg       | expected audioFormatSupported      |
+            | Validate audioFormatSupported with audioFormatOptions container audio/mp4   | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions container audio/mp4        | expected audioFormatSupported      |
+            | Validate audioFormatSupported with audioFormatOptions container audio/ogg   | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions container audio/ogg        | expected audioFormatSupported      |
+            | Validate audioFormatSupported with audioFormatOptions container audio/webm  | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions container audio/webm       | expected audioFormatSupported      |         
+            | Validate audioFormatSupported with audioFormatOptions sampleRate 48         | audioFormatSupported      | fetch audioFormatSupported with audioFormatOptions sampleRate 48              | expected audioFormatSupported      |
+            | Validate videoFormatSupported with codec av1                                | videoFormatSupported      | fetch videoFormatSupported with codec av1                                     | expected videoFormatSupported      |
+            | Validate videoFormatSupported with codec hevc                               | videoFormatSupported      | fetch videoFormatSupported with codec hevc                                    | expected videoFormatSupported      |
+            | Validate videoFormatSupported with codec mpeg1                              | videoFormatSupported      | fetch videoFormatSupported with codec mpeg1                                   | expected videoFormatSupported      |
+            | Validate videoFormatSupported with codec mpeg2                              | videoFormatSupported      | fetch videoFormatSupported with codec mpeg2                                   | expected videoFormatSupported      |
+            | Validate videoFormatSupported with codec vp8                                | videoFormatSupported      | fetch videoFormatSupported with codec vp8                                     | expected videoFormatSupported      |
+            | Validate videoFormatSupported with codec vp9                                | videoFormatSupported      | fetch videoFormatSupported with codec vp9                                     | expected videoFormatSupported      |
+            | Validate videoFormatSupported with codec vp10                               | videoFormatSupported      | fetch videoFormatSupported with codec vp10                                    | expected videoFormatSupported      |         
+            | Validate videoFormatSupported with VideoFormatOptions atmos true            | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions atmos true                 | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions codecLevel 4.1        | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions codecLevel 4.1             | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions codecLevel 4.2        | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions codecLevel 4.2             | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions codecLevel 5.0        | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions codecLevel 5.0             | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions codecLevel 5.1        | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions codecLevel 5.1             | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions codecLevel high       | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions codecLevel high            | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions codecLevel main       | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions codecLevel main            | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions codecProfile high     | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions codecProfile high          | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions codecProfile main     | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions codecProfile main          | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions codecProfile main10   | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions codecProfile main10        | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions codecProfile p0       | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions codecProfile p0            | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions codecProfile p2       | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions codecProfile p2            | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions container video/mpeg  | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions container video/mpeg       | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions container video/mp2t  | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions container video/mp2t       | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions container video/mp4   | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions container video/mp4        | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions container video/webm  | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions container video/webm       | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions frameRate 30          | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions resolution frameRate 30    | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions hdr hdr10plus         | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions resolution hdr hdr10plus   | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions hdr dolbyVision       | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions resolution hdr dolbyVision | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions hdr hdr10             | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions resolution hdr hdr10       | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions hdr hlg               | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions resolution hdr hlg         | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions hdr sdr               | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions resolution hdr sdr         | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions hdr unknown           | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions resolution hdr unknown     | expected videoFormatSupported      |
+            | Validate videoFormatSupported with VideoFormatOptions hdr hdr10plus         | videoFormatSupported      | fetch videoFormatSupported with VideoFormatOptions resolution hdr hdr10plus   | expected videoFormatSupported      |
