@@ -431,3 +431,24 @@ While validating, if a key is present in both fcs-validation jsons (eg: cypress/
  * `And 'Firebolt' platform responds to '3rd party app' 'CLOSEDCAPTION_SETTINGS' get API`
  * `And 'Firebolt' platform responds to '1st party app' set API`
  * `And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' set API with 'INVALID_TYPE_PARAMS'`
+
+## '(.+)' platform (triggers|does not trigger) '(.*?)'(?: '(.*?)')? event(?: with '(.+)')?
+
+### Purpose: Performing a event validation against the source of truth
+
+### Params:
+| Param | Definition |
+| --- | --- |
+| sdk | sdk name |
+| eventExpected | eventExpected will used to decide expecting for an event or not. |
+| appId |app identtifier |
+| fireboltCallKey | key name passed to look for firebolt call object in fireboltCallData |
+| errorContent | Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS' |
+
+### Examples:
+ * `And 'Firebolt' platform triggers '1st party app' 'CLOSEDCAPTION_SETTINGS' event`
+ * `And 'Firebolt' platform triggers '1st party app' event`
+ * `And 'Firebolt' platform triggers '3rd party app' 'CLOSEDCAPTION_SETTINGS' event`
+ * `And 'Firebolt' platform does not trigger '3rd party app' 'CLOSEDCAPTION_SETTINGS' event`
+ * `And 'Firebolt' platform triggers '1st party app' event`
+ * `And 'Firebolt' platform triggers '1st party app' 'CLOSEDCAPTION_SETTINGS' event with 'INVALID_TYPE_PARAMS'`
