@@ -407,18 +407,228 @@
         "method": "device.audioFormatSupported",
         "params": "DEVICE_AUDIOCODEC"
     },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_CODEC_AAC": {
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AAC"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_CODEC_AC3": {
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AC3"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_CODEC_AC4": {
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AC4"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_CODEC_DTS-X": {
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_DTS-X"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_CODEC_MPEG3": {
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_MPEG3"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_CODEC_OPUS": {
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_OPUS"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_CODEC_TRUEHD": {
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_TRUEHD"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_CODEC_UNKNOWN": {
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_UNKNOWN"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_CODEC_VORBIS": {
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_VORBIS"
+    },
     "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_ATMOS": {
         "method": "device.audioFormatSupported",
         "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_ATMOS"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CODECLEVEL_4.2":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_CODECLEVEL_4.2"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CODECPROFILE_HIGH":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_HIGH"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CODECPROFILE_MAIN":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_MAIN"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CODECPROFILE_MAIN10":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_MAIN10"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CODECPROFILE_MP2LC":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_MP2LC"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CODECPROFILE_MP4HE":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_MP4HE"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CODECPROFILE_P0":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_P0"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CODECPROFILE_P2":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_P2"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CONTAINER_AUDIO/MPEG":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_CONTAINER_AUDIO/MPEG"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CONTAINER_AUDIO/MP4":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_CONTAINER_AUDIO/MP4"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CONTAINER_AUDIO/OGG":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_CONTAINER_AUDIO/OGG"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CONTAINER_AUDIO/WEBM":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_CONTAINER_AUDIO/WEBM"
+    },
+    "FETCH_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_SAMPLERATE_48":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_AUDIOFORMATOPTIONS_SAMPLERATE_48"
     },
     "FETCH_VIDEOFORMATSUPPORTED": {
         "method": "device.videoFormatSupported",
         "params": "DEVICE_VIDEOCODEC"
     },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_CODEC_AV1":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATSUPPORTED_WITH_CODEC_AV1"
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_CODEC_HEVC":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATSUPPORTED_WITH_CODEC_HEVC"
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_CODEC_MPEG1":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATSUPPORTED_WITH_CODEC_MPEG1"
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_CODEC_MPEG2":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATSUPPORTED_WITH_CODEC_MPEG2"
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_CODEC_VP8":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATSUPPORTED_WITH_CODEC_VP8"
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_CODEC_VP9":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATSUPPORTED_WITH_CODEC_VP9"
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_CODEC_VP10":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATSUPPORTED_WITH_CODEC_VP10"
+    },
     "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_RESOLUTION" :{
         "method": "device.videoFormatSupported",
         "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_RESOLUTION"  
     },
+
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_ATMOS_TRUE" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_ATMOS_TRUE"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECLEVEL_4.1" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CODECLEVEL_4.1"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECLEVEL_4.2" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CODECLEVEL_4.2"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECLEVEL_5.0" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CODECLEVEL_5.0"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECLEVEL_5.1" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CODECLEVEL_5.1"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECLEVEL_HIGH" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CODECLEVEL_HIGH"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECLEVEL_MAIN" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CODECLEVEL_MAIN"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECPROFILE_HIGH" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CODECPROFILE_HIGH"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECPROFILE_MAIN" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CODECPROFILE_MAIN"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECPROFILE_MAIN10" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CODECPROFILE_MAIN10"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECPROFILE_P0" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CODECPROFILE_P0"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECPROFILE_P2" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CODECPROFILE_P2"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CONTAINER_VIDEO/MPEG" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CONTAINER_VIDEO/MPEG"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CONTAINER_VIDEO/MP2T" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CONTAINER_VIDEO/MP2T"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CONTAINER_VIDEO/MP4" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CONTAINER_VIDEO/MP4"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CONTAINER_VIDEO/WEBM" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_CONTAINER_VIDEO/WEBM"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_FRAMERATE_30" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_FRAMERATE_30"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_HDR_HDR10PLUS" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_HDR_HDR10PLUS"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_HDR_DOLBYVISION" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_HDR_DOLBYVISION"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_HDR_HDR10" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_HDR_HDR10"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_HDR_HLG" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_HDR_HLG"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_HDR_SDR" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_HDR_SDR"  
+    },
+    "FETCH_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_HDR_UNKNOWN" :{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_VIDEOFORMATOPTIONS_HDR_UNKNOWN"  
+    },
+
     "FETCH_AUDIOMODE": {
         "method": "device.audioMode"
     },
@@ -486,6 +696,11 @@
         "params": "DEVICE_AUDIOCODEC_INVALID_TYPE_BOOLEAN",
         "expected": "error"
     },
+    "GET_AUDIOFORMATSUPPORTED_WITH_INVALID_AUDIOCODEC_DUMMYCODEC_KEY":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOCODEC_DUMMYCODEC_KEY",
+        "expected": "error"
+    },
     "GET_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_ATMOS_TYPE_INTERGER":{
         "method": "device.audioFormatSupported",
         "params": "DEVICE_AUDIOFORMATOPTIONS_ATMOS_TYPE_INTERGER",
@@ -495,6 +710,46 @@
         "method": "device.audioFormatSupported",
         "params": "DEVICE_AUDIOFORMATOPTIONS_ATMOS_TYPE_STRING",
         "expected": "error"
+    },
+    "GET_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CODECLEVEL_TYPE_INTERGER":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOFORMATOPTIONS_CODECLEVEL_TYPE_INTERGER",
+        "expected": "error"   
+    },
+    "GET_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CODECLEVEL_TYPE_BOOLEAN":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOFORMATOPTIONS_CODECLEVEL_TYPE_BOOLEAN",
+        "expected": "error"   
+    },
+    "GET_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CODECPROFILE_TYPE_INTERGER":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOFORMATOPTIONS_CODECPROFILE_TYPE_INTERGER",
+        "expected": "error"   
+    },
+    "GET_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CODECPROFILE_TYPE_BOOLEAN":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOFORMATOPTIONS_CODECPROFILE_TYPE_BOOLEAN",
+        "expected": "error"   
+    },
+    "GET_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CONTAINER_TYPE_INTERGER":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOFORMATOPTIONS_CONTAINER_TYPE_INTERGER",
+        "expected": "error"   
+    },
+    "GET_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_CONTAINER_TYPE_BOOLEAN":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOFORMATOPTIONS_CONTAINER_TYPE_BOOLEAN",
+        "expected": "error"   
+    },
+    "GET_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_SAMPLERATE_TYPE_BOOLEAN":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOFORMATOPTIONS_SAMPLERATE_TYPE_BOOLEAN",
+        "expected": "error"   
+    },
+    "GET_AUDIOFORMATSUPPORTED_WITH_AUDIOFORMATOPTIONS_SAMPLERATE_TYPE_STRING":{
+        "method": "device.audioFormatSupported",
+        "params": "DEVICE_AUDIOFORMATOPTIONS_SAMPLERATE_TYPE_STRING",
+        "expected": "error"   
     },
     "GET_VIDEOFORMATSUPPORTED_WITH_INVALID_VIDEOCODEC_TYPE_INTEGER":{
        "method": "device.videoFormatSupported",
@@ -506,6 +761,11 @@
         "params": "DEVICE_VIDEOCODEC_INVALID_TYPE_BOOLEAN",
         "expected": "error" 
     },
+    "GET_VIDEOFORMATSUPPORTED_WITH_INVALID_VIDEOCODEC_DUMMYCODEC_KEY":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOCODEC_DUMMYCODEC_KEY",
+        "expected": "error" 
+     },
     "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_RESOLUTION_TYPE_BOOLEAN":{
         "method": "device.videoFormatSupported",
         "params": "DEVICE_VIDEOFORMATOPTIONS_RESOLUTION_TYPE_BOOLEAN",
@@ -514,6 +774,66 @@
     "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_RESOLUTION_TYPE_INTEGER":{
         "method": "device.videoFormatSupported",
         "params": "DEVICE_VIDEOFORMATOPTIONS_RESOLUTION_TYPE_INTEGER",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_ATMOS_TYPE_INTERGER":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_ATMOS_TYPE_INTERGER",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_ATMOS_TYPE_STRING":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_ATMOS_TYPE_STRING",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECLEVEL_TYPE_INTERGER":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_CODECLEVEL_TYPE_INTERGER",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECLEVEL_TYPE_BOOLEAN":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_CODECLEVEL_TYPE_BOOLEAN",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECPROFILE_TYPE_INTERGER":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_CODECPROFILE_TYPE_INTERGER",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CODECPROFILE_TYPE_BOOLEAN":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_CODECPROFILE_TYPE_BOOLEAN",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CONTAINER_TYPE_INTERGER":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_CONTAINER_TYPE_INTERGER",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_CONTAINER_TYPE_BOOLEAN":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_CONTAINER_TYPE_BOOLEAN",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_FRAMERATE_TYPE_BOOLEAN":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_FRAMERATE_TYPE_BOOLEAN",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_FRAMERATE_TYPE_STRING":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_FRAMERATE_TYPE_STRING",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_HDR_TYPE_INTERGER":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_HDR_TYPE_INTERGER",
+        "expected": "error"
+    },
+    "GET_VIDEOFORMATSUPPORTED_WITH_VIDEOFORMATOPTIONS_HDR_TYPE_BOOLEAN":{
+        "method": "device.videoFormatSupported",
+        "params": "DEVICE_VIDEOFORMATOPTIONS_HDR_TYPE_BOOLEAN",
         "expected": "error"
     },
     "INVALID_PARAMETER_ERROR_FOR_AUDIOFORMATSUPPORTED": {
@@ -599,5 +919,838 @@
         "event": "device.onAudioOutputChanged",
         "validationJsonPath": "eventResponse",
         "content": "DEVICE_ONAUDIOOUTPUTCHANGED_EVENT"
-    }  
+    },
+    "DEVICE_AUDIOMODE_AS_AUTO": {
+        "method": "device.audioMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_AUDIOMODE_AUTO"
+    },
+    "DEVICE_AUDIOMODE_AS_MONO": {
+        "method": "device.audioMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_AUDIOMODE_MONO"
+    },
+    "DEVICE_AUDIOMODE_AS_NONE": {
+        "method": "device.audioMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_AUDIOMODE_NONE"
+    },
+    "DEVICE_AUDIOMODE_AS_PASSTHROUGH": {
+        "method": "device.audioMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_AUDIOMODE_PASSTHROUGH"
+    },
+    "DEVICE_AUDIOMODE_AS_STEREO": {
+        "method": "device.audioMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_AUDIOMODE_STEREO"
+    },
+    "DEVICE_AUDIOMODE_AS_SURROUND": {
+        "method": "device.audioMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_AUDIOMODE_SURROUND"
+    },
+    "DEVICE_AUDIOMODE_AS_UNKNOWN": {
+        "method": "device.audioMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_AUDIOMODE_UNKNOWN"
+    },
+    "DEVICE_VIDEOMODE_AS_480I": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_480I"
+    },
+    "DEVICE_VIDEOMODE_AS_480P": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_480P"
+    },
+    "DEVICE_VIDEOMODE_AS_576I25": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_576I25"
+    },
+    "DEVICE_VIDEOMODE_AS_576P50": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_576P50"
+    },
+    "DEVICE_VIDEOMODE_AS_576P60": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_576P60"
+    },
+    "DEVICE_VIDEOMODE_AS_720P50": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_720P50"
+    },
+    "DEVICE_VIDEOMODE_AS_720P60": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_720P60"
+    },
+    "DEVICE_VIDEOMODE_AS_1080I50": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_1080I50"
+    },
+    "DEVICE_VIDEOMODE_AS_1080I60": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_1080I60"
+    },
+    "DEVICE_VIDEOMODE_AS_1080P24": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_1080P24"
+    },
+    "DEVICE_VIDEOMODE_AS_1080P25": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_1080P25"
+    },
+    "DEVICE_VIDEOMODE_AS_1080P30": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_1080P30"
+    },
+    "DEVICE_VIDEOMODE_AS_1080P50": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_1080P50"
+    },
+    "DEVICE_VIDEOMODE_AS_1080P60": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_1080P60"
+    },
+    "DEVICE_VIDEOMODE_AS_2160P24": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_2160P24"
+    },
+    "DEVICE_VIDEOMODE_AS_2160P25": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_2160P25"
+    },
+    "DEVICE_VIDEOMODE_AS_2160P30": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_2160P30"
+    },
+    "DEVICE_VIDEOMODE_AS_2160P50": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_2160P50"
+    },
+    "DEVICE_VIDEOMODE_AS_2160P60": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_2160P60"
+    },
+    "DEVICE_VIDEOMODE_AS_4320P60": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_4320P60"
+    },
+    "DEVICE_VIDEOMODE_AS_UNKNOWN": {
+        "method": "device.videoMode",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODE_UNKNOWN"
+    },
+    "DEVICE_VIDEOMODES_AS_480I": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_480I"
+    },
+    "DEVICE_VIDEOMODES_AS_480P": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_480P"
+    },
+    "DEVICE_VIDEOMODES_AS_576I25": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_576I25"
+    },
+    "DEVICE_VIDEOMODES_AS_576P50": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_576P50"
+    },
+    "DEVICE_VIDEOMODES_AS_576P60": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_576P60"
+    },
+    "DEVICE_VIDEOMODES_AS_720P50": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_720P50"
+    },
+    "DEVICE_VIDEOMODES_AS_720P60": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_720P60"
+    },
+    "DEVICE_VIDEOMODES_AS_1080I50": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_1080I50"
+    },
+    "DEVICE_VIDEOMODES_AS_1080I60": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_1080I60"
+    },
+    "DEVICE_VIDEOMODES_AS_1080P24": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_1080P24"
+    },
+    "DEVICE_VIDEOMODES_AS_1080P25": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_1080P25"
+    },
+    "DEVICE_VIDEOMODES_AS_1080P30": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_1080P30"
+    },
+    "DEVICE_VIDEOMODES_AS_1080P50": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_1080P50"
+    },
+    "DEVICE_VIDEOMODES_AS_1080P60": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_1080P60"
+    },
+    "DEVICE_VIDEOMODES_AS_2160P24": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_2160P24"
+    },
+    "DEVICE_VIDEOMODES_AS_2160P25": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_2160P25"
+    },
+    "DEVICE_VIDEOMODES_AS_2160P30": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_2160P30"
+    },
+    "DEVICE_VIDEOMODES_AS_2160P50": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_2160P50"
+    },
+    "DEVICE_VIDEOMODES_AS_2160P60": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_2160P60"
+    },
+    "DEVICE_VIDEOMODES_AS_4320P60": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_4320P60"
+    },
+    "DEVICE_VIDEOMODES_AS_UNKNOWN": {
+        "method": "device.videoModes",
+        "validationJsonPath": "result",
+        "content": "DEVICE_VIDEOMODES_UNKNOWN"
+    },
+    "DEVICE_HDRPROFILE_AS_DOLBYVISION": {
+        "method": "device.hdrProfile",
+        "validationJsonPath": "result",
+        "content": "DEVICE_HDRPROFILE_DOLBYVISION"
+    },
+    "DEVICE_HDRPROFILE_AS_HDR10": {
+        "method": "device.hdrProfile",
+        "validationJsonPath": "result",
+        "content": "DEVICE_HDRPROFILE_HDR10"
+    },
+    "DEVICE_HDRPROFILE_AS_HDR10PLUS": {
+        "method": "device.hdrProfile",
+        "validationJsonPath": "result",
+        "content": "DEVICE_HDRPROFILE_HDR10PLUS"
+    },
+    "DEVICE_HDRPROFILE_AS_HLG": {
+        "method": "device.hdrProfile",
+        "validationJsonPath": "result",
+        "content": "DEVICE_HDRPROFILE_HLG"
+    },
+    "DEVICE_HDRPROFILE_AS_SDR": {
+        "method": "device.hdrProfile",
+        "validationJsonPath": "result",
+        "content": "DEVICE_HDRPROFILE_SDR"
+    },
+    "DEVICE_HDRPROFILE_AS_UNKNOWN": {
+        "method": "device.hdrProfile",
+        "validationJsonPath": "result",
+        "content": "DEVICE_HDRPROFILE_UNKNOWN"
+    },
+    "ONAUDIOMODECHANGED_WITH_AUDIOMODE_AS_AUTO": {
+        "event": "device.onAudioModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_AUTO"
+    },
+    "ONAUDIOMODECHANGED_WITH_AUDIOMODE_AS_MONO": {
+        "event": "device.onAudioModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_MONO"
+    },
+    "ONAUDIOMODECHANGED_WITH_AUDIOMODE_AS_NONE": {
+        "event": "device.onAudioModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_NONE"
+    },
+    "ONAUDIOMODECHANGED_WITH_AUDIOMODE_AS_PASSTHROUGH": {
+        "event": "device.onAudioModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_PASSTHROUGH"
+    },
+    "ONAUDIOMODECHANGED_WITH_AUDIOMODE_AS_STEREO": {
+        "event": "device.onAudioModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_STEREO"
+    },
+    "ONAUDIOMODECHANGED_WITH_AUDIOMODE_AS_SURROUND": {
+        "event": "device.onAudioModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_SURROUND"
+    },
+    "ONAUDIOMODECHANGED_WITH_AUDIOMODE_AS_UNKNOWN": {
+        "event": "device.onAudioModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_UNKNOWN"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_480I": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_480I"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_480P": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_480P"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_576I25": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_576I25"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_576P50": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_576P50"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_576P60": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_576P60"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_720P50": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_720P50"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_720P60": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_720P60"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_1080I50": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_1080I50"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_1080I60": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_1080I60"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_1080P24": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_1080P24"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_1080P25": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_1080P25"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_1080P30": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_1080P30"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_1080P50": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_1080P50"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_1080P60": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_1080P60"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_2160P24": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_2160P24"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_2160P25": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_2160P25"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_2160P30": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_2160P30"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_2160P50": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_2160P50"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_2160P60": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_2160P60"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_4320P60": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_4320P60"
+    },
+    "ONVIDEOMODECHANGED_WITH_VIDEOMODE_AS_UNKNOWN": {
+        "event": "device.onVideoModeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODE_UNKNOWN"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_480I": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_480I"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_480P": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_480P"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_576I25": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_576I25"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_576P50": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_576P50"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_576P60": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_576P60"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_720P50": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_720P50"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_720P60": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_720P60"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_1080I50": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_1080I50"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_1080I60": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_1080I60"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_1080P24": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_1080P24"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_1080P25": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_1080P25"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_1080P30": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_1080P30"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_1080P50": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_1080P50"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_1080P60": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_1080P60"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_2160P24": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_2160P24"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_2160P25": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_2160P25"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_2160P30": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_2160P30"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_2160P50": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_2160P50"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_2160P60": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_2160P60"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_4320P60": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_4320P60"
+    },
+    "ONVIDEOMODESCHANGED_WITH_VIDEOMODES_AS_UNKNOWN": {
+        "event": "device.onVideoModesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_VIDEOMODES_UNKNOWN"
+    },
+    "ONHDRPROFILECHANGED_WITH_HDRPROFILE_AS_DOLBYVISION": {
+        "event": "device.onHdrProfileChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_HDRPROFILE_DOLBYVISION"
+    },
+    "ONHDRPROFILECHANGED_WITH_HDRPROFILE_AS_HDR10": {
+        "event": "device.onHdrProfileChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_HDRPROFILE_AS_HDR10"
+    },
+    "ONHDRPROFILECHANGED_WITH_HDRPROFILE_AS_HDR10PLUS": {
+        "event": "device.onHdrProfileChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_HDRPROFILE_AS_HDR10PLUS"
+    },
+    "ONHDRPROFILECHANGED_WITH_HDRPROFILE_AS_HLG": {
+        "event": "device.onHdrProfileChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_HDRPROFILE_AS_HLG"
+    },
+    "ONHDRPROFILECHANGED_WITH_HDRPROFILE_AS_SDR": {
+        "event": "device.onHdrProfileChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_HDRPROFILE_AS_SDR"
+    },
+    "ONHDRPROFILECHANGED_WITH_HDRPROFILE_AS_UNKNOWN": {
+        "event": "device.onHdrProfileChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_HDRPROFILE_AS_UNKNOWN"
+    },
+    "ONAUDIOOUTPUTCHANGED_WITH_AUDIOMODE_AS_AUTO": {
+        "event": "device.onAudioOutputChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_AUTO"
+    },
+    "ONAUDIOOUTPUTCHANGED_WITH_AUDIOMODE_AS_MONO": {
+        "event": "device.onAudioOutputChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_MONO"
+    },
+    "ONAUDIOOUTPUTCHANGED_WITH_AUDIOMODE_AS_NONE": {
+        "event": "device.onAudioOutputChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_NONE"
+    },
+    "ONAUDIOOUTPUTCHANGED_WITH_AUDIOMODE_AS_PASSTHROUGH": {
+        "event": "device.onAudioOutputChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_PASSTHROUGH"
+    },
+    "ONAUDIOOUTPUTCHANGED_WITH_AUDIOMODE_AS_STEREO": {
+        "event": "device.onAudioOutputChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_STEREO"
+    },
+    "ONAUDIOOUTPUTCHANGED_WITH_AUDIOMODE_AS_SURROUND": {
+        "event": "device.onAudioOutputChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_SURROUND"
+    },
+    "ONAUDIOOUTPUTCHANGED_WITH_AUDIOMODE_AS_UNKNOWN": {
+        "event": "device.onAudioOutputChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_AUDIOMODE_UNKNOWN"
+    },
+    "ONAUDIOMODECHANGED_EVENT_WITH_AUDIOMODE_AS_AUTO": {
+        "method": "device.onAudioModeChanged",
+        "params": "DEVICE_ONAUDIOMODECHANGED_AUDIOMODE_AUTO_EVENTS"
+    },
+    "ONAUDIOMODECHANGED_EVENT_WITH_AUDIOMODE_AS_MONO": {
+        "method": "device.onAudioModeChanged",
+        "params": "DEVICE_ONAUDIOMODECHANGED_AUDIOMODE_MONO_EVENTS"
+    },
+    "ONAUDIOMODECHANGED_EVENT_WITH_AUDIOMODE_AS_NONE": {
+        "method": "device.onAudioModeChanged",
+        "params": "DEVICE_ONAUDIOMODECHANGED_AUDIOMODE_NONE_EVENTS"
+    },
+    "ONAUDIOMODECHANGED_EVENT_WITH_AUDIOMODE_AS_PASSTHROUGH": {
+        "method": "device.onAudioModeChanged",
+        "params": "DEVICE_ONAUDIOMODECHANGED_AUDIOMODE_PASSTHROUGH_EVENTS"
+    },
+    "ONAUDIOMODECHANGED_EVENT_WITH_AUDIOMODE_AS_STEREO": {
+        "method": "device.onAudioModeChanged",
+        "params": "DEVICE_ONAUDIOMODECHANGED_AUDIOMODE_STEREO_EVENTS"
+    },
+    "ONAUDIOMODECHANGED_EVENT_WITH_AUDIOMODE_AS_SURROUND": {
+        "method": "device.onAudioModeChanged",
+        "params": "DEVICE_ONAUDIOMODECHANGED_AUDIOMODE_SURROUND_EVENTS"
+    },
+    "ONAUDIOMODECHANGED_EVENT_WITH_AUDIOMODE_AS_UNKNOWN": {
+        "method": "device.onAudioModeChanged",
+        "params": "DEVICE_ONAUDIOMODECHANGED_AUDIOMODE_UNKNOWN_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_480I": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_480I_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_480P": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_480P_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_576I25": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_576I25_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_576I50": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_576I50_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_576I60": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_576I60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_720P50": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_720P50_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_720P60": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_720P60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_1080I50": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_1080I50_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_1080I60": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_1080I60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_1080P24": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_1080P24_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_1080P25": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_1080P25_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_1080P30": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_1080P30_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_1080P50": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_1080P50_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_1080P60": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_1080P60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_2160P24": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_2160P24_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_2160P25": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_2160P25_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_2160P30": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_2160P30_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_2160P50": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_2160P50_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_2160P60": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_2160P60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_4320P60": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_4320P60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODE_AS_UNKNOWN": {
+        "method": "device.onVideoModeChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODE_UNKNOWN_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_480I": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_480I_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_480P": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_480P_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_576I25": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_576I25_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_576I50": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_576I50_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_576I60": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_576I60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_720P50": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_720P50_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_720P60": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_720P60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_1080I50": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_1080I50_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_1080I60": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_1080I60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_1080P24": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_1080I60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_1080P25": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_1080P25_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_1080P30": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_1080P30_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_1080P50": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_1080P50_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_1080P60": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_1080P60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_2160P24": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_2160P24_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_2160P25": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_2160P25_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_2160P30": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_2160P30_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_2160P50": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_2160P50_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_2160P60": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_2160P60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_4320P60": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_4320P60_EVENTS"
+    },
+    "ONVIDEOMODECHANGED_EVENT_WITH_VIDEOMODES_AS_UNKNOWN": {
+        "method": "device.onVideoModesChanged",
+        "params": "DEVICE_ONVIDEOMODECHANGED_VIDEOMODES_UNKNOWN_EVENTS"
+    },
+    "ONHDRPROFILECHANGED_EVENT_WITH_HDRPROFILE_AS_DOLBYVISION": {
+        "method": "device.onHdrProfileChanged",
+        "params": "DEVICE_ONHDRPROFILECHANGED_HDRPROFILE_DOLBYVISION_EVENTS"
+    },
+    "ONHDRPROFILECHANGED_EVENT_WITH_HDRPROFILE_AS_HDR10": {
+        "method": "device.onHdrProfileChanged",
+        "params": "DEVICE_ONHDRPROFILECHANGED_HDRPROFILE_HDR10_EVENTS"
+    },
+    "ONHDRPROFILECHANGED_EVENT_WITH_HDRPROFILE_AS_HDR10PLUS": {
+        "method": "device.onHdrProfileChanged",
+        "params": "DEVICE_ONHDRPROFILECHANGED_HDRPROFILE_HDR10PLUS_EVENTS"
+    },
+    "ONHDRPROFILECHANGED_EVENT_WITH_HDRPROFILE_AS_HLG": {
+        "method": "device.onHdrProfileChanged",
+        "params": "DEVICE_ONHDRPROFILECHANGED_HDRPROFILE_HLG_EVENTS"
+    },
+    "ONHDRPROFILECHANGED_EVENT_WITH_HDRPROFILE_AS_SDR": {
+        "method": "device.onHdrProfileChanged",
+        "params": "DEVICE_ONHDRPROFILECHANGED_HDRPROFILE_SDR_EVENTS"
+    },
+    "ONHDRPROFILECHANGED_EVENT_WITH_HDRPROFILE_AS_UNKNOWN": {
+        "method": "device.onHdrProfileChanged",
+        "params": "DEVICE_ONHDRPROFILECHANGED_HDRPROFILE_UNKNOWN_EVENTS"
+    },
+    "ONAUDIOOUTPUTCHANGED_EVENT_WITH_AUDIOMODE_AS_AUTO": {
+        "method": "device.onAudioOutputChanged",
+        "params": "DEVICE_ONAUDIOOUTPUTCHANGED_AUDIOMODE_AUTO_EVENTS"
+    },
+    "ONAUDIOOUTPUTCHANGED_EVENT_WITH_AUDIOMODE_AS_MONO": {
+        "method": "device.onAudioOutputChanged",
+        "params": "DEVICE_ONAUDIOOUTPUTCHANGED_AUDIOMODE_MONO_EVENTS"
+    },
+    "ONAUDIOOUTPUTCHANGED_EVENT_WITH_AUDIOMODE_AS_NONE": {
+        "method": "device.onAudioOutputChanged",
+        "params": "DEVICE_ONAUDIOOUTPUTCHANGED_AUDIOMODE_NONE_EVENTS"
+    },
+    "ONAUDIOOUTPUTCHANGED_EVENT_WITH_AUDIOMODE_AS_PASSTHROUGH": {
+        "method": "device.onAudioOutputChanged",
+        "params": "DEVICE_ONAUDIOOUTPUTCHANGED_AUDIOMODE_PASSTHROUGH_EVENTS"
+    },
+    "ONAUDIOOUTPUTCHANGED_EVENT_WITH_AUDIOMODE_AS_STEREO": {
+        "method": "device.onAudioOutputChanged",
+        "params": "DEVICE_ONAUDIOOUTPUTCHANGED_AUDIOMODE_STEREO_EVENTS"
+    },
+    "ONAUDIOOUTPUTCHANGED_EVENT_WITH_AUDIOMODE_AS_SURROUND": {
+        "method": "device.onAudioOutputChanged",
+        "params": "DEVICE_ONAUDIOOUTPUTCHANGED_AUDIOMODE_SURROUND_EVENTS"
+    },
+    "ONAUDIOOUTPUTCHANGED_EVENT_WITH_AUDIOMODE_AS_UNKNOWN": {
+        "method": "device.onAudioOutputChanged",
+        "params": "DEVICE_ONAUDIOOUTPUTCHANGED_AUDIOMODE_UNKNOWN_EVENTS"
+    }
 }

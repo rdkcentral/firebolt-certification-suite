@@ -6,7 +6,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_COLORDEPTH",
                         "description": "Validation of the Display colorDepth"
                     }
@@ -21,7 +21,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_COLORIMETRY",
                         "description": "Validation of the Display colorimetry"
                     }
@@ -36,7 +36,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_HDRPROFILES",
                         "description": "Validation of the Display hdrProfiles"
                     }
@@ -51,7 +51,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_MANUFACTURER",
                         "description": "Validation of the Display manufacturer"
                     }
@@ -66,7 +66,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_PRODUCTNAME",
                         "description": "Validation of the Display productName"
                     }
@@ -81,7 +81,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_REFRESHRATE",
                         "description": "Validation of the Display refreshRate"
                     }
@@ -96,7 +96,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_RESOLUTION",
                         "description": "Validation of the Display resolution"
                     }
@@ -111,7 +111,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_RESOLUTIONNAME",
                         "description": "Validation of the Display resolutionName"
                     }
@@ -126,7 +126,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_SIZE",
                         "description": "Validation of the Display size"
                     }
@@ -141,7 +141,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_SOURCEPHYSICALADDRESS",
                         "description": "Validation of the Display sourcePhysicalAddress"
                     }
@@ -156,7 +156,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_COLORDEPTH",
                         "description": "Validation of the Display colorDepth"
                     }
@@ -171,7 +171,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_COLORIMETRY",
                         "description": "Validation of the Display colorimetry"
                     }
@@ -186,7 +186,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_HDRPROFILES",
                         "description": "Validation of the Display hdrProfiles"
                     }
@@ -201,7 +201,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_MANUFACTURER",
                         "description": "Validation of the Display manufacturer"
                     }
@@ -216,7 +216,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_PRODUCTNAME",
                         "description": "Validation of the Display productName"
                     }
@@ -231,7 +231,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_REFRESHRATE",
                         "description": "Validation of the Display refreshRate"
                     }
@@ -246,7 +246,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_RESOLUTION",
                         "description": "Validation of the Display resolution"
                     }
@@ -261,7 +261,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_RESOLUTIONNAME",
                         "description": "Validation of the Display resolutionName"
                     }
@@ -276,7 +276,7 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_SIZE",
                         "description": "Validation of the Display size"
                     }
@@ -291,9 +291,339 @@
                 "type": "fixture",
                 "validations": [
                     {
-                        "mode": "staticContentValidation",
+                        "mode": "deviceContentValidation",
                         "type": "DISPLAY_SOURCEPHYSICALADDRESS",
                         "description": "Validation of the Display sourcePhysicalAddress"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_COLORIMETRY_BT2020CYCC": {
+        "method": "display.colorimetry",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_COLORIMETRY_BT2020CYCC",
+                        "description": "Validation of the Display colorimetry"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_COLORIMETRY_BT2020RGB": {
+        "method": "display.colorimetry",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_COLORIMETRY_BT2020RGB",
+                        "description": "Validation of the Display colorimetry"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_COLORIMETRY_BT2020YCC": {
+        "method": "display.colorimetry",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_COLORIMETRY_BT2020YCC",
+                        "description": "Validation of the Display colorimetry"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_COLORIMETRY_DCI-P3": {
+        "method": "display.colorimetry",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_COLORIMETRY_DCI-P3",
+                        "description": "Validation of the Display colorimetry"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_COLORIMETRY_ICTCP": {
+        "method": "display.colorimetry",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_COLORIMETRY_ICTCP",
+                        "description": "Validation of the Display colorimetry"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_COLORIMETRY_OPRGB": {
+        "method": "display.colorimetry",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_COLORIMETRY_OPRGB",
+                        "description": "Validation of the Display colorimetry"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_COLORIMETRY_OPYCC601": {
+        "method": "display.colorimetry",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_COLORIMETRY_OPYCC601",
+                        "description": "Validation of the Display colorimetry"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_COLORIMETRY_SYCC601": {
+        "method": "display.colorimetry",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_COLORIMETRY_SYCC601",
+                        "description": "Validation of the Display colorimetry"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_COLORIMETRY_XVYCC601": {
+        "method": "display.colorimetry",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_COLORIMETRY_XVYCC601",
+                        "description": "Validation of the Display colorimetry"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_COLORIMETRY_XVYCC709": {
+        "method": "display.colorimetry",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_COLORIMETRY_XVYCC709",
+                        "description": "Validation of the Display colorimetry"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_COLORIMETRY_UNKNOWN": {
+        "method": "display.colorimetry",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_COLORIMETRY_UNKNOWN",
+                        "description": "Validation of the Display colorimetry"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_HDRPROFILE_DOLBYVISION": {
+        "method": "display.hdrProfiles",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_HDRPROFILE_DOLBYVISION",
+                        "description": "Validation of the Display hdrProfiles"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_HDRPROFILE_HDR10": {
+        "method": "display.hdrProfiles",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_HDRPROFILE_HDR10",
+                        "description": "Validation of the Display hdrProfiles"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_HDRPROFILE_HDR10PLUS": {
+        "method": "display.hdrProfiles",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_HDRPROFILE_HDR10PLUS",
+                        "description": "Validation of the Display hdrProfiles"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_HDRPROFILE_HLG": {
+        "method": "display.hdrProfiles",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_HDRPROFILE_HLG",
+                        "description": "Validation of the Display hdrProfiles"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_HDRPROFILE_SDR": {
+        "method": "display.hdrProfiles",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_HDRPROFILE_SDR",
+                        "description": "Validation of the Display hdrProfiles"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_HDRPROFILE_UNKNOWN": {
+        "method": "display.hdrProfiles",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_HDRPROFILE_UNKNOWN",
+                        "description": "Validation of the Display hdrProfiles"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_RESOLUTIONNAME_SD": {
+        "method": "display.resolutionName",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_RESOLUTIONNAME_SD",
+                        "description": "Validation of the Display resolutionName"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_RESOLUTIONNAME_HD": {
+        "method": "display.resolutionName",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_RESOLUTIONNAME_HD",
+                        "description": "Validation of the Display resolutionName"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_RESOLUTIONNAME_FHD": {
+        "method": "display.resolutionName",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_RESOLUTIONNAME_FHD",
+                        "description": "Validation of the Display resolutionName"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_RESOLUTIONNAME_UHD": {
+        "method": "display.resolutionName",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_RESOLUTIONNAME_UHD",
+                        "description": "Validation of the Display resolutionName"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISPLAY_RESOLUTIONNAME_UNKNOWN": {
+        "method": "display.resolutionName",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DISPLAY_RESOLUTIONNAME_UNKNOWN",
+                        "description": "Validation of the Display resolutionName"
                     }
                 ]
             }

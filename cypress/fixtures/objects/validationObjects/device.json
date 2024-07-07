@@ -463,7 +463,7 @@
                     {
                         "mode": "staticContentValidation",
                         "type": "DEVICE_HDCPVERSIONSUPPORTED",
-                        "description": "Validation of the Device hdcpVersionSupported"
+                        "description": "Validation of the Device hdcpVersionSupported Format"
                     }
                 ]
             }
@@ -478,7 +478,7 @@
                     {
                         "mode": "staticContentValidation",
                         "type": "DEVICE_HDRPROFILE",
-                        "description": "Validation of the Device hdrProfile"
+                        "description": "Validation of the Device hdrProfile Format"
                     }
                 ]
             }
@@ -493,7 +493,7 @@
                     {
                         "mode": "staticContentValidation",
                         "type": "DEVICE_HDRPROFILES",
-                        "description": "Validation of the Device hdrProfiles"
+                        "description": "Validation of the Device hdrProfiles Format"
                     }
                 ]
             }
@@ -508,7 +508,7 @@
                     {
                         "mode": "staticContentValidation",
                         "type": "DEVICE_AUDIOMODE",
-                        "description": "Validation of the Device audioMode"
+                        "description": "Validation of the Device audioMode Format"
                     }
                 ]
             }
@@ -523,7 +523,7 @@
                     {
                         "mode": "staticContentValidation",
                         "type": "DEVICE_VIDEOMODE",
-                        "description": "Validation of the Device videoMode"
+                        "description": "Validation of the Device videoMode Format"
                     }
                 ]
             }
@@ -538,7 +538,7 @@
                     {
                         "mode": "staticContentValidation",
                         "type": "DEVICE_VIDEOMODES",
-                        "description": "Validation of the Device videoModes"
+                        "description": "Validation of the Device videoModes Format"
                     }
                 ]
             }
@@ -553,7 +553,7 @@
                     {
                         "mode": "staticContentValidation",
                         "type": "DEVICE_AUDIOMODE",
-                        "description": "Validation of the Display audioMode changed"
+                        "description": "Validation of the Display audioMode changed Format"
                     }
                 ]
             }
@@ -568,7 +568,7 @@
                     {
                         "mode": "staticContentValidation",
                         "type": "DEVICE_VIDEOMODE",
-                        "description": "Validation of the Display videoMode changed"
+                        "description": "Validation of the Display videoMode changed Format"
                     }
                 ]
             }
@@ -583,7 +583,7 @@
                     {
                         "mode": "staticContentValidation",
                         "type": "DEVICE_VIDEOMODES",
-                        "description": "Validation of the Display videoModes changed"
+                        "description": "Validation of the Display videoModes changed Format"
                     }
                 ]
             }
@@ -598,7 +598,7 @@
                     {
                         "mode": "staticContentValidation",
                         "type": "DEVICE_HDRPROFILE",
-                        "description": "Validation of the Display hdrProfile changed"
+                        "description": "Validation of the Display hdrProfile changed Format"
                     }
                 ]
             }
@@ -613,7 +613,820 @@
                     {
                         "mode": "staticContentValidation",
                         "type": "DEVICE_AUDIOMODE",
-                        "description": "Validation of the Display audioMode changed"
+                        "description": "Validation of the Display audioMode changed Format"
+                    }
+                ]
+            }
+        ]
+    },  
+    
+    
+
+    "DEVICE_AUDIOMODE_AUTO": {
+        "method": "device.audioMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_AUDIOMODE_AUTO",
+                        "description": "Validation of the Device audioMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_AUDIOMODE_MONO": {
+        "method": "device.audioMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_AUDIOMODE_MONO",
+                        "description": "Validation of the Device audioMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_AUDIOMODE_NONE": {
+        "method": "device.audioMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_AUDIOMODE_NONE",
+                        "description": "Validation of the Device audioMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_AUDIOMODE_PASSTHROUGH": {
+        "method": "device.audioMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_AUDIOMODE_PASSTHROUGH",
+                        "description": "Validation of the Device audioMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_AUDIOMODE_STEREO": {
+        "method": "device.audioMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_AUDIOMODE_STEREO",
+                        "description": "Validation of the Device audioMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_AUDIOMODE_SURROUND": {
+        "method": "device.audioMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_AUDIOMODE_SURROUND",
+                        "description": "Validation of the Device audioMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_AUDIOMODE_UNKNOWN": {
+        "method": "device.audioMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_AUDIOMODE_UNKNOWN",
+                        "description": "Validation of the Device audioMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_480I": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_480I",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_480P": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_480P",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_576I25": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_576I25",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_576P50": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_576P50",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_576P60": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_576P60",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_720P50": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_720P50",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_720P60": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_720P60",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_1080I50": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080I50",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_1080I60": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080I60",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_1080P24": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080P24",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_1080P25": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080P25",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_1080P30": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080P30",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_1080P50": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080P50",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_1080P60": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080P60",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_2160P24": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_2160P24",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_2160P25": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_2160P25",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_2160P30": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_2160P30",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_2160P50": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_2160P50",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_2160P60": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_2160P60",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_4320P60": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_4320P60",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODE_UNKNOWN": {
+        "method": "device.videoMode",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_UNKNOWN",
+                        "description": "Validation of the Device videoMode Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_480I": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_480I",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_480P": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_480P",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_576I25": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_576I25",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_576P50": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_576P50",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_576P60": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_576P60",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_720P60": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_720P60",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_1080I50": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080I50",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_1080I60": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080I60",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_1080P24": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080P24",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_1080P25": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080P25",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_1080P30": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080P30",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_1080P50": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080P50",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_1080P60": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_1080P60",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_2160P24": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_2160P24",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_2160P25": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_2160P25",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_2160P30": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_2160P30",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_2160P50": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_2160P50",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_2160P60": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_2160P60",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_4320P60": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_4320P60",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_VIDEOMODES_UNKNOWN": {
+        "method": "device.videoModes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_VIDEOMODE_UNKNOWN",
+                        "description": "Validation of the Device videoModes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_HDRPROFILE_DOLBYVISION": {
+        "method": "device.hdrProfile",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_HDRPROFILE_DOLBYVISION",
+                        "description": "Validation of the Device hdrProfile Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_HDRPROFILE_HDR10": {
+        "method": "device.hdrProfile",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_HDRPROFILE_HDR10",
+                        "description": "Validation of the Device hdrProfile Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_HDRPROFILE_HDR10PLUS": {
+        "method": "device.hdrProfile",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_HDRPROFILE_HDR10PLUS",
+                        "description": "Validation of the Device hdrProfile Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_HDRPROFILE_HLG": {
+        "method": "device.hdrProfile",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_HDRPROFILE_HLG",
+                        "description": "Validation of the Device hdrProfile Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_HDRPROFILE_SDR": {
+        "method": "device.hdrProfile",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_HDRPROFILE_SDR",
+                        "description": "Validation of the Device hdrProfile Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "DEVICE_HDRPROFILE_UNKNOWN": {
+        "method": "device.hdrProfile",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DEVICE_HDRPROFILE_UNKNOWN",
+                        "description": "Validation of the Device hdrProfile Format"
                     }
                 ]
             }
