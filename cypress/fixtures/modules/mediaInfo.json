@@ -23,6 +23,52 @@
             1080
         ]
     },
+    "AUDIOCODEC_MPEG3": {
+        "bitRate": 128,
+        "channels": "2",
+        "codec": "mpeg3",
+        "container": "audio/mp4",
+        "pipelineId": 1,
+        "sampleRate": 48
+    },
+    "AUDIOCONTAINER_AUDIO/WEBM": {
+        "bitRate": 128,
+        "channels": "2",
+        "codec": "mpeg3",
+        "container": "audio/webm",
+        "pipelineId": 1,
+        "sampleRate": 48
+    },
+    "VIDEOCODEC_MPEG1": {
+        "codec": "mpeg1",
+        "codecLevel": "4.2",
+        "codecProfile": "main",
+        "container": "video/mp4",
+        "frameRate": 30,
+        "hdr": [
+            "hdr10"
+        ],
+        "pipelineId": 1,
+        "resolution": [
+            1920,
+            1080
+        ]
+    },
+    "VIDEOCONTAINER_VIDEO/MP2T": {
+        "codec": "mpeg1",
+        "codecLevel": "4.2",
+        "codecProfile": "main",
+        "container": "video/mp2t",
+        "frameRate": 30,
+        "hdr": [
+            "hdr10"
+        ],
+        "pipelineId": 1,
+        "resolution": [
+            1920,
+            1080
+        ]
+    },
     "ONAUDIOFORMATCHANGED_EVENT":{
         "method": "mediaInfo.onAudioFormatChanged",
         "result": [
@@ -116,5 +162,125 @@
                 1080
             ]
         }
-    ]
+    ],
+    "AUDIOCODEC_AC4":[
+        {
+            "bitRate": 128,
+            "channels": "2",
+            "codec": "ac4",
+            "codecProfile": "mp2lc",
+            "container": "audio/mp4",
+            "pipelineId": 1,
+            "sampleRate": 48
+        }
+    ],
+    "VIDEOCODEC_VP8": [
+        {
+            "codec": "vp8",
+            "codecLevel": "4.2",
+            "codecProfile": "main",
+            "container": "video/mp4",
+            "frameRate": 30,
+            "hdr": [
+                "hdr10"
+            ],
+            "pipelineId": 1,
+            "resolution": [
+                1920,
+                1080
+            ]
+        }
+    ],
+    "ONAUDIOFORMATCHANGED_AUDIOCODEC_MPEG3_EVENTS":{
+        "method": "mediaInfo.onAudioFormatChanged",
+        "result": [
+            {
+                "bitRate": 128,
+                "channels": "5.1",
+                "codec": "mpeg3",
+                "container": "audio/mp4",
+                "pipelineId": 1,
+                "sampleRate": 48
+            }
+        ]
+    },
+    "ONAUDIOFORMATCHANGED_AUDIOCONTAINER_AUDIO/WEBM_EVENTS":{
+        "method": "mediaInfo.onAudioFormatChanged",
+        "result": [
+            {
+                "bitRate": 128,
+                "channels": "5.1",
+                "codec": "mpeg3",
+                "container": "audio/webm",
+                "pipelineId": 1,
+                "sampleRate": 48
+            }
+        ]
+    },
+    "ONVIDEOFORMATCHANGED_VIDEOCODEC_MPEG1_EVENTS":{
+        "method": "mediaInfo.onVideoFormatChanged",
+        "result": [
+            {
+                "codec": "mpeg1",
+                "codecLevel": "4.2",
+                "codecProfile": "main",
+                "container": "video/mp4",
+                "frameRate": 30,
+                "hdr": [
+                    "hdr10"
+                ],
+                "pipelineId": 1,
+                "resolution": [
+                    1920,
+                    1080
+                ]
+            }
+        ]
+    },
+    "ONVIDEOFORMATCHANGED_VIDEOCONTAINER_VIDEO/MP2T_EVENTS":{
+        "method": "mediaInfo.onVideoFormatChanged",
+        "result": [
+            {
+                "codec": "mpeg1",
+                "codecLevel": "4.2",
+                "codecProfile": "main",
+                "container": "video/mp2t",
+                "frameRate": 30,
+                "hdr": [
+                    "hdr10"
+                ],
+                "pipelineId": 1,
+                "resolution": [
+                    1920,
+                    1080
+                ]
+            }
+        ]
+    },
+    "ONACTIVEAUDIOFORMATSCHANGED_AUDIOCODEC_AC4_EVENTS":{
+        "method": "manage_mediaInfo.onActiveAudioFormatsChanged",
+        "result": [
+            {
+                "bitRate": 128,
+                "channels": "5.1",
+                "codec": "ac4",
+                "container": "audio/mp4",
+                "pipelineId": 1,
+                "sampleRate": 48
+            }
+        ]
+    },
+    "ONACTIVEVIDEOFORMATSCHANGED_VIDEOCODEC_MPEG1_EVENTS":{
+        "method": "manage_mediaInfo.onActiveVideoFormatsChanged",
+        "result": [
+            {
+                "bitRate": 128,
+                "channels": "5.1",
+                "codec": "mpeg1",
+                "container": "audio/mp4",
+                "pipelineId": 1,
+                "sampleRate": 48
+            }
+        ]
+    }
 }

@@ -82,5 +82,92 @@
         "method": "manage_mediaInfo.activeVideoFormats",
 		"validationJsonPath": "result",
 		"content": "MEDIAINFO_ACTIVEVIDEOFORMATS"
+    },
+
+
+    
+    "MEDIAINFO_AUDIOCODEC_AS_MPEG3": {
+        "method": "mediaInfo.audioFormat",
+        "validationJsonPath": "result",
+        "content": "MEDIAINFO_AUDIOCODEC_MPEG3"
+    },
+    "MEDIAINFO_AUDIOCONTAINER_AS_AUDIO/WEBM": {
+        "method": "mediaInfo.audioFormat",
+        "validationJsonPath": "result",
+        "content": "MEDIAINFO_AUDIOCONTAINER_AUDIO/WEBM"
+    },
+    "ONAUDIOFORMATCHANGED_WITH_AUDIOCODEC_AS_MPEG3":{
+        "method": "mediaInfo.onAudioFormatChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "MEDIAINFO_AUDIOCODEC_MPEG3"        
+    },
+    "ONAUDIOFORMATCHANGED_WITH_AUDIOCONTAINER_AS_AUDIO/WEBM":{
+        "method": "mediaInfo.onAudioFormatChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "MEDIAINFO_AUDIOCONTAINER_AUDIO/WEBM"        
+    },
+    "ONAUDIOFORMATCHANGED_EVENT_WITH_AUDIOCODEC_AS_MPEG3": {
+        "method": "mediaInfo.onAudioFormatChanged",
+        "params": "MEDIAINFO_ONAUDIOFORMATCHANGED_AUDIOCODEC_MPEG3_EVENTS"
+    },
+    "ONAUDIOFORMATCHANGED_EVENT_WITH_AUDIOCONTAINER_AS_AUDIO/WEBM": {
+        "method": "mediaInfo.onAudioFormatChanged",
+        "params": "MEDIAINFO_ONAUDIOFORMATCHANGED_AUDIOCONTAINER_AUDIO/WEBM_EVENTS"
+    },
+    "MEDIAINFO_VIDEOCODEC_AS_MPEG1":{
+        "method": "mediaInfo.videoFormat",
+		"validationJsonPath": "result",
+		"content": "MEDIAINFO_VIDEOCODEC_MPEG1"
+    },
+    "MEDIAINFO_VIDEOCONTAINER_AS_VIDEO/MP2T":{
+        "method": "mediaInfo.videoFormat",
+		"validationJsonPath": "result",
+		"content": "MEDIAINFO_VIDEOCONTAINER_VIDEO/MP2T"
+    },
+    "ONVIDEOFORMATCHANGED_WITH_VIDEOCODEC_AS_MPEG1":{
+        "method": "mediaInfo.onVideoFormatChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "MEDIAINFO_VIDEOCODEC_MPEG1"
+    },
+    "ONVIDEOFORMATCHANGED_WITH_VIDEOCONTAINER_AS_VIDEO/MP2T":{
+        "method": "mediaInfo.onVideoFormatChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "MEDIAINFO_VIDEOCONTAINER_VIDEO/MP2T"
+    },
+    "ONVIDEOFORMATCHANGED_EVENT_WITH_VIDEOCODEC_AS_MPEG1": {
+        "method": "mediaInfo.onVideoFormatChanged",
+        "params": "MEDIAINFO_ONVIDEOFORMATCHANGED_VIDEOCODEC_MPEG1_EVENTS"
+    },
+    "ONVIDEOFORMATCHANGED_EVENT_WITH_VIDEOCONTAINER_AS_VIDEO/MP2T": {
+        "method": "mediaInfo.onVideoFormatChanged",
+        "params": "MEDIAINFO_ONVIDEOFORMATCHANGED_VIDEOCONTAINER_VIDEO/MP2T_EVENTS"
+    },
+    "MEDIAINFO_AUDIOCODEC_AS_AC4":{
+        "method": "manage_mediaInfo.activeAudioFormats",
+		"validationJsonPath": "result",
+		"content": "MEDIAINFO_AUDIOCODEC_AC4"
+    },
+    "MEDIAINFO_VIDEOCODEC_AS_VP8":{
+        "method": "manage_mediaInfo.activeVideoFormats",
+		"validationJsonPath": "result",
+		"content": "MEDIAINFO_VIDEOCODEC_VP8"
+    },
+    "ONACTIVEAUDIOFORMATSCHANGED_WITH_AUDIOCODEC_AS_AC4":{
+        "method": "manage_mediaInfo.onActiveAudioFormatsChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "MEDIAINFO_AUDIOCODEC_AC4"
+    },
+    "ONACTIVEVIDEOFORMATSCHANGED_WITH_VIDEOCODEC_AS_MPEG1":{
+        "method": "manage_mediaInfo.onActiveVideoFormatsChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "MEDIAINFO_VIDEOCODEC_VP8"
+    },
+    "ONACTIVEAUDIOFORMATSCHANGED_EVENT_WITH_AUDIOCODEC_AS_AC4": {
+        "method": "manage_mediaInfo.onActiveAudioFormatsChanged",
+        "params": "MEDIAINFO_ONACTIVEAUDIOFORMATSCHANGED_AUDIOCODEC_AC4_EVENTS"
+    },
+    "ONACTIVEVIDEOFORMATSCHANGED_EVENT_WITH_VIDEOCODEC_AS_MPEG1": {
+        "method": "manage_mediaInfo.onActiveVideoFormatsChanged",
+        "params": "MEDIAINFO_ONACTIVEVIDEOFORMATSCHANGED_VIDEOCODEC_MPEG1_EVENTS"
     }
 }
