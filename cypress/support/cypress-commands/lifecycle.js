@@ -169,6 +169,7 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
 
   // Send message to 3rd party app to invoke lifecycle history API to get history response
   cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}').then((response) => {
+    console.log('@@@@response', response)
     // Perform a null check on history response and check if response has nested properties result, _history, _value
     response = JSON.parse(response ?? '{}');
     if (
@@ -179,8 +180,7 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
     ) {
       const pretext = CONSTANTS.HISTORY_VALIDATION_REQ + lifecycleHistoryRequirementId.history.id;
       cy.log(
-        CONSTANTS.LIFECYCLE_HISTORY_RESPONSE +
-          JSON.stringify(response.report.result._history._value)
+        CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + JSON.stringify(response.result._history._value)
       );
       // Extract app history value
       const appHistory = response.result._history._value;

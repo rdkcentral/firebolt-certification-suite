@@ -43,6 +43,11 @@
 | sdk | name of the sdk |
 | key | key name of the firebolt data contains method/param/context. |
 
+Note: 
+ - deviceIdentifier should have values like device1, device2 or device3
+ - When device1 passed it will launch the default 3rd party app
+ - Other than device1 passed, launching the app on another devices based on the value associated with device indentifier.
+
 ### Examples:
 * `Given '3rd party app' registers for the 'Closed Captions Settings' event using the 'Firebolt' API`
 * `Given 'test.test.test' registers for the 'Closed Captions Settings' event using the 'Firebolt' API`
