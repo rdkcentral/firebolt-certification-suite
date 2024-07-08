@@ -197,18 +197,18 @@ Cypress.Commands.add('getSdkVersion', () => {
 Cypress.Commands.add('updateRunInfo', () => {
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
-  let configModuleConst;
-  try {
-    configModuleConst = require('../../../node_modules/configModule/constants/constants');
-  } catch (error) {
-    logger.info('Unable to read from configModule constants');
-  }
 
   cy.task('checkFileExists', reportEnvFile).then((exists) => {
     if (exists) {
       cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
         if (!tempFileExists) {
           try {
+            let configModuleConst;
+            try {
+              configModuleConst = require('../../../node_modules/configModule/constants/constants');
+            } catch (error) {
+              logger.info('Unable to read from configModule constants');
+            }
             // get data for runInfo
             cy.getDeviceData(CONSTANTS.DEVICE_MODEL, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
               (response) => {
