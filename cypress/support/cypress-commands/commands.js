@@ -1,5 +1,3 @@
-import configModuleConst from 'configModule/constants/constants';
-
 /**
  * Copyright 2024 Comcast Cable Communications Management, LLC
  *
@@ -199,7 +197,13 @@ Cypress.Commands.add('getSdkVersion', () => {
 Cypress.Commands.add('updateRunInfo', () => {
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
-  const configModuleConst = require('../../../node_modules/configModule/constants/constants');
+  let configModuleConst;
+  try {
+    configModuleConst = require('../../../node_modules/configModule/constants/constants');
+  } catch (error) {
+    logger.info('Unable to read from configModule constants');
+  }
+
   cy.task('checkFileExists', reportEnvFile).then((exists) => {
     if (exists) {
       cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
