@@ -1,3 +1,5 @@
+import configModuleConst from 'configModule/constants/constants';
+
 /**
  * Copyright 2024 Comcast Cable Communications Management, LLC
  *
@@ -197,7 +199,7 @@ Cypress.Commands.add('getSdkVersion', () => {
 Cypress.Commands.add('updateRunInfo', () => {
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
-  const envOpt = './options.txt';
+  const configModuleConst = require('../../../node_modules/configModule/constants/constants');
   cy.task('checkFileExists', reportEnvFile).then((exists) => {
     if (exists) {
       cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
@@ -245,7 +247,9 @@ Cypress.Commands.add('updateRunInfo', () => {
                   };
 
                   reportEnv.customData.data.forEach((item) => {
-                    if (labelToEnvMap[item.label]) {
+                    if (item.label === CONSTANTS.PRODUCT) {
+                      item.value = configModuleConst.PRODUCT ? configModuleConst.PRODUCT : 'N/A';
+                    } else if (labelToEnvMap[item.label]) {
                       item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
                     }
                   });
