@@ -114,8 +114,8 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
  * Given 'test.test.test' invokes the 'Firebolt' API to 'get device id'
  * Given 'secondary 3rd party app' invokes the 'Firebolt' API to 'get device id'
  * And '3rd party app' invokes the 'Firebolt' API to 'get device id' on 'device1' device
- * 
- * Note: 
+ *
+ * Note:
  *  - deviceIdentifier should have values like device1, device2 or device3
  *  - When device1 passed it will launch the default 3rd party app
  *  - Other than device1 passed, launching the app on another devices based on the value associated with device indentifier.
