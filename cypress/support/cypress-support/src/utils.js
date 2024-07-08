@@ -637,6 +637,29 @@ function checkForTags(tags) {
 
 /**
  * @module utils
+ * @function checkForSecondaryAppId
+ * @description Checks whether the appId is available in env
+ * @example
+ * checkForSecondaryAppId("appIdKey")
+ */
+function checkForSecondaryAppId(appId) {
+  let envAppIdKey;
+  try {
+    if (appId === CONSTANTS.SECONDARY_THIRD_PARTY_APP) {
+      envAppIdKey = CONSTANTS.SECONDARY_THIRD_PARTY_APP_ID;
+      return getEnvVariable(CONSTANTS.SECONDARY_THIRD_PARTY_APP_ID);
+    } else {
+      return appId;
+    }
+  } catch (err) {
+    fireLog.info(eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR)).then(() => {
+      throw new Error(eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR));
+    });
+  }
+}
+
+/**
+ * @module utils
  * @globalfunction resolveDeviceVariable
  * @description Resolve the device variable from the preprocessed data for the given key
  * @example
@@ -839,7 +862,9 @@ global.resolveAtRuntime = function (input) {
       }
       // If input not having "{{", returning content from runtime environment variable.
       else if (!input.includes('{{')) {
-        return getEnvVariable('runtime')[input] || input;
+        return getEnvVariable('runtime')[input] !== undefined
+          ? getEnvVariable('runtime')[input]
+          : input;
       }
     } else if (Array.isArray(input) && input.length > 0) {
       // input is an array; iterating through each element, it updates the actual value for that pattern if there is an occurrence of "{{".
@@ -847,6 +872,7 @@ global.resolveAtRuntime = function (input) {
         if (element.includes('{{')) {
           return replacingPatternOccurenceWithValue(element);
         }
+        return element;
       });
     } else {
       logger.info(`Passed input - ${input} must be an array or a string.`);
@@ -878,4 +904,5 @@ module.exports = {
   checkForTags,
   fireLog,
   parseValue,
+  checkForSecondaryAppId,
 };
