@@ -658,6 +658,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
       ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
       : UTILS.checkForSecondaryAppId(appCallSign); // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
+  // Creating data for basic intent to be sent to the app on launch
   let appCategory, data;
   if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
     appCategory =
@@ -673,6 +674,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
       },
     };
   }
+  // If testType == lifecycle, modifying data to include lifecycle_validation = true in the intent to be sent to the app
   if (
     Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI ||
     Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
@@ -687,13 +689,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
       },
     };
   }
+  // Creating intent and request map to be sent to the app on launch
   const messageIntent = {
     action: CONSTANTS.SEARCH,
     data: data,
     context: { source: CONSTANTS.DEVICE },
   };
-  // intent to be sent to the app on launch
-  // create the request map
   const requestMap = {
     method: CONSTANTS.DISCOVERY_LAUNCH,
     params: { [CONSTANTS.APP_ID]: appId, [CONSTANTS.INTENT]: messageIntent },
