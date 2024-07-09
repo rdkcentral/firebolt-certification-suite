@@ -716,5 +716,10 @@
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
         "content": "DISCOVERYLAUNCH_SEARCH_INTENT_SOURCE"
+    },
+    "ONNAVIGATETO_WITH_NULL_RESPONSE": {
+        "event": "discovery.onNavigateTo",
+        "validationJsonPath": "eventResponse",
+        "content": "NULL"
     }
 }
