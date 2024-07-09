@@ -388,6 +388,16 @@ Feature: UserGrants
         When User 'stops' recording lifecycle history for '3rd party app'
         Then User validates lifecycle history for '3rd party app' with 'background:foreground'
 
+    # Testing with grantPolicy having not supported capability, so it will return error since capability is not supported
+    @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
+    Scenario: UserGrants.Capabilities - Negative Scenario: Validate Capability Without supported capability expecting error
+        Given the environment has been set up for 'userGrants' tests
+        And 3rd party 'certification' app is launched
+        And Framework registers 'pinChallenge' test provider
+        # use localization.laton capability which is not supported xrn:firebolt:capability:localization:location
+        When '3rd party app' invokes the 'Firebolt' API to 'expect error for localization latlon'
+        Then 'Firebolt' platform responds with 'not supported error for localization latlon'
+
     # grantPolicy having lifespan:seconds and lifespanTtl:60 seconds
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
     Scenario: UserGrants.Capabilities R*2.2.3.4 - Positive Scenario: privacySetting - autoApplyPolicy:always property-getter:true silently grant
