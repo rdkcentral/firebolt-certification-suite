@@ -472,9 +472,11 @@ Given(
         });
       } else {
         fireboltCallObject = UTILS.getEnvVariable('runtime').fireboltCall;
+        console.log('2198 UTILS.getEnvVariable',UTILS.getEnvVariable('runtime'))
       }
 
       cy.then(() => {
+      console.log('2198 fireboltCallObject',fireboltCallObject)
         let method =
           methodType === CONSTANTS.SET
             ? typeof fireboltCallObject.setMethod == CONSTANTS.TYPE_FUNCTION
@@ -496,6 +498,7 @@ Given(
             ? resolveContentObject(fireboltCallObject.setContent)
             : resolveContentObject(fireboltCallObject.content);
 
+            console.log('2198 contentObject',contentObject)
         method = method.includes('_') ? method.split('_')[1] : method;
         contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
         validationJsonPath = validationJsonPath ? validationJsonPath : CONSTANTS.RESULT;
@@ -532,6 +535,7 @@ Given(
             try {
               if (contentObject && contentObject.data) {
                 contentObject.data.forEach((object) => {
+                  console.log('2198 object',object)
                   if (object.validations) {
                     const scenario = object.type;
                     const methodResponse = apiObject?.response ? apiObject.response : null;
@@ -760,13 +764,21 @@ Given(
             const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
             cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
               response = JSON.parse(response);
-              response = response.report;
-              cy.saveEventResponse(
-                response,
-                eventObject,
-                eventName,
-                eventExpected === 'triggers' ? true : false
-              );
+              if (
+                response &&
+                response.result &&
+                response.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
+              ) {
+                response.result = response.result.eventResponse;
+              }
+              cy.updateResponseForFCS(event, null, response).then((updatedResponse) => {
+                cy.saveEventResponse(
+                  updatedResponse,
+                  eventObject,
+                  eventName,
+                  eventExpected === 'triggers' ? true : false
+                );
+              });
             });
           }
 

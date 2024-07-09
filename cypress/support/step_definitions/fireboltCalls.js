@@ -960,7 +960,7 @@ Given(
 
           // Splitting the method name if it contains an underscore and using the first part to determine the action that decides sdk.
           if (event && event.includes('_')) {
-            action = setMethod.split('_')[0];
+            action = event.split('_')[0];
             event = event.split('_')[1];
           }
 
