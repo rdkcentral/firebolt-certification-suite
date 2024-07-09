@@ -122,7 +122,7 @@ Feature: Accessibility
          | Disable audioDescriptionSettings | disable audioDescription | disabled audioDescription settings | onaudioDescriptionSettings with disabled |
          | Enable audioDescriptionSettings  | enable audioDescription  | enabled audioDescription settings  | onaudioDescriptionSettings with enabled  |
 
-   @sdk @transport @Sev2
+   @sdk @transport @requiresPlatformImplementation @Sev2
    Scenario: Accessibility.onClosedCaptionsSettingsChanged event - Positive Scenario: Clear listeners
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And I clear 'accessibility onClosedCaptionsSettingsChanged event' listeners

@@ -73,7 +73,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayEntity Foreground without options for entityType playlist       | launch app with playentity intent without options                               | onNavigateTo with playentity intent without options                               |
             | PlayEntity Foreground with programType concert                      | launch app with playentity intent with programtype concert                      | onNavigateTo with playentity intent with programtype concert                      |
 
-    @sdk @transport
+    @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in inactive
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'inactive'

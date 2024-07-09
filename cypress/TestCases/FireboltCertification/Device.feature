@@ -59,7 +59,7 @@ Feature: Device
             | Scenario                | Method  | API_Key              | validation_key          |
             | Validate device version | version | fetch device version | expected device version |
 
-    @regression @sdk @Sev2
+    @regression @sdk @requiresPlatformImplementation @Sev2
     Scenario: Device.onNameChanged - Positive Scenario: Clearing event listeners
         When '3rd party app' registers for the 'device onNameChanged' event using the 'Firebolt' API
         And I clear 'device onNameChanged event' listeners
