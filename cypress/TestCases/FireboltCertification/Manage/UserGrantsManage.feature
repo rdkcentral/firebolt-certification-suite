@@ -2,7 +2,7 @@ Feature: UserGrants_Manage
 
     # First allowing the grant and calling usergrants.app then checking grant using Capabilities.granted
     @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: Usergrants.app - Positive Scenario: with grant(ackchallenge)
+    Scenario: Usergrants.app R.5.1.2 - Positive Scenario: with grant(ackchallenge)
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'ackchallenge' test provider
@@ -17,7 +17,7 @@ Feature: UserGrants_Manage
 
     # First allowing the grant for device.distributor for the device and calling usergrants.device and validating.
     @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: Usergrants.device - Positive Scenario: with grant(ackchallenge)
+    Scenario: Usergrants.device R.5.1.3 - Positive Scenario: with grant(ackchallenge)
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'ackchallenge' test provider
@@ -30,7 +30,7 @@ Feature: UserGrants_Manage
 
     # First allowing the grant and calling usergrants.capability then checking grant using Capabilities.granted
     @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: Usergrants.capability - Positive Scenario: with grant(ackchallenge)
+    Scenario: Usergrants.capability R.5.1.4 - Positive Scenario: with grant(ackchallenge)
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'ackchallenge' test provider
@@ -53,14 +53,14 @@ Feature: UserGrants_Manage
         Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
 
         Examples:
-            | Scenario                         | Grant_Key                           | Grant_Method_Content      | Key                              | Validation_Key                                   | Method |
-            | grant capability at device level | grant device distributor capability | null for usergrants grant | get usergrants for device        | expected list of grants for device               | grant  |
-            | grant capability at app level    | grant device id capability          | null for usergrants grant | get usergrants for 3rd party app | expected list of grants for 3rd party app        | grant  |
-            | deny capability at device level  | deny device distributor capability  | null for usergrants deny  | get usergrants for device        | expected list of denied grants for device        | deny   |
-            | deny capability at app level     | deny device id capability           | null for usergrants deny  | get usergrants for 3rd party app | expected list of denied grants for 3rd party app | deny   |
+            | Scenario                         | Grant_Key                           | Grant_Method_Content      | Key                              | Validation_Key                                   | Method        |
+            | grant capability at device level | grant device distributor capability | null for usergrants grant | get usergrants for device        | expected list of grants for device               | grant R.5.1.5 |
+            | grant capability at app level    | grant device id capability          | null for usergrants grant | get usergrants for 3rd party app | expected list of grants for 3rd party app        | grant R.5.1.5 |
+            | deny capability at device level  | deny device distributor capability  | null for usergrants deny  | get usergrants for device        | expected list of denied grants for device        | deny R.5.1.6  |
+            | deny capability at app level     | deny device id capability           | null for usergrants deny  | get usergrants for 3rd party app | expected list of denied grants for 3rd party app | deny R.5.1.6  |
 
     @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
-    Scenario Outline: Usergrants.clear - Positive Scenario: <Scenario>
+    Scenario Outline: Usergrants.clear R.5.1.7 - Positive Scenario: <Scenario>
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'ackchallenge' test provider
@@ -158,7 +158,7 @@ Feature: UserGrants_Manage
             | invalid appId                         | request | get usergrants request with invalid options appId parameter  | invalid parameter for usergrants request |
 
     @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capability - Positive Scenario: by clearing the grant and validating usergrants.capability as empty
+    Scenario: UserGrants.Capability R.5.1.4 - Positive Scenario: by clearing the grant and validating usergrants.capability as empty
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'ackchallenge' test provider
@@ -174,7 +174,7 @@ Feature: UserGrants_Manage
         Then 'Firebolt' platform responds with 'null for capabilities granted'
 
     @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: Usergrants.app - Positive Scenario: by clearing the grant and validating usergrants.app as empty
+    Scenario: Usergrants.app R.5.1.2 - Positive Scenario: by clearing the grant and validating usergrants.app as empty
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'ackchallenge' test provider

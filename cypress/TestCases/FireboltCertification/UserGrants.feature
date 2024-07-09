@@ -4,14 +4,14 @@ Feature: UserGrants
     # Case-1: Validating by allowing the grant
     # Case-2: Validating by denying the grant (using pinchallenge and acknowledge).
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Grant - Positive Scenario: Validate Capabilities with denied (pinChallenge) and lifespan once
+    Scenario: UserGrants.Grant R*2.2.2.1 - Positive Scenario: Validate Capabilities with denied (pinChallenge) and lifespan once
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         # Case-1
         And Framework registers 'pinChallenge' test provider
         And User 'starts' recording lifecycle history for '3rd party app'
         When '3rd party app' invokes the 'Firebolt' API to 'get postalcode'
-        Then 'Firebolt' platform responds with '20850 for localization postalcode'
+        Then 'Firebolt' platform responds with 'expected value for localization postalcode'
         When '3rd party app' invokes the 'Firebolt' API to 'check if capabilities is granted for postalcode'
         Then 'Firebolt' platform responds with 'null for capabilities granted'
         When User 'stops' recording lifecycle history for '3rd party app'
@@ -28,7 +28,7 @@ Feature: UserGrants
 
     # Testing with grantPolicy having one option with one step(here step with acknowledge)
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with one step option(only acknowledgeChallenge)
+    Scenario: UserGrants.Capabilities R.2.1.1 - Positive Scenario: Validate Capability Grant access with one step option(only acknowledgeChallenge)
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'ackchallenge' test provider
@@ -42,9 +42,9 @@ Feature: UserGrants
 
     # Testing with grantPolicy having with scope device and grant access, so all the apps in that device may have the access
     # provide access using any 3rd party and check in another 3rd party
-    # Involves 2 apps, Will be handled in FIRECERT-2194
+    # Involves 2 apps, Will be handled in separate ticket
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with scope device
+    Scenario: UserGrants.Capabilities R.4.4.1.1 - Positive Scenario: Validate Capability Grant access with scope device
         Given the environment has been set up for 'userGrants' tests
         # 3rd party app
         And 3rd party 'certification' app is launched
@@ -63,9 +63,9 @@ Feature: UserGrants
 
     # Deny access with scope device, so all the apps in that device may not have the access
     # launch a 3rd party and provide acess using any 3rd party and check in another 3rd party
-    # Involves 2 apps, Will be handled in FIRECERT-2194
+    # Involves 2 apps, Will be handled in separate ticket
     @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Negative Scenario: Validate Capability access denied for pinChallenge with scope device
+    Scenario: UserGrants.Capabilities R.4.4.1.1 - Negative Scenario: Validate Capability access denied for pinChallenge with scope device
         Given the environment has been set up for 'userGrants' tests
         # 3rd party app
         And 3rd party 'certification' app is launched
@@ -82,7 +82,7 @@ Feature: UserGrants
         Then 'Firebolt' platform responds with 'false for capabilities granted'
 
     # Testing with grantPolicy having device level grant access and check in another device
-    # Involves multiple devices, Will be handled in FIRECERT-2195
+    # Involves multiple devices, Will be handled in separate ticket
     @Usergrants @coreSDK @sdk @transport @notSupported
     Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capability permission in 2 diff devices
         Given the environment has been set up for 'userGrants' tests
@@ -106,7 +106,7 @@ Feature: UserGrants
     # Case-1: Allowing the grant and validating the result
     # Case-2: Checking the lifecycle history to check ui is not coming and validating for result because already allowed grant in Case-1.
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan forever
+    Scenario: UserGrants.Capabilities R*2.2.2.2 - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan forever
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         #Case-1
@@ -129,7 +129,7 @@ Feature: UserGrants
     # Case-1: Denying the grant and validating for error
     # Case-2: Checking the lifecycle history to check ui is not coming and calling postal code and validating for error because already denied grant in Case-1.
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan forever
+    Scenario: UserGrants.Capabilities R*2.2.2.2 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan forever
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         #Case-1
@@ -153,7 +153,7 @@ Feature: UserGrants
     # Case-2: Closing and launching the app, allowing grant and validating ui is coming again
     # Added @notSupported as glue is not implemented yet.
     @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan appActive
+    Scenario: UserGrants.Capabilities R*2.2.2.3 - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan appActive
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         #Case-1
@@ -180,7 +180,7 @@ Feature: UserGrants
     # Case-2: Closing and launching the app, denying grant and validating ui is coming again
     # Added @notSupported as glue is not implemented yet.
     @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan appActive
+    Scenario: UserGrants.Capabilities R*2.2.2.3 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan appActive
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         #Case-1
@@ -208,7 +208,7 @@ Feature: UserGrants
     # Case-2: Calling the API again within the ttl and it should not ask for grant
     # Case-3: Calling API after ttl, here it will ask grant again
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (ackchallenge) and lifespan:seconds lifespanTtl:60 sec
+    Scenario: UserGrants.Capabilities R*2.2.2.5 - Positive Scenario: Validate Capabilities with granted (ackchallenge) and lifespan:seconds lifespanTtl:60 sec
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         #Case-1
@@ -241,7 +241,7 @@ Feature: UserGrants
     # Case-2: Calling the API again within the ttl and it should not ask for grant
     # Case-3: Calling API after ttl, here it will ask for grant again
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60 sec
+    Scenario: UserGrants.Capabilities R*2.2.2.5 - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60 sec
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         # Case-1
@@ -273,7 +273,7 @@ Feature: UserGrants
     # Case-1: Allowing grant and validating the result
     # Case-2: Before ttl ends rebooting the device and on calling api, it should return result without asking for grant
     @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capabilities with grant(pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl it should not ask for grant
+    Scenario: UserGrants.Capabilities R*2.2.2.5 - Positive Scenario: Validate Capabilities with grant(pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl it should not ask for grant
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         # Case-1
@@ -302,7 +302,7 @@ Feature: UserGrants
     # Case-1: Allowing grant and validating the result
     # Case-2: Reboot the device after ttl, after reboot when API is called again and asks for grant, then deny grant
     @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capabilities with grant(ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant
+    Scenario: UserGrants.Capabilities R*2.2.2.5 - Positive Scenario: Validate Capabilities with grant(ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         # Case-1
@@ -333,7 +333,7 @@ Feature: UserGrants
     # Case-1: Deny grant and validate error
     # Case-2: Before ttl ends rebooting the device, call api and expect to return result without asking for grant
     @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl and it should not ask grant
+    Scenario: UserGrants.Capabilities R*2.2.2.5 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl and it should not ask grant
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         # Case-1
@@ -362,7 +362,7 @@ Feature: UserGrants
     # Case-1: Deny grant and validate error
     # Case-2: Reboot device after ttl, after reboot when api is called again, expect to ask grant and then deny grant
     @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant
+    Scenario: UserGrants.Capabilities R*2.2.2.5 - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         # Case-1
@@ -390,7 +390,7 @@ Feature: UserGrants
 
     # grantPolicy having lifespan:seconds and lifespanTtl:60 seconds
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: privacySetting - autoApplyPolicy:always property-getter:true silently grant
+    Scenario: UserGrants.Capabilities R*2.2.3.4 - Positive Scenario: privacySetting - autoApplyPolicy:always property-getter:true silently grant
         Given the environment has been set up for 'userGrants' tests
         And 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
         And 3rd party 'certification' app is launched
@@ -406,7 +406,7 @@ Feature: UserGrants
     # First testcase having grantPolicy with lifespan:seconds and lifespanTtl:60 seconds
     # Second testcase having lifespan:appActive
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario Outline: UserGrants.Capabilities - Positive Scenario: <Scenario>
+    Scenario Outline: UserGrants.Capabilities <ReqId>- Positive Scenario: <Scenario>
         Given the environment has been set up for 'userGrants' tests
         And 1st party app invokes the 'Firebolt' API to '<Key>'
         And 3rd party 'certification' app is launched
@@ -420,13 +420,13 @@ Feature: UserGrants
         Then 'Firebolt' platform responds with 'false for capabilities granted'
 
         Examples:
-            | Scenario                                                                             | Key                    | API_Key                                  | Invalid_Request_Error                       | Check_Capabilities_Granted                                                   |
-            | Validate Capability autoApplyPolicy:always property-getter:false silently denied     | disable closedCaptions | expect error for closedCaptions settings | invalid request for closedCaptions settings | check if accessibility closedCaptions capability is granted with role as use |
-            | Validate Capability autoApplyPolicy:disallowed property-getter:false silently denied | disable voiceguidance  | expect error for voiceGuidance Settings  | invalid request for voiceGuidance settings  | check if accessibility voiceGuidance capability is granted with role as use  |
+            | Scenario                                                                             | Key                    | API_Key                                  | Invalid_Request_Error                       | Check_Capabilities_Granted                                                   | ReqId     |
+            | Validate Capability autoApplyPolicy:always property-getter:false silently denied     | disable closedCaptions | expect error for closedCaptions settings | invalid request for closedCaptions settings | check if accessibility closedCaptions capability is granted with role as use | R*2.2.3.4 |
+            | Validate Capability autoApplyPolicy:disallowed property-getter:false silently denied | disable voiceguidance  | expect error for voiceGuidance Settings  | invalid request for voiceGuidance settings  | check if accessibility voiceGuidance capability is granted with role as use  | R*2.2.3.6 |
 
     # grantPolicy having lifespan:appActive
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:true silently grant
+    Scenario: UserGrants.Capabilities R*2.2.3.5 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:true silently grant
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And 1st party app invokes the 'Firebolt' API to 'set privacy allow watchHistory as true'
@@ -440,7 +440,7 @@ Feature: UserGrants
 
     # grantPolicy having lifespan:appActive
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false grant
+    Scenario: UserGrants.Capabilities R*2.2.3.5 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false grant
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And 1st party app invokes the 'Firebolt' API to 'set privacy allow watchHistory as false'
@@ -457,7 +457,7 @@ Feature: UserGrants
 
     # grantPolicy having lifespan:appActive
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false deny
+    Scenario: UserGrants.Capabilities R*2.2.3.5 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false deny
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And 1st party app invokes the 'Firebolt' API to 'set privacy allow watchHistory as false'
@@ -474,7 +474,7 @@ Feature: UserGrants
 
     # grantPolicy having lifespan:appActive
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true grant
+    Scenario: UserGrants.Capabilities R*2.2.3.6 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true grant
         Given the environment has been set up for 'userGrants' tests
         And 1st party app invokes the 'Firebolt' API to 'disable voiceguidance'
         And 3rd party 'certification' app is launched
@@ -492,7 +492,7 @@ Feature: UserGrants
 
     # grantPolicy having lifespan:appActive
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true deny
+    Scenario: UserGrants.Capabilities R*2.2.3.6 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true deny
         Given the environment has been set up for 'userGrants' tests
         And 1st party app invokes the 'Firebolt' API to 'disable voiceguidance'
         And 3rd party 'certification' app is launched
@@ -510,7 +510,7 @@ Feature: UserGrants
 
     # grantPolicy having lifespan:appActive
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario Outline: UserGrants.Capabilities - Positive Scenario: with privacySetting - <Scenario>
+    Scenario Outline: UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - <Scenario>
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And 1st party app invokes the 'Firebolt' API to '<Key>'
@@ -532,7 +532,7 @@ Feature: UserGrants
 
     #grantPolicy having lifespan:appActive
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario Outline: UserGrants.Capabilities - Positive Scenario: with privacySetting - <Scenario>
+    Scenario Outline: UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - <Scenario>
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And 1st party app invokes the 'Firebolt' API to '<Key>'
@@ -554,7 +554,7 @@ Feature: UserGrants
 
     #grantPolicy having lifespan:appActive
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario Outline: UserGrants.Capabilities - Positive Scenario:privacySetting - <Scenario>
+    Scenario Outline: UserGrants.Capabilities <ReqId> - Positive Scenario:privacySetting - <Scenario>
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And 1st party app invokes the 'Firebolt' API to 'set privacy allow watchHistory as true'
@@ -570,13 +570,13 @@ Feature: UserGrants
         Then 'Firebolt' platform responds with 'false for capabilities granted'
 
         Examples:
-            | Scenario                                                                                            | API_Key                              | Invalid_Request_Error                   | Method_Content                       | Check_Capabilities_Granted                                       |
-            | Validate Capability updateProperty:true - property-getter:true deny property should be set to false | expect error for secondscreen device | invalid request for secondscreen device | false for privacy allow watchHistory | check if secondscreen device capability is granted with role use |
-            | Validate Capability updateProperty:false - property-getter:true deny property should not be updated | expect error for allow profile flags | invalid request for profile flags       | true for privacy allow watchHistory  | check if profile flags capability is granted with role use       |
+            | Scenario                                                                                            | API_Key                              | Invalid_Request_Error                   | Method_Content                       | Check_Capabilities_Granted                                       | ReqId      |
+            | Validate Capability updateProperty:true - property-getter:true deny property should be set to false | expect error for secondscreen device | invalid request for secondscreen device | false for privacy allow watchHistory | check if secondscreen device capability is granted with role use | R*2.2.3.9  |
+            | Validate Capability updateProperty:false - property-getter:true deny property should not be updated | expect error for allow profile flags | invalid request for profile flags       | true for privacy allow watchHistory  | check if profile flags capability is granted with role use       | R*2.2.3.10 |
 
     # grantPolicy having lifespan:appActive
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario Outline: UserGrants.Capabilities - Positive Scenario:privacySetting - <Scenario>
+    Scenario Outline: UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - <Scenario>
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
@@ -601,7 +601,7 @@ Feature: UserGrants
     # Case-1: Allow grant and validate the result
     # Case-2: Call API after device is rebooted,expect to ask for grant, deny grant and validate error
     @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capabilities with grant (pinChallenge) and lifespan powerActive - after reboot deny and validate
+    Scenario: UserGrants.Capabilities R*2.2.2.4 - Positive Scenario: Validate Capabilities with grant (pinChallenge) and lifespan powerActive - after reboot deny and validate
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         # Case-1
@@ -631,7 +631,7 @@ Feature: UserGrants
     # Case-1: Deny grant and validate error
     # Case-2: Call API after device is rebooted,expect to ask for grant, allow grant and validate result
     @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan powerActive - after reboot grant and validate
+    Scenario: UserGrants.Capabilities R*2.2.2.4 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan powerActive - after reboot grant and validate
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         # Case-1
@@ -660,7 +660,7 @@ Feature: UserGrants
     # 1st example: Call usergrants.request for account.uid with granting acknowledgeChallenge for role use and validate capabilities.info for same capability and check role use is granted and not any other role
     # 2nd example: Call usergrants.request for account.uid with granting acknowledgeChallenge for role manage and validate capabilities.info for same capability and check role manage is granted and not any other role
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario Outline: UserGrants.request - Positive Scenario: <Scenario>
+    Scenario Outline: UserGrants.request R.1.1 - Positive Scenario: <Scenario>
         Given the environment has been set up for 'userGrants' tests
         And Framework registers 'ackchallenge' test provider
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
@@ -678,7 +678,7 @@ Feature: UserGrants
     # 1st example: Call usergrants.request for account.uid with denying acknowledgeChallenge for role use and validate capabilities.info for same capability and check role use is denied
     # 2nd example: Call usergrants.request for account.uid with denying acknowledgeChallenge for role manage and validate capabilities.info for same capability and check role manage is denied
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario Outline: UserGrants.request - Negative Scenario: <Scenario>
+    Scenario Outline: UserGrants.request R.1.2 - Negative Scenario: <Scenario>
         Given the environment has been set up for 'userGrants' tests
         And Framework registers 'ackchallenge' test provider
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
@@ -695,7 +695,7 @@ Feature: UserGrants
 
     # Call usergrants.request with securestorage for role use, but the grant policy has role manage, since role mismatch it should return null since no grantpolicy is matched
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.request - Negative Scenario: Validate userGrants.request call with role use, but grantpolicy having manage capability
+    Scenario: UserGrants.request R.1.1 - Negative Scenario: Validate userGrants.request call with role use, but grantpolicy having manage capability
         Given the environment has been set up for 'userGrants' tests
         And Framework registers 'pinChallenge' test provider
         When 1st party app invokes the 'Firebolt' API to 'request grant for secure storage capability with role use'
@@ -708,7 +708,7 @@ Feature: UserGrants
         Then 'Firebolt' platform responds to '1st party app' with 'granted for secure storage capability with role use'
 
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.request - Positive Scenario: Validate UserGrants.request which grantpolicy is not present in manifest
+    Scenario: UserGrants.request R.1.2 - Positive Scenario: Validate UserGrants.request which grantpolicy is not present in manifest
         Given the environment has been set up for 'userGrants' tests
         When 1st party app invokes the 'Firebolt' API to 'request grant for device info capability with role use'
         And 3rd party 'certification' app is launched
@@ -749,7 +749,7 @@ Feature: UserGrants
 
     # Call capabilities.request for account.uid with granting acknowledgeChallenge for role provide and validate by calling capabilities.info with same capability and check which role manage is granted and not any other role
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.request - Positive Scenario: Validate usergrants.request by granting for role provide
+    Scenario: UserGrants.request R.2.1.1 - Positive Scenario: Validate usergrants.request by granting for role provide
         Given the environment has been set up for 'userGrants' tests
         And Framework registers 'ackchallenge' test provider
         When 1st party app invokes the 'Firebolt' API to 'request grant for account uid capability with role provide'
@@ -764,7 +764,7 @@ Feature: UserGrants
 
     # Call capabilities.request for account.uid with denying acknowledgeChallenge for role manage and validate by calling capabilities.info with same capability and check which role manage is denied
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.request - Negative Scenario: Validate usergrants.request by denying for role provide
+    Scenario: UserGrants.request R.2.1.1 - Negative Scenario: Validate usergrants.request by denying for role provide
         Given the environment has been set up for 'userGrants' tests
         And Framework registers 'ackchallenge' test provider
         When 1st party app invokes the 'Firebolt' API to 'request grant for account uid capability with role provide'
