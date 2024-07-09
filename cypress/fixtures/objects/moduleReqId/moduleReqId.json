@@ -1103,21 +1103,21 @@
                     }
                 ]
             },
-            "UserGrants.request R.2.1.1 - Positive Scenario: Validate usergrants.request by granting for role provide": {
+            "UserGrants.request R.1.1 - Positive Scenario: Validate usergrants.request by granting for role provide": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants R.2.1.1, R.1.1",
+                            "id": "UserGrants R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.request R.2.1.1 - Negative Scenario: Validate usergrants.request by denying for role provide": {
+            "UserGrants.request R.1.2 - Negative Scenario: Validate usergrants.request by denying for role provide": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants R.2.1.1, R.1.2",
+                            "id": "UserGrants R.1.2",
                             "description": "Should not be null"
                         }
                     }

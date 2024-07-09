@@ -749,7 +749,7 @@ Feature: UserGrants
 
     # Call capabilities.request for account.uid with granting acknowledgeChallenge for role provide and validate by calling capabilities.info with same capability and check which role manage is granted and not any other role
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.request R.2.1.1 - Positive Scenario: Validate usergrants.request by granting for role provide
+    Scenario: UserGrants.request R.1.1 - Positive Scenario: Validate usergrants.request by granting for role provide
         Given the environment has been set up for 'userGrants' tests
         And Framework registers 'ackchallenge' test provider
         When 1st party app invokes the 'Firebolt' API to 'request grant for account uid capability with role provide'
@@ -764,7 +764,7 @@ Feature: UserGrants
 
     # Call capabilities.request for account.uid with denying acknowledgeChallenge for role manage and validate by calling capabilities.info with same capability and check which role manage is denied
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.request R.2.1.1 - Negative Scenario: Validate usergrants.request by denying for role provide
+    Scenario: UserGrants.request R.1.2 - Negative Scenario: Validate usergrants.request by denying for role provide
         Given the environment has been set up for 'userGrants' tests
         And Framework registers 'ackchallenge' test provider
         When 1st party app invokes the 'Firebolt' API to 'request grant for account uid capability with role provide'
