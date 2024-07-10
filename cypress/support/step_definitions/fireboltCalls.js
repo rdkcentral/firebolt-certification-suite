@@ -543,7 +543,7 @@ Given(/User triggers event with value as '(.+)'/, (key) => {
     cy.log(CONSTANTS.TRIGGER_EVENT_REQUEST + JSON.stringify(requestMap)).then(() => {
       cy.sendMessagetoPlatforms(requestMap).then((result) => {
         if (result) {
-          logger.info(CONSTANTS.TRIGGER_EVENT_SUCCESS);
+          console.log(CONSTANTS.TRIGGER_EVENT_SUCCESS);
         }
       });
     });
