@@ -125,7 +125,6 @@ Given(
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : UTILS.checkForSecondaryAppId(appId);
     let requestTopic, responseTopic;
-    const deviceName = deviceIdentifier;
 
     cy.then(() => {
       // Failing the test, When device identifier is passed and corresponding value not there in environment variable.
@@ -144,112 +143,101 @@ Given(
         deviceIdentifier = UTILS.getEnvVariable(deviceIdentifier, false);
         cy.launchApp(CONSTANTS.CERTIFICATION, appId, deviceIdentifier);
       }
-      // Launching the default 3rd party app when device identifier has "device1"
+      // Launching the default 3rd party app when device identifier has 'device1'
       else if (deviceIdentifier === CONSTANTS.DEVICE1) {
         deviceIdentifier = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC);
         cy.launchApp(CONSTANTS.CERTIFICATION, appId, deviceIdentifier);
       }
-    })
-      .then(() => {
-        requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
-        responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
+    }).then(() => {
+      requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
+      responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
 
-        // Fetching the data like method, param, context and action etc.
-        cy.fireboltDataParser(key, sdk).then((parsedDataArr) => {
-          parsedDataArr.forEach((parsedData) => {
-            const method = parsedData.method;
-            const param = parsedData.params;
-            const context = parsedData.context;
-            const action = parsedData.action;
-            const expected = parsedData.expected;
-            let isNotSupportedApi = false;
+      // Fetching the data like method, param, context and action etc.
+      cy.fireboltDataParser(key, sdk).then((parsedDataArr) => {
+        parsedDataArr.forEach((parsedData) => {
+          const method = parsedData.method;
+          const param = parsedData.params;
+          const context = parsedData.context;
+          const action = parsedData.action;
+          const expected = parsedData.expected;
+          let isNotSupportedApi = false;
 
-            if (UTILS.isScenarioExempted(method, param)) {
-              isNotSupportedApi = true;
-            }
-            if (
-              Cypress.env(CONSTANTS.TEST_TYPE) &&
-              Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
-            ) {
-              cy.fetchLifecycleHistory(appId);
-            }
-            const communicationMode = UTILS.getCommunicationMode();
-            const additionalParams = {
-              communicationMode: communicationMode,
-              action: action,
-              isNotSupportedApi: isNotSupportedApi,
-            };
-            const params = { method: method, methodParams: param };
+          if (UTILS.isScenarioExempted(method, param)) {
+            isNotSupportedApi = true;
+          }
+          if (
+            Cypress.env(CONSTANTS.TEST_TYPE) &&
+            Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
+          ) {
+            cy.fetchLifecycleHistory(appId);
+          }
+          const communicationMode = UTILS.getCommunicationMode();
+          const additionalParams = {
+            communicationMode: communicationMode,
+            action: action,
+            isNotSupportedApi: isNotSupportedApi,
+          };
+          const params = { method: method, methodParams: param };
 
-            // Creating intent message using above details to send it to 3rd party app.
-            const intentMessage = UTILS.createIntentMessage(
-              CONSTANTS.TASK.CALLMETHOD,
-              params,
-              additionalParams
-            );
+          // Creating intent message using above details to send it to 3rd party app.
+          const intentMessage = UTILS.createIntentMessage(
+            CONSTANTS.TASK.CALLMETHOD,
+            params,
+            additionalParams
+          );
 
+          fireLog.info(
+            `Call from app: ${appId}, device: ${deviceIdentifier || UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)} - method: ${method} params: ${JSON.stringify(param)}`
+          );
+          if (Cypress.env('isRpcOnlyValidation')) {
             fireLog.info(
-              `Call from app: ${appId}, device: ${deviceIdentifier || UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)} - method: ${method} params: ${JSON.stringify(param)}`
+              `${method} response will be retrieved in subsequent steps and validated when the rpc-only methods are invoked. Proceeding to the next step.`
             );
-            if (Cypress.env('isRpcOnlyValidation')) {
-              fireLog.info(
-                `${method} response will be retrieved in subsequent steps and validated when the rpc-only methods are invoked. Proceeding to the next step.`
-              );
-            }
+          }
 
-            // Adding additional details to created intent if any platform specific data is present in configModule.
-            cy.runIntentAddon(CONSTANTS.TASK.CALLMETHOD, intentMessage).then((parsedIntent) => {
-              // Sending message to 3rd party app.
-              cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent).then((result) => {
-                if (!Cypress.env('isRpcOnlyValidation')) {
-                  if (result === CONSTANTS.NO_RESPONSE) {
-                    assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
-                  }
-                  result = JSON.parse(result);
-                  cy.updateResponseForFCS(method, params, result).then((updatedResponse) => {
-                    // Create a deep copy to avoid reference mutation
-                    const dataToBeCensored = _.cloneDeep(result);
-
-                    // Call the 'censorData' command to hide sensitive data
-                    cy.censorData(method, dataToBeCensored).then((maskedResult) => {
-                      const responseType = result.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
-                      fireLog.info(
-                        `Response from app: ${appId}, device:  ${deviceIdentifier || UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)} - ${JSON.stringify(maskedResult[responseType])}`
-                      );
-                    });
-
-                    // If method and params are not supported setting isScenarioExempted as true for further validation.
-                    if (UTILS.isScenarioExempted(method, param)) {
-                      Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
-                    }
-
-                    // Creating object with method name, params and response etc and storing it in a global list for further validation.
-                    const apiAppObject = new apiObject(
-                      method,
-                      param,
-                      context,
-                      updatedResponse,
-                      expected,
-                      appId
-                    );
-                    UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
-                  });
+          // Adding additional details to created intent if any platform specific data is present in configModule.
+          cy.runIntentAddon(CONSTANTS.TASK.CALLMETHOD, intentMessage).then((parsedIntent) => {
+            // Sending message to 3rd party app.
+            cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent).then((result) => {
+              if (!Cypress.env('isRpcOnlyValidation')) {
+                if (result === CONSTANTS.NO_RESPONSE) {
+                  assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
                 }
-              });
+                result = JSON.parse(result);
+                cy.updateResponseForFCS(method, params, result).then((updatedResponse) => {
+                  // Create a deep copy to avoid reference mutation
+                  const dataToBeCensored = _.cloneDeep(result);
+
+                  // Call the 'censorData' command to hide sensitive data
+                  cy.censorData(method, dataToBeCensored).then((maskedResult) => {
+                    const responseType = result.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
+                    fireLog.info(
+                      `Response from app: ${appId}, device:  ${deviceIdentifier || UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)} - ${JSON.stringify(maskedResult[responseType])}`
+                    );
+                  });
+
+                  // If method and params are not supported setting isScenarioExempted as true for further validation.
+                  if (UTILS.isScenarioExempted(method, param)) {
+                    Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
+                  }
+
+                  // Creating object with method name, params and response etc and storing it in a global list for further validation.
+                  const apiAppObject = new apiObject(
+                    method,
+                    param,
+                    context,
+                    updatedResponse,
+                    expected,
+                    appId
+                  );
+                  UTILS.getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
+                });
+              }
             });
           });
         });
-      })
-      .then(() => {
-        if (deviceIdentifier && deviceName !== CONSTANTS.DEVICE1) {
-          const publishMessage = UTILS.createIntentMessage(
-            CONSTANTS.TASK.CALLMETHOD,
-            { method: 'Lifecycle.close', methodParams: { reason: 'error' } },
-            { communicationMode: UTILS.getCommunicationMode() }
-          );
-          cy.sendMessagetoApp(requestTopic, responseTopic, publishMessage);
-        }
       });
+    });
   }
 );
 
