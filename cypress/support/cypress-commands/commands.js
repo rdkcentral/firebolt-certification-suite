@@ -856,16 +856,20 @@ Cypress.Commands.add('startOrStopInteractionsService', (action) => {
   // Sending message to the platform to call designated handler
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     if (result?.success) {
-      fireLog.assert(true, `Firebolt interactions collection service ${action} successfully`).then(() => {
-        return true;
-      });
+      fireLog
+        .assert(true, `Firebolt interactions collection service ${action} successfully`)
+        .then(() => {
+          return true;
+        });
     } else {
-      fireLog.assert(
-        false,
-        `Firebolt interactions collection service with action as ${action} has failed with error ${JSON.stringify(result.message)}`
-      ).then(() => {
-        return false;
-      });
+      fireLog
+        .assert(
+          false,
+          `Firebolt interactions collection service with action as ${action} has failed with error ${JSON.stringify(result.message)}`
+        )
+        .then(() => {
+          return false;
+        });
     }
   });
 });
