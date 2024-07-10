@@ -128,3 +128,15 @@ Note: Key name value is an object and it can contains data as below
 * `And '3rd party app' invokes the 'Firebolt' get API 'CLOSEDCAPTION_SETTINGS'`
 * `And '3rd party app' invokes the 'Firebolt' get API`
 * `And 'test_app' invokes the 'Firebolt' get API 'CLOSEDCAPTION_SETTINGS'`
+
+## User triggers event with value as '(.+)'
+
+### Purpose: sending message to platform to make post call to set event values.
+
+### Params:
+| Param | Definition |
+| --- | --- |
+| key |  key name of the event data |
+
+### Examples:
+* `And User triggers event with value as 'onColorimetryChanged event with colorimetry as BT2020cYCC'`

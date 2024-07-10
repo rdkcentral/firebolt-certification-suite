@@ -109,4 +109,18 @@ function fetchEventResponse(parsedParam) {
   }
 }
 
+/**
+ * @module fcs
+ * @function triggerEvent
+ * @description sending message to platform to make post call to set event values.
+ * @param {String} key - key name of the event data
+ * @example
+ * triggerEvent('onColorimetryChanged event with colorimetry as BT2020cYCC')
+ */
+function triggerEvent(key) {
+  fireLog.info(CONSTANTS.TRIGGER_EVENT_MISSING).then(() => {
+    throw new Error(CONSTANTS.TRIGGER_EVENT_MISSING);
+  });
+}
+
 module.exports = { setResponse, setTestProvider, setLifecycleState, fetchEventResponse };
