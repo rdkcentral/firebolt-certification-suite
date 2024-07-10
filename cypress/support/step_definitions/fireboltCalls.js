@@ -535,7 +535,7 @@ Given(
  */
 Given(/User triggers event with value as '(.+)'/, (key) => {
   cy.fireboltDataParser(key).then((parsedData) => {
-    let value = parsedData[0].params;
+    const value = parsedData[0].params;
     const requestMap = {
       method: CONSTANTS.REQUEST_OVERRIDE_CALLS.TRIGGEREVENT,
       params: { value: value },
