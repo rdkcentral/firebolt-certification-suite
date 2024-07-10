@@ -30,7 +30,15 @@
 ### Examples:
 * `Given '3rd party app' invokes the 'Firebolt' API to 'get device id'`
 * `Given 'test.test.test' invokes the 'Firebolt' API to 'get device id'`
-* `And '3rd party app' invokes the 'Firebolt' API to 'get device id' on 'device1' device`
+* `Given 'secondary 3rd party app' invokes the 'Firebolt' API to 'get device id'`
+* `Given '3rd party app' invokes the 'Firebolt' API to 'get device id' on 'device1' device`
+   - This should launch the default 3rd party app on device1(this is same as default device) and then call the device.id api
+* `Given 'Secondary 3rd party app' invokes the 'Firebolt' API to 'get device id' on 'device2' device`
+  - This should launch the secondarty 3rd party app on device2 and then call the device.id api
+* `Given 'appId' invokes the 'Firebolt' API to 'get device id' on 'device2' device`
+  - This should launch the app with the appId specified on device2 and then call the device.id api
+*  `Given 'Secondary 3rd party app' invokes the 'Firebolt' API to 'get device id'`
+  - If device identifier is not present, there is no need for a launch. It will just need to invoke the api
 
 ## '(.+)' registers for the '(.+)' event using the '(.+)' API
 
@@ -42,11 +50,6 @@
 | appId | 3rd party app id |
 | sdk | name of the sdk |
 | key | key name of the firebolt data contains method/param/context. |
-
-Note: 
- - deviceIdentifier should have values like device1, device2 or device3
- - When device1 passed it will launch the default 3rd party app
- - Other than device1 passed, launching the app on another devices based on the value associated with device indentifier.
 
 ### Examples:
 * `Given '3rd party app' registers for the 'Closed Captions Settings' event using the 'Firebolt' API`
