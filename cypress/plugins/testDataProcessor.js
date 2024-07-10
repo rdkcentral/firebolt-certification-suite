@@ -487,9 +487,6 @@ function combineValidationObjectsJson() {
 // Function to print logs when data is having "no data" else returning as is.
 function paramDataLogs(paramData, dataIdentifier, defaultRetVal, requestType) {
   if (paramData == CONSTANTS.NO_DATA) {
-    logger.info(
-      `Expected ${requestType || 'data'} ${dataIdentifier} was not found in fixtures. Returning ${dataIdentifier} as is.`
-    );
     return defaultRetVal;
   } else {
     return paramData;

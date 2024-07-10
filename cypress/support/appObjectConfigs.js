@@ -59,14 +59,15 @@ class eventObject {
       this.eventTime = response.eventTime;
     } else {
       cy.logValidationResult(
-        ' Did not receive eventResponse,' + ' Actual: ' + response.eventResponse,
+        ' Did not receive eventResponse,' + ' Actual: ' + typeof response == 'string'
+          ? response
+          : JSON.stringify(response),
         CONSTANTS.FAIL,
         CONSTANTS.SKIPPED,
         CONSTANTS.SKIPPED
       ).then(() => {
-        const pretext = 'Event Not Received : ';
-
-        fireLog.equal(response.eventResponse, content, pretext);
+        const pretext = 'Event Not Received ';
+        assert(false, pretext);
       });
     }
   }

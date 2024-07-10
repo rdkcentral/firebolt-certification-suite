@@ -142,8 +142,13 @@ Cypress.Commands.add(
             const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
               apiErrorResponse.message.includes(errorMessage)
             );
-            const pretext =
-              CONSTANTS.ERROR_MESSAGE_VALIDATION + 'Expected ' + checkErrorMessage + ' to be true';
+            let pretext = CONSTANTS.ERROR_MESSAGE_VALIDATION + `for ${method} : `;
+            if (checkErrorMessage) {
+              pretext = pretext + `apiResponse errorMessage is present in errorContent object list`;
+            } else {
+              pretext =
+                pretext + `apiResponse errorMessage is not present in errorContent object list`;
+            }
             fireLog.equal(checkErrorMessage, true, pretext);
           });
         } else {
@@ -218,27 +223,32 @@ Cypress.Commands.add(
     ) {
       skipSchema = true;
     }
-    // Verifying whether the error is undefined or not in the response received.
-    cy.errorNotUndefinedCheck(response)
-      .then((result) => {
-        // Pushing the validation status object into an array.
-        validationCheck.push(result);
-      })
-      .then(() => {
-        if (apiSchemaResult && !skipSchema) {
-          // Validating the schema validation result
-          cy.schemaValidationCheck(apiSchemaResult).then((result) => {
-            let isNullCheckSkipped = false;
+    cy.then(() => {
+      if (apiSchemaResult && !skipSchema) {
+        // Validating the schema validation result
+        cy.schemaValidationCheck(apiSchemaResult).then((result) => {
+          let isNullCheckSkipped = false;
 
-            // Enable the isNullCheckSkipped flag when an error is not present in the response and the schema is passed without expecting an error.
-            if (response.error == null || response.error == undefined) {
-              result.validationStatus == CONSTANTS.PASS && errorExpected != CONSTANTS.ERROR
-                ? (isNullCheckSkipped = true)
-                : (isNullCheckSkipped = false);
-            }
-          });
-        }
-      })
+          // Enable the isNullCheckSkipped flag when an error is not present in the response and the schema is passed without expecting an error.
+          if (response.error == null || response.error == undefined) {
+            result.validationStatus == CONSTANTS.PASS && errorExpected != CONSTANTS.ERROR
+              ? (isNullCheckSkipped = true)
+              : (isNullCheckSkipped = false);
+          }
+          // Checking if the error is null in the response and if the error is expected or not.
+          if (!UTILS.getEnvVariable(CONSTANTS.IS_SCENARIO_EXEMPTED, false)) {
+            cy.errorNullCheck(response, errorExpected, isNullCheckSkipped).then((result) => {
+              validationCheck.push(result);
+            });
+          }
+        });
+      } else {
+        // Checking if the error is null in the response and if the error is expected or not.
+        cy.errorNullCheck(response, errorExpected).then((result) => {
+          validationCheck.push(result);
+        });
+      }
+    })
       .then(() => {
         if (apiSchemaResult) {
           // Validating the schema validation result

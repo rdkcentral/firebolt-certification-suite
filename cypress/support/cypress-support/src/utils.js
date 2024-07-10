@@ -285,11 +285,7 @@ function getApiOrEventObjectFromGlobalList(method, context, appId, validationTyp
   );
 
   // Failing when the filteredObjectList is empty.
-  assert.isNotEmpty(
-    filteredObjectList,
-    `Required response not found in ${validationType} object list`
-  );
-
+  assert.isNotEmpty(filteredObjectList, `Could not find the api response in api list `);
   // When the context is empty, the most recent apiOrEventObject is obtained from the filtered list.
   // If the context is not empty, the filtered list is iterated, and the API object that has the same context is retrieved.
   if (context == undefined) {
