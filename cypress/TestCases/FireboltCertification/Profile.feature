@@ -11,9 +11,14 @@ Feature: Profile
         Then 'Firebolt' platform responds with '<Content>'
         And 'Firebolt' platform responds with 'expected lifecycle state as foreground'
 
+        @Sev0
+        Examples:
+            | Scenario    | Content                               |
+            | Correct-PIN | true for profile approveContentRating |
+
+        @Sev2
         Examples:
             | Scenario       | Content                                |
-            | Correct-PIN    | true for profile approveContentRating  |
             | Wrong-PIN      | false for profile approveContentRating |
             | Cancelling-PIN | false for profile approveContentRating |
 
@@ -31,9 +36,14 @@ Feature: Profile
         And User validates lifecycle history for '1st party app' with 'background:foreground:background'
         And User validates lifecycle history for '3rd party app' with 'background:foreground'
 
+        @Sev0
+        Examples:
+            | Scenario    | Content                               |
+            | Correct-PIN | true for profile approveContentRating |
+
+        @Sev2
         Examples:
             | Scenario       | Content                                |
-            | Correct-PIN    | true for profile approveContentRating  |
             | Wrong-PIN      | false for profile approveContentRating |
             | Cancelling-PIN | false for profile approveContentRating |
 
@@ -47,9 +57,14 @@ Feature: Profile
         Then 'Firebolt' platform responds with '<Content>'
         And 'Firebolt' platform responds with 'expected lifecycle state as foreground'
 
+        @Sev0
+        Examples:
+            | Scenario    | Content                          |
+            | Correct-PIN | true for profile approvePurchase |
+
+        @Sev2
         Examples:
             | Scenario       | Content                           |
-            | Correct-PIN    | true for profile approvePurchase  |
             | Wrong-PIN      | false for profile approvePurchase |
             | Cancelling-PIN | false for profile approvePurchase |
 
@@ -73,7 +88,7 @@ Feature: Profile
             | Wrong-PIN      | false for profile approvePurchase |
             | Cancelling-PIN | false for profile approvePurchase |
 
-    @sdk @transport
+    @sdk @transport @Sev2
     Scenario: Profile.flags - Positive Scenario
         Given the environment has been set up for 'Profile' tests
         And 3rd party 'certification' app is launched
