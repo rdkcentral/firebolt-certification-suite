@@ -534,15 +534,18 @@ Given(
  * And User triggers event with value as 'onColorimetryChanged event with colorimetry as BT2020cYCC'
  */
 Given(/User triggers event with value as '(.+)'/, (key) => {
-  const requestMap = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.TRIGGEREVENT,
-    params: { key: key },
-  };
-  cy.log(CONSTANTS.TRIGGER_EVENT_REQUEST + JSON.stringify(requestMap)).then(() => {
-    cy.sendMessagetoPlatforms(requestMap).then((result) => {
-      if (result) {
-        logger.info(CONSTANTS.TRIGGER_EVENT_SUCCESS);
-      }
+  cy.fireboltDataParser(key).then((parsedData) => {
+    let value = parsedData[0].params;
+    const requestMap = {
+      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.TRIGGEREVENT,
+      params: { value: value },
+    };
+    cy.log(CONSTANTS.TRIGGER_EVENT_REQUEST + JSON.stringify(requestMap)).then(() => {
+      cy.sendMessagetoPlatforms(requestMap).then((result) => {
+        if (result) {
+          logger.info(CONSTANTS.TRIGGER_EVENT_SUCCESS);
+        }
+      });
     });
   });
 });
