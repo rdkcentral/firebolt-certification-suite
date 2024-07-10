@@ -458,9 +458,10 @@ module.exports = {
   SECONDARY_THIRD_PARTY_APP_ID: 'secondary3rdPartyAppId',
   SECONDARY_APPID_MISSING_ERROR:
     '`Unable to find the ${envAppIdKey} value in the env, please add the value in configModule/constants/config.json`',
-  TRIGGER_EVENT_MISSING: 'triggerEvent request override function to set event values not implemented by underlying platform',
+  TRIGGER_EVENT_MISSING:
+    'triggerEvent request override function to set event values not implemented by underlying platform',
   TRIGGER_EVENT_REQUEST: 'Request sent to platform to trigger event: ',
-  TRIGGER_EVENT_SUCCESS: 'Event triggered successfully'
+  TRIGGER_EVENT_SUCCESS: 'Event triggered successfully',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

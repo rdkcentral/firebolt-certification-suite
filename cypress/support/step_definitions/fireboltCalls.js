@@ -536,7 +536,7 @@ Given(
 Given(/User triggers event with value as '(.+)'/, (key) => {
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.TRIGGEREVENT,
-    params: { key: key},
+    params: { key: key },
   };
   cy.log(CONSTANTS.TRIGGER_EVENT_REQUEST + JSON.stringify(requestMap)).then(() => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {

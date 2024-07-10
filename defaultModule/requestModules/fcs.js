@@ -123,4 +123,4 @@ function triggerEvent(key) {
   });
 }
 
-module.exports = { setResponse, setTestProvider, setLifecycleState, fetchEventResponse };
+module.exports = { setResponse, setTestProvider, setLifecycleState, fetchEventResponse, triggerEvent };
