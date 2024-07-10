@@ -208,6 +208,7 @@ Cypress.Commands.add('updateRunInfo', () => {
               configModuleConst = require('../../../node_modules/configModule/constants/constants');
             } catch (error) {
               logger.info('Unable to read from configModule constants');
+              return false;
             }
             // get data for runInfo
             cy.getDeviceData(CONSTANTS.DEVICE_MODEL, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
