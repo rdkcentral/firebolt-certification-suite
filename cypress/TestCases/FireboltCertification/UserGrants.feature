@@ -20,7 +20,7 @@ Feature: UserGrants
 
     # Deny access with scope device, so all the apps in that device may not have the access
     # launch a 3rd party and provide acess using any 3rd party and check in another 3rd party
-    @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
+    @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
     Scenario: UserGrants.Capabilities R.4.4.1.1 - Negative Scenario: Validate Capability access denied for pinChallenge with scope device
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
