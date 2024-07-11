@@ -847,13 +847,13 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, additionalParams, ta
   }
 
   cy.then(() => {
-    if (target === 'App') {
+    if (target === CONSTANTS.APP) {
       const additionalParams = {
         communicationMode: UTILS.getCommunicationMode(),
         action: action,
         isNotSupportedApi: isNotSupportedApi,
       };
-      const methodKey = task == CONSTANTS.TASK.REGISTEREVENT ? 'event' : 'method';
+      const methodKey = task == CONSTANTS.TASK.REGISTEREVENT ? CONSTANTS.EVENT : CONSTANTS.METHOD;
       const paramKey = task == CONSTANTS.TASK.REGISTEREVENT ? 'params' : 'methodParams';
 
       const requestParams = { [methodKey]: method, [paramKey]: params };
@@ -867,7 +867,7 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, additionalParams, ta
         const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
         cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent);
       });
-    } else if (target === 'Platform') {
+    } else if (target === CONSTANTS.PLATFORM) {
       const requestMap = {
         method: method,
         params: params,
@@ -885,7 +885,7 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, additionalParams, ta
       fireLog.assert(false, `Invalid ${target} target, it should be either app or platfrom`);
     }
   }).then((response) => {
-    if (Cypress.env('isRpcOnlyValidation')) {
+    if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
       fireLog.info(
         `${method} response will be retrieved in subsequent steps and validated when the rpc-only methods are invoked. Proceeding to the next step.`
       );
@@ -894,8 +894,8 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, additionalParams, ta
     if (
       (response && typeof response == CONSTANTS.TYPE_OBJECT) ||
       (typeof response == CONSTANTS.TYPE_STRING &&
-        (JSON.parse(response).hasOwnProperty('result') ||
-          JSON.parse(response).hasOwnProperty('error')))
+        (JSON.parse(response).hasOwnProperty(CONSTANTS.RESULT) ||
+          JSON.parse(response).hasOwnProperty(CONSTANTS.ERROR)))
     ) {
       if (response === CONSTANTS.NO_RESPONSE) {
         assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
