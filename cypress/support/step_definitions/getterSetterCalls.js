@@ -551,12 +551,13 @@ function resolveContentObject(input) {
   if (Array.isArray(input)) {
     return input.map((item) => resolveContentObject(item));
   } else if (typeof input == CONSTANTS.TYPE_OBJECT && input !== null) {
+    const newObj = {};
     for (const key in input) {
       if (Object.hasOwnProperty.call(input, key)) {
-        input[key] = resolveContentObject(input[key]);
+        newObj[key] = resolveContentObject(input[key]);
       }
     }
-    return input;
+    return newObj;
   } else if (input && typeof input === CONSTANTS.TYPE_FUNCTION) {
     return input();
   } else {
