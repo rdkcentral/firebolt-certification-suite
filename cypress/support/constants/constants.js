@@ -55,6 +55,7 @@ module.exports = {
   COMBINEVALIDATIONOBJECTSJSON: 'combineValidationObjectsJson',
   COMMUNICATION_MODE: 'communicationMode',
   CONFIG: 'CONFIG',
+  CONFIG_IMPLEMENTATION_MISSING: 'Config module implementation missing',
   CONFIG_MODULE_SETRESPONSE_PATH: 'cypress/fixtures/external/setResponseData.json',
   CONTENT: 'Content',
   CONTEXT: 'Context',
@@ -458,10 +459,8 @@ module.exports = {
   SECONDARY_THIRD_PARTY_APP_ID: 'secondary3rdPartyAppId',
   SECONDARY_APPID_MISSING_ERROR:
     '`Unable to find the ${envAppIdKey} value in the env, please add the value in configModule/constants/config.json`',
-  TRIGGER_EVENT_MISSING:
-    'triggerEvent request override function to set event values not implemented by underlying platform',
-  TRIGGER_EVENT_REQUEST: 'Request sent to platform to trigger event: ',
-  TRIGGER_EVENT_SUCCESS: 'Event triggered successfully',
+  SET_EVENT_REQUEST: 'Request sent to set event values in platform: ',
+  SET_EVENT_SUCCESS: 'Event value set successfully in platform',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

@@ -139,4 +139,4 @@ Note: Key name value is an object and it can contains data as below
 | key |  key name of the event data |
 
 ### Examples:
-* `And User triggers event with value as 'onColorimetryChanged event with colorimetry as BT2020cYCC'`
+* `And User triggers event with value as 'onNetworkChanged events with wifi connected'`

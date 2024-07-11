@@ -531,7 +531,7 @@ Given(
  * @description sending message to platform to make post call to set event values.
  * @param {String} key - key name of the event data
  * @example
- * And User triggers event with value as 'onColorimetryChanged event with colorimetry as BT2020cYCC'
+ * And User triggers event with value as 'onNetworkChanged events with wifi connected'
  */
 Given(/User triggers event with value as '(.+)'/, (key) => {
   cy.fireboltDataParser(key).then((parsedData) => {
@@ -540,10 +540,10 @@ Given(/User triggers event with value as '(.+)'/, (key) => {
       method: CONSTANTS.REQUEST_OVERRIDE_CALLS.TRIGGEREVENT,
       params: { value: value },
     };
-    cy.log(CONSTANTS.TRIGGER_EVENT_REQUEST + JSON.stringify(requestMap)).then(() => {
+    cy.log(CONSTANTS.SET_EVENT_REQUEST + JSON.stringify(requestMap)).then(() => {
       cy.sendMessagetoPlatforms(requestMap).then((result) => {
         if (result) {
-          console.log(CONSTANTS.TRIGGER_EVENT_SUCCESS);
+          console.log(CONSTANTS.SET_EVENT_SUCCESS);
         }
       });
     });

@@ -118,8 +118,8 @@ function fetchEventResponse(parsedParam) {
  * triggerEvent('onColorimetryChanged event with colorimetry as BT2020cYCC')
  */
 function triggerEvent(key) {
-  fireLog.info(CONSTANTS.TRIGGER_EVENT_MISSING).then(() => {
-    throw new Error(CONSTANTS.TRIGGER_EVENT_MISSING);
+  fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
+    throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
   });
 }
 
