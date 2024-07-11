@@ -115,7 +115,13 @@ function fetchEventResponse(parsedParam) {
  * @description sending message to platform to make post call to set event values.
  * @param {String} key - key name of the event data
  * @example
- * triggerEvent('onColorimetryChanged event with colorimetry as BT2020cYCC')
+ * triggerEvent({method: 'fcs.triggerevent', params: {'value': {
+        "method": "device.onNetworkChanged",
+        "result": {
+            "state": "disconnected",
+            "type": "ethernet"
+        }
+    }}})
  */
 function triggerEvent(key) {
   fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
