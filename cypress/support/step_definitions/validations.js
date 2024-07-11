@@ -70,177 +70,22 @@ Given(
               ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
               : UTILS.checkForSecondaryAppId(appId);
 
-          // Fetching the object from the global list.
-          const methodOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
-            methodOrEvent,
-            context,
-            appId,
-            validationType
-          );
-          const param = methodOrEventObject.params;
-          // Function to do error null check, schema validation check and event listerner response checks
-          cy.validateResponseErrorAndSchemaResult(methodOrEventObject, validationType).then(() => {
-            // If response of the method is not supported, checks in the not supported list for that method name, if it is present then pass else mark it as fail
-            if (
-              !Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION) &&
-              (UTILS.isScenarioExempted(methodOrEvent, param) || expectingError)
-            ) {
-              let errorExpected;
-
-              // If the expected error is false, we set "exceptionErrorObject" to the errorExpected variable, which will be used to retrieve the error content object based on the exception method type.
-              expectingError === true
-                ? (errorExpected = contentObject)
-                : (errorExpected = CONSTANTS.EXCEPTION_ERROR_OBJECT);
-
-              cy.validateErrorObject(
-                methodOrEvent,
-                errorExpected,
-                validationType,
-                context,
-                appId,
-                param
-              ).then(() => {
-                return true;
-              });
-            } else if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
-              // If validationType is an event then send a message to the app to retrieve an event response based on the app ID.
-              if (validationType == CONSTANTS.EVENT) {
-                const eventName = methodOrEventObject.eventObjectId;
-                if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
-                  const requestMap = {
-                    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCH_EVENT_RESPONSE,
-                    params: eventName,
-                  };
-
-                  cy.sendMessagetoPlatforms(requestMap).then((result) => {
-                    cy.updateResponseForFCS(methodOrEvent, null, result, true).then(
-                      (updatedResponse) => {
-                        cy.saveEventResponse(
-                          updatedResponse,
-                          methodOrEventObject,
-                          eventName,
-                          eventExpected === 'triggers' ? true : false
-                        );
-                      }
-                    );
-                  });
-                } else {
-                  const params = { event: eventName };
-                  // Generating an intent message using the provided information to send it to a third-party app
-                  const intentMessage = UTILS.createIntentMessage(
-                    CONSTANTS.TASK.GETEVENTRESPONSE,
-                    params
-                  );
-                  const requestTopic = UTILS.getTopic(appId);
-                  const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
-                  cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then(
-                    (response) => {
-                      response = JSON.parse(response);
-                      if (
-                        response &&
-                        response.result &&
-                        response.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
-                      ) {
-                        response.result = response.result.eventResponse;
-                      }
-                      cy.updateResponseForFCS(methodOrEvent, null, response, true).then(
-                        (updatedResponse) => {
-                          cy.saveEventResponse(
-                            updatedResponse,
-                            methodOrEventObject,
-                            eventName,
-                            eventExpected === 'triggers' ? true : false
-                          );
-                        }
-                      );
-                    }
-                  );
-                }
-              }
-
-              try {
-                if (contentObject && contentObject.data) {
-                  contentObject.data.forEach((object) => {
-                    if (object.validations) {
-                      const scenario = object.type;
-                      const methodOrEventResponse =
-                        validationType == CONSTANTS.EVENT
-                          ? methodOrEventObject.eventResponse
-                          : validationType == CONSTANTS.METHOD
-                            ? methodOrEventObject.apiResponse
-                            : null;
-                      switch (scenario) {
-                        case CONSTANTS.REGEX:
-                          cy.regExValidation(
-                            methodOrEvent,
-                            object.validations[0].type,
-                            validationJsonPath,
-                            methodOrEventResponse
-                          );
-                          break;
-                        case CONSTANTS.MISC:
-                          cy.miscellaneousValidation(
-                            methodOrEvent,
-                            object.validations[0],
-                            methodOrEventObject
-                          );
-                          break;
-                        case CONSTANTS.DECODE:
-                          const decodeType = object.specialCase;
-                          const responseForDecodeValidation =
-                            validationType == CONSTANTS.EVENT
-                              ? methodOrEventResponse
-                              : validationType == CONSTANTS.METHOD
-                                ? methodOrEventResponse.result
-                                : null;
-
-                          cy.decodeValidation(
-                            methodOrEvent,
-                            decodeType,
-                            responseForDecodeValidation,
-                            object.validations[0],
-                            null
-                          );
-                          break;
-                        case CONSTANTS.FIXTURE:
-                          cy.validateContent(
-                            methodOrEvent,
-                            context,
-                            validationJsonPath,
-                            object.validations[0].type,
-                            validationType,
-                            appId
-                          );
-                          break;
-                        case CONSTANTS.CUSTOM:
-                          cy.customValidation(object, methodOrEventObject);
-                          break;
-                        case CONSTANTS.UNDEFINED:
-                          cy.undefinedValidation(object, methodOrEventObject, validationType);
-                          break;
-                        default:
-                          assert(false, 'Unsupported validation type');
-                          break;
-                      }
-                    }
-                  });
-                } else {
-                  cy.validateContent(
-                    methodOrEvent,
-                    context,
-                    validationJsonPath,
-                    contentObject,
-                    validationType,
-                    appId
-                  );
-                }
-              } catch (error) {
-                assert(false, `Unable to validate the response: ${error}`);
-              }
-            } else {
-              cy.log('Content validation is skipped');
-            }
-          });
+          const additionalParams = {
+            method: methodOrEvent,
+            context: context,
+            validationJsonPath: validationJsonPath,
+            contentObject: contentObject,
+            expectingError: expectingError,
+            appId: appId,
+            eventExpected: eventExpected,
+          };
+          if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
+            cy.methodorEventResponseValidation(validationType, additionalParams);
+          } else {
+            cy.log(
+              `${CONSTANTS.SKIPCONTENTVALIDATION} flag is enabled, Skipping the Content validation`
+            );
+          }
         });
       });
     } else {
@@ -500,147 +345,27 @@ Given(
         contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
         validationJsonPath = validationJsonPath ? validationJsonPath : CONSTANTS.RESULT;
 
-        // Fetching the object from the global list.
-        const apiObject = UTILS.getApiOrEventObjectFromGlobalList(method, context, appId);
-        const param = apiObject.params;
-
-        // Function to do error null check, schema validation check and event listerner response checks
-        cy.validateResponseErrorAndSchemaResult(apiObject, CONSTANTS.METHOD).then(() => {
-          // If response of the method is not supported, checks in the not supported list for that method name, if it is present then pass else mark it as fail
-          if (
-            !Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION) &&
-            (UTILS.isScenarioExempted(method, param) || expectingError)
-          ) {
-            let errorExpected;
-
-            // If the expected error is false, we set "exceptionErrorObject" to the errorExpected variable, which will be used to retrieve the error content object based on the exception method type.
-            expectingError === true
-              ? (errorExpected = UTILS.getEnvVariable('errorContentValidationJson')[errorContent])
-              : (errorExpected = CONSTANTS.EXCEPTION_ERROR_OBJECT);
-
-            cy.validateErrorObject(
-              method,
-              errorExpected,
-              CONSTANTS.METHOD,
-              context,
-              appId,
-              param
-            ).then(() => {
-              return true;
-            });
-          } else if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
-            try {
-              if (contentObject && contentObject.data) {
-                contentObject.data.forEach((object) => {
-                  if (object.validations) {
-                    const scenario = object.type;
-                    const methodResponse = apiObject?.response ? apiObject.response : null;
-
-                    // Looping through validationJsonPath to find the valid path for validation.
-                    if (validationJsonPath && Array.isArray(validationJsonPath)) {
-                      const validationPath = validationJsonPath.find((path) => {
-                        if (
-                          path
-                            .split('.')
-                            .reduce((acc, part) => acc && acc[part], methodResponse) !== undefined
-                        ) {
-                          return path;
-                        }
-                      });
-                      validationPath
-                        ? (validationJsonPath = validationPath)
-                        : fireLog.assert(
-                            false,
-                            'Could not find the valid validation path from the validationJsonPath list'
-                          );
-                    }
-
-                    switch (scenario) {
-                      case CONSTANTS.REGEX:
-                        cy.regExValidation(
-                          method,
-                          object.validations[0].type,
-                          validationJsonPath,
-                          methodResponse
-                        );
-                        break;
-                      case CONSTANTS.MISC:
-                        cy.miscellaneousValidation(method, object.validations[0], apiObject);
-                        break;
-                      case CONSTANTS.DECODE:
-                        const decodeType = object.specialCase;
-                        const responseForDecodeValidation = methodResponse?.result
-                          ? methodResponse.result
-                          : null;
-
-                        cy.decodeValidation(
-                          method,
-                          decodeType,
-                          responseForDecodeValidation,
-                          object.validations[0],
-                          null
-                        );
-                        break;
-                      case CONSTANTS.FIXTURE:
-                        cy.validateContent(
-                          method,
-                          context,
-                          validationJsonPath,
-                          object.validations[0].type,
-                          CONSTANTS.METHOD,
-                          appId
-                        );
-                        break;
-                      case CONSTANTS.CUSTOM:
-                        cy.customValidation(object, apiObject);
-                        break;
-                      case CONSTANTS.UNDEFINED:
-                        cy.undefinedValidation(object, apiObject, CONSTANTS.METHOD);
-                        break;
-                      default:
-                        assert(false, 'Unsupported validation type');
-                        break;
-                    }
-                  }
-                });
-              } else {
-                cy.validateContent(
-                  method,
-                  context,
-                  validationJsonPath,
-                  contentObject,
-                  CONSTANTS.METHOD,
-                  appId
-                );
-              }
-            } catch (error) {
-              assert(false, `Unable to validate the response: ${error}`);
-            }
-          } else {
-            cy.log('Content validation is skipped');
-          }
-        });
+        if (expectingError) {
+          contentObject = UTILS.getEnvVariable('errorContentValidationJson')[errorContent];
+        }
+        const additionalParams = {
+          method: method,
+          context: context,
+          validationJsonPath: validationJsonPath,
+          contentObject: contentObject,
+          expectingError: expectingError,
+          appId: appId,
+        };
+        if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
+          cy.methodorEventResponseValidation(CONSTANTS.METHOD, additionalParams);
+        } else {
+          cy.log(
+            `${CONSTANTS.SKIPCONTENTVALIDATION} flag is enabled, Skipping the Content validation`
+          );
+        }
       });
     } else {
       assert(false, `${sdk} SDK not Supported`);
-    }
-
-    // A Function that recursively check each fields and invokes if it's a function within an array or object.
-    function resolveContentObject(input) {
-      if (Array.isArray(input)) {
-        return input.map((item) => resolveContentObject(item));
-      } else if (typeof input == CONSTANTS.TYPE_OBJECT && input !== null) {
-        for (const key in input) {
-          if (Object.hasOwnProperty.call(input, key)) {
-            input[key] = resolveContentObject(input[key]);
-          }
-        }
-        return input;
-      } else if (input && typeof input === CONSTANTS.TYPE_FUNCTION) {
-        return input();
-      } else {
-        return input;
-      }
     }
   }
 );
@@ -704,182 +429,46 @@ Given(
           ? eventValidationJsonPath
           : CONSTANTS.EVENT_RESPONSE;
 
-        // Fetching the object from the global list.
-        const eventObject = UTILS.getApiOrEventObjectFromGlobalList(
-          event,
-          context,
-          appId,
-          CONSTANTS.EVENT
-        );
-        const param = eventObject.params;
-
-        // If response of the event is not supported, checks in the not supported list for that event name, if it is present then pass else mark it as fail
-        if (
-          !Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION) &&
-          (UTILS.isScenarioExempted(event, param) || expectingError)
-        ) {
-          let errorExpected;
-
-          // If the expected error is false, we set "exceptionErrorObject" to the errorExpected variable, which will be used to retrieve the error content object based on the exception event type.
-          expectingError === true
-            ? (errorExpected = UTILS.getEnvVariable('errorContentValidationJson')[errorContent])
-            : (errorExpected = CONSTANTS.EXCEPTION_ERROR_OBJECT);
-
-          cy.validateErrorObject(event, errorExpected, CONSTANTS.EVENT, context, appId, param).then(
-            () => {
-              return true;
-            }
-          );
-        } else if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
-          // If validationType is an event then send a message to the app to retrieve an event response based on the app ID.
-          const eventName = eventObject.eventObjectId;
-          if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
-            const requestMap = {
-              method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCH_EVENT_RESPONSE,
-              params: eventName,
-            };
-
-            cy.sendMessagetoPlatforms(requestMap).then((result) => {
-              cy.updateResponseForFCS(event, null, result).then((updatedResponse) => {
-                cy.saveEventResponse(
-                  updatedResponse,
-                  eventObject,
-                  eventName,
-                  eventExpected === 'triggers' ? true : false
-                );
-              });
-            });
-          } else {
-            const params = { event: eventName };
-            // Generating an intent message using the provided information to send it to a third-party app
-            const intentMessage = UTILS.createIntentMessage(
-              CONSTANTS.TASK.GETEVENTRESPONSE,
-              params
-            );
-            const requestTopic = UTILS.getTopic(appId);
-            const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
-            cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
-              response = JSON.parse(response);
-              response = response.report;
-              cy.saveEventResponse(
-                response,
-                eventObject,
-                eventName,
-                eventExpected === 'triggers' ? true : false
-              );
-            });
-          }
-
-          try {
-            if (contentObject && contentObject.data) {
-              contentObject.data.forEach((object) => {
-                if (object.validations) {
-                  const scenario = object.type;
-                  const eventResponse = eventObject?.eventResponse
-                    ? eventObject.eventResponse
-                    : null;
-
-                  // Looping through eventValidationJsonPath to find the valid path for validation.
-                  if (eventValidationJsonPath && Array.isArray(eventValidationJsonPath)) {
-                    const validationPath = eventValidationJsonPath.find((path) => {
-                      if (
-                        path.split('.').reduce((acc, part) => acc && acc[part], eventResponse) !==
-                        undefined
-                      ) {
-                        return path;
-                      }
-                    });
-                    validationPath
-                      ? (eventValidationJsonPath = validationPath)
-                      : fireLog.assert(
-                          false,
-                          'Could not find the valid validation path from the eventValidationJsonPath list'
-                        );
-                  }
-
-                  switch (scenario) {
-                    case CONSTANTS.REGEX:
-                      cy.regExValidation(
-                        event,
-                        object.validations[0].type,
-                        eventValidationJsonPath,
-                        eventResponse
-                      );
-                      break;
-                    case CONSTANTS.MISC:
-                      cy.miscellaneousValidation(event, object.validations[0], eventObject);
-                      break;
-                    case CONSTANTS.DECODE:
-                      const decodeType = object.specialCase;
-                      const responseForDecodeValidation = eventResponse;
-
-                      cy.decodeValidation(
-                        event,
-                        decodeType,
-                        responseForDecodeValidation,
-                        object.validations[0],
-                        null
-                      );
-                      break;
-                    case CONSTANTS.FIXTURE:
-                      cy.validateContent(
-                        event,
-                        context,
-                        eventValidationJsonPath,
-                        object.validations[0].type,
-                        CONSTANTS.EVENT,
-                        appId
-                      );
-                      break;
-                    case CONSTANTS.CUSTOM:
-                      cy.customValidation(object, eventObject);
-                      break;
-                    case CONSTANTS.UNDEFINED:
-                      cy.undefinedValidation(object, eventObject, CONSTANTS.EVENT);
-                      break;
-                    default:
-                      assert(false, 'Unsupported validation type');
-                      break;
-                  }
-                }
-              });
-            } else {
-              cy.validateContent(
-                event,
-                context,
-                eventValidationJsonPath,
-                contentObject,
-                CONSTANTS.EVENT,
-                appId
-              );
-            }
-          } catch (error) {
-            assert(false, `Unable to validate the response: ${error}`);
-          }
+        if (expectingError) {
+          contentObject = UTILS.getEnvVariable('errorContentValidationJson')[errorContent];
+        }
+        const additionalParams = {
+          method: event,
+          context: context,
+          validationJsonPath: eventValidationJsonPath,
+          contentObject: contentObject,
+          expectingError: expectingError,
+          appId: appId,
+          eventExpected: eventExpected,
+        };
+        if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
+          cy.methodorEventResponseValidation(CONSTANTS.EVENT, additionalParams);
         } else {
-          cy.log('Content validation is skipped');
+          cy.log(
+            `${CONSTANTS.SKIPCONTENTVALIDATION} flag is enabled, Skipping the Content validation`
+          );
         }
       });
     } else {
       assert(false, `${sdk} SDK not Supported`);
     }
-
-    // A Function that recursively check each fields and invokes if it's a function within an array or object.
-    function resolveContentObject(input) {
-      if (Array.isArray(input)) {
-        return input.map((item) => resolveContentObject(item));
-      } else if (typeof input == CONSTANTS.TYPE_OBJECT && input !== null) {
-        for (const key in input) {
-          if (Object.hasOwnProperty.call(input, key)) {
-            input[key] = resolveContentObject(input[key]);
-          }
-        }
-        return input;
-      } else if (input && typeof input === CONSTANTS.TYPE_FUNCTION) {
-        return input();
-      } else {
-        return input;
-      }
-    }
   }
 );
+
+// A Function that recursively check each fields and invokes if it's a function within an array or object.
+function resolveContentObject(input) {
+  if (Array.isArray(input)) {
+    return input.map((item) => resolveContentObject(item));
+  } else if (typeof input == CONSTANTS.TYPE_OBJECT && input !== null) {
+    for (const key in input) {
+      if (Object.hasOwnProperty.call(input, key)) {
+        input[key] = resolveContentObject(input[key]);
+      }
+    }
+    return input;
+  } else if (input && typeof input === CONSTANTS.TYPE_FUNCTION) {
+    return input();
+  } else {
+    return input;
+  }
+}

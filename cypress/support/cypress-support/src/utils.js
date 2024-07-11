@@ -803,6 +803,11 @@ function parseValue(str) {
     if (str === 'false') return false;
 
     if (!isNaN(str)) return Number(str);
+
+    // If the string contains comma, split it into an array
+    if (str.includes(',')) {
+      return str.split(',');
+    }
   }
 
   return str;

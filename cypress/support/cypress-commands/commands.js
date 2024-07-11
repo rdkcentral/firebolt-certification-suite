@@ -19,6 +19,7 @@ const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS, { getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
+import { apiObject, eventObject } from '../appObjectConfigs';
 
 /**
  * @module commands
@@ -832,4 +833,294 @@ Cypress.Commands.add('clearCache', () => {
   cy.clearLocalStorage();
   cy.clearAllSessionStorage();
   cy.reload(true);
+});
+
+
+Cypress.Commands.add('sendMessageToPlatformOrApp', (target, additionalParams, task) => {
+  const { method, params, context, action, expected, appId } = additionalParams;
+  task = task ? task : CONSTANTS.TASK.CALLMETHOD;
+  let isNotSupportedApi = false;
+
+  if (UTILS.isScenarioExempted(method, params)) {
+    isNotSupportedApi = true;
+    Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
+  }
+
+  cy.then(() => {
+    if (target === 'App') {
+      const additionalParams = {
+        communicationMode: UTILS.getCommunicationMode(),
+        action: action,
+        isNotSupportedApi: isNotSupportedApi,
+      };
+      const methodKey = task == CONSTANTS.TASK.REGISTEREVENT ? 'event' : 'method';
+      const paramKey = task == CONSTANTS.TASK.REGISTEREVENT ? 'params' : 'methodParams';
+
+      const requestParams = { [methodKey]: method, [paramKey]: params };
+
+      // Creating intent message using above details to send it to 3rd party app.
+      const intentMessage = UTILS.createIntentMessage(task, requestParams, additionalParams);
+
+      // Adding additional details to created intent if any platform specific data is present in configModule.
+      cy.runIntentAddon(task, intentMessage).then((parsedIntent) => {
+        const requestTopic = UTILS.getTopic(appId);
+        const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+        cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent);
+      });
+    } else if (target === 'Platform') {
+      const requestMap = {
+        method: method,
+        params: params,
+        action: action,
+        task: task,
+      };
+      // Assigning event_param env if param has empty object
+      if (task == CONSTANTS.TASK.REGISTEREVENT && Object.keys(requestMap.params).length === 0) {
+        // To Do :debug event_param issue by passing isrequired as false for getEnvVariable,need to debug further
+        requestMap.params = UTILS.getEnvVariable(CONSTANTS.EVENT_PARAM, false);
+      }
+
+      cy.sendMessagetoPlatforms(requestMap);
+    } else {
+      fireLog.assert(false, `Invalid ${target} target, it should be either app or platfrom`);
+    }
+  }).then((response) => {
+    if (Cypress.env('isRpcOnlyValidation')) {
+      fireLog.info(
+        `${method} response will be retrieved in subsequent steps and validated when the rpc-only methods are invoked. Proceeding to the next step.`
+      );
+      return;
+    }
+    if (
+      (response && typeof response == CONSTANTS.TYPE_OBJECT) ||
+      (typeof response == CONSTANTS.TYPE_STRING &&
+        (JSON.parse(response).hasOwnProperty('result') ||
+          JSON.parse(response).hasOwnProperty('error')))
+    ) {
+      if (response === CONSTANTS.NO_RESPONSE) {
+        assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+      }
+
+      response = typeof response == CONSTANTS.TYPE_STRING ? JSON.parse(response) : response;
+
+      if (
+        response &&
+        response.error &&
+        response.error.message &&
+        CONSTANTS.ERROR_LIST.includes(response.error.message)
+      ) {
+        if (UTILS.getEnvVariable(CONSTANTS.CERTIFICATION) == true) {
+          fireLog.assert(false, `${target} does not support method: ${method}`);
+        } else {
+          fireLog.info(`NotSupported: ${target} does not support method: ${method}`).then(() => {
+            throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+          });
+        }
+      }
+
+      if (task == CONSTANTS.TASK.REGISTEREVENT) {
+        if (response && response.result && response.result.hasOwnProperty(CONSTANTS.LISTENING)) {
+          const eventResponse = {
+            eventListenerId: response.result.event + '-' + response.id,
+            eventListenerResponse: response.result,
+          };
+          response.result = eventResponse;
+        }
+        if (response && response.error && response.error.message) {
+          fireLog.assert(
+            false,
+            `Event registration failed for event ${method} with error message: ${response.error.message} `
+          );
+        }
+      }
+
+      cy.updateResponseForFCS(method, params, response).then((updatedResponse) => {
+        // Create a deep copy to avoid reference mutation
+        const dataToBeCensored = _.cloneDeep(response);
+
+        // Call the 'censorData' command to hide sensitive data
+        cy.censorData(method, dataToBeCensored).then((maskedResult) => {
+          fireLog.info(`Response from ${target}: ${JSON.stringify(maskedResult)}`);
+        });
+        // Creating object with event name, params, and response etc and storing it in a global list for further validation.
+        const apiOrEventAppObject =
+          task === CONSTANTS.TASK.REGISTEREVENT
+            ? new eventObject(method, params, context, updatedResponse, appId, expected)
+            : new apiObject(method, params, context, updatedResponse, expected, appId);
+
+        const globalList =
+          task === CONSTANTS.TASK.REGISTEREVENT
+            ? CONSTANTS.GLOBAL_EVENT_OBJECT_LIST
+            : CONSTANTS.GLOBAL_API_OBJECT_LIST;
+        UTILS.getEnvVariable(globalList).push(apiOrEventAppObject);
+      });
+    } else {
+      fireLog.info(
+        `${target} returned response in invalid format, which could lead to failures in validations. Response must be in JSON RPC format - ${response}`
+      );
+    }
+  });
+});
+
+Cypress.Commands.add('methodorEventResponseValidation', (validationType, additionalParams) => {
+  const { method, context, contentObject, expectingError, appId, eventExpected } = additionalParams;
+  let validationJsonPath = additionalParams.validationJsonPath;
+
+  // Extracting the api or event object from the global list.
+  const methodOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
+    method,
+    context,
+    appId,
+    validationType
+  );
+  const param = methodOrEventObject.params;
+
+  cy.validateResponseErrorAndSchemaResult(methodOrEventObject, validationType).then(() => {
+    // If passed method is exception method or expecting a error in response, doing error content validation.
+    if (UTILS.isScenarioExempted(method, param) || expectingError) {
+      // If not expecting for an error and it's a exception method, storing "exceptionErrorObject" to errorContent variable to fetch the error content object based on the exception type.
+      let errorContent = expectingError === true ? contentObject : CONSTANTS.EXCEPTION_ERROR_OBJECT;
+      cy.validateErrorObject(method, errorContent, validationType, context, appId, param);
+    } else {
+      if (validationType == CONSTANTS.EVENT) {
+        const eventName = methodOrEventObject.eventObjectId;
+        if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
+          const requestMap = {
+            method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCH_EVENT_RESPONSE,
+            params: eventName,
+          };
+
+          cy.sendMessagetoPlatforms(requestMap).then((result) => {
+            cy.updateResponseForFCS(method, null, result, true).then((updatedResponse) => {
+              cy.saveEventResponse(
+                updatedResponse,
+                methodOrEventObject,
+                eventName,
+                eventExpected === 'triggers' ? true : false
+              );
+            });
+          });
+        } else {
+          const params = { event: eventName };
+          // Generating an intent message using the provided information to send it to a third-party app
+          const intentMessage = UTILS.createIntentMessage(CONSTANTS.TASK.GETEVENTRESPONSE, params);
+          const requestTopic = UTILS.getTopic(appId);
+          const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+          cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
+            response = JSON.parse(response);
+            if (
+              response &&
+              response.result &&
+              response.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
+            ) {
+              response.result = response.result.eventResponse;
+            }
+            cy.updateResponseForFCS(method, null, response, true).then((updatedResponse) => {
+              cy.saveEventResponse(
+                updatedResponse,
+                methodOrEventObject,
+                eventName,
+                eventExpected === 'triggers' ? true : false
+              );
+            });
+          });
+        }
+      }
+
+      try {
+        if (contentObject && contentObject.data) {
+          contentObject.data.forEach((object) => {
+            if (object.validations) {
+              const scenario = object.type;
+              const methodOrEventResponse =
+                validationType == CONSTANTS.EVENT
+                  ? methodOrEventObject.eventResponse
+                  : validationType == CONSTANTS.METHOD
+                    ? methodOrEventObject.apiResponse
+                    : null;
+
+              // Looping through validationJsonPath to find the valid path for validation.
+              if (validationJsonPath && Array.isArray(validationJsonPath)) {
+                const validationPath = validationJsonPath.find((path) => {
+                  if (
+                    path
+                      .split('.')
+                      .reduce((acc, part) => acc && acc[part], methodOrEventResponse) !== undefined
+                  ) {
+                    return path;
+                  }
+                });
+                validationPath
+                  ? (validationJsonPath = validationPath)
+                  : fireLog.assert(
+                      false,
+                      'Could not find the valid validation path from the validationJsonPath list'
+                    );
+              }
+              switch (scenario) {
+                case CONSTANTS.REGEX:
+                  cy.regExValidation(
+                    method,
+                    object.validations[0].type,
+                    validationJsonPath,
+                    methodOrEventResponse
+                  );
+                  break;
+                case CONSTANTS.MISC:
+                  cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
+                  break;
+                case CONSTANTS.DECODE:
+                  const decodeType = object.specialCase;
+                  const responseForDecodeValidation =
+                    validationType == CONSTANTS.EVENT
+                      ? methodOrEventResponse
+                      : validationType == CONSTANTS.METHOD
+                        ? methodOrEventResponse.result
+                        : null;
+
+                  cy.decodeValidation(
+                    method,
+                    decodeType,
+                    responseForDecodeValidation,
+                    object.validations[0],
+                    null
+                  );
+                  break;
+                case CONSTANTS.FIXTURE:
+                  cy.validateContent(
+                    method,
+                    context,
+                    validationJsonPath,
+                    object.validations[0].type,
+                    validationType,
+                    appId
+                  );
+                  break;
+                case CONSTANTS.CUSTOM:
+                  cy.customValidation(object, methodOrEventObject);
+                  break;
+                case CONSTANTS.UNDEFINED:
+                  cy.undefinedValidation(object, methodOrEventObject, validationType);
+                  break;
+                default:
+                  assert(false, 'Unsupported validation type');
+                  break;
+              }
+            }
+          });
+        } else {
+          cy.validateContent(
+            method,
+            context,
+            validationJsonPath,
+            contentObject,
+            validationType,
+            appId
+          );
+        }
+      } catch (error) {
+        assert(false, `Unable to validate the response: ${error}`);
+      }
+    }
+  });
 });

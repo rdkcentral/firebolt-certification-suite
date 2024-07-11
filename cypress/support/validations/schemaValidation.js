@@ -68,14 +68,14 @@ Cypress.Commands.add(
           if (response.hasOwnProperty(CONSTANTS.RESULT)) {
             if (
               response &&
-              response.result &&
+              response.result !== undefined &&
               response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
             ) {
               formattedResponse = Object.assign(formattedResponse, response.result);
               formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
             } else if (
               response &&
-              response.result &&
+              response.result !== undefined &&
               !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
             ) {
               formattedResponse.eventResponse = response.result;
@@ -85,7 +85,7 @@ Cypress.Commands.add(
           } else if (response.hasOwnProperty(CONSTANTS.ERROR)) {
             if (
               response &&
-              response.result &&
+              response.result !== undefined &&
               response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
             ) {
               formattedResponse = Object.assign(formattedResponse, response.error);

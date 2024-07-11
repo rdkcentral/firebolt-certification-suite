@@ -297,8 +297,6 @@ module.exports = {
   PARAMS: 'Params',
   PASS: 'PASS',
   PASSWORD: 'password',
-  PLATFORM_INVALID_RESPONSE_LOG:
-    'Platform returned response in invalid format, which could lead to failures in validations. Response must be an object',
   PLATFORM_NOT_SUPPORT_LOG: 'Platform does not support method',
   PLATFORM_NOT_TRIGGER_EVENT: 'Platform MUST not trigger event ',
   PLATFORM_TRIGGER_EVENT: 'Platform MUST trigger event ',
@@ -331,6 +329,8 @@ module.exports = {
   },
   PERFORMANCE_METRICS: 'performanceMetrics',
   RESPONSE: 'Response: ',
+  RESPONSE_INVALID_RESPONSE_LOG:
+    'Platform or App returned response in invalid format, which could lead to failures in validations. Response must be in JSON RPC format',
   RESPONSE_NOT_FOUND: 'No_Response',
   RESPONSE_STATUS: {
     OK: 'OK',
