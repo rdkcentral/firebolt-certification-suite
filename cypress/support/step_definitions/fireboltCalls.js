@@ -50,7 +50,7 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
           ' params: ' +
           JSON.stringify(parsedData.params)
       );
-      cy.sendMessageToPlatformOrApp('Platform', additionalParams);
+      cy.sendMessageToPlatformOrApp(CONSTANTS.PLATFORM, additionalParams);
     });
   });
 });
@@ -96,7 +96,7 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
         `Call from ${appId}, method: ${parsedData.method} params: ${JSON.stringify(parsedData.params)}`
       );
 
-      cy.sendMessageToPlatformOrApp('App', additionalParams);
+      cy.sendMessageToPlatformOrApp(CONSTANTS.APP, additionalParams);
     });
   });
 });
@@ -135,7 +135,7 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
       fireLog.info(
         `Registering for the ${parsedData.method} event using ${appId} with params : ${JSON.stringify(parsedData.params)}`
       );
-      cy.sendMessageToPlatformOrApp('App', additionalParams, CONSTANTS.TASK.REGISTEREVENT);
+      cy.sendMessageToPlatformOrApp(CONSTANTS.APP, additionalParams, CONSTANTS.TASK.REGISTEREVENT);
     });
   });
 });
@@ -166,7 +166,11 @@ Given(/1st party app registers for the '(.+)' event using the '(.+)' API$/, asyn
           parsedData.params
         )}`
       );
-      cy.sendMessageToPlatformOrApp('Platform', additionalParams, CONSTANTS.TASK.REGISTEREVENT);
+      cy.sendMessageToPlatformOrApp(
+        CONSTANTS.PLATFORM,
+        additionalParams,
+        CONSTANTS.TASK.REGISTEREVENT
+      );
     });
   });
 });

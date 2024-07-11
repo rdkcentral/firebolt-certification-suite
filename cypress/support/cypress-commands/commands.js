@@ -901,7 +901,7 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, additionalParams, ta
         assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
       }
 
-      response = typeof response == CONSTANTS.TYPE_STRING ? JSON.parse(response) : response;
+      response = typeof response === CONSTANTS.TYPE_STRING ? JSON.parse(response) : response;
 
       if (
         response &&
@@ -940,7 +940,8 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, additionalParams, ta
 
         // Call the 'censorData' command to hide sensitive data
         cy.censorData(method, dataToBeCensored).then((maskedResult) => {
-          fireLog.info(`Response from ${target}: ${JSON.stringify(maskedResult)}`);
+          const appLog = target === CONSTANTS.PLATFORM ? 'Firebolt platform' : `app: ${appId}`;
+          fireLog.info(`Response from ${appLog}: ${JSON.stringify(maskedResult)}`);
         });
         // Creating object with event name, params, and response etc and storing it in a global list for further validation.
         const apiOrEventAppObject =

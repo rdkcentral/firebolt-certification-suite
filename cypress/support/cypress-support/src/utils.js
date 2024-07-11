@@ -885,6 +885,25 @@ global.resolveAtRuntime = function (input) {
   };
 };
 
+// A Function that recursively check each fields and invokes if it's a function within an array or object.
+function resolveRecursiveValues(input) {
+  if (Array.isArray(input)) {
+    return input.map((item) => resolveRecursiveValues(item));
+  } else if (typeof input == CONSTANTS.TYPE_OBJECT && input !== null) {
+    const newObj = {};
+    for (const key in input) {
+      if (Object.hasOwnProperty.call(input, key)) {
+        newObj[key] = resolveRecursiveValues(input[key]);
+      }
+    }
+    return newObj;
+  } else if (input && typeof input === CONSTANTS.TYPE_FUNCTION) {
+    return input();
+  } else {
+    return input;
+  }
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -910,4 +929,5 @@ module.exports = {
   fireLog,
   parseValue,
   checkForSecondaryAppId,
+  resolveRecursiveValues,
 };

@@ -104,16 +104,14 @@ Given(
         if (!fireboltCallObject) {
           fireLog.assert(false, fireboltCallObjectErrorMessage);
         } else {
-          let setMethod =
-            typeof fireboltCallObject.setMethod === CONSTANTS.TYPE_FUNCTION
-              ? fireboltCallObject.setMethod()
-              : fireboltCallObject.setMethod;
+          let setMethod = UTILS.resolveRecursiveValues(fireboltCallObject.setMethod);
           let setParams;
 
           // Extracting the parameter from the fireboltCall object
-          if (typeof fireboltCallObject.setParams === CONSTANTS.TYPE_FUNCTION) {
-            setParams = { value: fireboltCallObject.setParams() };
-          } else if (typeof fireboltCallObject.setParams === CONSTANTS.TYPE_OBJECT) {
+          if (
+            fireboltCallObject.setParams &&
+            typeof fireboltCallObject.setParams === CONSTANTS.TYPE_OBJECT
+          ) {
             setParams = fireboltCallObject.setParams;
 
             // Iterating through the object and invoking it if it is a function
@@ -123,7 +121,7 @@ Given(
               }
             }
           } else {
-            setParams = { value: fireboltCallObject.setParams };
+            setParams = { value: UTILS.resolveRecursiveValues(fireboltCallObject.setParams) };
           }
 
           const context = {};
@@ -203,14 +201,10 @@ Given(/'(.+)' invokes the '(.+)' get API(?: '(.+)')?$/, async (appId, sdk, fireb
       if (!fireboltCallObject) {
         fireLog.assert(false, fireboltCallObjectErrorMessage);
       } else {
-        let method =
-          typeof fireboltCallObject.method === CONSTANTS.TYPE_FUNCTION
-            ? fireboltCallObject.method()
-            : fireboltCallObject.method;
-        const param =
-          fireboltCallObject.params && typeof fireboltCallObject.params === CONSTANTS.TYPE_FUNCTION
-            ? fireboltCallObject.params()
-            : fireboltCallObject.params;
+        let method = UTILS.resolveRecursiveValues(fireboltCallObject.method);
+        const param = UTILS.resolveRecursiveValues(fireboltCallObject.params);
+        console.log('method', method);
+        console.log('param', param);
 
         const context = {};
         const expected = CONSTANTS.RESULT;
@@ -226,11 +220,6 @@ Given(/'(.+)' invokes the '(.+)' get API(?: '(.+)')?$/, async (appId, sdk, fireb
         if (method && method.includes('_')) {
           action = method.split('_')[0];
           method = method.split('_')[1];
-        }
-
-        // If method and param are not supported setting isScenarioExempted as true for further validation.
-        if (UTILS.isScenarioExempted(method, param)) {
-          Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
         }
 
         const additionalParams = {
@@ -308,10 +297,7 @@ Given(
         if (!fireboltCallObject) {
           fireLog.assert(false, fireboltCallObjectErrorMessage);
         } else {
-          let event =
-            typeof fireboltCallObject.event === CONSTANTS.TYPE_FUNCTION
-              ? fireboltCallObject.event()
-              : fireboltCallObject.event;
+          let event = UTILS.resolveRecursiveValues(fireboltCallObject.event);
           const eventParams = {};
           const context = {};
           appId =
@@ -324,7 +310,7 @@ Given(
 
           // Splitting the method name if it contains an underscore and using the first part to determine the action that decides sdk.
           if (event && event.includes('_')) {
-            action = setMethod.split('_')[0];
+            action = event.split('_')[0];
             event = event.split('_')[1];
           }
 
@@ -409,24 +395,18 @@ Given(
       cy.then(() => {
         let method =
           methodType === CONSTANTS.SET
-            ? typeof fireboltCallObject.setMethod == CONSTANTS.TYPE_FUNCTION
-              ? fireboltCallObject.setMethod()
-              : fireboltCallObject.setMethod
-            : typeof fireboltCallObject.method == CONSTANTS.TYPE_FUNCTION
-              ? fireboltCallObject.method()
-              : fireboltCallObject.method;
+            ? UTILS.resolveRecursiveValues(fireboltCallObject.setMethod)
+            : UTILS.resolveRecursiveValues(fireboltCallObject.method);
+
         let validationJsonPath =
           methodType === CONSTANTS.SET
-            ? typeof fireboltCallObject.setValidationJsonPath == CONSTANTS.TYPE_FUNCTION
-              ? fireboltCallObject.setValidationJsonPath()
-              : fireboltCallObject.setValidationJsonPath
-            : typeof fireboltCallObject.validationJsonPath == CONSTANTS.TYPE_FUNCTION
-              ? fireboltCallObject.validationJsonPath()
-              : fireboltCallObject.validationJsonPath;
+            ? UTILS.resolveRecursiveValues(fireboltCallObject.setValidationJsonPath)
+            : UTILS.resolveRecursiveValues(fireboltCallObject.validationJsonPath);
+
         let contentObject =
           methodType === CONSTANTS.SET
-            ? resolveContentObject(fireboltCallObject.setContent)
-            : resolveContentObject(fireboltCallObject.content);
+            ? UTILS.resolveRecursiveValues(fireboltCallObject.setContent)
+            : UTILS.resolveRecursiveValues(fireboltCallObject.content);
 
         method = method.includes('_') ? method.split('_')[1] : method;
         contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
@@ -502,15 +482,11 @@ Given(
       }
 
       cy.then(() => {
-        let event =
-          typeof fireboltCallObject.event == CONSTANTS.TYPE_FUNCTION
-            ? fireboltCallObject.event()
-            : fireboltCallObject.event;
-        let eventValidationJsonPath =
-          typeof fireboltCallObject.eventValidationJsonPath == CONSTANTS.TYPE_FUNCTION
-            ? fireboltCallObject.eventValidationJsonPath()
-            : fireboltCallObject.eventValidationJsonPath;
-        let contentObject = resolveContentObject(fireboltCallObject.content);
+        let event = UTILS.resolveRecursiveValues(fireboltCallObject.event);
+        let eventValidationJsonPath = UTILS.resolveRecursiveValues(
+          fireboltCallObject.eventValidationJsonPath
+        );
+        let contentObject = UTILS.resolveRecursiveValues(fireboltCallObject.content);
 
         event = event.includes('_') ? event.split('_')[1] : event;
         contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
@@ -545,22 +521,3 @@ Given(
     }
   }
 );
-
-// A Function that recursively check each fields and invokes if it's a function within an array or object.
-function resolveContentObject(input) {
-  if (Array.isArray(input)) {
-    return input.map((item) => resolveContentObject(item));
-  } else if (typeof input == CONSTANTS.TYPE_OBJECT && input !== null) {
-    const newObj = {};
-    for (const key in input) {
-      if (Object.hasOwnProperty.call(input, key)) {
-        newObj[key] = resolveContentObject(input[key]);
-      }
-    }
-    return newObj;
-  } else if (input && typeof input === CONSTANTS.TYPE_FUNCTION) {
-    return input();
-  } else {
-    return input;
-  }
-}
