@@ -50,7 +50,7 @@ Given(
 );
 
 /**
- * @module fireboltCalls
+ * @module getterSetterCalls
  * @function 1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'
  * @description Sending a message to platform to set a value
  * @param {String} sdk - sdk name.
@@ -81,7 +81,7 @@ Given(
         value: value,
       });
 
-      // runtime environment variable holds attribute and value
+      // Store attribute and value in the runtime environment variable
       Cypress.env(CONSTANTS.RUNTIME, object);
 
       // When fireboltCall object key passed fetching the object from the fireboltCalls data else reading it from environment variable
@@ -114,7 +114,7 @@ Given(
           ) {
             setParams = fireboltCallObject.setParams;
 
-            // Iterating through the object and invoking it if it is a function
+            // Iterating through the object and invoke if it is a function
             for (const key in setParams) {
               if (typeof setParams[key] === CONSTANTS.TYPE_FUNCTION) {
                 setParams[key] = setParams[key]();
@@ -159,7 +159,7 @@ Given(
 );
 
 /**
- * @module fireboltCalls
+ * @module getterSetterCalls
  * @function '(.+)' invokes the '(.+)' get API(?: '(.+)')
  * @description Sending a message to platform or app to get a value
  * @param {String} appId - app identifier.
@@ -183,6 +183,7 @@ Given(/'(.+)' invokes the '(.+)' get API(?: '(.+)')?$/, async (appId, sdk, fireb
 
     // When fireboltCall object key passed fetching the object from the fireboltCalls data else reading it from environment variable
     if (fireboltCallKey) {
+      // Fetching fireboltCall object from fireboltCalls data
       cy.getFireboltData(fireboltCallKey).then((fireboltData) => {
         fireboltCallObject = fireboltData;
         cy.wrap(UTILS.getEnvVariable(CONSTANTS.RUNTIME)).then((object) => {
@@ -191,6 +192,7 @@ Given(/'(.+)' invokes the '(.+)' get API(?: '(.+)')?$/, async (appId, sdk, fireb
         });
       });
     } else {
+      // Reading fireboltCall object from the environment variable
       fireboltCallObject = UTILS.getEnvVariable(CONSTANTS.RUNTIME).fireboltCall;
       fireboltCallObjectErrorMessage =
         'Unable to find the firebolt object in the runtime environment variable';
@@ -254,10 +256,10 @@ Given(/'(.+)' invokes the '(.+)' get API(?: '(.+)')?$/, async (appId, sdk, fireb
 });
 
 /**
- * @module fireboltCalls
+ * @module getterSetterCalls
  * @function '(.+)' registers for the '(.*?)'(?: '(.*?)')? event
- * @description Sending a message to platform or app to register a event
- * @param {String} appId - app identtifier.
+ * @description Sending a message to platform or app to register an event
+ * @param {String} appId - app identifier.
  * @param {String} sdk - sdk name.
  * @param {String} fireboltCallKey - key name passed to look for firebolt call object in fireboltCallData.
  * @example
@@ -279,6 +281,7 @@ Given(
 
       // When fireboltCall object key passed fetching the object from the fireboltCalls data else reading it from environment variable
       if (fireboltCallKey) {
+        // Fetching fireboltCall object from fireboltCalls data
         cy.getFireboltData(fireboltCallKey).then((fireboltData) => {
           fireboltCallObject = fireboltData;
           cy.wrap(UTILS.getEnvVariable(CONSTANTS.RUNTIME)).then((object) => {
@@ -287,6 +290,7 @@ Given(
           });
         });
       } else {
+        // Reading fireboltCall object from the environment variable
         fireboltCallObject = UTILS.getEnvVariable(CONSTANTS.RUNTIME).fireboltCall;
         fireboltCallObjectErrorMessage =
           'Unable to find the firebolt object in the runtime environment variable';
@@ -352,13 +356,13 @@ Given(
 );
 
 /**
- * @module validations
+ * @module getterSetterCalls
  * @function And '(.+)' platform responds to '([^']*)'(?: '([^']*)')? (get|set) API(?: with '(.+)')?
  * @description Performing a validation against the source of truth for the given API response
  * @param {String} sdk - name of the sdk.
- * @param {String} appId - The object was retrieved by using the appId.
+ * @param {String} appId - app identifier.
  * @param {String} fireboltCallKey - key name passed to look for firebolt call object in fireboltCallData Json.
- * @param {String} methodType - Determines which method doing content validation Ex: set or get
+ * @param {String} methodType - Determines the type of method being validated Ex: set or get
  * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS'
  * @example
  * And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' get API
@@ -440,12 +444,12 @@ Given(
 );
 
 /**
- * @module validations
+ * @module getterSetterCalls
  * @function And '(.+)' platform (triggers|does not trigger) '(.*?)'(?: '(.*?)')? event(?: with '(.+)')?
  * @description Performing a event validation against the source of truth
  * @param {String} sdk - name of the sdk.
- * @param {String} eventExpected - eventExpected will used to decide expecting for an event or not.
- * @param {String} appId - The object was retrieved by using the appId.
+ * @param {String} eventExpected - Determines whether the event is expected or not.
+ * @param {String} appId - app identifier.
  * @param {String} fireboltCallKey - key name passed to look for firebolt call object in fireboltCallData Json.
  * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS'
  * @example
@@ -488,6 +492,7 @@ Given(
         );
         let contentObject = UTILS.resolveRecursiveValues(fireboltCallObject.content);
 
+         // Extract the event name
         event = event.includes('_') ? event.split('_')[1] : event;
         contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
         eventValidationJsonPath = eventValidationJsonPath
