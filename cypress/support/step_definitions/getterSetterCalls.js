@@ -20,7 +20,7 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
 const CONSTANTS = require('../constants/constants');
 
 /**
- * @module settersGetterCalls
+ * @module getterSetterCalls
  * @function Given we test the '(.+)' getters and setters
  * @description Define and cache the fireboltCall object to use for getters and setters scenario by saving the object in env variable.
  * @param {String} key - key name of the fireboltCall setter/getter data.
@@ -71,7 +71,6 @@ Given(
       let fireboltCallObject;
       let fireboltCallObjectErrorMessage = CONSTANTS.NO_DATA_FOR_THE_KEY + fireboltCallKey;
 
-      // runtime environment variable holds attribute and value
       if (!UTILS.getEnvVariable(CONSTANTS.RUNTIME, false)) {
         Cypress.env(CONSTANTS.RUNTIME, {});
       }
@@ -492,7 +491,7 @@ Given(
         );
         let contentObject = UTILS.resolveRecursiveValues(fireboltCallObject.content);
 
-         // Extract the event name
+        // Extract the event name
         event = event.includes('_') ? event.split('_')[1] : event;
         contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
         eventValidationJsonPath = eventValidationJsonPath
