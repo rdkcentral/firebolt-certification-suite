@@ -78,7 +78,7 @@ function run() {
 // Function to open Cypress without report options
 function open() {
   const command = 'cypress';
-  const args = ['open', '--e2e', ...params.split(' ')];
+  const args = ['open', '--e2e', ...modifyParams(params).split(' ')];
   console.log(`[Running cypress command: ${command} ${args.join(' ')}]`);
 
   const cypressProcess = spawn(command, args, { stdio: 'inherit' });
