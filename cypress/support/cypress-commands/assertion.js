@@ -125,10 +125,6 @@ Cypress.Commands.add(
               appId,
               validationType
             );
-            console.log('entered apiOrEventObject >>> ', apiOrEventObject);
-            // if(apiOrEventObject && apiOrEventObject.eventListenerResponse && apiOrEventObject.eventListenerResponse.error){
-
-            // }
             const apiErrorResponse =
               validationType == CONSTANTS.EVENT
                 ? apiOrEventObject.eventListenerResponse.error
@@ -223,32 +219,38 @@ Cypress.Commands.add(
     ) {
       skipSchema = true;
     }
-    cy.then(() => {
-      if (apiSchemaResult && !skipSchema) {
-        // Validating the schema validation result
-        cy.schemaValidationCheck(apiSchemaResult).then((result) => {
-          let isNullCheckSkipped = false;
+    // Verifying whether the error is undefined or not in the response received.
+    cy.errorNotUndefinedCheck(response)
+      .then((result) => {
+        // Pushing the validation status object into an array.
+        validationCheck.push(result);
+      })
+      .then(() => {
+        if (apiSchemaResult && !skipSchema) {
+          // Validating the schema validation result
+          cy.schemaValidationCheck(apiSchemaResult).then((result) => {
+            let isNullCheckSkipped = false;
 
-          // Enable the isNullCheckSkipped flag when an error is not present in the response and the schema is passed without expecting an error.
-          if (response.error == null || response.error == undefined) {
-            result.validationStatus == CONSTANTS.PASS && errorExpected != CONSTANTS.ERROR
-              ? (isNullCheckSkipped = true)
-              : (isNullCheckSkipped = false);
-          }
+            // Enable the isNullCheckSkipped flag when an error is not present in the response and the schema is passed without expecting an error.
+            if (response.error == null || response.error == undefined) {
+              result.validationStatus == CONSTANTS.PASS && errorExpected != CONSTANTS.ERROR
+                ? (isNullCheckSkipped = true)
+                : (isNullCheckSkipped = false);
+            }
+            // Checking if the error is null in the response and if the error is expected or not.
+            if (!UTILS.getEnvVariable(CONSTANTS.IS_SCENARIO_EXEMPTED, false)) {
+              cy.errorNullCheck(response, errorExpected, isNullCheckSkipped).then((result) => {
+                validationCheck.push(result);
+              });
+            }
+          });
+        } else {
           // Checking if the error is null in the response and if the error is expected or not.
-          if (!UTILS.getEnvVariable(CONSTANTS.IS_SCENARIO_EXEMPTED, false)) {
-            cy.errorNullCheck(response, errorExpected, isNullCheckSkipped).then((result) => {
-              validationCheck.push(result);
-            });
-          }
-        });
-      } else {
-        // Checking if the error is null in the response and if the error is expected or not.
-        cy.errorNullCheck(response, errorExpected).then((result) => {
-          validationCheck.push(result);
-        });
-      }
-    })
+          cy.errorNullCheck(response, errorExpected).then((result) => {
+            validationCheck.push(result);
+          });
+        }
+      })
       .then(() => {
         if (apiSchemaResult) {
           // Validating the schema validation result
@@ -444,23 +446,20 @@ function loggingValidationCheckResult(validationCheck) {
   });
 
   // Printing the status of all checks in the report.
-  cy.get(validationCheck)
-    .each((logging) => {
-      cy.log(
-        `${logging.validationPoint}: ${logging.validationStatus}. ${logging.message}`,
-        'loggingValidationCheckResult'
+  cy.get(validationCheck);
+  // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
+  validationCheck.forEach((assertion) => {
+    if (assertion.validationStatus == CONSTANTS.SKIPPED) {
+      fireLog.info(`${assertion.validationPoint}: ${assertion.validationStatus}`);
+    } else {
+      fireLog.info(
+        `${assertion.validationPoint}: ${assertion.validationStatus} ${assertion.message}`
       );
-    })
-    .then(() => {
-      // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
-      validationCheck.forEach((assertion) => {
-        if (assertion.validationStatus == CONSTANTS.SKIPPED) {
-          assert.equal(assertion.validationStatus, CONSTANTS.SKIPPED, assertion.validationPoint);
-        } else {
-          assert.equal(assertion.validationStatus, CONSTANTS.PASS, assertion.validationPoint);
-        }
-      });
-    });
+      if (assertion.validationStatus == CONSTANTS.FAIL) {
+        throw new Error(`${assertion.validationPoint} failed, ${assertion.message}`);
+      }
+    }
+  });
 }
 
 /**
