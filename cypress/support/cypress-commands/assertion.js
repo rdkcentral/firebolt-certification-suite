@@ -191,7 +191,11 @@ Cypress.Commands.add(
         ' to be ' +
         JSON.stringify(expected);
       // Executing fireLog.deepEqual() after logging
-      fireLog.deepEqual(apiResponseContent, expected, pretext);
+      if (apiResponseContent != expected) {
+        throw new Error(`${pretext}`);
+      } else {
+        fireLog.info(`${pretext}`);
+      }
     }
   }
 );
