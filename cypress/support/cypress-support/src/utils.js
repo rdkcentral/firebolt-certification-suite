@@ -801,6 +801,7 @@ function parseValue(str) {
   if (typeof str === 'string') {
     if (str === 'true') return true;
     if (str === 'false') return false;
+    if (str === 'null') return null;
 
     if (!isNaN(str)) return Number(str);
 
