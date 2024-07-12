@@ -51,7 +51,7 @@ Given(
 
 /**
  * @module getterSetterCalls
- * @function 1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'
+ * @function Given 1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'
  * @description Sending a message to platform to set a value
  * @param {String} sdk - sdk name.
  * @param {String} fireboltCallKey - key name passed to look for firebolt call object in fireboltCallData.
@@ -59,9 +59,9 @@ Given(
  * @param {String} invalidValue - Determines whether expecting for an error or result.
  * @param {String} value - The value used by the set method to set the value (ex. monospaced_sanserif)
  * @example
- * Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to 'true'
- * Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to invalid 'test'
- * Given '1st party app' invokes the 'Firebolt' API to set 'enable' to 'true'
+ * Given 1st party app invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to 'true'
+ * Given 1st party app invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to invalid 'test'
+ * Given 1st party app invokes the 'Firebolt' API to set 'enable' to 'true'
  */
 Given(
   /1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'$/,
@@ -74,16 +74,16 @@ Given(
       if (!UTILS.getEnvVariable(CONSTANTS.RUNTIME, false)) {
         Cypress.env(CONSTANTS.RUNTIME, {});
       }
+
+      // Store attribute and value in the runtime environment variable
       let object = UTILS.getEnvVariable(CONSTANTS.RUNTIME);
       object = Object.assign(object, {
         attribute: attribute,
         value: value,
       });
-
-      // Store attribute and value in the runtime environment variable
       Cypress.env(CONSTANTS.RUNTIME, object);
 
-      // When fireboltCall object key passed fetching the object from the fireboltCalls data else reading it from environment variable
+      // When fireboltCall object key passed fetching the object from the fireboltCalls data else reading it from environment variable.
       if (fireboltCallKey) {
         cy.getFireboltData(fireboltCallKey).then((fireboltData) => {
           fireboltCallObject = fireboltData;
@@ -159,7 +159,7 @@ Given(
 
 /**
  * @module getterSetterCalls
- * @function '(.+)' invokes the '(.+)' get API(?: '(.+)')
+ * @function Given '(.+)' invokes the '(.+)' get API(?: '(.+)')
  * @description Sending a message to platform or app to get a value
  * @param {String} appId - app identifier.
  * @param {String} sdk - sdk name.
@@ -204,9 +204,6 @@ Given(/'(.+)' invokes the '(.+)' get API(?: '(.+)')?$/, async (appId, sdk, fireb
       } else {
         let method = UTILS.resolveRecursiveValues(fireboltCallObject.method);
         const param = UTILS.resolveRecursiveValues(fireboltCallObject.params);
-        console.log('method', method);
-        console.log('param', param);
-
         const context = {};
         const expected = CONSTANTS.RESULT;
         appId =
@@ -256,7 +253,7 @@ Given(/'(.+)' invokes the '(.+)' get API(?: '(.+)')?$/, async (appId, sdk, fireb
 
 /**
  * @module getterSetterCalls
- * @function '(.+)' registers for the '(.*?)'(?: '(.*?)')? event
+ * @function Given '(.+)' registers for the '(.*?)'(?: '(.*?)')? event
  * @description Sending a message to platform or app to register an event
  * @param {String} appId - app identifier.
  * @param {String} sdk - sdk name.
@@ -356,7 +353,7 @@ Given(
 
 /**
  * @module getterSetterCalls
- * @function And '(.+)' platform responds to '([^']*)'(?: '([^']*)')? (get|set) API(?: with '(.+)')?
+ * @function Given '(.+)' platform responds to '([^']*)'(?: '([^']*)')? (get|set) API(?: with '(.+)')?
  * @description Performing a validation against the source of truth for the given API response
  * @param {String} sdk - name of the sdk.
  * @param {String} appId - app identifier.
@@ -429,7 +426,7 @@ Given(
           appId: appId,
         };
         if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
-          cy.methodorEventResponseValidation(CONSTANTS.METHOD, additionalParams);
+          cy.methodOrEventResponseValidation(CONSTANTS.METHOD, additionalParams);
         } else {
           cy.log(
             `${CONSTANTS.SKIPCONTENTVALIDATION} flag is enabled, Skipping the Content validation`
@@ -444,7 +441,7 @@ Given(
 
 /**
  * @module getterSetterCalls
- * @function And '(.+)' platform (triggers|does not trigger) '(.*?)'(?: '(.*?)')? event(?: with '(.+)')?
+ * @function Given '(.+)' platform (triggers|does not trigger) '(.*?)'(?: '(.*?)')? event(?: with '(.+)')?
  * @description Performing a event validation against the source of truth
  * @param {String} sdk - name of the sdk.
  * @param {String} eventExpected - Determines whether the event is expected or not.
@@ -513,7 +510,7 @@ Given(
           eventExpected: eventExpected,
         };
         if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
-          cy.methodorEventResponseValidation(CONSTANTS.EVENT, additionalParams);
+          cy.methodOrEventResponseValidation(CONSTANTS.EVENT, additionalParams);
         } else {
           cy.log(
             `${CONSTANTS.SKIPCONTENTVALIDATION} flag is enabled, Skipping the Content validation`

@@ -885,7 +885,14 @@ global.resolveAtRuntime = function (input) {
   };
 };
 
-// A Function that recursively check each fields and invokes if it's a function within an array or object.
+/**
+ * @module utils
+ * @function resolveRecursiveValues
+ * @description A Function that recursively check each fields and invoke if it is a function within an array or object.
+ * @param {*} input - value which need to resolved and it may be string/object/array/function
+ * @example
+ * resolveRecursiveValues(function())
+ */
 function resolveRecursiveValues(input) {
   if (Array.isArray(input)) {
     return input.map((item) => resolveRecursiveValues(item));

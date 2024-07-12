@@ -835,7 +835,18 @@ Cypress.Commands.add('clearCache', () => {
   cy.reload(true);
 });
 
-
+/**
+ * @module commands
+ * @function sendMessageToPlatformOrApp
+ * @description Function to send message to Platform or App to make an Api call.
+ * @param {String} target - 'App' or 'Platform'
+ * @param {String} additionalParams - Contains the data which required to create request message to make a call.
+ * @param {String} task - Task/Handler name that decides whether make a api call or event call.
+ * @example
+ * cy.sendMessageToPlatformOrApp('App', {method: 'account.id', params: {}, context: {}, action: 'core', expected: 'result', appId: 'test.test'}
+ * cy.sendMessageToPlatformOrApp('Platform', {method: 'account.id', params: {}, context: {}, action: 'core', expected: 'result'}
+ * cy.sendMessageToPlatformOrApp('App', {method: 'accessibility.onClosedCaptionsSettingsChanged', params: {}, context: {}, action: 'core', expected: 'result', appId: 'test.test', 'registerEvent'}
+ */
 Cypress.Commands.add('sendMessageToPlatformOrApp', (target, additionalParams, task) => {
   const { method, params, context, action, expected, appId } = additionalParams;
   task = task ? task : CONSTANTS.TASK.CALLMETHOD;
@@ -963,7 +974,17 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, additionalParams, ta
   });
 });
 
-Cypress.Commands.add('methodorEventResponseValidation', (validationType, additionalParams) => {
+/**
+ * @module commands
+ * @function sendMessageToPlatformOrApp
+ * @description Function to send message to Platform or App to make an Api call.
+ * @param {String} validationType - Determines whether method or event validation is being performed. Ex: 'method' or 'event'
+ * @param {String} additionalParams - Contains the data which required to do content validation for the specified method.
+ * @example
+ * cy.sendMessageToPlatformOrApp('method', {method: 'account.id', context: {}, contentObject: {}, expectingError: false, appId: 'test.test'}
+ * cy.sendMessageToPlatformOrApp('event', {method: 'accessibility.onClosedCaptionsSettingsChanged', context: {}, contentObject: {}, expectingError: false, appId: 'test.test', eventExpected: 'triggers'}
+ */
+Cypress.Commands.add('methodOrEventResponseValidation', (validationType, additionalParams) => {
   const { method, context, contentObject, expectingError, appId, eventExpected } = additionalParams;
   let validationJsonPath = additionalParams.validationJsonPath;
 

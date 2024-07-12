@@ -1,6 +1,6 @@
 # GetterSetterCallsGlue
 
-## 1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'
+## Given 1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'
 
 ### Purpose: Sending a message to platform to set a value
 
@@ -14,11 +14,11 @@
 | value | The value used by the set method to set the value (ex. monospaced_sanserif) |
 
 ### Examples:
-* `Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to 'true'`
-* `Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to invalid 'test'`
-* `Given '1st party app' invokes the 'Firebolt' API to set 'enable' to 'true'`
+* `Given 1st party app invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to 'true'`
+* `Given 1st party app invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to invalid 'test'`
+* `Given 1st party app invokes the 'Firebolt' API to set 'enable' to 'true'`
 
-## '(.+)' registers for the '(.*?)'(?: '(.*?)')? event
+## Given '(.+)' registers for the '(.*?)'(?: '(.*?)')? event
 
 ### Purpose: Sending a message to platform or app to register a event
 
@@ -34,7 +34,7 @@
  * `And '3rd party app' registers for the 'Firebolt' 'CLOSEDCAPTION_SETTINGS' event`
  * `And '1st party app' registers for the 'Firebolt' event`
 
-## '(.+)' invokes the '(.+)' get API(?: '(.+)')
+## Given '(.+)' invokes the '(.+)' get API(?: '(.+)')
 
 ### Purpose: Sending a message to platform or 3rd party app to get a value
 
@@ -51,7 +51,7 @@
 * `And '3rd party app' invokes the 'Firebolt' get API`
 * `And 'test_app' invokes the 'Firebolt' get API 'CLOSEDCAPTION_SETTINGS'`
   
-## '(.+)' platform responds to '([^']*)'(?: '([^']*)')? (get|set) API(?: with '(.+)')?
+## Given '(.+)' platform responds to '([^']*)'(?: '([^']*)')? (get|set) API(?: with '(.+)')?
 ### Purpose: Performing a validation against the source of truth for the given API response
 
 ### Params:
@@ -70,7 +70,7 @@
  * `And 'Firebolt' platform responds to '1st party app' set API`
  * `And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' set API with 'INVALID_TYPE_PARAMS'`
 
-## '(.+)' platform (triggers|does not trigger) '(.*?)'(?: '(.*?)')? event(?: with '(.+)')?
+## Given '(.+)' platform (triggers|does not trigger) '(.*?)'(?: '(.*?)')? event(?: with '(.+)')?
 
 ### Purpose: Performing a event validation against the source of truth
 
@@ -91,7 +91,7 @@
  * `And 'Firebolt' platform triggers '1st party app' event`
  * `And 'Firebolt' platform triggers '1st party app' 'CLOSEDCAPTION_SETTINGS' event with 'INVALID_TYPE_PARAMS'`
 
-## '(.+)' platform responds to '([^']*)'(?: '([^']*)')? (get|set) API(?: with '(.+)')?
+## Given '(.+)' platform responds to '([^']*)'(?: '([^']*)')? (get|set) API(?: with '(.+)')?
 ### Purpose: Performing a validation against the source of truth for the given API response
 
 ### Params:

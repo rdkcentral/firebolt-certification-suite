@@ -80,7 +80,7 @@ Given(
             eventExpected: eventExpected,
           };
           if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
-            cy.methodorEventResponseValidation(validationType, additionalParams);
+            cy.methodOrEventResponseValidation(validationType, additionalParams);
           } else {
             cy.log(
               `${CONSTANTS.SKIPCONTENTVALIDATION} flag is enabled, Skipping the Content validation`

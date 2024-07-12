@@ -305,6 +305,7 @@ request
 response
 - `123`
 - `true`
+
 ## resolveAtRuntime
 
 ### Purpose: Return the function which is having logic to resolve the value for the passed input at runtime.
@@ -326,3 +327,16 @@ return
 - `['result.fontSize', 'result.styles.fontSize']`
 - `"manage_closedcaptions.setFontSize"`
 - `1.5`
+
+## resolveRecursiveValues
+
+### Purpose: A Function that recursively check each fields and invoke if it is a function within an array or object.
+
+### Params:
+| Param | Definition| Type |
+| --- | --- | --- |
+| input | value which need to resolved | * |
+
+### Examples:
+request
+- `resolveRecursiveValues(function())`

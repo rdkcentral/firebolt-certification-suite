@@ -35,14 +35,7 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
   // Fetching the data like method, param, context and action etc.
   cy.fireboltDataParser(key, sdk).then((parsedDataArr) => {
     parsedDataArr.forEach((parsedData) => {
-      const additionalParams = {
-        method: parsedData.method,
-        params: parsedData.params,
-        context: parsedData.context,
-        action: parsedData.action,
-        expected: parsedData.expected,
-        appId: Cypress.env(CONSTANTS.FIRST_PARTY_APPID),
-      };
+      parsedData.appId = Cypress.env(CONSTANTS.FIRST_PARTY_APPID);
 
       fireLog.info(
         'Call from 1st party App, method: ' +
@@ -50,7 +43,7 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
           ' params: ' +
           JSON.stringify(parsedData.params)
       );
-      cy.sendMessageToPlatformOrApp(CONSTANTS.PLATFORM, additionalParams);
+      cy.sendMessageToPlatformOrApp(CONSTANTS.PLATFORM, parsedData);
     });
   });
 });
@@ -84,19 +77,13 @@ Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
       ) {
         cy.fetchLifecycleHistory(appId);
       }
-      const additionalParams = {
-        method: parsedData.method,
-        params: parsedData.params,
-        context: parsedData.context,
-        action: parsedData.action,
-        expected: parsedData.expected,
-        appId: appId,
-      };
+      parsedData.appId = appId;
+
       fireLog.info(
         `Call from ${appId}, method: ${parsedData.method} params: ${JSON.stringify(parsedData.params)}`
       );
 
-      cy.sendMessageToPlatformOrApp(CONSTANTS.APP, additionalParams);
+      cy.sendMessageToPlatformOrApp(CONSTANTS.APP, parsedData);
     });
   });
 });
@@ -124,18 +111,11 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
           ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
           : UTILS.checkForSecondaryAppId(appId);
 
-      const additionalParams = {
-        method: parsedData.method,
-        params: parsedData.params,
-        context: parsedData.context,
-        action: parsedData.action,
-        expected: parsedData.expected,
-        appId: appId,
-      };
+      parsedData.appId = appId;
       fireLog.info(
         `Registering for the ${parsedData.method} event using ${appId} with params : ${JSON.stringify(parsedData.params)}`
       );
-      cy.sendMessageToPlatformOrApp(CONSTANTS.APP, additionalParams, CONSTANTS.TASK.REGISTEREVENT);
+      cy.sendMessageToPlatformOrApp(CONSTANTS.APP, parsedData, CONSTANTS.TASK.REGISTEREVENT);
     });
   });
 });
@@ -153,24 +133,13 @@ Given(/1st party app registers for the '(.+)' event using the '(.+)' API$/, asyn
   // Fetching the data like method, param, context and action etc.
   cy.fireboltDataParser(key, sdk).then((parsedDataArr) => {
     parsedDataArr.forEach((parsedData) => {
-      const additionalParams = {
-        method: parsedData.method,
-        params: parsedData.params,
-        context: parsedData.context,
-        action: parsedData.action,
-        expected: parsedData.expected,
-        appId: UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
-      };
+      parsedData.appId = UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID);
       fireLog.info(
         `Registering for the ${parsedData.method} event using 1st party App with params : ${JSON.stringify(
           parsedData.params
         )}`
       );
-      cy.sendMessageToPlatformOrApp(
-        CONSTANTS.PLATFORM,
-        additionalParams,
-        CONSTANTS.TASK.REGISTEREVENT
-      );
+      cy.sendMessageToPlatformOrApp(CONSTANTS.PLATFORM, parsedData, CONSTANTS.TASK.REGISTEREVENT);
     });
   });
 });
