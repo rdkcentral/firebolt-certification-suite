@@ -679,3 +679,242 @@ Given(
     }
   }
 );
+
+/**
+ * @module validations
+ * @function And '(.+)' platform (triggers|does not trigger) '(.*?)'(?: '(.*?)')? event(?: with '(.+)')?
+ * @description Performing a event validation against the source of truth
+ * @param {String} sdk - name of the sdk.
+ * @param {String} eventExpected - eventExpected will used to decide expecting for an event or not.
+ * @param {String} appId - The object was retrieved by using the appId.
+ * @param {String} fireboltCallKey - key name passed to look for firebolt call object in fireboltCallData Json.
+ * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS'
+ * @example
+ * And 'Firebolt' platform triggers '1st party app' 'CLOSEDCAPTION_SETTINGS' event
+ * And 'Firebolt' platform triggers '1st party app' event
+ * And 'Firebolt' platform triggers '3rd party app' 'CLOSEDCAPTION_SETTINGS' event
+ * And 'Firebolt' platform does not trigger '3rd party app' 'CLOSEDCAPTION_SETTINGS' event
+ * And 'Firebolt' platform triggers '1st party app' event
+ * And 'Firebolt' platform triggers '1st party app' 'CLOSEDCAPTION_SETTINGS' event with 'INVALID_TYPE_PARAMS'
+ */
+Given(
+  /'(.+)' platform (triggers|does not trigger) '(.*?)'(?: '(.*?)')? event(?: with '(.+)')?$/,
+  async (sdk, eventExpected, appId, fireboltCallKey, errorContent) => {
+    if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
+      let fireboltCallObject;
+      // Reading the appId from the environment variable
+      appId = !appId
+        ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+        : appId === CONSTANTS.THIRD_PARTY_APP
+          ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+          : appId === CONSTANTS.FIRST_PARTY_APP
+            ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
+            : appId;
+      const context = {};
+      const expectingError = errorContent ? true : false;
+
+      // When fireboltCall object key passed fetching the object from the fireboltCalls data else reading it from environment variable
+      if (fireboltCallKey) {
+        cy.getFireboltData(fireboltCallKey).then((fireboltData) => {
+          fireboltCallObject = fireboltData;
+        });
+      } else {
+        fireboltCallObject = UTILS.getEnvVariable('runtime').fireboltCall;
+      }
+
+      cy.then(() => {
+        let event =
+          typeof fireboltCallObject.event == CONSTANTS.TYPE_FUNCTION
+            ? fireboltCallObject.event()
+            : fireboltCallObject.event;
+        let eventValidationJsonPath =
+          typeof fireboltCallObject.eventValidationJsonPath == CONSTANTS.TYPE_FUNCTION
+            ? fireboltCallObject.eventValidationJsonPath()
+            : fireboltCallObject.eventValidationJsonPath;
+        let contentObject = resolveContentObject(fireboltCallObject.content);
+
+        event = event.includes('_') ? event.split('_')[1] : event;
+        contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
+        eventValidationJsonPath = eventValidationJsonPath
+          ? eventValidationJsonPath
+          : CONSTANTS.EVENT_RESPONSE;
+
+        // Fetching the object from the global list.
+        const eventObject = UTILS.getApiOrEventObjectFromGlobalList(
+          event,
+          context,
+          appId,
+          CONSTANTS.EVENT
+        );
+        const param = eventObject.params;
+
+        // If response of the event is not supported, checks in the not supported list for that event name, if it is present then pass else mark it as fail
+        if (
+          !Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION) &&
+          (UTILS.isScenarioExempted(event, param) || expectingError)
+        ) {
+          let errorExpected;
+
+          // If the expected error is false, we set "exceptionErrorObject" to the errorExpected variable, which will be used to retrieve the error content object based on the exception event type.
+          expectingError === true
+            ? (errorExpected = UTILS.getEnvVariable('errorContentValidationJson')[errorContent])
+            : (errorExpected = CONSTANTS.EXCEPTION_ERROR_OBJECT);
+
+          cy.validateErrorObject(event, errorExpected, CONSTANTS.EVENT, context, appId, param).then(
+            () => {
+              return true;
+            }
+          );
+        } else if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
+          // If validationType is an event then send a message to the app to retrieve an event response based on the app ID.
+          const eventName = eventObject.eventObjectId;
+          if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
+            const requestMap = {
+              method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCH_EVENT_RESPONSE,
+              params: eventName,
+            };
+
+            cy.sendMessagetoPlatforms(requestMap).then((result) => {
+              cy.updateResponseForFCS(event, null, result).then((updatedResponse) => {
+                cy.saveEventResponse(
+                  updatedResponse,
+                  eventObject,
+                  eventName,
+                  eventExpected === 'triggers' ? true : false
+                );
+              });
+            });
+          } else {
+            const params = { event: eventName };
+            // Generating an intent message using the provided information to send it to a third-party app
+            const intentMessage = UTILS.createIntentMessage(
+              CONSTANTS.TASK.GETEVENTRESPONSE,
+              params
+            );
+            const requestTopic = UTILS.getTopic(appId);
+            const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+            cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
+              response = JSON.parse(response);
+              response = response.report;
+              cy.saveEventResponse(
+                response,
+                eventObject,
+                eventName,
+                eventExpected === 'triggers' ? true : false
+              );
+            });
+          }
+
+          try {
+            if (contentObject && contentObject.data) {
+              contentObject.data.forEach((object) => {
+                if (object.validations) {
+                  const scenario = object.type;
+                  const eventResponse = eventObject?.eventResponse
+                    ? eventObject.eventResponse
+                    : null;
+
+                  // Looping through eventValidationJsonPath to find the valid path for validation.
+                  if (eventValidationJsonPath && Array.isArray(eventValidationJsonPath)) {
+                    const validationPath = eventValidationJsonPath.find((path) => {
+                      if (
+                        path.split('.').reduce((acc, part) => acc && acc[part], eventResponse) !==
+                        undefined
+                      ) {
+                        return path;
+                      }
+                    });
+                    validationPath
+                      ? (eventValidationJsonPath = validationPath)
+                      : fireLog.assert(
+                          false,
+                          'Could not find the valid validation path from the eventValidationJsonPath list'
+                        );
+                  }
+
+                  switch (scenario) {
+                    case CONSTANTS.REGEX:
+                      cy.regExValidation(
+                        event,
+                        object.validations[0].type,
+                        eventValidationJsonPath,
+                        eventResponse
+                      );
+                      break;
+                    case CONSTANTS.MISC:
+                      cy.miscellaneousValidation(event, object.validations[0], eventObject);
+                      break;
+                    case CONSTANTS.DECODE:
+                      const decodeType = object.specialCase;
+                      const responseForDecodeValidation = eventResponse;
+
+                      cy.decodeValidation(
+                        event,
+                        decodeType,
+                        responseForDecodeValidation,
+                        object.validations[0],
+                        null
+                      );
+                      break;
+                    case CONSTANTS.FIXTURE:
+                      cy.validateContent(
+                        event,
+                        context,
+                        eventValidationJsonPath,
+                        object.validations[0].type,
+                        CONSTANTS.EVENT,
+                        appId
+                      );
+                      break;
+                    case CONSTANTS.CUSTOM:
+                      cy.customValidation(object, eventObject);
+                      break;
+                    case CONSTANTS.UNDEFINED:
+                      cy.undefinedValidation(object, eventObject, CONSTANTS.EVENT);
+                      break;
+                    default:
+                      assert(false, 'Unsupported validation type');
+                      break;
+                  }
+                }
+              });
+            } else {
+              cy.validateContent(
+                event,
+                context,
+                eventValidationJsonPath,
+                contentObject,
+                CONSTANTS.EVENT,
+                appId
+              );
+            }
+          } catch (error) {
+            assert(false, `Unable to validate the response: ${error}`);
+          }
+        } else {
+          cy.log('Content validation is skipped');
+        }
+      });
+    } else {
+      assert(false, `${sdk} SDK not Supported`);
+    }
+
+    // A Function that recursively check each fields and invokes if it's a function within an array or object.
+    function resolveContentObject(input) {
+      if (Array.isArray(input)) {
+        return input.map((item) => resolveContentObject(item));
+      } else if (typeof input == CONSTANTS.TYPE_OBJECT && input !== null) {
+        for (const key in input) {
+          if (Object.hasOwnProperty.call(input, key)) {
+            input[key] = resolveContentObject(input[key]);
+          }
+        }
+        return input;
+      } else if (input && typeof input === CONSTANTS.TYPE_FUNCTION) {
+        return input();
+      } else {
+        return input;
+      }
+    }
+  }
+);
