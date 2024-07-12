@@ -68,7 +68,6 @@ Given(
   async (sdk, fireboltCallKey, attribute, invalidValue, value) => {
     if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
       value = UTILS.parseValue(value);
-      console.log('value', value)
       let fireboltCallObject;
       let fireboltCallObjectErrorMessage = CONSTANTS.NO_DATA_FOR_THE_KEY + fireboltCallKey;
 
@@ -123,7 +122,6 @@ Given(
           } else {
             setParams = { value: UTILS.resolveRecursiveValues(fireboltCallObject.setParams) };
           }
-          console.log('setParams', setParams)
 
           const context = {};
           const expected = invalidValue ? CONSTANTS.ERROR : CONSTANTS.RESULT;
