@@ -24,7 +24,8 @@
       "not a valid OpenRPC date-time format",
       "data did not match any variant of untagged enum NavigationIntent ",
       "Invalid Value for set speed",
-      "data did not match"
+      "data did not match",
+      "is not one of"
     ],
     "errorCode": [-32602, -32400, -40300]
   },
