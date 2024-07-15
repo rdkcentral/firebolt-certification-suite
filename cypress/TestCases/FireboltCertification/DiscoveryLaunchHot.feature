@@ -213,13 +213,13 @@ Feature: Discovery.launch_HotLaunch
         When 1st party app invokes the 'Firebolt' API to 'launch app with search intent int source'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
 
-    @DiscoveryLaunch @coreSDK @sdk @transport
-    Scenario: Discovery.Launch Hot Launch - Positive Scenario: Event validation where one app is in background and one is in foreground
+    @DiscoveryLaunch @coreSDK @sdk @transport @requiresPlatformImplementation
+    Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: Event validation where one app is in <state> and one is in foreground
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
         When Test runner waits for 10 'seconds'
         And 'secondary 3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
-        And 'secondary 3rd party app' transitions to state 'background'
+        And 'secondary 3rd party app' transitions to state '<state>'
         And 3rd party 'certification' app is launched
         And '3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
         When 1st party app invokes the 'Firebolt' API to 'launch app with home intent'
@@ -229,18 +229,7 @@ Feature: Discovery.launch_HotLaunch
         And 'Firebolt' platform triggers event 'onNavigateTo with home intent'
         And 'Firebolt' platform does not trigger to 'secondary 3rd party app' event 'onNavigateTo'
 
-    @DiscoveryLaunch @coreSDK @sdk @transport
-    Scenario: Discovery.Launch Hot Launch - Positive Scenario: Event validation where one app is in inactive and one is in foreground
-        Given the environment has been set up for 'DiscoveryLaunch' tests
-        And 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
-        When Test runner waits for 10 'seconds'
-        And 'secondary 3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
-        And 'secondary 3rd party app' transitions to state 'inactive'
-        And 3rd party 'certification' app is launched
-        And '3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
-        When 1st party app invokes the 'Firebolt' API to 'launch app with home intent'
-        Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
-        And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-        Then 'Firebolt' platform responds with 'foreground for lifecycle state'
-        And 'Firebolt' platform triggers event 'onNavigateTo with home intent'
-        And 'Firebolt' platform does not trigger to 'secondary 3rd party app' event 'onNavigateTo'
+        Examples:
+            | state       |
+            | background  |
+            | inactive    |
