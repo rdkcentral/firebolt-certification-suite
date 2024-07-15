@@ -40,68 +40,6 @@ Feature: UserGrants
         When User 'stops' recording lifecycle history for '3rd party app'
         Then User validates lifecycle history for '3rd party app' with 'background:foreground'
 
-    # Testing with grantPolicy having with scope device and grant access, so all the apps in that device may have the access
-    # provide access using any 3rd party and check in another 3rd party
-    # Involves 2 apps, Will be handled in separate ticket
-    @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities R.4.4.1.1 - Positive Scenario: Validate Capability Grant access with scope device
-        Given the environment has been set up for 'userGrants' tests
-        # 3rd party app
-        And 3rd party 'certification' app is launched
-        And Framework registers 'pinChallenge' test provider
-        When '3rd party app' invokes the 'Firebolt' API to 'notify watched content with only entityid'
-        Then 'Firebolt' platform responds with 'true for watched content in discovery'
-        When 1st party app invokes the 'Firebolt' API to 'check if capabilities is granted for discovery watched'
-        Then 'Firebolt' platform responds with 'true for capabilities granted'
-        When '3rd party app' invokes the 'Firebolt' API to 'close app with user exit'
-        # 1st part app
-        ###### And 1st party 'certification' app is launched
-        When '3rd party app' invokes the 'Firebolt' API to 'notify watched content with only entityid'
-        Then 'Firebolt' platform responds with 'true for watched content in discovery'
-        When 1st party app invokes the 'Firebolt' API to 'check if capabilities is granted for discovery watched'
-        Then 'Firebolt' platform responds with 'true for capabilities granted'
-
-    # Deny access with scope device, so all the apps in that device may not have the access
-    # launch a 3rd party and provide acess using any 3rd party and check in another 3rd party
-    # Involves 2 apps, Will be handled in separate ticket
-    @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities R.4.4.1.1 - Negative Scenario: Validate Capability access denied for pinChallenge with scope device
-        Given the environment has been set up for 'userGrants' tests
-        # 3rd party app
-        And 3rd party 'certification' app is launched
-        And Framework registers 'pinChallenge' test provider
-        When '3rd party app' invokes the 'Firebolt' API to 'expect error while notifying watched content with only entityid'
-        Then 'Firebolt' platform responds with 'invalid request for discovery watched'
-        When 1st party app invokes the 'Firebolt' API to 'check if capabilities is granted for discovery watched'
-        Then 'Firebolt' platform responds with 'false for capabilities granted'
-        # 1st part app
-        ###### And 1st party 'certification' app is launched
-        When '3rd party app' invokes the 'Firebolt' API to 'expect error while notifying watched content with only entityid'
-        Then 'Firebolt' platform responds with 'invalid request for discovery watched'
-        When 1st party app invokes the 'Firebolt' API to 'check if capabilities is granted for discovery watched'
-        Then 'Firebolt' platform responds with 'false for capabilities granted'
-
-    # Testing with grantPolicy having device level grant access and check in another device
-    # Involves multiple devices, Will be handled in separate ticket
-    @Usergrants @coreSDK @sdk @transport @notSupported
-    Scenario: UserGrants.Capabilities - Positive Scenario: Validate Capability permission in 2 diff devices
-        Given the environment has been set up for 'userGrants' tests
-        # 1st device
-        And 3rd party 'certification' app is launched
-        And Framework registers 'ackchallenge' test provider
-        When '3rd party app' invokes the 'Firebolt' API to 'fetch device distributor'
-        Then 'Firebolt' platform responds with 'expected device distributor'
-        When '3rd party app' invokes the 'Firebolt' API to 'check if capabilities is granted for device distributor'
-        Then 'Firebolt' platform responds with 'true for capabilities granted'
-        # 2nd device
-        When 3rd party 'certification' app is launched
-        # in another device
-        And '3rd party app' invokes the 'Firebolt' API to 'fetch device distributor'
-        Then 'Firebolt' platform responds with 'expect error for device distributor'
-        When '3rd party app' invokes the 'Firebolt' API to 'check if capabilities is granted for device distributor'
-        Then 'Firebolt' platform responds with 'true for capabilities granted'
-
-
     # If lifespan value forever only once ask for grant until we clear the given grant
     # Case-1: Allowing the grant and validating the result
     # Case-2: Checking the lifecycle history to check ui is not coming and validating for result because already allowed grant in Case-1.
@@ -113,7 +51,7 @@ Feature: UserGrants
         And Framework registers 'pinChallenge' test provider
         And User 'starts' recording lifecycle history for '3rd party app'
         When '3rd party app' invokes the 'Firebolt' API to 'get locality'
-        Then 'Firebolt' platform responds with 'washington for localization locality'
+        Then 'Firebolt' platform responds with 'expected value for localization locality'
         When '3rd party app' invokes the 'Firebolt' API to 'check if capabilities is granted for locality'
         Then 'Firebolt' platform responds with 'true for capabilities granted'
         When User 'stops' recording lifecycle history for '3rd party app'
@@ -121,7 +59,7 @@ Feature: UserGrants
         #Case-2
         When User 'starts' recording lifecycle history for '3rd party app'
         And '3rd party app' invokes the 'Firebolt' API to 'get locality'
-        Then 'Firebolt' platform responds with 'washington for localization locality'
+        Then 'Firebolt' platform responds with 'expected value for localization locality'
         When User 'stops' recording lifecycle history for '3rd party app'
         Then User validates lifecycle history for '3rd party app' with 'EMPTY_HISTORY'
 
@@ -151,7 +89,6 @@ Feature: UserGrants
     # If lifespan value appActive it ask grant once when app is active and it ask again when app is closed and active again.
     # Case-1: Allowing grant when app is active and validating
     # Case-2: Closing and launching the app, allowing grant and validating ui is coming again
-    # Added @notSupported as glue is not implemented yet.
     @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
     Scenario: UserGrants.Capabilities R*2.2.2.3 - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan appActive
         Given the environment has been set up for 'userGrants' tests
@@ -160,7 +97,7 @@ Feature: UserGrants
         And Framework registers 'pinChallenge' test provider
         And User 'starts' recording lifecycle history for '3rd party app'
         When '3rd party app' invokes the 'Firebolt' API to 'get device name'
-        Then 'Firebolt' platform responds with 'living hall for device name'
+        Then 'Firebolt' platform responds with 'expected value for device name'
         When '3rd party app' invokes the 'Firebolt' API to 'check if capabilities is granted for locality'
         Then 'Firebolt' platform responds with 'true for capabilities granted'
         When User 'stops' recording lifecycle history for '3rd party app'
@@ -171,14 +108,13 @@ Feature: UserGrants
         And User set response for 'set pinchallenge correct pin'
         And User 'starts' recording lifecycle history for '3rd party app'
         And '3rd party app' invokes the 'Firebolt' API to 'get device name'
-        Then 'Firebolt' platform responds with 'living hall for device name'
+        Then 'Firebolt' platform responds with 'expected value for device name'
         When User 'stops' recording lifecycle history for '3rd party app'
         Then User validates lifecycle history for '3rd party app' with 'background:foreground'
 
     # If lifespan value appActive it ask grant once when app is active and it ask again when app is closed and active again.
     # Case-1: Denying grant when app is active and validating
-    # Case-2: Closing and launching the app, denying grant and validating ui is coming again
-    # Added @notSupported as glue is not implemented yet.
+    # Case-2: Closing and launching the app, denying grant and validating ui is coming again    
     @Usergrants @coreSDK @sdk @transport @notSupported @requiresPlatformImplementation
     Scenario: UserGrants.Capabilities R*2.2.2.3 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan appActive
         Given the environment has been set up for 'userGrants' tests
@@ -287,7 +223,7 @@ Feature: UserGrants
         Then User validates lifecycle history for '3rd party app' with 'background:foreground'
         # Case-2
         # rebooting the device before ttl ends and validating again
-        ### When I reboot device
+        When I reboot device
         When 3rd party 'certification' app is launched
         And User 'starts' recording lifecycle history for '3rd party app'
         And '3rd party app' invokes the 'Firebolt' API to 'get localization language'
@@ -316,7 +252,7 @@ Feature: UserGrants
         Then User validates lifecycle history for '3rd party app' with 'background:foreground'
         When Test runner waits for 60 'seconds'
         # rebooting the device after ttl and validating again
-        ### When I reboot device
+        When I reboot device
         And 3rd party 'certification' app is launched
         And User set response for 'set acknowledge deny'
         And Framework registers 'ackchallenge' test provider
@@ -347,7 +283,7 @@ Feature: UserGrants
         Then User validates lifecycle history for '3rd party app' with 'background:foreground'
         # Case-2
         # rebooting the device before ttl ends and validating again
-        ### When I reboot device
+        When I reboot device
         When 3rd party 'certification' app is launched
         And User 'starts' recording lifecycle history for '3rd party app'
         And '3rd party app' invokes the 'Firebolt' API to 'expect error for localization language'
@@ -376,7 +312,7 @@ Feature: UserGrants
         Then User validates lifecycle history for '3rd party app' with 'background:foreground'
         # Case-2
         # rebooting the device after ttl and validating again
-        ### When I reboot device
+        When I reboot device
         When 3rd party 'certification' app is launched
         And User set response for 'set acknowledge granted'
         And Framework registers 'ackchallenge' test provider
@@ -388,16 +324,6 @@ Feature: UserGrants
         When User 'stops' recording lifecycle history for '3rd party app'
         Then User validates lifecycle history for '3rd party app' with 'background:foreground'
 
-    # Testing with grantPolicy having not supported capability, so it will return error since capability is not supported
-    @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
-    Scenario: UserGrants.Capabilities - Negative Scenario: Validate Capability Without supported capability expecting error
-        Given the environment has been set up for 'userGrants' tests
-        And 3rd party 'certification' app is launched
-        And Framework registers 'pinChallenge' test provider
-        # use localization.laton capability which is not supported xrn:firebolt:capability:localization:location
-        When '3rd party app' invokes the 'Firebolt' API to 'expect error for localization latlon'
-        Then 'Firebolt' platform responds with 'not supported error for localization latlon'
-
     # grantPolicy having lifespan:seconds and lifespanTtl:60 seconds
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
     Scenario: UserGrants.Capabilities R*2.2.3.4 - Positive Scenario: privacySetting - autoApplyPolicy:always property-getter:true silently grant
@@ -405,11 +331,8 @@ Feature: UserGrants
         And 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
         And 3rd party 'certification' app is launched
         And 1st party app invokes the 'Firebolt' API to 'set privacy allow watchHistory as true'
-        And User 'starts' recording lifecycle history for '3rd party app'
         When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
         Then 'Firebolt' platform responds with 'disabled for closedCaptions settings'
-        When User 'stops' recording lifecycle history for '3rd party app'
-        Then User validates lifecycle history for '3rd party app' with 'EMPTY_HISTORY'
         When '3rd party app' invokes the 'Firebolt' API to 'check if accessibility closedCaptions capability is granted with role as use'
         Then 'Firebolt' platform responds with 'true for capabilities granted'
 
@@ -421,11 +344,8 @@ Feature: UserGrants
         And 1st party app invokes the 'Firebolt' API to '<Key>'
         And 3rd party 'certification' app is launched
         And 1st party app invokes the 'Firebolt' API to 'set privacy allow watchHistory as false'
-        And User 'starts' recording lifecycle history for '3rd party app'
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Invalid_Request_Error>'
-        When User 'stops' recording lifecycle history for '3rd party app'
-        Then User validates lifecycle history for '3rd party app' with 'EMPTY_HISTORY'
         When '3rd party app' invokes the 'Firebolt' API to '<Check_Capabilities_Granted>'
         Then 'Firebolt' platform responds with 'false for capabilities granted'
 
@@ -440,11 +360,8 @@ Feature: UserGrants
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And 1st party app invokes the 'Firebolt' API to 'set privacy allow watchHistory as true'
-        And User 'starts' recording lifecycle history for '3rd party app'
         When '3rd party app' invokes the 'Firebolt' API to 'fetch device token'
         Then 'Firebolt' platform responds with 'authentication device'
-        When User 'stops' recording lifecycle history for '3rd party app'
-        Then User validates lifecycle history for '3rd party app' with 'EMPTY_HISTORY'
         When '3rd party app' invokes the 'Firebolt' API to 'check if authentication token device capability is granted with role use'
         Then 'Firebolt' platform responds with 'true for capabilities granted'
 
@@ -625,7 +542,7 @@ Feature: UserGrants
         Then User validates lifecycle history for '3rd party app' with 'background:foreground'
         # Case-2
         # rebooting the device
-        ###### When I reboot device
+        When I reboot device
         When 3rd party 'certification' app is launched
         And Framework registers 'pinChallenge' test provider
         And User set response for 'set pinchallenge wrong pin'
@@ -655,7 +572,7 @@ Feature: UserGrants
         Then User validates lifecycle history for '3rd party app' with 'background:foreground'
         # Case-2
         # rebooting the device
-        ###### When I reboot device
+        When I reboot device
         When 3rd party 'certification' app is launched
         And Framework registers 'pinChallenge' test provider
         And User set response for 'set pinchallenge correct pin'

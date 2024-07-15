@@ -637,5 +637,10 @@
         "method": "localization.removeAdditionalInfo",
         "validationJsonPath": "result",
         "content": "NULL"  
+    },
+    "EXPECTED_VALUE_FOR_LOCALIZATION_LOCALITY": {
+        "method": "localization.locality",  
+        "validationJsonPath": "result",
+        "content": "LOCALIZATION_LOCALITY"  
     }
 }

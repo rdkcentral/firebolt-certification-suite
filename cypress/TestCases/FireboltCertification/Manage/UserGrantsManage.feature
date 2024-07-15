@@ -43,6 +43,10 @@ Feature: UserGrants_Manage
         When '3rd party app' invokes the 'Firebolt' API to 'check if capabilities is granted for device id'
         Then 'Firebolt' platform responds with 'true for capabilities granted'
 
+    # Example - 1: Granting the device distributor capability at device level and validating by retrieving the list of active grants for the device.
+    # Example - 2: Granting the device ID capability to specific 3rd party app and validating by retrieving the list of active grants for that app.
+    # Example - 3: Denying the device distributor capability at device level and validating by retrieving the list of denied grants for the device.
+    # Example - 4: Denying the device ID capability to specific 3rd party app and validating by retrieving the list of denied grants for that app.
     @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Usergrants.<method> - Positive Scenario: <Scenario>
         Given the environment has been set up for 'userGrants' tests

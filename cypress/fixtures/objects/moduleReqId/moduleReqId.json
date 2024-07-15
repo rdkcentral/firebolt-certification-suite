@@ -703,36 +703,6 @@
                     }
                 ]
             },
-            "UserGrants.Capabilities R.4.4.1.1 - Positive Scenario: Validate Capability Grant access with scope device": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants R.4.4.1.1, R.1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities R.4.4.1.1 - Negative Scenario: Validate Capability access denied for pinchallenge with scope device": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants R.4.4.1.1, R.1.2",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability permission in 2 diff devices": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.1",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
             "UserGrants.Capabilities R*2.2.2.2 - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan forever": {
                 "req": [
                     {

@@ -393,5 +393,11 @@
     "ONNETWORKCHANGED_EVENTS_WITH_HYBRID_DISCONNECTED": {
         "method": "device.onNetworkChanged",
         "params": "DEVICE_ONNETWORKCHANGED_HYBRIDDISCONNECT_EVENTS"
+    },
+    "EXPECTED_VALUE_FOR_DEVICE_NAME": {
+        "method": "device.name",
+        "validationJsonPath": "result",
+        "content": "Living hall",
+        "expectingError": false
     }
 }
