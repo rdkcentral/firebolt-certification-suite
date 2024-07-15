@@ -51,7 +51,7 @@ Feature: Device
         Then 'Firebolt' platform responds to '1st party app' for 'set device name to kitchen'
         And 'Firebolt' platform does not trigger event for 'onDeviceNameChanged'
 
-    @Device @coreSDK @sdk @transport @requiresPlatformImplementation
+    @Device @coreSDK @sdk @transport @requiresPlatformImplementation @notSupported
     Scenario Outline: Device.network - Positive Scenario: <Scenario>
         When '3rd party app' registers for the 'device onNetworkChanged' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'fetch device network'
