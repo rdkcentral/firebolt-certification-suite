@@ -140,10 +140,9 @@ Cypress.Commands.add(
             );
             let pretext = CONSTANTS.ERROR_MESSAGE_VALIDATION + `for ${method} : `;
             if (checkErrorMessage) {
-              pretext = pretext + `apiResponse errorMessage is present in errorContent object list`;
+              pretext = pretext + `Error message present in list of expected error messages`;
             } else {
-              pretext =
-                pretext + `apiResponse errorMessage is not present in errorContent object list`;
+              pretext = pretext + `Error message not present in list of expected error messages`;
             }
             fireLog.equal(checkErrorMessage, true, pretext);
           });
@@ -186,11 +185,13 @@ Cypress.Commands.add(
       const apiResponseContent = eval(CONSTANTS.EXTRACTEDAPI_PATH + validationPath);
       const pretext =
         CONSTANTS.METHOD_CONTENT +
+        ' for ' +
+        methodOrEvent +
+        ':' +
         ' expected ' +
         JSON.stringify(apiResponseContent) +
         ' to be ' +
         JSON.stringify(expected);
-      // Executing fireLog.deepEqual() after logging
       if (apiResponseContent != expected) {
         throw new Error(`${pretext}`);
       } else {
