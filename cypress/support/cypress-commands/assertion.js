@@ -614,7 +614,7 @@ Cypress.Commands.add(
       } else if (!extractEventObject) {
         throw new Error('Event Not Received');
       } else {
-        throw new Error('Event Response Does Not Contain the required field');
+        throw new Error('Event Not Received');
       }
     }
     let expectedValue = expected;
