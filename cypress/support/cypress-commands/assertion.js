@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module assertion
@@ -510,7 +510,7 @@ Cypress.Commands.add(
           CONSTANTS.SKIPPED
         );
         cy.assertValidationsForEvent(
-          'Schema Validation Failed',
+          extractEventObject,
           verifyPath,
           'PASS',
           'Event Schema Validation :'
@@ -602,7 +602,6 @@ Cypress.Commands.add(
     const verifyEventResponse = verifyPath.split('.')[0];
     const verifyInnerObject = verifyPath.split('.')[1];
     const verifyOuterObject = verifyPath.split('.')[2];
-
     // Checks for multi level object structure and does the event content validation
     if (verifyOuterObject) {
       const eventResponseInnerObject = verifyEventResponse + '.' + verifyInnerObject;
@@ -610,7 +609,13 @@ Cypress.Commands.add(
         expected = eval('extractEventObject.' + verifyPath);
       }
     } else {
-      expected = eval('extractEventObject.' + verifyPath);
+      if (extractEventObject && eval('extractEventObject.' + verifyPath)) {
+        expected = eval('extractEventObject.' + verifyPath);
+      } else if (!extractEventObject) {
+        throw new Error('Event Not Received');
+      } else {
+        throw new Error('Event Response Does Not Contain the required field');
+      }
     }
     let expectedValue = expected;
     let actualValue = actual;
