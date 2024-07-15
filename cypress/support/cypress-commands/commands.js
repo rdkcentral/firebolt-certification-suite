@@ -1005,51 +1005,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
         expectingError === true ? contentObject : CONSTANTS.EXCEPTION_ERROR_OBJECT;
       cy.validateErrorObject(method, errorContent, validationType, context, appId, param);
     } else {
-      if (validationType == CONSTANTS.EVENT) {
-        const eventName = methodOrEventObject.eventObjectId;
-        if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
-          const requestMap = {
-            method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCH_EVENT_RESPONSE,
-            params: eventName,
-          };
-
-          cy.sendMessagetoPlatforms(requestMap).then((result) => {
-            cy.updateResponseForFCS(method, null, result, true).then((updatedResponse) => {
-              cy.saveEventResponse(
-                updatedResponse,
-                methodOrEventObject,
-                eventName,
-                eventExpected === 'triggers' ? true : false
-              );
-            });
-          });
-        } else {
-          const params = { event: eventName };
-          // Generating an intent message using the provided information to send it to a third-party app
-          const intentMessage = UTILS.createIntentMessage(CONSTANTS.TASK.GETEVENTRESPONSE, params);
-          const requestTopic = UTILS.getTopic(appId);
-          const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
-          cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
-            response = JSON.parse(response);
-            if (
-              response &&
-              response.result &&
-              response.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
-            ) {
-              response.result = response.result.eventResponse;
-            }
-            cy.updateResponseForFCS(method, null, response, true).then((updatedResponse) => {
-              cy.saveEventResponse(
-                updatedResponse,
-                methodOrEventObject,
-                eventName,
-                eventExpected === 'triggers' ? true : false
-              );
-            });
-          });
-        }
-      }
-
       cy.then(() => {
         if (validationType == CONSTANTS.EVENT) {
           const eventName = methodOrEventObject.eventObjectId;
@@ -1119,7 +1074,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                     ? (validationJsonPath = validationPath)
                     : fireLog.assert(
                         false,
-                        'Could not find the valid validation path from the validationJsonPath list'
+                        `Could not find the valid validation path from the validationJsonPath list - ${validationJsonPath}`
                       );
                 }
                 switch (scenario) {

@@ -1,4 +1,4 @@
-exports.CLOSEDCAPTIONS_SETTINGS = {
+exports.ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS = {
   method: 'accessibility.closedCaptionsSettings',
   params: null,
   validationJsonPath: resolveAtRuntime(['result.{{attribute}}', 'result.styles.{{attribute}}']),
@@ -29,7 +29,7 @@ exports.CLOSEDCAPTIONS_SETTINGS = {
   },
 };
 
-exports.VOICEGUIDANCE_SETTINGS = {
+exports.ACCESSIBILITY_VOICEGUIDANCE_SETTINGS = {
   method: 'accessibility.voiceGuidanceSettings',
   params: null,
   validationJsonPath: resolveAtRuntime(['result.{{attribute}}']),
@@ -85,7 +85,7 @@ exports.AUDIODESCRIPTIONS_SETTINGS = {
   },
 };
 
-exports.CLOSEDCAPTIONS = {
+exports.ACCESSIBILITY_CLOSEDCAPTIONS = {
   method: 'accessibility.closedCaptions',
   params: null,
   validationJsonPath: resolveAtRuntime(['result.{{attribute}}', 'result.styles.{{attribute}}']),
@@ -116,7 +116,7 @@ exports.CLOSEDCAPTIONS = {
   },
 };
 
-exports.VOICEGUIDANCE = {
+exports.ACCESSIBILITY_VOICEGUIDANCE = {
   method: 'accessibility.voiceGuidance',
   params: null,
   validationJsonPath: resolveAtRuntime(['result.{{attribute}}']),
