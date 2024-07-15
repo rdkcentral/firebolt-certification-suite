@@ -20,7 +20,7 @@ Feature: MediaInfo_Manage
         And 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
         When User triggers event with value as '<Event_Param>'
-        Then 'Firebolt' platform triggers event '<Event_Validation_Key>'
+        Then 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
 
         Examples:
             | Scenario                                                      | method                | Event_Registration_Key                 | API_Key                              | Validation_Key                 | Event_Validation_Key                                     | Event_Param                                                |
