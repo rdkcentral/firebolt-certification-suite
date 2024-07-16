@@ -2,8 +2,8 @@
 # Validation objects are not added for not supported methods
 Feature: Lifecycle_Inactive
 
-    @Lifecycle @coreSDK
-    Scenario Outline: Lifecycle 2.3.1 Close an app from <state>
+    @Lifecycle @coreSDK @requiresPlatformImplementation
+    Scenario Outline: Lifecycle R*3.3 Close an app from <state>
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with '<state>' state
         When '3rd party app' transitions to state 'inactive'
@@ -13,8 +13,8 @@ Feature: Lifecycle_Inactive
             | foreground |
             | background |
 
-    @Lifecycle @coreSDK @lifecycleManagement
-    Scenario: Lifecycle 2.3.3 No impact on closing app from inactive state
+    @Lifecycle @coreSDK @lifecycleManagement @requiresPlatformImplementation
+    Scenario: Lifecycle R*3.3.3 No impact on closing app from inactive state
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched with 'inactive' state
         # And 1st party app invokes the API to 'get lifecycle management state'

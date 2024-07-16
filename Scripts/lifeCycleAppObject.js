@@ -41,7 +41,7 @@ class stateConfig {
 
         // If currentState and previousState are not equal and allowed state transition supports currentState, generate an event and push to notification list
         if (stateTransition.includes(currentState) && currentState != previousState) {
-          const message = { state: currentState, previous: previousState };
+          const message = { previous: previousState, state: currentState };
           logger.info('Lifecycle appObject transition: ' + JSON.stringify(message));
           const tempNotification = new notificationConfig(message);
           this.notification.push(tempNotification);
