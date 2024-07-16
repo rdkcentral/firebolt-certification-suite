@@ -1097,7 +1097,7 @@ Given(
  * @example
  * When I reboot device
  */
- Given('I reboot device', () => {
+Given('I reboot device', () => {
   fireLog.info(CONSTANTS.STEP_DEFINITION_NEEDS_TO_IMPLEMENT).then(() => {
     throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
   });

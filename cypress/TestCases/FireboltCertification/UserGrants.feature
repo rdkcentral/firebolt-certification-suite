@@ -674,7 +674,7 @@ Feature: UserGrants
         And '3rd party app' invokes the 'Firebolt' API to 'check if account uid capability is granted with role as provide'
         Then 'Firebolt' platform responds to '1st party app' with 'deferred for account uid capability with role use'
 
-    # Call capabilities.request for account.uid with granting acknowledgeChallenge for role provide and validate by calling capabilities.info with same capability and check which role manage is granted and not any other role
+    # Call userGrants.request for account.uid with granting acknowledgeChallenge for role provide and validate by calling capabilities.info with same capability and check which role manage is granted and not any other role
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
     Scenario: UserGrants.request R.1.1 - Positive Scenario: Validate usergrants.request by granting for role provide
         Given the environment has been set up for 'userGrants' tests
@@ -689,7 +689,7 @@ Feature: UserGrants
         And '3rd party app' invokes the 'Firebolt' API to 'check if account uid capability is granted with role as provide'
         Then 'Firebolt' platform responds to '1st party app' with 'granted for account uid capability with role provide'
 
-    # Call capabilities.request for account.uid with denying acknowledgeChallenge for role manage and validate by calling capabilities.info with same capability and check which role manage is denied
+    # Call userGrants.request for account.uid with denying acknowledgeChallenge for role manage and validate by calling capabilities.info with same capability and check which role manage is denied
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
     Scenario: UserGrants.request R.1.2 - Negative Scenario: Validate usergrants.request by denying for role provide
         Given the environment has been set up for 'userGrants' tests
