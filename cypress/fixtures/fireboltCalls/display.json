@@ -1,0 +1,510 @@
+{
+    "GET_DISPLAY_COLORDEPTH": {
+        "method": "display.colorDepth"
+    },
+    "GET_DISPLAY_COLORIMETRY": {
+        "method": "display.colorimetry"
+    },
+    "GET_DISPLAY_HDRPROFILES": {
+        "method": "display.hdrProfiles"
+    },
+    "GET_DISPLAY_MANUFACTURER": {
+        "method": "display.manufacturer"
+    },
+    "GET_DISPLAY_PRODUCTNAME": {
+        "method": "display.productName"
+    },
+    "GET_DISPLAY_REFRESHRATE": {
+        "method": "display.refreshRate"
+    },
+    "GET_DISPLAY_RESOLUTION": {
+        "method": "display.resolution"
+    },
+    "GET_DISPLAY_RESOLUTIONNAME": {
+        "method": "display.resolutionName"
+    },
+    "GET_DISPLAY_SIZE": {
+        "method": "display.size"
+    },
+    "GET_DISPLAY_SOURCEPHYSICALADDRESS": {
+        "method": "display.sourcePhysicalAddress"
+    },
+    "EXPECTED_DISPLAY_COLORDEPTH":{
+        "method": "display.colorDepth",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_COLORDEPTH"
+    },
+    "EXPECTED_DISPLAY_COLORIMETRY":{
+        "method": "display.colorimetry",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_COLORIMETRY"    
+    },
+    "EXPECTED_DISPLAY_HDRPROFILES":{
+        "method": "display.hdrProfiles",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_HDRPROFILES"      
+    },
+    "EXPECTED_DISPLAY_MANUFACTURER":{
+        "method": "display.manufacturer",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_MANUFACTURER"     
+    },
+    "EXPECTED_DISPLAY_PRODUCTNAME":{
+        "method": "display.productName",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_PRODUCTNAME"     
+    },
+    "EXPECTED_DISPLAY_REFRESHRATE":{
+        "method": "display.refreshRate",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_REFRESHRATE"        
+    },
+    "EXPECTED_DISPLAY_RESOLUTION":{
+        "method": "display.resolution",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_RESOLUTION"         
+    },
+    "EXPECTED_DISPLAY_RESOLUTIONNAME":{
+        "method": "display.resolutionName",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_RESOLUTIONNAME"        
+    },
+    "EXPECTED_DISPLAY_SIZE":{
+        "method": "display.size",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_SIZE"         
+    },
+    "EXPECTED_DISPLAY_SOURCEPHYSICALADDRESS":{
+        "method": "display.sourcePhysicalAddress",
+		"validationJsonPath": "result",
+		"content": "DISPLAY_SOURCEPHYSICALADDRESS"       
+    },
+    "DISPLAY_ONCOLORDEPTHCHANGED":{
+        "method": "display.onColorDepthChanged"
+    },
+    "DISPLAY_ONCOLORIMETRYCHANGED":{
+        "method": "display.onColorimetryChanged"
+    },
+    "DISPLAY_ONHDRPROFILESCHANGED":{
+        "method": "display.onHdrProfilesChanged"
+    },
+    "DISPLAY_ONMANUFACTURERCHANGED":{
+        "method": "display.onManufacturerChanged"
+    },
+    "DISPLAY_ONPRODUCTNAMECHANGED":{
+        "method": "display.onProductNameChanged"
+    },
+    "DISPLAY_ONREFRESHRATECHANGED":{
+        "method": "display.onRefreshRateChanged"
+    },
+    "DISPLAY_ONRESOLUTIONCHANGED":{
+        "method": "display.onResolutionChanged"
+    },
+    "DISPLAY_ONRESOLUTIONNAMECHANGED":{
+        "method": "display.onResolutionNameChanged"
+    },
+    "DISPLAY_ONSIZECHANGED":{
+        "method": "display.onSizeChanged"
+    },
+    "DISPLAY_ONSOURCEPHYSICALADDRESSCHANGED":{
+        "method": "display.onSourcePhysicalAddressChanged"
+    },
+    "ONCOLORDEPTHCHANGED_EVENT":{
+        "method": "display.onColorDepthChanged",
+        "params": "DISPLAY_ONCOLORDEPTHCHANGED_EVENT"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT":{
+        "method": "display.onColorimetryChanged",
+        "params": "DISPLAY_ONCOLORIMETRYCHANGED_EVENT"
+    },
+    "ONHDRPROFILESCHANGED_EVENT":{
+        "method": "display.onHdrProfilesChanged",
+        "params": "DISPLAY_ONHDRPROFILESCHANGED_EVENT"
+    },
+    "ONMANUFACTURERCHANGED_EVENT":{
+        "method": "display.onManufacturerChanged",
+        "params": "DISPLAY_ONMANUFACTURERCHANGED_EVENT"
+    },
+    "ONPRODUCTNAMECHANGED_EVENT":{
+        "method": "display.onProductNameChanged",
+        "params": "DISPLAY_ONPRODUCTNAMECHANGED_EVENT"
+    },
+    "ONREFRESHRATECHANGED_EVENT":{
+        "method": "display.onRefreshRateChanged",
+        "params": "DISPLAY_ONREFRESHRATECHANGED_EVENT"
+    },
+    "ONRESOLUTIONCHANGED_EVENT":{
+        "method": "display.onResolutionChanged",
+        "params": "DISPLAY_ONRESOLUTIONCHANGED_EVENT"
+    },
+    "ONRESOLUTIONNAMECHANGED_EVENT":{
+        "method": "display.onResolutionNameChanged",
+        "params": "DISPLAY_ONRESOLUTIONNAMECHANGED_EVENT"
+    },
+    "ONSIZECHANGED_EVENT":{
+        "method": "display.onSizeChanged",
+        "params": "DISPLAY_ONSIZECHANGED_EVENT"
+    },
+    "ONSOURCEPHYSICALADDRESSCHANGED_EVENT":{
+        "method": "display.onSourcePhysicalAddressChanged",
+        "params": "DISPLAY_ONSOURCEPHYSICALADDRESSCHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONCOLORDEPTHCHANGED_EVENT":{
+        "event": "display.onColorDepthChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONCOLORDEPTHCHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONCOLORIMETRYCHANGED_EVENT":{
+        "event": "display.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONCOLORIMETRYCHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONHDRPROFILESCHANGED_EVENT":{
+        "event": "display.onHdrProfilesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONHDRPROFILESCHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONMANUFACTURERCHANGED_EVENT":{
+        "event": "display.onManufacturerChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONMANUFACTURERCHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONPRODUCTNAMECHANGED_EVENT":{
+        "event": "display.onProductNameChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONPRODUCTNAMECHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONREFRESHRATECHANGED_EVENT":{
+        "event": "display.onRefreshRateChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONREFRESHRATECHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONRESOLUTIONCHANGED_EVENT":{
+        "event": "display.onResolutionChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONRESOLUTIONCHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONRESOLUTIONNAMECHANGED_EVENT":{
+        "event": "display.onResolutionNameChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONRESOLUTIONNAMECHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONSIZECHANGED_EVENT":{
+        "event": "display.onSizeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONSIZECHANGED_EVENT"
+    },
+    "EXPECTED_DISPLAY_ONSOURCEPHYSICALADDRESSCHANGED_EVENT":{
+        "event": "display.onSourcePhysicalAddressChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_ONSOURCEPHYSICALADDRESSCHANGED_EVENT"
+    },
+    "DISPLAY_COLORIMETRY_AS_BT2020CYCC": {
+        "method": "display.colorimetry",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_COLORIMETRY_BT2020CYCC"
+    },
+    "DISPLAY_COLORIMETRY_AS_BT2020RGB": {
+        "method": "display.colorimetry",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_COLORIMETRY_BT2020RGB"
+    },
+    "DISPLAY_COLORIMETRY_AS_BT2020YCC": {
+        "method": "display.colorimetry",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_COLORIMETRY_BT2020YCC"
+    },
+    "DISPLAY_COLORIMETRY_AS_DCI-P3": {
+        "method": "display.colorimetry",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_COLORIMETRY_DCI-P3"
+    },
+    "DISPLAY_COLORIMETRY_AS_ICTCP": {
+        "method": "display.colorimetry",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_COLORIMETRY_ICTCP"
+    },
+    "DISPLAY_COLORIMETRY_AS_OPRGB": {
+        "method": "display.colorimetry",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_COLORIMETRY_OPRGB"
+    },
+    "DISPLAY_COLORIMETRY_AS_OPYCC601": {
+        "method": "display.colorimetry",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_COLORIMETRY_OPYCC601"
+    },
+    "DISPLAY_COLORIMETRY_AS_SYCC601": {
+        "method": "display.colorimetry",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_COLORIMETRY_SYCC601"
+    },
+    "DISPLAY_COLORIMETRY_AS_XVYCC601": {
+        "method": "display.colorimetry",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_COLORIMETRY_XVYCC601"
+    },
+    "DISPLAY_COLORIMETRY_AS_XVYCC709": {
+        "method": "display.colorimetry",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_COLORIMETRY_XVYCC709"
+    },
+    "DISPLAY_COLORIMETRY_AS_UNKNOWN": {
+        "method": "display.colorimetry",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_COLORIMETRY_UNKNOWN"
+    },
+    "DISPLAY_HDRPROFILE_AS_DOLBYVISION": {
+        "method": "display.hdrProfiles",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_HDRPROFILE_DOLBYVISION"
+    },
+    "DISPLAY_HDRPROFILE_AS_HDR10": {
+        "method": "display.hdrProfiles",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_HDRPROFILE_HDR10"
+    },
+    "DISPLAY_HDRPROFILE_AS_HDR10PLUS": {
+        "method": "display.hdrProfiles",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_HDRPROFILE_HDR10PLUS"
+    },
+    "DISPLAY_HDRPROFILE_AS_HLG": {
+        "method": "display.hdrProfiles",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_HDRPROFILE_HLG"
+    },
+    "DISPLAY_HDRPROFILE_AS_SDR": {
+        "method": "display.hdrProfiles",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_HDRPROFILE_SDR"
+    },
+    "DISPLAY_HDRPROFILE_AS_UNKNOWN": {
+        "method": "display.hdrProfiles",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_HDRPROFILE_UNKNOWN"
+    },
+    "DISPLAY_RESOLUTIONNAME_AS_SD": {
+        "method": "display.resolutionName",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_RESOLUTIONNAME_SD"
+    },
+    "DISPLAY_RESOLUTIONNAME_AS_HD": {
+        "method": "display.resolutionName",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_RESOLUTIONNAME_HD"
+    },
+    "DISPLAY_RESOLUTIONNAME_AS_FHD": {
+        "method": "display.resolutionName",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_RESOLUTIONNAME_FHD"
+    },
+    "DISPLAY_RESOLUTIONNAME_AS_UHD": {
+        "method": "display.resolutionName",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_RESOLUTIONNAME_UHD"
+    },
+    "DISPLAY_RESOLUTIONNAME_AS_UNKNOWN": {
+        "method": "display.resolutionName",
+        "validationJsonPath": "result",
+        "content": "DISPLAY_RESOLUTIONNAME_UNKNOWN"
+    },
+    "ONCOLORIMETRYCHANGED_WITH_COLORIMETRY_AS_BT2020CYCC": {
+        "event": "device.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_COLORIMETRY_BT2020CYCC"
+    },
+    "ONCOLORIMETRYCHANGED_WITH_COLORIMETRY_AS_BT2020RGB": {
+        "event": "device.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_COLORIMETRY_BT2020RGB"
+    },
+    "ONCOLORIMETRYCHANGED_WITH_COLORIMETRY_AS_BT2020YCC": {
+        "event": "device.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_COLORIMETRY_BT2020YCC"
+    },
+    "ONCOLORIMETRYCHANGED_WITH_COLORIMETRY_AS_DCI-P3": {
+        "event": "device.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_COLORIMETRY_DCI-P3"
+    },
+    "ONCOLORIMETRYCHANGED_WITH_COLORIMETRY_AS_ICTCP": {
+        "event": "device.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_COLORIMETRY_ICTCP"
+    },
+    "ONCOLORIMETRYCHANGED_WITH_COLORIMETRY_AS_OPRGB": {
+        "event": "device.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_COLORIMETRY_OPRGB"
+    },
+    "ONCOLORIMETRYCHANGED_WITH_COLORIMETRY_AS_OPYCC601": {
+        "event": "device.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_COLORIMETRY_OPYCC601"
+    },
+    "ONCOLORIMETRYCHANGED_WITH_COLORIMETRY_AS_SYCC601": {
+        "event": "device.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_COLORIMETRY_SYCC601"
+    },
+    "ONCOLORIMETRYCHANGED_WITH_COLORIMETRY_AS_XVYCC601": {
+        "event": "device.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_COLORIMETRY_XVYCC601"
+    },
+    "ONCOLORIMETRYCHANGED_WITH_COLORIMETRY_AS_XVYCC709": {
+        "event": "device.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_COLORIMETRY_XVYCC709"
+    },
+    "ONCOLORIMETRYCHANGED_WITH_COLORIMETRY_AS_UNKNOWN": {
+        "event": "device.onColorimetryChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_COLORIMETRY_UNKNOWN"
+    },
+    "ONHDRPROFILESCHANGED_WITH_HDRPROFILE_AS_DOLBYVISION": {
+        "event": "device.onHdrProfilesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_HDRPROFILE_DOLBYVISION"
+    },
+    "ONHDRPROFILESCHANGED_WITH_HDRPROFILE_AS_DOLBYVISION_HDR10": {
+        "event": "device.onHdrProfilesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_HDRPROFILE_HDR10"
+    },
+    "ONHDRPROFILESCHANGED_WITH_HDRPROFILE_AS_DOLBYVISION_HDR10PLUS": {
+        "event": "device.onHdrProfilesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_HDRPROFILE_HDR10PLUS"
+    },
+    "ONHDRPROFILESCHANGED_WITH_HDRPROFILE_AS_DOLBYVISION_HLG": {
+        "event": "device.onHdrProfilesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_HDRPROFILE_HLG"
+    },
+    "ONHDRPROFILESCHANGED_WITH_HDRPROFILE_AS_DOLBYVISION_SDR": {
+        "event": "device.onHdrProfilesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_HDRPROFILE_SDR"
+    },
+    "ONHDRPROFILESCHANGED_WITH_HDRPROFILE_AS_DOLBYVISION_UNKNOWN": {
+        "event": "device.onHdrProfilesChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_HDRPROFILE_UNKNOWN"
+    },
+    "ONRESOLUTIONNAMECHANGED_WITH_RESOLUTIONNAME_AS_SD": {
+        "event": "device.onResolutionNameChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_RESOLUTIONNAME_SD"
+    },
+    "ONRESOLUTIONNAMECHANGED_WITH_RESOLUTIONNAME_AS_HD": {
+        "event": "device.onResolutionNameChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_RESOLUTIONNAME_HD"
+    },
+    "ONRESOLUTIONNAMECHANGED_WITH_RESOLUTIONNAME_AS_FHD": {
+        "event": "device.onResolutionNameChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_RESOLUTIONNAME_FHD"
+    },
+    "ONRESOLUTIONNAMECHANGED_WITH_RESOLUTIONNAME_AS_UHD": {
+        "event": "device.onResolutionNameChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_RESOLUTIONNAME_UHD"
+    },
+    "ONRESOLUTIONNAMECHANGED_WITH_RESOLUTIONNAME_AS_UNKNOWN": {
+        "event": "device.onResolutionNameChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DISPLAY_RESOLUTIONNAME_UNKNOWN"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT_WITH_COLORIMETRY_AS_BT2020CYCC": {
+        "method": "device.onColorimetryChanged",
+        "params": "DEVICE_ONCOLORIMETRYCHANGED_COLORIMETRY_BT2020CYCC_EVENTS"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT_WITH_COLORIMETRY_AS_BT2020RGB": {
+        "method": "device.onColorimetryChanged",
+        "params": "DEVICE_ONCOLORIMETRYCHANGED_COLORIMETRY_BT2020RGB_EVENTS"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT_WITH_COLORIMETRY_AS_BT2020YCC": {
+        "method": "device.onColorimetryChanged",
+        "params": "DEVICE_ONCOLORIMETRYCHANGED_COLORIMETRY_BT2020YCC_EVENTS"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT_WITH_COLORIMETRY_AS_DCI-P3": {
+        "method": "device.onColorimetryChanged",
+        "params": "DEVICE_ONCOLORIMETRYCHANGED_COLORIMETRY_DCI-P3_EVENTS"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT_WITH_COLORIMETRY_AS_ICTCP": {
+        "method": "device.onColorimetryChanged",
+        "params": "DEVICE_ONCOLORIMETRYCHANGED_COLORIMETRY_ICTCP_EVENTS"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT_WITH_COLORIMETRY_AS_OPRGB": {
+        "method": "device.onColorimetryChanged",
+        "params": "DEVICE_ONCOLORIMETRYCHANGED_COLORIMETRY_OPRGB_EVENTS"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT_WITH_COLORIMETRY_AS_OPYCC601": {
+        "method": "device.onColorimetryChanged",
+        "params": "DEVICE_ONCOLORIMETRYCHANGED_COLORIMETRY_OPYCC601_EVENTS"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT_WITH_COLORIMETRY_AS_SYCC601": {
+        "method": "device.onColorimetryChanged",
+        "params": "DEVICE_ONCOLORIMETRYCHANGED_COLORIMETRY_SYCC601_EVENTS"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT_WITH_COLORIMETRY_AS_XVYCC601": {
+        "method": "device.onColorimetryChanged",
+        "params": "DEVICE_ONCOLORIMETRYCHANGED_COLORIMETRY_XVYCC601_EVENTS"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT_WITH_COLORIMETRY_AS_XVYCC709": {
+        "method": "device.onColorimetryChanged",
+        "params": "DEVICE_ONCOLORIMETRYCHANGED_COLORIMETRY_XVYCC709_EVENTS"
+    },
+    "ONCOLORIMETRYCHANGED_EVENT_WITH_COLORIMETRY_AS_UNKNOWN": {
+        "method": "device.onColorimetryChanged",
+        "params": "DEVICE_ONCOLORIMETRYCHANGED_COLORIMETRY_UNKNOWN_EVENTS"
+    },
+    "ONHDRPROFILESCHANGED_EVENT_WITH_HDRPROFILE_AS_DOLBYVISION": {
+        "method": "device.onHdrProfilesChanged",
+        "params": "DEVICE_ONHDRPROFILESCHANGED_HDRPROFILE_DOLBYVISION_EVENTS"
+    },
+    "ONHDRPROFILESCHANGED_EVENT_WITH_HDRPROFILE_AS_HDR10": {
+        "method": "device.onHdrProfilesChanged",
+        "params": "DEVICE_ONHDRPROFILESCHANGED_HDRPROFILE_HDR10_EVENTS"
+    },
+    "ONHDRPROFILESCHANGED_EVENT_WITH_HDRPROFILE_AS_HDR10PLUS": {
+        "method": "device.onHdrProfilesChanged",
+        "params": "DEVICE_ONHDRPROFILESCHANGED_HDRPROFILE_HDR10PLUS_EVENTS"
+    },
+    "ONHDRPROFILESCHANGED_EVENT_WITH_HDRPROFILE_AS_HLG": {
+        "method": "device.onHdrProfilesChanged",
+        "params": "DEVICE_ONHDRPROFILESCHANGED_HDRPROFILE_HLG_EVENTS"
+    },
+    "ONHDRPROFILESCHANGED_EVENT_WITH_HDRPROFILE_AS_SDR": {
+        "method": "device.onHdrProfilesChanged",
+        "params": "DEVICE_ONHDRPROFILESCHANGED_HDRPROFILE_SDR_EVENTS"
+    },
+    "ONHDRPROFILESCHANGED_EVENT_WITH_HDRPROFILE_AS_UNKNOWN": {
+        "method": "device.onHdrProfilesChanged",
+        "params": "DEVICE_ONHDRPROFILESCHANGED_HDRPROFILE_UNKNOWN_EVENTS"
+    },
+    "ONRESOLUTIONNAMECHANGED_EVENT_WITH_RESOLUTIONNAME_AS_SD": {
+        "method": "device.onHdrProfilesChanged",
+        "params": "DEVICE_ONRESOLUTIONNAMECHANGED_RESOLUTIONNAME_SD_EVENTS"
+    },
+    "ONRESOLUTIONNAMECHANGED_EVENT_WITH_RESOLUTIONNAME_AS_HD": {
+        "method": "device.onResolutionNameChanged",
+        "params": "DEVICE_ONRESOLUTIONNAMECHANGED_RESOLUTIONNAME_HD_EVENTS"
+    },
+    "ONRESOLUTIONNAMECHANGED_EVENT_WITH_RESOLUTIONNAME_AS_FHD": {
+        "method": "device.onResolutionNameChanged",
+        "params": "DEVICE_ONRESOLUTIONNAMECHANGED_RESOLUTIONNAME_FHD_EVENTS"
+    },
+    "ONRESOLUTIONNAMECHANGED_EVENT_WITH_RESOLUTIONNAME_AS_UHD": {
+        "method": "device.onResolutionNameChanged",
+        "params": "DEVICE_ONRESOLUTIONNAMECHANGED_RESOLUTIONNAME_UHD_EVENTS"
+    },
+    "ONRESOLUTIONNAMECHANGED_EVENT_WITH_RESOLUTIONNAME_AS_UNKNOWN": {
+        "method": "device.onResolutionNameChanged",
+        "params": "DEVICE_ONRESOLUTIONNAMECHANGED_RESOLUTIONNAME_UNKNOWN_EVENTS"
+    }
+}

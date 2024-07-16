@@ -1,0 +1,212 @@
+{
+    "MEDIAINFO_AUDIOFORMAT": {
+        "method": "mediaInfo.audioFormat",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_AUDIOFORMAT",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_VIDEOFORMAT": {
+        "method": "mediaInfo.videoFormat",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_VIDEOFORMAT",
+                        "description": "Validation of the mediaInfo video formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ONAUDIOFORMATCHANGED_EVENT": {
+        "method": "mediaInfo.onAudioFormatChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_AUDIOFORMAT",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ONVIDEOFORMATCHANGED_EVENT": {
+        "method": "mediaInfo.onVideoFormatChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_VIDEOFORMAT",
+                        "description": "Validation of the mediaInfo video formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ONACTIVEAUDIOFORMATSCHANGED_EVENT":{
+        "method": "manage_mediaInfo.onActiveAudioFormatsChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_VIDEOFORMAT",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ONACTIVEVIDEOFORMATSCHANGED_EVENT":{
+        "method": "manage_mediaInfo.onActiveVideoFormatsChanged",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_VIDEOFORMAT",
+                        "description": "Validation of the mediaInfo video formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ACTIVEAUDIOFORMATS": {
+        "method": "manage_mediaInfo.activeAudioFormats",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_ACTIVEAUDIOFORMATS",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_ACTIVEVIDEOFORMATS": {
+        "method": "manage_mediaInfo.activeVideoFormats",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_ACTIVEVIDEOFORMATS",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_AUDIOCODEC_MPEG3": {
+        "method": "mediaInfo.audioFormat",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_AUDIOCODEC_MPEG3",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_AUDIOCONTAINER_AUDIO/WEBM": {
+        "method": "mediaInfo.audioFormat",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_AUDIOCONTAINER_AUDIO/WEBM",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_VIDEOCODEC_MPEG1": {
+        "method": "mediaInfo.videoFormat",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_VIDEOCODEC_MPEG1",
+                        "description": "Validation of the mediaInfo video formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_VIDEOCONTAINER_VIDEO/MP2T": {
+        "method": "mediaInfo.videoFormat",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_VIDEOCONTAINER_VIDEO/MP2T",
+                        "description": "Validation of the mediaInfo video formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_AUDIOCODEC_AC4": {
+        "method": "manage_mediaInfo.activeAudioFormats",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_AUDIOCODEC_AC4",
+                        "description": "Validation of the mediaInfo audio formats"
+                    }
+                ]
+            }
+        ]
+    },
+    "MEDIAINFO_VIDEOCODEC_VP8": {
+        "method": "manage_mediaInfo.activeVideoFormats",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "MEDIAINFO_VIDEOCODEC_VP8",
+                        "description": "Validation of the mediaInfo video formats"
+                    }
+                ]
+            }
+        ]
+    }
+}

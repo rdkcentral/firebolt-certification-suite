@@ -1,0 +1,63 @@
+Feature: Display
+
+    Background: Launch FCA for 'Display'
+        Given the environment has been set up for 'Display' tests
+        And 3rd party 'certification' app is launched
+
+    @Display @coreSDK @sdk @transport
+    Scenario Outline:Display.<Method> - Positive Scenario: <Scenario>
+        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with '<Validation_Key>'
+        Examples:
+            | Scenario                                | Method                | API_Key                            | Validation_Key                          |
+            | Validate display colorDepth             | colorDepth            | get display colorDepth             | expected display colorDepth             |  
+            | Validate display colorimetry            | colorimetry           | get display colorimetry            | expected display colorimetry            |   
+            | Validate display hdrProfiles            | hdrProfiles           | get display hdrProfiles            | expected display hdrProfiles            |  
+            | Validate display manufacturer           | manufacturer          | get display manufacturer           | expected display manufacturer           |  
+            | Validate display productName            | productName           | get display productName            | expected display productName            |  
+            | Validate display refreshRate            | refreshRate           | get display refreshRate            | expected display refreshRate            |  
+            | Validate display resolution             | resolution            | get display resolution             | expected display resolution             |  
+            | Validate display resolutionName         | resolutionName        | get display resolutionName         | expected display resolutionName         |  
+            | Validate display size                   | size                  | get display size                   | expected display size                   |  
+            | Validate display sourcePhysicalAddress  | sourcePhysicalAddress | get display sourcePhysicalAddress  | expected display sourcePhysicalAddress  | 
+
+    @Display @coreSDK @sdk @transport @notSupported
+    Scenario Outline: Display.<method> - Positive Scenario: <Scenario>
+        When '3rd party app' registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
+        And '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with '<Method_Validation_Key>'
+        When User triggers event with value as '<Event_Param>'
+        Then 'Firebolt' platform triggers event '<Event_Validation_Key>'
+
+        Examples:
+            | Scenario                                      | method                | Event_Registration_Key                  | API_Key                           | Method_Validation_Key                  | Event_Validation_Key                                     | Event_Param                                                   |
+            | validate display colorDepthChanged            | colorDepth            | display onColorDepthChanged             | get display colorDepth            | expected display colorDepth            | expected display onColorDepthChanged event               | onColorDepthChanged event                                     | 
+            | validate display colorimetry_BT2020cYCC       | colorimetry           | display onColorimetryChanged            | get display colorimetry           | display colorimetry as BT2020cYCC      | onColorimetryChanged with colorimetry as BT2020cYCC      | onColorimetryChanged event with colorimetry as BT2020cYCC     | 
+            | validate display colorimetry_BT2020RGB        | colorimetry           | display onColorimetryChanged            | get display colorimetry           | display colorimetry as BT2020RGB       | onColorimetryChanged with colorimetry as BT2020RGB       | onColorimetryChanged event with colorimetry as BT2020RGB      | 
+            | validate display colorimetry_BT2020YCC        | colorimetry           | display onColorimetryChanged            | get display colorimetry           | display colorimetry as BT2020YCC       | onColorimetryChanged with colorimetry as BT2020YCC       | onColorimetryChanged event with colorimetry as BT2020YCC      | 
+            | validate display colorimetry_DCI-P3           | colorimetry           | display onColorimetryChanged            | get display colorimetry           | display colorimetry as DCI-P3          | onColorimetryChanged with colorimetry as DCI-P3          | onColorimetryChanged event with colorimetry as DCI-P3         | 
+            | validate display colorimetry_ICtCp            | colorimetry           | display onColorimetryChanged            | get display colorimetry           | display colorimetry as ICtCp           | onColorimetryChanged with colorimetry as ICtCp           | onColorimetryChanged event with colorimetry as ICtCp          | 
+            | validate display colorimetry_opRGB            | colorimetry           | display onColorimetryChanged            | get display colorimetry           | display colorimetry as opRGB           | onColorimetryChanged with colorimetry as opRGB           | onColorimetryChanged event with colorimetry as opRGB          | 
+            | validate display colorimetry_opYCC601         | colorimetry           | display onColorimetryChanged            | get display colorimetry           | display colorimetry as opYCC601        | onColorimetryChanged with colorimetry as opYCC601        | onColorimetryChanged event with colorimetry as opYCC601       | 
+            | validate display colorimetry_sYCC601          | colorimetry           | display onColorimetryChanged            | get display colorimetry           | display colorimetry as sYCC601         | onColorimetryChanged with colorimetry as sYCC601         | onColorimetryChanged event with colorimetry as sYCC601        | 
+            | validate display colorimetry_xvYCC601         | colorimetry           | display onColorimetryChanged            | get display colorimetry           | display colorimetry as xvYCC601        | onColorimetryChanged with colorimetry as xvYCC601        | onColorimetryChanged event with colorimetry as xvYCC601       | 
+            | validate display colorimetry_xvYCC709         | colorimetry           | display onColorimetryChanged            | get display colorimetry           | display colorimetry as xvYCC709        | onColorimetryChanged with colorimetry as xvYCC709        | onColorimetryChanged event with colorimetry as xvYCC709       | 
+            | validate display colorimetry_unknown          | colorimetry           | display onColorimetryChanged            | get display colorimetry           | display colorimetry as unknown         | onColorimetryChanged with colorimetry as unknown         | onColorimetryChanged event with colorimetry as unknown        | 
+            | validate display hdrProfiles_dolbyVision      | hdrProfiles           | display onHdrProfilesChanged            | get display hdrProfiles           | display hdrProfile as dolbyVision      | onHdrProfilesChanged with hdrProfile as dolbyVision      | onHdrProfilesChanged event with hdrProfile as dolbyVision     |
+            | validate display hdrProfiles_hdr10            | hdrProfiles           | display onHdrProfilesChanged            | get display hdrProfiles           | display hdrProfile as hdr10            | onHdrProfilesChanged with hdrProfile as hdr10            | onHdrProfilesChanged event with hdrProfile as hdr10           |
+            | validate display hdrProfiles_hdr10plus        | hdrProfiles           | display onHdrProfilesChanged            | get display hdrProfiles           | display hdrProfile as hdr10plus        | onHdrProfilesChanged with hdrProfile as hdr10plus        | onHdrProfilesChanged event with hdrProfile as hdr10plus       |
+            | validate display hdrProfiles_hlg              | hdrProfiles           | display onHdrProfilesChanged            | get display hdrProfiles           | display hdrProfile as hlg              | onHdrProfilesChanged with hdrProfile as hlg              | onHdrProfilesChanged event with hdrProfile as hlg             |
+            | validate display hdrProfiles_sdr              | hdrProfiles           | display onHdrProfilesChanged            | get display hdrProfiles           | display hdrProfile as sdr              | onHdrProfilesChanged with hdrProfile as sdr              | onHdrProfilesChanged event with hdrProfile as sdr             |
+            | validate display hdrProfiles_unknown          | hdrProfiles           | display onHdrProfilesChanged            | get display hdrProfiles           | display hdrProfile as unknown          | onHdrProfilesChanged with hdrProfile as unknown          | onHdrProfilesChanged event with hdrProfile as unknown         |
+            | validate display ManufacturerChanged          | manufacturer          | display onManufacturerChanged           | get display manufacturer          | expected display manufacturer          | expected display onManufacturerChanged event             | onManufacturerChanged event                                   |
+            | validate display productNameChanged           | productName           | display onProductNameChanged            | get display productName           | expected display productName           | expected display onProductNameChanged event              | onProductNameChanged event                                    |
+            | validate display refreshRateChanged           | refreshRate           | display onRefreshRateChanged            | get display refreshRate           | expected display refreshRate           | expected display onRefreshRateChanged event              | onRefreshRateChanged event                                    |
+            | validate display resolutionChanged            | resolution            | display onResolutionChanged             | get display resolution            | expected display resolution            | expected display onResolutionChanged event               | onResolutionChanged event                                     |
+            | validate display resolutionName_sd            | resolutionName        | display onResolutionNameChanged         | get display resolutionName        | display resolutionName as sd           | onResolutionNameChanged with resolutionName as sd        | onResolutionNameChanged event with resolutionName as sd       |
+            | validate display resolutionName_hd            | resolutionName        | display onResolutionNameChanged         | get display resolutionName        | display resolutionName as hd           | onResolutionNameChanged with resolutionName as hd        | onResolutionNameChanged event with resolutionName as hd       |
+            | validate display resolutionName_fhd           | resolutionName        | display onResolutionNameChanged         | get display resolutionName        | display resolutionName as fhd          | onResolutionNameChanged with resolutionName as fhd       | onResolutionNameChanged event with resolutionName as fhd      |
+            | validate display resolutionName_uhd           | resolutionName        | display onResolutionNameChanged         | get display resolutionName        | display resolutionName as uhd          | onResolutionNameChanged with resolutionName as uhd       | onResolutionNameChanged event with resolutionName as uhd      |
+            | validate display resolutionName_unknown       | resolutionName        | display onResolutionNameChanged         | get display resolutionName        | display resolutionName as unknown      | onResolutionNameChanged with resolutionName as unknown   | onResolutionNameChanged event with resolutionName as unknown  | 
+            | validate display sizeChanged                  | size                  | display onSizeChanged                   | get display size                  | expected display size                  | expected display onSizeChanged event                     | onSizeChanged event                                           |
+            | validate display sourcePhysicalAddressChanged | sourcePhysicalAddress | display onSourcePhysicalAddressChanged  | get display sourcePhysicalAddress | expected display sourcePhysicalAddress | expected display onSourcePhysicalAddressChanged event    | onSourcePhysicalAddressChanged event                          |
+ 
