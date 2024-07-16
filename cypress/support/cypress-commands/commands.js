@@ -1070,15 +1070,12 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                       return path;
                     }
                   });
-                  if (validationPath) {
-                    validationJsonPath = validationPath;
-                  } else {
-                    fireLog.info('Response: ', methodOrEventResponse);
-                    fireLog.assert(
-                      false,
-                      `Could not find the valid validation path from the validationJsonPath list - ${validationJsonPath}`
-                    );
-                  }
+                  validationPath
+                    ? (validationJsonPath = validationPath)
+                    : fireLog.assert(
+                        false,
+                        `Could not find the valid validation path from the validationJsonPath list - ${JSON.stringify(validationJsonPath)}`
+                      );
                 }
                 switch (scenario) {
                   case CONSTANTS.REGEX:
