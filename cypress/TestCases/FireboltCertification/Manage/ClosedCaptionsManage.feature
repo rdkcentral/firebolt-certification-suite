@@ -42,13 +42,14 @@ Feature: ClosedCaptions_Manage
             | Set textAlign-center                 | textAlign          | center                |
             | Set textAlign-right                  | textAlign          | right                 |
             | Set textAlignVertical-top            | textAlignVertical  | top                   |
+            | Set textAlignVertical-middle         | textAlignVertical  | middle                |
             | Set textAlignVertical-bottom         | textAlignVertical  | bottom                |
             | Set preferredLanguages               | preferredLanguages | spa,eng               |
             | Set windowColor-white                | windowColor        | white                 |
             | Set windowOpacity-50                 | windowOpacity      | 50                    |
 
     @ClosedCaptions @manageSDK
-    Scenario Outline: ClosedCaptions.<Method> - Positive Scenario: <Method>
+    Scenario Outline: ClosedCaptions.<Method> - Positive Scenario: <Method> with 'null' params
         Given we test the 'CLOSED_CAPTIONS_SETTINGS' getters and setters '<Method>' to 'null'
         When '1st party app' registers for the 'Firebolt' event
         And 1st party app invokes the 'Firebolt' API to set '<Method>' to 'null'
@@ -58,19 +59,19 @@ Feature: ClosedCaptions_Manage
         And 'Firebolt' platform triggers '1st party app' event
 
         Examples:
-            | Method                    |
-            | fontFamily                |
-            | fontSize                  |
-            | fontColor                 |
-            | fontEdge                  |
-            | fontEdgeColor             |
-            | fontOpacity               |
-            | backgroundColor           |
-            | backgroundOpacity         |
-            | textAlign                 |
-            | textAlignVerticalontColor |
-            | windowColor               |
-            | windowOpacity             |
+            | Method            |
+            | fontFamily        |
+            | fontSize          |
+            | fontColor         |
+            | fontEdge          |
+            | fontEdgeColor     |
+            | fontOpacity       |
+            | backgroundColor   |
+            | backgroundOpacity |
+            | textAlign         |
+            | textAlignVertical |
+            | windowColor       |
+            | windowOpacity     |
 
     @ClosedCaptions @manageSDK
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error

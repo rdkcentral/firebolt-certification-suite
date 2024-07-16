@@ -809,9 +809,6 @@ function parseValue(str) {
     if (str.includes(',')) {
       return str.split(',');
     }
-    if (/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(str)) {
-      return str;
-    }
   }
 
   return str;

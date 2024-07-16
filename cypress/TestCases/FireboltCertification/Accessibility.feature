@@ -128,7 +128,7 @@ Feature: Accessibility
             | Set fontSize-1                     | fontSize          | 1                   |
             | Set fontColor-#ffffff              | fontColor         | #ffffff             |
             | Set fontEdge-raised                | fontEdge          | raised              |
-            | Set fontEdgeColor-#7f7f7f          | fontEdge          | #7F7F7F             |
+            | Set fontEdgeColor-#7f7f7f          | fontEdgeColor     | #7F7F7F             |
             | Set backgroundColor-#000000        | backgroundColor   | #000000             |
             | Set fontOpacity-100                | fontOpacity       | 100                 |
             | Set backgroundOpacity-100          | backgroundOpacity | 100                 |
