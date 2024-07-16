@@ -686,10 +686,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
       params: { [CONSTANTS.APP_ID]: appId, [CONSTANTS.INTENT]: messageIntent },
     };
   }
-  if (
-    Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI ||
-    Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
-  ) {
+  if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE) {
     data = {
       query: {
         params: {

@@ -35,9 +35,6 @@ Given('the environment has been set up for {string} tests', (test) => {
   ) {
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
-    if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
-      Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
-    }
 
     if (test == CONSTANTS.SETUPCHECK) {
       UTILS.getSetupDetails();
