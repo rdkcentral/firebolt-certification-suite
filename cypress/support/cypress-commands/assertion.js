@@ -141,10 +141,11 @@ Cypress.Commands.add(
             let pretext = CONSTANTS.ERROR_MESSAGE_VALIDATION + `for ${method} : `;
             if (checkErrorMessage) {
               pretext = pretext + `Error message present in list of expected error messages`;
+              fireLog.assert(true, pretext);
             } else {
               pretext = pretext + `Error message not present in list of expected error messages`;
+              fireLog.assert(false, pretext);
             }
-            fireLog.equal(checkErrorMessage, true, pretext);
           });
         } else {
           fireLog.assert(false, `Expected error content not found in ${errorContentFilePath}`);
@@ -193,7 +194,7 @@ Cypress.Commands.add(
         ' to be ' +
         JSON.stringify(expected);
       if (apiResponseContent != expected) {
-        throw new Error(`${pretext}`);
+        fireLog.assert(false, pretext);
       } else {
         fireLog.info(`${pretext}`);
       }
@@ -455,10 +456,14 @@ function loggingValidationCheckResult(validationCheck) {
   // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
   validationCheck.forEach((assertion) => {
     if (assertion.validationStatus == CONSTANTS.SKIPPED) {
-      fireLog.info(`${assertion.validationPoint}: ${assertion.validationStatus}`);
+      cy.log(
+        `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`,
+        'loggingValidationCheckResult'
+      );
     } else {
-      fireLog.info(
-        `${assertion.validationPoint}: ${assertion.validationStatus} ${assertion.message}`
+      cy.log(
+        `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`,
+        'loggingValidationCheckResult'
       );
       if (assertion.validationStatus == CONSTANTS.FAIL) {
         throw new Error(`${assertion.validationPoint} failed, ${assertion.message}`);
@@ -466,7 +471,6 @@ function loggingValidationCheckResult(validationCheck) {
     }
   });
 }
-
 /**
  * @module assertion
  * @function validateEvent
@@ -609,19 +613,12 @@ Cypress.Commands.add(
         expected = eval('extractEventObject.' + verifyPath);
       }
     } else {
-      if (extractEventObject && eval('extractEventObject.' + verifyPath)) {
-        expected = eval('extractEventObject.' + verifyPath);
-      } else if (!extractEventObject) {
-        throw new Error('Event Not Received');
-      } else {
-        throw new Error('Event Not Received');
-      }
+      expected = eval('extractEventObject.' + verifyPath);
     }
-    let expectedValue = expected;
-    let actualValue = actual;
-    typeof expected == 'object' ? (expectedValue = JSON.stringify(expected)) : expected;
-    typeof actual == 'object' ? (actualValue = JSON.stringify(actual)) : actual;
-    pretext = pretext + ' expected ' + actualValue + ' to be ' + expectedValue;
+    const expectedValue = expected;
+    const actualValue = actual;
+    typeof expected == 'object' ? (expected = JSON.stringify(expected)) : expected;
+    typeof actual == 'object' ? (actual = JSON.stringify(actual)) : actual;
     fireLog.deepEqual(expectedValue, actualValue, pretext);
   }
 );

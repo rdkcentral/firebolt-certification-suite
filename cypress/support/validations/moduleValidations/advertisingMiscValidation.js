@@ -51,18 +51,19 @@ function validateAdvertisingAdvertisingId(method, validationTypeObject, apiOrEve
   const pretext = `${CONSTANTS.METHOD_CONTENT} for ${method} method : `;
 
   // Ifa is an advertising identifier and it should not be empty.
-  cy.log(`${pretext} Ifa is not null or undefined`, 'validateAdvertisingAdvertisingId').then(() => {
-    assert.exists(response.ifa, `${pretext} : Is not null or undefined`);
-  });
+  cy.log(`${pretext} Ifa value is not null or undefined`, 'validateAdvertisingAdvertisingId').then(
+    () => {
+      assert.exists(response.ifa, `${pretext} : Is not null or undefined`);
+    }
+  );
 
   switch (ScenarioType) {
     case CONSTANTS.LIMITADTRACKING_ON:
       // lmt value equal to 1 when limitAdTracking is on
       cy.log(
-        `${pretext} Expected Lmt value ` +
-          response.lmt +
-          ` equal to be ` +
-          CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT,
+        `${pretext} Expected Lmt value : ${CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT},` +
+          ` Actual value : ` +
+          response.lmt,
         'validateAdvertisingAdvertisingId'
       ).then(() => {
         assert.equal(
@@ -73,10 +74,9 @@ function validateAdvertisingAdvertisingId(method, validationTypeObject, apiOrEve
       });
       if (response.ifa_type) {
         cy.log(
-          `${pretext} Expected Ifa_type value ` +
-            response.ifa_type +
-            ` equal to be ` +
-            CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_IFA_TYPE,
+          `${pretext} Expected Ifa_type value : ${CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_IFA_TYPE}, ` +
+            ` Actual value : ` +
+            response.ifa_type,
           'validateAdvertisingAdvertisingId'
         ).then(() => {
           assert.equal(
@@ -90,10 +90,9 @@ function validateAdvertisingAdvertisingId(method, validationTypeObject, apiOrEve
     case CONSTANTS.LIMITADTRACKING_OFF:
       // lmt value equal to 0 when limitAdTracking is off
       cy.log(
-        `${pretext} Expected Lmt value ` +
-          response.lmt +
-          ` equal to be ` +
-          CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT,
+        `${pretext} Expected Lmt value : ${CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT},` +
+          ` Actual value : ` +
+          response.lmt,
         'validateAdvertisingAdvertisingId'
       ).then(() => {
         assert.equal(
@@ -104,10 +103,9 @@ function validateAdvertisingAdvertisingId(method, validationTypeObject, apiOrEve
       });
       if (response.ifa_type) {
         cy.log(
-          `${pretext} Expected Ifa_type value ` +
-            response.ifa_type +
-            ` equal to be ` +
-            CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_IFA_TYPE,
+          `${pretext} Expected Ifa_type value : ${CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_IFA_TYPE}, ` +
+            ` Actual value : ` +
+            response.ifa_type,
           'validateAdvertisingAdvertisingId'
         ).then(() => {
           assert.equal(
