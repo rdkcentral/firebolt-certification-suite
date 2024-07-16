@@ -337,7 +337,7 @@ Cypress.Commands.add('errorNullCheck', (response, errorExpected, isNullCheckSkip
   let validationStatus = CONSTANTS.PASS;
   let message = '';
   const isForcedSkip = false;
-
+  errorExpected == CONSTANTS.ERROR
   // If isNullCheckSkipped is true, skip the null check error since it passed the schema validation check.
   // If isNullCheckSkipped is false and the error expected is false, the error property in the response should be null. If it is other than null, the check should fail.
   // If isNullCheckSkipped is false and the error expected is true, the error property in the response should not be null. If it is null, the check should fail.
@@ -649,7 +649,6 @@ Cypress.Commands.add(
 
     fireLog.info('Event Received Check : ' + eventReceivedCheck);
     fireLog.info('Event Schema Check : ' + schemaCheck);
-    // fireLog.info('Event Content Check : ' + contentCheck);
   }
 );
 

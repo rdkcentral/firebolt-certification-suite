@@ -163,7 +163,6 @@ class decodeValidations {
             `Regular Expression Validation: expected ${param} to be in a valid ${regexFormat} format`,
             'decodeBase64AndJwtToken'
           ).then(() => {
-            // assert.equal(true, resultSet, 'RegEx Validation:');
             if (resultSet == false) {
               throw new Error(`RegEx Validation failed for ${param} value`);
             } else {
