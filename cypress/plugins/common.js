@@ -28,8 +28,7 @@ function genericSupport(config) {
   try {
     data = JSON.parse(fs.readFileSync('supportConfig.json'));
   } catch (error) {
-    logger.error('Received following error while trying to read supportConfig json', error);
-    return config;
+    logger.info('Received following error while trying to read supportConfig json', error);
   }
 
   // Get the arguments passed from command line during run time.
