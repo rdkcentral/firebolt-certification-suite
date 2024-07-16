@@ -1,4 +1,4 @@
-@Account @manageSDK
+@Account @AccountManage @manageSDK
 Feature: Account_Manage
 
    Background: Launch FCA for 'Account'

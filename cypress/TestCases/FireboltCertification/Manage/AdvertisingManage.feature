@@ -1,4 +1,4 @@
-@Advertising @manageSDK
+@Advertising @AdvertisingManage @manageSDK
 Feature: Advertising_Manage
 
    Background: Launch FCA for 'Advertising'

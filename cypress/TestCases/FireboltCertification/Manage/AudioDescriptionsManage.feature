@@ -1,4 +1,4 @@
-@AudioDescriptions @manageSDK
+@AudioDescriptions @AudioDescriptionsManage @manageSDK
 Feature: AudioDescriptions_Manage
 
    Background: Launch FCA for 'AudioDescriptions'
@@ -19,7 +19,7 @@ Feature: AudioDescriptions_Manage
          | Enable AudioDescriptions  | enable audioDescription  | enabled for audioDescriptions  | onEnabledChanged for audiodescriptions with enable  |
          | Disable AudioDescriptions | disable audioDescription | disabled for audioDescriptions | onEnabledChanged for audiodescriptions with disable |
 
-   @AudioDescriptions @manageSDK @sdk @transport
+  @sdk @transport
    Scenario Outline: AudioDescriptions.enabled - Negative Scenario: <Scenario> expecting error
       When 1st party app invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds to '1st party app' with 'invalid params for audiodescriptions setEnabled'

@@ -5,7 +5,7 @@ Feature: Accessibility
       Given the environment has been set up for 'Accessibility' tests
       And 3rd party 'certification' app is launched
 
-   
+   @sdk @transport
    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
@@ -20,6 +20,7 @@ Feature: Accessibility
          | Scenario               | Key                    | Method_Content                       | Event_Content                                 |
          | Disable closedcaptions | disable closedCaptions | disabled for closedCaptions settings | onclosedCaptionsSettingsChanged with disabled |
          | Enable closedcaptions  | enable closedCaptions  | enabled for closedCaptions settings  | onclosedCaptionsSettingsChanged with enabled  |
+
       @Sev1
       Examples:
          | Scenario                             | Key                                     | Method_Content                                                  | Event_Content                                                             |
@@ -44,6 +45,7 @@ Feature: Accessibility
          | Set backgroundColor-#7f7f7f          | set backgroundColor to #7f7f7f          | #7f7f7f for backgroundColor in closedcaptions settings          | onclosedCaptionsSettingsChanged with #7f7f7f for backgroundColor          |
          | Set fontOpacity-75                   | set fontOpacity to 75                   | 75 for fontOpacity in closedcaptions settings                   | onclosedCaptionsSettingsChanged with 75 for fontOpacity                   |
          | Set backgroundOpacity-75             | set backgroundOpacity to 75             | 75 for backgroundOpacity in closedcaptions settings             | onclosedCaptionsSettingsChanged with 75 for backgroundOpacity             |
+
       @Sev2
       Examples:
          | Scenario                     | Key                                       | Method_Content                                            | Event_Content                                                       |
@@ -57,7 +59,7 @@ Feature: Accessibility
          | Set windowOpacity-50         | set windowOpacity to 50                   | 50 for windowOpacity in closedcaptions settings           | onclosedCaptionsSettingsChanged with 50 for windowOpacity           |
          | Set preferredLanguages       | set preferredLanguages to spanish english | spanish for preferredLanguages in closedcaptions settings | onclosedCaptionsSettingsChanged with spanish for preferredLanguages |
 
-   
+   @sdk @transport
    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario> with 'null' params
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
@@ -67,7 +69,7 @@ Feature: Accessibility
       Then 'Firebolt' platform responds with '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
-      @Sev2 @sdk @transport
+      @Sev2
       Examples:
          | Scenario          | Key                           | Method_Content                      | Event_Content                                                            |
          | fontFamily        | set fontFamily as null        | default value for fontFamily        | onclosedCaptionsSettingsChanged with default value for fontfamily        |
@@ -83,7 +85,7 @@ Feature: Accessibility
          | windowColor       | set windowColor as null       | default value for windowColor       | onclosedCaptionsSettingsChanged with default value for windowColor       |
          | windowOpacity     | set windowOpacity as null     | default value for windowOpacity     | onclosedCaptionsSettingsChanged with default value for windowOpacity     |
 
-   
+   @sdk @transport
    Scenario Outline: Accessibility.voiceGuidanceSettings - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onVoiceGuidanceSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get voiceGuidance settings'
@@ -93,14 +95,13 @@ Feature: Accessibility
       Then 'Firebolt' platform responds with '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
-
-      @Sev0 @sdk @transport
+      @Sev0
       Examples:
          | Scenario              | Key                   | Method_Content                  | Event_Content                         |
          | Disable voiceguidance | disable voiceGuidance | disabled voiceGuidance settings | onvoiceGuidanceSettings with disabled |
          | Enable voiceguidance  | enable voiceGuidance  | enabled voiceGuidance settings  | onvoiceGuidanceSettings with enabled  |
 
-      @Sev1 @sdk @transport
+      @Sev1
       Examples:
          | Scenario      | Key              | Method_Content                          | Event_Content                              |
          | Set speed-1   | set speed as 1   | 1 for speed in voiceGuidance settings   | onvoiceGuidanceSettings with 1 for speed   |
@@ -130,7 +131,7 @@ Feature: Accessibility
       Then 'Firebolt' platform responds to '1st party app' for 'disable closedCaptions'
       And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
 
-   
+   @sdk @transport
    Scenario Outline: Accessibility.closedCaptions - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<Set_Method_Key>'
@@ -139,12 +140,12 @@ Feature: Accessibility
       Then 'Firebolt' platform responds with '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
-      @Sev0 @sdk @transport
+      @Sev0
       Examples:
          | Scenario              | Set_Method_Key        | Method_Content                           | Event_Content                                |
          | Enable closedcaptions | enable closedCaptions | enabled for accessibility closedCaptions | onclosedCaptionsSettingsChanged with enabled |
 
-      @Sev1 @sdk @transport
+      @Sev1
       Examples:
          | Scenario                           | Set_Method_Key                        | Method_Content                                                    | Event_Content                                                          |
          | Set fontFamily-monospaced_sanserif | set fontFamily to monospaced_sanserif | monospace sanserif for fontfamily in accessibility closedcaptions | onclosedCaptionsSettingsChanged with monospace sanserif for fontfamily |
@@ -160,7 +161,7 @@ Feature: Accessibility
          | Set windowColor-#7f7f7f            | set windowColor to #7f7f7f            | #7f7f7f for windowColor in accessibility closedcaptions           | onclosedCaptionsSettingsChanged with #7f7f7f for windowColor           |
          | Set windowOpacity-40               | set windowOpacity to 40               | 40 for windowOpacity in accessibility closedcaptions              | onclosedCaptionsSettingsChanged with 40 for windowOpacity              |
 
-   
+   @sdk @transport
    Scenario Outline: Accessibility.voiceGuidance - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'accessibility onVoiceGuidanceSettingsChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<Set_Method_Key>'
@@ -169,13 +170,13 @@ Feature: Accessibility
       Then 'Firebolt' platform responds with '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
-      @Sev0 @sdk @transport
+      @Sev0 @sdk
       Examples:
          | Scenario              | Set_Method_Key        | Method_Content         | Event_Content                         |
          | Disable voiceguidance | disable voiceGuidance | disabled voiceGuidance | onvoiceGuidanceSettings with disabled |
          | Enable voiceguidance  | enable voiceGuidance  | enabled voiceGuidance  | onvoiceGuidanceSettings with enabled  |
 
-      @Sev1 @sdk @transport
+      @Sev1
       Examples:
          | Scenario    | Set_Method_Key | Method_Content               | Event_Content                            |
          | Set speed-1 | set speed as 1 | 1 for speed in voiceGuidance | onvoiceGuidanceSettings with 1 for speed |

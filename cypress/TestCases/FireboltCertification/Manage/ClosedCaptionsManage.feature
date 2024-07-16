@@ -1,4 +1,4 @@
-@ClosedCaptions @manageSDK
+@ClosedCaptions @ClosedCaptionsManage @manageSDK
 Feature: ClosedCaptions_Manage
 
     Background: Launch FCA for 'ClosedCaptions'

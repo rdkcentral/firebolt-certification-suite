@@ -1,4 +1,4 @@
-@Discovery @manageSDK
+@Discovery @DiscoveryManage @manageSDK
 Feature: Discovery_Manage
 
     Background: Launch FCA for 'Discovery'

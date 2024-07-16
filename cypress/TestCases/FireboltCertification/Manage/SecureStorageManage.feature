@@ -1,4 +1,4 @@
-@SecureStorage @manageSDK
+@SecureStorage @SecureStorageManage @manageSDK
 Feature: SecureStorage_Manage
 
     Background: Launch FCA for 'SecureStorage'

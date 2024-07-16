@@ -1,4 +1,4 @@
-@HdmiInput @manageSDK
+@HDMIInput @HDMIInputManage @manageSDK
 Feature: HdmiInput_Manage
 
    Background: Initialize 'HdmiInput'

@@ -1,4 +1,4 @@
-@Wifi @manageSDK
+@Wifi @WifiManage @manageSDK
 Feature: Wifi_Manage
 
     Background: Launch FCA for 'Wifi'
