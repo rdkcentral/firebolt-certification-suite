@@ -1,4 +1,4 @@
-@Metrics @manageSDK
+@Metrics @MetricsManage @manageSDK
 Feature: Metrics_Manage
 
     Background: Launch FCA for 'Metrics'

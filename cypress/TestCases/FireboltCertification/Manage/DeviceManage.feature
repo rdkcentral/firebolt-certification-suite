@@ -1,4 +1,4 @@
-@Device @manageSDK
+@Device @DeviceManage @manageSDK
 Feature: Device_Manage
 
     Background: Launch FCA for 'Device'

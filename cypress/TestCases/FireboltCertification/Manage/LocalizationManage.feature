@@ -1,4 +1,4 @@
-@Localization @manageSDK
+@Localization @LocalizationManage @manageSDK
 Feature: Localization_Manage
 
     Background: Launch FCA for 'Localization'

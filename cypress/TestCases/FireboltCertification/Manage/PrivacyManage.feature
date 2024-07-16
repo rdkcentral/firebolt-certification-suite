@@ -1,4 +1,4 @@
-@Privacy @manageSDK
+@Privacy @PrivacyManage @manageSDK
 Feature: Privacy_Manage
 
    Background: Launch FCA for 'Privacy'

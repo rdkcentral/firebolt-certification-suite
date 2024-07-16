@@ -5,7 +5,6 @@ Feature: Capabilities
     Given the environment has been set up for 'Capabilities' tests
     And 3rd party 'certification' app is launched
 
-
   @sdk @transport
   Scenario: Capabilities.info - Positive Scenario: Validate passing all the capabilities list
     When '3rd party app' invokes the 'Firebolt' API to 'get capability info'

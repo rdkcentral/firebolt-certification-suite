@@ -1,4 +1,4 @@
-@Metrics @rpcOnly
+@Metrics @coreSDK @rpcOnly
 Feature: Metrics_RpcOnly
 
     @transport

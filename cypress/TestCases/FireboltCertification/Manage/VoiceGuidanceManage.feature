@@ -1,4 +1,4 @@
-@VoiceGuidance @manageSDK
+@VoiceGuidance @VoiceGuidanceManage @manageSDK
 Feature: VoiceGuidance_Manage
 
     Background: Launch FCA for 'VoiceGuidance'
