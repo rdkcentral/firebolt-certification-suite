@@ -674,7 +674,11 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
       },
     };
   }
-  if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE) {
+  // If testType == lifecycle, modifying data to include lifecycle_validation = true in the intent to be sent to the app
+  if (
+    Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI ||
+    Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
+  ) {
     data = {
       query: {
         params: {
