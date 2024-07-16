@@ -618,11 +618,11 @@
         "content": "INVALID_REQUEST",
         "expectingError": true
     },
-    "EXPECT_ERROR_FOR_LOCALIZATION_LATLON": {
+    "EXPECT_ERROR_FOR_NOTSUPPORTED_CAPABILITY": {
         "method": "localization.latlon",
         "expected": "error"
     },
-    "NOT_SUPPORTED_ERROR_FOR_LOCALIZATION_LATLON": {
+    "NOT_SUPPORTED_ERROR_FOR_GIVEN_CAPABILITY": {
         "method": "localization.latlon",
         "validationJsonPath": "result",
         "content": "NOT_SUPPORTED",

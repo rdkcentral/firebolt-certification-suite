@@ -28,6 +28,6 @@ Feature: UserGrants
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'pinChallenge' test provider
-        # use localization.laton capability which is not supported xrn:firebolt:capability:localization:location
-        When '3rd party app' invokes the 'Firebolt' API to 'expect error for localization latlon'
-        Then 'Firebolt' platform responds with 'not supported error for localization latlon'
+        # Using a capability that is not supported
+        When '3rd party app' invokes the 'Firebolt' API to 'expect error for notsupported capability'
+        Then 'Firebolt' platform responds with 'not supported error for given capability'

@@ -535,7 +535,7 @@
         "method": "manage_usergrants.request",
         "params": "USERGRANTS_REQUEST_DEVICE_INFO"
     },
-    "GRANTED_FOR_DEVICE_INFO_CAPABILITY_WITH_ROLE_USE": {
+    "DEFAULT_VALUES_FOR_DEVICE_INFO_CAPABILITY_WITH_ROLE_USE": {
         "method": "usergrants.request",
         "validationJsonPath": "result",
         "content": "USERGRANTS_REQUEST_INFO_GRANTED_DEVICE_INFO"

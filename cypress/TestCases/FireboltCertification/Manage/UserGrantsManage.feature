@@ -51,13 +51,13 @@ Feature: UserGrants_Manage
     Scenario Outline: Usergrants.<method> - Positive Scenario: <Scenario>
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
-        And 1st party app invokes the 'Firebolt' API to '<Grant_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Grant_Method_Content>'
-        When 1st party app invokes the 'Firebolt' API to '<Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
+        And 1st party app invokes the 'Firebolt' API to '<API_Key1>'
+        Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key1>'
+        When 1st party app invokes the 'Firebolt' API to '<API_Key2>'
+        Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key2>'
 
         Examples:
-            | Scenario                         | Grant_Key                           | Grant_Method_Content      | Key                              | Validation_Key                                   | Method        |
+            | Scenario                         | API_Key1                            | Validation_Key1           | API_Key2                         | Validation_Key2                                  | Method        |
             | grant capability at device level | grant device distributor capability | null for usergrants grant | get usergrants for device        | expected list of grants for device               | grant R.5.1.5 |
             | grant capability at app level    | grant device id capability          | null for usergrants grant | get usergrants for 3rd party app | expected list of grants for 3rd party app        | grant R.5.1.5 |
             | deny capability at device level  | deny device distributor capability  | null for usergrants deny  | get usergrants for device        | expected list of denied grants for device        | deny R.5.1.6  |

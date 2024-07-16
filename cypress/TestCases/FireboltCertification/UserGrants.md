@@ -4,12 +4,12 @@ Feature file for Firebolt Certification UserGrants Module.
 ## Purpose
 A module for managing grants given by the user.
 
-## Pre requisites :
+## Requirements :
 1.**Grant Policies**
 * Grant Policies specify details like how long the grant lasts and what is the scope of the grant. 
-* We have to add the corresponding grantPolicy of the capability we are testing inside "grantPolicies" object within "capabilities" object of deviceManifest file.
-* This object will be having the grantpolicy for manage, use and provide roles.
-  For eg:, for localization.postalCode,
+* The corresponding grant policy of the capability being tested must be added inside the "grantPolicies" object within the "capabilities" object.
+* This object will include the grant policy for different roles such as manage, use, and provide.
+  Example structure for a capability (e.g., localization.postalCode):
     "capabilities": {
                         "supported": [ 
                             ...
@@ -44,8 +44,8 @@ A module for managing grants given by the user.
     }
 
  2.**Dependencies** 
- * Capabilities which are dependent on other grantPolicy, have to be added inside "dependencies" object of "capabilities" object.
- * For eg:, if "discovery.watched" api has to use the grantPolicy of "app-usage", then we have to add the dependency as following :
+ * Capabilities which are dependent on other grant policies must be added inside "dependencies" object of "capabilities" object.
+ * Example structure for a capability with dependencies (e.g., discovery.watched depends on app-usage):
     "capabilities": {
                         "supported": [ 
                             ...
@@ -77,3 +77,11 @@ A module for managing grants given by the user.
                             }
                         }
     }
+
+3.**Acknowledgement**
+ * The Acknowledgement capability enables a user to acknowledge a user grant by simply clicking a button.
+ * This requires additional implementation on the config module side. The prompt should appear for the user to acknowledge the challenge, allowing the grant to be either denied or granted based on user action.
+
+4.**Pin Challenge**
+* The Pin Challenge capability enables a user to confirm that they are the account owner, or a delegate of, by responding to a numeric PIN challenge.
+* This requires additional implementation on the config module side. The prompt should appear for the user to enter the PIN, allowing the grant to be either denied or granted based on user input.

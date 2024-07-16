@@ -644,7 +644,7 @@ Feature: UserGrants
         When '3rd party app' invokes the 'Firebolt' API to 'get info of device info capability'
         And '3rd party app' invokes the 'Firebolt' API to 'check if device info capability is granted with role as use'
         And '3rd party app' invokes the 'Firebolt' API to 'check if device info capability is granted with role as manage'
-        Then 'Firebolt' platform responds to '1st party app' with 'granted for device info capability with role use'
+        Then 'Firebolt' platform responds to '1st party app' with 'default values for device info capability with role use'
 
     @Usergrants @coreSDK @sdk @transport @requiresPlatformImplementation
     Scenario: UserGrants.request - Positive Scenario: Validate userGrants.request by deferring
