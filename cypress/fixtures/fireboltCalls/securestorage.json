@@ -327,6 +327,10 @@
         "method": "manage_securestorage.setForApp",
         "params": "SECURESTORAGE_SETFORAPP_DEVICE_KEY1"
     },
+    "SET_SECURE_DATA_VALUE1_FOR_SECOND_APP_WITH_SCOPE_DEVICE": {
+        "method": "manage_securestorage.setForApp",
+        "params": "SECURESTORAGE_SETFORAPP_DEVICE_KEY1_APP1"
+    },
     "SET_SECURE_DATA_VALUE2_FOR_AN_APP_WITH_SCOPE_DEVICE": {
         "method": "manage_securestorage.setForApp",
         "params": "SECURESTORAGE_SETFORAPP_DEVICE_KEY2"

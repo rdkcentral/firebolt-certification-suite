@@ -650,7 +650,7 @@ Cypress.Commands.add('censorData', (method, response) => {
  * cy.launchApp('firebolt', 'foo')
  * cy.launchApp('certification', 'foo')
  */
-Cypress.Commands.add('launchApp', (appType, appCallSign) => {
+Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   // use the firebolt command Discovery.launch to launch the app. If app id given, use the app id
   // else get the default app id from environment variable.
 
@@ -659,9 +659,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
       ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
       : UTILS.checkForSecondaryAppId(appCallSign); // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
-  // create the request map
-  // basic intent to be sent to the app on launch
-  let requestMap = { method: CONSTANTS.DISCOVERY_LAUNCH, params: { appId: appId } };
+  // Creating data for basic intent to be sent to the app on launch
   let appCategory, data;
   if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
     appCategory =
@@ -676,17 +674,8 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
         },
       },
     };
-    const messageIntent = {
-      action: CONSTANTS.SEARCH,
-      data: data,
-      context: { source: CONSTANTS.DEVICE },
-    };
-
-    requestMap = {
-      method: CONSTANTS.DISCOVERY_LAUNCH,
-      params: { [CONSTANTS.APP_ID]: appId, [CONSTANTS.INTENT]: messageIntent },
-    };
   }
+  // If testType == lifecycle, modifying data to include lifecycle_validation = true in the intent to be sent to the app
   if (
     Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI ||
     Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
@@ -700,8 +689,17 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
         },
       },
     };
-    requestMap.params.intent.data = data;
   }
+  // Creating intent and request map to be sent to the app on launch
+  const messageIntent = {
+    action: CONSTANTS.SEARCH,
+    data: data,
+    context: { source: CONSTANTS.DEVICE },
+  };
+  const requestMap = {
+    method: CONSTANTS.DISCOVERY_LAUNCH,
+    params: { [CONSTANTS.APP_ID]: appId, [CONSTANTS.INTENT]: messageIntent },
+  };
 
   // Add the PubSub URL if required
   if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
@@ -722,12 +720,13 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     requestMap.params.intent.data = data;
   }
 
+  requestMap.deviceIdentifier = deviceIdentifier;
   // Stringify the query (The intent requires it be a string)
   data.query = JSON.stringify(data.query);
   Cypress.env(CONSTANTS.CURRENT_APP_ID, appId);
 
-  const requestTopic = UTILS.getTopic(appId);
-  const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+  const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
+  const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
 
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
     fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
@@ -746,11 +745,8 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
           // if not received, throwing error with corresponding topic and retry count.
           if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
             throw Error(
-              'FCA not launched as 3rd party app or not subscribed to ' +
-                requestTopic +
-                '. Unable to get healthCheck response from FCA in ' +
-                UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
-                ' retries'
+              `Unable to get healthCheck response from App in ${getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES)} retries. Failed to launch the 3rd party app on ${deviceIdentifier | getEnvVariable(CONSTANTS.DEVICE_MAC)} or not subscribed to
+            ${requestTopic} topic.`
             );
           }
           healthCheckResponse = JSON.parse(healthCheckResponse);

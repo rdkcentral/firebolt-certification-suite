@@ -55,38 +55,67 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
  * @param {String} appId - 3rd party app id.
  * @param {String} sdk - sdk name.
  * @param {String} key - key name of the firebolt data contains method/param/context.
+ * @param {String} deviceIdentifier - Contains environment variable name which is having device mac.
  * @example
  * Given '3rd party app' invokes the 'Firebolt' API to 'get device id'
  * Given 'test.test.test' invokes the 'Firebolt' API to 'get device id'
  * Given 'secondary 3rd party app' invokes the 'Firebolt' API to 'get device id'
+ * And '3rd party app' invokes the 'Firebolt' API to 'get device id' on 'device1' device
  */
-Given(/'(.+)' invokes the '(.+)' API to '(.+)'$/, async (appId, sdk, key) => {
-  // Fetching the data like method, param, context and action etc.
-  cy.fireboltDataParser(key, sdk).then((parsedDataArr) => {
-    parsedDataArr.forEach((parsedData) => {
-      // If appId is having '3rd party app' taking default appId else using the value as-is.
-      appId = !appId
+Given(
+  /'(.+)' invokes the '(.+)' API to '(.+)'(?: on '(.+)' device)?$/,
+  async (appId, sdk, key, deviceIdentifier) => {
+    // If appId is having '3rd party app' taking default appId else using the value as-is.
+    appId = !appId
+      ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+      : appId === CONSTANTS.THIRD_PARTY_APP
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-        : appId === CONSTANTS.THIRD_PARTY_APP
-          ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-          : UTILS.checkForSecondaryAppId(appId);
+        : UTILS.checkForSecondaryAppId(appId);
 
+    cy.then(() => {
       if (
-        Cypress.env(CONSTANTS.TEST_TYPE) &&
-        Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
+        deviceIdentifier &&
+        !UTILS.getEnvVariable(deviceIdentifier, false) &&
+        deviceIdentifier != CONSTANTS.DEVICE1
       ) {
-        cy.fetchLifecycleHistory(appId);
+        fireLog.assert(
+          false,
+          `Unable to find the ${deviceIdentifier} environment value, Check whether environment variable value added for ${deviceIdentifier}`
+        );
       }
-      parsedData.appId = appId;
+      // Launching the App, when device identifier is passed and corresponding environment value present.
+      else if (deviceIdentifier && UTILS.getEnvVariable(deviceIdentifier, false)) {
+        deviceIdentifier = UTILS.getEnvVariable(deviceIdentifier, false);
+        cy.launchApp(CONSTANTS.CERTIFICATION, appId, deviceIdentifier);
+      }
+      // Launching the default 3rd party app when device identifier has 'device1'
+      else if (deviceIdentifier === CONSTANTS.DEVICE1) {
+        deviceIdentifier = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC);
+        cy.launchApp(CONSTANTS.CERTIFICATION, appId, deviceIdentifier);
+      }
+    }).then(() => {
+      // Fetching the data like method, param, context and action etc.
+      cy.fireboltDataParser(key, sdk).then((parsedDataArr) => {
+        parsedDataArr.forEach((parsedData) => {
+          if (
+            Cypress.env(CONSTANTS.TEST_TYPE) &&
+            Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
+          ) {
+            cy.fetchLifecycleHistory(appId);
+          }
+          parsedData.appId = appId;
 
-      fireLog.info(
-        `Call from ${appId}, method: ${parsedData.method} params: ${JSON.stringify(parsedData.params)}`
-      );
+          fireLog.info(
+            `Call from app: ${appId}, device: ${deviceIdentifier || UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)} - method: ${parsedData.method} params: ${JSON.stringify(parsedData.params)}`
+          );
 
-      cy.sendMessageToPlatformOrApp(CONSTANTS.APP, parsedData);
+          cy.sendMessageToPlatformOrApp(CONSTANTS.APP, parsedData);
+        });
+      });
     });
-  });
-});
+  }
+);
+ 
 
 /**
  * @module fireboltCalls
