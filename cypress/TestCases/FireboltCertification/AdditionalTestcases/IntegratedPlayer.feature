@@ -11,8 +11,14 @@ Feature: IntegratedPlayer
         Then 'Firebolt' platform responds to '1st party app' with '<Validation_key>'
 
       Examples:
-         | Scenario             | API_Key         | Validation_key        | method |
-         | Validate player load | set player load | value for player load | load   |
+        | Scenario                     | API_Key             | Validation_key            | method   |
+        | Validate player load api     | load player         | value for player load     | load     |
+        | Validate player destroy api  | destroy player      | value for player destroy  | destroy  |
+        | Validate player play api     | play player         | value for player play     | play     |
+        | Validate player progress api | get player progress | value for player progress | progress |
+        | Validate player status api   | get player status   | value for player status   | status   |
+        | Validate player stop api     | stop player         | value for player stop     | stop     |
+        | Validate player tracks api   | get player tracks   | value for player tracks   | tracks   |
     
     @sdk @IntegratedPlayer
     Scenario Outline: BroadcastPlayer.<method> - Positive Scenario: <Scenario>
