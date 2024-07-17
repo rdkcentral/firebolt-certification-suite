@@ -2,7 +2,7 @@
   "branches": [
     "main",
     {
-      "name": "dev",
+      "name": "FIRECERT-1998-semanticVersioning",
       "prerelease": true
     }
   ],
