@@ -7,5 +7,62 @@
     "method": "player.load",
     "validationJsonPath": "result",
     "content": "INTEGRATEDPLAYER_PLAYER_LOAD_RESPONSE"
+  },
+  "CREATE_BROADCASTPLAYER_INSTANCE": {
+    "method": "broadcastPlayer.create"
+  },
+  "BROADCASTPLAYER_INSTANCE": {
+    "method": "broadcastPlayer.create",
+    "validationJsonPath": "result",
+    "content": "INTEGRATEDPLAYER_BROADCASTPLAYER_INSTANCE"
+  },
+  "GET_STATUS_OF_BROADCASTPLAYER": {
+    "method": "broadcastPlayer.status",
+    "params": "INTEGRATEDPLAYER_BROADCASTPLAYER_STATUS_PARAM"
+  },
+  "STATUS_OF_BROADCASTPLAYER": {
+    "method": "broadcastPlayer.status",
+    "validationJsonPath": "result",
+    "content": "INTEGRATEDPLAYER_BROADCASTPLAYER_STATUS"
+  },
+  "GET_BROADCAST_STATUS_OF_PLAYER": {
+    "method": "broadcastPlayer.provideStatus",
+    "params": "INTEGRATEDPLAYER_BROADCAST_STATUS_OF_PLAYER_PARAM"
+  },
+  "BROADCAST_STATUS_OF_PLAYER": {
+    "method": "broadcastPlayer.provideStatus",
+    "validationJsonPath": "result",
+    "content": "NULL"
+},
+"GET_RESPONSE_FROM_CREATEPROVIDER": {
+    "method": "broadcastPlayer.createResponse",
+    "params": "INTEGRATEDPLAYER_BROADCAST_CREATEPROVIDER_RESPONSE_PARAM"
+  },
+  "RESPONSE_OF_CREATEPROVIDER": {
+    "method": "broadcastPlayer.createResponse",
+    "validationJsonPath": "result",
+    "content": "NULL"
+},
+"GET_ERROR_FROM_CREATEPROVIDER": {
+    "method": "broadcastPlayer.createError",
+    "params": "INTEGRATEDPLAYER_BROADCAST_CREATEPROVIDER_ERROR_PARAM"
+  },
+  "ERROR_OF_CREATEPROVIDER": {
+    "method": "broadcastPlayer.createError",
+    "validationJsonPath": "result",
+    "content": "NULL"
+},
+"GET_RESPONSE_FROM_STATUSPROVIDER": {
+    "method": "broadcastPlayer.statusResponse",
+    "params": "INTEGRATEDPLAYER_BROADCAST_STATUSPROVIDER_RESPONSE_PARAM"
+  },
+  "RESPONSE_OF_STATUSPROVIDER": {
+    "method": "broadcastPlayer.statusResponse",
+    "validationJsonPath": "result",
+    "content": "NULL"
+},
+"GET_ERROR_FROM_STATUSPROVIDER": {
+    "method": "broadcastPlayer.statusError",
+    "params": "INTEGRATEDPLAYER_BROADCAST_STATUSPROVIDER_ERROR_PARAM"
   }
 }

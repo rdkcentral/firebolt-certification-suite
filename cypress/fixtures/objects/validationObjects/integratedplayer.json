@@ -1,0 +1,33 @@
+{
+    "INTEGRATEDPLAYER_BROADCASTPLAYER_INSTANCE": {
+        "method": "broadcastPlayer.create",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "INTEGRATEDPLAYER_BROADCASTPLAYER_INSTANCE",
+                        "description": "Validation of the broadcastPlayer instance"
+                    }
+                ]
+            }
+        ]
+    },
+    "INTEGRATEDPLAYER_BROADCASTPLAYER_STATUS": {
+        "method": "broadcastPlayer.status",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "INTEGRATEDPLAYER_BROADCASTPLAYER_INSTANCE",
+                        "description": "Validation of broadcastPlayer status"
+                    }
+                ]
+            }
+        ]
+    }
+
+}
