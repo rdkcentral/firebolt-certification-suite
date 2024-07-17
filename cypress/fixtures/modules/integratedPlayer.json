@@ -1,0 +1,10 @@
+{
+  "PLAYER_LOAD": {
+    "appId": "app1",
+    "playerId": "123",
+    "request": {
+      "locator": "https://cdn.rdkcentral.com/media/assets/asset.hls"
+    }
+  },
+  "PLAYER_LOAD_RESPONSE": {}
+}

@@ -1,0 +1,11 @@
+{
+  "SET_PLAYER_LOAD": {
+    "method": "player.load",
+    "params": "INTEGRATEDPLAYER_PLAYER_LOAD"
+  },
+  "VALUE_FOR_PLAYER_LOAD": {
+    "method": "player.load",
+    "validationJsonPath": "result",
+    "content": "INTEGRATEDPLAYER_PLAYER_LOAD_RESPONSE"
+  }
+}
