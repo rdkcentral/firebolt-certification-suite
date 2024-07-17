@@ -182,9 +182,9 @@ function overideParamsFromConfigModule(overrideParams) {
  * @description Function to fetch the required topics.
  */
 
-function getTopic(appIdentifier = null, operation = null) {
+function getTopic(appIdentifier = null, operation = null, deviceIdentifier) {
   let topic;
-  let deviceMac = getEnvVariable(CONSTANTS.DEVICE_MAC);
+  let deviceMac = deviceIdentifier ? deviceIdentifier : getEnvVariable(CONSTANTS.DEVICE_MAC);
   if (deviceMac.length <= 5 || !deviceMac || deviceMac == undefined) {
     assert(
       false,
@@ -803,6 +803,11 @@ function parseValue(str) {
     if (str === 'false') return false;
 
     if (!isNaN(str)) return Number(str);
+
+    // If the string contains comma, split it into an array
+    if (str.includes(',')) {
+      return str.split(',');
+    }
   }
 
   return str;
@@ -880,6 +885,33 @@ global.resolveAtRuntime = function (input) {
   };
 };
 
+
+/**
+ * @module utils
+ * @function resolveRecursiveValues
+ * @description A Function that recursively check each fields and invoke if it is a function within an array or object.
+ * @param {*} input - value which need to resolved and it may be string/object/array/function
+ * @example
+ * resolveRecursiveValues(function())
+ */
+ function resolveRecursiveValues(input) {
+  if (Array.isArray(input)) {
+    return input.map((item) => resolveRecursiveValues(item));
+  } else if (typeof input == CONSTANTS.TYPE_OBJECT && input !== null) {
+    const newObj = {};
+    for (const key in input) {
+      if (Object.hasOwnProperty.call(input, key)) {
+        newObj[key] = resolveRecursiveValues(input[key]);
+      }
+    }
+    return newObj;
+  } else if (input && typeof input === CONSTANTS.TYPE_FUNCTION) {
+    return input();
+  } else {
+    return input;
+  }
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -905,4 +937,5 @@ module.exports = {
   fireLog,
   parseValue,
   checkForSecondaryAppId,
+  resolveRecursiveValues,
 };

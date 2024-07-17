@@ -104,6 +104,7 @@ Given(
             cy.fetchLifecycleHistory(appId);
           }
           parsedData.appId = appId;
+          parsedData.deviceIdentifier = deviceIdentifier;
 
           fireLog.info(
             `Call from app: ${appId}, device: ${deviceIdentifier || UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)} - method: ${parsedData.method} params: ${JSON.stringify(parsedData.params)}`

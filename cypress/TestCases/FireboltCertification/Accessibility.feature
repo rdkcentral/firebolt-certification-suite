@@ -51,30 +51,29 @@ Feature: Accessibility
             | Set preferredLanguages               | preferredLanguages | spa,eng               |
 
     @Accessibility @coreSDK @sdk @transport
-    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Method> with 'null' params
-        Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' getters and setters '<Method>' to 'null'
-        When '3rd party app' registers for the 'Firebolt' event
-        When '3rd party app' invokes the 'Firebolt' get API
-        Given 1st party app invokes the 'Firebolt' API to set '<Method>' to 'null'
-        And 'Firebolt' platform responds to '1st party app' set API
-        When '3rd party app' invokes the 'Firebolt' get API
-        And 'Firebolt' platform responds to '3rd party app' get API
-        And 'Firebolt' platform triggers '3rd party app' event
+    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario> with 'null' params
+        When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
+        And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
+        And 1st party app invokes the 'Firebolt' API to '<Key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Key>'
+        When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
+        Then 'Firebolt' platform responds with '<Method_Content>'
+        And 'Firebolt' platform triggers event '<Event_Content>'
 
         Examples:
-            | Method            |
-            | fontFamily        |
-            | fontSize          |
-            | fontColor         |
-            | fontEdge          |
-            | fontEdgeColor     |
-            | fontOpacity       |
-            | backgroundColor   |
-            | backgroundOpacity |
-            | textAlign         |
-            | textAlignVertical |
-            | windowColor       |
-            | windowOpacity     |
+         | Scenario          | Key                           | Method_Content                      | Event_Content                                                            |
+         | fontFamily        | set fontFamily as null        | default value for fontFamily        | onclosedCaptionsSettingsChanged with default value for fontfamily        |
+         | fontSize          | set fontSize as null          | default value for fontSize          | onclosedCaptionsSettingsChanged with default value for fontSize          |
+         | fontColor         | set fontColor as null         | default value for fontColor         | onclosedCaptionsSettingsChanged with default value for fontColor         |
+         | fontEdge          | set fontEdge as null          | default value for fontEdge          | onclosedCaptionsSettingsChanged with default value for fontEdge          |
+         | fontEdgeColor     | set fontEdgeColor as null     | default value for fontEdgeColor     | onclosedCaptionsSettingsChanged with default value for fontEdgeColor     |
+         | fontOpacity       | set fontOpacity as null       | default value for fontOpacity       | onclosedCaptionsSettingsChanged with default value for fontOpacity       |
+         | backgroundColor   | set backgroundColor as null   | default value for backgroundColor   | onclosedCaptionsSettingsChanged with default value for backgroundColor   |
+         | backgroundOpacity | set backgroundOpacity as null | default value for backgroundOpacity | onclosedCaptionsSettingsChanged with default value for backgroundOpacity |
+         | textAlign         | set textAlign as null         | default value for textAlign         | onclosedCaptionsSettingsChanged with default value for textAlign         |
+         | textAlignVertical | set textAlignVertical as null | default value for textAlignVertical | onclosedCaptionsSettingsChanged with default value for textAlignVertical |
+         | windowColor       | set windowColor as null       | default value for windowColor       | onclosedCaptionsSettingsChanged with default value for windowColor       |
+         | windowOpacity     | set windowOpacity as null     | default value for windowOpacity     | onclosedCaptionsSettingsChanged with default value for windowOpacity     |
 
     @Accessibility @coreSDK @sdk @transport
     Scenario Outline: Accessibility.voiceGuidanceSettings - Positive Scenario: <Scenario>
