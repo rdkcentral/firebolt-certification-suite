@@ -885,7 +885,6 @@ global.resolveAtRuntime = function (input) {
   };
 };
 
-
 /**
  * @module utils
  * @function resolveRecursiveValues
@@ -894,7 +893,7 @@ global.resolveAtRuntime = function (input) {
  * @example
  * resolveRecursiveValues(function())
  */
- function resolveRecursiveValues(input) {
+function resolveRecursiveValues(input) {
   if (Array.isArray(input)) {
     return input.map((item) => resolveRecursiveValues(item));
   } else if (typeof input == CONSTANTS.TYPE_OBJECT && input !== null) {

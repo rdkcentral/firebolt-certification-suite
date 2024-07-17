@@ -845,7 +845,7 @@ Cypress.Commands.add('clearCache', () => {
  */
 Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) => {
   const { method, params, context, action, expected, appId } = requestData;
-  const deviceIdentifier = requestData.deviceIdentifier
+  const deviceIdentifier = requestData.deviceIdentifier;
   task = task ? task : CONSTANTS.TASK.CALLMETHOD;
   let isNotSupportedApi = false;
 
@@ -871,7 +871,7 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
 
       // Adding additional details to created intent if any platform specific data is present in configModule.
       cy.runIntentAddon(task, intentMessage).then((parsedIntent) => {
-        const requestTopic = UTILS.getTopic(appId, null,  deviceIdentifier);
+        const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
         const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
         cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent);
       });
