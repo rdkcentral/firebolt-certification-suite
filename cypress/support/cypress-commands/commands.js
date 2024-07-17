@@ -43,7 +43,7 @@ Cypress.Commands.add(
       fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
     if (!fireboltData) {
-      fireLog.assert(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
+      fireLog.fail(CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
     return fireboltData;
   }
@@ -112,7 +112,7 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
       });
     });
   } else {
-    fireLog.assert(false, `${sdk} SDK not Supported`);
+    fireLog.fail(`${sdk} SDK not Supported`);
   }
 });
 
@@ -404,7 +404,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
         }
       });
     } else {
-      fireLog.assert(false, CONSTANTS.BEFORE_OPERATION_FORMAT);
+      fireLog.fail(CONSTANTS.BEFORE_OPERATION_FORMAT);
     }
   }
 });
@@ -419,7 +419,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
  */
 Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
   if (!beforeOperation) {
-    fireLog.assert(false, 'Before operation object is null/undefined - setResponse');
+    fireLog.fail('Before operation object is null/undefined - setResponse');
   }
   let firstParty;
   if (beforeOperation.hasOwnProperty('firstParty')) {
@@ -587,7 +587,7 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
       fireLog(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
       return true;
     } else {
-      fireLog.assert(false, eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
+      fireLog.fail(eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
     }
   });
 });
