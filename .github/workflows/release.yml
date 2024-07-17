@@ -5,6 +5,7 @@ on:
     branches:
       - 'main'
       - 'dev'
+      - 'FIRECERT-1998-semanticVersioning'
 env:
   HUSKY: 0
 jobs:
