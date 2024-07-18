@@ -62,61 +62,71 @@
       "content": "INTEGRATEDPLAYER_PLAYER_TRACKS_RESPONSE"
     },
     "CREATE_BROADCASTPLAYER_INSTANCE": {
-      "method": "broadcastPlayer.create"
+      "method": "broadcastplayer.create",
+      "params": "INTEGRATEDPLAYER_BROADCASTPLAYER_CREATE_INSTANCE_PARAM"
     },
     "BROADCASTPLAYER_INSTANCE": {
-      "method": "broadcastPlayer.create",
+      "method": "broadcastplayer.create",
       "validationJsonPath": "result",
       "content": "INTEGRATEDPLAYER_BROADCASTPLAYER_INSTANCE"
     },
     "GET_STATUS_OF_BROADCASTPLAYER": {
-      "method": "broadcastPlayer.status",
+      "method": "broadcastplayer.status",
       "params": "INTEGRATEDPLAYER_BROADCASTPLAYER_STATUS_PARAM"
     },
     "STATUS_OF_BROADCASTPLAYER": {
-      "method": "broadcastPlayer.status",
+      "method": "broadcastplayer.status",
       "validationJsonPath": "result",
       "content": "INTEGRATEDPLAYER_BROADCASTPLAYER_STATUS"
     },
     "GET_BROADCAST_STATUS_OF_PLAYER": {
-      "method": "broadcastPlayer.provideStatus",
+      "method": "broadcastplayer.provideStatus",
       "params": "INTEGRATEDPLAYER_BROADCAST_STATUS_OF_PLAYER_PARAM"
     },
     "BROADCAST_STATUS_OF_PLAYER": {
-      "method": "broadcastPlayer.provideStatus",
+      "method": "broadcastplayer.provideStatus",
       "validationJsonPath": "result",
       "content": "NULL"
     },
     "GET_RESPONSE_FROM_CREATEPROVIDER": {
-      "method": "broadcastPlayer.createResponse",
+      "method": "broadcastplayer.createResponse",
       "params": "INTEGRATEDPLAYER_BROADCAST_CREATEPROVIDER_RESPONSE_PARAM"
     },
     "RESPONSE_OF_CREATEPROVIDER": {
-      "method": "broadcastPlayer.createResponse",
+      "method": "broadcastplayer.createResponse",
       "validationJsonPath": "result",
       "content": "NULL"
     },
     "GET_ERROR_FROM_CREATEPROVIDER": {
-      "method": "broadcastPlayer.createError",
+      "method": "broadcastplayer.createError",
       "params": "INTEGRATEDPLAYER_BROADCAST_CREATEPROVIDER_ERROR_PARAM"
     },
     "ERROR_OF_CREATEPROVIDER": {
-      "method": "broadcastPlayer.createError",
+      "method": "broadcastplayer.createError",
       "validationJsonPath": "result",
       "content": "NULL"
     },
     "GET_RESPONSE_FROM_STATUSPROVIDER": {
-      "method": "broadcastPlayer.statusResponse",
+      "method": "broadcastplayer.statusResponse",
       "params": "INTEGRATEDPLAYER_BROADCAST_STATUSPROVIDER_RESPONSE_PARAM"
     },
     "RESPONSE_OF_STATUSPROVIDER": {
-      "method": "broadcastPlayer.statusResponse",
+      "method": "broadcastplayer.statusResponse",
       "validationJsonPath": "result",
       "content": "NULL"
     },
     "GET_ERROR_FROM_STATUSPROVIDER": {
-      "method": "broadcastPlayer.statusError",
+      "method": "broadcastplayer.statusError",
       "params": "INTEGRATEDPLAYER_BROADCAST_STATUSPROVIDER_ERROR_PARAM"
+    },
+    "CREATE_STREAMINGPLAYER_INSTANCE": {
+      "method": "streamingplayer.create",
+      "params": "INTEGRATEDPLAYER_STREAMINGPLAYER_CREATE_INSTANCE_PARAM"
+    },
+    "STREAMINGPLAYER_INSTANCE": {
+      "method": "streamingplayer.create",
+      "validationJsonPath": "result",
+      "content": "INTEGRATEDPLAYER_STREAMINGPLAYER_INSTANCE"
     }
   }
   

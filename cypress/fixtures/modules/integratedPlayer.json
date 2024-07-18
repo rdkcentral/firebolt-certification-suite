@@ -91,6 +91,23 @@
         "code": 1,
         "message": "Error"
       }
+    },
+    "BROADCASTPLAYER_CREATE_INSTANCE_PARAM": {
+      "request": {},
+      "appId": "app1"
+    },
+    "STREAMINGPLAYER_CREATE_INSTANCE_PARAM": {
+        "request": {},
+        "appId": "app1"
+    },
+    "STREAMINGPLAYER_INSTANCE": {
+        "result": {
+          "player": {
+            "playerId": "abc",
+            "windowId": "def"
+          },
+          "appId": "app2"
+        }
     }
   }
   
