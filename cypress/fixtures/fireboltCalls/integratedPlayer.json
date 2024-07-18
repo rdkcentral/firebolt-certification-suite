@@ -133,8 +133,7 @@
   },
   "BROADCAST_STATUS_OF_PLAYER": {
     "method": "broadcastplayer.provideStatus",
-    "validationJsonPath": "result",
-    "content": "NULL"
+    "validationJsonPath": "result"
   },
   "GET_RESPONSE_FROM_CREATEPROVIDER": {
     "method": "broadcastplayer.createResponse",
@@ -142,8 +141,7 @@
   },
   "RESPONSE_OF_CREATEPROVIDER": {
     "method": "broadcastplayer.createResponse",
-    "validationJsonPath": "result",
-    "content": "NULL"
+    "validationJsonPath": "result"
   },
   "GET_ERROR_FROM_CREATEPROVIDER": {
     "method": "broadcastplayer.createError",
@@ -151,8 +149,7 @@
   },
   "ERROR_OF_CREATEPROVIDER": {
     "method": "broadcastplayer.createError",
-    "validationJsonPath": "result",
-    "content": "NULL"
+    "validationJsonPath": "result"
   },
   "GET_RESPONSE_FROM_STATUSPROVIDER": {
     "method": "broadcastplayer.statusResponse",
@@ -160,8 +157,7 @@
   },
   "RESPONSE_OF_STATUSPROVIDER": {
     "method": "broadcastplayer.statusResponse",
-    "validationJsonPath": "result",
-    "content": "NULL"
+    "validationJsonPath": "result"
   },
   "GET_ERROR_FROM_STATUSPROVIDER": {
     "method": "broadcastplayer.statusError",
