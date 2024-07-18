@@ -18,9 +18,6 @@
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
 const logger = require('../Logger')('sample.js');
 
-Given('Pass', () => {
-  logger.info('Sample pass');
-});
 
 Given('Fail', () => {
   throw new Error('Sample failure');
