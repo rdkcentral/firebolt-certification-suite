@@ -1,48 +1,137 @@
 {
-    "INTEGRATEDPLAYER_BROADCASTPLAYER_INSTANCE": {
-        "method": "broadcastplayer.create",
-        "data": [
-            {
-                "type": "fixture",
-                "validations": [
-                    {
-                        "mode": "staticContentValidation",
-                        "type": "INTEGRATEDPLAYER_BROADCASTPLAYER_INSTANCE",
-                        "description": "Validation of the broadcastPlayer instance"
-                    }
-                ]
-            }
+  "INTEGRATEDPLAYER_BROADCASTPLAYER_INSTANCE": {
+    "method": "broadcastplayer.create",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "INTEGRATEDPLAYER_BROADCASTPLAYER_INSTANCE",
+            "description": "Validation of the broadcastPlayer instance"
+          }
         ]
-    },
-    "INTEGRATEDPLAYER_BROADCASTPLAYER_STATUS": {
-        "method": "broadcastplayer.status",
-        "data": [
-            {
-                "type": "fixture",
-                "validations": [
-                    {
-                        "mode": "staticContentValidation",
-                        "type": "INTEGRATEDPLAYER_BROADCASTPLAYER_INSTANCE",
-                        "description": "Validation of broadcastPlayer status"
-                    }
-                ]
-            }
+      }
+    ]
+  },
+  "INTEGRATEDPLAYER_BROADCASTPLAYER_STATUS": {
+    "method": "broadcastplayer.status",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "INTEGRATEDPLAYER_BROADCASTPLAYER_INSTANCE",
+            "description": "Validation of broadcastPlayer status"
+          }
         ]
-    },
-    "INTEGRATEDPLAYER_STREAMINGPLAYER_INSTANCE": {
-        "method": "streamingplayer.create",
-        "data": [
-            {
-                "type": "fixture",
-                "validations": [
-                    {
-                        "mode": "staticContentValidation",
-                        "type": "INTEGRATEDPLAYER_STREAMINGPLAYER_INSTANCE",
-                        "description": "Validation of the streamingPlayer instance"
-                    }
-                ]
-            }
+      }
+    ]
+  },
+  "INTEGRATEDPLAYER_STREAMINGPLAYER_INSTANCE": {
+    "method": "streamingplayer.create",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "INTEGRATEDPLAYER_STREAMINGPLAYER_INSTANCE",
+            "description": "Validation of the streamingPlayer instance"
+          }
         ]
-    }
-
+      }
+    ]
+  },
+  "INTEGRATEDPLAYER_PLAYER_LOAD_VALUE": {
+    "method": "player.load",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "INTEGRATEDPLAYER_PLAYER_MEDIA_SESSION_ID_RESPONSE",
+            "description": "Validation of player load api"
+          }
+        ]
+      }
+    ]
+  },
+  "INTEGRATEDPLAYER_PLAYER_PLAY_VALUE": {
+    "method": "player.play",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "INTEGRATEDPLAYER_PLAYER_MEDIA_SESSION_ID_RESPONSE",
+            "description": "Validation of player play api"
+          }
+        ]
+      }
+    ]
+  },
+  "INTEGRATEDPLAYER_PLAYER_PROGRESS_VALUE": {
+    "method": "player.progress",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "INTEGRATEDPLAYER_PLAYER_PROGRESS_RESPONSE",
+            "description": "Validation of player progress api"
+          }
+        ]
+      }
+    ]
+  },
+  "INTEGRATEDPLAYER_PLAYER_STATUS_VALUE": {
+    "method": "player.status",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "INTEGRATEDPLAYER_PLAYER_STATUS_RESPONSE",
+            "description": "Validation of player status api"
+          }
+        ]
+      }
+    ]
+  },
+  "INTEGRATEDPLAYER_PLAYER_STOP_VALUE": {
+    "method": "player.stop",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "INTEGRATEDPLAYER_PLAYER_MEDIA_SESSION_ID_RESPONSE",
+            "description": "Validation of player stop api"
+          }
+        ]
+      }
+    ]
+  },
+  "INTEGRATEDPLAYER_PLAYER_TRACKS_VALUE": {
+    "method": "player.tracks",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "INTEGRATEDPLAYER_PLAYER_TRACKS_RESPONSE",
+            "description": "Validation of player tracks api"
+          }
+        ]
+      }
+    ]
+  }
 }

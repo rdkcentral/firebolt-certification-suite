@@ -6,7 +6,7 @@
   "VALUE_FOR_PLAYER_LOAD": {
     "method": "player.load",
     "validationJsonPath": "result",
-    "content": "INTEGRATEDPLAYER_PLAYER_MEDIA_SESSION_ID_RESPONSE"
+    "content": "INTEGRATEDPLAYER_PLAYER_LOAD_VALUE"
   },
   "DESTROY_PLAYER": {
     "method": "player.destroy",
@@ -23,7 +23,7 @@
   "VALUE_FOR_PLAYER_PLAY": {
     "method": "player.play",
     "validationJsonPath": "result",
-    "content": "INTEGRATEDPLAYER_PLAYER_MEDIA_SESSION_ID_RESPONSE"
+    "content": "INTEGRATEDPLAYER_PLAYER_PLAY_VALUE"
   },
   "GET_PLAYER_PROGRESS": {
     "method": "player.progress",
@@ -32,7 +32,7 @@
   "VALUE_FOR_PLAYER_PROGRESS": {
     "method": "player.progress",
     "validationJsonPath": "result",
-    "content": "INTEGRATEDPLAYER_PLAYER_PROGRESS_RESPONSE"
+    "content": "INTEGRATEDPLAYER_PLAYER_PROGRESS_VALUE"
   },
   "GET_PLAYER_STATUS": {
     "method": "player.status",
@@ -41,7 +41,7 @@
   "VALUE_FOR_PLAYER_STATUS": {
     "method": "player.status",
     "validationJsonPath": "result",
-    "content": "INTEGRATEDPLAYER_PLAYER_STATUS_RESPONSE"
+    "content": "INTEGRATEDPLAYER_PLAYER_STATUS_VALUE"
   },
   "STOP_PLAYER": {
     "method": "player.stop",
@@ -50,7 +50,7 @@
   "VALUE_FOR_PLAYER_STOP": {
     "method": "player.stop",
     "validationJsonPath": "result",
-    "content": "INTEGRATEDPLAYER_PLAYER_MEDIA_SESSION_ID_RESPONSE"
+    "content": "INTEGRATEDPLAYER_PLAYER_STOP_VALUE"
   },
   "GET_PLAYER_TRACKS": {
     "method": "player.tracks",
@@ -59,7 +59,7 @@
   "VALUE_FOR_PLAYER_TRACKS": {
     "method": "player.tracks",
     "validationJsonPath": "result",
-    "content": "INTEGRATEDPLAYER_PLAYER_TRACKS_RESPONSE"
+    "content": "INTEGRATEDPLAYER_PLAYER_TRACKS_VALUE"
   },
   "SET_AUDIO_TRACK": {
     "method": "player.setAudioTrack",
