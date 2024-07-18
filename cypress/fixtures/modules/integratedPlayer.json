@@ -1,113 +1,150 @@
 {
-    "PLAYER_LOAD": {
-      "appId": "app1",
-      "playerId": "123",
-      "request": {
-        "locator": "https://cdn.rdkcentral.com/media/assets/asset.hls"
-      }
-    },
-    "PLAYER_LOAD_RESPONSE": {},
-    "PLAYER_MEDIA_SESSION_ID_RESPONSE": { "mediaSessionId": "sess1" },
-    "PLAYER_APPID_PLAYERID": {
-      "appId": "app1",
-      "playerId": "123"
-    },
-    "PLAYER_PROGRESS_RESPONSE": {
+  "PLAYER_LOAD": {
+    "appId": "app1",
+    "playerId": "123",
+    "request": {
+      "locator": "https://cdn.rdkcentral.com/media/assets/asset.hls"
+    }
+  },
+  "PLAYER_LOAD_RESPONSE": {},
+  "PLAYER_MEDIA_SESSION_ID_RESPONSE": { "mediaSessionId": "sess1" },
+  "PLAYER_APPID_PLAYERID": {
+    "appId": "app1",
+    "playerId": "123"
+  },
+  "PLAYER_PROGRESS_RESPONSE": {
+    "speed": 1,
+    "startPosition": 0,
+    "position": 5000,
+    "endPosition": 3600000,
+    "liveSyncTime": "2021-04-23T18:25:43.511Z"
+  },
+  "PLAYER_STATUS_RESPONSE": {
+    "mediaSessionId": "sess1",
+    "state": "PLAYING"
+  },
+  "PLAYER_SET_AUDIO_TRACK": {
+    "appId": "app1",
+    "playerId": "123",
+    "trackId": "Audio1"
+  },
+  "PLAYER_SET_CAPTIONS_TRACK": {
+    "appId": "app1",
+    "playerId": "123",
+    "trackId": "CC1"
+  },
+  "PLAYER_SET_POSITION": {
+    "appId": "app1",
+    "playerId": "123",
+    "position": "10000"
+  },
+  "PLAYER_SET_SPEED": {
+    "appId": "app1",
+    "playerId": "123",
+    "speed": "2"
+  },
+  "PLAYER_PROVIDE_PROGRESS": {
+    "playerId": "123",
+    "progress": {
       "speed": 1,
       "startPosition": 0,
       "position": 5000,
       "endPosition": 3600000,
       "liveSyncTime": "2021-04-23T18:25:43.511Z"
+    }
+  },
+  "PLAYER_PROVIDE_STATUS": {
+    "playerId": "123",
+    "status": {
+      "mediaSessionId": "sess2",
+      "state": "BLOCKED",
+      "blockedReason": "CONTENT_NOT_FOUND"
+    }
+  },
+  "PLAYER_TRACKS_RESPONSE": {
+    "audio": [
+      {
+        "trackId": "123",
+        "language": "en",
+        "audioDescription": false,
+        "type": "PCM",
+        "selected": true
+      }
+    ],
+    "captions": [
+      {
+        "trackId": "123",
+        "language": "en",
+        "name": "CC1",
+        "selected": true
+      }
+    ]
+  },
+  "BROADCASTPLAYER_INSTANCE": {
+    "player": {
+      "playerId": "123",
+      "windowId": "456"
     },
-    "PLAYER_STATUS_RESPONSE": {
-      "mediaSessionId": "sess1",
-      "state": "PLAYING"
-    },
-    "PLAYER_TRACKS_RESPONSE": {
-      "audio": [
-        {
-          "trackId": "123",
-          "language": "en",
-          "audioDescription": false,
-          "type": "PCM",
-          "selected": true
-        }
-      ],
-      "captions": [
-        {
-          "trackId": "123",
-          "language": "en",
-          "name": "CC1",
-          "selected": true
-        }
-      ]
-    },
-    "BROADCASTPLAYER_INSTANCE": {
+    "appId": "app1"
+  },
+  "BROADCASTPLAYER_STATUS_PARAM": {
+    "playerId": "123",
+    "appId": "app1"
+  },
+  "BROADCAST_STATUS_OF_PLAYER_PARAM": {
+    "playerId": "123",
+    "status": {
+      "locked": false,
+      "frequency": 695000000,
+      "signalStrength": 90,
+      "signalQuality": 90
+    }
+  },
+  "BROADCAST_CREATEPROVIDER_RESPONSE_PARAM": {
+    "correlationId": "123",
+    "result": {
+      "playerId": "123",
+      "windowId": "456"
+    }
+  },
+  "BROADCAST_CREATEPROVIDER_ERROR_PARAM": {
+    "correlationId": "123",
+    "error": {
+      "code": 1,
+      "message": "Error"
+    }
+  },
+  "BROADCAST_STATUSPROVIDER_RESPONSE_PARAM": {
+    "correlationId": "123",
+    "result": {
+      "locked": false,
+      "frequency": 1,
+      "signalStrength": 90,
+      "signalQuality": 90
+    }
+  },
+  "BROADCAST_STATUSPROVIDER_ERROR_PARAM": {
+    "correlationId": "123",
+    "error": {
+      "code": 1,
+      "message": "Error"
+    }
+  },
+  "BROADCASTPLAYER_CREATE_INSTANCE_PARAM": {
+    "request": {},
+    "appId": "app1"
+  },
+  "STREAMINGPLAYER_CREATE_INSTANCE_PARAM": {
+    "request": {},
+    "appId": "app1"
+  },
+  "STREAMINGPLAYER_INSTANCE": {
+    "result": {
       "player": {
-        "playerId": "123",
-        "windowId": "456"
+        "playerId": "abc",
+        "windowId": "def"
       },
-      "appId": "app1"
-    },
-    "BROADCASTPLAYER_STATUS_PARAM": {
-      "playerId": "123",
-      "appId": "app1"
-    },
-    "BROADCAST_STATUS_OF_PLAYER_PARAM": {
-      "playerId": "123",
-      "status": {
-        "locked": false,
-        "frequency": 695000000,
-        "signalStrength": 90,
-        "signalQuality": 90
-      }
-    },
-    "BROADCAST_CREATEPROVIDER_RESPONSE_PARAM": {
-      "correlationId": "123",
-      "result": {
-        "playerId": "123",
-        "windowId": "456"
-      }
-    },
-    "BROADCAST_CREATEPROVIDER_ERROR_PARAM": {
-      "correlationId": "123",
-      "error": {
-        "code": 1,
-        "message": "Error"
-      }
-    },
-    "BROADCAST_STATUSPROVIDER_RESPONSE_PARAM": {
-      "correlationId": "123",
-      "result": {
-        "locked": false,
-        "frequency": 1,
-        "signalStrength": 90,
-        "signalQuality": 90
-      }
-    },
-    "BROADCAST_STATUSPROVIDER_ERROR_PARAM": {
-      "correlationId": "123",
-      "error": {
-        "code": 1,
-        "message": "Error"
-      }
-    },
-    "BROADCASTPLAYER_CREATE_INSTANCE_PARAM": {
-      "request": {},
-      "appId": "app1"
-    },
-    "STREAMINGPLAYER_CREATE_INSTANCE_PARAM": {
-        "request": {},
-        "appId": "app1"
-    },
-    "STREAMINGPLAYER_INSTANCE": {
-        "result": {
-          "player": {
-            "playerId": "abc",
-            "windowId": "def"
-          },
-          "appId": "app2"
-        }
+      "appId": "app2"
     }
   }
-  
+}
