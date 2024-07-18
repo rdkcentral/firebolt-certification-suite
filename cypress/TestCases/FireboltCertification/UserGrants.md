@@ -1,22 +1,16 @@
 # Firebolt Certification
-Feature file for Firebolt Certification UserGrants Module.
+Feature file for certifying UserGrants module.
 
 ## Purpose
 A module for managing grants given by the user.
 
 ## Requirements :
 1.**Grant Policies**
-* Grant Policies specify details like how long the grant lasts and what is the scope of the grant. 
-* The corresponding grant policy of the capability being tested must be added inside the "grantPolicies" object within the "capabilities" object.
-* This object will include the grant policy for different roles such as manage, use, and provide.
-  Example structure for a capability (e.g., localization.postalCode):
-    "capabilities": {
-                        "supported": [ 
-                            ...
-                        ],
-                        "dependencies": {
-                                ...
-                        },
+* Grant Policies specify details like how long a grant is valid for and what is the scope of the grant.
+* The grantPolicy object will include policies for different roles such as manage, use, and provide.
+
+  **Example structure for a grant policy:**
+                    ```
                         "grantPolicies": {
                             "xrn:firebolt:capability:localization:postal-code": {
                                     "use": {
@@ -39,44 +33,19 @@ A module for managing grants given by the user.
                                         "lifespan": "once",
                                         "overridable": false
                                     }
-                        }
-
-    }
+                           ```         
 
  2.**Dependencies** 
  * Capabilities which are dependent on other grant policies must be added inside "dependencies" object of "capabilities" object.
- * Example structure for a capability with dependencies (e.g., discovery.watched depends on app-usage):
-    "capabilities": {
-                        "supported": [ 
-                            ...
-                        ],
+  
+  **Example structure for a capability with dependencies:**
+                        ```
                         "dependencies": {
                                 "xrn:firebolt:capability:discovery:watched": [
                                     "xrn:firebolt:capability:data:app-usage"
                                 ]
-                        },
-                        "grantPolicies": {
-                            "xrn:firebolt:capability:data:app-usage": {
-                                "use": {
-                                "options": [
-                                    {
-                                    "steps": [
-                                        {
-                                        "capability": "xrn:firebolt:capability:usergrant:pinchallenge",
-                                        "configuration": {
-                                            "pinSpace": "purchase"
-                                        }
-                                        }
-                                    ]
-                                    }
-                                ],
-                                "scope": "app",
-                                "lifespan": "appActive",
-                                "overridable": false
-                                }
-                            }
                         }
-    }
+                       ``` 
 
 3.**Acknowledgement**
  * The Acknowledgement capability enables a user to acknowledge a user grant by simply clicking a button.

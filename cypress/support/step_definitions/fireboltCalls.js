@@ -1092,12 +1092,12 @@ Given(
 );
 
 /**
- * @function I reboot device
+ * @function device is rebooted
  * @description Reboot a device during test execution
  * @example
- * When I reboot device
+ * When device is rebooted
  */
-Given('I reboot device', () => {
+Given('device is rebooted', () => {
   fireLog.info(CONSTANTS.STEP_DEFINITION_NEEDS_TO_IMPLEMENT).then(() => {
     throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
   });
