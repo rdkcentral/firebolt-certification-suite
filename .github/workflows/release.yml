@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Set explicit npm dist-tag default
+      - name: Set explicit npm dist-tag defaul
         if: github.ref_name == 'main'
         run: echo "NPM_DIST_TAG=latest" >> $GITHUB_ENV
       - name: Override npm dist-tag for non-main releases
