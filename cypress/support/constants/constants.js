@@ -421,6 +421,7 @@ module.exports = {
   CENSOR_DATA_PATH: 'censorData.json',
   IS_PERFORMANCE_METRICS_ENABLED: 'isPerformanceMetricsEnabled',
   INITIATED: 'initiated',
+  INTEGRATEDPLAYER: 'IntegratedPlayer',
   STOPPED: 'stopped',
   START: 'start',
   STOP: 'stop',
@@ -449,6 +450,7 @@ module.exports = {
   VISIBILITYSTATE_FAILURE_LOG:
     '. If the visibility state response is as per the platform, add the expected value in configModule. More details is present in footer',
   NO_EVENT_TRIGGERED: 'Expecting no event to be triggered from platform',
+  PROVIDERS: 'providers',
   REGISTERPROVIDER: 'registerprovider',
   USERINTERESTPROVIDER: 'userinterestprovider',
   VISIBILITYSTATE: 'visibilityState',
