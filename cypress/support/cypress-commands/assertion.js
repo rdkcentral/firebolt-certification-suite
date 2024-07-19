@@ -648,6 +648,7 @@ Cypress.Commands.add(
 
     fireLog.info('Event Received Check : ' + eventReceivedCheck);
     fireLog.info('Event Schema Check : ' + schemaCheck);
+    fireLog.info('Event Content Check : ' + contentCheck);
   }
 );
 
