@@ -465,7 +465,7 @@ function loggingValidationCheckResult(validationCheck) {
         'loggingValidationCheckResult'
       );
       if (assertion.validationStatus == CONSTANTS.FAIL) {
-        throw new Error(`${assertion.validationPoint} failed, ${assertion.message}`);
+        fireLog.assert(false, `${assertion.validationPoint} failed, ${assertion.message}`);
       }
     }
   });
