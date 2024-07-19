@@ -1,0 +1,37 @@
+name: Release to GitHub
+on:
+  push:
+    branches:
+      - 'main'
+      - 'dev'
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Set explicit npm dist-tag default
+        if: github.ref_name == 'main'
+        run: echo "NPM_DIST_TAG=latest" >> $GITHUB_ENV
+      - name: Override npm dist-tag for non-main releases
+        if: github.ref_name != 'main'
+        run: echo "NPM_DIST_TAG=${{ github.ref_name }}" >> $GITHUB_ENV
+      - name: Install dependencies
+        run: yarn install
+      - name: Release to GitHub
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # <-- Allows semantic-release-bot to push changes to protected branches
+          npm_config_tag: ${{ env.NPM_DIST_TAG }} # <-- For main, this is `latest.` Otherwise, `dev`, `next-major`, etc. See ./.releaserc for release branch config.
+        run: npx semantic-release
