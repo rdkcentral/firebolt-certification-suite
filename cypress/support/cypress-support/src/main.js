@@ -55,8 +55,25 @@ export default function (module) {
       } else {
         cy.log('Unable to establish a pub/sub connection.');
       }
+      if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS) == true) {
+        const topic = UTILS.getTopic(
+          UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
+          CONSTANTS.SUBSCRIBE,
+          '_fbinteractions'
+        );
+        console.log('line 81--------');
+        appTransport.subscribe(topic, UTILS.interactionResults);
+        cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
+          if (response) {
+            Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
+          }
+        });
+      } else {
+        cy.log(CONSTANTS.INTERACTIONS_SERVICE_NOT_ACTIVE);
+      }
     });
 
+    Cypress.env('interactionLogs', []);
     // Create an instance of global queue
     const messageQueue = new Queue();
     Cypress.env(CONSTANTS.MESSAGE_QUEUE, messageQueue);
@@ -70,15 +87,6 @@ export default function (module) {
       });
     } else {
       cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
-    }
-    if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS) == true) {
-      cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
-        if (response) {
-          Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
-        }
-      });
-    } else {
-      cy.log(CONSTANTS.INTERACTIONS_SERVICE_NOT_ACTIVE);
     }
 
     // Merge fireboltCalls
@@ -196,7 +204,7 @@ export default function (module) {
             }
           });
         }
-        if (UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED) == true) {
+        if (UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) == true) {
           cy.startOrStopInteractionsService(CONSTANTS.STOPPED).then((response) => {
             if (response) {
               Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false);

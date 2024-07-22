@@ -182,7 +182,7 @@ function overideParamsFromConfigModule(overrideParams) {
  * @description Function to fetch the required topics.
  */
 
-function getTopic(appIdentifier = null, operation = null) {
+function getTopic(appIdentifier = null, operation = null, subscribeSuffix = null) {
   let topic;
   let deviceMac = getEnvVariable(CONSTANTS.DEVICE_MAC);
   if (deviceMac.length <= 5 || !deviceMac || deviceMac == undefined) {
@@ -201,7 +201,7 @@ function getTopic(appIdentifier = null, operation = null) {
     topic = deviceMac + '_' + getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
   }
   if (operation == CONSTANTS.SUBSCRIBE) {
-    return topic + CONSTANTS.TOPIC_SUBSCRIBE_SUFFIX;
+    return subscribeSuffix ? topic + subscribeSuffix : topic + CONSTANTS.TOPIC_SUBSCRIBE_SUFFIX;
   } else {
     return topic + CONSTANTS.TOPIC_PUBLISH_SUFFIX;
   }
@@ -581,6 +581,13 @@ function subscribeResults(data, metaData) {
   getEnvVariable(CONSTANTS.MESSAGE_QUEUE).enqueue(queueInput);
 }
 
+function interactionResults(data) {
+  // data = JSON.parse(data);
+  console.log("data line 586---------------------:",data);
+  getEnvVariable('interactionLogs').push(JSON.parse(data));
+  console.log("line 588---------------:",getEnvVariable('interactionLogs'));
+}
+
 /**
  * @module utils
  * @function destroyGlobalObjects
@@ -905,4 +912,5 @@ module.exports = {
   fireLog,
   parseValue,
   checkForSecondaryAppId,
+  interactionResults
 };
