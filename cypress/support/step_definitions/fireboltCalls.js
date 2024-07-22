@@ -50,10 +50,6 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
       fireLog.info(
         'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params)
       );
-      // Save playerId to environment variable if present
-      if (params && params.playerId) {
-        Cypress.env(CONSTANTS.PLAYERID, params.playerId);
-      }
       cy.sendMessagetoPlatforms(requestMap).then((response) => {
         if (response && typeof response == CONSTANTS.TYPE_OBJECT) {
           // If error and the error message having 'Method not found' or 'Method not Implemented' mark the testcase as undefined.
@@ -85,6 +81,11 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
             // If event and params are not supported setting isScenarioExempted as true for further validation.
             if (UTILS.isScenarioExempted(method, params)) {
               Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
+            }
+            // Save playerId to env variable if present
+            const playerId = updatedResponse?.response?.result?.playerId;
+            if (playerId) {
+              Cypress.env(CONSTANTS.PLAYERID, playerId);
             }
 
             // Creating object with event name, params, and response etc and storing it in a global list for further validation.
