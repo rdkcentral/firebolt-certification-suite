@@ -43,7 +43,7 @@ Cypress.Commands.add(
       fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
     if (!fireboltData) {
-      fireLog.assert(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
+      fireLog.fail(CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
     return fireboltData;
   }
@@ -112,7 +112,7 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
       });
     });
   } else {
-    fireLog.assert(false, `${sdk} SDK not Supported`);
+    fireLog.fail(`${sdk} SDK not Supported`);
   }
 });
 
@@ -404,7 +404,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
         }
       });
     } else {
-      fireLog.assert(false, CONSTANTS.BEFORE_OPERATION_FORMAT);
+      fireLog.fail(CONSTANTS.BEFORE_OPERATION_FORMAT);
     }
   }
 });
@@ -419,7 +419,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
  */
 Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
   if (!beforeOperation) {
-    fireLog.assert(false, 'Before operation object is null/undefined - setResponse');
+    fireLog.fail('Before operation object is null/undefined - setResponse');
   }
   let firstParty;
   if (beforeOperation.hasOwnProperty('firstParty')) {
@@ -587,7 +587,7 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
       fireLog(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
       return true;
     } else {
-      fireLog.assert(false, eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
+      fireLog.fail(eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
     }
   });
 });
@@ -649,7 +649,7 @@ Cypress.Commands.add('censorData', (method, response) => {
  * cy.launchApp('firebolt', 'foo')
  * cy.launchApp('certification', 'foo')
  */
-Cypress.Commands.add('launchApp', (appType, appCallSign) => {
+Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   // use the firebolt command Discovery.launch to launch the app. If app id given, use the app id
   // else get the default app id from environment variable.
 
@@ -719,12 +719,13 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     requestMap.params.intent.data = data;
   }
 
+  requestMap.deviceIdentifier = deviceIdentifier;
   // Stringify the query (The intent requires it be a string)
   data.query = JSON.stringify(data.query);
   Cypress.env(CONSTANTS.CURRENT_APP_ID, appId);
 
-  const requestTopic = UTILS.getTopic(appId);
-  const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+  const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
+  const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
 
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
     fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
@@ -743,11 +744,8 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
           // if not received, throwing error with corresponding topic and retry count.
           if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
             throw Error(
-              'FCA not launched as 3rd party app or not subscribed to ' +
-                requestTopic +
-                '. Unable to get healthCheck response from FCA in ' +
-                UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
-                ' retries'
+              `Unable to get healthCheck response from App in ${getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES)} retries. Failed to launch the 3rd party app on ${deviceIdentifier | getEnvVariable(CONSTANTS.DEVICE_MAC)} or not subscribed to
+            ${requestTopic} topic.`
             );
           }
           healthCheckResponse = JSON.parse(healthCheckResponse);
