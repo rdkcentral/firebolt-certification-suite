@@ -83,7 +83,7 @@ Feature: Localization
     @Device @coreSDK @regression @sdk @requiresPlatformImplementation
     Scenario Outline: Localization.<Method_Name> - Positive Scenario: Clearing event listeners
         When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
-        And I clear '<Clear_Event_Name>' listeners
+        And 1st party stops listening to the event '<Clear_Event_Name>'
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
         And 'Firebolt' platform does not trigger event for '<Event_Validation_Key>'

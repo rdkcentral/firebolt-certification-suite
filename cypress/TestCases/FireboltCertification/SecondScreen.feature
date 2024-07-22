@@ -37,7 +37,7 @@ Feature: Secondscreen
    @Secondscreen @coreSDK @regression @sdk @requiresPlatformImplementation
    Scenario: Secondscreen.onFriendlyNameChanged - Positive Scenario: Validating event clearing listeners
       Given '3rd party app' registers for the 'secondscreen onFriendlyNameChanged' event using the 'Firebolt' API
-      And I clear 'secondscreen onFriendlyNameChanged event' listeners
+      And 1st party stops listening to the event 'secondscreen onFriendlyNameChanged event'
       And 1st party app invokes the 'Firebolt' API to 'set friendlyName to guest room'
       Then 'Firebolt' platform responds to '1st party app' for 'set friendlyName to guest room'
       And 'Firebolt' platform does not trigger event for 'onFriendlyNameChanged'
@@ -58,7 +58,7 @@ Feature: Secondscreen
    @Secondscreen @coreSDK @regression @sdk @notSupported @requiresPlatformImplementation
    Scenario Outline: Secondscreen.<Event_Name> - Positive Scenario: Validating event Clearing listeners
       When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
-      And I clear '<Clear_Event_Name>' listeners
+      And 1st party stops listening to the event '<Clear_Event_Name>'
       Then User triggers event with value as '<Event_Params>'
       Then 'Firebolt' platform does not trigger event for '<Event_Validation_Key>'
       Examples:
