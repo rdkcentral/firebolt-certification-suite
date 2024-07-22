@@ -619,7 +619,7 @@ Given(
       cy.then(() => {
         // Failing the test when fireboltCall object not there
         if (!fireboltCallObject) {
-          fireLog.assert(false, fireboltCallObjectErrorMessage);
+          fireLog.fail(fireboltCallObjectErrorMessage);
         } else {
           let setMethod =
             typeof fireboltCallObject.setMethod === CONSTANTS.TYPE_FUNCTION
@@ -717,7 +717,7 @@ Given(
         }
       });
     } else {
-      fireLog.assert(false, `${sdk} SDK not Supported`);
+      fireLog.fail(`${sdk} SDK not Supported`);
     }
   }
 );
