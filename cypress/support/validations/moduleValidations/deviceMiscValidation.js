@@ -41,7 +41,7 @@ export function deviceMiscValidation(method, validationTypeObject, apiOrEventObj
       for (const key in response) {
         cy.log(`Miscellaneous Validation for ${method}: Expected ${key} value to be boolean`).then(
           () => {
-            assert.isBoolean(response[key], 'Expected to be');
+            fireLog.isBoolean(response[key], 'Expected to be');
           }
         );
       }
