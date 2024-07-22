@@ -18,7 +18,7 @@ Feature: Discovery_Manage
             | Without entitlements | notify user has signed In without entitlements |
 
     @Discovery @manageSDK @sdk @transport
-    Scenario: Discovery.onSignOut event - Positive Scenario: Validating discovery onSignOut event
+    Scenario: Discovery.onSitgnOut event - Positive Scenario: Validating discovery onSignOut event
         When 1st party app registers for the 'discovery onSignOut' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'notify user has signed out'
         Then 'Firebolt' platform responds with 'signOut for discovery'

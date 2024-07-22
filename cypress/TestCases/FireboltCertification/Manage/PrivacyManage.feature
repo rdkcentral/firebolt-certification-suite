@@ -2,43 +2,73 @@ Feature: Privacy_Manage
 
    Background: Launch FCA for 'Privacy'
       Given the environment has been set up for 'Privacy' tests
-      And 3rd party 'certification' app is launched
 
    @Privacy @manageSDK @sdk @transport
    Scenario Outline: Privacy.<Method> - Positive Scenario: <Scenario>
-      When 1st party app registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
-      And 1st party app invokes the 'Firebolt' API to '<API_Set_Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<API_Set_Key>'
-      When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
-      And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
+      Given we test the 'PRIVACY_SETTINGS' getters and setters '<Method>' to '<Value>'
+      When '1st party app' registers for the 'Firebolt' event
+      And 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      When '1st party app' invokes the 'Firebolt' get API
+      Then 'Firebolt' platform responds to '1st party app' get API
+      And 'Firebolt' platform triggers '1st party app' event
 
       Examples:
-         | Scenario                               | Method                         | Event_Registration_Key                          | API_Set_Key                                          | API_Key                                     | Method_Validation_Key                             | Event_Validation_Key                                      |
-         | Enable allowResumePoints               | allowResumePoints              | privacy onAllowResumePointsChanged              | set privacy allow resumePoints as true               | get privacy allow resumePoints              | true for privacy allow resumePoints               | onAllowResumePointsChanged for privacy true               |
-         | Disable allowResumePoints              | allowResumePoints              | privacy onAllowResumePointsChanged              | set privacy allow resumePoints as false              | get privacy allow resumePoints              | false for privacy allow resumePoints              | onAllowResumePointsChanged for privacy false              |
-         | Enable allowUnentitledResumePoints     | allowUnentitledResumePoints    | privacy onAllowUnentitledResumePointsChanged    | set privacy allow unEntitledResumePoints as true     | get privacy allow unEntitledResumePoints    | true for privacy allow unEntitledResumePoints     | onAllowUnentitledResumePointsChanged for privacy true     |
-         | Disable allowUnentitledResumePoints    | allowUnentitledResumePoints    | privacy onAllowUnentitledResumePointsChanged    | set privacy allow unEntitledResumePoints as false    | get privacy allow unEntitledResumePoints    | false for privacy allow unEntitledResumePoints    | onAllowUnentitledResumePointsChanged for privacy false    |
-         | Enable allowWatchHistory               | allowWatchHistory              | privacy onAllowWatchHistoryChanged              | set privacy allow watchHistory as true               | get privacy allow watchHistory              | true for privacy allow watchHistory               | onAllowWatchHistoryChanged for privacy true               |
-         | Disable allowWatchHistory              | allowWatchHistory              | privacy onAllowWatchHistoryChanged              | set privacy allow watchHistory as false              | get privacy allow watchHistory              | false for privacy allow watchHistory              | onAllowWatchHistoryChanged for privacy false              |
-         | Enable allowProductAnalytics           | allowProductAnalytics          | privacy onAllowProductAnalyticsChanged          | set privacy allow productAnalytics as true           | get privacy allow productAnalytics          | true for privacy allow productAnalytics           | onAllowProductAnalyticsChanged for privacy true           |
-         | Disable allowProductAnalytics          | allowProductAnalytics          | privacy onAllowProductAnalyticsChanged          | set privacy allow productAnalytics as false          | get privacy allow productAnalytics          | false for privacy allow productAnalytics          | onAllowProductAnalyticsChanged for privacy false          |
-         | Enable allowPersonalization            | allowPersonalization           | privacy onAllowPersonalizationChanged           | set privacy allow personalization as true            | get privacy allow personalization           | true for privacy allow personalization            | onAllowPersonalizationChanged for privacy true            |
-         | Disable allowPersonalization           | allowPersonalization           | privacy onAllowPersonalizationChanged           | set privacy allow personalization as false           | get privacy allow personalization           | false for privacy allow personalization           | onAllowPersonalizationChanged for privacy false           |
-         | Enable allowUnentitledPersonalization  | allowUnentitledPersonalization | privacy onAllowUnentitledPersonalizationChanged | set privacy allow unEntitledpersonalization as true  | get privacy allow unEntitledpersonalization | true for privacy allow unEntitledpersonalization  | onAllowUnentitledPersonalizationChanged for privacy true  |
-         | Disable allowUnentitledPersonalization | allowUnentitledPersonalization | privacy onAllowUnentitledPersonalizationChanged | set privacy allow unEntitledpersonalization as false | get privacy allow unEntitledpersonalization | false for privacy allow unEntitledpersonalization | onAllowUnentitledPersonalizationChanged for privacy false |
-         | Enable allowRemoteDiagnostics          | allowRemoteDiagnostics         | privacy onAllowRemoteDiagnosticsChanged         | set privacy allow remoteDiagnostics as true          | get privacy allow remoteDiagnostics         | true for privacy allow remoteDiagnostics          | onAllowRemoteDiagnosticsChanged for privacy true          |
-         | Disable allowRemoteDiagnostics         | allowRemoteDiagnostics         | privacy onAllowRemoteDiagnosticsChanged         | set privacy allow remoteDiagnostics as false         | get privacy allow remoteDiagnostics         | false for privacy allow remoteDiagnostics         | onAllowRemoteDiagnosticsChanged for privacy false         |
-         | Enable allowPrimaryContentAdTargeting  | allowPrimaryContentAdTargeting | privacy onAllowPrimaryContentAdTargetingChanged | set privacy allow primaryContentAdTargeting as true  | get privacy allow primaryContentAdTargeting | true for privacy allow primaryContentAdTargeting  | onAllowPrimaryContentAdTargetingChanged for privacy true  |
-         | Disable allowPrimaryContentAdTargeting | allowPrimaryContentAdTargeting | privacy onAllowPrimaryContentAdTargetingChanged | set privacy allow primaryContentAdTargeting as false | get privacy allow primaryContentAdTargeting | false for privacy allow primaryContentAdTargeting | onAllowPrimaryContentAdTargetingChanged for privacy false |
-         | Enable allowPrimaryBrowseAdTargeting   | allowPrimaryBrowseAdTargeting  | privacy onAllowPrimaryBrowseAdTargetingChanged  | set privacy allow primaryBrowseAdTargeting as true   | get privacy allow primaryBrowseAdTargeting  | true for privacy allow primaryBrowseAdTargeting   | onAllowPrimaryBrowseAdTargetingChanged for privacy true   |
-         | Disable allowPrimaryBrowseAdTargeting  | allowPrimaryBrowseAdTargeting  | privacy onAllowPrimaryBrowseAdTargetingChanged  | set privacy allow primaryBrowseAdTargeting as false  | get privacy allow primaryBrowseAdTargeting  | false for privacy allow primaryBrowseAdTargeting  | onAllowPrimaryBrowseAdTargetingChanged for privacy false  |
-         | Enable allowAppContentAdTargeting      | allowAppContentAdTargeting     | privacy onAllowAppContentAdTargetingChanged     | set privacy allow appContentAdTargeting as true      | get privacy allow appContentAdTargeting     | true for privacy allow appContentAdTargeting      | onAllowAppContentAdTargetingChanged for privacy true      |
-         | Disable allowAppContentAdTargeting     | allowAppContentAdTargeting     | privacy onAllowAppContentAdTargetingChanged     | set privacy allow appContentAdTargeting as false     | get privacy allow appContentAdTargeting     | false for privacy allow appContentAdTargeting     | onAllowAppContentAdTargetingChanged for privacy false     |
-         | Enable allowACRCollection              | allowACRCollection             | privacy onAllowACRCollectionChanged             | set privacy allow ACRCollection as true              | get privacy allow ACRCollection             | true for privacy allow ACRCollection              | onAllowACRCollectionChanged for privacy true              |
-         | Disable allowACRCollection             | allowACRCollection             | privacy onAllowACRCollectionChanged             | set privacy allow ACRCollection as false             | get privacy allow ACRCollection             | false for privacy allow ACRCollection             | onAllowACRCollectionChanged for privacy false             |
-         | Enable allowCameraAnalytics            | allowCameraAnalytics           | privacy onAllowCameraAnalyticsChanged           | set privacy allow cameraAnalytics as true            | get privacy allow cameraAnalytics           | true for privacy allow cameraAnalytics            | onallowcameraanalyticschanged for privacy true            |
-         | Disable allowCameraAnalytics           | allowCameraAnalytics           | privacy onAllowCameraAnalyticsChanged           | set privacy allow cameraAnalytics as false           | get privacy allow cameraAnalytics           | false for privacy allow cameraAnalytics           | onallowcameraanalyticschanged for privacy false           |
+         | Scenario                                             | Method                         | Value |
+         | Enable allowResumePoints                             | allowResumePoints              | true  |
+         | Disable allowResumePoints                            | allowResumePoints              | false |
+         | Enable allowUnentitledResumePoints                   | allowUnentitledResumePoints    | true  |
+         | Disable allowRallowUnentitledResumePointsesumePoints | allowUnentitledResumePoints    | false |
+         | Enable allowWatchHistory                             | allowWatchHistory              | true  |
+         | Disable allowWatchHistory                            | allowWatchHistory              | false |
+         | Enable allowProductAnalytics                         | allowProductAnalytics          | true  |
+         | Disable allowProductAnalytics                        | allowProductAnalytics          | false |
+         | Enable allowPersonalization                          | allowPersonalization           | true  |
+         | Disable allowPersonalization                         | allowPersonalization           | false |
+         | Enable allowUnentitledPersonalization                | allowUnentitledPersonalization | true  |
+         | Disable allowUnentitledPersonalization               | allowUnentitledPersonalization | false |
+         | Enable allowRemoteDiagnostics                        | allowRemoteDiagnostics         | true  |
+         | Disable allowRemoteDiagnostics                       | allowRemoteDiagnostics         | false |
+         | Enable allowPrimaryContentAdTargeting                | allowPrimaryContentAdTargeting | true  |
+         | Disable allowPrimaryContentAdTargeting               | allowPrimaryContentAdTargeting | false |
+         | Enable allowPrimaryBrowseAdTargeting                 | allowPrimaryBrowseAdTargeting  | true  |
+         | Disable allowPrimaryBrowseAdTargeting                | allowPrimaryBrowseAdTargeting  | false |
+         | Enable allowAppContentAdTargeting                    | allowAppContentAdTargeting     | true  |
+         | Disable allowAppContentAdTargeting                   | allowAppContentAdTargeting     | false |
+         | Enable allowACRCollection                            | allowACRCollection             | true  |
+         | Disable allowACRCollection                           | allowACRCollection             | false |
+         | Enable allowCameraAnalytics                          | allowCameraAnalytics           | true  |
+         | Disable allowCameraAnalytics                         | allowCameraAnalytics           | false |
+
+   # get method validation?
+   @Privacy @manageSDK @sdk @transport
+   Scenario: Privacy.settings - Positive Scenario: Settings
+      And 1st party app invokes the 'Firebolt' API to set 'allowResumePoints' to 'true'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      And 1st party app invokes the 'Firebolt' API to set 'allowUnentitledResumePoints' to 'true'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      And 1st party app invokes the 'Firebolt' API to set 'allowWatchHistory' to 'true'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      And 1st party app invokes the 'Firebolt' API to set 'allowProductAnalytics' to 'true'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      And 1st party app invokes the 'Firebolt' API to set 'allowPersonalization' to 'true'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      And 1st party app invokes the 'Firebolt' API to set 'allowUnentitledPersonalization' to 'true'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      And 1st party app invokes the 'Firebolt' API to set 'allowRemoteDiagnostics' to 'true'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      And 1st party app invokes the 'Firebolt' API to set 'allowPrimaryContentAdTargeting' to 'true'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      And 1st party app invokes the 'Firebolt' API to set 'allowPrimaryBrowseAdTargeting' to 'true'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      And 1st party app invokes the 'Firebolt' API to set 'allowAppContentAdTargeting' to 'true'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      And 1st party app invokes the 'Firebolt' API to set 'allowACRCollection' to 'true'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      And 1st party app invokes the 'Firebolt' API to set 'allowCameraAnalytics' to 'true'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      When 1st party app invokes the 'Firebolt' API to 'get privacy settings'
+      Then 'Firebolt' platform responds to '1st party app' for 'expected privacy settings'
 
    @Privacy @manageSDK @sdk @transport
    Scenario: Privacy.settings - Positive Scenario: Settings
@@ -71,32 +101,33 @@ Feature: Privacy_Manage
 
    @Privacy @manageSDK @sdk @transport
    Scenario Outline: Privacy.<Method> - Negative Scenario: <Scenario> and expecting error
-      When 1st party app invokes the 'Firebolt' API to '<Error_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with '<Error_Object>'
+      Given we test the 'PRIVACY_SETTINGS' getters and setters '<Method>' to '<Value>'
+      When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
+      And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
       Examples:
-         | Scenario          | Method                         | Error_Key                                                              | Error_Object                                                      |
-         | Set Integer value | allowResumePoints              | set privacy allowResumePoints with invalid params integer              | invalid params integer for privacy allowResumePoints              |
-         | Set String value  | allowResumePoints              | set privacy allowResumePoints with invalid test params                 | invalid test params for privacy allowResumePoints                 |
-         | Set Integer value | allowUnentitledResumePoints    | set privacy allowUnentitledResumePoints with invalid params integer    | invalid params integer for privacy allowUnentitledResumePoints    |
-         | Set String value  | allowUnentitledResumePoints    | set privacy allowUnentitledResumePoints with invalid test params       | invalid test params for privacy allowUnentitledResumePoints       |
-         | Set Integer value | allowWatchHistory              | set privacy allowwatchhistory with invalid params integer              | invalid params integer for privacy allowwatchhistory              |
-         | Set String value  | allowWatchHistory              | set privacy allowwatchhistory with invalid test params                 | invalid test params for privacy allowwatchhistory                 |
-         | Set Integer value | allowProductAnalytics          | set privacy allowProductAnalytics with invalid params integer          | invalid params integer for privacy allowProductAnalytics          |
-         | Set String value  | allowProductAnalytics          | set privacy allowProductAnalytics with invalid test params             | invalid test params for privacy allowProductAnalytics             |
-         | Set Integer value | allowPersonalization           | set privacy allowPersonalization with invalid params integer           | invalid params integer for privacy allowPersonalization           |
-         | Set String value  | allowPersonalization           | set privacy allowPersonalization with invalid test params              | invalid test params for privacy allowPersonalization              |
-         | Set Integer value | allowUnentitledPersonalization | set privacy allowunentitledpersonalization with invalid params integer | invalid params integer for privacy allowunentitledpersonalization |
-         | Set String value  | allowUnentitledPersonalization | set privacy allowunentitledpersonalization with invalid test params    | invalid test params for privacy allowunentitledpersonalization    |
-         | Set Integer value | allowRemoteDiagnostics         | set privacy allowRemoteDiagnostics with invalid params integer         | invalid params integer for privacy allowRemoteDiagnostics         |
-         | Set String value  | allowRemoteDiagnostics         | set privacy allowRemoteDiagnostics with invalid test params            | invalid test params for privacy allowRemoteDiagnostics            |
-         | Set Integer value | allowPrimaryContentAdTargeting | set privacy allowPrimaryContentAdTargeting with invalid params integer | invalid params integer for privacy allowPrimaryContentAdTargeting |
-         | Set String value  | allowPrimaryContentAdTargeting | set privacy allowPrimaryContentAdTargeting with invalid test params    | invalid test params for privacy allowPrimaryContentAdTargeting    |
-         | Set Integer value | allowPrimaryBrowseAdTargeting  | set privacy allowPrimaryBrowseAdTargeting with invalid params integer  | invalid params integer for privacy allowPrimaryBrowseAdTargeting  |
-         | Set String value  | allowPrimaryBrowseAdTargeting  | set privacy allowPrimaryBrowseAdTargeting with invalid test params     | invalid test params for privacy allowPrimaryBrowseAdTargeting     |
-         | Set Integer value | allowAppContentAdTargeting     | set privacy allowAppContentAdTargeting with invalid params integer     | invalid params integer for privacy allowAppContentAdTargeting     |
-         | Set String value  | allowAppContentAdTargeting     | set privacy allowAppContentAdTargeting with invalid test params        | invalid test params for privacy allowAppContentAdTargeting        |
-         | Set Integer value | allowACRCollection             | set privacy allowACRCollection with invalid params integer             | invalid params integer for privacy allowACRCollection             |
-         | Set String value  | allowACRCollection             | set privacy allowACRCollection with invalid test params                | invalid test params for privacy allowACRCollection                |
-         | Set Integer value | allowCameraAnalytics           | set privacy allowCameraAnalytics with invalid params integer           | invalid params integer for privacy allowCameraAnalytics           |
-         | Set String value  | allowCameraAnalytics           | set privacy allowCameraAnalytics with invalid test params              | invalid test params for privacy allowCameraAnalytics              |
+         | Scenario          | Method                         | Value |
+         | Set Integer param | allowResumePoints              | 1     |
+         | Set String param  | allowResumePoints              | test  |
+         | Set Integer param | allowUnentitledResumePoints    | 1     |
+         | Set String param  | allowUnentitledResumePoints    | test  |
+         | Set Integer param | allowWatchHistory              | 1     |
+         | Set String param  | allowWatchHistory              | test  |
+         | Set Integer param | allowProductAnalytics          | 1     |
+         | Set String param  | allowProductAnalytics          | test  |
+         | Set Integer param | allowPersonalization           | 1     |
+         | Set String param  | allowPersonalization           | test  |
+         | Set Integer param | allowUnentitledPersonalization | 1     |
+         | Set String param  | allowUnentitledPersonalization | test  |
+         | Set Integer param | allowRemoteDiagnostics         | 1     |
+         | Set String param  | allowRemoteDiagnostics         | test  |
+         | Set Integer param | allowPrimaryContentAdTargeting | 1     |
+         | Set String param  | allowPrimaryContentAdTargeting | test  |
+         | Set Integer param | allowPrimaryBrowseAdTargeting  | 1     |
+         | Set String param  | allowPrimaryBrowseAdTargeting  | test  |
+         | Set Integer param | allowAppContentAdTargeting     | 1     |
+         | Set String param  | allowAppContentAdTargeting     | test  |
+         | Set Integer param | allowACRCollection             | 1     |
+         | Set String param  | allowACRCollection             | test  |
+         | Set Integer param | allowCameraAnalytics           | 1     |
+         | Set String param  | allowCameraAnalytics           | test  |

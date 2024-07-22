@@ -6,32 +6,34 @@ Feature: Advertising_Manage
 
    @Advertising @manageSDK @sdk @transport
    Scenario: Advertising.resetIdentifier - Positive Scenario: Reset Identifier
-      When 1st party app invokes the 'Firebolt' API to 'reset identifier for advertising'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for advertising resetIdentifier'
+      Given we test the 'ADVERTISING_RESET_IDENTIFIER' getters and setters
+      When '1st party app' invokes the 'Firebolt' get API
+      Then 'Firebolt' platform responds to '1st party app' get API
 
-   # Since the "refui" app validation is not designed, the event validation step is commented out.
    @Advertising @manageSDK @sdk @transport
    Scenario Outline: Advertising.skipRestriction - Positive Scenario: <Scenario>
-      When 1st party app registers for the 'advertising onSkipRestrictionChanged' event using the 'Firebolt' API
-      And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
-      When 1st party app invokes the 'Firebolt' API to 'get advertising skipRestriction'
-      Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
-      And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
+      Given we test the 'ADVERTISING_SKIP_RESTRICTION' getters and setters
+      When '1st party app' registers for the 'Firebolt' event
+      And 1st party app invokes the 'Firebolt' API to set 'skipRestriction' to '<Value>'
+      Then 'Firebolt' platform responds to '1st party app' set API
+      When '1st party app' invokes the 'Firebolt' get API
+      Then 'Firebolt' platform responds to '1st party app' get API
+      And 'Firebolt' platform triggers '1st party app' event
 
       Examples:
-         | Scenario                     | API_Key                             | Method_Validation_Key            | Event_Validation_Key                       |
-         | SkipRestriction adsAll       | set skipRestriction as adsAll       | adsAll for skipRestriction       | onSkipRestrictionChanged with adsAll       |
-         | SkipRestriction none         | set skipRestriction as none         | none for skipRestriction         | onSkipRestrictionChanged with none         |
-         | SkipRestriction adsUnwatched | set skipRestriction as adsUnwatched | adsUnwatched for skipRestriction | onSkipRestrictionChanged with adsUnwatched |
-         | SkipRestriction all          | set skipRestriction as all          | all for skipRestriction          | onSkipRestrictionChanged with all          |
-
+         | Scenario                     | Value        |
+         | SkipRestriction adsAll       | adsAll       |
+         | SkipRestriction none         | none         |
+         | SkipRestriction adsUnwatched | adsUnwatched |
+         | SkipRestriction all          | all          |
 
    @Advertising @manageSDK @sdk @transport
    Scenario: Advertising.setSkipRestriction - Negative Scenario: SkipRestriction expecting error
-      When 1st party app invokes the 'Firebolt' API to 'set skipRestriction with integer'
-      Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for skipRestriction'
+      Given we test the 'ADVERTISING_SKIP_RESTRICTION' getters and setters
+      When 1st party app invokes the 'Firebolt' API to set 'skipRestriction' to invalid '898756'
+      And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
+   # glue support is not there, do we need to modify this TC to v2 format?
    @Advertising @manageSDK @sdk @transport @notSupported
    Scenario: Advertising.resetIdentifier - Positive Scenario: Reset Identifier method
       When '3rd party app' invokes the 'Firebolt' API to 'get no coppa'

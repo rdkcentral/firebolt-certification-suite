@@ -2,37 +2,38 @@ Feature: VoiceGuidance_Manage
 
     Background: Launch FCA for 'VoiceGuidance'
         Given the environment has been set up for 'VoiceGuidance' tests
-        And 3rd party 'certification' app is launched
 
     @VoiceGuidance @manageSDK @sdk @transport
     Scenario Outline: Voiceguidance.<Method> - Positive Scenario: <Scenario>
-        When 1st party app registers for the '<Event_registration_Key>' event using the 'Firebolt' API
-        And 1st party app invokes the 'Firebolt' API to '<API_Set_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<API_Set_Key>'
-        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
-        And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
+        Given we test the 'VOICEGUIDANCE' getters and setters '<Method>' to '<Value>'
+        When '1st party app' registers for the 'Firebolt' event
+        And 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
+        Then 'Firebolt' platform responds to '1st party app' set API
+        When '1st party app' invokes the 'Firebolt' get API
+        Then 'Firebolt' platform responds to '1st party app' get API
+        And 'Firebolt' platform triggers '1st party app' event
 
         Examples:
-            | Scenario              | Method  | Event_registration_Key         | API_Set_Key                  | API_Key                   | Method_Validation_Key           | Event_Validation_Key                          |
-            | Disable voiceguidance | enabled | voiceguidance onenabledchanged | disable voiceguidance        | get voiceguidance enabled | false for voiceguidance enabled | onenabledchanged for voiceguidance with false |
-            | Enable voiceguidance  | enabled | voiceguidance onenabledchanged | enable voiceguidance         | get voiceguidance enabled | true for voiceguidance enabled  | onenabledchanged for voiceguidance with true  |
-            | Set speed-1           | speed   | voiceguidance onspeedchanged   | set voiceguidance speed to 1 | get voiceguidance speed   | 1 for voiceguidance speed       | onSpeedChanged for voiceguidance with 1       |
-            | Set speed-2           | speed   | voiceguidance onspeedchanged   | set voiceguidance speed to 2 | get voiceguidance speed   | 2 for voiceguidance speed       | onSpeedChanged for voiceguidance with 2       |
+            | Scenario              | Method  | Value |
+            | Disable voiceguidance | enabled | false |
+            | Enable voiceguidance  | enabled | true  |
+            | Set speed-1           | speed   | 1     |
+            | Set speed-2           | speed   | 2     |
 
     @VoiceGuidance @manageSDK @sdk @transport
     Scenario Outline: Voiceguidance.<Method> - Negative Scenario: <Scenario> and expecting error
-        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Error_Object>'
+        Given we test the 'VOICEGUIDANCE' getters and setters '<Method>' to '<Value>'
+        When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
+        And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
         Examples:
-            | Scenario          | Method  | API_Key                                     | Error_Object                                 |
-            | Set string param  | enabled | set voiceguidance enabled with test string  | invalid test sting for voiceguidance enabled |
-            | Set integer param | enabled | set voiceguidance enabled with integer      | invalid integer for voiceguidance enabled    |
-            | Set Enable-test   | enabled | enable voiceGuidance with test parameter    | invalid params for voiceGuidance setEnabled  |
-            | Set Enable-123    | enabled | enable voiceGuidance with integer parameter | invalid params for voiceGuidance setEnabled  |
-            | Set speed-test    | speed   | set speed as test                           | invalid params for voiceGuidance setSpeed    |
-            | Set speed-true    | speed   | set speed as true                           | invalid params for voiceGuidance setSpeed    |
-            | Set string param  | speed   | set voiceguidance speed to test string      | invalid test sting for voiceguidance speed   |
-            | Set boolean param | speed   | set voiceguidance speed to true             | invalid true for voiceguidance speed         |
-            | Set speed-12      | speed   | set voiceguidance speed to integer          | invalid integer for voiceguidance speed      |
+            | Scenario          | Method  | Value |
+            | Set string param  | enabled | test  |
+            | Set integer param | enabled | 1     |
+            | Set Enable-test   | enabled | test  |
+            | Set Enable-123    | enabled | 123   |
+            | Set speed-test    | speed   | test  |
+            | Set speed-true    | speed   | true  |
+            | Set string param  | speed   | test  |
+            | Set boolean param | speed   | true  |
+            | Set speed-12      | speed   | 12    |
