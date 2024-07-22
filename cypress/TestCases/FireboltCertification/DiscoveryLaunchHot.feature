@@ -119,7 +119,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayEntity Background with programType movie                  | launch app with playentity intent with programtype movie                 | onNavigateTo with playentity intent with programtype movie                 |
 
     @DiscoveryLaunch @coreSDK @sdk @transport
-    Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: Null intent and app in <state>
+    Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: Null intent and app in <State>
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state '<State>'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
