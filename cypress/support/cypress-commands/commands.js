@@ -719,17 +719,6 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
     requestMap.params.intent.data = data;
   }
 
-  // If the testType is IntegratedPlayer, send the discovery.launch params with providers = true, then certification app will register for IntegratedPlayer providers.
-  if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.INTEGRATEDPLAYER) {
-    data = {
-      query: JSON.stringify({
-        params: {
-          [CONSTANTS.PROVIDERS]: true,
-        },
-      }),
-    };
-    requestMap.params.intent.data = data;
-  }
 
   requestMap.deviceIdentifier = deviceIdentifier;
   // Stringify the query (The intent requires it be a string)
