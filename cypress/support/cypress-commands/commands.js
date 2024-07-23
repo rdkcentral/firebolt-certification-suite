@@ -719,7 +719,6 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
     requestMap.params.intent.data = data;
   }
 
-
   requestMap.deviceIdentifier = deviceIdentifier;
   // Stringify the query (The intent requires it be a string)
   data.query = JSON.stringify(data.query);
