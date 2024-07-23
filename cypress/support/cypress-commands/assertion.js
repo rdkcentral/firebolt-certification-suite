@@ -130,7 +130,7 @@ Cypress.Commands.add(
                 ? apiOrEventObject.eventListenerResponse.error
                 : apiOrEventObject.apiResponse.error;
 
-            assert.include(
+            fireLog.include(
               errorContentObject.errorCode,
               apiErrorResponse.code,
               CONSTANTS.ERROR_CODE
