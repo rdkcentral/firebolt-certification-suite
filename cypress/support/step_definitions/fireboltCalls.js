@@ -312,14 +312,25 @@ Given(
 );
 
 /**
- * @function User triggers event with value '{}}'
- * @description sending message to platform to make post call to set values.
- * @param {String} key - Name of event to be called.
+ * @function User triggers event with value as '(.+)'
+ * @description sending message to platform to make post call to set event values.
+ * @param {String} key - key name of the event data
  * @example
- * And User triggers event with value as ' DEVICE_ONHDCPCHANGED_EVENTS'
+ * And User triggers event with value as 'onNetworkChanged events with wifi connected'
  */
 Given(/User triggers event with value as '(.+)'/, (key) => {
-  fireLog.info(CONSTANTS.STEP_DEFINITION_NEEDS_TO_IMPLEMENT).then(() => {
-    throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+  cy.fireboltDataParser(key).then((parsedData) => {
+    const value = parsedData[0].params;
+    const requestMap = {
+      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.TRIGGEREVENT,
+      params: { value: value },
+    };
+    cy.log(CONSTANTS.SET_EVENT_REQUEST + JSON.stringify(requestMap)).then(() => {
+      cy.sendMessagetoPlatforms(requestMap).then((result) => {
+        if (result) {
+          console.log(CONSTANTS.SET_EVENT_SUCCESS);
+        }
+      });
+    });
   });
 });
