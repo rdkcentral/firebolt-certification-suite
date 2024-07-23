@@ -660,7 +660,10 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // Creating data for basic intent to be sent to the app on launch
   let appCategory, data;
-  if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
+  if (
+    appType.toLowerCase() === CONSTANTS.CERTIFICATION ||
+    appType.toLowerCase() === CONSTANTS.PLAYER
+  ) {
     appCategory =
       UTILS.getEnvVariable(CONSTANTS.APP_TYPE, false) !== undefined
         ? UTILS.getEnvVariable(CONSTANTS.APP_TYPE)
