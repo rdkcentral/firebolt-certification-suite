@@ -15,7 +15,7 @@
 * `Given 1st party app invokes the API to 'get device id'`
 
 
-## '(.+)' invokes the '(.+)' API to '(.+)
+## '(.+)' invokes the '(.+)' API to '(.+)'(?: on '(.+)' device)?
 
 ### Purpose: send message to 3rd party app to make api call.
 
@@ -87,54 +87,14 @@ Note: Key name value is an object and it can contains data as below
 ### Examples:
 * `And '1st party' stops listening to the event 'discovery onPolicyChanged event'`
 
+## User triggers event with value as '(.+)'
 
-## 1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'
-
-### Purpose: Sending a message to platform to set a value
-
-### Params:
-| Param | Definition |
-| --- | --- |
-| sdk | sdk name |
-| fireboltCallKey | key name passed to look for firebolt call object in fireboltCallData |
-| attribute | The attribute we are setting (ex. fontFamily) |
-| invalidValue | Determines whether expecting for an error or result |
-| value | The value used by the set method to set the value (ex. monospaced_sanserif) |
-
-### Examples:
-* `Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to 'true'`
-* `Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to invalid 'test'`
-* `Given '1st party app' invokes the 'Firebolt' API to set 'enable' to 'true'`
-
-## '(.+)' registers for the '(.*?)'(?: '(.*?)')? event
-
-### Purpose: Sending a message to platform or app to register a event
+### Purpose: sending message to platform to make post call to set event values.
 
 ### Params:
 | Param | Definition |
 | --- | --- |
-| appId |app identtifier |
-| sdk | sdk name |
-| fireboltCallKey | key name passed to look for firebolt call object in fireboltCallData |
+| key |  key name of the event data |
 
 ### Examples:
- * `And '1st party app' registers for the 'Firebolt' 'CLOSEDCAPTION_SETTINGS' event`
- * `And '3rd party app' registers for the 'Firebolt' 'CLOSEDCAPTION_SETTINGS' event`
- * `And '1st party app' registers for the 'Firebolt' event`
-
-## '(.+)' invokes the '(.+)' get API(?: '(.+)')
-
-### Purpose: Sending a message to platform or 3rd party app to get a value
-
-### Params:
-| Param | Definition |
-| --- | --- |
-| appId | app identifier. |
-| sdk | sdk name |
-| fireboltCallKey | key name passed to look for firebolt call object in fireboltCallData |
-
-### Examples:
-* `And '1st party app' invokes the 'Firebolt' get API 'CLOSEDCAPTION_SETTINGS'`
-* `And '3rd party app' invokes the 'Firebolt' get API 'CLOSEDCAPTION_SETTINGS'`
-* `And '3rd party app' invokes the 'Firebolt' get API`
-* `And 'test_app' invokes the 'Firebolt' get API 'CLOSEDCAPTION_SETTINGS'`
+* `And User triggers event with value as 'onNetworkChanged events with wifi connected'`
