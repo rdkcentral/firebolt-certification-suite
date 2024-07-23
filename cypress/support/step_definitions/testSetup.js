@@ -111,7 +111,7 @@ function destroyAppInstance(testType) {
             method: CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP,
           };
           cy.sendMessagetoPlatforms(requestMap).then(() => {
-            //Config modules needs override for validation of app unload
+            // Config modules needs override for validation of app unload
             cy.log('Platforms unload app execution complete');
           });
         } else {
