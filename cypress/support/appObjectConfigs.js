@@ -51,8 +51,10 @@ class eventObject {
   // Function to update the event response in event object.
   setEventResponseData(response) {
     if (
-      (response.eventSchemaResult && response.eventResponse != null) ||
-      response.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
+      (response && response.eventResponse && response.eventResponse[this.eventObjectId] != null) ||
+      (response &&
+        response.eventResponse != null &&
+        !response.eventResponse.hasOwnProperty(this.eventObjectId))
     ) {
       this.eventResponse = response.eventResponse;
       this.eventSchemaResult = response.eventSchemaResult;
