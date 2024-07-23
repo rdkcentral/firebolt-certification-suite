@@ -89,4 +89,50 @@ function setLifecycleState(parsedData) {
     throw new Error(CONSTANTS.SET_LIFECYCLE_STATE_MISSING);
   });
 }
-module.exports = { setResponse, setTestProvider, setLifecycleState };
+
+/**
+ * @module fcs
+ * @function fetchEventResponse
+ * @description Extracting a triggered event response from MAP, otherwise returning the parameter as-is.
+ * @param {Object} parsedParam - request message having event id to fetch the response.
+ * @example
+ * fetchEventResponse({method: 'fcs.fetchEventResponse', params: '2'})
+ **/
+function fetchEventResponse(parsedParam) {
+  let result;
+  const responseMap = Cypress.env(CONSTANTS.EVENT_RESPONSE_MAP);
+  if (responseMap && responseMap.has(parsedParam.params)) {
+    result = responseMap.get(parsedParam.params);
+    return result.listenerResponse;
+  } else {
+    return parsedParam;
+  }
+}
+
+/**
+ * @module fcs
+ * @function triggerEvent
+ * @description sending message to platform to make post call to set event values.
+ * @param {String} key - key name of the event data
+ * @example
+ * triggerEvent({method: 'fcs.triggerevent', params: {'value': {
+        "method": "device.onNetworkChanged",
+        "result": {
+            "state": "disconnected",
+            "type": "ethernet"
+        }
+    }}})
+ */
+function triggerEvent(key) {
+  fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
+    throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
+  });
+}
+
+module.exports = {
+  setResponse,
+  setTestProvider,
+  setLifecycleState,
+  fetchEventResponse,
+  triggerEvent,
+};

@@ -2,14 +2,14 @@
 Feature: Lifecycle
 
     @sdk @transport @regression
-    Scenario: Validate lifecycle.ready - Notify the platform that the app is ready
+    Scenario: Lifecycle R*4.1 Validate lifecycle.ready - Notify the platform that the app is ready
         Given the environment has been set up for 'lifeCycleApi' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'notify that the app is ready'
         Then 'Firebolt' platform responds with 'null for lifecycle ready'
 
     @sdk @transport @regression
-    Scenario: Validate 'lifecycle.ready' - expecting error
+    Scenario: Lifecycle R*4.1 Validate 'lifecycle.ready' - expecting error
         Given the environment has been set up for 'lifeCycleApi' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'notify that the app is ready'
@@ -20,14 +20,14 @@ Feature: Lifecycle
         Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
     @sdk @transport @regression
-    Scenario: Validate lifecycle.state - Get the current state
+    Scenario: Lifecycle R*4.6 Validate lifecycle.state - Get the current state
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
     @regression @sdk @transport
-    Scenario Outline: Validate lifecycle.close - '<Scenario>' expecting error
+    Scenario Outline: Lifecycle R*4.3 Validate lifecycle.close - '<Scenario>' expecting error
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
@@ -47,7 +47,7 @@ Feature: Lifecycle
             | Invalid params | close app with invalid parameter | invalid parameter error for lifecycle close |
 
     @regression @sdk @transport
-    Scenario Outline: Validate lifecycle.close - Positive Scenario - '<Scenario>'
+    Scenario Outline: Lifecycle R*4.3 Validate lifecycle.close - Positive Scenario - '<Scenario>'
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
@@ -61,7 +61,7 @@ Feature: Lifecycle
             | with done          | close app with done          |
 
     @sdk @transport @regression
-    Scenario: Validate 'lifecycle.finished' - expecting error
+    Scenario: Lifecycle R*4.5 Validate 'lifecycle.finished' - expecting error
         Given the environment has been set up for 'lifecycle' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'notify that the app is done unloading'

@@ -35,7 +35,7 @@ Feature: Secondscreen
       Then 'Firebolt' platform responds with 'guest room for secondscreen friendlyName'
       And 'Firebolt' platform triggers event 'onFriendlyNameChanged for secondscreen with guest room'
 
-   @regression @sdk
+   @regression @sdk @requiresPlatformImplementation
    Scenario: Secondscreen.onFriendlyNameChanged - Positive Scenario: Validating event clearing listeners
       Given '3rd party app' registers for the 'secondscreen onFriendlyNameChanged' event using the 'Firebolt' API
       And I clear 'secondscreen onFriendlyNameChanged event' listeners
@@ -43,20 +43,20 @@ Feature: Secondscreen
       Then 'Firebolt' platform responds to '1st party app' for 'set friendlyName to guest room'
       And 'Firebolt' platform does not trigger event for 'onFriendlyNameChanged'
 
-   @regression @sdk @notSupported
+   @regression @sdk @requiresPlatformImplementation @notSupported
    Scenario Outline: Secondscreen.<EventName> - Positive Scenario: Validating event name in response
       When '3rd party app' registers for the '<RegisteredEvent>' event using the 'Firebolt' API
       And User triggers event with value as '<EventParams>'
-      Then 'Firebolt' platform responds with '<Event_Validation_Key>'
+      Then 'Firebolt' platform triggers event '<Event_Validation_Key>'
 
       Examples:
-         | EventName       | RegisteredEvent              | Event_Validation_Key                        | EventParams           |
-         | onLaunchRequest | secondscreen onLaunchRequest | expected secondscreen onLaunchRequest event | onLaunchRequest event |
-         | onLaunchRequest | secondscreen onLaunchRequest | expected secondscreen onLaunchRequest event | onLaunchRequest event |
-         | onCloseRequest  | secondscreen onCloseRequest  | expected secondscreen onCloseRequest event  | onCloseRequest event  |
-         | onCloseRequest  | secondscreen onCloseRequest  | expected secondscreen onCloseRequest event  | onCloseRequest event  |
+         | EventName       | RegisteredEvent              | Event_Validation_Key               | EventParams           |
+         | onLaunchRequest | secondscreen onLaunchRequest | secondscreen onLaunchRequest event | onLaunchRequest event |
+         | onLaunchRequest | secondscreen onLaunchRequest | secondscreen onLaunchRequest event | onLaunchRequest event |
+         | onCloseRequest  | secondscreen onCloseRequest  | secondscreen onCloseRequest event  | onCloseRequest event  |
+         | onCloseRequest  | secondscreen onCloseRequest  | secondscreen onCloseRequest event  | onCloseRequest event  |
 
-   @regression @sdk @notSupported
+   @regression @sdk @requiresPlatformImplementation @notSupported
    Scenario Outline: Secondscreen.<Event_Name> - Positive Scenario: Validating event Clearing listeners
       When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
       And I clear '<Clear_Event_Name>' listeners

@@ -176,7 +176,7 @@ Feature: HdmiInput_Manage
 
    # Needs to confirm whether the event gets triggered. Event parameters are not added yet as they are not known.
    @sdk @notsupported
-   Scenario Outline: HdmiInput.onConnectionChanged - Positive Scenario: Validate Hdmi1 - hdmiinput.open
+   Scenario: HdmiInput.onConnectionChanged - Positive Scenario: Validate Hdmi1 - hdmiinput.open
       When 1st party app registers for the 'hdmiinput onConnectionChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to 'open HDMI1 port'
       Then 'Firebolt' platform responds to '1st party app' with 'null for hdmi input open'
@@ -185,7 +185,7 @@ Feature: HdmiInput_Manage
 
    # Needs to confirm whether the event gets triggered. Event parameters are not added yet as they are not known.
    @sdk @notsupported
-   Scenario Outline: HdmiInput.onConnectionChanged - Positive Scenario: Validate Hdmi1 - hdmiinput.close
+   Scenario: HdmiInput.onConnectionChanged - Positive Scenario: Validate Hdmi1 - hdmiinput.close
       When 1st party app registers for the 'hdmiinput onConnectionChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to 'close HDMI port'
       Then 'Firebolt' platform responds to '1st party app' with 'null for hdmi input close'

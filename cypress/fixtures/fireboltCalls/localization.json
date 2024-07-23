@@ -96,6 +96,9 @@
     "GET_LOCALIZATION_COUNTRYCODE": {
         "method": "localization.countryCode"
     },
+    "LOCALIZATION_COUNTRYCODE": {
+        "method": "localization.countryCode"
+    },
     "PH_FOR_LOCALIZATION_COUNTRYCODE": {
         "method": "localization.countryCode",  
         "validationJsonPath": "result",
@@ -121,7 +124,12 @@
     "ENUK_FOR_LOCALIZATION_LOCALE": {
         "method": "localization.locale",  
         "validationJsonPath": "result",
-        "content": "LOCALIZATION_LOCALE_UK"  
+        "content": "LOCALIZATION_LOCALE_UK"
+    },
+    "ESUK_FOR_LOCALIZATION_LOCALE": {
+        "method": "localization.locale",  
+        "validationJsonPath": "result",
+        "content": "LOCALIZATION_LOCALE_UK_ES"
     },
     "GET_LOCALIZATION_PREFERREDAUDIOLANGUAGES": {
         "method": "localization.preferredAudioLanguages"
@@ -190,6 +198,10 @@
         "method": "manage_localization.setLocale",
         "params": "LOCALIZATION_LOCALE_UK"
     },
+    "SET_LOCALE_TO_ESUK": {
+        "method": "manage_localization.setLocale",
+        "params": "LOCALIZATION_LOCALE_UK_ES"
+    },
     "SET_LANGUAGE_TO_ES": {
         "method": "manage_localization.setLanguage",
         "params": "LOCALIZATION_LANGUAGE_ES"
@@ -256,10 +268,25 @@
         "validationJsonPath": "eventResponse",
         "content": "LOCALIZATION_LOCALE_UK"
     },
+    "ONLOCALECHANGED_FOR_LOCALIZATION_WITH_ESUK": {
+        "event": "localization.onLocaleChanged",  
+        "validationJsonPath": "eventResponse",
+        "content": "LOCALIZATION_LOCALE_UK_ES"
+    },
     "ONCOUNTRYCODECHANGED_FOR_LOCALIZATION_WITH_PH": {
         "event": "localization.onCountryCodeChanged",
         "validationJsonPath": "eventResponse",
         "content": "LOCALIZATION_COUNTRYCODE_PH"  
+    },
+    "ONCOUNTRYCODECHANGED_FOR_LOCALIZATION_WITH_UK": {
+        "event": "localization.onCountryCodeChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "LOCALIZATION_COUNTRYCODE_UK"  
+    },
+    "UK_FOR_LOCALIZATION_COUNTRYCODE": {
+        "method": "localization.countryCode",  
+        "validationJsonPath": "result",
+        "content": "LOCALIZATION_COUNTRYCODE"  
     },
     "SET_POSTALCODE_TO_12345": {
         "method": "manage_localization.setPostalCode",
@@ -637,5 +664,11 @@
         "method": "localization.removeAdditionalInfo",
         "validationJsonPath": "result",
         "content": "NULL"  
+    },
+    "EXPECTED_LOCALIZATION_COUNTRYCODE_CHALLENGEERROR":{
+        "method": "localization.countryCode",
+        "validationJsonPath": "result",
+        "content": "CUSTOM_ERROR",
+        "expectingError": true
     }
 }

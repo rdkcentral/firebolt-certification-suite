@@ -3,7 +3,7 @@
 @Lifecycle @coreSDK
 Feature: Lifecycle_Configuration
     @notSupported
-    Scenario: Lifecycle 6.1 App launch time out
+    Scenario: Lifecycle R*6.1 App launch time out
         Given the environment has been set up for 'lifecycle' tests
         # And firebolt config 'Lifecycle.appReadyTimeout' is set to to 5 'seconds'
         And 3rd party 'certification' app is launched with 'initializing' state
@@ -11,7 +11,7 @@ Feature: Lifecycle_Configuration
         Then '3rd party app' will be in 'terminated' state
 
     @notSupported
-    Scenario: Lifecycle 6.2 appFinishedTimeout exceeded
+    Scenario: Lifecycle R*6.1 appFinishedTimeout exceeded
         Given the environment has been set up for 'lifecycle' tests
         # And firebolt config 'Lifecycle.appReadyTimeout' is set to to 5 'seconds'
         And 3rd party 'certification' app is launched with 'unloading' state
@@ -19,7 +19,7 @@ Feature: Lifecycle_Configuration
         Then '3rd party app' will be in 'terminated' state
 
     @notSupported
-    Scenario: Lifecycle 6.2 appFinishedTimeout data type
+    Scenario: Lifecycle R*6.2 appFinishedTimeout data type
         Given the environment has been set up for 'lifecycle' tests
         # And 1st party app invokes API methods using below datatable
         # Then 'Firebolt' platform responds with 'message and code for lifecycle appFinishedTimeout'
@@ -30,7 +30,7 @@ Feature: Lifecycle_Configuration
         #     | Lifecycle.appFinishedTimeout |        |
 
     @notSupported
-    Scenario: Lifecycle 6.1 appReadyTimeout data type
+    Scenario: Lifecycle R*6.1 appReadyTimeout data type
         Given the environment has been set up for 'lifecycle' tests
         # And 1st party app invokes API methods using below datatable
         # Then 'Firebolt' platform responds with 'message and code for lifecycle appReadyTimeout'

@@ -70,7 +70,9 @@ To execute the certification suite against any platform, the following setup mus
 | healthCheckRetries                  | number  | 8                                 | Health check retry count                                                                                                                                                                                            |
 | communicationMode                   | string  | 'SDK' or 'Transport'              | Set communicationMode as SDK/transport. Default mode is SDK                                                                                                                                                         |
 | performanceMetrics                  | boolean | true                              | Makes a call to platform to start/stop the recording of performance metrics if value is true                                                                                                                        |
+| pubSubUrl                           | string  | ws://127.0.0.1:8081               | Sets the the url to use for a PubSub server which will be used for 3rd party app communication.                                                                                                                     |
 
+| fcaAppList                  | array | ['default3rdPartyAppId']     | Holds the list of fca app identifiers |
 
 - Provide the specPattern mapping details. 
 Update the specHelperConfig.js with the specPattern mapping details.
@@ -370,5 +372,18 @@ Example Usage:
   logger.info('This is an informational message', 'moduleName');
   logger.debug('This is a debugging message');
   logger.error('This is an error message');
+```
 
-  ```
+## Using Simple PubSub
+
+If you want to use simplePubSub server as the means of communication for 3rd party app calls follow these steps:
+
+1. Clone SimplePubSub server.
+2. Setup SimplePubSub server (i.e. `npm install`) and start (i.e. `npm start`).
+3. Clone [firebolt-certification-app](https://github.com/rdkcentral/firebolt-certification-app). 
+4. In FCA hange the `host` in /webpack.dev.js to <YOUR_IP>.
+5. Setup firebolt-certification-app (FCA) (i.e. `npm install`) and start (i.e. `npm start`).
+6. Point your device to use your local instance of FCA (i.e. `http://<YOUR_IP>:8081`).
+7. When running FCS include env variables:
+    - deviceMac: `<DEVICE_UNDER_TEST>`
+    - pubSubUrl: `ws://<YOUR_IP>:8080`

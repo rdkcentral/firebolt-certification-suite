@@ -18,7 +18,6 @@
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS from '../cypress-support/src/utils';
-
 /**
  * @module assertion
  * @function validateErrorObject
@@ -128,7 +127,7 @@ Cypress.Commands.add(
             const apiErrorResponse =
               validationType == CONSTANTS.EVENT
                 ? apiOrEventObject.eventListenerResponse.error
-                : apiOrEventObject.response.error;
+                : apiOrEventObject.apiResponse.error;
 
             fireLog.include(
               errorContentObject.errorCode,
@@ -139,13 +138,13 @@ Cypress.Commands.add(
             const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
               apiErrorResponse.message.includes(errorMessage)
             );
-            fireLog.equal(checkErrorMessage, true, 'Error Message Validation: ');
+            fireLog.equal(checkErrorMessage, true, 'Error Message Validation:');
           });
         } else {
-          fireLog.assert(false, `Expected error content not found in ${errorContentFilePath}`);
+          fireLog.fail(`Expected error content not found in ${errorContentFilePath}`);
         }
       } catch (error) {
-        fireLog.assert(false, 'Failed to validate error: ' + error);
+        fireLog.fail(error.message);
       }
     }
   }
@@ -178,14 +177,7 @@ Cypress.Commands.add(
       cy.validateEvent(extractedApiObject, context, validationPath, expected, appId);
     } else {
       const apiResponseContent = eval(CONSTANTS.EXTRACTEDAPI_PATH + validationPath);
-      const pretext =
-        CONSTANTS.METHOD_CONTENT +
-        ' expected ' +
-        JSON.stringify(apiResponseContent) +
-        ' to be ' +
-        JSON.stringify(expected);
-      // Executing fireLog.deepEqual() after logging
-      fireLog.deepEqual(apiResponseContent, expected, pretext);
+      fireLog.deepEqual(apiResponseContent, expected, CONSTANTS.METHOD_CONTENT);
     }
   }
 );
@@ -631,15 +623,15 @@ Cypress.Commands.add(
     if (eventReceived) {
       try {
         eventReceived = JSON.parse(eventReceived);
-        cy.log('Event Response: ' + JSON.stringify(eventReceived.eventResponse));
+        fireLog.info('Event Response: ' + JSON.stringify(eventReceived.eventResponse));
       } catch (e) {
-        cy.log('Event Response: ' + eventReceived);
+        fireLog.info('Event Response: ' + eventReceived);
       }
     }
 
-    cy.log('Event Received Check : ' + eventReceivedCheck);
-    cy.log('Event Schema Check : ' + schemaCheck);
-    cy.log('Event Content Check : ' + contentCheck);
+    fireLog.info('Event Received Check : ' + eventReceivedCheck);
+    fireLog.info('Event Schema Check : ' + schemaCheck);
+    fireLog.info('Event Content Check : ' + contentCheck);
   }
 );
 
@@ -660,7 +652,7 @@ Cypress.Commands.add(
   (response, methodOrEventObject, eventName, eventExpected) => {
     const eventNameForLog = eventName.split('-')[0];
     if (!response) {
-      fireLog.assert(false, `Event response not received for ${eventNameForLog}`);
+      fireLog.fail(`Event response not received for ${eventNameForLog}`);
     }
     if (response.error) {
       fireLog.isNull(response.error, 'Expected event response.error to be null');
@@ -669,7 +661,7 @@ Cypress.Commands.add(
     if (eventExpected) {
       methodOrEventObject.setEventResponseData(response);
     } else {
-      fireLog.isNull(response[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
+      fireLog.isNull(response.eventResponse[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
     }
   }
 );
@@ -690,7 +682,8 @@ Cypress.Commands.add(
       return;
     }
     if (validationType == CONSTANTS.METHOD) {
-      const { response, expected, apiSchemaResult } = methodOrEventObject;
+      const { expected, apiSchemaResult } = methodOrEventObject;
+      const response = methodOrEventObject.apiResponse;
 
       cy.validationChecksForResponseAndSchemaResult(
         response,

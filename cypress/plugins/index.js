@@ -60,7 +60,10 @@ module.exports = async (on, config) => {
   config.reporterOptions.reportDir = `./reports/${config.env.jobId}`;
 
   // Get and dereference OpenRPC
-  const openRpcs = await getAndDereferenceOpenRpc(config.env.externalOpenRpcUrls);
+  const openRpcs = await getAndDereferenceOpenRpc(
+    config.env.externalOpenRpcUrls,
+    config.env.sdkVersion
+  );
   // Set env equal to strigified openRpcs due to circular references
   config.env.dereferenceOpenRPC = flatted.stringify(openRpcs);
 
@@ -298,7 +301,14 @@ module.exports = async (on, config) => {
             jsonReport = readDataFromFile(filePath + fileName);
           }
           const reportProperties = {};
+          let customReportData;
+          try {
+            customReportData = require('../fixtures/external/objects/customReportData.json');
+          } catch (error) {
+            customReportData = require('../fixtures/customReportData.json');
+          }
           reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
+          reportProperties.customReportData = customReportData;
           // Add the report to the reportObj
           if (reportType === CONSTANTS.CUCUMBER) {
             reportObj.cucumberReport = jsonReport;

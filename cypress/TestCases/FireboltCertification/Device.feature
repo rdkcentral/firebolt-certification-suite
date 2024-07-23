@@ -44,7 +44,7 @@ Feature: Device
             | Validate videoResolution  | videoResolution  | fetch videoResolution  | expected videoResolution  |
             | Validate audio            | audio            | fetch audio            | expected audio            |
 
-    @regression @sdk
+    @regression @sdk @requiresPlatformImplementation
     Scenario: Device.onNameChanged - Positive Scenario: Clearing event listeners
         When '3rd party app' registers for the 'device onNameChanged' event using the 'Firebolt' API
         And I clear 'device onNameChanged event' listeners
@@ -52,7 +52,7 @@ Feature: Device
         Then 'Firebolt' platform responds to '1st party app' for 'set device name to kitchen'
         And 'Firebolt' platform does not trigger event for 'onDeviceNameChanged'
 
-    @sdk @transport @notSupported
+    @sdk @transport @requiresPlatformImplementation @notSupported
     Scenario Outline: Device.network - Positive Scenario: <Scenario>
         When '3rd party app' registers for the 'device onNetworkChanged' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'fetch device network'
@@ -68,3 +68,4 @@ Feature: Device
             | Validate network_Ethernet_disconnected | device network as ethernet disconnected | onNetworkChanged with ethernet disconnected | onNetworkChanged events with ethernet disconnected |
             | Validate network_Hybrid_connected      | device network as hybrid connected      | onNetworkChanged with hybrid connected      | onNetworkChanged events with hybrid connected      |
             | Validate network_Hybrid_disconnected   | device network as hybrid disconnected   | onNetworkChanged with hybrid disconnected   | onNetworkChanged events with hybrid disconnected   |
+            
