@@ -28,6 +28,8 @@ const logger = require('../support/Logger')('localReportGenerator.js');
 const rename = util.promisify(fs.rename);
 const readdir = util.promisify(fs.readdir);
 const mkdir = util.promisify(fs.mkdir);
+const readFileAsync = util.promisify(fs.readFile);
+const writeFileAsync = util.promisify(fs.writeFile);
 
 /**
  * Generates local reports for Mochawesome and Cucumber based on the provided report data.
@@ -70,16 +72,28 @@ async function generateLocalReport(reportObj, jobId) {
   if (reportObj.cucumberReport && reportObj.cucumberReportFilePath) {
     // Move cucumber json to a separate directory and get the path
     const cucumberDir = await filterCucumberJson(reportObj.cucumberReportFilePath);
-
+    let customReportData;
+    try {
+      customReportData = require('../fixtures/external/objects/customReportData.json');
+    } catch (error) {
+      customReportData = require('../fixtures/customReportData.json');
+    }
     // Configure cucumber report options
     reportEnv.jsonDir = cucumberDir;
     reportEnv.reportPath = `./reports/${jobId}/cucumber-html-report`;
+    const featuresDir = `./reports/${jobId}/cucumber-html-report/features`;
+    if (customReportData.customFooter)
+      reportEnv.pageFooter = customReportData.customFooter.PageFooter;
 
     // Generate the cucumber report
     await cucumberReportGenerator.generate(reportEnv);
 
     // Remove tags from the generated cucumber report
     removeTagsFromCukeHtml(reportEnv.reportPath + '/index.html');
+    if (customReportData.customFooter)
+      await processFeaturesFiles(featuresDir, customReportData.customFooter, 'customFooter');
+    if (customReportData.customMetadata)
+      await processFeaturesFiles(featuresDir, customReportData.customMetadata, 'customMetadata');
 
     logger.info(
       `A local report has been generated and can be accessed at ./reports/${jobId}/cucumber-html-report/index.html`,
@@ -163,6 +177,55 @@ function removeTagsFromCukeHtml(htmlReportPath) {
   } else {
     logger.error(`Table with id "features-table" not found in the HTML.`, `removeTagsFromCukeHtml`);
   }
+}
+
+async function updateCustomData(filePath, newCustomData, flag) {
+  const data = await readFileAsync(filePath, 'utf8');
+  let updatedData;
+  if (flag.includes('customFooter')) {
+    const regex = /<div id="pagefooter">.*?<\/div>/s;
+    updatedData = data.replace(regex, newCustomData);
+  } else if (flag.includes('customMetadata')) {
+    let regex = /<h2>Metadata<\/h2>/;
+
+    // Replace the found pattern with the new header content
+    updatedData = data.replace(regex, '<h2>Setup & Metadata</h2>');
+    regex = /(<ul class="quick-list">)([\s\S]*?)(<\/ul>)/;
+    // Prepare the "Setup" section and HTML content from newCustomData
+    const setupContent = `<li><span class="meta-data-title">Setup</span><ul class="prereq-list">`;
+    const metadataContent = Object.values(newCustomData).join('');
+    const finalContent = setupContent + metadataContent + '</ul></li>';
+
+    updatedData = data.replace(regex, `$1$2\n${finalContent}$3`);
+  }
+  await writeFileAsync(filePath, updatedData, 'utf8');
+}
+
+// Process each footer in html files
+async function processFeaturesFiles(reportDir, customData, customFlag) {
+  try {
+    const files = await readdir(reportDir);
+
+    for (const file of files) {
+      const data = await getCustomData(file, customData);
+      if (data) {
+        const filePath = path.join(reportDir, file);
+        await updateCustomData(filePath, data, customFlag);
+      }
+    }
+  } catch (err) {
+    console.error('Error reading report directory:', err);
+  }
+}
+
+// Function to get the custom footer based on filename
+async function getCustomData(fileName, customData) {
+  for (const key in customData) {
+    if (fileName.includes(`${key}.html`)) {
+      return customData[key];
+    }
+  }
+  return null;
 }
 
 module.exports = { generateLocalReport };

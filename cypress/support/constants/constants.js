@@ -96,6 +96,7 @@ module.exports = {
   EMAIL: 'email',
   ENV_PLATFORM_SDK_VERSION: 'platformSdkVersion',
   ERROR: 'error',
+  ERROR_CODE: 'Error code',
   ERROR_CONTENT_JSON_PATH: 'objects/errorObjects/errorContent.json',
   ERROR_CONTENT_OBJECTS_PATH: 'cypress/fixtures/objects/errorObjects/errorContent.json',
   ERROR_CONTENT_VALIDATIONJSON: 'errorContentValidationJson',
