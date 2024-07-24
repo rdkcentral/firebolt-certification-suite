@@ -1,3 +1,10 @@
+# [1.0.0-dev.2](https://github.com/jbigel/firebolt-certification-suite/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2024-07-24)
+
+
+### Bug Fixes
+
+* adding personal access token ([#5](https://github.com/jbigel/firebolt-certification-suite/issues/5)) ([32b6d9e](https://github.com/jbigel/firebolt-certification-suite/commit/32b6d9ed401c25561766046ca0ec65408703e0fa))
+
 # 1.0.0-dev.1 (2024-07-19)
 
 
