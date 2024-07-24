@@ -15,7 +15,7 @@
 * `Given 1st party app invokes the API to 'get device id'`
 
 
-## '(.+)' invokes the '(.+)' API to '(.+)
+## '(.+)' invokes the '(.+)' API to '(.+)'(?: on '(.+)' device)?
 
 ### Purpose: send message to 3rd party app to make api call.
 
@@ -25,10 +25,20 @@
 | appId | 3rd party app id |
 | sdk | name of the sdk |
 | key | key name of the request data. |
+| deviceIdentifier | Contains environment variable name which is having device mac. |
 
 ### Examples:
 * `Given '3rd party app' invokes the 'Firebolt' API to 'get device id'`
 * `Given 'test.test.test' invokes the 'Firebolt' API to 'get device id'`
+* `Given 'secondary 3rd party app' invokes the 'Firebolt' API to 'get device id'`
+* `Given '3rd party app' invokes the 'Firebolt' API to 'get device id' on 'device1' device`
+   - This should launch the default 3rd party app on device1(this is same as default device) and then call the device.id api
+* `Given 'Secondary 3rd party app' invokes the 'Firebolt' API to 'get device id' on 'device2' device`
+  - This should launch the secondarty 3rd party app on device2 and then call the device.id api
+* `Given 'appId' invokes the 'Firebolt' API to 'get device id' on 'device2' device`
+  - This should launch the app with the appId specified on device2 and then call the device.id api
+*  `Given 'Secondary 3rd party app' invokes the 'Firebolt' API to 'get device id'`
+  - If device identifier is not present, there is no need for a launch. It will just need to invoke the api
 
 ## '(.+)' registers for the '(.+)' event using the '(.+)' API
 
@@ -77,54 +87,14 @@ Note: Key name value is an object and it can contains data as below
 ### Examples:
 * `And I clear 'clear accessibility.onClosedCaptionsSettingsChanged' listeners`
 
+## User triggers event with value as '(.+)'
 
-## 1st party app invokes the '(.+)' API (?:'(.+)' )?to set '(.+)' to( invalid)? '(.+)'
-
-### Purpose: Sending a message to platform to set a value
-
-### Params:
-| Param | Definition |
-| --- | --- |
-| sdk | sdk name |
-| fireboltCallKey | key name passed to look for firebolt call object in fireboltCallData |
-| attribute | The attribute we are setting (ex. fontFamily) |
-| invalidValue | Determines whether expecting for an error or result |
-| value | The value used by the set method to set the value (ex. monospaced_sanserif) |
-
-### Examples:
-* `Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to 'true'`
-* `Given '1st party app' invokes the 'Firebolt' API 'CLOSEDCAPTION_SETTINGS' to set 'enable' to invalid 'test'`
-* `Given '1st party app' invokes the 'Firebolt' API to set 'enable' to 'true'`
-
-## '(.+)' registers for the '(.*?)'(?: '(.*?)')? event
-
-### Purpose: Sending a message to platform or app to register a event
+### Purpose: sending message to platform to make post call to set event values.
 
 ### Params:
 | Param | Definition |
 | --- | --- |
-| appId |app identtifier |
-| sdk | sdk name |
-| fireboltCallKey | key name passed to look for firebolt call object in fireboltCallData |
+| key |  key name of the event data |
 
 ### Examples:
- * `And '1st party app' registers for the 'Firebolt' 'CLOSEDCAPTION_SETTINGS' event`
- * `And '3rd party app' registers for the 'Firebolt' 'CLOSEDCAPTION_SETTINGS' event`
- * `And '1st party app' registers for the 'Firebolt' event`
-
-## '(.+)' invokes the '(.+)' get API(?: '(.+)')
-
-### Purpose: Sending a message to platform or 3rd party app to get a value
-
-### Params:
-| Param | Definition |
-| --- | --- |
-| appId | app identifier. |
-| sdk | sdk name |
-| fireboltCallKey | key name passed to look for firebolt call object in fireboltCallData |
-
-### Examples:
-* `And '1st party app' invokes the 'Firebolt' get API 'CLOSEDCAPTION_SETTINGS'`
-* `And '3rd party app' invokes the 'Firebolt' get API 'CLOSEDCAPTION_SETTINGS'`
-* `And '3rd party app' invokes the 'Firebolt' get API`
-* `And 'test_app' invokes the 'Firebolt' get API 'CLOSEDCAPTION_SETTINGS'`
+* `And User triggers event with value as 'onNetworkChanged events with wifi connected'`

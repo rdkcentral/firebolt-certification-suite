@@ -19,6 +19,7 @@ const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS, { getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
+import { apiObject, eventObject } from '../appObjectConfigs';
 
 /**
  * @module commands
@@ -43,7 +44,7 @@ Cypress.Commands.add(
       fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
     if (!fireboltData) {
-      fireLog.assert(false, CONSTANTS.NO_DATA_FOR_THE_KEY + key);
+      fireLog.fail(CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
     return fireboltData;
   }
@@ -112,7 +113,7 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
       });
     });
   } else {
-    fireLog.assert(false, `${sdk} SDK not Supported`);
+    fireLog.fail(`${sdk} SDK not Supported`);
   }
 });
 
@@ -404,7 +405,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
         }
       });
     } else {
-      fireLog.assert(false, CONSTANTS.BEFORE_OPERATION_FORMAT);
+      fireLog.fail(CONSTANTS.BEFORE_OPERATION_FORMAT);
     }
   }
 });
@@ -419,7 +420,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
  */
 Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
   if (!beforeOperation) {
-    fireLog.assert(false, 'Before operation object is null/undefined - setResponse');
+    fireLog.fail('Before operation object is null/undefined - setResponse');
   }
   let firstParty;
   if (beforeOperation.hasOwnProperty('firstParty')) {
@@ -596,7 +597,7 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
       fireLog(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
       return true;
     } else {
-      fireLog.assert(false, eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
+      fireLog.fail(eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
     }
   });
 });
@@ -658,7 +659,7 @@ Cypress.Commands.add('censorData', (method, response) => {
  * cy.launchApp('firebolt', 'foo')
  * cy.launchApp('certification', 'foo')
  */
-Cypress.Commands.add('launchApp', (appType, appCallSign) => {
+Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   // use the firebolt command Discovery.launch to launch the app. If app id given, use the app id
   // else get the default app id from environment variable.
 
@@ -728,12 +729,13 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
     requestMap.params.intent.data = data;
   }
 
+  requestMap.deviceIdentifier = deviceIdentifier;
   // Stringify the query (The intent requires it be a string)
   data.query = JSON.stringify(data.query);
   Cypress.env(CONSTANTS.CURRENT_APP_ID, appId);
 
-  const requestTopic = UTILS.getTopic(appId);
-  const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+  const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
+  const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
 
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
     fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
@@ -752,11 +754,8 @@ Cypress.Commands.add('launchApp', (appType, appCallSign) => {
           // if not received, throwing error with corresponding topic and retry count.
           if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
             throw Error(
-              'FCA not launched as 3rd party app or not subscribed to ' +
-                requestTopic +
-                '. Unable to get healthCheck response from FCA in ' +
-                UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
-                ' retries'
+              `Unable to get healthCheck response from App in ${getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES)} retries. Failed to launch the 3rd party app on ${deviceIdentifier | getEnvVariable(CONSTANTS.DEVICE_MAC)} or not subscribed to
+            ${requestTopic} topic.`
             );
           }
           healthCheckResponse = JSON.parse(healthCheckResponse);
@@ -839,6 +838,318 @@ Cypress.Commands.add('clearCache', () => {
   cy.clearLocalStorage();
   cy.clearAllSessionStorage();
   cy.reload(true);
+});
+
+/**
+ * @module commands
+ * @function sendMessageToPlatformOrApp
+ * @description Function to send message to Platform or App to make an Api call.
+ * @param {String} target - 'App' or 'Platform'
+ * @param {String} requestData - Contains the data which required to create request message to make a call.
+ * @param {String} task - Task/Handler name that decides whether make a api call or event call.
+ * @example
+ * cy.sendMessageToPlatformOrApp('App', {method: 'account.id', params: {}, context: {}, action: 'core', expected: 'result', appId: 'test.test'}
+ * cy.sendMessageToPlatformOrApp('Platform', {method: 'account.id', params: {}, context: {}, action: 'core', expected: 'result'}
+ * cy.sendMessageToPlatformOrApp('App', {method: 'accessibility.onClosedCaptionsSettingsChanged', params: {}, context: {}, action: 'core', expected: 'result', appId: 'test.test', 'registerEvent'}
+ */
+Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) => {
+  const { method, params, context, action, expected, appId } = requestData;
+  const deviceIdentifier = requestData.deviceIdentifier;
+  task = task ? task : CONSTANTS.TASK.CALLMETHOD;
+  let isNotSupportedApi = false;
+
+  if (UTILS.isScenarioExempted(method, params)) {
+    isNotSupportedApi = true;
+    Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
+  }
+
+  cy.then(() => {
+    if (target === CONSTANTS.APP) {
+      const additionalParams = {
+        communicationMode: UTILS.getCommunicationMode(),
+        action: action,
+        isNotSupportedApi: isNotSupportedApi,
+      };
+      const methodKey = task == CONSTANTS.TASK.REGISTEREVENT ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+      const paramKey = task == CONSTANTS.TASK.REGISTEREVENT ? 'params' : 'methodParams';
+
+      const requestParams = { [methodKey]: method, [paramKey]: params };
+
+      // Creating intent message using above details to send it to 3rd party app.
+      const intentMessage = UTILS.createIntentMessage(task, requestParams, additionalParams);
+
+      // Adding additional details to created intent if any platform specific data is present in configModule.
+      cy.runIntentAddon(task, intentMessage).then((parsedIntent) => {
+        const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
+        const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
+        cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent);
+      });
+    } else if (target === CONSTANTS.PLATFORM) {
+      const requestMap = {
+        method: method,
+        params: params,
+        action: action,
+        task: task,
+      };
+      // Assigning event_param env if param has empty object
+      if (task == CONSTANTS.TASK.REGISTEREVENT && Object.keys(requestMap.params).length === 0) {
+        // To Do :debug event_param issue by passing isrequired as false for getEnvVariable,need to debug further
+        requestMap.params = UTILS.getEnvVariable(CONSTANTS.EVENT_PARAM, false);
+      }
+
+      cy.sendMessagetoPlatforms(requestMap);
+    } else {
+      fireLog.assert(false, `Invalid ${target} target, it should be either app or platfrom`);
+    }
+  }).then((response) => {
+    if (response === CONSTANTS.NO_RESPONSE) {
+      assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+    }
+
+    if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
+      fireLog.info(
+        `${method} response will be retrieved in subsequent steps and validated when the rpc-only methods are invoked. Proceeding to the next step.`
+      );
+      return;
+    }
+    if (
+      (response && typeof response == CONSTANTS.TYPE_OBJECT) ||
+      (typeof response == CONSTANTS.TYPE_STRING &&
+        (JSON.parse(response).hasOwnProperty(CONSTANTS.RESULT) ||
+          JSON.parse(response).hasOwnProperty(CONSTANTS.ERROR)))
+    ) {
+      response = typeof response === CONSTANTS.TYPE_STRING ? JSON.parse(response) : response;
+
+      if (
+        response &&
+        response.error &&
+        response.error.message &&
+        CONSTANTS.ERROR_LIST.includes(response.error.message)
+      ) {
+        if (UTILS.getEnvVariable(CONSTANTS.CERTIFICATION) == true) {
+          fireLog.assert(false, `${target} does not support method: ${method}`);
+        } else {
+          fireLog.info(`NotSupported: ${target} does not support method: ${method}`).then(() => {
+            throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+          });
+        }
+      }
+
+      if (task == CONSTANTS.TASK.REGISTEREVENT) {
+        if (response && response.result && response.result.hasOwnProperty(CONSTANTS.LISTENING)) {
+          const eventResponse = {
+            eventListenerId: response.result.event + '-' + response.id,
+            eventListenerResponse: response.result,
+          };
+          response.result = eventResponse;
+        }
+        if (response && response.error && response.error.message) {
+          fireLog.assert(
+            false,
+            `Event registration failed for event ${method} with error message: ${response.error.message} `
+          );
+        }
+      }
+
+      cy.updateResponseForFCS(method, params, response).then((updatedResponse) => {
+        // Create a deep copy to avoid reference mutation
+        const dataToBeCensored = _.cloneDeep(response);
+
+        // Call the 'censorData' command to hide sensitive data
+        cy.censorData(method, dataToBeCensored).then((maskedResult) => {
+          const appLog = target === CONSTANTS.PLATFORM ? 'Firebolt platform' : `app: ${appId}`;
+          fireLog.info(`Response from ${appLog}: ${JSON.stringify(maskedResult)}`);
+        });
+        // Creating object with event name, params, and response etc and storing it in a global list for further validation.
+        const apiOrEventAppObject =
+          task === CONSTANTS.TASK.REGISTEREVENT
+            ? new eventObject(method, params, context, updatedResponse, appId, expected)
+            : new apiObject(method, params, context, updatedResponse, expected, appId);
+
+        const globalList =
+          task === CONSTANTS.TASK.REGISTEREVENT
+            ? CONSTANTS.GLOBAL_EVENT_OBJECT_LIST
+            : CONSTANTS.GLOBAL_API_OBJECT_LIST;
+        UTILS.getEnvVariable(globalList).push(apiOrEventAppObject);
+      });
+    } else {
+      fireLog.info(
+        `${target} returned response in invalid format, which could lead to failures in validations. Response must be in JSON RPC format - ${response}`
+      );
+    }
+  });
+});
+
+/**
+ * @module commands
+ * @function sendMessageToPlatformOrApp
+ * @description Function to send message to Platform or App to make an Api call.
+ * @param {String} validationType - Determines whether method or event validation is being performed. Ex: 'method' or 'event'
+ * @param {String} requestData - Contains the data which required to do content validation for the specified method.
+ * @example
+ * cy.sendMessageToPlatformOrApp('method', {method: 'account.id', context: {}, contentObject: {}, expectingError: false, appId: 'test.test'}
+ * cy.sendMessageToPlatformOrApp('event', {method: 'accessibility.onClosedCaptionsSettingsChanged', context: {}, contentObject: {}, expectingError: false, appId: 'test.test', eventExpected: 'triggers'}
+ */
+Cypress.Commands.add('methodOrEventResponseValidation', (validationType, requestData) => {
+  const { method, context, contentObject, expectingError, appId, eventExpected } = requestData;
+  let validationJsonPath = requestData.validationJsonPath;
+
+  // Extracting the api or event object from the global list.
+  const methodOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
+    method,
+    context,
+    appId,
+    validationType
+  );
+  const param = methodOrEventObject.params;
+
+  cy.validateResponseErrorAndSchemaResult(methodOrEventObject, validationType).then(() => {
+    // If passed method is exception method or expecting a error in response, doing error content validation.
+    if (UTILS.isScenarioExempted(method, param) || expectingError) {
+      // If not expecting for an error and it's a exception method, storing "exceptionErrorObject" to errorContent variable to fetch the error content object based on the exception type.
+      const errorContent =
+        expectingError === true ? contentObject : CONSTANTS.EXCEPTION_ERROR_OBJECT;
+      cy.validateErrorObject(method, errorContent, validationType, context, appId, param);
+    } else {
+      cy.then(() => {
+        if (validationType == CONSTANTS.EVENT) {
+          const eventName = methodOrEventObject.eventObjectId;
+          let eventResponse;
+          if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
+            const requestMap = {
+              method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCH_EVENT_RESPONSE,
+              params: eventName,
+            };
+            eventResponse = cy.sendMessagetoPlatforms(requestMap);
+          } else {
+            const params = { event: eventName };
+            // Generating an intent message using the provided information to send it to a third-party app
+            const intentMessage = UTILS.createIntentMessage(
+              CONSTANTS.TASK.GETEVENTRESPONSE,
+              params
+            );
+            const requestTopic = UTILS.getTopic(appId);
+            const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+            eventResponse = cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage);
+          }
+          eventResponse.then((response) => {
+            response = typeof response === CONSTANTS.TYPE_STRING ? JSON.parse(response) : response;
+            if (
+              response &&
+              response.result &&
+              response.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
+            ) {
+              response.result = response.result.eventResponse;
+            }
+            cy.updateResponseForFCS(method, null, response, true).then((updatedResponse) => {
+              cy.saveEventResponse(
+                updatedResponse,
+                methodOrEventObject,
+                eventName,
+                eventExpected === 'triggers' ? true : false
+              );
+            });
+          });
+        }
+      }).then(() => {
+        try {
+          if (contentObject && contentObject.data) {
+            contentObject.data.forEach((object) => {
+              if (object.validations) {
+                const scenario = object.type;
+                const methodOrEventResponse =
+                  validationType == CONSTANTS.EVENT
+                    ? methodOrEventObject
+                    : validationType == CONSTANTS.METHOD
+                      ? methodOrEventObject.apiResponse
+                      : null;
+
+                // Looping through validationJsonPath to find the valid path for validation.
+                if (validationJsonPath && Array.isArray(validationJsonPath)) {
+                  const validationPath = validationJsonPath.find((path) => {
+                    if (
+                      path
+                        .split('.')
+                        .reduce((acc, part) => acc && acc[part], methodOrEventResponse) !==
+                      undefined
+                    ) {
+                      return path;
+                    }
+                  });
+                  validationPath
+                    ? (validationJsonPath = validationPath)
+                    : fireLog.assert(
+                        false,
+                        `Could not find the valid validation path from the validationJsonPath list - ${JSON.stringify(validationJsonPath)}`
+                      );
+                }
+                switch (scenario) {
+                  case CONSTANTS.REGEX:
+                    cy.regExValidation(
+                      method,
+                      object.validations[0].type,
+                      validationJsonPath,
+                      methodOrEventResponse
+                    );
+                    break;
+                  case CONSTANTS.MISC:
+                    cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
+                    break;
+                  case CONSTANTS.DECODE:
+                    const decodeType = object.specialCase;
+                    const responseForDecodeValidation =
+                      validationType == CONSTANTS.EVENT
+                        ? methodOrEventResponse.eventResponse
+                        : validationType == CONSTANTS.METHOD
+                          ? methodOrEventResponse.result
+                          : null;
+
+                    cy.decodeValidation(
+                      method,
+                      decodeType,
+                      responseForDecodeValidation,
+                      object.validations[0],
+                      null
+                    );
+                    break;
+                  case CONSTANTS.FIXTURE:
+                    cy.validateContent(
+                      method,
+                      context,
+                      validationJsonPath,
+                      object.validations[0].type,
+                      validationType,
+                      appId
+                    );
+                    break;
+                  case CONSTANTS.CUSTOM:
+                    cy.customValidation(object, methodOrEventObject);
+                    break;
+                  case CONSTANTS.UNDEFINED:
+                    cy.undefinedValidation(object, methodOrEventObject, validationType);
+                    break;
+                  default:
+                    assert(false, 'Unsupported validation type');
+                    break;
+                }
+              }
+            });
+          } else {
+            cy.validateContent(
+              method,
+              context,
+              validationJsonPath,
+              contentObject,
+              validationType,
+              appId
+            );
+          }
+        } catch (error) {
+          assert(false, `Unable to validate the response: ${error}`);
+        }
+      });
+    }
+  });
 });
 
 /**
