@@ -514,7 +514,7 @@ Cypress.Commands.add('setAppIdFromAppType', (appType) => {
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appType === CONSTANTS.FIRST_PARTY_APP
           ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
-          : appType;
+          : UTILS.checkForSecondaryAppId(appType);
     resolve(appId);
   });
 });
