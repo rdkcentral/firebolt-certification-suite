@@ -56,11 +56,13 @@ To execute Usergrant test cases, additional implementation in the configuration 
 
 2. **Framework registers** 
    This glue informs the platform to use a test provider for simulating user inputs. It registers providers like 'pinChallenge' or 'Ackchallenge'. The `setTestProvider` function, which should be implemented in the configModule, sends the necessary messages to the platform to enable the simulation.
-     **Examples:**
+   
+      **Example:**
      - `Framework registers 'pinChallenge' test provider`
 
 3. **User sets response**
-   Making a call to set the value in 1st party app or 3rd party app. For more details, refer to the [User set response](https://github.com/rdkcentral/firebolt-certification-suite/blob/dev/cypress/support/step_definitions/providerCalls.md#user-set-response-for-)
+   Making a call to set the value in 1st party app or 3rd party app. For more details, refer to the [User set response.](https://github.com/rdkcentral/firebolt-certification-suite/blob/dev/cypress/support/step_definitions/providerCalls.md#user-set-response-for-)
+
      **Examples:**
      - `User sets response for 'pinChallenge correct pin'`
      - `User sets response for 'acknowledge granted'`
