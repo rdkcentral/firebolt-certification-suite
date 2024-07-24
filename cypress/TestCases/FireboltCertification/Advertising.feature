@@ -128,17 +128,17 @@ Feature: Advertising
    @Advertising @coreSDK @sdk @transport
    Scenario Outline: Advertising.advertisingId - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds with 'invalid parameter for advertising advertisingId'
+      Then 'Firebolt' platform responds with '<Method_Validation_Key>'
 
       Examples:
-         | Scenario                         | API_Key                                     |
-         | Invalid advertisingId type value | get advertisingId with invalid type         |
-         | Invalid advertisingId ID value   | get advertisingId with invalid ID           |
-         | Invalid advertisingId scope type | get advertisingId with invalid scope type   |
-         | Without scope type and id        | get advertisingId without scope type and id |
-         | Without scope id                 | get advertisingId without scope id          |
-         | Without scope type               | get advertisingId without scope type        |
-         | Invalid advertisingId scope      | get advertisingId with invalid scope        |
+         | Scenario                         | API_Key                                     | Method_Validation_Key                                  |
+         | Invalid advertisingId type value | get advertisingId with invalid type         | invalid parameter for advertising advertisingId        |
+         | Invalid advertisingId ID value   | get advertisingId with invalid ID           | invalid parameter for advertising advertisingId        |
+         | Invalid advertisingId scope type | get advertisingId with invalid scope type   | invalid parameter for advertising advertisingId        |
+         | Without scope type and id        | get advertisingId without scope type and id | required property error for advertising advertisingid  |
+         | Without scope id                 | get advertisingId without scope id          | required property error for advertising advertisingid  |
+         | Without scope type               | get advertisingId without scope type        | required property error for advertising advertisingid  |
+         | Invalid advertisingId scope      | get advertisingId with invalid scope        | required property error for advertising advertisingid  |
 
    @Advertising @coreSDK @sdk @transport @requiresPlatformImplementation
    Scenario: Advertising.onPolicyChanged - Positive Scenario: Clearing event listeners

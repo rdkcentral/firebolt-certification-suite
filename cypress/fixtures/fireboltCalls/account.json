@@ -64,7 +64,7 @@
   "REQUIRED_PROPERTY_ERROR_FOR_ACCOUNT_SESSION": {
     "method": "account.session",
     "validationJsonPath": "result",
-    "content": "INVALID_RANGE",
+    "content": "MISSING_PROPERTY",
     "expectingError": true
   },
   "SET_ACCOUNT_SESSION_WITH_INVALID_EXPIRESIN": {
