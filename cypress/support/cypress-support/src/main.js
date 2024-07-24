@@ -62,7 +62,7 @@ export default function (module) {
         CONSTANTS.TOPIC_FBINTERACTIONS
       );
       appTransport.subscribe(topic, UTILS.interactionResults);
-      if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS) == true) {
+      if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS, false) == true) {
         cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
           if (response) {
             Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
