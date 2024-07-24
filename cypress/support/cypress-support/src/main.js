@@ -55,14 +55,13 @@ export default function (module) {
       } else {
         cy.log('Unable to establish a pub/sub connection.');
       }
+      const topic = UTILS.getTopic(
+        UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
+        CONSTANTS.SUBSCRIBE,
+        CONSTANTS.TOPIC_FBINTERACTIONS
+      );
+      appTransport.subscribe(topic, UTILS.interactionResults);
       if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS) == true) {
-        const topic = UTILS.getTopic(
-          UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
-          CONSTANTS.SUBSCRIBE,
-          '_fbinteractions'
-        );
-        console.log('line 81--------');
-        appTransport.subscribe(topic, UTILS.interactionResults);
         cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
           if (response) {
             Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
@@ -73,7 +72,10 @@ export default function (module) {
       }
     });
 
-    Cypress.env('interactionLogs', []);
+    Cypress.env(CONSTANTS.FB_INTERACTIONLOGS, []);
+    // const interactionLogsMap = new Map();
+    // Cypress.env(CONSTANTS.FB_INTERACTIONLOGS, interactionLogsMap);
+
     // Create an instance of global queue
     const messageQueue = new Queue();
     Cypress.env(CONSTANTS.MESSAGE_QUEUE, messageQueue);

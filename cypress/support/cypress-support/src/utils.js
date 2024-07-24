@@ -581,11 +581,11 @@ function subscribeResults(data, metaData) {
   getEnvVariable(CONSTANTS.MESSAGE_QUEUE).enqueue(queueInput);
 }
 
-function interactionResults(data) {
-  // data = JSON.parse(data);
-  console.log("data line 586---------------------:",data);
-  getEnvVariable('interactionLogs').push(JSON.parse(data));
-  console.log("line 588---------------:",getEnvVariable('interactionLogs'));
+function interactionResults(interactionLog) {
+  if (interactionLog && interactionLog != '') {
+    interactionLog = JSON.parse(interactionLog);
+    getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).push(interactionLog);
+  }
 }
 
 /**

@@ -538,6 +538,15 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
+  } else if (
+    beforeOperation.hasOwnProperty(CONSTANTS.INTERACTIONS_METRICS) &&
+    beforeOperation.interactionsMetrics === true
+  ) {
+    cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
+      if (response) {
+        Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
+      }
+    });
   }
 });
 
