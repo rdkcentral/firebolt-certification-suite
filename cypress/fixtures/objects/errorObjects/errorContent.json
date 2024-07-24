@@ -25,8 +25,25 @@
       "data did not match any variant of untagged enum NavigationIntent ",
       "Invalid Value for set speed",
       "data did not match",
-      "is not one of"
+      "is not one of",
+      "is not of type",
+      "does not match",
+      "is not of types",
+      "is not a",
+      "is not valid under any of the schemas listed in the 'oneOf' keyword"
     ],
+    "errorCode": [-32602, -32400, -40300]
+  },
+  "isInvalidRange": {
+    "errorMessage": ["is less than the minimum of", "is greater than the maximum"],
+    "errorCode": [-32602, -32400, -40300]
+  },
+  "isInvalidLength": {
+    "errorMessage": ["has less than", "is longer than"],
+    "errorCode": [-32602, -32400, -40300]
+  },
+  "isMissingProperty": {
+    "errorMessage": ["is a required property"],
     "errorCode": [-32602, -32400, -40300]
   },
   "isCustomError": {
@@ -37,8 +54,8 @@
     "errorMessage": ["Invalid Request", "user denied access", "user did not make a grant decision"],
     "errorCode": [-32600, -40300]
   },
-  "lifecycleFininshedError":{
-    "errorMessage": ["Custom error","Cannot call finished"],
+  "lifecycleFininshedError": {
+    "errorMessage": ["Custom error", "Cannot call finished"],
     "errorCode": [-32001]
   },
   "isNotAvailable": {

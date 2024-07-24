@@ -18,11 +18,11 @@ Feature: Account_Manage
    @Account @manageSDK @sdk @transport
    Scenario Outline: Account.session - Negative Scenario: <Scenario> expecting error
       When 1st party app invokes the 'Firebolt' API to '<Key>'
-      Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for account session'
+      Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
 
       Examples:
-         | Scenario                             | Key                                              |
-         | Invalid session token                | set account session with invalid token           |
-         | Invalid session ExpiresIn            | set account session with invalid ExpiresIn       |
-         | Passing ExpiresIn Invalid value      | set account session with invalid ExpiresIn value |
-         | Without session token - Empty params | set account session without parameters           |
+         | Scenario                             | Key                                              | Method_Validation_Key                         |
+         | Invalid session token                | set account session with invalid token           | invalid parameters for account session        |
+         | Invalid session ExpiresIn            | set account session with invalid ExpiresIn       | invalid parameters for account session        |
+         | Passing ExpiresIn Invalid value      | set account session with invalid ExpiresIn value | invalid range for account session             |
+         | Without session token - Empty params | set account session without parameters           | required property error for account session   |

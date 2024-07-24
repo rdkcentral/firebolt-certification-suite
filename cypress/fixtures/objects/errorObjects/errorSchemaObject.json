@@ -1,53 +1,77 @@
 {
   "INVALID_TYPE_PARAMS": {
-      "type": "validationFunction",
-      "validations": [
-          {
-              "type": "isInvalidTypeParams"
-          }
-      ]
+    "type": "validationFunction",
+    "validations": [
+      {
+        "type": "isInvalidTypeParams"
+      }
+    ]
+  },
+  "INVALID_RANGE": {
+    "type": "validationFunction",
+    "validations": [
+      {
+        "type": "isInvalidRange"
+      }
+    ]
+  },
+  "INVALID_LENGTH": {
+    "type": "validationFunction",
+    "validations": [
+      {
+        "type": "isInvalidLength"
+      }
+    ]
+  },
+  "MISSING_PROPERTY": {
+    "type": "validationFunction",
+    "validations": [
+      {
+        "type": "isMissingProperty"
+      }
+    ]
   },
   "NOT_SUPPORTED": {
-      "type": "validationFunction",
-      "validations": [
-          {
-              "type": "isNotSupported"
-          }
-      ]
+    "type": "validationFunction",
+    "validations": [
+      {
+        "type": "isNotSupported"
+      }
+    ]
   },
   "INVALID_REQUEST": {
-      "type": "validationFunction",
-      "validations": [
-          {
-              "type": "isInvalidRequest"
-          }
-      ]
+    "type": "validationFunction",
+    "validations": [
+      {
+        "type": "isInvalidRequest"
+      }
+    ]
   },
   "CUSTOM_ERROR": {
-      "type": "validationFunction",
-      "validations": [
-          {
-              "type": "isCustomError"
-          }
-      ]
+    "type": "validationFunction",
+    "validations": [
+      {
+        "type": "isCustomError"
+      }
+    ]
   },
   "NOT_AVAILABLE": {
-      "type": "validationFunction",
-      "validations": [
-          {
-              "type": "isNotAvailable"
-          }
-      ]
+    "type": "validationFunction",
+    "validations": [
+      {
+        "type": "isNotAvailable"
+      }
+    ]
   },
   "EXEMPTED_TYPE": {
-      "type": "TBD"
+    "type": "TBD"
   },
   "NOT_PERMITTED": {
-      "type": "validationFunction",
-      "validations": [
-          {
-              "type": "isNotPermitted"
-          }
-      ]
+    "type": "validationFunction",
+    "validations": [
+      {
+        "type": "isNotPermitted"
+      }
+    ]
   }
 }
