@@ -312,3 +312,15 @@ Given(/Interactions metrics collection process is '(initiated|stopped)'/, (actio
     cy.log(CONSTANTS.INTERACTIONS_SERVICE_ENABLED);
   }
 });
+
+/**
+ * @module validations
+ * @function Given Validate Firebolt Interactions metrics logs
+ * @description Validating the firebolt interaction logs in configModule
+
+ * @example
+ * Given Validate Firebolt Interactions metrics logs
+ */
+Given(/Validate Firebolt Interactions metrics logs/, () => {
+  cy.validateFireboltInteractionsLogs();
+});

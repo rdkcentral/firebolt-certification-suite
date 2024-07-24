@@ -58,6 +58,7 @@ export default function (module) {
       const topic = UTILS.getTopic(
         UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
         CONSTANTS.SUBSCRIBE,
+        null,
         CONSTANTS.TOPIC_FBINTERACTIONS
       );
       appTransport.subscribe(topic, UTILS.interactionResults);
@@ -71,10 +72,6 @@ export default function (module) {
         cy.log(CONSTANTS.INTERACTIONS_SERVICE_NOT_ACTIVE);
       }
     });
-
-    Cypress.env(CONSTANTS.FB_INTERACTIONLOGS, []);
-    // const interactionLogsMap = new Map();
-    // Cypress.env(CONSTANTS.FB_INTERACTIONLOGS, interactionLogsMap);
 
     // Create an instance of global queue
     const messageQueue = new Queue();
@@ -121,6 +118,7 @@ export default function (module) {
   beforeEach(() => {
     cy.getBeforeOperationObject();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs()
   });
 
   /**

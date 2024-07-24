@@ -181,7 +181,12 @@ function overideParamsFromConfigModule(overrideParams) {
  * @function getTopic
  * @description Function to fetch the required topics.
  */
-function getTopic(appIdentifier = null, operation = null, deviceIdentifier, subscribeSuffix = null) {
+function getTopic(
+  appIdentifier = null,
+  operation = null,
+  deviceIdentifier,
+  subscribeSuffix = null
+) {
   let topic;
   let deviceMac = deviceIdentifier ? deviceIdentifier : getEnvVariable(CONSTANTS.DEVICE_MAC);
   if (deviceMac.length <= 5 || !deviceMac || deviceMac == undefined) {
@@ -580,10 +585,18 @@ function subscribeResults(data, metaData) {
   getEnvVariable(CONSTANTS.MESSAGE_QUEUE).enqueue(queueInput);
 }
 
+/**
+ * @module utils
+ * @function interactionResults
+ * @description Callback function to fetch the interaction logs from subscribe function and storing in a list.
+ * @param {object} interactionLog - interaction logs
+ * @example
+ * interactionResults("{"method": "account.id", "response": "123", "tt": 12}")
+ **/
 function interactionResults(interactionLog) {
-  if (interactionLog && interactionLog != '') {
+  if (interactionLog) {
     interactionLog = JSON.parse(interactionLog);
-    getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).push(interactionLog);
+    getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
   }
 }
 
@@ -965,6 +978,34 @@ function resolveRecursiveValues(input) {
     return input;
   }
 }
+
+/**
+ * InteractionsLogs class provides function to add and get interaction logs.
+ * @class
+ *
+ * @example
+ * interactionLogs.addLog({});
+ * interactionLogs.getLogs();
+ * interactionLogs.isFalse();
+ */
+class InteractionsLogs {
+  constructor() {
+    this.logs = [];
+  }
+
+  addLog(message) {
+    this.logs.push(message);
+  }
+
+  getLogs() {
+    return this.logs;
+  }
+  clearLogs() {
+    this.logs = [];
+  }
+}
+const interactionLogs = new InteractionsLogs();
+Cypress.env(CONSTANTS.FB_INTERACTIONLOGS, interactionLogs);
 
 module.exports = {
   replaceJsonStringWithEnvVar,
