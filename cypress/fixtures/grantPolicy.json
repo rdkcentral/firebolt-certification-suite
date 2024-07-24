@@ -5,13 +5,6 @@
                 {
                     "steps": [
                         {
-                            "capability": "xrn:firebolt:capability:usergrant:fingerprint"
-                        }
-                    ]
-                },
-                {
-                    "steps": [
-                        {
                             "capability": "xrn:firebolt:capability:usergrant:pinchallenge",
                             "configuration": {
                                 "pinSpace": "purchase"
@@ -41,13 +34,6 @@
                         },
                         {
                             "capability": "xrn:firebolt:capability:usergrant:acknowledgechallenge"
-                        }
-                    ]
-                },
-                {
-                    "steps": [
-                        {
-                            "capability": "xrn:firebolt:capability:usergrant:fingerprint"
                         }
                     ]
                 }
