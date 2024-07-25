@@ -322,5 +322,5 @@ Given(/Interactions metrics collection process is '(initiated|stopped)'/, (actio
  * Given Validate Firebolt Interactions metrics logs
  */
 Given(/Validate Firebolt Interactions metrics logs/, () => {
-  cy.validateFireboltInteractionsLogs();
+  cy.then(() => cy.validateFireboltInteractionsLogs());
 });
