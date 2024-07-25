@@ -417,7 +417,7 @@
     "ONBACKGROUNDCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onBackgroundColorChanged",
         "validationJsonPath": "eventResponse",
-        "isNullCaseCase": true
+        "isNullCase": true
     },
     "75_FOR_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.backgroundOpacity",
@@ -441,7 +441,7 @@
     "ONBACKGROUNDOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onBackgroundOpacityChanged",
         "validationJsonPath": "eventResponse",
-        "isNullCaseCase": true
+        "isNullCase": true
     },
     "DISABLED_FOR_CLOSEDCAPTIONS":{
         "method": "closedcaptions.enabled",
