@@ -539,7 +539,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
-  } 
+  }
   // Initiating the Interaction service to listening for interaction logs when interactionsMetrics is set to true in beforeOperation object.
   else if (
     beforeOperation.hasOwnProperty(CONSTANTS.INTERACTIONS_METRICS) &&
