@@ -1,9 +1,10 @@
+@ClosedCaptions @ClosedCaptionsManage @manageSDK
 Feature: ClosedCaptions_Manage
 
     Background: Launch FCA for 'ClosedCaptions'
         Given the environment has been set up for 'ClosedCaptions' tests
 
-    @ClosedCaptions @manageSDK
+    @sdk @transport
     Scenario Outline: ClosedCaptions.<Method> - Positive Scenario: <Scenario>
         Given we test the 'CLOSED_CAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
         When '1st party app' registers for the 'Firebolt' event
@@ -48,7 +49,7 @@ Feature: ClosedCaptions_Manage
             | Set windowColor-white                | windowColor        | white                 |
             | Set windowOpacity-50                 | windowOpacity      | 50                    |
 
-    @ClosedCaptions @manageSDK
+    @sdk @transport
     Scenario Outline: Closedcaptions.<Method> - Positive Scenario: <Scenario> with 'null' params
         When 1st party app registers for the '<Event>' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
@@ -72,7 +73,7 @@ Feature: ClosedCaptions_Manage
             | windowColor       | windowColor       | set windowColor as null       | get windowColor       | default value for windowColor in closedcaptions       | onWindowColorChanged for closedcaptions with default value       | closedcaptions onWindowColorChanged       |
             | windowOpacity     | windowOpacity     | set windowOpacity as null     | get windowOpacity     | default value for windowOpacity in closedcaptions     | onWindowOpacityChanged for closedcaptions with default value     | closedcaptions onWindowOpacityChanged     |
 
-    @ClosedCaptions @manageSDK
+    @sdk @transport
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error
         Given we test the 'CLOSED_CAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'

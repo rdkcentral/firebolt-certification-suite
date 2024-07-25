@@ -1,10 +1,11 @@
+@Accessibility @coreSDK
 Feature: Accessibility
 
     Background: Launch FCA for 'Accessibility'
         Given the environment has been set up for 'Accessibility' tests
         And 3rd party 'certification' app is launched
 
-    @Accessibility @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
         Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
         When '3rd party app' registers for the 'Firebolt' event
@@ -50,15 +51,15 @@ Feature: Accessibility
             | Set windowOpacity-50                 | windowOpacity      | 50                    |
             | Set preferredLanguages               | preferredLanguages | spa,eng               |
 
-    @Accessibility @coreSDK @sdk @transport
-    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario> with 'null' params
-        When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
-        And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
-        And 1st party app invokes the 'Firebolt' API to '<Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<Key>'
-        When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
-        Then 'Firebolt' platform responds with '<Method_Content>'
-        And 'Firebolt' platform triggers event '<Event_Content>'
+   @sdk @transport
+   Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario> with 'null' params
+      When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
+      And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
+      And 1st party app invokes the 'Firebolt' API to '<Key>'
+      Then 'Firebolt' platform responds to '1st party app' for '<Key>'
+      When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
+      Then 'Firebolt' platform responds with '<Method_Content>'
+      And 'Firebolt' platform triggers event '<Event_Content>'
 
         Examples:
          | Scenario          | Key                           | Method_Content                      | Event_Content                                                            |
@@ -75,7 +76,7 @@ Feature: Accessibility
          | windowColor       | set windowColor as null       | default value for windowColor       | onclosedCaptionsSettingsChanged with default value for windowColor       |
          | windowOpacity     | set windowOpacity as null     | default value for windowOpacity     | onclosedCaptionsSettingsChanged with default value for windowOpacity     |
 
-    @Accessibility @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Accessibility.voiceGuidanceSettings - Positive Scenario: <Scenario>
         Given we test the 'ACCESSIBILITY_VOICEGUIDANCE_SETTINGS' getters and setters '<Method>' to '<Value>'
         When '3rd party app' registers for the 'Firebolt' event
@@ -94,7 +95,7 @@ Feature: Accessibility
             | Set speed-0.5         | speed   | 0.5   |
             | Set speed-2           | speed   | 2     |
 
-    @Accessibility @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Accessibility.audioDescriptionSettings - Positive Scenario: <Scenario>
         Given we test the 'AUDIODESCRIPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
         When '3rd party app' registers for the 'Firebolt' event
@@ -110,7 +111,7 @@ Feature: Accessibility
             | Disable audioDescriptionSettings | enabled | false |
             | Enable audioDescriptionSettings  | enabled | true  |
 
-    @Accessibility @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Accessibility.closedCaptions - Positive Scenario: <Scenario>
         Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS' getters and setters '<Method>' to '<Value>'
         When '3rd party app' registers for the 'Firebolt' event
@@ -136,7 +137,7 @@ Feature: Accessibility
             | Set windowColor-#7f7f7f            | windowColor       | #7F7F7F             |
             | Set windowOpacity-40               | windowOpacity     | 40                  |
 
-    @Accessibility @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Accessibility.voiceGuidance - Positive Scenario: <Scenario>
         Given we test the 'ACCESSIBILITY_VOICEGUIDANCE' getters and setters '<Method>' to '<Value>'
         When '3rd party app' registers for the 'Firebolt' event

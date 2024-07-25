@@ -1,10 +1,11 @@
+@Privacy @PrivacyManage @manageSDK
 Feature: Privacy_Manage
 
    Background: Launch FCA for 'Privacy'
       Given the environment has been set up for 'Privacy' tests
       And 3rd party 'certification' app is launched
 
-   @Privacy @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Privacy.<Method> - Positive Scenario: <Scenario>
       When 1st party app registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<API_Set_Key>'
@@ -40,7 +41,7 @@ Feature: Privacy_Manage
          | Enable allowCameraAnalytics            | allowCameraAnalytics           | privacy onAllowCameraAnalyticsChanged           | set privacy allow cameraAnalytics as true            | get privacy allow cameraAnalytics           | true for privacy allow cameraAnalytics            | onallowcameraanalyticschanged for privacy true            |
          | Disable allowCameraAnalytics           | allowCameraAnalytics           | privacy onAllowCameraAnalyticsChanged           | set privacy allow cameraAnalytics as false           | get privacy allow cameraAnalytics           | false for privacy allow cameraAnalytics           | onallowcameraanalyticschanged for privacy false           |
 
-   @Privacy @manageSDK @sdk @transport
+   @sdk @transport
    Scenario: Privacy.settings - Positive Scenario: Settings
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow resumePoints as true'
       Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow resumePoints as true'
@@ -69,7 +70,7 @@ Feature: Privacy_Manage
       When 1st party app invokes the 'Firebolt' API to 'get privacy settings'
       Then 'Firebolt' platform responds to '1st party app' for 'expected privacy settings'
 
-   @Privacy @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Privacy.<Method> - Negative Scenario: <Scenario> and expecting error
       When 1st party app invokes the 'Firebolt' API to '<Error_Key>'
       Then 'Firebolt' platform responds to '1st party app' with '<Error_Object>'
