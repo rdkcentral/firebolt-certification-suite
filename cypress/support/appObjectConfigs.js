@@ -54,7 +54,8 @@ class eventObject {
       (response && response.eventResponse && response.eventResponse[this.eventObjectId] != null) ||
       (response &&
         response.eventResponse != null &&
-        !response.eventResponse.hasOwnProperty(this.eventObjectId)) || isNullCase === true
+        !response.eventResponse.hasOwnProperty(this.eventObjectId)) ||
+      isNullCase === true
     ) {
       this.eventResponse = response.eventResponse;
       this.eventSchemaResult = response.eventSchemaResult;
