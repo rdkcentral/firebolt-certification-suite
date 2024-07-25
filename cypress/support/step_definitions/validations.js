@@ -294,6 +294,7 @@ Given(/Interactions metrics collection process is (initiated|stopped)/, (action)
     (action == CONSTANTS.STOPPED &&
       UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED) == true)
   ) {
+    // clearing the logs before starting the service
     if (action === CONSTANTS.INITIATED) {
       UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
     }
@@ -325,5 +326,5 @@ Given(/Interactions metrics collection process is (initiated|stopped)/, (action)
  * Given Validate Firebolt Interactions metrics logs
  */
 Given(/Validate Firebolt Interactions metrics logs/, () => {
-  cy.then(() => cy.validateFireboltInteractionsLogs());
+  cy.then(() => cy.validateFireboltInteractionLogs());
 });

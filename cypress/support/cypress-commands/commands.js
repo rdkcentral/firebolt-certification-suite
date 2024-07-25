@@ -1196,15 +1196,15 @@ Cypress.Commands.add('startOrStopInteractionsService', (action) => {
 
 /**
  * @module commands
- * @function validateFireboltInteractionsLogs
+ * @function validateFireboltInteractionLogs
  * @description Command to validate the firebolt interaction logs in configModule
  * @example
- * cy.validateFireboltInteractionsLogs()
- * cy.validateFireboltInteractionsLogs()
+ * cy.validateFireboltInteractionLogs()
+ * cy.validateFireboltInteractionLogs()
  */
-Cypress.Commands.add('validateFireboltInteractionsLogs', () => {
+Cypress.Commands.add('validateFireboltInteractionLogs', () => {
   const validationObject = {
-    assertionDef: 'validateFireboltbInteractionLogs',
+    assertionDef: 'validateFireboltInteractionLogs',
   };
   const interactionLogs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs();
   cy.customValidation(validationObject, interactionLogs);
