@@ -62,6 +62,7 @@ Given(
             ? item.content
             : CONSTANTS.NULL_RESPONSE;
           const expectingError = item.expectingError;
+          const isNullCase = item.isNullCase || false;
 
           // If the app ID is not passed from the feature, the default app ID will be retrieved.
           appId = !appId
@@ -78,6 +79,7 @@ Given(
             expectingError: expectingError,
             appId: appId,
             eventExpected: eventExpected,
+            isNullCase: isNullCase,
           };
           if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
             cy.methodOrEventResponseValidation(validationType, additionalParams);

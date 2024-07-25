@@ -33,7 +33,7 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
  */
 Cypress.Commands.add(
   'updateResponseForFCS',
-  (methodOrEvent, params, response, isValidation = false) => {
+  (methodOrEvent, params, response, isValidation = false, isNullCase = false) => {
     const responseType = response.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
 
     if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
@@ -76,7 +76,7 @@ Cypress.Commands.add(
             } else if (
               response &&
               response.result != undefined &&
-              !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+              !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE) || isNullCase == true
             ) {
               formattedResponse.eventResponse = response.result;
               formattedResponse.eventSchemaResult = formattedSchemaValidationResult;

@@ -416,7 +416,8 @@
     },
     "ONBACKGROUNDCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onBackgroundColorChanged",
-        "validationJsonPath": "eventResponse"
+        "validationJsonPath": "eventResponse",
+        "isNullCaseCase": true
     },
     "75_FOR_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.backgroundOpacity",
@@ -439,7 +440,8 @@
     },
     "ONBACKGROUNDOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onBackgroundOpacityChanged",
-        "validationJsonPath": "eventResponse"
+        "validationJsonPath": "eventResponse",
+        "isNullCaseCase": true
     },
     "DISABLED_FOR_CLOSEDCAPTIONS":{
         "method": "closedcaptions.enabled",
@@ -482,7 +484,8 @@
     },
     "ONFONTCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onFontColorChanged",
-        "validationJsonPath": "eventResponse"
+        "validationJsonPath": "eventResponse",
+        "isNullCase": true
     },
     "RAISED_FOR_FONTEDGE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdge",
@@ -505,7 +508,8 @@
     },
     "ONFONTEDGECHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onFontEdgeChanged",
-        "validationJsonPath": "eventResponse"
+        "validationJsonPath": "eventResponse",
+        "isNullCase": true
     },
     "DEPRESSED_FOR_FONTEDGE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontEdge",
@@ -593,7 +597,8 @@
     },
     "ONFONTEDGECOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onFontEdgeColorChanged",
-        "validationJsonPath": "eventResponse"
+        "validationJsonPath": "eventResponse",
+        "isNullCase": true
     },
     "CURSIVE_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontFamily",
@@ -626,7 +631,8 @@
     },
     "ONFONTOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onFontOpacityChanged",
-        "validationJsonPath": "eventResponse"
+        "validationJsonPath": "eventResponse",
+        "isNullCase": true
     },
     "DEFAULT_VALUE_FOR_FONTSIZE_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontSize",
@@ -639,7 +645,8 @@
     },
     "ONFONTSIZECHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onFontSizeChanged",
-        "validationJsonPath": "eventResponse"
+        "validationJsonPath": "eventResponse",
+        "isNullCase": true
     },
     "LEFT_FOR_TEXTALIGN_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlign",
@@ -672,7 +679,8 @@
     },
     "ONTEXTALIGNCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onTextAlignChanged",
-        "validationJsonPath": "eventResponse"
+        "validationJsonPath": "eventResponse",
+        "isNullCase": true
     },
     "TOP_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlignVertical",
@@ -695,7 +703,8 @@
     },
     "ONTEXTALIGNVERTICALCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onTextAlignVerticalChanged",
-        "validationJsonPath": "eventResponse"
+        "validationJsonPath": "eventResponse",
+        "isNullCase": true
     },
     "BOTTOM_FOR_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.textAlignVertical",
@@ -739,7 +748,8 @@
     },
     "ONFONTFAMILYCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onFontFamilyChanged",
-        "validationJsonPath": "eventResponse"
+        "validationJsonPath": "eventResponse",
+        "isNullCase": true
     },
     "PROPORTIONAL_SERIF_FOR_FONTFAMILY_IN_CLOSEDCAPTIONS": {
         "method": "closedcaptions.fontFamily",
@@ -826,7 +836,8 @@
     },
     "ONWINDOWCOLORCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onWindowColorChanged",
-        "validationJsonPath": "eventResponse"
+        "validationJsonPath": "eventResponse",
+        "isNullCase": true
     },
     "WHITE_FOR_WINDOWCOLOR_IN_CLOSEDCAPTIONS_EVENT": {
         "event": "closedcaptions.onWindowColorChanged",
@@ -855,7 +866,8 @@
     },
     "ONWINDOWOPACITYCHANGED_FOR_CLOSEDCAPTIONS_WITH_DEFAULT_VALUE": {
         "event": "closedcaptions.onWindowOpacityChanged",
-        "validationJsonPath": "eventResponse"
+        "validationJsonPath": "eventResponse",
+        "isNullCase": true
     },
     "ENABLE_CLOSEDCAPTIONS_WITH_NO_PARAMETERS":{
         "method": "manage_closedcaptions.setEnabled"
