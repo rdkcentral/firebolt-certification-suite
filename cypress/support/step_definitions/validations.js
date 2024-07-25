@@ -280,20 +280,23 @@ Given(
 
 /**
  * @module validations
- * @function Interactions metrics collection process is '(initiated|stopped)'
+ * @function Interactions metrics collection process is (initiated|stopped)
  * @description To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
  * @param {String} action - initiated or stopped
  * @example
- * Given Interactions metrics collection process is inititated
+ * Given Interactions metrics collection process is initiated
  * Given Interactions metrics collection process is stopped
  */
-Given(/Interactions metrics collection process is '(initiated|stopped)'/, (action) => {
+Given(/Interactions metrics collection process is (initiated|stopped)/, (action) => {
   if (
     (action == CONSTANTS.INITIATED &&
       UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) != true) ||
     (action == CONSTANTS.STOPPED &&
       UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED) == true)
   ) {
+    if (action === CONSTANTS.INITIATED) {
+      UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
+    }
     cy.startOrStopInteractionsService(action).then((response) => {
       if (response) {
         Cypress.env(

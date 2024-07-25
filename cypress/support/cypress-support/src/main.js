@@ -75,6 +75,8 @@ export default function (module) {
       }
     });
 
+    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
+
     // Create an instance of global queue
     const messageQueue = new Queue();
     Cypress.env(CONSTANTS.MESSAGE_QUEUE, messageQueue);
@@ -120,7 +122,6 @@ export default function (module) {
   beforeEach(() => {
     cy.getBeforeOperationObject();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
-    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
   });
 
   /**
