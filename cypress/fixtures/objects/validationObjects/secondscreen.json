@@ -59,7 +59,7 @@
             }
         ]
     },
-    "ONCLOSEREQUEST": {
+    "SECONDSCREEN_ONCLOSEREQUEST": {
         "method": "secondscreen.onCloseRequest",
         "data": [
             {
@@ -73,6 +73,21 @@
                 ]
             }
         ]
+    },
+   
+    "SECONDSCREEN_ONLAUNCHREQUEST_TYPE_DIAL_WITH_TEST_DATA": {
+        "method": "secondscreen.onCloseRequest",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "SECONDSCREEN_ONLAUNCHREQUEST_TYPE_DIAL_WITH_TEST_DATA",
+                        "description": "Validation of the Secondscreen onLaunchRequest event"
+                                }
+                ]
+            }
+        ]
     }
-
 }

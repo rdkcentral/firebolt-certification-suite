@@ -28,3 +28,7 @@ Licensed under the MIT License
 scenarios-original.tmpl is taken from https://github.com/WasiqB/multiple-cucumber-html-reporter which is:
 Copyright (c) 2023 Wasiq Bhamla
 Licensed under the MIT License
+
+Scripts/run.js uses code provided by cross-spawn taken from https://github.com/moxystudio/node-cross-spawn
+Copyright (c) 2018 Made With MOXY Lda hello@moxy.studio
+Licensed under the MIT License

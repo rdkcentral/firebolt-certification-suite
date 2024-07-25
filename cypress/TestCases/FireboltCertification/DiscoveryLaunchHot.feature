@@ -1,3 +1,4 @@
+@DiscoveryLaunch @coreSDK @AppHotLaunch
 Feature: Discovery.launch_HotLaunch
 
     @initialization
@@ -8,7 +9,7 @@ Feature: Discovery.launch_HotLaunch
         And '3rd party app' transitions to state 'foreground'
         And '3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
 
-    @DiscoveryLaunch @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in foreground
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -62,7 +63,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayEntity Foreground with programType episode                      | launch app with playentity intent with programtype episode                      | onNavigateTo with playentity intent with programtype episode                      |
             | PlayEntity Foreground with programType concert                      | launch app with playentity intent with programtype concert                      | onNavigateTo with playentity intent with programtype concert                      |
 
-    @DiscoveryLaunch @coreSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in inactive
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'inactive'
@@ -90,7 +91,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayEntity Inactive without options for entityType playlist | launch app with playentity intent without options                        | onNavigateTo with playentity intent without options                        |
             | PlayEntity Inactive with programType movie                  | launch app with playentity intent with programtype movie                 | onNavigateTo with playentity intent with programtype movie                 |
 
-    @DiscoveryLaunch @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in background
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'background'
@@ -118,7 +119,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayEntity Background without options for entityType playlist | launch app with playentity intent without options                        | onNavigateTo with playentity intent without options                        |
             | PlayEntity Background with programType movie                  | launch app with playentity intent with programtype movie                 | onNavigateTo with playentity intent with programtype movie                 |
 
-    @DiscoveryLaunch @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: Null intent and app in <State>
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state '<State>'
@@ -135,7 +136,7 @@ Feature: Discovery.launch_HotLaunch
             | launch app with null intent | background |
             | launch app with null intent | suspended  |
 
-    @DiscoveryLaunch @coreSDK @sdk @transport @suspended
+    @sdk @transport @suspended
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in suspended
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'suspended'
@@ -162,7 +163,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayEntity Suspended without options for entityType playlist | launch app with playentity intent without options                        |
             | PlayEntity Suspended with programType movie                  | launch app with playentity intent with programtype movie                 |
 
-    @DiscoveryLaunch @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Discovery.Launch Hot Launch - Negative Scenario: <Scenario> expecting error
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'foreground'
@@ -177,21 +178,21 @@ Feature: Discovery.launch_HotLaunch
             | No Source Intent  | no source intent for discoverylaunch  |
             | No Data Intent    | no data intent for discoverylaunch    |
 
-        @DiscoveryLaunch @sdk @coreSDK  @transport @skipNegative
+        @sdk @transport @skipNegative
         Examples:
             | Scenario               | Error_Key                                  |
             | Invalid Action Intent  | invalid action intent for discoverylaunch  |
             | Invalid Context Intent | invalid context intent for discoverylaunch |
             | Invalid Data Intent    | invalid data intent for discoverylaunch    |
 
-    @DiscoveryLaunch @coreSDK @sdk @transport
+    @sdk @transport
     Scenario: Discovery.Launch Hot Launch - Negative Scenario: Passing the invalid appId type
         Given the environment has been set up for 'Discovery.Launch' tests
         And 3rd party 'certification' app is launched
         When 1st party app invokes the 'Firebolt' API to 'launch app with invalid appId type'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
 
-    @DiscoveryLaunch @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> for context source
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -206,7 +207,7 @@ Feature: Discovery.launch_HotLaunch
             | Passing random string | launch app with random string source | onNavigateTo with random string source |
             | Passing valid string  | launch app with search intent source | onNavigateTo with search intent source |
 
-    @DiscoveryLaunch @coreSDK @sdk @transport
+    @sdk @transport
     Scenario: Discovery.Launch Hot Launch - Negative Scenario: Invalid context source expecting error
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'foreground'
