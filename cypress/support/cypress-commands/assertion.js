@@ -138,14 +138,7 @@ Cypress.Commands.add(
             const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
               apiErrorResponse.message.includes(errorMessage)
             );
-            let pretext = CONSTANTS.ERROR_MESSAGE_VALIDATION + `for ${method} : `;
-            if (checkErrorMessage) {
-              pretext = pretext + `Error message present in list of expected error messages`;
-              fireLog.assert(true, pretext);
-            } else {
-              pretext = pretext + `Error message not present in list of expected error messages`;
-              fireLog.assert(false, pretext);
-            }
+            fireLog.equal(checkErrorMessage, true, 'Error Message Validation:');
           });
         } else {
           fireLog.fail(`Expected error content not found in ${errorContentFilePath}`);

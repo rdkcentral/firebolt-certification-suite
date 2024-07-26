@@ -107,7 +107,6 @@ module.exports = {
   ERROR_INSIDE_RESULT_CHECK: 'Error inside Result check',
   ERROR_LIFECYCLE_STATE_VALIDATION: 'Lifecycle state validation failed due to following error - ',
   ERROR_LIST: ['Method not found', 'Method Not Implemented'],
-  ERROR_MESSAGE_VALIDATION: 'Error Message Validation ',
   ERROR_NOT_UNDEFINED_CHECK: 'Error not undefined Check',
   ERROR_NULL_CHECK: 'Error null Check',
   ERROR_SCHEMA_OBJECTS_PATH: 'cypress/fixtures/objects/errorObjects/errorSchemaObject.json',
