@@ -82,7 +82,6 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
             if (UTILS.isScenarioExempted(method, params)) {
               Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
             }
-
             // Creating object with event name, params, and response etc and storing it in a global list for further validation.
             const apiAppObject = new apiObject(
               method,
