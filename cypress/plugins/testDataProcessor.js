@@ -103,11 +103,7 @@ function processSetResponseJson(setResponseJsonData) {
 
 /**
  *  @function getErrorContentObjectJson
- *  getErrorContentObjectJson function will perform following operations
- *  - Iterate over each key in the provided JSON
- *  - Resolve the each type in the array of validations object.
- *  - Return the JSON with the updated value.
- *
+ *  @description Fetching the error content objects from the JSON
  *  @example
  *  getErrorContentObjectJson()
  */
@@ -209,7 +205,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
       if (
         fireboltObject.hasOwnProperty(CONSTANTS.EXPECTING_ERROR) &&
         fireboltObject.expectingError == true
-      ) { 
+      ) {
         if (
           resolvedErrorContentJson &&
           dataIdentifier &&
