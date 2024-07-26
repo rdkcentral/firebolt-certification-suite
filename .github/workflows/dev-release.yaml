@@ -6,25 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  release:
-    name: Release
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install dependencies
-        run: yarn install
-      - name: Release to GitHub
-        env:
-          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_PAT }} # <-- Allows semantic-release-bot to push changes to protected branches (using a PAT to avoid rate limits)
-          npm_config_tag: dev # <-- See ./.releaserc for release branch config.
-        run: npx semantic-release
+  call-release-workflow:
+    uses: ./.github/workflows/release.yml
+    with:
+      branch: 'dev'

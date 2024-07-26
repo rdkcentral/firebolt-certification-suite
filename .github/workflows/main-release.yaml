@@ -37,28 +37,9 @@ jobs:
     name: Release
     needs: merge-dev-to-main
     if: ${{ success() }}
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Fetch changes in main
-        uses: ./.github/actions/fetch-latest-main
-      - name: Install dependencies
-        run: yarn install
-      - name: Release to GitHub
-        env:
-          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_PAT }} # <-- Allows semantic-release-bot to push changes to protected branches (using a PAT to avoid rate limits)
-          npm_config_tag: main # <-- See ./.releaserc for release branch config.
-        run: npx semantic-release
+    uses: ./.github/workflows/release.yml
+    with:
+      branch: 'main'
 
   merge-main-to-dev:
     name: Merge main back to dev
