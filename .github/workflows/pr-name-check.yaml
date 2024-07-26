@@ -1,0 +1,38 @@
+name: PR Name Check
+
+on:
+  pull_request:
+    branches:
+      - 'dev'
+    types: [opened, edited, synchronize]
+
+jobs:
+  check-pr-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Check PR title
+        run: |
+          if ! echo "${{ github.event.pull_request.title }}" | grep -Eq "^(feat|fix|BREAKING CHANGE)(\([^)]+\))?: "; then
+            echo 'FAIL_OUTPUT=Invalid PR title. It must start with feat: or fix: or BREAKING CHANGE: or feat(<DESCRIPTOR>): or fix(<DESCRIPTOR>): or BREAKING CHANGE(<DESCRIPTOR>):' >> $GITHUB_ENV
+            exit 1
+          fi
+
+      - name: Comment on PR
+        if: failure()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_COMMENT: ${{ env.FAIL_OUTPUT }}
+        run: |
+          JSON_PAYLOAD=$(jq -n --arg body "$PR_COMMENT" '{"body": $body}')
+          
+          echo "Generated JSON payload:"
+          echo "$JSON_PAYLOAD"
+          
+          curl -X POST \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$JSON_PAYLOAD" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments"
