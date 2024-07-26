@@ -83,7 +83,7 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
               Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, true);
             }
             // Save playerId to env variable if present
-            const playerId = updatedResponse?.response?.result?.playerId;
+            const playerId = updatedResponse?.response?.result?.player?.playerId;
             if (playerId) {
               Cypress.env(CONSTANTS.PLAYERID, playerId);
             }
