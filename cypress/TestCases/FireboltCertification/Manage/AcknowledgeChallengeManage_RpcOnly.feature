@@ -1,9 +1,8 @@
-@AcknowledgeChallenge @AcknowledgeChallengeManage @manageSDK @rpcOnly
-Feature: AcknowledgeChallenge_Manage_RpcOnly
+ Feature: AcknowledgeChallenge_Manage_RpcOnly
 
     # Note: Reboot required after running this feature file
 
-    @transport @requiresPlatformImplementation
+    @transport @ripple @requiresPlatformImplementation
     Scenario: AcknowledgeChallenge.onRequestChallenge - Positive Scenario: Validating rpc method
         Given the environment has been set up for 'AcknowledgeChallenge-rpc-Only' tests
         And 3rd party 'certification' app is launched
@@ -17,7 +16,7 @@ Feature: AcknowledgeChallenge_Manage_RpcOnly
         And Fetch response for 'localization countryCode' method from 3rd party app
         Then 'Firebolt' platform responds with 'expected localization countryCode'
 
-    @transport @requiresPlatformImplementation
+    @transport @ripple @requiresPlatformImplementation
     Scenario: AcknowledgeChallenge.challengeError - Negative Scenario: Validating rpc method
         Given the environment has been set up for 'AcknowledgeChallenge-rpc-Only' tests
         And 3rd party 'certification' app is launched
@@ -28,4 +27,4 @@ Feature: AcknowledgeChallenge_Manage_RpcOnly
         And Fetch response for 'acknowledgeChallenge onRequestChallenge' event from 1st party app
         And 1st party app invokes the 'Firebolt' API to 'send error from challenge provider'
         And Fetch response for 'localization countryCode' method from 3rd party app
-        Then 'Firebolt' platform responds with 'custom error'
+        Then 'Firebolt' platform responds with 'expected localization countryCode'

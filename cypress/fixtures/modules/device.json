@@ -88,14 +88,14 @@
         "method": "device.onNetworkChanged",
         "result": {
             "state": "connected",
-            "type": "hybrid"
+            "type": "ethernet"
         }
     },
     "ONNETWORKCHANGED_HYBRIDDISCONNECT_EVENTS": {
         "method": "device.onNetworkChanged",
         "result": {
             "state": "disconnected",
-            "type": "hybrid"
+            "type": "ethernet"
         }
     }
 }

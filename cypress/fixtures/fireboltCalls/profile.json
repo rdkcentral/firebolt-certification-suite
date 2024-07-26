@@ -63,11 +63,5 @@
     "SEND_ERROR_FROM_PINCHALLENGE_PROVIDER":{
         "method": "pinChallenge.challengeError",
         "params": "PROFILE_PINCHALLENGE_CHALLENGE_ERROR_PARAMS"
-    },
-    "PROFILE_APPROVEPURCHASE_CHALLENGEERROR": {
-        "method": "profile.approvePurchase",
-        "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
-        "expectingError": true
     }
 }

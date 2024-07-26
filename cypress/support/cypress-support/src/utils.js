@@ -182,9 +182,9 @@ function overideParamsFromConfigModule(overrideParams) {
  * @description Function to fetch the required topics.
  */
 
-function getTopic(appIdentifier = null, operation = null, deviceIdentifier) {
+function getTopic(appIdentifier = null, operation = null) {
   let topic;
-  let deviceMac = deviceIdentifier ? deviceIdentifier : getEnvVariable(CONSTANTS.DEVICE_MAC);
+  let deviceMac = getEnvVariable(CONSTANTS.DEVICE_MAC);
   if (deviceMac.length <= 5 || !deviceMac || deviceMac == undefined) {
     assert(
       false,
@@ -695,70 +695,28 @@ global.resolveDeviceVariable = function (key) {
  *
  */
 
-class FireLog extends Function {
+class FireLog {
   constructor() {
-    // Creating the function body dynamically
-    const functionBody = `
-      return function (...args) {
-        return this.log(...args);
-      }
-    `;
-    super('...args', functionBody);
-
-    const handler = {
-      apply: function (target, thisArg, argumentsList) {
-        let message;
-        const methodName = target.name;
-        if (target.hasOwnLog) {
-          // If the method has its own logging, just apply it
-          return Reflect.apply(target, thisArg, argumentsList);
-        } else {
-          if (argumentsList.length > 2)
-            message =
-              'Expected: ' +
-              JSON.stringify(argumentsList[0]) +
-              ' Actual: ' +
-              JSON.stringify(argumentsList[1]);
-          else
-            message =
-              argumentsList[argumentsList.length - 1] +
-              ' Actual: ' +
-              JSON.stringify(argumentsList[0]);
-          return cy.log(message).then(() => {
-            return Reflect.apply(target, thisArg, argumentsList);
-          });
-        }
-      },
-    };
-    // Proxy for the fireLog method
-    const instanceProxy = new Proxy(this, handler);
-    const fireLogProxy = new Proxy(instanceProxy, {
-      apply: function (target, thisArg, argumentsList) {
-        const message = argumentsList[argumentsList.length - 1];
-        return cy.log(message);
-      },
-    });
+    if (!FireLog.instance) {
+      FireLog.instance = this;
+    }
 
     // Use cy.log(message) for every method in the class
-    const prototype = Object.getPrototypeOf(instanceProxy);
+    const prototype = Object.getPrototypeOf(this);
     Object.getOwnPropertyNames(prototype).forEach((method) => {
-      if (
-        method !== 'constructor' &&
-        method !== 'fireLog' &&
-        typeof instanceProxy[method] === 'function'
-      ) {
-        instanceProxy[method] = new Proxy(instanceProxy[method], handler);
-        const methodSource = instanceProxy[method].toString();
-        instanceProxy[method].hasOwnLog = methodSource.includes('cy.log');
+      if (method !== 'constructor' && typeof this[method] === 'function') {
+        const originalMethod = this[method];
+        this[method] = function (...args) {
+          const message = args[args.length - 1];
+
+          return cy.log(message).then(() => {
+            return originalMethod.apply(this, args);
+          });
+        };
       }
     });
 
-    return fireLogProxy;
-  }
-
-  // Method to log a message without any assertion
-  log(message) {
-    return cy.log(message);
+    return FireLog.instance;
   }
 
   isNull(value, message) {
@@ -806,22 +764,15 @@ class FireLog extends Function {
   }
 
   include(haystack, needle, message) {
-    cy.log(
-      message + ' ' + JSON.stringify(needle) + ' expected to be in ' + JSON.stringify(haystack)
-    );
     assert.include(haystack, needle, message);
   }
+
   exists(value, message) {
     assert.exists(value, message);
   }
 
   assert(expression, message) {
     assert(expression, message);
-  }
-
-  fail(message) {
-    cy.log(message);
-    assert.fail(message);
   }
 
   info(message) {}
@@ -852,11 +803,6 @@ function parseValue(str) {
     if (str === 'false') return false;
 
     if (!isNaN(str)) return Number(str);
-
-    // If the string contains comma, split it into an array
-    if (str.includes(',')) {
-      return str.split(',');
-    }
   }
 
   return str;
@@ -934,32 +880,6 @@ global.resolveAtRuntime = function (input) {
   };
 };
 
-/**
- * @module utils
- * @function resolveRecursiveValues
- * @description A Function that recursively check each fields and invoke if it is a function within an array or object.
- * @param {*} input - value which need to resolved and it may be string/object/array/function
- * @example
- * resolveRecursiveValues(function())
- */
-function resolveRecursiveValues(input) {
-  if (Array.isArray(input)) {
-    return input.map((item) => resolveRecursiveValues(item));
-  } else if (typeof input == CONSTANTS.TYPE_OBJECT && input !== null) {
-    const newObj = {};
-    for (const key in input) {
-      if (Object.hasOwnProperty.call(input, key)) {
-        newObj[key] = resolveRecursiveValues(input[key]);
-      }
-    }
-    return newObj;
-  } else if (input && typeof input === CONSTANTS.TYPE_FUNCTION) {
-    return input();
-  } else {
-    return input;
-  }
-}
-
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -985,5 +905,4 @@ module.exports = {
   fireLog,
   parseValue,
   checkForSecondaryAppId,
-  resolveRecursiveValues,
 };

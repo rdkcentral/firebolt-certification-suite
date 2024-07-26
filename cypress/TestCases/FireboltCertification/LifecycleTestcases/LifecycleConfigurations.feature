@@ -1,16 +1,15 @@
-# Commented step definitions to be implemented once not supported methods are implemented and tested
+# Commented step definitions to be implemented once not supported methods are implemented and tested    
 # Validation objects are not added for not supported methods
-@Lifecycle @coreSDK
 Feature: Lifecycle_Configuration
-    @notSupported
+    @Lifecycle @coreSDK @notSupported
     Scenario: Lifecycle R*6.1 App launch time out
         Given the environment has been set up for 'lifecycle' tests
         # And firebolt config 'Lifecycle.appReadyTimeout' is set to to 5 'seconds'
         And 3rd party 'certification' app is launched with 'initializing' state
         # And Test runner waits for 5 'seconds'
         Then '3rd party app' will be in 'terminated' state
-
-    @notSupported
+        
+    @Lifecycle @coreSDK @notSupported
     Scenario: Lifecycle R*6.1 appFinishedTimeout exceeded
         Given the environment has been set up for 'lifecycle' tests
         # And firebolt config 'Lifecycle.appReadyTimeout' is set to to 5 'seconds'
@@ -18,7 +17,7 @@ Feature: Lifecycle_Configuration
         # And Test runner waits for 10 'seconds'
         Then '3rd party app' will be in 'terminated' state
 
-    @notSupported
+    @Lifecycle @coreSDK @notSupported
     Scenario: Lifecycle R*6.2 appFinishedTimeout data type
         Given the environment has been set up for 'lifecycle' tests
         # And 1st party app invokes API methods using below datatable
@@ -29,7 +28,7 @@ Feature: Lifecycle_Configuration
         #     | Lifecycle.appFinishedTimeout | true   |
         #     | Lifecycle.appFinishedTimeout |        |
 
-    @notSupported
+    @Lifecycle @coreSDK @notSupported
     Scenario: Lifecycle R*6.1 appReadyTimeout data type
         Given the environment has been set up for 'lifecycle' tests
         # And 1st party app invokes API methods using below datatable

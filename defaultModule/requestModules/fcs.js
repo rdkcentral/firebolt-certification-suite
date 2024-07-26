@@ -109,30 +109,4 @@ function fetchEventResponse(parsedParam) {
   }
 }
 
-/**
- * @module fcs
- * @function triggerEvent
- * @description sending message to platform to make post call to set event values.
- * @param {String} key - key name of the event data
- * @example
- * triggerEvent({method: 'fcs.triggerevent', params: {'value': {
-        "method": "device.onNetworkChanged",
-        "result": {
-            "state": "disconnected",
-            "type": "ethernet"
-        }
-    }}})
- */
-function triggerEvent(key) {
-  fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
-    throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
-  });
-}
-
-module.exports = {
-  setResponse,
-  setTestProvider,
-  setLifecycleState,
-  fetchEventResponse,
-  triggerEvent,
-};
+module.exports = { setResponse, setTestProvider, setLifecycleState, fetchEventResponse };

@@ -31,7 +31,6 @@ module.exports = {
   ALPHANUMERIC: 'alphanumeric',
   API_NAME: 'apiName',
   API_VERSION: 'apiVersion',
-  APP: 'App',
   APP_HISTORY_EMPTY: 'App history is empty',
   APP_ID: 'appId',
   APP_LIFECYCLE_HISTORY: 'appLifeCycleHistory',
@@ -56,7 +55,6 @@ module.exports = {
   COMBINEVALIDATIONOBJECTSJSON: 'combineValidationObjectsJson',
   COMMUNICATION_MODE: 'communicationMode',
   CONFIG: 'CONFIG',
-  CONFIG_IMPLEMENTATION_MISSING: 'Config module implementation missing',
   CONFIG_MODULE_SETRESPONSE_PATH: 'cypress/fixtures/external/setResponseData.json',
   CONTENT: 'Content',
   CONTEXT: 'Context',
@@ -79,7 +77,6 @@ module.exports = {
   DEFAULT_TEST_DATA: 'defaultTestData.json',
   DEREFERENCE_OPENRPC: 'dereferenceOpenRPC',
   DEVICE: 'device',
-  DEVICE1: 'device1',
   DEVICEMANIFESTDATA: 'deviceManifestData',
   DEVICEMODULEFORMAT: 'deviceModelFormat',
   DEVICE_AUDIO: 'device.audio',
@@ -97,10 +94,8 @@ module.exports = {
   EMAIL: 'email',
   ENV_PLATFORM_SDK_VERSION: 'platformSdkVersion',
   ERROR: 'error',
-  ERROR_CODE: 'Error code',
   ERROR_CONTENT_JSON_PATH: 'objects/errorObjects/errorContent.json',
   ERROR_CONTENT_OBJECTS_PATH: 'cypress/fixtures/objects/errorObjects/errorContent.json',
-  ERROR_CONTENT_VALIDATIONJSON: 'errorContentValidationJson',
   ERROR_EXPECTED: 'Expected response.error not to be null',
   ERROR_EXPECTED_DEFINED: 'Expected response.error to be defined',
   ERROR_EXPECTED_NULL: 'Expected response.error to be null',
@@ -302,7 +297,8 @@ module.exports = {
   PARAMS: 'Params',
   PASS: 'PASS',
   PASSWORD: 'password',
-  PLATFORM: 'Platform',
+  PLATFORM_INVALID_RESPONSE_LOG:
+    'Platform returned response in invalid format, which could lead to failures in validations. Response must be an object',
   PLATFORM_NOT_SUPPORT_LOG: 'Platform does not support method',
   PLATFORM_NOT_TRIGGER_EVENT: 'Platform MUST not trigger event ',
   PLATFORM_TRIGGER_EVENT: 'Platform MUST trigger event ',
@@ -329,16 +325,12 @@ module.exports = {
     RECORD_LIFECYCLE_HISTORY: 'fcs.recordLifecycleHistory',
     SETPERFORMANCETESTHANDLER: 'performance.setPerformanceTestHandler',
     SETLIFECYCLESTATE: 'fcs.setLifecycleState',
-    TRIGGEREVENT: 'fcs.triggerEvent',
     FETCH_EVENT_RESPONSE: 'fcs.fetchEventResponse',
     PERFORMANCE_THRESHOLD_VALIDATOR: 'performance.fetchPerformanceThreshold',
     CREATE_MARKER: 'performance.createMarker',
-    UNLOADAPP: 'fcs.unloadApp',
   },
   PERFORMANCE_METRICS: 'performanceMetrics',
   RESPONSE: 'Response: ',
-  RESPONSE_INVALID_RESPONSE_LOG:
-    'Platform or App returned response in invalid format, which could lead to failures in validations. Response must be in JSON RPC format',
   RESPONSE_NOT_FOUND: 'No_Response',
   RESPONSE_STATUS: {
     OK: 'OK',
@@ -465,8 +457,6 @@ module.exports = {
   SECONDARY_THIRD_PARTY_APP_ID: 'secondary3rdPartyAppId',
   SECONDARY_APPID_MISSING_ERROR:
     '`Unable to find the ${envAppIdKey} value in the env, please add the value in configModule/constants/config.json`',
-  SET_EVENT_REQUEST: 'Request sent to set event values in platform: ',
-  SET_EVENT_SUCCESS: 'Event value set successfully in platform',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

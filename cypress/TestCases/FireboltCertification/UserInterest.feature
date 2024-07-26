@@ -1,4 +1,3 @@
-@UserInterest @coreSDK
 Feature: UserInterest
 
     @initialization
@@ -6,7 +5,7 @@ Feature: UserInterest
         Given the environment has been set up for 'Userinterest' tests
         And 3rd party 'certification' app is launched
 
-    @sdk @transport
+    @coreSDK @sdk @transport @userinterest
     Scenario Outline: Discovery.userInterest - Positive Scenario: In-app UX - Notify userInterest with type <Scenario>
         When 1st party app registers for the 'Content onUserInterest' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'notify userInterest with <userInterestData>'
@@ -59,7 +58,7 @@ Feature: UserInterest
             | disinterest & reason recording with program season entity                              | type disinterest and reason recording with program season entity                              | type disinterest reason recording program season entity                              |
 
 
-    @sdk @transport
+    @coreSDK @sdk @transport @userinterest
     Scenario Outline: Discovery.userInterest - Negative Scenario: <Scenario> expecting error
         When '3rd party app' invokes the 'Firebolt' API to 'notify userInterest <Param>'
         Then 'Firebolt' platform responds with 'invalid params for discovery userInterest'
@@ -87,7 +86,7 @@ Feature: UserInterest
             | Invalid programType for program entity with seriesId    | with invalid programType for program entity with seriesId    |
             | Invalid programType for program entity with seasonId    | with invalid programType for program entity with seasonId    |
 
-    @sdk
+    @coreSDK @sdk @userinterest
     Scenario Outline: Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type <Scenario>
         And 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type <userInterestData>'
         Then 'Firebolt' platform responds to '1st party app' with '<method_Content>'
@@ -101,7 +100,7 @@ Feature: UserInterest
             | disinterest and reason reaction  | disinterest reason reaction  | requestUserInterest with reason reaction  |
             | disinterest and reason recording | disinterest reason recording | requestUserInterest with reason recording |
 
-    @sdk @transport
+    @coreSDK @sdk @transport @userinterest
     Scenario Outline: Content.requestUserInterest - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with <Param>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid params for content requestUserInterest'
@@ -113,17 +112,17 @@ Feature: UserInterest
             | Invalid reason value - test params     | invalid reasonType   |
             | Invalid Interest type - boolean params | boolean reasonType   |
 
-    @sdk @requiresPlatformImplementation
+    @coreSDK @sdk @userinterest @notSupported
     Scenario: Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but platform timeout without sending response
         When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type interest timeout'
         Then 'Firebolt' platform responds to '1st party app' with 'not available for requestUserInterest'
 
-    @sdk @requiresPlatformImplementation
+    @coreSDK @sdk @userinterest @notSupported
     Scenario: Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but 3rd party app return error
         When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type interest returns error'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for requestUserInterest'
 
-    @sdk @requiresPlatformImplementation
+    @coreSDK @sdk @userinterest @notSupported
     Scenario: Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest without registering for providers
         Given the environment has been set up for 'UserInterestProvider' tests
         And 3rd party 'certification' app is launched

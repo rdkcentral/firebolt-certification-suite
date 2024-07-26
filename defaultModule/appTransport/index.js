@@ -16,8 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const logger = require('../../../cypress/support/Logger')('index.js');
-const constants = require('../../../cypress/support/constants/constants');
-const { getEnvVariable } = require('../../../cypress/support/cypress-support/src/utils');
+const constants = require('../../cypress/support/constants/constants');
+const { getEnvVariable } = require('../../cypress/support/cypress-support/src/utils');
 
 const client = {
   ws: null,

@@ -1,9 +1,8 @@
-@Profile @ProfileManage @manageSDK @rpcOnly
 Feature: Profile_Manage_RpcOnly
 
     # Note: Reboot required after running this feature file
 
-    @transport @requiresPlatformImplementation
+    @transport @ripple @requiresPlatformImplementation
     Scenario: PinChallenge.onRequestChallenge - Positive Scenario: Validating rpc method
         Given the environment has been set up for 'PinChallenge-rpc-Only' tests
         And 3rd party 'certification' app is launched
@@ -16,7 +15,7 @@ Feature: Profile_Manage_RpcOnly
         Then 'Firebolt' platform responds with 'true for profile approvepurchase'
 
 
-    @transport @requiresPlatformImplementation
+    @transport @ripple @requiresPlatformImplementation
     Scenario: PinChallenge.challengeError - Negative Scenario: Validating rpc method
         Given the environment has been set up for 'PinChallenge-rpc-Only' tests
         And 3rd party 'certification' app is launched
@@ -25,4 +24,4 @@ Feature: Profile_Manage_RpcOnly
         And Fetch response for 'pinChallenge onRequestChallenge' event from 1st party app
         And 1st party app invokes the 'Firebolt' API to 'send error from pinchallenge provider'
         And Fetch response for 'profile approvePurchase' method from 3rd party app
-        Then 'Firebolt' platform responds with 'custom error'
+        Then 'Firebolt' platform responds with 'true for profile approvepurchase'

@@ -1,4 +1,3 @@
-@ClosedCaptions @manageSDK
 Feature: ClosedCaptions_Manage
 
     Background: Launch FCA for 'ClosedCaptions'
@@ -7,7 +6,7 @@ Feature: ClosedCaptions_Manage
 
     # Below scenario can be implemented by respective config module to return error or default value 
     # For all the below testcases we are passing invalid string in params but there is no enum value specified so the platform can decide to either return error or default value 
-    @sdk @transport
+    @ClosedCaptions @manageSDK
     Scenario Outline: ClosedCaptions.<Method> - Setting random string values: <Scenario>
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_key>'

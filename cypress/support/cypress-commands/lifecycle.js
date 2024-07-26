@@ -179,7 +179,8 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
     ) {
       const pretext = CONSTANTS.HISTORY_VALIDATION_REQ + lifecycleHistoryRequirementId.history.id;
       cy.log(
-        CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + JSON.stringify(response.result._history._value)
+        CONSTANTS.LIFECYCLE_HISTORY_RESPONSE +
+          JSON.stringify(response.report.result._history._value)
       );
       // Extract app history value
       const appHistory = response.result._history._value;
