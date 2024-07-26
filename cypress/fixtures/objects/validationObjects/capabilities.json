@@ -32,7 +32,24 @@
                 "validations": [
                     {
                         "type": "request",
-                        "description": "Validation of capabilities.request to check the capability requested"
+                        "description": "Validation of capabilities.request to check the capability requested",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.request",
+                                "validationPath": "result[0].use.granted",
+                                "content": true
+                            },
+                            {
+                                "method": "capabilities.request",
+                                "validationPath": "result[0].manage.granted",
+                                "content": true
+                            },
+                            {
+                                "method": "capabilities.request",
+                                "validationPath": "result[0].provide.granted",
+                                "content": true
+                            }
+                        ]
                     }
                 ]
             }

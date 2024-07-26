@@ -61,7 +61,7 @@ class eventObject {
       this.eventSchemaResult = response.eventSchemaResult;
       this.eventTime = response.eventTime;
     } else {
-      assert(false, 'Platform didn’t trigger the event with a valid response');
+      assert(false, 'Platform does not trigger event');
     }
   }
 }
