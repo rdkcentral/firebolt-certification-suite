@@ -37,7 +37,7 @@ jobs:
     name: Release
     needs: merge-dev-to-main
     if: ${{ success() }}
-    uses: ./.github/workflows/release.yml
+    uses: ./.github/workflows/release.yaml
     with:
       branch: 'main'
 
