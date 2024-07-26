@@ -210,7 +210,6 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
         fireboltObject.hasOwnProperty(CONSTANTS.EXPECTING_ERROR) &&
         fireboltObject.expectingError == true
       ) { 
-        // resolvedErrorContentJson
         if (
           resolvedErrorContentJson &&
           dataIdentifier &&
