@@ -1,8 +1,9 @@
+@AcknowledgeChallenge @AcknowledgeChallengeManage @manageSDK @rpcOnly
 Feature: AcknowledgeChallenge_Manage_RpcOnly
 
     # Note: Reboot required after running this feature file
 
-    @transport @ripple @requiresPlatformImplementation
+    @transport @requiresPlatformImplementation
     Scenario: AcknowledgeChallenge.onRequestChallenge - Positive Scenario: Validating rpc method
         Given the environment has been set up for 'AcknowledgeChallenge-rpc-Only' tests
         And 3rd party 'certification' app is launched
@@ -16,7 +17,7 @@ Feature: AcknowledgeChallenge_Manage_RpcOnly
         And Fetch response for 'localization countryCode' method from 3rd party app
         Then 'Firebolt' platform responds with 'expected localization countryCode'
 
-    @transport @ripple @requiresPlatformImplementation
+    @transport @requiresPlatformImplementation
     Scenario: AcknowledgeChallenge.challengeError - Negative Scenario: Validating rpc method
         Given the environment has been set up for 'AcknowledgeChallenge-rpc-Only' tests
         And 3rd party 'certification' app is launched

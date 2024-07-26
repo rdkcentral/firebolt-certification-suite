@@ -1,10 +1,11 @@
+@VoiceGuidance @VoiceGuidanceManage @manageSDK
 Feature: VoiceGuidance_Manage
 
     Background: Launch FCA for 'VoiceGuidance'
         Given the environment has been set up for 'VoiceGuidance' tests
         And 3rd party 'certification' app is launched
 
-    @VoiceGuidance @manageSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Voiceguidance.<Method> - Positive Scenario: <Scenario>
         When 1st party app registers for the '<Event_registration_Key>' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<API_Set_Key>'
@@ -20,7 +21,7 @@ Feature: VoiceGuidance_Manage
             | Set speed-1           | speed   | voiceguidance onspeedchanged   | set voiceguidance speed to 1 | get voiceguidance speed   | 1 for voiceguidance speed       | onSpeedChanged for voiceguidance with 1       |
             | Set speed-2           | speed   | voiceguidance onspeedchanged   | set voiceguidance speed to 2 | get voiceguidance speed   | 2 for voiceguidance speed       | onSpeedChanged for voiceguidance with 2       |
 
-    @VoiceGuidance @manageSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Voiceguidance.<Method> - Negative Scenario: <Scenario> and expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Error_Object>'

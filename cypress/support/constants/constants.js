@@ -334,6 +334,7 @@ module.exports = {
     FETCH_EVENT_RESPONSE: 'fcs.fetchEventResponse',
     PERFORMANCE_THRESHOLD_VALIDATOR: 'performance.fetchPerformanceThreshold',
     CREATE_MARKER: 'performance.createMarker',
+    UNLOADAPP: 'fcs.unloadApp',
   },
   PERFORMANCE_METRICS: 'performanceMetrics',
   RESPONSE: 'Response: ',
