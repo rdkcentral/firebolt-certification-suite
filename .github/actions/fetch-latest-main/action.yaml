@@ -1,0 +1,17 @@
+name: Fetch Latest Main
+description: Fetches the latest changes from the main branch
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Fetch latest changes from main
+      shell: bash
+      run: |
+        git fetch origin main
+        git checkout main
+        git pull origin main
