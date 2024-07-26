@@ -982,7 +982,8 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
  * cy.sendMessageToPlatformOrApp('event', {method: 'accessibility.onClosedCaptionsSettingsChanged', context: {}, contentObject: {}, expectingError: false, appId: 'test.test', eventExpected: 'triggers'}
  */
 Cypress.Commands.add('methodOrEventResponseValidation', (validationType, requestData) => {
-  const { method, context, contentObject, expectingError, appId, eventExpected } = requestData;
+  const { method, context, contentObject, expectingError, appId, eventExpected, isNullCase } =
+    requestData;
   let validationJsonPath = requestData.validationJsonPath;
 
   // Extracting the api or event object from the global list.
@@ -1032,14 +1033,17 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
             ) {
               response.result = response.result.eventResponse;
             }
-            cy.updateResponseForFCS(method, null, response, true).then((updatedResponse) => {
-              cy.saveEventResponse(
-                updatedResponse,
-                methodOrEventObject,
-                eventName,
-                eventExpected === 'triggers' ? true : false
-              );
-            });
+            cy.updateResponseForFCS(method, null, response, true, isNullCase).then(
+              (updatedResponse) => {
+                cy.saveEventResponse(
+                  updatedResponse,
+                  methodOrEventObject,
+                  eventName,
+                  eventExpected === 'triggers' ? true : false,
+                  isNullCase
+                );
+              }
+            );
           });
         }
       }).then(() => {

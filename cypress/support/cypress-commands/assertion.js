@@ -634,7 +634,7 @@ Cypress.Commands.add(
  */
 Cypress.Commands.add(
   'saveEventResponse',
-  (response, methodOrEventObject, eventName, eventExpected) => {
+  (response, methodOrEventObject, eventName, eventExpected, isNullCase) => {
     const eventNameForLog = eventName.split('-')[0];
     if (!response) {
       fireLog.fail(`Event response not received for ${eventNameForLog}`);
@@ -644,7 +644,7 @@ Cypress.Commands.add(
     }
 
     if (eventExpected) {
-      methodOrEventObject.setEventResponseData(response);
+      methodOrEventObject.setEventResponseData(response, isNullCase);
     } else {
       fireLog.isNull(response.eventResponse[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
     }

@@ -1,8 +1,7 @@
 @UserInterest @coreSDK
 Feature: UserInterest
 
-    @initialization
-    Scenario: Launch FCA for 'Userinterest'
+    Background: Launch FCA for 'Userinterest'
         Given the environment has been set up for 'Userinterest' tests
         And 3rd party 'certification' app is launched
 
