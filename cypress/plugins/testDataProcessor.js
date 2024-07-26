@@ -314,10 +314,18 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                     if (REGEXFORMATS[regexType]) {
                       parsedRegexExp = REGEXFORMATS[regexType];
                     } else {
-                      const regExp = new RegExp(data.type);
+                      let regExp = data.type;
+                      if (typeof data.type != CONSTANTS.STRING) {
+                        regExp = new RegExp(regExp.toString());
+                      }
+
                       parsedRegexExp = regExp;
                     }
-                    return (data.type = parsedRegexExp.toString());
+                    if (typeof parsedRegexExp != CONSTANTS.STRING) {
+                      return (data.type = parsedRegexExp.toString());
+                    } else {
+                      return (data.type = parsedRegexExp);
+                    }
 
                   case CONSTANTS.DEVICE_CONTENT_VALIDATION:
                     // Extracting the device mac from the environment JSON.
