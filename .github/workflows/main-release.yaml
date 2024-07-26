@@ -2,6 +2,11 @@ name: Main Release to GitHub
 
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to use for the workflow'
+        required: true
+        default: 'main'
 
 jobs:
   merge-dev-to-main:
