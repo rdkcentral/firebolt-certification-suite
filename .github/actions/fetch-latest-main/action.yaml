@@ -9,8 +9,8 @@ runs:
       with:
         fetch-depth: 0
 
-    - name: Fetch latest changes from main
-      run: |
-        git fetch origin main
-        git checkout main
-        git pull origin main
+      - name: Checkout main branch
+        run: git checkout main
+
+      - name: Pull latest changes
+        run: git pull origin main
