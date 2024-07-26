@@ -130,9 +130,6 @@ function processErrorContentJson() {
           validationObject.type
         );
         if (errorContentObject !== CONSTANTS.NO_DATA) {
-          logger.info(
-            `Expected error content object not found in ${CONSTANTS.ERROR_CONTENT_OBJECTS_PATH} for ${validationObject.type}`
-          );
           validationObject.type = errorContentObject;
         }
       });

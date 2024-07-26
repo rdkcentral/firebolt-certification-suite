@@ -94,7 +94,7 @@ Cypress.Commands.add(
               });
             }
           } else {
-            cy.log(`Unable to find data for Error validation for ${dataIdentifier}`);
+            fireLog.info(`Unable to find data for Error validation for ${dataIdentifier}`);
           }
         });
       });
@@ -455,12 +455,12 @@ function loggingValidationCheckResult(validationCheck) {
   // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
   validationCheck.forEach((assertion) => {
     if (assertion.validationStatus == CONSTANTS.SKIPPED) {
-      cy.log(
+      fireLog.info(
         `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`,
         'loggingValidationCheckResult'
       );
     } else {
-      cy.log(
+      fireLog.info(
         `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`,
         'loggingValidationCheckResult'
       );
