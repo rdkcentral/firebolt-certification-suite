@@ -413,9 +413,16 @@ Given(
         validationJsonPath = validationJsonPath ? validationJsonPath : CONSTANTS.RESULT;
 
         if (expectingError) {
-          contentObject = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[
-            errorContent
-          ];
+          if (
+            UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON, false) &&
+            UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[errorContent]
+          ) {
+            contentObject = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[
+              errorContent
+            ];
+          } else {
+            contentObject = errorContent;
+          }
         }
         const additionalParams = {
           method: method,
@@ -496,9 +503,16 @@ Given(
           : CONSTANTS.EVENT_RESPONSE;
 
         if (expectingError) {
-          contentObject = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[
-            errorContent
-          ];
+          if (
+            UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON, false) &&
+            UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[errorContent]
+          ) {
+            contentObject = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[
+              errorContent
+            ];
+          } else {
+            contentObject = errorContent;
+          }
         }
         const additionalParams = {
           method: event,
