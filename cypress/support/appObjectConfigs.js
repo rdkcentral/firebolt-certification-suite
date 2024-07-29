@@ -61,17 +61,7 @@ class eventObject {
       this.eventSchemaResult = response.eventSchemaResult;
       this.eventTime = response.eventTime;
     } else {
-      cy.logValidationResult(
-        ' Did not receive eventResponse,' + ' Actual: ' + typeof response == 'string'
-          ? response
-          : JSON.stringify(response),
-        CONSTANTS.FAIL,
-        CONSTANTS.SKIPPED,
-        CONSTANTS.SKIPPED
-      ).then(() => {
-        const pretext = 'Event Not Received ';
-        assert(false, pretext);
-      });
+      assert(false, 'Platform does not trigger event');
     }
   }
 }
