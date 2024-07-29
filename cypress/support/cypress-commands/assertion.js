@@ -429,24 +429,26 @@ function loggingValidationCheckResult(validationCheck) {
   });
 
   // Printing the status of all checks in the report.
-  cy.get(validationCheck)
-    .each((logging) => {
+  cy.get(validationCheck);
+  // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
+  validationCheck.forEach((assertion) => {
+    if (assertion.validationStatus == CONSTANTS.SKIPPED) {
       cy.log(
-        `${logging.validationPoint}: ${logging.validationStatus}. ${logging.message}`,
+        `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`,
         'loggingValidationCheckResult'
       );
-    })
-    .then(() => {
-      // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
-      validationCheck.forEach((assertion) => {
-        if (assertion.validationStatus == CONSTANTS.SKIPPED) {
-          assert.equal(assertion.validationStatus, CONSTANTS.SKIPPED, assertion.validationPoint);
-        } else {
-          assert.equal(assertion.validationStatus, CONSTANTS.PASS, assertion.validationPoint);
-        }
-      });
-    });
-} /**
+    } else {
+      cy.log(
+        `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`,
+        'loggingValidationCheckResult'
+      );
+      if (assertion.validationStatus == CONSTANTS.FAIL) {
+        fireLog.assert(false, `${assertion.validationPoint} failed, ${assertion.message}`);
+      }
+    }
+  });
+}
+/**
  * @module assertion
  * @function validateEvent
  * @description To validate the Events and log the results
