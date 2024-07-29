@@ -40,18 +40,6 @@
  * `Given Metrics collection process is 'inititated'`
  * `Given Metrics collection process is 'stopped'`
 
-## Interactions collection process is '(initiated|stopped)'
-### Purpose: To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
-
-### Params:
-| Param | Definition |
-| --- | --- |
-| action | initiated or stopped |
-
-### Examples:
- * `Given Interactions collection process is 'initiated'`
- * `Given Interactions collection process is 'stopped'`
-
  ## '(.+)' will (be|stay) in '(.+)' state
 ### Purpose: To validate 3rd party app transitionss wrt state, event and history aagainst appObject as the source of truth
 Here, be/stay determines whether the app will get transitioned to new state or will be staying in the same state.
@@ -423,3 +411,21 @@ While validating, if a key is present in both fcs-validation jsons (eg: cypress/
             }
         ]
 }
+
+## Interactions collection process is '(initiated|stopped)'
+### Purpose: To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
+
+### Params:
+| Param | Definition |
+| --- | --- |
+| action | initiated or stopped |
+
+### Examples:
+ * `Given Interactions collection process is 'initiated'`
+ * `Given Interactions collection process is 'stopped'`
+
+## Validate Firebolt Interactions logs
+### Purpose: Validating the firebolt interaction logs in configModule
+
+### Examples:
+ * `Given Validate Firebolt Interactions logs`
