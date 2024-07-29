@@ -40,7 +40,7 @@
  * `Given Metrics collection process is 'inititated'`
  * `Given Metrics collection process is 'stopped'`
 
-## Interactions metrics collection process is '(initiated|stopped)'
+## Interactions collection process is '(initiated|stopped)'
 ### Purpose: To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
 
 ### Params:
@@ -49,8 +49,8 @@
 | action | initiated or stopped |
 
 ### Examples:
- * `Given Interactions metrics collection process is 'inititated'`
- * `Given Interactions metrics collection process is 'stopped'`
+ * `Given Interactions collection process is 'initiated'`
+ * `Given Interactions collection process is 'stopped'`
 
  ## '(.+)' will (be|stay) in '(.+)' state
 ### Purpose: To validate 3rd party app transitionss wrt state, event and history aagainst appObject as the source of truth

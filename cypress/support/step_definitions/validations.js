@@ -282,14 +282,14 @@ Given(
 
 /**
  * @module validations
- * @function Interactions metrics collection process is (initiated|stopped)
+ * @function Given Interactions collection process is (initiated|stopped)
  * @description To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
  * @param {String} action - initiated or stopped
  * @example
- * Given Interactions metrics collection process is initiated
- * Given Interactions metrics collection process is stopped
+ * Given Interactions collection process is initiated
+ * Given Interactions collection process is stopped
  */
-Given(/Interactions metrics collection process is (initiated|stopped)/, (action) => {
+Given(/Interactions collection process is (initiated|stopped)/, (action) => {
   if (
     (action == CONSTANTS.INITIATED &&
       UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) != true) ||
@@ -321,12 +321,12 @@ Given(/Interactions metrics collection process is (initiated|stopped)/, (action)
 
 /**
  * @module validations
- * @function Given Validate Firebolt Interactions metrics logs
+ * @function Given Validate Firebolt Interactions logs
  * @description Validating the firebolt interaction logs in configModule
 
  * @example
- * Given Validate Firebolt Interactions metrics logs
+ * Given Validate Firebolt Interactions logs
  */
-Given(/Validate Firebolt Interactions metrics logs/, () => {
+Given(/Validate Firebolt Interactions logs/, () => {
   cy.then(() => cy.validateFireboltInteractionLogs());
 });
