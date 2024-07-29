@@ -210,7 +210,6 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
         ) {
           return resolvedErrorContentJson[dataIdentifier];
         } else {
-          logger.info(`Unable to find data for Error validation for ${dataIdentifier}`);
           return dataIdentifier;
         }
       } else {
