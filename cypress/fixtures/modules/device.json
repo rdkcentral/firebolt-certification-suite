@@ -97,5 +97,420 @@
             "state": "disconnected",
             "type": "ethernet"
         }
+    },
+    "AUDIOCODEC": {"codec": "eac3"},
+    "AUDIOCODEC_AAC": {"codec": "aac"},
+    "AUDIOCODEC_AC3": {"codec": "ac3"},
+    "AUDIOCODEC_AC4": {"codec": "ac4"},
+    "AUDIOCODEC_DTS-X": {"codec": "dts-x"},
+    "AUDIOCODEC_MPEG3": {"codec": "mpeg3"},
+    "AUDIOCODEC_OPUS": {"codec": "opus"},
+    "AUDIOCODEC_TRUEHD": {"codec": "truehd"},
+    "AUDIOCODEC_UNKNOWN": {"codec": "unknown"},
+    "AUDIOCODEC_VORBIS": {"codec": "vorbis"},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_ATMOS":{"codec": "eac3", "options": {"atmos": true}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_CODECLEVEL_4.2":{"codec": "eac3", "options": {"codecLevel": "4.2"}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_HIGH":{"codec": "eac3", "options": {"codecProfile": "high"}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_MAIN":{"codec": "eac3", "options": {"codecProfile": "main"}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_MAIN10":{"codec": "eac3", "options": {"codecProfile": "main10"}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_MP2LC":{"codec": "eac3", "options": {"codecProfile": "mp2lc"}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_MP4HE":{"codec": "eac3", "options": {"codecProfile": "mp4he"}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_P0":{"codec": "eac3", "options": {"codecProfile": "p0"}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_CODECPROFILE_P2":{"codec": "eac3", "options": {"codecProfile": "p2"}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_CONTAINER_AUDIO/MPEG": {"codec": "eac3", "options": {"container": "audio/mpeg"}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_CONTAINER_AUDIO/MP4": {"codec": "eac3", "options": {"container": "audio/mp4"}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_CONTAINER_AUDIO/OGG": {"codec": "eac3", "options": {"container": "audio/ogg"}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_CONTAINER_AUDIO/WEBM": {"codec": "eac3", "options": {"container": "audio/webm"}},
+    "AUDIOCODEC_AUDIOFORMATOPTIONS_SAMPLERATE_48": {"codec": "eac3", "options": {"sampleRate": 48}},
+    "VIDEOCODEC": {"codec": "avc"},
+    "VIDEOFORMATSUPPORTED_WITH_CODEC_AV1": {"codec": "avc"},
+    "VIDEOFORMATSUPPORTED_WITH_CODEC_HEVC": {"codec": "hevc"},
+    "VIDEOFORMATSUPPORTED_WITH_CODEC_MPEG1": {"codec": "mpeg1"},
+    "VIDEOFORMATSUPPORTED_WITH_CODEC_MPEG2": {"codec": "mpeg2"},
+    "VIDEOFORMATSUPPORTED_WITH_CODEC_VP8": {"codec": "vp8"},
+    "VIDEOFORMATSUPPORTED_WITH_CODEC_VP9": {"codec": "vp9"},
+    "VIDEOFORMATSUPPORTED_WITH_CODEC_VP10": {"codec": "vp10"},
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_RESOLUTION":{"codec": "avc", "options": {"resolution": [1920,1080]}},
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_ATMOS_TRUE": {"codec": "avc", "options": {"atmos": true}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CODECLEVEL_4.1": {"codec": "avc", "options": {"codecLevel": "4.1"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CODECLEVEL_4.2": {"codec": "avc", "options": {"codecLevel": "4.2"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CODECLEVEL_5.0": {"codec": "avc", "options": {"codecLevel": "5.0"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CODECLEVEL_5.1": {"codec": "avc", "options": {"codecLevel": "5.1"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CODECLEVEL_HIGH": {"codec": "avc", "options": {"codecLevel": "high"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CODECLEVEL_MAIN": {"codec": "avc", "options": {"codecLevel": "main"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CODECPROFILE_HIGH": {"codec": "avc", "options": {"codecProfile": "high"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CODECPROFILE_MAIN": {"codec": "avc", "options": {"codecProfile": "main"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CODECPROFILE_MAIN10": {"codec": "avc", "options": {"codecProfile": "main10"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CODECPROFILE_P0": {"codec": "avc", "options": {"codecProfile": "p0"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CODECPROFILE_P2": {"codec": "avc", "options": {"codecProfile": "p2"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CONTAINER_VIDEO/MPEG": {"codec": "avc", "options": {"container": "video/mpeg"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CONTAINER_VIDEO/MP2T": {"codec": "avc", "options": {"container": "video/mp2t"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CONTAINER_VIDEO/MP4": {"codec": "avc", "options": {"container": "video/mp4"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_CONTAINER_VIDEO/WEBM": {"codec": "avc", "options": {"container": "video/webm"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_FRAMERATE_30": {"codec": "avc", "options": {"frameRate": 30}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_HDR_HDR10PLUS": {"codec": "avc", "options": {"hdr": "hdr10plus"}},
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_HDR_DOLBYVISION": {"codec": "avc", "options": {"hdr": "dolbyVision"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_HDR_HDR10": {"codec": "avc", "options": {"hdr": "hdr10"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_HDR_HLG": {"codec": "avc", "options": {"hdr": "hlg"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_HDR_SDR": {"codec": "avc", "options": {"hdr": "sdr"}}, 
+    "VIDEOCODEC_VIDEOFORMATOPTIONS_HDR_UNKNOWN": {"codec": "avc", "options": {"hdr": "unknown"}}, 
+    "HDCPVERSIONSUPPORTED": "2.2",
+    "HDRPROFILE": "hdr10",
+    "HDRPROFILES": ["hdr10","hdr10plus","hlg"],
+    "AUDIOMODE": "stereo",
+    "VIDEOMODE": "1080p60",
+    "VIDEOMODES": ["720p50","720p60","1080i50", "1080i60","1080p24","1080p30","1080p50","1080p60"],
+    "AUDIOCODEC_INVALID_TYPE_INTEGER": {"codec": 1234},
+    "AUDIOCODEC_INVALID_TYPE_BOOLEAN": {"codec": true},
+    "AUDIOCODEC_DUMMYCODEC_KEY": {"dummycodec": "avc"},
+    "AUDIOFORMATOPTIONS_ATMOS_TYPE_INTERGER": {"codec": "eac3", "options": {"atmos": 1234}},
+    "AUDIOFORMATOPTIONS_ATMOS_TYPE_STRING": {"codec": "eac3", "options": {"atmos": "test"}},
+    "AUDIOFORMATOPTIONS_CODECLEVEL_TYPE_INTERGER": {"codec": "eac3", "options": {"codecLevel": 123}},
+    "AUDIOFORMATOPTIONS_CODECLEVEL_TYPE_BOOLEAN": {"codec": "eac3", "options": {"codecLevel": true}},
+    "AUDIOFORMATOPTIONS_CODECPROFILE_TYPE_INTERGER": {"codec": "eac3", "options": {"codecProfile": 123}},
+    "AUDIOFORMATOPTIONS_CODECPROFILE_TYPE_BOOLEAN": {"codec": "eac3", "options": {"codecProfile": 123}},
+    "AUDIOFORMATOPTIONS_CONTAINER_TYPE_INTERGER": {"codec": "eac3", "options": {"container": 123}},
+    "AUDIOFORMATOPTIONS_CONTAINER_TYPE_BOOLEAN": {"codec": "eac3", "options": {"container": true}},
+    "AUDIOFORMATOPTIONS_SAMPLERATE_TYPE_BOOLEAN":{"codec": "eac3", "options": {"sampleRate": true}},
+    "AUDIOFORMATOPTIONS_SAMPLERATE_TYPE_STRING":{"codec": "eac3", "options": {"sampleRate": "test"}},
+    "VIDEOCODEC_INVALID_TYPE_INTEGER":{"codec": 1234},
+    "VIDEOCODEC_INVALID_TYPE_BOOLEAN":{"codec": true},
+    "VIDEOCODEC_DUMMYCODEC_KEY": {"dummycodec": "eac3"},
+    "VIDEOFORMATOPTIONS_RESOLUTION_TYPE_BOOLEAN": {"codec": "avc", "options": {"resolution": true}},
+    "VIDEOFORMATOPTIONS_RESOLUTION_TYPE_INTEGER": {"codec": "avc", "options": {"resolution": 12345}},
+    "VIDEOFORMATOPTIONS_ATMOS_TYPE_INTERGER": {"codec": "avc", "options": {"atmos": 123}},
+    "VIDEOFORMATOPTIONS_ATMOS_TYPE_STRING": {"codec": "avc", "options": {"resolution": "test"}},
+    "VIDEOFORMATOPTIONS_CODECLEVEL_TYPE_INTERGER": {"codec": "avc", "options": {"codecLevel": 123}},
+    "VIDEOFORMATOPTIONS_CODECLEVEL_TYPE_BOOLEAN": {"codec": "avc", "options": {"codecLevel": true}},
+    "VIDEOFORMATOPTIONS_CODECPROFILE_TYPE_INTERGER": {"codec": "avc", "options": {"codecProfile": 123}},
+    "VIDEOFORMATOPTIONS_CODECPROFILE_TYPE_BOOLEAN": {"codec": "avc", "options": {"codecProfile": true}},
+    "VIDEOFORMATOPTIONS_CONTAINER_TYPE_INTERGER": {"codec": "avc", "options": {"container": 123}},
+    "VIDEOFORMATOPTIONS_CONTAINER_TYPE_BOOLEAN": {"codec": "avc", "options": {"container": true}},
+    "VIDEOFORMATOPTIONS_FRAMERATE_TYPE_BOOLEAN": {"codec": "avc", "options": {"frameRate": true}},
+    "VIDEOFORMATOPTIONS_FRAMERATE_TYPE_STRING": {"codec": "avc", "options": {"frameRate": "test"}},
+    "VIDEOFORMATOPTIONS_HDR_TYPE_INTERGER": {"codec": "avc", "options": {"hdr": 123}},
+    "VIDEOFORMATOPTIONS_HDR_TYPE_BOOLEAN": {"codec": "avc", "options": {"hdr": true}},
+    "ONAUDIOMODECHANGED_EVENT":{
+        "method": "display.onAudioModeChanged",
+        "result": "stereo"
+    },
+    "ONVIDEOMODECHANGED_EVENT":{
+        "method": "display.onVideoModeChanged",
+        "result": "1080p60"
+    },
+    "ONVIDEOMODESCHANGED_EVENT":{
+        "method": "display.onVideoModesChanged",
+        "result": [
+            "720p50",
+            "720p60",
+            "1080i50",
+            "1080i60",
+            "1080p24",
+            "1080p30",
+            "1080p50",
+            "1080p60"
+        ]
+    },
+    "ONSOURCEFRAMERATEUSEDCHANGED_EVENT":{
+        "method": "display.onSourceFrameRateUsedChanged",
+        "result": true
+    },
+    "ONHDRPROFILECHANGED_EVENT":{
+        "method": "display.onHdrProfileChanged",
+        "result": "hdr10"
+    },
+    "ONAUDIOOUTPUTCHANGED_EVENT":{
+        "method": "display.onAudioOutputChanged",
+        "result": "stereo"
+    },
+    "AUDIOMODE_AUTO": "auto",
+    "AUDIOMODE_MONO": "mono",
+    "AUDIOMODE_NONE": "none",
+    "AUDIOMODE_PASSTHROUGH": "passthrough",
+    "AUDIOMODE_STEREO": "stereo",
+    "AUDIOMODE_SURROUND": "surround",
+    "AUDIOMODE_UNKNOWN": "unknown",
+    "VIDEOMODE_480I": "480i",
+    "VIDEOMODE_480P": "480p",
+    "VIDEOMODE_576I25": "576i25",
+    "VIDEOMODE_576P50": "576p50",
+    "VIDEOMODE_576P60": "576p60",
+    "VIDEOMODE_720P50": "720p50",
+    "VIDEOMODE_720P60": "720p60",
+    "VIDEOMODE_1080I50": "1080i50",
+    "VIDEOMODE_1080I60": "1080i60",
+    "VIDEOMODE_1080P24": "1080p24",
+    "VIDEOMODE_1080P25": "1080p25",
+    "VIDEOMODE_1080P30": "1080p30",
+    "VIDEOMODE_1080P50": "1080p50",
+    "VIDEOMODE_1080P60": "1080p60",
+    "VIDEOMODE_2160P24": "2160p24",
+    "VIDEOMODE_2160P25": "2160p25",
+    "VIDEOMODE_2160P30": "2160p30",
+    "VIDEOMODE_2160P50": "2160p50",
+    "VIDEOMODE_2160P60": "2160p60",
+    "VIDEOMODE_4320P60": "4320p60",
+    "VIDEOMODE_UNKNOWN": "unknown",
+    "HDRPROFILE_DOLBYVISION": "dolbyVision",
+    "HDRPROFILE_HDR10": "hdr10",
+    "HDRPROFILE_HDR10PLUS": "hdr10plus",
+    "HDRPROFILE_HLG": "hlg",
+    "HDRPROFILE_SDR": "sdr",
+    "HDRPROFILE_UNKNOWN": "unknown",
+    "ONAUDIOMODECHANGED_AUDIOMODE_AUTO_EVENTS": {
+        "method": "device.onAudioModeChanged",
+        "result": "auto"
+    },
+    "ONAUDIOMODECHANGED_AUDIOMODE_MONO_EVENTS": {
+        "method": "device.onAudioModeChanged",
+        "result": "mono"
+    },
+    "ONAUDIOMODECHANGED_AUDIOMODE_NONE_EVENTS": {
+        "method": "device.onAudioModeChanged",
+        "result": "none"
+    },
+    "ONAUDIOMODECHANGED_AUDIOMODE_PASSTHROUGH_EVENTS": {
+        "method": "device.onAudioModeChanged",
+        "result": "passthrough"
+    },
+    "ONAUDIOMODECHANGED_AUDIOMODE_STEREO_EVENTS": {
+        "method": "device.onAudioModeChanged",
+        "result": "stereo"
+    },
+    "ONAUDIOMODECHANGED_AUDIOMODE_SURROUND_EVENTS": {
+        "method": "device.onAudioModeChanged",
+        "result": "surround"
+    },
+    "ONAUDIOMODECHANGED_AUDIOMODE_UNKNOWN_EVENTS": {
+        "method": "device.onAudioModeChanged",
+        "result": "unknown"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_480I_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "480i"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_480P_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "480p"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_576I25_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "576i25"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_576I50_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "576p50"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_576I60_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "576p60"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_720P50_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "720p50"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_720P60_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "720p60"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_1080I50_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "1080i50"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_1080I60_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "1080i60"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_1080P24_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "1080p24"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_1080P25_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "1080p25"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_1080P30_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "1080p30"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_1080P50_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "1080p50"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_1080P60_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "1080p60"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_2160P24_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "2160p24"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_2160P25_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "2160p25"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_2160P30_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "2160p30"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_2160P50_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "2160p50"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_2160P60_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "2160p60"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_4320P60_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "4320p60"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODE_UNKNOWN_EVENTS": {
+        "method": "device.onVideoModeChanged",
+        "result": "unknown"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_480I_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "480i"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_480P_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "480p"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_576I25_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "576i25"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_576I50_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "576p50"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_576I60_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "576p60"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_720P50_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "720p50"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_720P60_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "720p60"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_1080I50_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "1080i50"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_1080I60_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "1080i60"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_1080P24_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "1080p24"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_1080P25_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "1080p25"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_1080P30_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "1080p30"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_1080P50_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "1080p50"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_1080P60_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "1080p60"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_2160P24_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "2160p24"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_2160P25_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "2160p25"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_2160P30_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "2160p30"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_2160P50_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "2160p50"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_2160P60_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "4320p60"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_4320P60_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "4320P60"
+    },
+    "ONVIDEOMODECHANGED_VIDEOMODES_UNKNOWN_EVENTS": {
+        "method": "device.onVideoModesChanged",
+        "result": "unknown"
+    },
+    "ONHDRPROFILECHANGED_HDRPROFILE_DOLBYVISION_EVENTS": {
+        "method": "device.onHdrProfileChanged",
+        "result": "dolbyVision"
+    },
+    "ONHDRPROFILECHANGED_HDRPROFILE_HDR10_EVENTS": {
+        "method": "device.onHdrProfileChanged",
+        "result": "hdr10"
+    },
+    "ONHDRPROFILECHANGED_HDRPROFILE_HDR10PLUS_EVENTS": {
+        "method": "device.onHdrProfileChanged",
+        "result": "hdr10plus"
+    },
+    "ONHDRPROFILECHANGED_HDRPROFILE_HLG_EVENTS": {
+        "method": "device.onHdrProfileChanged",
+        "result": "hlg"
+    },
+    "ONHDRPROFILECHANGED_HDRPROFILE_SDR_EVENTS": {
+        "method": "device.onHdrProfileChanged",
+        "result": "sdr"
+    },
+    "ONHDRPROFILECHANGED_HDRPROFILE_UNKNOWN_EVENTS": {
+        "method": "device.onHdrProfileChanged",
+        "result": "unknown"
+    },
+    "ONAUDIOOUTPUTCHANGED_AUDIOMODE_AUTO_EVENTS": {
+        "method": "device.onAudioOutputChanged",
+        "result": "auto"
+    },
+    "ONAUDIOOUTPUTCHANGED_AUDIOMODE_MONO_EVENTS": {
+        "method": "device.onAudioOutputChanged",
+        "result": "mono"
+    },
+    "ONAUDIOOUTPUTCHANGED_AUDIOMODE_NONE_EVENTS": {
+        "method": "device.onAudioOutputChanged",
+        "result": "none"
+    },
+    "ONAUDIOOUTPUTCHANGED_AUDIOMODE_PASSTHROUGH_EVENTS": {
+        "method": "device.onAudioOutputChanged",
+        "result": "passthrough"
+    },
+    "ONAUDIOOUTPUTCHANGED_AUDIOMODE_STEREO_EVENTS": {
+        "method": "device.onAudioOutputChanged",
+        "result": "stereo"
+    },
+    "ONAUDIOOUTPUTCHANGED_AUDIOMODE_SURROUND_EVENTS": {
+        "method": "device.onAudioOutputChanged",
+        "result": "surround"
+    },
+    "ONAUDIOOUTPUTCHANGED_AUDIOMODE_UNKNOWN_EVENTS": {
+        "method": "device.onAudioOutputChanged",
+        "result": "unknown"
     }
+
+
+
+
+
+
+
+
 }
