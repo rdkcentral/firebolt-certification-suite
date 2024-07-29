@@ -506,6 +506,7 @@ Cypress.Commands.add('fetchLifecycleHistory', (appId) => {
  * @example
  * cy.setAppIdFromAppType('3rd party app')
  * cy.setAppIdFromAppType('1st party app')
+ * cy.setAppIdFromAppType('player')
  */
 Cypress.Commands.add('setAppIdFromAppType', (appType) => {
   return new Cypress.Promise((resolve, reject) => {
@@ -514,7 +515,7 @@ Cypress.Commands.add('setAppIdFromAppType', (appType) => {
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appType === CONSTANTS.FIRST_PARTY_APP
           ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
-          : appType;
+          : UTILS.checkForSecondaryAppId(appType);
     resolve(appId);
   });
 });
