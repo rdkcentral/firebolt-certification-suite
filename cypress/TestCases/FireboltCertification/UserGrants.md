@@ -54,18 +54,11 @@ To execute Usergrant test cases, additional implementation in the configuration 
 1. **Before Operation**
    Before operations are a set of operations performed before a test case is executed. For more details, refer to the [Before Operation](https://github.com/rdkcentral/firebolt-certification-suite/blob/dev/README.md#before-operation)
 
-2. **Framework registers** 
-   This glue informs the platform to use a test provider for simulating user inputs. It registers providers like 'pinChallenge' or 'Ackchallenge'. The `setTestProvider` function, which should be implemented in the configModule, sends the necessary messages to the platform to enable the simulation.
-   
-      **Example:**
-     - `Framework registers 'pinChallenge' test provider`
+2. **Framework registers '(.+)' test provider** 
+   This glue informs the platform to use a test provider for simulating user inputs. For more details refer [here](https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/support/step_definitions/providerCalls.md#framework-registers--test-provider).
 
-3. **User sets response**
+3. **User set response for '(.+)'**
    Making a call to set the value in 1st party app or 3rd party app. For more details, refer to the [User set response.](https://github.com/rdkcentral/firebolt-certification-suite/blob/dev/cypress/support/step_definitions/providerCalls.md#user-set-response-for-)
-
-     **Examples:**
-     - `User sets response for 'pinChallenge correct pin'`
-     - `User sets response for 'acknowledge granted'`
   
   - **Acknowledgement:**  
      The Acknowledgement allows a user to acknowledge a user grant by clicking a button. The challenge should appear for the user to acknowledge the grant, allowing the grant to be either accepted or denied based on user action. 
@@ -73,5 +66,5 @@ To execute Usergrant test cases, additional implementation in the configuration 
    - **PinChallenge:**  
      The Pin Challenge requires a user to respond to a numeric PIN challenge to confirm their identity. The challenge should appear for the user to enter the PIN, allowing the grant to be either accepted or denied based on user input.
 
-4. **User 'starts' recording lifecycle history**
+4. **User '(.+)' recording lifecycle history for '(.+)'**
    Sending a message to the platform/app to start/stop recording lifecycle histories. For more details, refer to the [User starts recording lifecycle history](https://github.com/rdkcentral/firebolt-certification-suite/blob/dev/cypress/support/step_definitions/providerCalls.md#user--recording-lifecycle-history-for-)

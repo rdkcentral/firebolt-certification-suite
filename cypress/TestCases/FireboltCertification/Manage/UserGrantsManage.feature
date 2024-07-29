@@ -1,7 +1,8 @@
+@UserGrants @UserGrantsManage @manageSDK
 Feature: UserGrants_Manage
 
     # First allowing the grant and calling usergrants.app then checking grant using Capabilities.granted
-    @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario: Usergrants.app R.5.1.2 - Positive Scenario: with grant(ackchallenge)
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
@@ -16,7 +17,7 @@ Feature: UserGrants_Manage
         Then 'Firebolt' platform responds with 'true for capabilities granted'
 
     # First allowing the grant for device.distributor for the device and calling usergrants.device and validating.
-    @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario: Usergrants.device R.5.1.3 - Positive Scenario: with grant(ackchallenge)
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
@@ -29,7 +30,7 @@ Feature: UserGrants_Manage
         Then 'Firebolt' platform responds to '1st party app' with 'expected list of grants for device'
 
     # First allowing the grant and calling usergrants.capability then checking grant using Capabilities.granted
-    @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario: Usergrants.capability R.5.1.4 - Positive Scenario: with grant(ackchallenge)
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
@@ -47,7 +48,7 @@ Feature: UserGrants_Manage
     # Example - 2: Granting the device ID capability by calling usergrants.grant method to specific 3rd party app and validating by retrieving the list of active grants for that app by usergrants.app.
     # Example - 3: Denying the device distributor capability by calling usergrants.deny method at device level and validating by retrieving the list of denied grants for the device by usergrants.device.
     # Example - 4: Denying the device ID capability by calling usergrants.deny method to specific 3rd party app and validating by retrieving the list of denied grants for that app by usergrants.app.
-    @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Usergrants.<method> - Positive Scenario: <Scenario>
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
@@ -63,7 +64,7 @@ Feature: UserGrants_Manage
             | deny capability at device level  | deny device distributor capability  | null for usergrants deny  | get usergrants for device        | expected list of denied grants for device        | deny R.5.1.6  |
             | deny capability at app level     | deny device id capability           | null for usergrants deny  | get usergrants for 3rd party app | expected list of denied grants for 3rd party app | deny R.5.1.6  |
 
-    @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Usergrants.clear R.5.1.7 - Positive Scenario: <Scenario>
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
@@ -85,7 +86,7 @@ Feature: UserGrants_Manage
             | clear grant at device app for role use   | fetch device id          | get usergrants for 3rd party app | expected list of grants for 3rd party app | clear device id capability          | empty array for usergrants device id          |
 
     # here requesting a grant for device id for the role use
-    @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario: Usergrants.request - Positive Scenario: requesting for grant without force params, with force=true
         Given the environment has been set up for 'userGrants' tests
         And Framework registers 'pinChallenge' test provider
@@ -105,7 +106,7 @@ Feature: UserGrants_Manage
         Then 'Firebolt' platform responds to '1st party app' with 'denied for usergrants country code capability'
 
     # here requesting a grant for device id for the role use
-    @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario: Usergrants.request - Positive Scenario: requesting for grant without force params, with force=true and force=false
         Given the environment has been set up for 'userGrants' tests
         And Framework registers 'ackchallenge' test provider
@@ -125,7 +126,7 @@ Feature: UserGrants_Manage
         When 1st party app invokes the 'Firebolt' API to 'get 3rd party app grants'
         Then 'Firebolt' platform responds to '1st party app' with 'denied for usergrants country code capability'
 
-    @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Usergrants.<Method> - Negative Scenario: <Scenario> expecting error
         Given the environment has been set up for 'userGrants' tests
         When 1st party app invokes the 'Firebolt' API to '<Api_Key>'
@@ -138,7 +139,7 @@ Feature: UserGrants_Manage
             | with integer capability | get usergrants capability with invalid type integer capability parameter | invalid parameter for usergrants capability | capability |
             | with boolean capability | get usergrants capability with invalid type boolean capability parameter | invalid parameter for usergrants capability | capability |
 
-    @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Usergrants.<Method> - Negative Scenario: <Scenario> expecting error
         Given the environment has been set up for 'userGrants' tests
         When 1st party app invokes the 'Firebolt' API to '<Api_Key>'
@@ -161,7 +162,7 @@ Feature: UserGrants_Manage
             | invalid capability                    | request | get usergrants request with invalid capability parameter     | invalid parameter for usergrants request |
             | invalid appId                         | request | get usergrants request with invalid options appId parameter  | invalid parameter for usergrants request |
 
-    @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario: UserGrants.Capability R.5.1.4 - Positive Scenario: by clearing the grant and validating usergrants.capability as empty
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
@@ -177,7 +178,7 @@ Feature: UserGrants_Manage
         When '3rd party app' invokes the 'Firebolt' API to 'check if capabilities is granted for device distributor'
         Then 'Firebolt' platform responds with 'null for capabilities granted'
 
-    @Usergrants @manageSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario: Usergrants.app R.5.1.2 - Positive Scenario: by clearing the grant and validating usergrants.app as empty
         Given the environment has been set up for 'userGrants' tests
         And 3rd party 'certification' app is launched
