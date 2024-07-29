@@ -171,10 +171,10 @@ Cypress.Commands.add(
         JSON.stringify(apiResponseContent) +
         ' to be ' +
         JSON.stringify(expected);
-      if (apiResponseContent != expected) {
-        fireLog.assert(false, pretext);
-      } else {
+      if (_.isEqual(apiResponseContent, expected)) {
         fireLog.info(`${pretext}`);
+      } else {
+        fireLog.assert(false, pretext);
       }
     }
   }
