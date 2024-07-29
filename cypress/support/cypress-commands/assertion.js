@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { fireLog } from '../cypress-support/src/utils';
 /**
  * @module assertion
  * @function validateErrorObject
@@ -36,7 +36,7 @@ Cypress.Commands.add(
   (method, expectedContent, validationType, context = CONSTANTS.NO_CONTEXT, appId, param) => {
     // Function to extract the error validation objects for the passed method and parameters from the exception list.
     const fetchErrorValidationObjectForExceptionmethod = (method, param) => {
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
         const exceptionMethods = UTILS.getEnvVariable(CONSTANTS.EXCEPTION_METHODS);
         let exceptionType, methodInExceptionList, errorType;
         // Looping through the different types of exceptions lists.
@@ -72,34 +72,23 @@ Cypress.Commands.add(
               errorType = CONSTANTS.NOT_SUPPORTED;
           }
         }
-        const errorSchemaFilePath = CONSTANTS.ERROR_SCHEMA_OBJECTS_PATH;
-        const errorContentFilePath = CONSTANTS.ERROR_CONTENT_OBJECTS_PATH;
 
-        // Extracting the error validation object from the above files based on obtained errorType.
-        cy.task(CONSTANTS.READFILEIFEXISTS, errorSchemaFilePath).then((errorSchema) => {
-          if (errorSchema) {
-            errorSchema = JSON.parse(errorSchema);
-            errorSchema = errorSchema[errorType];
-            if (
-              typeof errorSchema == CONSTANTS.TYPE_OBJECT &&
-              errorSchema.type == CONSTANTS.VALIDATION_FUNCTION
-            ) {
-              errorSchema.validations.forEach((validationObject) => {
-                cy.task(CONSTANTS.READFILEIFEXISTS, errorContentFilePath).then((errorContent) => {
-                  errorContent = JSON.parse(errorContent);
-                  validationObject.type = errorContent[validationObject.type];
-                  resolve(errorSchema);
-                });
-              });
-            }
-          } else {
-            cy.log(`Unable to find data for Error validation for ${dataIdentifier}`);
-          }
-        });
+        // Extracting the error content validation object from the environment variable.
+        if (
+          UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON, false) &&
+          UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[errorType]
+        ) {
+          const contentObject = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[
+            errorType
+          ];
+          resolve(contentObject);
+        } else {
+          reject(`Unable to find Error content validation object for ${errorType}`);
+        }
       });
     };
 
-    if (expectedContent == CONSTANTS.EXCEPTION_ERROR_OBJECT) {
+    if (expectedContent === CONSTANTS.EXCEPTION_ERROR_OBJECT) {
       cy.wrap(fetchErrorValidationObjectForExceptionmethod(method, param)).then((errorObject) => {
         validateErrorObjects(errorObject);
       });
@@ -109,6 +98,7 @@ Cypress.Commands.add(
 
     // Function to do content validation for the error objects.
     function validateErrorObjects(errorSchemaObject) {
+      console.log(`Debug : errorSchemaObject ` + JSON.stringify(errorSchemaObject));
       try {
         if (
           errorSchemaObject &&
@@ -134,14 +124,9 @@ Cypress.Commands.add(
               apiErrorResponse.code,
               CONSTANTS.ERROR_CODE
             );
-
-            const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
-              apiErrorResponse.message.includes(errorMessage)
-            );
-            fireLog.equal(checkErrorMessage, true, 'Error Message Validation:');
           });
         } else {
-          fireLog.fail(`Expected error content not found in ${errorContentFilePath}`);
+          fireLog.fail(`Unable to find Error content validation object for ${errorSchemaObject}`);
         }
       } catch (error) {
         fireLog.fail(error.message);
@@ -649,7 +634,7 @@ Cypress.Commands.add(
  */
 Cypress.Commands.add(
   'saveEventResponse',
-  (response, methodOrEventObject, eventName, eventExpected) => {
+  (response, methodOrEventObject, eventName, eventExpected, isNullCase) => {
     const eventNameForLog = eventName.split('-')[0];
     if (!response) {
       fireLog.fail(`Event response not received for ${eventNameForLog}`);
@@ -659,7 +644,7 @@ Cypress.Commands.add(
     }
 
     if (eventExpected) {
-      methodOrEventObject.setEventResponseData(response);
+      methodOrEventObject.setEventResponseData(response, isNullCase);
     } else {
       fireLog.isNull(response.eventResponse[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
     }

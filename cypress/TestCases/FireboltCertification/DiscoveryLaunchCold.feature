@@ -1,3 +1,4 @@
+@DiscoveryLaunch @coreSDK @AppColdLaunch
 Feature: Discovery.launch_ColdLaunch
 
     @initialization
@@ -5,7 +6,7 @@ Feature: Discovery.launch_ColdLaunch
         Given the environment has been set up for 'Discovery.Launch' tests
         And 3rd party 'certification' app is launched
 
-    @DiscoveryLaunch @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Discovery.Launch Cold Launch - Positive Scenario: <Scenario> intent with context
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -46,7 +47,7 @@ Feature: Discovery.launch_ColdLaunch
             | PlayEntity intent without entityType and with programType movie for movieEntity     | launch app with playentity intent without entityType and with programType movie for movieEntity     | get initialization parameters for PlayEntity intent | playentity for initialization parameters without entityType for movieEntity     |
             | PlayEntity intent without entityType and with programType movie for TvEpisodeEntity | launch app with playentity intent without entityType and with programType movie for TvEpisodeEntity | get initialization parameters for Playback intent   | playentity for initialization parameters without entityType for TvEpisodeEntity |
 
-    @DiscoveryLaunch @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Discovery.Launch Cold Launch - Negative Scenario: <Scenario> and expecting error
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Error_Key>'
@@ -101,7 +102,7 @@ Feature: Discovery.launch_ColdLaunch
             | Integer Source Tune Intent                                 | invalid integer source tune intent for discoverylaunch                 |
             | Search Intent Integer Data                                 | search intent integer data for discoverylaunch                         |
 
-    @DiscoveryLaunch @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Discovery.Launch Cold Launch - Positive Scenario: <Scenario> for context source
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'

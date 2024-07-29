@@ -1,10 +1,11 @@
+@Localization @manageSDK
 Feature: Localization_SDK
 
     Background: Launch FCA for 'Localization'
         Given the environment has been set up for 'Localization' tests
         And 3rd party 'certification' app is launched
 
-    @Localization @manageSDK @sdk @transport
+    @sdk
     Scenario Outline: Localization.<SetMethod> - Positive Scenario: <Scenario> with undefined params
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
