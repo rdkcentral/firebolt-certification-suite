@@ -446,7 +446,7 @@ function loggingValidationCheckResult(validationCheck) {
         }
       });
     });
-}/**
+} /**
  * @module assertion
  * @function validateEvent
  * @description To validate the Events and log the results
