@@ -137,7 +137,7 @@ Feature: Accessibility
             | Set windowColor-#7f7f7f            | windowColor       | #7F7F7F             |
             | Set windowOpacity-40               | windowOpacity     | 40                  |
 
-   @Accessibility @coreSDK @sdk @transport @requiresPlatformImplementation
+   @sdk @transport @requiresPlatformImplementation
    Scenario: Accessibility.onClosedCaptionsSettingsChanged event - Positive Scenario: Clear listeners
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And 1st party stops listening to the event 'accessibility onClosedCaptionsSettingsChanged event'
@@ -145,7 +145,7 @@ Feature: Accessibility
       Then 'Firebolt' platform responds to '1st party app' for 'disable closedCaptions'
       And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
 
-    @Accessibility @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Accessibility.voiceGuidance - Positive Scenario: <Scenario>
         Given we test the 'ACCESSIBILITY_VOICEGUIDANCE' getters and setters '<Method>' to '<Value>'
         When '3rd party app' registers for the 'Firebolt' event

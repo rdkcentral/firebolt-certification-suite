@@ -141,7 +141,7 @@ Feature: Advertising
          | Without scope type               | get advertisingId without scope type        |
          | Invalid advertisingId scope      | get advertisingId with invalid scope        |
 
-      @Advertising @coreSDK @sdk @transport @requiresPlatformImplementation
+      @sdk @transport @requiresPlatformImplementation
       Scenario: Advertising.onPolicyChanged - Positive Scenario: Clearing event listeners
             When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
             And 1st party stops listening to the event 'advertising onPolicyChanged event'
