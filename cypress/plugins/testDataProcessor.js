@@ -10,8 +10,6 @@ const logger = require('../support/Logger')('testDataProcessor.js');
 // Combining validation objects from FCS and config module into single JSON
 const validationObjects = combineValidationObjectsJson();
 
-// Resolving the variables in the SetResponse JSON
-const resolvedErrorContentJson = getErrorContentObjectJson();
 let resolvedFireboltCallsJson;
 let combinedFireboltMocksJson;
 
@@ -68,7 +66,6 @@ function testDataProcessor(configEnv) {
     fireboltCallsJson: resolvedFireboltCallsJson,
     fireboltMocksJson: combinedFireboltMocksJson,
     setResponseJson: resolvedSetResponseJson,
-    errorContentValidationJson: resolvedErrorContentJson,
     combineValidationObjectsJson: validationObjects,
   };
 }
@@ -99,21 +96,6 @@ function processSetResponseJson(setResponseJsonData) {
     }
   }
   return setResponseJsonData;
-}
-
-/**
- *  @function getErrorContentObjectJson
- *  @description Fetching the error content objects from the JSON
- *  @example
- *  getErrorContentObjectJson()
- */
-function getErrorContentObjectJson() {
-  const errorSchemaJson = fetchDataFromFile(CONSTANTS.ERROR_CONTENT_OBJECTS_PATH);
-  if (errorSchemaJson) {
-    return errorSchemaJson;
-  } else {
-    logger.error('Unable to find Error content JSON in configModule', 'getErrorContentObjectJson');
-  }
 }
 
 /**
@@ -201,21 +183,12 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
       }
 
     case CONSTANTS.CONTENT.toLowerCase():
-      // Checking if an error is expected; if so, retrieving the error content objects.
+      // Checking if an error is expected; if so, returning the key as is.
       if (
         fireboltObject.hasOwnProperty(CONSTANTS.EXPECTING_ERROR) &&
         fireboltObject.expectingError == true
       ) {
-        if (
-          resolvedErrorContentJson &&
-          dataIdentifier &&
-          resolvedErrorContentJson[dataIdentifier]
-        ) {
-          return resolvedErrorContentJson[dataIdentifier];
-        } else {
-          logger.info(`Unable to find data for Error validation for ${dataIdentifier}`);
-          return dataIdentifier;
-        }
+        return dataIdentifier;
       } else {
         const validationObject = validationObjects[dataIdentifier];
 

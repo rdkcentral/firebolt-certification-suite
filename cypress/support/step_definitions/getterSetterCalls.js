@@ -412,18 +412,7 @@ Given(
         contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
         validationJsonPath = validationJsonPath ? validationJsonPath : CONSTANTS.RESULT;
 
-        if (expectingError) {
-          if (
-            UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON, false) &&
-            UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[errorContent]
-          ) {
-            contentObject = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[
-              errorContent
-            ];
-          } else {
-            contentObject = errorContent;
-          }
-        }
+        contentObject = expectingError ? errorContent : contentObject;
         const additionalParams = {
           method: method,
           context: context,
@@ -502,18 +491,7 @@ Given(
           ? eventValidationJsonPath
           : CONSTANTS.EVENT_RESPONSE;
 
-        if (expectingError) {
-          if (
-            UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON, false) &&
-            UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[errorContent]
-          ) {
-            contentObject = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[
-              errorContent
-            ];
-          } else {
-            contentObject = errorContent;
-          }
-        }
+        contentObject = expectingError ? errorContent : contentObject;
         const additionalParams = {
           method: event,
           context: context,
