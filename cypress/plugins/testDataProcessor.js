@@ -192,9 +192,6 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
       const contextImportFile = CONSTANTS.CONTEXT_FILE_PATH;
       const contextValue = fetchAndParseDataFromJson(contextImportFile, dataIdentifier);
       if (contextValue === CONSTANTS.NO_DATA) {
-        logger.info(
-          `Expected context not found for ${dataIdentifier}. Returning ${dataIdentifier} as is.`
-        );
         return dataIdentifier;
       } else {
         return contextValue;
@@ -213,7 +210,6 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
         ) {
           return resolvedErrorContentJson[dataIdentifier];
         } else {
-          logger.info(`Unable to find data for Error validation for ${dataIdentifier}`);
           return dataIdentifier;
         }
       } else {
@@ -287,9 +283,6 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                     }
                     let deviceData = fetchAndParseDataFromJson(deviceDataPath, data.type);
                     if (deviceData === CONSTANTS.NO_DATA) {
-                      logger.info(
-                        `Expected deviceData not found for ${data.type}. Returning ${data.type} as is.`
-                      );
                       deviceData = data.type;
                     }
                     return (data.type = deviceData);
@@ -441,9 +434,6 @@ function combineValidationObjectsJson() {
 // Function to print logs when data is having "no data" else returning as is.
 function paramDataLogs(paramData, dataIdentifier, defaultRetVal, requestType) {
   if (paramData == CONSTANTS.NO_DATA) {
-    logger.info(
-      `Expected ${requestType || 'data'} ${dataIdentifier} was not found in fixtures. Returning ${dataIdentifier} as is.`
-    );
     return defaultRetVal;
   } else {
     return paramData;
