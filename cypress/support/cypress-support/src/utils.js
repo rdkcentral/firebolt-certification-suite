@@ -285,7 +285,10 @@ function getApiOrEventObjectFromGlobalList(method, context, appId, validationTyp
   );
 
   // Failing when the filteredObjectList is empty.
-  assert.isNotEmpty(filteredObjectList, 'filteredObjectList is not to be empty');
+  if (filteredObjectList.length < 1) {
+    fireLog.info('Could not find the api response in api list');
+    fireLog.isNotEmpty(filteredObjectList, 'filteredObjectList is not to be empty');
+  }
 
   // When the context is empty, the most recent apiOrEventObject is obtained from the filtered list.
   // If the context is not empty, the filtered list is iterated, and the API object that has the same context is retrieved.
@@ -302,8 +305,8 @@ function getApiOrEventObjectFromGlobalList(method, context, appId, validationTyp
 
   // If no response is found, fail with no appObject found.
   if (!extractedObject) {
-    cy.log(CONSTANTS.NO_APP_OR_EVENT_OBJECT);
-    assert(false, CONSTANTS.NO_APP_OR_EVENT_OBJECT);
+    fireLog.info(CONSTANTS.NO_APP_OR_EVENT_OBJECT);
+    fireLog.assert(false, CONSTANTS.NO_APP_OR_EVENT_OBJECT);
   }
   return extractedObject;
 }

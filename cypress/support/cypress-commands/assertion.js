@@ -46,7 +46,20 @@ Cypress.Commands.add(
       cy.validateEvent(extractedApiObject, context, validationPath, expected, appId);
     } else {
       const apiResponseContent = eval(CONSTANTS.EXTRACTEDAPI_PATH + validationPath);
-      fireLog.deepEqual(apiResponseContent, expected, CONSTANTS.METHOD_CONTENT);
+      const pretext =
+        CONSTANTS.METHOD_CONTENT +
+        ' for ' +
+        methodOrEvent +
+        ':' +
+        ' expected ' +
+        JSON.stringify(apiResponseContent) +
+        ' to be ' +
+        JSON.stringify(expected);
+      if (_.isEqual(apiResponseContent, expected)) {
+        fireLog.info(`${pretext}`);
+      } else {
+        fireLog.assert(false, pretext);
+      }
     }
   }
 );
@@ -92,7 +105,6 @@ Cypress.Commands.add(
                 ? (isNullCheckSkipped = true)
                 : (isNullCheckSkipped = false);
             }
-
             // Checking if the error is null in the response and if the error is expected or not.
             if (!UTILS.getEnvVariable(CONSTANTS.IS_SCENARIO_EXEMPTED, false)) {
               cy.errorNullCheck(response, errorExpected, isNullCheckSkipped).then((result) => {
@@ -187,7 +199,6 @@ Cypress.Commands.add('errorNullCheck', (response, errorExpected, isNullCheckSkip
   let validationStatus = CONSTANTS.PASS;
   let message = '';
   const isForcedSkip = false;
-
   // If isNullCheckSkipped is true, skip the null check error since it passed the schema validation check.
   // If isNullCheckSkipped is false and the error expected is false, the error property in the response should be null. If it is other than null, the check should fail.
   // If isNullCheckSkipped is false and the error expected is true, the error property in the response should not be null. If it is null, the check should fail.
@@ -302,25 +313,25 @@ function loggingValidationCheckResult(validationCheck) {
   });
 
   // Printing the status of all checks in the report.
-  cy.get(validationCheck)
-    .each((logging) => {
+  cy.get(validationCheck);
+  // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
+  validationCheck.forEach((assertion) => {
+    if (assertion.validationStatus == CONSTANTS.SKIPPED) {
       cy.log(
-        `${logging.validationPoint}: ${logging.validationStatus}. ${logging.message}`,
+        `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`,
         'loggingValidationCheckResult'
       );
-    })
-    .then(() => {
-      // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
-      validationCheck.forEach((assertion) => {
-        if (assertion.validationStatus == CONSTANTS.SKIPPED) {
-          assert.equal(assertion.validationStatus, CONSTANTS.SKIPPED, assertion.validationPoint);
-        } else {
-          assert.equal(assertion.validationStatus, CONSTANTS.PASS, assertion.validationPoint);
-        }
-      });
-    });
+    } else {
+      cy.log(
+        `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`,
+        'loggingValidationCheckResult'
+      );
+      if (assertion.validationStatus == CONSTANTS.FAIL) {
+        fireLog.assert(false, `${assertion.validationPoint} failed, ${assertion.message}`);
+      }
+    }
+  });
 }
-
 /**
  * @module assertion
  * @function validateEvent
@@ -364,10 +375,10 @@ Cypress.Commands.add(
           CONSTANTS.SKIPPED
         );
         cy.assertValidationsForEvent(
-          'Schema Validation Failed',
-          'FAIL',
+          extractEventObject,
+          verifyPath,
           'PASS',
-          'Event Schema Validation'
+          'Event Schema Validation :'
         );
       } else if (eventSchemaStatus && eventSchemaStatus.status === 'PASS') {
         // Doing event content validation
@@ -456,7 +467,6 @@ Cypress.Commands.add(
     const verifyEventResponse = verifyPath.split('.')[0];
     const verifyInnerObject = verifyPath.split('.')[1];
     const verifyOuterObject = verifyPath.split('.')[2];
-
     // Checks for multi level object structure and does the event content validation
     if (verifyOuterObject) {
       const eventResponseInnerObject = verifyEventResponse + '.' + verifyInnerObject;
