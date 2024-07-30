@@ -68,7 +68,7 @@
 ### Examples:
 * `Given 1st party app registers for the 'Closed Captioning Changed' event using the 'Firebolt' API`
 
-## I clear '(.+)' listeners
+## (3rd party|1st party) stops listening to the event '(.+)'
 
 ### Purpose: sending message to platform/third party App to clear event listener.
 
@@ -85,7 +85,7 @@ Note: Key name value is an object and it can contains data as below
 | appId | When firstParty is false, we need to specify the app ID. If not, it will take the default app ID |
 
 ### Examples:
-* `And I clear 'clear accessibility.onClosedCaptionsSettingsChanged' listeners`
+* `And '1st party' stops listening to the event 'discovery onPolicyChanged event'`
 
 ## User triggers event with value as '(.+)'
 
