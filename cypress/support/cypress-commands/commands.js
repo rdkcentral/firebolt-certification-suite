@@ -998,10 +998,17 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
   cy.validateResponseErrorAndSchemaResult(methodOrEventObject, validationType).then(() => {
     // If passed method is exception method or expecting a error in response, doing error content validation.
     if (UTILS.isScenarioExempted(method, param) || expectingError) {
-      // If not expecting for an error and it's a exception method, storing "exceptionErrorObject" to errorContent variable to fetch the error content object based on the exception type.
-      const errorContent =
-        expectingError === true ? contentObject : CONSTANTS.EXCEPTION_ERROR_OBJECT;
-      cy.validateErrorObject(method, errorContent, validationType, context, appId, param);
+      const errorResponse =
+        validationType == CONSTANTS.EVENT
+          ? methodOrEventObject.eventListenerResponse.error
+          : methodOrEventObject.apiResponse.error;
+
+      cy.validateErrorObject(
+        errorResponse,
+        contentObject,
+        methodOrEventObject,
+        UTILS.isScenarioExempted(method, param)
+      );
     } else {
       cy.then(() => {
         if (validationType == CONSTANTS.EVENT) {

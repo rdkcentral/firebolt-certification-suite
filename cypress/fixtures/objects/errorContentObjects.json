@@ -1,0 +1,17 @@
+{
+    "NOT_SUPPORTED": {
+        "type": "schemaOnly"
+    },
+    "NOT_PERMITTED": {
+        "type": "schemaOnly"
+    },
+    "NOT_AVAILABLE": {
+        "type": "schemaOnly"
+    },
+    "INVALID_TYPE_PARAMS": {
+        "type": "schemaOnly"
+    },
+    "INVALID_REQUEST": {
+        "type": "schemaOnly"
+    }
+}

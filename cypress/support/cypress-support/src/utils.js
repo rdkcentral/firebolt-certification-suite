@@ -337,29 +337,34 @@ function unsubscribe(webSocketClient = null) {
  * isScenarioExempted("advertising.setSkipRestriction");
  **/
 function isScenarioExempted(method, param) {
-  let isInList = false;
-  const combinedExceptionList = generateCombinedExceptionList();
-  const methodInExceptionList = combinedExceptionList.find((object) => {
-    if (
-      object.hasOwnProperty('param') &&
-      object.method.toLowerCase() === method.toLowerCase() &&
-      _.isEqual(object.param, param)
-    ) {
-      return true;
-    } else if (
-      !object.hasOwnProperty('param') &&
-      object.method &&
-      object.method.toLowerCase() === method.toLowerCase()
-    ) {
-      return true;
-    } else {
-      return false;
+  let exceptionType;
+  const exceptionMethods = getEnvVariable(CONSTANTS.EXCEPTION_METHODS);
+  for (const [type, list] of Object.entries(exceptionMethods)) {
+    // Looking for the method and params in each list, if matched returning that exception method.
+    methodInExceptionList = list.find((object) => {
+      if (
+        object.hasOwnProperty(CONSTANTS.PARAM) &&
+        object.method.toLowerCase() === method.toLowerCase() &&
+        _.isEqual(object.param, param)
+      ) {
+        return true;
+      } else if (
+        !object.hasOwnProperty(CONSTANTS.PARAM) &&
+        object.method &&
+        object.method.toLowerCase() === method.toLowerCase()
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    // If method is prsent in the list, exiting the loop.
+    if (methodInExceptionList) {
+      exceptionType = type;
+      break;
     }
-  });
-  if (methodInExceptionList) {
-    isInList = true;
   }
-  return isInList;
+  return exceptionType;
 }
 
 /**

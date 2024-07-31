@@ -33,103 +33,50 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
  */
 Cypress.Commands.add(
   'validateErrorObject',
-  (method, expectedContent, validationType, context = CONSTANTS.NO_CONTEXT, appId, param) => {
-    // Function to extract the error validation objects for the passed method and parameters from the exception list.
-    const fetchErrorValidationObjectForExceptionmethod = (method, param) => {
-      return new Promise((resolve, reject) => {
-        const exceptionMethods = UTILS.getEnvVariable(CONSTANTS.EXCEPTION_METHODS);
-        let exceptionType, methodInExceptionList, errorType;
-        // Looping through the different types of exceptions lists.
-        for (const [type, list] of Object.entries(exceptionMethods)) {
-          // Looking for the method and params in each list, if matched returning that exception method.
-          methodInExceptionList = list.find((obj) => {
-            if (obj.method && obj.method.toLowerCase() === method.toLowerCase()) {
-              if (obj.hasOwnProperty(CONSTANTS.PARAM)) {
-                return _.isEqual(obj.param, param);
-              } else {
-                return true;
-              }
-            }
-            return false;
-          });
+  (errorResponse, errorSchemaObject, apiObject, isExceptionMethod) => {
+    errorSchemaObject = isExceptionMethod
+      ? fetchErrorValidationObjectForExceptionMethod()
+      : errorSchemaObject;
 
-          // If method is prsent in the list, exiting the loop.
-          if (methodInExceptionList) {
-            exceptionType = type;
-            break;
-          }
-        }
-
-        if (methodInExceptionList) {
-          switch (exceptionType) {
-            case CONSTANTS.NOT_AVAILABLE_METHODS:
-              errorType = CONSTANTS.NOT_AVAILABLE;
-              break;
-            case CONSTANTS.NOT_PERMITTED_METHODS:
-              errorType = CONSTANTS.NOT_PERMITTED;
-              break;
-            default:
-              errorType = CONSTANTS.NOT_SUPPORTED;
-          }
-        }
-
-        // Extracting the error content validation object from the environment variable.
-        if (
-          UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON, false) &&
-          UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[errorType]
-        ) {
-          const contentObject = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[
-            errorType
-          ];
-          resolve(contentObject);
-        } else {
-          reject(`Unable to find Error content validation object for ${errorType}`);
-        }
-      });
-    };
-
-    if (expectedContent === CONSTANTS.EXCEPTION_ERROR_OBJECT) {
-      cy.wrap(fetchErrorValidationObjectForExceptionmethod(method, param)).then((errorObject) => {
-        validateErrorObjects(errorObject);
-      });
+    if (errorSchemaObject.type === 'schemaOnly') {
+      return;
+    } else if (errorSchemaObject.type === CONSTANTS.CUSTOM) {
+      cy.customValidation(errorSchemaObject, apiObject);
     } else {
-      validateErrorObjects(expectedContent);
+      validateErrorObjects(errorSchemaObject);
     }
 
     // Function to do content validation for the error objects.
-    function validateErrorObjects(errorSchemaObject) {
-      console.log(`Debug : errorSchemaObject ` + JSON.stringify(errorSchemaObject));
+    function validateErrorObjects(errorContentObject) {
+      console.log(`Debug : errorContentObject ` + JSON.stringify(errorContentObject));
       try {
         if (
-          errorSchemaObject &&
-          errorSchemaObject.hasOwnProperty('validations') &&
-          Array.isArray(errorSchemaObject.validations)
+          errorContentObject &&
+          errorContentObject.hasOwnProperty('validations') &&
+          Array.isArray(errorContentObject.validations)
         ) {
-          errorSchemaObject.validations.forEach((errorContentObject) => {
+          errorContentObject.validations.forEach((errorContentObject) => {
             errorContentObject = errorContentObject.type;
-
-            const apiOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
-              method,
-              context,
-              appId,
-              validationType
-            );
-            const apiErrorResponse =
-              validationType == CONSTANTS.EVENT
-                ? apiOrEventObject.eventListenerResponse.error
-                : apiOrEventObject.apiResponse.error;
-
-            fireLog.include(
-              errorContentObject.errorCode,
-              apiErrorResponse.code,
-              CONSTANTS.ERROR_CODE
-            );
+            fireLog.include(errorContentObject.errorCode, errorResponse.code, CONSTANTS.ERROR_CODE);
           });
         } else {
-          fireLog.fail(`Unable to find Error content validation object for ${errorSchemaObject}`);
+          fireLog.fail(`Unable to find Error content validation object for ${errorContentObject}`);
         }
       } catch (error) {
         fireLog.fail(error.message);
+      }
+    }
+
+    function fetchErrorValidationObjectForExceptionMethod() {
+      const errorContents = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON);
+      const errorType = Object.keys(errorContents).find((key) => isExceptionMethod.includes(key));
+
+      // Extracting the error content validation object from the environment variable.
+      if (errorContents && errorContents[errorType]) {
+        const contentObject = errorContents[errorType];
+        return contentObject;
+      } else {
+        fireLog.fail(`Unable to find Error content validation object for ${errorType}`);
       }
     }
   }
