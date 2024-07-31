@@ -38,10 +38,11 @@ Cypress.Commands.add(
       ? fetchErrorValidationObjectForExceptionMethod()
       : expectedContent;
 
-    //  If error 
+    //  If error object having type as "schemaOnly", skipping the content vallidation
     if (expectedContent.type === CONSTANTS.SCHEMA_ONLY) {
       return;
-    } else if (expectedContent.type === CONSTANTS.CUSTOM) {
+    } // Doing custom validation when error object having type as "custom"
+    else if (expectedContent.type === CONSTANTS.CUSTOM) {
       const additionalParams = { apiObject: apiObject, expectedContent: expectedContent };
       cy.customValidation(expectedContent, additionalParams);
     } else {
@@ -52,6 +53,7 @@ Cypress.Commands.add(
     function validateErrorObjects(errorContentObject) {
       console.log(`Debug : errorContentObject ` + JSON.stringify(errorContentObject));
       try {
+        // errorContentObject having expected format doing content validation else failing the test
         if (
           errorContentObject &&
           errorContentObject.hasOwnProperty('validations') &&
@@ -69,6 +71,7 @@ Cypress.Commands.add(
       }
     }
 
+    // Function to fetch the error object key name based on exception method.
     function fetchErrorValidationObjectForExceptionMethod() {
       const errorContents = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON);
       const errorType = Object.keys(errorContents).find((key) => isExceptionMethod.includes(key));
