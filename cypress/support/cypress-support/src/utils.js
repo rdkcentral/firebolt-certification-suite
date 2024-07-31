@@ -722,6 +722,8 @@ class FireLog extends Function {
               JSON.stringify(argumentsList[0]) +
               ' Actual: ' +
               JSON.stringify(argumentsList[1]);
+          else if (argumentsList.length == 1) message = argumentsList[0];
+          else if (argumentsList.length == 2) message = argumentsList[1];
           else
             message =
               argumentsList[argumentsList.length - 1] +
