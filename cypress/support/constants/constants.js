@@ -339,7 +339,7 @@ module.exports = {
     TRIGGEREVENT: 'fcs.triggerEvent',
     FETCH_EVENT_RESPONSE: 'fcs.fetchEventResponse',
     PERFORMANCE_THRESHOLD_VALIDATOR: 'performance.fetchPerformanceThreshold',
-    SETFIREBOLTINTERACTIONSHANDLER: 'performance.setFireboltInteractionsHandler',
+    SETFIREBOLTINTERACTIONSHANDLER: 'fcs.setFireboltInteractionsHandler',
     CREATE_MARKER: 'performance.createMarker',
     UNLOADAPP: 'fcs.unloadApp',
   },
