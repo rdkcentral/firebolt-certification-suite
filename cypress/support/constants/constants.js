@@ -353,6 +353,7 @@ module.exports = {
   SCENARIO_REQUIREMENTS: 'scenarioRequirements',
   SCHEMA_CHECK_SKIPPED:
     'Assertion for Schema validation is skipped since skipSchemaValidation flag is true',
+  SCHEMA_ONLY: 'schemaOnly',
   SCHEMA_VALIDATION_CHECK: 'Schema validation Check',
   SCHEMA_VALIDATION_RESPONSE: 'schemaValidationResponse',
   SCHEMA_VALIDATION_STATUS: 'schemaValidationStatus',

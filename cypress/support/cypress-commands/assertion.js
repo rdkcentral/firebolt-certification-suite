@@ -24,7 +24,7 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
  * @function validateErrorObject
  * @description Validating the error code against the source of truth
  * @param {Object} errorResponse - Error response containing error code and message.
- * @param {Object} errorSchemaObject - Source of truth for validation.
+ * @param {Object} expectedContent - Source of truth for validation.
  * @param {Object} apiObject - validationType contains a method or event.
  * @param {String} isExceptionMethod - Contains the exception list name if the method exists in that list.
  * @example
@@ -33,18 +33,19 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
  */
 Cypress.Commands.add(
   'validateErrorObject',
-  (errorResponse, errorSchemaObject, apiObject, isExceptionMethod) => {
-    errorSchemaObject = isExceptionMethod
+  (errorResponse, expectedContent, apiObject, isExceptionMethod) => {
+    expectedContent = isExceptionMethod
       ? fetchErrorValidationObjectForExceptionMethod()
-      : errorSchemaObject;
+      : expectedContent;
 
-    if (errorSchemaObject.type === 'schemaOnly') {
+    //  If error 
+    if (expectedContent.type === CONSTANTS.SCHEMA_ONLY) {
       return;
-    } else if (errorSchemaObject.type === CONSTANTS.CUSTOM) {
-      const additionalParams = { apiObject: apiObject, errorSchemaObject: errorSchemaObject };
-      cy.customValidation(errorSchemaObject, additionalParams);
+    } else if (expectedContent.type === CONSTANTS.CUSTOM) {
+      const additionalParams = { apiObject: apiObject, expectedContent: expectedContent };
+      cy.customValidation(expectedContent, additionalParams);
     } else {
-      validateErrorObjects(errorSchemaObject);
+      validateErrorObjects(expectedContent);
     }
 
     // Function to do content validation for the error objects.

@@ -109,8 +109,8 @@ function processSetResponseJson(setResponseJsonData) {
  */
 function getErrorContentObjectJson() {
   const errorContentJson = fetchDataFromFile(CONSTANTS.ERROR_CONTENT_OBJECTS_PATH);
-  const externalErrorSchemaJson = fetchDataFromFile(CONSTANTS.EXTERNAL_ERROR_CONTENT_OBJECTS_PATH);
-  const combinedErrorContentJson = Object.assign(errorContentJson, externalErrorSchemaJson);
+  const externalErrorContentJson = fetchDataFromFile(CONSTANTS.EXTERNAL_ERROR_CONTENT_OBJECTS_PATH);
+  const combinedErrorContentJson = Object.assign(errorContentJson, externalErrorContentJson);
   if (combinedErrorContentJson) {
     return combinedErrorContentJson;
   } else {
