@@ -64,7 +64,7 @@
 		"method": "internal.initialize",
 		"context": "noContext",
 		"validationJsonPath": "result",
-		"expected": "INTERNAL_INITIALIZATION",
-    "APPINFO": {"build": "1.2.2"}
-	}
+		"expected": "INTERNAL_INITIALIZATION"
+	},
+  "APPINFO": {"build": "1.2.2"}
 }
