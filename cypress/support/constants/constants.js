@@ -107,7 +107,7 @@ module.exports = {
   ERROR_LIST: ['Method not found', 'Method Not Implemented'],
   ERROR_NOT_UNDEFINED_CHECK: 'Error not undefined Check',
   ERROR_NULL_CHECK: 'Error null Check',
-  ERROR_CONTENT_OBJECTS_PATH: 'cypress/fixtures/external/objects/errorContentObjects.json',
+  ERROR_CONTENT_OBJECTS_PATH: 'cypress/fixtures/objects/errorContentObjects.json',
   ERROR_SCHEMA_SDK: 'errorSchemaSDK',
   ERROR_SCHEMA_TRANSPORT: 'errorSchemaTransport',
   EVENT: 'event',
@@ -135,6 +135,7 @@ module.exports = {
   EXPECTED_JSON_IN_VALIDATION_OBJECTS:
     'Expected JSON data should be defined in fixtures/objects/validationObjects/',
   EXPECTING_ERROR: 'expectingError',
+  EXTERNAL_ERROR_CONTENT_OBJECTS_PATH: 'cypress/fixtures/external/objects/errorContentObjects.json',
   EXTERNAL_DEVICES_PATH: 'cypress/fixtures/external/devices/',
   EXTERNAL_MODULEREQID_PATH: 'cypress/fixtures/external/objects/moduleReqId/moduleReqId.json',
   EXTERNAL_PATH: 'cypress/fixtures/external/modules/',
@@ -352,6 +353,7 @@ module.exports = {
   SCENARIO_REQUIREMENTS: 'scenarioRequirements',
   SCHEMA_CHECK_SKIPPED:
     'Assertion for Schema validation is skipped since skipSchemaValidation flag is true',
+  SCHEMA_ONLY: 'schemaOnly',
   SCHEMA_VALIDATION_CHECK: 'Schema validation Check',
   SCHEMA_VALIDATION_RESPONSE: 'schemaValidationResponse',
   SCHEMA_VALIDATION_STATUS: 'schemaValidationStatus',

@@ -108,9 +108,11 @@ function processSetResponseJson(setResponseJsonData) {
  *  getErrorContentObjectJson()
  */
 function getErrorContentObjectJson() {
-  const errorSchemaJson = fetchDataFromFile(CONSTANTS.ERROR_CONTENT_OBJECTS_PATH);
-  if (errorSchemaJson) {
-    return errorSchemaJson;
+  const errorContentJson = fetchDataFromFile(CONSTANTS.ERROR_CONTENT_OBJECTS_PATH);
+  const externalErrorContentJson = fetchDataFromFile(CONSTANTS.EXTERNAL_ERROR_CONTENT_OBJECTS_PATH);
+  const combinedErrorContentJson = Object.assign(errorContentJson, externalErrorContentJson);
+  if (combinedErrorContentJson) {
+    return combinedErrorContentJson;
   } else {
     logger.error('Unable to find Error content JSON in configModule', 'getErrorContentObjectJson');
   }
