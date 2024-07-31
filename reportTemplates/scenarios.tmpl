@@ -163,8 +163,8 @@ SPDX-License-Identifier: Apache-2.0
                                                     <pre class="info" id="output<%= scenarioCounter %>"></pre>
                                                     <script>
                                                         var inputString = '<%= embedding.data %>';
-                                                        var startIndex = inputString.indexOf("[", inputString.indexOf("[") + 1) +2;
-                                                        var endIndex = inputString.indexOf("]", startIndex) -1;
+                                                        var startIndex = inputString.indexOf("[", inputString.indexOf("[") + 1) +1;
+                                                        var endIndex = inputString.indexOf("]", startIndex);
                                                         var replacedArray = inputString.substring(startIndex, endIndex);
                                                         
                                                         document.getElementById("output<%= scenarioCounter %>").innerHTML =  replacedArray;
