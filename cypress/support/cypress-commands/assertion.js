@@ -18,15 +18,15 @@
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS, { fireLog } from '../cypress-support/src/utils';
+
 /**
  * @module assertion
  * @function validateErrorObject
- * @description Validating the error message and code against the source of truth
- * @param {String} method - Name of the API to be validated
- * @param {String} expectedContent - Source of truth for validation.
- * @param {String} validationType - validationType contains a method or event.
- * @param {Object} context - Context value used to fetch the specific object.
- * @param {String} appId - appId to fetch the method/event
+ * @description Validating the error code against the source of truth
+ * @param {Object} errorResponse - Error response containing error code and message.
+ * @param {Object} errorSchemaObject - Source of truth for validation.
+ * @param {Object} apiObject - validationType contains a method or event.
+ * @param {String} isExceptionMethod - Contains the exception list name if the method exists in that list.
  * @example
  * cy.validateErrorObject('authentication.token', 'NOT_SUPPORTED', 'method', {}, 'test.test')
  * cy.validateErrorObject('authentication.token', 'exceptionErrorObject', 'method', {}, 'test.test', {'type': 'distributor})
@@ -41,7 +41,8 @@ Cypress.Commands.add(
     if (errorSchemaObject.type === 'schemaOnly') {
       return;
     } else if (errorSchemaObject.type === CONSTANTS.CUSTOM) {
-      cy.customValidation(errorSchemaObject, apiObject);
+      const additionalParams = { apiObject: apiObject, errorSchemaObject: errorSchemaObject };
+      cy.customValidation(errorSchemaObject, additionalParams);
     } else {
       validateErrorObjects(errorSchemaObject);
     }
