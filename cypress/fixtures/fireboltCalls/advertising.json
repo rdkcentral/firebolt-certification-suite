@@ -353,7 +353,7 @@
     "INVALID_REQUEST_FOR_ADVERTISING_POLICY": {
         "method": "advertising.policy",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     }
 }

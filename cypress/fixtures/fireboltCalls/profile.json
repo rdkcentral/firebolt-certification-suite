@@ -40,7 +40,7 @@
     "INVALID_REQUEST_FOR_PROFILE_FLAGS": {
         "method": "profile.flags",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "PINCHALLENGE_ONREQUESTCHALLENGE_MANAGE":{
@@ -67,7 +67,7 @@
     "PROFILE_APPROVEPURCHASE_CHALLENGEERROR": {
         "method": "profile.approvePurchase",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     }
 }

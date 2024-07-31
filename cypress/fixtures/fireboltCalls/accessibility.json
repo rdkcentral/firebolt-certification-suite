@@ -1043,13 +1043,13 @@
     "INVALID_REQUEST_FOR_CLOSEDCAPTIONS_SETTINGS": {
         "method": "accessibility.closedCaptionsSettings",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_REQUEST_FOR_VOICEGUIDANCE_SETTINGS": {
         "method": "accessibility.voiceGuidanceSettings",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "GET_CLOSEDCAPTIONS":{
