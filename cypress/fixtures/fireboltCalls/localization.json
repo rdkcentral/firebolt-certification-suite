@@ -317,13 +317,10 @@
         "validationJsonPath": "result",
         "content": "LOCALIZATION_POSTALCODE"  
     },
-    "20850_FOR_LOCALIZATION_POSTALCODE":{
+    "EXPECTED_VALUE_FOR_LOCALIZATION_POSTALCODE":{
         "method": "localization.postalCode",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "content": "LOCALIZATION_POSTALCODE",
-        "expectingError": false
+        "content": "LOCALIZATION_POSTALCODE"
     },
     "ONPOSTALCODECHANGED_FOR_LOCALIZATION_POSTALCODE_WITH_12345": {
         "event": "localization.onPostalCodeChanged",
@@ -645,11 +642,11 @@
         "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
-    "EXPECT_ERROR_FOR_LOCALIZATION_LATLON": {
+    "EXPECT_ERROR_FOR_NOTSUPPORTED_CAPABILITY": {
         "method": "localization.latlon",
         "expected": "error"
     },
-    "NOT_SUPPORTED_ERROR_FOR_LOCALIZATION_LATLON": {
+    "NOT_SUPPORTED_ERROR_FOR_GIVEN_CAPABILITY": {
         "method": "localization.latlon",
         "validationJsonPath": "result",
         "content": "NOT_SUPPORTED",
@@ -664,6 +661,11 @@
         "method": "localization.removeAdditionalInfo",
         "validationJsonPath": "result",
         "content": "NULL"  
+    },
+    "EXPECTED_VALUE_FOR_LOCALIZATION_LOCALITY": {
+        "method": "localization.locality",  
+        "validationJsonPath": "result",
+        "content": "LOCALIZATION_LOCALITY"  
     },
     "EXPECTED_LOCALIZATION_COUNTRYCODE_CHALLENGEERROR":{
         "method": "localization.countryCode",

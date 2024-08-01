@@ -325,6 +325,78 @@ HTTP call to the platform:<br/>
     "message": `Unable to create marker, failed with status code- 200 and error- unable to find the dashboard`
   }
   ```
+  ### setTestProvider: 
+
+- Request:<br>
+  Making a call which sends necessary message to the platform to use a test provider for simulating user inputs.<br>
+  Format:
+  ```
+   {
+     method: 'fcs.setTestProvider',
+     params: <provider name>
+   }
+  ```
+  Examples:
+  ```
+   {
+     method: 'fcs.setTestProvider',
+     params: 'pinChallenge'
+   }
+   ```
+- Response:<br>
+  Receives an object with intent message.
+  Example:
+  ```
+  {
+  "action": "search",
+  "context": {
+    "source": "device"
+  },
+  "data": {
+    "query": "{\"task\":\"registerProviderHandler\",\"params\":{\"provider\":\"pinChallenge\"},\"action\":\"CORE\",\"context\":{\"communicationMode\":\"SDK\"},\"asynchronous\":false}"
+    }
+  }
+  ```
+### recordLifecycleHistory:
+
+- Request:<br>
+  Making a call to the platform to start/stop the lifecycle history recording.<br>
+  Format:
+  ```
+   {
+    "method": "fcs.recordLifecycleHistory",
+    "params": {
+      "task": "<task name>",
+      "appId": "<app ID>"
+    }
+  }
+
+  ```
+  Examples:
+  ```
+   {
+    "method": "fcs.recordLifecycleHistory",
+    "params": {
+      "task": "start",
+      "appId": "test"
+    }
+  }
+   ```
+- Response:<br>
+  Receives an object with intent message and transport type.
+  Example:
+  ```
+  "transport": "<transportMode>",
+  "payload": {
+  "action": "search",
+  "context": {
+    "source": "device"
+  },
+  "data": {
+    "query": "{\"task\":\"start\",\"params\":{\"provider\":\"pinChallenge\"},\"action\":\"CORE\",\"context\":{\"communicationMode\":\"SDK\"},\"asynchronous\":false}"
+    }
+  }
+  ```
 
 
 ## Data in fixture folder is segregated as per below configurations
