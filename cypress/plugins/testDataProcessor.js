@@ -233,10 +233,10 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                     if (envSegments.length > 1) {
                       const objectName = envSegments[0];
                       const propertyName = envSegments[1];
-  
+
                       // Get object from envVariables
                       const envValue = _.get(envVariables, [objectName, propertyName]);
-  
+
                       // Check if object exists and contains the specified property
                       if (envValue !== undefined) {
                         data.type = envValue;
@@ -267,16 +267,16 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
 
                       data.type = parsedRegexExp.toString();
                       break;
-  
+
                     case CONSTANTS.DEVICE_CONTENT_VALIDATION:
                       // Extracting the device mac from the environment JSON.
                       let deviceMac = envVariables[CONSTANTS.DEVICE_MAC];
                       deviceMac = deviceMac.replaceAll(':', '');
-  
+
                       const deviceDataPath = deviceMac
                         ? CONSTANTS.EXTERNAL_DEVICES_PATH + deviceMac + '.json'
                         : CONSTANTS.DEFAULT_DEVICE_DATA_PATH;
-  
+
                       if (!deviceMac) {
                         logger.info('Falling back to default device data path');
                       }
@@ -289,7 +289,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                       }
                       data.type = deviceData;
                       break;
-  
+
                     default:
                       data.type = testDataParser(data.type);
                       break;
