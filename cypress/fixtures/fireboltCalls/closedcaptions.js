@@ -1,6 +1,6 @@
 exports.CLOSED_CAPTIONS_SETTINGS = {
   method: resolveAtRuntime('manage_closedcaptions.{{attribute}}'),
-  params: null,
+  params: {},
   validationJsonPath: 'result',
   setMethod: resolveAtRuntime('manage_closedcaptions.set{{attribute.uppercaseFirstChar}}'),
   setParams: resolveAtRuntime('value'),

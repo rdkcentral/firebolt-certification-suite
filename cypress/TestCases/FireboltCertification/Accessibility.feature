@@ -108,8 +108,8 @@ Feature: Accessibility
 
         Examples:
             | Scenario                         | Method  | Value |
-            | Disable audioDescriptionSettings | enabled | false |
             | Enable audioDescriptionSettings  | enabled | true  |
+            | Disable audioDescriptionSettings | enabled | false |
 
     @sdk @transport
     Scenario Outline: Accessibility.closedCaptions - Positive Scenario: <Scenario>
@@ -123,6 +123,7 @@ Feature: Accessibility
 
         Examples:
             | Scenario                           | Method            | Value               |
+            | Disable closedcaptions             | enabled           | false               |
             | Enable closedcaptions              | enabled           | true                |
             | Set fontFamily-monospaced_sanserif | fontFamily        | monospaced_sanserif |
             | Set fontSize-1                     | fontSize          | 1                   |
