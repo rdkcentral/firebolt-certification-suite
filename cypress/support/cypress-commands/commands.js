@@ -1057,82 +1057,88 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
         try {
           if (contentObject && contentObject.data) {
             contentObject.data.forEach((object) => {
-              if (object.validations) {
-                const scenario = object.type;
-                const methodOrEventResponse =
-                  validationType == CONSTANTS.EVENT
-                    ? methodOrEventObject
-                    : validationType == CONSTANTS.METHOD
-                      ? methodOrEventObject.apiResponse
-                      : null;
+              const scenario = object.type;
+              if (scenario != CONSTANTS.SCHEMA_ONLY) {
+                if (object.validations) {
+                  const methodOrEventResponse =
+                    validationType == CONSTANTS.EVENT
+                      ? methodOrEventObject
+                      : validationType == CONSTANTS.METHOD
+                        ? methodOrEventObject.apiResponse
+                        : null;
 
-                // Looping through validationJsonPath to find the valid path for validation.
-                if (validationJsonPath && Array.isArray(validationJsonPath)) {
-                  const validationPath = validationJsonPath.find((path) => {
-                    if (
-                      path
-                        .split('.')
-                        .reduce((acc, part) => acc && acc[part], methodOrEventResponse) !==
-                      undefined
-                    ) {
-                      return path;
-                    }
-                  });
-                  validationPath
-                    ? (validationJsonPath = validationPath)
-                    : fireLog.assert(
-                        false,
-                        `Could not find the valid validation path from the validationJsonPath list - ${JSON.stringify(validationJsonPath)}`
+                  // Looping through validationJsonPath to find the valid path for validation.
+                  if (validationJsonPath && Array.isArray(validationJsonPath)) {
+                    const validationPath = validationJsonPath.find((path) => {
+                      if (
+                        path
+                          .split('.')
+                          .reduce((acc, part) => acc && acc[part], methodOrEventResponse) !==
+                        undefined
+                      ) {
+                        return path;
+                      }
+                    });
+                    validationPath
+                      ? (validationJsonPath = validationPath)
+                      : fireLog.assert(
+                          false,
+                          `Could not find the valid validation path from the validationJsonPath list - ${JSON.stringify(validationJsonPath)}`
+                        );
+                  }
+                  switch (scenario) {
+                    case CONSTANTS.REGEX:
+                      cy.regExValidation(
+                        method,
+                        object.validations[0].type,
+                        validationJsonPath,
+                        methodOrEventResponse
                       );
-                }
-                switch (scenario) {
-                  case CONSTANTS.REGEX:
-                    cy.regExValidation(
-                      method,
-                      object.validations[0].type,
-                      validationJsonPath,
-                      methodOrEventResponse
-                    );
-                    break;
-                  case CONSTANTS.MISC:
-                    cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
-                    break;
-                  case CONSTANTS.DECODE:
-                    const decodeType = object.specialCase;
-                    const responseForDecodeValidation =
-                      validationType == CONSTANTS.EVENT
-                        ? methodOrEventResponse.eventResponse
-                        : validationType == CONSTANTS.METHOD
-                          ? methodOrEventResponse.result
-                          : null;
+                      break;
+                    case CONSTANTS.MISC:
+                      cy.miscellaneousValidation(
+                        method,
+                        object.validations[0],
+                        methodOrEventObject
+                      );
+                      break;
+                    case CONSTANTS.DECODE:
+                      const decodeType = object.specialCase;
+                      const responseForDecodeValidation =
+                        validationType == CONSTANTS.EVENT
+                          ? methodOrEventResponse.eventResponse
+                          : validationType == CONSTANTS.METHOD
+                            ? methodOrEventResponse.result
+                            : null;
 
-                    cy.decodeValidation(
-                      method,
-                      decodeType,
-                      responseForDecodeValidation,
-                      object.validations[0],
-                      null
-                    );
-                    break;
-                  case CONSTANTS.FIXTURE:
-                    cy.validateContent(
-                      method,
-                      context,
-                      validationJsonPath,
-                      object.validations[0].type,
-                      validationType,
-                      appId
-                    );
-                    break;
-                  case CONSTANTS.CUSTOM:
-                    cy.customValidation(object, methodOrEventObject);
-                    break;
-                  case CONSTANTS.UNDEFINED:
-                    cy.undefinedValidation(object, methodOrEventObject, validationType);
-                    break;
-                  default:
-                    assert(false, 'Unsupported validation type');
-                    break;
+                      cy.decodeValidation(
+                        method,
+                        decodeType,
+                        responseForDecodeValidation,
+                        object.validations[0],
+                        null
+                      );
+                      break;
+                    case CONSTANTS.FIXTURE:
+                      cy.validateContent(
+                        method,
+                        context,
+                        validationJsonPath,
+                        object.validations[0].type,
+                        validationType,
+                        appId
+                      );
+                      break;
+                    case CONSTANTS.CUSTOM:
+                      cy.customValidation(object, methodOrEventObject);
+                      break;
+                    case CONSTANTS.UNDEFINED:
+                      cy.undefinedValidation(object, methodOrEventObject, validationType);
+                      break;
+                    default:
+                      assert(false, 'Unsupported validation type');
+                      break;
+                  }
                 }
               }
             });
