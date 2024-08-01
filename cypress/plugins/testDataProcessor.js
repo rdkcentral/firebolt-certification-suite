@@ -263,97 +263,88 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
           return dataIdentifier;
         }
       } else {
-        const validationObject = validationObjects[dataIdentifier];
+        const validationObjectArray = validationObjects[dataIdentifier];
+        const validationObject = _.cloneDeep(validationObjectArray);
 
         if (validationObject && validationObject.data) {
           validationObject.data.forEach((object, index) => {
             if (object.validations && object.validations.length > 0) {
               // Iterating through the validations array, retrieving and updating the value of the type field based on mode.
               object.validations.forEach((data) => {
-                // When the data.type is not string, returning the data as is
-                if (typeof data.type !== CONSTANTS.STRING) {
-                  return data.type;
-                }
-
-                // Resolve any cypress env variables
-                if (typeof data.type === 'string' && data.type.includes('CYPRESSENV')) {
-                  // Split into an array and remove CYPRESSENV
-                  const envSegments = data.type.split('-').slice(1);
-                  // Handle the case where the env variable is an object
-                  if (envSegments.length > 1) {
-                    const objectName = envSegments[0];
-                    const propertyName = envSegments[1];
-
-                    // Get object from envVariables
-                    const envValue = _.get(envVariables, [objectName, propertyName]);
-
-                    // Check if object exists and contains the specified property
-                    if (envValue !== undefined) {
-                      return (data.type = envValue);
+                // When the data.type is string, then parse the value
+                if (typeof data?.type === CONSTANTS.STRING) {
+                  // Resolve any cypress env variables
+                  if (data.type.includes('CYPRESSENV')) {
+                    // Split into an array and remove CYPRESSENV
+                    const envSegments = data.type.split('-').slice(1);
+                    // Handle the case where the env variable is an object
+                    if (envSegments.length > 1) {
+                      const objectName = envSegments[0];
+                      const propertyName = envSegments[1];
+  
+                      // Get object from envVariables
+                      const envValue = _.get(envVariables, [objectName, propertyName]);
+  
+                      // Check if object exists and contains the specified property
+                      if (envValue !== undefined) {
+                        data.type = envValue;
+                      } else {
+                        logger.info(`Cypress env variable '${envKey}' does not exist`);
+                      }
                     } else {
-                      logger.info(`Cypress env variable '${envKey}' does not exist`);
-                      return data.type;
-                    }
-                  } else {
-                    const envKey = envSegments[0];
-                    const envValue = _.get(envVariables, envKey);
-                    if (envValue !== undefined) {
-                      return (data.type = envValue);
-                    } else {
-                      logger.info(`Cypress env variable '${envKey}' does not exist`);
-                      return data.type;
+                      const envKey = envSegments[0];
+                      const envValue = _.get(envVariables, envKey);
+                      if (envValue !== undefined) {
+                        data.type = envValue;
+                      } else {
+                        logger.info(`Cypress env variable '${envKey}' does not exist`);
+                      }
                     }
                   }
-                }
-                switch (data.mode) {
-                  case CONSTANTS.REGEX.toLowerCase():
-                    const regexType = data.type.includes('_REGEXP')
-                      ? data.type
-                      : data.type + '_REGEXP';
-                    let parsedRegexExp;
-                    if (REGEXFORMATS[regexType]) {
-                      parsedRegexExp = REGEXFORMATS[regexType];
-                    } else {
-                      let regExp = data.type;
-                      if (typeof data.type != CONSTANTS.STRING) {
-                        regExp = new RegExp(regExp.toString());
+                  switch (data.mode) {
+                    case CONSTANTS.REGEX.toLowerCase():
+                      const regexType = data.type.includes('_REGEXP')
+                        ? data.type
+                        : data.type + '_REGEXP';
+                      let parsedRegexExp;
+                      if (REGEXFORMATS[regexType]) {
+                        parsedRegexExp = REGEXFORMATS[regexType];
+                      } else {
+                        parsedRegexExp = new RegExp(data.type);
                       }
 
-                      parsedRegexExp = regExp;
-                    }
-                    if (typeof parsedRegexExp != CONSTANTS.STRING) {
-                      return (data.type = parsedRegexExp.toString());
-                    } else {
-                      return (data.type = parsedRegexExp);
-                    }
-
-                  case CONSTANTS.DEVICE_CONTENT_VALIDATION:
-                    // Extracting the device mac from the environment JSON.
-                    let deviceMac = envVariables[CONSTANTS.DEVICE_MAC];
-                    deviceMac = deviceMac.replaceAll(':', '');
-
-                    const deviceDataPath = deviceMac
-                      ? CONSTANTS.EXTERNAL_DEVICES_PATH + deviceMac + '.json'
-                      : CONSTANTS.DEFAULT_DEVICE_DATA_PATH;
-
-                    if (!deviceMac) {
-                      logger.info('Falling back to default device data path');
-                    }
-                    let deviceData = fetchAndParseDataFromJson(deviceDataPath, data.type);
-                    if (deviceData === CONSTANTS.NO_DATA) {
-                      logger.info(
-                        `Expected deviceData not found for ${data.type}. Returning ${data.type} as is.`
-                      );
-                      deviceData = data.type;
-                    }
-                    return (data.type = deviceData);
-
-                  default:
-                    return (data.type = testDataParser(data.type));
+                      data.type = parsedRegexExp.toString();
+                      break;
+  
+                    case CONSTANTS.DEVICE_CONTENT_VALIDATION:
+                      // Extracting the device mac from the environment JSON.
+                      let deviceMac = envVariables[CONSTANTS.DEVICE_MAC];
+                      deviceMac = deviceMac.replaceAll(':', '');
+  
+                      const deviceDataPath = deviceMac
+                        ? CONSTANTS.EXTERNAL_DEVICES_PATH + deviceMac + '.json'
+                        : CONSTANTS.DEFAULT_DEVICE_DATA_PATH;
+  
+                      if (!deviceMac) {
+                        logger.info('Falling back to default device data path');
+                      }
+                      let deviceData = fetchAndParseDataFromJson(deviceDataPath, data.type);
+                      if (deviceData === CONSTANTS.NO_DATA) {
+                        logger.info(
+                          `Expected deviceData not found for ${data.type}. Returning ${data.type} as is.`
+                        );
+                        deviceData = data.type;
+                      }
+                      data.type = deviceData;
+                      break;
+  
+                    default:
+                      data.type = testDataParser(data.type);
+                      break;
+                  }
                 }
               });
             }
-            return object;
           });
 
           return validationObject;
