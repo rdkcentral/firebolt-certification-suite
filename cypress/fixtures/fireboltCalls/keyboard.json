@@ -81,19 +81,19 @@
         "method": "keyboard.standard",
         "expected": "error"
     },
-    "INVALID_PARAMETER_FOR_EMAIL": {
+    "ERROR_FOR_EMAIL": {
         "method": "keyboard.email",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
-    "INVALID_PARAMETER_PASSWORD": {
+    "ERROR_FOR_PASSWORD": {
         "method": "keyboard.password",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
-    "INVALID_PARAMETER_STANDARD": {
+    "ERROR_FOR_STANDARD": {
         "method": "keyboard.standard",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",

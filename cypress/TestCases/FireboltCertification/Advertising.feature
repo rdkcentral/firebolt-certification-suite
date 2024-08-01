@@ -100,13 +100,13 @@ Feature: Advertising
       Then 'Firebolt' platform responds with '<Method_Validation_key>'
 
       Examples:
-         | Scenario                                    | API_Key                                      | Method_Validation_key                      |
-         | Empty params                                | get config with empty parameter              | invalid parameter error advertising config |
-         | Invalid coppa value                         | get config with invalid coppa                | invalid parameter error advertising config |
-         | Invalid authenticationEntity datatype value | get config with invalid authenticationEntity | invalid parameter error advertising config |
-         | Invalid environment datatype value          | get config with invalid environment datatype | invalid parameter error advertising config |
-         | Invalid environment value                   | get config with invalid environment          | invalid parameter error advertising config |
-         | Integer values for params                   | get config with integer parameter            | invalid parameter error advertising config |
+         | Scenario                                    | API_Key                                      | Method_Validation_key        |
+         | Empty params                                | get config with empty parameter              | error for advertising config |
+         | Invalid coppa value                         | get config with invalid coppa                | error for advertising config |
+         | Invalid authenticationEntity datatype value | get config with invalid authenticationEntity | error for advertising config |
+         | Invalid environment datatype value          | get config with invalid environment datatype | error for advertising config |
+         | Invalid environment value                   | get config with invalid environment          | error for advertising config |
+         | Integer values for params                   | get config with integer parameter            | error for advertising config |
 
    @sdk @transport
    Scenario Outline: Advertising.advertisingId - Positive Scenario: <Scenario>
@@ -129,7 +129,7 @@ Feature: Advertising
    @sdk @transport
    Scenario Outline: Advertising.advertisingId - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds with 'invalid parameter for advertising advertisingId'
+      Then 'Firebolt' platform responds with 'error for advertising advertisingId'
 
       Examples:
          | Scenario                         | API_Key                                     |

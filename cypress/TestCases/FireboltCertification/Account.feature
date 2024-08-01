@@ -21,8 +21,8 @@ Feature: Account
       Then 'Firebolt' platform responds with '<Validation_key>'
 
       Examples:
-         | Scenario                              | API_Key                                           | Validation_key                          | method |
-         | Account ID Device not provisioned     | fetch account ID when device is not provisioned   | invalid parameter error for account id  | id     |
-         | Account UID Device not provisioned    | fetch account UID when device is not provisioned  | invalid parameter error for account uid | uid    |
-         | Account ID Account retrieval attempt  | fetch account ID when account is not provisioned  | invalid parameter error for account id  | id     |
-         | Account UID Account retrieval attempt | fetch account UID when account is not provisioned | invalid parameter error for account uid | uid    |
+         | Scenario                              | API_Key                                           | Validation_key        | method |
+         | Account ID Device not provisioned     | fetch account ID when device is not provisioned   | error for account id  | id     |
+         | Account UID Device not provisioned    | fetch account UID when device is not provisioned  | error for account uid | uid    |
+         | Account ID Account retrieval attempt  | fetch account ID when account is not provisioned  | error for account id  | id     |
+         | Account UID Account retrieval attempt | fetch account UID when account is not provisioned | error for account uid | uid    |

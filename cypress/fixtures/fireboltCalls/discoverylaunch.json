@@ -359,13 +359,13 @@
         "params": "DISCOVERYLAUNCH_SEARCH_INTENT_INT_DATA",
         "expected": "error"
     },
-    "INVALID_PARAMETERS_FOR_DISCOVERY_LAUNCH": {
+    "ERROR_FOR_DISCOVERY_LAUNCH": {
         "method": "discovery.launch",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
-    "INVALID_PARAMETERS_FOR_DISCOVERYLAUNCH": {
+    "ERROR_FOR_DISCOVERYLAUNCH": {
         "method": "discovery.launch",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",

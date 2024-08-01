@@ -19,12 +19,12 @@
 		"validationJsonPath": "result",
 		"content": "ACCOUNT_UID"
 	},
-    "INVALID_PARAMETER_ERROR_FOR_ACCOUNT_ID": {
+    "ERROR_FOR_ACCOUNT_ID": {
 		"method": "account.id",
 		"validationJsonPath": "result",
 		"content": "INVALID_TYPE_PARAMS"
 	},
-    "INVALID_PARAMETER_ERROR_FOR_ACCOUNT_UID": {
+    "ERROR_FOR_ACCOUNT_UID": {
 		"method": "account.uid",
 		"validationJsonPath": "result",
 		"content": "INVALID_TYPE_PARAMS"

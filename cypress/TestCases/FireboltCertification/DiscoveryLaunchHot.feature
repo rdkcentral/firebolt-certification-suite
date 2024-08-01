@@ -169,7 +169,7 @@ Feature: Discovery.launch_HotLaunch
         And '3rd party app' transitions to state 'foreground'
         When '3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
         And 1st party app invokes the 'Firebolt' API to '<Error_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
+        Then 'Firebolt' platform responds to '1st party app' with 'error for discovery launch'
 
         Examples:
             | Scenario          | Error_Key                             |
@@ -190,7 +190,7 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'Discovery.Launch' tests
         And 3rd party 'certification' app is launched
         When 1st party app invokes the 'Firebolt' API to 'launch app with invalid appId type'
-        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
+        Then 'Firebolt' platform responds to '1st party app' with 'error for discovery launch'
 
     @sdk @transport
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> for context source
@@ -212,7 +212,7 @@ Feature: Discovery.launch_HotLaunch
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'foreground'
         When 1st party app invokes the 'Firebolt' API to 'launch app with search intent int source'
-        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
+        Then 'Firebolt' platform responds to '1st party app' with 'error for discovery launch'
 
     @DiscoveryLaunch @coreSDK @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: Event validation where one app is in <state> and one is in foreground

@@ -87,16 +87,16 @@ Feature: SecureStorage
 
         Examples:
             | Scenario                                        | API_Key                                     | Validation_Key                           |
-            | Passing invalid scope for get                   | get stored value with invalid scope         | invalid parameters for securestorage get |
-            | Passing scope for get as empty string           | get stored value with scope as empty string | invalid parameters for securestorage get |
-            | Passing scope for get as number                 | get stored value with scope as number       | invalid parameters for securestorage get |
-            | Passing scope for null for getting stored value | get stored value with scope as null         | invalid parameters for securestorage get |
-            | Passing scope for get as boolean                | get stored value with scope as boolean      | invalid parameters for securestorage get |
-            | without scope                                   | get stored value without scope              | invalid parameters for securestorage get |
-            | Passing key for get as number                   | get stored value with key as number         | invalid parameters for securestorage get |
-            | Passing key as null                             | get stored value with key as null           | invalid parameters for securestorage get |
-            | Passing key as boolean                          | get stored value with key as boolean        | invalid parameters for securestorage get |
-            | without key                                     | get stored value without key                | invalid parameters for securestorage get |
+            | Passing invalid scope for get                   | get stored value with invalid scope         | error for securestorage get |
+            | Passing scope for get as empty string           | get stored value with scope as empty string | error for securestorage get |
+            | Passing scope for get as number                 | get stored value with scope as number       | error for securestorage get |
+            | Passing scope for null for getting stored value | get stored value with scope as null         | error for securestorage get |
+            | Passing scope for get as boolean                | get stored value with scope as boolean      | error for securestorage get |
+            | without scope                                   | get stored value without scope              | error for securestorage get |
+            | Passing key for get as number                   | get stored value with key as number         | error for securestorage get |
+            | Passing key as null                             | get stored value with key as null           | error for securestorage get |
+            | Passing key as boolean                          | get stored value with key as boolean        | error for securestorage get |
+            | without key                                     | get stored value without key                | error for securestorage get |
             | Passing key for get as empty string             | get stored value with key as empty          | custom error for securestorage get       |
 
     @sdk @transport
@@ -111,24 +111,24 @@ Feature: SecureStorage
         Then 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
 
         Examples:
-            | Scenario                        | API_Key                                       | Validation_Key                           |
-            | Passing invalid scope           | set secure value with invalid scope           | invalid parameters for securestorage set |
-            | Passing scope as number         | set secure value with scope as number         | invalid parameters for securestorage set |
-            | Passing scope as null           | set secure value with scope as null           | invalid parameters for securestorage set |
-            | Passing scope as boolean        | set secure value with scope as boolean        | invalid parameters for securestorage set |
-            | Passing scope as empty string   | set secure value with scope as empty string   | invalid parameters for securestorage set |
-            | without scope                   | set secure value without scope                | invalid parameters for securestorage set |
-            | Passing key as number           | set secure value with key as number           | invalid parameters for securestorage set |
-            | Passing key as null             | set secure value with key as null             | invalid parameters for securestorage set |
-            | Passing key as boolean          | set secure value with key as boolean          | invalid parameters for securestorage set |
-            | without key                     | set secure value without key                  | invalid parameters for securestorage set |
-            | Passing value as number         | set secure value with value as number         | invalid parameters for securestorage set |
-            | Passing value as null           | set secure value with value as null           | invalid parameters for securestorage set |
-            | Passing value as boolean        | set secure value with value as boolean        | invalid parameters for securestorage set |
-            | without value                   | set secure value without value                | invalid parameters for securestorage set |
-            | Passing invalid options         | set secure value with invalid options         | invalid parameters for securestorage set |
-            | Passing options as empty object | set secure value with options as empty object | invalid parameters for securestorage set |
-            | Passing options as empty string | set secure value with options as empty string | invalid parameters for securestorage set |
+            | Scenario                        | API_Key                                       | Validation_Key              |
+            | Passing invalid scope           | set secure value with invalid scope           | error for securestorage set |
+            | Passing scope as number         | set secure value with scope as number         | error for securestorage set |
+            | Passing scope as null           | set secure value with scope as null           | error for securestorage set |
+            | Passing scope as boolean        | set secure value with scope as boolean        | error for securestorage set |
+            | Passing scope as empty string   | set secure value with scope as empty string   | error for securestorage set |
+            | without scope                   | set secure value without scope                | error for securestorage set |
+            | Passing key as number           | set secure value with key as number           | error for securestorage set |
+            | Passing key as null             | set secure value with key as null             | error for securestorage set |
+            | Passing key as boolean          | set secure value with key as boolean          | error for securestorage set |
+            | without key                     | set secure value without key                  | error for securestorage set |
+            | Passing value as number         | set secure value with value as number         | error for securestorage set |
+            | Passing value as null           | set secure value with value as null           | error for securestorage set |
+            | Passing value as boolean        | set secure value with value as boolean        | error for securestorage set |
+            | without value                   | set secure value without value                | error for securestorage set |
+            | Passing invalid options         | set secure value with invalid options         | error for securestorage set |
+            | Passing options as empty object | set secure value with options as empty object | error for securestorage set |
+            | Passing options as empty string | set secure value with options as empty string | error for securestorage set |
             | Passing key as empty string     | set secure value with empty key               | custom error for securestorage set       |
 
     @sdk @transport
@@ -143,17 +143,17 @@ Feature: SecureStorage
         Then 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
 
         Examples:
-            | Scenario                      | API_Key                                        | Validation_Key                              |
-            | Passing invalid scope         | remove stored value with invalid scope         | invalid parameters for securestorage remove |
-            | Passing scope as empty string | remove stored value with scope as empty string | invalid parameters for securestorage remove |
-            | Passing scope as number       | remove stored value with scope as number       | invalid parameters for securestorage remove |
-            | Passing scope as null         | remove stored value with scope as null         | invalid parameters for securestorage remove |
-            | Passing scope as boolean      | remove stored value with scope as boolean      | invalid parameters for securestorage remove |
-            | without scope                 | remove stored value without scope              | invalid parameters for securestorage remove |
-            | Passing key as number         | remove stored value with key as number         | invalid parameters for securestorage remove |
-            | Passing key as null           | remove stored value with key as null           | invalid parameters for securestorage remove |
-            | Passing key as boolean        | remove stored value with key as boolean        | invalid parameters for securestorage remove |
-            | without key                   | remove stored value without key                | invalid parameters for securestorage remove |
+            | Scenario                      | API_Key                                        | Validation_Key                 |
+            | Passing invalid scope         | remove stored value with invalid scope         | error for securestorage remove |
+            | Passing scope as empty string | remove stored value with scope as empty string | error for securestorage remove |
+            | Passing scope as number       | remove stored value with scope as number       | error for securestorage remove |
+            | Passing scope as null         | remove stored value with scope as null         | error for securestorage remove |
+            | Passing scope as boolean      | remove stored value with scope as boolean      | error for securestorage remove |
+            | without scope                 | remove stored value without scope              | error for securestorage remove |
+            | Passing key as number         | remove stored value with key as number         | error for securestorage remove |
+            | Passing key as null           | remove stored value with key as null           | error for securestorage remove |
+            | Passing key as boolean        | remove stored value with key as boolean        | error for securestorage remove |
+            | without key                   | remove stored value without key                | error for securestorage remove |
             | Passing key as empty string   | remove stored value with empty key             | custom error for securestorage remove       |
 
     @sdk @transport
@@ -212,7 +212,7 @@ Feature: SecureStorage
         And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as account and key as authTestTokenAccount'
         And 'Firebolt' platform responds with 'expected value for authTestTokenAccount stored data in securestorage'
         When '3rd party app' invokes the 'Firebolt' API to '<Clear_API_key>'
-        Then 'Firebolt' platform responds with 'invalid parameters for securestorage clear'
+        Then 'Firebolt' platform responds with 'error for securestorage clear'
         When '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
         Then 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
         When '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as account and key as authTestTokenAccount'

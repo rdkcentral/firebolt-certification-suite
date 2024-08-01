@@ -68,7 +68,7 @@
 		"validationJsonPath": "result",
 		"content": "AUTHENTICATION_DECODE_BASE64_AUTHENTICATION_ROOT_TOKEN"
 	},
-    "INVALID_PARAMETER_ERROR_AUTHENTICATION_TOKEN": {
+    "ERROR_FOR_AUTHENTICATION_TOKEN": {
 		"method": "authentication.token",
 		"validationJsonPath": "result",
 		"content": "INVALID_TYPE_PARAMS",

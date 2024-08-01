@@ -23,8 +23,8 @@ Feature: SecondScreen
 
       Examples:
          | Scenario                           | API_key                              | Validation_key                             |
-         | Validate passing device as boolean | get secondscreen device with boolean | invalid parameters for secondscreen device |
-         | Validate passing device as integer | get secondscreen device with integer | invalid parameters for secondscreen device |
+         | Validate passing device as boolean | get secondscreen device with boolean | error for secondscreen device |
+         | Validate passing device as integer | get secondscreen device with integer | error for secondscreen device |
 
    @sdk @transport
    Scenario: SecondScreen.FriendlyName - Positive Scenario: Validate Set friendlyName

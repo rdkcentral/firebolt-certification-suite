@@ -41,7 +41,7 @@
         "validationJsonPath": "result",
         "content": "SECONDSCREEN_PROTOCOLS"
     },
-    "INVALID_PARAMETERS_FOR_SECONDSCREEN_DEVICE": {
+    "ERROR_FOR_SECONDSCREEN_DEVICE": {
         "method": "secondscreen.device",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",

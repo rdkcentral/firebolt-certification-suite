@@ -238,7 +238,7 @@
         "validationJsonPath": "result",
         "content": "SECURESTORAGE_GET_DEVICE1"
     },
-    "INVALID_PARAMETERS_FOR_SECURESTORAGE_GET": {
+    "ERROR_FOR_SECURESTORAGE_GET": {
         "method": "securestorage.get",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
@@ -534,7 +534,7 @@
         "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
-    "INVALID_PARAMETERS_FOR_SECURESTORAGE_SET": {
+    "ERROR_FOR_SECURESTORAGE_SET": {
         "method": "securestorage.set",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
@@ -546,7 +546,7 @@
         "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
-    "INVALID_PARAMETERS_FOR_SECURESTORAGE_REMOVE": {
+    "ERROR_FOR_SECURESTORAGE_REMOVE": {
         "method": "securestorage.remove",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
@@ -833,7 +833,7 @@
         "method": "securestorage.clear",
         "expected": "error"
     },
-    "INVALID_PARAMETERS_FOR_SECURESTORAGE_CLEAR": {
+    "ERROR_FOR_SECURESTORAGE_CLEAR": {
         "method": "securestorage.clear",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",

@@ -35,7 +35,7 @@ Feature: Authentication
       Then 'Firebolt' platform responds with '<Validation_key>'
 
       Examples:
-         | Scenario                       | API_Key                            | Validation_key                               |
-         | Invalid Parameter Platform1    | get token with platform1 parameter | invalid parameter error authentication token |
-         | Invalid Parameter type Boolean | get token with true parameter      | invalid parameter error authentication token |
-         | Invalid Parameter type Integer | get token with integer parameter   | invalid parameter error authentication token |
+         | Scenario                       | API_Key                            | Validation_key                 |
+         | Invalid Parameter Platform1    | get token with platform1 parameter | error for authentication token |
+         | Invalid Parameter type Boolean | get token with true parameter      | error for authentication token |
+         | Invalid Parameter type Integer | get token with integer parameter   | error for authentication token |

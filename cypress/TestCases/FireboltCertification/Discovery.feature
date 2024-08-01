@@ -62,7 +62,7 @@ Feature: Discovery
    @sdk @transport
    Scenario Outline: Discovery.watched - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds with 'invalid params for discovery watched'
+      Then 'Firebolt' platform responds with 'error for discovery watched'
 
       Examples:
          | Scenario                 | API_Key                                             |
@@ -76,7 +76,7 @@ Feature: Discovery
    @sdk @transport
    Scenario Outline: Discovery.watchNext - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds with 'invalid params for discovery watchnext'
+      Then 'Firebolt' platform responds with 'error for discovery watchnext'
 
       Examples:
          | Scenario                           | API_Key                                                        |
@@ -95,7 +95,7 @@ Feature: Discovery
    @sdk @transport
    Scenario Outline: Discovery.entitlements - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds with 'invalid params for discovery entitlements'
+      Then 'Firebolt' platform responds with 'error for discovery entitlements'
 
       Examples:
          | Scenario                              | API_Key                                 |
@@ -105,7 +105,7 @@ Feature: Discovery
    @sdk @transport
    Scenario Outline: Discovery.signIn - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds with 'invalid params for discovery signIn'
+      Then 'Firebolt' platform responds with 'error for discovery signIn'
 
       Examples:
          | Scenario                              | API_Key                                      |
@@ -138,7 +138,7 @@ Feature: Discovery
    @sdk @transport
    Scenario Outline: Discovery.contentAccess - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds with 'invalid parameter error for discovery contentAccess'
+      Then 'Firebolt' platform responds with 'error for discovery contentAccess'
 
       Examples:
          | Scenario                                   | API_Key                                                               |

@@ -154,7 +154,7 @@
         "method": "discovery.watched",
         "expected": "error"
     },
-    "INVALID_PARAMS_FOR_DISCOVERY_WATCHED": {
+    "ERROR_FOR_DISCOVERY_WATCHED": {
         "method": "discovery.watched",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
@@ -191,7 +191,7 @@
         "params": "DISCOVERY_WATCHED_INVALID_WATCHEDON",
         "expected": "error"
     },
-    "INVALID_PARAMS_FOR_DISCOVERY_WATCHNEXT": {
+    "ERROR_FOR_DISCOVERY_WATCHNEXT": {
         "method": "discovery.watchNext",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
@@ -252,7 +252,7 @@
         "params": "DISCOVERY_WATCHNEXT_INVALID_IDENTIFIERS_APPCONTENTDATA",
         "expected": "error"
     },
-    "INVALID_PARAMS_FOR_DISCOVERY_ENTITLEMENTS": {
+    "ERROR_FOR_DISCOVERY_ENTITLEMENTS": {
         "method": "discovery.entitlements",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
@@ -268,7 +268,7 @@
         "params": "DISCOVERY_INVALID_ENTITLEMENTS_INTEGER_PARAMS",
         "expected": "error"
     },
-    "INVALID_PARAMS_FOR_DISCOVERY_SIGNIN": {
+    "ERROR_FOR_DISCOVERY_SIGNIN": {
         "method": "discovery.signIn",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
@@ -327,7 +327,7 @@
     "CLEAR_CONTENTACCESS": {
         "method": "discovery.clearContentAccess"
     },
-    "INVALID_PARAMETER_ERROR_FOR_DISCOVERY_CONTENTACCESS": {
+    "ERROR_FOR_DISCOVERY_CONTENTACCESS": {
         "method": "discovery.contentAccess",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",

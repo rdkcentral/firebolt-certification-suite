@@ -49,13 +49,13 @@ Feature: Keyboard
         Then 'Firebolt' platform responds with '<Validation_key>'
 
         Examples:
-            | Method   | Scenario                             | API_Key                                                      | Validation_key              |
-            | email    | passing email type as invalid string | prompt the user for their email with invalid type as string  | invalid parameter for email |
-            | email    | passing email type as integer        | prompt the user for their email with invalid type as integer | invalid parameter for email |
-            | email    | passing email type as empty          | prompt the user for their email with type as empty           | invalid parameter for email |
-            | password | passing password as integer          | prompt the user for their invalid password as integer        | invalid parameter password  |
-            | standard | passing standard as integer          | prompt the user for their invalid standard as integer        | invalid parameter standard  |
-            | standard | passing standard as empty            | prompt the user for their standard as empty                  | invalid parameter standard  |
+            | Method   | Scenario                             | API_Key                                                      | Validation_key     |
+            | email    | passing email type as invalid string | prompt the user for their email with invalid type as string  | error for email    |
+            | email    | passing email type as integer        | prompt the user for their email with invalid type as integer | error for email    |
+            | email    | passing email type as empty          | prompt the user for their email with type as empty           | error for email    |
+            | password | passing password as integer          | prompt the user for their invalid password as integer        | error for password |
+            | standard | passing standard as integer          | prompt the user for their invalid standard as integer        | error for standard |
+            | standard | passing standard as empty            | prompt the user for their standard as empty                  | error for standard |
 
 
     @sdk @transport @requiresPlatformImplementation
@@ -69,10 +69,10 @@ Feature: Keyboard
         Then 'Firebolt' platform responds with '<Validation_key>'
 
         Examples:
-            | Method   | Scenario                             | API_Key                                                      | Validation_key              |
-            | email    | passing email type as invalid string | prompt the user for their email with invalid type as string  | invalid parameter for email |
-            | email    | passing email type as integer        | prompt the user for their email with invalid type as integer | invalid parameter for email |
-            | email    | passing email type as empty          | prompt the user for their email with type as empty           | invalid parameter for email |
-            | password | passing password as integer          | prompt the user for their invalid password as integer        | invalid parameter password  |
-            | standard | passing standard as integer          | prompt the user for their invalid standard as integer        | invalid parameter password  |
-            | standard | passing standard as empty            | prompt the user for their standard as empty                  | invalid parameter standard  |
+            | Method   | Scenario                             | API_Key                                                      | Validation_key     |
+            | email    | passing email type as invalid string | prompt the user for their email with invalid type as string  | error for email    |
+            | email    | passing email type as integer        | prompt the user for their email with invalid type as integer | error for email    |
+            | email    | passing email type as empty          | prompt the user for their email with type as empty           | error for email    |
+            | password | passing password as integer          | prompt the user for their invalid password as integer        | error for password |
+            | standard | passing standard as integer          | prompt the user for their invalid standard as integer        | error for password |
+            | standard | passing standard as empty            | prompt the user for their standard as empty                  | error for standard |
