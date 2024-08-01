@@ -163,7 +163,7 @@
     "INVALID_REQUEST_FOR_DISCOVERY_WATCHED": {
         "method": "discovery.watched",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "NOTIFY_WATCHED_CONTENT_WITH_INVALID_ENTITYID_NUMBER": {
@@ -450,7 +450,7 @@
     "INVALID_REQUEST_FOR_DISCOVERY_WATCHNEXT": {
         "method": "discovery.watchNext",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     }
 }

@@ -378,7 +378,7 @@
     "INVALID_REQUEST_FOR_LOCALIZATION_LOCALITY": {
         "method": "localization.locality",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "ONLOCALITYCHANGED_FOR_LOCALIZATION_LOCALITY_WITH_WASHINGTON": {
@@ -475,7 +475,7 @@
     "INVALID_REQUEST_FOR_POSTALCODE": {
         "method": "localization.postalCode",
 		"validationJsonPath": "result",
-		"content": "INVALID_REQUEST",
+		"content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "SET_POSTALCODE_WITH_BOOLEAN": {
@@ -639,7 +639,7 @@
     "INVALID_REQUEST_FOR_LOCALIZATION_LANGUAGE": {
         "method": "localization.language",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "EXPECT_ERROR_FOR_NOTSUPPORTED_CAPABILITY": {
@@ -670,7 +670,7 @@
     "EXPECTED_LOCALIZATION_COUNTRYCODE_CHALLENGEERROR":{
         "method": "localization.countryCode",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     }
 }

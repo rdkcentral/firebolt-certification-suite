@@ -171,19 +171,19 @@
     "ENTERED_EMAIL_ADDRESS_PROVIDER_ERROR": {
         "method": "keyboard.email",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "ENTERED_USERNAME_PROVIDER_ERROR": {
         "method": "keyboard.standard",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "ENTERED_PASSWORD_PROVIDER_ERROR": {
         "method": "keyboard.password",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "SEND_ERROR_FROM_EMAIL_PROVIDER":{

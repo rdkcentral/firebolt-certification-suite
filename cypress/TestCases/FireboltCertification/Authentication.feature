@@ -1,10 +1,11 @@
+@Authentication @coreSDK 
 Feature: Authentication
 
    Background: Launch FCA for 'Authentication'
       Given the environment has been set up for 'Authentication' tests
       And 3rd party 'certification' app is launched
 
-   @Authentication @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Authentication.token - Positive Scenario: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
@@ -17,7 +18,7 @@ Feature: Authentication
          | Get Distributor-CIMA token type | get the authentication token for distributor_CIMA | decode base64 authentication token |
          | Get Distributor-OAT token type  | get the authentication token for distributor_OAT  | decode base64 authentication token |
 
-   @Authentication @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Authentication.<Method> - Positive Scenario: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
@@ -28,7 +29,7 @@ Feature: Authentication
          | Get Session token type | fetch session token | authentication session | session |
          | Get Root token type    | fetch root token    | authentication root    | root    |
 
-   @Authentication @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Authentication.token - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'

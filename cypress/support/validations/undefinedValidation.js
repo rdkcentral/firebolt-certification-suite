@@ -21,7 +21,7 @@ Cypress.Commands.add(
           validationType == CONSTANTS.EVENT
             ? apiOrEventObject.eventResponse
             : validationType == CONSTANTS.METHOD
-              ? apiOrEventObject.response.result
+              ? apiOrEventObject.apiResponse.result
               : null;
         const methodOrEventName =
           validationType == CONSTANTS.EVENT
