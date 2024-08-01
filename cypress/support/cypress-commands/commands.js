@@ -154,46 +154,149 @@ Cypress.Commands.add('getSdkVersion', () => {
       })
       .then((latestSDKversion) => {
         // Calling device.version API
-        cy.getDeviceVersion().then((response) => {
-          // If the response is invalid, assign the latest SDK version to the environment variable.
-          if (response?.api?.readable && response.sdk?.readable) {
-            // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
-            // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
-            // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
-            const deviceSDKversionJson =
-              UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
-                ? response.api
-                : response.sdk;
-            const readableSDKVersion = deviceSDKversionJson.readable;
+        cy.getDeviceData(CONSTANTS.DEVICE_VERSION, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+          (response) => {
+            // If the response is invalid, assign the latest SDK version to the environment variable.
+            if (response?.api?.readable && response.sdk?.readable) {
+              // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
+              // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
+              // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
+              const deviceSDKversionJson =
+                UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
+                  ? response.api
+                  : response.sdk;
+              const readableSDKVersion = deviceSDKversionJson.readable;
 
-            // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
-            Cypress.env(
-              CONSTANTS.ENV_PLATFORM_SDK_VERSION,
-              readableSDKVersion.includes(CONSTANTS.NEXT) ||
-                readableSDKVersion.includes(CONSTANTS.PROPOSED)
-                ? readableSDKVersion
-                : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
-            );
-            return;
+              // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
+              Cypress.env(
+                CONSTANTS.ENV_PLATFORM_SDK_VERSION,
+                readableSDKVersion.includes(CONSTANTS.NEXT) ||
+                  readableSDKVersion.includes(CONSTANTS.PROPOSED)
+                  ? readableSDKVersion
+                  : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
+              );
+            } else {
+              Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
+            }
+            if (response?.firmware?.readable) {
+              let deviceFirmware = JSON.stringify(response.firmware.readable);
+              deviceFirmware = deviceFirmware.replace(/"/g, '');
+              Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+            }
           }
-          Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
-        });
+        );
       });
   }
+});
+/**
+ * @module commands
+ * @function updateRunInfo
+ * @description update Run Info in cucumber report dynamically
+ * @example
+ * updateRunInfo()
+ */
+Cypress.Commands.add('updateRunInfo', () => {
+  const reportEnvFile = './reportEnv.json';
+  const tempReportEnvFile = './tempReportEnv.json';
+
+  cy.task('checkFileExists', reportEnvFile).then((exists) => {
+    if (exists) {
+      cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
+        if (!tempFileExists) {
+          try {
+            let configModuleConst;
+            try {
+              configModuleConst = require('../../../node_modules/configModule/constants/constants');
+            } catch (error) {
+              logger.info('Unable to read from configModule constants');
+              return false;
+            }
+            // get data for runInfo
+            cy.getDeviceData(CONSTANTS.DEVICE_MODEL, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+              (response) => {
+                Cypress.env(CONSTANTS.ENV_DEVICE_MODEL, JSON.stringify(response).replace(/"/g, ''));
+              }
+            );
+            cy.getDeviceData(
+              CONSTANTS.DEVICE_DISTRIBUTOR,
+              {},
+              CONSTANTS.ACTION_CORE.toLowerCase()
+            ).then((response) => {
+              Cypress.env(
+                CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                JSON.stringify(response).replace(/"/g, '')
+              );
+            });
+            cy.getDeviceData(
+              CONSTANTS.DEVICE_PLATFORM,
+              {},
+              CONSTANTS.ACTION_CORE.toLowerCase()
+            ).then((response) => {
+              Cypress.env(CONSTANTS.ENV_PLATFORM, JSON.stringify(response).replace(/"/g, ''));
+            });
+            cy.readFile(reportEnvFile).then((reportEnv) => {
+              if (reportEnv) {
+                const isPlatformRipple = false;
+                if (
+                  reportEnv.customData &&
+                  reportEnv.customData.data &&
+                  reportEnv.customData.data.length > 0
+                ) {
+                  const labelToEnvMap = {
+                    [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
+                    [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_PLATFORM_SDK_VERSION,
+                    [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
+                    [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
+                    [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
+                    [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
+                    [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                  };
+
+                  reportEnv.customData.data.forEach((item) => {
+                    if (item.label === CONSTANTS.PRODUCT) {
+                      item.value = configModuleConst.PRODUCT ? configModuleConst.PRODUCT : 'N/A';
+                    } else if (labelToEnvMap[item.label]) {
+                      item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+                    }
+                  });
+                }
+                // write the merged object
+                cy.writeFile(tempReportEnvFile, reportEnv);
+              } else {
+                logger.info('Unable to read from reportEnv json file');
+                return false;
+              }
+            });
+          } catch (err) {
+            logger.info('Error in updating Run Info in cucumber report', err);
+            return false;
+          }
+        } else {
+          logger.info(
+            'Unable to update Run Info in cucumber report, tempReportEnv file already exists'
+          );
+          return false;
+        }
+      });
+    } else {
+      logger.info('Unable to update Run Info in cucumber report, reportEnv file doesnt exist');
+      return false;
+    }
+  });
 });
 
 /**
  * @module commands
- * @function getDeviceVersion
- * @description Making device.version API call to get SDK version.
+ * @function getDeviceData
+ * @description Making API call.
  * @example
- * cy.getDeviceVersion()
+ * cy.getDeviceData(method, param, action)
  */
-Cypress.Commands.add('getDeviceVersion', () => {
+Cypress.Commands.add('getDeviceData', (method, param, action) => {
   const requestMap = {
-    method: CONSTANTS.DEVICE_VERSION,
-    param: {},
-    action: CONSTANTS.ACTION_CORE.toLowerCase(),
+    method: method,
+    param: param,
+    action: action,
   };
   cy.log(
     'Call from 1st party App, method: ' +
