@@ -108,9 +108,11 @@ function processSetResponseJson(setResponseJsonData) {
  *  getErrorContentObjectJson()
  */
 function getErrorContentObjectJson() {
-  const errorSchemaJson = fetchDataFromFile(CONSTANTS.ERROR_CONTENT_OBJECTS_PATH);
-  if (errorSchemaJson) {
-    return errorSchemaJson;
+  const errorContentJson = fetchDataFromFile(CONSTANTS.ERROR_CONTENT_OBJECTS_PATH);
+  const externalErrorContentJson = fetchDataFromFile(CONSTANTS.EXTERNAL_ERROR_CONTENT_OBJECTS_PATH);
+  const combinedErrorContentJson = Object.assign(errorContentJson, externalErrorContentJson);
+  if (combinedErrorContentJson) {
+    return combinedErrorContentJson;
   } else {
     logger.error('Unable to find Error content JSON in configModule', 'getErrorContentObjectJson');
   }
@@ -192,9 +194,6 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
       const contextImportFile = CONSTANTS.CONTEXT_FILE_PATH;
       const contextValue = fetchAndParseDataFromJson(contextImportFile, dataIdentifier);
       if (contextValue === CONSTANTS.NO_DATA) {
-        logger.info(
-          `Expected context not found for ${dataIdentifier}. Returning ${dataIdentifier} as is.`
-        );
         return dataIdentifier;
       } else {
         return contextValue;
@@ -213,93 +212,91 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
         ) {
           return resolvedErrorContentJson[dataIdentifier];
         } else {
-          logger.info(`Unable to find data for Error validation for ${dataIdentifier}`);
           return dataIdentifier;
         }
       } else {
-        const validationObject = validationObjects[dataIdentifier];
+        const validationObjectArray = validationObjects[dataIdentifier];
+        const validationObject = _.cloneDeep(validationObjectArray);
 
         if (validationObject && validationObject.data) {
           validationObject.data.forEach((object, index) => {
             if (object.validations && object.validations.length > 0) {
               // Iterating through the validations array, retrieving and updating the value of the type field based on mode.
               object.validations.forEach((data) => {
-                // When the data.type is not string, returning the data as is
-                if (typeof data.type !== CONSTANTS.STRING) {
-                  return data.type;
-                }
+                // When the data.type is string, then parse the value
+                if (typeof data?.type === CONSTANTS.STRING) {
+                  // Resolve any cypress env variables
+                  if (data.type.includes('CYPRESSENV')) {
+                    // Split into an array and remove CYPRESSENV
+                    const envSegments = data.type.split('-').slice(1);
+                    // Handle the case where the env variable is an object
+                    if (envSegments.length > 1) {
+                      const objectName = envSegments[0];
+                      const propertyName = envSegments[1];
 
-                // Resolve any cypress env variables
-                if (typeof data.type === 'string' && data.type.includes('CYPRESSENV')) {
-                  // Split into an array and remove CYPRESSENV
-                  const envSegments = data.type.split('-').slice(1);
-                  // Handle the case where the env variable is an object
-                  if (envSegments.length > 1) {
-                    const objectName = envSegments[0];
-                    const propertyName = envSegments[1];
+                      // Get object from envVariables
+                      const envValue = _.get(envVariables, [objectName, propertyName]);
 
-                    // Get object from envVariables
-                    const envValue = _.get(envVariables, [objectName, propertyName]);
-
-                    // Check if object exists and contains the specified property
-                    if (envValue !== undefined) {
-                      return (data.type = envValue);
+                      // Check if object exists and contains the specified property
+                      if (envValue !== undefined) {
+                        data.type = envValue;
+                      } else {
+                        logger.info(`Cypress env variable '${envKey}' does not exist`);
+                      }
                     } else {
-                      logger.info(`Cypress env variable '${envKey}' does not exist`);
-                      return data.type;
-                    }
-                  } else {
-                    const envKey = envSegments[0];
-                    const envValue = _.get(envVariables, envKey);
-                    if (envValue !== undefined) {
-                      return (data.type = envValue);
-                    } else {
-                      logger.info(`Cypress env variable '${envKey}' does not exist`);
-                      return data.type;
+                      const envKey = envSegments[0];
+                      const envValue = _.get(envVariables, envKey);
+                      if (envValue !== undefined) {
+                        data.type = envValue;
+                      } else {
+                        logger.info(`Cypress env variable '${envKey}' does not exist`);
+                      }
                     }
                   }
-                }
-                switch (data.mode) {
-                  case CONSTANTS.REGEX.toLowerCase():
-                    const regexType = data.type.includes('_REGEXP')
-                      ? data.type
-                      : data.type + '_REGEXP';
-                    let parsedRegexExp;
-                    if (REGEXFORMATS[regexType]) {
-                      parsedRegexExp = REGEXFORMATS[regexType];
-                    } else {
-                      const regExp = new RegExp(data.type);
-                      parsedRegexExp = regExp;
-                    }
-                    return (data.type = parsedRegexExp.toString());
+                  switch (data.mode) {
+                    case CONSTANTS.REGEX.toLowerCase():
+                      const regexType = data.type.includes('_REGEXP')
+                        ? data.type
+                        : data.type + '_REGEXP';
+                      let parsedRegexExp;
+                      if (REGEXFORMATS[regexType]) {
+                        parsedRegexExp = REGEXFORMATS[regexType];
+                      } else {
+                        parsedRegexExp = new RegExp(data.type);
+                      }
 
-                  case CONSTANTS.DEVICE_CONTENT_VALIDATION:
-                    // Extracting the device mac from the environment JSON.
-                    let deviceMac = envVariables[CONSTANTS.DEVICE_MAC];
-                    deviceMac = deviceMac.replaceAll(':', '');
+                      data.type = parsedRegexExp.toString();
+                      break;
 
-                    const deviceDataPath = deviceMac
-                      ? CONSTANTS.EXTERNAL_DEVICES_PATH + deviceMac + '.json'
-                      : CONSTANTS.DEFAULT_DEVICE_DATA_PATH;
+                    case CONSTANTS.DEVICE_CONTENT_VALIDATION:
+                      // Extracting the device mac from the environment JSON.
+                      let deviceMac = envVariables[CONSTANTS.DEVICE_MAC];
+                      deviceMac = deviceMac.replaceAll(':', '');
 
-                    if (!deviceMac) {
-                      logger.info('Falling back to default device data path');
-                    }
-                    let deviceData = fetchAndParseDataFromJson(deviceDataPath, data.type);
-                    if (deviceData === CONSTANTS.NO_DATA) {
-                      logger.info(
-                        `Expected deviceData not found for ${data.type}. Returning ${data.type} as is.`
-                      );
-                      deviceData = data.type;
-                    }
-                    return (data.type = deviceData);
+                      const deviceDataPath = deviceMac
+                        ? CONSTANTS.EXTERNAL_DEVICES_PATH + deviceMac + '.json'
+                        : CONSTANTS.DEFAULT_DEVICE_DATA_PATH;
 
-                  default:
-                    return (data.type = testDataParser(data.type));
+                      if (!deviceMac) {
+                        logger.info('Falling back to default device data path');
+                      }
+                      let deviceData = fetchAndParseDataFromJson(deviceDataPath, data.type);
+                      if (deviceData === CONSTANTS.NO_DATA) {
+                        logger.info(
+                          `Expected deviceData not found for ${data.type}. Returning ${data.type} as is.`
+                        );
+                        deviceData = data.type;
+                      }
+                      data.type = deviceData;
+                      break;
+
+                    default:
+                      data.type = testDataParser(data.type);
+                      break;
+                  }
                 }
               });
             }
-            return object;
           });
 
           return validationObject;
@@ -441,9 +438,6 @@ function combineValidationObjectsJson() {
 // Function to print logs when data is having "no data" else returning as is.
 function paramDataLogs(paramData, dataIdentifier, defaultRetVal, requestType) {
   if (paramData == CONSTANTS.NO_DATA) {
-    logger.info(
-      `Expected ${requestType || 'data'} ${dataIdentifier} was not found in fixtures. Returning ${dataIdentifier} as is.`
-    );
     return defaultRetVal;
   } else {
     return paramData;

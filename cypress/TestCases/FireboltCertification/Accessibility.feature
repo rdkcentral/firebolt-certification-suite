@@ -108,8 +108,8 @@ Feature: Accessibility
 
         Examples:
             | Scenario                         | Method  | Value |
-            | Disable audioDescriptionSettings | enabled | false |
             | Enable audioDescriptionSettings  | enabled | true  |
+            | Disable audioDescriptionSettings | enabled | false |
 
     @sdk @transport
     Scenario Outline: Accessibility.closedCaptions - Positive Scenario: <Scenario>
@@ -123,6 +123,7 @@ Feature: Accessibility
 
         Examples:
             | Scenario                           | Method            | Value               |
+            | Disable closedcaptions             | enabled           | false               |
             | Enable closedcaptions              | enabled           | true                |
             | Set fontFamily-monospaced_sanserif | fontFamily        | monospaced_sanserif |
             | Set fontSize-1                     | fontSize          | 1                   |
@@ -136,6 +137,14 @@ Feature: Accessibility
             | Set textAlignVertical-top          | textAlignVertical | top                 |
             | Set windowColor-#7f7f7f            | windowColor       | #7F7F7F             |
             | Set windowOpacity-40               | windowOpacity     | 40                  |
+
+   @sdk @transport @requiresPlatformImplementation
+   Scenario: Accessibility.onClosedCaptionsSettingsChanged event - Positive Scenario: Clear listeners
+      When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
+      And 1st party stops listening to the event 'accessibility onClosedCaptionsSettingsChanged event'
+      And 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
+      Then 'Firebolt' platform responds to '1st party app' for 'disable closedCaptions'
+      And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
 
     @sdk @transport
     Scenario Outline: Accessibility.voiceGuidance - Positive Scenario: <Scenario>

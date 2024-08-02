@@ -289,7 +289,10 @@ function getApiOrEventObjectFromGlobalList(method, context, appId, validationTyp
   );
 
   // Failing when the filteredObjectList is empty.
-  assert.isNotEmpty(filteredObjectList, 'filteredObjectList is not to be empty');
+  if (filteredObjectList.length < 1) {
+    fireLog.info('Could not find the api response in api list');
+    fireLog.isNotEmpty(filteredObjectList, 'filteredObjectList is not to be empty');
+  }
 
   // When the context is empty, the most recent apiOrEventObject is obtained from the filtered list.
   // If the context is not empty, the filtered list is iterated, and the API object that has the same context is retrieved.
@@ -306,8 +309,8 @@ function getApiOrEventObjectFromGlobalList(method, context, appId, validationTyp
 
   // If no response is found, fail with no appObject found.
   if (!extractedObject) {
-    cy.log(CONSTANTS.NO_APP_OR_EVENT_OBJECT);
-    assert(false, CONSTANTS.NO_APP_OR_EVENT_OBJECT);
+    fireLog.info(CONSTANTS.NO_APP_OR_EVENT_OBJECT);
+    fireLog.assert(false, CONSTANTS.NO_APP_OR_EVENT_OBJECT);
   }
   return extractedObject;
 }
@@ -338,29 +341,34 @@ function unsubscribe(webSocketClient = null) {
  * isScenarioExempted("advertising.setSkipRestriction");
  **/
 function isScenarioExempted(method, param) {
-  let isInList = false;
-  const combinedExceptionList = generateCombinedExceptionList();
-  const methodInExceptionList = combinedExceptionList.find((object) => {
-    if (
-      object.hasOwnProperty('param') &&
-      object.method.toLowerCase() === method.toLowerCase() &&
-      _.isEqual(object.param, param)
-    ) {
-      return true;
-    } else if (
-      !object.hasOwnProperty('param') &&
-      object.method &&
-      object.method.toLowerCase() === method.toLowerCase()
-    ) {
-      return true;
-    } else {
-      return false;
+  let exceptionType;
+  const exceptionMethods = getEnvVariable(CONSTANTS.EXCEPTION_METHODS);
+  for (const [type, list] of Object.entries(exceptionMethods)) {
+    // Looking for the method and params in each list, if matched returning that exception method.
+    methodInExceptionList = list.find((object) => {
+      if (
+        object.hasOwnProperty(CONSTANTS.PARAM) &&
+        object.method.toLowerCase() === method.toLowerCase() &&
+        _.isEqual(object.param, param)
+      ) {
+        return true;
+      } else if (
+        !object.hasOwnProperty(CONSTANTS.PARAM) &&
+        object.method &&
+        object.method.toLowerCase() === method.toLowerCase()
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    // If method is prsent in the list, exiting the loop.
+    if (methodInExceptionList) {
+      exceptionType = type;
+      break;
     }
-  });
-  if (methodInExceptionList) {
-    isInList = true;
   }
-  return isInList;
+  return exceptionType;
 }
 
 /**
@@ -738,6 +746,8 @@ class FireLog extends Function {
               JSON.stringify(argumentsList[0]) +
               ' Actual: ' +
               JSON.stringify(argumentsList[1]);
+          else if (argumentsList.length == 1) message = argumentsList[0];
+          else if (argumentsList.length == 2) message = argumentsList[1];
           else
             message =
               argumentsList[argumentsList.length - 1] +

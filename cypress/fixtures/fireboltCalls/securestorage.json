@@ -857,19 +857,19 @@
     "CUSTOM_ERROR_FOR_SECURESTORAGE_REMOVE": {
         "method": "securestorage.remove",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_SECURESTORAGE_SET": {
         "method": "securestorage.set",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_SECURESTORAGE_GET": {
         "method": "securestorage.get",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     }
 }

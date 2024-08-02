@@ -1,0 +1,82 @@
+name: Main Release to GitHub
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate-dev:
+    uses: ./.github/workflows/lint-and-sample-feature-run.yaml
+    with:
+      branch: 'dev'
+
+  merge-dev-to-main:
+    name: Merge dev to main
+    needs: validate-dev
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ secrets.GITHUB_EMAIL }}"
+
+      - name: Checkout dev branch
+        run: git checkout dev
+
+      - name: Merge dev into main
+        run: |
+          git checkout main
+          git merge dev --no-ff
+          git push origin main
+          
+  release:
+    name: Release
+    needs: merge-dev-to-main
+    uses: ./.github/workflows/release.yaml
+    with:
+      branch: 'main'
+    secrets:
+      SEMANTIC_RELEASE_BOT_PAT: ${{ secrets.SEMANTIC_RELEASE_BOT_PAT }}
+
+  merge-main-to-dev:
+    name: Merge main back to dev
+    needs: release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ secrets.GITHUB_EMAIL }}"
+
+      
+      - name: Fetch changes in main
+        uses: ./.github/actions/fetch-latest-main
+
+      - name: Merge main into dev
+        run: |
+          git checkout dev
+          git merge main --no-ff
+          git push origin dev
+
+  notify-on-failure:
+    name: Notify on Failure
+    needs: [validate-dev, merge-dev-to-main, release, merge-main-to-dev]
+    if: ${{ failure() }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify Failure
+        run: |
+          echo "Merge or Release process failed. Check the logs for details."
+          # Add notification for stakeholders here, e.g., send an email, create a GitHub issue, post a Slack message, etc.

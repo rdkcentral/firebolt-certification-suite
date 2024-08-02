@@ -89,7 +89,7 @@
     "INVALID_REQUEST_FOR_SECONDSCREEN_DEVICE": {
         "method": "secondscreen.device",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "SECONDSCREEN_ONLAUNCHREQUEST_EVENT": {

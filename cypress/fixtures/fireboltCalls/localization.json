@@ -317,13 +317,10 @@
         "validationJsonPath": "result",
         "content": "LOCALIZATION_POSTALCODE"  
     },
-    "20850_FOR_LOCALIZATION_POSTALCODE":{
+    "EXPECTED_VALUE_FOR_LOCALIZATION_POSTALCODE":{
         "method": "localization.postalCode",
-        "event": null,
-        "context": "noContext",
         "validationJsonPath": "result",
-        "content": "LOCALIZATION_POSTALCODE",
-        "expectingError": false
+        "content": "LOCALIZATION_POSTALCODE"
     },
     "ONPOSTALCODECHANGED_FOR_LOCALIZATION_POSTALCODE_WITH_12345": {
         "event": "localization.onPostalCodeChanged",
@@ -381,7 +378,7 @@
     "INVALID_REQUEST_FOR_LOCALIZATION_LOCALITY": {
         "method": "localization.locality",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "ONLOCALITYCHANGED_FOR_LOCALIZATION_LOCALITY_WITH_WASHINGTON": {
@@ -478,7 +475,7 @@
     "INVALID_REQUEST_FOR_POSTALCODE": {
         "method": "localization.postalCode",
 		"validationJsonPath": "result",
-		"content": "INVALID_REQUEST",
+		"content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "SET_POSTALCODE_WITH_BOOLEAN": {
@@ -642,14 +639,14 @@
     "INVALID_REQUEST_FOR_LOCALIZATION_LANGUAGE": {
         "method": "localization.language",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
-    "EXPECT_ERROR_FOR_LOCALIZATION_LATLON": {
+    "EXPECT_ERROR_FOR_NOTSUPPORTED_CAPABILITY": {
         "method": "localization.latlon",
         "expected": "error"
     },
-    "NOT_SUPPORTED_ERROR_FOR_LOCALIZATION_LATLON": {
+    "NOT_SUPPORTED_ERROR_FOR_GIVEN_CAPABILITY": {
         "method": "localization.latlon",
         "validationJsonPath": "result",
         "content": "NOT_SUPPORTED",
@@ -665,10 +662,15 @@
         "validationJsonPath": "result",
         "content": "NULL"  
     },
+    "EXPECTED_VALUE_FOR_LOCALIZATION_LOCALITY": {
+        "method": "localization.locality",  
+        "validationJsonPath": "result",
+        "content": "LOCALIZATION_LOCALITY"  
+    },
     "EXPECTED_LOCALIZATION_COUNTRYCODE_CHALLENGEERROR":{
         "method": "localization.countryCode",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     }
 }

@@ -1,6 +1,6 @@
 exports.ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS = {
   method: 'accessibility.closedCaptionsSettings',
-  params: null,
+  params: {},
   validationJsonPath: resolveAtRuntime(['result.{{attribute}}', 'result.styles.{{attribute}}']),
   setMethod: resolveAtRuntime('manage_closedcaptions.set{{attribute.uppercaseFirstChar}}'),
   setParams: resolveAtRuntime('value'),
