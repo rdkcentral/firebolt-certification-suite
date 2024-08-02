@@ -445,8 +445,8 @@ Cypress.Commands.add(
         cy.assertValidationsForEvent(
           extractEventObject,
           verifyPath,
-          'PASS',
-          'Event Schema Validation :'
+          content,
+          'Event Schema Validation failed'
         );
       } else if (eventSchemaStatus && eventSchemaStatus.status === 'PASS') {
         // Doing event content validation
@@ -477,7 +477,7 @@ Cypress.Commands.add(
             extractEventObject,
             verifyPath,
             content,
-            'Event Content validation'
+            'Event Content validation failed'
           );
         }
       } else {
@@ -548,7 +548,22 @@ Cypress.Commands.add(
     const actualValue = actual;
     typeof expected == 'object' ? (expected = JSON.stringify(expected)) : expected;
     typeof actual == 'object' ? (actual = JSON.stringify(actual)) : actual;
-    fireLog.deepEqual(expectedValue, actualValue, pretext);
+
+    pretext =
+      pretext +
+      ' for ' +
+      extractEventObject.eventName +
+      ':' +
+      ' expected ' +
+      actual +
+      ' to be ' +
+      expected;
+
+    if (_.isEqual(expectedValue, actualValue)) {
+      fireLog.info(`${pretext}`);
+    } else {
+      fireLog.assert(false, `${pretext}`);
+    }
   }
 );
 
