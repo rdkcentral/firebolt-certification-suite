@@ -66,6 +66,7 @@ For the validation part, for the states when the app is not reachable for us to 
 |  fixture          |  Used when the response value is to be validated against an expected value already provided.                      |
 |  custom           |  Used when the incoming response has to be validated using a customized function provided in the configModule.    |
 |  undefined        |  Used when the incoming response has to be validated against undefined value.                                     |
+|  schemaOnly       |  When validation type is `schemaOnly`, it will skip content validation and stops at schema validation          |
 
 
 ## regEx
@@ -374,7 +375,39 @@ Here, the value of the key "assertionDef" will be the customMethod we use for va
                 ]
             }
         ]
-    
+
+## schemaOnly
+The 'schemaOnly` validation type allows to skip content validation and stops at schema validation.
+
+### format:
+```
+    {
+        "method": "",
+        "data": [
+            {
+                "type": "schemaOnly"
+            }
+        ]
+    }
+```
+### Params:
+| Param         | type   |  Description                                                                                               |
+| ------------  | ------ | ---------------------------------------------------------------------------------------------------------  |
+| method        | string |  The name of the method whose response is to be validated.                                                 |
+| data          | array  |  An array that holds the entire set of validation objects.                                                 |
+| type          | string |  The value which indicates the type of validation.                                                         |
+
+### Example:
+```
+    {
+        "method": "device.version",
+        "data": [
+            {
+                "type": "schemaOnly"
+            }
+        ]
+    }
+```
 
 # Validation Override
 
@@ -412,3 +445,156 @@ While validating, if a key is present in both fcs-validation jsons (eg: cypress/
             }
         ]
 }
+
+
+## Error Content Validation
+
+### Background
+
+Validating the error content obtained in the response. The validation is done against a source of truth, which contains an array of error codes and messages etc. The goal is to ensure that the error codes and messages in the response match the expected values defined in the source of truth.
+
+### Default Validation Types in FCS
+
+FCS having only 4 types for Validation error objects [errorContentObjects.json](../../fixtures/objects/errorContentObjects.json)
+
+- NOT_SUPPORTED
+- NOT_PERMITTED
+- NOT_AVAILABLE
+- INVALID_TYPE_PARAMS
+
+#### Format
+
+```
+{
+    "<Error object name>": {
+        "type": "schemaOnly"
+    }
+}
+```
+
+#### Params:
+
+| Param             | type   | Description                                                                                                                     |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| Error object name | string | Error object key name, which is given in the test case                                                                         |
+| type              | string | The value which indicates the type of validation.                                                                               |
+| schemaOnly        | string | By default FCS having validation as `schemaonly`, which will not perform content validation instead stops at schema validation. |
+
+#### Example:
+
+```
+    "NOT_SUPPORTED": {
+        "type": "schemaOnly"
+    }
+```
+
+Note:
+
+- Error content validation will be happened only when override objects are added from the config module.
+- If error type having `schemaOnly` as shown in example, exection will stop after schema validation and testcase will PASS.
+
+### Content validation can be performed by adding override in the config module
+
+- Validation objects can be added in config module: `cypress/fixtures/objects/errorContentObjects.json` file.
+- If an object in the config module shares the same key name as an error object defined in FCS, FCS error object will be overriden.
+
+#### Format
+
+Below is the format need to be followed while adding override in config module
+
+```
+{
+    "<Error object name>": {
+        "type": "errorValidationFunction",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [ERROR_CODE1, ERROR_CODE2]
+                }
+            }
+        ]
+    }
+}
+```
+
+#### Params:
+
+| Param             | type   | Description                                                                            |
+| ----------------- | ------ | -------------------------------------------------------------------------------------- |
+| Error object name | string | Error object key name, which is given in the test case                                |
+| type              | string | The value which indicates the type of validation.                                      |
+| validations       | array  | Holds the array of objects having type and which is having error codes for validation. |
+
+#### Example:
+
+```
+"INVALID_TYPE_PARAMS": {
+        "type": "errorValidationFunction",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -1234,
+                        -6789
+                    ]
+                }
+            }
+        ]
+    }
+```
+
+#### Any additional validations needed, that can be done using custom validation
+
+- To do custom validation error object must have the type as `custom` shown in below format.
+- The value given for `assertionDef` represents the function name and this function should be defined in config module: `cypress/fixtures/customValidations/`
+
+#### Format
+
+Below is the custom validation object format need to be followed while adding override in config module
+
+```
+{
+    "<Error object name>": {
+        "type": "custom",
+        "assertionDef" : "<function name>",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [ERROR_CODE1, ERROR_CODE2]
+                }
+            }
+        ]
+    }
+}
+```
+
+#### Params:
+
+| Param             | type   | Description                                                                                                           |
+| ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
+| Error object name | string | Error object key name, which is given in the test case                                                               |
+| type              | string | The value which indicates the type of validation.                                                                     |
+| assertionDef      | string | holds the function name, which we are going to add custom validation logic                                            |
+| validations       | array  | Holds the array of objects having type which contains the data for validation, like error codes, error messages, etc. |
+
+#### Example:
+
+```
+    "CUSTOM_ERROR": {
+        "type": "custom",
+        "assertionDef" : "validateErrorCodeAndMessages",
+        "validations": [
+            {
+                "type": {
+                   "errorCode": [
+                        -1234,
+                        -6789
+                    ],
+                    "errorMessage": [
+                        "Custom error"
+                    ]
+                }
+            }
+        ]
+    }
+```
