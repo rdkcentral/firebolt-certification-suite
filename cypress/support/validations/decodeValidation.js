@@ -126,10 +126,7 @@ class decodeValidations {
     if (token) {
       // Check whether decodeType is BASE64 and decode the token and get the param values from decoded object and validating it
       if (decodeType == CONSTANTS.BASE64) {
-        
-        let sample = JSON.stringify(token)
-        let encode = btoa(sample)
-        const decode = atob(encode);
+        const decode = atob(token);
 
         if (decode.includes(param)) {
           const indexOfParam = decode.indexOf(param);
