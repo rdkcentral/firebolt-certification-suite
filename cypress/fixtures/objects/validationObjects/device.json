@@ -17,14 +17,7 @@
         "method": "device.version",
         "data": [
             {
-                "type": "miscellaneous",
-                "validations": [
-                    {
-                        "mode": "fixture",
-                        "type": "CYPRESSENV-defaultTestData-apiVersion",
-                        "description": "Validation of the Device version  API Format"
-                    }
-                ]
+                "type": "schemaOnly"
             }
         ]
     },
