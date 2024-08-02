@@ -330,7 +330,6 @@ module.exports = {
   PLATFORM_NOT_TRIGGER_EVENT: 'Platform MUST not trigger event ',
   PLATFORM_TRIGGER_EVENT: 'Platform MUST trigger event ',
   PLATFORM_RELEASE: 'Release',
-  PLATFORM: 'Platform',
   PARTNER: 'Partner',
   PRODUCT: 'Product',
   PREREQUISITE_DATA: 'PreRequisiteData.json',
