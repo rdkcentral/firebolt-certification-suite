@@ -156,6 +156,7 @@ Cypress.Commands.add('getSdkVersion', () => {
         // Calling device.version API
         cy.getDeviceData(CONSTANTS.DEVICE_VERSION, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
           (response) => {
+            console.log("RESPONST" + JSON.stringify(response))
             // If the response is invalid, assign the latest SDK version to the environment variable.
             if (response?.api?.readable && response.sdk?.readable) {
               // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
@@ -182,6 +183,11 @@ Cypress.Commands.add('getSdkVersion', () => {
               let deviceFirmware = JSON.stringify(response.firmware.readable);
               deviceFirmware = deviceFirmware.replace(/"/g, '');
               Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+            }
+            if (response?.api?.readable) {
+              let fireboltVersion = JSON.stringify(response.api.readable);
+              fireboltVersion = fireboltVersion.replace(/"/g, '');
+              Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
             }
           }
         );
@@ -244,7 +250,8 @@ Cypress.Commands.add('updateRunInfo', () => {
                 ) {
                   const labelToEnvMap = {
                     [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
-                    [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_PLATFORM_SDK_VERSION,
+                    [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
+                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_PLATFORM_SDK_VERSION,
                     [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
                     [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
                     [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
