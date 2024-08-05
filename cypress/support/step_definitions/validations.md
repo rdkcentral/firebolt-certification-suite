@@ -552,14 +552,7 @@ Below is the custom validation object format need to be followed while adding ov
 {
     "<Error object name>": {
         "type": "custom",
-        "assertionDef" : "<function name>",
-        "validations": [
-            {
-                "type": {
-                    "errorCode": [ERROR_CODE1, ERROR_CODE2]
-                }
-            }
-        ]
+        "assertionDef" : "<function name>"
     }
 }
 ```
@@ -571,7 +564,8 @@ Below is the custom validation object format need to be followed while adding ov
 | Error object name | string | Error object key name, which is given in the test case                                                               |
 | type              | string | The value which indicates the type of validation.                                                                     |
 | assertionDef      | string | holds the function name, which we are going to add custom validation logic                                            |
-| validations       | array  | Holds the array of objects having type which contains the data for validation, like error codes, error messages, etc. |
+
+Note: The error object allows the user to add their own validations.
 
 ##### Example:
 
