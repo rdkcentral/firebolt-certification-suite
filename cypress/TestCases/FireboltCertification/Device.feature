@@ -1,10 +1,11 @@
+@Device @coreSDK
 Feature: Device
 
     Background: Launch FCA for 'Device'
         Given the environment has been set up for 'Device' tests
         And 3rd party 'certification' app is launched
 
-    @Device @coreSDK @sdk @transport
+    @sdk @transport
     Scenario Outline:Device.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
@@ -19,7 +20,7 @@ Feature: Device
             | Validate Device sku         | fetch device sku         | expected device sku         | sku         |
             | Validate Device make        | fetch device make        | expected device make        | make        |
 
-    @Device @coreSDK @sdk @transport
+    @sdk @transport
     Scenario: Device.name - Positive Scenario: Validate device name change
         When '3rd party app' registers for the 'device onNameChanged' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'get device name'
@@ -29,7 +30,7 @@ Feature: Device
         Then 'Firebolt' platform responds with 'living hall for device name'
         And 'Firebolt' platform triggers event 'onDeviceNameChanged with living hall'
 
-    @Device @mfos @coreSDK @regression @sdk
+    @mfos  @regression @sdk
     Scenario Outline: Device.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<validation_key>'
@@ -43,27 +44,28 @@ Feature: Device
             | Validate videoResolution  | videoResolution  | fetch videoResolution  | expected videoResolution  |
             | Validate audio            | audio            | fetch audio            | expected audio            |
 
-    @Device @coreSDK @regression @sdk
+    @regression @sdk @requiresPlatformImplementation
     Scenario: Device.onNameChanged - Positive Scenario: Clearing event listeners
         When '3rd party app' registers for the 'device onNameChanged' event using the 'Firebolt' API
-        And I clear 'device onNameChanged event' listeners
+        And 1st party stops listening to the event 'device onNameChanged event'
         And 1st party app invokes the 'Firebolt' API to 'set device name to kitchen'
         Then 'Firebolt' platform responds to '1st party app' for 'set device name to kitchen'
         And 'Firebolt' platform does not trigger event for 'onDeviceNameChanged'
 
-    @Device @coreSDK @sdk @transport @notSupported
+    @sdk @transport @requiresPlatformImplementation @notSupported
     Scenario Outline: Device.network - Positive Scenario: <Scenario>
         When '3rd party app' registers for the 'device onNetworkChanged' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'fetch device network'
         Then 'Firebolt' platform responds with '<Method_Validation_Key>'
         When User triggers event with value as '<Event_Params>'
         Then 'Firebolt' platform triggers event '<Event_Validation_Key>'
-        
+
         Examples:
-            | Scenario                               | Method_Validation_Key                   | Event_Validation_Key                        |
-            | Validate network_wifi_connected        | device network as wifi connected        | onNetworkChanged with wifi connected        |
-            | Validate network_wifi_disconnected     | device network as wifi disconnected     | onNetworkChanged with wifi disconnected     |
-            | Validate network_Ethernet_connected    | device network as ethernet connected    | onNetworkChanged with ethernet connected    |
-            | Validate network_Ethernet_disconnected | device network as ethernet disconnected | onNetworkChanged with ethernet disconnected |
-            | Validate network_Hybrid_connected      | device network as hybrid connected      | onNetworkChanged with hybrid connected      |
-            | Validate network_Hybrid_disconnected   | device network as hybrid disconnected   | onNetworkChanged with hybrid disconnected   |
+            | Scenario                               | Method_Validation_Key                   | Event_Validation_Key                        | Event_Params                                       |
+            | Validate network_wifi_connected        | device network as wifi connected        | onNetworkChanged with wifi connected        | onNetworkChanged events with wifi connected        |
+            | Validate network_wifi_disconnected     | device network as wifi disconnected     | onNetworkChanged with wifi disconnected     | onNetworkChanged events with wifi disconnected     |
+            | Validate network_Ethernet_connected    | device network as ethernet connected    | onNetworkChanged with ethernet connected    | onNetworkChanged events with ethernet connected    |
+            | Validate network_Ethernet_disconnected | device network as ethernet disconnected | onNetworkChanged with ethernet disconnected | onNetworkChanged events with ethernet disconnected |
+            | Validate network_Hybrid_connected      | device network as hybrid connected      | onNetworkChanged with hybrid connected      | onNetworkChanged events with hybrid connected      |
+            | Validate network_Hybrid_disconnected   | device network as hybrid disconnected   | onNetworkChanged with hybrid disconnected   | onNetworkChanged events with hybrid disconnected   |
+            

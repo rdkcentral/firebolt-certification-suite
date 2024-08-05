@@ -129,9 +129,10 @@ class decodeValidations {
         const decode = atob(token);
 
         if (decode.includes(param)) {
+          const indexOfParam = decode.indexOf(param);
           const extractedData = decode.slice(
-            decode.indexOf(param) + REGEXFORMATS[param][0],
-            decode.indexOf(param) + REGEXFORMATS[param][1]
+            indexOfParam + param.length + 2,
+            decode.indexOf('</', indexOfParam + 1)
           );
           const resultSet = regexFormat.test(extractedData);
 
@@ -139,7 +140,11 @@ class decodeValidations {
             `Regular Expression Validation: expected ${param} to be in a valid ${regexFormat} format`,
             'decodeBase64AndJwtToken'
           ).then(() => {
-            assert.equal(true, resultSet, 'RegEx Validation:');
+            if (resultSet == false) {
+              throw new Error(`RegEx Validation failed for ${param} value`);
+            } else {
+              fireLog.info(`RegEx Validation passed for ${param} value`);
+            }
           });
         } else {
           cy.log(`Decode base64: Expected ${param} field not present in Decoded data`).then(() => {
@@ -158,7 +163,11 @@ class decodeValidations {
             `Regular Expression Validation: expected ${param} to be in a valid ${regexFormat} format`,
             'decodeBase64AndJwtToken'
           ).then(() => {
-            assert.equal(true, resultSet, 'RegEx Validation:');
+            if (resultSet == false) {
+              throw new Error(`RegEx Validation failed for ${param} value`);
+            } else {
+              fireLog.info(`RegEx Validation passed for ${param} value`);
+            }
           });
         } else {
           cy.log(`Decode jwt: Expected ${param} field not present in Decoded data`).then(() => {

@@ -4,6 +4,14 @@
 
 ### Purpose: Informs the platform to use the test provider for simulating user inputs.
 
+### Overview: 
+This glue informs the platform to use a test provider for simulating user inputs. It registers providers like 'pinChallenge', 'Ackchallenge', 'Keyboard'. 
+
+### Custom override:
+This glue code requires a custom override function `setTestProvider` to be implemented in the config module inside the file -(`configModule/requestModules/fcs.js`) setTestProvider function should be implemented in the configModule which sends necessary messages to the platform to enable the simulation. More info about setTestProvider, refer [here](https://github.com/rdkcentral/firebolt-certification-suite?tab=readme-ov-file#request-overrides).
+
+### Usage:
+This glue code is used in scenarios like userGrants and keyboard, where we need to stimulate the input.
 ### Params:
 | Param | Definition |
 | --- | --- |
@@ -15,6 +23,14 @@
 ## User '(.+)' recording lifecycle history for '(.+)'
 
 ### Purpose: Sending a message to the platform/app to start/stop recording lifecycle histories.
+
+### Overview: 
+This glue code sends a message to the platform/app to start or stop recording lifecycle histories.
+### Custom override:
+This glue code requires a custom override function `recordLifecycleHistory` to be implemented in the config module inside the file -(`configModule/requestModules/fcs.js`). More info about recordLifecycleHistory, refer [here](https://github.com/rdkcentral/firebolt-certification-suite?tab=readme-ov-file#request-overrides)
+
+### Usage: 
+This glue code is utilized in scenarios like userGrants to explicitly record lifecycle state transitions.
 
 ### Params:
 | Param | Definition |

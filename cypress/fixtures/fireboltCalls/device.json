@@ -56,7 +56,7 @@
     "INVALID_REQUEST_FOR_DEVICE_MODEL": {
         "method": "device.model",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "EXPECTED_DEVICE_SKU": {
@@ -227,7 +227,7 @@
     "INVALID_REQUEST_FOR_DEVICE_DISTRIBUTOR":{
         "method": "device.distributor",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETERS_FOR_DEVICE_PROVISION":{
@@ -287,7 +287,7 @@
     "INVALID_REQUEST_FOR_DEVICE_NAME": {
         "method": "device.name",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "DEVICE_ONNETWORKCHANGED": {
@@ -363,11 +363,41 @@
     "INVALID_REQUEST_FOR_DEVICE_ID": {
         "method": "device.id",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "EXPECT_ERROR_FOR_DEVICE_MODEL": {
         "method": "device.model",
         "expected": "error"
+    },
+    "ONNETWORKCHANGED_EVENTS_WITH_WIFI_CONNECTED": {
+        "method": "device.onNetworkChanged",
+        "params": "DEVICE_ONNETWORKCHANGED_WIFICONNECT_EVENTS"
+    },
+    "ONNETWORKCHANGED_EVENTS_WITH_WIFI_DISCONNECTED": {
+        "method": "device.onNetworkChanged",
+        "params": "DEVICE_ONNETWORKCHANGED_WIFIDISCONNECT_EVENTS"
+    },
+    "ONNETWORKCHANGED_EVENTS_WITH_ETHERNET_CONNECTED": {
+        "method": "device.onNetworkChanged",
+        "params": "DEVICE_ONNETWORKCHANGED_ETHERNETCONNECT_EVENTS"
+    },
+    "ONNETWORKCHANGED_EVENTS_WITH_ETHERNET_DISCONNECTED": {
+        "method": "device.onNetworkChanged",
+        "params": "DEVICE_ONNETWORKCHANGED_ETHERNETDISCONNECT_EVENTS"
+    },
+    "ONNETWORKCHANGED_EVENTS_WITH_HYBRID_CONNECTED": {
+        "method": "device.onNetworkChanged",
+        "params": "DEVICE_ONNETWORKCHANGED_HYBRIDCONNECT_EVENTS"
+    },
+    "ONNETWORKCHANGED_EVENTS_WITH_HYBRID_DISCONNECTED": {
+        "method": "device.onNetworkChanged",
+        "params": "DEVICE_ONNETWORKCHANGED_HYBRIDDISCONNECT_EVENTS"
+    },
+    "EXPECTED_VALUE_FOR_DEVICE_NAME": {
+        "method": "device.name",
+        "validationJsonPath": "result",
+        "content": "Living hall",
+        "expectingError": false
     }
 }

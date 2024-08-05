@@ -17,6 +17,7 @@
  */
 const CONSTANTS = require('../../constants/constants');
 const UTILS = require('../../cypress-support/src/utils');
+import { fireLog } from '../../cypress-support/src/utils';
 
 /**
  * @module deviceMiscValidation
@@ -29,7 +30,7 @@ const UTILS = require('../../cypress-support/src/utils');
  * deviceMiscValidation('device.verion',  {"mode": "fixture", "type": "APIVERSION", "description": "Validation of the Device version  API Format"},{response:{result: '', error: null, ...}});
  */
 export function deviceMiscValidation(method, validationTypeObject, apiOrEventObject) {
-  const response = apiOrEventObject.response.result;
+  const response = apiOrEventObject.apiResponse.result;
 
   switch (method) {
     case CONSTANTS.DEVICE_VERSION:
@@ -39,9 +40,11 @@ export function deviceMiscValidation(method, validationTypeObject, apiOrEventObj
     case CONSTANTS.DEVICE_HDCP:
     case CONSTANTS.DEVICE_HDR:
       for (const key in response) {
-        cy.log(`Expected ${key} value to be boolean`).then(() => {
-          assert.isBoolean(response[key], 'Expected to be');
-        });
+        fireLog
+          .info(`Miscellaneous Validation for ${method}: Expected ${key} value to be boolean`)
+          .then(() => {
+            assert.isBoolean(response[key], 'Expected to be');
+          });
       }
       break;
     case CONSTANTS.DEVICE_SCREENRESOLUTION:
@@ -52,9 +55,13 @@ export function deviceMiscValidation(method, validationTypeObject, apiOrEventObj
       const isPresent = validationTypeObject.type.some((resolution) => {
         return resolution[0] === response[0] && resolution[1] === response[1];
       });
-      cy.log(`Expected [${response}] to be present in [${deviceResolution}]`).then(() => {
-        assert.equal(true, isPresent, 'Expected to be present');
-      });
+      fireLog
+        .info(
+          `Miscellaneous Validation for ${method}: Expected [${response}] to be present in [${deviceResolution}]`
+        )
+        .then(() => {
+          assert.equal(true, isPresent, 'Expected to be present');
+        });
       break;
   }
 }
@@ -71,7 +78,7 @@ export function deviceMiscValidation(method, validationTypeObject, apiOrEventObj
  */
 function validateDeviceVersion(method, validationTypeObject, apiOrEventObject) {
   const expected = validationTypeObject.type;
-  const response = apiOrEventObject.response.result;
+  const response = apiOrEventObject.apiResponse.result;
   const apiVersionvalue = UTILS.getEnvVariable(CONSTANTS.API_VERSION, false);
 
   // The APIVersionValue contains any value, directly validating with the obtained response.
@@ -80,7 +87,7 @@ function validateDeviceVersion(method, validationTypeObject, apiOrEventObject) {
       response.api.major + '.' + response.api.minor + '.' + response.api.patch,
       apiVersionvalue
     );
-    cy.log(
+    fireLog.info(
       'Miscellaneous Validation for ' +
         method +
         ': Expected value: ' +
@@ -98,7 +105,7 @@ function validateDeviceVersion(method, validationTypeObject, apiOrEventObject) {
       response.api.major + '.' + response.api.minor + '.' + response.api.patch,
       expected
     );
-    cy.log(
+    fireLog.info(
       'Miscellaneous Validation for ' +
         method +
         ': Expected value: ' +

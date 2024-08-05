@@ -45,6 +45,15 @@ Response
 - {'abc': {'method': 'method_name', 'validationJsonPath': 'result', 'content': true}}
 ```
 
+### > getErrorContentObjectJson
+Fetching the error content objects from the JSON
+
+Ex:
+```
+Request
+- getErrorContentObjectJson()
+```
+
 ### > testDataHandler
 This command is used mainly for parsing and fetching test data from various fixture files depending on the requestType passed to the command. RequestType can have different values based on what type of data need to be parsed and fetched from test data file. DataIdentifier specifies the key of the test data which is used to identify and fetch the test data from different test data files.
 

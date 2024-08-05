@@ -683,551 +683,371 @@
             }
         },
         "UserGrants": {
-            "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with two options, first option(with fingerprint) is not supported and second option(with pinChallenge and acknowledge) is supported": {
+            "UserGrants.Grant R*2.2.2.1 - Positive Scenario: Validate Capabilities with denied (pinChallenge) and lifespan once": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.1",
+                            "id": "UserGrants R*2.2.2.1, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with two options, first option(with pinChallenge and acknowledge) is supported and second option(with fingerprint) is not supported": {
+            "UserGrants.Capabilities R.2.1.1 - Positive Scenario: Validate Capability Grant access with one step option(only acknowledgeChallenge)": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.2",
+                            "id": "UserGrants R.2.1.1, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with role manage": {
+            "UserGrants.Capabilities R*2.2.2.2 - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan forever": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.3",
+                            "id": "UserGrants R*2.2.2.2, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with role provide": {
+            "UserGrants.Capabilities R*2.2.2.2 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan forever": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.4",
+                            "id": "UserGrants R*2.2.2.2, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Negative Scenario: Validate Capabilities access denied for pinChallenge": {
+            "UserGrants.Capabilities R*2.2.2.3 - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan appActive": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.5",
+                            "id": "UserGrants R*2.2.2.3, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Negative Scenario: Validate Capabilities access denied for ackChallenge": {
+            "UserGrants.Capabilities R*2.2.2.3 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan appActive": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.6",
+                            "id": "UserGrants R*2.2.2.3, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Grant - Positive Scenario: Validate Capabilities with denied (pinChallenge) and lifespan once": {
+            "UserGrants.Capabilities R*2.2.2.5 - Positive Scenario: Validate Capabilities with granted (ackchallenge) and lifespan:seconds lifespanTtl:60 sec": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.7",
+                            "id": "UserGrants R*2.2.2.5, R.1.1, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with one step option(only acknowledgeChallenge)": {
+            "UserGrants.Capabilities R*2.2.2.5 - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60 sec": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.7",
+                            "id": "UserGrants R*2.2.2.5, R.1.2, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with scope device": {
+            "UserGrants.Capabilities R*2.2.2.5 - Positive Scenario: Validate Capabilities with grant(pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl it should not ask for grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.8",
+                            "id": "UserGrants R*2.2.2.5, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capability access denied for pinchallenge with scope device": {
+            "UserGrants.Capabilities R*2.2.2.5 - Positive Scenario: Validate Capabilities with grant(ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.9",
+                            "id": "UserGrants R*2.2.2.5, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan forever": {
+            "UserGrants.Capabilities R*2.2.2.5 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl and it should not ask grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.10",
+                            "id": "UserGrants R*2.2.2.5, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan forever": {
+            "UserGrants.Capabilities R*2.2.2.5 - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.11",
+                            "id": "UserGrants R*2.2.2.5, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan appActive": {
+            "UserGrants.Capabilities R*2.2.3.4 - Positive Scenario: privacySetting - autoApplyPolicy:always property-getter:true silently grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.12",
+                            "id": "UserGrants R*2.2.3.4, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan appActive": {
+            "UserGrants.Capabilities R*2.2.3.4 - Positive Scenario: Validate Capability autoApplyPolicy:always property-getter:false silently denied": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.13",
+                            "id": "UserGrants R*2.2.3.4, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (ackchallenge) and lifespan:seconds lifespanTtl:60 sec": {
+            "UserGrants.Capabilities R*2.2.3.6 - Positive Scenario: Validate Capability autoApplyPolicy:disallowed property-getter:false silently denied": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.14",
+                            "id": "UserGrants R*2.2.3.6, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60 sec": {
+            "UserGrants.Capabilities R*2.2.3.5 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:true silently grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.15",
+                            "id": "UserGrants R*2.2.3.5, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with grant(pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl it should not ask for grant": {
+            "UserGrants.Capabilities R*2.2.3.5 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.16",
+                            "id": "UserGrants R*2.2.3.5, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with grant(ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant": {
+            "UserGrants.Capabilities R*2.2.3.5 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false deny": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.17",
+                            "id": "UserGrants R*2.2.3.5, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl and it should not ask grant": {
+            "UserGrants.Capabilities R*2.2.3.6 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.18",
+                            "id": "UserGrants R*2.2.3.6, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant": {
+            "UserGrants.Capabilities R*2.2.3.6 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true deny": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.19",
+                            "id": "UserGrants R*2.2.3.6, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capability Without supported capability expecting error": {
+            "UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:true grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.20",
+                            "id": "UserGrants R*2.2.3.7, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: privacySetting - autoApplyPolicy:always property-getter:true silently grant": {
+            "UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:false grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.21",
+                            "id": "UserGrants R*2.2.3.7, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability autoApplyPolicy:always property-getter:false silently denied": {
+            "UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:true deny": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.22",
+                            "id": "UserGrants R*2.2.3.7, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability autoApplyPolicy:disallowed property-getter:false silently denied": {
+            "UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:false deny": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.23",
+                            "id": "UserGrants R*2.2.3.7, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:true silently grant": {
+            "UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:true deny property should be set to false": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.24",
+                            "id": "UserGrants R*2.2.3.9, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false grant": {
+            "UserGrants.Capabilities R*2.2.3.10 - Positive Scenario:privacySetting - Validate Capability updateProperty:false - property-getter:true deny property should not be updated": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.25",
+                            "id": "UserGrants R*2.2.3.10, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false deny": {
+            "UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:false grant property should be set to false": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.26",
+                            "id": "UserGrants R*2.2.3.9, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true grant": {
+            "UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:true grant property should not be changed": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.27",
+                            "id": "UserGrants R*2.2.3.9, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true deny": {
+            "UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - Validate Capability updateProperty:false - property-getter:false grant property should not be changed": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.28",
+                            "id": "UserGrants R*2.2.3.9, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:true grant": {
+            "UserGrants.Capabilities R*2.2.2.4 - Positive Scenario: Validate Capabilities with grant (pinChallenge) and lifespan powerActive - after reboot deny and validate": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.29",
+                            "id": "UserGrants R*2.2.2.4",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:false grant": {
+            "UserGrants.Capabilities R*2.2.2.4 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan powerActive - after reboot grant and validate": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.30",
+                            "id": "UserGrants R*2.2.2.4",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:true deny": {
+            "UserGrants.request R.1.1 - Positive Scenario: Validate userGrants.request by granting for role use": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.31",
+                            "id": "UserGrants R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:false deny": {
+            "UserGrants.request R.1.1 - Positive Scenario: Validate userGrants.request by granting for role manage": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.32",
+                            "id": "UserGrants R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:true deny property should be set to false": {
+            "UserGrants.request R.1.2 - Negative Scenario: Validate userGrants.request by denying for role use": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.33",
+                            "id": "UserGrants R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:false - property-getter:true deny property should not be updated": {
+            "UserGrants.request R.1.2 - Negative Scenario: Validate userGrants.request by denying for role manage": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.34",
+                            "id": "UserGrants R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:false grant property should be set to false": {
+            "UserGrants.request R.1.1 - Negative Scenario: Validate userGrants.request call with role use, but grantpolicy having manage capability": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.35",
+                            "id": "UserGrants R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:true grant property should not be changed": {
+            "UserGrants.request R.1.2 - Positive Scenario: Validate UserGrants.request which grantpolicy is not present in manifest": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.36",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:false - property-getter:false grant property should not be changed": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.37",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Allow grant for one API and all API's should have grant in group": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.38",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Allow grant for one API and clear grant, call another API it will ask for grant again": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.39",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Deny grant for one API and all API's shouldn't have grant in group": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.40",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capability - Positive Scenario: AcknowledgeChallenge Grant is deferred by exiting overlay": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.42",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capability - Positive Scenario: Acknowledgechallenge Grant is deferred based on the timeout (4 seconds)": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.43",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with grant (pinChallenge) and lifespan powerActive - after reboot deny and validate": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.44",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan powerActive - after reboot grant and validate": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.45",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:true property:Privacy.allowWatchHistory silently grant": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.46",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability permission in 2 diff devices": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.57",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Positive Scenario: Validate Capability.request granted(ackChallenge)": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.49",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Positive Scenario: Validate Capability.request Denied(ackChallenge)": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.50",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Positive Scenario: Validate userGrants.request by granting for role use": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.51",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Positive Scenario: Validate userGrants.request by granting for role manage": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.52",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Negative Scenario: Validate userGrants.request by denying for role use": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.53",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Negative Scenario: Validate userGrants.request by denying for role manage": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.54",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Negative Scenario: Validate userGrants.request call with role use, but grantpolicy having manage capability": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.55",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Positive Scenario: Validate UserGrants.request which grantpolicy is not present in manifest": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.56",
+                            "id": "UserGrants R.1.2",
                             "description": "Should not be null"
                         }
                     }
@@ -1237,7 +1057,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.57",
+                            "id": "UserGrants 1.40",
                             "description": "Should not be null"
                         }
                     }
@@ -1247,27 +1067,27 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.58",
+                            "id": "UserGrants 1.41",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.request - Positive Scenario: Validate usergrants.request by granting for role provide": {
+            "UserGrants.request R.1.1 - Positive Scenario: Validate usergrants.request by granting for role provide": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.59",
+                            "id": "UserGrants R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.request - Negative Scenario: Validate usergrants.request by denying for role provide": {
+            "UserGrants.request R.1.2 - Negative Scenario: Validate usergrants.request by denying for role provide": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.60",
+                            "id": "UserGrants R.1.2",
                             "description": "Should not be null"
                         }
                     }
@@ -1459,91 +1279,91 @@
             }
         },
         "UserGrants_Manage": {
-            "Usergrants.app - Positive Scenario: with grant(ackchallenge)": {
+            "Usergrants.app R.5.1.2 - Positive Scenario: with grant(ackchallenge)": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.1",
+                            "id": "UserGrants R.5.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.device - Positive Scenario: with grant(ackchallenge)": {
+            "Usergrants.device R.5.1.3 - Positive Scenario: with grant(ackchallenge)": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.2",
+                            "id": "UserGrants R.5.1.3",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.capability - Positive Scenario: with grant(ackchallenge)": {
+            "Usergrants.capability R.5.1.4 - Positive Scenario: with grant(ackchallenge)": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.3",
+                            "id": "UserGrants R.5.1.4",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.grant - Positive Scenario: grant capability at device level": {
+            "Usergrants.grant R.5.1.5 - Positive Scenario: grant capability at device level": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.4",
+                            "id": "UserGrants R.5.1.5",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.grant - Positive Scenario: grant capability at app level": {
+            "Usergrants.grant R.5.1.5 - Positive Scenario: grant capability at app level": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.5",
+                            "id": "UserGrants R.5.1.5",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.deny - Positive Scenario: deny capability at device level": {
+            "Usergrants.deny R.5.1.6 - Positive Scenario: deny capability at device level": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.6",
+                            "id": "UserGrants R.5.1.6",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.deny - Positive Scenario: deny capability at app level": {
+            "Usergrants.deny R.5.1.6 - Positive Scenario: deny capability at app level": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.7",
+                            "id": "UserGrants R.5.1.6",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.clear - Positive Scenario: clear grant at device level for role use": {
+            "Usergrants.clear R.5.1.7 - Positive Scenario: clear grant at device level for role use": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.8",
+                            "id": "UserGrants R.5.1.7",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.clear - Positive Scenario: clear grant at app level for role use": {
+            "Usergrants.clear R.5.1.7 - Positive Scenario: clear grant at app level for role use": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.9",
+                            "id": "UserGrants R.5.1.7",
                             "description": "Should not be null"
                         }
                     }
@@ -1569,31 +1389,31 @@
                     }
                 ]
             },
-            "Usergrants.app - Positive Scenario: with grant(pinChallenge)": {
+            "Usergrants.app R.5.1.2 - Positive Scenario: with grant(pinChallenge)": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.12",
+                            "id": "UserGrants R.5.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: by clearing the grant and validating usergrants.capability as empty": {
+            "UserGrants.Capability R.5.1.4 - Positive Scenario: by clearing the grant and validating usergrants.capability as empty": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.13",
+                            "id": "UserGrants R.5.1.7, R.5.1.4",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: by clearing the grant and validating usergrants.app as empty": {
+            "UserGrants.app R.5.1.2 - Positive Scenario: by clearing the grant and validating usergrants.app as empty": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.14",
+                            "id": "UserGrants R.5.1.7, R.5.1.2",
                             "description": "Should not be null"
                         }
                     }
@@ -1601,171 +1421,181 @@
             }
         },
         "Lifecycle_Inactive": {
-            "Lifecycle 2.3.1 Close an app from foreground": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "1.2.2 & 3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": "1.1.2"
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.2.1",
-                                "1.2.2"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.3.1 Close an app from background": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "1.2.2 & 3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": "1.1.2"
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.2.1",
-                                "1.2.2"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.3.3 No impact on closing app from inactive state": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "1.2.2 & 3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": "1.1.2"
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.2.1",
-                                "1.2.2"
-                            ]
-                        }
-                    }
-                ]
-            }
+            
+          "Lifecycle R*3.3 Close an app from foreground": {
+            "req": [
+              {
+                "state": {
+                  "id": "R*4.6, R*2.2.5, R*2.2.6"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": "R*2.2.2 ['onInactive' event triggered]"
+                }
+              },
+              {
+                "visible_check": {
+                    "id": "R.2.2.1"
+                }
+              }
+            ]
+          },
+          "Lifecycle R*3.3 Close an app from background": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R*2.2.5, R*2.2.6"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*2.2.2 ['onInactive' event triggered]"
+                  }
+                },
+                {
+                  "visible_check": {
+                      "id": "R.2.2.1"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R*3.3.3 No impact on closing app from inactive state": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.3.3"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*3.3.3"
+                  }
+                },
+                {
+                  "visible_check": {
+                      "id": "R.2.2.1"
+                  }
+                }
+              ]
+          }
         },
         "Lifecycle_Foreground": {
-            "Lifecycle 2.2 Loading & Launching an App (initializing -> foreground)": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.3.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.2.1 Relaunch foreground app": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.3.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.2.5 App Launching another app": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "3.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.3.6",
-                                "1.3.6"
-                            ]
-                        }
-                    }
-                ]
-            }
+          "Lifecycle R*3.2 Loading & Launching an App (initializing -> foreground)": {
+            "req": [
+              {
+                "state": {
+                  "id": "R*4.6, R*3.2.7"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": ["R*2.3.6 ['onForeground' event triggered]", "R*2.2.2 ['onInactive' event triggered]"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "R*2.3.2"
+                }
+              }
+            ]
+          },
+          "Lifecycle R*3.2.3 Relaunch foreground app": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.2.3"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*3.2.3"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.3.2"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R.3.2.1 App Launching another app": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.2.7"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*2.4.6 ['onBackground' event triggered]"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.3.2"
+                  }
+                }
+              ]
+          }
         },
         "Lifecycle_Initializing": {
-            "Lifecycle 2.3.2 Cannot Close an app from initializing": {
+            "Lifecycle R.3.3.4 Cannot Close an app from initializing": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.1.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R*2.1.1"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.1.2"
+                            "id": "R*2.1.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.3.3.4"
                         }
                     }
                 ]
             }
         },
         "Lifecycle_Terminated": {
-            "Lifecycle 2.8 Terminate app in foreground State": {
+            "Lifecycle R*3.8 Terminate app in foreground State": {
                 "req": [
                     {
                         "state": {
-                            "id": ""
+                            "id": "R*4.6, R*3.8"
                         }
                     },
                     {
@@ -1775,16 +1605,16 @@
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.8 Terminate app in background State": {
+            "Lifecycle R*3.8 Terminate app in background State": {
                 "req": [
                     {
                         "state": {
-                            "id": ""
+                            "id": "R*4.6, R*3.8"
                         }
                     },
                     {
@@ -1794,16 +1624,16 @@
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.8 Terminate app in initializing State": {
+            "Lifecycle R*3.8 Terminate app in initializing State": {
                 "req": [
                     {
                         "state": {
-                            "id": ""
+                            "id": "R*4.6, R*3.8"
                         }
                     },
                     {
@@ -1813,16 +1643,16 @@
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.8 Terminate app in inactive State": {
+            "Lifecycle R*3.8 Terminate app in inactive State": {
                 "req": [
                     {
                         "state": {
-                            "id": ""
+                            "id": "R*4.6, R*3.8"
                         }
                     },
                     {
@@ -1832,16 +1662,16 @@
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.8 Terminate app in suspended State": {
+            "Lifecycle R*3.8 Terminate app in suspended State": {
                 "req": [
                     {
                         "state": {
-                            "id": ""
+                            "id": "R*4.6, R*3.8"
                         }
                     },
                     {
@@ -1851,16 +1681,16 @@
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.8 Terminate app in unloading State": {
+            "Lifecycle R*3.8 Terminate app in unloading State": {
                 "req": [
                     {
                         "state": {
-                            "id": ""
+                            "id": "R*4.6, R*3.8"
                         }
                     },
                     {
@@ -1870,284 +1700,420 @@
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.8"
                         }
                     }
                 ]
             }
         },
         "Lifecycle_Unloading": {
-            "Lifecycle 3.4.4 No impact of multiple Finished events while unloading": {
+            "Lifecycle R.4.5.4 No impact of multiple Finished events while unloading": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.4.5.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.4.5.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.7.1 Unloading from Inactive state": {
+            "Lifecycle R*3.7 Unloading from Inactive state": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R*2.5.1, R*3.7.5"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.7.5, R*2.5.1"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.3.2 Cannot Close an Unloading App": {
+            "Lifecycle R.3.3.4 Cannot Close an Unloading App": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.3.3.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.3.3.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 3.4.3 finished from unloading state": {
+            "Lifecycle R*4.5.3 finished from unloading state": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R*4.5.3"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*4.5.3"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.7.2 Should not unload from active state (foreground)": {
+            "Lifecycle R*3.7.2 Should not unload from active state (foreground)": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R*3.7.2"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*3.7.2"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.1 Cannot Suspend Unloaded app": {
+            "Lifecycle R*2.6.5 Cannot Suspend Unloaded app": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R*2.6.5"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R*2.6.5"
                         }
                     }
                 ]
             },
-            "Lifecycle 3.4.1 Should not finish from state other than unloading (initializing)": {
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (initializing)": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.4.5.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.4.5.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 3.4.1 Should not finish from state other than unloading (foreground)": {
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (foreground)": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.4.5.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.4.5.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 3.4.1 Should not finish from state other than unloading (background)": {
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (background)": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.4.5.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.4.5.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 3.4.1 Should not finish from state other than unloading (inactive)": {
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (inactive)": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.4.5.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.4.5.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 3.4.1 Should not finish from state other than unloading (suspended)": {
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (suspended)": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.4.5.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.4.5.4"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.3.2 Cannot Close an app that is not loaded": {
+            "Lifecycle R.3.3.4 Cannot Close an app that is not loaded": {
                 "req": [
                     {
                         "state": {
-                            "id": [
-                                "1.5.1",
-                                "3.5"
-                            ]
+                            "id": "R*4.6, R.3.3.4"
                         }
                     },
                     {
                         "history": {
-                            "id": "1.5.2"
+                            "id": "R*2.5.3"
                         }
                     },
                     {
                         "event": {
-                            "id": ""
+                            "id": "R.3.3.4"
                         }
                     }
                 ]
             }
         },
         "Lifecycle_Background": {
-            "Lifecycle 2.4.2 Background an app from foreground": {
+          "Lifecycle R*3.4 Background an app from foreground": {
+            "req": [
+              {
+                "state": {
+                  "id": 
+                    "R*4.6, R*3.4.6"
+                
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": "R*2.4.6 ['onBackground' event triggered]"
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "R*2.4.2"
+                }
+              }
+            ]
+          },
+          "Lifecycle R*3.4 Background an app from inactive": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.4.6"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*2.4.6 ['onBackground' event triggered]"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R.3.4.4 Cannot Background app that is not loaded": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R.3.4.4"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R.3.4.4"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R*3.4.3 Cannot Background a Backgrounded App": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.4.3"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*3.4.3"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R.3.4.4 Cannot Background app in Unloading state": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R.3.4.4"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R.3.4.4"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R.3.4.4 Cannot background app from suspended state": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R.3.4.4"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R.3.4.4"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R.3.4.4 Should not Background app in initializing state": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R.3.4.4"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R.3.4.4"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
+                }
+              ]
+          }
+        },
+        "Lifecycle_Suspended": {
+            "Lifecycle R*1.6.1 App should subscribe to onSuspended listener regardless of capability": {
                 "req": [
                     {
                         "state": {
-                            "id": "3.5"
+                            "id": "R*4.6, R*2.6.1"
                         }
                     },
                     {
@@ -2157,19 +2123,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
+                            "id": "R*2.6.1"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.4.2 Background an app from inactive": {
+            "Lifecycle R*2.6.5 Suspend App from Inactive state": {
                 "req": [
                     {
                         "state": {
-                            "id": "3.5"
+                            "id": "R*4.6, R*2.6.4"
                         }
                     },
                     {
@@ -2179,19 +2142,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.4.3 Cannot Background app that is not loaded": {
+            "Lifecycle R*3.2.5, R*3.2.6, R*3.2.7 Relaunch a previously Suspended app after Unsuspend": {
                 "req": [
                     {
                         "state": {
-                            "id": "3.5"
+                            "id": "R*4.6, R*3.2.7, R*2.2.8"
                         }
                     },
                     {
@@ -2201,19 +2161,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
+                            "id": "R*2.3.6, R*2.2.8"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.4.1 Cannot Background a Backgrounded App": {
+            "Lifecycle R*3.5.2 Cannot Suspend a suspended App": {
                 "req": [
                     {
                         "state": {
-                            "id": "3.5"
+                            "id": "R*4.6, R*3.5.2"
                         }
                     },
                     {
@@ -2223,19 +2180,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
+                            "id": "R*3.5.2"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.4.3 Cannot Background app in Unloading state": {
+            "Lifecycle R*2.6.5 Cannot Suspend a unloaded App": {
                 "req": [
                     {
                         "state": {
-                            "id": "3.5"
+                            "id": "R*4.6, R*2.6.5"
                         }
                     },
                     {
@@ -2245,19 +2199,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
+                            "id": "R*2.6.5"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.4.3 Cannot background app from suspended state": {
+            "Lifecycle R*3.2.5 Cannot relaunch Suspended App": {
                 "req": [
                     {
                         "state": {
-                            "id": "3.5"
+                            "id": "R*4.6, R*3.2.5"
                         }
                     },
                     {
@@ -2267,19 +2218,16 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
+                            "id": "R*3.2.5"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.4.3 Should not Background app in initializing state": {
+            "Lifecycle R*2.6.5 Cannot Suspend foreground app": {
                 "req": [
                     {
                         "state": {
-                            "id": "3.5"
+                            "id": "R*4.6, R*2.6.5"
                         }
                     },
                     {
@@ -2289,389 +2237,289 @@
                     },
                     {
                         "event": {
-                            "id": [
-                                "1.4.6",
-                                "1.3.6"
-                            ]
+                            "id": "R*2.6.5"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*2.6.5 Cannot Suspend background app": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*2.6.5"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*2.6.5"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R.3.3.4 Cannot Close Suspended App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R.3.3.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.3.3.4"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6 Unsuspending App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*2.2.8, R*3.6.7"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*2.2.8"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6.2 Cannot Unsuspend in initializing State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.6.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.6.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6.3 Cannot Unsuspend in foreground State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.6.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.6.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6.3 Cannot Unsuspend in background State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.6.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.6.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6.3 Cannot Unsuspend in inactive State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.6.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.6.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6.3 Cannot Unsuspend in unloading State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.6.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.6.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6.2 Unsuspend unloaded app": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.6.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.6.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R.3.5.3 Try to suspend an app that doesn't exist": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R.3.5.3"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.3.5.3"
                         }
                     }
                 ]
             }
         },
-        "Lifecycle_Suspended": {
-            "Lifecycle 1.6.1 App should subscribe to onSuspended listener regardless of capability": {
+        "UserInterest": {
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type interest and reason playlist": {
                 "req": [
                     {
-                        "state": {
-                            "id": "1.6.1"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                        "method": {
+                            "id": "UserInterest 4.1",
+                            "description": "Positive Scenario: with type interest and reason playlist"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.4 Suspend App from Inactive state": {
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type interest and reason reaction": {
                 "req": [
                     {
-                        "state": {
-                            "id": "2.5.4"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                        "method": {
+                            "id": "UserInterest 4.2",
+                            "description": "Positive Scenario: with type interest and reason reaction"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.2.4 Relaunch a previously Suspended app after Unsuspend": {
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type interest and reason recording": {
                 "req": [
                     {
-                        "state": {
-                            "id": "2.2.4"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                        "method": {
+                            "id": "UserInterest 4.3",
+                            "description": "Positive Scenario: with type interest and reason recording"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.3 Cannot Suspend a suspended App": {
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type disinterest and reason playlist": {
                 "req": [
                     {
-                        "state": {
-                            "id": "2.5.3"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                        "method": {
+                            "id": "UserInterest 4.4",
+                            "description": "Positive Scenario: with type disinterest and reason playlist"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.1 Cannot Suspend a unloaded App": {
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type disinterest and reason reaction": {
                 "req": [
                     {
-                        "state": {
-                            "id": "2.5.1"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                        "method": {
+                            "id": "UserInterest 4.5",
+                            "description": "Positive Scenario: with type disinterest and reason reaction"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.5 Cannot relaunch Suspended App": {
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type disinterest and reason recording": {
                 "req": [
                     {
-                        "state": {
-                            "id": "2.5.5"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                        "method": {
+                            "id": "UserInterest 4.6",
+                            "description": "Positive Scenario: with type disinterest and reason recording"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.2 Cannot Suspend foreground app": {
+            "Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but platform timeout without sending response": {
                 "req": [
                     {
-                        "state": {
-                            "id": "2.5.2"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                        "method": {
+                            "id": "UserInterest 4.7",
+                            "description": "Positive Scenario: with type disinterest and reason recording"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.5.2 Cannot Suspend background app": {
+            "Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but 3rd party app return error": {
                 "req": [
                     {
-                        "state": {
-                            "id": "2.5.2"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                        "method": {
+                            "id": "UserInterest 4.8",
+                            "description": "Negative Scenario: Notify requestUserInterest without registering for providers"
                         }
                     }
                 ]
             },
-            "Lifecycle 2.3.2 Cannot Close Suspended App": {
+            "Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest without registering for providers": {
                 "req": [
                     {
-                        "state": {
-                            "id": "2.3.2"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.6, 2.6.2 Unsuspending App": {
-                "req": [
-                    {
-                        "state": {
-                            "id": [
-                                "2.6",
-                                "2.6.2"
-                            ]
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.6.1 Cannot Unsuspend in initializing State": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "2.6.1"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.6.1 Cannot Unsuspend in foreground State": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "2.6.1"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.6.1 Cannot Unsuspend in background State": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "2.6.1"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.6.1 Cannot Unsuspend in inactive State": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "2.6.1"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.6.1 Cannot Unsuspend in unloading State": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "2.6.1"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 4.3 Unsuspend unloaded app": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "4.3"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
-                        }
-                    }
-                ]
-            },
-            "Lifecycle 2.5.6 Try to suspend an app that doesn't exist": {
-                "req": [
-                    {
-                        "state": {
-                            "id": "2.5.6"
-                        }
-                    },
-                    {
-                        "history": {
-                            "id": ""
-                        }
-                    },
-                    {
-                        "event": {
-                            "id": [
-                                "1.6.4",
-                                "1.6.3"
-                            ]
+                        "method": {
+                            "id": "UserInterest 4.9",
+                            "description": "Negative Scenario: Notify requestUserInterest without registering for providers"
                         }
                     }
                 ]

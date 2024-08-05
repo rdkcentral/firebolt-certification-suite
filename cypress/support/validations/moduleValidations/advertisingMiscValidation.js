@@ -1,3 +1,5 @@
+import { fireLog } from '../../cypress-support/src/utils';
+
 /**
  * Copyright 2024 Comcast Cable Communications Management, LLC
  *
@@ -46,67 +48,82 @@ export function advertisingMiscValidation(method, validationTypeObject, apiOrEve
  * validateAdvertisingAdvertisingId('advertising.advertisingId',  {"type": "limitAdTrackingON"},{response:{result: '', error: null, ...}});
  */
 function validateAdvertisingAdvertisingId(method, validationTypeObject, apiOrEventObject) {
-  const response = apiOrEventObject.response.result;
+  const response = apiOrEventObject.apiResponse.result;
   const ScenarioType = validationTypeObject.type;
   const pretext = `${CONSTANTS.METHOD_CONTENT} for ${method} method : `;
 
   // Ifa is an advertising identifier and it should not be empty.
-  cy.log(
-    `${pretext} Ifa is not null or undefined: *******`,
-    'validateAdvertisingAdvertisingId'
-  ).then(() => {
-    assert.exists(response.ifa, `${pretext} : Is not null or undefined`);
-  });
+  fireLog
+    .info(`${pretext} Ifa value is not null or undefined`, 'validateAdvertisingAdvertisingId')
+    .then(() => {
+      assert.exists(response.ifa, `${pretext} : Is not null or undefined`);
+    });
 
   switch (ScenarioType) {
     case CONSTANTS.LIMITADTRACKING_ON:
       // lmt value equal to 1 when limitAdTracking is on
-      cy.log(
-        `${pretext} Lmt equal to be 1: ` + response.lmt,
-        'validateAdvertisingAdvertisingId'
-      ).then(() => {
-        assert.equal(
-          CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT,
-          response.lmt,
-          `${pretext} Equal to be  `
-        );
-      });
-      if (response.ifa_type) {
-        cy.log(
-          `${pretext} Ifa_type equal to be sessionId : ` + response.ifa_type,
+      fireLog
+        .info(
+          `${pretext} Expected Lmt value : ${CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT},` +
+            ` Actual value : ` +
+            response.lmt,
           'validateAdvertisingAdvertisingId'
-        ).then(() => {
+        )
+        .then(() => {
           assert.equal(
-            CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_IFA_TYPE,
-            response.ifa_type,
-            `${pretext} Equal to be `
+            CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT,
+            response.lmt,
+            `${pretext} Equal to be  `
           );
         });
+      if (response.ifa_type) {
+        fireLog
+          .info(
+            `${pretext} Expected Ifa_type value : ${CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_IFA_TYPE}, ` +
+              ` Actual value : ` +
+              response.ifa_type,
+            'validateAdvertisingAdvertisingId'
+          )
+          .then(() => {
+            assert.equal(
+              CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_IFA_TYPE,
+              response.ifa_type,
+              `${pretext} Equal to be `
+            );
+          });
       }
       break;
     case CONSTANTS.LIMITADTRACKING_OFF:
       // lmt value equal to 0 when limitAdTracking is off
-      cy.log(
-        `${pretext} Lmt equal to be 0 : ` + response.lmt,
-        'validateAdvertisingAdvertisingId'
-      ).then(() => {
-        assert.equal(
-          CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT,
-          response.lmt,
-          `${pretext} Equal to be `
-        );
-      });
-      if (response.ifa_type) {
-        cy.log(
-          `${pretext} Ifa_type equal to be sessionId: ` + response.ifa_type,
+      fireLog
+        .info(
+          `${pretext} Expected Lmt value : ${CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT},` +
+            ` Actual value : ` +
+            response.lmt,
           'validateAdvertisingAdvertisingId'
-        ).then(() => {
+        )
+        .then(() => {
           assert.equal(
-            CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_IFA_TYPE,
-            response.ifa_type,
-            `${pretext} Equal to be`
+            CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT,
+            response.lmt,
+            `${pretext} Equal to be `
           );
         });
+      if (response.ifa_type) {
+        fireLog
+          .info(
+            `${pretext} Expected Ifa_type value : ${CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_IFA_TYPE}, ` +
+              ` Actual value : ` +
+              response.ifa_type,
+            'validateAdvertisingAdvertisingId'
+          )
+          .then(() => {
+            assert.equal(
+              CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_IFA_TYPE,
+              response.ifa_type,
+              `${pretext} Equal to be`
+            );
+          });
       }
       break;
   }

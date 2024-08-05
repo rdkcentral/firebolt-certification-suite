@@ -19,15 +19,15 @@
 const CONSTANTS = require('./constants/constants');
 
 class apiObject {
-  constructor(apiName, params, context, response, expected, appId) {
+  constructor(apiName, params, context, apiResponse, expected, appId) {
     this.apiName = apiName;
     this.params = params;
     this.context = context;
     this.expected = expected;
-    response.apiResponse ? (this.response = response.apiResponse) : (this.response = response);
+    this.apiResponse = apiResponse.response;
     this.apiSchemaResult = {
-      validationStatus: response.schemaValidationStatus,
-      validationResponse: response.schemaValidationResponse,
+      validationStatus: apiResponse.schemaValidationStatus,
+      validationResponse: apiResponse.schemaValidationResponse,
     };
     this.app = appId;
   }
@@ -49,10 +49,13 @@ class eventObject {
   }
 
   // Function to update the event response in event object.
-  setEventResponseData(response) {
+  setEventResponseData(response, isNullCase) {
     if (
-      (response.eventListenerId && response.eventSchemaResult && response.eventResponse != null) ||
-      response.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
+      (response && response.eventResponse && response.eventResponse[this.eventObjectId] != null) ||
+      (response &&
+        response.eventResponse != null &&
+        !response.eventResponse.hasOwnProperty(this.eventObjectId)) ||
+      isNullCase === true
     ) {
       this.eventResponse = response.eventResponse;
       this.eventSchemaResult = response.eventSchemaResult;

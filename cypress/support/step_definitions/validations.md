@@ -40,18 +40,21 @@
  * `I 'start' performance metrics collection`
  * `I 'stop' performance metrics collection`
 
- ## {string} is in {string} state
+
+ ## '(.+)' will (be|stay) in '(.+)' state
 ### Purpose: To validate 3rd party app transitionss wrt state, event and history aagainst appObject as the source of truth
+Here, be/stay determines whether the app will get transitioned to new state or will be staying in the same state.
+For the validation part, for the states when the app is not reachable for us to get the status or history, we use customValidation , where we get the validation key name from the moduleReqId.json of the specific testcase. The customValidation function will be defined in the corresponding confiModule. Refer to the [custom] validation.
 
 ### Params:
-| Param | Definition |
-| --- | --- |
-| app | app type |
-| state | expected state to be used for validation |
+| Param | Definition                                |
+| ---   | ---                                       |
+| app   | app type                                  |
+| state | expected state to be used for validation  |
 
 ### Examples:
- * `'3rd party app' is in 'foreground' state`
-
+ * Then '3rd party app' will stay in 'foreground' state
+ * Then '3rd party app' will be in 'background' state
 
 # Supported Validations
 
@@ -62,6 +65,8 @@
 |  decode           |  Used when the incoming response has to be decoded and validated. It can be base64 or JWT.                        |
 |  fixture          |  Used when the response value is to be validated against an expected value already provided.                      |
 |  custom           |  Used when the incoming response has to be validated using a customized function provided in the configModule.    |
+|  undefined        |  Used when the incoming response has to be validated against undefined value.                                     |
+
 
 ## regEx
 ### format:
@@ -239,6 +244,7 @@
             }
         ]
 }
+
 ## custom
 ### format:
 {
@@ -285,44 +291,7 @@
         ]
 }
 
-# Validation Override
-
-## Format
-The basic structure of the validation object in configModule with override will be as :
-    {
-            "data": [
-                {
-                    "type": "",
-                    "override": <value>,
-                    "validations": [
-                        {
-                            "type": "",
-                            "description": ""
-                        }
-                    ]
-                }
-            ]
-    }
-
-While validating, if a key is present in both fcs-validation jsons (eg: cypress/fixtures/objects/validationObjects/accessibility.json ) and also in configModule's validation jsons (eg: in config module : fixtures/objects/validationObjects/account.json ) which will be in cypress/fixtures/external/objects/validationObjects/, it will be checking for the "override" value first. If the override value of config validation object is matching with fcs validation objects data's index value, then that specific object in the data array will be overriden with the object from configModule. Else, the configModule object will be pushed as a new object in the data array.
-
-### Example:
-{
-        "data": [
-            {
-                "type": "regEx",
-                "override": 0,
-                "validations": [
-                    {
-                        "type": "COUNTRYCODE",
-                        "description": "Validation of the localization countrycode"
-                    }
-                ]
-            }
-        ]
-}
-
-# Custom Validation
+### Custom Validation
 ## Format
 The basic structure of the validation object in configModule with customValidation will be as :
 {
@@ -363,4 +332,83 @@ Here, the value of the key "assertionDef" will be the customMethod we use for va
                 ]
             }
 		]
+}
+
+## undefined
+### format:
+{
+        "method": "",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "",
+                        "description": ""
+                    }
+                ]
+            }
+        ]
+}
+
+### Params:
+| Param         | type   |  Description                                                                                               |
+| ------------  | ------ | ---------------------------------------------------------------------------------------------------------  |
+| method        | string |  The name of the method whose response is to be validated.                                                 |
+| data          | array  |  An array that holds the entire set of validation objects.                                                 |
+| type          | string |  The value which indicates the type of validation.                                                         |
+| validations   | array  |  The array that holds all the data for validation, like value, format, etc.                                |
+| field         | string |  The field to be validated ( depends on the validation function ).                                          |
+| description   | string |  The description of the validation executed with this type.                                                |
+
+### Example:
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.windowColor",
+                        "description": "Validation of the accessibility windowcolor undefined"
+                    }
+                ]
+            }
+        ]
+    
+
+# Validation Override
+
+## Format
+The basic structure of the validation object in configModule with override will be as :
+    {
+            "data": [
+                {
+                    "type": "",
+                    "override": <value>,
+                    "validations": [
+                        {
+                            "type": "",
+                            "description": ""
+                        }
+                    ]
+                }
+            ]
+    }
+
+While validating, if a key is present in both fcs-validation jsons (eg: cypress/fixtures/objects/validationObjects/accessibility.json ) and also in configModule's validation jsons (eg: in config module : fixtures/objects/validationObjects/account.json ) which will be in cypress/fixtures/external/objects/validationObjects/, it will be checking for the "override" value first. If the override value of config validation object is matching with fcs validation objects data's index value, then that specific object in the data array will be overriden with the object from configModule. Else, the configModule object will be pushed as a new object in the data array.
+
+### Example:
+{
+        "data": [
+            {
+                "type": "regEx",
+                "override": 0,
+                "validations": [
+                    {
+                        "type": "COUNTRYCODE",
+                        "description": "Validation of the localization countrycode"
+                    }
+                ]
+            }
+        ]
 }

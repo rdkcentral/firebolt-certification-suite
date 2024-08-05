@@ -47,14 +47,27 @@ class regExValidations {
       const validationResult = extractedResponse
         ? expression.test(extractedResponse)
         : expression.test(response);
+      const stringifiedExtractedResponse =
+        typeof extractedResponse === 'object'
+          ? JSON.stringify(extractedResponse)
+          : extractedResponse;
+      const stringifiedResponse =
+        typeof response === 'object' ? JSON.stringify(response) : response;
 
       cy.log(
         `RegEx Validation : Expected ${method} response ${
-          extractedResponse ? extractedResponse : response
+          stringifiedExtractedResponse ? stringifiedExtractedResponse : stringifiedResponse
         } to be in ${expression} regex format`,
         'regexResultValidator'
       ).then(() => {
-        assert.equal(true, validationResult, 'RegEx Validation:');
+        if (validationResult == false) {
+          assert(false, `RegEx Validation failed for ${method}`);
+        } else {
+          assert(
+            true,
+            `RegEx Validation: Expected ${method} response ${stringifiedExtractedResponse ? stringifiedExtractedResponse : stringifiedResponse} to be in ${expression} regex format`
+          );
+        }
       });
     } else {
       assert(false, `RegEx Validation: Expected response Not Found for ${method}`);

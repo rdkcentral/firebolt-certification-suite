@@ -46,7 +46,7 @@ export function parametersMiscValidation(method, validationTypeObject, apiOrEven
  * validateParametersInitialization('parameters.initialization',  {"type": "limitAdTrackingON"},{response:{result: '', error: null, ...}});
  */
 function validateParametersInitialization(method, validationTypeObject, apiOrEventObject) {
-  const response = apiOrEventObject.response.result;
+  const response = apiOrEventObject.apiResponse.result;
   const ScenarioType = validationTypeObject.type;
   const pretext = `${CONSTANTS.METHOD_CONTENT} for ${method} :`;
   switch (ScenarioType) {

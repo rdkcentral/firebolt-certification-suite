@@ -1,10 +1,11 @@
+@Advertising @coreSDK
 Feature: Advertising
 
    Background: Launch FCA for 'Advertising'
       Given the environment has been set up for 'Advertising' tests
       And 3rd party 'certification' app is launched
 
-   @Advertising @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Advertising.policy - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
@@ -16,10 +17,10 @@ Feature: Advertising
 
       Examples:
          | Scenario                | API_Key                 | Method_Validation_key                       | Event_Validation_key                                       |
-         | Disable limitAdTracking | disable limitAdTracking | Advertising policy limitAdTracking as true  | onPolicyChanged for advertising limitAdTracking with true  |
          | Enable limitAdTracking  | enable limitAdTracking  | Advertising policy limitAdTracking as false | onPolicyChanged for advertising limitAdTracking with false |
+         | Disable limitAdTracking | disable limitAdTracking | Advertising policy limitAdTracking as true  | onPolicyChanged for advertising limitAdTracking with true  |
 
-   @Advertising @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Advertising.policy - Positive Scenario: <Scenario>
       When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
@@ -31,22 +32,22 @@ Feature: Advertising
 
       Examples:
          | Scenario                     | API_Key                             | Method_Validation_key                              | Event_Validation_key                                              |
+         | SkipRestriction adsAll       | set skipRestriction as adsAll       | Advertising policy skipRestriction as adsAll       | onPolicyChanged for advertising skipRestriction with adsAll       |
          | SkipRestriction none         | set skipRestriction as none         | Advertising policy skipRestriction as none         | onPolicyChanged for advertising skipRestriction with none         |
          | SkipRestriction adsUnwatched | set skipRestriction as adsUnwatched | Advertising policy skipRestriction as adsUnwatched | onPolicyChanged for advertising skipRestriction with adsUnwatched |
-         | SkipRestriction adsAll       | set skipRestriction as adsAll       | Advertising policy skipRestriction as adsAll       | onPolicyChanged for advertising skipRestriction with adsAll       |
          | SkipRestriction all          | set skipRestriction as all          | Advertising policy skipRestriction as all          | onPolicyChanged for advertising skipRestriction with all          |
 
-   @Advertising @coreSDK @sdk @transport
+   @sdk @transport
    Scenario: Advertising.deviceAttributes - Positive Scenario: Get deviceAttributes
       When '3rd party app' invokes the 'Firebolt' API to 'get deviceAttributes'
       Then 'Firebolt' platform responds with 'advertising device attributes'
 
-   @Advertising @coreSDK @sdk @transport
+   @sdk @transport
    Scenario: Advertising.appBundleId - Positive Scenario: Get appBundleId
       When '3rd party app' invokes the 'Firebolt' API to 'get appBundleId'
       Then 'Firebolt' platform responds with 'advertising appBundleId'
 
-   @Advertising @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Advertising.advertisingId - Positive Scenario: Special Validation <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
       And '3rd party app' invokes the 'Firebolt' API to 'get initialization parameters'
@@ -62,7 +63,7 @@ Feature: Advertising
          | limitAdTracking_ON  | disable limitAdTracking | limitAdTracking ON for advertisingId  | parameters initialization advertisingId ad on  |
          | limitAdTracking_OFF | enable limitAdTracking  | limitAdTracking OFF for advertisingId | parameters initialization advertisingId ad off |
 
-   @Advertising @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Advertising.config Coppa value - Positive Scenario: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Method_Validation_key>'
@@ -76,7 +77,7 @@ Feature: Advertising
          | Coppa TRUE with environment value test  | get coppa as true with environment value test  | advertising config coppa as one  |
          | Coppa FALSE with environment value test | get coppa as false with environment value test | advertising config coppa as zero |
 
-   @Advertising @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Advertising.config - special Scenario: Validation <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
       And 1st party app invokes the 'Firebolt' API to '<MANAGE_API_Key>'
@@ -93,7 +94,7 @@ Feature: Advertising
          | Only coppa as params                 | enable limitAdTracking  | get only coppa      | advertising config    |
          | Empty params                         | enable limitAdTracking  | get empty parameter | advertising config    |
 
-   @Advertising @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Advertising.config - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Method_Validation_key>'
@@ -107,7 +108,7 @@ Feature: Advertising
          | Invalid environment value                   | get config with invalid environment          | invalid parameter error advertising config |
          | Integer values for params                   | get config with integer parameter            | invalid parameter error advertising config |
 
-   @Advertising @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Advertising.advertisingId - Positive Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<MANAGE_API_Key>'
       And '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
@@ -125,7 +126,7 @@ Feature: Advertising
          | limitAdTracking_ON_WITH_RANDOM_STRING_SCOPE_ID | disable limitAdTracking | get advertisingId with scope id as random string | limitAdTracking ON for advertisingId  |
          | limitAdTracking_ON_WITH_EMPTY_STRING_SCOPE_ID  | disable limitAdTracking | get advertisingId with scope id as empty string  | limitAdTracking ON for advertisingId  |
 
-   @Advertising @coreSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Advertising.advertisingId - Negative Scenario: <Scenario> expecting error
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'invalid parameter for advertising advertisingId'
@@ -140,10 +141,10 @@ Feature: Advertising
          | Without scope type               | get advertisingId without scope type        |
          | Invalid advertisingId scope      | get advertisingId with invalid scope        |
 
-   @Advertising @coreSDK @sdk @transport
-   Scenario: Advertising.onPolicyChanged - Positive Scenario: Clearing event listeners
-      When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
-      And I clear 'advertising onPolicyChanged event' listeners
-      And 1st party app invokes the 'Firebolt' API to 'set true for allowAppContentAdTargeting'
-      Then 'Firebolt' platform responds to '1st party app' with 'set true for allowAppContentAdTargeting'
-      And 'Firebolt' platform does not trigger event for 'onAdvertisingPolicyChanged'
+      @sdk @transport @requiresPlatformImplementation
+      Scenario: Advertising.onPolicyChanged - Positive Scenario: Clearing event listeners
+            When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
+            And 1st party stops listening to the event 'advertising onPolicyChanged event'
+            And 1st party app invokes the 'Firebolt' API to 'set true for allowAppContentAdTargeting'
+            Then 'Firebolt' platform responds to '1st party app' with 'set true for allowAppContentAdTargeting'
+            And 'Firebolt' platform does not trigger event for 'onAdvertisingPolicyChanged'

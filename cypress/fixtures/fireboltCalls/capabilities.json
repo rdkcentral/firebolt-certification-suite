@@ -961,7 +961,7 @@
     "CUSTOM_ERROR_FOR_CAPABILITIES_INFO": {
         "method": "capabilities.info",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_PERMITTED": {
