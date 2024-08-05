@@ -451,16 +451,15 @@ While validating, if a key is present in both fcs-validation jsons (eg: cypress/
 
 ### Background
 
-Validating the error content obtained in the response. The validation is done against a source of truth, which contains an array of error codes and messages etc. The goal is to ensure that the error codes and messages in the response match the expected values defined in the source of truth.
+There are some test cases which involves calling firebolt methods with invalid parameters, missing parameters. Here, we are expecting error to be returned from the device. FCS has some default error types defined which can be used in various test cases.
 
 ### Default Validation Types in FCS
+Below is the default error objects supported in FCS [errorContentObjects.json](../../fixtures/objects/errorContentObjects.json). All of these validation objects have type `schemaOnly`  This implies that FCS will perform schema validation but will not carry out content validation.
 
-FCS having only 4 types for Validation error objects [errorContentObjects.json](../../fixtures/objects/errorContentObjects.json)
-
-- NOT_SUPPORTED
-- NOT_PERMITTED
-- NOT_AVAILABLE
-- INVALID_TYPE_PARAMS
+- NOT_SUPPORTED - This can be used for api's which are not supported
+- NOT_PERMITTED - This can be used for api's which are not supported
+- NOT_AVAILABLE - This can be used for api's which are not supported
+- INVALID_TYPE_PARAMS - This can be used for error validation which involves calling firebolt methods with invalid parameters, missing parameters etc.
 
 #### Format
 
@@ -488,17 +487,13 @@ FCS having only 4 types for Validation error objects [errorContentObjects.json](
     }
 ```
 
-Note:
+### Content validation support
+#### Extended error code validation
+- User can add error code validations to error validations by overriding in config module in the `cypress/fixtures/objects/errorContentObjects.json` file.
 
-- Error content validation will be happened only when override objects are added from the config module.
-- If error type having `schemaOnly` as shown in example, exection will stop after schema validation and testcase will PASS.
+- For that, they would need to use the same key name as any of the default error objects defined in FCS.
 
-### Content validation can be performed by adding override in the config module
-
-- Validation objects can be added in config module: `cypress/fixtures/objects/errorContentObjects.json` file.
-- If an object in the config module shares the same key name as an error object defined in FCS, FCS error object will be overriden.
-
-#### Format
+##### Format
 
 Below is the format need to be followed while adding override in config module
 
@@ -516,8 +511,9 @@ Below is the format need to be followed while adding override in config module
     }
 }
 ```
+Note: FCS expects the error object to be defined in the above format. Any deviation from the above format would cause failures in error content validation.
 
-#### Params:
+##### Params:
 
 | Param             | type   | Description                                                                            |
 | ----------------- | ------ | -------------------------------------------------------------------------------------- |
@@ -525,7 +521,7 @@ Below is the format need to be followed while adding override in config module
 | type              | string | The value which indicates the type of validation.                                      |
 | validations       | array  | Holds the array of objects having type and which is having error codes for validation. |
 
-#### Example:
+##### Example:
 
 ```
 "INVALID_TYPE_PARAMS": {
@@ -543,12 +539,12 @@ Below is the format need to be followed while adding override in config module
     }
 ```
 
-#### Any additional validations needed, that can be done using custom validation
-
-- To do custom validation error object must have the type as `custom` shown in below format.
+#### Custom validation support
+Users can further add their own error validations using custom validation objects.
+- To do custom validation, error object must have the type as `custom` shown in below format.
 - The value given for `assertionDef` represents the function name and this function should be defined in config module: `cypress/fixtures/customValidations/`
 
-#### Format
+##### Format
 
 Below is the custom validation object format need to be followed while adding override in config module
 
@@ -568,7 +564,7 @@ Below is the custom validation object format need to be followed while adding ov
 }
 ```
 
-#### Params:
+##### Params:
 
 | Param             | type   | Description                                                                                                           |
 | ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
@@ -577,7 +573,7 @@ Below is the custom validation object format need to be followed while adding ov
 | assertionDef      | string | holds the function name, which we are going to add custom validation logic                                            |
 | validations       | array  | Holds the array of objects having type which contains the data for validation, like error codes, error messages, etc. |
 
-#### Example:
+##### Example:
 
 ```
     "CUSTOM_ERROR": {
