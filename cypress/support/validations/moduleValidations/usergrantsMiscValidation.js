@@ -36,7 +36,7 @@ export function usergrantsMiscValidation(method, validationTypeObject, apiOrEven
       const appId = apiOrEventObject.app;
       const context = apiOrEventObject.context;
       const methodOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(method, context, appId);
-      const userGrantsList = methodOrEventObject.apiResponse.result;
+      const userGrantsList = methodOrEventObject.response.result;
       const pretext = CONSTANTS.METHOD_CONTENT;
       if (validationTypeObject.content) {
         cy.log(

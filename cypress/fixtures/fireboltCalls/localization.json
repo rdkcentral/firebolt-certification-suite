@@ -41,7 +41,7 @@
     "EMPTY_RESPONSE_FOR_LOCALIZATION_ADDITIONALINFO": {
         "method": "localization.additionalInfo",
         "validationJsonPath": "result",
-        "content": "LOCALIZATION_REMOVE_ADDITIONALINFO_EMPTY_RESPONSE"  
+        "content": "EMPTYPARAM"  
     },
     "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_KEY_AS_STRING_VALUE_AS_NULL": {
         "method": "manage_localization.addAdditionalInfo",
@@ -94,9 +94,6 @@
         "expected": "error"
     },
     "GET_LOCALIZATION_COUNTRYCODE": {
-        "method": "localization.countryCode"
-    },
-    "LOCALIZATION_COUNTRYCODE": {
         "method": "localization.countryCode"
     },
     "PH_FOR_LOCALIZATION_COUNTRYCODE": {

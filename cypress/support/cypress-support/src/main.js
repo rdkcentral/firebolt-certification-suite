@@ -29,10 +29,6 @@ const logger = require('../../Logger')('main.js');
 const setimmediate = require('setimmediate');
 let appTransport;
 const flatted = require('flatted');
-const internalV2FireboltCallsData = require('../../../fixtures/fireboltCalls/index');
-const externalV2FireboltCallsData = require('../../../fixtures/external/fireboltCalls/index');
-const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/index');
-const externalV2FireboltMockData = require('../../../fixtures/external/fireboltCalls/index');
 
 export default function (module) {
   const config = new Config(module);
@@ -73,26 +69,6 @@ export default function (module) {
         'Performance metrics service not active. To use perforance metrics service, pass performanceMetrics environment variable as true'
       );
     }
-
-    // Merge fireboltCalls
-    const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
-    const v2FireboltCallsData = { ...internalV2FireboltCallsData, ...externalV2FireboltCallsData };
-
-    cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
-      (mergedFireboltCalls) => {
-        Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
-      }
-    );
-
-    // Merge fireboltMocks
-    const v1FireboltMockData = UTILS.getEnvVariable('fireboltMocksJson');
-    const combinedFireboltMockData = {
-      ...v1FireboltMockData,
-      ...internalV2FireboltMockData,
-      ...externalV2FireboltMockData,
-    };
-
-    Cypress.env(CONSTANTS.COMBINEDFIREBOLTMOCKS, combinedFireboltMockData);
 
     // Unflatten the openRPC data
     const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
@@ -424,8 +400,6 @@ export default function (module) {
           if (results) {
             // Response recieved from queue
             return results;
-          } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
-            return true;
           }
         });
     } else {
@@ -496,22 +470,19 @@ export default function (module) {
         ) {
           assert(
             false,
-            `Expected customValidationMethod ${functionName} was not found in the validationFunctions file. More info - ${CONSTANTS.CUSTOM_METHOD_PATH}`
+            `Expected customValidationMethod ${functionName} was not found in the validationFunctions file.`
           );
         }
       } else {
         // if config module doesn't have customValidations function
         assert(
           false,
-          `Expected customValidationMethod ${functionName} was not found in the validationFunctions file. More info - ${CONSTANTS.CUSTOM_METHOD_PATH}`
+          `Expected customValidationMethod ${functionName} was not found in the validationFunctions file.`
         );
       }
     } else {
       // if config module doesn't have customValidations function
-      assert(
-        false,
-        `Expected customValidationMethod was not found in the validationObject. More info - ${CONSTANTS.CUSTOM_METHOD_PATH}`
-      );
+      assert(false, `Expected customValidationMethod was not found in the validationObject.`);
     }
   });
 }

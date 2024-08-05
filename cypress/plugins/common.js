@@ -18,47 +18,36 @@
 const fs = require('fs');
 const testDataProcessor = require('./testDataProcessor');
 const logger = require('../support/Logger')('common.js');
-const { generateIndexFile, preprocessDeviceData } = require('./pluginUtils');
-const CONSTANTS = require('../support/constants/constants');
 
 // If "genericSupport" is set to a falsy value (false, null, etc), take no further action. Simply "return"
 function genericSupport(config) {
-  let data;
   // Read additional config.
   try {
-    data = JSON.parse(fs.readFileSync('supportConfig.json'));
+    const data = JSON.parse(fs.readFileSync('supportConfig.json'));
+
+    // Get the arguments passed from command line during run time.
+    const commandLineArgs = Object.entries(config.resolved.env)
+      .filter(([key, value]) => value.from === 'cli')
+      .reduce((acc, [key, value]) => {
+        acc[key] = value.value;
+        return acc;
+      }, {});
+
+    // The sequence of override - the default config in the config.js file, overriden by supportConfig.json and then by the command line arguments.
+    config.env = {
+      ...config.env,
+      ...data,
+      ...commandLineArgs,
+    };
+
+    const testDataEnv = testDataProcessor.testDataProcessor(config.env);
+    Object.assign(config.env, testDataEnv);
+
+    return config;
   } catch (error) {
     logger.error('Received following error while trying to read supportConfig json', error);
     return config;
   }
-
-  // Get the arguments passed from command line during run time.
-  const commandLineArgs = Object.entries(config.resolved.env)
-    .filter(([key, value]) => value.from === 'cli')
-    .reduce((acc, [key, value]) => {
-      acc[key] = value.value;
-      return acc;
-    }, {});
-
-  // fireboltCalls JSON
-  generateIndexFile(CONSTANTS.FIREBOLTCALLS_FROM_FCS, 'fireboltCalls');
-  generateIndexFile(CONSTANTS.FIREBOLTCALLS_FROM_CONFIGMODULE, 'fireboltCalls');
-  // fireboltMocks JSON
-  generateIndexFile(CONSTANTS.FIREBOLTMOCK_FROM_FCS, 'fireboltMocks');
-  generateIndexFile(CONSTANTS.FIREBOLTMOCK_FROM_CONFIGMODULE, 'fireboltMocks');
-
-  // The sequence of override - the default config in the config.js file, overriden by supportConfig.json and then by the command line arguments.
-  config.env = {
-    ...config.env,
-    ...data,
-    ...commandLineArgs,
-  };
-  // To read device data JSON
-  preprocessDeviceData(config);
-  const testDataEnv = testDataProcessor.testDataProcessor(config.env);
-  Object.assign(config.env, testDataEnv);
-
-  return config;
 }
 
 module.exports = {

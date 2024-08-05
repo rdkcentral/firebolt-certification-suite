@@ -780,8 +780,7 @@
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWPRIMARYCONTENTADTARGETING": {
         "method": "privacy.setAllowPrimaryContentAdTargeting",
-        "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "expected": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWPRIMARYBROWSEADTARGETING": {

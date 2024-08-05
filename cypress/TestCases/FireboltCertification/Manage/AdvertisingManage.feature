@@ -21,9 +21,9 @@ Feature: Advertising_Manage
 
       Examples:
          | Scenario                     | API_Key                             | Method_Validation_Key            | Event_Validation_Key                       |
-         | SkipRestriction adsAll       | set skipRestriction as adsAll       | adsAll for skipRestriction       | onSkipRestrictionChanged with adsAll       |
          | SkipRestriction none         | set skipRestriction as none         | none for skipRestriction         | onSkipRestrictionChanged with none         |
          | SkipRestriction adsUnwatched | set skipRestriction as adsUnwatched | adsUnwatched for skipRestriction | onSkipRestrictionChanged with adsUnwatched |
+         | SkipRestriction adsAll       | set skipRestriction as adsAll       | adsAll for skipRestriction       | onSkipRestrictionChanged with adsAll       |
          | SkipRestriction all          | set skipRestriction as all          | all for skipRestriction          | onSkipRestrictionChanged with all          |
 
 
