@@ -4,7 +4,6 @@
     "ADD_ADDITIONALINFO_KEY_AS_STRING": {"key":"defaultKey"},
     "ADD_ADDITIONALINFO_KEY_AS_EMPTY_STRING": {"key":""},
     "REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING": {"":""},
-    "REMOVE_ADDITIONALINFO_EMPTY_RESPONSE": {},
     "ADD_ADDITIONALINFO_VALUE_AS_NULL": {"key": "info","value": null},
     "ADD_ADDITIONALINFO_KEY_AS_NULL": {"key": null ,"value": "value1"},
     "ADD_ADDITIONALINFO_AS_NULL": {"key": null ,"value": null},

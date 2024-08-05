@@ -67,24 +67,5 @@
     },
     "DEVICE_ID": {
         "capability": "xrn:firebolt:capability:device:id"
-    },
-    "CHALLENGEFOCUS_PARAMS": {
-        "CYPRESSENV-correlationId": "123"
-    },
-    "CHALLENGERESPONSE_PARAMS": {
-        "CYPRESSENV-correlationId": "123",
-        "result": {
-            "granted": true,
-            "reason": "correctPin"
-        }
-    },
-    "CHALLENGEERROR_PARAMS": {
-        "error": {
-            "CYPRESSENV-correlationId": "123",
-            "result": {
-                "code": 1,
-                "message": "Error"
-            }
-        }
     }
 }

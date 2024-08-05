@@ -48,7 +48,7 @@ Feature: Keyboard
         Then 'Firebolt' platform responds with '<Validation_key>'
 
         Examples:
-            | Method   | Scenario                             | API_Key                                                      | Validation_key              |
+            | Mehtod   | Scenario                             | API_Key                                                      | Validation_key              |
             | email    | passing email type as invalid string | prompt the user for their email with invalid type as string  | invalid parameter for email |
             | email    | passing email type as integer        | prompt the user for their email with invalid type as integer | invalid parameter for email |
             | email    | passing email type as empty          | prompt the user for their email with type as empty           | invalid parameter for email |

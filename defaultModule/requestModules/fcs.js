@@ -89,24 +89,4 @@ function setLifecycleState(parsedData) {
     throw new Error(CONSTANTS.SET_LIFECYCLE_STATE_MISSING);
   });
 }
-
-/**
- * @module fcs
- * @function fetchEventResponse
- * @description Extracting a triggered event response from MAP, otherwise returning the parameter as-is.
- * @param {Object} parsedParam - request message having event id to fetch the response.
- * @example
- * fetchEventResponse({method: 'fcs.fetchEventResponse', params: '2'})
- **/
-function fetchEventResponse(parsedParam) {
-  let result;
-  const responseMap = Cypress.env(CONSTANTS.EVENT_RESPONSE_MAP);
-  if (responseMap && responseMap.has(parsedParam.params)) {
-    result = responseMap.get(parsedParam.params);
-    return result.listenerResponse;
-  } else {
-    return parsedParam;
-  }
-}
-
-module.exports = { setResponse, setTestProvider, setLifecycleState, fetchEventResponse };
+module.exports = { setResponse, setTestProvider, setLifecycleState };

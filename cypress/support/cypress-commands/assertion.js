@@ -128,7 +128,7 @@ Cypress.Commands.add(
             const apiErrorResponse =
               validationType == CONSTANTS.EVENT
                 ? apiOrEventObject.eventListenerResponse.error
-                : apiOrEventObject.apiResponse.error;
+                : apiOrEventObject.response.error;
 
             fireLog.include(
               errorContentObject.errorCode,
@@ -631,15 +631,15 @@ Cypress.Commands.add(
     if (eventReceived) {
       try {
         eventReceived = JSON.parse(eventReceived);
-        fireLog.info('Event Response: ' + JSON.stringify(eventReceived.eventResponse));
+        cy.log('Event Response: ' + JSON.stringify(eventReceived.eventResponse));
       } catch (e) {
-        fireLog.info('Event Response: ' + eventReceived);
+        cy.log('Event Response: ' + eventReceived);
       }
     }
 
-    fireLog.info('Event Received Check : ' + eventReceivedCheck);
-    fireLog.info('Event Schema Check : ' + schemaCheck);
-    fireLog.info('Event Content Check : ' + contentCheck);
+    cy.log('Event Received Check : ' + eventReceivedCheck);
+    cy.log('Event Schema Check : ' + schemaCheck);
+    cy.log('Event Content Check : ' + contentCheck);
   }
 );
 
@@ -669,7 +669,7 @@ Cypress.Commands.add(
     if (eventExpected) {
       methodOrEventObject.setEventResponseData(response);
     } else {
-      fireLog.isNull(response.eventResponse[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
+      fireLog.isNull(response[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
     }
   }
 );
@@ -690,8 +690,7 @@ Cypress.Commands.add(
       return;
     }
     if (validationType == CONSTANTS.METHOD) {
-      const { expected, apiSchemaResult } = methodOrEventObject;
-      const response = methodOrEventObject.apiResponse;
+      const { response, expected, apiSchemaResult } = methodOrEventObject;
 
       cy.validationChecksForResponseAndSchemaResult(
         response,

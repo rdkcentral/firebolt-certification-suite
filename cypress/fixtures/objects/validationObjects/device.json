@@ -21,7 +21,7 @@
                 "validations": [
                     {
                         "mode": "fixture",
-                        "type": "CYPRESSENV-defaultTestData-apiVersion",
+                        "type": "APIVERSION",
                         "description": "Validation of the Device version  API Format"
                     }
                 ]
@@ -81,7 +81,7 @@
                 "validations": [
                     {
                         "mode": "fixture",
-                        "type": "CYPRESSENV-defaultTestData-deviceResolution",
+                        "type": "DEVICERESOLUTION",
                         "description": "Validation of the Device videoResolution"
                     }
                 ]
@@ -319,7 +319,7 @@
             }
         ]
     },
-    "DEVICE_NETWORK_WIFICONNECTED": {
+    "NETWORK_WIFICONNECTED": {
         "method": "device.network",
         "data": [
             {
@@ -334,7 +334,7 @@
             }
         ]
     },
-    "DEVICE_NETWORK_WIFIDISCONNECTED": {
+    "NETWORK_WIFIDISCONNECTED": {
         "method": "device.network",
         "data": [
             {
@@ -349,7 +349,7 @@
             }
         ]
     },
-    "DEVICE_NETWORK_ETHERNETCONNECTED": {
+    "NETWORK_ETHERNETCONNECTED": {
         "method": "device.network",
         "data": [
             {
@@ -364,7 +364,7 @@
             }
         ]
     },
-    "DEVICE_NETWORK_ETHERNETDISCONNECTED": {
+    "NETWORK_ETHERNETDISCONNECTED": {
         "method": "device.network",
         "data": [
             {
@@ -379,7 +379,7 @@
             }
         ]
     },
-    "DEVICE_NETWORK_HYBRIDCONNECTED": {
+    "NETWORK_HYBRIDCONNECTED": {
         "method": "device.network",
         "data": [
             {
@@ -394,7 +394,7 @@
             }
         ]
     },
-    "DEVICE_NETWORK_HYBRIDDISCONNECTED": {
+    "NETWORK_HYBRIDDISCONNECTED": {
         "method": "device.network",
         "data": [
             {
@@ -409,7 +409,7 @@
             }
         ]
     },
-    "DEVICE_NETWORK_WIFIDISCONNECTED_EVENT": {
+    "NETWORK_WIFIDISCONNECTED_EVENT": {
         "method": "device.network",
         "data": [
             {
@@ -424,7 +424,7 @@
             }
         ]
     },
-    "DEVICE_NETWORK_ETHERNETDISCONNECTED_EVENT": {
+    "NETWORK_ETHERNETDISCONNECTED_EVENT": {
         "method": "device.network",
         "data": [
             {
@@ -439,7 +439,7 @@
             }
         ]
     },
-    "DEVICE_NETWORKHYBRIDDISCONNECTED_EVENT": {
+    "NETWORKHYBRIDDISCONNECTED_EVENT": {
         "method": "device.network",
         "data": [
             {

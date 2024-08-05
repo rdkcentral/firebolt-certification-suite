@@ -43,25 +43,12 @@ Feature: Secondscreen
       And 'Firebolt' platform does not trigger event for 'onFriendlyNameChanged'
 
    @Secondscreen @coreSDK @regression @sdk @notSupported
-   Scenario Outline: Secondscreen.<EventName> - Positive Scenario: Validating event name in response
-      When '3rd party app' registers for the '<RegisteredEvent>' event using the 'Firebolt' API
-      And User triggers event with value as '<EventParams>'
-      Then 'Firebolt' platform responds with '<Event_Validation_Key>'
-
-      Examples:
-         | EventName       | RegisteredEvent              | Event_Validation_Key                        | EventParams           |
-         | onLaunchRequest | secondscreen onLaunchRequest | expected secondscreen onLaunchRequest event | onLaunchRequest event |
-         | onLaunchRequest | secondscreen onLaunchRequest | expected secondscreen onLaunchRequest event | onLaunchRequest event |
-         | onCloseRequest  | secondscreen onCloseRequest  | expected secondscreen onCloseRequest event  | onCloseRequest event  |
-         | onCloseRequest  | secondscreen onCloseRequest  | expected secondscreen onCloseRequest event  | onCloseRequest event  |
-
-   @Secondscreen @coreSDK @regression @sdk @notSupported
    Scenario Outline: Secondscreen.<Event_Name> - Positive Scenario: Validating event Clearing listeners
       When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
       And I clear '<Clear_Event_Name>' listeners
-      Then User triggers event with value as '<Event_Params>'
+      # Then User triggers event with value as '<Event_Params>'
       Then 'Firebolt' platform does not trigger event for '<Event_Validation_Key>'
       Examples:
-         | Event_Name      | Registered_Event             | Clear_Event_Name                   | Event_Validation_Key                        | Event_Params          |
-         | onLaunchRequest | secondscreen onLaunchRequest | secondscreen onLaunchRequest event | null for secondscreen onLaunchRequest event | onLaunchRequest event |
-         | onCloseRequest  | secondscreen onCloseRequest  | secondscreen onCloseRequest event  | null for secondscreen onCloseRequest event  | onCloseRequest event  |
+         | Event_Name      | Registered_Event             | Clear_Event_Name                   | Event_Validation_Key                        |
+         | onLaunchRequest | secondscreen onLaunchRequest | secondscreen onLaunchRequest event | null for secondscreen onLaunchRequest event |
+         | onCloseRequest  | secondscreen onCloseRequest  | secondscreen onCloseRequest event  | null for secondscreen onCloseRequest event  |

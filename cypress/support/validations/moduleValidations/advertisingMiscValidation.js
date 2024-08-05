@@ -46,7 +46,7 @@ export function advertisingMiscValidation(method, validationTypeObject, apiOrEve
  * validateAdvertisingAdvertisingId('advertising.advertisingId',  {"type": "limitAdTrackingON"},{response:{result: '', error: null, ...}});
  */
 function validateAdvertisingAdvertisingId(method, validationTypeObject, apiOrEventObject) {
-  const response = apiOrEventObject.apiResponse.result;
+  const response = apiOrEventObject.response.result;
   const ScenarioType = validationTypeObject.type;
   const pretext = `${CONSTANTS.METHOD_CONTENT} for ${method} method : `;
 

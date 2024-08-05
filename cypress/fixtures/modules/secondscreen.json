@@ -18,20 +18,5 @@
     "ONCLOSEREQUEST_TYPE_DIAL": {
         "type": "dial",
         "version": "1.7"
-    },
-    "ONLAUNCHREQUEST_EVENT": {
-        "method": "secondscreen.onLaunchRequest",
-        "result":{
-            "type": "dial",
-            "version": "1.7",
-            "data": "test"
-        }
-    },
-    "ONCLOSEREQUEST_EVENT": {
-        "method": "secondscreen.onCloseRequest",
-        "result":{
-            "type": "dial",
-            "version": "1.7"
-        }
     }
 }
