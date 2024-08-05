@@ -44,7 +44,7 @@ Given(
       cy.launchApp(appType, appCallSign);
       cy.lifecycleSetup(appCallSign, state);
       Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, true);
-      cy.updateRunInfo();
+    //  cy.updateRunInfo();
     }
   }
 );
