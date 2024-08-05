@@ -56,13 +56,13 @@ export default function (module) {
         cy.log('Unable to establish a pub/sub connection.');
       }
       // Creating a topic with _fbinteractions suffix to listen for interaction logs
-      const topic = UTILS.getTopic(
-        UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
-        CONSTANTS.SUBSCRIBE,
-        null,
-        CONSTANTS.TOPIC_FBINTERACTIONS
-      );
-      appTransport.subscribe(topic, UTILS.interactionResults);
+      // const topic = UTILS.getTopic(
+      //   UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
+      //   CONSTANTS.SUBSCRIBE,
+      //   null,
+      //   CONSTANTS.TOPIC_FBINTERACTIONS
+      // );
+      // appTransport.subscribe(topic, UTILS.interactionResults);
       // Initiating the Interaction service to listening for interaction logs when interactionsMetrics flag set to true.
       if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS, false) == true) {
         cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
