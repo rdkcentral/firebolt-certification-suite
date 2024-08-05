@@ -65,7 +65,7 @@ export default function (module) {
         );
         appTransport.subscribe(topic, UTILS.interactionResults);
       } catch (err) {
-        UTILS.fireLog.error(
+        UTILS.fireLog.info(
           `Unable to subscribe to ${CONSTANTS.TOPIC_FBINTERACTIONS} suffixed topic`
         );
       }
