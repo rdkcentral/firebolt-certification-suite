@@ -156,7 +156,7 @@ Cypress.Commands.add('getSdkVersion', () => {
         // Calling device.version API
         cy.getDeviceData(CONSTANTS.DEVICE_VERSION, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
           (response) => {
-            console.log("RESPONST" + JSON.stringify(response))
+            console.log('RESPONST' + JSON.stringify(response));
             // If the response is invalid, assign the latest SDK version to the environment variable.
             if (response?.api?.readable && response.sdk?.readable) {
               // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
@@ -204,7 +204,22 @@ Cypress.Commands.add('getSdkVersion', () => {
 Cypress.Commands.add('updateRunInfo', () => {
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
-
+  let deviceModel = '';
+  let deviceDistributor = '';
+  let devicePlatform = '';
+  // function to set env variable for run info data
+  const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
+    if (deviceData === '') {
+      // Fetch data from the third-party app
+      cy.getDeviceDataFromThirdPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
+        // Set environment variable with the response
+        Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
+      });
+    } else {
+      // Set environment variable with the value from json file
+      Cypress.env(envVarName, JSON.stringify(deviceData).replace(/"/g, ''));
+    }
+  };
   cy.task('checkFileExists', reportEnvFile).then((exists) => {
     if (exists) {
       cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
@@ -217,29 +232,46 @@ Cypress.Commands.add('updateRunInfo', () => {
               logger.info('Unable to read from configModule constants');
               return false;
             }
-            // get data for runInfo
-            cy.getDeviceData(CONSTANTS.DEVICE_MODEL, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-              (response) => {
-                Cypress.env(CONSTANTS.ENV_DEVICE_MODEL, JSON.stringify(response).replace(/"/g, ''));
-              }
-            );
-            cy.getDeviceData(
-              CONSTANTS.DEVICE_DISTRIBUTOR,
-              {},
-              CONSTANTS.ACTION_CORE.toLowerCase()
-            ).then((response) => {
-              Cypress.env(
-                CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
-                JSON.stringify(response).replace(/"/g, '')
-              );
-            });
-            cy.getDeviceData(
-              CONSTANTS.DEVICE_PLATFORM,
-              {},
-              CONSTANTS.ACTION_CORE.toLowerCase()
-            ).then((response) => {
-              Cypress.env(CONSTANTS.ENV_PLATFORM, JSON.stringify(response).replace(/"/g, ''));
-            });
+            const deviceMac = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC).replace(/:/g, '');
+            const deviceMacJson = `./cypress/fixtures/devices/${deviceMac}.json`;
+            // Check if mac json file exists
+            cy.task('checkFileExists', deviceMacJson)
+              .then((exists) => {
+                if (exists) {
+                  // File exists, read the file
+                  return cy.readFile(deviceMacJson).then((macJson) => {
+                    deviceModel = macJson?.DEVICE_MODEL ?? '';
+                    deviceDistributor = macJson?.DEVICE_DISTRIBUTOR ?? '';
+                    devicePlatform = macJson?.DEVICE_PLATFORM ?? '';
+                  });
+                }
+                return cy.wrap(null); // Ensure the chain continues
+              })
+              .then(() => {
+                // Sequentially set environment variables
+                return setEnvRunInfo(
+                  deviceModel,
+                  CONSTANTS.DEVICE_MODEL,
+                  CONSTANTS.ACTION_CORE,
+                  CONSTANTS.ENV_DEVICE_MODEL
+                );
+              })
+              .then(() => {
+                return setEnvRunInfo(
+                  deviceDistributor,
+                  CONSTANTS.DEVICE_DISTRIBUTOR,
+                  CONSTANTS.ACTION_CORE,
+                  CONSTANTS.ENV_DEVICE_DISTRIBUTOR
+                );
+              })
+              .then(() => {
+                return setEnvRunInfo(
+                  devicePlatform,
+                  CONSTANTS.DEVICE_PLATFORM,
+                  CONSTANTS.ACTION_CORE,
+                  CONSTANTS.ENV_PLATFORM
+                );
+              });
             cy.readFile(reportEnvFile).then((reportEnv) => {
               if (reportEnv) {
                 const isPlatformRipple = false;
@@ -321,6 +353,46 @@ Cypress.Commands.add('getDeviceData', (method, param, action) => {
     } catch (error) {
       fireLog.info('Failed to fetch device.version', error);
     }
+  });
+});
+/**
+ * @module commands
+ * @function getDeviceDataFromThirdPartyApp
+ * @description Making API call from third party app.
+ * @example
+ * cy.getDeviceDataFromThirdPartyApp(method, param, action)
+ */
+
+Cypress.Commands.add('getDeviceDataFromThirdPartyApp', (method, params, action) => {
+  const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
+  const deviceIdentifier = null;
+  const task = CONSTANTS.TASK.CALLMETHOD;
+  const additionalParams = {
+    communicationMode: UTILS.getCommunicationMode(),
+    action: action,
+    isNotSupportedApi: false,
+  };
+  const methodKey = CONSTANTS.METHOD;
+  const paramKey = 'methodParams';
+
+  const requestParams = { [methodKey]: method, [paramKey]: params };
+  const intentMessage = UTILS.createIntentMessage(task, requestParams, additionalParams);
+
+  cy.runIntentAddon(task, intentMessage).then((parsedIntent) => {
+    const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
+    const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
+    cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent).then((response) => {
+      const responseObject = JSON.parse(response);
+      try {
+        if (responseObject && responseObject.result) {
+          return responseObject.result;
+        } else {
+          throw 'Obtained response is null|undefined';
+        }
+      } catch (error) {
+        fireLog.info('Failed to fetch device.version', error);
+      }
+    });
   });
 });
 
