@@ -55,6 +55,31 @@ Given('the environment has been set up for {string} tests', (test) => {
     if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
       Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
     }
+    // fetch device details dynamically
+    cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+      (response) => {
+        if (response) {
+          const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA);
+          const extractedData = {};
+          if (deviceData) {
+            for (let i = 0; i < deviceData.length; i++) {
+              if (deviceData[i].id == response) {
+                extractedData.deviceId = deviceData[i].id;
+                extractedData.deviceData = deviceData[i].data.deviceType;
+                extractedData.accountId = deviceData[i].data.serviceAccountId;
+                extractedData.distributor = deviceData[i].data.partner;
+                extractedData.sku = deviceData[i].data.model;
+              }
+            }
+            Cypress.env(CONSTANTS.DEVICE_DATA, extractedData);
+          } else {
+            throw new Error('Error getting deviceData from CodeBig ');
+          }
+        } else {
+          throw new Error('Error getting device id ');
+        }
+      }
+    );
   }
 });
 
