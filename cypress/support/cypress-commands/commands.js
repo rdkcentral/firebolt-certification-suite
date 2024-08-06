@@ -212,6 +212,7 @@ Cypress.Commands.add('updateRunInfo', () => {
     if (deviceData === '') {
       // Fetch data from the third-party app
       cy.getDeviceDataFromThirdPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
+        console.log('RESPONSE??????????????????' + response);
         // Set environment variable with the response
         Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
       });
@@ -245,9 +246,11 @@ Cypress.Commands.add('updateRunInfo', () => {
                     devicePlatform = macJson?.DEVICE_PLATFORM ?? '';
                   });
                 }
+                console.log('WRAAAP????');
                 return cy.wrap(null); // Ensure the chain continues
               })
               .then(() => {
+                console.log('SEQUENTUAL????');
                 // Sequentially set environment variables
                 return setEnvRunInfo(
                   deviceModel,
@@ -382,6 +385,9 @@ Cypress.Commands.add('getDeviceDataFromThirdPartyApp', (method, params, action) 
     const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
     const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
     cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent).then((response) => {
+      if (typeof response === 'string' && response === CONSTANTS.NO_RESPONSE) {
+        return 'N/A';
+      }
       const responseObject = JSON.parse(response);
       try {
         if (responseObject && responseObject.result) {
