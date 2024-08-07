@@ -1,5 +1,5 @@
 @DiscoveryLaunch @coreSDK @AppHotLaunch
-Feature: Discovery.launch_HotLaunch
+Feature: Discovery.Launch_HotLaunch
 
     @initialization
     Scenario: Launch FCA for Discovery.Launch Hot Launch
