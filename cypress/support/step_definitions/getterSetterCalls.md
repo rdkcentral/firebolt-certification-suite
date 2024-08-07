@@ -10,7 +10,7 @@ Firebolt objects can be added within JS files located in the `cypress/fixtures/f
 
 ### Sample Firebolt Object Format
 
-Below is the sample format showing how we can create a firebolt object.
+Below is the sample format showing how to create a firebolt object.
 
 ```
   JS_OBJECT_NAME = {
@@ -299,7 +299,7 @@ exports.ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS = {
 };
 ```
 
-### Example 1:
+### Example 2:
 
 **Test case**
 
