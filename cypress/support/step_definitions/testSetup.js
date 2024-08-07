@@ -58,6 +58,7 @@ Given('the environment has been set up for {string} tests', (test) => {
     // fetch device details dynamically
     cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
       (response) => {
+        // if response ( device.id ) is present, call a function in xumoConfig for executing the following logic
         if (response) {
           const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA);
           const extractedData = {};
@@ -73,7 +74,7 @@ Given('the environment has been set up for {string} tests', (test) => {
             }
             Cypress.env(CONSTANTS.DEVICE_DATA, extractedData);
           } else {
-            throw new Error('Error getting deviceData from CodeBig ');
+            throw new Error('Error getting deviceData');
           }
         } else {
           throw new Error('Error getting device id ');
