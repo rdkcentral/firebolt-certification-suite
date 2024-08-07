@@ -1096,9 +1096,9 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
     appId,
     validationType
   );
-  const param = methodOrEventObject.params;
 
   cy.validateResponseErrorAndSchemaResult(methodOrEventObject, validationType).then(() => {
+    const param = methodOrEventObject.params;
     // If passed method is exception method or expecting a error in response, doing error content validation.
     if (UTILS.isScenarioExempted(method, param) || expectingError) {
       const errorResponse =
@@ -1262,4 +1262,97 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
       });
     }
   });
+});
+
+/**
+ * @module commands
+ * @function validateMethodOrEventResponseForV2
+ * @description Validating the event or method response
+ * @param {String} validationType - Determines event or method validation
+ * @param {String} method - API name
+ * @param {*} validationJsonPath - Contains an array or string with the path of the response value that needs to be validated.
+ * @param {String} contentObject - Contains source of truth for content validation.
+ * @param {String} appId - app identified name.
+ * @param {String} errorContent - Holds the error content validation object when error is expected.
+ * @param {String} eventExpected - Determines whether expecting for a event or not.
+ * @example
+ * cy.validateMethodOrEventResponseForV2('method', 'account.id', 'result', {}, 'test.test', 'errorContent', 'eventExpected');
+ */
+Cypress.Commands.add(
+  'validateMethodOrEventResponseForV2',
+  (
+    validationType,
+    method,
+    validationJsonPath,
+    contentObject,
+    appId,
+    errorContent,
+    eventExpected
+  ) => {
+    // Reading the appId from the environment variable
+    appId = !appId
+      ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+      : appId === CONSTANTS.THIRD_PARTY_APP
+        ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+        : appId === CONSTANTS.FIRST_PARTY_APP
+          ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
+          : appId;
+    const context = {};
+    const expectingError = errorContent ? true : false;
+    contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
+    method = method.includes('_') ? method.split('_')[1] : method;
+    if (expectingError) {
+      if (
+        UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON, false) &&
+        UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[errorContent]
+      ) {
+        contentObject = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[errorContent];
+      } else {
+        contentObject = errorContent;
+      }
+    }
+
+    const additionalParams = {
+      method: method,
+      context: context,
+      validationJsonPath: validationJsonPath,
+      contentObject: contentObject,
+      expectingError: expectingError,
+      appId: appId,
+      eventExpected: eventExpected,
+    };
+
+    if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
+      cy.methodOrEventResponseValidation(validationType, additionalParams);
+    } else {
+      cy.log(`${CONSTANTS.SKIPCONTENTVALIDATION} flag is enabled, Skipping the Content validation`);
+    }
+  }
+);
+
+/**
+ * @module commands
+ * @function getV2FireboltCallObject
+ * @description Fetching the firebolt call object from the environment variable if present, otherwise failing the test.
+ * @param {String} sdk - sdk name .
+ * @example
+ * cy.getV2FireboltCallObject(sdk);
+ */
+Cypress.Commands.add('getV2FireboltCallObject', (sdk) => {
+  if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
+    // Checking the `runtime` env variable created and it has 'fireboltCall' field, else failing the test.
+    if (
+      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false) &&
+      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).hasOwnProperty('fireboltCall') &&
+      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).fireboltCall
+    ) {
+      return UTILS.getEnvVariable(CONSTANTS.RUNTIME).fireboltCall;
+    } else {
+      fireLog.fail(
+        'The runtime environment variable was not found. To initialize the firebolt object, add the step "we test the (.+) getters and setters" with firebolt object key.'
+      );
+    }
+  } else {
+    fireLog.assert(false, `${sdk} SDK not Supported`);
+  }
 });

@@ -340,3 +340,18 @@ return
 ### Examples:
 request
 - `resolveRecursiveValues(function())`
+
+## fireboltCallObjectHasField
+
+### Purpose: A Function that recursively check each fields and invoke if it is a function within an array or object.
+
+### Params:
+| **Param** | **Definition**| **Type** |
+| --- | --- | --- |
+| ***object*** | Object for which we need to look for a specific key | object |
+| ***field*** | key name, which must be looked up in the object | string |
+| ***skipCheck*** | skipping the check when this flag is enabled | * |
+
+### Examples:
+ * `fireboltCallObjectHasField({abc: 123}, abc)`
+ * `fireboltCallObjectHasField({abc: 123}, xyz, true)`
