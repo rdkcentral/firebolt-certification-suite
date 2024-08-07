@@ -1,15 +1,16 @@
+@HDMIInput @HDMIInputManage @manageSDK
 Feature: HdmiInput_Manage
 
    Background: Initialize 'HdmiInput'
       Given the environment has been set up for 'hdmiInput' tests
       And 3rd party 'certification' app is launched
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario: HDMIInput.ports - Positive Scenario: Validate HDMIInput ports
       When 1st party app invokes the 'Firebolt' API to 'get hdmiinput ports list'
       Then 'Firebolt' platform responds to '1st party app' with 'expected hdmiinput ports'
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: HDMIInput.port - Positive Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<Key>'
       Then 'Firebolt' platform responds to '1st party app' with 'expected hdmiinput port'
@@ -19,7 +20,7 @@ Feature: HdmiInput_Manage
          | Validate HDMIInput port - Hdmi1 | get hdmiinput port with portId HDMI1 |
          | Validate HDMIInput port - Hdmi2 | get hdmiinput port with portId HDMI2 |
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: HDMIInput.port - Positive Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<Key>'
       Then 'Firebolt' platform responds to '1st party app' for '<Key>'
@@ -34,7 +35,7 @@ Feature: HdmiInput_Manage
          | Validate HDMIInput port edidVersion 2.0                 | set edidVersion to 2.0                   | 2.0 for edidVersion port                 |
          | Validate HDMIInput port edidVersion unknown             | set edidVersion to unknown               | 2.0 for edidVersion port                 |
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: HDMIInput.ports - Positive Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<Key>'
       Then 'Firebolt' platform responds to '1st party app' for '<Key>'
@@ -50,7 +51,7 @@ Feature: HdmiInput_Manage
          | Validate HDMIInput ports edidVersion unknown             | set edidVersion to unknown               | 2.0 for edidVersion ports                 |
 
    # If edidVersion is 1.4, then autoLowLatencyModeCapable and autoLowLatencyModeSignalled must be false
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario: HDMIInput.ports - Positive Scenario: Validate HDMIInput ports with edidVersion 1.4
       When 1st party app invokes the 'Firebolt' API to 'set edidVersion to 1.4'
       Then 'Firebolt' platform responds to '1st party app' for 'set edidVersion to 1.4'
@@ -58,17 +59,17 @@ Feature: HdmiInput_Manage
       Then 'Firebolt' platform responds to '1st party app' with 'false for autoLowLatencyModeCapable ports'
       Then 'Firebolt' platform responds to '1st party app' with 'false for autoLowLatencyModeSignalled ports'
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario: HDMIInput.open - Positive Scenario: Validate HDMIInput open
       When 1st party app invokes the 'Firebolt' API to 'open HDMI1 port'
       Then 'Firebolt' platform responds to '1st party app' with 'null for hdmiinput open'
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario: HDMIInput.close - Positive Scenario: Validate HDMIInput close
       When 1st party app invokes the 'Firebolt' API to 'close HDMI port'
       Then 'Firebolt' platform responds to '1st party app' with 'null for hdmiinput close'
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline:  HdmiInput.<Method> - Positive Scenario: <Scenario>
       When 1st party app registers for the '<Event_Registration_Key>' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to '<Key>'
@@ -86,7 +87,7 @@ Feature: HdmiInput_Manage
          | set LowLatencyMode-true             | set lowLatencyMode with true                   | true for lowLatencyMode                        | hdmiInput onLowLatencyModeChanged            | get lowLatencyMode            | true for onLowLatencyModeChanged             | lowLatencyMode            |
          | set LowLatencyMode-false            | set lowLatencyMode with false                  | false for lowLatencyMode                       | hdmiInput onLowLatencyModeChanged            | get lowLatencyMode            | false for onLowLatencyModeChanged            | lowLatencyMode            |
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: HDMIInput.port - Negative Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<Key>'
       Then 'Firebolt' platform responds to '1st party app' with 'Invalid parameters for hdmiInput port'
@@ -97,7 +98,7 @@ Feature: HdmiInput_Manage
          | Validate HDMIInput port - boolean        | set hdmiInput with boolean        |
          | Validate HDMIInput port - invalid string | set hdmiInput with invalid string |
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: HDMIInput.ports - Negative Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<Key>'
       Then 'Firebolt' platform responds to '1st party app' with 'Invalid parameters for hdmiInput edidVersion'
@@ -108,7 +109,7 @@ Feature: HdmiInput_Manage
          | Validate HDMIInput ports with boolean edidVersion        | set hdmiInput port with boolean edidVersion        |
          | Validate HDMIInput ports with invalid string edidVersion | set hdmiInput port with invalid string edidVersion |
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: HDMIInput.<Method> - Negative Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<Key>'
       Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
@@ -127,7 +128,7 @@ Feature: HdmiInput_Manage
          | set EdidVersion-empty param                  | set EdidVersion with empty param                  | Invalid parameters for EdidVersion               | edidVersion               |
          | set LowLatencyMode-empty param               | set LowLatencyMode with empty param               | Invalid parameters for LowLatencyMode            | lowLatencyMode            |
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: HDMIInput.open - Negative Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<Key>'
       Then 'Firebolt' platform responds to '1st party app' with 'Invalid parameters for hdmiInput open'
@@ -138,14 +139,14 @@ Feature: HdmiInput_Manage
          | Validate HDMIInput open - integer port | set hdmiInput open with integer     |
          | Validate HDMIInput open - boolean port | set hdmiInput open with boolean     |
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario: HDMIInput.ports - Negative Scenario: Validate HDMIInput ports with edidVersion 1.4 and autoLowLatencyModeCapable - true
       When 1st party app invokes the 'Firebolt' API to 'set edidVersion to 1.4'
       And 1st party app invokes the 'Firebolt' API to 'set autoLowLatencyModeCapable with true'
       And 1st party app invokes the 'Firebolt' API to 'get hdmiinput ports list with error'
       Then 'Firebolt' platform responds to '1st party app' with 'Invalid parameters for hdmiInput ports'
 
-   @HdmiInput @manageSDK @sdk @transport
+   @sdk @transport
    Scenario: HDMIInput.port - Negative Scenario: Validate HDMIInput port with edidVersion 1.4 and autoLowLatencyModeCapable - true
       When 1st party app invokes the 'Firebolt' API to 'set edidVersion to 1.4'
       And 1st party app invokes the 'Firebolt' API to 'set autoLowLatencyModeCapable with true'
@@ -153,7 +154,7 @@ Feature: HdmiInput_Manage
       Then 'Firebolt' platform responds to '1st party app' with 'Invalid parameters for hdmiInput port'
 
    # Event parameters are not added yet as they are not known.
-   @HdmiInput @manageSDK @sdk @notsupported
+   @sdk @notsupported
    Scenario Outline: HdmiInput.<Event> - Positive Scenario: Validate <Scenario>
       When 1st party app registers for the '<Event_Key>' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to 'get hdmiinput port with portId HDMI1'
@@ -162,7 +163,7 @@ Feature: HdmiInput_Manage
       Then 'Firebolt' platform triggers event '<Event_Validation_Key>'
 
       Examples:
-         | Scenario                                  | Event                             | Event_Key                                   | Method_content                                        | Event_Validation_Key                                        |
+         | Scenario                                  | Event                             | Event_Key                                   | Method_content                                       | Event_Validation_Key                                        |
          | Hdmi1 - connected true                    | onConnectionChanged               | hdmiinput onConnectionChanged               | true for hdmiinput port connected                    | true for hdmiinput onConnectionChanged event                |
          | Hdmi1 - connected false                   | onConnectionChanged               | hdmiinput onConnectionChanged               | false for hdmiinput port connected                   | false for hdmiinput onConnectionChanged event               |
          | Hdmi1 - signal unknown                    | onSignalChanged                   | hdmiinput onSignalChanged                   | unknown for hdmiinput port signal                    | unknown for hdmiinput onSignalChanged event                 |
@@ -174,8 +175,8 @@ Feature: HdmiInput_Manage
          | Hdmi1 - autoLowLatencyModeSignalled false | onAutoLowLatencyModeSignalChanged | hdmiinput onAutoLowLatencyModeSignalChanged | false for hdmiinput port autoLowLatencyModeSignalled | false for hdmiinput onAutoLowLatencyModeSignalChanged event |
 
    # Needs to confirm whether the event gets triggered. Event parameters are not added yet as they are not known.
-   @HdmiInput @manageSDK @sdk @notsupported
-   Scenario Outline: HdmiInput.onConnectionChanged - Positive Scenario: Validate Hdmi1 - hdmiinput.open
+   @sdk @notsupported
+   Scenario: HdmiInput.onConnectionChanged - Positive Scenario: Validate Hdmi1 - hdmiinput.open
       When 1st party app registers for the 'hdmiinput onConnectionChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to 'open HDMI1 port'
       Then 'Firebolt' platform responds to '1st party app' with 'null for hdmi input open'
@@ -183,8 +184,8 @@ Feature: HdmiInput_Manage
       Then 'Firebolt' platform triggers event 'true for hdmiinput onConnectionChanged event'
 
    # Needs to confirm whether the event gets triggered. Event parameters are not added yet as they are not known.
-   @HdmiInput @manageSDK @sdk @notsupported
-   Scenario Outline: HdmiInput.onConnectionChanged - Positive Scenario: Validate Hdmi1 - hdmiinput.close
+   @sdk @notsupported
+   Scenario: HdmiInput.onConnectionChanged - Positive Scenario: Validate Hdmi1 - hdmiinput.close
       When 1st party app registers for the 'hdmiinput onConnectionChanged' event using the 'Firebolt' API
       And 1st party app invokes the 'Firebolt' API to 'close HDMI port'
       Then 'Firebolt' platform responds to '1st party app' with 'null for hdmi input close'

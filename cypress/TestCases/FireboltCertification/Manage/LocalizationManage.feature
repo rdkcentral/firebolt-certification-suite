@@ -1,9 +1,10 @@
+@Localization @LocalizationManage @manageSDK
 Feature: Localization_Manage
 
     Background: Launch FCA for 'Localization'
         Given the environment has been set up for 'Localization' tests
 
-    @Localization @manageSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Localization.<Scenario> - Positive Scenario: <Scenario>
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         When '1st party app' registers for the 'Firebolt' event
@@ -24,7 +25,7 @@ Feature: Localization_Manage
             | Time-Zone               | timeZone                | America/New_York |
             | PreferredAudioLanguages | preferredAudioLanguages | spa,eng          |
 
-    @Localization @manageSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
@@ -40,7 +41,7 @@ Feature: Localization_Manage
             | TimeZone-integer    | locality | 123   |
             | TimeZone-boolean    | locality | true  |
 
-    @Localization @manageSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
@@ -57,11 +58,11 @@ Feature: Localization_Manage
             | Set preferredAudioLanguages-test | preferredAudioLanguages | test  |
 
     # empty object?
-    @Localization @manageSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Localization.removeAdditionalInfo - Negative Scenario: <Scenario> and expecting error
         Given we test the 'LOCALIZATION_ADDITIONAL_INFO' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
-        And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
+        Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
         Examples:
             | Scenario              | Method               | Value |
@@ -69,11 +70,11 @@ Feature: Localization_Manage
             | with param as object  | removeAdditionalInfo |       |
 
     # object params?
-    @Localization @manageSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Localization.addAdditionalInfo - Negative Scenario: <Scenario> and expecting error
         Given we test the 'LOCALIZATION_ADDITIONAL_INFO' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
-        And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
+        Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
         Examples:
             | Scenario                             | Method            | Value |

@@ -45,17 +45,13 @@ Response
 - {'abc': {'method': 'method_name', 'validationJsonPath': 'result', 'content': true}}
 ```
 
-### > processErrorContentJson
-processErrorContentJson function will perform following operations
-- Iterate over each key in the provided JSON
-- Resolve the each type in the array of validations object.
-- Return the JSON with the updated value.
+### > getErrorContentObjectJson
+Fetching the error content objects from the JSON
 
 Ex:
-
 ```
 Request
-- processErrorContentJson()
+- getErrorContentObjectJson()
 ```
 
 ### > testDataHandler

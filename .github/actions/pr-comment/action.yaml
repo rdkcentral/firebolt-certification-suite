@@ -1,0 +1,24 @@
+name: Comment on PR
+description: Comments on a pull request.
+
+inputs:
+  github_token:
+    description: 'GitHub token for authentication'
+    required: true
+  pr_comment:
+    description: 'Comment to post on the PR'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run comment script
+      shell: bash
+      env:
+        PR_COMMENT: ${{ inputs.pr_comment }}
+      run: |
+        curl -X POST \
+            -H "Authorization: Bearer ${{ inputs.github_token }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"body\": \"$PR_COMMENT\"}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments"

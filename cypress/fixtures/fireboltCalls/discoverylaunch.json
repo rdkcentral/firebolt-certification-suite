@@ -359,14 +359,18 @@
         "params": "DISCOVERYLAUNCH_SEARCH_INTENT_INT_DATA",
         "expected": "error"
     },
-
     "INVALID_PARAMETERS_FOR_DISCOVERY_LAUNCH": {
         "method": "discovery.launch",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
-
+    "INVALID_PARAMETERS_FOR_DISCOVERYLAUNCH": {
+        "method": "discovery.launch",
+        "validationJsonPath": "result",
+        "content": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
     "LAUNCH_APP_WITH_NULL_INTENT_SOURCE": {
         "method": "discovery.launch",
         "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE"
@@ -716,5 +720,10 @@
         "event": "discovery.onNavigateTo",
         "validationJsonPath": "eventResponse",
         "content": "DISCOVERYLAUNCH_SEARCH_INTENT_SOURCE"
+    },
+    "ONNAVIGATETO_WITH_NULL_RESPONSE": {
+        "event": "discovery.onNavigateTo",
+        "validationJsonPath": "eventResponse",
+        "content": "NULL"
     }
 }

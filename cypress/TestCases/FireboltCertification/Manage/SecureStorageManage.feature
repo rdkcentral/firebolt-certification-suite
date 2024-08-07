@@ -1,10 +1,11 @@
+@SecureStorage @SecureStorageManage @manageSDK
 Feature: SecureStorage_Manage
 
     Background: Launch FCA for 'SecureStorage'
         Given the environment has been set up for 'securestorage' tests
         And 3rd party 'certification' app is launched
 
-    @SecureStorage @manageSDK
+    @sdk @transport
     Scenario Outline: SecureStorage.setForApp - Positive Scenario: <Scenario>
         Given 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
         And 'Firebolt' platform responds to '1st party app' for 'null for clearing stored value for an app'
@@ -22,7 +23,7 @@ Feature: SecureStorage_Manage
             | setForApp with device scope and optional parameter  | set secure data value for an app with scope device with optional parameter  | get stored value with scope as device and key as authTestTokenDevice1   | authTestTokenValue1 for stored data in securestorage                 | clear stored value with scope as device for an app  |
             | setForApp with account scope and optional parameter | set secure data value for an app with scope account with optional parameter | get stored value with scope as account and key as authTestTokenAccount1 | authTestTokenValue1 for stored data in securestorage                 | clear stored value with scope as account for an app |
 
-    @SecureStorage @manageSDK
+    @sdk @transport
     Scenario Outline: SecureStorage.removeForApp - Positive Scenario: <Scenario>
         Given 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
         And 'Firebolt' platform responds to '1st party app' for 'null for clearing stored value for an app'
@@ -48,7 +49,7 @@ Feature: SecureStorage_Manage
             | removeForApp with device scope  | remove secure data value for an app with scope device   | set secure data value1 for an app with scope device  | set secure data value2 for an app with scope device  | get stored value for an app for authTestTokenDevice1 with scope device   | get stored value for an app for authTestTokenDevice2 with scope device   | expected value for authTestTokenDevice2 stored data in securestorage  | expected value for authTestTokenDevice1 stored data in securestorage  | clear stored value with scope as device for an app  |
             | removeForApp with account scope | remove secure data value1 for an app with scope account | set secure data value1 for an app with scope account | set secure data value2 for an app with scope account | get stored value for an app for authTestTokenAccount1 with scope account | get stored value for an app for authTestTokenAccount2 with scope account | expected value for authTestTokenAccount2 stored data in securestorage | expected value for authTestTokenAccount1 stored data in securestorage | clear stored value with scope as account for an app |
 
-    @SecureStorage @manageSDK
+    @sdk @transport
     Scenario Outline: SecureStorage.clearForApp - Positive Scenario: <Scenario>
         Given 1st party app invokes the 'Firebolt' API to '<Set_API_Key1>'
         And 'Firebolt' platform responds to '1st party app' for '<Set_API_Key1>'
@@ -65,13 +66,12 @@ Feature: SecureStorage_Manage
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
         Then 'Firebolt' platform responds with 'null for getting stored value'
 
-
         Examples:
             | Scenario                       | Clear_API_Key                                          | API_Key                                                      | Set_API_Key1                                         | Set_API_Key2                                         | Get_API_Key1                                                             | Get_API_Key2                                                             | Validation_Key2                                                       | Validation_Key1                                                       |
             | clearForApp with device scope  | clear secure data values for an app with scope device  | get stored value for authTestTokenDevice with scope device   | set secure data value1 for an app with scope device  | set secure data value2 for an app with scope device  | get stored value for an app for authTestTokenDevice1 with scope device   | get stored value for an app for authTestTokenDevice2 with scope device   | expected value for authTestTokenDevice2 stored data in securestorage  | expected value for authTestTokenDevice1 stored data in securestorage  |
             | clearForApp with account scope | clear secure data values for an app with scope account | get stored value for authTestTokenAccount with scope account | set secure data value1 for an app with scope account | set secure data value2 for an app with scope account | get stored value for an app for authTestTokenAccount1 with scope account | get stored value for an app for authTestTokenAccount2 with scope account | expected value for authTestTokenAccount2 stored data in securestorage | expected value for authTestTokenAccount1 stored data in securestorage |
 
-    @SecureStorage @manageSDK
+    @sdk @transport
     Scenario Outline: SecureStorage.setForApp - Negative Scenario: <Scenario>
         When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for 'invalid params for setting a data value in securestorage'
@@ -93,7 +93,7 @@ Feature: SecureStorage_Manage
             | setForApp with boolean value | set secure data value for an app with boolean value |
             | setForApp without value      | set secure data value for an app without value      |
 
-    @SecureStorage @manageSDK
+    @sdk @transport
     Scenario Outline: SecureStorage.removeForApp - Negative Scenario: <Scenario>
         And 1st party app invokes the 'Firebolt' API to '<API_Key>'
         And 'Firebolt' platform responds to '1st party app' for 'invalid parameters for securestorage removeForApp'
@@ -111,7 +111,7 @@ Feature: SecureStorage_Manage
             | Passing key as boolean        | remove secure data value for an app with boolean key   |
             | Without key                   | remove secure data value for an app without key        |
 
-    @SecureStorage @manageSDK
+    @sdk @transport
     Scenario Outline: SecureStorage.clearForApp - Negative Scenario: <Scenario>
         When 1st party app invokes the 'Firebolt' API to '<Clear_API_key>'
         Then 'Firebolt' platform responds to '1st party app' for 'invalid params for clearing all data for an app in securestorage'
@@ -124,3 +124,105 @@ Feature: SecureStorage_Manage
             | Passing scope as null         | clear secure data values for an app with null scope    |
             | Passing scope as boolean      | clear secure data values for an app with boolean scope |
             | without scope                 | clear secure data values for an app without scope      |
+
+
+    # secondary 3rd party app is launched
+    # clears the existing key for 1st app
+    # validates the cleared value for 1st app
+    # set value for 1st app
+    # validates the set value for 1st app
+    # validates the set value for 2nd app
+    @sdk @transport
+    Scenario Outline: SecureStorage.setForApp - Positive Scenario: <Scenario>
+        Given 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
+        And 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
+        And 'Firebolt' platform responds to '1st party app' for 'null for clearing stored value for an app'
+        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with 'null for getting stored value'
+        And 'secondary 3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        And 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
+        When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
+        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with '<Method_Validation_Key>'
+        And 'secondary 3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        And 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
+
+        Examples:
+            | Scenario                                | Set_API_Key                                        | API_Key                                                              | Method_Validation_Key                                               | Clear_API_Key                                      |
+            | setForApp with device scope with 2 apps | set secure data value for an app with scope device | get stored value with scope as device and key as authTestTokenDevice | expected value for authTestTokenDevice stored data in securestorage | clear stored value with scope as device for an app |
+
+    # secondary 3rd party app is launched
+    # clears the existing key for 1st app
+    # validates the cleared value for 1st app
+    # set value1 for 1st app
+    # set value2 for 1st app
+    # validates the set values for 1st app
+    # set value1 for 2nd app
+    # validates the set value for 2nd app
+    # remove value1 for 1st app
+    # validate the values for 1st app
+    # validate the value for 2nd app
+    @sdk @transport
+    Scenario Outline: SecureStorage.removeForApp - Positive Scenario: <Scenario>
+        Given 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
+        And 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
+        And 'Firebolt' platform responds to '1st party app' for 'null for clearing stored value for an app'
+        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        Then 'Firebolt' platform responds with 'null for getting stored value'
+        And 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
+        And 1st party app invokes the 'Firebolt' API to '<Set_API_Key1>'
+        And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value for an app'
+        And 1st party app invokes the 'Firebolt' API to '<Set_API_Key2>'
+        And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value for an app'
+        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        Then 'Firebolt' platform responds with '<Validation_Key1>'
+        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
+        Then 'Firebolt' platform responds with '<Validation_Key2>'
+        And 1st party app invokes the 'Firebolt' API to 'set secure data value1 for second app with scope device'
+        And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value for an app'
+        When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key1>'
+        When 1st party app invokes the 'Firebolt' API to '<Remove_API_Key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Remove_API_Key>'
+        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        Then 'Firebolt' platform responds with 'null for getting stored value'
+        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
+        Then 'Firebolt' platform responds with '<Validation_Key2>'
+        When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key1>'
+
+        Examples:
+            | Scenario                                   | Remove_API_Key                                        | Set_API_Key1                                        | Set_API_Key2                                        | Get_API_Key1                                                           | Get_API_Key2                                                           | Validation_Key2                                                      | Validation_Key1                                                      | Clear_API_Key                                      |
+            | removeForApp with device scope with 2 apps | remove secure data value for an app with scope device | set secure data value1 for an app with scope device | set secure data value2 for an app with scope device | get stored value for an app for authTestTokenDevice1 with scope device | get stored value for an app for authTestTokenDevice2 with scope device | expected value for authTestTokenDevice2 stored data in securestorage | expected value for authTestTokenDevice1 stored data in securestorage | clear stored value with scope as device for an app |
+
+    # secondary 3rd party app is launched
+    # set value1 for 1st app
+    # set value1 for 2nd app
+    # validates the set values for 1st app
+    # validates the set value for 2nd app
+    # clears the existing key for 1st app
+    # validates the cleared value for 1st app
+    # validate the values for 2nd app
+    @sdk @transport
+    Scenario Outline: SecureStorage.clearForApp - Positive Scenario: <Scenario>
+        Given 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
+        And 1st party app invokes the 'Firebolt' API to '<Set_API_Key1>'
+        And 'Firebolt' platform responds to '1st party app' for '<Set_API_Key1>'
+        And 1st party app invokes the 'Firebolt' API to 'set secure data value1 for second app with scope device'
+        And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value for an app'
+        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        Then 'Firebolt' platform responds with '<Validation_Key1>'
+        When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key1>'
+        When 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
+        Then 'Firebolt' platform responds to '1st party app' for '<Clear_API_Key>'
+        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        Then 'Firebolt' platform responds with 'null for getting stored value'
+        When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key1>'
+
+        Examples:
+            | Scenario                      | Clear_API_Key                                         | API_Key                                                    | Set_API_Key1                                        | Set_API_Key2                                        | Get_API_Key1                                                           | Get_API_Key2                                                           | Validation_Key2                                                      | Validation_Key1                                                      |
+            | clearForApp with device scope | clear secure data values for an app with scope device | get stored value for authTestTokenDevice with scope device | set secure data value1 for an app with scope device | set secure data value2 for an app with scope device | get stored value for an app for authTestTokenDevice1 with scope device | get stored value for an app for authTestTokenDevice2 with scope device | expected value for authTestTokenDevice2 stored data in securestorage | expected value for authTestTokenDevice1 stored data in securestorage |

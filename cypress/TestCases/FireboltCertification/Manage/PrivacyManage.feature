@@ -1,9 +1,10 @@
+@Privacy @PrivacyManage @manageSDK
 Feature: Privacy_Manage
 
    Background: Launch FCA for 'Privacy'
       Given the environment has been set up for 'Privacy' tests
 
-   @Privacy @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Privacy.<Method> - Positive Scenario: <Scenario>
       Given we test the 'PRIVACY_SETTINGS' getters and setters '<Method>' to '<Value>'
       When '1st party app' registers for the 'Firebolt' event
@@ -70,7 +71,7 @@ Feature: Privacy_Manage
       When 1st party app invokes the 'Firebolt' API to 'get privacy settings'
       Then 'Firebolt' platform responds to '1st party app' for 'expected privacy settings'
 
-   @Privacy @manageSDK @sdk @transport
+   @sdk @transport
    Scenario: Privacy.settings - Positive Scenario: Settings
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow resumePoints as true'
       Then 'Firebolt' platform responds to '1st party app' for 'set privacy allow resumePoints as true'
@@ -99,7 +100,7 @@ Feature: Privacy_Manage
       When 1st party app invokes the 'Firebolt' API to 'get privacy settings'
       Then 'Firebolt' platform responds to '1st party app' for 'expected privacy settings'
 
-   @Privacy @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: Privacy.<Method> - Negative Scenario: <Scenario> and expecting error
       Given we test the 'PRIVACY_SETTINGS' getters and setters '<Method>' to '<Value>'
       When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'

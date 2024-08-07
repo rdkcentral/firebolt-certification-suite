@@ -1,9 +1,10 @@
+@AudioDescriptions @AudioDescriptionsManage @manageSDK
 Feature: AudioDescriptions_Manage
 
    Background: Launch FCA for 'AudioDescriptions'
       Given the environment has been set up for 'AudioDescriptions' tests
 
-   @AudioDescriptions @manageSDK @sdk @transport
+   @sdk @transport
    Scenario Outline: AudioDescriptions.enabled - Positive Scenario: <Scenario>
       Given we test the 'AUDIODESCRIPTIONS' getters and setters 'enabled' to '<Value>'
       When '1st party app' registers for the 'Firebolt' event
@@ -18,7 +19,7 @@ Feature: AudioDescriptions_Manage
          | Disable AudioDescriptions | false |
          | Enable AudioDescriptions  | true  |
 
-   @AudioDescriptions @manageSDK @sdk @transport
+  @sdk @transport
    Scenario Outline: AudioDescriptions.enabled - Negative Scenario: <Scenario> expecting error
       Given we test the 'AUDIODESCRIPTIONS' getters and setters 'enabled' to '<Value>'
       When 1st party app invokes the 'Firebolt' API to set 'enabled' to invalid '<Value>'

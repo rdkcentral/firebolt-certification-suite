@@ -48,6 +48,7 @@ Given('the environment has been set up for {string} tests', (test) => {
         Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
       });
     });
+    // cy.updateRunInfo();
     cy.getCapabilities();
     destroyAppInstance(test);
     Cypress.env(CONSTANTS.ENV_SETUP_STATUS, true);
@@ -106,7 +107,14 @@ function destroyAppInstance(testType) {
     try {
       cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
         if (response != CONSTANTS.NO_RESPONSE) {
-          fireLog.assert(false, 'App failed to unload, Reason: ' + closeReason);
+          fireLog.log(false, 'App failed to unload, Reason: ' + closeReason);
+          const requestMap = {
+            method: CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP,
+          };
+          cy.sendMessagetoPlatforms(requestMap).then(() => {
+            // Config modules needs override for validation of app unload
+            cy.log('Platforms unload app execution complete');
+          });
         } else {
           cy.log('App unloaded', 'destroyAppInstance');
         }

@@ -89,15 +89,15 @@
     "INVALID_REQUEST_FOR_SECONDSCREEN_DEVICE": {
         "method": "secondscreen.device",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
-    "EXPECTED_SECONDSCREEN_ONLAUNCHREQUEST_EVENT": {
+    "SECONDSCREEN_ONLAUNCHREQUEST_EVENT": {
         "event": "secondscreen.onLaunchRequest",
         "validationJsonPath": "eventResponse",
-        "content": "SECONDSCREEN_ONLAUNCHREQUEST"
+        "content": "SECONDSCREEN_ONLAUNCHREQUEST_TYPE_DIAL_WITH_TEST_DATA"
     },
-    "EXPECTED_SECONDSCREEN_ONCLOSEREQUEST_EVENT": {
+    "SECONDSCREEN_ONCLOSEREQUEST_EVENT": {
         "event": "secondscreen.onCloseRequest",
         "validationJsonPath": "eventResponse",
         "content": "SECONDSCREEN_ONCLOSEREQUEST"

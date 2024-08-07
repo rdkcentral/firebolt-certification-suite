@@ -33,7 +33,7 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
  */
 Cypress.Commands.add(
   'updateResponseForFCS',
-  (methodOrEvent, params, response, isValidation = false) => {
+  (methodOrEvent, params, response, isValidation = false, isNullCase = false) => {
     const responseType = response.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
 
     if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
@@ -68,15 +68,16 @@ Cypress.Commands.add(
           if (response.hasOwnProperty(CONSTANTS.RESULT)) {
             if (
               response &&
-              response.result &&
+              response.result != undefined &&
               response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
             ) {
               formattedResponse = Object.assign(formattedResponse, response.result);
               formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
             } else if (
-              response &&
-              response.result &&
-              !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+              (response &&
+                response.result != undefined &&
+                !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) ||
+              isNullCase == true
             ) {
               formattedResponse.eventResponse = response.result;
               formattedResponse.eventSchemaResult = formattedSchemaValidationResult;
@@ -85,7 +86,7 @@ Cypress.Commands.add(
           } else if (response.hasOwnProperty(CONSTANTS.ERROR)) {
             if (
               response &&
-              response.result &&
+              response.result != undefined &&
               response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
             ) {
               formattedResponse = Object.assign(formattedResponse, response.error);

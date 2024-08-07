@@ -1,9 +1,10 @@
+@VoiceGuidance @VoiceGuidanceManage @manageSDK
 Feature: VoiceGuidance_Manage
 
     Background: Launch FCA for 'VoiceGuidance'
         Given the environment has been set up for 'VoiceGuidance' tests
 
-    @VoiceGuidance @manageSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Voiceguidance.<Method> - Positive Scenario: <Scenario>
         Given we test the 'VOICEGUIDANCE' getters and setters '<Method>' to '<Value>'
         When '1st party app' registers for the 'Firebolt' event
@@ -20,7 +21,7 @@ Feature: VoiceGuidance_Manage
             | Set speed-1           | speed   | 1     |
             | Set speed-2           | speed   | 2     |
 
-    @VoiceGuidance @manageSDK @sdk @transport
+    @sdk @transport
     Scenario Outline: Voiceguidance.<Method> - Negative Scenario: <Scenario> and expecting error
         Given we test the 'VOICEGUIDANCE' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'

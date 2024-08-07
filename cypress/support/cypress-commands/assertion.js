@@ -17,135 +17,73 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module assertion
  * @function validateErrorObject
- * @description Validating the error message and code against the source of truth
- * @param {String} method - Name of the API to be validated
- * @param {String} expectedContent - Source of truth for validation.
- * @param {String} validationType - validationType contains a method or event.
- * @param {Object} context - Context value used to fetch the specific object.
- * @param {String} appId - appId to fetch the method/event
+ * @description Validating the error code against the source of truth
+ * @param {Object} errorResponse - Error response containing error code and message.
+ * @param {Object} expectedContent - Source of truth for validation.
+ * @param {Object} apiObject - validationType contains a method or event.
+ * @param {String} isExceptionMethod - Contains the exception list name if the method exists in that list.
  * @example
  * cy.validateErrorObject('authentication.token', 'NOT_SUPPORTED', 'method', {}, 'test.test')
  * cy.validateErrorObject('authentication.token', 'exceptionErrorObject', 'method', {}, 'test.test', {'type': 'distributor})
  */
 Cypress.Commands.add(
   'validateErrorObject',
-  (method, expectedContent, validationType, context = CONSTANTS.NO_CONTEXT, appId, param) => {
-    // Function to extract the error validation objects for the passed method and parameters from the exception list.
-    const fetchErrorValidationObjectForExceptionmethod = (method, param) => {
-      return new Promise((resolve) => {
-        const exceptionMethods = UTILS.getEnvVariable(CONSTANTS.EXCEPTION_METHODS);
-        let exceptionType, methodInExceptionList, errorType;
-        // Looping through the different types of exceptions lists.
-        for (const [type, list] of Object.entries(exceptionMethods)) {
-          // Looking for the method and params in each list, if matched returning that exception method.
-          methodInExceptionList = list.find((obj) => {
-            if (obj.method && obj.method.toLowerCase() === method.toLowerCase()) {
-              if (obj.hasOwnProperty(CONSTANTS.PARAM)) {
-                return _.isEqual(obj.param, param);
-              } else {
-                return true;
-              }
-            }
-            return false;
-          });
+  (errorResponse, expectedContent, apiObject, isExceptionMethod) => {
+    expectedContent = isExceptionMethod
+      ? fetchErrorValidationObjectForExceptionMethod()
+      : expectedContent;
 
-          // If method is prsent in the list, exiting the loop.
-          if (methodInExceptionList) {
-            exceptionType = type;
-            break;
-          }
-        }
-
-        if (methodInExceptionList) {
-          switch (exceptionType) {
-            case CONSTANTS.NOT_AVAILABLE_METHODS:
-              errorType = CONSTANTS.NOT_AVAILABLE;
-              break;
-            case CONSTANTS.NOT_PERMITTED_METHODS:
-              errorType = CONSTANTS.NOT_PERMITTED;
-              break;
-            default:
-              errorType = CONSTANTS.NOT_SUPPORTED;
-          }
-        }
-        const errorSchemaFilePath = CONSTANTS.ERROR_SCHEMA_OBJECTS_PATH;
-        const errorContentFilePath = CONSTANTS.ERROR_CONTENT_OBJECTS_PATH;
-
-        // Extracting the error validation object from the above files based on obtained errorType.
-        cy.task(CONSTANTS.READFILEIFEXISTS, errorSchemaFilePath).then((errorSchema) => {
-          if (errorSchema) {
-            errorSchema = JSON.parse(errorSchema);
-            errorSchema = errorSchema[errorType];
-            if (
-              typeof errorSchema == CONSTANTS.TYPE_OBJECT &&
-              errorSchema.type == CONSTANTS.VALIDATION_FUNCTION
-            ) {
-              errorSchema.validations.forEach((validationObject) => {
-                cy.task(CONSTANTS.READFILEIFEXISTS, errorContentFilePath).then((errorContent) => {
-                  errorContent = JSON.parse(errorContent);
-                  validationObject.type = errorContent[validationObject.type];
-                  resolve(errorSchema);
-                });
-              });
-            }
-          } else {
-            cy.log(`Unable to find data for Error validation for ${dataIdentifier}`);
-          }
-        });
-      });
-    };
-
-    if (expectedContent == CONSTANTS.EXCEPTION_ERROR_OBJECT) {
-      cy.wrap(fetchErrorValidationObjectForExceptionmethod(method, param)).then((errorObject) => {
-        validateErrorObjects(errorObject);
-      });
+    //  If error object having type as "schemaOnly", skipping the content vallidation
+    if (expectedContent.type === CONSTANTS.SCHEMA_ONLY) {
+      return;
+    } // Doing custom validation when error object having type as "custom"
+    else if (expectedContent.type === CONSTANTS.CUSTOM) {
+      const additionalParams = { apiObject: apiObject, expectedContent: expectedContent };
+      cy.customValidation(expectedContent, additionalParams);
     } else {
-      validateErrorObjects(expectedContent);
-    }
-
-    // Function to do content validation for the error objects.
-    function validateErrorObjects(errorSchemaObject) {
+      console.log(`Debug : expectedContent ` + JSON.stringify(expectedContent));
       try {
+        // expectedContent having expected format doing content validation else failing the test
         if (
-          errorSchemaObject &&
-          errorSchemaObject.hasOwnProperty('validations') &&
-          Array.isArray(errorSchemaObject.validations)
+          expectedContent &&
+          expectedContent.hasOwnProperty('validations') &&
+          Array.isArray(expectedContent.validations)
         ) {
-          errorSchemaObject.validations.forEach((errorContentObject) => {
-            errorContentObject = errorContentObject.type;
-
-            const apiOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
-              method,
-              context,
-              appId,
-              validationType
-            );
-            const apiErrorResponse =
-              validationType == CONSTANTS.EVENT
-                ? apiOrEventObject.eventListenerResponse.error
-                : apiOrEventObject.apiResponse.error;
-
-            fireLog.include(
-              errorContentObject.errorCode,
-              apiErrorResponse.code,
-              CONSTANTS.ERROR_CODE
-            );
-
-            const checkErrorMessage = errorContentObject.errorMessage.some((errorMessage) =>
-              apiErrorResponse.message.includes(errorMessage)
-            );
-            fireLog.equal(checkErrorMessage, true, 'Error Message Validation: ');
+          expectedContent.validations.forEach((object) => {
+            object = object.type;
+            fireLog.include(object.errorCode, errorResponse.code, CONSTANTS.ERROR_CODE);
           });
         } else {
-          fireLog.assert(false, `Expected error content not found in ${errorContentFilePath}`);
+          fireLog.fail(`Unable to find Error content validation object for ${expectedContent}`);
         }
       } catch (error) {
-        fireLog.assert(false, 'Failed to validate error: ' + error);
+        fireLog.fail(error.message);
+      }
+    }
+
+    /**
+     * @module assertion
+     * @function fetchErrorValidationObjectForExceptionMethod
+     * @description Function to fetch the error object key name based on exception method.
+     * @example
+     * cy.fetchErrorValidationObjectForExceptionMethod()
+     * Ex: If Authentication.token present in "NOT_SUPPORTED_METHODS" exception list, fetching the NOT_SUPPORTED key name from the error content json.
+     */
+    function fetchErrorValidationObjectForExceptionMethod() {
+      const errorContents = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON);
+      const errorType = Object.keys(errorContents).find((key) => isExceptionMethod.includes(key));
+
+      // Extracting the error content validation object from the environment variable.
+      if (errorContents && errorContents[errorType]) {
+        const contentObject = errorContents[errorType];
+        return contentObject;
+      } else {
+        fireLog.fail(`Unable to find Error content validation object for ${errorType}`);
       }
     }
   }
@@ -180,12 +118,18 @@ Cypress.Commands.add(
       const apiResponseContent = eval(CONSTANTS.EXTRACTEDAPI_PATH + validationPath);
       const pretext =
         CONSTANTS.METHOD_CONTENT +
+        ' for ' +
+        methodOrEvent +
+        ':' +
         ' expected ' +
         JSON.stringify(apiResponseContent) +
         ' to be ' +
         JSON.stringify(expected);
-      // Executing fireLog.deepEqual() after logging
-      fireLog.deepEqual(apiResponseContent, expected, pretext);
+      if (_.isEqual(apiResponseContent, expected)) {
+        fireLog.info(`${pretext}`);
+      } else {
+        fireLog.assert(false, pretext);
+      }
     }
   }
 );
@@ -231,7 +175,6 @@ Cypress.Commands.add(
                 ? (isNullCheckSkipped = true)
                 : (isNullCheckSkipped = false);
             }
-
             // Checking if the error is null in the response and if the error is expected or not.
             if (!UTILS.getEnvVariable(CONSTANTS.IS_SCENARIO_EXEMPTED, false)) {
               cy.errorNullCheck(response, errorExpected, isNullCheckSkipped).then((result) => {
@@ -326,7 +269,6 @@ Cypress.Commands.add('errorNullCheck', (response, errorExpected, isNullCheckSkip
   let validationStatus = CONSTANTS.PASS;
   let message = '';
   const isForcedSkip = false;
-
   // If isNullCheckSkipped is true, skip the null check error since it passed the schema validation check.
   // If isNullCheckSkipped is false and the error expected is false, the error property in the response should be null. If it is other than null, the check should fail.
   // If isNullCheckSkipped is false and the error expected is true, the error property in the response should not be null. If it is null, the check should fail.
@@ -441,25 +383,25 @@ function loggingValidationCheckResult(validationCheck) {
   });
 
   // Printing the status of all checks in the report.
-  cy.get(validationCheck)
-    .each((logging) => {
+  cy.get(validationCheck);
+  // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
+  validationCheck.forEach((assertion) => {
+    if (assertion.validationStatus == CONSTANTS.SKIPPED) {
       cy.log(
-        `${logging.validationPoint}: ${logging.validationStatus}. ${logging.message}`,
+        `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`,
         'loggingValidationCheckResult'
       );
-    })
-    .then(() => {
-      // Assume the checks. If anything is marked other than skipped or pass, then fail the testcase.
-      validationCheck.forEach((assertion) => {
-        if (assertion.validationStatus == CONSTANTS.SKIPPED) {
-          assert.equal(assertion.validationStatus, CONSTANTS.SKIPPED, assertion.validationPoint);
-        } else {
-          assert.equal(assertion.validationStatus, CONSTANTS.PASS, assertion.validationPoint);
-        }
-      });
-    });
+    } else {
+      cy.log(
+        `${assertion.validationPoint}: ${assertion.validationStatus}. ${assertion.message}`,
+        'loggingValidationCheckResult'
+      );
+      if (assertion.validationStatus == CONSTANTS.FAIL) {
+        fireLog.assert(false, `${assertion.validationPoint} failed, ${assertion.message}`);
+      }
+    }
+  });
 }
-
 /**
  * @module assertion
  * @function validateEvent
@@ -503,10 +445,10 @@ Cypress.Commands.add(
           CONSTANTS.SKIPPED
         );
         cy.assertValidationsForEvent(
-          'Schema Validation Failed',
-          'FAIL',
-          'PASS',
-          'Event Schema Validation'
+          extractEventObject,
+          verifyPath,
+          content,
+          'Event Schema Validation failed'
         );
       } else if (eventSchemaStatus && eventSchemaStatus.status === 'PASS') {
         // Doing event content validation
@@ -537,7 +479,7 @@ Cypress.Commands.add(
             extractEventObject,
             verifyPath,
             content,
-            'Event Content validation'
+            'Event Content validation failed'
           );
         }
       } else {
@@ -595,7 +537,6 @@ Cypress.Commands.add(
     const verifyEventResponse = verifyPath.split('.')[0];
     const verifyInnerObject = verifyPath.split('.')[1];
     const verifyOuterObject = verifyPath.split('.')[2];
-
     // Checks for multi level object structure and does the event content validation
     if (verifyOuterObject) {
       const eventResponseInnerObject = verifyEventResponse + '.' + verifyInnerObject;
@@ -609,7 +550,22 @@ Cypress.Commands.add(
     const actualValue = actual;
     typeof expected == 'object' ? (expected = JSON.stringify(expected)) : expected;
     typeof actual == 'object' ? (actual = JSON.stringify(actual)) : actual;
-    fireLog.deepEqual(expectedValue, actualValue, pretext);
+
+    pretext =
+      pretext +
+      ' for ' +
+      extractEventObject.eventName +
+      ':' +
+      ' expected ' +
+      actual +
+      ' to be ' +
+      expected;
+
+    if (_.isEqual(expectedValue, actualValue)) {
+      fireLog.info(`${pretext}`);
+    } else {
+      fireLog.assert(false, `${pretext}`);
+    }
   }
 );
 
@@ -639,7 +595,6 @@ Cypress.Commands.add(
 
     fireLog.info('Event Received Check : ' + eventReceivedCheck);
     fireLog.info('Event Schema Check : ' + schemaCheck);
-    fireLog.info('Event Content Check : ' + contentCheck);
   }
 );
 
@@ -657,17 +612,17 @@ Cypress.Commands.add(
  */
 Cypress.Commands.add(
   'saveEventResponse',
-  (response, methodOrEventObject, eventName, eventExpected) => {
+  (response, methodOrEventObject, eventName, eventExpected, isNullCase) => {
     const eventNameForLog = eventName.split('-')[0];
     if (!response) {
-      fireLog.assert(false, `Event response not received for ${eventNameForLog}`);
+      fireLog.fail(`Event response not received for ${eventNameForLog}`);
     }
     if (response.error) {
       fireLog.isNull(response.error, 'Expected event response.error to be null');
     }
 
     if (eventExpected) {
-      methodOrEventObject.setEventResponseData(response);
+      methodOrEventObject.setEventResponseData(response, isNullCase);
     } else {
       fireLog.isNull(response.eventResponse[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
     }
