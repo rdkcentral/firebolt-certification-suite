@@ -59,6 +59,7 @@ const env = {
   skipContentValidation: false,
   communicationMode: 'SDK',
   performanceMetrics: false,
+  interactionsMetrics: false,
   generateLocalReport: true,
   loggerLevel: 'debug',
   testSuite: '',
