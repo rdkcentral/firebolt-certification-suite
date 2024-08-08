@@ -156,7 +156,6 @@ Cypress.Commands.add('getSdkVersion', () => {
         // Calling device.version API
         cy.getDeviceData(CONSTANTS.DEVICE_VERSION, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
           (response) => {
-            console.log('RESPONST' + JSON.stringify(response));
             // If the response is invalid, assign the latest SDK version to the environment variable.
             if (response?.api?.readable && response.sdk?.readable) {
               // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
@@ -212,7 +211,6 @@ Cypress.Commands.add('updateRunInfo', () => {
     if (deviceData === '') {
       // Fetch data from the third-party app
       cy.getDeviceDataFromThirdPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
-        console.log('RESPONSE??????????????????' + response);
         // Set environment variable with the response
         Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
       });
@@ -246,11 +244,9 @@ Cypress.Commands.add('updateRunInfo', () => {
                     devicePlatform = macJson?.DEVICE_PLATFORM ?? '';
                   });
                 }
-                console.log('WRAAAP????');
                 return cy.wrap(null); // Ensure the chain continues
               })
               .then(() => {
-                console.log('SEQUENTUAL????');
                 // Sequentially set environment variables
                 return setEnvRunInfo(
                   deviceModel,
@@ -396,7 +392,7 @@ Cypress.Commands.add('getDeviceDataFromThirdPartyApp', (method, params, action) 
           throw 'Obtained response is null|undefined';
         }
       } catch (error) {
-        fireLog.info('Failed to fetch device.version', error);
+        fireLog.info('Failed to obtain a response', error);
       }
     });
   });
