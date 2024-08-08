@@ -16,7 +16,7 @@ jobs:
       - name: Check PR title
         run: |
           if ! echo "${{ github.event.pull_request.title }}" | grep -Eq "^(feat|fix|BREAKING CHANGE)(\([^)]+\))?: "; then
-            echo 'FAIL_OUTPUT=Invalid PR title. It must start with feat: or fix: or BREAKING CHANGE: or feat(<DESCRIPTOR>): or fix(<DESCRIPTOR>): or BREAKING CHANGE(<DESCRIPTOR>):' >> $GITHUB_ENV
+            echo 'FAIL_OUTPUT=Invalid PR title. It must start with feat: or fix: or BREAKING CHANGE: or feat(<DESCRIPTOR>): or fix(<DESCRIPTOR>): or BREAKING CHANGE(<DESCRIPTOR>):. Please see our [Contributing-Guide](../tree/dev/CONTRIBUTING.md).' >> $GITHUB_ENV
             exit 1
           fi
 
