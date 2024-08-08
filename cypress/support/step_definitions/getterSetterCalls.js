@@ -21,7 +21,7 @@ const CONSTANTS = require('../constants/constants');
 
 /**
  * @module getterSetterCalls
- * @function Given we test the '(.+)' getters and setters(?: '(.+)' to '(.+)')?
+ * @function Given we test the '(.+)' getters and setters(?: '(.*?)'(?: to '(.*?)')?)?
  * @description Extracting the fireboltCall object based on the key provided from the testcase. This object is saving in to the `runtime` environment variable along with `attribute` and `value`.
  * @param {String} key - key name of the fireboltCall setter/getter data.
  * @param {String} attribute - The attribute to which the value is going to be set (ex. fontFamily).
@@ -31,7 +31,7 @@ const CONSTANTS = require('../constants/constants');
  * Given we test the 'CLOSED_CAPTIONS' getters and setters 'enabled' to 'true'
  */
 Given(
-  /we test the '(.+)' getters and setters(?: '(.+)' to '(.+)')?$/,
+  /we test the '(.+)' getters and setters(?: '(.*?)'(?: to '(.*?)')?)?$/,
   async (key, attribute, value) => {
     // Clear any current env.runtime variables
     Cypress.env(CONSTANTS.RUNTIME, {});

@@ -101,14 +101,14 @@ returns: 1.5
 
 ## Supported glue codes
 
-- we test the '(.+)' getters and setters(?: '(.+)' to '(.+)')?
+- we test the '(.+)' getters and setters(?: '(.*?)'(?: to '(.*?)')?)?
 - 1st party app invokes the '(.+)' API to set( invalid)? value
 - '(.+)' invokes the '(.+)' get API
 - '(.+)' registers for the '(.+)' event
 - '(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?
 - '(.+)' platform (triggers|does not trigger) '(.\*?)' event(?: with '(.+)')?
 
-### we test the '(.+)' getters and setters(?: '(.+)' to '(.+)')?
+### we test the '(.+)' getters and setters(?: '(.*?)'(?: to '(.*?)')?)?
 
 #### Params:
 
@@ -185,7 +185,7 @@ runtime: {
 | **_appId_** | app identifier |
 | **_sdk_**   | sdk name       |
 
-**Note:** This glue step will work only if the fireboltCall object cpontains `event` field.
+**Note:** This glue step will work only if the fireboltCall object contains `event` field.
 
 #### Examples:
 
