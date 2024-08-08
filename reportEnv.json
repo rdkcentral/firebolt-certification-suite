@@ -8,6 +8,7 @@
     "title": "Run info",
     "data": [
       { "label": "Product", "value": "N/A" },
+      { "label": "SDK Version", "value": "N/A" },
       { "label": "Firebolt Version", "value": "N/A" },
       { "label": "Platform", "value": "N/A" },
       { "label": "Release", "value": "N/A" },
