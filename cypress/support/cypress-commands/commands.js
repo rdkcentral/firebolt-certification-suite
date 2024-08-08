@@ -184,8 +184,11 @@ Cypress.Commands.add('getSdkVersion', () => {
               Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
             }
             if (response?.api?.readable) {
-              let fireboltVersion = JSON.stringify(response.api.readable);
-              fireboltVersion = fireboltVersion.replace(/"/g, '');
+              const fireboltVersion =
+                `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
+                  /"/g,
+                  ''
+                );
               Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
             }
           }
