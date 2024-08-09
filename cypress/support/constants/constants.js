@@ -84,7 +84,6 @@ module.exports = {
   DEVICEMODULEFORMAT: 'deviceModelFormat',
   DEVICE_AUDIO: 'device.audio',
   DEVICE_CONTENT_VALIDATION: 'deviceContentValidation',
-  DEVICE_DATA: 'deviceData',
   DEVICE_ENV: 'Device',
   DEVICE_FIRMWARE: 'Device Firmware',
   DEVICE_HDCP: 'device.hdcp',

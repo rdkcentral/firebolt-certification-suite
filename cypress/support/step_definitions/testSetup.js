@@ -56,31 +56,20 @@ Given('the environment has been set up for {string} tests', (test) => {
       Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
     }
     // fetch device details dynamically
-    cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-      (response) => {
-        // if response ( device.id ) is present, call a function in xumoConfig for executing the following logic
-        if (response) {
-          const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA);
-          const extractedData = {};
-          if (deviceData) {
-            for (let i = 0; i < deviceData.length; i++) {
-              if (deviceData[i].id == response) {
-                extractedData.deviceId = deviceData[i].id;
-                extractedData.deviceData = deviceData[i].data.deviceType;
-                extractedData.accountId = deviceData[i].data.serviceAccountId;
-                extractedData.distributor = deviceData[i].data.partner;
-                extractedData.sku = deviceData[i].data.model;
-              }
-            }
-            Cypress.env(CONSTANTS.DEVICE_DATA, extractedData);
-          } else {
-            throw new Error('Error getting deviceData');
+    if (Cypress.env(CONSTANTS.TEST_TYPE) == CONSTANTS.DEVICE_ENV) {
+      cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+        (response) => {
+          if (response) {
+            const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
+            const requestMap = {
+              method: method,
+              params: response,
+            };
+            cy.sendMessagetoPlatforms(requestMap);
           }
-        } else {
-          throw new Error('Error getting device id ');
         }
-      }
-    );
+      );
+    }
   }
 });
 
