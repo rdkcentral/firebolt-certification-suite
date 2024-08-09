@@ -46,32 +46,34 @@ Cypress.Commands.add(
       const additionalParams = { apiObject: apiObject, expectedContent: expectedContent };
       cy.customValidation(expectedContent, additionalParams);
     } else {
-      validateErrorObjects(expectedContent);
-    }
-
-    // Function to do content validation for the error objects.
-    function validateErrorObjects(errorContentObject) {
-      console.log(`Debug : errorContentObject ` + JSON.stringify(errorContentObject));
+      console.log(`Debug : expectedContent ` + JSON.stringify(expectedContent));
       try {
-        // errorContentObject having expected format doing content validation else failing the test
+        // expectedContent having expected format doing content validation else failing the test
         if (
-          errorContentObject &&
-          errorContentObject.hasOwnProperty('validations') &&
-          Array.isArray(errorContentObject.validations)
+          expectedContent &&
+          expectedContent.hasOwnProperty('validations') &&
+          Array.isArray(expectedContent.validations)
         ) {
-          errorContentObject.validations.forEach((errorContentObject) => {
-            errorContentObject = errorContentObject.type;
-            fireLog.include(errorContentObject.errorCode, errorResponse.code, CONSTANTS.ERROR_CODE);
+          expectedContent.validations.forEach((object) => {
+            object = object.type;
+            fireLog.include(object.errorCode, errorResponse.code, CONSTANTS.ERROR_CODE);
           });
         } else {
-          fireLog.fail(`Unable to find Error content validation object for ${errorContentObject}`);
+          fireLog.fail(`Unable to find Error content validation object for ${expectedContent}`);
         }
       } catch (error) {
         fireLog.fail(error.message);
       }
     }
 
-    // Function to fetch the error object key name based on exception method.
+    /**
+     * @module assertion
+     * @function fetchErrorValidationObjectForExceptionMethod
+     * @description Function to fetch the error object key name based on exception method.
+     * @example
+     * cy.fetchErrorValidationObjectForExceptionMethod()
+     * Ex: If Authentication.token present in "NOT_SUPPORTED_METHODS" exception list, fetching the NOT_SUPPORTED key name from the error content json.
+     */
     function fetchErrorValidationObjectForExceptionMethod() {
       const errorContents = UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON);
       const errorType = Object.keys(errorContents).find((key) => isExceptionMethod.includes(key));
