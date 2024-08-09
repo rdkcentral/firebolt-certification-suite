@@ -120,7 +120,7 @@
     "GET_DEVICE2": "authTestTokenDevice2",
     "GET_ACCOUNT2": "authTestTokenValue2",
     "GET_DEVICE1": "authTestTokenDevice1",
-    "GET_ACCOUNT1": "authTestTokenValue1",
+    "GET_ACCOUNT1": "authTestTokenAccount1",
     "INVALID_SCOPE": {
         "scope": "test",
         "key": "authTestTokenDevice"

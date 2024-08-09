@@ -39,7 +39,13 @@ Feature: Lifecycle
             | Scenario     | API_Key                        | Method_Content                              |
             | Empty params | close app with empty parameter | invalid parameter error for lifecycle close |
 
-        @regression @sdk @transport @skipNegative
+    @regression @sdk @transport @skipNegative
+    Scenario Outline: Lifecycle R*4.3 Validate lifecycle.close - Negative Scenario: '<Scenario>' expecting error
+        Given the environment has been set up for 'lifecycle' tests
+        And 3rd party 'certification' app is launched
+        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with '<Method_Content>'
+
         Examples:
             | Scenario       | API_Key                          | Method_Content                              |
             | Integer params | close app with integer parameter | invalid parameter error for lifecycle close |

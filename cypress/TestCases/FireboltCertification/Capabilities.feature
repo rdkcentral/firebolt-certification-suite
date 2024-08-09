@@ -17,7 +17,7 @@ Feature: Capabilities
 
     Examples:
       | Scenario                                                            | API_Key                                               | Validation_key                                        |
-      | Validate keyboard capability available in 3rd party app             | check availability of keyboard capability             | true for keyboard capability availability             |
+      | Validate keyboard capability available in 3rd party app             | check availability of keyboard capability             | expected value for keyboard capability availability   |
       | Validate acknowledgechallenge capability available in 3rd party app | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
       | Validate pinchallenge capability available in 3rd party app         | check availability of pinchallenge capability         | true for pinchallenge capability availability         |
 
@@ -28,7 +28,7 @@ Feature: Capabilities
 
     Examples:
       | Scenario                                                       | API_Key                                               | Validation_key                                        |
-      | Validate keyboard capability available in platform             | check availability of keyboard capability             | true for keyboard capability availability             |
+      | Validate keyboard capability available in platform             | check availability of keyboard capability             | expected value for keyboard capability availability   |
       | Validate acknowledgechallenge capability available in platform | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
       | Validate pinchallenge capability available in platform         | check availability of pinchallenge capability         | true for pinchallenge capability availability         |
 
