@@ -970,6 +970,27 @@ function resolveRecursiveValues(input) {
   }
 }
 
+/**
+ * @module utils
+ * @function fireboltCallObjectHasField
+ * @description A Function that recursively check each fields and invoke if it is a function within an array or object.
+ * @param {*} object - Object for which we need to look for a specific key
+ * @param {*} field - key name, which must be looked up in the object
+ * @param {*} skipCheck - skipping the check when this flag is enabled
+ * @example
+ * fireboltCallObjectHasField({abc: 123}, abc)
+ * fireboltCallObjectHasField({abc: 123}, xyz, true)
+ */
+function fireboltCallObjectHasField(object, field, skipCheck = false) {
+  if (!skipCheck) {
+    if ((object?.hasOwnProperty(field) && object[field] !== undefined) || skipCheck) {
+      return true;
+    } else {
+      fireLog.fail(`Could not found "${field}" field in fireboltCall object`);
+    }
+  }
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -996,4 +1017,5 @@ module.exports = {
   parseValue,
   checkForSecondaryAppId,
   resolveRecursiveValues,
+  fireboltCallObjectHasField,
 };
