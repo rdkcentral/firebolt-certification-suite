@@ -1266,7 +1266,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
 /**
  * @module commands
- * @function validateMethodOrEventResponseForV2
+ * @function validateMethodOrEventResponseForJs
  * @description Validating the event or method response
  * @param {String} validationType - Determines event or method validation
  * @param {String} method - API name
@@ -1276,10 +1276,10 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
  * @param {String} errorContent - Holds the error content validation object when error is expected.
  * @param {String} eventExpected - Determines whether expecting for a event or not.
  * @example
- * cy.validateMethodOrEventResponseForV2('method', 'account.id', 'result', {}, 'test.test', 'errorContent', 'eventExpected');
+ * cy.validateMethodOrEventResponseForJs('method', 'account.id', 'result', {}, 'test.test', 'errorContent', 'eventExpected');
  */
 Cypress.Commands.add(
-  'validateMethodOrEventResponseForV2',
+  'validateMethodOrEventResponseForJs',
   (
     validationType,
     method,
@@ -1332,13 +1332,13 @@ Cypress.Commands.add(
 
 /**
  * @module commands
- * @function getV2FireboltCallObject
+ * @function getJSFireboltCallObject
  * @description Fetching the firebolt call object from the environment variable if present, otherwise failing the test.
  * @param {String} sdk - sdk name .
  * @example
- * cy.getV2FireboltCallObject(sdk);
+ * cy.getJSFireboltCallObject(sdk);
  */
-Cypress.Commands.add('getV2FireboltCallObject', (sdk) => {
+Cypress.Commands.add('getJSFireboltCallObject', (sdk) => {
   if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
     // Checking the `runtime` env variable created and it has 'fireboltCall' field, else failing the test.
     if (

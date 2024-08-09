@@ -41,11 +41,9 @@ Given(
       // getFireboltData handles the case where the key is not found
       // Save the object as env.runtime.fireboltCall
       const runtime = { fireboltCall: parsedData };
-      if (attribute && value) {
-        value = UTILS.parseValue(value);
-        runtime.attribute = attribute;
-        runtime.value = value;
-      }
+      value = UTILS.parseValue(value);
+      runtime.attribute = attribute;
+      runtime.value = value;
       Cypress.env(CONSTANTS.RUNTIME, runtime);
     });
   }
@@ -64,7 +62,7 @@ Given(
 Given(
   /1st party app invokes the '(.+)' API to set( invalid)? value$/,
   async (sdk, invalidValue) => {
-    cy.getV2FireboltCallObject(sdk).then((fireboltCallObject) => {
+    cy.getJSFireboltCallObject(sdk).then((fireboltCallObject) => {
       let setMethod;
       let setParams;
       const context = {};
@@ -128,7 +126,7 @@ Given(
  * Given 'test_app' invokes the 'Firebolt' get API
  */
 Given(/'(.+)' invokes the '(.+)' get API$/, async (appId, sdk) => {
-  cy.getV2FireboltCallObject(sdk).then((fireboltCallObject) => {
+  cy.getJSFireboltCallObject(sdk).then((fireboltCallObject) => {
     const context = {};
     const expected = CONSTANTS.RESULT;
     appId =
@@ -193,7 +191,7 @@ Given(/'(.+)' invokes the '(.+)' get API$/, async (appId, sdk) => {
  * And '1st party app' registers for the 'Firebolt' event
  */
 Given(/'(.+)' registers for the '(.+)' event$/, async (appId, sdk) => {
-  cy.getV2FireboltCallObject(sdk).then((fireboltCallObject) => {
+  cy.getJSFireboltCallObject(sdk).then((fireboltCallObject) => {
     let event;
     if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.EVENT)) {
       event = UTILS.resolveRecursiveValues(fireboltCallObject.event);
@@ -259,7 +257,7 @@ Given(/'(.+)' registers for the '(.+)' event$/, async (appId, sdk) => {
 Given(
   /'(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?$/,
   async (sdk, appId, methodType, errorContent) => {
-    cy.getV2FireboltCallObject(sdk).then((fireboltCallObject) => {
+    cy.getJSFireboltCallObject(sdk).then((fireboltCallObject) => {
       let method, validationJsonPath, contentObject;
       const setOrGetMethod = methodType === CONSTANTS.SET ? 'setMethod' : 'method';
       if (UTILS.fireboltCallObjectHasField(fireboltCallObject, setOrGetMethod)) {
@@ -289,7 +287,7 @@ Given(
 
       validationJsonPath = validationJsonPath ? validationJsonPath : CONSTANTS.RESULT;
 
-      cy.validateMethodOrEventResponseForV2(
+      cy.validateMethodOrEventResponseForJs(
         CONSTANTS.METHOD,
         method,
         validationJsonPath,
@@ -318,7 +316,7 @@ Given(
 Given(
   /'(.+)' platform (triggers|does not trigger) '(.*?)' event(?: with '(.+)')?$/,
   async (sdk, eventExpected, appId, errorContent) => {
-    cy.getV2FireboltCallObject(sdk).then((fireboltCallObject) => {
+    cy.getJSFireboltCallObject(sdk).then((fireboltCallObject) => {
       let event, eventValidationJsonPath, contentObject;
       if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.EVENT)) {
         event = UTILS.resolveRecursiveValues(fireboltCallObject.event);
@@ -339,7 +337,7 @@ Given(
         ? eventValidationJsonPath
         : CONSTANTS.EVENT_RESPONSE;
 
-      cy.validateMethodOrEventResponseForV2(
+      cy.validateMethodOrEventResponseForJs(
         CONSTANTS.EVENT,
         event,
         eventValidationJsonPath,
