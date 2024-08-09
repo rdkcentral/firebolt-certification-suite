@@ -7,13 +7,14 @@ Feature: Metrics
 
     @sdk @transport
     Scenario Outline: Metrics.<Method> - Positive Scenario: <Scenario>
-        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_key>'
+        Given we test the 'METRICS_METHOD' getters and setters '<Method>' to '{}'
+        When '3rd party app' invokes the 'Firebolt' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
 
         Examples:
-            | Scenario             | Method       | API_Key                         | Validation_key                   |
-            | Metrics startContent | startContent | notify that content has started | true for startContent in metrics |
-            | Metrics stopContent  | stopContent  | notify that content has stopped | true for stopContent in metrics  |
+            | Scenario             | Method         |
+            | Metrics startContent | startContent   |
+            | Metrics stopContent  | stopContent    |
 
     @sdk @transport
     Scenario Outline: Metrics.<Method> - Negative Scenario: <Scenario> expecting error

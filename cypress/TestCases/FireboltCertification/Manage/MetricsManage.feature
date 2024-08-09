@@ -19,7 +19,7 @@ Feature: Metrics_Manage
             | Send schema as empty string       | send metrics event with empty schema                |
 
     @sdk @transport
-    Scenario Outline: Metrics.event - Positive Scenario: <Scenario>
+    Scenario Outline: Metrics.event - Negative Scenario: <Scenario> expecting error
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid params for metrics event'
 
@@ -31,4 +31,3 @@ Feature: Metrics_Manage
             | Data as string          | send metrics event with data as string     |
             | Data as boolean         | send metrics event with data as boolean    |
             | Data as integer         | send metrics event with data as integer    |
-
