@@ -1,6 +1,6 @@
 exports.ADVERTISING_RESET_IDENTIFIER = {
   method: 'manage_advertising.resetIdentifier',
-  params: null,
+  params: {},
   validationJsonPath: 'result',
   content: {
     data: [
@@ -20,7 +20,7 @@ exports.ADVERTISING_RESET_IDENTIFIER = {
 
 exports.ADVERTISING_SKIP_RESTRICTION = {
   method: 'manage_advertising.skipRestriction',
-  params: null,
+  params: {},
   validationJsonPath: 'result',
   setMethod: resolveAtRuntime('manage_advertising.set{{attribute.uppercaseFirstChar}}'),
   setParams: resolveAtRuntime('value'),

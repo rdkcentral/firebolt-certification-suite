@@ -7,27 +7,23 @@ Feature: Account_Manage
 
    @sdk @transport
    Scenario: Account.session - Positive Scenario: Push session token
-      Given we test the 'ACCOUNT_SESSION' getters and setters 'session' to '<Value>'
-      And 1st party app invokes the 'Firebolt' API to set 'session' to '<Value>'
-      Then 'Firebolt' platform responds to '1st party app' set API
+      When 1st party app invokes the 'Firebolt' API to 'push session token'
+      Then 'Firebolt' platform responds to '1st party app' with 'push session token'
 
    @sdk @transport
    Scenario: Account.session - Negative Scenario: Push session token expecting error
-      Given we test the 'ACCOUNT_SESSION' getters and setters 'session' to '<Value>'
-      And 1st party app invokes the 'Firebolt' API to set 'session' to '<Value>'
-      When '3rd party app' invokes the 'Firebolt' get API
-      Then 'Firebolt' platform responds to '1st party app' set API
+      When 1st party app invokes the 'Firebolt' API to 'push session token'
+      And '3rd party app' invokes the 'Firebolt' API to 'get advertisingId with custom error'
+      Then 'Firebolt' platform responds to '1st party app' for 'push session token'
 
    @sdk @transport
    Scenario Outline: Account.session - Negative Scenario: <Scenario> expecting error
-      Given we test the 'ACCOUNT_SESSION' getters and setters 'session' to '<Value>'
-      When 1st party app invokes the 'Firebolt' API to set 'session' to invalid '<Value>'
-      And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
+      When 1st party app invokes the 'Firebolt' API to '<Key>'
+      Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for account session'
 
       Examples:
-         | Scenario                             | Value                                              |
-         | Invalid session token                | {"token": 736843276434827468,"expiresIn": 84000}           |
-         | Invalid session ExpiresIn            | {"token": "RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ==","expiresIn": "BJGHhjbdcJKSW"}       |
-         | Passing ExpiresIn Invalid value      | {"token": "RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ==","expiresIn": 0} |
-         | Without session token - Empty params |            |
-
+         | Scenario                             | Key                                              |
+         | Invalid session token                | set account session with invalid token           |
+         | Invalid session ExpiresIn            | set account session with invalid ExpiresIn       |
+         | Passing ExpiresIn Invalid value      | set account session with invalid ExpiresIn value |
+         | Without session token - Empty params | set account session without parameters           |

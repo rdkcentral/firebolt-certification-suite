@@ -1,6 +1,6 @@
 exports.DEVICE_NAME = {
   method: 'manage_device.name',
-  params: null,
+  params: {},
   validationJsonPath: 'result',
   setMethod: resolveAtRuntime('manage_device.{{attribute}}'),
   setParams: resolveAtRuntime('value'),

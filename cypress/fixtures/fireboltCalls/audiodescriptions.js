@@ -1,6 +1,6 @@
 exports.AUDIODESCRIPTIONS = {
   method: 'manage_audiodescriptions.enabled',
-  params: null,
+  params: {},
   validationJsonPath: 'result',
   setMethod: resolveAtRuntime('manage_audiodescriptions.set{{attribute.uppercaseFirstChar}}'),
   setParams: resolveAtRuntime('value'),

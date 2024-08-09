@@ -13,9 +13,9 @@ Feature: Advertising_Manage
 
    @sdk @transport
    Scenario Outline: Advertising.skipRestriction - Positive Scenario: <Scenario>
-      Given we test the 'ADVERTISING_SKIP_RESTRICTION' getters and setters
+      Given we test the 'ADVERTISING_SKIP_RESTRICTION' getters and setters 'skipRestriction' to '<Value>'
       When '1st party app' registers for the 'Firebolt' event
-      And 1st party app invokes the 'Firebolt' API to set 'skipRestriction' to '<Value>'
+      And 1st party app invokes the 'Firebolt' API to set
       Then 'Firebolt' platform responds to '1st party app' set API
       When '1st party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '1st party app' get API

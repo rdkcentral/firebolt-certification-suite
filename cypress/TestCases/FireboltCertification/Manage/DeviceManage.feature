@@ -9,7 +9,7 @@ Feature: Device_Manage
     Scenario: Device.name - Positive Scenario: set device name - Bedroom
         Given we test the 'DEVICE_NAME' getters and setters 'setName' to 'Bedroom'
         When '1st party app' registers for the 'Firebolt' event
-        And 1st party app invokes the 'Firebolt' API to set 'setName' to 'Bedroom'
+        And 1st party app invokes the 'Firebolt' API to set
         Then 'Firebolt' platform responds to '1st party app' set API
         When '1st party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '1st party app' get API
@@ -17,14 +17,13 @@ Feature: Device_Manage
 
     @sdk @transport @notSupported
     Scenario Outline: Device.provision - Positive Scenario: <Scenario>
-        Given we test the 'DEVICE_NAME' getters and setters 'provision' to '<Value>'
-        When 1st party app invokes the 'Firebolt' API to set 'provision' to '<Value>'
-        And 'Firebolt' platform responds to '1st party app' set API
+        When 1st party app invokes the 'Firebolt' API to '<Key>'
+        Then 'Firebolt' platform responds to '1st party app' with '<MethodContent>'
 
             Examples:
-            | Scenario                                 | Value                                                                    |
-            | set device provision with default params | "accountId": "1234","deviceId": "1234"                                   |
-            | set device provision with distributor id | "accountId": "1234","deviceId": "1234","distributorId": "global_partner" |
+            | Scenario                                 | Key                                  | MethodContent                       |
+            | set device provision with default params | provision device with default values | default values for device provision |
+            | set device provision with distributor id | provision device with distributor id | distributor id for device provision |
 
     @sdk @transport @notSupported
     Scenario: Device.provision - Positive Scenario: default params including device.id and account.id
@@ -59,14 +58,13 @@ Feature: Device_Manage
 
     @sdk @transport
     Scenario Outline: Device.provision - Negative Scenario: <Scenario> expecting error
-        Given we test the 'DEVICE_NAME' getters and setters 'provision' to '<Value>'
-        When 1st party app invokes the 'Firebolt' API to set 'provision' to invalid '<Value>'
-        And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
+        When 1st party app invokes the 'Firebolt' API to '<Key>'
+        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for device provision'
 
         Examples:
-            | Scenario                               | Value                      |
-            | set deviceProvision with integer       | 123                        |
-            | set deviceProvision with boolean       | true                       |
-            | set deviceProvision without deviceId   | "accountId": "12345678910" |
-            | set deviceProvision with emptyParams   | {}                         |
-            | set deviceProvision without account id | "deviceId": "1234"         |
+            | Scenario                               | Key                                |
+            | set deviceProvision with integer       | provision device with integer      |
+            | set deviceProvision with boolean       | provision device with boolean      |
+            | set deviceProvision without deviceId   | provision device without deviceid  |
+            | set deviceProvision with emptyParams   | provision device with empty params |
+            | set deviceProvision without account id | provision device without accountid |

@@ -6,9 +6,9 @@ Feature: Localization_Manage
 
     @sdk @transport
     Scenario Outline: Localization.<Scenario> - Positive Scenario: <Scenario>
-        Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
+        Given we test the 'LOCALIZATION_MANAGE' getters and setters '<Method>' to '<Value>'
         When '1st party app' registers for the 'Firebolt' event
-        And 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
+        And 1st party app invokes the 'Firebolt' API to set 
         Then 'Firebolt' platform responds to '1st party app' set API
         When '1st party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '1st party app' get API
@@ -27,7 +27,7 @@ Feature: Localization_Manage
 
     @sdk @transport
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
-        Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
+        Given we test the 'LOCALIZATION_MANAGE' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
         And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
@@ -43,7 +43,7 @@ Feature: Localization_Manage
 
     @sdk @transport
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
-        Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
+        Given we test the 'LOCALIZATION_MANAGE' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
         And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
@@ -57,7 +57,6 @@ Feature: Localization_Manage
             | Set true to locale               | locale                  | true  |
             | Set preferredAudioLanguages-test | preferredAudioLanguages | test  |
 
-    # empty object?
     @sdk @transport
     Scenario Outline: Localization.removeAdditionalInfo - Negative Scenario: <Scenario> and expecting error
         Given we test the 'LOCALIZATION_ADDITIONAL_INFO' getters and setters '<Method>' to '<Value>'
@@ -67,20 +66,18 @@ Feature: Localization_Manage
         Examples:
             | Scenario              | Method               | Value |
             | with param as integer | removeAdditionalInfo | 12345 |
-            | with param as object  | removeAdditionalInfo |       |
+            | with param as object  | removeAdditionalInfo | null  |
 
-    # object params?
     @sdk @transport
     Scenario Outline: Localization.addAdditionalInfo - Negative Scenario: <Scenario> and expecting error
-        Given we test the 'LOCALIZATION_ADDITIONAL_INFO' getters and setters '<Method>' to '<Value>'
-        When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
-        Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
+        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for localization addAdditionalInfo'
 
         Examples:
-            | Scenario                             | Method            | Value |
-            | with key as string and value as null | addAdditionalInfo | 12345 |
-            | with key as null and value as string | addAdditionalInfo |       |
-            | with key and value as null           | addAdditionalInfo |       |
-            | with key and value as integer        | addAdditionalInfo |       |
-            | with key and value as object         | addAdditionalInfo |       |
-            | with empty object                    | addAdditionalInfo |       |
+            | Scenario                             | API_Key                                                             |
+            | with key as string and value as null | set localization addAdditionalInfo with key as string value as null |
+            | with key as null and value as string | set localization addAdditionalInfo with key as null value as string |
+            | with key and value as null           | set localization addAdditionalInfo with key and value as null       |
+            | with key and value as integer        | set localization addAdditionalInfo with key and value as integer    |
+            | with key and value as object         | set localization addAdditionalInfo with key and value as object     |
+            | with empty object                    | set localization addAdditionalInfo with empty object                |
