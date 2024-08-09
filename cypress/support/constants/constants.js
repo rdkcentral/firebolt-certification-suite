@@ -88,6 +88,7 @@ module.exports = {
   DEVICE_FIRMWARE: 'Device Firmware',
   DEVICE_HDCP: 'device.hdcp',
   DEVICE_HDR: 'device.hdr',
+  DEVICE_ID: 'device.id',
   DEVICE_IP: 'deviceIp',
   DEVICE_MAC: 'deviceMac',
   DEVICE_MAC_UNAVAILABLE: 'Device MAC unavailable',
