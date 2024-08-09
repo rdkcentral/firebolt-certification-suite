@@ -130,9 +130,10 @@ class decodeValidations {
 
         if (decode.includes(param)) {
           const indexOfParam = decode.indexOf(param);
-          const start = decode.indexOf(':', indexOfParam) + 1;
-          const end = decode.indexOf(',', start);
-          const extractedData = decode.slice(start, end).trim().replace(/"/g, '');
+          const extractedData = decode.slice(
+            indexOfParam + param.length + 2,
+            decode.indexOf('</', indexOfParam + 1)
+          );
           const resultSet = regexFormat.test(extractedData);
 
           cy.log(
