@@ -62,7 +62,7 @@ Given(
 Given(
   /1st party app invokes the '(.+)' API to set( invalid)? value$/,
   async (sdk, invalidValue) => {
-    cy.getJSFireboltCallObject(sdk).then((fireboltCallObject) => {
+    cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
       let setMethod;
       let setParams;
       const context = {};
@@ -103,7 +103,7 @@ Given(
         context: context,
         action: action,
         expected: expected,
-        appId: Cypress.env(CONSTANTS.FIRST_PARTY_APPID),
+        appId: UTILS.fetchAppIdentifierFromEnv(CONSTANTS.FIRST_PARTY_APP),
       };
 
       fireLog.info(
@@ -126,15 +126,10 @@ Given(
  * Given 'test_app' invokes the 'Firebolt' get API
  */
 Given(/'(.+)' invokes the '(.+)' get API$/, async (appId, sdk) => {
-  cy.getJSFireboltCallObject(sdk).then((fireboltCallObject) => {
+  cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
     const context = {};
     const expected = CONSTANTS.RESULT;
-    appId =
-      appId === CONSTANTS.THIRD_PARTY_APP
-        ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-        : appId === CONSTANTS.FIRST_PARTY_APP
-          ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
-          : appId;
+    appId = UTILS.fetchAppIdentifierFromEnv(appId);
     let action = CONSTANTS.ACTION_CORE.toLowerCase();
     let method;
     if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.METHOD)) {
@@ -191,19 +186,14 @@ Given(/'(.+)' invokes the '(.+)' get API$/, async (appId, sdk) => {
  * And '1st party app' registers for the 'Firebolt' event
  */
 Given(/'(.+)' registers for the '(.+)' event$/, async (appId, sdk) => {
-  cy.getJSFireboltCallObject(sdk).then((fireboltCallObject) => {
+  cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
     let event;
     if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.EVENT)) {
       event = UTILS.resolveRecursiveValues(fireboltCallObject.event);
     }
     const eventParams = {};
     const context = {};
-    appId =
-      appId === CONSTANTS.THIRD_PARTY_APP
-        ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-        : appId === CONSTANTS.FIRST_PARTY_APP
-          ? Cypress.env(CONSTANTS.FIRST_PARTY_APPID)
-          : appId;
+    appId = UTILS.fetchAppIdentifierFromEnv(appId);
     let action = CONSTANTS.ACTION_CORE.toLowerCase();
 
     // Splitting the method name if it contains an underscore and using the first part to determine the action that decides sdk.
@@ -257,7 +247,7 @@ Given(/'(.+)' registers for the '(.+)' event$/, async (appId, sdk) => {
 Given(
   /'(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?$/,
   async (sdk, appId, methodType, errorContent) => {
-    cy.getJSFireboltCallObject(sdk).then((fireboltCallObject) => {
+    cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
       let method, validationJsonPath, contentObject;
       const setOrGetMethod = methodType === CONSTANTS.SET ? 'setMethod' : 'method';
       if (UTILS.fireboltCallObjectHasField(fireboltCallObject, setOrGetMethod)) {
@@ -287,7 +277,7 @@ Given(
 
       validationJsonPath = validationJsonPath ? validationJsonPath : CONSTANTS.RESULT;
 
-      cy.validateMethodOrEventResponseForJs(
+      cy.validateMethodOrEventResponseForDynamicConfig(
         CONSTANTS.METHOD,
         method,
         validationJsonPath,
@@ -316,7 +306,7 @@ Given(
 Given(
   /'(.+)' platform (triggers|does not trigger) '(.*?)' event(?: with '(.+)')?$/,
   async (sdk, eventExpected, appId, errorContent) => {
-    cy.getJSFireboltCallObject(sdk).then((fireboltCallObject) => {
+    cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
       let event, eventValidationJsonPath, contentObject;
       if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.EVENT)) {
         event = UTILS.resolveRecursiveValues(fireboltCallObject.event);
@@ -337,7 +327,7 @@ Given(
         ? eventValidationJsonPath
         : CONSTANTS.EVENT_RESPONSE;
 
-      cy.validateMethodOrEventResponseForJs(
+      cy.validateMethodOrEventResponseForDynamicConfig(
         CONSTANTS.EVENT,
         event,
         eventValidationJsonPath,

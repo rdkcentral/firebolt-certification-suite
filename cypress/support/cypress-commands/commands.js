@@ -1076,13 +1076,13 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
 
 /**
  * @module commands
- * @function sendMessageToPlatformOrApp
- * @description Function to send message to Platform or App to make an Api call.
+ * @function methodOrEventResponseValidation
+ * @description Function to validate the response
  * @param {String} validationType - Determines whether method or event validation is being performed. Ex: 'method' or 'event'
  * @param {String} requestData - Contains the data which required to do content validation for the specified method.
  * @example
- * cy.sendMessageToPlatformOrApp('method', {method: 'account.id', context: {}, contentObject: {}, expectingError: false, appId: 'test.test'}
- * cy.sendMessageToPlatformOrApp('event', {method: 'accessibility.onClosedCaptionsSettingsChanged', context: {}, contentObject: {}, expectingError: false, appId: 'test.test', eventExpected: 'triggers'}
+ * cy.methodOrEventResponseValidation('method', {method: 'account.id', context: {}, contentObject: {}, expectingError: false, appId: 'test.test'})
+ * cy.methodOrEventResponseValidation('event', {method: 'accessibility.onClosedCaptionsSettingsChanged', context: {}, contentObject: {}, expectingError: false, appId: 'test.test', eventExpected: 'triggers'})
  */
 Cypress.Commands.add('methodOrEventResponseValidation', (validationType, requestData) => {
   const { method, context, contentObject, expectingError, appId, eventExpected, isNullCase } =
@@ -1266,7 +1266,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
 /**
  * @module commands
- * @function validateMethodOrEventResponseForJs
+ * @function validateMethodOrEventResponseForDynamicConfig
  * @description Validating the event or method response
  * @param {String} validationType - Determines event or method validation
  * @param {String} method - API name
@@ -1276,10 +1276,10 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
  * @param {String} errorContent - Holds the error content validation object when error is expected.
  * @param {String} eventExpected - Determines whether expecting for a event or not.
  * @example
- * cy.validateMethodOrEventResponseForJs('method', 'account.id', 'result', {}, 'test.test', 'errorContent', 'eventExpected');
+ * cy.validateMethodOrEventResponseForDynamicConfig('method', 'account.id', 'result', {}, 'test.test', 'errorContent', 'eventExpected');
  */
 Cypress.Commands.add(
-  'validateMethodOrEventResponseForJs',
+  'validateMethodOrEventResponseForDynamicConfig',
   (
     validationType,
     method,
@@ -1290,13 +1290,7 @@ Cypress.Commands.add(
     eventExpected
   ) => {
     // Reading the appId from the environment variable
-    appId = !appId
-      ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-      : appId === CONSTANTS.THIRD_PARTY_APP
-        ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
-        : appId === CONSTANTS.FIRST_PARTY_APP
-          ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
-          : appId;
+    appId = UTILS.fetchAppIdentifierFromEnv(appId);
     const context = {};
     const expectingError = errorContent ? true : false;
     contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
@@ -1332,13 +1326,13 @@ Cypress.Commands.add(
 
 /**
  * @module commands
- * @function getJSFireboltCallObject
+ * @function getRuntimeFireboltCallObject
  * @description Fetching the firebolt call object from the environment variable if present, otherwise failing the test.
  * @param {String} sdk - sdk name .
  * @example
- * cy.getJSFireboltCallObject(sdk);
+ * cy.getRuntimeFireboltCallObject(sdk);
  */
-Cypress.Commands.add('getJSFireboltCallObject', (sdk) => {
+Cypress.Commands.add('getRuntimeFireboltCallObject', (sdk) => {
   if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
     // Checking the `runtime` env variable created and it has 'fireboltCall' field, else failing the test.
     if (

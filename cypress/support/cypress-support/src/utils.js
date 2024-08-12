@@ -973,7 +973,7 @@ function resolveRecursiveValues(input) {
 /**
  * @module utils
  * @function fireboltCallObjectHasField
- * @description A Function that recursively check each fields and invoke if it is a function within an array or object.
+ * @description A function to verify if the provided field is present in the object, and to fail the step if the field is missing.
  * @param {*} object - Object for which we need to look for a specific key
  * @param {*} field - key name, which must be looked up in the object
  * @param {*} skipCheck - skipping the check when this flag is enabled
@@ -989,6 +989,25 @@ function fireboltCallObjectHasField(object, field, skipCheck = false) {
       fireLog.fail(`Could not found "${field}" field in fireboltCall object`);
     }
   }
+}
+
+/**
+ * @module utils
+ * @function fetchAppIdentifierFromEnv
+ * @description A Function to retrieve the appId from the environment variable based on the provided name.
+ * @param {*} appId - app identifier name
+ * @example
+ * fetchAppIdentifierFromEnv('1st party app')
+ * fetchAppIdentifierFromEnv('test.test)
+ */
+function fetchAppIdentifierFromEnv(appId) {
+  return (appId = !appId
+    ? getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+    : appId === CONSTANTS.THIRD_PARTY_APP
+      ? getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+      : appId === CONSTANTS.FIRST_PARTY_APP
+        ? getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
+        : checkForSecondaryAppId(appId));
 }
 
 module.exports = {
@@ -1018,4 +1037,5 @@ module.exports = {
   checkForSecondaryAppId,
   resolveRecursiveValues,
   fireboltCallObjectHasField,
+  fetchAppIdentifierFromEnv
 };

@@ -343,7 +343,7 @@ request
 
 ## fireboltCallObjectHasField
 
-### Purpose: A Function that recursively check each fields and invoke if it is a function within an array or object.
+### Purpose: A function to verify if the provided field is present in the object, and to fail the step if the field is missing.
 
 ### Params:
 | **Param** | **Definition**| **Type** |
@@ -355,3 +355,16 @@ request
 ### Examples:
  * `fireboltCallObjectHasField({abc: 123}, abc)`
  * `fireboltCallObjectHasField({abc: 123}, xyz, true)`
+
+ ## fetchAppIdentifierFromEnv
+
+### Purpose: A Function to retrieve the appId from the environment variable based on the provided name.
+
+### Params:
+| **Param** | **Definition**| **Type** |
+| --- | --- | --- |
+| ***appId*** | app identifier name | string |
+
+### Examples:
+ * `fetchAppIdentifierFromEnv('1st party app')`
+ * `fetchAppIdentifierFromEnv('test.test)`
