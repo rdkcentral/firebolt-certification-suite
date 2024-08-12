@@ -64,6 +64,17 @@ Given(
           const expectingError = item.expectingError;
           const isNullCase = item.isNullCase || false;
 
+          for (let i = 0; i < contentObject.data.length; i++) {
+            if (contentObject.data[i].validations[0].mode == CONSTANTS.DEVICE_CONTENT_VALIDATION) {
+              const type = contentObject.data[i].validations[0].type;
+              if (Cypress.env(CONSTANTS.DEVICE_DATA).hasOwnProperty(type)) {
+                contentObject.data[i].validations[0].type = Cypress.env(CONSTANTS.DEVICE_DATA)[
+                  type
+                ];
+              }
+            }
+          }
+
           // If the app ID is not passed from the feature, the default app ID will be retrieved.
           appId = !appId
             ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
