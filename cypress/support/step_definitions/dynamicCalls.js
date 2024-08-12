@@ -135,12 +135,9 @@ Given(/'(.+)' invokes the '(.+)' get API$/, async (appId, sdk) => {
     if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.METHOD)) {
       method = UTILS.resolveRecursiveValues(fireboltCallObject.method);
     }
-    let param;
-    if (
-      UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.PARAMS.toLocaleLowerCase())
-    ) {
-      param = UTILS.resolveRecursiveValues(fireboltCallObject.params);
-    }
+    let param = fireboltCallObject.params
+      ? UTILS.resolveRecursiveValues(fireboltCallObject.params)
+      : {};
 
     // Splitting the method name if it contains an underscore and using the first part to determine the action that decides sdk.
     if (method && method.includes('_')) {
@@ -247,10 +244,14 @@ Given(/'(.+)' registers for the '(.+)' event$/, async (appId, sdk) => {
 Given(
   /'(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?$/,
   async (sdk, appId, methodType, errorContent) => {
+    // Retrieving the dynamic firebolt call object from the env variable
     cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
       let method, validationJsonPath, contentObject;
       const setOrGetMethod = methodType === CONSTANTS.SET ? 'setMethod' : 'method';
+
+      // Verifying that the expected field exists in the fireboltCall object; if it does not, the step will fail.
       if (UTILS.fireboltCallObjectHasField(fireboltCallObject, setOrGetMethod)) {
+        // Checking whether the value is a function and invoking if it is, otherwise using it as is.
         method = UTILS.resolveRecursiveValues(fireboltCallObject[setOrGetMethod]);
       }
 
@@ -263,6 +264,7 @@ Given(
           errorContent
         )
       ) {
+        // Checking whether the value is a function and invoking if it is, otherwise using it as is.
         validationJsonPath = UTILS.resolveRecursiveValues(
           fireboltCallObject[setOrGetValidationJsonPath]
         );
@@ -272,11 +274,13 @@ Given(
       if (
         UTILS.fireboltCallObjectHasField(fireboltCallObject, setOrGetContentObject, errorContent)
       ) {
+        // Checking whether the value is a function and invoking if it is, otherwise using it as is.
         contentObject = UTILS.resolveRecursiveValues(fireboltCallObject[setOrGetContentObject]);
       }
 
       validationJsonPath = validationJsonPath ? validationJsonPath : CONSTANTS.RESULT;
 
+      // Doing content validation for method response
       cy.validateMethodOrEventResponseForDynamicConfig(
         CONSTANTS.METHOD,
         method,
@@ -306,27 +310,37 @@ Given(
 Given(
   /'(.+)' platform (triggers|does not trigger) '(.*?)' event(?: with '(.+)')?$/,
   async (sdk, eventExpected, appId, errorContent) => {
+    // Retrieving the dynamic firebolt call object from the env variable
     cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
       let event, eventValidationJsonPath, contentObject;
       if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.EVENT)) {
         event = UTILS.resolveRecursiveValues(fireboltCallObject.event);
       }
 
+      // Verifying that the expected field exists in the fireboltCall object; if it does not, the step will fail.
       if (UTILS.fireboltCallObjectHasField(fireboltCallObject, 'eventValidationJsonPath')) {
+        // Checking whether the value is a function and invoking if it is, otherwise using it as is.
         eventValidationJsonPath = UTILS.resolveRecursiveValues(
           fireboltCallObject.eventValidationJsonPath
         );
       }
 
+      // Verifying that the expected field exists in the fireboltCall object; if it does not, the step will fail.
       if (
-        UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.CONTENT.toLocaleLowerCase())
+        UTILS.fireboltCallObjectHasField(
+          fireboltCallObject,
+          CONSTANTS.CONTENT.toLocaleLowerCase(),
+          errorContent
+        )
       ) {
+        // Checking whether the value is a function and invoking if it is, otherwise using it as is.
         contentObject = UTILS.resolveRecursiveValues(fireboltCallObject.content);
       }
       eventValidationJsonPath = eventValidationJsonPath
         ? eventValidationJsonPath
         : CONSTANTS.EVENT_RESPONSE;
 
+      // Doing content validation for event response
       cy.validateMethodOrEventResponseForDynamicConfig(
         CONSTANTS.EVENT,
         event,

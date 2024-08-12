@@ -1037,5 +1037,5 @@ module.exports = {
   checkForSecondaryAppId,
   resolveRecursiveValues,
   fireboltCallObjectHasField,
-  fetchAppIdentifierFromEnv
+  fetchAppIdentifierFromEnv,
 };
