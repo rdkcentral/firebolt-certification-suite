@@ -412,3 +412,7 @@ While validating, if a key is present in both fcs-validation jsons (eg: cypress/
             }
         ]
 }
+
+# Device Content Validation
+
+For deviceContentValidation, the source of truth is fetched from an external API, which is dependent on the configuration module or platform on which we are testing. For the validation part, an override module called "fetchDeviceDetails" is expected to be in configModule to fetch the device details with the corresponding APIs mentioned for each config. DeviceId is passed from fcs to this override module as the only parameter, which is later used for fetching device details in the "configHelper" module.
