@@ -15,7 +15,7 @@ Feature: Advertising_Manage
    Scenario Outline: Advertising.skipRestriction - Positive Scenario: <Scenario>
       Given we test the 'ADVERTISING_SKIP_RESTRICTION' getters and setters 'skipRestriction' to '<Value>'
       When '1st party app' registers for the 'Firebolt' event
-      And 1st party app invokes the 'Firebolt' API to set
+      And 1st party app invokes the 'Firebolt' API to set value
       Then 'Firebolt' platform responds to '1st party app' set API
       When '1st party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '1st party app' get API
@@ -30,8 +30,8 @@ Feature: Advertising_Manage
 
    @sdk @transport
    Scenario: Advertising.setSkipRestriction - Negative Scenario: SkipRestriction expecting error
-      Given we test the 'ADVERTISING_SKIP_RESTRICTION' getters and setters
-      When 1st party app invokes the 'Firebolt' API to set 'skipRestriction' to invalid '898756'
+      Given we test the 'ADVERTISING_SKIP_RESTRICTION' getters and setters 'skipRestriction' to '898756'
+      When 1st party app invokes the 'Firebolt' API to set invalid value
       And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
    @sdk @transport @notSupported

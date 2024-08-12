@@ -7,9 +7,8 @@ Feature: Localization
 
     @sdk @transport
     Scenario: Localization.additionalInfo - Positive Scenario: Get additional info
-        Given we test the 'LOCALIZATION_ADDITIONAL_INFO' getters and setters
-        When '3rd party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '3rd party app' get API
+        When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
+        Then 'Firebolt' platform responds with 'expected localization additionalInfo'
 
     @sdk @transport
     Scenario Outline: Localization.addAdditionalInfo - Positive Scenario: <Scenario>
@@ -66,7 +65,7 @@ Feature: Localization
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         When '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
-        And 1st party app invokes the 'Firebolt' API to set
+        And 1st party app invokes the 'Firebolt' API to set value
         Then 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '3rd party app' get API

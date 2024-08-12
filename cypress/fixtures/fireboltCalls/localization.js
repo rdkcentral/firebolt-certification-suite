@@ -27,29 +27,10 @@ exports.LOCALIZATION_MANAGE = {
 };
 
 exports.LOCALIZATION_ADDITIONAL_INFO = {
-  method: 'localization.additionalInfo',
-  params: {},
-  validationJsonPath: 'result',
   setMethod: resolveAtRuntime('manage_localization.{{attribute}}'),
   setParams: resolveAtRuntime('value'),
   setValidationJsonPath: 'result',
   setContent: null,
-  content: {
-    data: [
-      {
-        type: 'fixture',
-        validations: [
-          {
-            mode: 'staticContentValidation',
-            type: resolveAtRuntime('value'),
-            description: resolveAtRuntime(
-              'Validating that manage_localization.{{attribute}} {{attribute}} is {{value}}'
-            ),
-          },
-        ],
-      },
-    ],
-  },
 };
 
 exports.LOCALIZATION = {

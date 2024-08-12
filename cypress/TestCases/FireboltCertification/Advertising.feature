@@ -22,25 +22,27 @@ Feature: Advertising
 
    @sdk @transport
    Scenario Outline: Advertising.policy - Positive Scenario: <Scenario>
-      When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
-      And '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
-      And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
-      When '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
-      Then 'Firebolt' platform responds with '<Method_Validation_key>'
-      And 'Firebolt' platform triggers event '<Event_Validation_key>'
+      Given we test the 'ADVERTISING_SKIPRESTRICTION' getters and setters '<Method>' to '<Value>'
+      When '3rd party app' registers for the 'Firebolt' event
+      When '3rd party app' invokes the 'Firebolt' get API
+      When 1st party app invokes the 'Firebolt' API to set value
+      And 'Firebolt' platform responds to '1st party app' set API
+      When '3rd party app' invokes the 'Firebolt' get API
+      And 'Firebolt' platform responds to '3rd party app' get API
+      And 'Firebolt' platform triggers '3rd party app' event
 
       Examples:
-         | Scenario                     | API_Key                             | Method_Validation_key                              | Event_Validation_key                                              |
-         | SkipRestriction adsAll       | set skipRestriction as adsAll       | Advertising policy skipRestriction as adsAll       | onPolicyChanged for advertising skipRestriction with adsAll       |
-         | SkipRestriction none         | set skipRestriction as none         | Advertising policy skipRestriction as none         | onPolicyChanged for advertising skipRestriction with none         |
-         | SkipRestriction adsUnwatched | set skipRestriction as adsUnwatched | Advertising policy skipRestriction as adsUnwatched | onPolicyChanged for advertising skipRestriction with adsUnwatched |
-         | SkipRestriction all          | set skipRestriction as all          | Advertising policy skipRestriction as all          | onPolicyChanged for advertising skipRestriction with all          |
+         | Scenario                     | Method          | Value        |
+         | SkipRestriction adsAll       | skipRestriction | adsAll       |
+         | SkipRestriction none         | skipRestriction | none         |
+         | SkipRestriction adsUnwatched | skipRestriction | adsUnwatched |
+         | SkipRestriction all          | skipRestriction | all          |
 
    @sdk @transport
    Scenario: Advertising.deviceAttributes - Positive Scenario: Get deviceAttributes
-      When '3rd party app' invokes the 'Firebolt' API to 'get deviceAttributes'
-      Then 'Firebolt' platform responds with 'advertising device attributes'
+      Given we test the 'ADVERTISING_DEVICEATTRIBUTES' getters and setters
+      When '3rd party app' invokes the 'Firebolt' get API
+      Then 'Firebolt' platform responds to '3rd party app' get API
 
    @sdk @transport
    Scenario: Advertising.appBundleId - Positive Scenario: Get appBundleId

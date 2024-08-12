@@ -22,13 +22,13 @@ Feature: Device
 
     @sdk @transport
     Scenario: Device.name - Positive Scenario: Validate device name change
-        When '3rd party app' registers for the 'device onNameChanged' event using the 'Firebolt' API
-        And '3rd party app' invokes the 'Firebolt' API to 'get device name'
-        And 1st party app invokes the 'Firebolt' API to 'set device name to living hall'
-        Then 'Firebolt' platform responds to '1st party app' for 'set device name to living hall'
-        When '3rd party app' invokes the 'Firebolt' API to 'get device name'
-        Then 'Firebolt' platform responds with 'living hall for device name'
-        And 'Firebolt' platform triggers event 'onDeviceNameChanged with living hall'
+        Given we test the 'DEVICE_NAME_CORE' getters and setters 'setName' to 'Living hall'
+        When '1st party app' registers for the 'Firebolt' event
+        And 1st party app invokes the 'Firebolt' API to set value
+        Then 'Firebolt' platform responds to '1st party app' set API
+        When '1st party app' invokes the 'Firebolt' get API
+        Then 'Firebolt' platform responds to '1st party app' get API
+        And 'Firebolt' platform triggers '1st party app' event
 
     @mfos  @regression @sdk
     Scenario Outline: Device.<Method> - Positive Scenario: <Scenario>

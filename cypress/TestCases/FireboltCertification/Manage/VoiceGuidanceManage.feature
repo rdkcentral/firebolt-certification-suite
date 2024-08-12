@@ -8,7 +8,7 @@ Feature: VoiceGuidance_Manage
     Scenario Outline: Voiceguidance.<Method> - Positive Scenario: <Scenario>
         Given we test the 'VOICEGUIDANCE' getters and setters '<Method>' to '<Value>'
         When '1st party app' registers for the 'Firebolt' event
-        And 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
+        And 1st party app invokes the 'Firebolt' API to set value
         Then 'Firebolt' platform responds to '1st party app' set API
         When '1st party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '1st party app' get API
@@ -24,7 +24,7 @@ Feature: VoiceGuidance_Manage
     @sdk @transport
     Scenario Outline: Voiceguidance.<Method> - Negative Scenario: <Scenario> and expecting error
         Given we test the 'VOICEGUIDANCE' getters and setters '<Method>' to '<Value>'
-        When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
+        When 1st party app invokes the 'Firebolt' API to set invalid value
         And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
         Examples:

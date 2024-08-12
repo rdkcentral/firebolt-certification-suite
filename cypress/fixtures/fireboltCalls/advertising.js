@@ -45,3 +45,51 @@ exports.ADVERTISING_SKIP_RESTRICTION = {
     ],
   },
 };
+
+exports.ADVERTISING_SKIPRESTRICTION = {
+  method: 'advertising.policy',
+  params: {},
+  validationJsonPath: 'result.skipRestriction',
+  setMethod: resolveAtRuntime('manage_advertising.setSkipRestriction'),
+  setParams: resolveAtRuntime('value'),
+  setValidationJsonPath: 'result',
+  setContent: null,
+  event: 'advertising.onPolicyChanged',
+  eventValidationJsonPath: 'eventResponse.skipRestriction',
+  content: {
+    data: [
+      {
+        type: 'fixture',
+        validations: [
+          {
+            mode: 'staticContentValidation',
+            type: resolveAtRuntime('value'),
+            description: resolveAtRuntime(
+              'Validating that manage_advertising.setskipRestriction skipRestriction is {{value}}'
+            ),
+          },
+        ],
+      },
+    ],
+  },
+};
+
+exports.ADVERTISING_DEVICEATTRIBUTES = {
+  method: 'advertising.deviceAttributes',
+  params: {},
+  validationJsonPath: 'result',
+  content: {
+    data: [
+      {
+        type: 'fixture',
+        validations: [
+          {
+            mode: 'staticContentValidation',
+            type: {},
+            description: 'Validating advertising.deviceAttributes',
+          },
+        ],
+      },
+    ],
+  },
+};

@@ -31,7 +31,7 @@ Feature: SecondScreen
       Given we test the 'SECONDSCREEN_FRIENDLYNAME' getters and setters 'name' to 'Guest Room'
       When '3rd party app' registers for the 'Firebolt' event
       And '3rd party app' invokes the 'Firebolt' get API
-      And 1st party app invokes the 'Firebolt' API to set 'name' to 'Guest Room'
+      And 1st party app invokes the 'Firebolt' API to set value
       Then 'Firebolt' platform responds to '1st party app' set API
       When '3rd party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '3rd party app' get API

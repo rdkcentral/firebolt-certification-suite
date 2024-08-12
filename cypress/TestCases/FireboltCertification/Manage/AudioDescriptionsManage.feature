@@ -8,7 +8,7 @@ Feature: AudioDescriptions_Manage
    Scenario Outline: AudioDescriptions.enabled - Positive Scenario: <Scenario>
       Given we test the 'AUDIODESCRIPTIONS' getters and setters 'enabled' to '<Value>'
       When '1st party app' registers for the 'Firebolt' event
-      And 1st party app invokes the 'Firebolt' API to set 'enabled' to '<Value>'
+      And 1st party app invokes the 'Firebolt' API to set value
       Then 'Firebolt' platform responds to '1st party app' set API
       When '1st party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '1st party app' get API
@@ -22,7 +22,7 @@ Feature: AudioDescriptions_Manage
   @sdk @transport
    Scenario Outline: AudioDescriptions.enabled - Negative Scenario: <Scenario> expecting error
       Given we test the 'AUDIODESCRIPTIONS' getters and setters 'enabled' to '<Value>'
-      When 1st party app invokes the 'Firebolt' API to set 'enabled' to invalid '<Value>'
+      When 1st party app invokes the 'Firebolt' API to set invalid value
       And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
       Examples:
