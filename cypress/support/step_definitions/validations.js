@@ -201,19 +201,16 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
           );
         }
       }
+    } else {
+      cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
+      cy.validateLifecycleHistoryAndEvents(
+        appObject.getAppObjectState().state,
+        appId,
+        isEventsExpected
+      );
     }
   } catch (error) {
-    throw new Error(
-      `Following error occurred during custom validation: ${JSON.stringify(error.message)}`
-    );
-  }
-  if (!validationObject) {
-    cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
-    cy.validateLifecycleHistoryAndEvents(
-      appObject.getAppObjectState().state,
-      appId,
-      isEventsExpected
-    );
+    throw new Error(`Following error occurred during custom validation: ${JSON.stringify(error)}`);
   }
 });
 
