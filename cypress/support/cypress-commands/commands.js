@@ -1296,6 +1296,7 @@ Cypress.Commands.add(
     contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
     method = method.includes('_') ? method.split('_')[1] : method;
     if (expectingError) {
+      // Retriving the error content from the environment variable if it exists; otherwise, using the key as-is
       if (
         UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON, false) &&
         UTILS.getEnvVariable(CONSTANTS.ERROR_CONTENT_VALIDATIONJSON)[errorContent]
@@ -1337,7 +1338,7 @@ Cypress.Commands.add('getRuntimeFireboltCallObject', (sdk) => {
     // Checking the `runtime` env variable created and it has 'fireboltCall' field, else failing the test.
     if (
       UTILS.getEnvVariable(CONSTANTS.RUNTIME, false) &&
-      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).hasOwnProperty('fireboltCall') &&
+      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).hasOwnProperty(CONSTANTS.FIREBOLTCALL) &&
       UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).fireboltCall
     ) {
       return UTILS.getEnvVariable(CONSTANTS.RUNTIME).fireboltCall;

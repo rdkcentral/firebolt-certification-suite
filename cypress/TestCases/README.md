@@ -34,7 +34,7 @@ Within the `cypress/TestCases` folder we have the following sub-folders:
 - FireboltCertification: Contains core and manage feature files.
 - Sanity: Contains core and manage sanity tests.
 
-## Dynamic Calls
+## Dynamic Firebolt Call
 
 ### Background
 
@@ -174,10 +174,6 @@ returns: 1.5
 - '(.+)' registers for the '(.+)' event
 - '(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?
 - '(.+)' platform (triggers|does not trigger) '(.\*?)' event(?: with '(.+)')?
-
-### Versatility of Firebolt Objects as JS Files
-
-- As shown in [Examples 1: Testcase 2](#usage), dynamic firebolt call objects provide ability to call multiple api calls using single object.
 
 ### Usage
 

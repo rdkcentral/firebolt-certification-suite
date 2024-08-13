@@ -68,12 +68,12 @@ Given(
       const context = {};
       const expected = invalidValue ? CONSTANTS.ERROR : CONSTANTS.RESULT;
       let action = CONSTANTS.ACTION_CORE.toLowerCase();
-      if (UTILS.fireboltCallObjectHasField(fireboltCallObject, 'setMethod')) {
+      if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.SET_METHOD)) {
         setMethod = UTILS.resolveRecursiveValues(fireboltCallObject.setMethod);
       }
 
       // Extracting the parameter from the fireboltCall object
-      if (UTILS.fireboltCallObjectHasField(fireboltCallObject, 'setParams')) {
+      if (fireboltCallObject?.setParams) {
         if (
           fireboltCallObject.setParams &&
           typeof fireboltCallObject.setParams === CONSTANTS.TYPE_OBJECT
@@ -89,6 +89,8 @@ Given(
         } else {
           setParams = { value: UTILS.resolveRecursiveValues(fireboltCallObject.setParams) };
         }
+      } else {
+        setParams = {};
       }
 
       // Splitting the method name if it contains an underscore and using the first part to determine the action that decides sdk.
@@ -135,7 +137,7 @@ Given(/'(.+)' invokes the '(.+)' get API$/, async (appId, sdk) => {
     if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.METHOD)) {
       method = UTILS.resolveRecursiveValues(fireboltCallObject.method);
     }
-    let param = fireboltCallObject.params
+    const param = fireboltCallObject.params
       ? UTILS.resolveRecursiveValues(fireboltCallObject.params)
       : {};
 
@@ -247,7 +249,7 @@ Given(
     // Retrieving the dynamic firebolt call object from the env variable
     cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
       let method, validationJsonPath, contentObject;
-      const setOrGetMethod = methodType === CONSTANTS.SET ? 'setMethod' : 'method';
+      const setOrGetMethod = methodType === CONSTANTS.SET ? CONSTANTS.SET_METHOD : CONSTANTS.METHOD;
 
       // Verifying that the expected field exists in the fireboltCall object; if it does not, the step will fail.
       if (UTILS.fireboltCallObjectHasField(fireboltCallObject, setOrGetMethod)) {
@@ -256,7 +258,7 @@ Given(
       }
 
       const setOrGetValidationJsonPath =
-        methodType === CONSTANTS.SET ? 'setValidationJsonPath' : 'validationJsonPath';
+        methodType === CONSTANTS.SET ? CONSTANTS.SET_VALIDATIONPATH : CONSTANTS.VALIDATIONJSONPATH;
       if (
         UTILS.fireboltCallObjectHasField(
           fireboltCallObject,
@@ -270,7 +272,10 @@ Given(
         );
       }
 
-      const setOrGetContentObject = methodType === CONSTANTS.SET ? 'setContent' : 'content';
+      const setOrGetContentObject =
+        methodType === CONSTANTS.SET
+          ? CONSTANTS.SET_CONTENT
+          : CONSTANTS.CONTENT.toLocaleLowerCase();
       if (
         UTILS.fireboltCallObjectHasField(fireboltCallObject, setOrGetContentObject, errorContent)
       ) {
@@ -318,7 +323,9 @@ Given(
       }
 
       // Verifying that the expected field exists in the fireboltCall object; if it does not, the step will fail.
-      if (UTILS.fireboltCallObjectHasField(fireboltCallObject, 'eventValidationJsonPath')) {
+      if (
+        UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.EVENT_VALIDATIONJSONPATH)
+      ) {
         // Checking whether the value is a function and invoking if it is, otherwise using it as is.
         eventValidationJsonPath = UTILS.resolveRecursiveValues(
           fireboltCallObject.eventValidationJsonPath
