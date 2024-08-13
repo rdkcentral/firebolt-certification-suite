@@ -70,18 +70,14 @@ Given(
             ) {
               if (contentObject && contentObject.data) {
                 for (let i = 0; i < contentObject.data.length; i++) {
+                  const type = contentObject.data[i].validations[0].type;
                   if (
-                    contentObject.data[i].validations[0].mode == CONSTANTS.DEVICE_CONTENT_VALIDATION
+                    Cypress.env(CONSTANTS.DEVICE_DATA) &&
+                    Cypress.env(CONSTANTS.DEVICE_DATA).hasOwnProperty(type)
                   ) {
-                    const type = contentObject.data[i].validations[0].type;
-                    if (
-                      Cypress.env(CONSTANTS.DEVICE_DATA) &&
-                      Cypress.env(CONSTANTS.DEVICE_DATA).hasOwnProperty(type)
-                    ) {
-                      contentObject.data[i].validations[0].type = Cypress.env(
-                        CONSTANTS.DEVICE_DATA
-                      )[type];
-                    }
+                    contentObject.data[i].validations[0].type = Cypress.env(CONSTANTS.DEVICE_DATA)[
+                      type
+                    ];
                   }
                 }
               }
