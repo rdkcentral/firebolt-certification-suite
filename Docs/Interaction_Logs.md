@@ -1,17 +1,22 @@
 ## Interaction Log service
+
 ### Background -
-The interaction log service will notify all the Firebolt calls getting invoked in the platform whether the Firebolt call is made manually by any action or internally made by any application or service. Whenever the platform identifies a firebolt call, the interaction log service will notify that.
+The interaction log service captures the various firebolt calls invoked during a test execution. This service will notify all the Firebolt calls invoked in the platform if the Firebolt call is called manually by any action or internally called by any application or service.
 ### Uses -
-The Interaction log service is essential for tracking method calls. When a method is called, it internally triggers/invokes other Firebolt methods. This service can be used to obtain the list of internal method calls.
+The Interaction log service is essential for tracking all the Firebolt calls made by the platform. When a method is called, it may internally trigger/invoke other Firebolt methods. This service can obtain the list of internal method calls and validate them if needed.
 ### Configurations -
 #### Framework side - fcs/config module side
-Below are the different ways to start the interaction service
-* Using `interactionsMetrics` flag. This can be enabled from the cli command to start the service
-* Using glue codes we can able to start and stop the interaction service and then using validation glue able to validate the obtained logs.
-* Using Before operation, able to start the service by adding `interactionsMetrics` to true in [beforeOperation](#before-operation). 
+FCS will be using pubsub communication to receive interaction logs. FCS will subscribe to `_fbinteractions` suffixed topic. Interaction logs will be received by this topic and get stored in an array.<br>
 
-#### Device side -
-Platform should have the support of interactonaction logging service. The way interactionlogs will be fetched from device differs on platform and that can be handled through config module.
+Below are the different ways to start the interaction service
+* Using `interactionsMetrics` flag. By default, this is false. This can be enabled from the cli command to start the service
+* Using glue codes, we can start and stop the interaction service for capturing the logs and then using validation glue, validate these logs. [Reference](#glue-codes-used-for-interaction-service)
+* Using Before operation, interaction service can be started by adding `interactionsMetrics = true` in [beforeOperation](#before-operation).
+
+Interactions logs will be stored in `fbInteractionLogs` env variable as an array.
+### Device side -
+* Device should have the support of interaction logging service.<br>
+* By default FCS uses pubsub communication, the device should have the ability to use pubsub communication to send the interaction logs to the `_fbinteractions` suffixed topic. If the device doesn't have this ability, then the respective implementation of using pubsub/any other communication to send the logs has to be implemented in both device and FCS/config module.
 ## Implementations -
 ### Glue codes used for interaction service
 * Given Interactions collection process is (initiated|stopped)  [here](/cypress/support/step_definitions/validations.md#interactions-collection-process-is-initiatedstopped)
