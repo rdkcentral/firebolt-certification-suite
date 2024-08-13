@@ -3,6 +3,7 @@ Feature: VoiceGuidance_Manage
 
     Background: Launch FCA for 'VoiceGuidance'
         Given the environment has been set up for 'VoiceGuidance' tests
+        And 3rd party 'certification' app is launched
 
     @sdk @transport
     Scenario Outline: Voiceguidance.<Method> - Positive Scenario: <Scenario>

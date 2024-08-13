@@ -3,6 +3,7 @@ Feature: Privacy_Manage
 
    Background: Launch FCA for 'Privacy'
       Given the environment has been set up for 'Privacy' tests
+      And 3rd party 'certification' app is launched
 
    @sdk @transport
    Scenario Outline: Privacy.<Method> - Positive Scenario: <Scenario>

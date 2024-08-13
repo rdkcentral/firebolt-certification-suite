@@ -3,6 +3,7 @@ Feature: AudioDescriptions_Manage
 
    Background: Launch FCA for 'AudioDescriptions'
       Given the environment has been set up for 'AudioDescriptions' tests
+      And 3rd party 'certification' app is launched
 
    @sdk @transport
    Scenario Outline: AudioDescriptions.enabled - Positive Scenario: <Scenario>

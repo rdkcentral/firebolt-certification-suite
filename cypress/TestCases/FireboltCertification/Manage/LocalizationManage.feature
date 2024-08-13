@@ -3,6 +3,7 @@ Feature: Localization_Manage
 
     Background: Launch FCA for 'Localization'
         Given the environment has been set up for 'Localization' tests
+        And 3rd party 'certification' app is launched
 
     @sdk @transport
     Scenario Outline: Localization.<Scenario> - Positive Scenario: <Scenario>
