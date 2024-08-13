@@ -353,6 +353,7 @@ module.exports = {
     PERFORMANCE_THRESHOLD_VALIDATOR: 'performance.fetchPerformanceThreshold',
     CREATE_MARKER: 'performance.createMarker',
     UNLOADAPP: 'fcs.unloadApp',
+    FETCHDEVICEDETAILS: 'fcs.fetchDeviceDetails',
   },
   PERFORMANCE_METRICS: 'performanceMetrics',
   RESPONSE: 'Response: ',
