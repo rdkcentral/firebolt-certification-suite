@@ -64,13 +64,26 @@ Given(
           const expectingError = item.expectingError;
           const isNullCase = item.isNullCase || false;
 
-          for (let i = 0; i < contentObject.data.length; i++) {
-            if (contentObject.data[i].validations[0].mode == CONSTANTS.DEVICE_CONTENT_VALIDATION) {
-              const type = contentObject.data[i].validations[0].type;
-              if (Cypress.env(CONSTANTS.DEVICE_DATA).hasOwnProperty(type)) {
-                contentObject.data[i].validations[0].type = Cypress.env(CONSTANTS.DEVICE_DATA)[
-                  type
-                ];
+          if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
+            if (
+              CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES.includes(Cypress.env(CONSTANTS.TEST_TYPE))
+            ) {
+              if (contentObject && contentObject.data) {
+                for (let i = 0; i < contentObject.data.length; i++) {
+                  if (
+                    contentObject.data[i].validations[0].mode == CONSTANTS.DEVICE_CONTENT_VALIDATION
+                  ) {
+                    const type = contentObject.data[i].validations[0].type;
+                    if (
+                      Cypress.env(CONSTANTS.DEVICE_DATA) &&
+                      Cypress.env(CONSTANTS.DEVICE_DATA).hasOwnProperty(type)
+                    ) {
+                      contentObject.data[i].validations[0].type = Cypress.env(
+                        CONSTANTS.DEVICE_DATA
+                      )[type];
+                    }
+                  }
+                }
               }
             }
           }
