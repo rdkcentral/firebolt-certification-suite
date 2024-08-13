@@ -9,7 +9,7 @@ Fixtures are designed to load a fixed set of data located in a file.
 
 ## Directory strucute:
 Within the `cypress/fixtures` folder we have the following sub-folders:
-- fireboltCalls: Contains FireboltCall keys which is used to make firebolt calls to the 1st party app or 3rd party app.
+- fireboltCalls: Contains fireboltCall objects which is used to make a API call and to validate the response .
 - fireboltMocks: Contains FireboltMock keys which is used to override the default response or set the responses.
 - modules: Contains json files in the format of <moduleName.json> where required content/parameters are present.
 - objects: 
@@ -28,59 +28,135 @@ It contains two json files as : errorContent.json and errorSchemaObject.json. Er
   **lifecycleHistorySchema.json**: Contains lifecycle schema for appID and lifecycle history.
 - versions: Contains different versions of firebolt.json includes versioning, capabilities and openrpc.
 
+
 ### fireboltCalls
+
 fireboltCalls object has two types as shown below.
 
-1. For making API Calls
-   - method - Name of the API to make a API call
-   - params - Represent the parameters to be sent for a firebolt call.
-   - context - Represent the data that needs to be stored in api/event object that helps to search specific object in a global list.
-   - expected - Determines whether we expect a "result" or an "error."
+#### To make API Call
 
-   Ex:
-   ``` 
-   "KEY_NAME":{
-      "method": "manage_audiodescriptions.setEnabled",
-		  "params": "INTEGER123",
-      "context": "noContext",
-      "expected": "error"
-    }
-   ```
+##### Format
 
-2. For content validation
-   - method or event - Name of the API or Event, which is used to extract the response object from global list for content validation.
-   - validationJsonPath - Represent the JSON path used to obtain a specific value.
-   - context - Represent the data that needs to be stored in api/event object that helps to search specific object in a global list.
-   - content - Represent the expected value used for validating against a firebolt api response.
-   - expectingError - Determines whether we are performing result or error content validation.
-   Ex:
-   ``` 
-   "ENABLE_AUDIODESCRIPTION_WITH_INTEGER_PARAMETER":{
-      "method": "accessibility.closedCaptionsSettings",
-      "context": "noContext",
-      "validationJsonPath": "result.enabled",
-      "content": "TRUE"
-    }
+```
+"KEY_NAME":{
+  "method": "",
+	"params": "",
+  "context": "",
+  "expected": ""
+}
+```
 
-    "ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_DISABLED": {
-      "event": "accessibility.onClosedCaptionsSettingsChanged",
-      "context": "noContext",
-      "validationJsonPath": "eventResponse.enabled",
-      "content": "FALSE"
-    }
+| **Param** | **Definition**                                                                                                        | **Example**                          |
+| --------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| method    | Name of the API to make a API call                                                                                    | accessibility.closedCaptionsSettings |
+| params    | Represent the parameters to be sent for a firebolt call.                                                              | {}                                   |
+| context   | Represent the data that needs to be stored in api/event object that helps to search specific object in a global list. | {}                                   |
+| expected  | Determine whether expecting for an error or result                                                                    | `result` or `error`                  |
 
-    "ONCLOSEDCAPTIONSSETTINGSCHANGED": {
-      "event": "accessibility.onClosedCaptionsSettingsChanged",
-      "validationJsonPath": "eventResponse",
-      "content": "NULL",
-      "expectingError": false
-    }
-   ```
+##### Examples:
 
-  Note: 
-    - The fields listed below are optional; if any of them are missing, default values listed below will be added during runtime.
-      - context  - {}
-      - params - {}
-      - validationJsonPath - "result"
-      - content - null
-    - If the firebolt validation object has a'method' field, it validates the method; otherwise, it validates the event.
+**Example 1:**
+
+```
+"FETCH_ACCOUNT_ID":{
+  "method": "account.id"
+}
+```
+
+**Example 2:**
+`ADVERTISING_INTEGER_PARAM` is a key name and this value is present in `modules/advertising.json` file
+
+- `ADVERTISING_INTEGER_PARAM` is split into two parts `ADVERTISING` and `INTEGER_PARAM`.
+- `ADVERTISING` refers to file name and `INTEGER_PARAM` is a object key name present inside advertising file.
+
+```
+"GET_CONFIG_WITH_INTEGER_PARAMETER":{
+  "method": "advertising.config",
+  "params": "ADVERTISING_INTEGER_PARAM",
+  "expected": "error"
+}
+```
+
+#### For content validation
+
+##### Format
+
+```
+"KEY_NAME":{
+  "method": "",
+	"validationJsonPath": "",
+  "context": "",
+  "content": ""
+}
+
+ or
+
+"KEY_NAME":{
+  "event": "",
+	"validationJsonPath": "",
+  "context": "",
+  "content": ""
+}
+```
+
+| **Param**          | **Definition**                                                                                                        | **Example**                          |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| method or event    | Name of the API or Event, which is used to extract the response object from global list for content validation.       | accessibility.closedCaptionsSettings |
+| validationJsonPath | Path of the response value that needs to be validated                                                                 | result.enabled                       |
+| context            | Represent the data that needs to be stored in api/event object that helps to search specific object in a global list. | {}                                   |
+| content            | Represent the expected value used for validating against a firebolt api respo                                         | true                                 |
+| expectingError     | Determines whether we are performing result or error content validation.                                              | true                                 |
+
+##### Examples:
+
+**Example 1:**
+
+- FCS has default data file, which contains the data that can be used across feature files. Ex: `TRUE` value is present in [defaultData.json](./defaultTestData.json)
+
+```
+"ENABLE_AUDIODESCRIPTION_WITH_INTEGER_PARAMETER":{
+  "method": "accessibility.closedCaptionsSettings",
+  "context": "noContext",
+  "validationJsonPath": "result.enabled",
+  "content": "TRUE"
+}
+```
+
+**Example 2:**
+
+- FCS has default data file, which contains the data that can be used across feature files. Ex: `FALSE` value is present in [defaultData.json](./defaultTestData.json)
+
+```
+"ONCLOSEDCAPTIONSSETTINGSCHANGED_WITH_DISABLED": {
+  "event": "accessibility.onClosedCaptionsSettingsChanged",
+  "context": "noContext",
+  "validationJsonPath": "eventResponse.enabled",
+  "content": "FALSE"
+}
+```
+
+**Example 3:**
+
+- `ACCOUNT_ID` content object present inside `fixtures/objects/validationObjects/account.json` file.
+- `ACCOUNT_ID` is split into two parts `ACCOUNT` and `ID`.
+- `ACCOUNT` refers to a file name and `ID` is a object key name present inside `account.json` file.
+
+```
+"ACCOUNT_ID": {
+  "method": "account.id",
+  "validationJsonPath": "result",
+  "content": "ACCOUNT_ID"
+}
+
+```
+
+**Note:** 
+The fields listed below are optional; if any of them are missing, default values listed below will be added during runtime. 
+```
+- context - {} 
+- params - {} 
+- validationJsonPath - "result" 
+- content - null 
+```
+If the firebolt validation object has a'method' field, it validates the method; otherwise, it validates the event.
+

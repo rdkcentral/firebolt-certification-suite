@@ -43,7 +43,7 @@ FCS has the current support to create firebolt calls with these mentioned parame
 ### Firebolt object
 
 - Firebolt objects can be added in Javascript files located in the `cypress/fixtures/fireboltCalls` folder. Ex: `cypress/fixtures/fireboltCalls/accessibility.js`
-- Having the support to override the firebolt objects from the config moduleby giving a same key.
+- Having the support to override the firebolt objects from the config module by giving a same key.
 
 #### Sample Firebolt Object Format
 
@@ -284,3 +284,12 @@ exports.CLOSED_CAPTIONS_SETTINGS = {
             | Scenario          | Method   | Value  | Error               |
             | Set enabled-test  | enabled  | test   | INVALID_TYPE_PARAMS |
 ```
+
+## Static Firebolt Call Object
+FCS has the support to create static firebolt calls object with these mentioned parameters [Methods, Method Parameters, Content] to make a API call and to validate the response.
+
+### Firebolt call object
+
+- Firebolt objects can be added in JSON files located in the `cypress/fixtures/fireboltCalls` folder. Ex: `cypress/fixtures/fireboltCalls/accessibility.json`
+
+**[More Info](../fixtures/README.md#fixtures)**
