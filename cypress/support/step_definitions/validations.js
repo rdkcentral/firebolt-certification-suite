@@ -68,9 +68,16 @@ Given(
             if (
               CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES.includes(Cypress.env(CONSTANTS.TEST_TYPE))
             ) {
+              let type;
               if (contentObject && contentObject.data) {
                 for (let i = 0; i < contentObject.data.length; i++) {
-                  const type = contentObject.data[i].validations[0].type;
+                  if (
+                    contentObject.data[i].validations &&
+                    contentObject.data[i].validations[0] &&
+                    contentObject.data[i].validations[0].type
+                  ) {
+                    type = contentObject.data[i].validations[0].type;
+                  }
                   if (
                     Cypress.env(CONSTANTS.DEVICE_DATA) &&
                     Cypress.env(CONSTANTS.DEVICE_DATA).hasOwnProperty(type)
