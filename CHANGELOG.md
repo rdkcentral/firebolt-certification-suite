@@ -1,3 +1,10 @@
+# [1.0.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2024-08-14)
+
+
+### Features
+
+* fastrack dev ([#194](https://github.com/rdkcentral/firebolt-certification-suite/issues/194)) ([ada0108](https://github.com/rdkcentral/firebolt-certification-suite/commit/ada01087d347be68f0abb4527d60580efd35cd05))
+
 # 1.0.0-dev.1 (2024-08-14)
 
 
