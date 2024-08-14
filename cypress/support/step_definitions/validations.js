@@ -64,9 +64,10 @@ Given(
           const expectingError = item.expectingError;
           const isNullCase = item.isNullCase || false;
 
-          if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
+          if (CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES.includes(Cypress.env(CONSTANTS.TEST_TYPE))) {
             if (
-              CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES.includes(Cypress.env(CONSTANTS.TEST_TYPE))
+              Cypress.env(CONSTANTS.DEVICE_DATA) &&
+              Object.keys(Cypress.env(CONSTANTS.DEVICE_DATA)).length > 0
             ) {
               let type;
               if (contentObject && contentObject.data) {
@@ -78,10 +79,7 @@ Given(
                   ) {
                     type = contentObject.data[i].validations[0].type;
                   }
-                  if (
-                    Cypress.env(CONSTANTS.DEVICE_DATA) &&
-                    Cypress.env(CONSTANTS.DEVICE_DATA).hasOwnProperty(type)
-                  ) {
+                  if (Cypress.env(CONSTANTS.DEVICE_DATA).hasOwnProperty(type)) {
                     contentObject.data[i].validations[0].type = Cypress.env(CONSTANTS.DEVICE_DATA)[
                       type
                     ];

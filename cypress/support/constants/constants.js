@@ -190,7 +190,6 @@ module.exports = {
   CUSTOM: 'custom',
   VALIDATION_FUNCTION: 'validationFunction',
   NOT_SUPPORTED: 'NOT_SUPPORTED',
-  FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG: 'fetch_device_details_dynamically',
   FIRST_PARTY_APPID: 'firstPartyAppId',
   GENERATE_HTML_REPORT: true,
   GETEVENTRESPONSE_ERROR_MSG: 'Received error: Requested listener not found',
