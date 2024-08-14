@@ -446,9 +446,25 @@ While validating, if a key is present in both fcs-validation jsons (eg: cypress/
         ]
 }
 
-# Device Content Validation
+# Dynamic Content Validation
 
-For deviceContentValidation, the source of truth is fetched from an external API, which is dependent on the configuration module or platform on which we are testing. For the validation part, an override module called "fetchDeviceDetails" is expected to be in configModule to fetch the device details with the corresponding APIs mentioned for each config. DeviceId is passed from fcs to this override module as the only parameter, which is later used for fetching device details in the "configHelper" module.
+For deviceContentValidation, the source of truth is fetched from an external API, which is dependent on the configuration module or platform on which we are testing. For the validation part, an override module called "fetchDeviceDetails" is expected to be in configModule to fetch the device details with the corresponding Urls mentioned for each config to fetch the data. DeviceId is passed from fcs to this override module as the only parameter, which is later used for fetching device details in the "configHelper" module.
+
+The fetched data from configHelper is returned to corresponding configModule where the required data is extracted and saved to an env called "DEVICE_DATA". The data from configHelper is saved to this env as an object with the key names as the validation-key.
+Initially, it maps to required object with the key as "deviceMac", if the device data is having multiple objects.
+Later, for eg:, if deviceId and deviceType values are to be extracted, we will save the value into "DEVICEID" and "DEVICE_TYPE" keynames, as these are the keynames used in the validationObject.
+For eg:, if activeDevicedata is the device response, the data extraction will be as follows :
+
+#### Format
+
+```
+    if (activeDevicedata.id == deviceId) {
+      extractedData.DEVICEID = activeDevicedata.id;
+      extractedData.DEVICE_TYPE = activeDevicedata.data.deviceType;
+    }
+    Cypress.env(CONSTANTS.DEVICE_DATA, extractedData);
+```
+
 
 ## Error Content Validation
 
