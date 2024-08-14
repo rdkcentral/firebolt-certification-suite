@@ -210,7 +210,7 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
       );
     }
   } catch (error) {
-    throw new Error(`Following error occurred during custom validation: ${JSON.stringify(error)}`);
+    throw new Error(`Error occurred during validation: ${JSON.stringify(error)}`);
   }
 });
 
