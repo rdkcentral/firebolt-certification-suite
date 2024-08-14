@@ -1,3 +1,10 @@
+# [1.1.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.1.0-dev.1...v1.1.0-dev.2) (2024-08-14)
+
+
+### Bug Fixes
+
+* remove bad versions from changelog ([b7cff58](https://github.com/rdkcentral/firebolt-certification-suite/commit/b7cff58bab6f9b0b795f77ceefd4d070412868a0))
+
 # [1.1.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.0.0...v1.1.0-dev.1) (2024-08-14)
 
 
