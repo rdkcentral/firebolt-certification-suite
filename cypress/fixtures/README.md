@@ -7,15 +7,15 @@ Fixtures are designed to load a fixed set of data located in a file.
 -  If a key is present in the ConfigModule but not in FCS, The key from the ConfigModule is copied over and used.
 -  If a key is present in both FCS and the ConfigModule, the ConfigModule's key will override or merge with precedence given to the ConfigModule.
 
-## Directory strucute:
-Within the `cypress/fixtures` folder we have the following sub-folders:
-- fireboltCalls: Contains fireboltCall objects which is used to make a API call and to validate the response .
-- fireboltMocks: Contains FireboltMock keys which is used to override the default response or set the responses.
-- modules: Contains json files in the format of <moduleName.json> where required content/parameters are present.
+## Directory structure:
+Within the `cypress/fixtures` folder, we have the following sub-folders:
+- fireboltCalls: Contains fireboltCall objects which are used to make an API call and to validate the response .
+- fireboltMocks: Contains FireboltMock keys which are used to override the default response or set the responses.
+- modules: Contains JSON files in the format of <moduleName.json> where required content/parameters are present.
 - objects: 
-  **validationObjects**: Contains json files where required validation json objects are present. 
+  **validationObjects**: Contains JSON files where required validation JSON objects are present. 
   **errorObjects**: Contains error objects for validating negative scenario parameters.
-It contains two json files as : errorContent.json and errorSchemaObject.json. Error response is validated against the schema present in errorSchemaObject.json. errorContent.json contains error Messages and error Codes for different error types.
+It contains two JSON files as : errorContent.json and errorSchemaObject.json. Error response is validated against the schema present in errorSchemaObject.json. errorContent.json contains error Messages and error Codes for different error types.
   **moduleReqId**: Contains scenario name and requirement ID for test cases.
 - apiObjectContext.json: Contains the context value.
 - censorData.json: Contains methods and fields that need to be censored..
@@ -48,7 +48,7 @@ fireboltCalls object has two types as shown below.
 
 | **Param** | **Definition**                                                                                                        | **Example**                          |
 | --------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| method    | Name of the API to make a API call                                                                                    | accessibility.closedCaptionsSettings |
+| method    | Name of the API to make an API call                                                                                    | accessibility.closedCaptionsSettings |
 | params    | Represent the parameters to be sent for a firebolt call.                                                              | {}                                   |
 | context   | Represent the data that needs to be stored in api/event object that helps to search specific object in a global list. | {}                                   |
 | expected  | Determine whether expecting for an error or result                                                                    | `result` or `error`                  |
@@ -137,9 +137,9 @@ fireboltCalls object has two types as shown below.
 
 **Example 3:**
 
-- `ACCOUNT_ID` content object present inside `fixtures/objects/validationObjects/account.json` file.
-- `ACCOUNT_ID` is split into two parts `ACCOUNT` and `ID`.
-- `ACCOUNT` refers to a file name and `ID` is a object key name present inside `account.json` file.
+- `ACCOUNT_ID` content object is present inside the `fixtures/objects/validationObjects/account.json` file.
+- `ACCOUNT_ID` is split into two parts: `ACCOUNT` and `ID`.
+- `ACCOUNT` refers to a file name, and `ID` is an object key name present inside the `account.json` file.
 
 ```
 "ACCOUNT_ID": {

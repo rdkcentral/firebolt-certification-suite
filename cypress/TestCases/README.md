@@ -168,7 +168,7 @@ returns: 1.5
 
 ### Supported glue codes [[here]](../support//step_definitions/dynamicCalls.md)
 
-- we test the '(.+)' getters and setters(?: '(._?)'(?: to '(._?)')?)?
+- we test the '(.+)' getters and setters(?: '(.*?)'(?: to '(.*?)')?)?
 - 1st party app invokes the '(.+)' API to set( invalid)? value
 - '(.+)' invokes the '(.+)' get API
 - '(.+)' registers for the '(.+)' event

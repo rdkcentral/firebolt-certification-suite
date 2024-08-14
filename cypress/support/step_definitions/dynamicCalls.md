@@ -1,6 +1,14 @@
 # DynamicCallsGlue
 
-## we test the '(.+)' getters and setters(?: '(._?)'(?: to '(._?)')?)?
+## we test the '(.+)' getters and setters(?: '(.*?)'(?: to '(.*?)')?)?
+- Extracting the fireboltCall object based on the key provided from the testcase. This object is saving in to the `runtime` environment variable along with `attribute` and `value`.
+
+**Note:** This glue is mandatory to add in the testcase before using any other dynamic runtime steps.
+
+### Examples:
+
+- `Given we test the 'CLOSED_CAPTIONS' getters and setters`
+- `Given we test the 'CLOSED_CAPTIONS' getters and setters 'enabled' to 'true'`
 
 ### Params:
 
@@ -9,8 +17,6 @@
 | **_key_**       | key name of the fireboltCall setter/getter data.                            |
 | **_attribute_** | The attribute to which the value is going to be set (ex. fontFamily).       |
 | **_value_**     | The value used by the set method to set the value (ex. monospaced_sanserif) |
-
-- Extracting the fireboltCall object based on the key provided from the testcase. This object is saving in to the `runtime` environment variable along with `attribute` and `value`.
 
 **Format:** Runtime environment variable having the format as shown below
 
@@ -21,13 +27,6 @@ runtime: {
  value: '',
 }
 ```
-
-**Note:** This glue is mandatory to add in the testcase before other steps.
-
-### Examples:
-
-- `Given we test the 'CLOSED_CAPTIONS' getters and setters`
-- `Given we test the 'CLOSED_CAPTIONS' getters and setters 'enabled' to 'true'`
 
 ## 1st party app invokes the '(.+)' API to set( invalid)? value
 
