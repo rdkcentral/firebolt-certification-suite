@@ -13,9 +13,7 @@ Within the `cypress/fixtures` folder, we have the following sub-folders:
 - fireboltMocks: Contains FireboltMock keys which are used to override the default response or set the responses.
 - modules: Contains JSON files in the format of <moduleName.json> where required content/parameters are present.
 - objects: 
-  **validationObjects**: Contains JSON files where required validation JSON objects are present. 
-  **errorObjects**: Contains error objects for validating negative scenario parameters.
-It contains two JSON files as : errorContent.json and errorSchemaObject.json. Error response is validated against the schema present in errorSchemaObject.json. errorContent.json contains error Messages and error Codes for different error types.
+  **validationObjects**: Contains json files where required validation json objects are present. 
   **moduleReqId**: Contains scenario name and requirement ID for test cases.
 - apiObjectContext.json: Contains the context value.
 - censorData.json: Contains methods and fields that need to be censored..
@@ -25,6 +23,7 @@ It contains two JSON files as : errorContent.json and errorSchemaObject.json. Er
 - regexformats.json: Contains constants used for regex validation.
 - schemas: 
   **errorSchema.json**: Contains error schemas for SDK and Transport mode which include fields for error codes, messages and additional data.
+  **errorContentObjects.json**: Contains default error objects supported in FCS.
   **lifecycleHistorySchema.json**: Contains lifecycle schema for appID and lifecycle history.
 - versions: Contains different versions of firebolt.json includes versioning, capabilities and openrpc.
 

@@ -378,6 +378,7 @@ module.exports = {
   SCHEMA_VALIDATION_STATUS: 'schemaValidationStatus',
   SCHEMA_VALIDATION_STATUS_CODE: ['PASS', 'FAIL', 'SKIPPED', 'PENDING'],
   SDK_VERSION: 'sdkVersion',
+  SDK_REPORT_VERSION: 'SDK Version',
   SEARCH: 'search',
   SET: 'set',
   SET_APP_STATE: 'Application state set to ',
