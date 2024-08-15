@@ -1,3 +1,10 @@
+# [1.1.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.1.0-dev.3...v1.1.0-dev.4) (2024-08-15)
+
+
+### Features
+
+* [FCS] Setter/Getter Code Enhance and Optimize ([#189](https://github.com/rdkcentral/firebolt-certification-suite/issues/189)) ([79df848](https://github.com/rdkcentral/firebolt-certification-suite/commit/79df848ae4c9de0af02d952e9aa2f48826a1f90e))
+
 # [1.1.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.1.0-dev.2...v1.1.0-dev.3) (2024-08-15)
 
 
