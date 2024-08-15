@@ -1,3 +1,10 @@
+# [1.1.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.1.0-dev.2...v1.1.0-dev.3) (2024-08-15)
+
+
+### Bug Fixes
+
+* undefined validation object fix ([#192](https://github.com/rdkcentral/firebolt-certification-suite/issues/192)) ([37de691](https://github.com/rdkcentral/firebolt-certification-suite/commit/37de691497af97f5de46afd3ddffb0f52899ce79))
+
 # [1.1.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.1.0-dev.1...v1.1.0-dev.2) (2024-08-14)
 
 
