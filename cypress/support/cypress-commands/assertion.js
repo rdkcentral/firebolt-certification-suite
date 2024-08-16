@@ -272,7 +272,6 @@ Cypress.Commands.add('errorNotUndefinedCheck', (response) => {
  * cy.errorNullCheck({"result":"Living room","error": null}, true, true)
  */
 Cypress.Commands.add('errorNullCheck', (response, errorExpected, isNullCheckSkipped) => {
-  console.log('errorNullCheck', response, errorExpected, isNullCheckSkipped);
   const validationPoint = CONSTANTS.ERROR_NULL_CHECK;
   let validationStatus = CONSTANTS.PASS;
   let message = '';
