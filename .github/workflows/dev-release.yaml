@@ -1,0 +1,15 @@
+name: Dev Release to GitHub
+
+on:
+  push:
+    branches:
+      - 'dev'
+  workflow_dispatch: 
+
+jobs:
+  call-release-workflow:
+    uses: ./.github/workflows/release.yaml
+    with:
+      branch: 'dev'
+    secrets:
+      SEMANTIC_RELEASE_BOT_PAT: ${{ secrets.SEMANTIC_RELEASE_BOT_PAT }}
