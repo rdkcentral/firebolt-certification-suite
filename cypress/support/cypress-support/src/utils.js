@@ -989,7 +989,7 @@ function resolveRecursiveValues(input) {
   }
 }
 
-/*
+/**
  * @module utils
  * @function fireboltCallObjectHasField
  * @description A function to verify if the provided field is present in the object, and to fail the step if the field is missing.
