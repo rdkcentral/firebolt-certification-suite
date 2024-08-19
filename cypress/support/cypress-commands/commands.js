@@ -727,6 +727,17 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
   }
+  // Initiating the Interaction service to listening for interaction logs when interactionsMetrics is set to true in beforeOperation object.
+  else if (
+    beforeOperation.hasOwnProperty(CONSTANTS.INTERACTIONS_METRICS) &&
+    beforeOperation.interactionsMetrics === true
+  ) {
+    cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
+      if (response) {
+        Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
+      }
+    });
+  }
 });
 
 Cypress.Commands.add('parsedMockData', (beforeOperation) => {
@@ -1434,4 +1445,60 @@ Cypress.Commands.add('getRuntimeFireboltCallObject', (sdk) => {
   } else {
     fireLog.assert(false, `${sdk} SDK not Supported`);
   }
+});
+
+/**
+ * @module commands
+ * @function startOrStopInteractionsService
+ * @description To start or stop firebolt interactions collection service in device by passing appropriate intent to designated handler
+ * @param {String} action - initiated or stopped
+ * @example
+ * cy.startOrStopInteractionsService('initiated)
+ * cy.startOrStopInteractionsService('stopped')
+ */
+Cypress.Commands.add('startOrStopInteractionsService', (action) => {
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETFIREBOLTINTERACTIONSHANDLER,
+    params: {
+      trigger: action == CONSTANTS.INITIATED ? CONSTANTS.START : CONSTANTS.STOP,
+      optionalParams: '',
+    },
+    task: CONSTANTS.TASK.FIREBOLTINTERACTIONSHANDLER,
+  };
+  fireLog.info(CONSTANTS.REQUEST_MAP_INTERACTIONS_SERVICE + JSON.stringify(requestMap));
+  // Sending message to the platform to call designated handler
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    if (result?.success) {
+      fireLog
+        .assert(true, `Firebolt interactions collection service ${action} successfully`)
+        .then(() => {
+          return true;
+        });
+    } else {
+      fireLog
+        .assert(
+          false,
+          `Firebolt interactions collection service with action as ${action} has failed with error ${JSON.stringify(result.message)}`
+        )
+        .then(() => {
+          return false;
+        });
+    }
+  });
+});
+
+/**
+ * @module commands
+ * @function validateFireboltInteractionLogs
+ * @description Command to validate the firebolt interaction logs in configModule
+ * @example
+ * cy.validateFireboltInteractionLogs()
+ * cy.validateFireboltInteractionLogs()
+ */
+Cypress.Commands.add('validateFireboltInteractionLogs', () => {
+  const validationObject = {
+    assertionDef: 'validateFireboltInteractionLogs',
+  };
+  const interactionLogs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs();
+  cy.customValidation(validationObject, interactionLogs);
 });
