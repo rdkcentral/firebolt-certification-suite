@@ -63,15 +63,19 @@ Given(
             : CONSTANTS.NULL_RESPONSE;
           const expectingError = item.expectingError;
           const isNullCase = item.isNullCase || false;
+          // if dynamic device details fetch flag is true
           if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
+            // if the current module is in dynamic details fetch list
             if (
               CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES.includes(Cypress.env(CONSTANTS.TEST_TYPE))
             ) {
+              // check if the dynamic device details env is present
               if (
                 Cypress.env(CONSTANTS.DEVICE_DATA) &&
                 Object.keys(Cypress.env(CONSTANTS.DEVICE_DATA)).length > 0
               ) {
                 let type;
+                // if the validation object used for current validation contains the required data
                 if (contentObject && contentObject.data) {
                   for (let i = 0; i < contentObject.data.length; i++) {
                     if (
@@ -82,6 +86,7 @@ Given(
                         CONSTANTS.DEVICE_CONTENT_VALIDATION
                     ) {
                       type = contentObject.data[i].validations[0].type;
+                      // if the dynamic device details env contains the validation key
                       if (Cypress.env(CONSTANTS.DEVICE_DATA).hasOwnProperty(type)) {
                         contentObject.data[i].validations[0].type = Cypress.env(
                           CONSTANTS.DEVICE_DATA
