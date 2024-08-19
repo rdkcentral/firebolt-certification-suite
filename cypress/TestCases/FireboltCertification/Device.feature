@@ -47,7 +47,7 @@ Feature: Device
     @regression @sdk @requiresPlatformImplementation
     Scenario: Device.onNameChanged - Positive Scenario: Clearing event listeners
         When '3rd party app' registers for the 'device onNameChanged' event using the 'Firebolt' API
-        And 1st party stops listening to the event 'device onNameChanged event'
+        And 3rd party stops listening to the event 'device onNameChanged event'
         And 1st party app invokes the 'Firebolt' API to 'set device name to kitchen'
         Then 'Firebolt' platform responds to '1st party app' for 'set device name to kitchen'
         And 'Firebolt' platform does not trigger event for 'onDeviceNameChanged'

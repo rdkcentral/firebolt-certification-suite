@@ -7,8 +7,8 @@ Feature: Advertising
 
    @sdk @transport
    Scenario Outline: Advertising.policy - Positive Scenario: <Scenario>
-      When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
-      And '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
+      Given '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
+      When '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
@@ -24,11 +24,11 @@ Feature: Advertising
    Scenario Outline: Advertising.policy - Positive Scenario: <Scenario>
       Given we test the 'ADVERTISING_SKIPRESTRICTION' getters and setters '<Method>' to '<Value>'
       When '3rd party app' registers for the 'Firebolt' event
+      And '3rd party app' invokes the 'Firebolt' get API
+      And 1st party app invokes the 'Firebolt' API to set value
+      Then 'Firebolt' platform responds to '1st party app' set API
       When '3rd party app' invokes the 'Firebolt' get API
-      When 1st party app invokes the 'Firebolt' API to set value
-      And 'Firebolt' platform responds to '1st party app' set API
-      When '3rd party app' invokes the 'Firebolt' get API
-      And 'Firebolt' platform responds to '3rd party app' get API
+      Then 'Firebolt' platform responds to '3rd party app' get API
       And 'Firebolt' platform triggers '3rd party app' event
 
       Examples:
@@ -53,7 +53,7 @@ Feature: Advertising
    Scenario Outline: Advertising.advertisingId - Positive Scenario: Special Validation <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
       And '3rd party app' invokes the 'Firebolt' API to 'get initialization parameters'
-      When 1st party app invokes the 'Firebolt' API to '<API_Key>'
+      And 1st party app invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
       And '3rd party app' invokes the 'Firebolt' API to 'get initialization parameters'
@@ -146,7 +146,7 @@ Feature: Advertising
       @sdk @transport @requiresPlatformImplementation
       Scenario: Advertising.onPolicyChanged - Positive Scenario: Clearing event listeners
             When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
-            And 1st party stops listening to the event 'advertising onPolicyChanged event'
+            And 3rd party stops listening to the event 'advertising onPolicyChanged event'
             And 1st party app invokes the 'Firebolt' API to 'set true for allowAppContentAdTargeting'
             Then 'Firebolt' platform responds to '1st party app' with 'set true for allowAppContentAdTargeting'
             And 'Firebolt' platform does not trigger event for 'onAdvertisingPolicyChanged'

@@ -77,7 +77,7 @@ Feature: ClosedCaptions_Manage
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error
         Given we test the 'CLOSED_CAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
-        And 'Firebolt' platform responds to '1st party app' set API with '<Error>'
+        Then 'Firebolt' platform responds to '1st party app' set API with '<Error>'
 
         Examples:
             | Scenario                    | Method             | Value      | Error               |

@@ -8,7 +8,7 @@ Feature: Keyboard_Manage_RpcOnly
         Given the environment has been set up for 'Keyboard-rpc-Only' tests
         And 3rd party 'certification' app is launched
         When 1st party app registers for the '<ManageEventName>' event using the 'Firebolt' API
-        When '3rd party app' invokes the 'Firebolt' API to '<MethodParam>'
+        And '3rd party app' invokes the 'Firebolt' API to '<MethodParam>'
         And Fetch response for '<EventName>' event from 1st party app
         And 1st party app invokes the 'Firebolt' API to '<FocusMethod>'
         And 1st party app invokes the 'Firebolt' API to '<ResponseMethod>'
@@ -25,7 +25,7 @@ Feature: Keyboard_Manage_RpcOnly
         Given the environment has been set up for 'Keyboard-rpc-Only' tests
         And 3rd party 'certification' app is launched
         When 1st party app registers for the '<ManageEventName>' event using the 'Firebolt' API
-        When '3rd party app' invokes the 'Firebolt' API to '<MethodParam>'
+        And '3rd party app' invokes the 'Firebolt' API to '<MethodParam>'
         And Fetch response for '<EventName>' event from 1st party app
         And 1st party app invokes the 'Firebolt' API to '<FocusMethod>'
         And Fetch response for '<MethodName>' method from 3rd party app

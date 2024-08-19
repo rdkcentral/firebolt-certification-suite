@@ -5,8 +5,8 @@ Feature: Metrics_RpcOnly
     Scenario Outline: Metrics.<Method> - Positive Scenario: Validating rpc method metrics <Method>
         Given the environment has been set up for 'Metrics' tests
         And 3rd party 'certification' app is launched
-        Given we test the 'METRICS_METHOD' getters and setters '<Method>' to '{}'
-        When '3rd party app' invokes the 'Firebolt' get API
+        When we test the 'METRICS_METHOD' getters and setters '<Method>' to '{}'
+        And '3rd party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '3rd party app' get API
 
         Examples:

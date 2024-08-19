@@ -161,7 +161,7 @@ Feature: Discovery
    @Device  @regression @sdk @requiresPlatformImplementation
    Scenario: Discovery.onPolicyChanged - Positive Scenario: Clearing event listeners
       When '3rd party app' registers for the 'discovery onPolicyChanged' event using the 'Firebolt' API
-      And 1st party stops listening to the event 'discovery onPolicyChanged event'
+      And 3rd party stops listening to the event 'discovery onPolicyChanged event'
       And 1st party app invokes the 'Firebolt' API to 'set allowPersonalization to true'
       Then 'Firebolt' platform responds to '1st party app' for 'set allowPersonalization to true'
       And 'Firebolt' platform does not trigger event for 'onDiscoveryPolicyChanged'

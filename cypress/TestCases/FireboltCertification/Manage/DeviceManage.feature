@@ -31,8 +31,8 @@ Feature: Device_Manage
         And '3rd party app' invokes the 'Firebolt' API to 'get device id'
         And '3rd party app' invokes the 'Firebolt' API to 'get account id'
         Then 'Firebolt' platform responds with 'expected provision device id'
-        Then 'Firebolt' platform responds with 'expected provision account id'
-        Then 'Firebolt' platform responds with 'default value for device provision'
+        And 'Firebolt' platform responds with 'expected provision account id'
+        And 'Firebolt' platform responds with 'default value for device provision'
 
     @sdk @transport @notSupported
     Scenario: Device.provision - Positive Scenario: with distributor id including device.id account.id and device.distributor
@@ -41,15 +41,15 @@ Feature: Device_Manage
         And '3rd party app' invokes the 'Firebolt' API to 'get device id'
         And '3rd party app' invokes the 'Firebolt' API to 'get account id'
         Then 'Firebolt' platform responds with 'expected provision device id'
-        Then 'Firebolt' platform responds with 'expected provision account id'
-        Then 'Firebolt' platform responds with 'distributor id for device provision'
-        Then 'Firebolt' platform responds with 'default value for device provision'
+        And 'Firebolt' platform responds with 'expected provision account id'
+        And 'Firebolt' platform responds with 'distributor id for device provision'
+        And 'Firebolt' platform responds with 'default value for device provision'
 
     @sdk @transport
     Scenario Outline: Device.name - Negative Scenario: <Scenario> expecting error
         Given we test the 'DEVICE_NAME' getters and setters 'setName' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set invalid value
-        And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
+        Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
         Examples:
             | Scenario                     | Value |

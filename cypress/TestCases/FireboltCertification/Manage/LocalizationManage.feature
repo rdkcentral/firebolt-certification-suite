@@ -30,7 +30,7 @@ Feature: Localization_Manage
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
         Given we test the 'LOCALIZATION_MANAGE' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set invalid value
-        And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
+        Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
         Examples:
             | Scenario            | Method   | Value |
@@ -46,7 +46,7 @@ Feature: Localization_Manage
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error
         Given we test the 'LOCALIZATION_MANAGE' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set invalid value
-        And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
+        Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
         Examples:
             | Scenario                         | Method                  | Value |
