@@ -82,6 +82,7 @@ export default class Websocket extends AsyncTransportClient {
       };
 
       this.ws.onmessage = (msg) => {
+        console.log('msg-------:', JSON.parse(msg.data));
         if (msg && msg.data) {
           const message = JSON.parse(msg.data);
           const requestMessage = JSON.parse(payload);
