@@ -178,11 +178,9 @@ Cypress.Commands.add(
             // Skip the null check for exempted scenarios based on the error response.
             if (UTILS.getEnvVariable(CONSTANTS.IS_SCENARIO_EXEMPTED, false)) {
               // Performing error null check validation if the response error is not null.
-              if (response?.error == null) {
-                cy.errorNullCheck(response, CONSTANTS.ERROR).then((result) => {
-                  validationCheck.push(result);
-                });
-              }
+              cy.errorNullCheck(response, CONSTANTS.ERROR).then((result) => {
+                validationCheck.push(result);
+              });
             } else {
               cy.errorNullCheck(response, errorExpected, isNullCheckSkipped).then((result) => {
                 validationCheck.push(result);
