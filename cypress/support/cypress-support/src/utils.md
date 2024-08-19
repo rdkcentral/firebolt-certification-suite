@@ -340,3 +340,31 @@ return
 ### Examples:
 request
 - `resolveRecursiveValues(function())`
+
+## fireboltCallObjectHasField
+
+### Purpose: A function to verify if the provided field is present in the object, and to fail the step if the field is missing.
+
+### Params:
+| **Param** | **Definition**| **Type** |
+| --- | --- | --- |
+| ***object*** | Object for which we need to look for a specific key | object |
+| ***field*** | key name, which must be looked up in the object | string |
+| ***skipCheck*** | skipping the check when this flag is enabled | * |
+
+### Examples:
+ * `fireboltCallObjectHasField({abc: 123}, abc)`
+ * `fireboltCallObjectHasField({abc: 123}, xyz, true)`
+
+ ## fetchAppIdentifierFromEnv
+
+### Purpose: A Function to retrieve the appId from the environment variable based on the provided name.
+
+### Params:
+| **Param** | **Definition**| **Type** |
+| --- | --- | --- |
+| ***appId*** | app identifier name | string |
+
+### Examples:
+ * `fetchAppIdentifierFromEnv('1st party app')`
+ * `fetchAppIdentifierFromEnv('test.test)`
