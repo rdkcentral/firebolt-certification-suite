@@ -102,7 +102,7 @@
     "PH_FOR_LOCALIZATION_COUNTRYCODE": {
         "method": "localization.countryCode",  
         "validationJsonPath": "result",
-        "content": "LOCALIZATION_COUNTRYCODE"  
+        "content": "LOCALIZATION_COUNTRYCODE_PH"  
     },
     "GET_LOCALIZATION_LANGUAGE": {
         "method": "localization.language"
@@ -163,7 +163,7 @@
     "WASHINGTON_FOR_LOCALIZATION_LOCALITY": {
         "method": "localization.locality",  
         "validationJsonPath": "result",
-        "content": "LOCALIZATION_LOCALITY"  
+        "content": "LOCALIZATION_LOCALITY_WASHINGTON"  
     },
     "ONLOCALITYCHANGED_FOR_LOCALIZATION_WITH_WASHINGTON": {
         "event": "localization.onLocalityChanged", 
@@ -315,7 +315,7 @@
     "12345_FOR_LOCALIZATION_POSTALCODE": {
         "method": "localization.postalCode",
         "validationJsonPath": "result",
-        "content": "LOCALIZATION_POSTALCODE"  
+        "content": "STRING_12345"  
     },
     "EXPECTED_VALUE_FOR_LOCALIZATION_POSTALCODE":{
         "method": "localization.postalCode",
@@ -373,7 +373,7 @@
     "WASHINGTON_FOR_LOCALITY": {
         "method": "localization.locality",
         "validationJsonPath": "result",
-        "content": "LOCALIZATION_LOCALITY"  
+        "content": "LOCALIZATION_LOCALITY_WASHINGTON"  
     },
     "INVALID_REQUEST_FOR_LOCALIZATION_LOCALITY": {
         "method": "localization.locality",
@@ -399,7 +399,7 @@
     "123456_FOR_POSTALCODE": {
         "method": "localization.postalCode",
         "validationJsonPath": "result",
-        "content": "LOCALIZATION_POSTALCODE"  
+        "content": "STRING123456"  
     },
     "LOCALIZATION_ONTIMEZONECHANGED": {
         "method": "manage_localization.onTimeZoneChanged"
@@ -414,7 +414,7 @@
     "AMERICA/NEWYORK_FOR_TIMEZONE": {
         "method": "localization.timeZone",
         "validationJsonPath": "result",
-        "content": "LOCALIZATION_TIMEZONE"  
+        "content": "LOCALIZATION_TIMEZONE_AMERICA_NEWYORK"  
     },
     "ONTIMEZONECHANGED_FOR_LOCALIZATION_WITH_AMERICA/NEWYORK": {
         "event": "localization.onTimeZoneChanged",
