@@ -88,6 +88,11 @@ export default class Websocket extends AsyncTransportClient {
           const mapKey = Array.from(Cypress.env('eventResponseMap').keys()).find((key) =>
             key.includes(message.id)
           );
+          const interactionKey = message.hasOwnProperty('FireboltInteraction');
+
+          if (interactionKey) {
+            Cypress.env('fbInteractionLogs').addLog(message.FireboltInteraction);
+          }
 
           // Updating event response in the map when event is triggered by the platform
           if (
