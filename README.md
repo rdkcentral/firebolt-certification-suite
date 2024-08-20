@@ -462,3 +462,26 @@ If you want to use simplePubSub server as the means of communication for 3rd par
 7. When running FCS include env variables:
     - deviceMac: `<DEVICE_UNDER_TEST>`
     - pubSubUrl: `ws://<YOUR_IP>:8080`
+
+# Dynamic Content Validation
+
+For deviceContentValidation, the source of truth is fetched from an external API, which is dependent on the configuration module or platform on which we are testing. FCS expects source of truth to be generated for the modules listed in [DYNAMIC_DEVICE_DETAILS_MODULES](../constants/constants.js). Config module should have a request override in [requestModules] fcs.js file as fetchDeviceDetails function. This should fetch the data and return the data in below format. If deviceId, deviceType and distributor values are to be extracted, we will save the value into "DEVICEID", "DEVICE_TYPE" and "DEVICE_DISTRIBUTOR" keynames, as these are the keynames used in the validationObject. These values will be then replaced to the <device-mac>.json values which is saved in an environment variable "DEVICE_DATA" in fcs.
+For eg:, if activeDevicedata is the device response, the data extraction will be as follows :
+
+
+#### Format
+
+```
+    if (activeDevicedata.id == deviceId) {
+      extractedData.DEVICEID = activeDevicedata.id;
+      extractedData.DEVICE_TYPE = activeDevicedata.data.deviceType;
+      extractedData.DEVICE_DISTRIBUTOR = deviceData[0].data.partner;
+
+    }
+    Cypress.env(CONSTANTS.DEVICE_DATA, extractedData);
+```
+
+For the validation part, an env variable is expected in configModule as "FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG" which acts like a flag to indicate whether dynamic details fetching is enabled or not. And an override module called "fetchDeviceDetails" is expected to be in configModule to fetch the device details with the corresponding Urls mentioned for each config to fetch the data. DeviceId is passed from fcs to this override module as the only parameter, which is later used for extracting device details.
+
+The fetched data from configHelper is returned to corresponding configModule where the required data is extracted and saved to an env called "DEVICE_DATA" where the existing mac.json values are overriden with dynamic values. The data from configHelper is saved to this env as an object with the key names as the validation-key.If the data is having multiple objects, the required device details are fetched by mapping with corresponding deviceId which is passed from fcs to configModule.
+
