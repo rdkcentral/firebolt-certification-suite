@@ -28,18 +28,17 @@
 * `User validates lifecycle history for '1st party app' with 'background:foreground:background'`
 * `User validates lifecycle history for '3rd party app' with 'background:foreground'`
 
-## I '(start|stop)' performance metrics collection
+## Metrics collection process is '(initiated|stopped)'
 ### Purpose: To start or stop performance metrics service in device by passing appropriate intent to performance test handler
 
 ### Params:
 | Param | Definition |
 | --- | --- |
-| action | start or stop |
+| action | initiated or stopped |
 
 ### Examples:
- * `I 'start' performance metrics collection`
- * `I 'stop' performance metrics collection`
-
+ * `Given Metrics collection process is 'inititated'`
+ * `Given Metrics collection process is 'stopped'`
 
  ## '(.+)' will (be|stay) in '(.+)' state
 ### Purpose: To validate 3rd party app transitionss wrt state, event and history aagainst appObject as the source of truth
@@ -66,6 +65,7 @@ For the validation part, for the states when the app is not reachable for us to 
 |  fixture          |  Used when the response value is to be validated against an expected value already provided.                      |
 |  custom           |  Used when the incoming response has to be validated using a customized function provided in the configModule.    |
 |  undefined        |  Used when the incoming response has to be validated against undefined value.                                     |
+|  schemaOnly       |  When validation type is `schemaOnly`, it will skip content validation and stops at schema validation          |
 
 
 ## regEx
@@ -374,7 +374,39 @@ Here, the value of the key "assertionDef" will be the customMethod we use for va
                 ]
             }
         ]
-    
+
+## schemaOnly
+The 'schemaOnly` validation type allows to skip content validation and stops at schema validation.
+
+### format:
+```
+    {
+        "method": "",
+        "data": [
+            {
+                "type": "schemaOnly"
+            }
+        ]
+    }
+```
+### Params:
+| Param         | type   |  Description                                                                                               |
+| ------------  | ------ | ---------------------------------------------------------------------------------------------------------  |
+| method        | string |  The name of the method whose response is to be validated.                                                 |
+| data          | array  |  An array that holds the entire set of validation objects.                                                 |
+| type          | string |  The value which indicates the type of validation.                                                         |
+
+### Example:
+```
+    {
+        "method": "device.version",
+        "data": [
+            {
+                "type": "schemaOnly"
+            }
+        ]
+    }
+```
 
 # Validation Override
 
@@ -412,3 +444,163 @@ While validating, if a key is present in both fcs-validation jsons (eg: cypress/
             }
         ]
 }
+
+## Error Content Validation
+
+### Background
+
+There are some test cases which involves calling firebolt methods with invalid parameters, missing parameters. Here, we are expecting error to be returned from the device. FCS has some default error types defined which can be used in various test cases.
+
+### Default Validation Types in FCS
+Below is the default error objects supported in FCS [errorContentObjects.json](../../fixtures/objects/errorContentObjects.json). All of these validation objects have type `schemaOnly`  This implies that FCS will perform schema validation but will not carry out content validation.
+
+- NOT_SUPPORTED - This can be used for api's which are not supported
+- NOT_PERMITTED - This can be used for api's which are not supported
+- NOT_AVAILABLE - This can be used for api's which are not supported
+- INVALID_TYPE_PARAMS - This can be used for error validation which involves calling firebolt methods with invalid parameters, missing parameters etc.
+
+#### Format
+
+```
+{
+    "<Error object name>": {
+        "type": "schemaOnly"
+    }
+}
+```
+
+#### Params:
+
+| Param             | type   | Description                                                                                                                     |
+| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| Error object name | string | Error object key name, which is given in the test case                                                                         |
+| type              | string | The value which indicates the type of validation.                                                                               |
+| schemaOnly        | string | By default FCS having validation as `schemaonly`, which will not perform content validation instead stops at schema validation. |
+
+#### Example:
+
+```
+    "NOT_SUPPORTED": {
+        "type": "schemaOnly"
+    }
+```
+
+### Content validation support
+#### Extended error code validation
+- User can add error code validations to error validations by overriding in config module in the `cypress/fixtures/objects/errorContentObjects.json` file.
+
+- For that, they would need to use the same key name as any of the default error objects defined in FCS.
+
+##### Format
+
+Below is the format need to be followed while adding override in config module
+
+```
+{
+    "<Error object name>": {
+        "type": "errorValidationFunction",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [ERROR_CODE1, ERROR_CODE2]
+                }
+            }
+        ]
+    }
+}
+```
+Note: FCS expects the error object to be defined in the above format. Any deviation from the above format would cause failures in error content validation.
+
+##### Params:
+
+| Param             | type   | Description                                                                            |
+| ----------------- | ------ | -------------------------------------------------------------------------------------- |
+| Error object name | string | Error object key name, which is given in the test case                                |
+| type              | string | The value which indicates the type of validation.                                      |
+| validations       | array  | Holds the array of objects having type and which is having error codes for validation. |
+
+##### Example:
+
+```
+"INVALID_TYPE_PARAMS": {
+        "type": "errorValidationFunction",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -1234,
+                        -6789
+                    ]
+                }
+            }
+        ]
+    }
+```
+
+#### Custom validation support
+Users can further add their own error validations using custom validation objects.
+- To do custom validation, error object must have the type as `custom` shown in below format.
+- The value given for `assertionDef` represents the function name and this function should be defined in config module: `cypress/fixtures/customValidations/`
+
+##### Format
+
+Below is the custom validation object format need to be followed while adding override in config module
+
+```
+{
+    "<Error object name>": {
+        "type": "custom",
+        "assertionDef" : "<function name>"
+    }
+}
+```
+
+##### Params:
+
+| Param             | type   | Description                                                                                                           |
+| ----------------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
+| Error object name | string | Error object key name, which is given in the test case                                                               |
+| type              | string | The value which indicates the type of validation.                                                                     |
+| assertionDef      | string | holds the function name, which we are going to add custom validation logic                                            |
+
+Note: The error object allows the user to add their own validations.
+
+##### Example:
+
+```
+    "CUSTOM_ERROR": {
+        "type": "custom",
+        "assertionDef" : "validateErrorCodeAndMessages",
+        "validations": [
+            {
+                "type": {
+                   "errorCode": [
+                        -1234,
+                        -6789
+                    ],
+                    "errorMessage": [
+                        "Custom error"
+                    ]
+                }
+            }
+        ]
+    }
+```
+
+## Interactions collection process is '(initiated|stopped)'
+### Purpose: To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
+
+### Params:
+| Param | Definition |
+| --- | --- |
+| action | initiated or stopped |
+
+### Examples:
+ * `Given Interactions collection process is 'initiated'`
+ * `Given Interactions collection process is 'stopped'`
+
+## Validate Firebolt Interactions logs
+### Purpose: Validating the firebolt interaction logs in configModule
+
+### Examples:
+ * `Given Validate Firebolt Interactions logs`

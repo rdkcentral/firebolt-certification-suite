@@ -181,8 +181,12 @@ function overideParamsFromConfigModule(overrideParams) {
  * @function getTopic
  * @description Function to fetch the required topics.
  */
-
-function getTopic(appIdentifier = null, operation = null, deviceIdentifier) {
+function getTopic(
+  appIdentifier = null,
+  operation = null,
+  deviceIdentifier,
+  subscribeSuffix = null
+) {
   let topic;
   let deviceMac = deviceIdentifier ? deviceIdentifier : getEnvVariable(CONSTANTS.DEVICE_MAC);
   if (deviceMac.length <= 5 || !deviceMac || deviceMac == undefined) {
@@ -201,7 +205,7 @@ function getTopic(appIdentifier = null, operation = null, deviceIdentifier) {
     topic = deviceMac + '_' + getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
   }
   if (operation == CONSTANTS.SUBSCRIBE) {
-    return topic + CONSTANTS.TOPIC_SUBSCRIBE_SUFFIX;
+    return subscribeSuffix ? topic + subscribeSuffix : topic + CONSTANTS.TOPIC_SUBSCRIBE_SUFFIX;
   } else {
     return topic + CONSTANTS.TOPIC_PUBLISH_SUFFIX;
   }
@@ -591,6 +595,21 @@ function subscribeResults(data, metaData) {
 
 /**
  * @module utils
+ * @function interactionResults
+ * @description Callback function to fetch the interaction logs from subscribe function and storing in a list.
+ * @param {object} interactionLog - interaction logs
+ * @example
+ * interactionResults("{"method": "account.id", "response": "123", "tt": 12}")
+ **/
+function interactionResults(interactionLog) {
+  interactionLog = JSON.parse(interactionLog);
+  if (interactionLog && interactionLog.hasOwnProperty(CONSTANTS.METHOD)) {
+    getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
+  }
+}
+
+/**
+ * @module utils
  * @function destroyGlobalObjects
  * @description Destroy global objects and recursively clear the environment variables whose name is stored in the list if present, before test execution. List of names of global object to be cleared can be passed
  *  @param {object} objectNameList - list of objects to be cleared
@@ -970,6 +989,74 @@ function resolveRecursiveValues(input) {
   }
 }
 
+/**
+ * @module utils
+ * @function fireboltCallObjectHasField
+ * @description A function to verify if the provided field is present in the object, and to fail the step if the field is missing.
+ * @param {*} object - Object for which we need to look for a specific key
+ * @param {*} field - key name, which must be looked up in the object
+ * @param {*} skipCheck - skipping the check when this flag is enabled
+ * @example
+ * fireboltCallObjectHasField({abc: 123}, abc)
+ * fireboltCallObjectHasField({abc: 123}, xyz, true)
+ */
+function fireboltCallObjectHasField(object, field, skipCheck = false) {
+  if (!skipCheck) {
+    if ((object?.hasOwnProperty(field) && object[field] !== undefined) || skipCheck) {
+      return true;
+    } else {
+      fireLog.fail(`Could not found "${field}" field in fireboltCall object`);
+    }
+  }
+}
+
+/**
+ * @module utils
+ * @function fetchAppIdentifierFromEnv
+ * @description A Function to retrieve the appId from the environment variable based on the provided name.
+ * @param {*} appId - app identifier name
+ * @example
+ * fetchAppIdentifierFromEnv('1st party app')
+ * fetchAppIdentifierFromEnv('test.test)
+ */
+function fetchAppIdentifierFromEnv(appId) {
+  return (appId = !appId
+    ? getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+    : appId === CONSTANTS.THIRD_PARTY_APP
+      ? getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+      : appId === CONSTANTS.FIRST_PARTY_APP
+        ? getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
+        : checkForSecondaryAppId(appId));
+}
+
+/**
+ * InteractionsLogs class provides function to add and get interaction logs.
+ * @class
+ *
+ * @example
+ * interactionLogs.addLog({});
+ * interactionLogs.getLogs();
+ * interactionLogs.isFalse();
+ */
+class InteractionsLogs {
+  constructor() {
+    this.logs = [];
+  }
+
+  addLog(message) {
+    this.logs.push(message);
+  }
+
+  getLogs() {
+    return this.logs;
+  }
+  clearLogs() {
+    this.logs = [];
+  }
+}
+const interactionLogs = new InteractionsLogs();
+Cypress.env(CONSTANTS.FB_INTERACTIONLOGS, interactionLogs);
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -995,5 +1082,8 @@ module.exports = {
   fireLog,
   parseValue,
   checkForSecondaryAppId,
+  interactionResults,
   resolveRecursiveValues,
+  fireboltCallObjectHasField,
+  fetchAppIdentifierFromEnv,
 };
