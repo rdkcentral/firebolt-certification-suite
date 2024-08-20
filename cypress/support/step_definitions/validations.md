@@ -28,18 +28,17 @@
 * `User validates lifecycle history for '1st party app' with 'background:foreground:background'`
 * `User validates lifecycle history for '3rd party app' with 'background:foreground'`
 
-## I '(start|stop)' performance metrics collection
+## Metrics collection process is '(initiated|stopped)'
 ### Purpose: To start or stop performance metrics service in device by passing appropriate intent to performance test handler
 
 ### Params:
 | Param | Definition |
 | --- | --- |
-| action | start or stop |
+| action | initiated or stopped |
 
 ### Examples:
- * `I 'start' performance metrics collection`
- * `I 'stop' performance metrics collection`
-
+ * `Given Metrics collection process is 'inititated'`
+ * `Given Metrics collection process is 'stopped'`
 
  ## '(.+)' will (be|stay) in '(.+)' state
 ### Purpose: To validate 3rd party app transitionss wrt state, event and history aagainst appObject as the source of truth
@@ -607,3 +606,21 @@ Note: The error object allows the user to add their own validations.
         ]
     }
 ```
+
+## Interactions collection process is '(initiated|stopped)'
+### Purpose: To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
+
+### Params:
+| Param | Definition |
+| --- | --- |
+| action | initiated or stopped |
+
+### Examples:
+ * `Given Interactions collection process is 'initiated'`
+ * `Given Interactions collection process is 'stopped'`
+
+## Validate Firebolt Interactions logs
+### Purpose: Validating the firebolt interaction logs in configModule
+
+### Examples:
+ * `Given Validate Firebolt Interactions logs`
