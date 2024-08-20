@@ -283,3 +283,54 @@ Given(
     });
   }
 );
+
+/**
+ * @module validations
+ * @function Given Interactions collection process is (initiated|stopped)
+ * @description To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
+ * @param {String} action - initiated or stopped
+ * @example
+ * Given Interactions collection process is initiated
+ * Given Interactions collection process is stopped
+ */
+Given(/Interactions collection process is (initiated|stopped)/, (action) => {
+  if (
+    (action == CONSTANTS.INITIATED &&
+      UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) != true) ||
+    (action == CONSTANTS.STOPPED &&
+      UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED) == true)
+  ) {
+    // clearing the logs before starting the service
+    if (action === CONSTANTS.INITIATED) {
+      UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
+    }
+    cy.startOrStopInteractionsService(action).then((response) => {
+      if (response) {
+        Cypress.env(
+          CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED,
+          action == CONSTANTS.INITIATED ? true : false
+        );
+      } else {
+        const message =
+          action == CONSTANTS.INITIATED
+            ? CONSTANTS.FAILED_TO_INITIATE_INTERACTIONS_SERVICE
+            : CONSTANTS.FAILED_TO_STOP_INTERACTIONS_SERVICE;
+        fireLog.assert(false, message);
+      }
+    });
+  } else {
+    cy.log(CONSTANTS.INTERACTIONS_SERVICE_ENABLED);
+  }
+});
+
+/**
+ * @module validations
+ * @function Given Validate Firebolt Interactions logs
+ * @description Validating the firebolt interaction logs in configModule
+
+ * @example
+ * Given Validate Firebolt Interactions logs
+ */
+Given(/Validate Firebolt Interactions logs/, () => {
+  cy.then(() => cy.validateFireboltInteractionLogs());
+});
