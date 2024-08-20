@@ -1,3 +1,10 @@
+## [1.1.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.1.0...v1.1.1-dev.1) (2024-08-20)
+
+
+### Bug Fixes
+
+* Exempted methods does not have error null check for error ([#195](https://github.com/rdkcentral/firebolt-certification-suite/issues/195)) ([3eac88e](https://github.com/rdkcentral/firebolt-certification-suite/commit/3eac88ec05bf691aef5888b2c147815efa2783d3))
+
 # [1.1.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.0.0...v1.1.0) (2024-08-20)
 
 
