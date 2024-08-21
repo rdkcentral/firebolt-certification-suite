@@ -69,9 +69,9 @@ To execute the certification suite against any platform, the following setup mus
 | firebolt_specification_proposed_url | string  | ''                                | Path for the proposed firebolt specification url                                                                                                                                                                    |
 | healthCheckRetries                  | number  | 8                                 | Health check retry count                                                                                                                                                                                            |
 | communicationMode                   | string  | 'SDK' or 'Transport'              | Set communicationMode as SDK/transport. Default mode is SDK                                                                                                                                                         |
-| performanceMetrics                  | boolean | true                              | Makes a call to platform to start/stop the recording of performance metrics if value is true                                                                                                                        |
+| performanceMetrics                  | boolean | true                              | Makes a call to platform to start/stop the recording of performance metrics based on action passed   |
+|interactionsMetrics                      | boolean | true                           | Makes a call to platform to start/stop listening to firebolt interactions based on action passed |
 | pubSubUrl                           | string  | ws://127.0.0.1:8081               | Sets the the url to use for a PubSub server which will be used for 3rd party app communication.                                                                                                                     |
-
 | fcaAppList                  | array | ['default3rdPartyAppId']     | Holds the list of fca app identifiers |
 
 - Provide the specPattern mapping details. 
@@ -325,7 +325,82 @@ HTTP call to the platform:<br/>
     "message": `Unable to create marker, failed with status code- 200 and error- unable to find the dashboard`
   }
   ```
+  ### setTestProvider: 
 
+- Request:<br>
+  Making a call which sends necessary message to the platform to use a test provider for simulating user inputs.<br>
+  Format:
+  ```
+   {
+     method: 'fcs.setTestProvider',
+     params: <provider name>
+   }
+  ```
+  Examples:
+  ```
+   {
+     method: 'fcs.setTestProvider',
+     params: 'pinChallenge'
+   }
+   ```
+- Response:<br>
+  Receives an object with intent message.
+  Example:
+  ```
+  {
+  "action": "search",
+  "context": {
+    "source": "device"
+  },
+  "data": {
+    "query": "{\"task\":\"registerProviderHandler\",\"params\":{\"provider\":\"pinChallenge\"},\"action\":\"CORE\",\"context\":{\"communicationMode\":\"SDK\"},\"asynchronous\":false}"
+    }
+  }
+  ```
+### recordLifecycleHistory:
+
+- Request:<br>
+  Making a call to the platform to start/stop the lifecycle history recording.<br>
+  Format:
+  ```
+   {
+    "method": "fcs.recordLifecycleHistory",
+    "params": {
+      "task": "<task name>",
+      "appId": "<app ID>"
+    }
+  }
+
+  ```
+  Examples:
+  ```
+   {
+    "method": "fcs.recordLifecycleHistory",
+    "params": {
+      "task": "start",
+      "appId": "test"
+    }
+  }
+   ```
+- Response:<br>
+  Receives an object with intent message and transport type.
+  Example:
+  ```
+  "transport": "<transportMode>",
+  "payload": {
+  "action": "search",
+  "context": {
+    "source": "device"
+  },
+  "data": {
+    "query": "{\"task\":\"start\",\"params\":{\"provider\":\"pinChallenge\"},\"action\":\"CORE\",\"context\":{\"communicationMode\":\"SDK\"},\"asynchronous\":false}"
+    }
+  }
+  ```
+
+## Interaction Log service
+
+See [Interaction_Logs,md](/Docs//Interaction_Logs.md)
 
 ## Data in fixture folder is segregated as per below configurations
 

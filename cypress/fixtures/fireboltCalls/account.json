@@ -32,7 +32,7 @@
     "INVALID_REQUEST_ERROR_FOR_ACCOUNT_UID": {
 		"method": "account.uid",
 		"validationJsonPath": "result",
-		"content": "INVALID_REQUEST",
+		"content": "INVALID_TYPE_PARAMS",
         "expectingError": true
 	},
     "PUSH_SESSION_TOKEN":{

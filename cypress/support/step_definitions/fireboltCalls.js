@@ -336,3 +336,15 @@ Given(/User triggers event with value as '(.+)'/, (key) => {
     });
   });
 });
+
+/**
+ * @function device is rebooted
+ * @description Reboot a device during test execution
+ * @example
+ * When device is rebooted
+ */
+Given('device is rebooted', () => {
+  fireLog.info(CONSTANTS.STEP_DEFINITION_NEEDS_TO_IMPLEMENT).then(() => {
+    throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+  });
+});
