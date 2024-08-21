@@ -474,19 +474,24 @@ When the validation mode is "deviceContentValidation", the source of truth for t
 2. Dynamic data
 
 Static data :
-For the static data, the source of truth is saved in <deviceMac.json> file placed in [here](../../fixtures/external/devices/) based on deviceMac value we are testing currently. And later when the test starts, these values will be saved as an object in an env variable "deviceData". If the deviceMac.json is not found in the mentioned path, the values will be saved as it is , for eg : DEVICEID: "DEVICEID"
+For static data, the source of truth is stored in a <deviceMac.json> file placed [here](../../fixtures/external/devices/) based on the deviceMac value being tested. When the test begins, these values are loaded into an object stored in an environment variable called deviceData. If deviceMac.json is not found in the specified path, the values are saved as they are, for example: DEVICEID: "DEVICEID".
 
 Dynamic data :
-For the dynamic data, the source of truth is fetched from configModule's override function called "fetchDeviceDetails" explained [here](https://github.com/rdkcentral/firebolt-certification-suite?tab=readme-ov-file#request-overrides). 
+For dynamic data, the source of truth is fetched from the configModule's override function called "fetchDeviceDetails" explained [here](https://github.com/rdkcentral/firebolt-certification-suite?tab=readme-ov-file#request-overrides).
 
 ### Usage :
-For fetching dynamic data from configModule, we have to set an env "fetch_device_details_dynamically" as true in the [supportConfig.json](../../../supportConfig.json). If this env is true, based on the platform, the dynamic details will be fetched from configModule and then overrides the existing env variable "deviceData" which is the static data of <deviceMac.json> saved when the test starts.
-If the dynamic device details fetching fails in configModule, the data will be the static data fetched as it is. FCS expects source of truth to be generated for the modules listed in [DYNAMIC_DEVICE_DETAILS_MODULES](../constants/constants.js). 
+
+To fetch dynamic data from configModule, set an environment variable fetch_device_details_dynamically as true in the [supportConfig.json](../../../supportConfig.json). If this environment variable is true, dynamic details will be fetched from configModule based on the platform and override the existing environment variable deviceData, which holds the static data from <deviceMac.json>.
+
+If the dynamic device details fetching fails in configModule, the data will default to the static data. FCS expects the source of truth to be generated for the modules listed in [DYNAMIC_DEVICE_DETAILS_MODULES](../constants/constants.js). 
+
 
 ### Implementation :
-Config module should have a override function "fetchDeviceDetails" explained [here](https://github.com/rdkcentral/firebolt-certification-suite?tab=readme-ov-file#request-overrides). This function should fetch the data and return the data in below format. If deviceId, deviceType and distributor values are to be extracted, we will save the value into "DEVICEID", "DEVICE_TYPE" and "DEVICE_DISTRIBUTOR" keynames, as these are the keynames used in the validationObject. These values will be then replaced to the <device-mac.json> values which is saved in an environment variable "DEVICE_DATA" in fcs.  
-When the test starts, deviceId is passed from fcs to this override function for the modules listed in [DYNAMIC_DEVICE_DETAILS_MODULES](../constants/constants.js) as the only parameter, which is later used for extracting device details. If the data is having multiple objects, the required device details are fetched by mapping with corresponding deviceId which is passed from fcs to configModule.
-For eg:, if activeDevicedata is the device response, the data extraction will be as follows :
+
+The configModule should have an override function "fetchDeviceDetails" as explained [here](https://github.com/rdkcentral/firebolt-certification-suite?tab=readme-ov-file#request-overrides). This function should fetch the data and return it in the format specified below. If deviceId, deviceType, and distributor values need to be extracted, they should be saved as "DEVICEID", "DEVICE_TYPE", and "DEVICE_DISTRIBUTOR" keys, as these are the key names used in the validationObject. These values will then replace the values in <device-mac.json> stored in the environment variable "DEVICE_DATA" in FCS.
+
+When the test starts, deviceId is passed from FCS to this override function for the modules listed in [DYNAMIC_DEVICE_DETAILS_MODULES](../constants/constants.js) as the only parameter, which is later used to extract device details. If the data contains multiple objects, the required device details are fetched by mapping them with the corresponding deviceId passed from FCS to configModule.
+For example, if activeDevicedata is the dynamic device response, the data extraction will be as follows:
 
 #### Format
 
@@ -501,16 +506,16 @@ For eg:, if activeDevicedata is the device response, the data extraction will be
 ```
 
 ### Example :
-From fcs, the override function is invoked in the below format :
-  Format:
+From FCS, the override function is invoked in the following format:
+Format:
   ```
    {
     "method": "fcs.fetchDeviceDetails",
     "params": <deviceId>
   }
 
-The response by overriding the static values in env will be as :
-  Example:
+The response by overriding the static values in the environment will be as follows:
+Example:
 
   ```
   {
