@@ -401,7 +401,7 @@ HTTP call to the platform:<br/>
 ### fetchDeviceDetails:
 
 - Request:<br>
-  Making a call to fetch device details and the token required for fetching details dynamically.<br>
+  Making a call to fetch device details and the token required for dynamically fetching details .<br>
 
   Format:
   ```
@@ -420,8 +420,8 @@ HTTP call to the platform:<br/>
   }
    ```
 - Response:<br>
-  Receives updated env variable of device_data with dynamic device details .
-  Example:
+  Receives the updated environment variable device_data with dynamic device details.
+Example:
 
   ```
   {
