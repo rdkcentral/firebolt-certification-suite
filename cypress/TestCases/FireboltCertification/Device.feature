@@ -9,6 +9,8 @@ Feature: Device
     Scenario Outline:Device.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
+
+        @Sev0
         Examples:
             | Scenario                    | API_Key                  | Validation_Key              | Method      |
             | Validate Device id          | fetch device id          | expected device id          | id          |
@@ -19,6 +21,14 @@ Feature: Device
             | Validate Device model       | fetch device model       | expected device model       | model       |
             | Validate Device sku         | fetch device sku         | expected device sku         | sku         |
             | Validate Device make        | fetch device make        | expected device make        | make        |
+
+        @Sev2
+        Examples:
+            | Scenario              | API_Key            | Validation_Key        | Method |
+            | Validate Device uid   | fetch device uid   | expected device uid   | uid    |
+            | Validate Device model | fetch device model | expected device model | model  |
+            | Validate Device sku   | fetch device sku   | expected device sku   | sku    |
+            | Validate Device make  | fetch device make  | expected device make  | make   |
 
     @sdk @transport
     Scenario: Device.name - Positive Scenario: Validate device name change
@@ -35,14 +45,23 @@ Feature: Device
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<validation_key>'
 
+        @Sev0
         Examples:
             | Scenario                  | Method           | API_Key                | validation_key            |
-            | Validate device version   | version          | fetch device version   | expected device version   |
             | Validate hdcp             | hdcp             | fetch hdcp             | expected hdcp             |
             | Validate hdr              | hdr              | fetch hdr              | expected hdr              |
             | Validate screenResolution | screenResolution | fetch screenResolution | expected screenResolution |
             | Validate videoResolution  | videoResolution  | fetch videoResolution  | expected videoResolution  |
-            | Validate audio            | audio            | fetch audio            | expected audio            |
+
+        @Sev1
+        Examples:
+            | Scenario       | Method | API_Key     | validation_key |
+            | Validate audio | audio  | fetch audio | expected audio |
+
+        @Sev2
+        Examples:
+            | Scenario                | Method  | API_Key              | validation_key          |
+            | Validate device version | version | fetch device version | expected device version |
 
     @regression @sdk @requiresPlatformImplementation
     Scenario: Device.onNameChanged - Positive Scenario: Clearing event listeners
