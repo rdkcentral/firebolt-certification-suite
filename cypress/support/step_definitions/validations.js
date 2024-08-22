@@ -18,7 +18,7 @@
 import { Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module validations
@@ -63,7 +63,7 @@ Given(
             : CONSTANTS.NULL_RESPONSE;
           const expectingError = item.expectingError;
           const isNullCase = item.isNullCase || false;
-          // check if the dynamic device details env is present
+          // check if the device details env is present
           if (
             Cypress.env(CONSTANTS.DEVICE_DATA) &&
             Object.keys(Cypress.env(CONSTANTS.DEVICE_DATA)).length > 0
@@ -88,6 +88,8 @@ Given(
                 }
               }
             }
+          } else {
+            fireLog.info('deviceData environment variable does not have the required data');
           }
 
           // If the app ID is not passed from the feature, the default app ID will be retrieved.
