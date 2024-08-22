@@ -60,8 +60,8 @@ Feature: Advertising
 
       Examples:
          | Scenario            | API_Key                 | AdvertidingId_Validation_key          | Parameters_Validation_key                      |
-         | limitAdTracking_ON  | disable limitAdTracking | limitAdTracking ON for advertisingId  | parameters initialization advertisingId ad on  |
          | limitAdTracking_OFF | enable limitAdTracking  | limitAdTracking OFF for advertisingId | parameters initialization advertisingId ad off |
+         | limitAdTracking_ON  | disable limitAdTracking | limitAdTracking ON for advertisingId  | parameters initialization advertisingId ad on  |
 
    @sdk @transport
    Scenario Outline: Advertising.config Coppa value - Positive Scenario: <Scenario>
