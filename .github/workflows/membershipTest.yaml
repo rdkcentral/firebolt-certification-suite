@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check team membership
-        id: check_team
         run: |
           TEAM_NAME="${{ secrets.RELEASE_TEAM_NAME }}"
           ORG_NAME="rdkcentral"
@@ -22,3 +21,10 @@ jobs:
             echo "User is not a member of the $TEAM_NAME team"
             exit 1
           fi
+
+  validate-dev:
+    needs: check-team-membership
+    uses: ./.github/workflows/lint-and-sample-feature-run.yaml
+    with:
+      branch: 'dev'
+    
