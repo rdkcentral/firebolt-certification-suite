@@ -603,7 +603,7 @@ function subscribeResults(data, metaData) {
  **/
 function interactionResults(interactionLog) {
   interactionLog = JSON.parse(interactionLog);
-  if (interactionLog && interactionLog.hasOwnProperty(CONSTANTS.METHOD)) {
+  if (interactionLog && interactionLog.hasOwnProperty('FireboltInteraction')) {
     getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
   }
 }
@@ -1040,18 +1040,27 @@ function fetchAppIdentifierFromEnv(appId) {
  */
 class InteractionsLogs {
   constructor() {
-    this.logs = [];
+    this.logs = new Map();
   }
 
   addLog(message) {
-    this.logs.push(message);
+    let scenarioName = Cypress.env('scenarioName');
+    if (this.logs.size > 0 && this.logs.has(scenarioName)) {
+      this.logs.get(scenarioName).push(message);
+    } else {
+      this.logs.set(scenarioName, [message]);
+    }
   }
 
-  getLogs() {
+  getLogs(scenarioName) {
+    if (scenarioName) {
+      return this.logs.get(scenarioName);
+    }
     return this.logs;
   }
+
   clearLogs() {
-    this.logs = [];
+    this.logs.clear();
   }
 }
 const interactionLogs = new InteractionsLogs();

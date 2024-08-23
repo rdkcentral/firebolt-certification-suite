@@ -315,7 +315,7 @@ Given(/Interactions collection process is (initiated|stopped)/, (action) => {
           action == CONSTANTS.INITIATED
             ? CONSTANTS.FAILED_TO_INITIATE_INTERACTIONS_SERVICE
             : CONSTANTS.FAILED_TO_STOP_INTERACTIONS_SERVICE;
-        fireLog.assert(false, message);
+        UTILS.fireLog.assert(false, message);
       }
     });
   } else {
@@ -332,5 +332,19 @@ Given(/Interactions collection process is (initiated|stopped)/, (action) => {
  * Given Validate Firebolt Interactions logs
  */
 Given(/Validate Firebolt Interactions logs/, () => {
-  cy.then(() => cy.validateFireboltInteractionLogs());
+  // cy.then(() => cy.validateFireboltInteractionLogs());
+  cy.getFireboltData('ID_INTERACTION_LOGS').then((fireboltData) => {
+    console.log('fireboltData------:', fireboltData);
+    const logs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs(
+      Cypress.env('scenarioName')
+    );
+    if (!logs) {
+      UTILS.fireLog.assert(
+        false,
+        `No interaction logs found for the scenario ${Cypress.env('scenarioName')}`
+      );
+    }
+    const contentObject = { logs: logs, content: fireboltData.content.data[0].validations };
+    cy.customValidation(fireboltData.content.data[0], contentObject);
+  });
 });

@@ -128,6 +128,11 @@ export default function (module) {
   beforeEach(() => {
     cy.getBeforeOperationObject();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+    let scenarioName = cy.state().test.title;
+    if (scenarioName.includes('(example')) {
+      scenarioName = scenarioName.split('(example')[0].trim();
+    }
+    Cypress.env('scenarioName', scenarioName);
   });
 
   /**
