@@ -1,0 +1,26 @@
+name: Test Membership Check
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check-team-membership:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check team membership
+        id: check_team
+        run: |
+          TEAM_NAME="your-team-name"
+          ORG_NAME="your-org-name"
+          USERNAME="${{ github.actor }}"
+
+          IS_MEMBER=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_NAME/memberships/$USERNAME \
+            | jq -r '.state')
+
+          if [ "$IS_MEMBER" != "active" ]; then
+            echo "User is not a member of the $TEAM_NAME team"
+            exit 1
+          else
+            echo "User is a member of the $TEAM_NAME team"
+          fi
