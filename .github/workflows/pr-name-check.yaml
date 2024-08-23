@@ -5,31 +5,24 @@ on:
     branches:
       - 'dev'
     types: [opened, edited, synchronize]
-  workflow_dispatch:
 
 jobs:
-  check-team-membership:
+  check-pr-name:
     runs-on: ubuntu-latest
     steps:
-      - name: Check team membership
-        id: check_team
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Check PR title
         run: |
-          TEAM_NAME="${{ secrets.RELEASE_TEAM_NAME }}"
-          ORG_NAME="rdkcentral"
-          USERNAME="${{ github.actor }}"
-
-          # Check if the user is part of the specified team
-          IS_MEMBER=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_NAME/memberships/$USERNAME \
-            | jq -r '.state')
-
-          if [ "$IS_MEMBER" != "active" ]; then
-            echo "User is not a member of the $TEAM_NAME team"
+          if ! echo "${{ github.event.pull_request.title }}" | grep -Eq "^(feat|fix|BREAKING CHANGE)(\([^)]+\))?: "; then
+            echo 'FAIL_OUTPUT=Invalid PR title. It must start with feat: or fix: or BREAKING CHANGE: or feat(<DESCRIPTOR>): or fix(<DESCRIPTOR>): or BREAKING CHANGE(<DESCRIPTOR>):. Please see our [Contributing-Guide](../tree/dev/CONTRIBUTING.md).' >> $GITHUB_ENV
             exit 1
           fi
 
-  validate-dev:
-    needs: check-team-membership
-    uses: ./.github/workflows/lint-and-sample-feature-run.yaml
-    with:
-      branch: 'dev'
+      - name: Comment on PR
+        if: failure()
+        uses: ./.github/actions/pr-comment
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_comment: ${{ env.FAIL_OUTPUT }}
