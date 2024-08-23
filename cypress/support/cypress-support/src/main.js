@@ -126,6 +126,7 @@ export default function (module) {
 
   // beforeEach
   beforeEach(() => {
+    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
     cy.getBeforeOperationObject();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
     let scenarioName = cy.state().test.title;

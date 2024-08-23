@@ -332,6 +332,12 @@ Given(/Interactions collection process is (initiated|stopped)/, (action) => {
  * Given Validate Firebolt Interactions logs
  */
 Given(/Validate Firebolt Interactions logs with '(.+)'/, (key) => {
+  if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS, false) !== true) {
+    cy.log(`Interactions log service is not enabled`).then(() => {
+      return
+    });
+  }
+  key = key.replaceAll(' ', '_').toUpperCase();
   cy.getFireboltData(key).then((fireboltData) => {
     console.log('fireboltData------:', fireboltData);
     const logs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs(
