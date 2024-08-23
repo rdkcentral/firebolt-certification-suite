@@ -1,5 +1,7 @@
 # DynamicCallsGlue
 
+## [Dynamic Firebolt Objects](../../fixtures/docs/dynamicObjects.md)
+
 ## we test the '(.+)' getters and setters(?: '(.*?)'(?: to '(.*?)')?)?
 #### Purpose: Extracting the fireboltCall object based on the key name and storing it in a `runtime` environment variable along with the attribute and value.
 
@@ -105,11 +107,13 @@ runtime: {
 | **_methodType_**   | Determines which method doing content validation Ex: set or get                                |
 | **_errorContent_** | Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS' |
 
-**Note:** This glue step will work only when fireboltCall object having below fields.
+**Note:** This glue step will work only when fireboltCall `setMethod` for set method validation and `method` for get method validation.
 
-- For set method response validation `setMethod`, `setValidationJsonPath` and `setContent`.
-- For get method response validation `method`, `validationJsonPath` and `content`.
-- `setValidationJsonPath` and `setContent` are optional while doing error content validation.
+Below fields is not mandatory to add in the fireboltCall object, if not present default value will be used.
+- setValidationJsonPath ---> 'result'
+- setContent ---> null
+- validationJsonPath ---> 'result'
+- content ---> null
 
 ## '(.+)' platform (triggers|does not trigger) '(.\*?)' event(?: with '(.+)')?
 
@@ -131,4 +135,6 @@ runtime: {
 | **_appId_**         | app identifier                                                                                 |
 | **_errorContent_**  | Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS' |
 
-**Note:** This glue step will work only when fireboltCall object having `event`, `eventValidationJsonPath` and `content` fields. Event name is enough while doing error content validation.
+**Note:** This glue step will work only when fireboltCall object having `event`, `eventValidationJsonPath` and `content` fields not present default value will be used.
+- eventValidationJsonPath ---> 'eventResponse'
+- content ---> null

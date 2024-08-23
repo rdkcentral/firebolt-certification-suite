@@ -1388,7 +1388,6 @@ Cypress.Commands.add(
     appId = UTILS.fetchAppIdentifierFromEnv(appId);
     const context = {};
     const expectingError = errorContent ? true : false;
-    contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
     method = method.includes('_') ? method.split('_')[1] : method;
     if (expectingError) {
       // Retriving the error content from the environment variable if it exists; otherwise, using the key as-is
