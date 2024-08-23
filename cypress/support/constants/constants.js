@@ -510,7 +510,7 @@ module.exports = {
   SET_EVENT_SUCCESS: 'Event value set successfully in platform',
   USER_METHOD: 'user/',
   SCENARIO_NAME: 'scenarioName',
-  FIREBOLT_INTERACTION: 'FireboltInteraction'
+  FIREBOLT_INTERACTION: 'FireboltInteraction',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
