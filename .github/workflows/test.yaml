@@ -1,4 +1,4 @@
-name: Main Release to GitHub
+name: Testing membership check
 
 on:
   workflow_dispatch:
