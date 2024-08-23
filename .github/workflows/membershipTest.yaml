@@ -1,4 +1,4 @@
-name: Testing membership check
+name: Test Membership Check
 
 on:
   workflow_dispatch:
@@ -14,7 +14,6 @@ jobs:
           ORG_NAME="rdkcentral"
           USERNAME="${{ github.actor }}"
 
-          # Check if the user is part of the specified team
           IS_MEMBER=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_NAME/memberships/$USERNAME \
             | jq -r '.state')
@@ -23,9 +22,3 @@ jobs:
             echo "User is not a member of the $TEAM_NAME team"
             exit 1
           fi
-
-  validate-dev:
-    needs: check-team-membership
-    uses: ./.github/workflows/lint-and-sample-feature-run.yaml
-    with:
-      branch: 'dev'
