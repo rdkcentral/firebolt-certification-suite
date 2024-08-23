@@ -132,7 +132,7 @@ export default function (module) {
     if (scenarioName.includes('(example')) {
       scenarioName = scenarioName.split('(example')[0].trim();
     }
-    Cypress.env('scenarioName', scenarioName);
+    Cypress.env(CONSTANTS.SCENARIO_NAME, scenarioName);
   });
 
   /**

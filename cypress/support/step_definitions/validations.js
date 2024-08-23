@@ -331,9 +331,8 @@ Given(/Interactions collection process is (initiated|stopped)/, (action) => {
  * @example
  * Given Validate Firebolt Interactions logs
  */
-Given(/Validate Firebolt Interactions logs/, () => {
-  // cy.then(() => cy.validateFireboltInteractionLogs());
-  cy.getFireboltData('ID_INTERACTION_LOGS').then((fireboltData) => {
+Given(/Validate Firebolt Interactions logs with '(.+)'/, (key) => {
+  cy.getFireboltData(key).then((fireboltData) => {
     console.log('fireboltData------:', fireboltData);
     const logs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs(
       Cypress.env('scenarioName')

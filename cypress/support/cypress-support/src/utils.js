@@ -603,7 +603,7 @@ function subscribeResults(data, metaData) {
  **/
 function interactionResults(interactionLog) {
   interactionLog = JSON.parse(interactionLog);
-  if (interactionLog && interactionLog.hasOwnProperty('FireboltInteraction')) {
+  if (interactionLog && interactionLog.hasOwnProperty(CONSTANTS.FIREBOLT_INTERACTION)) {
     getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
   }
 }
@@ -1044,7 +1044,7 @@ class InteractionsLogs {
   }
 
   addLog(message) {
-    let scenarioName = Cypress.env('scenarioName');
+    const scenarioName = Cypress.env(CONSTANTS.SCENARIO_NAME);
     if (this.logs.size > 0 && this.logs.has(scenarioName)) {
       this.logs.get(scenarioName).push(message);
     } else {
