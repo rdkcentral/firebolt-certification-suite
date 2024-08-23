@@ -73,6 +73,7 @@ const env = {
     ],
   },
   fcaAppList: ['default3rdPartyAppId'],
+  variableObjectsPrefixLists: ['DYNAMIC_FB_CALL_VARIABLES'],
 };
 
 module.exports = {

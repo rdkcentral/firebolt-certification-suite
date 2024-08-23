@@ -1,7 +1,7 @@
 # DynamicCallsGlue
 
 ## we test the '(.+)' getters and setters(?: '(.*?)'(?: to '(.*?)')?)?
-- Extracting the fireboltCall object based on the key provided from the testcase. This object is saving in to the `runtime` environment variable along with `attribute` and `value`.
+#### Purpose: Extracting the fireboltCall object based on the key name and storing it in a `runtime` environment variable along with the attribute and value.
 
 **Note:** This glue is mandatory to add in the testcase before using any other dynamic runtime steps.
 
@@ -30,7 +30,12 @@ runtime: {
 
 ## 1st party app invokes the '(.+)' API to set( invalid)? value
 
-**Purpose:** Sending a message to platform to set a value and `invalid` is a optional parameter that specify whether to expect for an error or a result.
+#### Purpose: Sending a message to platform to set a value. Optional parameter: `invalid` can be used to specify whether to expect an error or a result.
+
+### Examples:
+
+- `Given 1st party app invokes the 'Firebolt' API to set`
+- `Given 1st party app invokes the 'Firebolt' API to set invalid value`
 
 ### Params:
 
@@ -39,16 +44,18 @@ runtime: {
 | **_sdk_**          | sdk name                                           |
 | **_invalidValue_** | Determines whether an error or result is expected. |
 
-**Note:** This glue step will work only if the fireboltCall object contains `setMethod` and `setParams` fields.
+**Note:** This glue step will work only if the fireboltCall object contains `setMethod` and `setParams` is a not required field, by default it will take an empty object.
 
-### Examples:
-
-- `Given 1st party app invokes the 'Firebolt' API to set`
-- `Given 1st party app invokes the 'Firebolt' API to set invalid value`
 
 ## '(.+)' invokes the '(.+)' get API
 
-**Purpose:** Sending a message to platform or 3rd party app to invoke an API and get the value.
+#### Purpose: Sending a message to platform or 3rd party app to invoke an API and get the value.
+
+### Examples:
+
+- `And '1st party app' invokes the 'Firebolt' get API`
+- `And '3rd party app' invokes the 'Firebolt' get API`
+- `And 'test_app' invokes the 'Firebolt' get API`
 
 ### Params:
 
@@ -57,17 +64,16 @@ runtime: {
 | **_appId_** | app identifier. |
 | **_sdk_**   | sdk name        |
 
-**Note:** This glue step will work only if the fireboltCall object contains `method` and `params` fields.
-
-### Examples:
-
-- `And '1st party app' invokes the 'Firebolt' get API`
-- `And '3rd party app' invokes the 'Firebolt' get API`
-- `And 'test_app' invokes the 'Firebolt' get API`
+**Note:** This glue step will work only if the fireboltCall object contains `method` and `params` is a not required field, by default it will take an empty object.
 
 ## '(.+)' registers for the '(.+)' event
 
-**Purpose:** Sending a message to platform or third party app to start listening for an event.
+#### Purpose: Sending a message to platform or third party app to start listening for an event.
+
+### Examples:
+
+- `And '3rd party app' registers for the 'Firebolt' event`
+- `And '1st party app' registers for the 'Firebolt' event`
 
 ### Params:
 
@@ -78,14 +84,17 @@ runtime: {
 
 **Note:** This glue step will work only if the fireboltCall object contains `event` field.
 
-### Examples:
-
-- `And '3rd party app' registers for the 'Firebolt' event`
-- `And '1st party app' registers for the 'Firebolt' event`
 
 ## '(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?
 
-**Purpose:** Performing a validation against the source of truth for the given API response
+#### Purpose: Validating that the get or set API response aligns with the expected response which will typically be configured by the dynamic object with a json path to validate.
+
+### Examples:
+
+- `And 'Firebolt' platform responds to '1st party app' get API`
+- `And 'Firebolt' platform responds to '3rd party app' get API`
+- `And 'Firebolt' platform responds to '1st party app' set API`
+- `And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' set API with 'INVALID_TYPE_PARAMS'`
 
 ### Params:
 
@@ -102,16 +111,16 @@ runtime: {
 - For get method response validation `method`, `validationJsonPath` and `content`.
 - `setValidationJsonPath` and `setContent` are optional while doing error content validation.
 
-### Examples:
-
-- `And 'Firebolt' platform responds to '1st party app' get API`
-- `And 'Firebolt' platform responds to '3rd party app' get API`
-- `And 'Firebolt' platform responds to '1st party app' set API`
-- `And 'Firebolt' platform responds to '1st party app' 'CLOSEDCAPTION_SETTINGS' set API with 'INVALID_TYPE_PARAMS'`
-
 ## '(.+)' platform (triggers|does not trigger) '(.\*?)' event(?: with '(.+)')?
 
-**Purpose:** Performing a event validation against the source of truth
+#### Purpose: Validating the event response aligns with the expected response which will typically be configured by the dynamic object with a json path to validate.
+
+### Examples:
+
+- `And 'Firebolt' platform triggers '3rd party app' event`
+- `And 'Firebolt' platform does not trigger '3rd party app' event`
+- `And 'Firebolt' platform triggers '1st party app' event`
+- `And 'Firebolt' platform triggers '1st party app' event with 'INVALID_TYPE_PARAMS'`
 
 ### Params:
 
@@ -123,10 +132,3 @@ runtime: {
 | **_errorContent_**  | Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS' |
 
 **Note:** This glue step will work only when fireboltCall object having `event`, `eventValidationJsonPath` and `content` fields. Event name is enough while doing error content validation.
-
-### Examples:
-
-- `And 'Firebolt' platform triggers '3rd party app' event`
-- `And 'Firebolt' platform does not trigger '3rd party app' event`
-- `And 'Firebolt' platform triggers '1st party app' event`
-- `And 'Firebolt' platform triggers '1st party app' event with 'INVALID_TYPE_PARAMS'`

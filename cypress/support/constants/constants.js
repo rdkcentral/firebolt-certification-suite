@@ -463,6 +463,7 @@ module.exports = {
   ],
   USER_EXIT_REASON: 'userExit',
   VALIDATIONJSONPATH: 'validationJsonPath',
+  VARIABLES_PREFIX_LIST: 'variableObjectsPrefixLists',
   VERSION: 'version',
   WRITE_FAILED: 'Unable to write report json to file',
   WRITE_TO_FILE: 'writeToFile',
