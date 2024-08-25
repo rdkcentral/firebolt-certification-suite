@@ -321,19 +321,19 @@ export default function (module) {
     }
 
     // Overriding default value for mode, if input is not there from feature file or cli.
-    const mode = CONSTANTS.MODE_SDK; // default to SDK
+    const mode = CONSTANTS.MODE_TRANSPORT; // default to Transport
     if (
       !additionalParams[CONSTANTS.COMMUNICATION_MODE] &&
-      !UTILS.getEnvVariable(CONSTANTS.COMMUNICATION_MODE, false)
+      !UTILS.getEnvVariable(CONSTANTS.SUITE_COMMUNICATION_MODE, false)
     ) {
       additionalParams[CONSTANTS.COMMUNICATION_MODE] = mode;
     } else if (
       (!additionalParams[CONSTANTS.COMMUNICATION_MODE] ||
         additionalParams[CONSTANTS.COMMUNICATION_MODE]) &&
-      UTILS.getEnvVariable(CONSTANTS.COMMUNICATION_MODE, false)
+      UTILS.getEnvVariable(CONSTANTS.SUITE_COMMUNICATION_MODE, false)
     ) {
       additionalParams[CONSTANTS.COMMUNICATION_MODE] = UTILS.getEnvVariable(
-        CONSTANTS.COMMUNICATION_MODE
+        CONSTANTS.SUITE_COMMUNICATION_MODE
       );
     }
 
