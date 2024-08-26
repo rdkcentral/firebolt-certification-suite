@@ -17,6 +17,7 @@ Feature: Discovery.launch_ColdLaunch
         Then 'Firebolt' platform responds with '<Validation_Key_For_Parameters_Initialization_With_Intent>'
         And 'Firebolt' platform responds with 'foreground for lifecycle state'
 
+        @Sev0
         Examples:
             | Scenario                                                                            | Discovery_Launch_Key                                                                                | Call_Parameters_Initialization_With_Context_Key     | Validation_Key_For_Parameters_Initialization_With_Intent                        |
             | Null                                                                                | launch app with null intent                                                                         | get initialization parameters for null intent       | nullintent for initialization parameters                                        |
@@ -29,6 +30,10 @@ Feature: Discovery.launch_ColdLaunch
             | Tune                                                                                | launch app with tune intent                                                                         | get initialization parameters for Tune intent       | tuneintent for initialization parameters                                        |
             | PlayEntity                                                                          | launch app with playentity intent                                                                   | get initialization parameters for PlayEntity intent | playentityintent for initialization parameters                                  |
             | PlayQuery                                                                           | launch app with playquery intent                                                                    | get initialization parameters for PlayQuery intent  | playqueryintent for initialization parameters                                   |
+
+        @Sev1
+        Examples:
+            | Scenario                                                                            | Discovery_Launch_Key                                                                                | Call_Parameters_Initialization_With_Context_Key     | Validation_Key_For_Parameters_Initialization_With_Intent                        |
             | PlayQuery with musicType song                                                       | launch app with playquery intent with musictype song                                                | get initialization parameters for PlayQuery intent  | playqueryintent musictype song for initialization parameters                    |
             | PlayQuery with musicType album                                                      | launch app with playquery intent with musictype album                                               | get initialization parameters for PlayQuery intent  | playqueryintent musictype album for initialization parameters                   |
             | PlayQuery with programType concert                                                  | launch app with playquery intent with programtype concert                                           | get initialization parameters for PlayQuery intent  | playqueryintent programtype concert for initialization parameters               |
@@ -42,12 +47,16 @@ Feature: Discovery.launch_ColdLaunch
             | PlayEntity with programType movie                                                   | launch app with playentity intent with programtype movie                                            | get initialization parameters for PlayEntity intent | playentityintent with programtype movie for initialization parameters           |
             | PlayEntity with programType episode                                                 | launch app with playentity intent with programtype episode                                          | get initialization parameters for PlayEntity intent | playentityintent with programtype episode for initialization parameters         |
             | PlayEntity with programType concert                                                 | launch app with playentity intent with programtype concert                                          | get initialization parameters for PlayEntity intent | playentityintent with programtype concert for initialization parameters         |
+
+        @Sev2
+        Examples:
+            | Scenario                                                                            | Discovery_Launch_Key                                                                                | Call_Parameters_Initialization_With_Context_Key     | Validation_Key_For_Parameters_Initialization_With_Intent                        |
             | PlayEntity without options for entityType playlist                                  | launch app with playentity intent without options                                                   | get initialization parameters for PlayEntity intent | playentityintent without options for initialization parameters                  |
             | Playback intent without entityType and with programType movie                       | launch app with playback intent without entityType and with programType movie                       | get initialization parameters for Playback intent   | playbackintent for initialization parameters without entityType                 |
             | PlayEntity intent without entityType and with programType movie for movieEntity     | launch app with playentity intent without entityType and with programType movie for movieEntity     | get initialization parameters for PlayEntity intent | playentity for initialization parameters without entityType for movieEntity     |
             | PlayEntity intent without entityType and with programType movie for TvEpisodeEntity | launch app with playentity intent without entityType and with programType movie for TvEpisodeEntity | get initialization parameters for Playback intent   | playentity for initialization parameters without entityType for TvEpisodeEntity |
 
-    @sdk @transport
+    @sdk @transport @Sev2
     Scenario Outline: Discovery.Launch Cold Launch - Negative Scenario: <Scenario> and expecting error
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Error_Key>'
@@ -102,7 +111,7 @@ Feature: Discovery.launch_ColdLaunch
             | Integer Source Tune Intent                                 | invalid integer source tune intent for discoverylaunch                 |
             | Search Intent Integer Data                                 | search intent integer data for discoverylaunch                         |
 
-    @sdk @transport
+    @sdk @transport @Sev2
     Scenario Outline: Discovery.Launch Cold Launch - Positive Scenario: <Scenario> for context source
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'

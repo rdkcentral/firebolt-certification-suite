@@ -40,7 +40,7 @@ Feature: Localization
     Scenario: Localization.latlon - Positive Scenario: Get latlon
         When '3rd party app' invokes the 'Firebolt' API to 'get localization latlon'
         Then 'Firebolt' platform responds with 'expected localization latlon'
-    
+
     @sdk @transport @Sev0
     Scenario Outline: Positive Scenario: Validate interlinked methods - <Methods>
         When '3rd party app' registers for the '<First_Event_Registration_Key>' event using the 'Firebolt' API
@@ -72,10 +72,10 @@ Feature: Localization
 
         @Sev0
         Examples:
-            | Scenario              | Method                | Event_Registration_Key         | Set_API_Key        | Get_API_Key               | Method_Validation_Key        | Event_Validation_Key                       |
-            | Set & get locale      | Localization.locale   | localization onLocaleChanged   | set locale to enUK | get localization locale   | enUK for localization locale | onlocalechanged for localization with enUK |
-            | Set & get Language es | Localization.language | localization onLanguageChanged | set language to es | get localization language | es for localization language | onlanguagechanged for localization with es |
-            | Set & get Language en | Localization.language | localization onLanguageChanged | set language to en | get localization language | en for localization language | onlanguagechanged for localization with en |
+            | Scenario                                   | Method                               | Event_Registration_Key                        | Set_API_Key                             | Get_API_Key                              | Method_Validation_Key                            | Event_Validation_Key                                               |
+            | Set & get locale                           | Localization.locale                  | localization onLocaleChanged                  | set locale to enUK                      | get localization locale                  | enUK for localization locale                     | onlocalechanged for localization with enUK                         |
+            | Set & get Language es                      | Localization.language                | localization onLanguageChanged                | set language to es                      | get localization language                | es for localization language                     | onlanguagechanged for localization with es                         |
+            | Set & get Language en                      | Localization.language                | localization onLanguageChanged                | set language to en                      | get localization language                | en for localization language                     | onlanguagechanged for localization with en                         |
 
         @Sev1
         Examples:

@@ -16,21 +16,17 @@ Feature: Device
             | Validate Device id          | fetch device id          | expected device id          | id          |
             | Validate Device distributor | fetch device distributor | expected device distributor | distributor |
             | Validate Device platform    | fetch device platform    | expected device platform    | platform    |
-            | Validate Device uid         | fetch device uid         | expected device uid         | uid         |
             | Validate Device type        | fetch device type        | expected device type        | type        |
+
+        @Sev1
+        Examples:
+            | Scenario                    | API_Key                  | Validation_Key              | Method      |
+            | Validate Device uid         | fetch device uid         | expected device uid         | uid         |
             | Validate Device model       | fetch device model       | expected device model       | model       |
             | Validate Device sku         | fetch device sku         | expected device sku         | sku         |
             | Validate Device make        | fetch device make        | expected device make        | make        |
 
-        @Sev2
-        Examples:
-            | Scenario              | API_Key            | Validation_Key        | Method |
-            | Validate Device uid   | fetch device uid   | expected device uid   | uid    |
-            | Validate Device model | fetch device model | expected device model | model  |
-            | Validate Device sku   | fetch device sku   | expected device sku   | sku    |
-            | Validate Device make  | fetch device make  | expected device make  | make   |
-
-    @sdk @transport
+    @sdk @transport @Sev2
     Scenario: Device.name - Positive Scenario: Validate device name change
         When '3rd party app' registers for the 'device onNameChanged' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'get device name'
@@ -40,7 +36,7 @@ Feature: Device
         Then 'Firebolt' platform responds with 'living hall for device name'
         And 'Firebolt' platform triggers event 'onDeviceNameChanged with living hall'
 
-    @mfos  @regression @sdk
+    @mfos @regression @sdk
     Scenario Outline: Device.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<validation_key>'
@@ -55,15 +51,16 @@ Feature: Device
 
         @Sev1
         Examples:
-            | Scenario       | Method | API_Key     | validation_key |
-            | Validate audio | audio  | fetch audio | expected audio |
+            | Scenario                  | Method           | API_Key                | validation_key            |
+            | Validate audio            | audio            | fetch audio            | expected audio            |
 
         @Sev2
         Examples:
-            | Scenario                | Method  | API_Key              | validation_key          |
-            | Validate device version | version | fetch device version | expected device version |
+            | Scenario                  | Method           | API_Key                | validation_key            |
+            | Validate device version   | version          | fetch device version   | expected device version   |
 
-    @regression @sdk @requiresPlatformImplementation
+
+    @regression @sdk @requiresPlatformImplementation @Sev2
     Scenario: Device.onNameChanged - Positive Scenario: Clearing event listeners
         When '3rd party app' registers for the 'device onNameChanged' event using the 'Firebolt' API
         And 1st party stops listening to the event 'device onNameChanged event'

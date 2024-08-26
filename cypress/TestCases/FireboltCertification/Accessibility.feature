@@ -16,10 +16,15 @@ Feature: Accessibility
         And 'Firebolt' platform responds to '3rd party app' get API
         And 'Firebolt' platform triggers '3rd party app' event
 
+        @Sev0
         Examples:
             | Scenario                             | Method             | Value                 |
             | Disable closedcaptions               | enabled            | false                 |
             | Enable closedcaptions                | enabled            | true                  |
+
+        @Sev1
+        Examples:
+            | Scenario                             | Method             | Value                 |
             | Set fontFamily-monospaced_sanserif   | fontFamily         | monospaced_sanserif   |
             | Set fontFamily-cursive               | fontFamily         | cursive               |
             | Set fontFamily-proportional_serif    | fontFamily         | proportional_serif    |
@@ -61,20 +66,21 @@ Feature: Accessibility
       Then 'Firebolt' platform responds with '<Method_Content>'
       And 'Firebolt' platform triggers event '<Event_Content>'
 
-        Examples:
-         | Scenario          | Key                           | Method_Content                      | Event_Content                                                            |
-         | fontFamily        | set fontFamily as null        | default value for fontFamily        | onclosedCaptionsSettingsChanged with default value for fontfamily        |
-         | fontSize          | set fontSize as null          | default value for fontSize          | onclosedCaptionsSettingsChanged with default value for fontSize          |
-         | fontColor         | set fontColor as null         | default value for fontColor         | onclosedCaptionsSettingsChanged with default value for fontColor         |
-         | fontEdge          | set fontEdge as null          | default value for fontEdge          | onclosedCaptionsSettingsChanged with default value for fontEdge          |
-         | fontEdgeColor     | set fontEdgeColor as null     | default value for fontEdgeColor     | onclosedCaptionsSettingsChanged with default value for fontEdgeColor     |
-         | fontOpacity       | set fontOpacity as null       | default value for fontOpacity       | onclosedCaptionsSettingsChanged with default value for fontOpacity       |
-         | backgroundColor   | set backgroundColor as null   | default value for backgroundColor   | onclosedCaptionsSettingsChanged with default value for backgroundColor   |
-         | backgroundOpacity | set backgroundOpacity as null | default value for backgroundOpacity | onclosedCaptionsSettingsChanged with default value for backgroundOpacity |
-         | textAlign         | set textAlign as null         | default value for textAlign         | onclosedCaptionsSettingsChanged with default value for textAlign         |
-         | textAlignVertical | set textAlignVertical as null | default value for textAlignVertical | onclosedCaptionsSettingsChanged with default value for textAlignVertical |
-         | windowColor       | set windowColor as null       | default value for windowColor       | onclosedCaptionsSettingsChanged with default value for windowColor       |
-         | windowOpacity     | set windowOpacity as null     | default value for windowOpacity     | onclosedCaptionsSettingsChanged with default value for windowOpacity     |
+      @Sev2
+      Examples:
+       | Scenario          | Key                           | Method_Content                      | Event_Content                                                            |
+       | fontFamily        | set fontFamily as null        | default value for fontFamily        | onclosedCaptionsSettingsChanged with default value for fontfamily        |
+       | fontSize          | set fontSize as null          | default value for fontSize          | onclosedCaptionsSettingsChanged with default value for fontSize          |
+       | fontColor         | set fontColor as null         | default value for fontColor         | onclosedCaptionsSettingsChanged with default value for fontColor         |
+       | fontEdge          | set fontEdge as null          | default value for fontEdge          | onclosedCaptionsSettingsChanged with default value for fontEdge          |
+       | fontEdgeColor     | set fontEdgeColor as null     | default value for fontEdgeColor     | onclosedCaptionsSettingsChanged with default value for fontEdgeColor     |
+       | fontOpacity       | set fontOpacity as null       | default value for fontOpacity       | onclosedCaptionsSettingsChanged with default value for fontOpacity       |
+       | backgroundColor   | set backgroundColor as null   | default value for backgroundColor   | onclosedCaptionsSettingsChanged with default value for backgroundColor   |
+       | backgroundOpacity | set backgroundOpacity as null | default value for backgroundOpacity | onclosedCaptionsSettingsChanged with default value for backgroundOpacity |
+       | textAlign         | set textAlign as null         | default value for textAlign         | onclosedCaptionsSettingsChanged with default value for textAlign         |
+       | textAlignVertical | set textAlignVertical as null | default value for textAlignVertical | onclosedCaptionsSettingsChanged with default value for textAlignVertical |
+       | windowColor       | set windowColor as null       | default value for windowColor       | onclosedCaptionsSettingsChanged with default value for windowColor       |
+       | windowOpacity     | set windowOpacity as null     | default value for windowOpacity     | onclosedCaptionsSettingsChanged with default value for windowOpacity     |
 
     @sdk @transport
     Scenario Outline: Accessibility.voiceGuidanceSettings - Positive Scenario: <Scenario>
@@ -87,15 +93,20 @@ Feature: Accessibility
         And 'Firebolt' platform responds to '3rd party app' get API
         And 'Firebolt' platform triggers '3rd party app' event
 
+        @Sev0
         Examples:
             | Scenario              | Method  | Value |
             | Disable voiceguidance | enabled | false |
             | Enable voiceguidance  | enabled | true  |
+
+        @Sev1
+        Examples:
+            | Scenario              | Method  | Value |
             | Set speed-1           | speed   | 1     |
             | Set speed-0.5         | speed   | 0.5   |
             | Set speed-2           | speed   | 2     |
 
-    @sdk @transport
+    @sdk @transport @Sev1
     Scenario Outline: Accessibility.audioDescriptionSettings - Positive Scenario: <Scenario>
         Given we test the 'AUDIODESCRIPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
         When '3rd party app' registers for the 'Firebolt' event
@@ -121,10 +132,15 @@ Feature: Accessibility
         And 'Firebolt' platform responds to '3rd party app' get API
         And 'Firebolt' platform triggers '3rd party app' event
 
+        @Sev0
         Examples:
             | Scenario                           | Method            | Value               |
             | Disable closedcaptions             | enabled           | false               |
             | Enable closedcaptions              | enabled           | true                |
+
+        @Sev1
+        Examples:
+            | Scenario                           | Method            | Value               |
             | Set fontFamily-monospaced_sanserif | fontFamily        | monospaced_sanserif |
             | Set fontSize-1                     | fontSize          | 1                   |
             | Set fontColor-#ffffff              | fontColor         | #ffffff             |
@@ -138,7 +154,7 @@ Feature: Accessibility
             | Set windowColor-#7f7f7f            | windowColor       | #7F7F7F             |
             | Set windowOpacity-40               | windowOpacity     | 40                  |
 
-   @sdk @transport @requiresPlatformImplementation
+   @sdk @transport @requiresPlatformImplementation @Sev2
    Scenario: Accessibility.onClosedCaptionsSettingsChanged event - Positive Scenario: Clear listeners
       When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And 1st party stops listening to the event 'accessibility onClosedCaptionsSettingsChanged event'
@@ -157,8 +173,13 @@ Feature: Accessibility
         And 'Firebolt' platform responds to '3rd party app' get API
         And 'Firebolt' platform triggers '3rd party app' event
 
+        @Sev0
         Examples:
             | Scenario              | Method  | Value |
             | Disable voiceguidance | enabled | false |
             | Enable voiceguidance  | enabled | true  |
+
+        @Sev1
+        Examples:
+            | Scenario              | Method  | Value |
             | Set speed-1           | speed   | 1     |
