@@ -1,3 +1,10 @@
+# [1.2.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.1.1-dev.1...v1.2.0-dev.1) (2024-08-22)
+
+
+### Features
+
+* Implement new metrics API for 1.3.0 release ([#167](https://github.com/rdkcentral/firebolt-certification-suite/issues/167)) ([cd3062e](https://github.com/rdkcentral/firebolt-certification-suite/commit/cd3062e332fd8eaa5e256e09dd1ff96cdcc72a9a))
+
 ## [1.1.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.1.0...v1.1.1-dev.1) (2024-08-20)
 
 
