@@ -408,6 +408,10 @@ The 'schemaOnly` validation type allows to skip content validation and stops at 
     }
 ```
 
+# Dynamic Content Validation
+
+Documentation added in [dynamicContentValidations.md](./dynamicContentValidations.md)
+
 # Validation Override
 
 ## Format
@@ -444,87 +448,6 @@ While validating, if a key is present in both fcs-validation jsons (eg: cypress/
             }
         ]
 }
-
-# Dynamic Content Validation
-
-### Background:
-For the fixture validations mentioned in [Supported Validations](./validations.md#supported-validations), deviceContentValidation is used when the validation is done based on device specific value.
-For eg :
-
-```
-    "DEVICE_ID": {
-        "data": [
-            {
-                "type": "fixture",
-                "validations": [
-                    {
-                        "mode": "deviceContentValidation",
-                        "type": "DEVICEID",
-                        "description": "Validation of the Device Id Format"
-                    }
-                ]
-            }
-        ]
-    }
-
-```
-
-When the validation mode is "deviceContentValidation", the source of truth for the validation can be taken in two ways:
-1. Static data 
-2. Dynamic data
-
-Static data :
-For static data, the source of truth is stored in a <deviceMac.json> file placed [here](../../fixtures/external/devices/) based on the deviceMac value being tested. When the test begins, these values are loaded into an object stored in an environment variable called deviceData. If deviceMac.json is not found in the specified path, the values are saved as they are, for example: DEVICEID: "DEVICEID".
-
-Dynamic data :
-For dynamic data, the source of truth is fetched from the configModule's override function called "fetchDeviceDetails" explained [here](https://github.com/rdkcentral/firebolt-certification-suite?tab=readme-ov-file#request-overrides).
-
-### Usage :
-
-To fetch dynamic data from configModule, set an environment variable fetch_device_details_dynamically as true in the [supportConfig.json](../../../supportConfig.json). If this environment variable is true, dynamic details will be fetched from configModule based on the platform and override the existing environment variable deviceData, which holds the static data from <deviceMac.json>.
-
-If the dynamic device details fetching fails in configModule, the data will default to the static data. FCS expects the source of truth to be generated for the modules listed in [DYNAMIC_DEVICE_DETAILS_MODULES](../constants/constants.js). 
-
-
-### Implementation :
-
-The configModule should have an override function "fetchDeviceDetails" as explained [here](https://github.com/rdkcentral/firebolt-certification-suite?tab=readme-ov-file#request-overrides). This function should fetch the data and return it in the format specified below. If deviceId, deviceType, and distributor values need to be extracted, they should be saved as "DEVICEID", "DEVICE_TYPE", and "DEVICE_DISTRIBUTOR" keys, as these are the key names used in the validationObject. These values will then replace the values in <device-mac.json> stored in the environment variable "DEVICE_DATA" in FCS.
-
-When the test starts, deviceId is passed from FCS to this override function for the modules listed in [DYNAMIC_DEVICE_DETAILS_MODULES](../constants/constants.js) as the only parameter, which is later used to extract device details. If the data contains multiple objects, the required device details are fetched by mapping them with the corresponding deviceId passed from FCS to configModule.
-For example, if activeDevicedata is the dynamic device response, the data extraction will be as follows:
-
-#### Format
-
-```
-    if (activeDevicedata.id == deviceId) {
-      extractedData.DEVICEID = activeDevicedata.id;
-      extractedData.DEVICE_TYPE = activeDevicedata.data.deviceType;
-      extractedData.DEVICE_DISTRIBUTOR = deviceData[0].data.partner;
-
-    }
-    Cypress.env(CONSTANTS.DEVICE_DATA, extractedData);
-```
-
-### Example :
-From FCS, the override function is invoked in the following format:
-Format:
-  ```
-   {
-    "method": "fcs.fetchDeviceDetails",
-    "params": <deviceId>
-  }
-
-The response by overriding the static values in the environment will be as follows:
-Example:
-
-  ```
-  {
-    "DEVICEID": "354444327",
-    "DEVICE_TYPE": "ipstb",
-    "DEVICE_MODEL": "VALUE",
-     ...
-}
-  ```
 
 
 ## Error Content Validation
