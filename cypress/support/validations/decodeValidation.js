@@ -133,15 +133,18 @@ class decodeValidations {
           const indexOfParam = decode.indexOf(param);
 
           if (decode.startsWith('<?')) {
+            // Handle XML data extraction
             const start = decode.indexOf('>', indexOfParam) + 1;
             const end = decode.indexOf('</', start);
             extractedData = decode.slice(start, end).trim();
           } else {
+            // Handle JSON data extraction
             const start = decode.indexOf(':', indexOfParam) + 1;
             const end = decode.indexOf(',', start);
             extractedData = decode.slice(start, end).trim().replace(/"/g, '');
           }
 
+          // Clean up the extracted data. Remove any whitespaces, quotes or curly braces
           extractedData = extractedData.replace(/^[\s"']+|[\s"'}]+$/g, '');
           const resultSet = regexFormat.test(extractedData);
 
