@@ -1,3 +1,10 @@
+# [1.2.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.1...v1.2.0-dev.2) (2024-08-27)
+
+
+### Bug Fixes
+
+* updated miscValidation logs of advertising ([#187](https://github.com/rdkcentral/firebolt-certification-suite/issues/187)) ([31145af](https://github.com/rdkcentral/firebolt-certification-suite/commit/31145af4ebc5137d2bd79ab4c59d112b68e0f360))
+
 # [1.2.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.1.1-dev.1...v1.2.0-dev.1) (2024-08-22)
 
 
