@@ -248,8 +248,8 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
  * @description To start or stop performance metrics service in device by passing appropriate intent to performance test handler
  * @param {String} action - start or stop
  * @example
- * Given metrics collection is inititated
- * Given metric collection is stopped
+ * Given Metrics collection process is inititated
+ * Given Metrics collection process is stopped
  */
 Given(/Metrics collection process is '(initiated|stopped)'/, (action) => {
   if (
@@ -277,12 +277,13 @@ Given(/Metrics collection process is '(initiated|stopped)'/, (action) => {
 
 /**
  * @module validations
- * @function Validate (device|process|all) (memory|load|set size|required) consumption is within the limit of the threshold(?: of '(.+)' (cpu|bytes) with '(.+)' percentile
- * @descriptionvalidate Validates whether or not the cpu threshold of 'process' exceeds the 'percentile' of 'cpuThreshold'
- * @param {String} type - (cpu | memory)
- * @param {String} process - (ResidentApp | SearchAndDiscov)
- * @param {String} percentile - percentile
+ * @function Validate (device|process|all) (memory|load|set size|required) consumption is within the limit of the threshold(?: of '(.+)' (cpu|bytes) with '(.+)' percentile)
+ * @descriptionvalidate Validates the cpu or memory threshold of 'process' exceeds the 'percentile' of 'cpuThreshold'
+ * @param {String} type - (device|process|all) Which type of threshold values
+ * @param {String} process - (memory|load|set size|required) Which process to validate
  * @param {String} threshold - the maximum cpu/bytes threshold
+ * @param {String} bytes - (cpu|bytes) Thresold in bypes or cpu's
+ * @param {String} percentile - How much percentile
  * @example
  * Then Validate device load consumption is within the limit of the threshold
  * Then Validate process set size consumption is within the limit of the threshold of '1073741824' bytes with '70' percentile

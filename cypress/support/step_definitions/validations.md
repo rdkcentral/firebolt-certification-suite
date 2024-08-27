@@ -40,7 +40,24 @@
  * `Given Metrics collection process is 'inititated'`
  * `Given Metrics collection process is 'stopped'`
 
- ## '(.+)' will (be|stay) in '(.+)' state
+## Validate (device|process|all) (memory|load|set size|required) consumption is within the limit of the threshold(?: of '(.+)' (cpu|bytes) with '(.+)' percentile)
+### Purpose: Validates the cpu or memory threshold of 'process' exceeds the 'percentile' of 'cpuThreshold'
+
+### Params:
+| Param | Definition |
+| --- | --- |
+| type | (device|process|all) Which type of threshold values |
+| process | (memory|load|set size|required) Which process to validate |
+| threshold | the maximum cpu/bytes threshold |
+| bytes | (cpu|bytes) Thresold in bypes or cpu's |
+| percentile | How much percentile |
+
+### Examples:
+ * `Then Validate device load consumption is within the limit of the threshold`
+ * `Then Validate process set size consumption is within the limit of the threshold of '1073741824' bytes with '70' percentile`
+ * `Then Validate all required consumption is within the limit of the threshold`
+
+## '(.+)' will (be|stay) in '(.+)' state
 ### Purpose: To validate 3rd party app transitionss wrt state, event and history aagainst appObject as the source of truth
 Here, be/stay determines whether the app will get transitioned to new state or will be staying in the same state.
 For the validation part, for the states when the app is not reachable for us to get the status or history, we use customValidation , where we get the validation key name from the moduleReqId.json of the specific testcase. The customValidation function will be defined in the corresponding confiModule. Refer to the [custom] validation.
