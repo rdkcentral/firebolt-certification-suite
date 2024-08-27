@@ -8,8 +8,8 @@ Feature: Device_Manage
     @sdk @transport
     Scenario: Device.name - Positive Scenario: set device name - Bedroom
         Given we test the 'DEVICE_NAME' getters and setters 'setName' to 'Bedroom'
-        When '1st party app' registers for the 'Firebolt' event
-        And 1st party app invokes the 'Firebolt' API to set value
+        And '1st party app' registers for the 'Firebolt' event
+        When 1st party app invokes the 'Firebolt' API to set value
         Then 'Firebolt' platform responds to '1st party app' set API
         When '1st party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '1st party app' get API

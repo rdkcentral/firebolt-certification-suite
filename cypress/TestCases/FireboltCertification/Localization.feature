@@ -12,8 +12,8 @@ Feature: Localization
 
     @sdk @transport
     Scenario Outline: Localization.addAdditionalInfo - Positive Scenario: <Scenario>
-        When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
-        And 1st party app invokes the 'Firebolt' API to '<API_Key>'
+        Given '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
+        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         Then 'Firebolt' platform responds with '<Validation_Key>'
@@ -25,8 +25,8 @@ Feature: Localization
 
     @sdk @transport
     Scenario Outline: Localization.removeAdditionalInfo - Positive Scenario: <Scenario>
-        When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
-        And 1st party app invokes the 'Firebolt' API to '<API_Key>'
+        Given '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
+        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         Then 'Firebolt' platform responds with '<Validation_Key>'
@@ -43,10 +43,10 @@ Feature: Localization
     
     @sdk @transport
     Scenario Outline: Positive Scenario: Validate interlinked methods - <Methods>
-        When '3rd party app' registers for the '<First_Event_Registration_Key>' event using the 'Firebolt' API
+        Given '3rd party app' registers for the '<First_Event_Registration_Key>' event using the 'Firebolt' API
         And '3rd party app' registers for the '<Second_Event_Registration_Key>' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to '<First_Get_API_Key>'
-        And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
+        When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to '<First_Get_API_Key>'
         Then 'Firebolt' platform responds with '<First_Method_Validation_Key>'
@@ -61,11 +61,11 @@ Feature: Localization
             | Localization.locale and Localization.language    | localization onLocaleChanged | localization onLanguageChanged    | set locale to esUK | get localization locale | get localization language    | esUK for localization locale | es for localization language    | onlocalechanged for localization with esUK | onlanguagechanged for localization with es    |
 
     @sdk @transport
-    Scenario Outline: <Method> - Positive Scenario: Validate <Scenario>
+    Scenario Outline: Localization.<Method> - Positive Scenario: Validate <Scenario>
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
-        When '3rd party app' registers for the 'Firebolt' event
+        And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
-        And 1st party app invokes the 'Firebolt' API to set value
+        When 1st party app invokes the 'Firebolt' API to set value
         Then 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '3rd party app' get API
@@ -84,9 +84,9 @@ Feature: Localization
 
     @Device  @regression @sdk @requiresPlatformImplementation
     Scenario Outline: Localization.<Method_Name> - Positive Scenario: Clearing event listeners
-        When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
+        Given '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
         And 3rd party stops listening to the event '<Clear_Event_Name>'
-        And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
+        When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
         And 'Firebolt' platform does not trigger event for '<Event_Validation_Key>'
 

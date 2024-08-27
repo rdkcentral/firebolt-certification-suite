@@ -8,8 +8,8 @@ Feature: AudioDescriptions_Manage
    @sdk @transport
    Scenario Outline: AudioDescriptions.enabled - Positive Scenario: <Scenario>
       Given we test the 'AUDIODESCRIPTIONS' getters and setters 'enabled' to '<Value>'
-      When '1st party app' registers for the 'Firebolt' event
-      And 1st party app invokes the 'Firebolt' API to set value
+      And '1st party app' registers for the 'Firebolt' event
+      When 1st party app invokes the 'Firebolt' API to set value
       Then 'Firebolt' platform responds to '1st party app' set API
       When '1st party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '1st party app' get API

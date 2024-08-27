@@ -29,9 +29,9 @@ Feature: SecondScreen
    @sdk @transport
    Scenario: SecondScreen.FriendlyName - Positive Scenario: Validate Set friendlyName
       Given we test the 'SECONDSCREEN_FRIENDLYNAME' getters and setters 'name' to 'Guest Room'
-      When '3rd party app' registers for the 'Firebolt' event
+      And '3rd party app' registers for the 'Firebolt' event
       And '3rd party app' invokes the 'Firebolt' get API
-      And 1st party app invokes the 'Firebolt' API to set value
+      When 1st party app invokes the 'Firebolt' API to set value
       Then 'Firebolt' platform responds to '1st party app' set API
       When '3rd party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '3rd party app' get API
@@ -41,7 +41,7 @@ Feature: SecondScreen
    Scenario: SecondScreen.onFriendlyNameChanged - Positive Scenario: Validating event clearing listeners
       Given '3rd party app' registers for the 'secondscreen onFriendlyNameChanged' event using the 'Firebolt' API
       And 3rd party stops listening to the event 'secondscreen onFriendlyNameChanged event'
-      And 1st party app invokes the 'Firebolt' API to 'set friendlyName to guest room'
+      When 1st party app invokes the 'Firebolt' API to 'set friendlyName to guest room'
       Then 'Firebolt' platform responds to '1st party app' for 'set friendlyName to guest room'
       And 'Firebolt' platform does not trigger event for 'onFriendlyNameChanged'
 

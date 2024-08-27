@@ -7,8 +7,8 @@ Feature: ClosedCaptions_Manage
     @sdk @transport
     Scenario Outline: ClosedCaptions.<Method> - Positive Scenario: <Scenario>
         Given we test the 'CLOSED_CAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
-        When '1st party app' registers for the 'Firebolt' event
-        And 1st party app invokes the 'Firebolt' API to set value
+        And '1st party app' registers for the 'Firebolt' event
+        When 1st party app invokes the 'Firebolt' API to set value
         Then 'Firebolt' platform responds to '1st party app' set API
         When '1st party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '1st party app' get API
@@ -51,8 +51,8 @@ Feature: ClosedCaptions_Manage
 
     @sdk @transport
     Scenario Outline: Closedcaptions.<Method> - Positive Scenario: <Scenario> with 'null' params
-        When 1st party app registers for the '<Event>' event using the 'Firebolt' API
-        And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
+        Given 1st party app registers for the '<Event>' event using the 'Firebolt' API
+        When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
