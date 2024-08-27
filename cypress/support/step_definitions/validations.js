@@ -334,7 +334,7 @@ Given(/Interactions collection process is (initiated|stopped)/, (action) => {
 Given(/Validate Firebolt Interactions logs with '(.+)'/, (key) => {
   if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS, false) !== true) {
     cy.log(`Interactions log service is not enabled`).then(() => {
-      return
+      return;
     });
   }
   key = key.replaceAll(' ', '_').toUpperCase();
