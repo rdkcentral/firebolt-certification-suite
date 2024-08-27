@@ -280,14 +280,8 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                       if (!deviceMac) {
                         logger.info('Falling back to default device data path');
                       }
-                      let deviceData = fetchAndParseDataFromJson(deviceDataPath, data.type);
-                      if (deviceData === CONSTANTS.NO_DATA) {
-                        logger.info(
-                          `Expected deviceData not found for ${data.type}. Returning ${data.type} as is.`
-                        );
-                        deviceData = data.type;
-                      }
-                      data.type = deviceData;
+                      const deviceData = fetchDataFromFile(deviceDataPath);
+                      envVariables[CONSTANTS.DEVICE_DATA] = deviceData;
                       break;
 
                     default:
