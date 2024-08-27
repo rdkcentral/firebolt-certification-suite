@@ -1,3 +1,10 @@
+# [1.2.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.2...v1.2.0-dev.3) (2024-08-27)
+
+
+### Features
+
+* added support in env setup glue for fetching device details dynamically ([#188](https://github.com/rdkcentral/firebolt-certification-suite/issues/188)) ([85a8f77](https://github.com/rdkcentral/firebolt-certification-suite/commit/85a8f77bea66722e1ca27b489ea528b05900971b))
+
 # [1.2.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.1...v1.2.0-dev.2) (2024-08-27)
 
 
