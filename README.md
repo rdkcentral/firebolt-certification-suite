@@ -294,7 +294,7 @@ Below data apply to Account module, so data will go into cypress/fixtures/module
 
 ## Manual Cache Deletion for Cypress
 
-If you encounter any caching issues while executing testcases, please refer to this document [Cache_Deletion.md](Docs/Cache_Deletion.md).
+If you encounter any caching issues while executing testcases, please refer to this document [Cache_Deletion.md](Docs/Cache_Deletion.md)
 
 ## Using Winston Logger for Better Debugging
 
