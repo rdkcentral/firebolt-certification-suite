@@ -613,9 +613,9 @@ function validateVisibilityState(state) {
         else if (result.error) {
           assert(false, result.error.message);
         }
-
-        const pretext =
-          lifecycleStateRequirementId.visible_check.id + CONSTANTS.VISIBILITYSTATE_VALIDATION_REQ;
+        const pretext = lifecycleStateRequirementId?.visible_check?.id
+          ? lifecycleStateRequirementId.visible_check.id + CONSTANTS.VISIBILITYSTATE_VALIDATION_REQ
+          : CONSTANTS.VISIBILITYSTATE_VALIDATION_REQ;
         // checking if actual value is different from the default value
         if (visibilityState[state] != result.report) {
           // log to print a reason for failure and how to fix it

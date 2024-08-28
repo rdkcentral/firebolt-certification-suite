@@ -32,7 +32,7 @@
     "CUSTOM_ERROR_FOR_CLOSEDCAPTIONS_SETFONTEDGE":{
         "method": "closedcaptions.setFontEdge",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETFONTEDGECOLOR":{
@@ -50,7 +50,7 @@
     "CUSTOM_ERROR_FOR_CLOSEDCAPTIONS_SETFONTOPACITY":{
         "method": "closedcaptions.setFontOpacity",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETFONTOPACITY":{
@@ -62,7 +62,7 @@
     "CUSTOM_ERROR_FOR_CLOSEDCAPTIONS_SETBACKGROUNDOPACITY":{
         "method": "closedcaptions.setBackgroundOpacity",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLOSEDCAPTIONS_SETBACKGROUNDOPACITY":{
@@ -104,13 +104,13 @@
     "CUSTOM_ERROR_FOR_CLOSEDCAPTIONS_SETFONTSIZE":{
         "method": "closedcaptions.setFontSize",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_CLOSEDCAPTIONS_SETFONTFAMILY":{
         "method": "closedcaptions.setFontFamily",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "ENABLED_FOR_CLOSEDCAPTIONS_SETENABLED": {

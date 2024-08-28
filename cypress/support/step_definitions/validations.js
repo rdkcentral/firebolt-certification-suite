@@ -18,7 +18,7 @@
 import { Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module validations
@@ -63,6 +63,34 @@ Given(
             : CONSTANTS.NULL_RESPONSE;
           const expectingError = item.expectingError;
           const isNullCase = item.isNullCase || false;
+          // check if the device details env is present
+          if (
+            Cypress.env(CONSTANTS.DEVICE_DATA) &&
+            Object.keys(Cypress.env(CONSTANTS.DEVICE_DATA)).length > 0
+          ) {
+            let type;
+            // if the validation object used for current validation contains the required data
+            if (contentObject && contentObject.data) {
+              for (let i = 0; i < contentObject.data.length; i++) {
+                if (
+                  contentObject.data[i].validations &&
+                  contentObject.data[i].validations[0] &&
+                  contentObject.data[i].validations[0].type &&
+                  contentObject.data[i].validations[0].mode == CONSTANTS.DEVICE_CONTENT_VALIDATION
+                ) {
+                  type = contentObject.data[i].validations[0].type;
+                  // if the dynamic device details env contains the validation key
+                  if (Cypress.env(CONSTANTS.DEVICE_DATA).hasOwnProperty(type)) {
+                    contentObject.data[i].validations[0].type = Cypress.env(CONSTANTS.DEVICE_DATA)[
+                      type
+                    ];
+                  }
+                }
+              }
+            }
+          } else {
+            fireLog.info('deviceData environment variable does not have the required data');
+          }
 
           // If the app ID is not passed from the feature, the default app ID will be retrieved.
           appId = !appId
@@ -177,36 +205,40 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
   const scenarioName = cy.state().test.title;
   const moduleReqIdJson = Cypress.env(CONSTANTS.MODULEREQIDJSON);
   const featureFileName = cy.state().test.parent.title;
-  const scenarioList = moduleReqIdJson.scenarioNames[featureFileName];
-  const validationObject = scenarioList[scenarioName].validationObject;
+  const scenarioList = moduleReqIdJson?.scenarioNames[featureFileName];
+  const validationObject = scenarioList[scenarioName]?.validationObject;
   // custom validation in case of lifecycle test cases where app is not reachable
   // if validationObject is present in the modReqId for the specific TC, we have to validate based on that value
-  if (validationObject) {
-    if (Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON).hasOwnProperty(validationObject)) {
-      // the validation type is expected to be "custom"
-      if (
-        Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject].data[0].type ==
-        'custom'
-      ) {
-        const validationObjectData = Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[
-          validationObject
-        ].data[0];
-        // passing the validationObject to perform customValidation
-        cy.customValidation(validationObjectData);
-      } else {
-        assert(
-          false,
-          `Expected validationObject to be of "custom" type. Current value : ${Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject].data[0].type}`
-        );
+  try {
+    if (validationObject) {
+      if (Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON).hasOwnProperty(validationObject)) {
+        // the validation type is expected to be "custom"
+        if (
+          Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject]?.data[0]?.type ==
+          'custom'
+        ) {
+          const validationObjectData = Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[
+            validationObject
+          ].data[0];
+          // passing the validationObject to perform customValidation
+          cy.customValidation(validationObjectData);
+        } else {
+          assert(
+            false,
+            `Expected validationObject to be of "custom" type. Current value : ${Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject].data[0].type}`
+          );
+        }
       }
+    } else {
+      cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
+      cy.validateLifecycleHistoryAndEvents(
+        appObject.getAppObjectState().state,
+        appId,
+        isEventsExpected
+      );
     }
-  } else {
-    cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
-    cy.validateLifecycleHistoryAndEvents(
-      appObject.getAppObjectState().state,
-      appId,
-      isEventsExpected
-    );
+  } catch (error) {
+    throw new Error(`Error occurred during validation: ${JSON.stringify(error)}`);
   }
 });
 
@@ -279,3 +311,54 @@ Given(
     });
   }
 );
+
+/**
+ * @module validations
+ * @function Given Interactions collection process is (initiated|stopped)
+ * @description To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
+ * @param {String} action - initiated or stopped
+ * @example
+ * Given Interactions collection process is initiated
+ * Given Interactions collection process is stopped
+ */
+Given(/Interactions collection process is (initiated|stopped)/, (action) => {
+  if (
+    (action == CONSTANTS.INITIATED &&
+      UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) != true) ||
+    (action == CONSTANTS.STOPPED &&
+      UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED) == true)
+  ) {
+    // clearing the logs before starting the service
+    if (action === CONSTANTS.INITIATED) {
+      UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
+    }
+    cy.startOrStopInteractionsService(action).then((response) => {
+      if (response) {
+        Cypress.env(
+          CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED,
+          action == CONSTANTS.INITIATED ? true : false
+        );
+      } else {
+        const message =
+          action == CONSTANTS.INITIATED
+            ? CONSTANTS.FAILED_TO_INITIATE_INTERACTIONS_SERVICE
+            : CONSTANTS.FAILED_TO_STOP_INTERACTIONS_SERVICE;
+        fireLog.assert(false, message);
+      }
+    });
+  } else {
+    cy.log(CONSTANTS.INTERACTIONS_SERVICE_ENABLED);
+  }
+});
+
+/**
+ * @module validations
+ * @function Given Validate Firebolt Interactions logs
+ * @description Validating the firebolt interaction logs in configModule
+
+ * @example
+ * Given Validate Firebolt Interactions logs
+ */
+Given(/Validate Firebolt Interactions logs/, () => {
+  cy.then(() => cy.validateFireboltInteractionLogs());
+});

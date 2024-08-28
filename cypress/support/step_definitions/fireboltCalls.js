@@ -175,13 +175,15 @@ Given(/1st party app registers for the '(.+)' event using the '(.+)' API$/, asyn
 
 /**
  * @module fireboltCalls
- * @function And I clear '(.+)' listeners
+ * @function And (3rd party|1st party) stops listening to the event '(.+)'
  * @description sending message to platform/third party App to clear event listener.
+ * @param {String} app - value to determine 1st party or 3rd party.
  * @param {String} key - key name of the data contains event name and parameter.
  * @example
- * And I clear 'clear accessibility.onClosedCaptionsSettingsChanged' listeners
+ * And '1st party' stops listening to the event 'accessibility.onClosedCaptionsSettingsChanged'
+ * And '3rd party' stops listening to the event 'accessibility.onClosedCaptionsSettingsChanged'
  */
-Given(/I clear '(.+)' listeners$/, async (key) => {
+Given(/(3rd party|1st party) stops listening to the event '(.+)'$/, async (app, key) => {
   key = key.replaceAll(' ', '_').toUpperCase();
   cy.getFireboltData(key, CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS).then((parsedData) => {
     // Check if parsedData is an array or an object
@@ -332,5 +334,17 @@ Given(/User triggers event with value as '(.+)'/, (key) => {
         }
       });
     });
+  });
+});
+
+/**
+ * @function device is rebooted
+ * @description Reboot a device during test execution
+ * @example
+ * When device is rebooted
+ */
+Given('device is rebooted', () => {
+  fireLog.info(CONSTANTS.STEP_DEFINITION_NEEDS_TO_IMPLEMENT).then(() => {
+    throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
   });
 });

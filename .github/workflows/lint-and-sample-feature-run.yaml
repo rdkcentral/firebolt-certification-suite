@@ -1,0 +1,149 @@
+name: Lint Check and Sample Feature Run
+
+on:
+  pull_request:
+    branches:
+      - dev
+      - main
+  workflow_call:
+    inputs:
+      branch:
+        type: string
+        required: false
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.branch || github.head_ref }}
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Check for linting errors
+        run: yarn run lint > lintOutput.txt || true
+
+      - name: Determine comment based on linting results
+        id: comment
+        run: |
+          LINT_ERRORS=""
+          if [ -f lintOutput.txt ]; then
+              LINT_ERRORS=$(grep -E '[1-9][0-9]*\serror' lintOutput.txt || true)
+          fi
+          cat lintOutput.txt
+          
+          if [ -n "$LINT_ERRORS" ]; then
+           {
+              echo 'PR_COMMENT<<EOF'
+              echo -n 'Issue with linting detected.\n'
+              echo -n 'Linting failed with the following errors:\n'
+              echo -n '```\n'
+              awk '{printf "%s\\n", $0}' lintOutput.txt
+              echo -n '```\n'
+              echo -n '\n'
+              echo -n 'For more information on our linting policies, please see our [Linting-Guide](../tree/dev/Linting-Guide.md).\n'
+              echo '\n'
+              echo 'EOF'
+            } >> "$GITHUB_OUTPUT"
+            exit 1
+          else
+            echo "PR_COMMENT=Linting succeeded."
+          fi
+
+      - name: Notify PR on Failure
+        if: ${{ failure() && github.event_name == 'pull_request' }}
+        uses: ./.github/actions/pr-comment
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_comment: ${{ steps.comment.outputs.PR_COMMENT }}
+
+  run_testcase:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.branch || github.head_ref }}
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run Hello feature
+        run: yarn run cy:run -- --spec "cypress/TestCases/Sample/Hello.feature" --env testSuite="sample",generateLocalReport="false" > sampleRunOutput.txt || true
+
+      # To remove ANSI escape characters
+      - name: Remove ANSI escape codes from sampleRunOutput.txt
+        run: sed -i "s/\x1B\[[0-9;]*[JKmsu]//g" sampleRunOutput.txt
+
+      - name: Determine comment based on test results
+        id: comment
+        run: |
+          if grep -q "Build failed" sampleRunOutput.txt; then
+            # Build errors
+            grep -A 5 "Build failed" sampleRunOutput.txt > buildErrors.txt
+            cat buildErrors.txt
+          
+           {
+              echo 'PR_COMMENT<<EOF'
+              echo -n 'Build error occurred while running sample test with the following errors:\n'
+              echo -n '\n'
+              echo -n '```\n'
+              awk '{gsub(/"/, "\\\""); printf "%s\\n", $0}' buildErrors.txt
+              echo -n '```\n'
+              echo -n '\n'
+              echo -n 'For more information on our testing policies, please see our [Testing-Guide](../tree/dev/Testing-Guide.md).\n'
+              echo '\n'
+              echo 'EOF'
+            } >> "$GITHUB_OUTPUT"
+            exit 1
+          elif grep -q "0 passing" sampleRunOutput.txt; then
+            # Test case failure
+            FAILURE_REASON=$(sed -n '/1 failing/,/\[mochawesome\]/ {
+                            /1 failing/b
+                            /\[mochawesome\]/b
+                            p
+                            }' sampleRunOutput.txt > failure_reason.txt)
+          
+            {
+              echo 'PR_COMMENT<<EOF'
+              echo -n 'Hello feature run failed with the following errors:\n'
+              echo -n '\n'
+              echo -n '```\n'
+              awk '{gsub(/"/, "\\\""); printf "%s\\n", $0}' failure_reason.txt
+              echo -n '```\n'
+              echo -n '\n'
+              echo -n 'For more information on our testing policies, please see our [Testing-Guide](../tree/dev/Testing-Guide.md).\n'
+              echo '\n'
+              echo 'EOF'
+            } >> "$GITHUB_OUTPUT"
+            exit 1
+          else
+            echo "Hello feature run succeeded."
+          fi
+
+
+      - name: Notify PR on Failure
+        if: ${{ failure() && github.event_name == 'pull_request' }}
+        uses: ./.github/actions/pr-comment
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_comment:  ${{ steps.comment.outputs.PR_COMMENT }}

@@ -69,9 +69,9 @@ To execute the certification suite against any platform, the following setup mus
 | firebolt_specification_proposed_url | string  | ''                                | Path for the proposed firebolt specification url                                                                                                                                                                    |
 | healthCheckRetries                  | number  | 8                                 | Health check retry count                                                                                                                                                                                            |
 | communicationMode                   | string  | 'SDK' or 'Transport'              | Set communicationMode as SDK/transport. Default mode is SDK                                                                                                                                                         |
-| performanceMetrics                  | boolean | true                              | Makes a call to platform to start/stop the recording of performance metrics if value is true                                                                                                                        |
+| performanceMetrics                  | boolean | true                              | Makes a call to platform to start/stop the recording of performance metrics based on action passed   |
+|interactionsMetrics                      | boolean | true                           | Makes a call to platform to start/stop listening to firebolt interactions based on action passed |
 | pubSubUrl                           | string  | ws://127.0.0.1:8081               | Sets the the url to use for a PubSub server which will be used for 3rd party app communication.                                                                                                                     |
-
 | fcaAppList                  | array | ['default3rdPartyAppId']     | Holds the list of fca app identifiers |
 
 - Provide the specPattern mapping details. 
@@ -253,79 +253,12 @@ HTTP call to the platform:<br/>
 
 ## Request overrides
 
-### fetchPerformanceThreshold:
+Documentation added in [Request_Overrides.md](/Docs/Request_Overrides.md)
 
-- Request:<br>
-  Makes an HTTP request to graphite with deviceMac, processType with how much percentile, and from what time to fetch the metrics.<br>
-  Format:
-  ```
-   {
-     method: 'performance.fetchPerformanceThreshold',
-     params: {'type': '<(device|process|all)>', process: '<(memory|load|set size|required)>', percentile: 70, threshold: '<Threshold to use as source of truth>'}
-   }
-  ```
-  Examples:
-  ```
-   {
-     method: 'performance.fetchPerformanceThreshold',
-     params: {'type': 'device', process: 'memory', percentile: 70, threshold: '35000000'}
-   }
-   {
-     method: 'performance.fetchPerformanceThreshold',
-     params: {'type': 'process', process: 'set size', percentile: 70, threshold: '75000000'}
-   }
-   {
-     method: 'performance.fetchPerformanceThreshold',
-     params: {'type': 'all', process: 'required', percentile: 70, threshold: '75000000'}
-   }
-  ```
-- Response:<br>
-  Receives an array of objects, which contains success and message properties, success defines the execution is a success or failure and message defines either response or any custom message that descibes the pass/fail.
-  Example:
-  ```
-   [
-      {
-        "success": true,
-        "message": "Expected received threshold for set sizeRSS is 37748736 to be less than the expected threshold of 1073741824"
-      },
-      {
-        "success": true,
-        "message": "Expected received threshold for set sizePSS is 41964544 to be less than the expected threshold of 1073741824"
-      }
-   ]
-  ```
-### createMarker:
 
-- Request:<br>
-  Making an HTTP call to grafana to create a marker on dashboard with given description.<br>
-  Format:
-  ```
-   {
-     method: 'performance.createMarker',
-     params: <Scenario name>
-   }
-  ```
-  Examples:
-  ```
-   {
-     method: 'performance.createMarker',
-     params: 'Account.id - Positive Scenario: Validate account ID'
-   }
-  ```
-- Response:<br>
-  Recieves an object with success and message properties.
-  Example:
-  ```
-  {
-    "success": true,
-    "message": "Marker has been created successfully"
-  }
-  {
-    "success": false,
-    "message": `Unable to create marker, failed with status code- 200 and error- unable to find the dashboard`
-  }
-  ```
+## Interaction Log service
 
+See [Interaction_Logs,md](/Docs//Interaction_Logs.md)
 
 ## Data in fixture folder is segregated as per below configurations
 

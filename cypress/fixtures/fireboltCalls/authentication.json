@@ -81,7 +81,7 @@
     "INVALID_REQUEST_FOR_AUTHENTICATION_DEVICE": {
         "method": "authentication.device",
         "validationJsonPath": "result",
-        "content": "INVALID_REQUEST",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     }
 }

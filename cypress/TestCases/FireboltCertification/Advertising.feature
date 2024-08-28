@@ -60,8 +60,8 @@ Feature: Advertising
 
       Examples:
          | Scenario            | API_Key                 | AdvertidingId_Validation_key          | Parameters_Validation_key                      |
-         | limitAdTracking_ON  | disable limitAdTracking | limitAdTracking ON for advertisingId  | parameters initialization advertisingId ad on  |
          | limitAdTracking_OFF | enable limitAdTracking  | limitAdTracking OFF for advertisingId | parameters initialization advertisingId ad off |
+         | limitAdTracking_ON  | disable limitAdTracking | limitAdTracking ON for advertisingId  | parameters initialization advertisingId ad on  |
 
    @sdk @transport
    Scenario Outline: Advertising.config Coppa value - Positive Scenario: <Scenario>
@@ -141,10 +141,10 @@ Feature: Advertising
          | Without scope type               | get advertisingId without scope type        |
          | Invalid advertisingId scope      | get advertisingId with invalid scope        |
 
-   @sdk @transport @requiresPlatformImplementation
-   Scenario: Advertising.onPolicyChanged - Positive Scenario: Clearing event listeners
-      When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
-      And I clear 'advertising onPolicyChanged event' listeners
-      And 1st party app invokes the 'Firebolt' API to 'set true for allowAppContentAdTargeting'
-      Then 'Firebolt' platform responds to '1st party app' with 'set true for allowAppContentAdTargeting'
-      And 'Firebolt' platform does not trigger event for 'onAdvertisingPolicyChanged'
+      @sdk @transport @requiresPlatformImplementation
+      Scenario: Advertising.onPolicyChanged - Positive Scenario: Clearing event listeners
+            When '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
+            And 1st party stops listening to the event 'advertising onPolicyChanged event'
+            And 1st party app invokes the 'Firebolt' API to 'set true for allowAppContentAdTargeting'
+            Then 'Firebolt' platform responds to '1st party app' with 'set true for allowAppContentAdTargeting'
+            And 'Firebolt' platform does not trigger event for 'onAdvertisingPolicyChanged'
