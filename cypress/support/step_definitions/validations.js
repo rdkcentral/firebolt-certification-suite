@@ -325,31 +325,34 @@ Given(/Interactions collection process is (initiated|stopped)/, (action) => {
 
 /**
  * @module validations
- * @function Given Validate Firebolt Interactions logs
- * @description Validating the firebolt interaction logs in configModule
-
+ * @function Verify Firebolt Interactions for '(.+)'
+ * @description Validating the firebolt interaction logs
+ * @param {String} key - Validation object key name
  * @example
- * Given Validate Firebolt Interactions logs
+ * Verify Firebolt Interactions for 'account id method'
  */
-Given(/Validate Firebolt Interactions logs with '(.+)'/, (key) => {
-  if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS, false) !== true) {
-    cy.log(`Interactions log service is not enabled`).then(() => {
-      return
+Given(/Verify Firebolt Interactions for '(.+)'/, (key) => {
+  if (
+    (!UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) ||
+      UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) === false) &&
+    (!UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).size ||
+      UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).size === 0)
+  ) {
+    cy.log(`Interactions log service is not enabled`);
+  } else {
+    key = key.replaceAll(' ', '_').toUpperCase();
+    cy.getFireboltData(key).then((fireboltData) => {
+      const logs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs(
+        Cypress.env(CONSTANTS.SCENARIO_NAME)
+      );
+      if (!logs) {
+        UTILS.fireLog.assert(
+          false,
+          `No interaction logs found for the scenario - ${Cypress.env(CONSTANTS.SCENARIO_NAME)}`
+        );
+      }
+      const contentObject = { logs: logs, content: fireboltData.content.data[0].validations };
+      cy.customValidation(fireboltData.content.data[0], contentObject);
     });
   }
-  key = key.replaceAll(' ', '_').toUpperCase();
-  cy.getFireboltData(key).then((fireboltData) => {
-    console.log('fireboltData------:', fireboltData);
-    const logs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs(
-      Cypress.env('scenarioName')
-    );
-    if (!logs) {
-      UTILS.fireLog.assert(
-        false,
-        `No interaction logs found for the scenario ${Cypress.env('scenarioName')}`
-      );
-    }
-    const contentObject = { logs: logs, content: fireboltData.content.data[0].validations };
-    cy.customValidation(fireboltData.content.data[0], contentObject);
-  });
 });
