@@ -54,6 +54,23 @@ Given('the environment has been set up for {string} tests', (test) => {
     if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
       Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
     }
+    // fetch device details dynamically
+    if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
+      if (CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES.includes(Cypress.env(CONSTANTS.TEST_TYPE))) {
+        cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+          (response) => {
+            if (response) {
+              const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
+              const requestMap = {
+                method: method,
+                params: response,
+              };
+              cy.sendMessagetoPlatforms(requestMap);
+            }
+          }
+        );
+      }
+    }
   }
 });
 

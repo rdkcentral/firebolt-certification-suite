@@ -9,8 +9,8 @@ Feature: SecureStorage_Manage
     Scenario Outline: SecureStorage.setForApp - Positive Scenario: <Scenario>
         Given 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
         And 'Firebolt' platform responds to '1st party app' for 'null for clearing stored value for an app'
-        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with 'null for getting stored value'
+        And '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        And 'Firebolt' platform responds with 'null for getting stored value'
         When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
@@ -27,16 +27,16 @@ Feature: SecureStorage_Manage
     Scenario Outline: SecureStorage.removeForApp - Positive Scenario: <Scenario>
         Given 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
         And 'Firebolt' platform responds to '1st party app' for 'null for clearing stored value for an app'
-        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        Then 'Firebolt' platform responds with 'null for getting stored value'
+        And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And 'Firebolt' platform responds with 'null for getting stored value'
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key1>'
         And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value for an app'
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key2>'
         And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value for an app'
-        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        Then 'Firebolt' platform responds with '<Validation_Key1>'
-        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
-        Then 'Firebolt' platform responds with '<Validation_Key2>'
+        And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And 'Firebolt' platform responds with '<Validation_Key1>'
+        And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
+        And 'Firebolt' platform responds with '<Validation_Key2>'
         When 1st party app invokes the 'Firebolt' API to '<Remove_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Remove_API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
@@ -53,12 +53,12 @@ Feature: SecureStorage_Manage
     Scenario Outline: SecureStorage.clearForApp - Positive Scenario: <Scenario>
         Given 1st party app invokes the 'Firebolt' API to '<Set_API_Key1>'
         And 'Firebolt' platform responds to '1st party app' for '<Set_API_Key1>'
-        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        Then 'Firebolt' platform responds with '<Validation_Key1>'
+        And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And 'Firebolt' platform responds with '<Validation_Key1>'
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key2>'
         And 'Firebolt' platform responds to '1st party app' for '<Set_API_Key2>'
-        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
-        Then 'Firebolt' platform responds with '<Validation_Key2>'
+        And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
+        And 'Firebolt' platform responds with '<Validation_Key2>'
         When 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Clear_API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
@@ -95,8 +95,8 @@ Feature: SecureStorage_Manage
 
     @sdk @transport
     Scenario Outline: SecureStorage.removeForApp - Negative Scenario: <Scenario>
-        And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        And 'Firebolt' platform responds to '1st party app' for 'invalid parameters for securestorage removeForApp'
+        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds to '1st party app' for 'invalid parameters for securestorage removeForApp'
 
         Examples:
             | Scenario                      | API_Key                                                |
@@ -137,16 +137,16 @@ Feature: SecureStorage_Manage
         Given 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
         And 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
         And 'Firebolt' platform responds to '1st party app' for 'null for clearing stored value for an app'
-        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with 'null for getting stored value'
+        And '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        And 'Firebolt' platform responds with 'null for getting stored value'
         And 'secondary 3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         And 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
         When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Method_Validation_Key>'
-        And 'secondary 3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        And 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
+        When 'secondary 3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
 
         Examples:
             | Scenario                                | Set_API_Key                                        | API_Key                                                              | Method_Validation_Key                                               | Clear_API_Key                                      |
@@ -168,21 +168,21 @@ Feature: SecureStorage_Manage
         Given 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
         And 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
         And 'Firebolt' platform responds to '1st party app' for 'null for clearing stored value for an app'
-        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        Then 'Firebolt' platform responds with 'null for getting stored value'
+        And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And 'Firebolt' platform responds with 'null for getting stored value'
         And 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
         And 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key1>'
         And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value for an app'
         And 1st party app invokes the 'Firebolt' API to '<Set_API_Key2>'
         And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value for an app'
-        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        Then 'Firebolt' platform responds with '<Validation_Key1>'
-        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
-        Then 'Firebolt' platform responds with '<Validation_Key2>'
+        And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And 'Firebolt' platform responds with '<Validation_Key1>'
+        And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
+        And 'Firebolt' platform responds with '<Validation_Key2>'
         And 1st party app invokes the 'Firebolt' API to 'set secure data value1 for second app with scope device'
         And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value for an app'
-        When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
         And 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key1>'
         When 1st party app invokes the 'Firebolt' API to '<Remove_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Remove_API_Key>'
@@ -191,7 +191,7 @@ Feature: SecureStorage_Manage
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
         Then 'Firebolt' platform responds with '<Validation_Key2>'
         When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        And 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key1>'
+        Then 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key1>'
 
         Examples:
             | Scenario                                   | Remove_API_Key                                        | Set_API_Key1                                        | Set_API_Key2                                        | Get_API_Key1                                                           | Get_API_Key2                                                           | Validation_Key2                                                      | Validation_Key1                                                      | Clear_API_Key                                      |
@@ -212,16 +212,16 @@ Feature: SecureStorage_Manage
         And 'Firebolt' platform responds to '1st party app' for '<Set_API_Key1>'
         And 1st party app invokes the 'Firebolt' API to 'set secure data value1 for second app with scope device'
         And 'Firebolt' platform responds to '1st party app' for 'null for updating a secure data value for an app'
-        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        Then 'Firebolt' platform responds with '<Validation_Key1>'
-        When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        And 'Firebolt' platform responds with '<Validation_Key1>'
+        And 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
         And 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key1>'
         When 1st party app invokes the 'Firebolt' API to '<Clear_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Clear_API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
         Then 'Firebolt' platform responds with 'null for getting stored value'
         When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        And 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key1>'
+        Then 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key1>'
 
         Examples:
             | Scenario                      | Clear_API_Key                                         | API_Key                                                    | Set_API_Key1                                        | Set_API_Key2                                        | Get_API_Key1                                                           | Get_API_Key2                                                           | Validation_Key2                                                      | Validation_Key1                                                      |
