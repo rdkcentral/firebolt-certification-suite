@@ -508,7 +508,6 @@ module.exports = {
     '`Unable to find the ${envAppIdKey} value in the env, please add the value in configModule/constants/config.json`',
   SET_EVENT_REQUEST: 'Request sent to set event values in platform: ',
   SET_EVENT_SUCCESS: 'Event value set successfully in platform',
-  USER_METHOD: 'user/',
   SCENARIO_NAME: 'scenarioName',
   FIREBOLT_INTERACTION: 'FireboltInteraction',
 };
