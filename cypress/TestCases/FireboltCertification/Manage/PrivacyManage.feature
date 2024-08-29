@@ -29,8 +29,8 @@ Feature: Privacy_Manage
          | Disable allowPersonalization           | allowPersonalization           | false |
          | Enable allowUnentitledPersonalization  | allowUnentitledPersonalization | true  |
          | Disable allowUnentitledPersonalization | allowUnentitledPersonalization | false |
-         | Enable allowRemoteDiagnostics          | allowRemoteDiagnostics         | true  |
          | Disable allowRemoteDiagnostics         | allowRemoteDiagnostics         | false |
+         | Enable allowRemoteDiagnostics          | allowRemoteDiagnostics         | true  |
          | Enable allowPrimaryContentAdTargeting  | allowPrimaryContentAdTargeting | true  |
          | Disable allowPrimaryContentAdTargeting | allowPrimaryContentAdTargeting | false |
          | Enable allowPrimaryBrowseAdTargeting   | allowPrimaryBrowseAdTargeting  | true  |
@@ -41,13 +41,7 @@ Feature: Privacy_Manage
          | Disable allowACRCollection             | allowACRCollection             | false |
          | Enable allowCameraAnalytics            | allowCameraAnalytics           | true  |
          | Disable allowCameraAnalytics           | allowCameraAnalytics           | false |
-
-      @notSupported
-      Examples:
-         | Scenario                       | Method                 | Event_Registration_Key                  | API_Set_Key                                  | API_Key                             | Method_Validation_Key                     | Event_Validation_Key                              |
-         | Disable allowRemoteDiagnostics | allowRemoteDiagnostics | privacy onAllowRemoteDiagnosticsChanged | set privacy allow remoteDiagnostics as false | get privacy allow remoteDiagnostics | false for privacy allow remoteDiagnostics | onAllowRemoteDiagnosticsChanged for privacy false |
-         | Enable allowRemoteDiagnostics  | allowRemoteDiagnostics | privacy onAllowRemoteDiagnosticsChanged | set privacy allow remoteDiagnostics as true  | get privacy allow remoteDiagnostics | true for privacy allow remoteDiagnostics  | onAllowRemoteDiagnosticsChanged for privacy true  |
-
+         
    @sdk @transport
    Scenario: Privacy.settings - Positive Scenario: Settings
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow resumePoints as true'
