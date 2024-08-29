@@ -1,3 +1,10 @@
+# [1.2.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.3...v1.2.0-dev.4) (2024-08-29)
+
+
+### Features
+
+* Modify all setter/getter test cases to JSV2 format ([#157](https://github.com/rdkcentral/firebolt-certification-suite/issues/157)) ([bd6fa9b](https://github.com/rdkcentral/firebolt-certification-suite/commit/bd6fa9bd62470564f0b5447a569632213a9373b3))
+
 # [1.2.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.2...v1.2.0-dev.3) (2024-08-27)
 
 
