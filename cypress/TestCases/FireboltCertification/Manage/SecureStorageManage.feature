@@ -159,7 +159,7 @@ Feature: SecureStorage_Manage
     # validate the values for 1st app
     # validate the value for 2nd app
     @sdk @transport
-    Scenario Outline: SecureStorage.removeForApp - Positive Scenario: removeForApp with device scope with 2 apps
+    Scenario: SecureStorage.removeForApp - Positive Scenario: removeForApp with device scope with 2 apps
         Given 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
         And 1st party app invokes the 'Firebolt' API to 'clear stored value with scope as device for an app'
         And 'Firebolt' platform responds to '1st party app' for 'null for clearing stored value for an app'
