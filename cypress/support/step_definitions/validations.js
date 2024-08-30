@@ -325,13 +325,13 @@ Given(/Interactions collection process is (initiated|stopped)/, (action) => {
 
 /**
  * @module validations
- * @function Verify Firebolt Interactions for '(.+)'
+ * @function verify Firebolt Interactions for '(.+)'
  * @description Validating the firebolt interaction logs
  * @param {String} key - Validation object key name
  * @example
- * Verify Firebolt Interactions for 'account id method'
+ * verify Firebolt Interactions for 'account id method'
  */
-Given(/Verify Firebolt Interactions for '(.+)'/, (key) => {
+Given(/verify Firebolt Interactions for '(.+)'/, (key) => {
   if (
     (!UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) ||
       UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) === false) &&

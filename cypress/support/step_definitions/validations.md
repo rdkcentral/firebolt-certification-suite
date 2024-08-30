@@ -599,7 +599,7 @@ Note: The error object allows the user to add their own validations.
  * `Given Interactions collection process is 'initiated'`
  * `Given Interactions collection process is 'stopped'`
 
-## Verify Firebolt Interactions for '(.+)'
+## verify Firebolt Interactions for '(.+)'
 ### Purpose: Validating the firebolt interaction logs
 
 ### Params:
@@ -608,4 +608,4 @@ Note: The error object allows the user to add their own validations.
 | key | validation object key name |
 
 ### Examples:
- * `Verify Firebolt Interactions for 'account id method'`
+ * `verify Firebolt Interactions for 'account id method'`
