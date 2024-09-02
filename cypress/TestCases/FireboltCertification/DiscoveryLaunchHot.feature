@@ -181,20 +181,20 @@ Feature: Discovery.launch_HotLaunch
         Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
     Examples:
-        | Scenario                                        | Discovery_Launch_Key                                         |
-        | Home Suspended                                  | launch app with home intent                                  |
-        | Playback Suspended                              | launch app with playback intent                              |
-        | Entity Suspended                                | launch app with entity intent                                |
-        | Launch Suspended                                | launch app with intent                                       |
-        | Search Suspended                                | launch app with search intent                                |
-        | Search Suspended with programType movie         | launch app with search intent with programType movie         |
-        | Search Suspended with programType advertisement | launch app with search intent with programtype advertisement |
-        | Search Suspended with musicType song            | launch app with search intent with musictype song            |
-        | Search Suspended with musicType album           | launch app with search intent with musictype album           |
-        | Search Suspended with channelType streaming     | launch app with search intent with channelType streaming     |
-        | Search Suspended with channelType overTheAir    | launch app with search intent with channelType overTheAir    |
-        | Search Suspended with untyped entity            | launch app with search intent with untyped entity            |
-        | Search Suspended with playlist entity           | launch app with search intent with playlist entity           |
+        | Scenario                                                     | Discovery_Launch_Key                                                     |
+        | Home Suspended                                               | launch app with home intent                                              |
+        | Playback Suspended                                           | launch app with playback intent                                          |
+        | Entity Suspended                                             | launch app with entity intent                                            |
+        | Launch Suspended                                             | launch app with intent                                                   |
+        | Search Suspended                                             | launch app with search intent                                            |
+        | Search Suspended with programType movie                      | launch app with search intent with programType movie                     |
+        | Search Suspended with programType advertisement              | launch app with search intent with programtype advertisement             |
+        | Search Suspended with musicType song                         | launch app with search intent with musictype song                        |
+        | Search Suspended with musicType album                        | launch app with search intent with musictype album                       |
+        | Search Suspended with channelType streaming                  | launch app with search intent with channelType streaming                 |
+        | Search Suspended with channelType overTheAir                 | launch app with search intent with channelType overTheAir                |
+        | Search Suspended with untyped entity                         | launch app with search intent with untyped entity                        |
+        | Search Suspended with playlist entity                        | launch app with search intent with playlist entity                       |
         | Section Suspended                                            | launch app with section intent                                           |
         | Tune Suspended                                               | launch app with tune intent                                              |
         | PlayEntity Suspended                                         | launch app with playentity intent                                        |
