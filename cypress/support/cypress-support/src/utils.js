@@ -235,7 +235,7 @@ function getCommunicationMode() {
  * skipCurrentTest()
  */
 function skipCurrentTest() {
-  fireLog.info("The current test has been intentionally skipped by the test runner")
+  fireLog.info('The current test has been intentionally skipped by the test runner')
   mocha.suite.ctx.currentTest.skip();
 }
 
@@ -1098,5 +1098,5 @@ module.exports = {
   resolveRecursiveValues,
   fireboltCallObjectHasField,
   fetchAppIdentifierFromEnv,
-  skipCurrentTest
+  skipCurrentTest,
 };
