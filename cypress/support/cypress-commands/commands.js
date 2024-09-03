@@ -577,7 +577,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
       cy.get(Object.values(beforeOperation)).each((beforeOperationObject) => {
         if (beforeOperationObject.hasOwnProperty('skipTest')) {
           if (beforeOperationObject.skipTest === true) {
-            mocha.suite.ctx.currentTest.skip();
+            UTILS.skipCurrentTest();
           }
         }
         if (beforeOperationObject.tags) {
