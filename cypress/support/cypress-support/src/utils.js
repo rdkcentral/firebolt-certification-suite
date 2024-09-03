@@ -236,7 +236,7 @@ function getCommunicationMode() {
  */
 function skipCurrentTest() {
   fireLog.info('The current test has been intentionally skipped by the test runner');
-  mocha.suite.ctx.currentTest.skip();
+  mocha.suite.ctx.test?.skip();
 }
 
 /**
