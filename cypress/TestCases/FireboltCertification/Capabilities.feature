@@ -17,7 +17,7 @@ Feature: Capabilities
 
     Examples:
       | Scenario                                                            | API_Key                                               | Validation_key                                        |
-      | Validate keyboard capability available in 3rd party app             | check availability of keyboard capability             | true for keyboard capability availability             |
+      | Validate keyboard capability available in 3rd party app             | check availability of keyboard capability             | expected value for keyboard capability availability   |
       | Validate acknowledgechallenge capability available in 3rd party app | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
       | Validate pinchallenge capability available in 3rd party app         | check availability of pinchallenge capability         | true for pinchallenge capability availability         |
 
@@ -28,7 +28,7 @@ Feature: Capabilities
 
     Examples:
       | Scenario                                                       | API_Key                                               | Validation_key                                        |
-      | Validate keyboard capability available in platform             | check availability of keyboard capability             | true for keyboard capability availability             |
+      | Validate keyboard capability available in platform             | check availability of keyboard capability             | expected value for keyboard capability availability   |
       | Validate acknowledgechallenge capability available in platform | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
       | Validate pinchallenge capability available in platform         | check availability of pinchallenge capability         | true for pinchallenge capability availability         |
 
@@ -222,7 +222,7 @@ Feature: Capabilities
 
   @sdk @transport @requiresPlatformImplementation
   Scenario: Validate Capabilities.OnAvailable
-    When 1st party app registers for the 'capabilities onAvailable' event using the 'Firebolt' API
+    Given 1st party app registers for the 'capabilities onAvailable' event using the 'Firebolt' API
     And User set response for 'set keyboard response in platform'
     And Framework registers 'keyboard' test provider
     When 1st party app invokes the 'Firebolt' API to 'check availability of keyboard capability'
@@ -231,19 +231,19 @@ Feature: Capabilities
 
   @sdk @transport @requiresPlatformImplementation @notSupported
   Scenario: Validate Capabilities.OnUnavailable
-    When 1st party app registers for the 'capabilities onUnavailable' event using the 'Firebolt' API
+    Given 1st party app registers for the 'capabilities onUnavailable' event using the 'Firebolt' API
     And User set response for 'set keyboard response in platform'
-    When Framework registers 'keyboard' test provider
-    And 1st party app invokes the 'Firebolt' API to 'check availability of keyboard capability'
+    And Framework registers 'keyboard' test provider
+    When 1st party app invokes the 'Firebolt' API to 'check availability of keyboard capability'
     Then 'Firebolt' platform responds to '1st party app' with 'false for keyboard capability availability'
     And 'Firebolt' platform triggers to '1st party app' event 'expected value for capabilities onUnAvailable'
 
   @sdk @transport @requiresPlatformImplementation
   Scenario: Validate Capabilities.OnGranted
-    When '3rd party app' registers for the 'capabilities onGranted' event using the 'Firebolt' API
+    Given '3rd party app' registers for the 'capabilities onGranted' event using the 'Firebolt' API
     And User set response for 'set pinchallenge correct pin'
     And Framework registers 'pinChallenge' test provider
-    When User set response for 'set acknowledge granted'
+    And User set response for 'set acknowledge granted'
     And Framework registers 'ackchallenge' test provider
     When '3rd party app' invokes the 'Firebolt' API to 'fetch device id'
     Then 'Firebolt' platform responds with 'expected device id'
@@ -253,10 +253,10 @@ Feature: Capabilities
 
   @sdk @transport @requiresPlatformImplementation
   Scenario: Validate Capabilities.OnRevoked
-    When '3rd party app' registers for the 'capabilities onRevoked' event using the 'Firebolt' API
+    Given '3rd party app' registers for the 'capabilities onRevoked' event using the 'Firebolt' API
     And User set response for 'set pinchallenge wrong pin'
     And Framework registers 'pinChallenge' test provider
-    When User set response for 'set acknowledge granted'
+    And User set response for 'set acknowledge granted'
     And Framework registers 'ackchallenge' test provider
     When '3rd party app' invokes the 'Firebolt' API to 'expect error for device id'
     Then 'Firebolt' platform responds with 'invalid request for device id'

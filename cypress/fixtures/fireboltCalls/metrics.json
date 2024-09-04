@@ -636,5 +636,30 @@
     },
     "METRICS_MEDIALOADSTART_WITH_ENTITY_345": {
         
+    },
+    "INFORM_THE_PLATFORM_ABOUT_APP_BUILD": {
+        "method": "metrics.appInfo",
+        "params": "METRICS_APPINFO"
+    },
+    "INFORM_THE_PLATFORM_ABOUT_APP_WITH_NUMERIC_BUILD": {
+        "method": "metrics.appInfo",
+        "params": "METRICS_INTEGER_12",
+        "expected": "error"
+    },
+    "INFORM_THE_PLATFORM_ABOUT_APP_WITH_BOOLEAN_BUILD": {
+        "method": "metrics.appInfo",
+        "params": "TRUE",
+        "expected": "error"
+    },
+    "NULL_FOR_METRICS_APPINFO": {
+        "method": "metrics.appInfo",
+        "validationJsonPath": "result",
+        "content": "NULL"
+    },
+    "INVALID_PARAMS_FOR_METRICS_APPINFO":{
+        "method": "metrics.appInfo",
+        "validationJsonPath": "result",
+        "content": "INVALID_TYPE_PARAMS",
+        "expectingError": true
     }
 }

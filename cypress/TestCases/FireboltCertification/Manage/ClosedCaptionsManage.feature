@@ -7,8 +7,8 @@ Feature: ClosedCaptions_Manage
     @sdk @transport
     Scenario Outline: ClosedCaptions.<Method> - Positive Scenario: <Scenario>
         Given we test the 'CLOSED_CAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
-        When '1st party app' registers for the 'Firebolt' event
-        And 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
+        And '1st party app' registers for the 'Firebolt' event
+        When 1st party app invokes the 'Firebolt' API to set value
         Then 'Firebolt' platform responds to '1st party app' set API
         When '1st party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '1st party app' get API
@@ -51,8 +51,8 @@ Feature: ClosedCaptions_Manage
 
     @sdk @transport
     Scenario Outline: Closedcaptions.<Method> - Positive Scenario: <Scenario> with 'null' params
-        When 1st party app registers for the '<Event>' event using the 'Firebolt' API
-        And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
+        Given 1st party app registers for the '<Event>' event using the 'Firebolt' API
+        When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<Set_API_Key>'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
@@ -76,8 +76,8 @@ Feature: ClosedCaptions_Manage
     @sdk @transport
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error
         Given we test the 'CLOSED_CAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
-        When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
-        And 'Firebolt' platform responds to '1st party app' set API with '<Error>'
+        When 1st party app invokes the 'Firebolt' API to set invalid value
+        Then 'Firebolt' platform responds to '1st party app' set API with '<Error>'
 
         Examples:
             | Scenario                    | Method             | Value      | Error               |
@@ -88,11 +88,11 @@ Feature: ClosedCaptions_Manage
             | Set fontSize-true           | fontSize           | true       | INVALID_TYPE_PARAMS |
             | Set fontSize-test           | fontSize           | test       | INVALID_TYPE_PARAMS |
             | Set fontSize-true           | fontSize           | true       | INVALID_TYPE_PARAMS |
-            | Set fontSize-0.25           | fontSize           | 0.25       | CUSTOM_ERROR        |
-            | Set fontFamily-sans-serif   | fontFamily         | sans-serif | CUSTOM_ERROR        |
+            | Set fontSize-0.25           | fontSize           | 0.25       | INVALID_TYPE_PARAMS |
+            | Set fontFamily-sans-serif   | fontFamily         | sans-serif | INVALID_TYPE_PARAMS |
             | Set fontEdge-123            | fontEdge           | 123        | INVALID_TYPE_PARAMS |
             | Set fontEdge-true           | fontEdge           | true       | INVALID_TYPE_PARAMS |
-            | Set fontEdge-solid          | fontEdge           | solid      | CUSTOM_ERROR        |
+            | Set fontEdge-solid          | fontEdge           | solid      | INVALID_TYPE_PARAMS |
             | Set preferredLanguages-true | preferredLanguages | true       | INVALID_TYPE_PARAMS |
             | Set preferredLanguages-123  | preferredLanguages | 123        | INVALID_TYPE_PARAMS |
             | Set preferredLanguages-test | preferredLanguages | test       | INVALID_TYPE_PARAMS |
@@ -108,9 +108,9 @@ Feature: ClosedCaptions_Manage
             | Set textAlignVertical-true  | textAlignVertical  | true       | INVALID_TYPE_PARAMS |
             | Set fontColor-123           | fontColor          | 123        | INVALID_TYPE_PARAMS |
             | Set fontColor-true          | fontColor          | true       | INVALID_TYPE_PARAMS |
-            | Set fontOpacity-120         | fontOpacity        | 120        | CUSTOM_ERROR        |
+            | Set fontOpacity-120         | fontOpacity        | 120        | INVALID_TYPE_PARAMS |
             | Set fontOpacity-test        | fontOpacity        | test       | INVALID_TYPE_PARAMS |
             | Set fontOpacity-true        | fontOpacity        | true       | INVALID_TYPE_PARAMS |
-            | Set backgroundOpacity-120   | backgroundOpacity  | 120        | CUSTOM_ERROR        |
+            | Set backgroundOpacity-120   | backgroundOpacity  | 120        | INVALID_TYPE_PARAMS |
             | Set backgroundOpacity-test  | backgroundOpacity  | test       | INVALID_TYPE_PARAMS |
             | Set backgroundOpacity-true  | backgroundOpacity  | true       | INVALID_TYPE_PARAMS |

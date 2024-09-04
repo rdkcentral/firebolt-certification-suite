@@ -127,20 +127,36 @@ class decodeValidations {
       // Check whether decodeType is BASE64 and decode the token and get the param values from decoded object and validating it
       if (decodeType == CONSTANTS.BASE64) {
         const decode = atob(token);
+        let extractedData;
 
         if (decode.includes(param)) {
           const indexOfParam = decode.indexOf(param);
-          const extractedData = decode.slice(
-            indexOfParam + param.length + 2,
-            decode.indexOf('</', indexOfParam + 1)
-          );
+
+          if (decode.startsWith('<?')) {
+            // Handle XML data extraction
+            const start = decode.indexOf('>', indexOfParam) + 1;
+            const end = decode.indexOf('</', start);
+            extractedData = decode.slice(start, end).trim();
+          } else {
+            // Handle JSON data extraction
+            const start = decode.indexOf(':', indexOfParam) + 1;
+            const end = decode.indexOf(',', start);
+            extractedData = decode.slice(start, end).trim().replace(/"/g, '');
+          }
+
+          // Clean up the extracted data. Remove any whitespaces, quotes or curly braces
+          extractedData = extractedData.replace(/^[\s"']+|[\s"'}]+$/g, '');
           const resultSet = regexFormat.test(extractedData);
 
           cy.log(
             `Regular Expression Validation: expected ${param} to be in a valid ${regexFormat} format`,
             'decodeBase64AndJwtToken'
           ).then(() => {
-            assert.equal(true, resultSet, 'RegEx Validation:');
+            if (resultSet == false) {
+              throw new Error(`RegEx Validation failed for ${param} value`);
+            } else {
+              fireLog.info(`RegEx Validation passed for ${param} value`);
+            }
           });
         } else {
           cy.log(`Decode base64: Expected ${param} field not present in Decoded data`).then(() => {
@@ -159,7 +175,11 @@ class decodeValidations {
             `Regular Expression Validation: expected ${param} to be in a valid ${regexFormat} format`,
             'decodeBase64AndJwtToken'
           ).then(() => {
-            assert.equal(true, resultSet, 'RegEx Validation:');
+            if (resultSet == false) {
+              throw new Error(`RegEx Validation failed for ${param} value`);
+            } else {
+              fireLog.info(`RegEx Validation passed for ${param} value`);
+            }
           });
         } else {
           cy.log(`Decode jwt: Expected ${param} field not present in Decoded data`).then(() => {

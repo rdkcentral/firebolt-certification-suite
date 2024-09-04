@@ -683,551 +683,371 @@
             }
         },
         "UserGrants": {
-            "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with two options, first option(with fingerprint) is not supported and second option(with pinChallenge and acknowledge) is supported": {
+            "UserGrants.Grant R*2.2.2.1 - Positive Scenario: Validate Capabilities with denied (pinChallenge) and lifespan once": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.1",
+                            "id": "UserGrants R*2.2.2.1, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with two options, first option(with pinChallenge and acknowledge) is supported and second option(with fingerprint) is not supported": {
+            "UserGrants.Capabilities R.2.1.1 - Positive Scenario: Validate Capability Grant access with one step option(only acknowledgeChallenge)": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.2",
+                            "id": "UserGrants R.2.1.1, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with role manage": {
+            "UserGrants.Capabilities R*2.2.2.2 - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan forever": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.3",
+                            "id": "UserGrants R*2.2.2.2, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: Validate Capabilities Grant access with role provide": {
+            "UserGrants.Capabilities R*2.2.2.2 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan forever": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.4",
+                            "id": "UserGrants R*2.2.2.2, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Negative Scenario: Validate Capabilities access denied for pinChallenge": {
+            "UserGrants.Capabilities R*2.2.2.3 - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan appActive": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.5",
+                            "id": "UserGrants R*2.2.2.3, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Negative Scenario: Validate Capabilities access denied for ackChallenge": {
+            "UserGrants.Capabilities R*2.2.2.3 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan appActive": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.6",
+                            "id": "UserGrants R*2.2.2.3, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Grant - Positive Scenario: Validate Capabilities with denied (pinChallenge) and lifespan once": {
+            "UserGrants.Capabilities R*2.2.2.5 - Positive Scenario: Validate Capabilities with granted (ackchallenge) and lifespan:seconds lifespanTtl:60 sec": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.7",
+                            "id": "UserGrants R*2.2.2.5, R.1.1, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with one step option(only acknowledgeChallenge)": {
+            "UserGrants.Capabilities R*2.2.2.5 - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60 sec": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.7",
+                            "id": "UserGrants R*2.2.2.5, R.1.2, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with scope device": {
+            "UserGrants.Capabilities R*2.2.2.5 - Positive Scenario: Validate Capabilities with grant(pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl it should not ask for grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.8",
+                            "id": "UserGrants R*2.2.2.5, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capability access denied for pinchallenge with scope device": {
+            "UserGrants.Capabilities R*2.2.2.5 - Positive Scenario: Validate Capabilities with grant(ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.9",
+                            "id": "UserGrants R*2.2.2.5, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan forever": {
+            "UserGrants.Capabilities R*2.2.2.5 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl and it should not ask grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.10",
+                            "id": "UserGrants R*2.2.2.5, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan forever": {
+            "UserGrants.Capabilities R*2.2.2.5 - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.11",
+                            "id": "UserGrants R*2.2.2.5, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan appActive": {
+            "UserGrants.Capabilities R*2.2.3.4 - Positive Scenario: privacySetting - autoApplyPolicy:always property-getter:true silently grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.12",
+                            "id": "UserGrants R*2.2.3.4, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan appActive": {
+            "UserGrants.Capabilities R*2.2.3.4 - Positive Scenario: Validate Capability autoApplyPolicy:always property-getter:false silently denied": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.13",
+                            "id": "UserGrants R*2.2.3.4, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (ackchallenge) and lifespan:seconds lifespanTtl:60 sec": {
+            "UserGrants.Capabilities R*2.2.3.6 - Positive Scenario: Validate Capability autoApplyPolicy:disallowed property-getter:false silently denied": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.14",
+                            "id": "UserGrants R*2.2.3.6, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60 sec": {
+            "UserGrants.Capabilities R*2.2.3.5 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:true silently grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.15",
+                            "id": "UserGrants R*2.2.3.5, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with grant(pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl it should not ask for grant": {
+            "UserGrants.Capabilities R*2.2.3.5 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.16",
+                            "id": "UserGrants R*2.2.3.5, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with grant(ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant": {
+            "UserGrants.Capabilities R*2.2.3.5 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false deny": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.17",
+                            "id": "UserGrants R*2.2.3.5, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl and it should not ask grant": {
+            "UserGrants.Capabilities R*2.2.3.6 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.18",
+                            "id": "UserGrants R*2.2.3.6, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant": {
+            "UserGrants.Capabilities R*2.2.3.6 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true deny": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.19",
+                            "id": "UserGrants R*2.2.3.6, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capability Without supported capability expecting error": {
+            "UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:true grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.20",
+                            "id": "UserGrants R*2.2.3.7, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: privacySetting - autoApplyPolicy:always property-getter:true silently grant": {
+            "UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:false grant": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.21",
+                            "id": "UserGrants R*2.2.3.7, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability autoApplyPolicy:always property-getter:false silently denied": {
+            "UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:true deny": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.22",
+                            "id": "UserGrants R*2.2.3.7, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability autoApplyPolicy:disallowed property-getter:false silently denied": {
+            "UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:false deny": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.23",
+                            "id": "UserGrants R*2.2.3.7, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:true silently grant": {
+            "UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:true deny property should be set to false": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.24",
+                            "id": "UserGrants R*2.2.3.9, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false grant": {
+            "UserGrants.Capabilities R*2.2.3.10 - Positive Scenario:privacySetting - Validate Capability updateProperty:false - property-getter:true deny property should not be updated": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.25",
+                            "id": "UserGrants R*2.2.3.10, R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false deny": {
+            "UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:false grant property should be set to false": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.26",
+                            "id": "UserGrants R*2.2.3.9, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true grant": {
+            "UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:true grant property should not be changed": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.27",
+                            "id": "UserGrants R*2.2.3.9, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true deny": {
+            "UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - Validate Capability updateProperty:false - property-getter:false grant property should not be changed": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.28",
+                            "id": "UserGrants R*2.2.3.9, R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:true grant": {
+            "UserGrants.Capabilities R*2.2.2.4 - Positive Scenario: Validate Capabilities with grant (pinChallenge) and lifespan powerActive - after reboot deny and validate": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.29",
+                            "id": "UserGrants R*2.2.2.4",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:false grant": {
+            "UserGrants.Capabilities R*2.2.2.4 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan powerActive - after reboot grant and validate": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.30",
+                            "id": "UserGrants R*2.2.2.4",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:true deny": {
+            "UserGrants.request R.1.1 - Positive Scenario: Validate userGrants.request by granting for role use": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.31",
+                            "id": "UserGrants R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:false deny": {
+            "UserGrants.request R.1.1 - Positive Scenario: Validate userGrants.request by granting for role manage": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.32",
+                            "id": "UserGrants R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:true deny property should be set to false": {
+            "UserGrants.request R.1.2 - Negative Scenario: Validate userGrants.request by denying for role use": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.33",
+                            "id": "UserGrants R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:false - property-getter:true deny property should not be updated": {
+            "UserGrants.request R.1.2 - Negative Scenario: Validate userGrants.request by denying for role manage": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.34",
+                            "id": "UserGrants R.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:false grant property should be set to false": {
+            "UserGrants.request R.1.1 - Negative Scenario: Validate userGrants.request call with role use, but grantpolicy having manage capability": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.35",
+                            "id": "UserGrants R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:true grant property should not be changed": {
+            "UserGrants.request R.1.2 - Positive Scenario: Validate UserGrants.request which grantpolicy is not present in manifest": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.36",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:false - property-getter:false grant property should not be changed": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.37",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Allow grant for one API and all API's should have grant in group": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.38",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Allow grant for one API and clear grant, call another API it will ask for grant again": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.39",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability Deny grant for one API and all API's shouldn't have grant in group": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.40",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capability - Positive Scenario: AcknowledgeChallenge Grant is deferred by exiting overlay": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.42",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capability - Positive Scenario: Acknowledgechallenge Grant is deferred based on the timeout (4 seconds)": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.43",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with grant (pinChallenge) and lifespan powerActive - after reboot deny and validate": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.44",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan powerActive - after reboot grant and validate": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.45",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:true property:Privacy.allowWatchHistory silently grant": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.46",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.Capabilities - Positive Scenario: Validate Capability permission in 2 diff devices": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.57",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Positive Scenario: Validate Capability.request granted(ackChallenge)": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.49",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Positive Scenario: Validate Capability.request Denied(ackChallenge)": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.50",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Positive Scenario: Validate userGrants.request by granting for role use": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.51",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Positive Scenario: Validate userGrants.request by granting for role manage": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.52",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Negative Scenario: Validate userGrants.request by denying for role use": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.53",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Negative Scenario: Validate userGrants.request by denying for role manage": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.54",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Negative Scenario: Validate userGrants.request call with role use, but grantpolicy having manage capability": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.55",
-                            "description": "Should not be null"
-                        }
-                    }
-                ]
-            },
-            "UserGrants.request - Positive Scenario: Validate UserGrants.request which grantpolicy is not present in manifest": {
-                "req": [
-                    {
-                        "method": {
-                            "id": "UserGrants 1.56",
+                            "id": "UserGrants R.1.2",
                             "description": "Should not be null"
                         }
                     }
@@ -1237,7 +1057,7 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.57",
+                            "id": "UserGrants 1.40",
                             "description": "Should not be null"
                         }
                     }
@@ -1247,27 +1067,27 @@
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.58",
+                            "id": "UserGrants 1.41",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.request - Positive Scenario: Validate usergrants.request by granting for role provide": {
+            "UserGrants.request R.1.1 - Positive Scenario: Validate usergrants.request by granting for role provide": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.59",
+                            "id": "UserGrants R.1.1",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.request - Negative Scenario: Validate usergrants.request by denying for role provide": {
+            "UserGrants.request R.1.2 - Negative Scenario: Validate usergrants.request by denying for role provide": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.60",
+                            "id": "UserGrants R.1.2",
                             "description": "Should not be null"
                         }
                     }
@@ -1459,91 +1279,91 @@
             }
         },
         "UserGrants_Manage": {
-            "Usergrants.app - Positive Scenario: with grant(ackchallenge)": {
+            "Usergrants.app R.5.1.2 - Positive Scenario: with grant(ackchallenge)": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.1",
+                            "id": "UserGrants R.5.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.device - Positive Scenario: with grant(ackchallenge)": {
+            "Usergrants.device R.5.1.3 - Positive Scenario: with grant(ackchallenge)": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.2",
+                            "id": "UserGrants R.5.1.3",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.capability - Positive Scenario: with grant(ackchallenge)": {
+            "Usergrants.capability R.5.1.4 - Positive Scenario: with grant(ackchallenge)": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.3",
+                            "id": "UserGrants R.5.1.4",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.grant - Positive Scenario: grant capability at device level": {
+            "Usergrants.grant R.5.1.5 - Positive Scenario: grant capability at device level": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.4",
+                            "id": "UserGrants R.5.1.5",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.grant - Positive Scenario: grant capability at app level": {
+            "Usergrants.grant R.5.1.5 - Positive Scenario: grant capability at app level": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.5",
+                            "id": "UserGrants R.5.1.5",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.deny - Positive Scenario: deny capability at device level": {
+            "Usergrants.deny R.5.1.6 - Positive Scenario: deny capability at device level": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.6",
+                            "id": "UserGrants R.5.1.6",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.deny - Positive Scenario: deny capability at app level": {
+            "Usergrants.deny R.5.1.6 - Positive Scenario: deny capability at app level": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.7",
+                            "id": "UserGrants R.5.1.6",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.clear - Positive Scenario: clear grant at device level for role use": {
+            "Usergrants.clear R.5.1.7 - Positive Scenario: clear grant at device level for role use": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.8",
+                            "id": "UserGrants R.5.1.7",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "Usergrants.clear - Positive Scenario: clear grant at app level for role use": {
+            "Usergrants.clear R.5.1.7 - Positive Scenario: clear grant at app level for role use": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.9",
+                            "id": "UserGrants R.5.1.7",
                             "description": "Should not be null"
                         }
                     }
@@ -1569,31 +1389,31 @@
                     }
                 ]
             },
-            "Usergrants.app - Positive Scenario: with grant(pinChallenge)": {
+            "Usergrants.app R.5.1.2 - Positive Scenario: with grant(pinChallenge)": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.12",
+                            "id": "UserGrants R.5.1.2",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: by clearing the grant and validating usergrants.capability as empty": {
+            "UserGrants.Capability R.5.1.4 - Positive Scenario: by clearing the grant and validating usergrants.capability as empty": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.13",
+                            "id": "UserGrants R.5.1.7, R.5.1.4",
                             "description": "Should not be null"
                         }
                     }
                 ]
             },
-            "UserGrants.Capability - Positive Scenario: by clearing the grant and validating usergrants.app as empty": {
+            "UserGrants.app R.5.1.2 - Positive Scenario: by clearing the grant and validating usergrants.app as empty": {
                 "req": [
                     {
                         "method": {
-                            "id": "UserGrants 1.14",
+                            "id": "UserGrants R.5.1.7, R.5.1.2",
                             "description": "Should not be null"
                         }
                     }

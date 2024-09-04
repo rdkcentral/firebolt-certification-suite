@@ -345,7 +345,7 @@
     },
     "SET_SECURE_DATA_VALUE1_FOR_AN_APP_WITH_SCOPE_ACCOUNT": {
         "method": "manage_securestorage.setForApp",
-		"params": "SECURESTORAGE_SETFORAPP_ACCOUNT1"
+		"params": "SECURESTORAGE_SETFORAPP_ACCOUNT_KEY1"
     },
     "SET_SECURE_DATA_VALUE2_FOR_AN_APP_WITH_SCOPE_ACCOUNT": {
         "method": "manage_securestorage.setForApp",
@@ -857,19 +857,19 @@
     "CUSTOM_ERROR_FOR_SECURESTORAGE_REMOVE": {
         "method": "securestorage.remove",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_SECURESTORAGE_SET": {
         "method": "securestorage.set",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_SECURESTORAGE_GET": {
         "method": "securestorage.get",
         "validationJsonPath": "result",
-        "content": "CUSTOM_ERROR",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     }
 }
