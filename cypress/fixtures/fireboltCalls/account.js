@@ -33,14 +33,6 @@ exports.DYNAMIC_FB_CALL_VARIABLES = {
   },
 };
 
-exports.STATIC_COMMON_VARIABLES = {
-    DEFAULT: {
-      TRUE: true,
-      FALSE: false
-    },
-  };
-
-
 exports.FETCH_ACCOUNT_ID = {
   method: 'account.id',
   params: {},
@@ -58,7 +50,19 @@ exports.FETCH_ACCOUNT_UID = {
 };
 
 exports.ACCOUNT_UID = {
-    method: 'account.uid',
-    validationJsonPath: 'result',
-    content: this.DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.ACCOUNT.UID,
-  };
+  method: 'account.uid',
+  validationJsonPath: 'result',
+  content: this.DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.ACCOUNT.UID,
+};
+
+exports.FETCH_ACCOUNT_ID_WHEN_DEVICE_IS_NOT_PROVISIONED = {
+  method: 'account.id',
+  params: {},
+  expected: 'error',
+};
+
+exports.FETCH_ACCOUNT_UID_WHEN_DEVICE_IS_NOT_PROVISIONED = {
+  method: 'account.uid',
+  params: {},
+  expected: 'error',
+};
