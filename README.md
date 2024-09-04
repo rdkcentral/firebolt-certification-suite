@@ -117,7 +117,7 @@ Following are the supported runtime environments -
 
 ### NOTE:
 
-To override config based on the runtime environment, modify the `cypress.config.js` in root folder
+To override config based on the runtime environment, modify the `cypress.config.js` in root folder.
 
 ### Options
 
