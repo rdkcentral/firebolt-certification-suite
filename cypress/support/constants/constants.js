@@ -464,7 +464,7 @@ module.exports = {
     'Discovery.Launch',
     'Parameters',
     'userGrants',
-    'lifeCycleApi',
+    'lifeCycleApi'
   ],
   USER_EXIT_REASON: 'userExit',
   VALIDATIONJSONPATH: 'validationJsonPath',
