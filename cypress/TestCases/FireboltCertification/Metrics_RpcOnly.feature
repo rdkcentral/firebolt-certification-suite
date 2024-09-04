@@ -2,17 +2,18 @@
 Feature: Metrics_RpcOnly
 
     @transport
-    Scenario Outline: Metrics.<Scenario> - Positive Scenario: Validating rpc method metrics <Scenario>
+    Scenario Outline: Metrics.<Method> - Positive Scenario: Validating rpc method metrics <Method>
         Given the environment has been set up for 'Metrics' tests
         And 3rd party 'certification' app is launched
-        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_key>'
+        When we test the 'METRICS_METHOD' getters and setters '<Method>' to '{}'
+        And '3rd party app' invokes the 'Firebolt' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
 
         Examples:
-            | Scenario | API_Key                             | Validation_key              |
-            | ready    | notify that app is minimally usable | true for ready in metrics   |
-            | signIn   | log a sign in event                 | true for signIn in metrics  |
-            | signOut  | log a sign out event                | true for signOut in metrics |
+            | Method  |
+            | ready   |
+            | signIn  |
+            | signOut |
 
     @transport
     Scenario: Internal.initialize - Positive Scenario: Validating rpc method

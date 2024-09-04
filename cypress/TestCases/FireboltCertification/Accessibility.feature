@@ -8,12 +8,12 @@ Feature: Accessibility
     @sdk @transport
     Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
         Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
-        When '3rd party app' registers for the 'Firebolt' event
+        And '3rd party app' registers for the 'Firebolt' event
+        And '3rd party app' invokes the 'Firebolt' get API
+        When 1st party app invokes the 'Firebolt' API to set value
+        Then 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
-        Given 1st party app invokes the 'Firebolt' API to set value
-        And 'Firebolt' platform responds to '1st party app' set API
-        When '3rd party app' invokes the 'Firebolt' get API
-        And 'Firebolt' platform responds to '3rd party app' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
@@ -53,9 +53,9 @@ Feature: Accessibility
 
    @sdk @transport
    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario> with 'null' params
-      When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
+      Given '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
-      And 1st party app invokes the 'Firebolt' API to '<Key>'
+      When 1st party app invokes the 'Firebolt' API to '<Key>'
       Then 'Firebolt' platform responds to '1st party app' for '<Key>'
       When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
       Then 'Firebolt' platform responds with '<Method_Content>'
@@ -79,12 +79,12 @@ Feature: Accessibility
     @sdk @transport
     Scenario Outline: Accessibility.voiceGuidanceSettings - Positive Scenario: <Scenario>
         Given we test the 'ACCESSIBILITY_VOICEGUIDANCE_SETTINGS' getters and setters '<Method>' to '<Value>'
-        When '3rd party app' registers for the 'Firebolt' event
+        And '3rd party app' registers for the 'Firebolt' event
+        And '3rd party app' invokes the 'Firebolt' get API
+        When 1st party app invokes the 'Firebolt' API to set value
+        Then 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
-        Given 1st party app invokes the 'Firebolt' API to set value
-        And 'Firebolt' platform responds to '1st party app' set API
-        When '3rd party app' invokes the 'Firebolt' get API
-        And 'Firebolt' platform responds to '3rd party app' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
@@ -98,12 +98,12 @@ Feature: Accessibility
     @sdk @transport
     Scenario Outline: Accessibility.audioDescriptionSettings - Positive Scenario: <Scenario>
         Given we test the 'AUDIODESCRIPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
-        When '3rd party app' registers for the 'Firebolt' event
+        And '3rd party app' registers for the 'Firebolt' event
+        And '3rd party app' invokes the 'Firebolt' get API
+        When 1st party app invokes the 'Firebolt' API to set value
+        Then 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
-        Given 1st party app invokes the 'Firebolt' API to set value
-        And 'Firebolt' platform responds to '1st party app' set API
-        When '3rd party app' invokes the 'Firebolt' get API
-        And 'Firebolt' platform responds to '3rd party app' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
@@ -114,11 +114,11 @@ Feature: Accessibility
     @sdk @transport
     Scenario Outline: Accessibility.closedCaptions - Positive Scenario: <Scenario>
         Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS' getters and setters '<Method>' to '<Value>'
-        When '3rd party app' registers for the 'Firebolt' event
-        Given 1st party app invokes the 'Firebolt' API to set value
-        And 'Firebolt' platform responds to '1st party app' set API
+        And '3rd party app' registers for the 'Firebolt' event
+        When 1st party app invokes the 'Firebolt' API to set value
+        Then 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
-        And 'Firebolt' platform responds to '3rd party app' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
@@ -140,21 +140,21 @@ Feature: Accessibility
 
    @sdk @transport @requiresPlatformImplementation
    Scenario: Accessibility.onClosedCaptionsSettingsChanged event - Positive Scenario: Clear listeners
-      When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
-      And 1st party stops listening to the event 'accessibility onClosedCaptionsSettingsChanged event'
-      And 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
+      Given '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
+      And 3rd party stops listening to the event 'accessibility onClosedCaptionsSettingsChanged event'
+      When 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
       Then 'Firebolt' platform responds to '1st party app' for 'disable closedCaptions'
       And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
 
     @sdk @transport
     Scenario Outline: Accessibility.voiceGuidance - Positive Scenario: <Scenario>
         Given we test the 'ACCESSIBILITY_VOICEGUIDANCE' getters and setters '<Method>' to '<Value>'
-        When '3rd party app' registers for the 'Firebolt' event
+        And '3rd party app' registers for the 'Firebolt' event
+        And '3rd party app' invokes the 'Firebolt' get API
+        When 1st party app invokes the 'Firebolt' API to set value
+        Then 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
-        Given 1st party app invokes the 'Firebolt' API to set value
-        And 'Firebolt' platform responds to '1st party app' set API
-        When '3rd party app' invokes the 'Firebolt' get API
-        And 'Firebolt' platform responds to '3rd party app' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:

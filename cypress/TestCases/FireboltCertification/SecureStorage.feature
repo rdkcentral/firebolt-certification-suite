@@ -3,7 +3,7 @@ Feature: SecureStorage
 
     Background: Launch FCA for 'Securestorage'
         Given the environment has been set up for 'Securestorage' tests
-        When 3rd party 'certification' app is launched
+        And 3rd party 'certification' app is launched
 
     @sdk @transport
     Scenario Outline: SecureStorage.set - Positive Scenario: Validate <Scenario>
@@ -250,8 +250,8 @@ Feature: SecureStorage
         Then 'Firebolt' platform responds with 'null for updating a secure data value'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
-        And 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
-        And 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key>'
+        When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
+        Then 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key>'
 
         Examples:
             | Scenario                                    | Get_API_Key                                                             | Set_API_Key                                                    | Validation_Key                                                       | Clear_API_Key                            |
@@ -287,12 +287,12 @@ Feature: SecureStorage
         Then 'Firebolt' platform responds with 'null for removing stored value'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
         Then 'Firebolt' platform responds with 'null for getting stored value'
-        And 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        And 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
+        When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        Then 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
         Then 'Firebolt' platform responds with '<Validation_Key2>'
-        And 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
-        And 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key2>'
+        When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
+        Then 'Firebolt' platform responds to 'secondary 3rd party app' with '<Validation_Key2>'
 
 
         Examples:
@@ -328,10 +328,10 @@ Feature: SecureStorage
         Then 'Firebolt' platform responds with 'null for getting stored value'
         When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
         Then 'Firebolt' platform responds with 'null for getting stored value'
-        And 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
-        And 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
-        And 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
-        And 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
+        When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
+        Then 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
+        When 'secondary 3rd party app' invokes the 'Firebolt' API to '<Get_API_Key2>'
+        Then 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'
 
 
         Examples:
