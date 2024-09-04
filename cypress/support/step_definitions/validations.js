@@ -18,7 +18,7 @@
 import { Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module validations
@@ -63,6 +63,34 @@ Given(
             : CONSTANTS.NULL_RESPONSE;
           const expectingError = item.expectingError;
           const isNullCase = item.isNullCase || false;
+          // check if the device details env is present
+          if (
+            Cypress.env(CONSTANTS.DEVICE_DATA) &&
+            Object.keys(Cypress.env(CONSTANTS.DEVICE_DATA)).length > 0
+          ) {
+            let type;
+            // if the validation object used for current validation contains the required data
+            if (contentObject && contentObject.data) {
+              for (let i = 0; i < contentObject.data.length; i++) {
+                if (
+                  contentObject.data[i].validations &&
+                  contentObject.data[i].validations[0] &&
+                  contentObject.data[i].validations[0].type &&
+                  contentObject.data[i].validations[0].mode == CONSTANTS.DEVICE_CONTENT_VALIDATION
+                ) {
+                  type = contentObject.data[i].validations[0].type;
+                  // if the dynamic device details env contains the validation key
+                  if (Cypress.env(CONSTANTS.DEVICE_DATA).hasOwnProperty(type)) {
+                    contentObject.data[i].validations[0].type = Cypress.env(CONSTANTS.DEVICE_DATA)[
+                      type
+                    ];
+                  }
+                }
+              }
+            }
+          } else {
+            fireLog.info('deviceData environment variable does not have the required data');
+          }
 
           // If the app ID is not passed from the feature, the default app ID will be retrieved.
           appId = !appId
