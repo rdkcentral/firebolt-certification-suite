@@ -341,9 +341,9 @@ Cypress.Commands.add('getDeviceData', (method, param, action) => {
   };
   cy.log(
     'Call from 1st party App, method: ' +
-      requestMap.method +
-      ' params: ' +
-      JSON.stringify(requestMap.param)
+    requestMap.method +
+    ' params: ' +
+    JSON.stringify(requestMap.param)
   );
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
@@ -575,10 +575,8 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
     beforeOperation = scenarioList[scenarioName].beforeOperation;
     if (Array.isArray(beforeOperation)) {
       cy.get(Object.values(beforeOperation)).each((beforeOperationObject) => {
-        if (beforeOperationObject.hasOwnProperty('skipTest')) {
-          if (beforeOperationObject.skipTest === true) {
-            UTILS.skipCurrentTest();
-          }
+        if (beforeOperationObject.skipTest) {
+          UTILS.skipCurrentTest();
         }
         if (beforeOperationObject.tags) {
           if (UTILS.checkForTags(beforeOperationObject.tags)) {
@@ -587,8 +585,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
             cy.log(
               `Tag passed in the cli-${Cypress.env(
                 CONSTANTS.TAG
-              )} doesn't match with the tag present in before operation object-${
-                beforeOperationObject.tags
+              )} doesn't match with the tag present in before operation object-${beforeOperationObject.tags
               }`
             );
           }
@@ -1286,9 +1283,9 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                     validationPath
                       ? (validationJsonPath = validationPath)
                       : fireLog.assert(
-                          false,
-                          `Could not find the valid validation path from the validationJsonPath list - ${JSON.stringify(validationJsonPath)}`
-                        );
+                        false,
+                        `Could not find the valid validation path from the validationJsonPath list - ${JSON.stringify(validationJsonPath)}`
+                      );
                   }
                   switch (scenario) {
                     case CONSTANTS.REGEX:
