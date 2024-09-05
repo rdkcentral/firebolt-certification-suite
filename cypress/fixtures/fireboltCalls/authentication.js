@@ -1,4 +1,5 @@
-exports.DYNAMIC_FB_CALL_VARIABLES = {
+const errorContent = require('../objects/errorContentObjects.js');
+exports.AUTHENTICATION_VARIABLES = {
   DEFAULTS: {
     AUTHENTICATION: {
       DECODE_JWT_AUTHENTICATION_TOKEN: {
@@ -84,7 +85,7 @@ exports.DYNAMIC_FB_CALL_VARIABLES = {
 exports.STATIC_COMMON_VARIABLES = {
   DEFAULT: {
     PLATFORM: { type: 'platform' },
-    FALSE: false
+    FALSE: false,
   },
 };
 exports.GET_THE_AUTHENTICATION_TOKEN_FOR_PLATFORM = {
@@ -95,7 +96,7 @@ exports.GET_THE_AUTHENTICATION_TOKEN_FOR_PLATFORM = {
 exports.PLATFORM_AUTHENTICATION_TOKEN = {
   method: 'authentication.token',
   validationJsonPath: 'result',
-  content: this.DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.AUTHENTICATION.DECODE_JWT_AUTHENTICATION_TOKEN,
+  content: this.AUTHENTICATION_VARIABLES.DEFAULTS.AUTHENTICATION.DECODE_JWT_AUTHENTICATION_TOKEN,
 };
 
 exports.GET_THE_AUTHENTICATION_TOKEN_FOR_DEVICE = {
@@ -103,11 +104,11 @@ exports.GET_THE_AUTHENTICATION_TOKEN_FOR_DEVICE = {
   params: { type: 'device' },
 };
 
-exports.PLATFORM_AUTHENTICATION_TOKEN = {
+exports.DECODE_BASE64_AUTHENTICATION_TOKEN = {
   method: 'authentication.token',
   validationJsonPath: 'result',
   content:
-    this.DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.AUTHENTICATION.DECODE_BASE64_AUTHENTICATION_TOKEN,
+    this.AUTHENTICATION_VARIABLES.DEFAULTS.AUTHENTICATION.DECODE_BASE64_AUTHENTICATION_TOKEN,
 };
 
 exports.GET_THE_AUTHENTICATION_TOKEN_FOR_DISTRIBUTOR = {
@@ -133,7 +134,9 @@ exports.FETCH_DEVICE_TOKEN = {
 exports.AUTHENTICATION_DEVICE = {
   method: 'authentication.device',
   validationJsonPath: 'result',
-  content: this.DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.AUTHENTICATION.DECODE_BASE64_AUTHENTICATION_DEVICE_TOKEN,
+  content:
+    this.AUTHENTICATION_VARIABLES.DEFAULTS.AUTHENTICATION
+      .DECODE_BASE64_AUTHENTICATION_DEVICE_TOKEN,
 };
 
 exports.FETCH_SESSION_TOKEN = {
@@ -144,7 +147,9 @@ exports.FETCH_SESSION_TOKEN = {
 exports.AUTHENTICATION_SESSION = {
   method: 'authentication.session',
   validationJsonPath: 'result',
-  content: this.DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.AUTHENTICATION.DECODE_BASE64_AUTHENTICATION_DEVICE_TOKEN,
+  content:
+    this.AUTHENTICATION_VARIABLES.DEFAULTS.AUTHENTICATION
+      .DECODE_BASE64_AUTHENTICATION_DEVICE_TOKEN,
 };
 
 exports.FETCH_ROOT_TOKEN = {
@@ -155,7 +160,9 @@ exports.FETCH_ROOT_TOKEN = {
 exports.AUTHENTICATION_ROOT = {
   method: 'authentication.root',
   validationJsonPath: 'result',
-  content: this.DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.AUTHENTICATION.DECODE_BASE64_AUTHENTICATION_DEVICE_TOKEN,
+  content:
+    this.AUTHENTICATION_VARIABLES.DEFAULTS.AUTHENTICATION
+      .DECODE_BASE64_AUTHENTICATION_DEVICE_TOKEN,
 };
 
 exports.GET_TOKEN_WITH_PLATFORM1_PARAMETER = {
@@ -174,4 +181,11 @@ exports.GET_TOKEN_WITH_INTEGER_PARAMETER = {
   method: 'authentication.token',
   params: 123,
   expected: 'error',
+};
+
+exports.INVALID_PARAMETER_ERROR_AUTHENTICATION_TOKEN = {
+  method: 'authentication.token',
+  validationJsonPath: 'result',
+  content: errorContent.INVALID_TYPE_PARAMS,
+  expectingError: true,
 };

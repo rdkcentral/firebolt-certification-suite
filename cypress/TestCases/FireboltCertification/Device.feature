@@ -7,18 +7,19 @@ Feature: Device
 
     @sdk @transport
     Scenario Outline:Device.<Method> - Positive Scenario: <Scenario>
-        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_Key>'
+        Given we test the 'DEVICE' getters and setters '<Method>' to '{}'
+        When '3rd party app' invokes the 'Firebolt' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
         Examples:
-            | Scenario                    | API_Key                  | Validation_Key              | Method      |
-            | Validate Device id          | fetch device id          | expected device id          | id          |
-            | Validate Device distributor | fetch device distributor | expected device distributor | distributor |
-            | Validate Device platform    | fetch device platform    | expected device platform    | platform    |
-            | Validate Device uid         | fetch device uid         | expected device uid         | uid         |
-            | Validate Device type        | fetch device type        | expected device type        | type        |
-            | Validate Device model       | fetch device model       | expected device model       | model       |
-            | Validate Device sku         | fetch device sku         | expected device sku         | sku         |
-            | Validate Device make        | fetch device make        | expected device make        | make        |
+            | Scenario                    | Method      |
+            | Validate Device id          | id          |
+            | Validate Device distributor | distributor |
+            | Validate Device platform    | platform    |
+            | Validate Device uid         | uid         |
+            | Validate Device type        | type        |
+            | Validate Device model       | model       |
+            | Validate Device sku         | sku         |
+            | Validate Device make        | make        |
 
     @sdk @transport
     Scenario: Device.name - Positive Scenario: Validate device name change
@@ -68,4 +69,3 @@ Feature: Device
             | Validate network_Ethernet_disconnected | device network as ethernet disconnected | onNetworkChanged with ethernet disconnected | onNetworkChanged events with ethernet disconnected |
             | Validate network_Hybrid_connected      | device network as hybrid connected      | onNetworkChanged with hybrid connected      | onNetworkChanged events with hybrid connected      |
             | Validate network_Hybrid_disconnected   | device network as hybrid disconnected   | onNetworkChanged with hybrid disconnected   | onNetworkChanged events with hybrid disconnected   |
-            

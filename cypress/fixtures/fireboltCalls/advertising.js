@@ -93,3 +93,17 @@ exports.ADVERTISING_DEVICEATTRIBUTES = {
     ],
   },
 };
+
+exports.GET_NO_COPPA = {
+  method: 'advertising.config',
+  params: { options: { environment: 'prod', authenticationEntity: 'MVPD' } },
+};
+
+exports.GET_ADVERTISINGID = {
+  method: 'advertising.advertisingId',
+  params: {},
+};
+
+exports.RESET_IDENTIFIER_FOR_ADVERTISING = {
+  method: 'manage_advertising.resetIdentifier',
+};
