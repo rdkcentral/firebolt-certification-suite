@@ -891,6 +891,14 @@ function parseValue(str) {
   return str;
 }
 
+global.extractDeviceData = function (attribute) {
+  const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA); 
+  if (!deviceData) {
+    throw new Error('deviceData environment variable is not found');
+  }
+  return deviceData[attribute];
+}
+
 /**
  * @module utils
  * @globalfunction resolveAtRuntime
