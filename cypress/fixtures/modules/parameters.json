@@ -14,15 +14,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "program",
-          "programType": "movie",
-          "entityId": "el-camino"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "program",
+            "programType": "movie",
+            "entityId": "el-camino"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_EPISODE": {
@@ -32,17 +32,17 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "program",
-          "programType": "episode",
-          "entityId": "breaking-bad-pilot",
-          "seriesId": "breaking-bad",
-          "seasonId": "breaking-bad-season-1"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "program",
+            "programType": "episode",
+            "entityId": "breaking-bad-pilot",
+            "seriesId": "breaking-bad",
+            "seasonId": "breaking-bad-season-1"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_SEASON": {
@@ -52,16 +52,16 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "program",
-          "programType": "season",
-          "entityId": "breaking-bad-season-1",
-          "seriesId": "breaking-bad"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "program",
+            "programType": "season",
+            "entityId": "breaking-bad-season-1",
+            "seriesId": "breaking-bad"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_SERIES": {
@@ -71,15 +71,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "program",
-          "programType": "series",
-          "entityId": "breaking-bad"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "program",
+            "programType": "series",
+            "entityId": "breaking-bad"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_SPORTINGEVENT": {
@@ -89,15 +89,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "program",
-          "programType": "sportingEvent",
-          "entityId": "live-aid"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "program",
+            "programType": "sportingEvent",
+            "entityId": "live-aid"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_CONCERT": {
@@ -107,15 +107,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "program",
-          "programType": "concert",
-          "entityId": "live-aid"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "program",
+            "programType": "concert",
+            "entityId": "live-aid"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_PREVIEW": {
@@ -125,15 +125,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "program",
-          "programType": "preview",
-          "entityId": "live-aid"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "program",
+            "programType": "preview",
+            "entityId": "live-aid"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_OTHER": {
@@ -143,15 +143,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "program",
-          "programType": "other",
-          "entityId": "live-aid"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "program",
+            "programType": "other",
+            "entityId": "live-aid"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_ADVERTISEMENT": {
@@ -161,15 +161,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "program",
-          "programType": "advertisement",
-          "entityId": "live-aid"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "program",
+            "programType": "advertisement",
+            "entityId": "live-aid"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_MUSICVIDEO": {
@@ -179,15 +179,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "program",
-          "programType": "musicVideo",
-          "entityId": "live-aid"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "program",
+            "programType": "musicVideo",
+            "entityId": "live-aid"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_MINISODE": {
@@ -197,15 +197,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "program",
-          "programType": "minisode",
-          "entityId": "live-aid"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "program",
+            "programType": "minisode",
+            "entityId": "live-aid"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_EXTRA": {
@@ -215,15 +215,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "program",
-          "programType": "extra",
-          "entityId": "live-aid"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "program",
+            "programType": "extra",
+            "entityId": "live-aid"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_MUSICTYPE_SONG": {
@@ -233,15 +233,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "music",
-          "programType": "song",
-          "entityId": "frozen"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "music",
+            "programType": "song",
+            "entityId": "frozen"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_MUSICTYPE_ALBUM": {
@@ -251,15 +251,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "music",
-          "programType": "album",
-          "entityId": "light"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "music",
+            "programType": "album",
+            "entityId": "light"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_CHANNELTYPE_STREAMING": {
@@ -269,15 +269,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "channel",
-          "channelType": "streaming",
-          "entityId": "hbo"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "channel",
+            "channelType": "streaming",
+            "entityId": "hbo"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_CHANNELTYPE_OVERTHEAIR": {
@@ -287,15 +287,15 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "channel",
-          "channelType": "overTheAir",
-          "entityId": "hbo"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "channel",
+            "channelType": "overTheAir",
+            "entityId": "hbo"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_UNTYPED_ENTITY": {
@@ -305,13 +305,13 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityId": "an-entity"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityId": "an-entity"
+          }
+        ]
+      }
     }
   },
   "NAVIGATE_TO_SEARCH_INTENT_PLAYLIST_ENTITY": {
@@ -321,14 +321,14 @@
         "source": "voice"
       },
       "data": {
-        "query": "walter white"
-      },
-      "suggestions": [
-        {
-          "entityType": "playlist",
-          "entityId": "playlist/xyz"
-        }
-      ]
+        "query": "walter white",
+        "suggestions": [
+          {
+            "entityType": "playlist",
+            "entityId": "playlist/xyz"
+          }
+        ]
+      }
     }
   }
 }
