@@ -47,3 +47,6 @@ npx cypress open --browser electron -- env interactionsMetrics=true
    }
 }
 ```
+
+### Note: 
+Interaction Logs will be cleared after the each scenario execution is done, so any kind of validations should be added in that scenario only.
