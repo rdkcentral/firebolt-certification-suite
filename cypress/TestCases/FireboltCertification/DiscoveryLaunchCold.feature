@@ -129,8 +129,7 @@ Feature: Discovery.launch_ColdLaunch
         | Search Intent without musicType for musicEntity             | search intent without musicType for musicentity for discoverylaunch             |
         | Search Intent without channelType for channelEntity         | search intent without channelType for channelentity for discoverylaunch         |
         | Search Intent without entityId for untypedEntity            | search intent without entityId for untypedentity for discoverylaunch            |
-        | Search Intent without entityType for playlistEntity         | search intent without entitytype for playlistentity for discoverylaunch         |
-        | Search Intent with invalid entityType for programEntity     | search intent with invalid entityType for programEntity for discoverylaunch     |
+        | Search Intent with invalid entityType for movieEntity       | search intent with invalid entityType for movieEntity for discoverylaunch       |
         | Search Intent with invalid movieType for movieEntity        | search intent with invalid movieType for movieEntity for discoverylaunch        |
         | Search Intent with integer entityId for movieEntity         | search intent with integer entityId for movieEntity for discoverylaunch         |
         | Search Intent with integer assetId for movieEntity          | search intent with integer assetId for movieEntity for discoverylaunch          |
@@ -145,7 +144,6 @@ Feature: Discovery.launch_ColdLaunch
         | Search Intent with invalid musicType for musicEntity        | search intent with invalid musicType for musicEntity for discoverylaunch        |
         | Search Intent with invalid entityType for channelEntity     | search intent with invalid entityType for channelEntity for discoverylaunch     |
         | Search Intent with invalid channelType for channelEntity    | search intent with invalid channelType for channelEntity for discoverylaunch    |
-        | Search Intent with invalid entityType for playlistEntity    | search intent with invalid entityType for playlistEntity for discoverylaunch    |
 
     @sdk @transport
     Scenario Outline: Discovery.Launch Cold Launch - Positive Scenario: <Scenario> for context source
@@ -206,7 +204,7 @@ Feature: Discovery.launch_ColdLaunch
         | Search Intent without musicType for musicEntity             | search intent without musicType for musicentity for discoverylaunch             |
         | Search Intent without channelType for channelEntity         | search intent without channelType for channelentity for discoverylaunch         |
         | Search Intent without entityId for untypedEntity            | search intent without entityId for untypedentity for discoverylaunch            |
-        | Search Intent with invalid entityType for programEntity     | search intent with invalid entityType for programEntity for discoverylaunch     |
+        | Search Intent with invalid entityType for movieEntity       | search intent with invalid entityType for movieEntity for discoverylaunch       |
         | Search Intent with invalid movieType for movieEntity        | search intent with invalid movieType for movieEntity for discoverylaunch        |
         | Search Intent with integer entityId for movieEntity         | search intent with integer entityId for movieEntity for discoverylaunch         |
         | Search Intent with integer assetId for movieEntity          | search intent with integer assetId for movieEntity for discoverylaunch          |
@@ -221,6 +219,5 @@ Feature: Discovery.launch_ColdLaunch
         | Search Intent with invalid musicType for musicEntity        | search intent with invalid musicType for musicEntity for discoverylaunch        |
         | Search Intent with invalid entityType for channelEntity     | search intent with invalid entityType for channelEntity for discoverylaunch     |
         | Search Intent with invalid channelType for channelEntity    | search intent with invalid channelType for channelEntity for discoverylaunch    |
-        | Search Intent with invalid entityType for playlistEntity    | search intent with invalid entityType for playlistEntity for discoverylaunch    |
-        
+        | Search Intent with invalid entityId for untypedEntity       | search intent with invalid entityId for untypedEntity for discoverylaunch    |
         
