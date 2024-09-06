@@ -1,3 +1,10 @@
+# [1.2.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.4...v1.2.0-dev.5) (2024-09-06)
+
+
+### Features
+
+* Add support for skipping individual scenarios from beforeEach operation ([#205](https://github.com/rdkcentral/firebolt-certification-suite/issues/205)) ([b7e2257](https://github.com/rdkcentral/firebolt-certification-suite/commit/b7e22574216b7ba654ebd40b285c309105957ade))
+
 # [1.2.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.3...v1.2.0-dev.4) (2024-08-29)
 
 
