@@ -575,6 +575,9 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
     beforeOperation = scenarioList[scenarioName].beforeOperation;
     if (Array.isArray(beforeOperation)) {
       cy.get(Object.values(beforeOperation)).each((beforeOperationObject) => {
+        if (beforeOperationObject.skipTest) {
+          UTILS.skipCurrentTest();
+        }
         if (beforeOperationObject.tags) {
           if (UTILS.checkForTags(beforeOperationObject.tags)) {
             cy.setResponse(beforeOperationObject, scenarioName);

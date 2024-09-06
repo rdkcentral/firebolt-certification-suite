@@ -30,7 +30,7 @@ Feature: Device
         Then 'Firebolt' platform responds to '1st party app' get API
         And 'Firebolt' platform triggers '1st party app' event
 
-    @mfos  @regression @sdk
+    @regression @sdk @transport
     Scenario Outline: Device.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<validation_key>'
