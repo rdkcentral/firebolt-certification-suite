@@ -1,3 +1,10 @@
+# [1.2.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.6...v1.2.0-dev.7) (2024-09-06)
+
+
+### Features
+
+* added support to process array in static v2 ([#210](https://github.com/rdkcentral/firebolt-certification-suite/issues/210)) ([9a49910](https://github.com/rdkcentral/firebolt-certification-suite/commit/9a4991055948586db6dd70b76250f547b476ba06))
+
 # [1.2.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.5...v1.2.0-dev.6) (2024-09-06)
 
 
