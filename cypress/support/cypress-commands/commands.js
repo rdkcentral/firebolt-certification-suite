@@ -564,6 +564,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
   if (scenarioName.includes('(example')) {
     scenarioName = scenarioName.split('(example')[0].trim();
   }
+  Cypress.env(CONSTANTS.SCENARIO_NAME, scenarioName);
   // Fetching current feature name
   const moduleReqIdJson = Cypress.env(CONSTANTS.MODULEREQIDJSON);
   const scenarioList = moduleReqIdJson.scenarioNames[featureFileName];

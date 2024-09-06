@@ -129,11 +129,6 @@ export default function (module) {
     UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
     cy.getBeforeOperationObject();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
-    let scenarioName = cy.state().test.title;
-    if (scenarioName.includes('(example')) {
-      scenarioName = scenarioName.split('(example')[0].trim();
-    }
-    Cypress.env(CONSTANTS.SCENARIO_NAME, scenarioName);
   });
 
   /**
