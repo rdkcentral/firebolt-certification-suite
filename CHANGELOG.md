@@ -1,3 +1,10 @@
+# [1.2.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.5...v1.2.0-dev.6) (2024-09-06)
+
+
+### Features
+
+* Changed suite default communication mode to Transport ([#202](https://github.com/rdkcentral/firebolt-certification-suite/issues/202)) ([5d52c12](https://github.com/rdkcentral/firebolt-certification-suite/commit/5d52c12e9bb70354289357b1c4d2b97f04462c9c))
+
 # [1.2.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.4...v1.2.0-dev.5) (2024-09-06)
 
 
