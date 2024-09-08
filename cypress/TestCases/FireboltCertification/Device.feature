@@ -14,12 +14,16 @@ Feature: Device
             | Scenario                    | Method      |
             | Validate Device id          | id          |
             | Validate Device distributor | distributor |
-            | Validate Device platform    | platform    |
             | Validate Device uid         | uid         |
             | Validate Device type        | type        |
             | Validate Device model       | model       |
             | Validate Device sku         | sku         |
             | Validate Device make        | make        |
+
+    @sdk @transport
+    Scenario: Device.platform - Positive Scenario: Validate device platform
+        When '3rd party app' invokes the 'Firebolt' API to 'fetch device platform'
+        Then 'Firebolt' platform responds with 'expected device platform'
 
     @sdk @transport
     Scenario: Device.name - Positive Scenario: Validate device name change
@@ -33,8 +37,9 @@ Feature: Device
 
     @mfos  @regression @sdk
     Scenario Outline: Device.<Method> - Positive Scenario: <Scenario>
-        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<validation_key>'
+        Given we test the 'DEVICE' getters and setters '<Method>' to '{}'
+        When '3rd party app' invokes the 'Firebolt' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
 
         Examples:
             | Scenario                  | Method           | API_Key                | validation_key            |

@@ -12,7 +12,7 @@ exports.AUTHENTICATION_VARIABLES = {
                 field: 'iat',
                 mode: 'regex',
                 format: 'TOKEN_JWT_REGEXP',
-                type: 'NUMERIC_REGEXP',
+                type: '^[0-9]+$',
                 description: 'Validation of the Authentication Token issueDate Format',
               },
             ],
@@ -25,7 +25,7 @@ exports.AUTHENTICATION_VARIABLES = {
                 field: 'partnerId',
                 mode: 'regex',
                 format: 'TOKEN_JWT_REGEXP',
-                type: 'STRING_REGEXP',
+                type: '^[A-Za-z]*$',
                 description: 'Validation of the Authentication Token partner Format',
               },
             ],
@@ -42,7 +42,7 @@ exports.AUTHENTICATION_VARIABLES = {
                 field: 'issueDate',
                 mode: 'regex',
                 format: 'TOKEN_REGEXP',
-                type: 'DATEAUTHENTICATION_REGEXP',
+                type: '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])',
                 description: 'Validation of the Authentication Token issueDate Format',
               },
             ],
@@ -55,7 +55,7 @@ exports.AUTHENTICATION_VARIABLES = {
                 field: 'notOnOrAfter',
                 mode: 'regex',
                 format: 'TOKEN_REGEXP',
-                type: 'DATEAUTHENTICATION_REGEXP',
+                type: '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])',
                 description: 'Validation of the Authentication Token notOnOrAfter Format',
               },
             ],
@@ -72,7 +72,7 @@ exports.AUTHENTICATION_VARIABLES = {
                 field: 'issueDate',
                 mode: 'regex',
                 format: 'TOKEN_REGEXP',
-                type: 'DATEAUTHENTICATION_REGEXP',
+                type: '[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])',
                 description: 'Validation of the Authentication Token issueDate Format',
               },
             ],
@@ -82,12 +82,7 @@ exports.AUTHENTICATION_VARIABLES = {
     },
   },
 };
-exports.STATIC_COMMON_VARIABLES = {
-  DEFAULT: {
-    PLATFORM: { type: 'platform' },
-    FALSE: false,
-  },
-};
+
 exports.GET_THE_AUTHENTICATION_TOKEN_FOR_PLATFORM = {
   method: 'authentication.token',
   params: { type: 'platform' },

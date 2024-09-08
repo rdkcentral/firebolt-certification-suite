@@ -234,17 +234,6 @@
         "content": "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITHOUT_OPTIONS"
     },
 
-    "PARAMETERS_INITIALIZATION_ADVERTISINGID_AD_OFF": {
-		"method": "parameters.initialization",
-		"validationJsonPath": "result",
-		"content": "ADVERTISING_ADVERTISINGID_ADOFF"
-	},
-    "PARAMETERS_INITIALIZATION_ADVERTISINGID_AD_ON": {
-		"method": "parameters.initialization",
-		"validationJsonPath": "result",
-		"content": "ADVERTISING_ADVERTISINGID_ADON"
-	},
-
     "NULLINTENT_SOURCE_FOR_INITIALIZATION_PARAMETERS": {
         "method": "parameters.initialization",
         "context": "DISCOVERY_LAUNCH_NULL",

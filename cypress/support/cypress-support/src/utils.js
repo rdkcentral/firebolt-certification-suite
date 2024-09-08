@@ -891,13 +891,35 @@ function parseValue(str) {
   return str;
 }
 
-global.extractDeviceData = function (attribute) {
+global.extractEnvValue = function (attribute) {
   const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA); 
   if (!deviceData) {
     throw new Error('deviceData environment variable is not found');
   }
-  return deviceData[attribute];
-}
+  console.log('env var', deviceData);
+
+  if (/CYPRESSENV/.test(attribute)) {
+    const parts = attribute.split('-').slice(1); 
+    let envValue;
+
+    if (parts.length > 1) {
+      const objectName = parts[0];
+      const propertyName = parts[1];
+      envValue = Cypress.env(objectName) ? Cypress.env(objectName)[propertyName] : undefined;
+    } else {
+      const envKey = parts[0];
+      envValue =  Cypress.env(envKey);
+    }
+
+    if (envValue !== undefined) {
+      attribute = envValue;
+    } else {
+      console.log(`Cypress env variable '${attribute}' does not exist`);
+    }
+  }
+  return deviceData?.[attribute] ?? attribute;
+};
+
 
 /**
  * @module utils

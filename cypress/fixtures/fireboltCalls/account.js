@@ -8,7 +8,7 @@ exports.ACCOUNT_VARIABLES = {
           validations: [
             {
               mode: 'deviceContentValidation',
-              type: extractDeviceData('ACCOUNTID'),
+              type: extractEnvValue('ACCOUNTID'),
               description: 'Validation of the Account Id',
             },
           ],
