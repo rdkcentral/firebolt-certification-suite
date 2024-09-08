@@ -458,8 +458,8 @@ exports.ONNETWORKCHANGED_EVENTS_WITH_HYBRID_DISCONNECTED = {
 exports.PROVISION_DEVICE_WITH_DEFAULT_VALUES = {
   method: 'manage_device.provision',
   params: {
-    accountId: '7733381815376234554',
-    deviceId: '1578184773300015021',
+    accountId: '1234',
+    deviceId: '1234',
   },
 };
 
@@ -472,9 +472,9 @@ exports.DEFAULT_VALUE_FOR_DEVICE_PROVISION = {
 exports.PROVISION_DEVICE_WITH_DISTRIBUTOR_ID = {
   method: 'manage_device.provision',
   params: {
-    accountId: '7733381815376234554',
-    deviceId: '1578184773300015021',
-    distributorId: 'xglobal',
+    accountId: '1234',
+    deviceId: '1234',
+    distributorId: 'global_partner',
   },
 };
 
@@ -550,4 +550,9 @@ exports.PROVISION_DEVICE_WITHOUT_ACCOUNTID = {
     deviceId: '1234',
   },
   expected: 'error',
+};
+
+exports.SET_DEVICE_NAME_TO_LIVING_ROOM = {
+  method: 'manage_device.setName',
+  params: { value: 'Living Room' },
 };

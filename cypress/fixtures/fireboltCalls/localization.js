@@ -325,3 +325,28 @@ exports.ONLANGUAGECHANGED = {
   validationJsonPath: 'eventResponse',
   content: null,
 };
+
+exports.SET_LOCALIZATION_LOCALITY_TO_PHILADELPHIA = {
+  method: 'manage_localization.setLocality',
+  params: { value: 'Philadelphia' },
+};
+
+exports.SET_POSTALCODE_TO_19103 = {
+  method: 'manage_localization.setPostalCode',
+  params: { value: '19103' },
+};
+
+exports.SET_COUNTRYCODE_TO_US = {
+  method: 'manage_localization.setCountryCode',
+  params: { value: 'US' },
+};
+
+exports.SET_PREFERREDAUDIOLANGUAGES_TO_ENG_SPA = {
+  method: 'manage_localization.setPreferredAudioLanguages',
+  params: { value: ['eng', 'spa'] },
+};
+
+exports.SET_LOCALIZATION_TIMEZONE_WITH_AMERICA_LOSANGELES = {
+  method: 'manage_localization.setTimeZone',
+  params: { value: '"America/Los_Angeles"' },
+};

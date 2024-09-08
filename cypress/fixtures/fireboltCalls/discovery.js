@@ -924,3 +924,13 @@ exports.ONDISCOVERYPOLICYCHANGED = {
   validationJsonPath: 'eventResponse',
   content: null,
 };
+
+exports.DISABLE_RECOMMENDATIONS = {
+  method: 'manage_privacy.setAllowPersonalization',
+  params: {value: false},
+};
+
+exports.DISABLE_REMEMBER_WATCHED_PROGRAMS = {
+  method: 'manage_privacy.setAllowWatchHistory',
+  params: {value: false},
+};

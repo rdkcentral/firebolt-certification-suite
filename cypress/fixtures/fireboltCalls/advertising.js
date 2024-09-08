@@ -145,6 +145,11 @@ exports.ADVERTISING_VARIABLES = {
   },
 };
 
+exports.SET_SKIPRESTRICTION_AS_ADSUNWATCHED = {
+  method: 'manage_advertising.setskipRestriction',
+  params: 'adsunwatched',
+}
+
 exports.GET_NO_COPPA = {
   method: 'advertising.config',
   params: { options: { environment: 'prod', authenticationEntity: 'MVPD' } },
