@@ -94,7 +94,6 @@ exports.SET_ACCOUNT_SESSION_WITH_INVALID_EXPIRESIN_VALUE = {
   expected: 'error',
 };
 
-
 exports.SET_ACCOUNT_SESSION_WITHOUT_PARAMETERS = {
   method: 'manage_account.session',
   params: {},

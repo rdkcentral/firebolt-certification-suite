@@ -891,15 +891,26 @@ function parseValue(str) {
   return str;
 }
 
+/**
+ * @module utils
+ * @globalfunction extractEnvValue
+ * @description Return the env value.
+ * @param {String}
+ * @example
+ * extractEnvValue('DEVICEID')
+ * extractEnvValue('CYPRESSENV-defaultTestData-deviceResolution')
+ * @returns
+ * 1234
+ * [[1280, 720], [1920, 1080], [3840, 2160]]
+ */
 global.extractEnvValue = function (attribute) {
-  const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA); 
+  const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA);
   if (!deviceData) {
-    throw new Error('deviceData environment variable is not found');
+    logger.info('deviceData environment variable is not found');
   }
-  console.log('env var', deviceData);
 
   if (/CYPRESSENV/.test(attribute)) {
-    const parts = attribute.split('-').slice(1); 
+    const parts = attribute.split('-').slice(1);
     let envValue;
 
     if (parts.length > 1) {
@@ -908,18 +919,17 @@ global.extractEnvValue = function (attribute) {
       envValue = Cypress.env(objectName) ? Cypress.env(objectName)[propertyName] : undefined;
     } else {
       const envKey = parts[0];
-      envValue =  Cypress.env(envKey);
+      envValue = Cypress.env(envKey);
     }
 
     if (envValue !== undefined) {
       attribute = envValue;
     } else {
-      console.log(`Cypress env variable '${attribute}' does not exist`);
+      logger.info(`Cypress env variable '${attribute}' does not exist`);
     }
   }
   return deviceData?.[attribute] ?? attribute;
 };
-
 
 /**
  * @module utils

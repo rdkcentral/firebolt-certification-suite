@@ -371,11 +371,11 @@ exports.ONADVERTISINGPOLICYCHANGED = {
 };
 exports.ADVERTISING_ONPOLICYCHANGED = {
   method: 'advertising.onPolicyChanged',
-  params: {}
+  params: {},
 };
 exports.GET_ADVERTISING_POLICY = {
   method: 'advertising.policy',
-  params: {}
+  params: {},
 };
 exports.ADVERTISING_POLICY_LIMITADTRACKING_AS_TRUE = {
   method: 'advertising.policy',

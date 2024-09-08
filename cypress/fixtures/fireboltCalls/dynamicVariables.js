@@ -1,6 +1,6 @@
 const accountVariables = require('./account.js');
 exports.DYNAMIC_FB_CALL_VARIABLES = {
-    DEFAULTS: {
+  DEFAULTS: {
     ...accountVariables.ACCOUNT_VARIABLES,
-}
-}
+  },
+};
