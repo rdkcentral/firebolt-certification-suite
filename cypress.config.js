@@ -58,6 +58,7 @@ const env = {
   healthCheckRetries: 8,
   skipContentValidation: false,
   communicationMode: 'SDK',
+  suiteCommunicationMode: 'Transport',
   performanceMetrics: false,
   interactionsMetrics: false,
   generateLocalReport: true,

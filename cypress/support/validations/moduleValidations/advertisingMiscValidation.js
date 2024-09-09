@@ -54,7 +54,7 @@ function validateAdvertisingAdvertisingId(method, validationTypeObject, apiOrEve
 
   // Ifa is an advertising identifier and it should not be empty.
   fireLog
-    .info(`${pretext} Ifa value is not null or undefined`, 'validateAdvertisingAdvertisingId')
+    .info(`validateAdvertisingAdvertisingId: ${pretext} Ifa value is not null or undefined`)
     .then(() => {
       assert.exists(response.ifa, `${pretext} : Is not null or undefined`);
     });
@@ -64,31 +64,25 @@ function validateAdvertisingAdvertisingId(method, validationTypeObject, apiOrEve
       // lmt value equal to 1 when limitAdTracking is on
       fireLog
         .info(
-          `${pretext} Expected Lmt value : ${CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT},` +
+          `validateAdvertisingAdvertisingId: ${pretext} Expected Lmt value : ${CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT},` +
             ` Actual value : ` +
-            response.lmt,
-          'validateAdvertisingAdvertisingId'
+            response.lmt
         )
         .then(() => {
-          assert.equal(
-            CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT,
-            response.lmt,
-            `${pretext} Equal to be  `
-          );
+          assert.equal(response.lmt, CONSTANTS.ADVERTISING_LIMITIADTRACKING_ON_LMT, `${pretext}  `);
         });
       if (response.ifa_type) {
         fireLog
           .info(
-            `${pretext} Expected Ifa_type value : ${CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_IFA_TYPE}, ` +
+            `validateAdvertisingAdvertisingId: ${pretext} Expected Ifa_type value : ${CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_IFA_TYPE}, ` +
               ` Actual value : ` +
-              response.ifa_type,
-            'validateAdvertisingAdvertisingId'
+              response.ifa_type
           )
           .then(() => {
             assert.equal(
-              CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_IFA_TYPE,
               response.ifa_type,
-              `${pretext} Equal to be `
+              CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_ON_IFA_TYPE,
+              `${pretext} `
             );
           });
       }
@@ -97,31 +91,25 @@ function validateAdvertisingAdvertisingId(method, validationTypeObject, apiOrEve
       // lmt value equal to 0 when limitAdTracking is off
       fireLog
         .info(
-          `${pretext} Expected Lmt value : ${CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT},` +
+          `validateAdvertisingAdvertisingId: ${pretext} Expected Lmt value : ${CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT},` +
             ` Actual value : ` +
-            response.lmt,
-          'validateAdvertisingAdvertisingId'
+            response.lmt
         )
         .then(() => {
-          assert.equal(
-            CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT,
-            response.lmt,
-            `${pretext} Equal to be `
-          );
+          assert.equal(response.lmt, CONSTANTS.ADVERTISING_LIMITIADTRACKING_OFF_LMT, `${pretext} `);
         });
       if (response.ifa_type) {
         fireLog
           .info(
-            `${pretext} Expected Ifa_type value : ${CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_IFA_TYPE}, ` +
+            `validateAdvertisingAdvertisingId: ${pretext} Expected Ifa_type value : ${CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_IFA_TYPE}, ` +
               ` Actual value : ` +
-              response.ifa_type,
-            'validateAdvertisingAdvertisingId'
+              response.ifa_type
           )
           .then(() => {
             assert.equal(
-              CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_IFA_TYPE,
               response.ifa_type,
-              `${pretext} Equal to be`
+              CONSTANTS.ADVERTISINGID_LIMITIADTRACKING_OFF_IFA_TYPE,
+              `${pretext} `
             );
           });
       }

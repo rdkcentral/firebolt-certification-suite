@@ -7,36 +7,38 @@ Feature: Advertising_Manage
 
    @sdk @transport
    Scenario: Advertising.resetIdentifier - Positive Scenario: Reset Identifier
-      When 1st party app invokes the 'Firebolt' API to 'reset identifier for advertising'
-      Then 'Firebolt' platform responds to '1st party app' with 'null for advertising resetIdentifier'
+      Given we test the 'ADVERTISING_RESET_IDENTIFIER' getters and setters
+      When '1st party app' invokes the 'Firebolt' get API
+      Then 'Firebolt' platform responds to '1st party app' get API
 
    @sdk @transport
    Scenario Outline: Advertising.skipRestriction - Positive Scenario: <Scenario>
-      When 1st party app registers for the 'advertising onSkipRestrictionChanged' event using the 'Firebolt' API
-      And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
-      When 1st party app invokes the 'Firebolt' API to 'get advertising skipRestriction'
-      Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
-      And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
+      Given we test the 'ADVERTISING_SKIP_RESTRICTION' getters and setters 'skipRestriction' to '<Value>'
+      And '1st party app' registers for the 'Firebolt' event
+      When 1st party app invokes the 'Firebolt' API to set value
+      Then 'Firebolt' platform responds to '1st party app' set API
+      When '1st party app' invokes the 'Firebolt' get API
+      Then 'Firebolt' platform responds to '1st party app' get API
+      And 'Firebolt' platform triggers '1st party app' event
 
       Examples:
-         | Scenario                     | API_Key                             | Method_Validation_Key            | Event_Validation_Key                       |
-         | SkipRestriction adsAll       | set skipRestriction as adsAll       | adsAll for skipRestriction       | onSkipRestrictionChanged with adsAll       |
-         | SkipRestriction none         | set skipRestriction as none         | none for skipRestriction         | onSkipRestrictionChanged with none         |
-         | SkipRestriction adsUnwatched | set skipRestriction as adsUnwatched | adsUnwatched for skipRestriction | onSkipRestrictionChanged with adsUnwatched |
-         | SkipRestriction all          | set skipRestriction as all          | all for skipRestriction          | onSkipRestrictionChanged with all          |
-
+         | Scenario                     | Value        |
+         | SkipRestriction adsAll       | adsAll       |
+         | SkipRestriction none         | none         |
+         | SkipRestriction adsUnwatched | adsUnwatched |
+         | SkipRestriction all          | all          |
 
    @sdk @transport
    Scenario: Advertising.setSkipRestriction - Negative Scenario: SkipRestriction expecting error
-      When 1st party app invokes the 'Firebolt' API to 'set skipRestriction with integer'
-      Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for skipRestriction'
+      Given we test the 'ADVERTISING_SKIP_RESTRICTION' getters and setters 'skipRestriction' to '898756'
+      When 1st party app invokes the 'Firebolt' API to set invalid value
+      Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
    @sdk @transport @notSupported
    Scenario: Advertising.resetIdentifier - Positive Scenario: Reset Identifier method
-      When '3rd party app' invokes the 'Firebolt' API to 'get no coppa'
+      Given '3rd party app' invokes the 'Firebolt' API to 'get no coppa'
       And '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
-      And 1st party app invokes the 'Firebolt' API to 'reset identifier for advertising'
+      When 1st party app invokes the 'Firebolt' API to 'reset identifier for advertising'
       And '3rd party app' invokes the 'Firebolt' API to 'get no coppa'
       And '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
       Then I validate last '2' response are different for 'advertising.config' API method
