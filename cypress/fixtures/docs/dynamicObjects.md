@@ -1,6 +1,25 @@
+# Table of contents: 
+[Dynamic Objects (Only Supported in JS Objects)](#dynamic-objects-only-supported-in-js-objects)
+ - [Supported Dynamic Glue Codes](#supported-dynamic-glue-codes)
+   - [Background](#background)
+   - [Firebolt object](#firebolt-object)
+     - [Sample Firebolt Object Format](#sample-firebolt-object-format)
+   - [Runtime Variables](#runtime-variables)
+   - [ResolveAtRuntime Function](#resolveatruntime-function)
+     - [Examples](#examples)
+       - [Example 1](#example-1)
+       - [Example 2](#example-2)
+       - [Example 3](#example-3)
+   - [Usage](#usage)
+     - [Example 1](#example-1-1)
+     - [Example 2](#example-2-1)
+   - [Advanced Support](#advanced-support)
+     - [Examples](#example-3)
+
 # Dynamic Objects (Only Supported in JS Objects)
 
-## [Supported Dynamic Glue Codes](../../support/step_definitions/dynamicCalls.md)
+## Supported Dynamic Glue Codes
+To use dynamic firrebolt objects, we need to use dynamic glue codes listed [here](../../support/step_definitions/dynamicCalls.md)
 
 - we test the '(.+)' getters and setters(?: '(._?)'(?: to '(._?)')?)?
 - 1st party app invokes the '(.+)' API to set( invalid)? value
@@ -11,12 +30,12 @@
 
 ## Background
 
-FCS has the current support to create firebolt calls with these mentioned parameters [Methods, Method Parameters, Content]. These parameters define the method API calls, validation responses. Firebolt call object is designed in a way that it can handle multiple method calls.
+FCS supports dynamic firebolt JS objects to be used across multiple examples in a scenario outline. This is applicable for test cases where we can validate setter response, getter response, event response etc using a single JS object. More details outline below.
 
 ## Firebolt object
 
 - Firebolt objects can be added in Javascript files located in the `cypress/fixtures/fireboltCalls` folder. Ex: `cypress/fixtures/fireboltCalls/accessibility.js`
-- Having the support to override the firebolt objects from the config module by giving a same key.
+- Firebolt objects present in the config module will take priority if the same key present in FCS.
 
 ### Sample Firebolt Object Format
 
@@ -37,10 +56,10 @@ FIREBOLT_CALL = {
   };
 ```
 
-| **Param**               | **Definition**                                                                                            | **Example**                                   | **Supported Type**             |
-| ----------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------ |
+| **Param**               | **Definition**                                                                                            | **Example**                                   | **Supported Type**             |**Required** |
+| ----------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------ | --------------|
 | method                  | The method name to make a call, associated with get test steps                                            | accessibility.closedCaptionsSettings          | string                         |
-| params                  | parameters of the method                                                                                  | {}                                            | string or object               |
+| params                  | parameters of the method                                                                                  | {}                                            | string, number, array, object               |
 | validationJsonPath      | Contains an array or string with the path of the response value that needs to be validated                | result.enabled                                | string or array                |
 | setMethod               | The setter method name to make a call, associated with set test steps                                     | closedcaptions.setEnabled                     | string                         |
 | setParams               | Parameters of the set method to set new value.                                                            | {value: true}                                 | string or object               |
@@ -52,23 +71,22 @@ FIREBOLT_CALL = {
 
 **Note:**
 
-- Acceptable types for the above params i.e string, number, array, object etc.
 - These are all the supported fields but depending on the test scenario and glue code used none of them are technically required.
 
 ## Runtime Variables
 
-Runtime variables are used to store the values that are populated from the test case during execution.
+Runtime variables are used to store values from feature file and use them in dynamic firebolt object for making api calls, api validation, event validation etc.
 
-Below are the runtime variables that can be used in the fireboltCall object.
+Below are the runtime variables that is used by fireboltCall object.
 
 - **attribute:** Attribute is a field name of the `runtime` environment variable that holds the value of the method name. For example, if the method name is `closedCaptions.setEnabled`, the attribute value will be `enabled`.
 - **value:** Value is a field name of the `runtime` environment variable that holds the value used for to set the value or for validation.
 
-**Note:** In order to use the runtime variables in the fireboltCall object, the `resolveAtRuntime()` function should be used.
+**Note:** `resolveAtRuntime()` function is used by fireboltCall object in order to process runtime variables and other fields.
 
 ## ResolveAtRuntime Function
 
-**ResolveAtRuntime** is a global function utilized by the JS files. This function is used to dynamically resolve the values during the test case execution. It is used to replace the placeholders in the fireboltCall object with the actual values from the `runtime` environment variable.
+**ResolveAtRuntime** is a global function utilized by the JS files. This function is used to dynamically resolve values during test case execution. This function will replace variables in the fireboltCall object with the actual values from `runtime` variable.
 
 - **Input Types**: `resolveAtRuntime` accepts either a string or an array of strings as input.
 
@@ -78,7 +96,7 @@ Below are the runtime variables that can be used in the fireboltCall object.
 
 - **Options:** The function has the support to accespts the optional parameter `uppercaseFirstChar` or `lowercaseFirstChar` to convert the first character of the resolved value to uppercase or lowercase. This parameter is separated by a dot from the attribute name. This parameter is used to convert the attribute value to the correct format for the method name. For example, `resolveAtRuntime('manage_closedcaptions.set{{attribute.uppercaseFirstChar}}')`.
 
-This process ensures that all necessary values are dynamically resolved during the test case execution.
+Usage of this function by dynamic firebolt object ensures that all necessary values are dynamically resolved during test case execution in the corresponding glue code.
 
 ### Examples:
 
@@ -116,7 +134,7 @@ returns: 1.5
 
 The dynamic calls Glues can be used in test cases along with fireboltCall dynamic objects.
 
-### Below examples shows the how fireboltCall object and testcase can be written using dynamic glues.
+### Below are examples illustrating various ways to utilize dynamic firebolt objects and glue codes within test cases
 
 #### Example 1:
 

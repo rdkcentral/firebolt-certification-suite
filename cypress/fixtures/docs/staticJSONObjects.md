@@ -1,3 +1,17 @@
+# Table of contents: 
+[Static JSON Objects](#static-json-objects)
+  - [Firebolt Calls](#firebolt-calls)
+    - [How to Configure Firebolt Calls](#how-to-configure-firebolt-calls)
+    - [Example 1](#example-1)
+    - [Example 2](#example-2)
+    - [Example 3](#example-3)
+  - [Validation Objects](#validation-objects)
+    - [How to Configure Validation Objects](#how-to-configure-validation-objects)
+    - [Example 1](#example-1-1)
+    - [Example 2](#example-2-1)
+    - [Example 3](#example-3-1)
+  - [Usage](#usage)
+
 # Static JSON Objects
 
 Firebolt Calls has two types of JSON objects: Firebolt Calls and Validation Objects. These objects are used to make API calls and validate the response received from the API.
@@ -6,20 +20,19 @@ Firebolt Calls has two types of JSON objects: Firebolt Calls and Validation Obje
 
 ## Firebolt Calls
 
-Firebolt object is used to make an API call. It contains the following parameters:
+Firebolt JSON objects represent a firebolt api call to be made. It can contain the following parameters:
 
-- method - Name of the API to make an API call
-- params - Represent the parameters to be sent for a Firebolt call
-- context - Represent the data that needs to be stored in the API/event object that helps to search for a specific object which contains the response in a global list
-- expected - Determine whether expecting for an error or result
+| Field                               | Required     | Accepted values                      | Default values                                                                                                                           |
+| ----------------------------------- | ------- | --------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| method                       |  Y          | Firebolt method name in the format module.method         | No default value |
+|params                        |  N          | Represent the parameters to be sent for the method    | {}   |
+|context                        |  N          | Represent the data that needs to be stored in the API/event object that helps to search for a specific object which contains the response in a global list    | {}   |
+|expected                        |  N          | Determine whether expecting for an error or result    | "result"   |
 
 ### How to Configure Firebolt Calls
 
 - Define a firebolt call object in `cypress/fixtures/fireboltCalls/<fileName>.json`, where fileName can be any name.
-- Add the method, params, context, and expected parameters to the firebolt call object. params, context, and expected are optional parameters. By default, they are set to below values:
-  - params: {}
-  - context: {}
-  - expected: "result"
+- Add the method, params, context, and expected parameters to the firebolt call object.
 - `params` is the data that needs to be sent in the API call. It can be a string, number, boolean, or an object. Params can be a string or object
   - If the params passed as a objects, it will be used as is in the API call.
   - If the params passed as a string, and these values are processed as below:
@@ -65,6 +78,14 @@ Validation object is used to validate the response received from the API. It con
 - context - Represent the data that needs to be used to search for a specific object in the global list
 - content - The Validation content object that holds the source of truth for the validation
 - expectingError - Determines whether we are performing result or error content validation
+
+| Field                               | Required     | Accepted values                      | Default values                                                                                                                           |
+| ----------------------------------- | ------- | --------------------------------- | ----------------------------------------------------------------------------------------------------- |
+|method/event            | Y          | Name of the API or event, which is used to extract the response object from the global list for content validation   | No default value |
+|validationJsonPath            | N          | Path to the value in the response that needs to be validated   | result(for method)/ eventResponse(for event) |
+|context            | N          | Represent the data that needs to be used to search for a specific object in the global list  | {} |
+|content            | N          | The Validation content object that holds the source of truth for the validation  | {} |
+|expectingError            | N          | Determines whether we are performing result or error content validation  | False |
 
 ### How to Configure Validation Objects
 

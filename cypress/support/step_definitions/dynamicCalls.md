@@ -1,6 +1,32 @@
+# Table of contents:
+[DynamicCallsGlue](#dynamiccallsglue)
+  - [Dynamic Firebolt Objects](#dynamic-firebolt-objects)
+  - [we test the '(.+)' getters and setters(?: '(.*?)'(?: to '(.*?)')?)?](#we-test-the--getters-and-setters--to-)
+    - [Examples](#examples)
+    - [Params](#params)
+  - [1st party app invokes the '(.+)' API to set( invalid)? value](#1st-party-app-invokes-the--api-to-set-invalid-value)
+    - [Examples](#examples-1)
+    - [Params](#params-1)
+  - ['(.+)' invokes the '(.+)' get API](#-invokes-the--get-api)
+    - [Examples](#examples-2)
+    - [Params](#params-2)
+  - ['(.+)' registers for the '(.+)' event](#-registers-for-the--event)
+    - [Examples](#examples-3)
+    - [Params](#params-3)
+  - ['(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?](#-platform-responds-to--getset-api-with-)
+    - [Examples](#examples-4)
+    - [Params](#params-4)
+  - ['(.+)' platform (triggers|does not trigger) '(.\*?)' event(?: with '(.+)')?](#-platform-triggersdoes-not-trigger--event-with-)
+    - [Examples](#examples-5)
+    - [Params](#params-5)
+
+  
+
+
 # DynamicCallsGlue
 
-## [Dynamic Firebolt Objects](../../fixtures/docs/dynamicObjects.md)
+## Dynamic Firebolt Objects
+Dynamic glue codes have to be used with dynamic objects. Details on dynamic objects here [link](../../fixtures/docs/dynamicObjects.md)
 
 ## we test the '(.+)' getters and setters(?: '(.*?)'(?: to '(.*?)')?)?
 #### Purpose: Extracting the fireboltCall object based on the key name and storing it in a `runtime` environment variable along with the attribute and value.

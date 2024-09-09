@@ -950,7 +950,7 @@ global.resolveAtRuntime = function (input) {
 
     if (typeof input === CONSTANTS.TYPE_STRING) {
       // Replace pattern content for each occurrence of "{{" from the runtime environment
-      let resolvedValue = input.includes('{{')
+      const resolvedValue = input.includes('{{')
         ? replacingPatternOccurrenceWithValue(input)
         : runtimeEnv[input] !== undefined
           ? runtimeEnv[input]
@@ -976,7 +976,7 @@ global.resolveAtRuntime = function (input) {
 
         // Resolve the value from the object using the JSON path
         let value = variableObject;
-        for (let key of jsonPath.split('.')) {
+        for (const key of jsonPath.split('.')) {
           if (value[key] !== undefined) {
             value = value[key];
           } else {

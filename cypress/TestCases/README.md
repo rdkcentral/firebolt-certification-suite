@@ -15,7 +15,7 @@ And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
 Then Firebolt platform responds for 'accessibility.closedCaptionsSettings' method and '<Method_JSON_Path>' is '<Content>'
 ```
 * [Location of glue](../support/step_definitions/)
-* [Location of fixtures](../fixtures/modules/)
+* [Location of fixtures](../fixtures/README.md)
 * [Location of cypress commands](../support/cypress-commands)
 ## Tagging
 
