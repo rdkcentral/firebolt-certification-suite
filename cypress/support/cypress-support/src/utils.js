@@ -947,6 +947,7 @@ global.resolveAtRuntime = function (input) {
       // Check if the resolvedValue contains any item from the list
       if (
         resolvedValue &&
+        typeof resolvedValue === CONSTANTS.TYPE_STRING &&
         Cypress.env(CONSTANTS.VARIABLES_PREFIX_LIST).some((item) => resolvedValue.includes(item))
       ) {
         const fireboltCallsData = getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS);

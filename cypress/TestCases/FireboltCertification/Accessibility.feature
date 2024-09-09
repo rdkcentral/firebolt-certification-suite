@@ -51,30 +51,31 @@ Feature: Accessibility
             | Set windowOpacity-50                 | windowOpacity      | 50                    |
             | Set preferredLanguages               | preferredLanguages | spa,eng               |
 
-   @sdk @transport
-   Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario> with 'null' params
-      When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
-      And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
-      And 1st party app invokes the 'Firebolt' API to '<Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<Key>'
-      When '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
-      Then 'Firebolt' platform responds with '<Method_Content>'
-      And 'Firebolt' platform triggers event '<Event_Content>'
+    @sdk @transport
+    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario> with 'null' params
+        Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS_SET_TO_NULL' getters and setters '<Method>'
+        When '3rd party app' registers for the 'Firebolt' event
+        And '3rd party app' invokes the 'Firebolt' get API
+        And 1st party app invokes the 'Firebolt' API to set value
+        Then 'Firebolt' platform responds to '1st party app' set API
+        When '3rd party app' invokes the 'Firebolt' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
+        And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-         | Scenario          | Key                           | Method_Content                      | Event_Content                                                            |
-         | fontFamily        | set fontFamily as null        | default value for fontFamily        | onclosedCaptionsSettingsChanged with default value for fontfamily        |
-         | fontSize          | set fontSize as null          | default value for fontSize          | onclosedCaptionsSettingsChanged with default value for fontSize          |
-         | fontColor         | set fontColor as null         | default value for fontColor         | onclosedCaptionsSettingsChanged with default value for fontColor         |
-         | fontEdge          | set fontEdge as null          | default value for fontEdge          | onclosedCaptionsSettingsChanged with default value for fontEdge          |
-         | fontEdgeColor     | set fontEdgeColor as null     | default value for fontEdgeColor     | onclosedCaptionsSettingsChanged with default value for fontEdgeColor     |
-         | fontOpacity       | set fontOpacity as null       | default value for fontOpacity       | onclosedCaptionsSettingsChanged with default value for fontOpacity       |
-         | backgroundColor   | set backgroundColor as null   | default value for backgroundColor   | onclosedCaptionsSettingsChanged with default value for backgroundColor   |
-         | backgroundOpacity | set backgroundOpacity as null | default value for backgroundOpacity | onclosedCaptionsSettingsChanged with default value for backgroundOpacity |
-         | textAlign         | set textAlign as null         | default value for textAlign         | onclosedCaptionsSettingsChanged with default value for textAlign         |
-         | textAlignVertical | set textAlignVertical as null | default value for textAlignVertical | onclosedCaptionsSettingsChanged with default value for textAlignVertical |
-         | windowColor       | set windowColor as null       | default value for windowColor       | onclosedCaptionsSettingsChanged with default value for windowColor       |
-         | windowOpacity     | set windowOpacity as null     | default value for windowOpacity     | onclosedCaptionsSettingsChanged with default value for windowOpacity     |
+            | Scenario          | Method            |
+            | fontFamily        | fontFamily        |
+            | fontSize          | fontSize          |
+            | fontColor         | fontColor         |
+            | fontEdge          | fontEdge          |
+            | fontEdgeColor     | fontEdgeColor     |
+            | fontOpacity       | fontOpacity       |
+            | backgroundColor   | backgroundColor   |
+            | backgroundOpacity | backgroundOpacity |
+            | textAlign         | textAlign         |
+            | textAlignVertical | textAlignVertical |
+            | windowColor       | windowColor       |
+            | windowOpacity     | windowOpacity     |
 
     @sdk @transport
     Scenario Outline: Accessibility.voiceGuidanceSettings - Positive Scenario: <Scenario>
@@ -138,13 +139,13 @@ Feature: Accessibility
             | Set windowColor-#7f7f7f            | windowColor       | #7F7F7F             |
             | Set windowOpacity-40               | windowOpacity     | 40                  |
 
-   @sdk @transport @requiresPlatformImplementation
-   Scenario: Accessibility.onClosedCaptionsSettingsChanged event - Positive Scenario: Clear listeners
-      When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
-      And 1st party stops listening to the event 'accessibility onClosedCaptionsSettingsChanged event'
-      And 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
-      Then 'Firebolt' platform responds to '1st party app' for 'disable closedCaptions'
-      And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
+    @sdk @transport @requiresPlatformImplementation
+    Scenario: Accessibility.onClosedCaptionsSettingsChanged event - Positive Scenario: Clear listeners
+        When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
+        And 1st party stops listening to the event 'accessibility onClosedCaptionsSettingsChanged event'
+        And 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
+        Then 'Firebolt' platform responds to '1st party app' for 'disable closedCaptions'
+        And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
 
     @sdk @transport
     Scenario Outline: Accessibility.voiceGuidance - Positive Scenario: <Scenario>

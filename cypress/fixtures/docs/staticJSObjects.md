@@ -1,6 +1,19 @@
+# Table of contents: 
+[JS Objects](#js-objects)
+ - [Firebolt Calls](#firebolt-calls)
+   - [How to Configure Firebolt Calls](#how-to-configure-firebolt-calls)
+   - [Example 1](#example-1)
+   - [Example 2](#example-2)
+ - [Validation Objects](#validation-objects)
+   - [How to Configure Validation Objects](#how-to-configure-validation-objects)
+   - [Example 1](#example-1-1)
+   - [Example 2](#example-2-1)
+- [Usage](#usage)
+- [Advanced Support](#advanced-support)
+
 ## JS Objects
 
-Firebolt Calls have two types of JS objects: Firebolt Calls and Validation Objects. These objects are used to make API calls and validate the response received from the API.
+There are 2 types of JSON objects used in test cases. One is for making firebolt calls to the device and second is for validating the response of the call.
 
 ### Firebolt Calls
 

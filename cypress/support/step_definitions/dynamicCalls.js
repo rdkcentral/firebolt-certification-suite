@@ -261,7 +261,7 @@ Given(
         methodType === CONSTANTS.SET ? CONSTANTS.SET_VALIDATIONPATH : CONSTANTS.VALIDATIONJSONPATH;
 
       // Checking whether the value is a function and invoking if it is, otherwise using it as is.
-      const validationJsonPath = fireboltCallObject?.setOrGetValidationJsonPath
+      const validationJsonPath = fireboltCallObject?.[setOrGetValidationJsonPath]
         ? UTILS.resolveRecursiveValues(fireboltCallObject[setOrGetValidationJsonPath])
         : CONSTANTS.RESULT;
 
@@ -271,7 +271,7 @@ Given(
           : CONSTANTS.CONTENT.toLocaleLowerCase();
 
       // Checking whether the value is a function and invoking if it is, otherwise using it as is.
-      const contentObject = fireboltCallObject?.setOrGetContentObject
+      const contentObject = fireboltCallObject?.[setOrGetContentObject]
         ? UTILS.resolveRecursiveValues(fireboltCallObject[setOrGetContentObject])
         : CONSTANTS.NULL_RESPONSE;
 
