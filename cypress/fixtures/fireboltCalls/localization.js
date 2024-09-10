@@ -348,5 +348,5 @@ exports.SET_PREFERREDAUDIOLANGUAGES_TO_ENG_SPA = {
 
 exports.SET_LOCALIZATION_TIMEZONE_WITH_AMERICA_LOSANGELES = {
   method: 'manage_localization.setTimeZone',
-  params: { value: '"America/Los_Angeles"' },
+  params: { value: 'America/Los_Angeles' },
 };

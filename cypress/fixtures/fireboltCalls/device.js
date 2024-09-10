@@ -520,13 +520,13 @@ exports.INVALID_PARAMETERS_FOR_DEVICE_PROVISION = {
 
 exports.PROVISION_DEVICE_WITH_INTEGER = {
   method: 'manage_device.provision',
-  params: 123,
+  params: { value: 123 },
   expected: 'error',
 };
 
 exports.PROVISION_DEVICE_WITH_BOOLEAN = {
   method: 'manage_device.provision',
-  params: true,
+  params: { value: true },
   expected: 'error',
 };
 

@@ -146,8 +146,8 @@ exports.ADVERTISING_VARIABLES = {
 };
 
 exports.SET_SKIPRESTRICTION_AS_ADSUNWATCHED = {
-  method: 'manage_advertising.setskipRestriction',
-  params: 'adsunwatched',
+  method: 'manage_advertising.setSkipRestriction',
+  params: { value: 'adsUnwatched' },
 };
 
 exports.GET_NO_COPPA = {
