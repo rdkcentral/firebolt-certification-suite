@@ -67,7 +67,7 @@ exports.INVALID_PARAMETER_ERROR_FOR_ACCOUNT_UID = {
 
 exports.PUSH_SESSION_TOKEN = {
   method: 'manage_account.session',
-  params: { token: 'RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ==', expiresIn: 84000 },
+  params: { token: 'SW52Y==', expiresIn: 84000 },
 };
 
 exports.GET_ADVERTISINGID_WITH_CUSTOM_ERROR = {
@@ -84,13 +84,13 @@ exports.SET_ACCOUNT_SESSION_WITH_INVALID_TOKEN = {
 
 exports.SET_ACCOUNT_SESSION_WITH_INVALID_EXPIRESIN = {
   method: 'manage_account.session',
-  params: { token: 'RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ==', expiresIn: 'BJGHhjbdcJKSW' },
+  params: { token: 'SW52Y==', expiresIn: 'BJGHhjbdcJKSW' },
   expected: 'error',
 };
 
 exports.SET_ACCOUNT_SESSION_WITH_INVALID_EXPIRESIN_VALUE = {
   method: 'manage_account.session',
-  params: { token: 'RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ==', expiresIn: 0 },
+  params: { token: 'SW52Y==', expiresIn: 0 },
   expected: 'error',
 };
 
