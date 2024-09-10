@@ -78,7 +78,7 @@ exports.GET_ADVERTISINGID_WITH_CUSTOM_ERROR = {
 
 exports.SET_ACCOUNT_SESSION_WITH_INVALID_TOKEN = {
   method: 'manage_account.session',
-  params: { token: 736843276434827468, expiresIn: 84000 },
+  params: { token: 12345, expiresIn: 84000 },
   expected: 'error',
 };
 
