@@ -141,9 +141,9 @@ Feature: Accessibility
 
     @sdk @transport @requiresPlatformImplementation
     Scenario: Accessibility.onClosedCaptionsSettingsChanged event - Positive Scenario: Clear listeners
-        When '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
-        And 1st party stops listening to the event 'accessibility onClosedCaptionsSettingsChanged event'
-        And 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
+        Given '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
+        And 3rd party stops listening to the event 'accessibility onClosedCaptionsSettingsChanged event'
+        When 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
         Then 'Firebolt' platform responds to '1st party app' for 'disable closedCaptions'
         And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
 
