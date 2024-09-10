@@ -1397,7 +1397,8 @@ Cypress.Commands.add(
     contentObject,
     appId,
     errorContent,
-    eventExpected
+    eventExpected,
+    isNullCase
   ) => {
     // Reading the appId from the environment variable
     appId = UTILS.fetchAppIdentifierFromEnv(appId);
@@ -1424,6 +1425,7 @@ Cypress.Commands.add(
       expectingError: expectingError,
       appId: appId,
       eventExpected: eventExpected,
+      isNullCase: isNullCase,
     };
 
     if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {

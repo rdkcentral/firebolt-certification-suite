@@ -308,6 +308,7 @@ Given(
     // Retrieving the dynamic firebolt call object from the env variable
     cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
       let event;
+      const isNullCase = fireboltCallObject.isNullCase || false;
       if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.EVENT)) {
         event = UTILS.resolveRecursiveValues(fireboltCallObject.event);
       }
@@ -330,7 +331,8 @@ Given(
         contentObject,
         appId,
         errorContent,
-        eventExpected
+        eventExpected,
+        isNullCase,
       );
     });
   }
