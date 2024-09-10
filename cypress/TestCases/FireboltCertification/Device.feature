@@ -7,7 +7,7 @@ Feature: Device
 
     @sdk @transport
     Scenario Outline:Device.<Method> - Positive Scenario: <Scenario>
-        Given we test the 'DEVICE' getters and setters '<Method>' to '{}'
+        Given we test the 'DEVICE' getters and setters '<Method>'
         When '3rd party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '3rd party app' get API
         Examples:

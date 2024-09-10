@@ -7,7 +7,7 @@ Feature: Account
 
    @sdk @transport
    Scenario Outline: Account.<Method> - Positive Scenario: <Scenario>
-      Given we test the 'ACCOUNT_ID_UID' getters and setters '<Method>' to '{}'
+      Given we test the 'ACCOUNT_ID_UID' getters and setters '<Method>'
       When '3rd party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '3rd party app' get API
 

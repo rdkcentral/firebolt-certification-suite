@@ -1,1 +1,456 @@
-{}
+{
+    "DISCOVERY_ONPOLICYCHANGED": {
+        "method": "discovery.onPolicyChanged"
+    },
+    "ENABLE_RECOMMENDATIONS": {
+        "method": "manage_privacy.setAllowPersonalization",
+        "params": "TRUE"
+    },
+    "GET_VALUE_OF_POLICY": {
+        "method": "discovery.policy"
+    },
+    "TRUE_FOR_HISTORY_BASED_RECOMMENDATIONS_IN_POLICY": {
+        "method": "discovery.policy",
+        "validationJsonPath": "result.enableRecommendations",
+        "content": "TRUE"
+    },
+    "FALSE_FOR_HISTORY_BASED_SHAREWATCHHISTORY_IN_POLICY": {
+        "method": "discovery.policy",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.shareWatchHistory",
+        "content": "FALSE",
+        "expectingError": false
+    },
+    "ONPOLICYCHANGED_FOR_DISCOVERY_ENABLERECOMMENDATIONS_WITH_TRUE": {
+        "event": "discovery.onPolicyChanged",
+        "validationJsonPath": "eventResponse.enableRecommendations",
+        "content": "TRUE"
+    },
+    "DISABLE_RECOMMENDATIONS": {
+        "method": "manage_privacy.setAllowPersonalization",
+        "params": "FALSE"
+    },
+    "FALSE_FOR_HISTORY_BASED_RECOMMENDATIONS_IN_POLICY": {
+        "method": "discovery.policy",
+        "validationJsonPath": "result.enableRecommendations",
+        "content": "FALSE"
+    },
+    "ONPOLICYCHANGED_FOR_DISCOVERY_ENABLERECOMMENDATIONS_WITH_FALSE": {
+        "event": "discovery.onPolicyChanged",
+        "validationJsonPath": "eventResponse.enableRecommendations",
+        "content": "FALSE"
+    },
+    "ENABLE_REMEMBER_WATCHED_PROGRAMS": {
+        "method": "manage_privacy.setAllowWatchHistory",
+        "params": "TRUE"
+    },
+    "TRUE_FOR_REMEMBER_WATCHED_PROGRAMS_IN_POLICY": {
+        "method": "discovery.policy",
+        "validationJsonPath": "result.rememberWatchedPrograms",
+        "content": "TRUE"
+    },
+    "ONPOLICYCHANGED_FOR_DISCOVERY_REMEMBERWATCHEDPROGRAMS_WITH_TRUE": {
+        "event": "discovery.onPolicyChanged",
+        "validationJsonPath": "eventResponse.rememberWatchedPrograms",
+        "content": "TRUE"
+    },
+    "DISABLE_REMEMBER_WATCHED_PROGRAMS": {
+        "method": "manage_privacy.setAllowWatchHistory",
+        "params": "FALSE"
+    },
+    "FALSE_FOR_REMEMBER_WATCHED_PROGRAMS_IN_POLICY": {
+        "method": "discovery.policy",
+        "validationJsonPath": "result.rememberWatchedPrograms",
+        "content": "FALSE"
+    },
+    "ONPOLICYCHANGED_FOR_DISCOVERY_REMEMBERWATCHEDPROGRAMS_WITH_FALSE": {
+        "event": "discovery.onPolicyChanged",
+        "validationJsonPath": "eventResponse.rememberWatchedPrograms",
+        "content": "FALSE"
+    },
+    "NOTIFY_WATCHED_CONTENT_WITH_ONLY_ENTITYID": {
+        "method": "discovery.watched",
+        "params": "DISCOVERY_WATCHED_ONLY_ENTITY_ID"
+    },
+    "EXPECT_ERROR_WHILE_NOTIFYING_WATCHED_CONTENT_WITH_ONLY_ENTITYID": {
+        "method": "discovery.watched",
+        "params": "DISCOVERY_WATCHED_ONLY_ENTITY_ID"
+    },
+    "NOTIFY_WATCHED_CONTENT_WITH_ENTITYID_PROGRESS": {
+        "method": "discovery.watched",
+        "params": "DISCOVERY_WATCHED_ENTITY_ID_PROGRESS"
+    },
+    "NOTIFY_WATCHED_CONTENT_WITH_ENTITYID_PROGRESS_STATUS": {
+        "method": "discovery.watched",
+        "params": "DISCOVERY_WATCHED_ENTITY_ID_PROGRESS_STATUS"
+    },
+    "NOTIFY_WATCHED_CONTENT_WITH_ENTITYID_PROGRESS_STATUS_DATE": {
+        "method": "discovery.watched",
+        "params": "DISCOVERY_WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE"
+    },
+    "TRUE_FOR_WATCHED_CONTENT_IN_DISCOVERY": {
+        "method": "discovery.watched",
+        "validationJsonPath": "result",
+        "content": "TRUE"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_ENTITYID": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_ONLY_TITLE_IDENTIFIERS_ENTITYID"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_ENTITYID_ASSETID": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_ONLY_TITLE_IDENTIFIERS_ENTITYID_ASSETID"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_ENTITYID_ASSETID_SESSIONID": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_ONLY_TITLE_IDENTIFIERS_ENTITYID_ASSETID_SESSIONID"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_ENTITYID_ASSETID_SESSIONID_SERIESID": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_ONLY_TITLE_IDENTIFIERS_ENTITYID_ASSETID_SESSIONID_SERIESID"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_ENTITYID_ASSETID_SESSIONID_SERIESID_APPCONTENTDATA": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_ONLY_TITLE_IDENTIFIERS_ENTITYID_ASSETID_SESSIONID_SERIESID_APPCONTENTDATA"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_EXPIRES": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_ONLY_TITLE_IDENTIFIERS_EXPIRES"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_EXPIRES_IMAGES": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_ONLY_TITLE_IDENTIFIERS_EXPIRES_IMAGES"
+    },
+    "TRUE_FOR_WATCHNEXT_TILE_IN_DISCOVERY": {
+        "method": "discovery.watchNext",
+        "validationJsonPath": "result",
+        "content": "TRUE"
+    },
+    "TRUE_FOR_ENTITLEMENTS_IN_DISCOVERY": {
+        "method": "discovery.entitlements",
+        "validationJsonPath": "result",
+        "content": "TRUE"
+    },
+    "NOTIFY_ENTITLEMENTS": {
+        "method": "discovery.entitlements",
+        "params": "DISCOVERY_ENTITLEMENTS"
+    },
+    "NOTIFY_ENTITLEMENTS_WITH_ENTITLEMENTID_ONLY": {
+        "method": "discovery.entitlements",
+        "params": "DISCOVERY_ENTITLEMENTS_ENTITLEMENTID_ONLY"
+    },
+    "NOTIFY_USER_HAS_SIGNED_IN_WITH_ENTITLEMENTS": {
+        "method": "discovery.signIn",
+        "params": "DISCOVERY_SIGNIN_ENTITLEMENTS"
+    },
+    "NOTIFY_USER_HAS_SIGNED_IN_WITHOUT_ENTITLEMENTS": {
+        "method": "discovery.signIn"
+    },
+    "NOTIFY_USER_HAS_SIGNED_OUT": {
+        "method": "discovery.signOut"
+    },
+    "NOTIFY_WATCHED_CONTENT_WITH_EMPTY_PARAMETER": {
+        "method": "discovery.watched",
+        "expected": "error"
+    },
+    "INVALID_PARAMS_FOR_DISCOVERY_WATCHED": {
+        "method": "discovery.watched",
+        "validationJsonPath": "result",
+        "content": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_REQUEST_FOR_DISCOVERY_WATCHED": {
+        "method": "discovery.watched",
+        "validationJsonPath": "result",
+        "content": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "NOTIFY_WATCHED_CONTENT_WITH_INVALID_ENTITYID_NUMBER": {
+        "method": "discovery.watched",
+        "params": "DISCOVERY_WATCHED_INVALID_ENTITY_ID_NUMBER",
+        "expected": "error"
+    },
+    "NOTIFY_WATCHED_CONTENT_WITH_INVALID_PROGRESS": {
+        "method": "discovery.watched",
+        "params": "DISCOVERY_WATCHED_INVALID_PROGRESS",
+        "expected": "error"
+    },
+    "NOTIFY_WATCHED_CONTENT_WITH_INVALID_PROGRESS_STRING": {
+        "method": "discovery.watched",
+        "params": "DISCOVERY_WATCHED_INVALID_PROGRESS_STRING",
+        "expected": "error"
+    },
+    "NOTIFY_WATCHED_CONTENT_WITH_INVALID_COMPLETED": {
+        "method": "discovery.watched",
+        "params": "DISCOVERY_WATCHED_INVALID_COMPLETED",
+        "expected": "error"
+    },
+    "NOTIFY_WATCHED_CONTENT_WITH_INVALID_WATCHEDON": {
+        "method": "discovery.watched",
+        "params": "DISCOVERY_WATCHED_INVALID_WATCHEDON",
+        "expected": "error"
+    },
+    "INVALID_PARAMS_FOR_DISCOVERY_WATCHNEXT": {
+        "method": "discovery.watchNext",
+        "validationJsonPath": "result",
+        "content": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_ONLY_TITLE": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_ONLY_TITLE",
+        "expected": "error"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_INVALID_IDENTIFIERS": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_INVALID_IDENTIFIERS",
+        "expected": "error"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_INVALID_EXPIRES": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_INVALID_EXPIRES",
+        "expected": "error"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_INVALID_EXPIRES_INTEGER": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_INVALID_EXPIRES_INTEGER",
+        "expected": "error"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_INVALID_IMAGES": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_INVALID_IMAGES",
+        "expected": "error"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_INVALID_IMAGE_INTEGER": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_INVALID_IMAGE_INTEGER",
+        "expected": "error"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_INVALID_IDENTIFIERS_ENTITYID": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_INVALID_IDENTIFIERS_ENTITYID",
+        "expected": "error"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_INVALID_IDENTIFIERS_ASSETID": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_INVALID_IDENTIFIERS_ASSETID",
+        "expected": "error"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_INVALID_IDENTIFIERS_SESSIONID": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_INVALID_IDENTIFIERS_SESSIONID",
+        "expected": "error"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_INVALID_IDENTIFIERS_SERIESID": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_INVALID_IDENTIFIERS_SERIESID",
+        "expected": "error"
+    },
+    "SUGGEST_WATCHNEXT_TILE_WITH_INVALID_IDENTIFIERS_APPCONTENTDATA": {
+        "method": "discovery.watchNext",
+        "params": "DISCOVERY_WATCHNEXT_INVALID_IDENTIFIERS_APPCONTENTDATA",
+        "expected": "error"
+    },
+    "INVALID_PARAMS_FOR_DISCOVERY_ENTITLEMENTS": {
+        "method": "discovery.entitlements",
+        "validationJsonPath": "result",
+        "content": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "NOTIFY_ENTITLEMENTS_WITH_NO_ID": {
+        "method": "discovery.entitlements",
+        "params": "DISCOVERY_INVALID_ENTITLEMENTS_ENTITLEMENTID",
+        "expected": "error"
+    },
+    "NOTIFY_ENTITLEMENTS_WITH_INTEGER_PARAMS": {
+        "method": "discovery.entitlements",
+        "params": "DISCOVERY_INVALID_ENTITLEMENTS_INTEGER_PARAMS",
+        "expected": "error"
+    },
+    "INVALID_PARAMS_FOR_DISCOVERY_SIGNIN": {
+        "method": "discovery.signIn",
+        "validationJsonPath": "result",
+        "content": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "NOTIFY_USER_HAS_SIGNEDIN_WITH_NO_ID": {
+        "method": "discovery.signIn",
+        "params": "DISCOVERY_SIGNIN_INVALID_ENTITLEMENTS",
+        "expected": "error"
+    },
+    "NOTIFY_USER_HAS_SIGNEDIN_WITH_INTEGER_PARAMS": {
+        "method": "discovery.signIn",
+        "params": "DISCOVERY_INVALID_ENTITLEMENTS_INTEGER_PARAMS",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_AVAILABILITIES_CHANNEL_TYPE": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_TYPE_CHANNEL_LINEUP"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_AVAILABILITIES_PROGRAM_TYPE": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_TYPE_PROGRAM_LINEUP"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_AVAILABILITIES_TYPE_AND_ID": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_ONLY_TYPE_ID"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_AVAILABILITIES_TYPE_ID_AND_CATALOGID": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_WITH_CATALOG_ID"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_AVAILABILITIES_TYPE_ID_CATALOGID_AND_STARTTIME": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_WITH_CATALOG_ID_START_TIME"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_AVAILABILITIES_TYPE_ID_CATALOGID_STARTTIME_AND_ENDTIME": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_WITH_CATALOG_ID_START_TIME_END_TIME"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_AVAILABILITIES_AND_ENTITLEMENTS": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_WITH_AVAILABILITIES_AND_ENTITLEMENTS"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_ONLY_ENTITLEMENTS": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_WITH_ONLY_ENTITLEMENTS"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_AVAILABILITIES_PARAM_EMPTY": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_AS_EMPTY"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_ENTITLEMENTS_PARAM_EMPTY": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_ENTITLEMENTS_AS_EMPTY"
+    },
+    "CLEAR_CONTENTACCESS": {
+        "method": "discovery.clearContentAccess"
+    },
+    "INVALID_PARAMETER_ERROR_FOR_DISCOVERY_CONTENTACCESS": {
+        "method": "discovery.contentAccess",
+        "validationJsonPath": "result",
+        "content": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "NULL_FOR_DISCOVERY_CLEARCONTENTACCESS": {
+        "method": "discovery.clearContentAccess",
+        "validationJsonPath": "result",
+        "content": "NULL"
+    },
+    "NULL_FOR_DISCOVERY_CONTENTACCESS": {
+        "method": "discovery.contentAccess",
+        "validationJsonPath": "result",
+        "content": "NULL"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITHOUT_PARAMS": {
+        "method": "discovery.contentAccess",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITHOUT_AVAILABILITIES_TYPE_VALUE": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_WITHOUT_TYPE",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITHOUT_AVAILABILITIES_ID_VALUE": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_WITHOUT_ID",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_INVALID_AVAILABILITIES_TYPE_VALUE": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_INVALID_TYPE_VALUE",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_INVALID_AVAILABILITIES_TYPE": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_INVALID_DATATYPE_TYPE",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_INVALID_AVAILABILITIES_ID": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_INVALID_DATATYPE_ID",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_INVALID_AVAILABILITIES_CATALOG_ID": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_INVALID_DATATYPE_CATALOG_ID",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_INVALID_AVAILABILITIES_STARTTIME": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_INVALID_DATATYPE_START_TIME",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_INVALID_AVAILABILITIES_ENDTIME": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_AVAILABILITIES_INVALID_DATATYPE_END_TIME",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_INVALID_ENTITLEMENTS_BOOLEAN_ENTITLEMENTID": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_ENTITLEMENTS_INVALID_ENTITLEMENTID_TRUE",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_INVALID_ENTITLEMENTS_INTEGER_ENTITLEMENTID": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_ENTITLEMENTS_INVALID_ENTITLEMENTID_INTEGER",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_INVALID_ENTITLEMENTS_INVALID_STARTTIME": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_ENTITLEMENTS_INVALID_START_TIME",
+        "expected": "error"
+    },
+    "NOTIFY_CONTENT_ACCESS_WITH_INVALID_ENTITLEMENTS_INVALID_ENDTIME": {
+        "method": "discovery.contentAccess",
+        "params": "DISCOVERY_CONTENTACCESS_ENTITLEMENTS_INVALID_END_TIME",
+        "expected": "error"
+    },
+    "DISCOVERY_ONSIGNIN": {
+        "method": "manage_discovery.onSignIn"
+    },
+    "ONSIGNIN_FOR_DISCOVERY_WITH_APPID": {
+        "event": "discovery.onSignIn",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_ONSIGNIN_APPID"
+    },
+    "SIGNIN_FOR_DISCOVERY": {
+        "method": "discovery.signIn",
+        "validationJsonPath": "result",
+        "content": "DISCOVERY_SIGNIN_TRUE"
+    },
+    "DISCOVERY_ONSIGNOUT": {
+        "method": "manage_discovery.onSignOut"
+    },
+    "ONSIGNOUT_FOR_DISCOVERY_WITH_APPID": {
+        "event": "discovery.onSignOut",
+        "validationJsonPath": "eventResponse",
+        "content": "DISCOVERY_ONSIGNOUT_APPID"
+    },
+    "SIGNOUT_FOR_DISCOVERY": {
+        "method": "discovery.signOut",
+        "validationJsonPath": "result",
+        "content": "DISCOVERY_SIGNOUT_TRUE"
+    },
+    "SET_ALLOWPERSONALIZATION_TO_TRUE": {
+        "method": "manage_privacy.setAllowPersonalization",
+        "params": "TRUE"
+    },
+    "ONDISCOVERYPOLICYCHANGED": {
+        "event": "discovery.onPolicyChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "NULL",
+        "expectingError": false
+    },
+    "GET_HOME_INTENT": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_HOME_INTENT"
+    },
+    "INVALID_REQUEST_FOR_DISCOVERY_WATCHNEXT": {
+        "method": "discovery.watchNext",
+        "validationJsonPath": "result",
+        "content": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    }
+}

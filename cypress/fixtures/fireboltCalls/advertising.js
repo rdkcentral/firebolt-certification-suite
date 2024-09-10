@@ -135,7 +135,7 @@ exports.ADVERTISING_VARIABLES = {
               format: 'TOKEN_REGEXP',
               field: 'lmt',
               mode: 'regex',
-              type: 'NUMERIC_REGEXP',
+              type: '^[0-9]+$',
               description: 'Validation of the advertising.config privacyData Format',
             },
           ],

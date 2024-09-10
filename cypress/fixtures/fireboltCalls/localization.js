@@ -168,7 +168,7 @@ exports.GET_LOCALIZATION_LATLON = {
 exports.EXPECTED_LOCALIZATION_LATLON = {
   method: 'localization.latlon',
   validationJsonPath: 'result',
-  content: [39.9549, 75.1699],
+  content: '',
 };
 
 exports.LOCALIZATION_ONLOCALECHANGED = {

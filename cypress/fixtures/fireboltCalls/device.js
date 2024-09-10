@@ -77,7 +77,7 @@ exports.DEVICE_VARIABLES = {
           type: 'fixture',
           validations: [
             {
-              mode: 'staticContentValidation',
+              mode: 'deviceContentValidation',
               type: extractEnvValue('DEVICE_DISTRIBUTOR'),
               description: 'Validation of the Device Distributor Format',
             },
@@ -177,7 +177,7 @@ exports.DEVICE_VARIABLES = {
             {
               mode: 'fixture',
               type: 'HDR',
-              description: 'Validation of the Device hdcp',
+              description: 'Validation of the Device hdr',
             },
           ],
         },
@@ -195,7 +195,7 @@ exports.DEVICE_VARIABLES = {
                 [1920, 1080],
                 [3840, 2160],
               ],
-              description: 'Validation of the Device hdcp',
+              description: 'Validation of the Device screenResolution',
             },
           ],
         },
@@ -209,7 +209,7 @@ exports.DEVICE_VARIABLES = {
             {
               mode: 'fixture',
               type: extractEnvValue('CYPRESSENV-defaultTestData-deviceResolution'),
-              description: 'Validation of the Device hdcp',
+              description: 'Validation of the Device videoResolution',
             },
           ],
         },
@@ -223,7 +223,7 @@ exports.DEVICE_VARIABLES = {
             {
               mode: 'fixture',
               type: 'AUDIO',
-              description: 'Validation of the Device hdcp',
+              description: 'Validation of the Device audio',
             },
           ],
         },
@@ -291,7 +291,7 @@ exports.FETCH_DEVICE_PLATFORM = {
 exports.EXPECTED_DEVICE_PLATFORM = {
   method: 'device.platform',
   validationJsonPath: 'result',
-  content: 'DEVICE_PLATFORM',
+  content: '',
 };
 
 exports.DEVICE_ONNAMECHANGED = {
