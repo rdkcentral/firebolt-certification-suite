@@ -7,42 +7,46 @@ Feature: Capabilities
 
   @sdk @transport
   Scenario: Capabilities.info - Positive Scenario: Validate passing all the capabilities list
-    When '3rd party app' invokes the 'Firebolt' API to 'get capability info'
-    Then 'Firebolt' platform responds with 'expected value for info api'
+    Given we test the 'CAPABILITIES' getters and setters 'info' to 'capabilityInfo'
+    When '3rd party app' invokes the 'Firebolt' get API
+    Then 'Firebolt' platform responds to '3rd party app' get API
 
   @sdk @transport
   Scenario Outline: Capabilities.available - Positive Scenario: <Scenario>
-    When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-    Then 'Firebolt' platform responds with '<Validation_key>'
+    Given we test the 'CAPABILITIES' getters and setters 'available' to '<Value>'
+    When '3rd party app' invokes the 'Firebolt' get API
+    Then 'Firebolt' platform responds to '3rd party app' get API
 
     Examples:
-      | Scenario                                                            | API_Key                                               | Validation_key                                        |
-      | Validate keyboard capability available in 3rd party app             | check availability of keyboard capability             | expected value for keyboard capability availability   |
-      | Validate acknowledgechallenge capability available in 3rd party app | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
-      | Validate pinchallenge capability available in 3rd party app         | check availability of pinchallenge capability         | true for pinchallenge capability availability         |
+      | Scenario                                                            | Value                           |
+      | Validate keyboard capability available in 3rd party app             | keyboard_capability             |
+      | Validate acknowledgechallenge capability available in 3rd party app | acknowledgechallenge_capability |
+      | Validate pinchallenge capability available in 3rd party app         | pinchallenge_capability         |
 
   @sdk @transport
   Scenario Outline: Capabilities.available - Positive Scenario: <Scenario>
-    When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-    Then 'Firebolt' platform responds to '1st party app' with '<Validation_key>'
+    Given we test the 'CAPABILITIES' getters and setters 'available' to '<Value>'
+    When '1st party app' invokes the 'Firebolt' get API
+    Then 'Firebolt' platform responds to '1st party app' get API
 
     Examples:
-      | Scenario                                                       | API_Key                                               | Validation_key                                        |
-      | Validate keyboard capability available in platform             | check availability of keyboard capability             | expected value for keyboard capability availability   |
-      | Validate acknowledgechallenge capability available in platform | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
-      | Validate pinchallenge capability available in platform         | check availability of pinchallenge capability         | true for pinchallenge capability availability         |
+      | Scenario                                                       | Value                           |
+      | Validate keyboard capability available in platform             | keyboard_capability             |
+      | Validate acknowledgechallenge capability available in platform | acknowledgechallenge_capability |
+      | Validate pinchallenge capability available in platform         | pinchallenge_capability         |
 
   @sdk @transport
   Scenario Outline: Capabilities.granted - Positive Scenario: <Scenario>
-    When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-    Then 'Firebolt' platform responds with 'true for granted capability with passed role'
+    Given we test the 'CAPABILITIES' getters and setters 'granted' to '<Value>'
+    When '3rd party app' invokes the 'Firebolt' get API
+    Then 'Firebolt' platform responds to '3rd party app' get API
 
     Examples:
-      | Scenario                              | API_Key                                             |
-      | Validate with grants                  | check if passed capability is granted               |
-      | Validate with options role as use     | check if capability is granted with role as use     |
-      | Validate with options role as manage  | check if capability is granted with role as manage  |
-      | Validate with options role as provide | check if capability is granted with role as provide |
+      | Scenario                              | Value                              |
+      | Validate with grants                  | postalCode_capability              |
+      | Validate with options role as use     | postalCode_capability_role_use     |
+      | Validate with options role as manage  | postalCode_capability_role_manage  |
+      | Validate with options role as provide | postalCode_capability_role_provide |
 
   @sdk @transport
   Scenario Outline: Capabilities api - Positive Scenario: <Scenario>
@@ -79,7 +83,7 @@ Feature: Capabilities
       | Validate lifecycle launch              | get info of lifecycle launch capability              | check if lifecycle launch capability is supported              | check if lifecycle launch capability is permitted              |
       | Validate advertising identifier        | get info of advertising identifier capability        | check if advertising identifier capability is supported        | check if advertising identifier capability is permitted        |
       | Validate account id                    | get info of account id capability                    | check if account id capability is supported                    | check if account id capability is permitted                    |
-      | Validate account uid                   | get info of account uid capability                   | check if account uid capability is supported                   | check if account uid capability is permitted                   |
+      | Validate account uid                   | get info of account uid capability                   | check if account uid capability is supported                   | check if account uid capability is permitted                   |   
       | Validate discovery signInStatus        | get info of discovery signinstatus capability        | check if discovery signinstatus capability is supported        | check if discovery signinstatus capability is permitted        |
       | Validate discovery watchNext           | get info of discovery watchnext capability           | check if discovery watchnext capability is supported           | check if discovery watchnext capability is permitted           |
       | Validate discovery watched             | get info of discovery watched capability             | check if discovery watched capability is supported             | check if discovery watched capability is permitted             |
@@ -150,7 +154,7 @@ Feature: Capabilities
       | Validate discovery watchNext capability    | check if discovery watchnext capability is permitted with role use    | suggest watchnext tile with entityid      | true for watchnext tile in discovery  |
       | Validate discovery watched capability      | check if discovery watched capability is permitted with role use      | notify watched content with only entityid | true for watched content in discovery |
 
- @sdk @transport
+  @sdk @transport
   Scenario Outline: Capabilities.<Method> - Negative Scenario: <Scenario> and expecting error
     When '3rd party app' invokes the 'Firebolt' API to '<Error_Key>'
     Then 'Firebolt' platform responds with '<Error_Validation_Key>'
@@ -181,7 +185,7 @@ Feature: Capabilities
       | granted   | Validate options with boolean role     | get granted capabilities with invalid options boolean role | invalid params for capabilities granted   |
       | granted   | Validate options with array role       | get granted capabilities with invalid options array role   | invalid params for capabilities granted   |
 
-@sdk @transport
+  @sdk @transport
   Scenario: Capabilities api - Positive Scenario: Validate capability request
     When '3rd party app' invokes the 'Firebolt' API to 'get info of capability request capability'
     Then 'Firebolt' platform responds with 'expected value for info api'
