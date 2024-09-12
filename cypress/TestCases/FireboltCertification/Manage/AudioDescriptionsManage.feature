@@ -7,24 +7,26 @@ Feature: AudioDescriptions_Manage
 
    @sdk @transport
    Scenario Outline: AudioDescriptions.enabled - Positive Scenario: <Scenario>
-      When 1st party app registers for the 'audioDescriptions onEnabledChanged' event using the 'Firebolt' API
-      And 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
-      When 1st party app invokes the 'Firebolt' API to 'get audioDescriptions'
-      Then 'Firebolt' platform responds to '1st party app' with '<Method_Validation_Key>'
-      And 'Firebolt' platform triggers to '1st party app' event '<Event_Validation_Key>'
+      Given we test the 'AUDIODESCRIPTIONS' getters and setters 'enabled' to '<Value>'
+      And '1st party app' registers for the 'Firebolt' event
+      When 1st party app invokes the 'Firebolt' API to set value
+      Then 'Firebolt' platform responds to '1st party app' set API
+      When '1st party app' invokes the 'Firebolt' get API
+      Then 'Firebolt' platform responds to '1st party app' get API
+      And 'Firebolt' platform triggers '1st party app' event
 
       Examples:
-         | Scenario                  | API_Key                  | Method_Validation_Key          | Event_Validation_Key                                |
-         | Enable AudioDescriptions  | enable audioDescription  | enabled for audioDescriptions  | onEnabledChanged for audiodescriptions with enable  |
-         | Disable AudioDescriptions | disable audioDescription | disabled for audioDescriptions | onEnabledChanged for audiodescriptions with disable |
+         | Scenario                  | Value |
+         | Disable AudioDescriptions | false |
+         | Enable AudioDescriptions  | true  |
 
   @sdk @transport
    Scenario Outline: AudioDescriptions.enabled - Negative Scenario: <Scenario> expecting error
-      When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds to '1st party app' with 'invalid params for audiodescriptions setEnabled'
+      Given we test the 'AUDIODESCRIPTIONS' getters and setters 'enabled' to '<Value>'
+      When 1st party app invokes the 'Firebolt' API to set invalid value
+      Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
       Examples:
-         | Scenario                      | API_Key                                        |
-         | Set audiodescriptions-test    | enable audioDescription with test parameter    |
-         | Set audiodescriptions-INTEGER | enable audioDescription with integer parameter |
+         | Scenario                      | Value |
+         | Set audiodescriptions-test    | test  |
+         | Set audiodescriptions-INTEGER | 123   |

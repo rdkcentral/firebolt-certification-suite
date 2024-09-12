@@ -7,13 +7,14 @@ Feature: Metrics
 
     @sdk @transport
     Scenario Outline: Metrics.<Method> - Positive Scenario: <Scenario>
-        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds with '<Validation_key>'
+        Given we test the 'METRICS_METHOD' getters and setters '<Method>' to '{}'
+        When '3rd party app' invokes the 'Firebolt' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
 
         Examples:
-            | Scenario             | Method       | API_Key                         | Validation_key                   |
-            | Metrics startContent | startContent | notify that content has started | true for startContent in metrics |
-            | Metrics stopContent  | stopContent  | notify that content has stopped | true for stopContent in metrics  |
+            | Scenario             | Method         |
+            | Metrics startContent | startContent   |
+            | Metrics stopContent  | stopContent    |
 
     @sdk @transport
     Scenario Outline: Metrics.<Method> - Negative Scenario: <Scenario> expecting error
@@ -73,6 +74,7 @@ Feature: Metrics
             | error with mediaStalled parameter as string  | error                | notify that error has occured with mediaStalled parameter as string  | true for error in metrics                |
             | error with mediaStalled parameter as boolean | error                | notify that error has occured with mediaStalled parameter as boolean | true for error in metrics                |
             | error with mediaStalled parameter as number  | error                | notify that error has occured with mediaStalled parameter as number  | true for error in metrics                |
+            | Metrics appInfo                              | appInfo              | Inform the platform about app build                                  | null for metrics appInfo                 |
 
 
     @sdk @transport
@@ -118,3 +120,5 @@ Feature: Metrics
             | mediaRateChange with string-rate          | mediaRateChange      | notify that playback rate is changed with string rate           | invalid params for metrics mediaRateChange      |
             | mediaRenditionChange with numeric-bitRate | mediaRenditionChange | notify that playback rendition is Changed with numeric bitRate  | invalid params for metrics mediaRenditionChange |
             | mediaEnded with numeric-entityId          | mediaEnded           | notify that playback has stopped with numeric entityId          | invalid params for metrics mediaEnded           |
+            | Metrics appInfo with numeric build        | appInfo              | Inform the platform about app with numeric build                | invalid params for metrics appInfo              |
+            | Metrics appInfo with boolean build        | appInfo              | Inform the platform about app with boolean build                | invalid params for metrics appInfo              |

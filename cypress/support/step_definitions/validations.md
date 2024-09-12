@@ -408,6 +408,10 @@ The 'schemaOnly` validation type allows to skip content validation and stops at 
     }
 ```
 
+# Dynamic Content Validation
+
+Documentation added in [dynamicContentValidations.md](./dynamicContentValidations.md)
+
 # Validation Override
 
 ## Format
@@ -444,6 +448,7 @@ While validating, if a key is present in both fcs-validation jsons (eg: cypress/
             }
         ]
 }
+
 
 ## Error Content Validation
 

@@ -10,7 +10,7 @@ Feature: AcknowledgeChallenge_Manage_RpcOnly
         And Framework registers 'ackchallenge' test provider
         And User set response for 'granting acknowledge challenge'
         When 1st party app registers for the 'acknowledgeChallenge onRequestChallenge manage' event using the 'Firebolt' API
-        When '3rd party app' invokes the 'Firebolt' API to 'get localization countryCode'
+        And '3rd party app' invokes the 'Firebolt' API to 'get localization countryCode'
         And Fetch response for 'acknowledgeChallenge onRequestChallenge' event from 1st party app
         And 1st party app invokes the 'Firebolt' API to 'request focus for challenge provider'
         And 1st party app invokes the 'Firebolt' API to 'send response from challenge provider'
@@ -24,7 +24,7 @@ Feature: AcknowledgeChallenge_Manage_RpcOnly
         And Framework registers 'ackchallenge' test provider
         And User set response for 'granting acknowledge challenge'
         When 1st party app registers for the 'acknowledgeChallenge onRequestChallenge manage' event using the 'Firebolt' API
-        When '3rd party app' invokes the 'Firebolt' API to 'get localization countryCode'
+        And '3rd party app' invokes the 'Firebolt' API to 'get localization countryCode'
         And Fetch response for 'acknowledgeChallenge onRequestChallenge' event from 1st party app
         And 1st party app invokes the 'Firebolt' API to 'send error from challenge provider'
         And Fetch response for 'localization countryCode' method from 3rd party app
