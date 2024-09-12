@@ -10,7 +10,7 @@ jobs:
       - name: Check team membership
         id: check_team
         run: |
-          TEAM_NAME="${{ secrets.RELEASE_TEAM_NAME }}"
+          TEAM_NAME="firebolt-certification-maintainers"
           ORG_NAME="rdkcentral"
           USERNAME="${{ github.actor }}"
           # Check if the user is part of the specified team
