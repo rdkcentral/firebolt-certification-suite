@@ -13,27 +13,25 @@ Feature: Capabilities
 
   @sdk @transport
   Scenario Outline: Capabilities.available - Positive Scenario: <Scenario>
-    Given we test the 'CAPABILITIES' getters and setters 'available' to '<Value>'
-    When '3rd party app' invokes the 'Firebolt' get API
-    Then 'Firebolt' platform responds to '3rd party app' get API
+    When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+    Then 'Firebolt' platform responds with '<Validation_key>'
 
     Examples:
-      | Scenario                                                            | Value                           |
-      | Validate keyboard capability available in 3rd party app             | keyboard_capability             |
-      | Validate acknowledgechallenge capability available in 3rd party app | acknowledgechallenge_capability |
-      | Validate pinchallenge capability available in 3rd party app         | pinchallenge_capability         |
+      | Scenario                                                            | API_Key                                               | Validation_key                                        |
+      | Validate keyboard capability available in 3rd party app             | check availability of keyboard capability             | expected value for keyboard capability availability   |
+      | Validate acknowledgechallenge capability available in 3rd party app | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
+      | Validate pinchallenge capability available in 3rd party app         | check availability of pinchallenge capability         | expected value for pinchallenge capability availability         |
 
   @sdk @transport
   Scenario Outline: Capabilities.available - Positive Scenario: <Scenario>
-    Given we test the 'CAPABILITIES' getters and setters 'available' to '<Value>'
-    When '1st party app' invokes the 'Firebolt' get API
-    Then 'Firebolt' platform responds to '1st party app' get API
+    When 1st party app invokes the 'Firebolt' API to '<API_Key>'
+    Then 'Firebolt' platform responds to '1st party app' with '<Validation_key>'
 
     Examples:
-      | Scenario                                                       | Value                           |
-      | Validate keyboard capability available in platform             | keyboard_capability             |
-      | Validate acknowledgechallenge capability available in platform | acknowledgechallenge_capability |
-      | Validate pinchallenge capability available in platform         | pinchallenge_capability         |
+      | Scenario                                                       | API_Key                                               | Validation_key                                        |
+      | Validate keyboard capability available in platform             | check availability of keyboard capability             | expected value for keyboard capability availability   |
+      | Validate acknowledgechallenge capability available in platform | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
+      | Validate pinchallenge capability available in platform         | check availability of pinchallenge capability         | expected value for pinchallenge capability availability         |
 
   @sdk @transport
   Scenario Outline: Capabilities.granted - Positive Scenario: <Scenario>
