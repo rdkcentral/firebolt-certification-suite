@@ -14,7 +14,7 @@ jobs:
           ORG_NAME="rdkcentral"
           USERNAME="${{ github.actor }}"
           # Check if the user is part of the specified team
-          IS_MEMBER=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          IS_MEMBER=$(curl -s -H "Authorization: Bearer ${{ secrets.SEMANTIC_RELEASE_BOT_PAT }}" \
             https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_NAME/memberships/$USERNAME \
             | jq -r '.state')
           if [ "$IS_MEMBER" != "active" ]; then
