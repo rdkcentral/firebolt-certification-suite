@@ -40,6 +40,23 @@
  * `Given Metrics collection process is 'inititated'`
  * `Given Metrics collection process is 'stopped'`
 
+## Validate (device|process|all) (memory|load|set size|required) consumption is within the limit of the threshold(?: of '(.+)' (cpu|bytes) with '(.+)' percentile)?
+### Purpose: This glue is responsible to call Graphite API, fetch the performance metrics and validate metrics based on the given parameters.
+
+### Params:
+| Param | Definition |
+| --- | --- |
+| type | (device|process|all) |
+| process | (memory|load|set size|required) |
+| percentile | percentile |
+| bytes | bytes |
+| threshold | the maximum cpu/bytes threshold |
+
+### Examples:
+ * `Then Validate device load consumption is within the limit of the threshold`
+ * `Then Validate process set size consumption is within the limit of the threshold of '1073741824' bytes with '70' percentile`
+ * `Then Validate all required consumption is within the limit of the threshold`
+
  ## '(.+)' will (be|stay) in '(.+)' state
 ### Purpose: To validate 3rd party app transitionss wrt state, event and history aagainst appObject as the source of truth
 Here, be/stay determines whether the app will get transitioned to new state or will be staying in the same state.
