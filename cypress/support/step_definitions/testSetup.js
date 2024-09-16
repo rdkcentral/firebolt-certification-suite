@@ -83,7 +83,9 @@ Given('the environment has been set up for {string} tests', (test) => {
  * destroyAppInstance('Parameters')
  */
 function destroyAppInstance(testType) {
-  const isAllowedTestType = UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(testType);
+  const isAllowedTestType = UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(
+    testType
+  );
   // Checking if the previous test type is different from the current test type.
   const isDifferentFromPrevious =
     UTILS.getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != testType &&
