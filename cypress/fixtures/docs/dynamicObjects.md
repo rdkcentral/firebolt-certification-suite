@@ -1,24 +1,19 @@
-# Table of contents: 
-[Dynamic Objects (Only Supported in JS Objects)](#dynamic-objects-only-supported-in-js-objects)
- - [Supported Dynamic Glue Codes](#supported-dynamic-glue-codes)
-   - [Background](#background)
-   - [Firebolt object](#firebolt-object)
-     - [Sample Firebolt Object Format](#sample-firebolt-object-format)
-   - [Runtime Variables](#runtime-variables)
-   - [ResolveAtRuntime Function](#resolveatruntime-function)
-     - [Examples](#examples)
-       - [Example 1](#example-1)
-       - [Example 2](#example-2)
-       - [Example 3](#example-3)
-   - [Usage](#usage)
-     - [Example 1](#example-1-1)
-     - [Example 2](#example-2-1)
-   - [Advanced Support](#advanced-support)
-     - [Examples](#example-3)
-
 # Dynamic Objects (Only Supported in JS Objects)
 
+## Table of contents:
+
+- [Supported Dynamic Glue Codes](#supported-dynamic-glue-codes)
+- [Background](#background)
+- [Firebolt object](#firebolt-object)
+  - [Sample Firebolt Object Format](#sample-firebolt-object-format)
+- [Supported types of validations](#supported-types-of-validations-here)
+- [Runtime Variables](#runtime-variables)
+- [ResolveAtRuntime Function](#resolveatruntime-function)
+- [Usage](#usage)
+- [Advanced Support](#advanced-support)
+
 ## Supported Dynamic Glue Codes
+
 To use dynamic firrebolt objects, we need to use dynamic glue codes listed [here](../../support/step_definitions/dynamicCalls.md)
 
 - we test the '(.+)' getters and setters(?: '(._?)'(?: to '(._?)')?)?
@@ -37,11 +32,9 @@ FCS supports dynamic firebolt JS objects to be used across multiple examples in 
 - Firebolt objects can be added in Javascript files located in the `cypress/fixtures/fireboltCalls` folder. Ex: `cypress/fixtures/fireboltCalls/accessibility.js`
 - Firebolt objects present in the config module will take priority if the same key present in FCS.
 
-### Sample Firebolt Object Format
+### A dynamic firebolt object
 
-Below is the sample format showing how to create a firebolt object.
-
-```
+```javascript
 FIREBOLT_CALL = {
     method: ...,
     params: ...,
@@ -56,10 +49,10 @@ FIREBOLT_CALL = {
   };
 ```
 
-| **Param**               | **Definition**                                                                                            | **Example**                                   | **Supported Type**             |**Required** |
-| ----------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------ | --------------|
+| **Param**               | **Definition**                                                                                            | **Example**                                   | **Supported Type**             |
+| ----------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------ |
 | method                  | The method name to make a call, associated with get test steps                                            | accessibility.closedCaptionsSettings          | string                         |
-| params                  | parameters of the method                                                                                  | {}                                            | string, number, array, object               |
+| params                  | parameters of the method                                                                                  | {}                                            | string, number, array, object  |
 | validationJsonPath      | Contains an array or string with the path of the response value that needs to be validated                | result.enabled                                | string or array                |
 | setMethod               | The setter method name to make a call, associated with set test steps                                     | closedcaptions.setEnabled                     | string                         |
 | setParams               | Parameters of the set method to set new value.                                                            | {value: true}                                 | string or object               |
@@ -71,7 +64,9 @@ FIREBOLT_CALL = {
 
 **Note:**
 
-- These are all the supported fields but depending on the test scenario and glue code used none of them are technically required.
+- These are all the supported fields, but depending on the test scenario and glue code used, none of them are technically required.
+
+## Supported types of validations [here](./validations.md)
 
 ## Runtime Variables
 
@@ -95,6 +90,26 @@ Below are the runtime variables that is used by fireboltCall object.
   - **Array of Strings**: When an array of strings is provided, the function iterates over each string, replacing the patterns with the actual values from the `runtime` environment variable.
 
 - **Options:** The function has the support to accespts the optional parameter `uppercaseFirstChar` or `lowercaseFirstChar` to convert the first character of the resolved value to uppercase or lowercase. This parameter is separated by a dot from the attribute name. This parameter is used to convert the attribute value to the correct format for the method name. For example, `resolveAtRuntime('manage_closedcaptions.set{{attribute.uppercaseFirstChar}}')`.
+- **Options:** The function supports optional parameters `uppercaseFirstChar` or `lowercaseFirstChar` to convert the first character of the resolved value to uppercase or lowercase. This parameter is separated by a dot from the attribute name.
+
+  - `uppercaseFirstChar`
+
+    - Converts the first character of the resolved value to uppercase.
+    - Useful for formatting method names or any string where the first letter should be capitalized.
+    - Example usage:
+      ```javascript
+      resolveAtRuntime('manage_closedcaptions.set{{attribute.uppercaseFirstChar}}');
+      // If attribute is 'fontFamily', the result will be 'setFontFamily'
+      ```
+
+  - `lowercaseFirstChar`
+    - Converts the first character of the resolved value to lowercase.
+    - Useful for formatting method names or any string where the first letter should be in lowercase.
+    - Example usage:
+      ```javascript
+      resolveAtRuntime('manage_closedcaptions.set{{attribute.lowercaseFirstChar}}');
+      // If attribute is 'FontFamily', the result will be 'setfontFamily'
+      ```
 
 Usage of this function by dynamic firebolt object ensures that all necessary values are dynamically resolved during test case execution in the corresponding glue code.
 
@@ -102,14 +117,17 @@ Usage of this function by dynamic firebolt object ensures that all necessary val
 
 Assuming runtime environment variable having below details
 
-```
-runtime: {
+```javascript
+runtime = {
  attribute: 'fontSize',
  value: 1.5,
 }
 ```
 
 #### Example 1:
+
+Below example shows how the `resolveAtRuntime` function works with input as an array of strings.
+`resolveAtRuntime` function will loop through each string in the array and replace the pattern with the actual value from the `runtime` environment variable.
 
 ```
 resolveAtRuntime(["result.{{attribute}}", "result.styles.{{attribute}}"])
@@ -118,12 +136,16 @@ returns: ['result.fontSize', 'result.styles.fontSize']
 
 #### Example 2:
 
+When the input is a string with the pattern `{{attribute.uppercaseFirstChar}}`, the function will replace the pattern with the actual value from the `runtime` environment variable and convert the first character of the resolved value to uppercase.
+
 ```
 resolveAtRuntime("manage_closedcaptions.set{{attribute.uppercaseFirstChar}}")
 returns: "manage_closedcaptions.setFontSize"
 ```
 
 #### Example 3:
+
+`resolveAtRuntime` function will just return the value from the `runtime` environment variable when the input is a string without the pattern.
 
 ```
 resolveAtRuntime("value")
@@ -139,8 +161,9 @@ The dynamic calls Glues can be used in test cases along with fireboltCall dynami
 #### Example 1:
 
 **Firebolt object**
+This object is used to test the setter and getter methods of the `accessibility.closedCaptionsSettings` API.
 
-```
+```javascript
 exports.ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS = {
   method: 'accessibility.closedCaptionsSettings',
   params: {},
@@ -174,6 +197,7 @@ exports.ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS = {
 ```
 
 **Test case 1**
+In the below testcase, fetching the firebolt object `ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS` and storing it in `runtime` environment variable. Using this object making a call to validate the setter and getter methods along with event.
 
 ```
  Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
@@ -192,6 +216,7 @@ exports.ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS = {
 ```
 
 **Test case 2**
+The following test case demonstrates that multiple APIs can be written using the same Firebolt object.
 
 ```
 Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
@@ -216,8 +241,9 @@ Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Sce
 #### Example 2:
 
 **Firebolt object**
+This object is used to set new value to closed captions and validate the response.
 
-```
+```javascript
 exports.CLOSED_CAPTIONS_SETTINGS = {
   setMethod: resolveAtRuntime('manage_closedcaptions.set{{attribute.uppercaseFirstChar}}'),
   setParams: resolveAtRuntime('value'),
@@ -228,6 +254,9 @@ exports.CLOSED_CAPTIONS_SETTINGS = {
 ```
 
 **Test case**
+In the below testcase, fetching the firebolt object `CLOSED_CAPTIONS_SETTINGS` and storing it in `runtime` environment variable.
+
+- Calling `closedCaptions.setEnabled` method with invalid value and validating the error response.
 
 ```
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error
@@ -242,52 +271,54 @@ exports.CLOSED_CAPTIONS_SETTINGS = {
 
 ## Advanced Support
 
-FCS has the advanced support to create separate variables in JS config and creating a common set of variables. Below are the examples for the same.
+Dynamic objects provides advanced support to create separate variables objects in JS and to create a common set of variables. Below are examples demonstrating this capability.
 
 - Create a separate object in any JS file under the `cypress/fixtures/fireboltCalls` folder.
-- Object key name should be start with prefix `DYNAMIC_FB_CALLS_VARIABLES` as shown below.
+- The object key name should start with the prefix `DYNAMIC_FB_CALL_VARIABLES` as shown below.
 
-```
+```javascript
 exports.DYNAMIC_FB_CALL_VARIABLES = {
-   DEFAULTS: {
-      CLOSEDCAPTIONS: {
-         fontFamily: 'sanserif' || null
-      }
-   }
-}
+  DEFAULTS: {
+    CLOSEDCAPTIONS: {
+      fontFamily: 'sanserif' || null,
+    },
+  },
+};
 ```
 
-- Above prefix is not only limited to `DYANMIC_FB_CALLS_VARIABLES`, additional prefix can be added as per the requirement. New prefix should be added in the `variableObjectsPrefixLists` environment variable and overriding or adding new variables should be done via the config module or from the cli command.
+- The above prefix is not limited to `DYNAMIC_FB_CALL_VARIABLES` additional prefixes can be added as per the requirement. New prefixes should be added to the `variableObjectsPrefixLists` environment variable. Overriding or adding new variables should be done via the config module or from the CLI command.
 - To use the above variables in the fireboltCall object, use the [`resolveAtRuntime`](#resolveatruntime-function) function as shown below.
-  ```
+  ```javascript
    resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.CLOSEDCAPTIONS.fontFamily')
   ```
-  resolveAtRuntime function will treat the passed input as path and will resolve the value of the fontfamily from the DYNAMIC_FB_CALL_VARIABLES object.
+  The `resolveAtRuntime` function will treat the passed input as a path and will resolve the value of the `fontFamily` from the `DYNAMIC_FB_CALL_VARIABLES` object.
+
+**Note:** This support will work only when input having prefix present in the `variableObjectsPrefixLists` environment variable. Ex: `DYNAMIC_FB_CALL_VARIABLES`.
 
 ### Examples
 
 #### Example 1: Calling account.session with parameters
 
-- Create a firebolt object in `cypress/fixtures/fireboltCalls/account.js` with the below content:
-  ```
+- Create a firebolt object in `cypress/fixtures/fireboltCalls/account.js` with the following content:
+  ```javascript
      exports.PUSH_SESSION_TOKENACCOUNT = {
         setMethod: 'manage_account.session',
         setParams: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.ACCOUNT.ACCOUNT_SESSION'),
         setContent: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.NULL'),
      };
   ```
-- Define the variables object in `cypress/fixtures/fireboltCalls/account.js` with the below content:
+- Define the variables object in `cypress/fixtures/fireboltCalls/account.js` with the following content:
+  ```javascript
+  exports.DYNAMIC_FB_CALL_VARIABLES = {
+    ACCOUNT: {
+      ACCOUNT_SESSION: {
+        token: '',
+        expiresIn: '',
+      },
+      NULL: null,
+    },
+  };
   ```
-     exports.DYNAMIC_FB_CALL_VARIABLES = {
-        ACCOUNT: {
-           ACCOUNT_SESSION: {
-              token: '',
-              expiresIn: '',
-           },
-           NULL: null,
-        }
-     }
-  ```
-  ---> Not mandatory to have the same file name, it should be present in the same folder where the firebolt object is present, but the object key name should start with the prefix `DYNAMIC_FB_CALL_VARIABLES`.
+  Note: It is not mandatory to have the same file name. The variables object should be present in the same folder where the firebolt object is located or it should be overridden from the config module.
 - `resolveAtRuntime` will invoked while executing the test case and will resolve the value of the `DYNAMIC_FB_CALL_VARIABLES.ACCOUNT.ACCOUNT_SESSION`.
 - The validation content will be resolved to `null` from the `DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.NULL` object.

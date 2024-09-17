@@ -52,8 +52,8 @@ Feature: Accessibility
             | Set preferredLanguages               | preferredLanguages | spa,eng               |
 
     @sdk @transport
-    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario> with 'null' params
-        Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS_SET_TO_NULL' getters and setters '<Method>'
+    Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Method> with 'null' params
+        Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS_SET_TO_NULL' getters and setters '<Method>' to 'null'
         When '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
         And 1st party app invokes the 'Firebolt' API to set value
@@ -63,19 +63,19 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Scenario          | Method            |
-            | fontFamily        | fontFamily        |
-            | fontSize          | fontSize          |
-            | fontColor         | fontColor         |
-            | fontEdge          | fontEdge          |
-            | fontEdgeColor     | fontEdgeColor     |
-            | fontOpacity       | fontOpacity       |
-            | backgroundColor   | backgroundColor   |
-            | backgroundOpacity | backgroundOpacity |
-            | textAlign         | textAlign         |
-            | textAlignVertical | textAlignVertical |
-            | windowColor       | windowColor       |
-            | windowOpacity     | windowOpacity     |
+            | Method            |
+            | fontFamily        |
+            | fontSize          |
+            | fontColor         |
+            | fontEdge          |
+            | fontEdgeColor     |
+            | fontOpacity       |
+            | backgroundColor   |
+            | backgroundOpacity |
+            | textAlign         |
+            | textAlignVertical |
+            | windowColor       |
+            | windowOpacity     |
 
     @sdk @transport
     Scenario Outline: Accessibility.voiceGuidanceSettings - Positive Scenario: <Scenario>

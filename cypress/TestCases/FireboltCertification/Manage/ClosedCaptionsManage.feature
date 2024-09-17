@@ -50,8 +50,8 @@ Feature: ClosedCaptions_Manage
             | Set windowOpacity-50                 | windowOpacity      | 50                    |
 
     @sdk @transport
-    Scenario Outline: Closedcaptions.<Method> - Positive Scenario: <Scenario> with 'null' params
-        Given we test the 'CLOSEDCAPTIONS_SETTINGS_SET_TO_NULL' getters and setters '<Method>'
+    Scenario Outline: Closedcaptions.<Method> - Positive Scenario: <Method> with 'null' params
+        Given we test the 'CLOSEDCAPTIONS_SETTINGS_SET_TO_NULL' getters and setters '<Method>' to 'null'
         When '1st party app' registers for the 'Firebolt' event
         And 1st party app invokes the 'Firebolt' API to set value
         Then 'Firebolt' platform responds to '1st party app' set API
@@ -60,19 +60,19 @@ Feature: ClosedCaptions_Manage
         And 'Firebolt' platform triggers '1st party app' event
   
         Examples:
-            | Scenario          | Method            |
-            | fontFamily        | fontFamily        |
-            | fontSize          | fontSize          |
-            | fontColor         | fontColor         |
-            | fontEdge          | fontEdge          |
-            | fontEdgeColor     | fontEdgeColor     |
-            | fontOpacity       | fontOpacity       |
-            | backgroundColor   | backgroundColor   |
-            | backgroundOpacity | backgroundOpacity |
-            | textAlign         | textAlign         |
-            | textAlignVertical | textAlignVertical |
-            | windowColor       | windowColor       |
-            | windowOpacity     | windowOpacity     |
+            | Method            |
+            | fontFamily        |
+            | fontSize          |
+            | fontColor         |
+            | fontEdge          |
+            | fontEdgeColor     |
+            | fontOpacity       |
+            | backgroundColor   |
+            | backgroundOpacity |
+            | textAlign         |
+            | textAlignVertical |
+            | windowColor       |
+            | windowOpacity     |
 
     @sdk @transport
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error

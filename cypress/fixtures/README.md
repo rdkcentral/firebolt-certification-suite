@@ -31,4 +31,4 @@ Within the `cypress/fixtures` folder, we have the following sub-folders:
 
 1. [Static JSON Objects](docs/staticJSONObjects.md)
 2. [Static JS Objects](docs/staticJSObjects.md)
-3. [Dynamic JSON Objects](docs/dynamicObjects.md)
+3. [Dynamic JS Objects](docs/dynamicObjects.md)
