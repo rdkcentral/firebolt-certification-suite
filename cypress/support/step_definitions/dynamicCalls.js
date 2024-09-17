@@ -332,7 +332,7 @@ Given(
         appId,
         errorContent,
         eventExpected,
-        isNullCase,
+        isNullCase
       );
     });
   }

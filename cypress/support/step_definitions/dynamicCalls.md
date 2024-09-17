@@ -1,6 +1,6 @@
 # Dynamic Calls Glue
 
-## Table of contents:
+## Table of Contents:
   - [Dynamic Firebolt Objects](#dynamic-firebolt-objects)
   - [we test the '(.+)' getters and setters(?: '(.*?)'(?: to '(.*?)')?)?](#we-test-the--getters-and-setters--to-)
   - [1st party app invokes the '(.+)' API to set( invalid)? value](#1st-party-app-invokes-the--api-to-set-invalid-value)

@@ -1,8 +1,8 @@
 # Dynamic Objects (Only Supported in JS Objects)
 
-FCS supports dynamic firebolt JS objects to be used across multiple examples in a scenario outline. This is applicable for test cases where we can validate setter response, getter response, event response etc using a single JS object. More details outline below.
+FCS supports dynamic Firebolt JS objects to be used across multiple examples in a scenario outline. This is applicable for test cases where we can validate setter response, getter response, event response, etc. using a single JS object. More details are outlined below.
 
-## Table of contents:
+## Table of Contents:
 
 - [Supported Dynamic Glue Codes](#supported-dynamic-glue-codes)
 - [Firebolt object](#firebolt-object)
@@ -15,7 +15,7 @@ FCS supports dynamic firebolt JS objects to be used across multiple examples in 
 
 ## Supported Dynamic Glue Codes
 
-To use dynamic firrebolt objects, we need to use dynamic glue codes listed [here](../../support/step_definitions/dynamicCalls.md)
+To use dynamic Firebolt objects, we need to use dynamic glue codes listed [here](../../support/step_definitions/dynamicCalls.md)
 
 - we test the '(.+)' getters and setters(?: '(._?)'(?: to '(._?)')?)?
 - 1st party app invokes the '(.+)' API to set( invalid)? value
@@ -26,8 +26,8 @@ To use dynamic firrebolt objects, we need to use dynamic glue codes listed [here
 
 ## Firebolt object
 
-- Firebolt objects can be added in Javascript files located in the `cypress/fixtures/fireboltCalls` folder. Ex: `cypress/fixtures/fireboltCalls/accessibility.js`
-- Firebolt objects present in the config module will take priority if the same key present in FCS.
+- Firebolt objects can be added in JavaScript files located in the `cypress/fixtures/fireboltCalls` folder. Ex: `cypress/fixtures/fireboltCalls/accessibility.js`
+- Firebolt objects present in the config module will take priority if the same key is present in FCS.
 
 ### A dynamic firebolt object
 
@@ -67,18 +67,18 @@ FIREBOLT_CALL = {
 
 ## Runtime Variables
 
-Runtime variables are used to store values from feature file and use them in dynamic firebolt object for making api calls, api validation, event validation etc.
+Runtime variables are used to store values from the feature file and use them in dynamic Firebolt objects for making API calls, API validation, event validation, etc.
 
-Below are the runtime variables that is used by fireboltCall object.
+Below are the runtime variables that are used by the FireboltCall object.
 
 - **attribute:** Attribute is a field name of the `runtime` environment variable that holds the value of the method name. For example, if the method name is `closedCaptions.setEnabled`, the attribute value will be `enabled`.
 - **value:** Value is a field name of the `runtime` environment variable that holds the value used for to set the value or for validation.
 
-**Note:** `resolveAtRuntime()` function is used by fireboltCall object in order to process runtime variables and other fields.
+**Note:** `resolveAtRuntime()` function is used by the FireboltCall object in order to process runtime variables and other fields.
 
 ## ResolveAtRuntime Function
 
-**ResolveAtRuntime** is a global function utilized by the JS files. This function is used to dynamically resolve values during test case execution. This function will replace variables in the fireboltCall object with the actual values from `runtime` variable.
+**ResolveAtRuntime** is a global function utilized by the JS files. This function is used to dynamically resolve values during test case execution. This function will replace variables in the FireboltCall object with the actual values from the `runtime` variable.
 
 - **Input Types**: `resolveAtRuntime` accepts either a string or an array of strings as input.
 
@@ -108,11 +108,11 @@ Below are the runtime variables that is used by fireboltCall object.
       // If attribute is 'FontFamily', the result will be 'setfontFamily'
       ```
 
-Usage of this function by dynamic firebolt object ensures that all necessary values are dynamically resolved during test case execution in the corresponding glue code.
+Usage of this function by dynamic Firebolt objects ensures that all necessary values are dynamically resolved during test case execution in the corresponding glue code.
 
 ### Examples:
 
-Assuming runtime environment variable having below details
+Assuming the runtime environment variable has the below details:
 
 ```javascript
 runtime = {
@@ -123,8 +123,7 @@ runtime = {
 
 #### Example 1:
 
-Below example shows how the `resolveAtRuntime` function works with input as an array of strings.
-`resolveAtRuntime` function will loop through each string in the array and replace the pattern with the actual value from the `runtime` environment variable.
+The example below shows how the `resolveAtRuntime` function works with input as an array of strings. The `resolveAtRuntime` function will loop through each string in the array and replace the pattern with the actual value from the `runtime` environment variable.
 
 ```
 resolveAtRuntime(["result.{{attribute}}", "result.styles.{{attribute}}"])
@@ -142,7 +141,7 @@ returns: "manage_closedcaptions.setFontSize"
 
 #### Example 3:
 
-`resolveAtRuntime` function will just return the value from the `runtime` environment variable when the input is a string without the pattern.
+The `resolveAtRuntime` function will just return the value from the `runtime` environment variable when the input is a string without the pattern.
 
 ```
 resolveAtRuntime("value")
@@ -151,9 +150,9 @@ returns: 1.5
 
 ## Usage
 
-The dynamic calls Glues can be used in test cases along with fireboltCall dynamic objects.
+The dynamic calls Glues can be used in test cases along with FireboltCall dynamic objects.
 
-### Below are examples illustrating various ways to utilize dynamic firebolt objects and glue codes within test cases
+### Below are examples illustrating various ways to utilize dynamic Firebolt objects and glue codes within test cases
 
 #### Example 1:
 
@@ -194,7 +193,8 @@ exports.ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS = {
 ```
 
 **Test case 1**
-In the below testcase, fetching the firebolt object `ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS` and storing it in `runtime` environment variable. Using this object making a call to validate the setter and getter methods along with event.
+
+In the below test case, fetching the Firebolt object `ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS` and storing it in the `runtime` environment variable. Using this object to make a call to validate the setter and getter methods along with the event.
 
 ```
  Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
@@ -213,6 +213,7 @@ In the below testcase, fetching the firebolt object `ACCESSIBILITY_CLOSEDCAPTION
 ```
 
 **Test case 2**
+
 The following test case demonstrates that multiple APIs can be written using the same Firebolt object.
 
 ```
@@ -238,6 +239,7 @@ Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Sce
 #### Example 2:
 
 **Firebolt object**
+
 This object is used to set new value to closed captions and validate the response.
 
 ```javascript
@@ -284,7 +286,7 @@ exports.DYNAMIC_FB_CALL_VARIABLES = {
 };
 ```
 
-- The above prefix is not limited to `DYNAMIC_FB_CALL_VARIABLES` additional prefixes can be added as per the requirement. New prefixes should be added to the `variableObjectsPrefixLists` environment variable. Overriding or adding new variables should be done via the config module or from the CLI command.
+- The above prefix is not limited to `DYNAMIC_FB_CALL_VARIABLES` additional prefixes can be added as per the requirement. New prefixes should be added to the `variableObjectsPrefixLists` environment variable. Overriding or adding new variables should be done via the config module.
 - To use the above variables in the fireboltCall object, use the [`resolveAtRuntime`](#resolveatruntime-function) function as shown below.
   ```javascript
   resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.CLOSEDCAPTIONS.fontFamily');
@@ -323,8 +325,7 @@ exports.DYNAMIC_FB_CALL_VARIABLES = {
 
 ### Overriding Firebolt Objects
 
-Firebolt objects can be overridden from the config module or from the CLI command. Below are examples demonstrating this capability.
-Firebolt objects and dynamic variables in FCS can be overridden to provide custom configurations and values. This allows for flexibility and customization in your test scenarios. Here are examples of how to override firebolt objects and dynamic variables.
+Firebolt objects can be overridden from the config module or from the CLI command. Below are examples demonstrating this capability. Firebolt objects and dynamic variables in FCS can be overridden to provide custom configurations and values. This allows for flexibility and customization in your test scenarios. Here are examples of how to override firebolt objects and dynamic variables.
 
 #### Overriding Firebolt Objects
 

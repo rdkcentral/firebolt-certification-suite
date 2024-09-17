@@ -1,10 +1,10 @@
 # Static JSON Objects
 
-Firebolt Calls has two types of JSON objects: Firebolt Calls and Validation Objects. These objects are used to make API calls and validate the response received from the API.
+Firebolt Calls has two types of JSON objects: Firebolt Calls and Validation Objects. These objects are used to make API calls and validate the responses received from the API.
 
-JSON objects are used in glue codes listed [here](../../support/step_definitions/fireboltCalls.md)
+JSON objects are used in glue code listed [here](../../support/step_definitions/fireboltCalls.md).
 
-## Table of contents:
+## Table of Contents:
 
 - [Firebolt Calls](#firebolt-calls)
   - [How to Configure Firebolt Calls](#how-to-configure-firebolt-calls)
@@ -14,7 +14,7 @@ JSON objects are used in glue codes listed [here](../../support/step_definitions
 
 ## Firebolt Calls
 
-Firebolt JSON objects represent a firebolt api call to be made. It can contain the following parameters:
+Firebolt JSON objects represent a firebolt API call to be made. It can contain the following parameters:
 
 | Field    | Required | Accepted values                                                                                                                                            | Default values   |
 | -------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |

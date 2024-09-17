@@ -1,6 +1,6 @@
 # JS Objects
 
-## Table of contents:
+## Table of Contents:
 
 - [Firebolt Calls](#firebolt-calls)
   - [How to Configure Firebolt Calls](#how-to-configure-firebolt-calls)
@@ -9,25 +9,25 @@
 - [Usage](#usage)
 - [Advanced Support](#advanced-support)
 
-There are 2 types of JSON objects used in test cases. One is for making firebolt calls to the device and second is for validating the response of the call.
+There are two types of JSON objects used in test cases. One is for making Firebolt calls to the device, and the second is for validating the response of the call.
 
 ## Firebolt Calls
 
-Firebolt object is used to make an API call. It contains the following parameters:
+A Firebolt object is used to make an API call. It contains the following parameters:
 
 - method - Name of the API to make an API call
-- params - Represent the parameters to be sent for a Firebolt call
-- context - Represent the data that needs to be stored in the API/event object that helps to search for a specific object which contains the response in a global list
-- expected - Determine whether expecting for an error or result
+- params - Represents the parameters to be sent for a Firebolt call
+- context - Represents the data that needs to be stored in the API/event object that helps to search for a specific object which contains the response in a global list
+- expected - Determines whether expecting an error or result
 
 ### How to Configure Firebolt Calls
 
-- Define a firebolt call object in `cypress/fixtures/fireboltCalls/<fileName>.js`, where fileName can be any name.
-- Add the method, params, context, and expected parameters to the firebolt call object. params, context, and expected are optional parameters. By default, they are set to below values:
+- Define a Firebolt call object in `cypress/fixtures/fireboltCalls/<fileName>.js`, where fileName can be any name.
+- Add the method, params, context, and expected parameters to the Firebolt call object. Params, context, and expected are optional parameters. By default, they are set to the below values:
   - params: {}
   - context: {}
   - expected: "result"
-- params can be a object and present in JS files itself.
+- Params can be an object and present in JS files themselves.
 
 ### Example 1:
 
@@ -48,25 +48,25 @@ exports.DISABLE_CLOSEDCAPTIONS = {
 
 ## Validation Objects
 
-Validation object is used to validate the response received from the API. It contains the following parameters:
+A Validation object is used to validate the response received from the API. It contains the following parameters:
 
 - method/event - Name of the API or event, which is used to extract the response object from the global list for content validation
-- validationJsonPath - Path to the value in the response that needs to be validated.
-- context - Represent the data that needs to be used to search for a specific object in the global list
-- content - The Validation content object that holds the source of truth for the validation
+- validationJsonPath - Path to the value in the response that needs to be validated
+- context - Represents the data that needs to be used to search for a specific object in the global list
+- content - The validation content object that holds the source of truth for the validation
 - expectingError - Determines whether we are performing result or error content validation
 
 ### How to Configure Validation Objects
 
 - Define a validation object in `cypress/fixtures/fireboltCalls/<fileName>.js`, where fileName can be any name.
-- Add the method or event name, validationJsonPath, context, content and expectingError parameters to the validation object. validationJsonPath, context, content, and expectingError are optional parameters. By default, they are set to below values:
+- Add the method or event name, validationJsonPath, context, content, and expectingError parameters to the validation object. validationJsonPath, context, content, and expectingError are optional parameters. By default, they are set to the below values:
   - validationJsonPath: "result"
   - context: {}
   - content: null
   - expectingError: false
-- `content` is the expected value used for validating against a Firebolt API response. Content can only be a string and below are the different types of adding the content:
+- `content` is the expected value used for validating against a Firebolt API response. Content can only be a string, and below are the different types of adding the content:
   - Pass the expected value directly as a string, for example, "true" or "1234" etc.
-  - If want to do different kind of validations like regEx, decode etc. Define the validation object coneten as mentioned in [Supported Validation Types](./validations.md).
+  - If you want to do different kinds of validations like regEx, decode, etc., define the validation object content as mentioned in [Supported Validation Types](./validations.md).
 
 ### Example 1:
 
@@ -129,7 +129,7 @@ exports.CLOSEDCAPTIONS_SETTINGS = {
 
 ### Creating Separate VARIABLES in JS Config:
 
-Static objects can contain a common set of parameters or content that can be used in another file. Creating a common set of variables in a separate configuration file or in same file and using them in firebolt objects will help to maintain the data consistency.
+Static objects can contain a common set of parameters or content that can be used in another file. Creating a common set of variables in a separate configuration file or in the same file and using them in Firebolt objects will help to maintain data consistency.
 
 To create a common set of variables, follow the below steps:
 
