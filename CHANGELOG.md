@@ -1,3 +1,10 @@
+## [1.2.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0...v1.2.1-dev.1) (2024-09-17)
+
+
+### Bug Fixes
+
+* Corrected performance glue synchronous issue ([#212](https://github.com/rdkcentral/firebolt-certification-suite/issues/212)) ([49c4ffd](https://github.com/rdkcentral/firebolt-certification-suite/commit/49c4ffd1ac989bddd03a7bc18a724405f9e85135))
+
 # [1.2.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.1.0...v1.2.0) (2024-09-12)
 
 
