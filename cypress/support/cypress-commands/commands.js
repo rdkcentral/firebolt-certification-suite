@@ -799,7 +799,6 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     if (result?.success) {
       fireLog(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
-      return true;
     } else {
       fireLog.fail(eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
     }
