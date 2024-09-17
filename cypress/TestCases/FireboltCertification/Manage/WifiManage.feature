@@ -22,7 +22,7 @@ Feature: Wifi_Manage
         Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
         Examples:
-            | Scenario                                        | Method  | API_Key              |
+            | Scenario                                        | Method  | Value                |
             | Scan available wifi networks boolean param      | scan    | scan_with_boolean    |
             | Connect the device to wifi boolean ssid         | connect | connect_with_integer |
             | Connect the device using wps with boolean value | wps     | connect_with_boolean |
