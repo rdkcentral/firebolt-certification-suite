@@ -1,9 +1,10 @@
 # Dynamic Objects (Only Supported in JS Objects)
 
+FCS supports dynamic firebolt JS objects to be used across multiple examples in a scenario outline. This is applicable for test cases where we can validate setter response, getter response, event response etc using a single JS object. More details outline below.
+
 ## Table of contents:
 
 - [Supported Dynamic Glue Codes](#supported-dynamic-glue-codes)
-- [Background](#background)
 - [Firebolt object](#firebolt-object)
   - [Sample Firebolt Object Format](#sample-firebolt-object-format)
 - [Supported types of validations](#supported-types-of-validations-here)
@@ -22,10 +23,6 @@ To use dynamic firrebolt objects, we need to use dynamic glue codes listed [here
 - '(.+)' registers for the '(.+)' event
 - '(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?
 - '(.+)' platform (triggers|does not trigger) '(.\*?)' event(?: with '(.+)')?
-
-## Background
-
-FCS supports dynamic firebolt JS objects to be used across multiple examples in a scenario outline. This is applicable for test cases where we can validate setter response, getter response, event response etc using a single JS object. More details outline below.
 
 ## Firebolt object
 
@@ -119,9 +116,9 @@ Assuming runtime environment variable having below details
 
 ```javascript
 runtime = {
- attribute: 'fontSize',
- value: 1.5,
-}
+  attribute: 'fontSize',
+  value: 1.5,
+};
 ```
 
 #### Example 1:
@@ -250,7 +247,6 @@ exports.CLOSED_CAPTIONS_SETTINGS = {
   setValidationJsonPath: 'result',
   setContent: null,
 };
-
 ```
 
 **Test case**
@@ -271,6 +267,8 @@ In the below testcase, fetching the firebolt object `CLOSED_CAPTIONS_SETTINGS` a
 
 ## Advanced Support
 
+### Dynamic Firebolt Call Variables
+
 Dynamic objects provides advanced support to create separate variables objects in JS and to create a common set of variables. Below are examples demonstrating this capability.
 
 - Create a separate object in any JS file under the `cypress/fixtures/fireboltCalls` folder.
@@ -289,23 +287,23 @@ exports.DYNAMIC_FB_CALL_VARIABLES = {
 - The above prefix is not limited to `DYNAMIC_FB_CALL_VARIABLES` additional prefixes can be added as per the requirement. New prefixes should be added to the `variableObjectsPrefixLists` environment variable. Overriding or adding new variables should be done via the config module or from the CLI command.
 - To use the above variables in the fireboltCall object, use the [`resolveAtRuntime`](#resolveatruntime-function) function as shown below.
   ```javascript
-   resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.CLOSEDCAPTIONS.fontFamily')
+  resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.CLOSEDCAPTIONS.fontFamily');
   ```
   The `resolveAtRuntime` function will treat the passed input as a path and will resolve the value of the `fontFamily` from the `DYNAMIC_FB_CALL_VARIABLES` object.
 
 **Note:** This support will work only when input having prefix present in the `variableObjectsPrefixLists` environment variable. Ex: `DYNAMIC_FB_CALL_VARIABLES`.
 
-### Examples
+#### Examples
 
-#### Example 1: Calling account.session with parameters
+##### Example 1: Calling account.session with parameters
 
 - Create a firebolt object in `cypress/fixtures/fireboltCalls/account.js` with the following content:
   ```javascript
-     exports.PUSH_SESSION_TOKENACCOUNT = {
-        setMethod: 'manage_account.session',
-        setParams: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.ACCOUNT.ACCOUNT_SESSION'),
-        setContent: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.NULL'),
-     };
+  exports.PUSH_SESSION_TOKENACCOUNT = {
+    setMethod: 'manage_account.session',
+    setParams: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.ACCOUNT.ACCOUNT_SESSION'),
+    setContent: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.NULL'),
+  };
   ```
 - Define the variables object in `cypress/fixtures/fireboltCalls/account.js` with the following content:
   ```javascript
@@ -322,3 +320,91 @@ exports.DYNAMIC_FB_CALL_VARIABLES = {
   Note: It is not mandatory to have the same file name. The variables object should be present in the same folder where the firebolt object is located or it should be overridden from the config module.
 - `resolveAtRuntime` will invoked while executing the test case and will resolve the value of the `DYNAMIC_FB_CALL_VARIABLES.ACCOUNT.ACCOUNT_SESSION`.
 - The validation content will be resolved to `null` from the `DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.NULL` object.
+
+### Overriding Firebolt Objects
+
+Firebolt objects can be overridden from the config module or from the CLI command. Below are examples demonstrating this capability.
+Firebolt objects and dynamic variables in FCS can be overridden to provide custom configurations and values. This allows for flexibility and customization in your test scenarios. Here are examples of how to override firebolt objects and dynamic variables.
+
+#### Overriding Firebolt Objects
+
+Firebolt objects can be overridden by creating a new object with the same key name in the config module. The new object will be created with the same key name by doing deep merge with the default firebolt object. Here's an example:
+
+```javascript
+// Original firebolt object
+exports.ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS = {
+  setMethod: 'closedcaptions.setEnabled',
+  setParams: { value: true },
+  setValidationJsonPath: 'result.enabled',
+  setContent: null,
+};
+
+// firebolt object from the config module
+exports.ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS = {
+  setMethod: 'closedcaptions.setEnabled',
+  setParams: { value: false },
+  setValidationJsonPath: 'result.enabled',
+  setContent: null,
+};
+```
+
+In the above example, the original firebolt object ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS is overridden with a new object that has different values for the setParams field.
+
+#### Overriding Dynamic Variables
+
+Dynamic variables can be overridden by creating a new object with the same key name in the config module. The new object will be created with the same key name by doing deep merge with the default dynamic variables object. Here's an example:
+
+```javascript
+// Original dynamic variable
+exports.DYNAMIC_FB_CALL_VARIABLES = {
+  ACCOUNT: {
+    ACCOUNT_SESSION: {
+      token: '',
+      expiresIn: '',
+    },
+  },
+  CONTENT: {
+    DEVICE_ID: {
+      data: [
+        {
+          type: 'fixture',
+          validations: [
+            {
+              mode: 'staticContentValidation',
+              type: 'true',
+            },
+          ],
+        },
+      ],
+    },
+  },
+};
+
+// dynamic variable from config module
+exports.DYNAMIC_FB_CALL_VARIABLES = {
+  ACCOUNT: {
+    ACCOUNT_SESSION: {
+      token: 'abc123',
+      expiresIn: '3600',
+    },
+  },
+  CONTENT: {
+    DEVICE_ID: {
+      data: [
+        {
+          type: 'fixture',
+          validations: [
+            {
+              mode: 'deviceContentValidation',
+              type: 'DEVICEID',
+            },
+          ],
+        },
+      ],
+    },
+  },
+};
+```
+In the above example, 
+- Account session token and expiresIn values are overridden with new values in the config module.
+- The content of the DEVICE_ID object is overridden from staticContentValidation to deviceContentValidation in the config module.

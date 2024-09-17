@@ -91,8 +91,7 @@ exports.CLOSEDCAPTIONS_SETTINGS = {
         validations: [
           {
             mode: 'staticContentValidation',
-            type: 'ACCESSIBILITY_FONTFAMILY_CURSIVE',
-            description: 'Validation of the accessibility fontfamily cursive',
+            type: true,
           },
         ],
       },
@@ -128,8 +127,69 @@ exports.CLOSEDCAPTIONS_SETTINGS = {
 
 ## Advanced Support
 
-1. **Creating Separate VARIABLES in JS Config:**
-   C
+### Creating Separate VARIABLES in JS Config:
 
-2. **Creating Common Set of VARIABLES:**
-   Demonstrates how to create a common set of VARIABLES to be used throughout all JS config files.
+Static objects can contain a common set of parameters or content that can be used in another file. Creating a common set of variables in a separate configuration file or in same file and using them in firebolt objects will help to maintain the data consistency.
+
+To create a common set of variables, follow the below steps:
+
+1. Creating a common set of objects and using it in same file:
+
+   In the below example, the `staticData` object is created to hold common parameters that can be reused accross `accessibility.js` file.
+
+   **Example 1:**
+
+   ```javascript
+   const staticData = {
+     enable: { value: true },
+   };
+
+   // Below object present in cypress/fixtures/fireboltCalls/accessibility.js
+   exports.CLOSEDCAPTIONS_SETTINGS = {
+     method: 'accessibility.closedCaptionsSettings',
+     params: staticData.enable,
+     validationJsonPath: 'result.enabled',
+     content: true,
+   };
+   ```
+
+   **Example 2:**
+
+   ```javascript
+   exports.staticData = {
+     enable: { value: true },
+   };
+
+   // Below object present in cypress/fixtures/fireboltCalls/accessibility.js
+   exports.CLOSEDCAPTIONS_SETTINGS = {
+     method: 'accessibility.closedCaptionsSettings',
+     params: this.staticData.enable,
+     validationJsonPath: 'result.enabled',
+     content: true,
+   };
+   ```
+
+2. Creating a common set of objects in a separate configuration file:
+
+   In the below example, the `staticData` object is created in a separate file and imported into the `accessibility.js` file.
+
+   **Example 1:**
+
+   ```javascript
+   // In cypress/fixtures/fireboltCalls/staticData.js
+   exports.staticData = {
+     enable: { value: true },
+   };
+   ```
+
+   ```javascript
+   // In cypress/fixtures/fireboltCalls/accessibility.js
+   const staticData = require('./staticData').staticData;
+
+   exports.CLOSEDCAPTIONS_SETTINGS = {
+     method: 'accessibility.closedCaptionsSettings',
+     params: staticData.enable,
+     validationJsonPath: 'result.enabled',
+     content: true,
+   };
+   ```
