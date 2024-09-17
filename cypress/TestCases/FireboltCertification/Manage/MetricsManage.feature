@@ -7,16 +7,16 @@ Feature: Metrics_Manage
 
     @sdk @transport
     Scenario Outline: Metrics.event - Positive Scenario: <Scenario>
-        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
+        Given we test the 'METRICS_MANAGE' getters and setters 'event' to '<Value>'
+        When '1st party app' invokes the 'Firebolt' get API
+        Then 'Firebolt' platform responds to '1st party app' get API
 
         Examples:
-            | Scenario                          | API_Key                                             |
-            | Send foo event                    | send metrics event with schema and foo data         |
-            | Send foo event with null value    | send metrics event with schema and null foo data    |
-            | Send foo event with boolean value | send metrics event with schema and boolean foo data |
-            | Send data as empty object         | send metrics event with empty data                  |
-            | Send schema as empty string       | send metrics event with empty schema                |
+            | Scenario                          | Value                       |
+            | Send foo event                    | foo_data_and_schema         |
+            | Send foo event with null value    | null_foo_data_and_schema    |
+            | Send foo event with boolean value | boolean_foo_data_and_schema |
+            | Send data as empty object         | empty_data_object           |
 
     @sdk @transport
     Scenario Outline: Metrics.event - Negative Scenario: <Scenario> expecting error
@@ -31,3 +31,4 @@ Feature: Metrics_Manage
             | Data as string          | send metrics event with data as string     |
             | Data as boolean         | send metrics event with data as boolean    |
             | Data as integer         | send metrics event with data as integer    |
+            | Schema as empty string  | send metrics event with schema as empty    |

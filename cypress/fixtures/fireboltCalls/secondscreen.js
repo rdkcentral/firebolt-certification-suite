@@ -35,75 +35,75 @@ exports.ONCLOSEREQUEST_TYPE_DIAL = {
   type: 'dial',
   version: '1.7',
 };
-// exports.DYNAMIC_FB_CALL_VARIABLES = {
-//   SECONDSCREEN: {
-//     test: {
-//       type: 'test',
-//     },
-//     emptyArray: [],
-//     DIAL2: { dial2: true },
-//   },
-//   SECONDSCREEN_CONTENT: {
-//     device: {
-//       data: [
-//         {
-//           type: 'fixture',
-//           validations: [
-//             {
-//               mode: 'deviceContentValidation',
-//               type: extractEnvValue('DEVICEID'),
-//               description: 'Validation of the Secondscreen device Format',
-//             },
-//           ],
-//         },
-//       ],
-//     },
-//     protocols: {
-//       data: [
-//         {
-//           type: 'fixture',
-//           validations: [
-//             {
-//               mode: 'staticContentValidation',
-//               type: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.SECONDSCREEN.DIAL2'),
-//               description: 'Validation of the Secondscreen protocols Format',
-//             },
-//           ],
-//         },
-//       ],
-//     },
-//     SECONDSCREEN_ONLAUNCHREQUEST_TYPE_DIAL_WITH_TEST_DATA: {
-//       method: 'secondscreen.onCloseRequest',
-//       data: [
-//         {
-//           type: 'fixture',
-//           validations: [
-//             {
-//               mode: 'staticContentValidation',
-//               type: this.ONLAUNCHREQUEST_TYPE_DIAL_WITH_TEST_DATA,
-//               description: 'Validation of the Secondscreen onLaunchRequest event',
-//             },
-//           ],
-//         },
-//       ],
-//     },
-//     SECONDSCREEN_ONCLOSEREQUEST: {
-//       method: 'secondscreen.onCloseRequest',
-//       data: [
-//         {
-//           type: 'fixture',
-//           validations: [
-//             {
-//               mode: 'staticContentValidation',
-//               type: this.ONCLOSEREQUEST_TYPE_DIAL,
-//               description: 'Validation of the Secondscreen protocols Format',
-//             },
-//           ],
-//         },
-//       ],
-//     },
-//   },
-// };
+exports.DYNAMIC_FB_CALL_VARIABLES = {
+  SECONDSCREEN: {
+    test: {
+      type: 'test',
+    },
+    emptyArray: [],
+    DIAL2: { dial2: true },
+  },
+  SECONDSCREEN_CONTENT: {
+    device: {
+      data: [
+        {
+          type: 'fixture',
+          validations: [
+            {
+              mode: 'deviceContentValidation',
+              type: extractEnvValue('DEVICEID'),
+              description: 'Validation of the Secondscreen device Format',
+            },
+          ],
+        },
+      ],
+    },
+    protocols: {
+      data: [
+        {
+          type: 'fixture',
+          validations: [
+            {
+              mode: 'staticContentValidation',
+              type: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.SECONDSCREEN.DIAL2'),
+              description: 'Validation of the Secondscreen protocols Format',
+            },
+          ],
+        },
+      ],
+    },
+    SECONDSCREEN_ONLAUNCHREQUEST_TYPE_DIAL_WITH_TEST_DATA: {
+      method: 'secondscreen.onCloseRequest',
+      data: [
+        {
+          type: 'fixture',
+          validations: [
+            {
+              mode: 'staticContentValidation',
+              type: this.ONLAUNCHREQUEST_TYPE_DIAL_WITH_TEST_DATA,
+              description: 'Validation of the Secondscreen onLaunchRequest event',
+            },
+          ],
+        },
+      ],
+    },
+    SECONDSCREEN_ONCLOSEREQUEST: {
+      method: 'secondscreen.onCloseRequest',
+      data: [
+        {
+          type: 'fixture',
+          validations: [
+            {
+              mode: 'staticContentValidation',
+              type: this.ONCLOSEREQUEST_TYPE_DIAL,
+              description: 'Validation of the Secondscreen protocols Format',
+            },
+          ],
+        },
+      ],
+    },
+  },
+};
 exports.SECONDSCREEN = {
   method: resolveAtRuntime('secondscreen.{{attribute}}'),
   params: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.SECONDSCREEN.{{value}}'),
