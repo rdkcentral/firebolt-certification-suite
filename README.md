@@ -73,6 +73,7 @@ To execute the certification suite against any platform, the following setup mus
 |interactionsMetrics                      | boolean | true                           | Makes a call to platform to start/stop listening to firebolt interactions based on action passed |
 | pubSubUrl                           | string  | ws://127.0.0.1:8081               | Sets the the url to use for a PubSub server which will be used for 3rd party app communication.                                                                                                                     |
 | fcaAppList                  | array | ['default3rdPartyAppId']     | Holds the list of fca app identifiers |
+| suiteCommunicationMode     | string  | 'SDK' or 'Transport'              | Set suiteCommunicationMode as SDK/Transport. Default mode is Transport   |
 
 - Provide the specPattern mapping details. 
 Update the specHelperConfig.js with the specPattern mapping details.
