@@ -86,7 +86,7 @@ exports.LOCALIZATION_PREFERREDAUDIO_LANGUAGES = {
   setContent: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.CONTENT.{{attribute}}'),
 };
 
-exports.DYNAMIC_FB_CALL_VARIABLES = {
+exports.LOCALIZATION_VARIABLES = {
   DEFAULTS: {
     CONTENT: {
       preferredAudioLanguages: {
