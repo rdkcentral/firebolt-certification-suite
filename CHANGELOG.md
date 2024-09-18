@@ -1,3 +1,10 @@
+# [1.3.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.1-dev.1...v1.3.0-dev.1) (2024-09-18)
+
+
+### Features
+
+* Allow app close keys to be overwritten ([#214](https://github.com/rdkcentral/firebolt-certification-suite/issues/214)) ([4136c1e](https://github.com/rdkcentral/firebolt-certification-suite/commit/4136c1ea97270fb4ce0005e1de66a8db120bd89d))
+
 ## [1.2.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0...v1.2.1-dev.1) (2024-09-17)
 
 
