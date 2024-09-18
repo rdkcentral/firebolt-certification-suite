@@ -33,17 +33,17 @@ To use dynamic Firebolt objects, we need to use dynamic glue codes listed [here]
 
 ```javascript
 FIREBOLT_CALL = {
-    method: ...,
-    params: ...,
-    validationJsonPath: ...,
-    setMethod: ...,
-    setParams: ...,
-    setValidationJsonPath: ...,
-    setContent: ...,
-    event: ...,
-    eventValidationJsonPath: ...,
-    content: ...
-  };
+  method: ...,
+  params: ...,
+  validationJsonPath: ...,
+  setMethod: ...,
+  setParams: ...,
+  setValidationJsonPath: ...,
+  setContent: ...,
+  event: ...,
+  eventValidationJsonPath: ...,
+  content: ...
+};
 ```
 
 | **Param**               | **Definition**                                                                                            | **Example**                                   | **Supported Type**             |
