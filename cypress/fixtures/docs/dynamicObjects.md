@@ -124,8 +124,8 @@ runtime = {
 
 The example below shows how the `resolveAtRuntime` function works with input as an array of strings. The `resolveAtRuntime` function will loop through each string in the array and replace the pattern with the actual value from the `runtime` environment variable.
 
-```
-resolveAtRuntime(["result.{{attribute}}", "result.styles.{{attribute}}"])
+```javascript
+request: resolveAtRuntime(["result.{{attribute}}", "result.styles.{{attribute}}"])
 returns: ['result.fontSize', 'result.styles.fontSize']
 ```
 
@@ -133,8 +133,8 @@ returns: ['result.fontSize', 'result.styles.fontSize']
 
 When the input is a string with the pattern `{{attribute.uppercaseFirstChar}}`, the function will replace the pattern with the actual value from the `runtime` environment variable and convert the first character of the resolved value to uppercase.
 
-```
-resolveAtRuntime("manage_closedcaptions.set{{attribute.uppercaseFirstChar}}")
+```javascript
+request: resolveAtRuntime("manage_closedcaptions.set{{attribute.uppercaseFirstChar}}")
 returns: "manage_closedcaptions.setFontSize"
 ```
 
@@ -142,8 +142,8 @@ returns: "manage_closedcaptions.setFontSize"
 
 The `resolveAtRuntime` function will just return the value from the `runtime` environment variable when the input is a string without the pattern.
 
-```
-resolveAtRuntime("value")
+```javascript
+request: resolveAtRuntime("value")
 returns: 1.5
 ```
 
