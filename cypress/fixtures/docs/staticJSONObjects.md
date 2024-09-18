@@ -142,7 +142,7 @@ Validation object to validate the authentication token API response. `AUTHENTICA
 - Create a firebolt call object in `cypress/fixtures/fireboltCalls/accessibility.json` with the below content:
   ```json
   "GET_CLOSED_CAPTIONS_SETTINGS": {
-     "method": "accessibility.closedCaptionsSettings"
+    "method": "accessibility.closedCaptionsSettings"
   }
   ```
 - Use the key name `GET_CLOSED_CAPTIONS_SETTINGS` as is or convert it to `get closedCaptions settings` in the API call glue step in the feature file as shown below:
@@ -154,13 +154,13 @@ Validation object to validate the authentication token API response. `AUTHENTICA
 - Create a validation object in `cypress/fixtures/fireboltCalls/accessibility.json` with the below content:
   ```json
   "CLOSEDCAPTIONS_SETTINGS": {
-     "method": "accessibility.closedCaptionsSettings",
-     "validationJsonPath": "result.enabled",
-     "content": "FALSE"
+    "method": "accessibility.closedCaptionsSettings",
+    "validationJsonPath": "result.enabled",
+    "content": "FALSE"
   }
   ```
 - Use the key name `CLOSEDCAPTIONS_SETTINGS` as is or convert it to `closedCaptions settings` in the validation glue step in the feature file as shown below:
   ```
-     Then 'Firebolt' platform responds with 'closedCaptions settings'
+  Then 'Firebolt' platform responds with 'closedCaptions settings'
   ```
 - The glue code will look for the key name `CLOSEDCAPTIONS_SETTINGS` in the fireboltCalls JSON file and validate the response object with the content `FALSE`.

@@ -29,7 +29,7 @@ To use dynamic Firebolt objects, we need to use dynamic glue codes listed [here]
 - Firebolt objects can be added in JavaScript files located in the `cypress/fixtures/fireboltCalls` folder. Ex: `cypress/fixtures/fireboltCalls/accessibility.js`
 - Firebolt objects present in the config module will take priority if the same key is present in FCS.
 
-### A dynamic firebolt object
+### Below is the sample format of a dynamic firebolt object
 
 ```javascript
 FIREBOLT_CALL = {
@@ -86,7 +86,6 @@ Below are the runtime variables that are used by the FireboltCall object.
   - **String Input without Pattern**: If the string does not contain the '{{' pattern (e.g., `resolveAtRuntime("value")`), the function directly returns the value from the `runtime` environment variable.
   - **Array of Strings**: When an array of strings is provided, the function iterates over each string, replacing the patterns with the actual values from the `runtime` environment variable.
 
-- **Options:** The function has the support to accespts the optional parameter `uppercaseFirstChar` or `lowercaseFirstChar` to convert the first character of the resolved value to uppercase or lowercase. This parameter is separated by a dot from the attribute name. This parameter is used to convert the attribute value to the correct format for the method name. For example, `resolveAtRuntime('manage_closedcaptions.set{{attribute.uppercaseFirstChar}}')`.
 - **Options:** The function supports optional parameters `uppercaseFirstChar` or `lowercaseFirstChar` to convert the first character of the resolved value to uppercase or lowercase. This parameter is separated by a dot from the attribute name.
 
   - `uppercaseFirstChar`
