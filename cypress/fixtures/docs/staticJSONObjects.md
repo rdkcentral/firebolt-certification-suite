@@ -63,7 +63,7 @@ Creating a Firebolt call object to set the font family to monospaced sanserif. `
 ```json
 "SET_FONTFAMILY_TO_MONOSPACED_SANSERIF": {
   "method": "manage_closedcaptions.setFontFamily",
-	"params": "ACCESSIBILITY_FONTFAMILY_MONOSPACE"
+  "params": "ACCESSIBILITY_FONTFAMILY_MONOSPACE"
 }
 ```
 
@@ -105,9 +105,9 @@ Validation object to validate the account.id API response as '1234'.
 
 ```json
 "ACCOUNT_ID": {
-	"method": "account.id",
-	"validationJsonPath": "result",
-	"content": "1234"
+  "method": "account.id",
+  "validationJsonPath": "result",
+  "content": "1234"
 }
 ```
 
@@ -129,9 +129,9 @@ Validation object to validate the authentication token API response. `AUTHENTICA
 
 ```json
 "PLATFORM_AUTHENTICATION_TOKEN": {
-	"method": "authentication.token",
-	"validationJsonPath": "result",
-	"content": "AUTHENTICATION_DECODE_JWT_AUTHENTICATION_TOKEN"
+  "method": "authentication.token",
+  "validationJsonPath": "result",
+  "content": "AUTHENTICATION_DECODE_JWT_AUTHENTICATION_TOKEN"
 }
 ```
 
