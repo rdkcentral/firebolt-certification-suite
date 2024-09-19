@@ -9,16 +9,17 @@ Feature: Device
     Scenario Outline:Device.<Method> - Positive Scenario: <Scenario>
         Given we test the 'DEVICE' getters and setters '<Method>'
         When '3rd party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '3rd party app' get API
+        Then 'Firebolt' platform responds with '<Validation_Key>'
+
         Examples:
-            | Scenario                    | Method      |
-            | Validate Device id          | id          |
-            | Validate Device distributor | distributor |
-            | Validate Device uid         | uid         |
-            | Validate Device type        | type        |
-            | Validate Device model       | model       |
-            | Validate Device sku         | sku         |
-            | Validate Device make        | make        |
+            | Scenario                    | Method      | Validation_Key              |
+            | Validate Device id          | id          | expected device id          |
+            | Validate Device distributor | distributor | expected device distributor |
+            | Validate Device uid         | uid         | expected device uid         |
+            | Validate Device type        | type        | expected device type        |
+            | Validate Device model       | model       | expected device model       |
+            | Validate Device sku         | sku         | expected device sku         |
+            | Validate Device make        | make        | expected device make        |
 
     @sdk @transport
     Scenario: Device.platform - Positive Scenario: Validate device platform
@@ -39,7 +40,7 @@ Feature: Device
     Scenario Outline: Device.<Method> - Positive Scenario: <Scenario>
         Given we test the 'DEVICE' getters and setters '<Method>' to '{}'
         When '3rd party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '3rd party app' get API
+        Then 'Firebolt' platform responds with '<validation_key>'
 
         Examples:
             | Scenario                  | Method           | API_Key                | validation_key            |
