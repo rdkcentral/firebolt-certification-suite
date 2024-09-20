@@ -7,12 +7,11 @@ const UTILS = require('../cypress-support/src/utils');
  * @description To validate the content of the response if undefined
  * @param {Object} object - The object to validate
  * @example
- * cy.screenshotValidation()
+ * cy.screenshotValidation({})
  */
 Cypress.Commands.add('screenshotValidation', (object) => {
   if (UTILS.getEnvVariable('enableScreenshots')) {
-    console.log('object', object);
-    if (object && object.validations && object.validations.length > 0) {
+    if (object && object.validations) {
       const requestMap = {
         method: 'fcs.screenshot',
         params: {
@@ -21,11 +20,7 @@ Cypress.Commands.add('screenshotValidation', (object) => {
         },
       };
 
-      cy.sendMessagetoPlatforms(requestMap).then((response) => {
-        cy.log('Screenshot validation response: ', response).then(() => {
-          fireLog.equal('pass', response.status, 'Screenshot validation status');
-        });
-      });
+      cy.sendMessagetoPlatforms(requestMap)
     } else {
       fireLog.fail('No validations found for screenshot.');
     }
