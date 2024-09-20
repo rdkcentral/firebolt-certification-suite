@@ -52,8 +52,18 @@ exports.ACCOUNT_VARIABLES = {
 exports.ACCOUNT_ID_UID = {
   method: resolveAtRuntime('account.{{attribute}}'),
   params: null,
+};
+
+exports.ACCOUNT_ID = {
+  method: 'account.id',
   validationJsonPath: 'result',
-  content: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.ACCOUNT.{{attribute}}'),
+  content: this.ACCOUNT_VARIABLES.ACCOUNT.id,
+};
+
+exports.ACCOUNT_UID = {
+  method: 'account.uid',
+  validationJsonPath: 'result',
+  content: this.ACCOUNT_VARIABLES.ACCOUNT.uid,
 };
 
 exports.FETCH_ACCOUNT_ID_WHEN_DEVICE_IS_NOT_PROVISIONED = {

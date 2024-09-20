@@ -9,12 +9,11 @@ Feature: Account
    Scenario Outline: Account.<Method> - Positive Scenario: <Scenario>
       Given we test the 'ACCOUNT_ID_UID' getters and setters '<Method>'
       When '3rd party app' invokes the 'Firebolt' get API
-      Then 'Firebolt' platform responds to '3rd party app' get API
-
+      Then 'Firebolt' platform responds with '<Validation_key>'      
       Examples:
-         | Scenario             | Method |
-         | Validate account ID  | id     |
-         | Validate account UID | uid    |
+         | Scenario             | Method | Validation_key |
+         | Validate account ID  | id     | account id     | 
+         | Validate account UID | uid    | account uid    |
 
    @sdk @transport @notSupported @requiresPlatformImplementation
    Scenario Outline: Account.<method> - Negative Scenario: <Scenario>
