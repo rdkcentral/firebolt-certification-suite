@@ -15,15 +15,16 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-exports.NOT_SUPPORTED = {
-  type: 'schemaOnly',
-};
-exports.NOT_PERMITTED = {
-  type: 'schemaOnly',
-};
-exports.NOT_AVAILABLE = {
-  type: 'schemaOnly',
-};
-exports.INVALID_TYPE_PARAMS = {
-  type: 'schemaOnly',
+const accountVariables = require('./account');
+const deviceVariables = require('./device');
+const accessibilityVariables = require('./accessibility');
+const localizationVariables = require('./localization');
+
+exports.DYNAMIC_FB_CALL_VARIABLES = {
+  DEFAULTS: {
+    ...accountVariables.ACCOUNT_VARIABLES,
+    ...deviceVariables.DEVICE_VARIABLES,
+    ...localizationVariables.LOCALIZATION_VARIABLES,
+  },
+  ...accessibilityVariables.ACCESSIBILITY_VARIABLES,
 };

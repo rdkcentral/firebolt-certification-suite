@@ -30,7 +30,7 @@ import UTILS from '../cypress-support/src/utils';
 Given('the environment has been set up for {string} tests', (test) => {
   if (
     !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
-    CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES.includes(test) ||
+    UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
     UTILS.isTestTypeChanged(test)
   ) {
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
@@ -83,7 +83,9 @@ Given('the environment has been set up for {string} tests', (test) => {
  * destroyAppInstance('Parameters')
  */
 function destroyAppInstance(testType) {
-  const isAllowedTestType = CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES.includes(testType);
+  const isAllowedTestType = UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(
+    testType
+  );
   // Checking if the previous test type is different from the current test type.
   const isDifferentFromPrevious =
     UTILS.getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != testType &&
@@ -94,7 +96,7 @@ function destroyAppInstance(testType) {
     const responseTopic = UTILS.getTopic(null, CONSTANTS.SUBSCRIBE);
 
     // The test type is present in the unloading app test list, taking the reason as 'error'. This will unload the app.
-    const closeReason = CONSTANTS.UNLOADING_APP_TEST_TYPES.includes(testType)
+    const closeReason = UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(testType)
       ? CONSTANTS.ERROR
       : CONSTANTS.USER_EXIT_REASON;
 

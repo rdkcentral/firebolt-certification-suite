@@ -1,11 +1,11 @@
 # FireboltCallsGlue
 
-## 1st party app invokes the '(.+)' API to '(.+)'
+## 1st party app invokes the (?:'(.+)' )?API to '(.+)'
 
-### Purpose: send message to platform to make api call.
+### Purpose: Send a message to the platform to make an api call.
 
 ### Params:
-| Param | Definition |
+| **Param** | **Definition** |
 | --- | --- |
 | sdk | name of the sdk |
 | key | key name of the request data. |
@@ -20,7 +20,7 @@
 ### Purpose: send message to 3rd party app to make api call.
 
 ### Params:
-| Param | Definition |
+| **Param** | **Definition** |
 | --- | --- |
 | appId | 3rd party app id |
 | sdk | name of the sdk |
@@ -45,7 +45,7 @@
 ### Purpose: send message to 3rd party app to register the events.
 
 ### Params:
-| Param | Definition |
+| **Param** | **Definition** |
 | --- | --- |
 | appId | 3rd party app id |
 | sdk | name of the sdk |
@@ -60,7 +60,7 @@
 ### Purpose: send message to platform to register the events.
 
 ### Params:
-| Param | Definition |
+| **Param** | **Definition** |
 | --- | --- |
 | sdk | name of the sdk |
 | key | key name of the firebolt data contains method/param/context. |
@@ -73,12 +73,12 @@
 ### Purpose: sending message to platform/third party App to clear event listener.
 
 ### Params:
-| Param | Definition |
+| **Param** | **Definition** |
 | --- | --- |
 | sdk | key name of the data contains event name and required parameter. |
 
 Note: Key name value is an object and it can contains data as below
-| Field | Definition |
+| **Field** | **Definition** |
 | --- | --- |
 | event | name of the event |
 | firstParty | Ensure that the value is set to true when sending messages to the platform, otherwise, it should be set to false for third party app |
@@ -92,7 +92,7 @@ Note: Key name value is an object and it can contains data as below
 ### Purpose: sending message to platform to make post call to set event values.
 
 ### Params:
-| Param | Definition |
+| **Param** | **Definition** |
 | --- | --- |
 | key |  key name of the event data |
 
