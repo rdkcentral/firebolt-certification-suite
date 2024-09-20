@@ -1,3 +1,10 @@
+# [1.3.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.1...v1.3.0-dev.2) (2024-09-20)
+
+
+### Features
+
+* Enhance Setter/Getter Code to other test cases ([#200](https://github.com/rdkcentral/firebolt-certification-suite/issues/200)) ([9bdcd4d](https://github.com/rdkcentral/firebolt-certification-suite/commit/9bdcd4d415baf479620d47b289beb8004408c1de))
+
 # [1.3.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.1-dev.1...v1.3.0-dev.1) (2024-09-18)
 
 
