@@ -1033,7 +1033,7 @@ function fireboltCallObjectHasField(object, field, skipCheck = false) {
  * 1234
  * [[1280, 720], [1920, 1080], [3840, 2160]]
  */
- global.extractEnvValue = function (attribute) {
+global.extractEnvValue = function (attribute) {
   return function () {
     const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA);
     if (!deviceData) {
