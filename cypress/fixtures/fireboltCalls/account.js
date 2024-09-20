@@ -1,3 +1,20 @@
+/**
+ * Copyright 2024 Comcast Cable Communications Management, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 const errorContent = require('../objects/errorContentObjects.js');
 exports.ACCOUNT_VARIABLES = {
   ACCOUNT: {
@@ -65,6 +82,7 @@ exports.INVALID_PARAMETER_ERROR_FOR_ACCOUNT_UID = {
   expectingError: true,
 };
 
+// Dummy session token data
 exports.PUSH_SESSION_TOKEN = {
   method: 'manage_account.session',
   params: { token: 'SW52Y==', expiresIn: 84000 },
@@ -82,12 +100,14 @@ exports.SET_ACCOUNT_SESSION_WITH_INVALID_TOKEN = {
   expected: 'error',
 };
 
+// Dummy session token data
 exports.SET_ACCOUNT_SESSION_WITH_INVALID_EXPIRESIN = {
   method: 'manage_account.session',
   params: { token: 'SW52Y==', expiresIn: 'BJGHhjbdcJKSW' },
   expected: 'error',
 };
 
+// Dummy session token data
 exports.SET_ACCOUNT_SESSION_WITH_INVALID_EXPIRESIN_VALUE = {
   method: 'manage_account.session',
   params: { token: 'SW52Y==', expiresIn: 0 },
