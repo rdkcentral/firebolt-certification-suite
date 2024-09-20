@@ -36,7 +36,7 @@ Feature: Device
         Then 'Firebolt' platform responds to '1st party app' get API
         And 'Firebolt' platform triggers '1st party app' event
 
-    @mfos  @regression @sdk
+    @regression @sdk @transport
     Scenario Outline: Device.<Method> - Positive Scenario: <Scenario>
         Given we test the 'DEVICE' getters and setters '<Method>' to '{}'
         When '3rd party app' invokes the 'Firebolt' get API

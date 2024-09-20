@@ -15,7 +15,7 @@ Feature: Device_Manage
         Then 'Firebolt' platform responds to '1st party app' get API
         And 'Firebolt' platform triggers '1st party app' event
 
-    @sdk @transport @notSupported
+    @sdk @transport
     Scenario Outline: Device.provision - Positive Scenario: <Scenario>
         When 1st party app invokes the 'Firebolt' API to '<Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<MethodContent>'
@@ -25,7 +25,7 @@ Feature: Device_Manage
             | set device provision with default params | provision device with default values | default value for device provision  |
             | set device provision with distributor id | provision device with distributor id | distributor id for device provision |
 
-    @sdk @transport @notSupported
+    @sdk @transport
     Scenario: Device.provision - Positive Scenario: default params including device.id and account.id
         When 1st party app invokes the 'Firebolt' API to 'provision device with default values'
         And '3rd party app' invokes the 'Firebolt' API to 'get device id'
@@ -34,7 +34,7 @@ Feature: Device_Manage
         And 'Firebolt' platform responds with 'expected provision account id'
         And 'Firebolt' platform responds with 'default value for device provision'
 
-    @sdk @transport @notSupported
+    @sdk @transport
     Scenario: Device.provision - Positive Scenario: with distributor id including device.id account.id and device.distributor
         When '3rd party app' invokes the 'Firebolt' API to 'fetch device distributor'
         And 1st party app invokes the 'Firebolt' API to 'provision device with distributor id'

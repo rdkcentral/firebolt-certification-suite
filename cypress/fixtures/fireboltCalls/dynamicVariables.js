@@ -17,10 +17,14 @@
  */
 const accountVariables = require('./account');
 const deviceVariables = require('./device');
+const accessibilityVariables = require('./accessibility');
+const localizationVariables = require('./localization');
 
 exports.DYNAMIC_FB_CALL_VARIABLES = {
   DEFAULTS: {
     ...accountVariables.ACCOUNT_VARIABLES,
     ...deviceVariables.DEVICE_VARIABLES,
+    ...localizationVariables.LOCALIZATION_VARIABLES,
   },
+  ...accessibilityVariables.ACCESSIBILITY_VARIABLES,
 };

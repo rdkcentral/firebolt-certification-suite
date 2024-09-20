@@ -228,6 +228,18 @@ function getCommunicationMode() {
 }
 
 /**
+ * @module utils
+ * @function skipCurrentTest
+ * @description Skip the currently executing scenario
+ * @example
+ * skipCurrentTest()
+ */
+function skipCurrentTest() {
+  fireLog.info('The current test has been intentionally skipped by the test runner');
+  mocha.suite.ctx.test?.skip();
+}
+
+/**
  * @module main
  * @function extractModuleName
  * @description Parsing the module name from the dataIdentifier passed.
@@ -879,6 +891,7 @@ function parseValue(str) {
   if (typeof str === 'string') {
     if (str === 'true') return true;
     if (str === 'false') return false;
+    if (str === 'null') return null;
 
     if (!isNaN(str)) return Number(str);
 
@@ -960,46 +973,74 @@ global.resolveAtRuntime = function (input) {
       },
     };
 
-    // Function to check the occurence of the pattern and updating the actual value
-    function replacingPatternOccurenceWithValue(text) {
+    const runtimeEnv = getEnvVariable(CONSTANTS.RUNTIME);
+
+    // Function to check the occurrence of the pattern and updating the actual value
+    function replacingPatternOccurrenceWithValue(text) {
       return text.replace(/{{(.*?)}}/g, (match, pattern) => {
         let functionName;
 
-        // Separating the function name from the pattern, if it exists,.
+        // Separating the function name from the pattern, if it exists.
         if (pattern.includes('.')) {
-          functionName = pattern.split('.')[1];
-          pattern = pattern.split('.')[0];
+          [pattern, functionName] = pattern.split('.');
         }
 
         // If a function name is present in the pattern, call the function with pattern content as input.
         // Reading the pattern content from the runtime environment variable
-        if (functionName && functions.hasOwnProperty(functionName)) {
-          return functions[functionName](getEnvVariable('runtime')[pattern] || match);
-        } else {
-          return getEnvVariable('runtime')[pattern] || match;
-        }
+        const value = runtimeEnv[pattern] !== undefined ? runtimeEnv[pattern] : match;
+        return functionName && functions[functionName] ? functions[functionName](value) : value;
       });
     }
 
     if (typeof input === CONSTANTS.TYPE_STRING) {
-      // Returning the actual pattern content for each occurrence of "{{"
-      if (input.includes('{{')) {
-        return replacingPatternOccurenceWithValue(input);
-      }
-      // If input not having "{{", returning content from runtime environment variable.
-      else if (!input.includes('{{')) {
-        return getEnvVariable('runtime')[input] !== undefined
-          ? getEnvVariable('runtime')[input]
+      // Replace pattern content for each occurrence of "{{" from the runtime environment
+      const resolvedValue = input.includes('{{')
+        ? replacingPatternOccurrenceWithValue(input)
+        : runtimeEnv[input] !== undefined
+          ? runtimeEnv[input]
           : input;
+
+      // Check if the resolvedValue contains any item from the list
+      if (
+        resolvedValue &&
+        typeof resolvedValue === CONSTANTS.TYPE_STRING &&
+        Cypress.env(CONSTANTS.VARIABLES_PREFIX_LIST).some((item) => resolvedValue.includes(item))
+      ) {
+        const fireboltCallsData = getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS);
+        // Extract the prefix and the JSON path
+        const [prefix, ...pathParts] = resolvedValue.split('.');
+        const jsonPath = pathParts.join('.');
+
+        // Get the corresponding object based on the prefix
+        const variableObject = fireboltCallsData[prefix];
+
+        if (!variableObject) {
+          throw new Error(`Firebolt call object "${prefix}" not found in data.`);
+        }
+
+        // Resolve the value from the object using the JSON path
+        let value = variableObject;
+        for (const key of jsonPath.split('.')) {
+          if (value[key] !== undefined) {
+            value = value[key];
+          } else {
+            value = undefined; // Set value to undefined if the path is invalid
+            break;
+          }
+        }
+        if (value === undefined) {
+          throw new Error(`Path "${jsonPath}" not found in "${prefix}" object.`);
+        }
+
+        return resolveRecursiveValues(value);
+      } else {
+        return resolvedValue;
       }
     } else if (Array.isArray(input) && input.length > 0) {
       // input is an array; iterating through each element, it updates the actual value for that pattern if there is an occurrence of "{{".
-      return input.map((element) => {
-        if (element.includes('{{')) {
-          return replacingPatternOccurenceWithValue(element);
-        }
-        return element;
-      });
+      return input.map((element) =>
+        element.includes('{{') ? replacingPatternOccurrenceWithValue(element) : element
+      );
     } else {
       logger.info(`Passed input - ${input} must be an array or a string.`);
     }
@@ -1129,4 +1170,5 @@ module.exports = {
   resolveRecursiveValues,
   fireboltCallObjectHasField,
   fetchAppIdentifierFromEnv,
+  skipCurrentTest,
 };
