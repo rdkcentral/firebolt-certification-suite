@@ -86,6 +86,7 @@ const env = {
     'UserInterestProvider',
   ],
   fcaAppList: ['default3rdPartyAppId'],
+  variableObjectsPrefixLists: ['DYNAMIC_FB_CALL_VARIABLES'],
 };
 
 module.exports = {
