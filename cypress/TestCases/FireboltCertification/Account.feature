@@ -6,14 +6,14 @@ Feature: Account
       And 3rd party 'certification' app is launched
 
    @sdk @transport
-   Scenario Outline: Account.<method> - Positive Scenario: <Scenario>
-      When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-      Then 'Firebolt' platform responds with '<Validation_key>'
-
+   Scenario Outline: Account.<Method> - Positive Scenario: <Scenario>
+      Given we test the 'ACCOUNT_ID_UID' getters and setters '<Method>'
+      When '3rd party app' invokes the 'Firebolt' get API
+      Then 'Firebolt' platform responds with '<Validation_key>'      
       Examples:
-         | Scenario             | API_Key           | Validation_key | method |
-         | Validate account ID  | fetch account ID  | account id     | id     |
-         | Validate account UID | fetch account UID | account uid    | uid    |
+         | Scenario             | Method | Validation_key |
+         | Validate account ID  | id     | account id     | 
+         | Validate account UID | uid    | account uid    |
 
    @sdk @transport @notSupported @requiresPlatformImplementation
    Scenario Outline: Account.<method> - Negative Scenario: <Scenario>
@@ -24,5 +24,5 @@ Feature: Account
          | Scenario                              | API_Key                                           | Validation_key                          | method |
          | Account ID Device not provisioned     | fetch account ID when device is not provisioned   | invalid parameter error for account id  | id     |
          | Account UID Device not provisioned    | fetch account UID when device is not provisioned  | invalid parameter error for account uid | uid    |
-         | Account ID Account retrieval attempt  | fetch account ID when account is not provisioned  | invalid parameter error for account id  | id     |
-         | Account UID Account retrieval attempt | fetch account UID when account is not provisioned | invalid parameter error for account uid | uid    |
+         | Account ID Account retrieval attempt  | fetch account ID when device is not provisioned  | invalid parameter error for account id  | id     |
+         | Account UID Account retrieval attempt | fetch account UID when device is not provisioned | invalid parameter error for account uid | uid    |

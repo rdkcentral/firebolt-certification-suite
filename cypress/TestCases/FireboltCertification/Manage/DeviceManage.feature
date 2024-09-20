@@ -20,9 +20,9 @@ Feature: Device_Manage
         When 1st party app invokes the 'Firebolt' API to '<Key>'
         Then 'Firebolt' platform responds to '1st party app' with '<MethodContent>'
 
-            Examples:
+        Examples:
             | Scenario                                 | Key                                  | MethodContent                       |
-            | set device provision with default params | provision device with default values | default values for device provision |
+            | set device provision with default params | provision device with default values | default value for device provision  |
             | set device provision with distributor id | provision device with distributor id | distributor id for device provision |
 
     @sdk @transport
