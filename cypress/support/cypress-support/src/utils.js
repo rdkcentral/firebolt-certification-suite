@@ -1021,6 +1021,48 @@ function fireboltCallObjectHasField(object, field, skipCheck = false) {
     }
   }
 }
+/**
+ * @module utils
+ * @globalfunction extractEnvValue
+ * @description Extracts a value from environment variable or device data.
+ * @param {String} attribute - The value to extract from the environment variables or device data.
+ * @example
+ * extractEnvValue('DEVICEID')
+ * extractEnvValue('CYPRESSENV-defaultTestData-deviceResolution')
+ * @returns
+ * 1234
+ * [[1280, 720], [1920, 1080], [3840, 2160]]
+ */
+ global.extractEnvValue = function (attribute) {
+  return function () {
+    const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA);
+    if (!deviceData) {
+      logger.info('deviceData environment variable is not found');
+    }
+
+    if (/CYPRESSENV/.test(attribute)) {
+      const parts = attribute.split('-').slice(1);
+      let envValue;
+
+      if (parts.length > 1) {
+        const objectName = parts[0];
+        const propertyName = parts[1];
+        envValue = Cypress.env(objectName) ? Cypress.env(objectName)[propertyName] : undefined;
+      } else {
+        const envKey = parts[0];
+        envValue = Cypress.env(envKey);
+      }
+
+      if (envValue !== undefined) {
+        attribute = envValue;
+      } else {
+        logger.info(`Cypress env variable '${attribute}' does not exist`);
+      }
+    }
+
+    return deviceData?.[attribute] ?? attribute;
+  };
+};
 
 /**
  * @module utils
