@@ -52,7 +52,7 @@ exports.ONCLOSEREQUEST_TYPE_DIAL = {
   type: 'dial',
   version: '1.7',
 };
-exports.DYNAMIC_FB_CALL_VARIABLES = {
+exports.SECONDSCREEN_VARIABLES = {
   SECONDSCREEN: {
     test: {
       type: 'test',
@@ -189,13 +189,13 @@ exports.SECONDSCREEN_ONLAUNCHREQUEST_EVENT = {
   event: 'secondscreen.onLaunchRequest',
   validationJsonPath: 'eventResponse',
   content:
-    this.DYNAMIC_FB_CALL_VARIABLES.SECONDSCREEN_CONTENT
+    this.SECONDSCREEN_VARIABLES.SECONDSCREEN_CONTENT
       .SECONDSCREEN_ONLAUNCHREQUEST_TYPE_DIAL_WITH_TEST_DATA,
 };
 exports.SECONDSCREEN_ONCLOSEREQUEST_EVENT = {
   event: 'secondscreen.onCloseRequest',
   validationJsonPath: 'eventResponse',
-  content: this.DYNAMIC_FB_CALL_VARIABLES.SECONDSCREEN_CONTENT.SECONDSCREEN_ONCLOSEREQUEST,
+  content: this.SECONDSCREEN_VARIABLES.SECONDSCREEN_CONTENT.SECONDSCREEN_ONCLOSEREQUEST,
 };
 exports.ONLAUNCHREQUEST_EVENT = {
   method: 'secondscreen.onLaunchRequest',
