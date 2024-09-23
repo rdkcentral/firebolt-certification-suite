@@ -917,11 +917,13 @@ function parseValue(str) {
  * [[1280, 720], [1920, 1080], [3840, 2160]]
  */
 global.extractEnvValue = function (attribute) {
+  // Get the device data from env variable
   const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA);
   if (!deviceData) {
     logger.info('deviceData environment variable is not found');
   }
 
+  // If the attribute starts with 'CYPRESSENV', extract nested property from env variable.
   if (/CYPRESSENV/.test(attribute)) {
     const parts = attribute.split('-').slice(1);
     let envValue;
@@ -941,7 +943,7 @@ global.extractEnvValue = function (attribute) {
       logger.info(`Cypress env variable '${attribute}' does not exist`);
     }
   }
-
+  // Return the extracted value from device data or environment variable
   return deviceData?.[attribute] ?? attribute;
 };
 
