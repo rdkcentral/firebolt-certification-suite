@@ -917,34 +917,34 @@ function parseValue(str) {
  * [[1280, 720], [1920, 1080], [3840, 2160]]
  */
 global.extractEnvValue = function (attribute) {
-  return function () {
-    const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA);
-    if (!deviceData) {
-      logger.info('deviceData environment variable is not found');
+  // Get the device data from env variable
+  const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA);
+  if (!deviceData) {
+    logger.info('deviceData environment variable is not found');
+  }
+
+  // If the attribute starts with 'CYPRESSENV', extract nested property from env variable.
+  if (/CYPRESSENV/.test(attribute)) {
+    const parts = attribute.split('-').slice(1);
+    let envValue;
+
+    if (parts.length > 1) {
+      const objectName = parts[0];
+      const propertyName = parts[1];
+      envValue = Cypress.env(objectName) ? Cypress.env(objectName)[propertyName] : undefined;
+    } else {
+      const envKey = parts[0];
+      envValue = Cypress.env(envKey);
     }
 
-    if (/CYPRESSENV/.test(attribute)) {
-      const parts = attribute.split('-').slice(1);
-      let envValue;
-
-      if (parts.length > 1) {
-        const objectName = parts[0];
-        const propertyName = parts[1];
-        envValue = Cypress.env(objectName) ? Cypress.env(objectName)[propertyName] : undefined;
-      } else {
-        const envKey = parts[0];
-        envValue = Cypress.env(envKey);
-      }
-
-      if (envValue !== undefined) {
-        attribute = envValue;
-      } else {
-        logger.info(`Cypress env variable '${attribute}' does not exist`);
-      }
+    if (envValue !== undefined) {
+      attribute = envValue;
+    } else {
+      logger.info(`Cypress env variable '${attribute}' does not exist`);
     }
-
-    return deviceData?.[attribute] ?? attribute;
-  };
+  }
+  // Return the extracted value from device data or environment variable
+  return deviceData?.[attribute] ?? attribute;
 };
 
 /**
