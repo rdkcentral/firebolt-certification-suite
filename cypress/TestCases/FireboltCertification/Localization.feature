@@ -5,13 +5,13 @@ Feature: Localization
         Given the environment has been set up for 'Localization' tests
         And 3rd party 'certification' app is launched
 
-    @sdk @transport
-    Scenario: Localization.additionalInfo - Positive Scenario: Get additional info
+    @sdk @transport @Sev2
+    Scenario: Get additional Localization info:
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         Then 'Firebolt' platform responds with 'expected localization additionalInfo'
 
-    @sdk @transport
-    Scenario Outline: Localization.addAdditionalInfo - Positive Scenario: <Scenario>
+    @sdk @transport @Sev2
+    Scenario Outline: Adding <Scenario> for localization additional info:
         Given '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
@@ -19,12 +19,12 @@ Feature: Localization
         Then 'Firebolt' platform responds with '<Validation_Key>'
 
         Examples:
-            | Scenario                           | API_Key                                              | Validation_Key                               |
-            | with key and value as string       | set localization addAdditionalInfo with string       | string for localization additionalInfo       |
-            | with key and value as empty string | set localization addAdditionalInfo with empty string | empty string for localization additionalInfo |
+            | Scenario                      | API_Key                                              | Validation_Key                               |
+            | string as key and value       | set localization addAdditionalInfo with string       | string for localization additionalInfo       |
+            | empty string as key and value | set localization addAdditionalInfo with empty string | empty string for localization additionalInfo |
 
-    @sdk @transport
-    Scenario Outline: Localization.removeAdditionalInfo - Positive Scenario: <Scenario>
+    @sdk @transport @Sev2
+    Scenario Outline: Removing <Scenario> from localization additional info:
         Given '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
@@ -32,17 +32,17 @@ Feature: Localization
         Then 'Firebolt' platform responds with '<Validation_Key>'
 
         Examples:
-            | Scenario                           | API_Key                                                 | Validation_Key                                  |
-            | with key and value as string       | set localization removeAdditionalInfo with string       | empty key value for localization additionalInfo |
-            | with key and value as empty string | set localization removeAdditionalInfo with empty string | empty response for localization additionalInfo  |
+            | Scenario                       | API_Key                                                 | Validation_Key                                  |
+            | string as key and value        | set localization removeAdditionalInfo with string       | empty key/value for localization additionalInfo |
+            | empty string as key and value  | set localization removeAdditionalInfo with empty string | empty response for localization additionalInfo  |
 
-    @sdk @transport
-    Scenario: Localization.latlon - Positive Scenario: Get latlon
+    @sdk @transport @Sev2
+    Scenario: Get Latitude and Longitude localization info:
         When '3rd party app' invokes the 'Firebolt' API to 'get localization latlon'
         Then 'Firebolt' platform responds with 'expected localization latlon'
 
-    @sdk @transport
-    Scenario Outline: Positive Scenario: Validate interlinked methods - <Methods>
+    @sdk @transport @Sev0
+    Scenario Outline: Validating <Methods> :
         Given '3rd party app' registers for the '<First_Event_Registration_Key>' event using the 'Firebolt' API
         And '3rd party app' registers for the '<Second_Event_Registration_Key>' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to '<First_Get_API_Key>'
@@ -56,12 +56,12 @@ Feature: Localization
         And 'Firebolt' platform triggers event '<Second_Event_Validation_Key>'
 
         Examples:
-            | Methods                                          | First_Event_Registration_Key | Second_Event_Registration_Key     | Set_API_Key        | First_Get_API_Key       | Second_Get_API_Key           | First_Method_Validation_Key  | Second_Method_Validation_Key    | First_Event_Validation_Key                 | Second_Event_Validation_Key                   |
-            | Localization.locale and Localization.countrycode | localization onLocaleChanged | localization onCountryCodeChanged | set locale to enUK | get localization locale | get localization countrycode | enUK for localization locale | UK for localization countrycode | onlocalechanged for localization with enUK | oncountrycodechanged for localization with UK |
-            | Localization.locale and Localization.language    | localization onLocaleChanged | localization onLanguageChanged    | set locale to esUK | get localization locale | get localization language    | esUK for localization locale | es for localization language    | onlocalechanged for localization with esUK | onlanguagechanged for localization with es    |
+            | Methods                                          | First_Event_Registration_Key      | Second_Event_Registration_Key   | Set_API_Key        | First_Get_API_Key            | Second_Get_API_Key         | First_Method_Validation_Key     | Second_Method_Validation_Key    | First_Event_Validation_Key                      | Second_Event_Validation_Key                   |
+            | Localization.locale and Localization.countrycode | localization onCountryCodeChanged | localization onLocaleChanged    | set language to en | get localization countrycode | get localization locale    | UK for localization countrycode | enUK for localization locale    | oncountrycodechanged for localization with UK   | onlocalechanged for localization with UK      |
+            | Localization.locale and Localization.language    | localization onLanguageChanged    | localization onLocaleChanged    | set language to es | get localization language    | get localization locale    | es for localization language    | esUK for localization locale    | onlanguagechanged for localization with es      | onlocalechanged for localization with esUK    |
 
     @sdk @transport
-    Scenario Outline: Localization.<Method> - Positive Scenario: Validate <Scenario>
+    Scenario Outline: Validating <Scenario> :
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
@@ -71,19 +71,35 @@ Feature: Localization
         Then 'Firebolt' platform responds to '3rd party app' get API
         And 'Firebolt' platform triggers '3rd party app' event
 
+        @Sev0
         Examples:
-            | Scenario                                   | Method                  | Value      |
-            | Set & get locality                         | locality                | washington |
-            | Set & get countrycode                      | countryCode             | PH         |
-            | Set & get locale                           | locale                  | enUK       |
-            | Set & get Language es                      | language                | es         |
-            | Set & get Language en                      | language                | en         |
-            | Set & get preferredAudioLanguages(spa-eng) | preferredAudioLanguages | spa,eng    |
-            | Set & get preferredAudioLanguages(eng-spa) | preferredAudioLanguages | eng,spa    |
-            | Set & get PostalCode                       | postalCode              | 12345      |
+            | Scenario                                             | Method                  | Value      |
+            | Setters & getters - locale                           | locale                  | enUK       |
+            | Setters & getters - Language es                      | language                | es         |
+            | Setters & getters - Language en                      | language                | en         |
 
-    @regression @sdk @requiresPlatformImplementation
-    Scenario Outline: Localization.<Method_Name> - Positive Scenario: Clearing event listeners
+    @sdk @transport
+    Scenario Outline: Validating <Scenario> :
+        Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
+        And '3rd party app' registers for the 'Firebolt' event
+        And '3rd party app' invokes the 'Firebolt' get API
+        When 1st party app invokes the 'Firebolt' API to set value
+        Then 'Firebolt' platform responds to '1st party app' set API
+        When '3rd party app' invokes the 'Firebolt' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
+        And 'Firebolt' platform triggers '3rd party app' event
+
+        @Sev1
+        Examples:
+            | Scenario                                             | Method                  | Value      |
+            | Setters & getters - locality                         | locality                | washington |
+            | Setters & getters - countrycode                      | countryCode             | PH         |
+            | Setters & getters - preferredAudioLanguages(spa-eng) | preferredAudioLanguages | spa,eng    |
+            | Setters & getters - preferredAudioLanguages(eng-spa) | preferredAudioLanguages | eng,spa    |
+            | Setters & getters - PostalCode                       | postalCode              | 12345      |
+
+    @regression @sdk @requiresPlatformImplementation @Sev2
+    Scenario Outline: Clearing event listeners for Localization.<Method_Name> :
         Given '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
         And 3rd party stops listening to the event '<Clear_Event_Name>'
         When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
