@@ -37,8 +37,7 @@ Feature: Device
 
     @regression @sdk @transport
     Scenario Outline: Device.<Method> - Positive Scenario: <Scenario>
-        Given we test the 'DEVICE' getters and setters '<Method>' to '{}'
-        When '3rd party app' invokes the 'Firebolt' get API
+        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<validation_key>'
 
         Examples:

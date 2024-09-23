@@ -291,6 +291,42 @@ exports.FETCH_DEVICE_MAKE = {
   params: {},
 };
 
+exports.FETCH_DEVICE_VERSION = {
+  method: 'device.version',
+  params: {},
+};
+
+exports.FETCH_HDCP = {
+  method: 'device.hdcp',
+  params: {},
+};
+
+exports.FETCH_HDR = {
+  method: 'device.hdr',
+  params: {},
+};
+
+exports.FETCH_SCREENRESOLUTION = {
+  method: 'device.screenResolution',
+  params: {},
+};
+
+exports.FETCH_VIDEORESOLUTION = {
+  method: 'device.videoResolution',
+  params: {},
+};
+
+exports.FETCH_AUDIO = {
+  method: 'device.audio',
+  params: {},
+};
+
+exports.EXPECTED_DEVICE_VERSION = {
+  method: 'device.version',
+  validationJsonPath: 'result',
+  content: this.DEVICE_VARIABLES.DEVICE.version,
+};
+
 exports.EXPECTED_DEVICE_ID = {
   method: 'device.id',
   validationJsonPath: 'result',
