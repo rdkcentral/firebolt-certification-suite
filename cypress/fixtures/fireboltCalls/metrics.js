@@ -44,6 +44,109 @@ exports.METRICS_MANAGE = {
   content: null,
 };
 
+exports.METRICS_VARIABLES = {
+  foo_data_and_schema: {
+    schema: 'http://meta.rdkcentral.com/some/schema',
+    data: {
+      foo: 'foo',
+    },
+  },
+  null_foo_data_and_schema: {
+    schema: 'http://meta.rdkcentral.com/some/schema',
+    data: {
+      foo: null,
+    },
+  },
+  boolean_foo_data_and_schema: {
+    schema: 'http://meta.rdkcentral.com/some/schema',
+    data: {
+      foo: true,
+    },
+  },
+  empty_data_object: {
+    schema: 'http://meta.rdkcentral.com/some/schema',
+    data: {},
+  },
+  emptyObject: {},
+  entityId: { entityId: '345' },
+  pageId: { pageId: 'home' },
+  userMetrics: { category: 'user', type: 'The user did foo' },
+  appMetrics: { category: 'app', type: 'The user did foo' },
+  parametersMetrics_as_string: {
+    category: 'app',
+    type: 'The user did foo',
+    parameters: { value: 'test' },
+  },
+  parametersMetrics_as_boolean: {
+    category: 'app',
+    type: 'The user did foo',
+    parameters: { value: true },
+  },
+  parametersMetrics_as_number: {
+    category: 'app',
+    type: 'The user did foo',
+    parameters: { value: 123 },
+  },
+  parametersMetrics: {
+    category: 'app',
+    type: 'The user did foo',
+    parameters: {
+      appname: 'testing',
+      env: 'prod',
+      filter: false,
+      'in-home': true,
+      totalDuration: 6600,
+    },
+  },
+  mediaStalled: {
+    type: 'media',
+    code: 'MEDIA-STALLED',
+    description: 'playback stalled',
+    visible: true,
+  },
+  mediaStalled_parameter: {
+    type: 'media',
+    code: 'MEDIA-STALLED',
+    description: 'playback stalled',
+    visible: true,
+    parameters: {
+      appname: 'testing',
+      env: 'prod',
+      filter: false,
+      'in-home': true,
+      totalDuration: 6600,
+    },
+  },
+  mediaStalled_parameter_as_number: {
+    type: 'media',
+    code: 'MEDIA-STALLED',
+    description: 'playback stalled',
+    visible: true,
+    parameters: { value: 123 },
+  },
+  mediaStalled_parameter_as_boolean: {
+    type: 'media',
+    code: 'MEDIA-STALLED',
+    description: 'playback stalled',
+    visible: true,
+    parameters: { value: true },
+  },
+  mediaStalled_parameter_as_string: {
+    type: 'media',
+    code: 'MEDIA-STALLED',
+    description: 'playback stalled',
+    visible: true,
+    parameters: { value: 'test' },
+  },
+  mediaWaiting_entityId: { entityId: '1234' },
+  mediaProgress: { entityId: '345', progress: 0.75 },
+  mediaSeeking: { entityId: '345', target: 0.5 },
+  mediaSeeked: { entityId: '345', position: 0.51 },
+  playbackRate: { entityId: '345', rate: 2 },
+  bitrateProfile: { entityId: '345', bitrate: 5000, width: 1920, height: 1080, profile: 'HDR+' },
+  appBuild: { build: '1.2.2' },
+};
+
 exports.NOTIFY_THAT_CONTENT_HAS_STARTED = {
   method: 'metrics.startContent',
   params: {},
@@ -283,108 +386,6 @@ exports.NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED_PARAMETER_AS_NUMBER = {
   params: this.METRICS_VARIABLES.mediaStalled_parameter_as_number,
 };
 
-exports.METRICS_VARIABLES = {
-  foo_data_and_schema: {
-    schema: 'http://meta.rdkcentral.com/some/schema',
-    data: {
-      foo: 'foo',
-    },
-  },
-  null_foo_data_and_schema: {
-    schema: 'http://meta.rdkcentral.com/some/schema',
-    data: {
-      foo: null,
-    },
-  },
-  boolean_foo_data_and_schema: {
-    schema: 'http://meta.rdkcentral.com/some/schema',
-    data: {
-      foo: true,
-    },
-  },
-  empty_data_object: {
-    schema: 'http://meta.rdkcentral.com/some/schema',
-    data: {},
-  },
-  emptyObject: {},
-  entityId: { entityId: '345' },
-  pageId: { pageId: 'home' },
-  userMetrics: { category: 'user', type: 'The user did foo' },
-  appMetrics: { category: 'app', type: 'The user did foo' },
-  parametersMetrics_as_string: {
-    category: 'app',
-    type: 'The user did foo',
-    parameters: { value: 'test' },
-  },
-  parametersMetrics_as_boolean: {
-    category: 'app',
-    type: 'The user did foo',
-    parameters: { value: true },
-  },
-  parametersMetrics_as_number: {
-    category: 'app',
-    type: 'The user did foo',
-    parameters: { value: 123 },
-  },
-  parametersMetrics: {
-    category: 'app',
-    type: 'The user did foo',
-    parameters: {
-      appname: 'testing',
-      env: 'prod',
-      filter: false,
-      'in-home': true,
-      totalDuration: 6600,
-    },
-  },
-  mediaStalled: {
-    type: 'media',
-    code: 'MEDIA-STALLED',
-    description: 'playback stalled',
-    visible: true,
-  },
-  mediaStalled_parameter: {
-    type: 'media',
-    code: 'MEDIA-STALLED',
-    description: 'playback stalled',
-    visible: true,
-    parameters: {
-      appname: 'testing',
-      env: 'prod',
-      filter: false,
-      'in-home': true,
-      totalDuration: 6600,
-    },
-  },
-  mediaStalled_parameter_as_number: {
-    type: 'media',
-    code: 'MEDIA-STALLED',
-    description: 'playback stalled',
-    visible: true,
-    parameters: { value: 123 },
-  },
-  mediaStalled_parameter_as_boolean: {
-    type: 'media',
-    code: 'MEDIA-STALLED',
-    description: 'playback stalled',
-    visible: true,
-    parameters: { value: true },
-  },
-  mediaStalled_parameter_as_string: {
-    type: 'media',
-    code: 'MEDIA-STALLED',
-    description: 'playback stalled',
-    visible: true,
-    parameters: { value: 'test' },
-  },
-  mediaWaiting_entityId: { entityId: '1234' },
-  mediaProgress: { entityId: '345', progress: 0.75 },
-  mediaSeeking: { entityId: '345', target: 0.5 },
-  mediaSeeked: { entityId: '345', position: 0.51 },
-  playbackRate: { entityId: '345', rate: 2 },
-  bitrateProfile: { entityId: '345', bitrate: 5000, width: 1920, height: 1080, profile: 'HDR+' },
-  appBuild: { build: '1.2.2' },
-};
 exports.INTERNAL_INITIALIZATION = {
   version: {
     major: 0,
