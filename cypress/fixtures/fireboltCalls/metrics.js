@@ -44,6 +44,245 @@ exports.METRICS_MANAGE = {
   content: null,
 };
 
+exports.NOTIFY_THAT_CONTENT_HAS_STARTED = {
+  method: 'metrics.startContent',
+  params: {},
+};
+
+exports.NOTIFY_THAT_CONTENT_HAS_STOPPED = {
+  method: 'metrics.stopContent',
+  params: {},
+};
+
+exports.TRUE_FOR_STARTCONTENT_IN_METRICS = {
+  method: 'metrics.startContent',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_STOPCONTENT_IN_METRICS = {
+  method: 'metrics.stopContent',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_PAGE_IN_METRICS = {
+  method: 'metrics.page',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_ACTION_IN_METRICS = {
+  method: 'metrics.action',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_ERROR_IN_METRICS = {
+  method: 'metrics.error',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_MEDIALOADSTART_IN_METRICS = {
+  method: 'metrics.mediaLoadStart',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_MEDIAPLAY_IN_METRICS = {
+  method: 'metrics.mediaPlay',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_MEDIAPLAYING_IN_METRICS = {
+  method: 'metrics.mediaPlaying',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_MEDIAPAUSE_IN_METRICS = {
+  method: 'metrics.mediaPause',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_MEDIAWAITING_IN_METRICS = {
+  method: 'metrics.mediaWaiting',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_MEDIAPROGRESS_IN_METRICS = {
+  method: 'metrics.mediaProgress',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_MEDIASEEKING_IN_METRICS = {
+  method: 'metrics.mediaSeeking',
+  validationJsonPath: 'result',
+  content: true,
+};
+exports.TRUE_FOR_MEDIASEEKED_IN_METRICS = {
+  method: 'metrics.mediaSeeked',
+  validationJsonPath: 'result',
+  content: true,
+};
+exports.TRUE_FOR_MEDIARATECHANGE_IN_METRICS = {
+  method: 'metrics.mediaRateChange',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_MEDIARENDITIONCHANGE_IN_METRICS = {
+  method: 'metrics.mediaRenditionChange',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.TRUE_FOR_MEDIAENDED_IN_METRICS = {
+  method: 'metrics.mediaEnded',
+  validationJsonPath: 'result',
+  content: true,
+};
+
+exports.NOTIFY_THAT_CONTENT_HAS_STARTED_WITH_ENTITYID = {
+  method: 'metrics.startContent',
+  params: this.METRICS_VARIABLES.entityId,
+};
+
+exports.NOTIFY_THAT_CONTENT_HAS_STOPPED_WITH_ENTITYID = {
+  method: 'metrics.stopContent',
+  params: this.METRICS_VARIABLES.entityId,
+};
+
+exports.NOTIFY_THAT_PAGE_HAS_NAVIGATED_WITH_PAGEID = {
+  method: 'metrics.page',
+  params: this.METRICS_VARIABLES.pageId,
+};
+
+exports.NOTIFY_ABOUT_ACTION_WITH_USERMETRICS = {
+  method: 'metrics.action',
+  params: this.METRICS_VARIABLES.userMetrics,
+};
+
+exports.NOTIFY_ABOUT_ACTION_WITH_APPMETRICS = {
+  method: 'metrics.action',
+  params: this.METRICS_VARIABLES.appMetrics,
+};
+
+exports.NOTIFY_ABOUT_ACTION_WITH_PARAMETERSMETRICS = {
+  method: 'metrics.action',
+  params: this.METRICS_VARIABLES.parametersMetrics,
+};
+
+exports.NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED = {
+  method: 'metrics.error',
+  params: this.METRICS_VARIABLES.mediaStalled,
+};
+
+exports.NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED = {
+  method: 'metrics.error',
+  params: this.METRICS_VARIABLES.mediaStalled,
+};
+
+exports.INFER_LOAD_TIME_WITH_ENTITYID = {
+  method: 'metrics.mediaLoadStart',
+  params: this.METRICS_VARIABLES.entityId,
+};
+
+exports.START_PLAYBACK_WITH_ENTITYID = {
+  method: 'metrics.mediaPlay',
+  params: this.METRICS_VARIABLES.entityId,
+};
+
+exports.NOTIFY_THAT_PLAYBACK_HAS_STARTED_WITH_ENTITYID = {
+  method: 'metrics.mediaPlaying',
+  params: this.METRICS_VARIABLES.entityId,
+};
+
+exports.NOTIFY_THAT_PLAYBACK_HAS_PAUSED_WITH_ENTITYID = {
+  method: 'metrics.mediaPause',
+  params: this.METRICS_VARIABLES.entityId,
+};
+
+exports.NOTIFY_THAT_PLAYBACK_HAS_HALTED_WITH_ENTITYID = {
+  method: 'metrics.mediaWaiting',
+  params: this.METRICS_VARIABLES.mediaWaiting_entityId,
+};
+
+exports.NOTIFY_THAT_PLAYBACK_IS_PROGRESSING_WITH_MEDIAPOSITION = {
+  method: 'metrics.mediaProgress',
+  params: this.METRICS_VARIABLES.mediaProgress,
+};
+
+exports.NOTIFY_THAT_PLAYBACK_SEEK_IS_INITIATED_WITH_MEDIAPOSITION = {
+  method: 'metrics.mediaSeeking',
+  params: this.METRICS_VARIABLES.mediaSeeking,
+};
+
+exports.NOTIFY_THAT_PLAYBACK_SEEK_IS_COMPLETED_WITH_MEDIAPOSITION = {
+  method: 'metrics.mediaSeeked',
+  params: this.METRICS_VARIABLES.mediaSeeked,
+};
+
+exports.NOTIFY_THAT_PLAYBACK_RATE_IS_CHANGED_WITH_PLAYBACKRATE = {
+  method: 'metrics.mediaRateChange',
+  params: this.METRICS_VARIABLES.playbackRate,
+};
+
+exports.NOTIFY_THAT_PLAYBACK_RENDITION_IS_CHANGED_WITH_BITRATEPROFILE = {
+  method: 'metrics.mediaRenditionChange',
+  params: this.METRICS_VARIABLES.bitrateProfile,
+};
+
+exports.NOTIFY_THAT_PLAYBACK_HAS_STOPPED_WITH_ENTITYID = {
+  method: 'metrics.mediaEnded',
+  params: this.METRICS_VARIABLES.entityId,
+};
+
+exports.NOTIFY_ABOUT_ACTION_WITH_PARAMETERSMETRICS_AS_STRING = {
+  method: 'metrics.action',
+  params: this.METRICS_VARIABLES.parametersMetrics_as_string,
+};
+
+exports.NOTIFY_ABOUT_ACTION_WITH_PARAMETERSMETRICS_AS_BOOLEAN = {
+  method: 'metrics.action',
+  params: this.METRICS_VARIABLES.parametersMetrics_as_boolean,
+};
+
+exports.NOTIFY_ABOUT_ACTION_WITH_PARAMETERSMETRICS_AS_NUMBER = {
+  method: 'metrics.action',
+  params: this.METRICS_VARIABLES.parametersMetrics_as_number,
+};
+
+exports.NOTIFY_ABOUT_ACTION_WITH_PARAMETERSMETRICS = {
+  method: 'metrics.action',
+  params: this.METRICS_VARIABLES.parametersMetrics,
+};
+
+exports.NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED_PARAMETER = {
+  method: 'metrics.error',
+  params: this.METRICS_VARIABLES.mediaStalled_parameter,
+};
+
+exports.NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED_PARAMETER_AS_STRING = {
+  method: 'metrics.error',
+  params: this.METRICS_VARIABLES.mediaStalled_parameter_as_string,
+};
+
+exports.NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED_PARAMETER_AS_BOOLEAN = {
+  method: 'metrics.error',
+  params: this.METRICS_VARIABLES.mediaStalled_parameter_as_boolean,
+};
+
+exports.NOTIFY_THAT_ERROR_HAS_OCCURED_WITH_MEDIASTALLED_PARAMETER_AS_NUMBER = {
+  method: 'metrics.error',
+  params: this.METRICS_VARIABLES.mediaStalled_parameter_as_number,
+};
+
 exports.METRICS_VARIABLES = {
   foo_data_and_schema: {
     schema: 'http://meta.rdkcentral.com/some/schema',
