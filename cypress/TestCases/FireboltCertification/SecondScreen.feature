@@ -7,15 +7,15 @@ Feature: SecondScreen
 
    @sdk @transport
    Scenario Outline: SecondScreen.<Method> - Positive Scenario: <Scenario>
-      Given we test the 'SECONDSCREEN' getters and setters '<Method>' to '<Value>'
-      When '3rd party app' invokes the 'Firebolt' get API
-      Then 'Firebolt' platform responds to '3rd party app' get API
+      When '3rd party app' invokes the 'Firebolt' API to '<API_key>'
+      Then 'Firebolt' platform responds with '<Validation_key>'      
+
 
       Examples:
-         | Scenario                                    | Method    | Value      |
-         | Validate passing device with empty array    | device    | emptyArray |
-         | Validate passing device with string         | device    | test       |
-         | Validate passing protocols with empty array | protocols | emptyArray |
+         | Scenario                                    | Method    | Value      | API_key                                  |  Validation_key                 |    
+         | Validate passing device with empty array    | device    | emptyArray | get secondscreen device with empty array | expected secondscreen device    |
+         | Validate passing device with string         | device    | test       | get secondscreen device with string      | expected secondscreen device    |
+         | Validate passing protocols with empty array | protocols | emptyArray | get secondscreen protocols               | expected secondscreen protocols |
 
    @sdk @transport
    Scenario Outline: SecondScreen.device - Negative Scenario: <Scenario> expecting error

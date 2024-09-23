@@ -49,11 +49,6 @@ exports.ACCOUNT_VARIABLES = {
   },
 };
 
-exports.ACCOUNT_ID_UID = {
-  method: resolveAtRuntime('account.{{attribute}}'),
-  params: null,
-};
-
 exports.ACCOUNT_ID = {
   method: 'account.id',
   validationJsonPath: 'result',
@@ -64,6 +59,16 @@ exports.ACCOUNT_UID = {
   method: 'account.uid',
   validationJsonPath: 'result',
   content: this.ACCOUNT_VARIABLES.ACCOUNT.uid,
+};
+
+exports.FETCH_ACCOUNT_ID = {
+  method: 'account.id',
+  params: {},
+};
+
+exports.FETCH_ACCOUNT_UID = {
+  method: 'account.uid',
+  params: {},
 };
 
 exports.FETCH_ACCOUNT_ID_WHEN_DEVICE_IS_NOT_PROVISIONED = {

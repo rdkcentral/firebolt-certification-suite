@@ -128,6 +128,34 @@ exports.SECONDSCREEN = {
   content: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.SECONDSCREEN_CONTENT.{{attribute}}'),
 };
 
+exports.GET_SECONDSCREEN_DEVICE_WITH_EMPTY_ARRAY = {
+  method: 'secondscreen.device',
+  params: [],
+};
+
+exports.GET_SECONDSCREEN_DEVICE_WITH_STRING = {
+  method: 'secondscreen.device',
+  params: {value: "test"},
+};
+
+exports.GET_SECONDSCREEN_PROTOCOLS = {
+  method: 'secondscreen.protocols',
+  params: [],
+};
+
+exports.EXPECTED_SECONDSCREEN_DEVICE = {
+  method: 'secondscreen.device',
+  validationJsonPath: 'result',
+  content: this.SECONDSCREEN_VARIABLES.SECONDSCREEN_CONTENT.device,
+};
+
+exports.EXPECTED_SECONDSCREEN_PROTOCOLS = {
+  method: 'secondscreen.protocols',
+  validationJsonPath: 'result',
+  content: this.SECONDSCREEN_VARIABLES.SECONDSCREEN_CONTENT.protocols,
+};
+
+
 exports.GET_SECONDSCREEN_DEVICE_WITH_BOOLEAN = {
   method: 'secondscreen.device',
   params: { type: true },

@@ -261,6 +261,36 @@ exports.DEVICE = {
   params: {},
 };
 
+exports.FETCH_DEVICE_ID = {
+  method: 'device.id',
+  params: {},
+};
+
+exports.FETCH_DEVICE_UID = {
+  method: 'device.uid',
+  params: {},
+};
+
+exports.FETCH_DEVICE_TYPE = {
+  method: 'device.type',
+  params: {},
+};
+
+exports.FETCH_DEVICE_MODEL = {
+  method: 'device.model',
+  params: {},
+};
+
+exports.FETCH_DEVICE_SKU = {
+  method: 'device.sku',
+  params: {},
+};
+
+exports.FETCH_DEVICE_MAKE = {
+  method: 'device.make',
+  params: {},
+};
+
 exports.EXPECTED_DEVICE_ID = {
   method: 'device.id',
   validationJsonPath: 'result',

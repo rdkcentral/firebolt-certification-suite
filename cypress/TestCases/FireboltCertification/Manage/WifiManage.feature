@@ -7,13 +7,12 @@ Feature: Wifi_Manage
 
     @sdk @transport
     Scenario Outline: Wifi.scan - Positive Scenario: <Scenario>
-        Given we test the 'WIFI' getters and setters 'scan' to '<Value>'
-        When 1st party app invokes the 'Firebolt' API to set value
+    When 1st party app invokes the 'Firebolt' API to '<API_Key>'
 
         Examples:
-            | Scenario                                        | Value        |
-            | Scan available wifi networks without timeout    | emptyObject  |
-            | Scan available wifi networks with 20sec timeout | scan_timeout |
+            | Scenario                                        | Value        | API_Key                           |
+            | Scan available wifi networks without timeout    | emptyObject  | scan wifi with empty params       |
+            | Scan available wifi networks with 20sec timeout | scan_timeout | scan wifi with 20 seconds timeout |
 
     @sdk @transport
     Scenario Outline: Wifi.<Method> - Negative Scenario: <Scenario> and expecting error

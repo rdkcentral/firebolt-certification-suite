@@ -7,19 +7,18 @@ Feature: Device
 
     @sdk @transport
     Scenario Outline:Device.<Method> - Positive Scenario: <Scenario>
-        Given we test the 'DEVICE' getters and setters '<Method>'
-        When '3rd party app' invokes the 'Firebolt' get API
+        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
 
         Examples:
-            | Scenario                    | Method      | Validation_Key              |
-            | Validate Device id          | id          | expected device id          |
-            | Validate Device distributor | distributor | expected device distributor |
-            | Validate Device uid         | uid         | expected device uid         |
-            | Validate Device type        | type        | expected device type        |
-            | Validate Device model       | model       | expected device model       |
-            | Validate Device sku         | sku         | expected device sku         |
-            | Validate Device make        | make        | expected device make        |
+            | Scenario                    | Method      | Validation_Key              | API_Key                  |
+            | Validate Device id          | id          | expected device id          | fetch device id          |
+            | Validate Device distributor | distributor | expected device distributor | fetch device distributor |
+            | Validate Device uid         | uid         | expected device uid         | fetch device uid         |
+            | Validate Device type        | type        | expected device type        | fetch device type        |
+            | Validate Device model       | model       | expected device model       | fetch device model       |
+            | Validate Device sku         | sku         | expected device sku         | fetch device sku         |
+            | Validate Device make        | make        | expected device make        | fetch device make        |
 
     @sdk @transport
     Scenario: Device.platform - Positive Scenario: Validate device platform
