@@ -16,34 +16,26 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const errorContent = require('../objects/errorContentObjects.js');
-exports.CAPABILITIES = {
-  method: resolveAtRuntime('capabilities.{{attribute}}'),
-  params: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.CAPABILITIES.{{value}}'),
-  validationJsonPath: 'result',
-  content: resolveAtRuntime(
-    'DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.CAPABILITIES_CONTENT.{{attribute}}'
-  ),
-};
 
 exports.CAPABILITIES_VARIABLES = {
   CAPABILITIES: {
     capabilityInfo: extractEnvValue('CYPRESSENV-capabilitiesList'),
-    postalCode_capability: {
+    GRANTED_WITH_GRANT: {
       capability: 'xrn:firebolt:capability:localization:postal-code',
     },
-    postalCode_capability_role_use: {
+    GRANTED_WITH_OPTIONS_ROLE_USE: {
       capability: 'xrn:firebolt:capability:localization:postal-code',
       options: {
         role: 'use',
       },
     },
-    postalCode_capability_role_manage: {
+    GRANTED_WITH_OPTIONS_ROLE_MANAGE: {
       capability: 'xrn:firebolt:capability:localization:postal-code',
       options: {
         role: 'manage',
       },
     },
-    postalCode_capability_role_provide: {
+    GRANTED_WITH_OPTIONS_ROLE_PROVIDE: {
       capability: 'xrn:firebolt:capability:localization:postal-code',
       options: {
         role: 'provide',
@@ -1386,22 +1378,6 @@ exports.CHECK_IF_ACCOUNT_UID_CAPABILITY_IS_PERMITTED_WITH_ROLE_USE = {
 exports.FETCH_LIFECYCLE_STATE = {
   method: 'lifecycle.state',
 };
-exports.FETCH_ACCOUNT_ID = {
-  method: 'account.id',
-};
-exports.FETCH_ACCOUNT_UID = {
-  method: 'account.uid',
-};
-exports.ACCOUNT_ID = {
-  method: 'account.id',
-  validationJsonPath: 'result',
-  content: 'ACCOUNT_ID',
-};
-exports.ACCOUNT_UID = {
-  method: 'account.uid',
-  validationJsonPath: 'result',
-  content: 'ACCOUNT_UID',
-};
 exports.EXPECTED_LIFECYCLE_STATE_AS_FOREGROUND = {
   method: 'lifecycle.state',
   validationJsonPath: 'result',
@@ -1683,4 +1659,29 @@ exports.EXPECTED_CAPABILITY_IS_REQUESTED = {
   method: 'capabilities.request',
   validationJsonPath: 'result',
   content: this.CAPABILITIES_VARIABLES.CAPABILITIES_CONTENT.CAPABILITIES_REQUEST,
+};
+exports.GET_CAPABILITY_INFO = {
+  method: 'capabilities.info',
+  params: 'CYPRESSENV-capabilitiesList',
+};
+exports.CHECK_IF_PASSED_CAPABILITY_IS_GRANTED = {
+  method: 'capabilities.granted',
+  params: this.CAPABILITIES_VARIABLES.CAPABILITIES.GRANTED_WITH_GRANT,
+};
+exports.TRUE_FOR_GRANTED_CAPABILITY_WITH_PASSED_ROLE = {
+  method: 'capabilities.granted',
+  validationJsonPath: 'result',
+  content: true,
+};
+exports.CHECK_IF_CAPABILITY_IS_GRANTED_WITH_ROLE_AS_USE = {
+  method: 'capabilities.granted',
+  params: this.CAPABILITIES_VARIABLES.CAPABILITIES.GRANTED_WITH_OPTIONS_ROLE_USE,
+};
+exports.CHECK_IF_CAPABILITY_IS_GRANTED_WITH_ROLE_AS_MANAGE = {
+  method: 'capabilities.granted',
+  params: this.CAPABILITIES_VARIABLES.CAPABILITIES.GRANTED_WITH_OPTIONS_ROLE_MANAGE,
+};
+exports.CHECK_IF_CAPABILITY_IS_GRANTED_WITH_ROLE_AS_PROVIDE = {
+  method: 'capabilities.granted',
+  params: this.CAPABILITIES_VARIABLES.CAPABILITIES.GRANTED_WITH_OPTIONS_ROLE_PROVIDE,
 };

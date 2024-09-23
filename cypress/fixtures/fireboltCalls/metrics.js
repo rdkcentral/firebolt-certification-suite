@@ -16,54 +16,27 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const errorContent = require('../objects/errorContentObjects.js');
-exports.METRICS_METHOD = {
-  method: resolveAtRuntime('metrics.{{attribute}}'),
-  params: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.{{value}}'),
-  validationJsonPath: 'result',
-  content: {
-    data: [
-      {
-        type: 'fixture',
-        validations: [
-          {
-            mode: 'staticContentValidation',
-            type: true,
-            description: resolveAtRuntime(
-              'Validating that metrics.{{attribute}} {{attribute}} is true'
-            ),
-          },
-        ],
-      },
-    ],
-  },
-};
-exports.METRICS_MANAGE = {
-  method: resolveAtRuntime('manage_metrics.{{attribute}}'),
-  params: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.{{value}}'),
-  validationJsonPath: 'result',
-  content: null,
-};
 
 exports.METRICS_VARIABLES = {
-  foo_data_and_schema: {
+  FOO_DATA_AND_SCHEMA: {
     schema: 'http://meta.rdkcentral.com/some/schema',
     data: {
       foo: 'foo',
     },
   },
-  null_foo_data_and_schema: {
+  NULL_FOO_DATA_AND_SCHEMA: {
     schema: 'http://meta.rdkcentral.com/some/schema',
     data: {
       foo: null,
     },
   },
-  boolean_foo_data_and_schema: {
+  BOOLEAN_FOO_DATA_AND_SCHEMA: {
     schema: 'http://meta.rdkcentral.com/some/schema',
     data: {
       foo: true,
     },
   },
-  empty_data_object: {
+  EMPTY_DATA_OBJECT: {
     schema: 'http://meta.rdkcentral.com/some/schema',
     data: {},
   },
@@ -681,4 +654,47 @@ exports.INVALID_PARAMS_FOR_METRICS_APPINFO = {
   validationJsonPath: 'result',
   content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
+};
+exports.SEND_METRICS_EVENT_WITH_SCHEMA_AND_FOO_DATA = {
+  method: 'manage_metrics.event',
+  params: this.METRICS_VARIABLES.FOO_DATA_AND_SCHEMA,
+};
+exports.SEND_METRICS_EVENT_WITH_SCHEMA_AND_NULL_FOO_DATA = {
+  method: 'manage_metrics.event',
+  params: this.METRICS_VARIABLES.NULL_FOO_DATA_AND_SCHEMA,
+};
+exports.SEND_METRICS_EVENT_WITH_SCHEMA_AND_BOOLEAN_FOO_DATA = {
+  method: 'manage_metrics.event',
+  params: this.METRICS_VARIABLES.BOOLEAN_FOO_DATA_AND_SCHEMA,
+};
+exports.SEND_METRICS_EVENT_WITH_EMPTY_DATA = {
+  method: 'manage_metrics.event',
+  params: this.METRICS_VARIABLES.EMPTY_DATA_OBJECT,
+};
+exports.NOTIFY_THAT_APP_IS_MINIMALLY_USABLE = {
+  method: 'metrics.ready',
+  params: {},
+};
+exports.LOG_A_SIGN_IN_EVENT = {
+  method: 'metrics.signIn',
+  params: {},
+};
+exports.LOG_A_SIGN_OUT_EVENT = {
+  method: 'metrics.signOut',
+  params: {},
+};
+exports.TRUE_FOR_READY_IN_METRICS = {
+  method: 'metrics.ready',
+  validationJsonPath: 'result',
+  content: true,
+};
+exports.TRUE_FOR_SIGNIN_IN_METRICS = {
+  method: 'metrics.signIn',
+  validationJsonPath: 'result',
+  content: true,
+};
+exports.TRUE_FOR_SIGNOUT_IN_METRICS = {
+  method: 'metrics.signOut',
+  validationJsonPath: 'result',
+  content: true,
 };

@@ -58,10 +58,9 @@ exports.SECONDSCREEN_VARIABLES = {
       type: 'test',
     },
     emptyArray: [],
-    DIAL2: { dial2: true },
   },
   SECONDSCREEN_CONTENT: {
-    device: {
+    DEVICE: {
       data: [
         {
           type: 'fixture',
@@ -70,20 +69,6 @@ exports.SECONDSCREEN_VARIABLES = {
               mode: 'deviceContentValidation',
               type: extractEnvValue('DEVICEID'),
               description: 'Validation of the Secondscreen device Format',
-            },
-          ],
-        },
-      ],
-    },
-    protocols: {
-      data: [
-        {
-          type: 'fixture',
-          validations: [
-            {
-              mode: 'staticContentValidation',
-              type: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.SECONDSCREEN.DIAL2'),
-              description: 'Validation of the Secondscreen protocols Format',
             },
           ],
         },
@@ -121,13 +106,6 @@ exports.SECONDSCREEN_VARIABLES = {
     },
   },
 };
-exports.SECONDSCREEN = {
-  method: resolveAtRuntime('secondscreen.{{attribute}}'),
-  params: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.SECONDSCREEN.{{value}}'),
-  validationJsonPath: 'result',
-  content: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.SECONDSCREEN_CONTENT.{{attribute}}'),
-};
-
 exports.GET_SECONDSCREEN_DEVICE_WITH_EMPTY_ARRAY = {
   method: 'secondscreen.device',
   params: [],
@@ -146,15 +124,14 @@ exports.GET_SECONDSCREEN_PROTOCOLS = {
 exports.EXPECTED_SECONDSCREEN_DEVICE = {
   method: 'secondscreen.device',
   validationJsonPath: 'result',
-  content: this.SECONDSCREEN_VARIABLES.SECONDSCREEN_CONTENT.device,
+  content: this.SECONDSCREEN_VARIABLES.SECONDSCREEN_CONTENT.DEVICE,
 };
 
 exports.EXPECTED_SECONDSCREEN_PROTOCOLS = {
   method: 'secondscreen.protocols',
   validationJsonPath: 'result',
-  content: this.SECONDSCREEN_VARIABLES.SECONDSCREEN_CONTENT.protocols,
+  content: { dial2: true },
 };
-
 
 exports.GET_SECONDSCREEN_DEVICE_WITH_BOOLEAN = {
   method: 'secondscreen.device',

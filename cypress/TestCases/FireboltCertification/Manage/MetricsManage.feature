@@ -7,16 +7,15 @@ Feature: Metrics_Manage
 
     @sdk @transport
     Scenario Outline: Metrics.event - Positive Scenario: <Scenario>
-        Given we test the 'METRICS_MANAGE' getters and setters 'event' to '<Value>'
-        When '1st party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '1st party app' get API
+        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with '<API_Key>'
 
         Examples:
-            | Scenario                          | Value                       |
-            | Send foo event                    | foo_data_and_schema         |
-            | Send foo event with null value    | null_foo_data_and_schema    |
-            | Send foo event with boolean value | boolean_foo_data_and_schema |
-            | Send data as empty object         | empty_data_object           |
+            | Scenario                          | API_Key                                               |
+            | Send foo event                    | send metrics event with schema and foo data         |
+            | Send foo event with null value    | send metrics event with schema and null foo data    |
+            | Send foo event with boolean value | send metrics event with schema and boolean foo data |
+            | Send data as empty object         | send metrics event with empty data                  |
 
     @sdk @transport
     Scenario Outline: Metrics.event - Negative Scenario: <Scenario> expecting error
