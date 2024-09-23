@@ -7,14 +7,13 @@ Feature: Metrics
 
     @sdk @transport
     Scenario Outline: Metrics.<Method> - Positive Scenario: <Scenario>
-        Given we test the 'METRICS_METHOD' getters and setters '<Method>' to 'emptyObject'
-        When '3rd party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '3rd party app' get API
+        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with '<Validation_key>'
 
         Examples:
-            | Scenario             | Method       |
-            | Metrics startContent | startContent |
-            | Metrics stopContent  | stopContent  |
+            | Scenario             | Method       | API_Key                          | Validation_key                   |
+            | Metrics startContent | startContent | notify that content has started  | true for startContent in metrics | 
+            | Metrics stopContent  | stopContent  | notify that content has stopped  | true for stopContent in metrics  |
 
     @sdk @transport
     Scenario Outline: Metrics.<Method> - Negative Scenario: <Scenario> expecting error
@@ -43,39 +42,38 @@ Feature: Metrics
 
     @sdk @transport
     Scenario Outline: Metrics.<Method> - Positive Scenario: <Scenario>
-        Given we test the '<FB_Object>' getters and setters '<Method>' to '<Value>'
-        When '3rd party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '3rd party app' get API
+        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with '<Validation_key>'
 
         Examples:
-            | Scenario                                     | Method               | Value                             | FB_Object      |
-            | startContent with entityId                   | startContent         | entityId                          | METRICS_METHOD |
-            | stopContent with entityId                    | stopContent          | entityId                          | METRICS_METHOD |
-            | page with pageId                             | page                 | pageId                            | METRICS_METHOD |
-            | action with userMetrics                      | action               | userMetrics                       | METRICS_METHOD |
-            | action with appMetrics                       | action               | appMetrics                        | METRICS_METHOD |
-            | action with parametersMetrics                | action               | parametersMetrics                 | METRICS_METHOD |
-            | error with mediaStalled                      | error                | mediaStalled                      | METRICS_METHOD |
-            | mediaLoadStart with entityId                 | mediaLoadStart       | entityId                          | METRICS_METHOD |
-            | mediaPlay with entityId                      | mediaPlay            | entityId                          | METRICS_METHOD |
-            | mediaPlaying with entityId                   | mediaPlaying         | entityId                          | METRICS_METHOD |
-            | mediaPause with entityId                     | mediaPause           | entityId                          | METRICS_METHOD |
-            | mediaWaiting with entityId                   | mediaWaiting         | mediaWaiting_entityId             | METRICS_METHOD |
-            | mediaProgress with mediaPosition             | mediaProgress        | mediaProgress                     | METRICS_METHOD |
-            | mediaSeeking with mediaPosition              | mediaSeeking         | mediaSeeking                      | METRICS_METHOD |
-            | mediaSeeked with mediaPosition               | mediaSeeked          | mediaSeeked                       | METRICS_METHOD |
-            | mediaRateChange with playbackRate            | mediaRateChange      | playbackRate                      | METRICS_METHOD |
-            | mediaRenditionChange with bitrateProfile     | mediaRenditionChange | bitrateProfile                    | METRICS_METHOD |
-            | mediaEnded with entityId                     | mediaEnded           | entityId                          | METRICS_METHOD |
-            | action with parametersMetrics as string      | action               | parametersMetrics_as_string       | METRICS_METHOD |
-            | action with parametersMetrics as boolean     | action               | parametersMetrics_as_boolean      | METRICS_METHOD |
-            | action with parametersMetrics as number      | action               | parametersMetrics_as_number       | METRICS_METHOD |
-            | action with parametersMetrics                | action               | parametersMetrics                 | METRICS_METHOD |
-            | error with mediaStalled parameter            | error                | mediaStalled_parameter            | METRICS_METHOD |
-            | error with mediaStalled parameter as string  | error                | mediaStalled_parameter_as_string  | METRICS_METHOD |
-            | error with mediaStalled parameter as boolean | error                | mediaStalled_parameter_as_boolean | METRICS_METHOD |
-            | error with mediaStalled parameter as number  | error                | mediaStalled_parameter_as_number  | METRICS_METHOD |
-            | Metrics appInfo                              | appInfo              | appBuild                          | METRICS_MANAGE |
+            | Scenario                                     | Method               | API_Key                                                               | Validation_key                           |
+            | startContent with entityId                   | startContent         | notify that content has started with entityId                         | true for startContent in metrics         |
+            | stopContent with entityId                    | stopContent          | notify that content has stopped with entityId                         | true for stopContent in metrics          | 
+            | page with pageId                             | page                 | notify that page has navigated with pageId                            | true for page in metrics                 |
+            | action with userMetrics                      | action               | notify about action with userMetrics                                  | true for action in metrics               |
+            | action with appMetrics                       | action               | notify about action with appMetrics                                   | true for action in metrics               |
+            | action with parametersMetrics                | action               | notify about action with parametersMetrics                            | true for action in metrics               |
+            | error with mediaStalled                      | error                | notify that error has occured with mediaStalled                       | true for error in metrics                |
+            | mediaLoadStart with entityId                 | mediaLoadStart       | infer load time with entityId                                         | true for mediaLoadStart in metrics       |
+            | mediaPlay with entityId                      | mediaPlay            | start playback with entityId                                          | true for mediaPlay in metrics            |
+            | mediaPlaying with entityId                   | mediaPlaying         | notify that playback has started with entityId                        | true for mediaPlaying in metrics         |
+            | mediaPause with entityId                     | mediaPause           | notify that playback has paused with entityId                         | true for mediaPause in metrics           |
+            | mediaWaiting with entityId                   | mediaWaiting         | notify that playback has halted with entityId                         | true for mediaWaiting in metrics         |
+            | mediaProgress with mediaPosition             | mediaProgress        | notify that playback is progressing with mediaPosition                | true for mediaProgress in metrics        |
+            | mediaSeeking with mediaPosition              | mediaSeeking         | notify that playback seek is initiated with mediaPosition             | true for mediaSeeking in metrics         |
+            | mediaSeeked with mediaPosition               | mediaSeeked          | notify that playback seek is completed with mediaPosition             | true for mediaSeeked in metrics          |
+            | mediaRateChange with playbackRate            | mediaRateChange      | notify that playback rate is changed with playbackRate                | true for mediaRateChange in metrics      |
+            | mediaRenditionChange with bitrateProfile     | mediaRenditionChange | notify that playback rendition is Changed with bitrateProfile         | true for mediaRenditionChange in metrics |
+            | mediaEnded with entityId                     | mediaEnded           | notify that playback has stopped with entityId                        | true for mediaEnded in metrics           |
+            | action with parametersMetrics as string      | action               | notify about action with parametersMetrics as string                  | true for action in metrics               |
+            | action with parametersMetrics as boolean     | action               | notify about action with parametersMetrics as boolean                 | true for action in metrics               |
+            | action with parametersMetrics as number      | action               | notify about action with parametersMetrics as number                  | true for action in metrics               |
+            | action with parametersMetrics                | action               | notify about action with parametersMetrics                            | true for action in metrics               |
+            | error with mediaStalled parameter            | error                | notify that error has occured with mediaStalled parameter             | true for error in metrics                |
+            | error with mediaStalled parameter as string  | error                |notify that error has occured with mediaStalled parameter as string    | true for error in metrics                |
+            | error with mediaStalled parameter as boolean | error                |notify that error has occured with mediaStalled parameter as boolean   | true for error in metrics                |
+            | error with mediaStalled parameter as number  | error                |notify that error has occured with mediaStalled parameter as number    | true for error in metrics                |
+            # | Metrics appInfo                              | appInfo              | appBuild                          | METRICS_MANAGE |
 
 
     @sdk @transport

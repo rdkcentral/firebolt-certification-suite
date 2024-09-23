@@ -113,7 +113,7 @@ exports.GET_SECONDSCREEN_DEVICE_WITH_EMPTY_ARRAY = {
 
 exports.GET_SECONDSCREEN_DEVICE_WITH_STRING = {
   method: 'secondscreen.device',
-  params: {value: "test"},
+  params: { value: 'test' },
 };
 
 exports.GET_SECONDSCREEN_PROTOCOLS = {
