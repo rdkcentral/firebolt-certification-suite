@@ -49,17 +49,17 @@ exports.CONNECT_WIFI_WITH_INTEGER = {
   method: 'manage_wifi.connect',
   params: {
     ssid: 123456,
-    passphrase: "",
-    security: "none"
-},
+    passphrase: '',
+    security: 'none',
+  },
   expected: 'error',
 };
 
 exports.CONNECT_WPS_WITH_BOOLEAN = {
   method: 'manage_wifi.wps',
   params: {
-    security: true
-},
+    security: true,
+  },
   expected: 'error',
 };
 
