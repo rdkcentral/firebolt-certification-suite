@@ -938,3 +938,23 @@ exports.TRUE_FOR_SIGNOUT_IN_METRICS = {
   validationJsonPath: 'result',
   content: true,
 };
+exports.INFORM_THE_PLATFORM_ABOUT_APP_BUILD = {
+  method: 'metrics.appInfo',
+  params: this.METRICS_VARIABLES.appBuild,
+};
+exports.NULL_FOR_METRICS_APPINFO = {
+  method: 'metrics.appInfo',
+  validationJsonPath: 'result',
+  content: null,
+};
+exports.INVALID_PARAMS_FOR_METRICS_MEDIAENDED = {
+  method: 'metrics.mediaEnded',
+  validationJsonPath: 'result',
+  content: errorContent.INVALID_TYPE_PARAMS,
+  expectingError: true,
+};
+exports.INFORM_THE_PLATFORM_ABOUT_APP_WITH_BOOLEAN_BUILD = {
+  method: 'metrics.appInfo',
+  params: { value: true },
+  expected: 'error',
+};

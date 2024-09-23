@@ -375,31 +375,31 @@ exports.EXPECTED_DEVICE_VERSION = {
   content: this.DEVICE_VARIABLES.DEVICE.version,
 };
 
-exports.EXPECTED_DEVICE_HDCP = {
+exports.EXPECTED_HDCP = {
   method: 'device.hdcp',
   validationJsonPath: 'result',
   content: this.DEVICE_VARIABLES.DEVICE.hdcp,
 };
 
-exports.EXPECTED_DEVICE_HDR = {
+exports.EXPECTED_HDR = {
   method: 'device.hdr',
   validationJsonPath: 'result',
   content: this.DEVICE_VARIABLES.DEVICE.hdr,
 };
 
-exports.EXPECTED_DEVICE_SCREENRESOLUTION = {
+exports.EXPECTED_SCREENRESOLUTION = {
   method: 'device.screenResolution',
   validationJsonPath: 'result',
   content: this.DEVICE_VARIABLES.DEVICE.screenResolution,
 };
 
-exports.EXPECTED_DEVICE_VIDEORESOLUTION = {
+exports.EXPECTED_VIDEORESOLUTION = {
   method: 'device.videoResolution',
   validationJsonPath: 'result',
   content: this.DEVICE_VARIABLES.DEVICE.videoResolution,
 };
 
-exports.EXPECTED_DEVICE_AUDIO = {
+exports.EXPECTED_AUDIO = {
   method: 'device.audio',
   validationJsonPath: 'result',
   content: this.DEVICE_VARIABLES.DEVICE.audio,
