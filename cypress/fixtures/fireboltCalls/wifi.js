@@ -31,6 +31,6 @@ exports.SCAN_WIFI_WITH_EMPTY_PARAMS = {
 exports.SCAN_WIFI_WITH_20_SECONDS_TIMEOUT = {
   method: 'manage_wifi.scan',
   params: {
-        'timeout': 20
-    },
+    timeout: 20,
+  },
 };

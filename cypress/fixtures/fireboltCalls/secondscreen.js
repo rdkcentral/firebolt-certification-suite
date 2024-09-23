@@ -135,7 +135,7 @@ exports.GET_SECONDSCREEN_DEVICE_WITH_EMPTY_ARRAY = {
 
 exports.GET_SECONDSCREEN_DEVICE_WITH_STRING = {
   method: 'secondscreen.device',
-  params: {value: 'test'},
+  params: { value: 'test' },
 };
 
 exports.GET_SECONDSCREEN_PROTOCOLS = {
@@ -154,7 +154,6 @@ exports.EXPECTED_SECONDSCREEN_PROTOCOLS = {
   validationJsonPath: 'result',
   content: this.SECONDSCREEN_VARIABLES.SECONDSCREEN_CONTENT.protocols,
 };
-
 
 exports.GET_SECONDSCREEN_DEVICE_WITH_BOOLEAN = {
   method: 'secondscreen.device',
