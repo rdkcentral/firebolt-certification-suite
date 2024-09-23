@@ -9,6 +9,7 @@
 | custom              | Used when the incoming response has to be validated using a customized function provided in the configModule. |
 | undefined           | Used when the incoming response has to be validated against undefined value.                                  |
 | schemaOnly          | When validation type is `schemaOnly`, it will skip content validation and stops at schema validation          |
+| screenshotValidation  | screenshotValidation is used to validate the screenshot captured by the device.     |
 
 ## regEx
 
@@ -419,6 +420,86 @@ The 'schemaOnly` validation type allows to skip content validation and stops at 
   ]
 }
 
+```
+
+## screenshotValidation
+FCS supports screenshot validation. This validation is used to validate the screenshot captured by the platform. The screenshot validation object should be added to the validation objects.
+
+ - The request override function must be added to the configModule to capture the screenshot based on the platform.
+ - The config module is responsible for capturing the screenshot and returning the validation response back to FCS.
+ - `screenshot` is the function name which should be added in `requestModules/fcs.js` file and the same function can be defined in `responseModules/fcs.js` file to capture the screenshot response and do validations. 
+ - The screenshot validation response received from the config module looks like the format below.
+    ```javascript
+    {
+      "status": "pass/fail",
+      "validations": [
+        {"status":"pass/fail"},
+        {"status":"pass/fail"}
+      ]
+    }
+    ```
+    In the above response, `status` is the key which indicates the overall status of the screenshot validation. `validations` is the array of objects which holds the status of each validation object. `status` is the required field to determine the status of the validation.
+
+### Validation object format: 
+
+```
+{
+  "data": [
+    {
+      "type": "screenshotValidation",
+      "validations": []
+    }
+  ]
+}
+
+```
+
+### Params:
+
+| **Param**   | **Type** | **Description**                                                            |
+| ----------- | -------- | -------------------------------------------------------------------------- |
+| data        | array    | An array that holds the entire set of validation objects.                  |
+| type        | string   | The value that indicates the type of validation.                           |
+| validations | array    | The array that holds all the data for validation, like value, format, etc. |
+
+
+
+### Examples:
+**Example 1:**
+
+```javascript
+{
+  "data": [
+    {
+      "type": "screenshotValidation",
+      "validations": [
+        {
+            "type": "ocr",
+            "text": "tv+",
+            "regex": "tv"
+          },
+          {
+            "type": "image",
+            "label": "auth",
+            "confidence": 60
+          }
+      ]
+    }
+  ]
+}
+```
+
+**Example 2:**
+
+```javascript
+{
+  "data": [
+    {
+      "type": "screenshotValidation",
+      "validations": []
+    }
+  ]
+}
 ```
 
 # Validation Override

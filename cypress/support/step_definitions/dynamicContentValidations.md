@@ -1,7 +1,7 @@
 # Dynamic Content Validation
 
 ### Background:
-While executing the validations step in fcs tests, there are mainly seven modes of validation, which are mentioned in [Supported Validations](./validations.md#supported-validations). Out of these seven, deviceContentValidation is used when the validation is to be done based on device specific value of the device which we are currently testing on.
+While executing the validations step in fcs tests, there are mainly seven modes of validation, which are mentioned in [Supported Validations](../../fixtures/docs/validations.md#supported-validations). Out of these seven, deviceContentValidation is used when the validation is to be done based on device specific value of the device which we are currently testing on.
 While executing the test, the validation key will be fetched from the cypress/fixtures/fireboltCalls/ folder based on the current executing module. For example, if the "expected device id" is the validation key used in the validation step, it will be placed in the device.json file inside the fireboltCalls folder as:
 
 ```
