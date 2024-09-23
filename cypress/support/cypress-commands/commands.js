@@ -1399,13 +1399,13 @@ Cypress.Commands.add(
     contentObject,
     appId,
     errorContent,
-    eventExpected
+    eventExpected,
+    isNullCase
   ) => {
     // Reading the appId from the environment variable
     appId = UTILS.fetchAppIdentifierFromEnv(appId);
     const context = {};
     const expectingError = errorContent ? true : false;
-    contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
     method = method.includes('_') ? method.split('_')[1] : method;
     if (expectingError) {
       // Retriving the error content from the environment variable if it exists; otherwise, using the key as-is
@@ -1427,6 +1427,7 @@ Cypress.Commands.add(
       expectingError: expectingError,
       appId: appId,
       eventExpected: eventExpected,
+      isNullCase: isNullCase,
     };
 
     if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {
