@@ -16,12 +16,11 @@ Feature: Wifi_Manage
 
     @sdk @transport
     Scenario Outline: Wifi.<Method> - Negative Scenario: <Scenario> and expecting error
-        Given we test the 'WIFI' getters and setters '<Method>' to '<Value>'
-        When 1st party app invokes the 'Firebolt' API to set invalid value
-        Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
+        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds to '1st party app' with '<Error_Object>'
 
         Examples:
-            | Scenario                                        | Method  | Value                |
-            | Scan available wifi networks boolean param      | scan    | scan_with_boolean    |
-            | Connect the device to wifi boolean ssid         | connect | connect_with_integer |
-            | Connect the device using wps with boolean value | wps     | connect_with_boolean |
+            | Scenario                                        | Method  | API_Key                   | Error_Object                            |
+            | Scan available wifi networks boolean param      | scan    | scan wifi with boolean    | invalid boolean params for wifi scan    |
+            | Connect the device to wifi boolean ssid         | connect | connect wifi with integer | invalid integer params for wifi connect |
+            | Connect the device using wps with boolean value | wps     | connect wps with boolean  | invalid value params for wifi wps       |

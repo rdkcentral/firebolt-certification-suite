@@ -1,3 +1,5 @@
+const errorContent = require('../objects/errorContentObjects.js');
+
 exports.WIFI = {
   setMethod: resolveAtRuntime('manage_wifi.{{attribute}}'),
   setParams: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.DEFAULTS.{{value}}'),
@@ -33,4 +35,51 @@ exports.SCAN_WIFI_WITH_20_SECONDS_TIMEOUT = {
   params: {
     timeout: 20,
   },
+};
+
+exports.SCAN_WIFI_WITH_BOOLEAN = {
+  method: 'manage_wifi.scan',
+  params: {
+    timeout: true,
+  },
+  expected: 'error',
+};
+
+exports.CONNECT_WIFI_WITH_INTEGER = {
+  method: 'manage_wifi.connect',
+  params: {
+    ssid: 123456,
+    passphrase: "",
+    security: "none"
+},
+  expected: 'error',
+};
+
+exports.CONNECT_WPS_WITH_BOOLEAN = {
+  method: 'manage_wifi.wps',
+  params: {
+    security: true
+},
+  expected: 'error',
+};
+
+exports.INVALID_BOOLEAN_PARAMS_FOR_WIFI_SCAN = {
+  method: 'wifi.scan',
+  validationJsonPath: 'result',
+  content: errorContent.INVALID_TYPE_PARAMS,
+  expectingError: true,
+};
+
+exports.INVALID_INTEGER_PARAMS_FOR_WIFI_CONNECT = {
+  method: 'wifi.connect',
+  validationJsonPath: 'result',
+  content: errorContent.INVALID_TYPE_PARAMS,
+  expectingError: true,
+};
+
+exports.INVALID_VALUE_PARAMS_FOR_WIFI_WPS = {
+  method: 'wifi.wps',
+  validationJsonPath: 'result',
+  content: errorContent.INVALID_TYPE_PARAMS,
+  expectingError: true,
 };
