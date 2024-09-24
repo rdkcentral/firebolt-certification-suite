@@ -1,3 +1,10 @@
+# [1.3.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.3...v1.3.0-dev.4) (2024-09-24)
+
+
+### Features
+
+* Modify test cases to use static v2 objects with v1 glue code - Part 2 ([#213](https://github.com/rdkcentral/firebolt-certification-suite/issues/213)) ([491d8e4](https://github.com/rdkcentral/firebolt-certification-suite/commit/491d8e427ffd67f850eedd5655f0019a7e0bfe9e))
+
 # [1.3.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.2...v1.3.0-dev.3) (2024-09-20)
 
 
