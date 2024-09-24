@@ -46,34 +46,34 @@ Feature: Metrics
         Then 'Firebolt' platform responds with '<Validation_key>'
 
         Examples:
-            | Scenario                                     | Method               | API_Key                                                               | Validation_key                           |
-            | startContent with entityId                   | startContent         | notify that content has started with entityId                         | true for startContent in metrics         |
-            | stopContent with entityId                    | stopContent          | notify that content has stopped with entityId                         | true for stopContent in metrics          | 
-            | page with pageId                             | page                 | notify that page has navigated with pageId                            | true for page in metrics                 |
-            | action with userMetrics                      | action               | notify about action with userMetrics                                  | true for action in metrics               |
-            | action with appMetrics                       | action               | notify about action with appMetrics                                   | true for action in metrics               |
-            | action with parametersMetrics                | action               | notify about action with parametersMetrics                            | true for action in metrics               |
-            | error with mediaStalled                      | error                | notify that error has occured with mediaStalled                       | true for error in metrics                |
-            | mediaLoadStart with entityId                 | mediaLoadStart       | infer load time with entityId                                         | true for mediaLoadStart in metrics       |
-            | mediaPlay with entityId                      | mediaPlay            | start playback with entityId                                          | true for mediaPlay in metrics            |
-            | mediaPlaying with entityId                   | mediaPlaying         | notify that playback has started with entityId                        | true for mediaPlaying in metrics         |
-            | mediaPause with entityId                     | mediaPause           | notify that playback has paused with entityId                         | true for mediaPause in metrics           |
-            | mediaWaiting with entityId                   | mediaWaiting         | notify that playback has halted with entityId                         | true for mediaWaiting in metrics         |
-            | mediaProgress with mediaPosition             | mediaProgress        | notify that playback is progressing with mediaPosition                | true for mediaProgress in metrics        |
-            | mediaSeeking with mediaPosition              | mediaSeeking         | notify that playback seek is initiated with mediaPosition             | true for mediaSeeking in metrics         |
-            | mediaSeeked with mediaPosition               | mediaSeeked          | notify that playback seek is completed with mediaPosition             | true for mediaSeeked in metrics          |
-            | mediaRateChange with playbackRate            | mediaRateChange      | notify that playback rate is changed with playbackRate                | true for mediaRateChange in metrics      |
-            | mediaRenditionChange with bitrateProfile     | mediaRenditionChange | notify that playback rendition is Changed with bitrateProfile         | true for mediaRenditionChange in metrics |
-            | mediaEnded with entityId                     | mediaEnded           | notify that playback has stopped with entityId                        | true for mediaEnded in metrics           |
-            | action with parametersMetrics as string      | action               | notify about action with parametersMetrics as string                  | true for action in metrics               |
-            | action with parametersMetrics as boolean     | action               | notify about action with parametersMetrics as boolean                 | true for action in metrics               |
-            | action with parametersMetrics as number      | action               | notify about action with parametersMetrics as number                  | true for action in metrics               |
-            | action with parametersMetrics                | action               | notify about action with parametersMetrics                            | true for action in metrics               |
-            | error with mediaStalled parameter            | error                | notify that error has occured with mediaStalled parameter             | true for error in metrics                |
-            | error with mediaStalled parameter as string  | error                |notify that error has occured with mediaStalled parameter as string    | true for error in metrics                |
-            | error with mediaStalled parameter as boolean | error                |notify that error has occured with mediaStalled parameter as boolean   | true for error in metrics                |
-            | error with mediaStalled parameter as number  | error                |notify that error has occured with mediaStalled parameter as number    | true for error in metrics                |
-            # | Metrics appInfo                              | appInfo              | appBuild                          | METRICS_MANAGE |
+            | Scenario                                     | Method               | API_Key                                                              | Validation_key                           |
+            | startContent with entityId                   | startContent         | notify that content has started with entityId                        | true for startContent in metrics         |
+            | stopContent with entityId                    | stopContent          | notify that content has stopped with entityId                        | true for stopContent in metrics          |
+            | page with pageId                             | page                 | notify that page has navigated with pageId                           | true for page in metrics                 |
+            | action with userMetrics                      | action               | notify about action with userMetrics                                 | true for action in metrics               |
+            | action with appMetrics                       | action               | notify about action with appMetrics                                  | true for action in metrics               |
+            | action with parametersMetrics                | action               | notify about action with parametersMetrics                           | true for action in metrics               |
+            | error with mediaStalled                      | error                | notify that error has occured with mediaStalled                      | true for error in metrics                |
+            | mediaLoadStart with entityId                 | mediaLoadStart       | infer load time with entityId                                        | true for mediaLoadStart in metrics       |
+            | mediaPlay with entityId                      | mediaPlay            | start playback with entityId                                         | true for mediaPlay in metrics            |
+            | mediaPlaying with entityId                   | mediaPlaying         | notify that playback has started with entityId                       | true for mediaPlaying in metrics         |
+            | mediaPause with entityId                     | mediaPause           | notify that playback has paused with entityId                        | true for mediaPause in metrics           |
+            | mediaWaiting with entityId                   | mediaWaiting         | notify that playback has halted with entityId                        | true for mediaWaiting in metrics         |
+            | mediaProgress with mediaPosition             | mediaProgress        | notify that playback is progressing with mediaPosition               | true for mediaProgress in metrics        |
+            | mediaSeeking with mediaPosition              | mediaSeeking         | notify that playback seek is initiated with mediaPosition            | true for mediaSeeking in metrics         |
+            | mediaSeeked with mediaPosition               | mediaSeeked          | notify that playback seek is completed with mediaPosition            | true for mediaSeeked in metrics          |
+            | mediaRateChange with playbackRate            | mediaRateChange      | notify that playback rate is changed with playbackRate               | true for mediaRateChange in metrics      |
+            | mediaRenditionChange with bitrateProfile     | mediaRenditionChange | notify that playback rendition is Changed with bitrateProfile        | true for mediaRenditionChange in metrics |
+            | mediaEnded with entityId                     | mediaEnded           | notify that playback has stopped with entityId                       | true for mediaEnded in metrics           |
+            | action with parametersMetrics as string      | action               | notify about action with parametersMetrics as string                 | true for action in metrics               |
+            | action with parametersMetrics as boolean     | action               | notify about action with parametersMetrics as boolean                | true for action in metrics               |
+            | action with parametersMetrics as number      | action               | notify about action with parametersMetrics as number                 | true for action in metrics               |
+            | action with parametersMetrics                | action               | notify about action with parametersMetrics                           | true for action in metrics               |
+            | error with mediaStalled parameter            | error                | notify that error has occured with mediaStalled parameter            | true for error in metrics                |
+            | error with mediaStalled parameter as string  | error                | notify that error has occured with mediaStalled parameter as string  | true for error in metrics                |
+            | error with mediaStalled parameter as boolean | error                | notify that error has occured with mediaStalled parameter as boolean | true for error in metrics                |
+            | error with mediaStalled parameter as number  | error                | notify that error has occured with mediaStalled parameter as number  | true for error in metrics                |
+            | Metrics appInfo                              | appInfo              | Inform the platform about app build                                  | null for metrics appInfo                 |
 
 
     @sdk @transport

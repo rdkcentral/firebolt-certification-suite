@@ -15,24 +15,12 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-const accountVariables = require('./account');
-const deviceVariables = require('./device');
 const accessibilityVariables = require('./accessibility');
 const localizationVariables = require('./localization');
-const capabilitiesVariables = require('./capabilities');
-const wifiVariables = require('./wifi');
-const secondScreenVariables = require('./secondscreen');
-const metricsVariables = require('./metrics');
 
 exports.DYNAMIC_FB_CALL_VARIABLES = {
   DEFAULTS: {
-    ...accountVariables.ACCOUNT_VARIABLES,
-    ...deviceVariables.DEVICE_VARIABLES,
     ...localizationVariables.LOCALIZATION_VARIABLES,
-    ...capabilitiesVariables.CAPABILITIES_VARIABLES,
-    ...wifiVariables.WIFI_VARIABLES,
-    ...metricsVariables.METRICS_VARIABLES,
   },
   ...accessibilityVariables.ACCESSIBILITY_VARIABLES,
-  ...secondScreenVariables.SECONDSCREEN_VARIABLES,
 };
