@@ -261,6 +261,72 @@ exports.DEVICE = {
   params: {},
 };
 
+exports.FETCH_DEVICE_ID = {
+  method: 'device.id',
+  params: {},
+};
+
+exports.FETCH_DEVICE_UID = {
+  method: 'device.uid',
+  params: {},
+};
+
+exports.FETCH_DEVICE_TYPE = {
+  method: 'device.type',
+  params: {},
+};
+
+exports.FETCH_DEVICE_MODEL = {
+  method: 'device.model',
+  params: {},
+};
+
+exports.FETCH_DEVICE_SKU = {
+  method: 'device.sku',
+  params: {},
+};
+
+exports.FETCH_DEVICE_MAKE = {
+  method: 'device.make',
+  params: {},
+};
+
+exports.FETCH_DEVICE_VERSION = {
+  method: 'device.version',
+  params: {},
+};
+
+exports.FETCH_HDCP = {
+  method: 'device.hdcp',
+  params: {},
+};
+
+exports.FETCH_HDR = {
+  method: 'device.hdr',
+  params: {},
+};
+
+exports.FETCH_SCREENRESOLUTION = {
+  method: 'device.screenResolution',
+  params: {},
+};
+
+exports.FETCH_VIDEORESOLUTION = {
+  method: 'device.videoResolution',
+  params: {},
+};
+
+exports.FETCH_AUDIO = {
+  method: 'device.audio',
+  params: {},
+};
+
+exports.EXPECTED_DEVICE_VERSION = {
+  method: 'device.version',
+  validationJsonPath: 'result',
+  content: this.DEVICE_VARIABLES.DEVICE.version,
+};
+
 exports.EXPECTED_DEVICE_ID = {
   method: 'device.id',
   validationJsonPath: 'result',
@@ -309,31 +375,31 @@ exports.EXPECTED_DEVICE_VERSION = {
   content: this.DEVICE_VARIABLES.DEVICE.version,
 };
 
-exports.EXPECTED_DEVICE_HDCP = {
+exports.EXPECTED_HDCP = {
   method: 'device.hdcp',
   validationJsonPath: 'result',
   content: this.DEVICE_VARIABLES.DEVICE.hdcp,
 };
 
-exports.EXPECTED_DEVICE_HDR = {
+exports.EXPECTED_HDR = {
   method: 'device.hdr',
   validationJsonPath: 'result',
   content: this.DEVICE_VARIABLES.DEVICE.hdr,
 };
 
-exports.EXPECTED_DEVICE_SCREENRESOLUTION = {
+exports.EXPECTED_SCREENRESOLUTION = {
   method: 'device.screenResolution',
   validationJsonPath: 'result',
   content: this.DEVICE_VARIABLES.DEVICE.screenResolution,
 };
 
-exports.EXPECTED_DEVICE_VIDEORESOLUTION = {
+exports.EXPECTED_VIDEORESOLUTION = {
   method: 'device.videoResolution',
   validationJsonPath: 'result',
   content: this.DEVICE_VARIABLES.DEVICE.videoResolution,
 };
 
-exports.EXPECTED_DEVICE_AUDIO = {
+exports.EXPECTED_AUDIO = {
   method: 'device.audio',
   validationJsonPath: 'result',
   content: this.DEVICE_VARIABLES.DEVICE.audio,

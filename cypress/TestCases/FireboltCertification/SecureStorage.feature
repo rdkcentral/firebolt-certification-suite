@@ -242,7 +242,7 @@ Feature: SecureStorage
         And 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
         And 'secondary 3rd party app' invokes the 'Firebolt' API to 'clear stored value with scope as device'
         And 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for clearing stored value'
-        And '3rd party app' invokes the 'Firebolt' API to '<get stored value with scope as device and key as authTestTokenDevice'
+        And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
         And 'Firebolt' platform responds with 'null for getting stored value'
         And 'secondary 3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
         And 'Firebolt' platform responds to 'secondary 3rd party app' with 'null for getting stored value'

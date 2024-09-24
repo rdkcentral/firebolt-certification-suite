@@ -7,13 +7,12 @@ Feature: Account
 
    @sdk @transport
    Scenario Outline: Account.<Method> - Positive Scenario: <Scenario>
-      Given we test the 'ACCOUNT_ID_UID' getters and setters '<Method>'
-      When '3rd party app' invokes the 'Firebolt' get API
+      When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'      
       Examples:
-         | Scenario             | Method | Validation_key |
-         | Validate account ID  | id     | account id     | 
-         | Validate account UID | uid    | account uid    |
+         | Scenario             | Method | Validation_key | API_Key           |
+         | Validate account ID  | id     | account id     | fetch account ID  | 
+         | Validate account UID | uid    | account uid    | fetch account UID |
 
    @sdk @transport @notSupported @requiresPlatformImplementation
    Scenario Outline: Account.<method> - Negative Scenario: <Scenario>

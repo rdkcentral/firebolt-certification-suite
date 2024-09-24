@@ -13,8 +13,8 @@ Feature: Parameters
 
       Examples:
          | Scenario               | Set_API_Key                                       | Validation_Key                      |
-         | Passing params - TRUE  | set privacy allowAppContentAdTargeting with true  | true for parameters initialization  |
-         | Passing params - FALSE | set privacy allowAppContentAdTargeting with false | false for parameters initialization |
+         | Passing params - TRUE  | set privacy allow AppContentAdTargeting as true  | true for parameters initialization  |
+         | Passing params - FALSE | set privacy allow AppContentAdTargeting as false | false for parameters initialization |
 
    @sdk @transport
    Scenario: Parameters.initialization - Positive Scenario: Validate NavigationIntent - Home
