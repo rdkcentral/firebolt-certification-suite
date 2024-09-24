@@ -60,7 +60,7 @@ Feature: Localization
             | Localization.locale and Localization.countrycode | localization onCountryCodeChanged | localization onLocaleChanged    | set language to en | get localization countrycode | get localization locale    | UK for localization countrycode | enUK for localization locale    | oncountrycodechanged for localization with UK   | onlocalechanged for localization with UK      |
             | Localization.locale and Localization.language    | localization onLanguageChanged    | localization onLocaleChanged    | set language to es | get localization language    | get localization locale    | es for localization language    | esUK for localization locale    | onlanguagechanged for localization with es      | onlocalechanged for localization with esUK    |
 
-    @sdk @transport
+    @sdk @transport @Sev0
     Scenario Outline: Validating <Scenario> :
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
@@ -71,14 +71,13 @@ Feature: Localization
         Then 'Firebolt' platform responds to '3rd party app' get API
         And 'Firebolt' platform triggers '3rd party app' event
 
-        @Sev0
         Examples:
             | Scenario                                             | Method                  | Value      |
             | Setters & getters - locale                           | locale                  | enUK       |
             | Setters & getters - Language es                      | language                | es         |
             | Setters & getters - Language en                      | language                | en         |
 
-    @sdk @transport
+    @sdk @transport @Sev1
     Scenario Outline: Validating <Scenario> :
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
@@ -89,7 +88,6 @@ Feature: Localization
         Then 'Firebolt' platform responds to '3rd party app' get API
         And 'Firebolt' platform triggers '3rd party app' event
 
-        @Sev1
         Examples:
             | Scenario                                             | Method                  | Value      |
             | Setters & getters - locality                         | locality                | washington |
