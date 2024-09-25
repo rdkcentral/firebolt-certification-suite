@@ -423,26 +423,24 @@ The 'schemaOnly` validation type allows to skip content validation and stops at 
 ```
 
 ## screenshotValidation
-FCS supports screenshot validation. This validation is used to validate the screenshot captured by the platform. The screenshot validation object should be added to the validation objects.
+To perform screenshot validation, the screenshot validation object should be added to the validation objects.
 
- - The request override function must be added to the configModule to capture the screenshot based on the platform.
- - The config module is responsible for capturing the screenshot and returning the validation response back to FCS.
- - `screenshot` is the function name which should be added in `requestModules/fcs.js` file and the same function can be defined in `responseModules/fcs.js` file to capture the screenshot response and do validations. 
- - The screenshot validation response received from the config module looks like the format below.
-    ```javascript
-    {
-      "status": "pass/fail",
-      "validations": [
-        {"status":"pass/fail"},
-        {"status":"pass/fail"}
-      ]
-    }
-    ```
-    In the above response, `status` is the key which indicates the overall status of the screenshot validation. `validations` is the array of objects which holds the status of each validation object. `status` is the required field to determine the status of the validation.
+- The screenshot validation will happen only when the `enableScreenshots` environment variable is set to `true`.
+- FCA look for screenshotValidation status in below format and based on the status, it will decide the overall status of the screenshot validation.
+  ```javascript
+  {
+    status: "pass/fail",
+    validations: [
+      {status: "pass/fail"},
+      {status: "pass/fail"}
+    ]
+  }
+  ```
+- Actual validation can be added in cofigModule override function. Refer [here](/Docs/Request_Overrides.md#screenshot) for more details on `screenshot` override.
 
 ### Validation object format: 
 
-```
+```json
 {
   "data": [
     {
@@ -451,7 +449,6 @@ FCS supports screenshot validation. This validation is used to validate the scre
     }
   ]
 }
-
 ```
 
 ### Params:
@@ -462,12 +459,10 @@ FCS supports screenshot validation. This validation is used to validate the scre
 | type        | string   | The value that indicates the type of validation.                           |
 | validations | array    | The array that holds all the data for validation, like value, format, etc. |
 
-
-
 ### Examples:
-**Example 1:**
+**Example 1:** Below validation objects consist of OCR and image validation. The OCR validation is to validate the text `tv+` and the image validation is to validate the image with label `auth` with confidence 60 against the screenshot response.
 
-```javascript
+```json
 {
   "data": [
     {
@@ -489,9 +484,9 @@ FCS supports screenshot validation. This validation is used to validate the scre
 }
 ```
 
-**Example 2:**
+**Example 2:** Below validation object does not have any validations.
 
-```javascript
+```json
 {
   "data": [
     {
