@@ -20,7 +20,7 @@ Cypress.Commands.add('screenshotValidation', (object) => {
         },
       };
 
-      fireLog.info('Screenshot validation has started')
+      fireLog.info('Screenshot validation has started');
       fireLog.info('Screenshot Validation Object: ' + JSON.stringify(object.validations));
       cy.sendMessagetoPlatforms(requestMap).then((response) => {
         if (object.validations.length > 0) {
