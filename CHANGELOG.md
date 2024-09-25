@@ -1,3 +1,10 @@
+# [1.3.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.4...v1.3.0-dev.5) (2024-09-25)
+
+
+### Bug Fixes
+
+* error schema fix ([#199](https://github.com/rdkcentral/firebolt-certification-suite/issues/199)) ([35217ad](https://github.com/rdkcentral/firebolt-certification-suite/commit/35217ad7c4f2599e3aabf3daeb909c64f63002b3))
+
 # [1.3.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.3...v1.3.0-dev.4) (2024-09-24)
 
 
