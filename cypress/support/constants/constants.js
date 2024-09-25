@@ -126,8 +126,6 @@ module.exports = {
   ERROR_NOT_UNDEFINED_CHECK: 'Error not undefined Check',
   ERROR_NULL_CHECK: 'Error null Check',
   ERROR_CONTENT_OBJECTS_PATH: 'cypress/fixtures/objects/errorContentObjects.json',
-  ERROR_SCHEMA_SDK: 'errorSchemaSDK',
-  ERROR_SCHEMA_TRANSPORT: 'errorSchemaTransport',
   EVENT: 'event',
   EVENT_ERROR_MSG: 'Event listener error validation',
   EVENT_LISTENER_RESPONSE: 'eventListenerResponse',

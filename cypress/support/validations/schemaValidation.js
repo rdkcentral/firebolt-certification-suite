@@ -171,13 +171,8 @@ Cypress.Commands.add('getSchema', (methodOrEvent, params, schemaType) => {
     let schemaMap = null;
 
     if (schemaType == CONSTANTS.ERROR) {
-      cy.fixture(CONSTANTS.OPENRPC_ERROR_SCHEMA_PATH).then((errorSchema) => {
-        const communicationMode = UTILS.getCommunicationMode();
-        const errorSchemaBasedOnMode =
-          communicationMode == CONSTANTS.MODE_TRANSPORT
-            ? errorSchema[CONSTANTS.ERROR_SCHEMA_TRANSPORT]
-            : errorSchema[CONSTANTS.ERROR_SCHEMA_SDK];
-        return errorSchemaBasedOnMode;
+      cy.fixture(CONSTANTS.OPENRPC_ERROR_SCHEMA_PATH).then((errorSchemaObject) => {
+        return errorSchemaObject.errorSchema;
       });
     } else {
       if (
