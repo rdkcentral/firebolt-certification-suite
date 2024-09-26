@@ -244,7 +244,7 @@
 		"validationJsonPath": "result",
 		"content": "ADVERTISING_ADVERTISINGID_ADON"
 	},
-
+    
     "NULLINTENT_SOURCE_FOR_INITIALIZATION_PARAMETERS": {
         "method": "parameters.initialization",
         "context": "DISCOVERY_LAUNCH_NULL",

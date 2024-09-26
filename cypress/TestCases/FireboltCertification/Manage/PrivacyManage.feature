@@ -16,32 +16,32 @@ Feature: Privacy_Manage
       And 'Firebolt' platform triggers '1st party app' event
 
       Examples:
-         | Scenario                                             | Method                         | Value |
-         | Enable allowResumePoints                             | allowResumePoints              | true  |
-         | Disable allowResumePoints                            | allowResumePoints              | false |
-         | Enable allowUnentitledResumePoints                   | allowUnentitledResumePoints    | true  |
-         | Disable allowRallowUnentitledResumePointsesumePoints | allowUnentitledResumePoints    | false |
-         | Enable allowWatchHistory                             | allowWatchHistory              | true  |
-         | Disable allowWatchHistory                            | allowWatchHistory              | false |
-         | Enable allowProductAnalytics                         | allowProductAnalytics          | true  |
-         | Disable allowProductAnalytics                        | allowProductAnalytics          | false |
-         | Enable allowPersonalization                          | allowPersonalization           | true  |
-         | Disable allowPersonalization                         | allowPersonalization           | false |
-         | Enable allowUnentitledPersonalization                | allowUnentitledPersonalization | true  |
-         | Disable allowUnentitledPersonalization               | allowUnentitledPersonalization | false |
-         | Enable allowRemoteDiagnostics                        | allowRemoteDiagnostics         | true  |
-         | Disable allowRemoteDiagnostics                       | allowRemoteDiagnostics         | false |
-         | Enable allowPrimaryContentAdTargeting                | allowPrimaryContentAdTargeting | true  |
-         | Disable allowPrimaryContentAdTargeting               | allowPrimaryContentAdTargeting | false |
-         | Enable allowPrimaryBrowseAdTargeting                 | allowPrimaryBrowseAdTargeting  | true  |
-         | Disable allowPrimaryBrowseAdTargeting                | allowPrimaryBrowseAdTargeting  | false |
-         | Enable allowAppContentAdTargeting                    | allowAppContentAdTargeting     | true  |
-         | Disable allowAppContentAdTargeting                   | allowAppContentAdTargeting     | false |
-         | Enable allowACRCollection                            | allowACRCollection             | true  |
-         | Disable allowACRCollection                           | allowACRCollection             | false |
-         | Enable allowCameraAnalytics                          | allowCameraAnalytics           | true  |
-         | Disable allowCameraAnalytics                         | allowCameraAnalytics           | false |
-
+         | Scenario                               | Method                         | Value |
+         | Enable allowResumePoints               | allowResumePoints              | true  |
+         | Disable allowResumePoints              | allowResumePoints              | false |
+         | Enable allowUnentitledResumePoints     | allowUnentitledResumePoints    | true  |
+         | Disable allowUnentitledResumePoints    | allowUnentitledResumePoints    | false |
+         | Enable allowWatchHistory               | allowWatchHistory              | true  |
+         | Disable allowWatchHistory              | allowWatchHistory              | false |
+         | Enable allowProductAnalytics           | allowProductAnalytics          | true  |
+         | Disable allowProductAnalytics          | allowProductAnalytics          | false |
+         | Enable allowPersonalization            | allowPersonalization           | true  |
+         | Disable allowPersonalization           | allowPersonalization           | false |
+         | Enable allowUnentitledPersonalization  | allowUnentitledPersonalization | true  |
+         | Disable allowUnentitledPersonalization | allowUnentitledPersonalization | false |
+         | Disable allowRemoteDiagnostics         | allowRemoteDiagnostics         | false |
+         | Enable allowRemoteDiagnostics          | allowRemoteDiagnostics         | true  |
+         | Enable allowPrimaryContentAdTargeting  | allowPrimaryContentAdTargeting | true  |
+         | Disable allowPrimaryContentAdTargeting | allowPrimaryContentAdTargeting | false |
+         | Enable allowPrimaryBrowseAdTargeting   | allowPrimaryBrowseAdTargeting  | true  |
+         | Disable allowPrimaryBrowseAdTargeting  | allowPrimaryBrowseAdTargeting  | false |
+         | Enable allowAppContentAdTargeting      | allowAppContentAdTargeting     | true  |
+         | Disable allowAppContentAdTargeting     | allowAppContentAdTargeting     | false |
+         | Enable allowACRCollection              | allowACRCollection             | true  |
+         | Disable allowACRCollection             | allowACRCollection             | false |
+         | Enable allowCameraAnalytics            | allowCameraAnalytics           | true  |
+         | Disable allowCameraAnalytics           | allowCameraAnalytics           | false |
+         
    @sdk @transport
    Scenario: Privacy.settings - Positive Scenario: Settings
       When 1st party app invokes the 'Firebolt' API to 'set privacy allow resumePoints as true'

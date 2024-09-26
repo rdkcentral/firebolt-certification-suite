@@ -407,7 +407,7 @@
         "params": "DISCOVERY_CONTENTACCESS_ENTITLEMENTS_INVALID_END_TIME",
         "expected": "error"
     },
-    "DISCOVERY_ONSIGNIN":{
+    "DISCOVERY_ONSIGNIN": {
         "method": "manage_discovery.onSignIn"
     },
     "ONSIGNIN_FOR_DISCOVERY_WITH_APPID": {
@@ -420,7 +420,7 @@
         "validationJsonPath": "result",
         "content": "DISCOVERY_SIGNIN_TRUE"
     },
-    "DISCOVERY_ONSIGNOUT":{
+    "DISCOVERY_ONSIGNOUT": {
         "method": "manage_discovery.onSignOut"
     },
     "ONSIGNOUT_FOR_DISCOVERY_WITH_APPID": {
@@ -433,7 +433,7 @@
         "validationJsonPath": "result",
         "content": "DISCOVERY_SIGNOUT_TRUE"
     },
-    "SET_ALLOWPERSONALIZATION_TO_TRUE":{
+    "SET_ALLOWPERSONALIZATION_TO_TRUE": {
         "method": "manage_privacy.setAllowPersonalization",
         "params": "TRUE"
     },
@@ -443,7 +443,7 @@
         "content": "NULL",
         "expectingError": false
     },
-    "GET_HOME_INTENT":{
+    "GET_HOME_INTENT": {
         "method": "discovery.launch",
         "params": "DISCOVERY_HOME_INTENT"
     },

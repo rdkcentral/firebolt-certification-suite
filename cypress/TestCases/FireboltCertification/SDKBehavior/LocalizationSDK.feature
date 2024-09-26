@@ -6,16 +6,22 @@ Feature: Localization_SDK
         And 3rd party 'certification' app is launched
 
     @sdk
-    Scenario Outline: Localization.<SetMethod> - Positive Scenario: <Scenario> with undefined params
-        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' with '<Validation_Key>'
+    Scenario Outline: Localization.<Scenario> - Positive Scenario: <Attribute> with undefined params
+        Given we test the 'LOCALIZATION_SDK_BEHAVIOUR' getters and setters '<Attribute>'
+        When 1st party app invokes the 'Firebolt' API to set value
+        Then 'Firebolt' platform responds to '1st party app' set API
 
         Examples:
-            | Scenario                | SetMethod                  | API_Key                                    | Validation_Key                                |
-            | locality                | setLocality                | set locality without params                | expected localization locality                |
-            | postalCode              | setPostalCode              | set postalcode without params              | expected localization postalcode              |
-            | countryCode             | setCountryCode             | set countrycode without params             | expected manage localization countrycode      |
-            | language                | setLanguage                | set language without params                | expected manage localization language         |
-            | preferredAudioLanguages | setPreferredAudioLanguages | set preferredaudioLanguages without params | expected localization preferredaudiolanguages |
-            | locale                  | setLocale                  | set locale without params                  | expected manage localization locale           |
-            | timeZone                | setTimeZone                | set timezone without params                | expected localization timezone                |
+            | Scenario       | Attribute   |
+            | setLocality    | locality    |
+            | setPostalCode  | postalCode  |
+            | setCountryCode | countryCode |
+            | setLanguage    | language    |
+            | setLocale      | locale      |
+            | setTimeZone    | timeZone    |
+
+    @sdk
+    Scenario: Localization.setPreferredAudioLanguages - Positive Scenario: preferredAudioLanguages with undefined params
+        Given we test the 'LOCALIZATION_PREFERREDAUDIO_LANGUAGES' getters and setters 'preferredAudioLanguages'
+        When 1st party app invokes the 'Firebolt' API to set value
+        Then 'Firebolt' platform responds to '1st party app' set API
