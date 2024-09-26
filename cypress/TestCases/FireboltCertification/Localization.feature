@@ -56,9 +56,9 @@ Feature: Localization
         And 'Firebolt' platform triggers event '<Second_Event_Validation_Key>'
 
         Examples:
-            | Methods                                          | First_Event_Registration_Key      | Second_Event_Registration_Key   | Set_API_Key        | First_Get_API_Key            | Second_Get_API_Key         | First_Method_Validation_Key     | Second_Method_Validation_Key    | First_Event_Validation_Key                      | Second_Event_Validation_Key                   |
-            | Localization.locale and Localization.countrycode | localization onCountryCodeChanged | localization onLocaleChanged    | set language to en | get localization countrycode | get localization locale    | UK for localization countrycode | enUK for localization locale    | oncountrycodechanged for localization with UK   | onlocalechanged for localization with UK      |
-            | Localization.locale and Localization.language    | localization onLanguageChanged    | localization onLocaleChanged    | set language to es | get localization language    | get localization locale    | es for localization language    | esUK for localization locale    | onlanguagechanged for localization with es      | onlocalechanged for localization with esUK    |
+            | Methods                                          | First_Event_Registration_Key      | Second_Event_Registration_Key   | Set_API_Key           | First_Get_API_Key            | Second_Get_API_Key         | First_Method_Validation_Key     | Second_Method_Validation_Key    | First_Event_Validation_Key                      | Second_Event_Validation_Key                   |
+            | Localization.countrycode and Localization.locale | localization onCountryCodeChanged | localization onLocaleChanged    | set countrycode to UK | get localization countrycode | get localization locale    | UK for localization countrycode | enUK for localization locale    | oncountrycodechanged for localization with UK   | onlocalechanged for localization with UK      |
+            | Localization.language and Localization.locale    | localization onLanguageChanged    | localization onLocaleChanged    | set language to es    | get localization language    | get localization locale    | es for localization language    | esUK for localization locale    | onlanguagechanged for localization with es      | onlocalechanged for localization with esUK    |
 
     @sdk @transport @Sev0
     Scenario Outline: Validating localization.<Scenario>
@@ -74,19 +74,8 @@ Feature: Localization
         Examples:
             | Scenario                         | Method                  | Value      |
             | locale                           | locale                  | enUK       |
-            | Language (es)                    | language                | es         |
             | Language (en)                    | language                | en         |
-
-    @sdk @transport @Sev1
-    Scenario Outline: Validating localization.<Scenario>
-        Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
-        And '3rd party app' registers for the 'Firebolt' event
-        And '3rd party app' invokes the 'Firebolt' get API
-        When 1st party app invokes the 'Firebolt' API to set value
-        Then 'Firebolt' platform responds to '1st party app' set API
-        When '3rd party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '3rd party app' get API
-        And 'Firebolt' platform triggers '3rd party app' event
+            | Language (es)                    | language                | es         |
 
         Examples:
             | Scenario                          | Method                  | Value      |
