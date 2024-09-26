@@ -29,6 +29,7 @@ const logger = require('../../Logger')('main.js');
 const setimmediate = require('setimmediate');
 let appTransport;
 const flatted = require('flatted');
+const _ = require('lodash');
 const internalV2FireboltCallsData = require('../../../fixtures/fireboltCalls/index');
 const externalV2FireboltCallsData = require('../../../fixtures/external/fireboltCalls/index');
 const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/index');
@@ -100,7 +101,11 @@ export default function (module) {
 
     // Merge fireboltCalls
     const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
-    const v2FireboltCallsData = { ...internalV2FireboltCallsData, ...externalV2FireboltCallsData };
+    const v2FireboltCallsData = _.merge(
+      {},
+      internalV2FireboltCallsData,
+      externalV2FireboltCallsData
+    );
 
     cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
       (mergedFireboltCalls) => {
@@ -322,20 +327,13 @@ export default function (module) {
     }
 
     // Overriding default value for mode, if input is not there from feature file or cli.
-    const mode = CONSTANTS.MODE_SDK; // default to SDK
-    if (
-      !additionalParams[CONSTANTS.COMMUNICATION_MODE] &&
-      !UTILS.getEnvVariable(CONSTANTS.COMMUNICATION_MODE, false)
-    ) {
-      additionalParams[CONSTANTS.COMMUNICATION_MODE] = mode;
-    } else if (
-      (!additionalParams[CONSTANTS.COMMUNICATION_MODE] ||
-        additionalParams[CONSTANTS.COMMUNICATION_MODE]) &&
-      UTILS.getEnvVariable(CONSTANTS.COMMUNICATION_MODE, false)
-    ) {
+    const mode = CONSTANTS.MODE_TRANSPORT; // default to Transport
+    if (UTILS.getEnvVariable(CONSTANTS.SUITE_COMMUNICATION_MODE, false)) {
       additionalParams[CONSTANTS.COMMUNICATION_MODE] = UTILS.getEnvVariable(
-        CONSTANTS.COMMUNICATION_MODE
+        CONSTANTS.SUITE_COMMUNICATION_MODE
       );
+    } else {
+      additionalParams[CONSTANTS.COMMUNICATION_MODE] = mode;
     }
 
     // Overriding default value for action, if input is not there from feature file or cli.

@@ -82,11 +82,23 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
           params = UTILS.getEnvVariable(envParam, false);
         }
         // If params contain CYPRESSENV in any parameter assigning corresponding env value
-        const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
-        if (containEnv) {
-          const envParam = containEnv.split('-')[1];
-          params[envParam] = Cypress.env(envParam);
-          delete params[containEnv];
+        if (Array.isArray(params)) {
+          params.forEach((item) => {
+            const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
+
+            if (containEnv) {
+              const envParam = containEnv.split('-')[1];
+              item[envParam] = Cypress.env(envParam);
+              delete item[containEnv];
+            }
+          });
+        } else {
+          const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
+          if (containEnv) {
+            const envParam = containEnv.split('-')[1];
+            params[envParam] = Cypress.env(envParam);
+            delete params[containEnv];
+          }
         }
 
         method = item.method;
@@ -576,6 +588,9 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
     beforeOperation = scenarioList[scenarioName].beforeOperation;
     if (Array.isArray(beforeOperation)) {
       cy.get(Object.values(beforeOperation)).each((beforeOperationObject) => {
+        if (beforeOperationObject.skipTest) {
+          UTILS.skipCurrentTest();
+        }
         if (beforeOperationObject.tags) {
           if (UTILS.checkForTags(beforeOperationObject.tags)) {
             cy.setResponse(beforeOperationObject, scenarioName);
@@ -785,7 +800,6 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     if (result?.success) {
       fireLog(true, eval(CONSTANTS.PERFORMANCE_METRICS_SUCCESS_MESSAGE));
-      return true;
     } else {
       fireLog.fail(eval(CONSTANTS.PERFORMANCE_METRICS_FAILURE_MESSAGE));
     }
@@ -1388,13 +1402,13 @@ Cypress.Commands.add(
     contentObject,
     appId,
     errorContent,
-    eventExpected
+    eventExpected,
+    isNullCase
   ) => {
     // Reading the appId from the environment variable
     appId = UTILS.fetchAppIdentifierFromEnv(appId);
     const context = {};
     const expectingError = errorContent ? true : false;
-    contentObject = contentObject ? contentObject : CONSTANTS.NULL_RESPONSE;
     method = method.includes('_') ? method.split('_')[1] : method;
     if (expectingError) {
       // Retriving the error content from the environment variable if it exists; otherwise, using the key as-is
@@ -1416,6 +1430,7 @@ Cypress.Commands.add(
       expectingError: expectingError,
       appId: appId,
       eventExpected: eventExpected,
+      isNullCase: isNullCase,
     };
 
     if (!Cypress.env(CONSTANTS.SKIPCONTENTVALIDATION)) {

@@ -16,10 +16,10 @@ Feature: Capabilities
     Then 'Firebolt' platform responds with '<Validation_key>'
 
     Examples:
-      | Scenario                                                            | API_Key                                               | Validation_key                                        |
-      | Validate keyboard capability available in 3rd party app             | check availability of keyboard capability             | expected value for keyboard capability availability   |
-      | Validate acknowledgechallenge capability available in 3rd party app | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
-      | Validate pinchallenge capability available in 3rd party app         | check availability of pinchallenge capability         | true for pinchallenge capability availability         |
+      | Scenario                                                            | API_Key                                               | Validation_key                                          |
+      | Validate keyboard capability available in 3rd party app             | check availability of keyboard capability             | expected value for keyboard capability availability     |
+      | Validate acknowledgechallenge capability available in 3rd party app | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability   |
+      | Validate pinchallenge capability available in 3rd party app         | check availability of pinchallenge capability         | expected value for pinchallenge capability availability |
 
   @sdk @transport
   Scenario Outline: Capabilities.available - Positive Scenario: <Scenario>
@@ -27,10 +27,10 @@ Feature: Capabilities
     Then 'Firebolt' platform responds to '1st party app' with '<Validation_key>'
 
     Examples:
-      | Scenario                                                       | API_Key                                               | Validation_key                                        |
-      | Validate keyboard capability available in platform             | check availability of keyboard capability             | expected value for keyboard capability availability   |
-      | Validate acknowledgechallenge capability available in platform | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability |
-      | Validate pinchallenge capability available in platform         | check availability of pinchallenge capability         | true for pinchallenge capability availability         |
+      | Scenario                                                       | API_Key                                               | Validation_key                                          |
+      | Validate keyboard capability available in platform             | check availability of keyboard capability             | expected value for keyboard capability availability     |
+      | Validate acknowledgechallenge capability available in platform | check availability of acknowledgechallenge capability | true for acknowledgechallenge capability availability   |
+      | Validate pinchallenge capability available in platform         | check availability of pinchallenge capability         | expected value for pinchallenge capability availability |
 
   @sdk @transport
   Scenario Outline: Capabilities.granted - Positive Scenario: <Scenario>
@@ -150,7 +150,7 @@ Feature: Capabilities
       | Validate discovery watchNext capability    | check if discovery watchnext capability is permitted with role use    | suggest watchnext tile with entityid      | true for watchnext tile in discovery  |
       | Validate discovery watched capability      | check if discovery watched capability is permitted with role use      | notify watched content with only entityid | true for watched content in discovery |
 
- @sdk @transport
+  @sdk @transport
   Scenario Outline: Capabilities.<Method> - Negative Scenario: <Scenario> and expecting error
     When '3rd party app' invokes the 'Firebolt' API to '<Error_Key>'
     Then 'Firebolt' platform responds with '<Error_Validation_Key>'
@@ -181,7 +181,7 @@ Feature: Capabilities
       | granted   | Validate options with boolean role     | get granted capabilities with invalid options boolean role | invalid params for capabilities granted   |
       | granted   | Validate options with array role       | get granted capabilities with invalid options array role   | invalid params for capabilities granted   |
 
-@sdk @transport
+  @sdk @transport
   Scenario: Capabilities api - Positive Scenario: Validate capability request
     When '3rd party app' invokes the 'Firebolt' API to 'get info of capability request capability'
     Then 'Firebolt' platform responds with 'expected value for info api'

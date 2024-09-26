@@ -29,7 +29,7 @@
         "set privacy setAllowUnentitledPersonalization false",
         "set privacy setAllowUnentitledResumePoints false",
         "set privacy setAllowProductAnalytics false",
-        "set privacy setAllowRemoteDiagnostics false",
+        "set privacy setAllowRemoteDiagnostics true",
         "set privacy setAllowPrimaryContentAdTargeting false",
         "set privacy setAllowPrimaryBrowseAdTargeting false",
         "set privacy setAllowACRCollection false",

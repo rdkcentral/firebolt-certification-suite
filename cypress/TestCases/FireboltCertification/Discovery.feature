@@ -158,7 +158,7 @@ Feature: Discovery
          | Invalid entitlements invalid startTime     | notify content access with invalid entitlements invalid startTime     |
          | Invalid entitlements invalid endTime       | notify content access with invalid entitlements invalid endTime       |
 
-   @Device  @regression @sdk @requiresPlatformImplementation
+   @regression @sdk @requiresPlatformImplementation
    Scenario: Discovery.onPolicyChanged - Positive Scenario: Clearing event listeners
       Given '3rd party app' registers for the 'discovery onPolicyChanged' event using the 'Firebolt' API
       And 3rd party stops listening to the event 'discovery onPolicyChanged event'

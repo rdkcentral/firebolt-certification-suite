@@ -23,7 +23,7 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module fireboltCalls
- * @function And 1st party app invokes the '(.+)' API to '(.+)'
+ * @function And 1st party app invokes the (?:'(.+)' )?API to '(.+)'
  * @description send message to platform to make api call.
  * @param {String} sdk - sdk name.
  * @param {String} key - key name of the request data.
@@ -50,7 +50,7 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
 
 /**
  * @module fireboltCalls
- * @function And '(.+)' invokes the '(.+)' APi to '(.+)'
+ * @function And '(.+)' invokes the '(.+)' API to '(.+)'(?: on '(.+)' device)?
  * @description send message to 3rd party app to make api call.
  * @param {String} appId - 3rd party app id.
  * @param {String} sdk - sdk name.
