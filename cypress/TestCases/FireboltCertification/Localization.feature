@@ -77,6 +77,17 @@ Feature: Localization
             | Language (en)                    | language                | en         |
             | Language (es)                    | language                | es         |
 
+    @sdk @transport @Sev1
+    Scenario Outline: Validating localization.<Scenario>
+        Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
+        And '3rd party app' registers for the 'Firebolt' event
+        And '3rd party app' invokes the 'Firebolt' get API
+        When 1st party app invokes the 'Firebolt' API to set value
+        Then 'Firebolt' platform responds to '1st party app' set API
+        When '3rd party app' invokes the 'Firebolt' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
+        And 'Firebolt' platform triggers '3rd party app' event
+
         Examples:
             | Scenario                          | Method                  | Value      |
             | locality                          | locality                | washington |
