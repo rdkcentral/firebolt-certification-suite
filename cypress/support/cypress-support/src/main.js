@@ -355,7 +355,7 @@ export default function (module) {
     }
 
     cy.runIntentAddon(CONSTANTS.TASK.RUNTEST, additionalParams).then((parsedIntent) => {
-      const intent = UTILS.createIntentMessage(
+      let intent = UTILS.createIntentMessage(
         CONSTANTS.TASK.RUNTEST,
         overrideParams,
         parsedIntent
@@ -368,6 +368,27 @@ export default function (module) {
           assert(false, CONSTANTS.DEVICE_MAC_UNAVAILABLE);
         });
       }
+
+      intent = {
+        action: 'search',
+        data: {
+          query: JSON.stringify({
+            task: 'runTest',
+            params: {
+              extensionSDK: 'firebolt-players',
+              product: 'sky',
+              version: 'next',
+              testoken: '<x-firebolt-testtoken>',
+              forceCacheUpdate: false,
+              exceptionMethods: [],
+            },
+            action: 'core',
+            context: { communicationMode: 'Transport' },
+            metadata: {},
+          }),
+        },
+        context: { source: 'device' },
+      };
 
       cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
         cy.log('Response from Firebolt Implementation: ' + response);
