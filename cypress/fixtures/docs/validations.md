@@ -426,7 +426,7 @@ The 'schemaOnly` validation type allows to skip content validation and stops at 
 To perform screenshot validation, the screenshot validation object should be added to the validation objects.
 
 - The screenshot validation will happen only when the `enableScreenshots` environment variable is set to `true`.
-- FCA look for screenshotValidation status in below format and based on the status, it will decide the overall status of the screenshot validation.
+- FCS look for screenshotValidation status in below format and based on the status, it will decide the overall status of the screenshot validation.
   ```javascript
   {
     status: "pass/fail",
@@ -445,6 +445,7 @@ To perform screenshot validation, the screenshot validation object should be add
   "data": [
     {
       "type": "screenshotValidation",
+      "addToReport": true,
       "validations": []
     }
   ]
@@ -458,6 +459,7 @@ To perform screenshot validation, the screenshot validation object should be add
 | data        | array    | An array that holds the entire set of validation objects.                  |
 | type        | string   | The value that indicates the type of validation.                           |
 | validations | array    | The array that holds all the data for validation, like value, format, etc. |
+| addToReport | boolean  | Flag to determine whether to include the screenshot in the report.         |
 
 ### Examples:
 **Example 1:** Below validation objects consist of OCR and image validation. The OCR validation is to validate the text `tv+` and the image validation is to validate the image with label `auth` with confidence 60 against the screenshot response.
@@ -467,6 +469,7 @@ To perform screenshot validation, the screenshot validation object should be add
   "data": [
     {
       "type": "screenshotValidation",
+      "addToReport": true,
       "validations": [
         {
             "type": "ocr",

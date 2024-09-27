@@ -186,7 +186,7 @@ Example:
 ## screenshot:
 
 ### Request override
-- The `screenshot` request override is used to take a screenshot of the current screen of the platform. It is added in the config module `requestModules/fcs.js` file.
+- The `screenshot` request override is used to take a screenshot of the current screen of the platform. This function has to be added in config module `requestModules/fcs.js` file.
 
 #### Request format for screenshot request override function:
 

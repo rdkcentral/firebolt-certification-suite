@@ -15,7 +15,7 @@ Cypress.Commands.add('screenshotValidation', (object) => {
       const requestMap = {
         method: 'fcs.screenshot',
         params: {
-          addToReport: true,
+          addToReport: object.addToReport,
           validations: object.validations,
         },
       };
