@@ -5,14 +5,14 @@ Feature: Account
       Given the environment has been set up for 'Account' tests
       And 3rd party 'certification' app is launched
 #
-#   @sdk @transport @Sev0
-#   Scenario Outline: <Scenario> Account.<Method>
-#      When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
-#      Then 'Firebolt' platform responds with '<Validation_key>'
-#      Examples:
-#         | Scenario   | Method | Validation_key | API_Key           |
-#         | Validate   | id     | account id     | fetch account ID  |
-#         | Validate   | uid    | account uid    | fetch account UID |
+   @sdk @transport @Sev0
+   Scenario Outline: <Scenario> Account.<Method>
+      When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+      Then 'Firebolt' platform responds with '<Validation_key>'
+      Examples:
+         | Scenario   | Method | Validation_key | API_Key           |
+         | Validate   | id     | account id     | fetch account ID  |
+         | Validate   | uid    | account uid    | fetch account UID |
 
    @sdk @transport @notSupported @requiresPlatformImplementation @Sev2
    Scenario Outline: <Scenario>
