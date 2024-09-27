@@ -15,13 +15,13 @@ Feature: Account
          | Validate   | uid    | account uid    | fetch account UID |
 
    @sdk @transport @notSupported @requiresPlatformImplementation @Sev2
-   Scenario Outline: <Scenario> - Account.<method>
+   Scenario Outline: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
 
       Examples:
-         | Scenario                              | method | API_Key                                           | Validation_key                          |
-         | Account ID Device not provisioned     | id     | fetch account ID when device is not provisioned   | invalid parameter error for account id  |
-         | Account UID Device not provisioned    | uid    | fetch account UID when device is not provisioned  | invalid parameter error for account uid |
-         | Account ID Account retrieval attempt  | id     | fetch account ID when device is not provisioned   | invalid parameter error for account id  |
-         | Account UID Account retrieval attempt | uid    | fetch account UID when device is not provisioned  | invalid parameter error for account uid |
+         | Scenario                                | API_Key                                           | Validation_key                          |
+         | Account.ID - Device not provisioned     | fetch account ID when device is not provisioned   | invalid parameter error for account id  |
+         | Account.UID - Device not provisioned    | fetch account UID when device is not provisioned  | invalid parameter error for account uid |
+         | Account.ID - Account retrieval attempt  | fetch account ID when device is not provisioned   | invalid parameter error for account id  |
+         | Account.UID - Account retrieval attempt | fetch account UID when device is not provisioned  | invalid parameter error for account uid |
