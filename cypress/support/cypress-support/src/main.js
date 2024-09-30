@@ -89,15 +89,6 @@ export default function (module) {
     Cypress.env(CONSTANTS.MESSAGE_QUEUE, messageQueue);
     UTILS.parseExceptionList();
     cy.getModuleReqIdJson();
-    if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) == true) {
-      cy.startOrStopPerformanceService(CONSTANTS.INITIATED).then((response) => {
-        if (response) {
-          Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, true);
-        }
-      });
-    } else {
-      cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
-    }
 
     // Merge fireboltCalls
     const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
@@ -133,6 +124,15 @@ export default function (module) {
   beforeEach(() => {
     cy.getBeforeOperationObject();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+    if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) == true) {
+      cy.startOrStopPerformanceService(CONSTANTS.INITIATED).then((response) => {
+        if (response) {
+          Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, true);
+        }
+      });
+    } else {
+      cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
+    }
   });
 
   /**
@@ -211,13 +211,6 @@ export default function (module) {
   after(() => {
     (async () => {
       try {
-        if (UTILS.getEnvVariable(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false) == true) {
-          cy.startOrStopPerformanceService(CONSTANTS.STOPPED).then((response) => {
-            if (response) {
-              Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false);
-            }
-          });
-        }
         // Stoping the Interaction service if Interaction service is enabled.
         if (UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) == true) {
           cy.startOrStopInteractionsService(CONSTANTS.STOPPED).then((response) => {
@@ -239,6 +232,17 @@ export default function (module) {
         cy.log(`Something went wrong when attempting to unsubscribe: ${err}`);
       }
     })();
+  });
+
+  //after each
+  afterEach(() => {
+    if (UTILS.getEnvVariable(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false) == true) {
+      cy.startOrStopPerformanceService(CONSTANTS.STOPPED).then((response) => {
+        if (response) {
+          Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false);
+        }
+      });
+    }
   });
 
   /**
