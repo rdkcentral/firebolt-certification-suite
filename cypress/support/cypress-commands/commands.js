@@ -166,45 +166,54 @@ Cypress.Commands.add('getSdkVersion', () => {
       })
       .then((latestSDKversion) => {
         // Calling device.version API
-        cy.getDeviceData(CONSTANTS.DEVICE_VERSION, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-          (response) => {
-            // If the response is invalid, assign the latest SDK version to the environment variable.
-            if (response?.api?.readable && response.sdk?.readable) {
-              // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
-              // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
-              // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
-              const deviceSDKversionJson =
-                UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
-                  ? response.api
-                  : response.sdk;
-              const readableSDKVersion = deviceSDKversionJson.readable;
+        cy.getDeviceDataFromThirdPartyApp(
+          CONSTANTS.DEVICE_VERSION,
+          {},
+          CONSTANTS.ACTION_CORE.toLowerCase()
+        ).then((response) => {
+          // If the response is invalid, assign the latest SDK version to the environment variable.
+          if (response?.api?.readable && response.sdk?.readable) {
+            // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
+            // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
+            // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
+            const deviceSDKversionJson =
+              UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
+                ? response.api
+                : response.sdk;
+            const readableSDKVersion = deviceSDKversionJson.readable;
 
-              // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
-              Cypress.env(
-                CONSTANTS.ENV_PLATFORM_SDK_VERSION,
-                readableSDKVersion.includes(CONSTANTS.NEXT) ||
-                  readableSDKVersion.includes(CONSTANTS.PROPOSED)
-                  ? readableSDKVersion
-                  : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
+            // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
+            Cypress.env(
+              CONSTANTS.ENV_PLATFORM_SDK_VERSION,
+              readableSDKVersion.includes(CONSTANTS.NEXT) ||
+                readableSDKVersion.includes(CONSTANTS.PROPOSED)
+                ? readableSDKVersion
+                : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
+            );
+          } else if (response?.api?.readable) {
+            const apiVersion =
+              `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
+                /"/g,
+                ''
               );
-            } else {
-              Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
-            }
-            if (response?.firmware?.readable) {
-              let deviceFirmware = JSON.stringify(response.firmware.readable);
-              deviceFirmware = deviceFirmware.replace(/"/g, '');
-              Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
-            }
-            if (response?.api?.readable) {
-              const fireboltVersion =
-                `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
-                  /"/g,
-                  ''
-                );
-              Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
-            }
+            Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, apiVersion);
+          } else {
+            Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
           }
-        );
+          if (response?.firmware?.readable) {
+            let deviceFirmware = JSON.stringify(response.firmware.readable);
+            deviceFirmware = deviceFirmware.replace(/"/g, '');
+            Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+          }
+          if (response?.api?.readable) {
+            const fireboltVersion =
+              `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
+                /"/g,
+                ''
+              );
+            Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
+          }
+        });
       });
   }
 });
@@ -221,6 +230,11 @@ Cypress.Commands.add('updateRunInfo', () => {
   let deviceModel = '';
   let deviceDistributor = '';
   let devicePlatform = '';
+  cy.getSdkVersion().then(() => {
+    cy.getFireboltJsonData().then((data) => {
+      Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
+    });
+  });
   // function to set env variable for run info data
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
     if (deviceData === '') {
@@ -395,7 +409,12 @@ Cypress.Commands.add('getDeviceDataFromThirdPartyApp', (method, params, action) 
   cy.runIntentAddon(task, intentMessage).then((parsedIntent) => {
     const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
     const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
+    console.log(JSON.stringify(requestTopic) + ' reqTop2222');
+    console.log(JSON.stringify(responseTopic) + ' responseTopic22222222');
+    console.log(JSON.stringify(parsedIntent) + ' parsedIntent22222222222');
+
     cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent).then((response) => {
+      console.log(JSON.stringify(response) + ' RESSSSSSSSSSSSSSS');
       if (typeof response === 'string' && response === CONSTANTS.NO_RESPONSE) {
         return 'N/A';
       }
