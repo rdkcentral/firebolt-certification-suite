@@ -166,54 +166,52 @@ Cypress.Commands.add('getSdkVersion', () => {
       })
       .then((latestSDKversion) => {
         // Calling device.version API
-        cy.getDeviceDataFromThirdPartyApp(
-          CONSTANTS.DEVICE_VERSION,
-          {},
-          CONSTANTS.ACTION_CORE.toLowerCase()
-        ).then((response) => {
-          // If the response is invalid, assign the latest SDK version to the environment variable.
-          if (response?.api?.readable && response.sdk?.readable) {
-            // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
-            // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
-            // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
-            const deviceSDKversionJson =
-              UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
-                ? response.api
-                : response.sdk;
-            const readableSDKVersion = deviceSDKversionJson.readable;
+        cy.getDeviceData(CONSTANTS.DEVICE_VERSION, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+          (response) => {
+            // If the response is invalid, assign the latest SDK version to the environment variable.
+            if (response?.api?.readable && response.sdk?.readable) {
+              // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
+              // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
+              // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
+              const deviceSDKversionJson =
+                UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
+                  ? response.api
+                  : response.sdk;
+              const readableSDKVersion = deviceSDKversionJson.readable;
 
-            // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
-            Cypress.env(
-              CONSTANTS.ENV_PLATFORM_SDK_VERSION,
-              readableSDKVersion.includes(CONSTANTS.NEXT) ||
-                readableSDKVersion.includes(CONSTANTS.PROPOSED)
-                ? readableSDKVersion
-                : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
-            );
-          } else if (response?.api?.readable) {
-            const apiVersion =
-              `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
-                /"/g,
-                ''
+              // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
+              Cypress.env(
+                CONSTANTS.ENV_PLATFORM_SDK_VERSION,
+                readableSDKVersion.includes(CONSTANTS.NEXT) ||
+                  readableSDKVersion.includes(CONSTANTS.PROPOSED)
+                  ? readableSDKVersion
+                  : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
               );
-            Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, apiVersion);
-          } else {
-            Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
+            } else if (response?.api?.readable) {
+              const apiVersion =
+                `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
+                  /"/g,
+                  ''
+                );
+              Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, apiVersion);
+            } else {
+              Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
+            }
+            if (response?.firmware?.readable) {
+              let deviceFirmware = JSON.stringify(response.firmware.readable);
+              deviceFirmware = deviceFirmware.replace(/"/g, '');
+              Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+            }
+            if (response?.api?.readable) {
+              const fireboltVersion =
+                `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
+                  /"/g,
+                  ''
+                );
+              Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
+            }
           }
-          if (response?.firmware?.readable) {
-            let deviceFirmware = JSON.stringify(response.firmware.readable);
-            deviceFirmware = deviceFirmware.replace(/"/g, '');
-            Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
-          }
-          if (response?.api?.readable) {
-            const fireboltVersion =
-              `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
-                /"/g,
-                ''
-              );
-            Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
-          }
-        });
+        );
       });
   }
 });
@@ -365,15 +363,17 @@ Cypress.Commands.add('getDeviceData', (method, param, action) => {
     param: param,
     action: action,
   };
-  cy.log(
-    'Call from 1st party App, method: ' +
-      requestMap.method +
-      ' params: ' +
-      JSON.stringify(requestMap.param)
-  );
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
-      if (response && response.result) {
+      if (response === null) {
+        cy.getDeviceDataFromThirdPartyApp(
+          CONSTANTS.DEVICE_VERSION,
+          {},
+          CONSTANTS.ACTION_CORE.toLowerCase()
+        ).then((responseFrom3rdPartyApp) => {
+          return responseFrom3rdPartyApp;
+        });
+      } else if (response && response.result) {
         return response.result;
       } else {
         throw 'Obtained response is null|undefined';
