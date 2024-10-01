@@ -409,12 +409,7 @@ Cypress.Commands.add('getDeviceDataFromThirdPartyApp', (method, params, action) 
   cy.runIntentAddon(task, intentMessage).then((parsedIntent) => {
     const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
     const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
-    console.log(JSON.stringify(requestTopic) + ' reqTop2222');
-    console.log(JSON.stringify(responseTopic) + ' responseTopic22222222');
-    console.log(JSON.stringify(parsedIntent) + ' parsedIntent22222222222');
-
     cy.sendMessagetoApp(requestTopic, responseTopic, parsedIntent).then((response) => {
-      console.log(JSON.stringify(response) + ' RESSSSSSSSSSSSSSS');
       if (typeof response === 'string' && response === CONSTANTS.NO_RESPONSE) {
         return 'N/A';
       }
