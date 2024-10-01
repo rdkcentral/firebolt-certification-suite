@@ -234,7 +234,7 @@ export default function (module) {
     })();
   });
 
-  //after each
+  // after each
   afterEach(() => {
     if (UTILS.getEnvVariable(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false) == true) {
       cy.startOrStopPerformanceService(CONSTANTS.STOPPED).then((response) => {
