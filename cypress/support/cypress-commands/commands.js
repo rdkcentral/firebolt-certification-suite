@@ -168,6 +168,7 @@ Cypress.Commands.add('getSdkVersion', () => {
         // Calling device.version API
         cy.getDeviceData(CONSTANTS.DEVICE_VERSION, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
           (response) => {
+            console.log(JSON.stringify(response) + ' RESPONSEEEEEE');
             // If the response is invalid, assign the latest SDK version to the environment variable.
             if (response?.api?.readable && response.sdk?.readable) {
               // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
@@ -228,11 +229,6 @@ Cypress.Commands.add('updateRunInfo', () => {
   let deviceModel = '';
   let deviceDistributor = '';
   let devicePlatform = '';
-  cy.getSdkVersion().then(() => {
-    cy.getFireboltJsonData().then((data) => {
-      Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
-    });
-  });
   // function to set env variable for run info data
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
     if (deviceData === '') {
@@ -258,6 +254,12 @@ Cypress.Commands.add('updateRunInfo', () => {
               logger.info('Unable to read from configModule constants');
               return false;
             }
+            Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, false);
+            cy.getSdkVersion().then(() => {
+              cy.getFireboltJsonData().then((data) => {
+                Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
+              });
+            });
             const deviceMac = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC).replace(/:/g, '');
             const deviceMacJson = `./cypress/fixtures/devices/${deviceMac}.json`;
             // Check if mac json file exists
@@ -371,9 +373,11 @@ Cypress.Commands.add('getDeviceData', (method, param, action) => {
           {},
           CONSTANTS.ACTION_CORE.toLowerCase()
         ).then((responseFrom3rdPartyApp) => {
+          console.log(JSON.stringify(responseFrom3rdPartyApp) + ' responseFrom3rdPartyApp');
           return responseFrom3rdPartyApp;
         });
       } else if (response && response.result) {
+        console.log(JSON.stringify(response.result) + ' response.result');
         return response.result;
       } else {
         throw 'Obtained response is null|undefined';
