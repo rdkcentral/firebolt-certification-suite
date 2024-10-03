@@ -607,7 +607,7 @@
                 "validations": [
                     {
                         "mode": "staticContentValidation",
-                        "type": "DISCOVERYLAUNCH_INTENT_RANDOM_STRING",
+                        "type": "DISCOVERYLAUNCH_INTENT_RANDOM_STRING_CONTENT",
                         "description": "Validation of the DiscoveryLaunch for random string source"
                     }
                 ]
@@ -622,7 +622,7 @@
                 "validations": [
                     {
                         "mode": "staticContentValidation",
-                        "type": "DISCOVERYLAUNCH_SEARCH_INTENT_SOURCE",
+                        "type": "DISCOVERYLAUNCH_SEARCH_INTENT_SOURCE_CONTENT",
                         "description": "Validation of the DiscoveryLaunch for search intent"
                     }
                 ]
