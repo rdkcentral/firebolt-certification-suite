@@ -628,5 +628,20 @@
                 ]
             }
         ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for search intent"
+                    }
+                ]
+            }
+        ]
     }
 }
