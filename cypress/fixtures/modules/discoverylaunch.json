@@ -1,0 +1,618 @@
+{
+    "NULL_INTENT": {"appId" : "comcast.test.firecert"},
+    "HOME_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action":"home","context":{"source":"voice"}}},
+    "PLAYBACK_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action": "playback", "data": {"entityType": "program","programType": "movie", "entityId": "example-movie-id"},"context": {"source": "voice"}}},
+    "ENTITY_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action": "entity", "data": {"entityType": "program", "programType": "movie", "entityId": "example-movie-id" }, "context": {"source": "voice" } }},
+    "INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action":"launch","context":{"source":"voice"}}},
+    "SEARCH_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action":"search","context":{"source":"voice"},"data": {"query": "walter white"}}},
+    "SECTION_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action": "section", "data": { "sectionName": "settings" }, "context": { "source": "voice"} }},
+    "TUNE_INTENT": {"appId": "comcast.test.firecert", "intent": {"action": "tune", "data": { "entity": { "entityType": "channel", "channelType": "streaming", "entityId": "an-ott-channel"}, "options": {"restartCurrentProgram": true }}, "context": {"source": "voice"}}},
+    "PLAYENTITY_INTENT": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "playlist","entityId": "playlist/xyz"},"options": {"playFirstId": "song/xyz"}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran"},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["song"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["album"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_CONCERT":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"programTypes": ["concert"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_SPORTINGEVENT":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"programTypes": ["sportingEvent"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_PREVIEW":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"programTypes": ["preview"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_OTHER":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"programTypes": ["other"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_ADVERTISEMENT":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"programTypes": ["advertisement"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MUSICVIDEO":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"programTypes": ["musicVideo"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MINISODE":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"programTypes": ["minisode"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_EXTRA":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"programTypes": ["extra"]}},"context": {"source": "voice"}}},
+    "PLAYENTITY_INTENT_WITH_PROGRAMTYPE_MOVIE": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "program","programType": "movie","entityId": "el-camino"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_INTENT_WITH_PROGRAMTYPE_EPISODE": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "program","programType": "episode","entityId": "breaking-bad-pilot","seriesId": "breaking-bad","seasonId": "breaking-bad-season-1"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_INTENT_WITH_PROGRAMTYPE_CONCERT": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "program","programType": "concert","entityId": "live-aid"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_INTENT_WITHOUT_OPTIONS": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "playlist","entityId": "playlist/xyz"}},"context": {"source": "voice"}}},
+    "PLAYBACK_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE": {"appId" : "comcast.test.firecert", "intent" : {"action": "playback", "data": {"programType": "movie", "entityId": "example-movie-id"},"context": {"source": "voice"}}},
+    "PLAYENTITY_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE_FOR_MOVIEENTITY": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"programType": "movie","entityId": "el-camino"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE_FOR_TVEPISODEENTITY": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"programType": "episode","entityId": "breaking-bad-pilot", "seriesId": "breaking-bad", "seasonId": "breaking-bad-season-1"}},"context": {"source": "voice"}}},
+
+    "NO_ACTION_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"data": {"entityType": "program", "programType": "movie", "entityId": "example-movie-id" }, "context": {"source": "voice" } }},
+    "NO_CONTEXT_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action": "entity", "data": {"entityType": "program", "programType": "movie", "entityId": "example-movie-id" } }},
+    "NO_SOURCE_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action": "entity", "data": {"entityType": "program", "programType": "movie", "entityId": "example-movie-id" }, "context": {}}},
+    "NO_DATA_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action": "entity", "context": {"source": "voice" } }},
+    "INVALID_ACTION_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action": 123,"context":{"source":"voice"}}},
+    "INVALID_CONTEXT_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action":"home","context":{}}},
+    "INVALID_DATA_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action": "playback", "data": 123,"context": {"source": "voice"}}},
+    "PLAYBACK_INTENT_ONLY_ACTION": {"appId" : "comcast.test.firecert", "intent" : {"action": "playback"}},
+    "PLAYBACK_INTENT_INT_DATA": {"appId" : "comcast.test.firecert", "intent" : {"action": "playback", "data": 123,"context": {"source": "voice"}}},
+    "ENTITY_INTENT_INT_DATA": {"appId" : "comcast.test.firecert", "intent" : {"action": "entity", "data": 123, "context": {"source": "voice" } }},
+    "SEARCH_INTENT_INT_DATA": {"appId" : "comcast.test.firecert", "intent" : {"action":"search","context":{"source":"voice"},"data": 123}},
+    "SECTION_INTENT_INT_DATA": {"appId" : "comcast.test.firecert", "intent" : {"action": "section", "data": 123, "context": { "source": "voice"} }},
+    "TUNE_INTENT_INT_DATA": {"appId": "comcast.test.firecert", "intent": {"action": "tune", "data": 123, "options": {"restartCurrentProgram": true }}, "context": {"source": "voice"}},
+    "HOME_INTENT_INVALID_APPID": {"appId" : 123, "intent" : {"action":"home","context":{"source":"voice"}}},
+    "PLAYENTITY_INTENT_INT_DATA": {"appId" : "comcast.test.firecert","intent" : { "action": "play-entity","data": 123,"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_TEST_DATA":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": "test","context": {"source": "voice"}}},
+    "NO_QUERY_INTENT": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"options": {"musicTypes": ["song"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_INT_DATA":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": 123,"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_INT_QUERY":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": 123,"options": {"musicTypes": ["album"], "programTypes": ["extra"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_INT_PROGRAMTYPE":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["album"], "programTypes": 123}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_INT_MUSICTYPE":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": 123, "programTypes": ["extra"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_INT_TYPES":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": 123, "programTypes": 123}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_PROGRAMTYPE_STRING":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["album"], "programTypes": "extra"}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_MUSICTYPE_STRING":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": "album", "programTypes": ["extra"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_TYPES_WITHOUT_ARRAY":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": "album", "programTypes": "extra"}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_INVALID_PROGRAMTYPE":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"programTypes": ["abc"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_INVALID_MUSICTYPE":{"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["abc"]}},"context": {"source": "voice"}}},
+    "PLAYENTITY_MULTIPLE_OPTIONS":{"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "playlist","entityId": "playlist/xyz"},"options": {"playFirstId": "song/xyz","playFirstTrack": 3}},"context": {"source": "voice"}}},
+    "PLAYENTITY_PROGRAM_WITH_OPTIONS":{"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "program","programType": "movie","entityId": "el-camino"},"options": {"playFirstTrack": 0}},"context": {"source": "voice"}}},
+    "PLAYENTITY_INVALID_PLAYFIRSTTRACK":{"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "playlist","entityId": "playlist/xyz"},"options": {"playFirstTrack": 0}},"context": {"source": "voice"}}},
+    "PLAYENTITY_INTEGER_PLAYFIRSTID":{"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "playlist","entityId": "playlist/xyz"},"options": {"playFirstId": 123}},"context": {"source": "voice"}}},
+    "PLAYENTITY_WITHOUT_ENTITYTYPE": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityId": "playlist/xyz"},"options": {"playFirstId": "song/xyz"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_WITHOUT_ENTITYID": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "playlist"},"options": {"playFirstId": "song/xyz"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_WITHOUT_PROGRAMTYPE_FOR_MOVIEENTITY": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "program","entityId": "el-camino"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_MOVIEENTITY": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"programType": "movie","entityId": "el-camino"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_WITHOUT_ENTITYID_FOR_MOVIEENTITY": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "program","programType": "movie"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_WITHOUT_PROGRAMTYPE_FOR_TVEPISODEENTITY": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "program","entityId": "breaking-bad-pilot","seriesId": "breaking-bad","seasonId": "breaking-bad-season-1"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_TVEPISODEENTITY": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"programType": "episode","entityId": "breaking-bad-pilot","seriesId": "breaking-bad","seasonId": "breaking-bad-season-1"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_WITHOUT_ENTITYID_FOR_TVEPISODEENTITY": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "program","programType": "episode","seriesId": "breaking-bad","seasonId": "breaking-bad-season-1"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_WITHOUT_SERIESID_FOR_TVEPISODEENTITY": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "program","programType": "episode","entityId": "breaking-bad-pilot","seasonId": "breaking-bad-season-1"}},"context": {"source": "voice"}}},
+    "PLAYENTITY_WITHOUT_SEASONID_FOR_TVEPISODEENTITY": {"appId" : "comcast.test.firecert","intent" : {"action": "play-entity","data": {"entity": {"entityType": "program","programType": "episode","entityId": "breaking-bad-pilot","seriesId": "breaking-bad"}},"context": {"source": "voice"}}},
+    "INVALID_SOURCE_INTENT": {"appId" : "comcast.test.firecert", "intent" : {"action":"home","context":{"source":null}}},
+    "HOME_INTENT_INT_SOURCE": {"appId" : "comcast.test.firecert", "intent" : {"action":"home","context":{"source":123}}},
+    "PLAYBACK_INTENT_INT_SOURCE": {"appId" : "comcast.test.firecert", "intent" : {"action": "playback", "data": {"entityType": "program","programType": "movie", "entityId": "example-movie-id"},"context": {"source": 123}}},
+    "ENTITY_INTENT_INT_SOURCE": {"appId" : "comcast.test.firecert", "intent" : {"action": "entity", "data": {"entityType": "program", "programType": "movie", "entityId": "example-movie-id" }, "context": {"source": 123 } }},
+    "INTENT_INT_SOURCE": {"appId" : "comcast.test.firecert", "intent" : {"action":"launch","context":{"source":123}}},
+    "SEARCH_INTENT_INT_SOURCE": {"appId" : "comcast.test.firecert", "intent" : {"action":"search","context":{"source":123},"data": {"query": "walter white"}}},
+    "SECTION_INTENT_INT_SOURCE": {"appId" : "comcast.test.firecert", "intent" : {"action": "section", "data": { "sectionName": "settings" }, "context": { "source": 123} }},
+    "TUNE_INTENT_INT_SOURCE": {"appId": "comcast.test.firecert", "intent": {"action": "tune", "data": { "entity": { "entityType": "channel", "channelType": "streaming", "entityId": "an-ott-channel"}, "options": {"restartCurrentProgram": true }}, "context": {"source": 123}}},
+
+    "HOME_INTENT_SOURCE": {"appId" : "comcast.test.firecert", "intent" : {"action":"home","context":{"source": "TestingString"}}},
+    "PLAYBACK_INTENT_SOURCE": {"appId" : "comcast.test.firecert", "intent" : {"action": "playback", "data": {"entityType": "program","programType": "movie", "entityId": "example-movie-id"},"context": {"source": "voice"}}},
+    "PLAYBACK_INTENT_WITHOUT_ENTITYTYPE": {"appId" : "comcast.test.firecert", "intent" : {"action": "playback", "data": {"programType": "movie", "entityId": "example-movie-id"},"context": {"source": "voice"}}},
+    "ENTITY_INTENT_WITHOUT_ENTITYTYPE": {"appId" : "comcast.test.firecert", "intent" : {"action": "entity", "data": { "programType": "movie", "entityId": "example-movie-id" }, "context": {"source": "voice" } }},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_CONCERT": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["song"], "programTypes": ["concert"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_SPORTINGEVENT": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["song"], "programTypes": ["sportingEvent"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_PREVIEW": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["song"], "programTypes": ["preview"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_OTHER": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["song"], "programTypes": ["other"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_ADVERTISEMENT": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["song"], "programTypes": ["advertisement"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MUSICVIDEO": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["song"], "programTypes": ["musicVideo"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MINISODE": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["song"], "programTypes": ["minisode"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["song"], "programTypes": ["extra"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_CONCERT": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["album"], "programTypes": ["concert"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_SPORTINGEVENT": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["album"], "programTypes": ["sportingEvent"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_PREVIEW": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["album"], "programTypes": ["preview"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_OTHER": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["album"], "programTypes": ["other"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_ADVERTISEMENT": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["album"], "programTypes": ["advertisement"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MUSICVIDEO": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["album"], "programTypes": ["musicVideo"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MINISODE": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["album"], "programTypes": ["minisode"]}},"context": {"source": "voice"}}},
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_EXTRA": {"appId" : "comcast.test.firecert","intent" : {"action": "play-query","data": {"query": "Ed Sheeran","options": {"musicTypes": ["album"], "programTypes": ["extra"]}},"context": {"source": "voice"}}},
+    "LAUNCH_APP_WITH_INVALID_APPID_VALUE": {"appId" : "thirdPartyApp", "intent" : {"action":"home","context":{"source":"voice"}}},
+    "LAUNCH_APP_WITH_INVALID_APPID_TYPE" : {"appId" : 1234, "intent" : {"action":"home","context":{"source":"voice"}}},
+    "LAUNCH_APP_WITH_RANDOM_STRING_SOURCE": {"appId" : "comcast.test.firecert", "intent" : {"action":"search","context":{"source":"abcdwxyz"},"data": {"query": "walter white"}}},
+    "LAUNCH_APP_WITH_SEARCH_INTENT_SOURCE": {"appId" : "comcast.test.firecert", "intent" : {"action":"search","context":{"source": "voice"},"data": {"query": "walter white"}}},
+    "LAUNCH_APP_WITH_SEARCH_INTENT_INT_SOURCE": {"appId" : "comcast.test.firecert", "intent" : {"action":"search","context":{"source":123},"data": {"query": "walter white"}}},
+    "HOME_INTENT_CONTENT": {
+        "action": "home",
+        "context": {
+            "source": "voice"
+        }
+    },
+    "PLAYBACK_INTENT_CONTENT": {
+        "action": "playback",
+        "data": {
+            "entityType": "program",
+            "programType": "movie",
+            "entityId": "example-movie-id"
+        },
+        "context": {
+            "source": "voice"
+        }
+    },
+    "PLAYBACK_INTENT_WITHOUT_ENTITYTYPE_CONTENT": {
+        "action": "playback",
+        "data": {
+          "entityType":"program",
+          "programType": "movie",
+          "entityId": "example-movie-id"
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "ENTITY_INTENT_CONTENT": {
+        "action": "entity",
+        "data": {
+            "entityType": "program",
+            "programType": "movie",
+            "entityId": "example-movie-id"
+        },
+        "context": {
+            "source": "voice"
+        }
+    },
+    "ENTITY_INTENT_WITHOUT_ENTITYTYPE_CONTENT": {
+        "action": "entity",
+        "data": {
+            "entityType":"program",
+            "programType": "movie",
+            "entityId": "example-movie-id"
+        },
+        "context": {
+            "source": "voice"
+        }
+    },
+    "INTENT_CONTENT": {
+        "action": "launch",
+        "context": {
+            "source": "voice"
+        }
+    },
+    "SEARCH_INTENT_CONTENT": {
+        "action": "search",
+        "context": {
+            "source": "voice"
+        },
+        "data": {
+            "query": "walter white"
+        }
+    },
+    "SECTION_INTENT_CONTENT": {
+        "action": "section",
+        "data": {
+            "sectionName": "settings"
+        },
+        "context": {
+            "source": "voice"
+        }
+    },
+    "TUNE_INTENT_CONTENT": {
+        "action": "tune",
+        "data": {
+          "entity": {
+            "entityType": "channel",
+            "channelType": "streaming",
+            "entityId": "an-ott-channel"
+          },
+          "options": {
+            "restartCurrentProgram": true
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYENTITY_INTENT_CONTENT": {
+        "action": "play-entity",
+        "data": {
+          "entity": {
+            "entityType": "playlist",
+            "entityId": "playlist/xyz"
+          },
+          "options": {
+            "playFirstId": "song/xyz"
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran"
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["song"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["album"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_CONCERT_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "programTypes": ["concert"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_SPORTINGEVENT_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "programTypes": ["sportingEvent"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_PREVIEW_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "programTypes": ["preview"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_OTHER_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "programTypes": ["other"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_ADVERTISEMENT_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "programTypes": ["advertisement"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MUSICVIDEO_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "programTypes": ["musicVideo"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MINISODE_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "programTypes": ["minisode"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_PROGRAMTYPE_EXTRA_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "programTypes": ["extra"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_CONCERT_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["song"],
+            "programTypes": ["concert"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_SPORTINGEVENT_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["song"],
+            "programTypes": ["sportingEvent"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_PREVIEW_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["song"],
+            "programTypes": ["preview"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_OTHER_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["song"],
+            "programTypes": ["other"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_ADVERTISEMENT_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["song"],
+            "programTypes": ["advertisement"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MUSICVIDEO_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["song"],
+            "programTypes": ["musicVideo"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MINISODE_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["song"],
+            "programTypes": ["minisode"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["song"],
+            "programTypes": ["extra"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_CONCERT_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["album"],
+            "programTypes": ["concert"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_SPORTINGEVENT_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["album"],
+            "programTypes": ["sportingEvent"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_PREVIEW_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["album"],
+            "programTypes": ["preview"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_OTHER_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["album"],
+            "programTypes": ["other"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_ADVERTISEMENT_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["album"],
+            "programTypes": ["advertisement"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MUSICVIDEO_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["album"],
+            "programTypes": ["musicVideo"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MINISODE_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["album"],
+            "programTypes": ["minisode"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_EXTRA_CONTENT": {
+        "action": "play-query",
+        "data": {
+          "query": "Ed Sheeran",
+          "options": {
+            "musicTypes": ["album"],
+            "programTypes": ["extra"]
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYENTITY_INTENT_WITHOUT_OPTIONS_CONTENT": {
+        "action": "play-entity",
+        "data": {
+          "entity": {
+            "entityType": "playlist",
+            "entityId": "playlist/xyz"
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYENTITY_INTENT_WITH_PROGRAMTYPE_MOVIE_CONTENT": {
+        "action": "play-entity",
+        "data": {
+          "entity": {
+            "entityType": "program",
+            "programType": "movie",
+            "entityId": "el-camino"
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYENTITY_INTENT_WITH_PROGRAMTYPE_EPISODE_CONTENT": {
+        "action": "play-entity",
+        "data": {
+          "entity": {
+            "entityType": "program",
+            "programType": "episode",
+            "entityId": "breaking-bad-pilot",
+            "seriesId": "breaking-bad",
+            "seasonId": "breaking-bad-season-1"
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "PLAYENTITY_INTENT_WITH_PROGRAMTYPE_CONCERT_CONTENT": {
+        "action": "play-entity",
+        "data": {
+          "entity": {
+            "entityType": "program",
+            "programType": "concert",
+            "entityId": "live-aid"
+          }
+        },
+        "context": {
+          "source": "voice"
+        }
+    },
+    "INTENT_RANDOM_STRING_CONTENT": {
+        "action": "search",
+        "context": {
+          "source": "voice"
+        },
+        "data": {
+          "query": "walter white"
+        }
+    },
+    "SEARCH_INTENT_SOURCE_CONTENT": {
+        "action": "search",
+        "context": {
+          "source": "voice"
+        },
+        "data": {
+          "query": "walter white"
+        }
+    }
+}
