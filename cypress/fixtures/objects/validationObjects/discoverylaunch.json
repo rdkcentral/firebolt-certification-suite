@@ -1,5 +1,5 @@
 {
-    "DISCOVERYLAUNCH_HOME_INTENT_CONTENT": {
+    "DISCOVERYLAUNCH_HOME_INTENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -14,7 +14,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYBACK_INTENT_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYBACK_INTENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -29,7 +29,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -44,7 +44,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_ENTITY_INTENT_CONTENT": {
+    "DISCOVERYLAUNCH_ENTITY_INTENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -59,7 +59,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_ENTITY_INTENT_WITHOUT_ENTITYTYPE_CONTENT": {
+    "DISCOVERYLAUNCH_ENTITY_INTENT_WITHOUT_ENTITYTYPE": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -74,7 +74,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_INTENT_CONTENT": {
+    "DISCOVERYLAUNCH_INTENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -89,7 +89,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_SEARCH_INTENT_CONTENT": {
+    "DISCOVERYLAUNCH_SEARCH_INTENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -104,7 +104,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_SECTION_INTENT_CONTENT": {
+    "DISCOVERYLAUNCH_SECTION_INTENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -119,7 +119,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_TUNE_INTENT_CONTENT": {
+    "DISCOVERYLAUNCH_TUNE_INTENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -134,7 +134,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYENTITY_INTENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -149,7 +149,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -314,7 +314,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_CONCERT_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_CONCERT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -329,7 +329,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_SPORTINGEVENT_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_SPORTINGEVENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -344,7 +344,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_PREVIEW_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_PREVIEW": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -359,7 +359,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_OTHER_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_OTHER": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -374,7 +374,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_ADVERTISEMENT_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_ADVERTISEMENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -389,7 +389,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MUSICVIDEO_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MUSICVIDEO": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -404,7 +404,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MINISODE_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MINISODE": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -419,7 +419,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_CONCERT_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_CONCERT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -434,7 +434,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_SPORTINGEVENT_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_SPORTINGEVENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -449,7 +449,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_PREVIEW_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_PREVIEW": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -464,7 +464,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_OTHER_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_OTHER": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -479,7 +479,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_ADVERTISEMENT_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_ADVERTISEMENT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -494,7 +494,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MUSICVIDEO_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MUSICVIDEO": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -509,7 +509,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MINISODE_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MINISODE": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -524,7 +524,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_EXTRA_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_EXTRA": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -539,7 +539,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_OPTIONS_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_OPTIONS": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -554,7 +554,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_MOVIE_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_MOVIE": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -569,7 +569,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_EPISODE_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_EPISODE": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
@@ -584,7 +584,7 @@
             }
         ]
     },
-    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_CONCERT_CONTENT": {
+    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_CONCERT": {
         "method": "discovery.onNavigateTo",
         "data": [
             {
