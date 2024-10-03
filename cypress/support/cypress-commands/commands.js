@@ -168,7 +168,6 @@ Cypress.Commands.add('getSdkVersion', () => {
         // Calling device.version API
         cy.getDeviceData(CONSTANTS.DEVICE_VERSION, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
           (response) => {
-            console.log(JSON.stringify(response) + ' RESPONSEEEEEE');
             // If the response is invalid, assign the latest SDK version to the environment variable.
             if (response?.api?.readable && response.sdk?.readable) {
               // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
@@ -373,11 +372,9 @@ Cypress.Commands.add('getDeviceData', (method, param, action) => {
           {},
           CONSTANTS.ACTION_CORE.toLowerCase()
         ).then((responseFrom3rdPartyApp) => {
-          console.log(JSON.stringify(responseFrom3rdPartyApp) + ' responseFrom3rdPartyApp');
           return responseFrom3rdPartyApp;
         });
       } else if (response && response.result) {
-        console.log(JSON.stringify(response.result) + ' response.result');
         return response.result;
       } else {
         throw 'Obtained response is null|undefined';
