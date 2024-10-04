@@ -73,6 +73,7 @@ To execute the certification suite against any platform, the following setup mus
 |interactionsMetrics                      | boolean | true                           | Makes a call to platform to start/stop listening to firebolt interactions based on action passed |
 | pubSubUrl                           | string  | ws://127.0.0.1:8081               | Sets the the url to use for a PubSub server which will be used for 3rd party app communication.                                                                                                                     |
 | fcaAppList                  | array | ['default3rdPartyAppId']     | Holds the list of fca app identifiers |
+|suiteCommunicationMode       | string | 'SDK' or 'Transport'                        | Set communicationMode as SDK/Transport for suite feature files. Default mode is Transport                                                                                                                                                         |
 
 - Provide the specPattern mapping details. 
 Update the specHelperConfig.js with the specPattern mapping details.
@@ -151,6 +152,8 @@ Other cypress command line can also be passed
     To override the default response for a firebolt call.
     Set pre-requisite values for UI operations like automating the UI actions.
 
+3. To manually specify that a test should be skipped during execution. Useful in the case where a specific test case may be supported by both the framework and the platform but running the test causes undesired behavior which impacts the ability of the device to function as intended.
+
 - Before operation also works based on tags provided in cli. This tags can be send as env values from cli command using the key **beforeOperationTags**. Based on the tags specified in cli and the beforeOperation, corresponding configModule would perform necessary action steps. We can send the tags in below format.<br/>
   **--env beforeOperationTags='tag'**
 
@@ -189,7 +192,8 @@ Other cypress command line can also be passed
                   {
                      "fireboltMock/fireboltCall": "<Key of params that to be send>",
                      "firstParty": "<true/false>",
-                     "tags": ["if any tags are necessary for that before operation, else no need to add tags property"]
+                     "tags": ["if any tags are necessary for that before operation, else no need to add tags property"],
+                     "skipTest": "<true/false>",
                   }
                ]
             },
@@ -201,9 +205,11 @@ Other cypress command line can also be passed
       Properties in before Operation :<br/> 1) "fireboltMock/fireboltCall" : FireboltCall as a key will be used to make firebolt calls to the platform/3rd party app. FireboltMock as a key will be used to override the default response or set the responses.<br/>
       Data of fireboltMock/fireboltCall keys should be added in config module **fixtures/fireboltMocks/FeatureFileName.json** or **fixtures/fireboltCalls/FeatureFileName.json**
 
-          2) "firstParty" : Set value as **true** if the call is to firstParty, set it as **false** if the value is to 3rd party. If no firstparty property is added, it will take **false** as default value.
+          1) "firstParty" : Set value as **true** if the call is to firstParty, set it as **false** if the value is to 3rd party. If no firstparty property is added, it will take **false** as default value.
 
-          3) "tags" : Based on the tags specified here and the cli , corresponding configModule would perform necessary action steps.
+          2) "tags" : Based on the tags specified here and the cli , corresponding configModule would perform necessary action steps.
+
+          3) "skipTest" : Set value as **true** if the test is to be skipped. If the falue is **false** or not specified then the test will be executed as normal.
 
 ### Usage -
 
@@ -212,6 +218,7 @@ Other cypress command line can also be passed
   1. To make firebolt calls to the 3rd party app or the platform.<br/>
   2. Set pre-requisite values for UI operations like automating the UI actions.<br/>
   3. Override the default response for a firebolt call.<br/>
+  4. Skip a specific test
 
 ### Example -
 
@@ -251,6 +258,13 @@ HTTP call to the platform:<br/>
 }
 ```
 
+Skip a specific test:<br/>
+
+```json
+{
+  "skipTest": true
+}
+```
 ## Request overrides
 
 Documentation added in [Request_Overrides.md](/Docs/Request_Overrides.md)

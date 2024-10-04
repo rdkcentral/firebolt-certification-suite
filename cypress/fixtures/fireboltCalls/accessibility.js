@@ -143,3 +143,35 @@ exports.ACCESSIBILITY_VOICEGUIDANCE = {
     ],
   },
 };
+
+exports.ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS_SET_TO_NULL = {
+  method: 'accessibility.closedCaptionsSettings',
+  validationJsonPath: resolveAtRuntime('result.styles.{{attribute}}'),
+  setMethod: resolveAtRuntime('manage_closedcaptions.set{{attribute.uppercaseFirstChar}}'),
+  setParams: resolveAtRuntime('value'),
+  setValidationJsonPath: 'result',
+  setContent: null,
+  event: 'accessibility.onClosedCaptionsSettingsChanged',
+  eventValidationJsonPath: resolveAtRuntime('eventResponse.styles.{{attribute}}'),
+  content: resolveAtRuntime('DYNAMIC_FB_CALL_VARIABLES.CLOSEDCAPTIONS.NULL_CONTENT'),
+};
+
+exports.ACCESSIBILITY_VARIABLES = {
+  CLOSEDCAPTIONS: {
+    NULL_CONTENT: {
+      data: [
+        {
+          type: 'undefined',
+          validations: [
+            {
+              field: resolveAtRuntime('result.styles.{{attribute}}'),
+              description: resolveAtRuntime(
+                'Validating that accessibility.closedCaptionSettings {{attribute}} is default'
+              ),
+            },
+          ],
+        },
+      ],
+    },
+  },
+};

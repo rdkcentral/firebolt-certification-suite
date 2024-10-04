@@ -1,3 +1,84 @@
+# [1.3.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.4...v1.3.0-dev.5) (2024-09-25)
+
+
+### Bug Fixes
+
+* error schema fix ([#199](https://github.com/rdkcentral/firebolt-certification-suite/issues/199)) ([35217ad](https://github.com/rdkcentral/firebolt-certification-suite/commit/35217ad7c4f2599e3aabf3daeb909c64f63002b3))
+
+# [1.3.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.3...v1.3.0-dev.4) (2024-09-24)
+
+
+### Features
+
+* Modify test cases to use static v2 objects with v1 glue code - Part 2 ([#213](https://github.com/rdkcentral/firebolt-certification-suite/issues/213)) ([491d8e4](https://github.com/rdkcentral/firebolt-certification-suite/commit/491d8e427ffd67f850eedd5655f0019a7e0bfe9e))
+
+# [1.3.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.2...v1.3.0-dev.3) (2024-09-20)
+
+
+### Features
+
+* Modify all test cases to use static v2 objects with v1 glue code ([#208](https://github.com/rdkcentral/firebolt-certification-suite/issues/208)) ([b1aa5b4](https://github.com/rdkcentral/firebolt-certification-suite/commit/b1aa5b43799c4bf1d6b405a668c7718fbe4bd2bb))
+
+# [1.3.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.1...v1.3.0-dev.2) (2024-09-20)
+
+
+### Features
+
+* Enhance Setter/Getter Code to other test cases ([#200](https://github.com/rdkcentral/firebolt-certification-suite/issues/200)) ([9bdcd4d](https://github.com/rdkcentral/firebolt-certification-suite/commit/9bdcd4d415baf479620d47b289beb8004408c1de))
+
+# [1.3.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.1-dev.1...v1.3.0-dev.1) (2024-09-18)
+
+
+### Features
+
+* Allow app close keys to be overwritten ([#214](https://github.com/rdkcentral/firebolt-certification-suite/issues/214)) ([4136c1e](https://github.com/rdkcentral/firebolt-certification-suite/commit/4136c1ea97270fb4ce0005e1de66a8db120bd89d))
+
+## [1.2.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0...v1.2.1-dev.1) (2024-09-17)
+
+
+### Bug Fixes
+
+* Corrected performance glue synchronous issue ([#212](https://github.com/rdkcentral/firebolt-certification-suite/issues/212)) ([49c4ffd](https://github.com/rdkcentral/firebolt-certification-suite/commit/49c4ffd1ac989bddd03a7bc18a724405f9e85135))
+
+# [1.2.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.1.0...v1.2.0) (2024-09-12)
+
+
+### Bug Fixes
+
+* Exempted methods does not have error null check for error ([#195](https://github.com/rdkcentral/firebolt-certification-suite/issues/195)) ([3eac88e](https://github.com/rdkcentral/firebolt-certification-suite/commit/3eac88ec05bf691aef5888b2c147815efa2783d3))
+* updated miscValidation logs of advertising ([#187](https://github.com/rdkcentral/firebolt-certification-suite/issues/187)) ([31145af](https://github.com/rdkcentral/firebolt-certification-suite/commit/31145af4ebc5137d2bd79ab4c59d112b68e0f360))
+
+
+### Features
+
+* Add support for skipping individual scenarios from beforeEach operation ([#205](https://github.com/rdkcentral/firebolt-certification-suite/issues/205)) ([b7e2257](https://github.com/rdkcentral/firebolt-certification-suite/commit/b7e22574216b7ba654ebd40b285c309105957ade))
+* added support in env setup glue for fetching device details dynamically ([#188](https://github.com/rdkcentral/firebolt-certification-suite/issues/188)) ([85a8f77](https://github.com/rdkcentral/firebolt-certification-suite/commit/85a8f77bea66722e1ca27b489ea528b05900971b))
+* added support to process array in static v2 ([#210](https://github.com/rdkcentral/firebolt-certification-suite/issues/210)) ([9a49910](https://github.com/rdkcentral/firebolt-certification-suite/commit/9a4991055948586db6dd70b76250f547b476ba06))
+* Changed suite default communication mode to Transport ([#202](https://github.com/rdkcentral/firebolt-certification-suite/issues/202)) ([5d52c12](https://github.com/rdkcentral/firebolt-certification-suite/commit/5d52c12e9bb70354289357b1c4d2b97f04462c9c))
+* Implement new metrics API for 1.3.0 release ([#167](https://github.com/rdkcentral/firebolt-certification-suite/issues/167)) ([cd3062e](https://github.com/rdkcentral/firebolt-certification-suite/commit/cd3062e332fd8eaa5e256e09dd1ff96cdcc72a9a))
+* Modify all setter/getter test cases to JSV2 format ([#157](https://github.com/rdkcentral/firebolt-certification-suite/issues/157)) ([bd6fa9b](https://github.com/rdkcentral/firebolt-certification-suite/commit/bd6fa9bd62470564f0b5447a569632213a9373b3))
+
+# [1.2.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.6...v1.2.0-dev.7) (2024-09-06)
+
+
+### Features
+
+* added support to process array in static v2 ([#210](https://github.com/rdkcentral/firebolt-certification-suite/issues/210)) ([9a49910](https://github.com/rdkcentral/firebolt-certification-suite/commit/9a4991055948586db6dd70b76250f547b476ba06))
+
+# [1.2.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.5...v1.2.0-dev.6) (2024-09-06)
+
+
+### Features
+
+* Changed suite default communication mode to Transport ([#202](https://github.com/rdkcentral/firebolt-certification-suite/issues/202)) ([5d52c12](https://github.com/rdkcentral/firebolt-certification-suite/commit/5d52c12e9bb70354289357b1c4d2b97f04462c9c))
+
+# [1.2.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.4...v1.2.0-dev.5) (2024-09-06)
+
+
+### Features
+
+* Add support for skipping individual scenarios from beforeEach operation ([#205](https://github.com/rdkcentral/firebolt-certification-suite/issues/205)) ([b7e2257](https://github.com/rdkcentral/firebolt-certification-suite/commit/b7e22574216b7ba654ebd40b285c309105957ade))
+
 # [1.2.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0-dev.3...v1.2.0-dev.4) (2024-08-29)
 
 

@@ -247,7 +247,7 @@ Feature: Discovery.launch_HotLaunch
         | Search Intent with invalid channelType for channelEntity    | search intent with invalid channelType for channelEntity for discoverylaunch    |
         | Search Intent with invalid entityType for playlistEntity    | search intent with invalid entityType for playlistEntity for discoverylaunch    |
 
-        @sdk @transport @skipNegative
+        @skipNegative
         Examples:
             | Scenario               | Error_Key                                  |
             | Invalid Action Intent  | invalid action intent for discoverylaunch  |
@@ -283,7 +283,7 @@ Feature: Discovery.launch_HotLaunch
         When 1st party app invokes the 'Firebolt' API to 'launch app with search intent int source'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
 
-    @DiscoveryLaunch @coreSDK @sdk @transport @requiresPlatformImplementation
+    @sdk @transport @requiresPlatformImplementation
     Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: Event validation where one app is in <state> and one is in foreground
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And 3rd party 'certification' app is launched with 'secondary 3rd party app' appId

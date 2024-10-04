@@ -33,7 +33,7 @@ Feature: Localization
 
         Examples:
             | Scenario                           | API_Key                                                 | Validation_Key                                  |
-            | with key and value as string       | set localization removeAdditionalInfo with string       | empty key/value for localization additionalInfo |
+            | with key and value as string       | set localization removeAdditionalInfo with string       | empty key value for localization additionalInfo |
             | with key and value as empty string | set localization removeAdditionalInfo with empty string | empty response for localization additionalInfo  |
 
     # Set addAdditionalInfo with integer and boolean
@@ -98,7 +98,7 @@ Feature: Localization
             | Set & get preferredAudioLanguages(eng-spa) | preferredAudioLanguages | eng,spa    |
             | Set & get PostalCode                       | postalCode              | 12345      |
 
-    @Device  @regression @sdk @requiresPlatformImplementation
+    @regression @sdk @requiresPlatformImplementation
     Scenario Outline: Localization.<Method_Name> - Positive Scenario: Clearing event listeners
         Given '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
         And 3rd party stops listening to the event '<Clear_Event_Name>'

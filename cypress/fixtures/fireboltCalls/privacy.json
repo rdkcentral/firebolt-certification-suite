@@ -35,6 +35,10 @@
         "method": "manage_privacy.setAllowRemoteDiagnostics",
         "params": "FALSE"
     },
+    "SET_PRIVACY_SETALLOWREMOTEDIAGNOSTICS_TRUE": {
+        "method": "manage_privacy.setAllowRemoteDiagnostics",
+        "params": "TRUE"
+    },
     "SET_PRIVACY_SETALLOWPRIMARYCONTENTADTARGETING_FALSE": {
         "method": "manage_privacy.setAllowPrimaryContentAdTargeting",
         "params": "FALSE"
