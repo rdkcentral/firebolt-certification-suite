@@ -1,3 +1,10 @@
+# [1.3.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.5...v1.3.0-dev.6) (2024-10-04)
+
+
+### Bug Fixes
+
+* Resolve incorrectly formatted validation objects and rename keys where appropriate ([#227](https://github.com/rdkcentral/firebolt-certification-suite/issues/227)) ([941ec57](https://github.com/rdkcentral/firebolt-certification-suite/commit/941ec5725bb305ad93185db43d31c07cc6e7f72f))
+
 # [1.3.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.4...v1.3.0-dev.5) (2024-09-25)
 
 
