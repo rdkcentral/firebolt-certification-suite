@@ -31,5 +31,9 @@
     "SET_LANGUAGE_ENGLISH": "english",
     "COUNTRYCODE_US": "US",
     "LOCALITY_PHILADELPHIA": "Philadelphia",
-    "SETTIMEZONE_AMERICA_LOSANGELES": "America/Los_Angeles"
+    "SETTIMEZONE_AMERICA_LOSANGELES": "America/Los_Angeles",
+    "ADD_ADDITIONALINFO_VALUE_AS_INTEGER": {"key": "defaultKey","value": 123},
+    "ADD_ADDITIONALINFO_VALUE_AS_BOOLEAN": {"key": "defaultKey","value": true},
+    "ADD_ADDITIONALINFO_RESPONSE_AS_INTEGER": {"defaultKey":123},
+    "ADD_ADDITIONALINFO_RESPONSE_AS_BOOLEAN": {"defaultKey":true}
 }
