@@ -893,7 +893,16 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
     Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI ||
     Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
   ) {
-    data.query.params[CONSTANTS.LIFECYCLE_VALIDATION] = true;
+    data = {
+      query: {
+        params: {
+          [CONSTANTS.APP_ID]: appId,
+          [CONSTANTS.LIFECYCLE_VALIDATION]: true,
+          [CONSTANTS.APP_TYPE]: appCategory,
+          [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
+        },
+      },
+    };
   }
   // Creating intent and request map to be sent to the app on launch
   const messageIntent = {
@@ -910,8 +919,11 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
     data.query.params[CONSTANTS.PUB_SUB_URL] = getEnvVariable(CONSTANTS.PUB_SUB_URL);
   }
-  if (getEnvVariable(CONSTANTS.PUBSUB_UUID, false)) {
-    data.query.params[CONSTANTS.PUBSUB_UUID] = getEnvVariable(CONSTANTS.PUBSUB_UUID);
+  if (getEnvVariable(CONSTANTS.PUB_SUB_UUID, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_UUID] = getEnvVariable(CONSTANTS.PUB_SUB_UUID);
+  }
+  if (getEnvVariable(CONSTANTS.PUB_SUB_SUFFIX, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_SUFFIX] = getEnvVariable(CONSTANTS.PUB_SUB_SUFFIX);
   }
 
   if (Cypress.env('additionalLaunchParams')) {
