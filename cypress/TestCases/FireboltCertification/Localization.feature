@@ -6,12 +6,12 @@ Feature: Localization
         And 3rd party 'certification' app is launched
 
     @sdk @transport @Sev2
-    Scenario: Get additional Localization info
+    Scenario: Localization.additionalInfo - Get additional info
         When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         Then 'Firebolt' platform responds with 'expected localization additionalInfo'
 
     @sdk @transport @Sev2
-    Scenario Outline: Adding <Scenario> for localization additional info
+    Scenario Outline: Localization.addAdditionalInfo - Adding <Scenario> for localization additional info
         Given '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
@@ -24,7 +24,7 @@ Feature: Localization
             | empty string as key and value | set localization addAdditionalInfo with empty string | empty string for localization additionalInfo |
 
     @sdk @transport @Sev2
-    Scenario Outline: Removing <Scenario> from localization additional info
+    Scenario Outline: Localization.removeAdditionalInfo - Removing <Scenario> from localization additional info
         Given '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
@@ -37,12 +37,12 @@ Feature: Localization
             | empty string as key and value  | set localization removeAdditionalInfo with empty string | empty response for localization additionalInfo  |
 
     @sdk @transport @Sev2
-    Scenario: Get Latitude and Longitude localization info
+    Scenario: Localization.latlon - Get Latitude and Longitude localization info
         When '3rd party app' invokes the 'Firebolt' API to 'get localization latlon'
         Then 'Firebolt' platform responds with 'expected localization latlon'
 
     @sdk @transport @Sev0
-    Scenario Outline: Validating <Methods>
+    Scenario Outline: Localization.countrycode/language/locale - Validating <Methods>
         Given '3rd party app' registers for the '<First_Event_Registration_Key>' event using the 'Firebolt' API
         And '3rd party app' registers for the '<Second_Event_Registration_Key>' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to '<First_Get_API_Key>'
@@ -61,7 +61,7 @@ Feature: Localization
             | Localization.language and Localization.locale    | localization onLanguageChanged    | localization onLocaleChanged    | set language to es    | get localization language    | get localization locale    | es for localization language    | esUK for localization locale    | onlanguagechanged for localization with es      | onlocalechanged for localization with esUK    |
 
     @sdk @transport @Sev0
-    Scenario Outline: Validating localization.<Scenario>
+    Scenario Outline: Localization.<Method> - Validating localization <Scenario>
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
@@ -78,7 +78,7 @@ Feature: Localization
             | Language (es)                    | language                | es         |
 
     @sdk @transport @Sev1
-    Scenario Outline: Validating localization.<Scenario>
+    Scenario Outline: Localization.<Method> - Validating localization.<Scenario>
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
@@ -97,7 +97,7 @@ Feature: Localization
             | PostalCode                        | postalCode              | 12345      |
 
     @regression @sdk @requiresPlatformImplementation @Sev2
-    Scenario Outline: Clearing event listeners for Localization.<Method_Name>
+    Scenario Outline: Localization.<Method_Name> - Clearing event listeners for <Method_Name>
         Given '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
         And 3rd party stops listening to the event '<Clear_Event_Name>'
         When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
