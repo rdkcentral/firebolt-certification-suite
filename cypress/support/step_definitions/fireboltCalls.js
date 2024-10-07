@@ -348,3 +348,16 @@ Given('device is rebooted', () => {
     throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
   });
 });
+
+// Add "-" as seperator for keyCode if wanna give multple keyCode, else give single keyCode.
+// Eg: "home" or "home-volup" or "home-volup-voldown"
+Given(/'(.+)' key is pressed with a delay of '(.+)' seconds for a duration of '(.+)' seconds and repeated for '(.+)' times'/, (keyCode, delay, duration, repeat) => {
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.KEYPRESS,
+    params: {keyCode: keyCode.split('-'), delay, duration, repeat},
+  }; 
+  
+  cy.sendMessagetoPlatforms(requestMap).then(() => {
+    console.log('Key press request sent');
+  });
+});
