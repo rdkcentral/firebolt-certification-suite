@@ -187,6 +187,13 @@ Cypress.Commands.add('getSdkVersion', () => {
                   ? readableSDKVersion
                   : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
               );
+            } else if (response?.api?.readable) {
+              const apiVersion =
+                `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
+                  /"/g,
+                  ''
+                );
+              Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, apiVersion);
             } else {
               Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
             }
@@ -246,6 +253,12 @@ Cypress.Commands.add('updateRunInfo', () => {
               logger.info('Unable to read from configModule constants');
               return false;
             }
+            Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, false);
+            cy.getSdkVersion().then(() => {
+              cy.getFireboltJsonData().then((data) => {
+                Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
+              });
+            });
             const deviceMac = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC).replace(/:/g, '');
             const deviceMacJson = `./cypress/fixtures/devices/${deviceMac}.json`;
             // Check if mac json file exists
@@ -351,15 +364,17 @@ Cypress.Commands.add('getDeviceData', (method, param, action) => {
     param: param,
     action: action,
   };
-  cy.log(
-    'Call from 1st party App, method: ' +
-      requestMap.method +
-      ' params: ' +
-      JSON.stringify(requestMap.param)
-  );
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
-      if (response && response.result) {
+      if (response === null) {
+        cy.getDeviceDataFromThirdPartyApp(
+          CONSTANTS.DEVICE_VERSION,
+          {},
+          CONSTANTS.ACTION_CORE.toLowerCase()
+        ).then((responseFrom3rdPartyApp) => {
+          return responseFrom3rdPartyApp;
+        });
+      } else if (response && response.result) {
         return response.result;
       } else {
         throw 'Obtained response is null|undefined';
