@@ -1,3 +1,10 @@
+# [1.3.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.6...v1.3.0-dev.7) (2024-10-07)
+
+
+### Features
+
+* updating account module ([#221](https://github.com/rdkcentral/firebolt-certification-suite/issues/221)) ([33b078d](https://github.com/rdkcentral/firebolt-certification-suite/commit/33b078d1d9ca81d4a8ae1e022ff04c4969e529b6))
+
 # [1.3.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.5...v1.3.0-dev.6) (2024-10-04)
 
 
