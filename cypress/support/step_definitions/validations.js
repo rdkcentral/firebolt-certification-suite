@@ -363,3 +363,34 @@ Given(/Interactions collection process is (initiated|stopped)/, (action) => {
 Given(/Validate Firebolt Interactions logs/, () => {
   cy.then(() => cy.validateFireboltInteractionLogs());
 });
+
+
+/**
+ * @module validations
+ * @function Given Validate Firebolt Interactions logs
+ * @description Validating the firebolt interaction logs in configModule
+ * @example
+ * Given Validate Firebolt Interactions logs
+ */
+Given(/'(.+)' on '(.+)' page/, (validationObjectKey, page) => {
+  if (Cypress.env('runtime')) {
+    Cypress.env('runtime').page = page;
+  } else {
+    Cypress.env('runtime', { page });
+  }
+
+  validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  cy.getFireboltData(validationObjectKey).then((fireboltData) => {
+    const event = fireboltData.event;
+    const validationObject = UTILS.resolveRecursiveValues(fireboltData.content);
+    const validationJsonPath = fireboltData.validationJsonPath;
+    cy.methodOrEventResponseValidation('event', {
+      method: event,
+      validationJsonPath: validationJsonPath,
+      contentObject: validationObject,
+      expectingError: false,
+      appId: UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
+      eventExpected: 'triggers',
+    });
+  });
+});

@@ -873,6 +873,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // Creating data for basic intent to be sent to the app on launch
   let appCategory, data;
+  if (Cypress.env('runtime')) {
+    Cypress.env('runtime').appId = appId;
+  } else {
+    Cypress.env('runtime', { appId });
+  }
+
   if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
     appCategory =
       UTILS.getEnvVariable(CONSTANTS.APP_TYPE, false) !== undefined
@@ -1299,6 +1305,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                           `Could not find the valid validation path from the validationJsonPath list - ${JSON.stringify(validationJsonPath)}`
                         );
                   }
+                  console.log('CCCCCCCCCCCCCCCCCCCCCCscenario', scenario)
                   switch (scenario) {
                     case CONSTANTS.REGEX:
                       cy.regExValidation(
@@ -1347,6 +1354,9 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                       break;
                     case CONSTANTS.UNDEFINED:
                       cy.undefinedValidation(object, methodOrEventObject, validationType);
+                      break;
+                    case CONSTANTS.SCREENSHOT_VALIDATION:
+                      cy.screenshotValidation(object, methodOrEventObject);
                       break;
                     default:
                       assert(false, 'Unsupported validation type');
