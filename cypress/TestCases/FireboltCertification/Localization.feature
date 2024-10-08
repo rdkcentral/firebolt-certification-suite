@@ -42,7 +42,7 @@ Feature: Localization
         Then 'Firebolt' platform responds with 'expected localization latlon'
 
     @sdk @transport @Sev0
-    Scenario Outline: Localization.countrycode/language/locale - Validating <Methods>
+    Scenario Outline: Localization.locale - Get and Set <Methods> and Localization.locale
         Given '3rd party app' registers for the '<First_Event_Registration_Key>' event using the 'Firebolt' API
         And '3rd party app' registers for the '<Second_Event_Registration_Key>' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to '<First_Get_API_Key>'
@@ -57,11 +57,11 @@ Feature: Localization
 
         Examples:
             | Methods                                          | First_Event_Registration_Key      | Second_Event_Registration_Key   | Set_API_Key           | First_Get_API_Key            | Second_Get_API_Key         | First_Method_Validation_Key     | Second_Method_Validation_Key    | First_Event_Validation_Key                      | Second_Event_Validation_Key                   |
-            | Localization.countrycode and Localization.locale | localization onCountryCodeChanged | localization onLocaleChanged    | set countrycode to UK | get localization countrycode | get localization locale    | UK for localization countrycode | enUK for localization locale    | oncountrycodechanged for localization with UK   | onlocalechanged for localization with UK      |
-            | Localization.language and Localization.locale    | localization onLanguageChanged    | localization onLocaleChanged    | set language to es    | get localization language    | get localization locale    | es for localization language    | esUK for localization locale    | onlanguagechanged for localization with es      | onlocalechanged for localization with esUK    |
+            | Localization.countrycode | localization onCountryCodeChanged | localization onLocaleChanged    | set countrycode to UK | get localization countrycode | get localization locale    | UK for localization countrycode | enUK for localization locale    | oncountrycodechanged for localization with UK   | onlocalechanged for localization with UK      |
+            | Localization.language    | localization onLanguageChanged    | localization onLocaleChanged    | set language to es    | get localization language    | get localization locale    | es for localization language    | esUK for localization locale    | onlanguagechanged for localization with es      | onlocalechanged for localization with esUK    |
 
     @sdk @transport @Sev0
-    Scenario Outline: Localization.<Method> - Validating localization <Scenario>
+    Scenario Outline: Localization.<Method> - Validating getters and setters for localization.<Scenario>
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
@@ -78,7 +78,7 @@ Feature: Localization
             | Language (es)                    | language                | es         |
 
     @sdk @transport @Sev1
-    Scenario Outline: Localization.<Method> - Validating localization.<Scenario>
+    Scenario Outline: Localization.<Method> - Validating getters and setters for localization.<Scenario>
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
