@@ -872,7 +872,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
       : UTILS.checkForSecondaryAppId(appCallSign); // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // Creating data for basic intent to be sent to the app on launch
-  let appCategory, data;
+  let appCategory;
+  let data = {
+    query: {
+      params: {},
+    },
+  };
   if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
     appCategory =
       UTILS.getEnvVariable(CONSTANTS.APP_TYPE, false) !== undefined
