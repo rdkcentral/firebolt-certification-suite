@@ -1,0 +1,44 @@
+{
+  "jsonDir": "cypress/cucumber-json",
+  "reportPath": "./reports/cucumber-htmlreport.html",
+  "displayDuration": true,
+  "pageFooter": "<div></div>",
+  "customMetadata": true,
+  "customData": {
+    "title": "Run info",
+    "data": [
+      {
+        "label": "Product",
+        "value": "XUMO"
+      },
+      {
+        "label": "SDK Version",
+        "value": "1.4.1"
+      },
+      {
+        "label": "Firebolt Version",
+        "value": "1.1.0"
+      },
+      {
+        "label": "Platform",
+        "value": "WPE"
+      },
+      {
+        "label": "Release",
+        "value": "N/A"
+      },
+      {
+        "label": "Device",
+        "value": "N/A"
+      },
+      {
+        "label": "Device Firmware",
+        "value": "SCXI11BEI_VBN_24Q3_sprint_20240916233950sdy_FG_NG"
+      },
+      {
+        "label": "Partner",
+        "value": "xglobal"
+      }
+    ]
+  }
+}
