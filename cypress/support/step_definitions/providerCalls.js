@@ -154,6 +154,7 @@ Given(/User set response for '(.+)'/, (setResponseKey) => {
   );
 });
 
+// Sample glue for testing
 Given(/Capture screenshot response/, () => {
   const requestMap = {
     method: 'fcs.screenshot',
@@ -163,5 +164,5 @@ Given(/Capture screenshot response/, () => {
   };
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     cy.log('Screenshot response: ', response);
-  })
+  });
 });

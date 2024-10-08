@@ -1305,7 +1305,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                           `Could not find the valid validation path from the validationJsonPath list - ${JSON.stringify(validationJsonPath)}`
                         );
                   }
-                  console.log('CCCCCCCCCCCCCCCCCCCCCCscenario', scenario)
                   switch (scenario) {
                     case CONSTANTS.REGEX:
                       cy.regExValidation(
