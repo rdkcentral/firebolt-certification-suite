@@ -75,9 +75,16 @@ Given('the environment has been set up for {string} tests', (test) => {
   cy.envConfigSetup();
 });
 
+// Overwrite from the config module didn't work as expected 
 Cypress.Commands.add('envConfigSetup', () => {
   console.log('Original envConfigSetup command');
 });
+
+// Tried overwriting in fcs itself and it worked as expected
+// Cypress.Commands.overwrite('envConfigSetup', () => {
+//   // Overwritten implementation of envConfigSetup
+//   console.log('Overwritten envConfigSetup command');
+// });
 
 /**
  * @module TestSetupGlue
