@@ -883,6 +883,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
         params: {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.APP_TYPE]: appCategory,
+          [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
         },
       },
     };
@@ -898,6 +899,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.LIFECYCLE_VALIDATION]: true,
           [CONSTANTS.APP_TYPE]: appCategory,
+          [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
         },
       },
     };
@@ -916,8 +918,23 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   // Add the PubSub URL if required
   if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
     data.query.params[CONSTANTS.PUB_SUB_URL] = getEnvVariable(CONSTANTS.PUB_SUB_URL);
-    if (getEnvVariable(CONSTANTS.DEVICE_MAC, false)) {
-      data.query.params[CONSTANTS.MACADDRESS_PARAM] = getEnvVariable(CONSTANTS.DEVICE_MAC);
+  }
+  if (getEnvVariable(CONSTANTS.PUB_SUB_UUID, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_UUID] = getEnvVariable(CONSTANTS.PUB_SUB_UUID);
+  }
+  if (getEnvVariable(CONSTANTS.PUB_SUB_SUFFIX, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_SUFFIX] = getEnvVariable(CONSTANTS.PUB_SUB_SUFFIX);
+  }
+
+  if (Cypress.env('additionalLaunchParams')) {
+    const additionalParams = Cypress.env('additionalLaunchParams');
+    for (const key in additionalParams) {
+      let value = additionalParams[key];
+      if (value.startsWith('CYPRESSENV-')) {
+        const envParam = value.split('-')[1];
+        value = getEnvVariable(envParam, false);
+      }
+      data.query.params[key] = value;
     }
   }
   // If the testType is userInterestProvider, send the discovery.launch params with registerProvider = false, then certification app will not register for userInterest provider.
