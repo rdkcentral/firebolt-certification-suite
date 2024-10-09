@@ -908,6 +908,18 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
       },
     };
   }
+
+  if(Cypress.env(CONSTANTS.TEST_TYPE) == 'app launch') {
+    data = {
+      query: {
+        params: {
+          [CONSTANTS.APP_ID]: appId,
+          [CONSTANTS.APP_TYPE]: appCategory,
+        },
+      },
+    };
+  }
+
   // Creating intent and request map to be sent to the app on launch
   const messageIntent = {
     action: CONSTANTS.SEARCH,
