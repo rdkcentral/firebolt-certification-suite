@@ -72,6 +72,11 @@ Given('the environment has been set up for {string} tests', (test) => {
       }
     }
   }
+  cy.envConfigSetup();
+});
+
+Cypress.Commands.add('envConfigSetup', () => {
+  console.log('Original envConfigSetup command');
 });
 
 /**
