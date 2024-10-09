@@ -576,6 +576,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
   if (scenarioName.includes('(example')) {
     scenarioName = scenarioName.split('(example')[0].trim();
   }
+  Cypress.env(CONSTANTS.SCENARIO_NAME, scenarioName);
   // Fetching current feature name
   const moduleReqIdJson = Cypress.env(CONSTANTS.MODULEREQIDJSON);
   const scenarioList = moduleReqIdJson.scenarioNames[featureFileName];
@@ -872,7 +873,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
       : UTILS.checkForSecondaryAppId(appCallSign); // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // Creating data for basic intent to be sent to the app on launch
-  let appCategory, data;
+  let appCategory;
+  let data = {
+    query: {
+      params: {},
+    },
+  };
   if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
     appCategory =
       UTILS.getEnvVariable(CONSTANTS.APP_TYPE, false) !== undefined
@@ -1500,20 +1506,4 @@ Cypress.Commands.add('startOrStopInteractionsService', (action) => {
         });
     }
   });
-});
-
-/**
- * @module commands
- * @function validateFireboltInteractionLogs
- * @description Command to validate the firebolt interaction logs in configModule
- * @example
- * cy.validateFireboltInteractionLogs()
- * cy.validateFireboltInteractionLogs()
- */
-Cypress.Commands.add('validateFireboltInteractionLogs', () => {
-  const validationObject = {
-    assertionDef: 'validateFireboltInteractionLogs',
-  };
-  const interactionLogs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs();
-  cy.customValidation(validationObject, interactionLogs);
 });

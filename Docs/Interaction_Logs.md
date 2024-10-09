@@ -24,8 +24,10 @@ Interactions logs will be stored in `fbInteractionLogs` env variable as an array
  
 ### Custom validation support
 To do validation for interaction logs, custom function function should be added in config module.
-User can add `validateFireboltInteractionLogs` function inside `configModule/cypress/fixtures/customValidations/` to do validation of the interaction logs.
- 
+User can add `validateInteractionLogs` function inside `configModule/cypress/fixtures/customValidations/` to do validation of the interaction logs.
+
+Refer to [this](/cypress/support/step_definitions/validations.md#custom) to add the custom validation object.
+
 ### Execution - How to execute
 * Pass `interactionsMetrics= true` from the cli command to start the service
 ```
@@ -45,3 +47,6 @@ npx cypress open --browser electron -- env interactionsMetrics=true
    }
 }
 ```
+
+### Note: 
+Interaction Logs will be cleared after the each scenario execution is done, so any kind of validations should be added in that scenario only.
