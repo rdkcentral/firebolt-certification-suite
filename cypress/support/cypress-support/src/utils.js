@@ -615,7 +615,7 @@ function subscribeResults(data, metaData) {
  **/
 function interactionResults(interactionLog) {
   interactionLog = JSON.parse(interactionLog);
-  if (interactionLog && interactionLog.hasOwnProperty(CONSTANTS.FIREBOLT_INTERACTION)) {
+  if (interactionLog && interactionLog.hasOwnProperty(CONSTANTS.METHOD)) {
     getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
   }
 }
