@@ -18,7 +18,7 @@ Feature: Localization_Manage
         Examples:
             | Scenario                | Method                  | Value            |
             | Locality                | locality                | washington       |
-            | PostalCode              | postalCode              | 123456           |
+            | PostalCode              | postalCode              | "123456"         |
             | CountryCode             | countryCode             | PH               |
             | Language es             | language                | es               |
             | Language en             | language                | en               |

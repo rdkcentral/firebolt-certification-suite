@@ -10,5 +10,9 @@
     },
     "INVALID_TYPE_PARAMS": {
         "type": "schemaOnly"
+    },
+    "INVALID_PARAMS": {
+        "type": "schemaOnly"
     }
+      
 }
