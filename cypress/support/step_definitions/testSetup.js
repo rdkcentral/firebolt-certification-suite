@@ -72,6 +72,7 @@ Given('the environment has been set up for {string} tests', (test) => {
       }
     }
   }
+  cy.envConfigSetup();
 });
 
 /**
