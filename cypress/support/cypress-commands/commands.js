@@ -1551,4 +1551,4 @@ Cypress.Commands.add('validateFireboltInteractionLogs', () => {
  */
 Cypress.Commands.add('envConfigSetup', () => {
   fireLog.info('No additional config module environment setup');
-})
+});

@@ -337,3 +337,36 @@ Given(
     });
   }
 );
+
+/**
+ * @module validations
+ * @function Given '(.+)' on '(.+)' page
+ * @description Function to do event and screenshot validation for the given page
+ * @param {String} validationObjectKey - Firebolt object key name
+ * @param {String} page - Name of the page where the screenshot is taken.
+ * @example
+ * Given 'third party app is launched' on 'auth' page
+ */
+Given(/'(.+)' on '(.+)' page/, (validationObjectKey, page) => {
+  // Storing the page name in runtime environment variable to use it in the validations.
+  if (Cypress.env('runtime')) {
+    Cypress.env('runtime').page = page;
+  } else {
+    Cypress.env('runtime', { page });
+  }
+
+  validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  cy.getFireboltData(validationObjectKey).then((fireboltData) => {
+    const event = fireboltData.event;
+    const validationObject = UTILS.resolveRecursiveValues(fireboltData.content);
+    const validationJsonPath = fireboltData.validationJsonPath;
+    cy.methodOrEventResponseValidation('event', {
+      method: event,
+      validationJsonPath: validationJsonPath,
+      contentObject: validationObject,
+      expectingError: false,
+      appId: UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
+      eventExpected: 'triggers',
+    });
+  });
+});
