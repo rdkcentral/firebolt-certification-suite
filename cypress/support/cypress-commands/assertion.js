@@ -559,7 +559,7 @@ Cypress.Commands.add(
     pretext =
       pretext +
       ' for ' +
-      extractEventObject.eventName +
+      extractEventObject.eventObjectId +
       ':' +
       ' expected ' +
       actual +

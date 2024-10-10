@@ -89,7 +89,7 @@ Feature: ClosedCaptions_Manage
             | Set fontSize-true           | fontSize           | true       | INVALID_TYPE_PARAMS |
             | Set fontSize-test           | fontSize           | test       | INVALID_TYPE_PARAMS |
             | Set fontSize-true           | fontSize           | true       | INVALID_TYPE_PARAMS |
-            | Set fontSize-0.25           | fontSize           | 0.25       | INVALID_TYPE_PARAMS |
+            | Set fontSize-0.25           | fontSize           | 0.25       | INVALID_PARAMS      |
             | Set fontFamily-sans-serif   | fontFamily         | sans-serif | INVALID_TYPE_PARAMS |
             | Set fontEdge-123            | fontEdge           | 123        | INVALID_TYPE_PARAMS |
             | Set fontEdge-true           | fontEdge           | true       | INVALID_TYPE_PARAMS |
