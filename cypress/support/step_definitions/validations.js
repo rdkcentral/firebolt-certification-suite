@@ -364,7 +364,6 @@ Given(/Validate Firebolt Interactions logs/, () => {
   cy.then(() => cy.validateFireboltInteractionLogs());
 });
 
-
 /**
  * @module validations
  * @function Given Validate Firebolt Interactions logs
@@ -373,6 +372,7 @@ Given(/Validate Firebolt Interactions logs/, () => {
  * Given Validate Firebolt Interactions logs
  */
 Given(/'(.+)' on '(.+)' page/, (validationObjectKey, page) => {
+  // Storing the page name in runtime environment variable to use it in the validations.
   if (Cypress.env('runtime')) {
     Cypress.env('runtime').page = page;
   } else {

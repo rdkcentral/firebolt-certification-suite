@@ -72,12 +72,7 @@ Given('the environment has been set up for {string} tests', (test) => {
       }
     }
   }
-  if (test === 'app launch') {
-    const requestMap = {
-      method: 'fcs.envConfigSetup'
-    }
-    cy.sendMessagetoPlatforms(requestMap);
-  }
+  cy.envConfigSetup();
 });
 
 /**

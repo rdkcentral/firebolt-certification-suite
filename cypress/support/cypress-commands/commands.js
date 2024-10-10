@@ -873,6 +873,8 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // Creating data for basic intent to be sent to the app on launch
   let appCategory, data;
+
+  // Storing the appId in runtime environment variable
   if (Cypress.env('runtime')) {
     Cypress.env('runtime').appId = appId;
   } else {
@@ -909,7 +911,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
     };
   }
 
-  if(Cypress.env(CONSTANTS.TEST_TYPE) == 'app launch') {
+  if (Cypress.env(CONSTANTS.TEST_TYPE) == 'app launch') {
     data = {
       query: {
         params: {
@@ -1538,3 +1540,15 @@ Cypress.Commands.add('validateFireboltInteractionLogs', () => {
   const interactionLogs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs();
   cy.customValidation(validationObject, interactionLogs);
 });
+
+/**
+ * @module commands
+ * @function envConfigSetup
+ * @description Gives additional functionality to add necessary setup from the config module.
+ * @example
+ * cy.envConfigSetup()
+ * @Note Add or overwrite envConfigSetup cypress command in the config module to add necessary setup.
+ */
+Cypress.Commands.add('envConfigSetup', () => {
+  fireLog.info('No additional config module environment setup');
+})

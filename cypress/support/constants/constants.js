@@ -68,7 +68,7 @@ module.exports = {
   CUCUMBER: 'cucumber',
   CURRENT_APP_ID: 'currentAppId',
   CUSTOM_METHOD_PATH:
-    'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/support/step_definitions/validations.md#custom',
+    'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/fixtures/docs/validations.md#custom',
   CYPRESS_MODULES_PATH: 'cypress/fixtures/external/modules',
   DATE: 'date',
   DECIMAL: 'decimal',
