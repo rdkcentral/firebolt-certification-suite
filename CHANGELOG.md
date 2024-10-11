@@ -1,3 +1,10 @@
+# [1.3.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.7...v1.3.0-dev.8) (2024-10-11)
+
+
+### Bug Fixes
+
+* SetupCheck feature ([#232](https://github.com/rdkcentral/firebolt-certification-suite/issues/232)) ([62fe619](https://github.com/rdkcentral/firebolt-certification-suite/commit/62fe61930612e775166afd2b3346d7b042e988a7))
+
 # [1.3.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.6...v1.3.0-dev.7) (2024-10-07)
 
 
