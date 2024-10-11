@@ -115,12 +115,12 @@ exports.STATIC_VARIABLES = {
     SET_ACCOUNT1: {
       scope: 'account',
       key: 'authTestTokenAccount1',
-      value: 'authTestTokenAccount1',
+      value: 'authTestTokenAccountValue1',
     },
     SET_ACCOUNT2: {
       scope: 'account',
       key: 'authTestTokenAccount2',
-      value: 'authTestTokenAccount2',
+      value: 'authTestTokenAccountValue2',
     },
     REMOVE_DEVICE1: {
       scope: 'device',
