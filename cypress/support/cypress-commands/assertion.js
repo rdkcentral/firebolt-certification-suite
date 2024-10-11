@@ -537,8 +537,8 @@ Cypress.Commands.add(
  */
 Cypress.Commands.add(
   'assertValidationsForEvent',
-  (extractEventObject, verifyPath, actual, pretext) => {
-    let expected = undefined;
+  (extractEventObject, verifyPath, expected, pretext) => {
+    let actual = undefined;
     const verifyEventResponse = verifyPath.split('.')[0];
     const verifyInnerObject = verifyPath.split('.')[1];
     const verifyOuterObject = verifyPath.split('.')[2];
@@ -546,10 +546,10 @@ Cypress.Commands.add(
     if (verifyOuterObject) {
       const eventResponseInnerObject = verifyEventResponse + '.' + verifyInnerObject;
       if (eval('extractEventObject.' + eventResponseInnerObject)) {
-        expected = eval('extractEventObject.' + verifyPath);
+        actual = eval('extractEventObject.' + verifyPath);
       }
     } else {
-      expected = eval('extractEventObject.' + verifyPath);
+      actual = eval('extractEventObject.' + verifyPath);
     }
     const expectedValue = expected;
     const actualValue = actual;
