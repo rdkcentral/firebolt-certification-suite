@@ -1,3 +1,10 @@
+# [1.3.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.9...v1.3.0-dev.10) (2024-10-14)
+
+
+### Features
+
+* Player interaction logs validation ([#216](https://github.com/rdkcentral/firebolt-certification-suite/issues/216)) ([3366e97](https://github.com/rdkcentral/firebolt-certification-suite/commit/3366e9786b7ff2630d4d5b741e72c372f12697fe))
+
 # [1.3.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.8...v1.3.0-dev.9) (2024-10-14)
 
 
