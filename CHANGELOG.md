@@ -1,3 +1,10 @@
+# [1.3.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.8...v1.3.0-dev.9) (2024-10-14)
+
+
+### Features
+
+* player changes ([#233](https://github.com/rdkcentral/firebolt-certification-suite/issues/233)) ([929a1ef](https://github.com/rdkcentral/firebolt-certification-suite/commit/929a1efadba23b122ea256430c3026a7f15ce480))
+
 # [1.3.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.7...v1.3.0-dev.8) (2024-10-11)
 
 
