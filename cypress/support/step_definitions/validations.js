@@ -344,7 +344,7 @@ Given(/Interactions collection process is (initiated|stopped)/, (action) => {
           action == CONSTANTS.INITIATED
             ? CONSTANTS.FAILED_TO_INITIATE_INTERACTIONS_SERVICE
             : CONSTANTS.FAILED_TO_STOP_INTERACTIONS_SERVICE;
-        fireLog.assert(false, message);
+        UTILS.fireLog.assert(false, message);
       }
     });
   } else {
@@ -354,12 +354,34 @@ Given(/Interactions collection process is (initiated|stopped)/, (action) => {
 
 /**
  * @module validations
- * @function Given Validate Firebolt Interactions logs
- * @description Validating the firebolt interaction logs in configModule
-
+ * @function verify Firebolt Interactions for '(.+)'
+ * @description Validating the firebolt interaction logs
+ * @param {String} key - Validation object key name
  * @example
- * Given Validate Firebolt Interactions logs
+ * verify Firebolt Interactions for 'account id method'
  */
-Given(/Validate Firebolt Interactions logs/, () => {
-  cy.then(() => cy.validateFireboltInteractionLogs());
+Given(/verify Firebolt Interactions for '(.+)'/, (key) => {
+  if (
+    (!UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) ||
+      UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) === false) &&
+    (!UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).size ||
+      UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).size === 0)
+  ) {
+    cy.log(`Interactions log service is not enabled`);
+  } else {
+    key = key.replaceAll(' ', '_').toUpperCase();
+    cy.getFireboltData(key).then((fireboltData) => {
+      const logs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs(
+        Cypress.env(CONSTANTS.SCENARIO_NAME)
+      );
+      if (!logs) {
+        UTILS.fireLog.assert(
+          false,
+          `No interaction logs found for the scenario - ${Cypress.env(CONSTANTS.SCENARIO_NAME)}`
+        );
+      }
+      const contentObject = { logs: logs, content: fireboltData.content.data[0].validations };
+      cy.customValidation(fireboltData.content.data[0], contentObject);
+    });
+  }
 });

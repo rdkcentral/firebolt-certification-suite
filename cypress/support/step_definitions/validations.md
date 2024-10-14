@@ -84,8 +84,13 @@ For the validation part, for the states when the app is not reachable for us to 
  * `Given Interactions collection process is 'initiated'`
  * `Given Interactions collection process is 'stopped'`
 
-## Validate Firebolt Interactions logs
-### Purpose: Validating the firebolt interaction logs in configModule
+## verify Firebolt Interactions for '(.+)'
+### Purpose: Validating the firebolt interaction logs
+
+### Params:
+| Param | Definition |
+| --- | --- |
+| key | validation object key name |
 
 ### Examples:
- * `Given Validate Firebolt Interactions logs`
+ * `verify Firebolt Interactions for 'account id method'`
