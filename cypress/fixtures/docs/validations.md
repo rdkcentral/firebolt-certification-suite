@@ -9,6 +9,7 @@
 | custom              | Used when the incoming response has to be validated using a customized function provided in the configModule. |
 | undefined           | Used when the incoming response has to be validated against undefined value.                                  |
 | schemaOnly          | When validation type is `schemaOnly`, it will skip content validation and stops at schema validation          |
+| screenshotValidation  | screenshotValidation is used to validate the screenshot captured by the device.     |
 
 ## regEx
 
@@ -419,6 +420,84 @@ The 'schemaOnly` validation type allows to skip content validation and stops at 
   ]
 }
 
+```
+
+## screenshotValidation
+To perform screenshot validation, the screenshot validation object should be added to the validation objects.
+
+- The screenshot validation will happen only when the `enableScreenshots` environment variable is set to `true`.
+- FCS look for screenshotValidation status in below format and based on the status, it will decide the overall status of the screenshot validation.
+  ```javascript
+  {
+    status: "pass/fail",
+    validations: [
+      {status: "pass/fail"},
+      {status: "pass/fail"}
+    ]
+  }
+  ```
+- Actual validation can be added in cofigModule override function. Refer [here](/Docs/Request_Overrides.md#screenshot) for more details on `screenshot` override.
+
+### Validation object format: 
+
+```json
+{
+  "data": [
+    {
+      "type": "screenshotValidation",
+      "addToReport": true,
+      "validations": []
+    }
+  ]
+}
+```
+
+### Params:
+
+| **Param**   | **Type** | **Description**                                                            |
+| ----------- | -------- | -------------------------------------------------------------------------- |
+| data        | array    | An array that holds the entire set of validation objects.                  |
+| type        | string   | The value that indicates the type of validation.                           |
+| validations | array    | The array that holds all the data for validation, like value, format, etc. |
+| addToReport | boolean  | Flag to determine whether to include the screenshot in the report.         |
+
+### Examples:
+**Example 1:** Below validation objects consist of OCR and image validation. The OCR validation is to validate the text `tv+` and the image validation is to validate the image with label `auth` with confidence 60 against the screenshot response.
+
+```json
+{
+  "data": [
+    {
+      "type": "screenshotValidation",
+      "addToReport": true,
+      "validations": [
+        {
+            "type": "ocr",
+            "text": "tv+",
+            "regex": "tv"
+          },
+          {
+            "type": "image",
+            "label": "auth",
+            "confidence": 60
+          }
+      ]
+    }
+  ]
+}
+```
+
+**Example 2:** Below validation object does not have any validations.
+
+```json
+{
+  "data": [
+    {
+      "type": "screenshotValidation",
+      "validations": []
+    }
+  ]
+}
 ```
 
 # Validation Override
