@@ -915,7 +915,6 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
       },
     };
   }
-
   // Creating intent and request map to be sent to the app on launch
   const messageIntent = {
     action: CONSTANTS.SEARCH,
@@ -1215,7 +1214,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
   // Helper function to handle switch case validation
   const handleValidation = (object, methodOrEventObject, methodOrEventResponse = null) => {
-    console.log('object', object)
     const scenario = object.type;
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
     switch (scenario) {
@@ -1274,8 +1272,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
   // Check if method or event field is present in requestData
   if (!requestData.method && !requestData.event) {
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    console.log('contentObject', contentObject)
     if (contentObject && contentObject.data) {
       contentObject.data.forEach((object) => handleValidation(object));
     } else {
