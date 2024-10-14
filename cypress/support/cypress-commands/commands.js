@@ -885,7 +885,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   } else {
     Cypress.env('runtime', { appId });
   }
- 
+
   if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
     appCategory =
       UTILS.getEnvVariable(CONSTANTS.APP_TYPE, false) !== undefined
