@@ -922,8 +922,15 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   if (getEnvVariable(CONSTANTS.PUB_SUB_UUID, false)) {
     data.query.params[CONSTANTS.PUB_SUB_UUID] = getEnvVariable(CONSTANTS.PUB_SUB_UUID);
   }
-  if (getEnvVariable(CONSTANTS.PUB_SUB_SUFFIX, false)) {
-    data.query.params[CONSTANTS.PUB_SUB_SUFFIX] = getEnvVariable(CONSTANTS.PUB_SUB_SUFFIX);
+  if (getEnvVariable(CONSTANTS.PUB_SUB_PUBLISH_SUFFIX, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_PUBLISH_SUFFIX] = getEnvVariable(
+      CONSTANTS.PUB_SUB_PUBLISH_SUFFIX
+    );
+  }
+  if (getEnvVariable(CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX] = getEnvVariable(
+      CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX
+    );
   }
 
   if (Cypress.env('additionalLaunchParams')) {

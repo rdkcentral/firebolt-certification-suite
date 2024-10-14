@@ -329,7 +329,8 @@ module.exports = {
   PREREQUISITE_DATA: 'PreRequisiteData.json',
   PUB_SUB_URL: 'pubSubUrl', // Env Var for the URL for the Default Module's pubSub implementation
   PUB_SUB_UUID: 'pubsub_uuid',
-  PUB_SUB_SUFFIX: 'pubSubSuffix',
+  PUB_SUB_PUBLISH_SUFFIX: 'pubSubPublishSuffix',
+  PUB_SUB_SUBSCRIBE_SUFFIX: 'pubSubSubscribeSuffix',
   SETUPCHECK: 'Setup Check',
   SETUPVALUES: 'external/setupValues.json',
   SETUPVALUES_FILEPATH: 'cypress/fixtures/external/setupValues.json',
