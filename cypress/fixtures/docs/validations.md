@@ -440,12 +440,12 @@ To perform screenshot validation, the screenshot validation object should be add
 
 ### Validation object format: 
 
-```json
+```javascript
 {
-  "data": [
+  data: [
     {
-      "type": "screenshotValidation",
-      "validations": []
+      type: "screenshotValidation",
+      validations: []
     }
   ]
 }
@@ -462,16 +462,16 @@ To perform screenshot validation, the screenshot validation object should be add
 ### Examples:
 **Example 1:** Below validation objects consist of image validation. The image validation is to validate the image with label `auth` with confidence 60 against the screenshot response.
 
-```json
+```javascript
 {
-  "data": [
+  data: [
     {
-      "type": "screenshotValidation",
-      "validations": [
+      type: "screenshotValidation",
+      validations: [
           {
-            "type": "image",
-            "label": "auth",
-            "confidence": 60
+            type: "image",
+            label: "auth",
+            confidence: 60
           }
       ]
     }
@@ -481,12 +481,12 @@ To perform screenshot validation, the screenshot validation object should be add
 
 **Example 2:** Below validation object does not have any validations.
 
-```json
+```javascript
 {
-  "data": [
+  data: [
     {
-      "type": "screenshotValidation",
-      "validations": []
+      type: "screenshotValidation",
+      validations: []
     }
   ]
 }

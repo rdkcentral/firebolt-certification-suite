@@ -357,16 +357,8 @@ Given(/'(.+)' on '(.+)' page/, (validationObjectKey, page) => {
 
   validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   cy.getFireboltData(validationObjectKey).then((fireboltData) => {
-    const event = fireboltData.event;
-    const validationObject = UTILS.resolveRecursiveValues(fireboltData.content);
-    const validationJsonPath = fireboltData.validationJsonPath;
-    cy.methodOrEventResponseValidation('event', {
-      method: event,
-      validationJsonPath: validationJsonPath,
-      contentObject: validationObject,
-      expectingError: false,
-      appId: UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
-      eventExpected: 'triggers',
-    });
+    const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+    const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+    cy.methodOrEventResponseValidation(type, validationObject);
   });
 });

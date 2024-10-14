@@ -173,14 +173,14 @@
   Receives the updated environment variable device_data with dynamic device details.
 Example:
 
-  ```
-  {
-    "DEVICEID": "354444327",
-    "DEVICE_TYPE": "ipstb",
-    "DEVICE_MODEL": "VALUE",
-     ...
+```
+{
+  "DEVICEID": "354444327",
+  "DEVICE_TYPE": "ipstb",
+  "DEVICE_MODEL": "VALUE",
+  ...
 }
-  ```
+```
 ## screenshot:
 
 ### Request override
@@ -233,15 +233,26 @@ Example:
 }
 ```
 
-**Examples:**
+**Examples:** Response override function returning the response as below after validating the screenshot response against the validation object passed in the request override function.
 
-**Example 1:** 
+**Example 1:** Below represents validation of the screenhot response against the validation object is passed.
 
 ```javascript
 {
   status: "pass",
   validations: [
     {status: "pass"}
+  ]
+}
+```
+
+**Example 2:** Screenshot validation failed against the validation object passed.
+
+```javascript
+{
+  status: "fail",
+  validations: [
+    {status: "fail"}
   ]
 }
 ```

@@ -872,7 +872,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
       : UTILS.checkForSecondaryAppId(appCallSign); // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // Creating data for basic intent to be sent to the app on launch
-  let appCategory, data;
+  let appCategory;
+  let data = {
+    query: {
+      params: {},
+    },
+  };
 
   // Storing the appId in runtime environment variable
   if (Cypress.env('runtime')) {
@@ -905,17 +910,6 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
         params: {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.LIFECYCLE_VALIDATION]: true,
-          [CONSTANTS.APP_TYPE]: appCategory,
-        },
-      },
-    };
-  }
-
-  if (Cypress.env(CONSTANTS.TEST_TYPE) == 'app launch') {
-    data = {
-      query: {
-        params: {
-          [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.APP_TYPE]: appCategory,
         },
       },
@@ -1214,9 +1208,81 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
  * cy.methodOrEventResponseValidation('event', {method: 'accessibility.onClosedCaptionsSettingsChanged', context: {}, contentObject: {}, expectingError: false, appId: 'test.test', eventExpected: 'triggers'})
  */
 Cypress.Commands.add('methodOrEventResponseValidation', (validationType, requestData) => {
-  const { method, context, contentObject, expectingError, appId, eventExpected, isNullCase } =
-    requestData;
+  const { context, expectingError, appId, eventExpected, isNullCase } = requestData;
+  const method = requestData?.event ? requestData.event : requestData.method;
+  const contentObject = requestData.content ? requestData.content : requestData.contentObject;
   let validationJsonPath = requestData.validationJsonPath;
+
+  // Helper function to handle switch case validation
+  const handleValidation = (object, methodOrEventObject, methodOrEventResponse = null) => {
+    console.log('object', object)
+    const scenario = object.type;
+    if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
+    switch (scenario) {
+      case CONSTANTS.REGEX:
+        cy.regExValidation(
+          method,
+          object.validations[0].type,
+          validationJsonPath,
+          methodOrEventResponse
+        );
+        break;
+      case CONSTANTS.MISC:
+        cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
+        break;
+      case CONSTANTS.DECODE:
+        const decodeType = object.specialCase;
+        const responseForDecodeValidation =
+          validationType == CONSTANTS.EVENT
+            ? methodOrEventResponse.eventResponse
+            : validationType == CONSTANTS.METHOD
+              ? methodOrEventResponse.result
+              : null;
+
+        cy.decodeValidation(
+          method,
+          decodeType,
+          responseForDecodeValidation,
+          object.validations[0],
+          null
+        );
+        break;
+      case CONSTANTS.FIXTURE:
+        cy.validateContent(
+          method,
+          context,
+          validationJsonPath,
+          object.validations[0].type,
+          validationType,
+          appId
+        );
+        break;
+      case CONSTANTS.CUSTOM:
+        cy.customValidation(object, methodOrEventObject);
+        break;
+      case CONSTANTS.UNDEFINED:
+        cy.undefinedValidation(object, methodOrEventObject, validationType);
+        break;
+      case CONSTANTS.SCREENSHOT_VALIDATION:
+        cy.screenshotValidation(object);
+        break;
+      default:
+        assert(false, 'Unsupported validation type');
+        break;
+    }
+  };
+
+  // Check if method or event field is present in requestData
+  if (!requestData.method && !requestData.event) {
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    console.log('contentObject', contentObject)
+    if (contentObject && contentObject.data) {
+      contentObject.data.forEach((object) => handleValidation(object));
+    } else {
+      cy.validateContent(method, context, validationJsonPath, contentObject, validationType, appId);
+    }
+    return;
+  }
 
   // Extracting the api or event object from the global list.
   const methodOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
@@ -1319,62 +1385,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                           `Could not find the valid validation path from the validationJsonPath list - ${JSON.stringify(validationJsonPath)}`
                         );
                   }
-                  switch (scenario) {
-                    case CONSTANTS.REGEX:
-                      cy.regExValidation(
-                        method,
-                        object.validations[0].type,
-                        validationJsonPath,
-                        methodOrEventResponse
-                      );
-                      break;
-                    case CONSTANTS.MISC:
-                      cy.miscellaneousValidation(
-                        method,
-                        object.validations[0],
-                        methodOrEventObject
-                      );
-                      break;
-                    case CONSTANTS.DECODE:
-                      const decodeType = object.specialCase;
-                      const responseForDecodeValidation =
-                        validationType == CONSTANTS.EVENT
-                          ? methodOrEventResponse.eventResponse
-                          : validationType == CONSTANTS.METHOD
-                            ? methodOrEventResponse.result
-                            : null;
-
-                      cy.decodeValidation(
-                        method,
-                        decodeType,
-                        responseForDecodeValidation,
-                        object.validations[0],
-                        null
-                      );
-                      break;
-                    case CONSTANTS.FIXTURE:
-                      cy.validateContent(
-                        method,
-                        context,
-                        validationJsonPath,
-                        object.validations[0].type,
-                        validationType,
-                        appId
-                      );
-                      break;
-                    case CONSTANTS.CUSTOM:
-                      cy.customValidation(object, methodOrEventObject);
-                      break;
-                    case CONSTANTS.UNDEFINED:
-                      cy.undefinedValidation(object, methodOrEventObject, validationType);
-                      break;
-                    case CONSTANTS.SCREENSHOT_VALIDATION:
-                      cy.screenshotValidation(object, methodOrEventObject);
-                      break;
-                    default:
-                      assert(false, 'Unsupported validation type');
-                      break;
-                  }
+                  handleValidation(object, methodOrEventObject, methodOrEventResponse);
                 }
               }
             });
