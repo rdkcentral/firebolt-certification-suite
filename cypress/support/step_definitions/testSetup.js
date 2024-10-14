@@ -185,7 +185,9 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
         `API call to ensure that the first party app connection is established successfully: ${JSON.stringify(requestMap)}`
       );
       cy.sendMessagetoPlatforms(requestMap).then((result) => {
-        result = JSON.parse(result);
+        if (typeof result === 'string') {
+          result = JSON.parse(result);
+        }
         if (typeof result != CONSTANTS.TYPE_OBJECT) {
           result = JSON.parse(result);
           result = result.report;
