@@ -433,7 +433,7 @@ Cypress.Commands.add(
         CONSTANTS.SKIPPED,
         CONSTANTS.SKIPPED
       ).then(() => {
-        const pretext = 'Event Not Received : ';
+        const pretext = `Event Not Received for ${extractEventObject.eventObjectId}: `;
 
         fireLog.strictEqual(eventResponse, content, pretext);
       });
@@ -504,18 +504,21 @@ Cypress.Commands.add(
           CONSTANTS.SKIPPED,
           CONSTANTS.SKIPPED
         ).then(() => {
-          const pretext = 'Event Not Received : ';
+          const pretext = `Event Not Received for ${extractEventObject.eventObjectId}: `;
 
           fireLog.equal(eventResponse, content, pretext);
         });
       } else if (content === null) {
         cy.logValidationResult(
-          'Expected eventResponse is null,' + ' Actual: ' + eventResponse,
+          'Expected eventResponse for ' +
+            extractEventObject.eventObjectId +
+            ' is null , Actual: ' +
+            eventResponse,
           CONSTANTS.PASS,
           CONSTANTS.SKIPPED,
           CONSTANTS.SKIPPED
         ).then(() => {
-          const pretext = 'Event Not Received : ';
+          const pretext = `Event Not Received for ${extractEventObject.eventObjectId}: `;
 
           fireLog.strictEqual(eventResponse, content, pretext);
         });
