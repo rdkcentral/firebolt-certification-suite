@@ -190,7 +190,7 @@ Example:
 
 ```javascript
 {
-  method: 'screenshot',
+  method: 'fcs.screenshot',
   params: {
     validations: []
   }
@@ -203,7 +203,7 @@ Example:
 
 ```javascript
 {
-  method: 'screenshot',
+  method: 'fcs.screenshot',
   params: {
     validations: [
       {
