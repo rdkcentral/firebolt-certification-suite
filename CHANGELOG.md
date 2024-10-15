@@ -1,3 +1,38 @@
+# [1.3.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.9...v1.3.0-dev.10) (2024-10-14)
+
+
+### Features
+
+* Player interaction logs validation ([#216](https://github.com/rdkcentral/firebolt-certification-suite/issues/216)) ([3366e97](https://github.com/rdkcentral/firebolt-certification-suite/commit/3366e9786b7ff2630d4d5b741e72c372f12697fe))
+
+# [1.3.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.8...v1.3.0-dev.9) (2024-10-14)
+
+
+### Features
+
+* player changes ([#233](https://github.com/rdkcentral/firebolt-certification-suite/issues/233)) ([929a1ef](https://github.com/rdkcentral/firebolt-certification-suite/commit/929a1efadba23b122ea256430c3026a7f15ce480))
+
+# [1.3.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.7...v1.3.0-dev.8) (2024-10-11)
+
+
+### Bug Fixes
+
+* SetupCheck feature ([#232](https://github.com/rdkcentral/firebolt-certification-suite/issues/232)) ([62fe619](https://github.com/rdkcentral/firebolt-certification-suite/commit/62fe61930612e775166afd2b3346d7b042e988a7))
+
+# [1.3.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.6...v1.3.0-dev.7) (2024-10-07)
+
+
+### Features
+
+* updating account module ([#221](https://github.com/rdkcentral/firebolt-certification-suite/issues/221)) ([33b078d](https://github.com/rdkcentral/firebolt-certification-suite/commit/33b078d1d9ca81d4a8ae1e022ff04c4969e529b6))
+
+# [1.3.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.5...v1.3.0-dev.6) (2024-10-04)
+
+
+### Bug Fixes
+
+* Resolve incorrectly formatted validation objects and rename keys where appropriate ([#227](https://github.com/rdkcentral/firebolt-certification-suite/issues/227)) ([941ec57](https://github.com/rdkcentral/firebolt-certification-suite/commit/941ec5725bb305ad93185db43d31c07cc6e7f72f))
+
 # [1.3.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.4...v1.3.0-dev.5) (2024-09-25)
 
 
