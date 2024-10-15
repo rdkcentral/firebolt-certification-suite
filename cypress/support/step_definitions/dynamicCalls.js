@@ -349,10 +349,10 @@ Given(
  */
 Given(/'(.+)' on '(.+)' page/, (validationObjectKey, page) => {
   // Storing the page name in runtime environment variable to use it in the validations.
-  if (Cypress.env('runtime')) {
-    Cypress.env('runtime').page = page;
+  if (Cypress.env(CONSTANTS.RUNTIME)) {
+    Cypress.env(CONSTANTS.RUNTIME).page = page;
   } else {
-    Cypress.env('runtime', { page });
+    Cypress.env(CONSTANTS.RUNTIME, { page });
   }
 
   validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();

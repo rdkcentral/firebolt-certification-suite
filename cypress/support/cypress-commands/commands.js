@@ -880,10 +880,10 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   };
 
   // Storing the appId in runtime environment variable
-  if (Cypress.env('runtime')) {
-    Cypress.env('runtime').appId = appId;
+  if (Cypress.env(CONSTANTS.RUNTIME)) {
+    Cypress.env(CONSTANTS.RUNTIME).appId = appId;
   } else {
-    Cypress.env('runtime', { appId });
+    Cypress.env(CONSTANTS.RUNTIME, { appId });
   }
 
   if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
