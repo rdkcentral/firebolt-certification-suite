@@ -498,6 +498,8 @@ module.exports = {
     '`Unable to find the ${envAppIdKey} value in the env, please add the value in configModule/constants/config.json`',
   SET_EVENT_REQUEST: 'Request sent to set event values in platform: ',
   SET_EVENT_SUCCESS: 'Event value set successfully in platform',
+  SCENARIO_NAME: 'scenarioName',
+  FIREBOLT_INTERACTION: 'FireboltInteraction',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
