@@ -752,12 +752,13 @@ class FireLog extends Function {
           // If the method has its own logging, just apply it
           return Reflect.apply(target, thisArg, argumentsList);
         } else {
-          if (argumentsList.length > 2)
+          if (argumentsList.length > 3)
             message =
               'Expected : ' +
-              JSON.stringify(argumentsList[1]) +
+              JSON.stringify(argumentsList[2]) +
               ' Actual : ' +
-              JSON.stringify(argumentsList[0]);
+              JSON.stringify(argumentsList[1]);
+          else if (argumentsList.length == 3) message = argumentsList[2];
           else if (argumentsList.length == 1) message = argumentsList[0];
           else if (argumentsList.length == 2) message = argumentsList[1];
           else
