@@ -27,3 +27,6 @@ exports.NOT_AVAILABLE = {
 exports.INVALID_TYPE_PARAMS = {
   type: 'schemaOnly',
 };
+exports.INVALID_PARAMS = {
+  type: 'schemaOnly',
+};

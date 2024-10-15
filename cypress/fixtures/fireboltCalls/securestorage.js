@@ -105,22 +105,22 @@ exports.STATIC_VARIABLES = {
     SET_DEVICE1: {
       scope: 'device',
       key: 'authTestTokenDevice1',
-      value: 'authTestTokenDevice1',
+      value: 'authTestTokenDeviceValue1',
     },
     SET_DEVICE2: {
       scope: 'device',
       key: 'authTestTokenDevice2',
-      value: 'authTestTokenDevice2',
+      value: 'authTestTokenDeviceValue2',
     },
     SET_ACCOUNT1: {
       scope: 'account',
       key: 'authTestTokenAccount1',
-      value: 'authTestTokenAccount1',
+      value: 'authTestTokenAccountValue1',
     },
     SET_ACCOUNT2: {
       scope: 'account',
       key: 'authTestTokenAccount2',
-      value: 'authTestTokenAccount2',
+      value: 'authTestTokenAccountValue2',
     },
     REMOVE_DEVICE1: {
       scope: 'device',
@@ -302,10 +302,10 @@ exports.STATIC_VARIABLES = {
   SECURESTORAGE_CONTENT: {
     DEFAULT_VALUE: 'VGhpcyBub3QgYSByZWFsIHRva2VuLgo=',
     VALUE1: 'authTestTokenValue1',
-    GET_DEVICE2: 'authTestTokenDevice2',
-    GET_ACCOUNT2: 'authTestTokenValue2',
-    GET_DEVICE1: 'authTestTokenDevice1',
-    GET_ACCOUNT1: 'authTestTokenAccount1',
+    GET_DEVICE2: 'authTestTokenDeviceValue2',
+    GET_ACCOUNT2: 'authTestTokenAccountValue2',
+    GET_DEVICE1: 'authTestTokenDeviceValue1',
+    GET_ACCOUNT1: 'authTestTokenAccountValue1',
     VALUE2: 'authTestTokenValue2',
     VALUE_TTL: 'authTestTokenValueTTL',
     SCOPE_UPDATED_VALUE: 'VGhpcyBpcyBub3QgYSByZWFsIHRva2VuLg==',
