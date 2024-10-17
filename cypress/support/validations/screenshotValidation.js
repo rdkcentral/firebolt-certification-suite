@@ -13,7 +13,7 @@ Cypress.Commands.add('screenshotValidation', (object) => {
   if (UTILS.getEnvVariable('enableScreenshots')) {
     if (object && object.validations) {
       const requestMap = {
-        method: 'fcs.screenshot',
+        method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
         params: {
           validations: object.validations,
         },
