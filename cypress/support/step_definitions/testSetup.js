@@ -28,8 +28,7 @@ import UTILS from '../cypress-support/src/utils';
  * Given the environment has been set up for 'Firebolt Sanity' tests
  */
 Given('the environment has been set up for {string} tests', (test) => {
-  currentFeatureFile = JSON.stringify(window.testState.gherkinDocument.feature.name)
-  if (UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ) {
+  if (UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(JSON.stringify(window.testState.gherkinDocument.feature.name))) {
     return "pending"
   }
   if (
@@ -133,6 +132,7 @@ function destroyAppInstance(testType) {
           fireLog.log(false, 'App failed to unload, Reason: ' + closeReason);
           const requestMap = {
             method: CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP,
+            params: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
           };
           console.log('!!!!requestMap for unload is:', requestMap)
 
@@ -191,7 +191,7 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
       );
       cy.sendMessagetoPlatforms(requestMap).then((result) => {
         if (typeof result === 'string') {
-          result = JSON.parse(result);
+        result = JSON.parse(result);
         }
         if (typeof result != CONSTANTS.TYPE_OBJECT) {
           result = JSON.parse(result);

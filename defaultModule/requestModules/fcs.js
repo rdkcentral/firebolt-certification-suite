@@ -20,6 +20,7 @@
 // This is because Scripts/checkDefaultConfig.js copies neccessary folders missing from the configModule from here (defaultModule) to the config module.
 const CONSTANTS = require('../../../cypress/support/constants/constants');
 const UTILS = require('../../../cypress/support/cypress-support/src/utils');
+const { fireLog } = require('../../cypress/support/cypress-support/src/utils');
 
 /**
  * @module fcs
@@ -129,10 +130,24 @@ function triggerEvent(key) {
   });
 }
 
+/**
+ * @module fcs
+ * @function unloadApp
+ * @description UnloadApp
+ * @param {String} appId - appId which is to be unloaded
+ * unloadApp()
+ **/
+function unloadApp(appId){
+  fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
+    throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
+  });
+}
+
 module.exports = {
   setResponse,
   setTestProvider,
   setLifecycleState,
   fetchEventResponse,
   triggerEvent,
+  unloadApp,
 };
