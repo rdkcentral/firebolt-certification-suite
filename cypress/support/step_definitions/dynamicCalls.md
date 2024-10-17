@@ -149,3 +149,22 @@ Below fields is not mandatory to add in the fireboltCall object, if not present 
 **Note:** This glue step will work only when fireboltCall object having `event`, `eventValidationJsonPath` and `content` fields not present default value will be used.
 - eventValidationJsonPath ---> 'eventResponse'
 - content ---> null
+
+
+## '(.+)' on '(.+)' page
+
+#### Purpose: Function to do event and screenshot validation for the given page.
+
+### Examples:
+
+- `Then 'third party app is launched' on 'auth' page`
+
+### Params:
+
+| **Param**           | **Definition**                                                                                 |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
+| **_sdk_**           | sdk name                                                                                       |
+| **_eventExpected_** | Firebolt object key name.                                          |
+| **_page_**         | Name of the page where the screenshot is taken.                     |
+
+**Note:** This glue step will work only if the fireboltCall object contains `event`, `validationJsonPath` and `content`..
