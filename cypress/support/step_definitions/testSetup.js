@@ -127,14 +127,12 @@ function destroyAppInstance(testType) {
 
     try {
       cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
-        console.log('!!!!response for unload is:', response)
         if (response != CONSTANTS.NO_RESPONSE) {
           fireLog.log(false, 'App failed to unload, Reason: ' + closeReason);
           const requestMap = {
             method: CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP,
             params: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
           };
-          console.log('!!!!requestMap for unload is:', requestMap)
 
           cy.sendMessagetoPlatforms(requestMap).then(() => {
             // Config modules needs override for validation of app unload
