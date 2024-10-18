@@ -173,11 +173,86 @@
   Receives the updated environment variable device_data with dynamic device details.
 Example:
 
-  ```
-  {
-    "DEVICEID": "354444327",
-    "DEVICE_TYPE": "ipstb",
-    "DEVICE_MODEL": "VALUE",
-     ...
+```
+{
+  "DEVICEID": "354444327",
+  "DEVICE_TYPE": "ipstb",
+  "DEVICE_MODEL": "VALUE",
+  ...
 }
-  ```
+```
+## screenshot:
+
+### Request override
+- The `screenshot` request override is used to take a screenshot of the current screen of the platform. This function has to be added in config module `requestModules/fcs.js` file.
+
+#### Request format for screenshot request override function:
+
+```javascript
+{
+  method: 'fcs.screenshot',
+  params: {
+    validations: []
+  }
+}
+```
+
+**Examples:**
+
+**Example 1:** Passing validation objects to request override to validate the image with label `auth` with confidence 60 against the screenshot response.
+
+```javascript
+{
+  method: 'fcs.screenshot',
+  params: {
+    validations: [
+      {
+        "type": "image",
+        "label": "auth",
+        "confidence": 60
+      }
+    ]
+  }
+}
+```
+
+### Response override
+
+- The `screenshot` response override is used to validate the screenshot response against the validation object passed in the request override function. This function is added in the config module `responseModules/fcs.js` file.
+
+#### Return response format of screenshot response override function:
+- In the response below, `status` is the key that indicates the overall status of the screenshot validation. `validations` is an array of objects that holds the status of each validation object.
+- `status` is the required field to determine the status of the validation.
+
+```javascript
+{
+  status: "pass/fail",
+  validations: [
+    {status: "pass/fail"},
+  ]
+}
+```
+
+**Examples:** Response override function returning the response as below after validating the screenshot response against the validation object passed in the request override function.
+
+**Example 1:** Below represents validation of the screenhot response against the validation object is passed.
+
+```javascript
+{
+  status: "pass",
+  validations: [
+    {status: "pass"}
+  ]
+}
+```
+
+**Example 2:** Screenshot validation failed against the validation object passed.
+
+```javascript
+{
+  status: "fail",
+  validations: [
+    {status: "fail"}
+  ]
+}
+```
