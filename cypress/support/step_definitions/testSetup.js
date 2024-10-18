@@ -17,7 +17,7 @@
  */
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module TestSetupGlue
@@ -126,31 +126,40 @@ function destroyAppInstance(testType) {
     );
     cy.log(
       'Sending lifecycle close intent to unload app, method: ' +
-        params.methodName +
-        ' params: ' +
-        JSON.stringify(params.methodParams)
+      params.methodName +
+      ' params: ' +
+      JSON.stringify(params.methodParams)
     );
 
     try {
       cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
-        if (response != CONSTANTS.NO_RESPONSE) {
-          fireLog.log(false, 'App failed to unload, Reason: ' + closeReason);
+        let result;
+        try {
+          response = JSON.parse(response);
+          result = response.report.result;
+          fireLog.info('Received response from app to acknowledge close request. Response: ' + JSON.stringify(response));
+        }
+        catch {
+          result = response;
+        }
+        if (result === CONSTANTS.NO_RESPONSE || result === null) {
+          fireLog.info('App unloaded', 'destroyAppInstance');
+        } else {
+          fireLog.info(false, 'App may have failed to unload. Response: ' + JSON.stringify(response));
+          fireLog.info('Falling back to platform implementation of force unload.')
           const requestMap = {
             method: CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP,
             params: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID),
           };
-
           cy.sendMessagetoPlatforms(requestMap).then(() => {
             // Config modules needs override for validation of app unload
-            cy.log('Platforms unload app execution complete');
+            fireLog.info('Platforms unload app execution complete');
           });
-        } else {
-          cy.log('App unloaded', 'destroyAppInstance');
         }
         cy.wait(5000);
       });
     } catch (error) {
-      cy.log('Failed to close the 3rd party app: ', error);
+      fireLog.info('Failed to close the 3rd party app: ', error);
     }
   }
 }
@@ -222,10 +231,10 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
             if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
               throw Error(
                 'FCA not launched as 3rd party app or not subscribed to ' +
-                  requestTopic +
-                  '. Unable to get healthCheck response from FCA in ' +
-                  UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
-                  ' retries'
+                requestTopic +
+                '. Unable to get healthCheck response from FCA in ' +
+                UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
+                ' retries'
               );
             }
             healthCheckResponse = JSON.parse(healthCheckResponse);
