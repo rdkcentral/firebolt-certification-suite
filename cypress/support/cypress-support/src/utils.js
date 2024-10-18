@@ -801,7 +801,7 @@ class FireLog extends Function {
   }
 
   // Method to log a message without any assertion
-  log(message) {
+  info(message) {
     return cy.log(message);
   }
 
@@ -867,8 +867,6 @@ class FireLog extends Function {
     cy.log(message);
     assert.fail(message);
   }
-
-  info(message) {}
 }
 
 const fireLog = new FireLog();
