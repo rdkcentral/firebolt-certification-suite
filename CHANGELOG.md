@@ -1,3 +1,10 @@
+# [1.3.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.10...v1.3.0-dev.11) (2024-10-18)
+
+
+### Features
+
+* Screenshot capture glue ([#228](https://github.com/rdkcentral/firebolt-certification-suite/issues/228)) ([6896d5f](https://github.com/rdkcentral/firebolt-certification-suite/commit/6896d5f78739ceda4d496e2952ae1143accf2c2d))
+
 # [1.3.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.9...v1.3.0-dev.10) (2024-10-14)
 
 
