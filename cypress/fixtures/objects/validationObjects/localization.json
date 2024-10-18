@@ -171,5 +171,35 @@
                 ]
             }
         ]
+    },
+    "LOCALIZATION_ADD_ADDITIONALINFO_AS_INTEGER": {
+        "method": "localization.additionalInfo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_ADD_ADDITIONALINFO_RESPONSE_AS_INTEGER",
+                        "description": "Validation of the Localization add additionalInfo key as string Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_ADD_ADDITIONALINFO_AS_BOOLEAN": {
+        "method": "localization.additionalInfo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_ADD_ADDITIONALINFO_RESPONSE_AS_BOOLEAN",
+                        "description": "Validation of the Localization add additionalInfo key as string Format"
+                    }
+                ]
+            }
+        ]
     }
 }
