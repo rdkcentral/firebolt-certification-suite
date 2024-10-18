@@ -28,8 +28,12 @@ import UTILS from '../cypress-support/src/utils';
  * Given the environment has been set up for 'Firebolt Sanity' tests
  */
 Given('the environment has been set up for {string} tests', (test) => {
-  if (UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(JSON.stringify(window.testState.gherkinDocument.feature.name))) {
-    return "pending"
+  if (
+    UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
+      JSON.stringify(window.testState.gherkinDocument.feature.name)
+    )
+  ) {
+    return 'pending';
   }
   if (
     !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
@@ -120,9 +124,9 @@ function destroyAppInstance(testType) {
     );
     cy.log(
       'Sending lifecycle close intent to unload app, method: ' +
-      params.methodName +
-      ' params: ' +
-      JSON.stringify(params.methodParams)
+        params.methodName +
+        ' params: ' +
+        JSON.stringify(params.methodParams)
     );
 
     try {
@@ -131,7 +135,7 @@ function destroyAppInstance(testType) {
           fireLog.log(false, 'App failed to unload, Reason: ' + closeReason);
           const requestMap = {
             method: CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP,
-            params: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+            params: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID),
           };
 
           cy.sendMessagetoPlatforms(requestMap).then(() => {
@@ -189,7 +193,7 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
       );
       cy.sendMessagetoPlatforms(requestMap).then((result) => {
         if (typeof result === 'string') {
-        result = JSON.parse(result);
+          result = JSON.parse(result);
         }
         if (typeof result != CONSTANTS.TYPE_OBJECT) {
           result = JSON.parse(result);
@@ -216,10 +220,10 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
             if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
               throw Error(
                 'FCA not launched as 3rd party app or not subscribed to ' +
-                requestTopic +
-                '. Unable to get healthCheck response from FCA in ' +
-                UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
-                ' retries'
+                  requestTopic +
+                  '. Unable to get healthCheck response from FCA in ' +
+                  UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
+                  ' retries'
               );
             }
             healthCheckResponse = JSON.parse(healthCheckResponse);
