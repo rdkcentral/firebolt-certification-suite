@@ -79,6 +79,8 @@ Given('the environment has been set up for {string} tests', (test) => {
       }
     }
   }
+  // Calling the envConfigSetup command to setup the environment for the test from the config module.
+  cy.envConfigSetup();
 });
 
 /**
