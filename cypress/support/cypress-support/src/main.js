@@ -89,15 +89,6 @@ export default function (module) {
     Cypress.env(CONSTANTS.MESSAGE_QUEUE, messageQueue);
     UTILS.parseExceptionList();
     cy.getModuleReqIdJson();
-    if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) == true) {
-      cy.startOrStopPerformanceService(CONSTANTS.INITIATED).then((response) => {
-        if (response) {
-          Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, true);
-        }
-      });
-    } else {
-      cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
-    }
 
     // Merge fireboltCalls
     const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
@@ -132,8 +123,36 @@ export default function (module) {
   // beforeEach
   beforeEach(() => {
     UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
-    cy.getBeforeOperationObject();
-    UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+
+    cy.getBeforeOperationObject().then(() => {
+      const scenarioName = Cypress.env(CONSTANTS.SCENARIO_NAME);
+
+      UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+
+      if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) === true) {
+        if (scenarioName) {
+          const requestMap = {
+            method: CONSTANTS.REQUEST_OVERRIDE_CALLS.CREATE_MARKER,
+            params: scenarioName,
+          };
+          fireLog.info(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
+          cy.sendMessagetoPlatforms(requestMap).then((result) => {
+            fireLog.isTrue(
+              result.success,
+              'Response for marker creation: ' + JSON.stringify(result)
+            );
+          });
+
+          cy.startOrStopPerformanceService(CONSTANTS.INITIATED).then((response) => {
+            if (response) {
+              Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, true);
+            }
+          });
+        }
+      } else {
+        cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
+      }
+    });
   });
 
   /**
@@ -240,6 +259,17 @@ export default function (module) {
         cy.log(`Something went wrong when attempting to unsubscribe: ${err}`);
       }
     })();
+  });
+
+  //after each
+  afterEach(() => {
+    if (UTILS.getEnvVariable(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false) == true) {
+      cy.startOrStopPerformanceService(CONSTANTS.STOPPED).then((response) => {
+        if (response) {
+          Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false);
+        }
+      });
+    }
   });
 
   /**
