@@ -17,9 +17,9 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-          | Scenario                          | Method  | Value |
-          | Disabled closedcaptions  settings | enabled | false |
-          | Enabled closedcaptions   settings | enabled | true  |
+          | Scenario                         | Method  | Value |
+          | Disabled closedCaptionsSettings  | enabled | false |
+          | Enabled closedCaptionsSettings   | enabled | true  |
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.closedCaptionsSettings - Validating getters and setters for <Scenario>
