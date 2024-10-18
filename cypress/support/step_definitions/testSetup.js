@@ -43,12 +43,6 @@ Given('the environment has been set up for {string} tests', (test) => {
       UTILS.getSetupDetails();
     }
 
-    cy.getSdkVersion().then(() => {
-      cy.getFireboltJsonData().then((data) => {
-        Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
-      });
-    });
-    cy.getCapabilities();
     destroyAppInstance(test);
     Cypress.env(CONSTANTS.ENV_SETUP_STATUS, true);
     if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
