@@ -126,9 +126,9 @@ function destroyAppInstance(testType) {
     );
     cy.log(
       'Sending lifecycle close intent to unload app, method: ' +
-      params.methodName +
-      ' params: ' +
-      JSON.stringify(params.methodParams)
+        params.methodName +
+        ' params: ' +
+        JSON.stringify(params.methodParams)
     );
 
     try {
@@ -137,16 +137,21 @@ function destroyAppInstance(testType) {
         try {
           response = JSON.parse(response);
           result = response.report.result;
-          fireLog.info('Received response from app to acknowledge close request. Response: ' + JSON.stringify(response));
-        }
-        catch {
+          fireLog.info(
+            'Received response from app to acknowledge close request. Response: ' +
+              JSON.stringify(response)
+          );
+        } catch {
           result = response;
         }
         if (result === CONSTANTS.NO_RESPONSE || result === null) {
           fireLog.info('App unloaded', 'destroyAppInstance');
         } else {
-          fireLog.info(false, 'App may have failed to unload. Response: ' + JSON.stringify(response));
-          fireLog.info('Falling back to platform implementation of force unload.')
+          fireLog.info(
+            false,
+            'App may have failed to unload. Response: ' + JSON.stringify(response)
+          );
+          fireLog.info('Falling back to platform implementation of force unload.');
           const requestMap = {
             method: CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP,
             params: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID),
@@ -231,10 +236,10 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
             if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
               throw Error(
                 'FCA not launched as 3rd party app or not subscribed to ' +
-                requestTopic +
-                '. Unable to get healthCheck response from FCA in ' +
-                UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
-                ' retries'
+                  requestTopic +
+                  '. Unable to get healthCheck response from FCA in ' +
+                  UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
+                  ' retries'
               );
             }
             healthCheckResponse = JSON.parse(healthCheckResponse);

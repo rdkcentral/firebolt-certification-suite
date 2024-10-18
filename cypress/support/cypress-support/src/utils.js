@@ -867,7 +867,6 @@ class FireLog extends Function {
     cy.log(message);
     assert.fail(message);
   }
-
 }
 
 const fireLog = new FireLog();
