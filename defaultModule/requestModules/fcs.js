@@ -20,7 +20,6 @@
 // This is because Scripts/checkDefaultConfig.js copies neccessary folders missing from the configModule from here (defaultModule) to the config module.
 const CONSTANTS = require('../../../cypress/support/constants/constants');
 const UTILS = require('../../../cypress/support/cypress-support/src/utils');
-const { fireLog } = require('../../cypress/support/cypress-support/src/utils');
 
 /**
  * @module fcs
