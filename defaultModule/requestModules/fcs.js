@@ -136,7 +136,7 @@ function triggerEvent(key) {
  * @param {String} appId - appId which is to be unloaded
  * unloadApp()
  **/
-function unloadApp(appId){
+function unloadApp(appId) {
   fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
     throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
   });
