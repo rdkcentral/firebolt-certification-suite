@@ -25,19 +25,19 @@
     "INVALID_BOOLEAN_PARAMS_FOR_WIFI_SCAN": {
         "method": "wifi.scan",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_INTEGER_PARAMS_FOR_WIFI_CONNECT": {
         "method": "wifi.connect",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_VALUE_PARAMS_FOR_WIFI_WPS": {
         "method": "wifi.wps",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "WIFI_DISCONNECT": {

@@ -10,7 +10,7 @@
     "CUSTOM_ERROR_FOR_LIFECYCLE_READY_CAPABILITY": {
         "method": "lifecycle.ready",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "NOTIFY_THAT_THE_APP_IS_READY": {
@@ -28,7 +28,7 @@
     "CUSTOM_ERROR_FOR_LIFECYCLE_READY": {
         "method": "lifecycle.ready",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "CLOSE_APP_WITH_EMPTY_PARAMETER": {
@@ -54,7 +54,7 @@
     "INVALID_PARAMETER_ERROR_FOR_LIFECYCLE_CLOSE": {
         "method": "lifecycle.close",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "CLOSE_APP_WITH_REMOTE_BUTTON": {

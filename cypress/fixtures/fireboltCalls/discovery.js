@@ -683,21 +683,21 @@ exports.NOTIFY_WATCHED_CONTENT_WITH_INVALID_WATCHEDON = {
 exports.INVALID_PARAMS_FOR_DISCOVERY_WATCHED = {
   method: 'discovery.watched',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 
 exports.INVALID_PARAMS_FOR_DISCOVERY_WATCHNEXT = {
   method: 'discovery.watchNext',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.,
   expectingError: true,
 };
 
 exports.INVALID_PARAMS_FOR_DISCOVERY_ENTITLEMENTS = {
   method: 'discovery.entitlements',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 
@@ -792,7 +792,7 @@ exports.NOTIFY_USER_HAS_SIGNEDIN_WITH_INTEGER_PARAMS = {
 exports.INVALID_PARAMS_FOR_DISCOVERY_SIGNIN = {
   method: 'discovery.signIn',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 
@@ -917,7 +917,7 @@ exports.NOTIFY_CONTENT_ACCESS_WITH_INVALID_ENTITLEMENTS_INVALID_ENDTIME = {
 exports.INVALID_PARAMETER_ERROR_FOR_DISCOVERY_CONTENTACCESS = {
   method: 'discovery.contentAccess',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 

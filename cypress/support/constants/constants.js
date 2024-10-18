@@ -236,6 +236,7 @@ module.exports = {
   LIFECYCLE_HISTORY_FAILED: 'Failed to fetch lifecycle history due to following error: ',
   LIFECYCLE_HISTORY_RESPONSE: 'Lifecycle history response fetched from application: ',
   LIFECYCLE_HISTORY_SCHEMA_PATH: 'schemas/lifecycleHistorySchema',
+  LIFECYCLE_HISTORY_INTENT: 'Lifecycle intent sent to application to fetch App history: ',
   LIFECYCLE_INTENT: 'Lifecycle intent sent to application: ',
   LIFECYCLE_METHOD_LIST: ['Lifecycle.ready', 'Lifecycle.state', 'Lifecycle.close'],
   LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle events generated ',

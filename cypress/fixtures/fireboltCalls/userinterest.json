@@ -427,7 +427,7 @@
         "method": "discovery.userInterest",
         "context": "noContext",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "NOTIFY_USERINTEREST_WITH_INVALID_CHANNELTYPE_IN_CHANNEL_ENTITY":{
@@ -562,7 +562,7 @@
         "method": "discovery_content.requestUserInterest",
         "context": "noContext",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "DISCOVERY_ONREQUESTUSERINTEREST":{
@@ -577,7 +577,7 @@
     "INVALID_PARAMETERS_FOR_REQUESTUSERINTEREST": {
 		"method": "content.requestUserInterest",
 		"validationJsonPath": "result",
-		"content": "INVALID_TYPE_PARAMS",
+		"content": "INVALID_PARAMS",
         "expectingError": true
 	},
     "NOTIFY_REQUESTUSERINTEREST_WITH_TYPE_INTEREST_WITHOUT_PROVIDER": {
