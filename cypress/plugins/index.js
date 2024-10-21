@@ -214,7 +214,7 @@ module.exports = async (on, config) => {
     },
     downloadAndSaveImage({ imageUrl, fileName, downloadPath }) {
       const filePath = path.join(downloadPath, fileName);
- 
+
       return new Promise((resolve, reject) => {
         // Create directory if it doesn't exist
         fs.mkdir(path.dirname(filePath), { recursive: true }, (err) => {
