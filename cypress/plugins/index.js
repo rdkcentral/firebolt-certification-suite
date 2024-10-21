@@ -42,6 +42,7 @@ const updateLoggerLevel = require('../support/Logger').updateLoggerLevel;
 const tempReportEnvJson = '../../tempReportEnv.json';
 const { getAndDereferenceOpenRpc } = require('./pluginUtils');
 let metaDataArr = [];
+const fetch = require('node-fetch');
 
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
@@ -211,6 +212,35 @@ module.exports = async (on, config) => {
     },
     checkFileExists(filePath) {
       return fs.existsSync(filePath);
+    },
+    downloadAndSaveImage({ imageUrl, fileName, downloadPath }) {
+      const filePath = path.join(downloadPath, fileName);
+
+      return new Promise((resolve, reject) => {
+        // Create directory if it doesn't exist
+        fs.mkdir(path.dirname(filePath), { recursive: true }, (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            fetch(imageUrl)
+              .then((response) => {
+                const dest = fs.createWriteStream(filePath, { flags: 'w' });
+                response.body.pipe(dest);
+                dest.on('finish', () => {
+                  dest.close(() => {
+                    resolve(true); // Resolve with true on success
+                  });
+                });
+                dest.on('error', (err) => {
+                  reject(err);
+                });
+              })
+              .catch((err) => {
+                reject(err);
+              });
+          }
+        });
+      });
     },
   });
 
