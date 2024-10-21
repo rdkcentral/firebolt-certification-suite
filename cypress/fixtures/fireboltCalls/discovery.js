@@ -690,7 +690,7 @@ exports.INVALID_PARAMS_FOR_DISCOVERY_WATCHED = {
 exports.INVALID_PARAMS_FOR_DISCOVERY_WATCHNEXT = {
   method: 'discovery.watchNext',
   validationJsonPath: 'result',
-  content: errorContent.,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 
