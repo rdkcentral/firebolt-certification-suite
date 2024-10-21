@@ -1,3 +1,10 @@
+# [1.3.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.11...v1.3.0-dev.12) (2024-10-21)
+
+
+### Bug Fixes
+
+* sdk version bug fix ([#234](https://github.com/rdkcentral/firebolt-certification-suite/issues/234)) ([fd4cbf6](https://github.com/rdkcentral/firebolt-certification-suite/commit/fd4cbf6d34dffbb773d28b97537d7f41d216aeb6))
+
 # [1.3.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.10...v1.3.0-dev.11) (2024-10-18)
 
 
