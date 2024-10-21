@@ -73,7 +73,21 @@ const env = {
       [3840, 2160],
     ],
   },
+  unloadAppTestTypes: ['lifecycle', 'Discovery.Launch', 'Parameters', 'userGrants', 'lifeCycleApi'],
+  closeAppTestTypes: [
+    'Profile',
+    'Keyboard',
+    'Parameters',
+    'Discovery.Launch',
+    'lifecycle',
+    'AcknowledgeChallenge',
+    'userGrants',
+    'lifeCycleApi',
+    'UserInterestProvider',
+  ],
   fcaAppList: ['default3rdPartyAppId'],
+  variableObjectsPrefixLists: ['DYNAMIC_FB_CALL_VARIABLES'],
+  pendingFeatures: [],
 };
 
 module.exports = {

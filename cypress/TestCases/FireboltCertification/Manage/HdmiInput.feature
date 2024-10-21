@@ -31,9 +31,9 @@ Feature: HdmiInput_Manage
          | Scenario                                                | Key                                      | Validation_Key                           |
          | Validate HDMIInput port autoLowLatencyModeCapable true  | set autoLowLatencyModeCapable with true  | true for autoLowLatencyModeCapable port  |
          | Validate HDMIInput port autoLowLatencyModeCapable false | set autoLowLatencyModeCapable with false | false for autoLowLatencyModeCapable port |
-         | Validate HDMIInput port edidVersion 1.4                 | set edidVersion to 1.4                   | 1.4 for edidVersion port                 |
-         | Validate HDMIInput port edidVersion 2.0                 | set edidVersion to 2.0                   | 2.0 for edidVersion port                 |
-         | Validate HDMIInput port edidVersion unknown             | set edidVersion to unknown               | 2.0 for edidVersion port                 |
+         | Validate HDMIInput port edidVersion 1.4                 | set edidVersion to 1.4                   | edidVersion port 1 4                     |
+         | Validate HDMIInput port edidVersion 2.0                 | set edidVersion to 2.0                   | edidVersion port 2.0                     |
+         | Validate HDMIInput port edidVersion unknown             | set edidVersion to unknown               | edidVersion port 2.0                     |
 
    @sdk @transport
    Scenario Outline: HDMIInput.ports - Positive Scenario: <Scenario>
@@ -46,9 +46,9 @@ Feature: HdmiInput_Manage
          | Scenario                                                 | Key                                      | Validation_Key                            |
          | Validate HDMIInput ports autoLowLatencyModeCapable true  | set autoLowLatencyModeCapable with true  | true for autoLowLatencyModeCapable ports  |
          | Validate HDMIInput ports autoLowLatencyModeCapable false | set autoLowLatencyModeCapable with false | false for autoLowLatencyModeCapable ports |
-         | Validate HDMIInput ports edidVersion 1.4                 | set edidVersion to 1.4                   | 1.4 for edidVersion ports                 |
-         | Validate HDMIInput ports edidVersion 2.0                 | set edidVersion to 2.0                   | 2.0 for edidVersion ports                 |
-         | Validate HDMIInput ports edidVersion unknown             | set edidVersion to unknown               | 2.0 for edidVersion ports                 |
+         | Validate HDMIInput ports edidVersion 1.4                 | set edidVersion to 1.4                   | edidVersion ports 1 4                     |
+         | Validate HDMIInput ports edidVersion 2.0                 | set edidVersion to 2.0                   | edidVersion ports 2 0                     |
+         | Validate HDMIInput ports edidVersion unknown             | set edidVersion to unknown               | edidVersion ports 2 0                     |
 
    # If edidVersion is 1.4, then autoLowLatencyModeCapable and autoLowLatencyModeSignalled must be false
    @sdk @transport
@@ -81,9 +81,9 @@ Feature: HdmiInput_Manage
          | Scenario                            | Key                                            | Validation_Key                                 | Event_Registration_Key                       | Get_API_Key                   | Event_Validation_Key                         | Method                    |
          | set AutoLowLatencyModeCapable-true  | set autoLowLatencyModeCapable true with HDMI1  | true for autoLowLatencyModeCapable HDMI1 port  | hdmiInput onAutoLowLatencyModeCapableChanged | get autoLowLatencyModeCapable | true for onAutoLowLatencyModeCapableChanged  | autoLowLatencyModeCapable |
          | set AutoLowLatencyModeCapable-false | set autoLowLatencyModeCapable false with HDMI1 | false for autoLowLatencyModeCapable HDMI1 port | hdmiInput onAutoLowLatencyModeCapableChanged | get autoLowLatencyModeCapable | false for onAutoLowLatencyModeCapableChanged | autoLowLatencyModeCapable |
-         | set EdidVersion-1.4                 | set edidVersion to 1.4                         | 1.4 for edidVersion HDMI1 port                 | hdmiInput onEdidVersionChanged               | get edidVersion               | 1.4 for onEdidVersionChanged                 | edidVersion               |
-         | set EdidVersion-2.0                 | set edidVersion to 2.0                         | 2.0 for edidVersion HDMI1 port                 | hdmiInput onEdidVersionChanged               | get edidVersion               | 2.0 for onEdidVersionChanged                 | edidVersion               |
-         | set EdidVersion-unknown             | set edidVersion to unknown                     | 2.0 for edidVersion HDMI1 port                 | hdmiInput onEdidVersionChanged               | get edidVersion               | 2.0 for onEdidVersionChanged                 | edidVersion               |
+         | set EdidVersion-1.4                 | set edidVersion to 1.4                         | edidVersion HDMI1 port 1 4                     | hdmiInput onEdidVersionChanged               | get edidVersion               | onEdidVersionChanged 1 4                     | edidVersion               |
+         | set EdidVersion-2.0                 | set edidVersion to 2.0                         | edidVersion HDMI1 port 2 0                     | hdmiInput onEdidVersionChanged               | get edidVersion               | onEdidVersionChanged 2 0                     | edidVersion               |
+         | set EdidVersion-unknown             | set edidVersion to unknown                     | edidVersion HDMI1 port 2 0                     | hdmiInput onEdidVersionChanged               | get edidVersion               | onEdidVersionChanged 2 0                     | edidVersion               |
          | set LowLatencyMode-true             | set lowLatencyMode with true                   | true for lowLatencyMode                        | hdmiInput onLowLatencyModeChanged            | get lowLatencyMode            | true for onLowLatencyModeChanged             | lowLatencyMode            |
          | set LowLatencyMode-false            | set lowLatencyMode with false                  | false for lowLatencyMode                       | hdmiInput onLowLatencyModeChanged            | get lowLatencyMode            | false for onLowLatencyModeChanged            | lowLatencyMode            |
 

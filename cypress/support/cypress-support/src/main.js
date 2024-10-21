@@ -29,6 +29,7 @@ const logger = require('../../Logger')('main.js');
 const setimmediate = require('setimmediate');
 let appTransport;
 const flatted = require('flatted');
+const _ = require('lodash');
 const internalV2FireboltCallsData = require('../../../fixtures/fireboltCalls/index');
 const externalV2FireboltCallsData = require('../../../fixtures/external/fireboltCalls/index');
 const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/index');
@@ -100,7 +101,11 @@ export default function (module) {
 
     // Merge fireboltCalls
     const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
-    const v2FireboltCallsData = { ...internalV2FireboltCallsData, ...externalV2FireboltCallsData };
+    const v2FireboltCallsData = _.merge(
+      {},
+      internalV2FireboltCallsData,
+      externalV2FireboltCallsData
+    );
 
     cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
       (mergedFireboltCalls) => {
@@ -126,6 +131,7 @@ export default function (module) {
 
   // beforeEach
   beforeEach(() => {
+    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
     cy.getBeforeOperationObject();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
   });

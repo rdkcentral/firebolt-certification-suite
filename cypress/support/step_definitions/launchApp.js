@@ -35,13 +35,21 @@ Given(
   (appType, appCallSign, state) => {
     if (
       !UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) ||
-      CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES.includes(UTILS.getEnvVariable(CONSTANTS.TEST_TYPE)) ||
+      UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(
+        UTILS.getEnvVariable(CONSTANTS.TEST_TYPE)
+      ) ||
       UTILS.isTestTypeChanged(CONSTANTS.TEST_TYPE)
     ) {
       if (!state) {
         state = CONSTANTS.LIFECYCLE_STATES.FOREGROUND;
       }
       cy.launchApp(appType, appCallSign);
+      cy.getSdkVersion().then(() => {
+        cy.getFireboltJsonData().then((data) => {
+          Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
+        });
+      });
+      cy.getCapabilities();
       cy.lifecycleSetup(appCallSign, state);
       Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, true);
       cy.updateRunInfo();

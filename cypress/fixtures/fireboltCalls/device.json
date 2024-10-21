@@ -143,11 +143,11 @@
         "validationJsonPath": "result",
         "content": "DEVICE_AUDIO"
     },
-    "SET_DEVICE_NAME_TO_BEDROOM":{
+    "SET_DEVICE_NAME_TO_BEDROOM": {
         "method": "manage_device.setName",
-		"params": "Bedroom"
+        "params": "Bedroom"
     },
-    "GET_MANAGE_DEVICE_NAME":{
+    "GET_MANAGE_DEVICE_NAME": {
         "method": "manage_device.name"
     },
     "BEDROOM_FOR_DEVICE_NAME": {
@@ -160,28 +160,28 @@
         "validationJsonPath": "eventResponse",
         "content": "DEVICE_BEDROOM_NAME"
     },
-    "PROVISION_DEVICE_WITH_DEFAULT_VALUES":{
+    "PROVISION_DEVICE_WITH_DEFAULT_VALUES": {
         "method": "manage_device.provision",
-		"params": "DEVICE_PROVISION_DEFAULT_VALUES"
+        "params": "DEVICE_PROVISION_DEFAULT_VALUES"
     },
     "DEFAULT_VALUES_FOR_DEVICE_PROVISION": {
         "method": "device.provision",
         "validationJsonPath": "result",
         "content": "DEVICE_PROVISION_DEFAULT_CONTENT"
     },
-    "PROVISION_DEVICE_WITH_DISTRIBUTOR_ID":{
+    "PROVISION_DEVICE_WITH_DISTRIBUTOR_ID": {
         "method": "manage_device.provision",
-		"params": "DEVICE_PROVISION_WITH_DISTRIBUTOR_ID"
+        "params": "DEVICE_PROVISION_WITH_DISTRIBUTOR_ID"
     },
     "DISTRIBUTOR_ID_FOR_DEVICE_PROVISION": {
         "method": "device.provision",
         "validationJsonPath": "result",
         "content": "DEVICE_PROVISION_WITH_DISTRIBUTOR_ID_CONTENT"
     },
-    "GET_DEVICE_ID":{
+    "GET_DEVICE_ID": {
         "method": "device.id"
     },
-    "GET_ACCOUNT_ID":{
+    "GET_ACCOUNT_ID": {
         "method": "account.id"
     },
     "EXPECTED_PROVISION_DEVICE_ID": {
@@ -208,57 +208,57 @@
         "validationJsonPath": "result",
         "content": "DEVICE_DISTRIBUTOR"
     },
-    "SET_DEVICE_NAME_WITH_INTEGER":{
+    "SET_DEVICE_NAME_WITH_INTEGER": {
         "method": "manage_device.setName",
-		"params": "INTEGER123",
+        "params": "INTEGER123",
         "expected": "error"
     },
-    "SET_DEVICE_NAME_WITH_BOOLEAN":{
+    "SET_DEVICE_NAME_WITH_BOOLEAN": {
         "method": "manage_device.setName",
-		"params": "TRUE",
+        "params": "TRUE",
         "expected": "error"
     },
-    "INVALID_PARAMETERS_FOR_DEVICE":{
+    "INVALID_PARAMETERS_FOR_DEVICE": {
         "method": "device.setName",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
-    "INVALID_REQUEST_FOR_DEVICE_DISTRIBUTOR":{
+    "INVALID_REQUEST_FOR_DEVICE_DISTRIBUTOR": {
         "method": "device.distributor",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
-    "INVALID_PARAMETERS_FOR_DEVICE_PROVISION":{
+    "INVALID_PARAMETERS_FOR_DEVICE_PROVISION": {
         "method": "device.provision",
         "validationJsonPath": "result",
         "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
-    "PROVISION_DEVICE_WITH_INTEGER":{
+    "PROVISION_DEVICE_WITH_INTEGER": {
         "method": "manage_device.provision",
-		"params": "INTEGER123",
+        "params": "INTEGER123",
         "expected": "error"
     },
-    "PROVISION_DEVICE_WITH_BOOLEAN":{
+    "PROVISION_DEVICE_WITH_BOOLEAN": {
         "method": "manage_device.provision",
-		"params": "TRUE",
+        "params": "TRUE",
         "expected": "error"
     },
-    "PROVISION_DEVICE_WITHOUT_DEVICEID":{
+    "PROVISION_DEVICE_WITHOUT_DEVICEID": {
         "method": "manage_device.provision",
-		"params": "DEVICE_PROVISION_WITHOUT_DEVICEID",
+        "params": "DEVICE_PROVISION_WITHOUT_DEVICEID",
         "expected": "error"
     },
-    "PROVISION_DEVICE_WITH_EMPTY_PARAMS":{
+    "PROVISION_DEVICE_WITH_EMPTY_PARAMS": {
         "method": "manage_device.provision",
-		"params": "DEVICE_PROVISION_EMPTY_PARAMS",
+        "params": "DEVICE_PROVISION_EMPTY_PARAMS",
         "expected": "error"
     },
-    "PROVISION_DEVICE_WITHOUT_ACCOUNTID":{
+    "PROVISION_DEVICE_WITHOUT_ACCOUNTID": {
         "method": "manage_device.provision",
-		"params": "DEVICE_PROVISION_WITHOUT_ACCOUNTID",
+        "params": "DEVICE_PROVISION_WITHOUT_ACCOUNTID",
         "expected": "error"
     },
     "SET_DEVICE_NAME_WITHOUT_PARAMETERS": {

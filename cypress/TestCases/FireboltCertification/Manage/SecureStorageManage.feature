@@ -79,7 +79,7 @@ Feature: SecureStorage_Manage
         Examples:
             | Scenario                     | Set_API_Key                                         |
             | setForApp with invalid scope | set secure data value for an app with invalid scope |
-            | setForApp with integer scope | set secure data value for an app with invalid scope |
+            | setForApp with integer scope | set secure data value for an app with integer scope |
             | setForApp with null scope    | set secure data value for an app with null scope    |
             | setForApp with boolean scope | set secure data value for an app with boolean scope |
             | setForApp with empty scope   | set secure data value for an app with empty scope   |

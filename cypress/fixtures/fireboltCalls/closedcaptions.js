@@ -25,3 +25,15 @@ exports.CLOSED_CAPTIONS_SETTINGS = {
     ],
   },
 };
+
+exports.CLOSEDCAPTIONS_SETTINGS_SET_TO_NULL = {
+  method: resolveAtRuntime('manage_closedcaptions.{{attribute}}'),
+  validationJsonPath: 'result',
+  setMethod: resolveAtRuntime('manage_closedcaptions.set{{attribute.uppercaseFirstChar}}'),
+  setParams: resolveAtRuntime('value'),
+  setValidationJsonPath: 'result',
+  setContent: null,
+  event: resolveAtRuntime('manage_closedcaptions.on{{attribute.uppercaseFirstChar}}Changed'),
+  eventValidationJsonPath: 'eventResponse',
+  isNullCase: true,
+};

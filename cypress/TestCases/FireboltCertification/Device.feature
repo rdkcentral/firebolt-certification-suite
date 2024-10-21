@@ -9,16 +9,21 @@ Feature: Device
     Scenario Outline:Device.<Method> - Positive Scenario: <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
+
         Examples:
-            | Scenario                    | API_Key                  | Validation_Key              | Method      |
-            | Validate Device id          | fetch device id          | expected device id          | id          |
-            | Validate Device distributor | fetch device distributor | expected device distributor | distributor |
-            | Validate Device platform    | fetch device platform    | expected device platform    | platform    |
-            | Validate Device uid         | fetch device uid         | expected device uid         | uid         |
-            | Validate Device type        | fetch device type        | expected device type        | type        |
-            | Validate Device model       | fetch device model       | expected device model       | model       |
-            | Validate Device sku         | fetch device sku         | expected device sku         | sku         |
-            | Validate Device make        | fetch device make        | expected device make        | make        |
+            | Scenario                    | Method      | Validation_Key              | API_Key                  |
+            | Validate Device id          | id          | expected device id          | fetch device id          |
+            | Validate Device distributor | distributor | expected device distributor | fetch device distributor |
+            | Validate Device uid         | uid         | expected device uid         | fetch device uid         |
+            | Validate Device type        | type        | expected device type        | fetch device type        |
+            | Validate Device model       | model       | expected device model       | fetch device model       |
+            | Validate Device sku         | sku         | expected device sku         | fetch device sku         |
+            | Validate Device make        | make        | expected device make        | fetch device make        |
+
+    @sdk @transport
+    Scenario: Device.platform - Positive Scenario: Validate device platform
+        When '3rd party app' invokes the 'Firebolt' API to 'fetch device platform'
+        Then 'Firebolt' platform responds with 'expected device platform'
 
     @sdk @transport
     Scenario: Device.name - Positive Scenario: Validate device name change
@@ -68,4 +73,3 @@ Feature: Device
             | Validate network_Ethernet_disconnected | device network as ethernet disconnected | onNetworkChanged with ethernet disconnected | onNetworkChanged events with ethernet disconnected |
             | Validate network_Hybrid_connected      | device network as hybrid connected      | onNetworkChanged with hybrid connected      | onNetworkChanged events with hybrid connected      |
             | Validate network_Hybrid_disconnected   | device network as hybrid disconnected   | onNetworkChanged with hybrid disconnected   | onNetworkChanged events with hybrid disconnected   |
-            

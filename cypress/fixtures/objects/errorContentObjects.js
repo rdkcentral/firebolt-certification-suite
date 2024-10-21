@@ -15,9 +15,15 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-import './miscellaneousValidation';
-import './decodeValidation';
-import './regExValidation';
-import './schemaValidation';
-import './undefinedValidation';
-import './screenshotValidation';
+exports.NOT_SUPPORTED = {
+  type: 'schemaOnly',
+};
+exports.NOT_PERMITTED = {
+  type: 'schemaOnly',
+};
+exports.NOT_AVAILABLE = {
+  type: 'schemaOnly',
+};
+exports.INVALID_TYPE_PARAMS = {
+  type: 'schemaOnly',
+};
