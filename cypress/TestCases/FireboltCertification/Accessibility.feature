@@ -6,7 +6,7 @@ Feature: Accessibility
         And 3rd party 'certification' app is launched
 
     @sdk @transport @Sev0
-    Scenario Outline: Accessibility.closedCaptionsSettings - Validating getters and setters for <Scenario>
+   Scenario Outline: Accessibility.closedCaptionsSettings - Validating API and Event Responses for <Scenario>
         Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
@@ -22,7 +22,7 @@ Feature: Accessibility
           | Enabled closedCaptionsSettings   | enabled | true  |
 
     @sdk @transport @Sev1
-    Scenario Outline: Accessibility.closedCaptionsSettings - Validating getters and setters for <Scenario>
+    Scenario Outline: Accessibility.closedCaptionsSettings - Validating API and Event Responses for Closed Captions Settings Change to <Scenario>
         Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
@@ -91,7 +91,7 @@ Feature: Accessibility
          | windowOpacity     | set windowOpacity as null     | default value for windowOpacity     | onclosedCaptionsSettingsChanged with default value for windowOpacity     |
 
     @sdk @transport @Sev0
-    Scenario Outline: Accessibility.voiceGuidanceSettings - Validating getters and setters for <Scenario>
+    Scenario Outline: Accessibility.voiceGuidanceSettings - Validating API and Event Responses for <Scenario>
         Given we test the 'ACCESSIBILITY_VOICEGUIDANCE_SETTINGS' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
@@ -107,7 +107,7 @@ Feature: Accessibility
             | Enabled voiceguidance  | enabled | true  |
 
   @sdk @transport @Sev1
-  Scenario Outline: Accessibility.voiceGuidanceSettings - Validating getters and setters for <Scenario>
+  Scenario Outline: Accessibility.voiceGuidanceSettings - Validating API and Event Responses for Voice Guidance Settings Change to <Scenario>
     Given we test the 'ACCESSIBILITY_VOICEGUIDANCE_SETTINGS' getters and setters '<Method>' to '<Value>'
     And '3rd party app' registers for the 'Firebolt' event
     And '3rd party app' invokes the 'Firebolt' get API
@@ -124,7 +124,7 @@ Feature: Accessibility
       | speed-2           | speed   | 2     |
 
     @sdk @transport @Sev1
-    Scenario Outline: Accessibility.audioDescriptionSettings - Validating getters and setters for <Scenario>
+    Scenario Outline: Accessibility.audioDescriptionSettings - Validating API and Event Responses for <Scenario>
         Given we test the 'AUDIODESCRIPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
@@ -140,7 +140,7 @@ Feature: Accessibility
             | Disabled audioDescriptionSettings | enabled | false |
 
     @sdk @transport @Sev0
-    Scenario Outline: Accessibility.closedCaptions - Validating getters and setters for <Scenario>
+    Scenario Outline: Accessibility.closedCaptions - Validating API and Event Responses for <Scenario>
         Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         When 1st party app invokes the 'Firebolt' API to set value
@@ -155,7 +155,7 @@ Feature: Accessibility
             | Enabled closedcaptions              | enabled           | true                |
 
   @sdk @transport @Sev1
-  Scenario Outline: Accessibility.closedCaptions - Validating getters and setters for <Scenario>
+  Scenario Outline: Accessibility.closedCaptions - Validating API and Event Responses for Closed Captions Change to <Scenario>
     Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS' getters and setters '<Method>' to '<Value>'
     And '3rd party app' registers for the 'Firebolt' event
     When 1st party app invokes the 'Firebolt' API to set value
@@ -188,7 +188,7 @@ Feature: Accessibility
       And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
 
     @sdk @transport @Sev0
-    Scenario Outline: Accessibility.voiceGuidance - Validating getters and setters for <Scenario>
+    Scenario Outline: Accessibility.voiceGuidance - Validating API and Event Responses for <Scenario>
         Given we test the 'ACCESSIBILITY_VOICEGUIDANCE' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
@@ -204,7 +204,7 @@ Feature: Accessibility
             | Enabled voiceguidance  | enabled | true  |
 
   @sdk @transport @Sev1
-  Scenario Outline: Accessibility.voiceGuidance - Validating getters and setters for <Scenario>
+  Scenario Outline: Accessibility.voiceGuidance - Validating API and Event Responses for Voice Guidance Change to <Scenario>
     Given we test the 'ACCESSIBILITY_VOICEGUIDANCE' getters and setters '<Method>' to '<Value>'
     And '3rd party app' registers for the 'Firebolt' event
     And '3rd party app' invokes the 'Firebolt' get API
