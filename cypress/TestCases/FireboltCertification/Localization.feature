@@ -61,7 +61,7 @@ Feature: Localization
             | Localization.language    | localization onLanguageChanged    | localization onLocaleChanged    | set language to es    | get localization language    | get localization locale    | es for localization language    | esUK for localization locale    | onlanguagechanged for localization with es      | onlocalechanged for localization with esUK    |
 
     @sdk @transport @Sev0
-    Scenario Outline: Localization.<Method> - Validating getters and setters for localization.<Scenario>
+    Scenario Outline: Localization.<Method> - Validating API and Event Responses changes to localization.<Scenario>
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
@@ -78,7 +78,7 @@ Feature: Localization
             | Language (es)                    | language                | es         |
 
     @sdk @transport @Sev1
-    Scenario Outline: Localization.<Method> - Validating getters and setters for localization.<Scenario>
+    Scenario Outline: Localization.<Method> - Validating API and Event Responses changes to localization.<Scenario>
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
