@@ -420,3 +420,22 @@ exports.SET_LOCALIZATION_TIMEZONE_WITH_AMERICA_LOSANGELES = {
   method: 'manage_localization.setTimeZone',
   params: { value: 'America/Los_Angeles' },
 };
+
+exports.SET_LOCALIZATION_ADDADDITIONALINFO_WITH_INTEGER = {
+  method: 'manage_localization.addAdditionalInfo',
+  params: { key: 'defaultKey', value: 123 },
+};
+exports.INTEGER_FOR_LOCALIZATION_ADDITIONALINFO = {
+  method: 'localization.additionalInfo',
+  validationJsonPath: 'result',
+  content: { defaultKey: 123 },
+};
+exports.SET_LOCALIZATION_ADDADDITIONALINFO_WITH_BOOLEAN = {
+  method: 'manage_localization.addAdditionalInfo',
+  params: { key: 'defaultKey', value: true },
+};
+exports.BOOLEAN_FOR_LOCALIZATION_ADDITIONALINFO = {
+  method: 'localization.additionalInfo',
+  validationJsonPath: 'result',
+  content: { defaultKey: true },
+};
