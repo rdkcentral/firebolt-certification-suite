@@ -1,3 +1,10 @@
+# [1.3.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.12...v1.3.0-dev.13) (2024-10-21)
+
+
+### Features
+
+* Add support to mark features pending. Update fcs.unloadApp invocation ([#235](https://github.com/rdkcentral/firebolt-certification-suite/issues/235)) ([0ccd71c](https://github.com/rdkcentral/firebolt-certification-suite/commit/0ccd71ccc481269af9d2066c3d4c26f37cb5bd5e))
+
 # [1.3.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.11...v1.3.0-dev.12) (2024-10-21)
 
 
