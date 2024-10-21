@@ -78,40 +78,40 @@ Feature: ClosedCaptions_Manage
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error
         Given we test the 'CLOSED_CAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set invalid value
-        Then 'Firebolt' platform responds to '1st party app' set API with '<Error>'
+        Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_PARAMS'
 
         Examples:
-            | Scenario                    | Method             | Value      | Error          |
-            | Set enabled-test            | enabled            | test       | INVALID_PARAMS |
-            | Set enabled-123             | enabled            | 123        | INVALID_PARAMS |
-            | Set fontFamily-123          | fontFamily         | 123        | INVALID_PARAMS |
-            | Set fontFamily-true         | fontFamily         | true       | INVALID_PARAMS |
-            | Set fontSize-true           | fontSize           | true       | INVALID_PARAMS |
-            | Set fontSize-test           | fontSize           | test       | INVALID_PARAMS |
-            | Set fontSize-true           | fontSize           | true       | INVALID_PARAMS |
-            | Set fontSize-0.25           | fontSize           | 0.25       | INVALID_PARAMS |
-            | Set fontFamily-sans-serif   | fontFamily         | sans-serif | INVALID_PARAMS |
-            | Set fontEdge-123            | fontEdge           | 123        | INVALID_PARAMS |
-            | Set fontEdge-true           | fontEdge           | true       | INVALID_PARAMS |
-            | Set fontEdge-solid          | fontEdge           | solid      | INVALID_PARAMS |
-            | Set preferredLanguages-true | preferredLanguages | true       | INVALID_PARAMS |
-            | Set preferredLanguages-123  | preferredLanguages | 123        | INVALID_PARAMS |
-            | Set preferredLanguages-test | preferredLanguages | test       | INVALID_PARAMS |
-            | Set windowColor-123         | windowColor        | 123        | INVALID_PARAMS |
-            | Set windowOpacity-true      | windowOpacity      | true       | INVALID_PARAMS |
-            | Set fontEdgeColor-123       | fontEdgeColor      | 123        | INVALID_PARAMS |
-            | Set fontEdgeColor-true      | fontEdgeColor      | true       | INVALID_PARAMS |
-            | Set backgroundColor-123     | backgroundColor    | 123        | INVALID_PARAMS |
-            | Set backgroundColor-true    | backgroundColor    | true       | INVALID_PARAMS |
-            | Set textAlign-123           | textAlign          | 123        | INVALID_PARAMS |
-            | Set textAlign-true          | textAlign          | true       | INVALID_PARAMS |
-            | Set textAlignVertical-123   | textAlignVertical  | 123        | INVALID_PARAMS |
-            | Set textAlignVertical-true  | textAlignVertical  | true       | INVALID_PARAMS |
-            | Set fontColor-123           | fontColor          | 123        | INVALID_PARAMS |
-            | Set fontColor-true          | fontColor          | true       | INVALID_PARAMS |
-            | Set fontOpacity-120         | fontOpacity        | 120        | INVALID_PARAMS |
-            | Set fontOpacity-test        | fontOpacity        | test       | INVALID_PARAMS |
-            | Set fontOpacity-true        | fontOpacity        | true       | INVALID_PARAMS |
-            | Set backgroundOpacity-120   | backgroundOpacity  | 120        | INVALID_PARAMS |
-            | Set backgroundOpacity-test  | backgroundOpacity  | test       | INVALID_PARAMS |
-            | Set backgroundOpacity-true  | backgroundOpacity  | true       | INVALID_PARAMS |
+            | Scenario                    | Method             | Value      |
+            | Set enabled-test            | enabled            | test       |
+            | Set enabled-123             | enabled            | 123        |
+            | Set fontFamily-123          | fontFamily         | 123        |
+            | Set fontFamily-true         | fontFamily         | true       |
+            | Set fontSize-true           | fontSize           | true       |
+            | Set fontSize-test           | fontSize           | test       |
+            | Set fontSize-true           | fontSize           | true       |
+            | Set fontSize-0.25           | fontSize           | 0.25       |
+            | Set fontFamily-sans-serif   | fontFamily         | sans-serif |
+            | Set fontEdge-123            | fontEdge           | 123        |
+            | Set fontEdge-true           | fontEdge           | true       |
+            | Set fontEdge-solid          | fontEdge           | solid      |
+            | Set preferredLanguages-true | preferredLanguages | true       |
+            | Set preferredLanguages-123  | preferredLanguages | 123        |
+            | Set preferredLanguages-test | preferredLanguages | test       |
+            | Set windowColor-123         | windowColor        | 123        |
+            | Set windowOpacity-true      | windowOpacity      | true       |
+            | Set fontEdgeColor-123       | fontEdgeColor      | 123        |
+            | Set fontEdgeColor-true      | fontEdgeColor      | true       |
+            | Set backgroundColor-123     | backgroundColor    | 123        |
+            | Set backgroundColor-true    | backgroundColor    | true       |
+            | Set textAlign-123           | textAlign          | 123        |
+            | Set textAlign-true          | textAlign          | true       |
+            | Set textAlignVertical-123   | textAlignVertical  | 123        |
+            | Set textAlignVertical-true  | textAlignVertical  | true       |
+            | Set fontColor-123           | fontColor          | 123        |
+            | Set fontColor-true          | fontColor          | true       |
+            | Set fontOpacity-120         | fontOpacity        | 120        |
+            | Set fontOpacity-test        | fontOpacity        | test       |
+            | Set fontOpacity-true        | fontOpacity        | true       |
+            | Set backgroundOpacity-120   | backgroundOpacity  | 120        |
+            | Set backgroundOpacity-test  | backgroundOpacity  | test       |
+            | Set backgroundOpacity-true  | backgroundOpacity  | true       |
