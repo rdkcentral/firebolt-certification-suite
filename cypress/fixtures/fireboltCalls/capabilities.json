@@ -955,43 +955,43 @@
     "INVALID_PARAMS_FOR_CAPABILITIES_INFO": {
         "method": "capabilities.info",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_CAPABILITIES_INFO": {
         "method": "capabilities.info",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_PERMITTED": {
         "method": "capabilities.permitted",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_AVAILABLE": {
         "method": "capabilities.available",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_SUPPORTED": {
         "method": "capabilities.supported",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_CAPABILITIES_REQUEST": {
         "method": "capabilities.request",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CAPABILITIES_GRANTED": {
         "method": "capabilities.granted",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "CHECK_IF_LIFECYCLE_READY_CAPABILITY_EXPECTING_ERROR": {

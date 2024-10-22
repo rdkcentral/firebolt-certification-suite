@@ -206,7 +206,7 @@
     "INVALID_PARAMETER_ERROR_ADVERTISING_CONFIG": {
         "method": "advertising.config",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "ADVERTISING_SKIPRESTRICTION": {
@@ -217,7 +217,7 @@
     "INVALID_PARAMETER_FOR_ADVERTISING_ADVERTISINGID": {
         "method": "advertising.advertisingId",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "ADVERTISING_CONFIG": {
@@ -297,7 +297,7 @@
     "INVALID_PARAMETERS_FOR_SKIPRESTRICTION": {
         "method": "advertising.setSkipRestriction",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "GET_ADVERTISINGID_WITHOUT_SCOPE": {
@@ -353,7 +353,7 @@
     "INVALID_REQUEST_FOR_ADVERTISING_POLICY": {
         "method": "advertising.policy",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     }
 }

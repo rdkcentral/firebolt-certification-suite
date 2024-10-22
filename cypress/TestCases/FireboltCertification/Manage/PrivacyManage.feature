@@ -75,7 +75,7 @@ Feature: Privacy_Manage
    Scenario Outline: Privacy.<Method> - Negative Scenario: <Scenario> and expecting error
       Given we test the 'PRIVACY_SETTINGS' getters and setters '<Method>' to '<Value>'
       When 1st party app invokes the 'Firebolt' API to set invalid value
-      Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
+      Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_PARAMS'
 
       Examples:
          | Scenario          | Method                         | Value |
