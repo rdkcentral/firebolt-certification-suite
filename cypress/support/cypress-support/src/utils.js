@@ -687,7 +687,10 @@ function checkForSecondaryAppId(appId) {
     if (appId === CONSTANTS.SECONDARY_THIRD_PARTY_APP) {
       envAppIdKey = CONSTANTS.SECONDARY_THIRD_PARTY_APP_ID;
       return getEnvVariable(CONSTANTS.SECONDARY_THIRD_PARTY_APP_ID);
-    } else if (getEnvVariable(appId) !== null && getEnvVariable(appId) !== undefined) {
+    } else if (
+      getEnvVariable(appId, false) !== null &&
+      getEnvVariable(appId, false) !== undefined
+    ) {
       envAppIdKey = appId;
       return getEnvVariable(appId);
     } else {
