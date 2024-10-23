@@ -205,7 +205,9 @@ function getTopic(
     topic = deviceMac + '_' + getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
   }
   if (operation == CONSTANTS.SUBSCRIBE) {
-    return subscribeSuffix ? topic + subscribeSuffix : topic + getEnvVariable(CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX);
+    return subscribeSuffix
+      ? topic + subscribeSuffix
+      : topic + getEnvVariable(CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX);
   } else {
     return topic + getEnvVariable(CONSTANTS.PUB_SUB_PUBLISH_SUFFIX);
   }
