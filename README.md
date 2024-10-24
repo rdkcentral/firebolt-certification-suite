@@ -74,6 +74,8 @@ To execute the certification suite against any platform, the following setup mus
 | pubSubUrl                           | string  | ws://127.0.0.1:8081               | Sets the the url to use for a PubSub server which will be used for 3rd party app communication.                                                                                                                     |
 | fcaAppList                  | array | ['default3rdPartyAppId']     | Holds the list of fca app identifiers |
 |suiteCommunicationMode       | string | 'SDK' or 'Transport'                        | Set communicationMode as SDK/Transport for suite feature files. Default mode is Transport                                                                                                                                                         |
+| pubSubSubscribeSuffix                  | string | '_FCA'     | Name of the PubSub topic to subscribe to |
+| pubSubPublishSuffix                  | string | '_FCS'       | Name of the PubSub topic to publish to    |
 
 - Provide the specPattern mapping details. 
 Update the specHelperConfig.js with the specPattern mapping details.
@@ -137,6 +139,32 @@ Other cypress command line can also be passed
 - setup is used to load all the fixture files from node-modules/configModule to cypress/fixtures/external/. This setup is done automatically in postInstall.
 
   `npm run setup`
+
+## Launch Parameters
+
+### Default Launch Parameters
+The default launch parameters include:
+
+- **App ID**: The appId used to launch the app.
+- **MAC Address**: The MAC address of the device running the tests.
+- **pubSubURL**: This URL will be included if defined in the Cypress env.
+- **pubSub UUID**: This UUID will be included if defined in the Cypress env.
+- **appType**: Used to launch the certification app or by default `Firebolt` for certification.
+- **pubSub Suffix**: The suffix to be used for PubSub operations.
+
+### Additional Launch Parameters
+The `additionalLaunchParams` allows you to customize the test environment by including specific parameters that can override default parameters or add new configurations.
+
+- Set `Cypress.env("additionalLaunchParams")` in the configModule like this:
+```
+{
+additionalLaunchParams = { "pubSubUrl": `ws://<YOUR_IP>:8080`,  // Example of a hardcoded value
+    "testToken": "CYPRESSENV-testToken" // Example referencing another Cypress env variable
+    };
+} 
+```
+- Use `CYPRESSENV-<variable>` to reference other env variables.
+- Any keys defined in additionalLaunchParams will take precedence over default parameters with matching names.
 
 ## Before operation
 
