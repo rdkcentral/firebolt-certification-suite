@@ -924,26 +924,32 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
     data.query.params[CONSTANTS.PUB_SUB_URL] = getEnvVariable(CONSTANTS.PUB_SUB_URL);
   }
+  // Add the PubSub UUID if the env variable is set
   if (getEnvVariable(CONSTANTS.PUB_SUB_UUID, false)) {
     data.query.params[CONSTANTS.PUB_SUB_UUID] = getEnvVariable(CONSTANTS.PUB_SUB_UUID);
   }
-  if (getEnvVariable(CONSTANTS.PUB_SUB_PUBLISH_SUFFIX, false)) {
+  // Add the PubSub publish suffix from env variable
+  if (getEnvVariable(CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX, false)) {
     data.query.params[CONSTANTS.PUB_SUB_PUBLISH_SUFFIX] = getEnvVariable(
       CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX
     );
   }
-  if (getEnvVariable(CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX, false)) {
+  // Add the PubSub subscribe suffix from env variable
+  if (getEnvVariable(CONSTANTS.PUB_SUB_PUBLISH_SUFFIX, false)) {
     data.query.params[CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX] = getEnvVariable(
       CONSTANTS.PUB_SUB_PUBLISH_SUFFIX
     );
   }
-
+  // Check for additional launch parameters
+  // If a key exists in both the default parameters and the additional parameters, the value from the additional parameters will override the default value.
   if (Cypress.env('additionalLaunchParams')) {
     const additionalParams = Cypress.env('additionalLaunchParams');
     for (const key in additionalParams) {
       let value = additionalParams[key];
+      // If the value starts with 'CYPRESSENV-', extract the variable name.
       if (value.startsWith('CYPRESSENV-')) {
         const envParam = value.split('-')[1];
+        // Fetch the corresponding value from the environment.
         value = getEnvVariable(envParam, false);
       }
       data.query.params[key] = value;
