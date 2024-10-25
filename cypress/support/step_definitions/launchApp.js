@@ -52,7 +52,6 @@ Given(
       cy.getCapabilities();
       cy.lifecycleSetup(appCallSign, state);
       Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, true);
-      cy.updateRunInfo();
       cy.wait(50000);
     }
   }
