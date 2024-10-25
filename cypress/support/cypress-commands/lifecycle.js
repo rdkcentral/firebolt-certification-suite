@@ -305,7 +305,7 @@ Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) 
     } else {
       cy.log(CONSTANTS.LIFECYCLE_INTENT + JSON.stringify(publishMessage));
     }
-  }  
+  }
   cy.sendMessagetoApp(requestTopic, responseTopic, publishMessage).then((response) => {
     try {
       errorObject = JSON.parse(response).error;
