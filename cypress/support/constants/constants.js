@@ -501,6 +501,7 @@ module.exports = {
   SET_EVENT_SUCCESS: 'Event value set successfully in platform',
   SCENARIO_NAME: 'scenarioName',
   FIREBOLT_INTERACTION: 'FireboltInteraction',
+  PENDING_FEATURES: 'pendingFeatures',
   PERFORMANCE_VALIDATION: 'performanceValidation',
 };
 function getSanityReportPath() {

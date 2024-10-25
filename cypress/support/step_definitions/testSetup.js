@@ -17,7 +17,7 @@
  */
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
-import UTILS from '../cypress-support/src/utils';
+import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module TestSetupGlue
@@ -28,6 +28,13 @@ import UTILS from '../cypress-support/src/utils';
  * Given the environment has been set up for 'Firebolt Sanity' tests
  */
 Given('the environment has been set up for {string} tests', (test) => {
+  if (
+    UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
+      JSON.stringify(window.testState.gherkinDocument.feature.name)
+    )
+  ) {
+    return 'pending';
+  }
   if (
     !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
     UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
@@ -43,12 +50,6 @@ Given('the environment has been set up for {string} tests', (test) => {
       UTILS.getSetupDetails();
     }
 
-    cy.getSdkVersion().then(() => {
-      cy.getFireboltJsonData().then((data) => {
-        Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
-      });
-    });
-    cy.getCapabilities();
     destroyAppInstance(test);
     Cypress.env(CONSTANTS.ENV_SETUP_STATUS, true);
     if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
@@ -126,22 +127,38 @@ function destroyAppInstance(testType) {
 
     try {
       cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
-        if (response != CONSTANTS.NO_RESPONSE) {
-          fireLog.log(false, 'App failed to unload, Reason: ' + closeReason);
+        let result;
+        try {
+          response = JSON.parse(response);
+          result = response.report.result;
+          fireLog.info(
+            'Received response from app to acknowledge close request. Response: ' +
+              JSON.stringify(response)
+          );
+        } catch {
+          result = response;
+        }
+        if (result === CONSTANTS.NO_RESPONSE || result === null) {
+          fireLog.info('App unloaded', 'destroyAppInstance');
+        } else {
+          fireLog.info(
+            false,
+            'App may have failed to unload. Response: ' + JSON.stringify(response)
+          );
+          fireLog.info('Falling back to platform implementation of force unload.');
           const requestMap = {
             method: CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP,
+            params: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID),
           };
           cy.sendMessagetoPlatforms(requestMap).then(() => {
             // Config modules needs override for validation of app unload
-            cy.log('Platforms unload app execution complete');
+            fireLog.info('Platforms unload app execution complete');
           });
-        } else {
-          cy.log('App unloaded', 'destroyAppInstance');
         }
         cy.wait(5000);
       });
     } catch (error) {
-      cy.log('Failed to close the 3rd party app: ', error);
+      fireLog.info('Failed to close the 3rd party app: ', error);
     }
   }
 }

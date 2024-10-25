@@ -140,9 +140,10 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
 // Reason: If refui is not there and certification=false then sendMessageToPlatofrms will not have device.version.sdk value.
 Cypress.Commands.add('getSdkVersion', () => {
   let latestSDKversion;
-  const platformSDKVersion = UTILS.getEnvVariable(CONSTANTS.ENV_PLATFORM_SDK_VERSION, false);
-  if (platformSDKVersion) {
-    return platformSDKVersion;
+  const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
+  const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false);
+  if (sdkVersion) {
+    return sdkVersion;
   } else {
     // fetching latestSDKversion from Firebolt-specificaiton URL
     cy.request({
@@ -166,45 +167,49 @@ Cypress.Commands.add('getSdkVersion', () => {
       })
       .then((latestSDKversion) => {
         // Calling device.version API
-        cy.getDeviceData(CONSTANTS.DEVICE_VERSION, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-          (response) => {
-            // If the response is invalid, assign the latest SDK version to the environment variable.
-            if (response?.api?.readable && response.sdk?.readable) {
-              // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
-              // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
-              // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
-              const deviceSDKversionJson =
-                UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
-                  ? response.api
-                  : response.sdk;
-              const readableSDKVersion = deviceSDKversionJson.readable;
+        cy.log(`Call from app: ${appId} - method: ${CONSTANTS.DEVICE_VERSION} params: {}`);
+        cy.getDeviceDataFromThirdPartyApp(
+          CONSTANTS.DEVICE_VERSION,
+          {},
+          CONSTANTS.ACTION_CORE.toLowerCase()
+        ).then((response) => {
+          cy.log(`Response from app: ${appId} - ${JSON.stringify(response)}`);
+          // If the response is invalid, assign the latest SDK version to the environment variable.
+          if (response?.result?.api?.readable && response?.result.sdk?.readable) {
+            // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
+            // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
+            // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
+            const deviceSDKversionJson =
+              UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
+                ? response.result.api
+                : response.result.sdk;
+            const readableSDKVersion = deviceSDKversionJson.readable;
 
-              // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
-              Cypress.env(
-                CONSTANTS.ENV_PLATFORM_SDK_VERSION,
-                readableSDKVersion.includes(CONSTANTS.NEXT) ||
-                  readableSDKVersion.includes(CONSTANTS.PROPOSED)
-                  ? readableSDKVersion
-                  : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
-              );
-            } else {
-              Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
-            }
-            if (response?.firmware?.readable) {
-              let deviceFirmware = JSON.stringify(response.firmware.readable);
-              deviceFirmware = deviceFirmware.replace(/"/g, '');
-              Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
-            }
-            if (response?.api?.readable) {
-              const fireboltVersion =
-                `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
-                  /"/g,
-                  ''
-                );
-              Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
-            }
+            // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
+            Cypress.env(
+              CONSTANTS.SDK_VERSION,
+              readableSDKVersion.includes(CONSTANTS.NEXT) ||
+                readableSDKVersion.includes(CONSTANTS.PROPOSED)
+                ? readableSDKVersion
+                : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
+            );
+          } else {
+            Cypress.env(CONSTANTS.SDK_VERSION, latestSDKversion);
           }
-        );
+          if (response?.result?.firmware?.readable) {
+            let deviceFirmware = JSON.stringify(response.result.firmware.readable);
+            deviceFirmware = deviceFirmware.replace(/"/g, '');
+            Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+          }
+          if (response?.result?.api?.readable) {
+            const fireboltVersion =
+              `${response?.result?.api?.major}.${response?.result?.api?.minor}.${response?.result?.api?.patch}`.replace(
+                /"/g,
+                ''
+              );
+            Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
+          }
+        });
       });
   }
 });
@@ -227,7 +232,7 @@ Cypress.Commands.add('updateRunInfo', () => {
       // Fetch data from the third-party app
       cy.getDeviceDataFromThirdPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
         // Set environment variable with the response
-        Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
+        Cypress.env(envVarName, JSON.stringify(response.result).replace(/"/g, ''));
       });
     } else {
       // Set environment variable with the value from json file
@@ -297,7 +302,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                   const labelToEnvMap = {
                     [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                     [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
-                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_PLATFORM_SDK_VERSION,
+                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.SDK_VERSION,
                     [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
                     [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
                     [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
@@ -402,7 +407,7 @@ Cypress.Commands.add('getDeviceDataFromThirdPartyApp', (method, params, action) 
       const responseObject = JSON.parse(response);
       try {
         if (responseObject && responseObject.result) {
-          return responseObject.result;
+          return responseObject;
         } else {
           throw 'Obtained response is null|undefined';
         }
@@ -456,19 +461,19 @@ Cypress.Commands.add('getLatestFireboltJsonFromFixtures', () => {
  */
 Cypress.Commands.add('getFireboltJsonData', () => {
   let FIREBOLT_SPECIFICATION_URL;
-  const envPlatformSdkVersion = UTILS.getEnvVariable(CONSTANTS.ENV_PLATFORM_SDK_VERSION);
+  const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION);
 
   // Reading the path of the firebolt.json file from the environment variable based on the SDK version.
-  if (envPlatformSdkVersion.includes(CONSTANTS.NEXT)) {
+  if (sdkVersion.includes(CONSTANTS.NEXT)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_NEXT_URL);
-  } else if (envPlatformSdkVersion.includes(CONSTANTS.PROPOSED)) {
+  } else if (sdkVersion.includes(CONSTANTS.PROPOSED)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(
       CONSTANTS.FIREBOLT_SPECIFICATION_PROPOSED_URL
     );
   } else {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_URL).replace(
       CONSTANTS.LATEST,
-      envPlatformSdkVersion
+      sdkVersion
     );
   }
 
@@ -480,10 +485,10 @@ Cypress.Commands.add('getFireboltJsonData', () => {
       return data;
     }
 
-    //  If cy.request fails, get specific firebolt.json from -cypress/fixtures/versions/${Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION)}/firebolt.json
+    //  If cy.request fails, get specific firebolt.json from -cypress/fixtures/versions/${Cypress.env(CONSTANTS.SDK_VERSION)}/firebolt.json
     else {
       const configImportPath = `cypress/fixtures/versions/${UTILS.getEnvVariable(
-        CONSTANTS.ENV_PLATFORM_SDK_VERSION
+        CONSTANTS.SDK_VERSION
       )}/firebolt.json`;
 
       cy.task('readFileIfExists', configImportPath).then((data) => {
