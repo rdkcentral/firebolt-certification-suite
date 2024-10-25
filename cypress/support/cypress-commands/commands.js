@@ -984,6 +984,8 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
           expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
         });
         cy.updateRunInfo();
+      } else {
+        cy.wait(50000);
       }
     });
   });
