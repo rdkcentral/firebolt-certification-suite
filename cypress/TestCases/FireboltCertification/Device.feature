@@ -6,7 +6,7 @@ Feature: Device
         And 3rd party 'certification' app is launched
 
     @sdk @transport @Sev0
-    Scenario Outline:Device.<Method> - Get and validate method response content
+    Scenario Outline:Device.<Method> - Validate API Method Response Content for <Method>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
 
@@ -15,9 +15,10 @@ Feature: Device
             | id          | expected device id          | fetch device id          |
             | distributor | expected device distributor | fetch device distributor |
             | type        | expected device type        | fetch device type        |
+            | platform    | expected device platform    | fetch device platfor     |
 
     @sdk @transport @Sev1
-    Scenario Outline:Device.<Method> - Get and validate method response content
+    Scenario Outline:Device.<Method> - Validate API Method Response Content for <Method>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
 
@@ -28,13 +29,8 @@ Feature: Device
             | sku         | expected device sku         | fetch device sku         |
             | make        | expected device make        | fetch device make        |
 
-    @sdk @transport @Sev0
-    Scenario: Device.platform - Get and validate device platform response content
-        When '3rd party app' invokes the 'Firebolt' API to 'fetch device platform'
-        Then 'Firebolt' platform responds with 'expected device platform'
-
     @sdk @transport @Sev2
-    Scenario: Device.name - Validate getter and setter for device name change
+    Scenario: Device.name - Validating API and Event Responses for name change
         Given we test the 'DEVICE_NAME_CORE' getters and setters 'setName' to 'Living hall'
         And '1st party app' registers for the 'Firebolt' event
         When 1st party app invokes the 'Firebolt' API to set value
@@ -44,7 +40,7 @@ Feature: Device
         And 'Firebolt' platform triggers '1st party app' event
 
     @regression @sdk @transport @Sev0
-    Scenario Outline: Device.<Method> - Get and validate method response content
+    Scenario Outline: Device.<Method> - Validate API Method Response Content for <Method>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<validation_key>'
 
@@ -56,7 +52,7 @@ Feature: Device
             | videoResolution  | fetch videoResolution  | expected videoResolution  |
 
     @regression @sdk @transport @Sev1
-    Scenario Outline: Device.<Method> - Get and validate method response content
+    Scenario Outline: Device.<Method> - Validate API Method Response Content for <Method>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<validation_key>'
 
@@ -65,7 +61,7 @@ Feature: Device
             | audio            | fetch audio            | expected audio            |
 
     @regression @sdk @transport @Sev2
-    Scenario Outline: Device.<Method> - Get and validate method response content
+    Scenario Outline: Device.<Method> - Validate API Method Response Content for <Method>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<validation_key>'
 
