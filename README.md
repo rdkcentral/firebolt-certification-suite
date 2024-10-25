@@ -141,7 +141,7 @@ Other cypress command line can also be passed
   `npm run setup`
 
 ## Launch Parameters
-In the launch app function, a couple of parameters will be passed in the intent when the app is launched. For detailed information, refer to the [README](https://github.com/rdkcentral/firebolt-certification-suite/blob/8477ac036cdd424e3f706540ac11a47e45e80cd6/cypress/support/cypress-commands/commands.js#L871).
+When launching third party app, a couple of parameters can be passed in the intent. Launch parameters can be passed in cli or updated in config file. 
 
 
 ### Default Launch Parameters
@@ -158,23 +158,23 @@ Here are the default parameters that can be utilized during the app launch:
 Some of these parameters, such as `pubSubUrl` and `pubsub_uuid`, will only be included when they are defined in the env variables.
 
 ### Additional Launch Parameters from ConfigModule
-The `additionalLaunchParams` allows you to customize the test environment by including specific parameters that can override default parameters or add new configurations.
+The `additionalLaunchParams` allows you to customize the test environment by including specific parameters that can override default parameters or add new launch parameters from config module.
 
 - **Setting Up Additional Launch Parameters:**
-  - Define Parameters in the ConfigModule: Set the `additionalLaunchParams` in the configModule. Edit your `config.json` file in the configModule to include your additionalLaunchParams as shown below, or pass the env through the CLI.
+  - Define a new variable `additionalLaunchParams` in `config.json` file in the configModule. Add additional launch variables as a key-value pair as shown below.
   
   Example: 
 ```
 {
 additionalLaunchParams = { 
     "pubSubUrl": `ws://<YOUR_IP>:8080`,  // Example of a hardcoded value
-    "testtoken": "CYPRESSENV-testToken" // Example referencing another Cypress env variable
+    "appType": "CYPRESSENV-appType" // Example referencing another Cypress env variable
     };
 } 
 ```
 - **Usage of Keys and Values:**
-  - The key `pubSubUrl` contains a hardcoded WebSocket URL that will be included in the intent directly.
-  - The key `testtoken` is prefixed with `CYPRESSENV-`, indicating that it should search for an env variable named `testtoken`. If `Cypress.env("testtoken")` exists, its value will be passed in the intent.
+  - The key `pubSubUrl` contains a hardcoded URL that will be included in the intent directly.
+  - The key `appType` is prefixed with `CYPRESSENV-`, indicating that it should search for an env variable named `appType`. If `Cypress.env("appType")` exists, its value will be passed in the intent.
 - **Parameter Precedence:** Any keys defined in additionalLaunchParams will take precedence over default parameters with matching names.
 
 ## Before operation
