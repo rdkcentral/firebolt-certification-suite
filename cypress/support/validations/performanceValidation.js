@@ -21,7 +21,10 @@ const UTILS = require('../cypress-support/src/utils');
 
 Cypress.Commands.add('performanceValidation', (object) => {
   if (UTILS.getEnvVariable('performanceMetrics')) {
-    const { type, process, percentile, threshold } = object.validations[0];
+    const type = object.validations?.[0]?.type || 'all';
+    const process = object.validations?.[0]?.process || 'required';
+    const percentile = object.validations?.[0]?.percentile;
+    const threshold = object.validations?.[0]?.threshold;
     const requestMap = {
       method: CONSTANTS.REQUEST_OVERRIDE_CALLS.PERFORMANCE_THRESHOLD_VALIDATOR,
       params: { type, process, percentile, threshold },

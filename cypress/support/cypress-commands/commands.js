@@ -781,10 +781,6 @@ Cypress.Commands.add('parsedMockData', (beforeOperation) => {
  * cy.startOrStopPerformanceService('stopped')
  */
 Cypress.Commands.add('startOrStopPerformanceService', (action) => {
-  if (action == CONSTANTS.INITIATED) {
-    const epochTime = Number.parseInt(Date.now() / 1000);
-    Cypress.env(CONSTANTS.THRESHOLD_MONITOR_START_TIME, epochTime);
-  }
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETPERFORMANCETESTHANDLER,
     params: {
@@ -1546,4 +1542,24 @@ Cypress.Commands.add('startOrStopInteractionsService', (action) => {
  */
 Cypress.Commands.add('envConfigSetup', () => {
   fireLog.info('No additional config module environment setup');
+});
+
+Cypress.Commands.add('initiatePerformanceMetrics', () => {
+  const scenarioName = Cypress.env(CONSTANTS.SCENARIO_NAME);
+
+  if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) === true) {
+    const requestMap = {
+      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.CREATE_MARKER,
+      params: scenarioName,
+    };
+    fireLog.info(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
+    cy.sendMessagetoPlatforms(requestMap).then((result) => {
+      fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
+    });
+
+    const epochTime = Number.parseInt(Date.now() / 1000);
+    Cypress.env(CONSTANTS.THRESHOLD_MONITOR_START_TIME, epochTime);
+  } else {
+    cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
+  }
 });
