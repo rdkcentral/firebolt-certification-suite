@@ -161,7 +161,8 @@ Some of these parameters, such as `pubSubUrl` and `pubsub_uuid`, will only be in
 The `additionalLaunchParams` allows you to customize the test environment by including specific parameters that can override default parameters or add new configurations.
 
 - **Setting Up Additional Launch Parameters:**
-  - Define Parameters in the ConfigModule: Set the additionalLaunchParams in the configModule using the Cypress.env variable. Edit your `config.json` file in the configModule to include your additionalLaunchParams as shown below, or pass the env through the CLI.
+  - Define Parameters in the ConfigModule: Set the `additionalLaunchParams` in the configModule. Edit your `config.json` file in the configModule to include your additionalLaunchParams as shown below, or pass the env through the CLI.
+  
   Example: 
 ```
 {
