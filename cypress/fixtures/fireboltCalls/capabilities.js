@@ -1518,43 +1518,43 @@ exports.GET_GRANTED_CAPABILITIES_WITH_INVALID_OPTIONS_ARRAY_ROLE = {
 exports.INVALID_PARAMS_FOR_CAPABILITIES_INFO = {
   method: 'capabilities.info',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 exports.CUSTOM_ERROR_FOR_CAPABILITIES_INFO = {
   method: 'capabilities.info',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_CAPABILITIES_PERMITTED = {
   method: 'capabilities.permitted',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_CAPABILITIES_AVAILABLE = {
   method: 'capabilities.available',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_CAPABILITIES_SUPPORTED = {
   method: 'capabilities.supported',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_CAPABILITIES_GRANTED = {
   method: 'capabilities.granted',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 exports.CUSTOM_ERROR_FOR_LIFECYCLE_READY_CAPABILITY = {
   method: 'lifecycle.ready',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 exports.CHECK_IF_AUTHENTICATION_TOKEN_DEVICE_CAPABILITY_IS_PERMITTED_WITH_ROLE_USE = {

@@ -171,7 +171,7 @@ exports.SET_LOCALIZATION_ADDADDITIONALINFO_WITH_EMPTY_OBJECT = {
 exports.INVALID_PARAMETERS_FOR_LOCALIZATION_ADDADDITIONALINFO = {
   method: 'localization.addAdditionalInfo',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
 
