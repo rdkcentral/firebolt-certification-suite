@@ -1129,18 +1129,27 @@ function fetchAppIdentifierFromEnv(appId) {
  */
 class InteractionsLogs {
   constructor() {
-    this.logs = [];
+    this.logs = new Map();
   }
 
   addLog(message) {
-    this.logs.push(message);
+    const scenarioName = Cypress.env(CONSTANTS.SCENARIO_NAME);
+    if (this.logs.size > 0 && this.logs.has(scenarioName)) {
+      this.logs.get(scenarioName).push(message);
+    } else {
+      this.logs.set(scenarioName, [message]);
+    }
   }
 
-  getLogs() {
+  getLogs(scenarioName) {
+    if (scenarioName) {
+      return this.logs.get(scenarioName);
+    }
     return this.logs;
   }
+
   clearLogs() {
-    this.logs = [];
+    this.logs.clear();
   }
 }
 const interactionLogs = new InteractionsLogs();

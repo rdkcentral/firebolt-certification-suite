@@ -1,3 +1,55 @@
+# [1.3.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0...v1.3.0) (2024-10-21)
+
+
+### Bug Fixes
+
+* Corrected performance glue synchronous issue ([#212](https://github.com/rdkcentral/firebolt-certification-suite/issues/212)) ([49c4ffd](https://github.com/rdkcentral/firebolt-certification-suite/commit/49c4ffd1ac989bddd03a7bc18a724405f9e85135))
+* error schema fix ([#199](https://github.com/rdkcentral/firebolt-certification-suite/issues/199)) ([35217ad](https://github.com/rdkcentral/firebolt-certification-suite/commit/35217ad7c4f2599e3aabf3daeb909c64f63002b3))
+* Resolve incorrectly formatted validation objects and rename keys where appropriate ([#227](https://github.com/rdkcentral/firebolt-certification-suite/issues/227)) ([941ec57](https://github.com/rdkcentral/firebolt-certification-suite/commit/941ec5725bb305ad93185db43d31c07cc6e7f72f))
+* sdk version bug fix ([#234](https://github.com/rdkcentral/firebolt-certification-suite/issues/234)) ([fd4cbf6](https://github.com/rdkcentral/firebolt-certification-suite/commit/fd4cbf6d34dffbb773d28b97537d7f41d216aeb6))
+* SetupCheck feature ([#232](https://github.com/rdkcentral/firebolt-certification-suite/issues/232)) ([62fe619](https://github.com/rdkcentral/firebolt-certification-suite/commit/62fe61930612e775166afd2b3346d7b042e988a7))
+
+
+### Features
+
+* Add support to mark features pending. Update fcs.unloadApp invocation ([#235](https://github.com/rdkcentral/firebolt-certification-suite/issues/235)) ([0ccd71c](https://github.com/rdkcentral/firebolt-certification-suite/commit/0ccd71ccc481269af9d2066c3d4c26f37cb5bd5e))
+* Allow app close keys to be overwritten ([#214](https://github.com/rdkcentral/firebolt-certification-suite/issues/214)) ([4136c1e](https://github.com/rdkcentral/firebolt-certification-suite/commit/4136c1ea97270fb4ce0005e1de66a8db120bd89d))
+* Enhance Setter/Getter Code to other test cases ([#200](https://github.com/rdkcentral/firebolt-certification-suite/issues/200)) ([9bdcd4d](https://github.com/rdkcentral/firebolt-certification-suite/commit/9bdcd4d415baf479620d47b289beb8004408c1de))
+* Modify all test cases to use static v2 objects with v1 glue code ([#208](https://github.com/rdkcentral/firebolt-certification-suite/issues/208)) ([b1aa5b4](https://github.com/rdkcentral/firebolt-certification-suite/commit/b1aa5b43799c4bf1d6b405a668c7718fbe4bd2bb))
+* Modify test cases to use static v2 objects with v1 glue code - Part 2 ([#213](https://github.com/rdkcentral/firebolt-certification-suite/issues/213)) ([491d8e4](https://github.com/rdkcentral/firebolt-certification-suite/commit/491d8e427ffd67f850eedd5655f0019a7e0bfe9e))
+* player changes ([#233](https://github.com/rdkcentral/firebolt-certification-suite/issues/233)) ([929a1ef](https://github.com/rdkcentral/firebolt-certification-suite/commit/929a1efadba23b122ea256430c3026a7f15ce480))
+* Player interaction logs validation ([#216](https://github.com/rdkcentral/firebolt-certification-suite/issues/216)) ([3366e97](https://github.com/rdkcentral/firebolt-certification-suite/commit/3366e9786b7ff2630d4d5b741e72c372f12697fe))
+* Screenshot capture glue ([#228](https://github.com/rdkcentral/firebolt-certification-suite/issues/228)) ([6896d5f](https://github.com/rdkcentral/firebolt-certification-suite/commit/6896d5f78739ceda4d496e2952ae1143accf2c2d))
+* updating account module ([#221](https://github.com/rdkcentral/firebolt-certification-suite/issues/221)) ([33b078d](https://github.com/rdkcentral/firebolt-certification-suite/commit/33b078d1d9ca81d4a8ae1e022ff04c4969e529b6))
+
+# [1.3.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.12...v1.3.0-dev.13) (2024-10-21)
+
+
+### Features
+
+* Add support to mark features pending. Update fcs.unloadApp invocation ([#235](https://github.com/rdkcentral/firebolt-certification-suite/issues/235)) ([0ccd71c](https://github.com/rdkcentral/firebolt-certification-suite/commit/0ccd71ccc481269af9d2066c3d4c26f37cb5bd5e))
+
+# [1.3.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.11...v1.3.0-dev.12) (2024-10-21)
+
+
+### Bug Fixes
+
+* sdk version bug fix ([#234](https://github.com/rdkcentral/firebolt-certification-suite/issues/234)) ([fd4cbf6](https://github.com/rdkcentral/firebolt-certification-suite/commit/fd4cbf6d34dffbb773d28b97537d7f41d216aeb6))
+
+# [1.3.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.10...v1.3.0-dev.11) (2024-10-18)
+
+
+### Features
+
+* Screenshot capture glue ([#228](https://github.com/rdkcentral/firebolt-certification-suite/issues/228)) ([6896d5f](https://github.com/rdkcentral/firebolt-certification-suite/commit/6896d5f78739ceda4d496e2952ae1143accf2c2d))
+
+# [1.3.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.9...v1.3.0-dev.10) (2024-10-14)
+
+
+### Features
+
+* Player interaction logs validation ([#216](https://github.com/rdkcentral/firebolt-certification-suite/issues/216)) ([3366e97](https://github.com/rdkcentral/firebolt-certification-suite/commit/3366e9786b7ff2630d4d5b741e72c372f12697fe))
+
 # [1.3.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0-dev.8...v1.3.0-dev.9) (2024-10-14)
 
 

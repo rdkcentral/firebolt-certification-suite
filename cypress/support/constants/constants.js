@@ -68,7 +68,7 @@ module.exports = {
   CUCUMBER: 'cucumber',
   CURRENT_APP_ID: 'currentAppId',
   CUSTOM_METHOD_PATH:
-    'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/support/step_definitions/validations.md#custom',
+    'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/fixtures/docs/validations.md#custom',
   CYPRESS_MODULES_PATH: 'cypress/fixtures/external/modules',
   DATE: 'date',
   DECIMAL: 'decimal',
@@ -359,6 +359,7 @@ module.exports = {
     CREATE_MARKER: 'performance.createMarker',
     UNLOADAPP: 'fcs.unloadApp',
     FETCHDEVICEDETAILS: 'fcs.fetchDeviceDetails',
+    SCREENSHOT: 'fcs.screenshot',
   },
   REQUEST_MAP_INTERACTIONS_SERVICE: 'Request map for firebolt interactions service : ',
   RESPONSE: 'Response: ',
@@ -384,6 +385,7 @@ module.exports = {
   SCHEMA_VALIDATION_RESPONSE: 'schemaValidationResponse',
   SCHEMA_VALIDATION_STATUS: 'schemaValidationStatus',
   SCHEMA_VALIDATION_STATUS_CODE: ['PASS', 'FAIL', 'SKIPPED', 'PENDING'],
+  SCREENSHOT_VALIDATION: 'screenshotValidation',
   SDK_VERSION: 'sdkVersion',
   SDK_REPORT_VERSION: 'SDK Version',
   SEARCH: 'search',
@@ -500,6 +502,9 @@ module.exports = {
     '`Unable to find the ${envAppIdKey} value in the env, please add the value in configModule/constants/config.json`',
   SET_EVENT_REQUEST: 'Request sent to set event values in platform: ',
   SET_EVENT_SUCCESS: 'Event value set successfully in platform',
+  SCENARIO_NAME: 'scenarioName',
+  FIREBOLT_INTERACTION: 'FireboltInteraction',
+  PENDING_FEATURES: 'pendingFeatures',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
