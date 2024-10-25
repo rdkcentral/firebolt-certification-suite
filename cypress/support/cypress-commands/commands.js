@@ -949,10 +949,13 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
       // If the value starts with 'CYPRESSENV-', extract the variable name.
       if (value.startsWith('CYPRESSENV-')) {
         const envParam = value.split('-')[1];
-        // Fetch the corresponding value from the environment.
+        // Fetch the corresponding value from the env.
         value = getEnvVariable(envParam, false);
       }
-      data.query.params[key] = value;
+      // Add to data.query.params only if the value is defined
+      if (value) {
+        data.query.params[key] = value;
+      }
     }
   }
   // If the testType is userInterestProvider, send the discovery.launch params with registerProvider = false, then certification app will not register for userInterest provider.
