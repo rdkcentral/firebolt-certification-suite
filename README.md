@@ -141,30 +141,40 @@ Other cypress command line can also be passed
   `npm run setup`
 
 ## Launch Parameters
+In the launch app function, a couple of parameters will be passed in the intent when the app is launched. For detailed information, refer to the [README](https://github.com/rdkcentral/firebolt-certification-suite/blob/8477ac036cdd424e3f706540ac11a47e45e80cd6/cypress/support/cypress-commands/commands.js#L871).
+
 
 ### Default Launch Parameters
-The default launch parameters include:
+Here are the default parameters that can be utilized during the app launch:
 
-- **App ID**: The appId used to launch the app.
-- **MAC Address**: The MAC address of the device running the tests.
-- **pubSubURL**: This URL will be included if defined in the Cypress env.
-- **pubSub UUID**: This UUID will be included if defined in the Cypress env.
+- **appId**: The appId used to launch the app.
+- **deviceMac**: The MAC address of the device running the tests.
+- **pubSubUrl**: This URL will be included if defined in the Cypress env.
+- **pubsub_uuid**: This UUID will be included if defined in the Cypress env.
 - **appType**: Used to launch the certification app or by default `Firebolt` for certification.
-- **pubSub Suffix**: The suffix to be used for PubSub operations.
+- **pubSubSubscribeSuffix**: PubSub topic to subscribe to. 
+- **pubSubPublishSuffix**: PubSub topic to publish to.
+  
+Some of these parameters, such as `pubSubUrl` and `pubsub_uuid`, will only be included when they are defined in the env variables.
 
-### Additional Launch Parameters
+### Additional Launch Parameters from ConfigModule
 The `additionalLaunchParams` allows you to customize the test environment by including specific parameters that can override default parameters or add new configurations.
 
-- Set `Cypress.env("additionalLaunchParams")` in the configModule like this:
+- **Setting Up Additional Launch Parameters:**
+  - Define Parameters in the ConfigModule: Set the additionalLaunchParams in the configModule using the Cypress.env variable. Edit your `config.json` file in the configModule to include your additionalLaunchParams as shown below, or pass the env through the CLI.
+  Example: 
 ```
 {
-additionalLaunchParams = { "pubSubUrl": `ws://<YOUR_IP>:8080`,  // Example of a hardcoded value
-    "testToken": "CYPRESSENV-testToken" // Example referencing another Cypress env variable
+additionalLaunchParams = { 
+    "pubSubUrl": `ws://<YOUR_IP>:8080`,  // Example of a hardcoded value
+    "testtoken": "CYPRESSENV-testToken" // Example referencing another Cypress env variable
     };
 } 
 ```
-- Use `CYPRESSENV-<variable>` to reference other env variables.
-- Any keys defined in additionalLaunchParams will take precedence over default parameters with matching names.
+- **Usage of Keys and Values:**
+  - The key `pubSubUrl` contains a hardcoded WebSocket URL that will be included in the intent directly.
+  - The key `testtoken` is prefixed with `CYPRESSENV-`, indicating that it should search for an env variable named `testtoken`. If `Cypress.env("testtoken")` exists, its value will be passed in the intent.
+- **Parameter Precedence:** Any keys defined in additionalLaunchParams will take precedence over default parameters with matching names.
 
 ## Before operation
 
