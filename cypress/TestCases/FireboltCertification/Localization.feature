@@ -96,7 +96,7 @@ Feature: Localization
             | Set & get Language en                      | language                | en         |
             | Set & get preferredAudioLanguages(spa-eng) | preferredAudioLanguages | spa,eng    |
             | Set & get preferredAudioLanguages(eng-spa) | preferredAudioLanguages | eng,spa    |
-            | Set & get PostalCode                       | postalCode              | 12345      |
+            | Set & get PostalCode                       | postalCode              | "12345"    |
 
     @regression @sdk @requiresPlatformImplementation
     Scenario Outline: Localization.<Method_Name> - Positive Scenario: Clearing event listeners

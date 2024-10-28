@@ -236,12 +236,12 @@ Given(/'(.+)' registers for the '(.+)' event$/, async (appId, sdk) => {
  * @param {String} sdk - name of the sdk.
  * @param {String} appId - app identifier.
  * @param {String} methodType - Determines the type of method being validated Ex: set or get
- * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS'
+ * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_PARAMS'
  * @example
  * And 'Firebolt' platform responds to '1st party app' get API
  * And 'Firebolt' platform responds to '1st party app' set API
  * And 'Firebolt' platform responds to '3rd party app' get API
- * And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
+ * And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_PARAMS'
  */
 Given(
   /'(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?$/,
@@ -295,12 +295,12 @@ Given(
  * @param {String} sdk - name of the sdk.
  * @param {String} eventExpected - Determines whether the event is expected or not.
  * @param {String} appId - app identifier.
- * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS'
+ * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_PARAMS'
  * @example
  * And 'Firebolt' platform triggers '1st party app' event
  * And 'Firebolt' platform triggers '3rd party app' event
  * And 'Firebolt' platform does not trigger '3rd party app' event
- * And 'Firebolt' platform triggers '1st party app' event with 'INVALID_TYPE_PARAMS'
+ * And 'Firebolt' platform triggers '1st party app' event with 'INVALID_PARAMS'
  */
 Given(
   /'(.+)' platform (triggers|does not trigger) '(.*?)' event(?: with '(.+)')?$/,
@@ -337,3 +337,28 @@ Given(
     });
   }
 );
+
+/**
+ * @module validations
+ * @function Given '(.+)' on '(.+)' page
+ * @description Function to do event and screenshot validation for the given page
+ * @param {String} validationObjectKey - Firebolt object key name
+ * @param {String} page - Name of the page where the screenshot is taken.
+ * @example
+ * Given 'third party app is launched' on 'auth' page
+ */
+Given(/'(.+)' on '(.+)' page/, (validationObjectKey, page) => {
+  // Storing the page name in runtime environment variable to use it in the validations.
+  if (Cypress.env(CONSTANTS.RUNTIME)) {
+    Cypress.env(CONSTANTS.RUNTIME).page = page;
+  } else {
+    Cypress.env(CONSTANTS.RUNTIME, { page });
+  }
+
+  validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  cy.getFireboltData(validationObjectKey).then((fireboltData) => {
+    const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+    const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+    cy.methodOrEventResponseValidation(type, validationObject);
+  });
+});
