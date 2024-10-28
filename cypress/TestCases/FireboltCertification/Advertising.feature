@@ -113,7 +113,6 @@ Feature: Advertising
    @sdk @transport
    Scenario Outline: Advertising.advertisingId - Positive Scenario: <Scenario>
       When 1st party app invokes the 'Firebolt' API to '<MANAGE_API_Key>'
-      And '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
       Then 'Firebolt' platform responds to '1st party app' with '<MANAGE_API_Key>'
       When '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'

@@ -263,7 +263,7 @@ In the below testcase, fetching the firebolt object `CLOSED_CAPTIONS_SETTINGS` a
 
         Examples:
             | Scenario          | Method   | Value  | Error               |
-            | Set enabled-test  | enabled  | test   | INVALID_TYPE_PARAMS |
+            | Set enabled-test  | enabled  | test   | INVALID_PARAMS |
 ```
 
 ## Advanced Support
