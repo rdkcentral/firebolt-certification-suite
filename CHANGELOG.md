@@ -1,3 +1,10 @@
+# [1.4.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.1...v1.4.0-dev.2) (2024-10-28)
+
+
+### Features
+
+* Module certification issues 2 ([#242](https://github.com/rdkcentral/firebolt-certification-suite/issues/242)) ([5dcdbee](https://github.com/rdkcentral/firebolt-certification-suite/commit/5dcdbee7b491792ea772718fab9c90259a52a296))
+
 # [1.4.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0...v1.4.0-dev.1) (2024-10-28)
 
 
