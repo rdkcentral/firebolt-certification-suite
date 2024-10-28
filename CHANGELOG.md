@@ -1,3 +1,10 @@
+# [1.4.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.2...v1.4.0-dev.3) (2024-10-28)
+
+
+### Features
+
+* discovery entity changes for 1.4 release of sdk ([#209](https://github.com/rdkcentral/firebolt-certification-suite/issues/209)) ([0bd0a3d](https://github.com/rdkcentral/firebolt-certification-suite/commit/0bd0a3d5d36ce08ab1706fe4a262594649a0ebe0))
+
 # [1.4.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.1...v1.4.0-dev.2) (2024-10-28)
 
 
