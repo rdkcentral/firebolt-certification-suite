@@ -671,5 +671,23 @@
         "validationJsonPath": "result",
         "content": "INVALID_PARAMS",
         "expectingError": true
+    },
+    "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_INTEGER": {
+        "method": "manage_localization.addAdditionalInfo",
+        "params": "LOCALIZATION_ADD_ADDITIONALINFO_VALUE_AS_INTEGER"
+    },
+    "INTEGER_FOR_LOCALIZATION_ADDITIONALINFO": {
+        "method": "localization.additionalInfo",
+        "validationJsonPath": "result",
+        "content": "LOCALIZATION_ADD_ADDITIONALINFO_AS_INTEGER"  
+    },
+    "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_BOOLEAN": {
+        "method": "manage_localization.addAdditionalInfo",
+        "params": "LOCALIZATION_ADD_ADDITIONALINFO_VALUE_AS_BOOLEAN"
+    },
+    "BOOLEAN_FOR_LOCALIZATION_ADDITIONALINFO": {
+        "method": "localization.additionalInfo",
+        "validationJsonPath": "result",
+        "content": "LOCALIZATION_ADD_ADDITIONALINFO_AS_BOOLEAN"  
     }
 }
