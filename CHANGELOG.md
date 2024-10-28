@@ -1,3 +1,10 @@
+# [1.4.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0...v1.4.0-dev.1) (2024-10-28)
+
+
+### Features
+
+* [FCS] - Streamline dependencies on pub sub ([#224](https://github.com/rdkcentral/firebolt-certification-suite/issues/224)) ([e76863a](https://github.com/rdkcentral/firebolt-certification-suite/commit/e76863a9161ddab9e64e2ab6cf345b402d18a872))
+
 # [1.3.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0...v1.3.0) (2024-10-21)
 
 
