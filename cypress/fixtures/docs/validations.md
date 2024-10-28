@@ -10,6 +10,7 @@
 | undefined           | Used when the incoming response has to be validated against undefined value.                                  |
 | schemaOnly          | When validation type is `schemaOnly`, it will skip content validation and stops at schema validation          |
 | screenshotValidation  | screenshotValidation is used to validate the screenshot captured by the device.     |
+| performanceValidation  | Used to validate performance metrics against specified thresholds.     |
 
 ## regEx
 

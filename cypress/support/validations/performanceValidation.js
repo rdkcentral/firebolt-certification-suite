@@ -19,17 +19,29 @@
 const CONSTANTS = require('../constants/constants');
 const UTILS = require('../cypress-support/src/utils');
 
+/**
+ * @module performanceValidation
+ * @function performanceValidation
+ * @description Validates performance metrics based on provided validation parameters.
+ * @param {Object} object - The object to validate
+ * @example
+ * cy.performanceValidation({})
+ */
 Cypress.Commands.add('performanceValidation', (object) => {
+  // Check if performance metrics are enabled
   if (UTILS.getEnvVariable('performanceMetrics')) {
+    // Extract validation params or set defaults
     const type = object.validations?.[0]?.type || 'all';
     const process = object.validations?.[0]?.process || 'required';
     const percentile = object.validations?.[0]?.percentile;
     const threshold = object.validations?.[0]?.threshold;
+    // Call fetchPerformanceThreshold to validate performance metrics
     const requestMap = {
       method: CONSTANTS.REQUEST_OVERRIDE_CALLS.PERFORMANCE_THRESHOLD_VALIDATOR,
       params: { type, process, percentile, threshold },
     };
 
+    fireLog.info('Performance validation has started');
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       if (result.error) {
         cy.log('Failed to fetch and validate the performance metrics').then(() => {
@@ -44,6 +56,6 @@ Cypress.Commands.add('performanceValidation', (object) => {
       }
     });
   } else {
-    fireLog.info('performanceMetrics are disabled.');
+    fireLog.info('PerformanceMetrics are disabled.');
   }
 });

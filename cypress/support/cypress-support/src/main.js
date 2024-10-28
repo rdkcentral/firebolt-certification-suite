@@ -89,7 +89,15 @@ export default function (module) {
     Cypress.env(CONSTANTS.MESSAGE_QUEUE, messageQueue);
     UTILS.parseExceptionList();
     cy.getModuleReqIdJson();
-
+    if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) == true) {
+      cy.startOrStopPerformanceService(CONSTANTS.INITIATED).then((response) => {
+        if (response) {
+          Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, true);
+        }
+      });
+    } else {
+      cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
+    }
     // Merge fireboltCalls
     const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
     const v2FireboltCallsData = _.merge(
@@ -123,7 +131,6 @@ export default function (module) {
   // beforeEach
   beforeEach(() => {
     UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
-
     cy.getBeforeOperationObject();
     cy.initiatePerformanceMetrics();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
