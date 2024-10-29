@@ -19,7 +19,7 @@ import { Given } from '@badeball/cypress-cucumber-preprocessor';
 const logger = require('../Logger')('sample.js');
 
 Given('I print the {string} environment variable', (echo) => {
-  logger.info("The value for Cypress.env(\"" + echo + "\") is " + Cypress.env("echo"));
+  logger.info("The value for Cypress.env(\"" + echo + "\") is " + Cypress.env(echo));
 });
 
 Given('I say {string}', (echo) => {
