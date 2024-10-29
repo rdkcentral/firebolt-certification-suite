@@ -24,6 +24,6 @@ exports.NOT_PERMITTED = {
 exports.NOT_AVAILABLE = {
   type: 'schemaOnly',
 };
-exports.INVALID_PARAMS = {
+exports.INVALID_TYPE_PARAMS = {
   type: 'schemaOnly',
 };

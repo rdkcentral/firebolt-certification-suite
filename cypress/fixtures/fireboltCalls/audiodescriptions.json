@@ -2,7 +2,7 @@
     "INVALID_PARAMS_FOR_AUDIODESCRIPTIONS_SETENABLED": {
         "method": "audiodescriptions.setEnabled",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "AUDIODESCRIPTIONS_ONENABLEDCHANGED":{

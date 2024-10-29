@@ -1,737 +1,467 @@
 {
-  "PARAMETERS_INITIALIZATION_TRUE": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_INITIALIZATION_TRUE",
-            "description": "Validation of the Parameters initialization Format"
-          }
+    "PARAMETERS_INITIALIZATION_TRUE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_INITIALIZATION_TRUE",
+                        "description": "Validation of the Parameters initialization Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_INITIALIZATION",
-            "description": "Validation of the Parameters initialization for homeIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_INITIALIZATION",
+                        "description": "Validation of the Parameters initialization for homeIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_NULLINTENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NULLINTENT",
-            "description": "Validation of the Parameters initialization for nullIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_NULLINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_NULLINTENT",
+                        "description": "Validation of the Parameters initialization for nullIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_HOMEINTENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_HOMEINTENT",
-            "description": "Validation of the Parameters initialization for homeIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_HOMEINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_HOMEINTENT",
+                        "description": "Validation of the Parameters initialization for homeIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYBACKINTENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_PLAYBACKINTENT",
-            "description": "Validation of the Parameters initialization for playbacklIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYBACKINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_PLAYBACKINTENT",
+                        "description": "Validation of the Parameters initialization for playbacklIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYBACKINTENT_WITHOUT_ENTITYTYPE": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_PLAYBACKINTENT",
-            "description": "Validation of the Parameters initialization for playbacklIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYBACKINTENT_WITHOUT_ENTITYTYPE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_PLAYBACKINTENT",
+                        "description": "Validation of the Parameters initialization for playbacklIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_MOVIEENTITY": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_MOVIEENTITY",
-            "description": "Validation of the Parameters initialization for playbacklIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_MOVIEENTITY": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_MOVIEENTITY",
+                        "description": "Validation of the Parameters initialization for playbacklIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_TVEPISODEENTITY": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_TVEPISODEENTITY",
-            "description": "Validation of the Parameters initialization for playbacklIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_TVEPISODEENTITY": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_TVEPISODEENTITY",
+                        "description": "Validation of the Parameters initialization for playbacklIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_ENTITYINTENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_ENTITYINTENT",
-            "description": "Validation of the Parameters initialization for entityIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_ENTITYINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_ENTITYINTENT",
+                        "description": "Validation of the Parameters initialization for entityIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_LAUNCHINTENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_LAUNCHINTENT",
-            "description": "Validation of the Parameters initialization for launchIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_LAUNCHINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_LAUNCHINTENT",
+                        "description": "Validation of the Parameters initialization for launchIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_SEARCHINTENT",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_SEARCHINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SEARCHINTENT",
+                        "description": "Validation of the Parameters initialization for searchIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SECTIONINTENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_SECTIONINTENT",
-            "description": "Validation of the Parameters initialization for sectionIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_SECTIONINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_SECTIONINTENT",
+                        "description": "Validation of the Parameters initialization for sectionIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_TUNEINTENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_TUNEINTENT",
-            "description": "Validation of the Parameters initialization for tuneIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_TUNEINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_TUNEINTENT",
+                        "description": "Validation of the Parameters initialization for tuneIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_PLAYENTITYINTENT",
-            "description": "Validation of the Parameters initialization for PlayEntityIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_PLAYENTITYINTENT",
+                        "description": "Validation of the Parameters initialization for PlayEntityIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_PLAYQUERYINTENT",
-            "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_PLAYQUERYINTENT",
+                        "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_MUSICTYPE_SONG": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_MUSICTYPE_SONG",
-            "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_MUSICTYPE_SONG": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_MUSICTYPE_SONG",
+                        "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_MUSICTYPE_ALBUM": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_MUSICTYPE_ALBUM",
-            "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_MUSICTYPE_ALBUM": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_MUSICTYPE_ALBUM",
+                        "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_CONCERT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_CONCERT",
-            "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_CONCERT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_CONCERT",
+                        "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_SPORTINGEVENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_SPORTINGEVENT",
-            "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_SPORTINGEVENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_SPORTINGEVENT",
+                        "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_PREVIEW": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_PREVIEW",
-            "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_PREVIEW": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_PREVIEW",
+                        "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_OTHER": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_OTHER",
-            "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_OTHER": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_OTHER",
+                        "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_ADVERTISEMENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_ADVERTISEMENT",
-            "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_ADVERTISEMENT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_ADVERTISEMENT",
+                        "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_MUSICVIDEO": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_MUSICVIDEO",
-            "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_MUSICVIDEO": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_MUSICVIDEO",
+                        "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_MINISODE": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_MINISODE",
-            "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_MINISODE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_MINISODE",
+                        "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_EXTRA": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_EXTRA",
-            "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_EXTRA": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_EXTRA",
+                        "description": "Validation of the Parameters initialization for PlayQueryIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITH_PROGRAMTYPE_MOVIE": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_PLAYENTITYINTENT_MOVIE",
-            "description": "Validation of the Parameters initialization for tuneIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITH_PROGRAMTYPE_MOVIE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_PLAYENTITYINTENT_MOVIE",
+                        "description": "Validation of the Parameters initialization for tuneIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITH_PROGRAMTYPE_EPISODE": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_PLAYENTITYINTENT_EPISODE",
-            "description": "Validation of the Parameters initialization for tuneIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITH_PROGRAMTYPE_EPISODE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_PLAYENTITYINTENT_EPISODE",
+                        "description": "Validation of the Parameters initialization for tuneIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITH_PROGRAMTYPE_CONCERT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_PLAYENTITYINTENT_CONCERT",
-            "description": "Validation of the Parameters initialization for tuneIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITH_PROGRAMTYPE_CONCERT": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_PLAYENTITYINTENT_CONCERT",
+                        "description": "Validation of the Parameters initialization for tuneIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITHOUT_OPTIONS": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_PLAYENTITYINTENT_WITHOUT_OPTIONS",
-            "description": "Validation of the Parameters initialization for tuneIntent Format"
-          }
+    },
+    "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITHOUT_OPTIONS": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_PLAYENTITYINTENT_WITHOUT_OPTIONS",
+                        "description": "Validation of the Parameters initialization for tuneIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_HOMEINTENT_SOURCE": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_HOMEINTENT_SOURCE",
-            "description": "Validation of the Parameters initialization for homeIntent Format"
-          }
+    },
+    "PARAMETERS_HOMEINTENT_SOURCE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_HOMEINTENT_SOURCE",
+                        "description": "Validation of the Parameters initialization for homeIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_PLAYBACKINTENT_SOURCE": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_PLAYBACKINTENT_SOURCE",
-            "description": "Validation of the Parameters initialization for playbacklIntent Format"
-          }
+    },
+    "PARAMETERS_PLAYBACKINTENT_SOURCE": {
+        "method": "parameters.initialization",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PARAMETERS_PLAYBACKINTENT_SOURCE",
+                        "description": "Validation of the Parameters initialization for playbacklIntent Format"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PROGRAMTYPE_MOVIE": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_MOVIE",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PROGRAMTYPE_EPISODE": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_EPISODE",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PROGRAMTYPE_SEASON": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_SEASON",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PROGRAMTYPE_SERIES": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_SERIES",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PROGRAMTYPE_CONCERT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_CONCERT",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PROGRAMTYPE_SPORTINGEVENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_SPORTINGEVENT",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PROGRAMTYPE_PREVIEW": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_PREVIEW",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PROGRAMTYPE_OTHER": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_OTHER",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PROGRAMTYPE_ADVERTISEMENT": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_ADVERTISEMNT",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PROGRAMTYPE_MUSICVIDEO": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_MUSICVIDEO",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PROGRAMTYPE_MINISODE": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_MINISODE",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PROGRAMTYPE_EXTRA": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_EXTRA",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_MUSICTYPE_SONG": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_MUSICTYPE_SONG",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_MUSICTYPE_ALBUM": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_MUSICTYPE_ALBUM",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_CHANNELTYPE_STREAMING": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_CHANNELTYPE_STREAMING",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_CHANNELTYPE_OVERTHEAIR": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_CHANNELTYPE_OVERTHEAIR",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_UNTYPED_ENTITY": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_UNTYPED_ENTITY",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  },
-  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PLAYBACK_ENTITY": {
-    "method": "parameters.initialization",
-    "data": [
-      {
-        "type": "fixture",
-        "validations": [
-          {
-            "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PLAYLIST_ENTITY",
-            "description": "Validation of the Parameters initialization for searchIntent Format"
-          }
-        ]
-      }
-    ]
-  }
+    }
 }

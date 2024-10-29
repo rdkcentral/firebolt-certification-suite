@@ -8,7 +8,7 @@
     "NOT_AVAILABLE": {
         "type": "schemaOnly"
     },
-    "INVALID_PARAMS": {
+    "INVALID_TYPE_PARAMS": {
         "type": "schemaOnly"
     }
 }

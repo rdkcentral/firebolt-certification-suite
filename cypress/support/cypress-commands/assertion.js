@@ -433,7 +433,7 @@ Cypress.Commands.add(
         CONSTANTS.SKIPPED,
         CONSTANTS.SKIPPED
       ).then(() => {
-        const pretext = `Event Not Received for ${extractEventObject.eventObjectId}: `;
+        const pretext = 'Event Not Received : ';
 
         fireLog.strictEqual(eventResponse, content, pretext);
       });
@@ -504,21 +504,18 @@ Cypress.Commands.add(
           CONSTANTS.SKIPPED,
           CONSTANTS.SKIPPED
         ).then(() => {
-          const pretext = `Event Not Received for ${extractEventObject.eventObjectId}: `;
+          const pretext = 'Event Not Received : ';
 
           fireLog.equal(eventResponse, content, pretext);
         });
       } else if (content === null) {
         cy.logValidationResult(
-          'Expected eventResponse for ' +
-            extractEventObject.eventObjectId +
-            ' is null , Actual: ' +
-            eventResponse,
+          'Expected eventResponse is null,' + ' Actual: ' + eventResponse,
           CONSTANTS.PASS,
           CONSTANTS.SKIPPED,
           CONSTANTS.SKIPPED
         ).then(() => {
-          const pretext = `Event Not Received for ${extractEventObject.eventObjectId}: `;
+          const pretext = 'Event Not Received : ';
 
           fireLog.strictEqual(eventResponse, content, pretext);
         });
@@ -540,8 +537,8 @@ Cypress.Commands.add(
  */
 Cypress.Commands.add(
   'assertValidationsForEvent',
-  (extractEventObject, verifyPath, expected, pretext) => {
-    let actual = undefined;
+  (extractEventObject, verifyPath, actual, pretext) => {
+    let expected = undefined;
     const verifyEventResponse = verifyPath.split('.')[0];
     const verifyInnerObject = verifyPath.split('.')[1];
     const verifyOuterObject = verifyPath.split('.')[2];
@@ -549,10 +546,10 @@ Cypress.Commands.add(
     if (verifyOuterObject) {
       const eventResponseInnerObject = verifyEventResponse + '.' + verifyInnerObject;
       if (eval('extractEventObject.' + eventResponseInnerObject)) {
-        actual = eval('extractEventObject.' + verifyPath);
+        expected = eval('extractEventObject.' + verifyPath);
       }
     } else {
-      actual = eval('extractEventObject.' + verifyPath);
+      expected = eval('extractEventObject.' + verifyPath);
     }
     const expectedValue = expected;
     const actualValue = actual;
@@ -562,7 +559,7 @@ Cypress.Commands.add(
     pretext =
       pretext +
       ' for ' +
-      extractEventObject.eventObjectId +
+      extractEventObject.eventName +
       ':' +
       ' expected ' +
       actual +

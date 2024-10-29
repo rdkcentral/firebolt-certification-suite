@@ -86,14 +86,14 @@ exports.FETCH_ACCOUNT_UID_WHEN_DEVICE_IS_NOT_PROVISIONED = {
 exports.INVALID_PARAMETER_ERROR_FOR_ACCOUNT_ID = {
   method: 'account.id',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 
 exports.INVALID_PARAMETER_ERROR_FOR_ACCOUNT_UID = {
   method: 'account.uid',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 
@@ -138,6 +138,6 @@ exports.SET_ACCOUNT_SESSION_WITHOUT_PARAMETERS = {
 exports.INVALID_PARAMETERS_FOR_ACCOUNT_SESSION = {
   method: 'manage_account.session',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };

@@ -58,7 +58,7 @@
     "INVALID_PARAMS_FOR_METRICS_EVENT":{
         "method": "metrics.event",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "NOTIFY_THAT_CONTENT_HAS_STARTED": {
@@ -151,97 +151,97 @@
     "INVALID_PARAMS_FOR_METRICS_STARTCONTENT": {
         "method": "metrics.startContent",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_STOPCONTENT": {
         "method": "metrics.stopContent",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_PAGE": {
         "method": "metrics.page",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_ACTION": {
         "method": "metrics.action",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_ERROR": {
         "method": "metrics.error",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIALOADSTART": {
         "method": "metrics.mediaLoadStart",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIAPLAY": {
         "method": "metrics.mediaPlay",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIAPLAYING": {
         "method": "metrics.mediaPlaying",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIAPAUSE": {
         "method": "metrics.mediaPause",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIAWAITING": {
         "method": "metrics.mediaWaiting",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIAPROGRESS": {
         "method": "metrics.mediaProgress",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIASEEKING": {
         "method": "metrics.mediaSeeking",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIASEEKED": {
         "method": "metrics.mediaSeeked",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIARATECHANGE": {
         "method": "metrics.mediaRateChange",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIARENDITIONCHANGE": {
         "method": "metrics.mediaRenditionChange",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_METRICS_MEDIAENDED": {
         "method": "metrics.mediaEnded",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "NOTIFY_THAT_CONTENT_HAS_STARTED_WITH_ENTITYID": {
@@ -659,7 +659,7 @@
     "INVALID_PARAMS_FOR_METRICS_APPINFO":{
         "method": "metrics.appInfo",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     }
 }

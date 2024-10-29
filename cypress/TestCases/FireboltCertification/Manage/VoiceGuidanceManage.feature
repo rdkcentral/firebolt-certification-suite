@@ -26,7 +26,7 @@ Feature: VoiceGuidance_Manage
     Scenario Outline: Voiceguidance.<Method> - Negative Scenario: <Scenario> and expecting error
         Given we test the 'VOICEGUIDANCE' getters and setters '<Method>' to '<Value>'
         When 1st party app invokes the 'Firebolt' API to set invalid value
-        Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_PARAMS'
+        Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
         Examples:
             | Scenario          | Method  | Value |

@@ -236,12 +236,12 @@ Given(/'(.+)' registers for the '(.+)' event$/, async (appId, sdk) => {
  * @param {String} sdk - name of the sdk.
  * @param {String} appId - app identifier.
  * @param {String} methodType - Determines the type of method being validated Ex: set or get
- * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_PARAMS'
+ * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS'
  * @example
  * And 'Firebolt' platform responds to '1st party app' get API
  * And 'Firebolt' platform responds to '1st party app' set API
  * And 'Firebolt' platform responds to '3rd party app' get API
- * And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_PARAMS'
+ * And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
  */
 Given(
   /'(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?$/,
@@ -295,12 +295,12 @@ Given(
  * @param {String} sdk - name of the sdk.
  * @param {String} eventExpected - Determines whether the event is expected or not.
  * @param {String} appId - app identifier.
- * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_PARAMS'
+ * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS'
  * @example
  * And 'Firebolt' platform triggers '1st party app' event
  * And 'Firebolt' platform triggers '3rd party app' event
  * And 'Firebolt' platform does not trigger '3rd party app' event
- * And 'Firebolt' platform triggers '1st party app' event with 'INVALID_PARAMS'
+ * And 'Firebolt' platform triggers '1st party app' event with 'INVALID_TYPE_PARAMS'
  */
 Given(
   /'(.+)' platform (triggers|does not trigger) '(.*?)' event(?: with '(.+)')?$/,

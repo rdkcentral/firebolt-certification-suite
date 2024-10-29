@@ -66,20 +66,20 @@ exports.CONNECT_WPS_WITH_BOOLEAN = {
 exports.INVALID_BOOLEAN_PARAMS_FOR_WIFI_SCAN = {
   method: 'wifi.scan',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 
 exports.INVALID_INTEGER_PARAMS_FOR_WIFI_CONNECT = {
   method: 'wifi.connect',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 
 exports.INVALID_VALUE_PARAMS_FOR_WIFI_WPS = {
   method: 'wifi.wps',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };

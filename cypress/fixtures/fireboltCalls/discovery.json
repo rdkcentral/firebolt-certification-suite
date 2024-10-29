@@ -157,13 +157,13 @@
     "INVALID_PARAMS_FOR_DISCOVERY_WATCHED": {
         "method": "discovery.watched",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_REQUEST_FOR_DISCOVERY_WATCHED": {
         "method": "discovery.watched",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "NOTIFY_WATCHED_CONTENT_WITH_INVALID_ENTITYID_NUMBER": {
@@ -194,7 +194,7 @@
     "INVALID_PARAMS_FOR_DISCOVERY_WATCHNEXT": {
         "method": "discovery.watchNext",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "SUGGEST_WATCHNEXT_TILE_WITH_ONLY_TITLE": {
@@ -255,7 +255,7 @@
     "INVALID_PARAMS_FOR_DISCOVERY_ENTITLEMENTS": {
         "method": "discovery.entitlements",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "NOTIFY_ENTITLEMENTS_WITH_NO_ID": {
@@ -271,7 +271,7 @@
     "INVALID_PARAMS_FOR_DISCOVERY_SIGNIN": {
         "method": "discovery.signIn",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "NOTIFY_USER_HAS_SIGNEDIN_WITH_NO_ID": {
@@ -330,7 +330,7 @@
     "INVALID_PARAMETER_ERROR_FOR_DISCOVERY_CONTENTACCESS": {
         "method": "discovery.contentAccess",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "NULL_FOR_DISCOVERY_CLEARCONTENTACCESS": {
@@ -450,7 +450,7 @@
     "INVALID_REQUEST_FOR_DISCOVERY_WATCHNEXT": {
         "method": "discovery.watchNext",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     }
 }

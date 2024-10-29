@@ -525,7 +525,7 @@ exports.SEND_METRICS_EVENT_WITH_SCHEMA_AS_EMPTY = {
 exports.INVALID_PARAMS_FOR_METRICS_EVENT = {
   method: 'metrics.event',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 
@@ -617,91 +617,91 @@ exports.NOTIFY_THAT_PLAYBACK_HAS_STOPPED_WITH_EMPTY_PARAMETER = {
 exports.INVALID_PARAMS_FOR_METRICS_STARTCONTENT = {
   method: 'metrics.startContent',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_STOPCONTENT = {
   method: 'metrics.stopContent',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_PAGE = {
   method: 'metrics.page',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_ACTION = {
   method: 'metrics.action',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_ERROR = {
   method: 'metrics.error',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_MEDIALOADSTART = {
   method: 'metrics.mediaLoadStart',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_MEDIAPLAY = {
   method: 'metrics.mediaPlay',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_MEDIAPLAYING = {
   method: 'metrics.mediaPlaying',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_MEDIAPAUSE = {
   method: 'metrics.mediaPause',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_MEDIAWAITING = {
   method: 'metrics.mediaWaiting',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_MEDIAPROGRESS = {
   method: 'metrics.mediaProgress',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_MEDIASEEKING = {
   method: 'metrics.mediaSeeking',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_MEDIASEEKED = {
   method: 'metrics.mediaSeeked',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_MEDIARATECHANGE = {
   method: 'metrics.mediaRateChange',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMS_FOR_METRICS_MEDIARENDITIONCHANGE = {
   method: 'metrics.mediaRenditionChange',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.NOTIFY_THAT_CONTENT_HAS_STARTED_WITH_NUMERIC_ENTITYID = {
@@ -892,7 +892,7 @@ exports.INFORM_THE_PLATFORM_ABOUT_APP_WITH_NUMERIC_BUILD = {
 exports.INVALID_PARAMS_FOR_METRICS_APPINFO = {
   method: 'metrics.appInfo',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.SEND_METRICS_EVENT_WITH_SCHEMA_AND_FOO_DATA = {
@@ -950,7 +950,7 @@ exports.NULL_FOR_METRICS_APPINFO = {
 exports.INVALID_PARAMS_FOR_METRICS_MEDIAENDED = {
   method: 'metrics.mediaEnded',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INFORM_THE_PLATFORM_ABOUT_APP_WITH_BOOLEAN_BUILD = {

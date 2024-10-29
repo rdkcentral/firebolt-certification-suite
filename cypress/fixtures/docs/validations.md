@@ -553,7 +553,7 @@ Below is the default error objects supported in FCS [errorContentObjects.json](.
 - NOT_SUPPORTED - This can be used for api's which are not supported
 - NOT_PERMITTED - This can be used for api's which are not supported
 - NOT_AVAILABLE - This can be used for api's which are not supported
-- INVALID_PARAMS - This can be used for error validation which involves calling firebolt methods with invalid parameters, missing parameters etc.
+- INVALID_TYPE_PARAMS - This can be used for error validation which involves calling firebolt methods with invalid parameters, missing parameters etc.
 
 #### Format
 
@@ -621,7 +621,7 @@ Note: FCS expects the error object to be defined in the above format. Any deviat
 ##### Example:
 
 ```
-"INVALID_PARAMS": {
+"INVALID_TYPE_PARAMS": {
         "type": "errorValidationFunction",
         "validations": [
             {

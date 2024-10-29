@@ -36,22 +36,6 @@ Feature: Localization
             | with key and value as string       | set localization removeAdditionalInfo with string       | empty key value for localization additionalInfo |
             | with key and value as empty string | set localization removeAdditionalInfo with empty string | empty response for localization additionalInfo  |
 
-    # Set addAdditionalInfo with integer and boolean
-    @sdk @transport
-    Scenario Outline: Localization.<Method> - Positive Scenario: <Scenario>
-        Given '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
-        When 1st party app invokes the 'Firebolt' API to '<API_Key>'
-        Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
-        When '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
-        Then 'Firebolt' platform responds with '<Validation_Key>'
-
-        Examples:
-            | Scenario                                | API_Key                                           | Validation_Key                                 | Method               |
-            | with key as string and value as integer | set localization addAdditionalInfo with integer   | integer for localization additionalInfo        | addAdditionalInfo    |
-            | with key as string and value as integer | set localization removeAdditionalInfo with string | empty response for localization additionalInfo | removeAdditionalInfo |
-            | with key as string and value as boolean | set localization addAdditionalInfo with boolean   | boolean for localization additionalInfo        | addAdditionalInfo    |
-            | with key as string and value as boolean | set localization removeAdditionalInfo with string | empty response for localization additionalInfo | removeAdditionalInfo |
-
     @sdk @transport
     Scenario: Localization.latlon - Positive Scenario: Get latlon
         When '3rd party app' invokes the 'Firebolt' API to 'get localization latlon'
@@ -96,7 +80,7 @@ Feature: Localization
             | Set & get Language en                      | language                | en         |
             | Set & get preferredAudioLanguages(spa-eng) | preferredAudioLanguages | spa,eng    |
             | Set & get preferredAudioLanguages(eng-spa) | preferredAudioLanguages | eng,spa    |
-            | Set & get PostalCode                       | postalCode              | "12345"    |
+            | Set & get PostalCode                       | postalCode              | 12345      |
 
     @regression @sdk @requiresPlatformImplementation
     Scenario Outline: Localization.<Method_Name> - Positive Scenario: Clearing event listeners

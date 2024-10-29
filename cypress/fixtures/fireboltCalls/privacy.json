@@ -695,145 +695,145 @@
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWRESUMEPOINTS": {
         "method": "privacy.setAllowResumePoints",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWRESUMEPOINTS": {
         "method": "privacy.setAllowResumePoints",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWUNENTITLEDRESUMEPOINTS": {
         "method": "privacy.setAllowUnentitledResumePoints",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWUNENTITLEDRESUMEPOINTS": {
         "method": "privacy.setAllowUnentitledResumePoints",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWWATCHHISTORY": {
         "method": "privacy.setAllowWatchHistory",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWWATCHHISTORY": {
         "method": "privacy.setAllowWatchHistory",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWPRODUCTANALYTICS": {
         "method": "privacy.setAllowProductAnalytics",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWPRODUCTANALYTICS": {
         "method": "privacy.setAllowProductAnalytics",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWPERSONALIZATION": {
         "method": "privacy.setAllowPersonalization",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWPERSONALIZATION": {
         "method": "privacy.setAllowPersonalization",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWUNENTITLEDPERSONALIZATION": {
         "method": "privacy.setAllowUnentitledPersonalization",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWUNENTITLEDPERSONALIZATION": {
         "method": "privacy.setAllowUnentitledPersonalization",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWREMOTEDIAGNOSTICS": {
         "method": "privacy.setAllowRemoteDiagnostics",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWREMOTEDIAGNOSTICS": {
         "method": "privacy.setAllowRemoteDiagnostics",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWPRIMARYCONTENTADTARGETING": {
         "method": "privacy.setAllowPrimaryContentAdTargeting",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWPRIMARYCONTENTADTARGETING": {
         "method": "privacy.setAllowPrimaryContentAdTargeting",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWPRIMARYBROWSEADTARGETING": {
         "method": "privacy.setAllowPrimaryBrowseAdTargeting",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWPRIMARYBROWSEADTARGETING": {
         "method": "privacy.setAllowPrimaryBrowseAdTargeting",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWAPPCONTENTADTARGETING": {
         "method": "privacy.setAllowAppContentAdTargeting",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWAPPCONTENTADTARGETING": {
         "method": "privacy.setAllowAppContentAdTargeting",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWACRCOLLECTION": {
         "method": "privacy.setAllowACRCollection",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWACRCOLLECTION": {
         "method": "privacy.setAllowACRCollection",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_INTEGER_FOR_PRIVACY_ALLOWCAMERAANALYTICS": {
         "method": "privacy.setAllowCameraAnalytics",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_PARAMS_FOR_PRIVACY_ALLOWCAMERAANALYTICS": {
         "method": "privacy.setAllowCameraAnalytics",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "SET_PRIVACY_ALLOWRESUMEPOINTS": {

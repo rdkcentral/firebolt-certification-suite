@@ -32,7 +32,7 @@ Feature: Advertising_Manage
    Scenario: Advertising.setSkipRestriction - Negative Scenario: SkipRestriction expecting error
       Given we test the 'ADVERTISING_SKIP_RESTRICTION' getters and setters 'skipRestriction' to '898756'
       When 1st party app invokes the 'Firebolt' API to set invalid value
-      Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_PARAMS'
+      Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_TYPE_PARAMS'
 
    @sdk @transport @notSupported
    Scenario: Advertising.resetIdentifier - Positive Scenario: Reset Identifier method

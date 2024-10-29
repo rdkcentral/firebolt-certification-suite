@@ -71,7 +71,7 @@
     "INVALID_PARAMETER_ERROR_AUTHENTICATION_TOKEN": {
         "method": "authentication.token",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "EXPECT_ERROR_FOR_DEVICE_TOKEN": {
@@ -81,7 +81,7 @@
     "INVALID_REQUEST_FOR_AUTHENTICATION_DEVICE": {
         "method": "authentication.device",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     }
 }

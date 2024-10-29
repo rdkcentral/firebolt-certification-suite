@@ -241,7 +241,7 @@
     "INVALID_PARAMETERS_FOR_SECURESTORAGE_GET": {
         "method": "securestorage.get",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "SET_SECURE_DATA_VALUE_FOR_AN_APP_WITH_SCOPE_DEVICE": {
@@ -531,37 +531,37 @@
     "INVALID_PARAMS_FOR_SETTING_A_DATA_VALUE_IN_SECURESTORAGE":{
         "method": "securestorage.setForApp",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETERS_FOR_SECURESTORAGE_SET": {
         "method": "securestorage.set",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_REMOVING_STORED_VALUE_IN_SECURESTORAGE":{
         "method": "securestorage.removeForApp",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETERS_FOR_SECURESTORAGE_REMOVE": {
         "method": "securestorage.remove",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETERS_FOR_SECURESTORAGE_REMOVEFORAPP": {
         "method": "securestorage.removeForApp",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_CLEARING_ALL_DATA_FOR_AN_APP_IN_SECURESTORAGE":{
         "method": "securestorage.clearForApp",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "GET_STORED_VALUE_WITH_INVALID_SCOPE": {
@@ -836,7 +836,7 @@
     "INVALID_PARAMETERS_FOR_SECURESTORAGE_CLEAR": {
         "method": "securestorage.clear",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "GET_STORED_VALUE_WITH_KEY_AS_EMPTY": {
@@ -857,19 +857,19 @@
     "CUSTOM_ERROR_FOR_SECURESTORAGE_REMOVE": {
         "method": "securestorage.remove",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_SECURESTORAGE_SET": {
         "method": "securestorage.set",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_SECURESTORAGE_GET": {
         "method": "securestorage.get",
         "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
+        "content": "INVALID_TYPE_PARAMS",
         "expectingError": true
     }
 }

@@ -146,7 +146,7 @@ exports.GET_SECONDSCREEN_DEVICE_WITH_INTEGER = {
 exports.INVALID_PARAMETERS_FOR_SECONDSCREEN_DEVICE = {
   method: 'secondscreen.device',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.SECONDSCREEN_ONFRIENDLYNAMECHANGED = {

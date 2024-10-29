@@ -673,7 +673,7 @@ exports.FETCH_DEVICE_DISTRIBUTOR = {
 exports.INVALID_PARAMETERS_FOR_DEVICE_PROVISION = {
   method: 'device.provision',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 

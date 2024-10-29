@@ -293,19 +293,7 @@ Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) 
     params,
     additionalParams
   );
-
-  let publishMessageForLog;
-  if (publishMessage && publishMessage.data && publishMessage.data.query) {
-    publishMessageForLog = publishMessage.data.query;
-    if (typeof publishMessageForLog == 'string') {
-      publishMessageForLog = JSON.parse(publishMessageForLog);
-    }
-    if (publishMessageForLog.params.methodName == CONSTANTS.LIFECYCLE_APIS.HISTORY) {
-      cy.log(CONSTANTS.LIFECYCLE_HISTORY_INTENT + JSON.stringify(publishMessage));
-    } else {
-      cy.log(CONSTANTS.LIFECYCLE_INTENT + JSON.stringify(publishMessage));
-    }
-  }
+  cy.log(CONSTANTS.LIFECYCLE_INTENT + JSON.stringify(publishMessage));
   cy.sendMessagetoApp(requestTopic, responseTopic, publishMessage).then((response) => {
     try {
       errorObject = JSON.parse(response).error;

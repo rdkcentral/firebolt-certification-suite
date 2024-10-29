@@ -105,22 +105,22 @@ exports.STATIC_VARIABLES = {
     SET_DEVICE1: {
       scope: 'device',
       key: 'authTestTokenDevice1',
-      value: 'authTestTokenDeviceValue1',
+      value: 'authTestTokenDevice1',
     },
     SET_DEVICE2: {
       scope: 'device',
       key: 'authTestTokenDevice2',
-      value: 'authTestTokenDeviceValue2',
+      value: 'authTestTokenDevice2',
     },
     SET_ACCOUNT1: {
       scope: 'account',
       key: 'authTestTokenAccount1',
-      value: 'authTestTokenAccountValue1',
+      value: 'authTestTokenAccount1',
     },
     SET_ACCOUNT2: {
       scope: 'account',
       key: 'authTestTokenAccount2',
-      value: 'authTestTokenAccountValue2',
+      value: 'authTestTokenAccount2',
     },
     REMOVE_DEVICE1: {
       scope: 'device',
@@ -302,10 +302,10 @@ exports.STATIC_VARIABLES = {
   SECURESTORAGE_CONTENT: {
     DEFAULT_VALUE: 'VGhpcyBub3QgYSByZWFsIHRva2VuLgo=',
     VALUE1: 'authTestTokenValue1',
-    GET_DEVICE2: 'authTestTokenDeviceValue2',
-    GET_ACCOUNT2: 'authTestTokenAccountValue2',
-    GET_DEVICE1: 'authTestTokenDeviceValue1',
-    GET_ACCOUNT1: 'authTestTokenAccountValue1',
+    GET_DEVICE2: 'authTestTokenDevice2',
+    GET_ACCOUNT2: 'authTestTokenValue2',
+    GET_DEVICE1: 'authTestTokenDevice1',
+    GET_ACCOUNT1: 'authTestTokenAccount1',
     VALUE2: 'authTestTokenValue2',
     VALUE_TTL: 'authTestTokenValueTTL',
     SCOPE_UPDATED_VALUE: 'VGhpcyBpcyBub3QgYSByZWFsIHRva2VuLg==',
@@ -525,13 +525,13 @@ exports.SET_SECURE_DATA_VALUE_FOR_AN_APP_WITHOUT_VALUE = {
 exports.INVALID_PARAMS_FOR_SETTING_A_DATA_VALUE_IN_SECURESTORAGE = {
   method: 'securestorage.setForApp',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMETERS_FOR_SECURESTORAGE_REMOVEFORAPP = {
   method: 'securestorage.removeForApp',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.REMOVE_SECURE_DATA_VALUE_FOR_AN_APP_WITH_INVALID_SCOPE = {
@@ -617,7 +617,7 @@ exports.CLEAR_SECURE_DATA_VALUES_FOR_AN_APP_WITHOUT_SCOPE = {
 exports.INVALID_PARAMS_FOR_CLEARING_ALL_DATA_FOR_AN_APP_IN_SECURESTORAGE = {
   method: 'securestorage.clearForApp',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.SET_SECURE_DATA_VALUE1_FOR_SECOND_APP_WITH_SCOPE_DEVICE = {
@@ -816,13 +816,13 @@ exports.GET_STORED_VALUE_WITHOUT_KEY = {
 exports.CUSTOM_ERROR_FOR_SECURESTORAGE_GET = {
   method: 'securestorage.get',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.INVALID_PARAMETERS_FOR_SECURESTORAGE_GET = {
   method: 'securestorage.get',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.SET_SECURE_VALUE_WITH_INVALID_SCOPE = {
@@ -913,19 +913,19 @@ exports.SET_SECURE_VALUE_WITH_OPTIONS_AS_EMPTY_STRING = {
 exports.INVALID_PARAMETERS_FOR_SECURESTORAGE_SET = {
   method: 'securestorage.set',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.CUSTOM_ERROR_FOR_SECURESTORAGE_REMOVE = {
   method: 'securestorage.remove',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.CUSTOM_ERROR_FOR_SECURESTORAGE_SET = {
   method: 'securestorage.set',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 exports.REMOVE_STORED_VALUE_WITH_INVALID_SCOPE = {
@@ -1040,6 +1040,6 @@ exports.CLEAR_STORED_VALUE_WITHOUT_SCOPE = {
 exports.INVALID_PARAMETERS_FOR_SECURESTORAGE_CLEAR = {
   method: 'securestorage.clear',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };

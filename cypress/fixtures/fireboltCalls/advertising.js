@@ -366,14 +366,14 @@ exports.GET_ADVERTISINGID_WITH_INVALID_ID = {
 exports.INVALID_PARAMETER_FOR_ADVERTISING_ADVERTISINGID = {
   method: 'advertising.advertisingId',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 
 exports.INVALID_PARAMETER_ERROR_ADVERTISING_CONFIG = {
   method: 'advertising.config',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
+  content: errorContent.INVALID_TYPE_PARAMS,
   expectingError: true,
 };
 
