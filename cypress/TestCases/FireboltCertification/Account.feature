@@ -6,7 +6,7 @@ Feature: Account
       And 3rd party 'certification' app is launched
 
    @sdk @transport @Sev0
-   Scenario Outline: Account.<Method> - Get and validate method response content
+   Scenario Outline: Account.<Method> - Validate API Method Response Content
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
       Examples:
