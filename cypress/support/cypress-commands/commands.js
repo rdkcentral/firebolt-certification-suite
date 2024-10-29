@@ -1016,6 +1016,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
           healthCheckResponse = JSON.parse(healthCheckResponse);
           expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
         });
+        cy.updateRunInfo()
       }
     });
   });
