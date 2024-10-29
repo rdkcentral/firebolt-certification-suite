@@ -194,6 +194,6 @@ exports.GET_TOKEN_WITH_INTEGER_PARAMETER = {
 exports.INVALID_PARAMETER_ERROR_AUTHENTICATION_TOKEN = {
   method: 'authentication.token',
   validationJsonPath: 'result',
-  content: errorContent.INVALID_TYPE_PARAMS,
+  content: errorContent.INVALID_PARAMS,
   expectingError: true,
 };
