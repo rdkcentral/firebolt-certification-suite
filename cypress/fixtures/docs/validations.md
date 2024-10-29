@@ -494,7 +494,6 @@ To perform screenshot validation, the screenshot validation object should be add
 ### Updating Screenshot Logs
 To include the screenshot of the current screen as a link in the report, we need to add the following log: fireLog.info('Screenshot: ' + <url>) within the response override specified [here](/Docs/Request_Overrides.md#screenshot). Ensure that "Screenshot:" remains unchanged in the log message.
 
-
 # Validation Override
 
 ## Format
