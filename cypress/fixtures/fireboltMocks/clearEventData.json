@@ -42,9 +42,5 @@
     "SECONDSCREEN_ONCLOSEREQUEST_EVENT":{
         "event": "secondscreen.onCloseRequest",
         "firstParty": false
-    },
-    "ADVERTISING_ONSKIPRESTRICTIONCHANGED_EVENT":{
-        "event": "manage_advertising.onSkipRestrictionChanged",
-        "firstParty": false
     }
 }
