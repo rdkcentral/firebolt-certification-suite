@@ -6,7 +6,7 @@ Feature: Device
         And 3rd party 'certification' app is launched
 
     @sdk @transport @Sev0
-    Scenario Outline:Device.<Method> - Validate API Method Response Content for <Method>
+    Scenario Outline:Device.<Method> - Validate API Method Response Content
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
 
@@ -18,7 +18,7 @@ Feature: Device
             | platform    | expected device platform    | fetch device platform    |
 
     @sdk @transport @Sev1
-    Scenario Outline:Device.<Method> - Validate API Method Response Content for <Method>
+    Scenario Outline:Device.<Method> - Validate API Method Response Content
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
 
@@ -40,7 +40,7 @@ Feature: Device
         And 'Firebolt' platform triggers '1st party app' event
 
     @regression @sdk @transport @Sev0
-    Scenario Outline: Device.<Method> - Validate API Method Response Content for <Method>
+    Scenario Outline: Device.<Method> - Validate API Method Response Content
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<validation_key>'
 
@@ -52,7 +52,7 @@ Feature: Device
             | videoResolution  | fetch videoResolution  | expected videoResolution  |
 
     @regression @sdk @transport @Sev1
-    Scenario Outline: Device.<Method> - Validate API Method Response Content for <Method>
+    Scenario Outline: Device.<Method> - Validate API Method Response Content
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<validation_key>'
 
@@ -61,7 +61,7 @@ Feature: Device
             | audio            | fetch audio            | expected audio            |
 
     @regression @sdk @transport @Sev2
-    Scenario Outline: Device.<Method> - Validate API Method Response Content for <Method>
+    Scenario Outline: Device.<Method> - Validate API Method Response Content
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<validation_key>'
 
@@ -78,7 +78,7 @@ Feature: Device
         And 'Firebolt' platform does not trigger event for 'onDeviceNameChanged'
 
     @sdk @transport @requiresPlatformImplementation @notSupported @Sev2
-    Scenario Outline: Device.network - Get and validate state of <Scenario>
+    Scenario Outline: Device.onNetworkChanged - Get and validate state of <Scenario>
         Given '3rd party app' registers for the 'device onNetworkChanged' event using the 'Firebolt' API
         When '3rd party app' invokes the 'Firebolt' API to 'fetch device network'
         Then 'Firebolt' platform responds with '<Method_Validation_Key>'
