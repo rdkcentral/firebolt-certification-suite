@@ -15,7 +15,7 @@ Feature: Device
             | id          | expected device id          | fetch device id          |
             | distributor | expected device distributor | fetch device distributor |
             | type        | expected device type        | fetch device type        |
-            | platform    | expected device platform    | fetch device platfor     |
+            | platform    | expected device platform    | fetch device platform    |
 
     @sdk @transport @Sev1
     Scenario Outline:Device.<Method> - Validate API Method Response Content for <Method>
