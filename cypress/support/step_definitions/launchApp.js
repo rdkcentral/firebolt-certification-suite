@@ -44,12 +44,6 @@ Given(
         state = CONSTANTS.LIFECYCLE_STATES.FOREGROUND;
       }
       cy.launchApp(appType, appCallSign);
-      cy.getSdkVersion().then(() => {
-        cy.getFireboltJsonData().then((data) => {
-          Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
-        });
-      });
-      cy.getCapabilities();
       cy.lifecycleSetup(appCallSign, state);
       Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, true);
     }
