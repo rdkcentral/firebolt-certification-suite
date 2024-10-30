@@ -66,7 +66,7 @@ Feature: Accessibility
             | preferredLanguages | spa,eng               |
 
     @sdk @transport @Sev2
-    Scenario Outline: Accessibility.closedCaptionsSettings - Validating API and Event Responses for <Scenario> given a null value
+    Scenario Outline: Accessibility.onClosedCaptionsSettingsChanged - Validating API and Event Responses for <Scenario> change to null
         Given '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
         When 1st party app invokes the 'Firebolt' API to '<Key>'
@@ -179,13 +179,19 @@ Feature: Accessibility
             | windowColor       | #7F7F7F             |
             | windowOpacity     | 40                  |
 
-    @sdk @transport @requiresPlatformImplementation @Sev2
-    Scenario: Accessibility.onClosedCaptionsSettingsChanged event - Clearing event listeners for onClosedCaptionsSettingsChanged
-        Given '3rd party app' registers for the 'accessibility onClosedCaptionsSettingsChanged' event using the 'Firebolt' API
-        And 3rd party stops listening to the event 'accessibility onClosedCaptionsSettingsChanged event'
-        When 1st party app invokes the 'Firebolt' API to 'disable closedCaptions'
-        Then 'Firebolt' platform responds to '1st party app' for 'disable closedCaptions'
-        And 'Firebolt' platform does not trigger event for 'onclosedCaptionsSettingsChanged'
+  @sdk @transport @requiresPlatformImplementation @Sev2
+  Scenario Outline: Accessibility.<Method> - Clearing event listeners
+    Given '3rd party app' registers for the 'accessibility <Method>' event using the 'Firebolt' API
+    And 3rd party stops listening to the event 'accessibility <Method> event'
+    When 1st party app invokes the 'Firebolt' API to 'disable <Value>'
+    Then 'Firebolt' platform responds to '1st party app' for 'disable <Value>'
+    And 'Firebolt' platform does not trigger event for '<Method>'
+
+    Examples:
+      | Method                            | Value            |
+      | onClosedCaptionsSettingsChanged   | closedCaptions   |
+      | onVoiceGuidanceSettingsChanged    | voiceGuidance    |
+      | onAudioDescriptionSettingsChanged | audioDescription |
 
     @sdk @transport @Sev0
     Scenario Outline: Accessibility.voiceGuidance - Validating API and Event Responses for <Scenario>
