@@ -113,6 +113,7 @@ module.exports = {
   ENV_DEVICE_MODEL: 'deviceModel',
   ENV_DEVICE_DISTRIBUTOR: 'deviceDistributor',
   ENV_PARTNER: 'partner',
+  ENV_SDK_VERSION: 'sdkVersion',
   ENV_TARGET_VERSION: 'targetVersion',
   ERROR: 'error',
   ERROR_CODE: 'Error code',
