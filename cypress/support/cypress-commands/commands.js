@@ -1021,7 +1021,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
             Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
           });
         });
-        cy.getCapabilities();  
+        cy.getCapabilities();
         cy.updateRunInfo();
       }
     });
