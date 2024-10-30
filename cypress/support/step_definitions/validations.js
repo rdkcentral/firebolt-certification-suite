@@ -290,7 +290,7 @@ Given(/Metrics collection process is '(initiated|stopped)'/, (action) => {
  * Then Validate all required consumption is within the limit of the threshold
  */
 Given(
-  /Validate (device|process|all) (memory|load|set size|required) consumption is within the limit of the threshold(?: of '(.+)' (cpu|bytes) with '(.+)' percentile)?$/,
+  /(device|process|all) (memory|load|set size|required) consumption should be within the limit of the threshold(?: of '(.+)' (cpu|bytes) with '(.+)' percentile)?$/,
   (type, process, threshold, bytes, percentile) => {
     const requestMap = {
       method: CONSTANTS.REQUEST_OVERRIDE_CALLS.PERFORMANCE_THRESHOLD_VALIDATOR,
