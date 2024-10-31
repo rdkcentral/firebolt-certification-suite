@@ -5,8 +5,8 @@ Feature: Discovery
       Given the environment has been set up for 'Discovery' tests
       And 3rd party 'certification' app is launched
 
-   @sdk @transport
-   Scenario Outline: Discovery.policy - Positive Scenario: <Scenario>
+   @sdk @transport @Sev0
+   Scenario Outline: Discovery.policy - Validating API and Event Responses when <Scenario>
       Given we test the '<FB_Object>' getters and setters '<Method>' to '<Value>'
       And '3rd party app' registers for the 'Firebolt' event
       And '3rd party app' invokes the 'Firebolt' get API
@@ -17,14 +17,14 @@ Feature: Discovery
       And 'Firebolt' platform triggers '3rd party app' event
 
       Examples:
-         | Scenario                          | Method               | Value | FB_Object                           |
-         | enable Recommendations            | allowPersonalization | true  | DISCOVERY_RECOMMENDATIONS           |
-         | disable Recommendations           | allowPersonalization | false | DISCOVERY_RECOMMENDATIONS           |
-         | enable remember watched programs  | allowWatchHistory    | true  | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
-         | disable remember watched programs | allowWatchHistory    | false | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
+         | Scenario                            | Method               | Value | FB_Object                           |
+         | enabling Recommendations            | allowPersonalization | true  | DISCOVERY_RECOMMENDATIONS           |
+         | disabling Recommendations           | allowPersonalization | false | DISCOVERY_RECOMMENDATIONS           |
+         | enabling remember watched programs  | allowWatchHistory    | true  | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
+         | disabling remember watched programs | allowWatchHistory    | false | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
 
-   @sdk @transport
-   Scenario Outline: Discovery.watched - Positive Scenario: <Scenario>
+   @sdk @transport @Sev1
+   Scenario Outline: Discovery.watched - Validating API and Event Response <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for watched content in discovery'
 
@@ -35,8 +35,8 @@ Feature: Discovery
          | With EntityId, Progress & completed status                 | notify watched content with entityid progress status      |
          | With EntityId, Progress, completed Status & watchedon date | notify watched content with entityid progress status date |
 
-   @sdk @transport
-   Scenario Outline: Discovery.watchNext - Positive Scenario: <Scenario>
+   @sdk @transport @Sev1
+   Scenario Outline: Discovery.watchNext - Validating API and Event Response <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for watchnext tile in discovery'
 
@@ -44,14 +44,22 @@ Feature: Discovery
          | Scenario                                                                              | API_Key                                                                        |
          | With title & identifiers with entityId                                                | suggest watchnext tile with entityid                                           |
          | With title & identifiers with entityID & assetID                                      | suggest watchnext tile with entityid assetid                                   |
-         | With title & identifiers with entityID, assetID & sessionId                           | suggest watchnext tile with entityid assetid sessionid                         |
          | With title & identifiers with entityID, assetID, sessionId & seriesId                 | suggest watchnext tile with entityid assetid sessionid seriesid                |
+
+   @sdk @transport @Sev2
+   Scenario Outline: Discovery.watchNext - Validating API and Event Response <Scenario>
+      When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+      Then 'Firebolt' platform responds with 'true for watchnext tile in discovery'
+
+      Examples:
+         | Scenario                                                                              | API_Key                                                                        |
+         | With title & identifiers with entityID, assetID & sessionId                           | suggest watchnext tile with entityid assetid sessionid                         |
          | With title & identifiers with entityID, assetID, sessionId, seriesId & appContentData | suggest watchnext tile with entityid assetid sessionid seriesid appcontentdata |
          | With title, identifiers & expires                                                     | suggest watchnext tile with expires                                            |
-         | With title, identfiers, expires & images                                              | suggest watchnext tile with expires images                                     |
-
-   @sdk @transport
-   Scenario Outline: Discovery.entitlements - Positive Scenario: <Scenario>
+         | With title, identfiers, expires & images                                              | suggest watchnext tile with expires images                                     |    
+   
+   @sdk @transport @Sev0
+   Scenario Outline: Discovery.entitlements - Validating API and Event Response <Scenario>>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for entitlements in discovery'
 
@@ -60,8 +68,8 @@ Feature: Discovery
          | With valid params       | notify entitlements                         |
          | With only entitlementId | notify entitlements with entitlementid only |
 
-   @sdk @transport
-   Scenario Outline: Discovery.watched - Negative Scenario: <Scenario> expecting error
+   @sdk @transport @Sev2
+   Scenario Outline: Discovery.watched - Validating API Error Handling When Given <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'invalid params for discovery watched'
 
@@ -74,8 +82,8 @@ Feature: Discovery
          | Invalid completed status | notify watched content with invalid completed       |
          | Invalid watched on       | notify watched content with invalid watchedon       |
 
-   @sdk @transport
-   Scenario Outline: Discovery.watchNext - Negative Scenario: <Scenario> expecting error
+   @sdk @transport @Sev2
+   Scenario Outline: Discovery.watchNext - Validating API Error Handling When Given <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'invalid params for discovery watchnext'
 
@@ -93,28 +101,28 @@ Feature: Discovery
          | Invalid identifiers seriesId       | suggest watchnext tile with invalid identifiers seriesid       |
          | Invalid identifiers appContentData | suggest watchnext tile with invalid identifiers appcontentdata |
 
-   @sdk @transport
-   Scenario Outline: Discovery.entitlements - Negative Scenario: <Scenario> expecting error
+   @sdk @transport @Sev2
+   Scenario Outline: Discovery.entitlements - Validating API Error Handling When Given <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'invalid params for discovery entitlements'
 
       Examples:
-         | Scenario                              | API_Key                                 |
-         | Invalid entitlements - no id          | notify entitlements with no id          |
-         | Invalid entitlements - integer params | notify entitlements with integer params |
+         | Scenario                                 | API_Key                                 |
+         | Invalid entitlements with no id          | notify entitlements with no id          |
+         | Invalid entitlements with integer params | notify entitlements with integer params |
 
-   @sdk @transport
-   Scenario Outline: Discovery.signIn - Negative Scenario: <Scenario> expecting error
+   @sdk @transport @Sev2
+   Scenario Outline: Discovery.signIn - Validating API Error Handling When Given <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'invalid params for discovery signIn'
 
       Examples:
          | Scenario                              | API_Key                                      |
-         | Invalid entitlements - no id          | notify user has signedIn with no id          |
-         | Invalid entitlements - integer params | notify user has signedIn with integer params |
+         | Invalid entitlements with no id          | notify user has signedIn with no id          |
+         | Invalid entitlements with integer params | notify user has signedIn with integer params |
 
-   @sdk @transport
-   Scenario Outline: Discovery.contentAccess - Positive Scenario: <Scenario>
+   @sdk @transport @Sev1
+   Scenario Outline: Discovery.contentAccess - Validating API and Event Response <Scenario>>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'null for discovery contentAccess'
 
@@ -131,14 +139,14 @@ Feature: Discovery
          | with availabilities param empty                              | notify content access With availabilities param empty                             |
          | with entitlements param empty                                | notify content access With entitlements param empty                               |
 
-   @sdk @transport
-   Scenario: Discovery.clearContentAccess - Positive Scenario: Clear both availabilities and entitlements from the subscriber
+   @sdk @transport @Sev2
+   Scenario: Discovery.clearContentAccess - Clear availabilities and entitlements from the subscriber
       Given we test the 'DISCOVERY_CLEAR_CONTENTACCESS' getters and setters
       When '3rd party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '3rd party app' get API
 
-   @sdk @transport
-   Scenario Outline: Discovery.contentAccess - Negative Scenario: <Scenario> expecting error
+   @sdk @transport @Sev2
+   Scenario Outline: Discovery.contentAccess -  Validating API Error Handling With <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'invalid parameter error for discovery contentAccess'
 
@@ -158,8 +166,8 @@ Feature: Discovery
          | Invalid entitlements invalid startTime     | notify content access with invalid entitlements invalid startTime     |
          | Invalid entitlements invalid endTime       | notify content access with invalid entitlements invalid endTime       |
 
-   @regression @sdk @requiresPlatformImplementation
-   Scenario: Discovery.onPolicyChanged - Positive Scenario: Clearing event listeners
+   @regression @sdk @requiresPlatformImplementation @Sev2   
+   Scenario: Discovery.onPolicyChanged - Clearing event listeners
       Given '3rd party app' registers for the 'discovery onPolicyChanged' event using the 'Firebolt' API
       And 3rd party stops listening to the event 'discovery onPolicyChanged event'
       When 1st party app invokes the 'Firebolt' API to 'set allowPersonalization to true'
