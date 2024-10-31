@@ -1,3 +1,10 @@
+# [1.4.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.3...v1.4.0-dev.4) (2024-10-31)
+
+
+### Features
+
+* updated utils.js for getEnvVariable fix ([#246](https://github.com/rdkcentral/firebolt-certification-suite/issues/246)) ([6fe233e](https://github.com/rdkcentral/firebolt-certification-suite/commit/6fe233e72d8db2c85317afcba4d176fe73c76d27))
+
 # [1.4.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.2...v1.4.0-dev.3) (2024-10-28)
 
 
