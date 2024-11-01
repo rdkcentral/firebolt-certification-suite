@@ -1557,25 +1557,23 @@ Cypress.Commands.add('envConfigSetup', () => {
  * cy.initiatePerformanceMetrics()
  */
 Cypress.Commands.add('initiatePerformanceMetrics', () => {
-  // Retrieve the scenario name from the env.
-  const scenarioName = Cypress.env(CONSTANTS.SCENARIO_NAME);
-
   // Check if performance metrics is enabled
   if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) === true) {
+    // Retrieve the scenario name from the env.
+    const scenarioName = Cypress.env(CONSTANTS.SCENARIO_NAME);
+
     // Request to create a marker
     const requestMap = {
       method: CONSTANTS.REQUEST_OVERRIDE_CALLS.CREATE_MARKER,
       params: scenarioName,
     };
-    fireLog.info(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
-      fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
+      const markerCreated = result.success;
+      Cypress.env(CONSTANTS.MARKER_CREATION_STATUS, markerCreated);
     });
 
     // Save the start time in the environment variable
     const epochTime = Number.parseInt(Date.now() / 1000);
     Cypress.env(CONSTANTS.THRESHOLD_MONITOR_START_TIME, epochTime);
-  } else {
-    cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
   }
 });

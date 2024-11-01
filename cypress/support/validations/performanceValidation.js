@@ -29,7 +29,7 @@ const UTILS = require('../cypress-support/src/utils');
  */
 Cypress.Commands.add('performanceValidation', (object) => {
   // Check if performance metrics are enabled
-  if (UTILS.getEnvVariable('performanceMetrics')) {
+  if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS)) {
     // Extract validation params or set defaults
     const type = object.validations?.[0]?.type || 'all';
     const process = object.validations?.[0]?.process || 'required';
