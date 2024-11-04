@@ -92,8 +92,8 @@ Feature: Localization
             | Method                  | Value      |
             | locality                | washington |
             | countryCode             | PH         |
-            | preferredAudioLanguages | spa,eng    |
-            | preferredAudioLanguages | eng,spa    |
+            | preferredAudioLanguages | Spanish    |
+            | preferredAudioLanguages | English    |
             | postalCode              | 12345      |
 
     @regression @sdk @requiresPlatformImplementation @Sev2
