@@ -97,7 +97,7 @@ Feature: Localization
             | postalCode              | 12345      |
 
     @regression @sdk @requiresPlatformImplementation @Sev2
-    Scenario Outline: Localization.<Method_Name> - Clearing event listeners
+    Scenario Outline: Localization.<Method_Name> - Clearing event listeners for locality change
         Given '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
         And 3rd party stops listening to the event '<Clear_Event_Name>'
         When 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
@@ -105,8 +105,8 @@ Feature: Localization
         And 'Firebolt' platform does not trigger event for '<Event_Validation_Key>'
 
         Examples:
-            | Method_Name    | Registered_Event                  | Clear_Event_Name                        | Set_API_Key                | Event_Validation_Key |
-            | setLocality    | localization onLocalityChanged    | localization onLocalityChanged event    | set locality to Washington | onLocalityChanged    |
-            | setCountryCode | localization onCountryCodeChanged | localization onCountryCodeChanged event | set countrycode to PH      | onCountryCodeChanged |
-            | setLocale      | localization onlocalechanged      | localization onLocaleChanged event      | set locale to enUS         | onLocaleChanged      |
-            | setLanguage    | localization onlanguagechanged    | localization onLanguageChanged event    | set language to en         | onLanguageChanged    |
+            | Method_Name          | Registered_Event                  | Clear_Event_Name                        | Set_API_Key                | Event_Validation_Key |
+            | onLocalityChanged    | localization onLocalityChanged    | localization onLocalityChanged event    | set locality to Washington | onLocalityChanged    |
+            | onCountryCodeChanged | localization onCountryCodeChanged | localization onCountryCodeChanged event | set countrycode to PH      | onCountryCodeChanged |
+            | onlocalechanged      | localization onlocalechanged      | localization onLocaleChanged event      | set locale to enUS         | onLocaleChanged      |
+            | onlanguagechanged    | localization onlanguagechanged    | localization onLanguageChanged event    | set language to en         | onLanguageChanged    |
