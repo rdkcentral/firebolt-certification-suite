@@ -78,7 +78,7 @@ Feature: Localization
             | language                | es         |
 
     @sdk @transport @Sev1
-    Scenario Outline: Localization.<Method> - Validating API and Event Responses for <Method> change to <Value>
+    Scenario Outline: Localization.<Method> - Validating API and Event Responses for <Method> change to <Scenario>
         Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
@@ -89,12 +89,12 @@ Feature: Localization
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Method                  | Value      |
-            | locality                | washington |
-            | countryCode             | PH         |
-            | preferredAudioLanguages | Spanish    |
-            | preferredAudioLanguages | English    |
-            | postalCode              | 12345      |
+        | Scenario      | Method                  | Value      |
+        | washington    | locality                | washington |
+        | PH            | countryCode             | PH         |
+        | Spanish       | preferredAudioLanguages | spa,eng    |
+        | English       | preferredAudioLanguages | eng,spa    |
+        | 12345         | postalCode              | 12345      |
 
     @regression @sdk @requiresPlatformImplementation @Sev2
     Scenario Outline: Localization.<Method_Name> - Clearing event listeners
