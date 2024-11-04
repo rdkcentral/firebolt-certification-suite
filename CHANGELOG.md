@@ -1,3 +1,10 @@
+# [1.4.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.4...v1.4.0-dev.5) (2024-11-04)
+
+
+### Bug Fixes
+
+* SDK report field for module runs ([#247](https://github.com/rdkcentral/firebolt-certification-suite/issues/247)) ([e6ad482](https://github.com/rdkcentral/firebolt-certification-suite/commit/e6ad4827d5f30ea92622aa7524cf25ea4b5f21f9))
+
 # [1.4.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.3...v1.4.0-dev.4) (2024-10-31)
 
 
