@@ -209,6 +209,14 @@ Cypress.Commands.add('getSdkVersion', () => {
               );
             Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
           }
+          if (response?.result?.sdk?.readable) {
+            const responseResultSDK =
+              `${response?.result?.sdk?.major}.${response?.result?.sdk?.minor}.${response?.result?.sdk?.patch}`.replace(
+                /"/g,
+                ''
+              );
+            Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+          }
         });
       });
   }
@@ -302,7 +310,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                   const labelToEnvMap = {
                     [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                     [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
-                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.SDK_VERSION,
+                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
                     [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
                     [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
                     [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
