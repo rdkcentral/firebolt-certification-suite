@@ -6,29 +6,29 @@ Feature: SecondScreen
       And 3rd party 'certification' app is launched
 
    @sdk @transport
-   Scenario Outline: SecondScreen.<Method> - Positive Scenario: <Scenario>
+   Scenario Outline: SecondScreen.<Method> - Validating API and Event Responses when <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_key>'
       Then 'Firebolt' platform responds with '<Validation_key>'      
 
 
       Examples:
-         | Scenario                                    | Method    | API_key                                  | Validation_key                  |
-         | Validate passing device with empty array    | device    | get secondscreen device with empty array | expected secondscreen device    |
-         | Validate passing device with string         | device    | get secondscreen device with string      | expected secondscreen device    |
-         | Validate passing protocols with empty array | protocols | get secondscreen protocols               | expected secondscreen protocols |
+         | Scenario                           | Method    | API_key                                  | Validation_key                  |
+         | passing device with empty array    | device    | get secondscreen device with empty array | expected secondscreen device    |
+         | passing device with string         | device    | get secondscreen device with string      | expected secondscreen device    |
+         | passing protocols with empty array | protocols | get secondscreen protocols               | expected secondscreen protocols |
 
    @sdk @transport
-   Scenario Outline: SecondScreen.device - Negative Scenario: <Scenario> expecting error
+   Scenario Outline: SecondScreen.device - Validating API Error handling when <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
 
       Examples:
          | Scenario                           | API_key                              | Validation_key                             |
-         | Validate passing device as boolean | get secondscreen device with boolean | invalid parameters for secondscreen device |
-         | Validate passing device as integer | get secondscreen device with integer | invalid parameters for secondscreen device |
+         | passing device as boolean | get secondscreen device with boolean | invalid parameters for secondscreen device |
+         | passing device as integer | get secondscreen device with integer | invalid parameters for secondscreen device |
 
    @sdk @transport
-   Scenario: SecondScreen.FriendlyName - Positive Scenario: Validate Set friendlyName
+   Scenario: SecondScreen.FriendlyName - Validating API and Event Responses when changing device Name
       Given we test the 'SECONDSCREEN_FRIENDLYNAME' getters and setters 'name' to 'Living Room'
       And '3rd party app' registers for the 'Firebolt' event
       And '3rd party app' invokes the 'Firebolt' get API
@@ -39,7 +39,7 @@ Feature: SecondScreen
       And 'Firebolt' platform triggers '3rd party app' event
 
    @regression @sdk @requiresPlatformImplementation
-   Scenario: SecondScreen.onFriendlyNameChanged - Positive Scenario: Validating event clearing listeners
+   Scenario: SecondScreen.onFriendlyNameChanged - Clearing event listeners
       Given '3rd party app' registers for the 'secondscreen onFriendlyNameChanged' event using the 'Firebolt' API
       And 3rd party stops listening to the event 'secondscreen onFriendlyNameChanged event'
       When 1st party app invokes the 'Firebolt' API to 'set friendlyName to guest room'
@@ -47,7 +47,7 @@ Feature: SecondScreen
       And 'Firebolt' platform does not trigger event for 'onFriendlyNameChanged'
 
    @regression @sdk @requiresPlatformImplementation @notSupported
-   Scenario Outline: SecondScreen.<EventName> - Positive Scenario: Validating event name in response
+   Scenario Outline: SecondScreen.<EventName> - Validating API and Event Responses
       When '3rd party app' registers for the '<RegisteredEvent>' event using the 'Firebolt' API
       And User triggers event with value as '<EventParams>'
       Then 'Firebolt' platform triggers event '<Event_Validation_Key>'
@@ -60,7 +60,7 @@ Feature: SecondScreen
          | onCloseRequest  | secondscreen onCloseRequest  | secondscreen onCloseRequest event  | onCloseRequest event  |
 
    @regression @sdk @requiresPlatformImplementation @notSupported
-   Scenario Outline: SecondScreen.<Event_Name> - Positive Scenario: Validating event Clearing listeners
+   Scenario Outline: SecondScreen.<Event_Name> - Clearing event listeners
       When '3rd party app' registers for the '<Registered_Event>' event using the 'Firebolt' API
       And 3rd party stops listening to the event '<Clear_Event_Name>'
       And User triggers event with value as '<Event_Params>'
