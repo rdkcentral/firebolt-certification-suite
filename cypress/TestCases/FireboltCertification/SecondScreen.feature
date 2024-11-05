@@ -6,7 +6,7 @@ Feature: SecondScreen
       And 3rd party 'certification' app is launched
 
    @sdk @transport
-   Scenario Outline: SecondScreen.<Method> - Validating API and Event Responses when <Scenario>
+   Scenario Outline: SecondScreen.<Method> - Validating API Method responses when <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_key>'
       Then 'Firebolt' platform responds with '<Validation_key>'      
 
