@@ -24,49 +24,49 @@ Feature: Discovery
          | disabling remember watched programs | allowWatchHistory    | false | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
 
    @sdk @transport @Sev1
-   Scenario Outline: Discovery.watched - Validating API and Event Response <Scenario>
+   Scenario Outline: Discovery.watched - Validating API Method repsonse <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for watched content in discovery'
 
       Examples:
          | Scenario                                                   | API_Key                                                   |
-         | With only EntityId                                         | notify watched content with only entityid                 |
-         | With EntityId and Progress                                 | notify watched content with entityid progress             |
-         | With EntityId, Progress & completed status                 | notify watched content with entityid progress status      |
-         | With EntityId, Progress, completed Status & watchedon date | notify watched content with entityid progress status date |
+         | with only EntityId                                         | notify watched content with only entityid                 |
+         | with EntityId and Progress                                 | notify watched content with entityid progress             |
+         | with EntityId, Progress & completed status                 | notify watched content with entityid progress status      |
+         | with EntityId, Progress, completed Status & watchedon date | notify watched content with entityid progress status date |
 
    @sdk @transport @Sev1
-   Scenario Outline: Discovery.watchNext - Validating API and Event Response <Scenario>
+   Scenario Outline: Discovery.watchNext - Validating API Method response <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for watchnext tile in discovery'
 
       Examples:
          | Scenario                                                                              | API_Key                                                                        |
-         | With title & identifiers with entityId                                                | suggest watchnext tile with entityid                                           |
-         | With title & identifiers with entityID & assetID                                      | suggest watchnext tile with entityid assetid                                   |
-         | With title & identifiers with entityID, assetID, sessionId & seriesId                 | suggest watchnext tile with entityid assetid sessionid seriesid                |
+         | with title & identifiers with entityId                                                | suggest watchnext tile with entityid                                           |
+         | with title & identifiers with entityID & assetID                                      | suggest watchnext tile with entityid assetid                                   |
+         | with title & identifiers with entityID, assetID, sessionId & seriesId                 | suggest watchnext tile with entityid assetid sessionid seriesid                |
 
    @sdk @transport @Sev2
-   Scenario Outline: Discovery.watchNext - Validating API and Event Response <Scenario>
+   Scenario Outline: Discovery.watchNext - Validating API Method response <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for watchnext tile in discovery'
 
       Examples:
          | Scenario                                                                              | API_Key                                                                        |
-         | With title & identifiers with entityID, assetID & sessionId                           | suggest watchnext tile with entityid assetid sessionid                         |
-         | With title & identifiers with entityID, assetID, sessionId, seriesId & appContentData | suggest watchnext tile with entityid assetid sessionid seriesid appcontentdata |
-         | With title, identifiers & expires                                                     | suggest watchnext tile with expires                                            |
-         | With title, identfiers, expires & images                                              | suggest watchnext tile with expires images                                     |    
+         | with title & identifiers with entityID, assetID & sessionId                           | suggest watchnext tile with entityid assetid sessionid                         |
+         | with title & identifiers with entityID, assetID, sessionId, seriesId & appContentData | suggest watchnext tile with entityid assetid sessionid seriesid appcontentdata |
+         | with title, identifiers & expires                                                     | suggest watchnext tile with expires                                            |
+         | with title, identfiers, expires & images                                              | suggest watchnext tile with expires images                                     |    
    
    @sdk @transport @Sev0
-   Scenario Outline: Discovery.entitlements - Validating API and Event Response <Scenario>>
+   Scenario Outline: Discovery.entitlements - Validating API Method response <Scenario>>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for entitlements in discovery'
 
       Examples:
          | Scenario                | API_Key                                     |
-         | With valid params       | notify entitlements                         |
-         | With only entitlementId | notify entitlements with entitlementid only |
+         | with valid params       | notify entitlements                         |
+         | with only entitlementId | notify entitlements with entitlementid only |
 
    @sdk @transport @Sev2
    Scenario Outline: Discovery.watched - Validating API Error Handling When Given <Scenario>
@@ -75,12 +75,12 @@ Feature: Discovery
 
       Examples:
          | Scenario                 | API_Key                                             |
-         | Empty param              | notify watched content with empty parameter         |
-         | Invalid EntityID number  | notify watched content with invalid entityid number |
-         | Invalid progress         | notify watched content with invalid progress        |
-         | Invalid progress string  | notify watched content with invalid progress string |
-         | Invalid completed status | notify watched content with invalid completed       |
-         | Invalid watched on       | notify watched content with invalid watchedon       |
+         | empty param              | notify watched content with empty parameter         |
+         | invalid EntityID number  | notify watched content with invalid entityid number |
+         | invalid progress         | notify watched content with invalid progress        |
+         | invalid progress string  | notify watched content with invalid progress string |
+         | invalid completed status | notify watched content with invalid completed       |
+         | invalid watched on       | notify watched content with invalid watchedon       |
 
    @sdk @transport @Sev2
    Scenario Outline: Discovery.watchNext - Validating API Error Handling When Given <Scenario>
@@ -90,16 +90,16 @@ Feature: Discovery
       Examples:
          | Scenario                           | API_Key                                                        |
          | with only title                    | suggest watchnext tile with only title                         |
-         | Invalid identifiers                | suggest watchnext tile with invalid identifiers                |
-         | Invalid expires                    | suggest watchnext tile with invalid expires                    |
-         | Invalid expires-integer            | suggest watchnext tile with invalid expires integer            |
-         | Invalid images                     | suggest watchnext tile with invalid images                     |
-         | Invalid image-integer              | suggest watchnext tile with invalid image integer              |
-         | Invalid identifiers EntityId       | suggest watchnext tile with invalid identifiers entityid       |
-         | Invalid identifiers assetID        | suggest watchnext tile with invalid identifiers assetid        |
-         | Invalid identifiers sessionId      | suggest watchnext tile with invalid identifiers sessionid      |
-         | Invalid identifiers seriesId       | suggest watchnext tile with invalid identifiers seriesid       |
-         | Invalid identifiers appContentData | suggest watchnext tile with invalid identifiers appcontentdata |
+         | invalid identifiers                | suggest watchnext tile with invalid identifiers                |
+         | invalid expires                    | suggest watchnext tile with invalid expires                    |
+         | invalid expires-integer            | suggest watchnext tile with invalid expires integer            |
+         | invalid images                     | suggest watchnext tile with invalid images                     |
+         | invalid image-integer              | suggest watchnext tile with invalid image integer              |
+         | invalid identifiers EntityId       | suggest watchnext tile with invalid identifiers entityid       |
+         | invalid identifiers assetID        | suggest watchnext tile with invalid identifiers assetid        |
+         | invalid identifiers sessionId      | suggest watchnext tile with invalid identifiers sessionid      |
+         | invalid identifiers seriesId       | suggest watchnext tile with invalid identifiers seriesid       |
+         | invalid identifiers appContentData | suggest watchnext tile with invalid identifiers appcontentdata |
 
    @sdk @transport @Sev2
    Scenario Outline: Discovery.entitlements - Validating API Error Handling When Given <Scenario>
@@ -108,8 +108,8 @@ Feature: Discovery
 
       Examples:
          | Scenario                                 | API_Key                                 |
-         | Invalid entitlements with no id          | notify entitlements with no id          |
-         | Invalid entitlements with integer params | notify entitlements with integer params |
+         | invalid entitlements with no id          | notify entitlements with no id          |
+         | invalid entitlements with integer params | notify entitlements with integer params |
 
    @sdk @transport @Sev2
    Scenario Outline: Discovery.signIn - Validating API Error Handling When Given <Scenario>
@@ -118,26 +118,26 @@ Feature: Discovery
 
       Examples:
          | Scenario                              | API_Key                                      |
-         | Invalid entitlements with no id          | notify user has signedIn with no id          |
-         | Invalid entitlements with integer params | notify user has signedIn with integer params |
+         | invalid entitlements with no id          | notify user has signedIn with no id          |
+         | invalid entitlements with integer params | notify user has signedIn with integer params |
 
    @sdk @transport @Sev1
-   Scenario Outline: Discovery.contentAccess - Validating API and Event Response <Scenario>>
+   Scenario Outline: Discovery.contentAccess - Validating API Method Response <Scenario>>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'null for discovery contentAccess'
 
       Examples:
          | Scenario                                                     | API_Key                                                                           |
-         | With availabilities type channel-type                        | notify content access With availabilities channel type                            |
-         | With availabilities type program-type                        | notify content access With availabilities program type                            |
-         | With availabilities type, Id                                 | notify content access With availabilities type and Id                             |
-         | With availabilities type, Id, catalog Id                     | notify content access With availabilities type Id and catalogId                   |
-         | With availabilities type, Id, catalog Id, startTime          | notify content access With availabilities type Id catalogId and startTime         |
-         | With availabilities type, Id, catalog Id, startTime, endTime | notify content access With availabilities type Id catalogId startTime and endTime |
-         | With availabilities and entitlements                         | notify content access With availabilities and entitlements                        |
-         | With only entitlements                                       | notify content access With only entitlements                                      |
-         | with availabilities param empty                              | notify content access With availabilities param empty                             |
-         | with entitlements param empty                                | notify content access With entitlements param empty                               |
+         | with availabilities type channel-type                        | notify content access with availabilities channel type                            |
+         | with availabilities type program-type                        | notify content access with availabilities program type                            |
+         | with availabilities type, Id                                 | notify content access with availabilities type and Id                             |
+         | with availabilities type, Id, catalog Id                     | notify content access with availabilities type Id and catalogId                   |
+         | with availabilities type, Id, catalog Id, startTime          | notify content access with availabilities type Id catalogId and startTime         |
+         | with availabilities type, Id, catalog Id, startTime, endTime | notify content access with availabilities type Id catalogId startTime and endTime |
+         | with availabilities and entitlements                         | notify content access with availabilities and entitlements                        |
+         | with only entitlements                                       | notify content access with only entitlements                                      |
+         | with availabilities param empty                              | notify content access with availabilities param empty                             |
+         | with entitlements param empty                                | notify content access with entitlements param empty                               |
 
    @sdk @transport @Sev2
    Scenario: Discovery.clearContentAccess - Clear availabilities and entitlements from the subscriber
@@ -146,25 +146,25 @@ Feature: Discovery
       Then 'Firebolt' platform responds to '3rd party app' get API
 
    @sdk @transport @Sev2
-   Scenario Outline: Discovery.contentAccess -  Validating API Error Handling With <Scenario>
+   Scenario Outline: Discovery.contentAccess -  Validating API Error Handling with <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'invalid parameter error for discovery contentAccess'
 
       Examples:
          | Scenario                                   | API_Key                                                               |
-         | Without params                             | notify content access without params                                  |
-         | Missing availabilities type value          | notify content access without availabilities type value               |
-         | Missing availabilities id value            | notify content access without availabilities id value                 |
-         | Invalid availabilities type value          | notify content access with invalid availabilities type value          |
-         | Invalid availabilities type                | notify content access with invalid availabilities type                |
-         | Invalid availabilities Id                  | notify content access with invalid availabilities Id                  |
-         | Invalid availabilities catalog Id          | notify content access with invalid availabilities catalog Id          |
-         | Invalid availabilities startTime           | notify content access with invalid availabilities startTime           |
-         | Invalid availabilities endTime             | notify content access with invalid availabilities endTime             |
-         | Invalid entitlements boolean entitlementId | notify content access with invalid entitlements boolean entitlementId |
-         | Invalid entitlements integer entitlementId | notify content access with invalid entitlements integer entitlementId |
-         | Invalid entitlements invalid startTime     | notify content access with invalid entitlements invalid startTime     |
-         | Invalid entitlements invalid endTime       | notify content access with invalid entitlements invalid endTime       |
+         | without params                             | notify content access without params                                  |
+         | missing availabilities type value          | notify content access without availabilities type value               |
+         | missing availabilities id value            | notify content access without availabilities id value                 |
+         | invalid availabilities type value          | notify content access with invalid availabilities type value          |
+         | invalid availabilities type                | notify content access with invalid availabilities type                |
+         | invalid availabilities Id                  | notify content access with invalid availabilities Id                  |
+         | invalid availabilities catalog Id          | notify content access with invalid availabilities catalog Id          |
+         | invalid availabilities startTime           | notify content access with invalid availabilities startTime           |
+         | invalid availabilities endTime             | notify content access with invalid availabilities endTime             |
+         | invalid entitlements boolean entitlementId | notify content access with invalid entitlements boolean entitlementId |
+         | invalid entitlements integer entitlementId | notify content access with invalid entitlements integer entitlementId |
+         | invalid entitlements invalid startTime     | notify content access with invalid entitlements invalid startTime     |
+         | invalid entitlements invalid endTime       | notify content access with invalid entitlements invalid endTime       |
 
    @regression @sdk @requiresPlatformImplementation @Sev2   
    Scenario: Discovery.onPolicyChanged - Clearing event listeners
