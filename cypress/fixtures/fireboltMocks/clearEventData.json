@@ -3,6 +3,14 @@
         "event": "accessibility.onClosedCaptionsSettingsChanged",
         "firstParty": false
     },
+    "ACCESSIBILITY_ONVOICEGUIDANCESETTINGSCHANGED_EVENT":{
+        "event": "accessibility.onVoiceGuidanceSettingsChanged",
+        "firstParty": false
+    },
+    "ACCESSIBILITY_ONAUDIODESCRIPTIONSETTINGSCHANGED_EVENT":{
+        "event": "accessibility.onAudioDescriptionSettingsChanged",
+        "firstParty": false
+    },
     "ADVERTISING_ONPOLICYCHANGED_EVENT":{
         "event": "advertising.onPolicyChanged",
         "firstParty": false

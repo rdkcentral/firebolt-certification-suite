@@ -1032,6 +1032,18 @@
         "content": "NULL",
         "expectingError": false
     },
+    "ONAUDIODESCRIPTIONSETTINGSCHANGED": {
+        "event": "accessibility.onAudioDescriptionSettingsChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "NULL",
+        "expectingError": false
+    },
+    "ONVOICEGUIDANCESETTINGSCHANGED": {
+        "event": "accessibility.onVoiceGuidanceSettingsChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "NULL",
+        "expectingError": false
+    },
     "EXPECT_ERROR_FOR_CLOSEDCAPTIONS_SETTINGS":{
         "method": "accessibility.closedCaptionsSettings",
         "expected": "error"
