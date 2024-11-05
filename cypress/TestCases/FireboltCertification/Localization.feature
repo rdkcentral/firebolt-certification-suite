@@ -19,9 +19,12 @@ Feature: Localization
         Then 'Firebolt' platform responds with '<Validation_Key>'
 
         Examples:
-            | Scenario                      | API_Key                                              | Validation_Key                               |
-            | string as key and value       | set localization addAdditionalInfo with string       | string for localization additionalInfo       |
-            | empty string as key and value | set localization addAdditionalInfo with empty string | empty string for localization additionalInfo |
+            | Scenario                           | API_Key                                              | Validation_Key                               |
+            | string as key and value            | set localization addAdditionalInfo with string       | string for localization additionalInfo       |
+            | empty string as key and value      | set localization addAdditionalInfo with empty string | empty string for localization additionalInfo |
+            | string as key and integer as value | set localization addAdditionalInfo with integer      | integer for localization additionalInfo      |
+            | string as key and boolean as value | set localization addAdditionalInfo with boolean      | boolean for localization additionalInfo      |
+
 
     @sdk @transport @Sev2
     Scenario Outline: Localization.AdditionalInfo - Removing <Scenario> from localization additional info
@@ -32,9 +35,11 @@ Feature: Localization
         Then 'Firebolt' platform responds with '<Validation_Key>'
 
         Examples:
-            | Scenario                       | API_Key                                                 | Validation_Key                                  |
-            | string as key and value        | set localization removeAdditionalInfo with string       | empty key/value for localization additionalInfo |
-            | empty string as key and value  | set localization removeAdditionalInfo with empty string | empty response for localization additionalInfo  |
+            | Scenario                           | API_Key                                                 | Validation_Key                                  |
+            | string as key and value            | set localization removeAdditionalInfo with string       | empty key value for localization additionalInfo |
+            | empty string as key and value      | set localization removeAdditionalInfo with empty string | empty response for localization additionalInfo  |
+            | string as key and integer as value | set localization removeAdditionalInfo with string       | empty response for localization additionalInfo  |
+            | string as key and boolean as value | set localization removeAdditionalInfo with string       | empty response for localization additionalInfo  |
 
     @sdk @transport @Sev2
     Scenario: Localization.latlon - Get Latitude and Longitude localization info
@@ -94,7 +99,7 @@ Feature: Localization
             | PH            | countryCode             | PH         |
             | Spanish       | preferredAudioLanguages | spa,eng    |
             | English       | preferredAudioLanguages | eng,spa    |
-            | 12345         | postalCode              | 12345      |
+            | 12345         | postalCode              | "12345"    |
 
     @regression @sdk @requiresPlatformImplementation @Sev2
     Scenario Outline: Localization.<Method_Name> - Clearing event listeners
