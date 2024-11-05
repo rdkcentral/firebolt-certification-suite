@@ -6,7 +6,7 @@ Feature: Metrics
         And 3rd party 'certification' app is launched
 
     @sdk @transport
-    Scenario Outline: Metrics.<Method> - Validating API and Event Responses
+    Scenario Outline: Metrics.<Method> - Validating API Method response content
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
 
@@ -41,7 +41,7 @@ Feature: Metrics
             | mediaEnded with emptyParam           | mediaEnded           | notify that playback has stopped with empty parameter          | invalid params for metrics mediaEnded           |
 
     @sdk @transport
-    Scenario Outline: Metrics.<Method> - Validating API and Event Responses for <Scenario>
+    Scenario Outline: Metrics.<Method> - Validating API Method response for <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
 
