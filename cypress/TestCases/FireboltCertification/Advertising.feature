@@ -6,7 +6,7 @@ Feature: Advertising
       And 3rd party 'certification' app is launched
 
    @sdk @transport @Sev0
-   Scenario Outline: Advertising.policy - Validating API and Event Responses when <Scenario>
+   Scenario Outline: Advertising.policy - Validating API and Event responses when <Scenario>
       Given '3rd party app' registers for the 'advertising onPolicyChanged' event using the 'Firebolt' API
       And '3rd party app' invokes the 'Firebolt' API to 'get advertising policy'
       When 1st party app invokes the 'Firebolt' API to '<API_Key>'
@@ -21,7 +21,7 @@ Feature: Advertising
          | disabling limitAdTracking | disable limitAdTracking | Advertising policy limitAdTracking as true  | onPolicyChanged for advertising limitAdTracking with true  |
 
    @sdk @transport @Sev1
-   Scenario Outline: Advertising.policy - Validating API and Event Responses when <Method> set to <Value>
+   Scenario Outline: Advertising.policy - Validating API and Event responses when <Method> set to <Value>
       Given we test the 'ADVERTISING_SKIPRESTRICTION' getters and setters '<Method>' to '<Value>'
       And '3rd party app' registers for the 'Firebolt' event
       And '3rd party app' invokes the 'Firebolt' get API
@@ -39,18 +39,18 @@ Feature: Advertising
          | skipRestriction | all          |
 
    @sdk @transport @Sev2
-   Scenario: Advertising.deviceAttributes - Validating API and Event Responses content
+   Scenario: Advertising.deviceAttributes - Validating API Method response content
       Given we test the 'ADVERTISING_DEVICEATTRIBUTES' getters and setters
       When '3rd party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '3rd party app' get API
 
    @sdk @transport @Sev2
-   Scenario: Advertising.appBundleId - Validating API and Event Responses content
+   Scenario: Advertising.appBundleId - Validating API Method response content
       When '3rd party app' invokes the 'Firebolt' API to 'get appBundleId'
       Then 'Firebolt' platform responds with 'advertising appBundleId'
 
    @sdk @transport @Sev1
-   Scenario Outline: Advertising.advertisingId - Validating API and Event Responses when <Scenario>
+   Scenario Outline: Advertising.advertisingId - Validating API and Event responses when <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to 'get advertisingId'
       And '3rd party app' invokes the 'Firebolt' API to 'get initialization parameters'
       And 1st party app invokes the 'Firebolt' API to '<API_Key>'
@@ -66,7 +66,7 @@ Feature: Advertising
          | enabling limitAdTracking  | disable limitAdTracking | limitAdTracking ON for advertisingId  | parameters initialization advertisingId ad on  |
 
    @sdk @transport @Sev2
-   Scenario Outline: Advertising.config - Validating API and Event Responses for Coppa set to <Scenario>
+   Scenario Outline: Advertising.config - Validating API Method responses for Coppa set to <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Method_Validation_key>'
 
@@ -80,7 +80,7 @@ Feature: Advertising
          | FALSE with environment value test | get coppa as false with environment value test | advertising config coppa as zero |
 
    @sdk @transport @Sev2
-   Scenario Outline: Advertising.config - Validating API and Event Responses when <Scenario>
+   Scenario Outline: Advertising.config - Validating API and Event responses when <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<CORE_API_Key>'
       And 1st party app invokes the 'Firebolt' API to '<MANAGE_API_Key>'
       Then 'Firebolt' platform responds to '1st party app' with '<MANAGE_API_Key>'
