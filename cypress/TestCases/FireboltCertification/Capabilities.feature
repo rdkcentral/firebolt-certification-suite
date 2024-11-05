@@ -151,7 +151,7 @@ Feature: Capabilities
       | discovery watched capability      | check if discovery watched capability is permitted with role use      | notify watched content with only entityid | true for watched content in discovery |
 
   @sdk @transport
-  Scenario Outline: Capabilities.<Method> - Validating API Error Handling Giving <Scenario>
+  Scenario Outline: Capabilities.<Method> - Validating API Error handling given <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<Error_Key>'
     Then 'Firebolt' platform responds with '<Error_Validation_Key>'
     Examples:
