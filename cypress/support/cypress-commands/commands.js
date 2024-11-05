@@ -140,9 +140,10 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
 // Reason: If refui is not there and certification=false then sendMessageToPlatofrms will not have device.version.sdk value.
 Cypress.Commands.add('getSdkVersion', () => {
   let latestSDKversion;
-  const platformSDKVersion = UTILS.getEnvVariable(CONSTANTS.ENV_PLATFORM_SDK_VERSION, false);
-  if (platformSDKVersion) {
-    return platformSDKVersion;
+  const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
+  const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false);
+  if (sdkVersion) {
+    return sdkVersion;
   } else {
     // fetching latestSDKversion from Firebolt-specificaiton URL
     cy.request({
@@ -166,45 +167,57 @@ Cypress.Commands.add('getSdkVersion', () => {
       })
       .then((latestSDKversion) => {
         // Calling device.version API
-        cy.getDeviceData(CONSTANTS.DEVICE_VERSION, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-          (response) => {
-            // If the response is invalid, assign the latest SDK version to the environment variable.
-            if (response?.api?.readable && response.sdk?.readable) {
-              // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
-              // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
-              // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
-              const deviceSDKversionJson =
-                UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
-                  ? response.api
-                  : response.sdk;
-              const readableSDKVersion = deviceSDKversionJson.readable;
+        cy.log(`Call from app: ${appId} - method: ${CONSTANTS.DEVICE_VERSION} params: {}`);
+        cy.getDeviceDataFromThirdPartyApp(
+          CONSTANTS.DEVICE_VERSION,
+          {},
+          CONSTANTS.ACTION_CORE.toLowerCase()
+        ).then((response) => {
+          cy.log(`Response from app: ${appId} - ${JSON.stringify(response)}`);
+          // If the response is invalid, assign the latest SDK version to the environment variable.
+          if (response?.result?.api?.readable && response?.result.sdk?.readable) {
+            // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
+            // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
+            // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
+            const deviceSDKversionJson =
+              UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
+                ? response.result.api
+                : response.result.sdk;
+            const readableSDKVersion = deviceSDKversionJson.readable;
 
-              // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
-              Cypress.env(
-                CONSTANTS.ENV_PLATFORM_SDK_VERSION,
-                readableSDKVersion.includes(CONSTANTS.NEXT) ||
-                  readableSDKVersion.includes(CONSTANTS.PROPOSED)
-                  ? readableSDKVersion
-                  : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
-              );
-            } else {
-              Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, latestSDKversion);
-            }
-            if (response?.firmware?.readable) {
-              let deviceFirmware = JSON.stringify(response.firmware.readable);
-              deviceFirmware = deviceFirmware.replace(/"/g, '');
-              Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
-            }
-            if (response?.api?.readable) {
-              const fireboltVersion =
-                `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
-                  /"/g,
-                  ''
-                );
-              Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
-            }
+            // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
+            Cypress.env(
+              CONSTANTS.SDK_VERSION,
+              readableSDKVersion.includes(CONSTANTS.NEXT) ||
+                readableSDKVersion.includes(CONSTANTS.PROPOSED)
+                ? readableSDKVersion
+                : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
+            );
+          } else {
+            Cypress.env(CONSTANTS.SDK_VERSION, latestSDKversion);
           }
-        );
+          if (response?.result?.firmware?.readable) {
+            let deviceFirmware = JSON.stringify(response.result.firmware.readable);
+            deviceFirmware = deviceFirmware.replace(/"/g, '');
+            Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+          }
+          if (response?.result?.api?.readable) {
+            const fireboltVersion =
+              `${response?.result?.api?.major}.${response?.result?.api?.minor}.${response?.result?.api?.patch}`.replace(
+                /"/g,
+                ''
+              );
+            Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
+          }
+          if (response?.result?.sdk?.readable) {
+            const responseResultSDK =
+              `${response?.result?.sdk?.major}.${response?.result?.sdk?.minor}.${response?.result?.sdk?.patch}`.replace(
+                /"/g,
+                ''
+              );
+            Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+          }
+        });
       });
   }
 });
@@ -227,7 +240,7 @@ Cypress.Commands.add('updateRunInfo', () => {
       // Fetch data from the third-party app
       cy.getDeviceDataFromThirdPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
         // Set environment variable with the response
-        Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
+        Cypress.env(envVarName, JSON.stringify(response.result).replace(/"/g, ''));
       });
     } else {
       // Set environment variable with the value from json file
@@ -297,7 +310,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                   const labelToEnvMap = {
                     [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                     [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
-                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_PLATFORM_SDK_VERSION,
+                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
                     [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
                     [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
                     [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
@@ -402,7 +415,7 @@ Cypress.Commands.add('getDeviceDataFromThirdPartyApp', (method, params, action) 
       const responseObject = JSON.parse(response);
       try {
         if (responseObject && responseObject.result) {
-          return responseObject.result;
+          return responseObject;
         } else {
           throw 'Obtained response is null|undefined';
         }
@@ -456,19 +469,19 @@ Cypress.Commands.add('getLatestFireboltJsonFromFixtures', () => {
  */
 Cypress.Commands.add('getFireboltJsonData', () => {
   let FIREBOLT_SPECIFICATION_URL;
-  const envPlatformSdkVersion = UTILS.getEnvVariable(CONSTANTS.ENV_PLATFORM_SDK_VERSION);
+  const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION);
 
   // Reading the path of the firebolt.json file from the environment variable based on the SDK version.
-  if (envPlatformSdkVersion.includes(CONSTANTS.NEXT)) {
+  if (sdkVersion.includes(CONSTANTS.NEXT)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_NEXT_URL);
-  } else if (envPlatformSdkVersion.includes(CONSTANTS.PROPOSED)) {
+  } else if (sdkVersion.includes(CONSTANTS.PROPOSED)) {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(
       CONSTANTS.FIREBOLT_SPECIFICATION_PROPOSED_URL
     );
   } else {
     FIREBOLT_SPECIFICATION_URL = UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_URL).replace(
       CONSTANTS.LATEST,
-      envPlatformSdkVersion
+      sdkVersion
     );
   }
 
@@ -480,10 +493,10 @@ Cypress.Commands.add('getFireboltJsonData', () => {
       return data;
     }
 
-    //  If cy.request fails, get specific firebolt.json from -cypress/fixtures/versions/${Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION)}/firebolt.json
+    //  If cy.request fails, get specific firebolt.json from -cypress/fixtures/versions/${Cypress.env(CONSTANTS.SDK_VERSION)}/firebolt.json
     else {
       const configImportPath = `cypress/fixtures/versions/${UTILS.getEnvVariable(
-        CONSTANTS.ENV_PLATFORM_SDK_VERSION
+        CONSTANTS.SDK_VERSION
       )}/firebolt.json`;
 
       cy.task('readFileIfExists', configImportPath).then((data) => {
@@ -576,6 +589,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
   if (scenarioName.includes('(example')) {
     scenarioName = scenarioName.split('(example')[0].trim();
   }
+  Cypress.env(CONSTANTS.SCENARIO_NAME, scenarioName);
   // Fetching current feature name
   const moduleReqIdJson = Cypress.env(CONSTANTS.MODULEREQIDJSON);
   const scenarioList = moduleReqIdJson.scenarioNames[featureFileName];
@@ -872,7 +886,20 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
       : UTILS.checkForSecondaryAppId(appCallSign); // this is for the app to know the appId used for launch, so that it can use the same for creating PubSub connection.
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // Creating data for basic intent to be sent to the app on launch
-  let appCategory, data;
+  let appCategory;
+  let data = {
+    query: {
+      params: {},
+    },
+  };
+
+  // Storing the appId in runtime environment variable
+  if (Cypress.env(CONSTANTS.RUNTIME)) {
+    Cypress.env(CONSTANTS.RUNTIME).appId = appId;
+  } else {
+    Cypress.env(CONSTANTS.RUNTIME, { appId });
+  }
+
   if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
     appCategory =
       UTILS.getEnvVariable(CONSTANTS.APP_TYPE, false) !== undefined
@@ -883,6 +910,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
         params: {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.APP_TYPE]: appCategory,
+          [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
         },
       },
     };
@@ -898,6 +926,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.LIFECYCLE_VALIDATION]: true,
           [CONSTANTS.APP_TYPE]: appCategory,
+          [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
         },
       },
     };
@@ -916,8 +945,39 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   // Add the PubSub URL if required
   if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
     data.query.params[CONSTANTS.PUB_SUB_URL] = getEnvVariable(CONSTANTS.PUB_SUB_URL);
-    if (getEnvVariable(CONSTANTS.DEVICE_MAC, false)) {
-      data.query.params[CONSTANTS.MACADDRESS_PARAM] = getEnvVariable(CONSTANTS.DEVICE_MAC);
+  }
+  // Add the PubSub UUID if the env variable is set
+  if (getEnvVariable(CONSTANTS.PUB_SUB_UUID, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_UUID] = getEnvVariable(CONSTANTS.PUB_SUB_UUID);
+  }
+  // Add the PubSub publish suffix from env variable
+  if (getEnvVariable(CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_PUBLISH_SUFFIX] = getEnvVariable(
+      CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX
+    );
+  }
+  // Add the PubSub subscribe suffix from env variable
+  if (getEnvVariable(CONSTANTS.PUB_SUB_PUBLISH_SUFFIX, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX] = getEnvVariable(
+      CONSTANTS.PUB_SUB_PUBLISH_SUFFIX
+    );
+  }
+  // Check for additional launch parameters
+  // If a key exists in both the default parameters and the additional parameters, the value from the additional parameters will override the default value.
+  if (Cypress.env('additionalLaunchParams')) {
+    const additionalParams = Cypress.env('additionalLaunchParams');
+    for (const key in additionalParams) {
+      let value = additionalParams[key];
+      // If the value starts with 'CYPRESSENV-', extract the variable name.
+      if (value.startsWith('CYPRESSENV-')) {
+        const envParam = value.split('-')[1];
+        // Fetch the corresponding value from the env.
+        value = getEnvVariable(envParam, false);
+      }
+      // Add to data.query.params only if the value is defined
+      if (value) {
+        data.query.params[key] = value;
+      }
     }
   }
   // If the testType is userInterestProvider, send the discovery.launch params with registerProvider = false, then certification app will not register for userInterest provider.
@@ -964,6 +1024,13 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
           healthCheckResponse = JSON.parse(healthCheckResponse);
           expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
         });
+        cy.getSdkVersion().then(() => {
+          cy.getFireboltJsonData().then((data) => {
+            Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
+          });
+        });
+        cy.getCapabilities();
+        cy.updateRunInfo();
       }
     });
   });
@@ -1194,9 +1261,78 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
  * cy.methodOrEventResponseValidation('event', {method: 'accessibility.onClosedCaptionsSettingsChanged', context: {}, contentObject: {}, expectingError: false, appId: 'test.test', eventExpected: 'triggers'})
  */
 Cypress.Commands.add('methodOrEventResponseValidation', (validationType, requestData) => {
-  const { method, context, contentObject, expectingError, appId, eventExpected, isNullCase } =
-    requestData;
+  const { context, expectingError, appId, eventExpected, isNullCase } = requestData;
+  const method = requestData?.event ? requestData.event : requestData.method;
+  const contentObject = requestData.content ? requestData.content : requestData.contentObject;
   let validationJsonPath = requestData.validationJsonPath;
+
+  // Helper function to handle switch case validation
+  const handleValidation = (object, methodOrEventObject, methodOrEventResponse = null) => {
+    const scenario = object.type;
+    if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
+    switch (scenario) {
+      case CONSTANTS.REGEX:
+        cy.regExValidation(
+          method,
+          object.validations[0].type,
+          validationJsonPath,
+          methodOrEventResponse
+        );
+        break;
+      case CONSTANTS.MISC:
+        cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
+        break;
+      case CONSTANTS.DECODE:
+        const decodeType = object.specialCase;
+        const responseForDecodeValidation =
+          validationType == CONSTANTS.EVENT
+            ? methodOrEventResponse.eventResponse
+            : validationType == CONSTANTS.METHOD
+              ? methodOrEventResponse.result
+              : null;
+
+        cy.decodeValidation(
+          method,
+          decodeType,
+          responseForDecodeValidation,
+          object.validations[0],
+          null
+        );
+        break;
+      case CONSTANTS.FIXTURE:
+        cy.validateContent(
+          method,
+          context,
+          validationJsonPath,
+          object.validations[0].type,
+          validationType,
+          appId
+        );
+        break;
+      case CONSTANTS.CUSTOM:
+        cy.customValidation(object, methodOrEventObject);
+        break;
+      case CONSTANTS.UNDEFINED:
+        cy.undefinedValidation(object, methodOrEventObject, validationType);
+        break;
+      case CONSTANTS.SCREENSHOT_VALIDATION:
+        cy.screenshotValidation(object);
+        break;
+      default:
+        assert(false, 'Unsupported validation type');
+        break;
+    }
+  };
+
+  // Check if method or event field is present in requestData
+  if (!requestData.method && !requestData.event) {
+    if (contentObject && contentObject.data) {
+      contentObject.data.forEach((object) => handleValidation(object));
+    } else {
+      cy.validateContent(method, context, validationJsonPath, contentObject, validationType, appId);
+    }
+    return;
+  }
 
   // Extracting the api or event object from the global list.
   const methodOrEventObject = UTILS.getApiOrEventObjectFromGlobalList(
@@ -1299,59 +1435,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                           `Could not find the valid validation path from the validationJsonPath list - ${JSON.stringify(validationJsonPath)}`
                         );
                   }
-                  switch (scenario) {
-                    case CONSTANTS.REGEX:
-                      cy.regExValidation(
-                        method,
-                        object.validations[0].type,
-                        validationJsonPath,
-                        methodOrEventResponse
-                      );
-                      break;
-                    case CONSTANTS.MISC:
-                      cy.miscellaneousValidation(
-                        method,
-                        object.validations[0],
-                        methodOrEventObject
-                      );
-                      break;
-                    case CONSTANTS.DECODE:
-                      const decodeType = object.specialCase;
-                      const responseForDecodeValidation =
-                        validationType == CONSTANTS.EVENT
-                          ? methodOrEventResponse.eventResponse
-                          : validationType == CONSTANTS.METHOD
-                            ? methodOrEventResponse.result
-                            : null;
-
-                      cy.decodeValidation(
-                        method,
-                        decodeType,
-                        responseForDecodeValidation,
-                        object.validations[0],
-                        null
-                      );
-                      break;
-                    case CONSTANTS.FIXTURE:
-                      cy.validateContent(
-                        method,
-                        context,
-                        validationJsonPath,
-                        object.validations[0].type,
-                        validationType,
-                        appId
-                      );
-                      break;
-                    case CONSTANTS.CUSTOM:
-                      cy.customValidation(object, methodOrEventObject);
-                      break;
-                    case CONSTANTS.UNDEFINED:
-                      cy.undefinedValidation(object, methodOrEventObject, validationType);
-                      break;
-                    default:
-                      assert(false, 'Unsupported validation type');
-                      break;
-                  }
+                  handleValidation(object, methodOrEventObject, methodOrEventResponse);
                 }
               }
             });
@@ -1504,16 +1588,12 @@ Cypress.Commands.add('startOrStopInteractionsService', (action) => {
 
 /**
  * @module commands
- * @function validateFireboltInteractionLogs
- * @description Command to validate the firebolt interaction logs in configModule
+ * @function envConfigSetup
+ * @description Gives additional functionality to add necessary setup from the config module.
  * @example
- * cy.validateFireboltInteractionLogs()
- * cy.validateFireboltInteractionLogs()
+ * cy.envConfigSetup()
+ * @Note Add or overwrite envConfigSetup cypress command in the config module to add necessary setup.
  */
-Cypress.Commands.add('validateFireboltInteractionLogs', () => {
-  const validationObject = {
-    assertionDef: 'validateFireboltInteractionLogs',
-  };
-  const interactionLogs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs();
-  cy.customValidation(validationObject, interactionLogs);
+Cypress.Commands.add('envConfigSetup', () => {
+  fireLog.info('No additional config module environment setup');
 });

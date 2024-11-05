@@ -293,7 +293,19 @@ Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) 
     params,
     additionalParams
   );
-  cy.log(CONSTANTS.LIFECYCLE_INTENT + JSON.stringify(publishMessage));
+
+  let publishMessageForLog;
+  if (publishMessage && publishMessage.data && publishMessage.data.query) {
+    publishMessageForLog = publishMessage.data.query;
+    if (typeof publishMessageForLog == 'string') {
+      publishMessageForLog = JSON.parse(publishMessageForLog);
+    }
+    if (publishMessageForLog.params.methodName == CONSTANTS.LIFECYCLE_APIS.HISTORY) {
+      cy.log(CONSTANTS.LIFECYCLE_HISTORY_INTENT + JSON.stringify(publishMessage));
+    } else {
+      cy.log(CONSTANTS.LIFECYCLE_INTENT + JSON.stringify(publishMessage));
+    }
+  }
   cy.sendMessagetoApp(requestTopic, responseTopic, publishMessage).then((response) => {
     try {
       errorObject = JSON.parse(response).error;
@@ -506,6 +518,7 @@ Cypress.Commands.add('fetchLifecycleHistory', (appId) => {
  * @example
  * cy.setAppIdFromAppType('3rd party app')
  * cy.setAppIdFromAppType('1st party app')
+ * cy.setAppIdFromAppType('testApp')
  */
 Cypress.Commands.add('setAppIdFromAppType', (appType) => {
   return new Cypress.Promise((resolve, reject) => {
@@ -514,7 +527,7 @@ Cypress.Commands.add('setAppIdFromAppType', (appType) => {
         ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
         : appType === CONSTANTS.FIRST_PARTY_APP
           ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
-          : appType;
+          : UTILS.checkForSecondaryAppId(appType);
     resolve(appId);
   });
 });

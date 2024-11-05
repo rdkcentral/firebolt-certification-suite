@@ -191,13 +191,20 @@ Given(/(3rd party|1st party) stops listening to the event '(.+)'$/, async (app, 
 
     fireboltItems.forEach((item) => {
       const firstParty = item.firstParty;
+      const fireboltItem = { ...item };
+      let action = CONSTANTS.ACTION_CORE.toLowerCase();
+
+      if (fireboltItem?.event?.includes('_')) {
+        [action, fireboltItem.event] = fireboltItem.event.split('_');
+      }
 
       if (firstParty) {
         let params;
         const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.CLEARLISTENER;
         const requestMap = {
           method: method,
-          params: item,
+          params: fireboltItem,
+          action: action,
         };
 
         fireLog.info(
@@ -207,11 +214,21 @@ Given(/(3rd party|1st party) stops listening to the event '(.+)'$/, async (app, 
           fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
         });
       } else {
-        const appId = item.appId ? item.appId : Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID);
+        const appId = fireboltItem.appId
+          ? fireboltItem.appId
+          : Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID);
         const requestTopic = UTILS.getTopic(appId);
         const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
-        const params = { event: item.event };
-        const intentMessage = UTILS.createIntentMessage(CONSTANTS.TASK.CLEAREVENTHANDLER, params);
+        const params = { event: fireboltItem.event };
+        const additionalParams = {
+          communicationMode: UTILS.getCommunicationMode(),
+          action: action,
+        };
+        const intentMessage = UTILS.createIntentMessage(
+          CONSTANTS.TASK.CLEAREVENTHANDLER,
+          params,
+          additionalParams
+        );
 
         // Sending message to 3rd party app.
         cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {

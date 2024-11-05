@@ -89,12 +89,12 @@ Feature: Localization
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-        | Scenario      | Method                  | Value      |
-        | washington    | locality                | washington |
-        | PH            | countryCode             | PH         |
-        | Spanish       | preferredAudioLanguages | spa,eng    |
-        | English       | preferredAudioLanguages | eng,spa    |
-        | 12345         | postalCode              | 12345      |
+            | Scenario      | Method                  | Value      |
+            | washington    | locality                | washington |
+            | PH            | countryCode             | PH         |
+            | Spanish       | preferredAudioLanguages | spa,eng    |
+            | English       | preferredAudioLanguages | eng,spa    |
+            | 12345         | postalCode              | 12345      |
 
     @regression @sdk @requiresPlatformImplementation @Sev2
     Scenario Outline: Localization.<Method_Name> - Clearing event listeners

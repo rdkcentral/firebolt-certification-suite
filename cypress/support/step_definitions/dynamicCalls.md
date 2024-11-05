@@ -116,7 +116,7 @@ runtime: {
 | **_sdk_**          | name of the sdk                                                                                |
 | **_appId_**        | app identifier                                                                                 |
 | **_methodType_**   | Determines which method doing content validation Ex: set or get                                |
-| **_errorContent_** | Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS' |
+| **_errorContent_** | Doing error content validation when error content object key passed. Ex: 'INVALID_PARAMS' |
 
 **Note:** This glue step will work only when fireboltCall `setMethod` for set method validation and `method` for get method validation.
 
@@ -135,7 +135,7 @@ Below fields is not mandatory to add in the fireboltCall object, if not present 
 - `And 'Firebolt' platform triggers '3rd party app' event`
 - `And 'Firebolt' platform does not trigger '3rd party app' event`
 - `And 'Firebolt' platform triggers '1st party app' event`
-- `And 'Firebolt' platform triggers '1st party app' event with 'INVALID_TYPE_PARAMS'`
+- `And 'Firebolt' platform triggers '1st party app' event with 'INVALID_PARAMS'`
 
 ### Params:
 
@@ -144,8 +144,27 @@ Below fields is not mandatory to add in the fireboltCall object, if not present 
 | **_sdk_**           | sdk name                                                                                       |
 | **_eventExpected_** | Determines whether the event is expected or not.                                               |
 | **_appId_**         | app identifier                                                                                 |
-| **_errorContent_**  | Doing error content validation when error content object key passed. Ex: 'INVALID_TYPE_PARAMS' |
+| **_errorContent_**  | Doing error content validation when error content object key passed. Ex: 'INVALID_PARAMS' |
 
 **Note:** This glue step will work only when fireboltCall object having `event`, `eventValidationJsonPath` and `content` fields not present default value will be used.
 - eventValidationJsonPath ---> 'eventResponse'
 - content ---> null
+
+
+## '(.+)' on '(.+)' page
+
+#### Purpose: Function to do event and screenshot validation for the given page.
+
+### Examples:
+
+- `Then 'third party app is launched' on 'auth' page`
+
+### Params:
+
+| **Param**           | **Definition**                                                                                 |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
+| **_sdk_**           | sdk name                                                                                       |
+| **_eventExpected_** | Firebolt object key name.                                          |
+| **_page_**         | Name of the page where the screenshot is taken.                     |
+
+**Note:** This glue step will work only if the fireboltCall object contains `event`, `validationJsonPath` and `content`..

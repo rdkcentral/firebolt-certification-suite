@@ -68,7 +68,7 @@ module.exports = {
   CUCUMBER: 'cucumber',
   CURRENT_APP_ID: 'currentAppId',
   CUSTOM_METHOD_PATH:
-    'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/support/step_definitions/validations.md#custom',
+    'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/fixtures/docs/validations.md#custom',
   CYPRESS_MODULES_PATH: 'cypress/fixtures/external/modules',
   DATE: 'date',
   DECIMAL: 'decimal',
@@ -113,6 +113,7 @@ module.exports = {
   ENV_DEVICE_MODEL: 'deviceModel',
   ENV_DEVICE_DISTRIBUTOR: 'deviceDistributor',
   ENV_PARTNER: 'partner',
+  ENV_SDK_VERSION: 'sdkVersion',
   ENV_TARGET_VERSION: 'targetVersion',
   ERROR: 'error',
   ERROR_CODE: 'Error code',
@@ -237,6 +238,7 @@ module.exports = {
   LIFECYCLE_HISTORY_RESPONSE: 'Lifecycle history response fetched from application: ',
   LIFECYCLE_HISTORY_SCHEMA_PATH: 'schemas/lifecycleHistorySchema',
   LIFECYCLE_INTENT: 'Lifecycle intent sent to application: ',
+  LIFECYCLE_HISTORY_INTENT: 'Lifecycle intent sent to application to fetch App history: ',
   LIFECYCLE_METHOD_LIST: ['Lifecycle.ready', 'Lifecycle.state', 'Lifecycle.close'],
   LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle events generated ',
   LIFECYCLE_STATE: 'Lifecycle.state',
@@ -328,6 +330,9 @@ module.exports = {
   PRODUCT: 'Product',
   PREREQUISITE_DATA: 'PreRequisiteData.json',
   PUB_SUB_URL: 'pubSubUrl', // Env Var for the URL for the Default Module's pubSub implementation
+  PUB_SUB_UUID: 'pubsub_uuid',
+  PUB_SUB_PUBLISH_SUFFIX: 'pubSubPublishSuffix',
+  PUB_SUB_SUBSCRIBE_SUFFIX: 'pubSubSubscribeSuffix',
   SETUPCHECK: 'Setup Check',
   SETUPVALUES: 'external/setupValues.json',
   SETUPVALUES_FILEPATH: 'cypress/fixtures/external/setupValues.json',
@@ -356,6 +361,7 @@ module.exports = {
     CREATE_MARKER: 'performance.createMarker',
     UNLOADAPP: 'fcs.unloadApp',
     FETCHDEVICEDETAILS: 'fcs.fetchDeviceDetails',
+    SCREENSHOT: 'fcs.screenshot',
   },
   REQUEST_MAP_INTERACTIONS_SERVICE: 'Request map for firebolt interactions service : ',
   RESPONSE: 'Response: ',
@@ -381,6 +387,7 @@ module.exports = {
   SCHEMA_VALIDATION_RESPONSE: 'schemaValidationResponse',
   SCHEMA_VALIDATION_STATUS: 'schemaValidationStatus',
   SCHEMA_VALIDATION_STATUS_CODE: ['PASS', 'FAIL', 'SKIPPED', 'PENDING'],
+  SCREENSHOT_VALIDATION: 'screenshotValidation',
   SDK_VERSION: 'sdkVersion',
   SDK_REPORT_VERSION: 'SDK Version',
   SEARCH: 'search',
@@ -497,6 +504,9 @@ module.exports = {
     '`Unable to find the ${envAppIdKey} value in the env, please add the value in configModule/constants/config.json`',
   SET_EVENT_REQUEST: 'Request sent to set event values in platform: ',
   SET_EVENT_SUCCESS: 'Event value set successfully in platform',
+  SCENARIO_NAME: 'scenarioName',
+  FIREBOLT_INTERACTION: 'FireboltInteraction',
+  PENDING_FEATURES: 'pendingFeatures',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
