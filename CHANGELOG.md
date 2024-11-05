@@ -1,3 +1,10 @@
+# [1.4.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.5...v1.4.0-dev.6) (2024-11-05)
+
+
+### Bug Fixes
+
+* Fixing clear event listener issue ([#243](https://github.com/rdkcentral/firebolt-certification-suite/issues/243)) ([b06818e](https://github.com/rdkcentral/firebolt-certification-suite/commit/b06818e0a87e7b6bf6348b5bc6aeb65884e2ef97))
+
 # [1.4.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.4...v1.4.0-dev.5) (2024-11-04)
 
 
