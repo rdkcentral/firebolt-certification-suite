@@ -1,3 +1,12 @@
+# [1.4.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.6...v1.4.0-dev.7) (2024-11-05)
+
+
+### Features
+
+* Updating Scenario names ([#245](https://github.com/rdkcentral/firebolt-certification-suite/issues/245)) ([e3d2997](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3d2997d90c4c66c3caa1e73286e1ff7767eabb7))
+* XSB accessibility cleanup ([#249](https://github.com/rdkcentral/firebolt-certification-suite/issues/249)) ([55b0547](https://github.com/rdkcentral/firebolt-certification-suite/commit/55b054704faa93e8c976c59fe0dbf950a5a27cb6))
+* Xsb localization cleanup ([#222](https://github.com/rdkcentral/firebolt-certification-suite/issues/222)) ([4d3c746](https://github.com/rdkcentral/firebolt-certification-suite/commit/4d3c74670b1223bd1496ece9d6b8f9804e87fb0f))
+
 # [1.4.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.5...v1.4.0-dev.6) (2024-11-05)
 
 
