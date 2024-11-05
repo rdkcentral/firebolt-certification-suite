@@ -11,7 +11,7 @@ Feature: Localization
         Then 'Firebolt' platform responds with 'expected localization additionalInfo'
 
     @sdk @transport @Sev2
-    Scenario Outline: Localization.AdditionalInfo - Adding <Scenario> for localization additional info
+    Scenario Outline: Localization.additionalInfo - Adding <Scenario> for localization additional info
         Given '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
@@ -27,7 +27,7 @@ Feature: Localization
 
 
     @sdk @transport @Sev2
-    Scenario Outline: Localization.AdditionalInfo - Removing <Scenario> from localization additional info
+    Scenario Outline: Localization.additionalInfo - Removing <Scenario> from localization additional info
         Given '3rd party app' invokes the 'Firebolt' API to 'get localization additionalInfo'
         When 1st party app invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds to '1st party app' for '<API_Key>'
