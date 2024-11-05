@@ -7,7 +7,7 @@ Feature: Discovery.launch_ColdLaunch
         And 3rd party 'certification' app is launched
 
     @sdk @transport @Sev0
-    Scenario Outline: Discovery.Launch Cold Launch - Validate API Method Response for <Scenario> intent with context
+    Scenario Outline: Discovery.Launch Cold Launch - Validate API and Event response for <Scenario> intent with context
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -18,20 +18,20 @@ Feature: Discovery.launch_ColdLaunch
         And 'Firebolt' platform responds with 'foreground for lifecycle state'
 
         Examples:
-            | Scenario                                                                            | Discovery_Launch_Key                                                                                | Call_Parameters_Initialization_With_Context_Key     | Validation_Key_For_Parameters_Initialization_With_Intent                        |
-            | Null                                                                                | launch app with null intent                                                                         | get initialization parameters for null intent       | nullintent for initialization parameters                                        |
-            | Home                                                                                | launch app with home intent                                                                         | get initialization parameters for Home intent       | homeintent for initialization parameters                                        |
-            | Playback                                                                            | launch app with playback intent                                                                     | get initialization parameters for Playback intent   | playbackintent for initialization parameters                                    |
-            | Entity                                                                              | launch app with entity intent                                                                       | get initialization parameters for Entity intent     | entityintent for initialization parameters                                      |
-            | Launch                                                                              | launch app with intent                                                                              | get initialization parameters for Launch intent     | launchintent for initialization parameters                                      |
-            | Search                                                                              | launch app with search intent                                                                       | get initialization parameters for Search intent     | searchintent for initialization parameters                                      |
-            | Section                                                                             | launch app with section intent                                                                      | get initialization parameters for Section intent    | sectionintent for initialization parameters                                     |
-            | Tune                                                                                | launch app with tune intent                                                                         | get initialization parameters for Tune intent       | tuneintent for initialization parameters                                        |
-            | PlayEntity                                                                          | launch app with playentity intent                                                                   | get initialization parameters for PlayEntity intent | playentityintent for initialization parameters                                  |
-            | PlayQuery                                                                           | launch app with playquery intent                                                                    | get initialization parameters for PlayQuery intent  | playqueryintent for initialization parameters                                   |
+            | Scenario   | Discovery_Launch_Key              | Call_Parameters_Initialization_With_Context_Key     | Validation_Key_For_Parameters_Initialization_With_Intent |
+            | Null       | launch app with null intent       | get initialization parameters for null intent       | nullintent for initialization parameters                 |
+            | Home       | launch app with home intent       | get initialization parameters for Home intent       | homeintent for initialization parameters                 |
+            | Playback   | launch app with playback intent   | get initialization parameters for Playback intent   | playbackintent for initialization parameters             |
+            | Entity     | launch app with entity intent     | get initialization parameters for Entity intent     | entityintent for initialization parameters               |
+            | Launch     | launch app with intent            | get initialization parameters for Launch intent     | launchintent for initialization parameters               |
+            | Search     | launch app with search intent     | get initialization parameters for Search intent     | searchintent for initialization parameters               |
+            | Section    | launch app with section intent    | get initialization parameters for Section intent    | sectionintent for initialization parameters              |
+            | Tune       | launch app with tune intent       | get initialization parameters for Tune intent       | tuneintent for initialization parameters                 |
+            | PlayEntity | launch app with playentity intent | get initialization parameters for PlayEntity intent | playentityintent for initialization parameters           |
+            | PlayQuery  | launch app with playquery intent  | get initialization parameters for PlayQuery intent  | playqueryintent for initialization parameters            |
 
     @sdk @transport @Sev1
-    Scenario Outline: Discovery.Launch Cold Launch - Validate API Method Response for <Scenario> intent with context
+    Scenario Outline: Discovery.Launch Cold Launch - Validate API and Event response for <Scenario> intent with context
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -42,23 +42,23 @@ Feature: Discovery.launch_ColdLaunch
         And 'Firebolt' platform responds with 'foreground for lifecycle state'
 
         Examples:
-            | Scenario                                                                            | Discovery_Launch_Key                                                                                | Call_Parameters_Initialization_With_Context_Key     | Validation_Key_For_Parameters_Initialization_With_Intent                        |            
-            | PlayQuery with musicType song                                                       | launch app with playquery intent with musictype song                                                | get initialization parameters for PlayQuery intent  | playqueryintent musictype song for initialization parameters                    |
-            | PlayQuery with musicType album                                                      | launch app with playquery intent with musictype album                                               | get initialization parameters for PlayQuery intent  | playqueryintent musictype album for initialization parameters                   |
-            | PlayQuery with programType concert                                                  | launch app with playquery intent with programtype concert                                           | get initialization parameters for PlayQuery intent  | playqueryintent programtype concert for initialization parameters               |
-            | PlayQuery with programType sportingevent                                            | launch app with playquery intent with programtype sportingevent                                     | get initialization parameters for PlayQuery intent  | playqueryintent programtype sportingevent for initialization parameters         |
-            | PlayQuery with programType preview                                                  | launch app with playquery intent with programtype preview                                           | get initialization parameters for PlayQuery intent  | playqueryintent programtype preview for initialization parameters               |
-            | PlayQuery with programType other                                                    | launch app with playquery intent with programtype other                                             | get initialization parameters for PlayQuery intent  | playqueryintent programtype other for initialization parameters                 |
-            | PlayQuery with programType advertisement                                            | launch app with playquery intent with programtype advertisement                                     | get initialization parameters for PlayQuery intent  | playqueryintent programtype advertisement for initialization parameters         |
-            | PlayQuery with programType musicvideo                                               | launch app with playquery intent with programtype musicvideo                                        | get initialization parameters for PlayQuery intent  | playqueryintent programtype musicvideo for initialization parameters            |
-            | PlayQuery with programType minisode                                                 | launch app with playquery intent with programtype minisode                                          | get initialization parameters for PlayQuery intent  | playqueryintent programtype minisode for initialization parameters              |
-            | PlayQuery with programType extra                                                    | launch app with playquery intent with programtype extra                                             | get initialization parameters for PlayQuery intent  | playqueryintent programtype extra for initialization parameters                 |
-            | PlayEntity with programType movie                                                   | launch app with playentity intent with programtype movie                                            | get initialization parameters for PlayEntity intent | playentityintent with programtype movie for initialization parameters           |
-            | PlayEntity with programType episode                                                 | launch app with playentity intent with programtype episode                                          | get initialization parameters for PlayEntity intent | playentityintent with programtype episode for initialization parameters         |
-            | PlayEntity with programType concert                                                 | launch app with playentity intent with programtype concert                                          | get initialization parameters for PlayEntity intent | playentityintent with programtype concert for initialization parameters         |
+            | Scenario                                  | Discovery_Launch_Key                                            | Call_Parameters_Initialization_With_Context_Key     | Validation_Key_For_Parameters_Initialization_With_Intent                 |            
+            | PlayQuery with musicType song             | launch app with playquery intent with musictype song            | get initialization parameters for PlayQuery intent  | playqueryintent musictype song for initialization parameters             |
+            | PlayQuery with musicType album            | launch app with playquery intent with musictype album           | get initialization parameters for PlayQuery intent  | playqueryintent musictype album for initialization parameters            |
+            | PlayQuery with programType concert        | launch app with playquery intent with programtype concert       | get initialization parameters for PlayQuery intent  | playqueryintent programtype concert for initialization parameters        |
+            | PlayQuery with programType sportingevent  | launch app with playquery intent with programtype sportingevent | get initialization parameters for PlayQuery intent  | playqueryintent programtype sportingevent for initialization parameters  |
+            | PlayQuery with programType preview        | launch app with playquery intent with programtype preview       | get initialization parameters for PlayQuery intent  | playqueryintent programtype preview for initialization parameters        |
+            | PlayQuery with programType other          | launch app with playquery intent with programtype other         | get initialization parameters for PlayQuery intent  | playqueryintent programtype other for initialization parameters          |
+            | PlayQuery with programType advertisement  | launch app with playquery intent with programtype advertisement | get initialization parameters for PlayQuery intent  | playqueryintent programtype advertisement for initialization parameters  |
+            | PlayQuery with programType musicvideo     | launch app with playquery intent with programtype musicvideo    | get initialization parameters for PlayQuery intent  | playqueryintent programtype musicvideo for initialization parameters     |
+            | PlayQuery with programType minisode       | launch app with playquery intent with programtype minisode      | get initialization parameters for PlayQuery intent  | playqueryintent programtype minisode for initialization parameters       |
+            | PlayQuery with programType extra          | launch app with playquery intent with programtype extra         | get initialization parameters for PlayQuery intent  | playqueryintent programtype extra for initialization parameters          |
+            | PlayEntity with programType movie         | launch app with playentity intent with programtype movie        | get initialization parameters for PlayEntity intent | playentityintent with programtype movie for initialization parameters    |
+            | PlayEntity with programType episode       | launch app with playentity intent with programtype episode      | get initialization parameters for PlayEntity intent | playentityintent with programtype episode for initialization parameters  |
+            | PlayEntity with programType concert       | launch app with playentity intent with programtype concert      | get initialization parameters for PlayEntity intent | playentityintent with programtype concert for initialization parameters  |
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch Cold Launch - Validate API Method Response for <Scenario> intent with context
+    Scenario Outline: Discovery.Launch Cold Launch - Validate API and Event response for <Scenario> intent with context
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -76,7 +76,7 @@ Feature: Discovery.launch_ColdLaunch
             | PlayEntity intent without entityType and with programType movie for TvEpisodeEntity | launch app with playentity intent without entityType and with programType movie for TvEpisodeEntity | get initialization parameters for Playback intent   | playentity for initialization parameters without entityType for TvEpisodeEntity |
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch Cold Launch - Validating API Error Handling for <Scenario>
+    Scenario Outline: Discovery.Launch Cold Launch - Validating API Error handling for <Scenario>
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Error_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discoverylaunch'
@@ -131,7 +131,7 @@ Feature: Discovery.launch_ColdLaunch
             | Search Intent Integer Data                                 | search intent integer data for discoverylaunch                         |
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch Cold Launch - Validate API Method Response when <Scenario> for context source
+    Scenario Outline: Discovery.Launch Cold Launch - Validate API and Event response when <Scenario> for context source
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
