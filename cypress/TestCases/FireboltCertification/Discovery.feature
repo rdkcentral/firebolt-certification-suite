@@ -17,11 +17,11 @@ Feature: Discovery
       And 'Firebolt' platform triggers '3rd party app' event
 
       Examples:
-         | Scenario                            | Method               | Value | FB_Object                           |
-         | enabling recommendations            | allowPersonalization | true  | DISCOVERY_RECOMMENDATIONS           |
-         | disabling recommendations           | allowPersonalization | false | DISCOVERY_RECOMMENDATIONS           |
-         | enabling remember watched programs  | allowWatchHistory    | true  | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
-         | disabling remember watched programs | allowWatchHistory    | false | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
+         | Scenario                  | Method               | Value | FB_Object                           |
+         | enabling recommendations  | allowPersonalization | true  | DISCOVERY_RECOMMENDATIONS           |
+         | disabling recommendations | allowPersonalization | false | DISCOVERY_RECOMMENDATIONS           |
+         | enabling watch history    | allowWatchHistory    | true  | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
+         | disabling watch history   | allowWatchHistory    | false | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
 
    @sdk @transport @Sev1
    Scenario Outline: Discovery.watched - Validating API Method repsonse <Scenario>
