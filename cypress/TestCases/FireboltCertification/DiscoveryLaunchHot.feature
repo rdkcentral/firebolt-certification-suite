@@ -10,7 +10,7 @@ Feature: Discovery.launch_HotLaunch
         And '3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
 
     @sdk @transport @Sev0
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> and app in foreground state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with <Scenario> in foreground state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -34,7 +34,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayQuery intent                         | launch app with playquery intent                                                | onNavigateTo with playquery intent                                                |
 
     @sdk @transport @Sev1
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> and app in foreground state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with <Scenario> in foreground state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -53,7 +53,7 @@ Feature: Discovery.launch_HotLaunch
             | playquery intent with musictype album programtype musicvideo    | launch app with playquery intent with musictype album programtype musicvideo    | onNavigateTo with playquery intent with musictype album programtype musicvideo    |
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> and app in foreground state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with <Scenario> in foreground state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -91,7 +91,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayEntity intent with programType concert                      | launch app with playentity intent with programtype concert                      | onNavigateTo with playentity intent with programtype concert                      |
 
     @sdk @transport @requiresPlatformImplementation @Sev0
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> and app in inactive state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with <Scenario> in inactive state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'inactive'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -114,7 +114,7 @@ Feature: Discovery.launch_HotLaunch
             | playQuery intent  | launch app with PlayQuery intent  | onNavigateTo with PlayQuery intent  |
             
     @sdk @transport @requiresPlatformImplementation @Sev1
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> and app in inactive state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with <Scenario> in inactive state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'inactive'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -131,7 +131,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayEntity intent with programType movie                  | launch app with playentity intent with programtype movie                 | onNavigateTo with playentity intent with programtype movie                 |
 
     @sdk @transport @requiresPlatformImplementation @Sev0
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> and app in inactive state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with <Scenario> in inactive state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'inactive'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -147,7 +147,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayEntity intent without options for entityType playlist | launch app with playentity intent without options                        | onNavigateTo with playentity intent without options                        |
 
     @sdk @transport @Sev0
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> and app in background state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with <Scenario> in background state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'background'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -170,7 +170,7 @@ Feature: Discovery.launch_HotLaunch
             | playQuery intent   | launch app with PlayQuery intent  | onNavigateTo with PlayQuery intent  |
             
     @sdk @transport @Sev1
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> and app in background state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with <Scenario> in background state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'background'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -187,7 +187,7 @@ Feature: Discovery.launch_HotLaunch
             | playEntity intent with programType movie                  | launch app with playentity intent with programtype movie                 | onNavigateTo with playentity intent with programtype movie                 |
             
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> and app in background state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with <Scenario> in background state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'background'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -203,7 +203,7 @@ Feature: Discovery.launch_HotLaunch
             | playEntity intent without options for entityType playlist | launch app with playentity intent without options                        | onNavigateTo with playentity intent without options                        |
 
     @sdk @transport @Sev1
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response with Null intent and app in <State> state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with Null intent and app in <State> state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state '<State>'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -220,7 +220,7 @@ Feature: Discovery.launch_HotLaunch
             | launch app with null intent | suspended  |
 
     @sdk @transport @suspended @Sev0
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> and app in suspended state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with <Scenario> in suspended state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'suspended'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -242,7 +242,7 @@ Feature: Discovery.launch_HotLaunch
             | playQuery intent  | launch app with PlayQuery intent  |
             
     @sdk @transport @suspended @Sev1
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> <Scenario> and app in suspended state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with <Scenario> in suspended state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'suspended'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -258,7 +258,7 @@ Feature: Discovery.launch_HotLaunch
             | playEntity intent with programType movie    | launch app with playentity intent with programtype movie  |
 
     @sdk @transport @suspended @Sev2
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> and app in suspended state
+    Scenario Outline: Discovery.Launch - Hot Launch: Launch App with <Scenario> in suspended state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'suspended'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -273,7 +273,7 @@ Feature: Discovery.launch_HotLaunch
             | playentity Suspended without options for entityType playlist | launch app with playentity intent without options                        |
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch Hot Launch - Validating API error handling given <Scenario>
+    Scenario Outline: Discovery.Launch - Hot Launch: Validating API error handling given <Scenario>
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'foreground'
         When '3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
@@ -295,14 +295,14 @@ Feature: Discovery.launch_HotLaunch
             | invalid Data Intent    | invalid data intent for discoverylaunch    |
 
     @sdk @transport @Sev2
-    Scenario: Discovery.Launch Hot Launch - Validating API error handling given an invalid appId
+    Scenario: Discovery.Launch - Hot Launch: Validating API error handling given an invalid appId
         Given the environment has been set up for 'Discovery.Launch' tests
         And 3rd party 'certification' app is launched
         When 1st party app invokes the 'Firebolt' API to 'launch app with invalid appId type'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response for <Scenario> for context source
+    Scenario Outline: Discovery.Launch - Hot Launch: Validate API and Event response for <Scenario> for context source
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -317,14 +317,14 @@ Feature: Discovery.launch_HotLaunch
             | passing valid string  | launch app with search intent source | onNavigateTo with search intent source |
 
     @sdk @transport @Sev2
-    Scenario: Discovery.Launch Hot Launch - Validating API error handling given an Invalid context source
+    Scenario: Discovery.Launch - Hot Launch: Validating API error handling given an Invalid context source
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'foreground'
         When 1st party app invokes the 'Firebolt' API to 'launch app with search intent int source'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
 
     @sdk @transport @requiresPlatformImplementation @Sev2
-    Scenario Outline: Discovery.Launch Hot Launch - Validate API and Event response when one app is in <state> state and one is in foreground state
+    Scenario Outline: Discovery.Launch - Hot Launch: Validate API and Event response when one app is in <state> state and one is in foreground state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
         When Test runner waits for 10 'seconds'
