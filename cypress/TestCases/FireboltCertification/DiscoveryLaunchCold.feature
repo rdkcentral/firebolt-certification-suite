@@ -7,7 +7,7 @@ Feature: Discovery.launch_ColdLaunch
         And 3rd party 'certification' app is launched
 
     @sdk @transport @Sev0
-    Scenario Outline: Discovery.Launch - Cold Launch : Launch app with <Scenario> intent
+    Scenario Outline: Discovery.Launch - Cold Launch : Launch App with <Scenario> intent
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
