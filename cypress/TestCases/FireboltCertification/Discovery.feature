@@ -24,30 +24,30 @@ Feature: Discovery
          | disabling watch history   | allowWatchHistory    | false | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
 
    @sdk @transport @Sev1
-   Scenario Outline: Discovery.watched - Validating API Method repsonse <Scenario>
+   Scenario Outline: Discovery.watched - Confirm API Method Response for Parameter configurations: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for watched content in discovery'
 
       Examples:
-         | Scenario                                                   | API_Key                                                   |
-         | with only EntityId                                         | notify watched content with only entityid                 |
-         | with EntityId and Progress                                 | notify watched content with entityid progress             |
-         | with EntityId, Progress & completed status                 | notify watched content with entityid progress status      |
-         | with EntityId, Progress, completed Status & watchedon date | notify watched content with entityid progress status date |
+         | Scenario                                              | API_Key                                                   |
+         | EntityId only                                         | notify watched content with only entityid                 |
+         | EntityId and Progress                                 | notify watched content with entityid progress             |
+         | EntityId, Progress & completed status                 | notify watched content with entityid progress status      |
+         | EntityId, Progress, completed Status & watchedon date | notify watched content with entityid progress status date |
 
    @sdk @transport @Sev1
-   Scenario Outline: Discovery.watchNext - Validating API Method response <Scenario>
+   Scenario Outline: Discovery.watchNext - Confirm API Method Response for Parameter configurations: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for watchnext tile in discovery'
 
       Examples:
-         | Scenario                                                              | API_Key                                                         |
-         | with title & identifiers with entityId                                | suggest watchnext tile with entityid                            |
-         | with title & identifiers with entityID & assetID                      | suggest watchnext tile with entityid assetid                    |
-         | with title & identifiers with entityID, assetID, sessionId & seriesId | suggest watchnext tile with entityid assetid sessionid seriesid |
+         | Scenario                                                         | API_Key                                                         |
+         | Title & identifiers with entityId                                | suggest watchnext tile with entityid                            |
+         | Title & identifiers with entityID & assetID                      | suggest watchnext tile with entityid assetid                    |
+         | Title & identifiers with entityID, assetID, sessionId & seriesId | suggest watchnext tile with entityid assetid sessionid seriesid |
 
    @sdk @transport @Sev2
-   Scenario Outline: Discovery.watchNext - Validating API Method response <Scenario>
+   Scenario Outline: Discovery.watchNext - Confirm API Method Response for Parameter configurations: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for watchnext tile in discovery'
 
@@ -59,7 +59,7 @@ Feature: Discovery
          | with title, identfiers, expires & images                                              | suggest watchnext tile with expires images                                     |    
    
    @sdk @transport @Sev0
-   Scenario Outline: Discovery.entitlements - Validating API Method response <Scenario>>
+   Scenario Outline: Discovery.entitlements - Confirm API Method Response for Parameter configurations: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for entitlements in discovery'
 
@@ -122,22 +122,22 @@ Feature: Discovery
          | invalid entitlements with integer params | notify user has signedIn with integer params |
 
    @sdk @transport @Sev1
-   Scenario Outline: Discovery.contentAccess - Validating API Method response <Scenario>>
+   Scenario Outline: Discovery.contentAccess - Confirm API Method Response for Parameter configurations: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'null for discovery contentAccess'
 
       Examples:
-         | Scenario                                                     | API_Key                                                                           |
-         | with availabilities type channel-type                        | notify content access with availabilities channel type                            |
-         | with availabilities type program-type                        | notify content access with availabilities program type                            |
-         | with availabilities type, Id                                 | notify content access with availabilities type and Id                             |
-         | with availabilities type, Id, catalog Id                     | notify content access with availabilities type Id and catalogId                   |
-         | with availabilities type, Id, catalog Id, startTime          | notify content access with availabilities type Id catalogId and startTime         |
-         | with availabilities type, Id, catalog Id, startTime, endTime | notify content access with availabilities type Id catalogId startTime and endTime |
-         | with availabilities and entitlements                         | notify content access with availabilities and entitlements                        |
-         | with only entitlements                                       | notify content access with only entitlements                                      |
-         | with availabilities param empty                              | notify content access with availabilities param empty                             |
-         | with entitlements param empty                                | notify content access with entitlements param empty                               |
+         | Scenario                                                | API_Key                                                                           |
+         | availabilities type channel-type                        | notify content access with availabilities channel type                            |
+         | availabilities type program-type                        | notify content access with availabilities program type                            |
+         | availabilities type, Id                                 | notify content access with availabilities type and Id                             |
+         | availabilities type, Id, catalog Id                     | notify content access with availabilities type Id and catalogId                   |
+         | availabilities type, Id, catalog Id, startTime          | notify content access with availabilities type Id catalogId and startTime         |
+         | availabilities type, Id, catalog Id, startTime, endTime | notify content access with availabilities type Id catalogId startTime and endTime |
+         | availabilities and entitlements                         | notify content access with availabilities and entitlements                        |
+         | only entitlements                                       | notify content access with only entitlements                                      |
+         | availabilities param empty                              | notify content access with availabilities param empty                             |
+         | entitlements param empty                                | notify content access with entitlements param empty                               |
 
    @sdk @transport @Sev2
    Scenario: Discovery.clearContentAccess - Clearing availabilities and entitlements from the subscriber
