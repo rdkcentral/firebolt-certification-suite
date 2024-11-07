@@ -7,7 +7,7 @@ Feature: Discovery.launch_ColdLaunch
         And 3rd party 'certification' app is launched
 
     @sdk @transport @Sev0
-    Scenario Outline: Discovery.Launch Cold Launch - Validate API and Event response for <Scenario> intent with context
+    Scenario Outline: Discovery.Launch - Cold Launch : Launch app with <Scenario> intent
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -31,7 +31,7 @@ Feature: Discovery.launch_ColdLaunch
             | PlayQuery  | launch app with playquery intent  | get initialization parameters for PlayQuery intent  | playqueryintent for initialization parameters            |
 
     @sdk @transport @Sev1
-    Scenario Outline: Discovery.Launch Cold Launch - Validate API and Event response for <Scenario>
+    Scenario Outline: Discovery.Launch - Cold Launch : Launch App with <Scenario>
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -53,12 +53,12 @@ Feature: Discovery.launch_ColdLaunch
             | playquery intent with programType musicvideo    | launch app with playquery intent with programtype musicvideo    | get initialization parameters for PlayQuery intent  | playqueryintent programtype musicvideo for initialization parameters     |
             | playquery intent with programType minisode      | launch app with playquery intent with programtype minisode      | get initialization parameters for PlayQuery intent  | playqueryintent programtype minisode for initialization parameters       |
             | playquery intent with programType extra         | launch app with playquery intent with programtype extra         | get initialization parameters for PlayQuery intent  | playqueryintent programtype extra for initialization parameters          |
-            | PlayEntity intent with programType movie        | launch app with playentity intent with programtype movie        | get initialization parameters for PlayEntity intent | playentityintent with programtype movie for initialization parameters    |
-            | PlayEntity intent with programType episode      | launch app with playentity intent with programtype episode      | get initialization parameters for PlayEntity intent | playentityintent with programtype episode for initialization parameters  |
-            | PlayEntity intent with programType concert      | launch app with playentity intent with programtype concert      | get initialization parameters for PlayEntity intent | playentityintent with programtype concert for initialization parameters  |
+            | playEntity intent with programType movie        | launch app with playentity intent with programtype movie        | get initialization parameters for PlayEntity intent | playentityintent with programtype movie for initialization parameters    |
+            | playEntity intent with programType episode      | launch app with playentity intent with programtype episode      | get initialization parameters for PlayEntity intent | playentityintent with programtype episode for initialization parameters  |
+            | playEntity intent with programType concert      | launch app with playentity intent with programtype concert      | get initialization parameters for PlayEntity intent | playentityintent with programtype concert for initialization parameters  |
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch Cold Launch - Validate API and Event response for <Scenario>
+    Scenario Outline: Discovery.Launch - Cold Launch : Launch App with <Scenario>
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -70,13 +70,13 @@ Feature: Discovery.launch_ColdLaunch
 
         Examples:
             | Scenario                                                                            | Discovery_Launch_Key                                                                                | Call_Parameters_Initialization_With_Context_Key     | Validation_Key_For_Parameters_Initialization_With_Intent                        |            
-            | PlayEntity intent without options for entityType playlist                           | launch app with playentity intent without options                                                   | get initialization parameters for PlayEntity intent | playentityintent without options for initialization parameters                  |
-            | Playback intent without entityType and with programType movie                       | launch app with playback intent without entityType and with programType movie                       | get initialization parameters for Playback intent   | playbackintent for initialization parameters without entityType                 |
-            | PlayEntity intent without entityType and with programType movie for movieEntity     | launch app with playentity intent without entityType and with programType movie for movieEntity     | get initialization parameters for PlayEntity intent | playentity for initialization parameters without entityType for movieEntity     |
-            | PlayEntity intent without entityType and with programType movie for TvEpisodeEntity | launch app with playentity intent without entityType and with programType movie for TvEpisodeEntity | get initialization parameters for Playback intent   | playentity for initialization parameters without entityType for TvEpisodeEntity |
+            | playentity intent without options for entityType playlist                           | launch app with playentity intent without options                                                   | get initialization parameters for PlayEntity intent | playentityintent without options for initialization parameters                  |
+            | playback intent without entityType and with programType movie                       | launch app with playback intent without entityType and with programType movie                       | get initialization parameters for Playback intent   | playbackintent for initialization parameters without entityType                 |
+            | playentity intent without entityType and with programType movie for movieEntity     | launch app with playentity intent without entityType and with programType movie for movieEntity     | get initialization parameters for PlayEntity intent | playentity for initialization parameters without entityType for movieEntity     |
+            | playentity intent without entityType and with programType movie for TvEpisodeEntity | launch app with playentity intent without entityType and with programType movie for TvEpisodeEntity | get initialization parameters for Playback intent   | playentity for initialization parameters without entityType for TvEpisodeEntity |
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch Cold Launch - Validating API Error handling for <Scenario>
+    Scenario Outline: Discovery.Launch - Cold Launch : Validating API Error handling for <Scenario>
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Error_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discoverylaunch'
@@ -131,7 +131,7 @@ Feature: Discovery.launch_ColdLaunch
             | Search Intent Integer Data                                 | search intent integer data for discoverylaunch                         |
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch Cold Launch - Validate API and Event response when <Scenario> for context source
+    Scenario Outline: Discovery.Launch - Cold Launch : Validate API and Event response when <Scenario> for context source
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -143,5 +143,5 @@ Feature: Discovery.launch_ColdLaunch
 
         Examples:
             | Scenario              | Discovery_Launch_Key                   | Call_Parameters_Initialization_With_Context_Key   | Validation_Key_For_Parameters_Initialization_With_Intent |
-            | Passing random string | launch app with null intent source     | get initialization parameters for null intent     | nullintent source for initialization parameters          |
-            | Passing valid string  | launch app with playback intent source | get initialization parameters for playback intent | playbackintent source for initialization parameters      |
+            | passing random string | launch app with null intent source     | get initialization parameters for null intent     | nullintent source for initialization parameters          |
+            | passing valid string  | launch app with playback intent source | get initialization parameters for playback intent | playbackintent source for initialization parameters      |
