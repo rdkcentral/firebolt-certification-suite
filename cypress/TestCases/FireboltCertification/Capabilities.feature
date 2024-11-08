@@ -45,7 +45,7 @@ Feature: Capabilities
       | options role as provide | check if capability is granted with role as provide |
 
   @sdk @transport
-  Scenario Outline: Capabilities api - Validating API and event responses for <Scenario>
+  Scenario Outline: Capabilities api - Validating API and Event responses for <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<Info_API_Key>'
     Then 'Firebolt' platform responds with 'expected value for info api'
     When '3rd party app' invokes the 'Firebolt' API to '<Supported_API_Key>'
@@ -127,7 +127,7 @@ Feature: Capabilities
     Then 'Firebolt' platform responds with 'custom error for lifecycle ready capability'
 
   @sdk @transport
-  Scenario Outline: Capabilities.permitted - Validating API and event responses for <Scenario>
+  Scenario Outline: Capabilities.permitted - Validating API and Event responses for <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<Permitted_API_Key>'
     Then 'Firebolt' platform responds with 'expected value for permitted api'
     When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
@@ -139,13 +139,13 @@ Feature: Capabilities
       | account uid capability     | check if account uid capability is permitted with role use     | fetch account uid     | account uid                            |
 
   @sdk @transport
-  Scenario Outline: Capabilities.permitted - Validating API and event responses for <Scenario>
+  Scenario Outline: Capabilities.permitted - Validating API and Event responses for <Scenario>
     When '3rd party app' invokes the 'Firebolt' API to '<Permitted_API_Key>'
     Then 'Firebolt' platform responds with 'expected value for permitted api'
     When '3rd party app' invokes the 'Firebolt' API to '<Discovery_API_Key>'
     Then 'Firebolt' platform responds with '<Discovery_Validation_Key>'
     Examples:
-      | Scenario                                   | Permitted_API_Key                                                     | Discovery_API_Key                         | Discovery_Validation_Key              |
+      | Scenario                          | Permitted_API_Key                                                     | Discovery_API_Key                         | Discovery_Validation_Key              |
       | discovery entitlements capability | check if discovery entitlements capability is permitted with role use | notify entitlements                       | true for entitlements in discovery    |
       | discovery watchNext capability    | check if discovery watchnext capability is permitted with role use    | suggest watchnext tile with entityid      | true for watchnext tile in discovery  |
       | discovery watched capability      | check if discovery watched capability is permitted with role use      | notify watched content with only entityid | true for watched content in discovery |
