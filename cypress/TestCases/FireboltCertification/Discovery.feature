@@ -24,7 +24,7 @@ Feature: Discovery
          | disabling watch history   | allowWatchHistory    | false | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
 
    @sdk @transport @Sev1
-   Scenario Outline: Discovery.watched - Validate Method execution with parameter configuration: <Scenario>
+   Scenario Outline: Discovery.watched - Validate Method success with parameter configuration: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for watched content in discovery'
 
@@ -36,7 +36,7 @@ Feature: Discovery
          | EntityId, Progress, completed Status & watchedon date | notify watched content with entityid progress status date |
 
    @sdk @transport @Sev1
-   Scenario Outline: Discovery.watchNext - Validate Method execution with parameter configuration: <Scenario>
+   Scenario Outline: Discovery.watchNext - Validate Method success with parameter configuration: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for watchnext tile in discovery'
 
@@ -47,7 +47,7 @@ Feature: Discovery
          | Title & identifiers with entityID, assetID, sessionId & seriesId | suggest watchnext tile with entityid assetid sessionid seriesid |
 
    @sdk @transport @Sev2
-   Scenario Outline: Discovery.watchNext - Validate Method execution with parameter configuration: <Scenario>
+   Scenario Outline: Discovery.watchNext - Validate Method success with parameter configuration: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for watchnext tile in discovery'
 
@@ -59,7 +59,7 @@ Feature: Discovery
          | Title, identfiers, expires & images                                              | suggest watchnext tile with expires images                                     |    
    
    @sdk @transport @Sev0
-   Scenario Outline: Discovery.entitlements - Validate Method execution with <Scenario>
+   Scenario Outline: Discovery.entitlements - Validate Method success with <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'true for entitlements in discovery'
 
@@ -122,7 +122,7 @@ Feature: Discovery
          | invalid entitlements with integer params | notify user has signedIn with integer params |
 
    @sdk @transport @Sev1
-   Scenario Outline: Discovery.contentAccess - Validate Method execution with parameter configuration: <Scenario>
+   Scenario Outline: Discovery.contentAccess - Validate Method success with parameter configuration: <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with 'null for discovery contentAccess'
 
