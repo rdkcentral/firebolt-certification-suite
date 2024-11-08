@@ -52,11 +52,11 @@ Feature: Discovery
       Then 'Firebolt' platform responds with 'true for watchnext tile in discovery'
 
       Examples:
-         | Scenario                                                                              | API_Key                                                                        |
-         | with title & identifiers with entityID, assetID & sessionId                           | suggest watchnext tile with entityid assetid sessionid                         |
-         | with title & identifiers with entityID, assetID, sessionId, seriesId & appContentData | suggest watchnext tile with entityid assetid sessionid seriesid appcontentdata |
-         | with title, identifiers & expires                                                     | suggest watchnext tile with expires                                            |
-         | with title, identfiers, expires & images                                              | suggest watchnext tile with expires images                                     |    
+         | Scenario                                                                         | API_Key                                                                        |
+         | Title & identifiers with entityID, assetID & sessionId                           | suggest watchnext tile with entityid assetid sessionid                         |
+         | Title & identifiers with entityID, assetID, sessionId, seriesId & appContentData | suggest watchnext tile with entityid assetid sessionid seriesid appcontentdata |
+         | Title, identifiers & expires                                                     | suggest watchnext tile with expires                                            |
+         | Title, identfiers, expires & images                                              | suggest watchnext tile with expires images                                     |    
    
    @sdk @transport @Sev0
    Scenario Outline: Discovery.entitlements - Confirm API Method Response for Parameter configurations: <Scenario>
@@ -65,8 +65,8 @@ Feature: Discovery
 
       Examples:
          | Scenario                | API_Key                                     |
-         | with valid params       | notify entitlements                         |
-         | with only entitlementId | notify entitlements with entitlementid only |
+         | Using valid params       | notify entitlements                         |
+         | Using only entitlementId | notify entitlements with entitlementid only |
 
    @sdk @transport @Sev2
    Scenario Outline: Discovery.watched - Validating API Error handling when given <Scenario>
