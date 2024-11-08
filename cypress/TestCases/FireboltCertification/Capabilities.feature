@@ -252,7 +252,7 @@ Feature: Capabilities
     And 'Firebolt' platform triggers event 'expected value for capabilities OnGranted'
 
   @sdk @transport @requiresPlatformImplementation
-  Scenario: Capabilities.OnRevoked - Validating API and event response
+  Scenario: Capabilities.OnRevoked - Validate Event trigger and reponse
     Given '3rd party app' registers for the 'capabilities onRevoked' event using the 'Firebolt' API
     And User set response for 'set pinchallenge wrong pin'
     And Framework registers 'pinChallenge' test provider
