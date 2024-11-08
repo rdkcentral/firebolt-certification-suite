@@ -30,12 +30,12 @@ Feature: Authentication
          | Root token type    | fetch root token    | authentication root    | root    |
 
    @sdk @transport
-   Scenario Outline: Authentication.token - Validating API Error Handling When Given <Scenario>
+   Scenario Outline: Authentication.token - Validating API Error handling when given <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
 
       Examples:
-         | Scenario                            | API_Key                            | Validation_key                               |
-         | Invalid Parameter for Platform1     | get token with platform1 parameter | invalid parameter error authentication token |
-         | Invalid Parameter with type Boolean | get token with true parameter      | invalid parameter error authentication token |
-         | Invalid Parameter with type Integer | get token with integer parameter   | invalid parameter error authentication token |
+         | Scenario                             | API_Key                            | Validation_key                               |
+         | invalid parameters for Platform1     | get token with platform1 parameter | invalid parameter error authentication token |
+         | invalid parameters with type Boolean | get token with true parameter      | invalid parameter error authentication token |
+         | invalid parameters with type Integer | get token with integer parameter   | invalid parameter error authentication token |
