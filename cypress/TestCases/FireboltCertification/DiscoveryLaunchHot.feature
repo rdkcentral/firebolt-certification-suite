@@ -20,18 +20,18 @@ Feature: Discovery.launch_HotLaunch
         And 'Firebolt' platform triggers event '<Event_Content>'
 
         Examples:
-            | Scenario                                 | Discovery_Launch_Key                                                            | Event_Content                                                                     |
-            | Home intent                              | launch app with home intent                                                     | onNavigateTo with home intent                                                     |
-            | Playback intent                          | launch app with playback intent                                                 | onNavigateTo with playback intent                                                 |
-            | playback intent without entityType       | launch app with playback intent without entityType                              | onNavigateTo with playback intent without entityType                              |
-            | entity intent                            | launch app with entity intent                                                   | onNavigateTo with entity intent                                                   |
-            | entity intent without entityType         | launch app with entity intent without entityType                                | onNavigateTo with entity intent without entityType                                |
-            | Launch intent                            | launch app with intent                                                          | onNavigateTo with intent                                                          |
-            | Search intent                            | launch app with search intent                                                   | onNavigateTo with search intent                                                   |
-            | Section intent                           | launch app with section intent                                                  | onNavigateTo with section intent                                                  |
-            | Tune intent                              | launch app with tune intent                                                     | onNavigateTo with tune intent                                                     |
-            | PlayEntity intent                        | launch app with playentity intent                                               | onNavigateTo with playentity intent                                               |
-            | PlayQuery intent                         | launch app with playquery intent                                                | onNavigateTo with playquery intent                                                |
+            | Scenario                                 | Discovery_Launch_Key                                | Event_Content                                        |
+            | Home intent                              | launch app with home intent                         | onNavigateTo with home intent                        |
+            | Playback intent                          | launch app with playback intent                     | onNavigateTo with playback intent                    |
+            | playback intent without entityType       | launch app with playback intent without entityType  | onNavigateTo with playback intent without entityType |
+            | entity intent                            | launch app with entity intent                       | onNavigateTo with entity intent                      |
+            | entity intent without entityType         | launch app with entity intent without entityType    | onNavigateTo with entity intent without entityType   |
+            | Launch intent                            | launch app with intent                              | onNavigateTo with intent                             |
+            | Search intent                            | launch app with search intent                       | onNavigateTo with search intent                      |
+            | Section intent                           | launch app with section intent                      | onNavigateTo with section intent                     |
+            | Tune intent                              | launch app with tune intent                         | onNavigateTo with tune intent                        |
+            | PlayEntity intent                        | launch app with playentity intent                   | onNavigateTo with playentity intent                  |
+            | PlayQuery intent                         | launch app with playquery intent                    | onNavigateTo with playquery intent                   |
 
     @sdk @transport @Sev1
     Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in foreground state
