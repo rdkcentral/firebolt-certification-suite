@@ -74,7 +74,7 @@ Feature: Discovery.launch_ColdLaunch
             | Search with channelType overTheAir              | launch app with search intent with channelType overTheAir       | get initialization parameters for Search intent     | searchintent channeltype overtheair for initialization parameters        |
             | Search with untyped entity                      | launch app with search intent with untyped entity               | get initialization parameters for Search intent     | searchintent untyped entity for initialization parameters                |
             | Search with playlist entity                     | launch app with search intent with playlist entity              | get initialization parameters for Search intent     | searchintent playlist entity for initialization parameters               |
-            
+
     @sdk @transport @Sev2
     Scenario Outline: Discovery.Launch - Cold Launch : Launch App with <Scenario>
         Given the environment has been set up for 'Discovery.Launch' tests
@@ -100,53 +100,77 @@ Feature: Discovery.launch_ColdLaunch
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discoverylaunch'
 
         Examples:
-            | Scenario                                                   | Error_Key                                                              |
-            | missing Action Intent                                      | no action intent for discoverylaunch                                   |
-            | missing Context Intent                                     | no context intent for discoverylaunch                                  |
-            | missing Source Intent                                      | no source intent for discoverylaunch                                   |
-            | missing Data Intent                                        | no data intent for discoverylaunch                                     |
-            | Invalid Action Intent                                      | invalid action intent for discoverylaunch                              |
-            | Invalid Context Intent                                     | invalid context intent for discoverylaunch                             |
-            | Playback Intent with only action                           | playback intent only action for discoverylaunch                        |
-            | Playback Intent Integer Data                               | playback intent int data for discoverylaunch                           |
-            | Entity Intent Integer Data                                 | entity intent int data for discoverylaunch                             |
-            | Section Intent Integer Data                                | section intent int data for discoverylaunch                            |
-            | Tune Intent Integer Data                                   | tune intent int data for discoverylaunch                               |
-            | Home Intent Invalid AppId                                  | home intent invalid appid for discoverylaunch                          |
-            | PlayEntity Intent Integer Data                             | playentity intent int data for discoverylaunch                         |
-            | PlayQuery Intent Test Data                                 | playquery intent test data for discoverylaunch                         |
-            | missing Query Intent                                       | no query intent for discoverylaunch                                    |
-            | PlayQuery Intent Integer Data                              | playquery intent int data for discoverylaunch                          |
-            | PlayQuery Intent Integer Query                             | playquery intent int query for discoverylaunch                         |
-            | PlayQuery Intent Integer ProgramType                       | playquery intent int programtype for discoverylaunch                   |
-            | PlayQuery Intent Integer MusicType                         | playquery intent int musictype for discoverylaunch                     |
-            | PlayQuery Intent Integer Types                             | playquery intent int types for discoverylaunch                         |
-            | PlayQuery Intent ProgramType without array                 | playquery intent programtype string for discoverylaunch                |
-            | PlayQuery Intent MusicType without array                   | playquery intent musictype string for discoverylaunch                  |
-            | PlayQuery Intent Types without array                       | playquery intent types without array for discoverylaunch               |
-            | PlayQuery Intent Invalid ProgramType                       | playquery intent invalid programtype for discoverylaunch               |
-            | PlayQuery Intent Invalid MusicType                         | playquery intent invalid musictype for discoverylaunch                 |
-            | PlayEntity Intent with multiple options for playlistEntity | playentity multiple options for discoverylaunch                        |
-            | PlayEntity Intent with options for entityType program      | playentity program with options for discoverylaunch                    |
-            | PlayEntity Intent with Invalid playFirstTrack              | playentity invalid playfirsttrack for discoverylaunch                  |
-            | PlayEntity Intent with Integer playFirstId                 | playentity integer playfirstid for discoverylaunch                     |
-            | PlayEntity Intent without entityType for playlistEntity    | playentity without entitytype for discoverylaunch                      |
-            | PlayEntity Intent without entityId for playlistEntity      | playentity without entityid for discoverylaunch                        |
-            | PlayEntity Intent without programType for movieEntity      | playentity without programtype for movieentity for discoverylaunch     |
-            | PlayEntity Intent without entityId for movieEntity         | playentity without entityid for movieentity for discoverylaunch        |
-            | PlayEntity Intent without programType for TvEpisodeEntity  | playentity without programtype for tvepisodeentity for discoverylaunch |
-            | PlayEntity Intent without entityId for TvEpisodeEntity     | playentity without entityid for tvepisodeentity for discoverylaunch    |
-            | PlayEntity Intent without seriesId for TvEpisodeEntity     | playentity without seriesid for tvepisodeentity for discoverylaunch    |
-            | PlayEntity Intent without seasonId for TvEpisodeEntity     | playentity without seasonid for tvepisodeentity for discoverylaunch    |
-            | Invalid Source Intent                                      | invalid source intent for discoverylaunch                              |
-            | Integer Source Home Intent                                 | home intent with source null for discoverylaunch                       |
-            | Integer Source Playback Intent                             | invalid integer source playback intent for discoverylaunch             |
-            | Integer Source Entity Intent                               | invalid integer source entity intent for discoverylaunch               |
-            | Integer Source Intent                                      | invalid integer source intent for discoverylaunch                      |
-            | Integer Source Search Intent                               | invalid integer source search intent for discoverylaunch               |
-            | Integer Source Section Intent                              | invalid integer source section intent for discoverylaunch              |
-            | Integer Source Tune Intent                                 | invalid integer source tune intent for discoverylaunch                 |
-            | Search Intent Integer Data                                 | search intent integer data for discoverylaunch                         |
+            | Scenario                                                    | Error_Key                                                                       |
+            | missing Action Intent                                       | no action intent for discoverylaunch                                            |
+            | missing Context Intent                                      | no context intent for discoverylaunch                                           |
+            | missing Source Intent                                       | no source intent for discoverylaunch                                            |
+            | missing Data Intent                                         | no data intent for discoverylaunch                                              |
+            | Invalid Action Intent                                       | invalid action intent for discoverylaunch                                       |
+            | Invalid Context Intent                                      | invalid context intent for discoverylaunch                                      |
+            | Playback Intent with only action                            | playback intent only action for discoverylaunch                                 |
+            | Playback Intent Integer Data                                | playback intent int data for discoverylaunch                                    |
+            | Entity Intent Integer Data                                  | entity intent int data for discoverylaunch                                      |
+            | Section Intent Integer Data                                 | section intent int data for discoverylaunch                                     |
+            | Tune Intent Integer Data                                    | tune intent int data for discoverylaunch                                        |
+            | Home Intent Invalid AppId                                   | home intent invalid appid for discoverylaunch                                   |
+            | PlayEntity Intent Integer Data                              | playentity intent int data for discoverylaunch                                  |
+            | PlayQuery Intent Test Data                                  | playquery intent test data for discoverylaunch                                  |
+            | missing Query Intent                                        | no query intent for discoverylaunch                                             |
+            | PlayQuery Intent Integer Data                               | playquery intent int data for discoverylaunch                                   |
+            | PlayQuery Intent Integer Query                              | playquery intent int query for discoverylaunch                                  |
+            | PlayQuery Intent Integer ProgramType                        | playquery intent int programtype for discoverylaunch                            |
+            | PlayQuery Intent Integer MusicType                          | playquery intent int musictype for discoverylaunch                              |
+            | PlayQuery Intent Integer Types                              | playquery intent int types for discoverylaunch                                  |
+            | PlayQuery Intent ProgramType without array                  | playquery intent programtype string for discoverylaunch                         |
+            | PlayQuery Intent MusicType without array                    | playquery intent musictype string for discoverylaunch                           |
+            | PlayQuery Intent Types without array                        | playquery intent types without array for discoverylaunch                        |
+            | PlayQuery Intent Invalid ProgramType                        | playquery intent invalid programtype for discoverylaunch                        |
+            | PlayQuery Intent Invalid MusicType                          | playquery intent invalid musictype for discoverylaunch                          |
+            | PlayEntity Intent with multiple options for playlistEntity  | playentity multiple options for discoverylaunch                                 |
+            | PlayEntity Intent with options for entityType program       | playentity program with options for discoverylaunch                             |
+            | PlayEntity Intent with Invalid playFirstTrack               | playentity invalid playfirsttrack for discoverylaunch                           |
+            | PlayEntity Intent with Integer playFirstId                  | playentity integer playfirstid for discoverylaunch                              |
+            | PlayEntity Intent without entityType for playlistEntity     | playentity without entitytype for discoverylaunch                               |
+            | PlayEntity Intent without entityId for playlistEntity       | playentity without entityid for discoverylaunch                                 |
+            | PlayEntity Intent without programType for movieEntity       | playentity without programtype for movieentity for discoverylaunch              |
+            | PlayEntity Intent without entityId for movieEntity          | playentity without entityid for movieentity for discoverylaunch                 |
+            | PlayEntity Intent without programType for TvEpisodeEntity   | playentity without programtype for tvepisodeentity for discoverylaunch          |
+            | PlayEntity Intent without entityId for TvEpisodeEntity      | playentity without entityid for tvepisodeentity for discoverylaunch             |
+            | PlayEntity Intent without seriesId for TvEpisodeEntity      | playentity without seriesid for tvepisodeentity for discoverylaunch             |
+            | PlayEntity Intent without seasonId for TvEpisodeEntity      | playentity without seasonid for tvepisodeentity for discoverylaunch             |
+            | Invalid Source Intent                                       | invalid source intent for discoverylaunch                                       |
+            | Integer Source Home Intent                                  | home intent with source null for discoverylaunch                                |
+            | Integer Source Playback Intent                              | invalid integer source playback intent for discoverylaunch                      |
+            | Integer Source Entity Intent                                | invalid integer source entity intent for discoverylaunch                        |
+            | Integer Source Intent                                       | invalid integer source intent for discoverylaunch                               |
+            | Integer Source Search Intent                                | invalid integer source search intent for discoverylaunch                        |
+            | Integer Source Section Intent                               | invalid integer source section intent for discoverylaunch                       |
+            | Integer Source Tune Intent                                  | invalid integer source tune intent for discoverylaunch                          |
+            | Search Intent Integer Data                                  | search intent integer data for discoverylaunch                                  |
+            | Search Intent without programType for movieEntity           | search intent without programtype for movieentity for discoverylaunch           |
+            | Search Intent without entityType for movieEntity            | search intent without entitytype for movieentity for discoverylaunch            |
+            | Search Intent without entityId for movieEntity              | search intent without entityId for movieentity for discoverylaunch              |
+            | Search Intent without seriesId for episodeEntity            | search intent without seriesId for episodeentity for discoverylaunch            |
+            | Search Intent without seasonId for episodeEntity            | search intent without seasonId for episodeentity for discoverylaunch            |
+            | Search Intent without seriesId for seasonEntity             | search intent without seriesId for seasonentity for discoverylaunch             |
+            | Search Intent without musicType for musicEntity             | search intent without musicType for musicentity for discoverylaunch             |
+            | Search Intent without channelType for channelEntity         | search intent without channelType for channelentity for discoverylaunch         |
+            | Search Intent without entityId for untypedEntity            | search intent without entityId for untypedentity for discoverylaunch            |
+            | Search Intent with invalid entityType for movieEntity       | search intent with invalid entityType for movieEntity for discoverylaunch       |
+            | Search Intent with invalid movieType for movieEntity        | search intent with invalid movieType for movieEntity for discoverylaunch        |
+            | Search Intent with integer entityId for movieEntity         | search intent with integer entityId for movieEntity for discoverylaunch         |
+            | Search Intent with integer assetId for movieEntity          | search intent with integer assetId for movieEntity for discoverylaunch          |
+            | Search Intent with integer appContentData for movieEntity   | search intent with integer appContentData for movieEntity for discoverylaunch   |
+            | Search Intent with invalid episodeType for episodeEntity    | search intent with invalid episodetype for episodeEntity for discoverylaunch    |
+            | Search Intent with integer seasonId for episodeEntity       | search intent with integer seasonId for episodeEntity for discoverylaunch       |
+            | Search Intent with invalid seriesId for episodeEntity       | search intent with invalid seriesId for episodeEntity for discoverylaunch       |
+            | Search Intent with invalid seasonType for seasonEntity      | search intent with invalid seasonType for seasonEntity for discoverylaunch      |
+            | Search Intent with invalid seriesType for seriesEntity      | search intent with invalid seriesType for seriesEntity for discoverylaunch      |
+            | Search Intent with invalid programType for additionalEntity | search intent with invalid programType for additionalEntity for discoverylaunch |
+            | Search Intent with invalid entityType for musicEntity       | search intent with invalid entityType for musicEntity for discoverylaunch       |
+            | Search Intent with invalid musicType for musicEntity        | search intent with invalid musicType for musicEntity for discoverylaunch        |
+            | Search Intent with invalid entityType for channelEntity     | search intent with invalid entityType for channelEntity for discoverylaunch     |
+            | Search Intent with invalid channelType for channelEntity    | search intent with invalid channelType for channelEntity for discoverylaunch    |
 
     @sdk @transport @Sev2
     Scenario Outline: Discovery.Launch - Cold Launch : Validate API and Event response when <Scenario> for context source
