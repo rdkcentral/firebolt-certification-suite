@@ -10,7 +10,7 @@ Feature: Discovery.launch_HotLaunch
         And '3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
 
     @sdk @transport @Sev0
-    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in foreground state
+    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in foreground state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -34,7 +34,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayQuery intent                         | launch app with playquery intent                    | onNavigateTo with playquery intent                   |
 
     @sdk @transport @Sev1
-    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in foreground state
+    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in foreground state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -71,7 +71,7 @@ Feature: Discovery.launch_HotLaunch
             | Search intent with playlist entity                              | launch app with search intent with playlist entity                           | onNavigateTo with searchintent playlist entity                                    |
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in foreground state
+    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in foreground state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -109,7 +109,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayEntity intent with programType concert                      | launch app with playentity intent with programtype concert                      | onNavigateTo with playentity intent with programtype concert                      |
 
     @sdk @transport @requiresPlatformImplementation @Sev0
-    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in inactive state
+    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in inactive state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'inactive'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -132,7 +132,7 @@ Feature: Discovery.launch_HotLaunch
             | playQuery intent  | launch app with PlayQuery intent  | onNavigateTo with PlayQuery intent  |
             
     @sdk @transport @requiresPlatformImplementation @Sev1
-    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in inactive state
+    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in inactive state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'inactive'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -157,7 +157,7 @@ Feature: Discovery.launch_HotLaunch
             | Search intent with playlist entity              | launch app with search intent with playlist entity           | onNavigateTo with searchintent playlist entity              |
 
     @sdk @transport @requiresPlatformImplementation @Sev2
-    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in inactive state
+    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in inactive state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'inactive'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -173,7 +173,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayEntity intent without options for entityType playlist | launch app with playentity intent without options                        | onNavigateTo with playentity intent without options                        |
 
     @sdk @transport @Sev0
-    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in background state
+    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in background state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'background'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -196,7 +196,7 @@ Feature: Discovery.launch_HotLaunch
             | playQuery intent   | launch app with PlayQuery intent  | onNavigateTo with PlayQuery intent  |
             
     @sdk @transport @Sev1
-    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in background state
+    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in background state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'background'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -221,7 +221,7 @@ Feature: Discovery.launch_HotLaunch
             | Search intent with playlist entity            | launch app with search intent with playlist entity           | onNavigateTo with searchintent playlist entity              |
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in background state
+    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in background state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'background'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -254,7 +254,7 @@ Feature: Discovery.launch_HotLaunch
             | launch app with null intent | suspended  |
 
     @sdk @transport @suspended @Sev0
-    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in suspended state
+    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in suspended state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'suspended'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -276,7 +276,7 @@ Feature: Discovery.launch_HotLaunch
             | playQuery intent  | launch app with PlayQuery intent  |
             
     @sdk @transport @suspended @Sev1
-    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in suspended state
+    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in suspended state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'suspended'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
@@ -300,7 +300,7 @@ Feature: Discovery.launch_HotLaunch
             | Search intent with playlist entity           | launch app with search intent with playlist entity           |
 
     @sdk @transport @suspended @Sev2
-    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> in suspended state
+    Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in suspended state
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'suspended'
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
