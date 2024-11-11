@@ -1,3 +1,10 @@
+# [1.4.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.7...v1.4.0-dev.8) (2024-11-11)
+
+
+### Features
+
+* XSB Advertising module cleanup ([#251](https://github.com/rdkcentral/firebolt-certification-suite/issues/251)) ([6e457d0](https://github.com/rdkcentral/firebolt-certification-suite/commit/6e457d0460763252ac8dca64cac298243919a3c5))
+
 # [1.4.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.6...v1.4.0-dev.7) (2024-11-05)
 
 
