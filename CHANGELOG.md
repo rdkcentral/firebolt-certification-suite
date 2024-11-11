@@ -1,3 +1,61 @@
+# [1.4.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.7...v1.4.0-dev.8) (2024-11-11)
+
+
+### Features
+
+* XSB Advertising module cleanup ([#251](https://github.com/rdkcentral/firebolt-certification-suite/issues/251)) ([6e457d0](https://github.com/rdkcentral/firebolt-certification-suite/commit/6e457d0460763252ac8dca64cac298243919a3c5))
+
+# [1.4.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.6...v1.4.0-dev.7) (2024-11-05)
+
+
+### Features
+
+* Updating Scenario names ([#245](https://github.com/rdkcentral/firebolt-certification-suite/issues/245)) ([e3d2997](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3d2997d90c4c66c3caa1e73286e1ff7767eabb7))
+* XSB accessibility cleanup ([#249](https://github.com/rdkcentral/firebolt-certification-suite/issues/249)) ([55b0547](https://github.com/rdkcentral/firebolt-certification-suite/commit/55b054704faa93e8c976c59fe0dbf950a5a27cb6))
+* Xsb localization cleanup ([#222](https://github.com/rdkcentral/firebolt-certification-suite/issues/222)) ([4d3c746](https://github.com/rdkcentral/firebolt-certification-suite/commit/4d3c74670b1223bd1496ece9d6b8f9804e87fb0f))
+
+# [1.4.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.5...v1.4.0-dev.6) (2024-11-05)
+
+
+### Bug Fixes
+
+* Fixing clear event listener issue ([#243](https://github.com/rdkcentral/firebolt-certification-suite/issues/243)) ([b06818e](https://github.com/rdkcentral/firebolt-certification-suite/commit/b06818e0a87e7b6bf6348b5bc6aeb65884e2ef97))
+
+# [1.4.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.4...v1.4.0-dev.5) (2024-11-04)
+
+
+### Bug Fixes
+
+* SDK report field for module runs ([#247](https://github.com/rdkcentral/firebolt-certification-suite/issues/247)) ([e6ad482](https://github.com/rdkcentral/firebolt-certification-suite/commit/e6ad4827d5f30ea92622aa7524cf25ea4b5f21f9))
+
+# [1.4.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.3...v1.4.0-dev.4) (2024-10-31)
+
+
+### Features
+
+* updated utils.js for getEnvVariable fix ([#246](https://github.com/rdkcentral/firebolt-certification-suite/issues/246)) ([6fe233e](https://github.com/rdkcentral/firebolt-certification-suite/commit/6fe233e72d8db2c85317afcba4d176fe73c76d27))
+
+# [1.4.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.2...v1.4.0-dev.3) (2024-10-28)
+
+
+### Features
+
+* discovery entity changes for 1.4 release of sdk ([#209](https://github.com/rdkcentral/firebolt-certification-suite/issues/209)) ([0bd0a3d](https://github.com/rdkcentral/firebolt-certification-suite/commit/0bd0a3d5d36ce08ab1706fe4a262594649a0ebe0))
+
+# [1.4.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.1...v1.4.0-dev.2) (2024-10-28)
+
+
+### Features
+
+* Module certification issues 2 ([#242](https://github.com/rdkcentral/firebolt-certification-suite/issues/242)) ([5dcdbee](https://github.com/rdkcentral/firebolt-certification-suite/commit/5dcdbee7b491792ea772718fab9c90259a52a296))
+
+# [1.4.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0...v1.4.0-dev.1) (2024-10-28)
+
+
+### Features
+
+* [FCS] - Streamline dependencies on pub sub ([#224](https://github.com/rdkcentral/firebolt-certification-suite/issues/224)) ([e76863a](https://github.com/rdkcentral/firebolt-certification-suite/commit/e76863a9161ddab9e64e2ab6cf345b402d18a872))
+
 # [1.3.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.2.0...v1.3.0) (2024-10-21)
 
 

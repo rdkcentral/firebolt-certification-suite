@@ -492,6 +492,9 @@ To perform screenshot validation, the screenshot validation object should be add
 }
 ```
 
+### Updating Screenshot Logs
+To include the screenshot of the current screen as a link in the report, we need to add the following log: fireLog.info('Screenshot: ' + <url>) within the response override specified [here](/Docs/Request_Overrides.md#screenshot). Ensure that "Screenshot:" remains unchanged in the log message.
+
 # Validation Override
 
 ## Format
@@ -550,7 +553,7 @@ Below is the default error objects supported in FCS [errorContentObjects.json](.
 - NOT_SUPPORTED - This can be used for api's which are not supported
 - NOT_PERMITTED - This can be used for api's which are not supported
 - NOT_AVAILABLE - This can be used for api's which are not supported
-- INVALID_TYPE_PARAMS - This can be used for error validation which involves calling firebolt methods with invalid parameters, missing parameters etc.
+- INVALID_PARAMS - This can be used for error validation which involves calling firebolt methods with invalid parameters, missing parameters etc.
 
 #### Format
 
@@ -618,7 +621,7 @@ Note: FCS expects the error object to be defined in the above format. Any deviat
 ##### Example:
 
 ```
-"INVALID_TYPE_PARAMS": {
+"INVALID_PARAMS": {
         "type": "errorValidationFunction",
         "validations": [
             {

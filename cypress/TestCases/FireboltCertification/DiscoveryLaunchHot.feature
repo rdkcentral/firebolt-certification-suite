@@ -19,6 +19,7 @@ Feature: Discovery.launch_HotLaunch
         Then 'Firebolt' platform responds with 'foreground for lifecycle state'
         And 'Firebolt' platform triggers event '<Event_Content>'
 
+
         Examples:
             | Scenario                                 | Discovery_Launch_Key                                | Event_Content                                        |
             | Home intent                              | launch app with home intent                         | onNavigateTo with home intent                        |
@@ -84,7 +85,6 @@ Feature: Discovery.launch_HotLaunch
             | Scenario                                                        | Discovery_Launch_Key                                                            | Event_Content                                                                     |  
             | playquery intent with musictype album                           | launch app with playquery intent with musictype album                           | onNavigateTo with playquery intent with musictype album                           |
             | playquery intent with programtype concert                       | launch app with playquery intent with programtype concert                       | onNavigateTo with playquery intent with programtype concert                       |
-            | playquery intent with programtype sportingevent                 | launch app with playquery intent with programtype sportingevent                 | onNavigateTo with playquery intent with programtype sportingevent                 |
             | PlayQuery intent with programtype preview                       | launch app with playquery intent with programtype preview                       | onNavigateTo with playquery intent with programtype preview                       |
             | PlayQuery intent with programtype other                         | launch app with playquery intent with programtype other                         | onNavigateTo with playquery intent with programtype other                         |
             | PlayQuery intent with programtype advertisement                 | launch app with playquery intent with programtype advertisement                 | onNavigateTo with playquery intent with programtype advertisement                 |
@@ -182,6 +182,7 @@ Feature: Discovery.launch_HotLaunch
         And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
         Then 'Firebolt' platform responds with 'foreground for lifecycle state'
         And 'Firebolt' platform triggers event '<Event_Content>'
+
 
         Examples:
             | Scenario           | Discovery_Launch_Key              | Event_Content                       |
@@ -408,7 +409,7 @@ Feature: Discovery.launch_HotLaunch
         And 'Firebolt' platform triggers event 'onNavigateTo with home intent'
         And 'Firebolt' platform does not trigger to 'secondary 3rd party app' event 'onNavigateTo'
 
-        Examples:
-            | state       |
-            | background  |
-            | inactive    |
+    Examples:
+        | state      |
+        | background |
+        | inactive   |

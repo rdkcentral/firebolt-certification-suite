@@ -205,9 +205,11 @@ function getTopic(
     topic = deviceMac + '_' + getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
   }
   if (operation == CONSTANTS.SUBSCRIBE) {
-    return subscribeSuffix ? topic + subscribeSuffix : topic + CONSTANTS.TOPIC_SUBSCRIBE_SUFFIX;
+    return subscribeSuffix
+      ? topic + subscribeSuffix
+      : topic + getEnvVariable(CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX);
   } else {
-    return topic + CONSTANTS.TOPIC_PUBLISH_SUFFIX;
+    return topic + getEnvVariable(CONSTANTS.PUB_SUB_PUBLISH_SUFFIX);
   }
 }
 
@@ -687,7 +689,10 @@ function checkForSecondaryAppId(appId) {
     if (appId === CONSTANTS.SECONDARY_THIRD_PARTY_APP) {
       envAppIdKey = CONSTANTS.SECONDARY_THIRD_PARTY_APP_ID;
       return getEnvVariable(CONSTANTS.SECONDARY_THIRD_PARTY_APP_ID);
-    } else if (getEnvVariable(appId) !== null && getEnvVariable(appId) !== undefined) {
+    } else if (
+      getEnvVariable(appId, false) !== null &&
+      getEnvVariable(appId, false) !== undefined
+    ) {
       envAppIdKey = appId;
       return getEnvVariable(appId);
     } else {
@@ -755,12 +760,16 @@ class FireLog extends Function {
           // If the method has its own logging, just apply it
           return Reflect.apply(target, thisArg, argumentsList);
         } else {
-          if (argumentsList.length > 2)
+          if (argumentsList.length > 3)
             message =
               'Expected: ' +
               JSON.stringify(argumentsList[0]) +
               ' Actual: ' +
+              'Expected : ' +
+              JSON.stringify(argumentsList[2]) +
+              ' Actual : ' +
               JSON.stringify(argumentsList[1]);
+          else if (argumentsList.length == 3) message = argumentsList[2];
           else if (argumentsList.length == 1) message = argumentsList[0];
           else if (argumentsList.length == 2) message = argumentsList[1];
           else
