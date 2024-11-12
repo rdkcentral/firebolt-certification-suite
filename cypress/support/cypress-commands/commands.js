@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS, { getEnvVariable } from '../cypress-support/src/utils';
+import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 
@@ -366,9 +366,9 @@ Cypress.Commands.add('getDeviceData', (method, param, action) => {
   };
   cy.log(
     'Call from 1st party App, method: ' +
-      requestMap.method +
-      ' params: ' +
-      JSON.stringify(requestMap.param)
+    requestMap.method +
+    ' params: ' +
+    JSON.stringify(requestMap.param)
   );
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     try {
@@ -611,8 +611,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
             cy.log(
               `Tag passed in the cli-${Cypress.env(
                 CONSTANTS.TAG
-              )} doesn't match with the tag present in before operation object-${
-                beforeOperationObject.tags
+              )} doesn't match with the tag present in before operation object-${beforeOperationObject.tags
               }`
             );
           }
@@ -1431,9 +1430,9 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                     validationPath
                       ? (validationJsonPath = validationPath)
                       : fireLog.assert(
-                          false,
-                          `Could not find the valid validation path from the validationJsonPath list - ${JSON.stringify(validationJsonPath)}`
-                        );
+                        false,
+                        `Could not find the valid validation path from the validationJsonPath list - ${JSON.stringify(validationJsonPath)}`
+                      );
                   }
                   handleValidation(object, methodOrEventObject, methodOrEventResponse);
                 }
@@ -1596,4 +1595,44 @@ Cypress.Commands.add('startOrStopInteractionsService', (action) => {
  */
 Cypress.Commands.add('envConfigSetup', () => {
   fireLog.info('No additional config module environment setup');
+});
+
+/**
+ * @module commands
+ * @function exitAppSession
+ * @description Function to provide the test runner with various methods to end the current app session
+ * @param {String} exitType - Type of close operation to be performed.
+ * @param {String} appId - AppId to be closed.
+ * @example
+ * cy.exitAppSession('closeApp','testAppId')
+ * cy.exitAppSession('dismissApp','testAppId')
+ * cy.exitAppSession('unloadApp','testAppId')
+ */
+Cypress.Commands.add('exitAppSession', (exitType, appId) => {
+  fireLog.info('Invoking platform implementation to end session for appId: ' + appId);
+  let exitMethod
+  switch (exitType) {
+    case 'closeApp':
+      exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.CLOSEAPP
+      break;
+    case 'unloadApp':
+      exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP
+      break;
+    case 'dismissApp':
+      exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.DISMISSAPP
+      break;
+    default:
+      fireLog.info("Session for appId: " + appId + " will not be ended due to invalid exitType")
+      fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
+        throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
+      });
+      fireLog.info("Session for appId: " + appId + " will be ended with type: " + exitType)
+  }
+  const requestMap = {
+    method: exitMethod,
+    params: appId,
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    fireLog.info('Platform has successfully ended app Session for appId: ' + appId);
+  });
 });
