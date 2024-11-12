@@ -182,7 +182,7 @@ Feature: Capabilities
       | granted   | options with array role       | get granted capabilities with invalid options array role   | invalid params for capabilities granted   |
 
   @sdk @transport
-  Scenario: Capabilities api - Validate API Method Response for capability request
+  Scenario: Capabilities api - Validate API Method Response content for capability request
     When '3rd party app' invokes the 'Firebolt' API to 'get info of capability request capability'
     Then 'Firebolt' platform responds with 'expected value for info api'
     When '3rd party app' invokes the 'Firebolt' API to 'get capabilityInfo of request capability'
@@ -221,7 +221,7 @@ Feature: Capabilities
       | device uid capability                   | check if device uid capability is permitted with role use                   | fetch device uid    | expected device uid    |
 
   @sdk @transport @requiresPlatformImplementation
-  Scenario: Capabilities.OnAvailable - Validating API and event response
+  Scenario: Capabilities.OnAvailable - Validate Event trigger
     Given 1st party app registers for the 'capabilities onAvailable' event using the 'Firebolt' API
     And User set response for 'set keyboard response in platform'
     And Framework registers 'keyboard' test provider
@@ -230,7 +230,7 @@ Feature: Capabilities
     And 'Firebolt' platform triggers to '1st party app' event 'expected value for capabilities onAvailable'
 
   @sdk @transport @requiresPlatformImplementation @notSupported
-  Scenario: Capabilities.OnUnavailable - Validating API and event response
+  Scenario: Capabilities.OnUnavailable - Validate Event trigger and Error reponse
     Given 1st party app registers for the 'capabilities onUnavailable' event using the 'Firebolt' API
     And User set response for 'set keyboard response in platform'
     And Framework registers 'keyboard' test provider
@@ -239,7 +239,7 @@ Feature: Capabilities
     And 'Firebolt' platform triggers to '1st party app' event 'expected value for capabilities onUnAvailable'
 
   @sdk @transport @requiresPlatformImplementation
-  Scenario: Capabilities.OnGranted - Validating API and event response
+  Scenario: Capabilities.OnGranted - Validate Event trigger
     Given '3rd party app' registers for the 'capabilities onGranted' event using the 'Firebolt' API
     And User set response for 'set pinchallenge correct pin'
     And Framework registers 'pinChallenge' test provider
@@ -252,7 +252,7 @@ Feature: Capabilities
     And 'Firebolt' platform triggers event 'expected value for capabilities OnGranted'
 
   @sdk @transport @requiresPlatformImplementation
-  Scenario: Capabilities.OnRevoked - Validate Event trigger and reponse
+  Scenario: Capabilities.OnRevoked - Validate Event trigger and Error reponse
     Given '3rd party app' registers for the 'capabilities onRevoked' event using the 'Firebolt' API
     And User set response for 'set pinchallenge wrong pin'
     And Framework registers 'pinChallenge' test provider
