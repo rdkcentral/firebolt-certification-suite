@@ -34,6 +34,8 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
 Cypress.Commands.add(
   'updateResponseForFCS',
   (methodOrEvent, params, response, isValidation = false, isNullCase = false) => {
+    console.log("Updating the response for FCS method::"+ methodOrEvent+ ":::Response"+JSON.stringify(response));
+    
     const responseType = response.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
 
     if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
@@ -47,76 +49,87 @@ Cypress.Commands.add(
         responseType,
         isValidation
       ).then((schemaValidation) => {
-        if (methodOrEvent.includes('.on')) {
-          let formattedSchemaValidationResult;
+        console.log("Schema validation result::"+JSON.stringify(schemaValidation));
+        // Retrieving the pattern string from the env variable to differentiate if the method is an an event or a method
+        const regexPattern = UTILS.getEnvVariable(CONSTANTS.REGEX_EVENT_VALIDATION, true);
+        console.log("Regex Pattern::"+regexPattern);
+        if(regexPattern){
+          const regex = new RegExp(regexPattern.replace(/^\/|\/$/g, ''));  // No need to replace slashes
+          console.log("Regexx Object::" + regex);
+          if (regex.test(methodOrEvent)) {  
+            console.log("Inside ON event");
+            let formattedSchemaValidationResult;
 
-          if (
-            schemaValidation.errors &&
-            schemaValidation.errors.length > 0 &&
-            schemaValidation.errors[0].message
-          ) {
-            formattedSchemaValidationResult = {
-              status: CONSTANTS.FAIL,
-              eventSchemaResult: schemaValidation,
-            };
-          } else {
-            formattedSchemaValidationResult = {
-              status: CONSTANTS.PASS,
-              eventSchemaResult: schemaValidation,
-            };
-          }
-          if (response.hasOwnProperty(CONSTANTS.RESULT)) {
             if (
-              response &&
-              response.result != undefined &&
-              response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+              schemaValidation.errors &&
+              schemaValidation.errors.length > 0 &&
+              schemaValidation.errors[0].message
             ) {
-              formattedResponse = Object.assign(formattedResponse, response.result);
-              formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
-            } else if (
-              (response &&
+              formattedSchemaValidationResult = {
+                status: CONSTANTS.FAIL,
+                eventSchemaResult: schemaValidation,
+              };
+            } else {
+              formattedSchemaValidationResult = {
+                status: CONSTANTS.PASS,
+                eventSchemaResult: schemaValidation,
+              };
+            }
+            if (response.hasOwnProperty(CONSTANTS.RESULT)) {
+              if (
+                response &&
                 response.result != undefined &&
-                !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) ||
-              isNullCase == true
-            ) {
-              formattedResponse.eventResponse = response.result;
-              formattedResponse.eventSchemaResult = formattedSchemaValidationResult;
-              formattedResponse.eventTime = null;
+                response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+              ) {
+                formattedResponse = Object.assign(formattedResponse, response.result);
+                formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
+              } else if (
+                (response &&
+                  response.result != undefined &&
+                  !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) ||
+                isNullCase == true
+              ) {
+                formattedResponse.eventResponse = response.result;
+                formattedResponse.eventSchemaResult = formattedSchemaValidationResult;
+                formattedResponse.eventTime = null;
+              }
+            } else if (response.hasOwnProperty(CONSTANTS.ERROR)) {
+              if (
+                response &&
+                response.result != undefined &&
+                response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+              ) {
+                formattedResponse = Object.assign(formattedResponse, response.error);
+                formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
+              } else if (!response?.result?.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) {
+                formattedResponse = response.error;
+              }
             }
-          } else if (response.hasOwnProperty(CONSTANTS.ERROR)) {
+          } 
+          else {
+            console.log("Inside Else of ON method");
+            if (response.hasOwnProperty(CONSTANTS.ERROR)) {
+              result = { result: null, error: response.error };
+            } else if (response.hasOwnProperty(CONSTANTS.RESULT)) {
+              result = { result: response.result, error: null };
+            }
+
             if (
-              response &&
-              response.result != undefined &&
-              response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+              schemaValidation.errors &&
+              schemaValidation.errors.length > 0 &&
+              schemaValidation.errors[0].message
             ) {
-              formattedResponse = Object.assign(formattedResponse, response.error);
-              formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
-            } else if (!response?.result?.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) {
-              formattedResponse = response.error;
+              formattedResponse[CONSTANTS.SCHEMA_VALIDATION_STATUS] = CONSTANTS.FAIL;
+              formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
+            } else {
+              formattedResponse[CONSTANTS.SCHEMA_VALIDATION_STATUS] = CONSTANTS.PASS;
+              formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
             }
-          }
-        } else {
-          if (response.hasOwnProperty(CONSTANTS.ERROR)) {
-            result = { result: null, error: response.error };
-          } else if (response.hasOwnProperty(CONSTANTS.RESULT)) {
-            result = { result: response.result, error: null };
-          }
 
-          if (
-            schemaValidation.errors &&
-            schemaValidation.errors.length > 0 &&
-            schemaValidation.errors[0].message
-          ) {
-            formattedResponse[CONSTANTS.SCHEMA_VALIDATION_STATUS] = CONSTANTS.FAIL;
-            formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
-          } else {
-            formattedResponse[CONSTANTS.SCHEMA_VALIDATION_STATUS] = CONSTANTS.PASS;
-            formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
+            formattedResponse.response = result;
           }
-
-          formattedResponse.response = result;
         }
-
+        console.log("Formatted Response::"+JSON.stringify(formattedResponse));
         return formattedResponse;
       });
     } else {
@@ -141,8 +154,10 @@ Cypress.Commands.add(
 Cypress.Commands.add(
   'validateSchema',
   (response, methodOrEvent, params, schemaType, isValidation) => {
+    console.log("Validating the schema for method::"+ methodOrEvent+ ":::Response"+JSON.stringify(response));
     cy.getSchema(methodOrEvent, params, schemaType).then((schemaMap) => {
       if (schemaMap) {
+        console.log("SchemaMap for the method::"+ methodOrEvent+" ::is::"+JSON.stringify(schemaMap));
         return validator.validate(response, schemaMap);
       } else {
         if (isValidation) {
@@ -192,6 +207,7 @@ Cypress.Commands.add('getSchema', (methodOrEvent, params, schemaType) => {
         ) {
           const eventName = doc.methods[methodIndex].name;
           if (eventName.toLowerCase() == methodOrEvent.toLowerCase()) {
+            console.log(`Method found in document at index: ${docIndex}`);
             const methodObj = doc.methods[methodIndex];
             schemaMap = methodObj[schemaType].schema;
             break;
@@ -202,7 +218,7 @@ Cypress.Commands.add('getSchema', (methodOrEvent, params, schemaType) => {
           break;
         }
       }
-
+      console.log("SchemaMap for the method::"+ methodOrEvent+" ::is::"+JSON.stringify(schemaMap));
       return schemaMap;
     }
   });
@@ -225,3 +241,4 @@ function removeSetInMethodName(apiName) {
   }
   return apiName.split('.')[0] + '.' + updatedMethod;
 }
+

@@ -340,6 +340,7 @@ module.exports = {
   READ_FILES_FROM_DIRECTORY: 'readFilesFromDir',
   RECORD_TASK_TYPE_START: 'starts',
   REGEX: 'regEx',
+  REGEX_EVENT_VALIDATION: 'regexEventValidation',
   REPORT_COMMUNICATION_MODE: 'Communication Mode',
   REPORT_DATE: 'Date',
   REQUEST_OVERRIDE_CALLS: {
