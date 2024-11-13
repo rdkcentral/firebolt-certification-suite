@@ -5,7 +5,7 @@ Feature: Authentication
       Given the environment has been set up for 'Authentication' tests
       And 3rd party 'certification' app is launched
 
-   @sdk @transport
+   @sdk @transport @Sev0
    Scenario Outline: Authentication.token - Validate API Method response for <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
@@ -15,10 +15,18 @@ Feature: Authentication
          | Platform token type         | get the authentication token for platform         | platform authentication token      |
          | Device token type           | get the authentication token for device           | decode base64 authentication token |
          | Distributor token type      | get the authentication token for distributor      | decode base64 authentication token |
+        
+   @sdk @transport @Sev1
+   Scenario Outline: Authentication.token - Validate API Method response for <Scenario>
+      When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+      Then 'Firebolt' platform responds with '<Validation_key>'
+
+      Examples:
+         | Scenario                    | API_Key                                           | Validation_key                     |
          | Distributor-CIMA token type | get the authentication token for distributor_CIMA | decode base64 authentication token |
          | Distributor-OAT token type  | get the authentication token for distributor_OAT  | decode base64 authentication token |
 
-   @sdk @transport
+   @sdk @transport @Sev0
    Scenario Outline: Authentication.<Method> - Validate API Method response for <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
@@ -29,7 +37,7 @@ Feature: Authentication
          | Session token type | fetch session token | authentication session | session |
          | Root token type    | fetch root token    | authentication root    | root    |
 
-   @sdk @transport
+   @sdk @transport @Sev1
    Scenario Outline: Authentication.token - Validating API Error handling when given <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
       Then 'Firebolt' platform responds with '<Validation_key>'
