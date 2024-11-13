@@ -37,7 +37,7 @@ Given('the environment has been set up for {string} tests', (test) => {
   }
   if (
     !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
-    UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
+    UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) || UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
     UTILS.isTestTypeChanged(test)
   ) {
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
