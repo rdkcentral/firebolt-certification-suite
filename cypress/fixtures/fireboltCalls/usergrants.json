@@ -186,13 +186,13 @@
     "INVALID_PARAMETER_FOR_USERGRANTS_APP": {
         "method": "usergrants.app",
 		"validationJsonPath": "result",
-		"content": "INVALID_TYPE_PARAMS",
+		"content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETER_FOR_USERGRANTS_CAPABILITY": {
         "method": "usergrants.capability",
 		"validationJsonPath": "result",
-		"content": "INVALID_TYPE_PARAMS",
+		"content": "INVALID_PARAMS",
         "expectingError": true
     },
     "GET_USERGRANTS_GRANT_WITH_INVALID_ROLE_PARAMETER": {
@@ -238,13 +238,13 @@
     "INVALID_PARAMETER_FOR_USERGRANTS_GRANT": {
         "method": "usergrants.grant",
 		"validationJsonPath": "result",
-		"content": "INVALID_TYPE_PARAMS",
+		"content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETER_FOR_USERGRANTS_DENY": {
         "method": "usergrants.deny",
 		"validationJsonPath": "result",
-		"content": "INVALID_TYPE_PARAMS",
+		"content": "INVALID_PARAMS",
         "expectingError": true
     },
     "GET_USERGRANTS_CLEAR_WITH_INVALID_ROLE_PARAMETER": {
@@ -265,7 +265,7 @@
     "INVALID_PARAMETER_FOR_USERGRANTS_CLEAR": {
         "method": "usergrants.clear",
 		"validationJsonPath": "result",
-		"content": "INVALID_TYPE_PARAMS",
+		"content": "INVALID_PARAMS",
         "expectingError": true
     },
     "GET_USERGRANTS_REQUEST_WITH_INVALID_ROLE_PARAMETER": {
@@ -286,7 +286,7 @@
     "INVALID_PARAMETER_FOR_USERGRANTS_REQUEST": {
         "method": "usergrants.request",
 		"validationJsonPath": "result",
-		"content": "INVALID_TYPE_PARAMS",
+		"content": "INVALID_PARAMS",
         "expectingError": true
     },
     "CUSTOM_ERROR_FOR_USERGRANTS_GRANT": {

@@ -209,6 +209,14 @@ Cypress.Commands.add('getSdkVersion', () => {
               );
             Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
           }
+          if (response?.result?.sdk?.readable) {
+            const responseResultSDK =
+              `${response?.result?.sdk?.major}.${response?.result?.sdk?.minor}.${response?.result?.sdk?.patch}`.replace(
+                /"/g,
+                ''
+              );
+            Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+          }
         });
       });
   }
@@ -302,7 +310,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                   const labelToEnvMap = {
                     [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                     [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
-                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.SDK_VERSION,
+                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
                     [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
                     [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
                     [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
@@ -902,6 +910,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
         params: {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.APP_TYPE]: appCategory,
+          [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
         },
       },
     };
@@ -917,6 +926,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.LIFECYCLE_VALIDATION]: true,
           [CONSTANTS.APP_TYPE]: appCategory,
+          [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
         },
       },
     };
@@ -935,8 +945,39 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   // Add the PubSub URL if required
   if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
     data.query.params[CONSTANTS.PUB_SUB_URL] = getEnvVariable(CONSTANTS.PUB_SUB_URL);
-    if (getEnvVariable(CONSTANTS.DEVICE_MAC, false)) {
-      data.query.params[CONSTANTS.MACADDRESS_PARAM] = getEnvVariable(CONSTANTS.DEVICE_MAC);
+  }
+  // Add the PubSub UUID if the env variable is set
+  if (getEnvVariable(CONSTANTS.PUB_SUB_UUID, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_UUID] = getEnvVariable(CONSTANTS.PUB_SUB_UUID);
+  }
+  // Add the PubSub publish suffix from env variable
+  if (getEnvVariable(CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_PUBLISH_SUFFIX] = getEnvVariable(
+      CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX
+    );
+  }
+  // Add the PubSub subscribe suffix from env variable
+  if (getEnvVariable(CONSTANTS.PUB_SUB_PUBLISH_SUFFIX, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX] = getEnvVariable(
+      CONSTANTS.PUB_SUB_PUBLISH_SUFFIX
+    );
+  }
+  // Check for additional launch parameters
+  // If a key exists in both the default parameters and the additional parameters, the value from the additional parameters will override the default value.
+  if (Cypress.env('additionalLaunchParams')) {
+    const additionalParams = Cypress.env('additionalLaunchParams');
+    for (const key in additionalParams) {
+      let value = additionalParams[key];
+      // If the value starts with 'CYPRESSENV-', extract the variable name.
+      if (value.startsWith('CYPRESSENV-')) {
+        const envParam = value.split('-')[1];
+        // Fetch the corresponding value from the env.
+        value = getEnvVariable(envParam, false);
+      }
+      // Add to data.query.params only if the value is defined
+      if (value) {
+        data.query.params[key] = value;
+      }
     }
   }
   // If the testType is userInterestProvider, send the discovery.launch params with registerProvider = false, then certification app will not register for userInterest provider.
@@ -983,6 +1024,13 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
           healthCheckResponse = JSON.parse(healthCheckResponse);
           expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
         });
+        cy.getSdkVersion().then(() => {
+          cy.getFireboltJsonData().then((data) => {
+            Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
+          });
+        });
+        cy.getCapabilities();
+        cy.updateRunInfo();
       }
     });
   });
