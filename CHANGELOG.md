@@ -1,3 +1,12 @@
+# [1.4.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.8...v1.4.0-dev.9) (2024-11-13)
+
+
+### Features
+
+* XSB discover launch hot cleanup ([#256](https://github.com/rdkcentral/firebolt-certification-suite/issues/256)) ([68987c7](https://github.com/rdkcentral/firebolt-certification-suite/commit/68987c7a7e722c814edefd8cfdacd8976e329d53))
+* XSB discovery cleanup ([#258](https://github.com/rdkcentral/firebolt-certification-suite/issues/258)) ([55f5f7e](https://github.com/rdkcentral/firebolt-certification-suite/commit/55f5f7e49f9b925ef29ab9117346fc85875b09ee))
+* XSB discovery launch cold cleanup ([#260](https://github.com/rdkcentral/firebolt-certification-suite/issues/260)) ([34f3f62](https://github.com/rdkcentral/firebolt-certification-suite/commit/34f3f62d023cd2cd91f26d716c5092de36be3886))
+
 # [1.4.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.7...v1.4.0-dev.8) (2024-11-11)
 
 
