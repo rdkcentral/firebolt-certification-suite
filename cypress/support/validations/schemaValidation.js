@@ -34,8 +34,13 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
 Cypress.Commands.add(
   'updateResponseForFCS',
   (methodOrEvent, params, response, isValidation = false, isNullCase = false) => {
-    console.log("Updating the response for FCS method::"+ methodOrEvent+ ":::Response"+JSON.stringify(response));
-    
+    console.log(
+      'Updating the response for FCS method::' +
+        methodOrEvent +
+        ':::Response' +
+        JSON.stringify(response)
+    );
+
     const responseType = response.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
 
     if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
@@ -49,15 +54,15 @@ Cypress.Commands.add(
         responseType,
         isValidation
       ).then((schemaValidation) => {
-        console.log("Schema validation result::"+JSON.stringify(schemaValidation));
+        console.log('Schema validation result::' + JSON.stringify(schemaValidation));
         // Retrieving the pattern string from the env variable to differentiate if the method is an an event or a method
         const regexPattern = UTILS.getEnvVariable(CONSTANTS.REGEX_EVENT_VALIDATION, true);
-        console.log("Regex Pattern::"+regexPattern);
-        if(regexPattern){
-          const regex = new RegExp(regexPattern.replace(/^\/|\/$/g, ''));  // No need to replace slashes
-          console.log("Regexx Object::" + regex);
-          if (regex.test(methodOrEvent)) {  
-            console.log("Inside ON event");
+        console.log('Regex Pattern::' + regexPattern);
+        if (regexPattern) {
+          const regex = new RegExp(regexPattern.replace(/^\/|\/$/g, '')); // No need to replace slashes
+          console.log('Regexx Object::' + regex);
+          if (regex.test(methodOrEvent)) {
+            console.log('Inside ON event');
             let formattedSchemaValidationResult;
 
             if (
@@ -105,9 +110,8 @@ Cypress.Commands.add(
                 formattedResponse = response.error;
               }
             }
-          } 
-          else {
-            console.log("Inside Else of ON method");
+          } else {
+            console.log('Inside Else of ON method');
             if (response.hasOwnProperty(CONSTANTS.ERROR)) {
               result = { result: null, error: response.error };
             } else if (response.hasOwnProperty(CONSTANTS.RESULT)) {
@@ -129,7 +133,7 @@ Cypress.Commands.add(
             formattedResponse.response = result;
           }
         }
-        console.log("Formatted Response::"+JSON.stringify(formattedResponse));
+        console.log('Formatted Response::' + JSON.stringify(formattedResponse));
         return formattedResponse;
       });
     } else {
@@ -154,10 +158,17 @@ Cypress.Commands.add(
 Cypress.Commands.add(
   'validateSchema',
   (response, methodOrEvent, params, schemaType, isValidation) => {
-    console.log("Validating the schema for method::"+ methodOrEvent+ ":::Response"+JSON.stringify(response));
+    console.log(
+      'Validating the schema for method::' +
+        methodOrEvent +
+        ':::Response' +
+        JSON.stringify(response)
+    );
     cy.getSchema(methodOrEvent, params, schemaType).then((schemaMap) => {
       if (schemaMap) {
-        console.log("SchemaMap for the method::"+ methodOrEvent+" ::is::"+JSON.stringify(schemaMap));
+        console.log(
+          'SchemaMap for the method::' + methodOrEvent + ' ::is::' + JSON.stringify(schemaMap)
+        );
         return validator.validate(response, schemaMap);
       } else {
         if (isValidation) {
@@ -218,7 +229,9 @@ Cypress.Commands.add('getSchema', (methodOrEvent, params, schemaType) => {
           break;
         }
       }
-      console.log("SchemaMap for the method::"+ methodOrEvent+" ::is::"+JSON.stringify(schemaMap));
+      console.log(
+        'SchemaMap for the method::' + methodOrEvent + ' ::is::' + JSON.stringify(schemaMap)
+      );
       return schemaMap;
     }
   });
@@ -241,4 +254,3 @@ function removeSetInMethodName(apiName) {
   }
   return apiName.split('.')[0] + '.' + updatedMethod;
 }
-

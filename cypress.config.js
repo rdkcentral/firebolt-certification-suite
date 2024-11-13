@@ -85,7 +85,7 @@ const env = {
     'lifeCycleApi',
     'UserInterestProvider',
   ],
-  regexEventValidation : '/(\\.on)\\S*/',
+  regexEventValidation: '/(\\.on)\\S*/',
   fcaAppList: ['default3rdPartyAppId'],
   variableObjectsPrefixLists: ['DYNAMIC_FB_CALL_VARIABLES'],
   pendingFeatures: [],
