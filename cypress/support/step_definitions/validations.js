@@ -277,7 +277,7 @@ Given(/Metrics collection process is '(initiated|stopped)'/, (action) => {
 
 /**
  * @module validations
- * @function Validate (device|process|all) (memory|load|set size|required) consumption is within the limit of the threshold(?: of '(.+)' (cpu|bytes) with '(.+)' percentile
+ * @function (device|process|all) (memory|load|set size|required) consumption should be within the limit of the threshold(?: of '(.+)' (cpu|bytes) with '(.+)' percentile
  * @descriptionvalidate Validates whether or not the cpu threshold of 'process' exceeds the 'percentile' of 'cpuThreshold'
  * @param {String} type - (device|process|all)
  * @param {String} process - (memory|load|set size|required)
@@ -285,9 +285,9 @@ Given(/Metrics collection process is '(initiated|stopped)'/, (action) => {
  * @param {String} bytes - bytes
  * @param {String} threshold - the maximum cpu/bytes threshold
  * @example
- * Then Validate device load consumption is within the limit of the threshold
- * Then Validate process set size consumption is within the limit of the threshold of '1073741824' bytes with '70' percentile
- * Then Validate all required consumption is within the limit of the threshold
+ * Then device load consumption should be within the limit of the threshold
+ * Then process set size consumption should be within the limit of the threshold of '1073741824' bytes with '70' percentile
+ * Then all required consumption should be within the limit of the threshold
  */
 Given(
   /(device|process|all) (memory|load|set size|required) consumption should be within the limit of the threshold(?: of '(.+)' (cpu|bytes) with '(.+)' percentile)?$/,
