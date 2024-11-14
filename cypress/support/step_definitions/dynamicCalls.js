@@ -349,6 +349,19 @@ Given(
  */
 Given(/'(.+)' on '(.+)' page/, (validationObjectKey, page) => {
   // Storing the page name in runtime environment variable to use it in the validations.
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
+    params: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID),
+  };
+
+  cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    if (response === 'foreground') {
+      fireLog.info(`State is ${response} as expected`);
+    } else {
+      fireLog.fail(`Unexpected state: ${response}. Expected 'foreground'`);
+    }
+  });
+  
   if (Cypress.env(CONSTANTS.RUNTIME)) {
     Cypress.env(CONSTANTS.RUNTIME).page = page;
   } else {
