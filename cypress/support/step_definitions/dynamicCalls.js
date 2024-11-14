@@ -51,22 +51,31 @@ Given(
 
 /**
  * @module getterSetterCalls
- * @function Given 1st party app invokes the '(.+)' API to set( invalid)? value
+ * @function Given 1st party app(?: invokes the '(.+)' API)? to set(?: '(.*?)' to( invalid)? '(.*?)'|( invalid)? value)?
  * @description Sending a message to platform to set a value and `invalid` is a optional parameter that specify whether to expect for an error or a result.
  * @param {String} sdk - sdk name.
  * @param {String} invalidValue - Determines whether expecting for an error or result.
  * @example
- * Given 1st party app invokes the 'Firebolt' API to set
+ * Given 1st party app invokes the 'Firebolt' API to set value
+ * Given 1st party app to set value
  * Given 1st party app invokes the 'Firebolt' API to set invalid value
+ * Given 1st party app invokes the 'Firebolt' API to set 'enabled' to 'true'
+ * Given 1st party app to set 'enabled' to 'true'
  */
 Given(
-  /1st party app invokes the '(.+)' API to set( invalid)? value$/,
-  async (sdk, invalidValue) => {
-    cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
+  /1st party app(?: invokes the '(.+)' API)? to set(?: '(.*?)' to( invalid)? '(.*?)'|( invalid)? value)?$/,
+  async (sdk, attribute, invalidValue, value, invalidValue1) => {
+    if (attribute && value) {
+      value = UTILS.parseValue(value);
+      Cypress.env(CONSTANTS.RUNTIME).attribute = attribute;
+      Cypress.env(CONSTANTS.RUNTIME).value = value;
+    }
+
+    cy.getRuntimeFireboltCallObject().then((fireboltCallObject) => {
       let setMethod;
       let setParams;
       const context = {};
-      const expected = invalidValue ? CONSTANTS.ERROR : CONSTANTS.RESULT;
+      const expected = invalidValue || invalidValue1 ? CONSTANTS.ERROR : CONSTANTS.RESULT;
       let action = CONSTANTS.ACTION_CORE.toLowerCase();
       if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.SET_METHOD)) {
         setMethod = UTILS.resolveRecursiveValues(fireboltCallObject.setMethod);
@@ -118,7 +127,7 @@ Given(
 
 /**
  * @module getterSetterCalls
- * @function Given '(.+)' invokes the '(.+)' get API
+ * @function Given '(.+)' invokes(?: the '(.+)')? get API
  * @description Sending a message to platform or 3rd party app to invoke an API and get the value.
  * @param {String} appId - app identifier.
  * @param {String} sdk - sdk name.
@@ -126,9 +135,10 @@ Given(
  * Given '1st party app' invokes the 'Firebolt' get API
  * Given '3rd party app' invokes the 'Firebolt' get API
  * Given 'test_app' invokes the 'Firebolt' get API
+ * Given '1st party app' invokes get API
  */
-Given(/'(.+)' invokes the '(.+)' get API$/, async (appId, sdk) => {
-  cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
+Given(/'(.+)' invokes(?: the '(.+)')? get API$/, async (appId, sdk) => {
+  cy.getRuntimeFireboltCallObject().then((fireboltCallObject) => {
     const context = {};
     const expected = CONSTANTS.RESULT;
     appId = UTILS.fetchAppIdentifierFromEnv(appId);
@@ -176,16 +186,17 @@ Given(/'(.+)' invokes the '(.+)' get API$/, async (appId, sdk) => {
 
 /**
  * @module getterSetterCalls
- * @function Given '(.+)' registers for the '(.+)' event
+ * @function Given '(.+)' registers for(?: the '(.+)')? event
  * @description Sending a message to platform or third party app to start listening for an event.
  * @param {String} appId - app identifier.
  * @param {String} sdk - sdk name.
  * @example
  * And '3rd party app' registers for the 'Firebolt' event
  * And '1st party app' registers for the 'Firebolt' event
+ * And '1st party app' registers for event
  */
-Given(/'(.+)' registers for the '(.+)' event$/, async (appId, sdk) => {
-  cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
+Given(/'(.+)' registers for(?: the '(.+)')? event$/, async (appId, sdk) => {
+  cy.getRuntimeFireboltCallObject().then((fireboltCallObject) => {
     let event;
     if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.EVENT)) {
       event = UTILS.resolveRecursiveValues(fireboltCallObject.event);
@@ -231,7 +242,7 @@ Given(/'(.+)' registers for the '(.+)' event$/, async (appId, sdk) => {
 
 /**
  * @module getterSetterCalls
- * @function Given '(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?
+ * @function Given '(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)'| with '(.+)')?
  * @description Performing a validation against the source of truth for the given API response
  * @param {String} sdk - name of the sdk.
  * @param {String} appId - app identifier.
@@ -242,12 +253,15 @@ Given(/'(.+)' registers for the '(.+)' event$/, async (appId, sdk) => {
  * And 'Firebolt' platform responds to '1st party app' set API
  * And 'Firebolt' platform responds to '3rd party app' get API
  * And 'Firebolt' platform responds to '1st party app' set API with 'INVALID_PARAMS'
+ * And 'Firebolt' platform responds to '3rd party app' get API with 'true'
  */
 Given(
-  /'(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?$/,
-  async (sdk, appId, methodType, errorContent) => {
+  /'(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)'| with '(.+)')?$/,
+  async (sdk, appId, methodType, content, errorContent) => {
+    content = UTILS.parseValue(content);
+    Cypress.env(CONSTANTS.RUNTIME).content = content;
     // Retrieving the dynamic firebolt call object from the env variable
-    cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
+    cy.getRuntimeFireboltCallObject().then((fireboltCallObject) => {
       let method;
       const setOrGetMethod = methodType === CONSTANTS.SET ? CONSTANTS.SET_METHOD : CONSTANTS.METHOD;
 
@@ -290,7 +304,7 @@ Given(
 
 /**
  * @module getterSetterCalls
- * @function Given '(.+)' platform (triggers|does not trigger) '(.*?)' event(?: with '(.+)')?
+ * @function Given '(.+)' platform (triggers|does not trigger) '(.*?)' event(?: with '(.+)'| with '(.+)')?
  * @description Performing a event validation against the source of truth
  * @param {String} sdk - name of the sdk.
  * @param {String} eventExpected - Determines whether the event is expected or not.
@@ -301,12 +315,15 @@ Given(
  * And 'Firebolt' platform triggers '3rd party app' event
  * And 'Firebolt' platform does not trigger '3rd party app' event
  * And 'Firebolt' platform triggers '1st party app' event with 'INVALID_PARAMS'
+ * And 'Firebolt' platform triggers '1st party app' event with 'true'
  */
 Given(
-  /'(.+)' platform (triggers|does not trigger) '(.*?)' event(?: with '(.+)')?$/,
-  async (sdk, eventExpected, appId, errorContent) => {
+  /'(.+)' platform (triggers|does not trigger) '(.*?)' event(?: with '(.+)'| with '(.+)')?$/,
+  async (sdk, eventExpected, appId, content, errorContent) => {
+    content = UTILS.parseValue(content);
+    Cypress.env(CONSTANTS.RUNTIME).content = content;
     // Retrieving the dynamic firebolt call object from the env variable
-    cy.getRuntimeFireboltCallObject(sdk).then((fireboltCallObject) => {
+    cy.getRuntimeFireboltCallObject().then((fireboltCallObject) => {
       let event;
       const isNullCase = fireboltCallObject.isNullCase || false;
       if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.EVENT)) {

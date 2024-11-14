@@ -28,6 +28,30 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
  * Given the environment has been set up for 'Firebolt Sanity' tests
  */
 Given('the environment has been set up for {string} tests', (test) => {
+  const runtime = {};
+
+  // Check if the test parameter is provided
+  if (test) {
+    let fireboltCallKey;
+    // Check if the test parameter contains a colon to split into module and method
+    if (test.includes(':')) {
+      const [module, method] = test.split(':');
+      fireboltCallKey = module.toUpperCase();
+      Object.assign(runtime, { method, module });
+    } else {
+      // Replace spaces with underscores and convert to uppercase for the fireboltCallKey
+      fireboltCallKey = test.replace(/\s+/g, '_').toUpperCase();
+    }
+    // Retrieve the firebolt object from environment variables using the fireboltCallKey
+    const fireboltObject = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[fireboltCallKey];
+    if (fireboltObject) {
+      // Update the runtime environment variable with the firebolt object
+      runtime.fireboltCall = fireboltObject;
+      Cypress.env(CONSTANTS.RUNTIME, runtime);
+      fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
+    }
+  }
+
   if (
     UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
       JSON.stringify(window.testState.gherkinDocument.feature.name)

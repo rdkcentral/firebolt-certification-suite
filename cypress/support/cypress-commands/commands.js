@@ -1527,22 +1527,18 @@ Cypress.Commands.add(
  * @example
  * cy.getRuntimeFireboltCallObject(sdk);
  */
-Cypress.Commands.add('getRuntimeFireboltCallObject', (sdk) => {
-  if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
-    // Checking the `runtime` env variable created and it has 'fireboltCall' field, else failing the test.
-    if (
-      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false) &&
-      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).hasOwnProperty(CONSTANTS.FIREBOLTCALL) &&
-      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).fireboltCall
-    ) {
-      return UTILS.getEnvVariable(CONSTANTS.RUNTIME).fireboltCall;
-    } else {
-      fireLog.fail(
-        'The runtime environment variable was not found. To initialize the firebolt object, add the step "we test the (.+) getters and setters" with firebolt object key.'
-      );
-    }
+Cypress.Commands.add('getRuntimeFireboltCallObject', () => {
+  // Checking the `runtime` env variable created and it has 'fireboltCall' field, else failing the test.
+  if (
+    UTILS.getEnvVariable(CONSTANTS.RUNTIME, false) &&
+    UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).hasOwnProperty(CONSTANTS.FIREBOLTCALL) &&
+    UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).fireboltCall
+  ) {
+    return UTILS.getEnvVariable(CONSTANTS.RUNTIME).fireboltCall;
   } else {
-    fireLog.assert(false, `${sdk} SDK not Supported`);
+    fireLog.fail(
+      'The firebolt call object was not found in the runtime environment variable. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key.'
+    );
   }
 });
 
