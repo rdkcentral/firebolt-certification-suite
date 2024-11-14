@@ -1,3 +1,10 @@
+# [1.4.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.9...v1.4.0-dev.10) (2024-11-14)
+
+
+### Features
+
+* XSB authentication cleanup ([#255](https://github.com/rdkcentral/firebolt-certification-suite/issues/255)) ([f4dd871](https://github.com/rdkcentral/firebolt-certification-suite/commit/f4dd871c958090fb8728850161b2784abb77988a))
+
 # [1.4.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.8...v1.4.0-dev.9) (2024-11-13)
 
 
