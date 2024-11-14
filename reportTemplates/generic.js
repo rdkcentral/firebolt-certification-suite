@@ -16,6 +16,12 @@ limitations under the License.
 SPDX-License-Identifier: Apache-2.0
 */
 
+/*
+Adapts material from multiple-cucumber-html-reporter which is:
+Copyright (c) 2023 Wasiq Bhamla
+Licensed under the MIT License
+*/
+
 $('.x_title').on('click', function () {
   const $BOX_PANEL = $(this).closest('.x_panel'),
     $ICON = $(this).find('.collapse-link i'),
