@@ -34,13 +34,6 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
 Cypress.Commands.add(
   'updateResponseForFCS',
   (methodOrEvent, params, response, isValidation = false, isNullCase = false) => {
-    console.log(
-      'Updating the response for FCS method::' +
-        methodOrEvent +
-        ':::Response' +
-        JSON.stringify(response)
-    );
-
     const responseType = response.error ? CONSTANTS.ERROR : CONSTANTS.RESULT;
 
     if (response.hasOwnProperty(CONSTANTS.RESULT) || response.hasOwnProperty(CONSTANTS.ERROR)) {
@@ -56,77 +49,75 @@ Cypress.Commands.add(
       ).then((schemaValidation) => {
         // Retrieving the pattern string from the env variable to differentiate if the method is an an event or a method
         const regexPattern = UTILS.getEnvVariable(CONSTANTS.REGEX_EVENT_VALIDATION, true);
-        if (regexPattern) {
-          const regex = new RegExp(regexPattern.replace(/^\/|\/$/g, '')); // No need to replace slashes
-          if (regex.test(methodOrEvent)) {
-            let formattedSchemaValidationResult;
+        const regex = new RegExp(regexPattern.replace(/^\/|\/$/g, '')); // No need to replace slashes
+        if (regex.test(methodOrEvent)) {
+          let formattedSchemaValidationResult;
 
-            if (
-              schemaValidation.errors &&
-              schemaValidation.errors.length > 0 &&
-              schemaValidation.errors[0].message
-            ) {
-              formattedSchemaValidationResult = {
-                status: CONSTANTS.FAIL,
-                eventSchemaResult: schemaValidation,
-              };
-            } else {
-              formattedSchemaValidationResult = {
-                status: CONSTANTS.PASS,
-                eventSchemaResult: schemaValidation,
-              };
-            }
-            if (response.hasOwnProperty(CONSTANTS.RESULT)) {
-              if (
-                response &&
-                response.result != undefined &&
-                response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
-              ) {
-                formattedResponse = Object.assign(formattedResponse, response.result);
-                formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
-              } else if (
-                (response &&
-                  response.result != undefined &&
-                  !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) ||
-                isNullCase == true
-              ) {
-                formattedResponse.eventResponse = response.result;
-                formattedResponse.eventSchemaResult = formattedSchemaValidationResult;
-                formattedResponse.eventTime = null;
-              }
-            } else if (response.hasOwnProperty(CONSTANTS.ERROR)) {
-              if (
-                response &&
-                response.result != undefined &&
-                response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
-              ) {
-                formattedResponse = Object.assign(formattedResponse, response.error);
-                formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
-              } else if (!response?.result?.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) {
-                formattedResponse = response.error;
-              }
-            }
+          if (
+            schemaValidation.errors &&
+            schemaValidation.errors.length > 0 &&
+            schemaValidation.errors[0].message
+          ) {
+            formattedSchemaValidationResult = {
+              status: CONSTANTS.FAIL,
+              eventSchemaResult: schemaValidation,
+            };
           } else {
-            if (response.hasOwnProperty(CONSTANTS.ERROR)) {
-              result = { result: null, error: response.error };
-            } else if (response.hasOwnProperty(CONSTANTS.RESULT)) {
-              result = { result: response.result, error: null };
-            }
-
-            if (
-              schemaValidation.errors &&
-              schemaValidation.errors.length > 0 &&
-              schemaValidation.errors[0].message
-            ) {
-              formattedResponse[CONSTANTS.SCHEMA_VALIDATION_STATUS] = CONSTANTS.FAIL;
-              formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
-            } else {
-              formattedResponse[CONSTANTS.SCHEMA_VALIDATION_STATUS] = CONSTANTS.PASS;
-              formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
-            }
-
-            formattedResponse.response = result;
+            formattedSchemaValidationResult = {
+              status: CONSTANTS.PASS,
+              eventSchemaResult: schemaValidation,
+            };
           }
+          if (response.hasOwnProperty(CONSTANTS.RESULT)) {
+            if (
+              response &&
+              response.result != undefined &&
+              response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+            ) {
+              formattedResponse = Object.assign(formattedResponse, response.result);
+              formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
+            } else if (
+              (response &&
+                response.result != undefined &&
+                !response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) ||
+              isNullCase == true
+            ) {
+              formattedResponse.eventResponse = response.result;
+              formattedResponse.eventSchemaResult = formattedSchemaValidationResult;
+              formattedResponse.eventTime = null;
+            }
+          } else if (response.hasOwnProperty(CONSTANTS.ERROR)) {
+            if (
+              response &&
+              response.result != undefined &&
+              response.result.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)
+            ) {
+              formattedResponse = Object.assign(formattedResponse, response.error);
+              formattedResponse.eventListenerSchemaResult = formattedSchemaValidationResult;
+            } else if (!response?.result?.hasOwnProperty(CONSTANTS.EVENT_LISTENER_RESPONSE)) {
+              formattedResponse = response.error;
+            }
+          }
+        } else {
+          if (response.hasOwnProperty(CONSTANTS.ERROR)) {
+            result = { result: null, error: response.error };
+          } else if (response.hasOwnProperty(CONSTANTS.RESULT)) {
+            result = { result: response.result, error: null };
+          }
+
+          if (
+            schemaValidation.errors &&
+            schemaValidation.errors.length > 0 &&
+            schemaValidation.errors[0].message
+          ) {
+            formattedResponse[CONSTANTS.SCHEMA_VALIDATION_STATUS] = CONSTANTS.FAIL;
+            formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
+          } else {
+            formattedResponse[CONSTANTS.SCHEMA_VALIDATION_STATUS] = CONSTANTS.PASS;
+            formattedResponse[CONSTANTS.SCHEMA_VALIDATION_RESPONSE] = schemaValidation;
+          }
+
+          formattedResponse.response = result;
         }
         return formattedResponse;
       });
