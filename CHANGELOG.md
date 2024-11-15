@@ -1,3 +1,10 @@
+# [1.4.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.12...v1.4.0-dev.13) (2024-11-15)
+
+
+### Bug Fixes
+
+* added json object missing ([#259](https://github.com/rdkcentral/firebolt-certification-suite/issues/259)) ([2fc89e5](https://github.com/rdkcentral/firebolt-certification-suite/commit/2fc89e55b73b22b828b31c4d000e498c43c35d70))
+
 # [1.4.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.11...v1.4.0-dev.12) (2024-11-15)
 
 
