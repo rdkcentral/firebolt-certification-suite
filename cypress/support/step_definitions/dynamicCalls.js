@@ -361,7 +361,7 @@ Given(/'(.+)' on '(.+)' page/, (validationObjectKey, page) => {
       fireLog.fail(`Unexpected state: ${response}. Expected to be FOREGROUND`);
     }
   });
-  
+
   // Storing the page name in runtime environment variable to use it in the validations.
   if (Cypress.env(CONSTANTS.RUNTIME)) {
     Cypress.env(CONSTANTS.RUNTIME).page = page;
