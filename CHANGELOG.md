@@ -1,3 +1,10 @@
+# [1.4.0-dev.14](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.13...v1.4.0-dev.14) (2024-11-15)
+
+
+### Features
+
+* Enhancement of current performance scripts/code ([#248](https://github.com/rdkcentral/firebolt-certification-suite/issues/248)) ([5864c57](https://github.com/rdkcentral/firebolt-certification-suite/commit/5864c579820146162b5fbb6a59bd8361151642c9))
+
 # [1.4.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.12...v1.4.0-dev.13) (2024-11-15)
 
 
