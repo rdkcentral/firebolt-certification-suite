@@ -67,10 +67,10 @@ Feature: Localization
 
     @sdk @transport @Sev0
     Scenario Outline: Localization.<Method> - Validating API and Event Responses for <Method> change to <Value>
-        Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
+        Given the environment has been set up for 'LOCALIZATION' tests
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
-        When 1st party app invokes the 'Firebolt' API to set value
+        When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
         Then 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '3rd party app' get API
@@ -84,10 +84,10 @@ Feature: Localization
 
     @sdk @transport @Sev1
     Scenario Outline: Localization.<Method> - Validating API and Event Responses for <Method> change to <Scenario>
-        Given we test the 'LOCALIZATION' getters and setters '<Method>' to '<Value>'
+        Given the environment has been set up for 'LOCALIZATION' tests
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
-        When 1st party app invokes the 'Firebolt' API to set value
+        When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
         Then 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '3rd party app' get API

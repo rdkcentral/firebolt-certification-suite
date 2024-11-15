@@ -21,9 +21,9 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module TestSetupGlue
- * @function the environment has been set up for {string} tests
- * @description Setup the environment for the test in question.
- * @param {String} test - log message
+ * @function Given the environment has been set up for {string} tests
+ * @description Sets up the environment for the specified test.
+ * @param {String} test - The name of the test.
  * @example
  * Given the environment has been set up for 'Firebolt Sanity' tests
  */

@@ -17,17 +17,18 @@ FCS supports dynamic Firebolt JS objects to be used across multiple examples in 
 
 To use dynamic Firebolt objects, we need to use dynamic glue codes listed [here](../../support/step_definitions/dynamicCalls.md)
 
-- we test the '(.+)' getters and setters(?: '(._?)'(?: to '(._?)')?)?
 - 1st party app invokes the '(.+)' API to set( invalid)? value
 - '(.+)' invokes the '(.+)' get API
 - '(.+)' registers for the '(.+)' event
 - '(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?
 - '(.+)' platform (triggers|does not trigger) '(.\*?)' event(?: with '(.+)')?
+- '(.+)' on '(.+)' page
 
 ## Firebolt object
 
 - Firebolt objects can be added in JavaScript files located in the `cypress/fixtures/fireboltCalls` folder. Ex: `cypress/fixtures/fireboltCalls/accessibility.js`
 - Firebolt objects present in the config module will take priority if the same key is present in FCS.
+- Firebolt object is initialized using [the environment has been set up for {string} tests](../../support/step_definitions/testSetup.md#the-environment-has-been-set-up-for-string-tests) glue
 
 ### Below is the sample format of a dynamic firebolt object
 
@@ -45,6 +46,26 @@ FIREBOLT_CALL = {
   content: ...
 };
 ```
+### How to initialize the Firebolt object
+- The Firebolt object should be initialized using the [the environment has been set up for {string} tests](../../support/step_definitions/testSetup.md#the-environment-has-been-set-up-for-string-tests) glue code.
+- The glue code will accept the test type as a parameter. The test type should be the key name of the Firebolt object.
+- The Firebolt object will be fetched based on the key name and stored in the `runtime` environment variable.
+
+#### The are two ways to initialize the Firebolt object
+- Passing the key name in `module:method` format
+    ##### Format
+    ```javascript
+    Given the environment has been set up for 'module:method' tests
+    ```
+  - In the abover format, `module` is the name of the Firebolt object and firebolt object fetched and stored in the `runtime` environment variable using module name.
+  - `module:method` this will split the key name by `:` and both the module and method will be stored in the `runtime` environment variable.
+- Passing the key name directly
+    ##### Format
+    ```javascript
+    Given the environment has been set up for 'keyName' tests
+    ```
+  - In the above format, `keyName` is the name of the Firebolt object and firebolt object fetched and stored in the `runtime` environment variable using key name.
+
 
 | **Param**               | **Definition**                                                                                            | **Example**                                   | **Supported Type**             |
 | ----------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------ |
@@ -197,10 +218,10 @@ In the below test case, fetching the Firebolt object `ACCESSIBILITY_CLOSEDCAPTIO
 
 ```
  Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
-        Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
+        Given the environment has been set up for 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' tests
         When '3rd party app' registers for the 'Firebolt' event
         When '3rd party app' invokes the 'Firebolt' get API
-        Given 1st party app invokes the 'Firebolt' API to set value
+        Given 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
         And 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
         And 'Firebolt' platform responds to '3rd party app' get API
@@ -217,10 +238,10 @@ The following test case demonstrates that multiple APIs can be written using the
 
 ```
 Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
-        Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
+        Given the environment has been set up for 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' tests
         When '3rd party app' registers for the 'Firebolt' event
         When '3rd party app' invokes the 'Firebolt' get API
-        Given 1st party app invokes the 'Firebolt' API to set value
+        Given 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
         And 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
         And 'Firebolt' platform responds to '3rd party app' get API
@@ -257,8 +278,8 @@ In the below testcase, fetching the firebolt object `CLOSED_CAPTIONS_SETTINGS` a
 
 ```
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error
-        Given we test the 'CLOSED_CAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
-        When 1st party app invokes the 'Firebolt' API to set invalid value
+        Given the environment has been set up for 'CLOSED_CAPTIONS_SETTINGS' tests
+        When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
         And 'Firebolt' platform responds to '1st party app' set API with '<Error>'
 
         Examples:

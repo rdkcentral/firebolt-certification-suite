@@ -54,7 +54,10 @@ Given(
  * @function Given 1st party app(?: invokes the '(.+)' API)? to set(?: '(.*?)' to( invalid)? '(.*?)'|( invalid)? value)?
  * @description Sending a message to platform to set a value and `invalid` is a optional parameter that specify whether to expect for an error or a result.
  * @param {String} sdk - sdk name.
+ * @param {String} attribute - attribute holds the value of the method name
  * @param {String} invalidValue - Determines whether expecting for an error or result.
+ * @param {String} value - value holds the value used for to set the value or for validation.
+ * @param {String} invalidValue1 - Determines whether expecting for an error or result.
  * @example
  * Given 1st party app invokes the 'Firebolt' API to set value
  * Given 1st party app to set value
@@ -247,6 +250,7 @@ Given(/'(.+)' registers for(?: the '(.+)')? event$/, async (appId, sdk) => {
  * @param {String} sdk - name of the sdk.
  * @param {String} appId - app identifier.
  * @param {String} methodType - Determines the type of method being validated Ex: set or get
+ * @param {String} content - Optional parameter to pass the content to validate the response.
  * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_PARAMS'
  * @example
  * And 'Firebolt' platform responds to '1st party app' get API
@@ -309,6 +313,7 @@ Given(
  * @param {String} sdk - name of the sdk.
  * @param {String} eventExpected - Determines whether the event is expected or not.
  * @param {String} appId - app identifier.
+ * @param {String} content - Optional parameter to pass the content to validate the response.
  * @param {String} errorContent - Doing error content validation when error content object key passed. Ex: 'INVALID_PARAMS'
  * @example
  * And 'Firebolt' platform triggers '1st party app' event
