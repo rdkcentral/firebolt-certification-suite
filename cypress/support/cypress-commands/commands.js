@@ -793,10 +793,6 @@ Cypress.Commands.add('parsedMockData', (beforeOperation) => {
  * cy.startOrStopPerformanceService('stopped')
  */
 Cypress.Commands.add('startOrStopPerformanceService', (action) => {
-  if (action == CONSTANTS.INITIATED) {
-    const epochTime = Number.parseInt(Date.now() / 1000);
-    Cypress.env(CONSTANTS.THRESHOLD_MONITOR_START_TIME, epochTime);
-  }
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETPERFORMANCETESTHANDLER,
     params: {
@@ -1317,6 +1313,9 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
       case CONSTANTS.SCREENSHOT_VALIDATION:
         cy.screenshotValidation(object);
         break;
+      case CONSTANTS.PERFORMANCE_VALIDATION:
+        cy.performanceValidation(object);
+        break;
       default:
         assert(false, 'Unsupported validation type');
         break;
@@ -1635,4 +1634,33 @@ Cypress.Commands.add('exitAppSession', (exitType, appId) => {
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     fireLog.info('Platform has successfully ended app Session for appId: ' + appId);
   });
+});
+
+/**
+ * @module commands
+ * @function initiatePerformanceMetrics
+ * @description Creates a marker and saves the start time in THRESHOLD_MONITOR_START_TIME env, if performance metrics is enabled.
+ * @example
+ * cy.initiatePerformanceMetrics()
+ */
+Cypress.Commands.add('initiatePerformanceMetrics', () => {
+  // Check if performance metrics is enabled
+  if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) === true) {
+    // Retrieve the scenario name from the env.
+    const scenarioName = Cypress.env(CONSTANTS.SCENARIO_NAME);
+
+    // Request to create a marker
+    const requestMap = {
+      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.CREATE_MARKER,
+      params: scenarioName,
+    };
+    cy.sendMessagetoPlatforms(requestMap).then((result) => {
+      const markerCreated = result.success;
+      Cypress.env(CONSTANTS.MARKER_CREATION_STATUS, markerCreated);
+    });
+
+    // Save the start time in the environment variable
+    const epochTime = Number.parseInt(Date.now() / 1000);
+    Cypress.env(CONSTANTS.THRESHOLD_MONITOR_START_TIME, epochTime);
+  }
 });

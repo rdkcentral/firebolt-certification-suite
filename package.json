@@ -1,6 +1,6 @@
 {
   "name": "firebolt-certification-suite",
-  "version": "1.4.0-dev.7",
+  "version": "1.4.0-dev.14",
   "description": "Firebolt Certification Test Suite",
   "main": "index.js",
   "scripts": {
