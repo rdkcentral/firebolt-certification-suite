@@ -5,7 +5,7 @@ Feature: SecureStorage
         Given the environment has been set up for 'Securestorage' tests
         And 3rd party 'certification' app is launched
 
-    @sdk @transport
+    @sdk @transport @Sev1
     Scenario Outline: SecureStorage.set - Validating API and Event responses when <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Clear_API_Key>'
         And 'Firebolt' platform responds with 'null for clearing stored value'
@@ -20,10 +20,24 @@ Feature: SecureStorage
             | Scenario                                      | Get_API_Key                                                             | Set_API_Key                                                    | Validation_Key                                                       | Clear_API_Key                            |
             | changing scope to device                      | get stored value with scope as device and key as authTestTokenDevice    | update stored value for key authTestTokenDevice                | expected value for authTestTokenDevice stored data in securestorage  | clear stored value with scope as device  |
             | changing scope to account                     | get stored value with scope as account and key as authTestTokenAccount  | update stored value for key authTestTokenAccount               | expected value for authTestTokenAccount stored data in securestorage | clear stored value with scope as account |
+            
+    @sdk @transport @Sev2
+    Scenario Outline: SecureStorage.set - Validating API and Event responses when <Scenario>
+        Given '3rd party app' invokes the 'Firebolt' API to '<Clear_API_Key>'
+        And 'Firebolt' platform responds with 'null for clearing stored value'
+        And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
+        And 'Firebolt' platform responds with 'null for getting stored value'
+        When '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key>'
+        Then 'Firebolt' platform responds with 'null for updating a secure data value'
+        When '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
+        Then 'Firebolt' platform responds with '<Validation_Key>'
+
+        Examples:
+            | Scenario                                      | Get_API_Key                                                             | Set_API_Key                                                    | Validation_Key                                                       | Clear_API_Key                            |
             | changing scope to device with optionalparams  | get stored value with scope as device and key as authTestTokenDevice1   | update stored value for key authTestTokenDevice1 with options  | authTestTokenValue1 for stored value in securestorage                | clear stored value with scope as device  |
             | changing scope to account with optionalparams | get stored value with scope as account and key as authTestTokenAccount1 | update stored value for key authTestTokenAccount1 with options | authTestTokenValue1 for stored value in securestorage                | clear stored value with scope as account |
 
-    @sdk @transport
+    @sdk @transport @Sev2
     Scenario Outline: SecureStorage.set - Validating API and Event responses when <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Initial_Set_API_Key>'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
@@ -39,7 +53,7 @@ Feature: SecureStorage
             | updating existing device scope value  | get stored value with scope as device and key as authTestTokenDevice1   | update stored value for key authTestTokenDevice1  | get stored value with scope as device and key as authTestTokenDevice1   | authTestTokenValue2 for stored value in securestorage | authTestTokenValue1 for stored value in securestorage | update stored value for key authTestTokenDevice1 with options  | clear stored value with scope as device  |
             | updating existing account scope value | get stored value with scope as account and key as authTestTokenAccount1 | update stored value for key authTestTokenAccount1 | get stored value with scope as account and key as authTestTokenAccount1 | authTestTokenValue2 for stored value in securestorage | authTestTokenValue1 for stored value in securestorage | update stored value for key authTestTokenAccount1 with options | clear stored value with scope as account |
 
-    @sdk @transport
+    @sdk @transport @Sev1
     Scenario Outline: SecureStorage.set - Validating API and Event responses when <Scenario>
         Given  '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key1>'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
@@ -57,7 +71,7 @@ Feature: SecureStorage
             | adding scope as account for existing key with scope as device | get stored value with scope as device and key as authTestTokenDevice   | update stored value with scope as account and key as authTestTokenDevice | get stored value with scope as account and key as authTestTokenDevice | expected value for authTestTokenDevice stored data in securestorage  | expected value for account scoped authTestTokenDevice stored data in securestorage | update stored value for key authTestTokenDevice  |
             | adding scope as device for existing key with scope as account | get stored value with scope as account and key as authTestTokenAccount | update stored value with scope as device and key as authTestTokenAccount | get stored value with scope as device and key as authTestTokenAccount | expected value for authTestTokenAccount stored data in securestorage | expected value for device scoped authTestTokenAccount stored data in securestorage | update stored value for key authTestTokenAccount |
 
-    @sdk @transport
+    @sdk @transport @Sev1
     Scenario Outline: SecureStorage.remove - Positive Scenario: Validate <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key1>'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
@@ -80,7 +94,7 @@ Feature: SecureStorage
             | Removing account scope | set secure value for key authTestTokenAccount1 | set secure value for key authTestTokenAccount2 | remove the stored value authTestTokenAccount1 with scope account | get stored value for authTestTokenAccount1 with scope device | get stored value for authTestTokenAccount2 with scope device | expected value for authTestTokenAccount2 stored data in securestorage | expected value for authTestTokenAccount1 stored data in securestorage | clear stored value with scope as account |
 
 
-    @sdk @transport
+    @sdk @transport @Sev2
     Scenario Outline: SecureStorage.get - Validating API Method content error handling when <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
@@ -99,7 +113,7 @@ Feature: SecureStorage
             | missing key                         | get stored value without key                | invalid parameters for securestorage get |
             | scope key is an empty string        | get stored value with key as empty          | custom error for securestorage get       |
 
-    @sdk @transport
+    @sdk @transport @Sev2
     Scenario Outline: SecureStorage.set - Validating API Error handling when <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenDevice'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
@@ -131,7 +145,7 @@ Feature: SecureStorage
             | Passing options as empty string | set secure value with options as empty string | invalid parameters for securestorage set |
             | Passing key as empty string     | set secure value with empty key               | custom error for securestorage set       |
 
-    @sdk @transport
+    @sdk @transport @Sev2
     Scenario Outline: SecureStorage.remove - Validating API Error handling when <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenDevice'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
@@ -157,7 +171,7 @@ Feature: SecureStorage
             | Passing key as empty string   | remove stored value with empty key             | custom error for securestorage remove       |
 
     @sdk @transport
-    Scenario Outline: SecureStorage.remove - Positive Scenario: Validate get and remove <Scenario> after TTL
+    Scenario Outline: SecureStorage.remove - Validate get and remove <Scenario> after TTL
         Given '3rd party app' invokes the 'Firebolt' API to '<Clear_API_Key>'
         And 'Firebolt' platform responds with 'null for clearing stored value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
@@ -180,7 +194,7 @@ Feature: SecureStorage
             | with account scope | get stored value with scope as account and key as authTestTokenAccountTTL | set secure value with scope as account and TTL as 50 | remove stored value with scope as account and TTL as 50 | clear stored value with scope as account |
 
     @sdk @transport
-    Scenario Outline: SecureStorage.clear - Positive Scenario: Clears all the data values <Scenario>
+    Scenario Outline: SecureStorage.clear - Clearing all data values <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key1>'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key2>'
@@ -202,7 +216,7 @@ Feature: SecureStorage
             | with account scope | clear stored value with scope as account | get stored value with scope as account and key as authTestTokenAccount | get stored value with scope as account and key as authTestTokenAccount1 | update stored value for key authTestTokenAccount | update stored value for key authTestTokenAccount1 | expected value for authTestTokenAccount stored data in securestorage | authTestTokenValue2 for stored value in securestorage |
 
     @sdk @transport
-    Scenario Outline: SecureStorage.clear - Negative Scenario: Validate <Scenario> expecting error
+    Scenario Outline: SecureStorage.clear - Validating API Error handling when <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenDevice'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
@@ -236,7 +250,7 @@ Feature: SecureStorage
     # validates the set values for 1st app
     # validates the set value for 2nd app
     @sdk @transport
-    Scenario: SecureStorage.set - Positive Scenario: Validate Adding scope as device in 2 apps
+    Scenario: SecureStorage.set - Validate Adding scope as device in 2 apps
         Given '3rd party app' invokes the 'Firebolt' API to 'clear stored value with scope as device'
         And 'Firebolt' platform responds with 'null for clearing stored value'
         And 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
@@ -265,7 +279,7 @@ Feature: SecureStorage
     # validates the remaining value for 1st app
     # validates the remaining value for 2nd app
     @sdk @transport
-    Scenario: SecureStorage.remove - Positive Scenario: Validate Removing device scope in 2 apps
+    Scenario: SecureStorage.remove - Validate Removing device scope in 2 apps
         Given 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
         And '3rd party app' invokes the 'Firebolt' API to 'set secure value for key authTestTokenDevice1'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
@@ -299,7 +313,7 @@ Feature: SecureStorage
     # validates the null value for 1st app
     # validates the null value for 2nd app
     @sdk @transport
-    Scenario: SecureStorage.clear - Positive Scenario: Clears all the data values with device scope in 2 apps
+    Scenario: SecureStorage.clear - Clears all the data values with device scope in 2 apps
         Given 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
         And '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenDevice'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
