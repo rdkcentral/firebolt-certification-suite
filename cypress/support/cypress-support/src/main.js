@@ -98,7 +98,6 @@ export default function (module) {
     } else {
       cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
     }
-
     // Merge fireboltCalls
     const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
     const v2FireboltCallsData = _.merge(
@@ -133,6 +132,7 @@ export default function (module) {
   beforeEach(() => {
     UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
     cy.getBeforeOperationObject();
+    cy.initiatePerformanceMetrics();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
   });
 
