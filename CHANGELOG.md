@@ -1,3 +1,10 @@
+# [1.4.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.10...v1.4.0-dev.11) (2024-11-15)
+
+
+### Features
+
+* "Add screenshot" button on local cuke reports ([#261](https://github.com/rdkcentral/firebolt-certification-suite/issues/261)) ([bad0505](https://github.com/rdkcentral/firebolt-certification-suite/commit/bad0505205243930432d007ec790b2ce2ec4ace6))
+
 # [1.4.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.9...v1.4.0-dev.10) (2024-11-14)
 
 
