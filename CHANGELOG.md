@@ -1,3 +1,10 @@
+# [1.4.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.11...v1.4.0-dev.12) (2024-11-15)
+
+
+### Features
+
+* Start/stop performance metrics collection for each test case without glue code ([#236](https://github.com/rdkcentral/firebolt-certification-suite/issues/236)) ([d909237](https://github.com/rdkcentral/firebolt-certification-suite/commit/d909237457b889321ed3f84f0b93735ef3ad9ac0))
+
 # [1.4.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.10...v1.4.0-dev.11) (2024-11-15)
 
 
