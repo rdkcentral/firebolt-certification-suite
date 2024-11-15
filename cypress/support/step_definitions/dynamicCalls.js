@@ -348,20 +348,21 @@ Given(
  * Given 'third party app is launched' on 'auth' page
  */
 Given(/'(.+)' on '(.+)' page/, (validationObjectKey, page) => {
-  // Storing the page name in runtime environment variable to use it in the validations.
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
-    params: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID),
+    params: Cypress.env(CONSTANTS.CURRENT_APP_ID),
   };
 
+  // Sending the request to the platform to retrieve the app state.
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    if (response === 'foreground') {
-      fireLog.info(`State is ${response} as expected`);
+    if (response === 'FOREGROUND') {
+      fireLog.info(`State validation successful: Current state is '${response}' as expected`);
     } else {
-      fireLog.fail(`Unexpected state: ${response}. Expected 'foreground'`);
+      fireLog.fail(`Unexpected state: ${response}. Expected to be FOREGROUND`);
     }
   });
   
+  // Storing the page name in runtime environment variable to use it in the validations.
   if (Cypress.env(CONSTANTS.RUNTIME)) {
     Cypress.env(CONSTANTS.RUNTIME).page = page;
   } else {
