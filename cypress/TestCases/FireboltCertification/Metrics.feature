@@ -5,7 +5,7 @@ Feature: Metrics
         Given the environment has been set up for 'Metrics' tests
         And 3rd party 'certification' app is launched
 
-    @sdk @transport
+    @sdk @transport @Sev1
     Scenario Outline: Metrics.<Method> - Validating API Method response content
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
@@ -15,8 +15,8 @@ Feature: Metrics
             | startContent | notify that content has started  | true for startContent in metrics | 
             | stopContent  | notify that content has stopped  | true for stopContent in metrics  |
 
-    @sdk @transport
-    Scenario Outline: Metrics.<Method> - Validating API Error handling for <Scenario>
+    @sdk @transport @Sev2
+    Scenario Outline: Metrics.<Method> - Validating API Error handling when given <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
 
@@ -40,8 +40,8 @@ Feature: Metrics
             | mediaRenditionChange with emptyParam | mediaRenditionChange | notify that playback rendition is Changed with empty parameter | invalid params for metrics mediaRenditionChange |
             | mediaEnded with emptyParam           | mediaEnded           | notify that playback has stopped with empty parameter          | invalid params for metrics mediaEnded           |
 
-    @sdk @transport
-    Scenario Outline: Metrics.<Method> - Validating API Method response for <Scenario>
+    @sdk @transport @Sev2
+    Scenario Outline: Metrics.<Method> - Validating API Method content for <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
 
@@ -76,8 +76,8 @@ Feature: Metrics
             | Metrics appInfo                              | appInfo              | Inform the platform about app build                                  | null for metrics appInfo                 |
 
 
-    @sdk @transport
-    Scenario Outline: Metrics.<Method> - Validating API Error handling for <Scenario>
+    @sdk @transport @Sev2
+    Scenario Outline: Metrics.<Method> - Validating API Error handling when given <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
 
