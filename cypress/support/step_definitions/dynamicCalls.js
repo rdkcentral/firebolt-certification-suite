@@ -68,10 +68,16 @@ Given(
 Given(
   /1st party app(?: invokes the '(.+)' API)? to set(?: '(.*?)' to( invalid)? '(.*?)'|( invalid)? value)?$/,
   async (sdk, attribute, invalidValue, value, invalidValue1) => {
-    if (attribute && value) {
-      value = UTILS.parseValue(value);
-      Cypress.env(CONSTANTS.RUNTIME).attribute = attribute;
-      Cypress.env(CONSTANTS.RUNTIME).value = value;
+    if (Cypress.env(CONSTANTS.RUNTIME)) {
+      if (attribute && value) {
+        value = UTILS.parseValue(value);
+        Cypress.env(CONSTANTS.RUNTIME).attribute = attribute;
+        Cypress.env(CONSTANTS.RUNTIME).value = value;
+      }
+    } else {
+      fireLog.fail(
+        'No "runtime" environment variable found. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key.'
+      );
     }
 
     cy.getRuntimeFireboltCallObject().then((fireboltCallObject) => {
@@ -262,8 +268,17 @@ Given(/'(.+)' registers for(?: the '(.+)')? event$/, async (appId, sdk) => {
 Given(
   /'(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)'| with '(.+)')?$/,
   async (sdk, appId, methodType, content, errorContent) => {
-    content = UTILS.parseValue(content);
-    Cypress.env(CONSTANTS.RUNTIME).content = content;
+    if (Cypress.env(CONSTANTS.RUNTIME)) {
+      if (content) {
+        content = UTILS.parseValue(content);
+        Cypress.env(CONSTANTS.RUNTIME).content = content;
+      }
+    } else {
+      fireLog.fail(
+        'No "runtime" environment variable found. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key.'
+      );
+    }
+
     // Retrieving the dynamic firebolt call object from the env variable
     cy.getRuntimeFireboltCallObject().then((fireboltCallObject) => {
       let method;
@@ -325,8 +340,16 @@ Given(
 Given(
   /'(.+)' platform (triggers|does not trigger) '(.*?)' event(?: with '(.+)'| with '(.+)')?$/,
   async (sdk, eventExpected, appId, content, errorContent) => {
-    content = UTILS.parseValue(content);
-    Cypress.env(CONSTANTS.RUNTIME).content = content;
+    if (Cypress.env(CONSTANTS.RUNTIME)) {
+      if (content) {
+        content = UTILS.parseValue(content);
+        Cypress.env(CONSTANTS.RUNTIME).content = content;
+      }
+    } else {
+      fireLog.fail(
+        'No "runtime" environment variable found. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key.'
+      );
+    }
     // Retrieving the dynamic firebolt call object from the env variable
     cy.getRuntimeFireboltCallObject().then((fireboltCallObject) => {
       let event;

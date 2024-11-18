@@ -28,6 +28,7 @@ To use dynamic Firebolt objects, we need to use dynamic glue codes listed [here]
 
 - Firebolt objects can be added in JavaScript files located in the `cypress/fixtures/fireboltCalls` folder. Ex: `cypress/fixtures/fireboltCalls/accessibility.js`
 - Firebolt objects present in the config module will take priority if the same key is present in FCS.
+- Firebolt objects name must be in uppercase.
 - Firebolt object is initialized using [the environment has been set up for {string} tests](../../support/step_definitions/testSetup.md#the-environment-has-been-set-up-for-string-tests) glue
 
 ### Below is the sample format of a dynamic firebolt object
@@ -57,14 +58,27 @@ FIREBOLT_CALL = {
     ```javascript
     Given the environment has been set up for 'module:method' tests
     ```
-  - In the abover format, `module` is the name of the Firebolt object and firebolt object fetched and stored in the `runtime` environment variable using module name.
-  - `module:method` this will split the key name by `:` and both the module and method will be stored in the `runtime` environment variable.
+    - In the abover format, `module` is the name of the Firebolt object and firebolt object fetched and stored in the `runtime` environment variable using module name.
+    - `module:method` this will split the key name by `:` and both the module and method will be stored in the `runtime` environment variable.
+  - Example: `Given the environment has been set up for 'Localization:locale' tests` - `Localization` is the firebolt object name.
+
 - Passing the key name directly
     ##### Format
     ```javascript
     Given the environment has been set up for 'keyName' tests
     ```
-  - In the above format, `keyName` is the name of the Firebolt object and firebolt object fetched and stored in the `runtime` environment variable using key name.
+    - In the above format, `keyName` is the name of the Firebolt object and firebolt object fetched and stored in the `runtime` environment variable using key name.
+    
+    Example: `Given the environment has been set up for 'ADVERTISING_SKIPRESTRICTION' tests` - `ADVERTISING_SKIPRESTRICTION` is the firebolt object name.
+
+- Passing the key name with spaces
+    ##### Format
+    ```javascript
+    Given the environment has been set up for 'key Name' tests
+    ```
+    - In the above format, If `key Name` having spaces, then it should be replaced with `_` in the key name and finally, the key name converted to uppercase.
+    
+    Example: `Given the environment has been set up for 'Advertising skiprestriction' tests` - `ADVERTISING_SKIPRESTRICTION` is the firebolt object name.
 
 
 | **Param**               | **Definition**                                                                                            | **Example**                                   | **Supported Type**             |
