@@ -67,7 +67,7 @@ Feature: Localization
 
     @sdk @transport @Sev0
     Scenario Outline: Localization.<Method> - Validating API and Event Responses for <Method> change to <Value>
-        Given the environment has been set up for 'LOCALIZATION' tests
+        Given the environment has been set up for 'Localization' tests
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
@@ -84,7 +84,7 @@ Feature: Localization
 
     @sdk @transport @Sev1
     Scenario Outline: Localization.<Method> - Validating API and Event Responses for <Method> change to <Scenario>
-        Given the environment has been set up for 'LOCALIZATION' tests
+        Given the environment has been set up for 'Localization' tests
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'

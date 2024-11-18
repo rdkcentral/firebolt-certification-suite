@@ -18,10 +18,10 @@ Feature: Discovery
 
       Examples:
          | Scenario                  | Method               | Value | FB_Object                           |
-         | enabling recommendations  | allowPersonalization | true  | DISCOVERY_RECOMMENDATIONS           |
-         | disabling recommendations | allowPersonalization | false | DISCOVERY_RECOMMENDATIONS           |
-         | enabling watch history    | allowWatchHistory    | true  | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
-         | disabling watch history   | allowWatchHistory    | false | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
+         | enabling recommendations  | allowPersonalization | true  | Discovery recommendations           |
+         | disabling recommendations | allowPersonalization | false | Discovery recommendations           |
+         | enabling watch history    | allowWatchHistory    | true  | Discovery remember watched programs |
+         | disabling watch history   | allowWatchHistory    | false | Discovery remember watched programs |
 
    @sdk @transport @Sev1
    Scenario Outline: Discovery.watched - Validate Method success with parameter configuration: <Scenario>
@@ -141,7 +141,7 @@ Feature: Discovery
 
    @sdk @transport @Sev2
    Scenario: Discovery.clearContentAccess - Clearing availabilities and entitlements from the subscriber
-      Given the environment has been set up for 'DISCOVERY_CLEAR_CONTENTACCESS' tests
+      Given the environment has been set up for 'Discovery clear contentaccess' tests
       When '3rd party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '3rd party app' get API
 
