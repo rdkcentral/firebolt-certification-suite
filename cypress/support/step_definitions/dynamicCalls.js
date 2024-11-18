@@ -355,7 +355,7 @@ Given(/'(.+)' on '(.+)' page/, (validationObjectKey, page) => {
 
   // Sending the request to the platform to retrieve the app state.
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    if (response === 'FOREGROUND') {
+    if (response.toUpperCase() === 'FOREGROUND') {
       fireLog.info(`State validation successful: Current state is '${response}' as expected`);
     } else {
       fireLog.fail(`Unexpected state: ${response}. Expected to be FOREGROUND`);

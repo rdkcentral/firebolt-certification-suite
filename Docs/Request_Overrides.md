@@ -256,3 +256,45 @@ Example:
   ]
 }
 ```
+
+## getAppState:
+
+### Request override
+- The `getAppState` request override Sends message to the platform to call the WebSocket handler and to retrieve the status of all apps.. This function has to be added in config module `requestModules/fcs.js` file.
+
+#### Request format for getAppState request override function:
+
+```javascript
+{
+  method: 'fcs.getAppState',
+  params: {
+    appId: <'appid'>
+  }
+}
+```
+
+**Example:**
+
+```javascript
+{
+  method: 'fcs.getAppState',
+  params: {
+    appId:'foo' 
+    }
+}
+```
+### Response override
+
+- The `getAppState` returns the state of the app (e.g., foreground, background, etc.) based on the appId. This function is added in the config module `responseModules/fcs.js` file.
+
+#### Return response format of getAppState response override function:
+
+```javascript
+  'fireboltState'
+```
+
+**Example:** Response override function returning the fireboltState of the app based on the appId.
+
+```javascript
+  'FOREGROUND'
+```
