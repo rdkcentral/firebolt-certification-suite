@@ -592,7 +592,7 @@
         "validations": [
           {
             "mode": "staticContentValidation",
-            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_ADVERTISEMNT",
+            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PROGRAMTYPE_ADVERTISEMENT",
             "description": "Validation of the Parameters initialization for searchIntent Format"
           }
         ]
@@ -698,6 +698,21 @@
           {
             "mode": "staticContentValidation",
             "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_CHANNELTYPE_OVERTHEAIR",
+            "description": "Validation of the Parameters initialization for searchIntent Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_SEARCHINTENT_PLAYLIST_ENTITY": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_NAVIGATE_TO_SEARCH_INTENT_PLAYLIST_ENTITY",
             "description": "Validation of the Parameters initialization for searchIntent Format"
           }
         ]

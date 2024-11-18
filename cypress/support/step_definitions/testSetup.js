@@ -97,6 +97,15 @@ Given('the environment has been set up for {string} tests', (test) => {
       }
     }
   }
+  // Check the marker creation status
+  if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS)) {
+    const markerCreated = Cypress.env(CONSTANTS.MARKER_CREATION_STATUS);
+    if (markerCreated) {
+      fireLog.info('Marker has been created successfully');
+    } else {
+      fireLog.fail('Marker creation failed');
+    }
+  }
   // Calling the envConfigSetup command to setup the environment for the test from the config module.
   cy.envConfigSetup();
 });
