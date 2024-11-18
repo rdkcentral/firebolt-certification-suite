@@ -37,7 +37,8 @@ Given('the environment has been set up for {string} tests', (test) => {
   }
   if (
     !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
-    UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) || UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
+    UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
+    UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
     UTILS.isTestTypeChanged(test)
   ) {
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
@@ -104,7 +105,6 @@ function destroyAppInstance(testType) {
   );
   const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
 
-
   // Checking if the previous test type is different from the current test type.
   const isDifferentFromPrevious =
     UTILS.getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != testType &&
@@ -112,14 +112,16 @@ function destroyAppInstance(testType) {
   // If the current test type is present inside the closeAppTestTypes array then close the app.
   // If the multiple test types are executed in one command then close the app between them
   if (isCloseTestType || isDifferentFromPrevious) {
-    fireLog.info("Closing app since either Test Type is specified in closeAppTestTypes or is different from previous Test Type.")
-    cy.exitAppSession('closeApp', appId)
+    fireLog.info(
+      'Closing app since either Test Type is specified in closeAppTestTypes or is different from previous Test Type.'
+    );
+    cy.exitAppSession('closeApp', appId);
   }
 
   // If the current test type is present inside the unloadAppTestTypes array then unload the app.
   if (isUnloadTestType) {
-    fireLog.info("Unloading app since Test Type is specified in unloadAppTestTypes.")
-    cy.exitAppSession('unloadApp', appId)
+    fireLog.info('Unloading app since Test Type is specified in unloadAppTestTypes.');
+    cy.exitAppSession('unloadApp', appId);
   }
 }
 
@@ -190,10 +192,10 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
             if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
               throw Error(
                 'FCA not launched as 3rd party app or not subscribed to ' +
-                requestTopic +
-                '. Unable to get healthCheck response from FCA in ' +
-                UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
-                ' retries'
+                  requestTopic +
+                  '. Unable to get healthCheck response from FCA in ' +
+                  UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES) +
+                  ' retries'
               );
             }
             healthCheckResponse = JSON.parse(healthCheckResponse);

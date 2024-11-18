@@ -20,7 +20,6 @@
 // This is because Scripts/checkDefaultConfig.js copies neccessary folders missing from the configModule from here (defaultModule) to the config module.
 const CONSTANTS = require('../../../cypress/support/constants/constants');
 const UTILS = require('../../../cypress/support/cypress-support/src/utils');
-const { fireLog } = require('../../cypress/support/cypress-support/src/utils');
 
 /**
  * @module fcs
@@ -139,8 +138,10 @@ function triggerEvent(key) {
  **/
 function unloadApp(request) {
   // Generic error message due to missing implementation.
-  const appId = request.params
-  fireLog.info("App unload requires platform implementation. AppId: " + appId + " was not able to be unloaded.")
+  const appId = request.params;
+  fireLog.info(
+    'App unload requires platform implementation. AppId: ' + appId + ' was not able to be unloaded.'
+  );
   fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
     throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
   });
@@ -155,8 +156,12 @@ function unloadApp(request) {
  **/
 function dismissApp(request) {
   // Generic error message due to missing implementation.
-  const appId = request.params
-  fireLog.info("App dismiss requires platform implementation. AppId: " + appId + " was not able to be dismissed.")
+  const appId = request.params;
+  fireLog.info(
+    'App dismiss requires platform implementation. AppId: ' +
+      appId +
+      ' was not able to be dismissed.'
+  );
   fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
     throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
   });
@@ -171,7 +176,7 @@ function dismissApp(request) {
  **/
 function closeApp(request) {
   // Base implementation to invoke lifecycle.close when communicating with the app via PUBSUB
-  const appId = request.params
+  const appId = request.params;
   const requestTopic = UTILS.getTopic(appId);
   const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
 
@@ -185,16 +190,12 @@ function closeApp(request) {
     methodName: 'Lifecycle.close',
     methodParams: { reason: CONSTANTS.USER_EXIT_REASON },
   };
-  const intentMessage = UTILS.createIntentMessage(
-    CONSTANTS.TASK.RUNTEST,
-    params,
-    additionalParams
-  );
+  const intentMessage = UTILS.createIntentMessage(CONSTANTS.TASK.RUNTEST, params, additionalParams);
   fireLog.info(
     'Sending lifecycle close method to close app, method: ' +
-    params.methodName +
-    ' params: ' +
-    JSON.stringify(params.methodParams)
+      params.methodName +
+      ' params: ' +
+      JSON.stringify(params.methodParams)
   );
   try {
     cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
@@ -204,7 +205,7 @@ function closeApp(request) {
         result = response.report.result;
         fireLog.info(
           'Received response from app to acknowledge close request. Response: ' +
-          JSON.stringify(response)
+            JSON.stringify(response)
         );
       } catch {
         result = response;
@@ -212,9 +213,7 @@ function closeApp(request) {
       if (result === CONSTANTS.NO_RESPONSE || result === null) {
         fireLog.info('App closed successfully');
       } else {
-        fireLog.info(
-          false,
-          'App may have failed to close.');
+        fireLog.info(false, 'App may have failed to close.');
       }
       cy.wait(5000);
     });
