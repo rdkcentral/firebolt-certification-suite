@@ -1,3 +1,10 @@
+# [1.4.0-dev.15](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.14...v1.4.0-dev.15) (2024-11-18)
+
+
+### Bug Fixes
+
+* null scenario to v2 ([#265](https://github.com/rdkcentral/firebolt-certification-suite/issues/265)) ([e30bd9c](https://github.com/rdkcentral/firebolt-certification-suite/commit/e30bd9ca41955cb5a1385df3125dbd0d825ed5a9))
+
 # [1.4.0-dev.14](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0-dev.13...v1.4.0-dev.14) (2024-11-15)
 
 
