@@ -232,7 +232,7 @@ Feature: SecureStorage
             | with account scope | get stored value with scope as account and key as authTestTokenAccountTTL | set secure value with scope as account and TTL as 50 | remove stored value with scope as account and TTL as 50 | clear stored value with scope as account |
 
     @sdk @transport @Sev2
-    Scenario Outline: SecureStorage.clear - Clearing all data values <Scenario>
+    Scenario Outline: SecureStorage.clear - Validating API values are cleared <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key1>'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key2>'
@@ -287,8 +287,8 @@ Feature: SecureStorage
     # set value1 in device scope
     # validates the set values for 1st app
     # validates the set value for 2nd app
-    @sdk @transport
-    Scenario: SecureStorage.set - Validate Adding scope as device in 2 apps
+    @sdk @transport @Sev2
+    Scenario: SecureStorage.set - Validate API Adds value with device scope two apps
         Given '3rd party app' invokes the 'Firebolt' API to 'clear stored value with scope as device'
         And 'Firebolt' platform responds with 'null for clearing stored value'
         And 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
@@ -316,8 +316,8 @@ Feature: SecureStorage
     # validates the removed value for 2nd app
     # validates the remaining value for 1st app
     # validates the remaining value for 2nd app
-    @sdk @transport
-    Scenario: SecureStorage.remove - Validate Removing device scope in 2 apps
+    @sdk @transport @Sev2
+    Scenario: SecureStorage.remove - Validate API removes value with device scope in two apps
         Given 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
         And '3rd party app' invokes the 'Firebolt' API to 'set secure value for key authTestTokenDevice1'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
@@ -350,8 +350,8 @@ Feature: SecureStorage
     # clear values with device scope
     # validates the null value for 1st app
     # validates the null value for 2nd app
-    @sdk @transport
-    Scenario: SecureStorage.clear - Clears all the data values with device scope in 2 apps
+    @sdk @transport @Sev2
+    Scenario: SecureStorage.clear - Validate API clears value with device scope in two apps
         Given 3rd party 'certification' app is launched with 'secondary 3rd party app' appId
         And '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenDevice'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
