@@ -71,7 +71,7 @@ exports.DISCOVERY_REMEMBER_WATCHED_PROGRAMS = {
   },
 };
 
-exports.DISCOVERY_CLEAR_CONTENTACCESS = {
+exports.DISCOVERY_CLEARCONTENTACCESS = {
   method: 'discovery.clearContentAccess',
   params: {},
   validationJsonPath: 'result',

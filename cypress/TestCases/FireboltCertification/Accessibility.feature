@@ -7,7 +7,7 @@ Feature: Accessibility
 
     @sdk @transport @Sev0
     Scenario Outline: Accessibility.closedCaptionsSettings - Validating API and Event Responses for <Scenario>
-        Given the environment has been set up for 'Accessibility closedcaptions settings' tests
+        Given the environment has been set up for 'Accessibility closedCaptionsSettings' tests
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
@@ -23,7 +23,7 @@ Feature: Accessibility
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.closedCaptionsSettings - Validating API and Event Responses for <Method> change to <Value>
-        Given the environment has been set up for 'Accessibility closedcaptions settings' tests
+        Given the environment has been set up for 'Accessibility closedCaptionsSettings' tests
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
@@ -92,7 +92,7 @@ Feature: Accessibility
 
     @sdk @transport @Sev0
     Scenario Outline: Accessibility.voiceGuidanceSettings - Validating API and Event Responses for <Scenario>
-        Given the environment has been set up for 'Accessibility voiceguidance settings' tests
+        Given the environment has been set up for 'Accessibility voiceguidancesettings' tests
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
@@ -108,7 +108,7 @@ Feature: Accessibility
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.voiceGuidanceSettings - Validating API and Event Responses for <Method> change to <Value>
-        Given the environment has been set up for 'Accessibility voiceguidance settings' tests
+        Given the environment has been set up for 'Accessibility voiceguidancesettings' tests
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
@@ -125,7 +125,7 @@ Feature: Accessibility
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.audioDescriptionSettings - Validating API and Event Responses for <Scenario>
-        Given the environment has been set up for 'Audiodescriptions settings' tests
+        Given the environment has been set up for 'Accessibility audioDescriptionSettings' tests
         And '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
         When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'

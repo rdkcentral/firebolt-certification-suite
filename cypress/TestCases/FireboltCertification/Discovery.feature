@@ -141,7 +141,7 @@ Feature: Discovery
 
    @sdk @transport @Sev2
    Scenario: Discovery.clearContentAccess - Clearing availabilities and entitlements from the subscriber
-      Given the environment has been set up for 'Discovery clear contentaccess' tests
+      Given the environment has been set up for 'Discovery clearContentAccess' tests
       When '3rd party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '3rd party app' get API
 
