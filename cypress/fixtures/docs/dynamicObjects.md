@@ -53,7 +53,7 @@ FIREBOLT_CALL = {
 - The Firebolt object will be fetched based on the key name and stored in the `runtime` environment variable.
 
 #### The are two ways to initialize the Firebolt object
-- Passing the key name in `module:method` format
+- Passing the key name with colon `:`
     ##### Format
     ```javascript
     Given the environment has been set up for 'module:method' tests
@@ -62,7 +62,7 @@ FIREBOLT_CALL = {
     - `module:method` this will split the key name by `:` and both the module and method will be stored in the `runtime` environment variable.
   - Example: `Given the environment has been set up for 'Localization:locale' tests` - `Localization` is the firebolt object name.
 
-- Passing the key name directly
+- Passing the key name as is
     ##### Format
     ```javascript
     Given the environment has been set up for 'keyName' tests

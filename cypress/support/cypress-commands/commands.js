@@ -1536,7 +1536,7 @@ Cypress.Commands.add('getRuntimeFireboltCallObject', () => {
     return UTILS.getEnvVariable(CONSTANTS.RUNTIME).fireboltCall;
   } else {
     fireLog.fail(
-      'The firebolt call object was not found in the runtime environment variable. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key.'
+      `The firebolt call object was not found in the runtime environment variable. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key. Refer here - ${CONSTANTS.FIREBOLT_OBJECT_DOC_PATH}`
     );
   }
 });

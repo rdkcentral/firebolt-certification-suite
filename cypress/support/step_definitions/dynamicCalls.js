@@ -76,7 +76,7 @@ Given(
       }
     } else {
       fireLog.fail(
-        'No "runtime" environment variable found. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key.'
+        `${CONSTANTS.NO_RUNTIME_VARIABLE_FOUND} Refer here - ${CONSTANTS.FIREBOLT_OBJECT_DOC_PATH}`
       );
     }
 
@@ -275,7 +275,7 @@ Given(
       }
     } else {
       fireLog.fail(
-        'No "runtime" environment variable found. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key.'
+        `${CONSTANTS.NO_RUNTIME_VARIABLE_FOUND} Refer here - ${CONSTANTS.FIREBOLT_OBJECT_DOC_PATH}`
       );
     }
 
@@ -347,7 +347,7 @@ Given(
       }
     } else {
       fireLog.fail(
-        'No "runtime" environment variable found. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key.'
+        `${CONSTANTS.NO_RUNTIME_VARIABLE_FOUND} Refer here - ${CONSTANTS.FIREBOLT_OBJECT_DOC_PATH}`
       );
     }
     // Retrieving the dynamic firebolt call object from the env variable
