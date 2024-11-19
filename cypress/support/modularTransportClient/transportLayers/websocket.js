@@ -29,6 +29,7 @@ export default class Websocket extends AsyncTransportClient {
 
   async initialize() {
     if (this.options.url) {
+      cy.log('2538 testlog websocket.js');
       return new Promise((res, rej) => {
         // Protocol can be used for other things (For instance an access token)
         if (this.options.protocol) {
@@ -62,6 +63,7 @@ export default class Websocket extends AsyncTransportClient {
   }
 
   async send(payload) {
+    cy.log('2538 testlog payload', payload);
     if (this.listener) {
       throw new Error(
         'Cannot send payload while listening to messages. Please create another client instance'
@@ -75,24 +77,31 @@ export default class Websocket extends AsyncTransportClient {
       });
 
       const websocket = this.ws;
+      cy.log('2538 testlog websocket', websocket);
       const sendCallback = function (event) {
         websocket.removeEventListener('message', sendCallback);
         websocket.removeEventListener('error', sendCallback);
         res(event.data);
       };
+      cy.log('2538 testlog sendCallback', sendCallback);
 
       this.ws.onmessage = (msg) => {
+        cy.log('2538 testlog msg', msg);
         if (msg && msg.data) {
           const message = JSON.parse(msg.data);
           const requestMessage = JSON.parse(payload);
           const mapKey = Array.from(Cypress.env('eventResponseMap').keys()).find((key) =>
             key.includes(message.id)
           );
+          cy.log('2538 testlog message', message);
+          cy.log('2538 testlog requestMessage', requestMessage);
           const interactionKey = message.hasOwnProperty('FireboltInteraction');
+          cy.log('2538 testlog interactionKey', interactionKey);
 
           if (interactionKey) {
             Cypress.env('fbInteractionLogs').addLog(message.FireboltInteraction);
           }
+          cy.log('2538 testlog mapKey', mapKey);
 
           // Updating event response in the map when event is triggered by the platform
           if (
@@ -101,15 +110,19 @@ export default class Websocket extends AsyncTransportClient {
             !message?.result?.hasOwnProperty('listening')
           ) {
             const obj = Cypress.env('eventResponseMap').get(mapKey);
+            cy.log('2538 testlog obj', obj);
             obj.listenerResponse = message;
             Cypress.env('eventResponseMap').set(mapKey, obj);
           }
 
           // Returning the message when response and request id matches.
           if (message.id == requestMessage.id) {
+            cy.log('2538 testlog sending msg', message.id);
+            cy.log('2538 testlog sending msg', requestMessage.id);
             sendCallback(msg);
           }
         } else {
+          cy.log('2538 testlog sending msg else', msg);
           sendCallback(msg);
         }
       };

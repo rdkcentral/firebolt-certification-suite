@@ -251,13 +251,18 @@ export default function (module) {
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
    */
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
+  UTILS.fireLog.info('2538 testLog sendMessagetoPlatforms requestmap', requestMap)
     cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
       return new Promise(async (resolve) => {
+        UTILS.fireLog.info('2538 testLog sendMessagetoPlatforms resolve', resolve)
         const message = await config.getRequestOverride(requestMap);
+        UTILS.fireLog.info('2538 testLog sendMessagetoPlatforms message', message)
         // perform MTC call/FB call only if the message is not null
         if (message != null) {
           const response = await transport.sendMessage(message);
+          UTILS.fireLog.info('2538 testLog sendMessagetoPlatforms response', response)
           const result = config.getResponseOverride(response);
+          UTILS.fireLog.info('2538 testLog sendMessagetoPlatforms result', result)
           resolve(result);
         } else {
           resolve(null);

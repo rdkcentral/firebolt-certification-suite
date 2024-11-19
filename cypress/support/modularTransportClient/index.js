@@ -58,6 +58,7 @@ export default async (transportClient, options) => {
   }
   // If no external transport client, check for internal transport client
   else if (children[transportClient]) {
+    cy.log('2530 testlog transportClient children else if ')
     return createAndInitializeObject(children);
   }
 };

@@ -26,6 +26,7 @@ export default class Transport {
   }
 
   async sendMessage(messageObject) {
+    cy.log('2530 testlog sendMessage messageObject',messageObject)
     logger.info(`Printing the message object: ${JSON.stringify(messageObject)}`, `sendMessage`);
     if (this.isFireboltSDK(messageObject)) {
       if (!messageObject.action) {
@@ -37,12 +38,14 @@ export default class Transport {
         messageObject.method,
         messageObject.params
       );
+      cy.log('2530 testlog sendMessage methodResponse',methodResponse)
       return methodResponse;
     } else if (this.isMTC(messageObject)) {
       // Object contains "transport" and "options" fields, consider it as MTC call.
       const transportClient = await modularTransportClient(messageObject.transport, {
         ...messageObject.options,
       });
+      cy.log('2530 testlog sendMessage transportClient',transportClient)
       // If given transportClient exists, initialize the client else throw error.
       if (transportClient) {
         if (messageObject.payload) {

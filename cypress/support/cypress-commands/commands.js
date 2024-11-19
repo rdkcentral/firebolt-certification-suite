@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS, { getEnvVariable } from '../cypress-support/src/utils';
+import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 
@@ -873,6 +873,7 @@ Cypress.Commands.add('censorData', (method, response) => {
  * cy.launchApp('certification', 'foo')
  */
 Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
+  fireLog('2538 testlog inside launchApp')
   // use the firebolt command Discovery.launch to launch the app. If app id given, use the app id
   // else get the default app id from environment variable.
 
