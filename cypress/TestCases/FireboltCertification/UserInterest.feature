@@ -5,7 +5,7 @@ Feature: UserInterest
         Given the environment has been set up for 'Userinterest' tests
         And 3rd party 'certification' app is launched
 
-    @sdk @transport @Sev2
+    @sdk @transport @Sev1
     Scenario Outline: Discovery.userInterest - Validate API Method content with <Scenario>
         When 1st party app registers for the 'Content onUserInterest' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'notify userInterest with <userInterestData>'
@@ -16,6 +16,16 @@ Feature: UserInterest
             | Scenario                                                                               | userInterestData                                                                              | Event_Content                                                                        |
             | interest & reason playlist with program entity                                         | type interest and reason playlist with program entity                                         | type interest reason playlist                                                        |
             | disinterest & reason playlist with program entity                                      | type disinterest and reason playlist with program entity                                      | type disinterest reason playlist                                                     |
+            
+    @sdk @transport @Sev2
+    Scenario Outline: Discovery.userInterest - Validate API Method content with <Scenario>
+        When 1st party app registers for the 'Content onUserInterest' event using the 'Firebolt' API
+        And '3rd party app' invokes the 'Firebolt' API to 'notify userInterest with <userInterestData>'
+        Then 'Firebolt' platform responds with 'null for discovery userInterest'
+        And 'Firebolt' platform triggers to '1st party app' event 'onUserInterest with <Event_Content>'
+
+        Examples:
+            | Scenario                                                                               | userInterestData                                                                              | Event_Content                                                                        |
             | interest & reason playlist with channel streaming entity                               | type interest and reason playlist with channel streaming entity                               | type interest reason playlist channel                                                |
             | disinterest & reason playlist with channel streaming entity                            | type disinterest and reason playlist with channel streaming entity                            | type disinterest reason playlist channel                                             |
             | interest & reason playlist with channel overTheAir entity                              | type interest and reason playlist with channel overTheAir entity                              | type interest reason playlist overTheAir                                             |
@@ -86,7 +96,7 @@ Feature: UserInterest
             | invalid programType for program entity with seriesId    | with invalid programType for program entity with seriesId    |
             | invalid programType for program entity with seasonId    | with invalid programType for program entity with seasonId    |
 
-    @sdk @Sev2
+    @sdk @Sev1
     Scenario Outline: Content.requestUserInterest - Validate API Method content with <Scenario>
         And 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type <userInterestData>'
         Then 'Firebolt' platform responds to '1st party app' with '<method_Content>'
