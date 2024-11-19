@@ -29,7 +29,7 @@ Feature: SecondScreen
 
    @sdk @transport
    Scenario: SecondScreen.FriendlyName - Positive Scenario: Validate Set friendlyName
-      Given the environment has been set up for 'SECONDSCREEN_FRIENDLYNAME' tests
+      Given the environment has been set up for 'Secondscreen friendlyname' tests
       And '3rd party app' registers for the 'Firebolt' event
       And '3rd party app' invokes the 'Firebolt' get API
       When 1st party app invokes the 'Firebolt' API to set 'name' to 'Living Room'

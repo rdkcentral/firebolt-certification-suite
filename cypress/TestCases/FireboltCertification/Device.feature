@@ -31,7 +31,7 @@ Feature: Device
 
     @sdk @transport @Sev2
     Scenario: Device.name - Validating API and Event Responses for name change
-        Given the environment has been set up for 'DEVICE_NAME_CORE' tests
+        Given the environment has been set up for 'Device name core' tests
         And '1st party app' registers for the 'Firebolt' event
         When 1st party app invokes the 'Firebolt' API to set 'setName' to 'Living hall'
         Then 'Firebolt' platform responds to '1st party app' set API
