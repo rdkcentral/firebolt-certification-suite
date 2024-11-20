@@ -50,8 +50,7 @@ FIREBOLT_CALL = {
 ### How to initialize the Firebolt object
 - The Firebolt object should be initialized using the [the environment has been set up for {string} tests](../../support/step_definitions/testSetup.md#the-environment-has-been-set-up-for-string-tests) glue code.
 - The glue code accepts the test type as a parameter, which determines the Firebolt object to be used.
-- The Firebolt object will be retrieved based on the key name and stored in the runtime environment variable
-- The Firebolt object must be added in uppercase in the file located at: `cypress/fixtures/fireboltCalls/<module.js>`.
+- The Firebolt object will be retrieved based on the key name and stored in the runtime environment variable.
 
 #### Flowchart of Firebolt Object Usage
 ![alt text](envSetupFlowchart.png)
@@ -66,6 +65,28 @@ FIREBOLT_CALL = {
     - The Firebolt object will be fetched and stored in the runtime environment variable based on the module name.
     - The method is also specified after the colon : and will be stored alongside the module in the runtime environment..
   - Example: `Given the environment has been set up for 'Localization:locale' tests` - `Localization` is the firebolt object name.
+ 
+    **Firebolt Object:** 
+    ```javascript
+    exports.LOCALIZATION = {
+      method: 'Localization.locale',
+      params: {},
+      validationJsonPath: 'result',
+      content: {
+        data: [
+          {
+            type: 'fixture',
+            validations: [
+              {
+                mode: 'staticContentValidation',
+                type: resolveAtRuntime('value'),
+              },
+            ],
+          },
+        ],
+      },
+    };
+    ```
 
 - Passing the Key Name as Is
     ##### Format
@@ -76,6 +97,27 @@ FIREBOLT_CALL = {
     
   - Example: `Given the environment has been set up for 'ADVERTISING_SKIPRESTRICTION' tests` - `ADVERTISING_SKIPRESTRICTION` is the firebolt object name.
 
+    **Firebolt Object:** 
+    ```javascript
+    exports.ADVERTISING_SKIPRESTRICTION = {
+      method: 'Advertising.skipRestriction',
+      params: {},
+      validationJsonPath: 'result',
+      content: {
+        data: [
+          {
+            type: 'fixture',
+            validations: [
+              {
+                mode: 'staticContentValidation',
+                type: resolveAtRuntime('value'),
+              },
+            ],
+          },
+        ],
+      },
+    };
+
 - Passing the Key Name with Spaces
     ##### Format
     ```javascript
@@ -84,6 +126,27 @@ FIREBOLT_CALL = {
     - If the `key Name` has spaces, replace the spaces with an underscore (_), and then convert the entire key name to uppercase.
     
   - Example: `Given the environment has been set up for 'Advertising skiprestriction' tests` - `ADVERTISING_SKIPRESTRICTION` is the firebolt object name. The key name `Advertising skiprestriction` will be converted to `ADVERTISING_SKIPRESTRICTION` (spaces replaced with underscores and converted to uppercase).
+
+    **Firebolt Object:** 
+    ```javascript
+    exports.ADVERTISING_SKIPRESTRICTION = {
+      method: 'Advertising.skipRestriction',
+      params: {},
+      validationJsonPath: 'result',
+      content: {
+        data: [
+          {
+            type: 'fixture',
+            validations: [
+              {
+                mode: 'staticContentValidation',
+                type: resolveAtRuntime('value'),
+              },
+            ],
+          },
+        ],
+      },
+    };
 
 
 | **Param**               | **Definition**                                                                                            | **Example**                                   | **Supported Type**             |
