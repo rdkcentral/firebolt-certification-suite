@@ -179,7 +179,6 @@ function fetchAppMetaData() {
       .filter((file) => file !== 'app_metadata.json' && file.endsWith('.json'));
 
     const mergedData = appMetaData ? _.cloneDeep(appMetaData) : {};
-
     files.forEach((file) => {
       const filePath = path.join(appDataDir, file);
       const appId = file.split('.')[0];
