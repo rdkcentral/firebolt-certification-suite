@@ -49,36 +49,41 @@ FIREBOLT_CALL = {
 ```
 ### How to initialize the Firebolt object
 - The Firebolt object should be initialized using the [the environment has been set up for {string} tests](../../support/step_definitions/testSetup.md#the-environment-has-been-set-up-for-string-tests) glue code.
-- The glue code will accept the test type as a parameter. The test type should be the key name of the Firebolt object.
-- The Firebolt object will be fetched based on the key name and stored in the `runtime` environment variable.
+- The glue code accepts the test type as a parameter, which determines the Firebolt object to be used.
+- The Firebolt object will be retrieved based on the key name and stored in the runtime environment variable
+- The Firebolt object must be added in uppercase in the file located at: `cypress/fixtures/fireboltCalls/<module.js>`.
 
-#### The are two ways to initialize the Firebolt object
-- Passing the key name with colon `:`
+#### Flowchart of Firebolt Object Usage
+![alt text](envSetupFlowchart.png)
+
+#### Three Ways to Initialize the Firebolt Object
+- Passing the Key Name with a Colon `:`
     ##### Format
     ```javascript
     Given the environment has been set up for 'module:method' tests
     ```
-    - In the abover format, `module` is the name of the Firebolt object and firebolt object fetched and stored in the `runtime` environment variable using module name.
-    - `module:method` this will split the key name by `:` and both the module and method will be stored in the `runtime` environment variable.
+    - In this format, `module` is the name of the Firebolt object.
+    - The Firebolt object will be fetched and stored in the runtime environment variable based on the module name.
+    - The method is also specified after the colon : and will be stored alongside the module in the runtime environment..
   - Example: `Given the environment has been set up for 'Localization:locale' tests` - `Localization` is the firebolt object name.
 
-- Passing the key name as is
+- Passing the Key Name as Is
     ##### Format
     ```javascript
     Given the environment has been set up for 'keyName' tests
     ```
-    - In the above format, `keyName` is the name of the Firebolt object and firebolt object fetched and stored in the `runtime` environment variable using key name.
+    - In this format, `keyName` is the name of the Firebolt object, and it will be fetched and stored in the runtime environment variable.
     
-    Example: `Given the environment has been set up for 'ADVERTISING_SKIPRESTRICTION' tests` - `ADVERTISING_SKIPRESTRICTION` is the firebolt object name.
+  - Example: `Given the environment has been set up for 'ADVERTISING_SKIPRESTRICTION' tests` - `ADVERTISING_SKIPRESTRICTION` is the firebolt object name.
 
-- Passing the key name with spaces
+- Passing the Key Name with Spaces
     ##### Format
     ```javascript
     Given the environment has been set up for 'key Name' tests
     ```
-    - In the above format, If `key Name` having spaces, then it should be replaced with `_` in the key name and finally, the key name converted to uppercase.
+    - If the `key Name` has spaces, replace the spaces with an underscore (_), and then convert the entire key name to uppercase.
     
-    Example: `Given the environment has been set up for 'Advertising skiprestriction' tests` - `ADVERTISING_SKIPRESTRICTION` is the firebolt object name.
+  - Example: `Given the environment has been set up for 'Advertising skiprestriction' tests` - `ADVERTISING_SKIPRESTRICTION` is the firebolt object name. The key name `Advertising skiprestriction` will be converted to `ADVERTISING_SKIPRESTRICTION` (spaces replaced with underscores and converted to uppercase).
 
 
 | **Param**               | **Definition**                                                                                            | **Example**                                   | **Supported Type**             |
