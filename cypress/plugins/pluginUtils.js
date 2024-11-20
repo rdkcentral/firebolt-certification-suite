@@ -2,6 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
+const _ = require('lodash');
 const logger = require('../support/Logger')('pluginUtils.js');
 
 /**
@@ -155,4 +156,64 @@ function preprocessDeviceData(config) {
   }
 }
 
-module.exports = { getAndDereferenceOpenRpc, generateIndexFile, preprocessDeviceData };
+function fetchAppMetaData() {
+  const fcsAppMetaDataPath = 'cypress/fixtures/objects/appData/app_metadata.json';
+  const fcsAppMetaDataDir = 'cypress/fixtures/objects/appData/';
+
+  const configModuleAppMetaDataPath = 'cypress/fixtures/external/objects/appData/app_metadata.json';
+  const configModuleAppMetaDataDir = 'cypress/fixtures/external/objects/appData/';
+
+  const fcsAppMetaData = extractAppMetadata(fcsAppMetaDataDir, fcsAppMetaDataPath);
+  const configModuleAppMetaData = extractAppMetadata(
+    configModuleAppMetaDataDir,
+    configModuleAppMetaDataPath
+  );
+
+  const combinedAppMetaData = _.merge(fcsAppMetaData, configModuleAppMetaData);
+  fs.writeFileSync('./aaa.json', JSON.stringify(combinedAppMetaData, null, 2));
+
+  function extractAppMetadata(appDataDir, appMetaDataFile) {
+    const appMetaData = fetchDataFromFile(appMetaDataFile);
+    const files = fs
+      .readdirSync(appDataDir)
+      .filter((file) => file !== 'app_metadata.json' && file.endsWith('.json'));
+
+    const mergedData = appMetaData ? _.cloneDeep(appMetaData) : {};
+
+    files.forEach((file) => {
+      const filePath = path.join(appDataDir, file);
+      const appId = file.split('.')[0];
+      const fileData = fetchDataFromFile(filePath);
+      if (fileData) {
+        if (mergedData[appId]) {
+          mergedData[appId] = _.merge(mergedData[appId], fileData);
+        } else {
+          mergedData[appId] = fileData;
+        }
+      }
+    });
+    return mergedData;
+  }
+  return combinedAppMetaData;
+}
+
+function fetchDataFromFile(filePath) {
+  try {
+    if (fs.existsSync(filePath)) {
+      return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+    } else {
+      logger.error(`File not found at path: ${filePath}`);
+      return null;
+    }
+  } catch (error) {
+    logger.error(`Error reading or parsing the JSON file at ${filePath}: ${error.message}`);
+    return null;
+  }
+}
+
+module.exports = {
+  getAndDereferenceOpenRpc,
+  generateIndexFile,
+  preprocessDeviceData,
+  fetchAppMetaData,
+};
