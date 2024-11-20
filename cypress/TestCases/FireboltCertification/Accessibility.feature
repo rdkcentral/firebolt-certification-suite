@@ -67,10 +67,10 @@ Feature: Accessibility
 
     @sdk @transport @Sev2
     Scenario Outline: Accessibility.onClosedCaptionsSettingsChanged - Validating API and Event Responses for <Method> change to null
-        Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS_SET_TO_NULL' getters and setters '<Method>' to 'null'
+        Given the environment has been set up for 'Accessibility closedCaptions Settings set to null' tests
         When '3rd party app' registers for the 'Firebolt' event
         And '3rd party app' invokes the 'Firebolt' get API
-        And 1st party app invokes the 'Firebolt' API to set value
+        When 1st party app invokes the 'Firebolt' API to set '<Method>' to 'null'
         Then 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
         Then 'Firebolt' platform responds to '3rd party app' get API
