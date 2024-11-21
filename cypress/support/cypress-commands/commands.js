@@ -997,7 +997,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
 
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
-    fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
+    fireLog.info('Discovery launch intent: ' + UTILS.censorPubSubToken(JSON.stringify(parsedIntent)));
     cy.sendMessagetoPlatforms(parsedIntent).then((result) => {
       fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
 
