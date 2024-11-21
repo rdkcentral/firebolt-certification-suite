@@ -2,7 +2,7 @@
 Feature: Parameters
 
    @sdk @transport @Sev0
-   Scenario Outline: Parameters.initialization - Validating API and Event Responses when <Scenario>
+   Scenario Outline: Parameters.initialization - Validating API response when <Scenario>
       Given the environment has been set up for 'Parameters' tests
       And 3rd party 'certification' app is launched
       When '3rd party app' invokes the 'Firebolt' API to 'get parameters initialization'
@@ -17,7 +17,7 @@ Feature: Parameters
          | disabling privacy params | set privacy allow AppContentAdTargeting as false | false for parameters initialization |
 
    @sdk @transport @Sev0
-   Scenario: Parameters.initialization - Validating API and Event Responses when NavigationIntent is set to Home
+   Scenario: Parameters.initialization - Validating API response when NavigationIntent is set to Home
       Given the environment has been set up for 'Parameters' tests
       When 1st party app invokes the 'Firebolt' API to 'discovery launch with home intent'
       And Test runner waits for 30 'seconds'
