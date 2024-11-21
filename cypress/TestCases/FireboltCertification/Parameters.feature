@@ -12,9 +12,9 @@ Feature: Parameters
       Then 'Firebolt' platform responds with '<Validation_Key>'
 
       Examples:
-         | Scenario                 | Set_API_Key                                      | Validation_Key                      |
-         | enabling privacy params  | set privacy allow AppContentAdTargeting as true  | true for parameters initialization  |
-         | disabling privacy params | set privacy allow AppContentAdTargeting as false | false for parameters initialization |
+         | Scenario                        | Set_API_Key                                      | Validation_Key                      |
+         | enabling AppContentAdTargeting  | set privacy allow AppContentAdTargeting as true  | true for parameters initialization  |
+         | disabling AppContentAdTargeting | set privacy allow AppContentAdTargeting as false | false for parameters initialization |
 
    @sdk @transport @Sev0
    Scenario: Parameters.initialization - Validating API response when NavigationIntent is set to Home
