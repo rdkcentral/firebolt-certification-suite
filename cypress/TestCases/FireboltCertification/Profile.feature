@@ -2,7 +2,7 @@
 Feature: Profile
 
     @sdk @transport @requiresPlatformImplementation @Sev0
-    Scenario Outline: Profile.approveContentRating - Validating API and Event responses for <Scenario> without UI
+    Scenario Outline: Profile.approveContentRating - Validating API responses for <Scenario> without UI
         Given the environment has been set up for 'Profile' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'pinChallenge' test provider
@@ -16,7 +16,7 @@ Feature: Profile
             | Correct PIN entry | true for profile approveContentRating  |
             
     @sdk @transport @requiresPlatformImplementation @Sev2
-    Scenario Outline: Profile.approveContentRating - Validating API and Event responses for <Scenario> without UI
+    Scenario Outline: Profile.approveContentRating - Validating API responses for <Scenario> without UI
         Given the environment has been set up for 'Profile' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'pinChallenge' test provider
@@ -31,7 +31,7 @@ Feature: Profile
             | Cancelling PIN entry | false for profile approveContentRating |
 
     @sdk @transport @requiresPlatformImplementation @Sev0
-    Scenario Outline: Profile.approveContentRating - Validating API and Event responses for <Scenario> with UI
+    Scenario Outline: Profile.approveContentRating - Validating API responses for <Scenario> with UI
         Given the environment has been set up for 'Profile' tests
         And User 'starts' recording lifecycle history for '1st party app'
         And 3rd party 'certification' app is launched
@@ -49,7 +49,7 @@ Feature: Profile
             | Correct PIN entry | true for profile approveContentRating  |
             
     @sdk @transport @requiresPlatformImplementation @Sev2
-    Scenario Outline: Profile.approveContentRating - Validating API and Event responses for <Scenario> with UI
+    Scenario Outline: Profile.approveContentRating - Validating API responses for <Scenario> with UI
         Given the environment has been set up for 'Profile' tests
         And User 'starts' recording lifecycle history for '1st party app'
         And 3rd party 'certification' app is launched
@@ -68,7 +68,7 @@ Feature: Profile
             | Cancelling PIN entry | false for profile approveContentRating |
 
     @sdk @transport @requiresPlatformImplementation @Sev0
-    Scenario Outline: Profile.approvePurchase - Validating API and Event responses for <Scenario> without UI
+    Scenario Outline: Profile.approvePurchase - Validating API responses for <Scenario> without UI
         Given the environment has been set up for 'Profile' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'pinChallenge' test provider
@@ -82,7 +82,7 @@ Feature: Profile
             | Correct PIN entry | true for profile approvePurchase  |
             
     @sdk @transport @requiresPlatformImplementation @Sev2
-    Scenario Outline: Profile.approvePurchase - Validating API and Event responses for <Scenario> without UI
+    Scenario Outline: Profile.approvePurchase - Validating API responses for <Scenario> without UI
         Given the environment has been set up for 'Profile' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'pinChallenge' test provider
@@ -97,7 +97,7 @@ Feature: Profile
             | Cancelling PIN entry | false for profile approvePurchase |
 
     @sdk @transport @requiresPlatformImplementation @Sev0
-    Scenario Outline: Profile.approvePurchase - Validating API and Event responses for <Scenario> with UI
+    Scenario Outline: Profile.approvePurchase - Validating API responses for <Scenario> with UI
         Given the environment has been set up for 'Profile' tests
         And User 'starts' recording lifecycle history for '1st party app'
         And 3rd party 'certification' app is launched
@@ -115,7 +115,7 @@ Feature: Profile
             | Correct PIN entry | true for profile approvePurchase  |
             
     @sdk @transport @requiresPlatformImplementation @Sev2
-    Scenario Outline: Profile.approvePurchase - Validating API and Event responses for <Scenario> with UI
+    Scenario Outline: Profile.approvePurchase - Validating API responses for <Scenario> with UI
         Given the environment has been set up for 'Profile' tests
         And User 'starts' recording lifecycle history for '1st party app'
         And 3rd party 'certification' app is launched
@@ -134,7 +134,7 @@ Feature: Profile
             | Cancelling PIN entry | false for profile approvePurchase |
 
     @sdk @transport @Sev2
-    Scenario: Profile.flags - Validating API and Event responses
+    Scenario: Profile.flags - Validating API response
         Given the environment has been set up for 'Profile' tests
         And 3rd party 'certification' app is launched
         When '3rd party app' invokes the 'Firebolt' API to 'allow profile flags'
