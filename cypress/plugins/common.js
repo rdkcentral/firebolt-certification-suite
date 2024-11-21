@@ -52,11 +52,12 @@ function genericSupport(config) {
     ...data,
     ...commandLineArgs,
   };
-  const appMetadata = fetchAppMetaData();
   // To read device data JSON
   preprocessDeviceData(config);
+
+  fetchAppMetaData(config);
   const testDataEnv = testDataProcessor.testDataProcessor(config.env);
-  Object.assign(config.env, testDataEnv, appMetadata);
+  Object.assign(config.env, testDataEnv);
 
   return config;
 }

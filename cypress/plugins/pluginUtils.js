@@ -156,7 +156,7 @@ function preprocessDeviceData(config) {
   }
 }
 
-function fetchAppMetaData() {
+function fetchAppMetaData(config) {
   const fcsAppMetaDataPath = 'cypress/fixtures/objects/appData/app_metadata.json';
   const fcsAppMetaDataDir = 'cypress/fixtures/objects/appData/';
 
@@ -193,7 +193,7 @@ function fetchAppMetaData() {
     });
     return mergedData;
   }
-  return combinedAppMetaData;
+  config.env = Object.assign({}, config.env, { app_metadata: combinedAppMetaData });
 }
 
 function fetchDataFromFile(filePath) {

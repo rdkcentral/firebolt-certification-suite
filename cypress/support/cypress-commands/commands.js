@@ -872,7 +872,7 @@ Cypress.Commands.add('censorData', (method, response) => {
  * cy.launchApp('firebolt', 'foo')
  * cy.launchApp('certification', 'foo')
  */
-Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
+Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, intent) => {
   // use the firebolt command Discovery.launch to launch the app. If app id given, use the app id
   // else get the default app id from environment variable.
 
@@ -927,6 +927,26 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
       },
     };
   }
+
+  if (intent) {
+    let intentData;
+    Cypress.env(CONSTANTS.RUNTIME).intent = {};
+    const appMetadata = UTILS.getEnvVariable('app_metadata');
+
+    if (appMetadata[appId] && appMetadata[appId].intent) {
+      Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId].intent;
+    }
+
+    cy.task('readFileIfExists', 'cypress/fixtures/intentTemplate.json').then((intentTemplate) => {
+      if(!intentTemplate) {
+        fireLog.fail('Intent template file not found in cypress/fixtures');
+      } else {
+        intentData = intentTemplate[intent];
+        console.log('intentData', intentData);
+      }
+    });
+  }
+
   // Creating intent and request map to be sent to the app on launch
   const messageIntent = {
     action: CONSTANTS.SEARCH,
