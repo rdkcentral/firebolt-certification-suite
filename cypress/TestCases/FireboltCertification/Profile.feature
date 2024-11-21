@@ -12,8 +12,8 @@ Feature: Profile
         And 'Firebolt' platform responds with 'expected lifecycle state as foreground'
 
         Examples:
-            | Scenario       | Content                                |
-            | Correct-PIN    | true for profile approveContentRating  |
+            | Scenario          | Content                                |
+            | Correct PIN entry | true for profile approveContentRating  |
             
     @sdk @transport @requiresPlatformImplementation @Sev2
     Scenario Outline: Profile.approveContentRating - Validating API and Event responses for <Scenario> without UI
@@ -26,9 +26,9 @@ Feature: Profile
         And 'Firebolt' platform responds with 'expected lifecycle state as foreground'
 
         Examples:
-            | Scenario       | Content                                |            
-            | Wrong-PIN      | false for profile approveContentRating |
-            | Cancelling-PIN | false for profile approveContentRating |
+            | Scenario             | Content                                |            
+            | Wrong-PIN entry      | false for profile approveContentRating |
+            | Cancelling PIN entry | false for profile approveContentRating |
 
     @sdk @transport @requiresPlatformImplementation @Sev0
     Scenario Outline: Profile.approveContentRating - Validating API and Event responses for <Scenario> with UI
@@ -45,8 +45,8 @@ Feature: Profile
         And User validates lifecycle history for '3rd party app' with 'background:foreground'
 
         Examples:
-            | Scenario       | Content                                |
-            | Correct-PIN    | true for profile approveContentRating  |
+            | Scenario          | Content                                |
+            | Correct PIN entry | true for profile approveContentRating  |
             
     @sdk @transport @requiresPlatformImplementation @Sev2
     Scenario Outline: Profile.approveContentRating - Validating API and Event responses for <Scenario> with UI
@@ -63,9 +63,9 @@ Feature: Profile
         And User validates lifecycle history for '3rd party app' with 'background:foreground'
 
         Examples:
-            | Scenario       | Content                                |            
-            | Wrong-PIN      | false for profile approveContentRating |
-            | Cancelling-PIN | false for profile approveContentRating |
+            | Scenario             | Content                                |            
+            | Wrong PIN entry      | false for profile approveContentRating |
+            | Cancelling PIN entry | false for profile approveContentRating |
 
     @sdk @transport @requiresPlatformImplementation @Sev0
     Scenario Outline: Profile.approvePurchase - Validating API and Event responses for <Scenario> without UI
@@ -78,8 +78,8 @@ Feature: Profile
         And 'Firebolt' platform responds with 'expected lifecycle state as foreground'
 
         Examples:
-            | Scenario       | Content                           |
-            | Correct-PIN    | true for profile approvePurchase  |
+            | Scenario          | Content                           |
+            | Correct PIN entry | true for profile approvePurchase  |
             
     @sdk @transport @requiresPlatformImplementation @Sev2
     Scenario Outline: Profile.approvePurchase - Validating API and Event responses for <Scenario> without UI
@@ -92,9 +92,9 @@ Feature: Profile
         And 'Firebolt' platform responds with 'expected lifecycle state as foreground'
 
         Examples:
-            | Scenario       | Content                           |            
-            | Wrong-PIN      | false for profile approvePurchase |
-            | Cancelling-PIN | false for profile approvePurchase |
+            | Scenario             | Content                           |            
+            | Wrong PIN entry      | false for profile approvePurchase |
+            | Cancelling PIN entry | false for profile approvePurchase |
 
     @sdk @transport @requiresPlatformImplementation @Sev0
     Scenario Outline: Profile.approvePurchase - Validating API and Event responses for <Scenario> with UI
@@ -111,8 +111,8 @@ Feature: Profile
         And User validates lifecycle history for '3rd party app' with 'background:foreground'
 
         Examples:
-            | Scenario       | Content                           |
-            | Correct-PIN    | true for profile approvePurchase  |
+            | Scenario          | Content                           |
+            | Correct PIN entry | true for profile approvePurchase  |
             
     @sdk @transport @requiresPlatformImplementation @Sev2
     Scenario Outline: Profile.approvePurchase - Validating API and Event responses for <Scenario> with UI
@@ -129,9 +129,9 @@ Feature: Profile
         And User validates lifecycle history for '3rd party app' with 'background:foreground'
 
         Examples:
-            | Scenario       | Content                           |            
-            | Wrong-PIN      | false for profile approvePurchase |
-            | Cancelling-PIN | false for profile approvePurchase |
+            | Scenario             | Content                           |            
+            | Wrong PIN entry      | false for profile approvePurchase |
+            | Cancelling PIN entry | false for profile approvePurchase |
 
     @sdk @transport @Sev2
     Scenario: Profile.flags - Validating API and Event responses
