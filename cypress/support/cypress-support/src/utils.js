@@ -1168,9 +1168,9 @@ Cypress.env(CONSTANTS.FB_INTERACTIONLOGS, interactionLogs);
  * @description A Function to sensor the pubSubToken from the launch intent.
  * @param {String} data - The intent to be parsed and censored.
  * @example
- * censorPubSubToken('{"method: "launch", "params": {"intent": {"data": {"query": '{"params": {"pubSubToken": "ey3456789ab}'}}}}')
+ * censorPubSubToken('{"method: "launch", "params": {"intent": {"data": {"query": '{"params": {"pubSubToken": "12456789}'}}}}')
  * @returns
- * {"method: "launch", "params": {"intent": {"data": {"query": '{"params": {"pubSubToken": "12*****ab"}'}}}})
+ * {"method: "launch", "params": {"intent": {"data": {"query": '{"params": {"pubSubToken": "12*****89"}'}}}})
  */
 function censorPubSubToken(data) {
   data = JSON.parse(data);
