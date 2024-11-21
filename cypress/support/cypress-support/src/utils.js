@@ -1221,5 +1221,5 @@ module.exports = {
   fireboltCallObjectHasField,
   fetchAppIdentifierFromEnv,
   skipCurrentTest,
-  censorPubSubToken
+  censorPubSubToken,
 };
