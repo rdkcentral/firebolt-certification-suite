@@ -2,7 +2,7 @@
 Feature: Keyboard
 
     @sdk @transport @requiresPlatformImplementation @Sev1
-    Scenario Outline: Keyboard.<Method> - Validating API and event responses when prompting user with <Scenario> without UI
+    Scenario Outline: Keyboard.<Method> - Validating API responses when prompting user with <Scenario> without UI
         Given the environment has been set up for 'Keyboard' tests
         And 3rd party 'certification' app is launched
         And Framework registers 'keyboard' test provider
@@ -21,7 +21,7 @@ Feature: Keyboard
             | standard | standard keyboard                      | prompt the user for their standard platform                    | the entered standard user value |
 
     @sdk @transport @requiresPlatformImplementation @Sev1
-    Scenario Outline: Keyboard.<Method> - Validating API and event responses when prompting user with <Scenario> with UI
+    Scenario Outline: Keyboard.<Method> - Validating API responses when prompting user with <Scenario> with UI
         Given the environment has been set up for 'Keyboard' tests
         And User 'starts' recording lifecycle history for '1st party app'
         And 3rd party 'certification' app is launched
@@ -49,13 +49,13 @@ Feature: Keyboard
         Then 'Firebolt' platform responds with '<Validation_key>'
 
         Examples:
-            | Method   | Scenario                        | API_Key                                                      | Validation_key              |
-            | email    | passing email as invalid string | prompt the user for their email with invalid type as string  | invalid parameter for email |
-            | email    | passing email as integer        | prompt the user for their email with invalid type as integer | invalid parameter for email |
-            | email    | passing email as empty          | prompt the user for their email with type as empty           | invalid parameter for email |
-            | password | passing password as integer     | prompt the user for their invalid password as integer        | invalid parameter password  |
-            | standard | passing standard as integer     | prompt the user for their invalid standard as integer        | invalid parameter standard  |
-            | standard | passing standard as empty       | prompt the user for their standard as empty                  | invalid parameter standard  |
+            | Method   | Scenario                                    | API_Key                                                      | Validation_key              |
+            | email    | using email keyboard to pass invalid string | prompt the user for their email with invalid type as string  | invalid parameter for email |
+            | email    | using email keyboard to pass integer        | prompt the user for their email with invalid type as integer | invalid parameter for email |
+            | email    | using email keyboard and leaving blank      | prompt the user for their email with type as empty           | invalid parameter for email |
+            | password | using password keyboard to pass integer     | prompt the user for their invalid password as integer        | invalid parameter password  |
+            | standard | using standard keyboard to pass integer     | prompt the user for their invalid standard as integer        | invalid parameter standard  |
+            | standard | using standard keyboard and leaving empty   | prompt the user for their standard as empty                  | invalid parameter standard  |
 
 
     @sdk @transport @requiresPlatformImplementation @Sev2
@@ -69,10 +69,10 @@ Feature: Keyboard
         Then 'Firebolt' platform responds with '<Validation_key>'
 
         Examples:
-            | Method   | Scenario                             | API_Key                                                      | Validation_key              |
-            | email    | passing email type as invalid string | prompt the user for their email with invalid type as string  | invalid parameter for email |
-            | email    | passing email type as integer        | prompt the user for their email with invalid type as integer | invalid parameter for email |
-            | email    | passing email type as empty          | prompt the user for their email with type as empty           | invalid parameter for email |
-            | password | passing password as integer          | prompt the user for their invalid password as integer        | invalid parameter password  |
-            | standard | passing standard as integer          | prompt the user for their invalid standard as integer        | invalid parameter password  |
-            | standard | passing standard as empty            | prompt the user for their standard as empty                  | invalid parameter standard  |
+            | Method   | Scenario                                    | API_Key                                                      | Validation_key              |
+            | email    | using email keyboard to pass invalid string | prompt the user for their email with invalid type as string  | invalid parameter for email |
+            | email    | using email keyboard to pass integer        | prompt the user for their email with invalid type as integer | invalid parameter for email |
+            | email    | using email keyboard and leaving blank      | prompt the user for their email with type as empty           | invalid parameter for email |
+            | password | using password keyboard to pass integer     | prompt the user for their invalid password as integer        | invalid parameter password  |
+            | standard | using standard keyboard to pass integer     | prompt the user for their invalid standard as integer        | invalid parameter password  |
+            | standard | using standard keyboard and leaving empty   | prompt the user for their standard as empty                  | invalid parameter standard  |
