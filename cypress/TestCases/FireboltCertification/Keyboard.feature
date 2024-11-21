@@ -18,7 +18,7 @@ Feature: Keyboard
             | email    | email keyboard for signIn - type alone | prompt the user for their email address with signIn type alone | the entered email address       |
             | password | password keyboard                      | prompt the user for their password                             | the entered user password       |
             | password | password keyboard as empty             | prompt the user for their password as empty                    | the entered user password       |
-            | standard | standard keyboard platform             | prompt the user for their standard platform                    | the entered standard user value |
+            | standard | standard keyboard                      | prompt the user for their standard platform                    | the entered standard user value |
 
     @sdk @transport @requiresPlatformImplementation @Sev1
     Scenario Outline: Keyboard.<Method> - Validating API and event responses when prompting user with <Scenario> with UI
@@ -36,9 +36,9 @@ Feature: Keyboard
 
         Examples:
             | Method   | Scenario          | API_Key                                                  | Content                         |
-            | email    | email keyboard             | prompt the user for their email address with signIn type | the entered email address       |
-            | password | password keyboard          | prompt the user for their password                       | the entered user password       |
-            | standard | standard platform keyboard | prompt the user for their standard platform              | the entered standard user value |
+            | email    | email keyboard    | prompt the user for their email address with signIn type | the entered email address       |
+            | password | password keyboard | prompt the user for their password                       | the entered user password       |
+            | standard | standard keyboard | prompt the user for their standard platform              | the entered standard user value |
 
     @sdk @transport @requiresPlatformImplementation @Sev2
     Scenario Outline: Keyboard.<Method> - Validating API error handling when <Scenario> without UI
