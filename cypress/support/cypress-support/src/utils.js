@@ -1015,7 +1015,7 @@ global.resolveAtRuntime = function (input) {
       }
       const value = jsonPath.split('.').reduce((acc, key) => acc && acc[key], object);
       if (value === undefined) {
-        throw new Error(`Path "${jsonPath}" not found in "${objectName}" object.`);
+        throw new Error(`"${jsonPath}" field not found in "${objectName}" object.`);
       }
       return value;
     }
