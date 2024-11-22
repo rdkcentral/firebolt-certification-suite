@@ -16,7 +16,22 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-const discovery = require('./discovery');
-const fcs = require('./fcs');
-const fcsSetters = require('./fcsSetters')
-module.exports = { discovery, fcs, fcsSetters };
+function setClosedCaptions(attribute, value) {
+    cy.sendMessageToPlatforms(`Accessibility.setClosedCaptions`, value).then((response) => {
+        if (response == "good") {
+            return setterSuccess()
+        }
+
+        if (response == "bad") {
+            return setterFailure("This setter failed because reasons")
+        }
+    })
+}
+
+function setOneParamThing(value) {
+    return setterNotImplemented()
+}
+
+function setTwoParamThing(attribute, value) {
+    return setterNotImplemented()
+}
