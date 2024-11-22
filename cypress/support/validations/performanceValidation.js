@@ -41,21 +41,25 @@ Cypress.Commands.add('performanceValidation', (object) => {
       params: { type, process, percentile, threshold },
     };
 
-    UTILS.fireLog.info('Performance validation has started');
+    fireLog.info('Performance validation has started');
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
-      UTILS.fireLog('Performance validation has completed');
-      result.map((response) => {
-        UTILS.fireLog.info(JSON.stringify(response));
+      fireLog.info('Performance validation has stopped').then(() => {
+        cy.wrap(result)
+          .each((response) => {
+            cy.log(JSON.stringify(response));
+          })
+          .then(() => {
+            if (result.error) {
+              cy.log('Failed to fetch and validate the performance metrics').then(() => {
+                assert(false, result.error);
+              });
+            } else {
+              result.map((response) => {
+                assert.equal(true, response?.success, response?.message);
+              });
+            }
+          });
       });
-      if (result.error) {
-        cy.log('Failed to fetch and validate the performance metrics').then(() => {
-          assert(false, result.error);
-        });
-      } else {
-        result.map((response) => {
-          assert.equal(true, response?.success, response?.message);
-        });
-      }
     });
   } else {
     fireLog.info('PerformanceMetrics are disabled.');
