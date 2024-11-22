@@ -20,4 +20,5 @@ import './decodeValidation';
 import './regExValidation';
 import './schemaValidation';
 import './undefinedValidation';
+import './performanceValidation';
 import './screenshotValidation';

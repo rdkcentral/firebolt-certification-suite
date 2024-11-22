@@ -509,6 +509,8 @@ module.exports = {
   FIREBOLT_INTERACTION: 'FireboltInteraction',
   PENDING_FEATURES: 'pendingFeatures',
   FOREGROUND: 'FOREGROUND',
+  PERFORMANCE_VALIDATION: 'performanceValidation',
+  MARKER_CREATION_STATUS: 'markerCreationStatus',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
