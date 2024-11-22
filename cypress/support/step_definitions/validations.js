@@ -299,8 +299,8 @@ Given(
 
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       result.map((response) => {
-        UTILS.fireLog(JSON.stringify(response));
-      })
+        UTILS.fireLog.info(JSON.stringify(response));
+      });
       if (result.error) {
         cy.log('Failed to fetch and validate the performance metrics').then(() => {
           assert(false, result.error);
