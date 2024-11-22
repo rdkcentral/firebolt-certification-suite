@@ -41,8 +41,12 @@ Cypress.Commands.add('performanceValidation', (object) => {
       params: { type, process, percentile, threshold },
     };
 
-    fireLog.info('Performance validation has started');
+    UTILS.fireLog.info('Performance validation has started');
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
+      UTILS.fireLog('Performance validation has completed');
+      result.map((response) => {
+        UTILS.fireLog(JSON.stringify(response));
+      })
       if (result.error) {
         cy.log('Failed to fetch and validate the performance metrics').then(() => {
           assert(false, result.error);
