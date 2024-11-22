@@ -307,9 +307,7 @@ Given(
         });
       } else {
         result.map((response) => {
-          cy.log(response.message).then(() => {
-            assert.equal(true, response?.success, response?.message);
-          });
+          assert.equal(true, response?.success, response?.message);
         });
       }
     });
