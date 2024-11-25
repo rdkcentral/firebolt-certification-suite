@@ -72,7 +72,7 @@ FIREBOLT_CALL = {
 - The Firebolt object will be retrieved based on the key name and stored in the runtime environment variable.
 
 #### Flowchart of Firebolt Object Usage
-![alt text](envSetupFlowChart.png)
+![alt text](envSetupFlowchart.png)
 
 #### Two Ways to Initialize the Firebolt Object
 - **Passing the Key Name with a Colon `:`**
