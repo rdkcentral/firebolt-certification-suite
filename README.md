@@ -19,7 +19,7 @@ Firebolt certification suite has the following dependencies.
 
 **Configuration module**: This module serves to supply configuration overrides for certification tests when they are run on a specific platform under test. For instance, to enable CI/CD executions for some platforms, it is necessary to convert Firebolt commands to be sent via pubsub communication, rather than establishing a direct WebSocket connection to the platform. In the absence of a configuration module, the default communication and configuration will be utilized (i.e., connecting directly to platform on a device via WebSocket).
 
-**Validation module**: This module is designed to offer validation overrides or extensions for certification tests when they are executed on a firebolt platform under test. For example, additional distributor-level assertions on the Firebolt response obtained from the platform may be included
+**Validation module**: This module is designed to offer validation overrides or extensions for certification tests when they are executed on a firebolt platform under test. For example, additional distributor-level assertions on the Firebolt response obtained from the platform may be included.
 
 ## Setup
 
