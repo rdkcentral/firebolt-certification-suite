@@ -74,6 +74,8 @@ To execute the certification suite against any platform, the following setup mus
 | pubSubUrl                           | string  | ws://127.0.0.1:8081               | Sets the the url to use for a PubSub server which will be used for 3rd party app communication.                                                                                                                     |
 | fcaAppList                  | array | ['default3rdPartyAppId']     | Holds the list of fca app identifiers |
 |suiteCommunicationMode       | string | 'SDK' or 'Transport'                        | Set communicationMode as SDK/Transport for suite feature files. Default mode is Transport                                                                                                                                                         |
+| pubSubSubscribeSuffix                  | string | '_FCA'     | Name of the PubSub topic to subscribe to |
+| pubSubPublishSuffix                  | string | '_FCS'       | Name of the PubSub topic to publish to    |
 
 - Provide the specPattern mapping details. 
 Update the specHelperConfig.js with the specPattern mapping details.
@@ -137,6 +139,43 @@ Other cypress command line can also be passed
 - setup is used to load all the fixture files from node-modules/configModule to cypress/fixtures/external/. This setup is done automatically in postInstall.
 
   `npm run setup`
+
+## Launch Parameters
+When launching third party app, a couple of parameters can be passed in the intent. Launch parameters can be passed in cli or updated in config file. 
+
+
+### Default Launch Parameters
+Here are the default parameters that can be utilized during the app launch:
+
+- **appId**: The appId used to launch the app.
+- **deviceMac**: The MAC address of the device running the tests.
+- **pubSubUrl**: This URL will be included if defined in the Cypress env.
+- **pubsub_uuid**: This UUID will be included if defined in the Cypress env.
+- **appType**: Used to launch the certification app or by default `Firebolt` for certification.
+- **pubSubSubscribeSuffix**: PubSub topic to subscribe to. 
+- **pubSubPublishSuffix**: PubSub topic to publish to.
+  
+Some of these parameters, such as `pubSubUrl` and `pubsub_uuid`, will only be included when they are defined in the env variables.
+
+### Additional Launch Parameters from ConfigModule
+The `additionalLaunchParams` allows you to customize the test environment by including specific parameters that can override default parameters or add new launch parameters from config module.
+
+- **Setting Up Additional Launch Parameters:**
+  - Define a new variable `additionalLaunchParams` in `config.json` file in the configModule. Add additional launch variables as a key-value pair as shown below.
+  
+  Example: 
+```
+{
+additionalLaunchParams = { 
+    "pubSubUrl": `ws://<YOUR_IP>:8080`,  // Example of a hardcoded value
+    "appType": "CYPRESSENV-appType" // Example referencing another Cypress env variable
+    };
+} 
+```
+- **Usage of Keys and Values:**
+  - The key `pubSubUrl` contains a hardcoded URL that will be included in the intent directly.
+  - The key `appType` is prefixed with `CYPRESSENV-`, indicating that it should search for an env variable named `appType`. If `Cypress.env("appType")` exists, its value will be passed in the intent.
+- **Parameter Precedence:** Any keys defined in additionalLaunchParams will take precedence over default parameters with matching names.
 
 ## Before operation
 
