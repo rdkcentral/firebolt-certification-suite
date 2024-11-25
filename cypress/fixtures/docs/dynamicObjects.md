@@ -84,7 +84,7 @@ FIREBOLT_CALL = {
     Given the environment has been set up for 'module:method' tests
     ```
     - **Module**: The name of the Firebolt object (e.g., Localization).
-    - **Method**: The specific method method name (e.g., locale).
+    - **Method**: The specific method name (e.g., locale).
     - The Firebolt object will be fetched based on the module name and method name and stored in the runtime environment variable.
     - Refer [here](#runtime-variables) to know more about runtime variables.
 - Example: `Given the environment has been set up for 'Localization:locale' tests` - `Localization` is the firebolt object name.
