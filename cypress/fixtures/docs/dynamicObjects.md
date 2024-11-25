@@ -7,6 +7,7 @@ FCS supports dynamic Firebolt JS objects to be used across multiple examples in 
 - [Supported Dynamic Glue Codes](#supported-dynamic-glue-codes)
 - [Firebolt object](#firebolt-object)
   - [Sample Firebolt Object Format](#sample-firebolt-object-format)
+  - [How to initialize the Firebolt object](#how-to-initialize-the-firebolt-object)
 - [Supported types of validations](#supported-types-of-validations-here)
 - [Runtime Variables](#runtime-variables)
 - [ResolveAtRuntime Function](#resolveatruntime-function)
@@ -47,107 +48,6 @@ FIREBOLT_CALL = {
   content: ...
 };
 ```
-### How to initialize the Firebolt object
-- The Firebolt object should be initialized using the [the environment has been set up for {string} tests](../../support/step_definitions/testSetup.md#the-environment-has-been-set-up-for-string-tests) glue code.
-- The glue code accepts the test type as a parameter, which determines the Firebolt object to be used.
-- The Firebolt object will be retrieved based on the key name and stored in the runtime environment variable.
-
-#### Flowchart of Firebolt Object Usage
-![alt text](envSetupFlowchart.png)
-
-#### Three Ways to Initialize the Firebolt Object
-- Passing the Key Name with a Colon `:`
-    ##### Format
-    ```javascript
-    Given the environment has been set up for 'module:method' tests
-    ```
-    - In this format, `module` is the name of the Firebolt object.
-    - The Firebolt object will be fetched and stored in the runtime environment variable based on the module name.
-    - The method is also specified after the colon : and will be stored alongside the module in the runtime environment..
-  - Example: `Given the environment has been set up for 'Localization:locale' tests` - `Localization` is the firebolt object name.
- 
-    **Firebolt Object:** 
-    ```javascript
-    exports.LOCALIZATION = {
-      method: 'Localization.locale',
-      params: {},
-      validationJsonPath: 'result',
-      content: {
-        data: [
-          {
-            type: 'fixture',
-            validations: [
-              {
-                mode: 'staticContentValidation',
-                type: resolveAtRuntime('value'),
-              },
-            ],
-          },
-        ],
-      },
-    };
-    ```
-
-- Passing the Key Name as Is
-    ##### Format
-    ```javascript
-    Given the environment has been set up for 'keyName' tests
-    ```
-    - In this format, `keyName` is the name of the Firebolt object, and it will be fetched and stored in the runtime environment variable.
-    
-  - Example: `Given the environment has been set up for 'ADVERTISING_SKIPRESTRICTION' tests` - `ADVERTISING_SKIPRESTRICTION` is the firebolt object name.
-
-    **Firebolt Object:** 
-    ```javascript
-    exports.ADVERTISING_SKIPRESTRICTION = {
-      method: 'Advertising.skipRestriction',
-      params: {},
-      validationJsonPath: 'result',
-      content: {
-        data: [
-          {
-            type: 'fixture',
-            validations: [
-              {
-                mode: 'staticContentValidation',
-                type: resolveAtRuntime('value'),
-              },
-            ],
-          },
-        ],
-      },
-    };
-
-- Passing the Key Name with Spaces
-    ##### Format
-    ```javascript
-    Given the environment has been set up for 'key Name' tests
-    ```
-    - If the `key Name` has spaces, replace the spaces with an underscore (_), and then convert the entire key name to uppercase.
-    
-  - Example: `Given the environment has been set up for 'Advertising skiprestriction' tests` - `ADVERTISING_SKIPRESTRICTION` is the firebolt object name. The key name `Advertising skiprestriction` will be converted to `ADVERTISING_SKIPRESTRICTION` (spaces replaced with underscores and converted to uppercase).
-
-    **Firebolt Object:** 
-    ```javascript
-    exports.ADVERTISING_SKIPRESTRICTION = {
-      method: 'Advertising.skipRestriction',
-      params: {},
-      validationJsonPath: 'result',
-      content: {
-        data: [
-          {
-            type: 'fixture',
-            validations: [
-              {
-                mode: 'staticContentValidation',
-                type: resolveAtRuntime('value'),
-              },
-            ],
-          },
-        ],
-      },
-    };
-
 
 | **Param**               | **Definition**                                                                                            | **Example**                                   | **Supported Type**             |
 | ----------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------ |
@@ -166,6 +66,84 @@ FIREBOLT_CALL = {
 
 - These are all the supported fields, but depending on the test scenario and glue code used, none of them are technically required.
 
+### How to initialize the Firebolt object
+- The Firebolt object should be initialized using the [the environment has been set up for {string} tests](../../support/step_definitions/testSetup.md#the-environment-has-been-set-up-for-string-tests) glue code.
+- The glue code accepts the test type as a parameter, which determines the Firebolt object to be used.
+- The Firebolt object will be retrieved based on the key name and stored in the runtime environment variable.
+
+#### Flowchart of Firebolt Object Usage
+![alt text](envSetupFlowChart.png)
+
+#### Two Ways to Initialize the Firebolt Object
+- **Passing the Key Name with a Colon `:`**
+ 
+    This format allows you to specify both the module and the method of the Firebolt object by separating them with a colon.
+    Format: `module:method`. 
+    ##### Format
+    ```javascript
+    Given the environment has been set up for 'module:method' tests
+    ```
+    - **Module**: The name of the Firebolt object (e.g., Localization).
+    - **Method**: The specific method method name (e.g., locale).
+    - The Firebolt object will be fetched based on the module name and method name and stored in the runtime environment variable.
+    - Refer [here](#runtime-variables) to know more about runtime variables.
+- Example: `Given the environment has been set up for 'Localization:locale' tests` - `Localization` is the firebolt object name.
+ 
+    **Firebolt Object:** 
+    ```javascript
+    exports.LOCALIZATION = {
+      method: resolveAtRuntime('{{module}}.{{method}}'),
+      params: {},
+      validationJsonPath: 'result',
+      content: {
+        data: [
+          {
+            type: 'fixture',
+            validations: [
+              {
+                mode: 'staticContentValidation',
+                type: resolveAtRuntime('value'),
+              },
+            ],
+          },
+        ],
+      },
+    };
+    ```
+
+- **Passing the Key Name with Spaces**
+
+    This format is used when the key name does not contain a colon. If the key name contains spaces, they are replaced with underscores, and the entire key name is converted to uppercase.
+    ##### Format
+    ```javascript
+    Given the environment has been set up for 'key Name' tests
+    ```
+    - **key Name:** The Firebolt object name (e.g., Advertising skiprestriction).
+    - If the key name contains spaces, they are replaced with underscores and the entire key name is converted to uppercase (e.g., `Advertising skiprestriction` → `ADVERTISING_SKIPRESTRICTION`).
+    
+  - Example: `Given the environment has been set up for 'Advertising skiprestriction' tests` - 
+
+    **Firebolt Object:** 
+    ```javascript
+    exports.ADVERTISING_SKIPRESTRICTION = {
+      method: 'Advertising.skipRestriction',
+      params: {},
+      validationJsonPath: 'result',
+      content: {
+        data: [
+          {
+            type: 'fixture',
+            validations: [
+              {
+                mode: 'staticContentValidation',
+                type: resolveAtRuntime('value'),
+              },
+            ],
+          },
+        ],
+      },
+    };
+
 ## Supported types of validations [here](./validations.md)
 
 ## Runtime Variables
@@ -176,6 +154,9 @@ Below are the runtime variables that are used by the FireboltCall object.
 
 - **attribute:** Attribute is a field name of the `runtime` environment variable that holds the value of the method name. For example, if the method name is `closedCaptions.setEnabled`, the attribute value will be `enabled`.
 - **value:** Value is a field name of the `runtime` environment variable that holds the value used for to set the value or for validation.
+- **module:** Module is a field name of the `runtime` environment variable that holds the module name. For example, `resolveAtRuntime('{{module}}')` will dynamically resolve the module name from the runtime environment (e.g., `Localization`).
+- **method:** Method is a field name of the `runtime` environment variable that holds the method name. For ExampleFor example, `resolveAtRuntime('{{method}}')` will dynamically resolve the method name (e.g., `locale`).
+- **appid:** This allows the app ID to be set dynamically. For example, `Cypress.env('firstPartyAppId')` fetches the appId dynamically.
 
 **Note:** `resolveAtRuntime()` function is used by the FireboltCall object in order to process runtime variables and other fields.
 

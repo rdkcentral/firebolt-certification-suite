@@ -6,39 +6,7 @@
 
 #### Below are the tasks that are performed based on the test name:
 
-- This glue will used to initialize the firebolt object for the dynamic calls.
-
-  - Passing the key name with colon `:`
-    ##### Format
-    ```javascript
-    Given the environment has been set up for 'module:method' tests
-    ```
-    - In the abover format, `module` is the name of the Firebolt object and firebolt object fetched and stored in the `runtime` environment variable using module name.
-    - `module:method` this will split the key name by `:` and both the module and method will be stored in the `runtime` environment variable.
-  - Example: `Given the environment has been set up for 'Localization:locale' tests` - `Localization` is the firebolt object name.
-
-  - Passing the key name as is
-
-    ##### Format
-
-    ```javascript
-    Given the environment has been set up for 'keyName' tests
-    ```
-
-    - In the above format, `keyName` is the name of the Firebolt object and firebolt object fetched and stored in the `runtime` environment variable using key name.
-
-    Example: `Given the environment has been set up for 'ADVERTISING_SKIPRESTRICTION' tests` - `ADVERTISING_SKIPRESTRICTION` is the firebolt object name.
-
-  - Passing the key name with spaces
-
-    ##### Format
-
-    ```javascript
-    Given the environment has been set up for 'key Name' tests
-    ```
-    - In the above format, If `key Name` is having spaces, then it will be replaced with `_` in the key name and finally, the key name will be converted to uppercase.
-
-    Example: `Given the environment has been set up for 'Advertising skiprestriction' tests` - `ADVERTISING_SKIPRESTRICTION` is the firebolt object name.
+- This glue is used to potentially initialize the Firebolt object for dynamic calls. The Firebolt object can be initialized with dynamic objects if they are available, but it will work regardless of whether dynamic objects are found or required. For more details on dynamic objects, refer to [here](../../fixtures/docs/dynamicObjects.md/#firebolt-object).
 
 - This glue will close the app instance for the specified test names. To close the app instance, the test name should be configured in the `closeAppTestTypes` environment variable.
 

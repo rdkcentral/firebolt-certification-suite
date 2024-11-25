@@ -46,11 +46,13 @@ runtime: {
 #### Purpose: Sending a message to platform to set a value. Optional parameter: `invalid` can be used to specify whether to expect an error or a result.
 
 ### Examples:
-- `Given 1st party app invokes the 'Firebolt' API to set value`
-- `Given 1st party app to set value`
 - `Given 1st party app invokes the 'Firebolt' API to set invalid value`
 - `Given 1st party app invokes the 'Firebolt' API to set 'enabled' to 'true'`
 - `Given 1st party app to set 'enabled' to 'true'`
+ 
+*Note: The below formats will be deprecated in the future:*
+- `Given 1st party app invokes the 'Firebolt' API to set value`
+- `Given 1st party app to set value`
 
 ### Params:
 

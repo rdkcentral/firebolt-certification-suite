@@ -59,11 +59,12 @@ Given(
  * @param {String} value - value holds the value used for to set the value or for validation.
  * @param {String} invalidValue1 - Determines whether expecting for an error or result.
  * @example
- * Given 1st party app invokes the 'Firebolt' API to set value
- * Given 1st party app to set value
  * Given 1st party app invokes the 'Firebolt' API to set invalid value
  * Given 1st party app invokes the 'Firebolt' API to set 'enabled' to 'true'
  * Given 1st party app to set 'enabled' to 'true'
+Note: The below formats will be deprecated in the future
+ * Given 1st party app invokes the 'Firebolt' API to set value
+ * Given 1st party app to set value
  */
 Given(
   /1st party app(?: invokes the '(.+)' API)? to set(?: '(.*?)' to( invalid)? '(.*?)'|( invalid)? value)?$/,
