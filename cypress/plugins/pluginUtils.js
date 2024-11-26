@@ -156,6 +156,13 @@ function preprocessDeviceData(config) {
   }
 }
 
+/**
+ * @function fetchAppMetaData
+ * @description Reads app metadata from the appData directories of both fcs and configModule, then combines them, prioritizing the configModule metadata.
+ * @param {string} config - The config object.
+ * @example
+ * fetchAppMetaData(config);
+ */
 function fetchAppMetaData(config) {
   const fcsAppMetaDataPath = 'cypress/fixtures/objects/appData/app_metadata.json';
   const fcsAppMetaDataDir = 'cypress/fixtures/objects/appData/';
@@ -169,9 +176,10 @@ function fetchAppMetaData(config) {
     configModuleAppMetaDataPath
   );
 
+  // Combine the app metadata from the fcs and configModule appData directories.
   const combinedAppMetaData = _.merge(fcsAppMetaData, configModuleAppMetaData);
-  fs.writeFileSync('./aaa.json', JSON.stringify(combinedAppMetaData, null, 2));
 
+  // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
   function extractAppMetadata(appDataDir, appMetaDataFile) {
     const appMetaData = fetchDataFromFile(appMetaDataFile);
     const files = fs
@@ -193,9 +201,17 @@ function fetchAppMetaData(config) {
     });
     return mergedData;
   }
+  // Add the combined app metadata to the config.env object
   config.env = Object.assign({}, config.env, { app_metadata: combinedAppMetaData });
 }
 
+/**
+ * @function fetchDataFromFile
+ * @description Reads the data from a file and returns it
+ * @param {string} filePath - path of the file to fetch data
+ * @example
+ * fetchDataFromFile('./path/to/file.json');
+ */
 function fetchDataFromFile(filePath) {
   try {
     if (fs.existsSync(filePath)) {

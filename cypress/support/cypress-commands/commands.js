@@ -895,16 +895,19 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
   let messageIntent;
 
   if (intent) {
-    let intentData;
+    // Clearing the intent from the runtime environment variable
     Cypress.env(CONSTANTS.RUNTIME).intent = {};
     const appMetadata = UTILS.getEnvVariable('app_metadata');
 
+    // If the intent is present in the appMetadata, set the intent in the runtime environment variable
     if (appMetadata[appId] && appMetadata[appId][intent]) {
       Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId][intent];
     }
 
+    // Check if the intent is present in the intentTemplate else failing the test
     if (intentTemplate && intentTemplate[intent]) {
       try {
+        // Resolving the intent template with the values from the runtime environment variable.
         messageIntent = UTILS.resolveRecursiveValues(intentTemplate[intent]);
       } catch (error) {
         fireLog.fail('Could not resolve intentTemplate: ' + error.message);
@@ -915,7 +918,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
       );
     }
   } else {
-    let data = {
+    const data = {
       query: {
         params: {},
       },

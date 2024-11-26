@@ -996,6 +996,8 @@ global.resolveAtRuntime = function (input) {
         if (pattern.includes('.')) {
           [pattern, functionName] = pattern.split('.');
         }
+
+        // If the input contains '->', Consdering it as an object path and extracting the value from the object
         if (pattern.includes('->')) {
           return extractValueFromObjectPath(pattern);
         } else {
@@ -1006,6 +1008,8 @@ global.resolveAtRuntime = function (input) {
         }
       });
     }
+
+    // Retrieve the value from the object using the path specified by the "->" separator
     function extractValueFromObjectPath(inputText) {
       const [objectName, ...pathParts] = inputText.split('->');
       const jsonPath = pathParts.join('.');
@@ -1026,6 +1030,7 @@ global.resolveAtRuntime = function (input) {
       if (input.includes('{{')) {
         resolvedValue = replacingPatternOccurrenceWithValue(input);
       } else if (input.includes('->')) {
+        // If the input contains '->', Consdering it as an object path and extracting the value from the object
         resolvedValue = extractValueFromObjectPath(input);
       } else if (runtimeEnv[input] !== undefined) {
         resolvedValue = runtimeEnv[input];
