@@ -1,25 +1,7 @@
 {
-    "ADVERTISING_ONPOLICYCHANGED": {
-        "method": "advertising.onPolicyChanged"
-    },
-    "GET_ADVERTISING_POLICY": {
-        "method": "advertising.policy"
-    },
-    "DISABLE_LIMITADTRACKING": {
-        "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "FALSE"
-    },
-    "ENABLE_LIMITADTRACKING": {
-        "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "TRUE"
-    },
     "SET_SKIPRESTRICTION_AS_NONE": {
         "method": "manage_advertising.setSkipRestriction",
         "params": "NONE"
-    },
-    "SET_SKIPRESTRICTION_AS_ADSUNWATCHED": {
-        "method": "manage_advertising.setSkipRestriction",
-        "params": "ADVERTISING_SKIPRESTRICTION_ADSUNWATCHED"
     },
     "SET_SKIPRESTRICTION_AS_ADSALL": {
         "method": "manage_advertising.setSkipRestriction",
@@ -32,116 +14,16 @@
     "GET_DEVICEATTRIBUTES": {
         "method": "advertising.deviceAttributes"
     },
-    "GET_APPBUNDLEID": {
-        "method": "advertising.appBundleId"
-    },
-    "GET_ADVERTISINGID": {
-        "method": "advertising.advertisingId"
-    },
-    "GET_INITIALIZATION_PARAMETERS": {
-        "method": "parameters.initialization"
-    },
-    "GET_NO_COPPA": {
-        "method": "advertising.config",
-        "params": "ADVERTISING_NO_COPPA"
-    },
     "GET_COPPA_AS_TRUE": {
         "method": "advertising.config",
         "params": "ADVERTISING_COPPA_TRUE"
-    },
-    "GET_COPPA_AS_FALSE": {
-        "method": "advertising.config",
-        "params": "ADVERTISING_COPPA_FALSE"
-    },
-    "GET_NO_COPPA_WITH_ENVIRONMENT_VALUE_TEST": {
-        "method": "advertising.config",
-        "params": "ADVERTISING_NO_COPPA_ENVIRONMENT_TEST"
     },
     "GET_COPPA_AS_TRUE_WITH_ENVIRONMENT_VALUE_TEST": {
         "method": "advertising.config",
         "params": "ADVERTISING_COPPA_TRUE_ENVIRONMENT_TEST"
     },
-    "GET_COPPA_AS_FALSE_WITH_ENVIRONMENT_VALUE_TEST": {
-        "method": "advertising.config",
-        "params": "ADVERTISING_COPPA_FALSE_ENVIRONMENT_TEST"
-    },
-    "GET_ONLY_COPPA": {
-        "method": "advertising.config",
-        "params": "ADVERTISING_ONLY_COPPA"
-    },
-    "GET_EMPTY_PARAMETER": {
-        "method": "advertising.config",
-        "params": "ADVERTISING_EMPTY_PARAMS"
-    },
-    "GET_CONFIG_WITH_EMPTY_PARAMETER": {
-        "method": "advertising.config",
-        "expected": "error"
-    },
-    "GET_CONFIG_WITH_INVALID_COPPA": {
-        "method": "advertising.config",
-        "params": "ADVERTISING_INVALID_CONFIG_COPPA",
-        "expected": "error"
-    },
-    "GET_CONFIG_WITH_INVALID_AUTHENTICATIONENTITY": {
-        "method": "advertising.config",
-        "params": "ADVERTISING_INVALID_CONFIG_AUTHENTICATIONENTITY",
-        "expected": "error"
-    },
-    "GET_CONFIG_WITH_INVALID_ENVIRONMENT_DATATYPE": {
-        "method": "advertising.config",
-        "params": "ADVERTISING_INVALID_CONFIG_ENVIRONMENT_DATATYPE",
-        "expected": "error"
-    },
-    "GET_CONFIG_WITH_INVALID_ENVIRONMENT": {
-        "method": "advertising.config",
-        "params": "ADVERTISING_INVALID_CONFIG_ENVIRONMENT",
-        "expected": "error"
-    },
-    "GET_CONFIG_WITH_INTEGER_PARAMETER": {
-        "method": "advertising.config",
-        "params": "ADVERTISING_INTEGER_PARAM",
-        "expected": "error"
-    },
     "SET_SKIPRESTRICTION_WITH_UNDEFINED_PARAMETER": {
         "method": "manage_advertising.setSkipRestriction"
-    },
-    "GET_ADVERTISINGID_FOR_SCOPE_BROWSER": {
-        "method": "advertising.advertisingId",
-        "params": "ADVERTISING_ADVERTISINGID_SCOPE_BROWSER"
-    },
-    "GET_ADVERTISINGID_FOR_SCOPE_CONTENT": {
-        "method": "advertising.advertisingId",
-        "params": "ADVERTISING_ADVERTISINGID_SCOPE_CONTENT"
-    },
-    "GET_ADVERTISINGID_WITH_INVALID_TYPE": {
-        "method": "advertising.advertisingId",
-        "params": "ADVERTISING_ADVERTISINGID_INVALID_TYPE",
-        "expected": "error"
-    },
-    "GET_ADVERTISINGID_WITH_INVALID_ID": {
-        "method": "advertising.advertisingId",
-        "params": "ADVERTISING_ADVERTISINGID_INVALID_ID",
-        "expected": "error"
-    },
-    "ADVERTISING_POLICY_LIMITADTRACKING_AS_TRUE": {
-        "method": "advertising.policy",
-        "validationJsonPath": "result.limitAdTracking",
-        "content": "ADVERTISING_POLICY_TRUE"
-    },
-    "ADVERTISING_POLICY_LIMITADTRACKING_AS_FALSE": {
-        "method": "advertising.policy",
-        "validationJsonPath": "result.limitAdTracking",
-        "content": "ADVERTISING_POLICY_FALSE"
-    },
-    "ONPOLICYCHANGED_FOR_ADVERTISING_LIMITADTRACKING_WITH_TRUE": {
-        "event": "advertising.onPolicyChanged",
-        "validationJsonPath": "eventResponse.limitAdTracking",
-        "content": "ADVERTISING_POLICY_TRUE"
-    },
-    "ONPOLICYCHANGED_FOR_ADVERTISING_LIMITADTRACKING_WITH_FALSE": {
-        "event": "advertising.onPolicyChanged",
-        "validationJsonPath": "eventResponse.limitAdTracking",
-        "content": "ADVERTISING_POLICY_FALSE"
     },
     "ADVERTISING_POLICY_SKIPRESTRICTION_AS_NONE": {
         "method": "advertising.policy",
@@ -188,37 +70,10 @@
         "validationJsonPath": "result",
         "content": "ADVERTISING_DEVICEATTRIBUTES"
     },
-    "ADVERTISING_APPBUNDLEID": {
-        "method": "advertising.appBundleId",
-        "validationJsonPath": "result",
-        "content": "ADVERTISING_APPBUNDLEID"
-    },
-    "ADVERTISING_CONFIG_COPPA_AS_ZERO": {
-        "method": "advertising.config",
-        "validationJsonPath": "result.coppa",
-        "content": "ADVERTISING_CONFIG_ZERO"
-    },
-    "ADVERTISING_CONFIG_COPPA_AS_ONE": {
-        "method": "advertising.config",
-        "validationJsonPath": "result.coppa",
-        "content": "ADVERTISING_CONFIG_ONE"
-    },
-    "INVALID_PARAMETER_ERROR_ADVERTISING_CONFIG": {
-        "method": "advertising.config",
-        "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
-        "expectingError": true
-    },
     "ADVERTISING_SKIPRESTRICTION": {
         "method": "advertising.setSkipRestriction",
         "validationJsonPath": "result",
         "content": "ADVERTISING_SKIPRESTRICTION"
-    },
-    "INVALID_PARAMETER_FOR_ADVERTISING_ADVERTISINGID": {
-        "method": "advertising.advertisingId",
-        "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
-        "expectingError": true
     },
     "ADVERTISING_CONFIG": {
         "method": "advertising.config",
