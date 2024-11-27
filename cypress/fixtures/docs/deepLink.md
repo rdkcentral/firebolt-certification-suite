@@ -52,7 +52,7 @@ The intent template having the different kind of intent templates that are used 
 - The intent template is present in the `fixtures/intentTemplates.js` file.
 - This file present only in the FCS and this intent template not having the actual details like entityId, seriesId, appId etc.
 - This template get the actual data from the app metadata file that's been added from the FCS or from the config module.
-- To get the actual data from the app metadata file we need to use the [resolveAtRuntime](./dynamicObjects.md#runtime-variables) function by passing the appropriate arguments.
+- To get the actual data from the app metadata file we need to use the [resolveAtRuntime](./dynamicObjects.md#resolveatruntime-function) function by passing the appropriate arguments.
 
 **Example:** Below are the examples showing how the intent templates get the actual data from the app metadata file.
 
