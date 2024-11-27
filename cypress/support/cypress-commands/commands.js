@@ -209,6 +209,14 @@ Cypress.Commands.add('getSdkVersion', () => {
               );
             Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
           }
+          if (response?.result?.sdk?.readable) {
+            const responseResultSDK =
+              `${response?.result?.sdk?.major}.${response?.result?.sdk?.minor}.${response?.result?.sdk?.patch}`.replace(
+                /"/g,
+                ''
+              );
+            Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+          }
         });
       });
   }
@@ -302,7 +310,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                   const labelToEnvMap = {
                     [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                     [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
-                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.SDK_VERSION,
+                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
                     [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
                     [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
                     [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
@@ -786,10 +794,6 @@ Cypress.Commands.add('parsedMockData', (beforeOperation) => {
  * cy.startOrStopPerformanceService('stopped')
  */
 Cypress.Commands.add('startOrStopPerformanceService', (action) => {
-  if (action == CONSTANTS.INITIATED) {
-    const epochTime = Number.parseInt(Date.now() / 1000);
-    Cypress.env(CONSTANTS.THRESHOLD_MONITOR_START_TIME, epochTime);
-  }
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETPERFORMANCETESTHANDLER,
     params: {
@@ -902,6 +906,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
         params: {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.APP_TYPE]: appCategory,
+          [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
         },
       },
     };
@@ -917,6 +922,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
           [CONSTANTS.APP_ID]: appId,
           [CONSTANTS.LIFECYCLE_VALIDATION]: true,
           [CONSTANTS.APP_TYPE]: appCategory,
+          [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
         },
       },
     };
@@ -935,8 +941,39 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   // Add the PubSub URL if required
   if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
     data.query.params[CONSTANTS.PUB_SUB_URL] = getEnvVariable(CONSTANTS.PUB_SUB_URL);
-    if (getEnvVariable(CONSTANTS.DEVICE_MAC, false)) {
-      data.query.params[CONSTANTS.MACADDRESS_PARAM] = getEnvVariable(CONSTANTS.DEVICE_MAC);
+  }
+  // Add the PubSub UUID if the env variable is set
+  if (getEnvVariable(CONSTANTS.PUB_SUB_UUID, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_UUID] = getEnvVariable(CONSTANTS.PUB_SUB_UUID);
+  }
+  // Add the PubSub publish suffix from env variable
+  if (getEnvVariable(CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_PUBLISH_SUFFIX] = getEnvVariable(
+      CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX
+    );
+  }
+  // Add the PubSub subscribe suffix from env variable
+  if (getEnvVariable(CONSTANTS.PUB_SUB_PUBLISH_SUFFIX, false)) {
+    data.query.params[CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX] = getEnvVariable(
+      CONSTANTS.PUB_SUB_PUBLISH_SUFFIX
+    );
+  }
+  // Check for additional launch parameters
+  // If a key exists in both the default parameters and the additional parameters, the value from the additional parameters will override the default value.
+  if (Cypress.env('additionalLaunchParams')) {
+    const additionalParams = Cypress.env('additionalLaunchParams');
+    for (const key in additionalParams) {
+      let value = additionalParams[key];
+      // If the value starts with 'CYPRESSENV-', extract the variable name.
+      if (value.startsWith('CYPRESSENV-')) {
+        const envParam = value.split('-')[1];
+        // Fetch the corresponding value from the env.
+        value = getEnvVariable(envParam, false);
+      }
+      // Add to data.query.params only if the value is defined
+      if (value) {
+        data.query.params[key] = value;
+      }
     }
   }
   // If the testType is userInterestProvider, send the discovery.launch params with registerProvider = false, then certification app will not register for userInterest provider.
@@ -960,7 +997,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
 
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
-    fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
+    fireLog.info(
+      'Discovery launch intent: ' + UTILS.censorPubSubToken(JSON.stringify(parsedIntent))
+    );
     cy.sendMessagetoPlatforms(parsedIntent).then((result) => {
       fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
 
@@ -983,6 +1022,13 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
           healthCheckResponse = JSON.parse(healthCheckResponse);
           expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
         });
+        cy.getSdkVersion().then(() => {
+          cy.getFireboltJsonData().then((data) => {
+            Cypress.env(CONSTANTS.FIREBOLTCONFIG, data);
+          });
+        });
+        cy.getCapabilities();
+        cy.updateRunInfo();
       }
     });
   });
@@ -1270,6 +1316,9 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
       case CONSTANTS.SCREENSHOT_VALIDATION:
         cy.screenshotValidation(object);
         break;
+      case CONSTANTS.PERFORMANCE_VALIDATION:
+        cy.performanceValidation(object);
+        break;
       default:
         assert(false, 'Unsupported validation type');
         break;
@@ -1548,4 +1597,33 @@ Cypress.Commands.add('startOrStopInteractionsService', (action) => {
  */
 Cypress.Commands.add('envConfigSetup', () => {
   fireLog.info('No additional config module environment setup');
+});
+
+/**
+ * @module commands
+ * @function initiatePerformanceMetrics
+ * @description Creates a marker and saves the start time in THRESHOLD_MONITOR_START_TIME env, if performance metrics is enabled.
+ * @example
+ * cy.initiatePerformanceMetrics()
+ */
+Cypress.Commands.add('initiatePerformanceMetrics', () => {
+  // Check if performance metrics is enabled
+  if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) === true) {
+    // Retrieve the scenario name from the env.
+    const scenarioName = Cypress.env(CONSTANTS.SCENARIO_NAME);
+
+    // Request to create a marker
+    const requestMap = {
+      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.CREATE_MARKER,
+      params: scenarioName,
+    };
+    cy.sendMessagetoPlatforms(requestMap).then((result) => {
+      const markerCreated = result.success;
+      Cypress.env(CONSTANTS.MARKER_CREATION_STATUS, markerCreated);
+    });
+
+    // Save the start time in the environment variable
+    const epochTime = Number.parseInt(Date.now() / 1000);
+    Cypress.env(CONSTANTS.THRESHOLD_MONITOR_START_TIME, epochTime);
+  }
 });
