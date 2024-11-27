@@ -73,6 +73,8 @@ Below are the runtime variables that are used by the FireboltCall object.
 
 - **attribute:** Attribute is a field name of the `runtime` environment variable that holds the value of the method name. For example, if the method name is `closedCaptions.setEnabled`, the attribute value will be `enabled`.
 - **value:** Value is a field name of the `runtime` environment variable that holds the value used for to set the value or for validation.
+- **appId:** appId is a field name of the `runtime` environment variable and this is been added while launching the application.
+- **intent:** intent field has been added to the `runtime` environment variable, if the intent is been added while launching the application.
 
 **Note:** `resolveAtRuntime()` function is used by the FireboltCall object in order to process runtime variables and other fields.
 
