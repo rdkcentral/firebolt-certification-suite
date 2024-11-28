@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const logger = require('../support/Logger')('pluginUtils.js');
+const _ = require('lodash');
 
 /**
  * Fetches and dereferences OpenRPC documents from various sources including a Firebolt URL, local files, and external URLs.
@@ -155,4 +156,40 @@ function preprocessDeviceData(config) {
   }
 }
 
-module.exports = { getAndDereferenceOpenRpc, generateIndexFile, preprocessDeviceData };
+function fetchPlayerMethodObject(config) {
+  const fcsPlayerMethods = 'cypress/fixtures/objects/playerMethodObject.json';
+  const configModulePlayerMethods = 'cypress/fixtures/external/objects/playerMethodObject.json';
+
+  const fcsPlayerMethodsData = fetchDataFromFile(fcsPlayerMethods);
+  const configModulePlayerMethodsData = fetchDataFromFile(configModulePlayerMethods);
+  const combinedPlayerMethods = _.merge(fcsPlayerMethodsData, configModulePlayerMethodsData);
+  config.env = Object.assign({}, config.env, { playerMethodObject: combinedPlayerMethods });
+}
+
+/**
+ * @function fetchDataFromFile
+ * @description Reads the data from a file and returns it
+ * @param {string} filePath - path of the file to fetch data
+ * @example
+ * fetchDataFromFile('./path/to/file.json');
+ */
+function fetchDataFromFile(filePath) {
+  try {
+    if (fs.existsSync(filePath)) {
+      return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+    } else {
+      logger.error(`File not found at path: ${filePath}`);
+      return null;
+    }
+  } catch (error) {
+    logger.error(`Error reading or parsing the JSON file at ${filePath}: ${error.message}`);
+    return null;
+  }
+}
+
+module.exports = {
+  getAndDereferenceOpenRpc,
+  generateIndexFile,
+  preprocessDeviceData,
+  fetchPlayerMethodObject,
+};

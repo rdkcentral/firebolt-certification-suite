@@ -27,7 +27,7 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
  * @example
  * Given the environment has been set up for 'Firebolt Sanity' tests
  */
-Given('the environment has been set up for {string} tests', (test) => {
+Given('the environment has been set up for {string} tests for {string}', (test, scenarioType) => {
   if (
     UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
       JSON.stringify(window.testState.gherkinDocument.feature.name)
@@ -81,6 +81,18 @@ Given('the environment has been set up for {string} tests', (test) => {
     } else {
       fireLog.fail('Marker creation failed');
     }
+  }
+
+  if (test === 'integrated Player') {
+    const requestMap = {
+      method: 'fcs.callPlayerMethods',
+      params: {
+        scenarioType: scenarioType,
+        certificationType: UTILS.getEnvVariable(CONSTANTS.CERTIFICATION),
+        appId: 'appId',
+      },
+    };
+    cy.sendMessagetoPlatforms(requestMap);
   }
   // Calling the envConfigSetup command to setup the environment for the test from the config module.
   cy.envConfigSetup();
