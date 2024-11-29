@@ -45,8 +45,12 @@ Cypress.Commands.add('performanceValidation', (object) => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.info('Performance validation has stopped').then(() => {
         cy.wrap(result)
-          .each((response) => {
-            cy.log(JSON.stringify(response));
+          .then((response) => {
+            if (response && Array.isArray(response)) {
+              response.map((res) => {
+                cy.log(JSON.stringify(res));
+              });
+            }
           })
           .then(() => {
             if (result.error) {

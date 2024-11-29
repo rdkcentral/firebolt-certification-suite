@@ -298,21 +298,27 @@ Given(
     };
 
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
-      cy.wrap(result)
-        .each((response) => {
-          cy.log(JSON.stringify(response));
-        })
-        .then(() => {
-          if (result.error) {
-            cy.log('Failed to fetch and validate the performance metrics').then(() => {
-              assert(false, result.error);
-            });
-          } else {
-            result.map((response) => {
-              assert.equal(true, response?.success, response?.message);
-            });
-          }
-        });
+      fireLog.info('Performance validation has stopped').then(() => {
+        cy.wrap(result)
+          .then((response) => {
+            if (response && Array.isArray(response)) {
+              response.map((res) => {
+                cy.log(JSON.stringify(res));
+              });
+            }
+          })
+          .then(() => {
+            if (result.error) {
+              cy.log('Failed to fetch and validate the performance metrics').then(() => {
+                assert(false, result.error);
+              });
+            } else {
+              result.map((response) => {
+                assert.equal(true, response?.success, response?.message);
+              });
+            }
+          });
+      });
     });
   }
 );
