@@ -1627,3 +1627,43 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
     Cypress.env(CONSTANTS.THRESHOLD_MONITOR_START_TIME, epochTime);
   }
 });
+
+Cypress.Commands.add('startFireboltInteractions', () => {
+  cy.setPersistentStorage().then(() => {
+    cy.rebootDevice().then(() => {
+      cy.wait(180000);
+      // Need to make health check call to bolt
+      // Need to check if fireboltInteraction service is active or not
+    });
+  });
+});
+
+Cypress.Commands.add('setPersistentStorage', () => {
+  const requestMap = {
+    method: 'fcs.setPersistentStorage',
+    params: null,
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    console.log('persistentStorage result------', result);
+    if (result.success) {
+      // fireLog.info('Set persistentStorage response: ' + result.message);
+      fireLog.assert(true, 'Set persistentStorage response: ' + result.message);
+    } else {
+      fireLog.assert(false, 'Set persistentStorage response: ' + result.message);
+    }
+  });
+});
+
+Cypress.Commands.add('rebootDevice', () => {
+  const requestMap = {
+    method: 'fcs.rebootDevice',
+    params: null,
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    if (result.success) {
+      fireLog.info('Device is rebooting');
+    } else {
+      fireLog.assert(false, result.message);
+    }
+  });
+});
