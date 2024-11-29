@@ -27,7 +27,7 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
  * @example
  * Given the environment has been set up for 'Firebolt Sanity' tests
  */
-Given('the environment has been set up for {string} tests for {string}', (test, scenarioType) => {
+Given('the environment has been set up for {string} tests', (test) => {
   if (
     UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
       JSON.stringify(window.testState.gherkinDocument.feature.name)
