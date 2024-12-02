@@ -367,7 +367,6 @@ exports.SET_COUNTRYCODE_TO_UK = {
   params: { value: 'UK' },
 };
 
-
 exports.SET_LOCALE_TO_ENUS = {
   method: 'manage_localization.setLocale',
   params: { value: 'en-US' },
