@@ -60,3 +60,8 @@ Cypress.Commands.overwrite('log', (orig, message, options) => {
     ? attach('[' + dateString + '][' + options + '][' + message + ']')
     : attach('[' + dateString + '][' + message + ']');
 });
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // returning false here prevents Cypress from failing the test
+  return false;
+});

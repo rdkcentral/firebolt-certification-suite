@@ -303,7 +303,15 @@ export default function (module) {
    */
   Cypress.Commands.add('startTest', (datatables) => {
     const additionalParams = {};
-    let overrideParams = {};
+    let overrideParams = {
+      // {
+      //   action: 'search',
+      //   data: {
+      //     query:
+      //       '{"reportingId": "testing","standalone": "true","task": "runTest","params": { "certification": "entos",    "product": "sky",    "version": "1.4.0",    "testtoken": "<testtoken>", "macaddress": "<macaddress>"},"action": "core","context": {} }',
+      //   },
+      // }
+  };
     let appId;
 
     Cypress.env(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, CONSTANTS.SANITY_REPORT_LONGPOLL_TIMEOUT);
@@ -356,11 +364,18 @@ export default function (module) {
     }
 
     cy.runIntentAddon(CONSTANTS.TASK.RUNTEST, additionalParams).then((parsedIntent) => {
-      const intent = UTILS.createIntentMessage(
-        CONSTANTS.TASK.RUNTEST,
-        overrideParams,
-        parsedIntent
-      );
+      // const intent = UTILS.createIntentMessage(
+      //   CONSTANTS.TASK.RUNTEST,
+      //   overrideParams,
+      //   parsedIntent
+      const intent = {
+        action: 'search',
+        data: {
+          query:
+            '{"reportingId": "JRoeEntOStest","standalone": "true","task": "runTest","params": { "certification": "entos",    "product": "sky",    "version": "1.4.0",    "testtoken": "T0hOdlZUbGxWbGhqWm5sYWNHOU5aWE5ZUkVVMFdYZExNbmQwVFZOSlUyWT18fHNreQ==", "macaddress": "D4:52:EE:5A:BA:CA"},"action": "core","context": {} }',
+        },
+      }
+      // )
       const requestTopic = UTILS.getTopic(appId);
       const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
 
