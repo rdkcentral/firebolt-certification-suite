@@ -28,10 +28,10 @@ function setClosedCaptions(attribute, value) {
     })
 }
 
-function setOneParamThing(value) {
+function setVoiceGuidance(attribute, value) {
     return setterNotImplemented()
 }
 
-function setTwoParamThing(attribute, value) {
+function setPlaybackSpeed(attribute, value) {
     return setterNotImplemented()
 }
