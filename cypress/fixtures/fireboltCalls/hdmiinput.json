@@ -232,13 +232,13 @@
     "INVALID_PARAMETERS_FOR_HDMIINPUT_PORT":{
         "method": "hdmiinput.port",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "expected": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETERS_FOR_HDMIINPUT_EDIDVERSION":{
         "method": "hdmiinput.setEdidVersion",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "expected": "INVALID_PARAMS",
         "expectingError": true
     },
     "SET_AUTOLOWLATENCYMODECAPABLE_WITH_INTEGER": {
@@ -299,25 +299,25 @@
     "INVALID_PARAMETERS_FOR_AUTOLOWLATENCYMODECAPABLE":{
         "method": "hdmiinput.setAutoLowLatencyModeCapable",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "expected": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETERS_FOR_EDIDVERSION":{
         "method": "hdmiinput.setEdidVersion",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "expected": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETERS_FOR_LOWLATENCYMODE":{
         "method": "hdmiinput.setLowLatencyMode",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "expected": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMETERS_FOR_HDMIINPUT_OPEN":{
         "method": "hdmiinput.open",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "expected": "INVALID_PARAMS",
         "expectingError": true
     },
     "SET_HDMIINPUT_OPEN_WITH_EMPTY_PARAM": {
@@ -342,7 +342,7 @@
     "INVALID_PARAMETERS_FOR_HDMIINPUT_PORTS":{
         "method": "hdmiinput.ports",
         "validationJsonPath": "result",
-        "expected": "INVALID_TYPE_PARAMS",
+        "expected": "INVALID_PARAMS",
         "expectingError": true
     },
     "GET_HDMIINPUT_PORT_WITH_ERROR":{

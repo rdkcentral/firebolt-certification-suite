@@ -44,7 +44,7 @@
     "INVALID_PARAMETERS_FOR_SECONDSCREEN_DEVICE": {
         "method": "secondscreen.device",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "GUEST_ROOM_FOR_SECONDSCREEN_FRIENDLYNAME": {
@@ -89,7 +89,7 @@
     "INVALID_REQUEST_FOR_SECONDSCREEN_DEVICE": {
         "method": "secondscreen.device",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "SECONDSCREEN_ONLAUNCHREQUEST_EVENT": {

@@ -12,13 +12,13 @@
     "INVALID_PARAMS_FOR_VOICEGUIDANCE_SETENABLED": {
         "method": "voiceguidance.setEnabled",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_PARAMS_FOR_VOICEGUIDANCE_SETSPEED": {
         "method": "voiceguidance.setSpeed",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "VOICEGUIDANCE_ONENABLEDCHANGED": {
@@ -117,31 +117,31 @@
     "INVALID_TEST_STING_FOR_VOICEGUIDANCE_ENABLED": {
         "method": "voiceguidance.setEnabled",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_INTEGER_FOR_VOICEGUIDANCE_ENABLED": {
         "method": "voiceguidance.setEnabled",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_TEST_STING_FOR_VOICEGUIDANCE_SPEED": {
         "method": "voiceguidance.setSpeed",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_TRUE_FOR_VOICEGUIDANCE_SPEED": {
         "method": "voiceguidance.setSpeed",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     },
     "INVALID_INTEGER_FOR_VOICEGUIDANCE_SPEED": {
         "method": "voiceguidance.setSpeed",
         "validationJsonPath": "result",
-        "content": "INVALID_TYPE_PARAMS",
+        "content": "INVALID_PARAMS",
         "expectingError": true
     }
 }

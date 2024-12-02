@@ -88,6 +88,8 @@ const env = {
   regexEventValidation: '/(\\.on)\\S*/',
   fcaAppList: ['default3rdPartyAppId'],
   variableObjectsPrefixLists: ['DYNAMIC_FB_CALL_VARIABLES'],
+  pubSubPublishSuffix: '_FCS',
+  pubSubSubscribeSuffix: '_FCA',
   pendingFeatures: [],
 };
 

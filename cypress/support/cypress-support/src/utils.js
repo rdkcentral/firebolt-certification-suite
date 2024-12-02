@@ -205,9 +205,11 @@ function getTopic(
     topic = deviceMac + '_' + getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
   }
   if (operation == CONSTANTS.SUBSCRIBE) {
-    return subscribeSuffix ? topic + subscribeSuffix : topic + CONSTANTS.TOPIC_SUBSCRIBE_SUFFIX;
+    return subscribeSuffix
+      ? topic + subscribeSuffix
+      : topic + getEnvVariable(CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX);
   } else {
-    return topic + CONSTANTS.TOPIC_PUBLISH_SUFFIX;
+    return topic + getEnvVariable(CONSTANTS.PUB_SUB_PUBLISH_SUFFIX);
   }
 }
 
@@ -687,7 +689,10 @@ function checkForSecondaryAppId(appId) {
     if (appId === CONSTANTS.SECONDARY_THIRD_PARTY_APP) {
       envAppIdKey = CONSTANTS.SECONDARY_THIRD_PARTY_APP_ID;
       return getEnvVariable(CONSTANTS.SECONDARY_THIRD_PARTY_APP_ID);
-    } else if (getEnvVariable(appId) !== null && getEnvVariable(appId) !== undefined) {
+    } else if (
+      getEnvVariable(appId, false) !== null &&
+      getEnvVariable(appId, false) !== undefined
+    ) {
       envAppIdKey = appId;
       return getEnvVariable(appId);
     } else {
@@ -755,12 +760,16 @@ class FireLog extends Function {
           // If the method has its own logging, just apply it
           return Reflect.apply(target, thisArg, argumentsList);
         } else {
-          if (argumentsList.length > 2)
+          if (argumentsList.length > 3)
             message =
               'Expected: ' +
               JSON.stringify(argumentsList[0]) +
               ' Actual: ' +
+              'Expected : ' +
+              JSON.stringify(argumentsList[2]) +
+              ' Actual : ' +
               JSON.stringify(argumentsList[1]);
+          else if (argumentsList.length == 3) message = argumentsList[2];
           else if (argumentsList.length == 1) message = argumentsList[0];
           else if (argumentsList.length == 2) message = argumentsList[1];
           else
@@ -1153,6 +1162,35 @@ class InteractionsLogs {
 const interactionLogs = new InteractionsLogs();
 Cypress.env(CONSTANTS.FB_INTERACTIONLOGS, interactionLogs);
 
+/**
+ * @module utils
+ * @function censorPubSubToken
+ * @description A Function to sensor the pubSubToken from the launch intent.
+ * @param {String} data - The intent to be parsed and censored.
+ * @example
+ * censorPubSubToken('{"method: "launch", "params": {"intent": {"data": {"query": '{"params": {"pubSubToken": "12456789, "pubSubUrl": "https://dummy.com"}'}}}}')
+ * @returns
+ * {"method: "launch", "params": {"intent": {"data": {"query": '{"params": {"pubSubToken": "12#####89", "pubSubUrl": "ht#####om"}'}}}})
+ */
+function censorPubSubToken(data) {
+  data = JSON.parse(data);
+  if (data?.params?.intent?.data?.query && typeof data.params.intent.data.query === 'string') {
+    const queryData = JSON.parse(data.params.intent.data.query);
+    if (queryData?.params?.pubSubUrl) {
+      const url = queryData.params.pubSubUrl;
+      const urlLength = url.length;
+      queryData.params.pubSubUrl = url.replace(url.substring(2, urlLength - 2), '########');
+    }
+    if (queryData?.params?.pubSubToken) {
+      const token = queryData.params.pubSubToken;
+      const tokenLength = token.length;
+      queryData.params.pubSubToken = token.replace(token.substring(2, tokenLength - 2), '########');
+    }
+    data.params.intent.data.query = JSON.stringify(queryData);
+  }
+  return JSON.stringify(data);
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -1183,4 +1221,5 @@ module.exports = {
   fireboltCallObjectHasField,
   fetchAppIdentifierFromEnv,
   skipCurrentTest,
+  censorPubSubToken,
 };
