@@ -1631,8 +1631,16 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
 Cypress.Commands.add('startFireboltInteractions', () => {
   cy.setPersistentStorage().then(() => {
     cy.rebootDevice().then(() => {
-      cy.wait(180000);
-      // Need to make health check call to bolt
+      cy.wait(120000).then(() => {
+        cy.firstPartyAppHealthcheck().then((healthCheckResponse) => {
+          if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
+            throw Error(
+              `Unable to get healthCheck response from App in ${getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES)} retries. Device taking more time to reboot than usual time.`
+            );
+          }
+          expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
+        });
+      });
       // Need to check if fireboltInteraction service is active or not
     });
   });
@@ -1646,7 +1654,6 @@ Cypress.Commands.add('setPersistentStorage', () => {
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     console.log('persistentStorage result------', result);
     if (result.success) {
-      // fireLog.info('Set persistentStorage response: ' + result.message);
       fireLog.assert(true, 'Set persistentStorage response: ' + result.message);
     } else {
       fireLog.assert(false, 'Set persistentStorage response: ' + result.message);
@@ -1667,3 +1674,22 @@ Cypress.Commands.add('rebootDevice', () => {
     }
   });
 });
+
+Cypress.Commands.add('firstPartyAppHealthcheck', () => {
+  const requestMap = {
+    method: 'fcs.healthCheck',
+    params: null,
+  };
+  sendMessageToPlatformsWithRetry(requestMap, UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES));
+});
+
+function sendMessageToPlatformsWithRetry(intentMessage, retryCount) {
+  cy.sendMessagetoPlatforms(intentMessage).then((response) => {
+    if (response == CONSTANTS.NO_RESPONSE && retryCount > 0) {
+      retryCount = retryCount - 1;
+      return sendMessageToPlatformsWithRetry(intentMessage, retryCount);
+    } else {
+      return response;
+    }
+  });
+}
