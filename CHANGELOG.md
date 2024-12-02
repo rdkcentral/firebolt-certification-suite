@@ -1,3 +1,13 @@
+# [1.5.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0...v1.5.0-dev.1) (2024-12-02)
+
+
+### Features
+
+* Capabilities Cleanup + SevTags ([#267](https://github.com/rdkcentral/firebolt-certification-suite/issues/267)) ([6f3cc05](https://github.com/rdkcentral/firebolt-certification-suite/commit/6f3cc05f62356eefd106b3a0387b8d92b96cd684))
+* XSB keyboard module cleanup ([#272](https://github.com/rdkcentral/firebolt-certification-suite/issues/272)) ([04fcf22](https://github.com/rdkcentral/firebolt-certification-suite/commit/04fcf22b354efa35180de265d0936a319311db0e))
+* XSB Parameters module update ([#274](https://github.com/rdkcentral/firebolt-certification-suite/issues/274)) ([bc0187b](https://github.com/rdkcentral/firebolt-certification-suite/commit/bc0187bcc619efe04ff36264df8701657a14c62b))
+* XSB profile module cleanup ([#273](https://github.com/rdkcentral/firebolt-certification-suite/issues/273)) ([6dcabaa](https://github.com/rdkcentral/firebolt-certification-suite/commit/6dcabaa42f4bf94a2093b3ed449be8d70ed3dc99))
+
 # [1.4.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0...v1.4.0) (2024-11-27)
 
 
