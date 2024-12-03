@@ -1,3 +1,10 @@
+# [1.5.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.1...v1.5.0-dev.2) (2024-12-03)
+
+
+### Features
+
+* Enhancement of dynamic glue codes ([#263](https://github.com/rdkcentral/firebolt-certification-suite/issues/263)) ([59df9da](https://github.com/rdkcentral/firebolt-certification-suite/commit/59df9da4bf1ac6ae08d9e2ab56b301e67562c796))
+
 # [1.5.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0...v1.5.0-dev.1) (2024-12-02)
 
 
