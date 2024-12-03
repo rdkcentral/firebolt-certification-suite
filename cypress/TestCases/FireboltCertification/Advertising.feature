@@ -22,10 +22,10 @@ Feature: Advertising
 
    @sdk @transport @Sev1
    Scenario Outline: Advertising.policy - Validating API and Event responses when <Method> set to <Value>
-      Given we test the 'ADVERTISING_SKIPRESTRICTION' getters and setters '<Method>' to '<Value>'
+      Given the environment has been set up for 'Advertising skiprestriction' tests
       And '3rd party app' registers for the 'Firebolt' event
       And '3rd party app' invokes the 'Firebolt' get API
-      When 1st party app invokes the 'Firebolt' API to set value
+      When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
       Then 'Firebolt' platform responds to '1st party app' set API
       When '3rd party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '3rd party app' get API
@@ -40,7 +40,7 @@ Feature: Advertising
 
    @sdk @transport @Sev2
    Scenario: Advertising.deviceAttributes - Validating API Method response content
-      Given we test the 'ADVERTISING_DEVICEATTRIBUTES' getters and setters
+      Given the environment has been set up for 'Advertising deviceattributes' tests
       When '3rd party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '3rd party app' get API
 

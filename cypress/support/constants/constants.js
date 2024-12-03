@@ -176,6 +176,8 @@ module.exports = {
   FCS_VALIDATION_JSON: 'fCSValidationjson',
   FIREBOLT: 'firebolt',
   FIREBOLTCALL: 'fireboltCall',
+  FIREBOLT_OBJECT_DOC_PATH:
+    'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/fixtures/docs/dynamicObjects.md#firebolt-object',
   FIREBOLT_VERSION: 'Firebolt Version',
   FIREBOLTCALLS_FROM_CONFIGMODULE: 'cypress/fixtures/external/fireboltCalls/',
   FIREBOLTCALLS_FROM_FCS: 'cypress/fixtures/fireboltCalls/',
@@ -302,6 +304,8 @@ module.exports = {
   NO_MATCHED_RESPONSE: 'Unable to find the response for the current request',
   NO_PARAMS: 'noParam',
   NO_RESPONSE: 'No_Response',
+  NO_RUNTIME_VARIABLE_FOUND:
+    'No "runtime" environment variable found. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key.',
   NOTIFICATION_CONTENT_VALIDATION_REQ: 'Lifecycle notification content validation ',
   NOTIFICATION_EXISTS_REQ: 'Lifecycle notification exists ',
   NOTIFICATION_SCHEMA_VALIDATION_REQ: 'Lifecycle notification schema validation ',
