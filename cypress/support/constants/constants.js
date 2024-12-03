@@ -176,6 +176,8 @@ module.exports = {
   FCS_VALIDATION_JSON: 'fCSValidationjson',
   FIREBOLT: 'firebolt',
   FIREBOLTCALL: 'fireboltCall',
+  FIREBOLT_OBJECT_DOC_PATH:
+    'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/fixtures/docs/dynamicObjects.md#firebolt-object',
   FIREBOLT_VERSION: 'Firebolt Version',
   FIREBOLTCALLS_FROM_CONFIGMODULE: 'cypress/fixtures/external/fireboltCalls/',
   FIREBOLTCALLS_FROM_FCS: 'cypress/fixtures/fireboltCalls/',
@@ -302,6 +304,8 @@ module.exports = {
   NO_MATCHED_RESPONSE: 'Unable to find the response for the current request',
   NO_PARAMS: 'noParam',
   NO_RESPONSE: 'No_Response',
+  NO_RUNTIME_VARIABLE_FOUND:
+    'No "runtime" environment variable found. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key.',
   NOTIFICATION_CONTENT_VALIDATION_REQ: 'Lifecycle notification content validation ',
   NOTIFICATION_EXISTS_REQ: 'Lifecycle notification exists ',
   NOTIFICATION_SCHEMA_VALIDATION_REQ: 'Lifecycle notification schema validation ',
@@ -345,6 +349,7 @@ module.exports = {
   READ_FILES_FROM_DIRECTORY: 'readFilesFromDir',
   RECORD_TASK_TYPE_START: 'starts',
   REGEX: 'regEx',
+  REGEX_EVENT_VALIDATION: 'regexEventValidation',
   REPORT_COMMUNICATION_MODE: 'Communication Mode',
   REPORT_DATE: 'Date',
   REQUEST_OVERRIDE_CALLS: {
@@ -364,6 +369,7 @@ module.exports = {
     DISMISSAPP: 'fcs.dismissApp',
     FETCHDEVICEDETAILS: 'fcs.fetchDeviceDetails',
     SCREENSHOT: 'fcs.screenshot',
+    GETAPPSTATE: 'fcs.getAppState',
   },
   REQUEST_MAP_INTERACTIONS_SERVICE: 'Request map for firebolt interactions service : ',
   RESPONSE: 'Response: ',
@@ -509,6 +515,7 @@ module.exports = {
   SCENARIO_NAME: 'scenarioName',
   FIREBOLT_INTERACTION: 'FireboltInteraction',
   PENDING_FEATURES: 'pendingFeatures',
+  FOREGROUND: 'FOREGROUND',
   PERFORMANCE_VALIDATION: 'performanceValidation',
   MARKER_CREATION_STATUS: 'markerCreationStatus',
 };

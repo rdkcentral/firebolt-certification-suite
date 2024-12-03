@@ -7,10 +7,10 @@ Feature: Discovery
 
    @sdk @transport @Sev0
    Scenario Outline: Discovery.policy - Validating API and Event responses when <Scenario>
-      Given we test the '<FB_Object>' getters and setters '<Method>' to '<Value>'
+      Given the environment has been set up for '<FB_Object>' tests
       And '3rd party app' registers for the 'Firebolt' event
       And '3rd party app' invokes the 'Firebolt' get API
-      When 1st party app invokes the 'Firebolt' API to set value
+      When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
       Then 'Firebolt' platform responds to '1st party app' set API
       When '3rd party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '3rd party app' get API
@@ -18,10 +18,10 @@ Feature: Discovery
 
       Examples:
          | Scenario                  | Method               | Value | FB_Object                           |
-         | enabling recommendations  | allowPersonalization | true  | DISCOVERY_RECOMMENDATIONS           |
-         | disabling recommendations | allowPersonalization | false | DISCOVERY_RECOMMENDATIONS           |
-         | enabling watch history    | allowWatchHistory    | true  | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
-         | disabling watch history   | allowWatchHistory    | false | DISCOVERY_REMEMBER_WATCHED_PROGRAMS |
+         | enabling recommendations  | allowPersonalization | true  | Discovery recommendations           |
+         | disabling recommendations | allowPersonalization | false | Discovery recommendations           |
+         | enabling watch history    | allowWatchHistory    | true  | Discovery remember watched programs |
+         | disabling watch history   | allowWatchHistory    | false | Discovery remember watched programs |
 
    @sdk @transport @Sev1
    Scenario Outline: Discovery.watched - Validate Method success with parameter configuration: <Scenario>
@@ -141,7 +141,7 @@ Feature: Discovery
 
    @sdk @transport @Sev2
    Scenario: Discovery.clearContentAccess - Clearing availabilities and entitlements from the subscriber
-      Given we test the 'DISCOVERY_CLEAR_CONTENTACCESS' getters and setters
+      Given the environment has been set up for 'Discovery clearContentAccess' tests
       When '3rd party app' invokes the 'Firebolt' get API
       Then 'Firebolt' platform responds to '3rd party app' get API
 
