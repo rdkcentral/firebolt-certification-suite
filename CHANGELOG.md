@@ -1,3 +1,10 @@
+# [1.5.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.2...v1.5.0-dev.3) (2024-12-03)
+
+
+### Features
+
+* Add validation to ensure that the app launched is in foreground ([#264](https://github.com/rdkcentral/firebolt-certification-suite/issues/264)) ([0132a0f](https://github.com/rdkcentral/firebolt-certification-suite/commit/0132a0ffcdbd77d31c8b4c085144e65bca96b7b1))
+
 # [1.5.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.1...v1.5.0-dev.2) (2024-12-03)
 
 
