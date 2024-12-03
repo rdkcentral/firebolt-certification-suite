@@ -1,3 +1,10 @@
+# [1.5.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.3...v1.5.0-dev.4) (2024-12-03)
+
+
+### Bug Fixes
+
+* Added support in FCS for the external events ([#262](https://github.com/rdkcentral/firebolt-certification-suite/issues/262)) ([aab804d](https://github.com/rdkcentral/firebolt-certification-suite/commit/aab804d25a756ffff60e3cb47b20bbf8f500d33a))
+
 # [1.5.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.2...v1.5.0-dev.3) (2024-12-03)
 
 
