@@ -366,6 +366,7 @@ module.exports = {
     UNLOADAPP: 'fcs.unloadApp',
     FETCHDEVICEDETAILS: 'fcs.fetchDeviceDetails',
     SCREENSHOT: 'fcs.screenshot',
+    GETAPPSTATE: 'fcs.getAppState',
   },
   REQUEST_MAP_INTERACTIONS_SERVICE: 'Request map for firebolt interactions service : ',
   RESPONSE: 'Response: ',
@@ -511,6 +512,7 @@ module.exports = {
   SCENARIO_NAME: 'scenarioName',
   FIREBOLT_INTERACTION: 'FireboltInteraction',
   PENDING_FEATURES: 'pendingFeatures',
+  FOREGROUND: 'FOREGROUND',
   PERFORMANCE_VALIDATION: 'performanceValidation',
   MARKER_CREATION_STATUS: 'markerCreationStatus',
 };
