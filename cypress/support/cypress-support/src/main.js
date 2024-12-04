@@ -375,7 +375,6 @@ export default function (module) {
       }
 
       cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
-        cy.log('2282 intent', JSON.stringify(intent));
         cy.log('Response from Firebolt Implementation: ' + response);
 
         if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
