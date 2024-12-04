@@ -21,6 +21,55 @@ const _ = require('lodash');
 import { apiObject } from '../appObjectConfigs';
 import UTILS, { fireLog } from '../cypress-support/src/utils';
 
+Given(/3rd party '(.+)' app is dismissed$/, async (app) => {
+ 
+  console.log("runTime env >>> ",Cypress.env(CONSTANTS.RUNTIME))
+  console.log("app_metadata env >>> ",Cypress.env('app_metadata'))
+
+  let appId = Cypress.env(CONSTANTS.RUNTIME).appId
+  let KeyPressSequence
+
+    if(Cypress.env(CONSTANTS.RUNTIME) && Cypress.env(CONSTANTS.RUNTIME).intent && Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence){
+      KeyPressSequence = Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence
+    }else if(Cypress.env('app_metadata') && Cypress.env('app_metadata')[appId] && Cypress.env('app_metadata')[appId].defaultKeyPressSequence){
+      KeyPressSequence = Cypress.env('app_metadata')[appId].defaultKeyPressSequence
+    }else if(Cypress.env('app_metadata') && Cypress.env('app_metadata').defaultKeyPressSequence){
+      KeyPressSequence = Cypress.env('app_metadata').defaultKeyPressSequence
+    }else{
+      throw new Error("No KeyPressSequence ");
+
+      // console.error("No KeyPressSequence ")
+    }
+  // let KeyPressSequenceofEntity = Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence
+  // let keyPressSequenceofAppId = Cypress.env('app_metadata')[appId].defaultKeyPressSequence
+  // let keyPressSequenceGlobal = Cypress.env('app_metadata').defaultKeyPressSequence
+
+  // console.log("appId  >>> ",appId)
+  // console.log("KeyPressSequenceofEntity  >>> ",KeyPressSequenceofEntity)
+  // console.log("keyPressSequenceofAppId  >>> ",keyPressSequenceofAppId)
+  console.log("KeyPressSequence  >>> ",KeyPressSequence)
+  params = {
+    "keyCode": KeyPressSequence
+  }
+  const intentMessage = UTILS.createIntentMessage('keyPressHandler', requestParams);
+  // {
+  //   "action": "search",
+  //   "data": {
+  //     "query": "{
+  //       \"task\":\"keyPressHandler\",
+  //       \"params\":{
+  //           \"keyCode\":\"${keyCodes}\"
+  //       },
+  //       \"action\":\"NA\",
+  //       \"context\":{\"communicationMode\":\"console\"},
+  //       \"appType\":\"keyPress\"}"
+  //   },
+  //   "context": {
+  //     "source": "device"
+  //   }
+  // } 
+})
+
 /**
  * @module fireboltCalls
  * @function And 1st party app invokes the (?:'(.+)' )?API to '(.+)'
