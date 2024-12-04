@@ -182,23 +182,27 @@ function fetchAppMetaData(config) {
   // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
   function extractAppMetadata(appDataDir, appMetaDataFile) {
     const appMetaData = fetchDataFromFile(appMetaDataFile);
-    const files = fs
-      .readdirSync(appDataDir)
-      .filter((file) => file !== 'app_metadata.json' && file.endsWith('.json'));
-
     const mergedData = appMetaData ? _.cloneDeep(appMetaData) : {};
-    files.forEach((file) => {
-      const filePath = path.join(appDataDir, file);
-      const appId = file.split('.')[0];
-      const fileData = fetchDataFromFile(filePath);
-      if (fileData) {
-        if (mergedData[appId]) {
-          mergedData[appId] = _.merge(mergedData[appId], fileData);
-        } else {
-          mergedData[appId] = fileData;
+
+    if (fs.existsSync(appDataDir)) {
+      const files = fs
+        .readdirSync(appDataDir)
+        .filter((file) => file !== 'app_metadata.json' && file.endsWith('.json'));
+      console.log('files', files);
+
+      files.forEach((file) => {
+        const filePath = path.join(appDataDir, file);
+        const appId = file.split('.')[0];
+        const fileData = fetchDataFromFile(filePath);
+        if (fileData) {
+          if (mergedData[appId]) {
+            mergedData[appId] = _.merge(mergedData[appId], fileData);
+          } else {
+            mergedData[appId] = fileData;
+          }
         }
-      }
-    });
+      });
+    }
     return mergedData;
   }
   // Add the combined app metadata to the config.env object
