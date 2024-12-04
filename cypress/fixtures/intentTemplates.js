@@ -25,6 +25,7 @@ const series = {
       programType: 'episode',
       entityId: resolveAtRuntime('intent->entityId'),
     },
+    origin: "WEB"
   },
 };
 
@@ -40,6 +41,7 @@ const music_song = {
       entityId: resolveAtRuntime('intent->entityId'),
       musicType: 'song',
     },
+    origin: "WEB"
   },
 };
 
@@ -55,6 +57,7 @@ const music_album = {
       entityId: resolveAtRuntime('intent->entityId'),
       musicType: 'album',
     },
+    origin: "WEB"
   },
 };
 
