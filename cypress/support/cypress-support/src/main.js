@@ -347,8 +347,12 @@ export default function (module) {
       additionalParams[CONSTANTS.ACTION] = UTILS.getEnvVariable(CONSTANTS.ACTION);
     }
 
-    overrideParams.certification = UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false);
+    overrideParams.certification = UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, true);
     overrideParams.exceptionMethods = UTILS.generateCombinedExceptionList();
+    overrideParams.product = UTILS.getEnvVariable(CONSTANTS.ENV_PRODUCT, false);
+    overrideParams.version = UTILS.getEnvVariable(CONSTANTS.VERSION, false);
+    overrideParams.testtoken = UTILS.getEnvVariable(CONSTANTS.TESTTOKEN, false);
+    overrideParams.macaddress = UTILS.getEnvVariable(CONSTANTS.MACADDRESS_PARAM, false);
 
     // If certification is true override excluded methods and modules from config module if it is present else use the default lists in constants.
     if (overrideParams.certification == true) {
@@ -371,6 +375,7 @@ export default function (module) {
       }
 
       cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
+        cy.log('2282 intent', JSON.stringify(intent));
         cy.log('Response from Firebolt Implementation: ' + response);
 
         if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
