@@ -1628,6 +1628,13 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
   }
 });
 
+/**
+ * @module commands
+ * @function startFireboltInteractions
+ * @description Function to start the firebolt interactions service for IPA testType.
+ * @example
+ * cy.startFireboltInteractions()
+ */
 Cypress.Commands.add('startFireboltInteractions', () => {
   cy.setPersistentStorage().then(() => {
     cy.rebootDevice().then(() => {
@@ -1646,13 +1653,19 @@ Cypress.Commands.add('startFireboltInteractions', () => {
   });
 });
 
+/**
+ * @module commands
+ * @function setPersistentStorage
+ * @description Set the persistent storage value.
+ * @example
+ * cy.setPersistentStorage()
+ */
 Cypress.Commands.add('setPersistentStorage', () => {
   const requestMap = {
     method: 'fcs.setPersistentStorage',
     params: null,
   };
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
-    console.log('persistentStorage result------', result);
     if (result.success) {
       fireLog.assert(true, 'Set persistentStorage response: ' + result.message);
     } else {
@@ -1661,6 +1674,13 @@ Cypress.Commands.add('setPersistentStorage', () => {
   });
 });
 
+/**
+ * @module commands
+ * @function rebootDevice
+ * @description Command to reboot the device.
+ * @example
+ * cy.rebootDevice()
+ */
 Cypress.Commands.add('rebootDevice', () => {
   const requestMap = {
     method: 'fcs.rebootDevice',
@@ -1675,6 +1695,13 @@ Cypress.Commands.add('rebootDevice', () => {
   });
 });
 
+/**
+ * @module commands
+ * @function firstPartyAppHealthcheck
+ * @description Checking first party App connection status
+ * @example
+ * cy.firstPartyAppHealthcheck()
+ */
 Cypress.Commands.add('firstPartyAppHealthcheck', () => {
   const requestMap = {
     method: 'fcs.healthCheck',
@@ -1683,6 +1710,13 @@ Cypress.Commands.add('firstPartyAppHealthcheck', () => {
   sendMessageToPlatformsWithRetry(requestMap, UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES));
 });
 
+/**
+ * @module commands
+ * @function sendMessageToPlatformsWithRetry
+ * @description Retry the health check call for 8 times if no response is received.
+ * @example
+ * sendMessageToPlatformsWithRetry()
+ */
 function sendMessageToPlatformsWithRetry(intentMessage, retryCount) {
   cy.sendMessagetoPlatforms(intentMessage).then((response) => {
     if (response == CONSTANTS.NO_RESPONSE && retryCount > 0) {
