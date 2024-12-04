@@ -1623,3 +1623,103 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
     Cypress.env(CONSTANTS.THRESHOLD_MONITOR_START_TIME, epochTime);
   }
 });
+
+/**
+ * @module commands
+ * @function startFireboltInteractions
+ * @description Function to start the firebolt interactions service for IPA testType.
+ * @example
+ * cy.startFireboltInteractions()
+ */
+Cypress.Commands.add('startFireboltInteractions', () => {
+  cy.setPersistentStorage().then(() => {
+    cy.rebootDevice().then(() => {
+      cy.wait(120000).then(() => {
+        cy.firstPartyAppHealthcheck().then((healthCheckResponse) => {
+          if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
+            throw Error(
+              `Unable to get healthCheck response from App in ${getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES)} retries. Device taking more time to reboot than usual time.`
+            );
+          }
+          expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
+        });
+      });
+      // Need to check if fireboltInteraction service is active or not
+    });
+  });
+});
+
+/**
+ * @module commands
+ * @function setPersistentStorage
+ * @description Set the persistent storage value.
+ * @example
+ * cy.setPersistentStorage()
+ */
+Cypress.Commands.add('setPersistentStorage', () => {
+  const requestMap = {
+    method: 'fcs.setPersistentStorage',
+    params: null,
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    if (result.success) {
+      fireLog.assert(true, 'Set persistentStorage response: ' + result.message);
+    } else {
+      fireLog.assert(false, 'Set persistentStorage response: ' + result.message);
+    }
+  });
+});
+
+/**
+ * @module commands
+ * @function rebootDevice
+ * @description Command to reboot the device.
+ * @example
+ * cy.rebootDevice()
+ */
+Cypress.Commands.add('rebootDevice', () => {
+  const requestMap = {
+    method: 'fcs.rebootDevice',
+    params: null,
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    if (result.success) {
+      fireLog.info('Device is rebooting');
+    } else {
+      fireLog.assert(false, result.message);
+    }
+  });
+});
+
+/**
+ * @module commands
+ * @function firstPartyAppHealthcheck
+ * @description Checking first party App connection status
+ * @example
+ * cy.firstPartyAppHealthcheck()
+ */
+Cypress.Commands.add('firstPartyAppHealthcheck', () => {
+  const requestMap = {
+    method: 'fcs.healthCheck',
+    params: null,
+  };
+  sendMessageToPlatformsWithRetry(requestMap, UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES));
+});
+
+/**
+ * @module commands
+ * @function sendMessageToPlatformsWithRetry
+ * @description Retry the health check call for 8 times if no response is received.
+ * @example
+ * sendMessageToPlatformsWithRetry()
+ */
+function sendMessageToPlatformsWithRetry(intentMessage, retryCount) {
+  cy.sendMessagetoPlatforms(intentMessage).then((response) => {
+    if (response == CONSTANTS.NO_RESPONSE && retryCount > 0) {
+      retryCount = retryCount - 1;
+      return sendMessageToPlatformsWithRetry(intentMessage, retryCount);
+    } else {
+      return response;
+    }
+  });
+}
