@@ -349,17 +349,18 @@ export default function (module) {
 
     overrideParams.certification = UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, true);
     overrideParams.exceptionMethods = UTILS.generateCombinedExceptionList();
-    overrideParams.product = UTILS.getEnvVariable(CONSTANTS.ENV_PRODUCT, false);
-    overrideParams.version = UTILS.getEnvVariable(CONSTANTS.VERSION, false);
-    overrideParams.testtoken = UTILS.getEnvVariable(CONSTANTS.TESTTOKEN, false);
-    overrideParams.macaddress = UTILS.getEnvVariable(CONSTANTS.MACADDRESS_PARAM, false);
-
     // If certification is true override excluded methods and modules from config module if it is present else use the default lists in constants.
     if (overrideParams.certification == true) {
       overrideParams = UTILS.overideParamsFromConfigModule(overrideParams);
     }
 
+    // Pass overrideParams along with additionalParams to intent addon
+    additionalParams.overrideData = overrideParams;
     cy.runIntentAddon(CONSTANTS.TASK.RUNTEST, additionalParams).then((parsedIntent) => {
+      // Extract and store overrideParams from parsed intent and delete once done
+      overrideParams = parsedIntent.overrideData;
+      delete parsedIntent.overrideData;
+      // Create intent message using the parsed intent and override params
       const intent = UTILS.createIntentMessage(
         CONSTANTS.TASK.RUNTEST,
         overrideParams,
