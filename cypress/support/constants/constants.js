@@ -368,6 +368,7 @@ module.exports = {
     FETCHDEVICEDETAILS: 'fcs.fetchDeviceDetails',
     SCREENSHOT: 'fcs.screenshot',
     GETAPPSTATE: 'fcs.getAppState',
+    DISMISS: 'fcs.dismissApp',
   },
   REQUEST_MAP_INTERACTIONS_SERVICE: 'Request map for firebolt interactions service : ',
   RESPONSE: 'Response: ',
