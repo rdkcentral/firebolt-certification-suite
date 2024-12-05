@@ -7,29 +7,6 @@
         "method": "manage_privacy.setAllowAppContentAdTargeting",
         "params": "FALSE"
     },
-    "GET_PARAMETERS_INITIALIZATION": {
-        "method": "parameters.initialization"
-    },
-    "TRUE_FOR_PARAMETERS_INITIALIZATION": {
-        "method": "parameters.initialization",
-        "validationJsonPath": "result",
-        "content": "ADVERTISING_ADVERTISINGID_ADOFF"
-    },
-    "FALSE_FOR_PARAMETERS_INITIALIZATION": {
-        "method": "parameters.initialization",
-        "validationJsonPath": "result",
-        "content": "ADVERTISING_ADVERTISINGID_ADON"
-    },
-    "DISCOVERY_LAUNCH_WITH_HOME_INTENT": {
-        "method": "discovery.launch",
-        "params": "PARAMETERS_HOME_INTENT"
-    },
-    "HOME_INTENT_FOR_PARAMETERS_INITIALIZATION": {
-        "method": "parameters.initialization",
-        "validationJsonPath": "result",
-        "content": "PARAMETERS_INITIALIZATION"
-    },
-
     "GET_INITIALIZATION_PARAMETERS_FOR_NULL_INTENT": {
         "method": "parameters.initialization",
         "context": "DISCOVERY_LAUNCH_NULL"
@@ -70,7 +47,6 @@
         "method": "parameters.initialization",
         "context": "DISCOVERY_LAUNCH_PLAYQUERY"
     },
-
     "NULLINTENT_FOR_INITIALIZATION_PARAMETERS": {
         "method": "parameters.initialization",
         "context": "DISCOVERY_LAUNCH_NULL",
@@ -233,7 +209,6 @@
         "validationJsonPath": "result.discovery",
         "content": "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITHOUT_OPTIONS"
     },
-
     "PARAMETERS_INITIALIZATION_ADVERTISINGID_AD_OFF": {
 		"method": "parameters.initialization",
 		"validationJsonPath": "result",
@@ -244,7 +219,6 @@
 		"validationJsonPath": "result",
 		"content": "ADVERTISING_ADVERTISINGID_ADON"
 	},
-    
     "NULLINTENT_SOURCE_FOR_INITIALIZATION_PARAMETERS": {
         "method": "parameters.initialization",
         "context": "DISCOVERY_LAUNCH_NULL",

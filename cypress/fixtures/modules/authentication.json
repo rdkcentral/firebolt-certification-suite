@@ -2,7 +2,5 @@
     "PLATFORM": {"type":"platform"},
     "DEVICE": {"type":"device"},
     "DISTRIBUTOR": {"type":"distributor"},
-    "DISTRIBUTOR_CIMA": {"type":"distributor","options":{"clientId":"CIMA"}},
-    "DISTRIBUTOR_OAT": {"type":"distributor","options":{"clientId":"OAT"}},
     "PLATFORM1": {"type":"platform1"}
 }

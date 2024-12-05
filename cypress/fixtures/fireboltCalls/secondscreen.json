@@ -1,52 +1,4 @@
 {
-    "GET_SECONDSCREEN_DEVICE_WITH_EMPTY_ARRAY": {
-        "method": "secondscreen.device",
-        "params": "EMPTYARRAY"
-    },
-    "GET_SECONDSCREEN_DEVICE_WITH_STRING": {
-        "method": "secondscreen.device",
-        "params": "SECONDSCREEN_TEST"
-    },
-    "GET_SECONDSCREEN_PROTOCOLS": {
-        "method": "secondscreen.protocols",
-        "params": "EMPTYARRAY"
-    },
-    "GET_SECONDSCREEN_DEVICE_WITH_BOOLEAN": {
-        "method": "secondscreen.device",
-        "params": "SECONDSCREEN_TRUE",
-        "expected": "error"
-    },
-    "GET_SECONDSCREEN_DEVICE_WITH_INTEGER": {
-        "method": "secondscreen.device",
-        "params": "SECONDSCREEN_INTEGER_123",
-        "expected": "error"
-    },
-    "SECONDSCREEN_ONFRIENDLYNAMECHANGED": {
-        "method": "secondscreen.onFriendlyNameChanged"
-    },
-    "SET_FRIENDLYNAME_TO_GUEST_ROOM": {
-        "method": "manage_device.setName",
-        "params": "SECONDSCREEN_FRIENDLYNAME"
-    },
-    "GET_SECONDSCREEN_FRIENDLYNAME": {
-        "method": "secondscreen.friendlyName"
-    },
-    "EXPECTED_SECONDSCREEN_DEVICE": {
-        "method": "secondscreen.device",
-        "validationJsonPath": "result",
-        "content": "SECONDSCREEN_DEVICE"
-    },
-    "EXPECTED_SECONDSCREEN_PROTOCOLS": {
-        "method": "secondscreen.protocols",
-        "validationJsonPath": "result",
-        "content": "SECONDSCREEN_PROTOCOLS"
-    },
-    "INVALID_PARAMETERS_FOR_SECONDSCREEN_DEVICE": {
-        "method": "secondscreen.device",
-        "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
-        "expectingError": true
-    },
     "GUEST_ROOM_FOR_SECONDSCREEN_FRIENDLYNAME": {
         "method": "secondscreen.friendlyName",
         "validationJsonPath": "result",
@@ -57,31 +9,6 @@
         "validationJsonPath": "eventResponse",
         "content": "SECONDSCREEN_FRIENDLYNAME"
     },
-    "ONFRIENDLYNAMECHANGED": {
-        "event": "secondscreen.onFriendlyNameChanged",
-        "validationJsonPath": "eventResponse",
-        "content": "NULL"
-    },
-    "SECONDSCREEN_ONLAUNCHREQUEST": {
-        "method": "secondscreen.onLaunchRequest"
-    },
-    "SECONDSCREEN_ONCLOSEREQUEST": {
-        "method": "secondscreen.onCloseRequest"
-    },
-    "NULL_FOR_SECONDSCREEN_ONLAUNCHREQUEST_EVENT": {
-        "event": "secondscreen.onLaunchRequest",
-        "validationJsonPath": "eventResponse",
-        "content": "NULL"
-    },
-    "NULL_FOR_SECONDSCREEN_ONCLOSEREQUEST_EVENT": {
-        "event": "secondscreen.onCloseRequest",
-        "validationJsonPath": "eventResponse",
-        "content": "NULL",
-        "expectingError": false
-    },
-    "GET_SECONDSCREEN_DEVICE": {
-        "method": "secondscreen.device"
-    },
     "EXPECT_ERROR_FOR_SECONDSCREEN_DEVICE": {
         "method": "secondscreen.device",
         "expected": "error"
@@ -91,23 +18,5 @@
         "validationJsonPath": "result",
         "content": "INVALID_PARAMS",
         "expectingError": true
-    },
-    "SECONDSCREEN_ONLAUNCHREQUEST_EVENT": {
-        "event": "secondscreen.onLaunchRequest",
-        "validationJsonPath": "eventResponse",
-        "content": "SECONDSCREEN_ONLAUNCHREQUEST_TYPE_DIAL_WITH_TEST_DATA"
-    },
-    "SECONDSCREEN_ONCLOSEREQUEST_EVENT": {
-        "event": "secondscreen.onCloseRequest",
-        "validationJsonPath": "eventResponse",
-        "content": "SECONDSCREEN_ONCLOSEREQUEST"
-    },
-    "ONLAUNCHREQUEST_EVENT": {
-        "method": "secondscreen.onLaunchRequest",
-        "params": "SECONDSCREEN_ONLAUNCHREQUEST_EVENT"
-    },
-    "ONCLOSEREQUEST_EVENT": {
-        "method": "secondscreen.onCloseRequest",
-        "params": "SECONDSCREEN_ONCLOSEREQUEST_EVENT"
     }
 }
