@@ -375,16 +375,24 @@ Given('device is rebooted', () => {
  * And 3rd party 'firebolt' app is dismissed
  */
 Given(/3rd party '(.+)' app is dismissed$/, async (app) => {
-  let appId = Cypress.env(CONSTANTS.RUNTIME).appId
-  let KeyPressSequence
-  if (Cypress.env(CONSTANTS.RUNTIME) && Cypress.env(CONSTANTS.RUNTIME).intent && Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence) {
-    KeyPressSequence = Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence
-  } else if (Cypress.env('app_metadata') && Cypress.env('app_metadata')[appId] && Cypress.env('app_metadata')[appId].defaultKeyPressSequence) {
-    KeyPressSequence = Cypress.env('app_metadata')[appId].defaultKeyPressSequence
+  const appId = Cypress.env(CONSTANTS.RUNTIME).appId;
+  let KeyPressSequence;
+  if (
+    Cypress.env(CONSTANTS.RUNTIME) &&
+    Cypress.env(CONSTANTS.RUNTIME).intent &&
+    Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence
+  ) {
+    KeyPressSequence = Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence;
+  } else if (
+    Cypress.env('app_metadata') &&
+    Cypress.env('app_metadata')[appId] &&
+    Cypress.env('app_metadata')[appId].defaultKeyPressSequence
+  ) {
+    KeyPressSequence = Cypress.env('app_metadata')[appId].defaultKeyPressSequence;
   } else if (Cypress.env('app_metadata') && Cypress.env('app_metadata').defaultKeyPressSequence) {
-    KeyPressSequence = Cypress.env('app_metadata').defaultKeyPressSequence
+    KeyPressSequence = Cypress.env('app_metadata').defaultKeyPressSequence;
   } else {
-    throw new Error("No KeyPressSequence ");
+    throw new Error('No KeyPressSequence ');
   }
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.DISMISS,
@@ -392,9 +400,9 @@ Given(/3rd party '(.+)' app is dismissed$/, async (app) => {
   };
 
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    fireLog.info("Response of app dismiss function ", JSON.stringify(response))
-  })
-})
+    fireLog.info('Response of app dismiss function ', JSON.stringify(response));
+  });
+});
 
 /**
  * @module fireboltCalls
@@ -412,16 +420,13 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
   };
   fireLog.info(`Sending request to fetch app state: ${JSON.stringify(requestMap)}`);
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    let responseString = JSON.stringify(response)
+    const responseString = JSON.stringify(response);
     if (Object.keys(response).length === 0) {
       fireLog.info(
         `State validation successful: Current state of ${appId} app is ${responseString} as expected`
       );
     } else {
-      fireLog.fail(
-        `${appId} app is not dismissed. Response :${responseString}`
-      );
+      fireLog.fail(`${appId} app is not dismissed. Response :${responseString}`);
     }
-  })
-})
-
+  });
+});
