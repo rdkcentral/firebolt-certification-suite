@@ -349,6 +349,7 @@ export default function (module) {
 
     overrideParams.certification = UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false);
     overrideParams.exceptionMethods = UTILS.generateCombinedExceptionList();
+
     // If certification is true override excluded methods and modules from config module if it is present else use the default lists in constants.
     if (overrideParams.certification == true) {
       overrideParams = UTILS.overideParamsFromConfigModule(overrideParams);
