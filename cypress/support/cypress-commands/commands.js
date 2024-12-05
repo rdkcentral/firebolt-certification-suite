@@ -20,7 +20,6 @@ const { _ } = Cypress;
 import UTILS, { getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
-const intentTemplate = require('../../fixtures/intentTemplates');
 
 /**
  * @module commands
@@ -905,16 +904,24 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
     }
 
     // Check if the intent is present in the intentTemplate else failing the test
-    if (intentTemplate && intentTemplate[intent]) {
+    if (
+      Cypress.env('intentTemplates') &&
+      Cypress.env('intentTemplates')[appType] &&
+      Cypress.env('intentTemplates')[appType][intent]
+    ) {
       try {
-        // Resolving the intent template with the values from the runtime environment variable.
-        messageIntent = UTILS.resolveRecursiveValues(intentTemplate[intent]);
+        const intentTemplate = Cypress.env('intentTemplates')[appType][intent];
+        // Resolving the intent template with the values from the runtime environment variable.;
+        messageIntent = {
+          [CONSTANTS.APP_ID]: appId,
+          [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate)
+        };
       } catch (error) {
         fireLog.fail('Could not resolve intentTemplate: ' + error.message);
       }
     } else {
       fireLog.fail(
-        `Intent template for the ${intent} intent not found in cypress/fixtures/inetntTemplates.js`
+        `Intent template for the ${intent} intent not found in ${appType} intentTemplates`
       );
     }
   } else {

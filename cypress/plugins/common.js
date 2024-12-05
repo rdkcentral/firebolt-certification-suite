@@ -46,6 +46,8 @@ function genericSupport(config) {
   generateIndexFile(CONSTANTS.FIREBOLTMOCK_FROM_FCS, 'fireboltMocks');
   generateIndexFile(CONSTANTS.FIREBOLTMOCK_FROM_CONFIGMODULE, 'fireboltMocks');
 
+  generateIndexFile('cypress/fixtures/external/intentTemplates/', 'intentTemplates');
+
   // The sequence of override - the default config in the config.js file, overriden by supportConfig.json and then by the command line arguments.
   config.env = {
     ...config.env,
