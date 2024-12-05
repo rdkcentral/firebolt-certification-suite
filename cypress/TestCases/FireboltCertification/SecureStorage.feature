@@ -6,7 +6,7 @@ Feature: SecureStorage
         And 3rd party 'certification' app is launched
 
     @sdk @transport @Sev1
-    Scenario Outline: SecureStorage.set - Verify secure data clears, retrieves, and updates with <Scenario>
+    Scenario Outline: SecureStorage.set - Validate secure data content when <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Clear_API_Key>'
         And 'Firebolt' platform responds with 'null for clearing stored value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
@@ -22,7 +22,7 @@ Feature: SecureStorage
             | scope changed to account   | get stored value with scope as account and key as authTestTokenAccount  | update stored value for key authTestTokenAccount | expected value for authTestTokenAccount stored data in securestorage | clear stored value with scope as account |
             
     @sdk @transport @Sev2
-    Scenario Outline: SecureStorage.set - Verify secure data clears, retrieves, and updates with <Scenario>
+    Scenario Outline: SecureStorage.set - Validate secure data content when <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Clear_API_Key>'
         And 'Firebolt' platform responds with 'null for clearing stored value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
@@ -38,7 +38,7 @@ Feature: SecureStorage
             | scope changed to account with optionalparams  | get stored value with scope as account and key as authTestTokenAccount1 | update stored value for key authTestTokenAccount1 with options | authTestTokenValue1 for stored value in securestorage | clear stored value with scope as account |
 
     @sdk @transport @Sev1
-    Scenario Outline: SecureStorage.set - Verify secure data clears, retrieves, and updates when <Scenario>
+    Scenario Outline: SecureStorage.set - Validate secure data content when <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Initial_Set_API_Key>'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
@@ -54,7 +54,7 @@ Feature: SecureStorage
             | updating existing account scope value | get stored value with scope as account and key as authTestTokenAccount1 | update stored value for key authTestTokenAccount1 | get stored value with scope as account and key as authTestTokenAccount1 | authTestTokenValue2 for stored value in securestorage | authTestTokenValue1 for stored value in securestorage | update stored value for key authTestTokenAccount1 with options | clear stored value with scope as account |
 
     @sdk @transport @Sev1
-    Scenario Outline: SecureStorage.set - Verify secure data clears, retrieves, and updates when <Scenario>
+    Scenario Outline: SecureStorage.set - Validate secure data content when <Scenario>
         Given  '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key1>'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
@@ -72,7 +72,7 @@ Feature: SecureStorage
             | adding scope as device for existing key with scope as account | get stored value with scope as account and key as authTestTokenAccount | update stored value with scope as device and key as authTestTokenAccount | get stored value with scope as device and key as authTestTokenAccount | expected value for authTestTokenAccount stored data in securestorage | expected value for device scoped authTestTokenAccount stored data in securestorage | update stored value for key authTestTokenAccount |
 
     @sdk @transport @Sev1
-    Scenario Outline: SecureStorage.remove - Verify secure data clears after <Scenario>
+    Scenario Outline: SecureStorage.remove - Validate secure data content when <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key1>'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key1>'
@@ -209,7 +209,7 @@ Feature: SecureStorage
             | Passing key as empty string   | remove stored value with empty key             | custom error for securestorage remove       |
 
     @sdk @transport @Sev2
-    Scenario Outline: SecureStorage.remove - Verify secure data clears, retrieves, and updates <Scenario> after TTL
+    Scenario Outline: SecureStorage.remove - Validate secure data content <Scenario> after TTL
         Given '3rd party app' invokes the 'Firebolt' API to '<Clear_API_Key>'
         And 'Firebolt' platform responds with 'null for clearing stored value'
         And '3rd party app' invokes the 'Firebolt' API to '<Get_API_Key>'
@@ -232,7 +232,7 @@ Feature: SecureStorage
             | with scope as account | get stored value with scope as account and key as authTestTokenAccountTTL | set secure value with scope as account and TTL as 50 | remove stored value with scope as account and TTL as 50 | clear stored value with scope as account |
 
     @sdk @transport @Sev2
-    Scenario Outline: SecureStorage.clear - Validating values are cleared <Scenario>
+    Scenario Outline: SecureStorage.clear - Validate secure data content is cleared <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key1>'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to '<Set_API_Key2>'
@@ -249,9 +249,9 @@ Feature: SecureStorage
         Then 'Firebolt' platform responds with 'null for getting stored value'
 
         Examples:
-            | Scenario           | Clear_API_Key                            | Get_API_Key1                                                           | Get_API_Key2                                                            | Set_API_Key1                                     | Set_API_Key2                                      | Validation_Key1                                                      | Validation_Key2                                       |
-            | with device scope  | clear stored value with scope as device  | get stored value with scope as device and key as authTestTokenDevice   | get stored value with scope as device and key as authTestTokenDevice1   | update stored value for key authTestTokenDevice  | update stored value for key authTestTokenDevice1  | expected value for authTestTokenDevice stored data in securestorage  | authTestTokenValue2 for stored value in securestorage |
-            | with account scope | clear stored value with scope as account | get stored value with scope as account and key as authTestTokenAccount | get stored value with scope as account and key as authTestTokenAccount1 | update stored value for key authTestTokenAccount | update stored value for key authTestTokenAccount1 | expected value for authTestTokenAccount stored data in securestorage | authTestTokenValue2 for stored value in securestorage |
+            | Scenario              | Clear_API_Key                            | Get_API_Key1                                                           | Get_API_Key2                                                            | Set_API_Key1                                     | Set_API_Key2                                      | Validation_Key1                                                      | Validation_Key2                                       |
+            | with scope as device  | clear stored value with scope as device  | get stored value with scope as device and key as authTestTokenDevice   | get stored value with scope as device and key as authTestTokenDevice1   | update stored value for key authTestTokenDevice  | update stored value for key authTestTokenDevice1  | expected value for authTestTokenDevice stored data in securestorage  | authTestTokenValue2 for stored value in securestorage |
+            | with scope as account | clear stored value with scope as account | get stored value with scope as account and key as authTestTokenAccount | get stored value with scope as account and key as authTestTokenAccount1 | update stored value for key authTestTokenAccount | update stored value for key authTestTokenAccount1 | expected value for authTestTokenAccount stored data in securestorage | authTestTokenValue2 for stored value in securestorage |
 
     @sdk @transport @Sev1
     Scenario Outline: SecureStorage.clear - Validating API Error handling when <Scenario>
