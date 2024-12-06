@@ -181,14 +181,12 @@ export default class Config {
       );
       return fireboltResponse;
     }
-    
     if (typeof fireboltResponse === 'object') {
       fireboltResponse = JSON.stringify(fireboltResponse);
     }
     if (typeof fireboltResponse === 'string') {
       fireboltResponse = fireboltResponse.replace(/\r?\n|\s{3,}/g, '');
     }
-
     fireLog.info(
       'Original Response to be converted to firebolt equivalent: ' + fireboltResponse
     );
