@@ -7,6 +7,7 @@ FCS supports dynamic Firebolt JS objects to be used across multiple examples in 
 - [Supported Dynamic Glue Codes](#supported-dynamic-glue-codes)
 - [Firebolt object](#firebolt-object)
   - [Sample Firebolt Object Format](#sample-firebolt-object-format)
+  - [How to initialize the Firebolt object](#how-to-initialize-the-firebolt-object)
 - [Supported types of validations](#supported-types-of-validations-here)
 - [Runtime Variables](#runtime-variables)
 - [ResolveAtRuntime Function](#resolveatruntime-function)
@@ -17,17 +18,19 @@ FCS supports dynamic Firebolt JS objects to be used across multiple examples in 
 
 To use dynamic Firebolt objects, we need to use dynamic glue codes listed [here](../../support/step_definitions/dynamicCalls.md)
 
-- we test the '(.+)' getters and setters(?: '(._?)'(?: to '(._?)')?)?
 - 1st party app invokes the '(.+)' API to set( invalid)? value
 - '(.+)' invokes the '(.+)' get API
 - '(.+)' registers for the '(.+)' event
 - '(.+)' platform responds to '(.+)' (get|set) API(?: with '(.+)')?
 - '(.+)' platform (triggers|does not trigger) '(.\*?)' event(?: with '(.+)')?
+- '(.+)' on '(.+)' page
 
 ## Firebolt object
 
 - Firebolt objects can be added in JavaScript files located in the `cypress/fixtures/fireboltCalls` folder. Ex: `cypress/fixtures/fireboltCalls/accessibility.js`
 - Firebolt objects present in the config module will take priority if the same key is present in FCS.
+- Firebolt objects name must be in uppercase.
+- Firebolt object is initialized using [the environment has been set up for {string} tests](../../support/step_definitions/testSetup.md#the-environment-has-been-set-up-for-string-tests) glue
 
 ### Below is the sample format of a dynamic firebolt object
 
@@ -63,6 +66,84 @@ FIREBOLT_CALL = {
 
 - These are all the supported fields, but depending on the test scenario and glue code used, none of them are technically required.
 
+### How to initialize the Firebolt object
+- The Firebolt object should be initialized using the [the environment has been set up for {string} tests](../../support/step_definitions/testSetup.md#the-environment-has-been-set-up-for-string-tests) glue code.
+- The glue code accepts the test type as a parameter, which determines the Firebolt object to be used.
+- The Firebolt object will be retrieved based on the key name and stored in the runtime environment variable.
+
+#### Flowchart of Firebolt Object Usage
+![alt text](envSetupFlowchart.png)
+
+#### Two Ways to Initialize the Firebolt Object
+- **Passing the Key Name with a Colon `:`**
+ 
+    This format allows you to specify both the module and the method of the Firebolt object by separating them with a colon.
+    Format: `module:method`. 
+    ##### Format
+    ```javascript
+    Given the environment has been set up for 'module:method' tests
+    ```
+    - **Module**: The name of the Firebolt object (e.g., Localization).
+    - **Method**: The specific method name (e.g., locale).
+    - The Firebolt object will be fetched based on the module name and method name and stored in the runtime environment variable.
+    - Refer [here](#runtime-variables) to know more about runtime variables.
+- Example: `Given the environment has been set up for 'Localization:locale' tests` - `Localization` is the firebolt object name.
+ 
+    **Firebolt Object:** 
+    ```javascript
+    exports.LOCALIZATION = {
+      method: resolveAtRuntime('{{module}}.{{method}}'),
+      params: {},
+      validationJsonPath: 'result',
+      content: {
+        data: [
+          {
+            type: 'fixture',
+            validations: [
+              {
+                mode: 'staticContentValidation',
+                type: resolveAtRuntime('value'),
+              },
+            ],
+          },
+        ],
+      },
+    };
+    ```
+
+- **Passing the Key Name with Spaces**
+
+    This format is used when the key name does not contain a colon. If the key name contains spaces, they are replaced with underscores, and the entire key name is converted to uppercase.
+    ##### Format
+    ```javascript
+    Given the environment has been set up for 'key Name' tests
+    ```
+    - **key Name:** The Firebolt object name (e.g., Advertising skiprestriction).
+    - If the key name contains spaces, they are replaced with underscores and the entire key name is converted to uppercase (e.g., `Advertising skiprestriction` → `ADVERTISING_SKIPRESTRICTION`).
+    
+  - Example: `Given the environment has been set up for 'Advertising skiprestriction' tests` - 
+
+    **Firebolt Object:** 
+    ```javascript
+    exports.ADVERTISING_SKIPRESTRICTION = {
+      method: 'Advertising.skipRestriction',
+      params: {},
+      validationJsonPath: 'result',
+      content: {
+        data: [
+          {
+            type: 'fixture',
+            validations: [
+              {
+                mode: 'staticContentValidation',
+                type: resolveAtRuntime('value'),
+              },
+            ],
+          },
+        ],
+      },
+    };
+
 ## Supported types of validations [here](./validations.md)
 
 ## Runtime Variables
@@ -73,8 +154,11 @@ Below are the runtime variables that are used by the FireboltCall object.
 
 - **attribute:** Attribute is a field name of the `runtime` environment variable that holds the value of the method name. For example, if the method name is `closedCaptions.setEnabled`, the attribute value will be `enabled`.
 - **value:** Value is a field name of the `runtime` environment variable that holds the value used for to set the value or for validation.
+- **module:** Module is a field name of the `runtime` environment variable that holds the module name. For example, `resolveAtRuntime('{{module}}')` will dynamically resolve the module name from the runtime environment (e.g., `Localization`).
+- **method:** Method is a field name of the `runtime` environment variable that holds the method name. For ExampleFor example, `resolveAtRuntime('{{method}}')` will dynamically resolve the method name (e.g., `locale`).
 - **appId:** appId is a field name of the `runtime` environment variable and this is been added while launching the application.
 - **intent:** intent field has been added to the `runtime` environment variable, if the intent is been added while launching the application.
+- **content:** content field has been added to the `runtime` environment variable, if the content is been added from the validation glue code.
 
 **Note:** `resolveAtRuntime()` function is used by the FireboltCall object in order to process runtime variables and other fields.
 
@@ -199,10 +283,10 @@ In the below test case, fetching the Firebolt object `ACCESSIBILITY_CLOSEDCAPTIO
 
 ```
  Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
-        Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
+        Given the environment has been set up for 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' tests
         When '3rd party app' registers for the 'Firebolt' event
         When '3rd party app' invokes the 'Firebolt' get API
-        Given 1st party app invokes the 'Firebolt' API to set value
+        Given 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
         And 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
         And 'Firebolt' platform responds to '3rd party app' get API
@@ -219,10 +303,10 @@ The following test case demonstrates that multiple APIs can be written using the
 
 ```
 Scenario Outline: Accessibility.closedCaptionsSettings - Positive Scenario: <Scenario>
-        Given we test the 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
+        Given the environment has been set up for 'ACCESSIBILITY_CLOSEDCAPTIONS_SETTINGS' tests
         When '3rd party app' registers for the 'Firebolt' event
         When '3rd party app' invokes the 'Firebolt' get API
-        Given 1st party app invokes the 'Firebolt' API to set value
+        Given 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
         And 'Firebolt' platform responds to '1st party app' set API
         When '3rd party app' invokes the 'Firebolt' get API
         And 'Firebolt' platform responds to '3rd party app' get API
@@ -259,8 +343,8 @@ In the below testcase, fetching the firebolt object `CLOSED_CAPTIONS_SETTINGS` a
 
 ```
     Scenario Outline: ClosedCaptions.<Method> - Negative Scenario: <Scenario> expecting error
-        Given we test the 'CLOSED_CAPTIONS_SETTINGS' getters and setters '<Method>' to '<Value>'
-        When 1st party app invokes the 'Firebolt' API to set invalid value
+        Given the environment has been set up for 'CLOSED_CAPTIONS_SETTINGS' tests
+        When 1st party app invokes the 'Firebolt' API to set '<Method>' to invalid '<Value>'
         And 'Firebolt' platform responds to '1st party app' set API with '<Error>'
 
         Examples:
