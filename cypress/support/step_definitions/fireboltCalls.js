@@ -473,7 +473,7 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
         content: {
           type: {
             methods: {
-              'lifecyclemanagement.session': [],
+              'lifecycle.close': [],
             },
           },
           description: 'Validating of all methods interaction logs',
