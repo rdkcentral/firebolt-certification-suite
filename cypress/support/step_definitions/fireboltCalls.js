@@ -374,7 +374,7 @@ Given('device is rebooted', () => {
  * @example
  * And 3rd party 'firebolt' app is dismissed
  */
-Given(/3rd party '(.+)' app is dismissed$/, async (app) => {
+Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
   const appId = Cypress.env(CONSTANTS.RUNTIME).appId;
   let KeyPressSequence;
   if (
@@ -399,8 +399,11 @@ Given(/3rd party '(.+)' app is dismissed$/, async (app) => {
     params: KeyPressSequence.dismiss,
   };
 
+  fireLog.info(
+    `Request sent to platform to dismiss the ${appId} app: ${JSON.stringify(requestMap)}`
+  );
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    fireLog.info('Response of app dismiss function ', JSON.stringify(response));
+    fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
   });
 });
 
@@ -419,7 +422,7 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
     params: appId,
   };
-  fireLog.info(`Sending request to fetch app state: ${JSON.stringify(requestMapForGetAppState)}`);
+  fireLog.info(`Sending request to fetch ${appId} app state: ${JSON.stringify(requestMapForGetAppState)}`);
   cy.sendMessagetoPlatforms(requestMapForGetAppState)
     .then((response) => {
       const responseString = JSON.stringify(response);
@@ -433,6 +436,7 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
     })
     .then(() => {
       // screenShot validation
+      fireLog.info('Started Screenshot validation');
       const requestMapForScreenShotValidation = {
         method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
         params: {
@@ -451,7 +455,7 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
       cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
         fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
         if (response.status != 'pass') {
-          fireLog.fail('Screenshot validation failed');
+          fireLog.fail(`Screenshot validation failed ${response.validations}`);
         }
       });
     })
