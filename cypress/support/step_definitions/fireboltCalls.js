@@ -365,3 +365,125 @@ Given('device is rebooted', () => {
     throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
   });
 });
+
+/**
+ * @module fireboltCalls
+ * @function And 3rd party '(.+)' app is dismissed
+ * @description To dismiss the launched app
+ * @param {String} app - app name.
+ * @example
+ * And 3rd party 'firebolt' app is dismissed
+ */
+Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
+  const appId = Cypress.env(CONSTANTS.RUNTIME).appId;
+  let KeyPressSequence;
+  if (
+    Cypress.env(CONSTANTS.RUNTIME) &&
+    Cypress.env(CONSTANTS.RUNTIME).intent &&
+    Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence
+  ) {
+    KeyPressSequence = Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence;
+  } else if (
+    Cypress.env('app_metadata') &&
+    Cypress.env('app_metadata')[appId] &&
+    Cypress.env('app_metadata')[appId].defaultKeyPressSequence
+  ) {
+    KeyPressSequence = Cypress.env('app_metadata')[appId].defaultKeyPressSequence;
+  } else if (Cypress.env('app_metadata') && Cypress.env('app_metadata').defaultKeyPressSequence) {
+    KeyPressSequence = Cypress.env('app_metadata').defaultKeyPressSequence;
+  } else {
+    throw new Error('No KeyPressSequence ');
+  }
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.DISMISS,
+    params: KeyPressSequence.dismiss,
+  };
+
+  fireLog.info(
+    `Request sent to platform to dismiss the ${appId} app: ${JSON.stringify(requestMap)}`
+  );
+  cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
+  });
+});
+
+/**
+ * @module fireboltCalls
+ * @function And 3rd party '(.+)' app should be exited
+ * @description To validate that the app is dismissed
+ * @param {String} app - app name.
+ * @example
+ * Then 3rd party 'firebolt' app should be exited
+ */
+Given(/3rd party '(.+)' app should be exited$/, async (app) => {
+  // getAppState validation
+  const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
+  const requestMapForGetAppState = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
+    params: appId,
+  };
+  fireLog.info(`Sending request to fetch ${appId} app state: ${JSON.stringify(requestMapForGetAppState)}`);
+  cy.sendMessagetoPlatforms(requestMapForGetAppState)
+    .then((response) => {
+      const responseString = JSON.stringify(response);
+      if (Object.keys(response).length === 0) {
+        fireLog.info(
+          `State validation successful: Current state of ${appId} app is ${responseString} as expected`
+        );
+      } else {
+        fireLog.fail(`${appId} app is not dismissed. Response :${responseString}`);
+      }
+    })
+    .then(() => {
+      // screenShot validation
+      fireLog.info('Started Screenshot validation');
+      const requestMapForScreenShotValidation = {
+        method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
+        params: {
+          validations: [
+            {
+              type: 'image',
+              label: 'home',
+              confidence: 50,
+            },
+          ],
+        },
+      };
+      fireLog.info(
+        `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
+      );
+      cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
+        fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
+        if (response.status != 'pass') {
+          fireLog.fail(`Screenshot validation failed ${response.validations}`);
+        }
+      });
+    })
+    .then(() => {
+      // fireboltInteraction validation
+
+      const logs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs(
+        Cypress.env(CONSTANTS.SCENARIO_NAME)
+      );
+      console.log('logs', logs);
+      if (!logs) {
+        UTILS.fireLog.assert(
+          false,
+          `No interaction logs found for the scenario - ${Cypress.env(CONSTANTS.SCENARIO_NAME)}`
+        );
+      }
+      const contentObject = {
+        logs: logs,
+        content: {
+          type: {
+            methods: {
+              'lifecycle.close': [],
+            },
+          },
+          description: 'Validating of all methods interaction logs',
+        },
+      };
+      console.log('contentObject', contentObject);
+      cy.customValidation(fireboltData.content.data[0], contentObject);
+    });
+});
