@@ -1,3 +1,10 @@
+# [1.5.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.4...v1.5.0-dev.5) (2024-12-06)
+
+
+### Bug Fixes
+
+* entos intent support in fcs to get values from cli ([#281](https://github.com/rdkcentral/firebolt-certification-suite/issues/281)) ([834ca87](https://github.com/rdkcentral/firebolt-certification-suite/commit/834ca87f9a6e9180b1b1378218594bb66acd0bc1))
+
 # [1.5.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.3...v1.5.0-dev.4) (2024-12-03)
 
 
