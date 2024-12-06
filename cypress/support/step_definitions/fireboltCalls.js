@@ -413,20 +413,73 @@ Given(/3rd party '(.+)' app is dismissed$/, async (app) => {
  * Then 3rd party 'firebolt' app should be exited
  */
 Given(/3rd party '(.+)' app should be exited$/, async (app) => {
+  // getAppState validation
   const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
-  const requestMap = {
+  const requestMapForGetAppState = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
     params: appId,
   };
-  fireLog.info(`Sending request to fetch app state: ${JSON.stringify(requestMap)}`);
-  cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    const responseString = JSON.stringify(response);
-    if (Object.keys(response).length === 0) {
+  fireLog.info(`Sending request to fetch app state: ${JSON.stringify(requestMapForGetAppState)}`);
+  cy.sendMessagetoPlatforms(requestMapForGetAppState)
+    .then((response) => {
+      const responseString = JSON.stringify(response);
+      if (Object.keys(response).length === 0) {
+        fireLog.info(
+          `State validation successful: Current state of ${appId} app is ${responseString} as expected`
+        );
+      } else {
+        fireLog.fail(`${appId} app is not dismissed. Response :${responseString}`);
+      }
+    })
+    .then(() => {
+      // screenShot validation
+      const requestMapForScreenShotValidation = {
+        method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
+        params: {
+          validations: [
+            {
+              type: 'image',
+              label: 'home',
+              confidence: 50,
+            },
+          ],
+        },
+      };
       fireLog.info(
-        `State validation successful: Current state of ${appId} app is ${responseString} as expected`
+        `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
       );
-    } else {
-      fireLog.fail(`${appId} app is not dismissed. Response :${responseString}`);
-    }
-  });
+      cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
+        fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
+        if (response.status != 'pass') {
+          fireLog.fail('Screenshot validation failed');
+        }
+      });
+    })
+    .then(() => {
+      // fireboltInteraction validation
+
+      const logs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs(
+        Cypress.env(CONSTANTS.SCENARIO_NAME)
+      );
+      console.log('logs', logs);
+      if (!logs) {
+        UTILS.fireLog.assert(
+          false,
+          `No interaction logs found for the scenario - ${Cypress.env(CONSTANTS.SCENARIO_NAME)}`
+        );
+      }
+      const contentObject = {
+        logs: logs,
+        content: {
+          type: {
+            methods: {
+              'lifecyclemanagement.session': [],
+            },
+          },
+          description: 'Validating of all methods interaction logs',
+        },
+      };
+      console.log('contentObject', contentObject);
+      cy.customValidation(fireboltData.content.data[0], contentObject);
+    });
 });
