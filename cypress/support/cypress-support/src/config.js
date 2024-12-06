@@ -188,8 +188,8 @@ export default class Config {
       fireboltResponse = fireboltResponse.replace(/\r?\n|\s{3,}/g, '');
     }
     fireLog.info(
-      'Original Response to be converted to firebolt equivalent: ' + fireboltResponse
-    );
+      'Original Response to be converted to firebolt equivalent: ' + 
+      fireboltResponse);
     // If we've gotten to this point, we have a config override. Call it and return its response
     return methodConfig(fireboltResponse);
   }
