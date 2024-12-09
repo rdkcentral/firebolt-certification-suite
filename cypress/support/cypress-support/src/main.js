@@ -360,7 +360,13 @@ export default function (module) {
       overrideParams = UTILS.overideParamsFromConfigModule(overrideParams);
     }
 
+    // Pass overrideParams along with additionalParams to intent addon
+    additionalParams.overrideData = overrideParams;
     cy.runIntentAddon(CONSTANTS.TASK.RUNTEST, additionalParams).then((parsedIntent) => {
+      // Extract and store overrideParams from parsed intent and delete once done
+      overrideParams = parsedIntent.overrideData;
+      delete parsedIntent.overrideData;
+      // Create intent message using the parsed intent and override params
       const intent = UTILS.createIntentMessage(
         CONSTANTS.TASK.RUNTEST,
         overrideParams,
