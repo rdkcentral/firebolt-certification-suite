@@ -253,8 +253,27 @@ export default function (module) {
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
     cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
       return new Promise(async (resolve) => {
+        Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, requestMap.method);
+        const moduleName = requestMap.method.split('.')[0];
+        console.log('Module Name:', moduleName);
+        if (moduleName === 'fcsSetter') {
+          // Check if the specific method exists in fcsSetter
+          if (fcsSetter[requestMap.method]) {
+            try {
+              const response = await fcsSetter[requestMap.method](requestMap.params);
+              resolve(response);
+            } catch (error) {
+              resolve(setterFailure('Error while invoking fcsSetter method', error));
+            }
+          } else {
+            resolve(setterNotImplemented(`Method ${requestMap.method} not implemented`));
+          }
+          return;
+        }
+        // Default logic for other methods
         const message = await config.getRequestOverride(requestMap);
-        // perform MTC call/FB call only if the message is not null
+
+        // Perform MTC/FB call only if the message is not null
         if (message != null) {
           const response = await transport.sendMessage(message);
           const result = config.getResponseOverride(response);
