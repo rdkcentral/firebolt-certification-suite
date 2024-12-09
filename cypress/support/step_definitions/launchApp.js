@@ -38,6 +38,9 @@ Given(
       UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(
         UTILS.getEnvVariable(CONSTANTS.TEST_TYPE)
       ) ||
+      UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(
+        UTILS.getEnvVariable(CONSTANTS.TEST_TYPE)
+      ) ||
       UTILS.isTestTypeChanged(CONSTANTS.TEST_TYPE)
     ) {
       if (!state) {

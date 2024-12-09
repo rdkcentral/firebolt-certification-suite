@@ -365,6 +365,8 @@ module.exports = {
     SETFIREBOLTINTERACTIONSHANDLER: 'fcs.setFireboltInteractionsHandler',
     CREATE_MARKER: 'performance.createMarker',
     UNLOADAPP: 'fcs.unloadApp',
+    CLOSEAPP: 'fcs.closeApp',
+    DISMISSAPP: 'fcs.dismissApp',
     FETCHDEVICEDETAILS: 'fcs.fetchDeviceDetails',
     SCREENSHOT: 'fcs.screenshot',
     GETAPPSTATE: 'fcs.getAppState',
