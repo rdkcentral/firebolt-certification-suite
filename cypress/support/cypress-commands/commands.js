@@ -914,7 +914,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         // Resolving the intent template with the values from the runtime environment variable.;
         messageIntent = {
           [CONSTANTS.APP_ID]: appId,
-          [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate)
+          [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
         };
       } catch (error) {
         fireLog.fail('Could not resolve intentTemplate: ' + error.message);
