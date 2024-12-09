@@ -4,7 +4,7 @@ and sending a pull request.
 Before RDK accepts your code into the project you must sign the RDK Contributor License Agreement (CLA).
 
 ## Pull Request Naming Conventions
-All PR titles must follow a specific format to ensure clarity and consistency across the project. The allowed prefixes are based on the type of change your PR introduces:
+All PR titles must follow a specifec format to ensure clarity and consistency across the project. The allowed prefixes are based on the type of change your PR introduces:
 
 1. Feature Enhancements:
 Prefix your PR title with feat: if your PR adds a new feature.
