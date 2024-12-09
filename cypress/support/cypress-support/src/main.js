@@ -26,6 +26,7 @@ const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 const UTILS = require('./utils');
 const path = require('path');
 const logger = require('../../Logger')('main.js');
+const fcsSetter = require('../src/fcsSetter');
 const setimmediate = require('setimmediate');
 let appTransport;
 const flatted = require('flatted');
@@ -253,14 +254,23 @@ export default function (module) {
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
     cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
       return new Promise(async (resolve) => {
-        Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, requestMap.method);
+        console.log('Request Map:::' + JSON.stringify(requestMap));
         const moduleName = requestMap.method.split('.')[0];
+        const methodName = requestMap.method.split('.')[1];
         console.log('Module Name:', moduleName);
+        console.log('RequestMap ::' + JSON.stringify(methodName));
+        Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
+        console.log(
+          'Env variable' + JSON.stringify(Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD))
+        );
+
         if (moduleName === 'fcsSetter') {
           // Check if the specific method exists in fcsSetter
-          if (fcsSetter[requestMap.method]) {
+          const method = fcsSetter[methodName];
+          if (method) {
+            console.log('Inside If');
             try {
-              const response = await fcsSetter[requestMap.method](requestMap.params);
+              const response = await method(requestMap.params);
               resolve(response);
             } catch (error) {
               resolve(setterFailure('Error while invoking fcsSetter method', error));
@@ -268,18 +278,19 @@ export default function (module) {
           } else {
             resolve(setterNotImplemented(`Method ${requestMap.method} not implemented`));
           }
-          return;
-        }
-        // Default logic for other methods
-        const message = await config.getRequestOverride(requestMap);
-
-        // Perform MTC/FB call only if the message is not null
-        if (message != null) {
-          const response = await transport.sendMessage(message);
-          const result = config.getResponseOverride(response);
-          resolve(result);
+          // return;
         } else {
-          resolve(null);
+          // Default logic for other methods
+          const message = await config.getRequestOverride(requestMap);
+
+          // Perform MTC/FB call only if the message is not null
+          if (message != null) {
+            const response = await transport.sendMessage(message);
+            const result = config.getResponseOverride(response);
+            resolve(result);
+          } else {
+            resolve(null);
+          }
         }
       });
     });

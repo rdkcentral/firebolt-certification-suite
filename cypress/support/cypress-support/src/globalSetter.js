@@ -28,7 +28,7 @@ global.setterFailure = (message, error) => {
 
 global.setterNotImplemented = (message) => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
-  const errorMessage = `${methodName} ${message || `FCS setter for fcsSetter.${methodName} does not have an implementation`}`;
+  const errorMessage = `${message || `FCS setter for fcsSetter.${methodName} does not have an implementation`}`;
   cy.then(() => {
     throw new Error(errorMessage);
   });
