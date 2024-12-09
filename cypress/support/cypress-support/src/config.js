@@ -181,10 +181,12 @@ export default class Config {
       );
       return fireboltResponse;
     }
-    typeof fireboltResponse == 'object'
-      ? (fireboltResponse = JSON.stringify(fireboltResponse))
-      : fireboltResponse;
-
+    if (typeof fireboltResponse === 'object') {
+      fireboltResponse = JSON.stringify(fireboltResponse);
+    }
+    if (typeof fireboltResponse === 'string') {
+      fireboltResponse = fireboltResponse.replace(/\r?\n|\s{3,}/g, '');
+    }
     fireLog.info('Original Response to be converted to firebolt equivalent: ' + fireboltResponse);
     // If we've gotten to this point, we have a config override. Call it and return its response
     return methodConfig(fireboltResponse);

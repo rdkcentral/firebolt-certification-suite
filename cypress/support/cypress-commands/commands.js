@@ -997,7 +997,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
 
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
-    fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
+    fireLog.info(
+      'Discovery launch intent: ' + UTILS.censorPubSubToken(JSON.stringify(parsedIntent))
+    );
     cy.sendMessagetoPlatforms(parsedIntent).then((result) => {
       fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
 
@@ -1526,22 +1528,18 @@ Cypress.Commands.add(
  * @example
  * cy.getRuntimeFireboltCallObject(sdk);
  */
-Cypress.Commands.add('getRuntimeFireboltCallObject', (sdk) => {
-  if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
-    // Checking the `runtime` env variable created and it has 'fireboltCall' field, else failing the test.
-    if (
-      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false) &&
-      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).hasOwnProperty(CONSTANTS.FIREBOLTCALL) &&
-      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).fireboltCall
-    ) {
-      return UTILS.getEnvVariable(CONSTANTS.RUNTIME).fireboltCall;
-    } else {
-      fireLog.fail(
-        'The runtime environment variable was not found. To initialize the firebolt object, add the step "we test the (.+) getters and setters" with firebolt object key.'
-      );
-    }
+Cypress.Commands.add('getRuntimeFireboltCallObject', () => {
+  // Checking the `runtime` env variable created and it has 'fireboltCall' field, else failing the test.
+  if (
+    UTILS.getEnvVariable(CONSTANTS.RUNTIME, false) &&
+    UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).hasOwnProperty(CONSTANTS.FIREBOLTCALL) &&
+    UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).fireboltCall
+  ) {
+    return UTILS.getEnvVariable(CONSTANTS.RUNTIME).fireboltCall;
   } else {
-    fireLog.assert(false, `${sdk} SDK not Supported`);
+    fireLog.fail(
+      `The firebolt call object was not found in the runtime environment variable. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key. Refer here - ${CONSTANTS.FIREBOLT_OBJECT_DOC_PATH}`
+    );
   }
 });
 
