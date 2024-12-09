@@ -13,9 +13,9 @@ Feature: UserInterest
         And 'Firebolt' platform triggers to '1st party app' event 'onUserInterest with <Event_Content>'
 
         Examples:
-            | Scenario                                                                               | userInterestData                                                                              | Event_Content                                                                        |
-            | interest & reason playlist with program entity                                         | type interest and reason playlist with program entity                                         | type interest reason playlist                                                        |
-            | disinterest & reason playlist with program entity                                      | type disinterest and reason playlist with program entity                                      | type disinterest reason playlist                                                     |
+            | Scenario                                          | userInterestData                                         | Event_Content                    |
+            | interest & reason playlist with program entity    | type interest and reason playlist with program entity    | type interest reason playlist    |
+            | disinterest & reason playlist with program entity | type disinterest and reason playlist with program entity | type disinterest reason playlist |
             
     @sdk @transport @Sev2
     Scenario Outline: Discovery.userInterest - Validate API Method content with <Scenario>
@@ -97,7 +97,7 @@ Feature: UserInterest
             | invalid programType for program entity with seasonId    | with invalid programType for program entity with seasonId    |
 
     @sdk @Sev1
-    Scenario Outline: Content.requestUserInterest - Validate API Method content with <Scenario>
+    Scenario Outline: Content.requestUserInterest - Platform-UX - Notify requestUserInterest with type <Scenario>
         And 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type <userInterestData>'
         Then 'Firebolt' platform responds to '1st party app' with '<method_Content>'
 
