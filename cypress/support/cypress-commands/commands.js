@@ -20,6 +20,7 @@ const { _ } = Cypress;
 import UTILS, { getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
+const path = require('path');
 
 /**
  * @module commands
@@ -1667,4 +1668,68 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
     const epochTime = Number.parseInt(Date.now() / 1000);
     Cypress.env(CONSTANTS.THRESHOLD_MONITOR_START_TIME, epochTime);
   }
+});
+
+/**
+ * @module commands
+ * @function fetchAppMetaData
+ * @descriptionReads app metadata from the appData directories of both fcs and configModule, then combines them, prioritizing the configModule metadata.
+ * @example
+ * cy.fetchAppMetaData()
+ */
+Cypress.Commands.add('fetchAppMetaData', () => {
+  // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
+  const fcsAppMetaDataPath = 'cypress/fixtures/objects/appData/app_metadata.json';
+  const fcsAppMetaDataDir = 'cypress/fixtures/objects/appData/';
+
+  const configModuleAppMetaDataPath = 'cypress/fixtures/external/objects/appData/app_metadata.json';
+  const configModuleAppMetaDataDir = 'cypress/fixtures/external/objects/appData/';
+
+  cy.extractAppMetadata(fcsAppMetaDataDir, fcsAppMetaDataPath).then((fcsAppMetaData) => {
+    console.log('fcsAppMetaData', fcsAppMetaData)
+    cy.extractAppMetadata(configModuleAppMetaDataDir, configModuleAppMetaDataPath).then(
+      (configModuleAppMetaData) => {
+        console.log('configModuleAppMetaData', configModuleAppMetaData)
+        // Combine the app metadata from the fcs and configModule appData directories.
+        _.merge(fcsAppMetaData, configModuleAppMetaData);
+      }
+    );
+  });
+});
+
+/**
+ * @module commands
+ * @function extractAppMetadata
+ * @description Extracts app metadata from the appData directory and merges it with the app_metadata.json file.
+ * @example
+ * cy.extractAppMetadata('cypress/fixtures/objects/appData/', 'cypress/fixtures/objects/appData/app_metadata.json')
+ */
+Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
+  cy.task('readFileIfExists', appMetaDataFile).then((appMetaData) => {
+    let mergedData = appMetaData ? _.cloneDeep(appMetaData) : {};
+    mergedData = typeof mergedData === 'string' ? JSON.parse(mergedData) : mergedData;
+    cy.task('readFilesFromDir', appDataDir).then((files) => {
+      files = files ? files : [];
+      files = files.filter((file) => file !== 'app_metadata.json' && file.endsWith('.json'));
+      files.forEach((file) => {
+        const filePath = path.join(appDataDir, file);
+        const appId = file.split('.')[0];
+        cy.task('readFileIfExists', filePath)
+          .then((fileData) => {
+            fileData = JSON.parse(fileData);
+            if (fileData) {
+              if (mergedData[appId]) {
+                mergedData[appId] = _.merge(mergedData[appId], fileData);
+              } else {
+                mergedData[appId] = fileData;
+              }
+            }
+          })
+          .then(() => {
+            return mergedData;
+          });
+      })
+      return mergedData
+    });
+  });
 });

@@ -18,6 +18,9 @@
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
 import UTILS, { fireLog } from '../cypress-support/src/utils';
+const internalIntentTemplates = require('../../fixtures/intentTemplates');
+const externalIntentTemplates = require('../../fixtures/external/intentTemplates/index');
+const { _ } = Cypress;
 
 /**
  * @module TestSetupGlue
@@ -105,6 +108,14 @@ Given('the environment has been set up for {string} tests', (test) => {
     } else {
       fireLog.fail('Marker creation failed');
     }
+  }
+
+  if (test === 'Deeplink') {
+    cy.fetchAppMetaData().then((appMetaData) => {
+      Cypress.env('app_metadata', appMetaData);
+    });
+    const combinedIntentTemplates = _.merge(internalIntentTemplates, externalIntentTemplates);
+    Cypress.env('intentTemplates', combinedIntentTemplates);
   }
   // Calling the envConfigSetup command to setup the environment for the test from the config module.
   cy.envConfigSetup();

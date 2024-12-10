@@ -57,8 +57,6 @@ function genericSupport(config) {
   // To read device data JSON
   preprocessDeviceData(config);
 
-  // Retrieve app metadata and save it in the environment variable
-  fetchAppMetaData(config);
   const testDataEnv = testDataProcessor.testDataProcessor(config.env);
   Object.assign(config.env, testDataEnv);
 
