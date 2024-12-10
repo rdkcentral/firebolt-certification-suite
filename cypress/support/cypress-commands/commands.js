@@ -903,26 +903,44 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
       Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId][intent];
     }
 
-    // Check if the intent is present in the intentTemplate else failing the test
-    if (
-      Cypress.env('intentTemplates') &&
-      Cypress.env('intentTemplates')[appType] &&
-      Cypress.env('intentTemplates')[appType][intent]
-    ) {
-      try {
-        const intentTemplate = Cypress.env('intentTemplates')[appType][intent];
-        // Resolving the intent template with the values from the runtime environment variable.;
-        messageIntent = {
-          [CONSTANTS.APP_ID]: appId,
-          [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
-        };
-      } catch (error) {
-        fireLog.fail('Could not resolve intentTemplate: ' + error.message);
+    // Check if intentTemplates are defined for the given appType
+    let intentTemplate;
+    const intentTemplates = Cypress.env('intentTemplates');
+    if (intentTemplates && intentTemplates[appType]) {
+      // Check if intentTemplate exists for non-native appType
+      if (appType !== 'native' && intentTemplates[appType][intent]) {
+        intentTemplate = intentTemplates[appType][intent];
       }
-    } else {
+      // Check if intentTemplate exists for native appType
+      else if (
+        appType === 'native' &&
+        intentTemplates[appType][appId] &&
+        intentTemplates[appType][appId][intent]
+      ) {
+        intentTemplate = intentTemplates[appType][appId][intent];
+      }
+      // Log failure if intentTemplate is not found
+      else {
+        fireLog.fail(
+          `Intent template for the ${intent} intent not found in ${appType} intentTemplates`
+        );
+      }
+    }
+    // Log failure if intentTemplates are not defined for the given appType
+    else {
       fireLog.fail(
-        `Intent template for the ${intent} intent not found in ${appType} intentTemplates`
+        `No intentTemplates found for ${appType}, make sure the intentTemplates are defined as per the appType`
       );
+    }
+
+    // Attempt to resolve the intentTemplate and create messageIntent
+    try {
+      messageIntent = {
+        [CONSTANTS.APP_ID]: appId,
+        [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
+      };
+    } catch (error) {
+      fireLog.fail('Could not resolve intentTemplate: ' + error.message);
     }
   } else {
     const data = {
