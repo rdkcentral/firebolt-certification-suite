@@ -85,9 +85,7 @@ function setTestProvider(parsedData) {
 }
 
 function setLifecycleState(parsedData) {
-  cy.log(CONSTANTS.SET_LIFECYCLE_STATE_MISSING).then(() => {
-    throw new Error(CONSTANTS.SET_LIFECYCLE_STATE_MISSING);
-  });
+  fireLog.error(CONSTANTS.SET_LIFECYCLE_STATE_MISSING);
 }
 
 /**
@@ -124,9 +122,8 @@ function fetchEventResponse(parsedParam) {
     }}})
  */
 function triggerEvent(key) {
-  fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
-    throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
-  });
+  fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
+
 }
 
 /**
@@ -142,9 +139,7 @@ function unloadApp(request) {
   fireLog.info(
     'App unload requires platform implementation. AppId: ' + appId + ' was not able to be unloaded.'
   );
-  fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
-    throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
-  });
+  fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
 }
 
 /**
@@ -162,9 +157,7 @@ function dismissApp(request) {
       appId +
       ' was not able to be dismissed.'
   );
-  fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
-    throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
-  });
+  fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
 }
 
 /**
