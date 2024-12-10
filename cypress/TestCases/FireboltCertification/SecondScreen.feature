@@ -47,7 +47,7 @@ Feature: SecondScreen
       And 'Firebolt' platform does not trigger event for 'onFriendlyNameChanged'
 
    @regression @sdk @requiresPlatformImplementation @notSupported @Sev1
-   Scenario Outline: SecondScreen.<EventName> - Validating API and Event responses
+   Scenario Outline: SecondScreen.<EventName> - Validating Event responses
       When '3rd party app' registers for the '<RegisteredEvent>' event using the 'Firebolt' API
       And User triggers event with value as '<EventParams>'
       Then 'Firebolt' platform triggers event '<Event_Validation_Key>'
