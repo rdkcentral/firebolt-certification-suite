@@ -110,7 +110,7 @@ Given('the environment has been set up for {string} tests', (test) => {
     }
   }
 
-  if (test === 'Deeplink') {
+  if (test === 'Deeplink' && !Cypress.env('intentTemplates') && !Cypress.env('app_metadata')) {
     cy.fetchAppMetaData().then((appMetaData) => {
       Cypress.env('app_metadata', appMetaData);
     });
