@@ -34,6 +34,8 @@ const internalV2FireboltCallsData = require('../../../fixtures/fireboltCalls/ind
 const externalV2FireboltCallsData = require('../../../fixtures/external/fireboltCalls/index');
 const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/index');
 const externalV2FireboltMockData = require('../../../fixtures/external/fireboltCalls/index');
+const internalIntentTemplates = require('../../../fixtures/intentTemplates');
+const externalIntentTemplates = require('../../../fixtures/external/intentTemplates/index');
 
 export default function (module) {
   const config = new Config(module);
@@ -111,6 +113,9 @@ export default function (module) {
         Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
       }
     );
+
+    const combinedIntentTemplates = _.merge(internalIntentTemplates, externalIntentTemplates);
+    Cypress.env('intentTemplates', combinedIntentTemplates);
 
     // Merge fireboltMocks
     const v1FireboltMockData = UTILS.getEnvVariable('fireboltMocksJson');
@@ -355,7 +360,13 @@ export default function (module) {
       overrideParams = UTILS.overideParamsFromConfigModule(overrideParams);
     }
 
+    // Pass overrideParams along with additionalParams to intent addon
+    additionalParams.overrideData = overrideParams;
     cy.runIntentAddon(CONSTANTS.TASK.RUNTEST, additionalParams).then((parsedIntent) => {
+      // Extract and store overrideParams from parsed intent and delete once done
+      overrideParams = parsedIntent.overrideData;
+      delete parsedIntent.overrideData;
+      // Create intent message using the parsed intent and override params
       const intent = UTILS.createIntentMessage(
         CONSTANTS.TASK.RUNTEST,
         overrideParams,
