@@ -254,7 +254,6 @@ export default function (module) {
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
     cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
       return new Promise(async (resolve) => {
-        console.log('Request Map:::' + JSON.stringify(requestMap));
         const moduleName = requestMap.method.split('.')[0];
         const methodName = requestMap.method.split('.')[1];
         Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
@@ -271,7 +270,6 @@ export default function (module) {
             resolve(setterNotImplemented(`Method ${requestMap.method} not implemented`));
           }
         } else {
-          console.log('Inside else');
           // Default logic for other methods
           const message = await config.getRequestOverride(requestMap);
 

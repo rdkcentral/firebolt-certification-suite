@@ -1,11 +1,8 @@
 const UTILS = require('./utils');
 const CONSTANTS = require('../../constants/constants');
 
-console.log('Inside Global Function');
-
 global.setterSuccess = (message = 'successful response') => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
-  console.log('Inside setterSuccess methodName: ', JSON.stringify(methodName));
   cy.log(`[${methodName}] Success: ${message}`);
   return { status: 'success', message };
 };
@@ -18,7 +15,6 @@ global.setterFailure = (message, error) => {
   cy.then(() => {
     const thrownError = new Error(errorMessage);
     if (error) {
-      console.log('Inside setterFailure error: ', JSON.stringify(error));
       thrownError.message += `error due to : ${JSON.stringify(error)}`;
     }
 
