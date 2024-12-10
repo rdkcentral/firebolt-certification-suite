@@ -878,6 +878,10 @@ class FireLog extends Function {
   }
 
   info(message) {}
+
+  error(message) {
+    throw new Error(message);
+  }
 }
 
 const fireLog = new FireLog();
