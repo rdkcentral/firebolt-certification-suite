@@ -1,7 +1,6 @@
-const setEnabled = async (params) => {
-  console.log('Inside set closed caption for FCS setter');
+const setClosedCaptions = async (params) => {
+  console.log('PARams::+JSON.stringify(params)');
   const { attribute, value } = params;
-  console.log('Inside setEnabled');
   if (attribute === 'Enabled') {
     const response = await cy.sendMessageToPlatform('Accessibility.setClosedCaptions', value);
     if (response?.result) {
@@ -12,9 +11,9 @@ const setEnabled = async (params) => {
   throw new Error('Invalid attribute for setEnabled');
 };
 
-// Add additional methods if needed
+// Add additional methods
 const fcsSetter = {
-  setEnabled,
+  setClosedCaptions,
 };
 
 export default fcsSetter;

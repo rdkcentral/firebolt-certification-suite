@@ -258,7 +258,6 @@ export default function (module) {
         const moduleName = requestMap.method.split('.')[0];
         const methodName = requestMap.method.split('.')[1];
         Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
-
         if (moduleName === 'fcsSetter') {
           const method = fcsSetter[methodName];
           if (method && typeof method === 'function') {
@@ -272,6 +271,7 @@ export default function (module) {
             resolve(setterNotImplemented(`Method ${requestMap.method} not implemented`));
           }
         } else {
+          console.log('Inside else');
           // Default logic for other methods
           const message = await config.getRequestOverride(requestMap);
 
