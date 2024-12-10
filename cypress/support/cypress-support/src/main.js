@@ -19,6 +19,7 @@ import Config from './config';
 import Validation from './validation';
 import TransportLayer from './transport';
 import Queue from './queue';
+import fcsSetter from '../src/fcsSetter';
 const { v4: uuidv4 } = require('uuid');
 const CONSTANTS = require('../../constants/constants');
 const defaultDirectory = CONSTANTS.DEFAULT_DIRECTORY;
@@ -253,14 +254,35 @@ export default function (module) {
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
     cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
       return new Promise(async (resolve) => {
-        const message = await config.getRequestOverride(requestMap);
-        // perform MTC call/FB call only if the message is not null
-        if (message != null) {
-          const response = await transport.sendMessage(message);
-          const result = config.getResponseOverride(response);
-          resolve(result);
+        console.log('Request Map:::' + JSON.stringify(requestMap));
+        const moduleName = requestMap.method.split('.')[0];
+        const methodName = requestMap.method.split('.')[1];
+        Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
+
+        if (moduleName === 'fcsSetter') {
+          const method = fcsSetter[methodName];
+          if (method && typeof method === 'function') {
+            try {
+              const response = await method(requestMap.params);
+              resolve(response);
+            } catch (error) {
+              resolve(setterFailure(`Error while invoking ${requestMap.method} method`));
+            }
+          } else {
+            resolve(setterNotImplemented(`Method ${requestMap.method} not implemented`));
+          }
         } else {
-          resolve(null);
+          // Default logic for other methods
+          const message = await config.getRequestOverride(requestMap);
+
+          // Perform MTC/FB call only if the message is not null
+          if (message != null) {
+            const response = await transport.sendMessage(message);
+            const result = config.getResponseOverride(response);
+            resolve(result);
+          } else {
+            resolve(null);
+          }
         }
       });
     });
