@@ -19,6 +19,7 @@ import Config from './config';
 import Validation from './validation';
 import TransportLayer from './transport';
 import Queue from './queue';
+import fcsSetter from '../src/fcsSetter';
 const { v4: uuidv4 } = require('uuid');
 const CONSTANTS = require('../../constants/constants');
 const defaultDirectory = CONSTANTS.DEFAULT_DIRECTORY;
@@ -26,7 +27,6 @@ const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 const UTILS = require('./utils');
 const path = require('path');
 const logger = require('../../Logger')('main.js');
-const fcsSetter = require('../src/fcsSetter');
 const setimmediate = require('setimmediate');
 let appTransport;
 const flatted = require('flatted');
@@ -257,28 +257,20 @@ export default function (module) {
         console.log('Request Map:::' + JSON.stringify(requestMap));
         const moduleName = requestMap.method.split('.')[0];
         const methodName = requestMap.method.split('.')[1];
-        console.log('Module Name:', moduleName);
-        console.log('RequestMap ::' + JSON.stringify(methodName));
         Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
-        console.log(
-          'Env variable' + JSON.stringify(Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD))
-        );
 
         if (moduleName === 'fcsSetter') {
-          // Check if the specific method exists in fcsSetter
           const method = fcsSetter[methodName];
-          if (method) {
-            console.log('Inside If');
+          if (method && typeof method === 'function') {
             try {
               const response = await method(requestMap.params);
               resolve(response);
             } catch (error) {
-              resolve(setterFailure('Error while invoking fcsSetter method', error));
+              resolve(setterFailure(`Error while invoking ${requestMap.method} method`));
             }
           } else {
             resolve(setterNotImplemented(`Method ${requestMap.method} not implemented`));
           }
-          // return;
         } else {
           // Default logic for other methods
           const message = await config.getRequestOverride(requestMap);
