@@ -392,7 +392,7 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
   } else if (Cypress.env('app_metadata') && Cypress.env('app_metadata').defaultKeyPressSequence) {
     KeyPressSequence = Cypress.env('app_metadata').defaultKeyPressSequence;
   } else {
-    throw new Error('No KeyPressSequence ');
+    throw new Error(`Expected KeyPressSequence was not found for ${appId} in app_metadata.json`);
   }
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.DISMISS,
@@ -422,7 +422,9 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
     params: appId,
   };
-  fireLog.info(`Sending request to fetch ${appId} app state: ${JSON.stringify(requestMapForGetAppState)}`);
+  fireLog.info(
+    `Sending request to fetch ${appId} app state: ${JSON.stringify(requestMapForGetAppState)}`
+  );
   cy.sendMessagetoPlatforms(requestMapForGetAppState)
     .then((response) => {
       const responseString = JSON.stringify(response);
@@ -440,13 +442,7 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
       const requestMapForScreenShotValidation = {
         method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
         params: {
-          validations: [
-            {
-              type: 'image',
-              label: 'home',
-              confidence: 50,
-            },
-          ],
+          validations: Cypress.env(CONSTANTS.RUNTIME).fireboltCall.screenshot.validations,
         },
       };
       fireLog.info(
@@ -474,16 +470,16 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
       }
       const contentObject = {
         logs: logs,
-        content: {
-          type: {
-            methods: {
-              'lifecycle.close': [],
-            },
-          },
-          description: 'Validating of all methods interaction logs',
-        },
+        content: [
+          Cypress.env(CONSTANTS.RUNTIME).fireboltCall.fireboltInteraction.content.data[0]
+            .validations[0],
+        ],
       };
+
       console.log('contentObject', contentObject);
-      cy.customValidation(fireboltData.content.data[0], contentObject);
+      cy.customValidation(
+        Cypress.env(CONSTANTS.RUNTIME).fireboltCall.fireboltInteraction,
+        contentObject
+      );
     });
 });
