@@ -1,4 +1,3 @@
-
 const setEnabled = async (params) => {
   console.log('Inside set closed caption for FCS setter');
   const { attribute, value } = params;
