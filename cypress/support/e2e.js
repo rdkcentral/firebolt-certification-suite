@@ -17,6 +17,7 @@
  */
 
 // Importing generic module
+import './cypress-support/src/globalSetter';
 import * as genericModule from './cypress-support/src/main';
 import * as configModule from 'configModule';
 import addContext from 'mochawesome/addContext';
