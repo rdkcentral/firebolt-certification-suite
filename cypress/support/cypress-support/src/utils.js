@@ -880,7 +880,7 @@ class FireLog extends Function {
   info(message) {}
 
   error(message) {
-      throw new Error(message);
+    throw new Error(message);
   }
 }
 

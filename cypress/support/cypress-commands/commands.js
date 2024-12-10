@@ -1622,7 +1622,6 @@ Cypress.Commands.add('exitAppSession', (exitType, appId) => {
     default:
       fireLog.info('Session for appId: ' + appId + ' will not be ended due to invalid exitType');
       fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
-
   }
   fireLog.info('Session for appId: ' + appId + ' will be ended with type: ' + exitType);
   const requestMap = {

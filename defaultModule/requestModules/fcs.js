@@ -123,7 +123,6 @@ function fetchEventResponse(parsedParam) {
  */
 function triggerEvent(key) {
   fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
-
 }
 
 /**
