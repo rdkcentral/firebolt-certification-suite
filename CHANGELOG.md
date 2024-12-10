@@ -1,3 +1,10 @@
+# [1.5.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.6...v1.5.0-dev.7) (2024-12-10)
+
+
+### Features
+
+* Update App Exit Handling ([#266](https://github.com/rdkcentral/firebolt-certification-suite/issues/266)) ([d4a96b7](https://github.com/rdkcentral/firebolt-certification-suite/commit/d4a96b709179688943de3968b4da19026af7060b))
+
 # [1.5.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.5...v1.5.0-dev.6) (2024-12-09)
 
 
