@@ -1,3 +1,2 @@
-const firebolt = {
-};
+const firebolt = {};
 module.exports = { firebolt };
