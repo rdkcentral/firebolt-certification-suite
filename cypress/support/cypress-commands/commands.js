@@ -908,17 +908,10 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
     let intentTemplate;
     const intentTemplates = UTILS.getEnvVariable(CONSTANTS.INTENT_TEMPLATES, false);
     if (intentTemplates && intentTemplates[appType]) {
-      // Check if intentTemplate exists for non-native appType
-      if (appType !== 'native' && intentTemplates[appType][intent]) {
-        intentTemplate = intentTemplates[appType][intent];
-      }
-      // Check if intentTemplate exists for native appType
-      else if (
-        appType === 'native' &&
-        intentTemplates[appType][appId] &&
-        intentTemplates[appType][appId][intent]
-      ) {
+      if (intentTemplates[appType][appId] && intentTemplates[appType][appId][intent]) {
         intentTemplate = intentTemplates[appType][appId][intent];
+      } else if (intentTemplates[appType][intent]) {
+        intentTemplate = intentTemplates[appType][intent];
       }
       // Log failure if intentTemplate is not found
       else {

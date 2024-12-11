@@ -111,7 +111,7 @@ Given('the environment has been set up for {string} tests', (test) => {
   }
 
   if (
-    test === 'Deeplink' &&
+    Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(test) &&
     !Cypress.env(CONSTANTS.INTENT_TEMPLATES) &&
     !Cypress.env(CONSTANTS.APP_METADATA)
   ) {

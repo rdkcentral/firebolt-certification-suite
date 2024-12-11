@@ -158,6 +158,7 @@ module.exports = {
   EXTERNAL_APPMETADATA_DIRECTORY: 'cypress/fixtures/external/objects/appData/',
   EXTERNAL_ERROR_CONTENT_OBJECTS_PATH: 'cypress/fixtures/external/objects/errorContentObjects.json',
   EXTERNAL_DEVICES_PATH: 'cypress/fixtures/external/devices/',
+  EXTERNAL_MODULE_TESTTYPES: 'externalModuleTestTypes',
   EXTERNAL_MODULEREQID_PATH: 'cypress/fixtures/external/objects/moduleReqId/moduleReqId.json',
   EXTERNAL_PATH: 'cypress/fixtures/external/modules/',
   EXTERNAL_PREREQUISITE_DATA: './cypress/fixtures/external/PreRequisiteData.json',
