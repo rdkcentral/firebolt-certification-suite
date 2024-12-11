@@ -897,7 +897,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
   if (intent) {
     // Clearing the intent from the runtime environment variable
     Cypress.env(CONSTANTS.RUNTIME).intent = {};
-    const appMetadata = UTILS.getEnvVariable('app_metadata');
+    const appMetadata = UTILS.getEnvVariable(CONSTANTS.APP_METADATA, false);
 
     // If the intent is present in the appMetadata, set the intent in the runtime environment variable
     if (appMetadata[appId] && appMetadata[appId][intent]) {
@@ -906,7 +906,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
 
     // Check if intentTemplates are defined for the given appType
     let intentTemplate;
-    const intentTemplates = Cypress.env('intentTemplates');
+    const intentTemplates = UTILS.getEnvVariable(CONSTANTS.INTENT_TEMPLATES, false);
     if (intentTemplates && intentTemplates[appType]) {
       // Check if intentTemplate exists for non-native appType
       if (appType !== 'native' && intentTemplates[appType][intent]) {
@@ -1679,17 +1679,15 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
  */
 Cypress.Commands.add('fetchAppMetaData', () => {
   // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
-  const fcsAppMetaDataPath = 'cypress/fixtures/objects/appData/app_metadata.json';
-  const fcsAppMetaDataDir = 'cypress/fixtures/objects/appData/';
+  const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
+  const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
 
-  const configModuleAppMetaDataPath = 'cypress/fixtures/external/objects/appData/app_metadata.json';
-  const configModuleAppMetaDataDir = 'cypress/fixtures/external/objects/appData/';
+  const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
+  const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
-  cy.extractAppMetadata(fcsAppMetaDataDir, fcsAppMetaDataPath).then((fcsAppMetaData) => {
-    console.log('fcsAppMetaData', fcsAppMetaData)
-    cy.extractAppMetadata(configModuleAppMetaDataDir, configModuleAppMetaDataPath).then(
+  cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then((fcsAppMetaData) => {
+    cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
       (configModuleAppMetaData) => {
-        console.log('configModuleAppMetaData', configModuleAppMetaData)
         // Combine the app metadata from the fcs and configModule appData directories.
         _.merge(fcsAppMetaData, configModuleAppMetaData);
       }
@@ -1705,16 +1703,16 @@ Cypress.Commands.add('fetchAppMetaData', () => {
  * cy.extractAppMetadata('cypress/fixtures/objects/appData/', 'cypress/fixtures/objects/appData/app_metadata.json')
  */
 Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
-  cy.task('readFileIfExists', appMetaDataFile).then((appMetaData) => {
+  cy.task(CONSTANTS.READFILEIFEXISTS, appMetaDataFile).then((appMetaData) => {
     let mergedData = appMetaData ? _.cloneDeep(appMetaData) : {};
-    mergedData = typeof mergedData === 'string' ? JSON.parse(mergedData) : mergedData;
-    cy.task('readFilesFromDir', appDataDir).then((files) => {
+    mergedData = typeof mergedData === CONSTANTS.TYPE_STRING ? JSON.parse(mergedData) : mergedData;
+    cy.task(CONSTANTS.READ_FILES_FROM_DIRECTORY, appDataDir).then((files) => {
       files = files ? files : [];
       files = files.filter((file) => file !== 'app_metadata.json' && file.endsWith('.json'));
       files.forEach((file) => {
         const filePath = path.join(appDataDir, file);
         const appId = file.split('.')[0];
-        cy.task('readFileIfExists', filePath)
+        cy.task(CONSTANTS.READFILEIFEXISTS, filePath)
           .then((fileData) => {
             fileData = JSON.parse(fileData);
             if (fileData) {
@@ -1728,8 +1726,8 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
           .then(() => {
             return mergedData;
           });
-      })
-      return mergedData
+      });
+      return mergedData;
     });
   });
 });

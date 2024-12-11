@@ -56,7 +56,6 @@ function genericSupport(config) {
   };
   // To read device data JSON
   preprocessDeviceData(config);
-
   const testDataEnv = testDataProcessor.testDataProcessor(config.env);
   Object.assign(config.env, testDataEnv);
 

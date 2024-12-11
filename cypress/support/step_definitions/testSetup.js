@@ -110,12 +110,16 @@ Given('the environment has been set up for {string} tests', (test) => {
     }
   }
 
-  if (test === 'Deeplink' && !Cypress.env('intentTemplates') && !Cypress.env('app_metadata')) {
+  if (
+    test === 'Deeplink' &&
+    !Cypress.env(CONSTANTS.INTENT_TEMPLATES) &&
+    !Cypress.env(CONSTANTS.APP_METADATA)
+  ) {
     cy.fetchAppMetaData().then((appMetaData) => {
-      Cypress.env('app_metadata', appMetaData);
+      Cypress.env(CONSTANTS.APP_METADATA, appMetaData);
     });
     const combinedIntentTemplates = _.merge(internalIntentTemplates, externalIntentTemplates);
-    Cypress.env('intentTemplates', combinedIntentTemplates);
+    Cypress.env(CONSTANTS.INTENT_TEMPLATES, combinedIntentTemplates);
   }
   // Calling the envConfigSetup command to setup the environment for the test from the config module.
   cy.envConfigSetup();
