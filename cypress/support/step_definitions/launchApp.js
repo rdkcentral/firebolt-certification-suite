@@ -30,7 +30,7 @@ import UTILS from '../cypress-support/src/utils';
  * And 3rd party 'firebolt' app is launched with 'foo' appId
  * And 3rd party 'certification' app is launched with 'foo' appId with 'foreground' state
  * And 3rd party 'certification' app is launched with 'foreground' state
- * And 3rd party 'certification' app is launched with intent 'NullIntent'
+ * And 3rd party 'certification' app is launched with 'NullIntent' intent
  * And 3rd party 'certification' app is launched with 'foo' appId with 'foreground' state with 'NullIntent' intent
  */
 Given(
