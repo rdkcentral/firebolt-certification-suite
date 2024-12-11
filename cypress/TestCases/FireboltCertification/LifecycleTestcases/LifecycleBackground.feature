@@ -13,16 +13,7 @@ Feature: Lifecycle_Background
         Examples:
             | state      |
             | foreground |
-
-    @notSupported
-    Scenario Outline: Lifecycle R*3.4 Background an app from <state>
-        Given the environment has been set up for 'lifecycle' tests
-        And 3rd party 'certification' app is launched with '<state>' state
-        When '3rd party app' transitions to state 'background'
-        Then '3rd party app' will be in 'background' state
-        Examples:
-            | state    |
-            | inactive |
+            | inactive   |
 
     @needsFurtherInformation @notSupported @lifecycleManagement @requiresPlatformImplementation
     Scenario: Lifecycle R.3.4.4 Cannot Background app that is not loaded
