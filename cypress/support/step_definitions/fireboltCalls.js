@@ -394,15 +394,7 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
   } else {
     throw new Error(`Expected KeyPressSequence was not found for ${appId} in app_metadata.json`);
   }
-  const requestMap = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.DISMISS,
-    params: KeyPressSequence.dismiss,
-  };
-
-  fireLog.info(
-    `Request sent to platform to dismiss the ${appId} app: ${JSON.stringify(requestMap)}`
-  );
-  cy.sendMessagetoPlatforms(requestMap).then((response) => {
+  cy.exitAppSession('dismissApp', KeyPressSequence.dismiss).then((response) => {
     fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
   });
 });
@@ -468,17 +460,18 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
           `No interaction logs found for the scenario - ${Cypress.env(CONSTANTS.SCENARIO_NAME)}`
         );
       }
+      const app_type = Cypress.env(CONSTANTS.APP_TYPE);
       const contentObject = {
         logs: logs,
         content: [
-          Cypress.env(CONSTANTS.RUNTIME).fireboltCall.fireboltInteraction.content.data[0]
+          Cypress.env(CONSTANTS.RUNTIME).fireboltCall[app_type].fireboltInteraction.content.data[0]
             .validations[0],
         ],
       };
 
       console.log('contentObject', contentObject);
       cy.customValidation(
-        Cypress.env(CONSTANTS.RUNTIME).fireboltCall.fireboltInteraction,
+        Cypress.env(CONSTANTS.RUNTIME).fireboltCall[app_type].fireboltInteraction,
         contentObject
       );
     });
