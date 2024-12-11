@@ -1,3 +1,17 @@
+# [1.5.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.6...v1.5.0-dev.7) (2024-12-10)
+
+
+### Features
+
+* Update App Exit Handling ([#266](https://github.com/rdkcentral/firebolt-certification-suite/issues/266)) ([d4a96b7](https://github.com/rdkcentral/firebolt-certification-suite/commit/d4a96b709179688943de3968b4da19026af7060b))
+
+# [1.5.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.5...v1.5.0-dev.6) (2024-12-09)
+
+
+### Bug Fixes
+
+* Trimming the new line in logs ([#285](https://github.com/rdkcentral/firebolt-certification-suite/issues/285)) ([36f7b2f](https://github.com/rdkcentral/firebolt-certification-suite/commit/36f7b2f9fe2950c5d7da0c51a8ee8d70385843b4))
+
 # [1.5.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.4...v1.5.0-dev.5) (2024-12-06)
 
 
