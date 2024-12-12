@@ -85,9 +85,7 @@ function setTestProvider(parsedData) {
 }
 
 function setLifecycleState(parsedData) {
-  cy.log(CONSTANTS.SET_LIFECYCLE_STATE_MISSING).then(() => {
-    throw new Error(CONSTANTS.SET_LIFECYCLE_STATE_MISSING);
-  });
+  fireLog.error(CONSTANTS.SET_LIFECYCLE_STATE_MISSING);
 }
 
 /**
@@ -124,22 +122,96 @@ function fetchEventResponse(parsedParam) {
     }}})
  */
 function triggerEvent(key) {
-  fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
-    throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
-  });
+  fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
 }
 
 /**
  * @module fcs
  * @function unloadApp
- * @description UnloadApp
- * @param {String} appId - appId which is to be unloaded
- * unloadApp()
+ * @description unloadApp
+ * @param {Object} request - request body containing method and appId which is to be closed
+ * unloadApp("method": "fcs.unloadApp","params": "test.test.test")
  **/
-function unloadApp(appId) {
-  fireLog.info(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING).then(() => {
-    throw new Error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
-  });
+function unloadApp(request) {
+  // Generic error message due to missing implementation.
+  const appId = request.params;
+  fireLog.info(
+    'App unload requires platform implementation. AppId: ' + appId + ' was not able to be unloaded.'
+  );
+  fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
+}
+
+/**
+ * @module fcs
+ * @function dismissApp
+ * @description dismissApp
+ * @param {Object} request - request body containing method and appId which is to be closed
+ * dismissApp("method": "fcs.dismissApp","params": "test.test.test")
+ **/
+function dismissApp(request) {
+  // Generic error message due to missing implementation.
+  const appId = request.params;
+  fireLog.info(
+    'App dismiss requires platform implementation. AppId: ' +
+      appId +
+      ' was not able to be dismissed.'
+  );
+  fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
+}
+
+/**
+ * @module fcs
+ * @function closeApp
+ * @description closeApp
+ * @param {Object} request - request body containing method and appId which is to be closed
+ * closeApp("method": "fcs.closeApp","params": "test.test.test")
+ **/
+function closeApp(request) {
+  // Base implementation to invoke lifecycle.close when communicating with the app via PUBSUB
+  const appId = request.params;
+  const requestTopic = UTILS.getTopic(appId);
+  const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+
+  const communicationMode = UTILS.getCommunicationMode();
+  additionalParams = {
+    communicationMode: communicationMode,
+    action: 'Lifecycle.validation',
+  };
+  const params = {
+    mode: 'Lifecycle.validation',
+    methodName: 'Lifecycle.close',
+    methodParams: { reason: CONSTANTS.USER_EXIT_REASON },
+  };
+  const intentMessage = UTILS.createIntentMessage(CONSTANTS.TASK.RUNTEST, params, additionalParams);
+  fireLog.info(
+    'Sending lifecycle close method to close app, method: ' +
+      params.methodName +
+      ' params: ' +
+      JSON.stringify(params.methodParams)
+  );
+  try {
+    cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
+      let result;
+      try {
+        response = JSON.parse(response);
+        result = response.report.result;
+        fireLog.info(
+          'Received response from app to acknowledge close request. Response: ' +
+            JSON.stringify(response)
+        );
+      } catch {
+        result = response;
+      }
+      if (result === CONSTANTS.NO_RESPONSE || result === null) {
+        fireLog.info('App closed successfully');
+      } else {
+        fireLog.info(false, 'App may have failed to close.');
+      }
+      cy.wait(5000);
+    });
+  } catch (error) {
+    fireLog.info('Failed to close the 3rd party app: ', error);
+  }
 }
 
 module.exports = {
@@ -149,4 +221,6 @@ module.exports = {
   fetchEventResponse,
   triggerEvent,
   unloadApp,
+  dismissApp,
+  closeApp,
 };

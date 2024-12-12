@@ -21,13 +21,37 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
 
 /**
  * @module TestSetupGlue
- * @function the environment has been set up for {string} tests
- * @description Setup the environment for the test in question.
- * @param {String} test - log message
+ * @function Given the environment has been set up for {string} tests
+ * @description Sets up the environment for the specified test.
+ * @param {String} test - The name of the test.
  * @example
  * Given the environment has been set up for 'Firebolt Sanity' tests
  */
 Given('the environment has been set up for {string} tests', (test) => {
+  const runtime = {};
+
+  // Check if the test parameter is provided
+  if (test) {
+    let fireboltCallKey;
+    // Check if the test parameter contains a colon to split into module and method
+    if (test.includes(':')) {
+      const [module, method] = test.split(':');
+      fireboltCallKey = module.toUpperCase();
+      Object.assign(runtime, { method, module });
+    } else {
+      // Replace spaces with underscores and convert to uppercase for the fireboltCallKey
+      fireboltCallKey = test.replace(/\s+/g, '_').toUpperCase();
+    }
+    // Retrieve the firebolt object from environment variables using the fireboltCallKey
+    const fireboltObject = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[fireboltCallKey];
+    if (fireboltObject) {
+      // Update the runtime environment variable with the firebolt object
+      runtime.fireboltCall = fireboltObject;
+      Cypress.env(CONSTANTS.RUNTIME, runtime);
+      fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
+    }
+  }
+
   if (
     UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
       JSON.stringify(window.testState.gherkinDocument.feature.name)
@@ -38,6 +62,7 @@ Given('the environment has been set up for {string} tests', (test) => {
   if (
     !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
     UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
+    UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
     UTILS.isTestTypeChanged(test)
   ) {
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
@@ -107,80 +132,32 @@ Given('the environment has been set up for {string} tests', (test) => {
  * destroyAppInstance('Parameters')
  */
 function destroyAppInstance(testType) {
-  const isAllowedTestType = UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(
+  // Checking if the current test type is present in unloadAppTestTypes and/or closeAppTestTypes
+  const isCloseTestType = UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(
     testType
   );
+  const isUnloadTestType = UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(
+    testType
+  );
+  const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
+
   // Checking if the previous test type is different from the current test type.
   const isDifferentFromPrevious =
     UTILS.getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != testType &&
     UTILS.getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != undefined;
-
-  if (isAllowedTestType || isDifferentFromPrevious) {
-    const requestTopic = UTILS.getTopic();
-    const responseTopic = UTILS.getTopic(null, CONSTANTS.SUBSCRIBE);
-
-    // The test type is present in the unloading app test list, taking the reason as 'error'. This will unload the app.
-    const closeReason = UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(testType)
-      ? CONSTANTS.ERROR
-      : CONSTANTS.USER_EXIT_REASON;
-
-    const communicationMode = UTILS.getCommunicationMode();
-    additionalParams = {
-      communicationMode: communicationMode,
-      action: 'Lifecycle.validation',
-    };
-    const params = {
-      mode: 'Lifecycle.validation',
-      methodName: 'Lifecycle.close',
-      methodParams: { reason: closeReason },
-    };
-    const intentMessage = UTILS.createIntentMessage(
-      CONSTANTS.TASK.RUNTEST,
-      params,
-      additionalParams
+  // If the current test type is present inside the closeAppTestTypes array then close the app.
+  // If the multiple test types are executed in one command then close the app between them
+  if (isCloseTestType || isDifferentFromPrevious) {
+    fireLog.info(
+      'Closing app since either Test Type is specified in closeAppTestTypes or is different from previous Test Type.'
     );
-    cy.log(
-      'Sending lifecycle close intent to unload app, method: ' +
-        params.methodName +
-        ' params: ' +
-        JSON.stringify(params.methodParams)
-    );
+    cy.exitAppSession('closeApp', appId);
+  }
 
-    try {
-      cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
-        let result;
-        try {
-          response = JSON.parse(response);
-          result = response.report.result;
-          fireLog.info(
-            'Received response from app to acknowledge close request. Response: ' +
-              JSON.stringify(response)
-          );
-        } catch {
-          result = response;
-        }
-        if (result === CONSTANTS.NO_RESPONSE || result === null) {
-          fireLog.info('App unloaded', 'destroyAppInstance');
-        } else {
-          fireLog.info(
-            false,
-            'App may have failed to unload. Response: ' + JSON.stringify(response)
-          );
-          fireLog.info('Falling back to platform implementation of force unload.');
-          const requestMap = {
-            method: CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP,
-            params: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID),
-          };
-          cy.sendMessagetoPlatforms(requestMap).then(() => {
-            // Config modules needs override for validation of app unload
-            fireLog.info('Platforms unload app execution complete');
-          });
-        }
-        cy.wait(5000);
-      });
-    } catch (error) {
-      fireLog.info('Failed to close the 3rd party app: ', error);
-    }
+  // If the current test type is present inside the unloadAppTestTypes array then unload the app.
+  if (isUnloadTestType) {
+    fireLog.info('Unloading app since Test Type is specified in unloadAppTestTypes.');
+    cy.exitAppSession('unloadApp', appId);
   }
 }
 
