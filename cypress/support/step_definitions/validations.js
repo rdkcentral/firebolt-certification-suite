@@ -42,6 +42,22 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
 Given(
   /'(.+)' platform (responds|triggers|does not trigger)(?: to '(.+)')? (with|for|event)(?: for)? '(.+)'$/,
   async (sdk, eventExpected, appId, event, key) => {
+
+    // Merge fireboltCalls
+    const internalV2FireboltCallsData = require('../../fixtures/fireboltCalls/index');
+    const externalV2FireboltCallsData = require('../../fixtures/external/fireboltCalls/index');
+    const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
+    const v2FireboltCallsData = _.merge(
+      {},
+      internalV2FireboltCallsData,
+      externalV2FireboltCallsData
+    );
+    cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
+      (mergedFireboltCalls) => {
+        Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
+      }
+    );
+
     if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
       key = key.replaceAll(' ', '_').toUpperCase();
 
