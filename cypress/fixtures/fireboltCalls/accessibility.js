@@ -33,6 +33,11 @@ exports.ACCESSIBILITY_VOICEGUIDANCE_SETTINGS = {
   method: 'accessibility.voiceGuidanceSettings',
   params: null,
   validationJsonPath: resolveAtRuntime(['result.{{attribute}}']),
+  setMethod: 'fcsSetters.setVoiceGuidance',
+  setParams: {
+    attribute: resolveAtRuntime('attribute'),
+    value: resolveAtRuntime('value')
+  },
   setMethod: resolveAtRuntime('manage_voiceguidance.set{{attribute.uppercaseFirstChar}}'),
   setParams: resolveAtRuntime('value'),
   setValidationJsonPath: 'result',
