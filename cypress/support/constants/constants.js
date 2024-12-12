@@ -469,6 +469,7 @@ module.exports = {
   VALIDATIONJSONPATH: 'validationJsonPath',
   VARIABLES_PREFIX_LIST: 'variableObjectsPrefixLists',
   VERSION: 'version',
+  VISIBLE: 'VISIBLE',
   WRITE_FAILED: 'Unable to write report json to file',
   WRITE_TO_FILE: 'writeToFile',
   CENSOR_DATA_PATH: 'censorData.json',

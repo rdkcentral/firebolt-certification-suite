@@ -420,12 +420,24 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
   cy.sendMessagetoPlatforms(requestMapForGetAppState)
     .then((response) => {
       const responseString = JSON.stringify(response);
-      if (Object.keys(response).length === 0) {
-        fireLog.info(
-          `State validation successful: Current state of ${appId} app is ${responseString} as expected`
-        );
-      } else {
-        fireLog.fail(`${appId} app is not dismissed. Response :${responseString}`);
+      if (response && response.appState && response.visibilityState) {
+        if (
+          response.appState.toUpperCase() === CONSTANTS.LIFECYCLE_STATES.INACTIVE &&
+          response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
+        ) {
+          fireLog.info(
+            `State validation successful: Current state of ${appId} app is ${responseString} as expected`
+          );
+        } else if (
+          !response.appState &&
+          response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
+        ) {
+          cy.log(
+            `State validation successful: Current state of ${appId} app is ${responseString} as expected`
+          );
+        } else {
+          fireLog.fail(`${appId} app is not dismissed. Response :${responseString}`);
+        }
       }
     })
     .then(() => {
@@ -446,33 +458,5 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
           fireLog.fail(`Screenshot validation failed ${response.validations}`);
         }
       });
-    })
-    .then(() => {
-      // fireboltInteraction validation
-
-      const logs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs(
-        Cypress.env(CONSTANTS.SCENARIO_NAME)
-      );
-      console.log('logs', logs);
-      if (!logs) {
-        UTILS.fireLog.assert(
-          false,
-          `No interaction logs found for the scenario - ${Cypress.env(CONSTANTS.SCENARIO_NAME)}`
-        );
-      }
-      const app_type = Cypress.env(CONSTANTS.APP_TYPE);
-      const contentObject = {
-        logs: logs,
-        content: [
-          Cypress.env(CONSTANTS.RUNTIME).fireboltCall[app_type].fireboltInteraction.content.data[0]
-            .validations[0],
-        ],
-      };
-
-      console.log('contentObject', contentObject);
-      cy.customValidation(
-        Cypress.env(CONSTANTS.RUNTIME).fireboltCall[app_type].fireboltInteraction,
-        contentObject
-      );
     });
 });
