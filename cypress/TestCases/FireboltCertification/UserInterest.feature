@@ -6,7 +6,7 @@ Feature: UserInterest
         And 3rd party 'certification' app is launched
 
     @sdk @transport @Sev1
-    Scenario Outline: Discovery.userInterest - Validate API Method content with <Scenario>
+    Scenario Outline: Discovery.userInterest - Validate event response with <Scenario>
         When 1st party app registers for the 'Content onUserInterest' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'notify userInterest with <userInterestData>'
         Then 'Firebolt' platform responds with 'null for discovery userInterest'
@@ -18,7 +18,7 @@ Feature: UserInterest
             | disinterest & reason playlist with program entity | type disinterest and reason playlist with program entity | type disinterest reason playlist |
             
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.userInterest - Validate API Method content with <Scenario>
+    Scenario Outline: Discovery.userInterest - Validate event response content with <Scenario>
         When 1st party app registers for the 'Content onUserInterest' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'notify userInterest with <userInterestData>'
         Then 'Firebolt' platform responds with 'null for discovery userInterest'
