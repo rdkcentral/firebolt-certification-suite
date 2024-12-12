@@ -256,6 +256,7 @@ export default function (module) {
       return new Promise(async (resolve) => {
         const [moduleName, methodName] = requestMap.method.split('.');
         Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
+        // Check if request is for fcs setters
         if (moduleName === 'fcsSetter') {
           const method = fcsSetter[methodName];
           if (method && typeof method === 'function') {
