@@ -1,4 +1,4 @@
-const setClosedCaptions = async (params) => {
+const setClosedCaptions = async (attribute, value) => {
   console.log('FCS Setters');
 };
 
