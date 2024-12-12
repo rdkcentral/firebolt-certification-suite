@@ -6,7 +6,7 @@ Feature: Metrics
         And 3rd party 'certification' app is launched
 
     @sdk @transport @Sev1
-    Scenario Outline: Metrics.<Method> - Validating API Method response
+    Scenario Outline: Metrics.<Method> - Validating API Method success
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_key>'
 
