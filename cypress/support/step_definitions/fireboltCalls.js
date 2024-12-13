@@ -399,9 +399,9 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
     KeyPressSequence = Cypress.env('app_metadata').defaultKeyPressSequence;
   } else {
     // If no keyPressSequence is found, throw an error with details from the app_metadata file
-    const configModuleConst = require('../../fixtures/objects/appData/app_metadata.json');
+    const appMetadataJSON = require('../../fixtures/objects/appData/app_metadata.json');
     throw new Error(
-      `Expected KeyPressSequence was not found for ${appId} in app_metadata.json. More details on app_metadata present in: ${configModuleConst}`
+      `Expected KeyPressSequence was not found for ${appId} in app_metadata.json. More details on app_metadata present in: ${appMetadataJSON}`
     );
   }
   cy.exitAppSession('dismissApp', KeyPressSequence.dismiss).then((response) => {
