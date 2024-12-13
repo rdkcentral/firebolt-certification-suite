@@ -449,7 +449,7 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
         response.visibilityState &&
         response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
       ) {
-        cy.log(
+        fireLog.info(
           `State validation successful: Current state of ${appId} app is ${responseString} as expected`
         );
       } else {
