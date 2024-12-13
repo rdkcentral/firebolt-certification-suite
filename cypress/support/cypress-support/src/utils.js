@@ -1001,15 +1001,16 @@ global.resolveAtRuntime = function (input) {
           [pattern, functionName] = pattern.split('.');
         }
 
+        let value;
         // If the input contains '->', Consdering it as an object path and extracting the value from the object
         if (pattern.includes('->')) {
-          return extractValueFromObjectPath(pattern);
+          value = extractValueFromObjectPath(pattern);
         } else {
-          // If a function name is present in the pattern, call the function with pattern content as input.
           // Reading the pattern content from the runtime environment variable
-          const value = runtimeEnv[pattern] !== undefined ? runtimeEnv[pattern] : match;
-          return functionName && functions[functionName] ? functions[functionName](value) : value;
+          value = runtimeEnv[pattern] !== undefined ? runtimeEnv[pattern] : match;
         }
+        // If a function name is present in the pattern, call the function with pattern content as input.
+        return functionName && functions[functionName] ? functions[functionName](value) : value;
       });
     }
 
