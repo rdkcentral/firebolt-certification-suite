@@ -378,21 +378,31 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
   const appId = Cypress.env(CONSTANTS.RUNTIME).appId;
   let KeyPressSequence;
   if (
+    // Check if keyPressSequence is defined in the runtime environment variables for the specific intent
     Cypress.env(CONSTANTS.RUNTIME) &&
     Cypress.env(CONSTANTS.RUNTIME).intent &&
     Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence
   ) {
     KeyPressSequence = Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence;
   } else if (
+    // Check if defaultKeyPressSequence is defined for the specific appId in app_metadata
     Cypress.env('app_metadata') &&
     Cypress.env('app_metadata')[appId] &&
     Cypress.env('app_metadata')[appId].defaultKeyPressSequence
   ) {
     KeyPressSequence = Cypress.env('app_metadata')[appId].defaultKeyPressSequence;
-  } else if (Cypress.env('app_metadata') && Cypress.env('app_metadata').defaultKeyPressSequence) {
+  } else if (
+    // Check if defaultKeyPressSequence is defined in the app_metadata globally
+    Cypress.env('app_metadata') &&
+    Cypress.env('app_metadata').defaultKeyPressSequence
+  ) {
     KeyPressSequence = Cypress.env('app_metadata').defaultKeyPressSequence;
   } else {
-    throw new Error(`Expected KeyPressSequence was not found for ${appId} in app_metadata.json`);
+    // If no keyPressSequence is found, throw an error with details from the app_metadata file
+    const configModuleConst = require('../../fixtures/objects/appData/app_metadata.json');
+    throw new Error(
+      `Expected KeyPressSequence was not found for ${appId} in app_metadata.json. More details on app_metadata present in: ${configModuleConst}`
+    );
   }
   cy.exitAppSession('dismissApp', KeyPressSequence.dismiss).then((response) => {
     fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
@@ -420,24 +430,31 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
   cy.sendMessagetoPlatforms(requestMapForGetAppState)
     .then((response) => {
       const responseString = JSON.stringify(response);
-      if (response && response.appState && response.visibilityState) {
-        if (
-          response.appState.toUpperCase() === CONSTANTS.LIFECYCLE_STATES.INACTIVE &&
-          response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
-        ) {
-          fireLog.info(
-            `State validation successful: Current state of ${appId} app is ${responseString} as expected`
-          );
-        } else if (
-          !response.appState &&
-          response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
-        ) {
-          cy.log(
-            `State validation successful: Current state of ${appId} app is ${responseString} as expected`
-          );
-        } else {
-          fireLog.fail(`${appId} app is not dismissed. Response :${responseString}`);
-        }
+      if (
+        // Check if response exists and contains appState, visibilityState
+        // and if appState is INACTIVE and visibilityState is VISIBLE
+        response &&
+        response.appState &&
+        response.visibilityState &&
+        response.appState.toUpperCase() === CONSTANTS.LIFECYCLE_STATES.INACTIVE &&
+        response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
+      ) {
+        fireLog.info(
+          `State validation successful: Current state of ${appId} app is ${responseString} as expected`
+        );
+      } else if (
+        // Check if appState is missing, visibilityState exists, and visibilityState is VISIBLE
+        response &&
+        !response.appState &&
+        response.visibilityState &&
+        response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
+      ) {
+        cy.log(
+          `State validation successful: Current state of ${appId} app is ${responseString} as expected`
+        );
+      } else {
+        // Log failure message if none of the above conditions are met
+        fireLog.fail(`${appId} app is not dismissed. Response :${responseString}`);
       }
     })
     .then(() => {
