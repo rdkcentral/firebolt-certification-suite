@@ -878,6 +878,10 @@ class FireLog extends Function {
   }
 
   info(message) {}
+
+  error(message) {
+    throw new Error(message);
+  }
 }
 
 const fireLog = new FireLog();
@@ -1162,6 +1166,35 @@ class InteractionsLogs {
 const interactionLogs = new InteractionsLogs();
 Cypress.env(CONSTANTS.FB_INTERACTIONLOGS, interactionLogs);
 
+/**
+ * @module utils
+ * @function censorPubSubToken
+ * @description A Function to sensor the pubSubToken from the launch intent.
+ * @param {String} data - The intent to be parsed and censored.
+ * @example
+ * censorPubSubToken('{"method: "launch", "params": {"intent": {"data": {"query": '{"params": {"pubSubToken": "12456789, "pubSubUrl": "https://dummy.com"}'}}}}')
+ * @returns
+ * {"method: "launch", "params": {"intent": {"data": {"query": '{"params": {"pubSubToken": "12#####89", "pubSubUrl": "ht#####om"}'}}}})
+ */
+function censorPubSubToken(data) {
+  data = JSON.parse(data);
+  if (data?.params?.intent?.data?.query && typeof data.params.intent.data.query === 'string') {
+    const queryData = JSON.parse(data.params.intent.data.query);
+    if (queryData?.params?.pubSubUrl) {
+      const url = queryData.params.pubSubUrl;
+      const urlLength = url.length;
+      queryData.params.pubSubUrl = url.replace(url.substring(2, urlLength - 2), '########');
+    }
+    if (queryData?.params?.pubSubToken) {
+      const token = queryData.params.pubSubToken;
+      const tokenLength = token.length;
+      queryData.params.pubSubToken = token.replace(token.substring(2, tokenLength - 2), '########');
+    }
+    data.params.intent.data.query = JSON.stringify(queryData);
+  }
+  return JSON.stringify(data);
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -1192,4 +1225,5 @@ module.exports = {
   fireboltCallObjectHasField,
   fetchAppIdentifierFromEnv,
   skipCurrentTest,
+  censorPubSubToken,
 };

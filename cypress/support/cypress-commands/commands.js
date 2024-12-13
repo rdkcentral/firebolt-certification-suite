@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS, { getEnvVariable } from '../cypress-support/src/utils';
+import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 
@@ -997,7 +997,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
 
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
-    fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
+    fireLog.info(
+      'Discovery launch intent: ' + UTILS.censorPubSubToken(JSON.stringify(parsedIntent))
+    );
     cy.sendMessagetoPlatforms(parsedIntent).then((result) => {
       fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
 
@@ -1526,22 +1528,18 @@ Cypress.Commands.add(
  * @example
  * cy.getRuntimeFireboltCallObject(sdk);
  */
-Cypress.Commands.add('getRuntimeFireboltCallObject', (sdk) => {
-  if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
-    // Checking the `runtime` env variable created and it has 'fireboltCall' field, else failing the test.
-    if (
-      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false) &&
-      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).hasOwnProperty(CONSTANTS.FIREBOLTCALL) &&
-      UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).fireboltCall
-    ) {
-      return UTILS.getEnvVariable(CONSTANTS.RUNTIME).fireboltCall;
-    } else {
-      fireLog.fail(
-        'The runtime environment variable was not found. To initialize the firebolt object, add the step "we test the (.+) getters and setters" with firebolt object key.'
-      );
-    }
+Cypress.Commands.add('getRuntimeFireboltCallObject', () => {
+  // Checking the `runtime` env variable created and it has 'fireboltCall' field, else failing the test.
+  if (
+    UTILS.getEnvVariable(CONSTANTS.RUNTIME, false) &&
+    UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).hasOwnProperty(CONSTANTS.FIREBOLTCALL) &&
+    UTILS.getEnvVariable(CONSTANTS.RUNTIME, false).fireboltCall
+  ) {
+    return UTILS.getEnvVariable(CONSTANTS.RUNTIME).fireboltCall;
   } else {
-    fireLog.assert(false, `${sdk} SDK not Supported`);
+    fireLog.fail(
+      `The firebolt call object was not found in the runtime environment variable. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key. Refer here - ${CONSTANTS.FIREBOLT_OBJECT_DOC_PATH}`
+    );
   }
 });
 
@@ -1595,6 +1593,44 @@ Cypress.Commands.add('startOrStopInteractionsService', (action) => {
  */
 Cypress.Commands.add('envConfigSetup', () => {
   fireLog.info('No additional config module environment setup');
+});
+
+/**
+ * @module commands
+ * @function exitAppSession
+ * @description Function to provide the test runner with various methods to end the current app session
+ * @param {String} exitType - Type of close operation to be performed.
+ * @param {String} appId - AppId to be closed.
+ * @example
+ * cy.exitAppSession('closeApp','testAppId')
+ * cy.exitAppSession('dismissApp','testAppId')
+ * cy.exitAppSession('unloadApp','testAppId')
+ */
+Cypress.Commands.add('exitAppSession', (exitType, appId) => {
+  fireLog.info('Invoking platform implementation to end session for appId: ' + appId);
+  let exitMethod;
+  switch (exitType) {
+    case 'closeApp':
+      exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.CLOSEAPP;
+      break;
+    case 'unloadApp':
+      exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP;
+      break;
+    case 'dismissApp':
+      exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.DISMISSAPP;
+      break;
+    default:
+      fireLog.info('Session for appId: ' + appId + ' will not be ended due to invalid exitType');
+      fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
+  }
+  fireLog.info('Session for appId: ' + appId + ' will be ended with type: ' + exitType);
+  const requestMap = {
+    method: exitMethod,
+    params: appId,
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    fireLog.info('Platform has successfully ended app Session for appId: ' + appId);
+  });
 });
 
 /**

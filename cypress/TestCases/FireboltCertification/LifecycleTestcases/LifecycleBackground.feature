@@ -13,11 +13,7 @@ Feature: Lifecycle_Background
         Examples:
             | state      |
             | foreground |
-
-        @notSupported
-        Examples:
-            | state    |
-            | inactive |
+            | inactive   |
 
     @needsFurtherInformation @notSupported @lifecycleManagement @requiresPlatformImplementation
     Scenario: Lifecycle R.3.4.4 Cannot Background app that is not loaded
