@@ -34,8 +34,6 @@ const internalV2FireboltCallsData = require('../../../fixtures/fireboltCalls/ind
 const externalV2FireboltCallsData = require('../../../fixtures/external/fireboltCalls/index');
 const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/index');
 const externalV2FireboltMockData = require('../../../fixtures/external/fireboltCalls/index');
-const internalIntentTemplates = require('../../../fixtures/intentTemplates');
-const externalIntentTemplates = require('../../../fixtures/external/intentTemplates/index');
 
 export default function (module) {
   const config = new Config(module);
@@ -113,9 +111,6 @@ export default function (module) {
         Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
       }
     );
-
-    const combinedIntentTemplates = _.merge(internalIntentTemplates, externalIntentTemplates);
-    Cypress.env('intentTemplates', combinedIntentTemplates);
 
     // Merge fireboltMocks
     const v1FireboltMockData = UTILS.getEnvVariable('fireboltMocksJson');

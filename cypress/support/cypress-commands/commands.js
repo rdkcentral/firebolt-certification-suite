@@ -20,6 +20,7 @@ const { _ } = Cypress;
 import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
+const path = require('path');
 
 /**
  * @module commands
@@ -896,33 +897,44 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
   if (intent) {
     // Clearing the intent from the runtime environment variable
     Cypress.env(CONSTANTS.RUNTIME).intent = {};
-    const appMetadata = UTILS.getEnvVariable('app_metadata');
+    const appMetadata = UTILS.getEnvVariable(CONSTANTS.APP_METADATA, false);
 
     // If the intent is present in the appMetadata, set the intent in the runtime environment variable
-    if (appMetadata[appId] && appMetadata[appId][intent]) {
+    if (appMetadata && appMetadata[appId] && appMetadata[appId][intent]) {
       Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId][intent];
     }
 
-    // Check if the intent is present in the intentTemplate else failing the test
-    if (
-      Cypress.env('intentTemplates') &&
-      Cypress.env('intentTemplates')[appType] &&
-      Cypress.env('intentTemplates')[appType][intent]
-    ) {
-      try {
-        const intentTemplate = Cypress.env('intentTemplates')[appType][intent];
-        // Resolving the intent template with the values from the runtime environment variable.;
-        messageIntent = {
-          [CONSTANTS.APP_ID]: appId,
-          [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
-        };
-      } catch (error) {
-        fireLog.fail('Could not resolve intentTemplate: ' + error.message);
+    // Check if intentTemplates are defined for the given appType
+    let intentTemplate;
+    const intentTemplates = UTILS.getEnvVariable(CONSTANTS.INTENT_TEMPLATES, false);
+    if (intentTemplates && intentTemplates[appType]) {
+      if (intentTemplates[appType][appId] && intentTemplates[appType][appId][intent]) {
+        intentTemplate = intentTemplates[appType][appId][intent];
+      } else if (intentTemplates[appType][intent]) {
+        intentTemplate = intentTemplates[appType][intent];
       }
-    } else {
+      // Log failure if intentTemplate is not found
+      else {
+        fireLog.fail(
+          `Intent template for the ${intent} intent not found in ${appType} intentTemplates`
+        );
+      }
+    }
+    // Log failure if intentTemplates are not defined for the given appType
+    else {
       fireLog.fail(
-        `Intent template for the ${intent} intent not found in ${appType} intentTemplates`
+        `No intentTemplates found for ${appType}, make sure the intentTemplates are defined as per the appType`
       );
+    }
+
+    // Attempt to resolve the intentTemplate and create messageIntent
+    try {
+      messageIntent = {
+        [CONSTANTS.APP_ID]: appId,
+        [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
+      };
+    } catch (error) {
+      fireLog.fail('Could not resolve intentTemplate: ' + error.message);
     }
   } else {
     const data = {
@@ -1687,4 +1699,66 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
     const epochTime = Number.parseInt(Date.now() / 1000);
     Cypress.env(CONSTANTS.THRESHOLD_MONITOR_START_TIME, epochTime);
   }
+});
+
+/**
+ * @module commands
+ * @function fetchAppMetaData
+ * @descriptionReads app metadata from the appData directories of both fcs and configModule, then combines them, prioritizing the configModule metadata.
+ * @example
+ * cy.fetchAppMetaData()
+ */
+Cypress.Commands.add('fetchAppMetaData', () => {
+  // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
+  const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
+  const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
+
+  const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
+  const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
+
+  cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then((fcsAppMetaData) => {
+    cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
+      (configModuleAppMetaData) => {
+        // Combine the app metadata from the fcs and configModule appData directories.
+        _.merge(fcsAppMetaData, configModuleAppMetaData);
+      }
+    );
+  });
+});
+
+/**
+ * @module commands
+ * @function extractAppMetadata
+ * @description Extracts app metadata from the appData directory and merges it with the app_metadata.json file.
+ * @example
+ * cy.extractAppMetadata('cypress/fixtures/objects/appData/', 'cypress/fixtures/objects/appData/app_metadata.json')
+ */
+Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
+  cy.task(CONSTANTS.READFILEIFEXISTS, appMetaDataFile).then((appMetaData) => {
+    let mergedData = appMetaData ? _.cloneDeep(appMetaData) : {};
+    mergedData = typeof mergedData === CONSTANTS.TYPE_STRING ? JSON.parse(mergedData) : mergedData;
+    cy.task(CONSTANTS.READ_FILES_FROM_DIRECTORY, appDataDir).then((files) => {
+      files = files ? files : [];
+      files = files.filter((file) => file !== 'app_metadata.json' && file.endsWith('.json'));
+      files.forEach((file) => {
+        const filePath = path.join(appDataDir, file);
+        const appId = file.split('.')[0];
+        cy.task(CONSTANTS.READFILEIFEXISTS, filePath)
+          .then((fileData) => {
+            fileData = JSON.parse(fileData);
+            if (fileData) {
+              if (mergedData[appId]) {
+                mergedData[appId] = _.merge(mergedData[appId], fileData);
+              } else {
+                mergedData[appId] = fileData;
+              }
+            }
+          })
+          .then(() => {
+            return mergedData;
+          });
+      });
+      return mergedData;
+    });
+  });
 });

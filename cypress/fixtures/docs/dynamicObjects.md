@@ -193,6 +193,40 @@ Below are the runtime variables that are used by the FireboltCall object.
       // If attribute is 'FontFamily', the result will be 'setfontFamily'
       ```
 
+- Additional features:
+  - `resolveAtRuntime` function having the ability to fetch the specific value from the object at runtime. 
+  - This feature will work when input having `->` symbol in the string. 
+  - Example: 
+    Below is the runtime environment variable having the details.
+    ```javascript
+    runtime = {
+      fireboltCall: {
+        key: 'value',
+      }
+    };
+    ```
+    The below example shows how to fetch the entityId value from the intent object from the runtime environment variable.
+    ```javascript
+    resolveAtRuntime('fireboltCall->key')
+    ```
+    - `fireboltCall` represents the object name from the runtime environment variable.
+    - `key` represents the key name of the object.
+  - The same operation will work when input having `{{` pattern in the string.
+    
+    **Example: 1**
+    ```javascript
+    resolveAtRuntime('{{fireboltCall->key}}')
+
+    // Result: 'value'
+    ```
+    **Result:** 'value'
+    **Example: 2**
+    ```javascript
+    resolveAtRuntime('{{fireboltCall->key.uppercaseFirstChar}}')
+
+    // Result: 'Value'
+    ```
+
 Usage of this function by dynamic Firebolt objects ensures that all necessary values are dynamically resolved during test case execution in the corresponding glue code.
 
 ### Examples:

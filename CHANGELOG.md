@@ -1,3 +1,10 @@
+# [1.5.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.7...v1.5.0-dev.8) (2024-12-12)
+
+
+### Features
+
+* UserGants, LifecycleBackground cleanup + sev tags ([#276](https://github.com/rdkcentral/firebolt-certification-suite/issues/276)) ([7014175](https://github.com/rdkcentral/firebolt-certification-suite/commit/7014175315738474e8113eda20b7e7efd1cec2e4))
+
 # [1.5.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.6...v1.5.0-dev.7) (2024-12-10)
 
 
