@@ -1,3 +1,12 @@
+# [1.5.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.8...v1.5.0-dev.9) (2024-12-13)
+
+
+### Features
+
+* XSB metrics cleanup ([#292](https://github.com/rdkcentral/firebolt-certification-suite/issues/292)) ([194dbf7](https://github.com/rdkcentral/firebolt-certification-suite/commit/194dbf747b6284ca9337e0399b930198e035a429))
+* XSB metrics_rpconly cleanup ([#293](https://github.com/rdkcentral/firebolt-certification-suite/issues/293)) ([7cd21ab](https://github.com/rdkcentral/firebolt-certification-suite/commit/7cd21abce806069d1daa716cc541832af7c62aa1))
+* XSB UserInterest cleanup ([#291](https://github.com/rdkcentral/firebolt-certification-suite/issues/291)) ([566952c](https://github.com/rdkcentral/firebolt-certification-suite/commit/566952cbd9a2683d1831df52398e8348c7fdef3d))
+
 # [1.5.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.7...v1.5.0-dev.8) (2024-12-12)
 
 
