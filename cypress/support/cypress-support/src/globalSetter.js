@@ -9,22 +9,22 @@ global.setterSuccess = (message = 'successful response') => {
 
 global.setterFailure = (message, error) => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
-  const errorMessage = `${methodName} ${message || `FCS setter for fcsSetter.${methodName} failed`}`;
+  const errorMessage = `Setter Method fcs.${methodName} ${message || `Setter Method fcs.${methodName} failed`}`;
 
   // cy.then() added to handle the errors gracefully
   cy.then(() => {
     const thrownError = new Error(errorMessage);
+    // Setting the cause property to retain the original error
     if (error) {
-      thrownError.message += `error due to : ${JSON.stringify(error)}`;
+      thrownError.cause = error;
     }
-
     throw thrownError;
   });
 };
 
 global.setterNotImplemented = (message) => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
-  const errorMessage = `${message || `FCS setter for fcsSetter.${methodName} does not have an implementation`}`;
+  const errorMessage = `Setter Method fcs.${methodName} ${message || `Setter Method fcs.${methodName} does not have an implementation`}`;
   cy.then(() => {
     throw new Error(errorMessage);
   });

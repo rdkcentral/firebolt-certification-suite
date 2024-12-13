@@ -19,7 +19,7 @@ import Config from './config';
 import Validation from './validation';
 import TransportLayer from './transport';
 import Queue from './queue';
-import fcsSetter from '../src/fcsSetter';
+import fcsSetters from '../../../../node_modules/configModule/requestModules/fcsSetters';
 const { v4: uuidv4 } = require('uuid');
 const CONSTANTS = require('../../constants/constants');
 const defaultDirectory = CONSTANTS.DEFAULT_DIRECTORY;
@@ -253,24 +253,18 @@ export default function (module) {
    */
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
     cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
-      return new Promise(async (resolve) => {
+      return new Promise(async (resolve, reject) => {
         const [moduleName, methodName] = requestMap.method.split('.');
         Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
         // Check if request is for fcs setters
-        if (moduleName === 'fcsSetter') {
-          const method = fcsSetter[methodName];
+        if (moduleName === CONSTANTS.FCS_SETTER) {
+          const method = fcsSetters[methodName];
           if (method && typeof method === 'function') {
-            try {
-              const { attribute, value } = requestMap.params;
-              const response = await method(attribute, value);
-              resolve(response);
-            } catch (error) {
-              resolve(
-                setterFailure(`Error while invoking ${requestMap.method} due to ${error.message}`)
-              );
-            }
+            const { attribute, value } = requestMap.params;
+            const response = await method(attribute, value);
+            resolve(response);
           } else {
-            resolve(setterNotImplemented(`Method ${methodName} not implemented`));
+            reject(setterNotImplemented('not implemented'));
           }
         } else {
           // Default logic for other methods

@@ -1,10 +1,10 @@
 const setClosedCaptions = async (attribute, value) => {
-  console.log('FCS Setters');
+  console.log(`Setting  captions to ${value}`);
 };
 
 // Add additional methods
-const fcsSetter = {
+const fcsSetters = {
   setClosedCaptions,
 };
 
-export default fcsSetter;
+export default fcsSetters;
