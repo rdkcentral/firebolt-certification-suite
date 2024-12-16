@@ -1,3 +1,10 @@
+# [1.5.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.9...v1.5.0-dev.10) (2024-12-16)
+
+
+### Features
+
+* remove obsolete json data ([#277](https://github.com/rdkcentral/firebolt-certification-suite/issues/277)) ([8d7e51d](https://github.com/rdkcentral/firebolt-certification-suite/commit/8d7e51df8d63d998ab881f60fb53581705a11304))
+
 # [1.5.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.8...v1.5.0-dev.9) (2024-12-13)
 
 
