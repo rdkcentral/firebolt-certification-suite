@@ -24,8 +24,9 @@ global.setterFailure = (message, error) => {
 
 global.setterNotImplemented = (message) => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
-  const errorMessage = `Setter Method fcs.${methodName} ${message || `Setter Method fcs.${methodName} does not have an implementation`}`;
-  cy.then(() => {
-    throw new Error(errorMessage);
-  });
+  const errorMessage = `Setter Method fcs.${methodName} ${
+    message || `Setter Method fcs.${methodName} does not have an implementation`
+  }`;
+  // Return the error message for proper rejection handling
+  return new Error(errorMessage);
 };
