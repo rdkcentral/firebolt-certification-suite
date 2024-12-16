@@ -513,6 +513,7 @@ module.exports = {
   SET_EVENT_REQUEST: 'Request sent to set event values in platform: ',
   SET_EVENT_SUCCESS: 'Event value set successfully in platform',
   SCENARIO_NAME: 'scenarioName',
+  SCENARIO_TYPE: 'scenarioType',
   FIREBOLT_INTERACTION: 'FireboltInteraction',
   PENDING_FEATURES: 'pendingFeatures',
   FOREGROUND: 'FOREGROUND',
