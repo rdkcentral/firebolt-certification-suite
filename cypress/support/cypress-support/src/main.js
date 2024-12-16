@@ -259,7 +259,7 @@ export default function (module) {
         // Check if request is for fcs setters
         if (moduleName === CONSTANTS.FCS_SETTER) {
           const method = config.getFcsSetterOverride(moduleName, methodName);
-          if (typeof method === 'function')  {
+          if (typeof method === 'function') {
             const { attribute, value } = requestMap.params;
             const response = await method(attribute, value);
             resolve(response);
