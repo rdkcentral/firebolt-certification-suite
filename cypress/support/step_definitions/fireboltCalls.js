@@ -431,8 +431,8 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
     .then((response) => {
       const responseString = JSON.stringify(response);
       if (
-        // Check if response exists and contains appState, visibilityState
-        // and if appState is INACTIVE and visibilityState is VISIBLE
+        // Check if response exists and contains  the dismissed app's appState, visibilityState of launcher screen
+        // and if the dismissed app's appState is INACTIVE and launcher screen's visibilityState is VISIBLE
         response &&
         response.appState &&
         response.visibilityState &&
@@ -440,21 +440,23 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
         response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
       ) {
         fireLog.info(
-          `State validation successful: Current state of ${appId} app is ${responseString} as expected`
+          `State validation successful: Current state of ${appId} app is ${response.appState} and launcher screen's visibility state is ${response.visibilityState} `
         );
       } else if (
-        // Check if appState is missing, visibilityState exists, and visibilityState is VISIBLE
+        // Check if the dismissed app's appState is missing, and launcher screen's visibilityState is VISIBLE
         response &&
         !response.appState &&
         response.visibilityState &&
         response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
       ) {
         fireLog.info(
-          `State validation successful: Current state of ${appId} app is ${responseString} as expected`
+          `State validation successful: Current state of ${appId} app is ${response.appState} and launcher screen's visibility state is ${response.visibilityState}`
         );
       } else {
         // Log failure message if none of the above conditions are met
-        fireLog.fail(`${appId} app is not dismissed. Response :${responseString}`);
+        fireLog.fail(
+          `${appId} app is not dismissed. Current state of ${appId} app is ${response.appState} and launcher screen's visibility state is ${response.visibilityState}`
+        );
       }
     })
     .then(() => {
