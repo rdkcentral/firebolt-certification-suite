@@ -42,6 +42,17 @@ export default class Config {
     return this.moduleName;
   }
 
+   /* get fcsSetterOverride methods from configuration module.
+   * ex: {"method": "fcsSetters.setClosedCaptions", "params": {"attribute":enable "value": true }}
+   * If method not present, return null
+   * If method present, return the object to caller.
+   */
+
+  getFcsSetterOverride(moduleName, methodName) {
+    let methodConfig = this.configModule[requestModules][moduleName][methodName] || null;
+    return methodConfig;
+  }
+
   /* get request override config from configuration module.
    * ex: {"method": "closedcaptions.setEnabled", "params": { "value": true }}
    * If config not present, return same command as is to caller
@@ -129,7 +140,8 @@ export default class Config {
       }
       return methodConfig(fireboltObject);
     }
-
+    console.log( "MethodConfig in getoverride", JSON.stringify(methodConfig));
+    console.log("Method config firebollt obj"+JSON.stringify(methodConfig(fireboltObject)));
     // If we've gotten to this point, we have a config override. Call it and return its response
     return methodConfig(fireboltObject);
   }
