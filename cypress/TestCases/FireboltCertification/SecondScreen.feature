@@ -23,13 +23,13 @@ Feature: SecondScreen
       Then 'Firebolt' platform responds with '<Validation_key>'
 
       Examples:
-         | Scenario                           | API_key                              | Validation_key                             |
+         | Scenario                  | API_key                              | Validation_key                             |
          | passing device as boolean | get secondscreen device with boolean | invalid parameters for secondscreen device |
          | passing device as integer | get secondscreen device with integer | invalid parameters for secondscreen device |
 
    @sdk @transport @Sev2
    Scenario: SecondScreen.FriendlyName - Validating API and Event response
-      Given we test the 'SECONDSCREEN_FRIENDLYNAME' getters and setters 'name' to 'Living Room'
+      Given the environment has been set up for 'Secondscreen friendlyname' tests
       And '3rd party app' registers for the 'Firebolt' event
       And '3rd party app' invokes the 'Firebolt' get API
       When 1st party app invokes the 'Firebolt' API to set 'name' to 'Living Room'
