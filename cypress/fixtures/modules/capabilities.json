@@ -1,47 +1,11 @@
 {
-    "GET_KEYBOARD": {
-        "capability": "xrn:firebolt:capability:input:keyboard"
-    },
-    "GET_ACKNOWLEDGECHALLENGE": {
-        "capability": "xrn:firebolt:capability:usergrant:acknowledgechallenge"
-    },
-    "GET_PINCHALLENGE": {
-        "capability": "xrn:firebolt:capability:usergrant:pinchallenge"
-    },
     "GRANTED_WITH_GRANT": {
         "capability": "xrn:firebolt:capability:localization:postal-code"
-    },
-    "GRANTED_WITH_OPTIONS_ROLE_USE": {
-        "capability": "xrn:firebolt:capability:localization:postal-code",
-        "options": {
-            "role": "use"
-        }
     },
     "CAPABILITY_INFO_INFO_PARAM":{
         "capabilities":["xrn:firebolt:capability:capabilities:info"]
     },
-    "GRANTED_WITH_OPTIONS_ROLE_MANAGE": {
-        "capability": "xrn:firebolt:capability:localization:postal-code",
-        "options": {
-            "role": "manage"
-        }
-    },
-    "GRANTED_WITH_OPTIONS_ROLE_PROVIDE": {
-        "capability": "xrn:firebolt:capability:localization:postal-code",
-        "options": {
-            "role": "provide"
-        }
-    },
-    "INFO_USERGRANT_PINCHALLENGE": {"capabilities": ["xrn:firebolt:capability:usergrant:pinchallenge"]},
     "INFO_DEVICE_DISTRIBUTOR": {"capabilities": ["xrn:firebolt:capability:device:distributor"]},
-    "INFO_NETWORK_STATUS": {"capabilities": ["xrn:firebolt:capability:network:status"]},
-    "INFO_LOCALIZATION_TIMEZONE": {"capabilities": ["xrn:firebolt:capability:localization:time-zone"]},
-    "PRIVACY_SETTINGS_INFO_PARAM":{
-        "capabilities":["xrn:firebolt:capability:privacy:settings"]
-    },
-    "INFO_PROTOCOL_WIFI": {"capabilities": ["xrn:firebolt:capability:protocol:wifi"]},
-    "INFO_USERGRANT_ACKNOWLEDGECHALLENGE": {"capabilities": ["xrn:firebolt:capability:usergrant:acknowledgechallenge"]},
-    "INFO_GRANTS_STATE": {"capabilities": ["xrn:firebolt:capability:grants:state"]},
     "REQUEST_USERGRANT_PINCHALLENGE": {
         "grants": [
             {
@@ -113,16 +77,6 @@
             }
         ]
     },
-    "SUPPORTED_USERGRANT_PINCHALLENGE":"xrn:firebolt:capability:usergrant:pinchallenge",
-    "SUPPORTED_DEVICE_DISTRIBUTOR":"xrn:firebolt:capability:device:distributor",
-    "SUPPORTED_NETWORK_STATUS":"xrn:firebolt:capability:network:status",
-    "SUPPORTED_LOCALIZATION_TIMEZONE":"xrn:firebolt:capability:localization:time-zone",
-    "SUPPORTED_PRIVACY_SETTINGS":"xrn:firebolt:capability:privacy:settings",
-    "SUPPORTED_PROTOCOL_WIFI":"xrn:firebolt:capability:protocol:wifi",
-    "SUPPORTED_USERGRANT_ACKNOWLEDGECHALLENGE":"xrn:firebolt:capability:usergrant:acknowledgechallenge",
-    "SUPPORTED_GRANTS_STATE":"xrn:firebolt:capability:grants:state",
-    "INFO_LIFECYCLE_READY": {"capabilities": ["xrn:firebolt:capability:lifecycle:ready"]},
-    "SUPPORTED_LIFECYCLE_READY": "xrn:firebolt:capability:lifecycle:ready",
     "REQUEST_LIFECYCLE_READY": {
         "grants": [
             {
@@ -131,10 +85,6 @@
             }
         ]
     },
-    "INFO_LIFECYCLE_STATE": {"capabilities": ["xrn:firebolt:capability:lifecycle:state"]},
-    "INFO_LIFECYCLE_LAUNCH": {"capabilities": ["xrn:firebolt:capability:lifecycle:launch"]},
-    "SUPPORTED_LIFECYCLE_STATE": "xrn:firebolt:capability:lifecycle:state",
-    "SUPPORTED_LIFECYCLE_LAUNCH": "xrn:firebolt:capability:lifecycle:launch",
     "REQUEST_LIFECYCLE_STATE": {
         "grants": [
             {
@@ -151,12 +101,6 @@
             }
         ]
     },
-    "INFO_ADVERTISING_IDENTIFIER": {"capabilities": ["xrn:firebolt:capability:advertising:identifier"]},
-    "INFO_ACCOUNT_ID": {"capabilities": ["xrn:firebolt:capability:account:id"]},
-    "INFO_ACCOUNT_UID": {"capabilities": ["xrn:firebolt:capability:account:uid"]},
-    "SUPPORTED_ADVERTISING_IDENTIFIER": "xrn:firebolt:capability:advertising:identifier",
-    "SUPPORTED_ACCOUNT_ID": "xrn:firebolt:capability:account:id",
-    "SUPPORTED_ACCOUNT_UID": "xrn:firebolt:capability:account:uid",
     "REQUEST_ADVERTISING_IDENTIFIER": {
         "grants": [
             {
@@ -762,24 +706,6 @@
             "role": []
         }
     },
-    "PERMITTED_LIFECYCLE_READY_USE_ROLE_PARAM":{
-        "capability":"xrn:firebolt:capability:lifecycle:ready",
-        "options" : {
-            "role":"use"
-        }
-    },
-    "PERMITTED_LIFECYCLE_STATE_USE_ROLE_PARAM":{
-        "capability":"xrn:firebolt:capability:lifecycle:state",
-        "options" : {
-            "role":"use"
-        }
-    },
-    "PERMITTED_ACCOUNT_ID_USE_ROLE_PARAM":{
-        "capability":"xrn:firebolt:capability:account:id",
-        "options" : {
-            "role":"use"
-        }
-    },
     "PERMITTED_ACCOUNT_UID_USE_ROLE_PARAM":{
         "capability":"xrn:firebolt:capability:account:uid",
         "options" : {
@@ -848,12 +774,6 @@
 },
 "PERMITTED_DISCOVERY_WATCHED_USE_ROLE_PARAM":{
     "capability":"xrn:firebolt:capability:discovery:watched",
-    "options" : {
-        "role":"use"
-    }
-},
-"PERMITTED_LIFECYCLE_LAUNCH_USE_ROLE_PARAM":{
-    "capability":"xrn:firebolt:capability:lifecycle:launch",
     "options" : {
         "role":"use"
     }
@@ -1096,12 +1016,6 @@
     "capability": "xrn:firebolt:capability:discovery:watched",
     "options": {
         "role": "use"
-    }
-},
-"PERMITTED_ADVERTISING_IDENTIFIER_USE_ROLE_PARAM":{
-    "capability":"xrn:firebolt:capability:advertising:identifier",
-    "options" : {
-        "role":"use"
     }
 },
 "GRANTED_ACCOUNT_UID_ROLE_USE": {
