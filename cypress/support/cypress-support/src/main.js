@@ -19,7 +19,6 @@ import Config from './config';
 import Validation from './validation';
 import TransportLayer from './transport';
 import Queue from './queue';
-import fcsSetters from '../../../../node_modules/configModule/requestModules/fcsSetters';
 const { v4: uuidv4 } = require('uuid');
 const CONSTANTS = require('../../constants/constants');
 const defaultDirectory = CONSTANTS.DEFAULT_DIRECTORY;
