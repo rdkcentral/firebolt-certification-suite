@@ -1,3 +1,10 @@
+# [1.5.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.12...v1.5.0-dev.13) (2024-12-16)
+
+
+### Features
+
+* XSB SecureSotrage cleanup ([#286](https://github.com/rdkcentral/firebolt-certification-suite/issues/286)) ([c2244df](https://github.com/rdkcentral/firebolt-certification-suite/commit/c2244dfb19bf90ae0a2383ea0c4c10cb86af59fc))
+
 # [1.5.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.11...v1.5.0-dev.12) (2024-12-16)
 
 
