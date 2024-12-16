@@ -1,3 +1,10 @@
+# [1.5.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.10...v1.5.0-dev.11) (2024-12-16)
+
+
+### Features
+
+* Performance log enhancement ([#275](https://github.com/rdkcentral/firebolt-certification-suite/issues/275)) ([c806aeb](https://github.com/rdkcentral/firebolt-certification-suite/commit/c806aeb6c544de777a4fb339c0129f848fb56cbd))
+
 # [1.5.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.9...v1.5.0-dev.10) (2024-12-16)
 
 
