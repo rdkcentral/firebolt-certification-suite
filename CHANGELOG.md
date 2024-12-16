@@ -1,3 +1,10 @@
+# [1.5.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.11...v1.5.0-dev.12) (2024-12-16)
+
+
+### Features
+
+* XSB SecondScreen cleanup ([#290](https://github.com/rdkcentral/firebolt-certification-suite/issues/290)) ([eced08d](https://github.com/rdkcentral/firebolt-certification-suite/commit/eced08db6fda498f1c0af443f965c732aea27e1f))
+
 # [1.5.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.10...v1.5.0-dev.11) (2024-12-16)
 
 
