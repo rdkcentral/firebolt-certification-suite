@@ -49,7 +49,7 @@ export default class Config {
    */
 
   getFcsSetterOverride(moduleName, methodName) {
-    let methodConfig = this.configModule[requestModules][moduleName][methodName] || null;
+    const methodConfig = this.configModule[requestModules][moduleName][methodName] || null;
     return methodConfig;
   }
 
