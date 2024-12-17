@@ -450,13 +450,11 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
         response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
       ) {
         fireLog.info(
-          `State validation successful: Current state of ${appId} app is ${response.appState} and launcher screen's visibility state is ${response.visibilityState}`
+          `State validation successful: ${appId} app is dismissed and launcher screen's visibility state is ${response.visibilityState}`
         );
       } else {
         // Log failure message if none of the above conditions are met
-        fireLog.fail(
-          `${appId} app is not dismissed. Current state of ${appId} app is ${response.appState} and launcher screen's visibility state is ${response.visibilityState}`
-        );
+        fireLog.fail(`${appId} app is not dismissed. Response : ${response}`);
       }
     })
     .then(() => {
