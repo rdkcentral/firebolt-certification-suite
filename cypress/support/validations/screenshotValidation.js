@@ -22,9 +22,12 @@ Cypress.Commands.add('screenshotValidation', (object) => {
       fireLog.info('Screenshot validation has started');
       fireLog.info('Screenshot Validation Object: ' + JSON.stringify(object.validations));
       cy.sendMessagetoPlatforms(requestMap).then((response) => {
-        if (object.validations.length > 0) {
+        if (object.validations.length > 0 || response.validations.length > 0) {
           fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
-          fireLog.equal('pass', response.status, 'Screenshot validation status');
+          if (response && response.status === 'fail') {
+            const failedOne = response.validations.find((valObject) => valObject.status === 'fail');
+            fireLog.fail(`Screenshot Validation Failed: ${failedOne.message}`);
+          }
         }
       });
     } else {

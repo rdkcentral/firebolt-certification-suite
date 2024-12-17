@@ -20,6 +20,7 @@ const { _ } = Cypress;
 import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
+const path = require('path');
 
 /**
  * @module commands
@@ -872,7 +873,7 @@ Cypress.Commands.add('censorData', (method, response) => {
  * cy.launchApp('firebolt', 'foo')
  * cy.launchApp('certification', 'foo')
  */
-Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
+Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, intent) => {
   // use the firebolt command Discovery.launch to launch the app. If app id given, use the app id
   // else get the default app id from environment variable.
 
@@ -883,11 +884,6 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // Creating data for basic intent to be sent to the app on launch
   let appCategory;
-  let data = {
-    query: {
-      params: {},
-    },
-  };
 
   // Storing the appId in runtime environment variable
   if (Cypress.env(CONSTANTS.RUNTIME)) {
@@ -895,102 +891,145 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier) => {
   } else {
     Cypress.env(CONSTANTS.RUNTIME, { appId });
   }
-
-  if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
-    appCategory =
-      UTILS.getEnvVariable(CONSTANTS.APP_TYPE, false) !== undefined
-        ? UTILS.getEnvVariable(CONSTANTS.APP_TYPE)
-        : CONSTANTS.FIREBOLT; // appType defines in which mode app should be launched
-    data = {
-      query: {
-        params: {
-          [CONSTANTS.APP_ID]: appId,
-          [CONSTANTS.APP_TYPE]: appCategory,
-          [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
-        },
-      },
-    };
-  }
-  // If testType == lifecycle, modifying data to include lifecycle_validation = true in the intent to be sent to the app
-  if (
-    Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI ||
-    Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
-  ) {
-    data = {
-      query: {
-        params: {
-          [CONSTANTS.APP_ID]: appId,
-          [CONSTANTS.LIFECYCLE_VALIDATION]: true,
-          [CONSTANTS.APP_TYPE]: appCategory,
-          [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
-        },
-      },
-    };
-  }
   // Creating intent and request map to be sent to the app on launch
-  const messageIntent = {
-    action: CONSTANTS.SEARCH,
-    data: data,
-    context: { source: CONSTANTS.DEVICE },
-  };
-  const requestMap = {
-    method: CONSTANTS.DISCOVERY_LAUNCH,
-    params: { [CONSTANTS.APP_ID]: appId, [CONSTANTS.INTENT]: messageIntent },
-  };
+  let messageIntent;
 
-  // Add the PubSub URL if required
-  if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
-    data.query.params[CONSTANTS.PUB_SUB_URL] = getEnvVariable(CONSTANTS.PUB_SUB_URL);
-  }
-  // Add the PubSub UUID if the env variable is set
-  if (getEnvVariable(CONSTANTS.PUB_SUB_UUID, false)) {
-    data.query.params[CONSTANTS.PUB_SUB_UUID] = getEnvVariable(CONSTANTS.PUB_SUB_UUID);
-  }
-  // Add the PubSub publish suffix from env variable
-  if (getEnvVariable(CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX, false)) {
-    data.query.params[CONSTANTS.PUB_SUB_PUBLISH_SUFFIX] = getEnvVariable(
-      CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX
-    );
-  }
-  // Add the PubSub subscribe suffix from env variable
-  if (getEnvVariable(CONSTANTS.PUB_SUB_PUBLISH_SUFFIX, false)) {
-    data.query.params[CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX] = getEnvVariable(
-      CONSTANTS.PUB_SUB_PUBLISH_SUFFIX
-    );
-  }
-  // Check for additional launch parameters
-  // If a key exists in both the default parameters and the additional parameters, the value from the additional parameters will override the default value.
-  if (Cypress.env('additionalLaunchParams')) {
-    const additionalParams = Cypress.env('additionalLaunchParams');
-    for (const key in additionalParams) {
-      let value = additionalParams[key];
-      // If the value starts with 'CYPRESSENV-', extract the variable name.
-      if (value.startsWith('CYPRESSENV-')) {
-        const envParam = value.split('-')[1];
-        // Fetch the corresponding value from the env.
-        value = getEnvVariable(envParam, false);
+  if (intent) {
+    // Clearing the intent from the runtime environment variable
+    Cypress.env(CONSTANTS.RUNTIME).intent = {};
+    const appMetadata = UTILS.getEnvVariable(CONSTANTS.APP_METADATA, false);
+
+    // If the intent is present in the appMetadata, set the intent in the runtime environment variable
+    if (appMetadata && appMetadata[appId] && appMetadata[appId][intent]) {
+      Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId][intent];
+    }
+
+    // Check if intentTemplates are defined for the given appType
+    let intentTemplate;
+    const intentTemplates = UTILS.getEnvVariable(CONSTANTS.INTENT_TEMPLATES, false);
+    if (intentTemplates && intentTemplates[appType]) {
+      if (intentTemplates[appType][appId] && intentTemplates[appType][appId][intent]) {
+        intentTemplate = intentTemplates[appType][appId][intent];
+      } else if (intentTemplates[appType][intent]) {
+        intentTemplate = intentTemplates[appType][intent];
       }
-      // Add to data.query.params only if the value is defined
-      if (value) {
-        data.query.params[key] = value;
+      // Log failure if intentTemplate is not found
+      else {
+        fireLog.fail(
+          `Intent template for the ${intent} intent not found in ${appType} intentTemplates`
+        );
       }
     }
-  }
-  // If the testType is userInterestProvider, send the discovery.launch params with registerProvider = false, then certification app will not register for userInterest provider.
-  if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.USERINTERESTPROVIDER) {
-    data = {
-      query: JSON.stringify({
-        params: {
-          [CONSTANTS.REGISTERPROVIDER]: false,
-        },
-      }),
+    // Log failure if intentTemplates are not defined for the given appType
+    else {
+      fireLog.fail(
+        `No intentTemplates found for ${appType}, make sure the intentTemplates are defined as per the appType`
+      );
+    }
+
+    // Attempt to resolve the intentTemplate and create messageIntent
+    try {
+      messageIntent = {
+        [CONSTANTS.APP_ID]: appId,
+        [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
+      };
+    } catch (error) {
+      fireLog.fail('Could not resolve intentTemplate: ' + error.message);
+    }
+  } else {
+    const data = {
+      query: {
+        params: {},
+      },
     };
-    requestMap.params.intent.data = data;
+    if (appType.toLowerCase() === CONSTANTS.CERTIFICATION) {
+      appCategory =
+        UTILS.getEnvVariable(CONSTANTS.APP_TYPE, false) !== undefined
+          ? UTILS.getEnvVariable(CONSTANTS.APP_TYPE)
+          : CONSTANTS.FIREBOLT; // appType defines in which mode app should be launched
+      const params = {
+        [CONSTANTS.APP_ID]: appId,
+        [CONSTANTS.APP_TYPE]: appCategory,
+        [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
+      };
+      data.query.params = params;
+    }
+    // If testType == lifecycle, modifying data to include lifecycle_validation = true in the intent to be sent to the app
+    if (
+      Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI ||
+      Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLE
+    ) {
+      const params = {
+        [CONSTANTS.APP_ID]: appId,
+        [CONSTANTS.LIFECYCLE_VALIDATION]: true,
+        [CONSTANTS.APP_TYPE]: appCategory,
+        [CONSTANTS.MACADDRESS_PARAM]: getEnvVariable(CONSTANTS.DEVICE_MAC),
+      };
+      data.query.params = params;
+    }
+
+    // Add the PubSub URL if required
+    if (getEnvVariable(CONSTANTS.PUB_SUB_URL, false)) {
+      data.query.params[CONSTANTS.PUB_SUB_URL] = getEnvVariable(CONSTANTS.PUB_SUB_URL);
+    }
+    // Add the PubSub UUID if the env variable is set
+    if (getEnvVariable(CONSTANTS.PUB_SUB_UUID, false)) {
+      data.query.params[CONSTANTS.PUB_SUB_UUID] = getEnvVariable(CONSTANTS.PUB_SUB_UUID);
+    }
+    // Add the PubSub publish suffix from env variable
+    if (getEnvVariable(CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX, false)) {
+      data.query.params[CONSTANTS.PUB_SUB_PUBLISH_SUFFIX] = getEnvVariable(
+        CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX
+      );
+    }
+    // Add the PubSub subscribe suffix from env variable
+    if (getEnvVariable(CONSTANTS.PUB_SUB_PUBLISH_SUFFIX, false)) {
+      data.query.params[CONSTANTS.PUB_SUB_SUBSCRIBE_SUFFIX] = getEnvVariable(
+        CONSTANTS.PUB_SUB_PUBLISH_SUFFIX
+      );
+    }
+    // Check for additional launch parameters
+    // If a key exists in both the default parameters and the additional parameters, the value from the additional parameters will override the default value.
+    if (Cypress.env('additionalLaunchParams')) {
+      const additionalParams = Cypress.env('additionalLaunchParams');
+      for (const key in additionalParams) {
+        let value = additionalParams[key];
+        // If the value starts with 'CYPRESSENV-', extract the variable name.
+        if (value.startsWith('CYPRESSENV-')) {
+          const envParam = value.split('-')[1];
+          // Fetch the corresponding value from the env.
+          value = getEnvVariable(envParam, false);
+        }
+        // Add to data.query.params only if the value is defined
+        if (value) {
+          data.query.params[key] = value;
+        }
+      }
+    }
+
+    // If the testType is userInterestProvider, send the discovery.launch params with registerProvider = false, then certification app will not register for userInterest provider.
+    if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.USERINTERESTPROVIDER) {
+      data.query.params[CONSTANTS.REGISTERPROVIDER] = false;
+    }
+
+    // Stringify the query (The intent requires it be a string)
+    data.query = JSON.stringify(data.query);
+    messageIntent = {
+      [CONSTANTS.APP_ID]: appId,
+      [CONSTANTS.INTENT]: {
+        action: CONSTANTS.SEARCH,
+        data: data,
+        context: { source: CONSTANTS.DEVICE },
+      },
+    };
   }
 
+  const requestMap = {
+    method: CONSTANTS.DISCOVERY_LAUNCH,
+    params: messageIntent,
+  };
   requestMap.deviceIdentifier = deviceIdentifier;
-  // Stringify the query (The intent requires it be a string)
-  data.query = JSON.stringify(data.query);
+
   Cypress.env(CONSTANTS.CURRENT_APP_ID, appId);
 
   const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
@@ -1660,4 +1699,64 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
     const epochTime = Number.parseInt(Date.now() / 1000);
     Cypress.env(CONSTANTS.THRESHOLD_MONITOR_START_TIME, epochTime);
   }
+});
+
+/**
+ * @module commands
+ * @function fetchAppMetaData
+ * @descriptionReads app metadata from the appData directories of both fcs and configModule, then combines them, prioritizing the configModule metadata.
+ * @example
+ * cy.fetchAppMetaData()
+ */
+Cypress.Commands.add('fetchAppMetaData', () => {
+  // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
+  const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
+  const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
+
+  const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
+  const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
+
+  cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then((fcsAppMetaData) => {
+    cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
+      (configModuleAppMetaData) => {
+        // Combine the app metadata from the fcs and configModule appData directories.
+        _.merge(fcsAppMetaData, configModuleAppMetaData);
+      }
+    );
+  });
+});
+
+/**
+ * @module commands
+ * @function extractAppMetadata
+ * @description Extracts app metadata from the appData directory and merges it with the app_metadata.json file.
+ * @example
+ * cy.extractAppMetadata('cypress/fixtures/objects/appData/', 'cypress/fixtures/objects/appData/app_metadata.json')
+ */
+Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
+  cy.task(CONSTANTS.READFILEIFEXISTS, appMetaDataFile).then((appMetaData) => {
+    let mergedData = appMetaData ? _.cloneDeep(appMetaData) : {};
+    mergedData = typeof mergedData === CONSTANTS.TYPE_STRING ? JSON.parse(mergedData) : mergedData;
+    cy.task(CONSTANTS.READ_FILES_FROM_DIRECTORY, appDataDir).then((files) => {
+      files = files ? files : [];
+      files = files.filter((file) => file !== 'app_metadata.json' && file.endsWith('.json'));
+      const filePromises = files.map((file) => {
+        const filePath = path.join(appDataDir, file);
+        const appId = file.split('.')[0];
+        return cy.task(CONSTANTS.READFILEIFEXISTS, filePath).then((fileData) => {
+          fileData = JSON.parse(fileData);
+          if (fileData) {
+            if (mergedData[appId]) {
+              mergedData[appId] = _.merge(mergedData[appId], fileData);
+            } else {
+              mergedData[appId] = fileData;
+            }
+          }
+        });
+      });
+      return cy.wrap(Promise.all(filePromises)).then(() => {
+        return mergedData;
+      });
+    });
+  });
 });

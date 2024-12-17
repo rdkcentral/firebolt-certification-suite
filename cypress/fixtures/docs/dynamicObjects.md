@@ -156,7 +156,9 @@ Below are the runtime variables that are used by the FireboltCall object.
 - **value:** Value is a field name of the `runtime` environment variable that holds the value used for to set the value or for validation.
 - **module:** Module is a field name of the `runtime` environment variable that holds the module name. For example, `resolveAtRuntime('{{module}}')` will dynamically resolve the module name from the runtime environment (e.g., `Localization`).
 - **method:** Method is a field name of the `runtime` environment variable that holds the method name. For ExampleFor example, `resolveAtRuntime('{{method}}')` will dynamically resolve the method name (e.g., `locale`).
-- **appid:** This allows the app ID to be set dynamically. For example, `Cypress.env('firstPartyAppId')` fetches the appId dynamically.
+- **appId:** appId is a field name of the `runtime` environment variable and this is been added while launching the application.
+- **intent:** intent field has been added to the `runtime` environment variable, if the intent is been added while launching the application.
+- **content:** content field has been added to the `runtime` environment variable, if the content is been added from the validation glue code.
 
 **Note:** `resolveAtRuntime()` function is used by the FireboltCall object in order to process runtime variables and other fields.
 
@@ -190,6 +192,40 @@ Below are the runtime variables that are used by the FireboltCall object.
       resolveAtRuntime('manage_closedcaptions.set{{attribute.lowercaseFirstChar}}');
       // If attribute is 'FontFamily', the result will be 'setfontFamily'
       ```
+
+- Additional features:
+  - `resolveAtRuntime` function having the ability to fetch the specific value from the object at runtime. 
+  - This feature will work when input having `->` symbol in the string. 
+  - Example: 
+    Below is the runtime environment variable having the details.
+    ```javascript
+    runtime = {
+      fireboltCall: {
+        key: 'value',
+      }
+    };
+    ```
+    The below example shows how to fetch the entityId value from the intent object from the runtime environment variable.
+    ```javascript
+    resolveAtRuntime('fireboltCall->key')
+    ```
+    - `fireboltCall` represents the object name from the runtime environment variable.
+    - `key` represents the key name of the object.
+  - The same operation will work when input having `{{` pattern in the string.
+    
+    **Example: 1**
+    ```javascript
+    resolveAtRuntime('{{fireboltCall->key}}')
+
+    // Result: 'value'
+    ```
+    **Result:** 'value'
+    **Example: 2**
+    ```javascript
+    resolveAtRuntime('{{fireboltCall->key.uppercaseFirstChar}}')
+
+    // Result: 'Value'
+    ```
 
 Usage of this function by dynamic Firebolt objects ensures that all necessary values are dynamically resolved during test case execution in the corresponding glue code.
 
