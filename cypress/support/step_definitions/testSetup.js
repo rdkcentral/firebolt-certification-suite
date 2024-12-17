@@ -132,6 +132,7 @@ Given(
     cy.envConfigSetup();
   }
 );
+
 /**
  * @module TestSetupGlue
  * @function destroyAppInstance
