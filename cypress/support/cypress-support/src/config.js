@@ -48,12 +48,12 @@ export default class Config {
    * If method present, return the object to caller.
    */
 
-  getFcsSetterOverride(moduleName, methodName) {
+  getRequestOverride(moduleName, methodName) {
     const methodConfig = this.configModule[requestModules][moduleName][methodName] || null;
     return methodConfig;
   }
 
-  /* get request override config from configuration module.
+  /* invoke request override config from configuration module.
    * ex: {"method": "closedcaptions.setEnabled", "params": { "value": true }}
    * If config not present, return same command as is to caller
    * If config present, return the object to caller.
@@ -63,21 +63,24 @@ export default class Config {
    * getOverride - return same command as is to caller if override not found
    * Note: firebolt command format validation still exists in both cases.
    */
-  getRequestOverride(fireboltObject) {
+  invokeRequestOverride(fireboltObject) {
     // If config module is invalid or absent
     if (this.configModule === null || this.configModule === undefined || !this.configModule) {
-      logger.info(`config module is not provided`, `getRequestOverride`);
+      logger.info(`config module is not provided`, `invokeRequestOverride`);
       return fireboltObject;
     }
     if (!fireboltObject || !fireboltObject.method) {
-      logger.info(`firebolt object does not contain method param`, `getRequestOverride`);
+      logger.info(`firebolt object does not contain method param`, `invokeRequestOverride`);
       return fireboltObject;
     }
     // firebolt method format <module>.<method>
     const moduleMethodArray = fireboltObject.method.split('.');
 
     if (moduleMethodArray.length !== 2) {
-      logger.info(`Invalid module/method. Expected format '<Module.Method>'`, `getRequestOverride`);
+      logger.info(
+        `Invalid module/method. Expected format '<Module.Method>'`,
+        `invokeRequestOverride`
+      );
       return fireboltObject;
     }
 
@@ -144,13 +147,13 @@ export default class Config {
     return methodConfig(fireboltObject);
   }
 
-  /* get response override config from configuration module.
+  /* invoke response override config from configuration module.
    * If config not present, return same response as is to caller
    * If config present, return the modified response to caller.
    *
-   * getResponseOverride - return same command as is to caller if override not found
+   * invokeResponseOverride - return same command as is to caller if override not found
    */
-  getResponseOverride(fireboltResponse) {
+  invokeResponseOverride(fireboltResponse) {
     // Get the method and module name
     const methodName = this.getMethod();
     const moduleName = this.getModuleName();

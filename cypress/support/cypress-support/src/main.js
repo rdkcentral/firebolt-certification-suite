@@ -257,7 +257,7 @@ export default function (module) {
         Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
         // Check if request is for fcs setters
         if (moduleName === CONSTANTS.FCS_SETTER) {
-          const method = config.getFcsSetterOverride(moduleName, methodName);
+          const method = config.getRequestOverride(moduleName, methodName);
           if (typeof method === 'function') {
             const { attribute, value } = requestMap.params;
             const response = await method(attribute, value);
@@ -267,11 +267,11 @@ export default function (module) {
           }
         } else {
           // Default logic for other methods
-          const message = await config.getRequestOverride(requestMap);
+          const message = await config.invokeRequestOverride(requestMap);
           // Perform MTC/FB call only if the message is not null
           if (message != null) {
             const response = await transport.sendMessage(message);
-            const result = config.getResponseOverride(response);
+            const result = config.invokeResponseOverride(response);
             resolve(result);
           } else {
             resolve(null);
