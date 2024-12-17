@@ -118,12 +118,11 @@ Given('the environment has been set up for {string} tests', (test) => {
  * @param {String} testType - The name of the test.
  * @param {String} scenarioType - The name of the scenario which is optional.
  * @example
- * Given environment has been setup for 'device'
- * Given environment has been setup for 'device' for 'version'
+ * Given the environment has been setup for 'device'
+ * Given the environment has been setup for 'device' for 'version'
  */
 
-Given(
-  /the environment has been set up for '(.+)' (?: for '(.+)')?$/,
+Given(/^the environment has been set up for '([^']+)'(?: for '([^']+)')?$/, 
   async (testType, scenarioType) => {
     Cypress.env(CONSTANTS.TEST_TYPE, testType);
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
