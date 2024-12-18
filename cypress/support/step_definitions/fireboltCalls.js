@@ -454,7 +454,7 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
         );
       } else {
         // Log failure message if none of the above conditions are met
-        fireLog.fail(`${appId} app is not dismissed. Response : ${response}`);
+        fireLog.fail(`${appId} app is not dismissed. Response : ${responseString}`);
       }
     })
     .then(() => {
