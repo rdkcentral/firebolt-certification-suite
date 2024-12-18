@@ -102,7 +102,7 @@ module.exports = {
   DEVICE_PLATFORM: 'device.platform',
   DEVICE_VIDEORESOLUTION: 'device.videoResolution',
   DISCOVERY_LAUNCH: 'discovery.launch',
-  DYNAMIC_DEVICE_DETAILS_MODULES: ['Device'],
+  DYNAMIC_DEVICE_DETAILS_MODULES: 'dynamicDeviceDetailsModules',
   EMAIL: 'email',
   ENV_PLATFORM_SDK_VERSION: 'platformSdkVersion',
   ENV_PLATFORM: 'platform',
