@@ -51,7 +51,8 @@ Given('the environment has been set up for {string} tests', (test) => {
       fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
     }
   }
-
+  Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
+  Cypress.env(CONSTANTS.TEST_TYPE, test);
   if (
     UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
       JSON.stringify(window.testState.gherkinDocument.feature.name)
@@ -59,14 +60,16 @@ Given('the environment has been set up for {string} tests', (test) => {
   ) {
     return 'pending';
   }
+
+  // Calling the envConfigSetup command to setup the environment for the test from the config module.
+  cy.envConfigSetup();
+
   if (
     !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
     UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
     UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
     UTILS.isTestTypeChanged(test)
   ) {
-    Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
-    Cypress.env(CONSTANTS.TEST_TYPE, test);
     if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
       Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
     }
@@ -82,7 +85,11 @@ Given('the environment has been set up for {string} tests', (test) => {
     }
     // fetch device details dynamically
     if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
-      if (CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES.includes(Cypress.env(CONSTANTS.TEST_TYPE))) {
+      if (
+        UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES).includes(
+          Cypress.env(CONSTANTS.TEST_TYPE)
+        )
+      ) {
         cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
           (response) => {
             if (response) {
@@ -107,8 +114,6 @@ Given('the environment has been set up for {string} tests', (test) => {
       fireLog.fail('Marker creation failed');
     }
   }
-  // Calling the envConfigSetup command to setup the environment for the test from the config module.
-  cy.envConfigSetup();
 });
 
 /**
