@@ -1,3 +1,10 @@
+# [1.5.0-dev.14](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.13...v1.5.0-dev.14) (2024-12-18)
+
+
+### Features
+
+* LP sat changes ([#295](https://github.com/rdkcentral/firebolt-certification-suite/issues/295)) ([73e5c4b](https://github.com/rdkcentral/firebolt-certification-suite/commit/73e5c4b137effc7fa78f1e90bc944ccf224b3343))
+
 # [1.5.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.12...v1.5.0-dev.13) (2024-12-16)
 
 
