@@ -352,6 +352,7 @@ module.exports = {
   REGEX_EVENT_VALIDATION: 'regexEventValidation',
   REPORT_COMMUNICATION_MODE: 'Communication Mode',
   REPORT_DATE: 'Date',
+  REQUEST_OVERRIDE_METHOD: 'requestOverrideMethods',
   REQUEST_OVERRIDE_CALLS: {
     SETRESPONSE: 'fcs.setResponse',
     CLEARLISTENER: 'fcs.clearEventListeners',
@@ -406,6 +407,7 @@ module.exports = {
     'setLifecycleState function to send message to platform to set lifecycle state of application not implemented by underlying platform',
   SET_LIFECYCLE_STATE_REQUEST: 'Request sent to platform to set lifecycle state: ',
   SET_METHOD: 'setMethod',
+  FCS_SETTER: 'fcsSetters',
   SET_VALIDATIONPATH: 'setValidationJsonPath',
   SEVEN_SECONDS_TIMEOUT: 7000,
   SKIPCONTENTVALIDATION: 'skipContentValidation',
