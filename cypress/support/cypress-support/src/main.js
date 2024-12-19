@@ -259,8 +259,27 @@ export default function (module) {
         if (moduleName === CONSTANTS.FCS_SETTER) {
           const method = config.getRequestOverride(moduleName, methodName);
           if (typeof method === 'function') {
-            const { attribute, value } = requestMap.params;
-            const response = await method(attribute, value);
+            const params = requestMap.params || {};
+            const argCount = method.length;
+            // If the number of parameters does not match the expected argument count, reject
+            const paramsCount = Object.keys(params).length;
+            if (paramsCount !== argCount) {
+              reject(
+                new Error(
+                  `${requestMap.method} Expectes ${argCount} arguments, but got ${paramsCount} params`
+                )
+              );
+            }
+            const attribute = params.attribute ?? null; // Set to null if not exist
+            const value = params.value ?? null; // Set to null if not exist
+            let args = [];
+            if (attribute !== null && value !== null) {
+              args = [attribute, value]; // If both attribute and value are provided
+            } else if (value !== null) {
+              args = [value]; // If only value is provided
+            }
+            // Dynamically call the method with the params
+            const response = await method(...args);
             resolve(response);
           } else {
             reject(setterNotImplemented('not implemented'));
