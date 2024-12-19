@@ -472,7 +472,7 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
       cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
         fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
         if (response.status != 'pass') {
-          fireLog.fail(`Screenshot validation failed ${response.validations}`);
+          fireLog.fail(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
         }
       });
     });
