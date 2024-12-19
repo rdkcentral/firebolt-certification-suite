@@ -1,3 +1,10 @@
+# [1.6.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.1...v1.6.0-dev.1) (2024-12-19)
+
+
+### Features
+
+* Incorporated FCS setter into sendMessageToplatform ([#289](https://github.com/rdkcentral/firebolt-certification-suite/issues/289)) ([3b45e4d](https://github.com/rdkcentral/firebolt-certification-suite/commit/3b45e4d5e271babcdc701c3a950912a6ef18b6ea))
+
 ## [1.5.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0...v1.5.1) (2024-12-19)
 
 
