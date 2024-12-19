@@ -1,3 +1,10 @@
+## [1.5.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0...v1.5.1-dev.1) (2024-12-19)
+
+
+### Bug Fixes
+
+* Fixing testsetup issue ([#296](https://github.com/rdkcentral/firebolt-certification-suite/issues/296)) ([b179804](https://github.com/rdkcentral/firebolt-certification-suite/commit/b1798049dc02de7ccf9519c787aaf1099014d0fe))
+
 # [1.5.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0...v1.5.0) (2024-12-19)
 
 
