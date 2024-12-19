@@ -51,8 +51,6 @@ Given('the environment has been set up for {string} tests', (test) => {
       fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
     }
   }
-  Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
-  Cypress.env(CONSTANTS.TEST_TYPE, test);
   if (
     UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
       JSON.stringify(window.testState.gherkinDocument.feature.name)
@@ -61,15 +59,14 @@ Given('the environment has been set up for {string} tests', (test) => {
     return 'pending';
   }
 
-  // Calling the envConfigSetup command to setup the environment for the test from the config module.
-  cy.envConfigSetup();
-
   if (
     !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
     UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
     UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
     UTILS.isTestTypeChanged(test)
   ) {
+    Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
+    Cypress.env(CONSTANTS.TEST_TYPE, test);
     if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
       Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
     }
@@ -77,6 +74,9 @@ Given('the environment has been set up for {string} tests', (test) => {
     if (test == CONSTANTS.SETUPCHECK) {
       UTILS.getSetupDetails();
     }
+
+    // Calling the envConfigSetup command to setup the environment for the test from the config module.
+    cy.envConfigSetup();
 
     destroyAppInstance(test);
     Cypress.env(CONSTANTS.ENV_SETUP_STATUS, true);
