@@ -1,3 +1,106 @@
+# [1.5.0-dev.14](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.13...v1.5.0-dev.14) (2024-12-18)
+
+
+### Features
+
+* LP sat changes ([#295](https://github.com/rdkcentral/firebolt-certification-suite/issues/295)) ([73e5c4b](https://github.com/rdkcentral/firebolt-certification-suite/commit/73e5c4b137effc7fa78f1e90bc944ccf224b3343))
+
+# [1.5.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.12...v1.5.0-dev.13) (2024-12-16)
+
+
+### Features
+
+* XSB SecureSotrage cleanup ([#286](https://github.com/rdkcentral/firebolt-certification-suite/issues/286)) ([c2244df](https://github.com/rdkcentral/firebolt-certification-suite/commit/c2244dfb19bf90ae0a2383ea0c4c10cb86af59fc))
+
+# [1.5.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.11...v1.5.0-dev.12) (2024-12-16)
+
+
+### Features
+
+* XSB SecondScreen cleanup ([#290](https://github.com/rdkcentral/firebolt-certification-suite/issues/290)) ([eced08d](https://github.com/rdkcentral/firebolt-certification-suite/commit/eced08db6fda498f1c0af443f965c732aea27e1f))
+
+# [1.5.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.10...v1.5.0-dev.11) (2024-12-16)
+
+
+### Features
+
+* Performance log enhancement ([#275](https://github.com/rdkcentral/firebolt-certification-suite/issues/275)) ([c806aeb](https://github.com/rdkcentral/firebolt-certification-suite/commit/c806aeb6c544de777a4fb339c0129f848fb56cbd))
+
+# [1.5.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.9...v1.5.0-dev.10) (2024-12-16)
+
+
+### Features
+
+* remove obsolete json data ([#277](https://github.com/rdkcentral/firebolt-certification-suite/issues/277)) ([8d7e51d](https://github.com/rdkcentral/firebolt-certification-suite/commit/8d7e51df8d63d998ab881f60fb53581705a11304))
+
+# [1.5.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.8...v1.5.0-dev.9) (2024-12-13)
+
+
+### Features
+
+* XSB metrics cleanup ([#292](https://github.com/rdkcentral/firebolt-certification-suite/issues/292)) ([194dbf7](https://github.com/rdkcentral/firebolt-certification-suite/commit/194dbf747b6284ca9337e0399b930198e035a429))
+* XSB metrics_rpconly cleanup ([#293](https://github.com/rdkcentral/firebolt-certification-suite/issues/293)) ([7cd21ab](https://github.com/rdkcentral/firebolt-certification-suite/commit/7cd21abce806069d1daa716cc541832af7c62aa1))
+* XSB UserInterest cleanup ([#291](https://github.com/rdkcentral/firebolt-certification-suite/issues/291)) ([566952c](https://github.com/rdkcentral/firebolt-certification-suite/commit/566952cbd9a2683d1831df52398e8348c7fdef3d))
+
+# [1.5.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.7...v1.5.0-dev.8) (2024-12-12)
+
+
+### Features
+
+* UserGants, LifecycleBackground cleanup + sev tags ([#276](https://github.com/rdkcentral/firebolt-certification-suite/issues/276)) ([7014175](https://github.com/rdkcentral/firebolt-certification-suite/commit/7014175315738474e8113eda20b7e7efd1cec2e4))
+
+# [1.5.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.6...v1.5.0-dev.7) (2024-12-10)
+
+
+### Features
+
+* Update App Exit Handling ([#266](https://github.com/rdkcentral/firebolt-certification-suite/issues/266)) ([d4a96b7](https://github.com/rdkcentral/firebolt-certification-suite/commit/d4a96b709179688943de3968b4da19026af7060b))
+
+# [1.5.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.5...v1.5.0-dev.6) (2024-12-09)
+
+
+### Bug Fixes
+
+* Trimming the new line in logs ([#285](https://github.com/rdkcentral/firebolt-certification-suite/issues/285)) ([36f7b2f](https://github.com/rdkcentral/firebolt-certification-suite/commit/36f7b2f9fe2950c5d7da0c51a8ee8d70385843b4))
+
+# [1.5.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.4...v1.5.0-dev.5) (2024-12-06)
+
+
+### Bug Fixes
+
+* entos intent support in fcs to get values from cli ([#281](https://github.com/rdkcentral/firebolt-certification-suite/issues/281)) ([834ca87](https://github.com/rdkcentral/firebolt-certification-suite/commit/834ca87f9a6e9180b1b1378218594bb66acd0bc1))
+
+# [1.5.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.3...v1.5.0-dev.4) (2024-12-03)
+
+
+### Bug Fixes
+
+* Added support in FCS for the external events ([#262](https://github.com/rdkcentral/firebolt-certification-suite/issues/262)) ([aab804d](https://github.com/rdkcentral/firebolt-certification-suite/commit/aab804d25a756ffff60e3cb47b20bbf8f500d33a))
+
+# [1.5.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.2...v1.5.0-dev.3) (2024-12-03)
+
+
+### Features
+
+* Add validation to ensure that the app launched is in foreground ([#264](https://github.com/rdkcentral/firebolt-certification-suite/issues/264)) ([0132a0f](https://github.com/rdkcentral/firebolt-certification-suite/commit/0132a0ffcdbd77d31c8b4c085144e65bca96b7b1))
+
+# [1.5.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.0-dev.1...v1.5.0-dev.2) (2024-12-03)
+
+
+### Features
+
+* Enhancement of dynamic glue codes ([#263](https://github.com/rdkcentral/firebolt-certification-suite/issues/263)) ([59df9da](https://github.com/rdkcentral/firebolt-certification-suite/commit/59df9da4bf1ac6ae08d9e2ab56b301e67562c796))
+
+# [1.5.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.4.0...v1.5.0-dev.1) (2024-12-02)
+
+
+### Features
+
+* Capabilities Cleanup + SevTags ([#267](https://github.com/rdkcentral/firebolt-certification-suite/issues/267)) ([6f3cc05](https://github.com/rdkcentral/firebolt-certification-suite/commit/6f3cc05f62356eefd106b3a0387b8d92b96cd684))
+* XSB keyboard module cleanup ([#272](https://github.com/rdkcentral/firebolt-certification-suite/issues/272)) ([04fcf22](https://github.com/rdkcentral/firebolt-certification-suite/commit/04fcf22b354efa35180de265d0936a319311db0e))
+* XSB Parameters module update ([#274](https://github.com/rdkcentral/firebolt-certification-suite/issues/274)) ([bc0187b](https://github.com/rdkcentral/firebolt-certification-suite/commit/bc0187bcc619efe04ff36264df8701657a14c62b))
+* XSB profile module cleanup ([#273](https://github.com/rdkcentral/firebolt-certification-suite/issues/273)) ([6dcabaa](https://github.com/rdkcentral/firebolt-certification-suite/commit/6dcabaa42f4bf94a2093b3ed449be8d70ed3dc99))
+
 # [1.4.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.3.0...v1.4.0) (2024-11-27)
 
 

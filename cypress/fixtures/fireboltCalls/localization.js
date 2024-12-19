@@ -52,14 +52,14 @@ exports.LOCALIZATION_ADDITIONAL_INFO = {
 };
 
 exports.LOCALIZATION = {
-  method: resolveAtRuntime('localization.{{attribute}}'),
+  method: resolveAtRuntime('{{module}}.{{method}}'),
   params: {},
   validationJsonPath: 'result',
-  setMethod: resolveAtRuntime('manage_localization.set{{attribute.uppercaseFirstChar}}'),
+  setMethod: resolveAtRuntime('manage_{{module}}.set{{attribute.uppercaseFirstChar}}'),
   setParams: resolveAtRuntime('value'),
   setValidationJsonPath: 'result',
   setContent: null,
-  event: resolveAtRuntime('localization.on{{attribute.uppercaseFirstChar}}Changed'),
+  event: resolveAtRuntime('{{module}}.on{{method.uppercaseFirstChar}}Changed'),
   eventValidationJsonPath: 'eventResponse',
   content: {
     data: [
@@ -70,7 +70,7 @@ exports.LOCALIZATION = {
             mode: 'staticContentValidation',
             type: resolveAtRuntime('value'),
             description: resolveAtRuntime(
-              'Validating that manage_localization.set{{attribute.uppercaseFirstChar}} {{attribute}} is {{value}}'
+              'Validating that manage_{{module}}.set{{attribute.uppercaseFirstChar}} {{attribute}} is {{value}}'
             ),
           },
         ],
@@ -360,6 +360,11 @@ exports.SET_LOCALITY_TO_WASHINGTON = {
 exports.SET_COUNTRYCODE_TO_PH = {
   method: 'manage_localization.setCountryCode',
   params: { value: 'PH' },
+};
+
+exports.SET_COUNTRYCODE_TO_UK = {
+  method: 'manage_localization.setCountryCode',
+  params: { value: 'UK' },
 };
 
 exports.SET_LOCALE_TO_ENUS = {
