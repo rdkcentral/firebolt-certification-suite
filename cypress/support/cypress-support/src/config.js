@@ -42,7 +42,7 @@ export default class Config {
     return this.moduleName;
   }
 
-  /* get fcsSetterOverride methods from configuration module.
+  /* get request Override methods from configuration module.
    * ex: {"method": "fcsSetters.setClosedCaptions", "params": {"attribute":enable "value": true }}
    * If method not present, return null
    * If method present, return the object to caller.
