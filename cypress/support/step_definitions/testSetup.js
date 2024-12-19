@@ -134,13 +134,8 @@ function destroyAppInstance(testType) {
   );
   const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
 
-  // Checking if the previous test type is different from the current test type.
-  const isDifferentFromPrevious =
-    UTILS.getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != testType &&
-    UTILS.getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != undefined;
   // If the current test type is present inside the closeAppTestTypes array then close the app.
-  // If the multiple test types are executed in one command then close the app between them
-  if (isCloseTestType || isDifferentFromPrevious) {
+  if (isCloseTestType) {
     fireLog.info(
       'Closing app since either Test Type is specified in closeAppTestTypes or is different from previous Test Type.'
     );
