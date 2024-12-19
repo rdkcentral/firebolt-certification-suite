@@ -47,7 +47,6 @@ const ensureConfigModule = async () => {
         console.log(`Default subdirectory '${dir}' created.`);
       } else if (dir === 'requestModules') {
         // Special handling for requestModule to look for missing files.
-        console.log(`Checking files in '${dir}'...`);
 
         const defaultFiles = await fs.readdir(defaultSubDirPath);
 
