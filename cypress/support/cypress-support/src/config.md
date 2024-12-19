@@ -5,7 +5,21 @@ Note: Configuration modules are expected to export all request and response modu
 
 ### Supported Commands
 
-#### > config.getRequestOverride(fireboltObject)
+#### > config.getRequestOverride(moduleName, methodName)
+ 
+This function will look for any request override config present for given firebolt module/method. This function would return null if no request config override exists. 
+
+Order of Operations
+* If "requestModules/\<module\>.js-\>\<method\>()" exists, it should always be called for the \<module\>.\<method\> FB method (Ex: requestModules/fcsSetter.js-\>setClosedCaptions()).
+
+Ex:
+```
+request: config.getRequestOverride(fcsSetters, setClosedCaptions)
+
+```
+Note: specific examples will be dependent on the configuration module.
+
+#### > config.invokeRequestOverride(fireboltObject)
  
 This function will look for any request override config present for given firebolt module/method. This function would return same fireboltObject if no config exists. **Note**: It is the responsibility of the configuration module's request overrides to create an object that the tranpsort manager knows how to handle.
 
@@ -18,7 +32,7 @@ Order of Operations
 
 Ex:
 ```
-request: config.getRequestOverride({"method": "module.method", "param": paramObject})
+request: config.invokeRequestOverride({"method": "module.method", "param": paramObject})
 
 If override
 response: { "transport": "<transportMode>", "options": optionObject, "payload" : "<payload" }}
@@ -27,9 +41,9 @@ response: {"method": "module.method", "param": paramObject}
 ```
 Note: specific examples will be dependent on the configuration module.
 
-#### > config.getResponseOverride(fireboltResponse)
+#### > config.invokeResponseOverride(fireboltResponse)
 
-This function will look for any response override config present for given firebolt module/method read in [config.getRequestOverride(fireboltObject)](#-configgetrequestoverridefireboltobject). This function would return same response if no config exists. **Note**: It is the responsibility of the configuration module's response overrides to determine what kind of response is expected from the transport manager. (Ex: If a method has a request override that returns an HTTP MTC call, the response override should know to expect the MTC response object for an HTTP call)
+This function will look for any response override config present for given firebolt module/method read in [config.invokeRequestOverride(fireboltObject)](#-configinvokeRequestOverridefireboltobject). This function would return same response if no config exists. **Note**: It is the responsibility of the configuration module's response overrides to determine what kind of response is expected from the transport manager. (Ex: If a method has a request override that returns an HTTP MTC call, the response override should know to expect the MTC response object for an HTTP call)
 
 Order of Operations
 * If "responseModules/\<module\>.js-\>\<method\>()" exists, it should always be called for the \<module\>.\<method\> FB method (Ex: responseModules/discovery.js-\>launch()).
@@ -40,7 +54,7 @@ Order of Operations
 Ex:
 
 ```
-request: config.getResponseOverride(<responseFromTransportManager>)
+request: config.invokeResponseOverride(<responseFromTransportManager>)
 
 If override
 response: <modifiedResponse>

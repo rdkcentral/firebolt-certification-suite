@@ -252,15 +252,49 @@ export default function (module) {
    */
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
     cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
-      return new Promise(async (resolve) => {
-        const message = await config.getRequestOverride(requestMap);
-        // perform MTC call/FB call only if the message is not null
-        if (message != null) {
-          const response = await transport.sendMessage(message);
-          const result = config.getResponseOverride(response);
-          resolve(result);
+      return new Promise(async (resolve, reject) => {
+        const [moduleName, methodName] = requestMap.method.split('.');
+        Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
+        // Check if request is for fcs setters
+        if (moduleName === CONSTANTS.FCS_SETTER) {
+          const method = config.getRequestOverride(moduleName, methodName);
+          if (typeof method === 'function') {
+            const params = requestMap.params || {};
+            const argCount = method.length;
+            // If the number of parameters does not match the expected argument count, reject
+            const paramsCount = Object.keys(params).length;
+            if (paramsCount !== argCount) {
+              reject(
+                new Error(
+                  `${requestMap.method} Expectes ${argCount} arguments, but got ${paramsCount} params`
+                )
+              );
+            }
+            const attribute = params.attribute ?? null; // Set to null if not exist
+            const value = params.value ?? null; // Set to null if not exist
+            let args = [];
+            if (attribute !== null && value !== null) {
+              args = [attribute, value]; // If both attribute and value are provided
+            } else if (value !== null) {
+              args = [value]; // If only value is provided
+            }
+            // Dynamically call the method with the params
+            const response = await method(...args);
+            resolve(response);
+          } else {
+            reject(setterNotImplemented('not implemented'));
+          }
         } else {
-          resolve(null);
+          // Default logic for other methods
+          const message = await config.invokeRequestOverride(requestMap);
+          // Perform MTC/FB call only if the message is not null
+          if (message != null) {
+            const response = await transport.sendMessage(message);
+            const result = config.invokeResponseOverride(response);
+            resolve(result);
+          } else {
+            resolve(null);
+          }
         }
       });
     });
