@@ -68,8 +68,8 @@ const ensureConfigModule = async () => {
         const targetIndexExists = await fs.pathExists(targetIndexPath);
 
         if (defaultIndexExists) {
-          let defaultContent = await fs.readFile(defaultIndexPath, 'utf8');
-          let targetContent = targetIndexExists ? await fs.readFile(targetIndexPath, 'utf8') : '';
+          const defaultContent = await fs.readFile(defaultIndexPath, 'utf8');
+          const targetContent = targetIndexExists ? await fs.readFile(targetIndexPath, 'utf8') : '';
 
           // Merge contents, remove duplicates
           const mergedLines = new Set([
