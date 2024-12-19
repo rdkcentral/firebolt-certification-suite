@@ -111,8 +111,15 @@ Given('the environment has been set up for {string} tests', (test) => {
     }
   }
 
+  const testRegex = /deeplink|dismiss/i; // Regular expression to match 'deeplink' or 'dismiss' case-insensitively
+
+  const testLowerCase = test.toLowerCase();
+  const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
   if (
-    Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(test) &&
+    externalModuleTestTypes.some(
+      (item) => typeof item === 'string' && testLowerCase.toLowerCase().includes(item.toLowerCase())
+    ) &&
+    testLowerCase.match(testRegex) &&
     !Cypress.env(CONSTANTS.INTENT_TEMPLATES) &&
     !Cypress.env(CONSTANTS.APP_METADATA)
   ) {

@@ -377,26 +377,54 @@ Given('device is rebooted', () => {
 Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
   const appId = Cypress.env(CONSTANTS.RUNTIME).appId;
   let KeyPressSequence;
+  let loggedType;
+
+  const test = Cypress.env(CONSTANTS.TEST_TYPE);
+  const testLowerCase = test.toLowerCase();
+
+  if (testLowerCase.includes('playback')) {
+    if (
+      Cypress.env('app_metadata') &&
+      Cypress.env('app_metadata').defaultKeyPressSequence &&
+      Cypress.env('app_metadata').defaultKeyPressSequence.playbackDismiss
+    ) {
+      playbackDismiss = Cypress.env('app_metadata').defaultKeyPressSequence.playbackDismiss;
+      if (playbackDismiss.loggedIn) {
+        KeyPressSequence = playbackDismiss.loggedIn.dismiss;
+      } else if (playbackDismiss.loggedOut) {
+        KeyPressSequence = playbackDismiss.loggedOut.dismiss;
+      }
+    }
+  } else {
+    if (test.includes('loggedIn')) {
+      loggedType = 'loggedIn';
+    } else if (test.includes('loggedOut')) {
+      loggedType = 'loggedOut';
+    }
+  }
+
   if (
     // Check if keyPressSequence is defined in the runtime environment variables for the specific intent
     Cypress.env(CONSTANTS.RUNTIME) &&
     Cypress.env(CONSTANTS.RUNTIME).intent &&
-    Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence
+    Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence &&
+    Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence[loggedType]
   ) {
-    KeyPressSequence = Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence;
+    KeyPressSequence = Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence[loggedType];
   } else if (
     // Check if defaultKeyPressSequence is defined for the specific appId in app_metadata
     Cypress.env('app_metadata') &&
     Cypress.env('app_metadata')[appId] &&
-    Cypress.env('app_metadata')[appId].defaultKeyPressSequence
+    Cypress.env('app_metadata')[appId].defaultKeyPressSequence &&
+    Cypress.env('app_metadata')[appId].defaultKeyPressSequence[loggedType]
   ) {
-    KeyPressSequence = Cypress.env('app_metadata')[appId].defaultKeyPressSequence;
+    KeyPressSequence = Cypress.env('app_metadata')[appId].defaultKeyPressSequence[loggedType];
   } else if (
     // Check if defaultKeyPressSequence is defined in the app_metadata globally
     Cypress.env('app_metadata') &&
     Cypress.env('app_metadata').defaultKeyPressSequence
   ) {
-    KeyPressSequence = Cypress.env('app_metadata').defaultKeyPressSequence;
+    KeyPressSequence = Cypress.env('app_metadata').defaultKeyPressSequence.dismiss;
   } else {
     // If no keyPressSequence is found, throw an error with details from the app_metadata file
     const appMetadataJSON = require('../../fixtures/objects/appData/app_metadata.json');
@@ -404,6 +432,7 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
       `Expected KeyPressSequence was not found for ${appId} in app_metadata.json. More details on app_metadata present in: ${appMetadataJSON}`
     );
   }
+
   cy.exitAppSession('dismissApp', KeyPressSequence.dismiss).then((response) => {
     fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
   });
@@ -454,7 +483,7 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
         );
       } else {
         // Log failure message if none of the above conditions are met
-        fireLog.fail(`${appId} app is not dismissed. Response : ${response}`);
+        fireLog.fail(`${appId} app is not dismissed. Response : ${responseString}`);
       }
     })
     .then(() => {
@@ -472,7 +501,7 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
       cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
         fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
         if (response.status != 'pass') {
-          fireLog.fail(`Screenshot validation failed ${response.validations}`);
+          fireLog.fail(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
         }
       });
     });
