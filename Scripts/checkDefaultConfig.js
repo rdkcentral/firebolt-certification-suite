@@ -40,10 +40,51 @@ const ensureConfigModule = async () => {
       const targetSubDirPath = path.join(configModulePath, dir);
 
       const existsSubDir = await fs.pathExists(targetSubDirPath);
+
       if (!existsSubDir) {
         // Copy missing subdirectory from defaultModule.
         await fs.copy(defaultSubDirPath, targetSubDirPath);
-        console.log(`Default subdirectory ${dir} created.`);
+        console.log(`Default subdirectory '${dir}' created.`);
+      } else if (dir === 'requestModules') {
+        // Special handling for requestModule to look for missing files.
+        console.log(`Checking files in '${dir}'...`);
+
+        const defaultFiles = await fs.readdir(defaultSubDirPath);
+
+        for (const file of defaultFiles) {
+          const defaultFilePath = path.join(defaultSubDirPath, file);
+          const targetFilePath = path.join(targetSubDirPath, file);
+
+          const fileExists = await fs.pathExists(targetFilePath);
+          if (!fileExists) {
+            await fs.copy(defaultFilePath, targetFilePath);
+            console.log(`Copied '${file}' to 'requestModule'.`);
+          }
+        }
+        const defaultIndexPath = path.join(defaultSubDirPath, 'index.js');
+        const targetIndexPath = path.join(targetSubDirPath, 'index.js');
+
+        const defaultIndexExists = await fs.pathExists(defaultIndexPath);
+        const targetIndexExists = await fs.pathExists(targetIndexPath);
+
+        if (defaultIndexExists) {
+          let defaultContent = await fs.readFile(defaultIndexPath, 'utf8');
+          let targetContent = targetIndexExists ? await fs.readFile(targetIndexPath, 'utf8') : '';
+
+          // Merge contents, remove duplicates
+          const mergedLines = new Set([
+            ...targetContent.split('\n'),
+            ...defaultContent.split('\n'),
+          ]);
+
+          const mergedContent = Array.from(mergedLines).join('\n');
+
+          // Write back to target index.js
+          await fs.writeFile(targetIndexPath, mergedContent, 'utf8');
+          console.log(
+            `Merged 'index.js' content from defaultModule to configModule/requestModule.`
+          );
+        }
       }
     }
   } catch (err) {
