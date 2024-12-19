@@ -73,10 +73,13 @@ async function generateLocalReport(reportObj, jobId) {
     // Move cucumber json to a separate directory and get the path
     const cucumberDir = await filterCucumberJson(reportObj.cucumberReportFilePath);
     let customReportData;
+    const sdkVersion = config.env.sdkVersion || 'latest';
     try {
-      customReportData = require('../fixtures/external/objects/customReportData.json');
+      customReportData = require(
+        `../fixtures/external/${sdkVersion}/objects/customReportData.json`
+      );
     } catch (error) {
-      customReportData = require('../fixtures/customReportData.json');
+      customReportData = require(`../fixtures/${sdkVersion}/customReportData.json`);
     }
     // Configure cucumber report options
     reportEnv.jsonDir = cucumberDir;

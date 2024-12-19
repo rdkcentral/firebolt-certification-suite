@@ -434,6 +434,9 @@ function stackTrace() {
  */
 function lifecycleHistorySchemaValidation(result, schema, lifecycleHistoryRecordType, envKey) {
   const schemaValidationResult = validator.validate(result, schema);
+  const sdkVersion = getEnvVariable(
+    CONSTANTS.SDK_VERSION
+  ) || 'latest';
 
   if (
     lifecycleHistoryRecordType == CONSTANTS.TASK.STOPLIFECYCLERECORDING &&
@@ -444,7 +447,7 @@ function lifecycleHistorySchemaValidation(result, schema, lifecycleHistoryRecord
   ) {
     assert(
       false,
-      `Schema Validation Failed: Response must follow the format specified in "cypress/fixtures/schemas/lifecycleHistorySchema.json", Errors: ${schemaValidationResult.errors} `
+      `Schema Validation Failed: Response must follow the format specified in "cypress/fixtures/${sdkVersion}/schemas/lifecycleHistorySchema.json", Errors: ${schemaValidationResult.errors} `
     );
   }
 

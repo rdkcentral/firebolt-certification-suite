@@ -15,8 +15,10 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-const REGEXFORMATS = require('../../fixtures/regexformats');
+import UTILS from '../cypress-support/src/utils';
 const CONSTANTS = require('../constants/constants');
+const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION) || 'latest';
+const REGEXFORMATS = require(`../../fixtures/${sdkVersion}/regexformats`);
 const RegexParser = require('regex-parser');
 
 /**

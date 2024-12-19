@@ -260,7 +260,8 @@ Cypress.Commands.add('updateRunInfo', () => {
               return false;
             }
             const deviceMac = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC).replace(/:/g, '');
-            const deviceMacJson = `./cypress/fixtures/devices/${deviceMac}.json`;
+            const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION) || 'latest';
+            const deviceMacJson = `./cypress/fixtures/${sdkVersion}/devices/${deviceMac}.json`;
             // Check if mac json file exists
             cy.task('checkFileExists', deviceMacJson)
               .then((exists) => {
@@ -434,7 +435,8 @@ Cypress.Commands.add('getDeviceDataFromThirdPartyApp', (method, params, action) 
  * cy.getLatestFireboltJsonFromFixtures()
  */
 Cypress.Commands.add('getLatestFireboltJsonFromFixtures', () => {
-  cy.task('readFilesFromDir', 'cypress/fixtures/versions/').then((filesData) => {
+  const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION) || 'latest';
+  cy.task('readFilesFromDir', `cypress/fixtures/${sdkVersion}/versions/`).then((filesData) => {
     try {
       // Reading a greater version value from the versions folder.
       const version = filesData
@@ -495,7 +497,8 @@ Cypress.Commands.add('getFireboltJsonData', () => {
 
     //  If cy.request fails, get specific firebolt.json from -cypress/fixtures/versions/${Cypress.env(CONSTANTS.SDK_VERSION)}/firebolt.json
     else {
-      const configImportPath = `cypress/fixtures/versions/${UTILS.getEnvVariable(
+      const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION) || 'latest';
+      const configImportPath = `cypress/fixtures/${sdkVersion}/versions/${UTILS.getEnvVariable(
         CONSTANTS.SDK_VERSION
       )}/firebolt.json`;
 

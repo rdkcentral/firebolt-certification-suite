@@ -28,6 +28,6 @@ Here are some examples of tags for different categories:
 * Tags for communicationModes: @sdk, @transport
 
 ## Directory strucute:
-Within the `cypress/TestCases` folder we have the following sub-folders:
+Within the `cypress/TestCases/<sdkVersion>` folder we have the following sub-folders:
 - FireboltCertification: Contains core and manage feature files.
 - Sanity: Contains core and manage sanity tests.

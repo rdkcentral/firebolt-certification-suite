@@ -519,7 +519,7 @@ The basic structure of the validation object in configModule with override will 
 }
 ```
 
-While validating, if a key is present in both fcs-validation jsons (eg: cypress/fixtures/objects/validationObjects/accessibility.json ) and also in configModule's validation jsons (eg: in config module : fixtures/objects/validationObjects/account.json ) which will be in cypress/fixtures/external/objects/validationObjects/, it will be checking for the "override" value first. If the override value of config validation object is matching with fcs validation objects data's index value, then that specific object in the data array will be overriden with the object from configModule. Else, the configModule object will be pushed as a new object in the data array.
+While validating, if a key is present in both fcs-validation jsons (eg: cypress/fixtures/objects/validationObjects/accessibility.json ) and also in configModule's validation jsons (eg: in config module : fixtures/objects/validationObjects/account.json ) which will be in cypress/fixtures/external/<sdkVersion>objects/validationObjects/, it will be checking for the "override" value first. If the override value of config validation object is matching with fcs validation objects data's index value, then that specific object in the data array will be overriden with the object from configModule. Else, the configModule object will be pushed as a new object in the data array.
 
 ### Example:
 

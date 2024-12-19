@@ -73,7 +73,7 @@ Currently supported requestType is params, context and content.
    * Error validation
    * Result validation
     - Static Content Validation - Required content will be fetched from combined(fcs and config module) `default json` or from the corresponding `module json` files based on the precedence.
-      - `module.json` files reside in `fixtures/modules/` or `fixtures/external/modules/`
+      - `module.json` files reside in `fixtures/<sdkVersion>/modules/` or `fixtures/external/<sdkVersion>/modules/`
 
     - Device Content Validation
       - Content will be fetched from `devicMac.json` file when devicMac is present. 
