@@ -46,7 +46,8 @@ let metaDataArr = [];
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
   const testsuite = config.env.testSuite;
-  const specPattern = getSpecPattern(testsuite);
+  const sdkVersion = config.env.sdkVersion || 'latest';
+  const specPattern = getSpecPattern(testsuite, sdkVersion);
   if (specPattern !== undefined) {
     config.specPattern = specPattern;
   }
@@ -310,9 +311,11 @@ module.exports = async (on, config) => {
           if (fs.existsSync(tempReportEnv)) reportProperties.reportEnv = require(tempReportEnv);
           let customReportData;
           try {
-            customReportData = require('../fixtures/external/objects/customReportData.json');
+            customReportData = require(
+              `../fixtures/external/${sdkVersion}/objects/customReportData.json`
+            );
           } catch (error) {
-            customReportData = require('../fixtures/customReportData.json');
+            customReportData = require(`../fixtures/${sdkVersion}/customReportData.json`);
           }
           reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
           reportProperties.customReportData = customReportData;

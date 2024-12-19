@@ -30,10 +30,10 @@ const setimmediate = require('setimmediate');
 let appTransport;
 const flatted = require('flatted');
 const _ = require('lodash');
-const internalV2FireboltCallsData = require('../../../fixtures/fireboltCalls/index');
-const externalV2FireboltCallsData = require('../../../fixtures/external/fireboltCalls/index');
-const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/index');
-const externalV2FireboltMockData = require('../../../fixtures/external/fireboltCalls/index');
+const internalV2FireboltCallsData = require(`../../../fixtures/${sdkVersion}/fireboltCalls/index`);
+const externalV2FireboltCallsData = require(`../../../fixtures/external/${sdkVersion}/fireboltCalls/index`);
+const internalV2FireboltMockData = require(`../../../fixtures/${sdkVersion}/fireboltCalls/index`);
+const externalV2FireboltMockData = require(`../../../fixtures/external/${sdkVersion}/fireboltCalls/index`);
 
 export default function (module) {
   const config = new Config(module);

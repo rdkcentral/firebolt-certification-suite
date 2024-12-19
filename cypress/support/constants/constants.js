@@ -15,6 +15,10 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
+import UTILS from '../cypress-support/src/utils';
+
+const sdkVersion = UTILS.getEnvVariable('sdkVersion') || 'latest';
+
 module.exports = {
   ACTION: 'action',
   ACTION_CORE: 'CORE',
@@ -44,7 +48,7 @@ module.exports = {
   BEFORE_OPERATION: 'beforeOperation',
   BEFORE_OPERATION_TAGS: 'beforeOperationTags',
   BEFORE_OPERATION_FORMAT:
-    'Before operation object is not in proper array format, recheck the before objects in fixture/external/moduleReqId - getBeforeOperationObject',
+    'Before operation object is not in proper array format, recheck the before objects in fixture/external/<sdkVersion>/moduleReqId - getBeforeOperationObject',
   BOOLEAN: 'boolean',
   CAPABILITIES_INFO: 'capabilities.info',
   CAPABILITIES_PERMITTED: 'capabilities.permitted',
@@ -58,7 +62,7 @@ module.exports = {
   SUITE_COMMUNICATION_MODE: 'suiteCommunicationMode',
   CONFIG: 'CONFIG',
   CONFIG_IMPLEMENTATION_MISSING: 'Config module implementation missing',
-  CONFIG_MODULE_SETRESPONSE_PATH: 'cypress/fixtures/external/setResponseData.json',
+  CONFIG_MODULE_SETRESPONSE_PATH: `cypress/fixtures/external/${sdkVersion}/setResponseData.json`,
   CONTENT: 'Content',
   CONTEXT: 'Context',
   CONTEXT_FILE_PATH: 'cypress/fixtures/apiObjectContext.json',
@@ -69,7 +73,7 @@ module.exports = {
   CURRENT_APP_ID: 'currentAppId',
   CUSTOM_METHOD_PATH:
     'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/fixtures/docs/validations.md#custom',
-  CYPRESS_MODULES_PATH: 'cypress/fixtures/external/modules',
+  CYPRESS_MODULES_PATH: `cypress/fixtures/external/${sdkVersion}/modules`,
   DATE: 'date',
   DECIMAL: 'decimal',
   DECODE: 'decode',
@@ -153,11 +157,11 @@ module.exports = {
   EXPECTED_JSON_IN_VALIDATION_OBJECTS:
     'Expected JSON data should be defined in fixtures/objects/validationObjects/',
   EXPECTING_ERROR: 'expectingError',
-  EXTERNAL_ERROR_CONTENT_OBJECTS_PATH: 'cypress/fixtures/external/objects/errorContentObjects.json',
-  EXTERNAL_DEVICES_PATH: 'cypress/fixtures/external/devices/',
-  EXTERNAL_MODULEREQID_PATH: 'cypress/fixtures/external/objects/moduleReqId/moduleReqId.json',
-  EXTERNAL_PATH: 'cypress/fixtures/external/modules/',
-  EXTERNAL_PREREQUISITE_DATA: './cypress/fixtures/external/PreRequisiteData.json',
+  EXTERNAL_ERROR_CONTENT_OBJECTS_PATH: `cypress/fixtures/external/${sdkVersion}/objects/errorContentObjects.json`,
+  EXTERNAL_DEVICES_PATH: `cypress/fixtures/external/${sdkVersion}/devices/`,
+  EXTERNAL_MODULEREQID_PATH: `cypress/fixtures/external/${sdkVersion}/objects/moduleReqId/moduleReqId.json`,
+  EXTERNAL_PATH: `cypress/fixtures/external/${sdkVersion}/modules/`,
+  EXTERNAL_PREREQUISITE_DATA: `./cypress/fixtures/external/${sdkVersion}/PreRequisiteData.json`,
   EXTRACTEDAPI_PATH: 'extractedApiObject.apiResponse.',
   FAIL: 'FAIL',
   FAIL_ON_PUBSUB_CONNECTION_ERROR: 'failOnPubSubConnectionError',
@@ -179,18 +183,18 @@ module.exports = {
   FIREBOLT_OBJECT_DOC_PATH:
     'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/fixtures/docs/dynamicObjects.md#firebolt-object',
   FIREBOLT_VERSION: 'Firebolt Version',
-  FIREBOLTCALLS_FROM_CONFIGMODULE: 'cypress/fixtures/external/fireboltCalls/',
+  FIREBOLTCALLS_FROM_CONFIGMODULE: `cypress/fixtures/external/${sdkVersion}/fireboltCalls/`,
   FIREBOLTCALLS_FROM_FCS: 'cypress/fixtures/fireboltCalls/',
   FIREBOLTCONFIG: 'fireboltConfig',
   FIREBOLTMOCK: 'fireboltMock',
-  FIREBOLTMOCK_FROM_CONFIGMODULE: 'cypress/fixtures/external/fireboltMocks/',
+  FIREBOLTMOCK_FROM_CONFIGMODULE: `cypress/fixtures/external/${sdkVersion}/fireboltMocks/`,
   FIREBOLTMOCK_FROM_FCS: 'cypress/fixtures/fireboltMocks/',
   FIREBOLT_SPECIFICATION_NEXT_URL: 'firebolt_specification_next_url',
   FIREBOLT_SPECIFICATION_PROPOSED_URL: 'firebolt_specification_proposed_url',
   FIREBOLT_SPECIFICATION_URL: 'firebolt_specification_url',
   FIRST_PARTY_APP: '1st party app',
   VALIDATION_OBJECTS_PATH: 'cypress/fixtures/objects/validationObjects/',
-  CONFIG_VALIDATION_OBJECTS_PATH: 'cypress/fixtures/external/objects/validationObjects/',
+  CONFIG_VALIDATION_OBJECTS_PATH: `cypress/fixtures/external/${sdkVersion}/objects/validationObjects/`,
   FIXTURE: 'fixture',
   FIXTURE_DEFINED_PATH:
     'Expected JSON data should be defined in fixtures/objects/validationObjects/',
@@ -338,8 +342,8 @@ module.exports = {
   PUB_SUB_PUBLISH_SUFFIX: 'pubSubPublishSuffix',
   PUB_SUB_SUBSCRIBE_SUFFIX: 'pubSubSubscribeSuffix',
   SETUPCHECK: 'Setup Check',
-  SETUPVALUES: 'external/setupValues.json',
-  SETUPVALUES_FILEPATH: 'cypress/fixtures/external/setupValues.json',
+  SETUPVALUES: `external/${sdkVersion}/setupValues.json`,
+  SETUPVALUES_FILEPATH: `cypress/fixtures/external/${sdkVersion}/setupValues.json`,
   PREVIOUS_TEST_TYPE: 'previousTestType',
   PROPOSED: 'proposed',
   PUBLISH: 'publish',
@@ -489,7 +493,7 @@ module.exports = {
   CREATE_MARKER: 'createMarker',
   MODULE_OVERRIDES: ['fcs', 'performance'],
   COMBINEDDEFAULTTESTDATA: 'combinedDefaultTestData',
-  CONFIG_DEFAULTTESTDATA_PATH: 'cypress/fixtures/external/defaultTestData.json',
+  CONFIG_DEFAULTTESTDATA_PATH: `cypress/fixtures/external/${sdkVersion}/defaultTestData.json`,
   FCS_DEFAULTTESTDATA_PATH: 'cypress/fixtures/defaultTestData.json',
   ENV_SETUP_STATUS: 'environmentLaunched',
   APP_LAUNCH_STATUS: 'appLaunched',
