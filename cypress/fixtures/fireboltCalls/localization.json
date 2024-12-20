@@ -1,83 +1,4 @@
 {
-    "GET_LOCALIZATION_ADDITIONALINFO": {
-        "method": "localization.additionalInfo"
-    },
-    "EXPECTED_LOCALIZATION_ADDITIONALINFO": {
-        "method": "localization.additionalInfo",
-        "validationJsonPath": "result",
-        "content": "EMPTYPARAM"
-    },
-    "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_STRING": {
-        "method": "manage_localization.addAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_AS_STRING"
-    },
-    "STRING_FOR_LOCALIZATION_ADDITIONALINFO": {
-        "method": "localization.additionalInfo",
-        "validationJsonPath": "result",
-        "content": "LOCALIZATION_ADD_ADDITIONALINFO_AS_STRING"
-    },
-    "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_EMPTY_STRING": {
-        "method": "manage_localization.addAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_AS_EMPTY"
-    },
-    "EMPTY_STRING_FOR_LOCALIZATION_ADDITIONALINFO": {
-        "method": "localization.additionalInfo",
-        "validationJsonPath": "result",
-        "content": "LOCALIZATION_ADD_ADDITIONALINFO_AS_EMPTY"
-    },
-    "SET_LOCALIZATION_REMOVEADDITIONALINFO_WITH_STRING": {
-        "method": "manage_localization.removeAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_KEY_AS_STRING"
-    },
-    "SET_LOCALIZATION_REMOVEADDITIONALINFO_WITH_EMPTY_STRING": {
-        "method": "manage_localization.removeAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_KEY_AS_EMPTY_STRING"
-    },
-    "EMPTY_KEY/VALUE_FOR_LOCALIZATION_ADDITIONALINFO": {
-        "method": "localization.additionalInfo",
-        "validationJsonPath": "result",
-        "content": "LOCALIZATION_REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING"
-    },
-    "EMPTY_RESPONSE_FOR_LOCALIZATION_ADDITIONALINFO": {
-        "method": "localization.additionalInfo",
-        "validationJsonPath": "result",
-        "content": "LOCALIZATION_REMOVE_ADDITIONALINFO_EMPTY_RESPONSE"
-    },
-    "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_KEY_AS_STRING_VALUE_AS_NULL": {
-        "method": "manage_localization.addAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_VALUE_AS_NULL",
-        "expected": "error"
-    },
-    "INVALID_PARAMETERS_FOR_LOCALIZATION_ADDADDITIONALINFO": {
-        "method": "localization.addAdditionalInfo",
-        "validationJsonPath": "result",
-        "content": "INVALID_PARAMS",
-        "expectingError": true
-    },
-    "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_KEY_AS_NULL_VALUE_AS_STRING": {
-        "method": "manage_localization.addAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_KEY_AS_NULL",
-        "expected": "error"
-    },
-    "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_KEY_AND_VALUE_AS_NULL": {
-        "method": "manage_localization.addAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_AS_NULL",
-        "expected": "error"
-    },
-    "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_KEY_AND_VALUE_AS_INTEGER": {
-        "method": "manage_localization.addAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_AS_INTEGER",
-        "expected": "error"
-    },
-    "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_KEY_AND_VALUE_AS_OBJECT": {
-        "method": "manage_localization.addAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_AS_OBJECT",
-        "expected": "error"
-    },
-    "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_EMPTY_OBJECT": {
-        "method": "manage_localization.addAdditionalInfo",
-        "expected": "error"
-    },
     "SET_LOCALIZATION_REMOVEADDITIONALINFO_AS_EMPTY_OBJECT": {
         "method": "manage_localization.removeAdditionalInfo",
         "expected": "error"
@@ -93,64 +14,27 @@
         "params": "INTEGER_12345",
         "expected": "error"
     },
-    "GET_LOCALIZATION_COUNTRYCODE": {
-        "method": "localization.countryCode"
-    },
-    "LOCALIZATION_COUNTRYCODE": {
-        "method": "localization.countryCode"
-    },
     "PH_FOR_LOCALIZATION_COUNTRYCODE": {
         "method": "localization.countryCode",
         "validationJsonPath": "result",
         "content": "LOCALIZATION_COUNTRYCODE_PH"
-    },
-    "GET_LOCALIZATION_LANGUAGE": {
-        "method": "localization.language"
     },
     "EXPECTED_LOCALIZATION_LANGUAGE": {
         "method": "localization.language",
         "validationJsonPath": "result",
         "content": "LOCALIZATION_LANGUAGE"
     },
-    "GET_LOCALIZATION_LOCALE": {
-        "method": "localization.locale"
-    },
     "ENUS_FOR_LOCALIZATION_LOCALE": {
         "method": "localization.locale",
         "validationJsonPath": "result",
         "content": "LOCALIZATION_LOCALE"
     },
-    "ENUK_FOR_LOCALIZATION_LOCALE": {
-        "method": "localization.locale",
-        "validationJsonPath": "result",
-        "content": "LOCALIZATION_LOCALE_UK"
-    },
-    "ESUK_FOR_LOCALIZATION_LOCALE": {
-        "method": "localization.locale",
-        "validationJsonPath": "result",
-        "content": "LOCALIZATION_LOCALE_UK_ES"
-    },
     "GET_LOCALIZATION_PREFERREDAUDIOLANGUAGES": {
         "method": "localization.preferredAudioLanguages"
-    },
-    "GET_LOCALIZATION_LATLON": {
-        "method": "localization.latlon"
-    },
-    "EXPECTED_LOCALIZATION_LATLON": {
-        "method": "localization.latlon",
-        "validationJsonPath": "result",
-        "content": "LOCALIZATION_LATLON"
-    },
-    "LOCALIZATION_ONLOCALITYCHANGED": {
-        "method": "localization.onLocalityChanged"
     },
     "SET_LOCALIZATION_LOCALITY_TO_WASHINGTON": {
         "method": "manage_localization.setLocality",
         "params": "LOCALIZATION_LOCALITY_WASHINGTON"
-    },
-    "SET_LOCALIZATION_LOCALITY_TO_PHILADELPHIA": {
-        "method": "manage_localization.setLocality",
-        "params": "LOCALIZATION_LOCALITY_PHILADELPHIA"
     },
     "GET_LOCALIZATION_LOCALITY": {
         "method": "localization.locality"
@@ -169,53 +53,16 @@
         "validationJsonPath": "eventResponse",
         "content": "LOCALIZATION_LOCALITY_WASHINGTON"
     },
-    "LOCALIZATION_ONCOUNTRYCODECHANGED": {
-        "method": "localization.onCountryCodeChanged"
-    },
-    "LOCALIZATION_ONLOCALECHANGED": {
-        "method": "localization.onLocaleChanged"
-    },
-    "LOCALIZATION_ONLANGUAGECHANGED": {
-        "method": "localization.onLanguageChanged"
-    },
     "LOCALIZATION_ONPREFERREDAUDIOLANGUAGESCHANGED": {
         "method": "localization.onPreferredAudioLanguagesChanged"
-    },
-    "SET_COUNTRYCODE_TO_PH": {
-        "method": "manage_localization.setCountryCode",
-        "params": "LOCALIZATION_COUNTRYCODE_PH"
-    },
-    "SET_COUNTRYCODE_TO_US": {
-        "method": "manage_localization.setCountryCode",
-        "params": "LOCALIZATION_COUNTRYCODE_US"
-    },
-    "SET_LOCALE_TO_ENUS": {
-        "method": "manage_localization.setLocale",
-        "params": "LOCALIZATION_LOCALE"
-    },
-    "SET_LOCALE_TO_ENUK": {
-        "method": "manage_localization.setLocale",
-        "params": "LOCALIZATION_LOCALE_UK"
-    },
-    "SET_LOCALE_TO_ESUK": {
-        "method": "manage_localization.setLocale",
-        "params": "LOCALIZATION_LOCALE_UK_ES"
     },
     "SET_LANGUAGE_TO_ES": {
         "method": "manage_localization.setLanguage",
         "params": "LOCALIZATION_LANGUAGE_ES"
     },
-    "SET_LANGUAGE_TO_EN": {
-        "method": "manage_localization.setLanguage",
-        "params": "LOCALIZATION_LANGUAGE_EN"
-    },
     "SET_PREFERREDAUDIOLANGUAGES_TO_SPA_ENG": {
         "method": "manage_localization.setPreferredAudioLanguages",
         "params": "LOCALIZATION_PREFERRED_AUDIO_LANGUAGES_VALUE_SPA_ENG"
-    },
-    "SET_PREFERREDAUDIOLANGUAGES_TO_ENG_SPA": {
-        "method": "manage_localization.setPreferredAudioLanguages",
-        "params": "LOCALIZATION_PREFERRED_AUDIO_LANGUAGES_VALUE_ENG_SPA"
     },
     "SPA_ENG_FOR_LOCALIZATION_PREFERREDAUDIOLANGUAGES": {
         "method": "localization.preferredAudioLanguages",
@@ -237,16 +84,6 @@
         "validationJsonPath": "eventResponse",
         "content": "LOCALIZATION_PREFERRED_AUDIO_LANGUAGES_SPA_ENG"
     },
-    "ONLANGUAGECHANGED_FOR_LOCALIZATION_WITH_ES": {
-        "event": "localization.onLanguageChanged",
-        "validationJsonPath": "eventResponse",
-        "content": "LOCALIZATION_LANGUAGE_ES"
-    },
-    "ES_FOR_LOCALIZATION_LANGUAGE": {
-        "method": "localization.language",
-        "validationJsonPath": "result",
-        "content": "LOCALIZATION_LANGUAGE_ES"
-    },
     "EN_FOR_LOCALIZATION_LANGUAGE": {
         "method": "localization.language",
         "validationJsonPath": "result",
@@ -262,38 +99,14 @@
         "validationJsonPath": "eventResponse",
         "content": "LOCALIZATION_LOCALE"
     },
-    "ONLOCALECHANGED_FOR_LOCALIZATION_WITH_ENUK": {
-        "event": "localization.onLocaleChanged",
-        "validationJsonPath": "eventResponse",
-        "content": "LOCALIZATION_LOCALE_UK"
-    },
-    "ONLOCALECHANGED_FOR_LOCALIZATION_WITH_ESUK": {
-        "event": "localization.onLocaleChanged",
-        "validationJsonPath": "eventResponse",
-        "content": "LOCALIZATION_LOCALE_UK_ES"
-    },
     "ONCOUNTRYCODECHANGED_FOR_LOCALIZATION_WITH_PH": {
         "event": "localization.onCountryCodeChanged",
         "validationJsonPath": "eventResponse",
         "content": "LOCALIZATION_COUNTRYCODE_PH"
     },
-    "ONCOUNTRYCODECHANGED_FOR_LOCALIZATION_WITH_UK": {
-        "event": "localization.onCountryCodeChanged",
-        "validationJsonPath": "eventResponse",
-        "content": "LOCALIZATION_COUNTRYCODE_UK"
-    },
-    "UK_FOR_LOCALIZATION_COUNTRYCODE": {
-        "method": "localization.countryCode",
-        "validationJsonPath": "result",
-        "content": "LOCALIZATION_COUNTRYCODE"
-    },
     "SET_POSTALCODE_TO_12345": {
         "method": "manage_localization.setPostalCode",
         "params": "STRING_12345"
-    },
-    "SET_POSTALCODE_TO_19103": {
-        "method": "manage_localization.setPostalCode",
-        "params": "STRING19103"
     },
     "GET_POSTALCODE": {
         "method": "localization.postalCode"
@@ -361,10 +174,6 @@
     },
     "MANAGE_LOCALIZATION_ONPREFERREDAUDIOLANGUAGESCHANGED": {
         "method": "manage_localization.onPreferredAudioLanguagesChanged"
-    },
-    "SET_LOCALITY_TO_WASHINGTON": {
-        "method": "manage_localization.setLocality",
-        "params": "LOCALIZATION_LOCALITY_WASHINGTON"
     },
     "GET_LOCALITY": {
         "method": "manage_localization.locality"
@@ -607,30 +416,6 @@
     "SET_TIMEZONE_WITHOUT_PARAMS": {
         "method": "manage_localization.setTimeZone"
     },
-    "SET_LOCALIZATION_TIMEZONE_WITH_AMERICA_LOSANGELES": {
-        "method": "manage_localization.setTimeZone",
-        "params": "LOCALIZATION_SETTIMEZONE_AMERICA_LOSANGELES"
-    },
-    "ONLOCALITYCHANGED": {
-        "event": "localization.onLocalityChanged",
-        "validationJsonPath": "eventResponse",
-        "content": "NULL"
-    },
-    "ONCOUNTRYCODECHANGED": {
-        "event": "localization.onCountryCodeChanged",
-        "validationJsonPath": "eventResponse",
-        "content": "NULL"
-    },
-    "ONLOCALECHANGED": {
-        "event": "localization.onLocaleChanged",
-        "validationJsonPath": "eventResponse",
-        "content": "NULL"
-    },
-    "ONLANGUAGECHANGED": {
-        "event": "localization.onLanguageChanged",
-        "validationJsonPath": "eventResponse",
-        "content": "NULL"
-    },
     "EXPECT_ERROR_FOR_LOCALIZATION_LANGUAGE": {
         "method": "localization.language",
         "expected": "error"
@@ -671,23 +456,5 @@
         "validationJsonPath": "result",
         "content": "INVALID_PARAMS",
         "expectingError": true
-    },
-    "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_INTEGER": {
-        "method": "manage_localization.addAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_VALUE_AS_INTEGER"
-    },
-    "INTEGER_FOR_LOCALIZATION_ADDITIONALINFO": {
-        "method": "localization.additionalInfo",
-        "validationJsonPath": "result",
-        "content": "LOCALIZATION_ADD_ADDITIONALINFO_AS_INTEGER"  
-    },
-    "SET_LOCALIZATION_ADDADDITIONALINFO_WITH_BOOLEAN": {
-        "method": "manage_localization.addAdditionalInfo",
-        "params": "LOCALIZATION_ADD_ADDITIONALINFO_VALUE_AS_BOOLEAN"
-    },
-    "BOOLEAN_FOR_LOCALIZATION_ADDITIONALINFO": {
-        "method": "localization.additionalInfo",
-        "validationJsonPath": "result",
-        "content": "LOCALIZATION_ADD_ADDITIONALINFO_AS_BOOLEAN"  
     }
 }

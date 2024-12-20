@@ -5,8 +5,20 @@ Feature: UserInterest
         Given the environment has been set up for 'Userinterest' tests
         And 3rd party 'certification' app is launched
 
-    @sdk @transport
-    Scenario Outline: Discovery.userInterest - Positive Scenario: In-app UX - Notify userInterest with type <Scenario>
+    @sdk @transport @Sev1
+    Scenario Outline: Discovery.userInterest - Validate event response with <Scenario>
+        When 1st party app registers for the 'Content onUserInterest' event using the 'Firebolt' API
+        And '3rd party app' invokes the 'Firebolt' API to 'notify userInterest with <userInterestData>'
+        Then 'Firebolt' platform responds with 'null for discovery userInterest'
+        And 'Firebolt' platform triggers to '1st party app' event 'onUserInterest with <Event_Content>'
+
+        Examples:
+            | Scenario                                          | userInterestData                                         | Event_Content                    |
+            | interest & reason playlist with program entity    | type interest and reason playlist with program entity    | type interest reason playlist    |
+            | disinterest & reason playlist with program entity | type disinterest and reason playlist with program entity | type disinterest reason playlist |
+            
+    @sdk @transport @Sev2
+    Scenario Outline: Discovery.userInterest - Validate event response content with <Scenario>
         When 1st party app registers for the 'Content onUserInterest' event using the 'Firebolt' API
         And '3rd party app' invokes the 'Firebolt' API to 'notify userInterest with <userInterestData>'
         Then 'Firebolt' platform responds with 'null for discovery userInterest'
@@ -14,8 +26,6 @@ Feature: UserInterest
 
         Examples:
             | Scenario                                                                               | userInterestData                                                                              | Event_Content                                                                        |
-            | interest & reason playlist with program entity                                         | type interest and reason playlist with program entity                                         | type interest reason playlist                                                        |
-            | disinterest & reason playlist with program entity                                      | type disinterest and reason playlist with program entity                                      | type disinterest reason playlist                                                     |
             | interest & reason playlist with channel streaming entity                               | type interest and reason playlist with channel streaming entity                               | type interest reason playlist channel                                                |
             | disinterest & reason playlist with channel streaming entity                            | type disinterest and reason playlist with channel streaming entity                            | type disinterest reason playlist channel                                             |
             | interest & reason playlist with channel overTheAir entity                              | type interest and reason playlist with channel overTheAir entity                              | type interest reason playlist overTheAir                                             |
@@ -58,36 +68,36 @@ Feature: UserInterest
             | disinterest & reason recording with program season entity                              | type disinterest and reason recording with program season entity                              | type disinterest reason recording program season entity                              |
 
 
-    @sdk @transport
-    Scenario Outline: Discovery.userInterest - Negative Scenario: <Scenario> expecting error
+    @sdk @transport @Sev2
+    Scenario Outline: Discovery.userInterest - Validating API Error handling when given <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to 'notify userInterest <Param>'
         Then 'Firebolt' platform responds with 'invalid params for discovery userInterest'
 
         Examples:
             | Scenario                                                | Param                                                        |
-            | Empty param                                             | without any params                                           |
-            | Without Interest type                                   | without interest type                                        |
-            | Invalid Interest type - integer params                  | with numeric interestType                                    |
-            | Invalid Interest type - test params                     | with string interestType                                     |
-            | Invalid Interest type - boolean params                  | with boolean interestType                                    |
-            | Invalid channelType in channel entity                   | with invalid channelType in channel entity                   |
-            | Boolean channelType in channel entity                   | with boolean channelType in channel entity                   |
-            | Integer channelType in channel entity                   | with integer channelType in channel entity                   |
-            | Invalid programType in program entity                   | with invalid programType in program entity                   |
-            | Boolean programType in program entity                   | with boolean programType in program entity                   |
-            | Integer programType in program entity                   | with integer programType in program entity                   |
-            | Invalid musicType in music entity                       | with invalid musicType in music entity                       |
-            | Boolean musicType in music entity                       | with boolean musicType in music entity                       |
-            | Integer musicType in music entity                       | with integer musicType in music entity                       |
-            | Invalid seriesId in program episode entity              | with invalid seriesId in program episode entity              |
-            | Invalid seasonId in program episode entity              | with invalid seasonId in program episode entity              |
-            | Invalid seriesId and seasonId in program episode entity | with invalid seriesId and seasonId in program episode entity |
-            | Invalid seriesId in program season entity               | with invalid seriesId in program season entity               |
-            | Invalid programType for program entity with seriesId    | with invalid programType for program entity with seriesId    |
-            | Invalid programType for program entity with seasonId    | with invalid programType for program entity with seasonId    |
+            | empty params                                            | without any params                                           |
+            | no Interest type                                        | without interest type                                        |
+            | invalid Interest type with integer params               | with numeric interestType                                    |
+            | invalid Interest type with test params                  | with string interestType                                     |
+            | invalid Interest type with boolean params               | with boolean interestType                                    |
+            | invalid channelType in channel entity                   | with invalid channelType in channel entity                   |
+            | boolean channelType in channel entity                   | with boolean channelType in channel entity                   |
+            | integer channelType in channel entity                   | with integer channelType in channel entity                   |
+            | invalid programType in program entity                   | with invalid programType in program entity                   |
+            | boolean programType in program entity                   | with boolean programType in program entity                   |
+            | integer programType in program entity                   | with integer programType in program entity                   |
+            | invalid musicType in music entity                       | with invalid musicType in music entity                       |
+            | boolean musicType in music entity                       | with boolean musicType in music entity                       |
+            | integer musicType in music entity                       | with integer musicType in music entity                       |
+            | invalid seriesId in program episode entity              | with invalid seriesId in program episode entity              |
+            | invalid seasonId in program episode entity              | with invalid seasonId in program episode entity              |
+            | invalid seriesId and seasonId in program episode entity | with invalid seriesId and seasonId in program episode entity |
+            | invalid seriesId in program season entity               | with invalid seriesId in program season entity               |
+            | invalid programType for program entity with seriesId    | with invalid programType for program entity with seriesId    |
+            | invalid programType for program entity with seasonId    | with invalid programType for program entity with seasonId    |
 
-    @sdk
-    Scenario Outline: Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type <Scenario>
+    @sdk @Sev1
+    Scenario Outline: Content.requestUserInterest - Platform-UX - Notify requestUserInterest with type <Scenario>
         And 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type <userInterestData>'
         Then 'Firebolt' platform responds to '1st party app' with '<method_Content>'
 
@@ -100,30 +110,30 @@ Feature: UserInterest
             | disinterest and reason reaction  | disinterest reason reaction  | requestUserInterest with reason reaction  |
             | disinterest and reason recording | disinterest reason recording | requestUserInterest with reason recording |
 
-    @sdk @transport
-    Scenario Outline: Content.requestUserInterest - Negative Scenario: <Scenario> expecting error
+    @sdk @transport @Sev2
+    Scenario Outline: Content.requestUserInterest - Validating API Error handling when given <Scenario>
         When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with <Param>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid params for content requestUserInterest'
 
         Examples:
-            | Scenario                               | Param                |
-            | Invalid Interest value - test params   | invalid interestType |
-            | Invalid Interest type - boolean params | boolean interestType |
-            | Invalid reason value - test params     | invalid reasonType   |
-            | Invalid Interest type - boolean params | boolean reasonType   |
+            | Scenario                                  | Param                |
+            | invalid Interest value with test params   | invalid interestType |
+            | invalid Interest type with boolean params | boolean interestType |
+            | invalid reason value with test params     | invalid reasonType   |
+            | invalid Interest type with boolean params | boolean reasonType   |
 
-    @sdk @requiresPlatformImplementation
-    Scenario: Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but platform timeout without sending response
+    @sdk @requiresPlatformImplementation @Sev2
+    Scenario: Content.requestUserInterest - Validating API Error handling when platform times-out without sending response
         When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type interest timeout'
         Then 'Firebolt' platform responds to '1st party app' with 'not available for requestUserInterest'
 
-    @sdk @requiresPlatformImplementation
-    Scenario: Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but 3rd party app return error
+    @sdk @requiresPlatformImplementation @Sev2
+    Scenario: Content.requestUserInterest - Validating API Error handling when 3rd party app returns error
         When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type interest returns error'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for requestUserInterest'
 
-    @sdk @requiresPlatformImplementation
-    Scenario: Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest without registering for providers
+    @sdk @requiresPlatformImplementation @Sev1
+    Scenario: Content.requestUserInterest - Validating API Error handling when attempting to skip registering for providers
         Given the environment has been set up for 'UserInterestProvider' tests
         And 3rd party 'certification' app is launched
         When 1st party app invokes the 'Firebolt' API to 'notify requestUserInterest with type interest without provider'
