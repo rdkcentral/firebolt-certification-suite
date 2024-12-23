@@ -85,11 +85,13 @@ const env = {
     'lifeCycleApi',
     'UserInterestProvider',
   ],
+  regexEventValidation: '/(\\.on)\\S*/',
   fcaAppList: ['default3rdPartyAppId'],
   variableObjectsPrefixLists: ['DYNAMIC_FB_CALL_VARIABLES'],
   pubSubPublishSuffix: '_FCS',
   pubSubSubscribeSuffix: '_FCA',
   pendingFeatures: [],
+  dynamicDeviceDetailsModules: ['Device'],
 };
 
 module.exports = {

@@ -47,7 +47,10 @@ Cypress.Commands.add(
         responseType,
         isValidation
       ).then((schemaValidation) => {
-        if (methodOrEvent.includes('.on')) {
+        // Retrieving the pattern string from the env variable to differentiate if the method is an an event or a getter/setter
+        const regexPattern = UTILS.getEnvVariable(CONSTANTS.REGEX_EVENT_VALIDATION, true);
+        const regex = new RegExp(regexPattern.replace(/^\/|\/$/g, '')); // No need to replace slashes
+        if (regex.test(methodOrEvent)) {
           let formattedSchemaValidationResult;
 
           if (
@@ -116,7 +119,6 @@ Cypress.Commands.add(
 
           formattedResponse.response = result;
         }
-
         return formattedResponse;
       });
     } else {
@@ -202,7 +204,6 @@ Cypress.Commands.add('getSchema', (methodOrEvent, params, schemaType) => {
           break;
         }
       }
-
       return schemaMap;
     }
   });

@@ -1,8 +1,4 @@
 {
-    "SET_PRIVACY_SETALLOWAPPCONTENTADTARGETING_TRUE": {
-        "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "TRUE"
-    },
     "SET_PRIVACY_SETALLOWAPPCONTENTADTARGETING_FALSE": {
         "method": "manage_privacy.setAllowAppContentAdTargeting",
         "params": "FALSE"
@@ -107,10 +103,6 @@
         "method": "manage_privacy.setAllowUnentitledResumePoints",
         "params": "FALSE"
     },
-    "SET_PRIVACY_ALLOW_WATCHHISTORY_AS_TRUE": {
-        "method": "manage_privacy.setAllowWatchHistory",
-        "params": "TRUE"
-    },
     "SET_PRIVACY_ALLOW_WATCHHISTORY_AS_FALSE": {
         "method": "manage_privacy.setAllowWatchHistory",
         "params": "FALSE"
@@ -139,10 +131,6 @@
         "method": "manage_privacy.setAllowUnentitledPersonalization",
         "params": "FALSE"
     },
-    "SET_PRIVACY_ALLOW_REMOTEDIAGNOSTICS_AS_TRUE": {
-        "method": "manage_privacy.setAllowRemoteDiagnostics",
-        "params": "TRUE"
-    },
     "SET_PRIVACY_ALLOW_REMOTEDIAGNOSTICS_AS_FALSE": {
         "method": "manage_privacy.setAllowRemoteDiagnostics",
         "params": "FALSE"
@@ -163,25 +151,9 @@
         "method": "manage_privacy.setAllowPrimaryBrowseAdTargeting",
         "params": "FALSE"
     },
-    "SET_PRIVACY_ALLOW_APPCONTENTADTARGETING_AS_TRUE": {
-        "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "TRUE"
-    },
-    "SET_PRIVACY_ALLOW_APPCONTENTADTARGETING_AS_FALSE": {
-        "method": "manage_privacy.setAllowAppContentAdTargeting",
-        "params": "FALSE"
-    },
-    "SET_PRIVACY_ALLOW_ACRCOLLECTION_AS_TRUE": {
-        "method": "manage_privacy.setAllowACRCollection",
-        "params": "TRUE"
-    },
     "SET_PRIVACY_ALLOW_ACRCOLLECTION_AS_FALSE": {
         "method": "manage_privacy.setAllowACRCollection",
         "params": "FALSE"
-    },
-    "SET_PRIVACY_ALLOW_CAMERAANALYTICS_AS_TRUE": {
-        "method": "manage_privacy.setAllowCameraAnalytics",
-        "params": "TRUE"
     },
     "SET_PRIVACY_ALLOW_CAMERAANALYTICS_AS_FALSE": {
         "method": "manage_privacy.setAllowCameraAnalytics",
@@ -563,14 +535,6 @@
         "event": "privacy.onAllowCameraAnalyticsChanged",
         "validationJsonPath": "eventResponse",
         "content": "FALSE" 
-    },
-    "GET_PRIVACY_SETTINGS": {
-        "method": "manage_privacy.settings"
-    },
-    "EXPECTED_PRIVACY_SETTINGS": {
-        "method": "privacy.settings",
-        "validationJsonPath": "result",
-        "content": "PRIVACY_SETTINGS_METHOD"
     },
     "SET_PRIVACY_ALLOWRESUMEPOINTS_WITH_INVALID_PARAMS_INTEGER": {
         "method": "manage_privacy.setAllowResumePoints",
