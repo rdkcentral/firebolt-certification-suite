@@ -38,7 +38,8 @@ All fcsSetter functions must return one of 3 values. Any other value returned wi
 
 ## Required Functions
 
-<details id="setClosedCaptions">
+<a id="setClosedCaptions"></a> 
+
 <summary><b>fcsSetters.setClosedCaptions</b></summary>
 
 ```
@@ -55,7 +56,7 @@ When **setting an attribute** of closed captions, the *attribute* will be passed
 
 Ex: ```fcsSetters.setClosedCaptions("FontFamily", "Arial")``` seeks to set the Closed Captions "Font Family" to "Arial"
 
-</details>
+
 
 <details id="setAudioDescriptionSettings">
 <summary><b>fcsSetters.setAudioDescriptionSettings</b></summary>
