@@ -38,9 +38,7 @@ All fcsSetter functions must return one of 3 values. Any other value returned wi
 
 ## Required Functions
 
-<a id="setClosedCaptions"></a> 
-
-<details>
+<details id="setClosedCaptions">
 <summary><b>fcsSetters.setClosedCaptions</b></summary>
 
 ```
