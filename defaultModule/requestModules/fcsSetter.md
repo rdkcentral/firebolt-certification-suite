@@ -40,6 +40,7 @@ All fcsSetter functions must return one of 3 values. Any other value returned wi
 
 <a id="setClosedCaptions"></a> 
 
+<details>
 <summary><b>fcsSetters.setClosedCaptions</b></summary>
 
 ```
@@ -55,7 +56,7 @@ function setClosedCaptions(attribute,value) {
 When **setting an attribute** of closed captions, the *attribute* will be passed as the first parameter, and the *value* as the second.
 
 Ex: ```fcsSetters.setClosedCaptions("FontFamily", "Arial")``` seeks to set the Closed Captions "Font Family" to "Arial"
-
+</details>
 
 
 <details id="setAudioDescriptionSettings">
