@@ -1673,16 +1673,22 @@ Cypress.Commands.add('startFireboltInteractions', () => {
   cy.setPersistentStorage().then(() => {
     cy.rebootDevice().then(() => {
       cy.wait(120000).then(() => {
-        cy.firstPartyAppHealthcheck().then((healthCheckResponse) => {
-          if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
-            throw Error(
-              `Unable to get healthCheck response from App in ${getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES)} retries. Device taking more time to reboot than usual time.`
+        cy.firstPartyAppHealthcheck({ checkInteractionsEnabled: true }).then(
+          (healthCheckResponse) => {
+            if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
+              throw Error(
+                `Unable to get healthCheck response from App in ${getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES)} retries. Device taking more time to reboot than usual time.`
+              );
+            }
+            expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
+            assert.equal(
+              healthCheckResponse.isInteractionsEnabled,
+              true,
+              `Expecting isInteractionsEnabled to be true`
             );
           }
-          expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
-        });
+        );
       });
-      // Need to check if fireboltInteraction service is active or not
     });
   });
 });
@@ -1733,13 +1739,17 @@ Cypress.Commands.add('rebootDevice', () => {
  * @module commands
  * @function firstPartyAppHealthcheck
  * @description Checking first party App connection status
+ * @param Flag to check whether firebolt Interactions are enabled or not
  * @example
+ * cy.firstPartyAppHealthcheck({checkInteractionsEnabled : true})
+ * cy.firstPartyAppHealthcheck({checkInteractionsEnabled : false})
+ * cy.firstPartyAppHealthcheck({})
  * cy.firstPartyAppHealthcheck()
  */
-Cypress.Commands.add('firstPartyAppHealthcheck', () => {
+Cypress.Commands.add('firstPartyAppHealthcheck', (params) => {
   const requestMap = {
     method: 'fcs.healthCheck',
-    params: null,
+    params: params,
   };
   sendMessageToPlatformsWithRetry(requestMap, UTILS.getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES));
 });
