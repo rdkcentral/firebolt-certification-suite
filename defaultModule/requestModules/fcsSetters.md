@@ -107,7 +107,7 @@ Ex: ```fcsSetters.setAudioDescriptionSettings("setEnabled", "true");```
 <details id="setClosedCaptions">
 <summary><b>fcsSetters.setClosedCaptions</b></summary>
 
-Adjusts closed caption settings.
+Enable/Disable closed caption settings.
 
 ```
 function setClosedCaptions(attribute,value) {
@@ -439,7 +439,7 @@ function setDeviceNetwork(value) {
 
 When **setting an attribute** of DeviceNetwork, the *value* will be passed as a param.
 
-Ex: ```fcsSetters.setDeviceNetwork("Wifi")``` 
+Ex: ```fcsSetters.setDeviceNetwork("{"state": "connected", "type": "wifi"}")``` 
 
 </details>
 
