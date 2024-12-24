@@ -46,7 +46,9 @@ let metaDataArr = [];
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
   const testsuite = config.env.testSuite;
-  const specPattern = getSpecPattern(testsuite);
+  const sdkVersion = config.env.sdkVersion || 'latest';
+  CONSTANTS.setSdkVersion(sdkVersion);
+  const specPattern = getSpecPattern(testsuite, sdkVersion);
   if (specPattern !== undefined) {
     config.specPattern = specPattern;
   }
@@ -92,6 +94,32 @@ module.exports = async (on, config) => {
     log(message) {
       logger.info(message);
       return null;
+    },
+    getFireboltCallsData({ sdkVersion }) {
+      console.log(
+        'sdkversion inside index.js:------------------------->>>>>>>>>>>>>>>>>> ',
+        sdkVersion
+      );
+      let data;
+
+      const internalPath = path.resolve(
+        __dirname,
+        `../fixtures/${sdkVersion}/fireboltCalls/index.js`
+      );
+
+      try {
+        if (fs.existsSync(internalPath)) {
+          data = fs.readFileSync(internalPath, 'utf-8');
+          console.log('data 2204: _______>>>>>', data);
+          return data;
+        } else {
+          console.log(`Internal fireboltCalls data file not found: ${internalPath}`);
+        }
+      } catch (err) {
+        console.error(`Error reading files:`, err);
+      }
+
+      return data;
     },
     /* write json or string to file
     @param fileName - complete file name with path
@@ -310,9 +338,11 @@ module.exports = async (on, config) => {
           if (fs.existsSync(tempReportEnv)) reportProperties.reportEnv = require(tempReportEnv);
           let customReportData;
           try {
-            customReportData = require('../fixtures/external/objects/customReportData.json');
+            customReportData = require(
+              `../fixtures/external/${sdkVersion}/objects/customReportData.json`
+            );
           } catch (error) {
-            customReportData = require('../fixtures/customReportData.json');
+            customReportData = require(`../fixtures/${sdkVersion}/customReportData.json`);
           }
           reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
           reportProperties.customReportData = customReportData;

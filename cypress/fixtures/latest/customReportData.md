@@ -2,7 +2,7 @@
 We use a JSON structure to define `customFooter` and `customMetadata` for various pages within the report. This allows dynamic customization, ensuring that each page can have specific information and design elements as needed.
 
 ## Loading the JSON Data
-The JSON data will first be loaded from `configModule/fixtures/external/objects/customReportData.json`. If this file is not available in the configModule, the data will be loaded from the local JSON file located at `cypress/fixtures/customReportData.json`.
+The JSON data will first be loaded from `configModule/fixtures/external/<sdkVersion>/objects/customReportData.json`. If this file is not available in the configModule, the data will be loaded from the local JSON file located at `cypress/fixtures/customReportData.json`.
 
 ## Fields
 `customFooter`
