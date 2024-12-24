@@ -1,7 +1,6 @@
 # FCS Setters
 
 This document provides a comprehensive list of the required and optional setter and getter APIs, along with their descriptions and usage examples. These APIs are essential for configuring and interacting with various FCS functionalities.
-
 <br>**Note**: After clicking a link, you'll need to expand the corresponding function section manually by clicking on the dropdown arrow.
 
 1. [Return Values](#return-values)
