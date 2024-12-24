@@ -15,9 +15,11 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-import UTILS from '../cypress-support/src/utils';
-
-const sdkVersion = UTILS.getEnvVariable('sdkVersion') || 'latest';
+let sdkVersion = 'latest';
+const setSdkVersion = (version) => {
+  sdkVersion = version;
+  console.log('sdk version after set: ' + sdkVersion);
+};
 
 module.exports = {
   ACTION: 'action',
@@ -65,7 +67,7 @@ module.exports = {
   CONFIG_MODULE_SETRESPONSE_PATH: `cypress/fixtures/external/${sdkVersion}/setResponseData.json`,
   CONTENT: 'Content',
   CONTEXT: 'Context',
-  CONTEXT_FILE_PATH: 'cypress/fixtures/apiObjectContext.json',
+  CONTEXT_FILE_PATH: `cypress/fixtures/${sdkVersion}/apiObjectContext.json`,
   CORE: 'core',
   CORRELATIONID: 'correlationId',
   COUNTRYCODE: 'countryCode',
@@ -78,9 +80,9 @@ module.exports = {
   DECIMAL: 'decimal',
   DECODE: 'decode',
   DECODEVALUE_JSON_PATH: 'decodeValue.json',
-  DEFAULT_DEVICE_DATA_PATH: 'cypress/fixtures/defaultDeviceData.json',
+  DEFAULT_DEVICE_DATA_PATH: `cypress/fixtures/${sdkVersion}/defaultDeviceData.json`,
   DEFAULT_DIRECTORY: '/tmp/jsonReports/',
-  DEFAULT_PATH: 'cypress/fixtures/defaultTestData.json',
+  DEFAULT_PATH: `cypress/fixtures/${sdkVersion}/defaultTestData.json`,
   DEFAULT_TEST_DATA: 'defaultTestData.json',
   DEREFERENCE_OPENRPC: 'dereferenceOpenRPC',
   DEVICE: 'device',
@@ -130,7 +132,7 @@ module.exports = {
   ERROR_LIST: ['Method not found', 'Method Not Implemented'],
   ERROR_NOT_UNDEFINED_CHECK: 'Error not undefined Check',
   ERROR_NULL_CHECK: 'Error null Check',
-  ERROR_CONTENT_OBJECTS_PATH: 'cypress/fixtures/objects/errorContentObjects.json',
+  ERROR_CONTENT_OBJECTS_PATH: `cypress/fixtures/${sdkVersion}/objects/errorContentObjects.json`,
   EVENT: 'event',
   EVENT_ERROR_MSG: 'Event listener error validation',
   EVENT_LISTENER_RESPONSE: 'eventListenerResponse',
@@ -175,8 +177,8 @@ module.exports = {
   FCA_APP_LIST: 'fcaAppList',
   FB_INTERACTIONLOGS: 'fbInteractionLogs',
   FCS: 'fcs',
-  FCS_MODULEREQID_PATH: 'cypress/fixtures/objects/moduleReqId/moduleReqId.json',
-  FCS_SETRESPONSE_PATH: 'cypress/fixtures/setResponseData.json',
+  FCS_MODULEREQID_PATH: `cypress/fixtures/${sdkVersion}/objects/moduleReqId/moduleReqId.json`,
+  FCS_SETRESPONSE_PATH: `cypress/fixtures/${sdkVersion}/setResponseData.json`,
   FCS_VALIDATION_JSON: 'fCSValidationjson',
   FIREBOLT: 'firebolt',
   FIREBOLTCALL: 'fireboltCall',
@@ -184,16 +186,16 @@ module.exports = {
     'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/fixtures/docs/dynamicObjects.md#firebolt-object',
   FIREBOLT_VERSION: 'Firebolt Version',
   FIREBOLTCALLS_FROM_CONFIGMODULE: `cypress/fixtures/external/${sdkVersion}/fireboltCalls/`,
-  FIREBOLTCALLS_FROM_FCS: 'cypress/fixtures/fireboltCalls/',
+  FIREBOLTCALLS_FROM_FCS: `cypress/fixtures/${sdkVersion}/fireboltCalls/`,
   FIREBOLTCONFIG: 'fireboltConfig',
   FIREBOLTMOCK: 'fireboltMock',
   FIREBOLTMOCK_FROM_CONFIGMODULE: `cypress/fixtures/external/${sdkVersion}/fireboltMocks/`,
-  FIREBOLTMOCK_FROM_FCS: 'cypress/fixtures/fireboltMocks/',
+  FIREBOLTMOCK_FROM_FCS: `cypress/fixtures/${sdkVersion}/fireboltMocks/`,
   FIREBOLT_SPECIFICATION_NEXT_URL: 'firebolt_specification_next_url',
   FIREBOLT_SPECIFICATION_PROPOSED_URL: 'firebolt_specification_proposed_url',
   FIREBOLT_SPECIFICATION_URL: 'firebolt_specification_url',
   FIRST_PARTY_APP: '1st party app',
-  VALIDATION_OBJECTS_PATH: 'cypress/fixtures/objects/validationObjects/',
+  VALIDATION_OBJECTS_PATH: `cypress/fixtures/${sdkVersion}/objects/validationObjects/`,
   CONFIG_VALIDATION_OBJECTS_PATH: `cypress/fixtures/external/${sdkVersion}/objects/validationObjects/`,
   FIXTURE: 'fixture',
   FIXTURE_DEFINED_PATH:
@@ -281,7 +283,7 @@ module.exports = {
   MODE_SDK: 'SDK',
   MODE_TRANSPORT: 'Transport',
   MODULEREQIDJSON: 'moduleReqIdJson',
-  MODULES_PATH: 'cypress/fixtures/modules/',
+  MODULES_PATH: `cypress/fixtures/${sdkVersion}/modules/`,
   MODULE_NAMES: {
     DEVICE: 'device',
     ADVERTISING: 'advertising',
@@ -494,7 +496,7 @@ module.exports = {
   MODULE_OVERRIDES: ['fcs', 'performance'],
   COMBINEDDEFAULTTESTDATA: 'combinedDefaultTestData',
   CONFIG_DEFAULTTESTDATA_PATH: `cypress/fixtures/external/${sdkVersion}/defaultTestData.json`,
-  FCS_DEFAULTTESTDATA_PATH: 'cypress/fixtures/defaultTestData.json',
+  FCS_DEFAULTTESTDATA_PATH: `cypress/fixtures/${sdkVersion}/defaultTestData.json`,
   ENV_SETUP_STATUS: 'environmentLaunched',
   APP_LAUNCH_STATUS: 'appLaunched',
   VISIBILITYSTATE_VALIDATION_REQ: ' Lifecycle visibility state validation ',
@@ -522,6 +524,7 @@ module.exports = {
   FOREGROUND: 'FOREGROUND',
   PERFORMANCE_VALIDATION: 'performanceValidation',
   MARKER_CREATION_STATUS: 'markerCreationStatus',
+  setSdkVersion,
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

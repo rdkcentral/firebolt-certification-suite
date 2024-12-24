@@ -25,15 +25,21 @@ const defaultDirectory = CONSTANTS.DEFAULT_DIRECTORY;
 const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 const UTILS = require('./utils');
 const path = require('path');
+const fs = require('fs');
 const logger = require('../../Logger')('main.js');
 const setimmediate = require('setimmediate');
 let appTransport;
 const flatted = require('flatted');
 const _ = require('lodash');
-const internalV2FireboltCallsData = require(`../../../fixtures/${sdkVersion}/fireboltCalls/index`);
-const externalV2FireboltCallsData = require(`../../../fixtures/external/${sdkVersion}/fireboltCalls/index`);
-const internalV2FireboltMockData = require(`../../../fixtures/${sdkVersion}/fireboltCalls/index`);
-const externalV2FireboltMockData = require(`../../../fixtures/external/${sdkVersion}/fireboltCalls/index`);
+const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false) || 'latest';
+console.log('2204 sdk version: ', sdkVersion);
+const sample = require(`../../../fixtures/latest/fireboltCalls/index`);
+console.log('2204 sdk version: ', sample);
+// console.log('2204 file exists: ', fs.existsSync(sample));
+let internalV2FireboltCallsData,
+  externalV2FireboltCallsData,
+  internalV2FireboltMockData,
+  externalV2FireboltMockData;
 
 export default function (module) {
   const config = new Config(module);
@@ -46,7 +52,11 @@ export default function (module) {
 
   // before All
   before(() => {
-    // Added below custom commands to clear cache and to reload browser
+    cy.task('getFireboltCallsData', { sdkVersion }).then((data) => {
+      internalV2FireboltCallsData = data;
+
+      console.log('2204 Internal Firebolt Calls Data:', internalV2FireboltCallsData);
+    });
     cy.clearCache();
     cy.wrap(UTILS.pubSubClientCreation(appTransport), {
       timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT,

@@ -47,6 +47,7 @@ module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
   const testsuite = config.env.testSuite;
   const sdkVersion = config.env.sdkVersion || 'latest';
+  CONSTANTS.setSdkVersion(sdkVersion);
   const specPattern = getSpecPattern(testsuite, sdkVersion);
   if (specPattern !== undefined) {
     config.specPattern = specPattern;
@@ -93,6 +94,32 @@ module.exports = async (on, config) => {
     log(message) {
       logger.info(message);
       return null;
+    },
+    getFireboltCallsData({ sdkVersion }) {
+      console.log(
+        'sdkversion inside index.js:------------------------->>>>>>>>>>>>>>>>>> ',
+        sdkVersion
+      );
+      let data;
+
+      const internalPath = path.resolve(
+        __dirname,
+        `../fixtures/${sdkVersion}/fireboltCalls/index.js`
+      );
+
+      try {
+        if (fs.existsSync(internalPath)) {
+          data = fs.readFileSync(internalPath, 'utf-8');
+          console.log('data 2204: _______>>>>>', data);
+          return data;
+        } else {
+          console.log(`Internal fireboltCalls data file not found: ${internalPath}`);
+        }
+      } catch (err) {
+        console.error(`Error reading files:`, err);
+      }
+
+      return data;
     },
     /* write json or string to file
     @param fileName - complete file name with path
