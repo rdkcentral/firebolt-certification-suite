@@ -24,9 +24,11 @@ global.setterFailure = (message, error) => {
 
 global.setterNotImplemented = (message) => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
-  const errorMessage = `Setter Method fcs.${methodName} ${
+  const userMessage = `Setter Method fcs.${methodName} ${
     message || `Setter Method fcs.${methodName} does not have an implementation`
   }`;
+  const msg = `Please see the fcsSetters.${methodName} documentation for implementation details: https://github.com/rdkcentral/firebolt-certification-suite/blob/FIRECERT-2639/defaultModule/requestModules/fcsSetters.md#${methodName}`;
+  const errorMessage = `${userMessage}\n${msg}`;
   // Return the error message for proper rejection handling
   return new Error(errorMessage);
 };
