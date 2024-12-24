@@ -98,7 +98,7 @@ function setAudioDescriptionSettings(attribute,value) {
 
 When **setting an attribute** of AudioDescriptionSettings, the *attribute* will be passed as the first parameter, and the *value* as the second.
 
-Ex: fcsSetters.setAudioDescriptionSettings("setEnabled", "true");
+Ex: ```fcsSetters.setAudioDescriptionSettings("setEnabled", "true");```
 
 </details>
 
@@ -120,7 +120,8 @@ function setClosedCaptions(attribute,value) {
 
 When **setting an attribute** of closed captions, the *attribute* will be passed as the first parameter, and the *value* as the second.
 
-Ex: ```fcsSetters.setClosedCaptions("FontFamily", "Arial")``` seeks to set the Closed Captions "Font Family" to "Arial"
+Ex: ```fcsSetters.setClosedCaptions("FontFamily", "Arial")``` 
+
 </details>
 
 <details id="setDeviceAudio">
@@ -143,8 +144,6 @@ When **setting an attribute** of setDeviceAudio, the *value* will be passed as a
 Ex: ```fcsSetters.setDeviceAudio("Stereo");```
 
 </details>
-
-// TODO : check whether it has to have attribute,value has param
 
 <details id="setDiscoveryPolicy">
 <summary><b>fcsSetters.setDiscoveryPolicy</b></summary>
@@ -208,8 +207,6 @@ When **setting an attribute** of LifecycleState, the *value* will be passed as a
 Ex: ```fcsSetters.setLifecycleState("background");``` 
 
 </details>
-
-// TODO : check whether it has to have attribute,value has param
 
 <details id="setLimitAdTracking">
 <summary><b>fcsSetters.setLimitAdTracking</b></summary>
@@ -357,12 +354,9 @@ function getNegotiatedHdcp() {
 
 When **getting** the NegotiatedHdcp, no parm need to be passed.
 
-Ex: ```fcsSetters.getNegotiatedHdcp()``` retrieves the value of NegotiatedHdcp.
+Ex: ```fcsSetters.getNegotiatedHdcp()``` 
 
 </details>
-
-
-// TODO : check whether it has to have attribute,value has param
 
 <details id="setCountryCode">
 <summary><b>fcsSetters.setCountryCode</b></summary>
@@ -381,7 +375,7 @@ function setCountryCode(value) {
 
 When **setting an attribute** of CountryCode, the *value* will be passed as a param.
 
-Ex: ```fcsSetters.setCountryCode("08052")``` seeks to set the Country code to "08052"
+Ex: ```fcsSetters.setCountryCode("08052")``` 
 
 </details>
 
@@ -402,7 +396,7 @@ function setDeviceHdcp(value) {
 
 When **setting an attribute** of DeviceHdcp, the *value* will be passed as a param.
 
-Ex: ```fcsSetters.setDeviceHdcp("{"hdcp2.2": true}")``` seeks to set the hdcp2.2 to "true"
+Ex: ```fcsSetters.setDeviceHdcp("{"hdcp2.2": true}")``` 
 
 </details>
 
@@ -423,7 +417,7 @@ function setDeviceHdr(value) {
 
 When **setting an attribute** of DeviceHdr, the *value* will be passed as a param.
 
-Ex: ```fcsSetters.setDeviceHdr("{"dolbyVision": true}")``` seeks to set the dolbyVision to "true"
+Ex: ```fcsSetters.setDeviceHdr("{"dolbyVision": true}")``` 
 
 </details>
 
@@ -444,7 +438,7 @@ function setDeviceNetwork(value) {
 
 When **setting an attribute** of DeviceNetwork, the *value* will be passed as a param.
 
-Ex: ```fcsSetters.setDeviceNetwork("Wifi")``` seeks to set the DeviceNetwork to "Wifi"
+Ex: ```fcsSetters.setDeviceNetwork("Wifi")``` 
 
 </details>
 
