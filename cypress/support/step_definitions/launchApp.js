@@ -26,13 +26,16 @@ import UTILS from '../cypress-support/src/utils';
  * @param {String} appCallSign - The appId used to launch the app which is identified by the firebolt platform servicing the request
  * @param {String} state - lifecycle state of the application
  *  @example
- * Given 3rd party 'certification' app is launched
- * Given 3rd party 'firebolt' app is launched with 'foo' appId
- * Given 3rd party 'certification' app is launched with 'foo' appId with 'foreground' state
+ * And 3rd party 'certification' app is launched
+ * And 3rd party 'firebolt' app is launched with 'foo' appId
+ * And 3rd party 'certification' app is launched with 'foo' appId with 'foreground' state
+ * And 3rd party 'certification' app is launched with 'foreground' state
+ * And 3rd party 'certification' app is launched with 'NullIntent' intent
+ * And 3rd party 'certification' app is launched with 'foo' appId with 'foreground' state with 'NullIntent' intent
  */
 Given(
-  /3rd party '(.+)' app is launched(?: with '(.+)' appId)?(?: with '(.+)' state)?$/,
-  (appType, appCallSign, state) => {
+  /3rd party '(.+)' app is launched(?: with '(.+)' appId)?(?: with '(.+)' state)?(?: with '(.+)' intent)?$/,
+  (appType, appCallSign, state, intent) => {
     if (
       !UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) ||
       UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(
@@ -46,7 +49,7 @@ Given(
       if (!state) {
         state = CONSTANTS.LIFECYCLE_STATES.FOREGROUND;
       }
-      cy.launchApp(appType, appCallSign);
+      cy.launchApp(appType, appCallSign, null, intent);
       cy.lifecycleSetup(appCallSign, state);
       Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, true);
     }
