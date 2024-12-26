@@ -1,3 +1,10 @@
+# [1.6.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.1...v1.6.0-dev.2) (2024-12-26)
+
+
+### Features
+
+* Deep link implementation ([#268](https://github.com/rdkcentral/firebolt-certification-suite/issues/268)) ([6de90af](https://github.com/rdkcentral/firebolt-certification-suite/commit/6de90af21e49c8eb69ac30a6d6a14edbd318682b))
+
 # [1.6.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.1...v1.6.0-dev.1) (2024-12-19)
 
 
