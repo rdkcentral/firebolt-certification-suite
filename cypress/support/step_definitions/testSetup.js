@@ -84,25 +84,27 @@ Given('the environment has been set up for {string} tests', (test) => {
       Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
     }
     // fetch device details dynamically
-    if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
-      if (
-        UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES).includes(
-          Cypress.env(CONSTANTS.TEST_TYPE)
-        )
-      ) {
-        cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-          (response) => {
-            if (response) {
-              const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
-              const requestMap = {
-                method: method,
-                params: response,
-              };
-              cy.sendMessagetoPlatforms(requestMap);
+    try {
+      if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
+        const dynamicModules = UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES);
+        const testType = Cypress.env(CONSTANTS.TEST_TYPE);
+        if (dynamicModules && dynamicModules.includes(testType)) {
+          cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+            (response) => {
+              if (response) {
+                const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
+                const requestMap = {
+                  method: method,
+                  params: response,
+                };
+                cy.sendMessagetoPlatforms(requestMap);
+              }
             }
-          }
-        );
+          );
+        }
       }
+    } catch (error) {
+      cy.log(`Following error occurred while trying to fetch device details dynamically: ${error}`);
     }
   }
   // Check the marker creation status
