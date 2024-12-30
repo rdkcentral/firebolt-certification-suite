@@ -382,7 +382,7 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
   const test = Cypress.env(CONSTANTS.TEST_TYPE);
   const testLowerCase = test.toLowerCase();
 
-  if (testLowerCase.includes('playback')) {
+  if (testLowerCase.includes(CONSTANTS.PLAYBACK)) {
     if (
       Cypress.env('app_metadata') &&
       Cypress.env('app_metadata').defaultKeyPressSequence &&
@@ -390,21 +390,22 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
     ) {
       playbackDismiss = Cypress.env('app_metadata').defaultKeyPressSequence.playbackDismiss;
       if (playbackDismiss.loggedIn) {
-        KeyPressSequence = playbackDismiss.loggedIn.dismiss;
+        KeyPressSequence = playbackDismiss.loggedIn;
       } else if (playbackDismiss.loggedOut) {
-        KeyPressSequence = playbackDismiss.loggedOut.dismiss;
+        KeyPressSequence = playbackDismiss.loggedOut;
       }
     }
   } else {
-    if (test.includes('loggedIn')) {
-      loggedType = 'loggedIn';
-    } else if (test.includes('loggedOut')) {
-      loggedType = 'loggedOut';
+    if (test.includes(CONSTANTS.LOGGEDIN)) {
+      loggedType = CONSTANTS.LOGGEDIN;
+    } else if (test.includes(CONSTANTS.LOGGEDOUT)) {
+      loggedType = CONSTANTS.LOGGEDOUT;
     }
   }
 
   if (
     // Check if keyPressSequence is defined in the runtime environment variables for the specific intent
+    !KeyPressSequence &&
     Cypress.env(CONSTANTS.RUNTIME) &&
     Cypress.env(CONSTANTS.RUNTIME).intent &&
     Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence &&
@@ -413,6 +414,7 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
     KeyPressSequence = Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence[loggedType];
   } else if (
     // Check if defaultKeyPressSequence is defined for the specific appId in app_metadata
+    !KeyPressSequence &&
     Cypress.env('app_metadata') &&
     Cypress.env('app_metadata')[appId] &&
     Cypress.env('app_metadata')[appId].defaultKeyPressSequence &&
@@ -421,6 +423,7 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
     KeyPressSequence = Cypress.env('app_metadata')[appId].defaultKeyPressSequence[loggedType];
   } else if (
     // Check if defaultKeyPressSequence is defined in the app_metadata globally
+    !KeyPressSequence &&
     Cypress.env('app_metadata') &&
     Cypress.env('app_metadata').defaultKeyPressSequence
   ) {
