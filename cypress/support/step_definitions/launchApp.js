@@ -36,6 +36,7 @@ import UTILS from '../cypress-support/src/utils';
 Given(
   /3rd party '(.+)' app is launched(?: with '(.+)' appId)?(?: with '(.+)' state)?(?: with '(.+)' intent)?$/,
   (appType, appCallSign, state, intent) => {
+    Cypress.env(CONSTANTS.APP_TYPE, appType);
     if (
       !UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) ||
       UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(

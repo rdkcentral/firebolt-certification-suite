@@ -404,7 +404,7 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
 
   // Sending the request to the platform to retrieve the app state.
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    if (response.toUpperCase() === CONSTANTS.FOREGROUND) {
+    if (response.appState.toUpperCase() === CONSTANTS.FOREGROUND) {
       fireLog.info(
         `State validation successful: Current state of ${appId} app is ${response} as expected`
       );
