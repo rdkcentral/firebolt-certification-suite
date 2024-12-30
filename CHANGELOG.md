@@ -1,3 +1,10 @@
+# [1.6.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.2...v1.6.0-dev.3) (2024-12-30)
+
+
+### Features
+
+* added glue code for dismissing an app ([#284](https://github.com/rdkcentral/firebolt-certification-suite/issues/284)) ([329cbbc](https://github.com/rdkcentral/firebolt-certification-suite/commit/329cbbc29d524669491454f5712604e6ed6248e9))
+
 # [1.6.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.1...v1.6.0-dev.2) (2024-12-26)
 
 
