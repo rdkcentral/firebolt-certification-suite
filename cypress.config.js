@@ -92,6 +92,7 @@ const env = {
   pubSubSubscribeSuffix: '_FCA',
   pendingFeatures: [],
   externalModuleTestTypes: [],
+  dynamicDeviceDetailsModules: ['Device'],
 };
 
 module.exports = {

@@ -298,17 +298,25 @@ Given(
     };
 
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
-      if (result.error) {
-        cy.log('Failed to fetch and validate the performance metrics').then(() => {
-          assert(false, result.error);
+      cy.wrap(result)
+        .then((response) => {
+          if (response && Array.isArray(response)) {
+            response.map((res) => {
+              fireLog.info(JSON.stringify(res));
+            });
+          }
+        })
+        .then(() => {
+          if (result.error) {
+            fireLog.info('Failed to fetch and validate the performance metrics').then(() => {
+              fireLog.assert(false, result.error);
+            });
+          } else {
+            result.map((response) => {
+              fireLog.equal(true, response?.success, response?.message);
+            });
+          }
         });
-      } else {
-        result.map((response) => {
-          cy.log(response.message).then(() => {
-            assert.equal(true, response?.success, response?.message);
-          });
-        });
-      }
     });
   }
 );

@@ -1740,25 +1740,23 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
     cy.task(CONSTANTS.READ_FILES_FROM_DIRECTORY, appDataDir).then((files) => {
       files = files ? files : [];
       files = files.filter((file) => file !== 'app_metadata.json' && file.endsWith('.json'));
-      files.forEach((file) => {
+      const filePromises = files.map((file) => {
         const filePath = path.join(appDataDir, file);
         const appId = file.split('.')[0];
-        cy.task(CONSTANTS.READFILEIFEXISTS, filePath)
-          .then((fileData) => {
-            fileData = JSON.parse(fileData);
-            if (fileData) {
-              if (mergedData[appId]) {
-                mergedData[appId] = _.merge(mergedData[appId], fileData);
-              } else {
-                mergedData[appId] = fileData;
-              }
+        return cy.task(CONSTANTS.READFILEIFEXISTS, filePath).then((fileData) => {
+          fileData = JSON.parse(fileData);
+          if (fileData) {
+            if (mergedData[appId]) {
+              mergedData[appId] = _.merge(mergedData[appId], fileData);
+            } else {
+              mergedData[appId] = fileData;
             }
-          })
-          .then(() => {
-            return mergedData;
-          });
+          }
+        });
       });
-      return mergedData;
+      return cy.wrap(Promise.all(filePromises)).then(() => {
+        return mergedData;
+      });
     });
   });
 });
