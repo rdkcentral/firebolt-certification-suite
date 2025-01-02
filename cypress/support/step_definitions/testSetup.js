@@ -107,18 +107,6 @@ Given('the environment has been set up for {string} tests', (test) => {
       fireLog.fail('Marker creation failed');
     }
   }
-
-  if (test === 'integrated Player') {
-    const requestMap = {
-      method: 'fcs.callPlayerMethods',
-      params: {
-        scenarioType: scenarioType,
-        certificationType: UTILS.getEnvVariable(CONSTANTS.CERTIFICATION),
-        appId: 'appId',
-      },
-    };
-    cy.sendMessagetoPlatforms(requestMap);
-  }
   // Calling the envConfigSetup command to setup the environment for the test from the config module.
   cy.envConfigSetup();
 });
