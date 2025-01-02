@@ -90,7 +90,7 @@ const ensureConfigModule = async () => {
           // Write back to target index.js
           await fs.writeFile(targetIndexPath, mergedContent, 'utf8');
           console.log(
-            `Merged 'index.js' content from defaultModule to configModule/requestModule.`
+            `Merged 'index.js' content from defaultModule/requestModule to configModule/requestModule.`
           );
         }
       }
