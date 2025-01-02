@@ -70,10 +70,19 @@ const ensureConfigModule = async () => {
           const defaultContent = await fs.readFile(defaultIndexPath, 'utf8');
           const targetContent = targetIndexExists ? await fs.readFile(targetIndexPath, 'utf8') : '';
 
+          // Regular expression to remove comments (single-line and multi-line)
+          const commentRegex = /\/\/.*|\/\*[\s\S]*?\*\//g;
+
+          // Remove comments from default content
+          const cleanedDefaultContent = defaultContent.replace(commentRegex, '');
+
           // Merge contents, remove duplicates
           const mergedLines = new Set([
             ...targetContent.split('\n'),
-            ...defaultContent.split('\n'),
+            ...cleanedDefaultContent
+              .split('\n')
+              .map((line) => line.trim())
+              .filter((line) => line),
           ]);
 
           const mergedContent = Array.from(mergedLines).join('\n');
