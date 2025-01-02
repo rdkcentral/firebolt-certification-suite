@@ -107,7 +107,7 @@ Ex: ```fcsSetters.setAudioDescriptionSettings("setEnabled", "true");```
 <details id="setClosedCaptions">
 <summary><b>fcsSetters.setClosedCaptions</b></summary>
 
-Enable/Disable closed caption settings.
+Configures closed caption settings.
 
 ```
 function setClosedCaptions(attribute,value) {
