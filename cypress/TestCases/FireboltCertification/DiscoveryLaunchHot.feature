@@ -1,113 +1,152 @@
-@DiscoveryLaunch @coreSDK @AppColdLaunch
-Feature: Discovery.launch_ColdLaunch
+@DiscoveryLaunch @coreSDK @AppHotLaunch
+Feature: Discovery.launch_HotLaunch
 
   @initialization
-  Scenario: Launch FCA for Discovery.Launch Cold Launch
-    Given the environment has been set up for 'Discovery.Launch' tests
+  Scenario: Launch FCA for Discovery.Launch Hot Launch
+    Given the environment has been set up for 'DiscoveryLaunch' tests
     And 3rd party 'certification' app is launched
+    And Test runner waits for 10 'seconds'
+    And '3rd party app' transitions to state 'foreground'
+    And '3rd party app' registers for the 'discovery onNavigateTo' event using the 'Firebolt' API
 
   @sdk @transport
-  Scenario Outline: Discovery.Launch Cold Launch - Positive Scenario: <Scenario> intent with context
-    Given the environment has been set up for 'Discovery.Launch' tests
+  Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in foreground
+    Given the environment has been set up for 'DiscoveryLaunch' tests
     When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
     Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
     When Test runner waits for 30 'seconds'
     And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
-    And '3rd party app' invokes the 'Firebolt' API to '<Call_Parameters_Initialization_With_Context_Key>'
-    Then 'Firebolt' platform responds with '<Validation_Key_For_Parameters_Initialization_With_Intent>'
-    And 'Firebolt' platform responds with 'foreground for lifecycle state'
+    Then 'Firebolt' platform responds with 'foreground for lifecycle state'
+    And 'Firebolt' platform triggers event '<Event_Content>'
 
     Examples: 
-      | Scenario                                                                            | Discovery_Launch_Key                                                                                | Call_Parameters_Initialization_With_Context_Key     | Validation_Key_For_Parameters_Initialization_With_Intent                        |
-      | Null                                                                                | launch app with null intent                                                                         | get initialization parameters for null intent       | nullintent for initialization parameters                                        |
-      | Home                                                                                | launch app with home intent                                                                         | get initialization parameters for Home intent       | homeintent for initialization parameters                                        |
-      | Playback                                                                            | launch app with playback intent                                                                     | get initialization parameters for Playback intent   | playbackintent for initialization parameters                                    |
-      | Entity                                                                              | launch app with entity intent                                                                       | get initialization parameters for Entity intent     | entityintent for initialization parameters                                      |
-      | Launch                                                                              | launch app with intent                                                                              | get initialization parameters for Launch intent     | launchintent for initialization parameters                                      |
-      | Search                                                                              | launch app with search intent                                                                       | get initialization parameters for Search intent     | searchintent for initialization parameters                                      |
-      | Section                                                                             | launch app with section intent                                                                      | get initialization parameters for Section intent    | sectionintent for initialization parameters                                     |
-      | Tune                                                                                | launch app with tune intent                                                                         | get initialization parameters for Tune intent       | tuneintent for initialization parameters                                        |
-      | PlayEntity                                                                          | launch app with playentity intent                                                                   | get initialization parameters for PlayEntity intent | playentityintent for initialization parameters                                  |
-      | PlayQuery                                                                           | launch app with playquery intent                                                                    | get initialization parameters for PlayQuery intent  | playqueryintent for initialization parameters                                   |
-      | PlayQuery with musicType song                                                       | launch app with playquery intent with musictype song                                                | get initialization parameters for PlayQuery intent  | playqueryintent musictype song for initialization parameters                    |
-      | PlayQuery with musicType album                                                      | launch app with playquery intent with musictype album                                               | get initialization parameters for PlayQuery intent  | playqueryintent musictype album for initialization parameters                   |
-      | PlayQuery with programType concert                                                  | launch app with playquery intent with programtype concert                                           | get initialization parameters for PlayQuery intent  | playqueryintent programtype concert for initialization parameters               |
-      | PlayQuery with programType sportingevent                                            | launch app with playquery intent with programtype sportingevent                                     | get initialization parameters for PlayQuery intent  | playqueryintent programtype sportingevent for initialization parameters         |
-      | PlayQuery with programType preview                                                  | launch app with playquery intent with programtype preview                                           | get initialization parameters for PlayQuery intent  | playqueryintent programtype preview for initialization parameters               |
-      | PlayQuery with programType other                                                    | launch app with playquery intent with programtype other                                             | get initialization parameters for PlayQuery intent  | playqueryintent programtype other for initialization parameters                 |
-      | PlayQuery with programType advertisement                                            | launch app with playquery intent with programtype advertisement                                     | get initialization parameters for PlayQuery intent  | playqueryintent programtype advertisement for initialization parameters         |
-      | PlayQuery with programType musicvideo                                               | launch app with playquery intent with programtype musicvideo                                        | get initialization parameters for PlayQuery intent  | playqueryintent programtype musicvideo for initialization parameters            |
-      | PlayQuery with programType minisode                                                 | launch app with playquery intent with programtype minisode                                          | get initialization parameters for PlayQuery intent  | playqueryintent programtype minisode for initialization parameters              |
-      | PlayQuery with programType extra                                                    | launch app with playquery intent with programtype extra                                             | get initialization parameters for PlayQuery intent  | playqueryintent programtype extra for initialization parameters                 |
-      | PlayEntity with programType movie                                                   | launch app with playentity intent with programtype movie                                            | get initialization parameters for PlayEntity intent | playentityintent with programtype movie for initialization parameters           |
-      | PlayEntity with programType episode                                                 | launch app with playentity intent with programtype episode                                          | get initialization parameters for PlayEntity intent | playentityintent with programtype episode for initialization parameters         |
-      | PlayEntity with programType concert                                                 | launch app with playentity intent with programtype concert                                          | get initialization parameters for PlayEntity intent | playentityintent with programtype concert for initialization parameters         |
-      | PlayEntity without options for entityType playlist                                  | launch app with playentity intent without options                                                   | get initialization parameters for PlayEntity intent | playentityintent without options for initialization parameters                  |
-      | Playback intent without entityType and with programType movie                       | launch app with playback intent without entityType and with programType movie                       | get initialization parameters for Playback intent   | playbackintent for initialization parameters without entityType                 |
-      | PlayEntity intent without entityType and with programType movie for movieEntity     | launch app with playentity intent without entityType and with programType movie for movieEntity     | get initialization parameters for PlayEntity intent | playentity for initialization parameters without entityType for movieEntity     |
-      | PlayEntity intent without entityType and with programType movie for TvEpisodeEntity | launch app with playentity intent without entityType and with programType movie for TvEpisodeEntity | get initialization parameters for Playback intent   | playentity for initialization parameters without entityType for TvEpisodeEntity |
+      | Scenario                                                            | Discovery_Launch_Key                                                            | Event_Content                                                                     |
+      | Home Foreground                                                     | launch app with home intent                                                     | onNavigateTo with home intent                                                     |
+      | Playback Foreground                                                 | launch app with playback intent                                                 | onNavigateTo with playback intent                                                 |
+      | Playback Foreground without entityType                              | launch app with playback intent without entityType                              | onNavigateTo with playback intent without entityType                              |
+      | Entity Foreground                                                   | launch app with entity intent                                                   | onNavigateTo with entity intent                                                   |
+      | Entity Foreground without entityType                                | launch app with entity intent without entityType                                | onNavigateTo with entity intent without entityType                                |
+      | Launch Foreground                                                   | launch app with intent                                                          | onNavigateTo with intent                                                          |
+      | Search Foreground                                                   | launch app with search intent                                                   | onNavigateTo with search intent                                                   |
+      | Section Foreground                                                  | launch app with section intent                                                  | onNavigateTo with section intent                                                  |
+      | Tune Foreground                                                     | launch app with tune intent                                                     | onNavigateTo with tune intent                                                     |
+      | PlayEntity Foreground                                               | launch app with playentity intent                                               | onNavigateTo with playentity intent                                               |
+      | PlayQuery Foreground                                                | launch app with playquery intent                                                | onNavigateTo with playquery intent                                                |
+      | PlayQuery Foreground with musictype song                            | launch app with playquery intent with musictype song                            | onNavigateTo with playquery intent with musictype song                            |
+      | PlayQuery Foreground with musictype album                           | launch app with playquery intent with musictype album                           | onNavigateTo with playquery intent with musictype album                           |
+      | PlayQuery Foreground with programtype concert                       | launch app with playquery intent with programtype concert                       | onNavigateTo with playquery intent with programtype concert                       |
+      | PlayQuery Foreground with programtype sportingevent                 | launch app with playquery intent with programtype sportingevent                 | onNavigateTo with playquery intent with programtype sportingevent                 |
+      | PlayQuery Foreground with programtype preview                       | launch app with playquery intent with programtype preview                       | onNavigateTo with playquery intent with programtype preview                       |
+      | PlayQuery Foreground with programtype other                         | launch app with playquery intent with programtype other                         | onNavigateTo with playquery intent with programtype other                         |
+      | PlayQuery Foreground with programtype advertisement                 | launch app with playquery intent with programtype advertisement                 | onNavigateTo with playquery intent with programtype advertisement                 |
+      | PlayQuery Foreground with programtype musicvideo                    | launch app with playquery intent with programtype musicvideo                    | onNavigateTo with playquery intent with programtype musicvideo                    |
+      | PlayQuery Foreground with programtype minisode                      | launch app with playquery intent with programtype minisode                      | onNavigateTo with playquery intent with programtype minisode                      |
+      | PlayQuery Foreground with programtype extra                         | launch app with playquery intent with programtype extra                         | onNavigateTo with playquery intent with programtype extra                         |
+      | PlayQuery Foreground with musictype song programtype concert        | launch app with playquery intent with musictype song programtype concert        | onNavigateTo with playquery intent with musictype song programtype concert        |
+      | PlayQuery Foreground with musictype song programtype sportingevent  | launch app with playquery intent with musictype song programtype sportingevent  | onNavigateTo with playquery intent with musictype song programtype sportingevent  |
+      | PlayQuery Foreground with musictype song programtype preview        | launch app with playquery intent with musictype song programtype preview        | onNavigateTo with playquery intent with musictype song programtype preview        |
+      | PlayQuery Foreground with musictype song programtype other          | launch app with playquery intent with musictype song programtype other          | onNavigateTo with playquery intent with musictype song programtype other          |
+      | PlayQuery Foreground with musictype song programtype advertisement  | launch app with playquery intent with musictype song programtype advertisement  | onNavigateTo with playquery intent with musictype song programtype advertisement  |
+      | PlayQuery Foreground with musictype song programtype musicvideo     | launch app with playquery intent with musictype song programtype musicvideo     | onNavigateTo with playquery intent with musictype song programtype musicvideo     |
+      | PlayQuery Foreground with musictype song programtype minisode       | launch app with playquery intent with musictype song programtype minisode       | onNavigateTo with playquery intent with musictype song programtype minisode       |
+      | PlayQuery Foreground with musictype song programtype extra          | launch app with playquery intent with musictype song programtype extra          | onNavigateTo with playquery intent with musictype song programtype extra          |
+      | PlayQuery Foreground with musictype album programtype concert       | launch app with playquery intent with musictype album programtype concert       | onNavigateTo with playquery intent with musictype album programtype concert       |
+      | PlayQuery Foreground with musictype album programtype sportingevent | launch app with playquery intent with musictype album programtype sportingevent | onNavigateTo with playquery intent with musictype album programtype sportingevent |
+      | PlayQuery Foreground with musictype album programtype preview       | launch app with playquery intent with musictype album programtype preview       | onNavigateTo with playquery intent with musictype album programtype preview       |
+      | PlayQuery Foreground with musictype album programtype other         | launch app with playquery intent with musictype album programtype other         | onNavigateTo with playquery intent with musictype album programtype other         |
+      | PlayQuery Foreground with musictype album programtype advertisement | launch app with playquery intent with musictype album programtype advertisement | onNavigateTo with playquery intent with musictype album programtype advertisement |
+      | PlayQuery Foreground with musictype album programtype musicvideo    | launch app with playquery intent with musictype album programtype musicvideo    | onNavigateTo with playquery intent with musictype album programtype musicvideo    |
+      | PlayQuery Foreground with musictype album programtype minisode      | launch app with playquery intent with musictype album programtype minisode      | onNavigateTo with playquery intent with musictype album programtype minisode      |
+      | PlayQuery Foreground with musictype album programtype extra         | launch app with playquery intent with musictype album programtype extra         | onNavigateTo with playquery intent with musictype album programtype extra         |
+      | PlayEntity Foreground without options for entityType playlist       | launch app with playentity intent without options                               | onNavigateTo with playentity intent without options                               |
+      | PlayEntity Foreground with programType movie                        | launch app with playentity intent with programtype movie                        | onNavigateTo with playentity intent with programtype movie                        |
+      | PlayEntity Foreground with programType episode                      | launch app with playentity intent with programtype episode                      | onNavigateTo with playentity intent with programtype episode                      |
+      | PlayEntity Foreground with programType concert                      | launch app with playentity intent with programtype concert                      | onNavigateTo with playentity intent with programtype concert                      |
+
+  @sdk @transport @requiresPlatformImplementation
+  Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in inactive
+    Then 'Firebolt' platform responds with 'foreground for lifecycle state'
+    And 'Firebolt' platform triggers event '<Event_Content>'
+
+    Examples: 
+      | Scenario                                                    | Discovery_Launch_Key                                                     | Event_Content                                                              |
+      | Home Inactive                                               | launch app with home intent                                              | onNavigateTo with home intent                                              |
+      | Playback Inactive                                           | launch app with playback intent                                          | onNavigateTo with playback intent                                          |
+      | Entity Inactive                                             | launch app with entity intent                                            | onNavigateTo with entity intent                                            |
+      | Launch Inactive                                             | launch app with intent                                                   | onNavigateTo with intent                                                   |
+      | Search Inactive                                             | launch app with search intent                                            | onNavigateTo with search intent                                            |
+      | Section Inactive                                            | launch app with section intent                                           | onNavigateTo with section intent                                           |
+      | Tune Inactive                                               | launch app with tune intent                                              | onNavigateTo with tune intent                                              |
+      | PlayEntity Inactive                                         | launch app with playentity intent                                        | onNavigateTo with playentity intent                                        |
+      | PlayQuery Inactive                                          | launch app with PlayQuery intent                                         | onNavigateTo with PlayQuery intent                                         |
+      | PlayQuery Inactive with musictype song                      | launch app with playquery intent with musictype song                     | onNavigateTo with playquery intent with musictype song                     |
+      | PlayQuery Inactive with programtype concert                 | launch app with playquery intent with programtype concert                | onNavigateTo with playquery intent with programtype concert                |
+      | PlayQuery Inactive with musictype song programtype concert  | launch app with playquery intent with musictype song programtype concert | onNavigateTo with playquery intent with musictype song programtype concert |
+      | PlayEntity Inactive without options for entityType playlist | launch app with playentity intent without options                        | onNavigateTo with playentity intent without options                        |
+      | PlayEntity Inactive with programType movie                  | launch app with playentity intent with programtype movie                 | onNavigateTo with playentity intent with programtype movie                 |
 
   @sdk @transport
-  Scenario Outline: Discovery.Launch Cold Launch - Negative Scenario: <Scenario> and expecting error
-    Given the environment has been set up for 'Discovery.Launch' tests
-    When 1st party app invokes the 'Firebolt' API to '<Error_Key>'
-    Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discoverylaunch'
+  Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: <Scenario> intent and app in background
+    Then 'Firebolt' platform responds with 'foreground for lifecycle state'
+    And 'Firebolt' platform triggers event '<Event_Content>'
 
     Examples: 
-      | Scenario                                                   | Error_Key                                                              |
-      | No Action Intent                                           | no action intent for discoverylaunch                                   |
-      | No Context Intent                                          | no context intent for discoverylaunch                                  |
-      | No Source Intent                                           | no source intent for discoverylaunch                                   |
-      | No Data Intent                                             | no data intent for discoverylaunch                                     |
-      | Invalid Action Intent                                      | invalid action intent for discoverylaunch                              |
-      | Invalid Context Intent                                     | invalid context intent for discoverylaunch                             |
-      | Playback Intent with only action                           | playback intent only action for discoverylaunch                        |
-      | Playback Intent Integer Data                               | playback intent int data for discoverylaunch                           |
-      | Entity Intent Integer Data                                 | entity intent int data for discoverylaunch                             |
-      | Section Intent Integer Data                                | section intent int data for discoverylaunch                            |
-      | Tune Intent Integer Data                                   | tune intent int data for discoverylaunch                               |
-      | Home Intent Invalid AppId                                  | home intent invalid appid for discoverylaunch                          |
-      | PlayEntity Intent Integer Data                             | playentity intent int data for discoverylaunch                         |
-      | PlayQuery Intent Test Data                                 | playquery intent test data for discoverylaunch                         |
-      | No Query Intent                                            | no query intent for discoverylaunch                                    |
-      | PlayQuery Intent Integer Data                              | playquery intent int data for discoverylaunch                          |
-      | PlayQuery Intent Integer Query                             | playquery intent int query for discoverylaunch                         |
-      | PlayQuery Intent Integer ProgramType                       | playquery intent int programtype for discoverylaunch                   |
-      | PlayQuery Intent Integer MusicType                         | playquery intent int musictype for discoverylaunch                     |
-      | PlayQuery Intent Integer Types                             | playquery intent int types for discoverylaunch                         |
-      | PlayQuery Intent ProgramType without array                 | playquery intent programtype string for discoverylaunch                |
-      | PlayQuery Intent MusicType without array                   | playquery intent musictype string for discoverylaunch                  |
-      | PlayQuery Intent Types without array                       | playquery intent types without array for discoverylaunch               |
-      | PlayQuery Intent Invalid ProgramType                       | playquery intent invalid programtype for discoverylaunch               |
-      | PlayQuery Intent Invalid MusicType                         | playquery intent invalid musictype for discoverylaunch                 |
-      | PlayEntity Intent with multiple options for playlistEntity | playentity multiple options for discoverylaunch                        |
-      | PlayEntity Intent with options for entityType program      | playentity program with options for discoverylaunch                    |
-      | PlayEntity Intent with Invalid playFirstTrack              | playentity invalid playfirsttrack for discoverylaunch                  |
-      | PlayEntity Intent with Integer playFirstId                 | playentity integer playfirstid for discoverylaunch                     |
-      | PlayEntity Intent without entityType for playlistEntity    | playentity without entitytype for discoverylaunch                      |
-      | PlayEntity Intent without entityId for playlistEntity      | playentity without entityid for discoverylaunch                        |
-      | PlayEntity Intent without programType for movieEntity      | playentity without programtype for movieentity for discoverylaunch     |
-      | PlayEntity Intent without entityId for movieEntity         | playentity without entityid for movieentity for discoverylaunch        |
-      | PlayEntity Intent without programType for TvEpisodeEntity  | playentity without programtype for tvepisodeentity for discoverylaunch |
-      | PlayEntity Intent without entityId for TvEpisodeEntity     | playentity without entityid for tvepisodeentity for discoverylaunch    |
-      | PlayEntity Intent without seriesId for TvEpisodeEntity     | playentity without seriesid for tvepisodeentity for discoverylaunch    |
-      | PlayEntity Intent without seasonId for TvEpisodeEntity     | playentity without seasonid for tvepisodeentity for discoverylaunch    |
-      | Invalid Source Intent                                      | invalid source intent for discoverylaunch                              |
-      | Integer Source Home Intent                                 | home intent with source null for discoverylaunch                       |
-      | Integer Source Playback Intent                             | invalid integer source playback intent for discoverylaunch             |
-      | Integer Source Entity Intent                               | invalid integer source entity intent for discoverylaunch               |
-      | Integer Source Intent                                      | invalid integer source intent for discoverylaunch                      |
-      | Integer Source Search Intent                               | invalid integer source search intent for discoverylaunch               |
-      | Integer Source Section Intent                              | invalid integer source section intent for discoverylaunch              |
-      | Integer Source Tune Intent                                 | invalid integer source tune intent for discoverylaunch                 |
-      | Search Intent Integer Data                                 | search intent integer data for discoverylaunch                         |
+      | Scenario                                                      | Discovery_Launch_Key                                                     | Event_Content                                                              |
+      | Home Background                                               | launch app with home intent                                              | onNavigateTo with home intent                                              |
+      | Playback Background                                           | launch app with playback intent                                          | onNavigateTo with playback intent                                          |
+      | Entity Background                                             | launch app with entity intent                                            | onNavigateTo with entity intent                                            |
+      | Launch Background                                             | launch app with intent                                                   | onNavigateTo with intent                                                   |
+      | Search Background                                             | launch app with search intent                                            | onNavigateTo with search intent                                            |
+      | Section Background                                            | launch app with section intent                                           | onNavigateTo with section intent                                           |
+      | Tune Background                                               | launch app with tune intent                                              | onNavigateTo with tune intent                                              |
+      | PlayEntity Background                                         | launch app with playentity intent                                        | onNavigateTo with playentity intent                                        |
+      | PlayQuery Background                                          | launch app with PlayQuery intent                                         | onNavigateTo with PlayQuery intent                                         |
+      | PlayQuery Background with musictype song                      | launch app with playquery intent with musictype song                     | onNavigateTo with playquery intent with musictype song                     |
+      | PlayQuery Background with programtype concert                 | launch app with playquery intent with programtype concert                | onNavigateTo with playquery intent with programtype concert                |
+      | PlayQuery Background with musictype song programtype concert  | launch app with playquery intent with musictype song programtype concert | onNavigateTo with playquery intent with musictype song programtype concert |
+      | PlayEntity Background without options for entityType playlist | launch app with playentity intent without options                        | onNavigateTo with playentity intent without options                        |
+      | PlayEntity Background with programType movie                  | launch app with playentity intent with programtype movie                 | onNavigateTo with playentity intent with programtype movie                 |
 
   @sdk @transport
-  Scenario Outline: Discovery.Launch Cold Launch - Positive Scenario: <Scenario> for context source
-    Then 'Firebolt' platform responds with '<Validation_Key_For_Parameters_Initialization_With_Intent>'
-    And 'Firebolt' platform responds with 'foreground for lifecycle state'
+  Scenario Outline: Discovery.Launch Hot Launch - Positive Scenario: Null intent and app in <State>
+    And '3rd party app' invokes the 'Firebolt' API to 'fetch lifecycle state'
+    Then 'Firebolt' platform responds with 'foreground for lifecycle state'
 
     Examples: 
-      | Scenario              | Discovery_Launch_Key                   | Call_Parameters_Initialization_With_Context_Key   | Validation_Key_For_Parameters_Initialization_With_Intent |
-      | Passing random string | launch app with null intent source     | get initialization parameters for null intent     | nullintent source for initialization parameters          |
-      | Passing valid string  | launch app with playback intent source | get initialization parameters for playback intent | playbackintent source for initialization parameters      |
+      | Scenario                                                     | Discovery_Launch_Key                                                     |
+      | Home Suspended                                               | launch app with home intent                                              |
+      | Playback Suspended                                           | launch app with playback intent                                          |
+      | Entity Suspended                                             | launch app with entity intent                                            |
+      | Launch Suspended                                             | launch app with intent                                                   |
+      | Search Suspended                                             | launch app with search intent                                            |
+      | Section Suspended                                            | launch app with section intent                                           |
+      | Tune Suspended                                               | launch app with tune intent                                              |
+      | PlayEntity Suspended                                         | launch app with playentity intent                                        |
+      | PlayQuery Suspended                                          | launch app with PlayQuery intent                                         |
+      | PlayQuery Suspended with musictype song                      | launch app with playquery intent with musictype song                     |
+      | PlayQuery Suspended with programtype concert                 | launch app with playquery intent with programtype concert                |
+      | PlayQuery Suspended with musictype song programtype concert  | launch app with playquery intent with musictype song programtype concert |
+      | PlayEntity Suspended without options for entityType playlist | launch app with playentity intent without options                        |
+      | PlayEntity Suspended with programType movie                  | launch app with playentity intent with programtype movie                 |
+
+  @sdk @transport
+  Scenario Outline: Discovery.Launch Hot Launch - Negative Scenario: <Scenario> expecting error
+    And 1st party app invokes the 'Firebolt' API to '<Error_Key>'
+    Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
+
+    Examples: 
+      | Scenario          | Error_Key                             |
+      | No Action Intent  | no action intent for discoverylaunch  |
+      | No Context Intent | no context intent for discoverylaunch |
+      | No Source Intent  | no source intent for discoverylaunch  |
+      | No Data Intent    | no data intent for discoverylaunch    |
+
+    @skipNegative
+    Examples: 
+        And 'Firebolt' platform triggers event 'onNavigateTo with home intent'
+        And 'Firebolt' platform does not trigger to 'secondary 3rd party app' event 'onNavigateTo'
+
+    Examples: 
+      | state      |
+      | background |
+      | inactive   |
