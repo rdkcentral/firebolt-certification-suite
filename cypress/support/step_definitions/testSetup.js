@@ -70,8 +70,7 @@ Given('the environment has been set up for {string} tests', (test) => {
   if (
     !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
     UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
-    UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
-    UTILS.isTestTypeChanged(test)
+    UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test)
   ) {
     if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
       Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
