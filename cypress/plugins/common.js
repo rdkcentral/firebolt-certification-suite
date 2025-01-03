@@ -21,7 +21,7 @@ const logger = require('../support/Logger')('common.js');
 const {
   generateIndexFile,
   preprocessDeviceData,
-  fetchPlayerMethodObject,
+  fetchWrapperMethodObject,
 } = require('./pluginUtils');
 const CONSTANTS = require('../support/constants/constants');
 
@@ -58,7 +58,7 @@ function genericSupport(config) {
   };
   // To read device data JSON
   preprocessDeviceData(config);
-  fetchPlayerMethodObject(config);
+  fetchWrapperMethodObject(config);
   const testDataEnv = testDataProcessor.testDataProcessor(config.env);
   Object.assign(config.env, testDataEnv);
 

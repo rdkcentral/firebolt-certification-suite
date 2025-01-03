@@ -156,34 +156,49 @@ function preprocessDeviceData(config) {
   }
 }
 
-function fetchPlayerMethodObject(config) {
-  const fcsPlayerMethods = 'cypress/fixtures/objects/playerMethodObject.json';
-  const configModulePlayerMethods = 'cypress/fixtures/external/objects/playerMethodObject.json';
+/**
+ * @function fetchWrapperMethodObject
+ * @description Loads and combines two `wrapperMethodObject.js` files from FCS and config, then assigns the combined object to env.
+ * @param {object} config - The config object.
+ * @example
+ * fetchWrapperMethodObject(config);
+ */
+function fetchWrapperMethodObject(config) {
+  const fcsWrapperMethodObjectPath = path.resolve(
+    __dirname,
+    '..',
+    'fixtures',
+    'objects',
+    'wrapperMethodObject.js'
+  );
+  const configWrapperMethodObjectPath = path.resolve(
+    __dirname,
+    '..',
+    'fixtures',
+    'external',
+    'objects',
+    'wrapperMethodObject.js'
+  );
 
-  const fcsPlayerMethodsData = fetchDataFromFile(fcsPlayerMethods);
-  const configModulePlayerMethodsData = fetchDataFromFile(configModulePlayerMethods);
-  const combinedPlayerMethods = _.merge(fcsPlayerMethodsData, configModulePlayerMethodsData);
-  config.env = Object.assign({}, config.env, { playerMethodObject: combinedPlayerMethods });
+  const fcsWrapperMethodObject = loadJSFile(fcsWrapperMethodObjectPath);
+  const configWrapperMethodObject = loadJSFile(configWrapperMethodObjectPath);
+  
+  const combinedMethods = { ...fcsWrapperMethodObject, ...configWrapperMethodObject };
+  config.env.wrapperMethodObject = combinedMethods;
 }
 
 /**
- * @function fetchDataFromFile
- * @description Reads the data from a file and returns it
- * @param {string} filePath - path of the file to fetch data
- * @example
- * fetchDataFromFile('./path/to/file.json');
+ * @function loadJSFile
+ * @description Loads a JS file and returns its content. If loading fails, logs an error and returns an empty object.
+ * @param {string} filePath - Path to the JS file.
+ * @returns {Object} The content of the file or an empty object if loading fails.
  */
-function fetchDataFromFile(filePath) {
+function loadJSFile(filePath) {
   try {
-    if (fs.existsSync(filePath)) {
-      return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-    } else {
-      logger.error(`File not found at path: ${filePath}`);
-      return null;
-    }
+    return require(filePath);
   } catch (error) {
-    logger.error(`Error reading or parsing the JSON file at ${filePath}: ${error.message}`);
-    return null;
+    logger.error(`Error loading file at ${filePath}:`);
+    return {};
   }
 }
 
@@ -191,5 +206,5 @@ module.exports = {
   getAndDereferenceOpenRpc,
   generateIndexFile,
   preprocessDeviceData,
-  fetchPlayerMethodObject,
+  fetchWrapperMethodObject,
 };
