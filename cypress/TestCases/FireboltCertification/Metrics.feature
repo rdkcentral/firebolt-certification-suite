@@ -119,5 +119,4 @@ Feature: Metrics
             | mediaRateChange with string-rate               | mediaRateChange      | notify that playback rate is changed with string rate           | invalid params for metrics mediaRateChange      |
             | mediaRenditionChange with numeric-bitRate      | mediaRenditionChange | notify that playback rendition is Changed with numeric bitRate  | invalid params for metrics mediaRenditionChange |
             | mediaEnded with numeric-entityId               | mediaEnded           | notify that playback has stopped with numeric entityId          | invalid params for metrics mediaEnded           |
-            | Metrics appInfo with numeric build             | appInfo              | Inform the platform about app with numeric build                | invalid params for metrics appInfo              |
-            | Metrics appInfo with boolean build             | appInfo              | Inform the platform about app with boolean build                | invalid params for metrics appInfo              |
+   
