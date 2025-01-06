@@ -131,6 +131,22 @@ Given('the environment has been set up for {string} tests', (test) => {
   }
 });
 
+Given(
+  /^the environment has been set up for '([^']+)'(?: for '([^']+)')?$/,
+  async (testType, scenarioType) => {
+    Cypress.env(CONSTANTS.TEST_TYPE, testType);
+    Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
+    destroyAppInstance(testType);
+    if (Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(testType)) {
+      cy.fetchWrapperMethodObject().then((wrapperMethodObject) => {
+        Cypress.env('wrapperMethodObject', wrapperMethodObject);
+      });
+    }
+    // Calling the envConfigSetup command to setup the environment for the test from the config module.
+    cy.envConfigSetup();
+  }
+);
+
 /**
  * @module TestSetupGlue
  * @function destroyAppInstance

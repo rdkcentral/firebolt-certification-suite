@@ -18,11 +18,7 @@
 const fs = require('fs');
 const testDataProcessor = require('./testDataProcessor');
 const logger = require('../support/Logger')('common.js');
-const {
-  generateIndexFile,
-  preprocessDeviceData, fetchAppMetaData,
-  fetchWrapperMethodObject,
-} = require('./pluginUtils');
+const { generateIndexFile, preprocessDeviceData, fetchAppMetaData } = require('./pluginUtils');
 const CONSTANTS = require('../support/constants/constants');
 
 // If "genericSupport" is set to a falsy value (false, null, etc), take no further action. Simply "return"
@@ -60,7 +56,6 @@ function genericSupport(config) {
   };
   // To read device data JSON
   preprocessDeviceData(config);
-  fetchWrapperMethodObject(config);
   const testDataEnv = testDataProcessor.testDataProcessor(config.env);
   Object.assign(config.env, testDataEnv);
 
