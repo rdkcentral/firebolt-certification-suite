@@ -1767,12 +1767,12 @@ Cypress.Commands.add('fetchWrapperMethodObject', () => {
 
   cy.task('loadJSFile', fcsWrapperMethodObjectPath).then((fcsContent) => {
     cy.task('loadJSFile', configWrapperMethodObjectPath).then((configContent) => {
-      const fcsObject = fcsContent || {}; 
+      const fcsObject = fcsContent || {};
       const configObject = configContent || {};
 
       const combinedObject = { ...fcsObject, ...configObject };
 
-      return combinedObject
+      return combinedObject;
     });
   });
 });
