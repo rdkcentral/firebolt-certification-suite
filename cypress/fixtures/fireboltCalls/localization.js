@@ -362,6 +362,11 @@ exports.SET_COUNTRYCODE_TO_PH = {
   params: { value: 'PH' },
 };
 
+exports.SET_COUNTRYCODE_TO_UK = {
+  method: 'manage_localization.setCountryCode',
+  params: { value: 'UK' },
+};
+
 exports.SET_LOCALE_TO_ENUS = {
   method: 'manage_localization.setLocale',
   params: { value: 'en-US' },

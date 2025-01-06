@@ -20,7 +20,7 @@ const testDataProcessor = require('./testDataProcessor');
 const logger = require('../support/Logger')('common.js');
 const {
   generateIndexFile,
-  preprocessDeviceData,
+  preprocessDeviceData, fetchAppMetaData,
   fetchWrapperMethodObject,
 } = require('./pluginUtils');
 const CONSTANTS = require('../support/constants/constants');
@@ -49,6 +49,8 @@ function genericSupport(config) {
   // fireboltMocks JSON
   generateIndexFile(CONSTANTS.FIREBOLTMOCK_FROM_FCS, 'fireboltMocks');
   generateIndexFile(CONSTANTS.FIREBOLTMOCK_FROM_CONFIGMODULE, 'fireboltMocks');
+
+  generateIndexFile('cypress/fixtures/external/intentTemplates/', 'intentTemplates');
 
   // The sequence of override - the default config in the config.js file, overriden by supportConfig.json and then by the command line arguments.
   config.env = {

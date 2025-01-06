@@ -14,6 +14,9 @@
  * `Given 3rd party 'firebolt' app is launched with 'foo' appId`
  * `Given 3rd party 'certification' app is launched and with 'foreground' state`
  * `Given 3rd party 'certification' app is launched with 'foo' appId with 'foreground' state`
+ * `Given 3rd party 'certification' app is launched with 'foreground' state`
+ * `Given 3rd party 'certification' app is launched with 'NullIntent' intent`
+ * `Given 3rd party 'certification' app is launched with 'foo' appId with 'foreground' state with 'NullIntent' intent`
 
 ## {string} transitions to state {string}
 ### Purpose: Set state of 3rd party app as well as state inside appObject to use as source of truth

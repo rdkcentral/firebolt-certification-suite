@@ -16,6 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import './cypress-support/src/globalSetter';
 // Importing generic module
 import * as genericModule from './cypress-support/src/main';
 import * as configModule from 'configModule';
