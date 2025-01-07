@@ -43,21 +43,26 @@ All fcsSetter functions must return one of 3 values. Any other value returned wi
 <details id="launchApp">
 <summary><b>fcsSetters.launchApp</b></summary>
 
-To launches an application.
+Launch an application on the device under test (DUT).
 
+Ex:
 ```
 function launchApp(value) {
-    if(response){
-        return setterSuccess("launched App successfully!");
-    }else{
-        return setterFailure("Failed to launch app");
+    
+    let response = // Call your service to launch appId <value> on the device
+    let success = // Perform validations to ensure the app was launched successfully
+
+    if(success) {
+        return setterSuccess(`Launched ${value} successfully!`);
+    } else{
+        return setterFailure(`Failed to launch app ${value}`);
     }
 }
 ```
 
-When **setting an attribute** of launchApp, the *value* will be passed as a param.
+Param **value** will contain the appId to launch on the DUT
 
-Ex: ```fcsSetters.launchApp("AppName");``` 
+Ex: ```fcsSetters.launchApp("myAppId");``` 
 
 </details>
 
@@ -111,19 +116,36 @@ Configures closed caption settings.
 
 ```
 function setClosedCaptions(attribute,value) {
-    if(response){
-        return setterSuccess("Closed captions set successfully!");
-    }else{
-        return setterFailure("Failed to set closed captions.");
+    let response = // Call your service to update the Closed Captions state for the device
+    let success = // Perform validations to ensure the update happened successfully
+
+    if(success) {
+        return setterSuccess(`Set Closed Captions attribute '${attribute}' to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Unable to set Closed Caption attribute '${attribute}' to '${value}'`);
     }
 }
 ```
 
-When **setting an attribute** of closed captions, the *attribute* will be passed as the first parameter, and the *value* as the second.
+There are 2 possible scenarios this function should handle:
 
-Ex: ```fcsSetters.setClosedCaptions("FontFamily", "Arial")``` 
+**Enabling or Disabling Closed Captions**
+
+In this scenario, the *attribute* will be null/undefined or simply "closedCaptions". 
+The *value* will be a string containing a boolean "true" or "false". "true" will enable closed captioning, and false will disable it.
+
+**Setting a Closed Captions attribute**
+
+In this scenario, the *attribute* will contain an attribute for which to set a value, and *value* will contain that value.
+
+**Examples**
+
+Enable Closed Captions: ```fcsSetters.setClosedCaptions("closedCaptions", "true")``` 
+
+Set "FontFamily" to "Arial": ```fcsSetters.setClosedCaptions("FontFamily", "Arial")```
 
 </details>
+
 
 <details id="setDeviceAudio">
 <summary><b>fcsSetters.setDeviceAudio</b></summary>
