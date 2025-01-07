@@ -219,5 +219,3 @@ module.exports = {
   unloadApp,
   getNegotiatedHdcp,
 };
-
-
