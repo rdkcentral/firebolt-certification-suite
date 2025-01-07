@@ -131,7 +131,6 @@ Given('the environment has been set up for {string} tests', (test) => {
   }
 });
 
-
 /**
  * @module TestSetupGlue
  * @function destroyAppInstance
