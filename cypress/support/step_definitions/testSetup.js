@@ -142,32 +142,15 @@ Given(
         Cypress.env('wrapperMethodObject', wrapperMethodObject);
       });
     }
+    Cypress.env('detailed', false);
     // Calling the envConfigSetup command to setup the environment for the test from the config module.
     cy.envConfigSetup();
   }
 );
 
-/**
- * @module TestSetupGlue
- * @function Given the environment has been set up for '(.+)' tests(?: for '(.+)')
- * @description Sets up the environment for the specified testType and scenarioType if specified
- * @param {String} testType - The name of the test.
- * @param {String} scenarioType - The name of the scenario which is optional.
- * @example
- * Given the environment has been setup for 'device'
- * Given the environment has been setup for 'device' for 'version'
- */
-
-Given(
-  /^the environment has been set up for '([^']+)'(?: for '([^']+)')?$/,
-  async (testType, scenarioType) => {
-    Cypress.env(CONSTANTS.TEST_TYPE, testType);
-    Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
-    destroyAppInstance(testType);
-    // Calling the envConfigSetup command to setup the environment for the test from the config module.
-    cy.envConfigSetup();
-  }
-);
+Given(/'(.+)' is '(setup|loaded|running)' successfully/, async (testName, state) => {
+  Cypress.env('detailed', true);
+});
 
 /**
  * @module TestSetupGlue
