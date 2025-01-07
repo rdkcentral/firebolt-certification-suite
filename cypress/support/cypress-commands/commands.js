@@ -1760,19 +1760,3 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
     });
   });
 });
-
-Cypress.Commands.add('fetchWrapperMethodObject', () => {
-  const fcsWrapperMethodObjectPath = 'fixtures/objects/wrapperMethodObject';
-  const configWrapperMethodObjectPath = 'fixtures/external/objects/wrapperMethodObject';
-
-  cy.task('loadJSFile', fcsWrapperMethodObjectPath).then((fcsContent) => {
-    cy.task('loadJSFile', configWrapperMethodObjectPath).then((configContent) => {
-      const fcsObject = fcsContent || {};
-      const configObject = configContent || {};
-
-      const combinedObject = { ...fcsObject, ...configObject };
-
-      return combinedObject;
-    });
-  });
-});
