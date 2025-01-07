@@ -198,7 +198,7 @@ const getNegotiatedHdcp = async () => {
   return setterNotImplemented();
 };
 
-const fcsSetters = {
+module.exports = {
   setAdditionalInfo,
   setAudioDescriptionSettings,
   setCountryCode,
@@ -220,4 +220,4 @@ const fcsSetters = {
   getNegotiatedHdcp,
 };
 
-module.exports = fcsSetters;
+
