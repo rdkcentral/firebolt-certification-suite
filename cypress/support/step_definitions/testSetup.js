@@ -18,6 +18,9 @@
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
 import UTILS, { fireLog } from '../cypress-support/src/utils';
+const internalIntentTemplates = require('../../fixtures/intentTemplates');
+const externalIntentTemplates = require('../../fixtures/external/intentTemplates/index');
+const { _ } = Cypress;
 
 /**
  * @module TestSetupGlue
@@ -51,7 +54,8 @@ Given('the environment has been set up for {string} tests', (test) => {
       fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
     }
   }
-
+  Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
+  Cypress.env(CONSTANTS.TEST_TYPE, test);
   if (
     UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
       JSON.stringify(window.testState.gherkinDocument.feature.name)
@@ -59,14 +63,16 @@ Given('the environment has been set up for {string} tests', (test) => {
   ) {
     return 'pending';
   }
+
+  // Calling the envConfigSetup command to setup the environment for the test from the config module.
+  cy.envConfigSetup();
+
   if (
     !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
     UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
     UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
     UTILS.isTestTypeChanged(test)
   ) {
-    Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
-    Cypress.env(CONSTANTS.TEST_TYPE, test);
     if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
       Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
     }
@@ -82,7 +88,11 @@ Given('the environment has been set up for {string} tests', (test) => {
     }
     // fetch device details dynamically
     if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
-      if (CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES.includes(Cypress.env(CONSTANTS.TEST_TYPE))) {
+      if (
+        UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES).includes(
+          Cypress.env(CONSTANTS.TEST_TYPE)
+        )
+      ) {
         cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
           (response) => {
             if (response) {
@@ -107,9 +117,35 @@ Given('the environment has been set up for {string} tests', (test) => {
       fireLog.fail('Marker creation failed');
     }
   }
-  // Calling the envConfigSetup command to setup the environment for the test from the config module.
-  cy.envConfigSetup();
+
+  if (
+    Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(test) &&
+    !Cypress.env(CONSTANTS.INTENT_TEMPLATES) &&
+    !Cypress.env(CONSTANTS.APP_METADATA)
+  ) {
+    cy.fetchAppMetaData().then((appMetaData) => {
+      Cypress.env(CONSTANTS.APP_METADATA, appMetaData);
+    });
+    const combinedIntentTemplates = _.merge(internalIntentTemplates, externalIntentTemplates);
+    Cypress.env(CONSTANTS.INTENT_TEMPLATES, combinedIntentTemplates);
+  }
 });
+
+Given(
+  /^the environment has been set up for '([^']+)'(?: for '([^']+)')?$/,
+  async (testType, scenarioType) => {
+    Cypress.env(CONSTANTS.TEST_TYPE, testType);
+    Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
+    destroyAppInstance(testType);
+    if (Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(testType)) {
+      cy.fetchWrapperMethodObject().then((wrapperMethodObject) => {
+        Cypress.env('wrapperMethodObject', wrapperMethodObject);
+      });
+    }
+    // Calling the envConfigSetup command to setup the environment for the test from the config module.
+    cy.envConfigSetup();
+  }
+);
 
 /**
  * @module TestSetupGlue
@@ -151,13 +187,8 @@ function destroyAppInstance(testType) {
   );
   const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
 
-  // Checking if the previous test type is different from the current test type.
-  const isDifferentFromPrevious =
-    UTILS.getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != testType &&
-    UTILS.getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != undefined;
   // If the current test type is present inside the closeAppTestTypes array then close the app.
-  // If the multiple test types are executed in one command then close the app between them
-  if (isCloseTestType || isDifferentFromPrevious) {
+  if (isCloseTestType) {
     fireLog.info(
       'Closing app since either Test Type is specified in closeAppTestTypes or is different from previous Test Type.'
     );

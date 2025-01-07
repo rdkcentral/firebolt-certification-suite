@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const logger = require('../support/Logger')('pluginUtils.js');
+const _ = require('lodash');
 
 /**
  * Fetches and dereferences OpenRPC documents from various sources including a Firebolt URL, local files, and external URLs.
@@ -155,4 +156,8 @@ function preprocessDeviceData(config) {
   }
 }
 
-module.exports = { getAndDereferenceOpenRpc, generateIndexFile, preprocessDeviceData };
+module.exports = {
+  getAndDereferenceOpenRpc,
+  generateIndexFile,
+  preprocessDeviceData,
+};

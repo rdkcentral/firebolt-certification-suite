@@ -76,6 +76,7 @@ To execute the certification suite against any platform, the following setup mus
 |suiteCommunicationMode       | string | 'SDK' or 'Transport'                        | Set communicationMode as SDK/Transport for suite feature files. Default mode is Transport                                                                                                                                                         |
 | pubSubSubscribeSuffix                  | string | '_FCA'     | Name of the PubSub topic to subscribe to |
 | pubSubPublishSuffix                  | string | '_FCS'       | Name of the PubSub topic to publish to    |
+| externalModuleTestTypes              | array | []       |  It contains the config module testType names    |
 
 - Provide the specPattern mapping details. 
 Update the specHelperConfig.js with the specPattern mapping details.
