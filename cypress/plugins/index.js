@@ -41,11 +41,25 @@ const logger = require('../support/Logger')('index.js');
 const updateLoggerLevel = require('../support/Logger').updateLoggerLevel;
 const tempReportEnvJson = '../../tempReportEnv.json';
 const { getAndDereferenceOpenRpc } = require('./pluginUtils');
+const { execSync } = require('child_process');
 let metaDataArr = [];
 
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
   const testsuite = config.env.testSuite;
+  const sdkVersion = config.env.sdkVersion || 'latest';
+
+  try {
+    const preprocessorScript = `"${path.join(__dirname, '..', '..', 'Scripts', 'copyFixturesTestcases.js')}"`
+    execSync(`node ${preprocessorScript}`, {
+      stdio: 'inherit',
+      env: { ...process.env, sdkVersion }
+    });
+    console.log('Preprocessor script executed 2204>>>');
+  } catch (error) {
+    console.error('Error executing preprocessor script 2204>>>:', error);
+  }
+  
   const specPattern = getSpecPattern(testsuite);
   if (specPattern !== undefined) {
     config.specPattern = specPattern;
