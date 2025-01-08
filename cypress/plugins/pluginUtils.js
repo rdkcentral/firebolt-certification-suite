@@ -155,4 +155,8 @@ function preprocessDeviceData(config) {
   }
 }
 
-module.exports = { getAndDereferenceOpenRpc, generateIndexFile, preprocessDeviceData };
+module.exports = {
+  getAndDereferenceOpenRpc,
+  generateIndexFile,
+  preprocessDeviceData,
+};
