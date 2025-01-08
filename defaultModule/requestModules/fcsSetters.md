@@ -45,10 +45,9 @@ All fcsSetter functions must return one of 3 values. Any other value returned wi
 
 Launch an application on the device under test (DUT).
 
-Ex:
+**Examples**
 ```
-function launchApp(value) {
-    
+function launchApp(value) {   
     let response = // Call your service to launch appId <value> on the device
     let success = // Perform validations to ensure the app was launched successfully
 
@@ -60,9 +59,10 @@ function launchApp(value) {
 }
 ```
 
-Param **value** will contain the appId to launch on the DUT
+Param **value** will represent the appId to launch on the DUT.
 
-Ex: ```fcsSetters.launchApp("myAppId");``` 
+**Example** 
+```fcsSetters.launchApp("myAppId");``` 
 
 </details>
 
@@ -73,17 +73,22 @@ Sets additional metadata for localization or configuration.
 
 ```
 function setAdditionalInfo(value) {
-    if(response){
+    let response = // Call your service to update the additional info
+    let success = // Perform validations to ensure additional was updated successfully
+
+    if (success) {
         return setterSuccess("AdditionalInfo for Localization set successfully!");
-    }else{
+    } else {
         return setterFailure("Failed to set AdditionalInfo for Localization");
     }
 }
 ```
 
-When **setting an attribute** of AdditionalInfo, the *value* will be passed as a param.
+Param **value** will represent the metadata to set.
 
-Ex: ```fcsSetters.setAdditionalInfo("{ key: 'exampleKey', value: 'exampleValue' }");```
+**Example** 
+
+```fcsSetters.setAdditionalInfo("{ key: 'exampleKey', value: 'exampleValue' }");```
 
 </details>
 
@@ -93,18 +98,27 @@ Ex: ```fcsSetters.setAdditionalInfo("{ key: 'exampleKey', value: 'exampleValue' 
 Configures audio description settings.
 
 ```
-function setAudioDescriptionSettings(attribute,value) {
-    if(response){
-        return setterSuccess("AudioDescription Settings set successfully!");
-    }else{
-        return setterFailure("Failed to set AudioDescription Settings.");
+function setAudioDescriptionSettings(attribute, value) {
+    let response = // Call your service to update the audio description settings
+    let success = // Perform validations to ensure audio description was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Audio Description attribute '${attribute}' to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Audio Description attribute '${attribute}' to '${value}'`);
     }
 }
 ```
 
-When **setting an attribute** of AudioDescriptionSettings, the *attribute* will be passed as the first parameter, and the *value* as the second.
+This function handles the following scenario
 
-Ex: ```fcsSetters.setAudioDescriptionSettings("setEnabled", "true");```
+**Enabling or Disabling AudioDescriptionSettings**
+
+In this scenario, the *attribute* will be null/undefined or simply "enabled". 
+The *value* will be a string containing a boolean "true" or "false". *true* will enable audio description, and *false* will disable it.
+
+**Example**
+```fcsSetters.setAudioDescriptionSettings("setEnabled", "true");```
 
 </details>
 
@@ -117,7 +131,7 @@ Configures closed caption settings.
 ```
 function setClosedCaptions(attribute,value) {
     let response = // Call your service to update the Closed Captions state for the device
-    let success = // Perform validations to ensure the update happened successfully
+    let success = // Perform validations to ensure closed caption was updated successfully
 
     if(success) {
         return setterSuccess(`Set Closed Captions attribute '${attribute}' to '${value}' successfully!`);
@@ -131,8 +145,8 @@ There are 2 possible scenarios this function should handle:
 
 **Enabling or Disabling Closed Captions**
 
-In this scenario, the *attribute* will be null/undefined or simply "closedCaptions". 
-The *value* will be a string containing a boolean "true" or "false". "true" will enable closed captioning, and false will disable it.
+In this scenario, the *attribute* will be null/undefined or simply "enable". 
+The *value* will be a string containing a boolean "true" or "false". *true* will enable closed captioning, and *false* will disable it.
 
 **Setting a Closed Captions attribute**
 
@@ -140,7 +154,7 @@ In this scenario, the *attribute* will contain an attribute for which to set a v
 
 **Examples**
 
-Enable Closed Captions: ```fcsSetters.setClosedCaptions("closedCaptions", "true")``` 
+Enable Closed Captions: ```fcsSetters.setClosedCaptions("enable", "true")``` 
 
 Set "FontFamily" to "Arial": ```fcsSetters.setClosedCaptions("FontFamily", "Arial")```
 
@@ -150,21 +164,25 @@ Set "FontFamily" to "Arial": ```fcsSetters.setClosedCaptions("FontFamily", "Aria
 <details id="setDeviceAudio">
 <summary><b>fcsSetters.setDeviceAudio</b></summary>
 
-Configures device audio settings.
+Configures audio settings for the device.
 
 ```
 function setDeviceAudio(value) {
-    if(response){
-        return setterSuccess("DeviceAudio set successfully!");
-    }else{
-        return setterFailure("Failed to set DeviceAudio.");
+    let response = // Call your service to set device audio state
+    let success = // Perform validations to ensure device audio was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Device Audio attribute '${attribute}' to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Device Audio attribute '${attribute}' to '${value}'`);
     }
 }
 ```
 
-When **setting an attribute** of setDeviceAudio, the *value* will be passed as a param.
+Param **value** will represent the desired audio mode.
 
-Ex: ```fcsSetters.setDeviceAudio("Stereo");```
+**Example**
+```fcsSetters.setDeviceAudio("Stereo");```
 
 </details>
 
@@ -175,17 +193,21 @@ Configures the discovery policy for the device.
 
 ```
 function setDiscoveryPolicy(value) {
-    if(response){
-        return setterSuccess("DiscoveryPolicy set successfully!");
-    }else{
-        return setterFailure("Failed to set DiscoveryPolicy");
+    let response = // Call your service to set discovery policy state
+    let success = // Perform validations to ensure discovery policy was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Discovery Policy to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Discovery Policy to '${value}'`);
     }
 }
 ```
 
-When **setting an attribute** of DiscoveryPolicy, the *value* will be passed as a param.
+Param **value** will represent the desired discovery policy.
 
-Ex: ```fcsSetters.setDiscoveryPolicy("Allow");```
+**Example**
+```fcsSetters.setDiscoveryPolicy("Allow");```
 
 </details>
 
@@ -196,17 +218,21 @@ Sets the device's language.
 
 ```
 function setLanguage(value) {
-    if(response){
-        return setterSuccess("Language set successfully!");
-    }else{
-        return setterFailure("Failed to set language");
+    let response = // Call your service to set the language 
+    let success = // Perform validations to ensure language was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Language to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Language to '${value}'`);
     }
 }
 ```
 
-When **setting an attribute** of Language, the *value* will be passed as a param.
+Param **value** will represents the desired language.
 
-Ex: ```fcsSetters.setLanguage("en-US");```
+**Example** 
+```fcsSetters.setLanguage("en-US");```
 
 </details>
 
@@ -217,17 +243,22 @@ Sets the lifecycle state of the application.
 
 ```
 function setLifecycleState(value) {
-    if(response){
-        return setterSuccess("LifecycleState set successfully!");
-    }else{
-        return setterFailure("Failed to set LifecycleState");
+    let response = // Call your service to set the lifecycle state
+    let success = //Perform validations to ensure lifecycle state was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Lifecycle State to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Lifecycle State to '${value}'`);
     }
 }
+
 ```
 
-When **setting an attribute** of LifecycleState, the *value* will be passed as a param.
+Param **value** will represents the desired lifecycle state.
 
-Ex: ```fcsSetters.setLifecycleState("background");``` 
+**Example**
+```fcsSetters.setLifecycleState("background");``` 
 
 </details>
 
@@ -238,17 +269,21 @@ Configures the limit ad tracking setting.
 
 ```
 function setLimitAdTracking(value) {
-    if(response){
-        return setterSuccess("LimitAdTracking set successfully!");
-    }else{
-        return setterFailure("Failed to set LimitAdTracking.");
+    let response = // Call your service to set the limit ad tracking
+    let success = // Perform validations to limit ad tracking was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Limit Ad Tracking to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Limit Ad Tracking to '${value}'`);
     }
 }
 ```
 
-When **setting an attribute** of LimitAdTracking, the *value* will be passed as a param.
+Param **value** can either be true or false to set whether ad tracking should be limited.
 
-Ex: ```fcsSetters.setLimitAdTracking("true");``` 
+**Example**
+```fcsSetters.setLimitAdTracking("true");``` 
 
 </details>
 
@@ -259,17 +294,21 @@ Sets the device's locale settings.
 
 ```
 function setLocale(value) {
-    if(response){
-        return setterSuccess("Locale set successfully!");
-    }else{
-        return setterFailure("Failed to set Locale");
+    let response = // Call your service to set the locale state
+    let success = // Perform validations to ensure locale was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Locale to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Locale to '${value}'`);
     }
 }
 ```
 
-When **setting an attribute** of Locale, the *value* will be passed as a param.
+Param **value** represents the desired locale setting.
 
-Ex: ```fcsSetters.setLocale("en-US");``` seeks to set the Locale to "true"
+**Example**
+```fcsSetters.setLocale("en-US");``` seeks to set the Locale to "true"
 
 </details>
 
@@ -281,17 +320,21 @@ Configures the preferred audio languages.
 
 ```
 function setPreferredAudioLanguages(value) {
-    if(response){
-        return setterSuccess("PreferredAudioLanguages set successfully!");
-    }else{
-        return setterFailure("Failed to set PreferredAudioLanguages");
+    let response = // Call your service to set the preferred audio languages
+    let success = // Perform validations to ensure preferred audio language was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Preferred Audio Languages to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Preferred Audio Languages to '${value}'`);
     }
 }
 ```
 
-When **setting an attribute** of PreferredAudioLanguages, the *value* will be passed as a param.
+Param **value**  will be a list of preferred audio languages, represented as an array of language code.
 
-Ex: ```fcsSetters.setPreferredAudioLanguages("[\"en-US\", \"es-ES\"]");```
+**Examples**
+```fcsSetters.setPreferredAudioLanguages("[\"en-US\", \"es-ES\"]");```
 
 </details>
 
@@ -302,17 +345,21 @@ Configures the video resolution.
 
 ```
 function setVideoResolution(value) {
-    if(response){
-        return setterSuccess("VideoResolution set successfully!");
-    }else{
-        return setterFailure("Failed to set VideoResolution.");
+    let response = // Call your service to set the video resolution
+    let success = // Perform validations to ensure video resolution was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Video Resolution to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Video Resolution to '${value}'`);
     }
 }
 ```
 
-When **setting an attribute** of LimitAdTracking, the *value* will be passed as a param.
+Param **value** represents the desired video resolution.
 
-Ex: ```fcsSetters.setVideoResolution("1080p");``` 
+**Examples**
+```fcsSetters.setVideoResolution("1080p");``` 
 
 </details>
 
@@ -322,39 +369,53 @@ Ex: ```fcsSetters.setVideoResolution("1080p");```
 Configures voice guidance settings.
 
 ```
-function setVoiceGuidance(attribute,value) {
-    if(response){
-        return setterSuccess("VoiceGuidance set successfully!");
-    }else{
-        return setterFailure("Failed to set VoiceGuidance.");
+function setVoiceGuidance(attribute, value) {
+    let response = // Call your service to update the Voice Guidance state for the device
+    let success = // Perform validations to ensure the voice guidance was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Voice Guidance attribute '${attribute}' to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Unable to set Voice Guidance attribute '${attribute}' to '${value}'`);
     }
 }
 ```
 
-When **setting an attribute** of VoiceGuidance, the *attribute* will be passed as the first parameter, and the *value* as the second.
+This function handles the following scenario
 
-Ex: ```fcsSetters.setVoiceGuidance("setEnabled", "true");``` 
+**Enabling or Disabling Voice Guidance**
+
+In this scenario, the *attribute* will be null/undefined or simply "voiceGuidance". 
+The *value* will be a string containing a boolean "true" or "false". "true" will enable closed captioning, and false will disable it.
+
+**Example**
+
+To enable Voice Guidance: ```fcsSetters.setVoiceGuidance("voiceGuidance", "true");```
+
 </details>
-
 
 <details id="unloadApp">
 <summary><b>fcsSetters.unloadApp</b></summary>
 
-Unloads an application.
+Unloads an application on the device under Test(DUT).
 
 ```
-function unloadApp(value) {
-    if(response){
-        return setterSuccess("Unloaded app successfully!");
-    }else{
-        return setterFailure("Failed to unload an app");
+function launchApp(value) {   
+    let response = // Call your service to unloadlaunch appId <value> on the device
+    let success = // Perform validations to ensure the app was unloaded successfully
+
+    if(success) {
+        return setterSuccess(`Unloaded ${value} successfully!`);
+    } else{
+        return setterFailure(`Failed to unload ${value} app`);
     }
 }
 ```
 
-When **setting an attribute** of unloadApp, the *value* will be passed as a param.
+Param **value** will contain the appId to launch on the DUT.
 
-Ex: ```csSetters.unloadApp("AppName");``` 
+**Examples** 
+```fcsSetters.unloadApp("myAddId");``` 
 
 </details>
 
@@ -367,17 +428,22 @@ Retrieves the current HDCP negotiation settings.
 
 ```
 function getNegotiatedHdcp() {
-    if(response){
-        return setterSuccess("Getter NegotiatedHdcp successfully!");
-    }else{
-        return setterFailure("Failed to get NegotiatedHdcp");
+    let response = // Call your service to retrieve the HDCP negotiation settings
+    let success = // Validate that the retrieval was successful
+
+    if (success) {
+        return setterSuccess("Retrieved Negotiated Hdcp settings successfully!");
+    } else {
+        return setterFailure("Failed to retrieve Negotiated Hdcp settings");
     }
 }
+
 ```
 
-When **getting** the NegotiatedHdcp, no parm need to be passed.
+**No parameters** need to be passed, and the function simply retrieves the current HDCP negotiation settings.
 
-Ex: ```fcsSetters.getNegotiatedHdcp()``` 
+**Examples** 
+```fcsSetters.getNegotiatedHdcp()``` 
 
 </details>
 
@@ -388,17 +454,21 @@ Sets the country code for the device.
 
 ```
 function setCountryCode(value) {
-    if(response){
-        return setterSuccess("CountryCode set successfully!");
-    }else{
-        return setterFailure("Failed to set CountryCode");
+    let response = // Call your service to set the country code
+    let success = // Perform validations to ensure country code was updtaedsuccessfully
+
+    if (success) {
+        return setterSuccess(`Set Country Code to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Country Code to '${value}'`);
     }
 }
 ```
 
-When **setting an attribute** of CountryCode, the *value* will be passed as a param.
+Param **value** will represent the country code.
 
-Ex: ```fcsSetters.setCountryCode("08052")``` 
+**Examples**
+```fcsSetters.setCountryCode("US")``` 
 
 </details>
 
@@ -409,17 +479,20 @@ Configures HDCP settings for the device.
 
 ```
 function setDeviceHdcp(value) {
-    if(response){
-        return setterSuccess("DeviceHdr set successfully!");
-    }else{
-        return setterFailure("Failed to set DeviceHdcp");
+    let response = // Call your service to set the HDCP settings
+    let success = // Perform validations to ensure HDCP settings was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Device HDCP to '${value}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Device HDCP to '${value}'`);
     }
 }
 ```
+Param **value** will will be an object representing the HDCP settings.
 
-When **setting an attribute** of DeviceHdcp, the *value* will be passed as a param.
-
-Ex: ```fcsSetters.setDeviceHdcp("{"hdcp2.2": true}")``` 
+**Examples**
+```fcsSetters.setDeviceHdcp("{"hdcp2.2": true}")``` 
 
 </details>
 
@@ -430,17 +503,21 @@ Configures HDR settings for the device.
 
 ```
 function setDeviceHdr(value) {
-    if(response){
-        return setterSuccess("DeviceHdr set successfully!");
-    }else{
-        return setterFailure("Failed to set DeviceHdr");
+    let response = // Call your service to set the HDR settings with the provided object
+    let success = // Perform validations to ensure device HDR was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Device HDR to '${JSON.stringify(value)}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Device HDR to '${JSON.stringify(value)}'`);
     }
 }
 ```
 
-When **setting an attribute** of DeviceHdr, the *value* will be passed as a param.
+Param **value** will be an object representing the HDR settings.
 
-Ex: ```fcsSetters.setDeviceHdr("{"dolbyVision": true}")``` 
+**Examples**
+```fcsSetters.setDeviceHdr("{"dolbyVision": true}")``` 
 
 </details>
 
@@ -451,17 +528,21 @@ Configures the network settings for the device.
 
 ```
 function setDeviceNetwork(value) {
-    if(response){
-        return setterSuccess("DeviceNetwork set successfully!");
-    }else{
-        return setterFailure("Failed to set DeviceNetwork");
+    let response = // Call your service to set the network settings with the provided object
+    let success = // Perform validations to ensure device network was updated successfully
+
+    if (success) {
+        return setterSuccess(`Set Device Network to '${JSON.stringify(value)}' successfully!`);
+    } else {
+        return setterFailure(`Failed to set Device Network to '${JSON.stringify(value)}'`);
     }
 }
 ```
 
-When **setting an attribute** of DeviceNetwork, the *value* will be passed as a param.
+Param **value** will be an object representing the network settings.
 
-Ex: ```fcsSetters.setDeviceNetwork("{"state": "connected", "type": "wifi"}")``` 
+**Examples**
+```fcsSetters.setDeviceNetwork("{"state": "connected", "type": "wifi"}")``` 
 
 </details>
 
