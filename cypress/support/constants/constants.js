@@ -532,6 +532,8 @@ module.exports = {
   PLAYBACK: 'playback',
   LOGGEDIN: 'loggedIn',
   LOGGEDOUT: 'loggedOut',
+  SCENARIO_TYPE: 'scenarioType',
+  DISMISS: 'dismiss',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
