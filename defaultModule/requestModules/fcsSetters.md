@@ -45,7 +45,6 @@ All fcsSetter functions must return one of 3 values. Any other value returned wi
 
 Launch an application on the device under test (DUT).
 
-**Examples**
 ```
 function launchApp(value) {   
     let response = // Call your service to launch appId <value> on the device
@@ -62,6 +61,7 @@ function launchApp(value) {
 Param **value** will represent the appId to launch on the DUT.
 
 **Example** 
+
 ```fcsSetters.launchApp("myAppId");``` 
 
 </details>
@@ -118,6 +118,7 @@ In this scenario, the *attribute* will be null/undefined or simply "enabled".
 The *value* will be a string containing a boolean "true" or "false". *true* will enable audio description, and *false* will disable it.
 
 **Example**
+
 ```fcsSetters.setAudioDescriptionSettings("setEnabled", "true");```
 
 </details>
@@ -172,9 +173,9 @@ function setDeviceAudio(value) {
     let success = // Perform validations to ensure device audio was updated successfully
 
     if (success) {
-        return setterSuccess(`Set Device Audio attribute '${attribute}' to '${value}' successfully!`);
+        return setterSuccess(`Set Device Audio to '${value}' successfully!`);
     } else {
-        return setterFailure(`Failed to set Device Audio attribute '${attribute}' to '${value}'`);
+        return setterFailure(`Failed to set Device Audio to '${value}'`);
     }
 }
 ```
@@ -182,6 +183,7 @@ function setDeviceAudio(value) {
 Param **value** will represent the desired audio mode.
 
 **Example**
+
 ```fcsSetters.setDeviceAudio("Stereo");```
 
 </details>
@@ -207,6 +209,7 @@ function setDiscoveryPolicy(value) {
 Param **value** will represent the desired discovery policy.
 
 **Example**
+
 ```fcsSetters.setDiscoveryPolicy("Allow");```
 
 </details>
@@ -232,6 +235,7 @@ function setLanguage(value) {
 Param **value** will represents the desired language.
 
 **Example** 
+
 ```fcsSetters.setLanguage("en-US");```
 
 </details>
@@ -258,6 +262,7 @@ function setLifecycleState(value) {
 Param **value** will represents the desired lifecycle state.
 
 **Example**
+
 ```fcsSetters.setLifecycleState("background");``` 
 
 </details>
@@ -283,6 +288,7 @@ function setLimitAdTracking(value) {
 Param **value** can either be true or false to set whether ad tracking should be limited.
 
 **Example**
+
 ```fcsSetters.setLimitAdTracking("true");``` 
 
 </details>
@@ -308,6 +314,7 @@ function setLocale(value) {
 Param **value** represents the desired locale setting.
 
 **Example**
+
 ```fcsSetters.setLocale("en-US");``` seeks to set the Locale to "true"
 
 </details>
@@ -333,7 +340,8 @@ function setPreferredAudioLanguages(value) {
 
 Param **value**  will be a list of preferred audio languages, represented as an array of language code.
 
-**Examples**
+**Example**
+
 ```fcsSetters.setPreferredAudioLanguages("[\"en-US\", \"es-ES\"]");```
 
 </details>
@@ -358,7 +366,8 @@ function setVideoResolution(value) {
 
 Param **value** represents the desired video resolution.
 
-**Examples**
+**Example**
+
 ```fcsSetters.setVideoResolution("1080p");``` 
 
 </details>
@@ -414,7 +423,8 @@ function launchApp(value) {
 
 Param **value** will contain the appId to launch on the DUT.
 
-**Examples** 
+**Example** 
+
 ```fcsSetters.unloadApp("myAddId");``` 
 
 </details>
@@ -442,7 +452,8 @@ function getNegotiatedHdcp() {
 
 **No parameters** need to be passed, and the function simply retrieves the current HDCP negotiation settings.
 
-**Examples** 
+**Example** 
+
 ```fcsSetters.getNegotiatedHdcp()``` 
 
 </details>
@@ -467,7 +478,8 @@ function setCountryCode(value) {
 
 Param **value** will represent the country code.
 
-**Examples**
+**Example**
+
 ```fcsSetters.setCountryCode("US")``` 
 
 </details>
@@ -491,7 +503,8 @@ function setDeviceHdcp(value) {
 ```
 Param **value** will will be an object representing the HDCP settings.
 
-**Examples**
+**Example**
+
 ```fcsSetters.setDeviceHdcp("{"hdcp2.2": true}")``` 
 
 </details>
@@ -516,7 +529,8 @@ function setDeviceHdr(value) {
 
 Param **value** will be an object representing the HDR settings.
 
-**Examples**
+**Example**
+
 ```fcsSetters.setDeviceHdr("{"dolbyVision": true}")``` 
 
 </details>
@@ -541,7 +555,8 @@ function setDeviceNetwork(value) {
 
 Param **value** will be an object representing the network settings.
 
-**Examples**
+**Example**
+
 ```fcsSetters.setDeviceNetwork("{"state": "connected", "type": "wifi"}")``` 
 
 </details>
