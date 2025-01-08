@@ -33,7 +33,7 @@ const reporterOptions = {
 
 const env = {
   deviceIp: '',
-  deviceMac: '',
+  deviceMac: 'F0:46:3B:5B:EF:EE',
   default3rdPartyAppId: '',
   deviceCommPort: '3474',
   mock: false,
