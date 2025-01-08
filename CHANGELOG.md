@@ -1,3 +1,10 @@
+# [1.6.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.3...v1.6.0-dev.4) (2024-12-31)
+
+
+### Bug Fixes
+
+* Fixed multiple app launch issue ([#302](https://github.com/rdkcentral/firebolt-certification-suite/issues/302)) ([b1199da](https://github.com/rdkcentral/firebolt-certification-suite/commit/b1199dab4278de420c1ebad30b4dff114b6eb63b))
+
 # [1.6.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.2...v1.6.0-dev.3) (2024-12-30)
 
 
