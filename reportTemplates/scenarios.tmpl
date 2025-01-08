@@ -212,13 +212,7 @@ SPDX-License-Identifier: Apache-2.0
                         <% if(step.result) { %>
                             <% if (step.result.error_message) { %>
                                 <div id="error<%= scenarioIndex %>-<%= stepIndex %>-error" class="scenario-step-collapse collapse">
-                                    <pre class=info>
-                                        <%= step.result.error_message
-                                            .replace(/</g, '(') // Replace '<' with '('
-                                            .replace(/>/g, ')') // Replace '>' with ')'
-                                            .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>') // Replace URLs with clickable links
-                                        %>
-                                    </pre>
+                                    <pre class=info><%= step.result.error_message.replace(/</g, '(').replace(/>/g, ')') %></pre>
                                 </div>
                             <% } %>
 
