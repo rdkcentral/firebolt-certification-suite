@@ -30,126 +30,120 @@ const { _ } = Cypress;
  * @example
  * Given the environment has been set up for 'Firebolt Sanity' tests
  */
-Given('the environment has been set up for {string} tests', (test) => {
-  const runtime = {};
+Given(
+  /^the environment has been set up for '([^']+)' tests(?: for '([^']+)')?$/,
+  async (test, scenarioType) => {
+    const runtime = {};
 
-  // Check if the test parameter is provided
-  if (test) {
-    let fireboltCallKey;
-    // Check if the test parameter contains a colon to split into module and method
-    if (test.includes(':')) {
-      const [module, method] = test.split(':');
-      fireboltCallKey = module.toUpperCase();
-      Object.assign(runtime, { method, module });
-    } else {
-      // Replace spaces with underscores and convert to uppercase for the fireboltCallKey
-      fireboltCallKey = test.replace(/\s+/g, '_').toUpperCase();
-    }
-    // Retrieve the firebolt object from environment variables using the fireboltCallKey
-    const fireboltObject = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[fireboltCallKey];
-    if (fireboltObject) {
-      // Update the runtime environment variable with the firebolt object
-      runtime.fireboltCall = fireboltObject;
-      Cypress.env(CONSTANTS.RUNTIME, runtime);
-      fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
-    }
-  }
-  Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
-  Cypress.env(CONSTANTS.TEST_TYPE, test);
-  if (
-    UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
-      JSON.stringify(window.testState.gherkinDocument.feature.name)
-    )
-  ) {
-    return 'pending';
-  }
-
-  // Calling the envConfigSetup command to setup the environment for the test from the config module.
-  cy.envConfigSetup();
-
-  if (
-    !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
-    UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
-    UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
-    UTILS.isTestTypeChanged(test)
-  ) {
-    if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
-      Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
-    }
-
-    if (test == CONSTANTS.SETUPCHECK) {
-      UTILS.getSetupDetails();
-    }
-
-    destroyAppInstance(test);
-    Cypress.env(CONSTANTS.ENV_SETUP_STATUS, true);
-    if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
-      Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
-    }
-    // fetch device details dynamically
-    if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
-      if (
-        UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES).includes(
-          Cypress.env(CONSTANTS.TEST_TYPE)
-        )
-      ) {
-        cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-          (response) => {
-            if (response) {
-              const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
-              const requestMap = {
-                method: method,
-                params: response,
-              };
-              cy.sendMessagetoPlatforms(requestMap);
-            }
-          }
-        );
+    // Check if the test parameter is provided
+    if (test) {
+      let fireboltCallKey;
+      // Check if the test parameter contains a colon to split into module and method
+      if (test.includes(':')) {
+        const [module, method] = test.split(':');
+        fireboltCallKey = module.toUpperCase();
+        Object.assign(runtime, { method, module });
+      } else {
+        // Replace spaces with underscores and convert to uppercase for the fireboltCallKey
+        fireboltCallKey = test.replace(/\s+/g, '_').toUpperCase();
+      }
+      // Retrieve the firebolt object from environment variables using the fireboltCallKey
+      const fireboltObject = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[fireboltCallKey];
+      if (fireboltObject) {
+        // Update the runtime environment variable with the firebolt object
+        runtime.fireboltCall = fireboltObject;
+        Cypress.env(CONSTANTS.RUNTIME, runtime);
+        fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
       }
     }
-  }
-  // Check the marker creation status
-  if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS)) {
-    const markerCreated = Cypress.env(CONSTANTS.MARKER_CREATION_STATUS);
-    if (markerCreated) {
-      fireLog.info('Marker has been created successfully');
-    } else {
-      fireLog.fail('Marker creation failed');
-    }
-  }
-
-  if (
-    Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(test) &&
-    !Cypress.env(CONSTANTS.INTENT_TEMPLATES) &&
-    !Cypress.env(CONSTANTS.APP_METADATA)
-  ) {
-    cy.fetchAppMetaData().then((appMetaData) => {
-      Cypress.env(CONSTANTS.APP_METADATA, appMetaData);
-    });
-    const combinedIntentTemplates = _.merge(internalIntentTemplates, externalIntentTemplates);
-    Cypress.env(CONSTANTS.INTENT_TEMPLATES, combinedIntentTemplates);
-  }
-});
-
-Given(
-  /^the environment has been set up for '([^']+)'(?: for '([^']+)')?$/,
-  async (testType, scenarioType) => {
-    Cypress.env(CONSTANTS.TEST_TYPE, testType);
+    Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
+    Cypress.env(CONSTANTS.TEST_TYPE, test);
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
-    destroyAppInstance(testType);
-    if (Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(testType)) {
-      cy.fetchWrapperMethodObject().then((wrapperMethodObject) => {
-        Cypress.env('wrapperMethodObject', wrapperMethodObject);
-      });
-    }
     Cypress.env('detailed', false);
+    if (
+      UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
+        JSON.stringify(window.testState.gherkinDocument.feature.name)
+      )
+    ) {
+      return 'pending';
+    }
+
     // Calling the envConfigSetup command to setup the environment for the test from the config module.
     cy.envConfigSetup();
+
+    if (
+      !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
+      UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
+      UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
+      UTILS.isTestTypeChanged(test)
+    ) {
+      if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
+        Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
+      }
+
+      if (test == CONSTANTS.SETUPCHECK) {
+        UTILS.getSetupDetails();
+      }
+
+      destroyAppInstance(test);
+      Cypress.env(CONSTANTS.ENV_SETUP_STATUS, true);
+      if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
+        Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
+      }
+      // fetch device details dynamically
+      if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
+        if (
+          UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES).includes(
+            Cypress.env(CONSTANTS.TEST_TYPE)
+          )
+        ) {
+          cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+            (response) => {
+              if (response) {
+                const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
+                const requestMap = {
+                  method: method,
+                  params: response,
+                };
+                cy.sendMessagetoPlatforms(requestMap);
+              }
+            }
+          );
+        }
+      }
+    }
+    // Check the marker creation status
+    if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS)) {
+      const markerCreated = Cypress.env(CONSTANTS.MARKER_CREATION_STATUS);
+      if (markerCreated) {
+        fireLog.info('Marker has been created successfully');
+      } else {
+        fireLog.fail('Marker creation failed');
+      }
+    }
+
+    if (
+      Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(test) &&
+      !Cypress.env(CONSTANTS.INTENT_TEMPLATES) &&
+      !Cypress.env(CONSTANTS.APP_METADATA)
+    ) {
+      cy.fetchAppMetaData().then((appMetaData) => {
+        Cypress.env(CONSTANTS.APP_METADATA, appMetaData);
+      });
+      const combinedIntentTemplates = _.merge(internalIntentTemplates, externalIntentTemplates);
+      Cypress.env(CONSTANTS.INTENT_TEMPLATES, combinedIntentTemplates);
+    }
   }
 );
 
 Given(/'(.+)' is '(setup|loaded|running)' successfully/, async (testName, state) => {
   Cypress.env('detailed', true);
+  fcs.validateInitializeIntPlayer(
+    (appId = Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)),
+    (testType = Cypress.env(CONSTANTS.TEST_TYPE)),
+    (certificationType = Cypress.env(CONSTANTS.CERTIFICATION)),
+    (detailed = Cypress.env('detailed'))
+  );
 });
 
 /**
