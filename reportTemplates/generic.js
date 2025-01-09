@@ -95,6 +95,27 @@ attachScreenshotLinks = () => {
   });
 };
 
+const convertPreUrlsToHyperlinks = () => {
+  // Define regular expression to match URL patterns
+  const urlPattern = /(https:\/\/[^\s]+)/g;
+
+  // Get all the <pre> elements nested inside <div> elements
+  const preElements = document.querySelectorAll('div pre');
+
+  preElements.forEach((pre) => {
+    const preHTML = pre.innerHTML;
+
+    if (urlPattern.test(preHTML)) {
+      // Replace plain text URLs with clickable hyperlinks
+      const updatedHTML = preHTML.replace(urlPattern, (url) => {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+      });
+
+      pre.innerHTML = updatedHTML;
+    }
+  });
+};
+
 $(document).ready(() => {
   const status = ['passed', 'failed', 'pending', 'skipped', 'ambiguous', 'not-defined'];
   status.forEach((value) => {
@@ -106,4 +127,5 @@ $(document).ready(() => {
     }
   });
   attachScreenshotLinks();
+  convertPreUrlsToHyperlinks();
 });
