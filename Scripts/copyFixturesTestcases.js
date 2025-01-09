@@ -27,16 +27,16 @@ const configFixturesDir = path.join(
   'fixtures'
 );
 
-copyDirectory(sdkTestCasesDir, fcsTestCasesDir);
+copyFiles(sdkTestCasesDir, fcsTestCasesDir);
 const distributorDir = path.join(fcsTestCasesDir, 'distributor');
-copyDirectory(configTestCasesDir, distributorDir);
+copyFiles(configTestCasesDir, distributorDir);
 
-copyDirectory(sdkFixturesDir, fcsFixturesDir);
+copyFiles(sdkFixturesDir, fcsFixturesDir);
 const distributorFixturesDir = path.join(fcsFixturesDir, 'distributor');
-copyDirectory(configFixturesDir, distributorFixturesDir);
+copyFiles(configFixturesDir, distributorFixturesDir);
 
 // Function to copy files and directories
-function copyDirectory(configDir, externalDir) {
+function copyFiles(configDir, externalDir) {
   // Ensure the externalDir is fresh
   deleteDirectory(externalDir);
   fs.mkdirSync(externalDir, { recursive: true });
