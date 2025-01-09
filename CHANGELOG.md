@@ -1,3 +1,10 @@
+# [1.6.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.4...v1.6.0-dev.5) (2025-01-09)
+
+
+### Bug Fixes
+
+* change jsonschema dependency to static 1.4.1 version ([#308](https://github.com/rdkcentral/firebolt-certification-suite/issues/308)) ([cdba6f4](https://github.com/rdkcentral/firebolt-certification-suite/commit/cdba6f4921c5458663237c7862776aa4969cf957))
+
 # [1.6.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.3...v1.6.0-dev.4) (2024-12-31)
 
 
