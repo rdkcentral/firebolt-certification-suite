@@ -4,7 +4,7 @@ Follow these steps to set up and use the `simplePubSubModule` for your testing a
 
 ## 1. Update the `configModule`
 
-In your [`package.json`](../package.json#L"configModule"), update the `configModule` field to point to `./simplePubSubModule`.
+In your [`package.json`](../package.json), update the `configModule` field to point to `./simplePubSubModule`.
 
 ```json
 "configModule": "simplePubSubModule"
