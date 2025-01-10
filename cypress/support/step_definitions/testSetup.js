@@ -136,6 +136,15 @@ Given(
   }
 );
 
+/**
+ * @module TestSetupGlue
+ * @function Given '(.+)' is '(setupsetup|loaded|running)' successfully
+ * @description
+ * @param {String} testName - The name of the test.
+ * @param {String} state - The state of the test.
+ * @example
+ * Given 'app' is setup|loaded|running successfully
+ */
 Given(/'(.+)' is '(setup|loaded|running)' successfully/, async (testName, state) => {
   Cypress.env('detailed', true);
   fcs.validateInitializeIntPlayer(
