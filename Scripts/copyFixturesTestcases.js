@@ -8,31 +8,22 @@ const sdkTestCasesDir = path.join(__dirname, '..', 'cypress', sdkVersion, 'TestC
 const configTestCasesDir = path.join(
   __dirname,
   '..',
-  'node_modules',
-  'configModule',
   'cypress',
+  'external',
   sdkVersion,
   'TestCases'
 );
 
 const fcsFixturesDir = path.join(__dirname, '..', 'cypress', 'fixtures');
 const sdkFixturesDir = path.join(__dirname, '..', 'cypress', sdkVersion, 'fixtures');
-const configFixturesDir = path.join(
-  __dirname,
-  '..',
-  'node_modules',
-  'configModule',
-  'cypress',
-  sdkVersion,
-  'fixtures'
-);
+const configFixturesDir = path.join(__dirname, '..', 'cypress', 'external', sdkVersion, 'fixtures');
 
 copyFiles(sdkTestCasesDir, fcsTestCasesDir);
-const distributorDir = path.join(fcsTestCasesDir, 'distributor');
+const distributorDir = path.join(fcsTestCasesDir, 'Distributor');
 copyFiles(configTestCasesDir, distributorDir);
 
 copyFiles(sdkFixturesDir, fcsFixturesDir);
-const distributorFixturesDir = path.join(fcsFixturesDir, 'distributor');
+const distributorFixturesDir = path.join(fcsFixturesDir, 'external');
 copyFiles(configFixturesDir, distributorFixturesDir);
 
 // Function to copy files and directories

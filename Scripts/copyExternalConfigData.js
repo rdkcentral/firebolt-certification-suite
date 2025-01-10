@@ -24,25 +24,13 @@ logger.info(
 );
 
 // Config for testCase
-const EXTERNAL_DIR_TESTCASE = path.join(__dirname, '..', 'cypress', 'TestCases', 'Distributor');
+const EXTERNAL_DIR_TESTCASE = path.join(__dirname, '..', 'cypress', 'external');
 const CONFIG_DIR_TESTCASE = path.join(
   __dirname,
   '..',
   'node_modules',
   'configModule',
-  'cypress',
-  'TestCases'
-);
-
-// Config for fixtures
-const EXTERNAL_DIR_TESTDATA = path.join(__dirname, '..', 'cypress', 'fixtures', 'external');
-const CONFIG_DIR_TESTDATA = path.join(
-  __dirname,
-  '..',
-  'node_modules',
-  'configModule',
-  'cypress',
-  'fixtures'
+  'cypress'
 );
 
 // Config for config.json
@@ -85,13 +73,6 @@ if (fs.existsSync(CONFIG_DIR_TESTCASE)) {
   copyFiles(CONFIG_DIR_TESTCASE, EXTERNAL_DIR_TESTCASE);
 } else {
   logger.info('TestCases data is not available in configModule');
-}
-
-// Copy testData files
-if (fs.existsSync(CONFIG_DIR_TESTDATA)) {
-  copyFiles(CONFIG_DIR_TESTDATA, EXTERNAL_DIR_TESTDATA);
-} else {
-  logger.info('fixtures is not available in configModule');
 }
 
 // Copy config.json file
