@@ -539,19 +539,6 @@ function getSetupDetails() {
 
 /**
  * @module utils
- * @function isTestTypeChanged
- * @description To check if the test type has changed.
- * @returns {currentTest} - Current test type.
- */
-function isTestTypeChanged(currentTest) {
-  return (
-    getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != currentTest &&
-    getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != undefined
-  );
-}
-
-/**
- * @module utils
  * @function pubSubClientCreation
  * @description Establishing the pubsub connection and subscribing to the response topic.
  * @example
@@ -1238,7 +1225,6 @@ module.exports = {
   lifecycleHistorySchemaValidation,
   assertWithRequirementLogs,
   getSetupDetails,
-  isTestTypeChanged,
   pubSubClientCreation,
   subscribeResults,
   destroyGlobalObjects,
