@@ -1813,7 +1813,7 @@ Cypress.Commands.add('softAssertInArray', (methodArray, interactionLogs) => {
  */
 Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
   if (regex.test(value)) {
-    fireLog.info(`Value: ${value} is a non-empty string`);
+    fireLog.info(message);
   } else {
     jsonAssertion.softAssert(false, true, message);
     Cypress.log({
