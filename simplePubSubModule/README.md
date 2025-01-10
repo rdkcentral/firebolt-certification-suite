@@ -22,7 +22,7 @@ Customize this file with the environment variables required for your use case.
 
 ## 3. Add Custom Test Cases
 
-If you want to supplement the existing test cases with your own, add them under the following directory:
+If you want to supplement the existing test cases with your own, add them under the following [directory](./cypress):
 
 ```
 simplePubSubModule/cypress/TestCases
@@ -32,7 +32,7 @@ Each test case should follow the Cypress test case structure for compatibility.
 
 ## 4. Include Additional Test Data
 
-For tests that require additional data, include the necessary files under the following directory:
+For tests that require additional data, include the necessary files under the following [directory](./cypress):
 
 ```
 simplePubSubModule/cypress/fixtures
