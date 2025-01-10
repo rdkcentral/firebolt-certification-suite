@@ -155,7 +155,7 @@ In this scenario, the *attribute* will contain an attribute for which to set a v
 
 **Examples**
 
-Enable Closed Captions: ```fcsSetters.setClosedCaptions("enable", "true")``` 
+Enable Closed Captions: ```fcsSetters.setClosedCaptions("true")``` 
 
 Set "FontFamily" to "Arial": ```fcsSetters.setClosedCaptions("FontFamily", "Arial")```
 
