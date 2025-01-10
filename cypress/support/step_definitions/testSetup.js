@@ -27,8 +27,10 @@ const { _ } = Cypress;
  * @function Given the environment has been set up for {string} tests
  * @description Sets up the environment for the specified test.
  * @param {String} test - The name of the test.
+ * @param {String} scenarioType - The name of the scenario which is optional.
  * @example
  * Given the environment has been set up for 'Firebolt Sanity' tests
+ * Given the environment has been set up for 'Firebolt Sanity' tests for 'sample scenario type'
  */
 Given(
   /^the environment has been set up for '([^']+)' tests(?: for '([^']+)')?$/,
@@ -60,6 +62,7 @@ Given(
     Cypress.env(CONSTANTS.TEST_TYPE, test);
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
     Cypress.env('detailed', false);
+
     if (
       UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
         JSON.stringify(window.testState.gherkinDocument.feature.name)
