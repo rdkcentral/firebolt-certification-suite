@@ -58,7 +58,7 @@ showAll = () => {
 attachScreenshotLinks = () => {
   // Define regular expression to match the img URL pattern
   const imgPattern = /Screenshot:\s*(https:\/\/[^\s]+\.jpg)/g;
-
+  const urlPattern = /(https:\/\/[^\s]+)/g; // For general URLs
   // Get all the div elements in the document
   const divElements = document.querySelectorAll('div');
 
@@ -93,24 +93,17 @@ attachScreenshotLinks = () => {
       }
     }
   });
-};
-
-const convertPreUrlsToHyperlinks = () => {
-  // Define regular expression to match URL patterns
-  const urlPattern = /(https:\/\/[^\s]+)/g;
-
-  // Get all the <pre> elements nested inside <div> elements
+  // Process <pre> elements nested inside <div> for plain text URLs
   const preElements = document.querySelectorAll('div pre');
 
+  // Loop through the div elements to find text that contain urlPattern
   preElements.forEach((pre) => {
     const preHTML = pre.innerHTML;
-
     if (urlPattern.test(preHTML)) {
       // Replace plain text URLs with clickable hyperlinks
       const updatedHTML = preHTML.replace(urlPattern, (url) => {
-        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+        return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
       });
-
       pre.innerHTML = updatedHTML;
     }
   });
@@ -127,5 +120,4 @@ $(document).ready(() => {
     }
   });
   attachScreenshotLinks();
-  convertPreUrlsToHyperlinks();
 });
