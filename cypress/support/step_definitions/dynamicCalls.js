@@ -404,13 +404,24 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
 
   // Sending the request to the platform to retrieve the app state.
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    response.appState = 'BACKGROUND';
     if (response.appState.toUpperCase() === CONSTANTS.FOREGROUND) {
-      fireLog.info(
-        `State validation successful: Current state of ${appId} app is ${response} as expected`
+      // fireLog.info(
+      //   `State validation successful: Current state of ${appId} app is ${response} as expected`
+      // );
+      cy.softAssert(
+        response.appState.toUpperCase(),
+        CONSTANTS.FOREGROUND,
+        `State validation successful: Current state of ${appId} app is ${response.appState} as expected`
       );
     } else {
-      fireLog.fail(
-        `State validation failed: Current state of ${appId} app is ${response}, expected to be ${CONSTANTS.FOREGROUND}.`
+      // fireLog.fail(
+      //   `State validation failed: Current state of ${appId} app is ${response}, expected to be ${CONSTANTS.FOREGROUND}.`
+      // );
+      cy.softAssert(
+        response.appState.toUpperCase(),
+        CONSTANTS.FOREGROUND,
+        `State validation failed: Current state of ${appId} app is ${response.appState}, expected to be ${CONSTANTS.FOREGROUND}.`
       );
     }
   });
@@ -428,4 +439,5 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
     const validationObject = UTILS.resolveRecursiveValues(fireboltData);
     cy.methodOrEventResponseValidation(type, validationObject);
   });
+  cy.softAssertAll();
 });
