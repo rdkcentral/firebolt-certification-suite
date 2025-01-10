@@ -148,14 +148,19 @@ Given(
  * @example
  * Given 'app' is setup|loaded|running successfully
  */
-Given(/'(.+)' is '(setup|loaded|running)' successfully/, async (testName, state) => {
+Given(/'(.+)' is (setup|loaded|running) successfully/, async (testName, state) => {
   Cypress.env('detailed', true);
-  fcs.validateInitializeIntPlayer(
-    (appId = Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)),
-    (testType = Cypress.env(CONSTANTS.TEST_TYPE)),
-    (certificationType = Cypress.env(CONSTANTS.CERTIFICATION)),
-    (detailed = Cypress.env('detailed'))
-  );
+
+  const requestMap = {
+    method: 'fcs.validateInitializeIntPlayer',
+    params: {
+      appId: Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID),
+      scenarioType: Cypress.env(CONSTANTS.SCENARIO_TYPE),
+      detailed: Cypress.env('detailed'),
+      certification: Cypress.env(CONSTANTS.CERTIFICATION),
+    },
+  };
+  cy.sendMessagetoPlatforms(requestMap);
 });
 
 /**

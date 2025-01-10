@@ -1790,18 +1790,33 @@ Cypress.Commands.add('softAssert', (actual, expected, message) => {
  * cy.softAssertInArray(array1, array2)
  */
 Cypress.Commands.add('softAssertInArray', (methodArray, interactionLogs) => {
+  const methodNotFound = [];
   methodArray.forEach((method) => {
-    const isPresent = interactionLogs.some((log) => log.includes(method));
+    const isPresent = interactionLogs.some((log) => {
+      log.method === method;
+    });
     if (!isPresent) {
-      const message = `Method ${method} is not present in interactionLogs`;
-      jsonAssertion.softAssert(false, true, message);
-      Cypress.log({
-        name: 'Soft assertion error',
-        displayName: 'softAssertMethodsInLogs',
-        message: message,
-      });
+      methodNotFound.push(method);
     }
   });
+  if (methodNotFound.length > 0) {
+    const message = `The following methods are missing in interactionLogs: [${methodNotFound}].`;
+    // const message = `Methods in [ ${methodNotFound} ] are not present in interactionLogs`;
+    jsonAssertion.softAssert(false, true, message);
+    Cypress.log({
+      name: 'Soft assertion error',
+      displayName: 'softAssertMethodsInLogs',
+      message: message,
+    });
+  } else {
+    const message = `The following methods are present in interactionLogs: [${methodNotFound}].`;
+    jsonAssertion.softAssert(true, true, message);
+    Cypress.log({
+      name: 'Soft assertion error',
+      displayName: 'softAssertMethodsInLogs',
+      message: message,
+    });
+  }
 });
 
 /**
