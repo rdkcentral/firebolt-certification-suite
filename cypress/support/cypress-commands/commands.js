@@ -21,6 +21,7 @@ import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
+const jsonAssertion = require('soft-assert');
 
 /**
  * @module commands
@@ -1760,3 +1761,89 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
     });
   });
 });
+
+/**
+ * @module commands
+ * @function softAssert
+ * @description soft assertion to compare actual and expected values
+ * @example
+ * cy.softAssert(actual, expected, message)
+ */
+Cypress.Commands.add('softAssert', (actual, expected, message) => {
+  jsonAssertion.softAssert(actual, expected, message);
+  if (jsonAssertion.jsonDiffArray.length) {
+    jsonAssertion.jsonDiffArray.forEach((diff) => {
+      const log = Cypress.log({
+        name: 'Soft assertion error',
+        displayName: 'softAssert',
+        message: diff.error.message,
+      });
+    });
+  }
+});
+
+/**
+ * @module commands
+ * @function softAssertInArray
+ * @description soft assertion to compare methods in array
+ * @example
+ * cy.softAssertInArray(array1, array2)
+ */
+Cypress.Commands.add('softAssertInArray', (methodArray, interactionLogs) => {
+  const methodNotFound = [];
+  methodArray.forEach((method) => {
+    const isPresent = interactionLogs.some((log) => {
+      log.method === method;
+    });
+    if (!isPresent) {
+      methodNotFound.push(method);
+    }
+  });
+  if (methodNotFound.length > 0) {
+    const message = `The following methods are missing in interactionLogs: [${methodNotFound}].`;
+    // const message = `Methods in [ ${methodNotFound} ] are not present in interactionLogs`;
+    jsonAssertion.softAssert(false, true, message);
+    Cypress.log({
+      name: 'Soft assertion error',
+      displayName: 'softAssertMethodsInLogs',
+      message: message,
+    });
+  } else {
+    const message = `The following methods are present in interactionLogs: [${methodNotFound}].`;
+    jsonAssertion.softAssert(true, true, message);
+    Cypress.log({
+      name: 'Soft assertion error',
+      displayName: 'softAssertMethodsInLogs',
+      message: message,
+    });
+  }
+});
+
+/**
+ * @module commands
+ * @function softAssertFormat
+ * @description soft assertion to check if the value matches the regex format
+ * @example
+ * cy.softAssertFormat(value, regexFormat, message)
+ */
+Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
+  if (regex.test(value)) {
+    fireLog.info(message);
+  } else {
+    jsonAssertion.softAssert(false, true, message);
+    Cypress.log({
+      name: 'Soft assertion error',
+      displayName: 'softAssertStringFormat',
+      message: message,
+    });
+  }
+});
+
+/**
+ * @module commands
+ * @function softAssertAll
+ * @description soft assertion to check all the assertions
+ * @example
+ * cy.softAssertAll()
+ */
+Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());

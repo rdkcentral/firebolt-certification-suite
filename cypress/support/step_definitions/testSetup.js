@@ -27,11 +27,15 @@ const { _ } = Cypress;
  * @function Given the environment has been set up for {string} tests
  * @description Sets up the environment for the specified test.
  * @param {String} test - The name of the test.
+ * @param {String} scenarioType - The name of the scenario which is optional.
  * @example
  * Given the environment has been set up for 'Firebolt Sanity' tests
+ * Given the environment has been set up for 'Firebolt Sanity' tests for 'sample scenario type'
  */
-Given('the environment has been set up for {string} tests', (test) => {
-  const runtime = {};
+Given(
+  /^the environment has been set up for '([^']+)' tests(?: for '([^']+)')?$/,
+  async (test, scenarioType) => {
+    const runtime = {};
 
   // Check if the test parameter is provided
   if (test) {
@@ -106,28 +110,108 @@ Given('the environment has been set up for {string} tests', (test) => {
         );
       }
     }
-  }
-  // Check the marker creation status
-  if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS)) {
-    const markerCreated = Cypress.env(CONSTANTS.MARKER_CREATION_STATUS);
-    if (markerCreated) {
-      fireLog.info('Marker has been created successfully');
-    } else {
-      fireLog.fail('Marker creation failed');
+    Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
+    Cypress.env(CONSTANTS.TEST_TYPE, test);
+    Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
+    Cypress.env('detailed', false);
+
+    if (
+      UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
+        JSON.stringify(window.testState.gherkinDocument.feature.name)
+      )
+    ) {
+      return 'pending';
+    }
+
+    // Calling the envConfigSetup command to setup the environment for the test from the config module.
+    cy.envConfigSetup();
+
+    if (
+      !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
+      UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
+      UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
+      UTILS.isTestTypeChanged(test)
+    ) {
+      if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
+        Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
+      }
+
+      if (test == CONSTANTS.SETUPCHECK) {
+        UTILS.getSetupDetails();
+      }
+
+      destroyAppInstance(test);
+      Cypress.env(CONSTANTS.ENV_SETUP_STATUS, true);
+      if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
+        Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
+      }
+      // fetch device details dynamically
+      if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
+        if (
+          UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES).includes(
+            Cypress.env(CONSTANTS.TEST_TYPE)
+          )
+        ) {
+          cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+            (response) => {
+              if (response) {
+                const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
+                const requestMap = {
+                  method: method,
+                  params: response,
+                };
+                cy.sendMessagetoPlatforms(requestMap);
+              }
+            }
+          );
+        }
+      }
+    }
+    // Check the marker creation status
+    if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS)) {
+      const markerCreated = Cypress.env(CONSTANTS.MARKER_CREATION_STATUS);
+      if (markerCreated) {
+        fireLog.info('Marker has been created successfully');
+      } else {
+        fireLog.fail('Marker creation failed');
+      }
+    }
+
+    if (
+      Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(test) &&
+      !Cypress.env(CONSTANTS.INTENT_TEMPLATES) &&
+      !Cypress.env(CONSTANTS.APP_METADATA)
+    ) {
+      cy.fetchAppMetaData().then((appMetaData) => {
+        Cypress.env(CONSTANTS.APP_METADATA, appMetaData);
+      });
+      const combinedIntentTemplates = _.merge(internalIntentTemplates, externalIntentTemplates);
+      Cypress.env(CONSTANTS.INTENT_TEMPLATES, combinedIntentTemplates);
     }
   }
+});
+/**
+ * @module TestSetupGlue
+ * @function Given '(.+)' is '(setupsetup|loaded|running)' successfully
+ * @description
+ * @param {String} testName - The name of the test.
+ * @param {String} state - The state of the test.
+ * @example
+ * Given 'app' is setup|loaded|running successfully
+ */
+Given(/'(.+)' is (setup|loaded|running) successfully/, async (testName, state) => {
+  Cypress.env('detailed', true);
 
-  if (
-    Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(test) &&
-    !Cypress.env(CONSTANTS.INTENT_TEMPLATES) &&
-    !Cypress.env(CONSTANTS.APP_METADATA)
-  ) {
-    cy.fetchAppMetaData().then((appMetaData) => {
-      Cypress.env(CONSTANTS.APP_METADATA, appMetaData);
-    });
-    const combinedIntentTemplates = _.merge(internalIntentTemplates, externalIntentTemplates);
-    Cypress.env(CONSTANTS.INTENT_TEMPLATES, combinedIntentTemplates);
-  }
+  const requestMap = {
+    method: 'fcs.validateInitializeIntPlayer',
+    params: {
+      appId: Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID),
+      scenarioType: Cypress.env(CONSTANTS.SCENARIO_TYPE),
+      detailed: Cypress.env('detailed'),
+      certification: Cypress.env(CONSTANTS.CERTIFICATION),
+    },
+  };
+  cy.sendMessagetoPlatforms(requestMap);
 });
 
 /**
