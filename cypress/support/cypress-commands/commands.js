@@ -1847,3 +1847,43 @@ Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
  * cy.softAssertAll()
  */
 Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
+
+/**
+ * @module commands
+ * @function filterFireboltInteractions
+ * @description To filter the fireboltInteraction logs
+ * @example
+ * cy.filterFireboltInteractions()
+ */
+
+Cypress.Commands.add(
+  'filterFireboltInteractions',
+  (appId, startTimestamp, endTimestamp, method) => {
+    const fireboltInteractionLogs = Cypress.env('fbInteractionLogs');
+
+    const startTime = Cypress.env(CONSTANTS.INTERACTION_LOGS_START_TIME);
+    const endTime = Number.parseInt(Date.now() / 1000);
+
+    const filteredLogs = [];
+
+    for (const key in fireboltInteractionLogs) {
+      if (fireboltInteractionLogs.hasOwnProperty(key)) {
+        fireboltInteractionLogs[key].forEach((logArray) => {
+          logArray.forEach((log) => {
+            try {
+              const parsedResponse = JSON.parse(log.response);
+              // const logStartTime = parsedResponse.stats.start_time;
+              if (log.app_id === appId && log.method === method) {
+                filteredLogs.push(log);
+              }
+            } catch (error) {
+              console.error('Error parsing JSON response:', error);
+            }
+          });
+        });
+      }
+    }
+
+    return filteredLogs;
+  }
+);
