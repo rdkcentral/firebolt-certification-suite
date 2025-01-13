@@ -18,4 +18,7 @@
 
 const discovery = require('./discovery');
 const fcs = require('./fcs');
-module.exports = { discovery, fcs };
+const fcsSetters = require('./fcsSetters').default;
+exports.fcs = fcs;
+exports.discovery = discovery;
+exports.fcsSetters = fcsSetters;
