@@ -1,3 +1,11 @@
+# [1.6.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.6...v1.6.0-dev.7) (2025-01-13)
+
+
+### Features
+
+* Adding fcsSetter template in default config module ([#299](https://github.com/rdkcentral/firebolt-certification-suite/issues/299)) ([9cbd8b8](https://github.com/rdkcentral/firebolt-certification-suite/commit/9cbd8b83886a2c5bc3a09ffa267517d54eb91a1e))
+* Linking ReadMe to fcsSetter ([#305](https://github.com/rdkcentral/firebolt-certification-suite/issues/305)) ([1f9b1d0](https://github.com/rdkcentral/firebolt-certification-suite/commit/1f9b1d02e1949295bdf9207b972490e7befec920))
+
 # [1.6.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.5...v1.6.0-dev.6) (2025-01-10)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "firebolt-certification-suite",
-  "version": "1.6.0-dev.6",
+  "version": "1.6.0-dev.7",
   "description": "Firebolt Certification Test Suite",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "copyExternalConfigData": "node ./Scripts/copyExternalConfigData.js",
     "applyDependencyOverrides": "node ./Scripts/applyDependencyOverrides.js",
     "restoreDependencyOverrides": "node ./Scripts/restoreDependencyOverrides.js",
-    "setup": "npm run copyExternalConfigData && npm run applyDependencyOverrides && npm run copyCukeReportTemplate && npm run checkDefaultConfig" ,
+    "setup": "npm run copyExternalConfigData && npm run applyDependencyOverrides && npm run copyCukeReportTemplate && npm run checkDefaultConfig",
     "postinstall": "npm run setup",
     "format": "prettier --write \"**/*.js\"",
     "lint": "eslint .",
