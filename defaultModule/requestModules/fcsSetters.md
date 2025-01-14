@@ -193,10 +193,10 @@ function setDeviceAudio(value) {
 Param **value** will represent the desired audio mode.
 
 **Possible value**
-  * stereo
-  * dolbyDigital5.1
-  * dolbyDigital5.1+
-  * dolbyAtmos
+  - stereo
+  - dolbyDigital5.1
+  - dolbyDigital5.1+
+  - dolbyAtmos
 
 **Example**
 
