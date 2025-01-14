@@ -1,3 +1,10 @@
+# [1.6.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.7...v1.6.0-dev.8) (2025-01-14)
+
+
+### Bug Fixes
+
+* quick fix for removing duplicates in the requestModule/index.js ([#310](https://github.com/rdkcentral/firebolt-certification-suite/issues/310)) ([53264db](https://github.com/rdkcentral/firebolt-certification-suite/commit/53264db31650d7ba816d1ca114fc7a6357aab3f9))
+
 # [1.6.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.6...v1.6.0-dev.7) (2025-01-13)
 
 
