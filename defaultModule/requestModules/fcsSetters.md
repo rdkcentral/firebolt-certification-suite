@@ -97,8 +97,8 @@ The *value* will be an object containing the key of the metadata to be removed.
 
 **Example** 
 
-To add additional Info: ```fcsSetters.setAdditionalInfo("addAdditionalInfo", { key: "exampleKey", value: "exampleValue" });```
-To remove aditional Info```fcsSetters.setAdditionalInfo("removeAdditionalInfo", { key: "exampleKey" });```
+Add additional Info: ```fcsSetters.setAdditionalInfo("addAdditionalInfo", { key: "exampleKey", value: "exampleValue" });```
+Remove aditional Info```fcsSetters.setAdditionalInfo("removeAdditionalInfo", { key: "exampleKey" });```
 
 </details>
 
