@@ -69,26 +69,36 @@ Param **value** will represent the appId to launch on the DUT.
 <details id="setAdditionalInfo">
 <summary><b>fcsSetters.setAdditionalInfo</b></summary>
 
-Sets additional metadata for localization or configuration.
+Sets additional metadata or remove additional metadata for localization or configuration.
 
 ```
-function setAdditionalInfo(value) {
+function setAdditionalInfo(attribute, value) {
     let response = // Call your service to update the additional info
     let success = // Perform validations to ensure additional was updated successfully
 
     if (success) {
-        return setterSuccess("AdditionalInfo for Localization set successfully!");
+        return setterSuccess(`Successfully set AdditionalInfo '${attribute}' with value '${value}'!`);
     } else {
-        return setterFailure("Failed to set AdditionalInfo for Localization");
+        return setterFailure(`Failed to set AdditionalInfo '${attribute}' with value '${value}'`);
     }
 }
 ```
+There are 2 possible scenarios this function should handle:
 
-Param **value** will represent the metadata to set.
+**Add Additional Info**
+
+In this scenario, the *attribute* will be addAddionalInfo to add the additional metadata for localization. 
+The *value* will be an object containing key-value pairs representing the additional metadata to be added.
+
+**Remove additional Info**
+
+In this scenario, the *attribute* will be removeAddionalInfo to remove the additional metadata for localization. 
+The *value* will be an object containing the key of the metadata to be removed.
 
 **Example** 
 
-```fcsSetters.setAdditionalInfo("{ key: 'exampleKey', value: 'exampleValue' }");```
+To add additional Info: ```fcsSetters.setAdditionalInfo("addAdditionalInfo", { key: "exampleKey", value: "exampleValue" });```
+To remove aditional Info```fcsSetters.setAdditionalInfo("removeAdditionalInfo", { key: "exampleKey" });```
 
 </details>
 
@@ -151,7 +161,7 @@ The *value* will be a string containing a boolean "true" or "false". *true* will
 
 **Setting a Closed Captions attribute**
 
-In this scenario, the *attribute* will contain an attribute for which to set a value, and *value* will contain that value.
+In this scenario, the *attribute* will contain an attribute for which to set a value and *value* will contain that value.
 
 **Examples**
 
@@ -182,9 +192,16 @@ function setDeviceAudio(value) {
 
 Param **value** will represent the desired audio mode.
 
+**Possible value**
+  - stereo
+  - dolbyDigital5.1
+  - dolbyDigital5.1+
+  - dolbyAtmos
+
 **Example**
 
-```fcsSetters.setDeviceAudio("Stereo");```
+```fcsSetters.setDeviceAudio("stereo");```
+
 
 </details>
 
@@ -194,23 +211,36 @@ Param **value** will represent the desired audio mode.
 Configures the discovery policy for the device.
 
 ```
-function setDiscoveryPolicy(value) {
+function setDiscoveryPolicy(attribute, value) {
     let response = // Call your service to set discovery policy state
     let success = // Perform validations to ensure discovery policy was updated successfully
 
     if (success) {
-        return setterSuccess(`Set Discovery Policy to '${value}' successfully!`);
+        return setterSuccess(`Set Discovery Policy '${attribute}' to '${value}' successfully!`);
     } else {
-        return setterFailure(`Failed to set Discovery Policy to '${value}'`);
+        return setterFailure(`Failed to set Discovery Policy '${attribute}' to '${value}'`);
     }
 }
 ```
 
-Param **value** will represent the desired discovery policy.
+There are 2 possible scenarios this function should handle:
 
-**Example**
 
-```fcsSetters.setDiscoveryPolicy("Allow");```
+**Setting allowPersonalization to true**
+
+In this scenario, the *attribute* will be AllowPersonalization. 
+The *value* will be a string containing a boolean "true" or "false". *true* will allow Personalization and *false* will disable Personalization.
+
+**Setting AllowWatchHistory to true**
+
+In this scenario, the *attribute* will be AllowWatchHistory. 
+The *value* will be a string containing a boolean "true" or "false". *true* will enable/remember WatchHistory tracking and *false* will disable Watch history tracking.
+
+**Examples**
+
+Setting AllowPersonalization to true: ```fcsSetters.setDiscoveryPolicy("allowPesonalization","true")``` 
+
+Setting AllowWatchHistory to true: ```fcsSetters.setDiscoveryPolicy("allowWatchHistory", "true")```
 
 </details>
 
@@ -232,11 +262,15 @@ function setLanguage(value) {
 }
 ```
 
-Param **value** will represents the desired language.
+Param **value** will represent the desired language.
+
+**Possible value**
+  - en
+  - es
 
 **Example** 
 
-```fcsSetters.setLanguage("en-US");```
+```fcsSetters.setLanguage("en");```
 
 </details>
 
@@ -259,7 +293,14 @@ function setLifecycleState(value) {
 
 ```
 
-Param **value** will represents the desired lifecycle state.
+Param **value** will represent the desired lifecycle state.
+
+**Possible value**
+  - foreground
+  - background
+  - suspended
+  - inactive
+  - unloading
 
 **Example**
 
@@ -311,17 +352,21 @@ function setLocale(value) {
 }
 ```
 
-Param **value** represents the desired locale setting.
+Param **value** represent the desired locale setting.
+
+**Possible value**
+  - en-US
+  - es-US
 
 **Example**
 
-```fcsSetters.setLocale("en-US");``` seeks to set the Locale to "true"
+```fcsSetters.setLocale("en-US");``` 
 
 </details>
 
 
 <details id="setPreferredAudioLanguages">
-<summary><b>fcsSetters.setPreferredAudioLanguagese</b></summary>
+<summary><b>fcsSetters.setPreferredAudioLanguages</b></summary>
 
 Configures the preferred audio languages.
 
@@ -340,9 +385,13 @@ function setPreferredAudioLanguages(value) {
 
 Param **value**  will be a list of preferred audio languages, represented as an array of language code.
 
+**Possible value**
+  - ["eng","spa"]
+  - ["spa","eng"]
+
 **Example**
 
-```fcsSetters.setPreferredAudioLanguages("[\"en-US\", \"es-ES\"]");```
+```fcsSetters.setPreferredAudioLanguages("[\"eng\", \"spa\"]");```
 
 </details>
 
@@ -364,11 +413,11 @@ function setVideoResolution(value) {
 }
 ```
 
-Param **value** represents the desired video resolution.
+Param **value** represent array of desired video resolution.
 
 **Example**
 
-```fcsSetters.setVideoResolution("1080p");``` 
+```fcsSetters.setVideoResolution("[\"1920\", \"1080\"]");``` 
 
 </details>
 
@@ -394,12 +443,12 @@ This function handles the following scenario
 
 **Enabling or Disabling Voice Guidance**
 
-In this scenario, the *attribute* will be null/undefined or simply "voiceGuidance". 
+In this scenario, the *attribute* will be null/undefined or simply "enable". 
 The *value* will be a string containing a boolean "true" or "false". "true" will enable closed captioning, and false will disable it.
 
 **Example**
 
-To enable Voice Guidance: ```fcsSetters.setVoiceGuidance("voiceGuidance", "true");```
+To enable Voice Guidance: ```fcsSetters.setVoiceGuidance("enable", "true");```
 
 </details>
 
@@ -409,7 +458,7 @@ To enable Voice Guidance: ```fcsSetters.setVoiceGuidance("voiceGuidance", "true"
 Unloads an application on the device under Test(DUT).
 
 ```
-function launchApp(value) {   
+function unloadApp(value) {   
     let response = // Call your service to unloadlaunch appId <value> on the device
     let success = // Perform validations to ensure the app was unloaded successfully
 
@@ -421,7 +470,7 @@ function launchApp(value) {
 }
 ```
 
-Param **value** will contain the appId to launch on the DUT.
+Param **value** will contain the appId to unload on the DUT.
 
 **Example** 
 
@@ -478,6 +527,10 @@ function setCountryCode(value) {
 
 Param **value** will represent the country code.
 
+**Possible value**
+  - US
+  - UK
+
 **Example**
 
 ```fcsSetters.setCountryCode("US")``` 
@@ -501,7 +554,11 @@ function setDeviceHdcp(value) {
     }
 }
 ```
-Param **value** will will be an object representing the HDCP settings.
+Param **value** will be an object representing the HDCP settings.
+
+**Possible value**
+  - hdcp1.4
+  - hdcp2.2
 
 **Example**
 
@@ -529,6 +586,12 @@ function setDeviceHdr(value) {
 
 Param **value** will be an object representing the HDR settings.
 
+**Possible value**
+  - hdr10
+  - hdr10Plus
+  - dolbyVision
+  - hlg
+
 **Example**
 
 ```fcsSetters.setDeviceHdr("{"dolbyVision": true}")``` 
@@ -553,7 +616,12 @@ function setDeviceNetwork(value) {
 }
 ```
 
-Param **value** will be an object representing the network settings.
+Param **value** will be an object represent the network settings.
+
+**Possible value**
+  - wifi
+  - ethernet
+  - hybrid
 
 **Example**
 
