@@ -95,10 +95,11 @@ The *value* will be an object containing key-value pairs representing the additi
 In this scenario, the *attribute* will be removeAddionalInfo to remove the additional metadata for localization. 
 The *value* will be an object containing the key of the metadata to be removed.
 
-**Example** 
+**Examples** 
 
 Add additional Info: ```fcsSetters.setAdditionalInfo("addAdditionalInfo", { key: "exampleKey", value: "exampleValue" });```
-Remove aditional Info```fcsSetters.setAdditionalInfo("removeAdditionalInfo", { key: "exampleKey" });```
+
+Remove aditional Info: ```fcsSetters.setAdditionalInfo("removeAdditionalInfo", { key: "exampleKey" });```
 
 </details>
 
