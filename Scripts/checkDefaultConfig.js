@@ -76,18 +76,35 @@ const ensureConfigModule = async () => {
           // Remove comments from default content
           const cleanedDefaultContent = defaultContent.replace(commentRegex, '');
 
-          // Merge contents, remove duplicates
-          const mergedLines = new Set([
-            ...targetContent.split('\n'),
-            ...cleanedDefaultContent
-              .split('\n')
-              .map((line) => line.trim())
-              .filter((line) => line),
-          ]);
+          const targetLines = targetContent
+            .split('\n')
+            .map((line) => line.trim())
+            .filter((line) => line);
+          const defaultLines = cleanedDefaultContent
+            .split('\n')
+            .map((line) => line.trim())
+            .filter((line) => line);
 
-          const mergedContent = Array.from(mergedLines).join('\n');
+          // Create a Set of keys from the target content
+          const targetKeys = new Set(
+            targetLines
+              .filter((line) => line.includes('='))
+              .map((line) => line.split('=')[0].trim())
+          );
 
-          // Write back to target index.js
+          // Merge default lines only if the key does not exist in the target
+          const mergedLines = [...targetLines];
+          for (const line of defaultLines) {
+            if (line.includes('=')) {
+              const key = line.split('=')[0].trim();
+              if (!targetKeys.has(key)) {
+                mergedLines.push(line);
+              }
+            }
+          }
+
+          // Join merged lines and write back to target index.js
+          const mergedContent = mergedLines.join('\n');
           await fs.writeFile(targetIndexPath, mergedContent, 'utf8');
           console.log(
             `Merged 'index.js' content from defaultModule/requestModule to configModule/requestModule.`
