@@ -40,10 +40,76 @@ const ensureConfigModule = async () => {
       const targetSubDirPath = path.join(configModulePath, dir);
 
       const existsSubDir = await fs.pathExists(targetSubDirPath);
+
       if (!existsSubDir) {
         // Copy missing subdirectory from defaultModule.
         await fs.copy(defaultSubDirPath, targetSubDirPath);
-        console.log(`Default subdirectory ${dir} created.`);
+        console.log(`Default subdirectory '${dir}' created.`);
+      } else if (dir === 'requestModules') {
+        // Special handling for requestModule to look for missing files.
+
+        const defaultFiles = await fs.readdir(defaultSubDirPath);
+
+        for (const file of defaultFiles) {
+          const defaultFilePath = path.join(defaultSubDirPath, file);
+          const targetFilePath = path.join(targetSubDirPath, file);
+
+          const fileExists = await fs.pathExists(targetFilePath);
+          if (!fileExists) {
+            await fs.copy(defaultFilePath, targetFilePath);
+            console.log(`Copied '${file}' to 'requestModule'.`);
+          }
+        }
+        const defaultIndexPath = path.join(defaultSubDirPath, 'index.js');
+        const targetIndexPath = path.join(targetSubDirPath, 'index.js');
+
+        const defaultIndexExists = await fs.pathExists(defaultIndexPath);
+        const targetIndexExists = await fs.pathExists(targetIndexPath);
+
+        if (defaultIndexExists) {
+          const defaultContent = await fs.readFile(defaultIndexPath, 'utf8');
+          const targetContent = targetIndexExists ? await fs.readFile(targetIndexPath, 'utf8') : '';
+
+          // Regular expression to remove comments (single-line and multi-line)
+          const commentRegex = /\/\/.*|\/\*[\s\S]*?\*\//g;
+
+          // Remove comments from default content
+          const cleanedDefaultContent = defaultContent.replace(commentRegex, '');
+
+          const targetLines = targetContent
+            .split('\n')
+            .map((line) => line.trim())
+            .filter((line) => line);
+          const defaultLines = cleanedDefaultContent
+            .split('\n')
+            .map((line) => line.trim())
+            .filter((line) => line);
+
+          // Create a Set of keys from the target content
+          const targetKeys = new Set(
+            targetLines
+              .filter((line) => line.includes('='))
+              .map((line) => line.split('=')[0].trim())
+          );
+
+          // Merge default lines only if the key does not exist in the target
+          const mergedLines = [...targetLines];
+          for (const line of defaultLines) {
+            if (line.includes('=')) {
+              const key = line.split('=')[0].trim();
+              if (!targetKeys.has(key)) {
+                mergedLines.push(line);
+              }
+            }
+          }
+
+          // Join merged lines and write back to target index.js
+          const mergedContent = mergedLines.join('\n');
+          await fs.writeFile(targetIndexPath, mergedContent, 'utf8');
+          console.log(
+            `Merged 'index.js' content from defaultModule/requestModule to configModule/requestModule.`
+          );
+        }
       }
     }
   } catch (err) {

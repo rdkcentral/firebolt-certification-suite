@@ -91,6 +91,7 @@ const env = {
   pubSubPublishSuffix: '_FCS',
   pubSubSubscribeSuffix: '_FCA',
   pendingFeatures: [],
+  externalModuleTestTypes: [],
   dynamicDeviceDetailsModules: ['Device'],
 };
 

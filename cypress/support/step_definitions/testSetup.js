@@ -18,6 +18,9 @@
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
 import UTILS, { fireLog } from '../cypress-support/src/utils';
+const internalIntentTemplates = require('../../fixtures/intentTemplates');
+const externalIntentTemplates = require('../../fixtures/external/intentTemplates/index');
+const { _ } = Cypress;
 
 /**
  * @module TestSetupGlue
@@ -67,8 +70,7 @@ Given('the environment has been set up for {string} tests', (test) => {
   if (
     !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
     UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
-    UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
-    UTILS.isTestTypeChanged(test)
+    UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test)
   ) {
     if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
       Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
@@ -113,6 +115,18 @@ Given('the environment has been set up for {string} tests', (test) => {
     } else {
       fireLog.fail('Marker creation failed');
     }
+  }
+
+  if (
+    Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(test) &&
+    !Cypress.env(CONSTANTS.INTENT_TEMPLATES) &&
+    !Cypress.env(CONSTANTS.APP_METADATA)
+  ) {
+    cy.fetchAppMetaData().then((appMetaData) => {
+      Cypress.env(CONSTANTS.APP_METADATA, appMetaData);
+    });
+    const combinedIntentTemplates = _.merge(internalIntentTemplates, externalIntentTemplates);
+    Cypress.env(CONSTANTS.INTENT_TEMPLATES, combinedIntentTemplates);
   }
 });
 
