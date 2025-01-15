@@ -1859,7 +1859,7 @@ Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
 Cypress.Commands.add('getPlayerMethodInteractions', (appId, method) => {
   const fireboltInteractionLogs = Cypress.env(CONSTANTS.FB_INTERACTIONLOGS);
   const startTime = Cypress.env(CONSTANTS.INTERACTION_LOGS_START_TIME);
-  const endTime = Number.parseInt(Date.now() / 1000);
+  const endTime = Date.now();
   const filteredLogs = [];
 
   for (const key in fireboltInteractionLogs) {
