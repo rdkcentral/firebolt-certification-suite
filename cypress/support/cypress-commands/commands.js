@@ -1850,40 +1850,37 @@ Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
 
 /**
  * @module commands
- * @function filterFireboltInteractions
+ * @function getPlayerMethodInteractions
  * @description To filter the fireboltInteraction logs
  * @example
- * cy.filterFireboltInteractions()
+ * cy.getPlayerMethodInteractions()
  */
 
-Cypress.Commands.add(
-  'filterFireboltInteractions',
-  (appId, startTimestamp, endTimestamp, method) => {
-    const fireboltInteractionLogs = Cypress.env('fbInteractionLogs');
+Cypress.Commands.add('getPlayerMethodInteractions', (appId, method) => {
+  const fireboltInteractionLogs = Cypress.env(CONSTANTS.FB_INTERACTIONLOGS);
+  const startTime = Cypress.env(CONSTANTS.INTERACTION_LOGS_START_TIME);
+  const endTime = Number.parseInt(Date.now() / 1000);
+  const filteredLogs = [];
 
-    const startTime = Cypress.env(CONSTANTS.INTERACTION_LOGS_START_TIME);
-    const endTime = Number.parseInt(Date.now() / 1000);
-
-    const filteredLogs = [];
-
-    for (const key in fireboltInteractionLogs) {
-      if (fireboltInteractionLogs.hasOwnProperty(key)) {
-        fireboltInteractionLogs[key].forEach((logArray) => {
-          logArray.forEach((log) => {
-            try {
-              const parsedResponse = JSON.parse(log.response);
-              // const logStartTime = parsedResponse.stats.start_time;
-              if (log.app_id === appId && log.method === method) {
-                filteredLogs.push(log);
-              }
-            } catch (error) {
-              console.error('Error parsing JSON response:', error);
+  for (const key in fireboltInteractionLogs) {
+    if (fireboltInteractionLogs.hasOwnProperty(key)) {
+      fireboltInteractionLogs[key].forEach((logArray) => {
+        logArray.forEach((log) => {
+          try {
+            if (
+              log.app_id === appId &&
+              log.method === method &&
+              log.time_stamp >= startTime &&
+              log.time_stamp <= endTime
+            ) {
+              filteredLogs.push(log);
             }
-          });
+          } catch (error) {
+            console.error('Firebolt interactions logs filtering failed:', error);
+          }
         });
-      }
+      });
     }
-
-    return filteredLogs;
   }
-);
+  return filteredLogs;
+});
