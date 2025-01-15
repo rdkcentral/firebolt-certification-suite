@@ -1801,7 +1801,6 @@ Cypress.Commands.add('softAssertInArray', (methodArray, interactionLogs) => {
   });
   if (methodNotFound.length > 0) {
     const message = `The following methods are missing in interactionLogs: [${methodNotFound}].`;
-    // const message = `Methods in [ ${methodNotFound} ] are not present in interactionLogs`;
     jsonAssertion.softAssert(false, true, message);
     Cypress.log({
       name: 'Soft assertion error',
