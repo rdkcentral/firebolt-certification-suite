@@ -1,3 +1,51 @@
+# [1.6.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.1...v1.6.0) (2025-01-15)
+
+
+### Bug Fixes
+
+* change jsonschema dependency to static 1.4.1 version ([#308](https://github.com/rdkcentral/firebolt-certification-suite/issues/308)) ([cdba6f4](https://github.com/rdkcentral/firebolt-certification-suite/commit/cdba6f4921c5458663237c7862776aa4969cf957))
+* Fixed multiple app launch issue ([#302](https://github.com/rdkcentral/firebolt-certification-suite/issues/302)) ([b1199da](https://github.com/rdkcentral/firebolt-certification-suite/commit/b1199dab4278de420c1ebad30b4dff114b6eb63b))
+* quick fix for removing duplicates in the requestModule/index.js ([#310](https://github.com/rdkcentral/firebolt-certification-suite/issues/310)) ([53264db](https://github.com/rdkcentral/firebolt-certification-suite/commit/53264db31650d7ba816d1ca114fc7a6357aab3f9))
+* Removed different test type name check ([#304](https://github.com/rdkcentral/firebolt-certification-suite/issues/304)) ([bbd526b](https://github.com/rdkcentral/firebolt-certification-suite/commit/bbd526b1943a96556b60e12e91519ca9522fc424))
+
+
+### Features
+
+* added glue code for dismissing an app ([#284](https://github.com/rdkcentral/firebolt-certification-suite/issues/284)) ([329cbbc](https://github.com/rdkcentral/firebolt-certification-suite/commit/329cbbc29d524669491454f5712604e6ed6248e9))
+* Adding fcsSetter template in default config module ([#299](https://github.com/rdkcentral/firebolt-certification-suite/issues/299)) ([9cbd8b8](https://github.com/rdkcentral/firebolt-certification-suite/commit/9cbd8b83886a2c5bc3a09ffa267517d54eb91a1e))
+* Deep link implementation ([#268](https://github.com/rdkcentral/firebolt-certification-suite/issues/268)) ([6de90af](https://github.com/rdkcentral/firebolt-certification-suite/commit/6de90af21e49c8eb69ac30a6d6a14edbd318682b))
+* Incorporated FCS setter into sendMessageToplatform ([#289](https://github.com/rdkcentral/firebolt-certification-suite/issues/289)) ([3b45e4d](https://github.com/rdkcentral/firebolt-certification-suite/commit/3b45e4d5e271babcdc701c3a950912a6ef18b6ea))
+* Linking ReadMe to fcsSetter ([#305](https://github.com/rdkcentral/firebolt-certification-suite/issues/305)) ([1f9b1d0](https://github.com/rdkcentral/firebolt-certification-suite/commit/1f9b1d02e1949295bdf9207b972490e7befec920))
+
+# [1.6.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.7...v1.6.0-dev.8) (2025-01-14)
+
+
+### Bug Fixes
+
+* quick fix for removing duplicates in the requestModule/index.js ([#310](https://github.com/rdkcentral/firebolt-certification-suite/issues/310)) ([53264db](https://github.com/rdkcentral/firebolt-certification-suite/commit/53264db31650d7ba816d1ca114fc7a6357aab3f9))
+
+# [1.6.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.6...v1.6.0-dev.7) (2025-01-13)
+
+
+### Features
+
+* Adding fcsSetter template in default config module ([#299](https://github.com/rdkcentral/firebolt-certification-suite/issues/299)) ([9cbd8b8](https://github.com/rdkcentral/firebolt-certification-suite/commit/9cbd8b83886a2c5bc3a09ffa267517d54eb91a1e))
+* Linking ReadMe to fcsSetter ([#305](https://github.com/rdkcentral/firebolt-certification-suite/issues/305)) ([1f9b1d0](https://github.com/rdkcentral/firebolt-certification-suite/commit/1f9b1d02e1949295bdf9207b972490e7befec920))
+
+# [1.6.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.5...v1.6.0-dev.6) (2025-01-10)
+
+
+### Bug Fixes
+
+* Removed different test type name check ([#304](https://github.com/rdkcentral/firebolt-certification-suite/issues/304)) ([bbd526b](https://github.com/rdkcentral/firebolt-certification-suite/commit/bbd526b1943a96556b60e12e91519ca9522fc424))
+
+# [1.6.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.4...v1.6.0-dev.5) (2025-01-09)
+
+
+### Bug Fixes
+
+* change jsonschema dependency to static 1.4.1 version ([#308](https://github.com/rdkcentral/firebolt-certification-suite/issues/308)) ([cdba6f4](https://github.com/rdkcentral/firebolt-certification-suite/commit/cdba6f4921c5458663237c7862776aa4969cf957))
+
 # [1.6.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.3...v1.6.0-dev.4) (2024-12-31)
 
 
