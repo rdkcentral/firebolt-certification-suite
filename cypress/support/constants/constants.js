@@ -405,6 +405,7 @@ module.exports = {
   SCHEMA_VALIDATION_STATUS: 'schemaValidationStatus',
   SCHEMA_VALIDATION_STATUS_CODE: ['PASS', 'FAIL', 'SKIPPED', 'PENDING'],
   SCREENSHOT_VALIDATION: 'screenshotValidation',
+  SCENARIO_TYPE: 'scenarioType',
   SDK_VERSION: 'sdkVersion',
   SDK_REPORT_VERSION: 'SDK Version',
   SEARCH: 'search',

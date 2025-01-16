@@ -51,7 +51,8 @@
     "setimmediate": "^1.0.5",
     "shell-exec": "1.0.2",
     "uuid": "^8.3.1",
-    "winston": "^3.8.2"
+    "winston": "^3.8.2",
+    "soft-assert": "^0.2.7"
   },
   "devDependencies": {
     "babel-jest": "^27.4.5",
@@ -70,6 +71,13 @@
   "cypress-cucumber-preprocessor": {
     "json": {
       "enabled": true
-    }
+    },
+    "stepDefinitions": [
+      "cypress/e2e/[filepath]/**/*.{js,ts}",
+      "cypress/e2e/[filepath].{js,ts}",
+      "cypress/support/step_definitions/**/*.{js,ts}",
+      "node_modules/configModule/cypress/support/step_definitions/**/*.{js,ts}",
+      "node_modules/fcs-config-helper/cypress/support/step_definitions/**/*.{js,ts}"
+    ]
   }
 }

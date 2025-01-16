@@ -61,6 +61,7 @@ Given(
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
+    Cypress.env('detailed', false);
 
     if (
       UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
@@ -137,6 +138,30 @@ Given(
     }
   }
 );
+
+/**
+ * @module TestSetupGlue
+ * @function Given '(.+)' is '(setupsetup|loaded|running)' successfully
+ * @description
+ * @param {String} testName - The name of the test.
+ * @param {String} state - The state of the test.
+ * @example
+ * Given 'app' is setup|loaded|running successfully
+ */
+Given(/'(.+)' is (setup|loaded|running) successfully/, async (testName, state) => {
+  Cypress.env('detailed', true);
+
+  const requestMap = {
+    method: 'fcs.validateInitializeIntPlayer',
+    params: {
+      appId: Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID),
+      scenarioType: Cypress.env(CONSTANTS.SCENARIO_TYPE),
+      detailed: Cypress.env('detailed'),
+      certification: Cypress.env(CONSTANTS.CERTIFICATION),
+    },
+  };
+  cy.sendMessagetoPlatforms(requestMap);
+});
 
 /**
  * @module TestSetupGlue
