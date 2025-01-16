@@ -44,8 +44,7 @@ Given(
       ) ||
       UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(
         UTILS.getEnvVariable(CONSTANTS.TEST_TYPE)
-      ) ||
-      UTILS.isTestTypeChanged(UTILS.getEnvVariable(CONSTANTS.TEST_TYPE))
+      )
     ) {
       if (!state) {
         state = CONSTANTS.LIFECYCLE_STATES.FOREGROUND;

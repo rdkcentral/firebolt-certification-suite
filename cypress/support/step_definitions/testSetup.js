@@ -37,25 +37,77 @@ Given(
   async (test, scenarioType) => {
     const runtime = {};
 
-    // Check if the test parameter is provided
-    if (test) {
-      let fireboltCallKey;
-      // Check if the test parameter contains a colon to split into module and method
-      if (test.includes(':')) {
-        const [module, method] = test.split(':');
-        fireboltCallKey = module.toUpperCase();
-        Object.assign(runtime, { method, module });
-      } else {
-        // Replace spaces with underscores and convert to uppercase for the fireboltCallKey
-        fireboltCallKey = test.replace(/\s+/g, '_').toUpperCase();
-      }
-      // Retrieve the firebolt object from environment variables using the fireboltCallKey
-      const fireboltObject = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[fireboltCallKey];
-      if (fireboltObject) {
-        // Update the runtime environment variable with the firebolt object
-        runtime.fireboltCall = fireboltObject;
-        Cypress.env(CONSTANTS.RUNTIME, runtime);
-        fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
+  // Check if the test parameter is provided
+  if (test) {
+    let fireboltCallKey;
+    // Check if the test parameter contains a colon to split into module and method
+    if (test.includes(':')) {
+      const [module, method] = test.split(':');
+      fireboltCallKey = module.toUpperCase();
+      Object.assign(runtime, { method, module });
+    } else {
+      // Replace spaces with underscores and convert to uppercase for the fireboltCallKey
+      fireboltCallKey = test.replace(/\s+/g, '_').toUpperCase();
+    }
+    // Retrieve the firebolt object from environment variables using the fireboltCallKey
+    const fireboltObject = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[fireboltCallKey];
+    if (fireboltObject) {
+      // Update the runtime environment variable with the firebolt object
+      runtime.fireboltCall = fireboltObject;
+      Cypress.env(CONSTANTS.RUNTIME, runtime);
+      fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
+    }
+  }
+  Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
+  Cypress.env(CONSTANTS.TEST_TYPE, test);
+  if (
+    UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
+      JSON.stringify(window.testState.gherkinDocument.feature.name)
+    )
+  ) {
+    return 'pending';
+  }
+
+  // Calling the envConfigSetup command to setup the environment for the test from the config module.
+  cy.envConfigSetup();
+
+  if (
+    !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
+    UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
+    UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test)
+  ) {
+    if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
+      Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
+    }
+
+    if (test == CONSTANTS.SETUPCHECK) {
+      UTILS.getSetupDetails();
+    }
+
+    destroyAppInstance(test);
+    Cypress.env(CONSTANTS.ENV_SETUP_STATUS, true);
+    if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
+      Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
+    }
+    // fetch device details dynamically
+    if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
+      if (
+        UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES).includes(
+          Cypress.env(CONSTANTS.TEST_TYPE)
+        )
+      ) {
+        cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+          (response) => {
+            if (response) {
+              const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
+              const requestMap = {
+                method: method,
+                params: response,
+              };
+              cy.sendMessagetoPlatforms(requestMap);
+            }
+          }
+        );
       }
     }
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
@@ -137,8 +189,7 @@ Given(
       Cypress.env(CONSTANTS.INTENT_TEMPLATES, combinedIntentTemplates);
     }
   }
-);
-
+});
 /**
  * @module TestSetupGlue
  * @function Given '(.+)' is '(setupsetup|loaded|running)' successfully

@@ -531,6 +531,7 @@ module.exports = {
   FOREGROUND: 'FOREGROUND',
   PERFORMANCE_VALIDATION: 'performanceValidation',
   MARKER_CREATION_STATUS: 'markerCreationStatus',
+  INTERACTION_LOGS_START_TIME: "interactionLogsStartTime",
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

@@ -1,3 +1,10 @@
+# [1.6.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.5...v1.6.0-dev.6) (2025-01-10)
+
+
+### Bug Fixes
+
+* Removed different test type name check ([#304](https://github.com/rdkcentral/firebolt-certification-suite/issues/304)) ([bbd526b](https://github.com/rdkcentral/firebolt-certification-suite/commit/bbd526b1943a96556b60e12e91519ca9522fc424))
+
 # [1.6.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0-dev.4...v1.6.0-dev.5) (2025-01-09)
 
 
