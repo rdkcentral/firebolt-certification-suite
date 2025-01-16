@@ -1789,31 +1789,15 @@ Cypress.Commands.add('softAssert', (actual, expected, message) => {
  * @example
  * cy.softAssertInArray(array1, array2)
  */
-Cypress.Commands.add('softAssertInArray', (methodArray, interactionLogs) => {
+Cypress.Commands.add('softAssertInArray', (methodArray, interactionLogs, messageFromFunction) => {
   const methodNotFound = [];
-  methodArray.forEach((method) => {
-    const isPresent = interactionLogs.some((log) => {
-      log.method === method;
-    });
-    if (!isPresent) {
-      methodNotFound.push(method);
-    }
-  });
-  if (methodNotFound.length > 0) {
+  if (methodArray.length > 0) {
     const message = `The following methods are missing in interactionLogs: [${methodNotFound}].`;
-    jsonAssertion.softAssert(false, true, message);
+    jsonAssertion.softAssert(false, true, messageFromFunction);
     Cypress.log({
       name: 'Soft assertion error',
       displayName: 'softAssertMethodsInLogs',
-      message: message,
-    });
-  } else {
-    const message = `The following methods are present in interactionLogs: [${methodNotFound}].`;
-    jsonAssertion.softAssert(true, true, message);
-    Cypress.log({
-      name: 'Soft assertion error',
-      displayName: 'softAssertMethodsInLogs',
-      message: message,
+      message: messageFromFunction,
     });
   }
 });
