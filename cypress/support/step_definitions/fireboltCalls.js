@@ -389,11 +389,12 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
       // playback dismiss
       if (testLowerCase.includes(CONSTANTS.PLAYBACK)) {
         if (
-          Cypress.env('app_metadata') &&
-          Cypress.env('app_metadata').defaultKeyPressSequence &&
-          Cypress.env('app_metadata').defaultKeyPressSequence.playbackDismiss
+          Cypress.env(CONSTANTS.APP_METADATA) &&
+          Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence &&
+          Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.playbackDismiss
         ) {
-          playbackDismiss = Cypress.env('app_metadata').defaultKeyPressSequence.playbackDismiss;
+          playbackDismiss = Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence
+            .playbackDismiss;
           if (playbackDismiss.loggedIn) {
             KeyPressSequence = playbackDismiss.loggedIn;
           } else if (playbackDismiss.loggedOut) {
@@ -422,20 +423,22 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
         } else if (
           // Check if defaultKeyPressSequence is defined for the specific appId in app_metadata
           !KeyPressSequence &&
-          Cypress.env('app_metadata') &&
-          Cypress.env('app_metadata')[appId] &&
-          Cypress.env('app_metadata')[appId].defaultKeyPressSequence &&
-          Cypress.env('app_metadata')[appId].defaultKeyPressSequence[loggedType]
+          Cypress.env(CONSTANTS.APP_METADATA) &&
+          Cypress.env(CONSTANTS.APP_METADATA)[appId] &&
+          Cypress.env(CONSTANTS.APP_METADATA)[appId].defaultKeyPressSequence &&
+          Cypress.env(CONSTANTS.APP_METADATA)[appId].defaultKeyPressSequence[loggedType]
         ) {
-          KeyPressSequence = Cypress.env('app_metadata')[appId].defaultKeyPressSequence[loggedType];
+          KeyPressSequence = Cypress.env(CONSTANTS.APP_METADATA)[appId].defaultKeyPressSequence[
+            loggedType
+          ];
         } else if (
           // Check if defaultKeyPressSequence is defined in the app_metadata globally
           !KeyPressSequence &&
-          Cypress.env('app_metadata') &&
-          Cypress.env('app_metadata').defaultKeyPressSequence &&
-          Cypress.env('app_metadata').defaultKeyPressSequence.dismiss
+          Cypress.env(CONSTANTS.APP_METADATA) &&
+          Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence &&
+          Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss
         ) {
-          KeyPressSequence = Cypress.env('app_metadata').defaultKeyPressSequence.dismiss;
+          KeyPressSequence = Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss;
         } else {
           // If no keyPressSequence is found, throw an error with details from the app_metadata file
           const appMetadataJSON = require('../../fixtures/docs/app_metadata.json');
