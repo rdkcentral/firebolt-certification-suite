@@ -63,6 +63,7 @@ if (!jobId) {
 
 process.env.CYPRESS_jobId = jobId;
 
+// Function to execute preprocessorScript
 function runPreprocessorScript() {
   const preprocessorScript = path.join(__dirname, 'copyFixturesTestcases.js');
   spawn('node', [preprocessorScript], {
@@ -71,6 +72,7 @@ function runPreprocessorScript() {
   });
 }
 
+// Function to execute cypress run
 function run() {
   runPreprocessorScript();
 
