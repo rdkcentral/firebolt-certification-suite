@@ -5,10 +5,27 @@
  * @example fcsSetters.launchApp("AppName");
  */
 const launchApp = async (value) => {
-  return setterNotImplemented();
+  const requestMap = createRequestMap(`Discovery.launch`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
-
-// TODO: Check whether it needs both attribute and value
 
 /**
  * Sets additional metadata for localization or configuration.
@@ -16,8 +33,27 @@ const launchApp = async (value) => {
  * @returns {Promise<any>} A promise that resolves/reject based on the response when the operation is complete.
  * @example fcsSetters.setAdditionalInfo("{ key: 'exampleKey', value: 'exampleValue' }");
  */
-const setAdditionalInfo = async (value) => {
-  return setterNotImplemented();
+const setAdditionalInfo = async (attribute, value) => {
+  const requestMap = createRequestMap(`localization.${attribute}`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -28,7 +64,27 @@ const setAdditionalInfo = async (value) => {
  * @example fcsSetters.setAudioDescriptionSettings("setEnabled", "true");
  */
 const setAudioDescriptionSettings = async (attribute, value) => {
-  return setterNotImplemented();
+  attribute = attribute ?? 'Enabled'; // Default value
+  const requestMap = createRequestMap(`Audiodescriptions.set${attribute}`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -38,7 +94,26 @@ const setAudioDescriptionSettings = async (attribute, value) => {
  * @example fcsSetters.setCountryCode("US");
  */
 const setCountryCode = async (value) => {
-  return setterNotImplemented();
+  const requestMap = createRequestMap(`Localization.set${attribute}`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -78,8 +153,27 @@ const setClosedCaptions = async (attribute, value) => {
  * @returns {Promise<any>} A promise that resolves/reject based on the response when the operation is complete.
  * @example fcsSetters.setDiscoveryPolicy("Allow");
  */
-const setDiscoveryPolicy = async (value) => {
-  return setterNotImplemented();
+const setDiscoveryPolicy = async (attribute, value) => {
+  const requestMap = createRequestMap(`privacy.set${attribute}`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -89,7 +183,26 @@ const setDiscoveryPolicy = async (value) => {
  * @example fcsSetters.setDeviceAudio("stereo");
  */
 const setDeviceAudio = async (value) => {
-  return setterNotImplemented();
+  const requestMap = createRequestMap(`device.audio`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -99,7 +212,26 @@ const setDeviceAudio = async (value) => {
  * @example fcsSetters.setDeviceHdcp("{"hdcp2.2": true}")
  */
 const setDeviceHdcp = async (value) => {
-  return setterNotImplemented();
+  const requestMap = createRequestMap(`device.hdcp`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -109,7 +241,26 @@ const setDeviceHdcp = async (value) => {
  * @example fcsSetters.setDeviceHdr("{"dolbyVision": true}")
  */
 const setDeviceHdr = async (value) => {
-  return setterNotImplemented();
+  const requestMap = createRequestMap(`device.hdr`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -119,7 +270,26 @@ const setDeviceHdr = async (value) => {
  * @example fcsSetters.setDeviceNetwork("{"state": "connected", "type": "wifi"}")
  */
 const setDeviceNetwork = async (value) => {
-  return setterNotImplemented();
+  const requestMap = createRequestMap(`device.network`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -129,7 +299,26 @@ const setDeviceNetwork = async (value) => {
  * @example fcsSetters.setLanguage("en-US");
  */
 const setLanguage = async (value) => {
-  return setterNotImplemented();
+  const requestMap = createRequestMap(`Localization.setLanguage`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -140,10 +329,27 @@ const setLanguage = async (value) => {
  * @example fcsSetters.setLifecycleState("foreground");
  */
 const setLifecycleState = async (value) => {
-  return setterNotImplemented();
+  const requestMap = createRequestMap(`lifecycle.state`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
-
-// TODO: Check whether it needs both attribute and value
 
 /**
  * Sets the limit ad tracking preference.
@@ -151,8 +357,27 @@ const setLifecycleState = async (value) => {
  * @returns {Promise<any>} A promise that resolves/reject based on the response when the operation is complete.
  * @example fcsSetters.setLimitAdTracking("true");
  */
-const setLimitAdTracking = async (value) => {
-  return setterNotImplemented();
+const setLimitAdTracking = async (attribute, value) => {
+  const requestMap = createRequestMap(`privacy.set${attribute}`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -162,7 +387,26 @@ const setLimitAdTracking = async (value) => {
  * @example fcsSetters.setLocale("en-US");
  */
 const setLocale = async (value) => {
-  return setterNotImplemented();
+  const requestMap = createRequestMap(`localization.setLocale`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -172,7 +416,26 @@ const setLocale = async (value) => {
  * @example fcsSetters.setPreferredAudioLanguages(["en-US"]);
  */
 const setPreferredAudioLanguages = async (value) => {
-  return setterNotImplemented();
+  const requestMap = createRequestMap(`localization.setPreferredAudioLanguages`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -182,7 +445,26 @@ const setPreferredAudioLanguages = async (value) => {
  * @example fcsSetters.setVideoResolution("1080p");
  */
 const setVideoResolution = async (value) => {
-  return setterNotImplemented();
+  const requestMap = createRequestMap(`Device.videoResolution`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -193,7 +475,27 @@ const setVideoResolution = async (value) => {
  * @example fcsSetters.setVoiceGuidance("enabled", "true");
  */
 const setVoiceGuidance = async (attribute, value) => {
-  return setterNotImplemented();
+  attribute = attribute ?? 'Enabled'; // Default value
+  const requestMap = createRequestMap(`VoiceGuidance.set${attribute}`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -203,7 +505,26 @@ const setVoiceGuidance = async (attribute, value) => {
  * @example fcsSetters.unloadApp("AppName");
  */
 const unloadApp = async (value) => {
-  return setterNotImplemented();
+  const requestMap = createRequestMap(`lifecycle.setState`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -214,6 +535,19 @@ const unloadApp = async (value) => {
  */
 const getNegotiatedHdcp = async () => {
   return setterNotImplemented();
+};
+
+/**
+ * Creates a request map object.
+ * @param {string} method - The method to call.
+ * @param {any} value - The value to set.
+ * @returns {object} The request map object.
+ */
+const createRequestMap = (method, value) => {
+  return {
+    method: method,
+    params: { value: value },
+  };
 };
 
 module.exports = {
