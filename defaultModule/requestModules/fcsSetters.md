@@ -77,9 +77,9 @@ function setAdditionalInfo(attribute, value) {
     let success = // Perform validations to ensure additional was updated successfully
 
     if (success) {
-        return setterSuccess(`Successfully set AdditionalInfo '${attribute}' with value '${value}'!`);
+        return setterSuccess(`Successfully set '${attribute}' with value '${value}'!`);
     } else {
-        return setterFailure(`Failed to set AdditionalInfo '${attribute}' with value '${value}'`);
+        return setterFailure(`Failed to set '${attribute}' with value '${value}'`);
     }
 }
 ```
@@ -99,7 +99,7 @@ The *value* will be an object containing the key of the metadata to be removed.
 
 Add additional Info: ```fcsSetters.setAdditionalInfo("addAdditionalInfo", { key: "exampleKey", value: "exampleValue" });```
 
-Remove aditional Info: ```fcsSetters.setAdditionalInfo("removeAdditionalInfo", { key: "exampleKey" });```
+Remove additional Info: ```fcsSetters.setAdditionalInfo("removeAdditionalInfo", { key: "exampleKey" });```
 
 </details>
 
@@ -114,9 +114,9 @@ function setAudioDescriptionSettings(attribute, value) {
     let success = // Perform validations to ensure audio description was updated successfully
 
     if (success) {
-        return setterSuccess(`Set Audio Description attribute '${attribute}' to '${value}' successfully!`);
+        return setterSuccess(`Set Audio Description '${attribute}' to '${value}' successfully!`);
     } else {
-        return setterFailure(`Failed to set Audio Description attribute '${attribute}' to '${value}'`);
+        return setterFailure(`Failed to set Audio Description '${attribute}' to '${value}'`);
     }
 }
 ```
@@ -125,7 +125,7 @@ This function handles the following scenario
 
 **Enabling or Disabling AudioDescriptionSettings**
 
-In this scenario, the *attribute* will be null/undefined or simply "enabled". 
+In this scenario, the *attribute* will be null/undefined or simply "setEnabled". 
 The *value* will be a string containing a boolean "true" or "false". *true* will enable audio description, and *false* will disable it.
 
 **Example**
@@ -146,9 +146,9 @@ function setClosedCaptions(attribute,value) {
     let success = // Perform validations to ensure closed caption was updated successfully
 
     if(success) {
-        return setterSuccess(`Set Closed Captions attribute '${attribute}' to '${value}' successfully!`);
+        return setterSuccess(`Set Closed Captions '${attribute}' to '${value}' successfully!`);
     } else {
-        return setterFailure(`Unable to set Closed Caption attribute '${attribute}' to '${value}'`);
+        return setterFailure(`Unable to set Closed Caption '${attribute}' to '${value}'`);
     }
 }
 ```
@@ -157,7 +157,7 @@ There are 2 possible scenarios this function should handle:
 
 **Enabling or Disabling Closed Captions**
 
-In this scenario, the *attribute* will be null/undefined or simply "enable". 
+In this scenario, the *attribute* will be null/undefined or simply "setEnable". 
 The *value* will be a string containing a boolean "true" or "false". *true* will enable closed captioning, and *false* will disable it.
 
 **Setting a Closed Captions attribute**
@@ -217,9 +217,9 @@ function setDiscoveryPolicy(attribute, value) {
     let success = // Perform validations to ensure discovery policy was updated successfully
 
     if (success) {
-        return setterSuccess(`Set Discovery Policy '${attribute}' to '${value}' successfully!`);
+        return setterSuccess(`Set '${attribute}' policy to '${value}' successfully!`);
     } else {
-        return setterFailure(`Failed to set Discovery Policy '${attribute}' to '${value}'`);
+        return setterFailure(`Failed to set  '${attribute}' policy to '${value}'`);
     }
 }
 ```
@@ -227,14 +227,14 @@ function setDiscoveryPolicy(attribute, value) {
 There are 2 possible scenarios this function should handle:
 
 
-**Setting allowPersonalization to true**
+**Setting AllowPersonalization to true**
 
-In this scenario, the *attribute* will be AllowPersonalization. 
+In this scenario, the *attribute* will be setAllowPersonalization. 
 The *value* will be a string containing a boolean "true" or "false". *true* will allow Personalization and *false* will disable Personalization.
 
 **Setting AllowWatchHistory to true**
 
-In this scenario, the *attribute* will be AllowWatchHistory. 
+In this scenario, the *attribute* will be setAllowWatchHistory. 
 The *value* will be a string containing a boolean "true" or "false". *true* will enable/remember WatchHistory tracking and *false* will disable Watch history tracking.
 
 **Examples**
@@ -315,23 +315,42 @@ Param **value** will represent the desired lifecycle state.
 Configures the limit ad tracking setting.
 
 ```
-function setLimitAdTracking(value) {
+function setLimitAdTracking(attribute, value) {
     let response = // Call your service to set the limit ad tracking
     let success = // Perform validations to limit ad tracking was updated successfully
 
     if (success) {
-        return setterSuccess(`Set Limit Ad Tracking to '${value}' successfully!`);
+        return setterSuccess(`Set '${attribute}' Tracking to '${value}' successfully!`);
     } else {
-        return setterFailure(`Failed to set Limit Ad Tracking to '${value}'`);
+        return setterFailure(`Failed to set '${attribute}' Tracking to '${value}'`);
     }
 }
 ```
 
-Param **value** can either be true or false to set whether ad tracking should be limited.
+There are 3 possible scenarios this function should handle:
 
-**Example**
+**SetAllowPrimaryBrowseAdTargeting**
 
-```fcsSetters.setLimitAdTracking("true");``` 
+In this scenario, the *attribute* will be SetAllowPrimaryBrowseAdTargeting. 
+The *value* will be a string containing a boolean "true" or "false". *true* will allow PrimaryBrowseAdTargeting and *false* will disable it.
+
+**SetAllowAppContentAdTargeting**
+
+In this scenario, the *attribute* will be SetAllowAppContentAdTargeting. 
+The *value* will be a string containing a boolean "true" or "false". *true* will allow AppContentAdTargeting and *false* will disable it.
+
+**SetAllowPrimaryContentAdTargeting**
+
+In this scenario, the *attribute* will be SetAllowPrimaryContentAdTargeting. 
+The *value* will be a string containing a boolean "true" or "false". *true* will allow PrimaryContentAdTargeting and *false* will disable it.**
+
+**Examples**
+
+Set AllowAppContentAdTargeting: ```fcsSetters.setLimitAdTracking("SetAllowAppContentAdTargeting","true")``` 
+
+Set AllowPrimaryBrowseAdTargeting: ```fcsSetters.setLimitAdTracking("SetAllowPrimaryBrowseAdTargeting","true")``` 
+
+Set AllowPrimaryContentAdTargeting: ```fcsSetters.setLimitAdTracking("SetAllowPrimaryContentAdTargeting","true")``` 
 
 </details>
 
