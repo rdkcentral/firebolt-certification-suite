@@ -1,12 +1,3 @@
 
 {
-    "SEND_METRICS_EVENT_WITH_EMPTY_SCHEMA": {
-        "method": "manage_metrics.event",
-        "params": "METRICS_EMPTY_SCHEMA"
-    },
-    "NULL_FOR_METRICS_EVENT": {
-        "method": "metrics.event",
-        "validationJsonPath": "result",
-        "content": "NULL"
-    }
 }
