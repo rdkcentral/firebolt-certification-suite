@@ -342,13 +342,13 @@ Feature: SecureStorage
         And '3rd party app' invokes the 'Firebolt' API to 'set secure value for key authTestTokenDevice1'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to 'get stored value for authTestTokenDevice1 with scope device'
-        And 'Firebolt' platform responds with ' expected value for authTestTokenDevice1 stored data in securestorage'
+        And 'Firebolt' platform responds with 'expected value for authTestTokenDevice1 stored data in securestorage'
         And '3rd party app' invokes the 'Firebolt' API to 'set secure value for key authTestTokenDevice2'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to 'get stored value for authTestTokenDevice2 with scope device'
         And 'Firebolt' platform responds with 'expected value for authTestTokenDevice2 stored data in securestorage'
         And 'secondary 3rd party app' invokes the 'Firebolt' API to 'get stored value for authTestTokenDevice1 with scope device'
-        And 'Firebolt' platform responds to 'secondary 3rd party app' with ' expected value for authTestTokenDevice1 stored data in securestorage'
+        And 'Firebolt' platform responds to 'secondary 3rd party app' with 'expected value for authTestTokenDevice1 stored data in securestorage'
         And 'secondary 3rd party app' invokes the 'Firebolt' API to 'get stored value for authTestTokenDevice2 with scope device'
         And 'Firebolt' platform responds to 'secondary 3rd party app' with 'expected value for authTestTokenDevice2 stored data in securestorage'
         When '3rd party app' invokes the 'Firebolt' API to 'remove the stored value authTestTokenDevice1 with scope device'
@@ -360,7 +360,7 @@ Feature: SecureStorage
         When '3rd party app' invokes the 'Firebolt' API to 'get stored value for authTestTokenDevice2 with scope device'
         Then 'Firebolt' platform responds with 'expected value for authTestTokenDevice2 stored data in securestorage'
         When 'secondary 3rd party app' invokes the 'Firebolt' API to 'get stored value for authTestTokenDevice2 with scope device'
-        Then 'Firebolt' platform responds to 'secondary 3rd party app' with '<expected value for authTestTokenDevice2 stored data in securestorage'
+        Then 'Firebolt' platform responds to 'secondary 3rd party app' with 'expected value for authTestTokenDevice2 stored data in securestorage'
 
     # 2nd app is launched
     # set value1 in device scope
