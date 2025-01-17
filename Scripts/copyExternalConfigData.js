@@ -19,19 +19,11 @@ const fs = require('fs');
 const path = require('path');
 const logger = require('../cypress/support/Logger')('copyExternalConfigData.js');
 
-logger.info(
-  'Copying Config fixtures and Testcases into sdkResources/external'
-);
+logger.info('Copying Config fixtures and Testcases into sdkResources/external');
 
 // Config for sdk resources folder
 const EXTERNAL_DIR = path.join(__dirname, '..', 'sdkResources', 'external');
-const CONFIG_DIR = path.join(
-  __dirname,
-  '..',
-  'node_modules',
-  'configModule',
-  'sdkResources'
-);
+const CONFIG_DIR = path.join(__dirname, '..', 'node_modules', 'configModule', 'sdkResources');
 
 // Config for config.json
 const SOURCE_CONFIG_FILE = path.join(

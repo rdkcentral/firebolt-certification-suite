@@ -16,7 +16,14 @@ const configTestCasesDir = path.join(
 
 const fcsFixturesDir = path.join(__dirname, '..', 'cypress', 'fixtures');
 const sdkFixturesDir = path.join(__dirname, '..', 'sdkResources', sdkVersion, 'fixtures');
-const configFixturesDir = path.join(__dirname, '..', 'sdkResources', 'external', sdkVersion, 'fixtures');
+const configFixturesDir = path.join(
+  __dirname,
+  '..',
+  'sdkResources',
+  'external',
+  sdkVersion,
+  'fixtures'
+);
 
 copyFiles(sdkTestCasesDir, fcsTestCasesDir);
 const distributorDir = path.join(fcsTestCasesDir, 'Distributor');
