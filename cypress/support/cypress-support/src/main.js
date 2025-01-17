@@ -251,37 +251,49 @@ export default function (module) {
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
    */
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
-    cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
-      return new Promise(async (resolve, reject) => {
+    console.log('requestMap', JSON.stringify(requestMap));
+
+    cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then((requestMap) => {
+      return new Cypress.Promise(async (resolve, reject) => {
+        console.log(requestMap.method);
         const [moduleName, methodName] = requestMap.method.split('.');
         Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
-        // Check if request is for fcs setters
+
+        // Check if request is for FCS setters
         if (moduleName === CONSTANTS.FCS_SETTER) {
+          console.log('moduleName', JSON.stringify(moduleName));
           const method = config.getRequestOverride(moduleName, methodName);
+          console.log('Type of method', typeof method);
+          console.log('Method::' + method);
           if (typeof method === 'function') {
             const params = requestMap.params || {};
             const argCount = method.length;
-            // If the number of parameters does not match the expected argument count, reject
             const paramsCount = Object.keys(params).length;
-            if (paramsCount !== argCount) {
+
+            // Validate parameter count
+            if (paramsCount > argCount) {
               reject(
                 new Error(
-                  `${requestMap.method} Expectes ${argCount} arguments, but got ${paramsCount} params`
+                  `${requestMap.method} expects ${argCount} arguments, but got ${paramsCount} params`
                 )
               );
             }
-            const attribute = params.attribute ?? null; // Set to null if not exist
-            const value = params.value ?? null; // Set to null if not exist
+
+            const attribute = params.attribute ?? null;
+            const value = params.value ?? null;
             let args = [];
+
             if (attribute !== null && value !== null) {
-              args = [attribute, value]; // If both attribute and value are provided
+              args = [attribute, value];
             } else if (value !== null) {
-              args = [value]; // If only value is provided
+              args = [value];
             }
+
             // Dynamically call the method with the params
             const response = await method(...args);
             resolve(response);
           } else {
+            console.log('Inside else');
             reject(setterNotImplemented('not implemented'));
           }
         } else {
@@ -291,6 +303,8 @@ export default function (module) {
           if (message != null) {
             const response = await transport.sendMessage(message);
             const result = config.invokeResponseOverride(response);
+            console.log('Response::' + JSON.stringify(response));
+            console.log('Result::' + JSON.stringify(result));
             resolve(result);
           } else {
             resolve(null);

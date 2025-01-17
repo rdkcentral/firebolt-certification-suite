@@ -3,8 +3,8 @@ const CONSTANTS = require('../../constants/constants');
 
 global.setterSuccess = (message = 'Setter Method is success') => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
-  cy.log(`[${methodName}] ${message}`);
-  return { status: 'success', message };
+  console.log(`[${methodName}] ${message}`);
+  return { jsonrpc: '2.0', result: null, id: 0 };
 };
 
 global.setterFailure = (message, error) => {

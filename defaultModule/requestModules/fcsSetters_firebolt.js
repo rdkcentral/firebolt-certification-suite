@@ -8,13 +8,15 @@ const launchApp = async (value) => {
   return setterNotImplemented();
 };
 
+// TODO: Check whether it needs both attribute and value
+
 /**
  * Sets additional metadata for localization or configuration.
  * @param {any} value - The value to set.
  * @returns {Promise<any>} A promise that resolves/reject based on the response when the operation is complete.
  * @example fcsSetters.setAdditionalInfo("{ key: 'exampleKey', value: 'exampleValue' }");
  */
-const setAdditionalInfo = async (attribute, value) => {
+const setAdditionalInfo = async (value) => {
   return setterNotImplemented();
 };
 
@@ -47,7 +49,27 @@ const setCountryCode = async (value) => {
  * @example fcsSetters.setClosedCaptions("setEnabled", "true");
  */
 const setClosedCaptions = async (attribute, value) => {
-  return setterNotImplemented();
+  attribute = attribute ?? 'Enabled'; // Default value
+  const requestMap = createRequestMap(`closedcaptions.set${attribute}`, value);
+  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
+    try {
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response: Response is null or not an object');
+      }
+      const success = response.hasOwnProperty('result');
+      if (success) {
+        return await setterSuccess(`Successfully ${value}d closed captions`);
+      } else {
+        return await setterFailure(
+          `Unable to set ${value} closed captions`,
+          JSON.stringify(response)
+        );
+      }
+    } catch (error) {
+      console.error('Error handling response:', error);
+      return await setterFailure('Error occurred while processing the response', error.message);
+    }
+  });
 };
 
 /**
@@ -56,7 +78,7 @@ const setClosedCaptions = async (attribute, value) => {
  * @returns {Promise<any>} A promise that resolves/reject based on the response when the operation is complete.
  * @example fcsSetters.setDiscoveryPolicy("Allow");
  */
-const setDiscoveryPolicy = async (attribute, value) => {
+const setDiscoveryPolicy = async (value) => {
   return setterNotImplemented();
 };
 
@@ -121,13 +143,15 @@ const setLifecycleState = async (value) => {
   return setterNotImplemented();
 };
 
+// TODO: Check whether it needs both attribute and value
+
 /**
  * Sets the limit ad tracking preference.
  * @param {any} value - The value to set.
  * @returns {Promise<any>} A promise that resolves/reject based on the response when the operation is complete.
  * @example fcsSetters.setLimitAdTracking("true");
  */
-const setLimitAdTracking = async (attribute, value) => {
+const setLimitAdTracking = async (value) => {
   return setterNotImplemented();
 };
 
