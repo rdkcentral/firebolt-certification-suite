@@ -20,17 +20,17 @@ const path = require('path');
 const logger = require('../cypress/support/Logger')('copyExternalConfigData.js');
 
 logger.info(
-  'Copying Config fixtures into fixtures/external and Testcases into TestCases/Distributor'
+  'Copying Config fixtures and Testcases into sdkResources/external'
 );
 
-// Config for testCase
-const EXTERNAL_DIR_TESTCASE = path.join(__dirname, '..', 'cypress', 'external');
-const CONFIG_DIR_TESTCASE = path.join(
+// Config for sdk resources folder
+const EXTERNAL_DIR = path.join(__dirname, '..', 'sdkResources', 'external');
+const CONFIG_DIR = path.join(
   __dirname,
   '..',
   'node_modules',
   'configModule',
-  'cypress'
+  'sdkResources'
 );
 
 // Config for config.json
@@ -69,10 +69,10 @@ function copyFiles(configDir, externalDir) {
 }
 
 // Copy testCase files
-if (fs.existsSync(CONFIG_DIR_TESTCASE)) {
-  copyFiles(CONFIG_DIR_TESTCASE, EXTERNAL_DIR_TESTCASE);
+if (fs.existsSync(CONFIG_DIR)) {
+  copyFiles(CONFIG_DIR, EXTERNAL_DIR);
 } else {
-  logger.info('TestCases data is not available in configModule');
+  logger.info('sdk resources is not available in configModule');
 }
 
 // Copy config.json file
