@@ -122,8 +122,13 @@ Given(
       }
     }
 
+    const testLowerCase = test.toLowerCase();
+    const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
     if (
-      Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(test) &&
+      externalModuleTestTypes.some(
+        (item) =>
+          typeof item === 'string' && testLowerCase.toLowerCase().includes(item.toLowerCase())
+      ) &&
       !Cypress.env(CONSTANTS.INTENT_TEMPLATES) &&
       !Cypress.env(CONSTANTS.APP_METADATA)
     ) {
