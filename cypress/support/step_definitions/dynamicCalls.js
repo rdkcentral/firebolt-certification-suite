@@ -406,11 +406,11 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     if (response.appState.toUpperCase() === CONSTANTS.FOREGROUND) {
       fireLog.info(
-        `State validation successful: Current state of ${appId} app is ${response} as expected`
+        `State validation successful: Current state of ${appId} app is ${JSON.stringify(response)} as expected`
       );
     } else {
       fireLog.fail(
-        `State validation failed: Current state of ${appId} app is ${response}, expected to be ${CONSTANTS.FOREGROUND}.`
+        `State validation failed: Current state of ${appId} app is ${JSON.stringify(response)}, expected to be ${CONSTANTS.FOREGROUND}.`
       );
     }
   });
