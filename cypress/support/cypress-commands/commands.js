@@ -1645,30 +1645,58 @@ Cypress.Commands.add('envConfigSetup', () => {
  * cy.exitAppSession('dismissApp','testAppId')
  * cy.exitAppSession('unloadApp','testAppId')
  */
-Cypress.Commands.add('exitAppSession', (exitType, appId) => {
-  fireLog.info('Invoking platform implementation to end session for appId: ' + appId);
+Cypress.Commands.add('exitAppSession', (exitType, params) => {
   let exitMethod;
+  let requestMap;
+  fireLog.info(
+    'Invoking platform implementation to end session for appId: ' + params.appId
+      ? params.appId
+      : Cypress.env(CONSTANTS.RUNTIME).appId
+  );
   switch (exitType) {
     case 'closeApp':
       exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.CLOSEAPP;
+      requestMap = {
+        method: exitMethod,
+        params: params.appId,
+      };
+
       break;
     case 'unloadApp':
       exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP;
+      requestMap = {
+        method: exitMethod,
+        params: params.appId,
+      };
+
       break;
     case 'dismissApp':
       exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.DISMISSAPP;
+      requestMap = {
+        method: exitMethod,
+        params: params.keyPressSequence,
+      };
+
       break;
     default:
-      fireLog.info('Session for appId: ' + appId + ' will not be ended due to invalid exitType');
+      fireLog.info(
+        'Session for appId: ' + params.appId
+          ? params.appId
+          : Cypress.env(CONSTANTS.RUNTIME).appId + ' will not be ended due to invalid exitType'
+      );
       fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
   }
-  fireLog.info('Session for appId: ' + appId + ' will be ended with type: ' + exitType);
-  const requestMap = {
-    method: exitMethod,
-    params: appId,
-  };
+  fireLog.info(
+    'Session for appId: ' + params.appId
+      ? params.appId
+      : Cypress.env(CONSTANTS.RUNTIME).appId + ' will be ended with type: ' + exitType
+  );
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    fireLog.info('Platform has successfully ended app Session for appId: ' + appId);
+    fireLog.info(
+      'Platform has successfully ended app Session for appId: ' + params.appId
+        ? params.appId
+        : Cypress.env(CONSTANTS.RUNTIME).appId
+    );
   });
 });
 
