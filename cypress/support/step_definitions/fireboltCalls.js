@@ -436,9 +436,10 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
           !KeyPressSequence &&
           Cypress.env(CONSTANTS.APP_METADATA) &&
           Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence &&
-          Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence[loggedType]
+          Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss &&
+          Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss[loggedType]
         ) {
-          KeyPressSequence = Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence[
+          KeyPressSequence = Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss[
             loggedType
           ];
         } else {
