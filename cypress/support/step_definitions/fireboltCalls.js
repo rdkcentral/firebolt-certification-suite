@@ -436,9 +436,11 @@ Given(/3rd party '(.+)' app is dismissed$/, async (appType) => {
           !KeyPressSequence &&
           Cypress.env(CONSTANTS.APP_METADATA) &&
           Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence &&
-          Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss
+          Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence[loggedType]
         ) {
-          KeyPressSequence = Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss;
+          KeyPressSequence = Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence[
+            loggedType
+          ];
         } else {
           // If no keyPressSequence is found, throw an error with details from the app_metadata file
           const appMetadataJSON = require('../../fixtures/docs/app_metadata.json');

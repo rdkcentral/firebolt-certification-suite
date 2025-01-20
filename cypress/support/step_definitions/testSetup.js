@@ -32,6 +32,7 @@ const { _ } = Cypress;
  */
 Given(
   /^the environment has been set up for '([^']+)' tests(?: (for|with) '([^']+)')?$/,
+
   async (test, type, scenarioType) => {
     const runtime = {};
 
@@ -74,8 +75,7 @@ Given(
     if (
       !UTILS.getEnvVariable(CONSTANTS.ENV_SETUP_STATUS, false) ||
       UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(test) ||
-      UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test) ||
-      UTILS.isTestTypeChanged(test)
+      UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(test)
     ) {
       if (test.toLowerCase() == CONSTANTS.MODULE_NAMES.LIFECYCLEAPI) {
         Cypress.env(CONSTANTS.LIFECYCLE_VALIDATION, true);
@@ -121,9 +121,9 @@ Given(
         fireLog.fail('Marker creation failed');
       }
     }
-
     const testLowerCase = test.toLowerCase();
     const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
+
     if (
       externalModuleTestTypes.some(
         (item) =>
@@ -140,6 +140,7 @@ Given(
     }
   }
 );
+
 /**
  * @module TestSetupGlue
  * @function destroyAppInstance
