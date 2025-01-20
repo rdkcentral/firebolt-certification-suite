@@ -1,9 +1,15 @@
 const spawn = require('cross-spawn');
 const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
+const path = require('path');
 
 // Reading first parameter from the scripts to call function
 const functionName = process.argv[2];
 const params = process.argv.slice(3).join(' ');
+
+const sdkVersionMatch = params.match(/sdkVersion=([^\s,]+)/);
+const sdkVersion = sdkVersionMatch ? sdkVersionMatch[1] : 'latest';
+process.env.sdkVersion = sdkVersion;
 
 // Creating UUID
 function generateUUID() {
@@ -57,8 +63,19 @@ if (!jobId) {
 
 process.env.CYPRESS_jobId = jobId;
 
+// Function to execute preprocessorScript
+function runPreprocessorScript() {
+  const preprocessorScript = path.join(__dirname, 'copyFixturesTestcases.js');
+  spawn('node', [preprocessorScript], {
+    stdio: 'inherit',
+    env: { ...process.env, sdkVersion },
+  });
+}
+
 // Function to execute cypress run
 function run() {
+  runPreprocessorScript();
+
   const args = ['run', '--e2e', ...modifyParams(params).split(' ')];
   console.log(`[Running cypress command: cypress ${args.join(' ')}]`);
 
@@ -77,6 +94,8 @@ function run() {
 
 // Function to open Cypress without report options
 function open() {
+  runPreprocessorScript();
+
   const command = 'cypress';
   const args = ['open', '--e2e', ...modifyParams(params).split(' ')];
   console.log(`[Running cypress command: ${command} ${args.join(' ')}]`);

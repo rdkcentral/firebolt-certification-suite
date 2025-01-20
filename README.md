@@ -109,11 +109,11 @@ Following are the supported runtime environments -
 
 ### Run the certification suite with the browser
 
-`npx cypress open --browser electron -- env testSuite = <runtime-environment>
+`npm run cy:open -- --env testSuite = <runtime-environment>
 
 ### Run the certification suite in cli
 
-`npx cypress run -- env testSuite = <runtime-environment>
+`npm run cy:run -- --env testSuite = <runtime-environment>
 
 ### Run the certification suite in cli with overriding reporter-options
 
@@ -137,7 +137,7 @@ Other cypress command line can also be passed
 
 ### Helpful Information
 
-- setup is used to load all the fixture files from node-modules/configModule to cypress/fixtures/external/. This setup is done automatically in postInstall.
+- setup is used to load all sdk resources folders from node-modules/configModule to sdkResources/external/. This setup is done automatically in postInstall.
 
   `npm run setup`
 
