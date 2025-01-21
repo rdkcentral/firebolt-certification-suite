@@ -94,7 +94,7 @@ const setAudioDescriptionSettings = async (attribute, value) => {
  * @example fcsSetters.setCountryCode("US");
  */
 const setCountryCode = async (value) => {
-  const requestMap = createRequestMap(`localization.set${attribute}`, value);
+  const requestMap = createRequestMap(`localization.setcountryCode`, value);
   return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
     try {
       if (!response || typeof response !== 'object') {
@@ -183,26 +183,7 @@ const setDiscoveryPolicy = async (attribute, value) => {
  * @example fcsSetters.setDeviceAudio("stereo");
  */
 const setDeviceAudio = async (value) => {
-  const requestMap = createRequestMap(`device.audio`, value);
-  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
-    try {
-      if (!response || typeof response !== 'object') {
-        throw new Error('Invalid response: Response is null or not an object');
-      }
-      const success = response.hasOwnProperty('result');
-      if (success) {
-        return await setterSuccess(`Successfully ${value}d closed captions`);
-      } else {
-        return await setterFailure(
-          `Unable to set ${value} closed captions`,
-          JSON.stringify(response)
-        );
-      }
-    } catch (error) {
-      console.error('Error handling response:', error);
-      return await setterFailure('Error occurred while processing the response', error.message);
-    }
-  });
+  return setterNotImplemented('setDeviceAudio is not supported by firebolt');
 };
 
 /**
@@ -212,26 +193,7 @@ const setDeviceAudio = async (value) => {
  * @example fcsSetters.setDeviceHdcp("{"hdcp2.2": true}")
  */
 const setDeviceHdcp = async (value) => {
-  const requestMap = createRequestMap(`device.hdcp`, value);
-  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
-    try {
-      if (!response || typeof response !== 'object') {
-        throw new Error('Invalid response: Response is null or not an object');
-      }
-      const success = response.hasOwnProperty('result');
-      if (success) {
-        return await setterSuccess(`Successfully ${value}d closed captions`);
-      } else {
-        return await setterFailure(
-          `Unable to set ${value} closed captions`,
-          JSON.stringify(response)
-        );
-      }
-    } catch (error) {
-      console.error('Error handling response:', error);
-      return await setterFailure('Error occurred while processing the response', error.message);
-    }
-  });
+  return setterNotImplemented('setDeviceHdcp is not supported by firebolt');
 };
 
 /**
@@ -241,26 +203,7 @@ const setDeviceHdcp = async (value) => {
  * @example fcsSetters.setDeviceHdr("{"dolbyVision": true}")
  */
 const setDeviceHdr = async (value) => {
-  const requestMap = createRequestMap(`device.hdr`, value);
-  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
-    try {
-      if (!response || typeof response !== 'object') {
-        throw new Error('Invalid response: Response is null or not an object');
-      }
-      const success = response.hasOwnProperty('result');
-      if (success) {
-        return await setterSuccess(`Successfully ${value}d closed captions`);
-      } else {
-        return await setterFailure(
-          `Unable to set ${value} closed captions`,
-          JSON.stringify(response)
-        );
-      }
-    } catch (error) {
-      console.error('Error handling response:', error);
-      return await setterFailure('Error occurred while processing the response', error.message);
-    }
-  });
+  return setterNotImplemented('setDeviceHdr is not supported by firebolt');
 };
 
 /**
@@ -270,26 +213,7 @@ const setDeviceHdr = async (value) => {
  * @example fcsSetters.setDeviceNetwork("{"state": "connected", "type": "wifi"}")
  */
 const setDeviceNetwork = async (value) => {
-  const requestMap = createRequestMap(`device.network`, value);
-  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
-    try {
-      if (!response || typeof response !== 'object') {
-        throw new Error('Invalid response: Response is null or not an object');
-      }
-      const success = response.hasOwnProperty('result');
-      if (success) {
-        return await setterSuccess(`Successfully ${value}d closed captions`);
-      } else {
-        return await setterFailure(
-          `Unable to set ${value} closed captions`,
-          JSON.stringify(response)
-        );
-      }
-    } catch (error) {
-      console.error('Error handling response:', error);
-      return await setterFailure('Error occurred while processing the response', error.message);
-    }
-  });
+  return setterNotImplemented('setDeviceNetwork is not supported by firebolt');
 };
 
 /**
@@ -305,6 +229,7 @@ const setLanguage = async (value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
+      cy.up;
       const success = response.hasOwnProperty('result');
       if (success) {
         return await setterSuccess(`Successfully ${value}d closed captions`);
@@ -445,26 +370,7 @@ const setPreferredAudioLanguages = async (value) => {
  * @example fcsSetters.setVideoResolution("1080p");
  */
 const setVideoResolution = async (value) => {
-  const requestMap = createRequestMap(`device.videoResolution`, value);
-  return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
-    try {
-      if (!response || typeof response !== 'object') {
-        throw new Error('Invalid response: Response is null or not an object');
-      }
-      const success = response.hasOwnProperty('result');
-      if (success) {
-        return await setterSuccess(`Successfully ${value}d closed captions`);
-      } else {
-        return await setterFailure(
-          `Unable to set ${value} closed captions`,
-          JSON.stringify(response)
-        );
-      }
-    } catch (error) {
-      console.error('Error handling response:', error);
-      return await setterFailure('Error occurred while processing the response', error.message);
-    }
-  });
+  return setterNotImplemented('setVideoResolution is not supported by firebolt');
 };
 
 /**
