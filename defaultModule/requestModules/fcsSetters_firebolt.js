@@ -5,7 +5,7 @@
  * @example fcsSetters.launchApp("AppName");
  */
 const launchApp = async (value) => {
-  const requestMap = createRequestMap(`Discovery.launch`, value);
+  const requestMap = createRequestMap(`discovery.launch`, value);
   return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
     try {
       if (!response || typeof response !== 'object') {
@@ -34,7 +34,7 @@ const launchApp = async (value) => {
  * @example fcsSetters.setAdditionalInfo("{ key: 'exampleKey', value: 'exampleValue' }");
  */
 const setAdditionalInfo = async (attribute, value) => {
-  const requestMap = createRequestMap(`localization.${attribute}`, value);
+  const requestMap = createRequestMap(`localization.set${attribute}`, value);
   return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
     try {
       if (!response || typeof response !== 'object') {
@@ -65,7 +65,7 @@ const setAdditionalInfo = async (attribute, value) => {
  */
 const setAudioDescriptionSettings = async (attribute, value) => {
   attribute = attribute ?? 'Enabled'; // Default value
-  const requestMap = createRequestMap(`Audiodescriptions.set${attribute}`, value);
+  const requestMap = createRequestMap(`audiodescriptions.set${attribute}`, value);
   return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
     try {
       if (!response || typeof response !== 'object') {
@@ -94,7 +94,7 @@ const setAudioDescriptionSettings = async (attribute, value) => {
  * @example fcsSetters.setCountryCode("US");
  */
 const setCountryCode = async (value) => {
-  const requestMap = createRequestMap(`Localization.set${attribute}`, value);
+  const requestMap = createRequestMap(`localization.set${attribute}`, value);
   return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
     try {
       if (!response || typeof response !== 'object') {
@@ -299,7 +299,7 @@ const setDeviceNetwork = async (value) => {
  * @example fcsSetters.setLanguage("en-US");
  */
 const setLanguage = async (value) => {
-  const requestMap = createRequestMap(`Localization.setLanguage`, value);
+  const requestMap = createRequestMap(`localization.setLanguage`, value);
   return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
     try {
       if (!response || typeof response !== 'object') {
@@ -445,7 +445,7 @@ const setPreferredAudioLanguages = async (value) => {
  * @example fcsSetters.setVideoResolution("1080p");
  */
 const setVideoResolution = async (value) => {
-  const requestMap = createRequestMap(`Device.videoResolution`, value);
+  const requestMap = createRequestMap(`device.videoResolution`, value);
   return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
     try {
       if (!response || typeof response !== 'object') {
@@ -476,7 +476,7 @@ const setVideoResolution = async (value) => {
  */
 const setVoiceGuidance = async (attribute, value) => {
   attribute = attribute ?? 'Enabled'; // Default value
-  const requestMap = createRequestMap(`VoiceGuidance.set${attribute}`, value);
+  const requestMap = createRequestMap(`voiceguidance.set${attribute}`, value);
   return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
     try {
       if (!response || typeof response !== 'object') {
