@@ -413,6 +413,7 @@ Given(
             loggedType = CONSTANTS.LOGGEDOUT;
           }
 
+
           if (
             // Check if keyPressSequence is defined in the runtime environment variables for the specific intent
             !KeyPressSequence &&
@@ -451,6 +452,7 @@ Given(
               `Expected KeyPressSequence was not found for ${appId} in app_metadata.json. More details on app_metadata present in: ${JSON.stringify(appMetadataJSON)}`
             );
           }
+
         }
       } else {
         // when test is Dimiss and scenarioType is not present
