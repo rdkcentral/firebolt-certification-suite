@@ -23,9 +23,9 @@ const setAdditionalInfo = async (attribute, value) => {
  * @param {string} attribute - The attribute to set.
  * @param {any} value - The value to set.
  * @returns {Promise<any>} A promise that resolves/reject based on the response when the operation is complete.
- * @example fcsSetters.setAudioDescriptionSettings("setEnabled", "true");
+ * @example fcsSetters.setAudioDescriptions("setEnabled", "true");
  */
-const setAudioDescriptionSettings = async (attribute, value) => {
+const setAudioDescriptions = async (attribute, value) => {
   return setterNotImplemented();
 };
 
@@ -194,7 +194,7 @@ const getNegotiatedHdcp = async () => {
 
 module.exports = {
   setAdditionalInfo,
-  setAudioDescriptionSettings,
+  setAudioDescriptions,
   setCountryCode,
   setClosedCaptions,
   setDiscoveryPolicy,
