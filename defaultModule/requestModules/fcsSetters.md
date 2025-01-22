@@ -7,7 +7,7 @@ This document provides a comprehensive list of the required and optional setter 
 2. [Required Functions](#required-functions)
     * [launchApp](#launchApp)
     * [setAdditionalInfo](#setAdditionalInfo)
-    * [setAudioDescriptionSettings](#setAudioDescriptionSettings)
+    * [setAudioDescriptions](#setAudioDescriptions)
     * [setClosedCaptions](#setClosedCaptions)
     * [setDeviceAudio](#setDeviceAudio)
     * [setDiscoveryPolicy](#setDiscoveryPolicy)
@@ -103,13 +103,13 @@ Remove additional Info: ```fcsSetters.setAdditionalInfo("removeAdditionalInfo", 
 
 </details>
 
-<details id="setAudioDescriptionSettings">
-<summary><b>fcsSetters.setAudioDescriptionSettings</b></summary>
+<details id="setAudioDescriptions">
+<summary><b>fcsSetters.setAudioDescriptions</b></summary>
 
 Configures audio description settings.
 
 ```
-function setAudioDescriptionSettings(attribute, value) {
+function setAudioDescriptions(attribute, value) {
     let response = // Call your service to update the audio description settings
     let success = // Perform validations to ensure audio description was updated successfully
 
@@ -123,14 +123,14 @@ function setAudioDescriptionSettings(attribute, value) {
 
 This function handles the following scenario
 
-**Enabling or Disabling AudioDescriptionSettings**
+**Enabling or Disabling AudioDescriptions**
 
 In this scenario, the *attribute* will be null/undefined or simply "setEnabled". 
 The *value* will be a string containing a boolean "true" or "false". *true* will enable audio description, and *false* will disable it.
 
 **Example**
 
-```fcsSetters.setAudioDescriptionSettings("setEnabled", "true");```
+```fcsSetters.setAudioDescriptions("setEnabled", "true");```
 
 </details>
 
