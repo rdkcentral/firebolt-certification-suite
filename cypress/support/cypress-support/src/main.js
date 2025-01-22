@@ -251,13 +251,10 @@ export default function (module) {
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
    */
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
-    console.log('requestMap', JSON.stringify(requestMap));
-
-    cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then((requestMap) => {
-      return new Cypress.Promise(async (resolve, reject) => {
+    cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
+      return new Promise(async (resolve, reject) => {
         const [moduleName, methodName] = requestMap.method.split('.');
         Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
-
         // Check if request is for FCS setters
         if (moduleName === CONSTANTS.FCS_SETTER) {
           const method = config.getRequestOverride(moduleName, methodName);
