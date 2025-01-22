@@ -255,16 +255,12 @@ export default function (module) {
 
     cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then((requestMap) => {
       return new Cypress.Promise(async (resolve, reject) => {
-        console.log(requestMap.method);
         const [moduleName, methodName] = requestMap.method.split('.');
         Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
 
         // Check if request is for FCS setters
         if (moduleName === CONSTANTS.FCS_SETTER) {
-          console.log('moduleName', JSON.stringify(moduleName));
           const method = config.getRequestOverride(moduleName, methodName);
-          console.log('Type of method', typeof method);
-          console.log('Method::' + method);
           if (typeof method === 'function') {
             const params = requestMap.params || {};
             const argCount = method.length;
@@ -278,22 +274,14 @@ export default function (module) {
                 )
               );
             }
-
             const attribute = params.attribute ?? null;
             const value = params.value ?? null;
-            let args = [];
-
-            if (attribute !== null && value !== null) {
-              args = [attribute, value];
-            } else if (value !== null) {
-              args = [value];
-            }
+            let args = [attribute, value];
 
             // Dynamically call the method with the params
             const response = await method(...args);
             resolve(response);
           } else {
-            console.log('Inside else');
             reject(setterNotImplemented('not implemented'));
           }
         } else {
@@ -303,8 +291,6 @@ export default function (module) {
           if (message != null) {
             const response = await transport.sendMessage(message);
             const result = config.invokeResponseOverride(response);
-            console.log('Response::' + JSON.stringify(response));
-            console.log('Result::' + JSON.stringify(result));
             resolve(result);
           } else {
             resolve(null);

@@ -69,11 +69,11 @@ const setAdditionalInfo = async (attribute, value) => {
  * @param {string} attribute - The attribute to set.
  * @param {any} value - The value to set.
  * @returns {Promise<any>} A promise that resolves/reject based on the response when the operation is complete.
- * @example fcsSetters.setAudioDescriptionSettings("setEnabled", "true");
+ * @example fcsSetters.setAudioDescriptions("setEnabled", "true");
  */
-const setAudioDescriptionSettings = async (attribute, value) => {
+const setAudioDescriptions = async (attribute, value) => {
   attribute = attribute ?? 'Enabled'; // Default value
-  const setterMethod = `fcsSetters.${setAudioDescriptionSettings.name}`; // Dynamically retrieve the function name to map response
+  const setterMethod = `fcsSetters.${setAudioDescriptions.name}`; // Dynamically retrieve the function name to map response
   const requestMap = createRequestMap(`audiodescriptions.set${attribute}`, value);
 
   return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
@@ -522,7 +522,7 @@ const validateResponse = async (requestMap, response, setterMethod) => {
 
 module.exports = {
   setAdditionalInfo,
-  setAudioDescriptionSettings,
+  setAudioDescriptions,
   setCountryCode,
   setClosedCaptions,
   setDiscoveryPolicy,
