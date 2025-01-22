@@ -277,7 +277,7 @@ const setLanguage = async (value) => {
  */
 const setLifecycleState = async (value) => {
   const setterMethod = `fcsSetters.${setLifecycleState.name}`; // Dynamically retrieve the function name to map response
-  const requestMap = createRequestMap(`lifecycle.state`, value);
+  const requestMap = createRequestMap(`fcs.setLifecycleState`, value);
 
   return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
     try {
@@ -448,7 +448,7 @@ const setVoiceGuidance = async (attribute, value) => {
  */
 const unloadApp = async (value) => {
   const setterMethod = `fcsSetters.${unloadApp.name}`; // Dynamically retrieve the function name to map response
-  const requestMap = createRequestMap(`lifecycle.setState`, value);
+  const requestMap = createRequestMap(`fcs.unloadApp`, value);
 
   return cy.sendMessagetoPlatforms(requestMap).then(async (response) => {
     try {
