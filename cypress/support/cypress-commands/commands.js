@@ -1161,7 +1161,7 @@ Cypress.Commands.add('clearCache', () => {
  */
 Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) => {
   const { method, params, action, expected, appId } = requestData;
-  let context = requestData?.context ? requestData.context : {};
+  const context = requestData?.context ? requestData.context : {};
   const deviceIdentifier = requestData.deviceIdentifier;
   task = task ? task : CONSTANTS.TASK.CALLMETHOD;
   let isNotSupportedApi = false;
