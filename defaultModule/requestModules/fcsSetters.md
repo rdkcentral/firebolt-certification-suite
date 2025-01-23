@@ -294,9 +294,16 @@ function setLifecycleState(value) {
 
 ```
 
-Param **value** will represent the desired lifecycle state.
+Param **value** will represent the desired lifecycle state and the appId. It must be provided as an object with the following structure:
 
-**Possible value**
+```
+{
+  "state": "desired-lifecycle-state",
+  "appId": "desired-appId"
+}
+```
+
+**Possible States**
   - foreground
   - background
   - suspended
@@ -305,7 +312,7 @@ Param **value** will represent the desired lifecycle state.
 
 **Example**
 
-```fcsSetters.setLifecycleState("background");``` 
+```fcsSetters.setLifecycleState({ state: "background", appId: "myAppId" });``` 
 
 </details>
 
