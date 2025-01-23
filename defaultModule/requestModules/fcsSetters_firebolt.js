@@ -17,7 +17,7 @@ const launchApp = async (value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty(CONSTANTS.RESULT);
@@ -81,7 +81,7 @@ const setAudioDescriptions = async (attribute, value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty('result');
@@ -114,7 +114,7 @@ const setCountryCode = async (value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty('result');
@@ -147,7 +147,7 @@ const setClosedCaptions = async (attribute, value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty(CONSTANTS.RESULT);
@@ -181,7 +181,7 @@ const setDiscoveryPolicy = async (attribute, value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty('result');
@@ -252,7 +252,7 @@ const setLanguage = async (value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty('result');
@@ -284,7 +284,7 @@ const setLifecycleState = async (value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty('result');
@@ -315,7 +315,7 @@ const setLimitAdTracking = async (attribute, value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty('result');
@@ -346,7 +346,7 @@ const setLocale = async (value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty('result');
@@ -377,7 +377,7 @@ const setPreferredAudioLanguages = async (value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty('result');
@@ -420,7 +420,7 @@ const setVoiceGuidance = async (attribute, value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty('result');
@@ -455,7 +455,7 @@ const unloadApp = async (value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty('result');
