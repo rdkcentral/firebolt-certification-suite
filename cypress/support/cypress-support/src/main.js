@@ -264,17 +264,22 @@ export default function (module) {
             const paramsCount = Object.keys(params).length;
 
             // Validate parameter count
-            if (paramsCount > argCount) {
+            if (paramsCount > argCount || (argCount > 0 && paramsCount === 0)) {
               reject(
                 new Error(
                   `${requestMap.method} expects ${argCount} arguments, but got ${paramsCount} params`
                 )
               );
             }
-            const attribute = params.attribute ?? null;
-            const value = params.value ?? null;
-            let args = [attribute, value];
+            // Based on the fcsSetter method params,resolve the arguments
+            const argResolvers = {
+              0: () => [], // No arguments expected
+              1: () => [params.value], // Single argument: use params.value
+              2: () => [params.attribute ?? null, params.value], // Two arguments: use params.attribute and params.value
+            };
 
+            // Dynamically resolve arguments using the resolver
+            const args = argResolvers[argCount]?.() || [];
             // Dynamically call the method with the params
             const response = await method(...args);
             resolve(response);
