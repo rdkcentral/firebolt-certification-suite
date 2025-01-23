@@ -263,7 +263,7 @@ export default function (module) {
             const argCount = method.length;
             const paramsCount = Object.keys(params).length;
 
-            // Validate parameter count
+            // Validate number of request parameters matches the fcsSetter argument count
             if (paramsCount > argCount || (argCount > 0 && paramsCount === 0)) {
               reject(
                 new Error(
