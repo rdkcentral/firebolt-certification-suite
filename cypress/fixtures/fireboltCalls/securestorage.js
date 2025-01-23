@@ -414,16 +414,6 @@ exports.NULL_FOR_UPDATING_A_SECURE_DATA_VALUE_FOR_AN_APP = {
   validationJsonPath: 'result',
   content: null,
 };
-exports.NULL_FOR_UPDATING_A_SECURE_DATA_VALUE = {
-  method: 'securestorage.set',
-  validationJsonPath: 'result',
-  content: null,
-};
-exports.NULL_FOR_REMOVING_STORED_VALUE = {
-  method: 'securestorage.remove',
-  validationJsonPath: 'result',
-  content: null,
-};
 exports.EXPECTED_VALUE_FOR_AUTHTESTTOKENDEVICE2_STORED_DATA_IN_SECURESTORAGE = {
   method: 'securestorage.get',
   validationJsonPath: 'result',
@@ -534,12 +524,6 @@ exports.SET_SECURE_DATA_VALUE_FOR_AN_APP_WITHOUT_VALUE = {
 };
 exports.INVALID_PARAMS_FOR_SETTING_A_DATA_VALUE_IN_SECURESTORAGE = {
   method: 'securestorage.setForApp',
-  validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
-  expectingError: true,
-};
-exports.INVALID_PARAMETERS_FOR_SECURESTORAGE_REMOVE = {
-  method: 'securestorage.remove',
   validationJsonPath: 'result',
   content: errorContent.INVALID_PARAMS,
   expectingError: true,

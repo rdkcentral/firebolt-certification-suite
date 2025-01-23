@@ -1,4 +1,14 @@
 {
+    "NULL_FOR_UPDATING_A_SECURE_DATA_VALUE": {
+        "method": "securestorage.set",
+        "validationJsonPath": "result",
+        "content": "NULL"
+    },
+    "NULL_FOR_REMOVING_STORED_VALUE": {
+        "method": "securestorage.remove",
+        "validationJsonPath": "result",
+        "content": "NULL"
+    },
     "NULL_FOR_REMOVING_STORED_VALUE_FOR_AN_APP": {
         "method": "securestorage.removeForApp",
         "validationJsonPath": "result",
@@ -135,6 +145,12 @@
     },
     "INVALID_PARAMS_FOR_REMOVING_STORED_VALUE_IN_SECURESTORAGE":{
         "method": "securestorage.removeForApp",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMETERS_FOR_SECURESTORAGE_REMOVE": {
+        "method": "securestorage.remove",
         "validationJsonPath": "result",
         "content": "INVALID_PARAMS",
         "expectingError": true

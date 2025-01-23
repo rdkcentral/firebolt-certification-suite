@@ -107,6 +107,11 @@
     "method": "discovery.launch",
     "params": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_ENTITYTYPE_AND_WITH_PROGRAMTYPE_MOVIE_FOR_TVEPISODEENTITY"
   },
+  "TRUE_FOR_DISCOVERYLAUNCH": {
+    "method": "discovery.launch",
+    "validationJsonPath": "result",
+    "content": "TRUE"
+  },
   "FOREGROUND_FOR_LIFECYCLE_STATE": {
     "method": "lifecycle.state",
     "validationJsonPath": "result",
