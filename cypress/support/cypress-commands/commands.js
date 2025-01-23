@@ -1210,7 +1210,7 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
     }
   }).then((response) => {
     if (method.startsWith(CONSTANTS.FCS_SETTER)) {
-      console.log('Skipping schema validation for FCS_SETTER method');
+      console.log(`Schema validation skipped for the ${method} method as it is already handled by fcsSetters.`);
       return;
     }
     if (response === CONSTANTS.NO_RESPONSE) {

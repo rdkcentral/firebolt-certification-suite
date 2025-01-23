@@ -24,6 +24,7 @@ const launchApp = async (value) => {
       if (success) {
         return await setterSuccess(`Launched ${value} successfully!`);
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await setterFailure(`Failed to launch app ${value}`);
       }
     } catch (error) {
@@ -48,13 +49,14 @@ const setAdditionalInfo = async (attribute, value) => {
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response: Response is null or not an object');
       }
-      //Validating the response
+      // Validating the response
       await validateResponse(requestMap, response, setterMethod);
 
       const success = response.hasOwnProperty(CONSTANTS.RESULT);
       if (success) {
         return await setterSuccess(`Successfully set '${attribute}' with value '${value}'!`);
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await setterFailure(`Failed to set '${attribute}' with value '${value}'`);
       }
     } catch (error) {
@@ -90,6 +92,7 @@ const setAudioDescriptions = async (attribute, value) => {
           `Set Audio Description '${attribute}' to '${value}' successfully!`
         );
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await setterFailure(`Failed to set Audio Description '${attribute}' to '${value}'`);
       }
     } catch (error) {
@@ -121,6 +124,7 @@ const setCountryCode = async (value) => {
       if (success) {
         return await setterSuccess(`Set Country Code to '${value}' successfully!`);
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await setterFailure(`Failed to set Country Code to '${value}'`);
       }
     } catch (error) {
@@ -154,6 +158,7 @@ const setClosedCaptions = async (attribute, value) => {
       if (success) {
         return await setterSuccess(`Successfully ${value}d closed captions`);
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await setterFailure(`Unable to set ${value} closed captions`);
       }
     } catch (error) {
@@ -188,6 +193,7 @@ const setDiscoveryPolicy = async (attribute, value) => {
       if (success) {
         return await setterSuccess(`Set '${attribute}' policy to '${value}' successfully!`);
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await setterFailure(`Failed to set '${attribute}' policy to '${value}'`);
       }
     } catch (error) {
@@ -259,6 +265,7 @@ const setLanguage = async (value) => {
       if (success) {
         return await setterSuccess(`Set Language to '${value}' successfully!`);
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await setterFailure(`Failed to set Language to '${value}'`);
       }
     } catch (error) {
@@ -291,6 +298,7 @@ const setLifecycleState = async (value) => {
       if (success) {
         return await setterSuccess(`Set Lifecycle State to '${value}' successfully!`);
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await setterFailure(`Failed to set Lifecycle State to '${value}'`);
       }
     } catch (error) {
@@ -322,6 +330,7 @@ const setLimitAdTracking = async (attribute, value) => {
       if (success) {
         return await setterSuccess(`Set '${attribute}' Tracking to '${value}' successfully!`);
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await setterFailure(`Failed to set '${attribute}' Tracking to '${value}'`);
       }
     } catch (error) {
@@ -353,6 +362,7 @@ const setLocale = async (value) => {
       if (success) {
         return await setterSuccess(`Set Locale to '${value}' successfully!`);
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await setterFailure(`Failed to set Locale to '${value}'`);
       }
     } catch (error) {
@@ -384,6 +394,7 @@ const setPreferredAudioLanguages = async (value) => {
       if (success) {
         return await setterSuccess(`Set Preferred Audio Languages to '${value}' successfully!`);
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await setterFailure(`Failed to set Preferred Audio Languages to '${value}'`);
       }
     } catch (error) {
@@ -429,6 +440,7 @@ const setVoiceGuidance = async (attribute, value) => {
           `Set Voice Guidance attribute '${attribute}' to '${value}' successfully!`
         );
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await setterFailure(
           `Unable to set Voice Guidance attribute '${attribute}' to '${value}'`
         );
@@ -462,6 +474,7 @@ const unloadApp = async (value) => {
       if (success) {
         return await setterSuccess(`Unloaded ${value} successfully!`);
       } else {
+        console.log(`Response from the platform - ${JSON.stringify(response)}`);
         return await ssetterFailure(`Failed to unload ${value} app`);
       }
     } catch (error) {
