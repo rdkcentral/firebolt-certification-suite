@@ -1641,9 +1641,9 @@ Cypress.Commands.add('envConfigSetup', () => {
  * @param {String} exitType - Type of close operation to be performed.
  * @param {String} params - The parameters required to perform the close operation.
  * @example
- * cy.exitAppSession('closeApp',{appId: '', actionType: closeApp)
- * cy.exitAppSession('dismissApp',{keyPressSequence: [], actionType: dismissApp)})
- * cy.exitAppSession('unloadApp',{appId: '', actionType: unloadApp})
+ * cy.exitAppSession('closeApp',{appId: '')
+ * cy.exitAppSession('dismissApp',{keyPressSequence: []})
+ * cy.exitAppSession('unloadApp',{appId: ''})
  */
 Cypress.Commands.add('exitAppSession', (exitType, params) => {
   let exitMethod;
@@ -1677,7 +1677,9 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
 
       break;
     default:
-      fireLog.info(`Session for appId: ${appIdForLog} will not be ended due to invalid exitType`);
+      fireLog.info(
+        `Session for appId: ${appIdForLog} will not be ended due to invalid exitType ${exitType}`
+      );
       fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
   }
   cy.log(`Session for appId: ${appIdForLog} will be ended with type: ${exitType}`);

@@ -413,7 +413,6 @@ Given(
             loggedType = CONSTANTS.LOGGEDOUT;
           }
 
-
           if (
             // Check if keyPressSequence is defined in the runtime environment variables for the specific intent
             !KeyPressSequence &&
@@ -452,7 +451,6 @@ Given(
               `Expected KeyPressSequence was not found for ${appId} in app_metadata.json. More details on app_metadata present in: ${JSON.stringify(appMetadataJSON)}`
             );
           }
-
         }
       } else {
         // when test is Dimiss and scenarioType is not present
@@ -461,25 +459,25 @@ Given(
     }
 
     const params = {};
-
+    let actionType;
     switch (action) {
       case 'dismissed':
         params.keyPressSequence = KeyPressSequence.dismiss;
-        params.actionType = 'dismissApp';
+        actionType = 'dismissApp';
         break;
       case 'closed':
         params.appId = appId;
-        params.actionType = 'closeApp';
+        actionType = 'closeApp';
         break;
       case 'unloaded':
         params.appId = appId;
-        params.actionType = 'unloadApp';
+        actionType = 'unloadApp';
         break;
       default:
         fireLog.error('Invalid action type');
         break;
     }
-    cy.exitAppSession(params.actionType, params).then((response) => {
+    cy.exitAppSession(actionType, params).then((response) => {
       fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
     });
   }
