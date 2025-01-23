@@ -9,7 +9,7 @@ global.setterSuccess = (message = 'Setter Method is success') => {
 
 global.setterFailure = (message, error) => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
-  const errorMessage = `Setter Method fcsSetters.${methodName} ${message || `Setter Method fcs.${methodName} failed`}`;
+  const errorMessage = `Setter Method fcsSetters.${methodName} ${message || `Setter Method fcsSetters.${methodName} failed`}`;
 
   // cy.then() added to handle the errors gracefully
   cy.then(() => {
@@ -24,7 +24,7 @@ global.setterFailure = (message, error) => {
 
 global.setterNotImplemented = (message) => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
-  const userMessage = `Setter Method fcs.${methodName} ${
+  const userMessage = `Setter Method fcsSetters.${methodName} ${
     message || `Setter Method fcsSetters.${methodName} does not have an implementation`
   }`;
   const docLink = `Please see the fcsSetters.${methodName} documentation for implementation details: https://github.com/rdkcentral/firebolt-certification-suite/blob/main/defaultModule/requestModules/fcsSetters.md#${methodName}`;
