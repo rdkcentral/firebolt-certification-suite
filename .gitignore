@@ -15,6 +15,12 @@ cypress/fixtures/external
 # External sdk Resources
 sdkResources/external
 
+# fixtures
+cypress/fixtures
+
+# Testcases
+cypress/TestCases
+
 # Firebolt Calls Test Data
 cypress/fixtures/fireboltCalls/index.js
 
