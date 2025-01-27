@@ -1,3 +1,10 @@
+# [1.7.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.1...v1.7.0-dev.2) (2025-01-27)
+
+
+### Features
+
+* close and unload in dismiss glue code ([#316](https://github.com/rdkcentral/firebolt-certification-suite/issues/316)) ([236ddf6](https://github.com/rdkcentral/firebolt-certification-suite/commit/236ddf6ef19cfcfd3613191f5804e9e7d22c62be))
+
 # [1.7.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0...v1.7.0-dev.1) (2025-01-24)
 
 
