@@ -6,7 +6,7 @@ global.setterSuccess = async (message = 'Setter Method is success') => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
   const params = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_PARAMS);
   const response = { jsonrpc: '2.0', result: null, id: 0 };
-  //Validating the response
+  // Validating the response
   await validateResponse(methodName, params, response);
   console.log(`[${methodName}] ${message}`);
   return response;
@@ -14,7 +14,7 @@ global.setterSuccess = async (message = 'Setter Method is success') => {
 
 global.setterFailure = (message, error) => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
-  const errorMessage = `Setter Method fcsSetters.${methodName} ${message || `Setter Method fcsSetters.${methodName} failed`}`;
+  const errorMessage = `Setter Method ${methodName} ${message || `Setter Method ${methodName} failed`}`;
 
   // cy.then() added to handle the errors gracefully
   cy.then(() => {
@@ -29,13 +29,13 @@ global.setterFailure = (message, error) => {
 
 global.setterNotImplemented = (message) => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
-  const userMessage = `Setter Method fcsSetters.${methodName} ${
-    message || `Setter Method fcsSetters.${methodName} does not have an implementation`
+  const userMessage = `Setter Method ${methodName} ${
+    message || `Setter Method ${methodName} does not have an implementation`
   }`;
-  const docLink = `Please see the fcsSetters.${methodName} documentation for implementation details: https://github.com/rdkcentral/firebolt-certification-suite/blob/main/defaultModule/requestModules/fcsSetters.md#${methodName}`;
-  const errorMessage = `NotSupported :: ${userMessage}\n${docLink}`;
+  const docLink = `Please see the ${methodName} documentation for implementation details: https://github.com/rdkcentral/firebolt-certification-suite/blob/main/defaultModule/requestModules/fcsSetters.md#${methodName}`;
+  const errorMessage = `${userMessage}\n${docLink}`;
   // Return the error message for proper rejection handling
-  return new Error(errorMessage);
+  throw new Error(errorMessage);
 };
 
 /**
