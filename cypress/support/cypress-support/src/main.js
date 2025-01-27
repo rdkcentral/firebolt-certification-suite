@@ -254,9 +254,11 @@ export default function (module) {
     cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
       return new Promise(async (resolve, reject) => {
         const [moduleName, methodName] = requestMap.method.split('.');
-        Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
+        Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, requestMap.method);
+        Cypress.env(CONSTANTS.REQUEST_OVERRIDE_PARAMS, requestMap.params);
         // Check if request is for FCS setters
         if (moduleName === CONSTANTS.FCS_SETTER) {
+          Cypress.env(CONSTANTS.FCS_SETTER_REQUEST_OVERRIDE_METHOD, requestMap.method);
           const method = config.getRequestOverride(moduleName, methodName);
           if (typeof method === 'function') {
             const params = requestMap.params || {};
