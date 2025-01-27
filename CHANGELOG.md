@@ -1,3 +1,10 @@
+# [1.7.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0...v1.7.0-dev.1) (2025-01-24)
+
+
+### Features
+
+* Dismiss implementation for logged in and logged out apps ([#298](https://github.com/rdkcentral/firebolt-certification-suite/issues/298)) ([74cbe76](https://github.com/rdkcentral/firebolt-certification-suite/commit/74cbe7609f3d47d7300acfb07004e65f0b894c4a))
+
 # [1.6.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.5.1...v1.6.0) (2025-01-15)
 
 
