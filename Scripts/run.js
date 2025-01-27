@@ -9,7 +9,6 @@ const params = process.argv.slice(3).join(' ');
 
 const sdkVersionMatch = params.match(/sdkVersion=([^\s,]+)/);
 let sdkVersion = sdkVersionMatch ? sdkVersionMatch[1] : 'latest';
-process.env.sdkVersion = sdkVersion;
 
 if (sdkVersion === 'latest' && process.env.SDK_VERSION_LATEST) {
   sdkVersion = process.env.SDK_VERSION_LATEST;
