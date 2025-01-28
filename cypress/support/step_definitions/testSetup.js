@@ -115,7 +115,7 @@ Given(
           `Following error occurred while trying to fetch device details dynamically: ${error}`
         );
       }
-
+    }
     // Check the marker creation status
     if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS)) {
       const markerCreated = Cypress.env(CONSTANTS.MARKER_CREATION_STATUS);
