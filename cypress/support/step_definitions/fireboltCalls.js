@@ -365,3 +365,189 @@ Given('device is rebooted', () => {
     throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
   });
 });
+
+/**
+ * @module fireboltCalls
+ * @function And 3rd party '(.+)' app is dismissed
+ * @description To dismiss the launched app
+ * @param {String} app - app name.
+ * @example
+ * And 3rd party 'firebolt' app is dismissed
+ */
+Given(
+  /3rd party '(.+)' app(?: '(.+)')? is (dismissed|closed|unloaded)$/,
+  async (appType, appId, action) => {
+    appId = appId ? appId : Cypress.env(CONSTANTS.RUNTIME).appId;
+    let KeyPressSequence;
+    let loggedType;
+
+    const test = Cypress.env(CONSTANTS.TEST_TYPE);
+    const testLowerCase = test.toLowerCase();
+    const scenarioType = Cypress.env(CONSTANTS.SCENARIO_TYPE);
+    const scenarioTypeLowerCase = scenarioType.toLowerCase();
+
+    if (testLowerCase.includes(CONSTANTS.DISMISS)) {
+      if (Cypress.env(CONSTANTS.SCENARIO_TYPE)) {
+        // playback dismiss
+        if (testLowerCase.includes(CONSTANTS.PLAYBACK)) {
+          if (
+            Cypress.env(CONSTANTS.APP_METADATA) &&
+            Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence &&
+            Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.playbackDismiss
+          ) {
+            playbackDismiss = Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence
+              .playbackDismiss;
+            if (playbackDismiss.loggedIn) {
+              KeyPressSequence = playbackDismiss.loggedIn;
+            } else if (playbackDismiss.loggedOut) {
+              KeyPressSequence = playbackDismiss.loggedOut;
+            }
+          }
+        } else {
+          // other dismiss cases
+
+          // check whether app is loggedIn or loggedOut
+          if (scenarioTypeLowerCase.includes(CONSTANTS.LOGGEDIN.toLowerCase())) {
+            loggedType = CONSTANTS.LOGGEDIN;
+          } else if (scenarioTypeLowerCase.includes(CONSTANTS.LOGGEDOUT.toLowerCase())) {
+            loggedType = CONSTANTS.LOGGEDOUT;
+          }
+
+          if (
+            // Check if keyPressSequence is defined in the runtime environment variables for the specific intent
+            !KeyPressSequence &&
+            Cypress.env(CONSTANTS.RUNTIME) &&
+            Cypress.env(CONSTANTS.RUNTIME).intent &&
+            Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence &&
+            Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence[loggedType]
+          ) {
+            KeyPressSequence = Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence[loggedType];
+          } else if (
+            // Check if defaultKeyPressSequence is defined for the specific appId in app_metadata
+            !KeyPressSequence &&
+            Cypress.env(CONSTANTS.APP_METADATA) &&
+            Cypress.env(CONSTANTS.APP_METADATA)[appId] &&
+            Cypress.env(CONSTANTS.APP_METADATA)[appId].defaultKeyPressSequence &&
+            Cypress.env(CONSTANTS.APP_METADATA)[appId].defaultKeyPressSequence[loggedType]
+          ) {
+            KeyPressSequence = Cypress.env(CONSTANTS.APP_METADATA)[appId].defaultKeyPressSequence[
+              loggedType
+            ];
+          } else if (
+            // Check if defaultKeyPressSequence is defined in the app_metadata globally
+            !KeyPressSequence &&
+            Cypress.env(CONSTANTS.APP_METADATA) &&
+            Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence &&
+            Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss &&
+            Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss[loggedType]
+          ) {
+            KeyPressSequence = Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss[
+              loggedType
+            ];
+          } else {
+            // If no keyPressSequence is found, throw an error with details from the app_metadata file
+            const appMetadataJSON = require('../../fixtures/docs/app_metadata.json');
+            throw new Error(
+              `Expected KeyPressSequence was not found for ${appId} in app_metadata.json. More details on app_metadata present in: ${JSON.stringify(appMetadataJSON)}`
+            );
+          }
+        }
+      } else {
+        // when test is Dimiss and scenarioType is not present
+        fireLog.fail('Scenario type is not defined in the runtime environment variables');
+      }
+    }
+
+    const params = {};
+    let actionType;
+    switch (action) {
+      case 'dismissed':
+        params.keyPressSequence = KeyPressSequence.dismiss;
+        actionType = 'dismissApp';
+        break;
+      case 'closed':
+        params.appId = appId;
+        actionType = 'closeApp';
+        break;
+      case 'unloaded':
+        params.appId = appId;
+        actionType = 'unloadApp';
+        break;
+      default:
+        fireLog.error('Invalid action type');
+        break;
+    }
+    cy.exitAppSession(actionType, params).then((response) => {
+      fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
+    });
+  }
+);
+
+/**
+ * @module fireboltCalls
+ * @function And 3rd party '(.+)' app should be exited
+ * @description To validate that the app is dismissed
+ * @param {String} app - app name.
+ * @example
+ * Then 3rd party 'firebolt' app should be exited
+ */
+Given(/3rd party '(.+)' app should be exited$/, async (app) => {
+  // getAppState validation
+  const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
+  const requestMapForGetAppState = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
+    params: appId,
+  };
+  fireLog.info(
+    `Sending request to fetch ${appId} app state: ${JSON.stringify(requestMapForGetAppState)}`
+  );
+  cy.sendMessagetoPlatforms(requestMapForGetAppState)
+    .then((response) => {
+      const responseString = JSON.stringify(response);
+      if (
+        // Check if response exists and contains  the dismissed app's appState, visibilityState of launcher screen
+        // and if the dismissed app's appState is INACTIVE and launcher screen's visibilityState is VISIBLE
+        response &&
+        response.appState &&
+        response.visibilityState &&
+        response.appState.toUpperCase() === CONSTANTS.LIFECYCLE_STATES.INACTIVE &&
+        response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
+      ) {
+        fireLog.info(
+          `State validation successful: Current state of ${appId} app is ${response.appState} and launcher screen's visibility state is ${response.visibilityState} `
+        );
+      } else if (
+        // Check if the dismissed app's appState is missing, and launcher screen's visibilityState is VISIBLE
+        response &&
+        !response.appState &&
+        response.visibilityState &&
+        response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
+      ) {
+        fireLog.info(
+          `State validation successful: ${appId} app is dismissed and launcher screen's visibility state is ${response.visibilityState}`
+        );
+      } else {
+        // Log failure message if none of the above conditions are met
+        fireLog.fail(`${appId} app is not dismissed. Response : ${responseString}`);
+      }
+    })
+    .then(() => {
+      // screenShot validation
+      fireLog.info('Started Screenshot validation');
+      const requestMapForScreenShotValidation = {
+        method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
+        params: {
+          validations: Cypress.env(CONSTANTS.RUNTIME).fireboltCall.screenshot.validations,
+        },
+      };
+      fireLog.info(
+        `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
+      );
+      cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
+        fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
+        if (response.status != 'pass') {
+          fireLog.fail(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
+        }
+      });
+    });
+});

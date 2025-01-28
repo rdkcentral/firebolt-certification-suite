@@ -539,19 +539,6 @@ function getSetupDetails() {
 
 /**
  * @module utils
- * @function isTestTypeChanged
- * @description To check if the test type has changed.
- * @returns {currentTest} - Current test type.
- */
-function isTestTypeChanged(currentTest) {
-  return (
-    getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != currentTest &&
-    getEnvVariable(CONSTANTS.PREVIOUS_TEST_TYPE, false) != undefined
-  );
-}
-
-/**
- * @module utils
  * @function pubSubClientCreation
  * @description Establishing the pubsub connection and subscribing to the response topic.
  * @example
@@ -1001,20 +988,47 @@ global.resolveAtRuntime = function (input) {
           [pattern, functionName] = pattern.split('.');
         }
 
+        let value;
+        // If the input contains '->', Consdering it as an object path and extracting the value from the object
+        if (pattern.includes('->')) {
+          value = extractValueFromObjectPath(pattern);
+        } else {
+          // Reading the pattern content from the runtime environment variable
+          value = runtimeEnv[pattern] !== undefined ? runtimeEnv[pattern] : match;
+        }
         // If a function name is present in the pattern, call the function with pattern content as input.
-        // Reading the pattern content from the runtime environment variable
-        const value = runtimeEnv[pattern] !== undefined ? runtimeEnv[pattern] : match;
         return functionName && functions[functionName] ? functions[functionName](value) : value;
       });
     }
 
+    // Retrieve the value from the object using the path specified by the "->" separator
+    function extractValueFromObjectPath(inputText) {
+      const [objectName, ...pathParts] = inputText.split('->');
+      const jsonPath = pathParts.join('.');
+      const object = runtimeEnv[objectName];
+      if (!object) {
+        throw new Error(`Object "${objectName}" not found in runtime environment.`);
+      }
+      const value = jsonPath.split('.').reduce((acc, key) => acc && acc[key], object);
+      if (value === undefined) {
+        throw new Error(`"${jsonPath}" field not found in "${objectName}" object.`);
+      }
+      return value;
+    }
+
     if (typeof input === CONSTANTS.TYPE_STRING) {
-      // Replace pattern content for each occurrence of "{{" from the runtime environment
-      const resolvedValue = input.includes('{{')
-        ? replacingPatternOccurrenceWithValue(input)
-        : runtimeEnv[input] !== undefined
-          ? runtimeEnv[input]
-          : input;
+      // Replace pattern content for each occurrence of "{{" from the runtime environment variable
+      let resolvedValue;
+      if (input.includes('{{')) {
+        resolvedValue = replacingPatternOccurrenceWithValue(input);
+      } else if (input.includes('->')) {
+        // If the input contains '->', Consdering it as an object path and extracting the value from the object
+        resolvedValue = extractValueFromObjectPath(input);
+      } else if (runtimeEnv[input] !== undefined) {
+        resolvedValue = runtimeEnv[input];
+      } else {
+        resolvedValue = input;
+      }
 
       // Check if the resolvedValue contains any item from the list
       if (
@@ -1211,7 +1225,6 @@ module.exports = {
   lifecycleHistorySchemaValidation,
   assertWithRequirementLogs,
   getSetupDetails,
-  isTestTypeChanged,
   pubSubClientCreation,
   subscribeResults,
   destroyGlobalObjects,
