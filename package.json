@@ -3,9 +3,12 @@
   "version": "1.6.0-dev.5",
   "description": "Firebolt Certification Test Suite",
   "main": "index.js",
+  "config": {
+    "SDK_VERSION_LATEST": "1.4.1"
+  },
   "scripts": {
-    "cy:open": "set SDK_VERSION_LATEST=1.4.1&& node ./Scripts/checkDefaultConfig.js && yarn cache clean && node ./Scripts/run.js open",
-    "cy:run": "set SDK_VERSION_LATEST=1.4.1&& node ./Scripts/checkDefaultConfig.js && yarn cache clean && node ./Scripts/run.js run",
+    "cy:open": "node ./Scripts/checkDefaultConfig.js && yarn cache clean && node ./Scripts/run.js open",
+    "cy:run": "node ./Scripts/checkDefaultConfig.js && yarn cache clean && node ./Scripts/run.js run",
     "softRefresh": "yarn install && yarn upgrade",
     "hardRefresh": "rm -rf node_modules && yarn cache clean && yarn softRefresh",
     "copyCukeReportTemplate": "node ./Scripts/copyCukeReportTemplate.js",

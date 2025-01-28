@@ -2,6 +2,7 @@ const spawn = require('cross-spawn');
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 const path = require('path');
+const packageJson = require('./../package.json');
 
 // Reading first parameter from the scripts to call function
 const functionName = process.argv[2];
@@ -10,8 +11,11 @@ const params = process.argv.slice(3).join(' ');
 const sdkVersionMatch = params.match(/sdkVersion=([^\s,]+)/);
 let sdkVersion = sdkVersionMatch ? sdkVersionMatch[1] : 'latest';
 
-if (sdkVersion === 'latest' && process.env.SDK_VERSION_LATEST) {
-  sdkVersion = process.env.SDK_VERSION_LATEST;
+// Access SDK_VERSION_LATEST from the config
+const sdkVersionLatest = packageJson.config.SDK_VERSION_LATEST;
+// If sdkVersion is 'latest', fallback to the value in package.json config
+if (sdkVersion === 'latest') {
+  sdkVersion = sdkVersionLatest;
 }
 // Creating UUID
 function generateUUID() {
