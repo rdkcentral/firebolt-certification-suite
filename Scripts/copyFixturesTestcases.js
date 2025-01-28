@@ -42,18 +42,29 @@ const configFixturesDir = path.join(
   'fixtures'
 );
 
-copyFiles(sdkTestCasesDir, fcsTestCasesDir);
-const distributorDir = path.join(fcsTestCasesDir, 'Distributor');
-copyFiles(configTestCasesDir, distributorDir);
+deleteDirectory(fcsTestCasesDir);
+if (fs.existsSync(sdkTestCasesDir)) {
+  copyFiles(sdkTestCasesDir, fcsTestCasesDir);
+} else if (fs.existsSync(configTestCasesDir)) {
+  const distributorDir = path.join(fcsTestCasesDir, 'Distributor');
+  copyFiles(configTestCasesDir, distributorDir);
+} else {
+  console.log('Neither sdkResources nor external directory exists for TestCases.');
+}
 
-copyFiles(sdkFixturesDir, fcsFixturesDir);
-const distributorFixturesDir = path.join(fcsFixturesDir, 'external');
-copyFiles(configFixturesDir, distributorFixturesDir);
+deleteDirectory(fcsFixturesDir);
+if (fs.existsSync(sdkFixturesDir)) {
+  copyFiles(sdkFixturesDir, fcsFixturesDir);
+} else if (fs.existsSync(configFixturesDir)) {
+  const distributorFixturesDir = path.join(fcsFixturesDir, 'external');
+  copyFiles(configFixturesDir, distributorFixturesDir);
+} else {
+  console.log('Neither sdkResources nor external directory exists for Fixtures.');
+}
 
 // Function to copy files and directories
 function copyFiles(configDir, externalDir) {
   // Ensure the directory is fresh
-  deleteDirectory(externalDir);
   fs.mkdirSync(externalDir, { recursive: true });
 
   const entries = fs.readdirSync(configDir, { withFileTypes: true });
