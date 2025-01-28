@@ -1,3 +1,10 @@
+# [1.7.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.3...v1.7.0-dev.4) (2025-01-28)
+
+
+### Features
+
+* ReadMe for fcsSetters ([#300](https://github.com/rdkcentral/firebolt-certification-suite/issues/300)) ([7950884](https://github.com/rdkcentral/firebolt-certification-suite/commit/7950884d13d7c078fc0f40a27ac79b92f41c3164))
+
 # [1.7.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.2...v1.7.0-dev.3) (2025-01-28)
 
 
