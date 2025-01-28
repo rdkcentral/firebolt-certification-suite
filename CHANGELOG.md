@@ -1,3 +1,10 @@
+# [1.7.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.2...v1.7.0-dev.3) (2025-01-28)
+
+
+### Bug Fixes
+
+* error handling and null check for source of truth ([#301](https://github.com/rdkcentral/firebolt-certification-suite/issues/301)) ([b4b46ee](https://github.com/rdkcentral/firebolt-certification-suite/commit/b4b46eec055f09993529e7614f6128fa6029a3b0))
+
 # [1.7.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.1...v1.7.0-dev.2) (2025-01-27)
 
 
