@@ -530,11 +530,10 @@ module.exports = {
   FOREGROUND: 'FOREGROUND',
   PERFORMANCE_VALIDATION: 'performanceValidation',
   MARKER_CREATION_STATUS: 'markerCreationStatus',
-  INTERACTION_LOGS_START_TIME: "interactionLogsStartTime",
+  INTERACTION_LOGS_START_TIME: 'interactionLogsStartTime',
   PLAYBACK: 'playback',
   LOGGEDIN: 'loggedIn',
   LOGGEDOUT: 'loggedOut',
-  SCENARIO_TYPE: 'scenarioType',
   DISMISS: 'dismiss',
 };
 function getSanityReportPath() {

@@ -96,12 +96,12 @@ Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0
           });
         } else {
           const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
-          if(envList.length > 0) {
+          if (envList.length > 0) {
             envList.forEach((item) => {
               const envParam = item.split('-')[1];
               params[envParam] = Cypress.env(envParam);
               delete params[item];
-            })
+            });
           }
         }
 

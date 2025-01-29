@@ -137,7 +137,6 @@ Given(
         (item) =>
           typeof item === 'string' && testLowerCase.toLowerCase().includes(item.toLowerCase())
       ) &&
-
       !Cypress.env(CONSTANTS.INTENT_TEMPLATES) &&
       !Cypress.env(CONSTANTS.APP_METADATA)
     ) {
@@ -149,7 +148,6 @@ Given(
     }
   }
 );
-
 
 /**
  * @module TestSetupGlue
@@ -174,7 +172,6 @@ Given(/'(.+)' is (setup|loaded|running) successfully/, async (testName, state) =
   };
   cy.sendMessagetoPlatforms(requestMap);
 });
-
 
 /**
  * @module TestSetupGlue
