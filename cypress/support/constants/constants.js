@@ -529,6 +529,11 @@ module.exports = {
   FOREGROUND: 'FOREGROUND',
   PERFORMANCE_VALIDATION: 'performanceValidation',
   MARKER_CREATION_STATUS: 'markerCreationStatus',
+  PLAYBACK: 'playback',
+  LOGGEDIN: 'loggedIn',
+  LOGGEDOUT: 'loggedOut',
+  SCENARIO_TYPE: 'scenarioType',
+  DISMISS: 'dismiss',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

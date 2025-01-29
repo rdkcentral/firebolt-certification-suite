@@ -1,21 +1,22 @@
 {
   "name": "firebolt-certification-suite",
-  "version": "1.6.0-dev.5",
+  "version": "1.7.0-dev.4",
   "description": "Firebolt Certification Test Suite",
   "main": "index.js",
   "config": {
     "SDK_VERSION_LATEST": "1.4.1"
   },
   "scripts": {
-    "cy:open": "node ./Scripts/checkDefaultConfig.js && yarn cache clean && node ./Scripts/run.js open",
-    "cy:run": "node ./Scripts/checkDefaultConfig.js && yarn cache clean && node ./Scripts/run.js run",
+    "cy:open": "npm run checkDefaultConfig && yarn cache clean && node ./Scripts/run.js open",
+    "cy:run": "npm run checkDefaultConfig && yarn cache clean && node ./Scripts/run.js run",
     "softRefresh": "yarn install && yarn upgrade",
     "hardRefresh": "rm -rf node_modules && yarn cache clean && yarn softRefresh",
+    "checkDefaultConfig": "node ./Scripts/checkDefaultConfig.js",
     "copyCukeReportTemplate": "node ./Scripts/copyCukeReportTemplate.js",
     "copyExternalConfigData": "node ./Scripts/copyExternalConfigData.js",
     "applyDependencyOverrides": "node ./Scripts/applyDependencyOverrides.js",
     "restoreDependencyOverrides": "node ./Scripts/restoreDependencyOverrides.js",
-    "setup": "npm run copyExternalConfigData && npm run applyDependencyOverrides && npm run copyCukeReportTemplate",
+    "setup": "npm run copyExternalConfigData && npm run applyDependencyOverrides && npm run copyCukeReportTemplate && npm run checkDefaultConfig",
     "postinstall": "npm run setup",
     "format": "prettier --write \"**/*.js\"",
     "lint": "eslint .",
