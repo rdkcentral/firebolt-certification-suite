@@ -94,6 +94,27 @@ By default, the project uses a predefined configuration module referred to as th
 
 Once complete, continue following the rest of the [Setup Instructions](#setup).
 
+#### Config Variables
+
+The Firebolt Certification Suite (FCS) uses configuration variables to manage the behavior of the suite during runtime. These variables are defined in the `package.json`.
+
+##### SDK Version
+- **Variable Name**: `SDK_VERSION_LATEST`
+- **Purpose**: Specifies the SDK version that FCS should use during tests.
+- **Default Value**: `"1.4.1"`
+- **Location**: Defined in `package.json` under the `config` section.
+
+#### Example:
+
+In the `package.json` file, you will find the following entry:
+
+```json
+"config": {
+  "SDK_VERSION_LATEST": "1.4.1"
+}
+```
+**Note:** It is recommended that this value **not** be modified unless necessary for a specific SDK version.
+
 ## Execution
 
 Following are the supported runtime environments -

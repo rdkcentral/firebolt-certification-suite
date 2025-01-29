@@ -18,7 +18,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const sdkVersion = process.env.sdkVersion || 'latest';
+const sdkVersion = process.env.sdkVersion;
 
 const fcsTestCasesDir = path.join(__dirname, '..', 'cypress', 'TestCases');
 const sdkTestCasesDir = path.join(__dirname, '..', 'sdkResources', sdkVersion, 'TestCases');
@@ -49,7 +49,9 @@ if (fs.existsSync(sdkTestCasesDir)) {
   const distributorDir = path.join(fcsTestCasesDir, 'Distributor');
   copyFiles(configTestCasesDir, distributorDir);
 } else {
-  console.log('Neither sdkResources nor external directory exists for TestCases.');
+  console.log(
+    `No TestCases found for sdkVersion '${sdkVersion}' in either sdkResources or external directory`
+  );
 }
 
 deleteDirectory(fcsFixturesDir);
@@ -59,7 +61,9 @@ if (fs.existsSync(sdkFixturesDir)) {
   const distributorFixturesDir = path.join(fcsFixturesDir, 'external');
   copyFiles(configFixturesDir, distributorFixturesDir);
 } else {
-  console.log('Neither sdkResources nor external directory exists for Fixtures.');
+  console.log(
+    `No Fixtures found for sdkVersion '${sdkVersion}' in either sdkResources or external directory`
+  );
 }
 
 // Function to copy files and directories

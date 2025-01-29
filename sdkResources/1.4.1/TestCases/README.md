@@ -4,7 +4,7 @@ Feature files for Firebolt Certification Modules.
 
 ## Setup
 
-Refer [setup instructions](../../README.md#setup) to complete the required setup and execute test cases against any platform.
+Refer [setup instructions](../../../README.md#setup) to complete the required setup and execute test cases against any platform.
 
 ## General Instruction
 

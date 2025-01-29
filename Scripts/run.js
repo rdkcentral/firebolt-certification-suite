@@ -8,15 +8,55 @@ const packageJson = require('./../package.json');
 const functionName = process.argv[2];
 const params = process.argv.slice(3).join(' ');
 
-const sdkVersionMatch = params.match(/sdkVersion=([^\s,]+)/);
-let sdkVersion = sdkVersionMatch ? sdkVersionMatch[1] : 'latest';
-
-// Access SDK_VERSION_LATEST from the config
-const sdkVersionLatest = packageJson.config.SDK_VERSION_LATEST;
-// If sdkVersion is 'latest', fallback to the value in package.json config
-if (sdkVersion === 'latest') {
-  sdkVersion = sdkVersionLatest;
+// Helper function to load config module's package.json
+function loadConfigPackageJson() {
+  try {
+    const configPackageJsonPath = path.resolve(
+      __dirname,
+      '..',
+      'node_modules',
+      'configModule',
+      'package.json'
+    );
+    const configPackageJson = require(configPackageJsonPath);
+    return configPackageJson.config?.supportedSDKVersion || null;
+  } catch (err) {
+    console.error("Could not load config module's package.json:", err);
+    return null;
+  }
 }
+
+// Determine sdkVersion
+function determineSdkVersion() {
+  // 1. If sdkVersion is passed in CLI, prioritize it.
+  const sdkVersionMatch = params.match(/sdkVersion=([^\s,]+)/);
+  if (sdkVersionMatch) {
+    const sdkVersionFromCLI = sdkVersionMatch[1];
+    if (sdkVersionFromCLI === 'latest') {
+      console.log(
+        `'sdkVersion=latest' passed in CLI, using sdkVersion from FCS package.json: ${packageJson.config.SDK_VERSION_LATEST}`
+      );
+      return packageJson.config.SDK_VERSION_LATEST; // Use FCS package.json version
+    }
+    console.log(`Using sdkVersion from CLI: ${sdkVersionFromCLI}`);
+    return sdkVersionFromCLI;
+  }
+
+  // 2. Check config module's package.json for supportedSDKVersion
+  const sdkVersionFromConfig = loadConfigPackageJson();
+  if (sdkVersionFromConfig) {
+    console.log(`Using sdkVersion from config module: ${sdkVersionFromConfig}`);
+    return sdkVersionFromConfig;
+  }
+
+  // 3. Fallback to FCS package.json (SDK_VERSION_LATEST)
+  console.log(`Using sdkVersion from FCS package.json: ${packageJson.config.SDK_VERSION_LATEST}`);
+  return packageJson.config.SDK_VERSION_LATEST;
+}
+
+// Get sdkVersion
+const sdkVersion = determineSdkVersion();
+
 // Creating UUID
 function generateUUID() {
   return uuidv4();
