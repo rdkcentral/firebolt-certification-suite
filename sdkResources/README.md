@@ -30,7 +30,7 @@ The suite checks the package.json of the configModule (inside node_modules) for 
     - `sdkResources/<version>` or
     - `sdkResources/external/<version>` (whichever is available).
 
-- **If neither a CLI SDK version nor a supported version in the configModule is provided:** The suite defaults to using the `SDK_VERSION_LATEST` version defined in FCS’s `package.json` (currently 1.4.1), and the corresponding test cases and fixtures will be copied from: 
+- **If neither a CLI SDK version nor a supported version in the configModule is provided:** The suite defaults to using the `supportedSDKVersion` version defined in FCS’s `package.json` (currently 1.4.1), and the corresponding test cases and fixtures will be copied from: 
     - `sdkResources/<version>` or
     - `sdkResources/external/<version>` (whichever is available).
 
@@ -82,6 +82,6 @@ Here’s an example to illustrate the flow of resource copying:
 
 - **Scenario 3:** No version is passed via CLI, and no version is found in the config. 
 
-    The suite will default to `SDK_VERSION_LATEST` from the `FCS/package.json`, which is currently 1.4.1. Resources from `sdkResources/1.4.1` and/or sdkResources/external/1.4.1 will be copied to cypress/fixtures and cypress/TestCases.
+    The suite will default to `supportedSDKVersion ` from the `FCS/package.json`, which is currently 1.4.1. Resources from `sdkResources/1.4.1` and/or sdkResources/external/1.4.1 will be copied to cypress/fixtures and cypress/TestCases.
 
 **Note:** It will look for the version in both directories and copy whichever is available (either from the direct version folder or the external folder). If the version is found in both locations, it will copy resources from both.

@@ -34,9 +34,9 @@ function determineSdkVersion() {
     const sdkVersionFromCLI = sdkVersionMatch[1];
     if (sdkVersionFromCLI === 'latest') {
       console.log(
-        `'sdkVersion=latest' passed in CLI, using sdkVersion from FCS package.json: ${packageJson.config.SDK_VERSION_LATEST}`
+        `'sdkVersion=latest' passed in CLI, using sdkVersion from FCS package.json: ${packageJson.config.supportedSDKVersion}`
       );
-      return packageJson.config.SDK_VERSION_LATEST; // Use FCS package.json version
+      return packageJson.config.supportedSDKVersion; // Use FCS package.json version
     }
     console.log(`Using sdkVersion from CLI: ${sdkVersionFromCLI}`);
     return sdkVersionFromCLI;
@@ -49,9 +49,9 @@ function determineSdkVersion() {
     return sdkVersionFromConfig;
   }
 
-  // 3. Fallback to FCS package.json (SDK_VERSION_LATEST)
-  console.log(`Using sdkVersion from FCS package.json: ${packageJson.config.SDK_VERSION_LATEST}`);
-  return packageJson.config.SDK_VERSION_LATEST;
+  // 3. Fallback to FCS package.json (supportedSDKVersion )
+  console.log(`Using sdkVersion from FCS package.json: ${packageJson.config.supportedSDKVersion}`);
+  return packageJson.config.supportedSDKVersion;
 }
 
 // Get sdkVersion
