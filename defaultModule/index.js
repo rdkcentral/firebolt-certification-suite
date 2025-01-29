@@ -20,7 +20,7 @@ const responseModules = require('./responseModules/index');
 const intentAddons = require('./intentAddons/index');
 const appTransport = require('./appTransport/index');
 const cypressAddons = require('./cypress/index');
-const externalTransport = require('./transportLayers/index');
+const externalTransport = require('./transportLayer/index');
 
 exports.requestModules = requestModules;
 exports.responseModules = responseModules;

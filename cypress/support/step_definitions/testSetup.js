@@ -33,10 +33,10 @@ const { _ } = Cypress;
  * Given the environment has been set up for 'Firebolt Sanity' tests for 'sample scenario type'
  */
 Given(
-  /^the environment has been set up for '([^']+)' tests(?: for '([^']+)')?$/,
-  async (test, scenarioType) => {
-    const runtime = {};
+  /^the environment has been set up for '([^']+)' tests(?: (for|with) '([^']+)')?$/,
 
+  async (test, type, scenarioType) => {
+    const runtime = {};
     // Check if the test parameter is provided
     if (test) {
       let fireboltCallKey;
@@ -94,25 +94,29 @@ Given(
         Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
       }
       // fetch device details dynamically
-      if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
-        if (
-          UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES).includes(
-            Cypress.env(CONSTANTS.TEST_TYPE)
-          )
-        ) {
-          cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-            (response) => {
-              if (response) {
-                const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
-                const requestMap = {
-                  method: method,
-                  params: response,
-                };
-                cy.sendMessagetoPlatforms(requestMap);
+      try {
+        if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
+          const dynamicModules = UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES);
+          const testType = Cypress.env(CONSTANTS.TEST_TYPE);
+          if (dynamicModules && dynamicModules.includes(testType)) {
+            cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
+              (response) => {
+                if (response) {
+                  const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
+                  const requestMap = {
+                    method: method,
+                    params: response,
+                  };
+                  cy.sendMessagetoPlatforms(requestMap);
+                }
               }
-            }
-          );
+            );
+          }
         }
+      } catch (error) {
+        cy.log(
+          `Following error occurred while trying to fetch device details dynamically: ${error}`
+        );
       }
     }
     // Check the marker creation status
@@ -125,8 +129,15 @@ Given(
       }
     }
 
+    const testLowerCase = test.toLowerCase();
+    const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
+
     if (
-      Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(test) &&
+      externalModuleTestTypes.some(
+        (item) =>
+          typeof item === 'string' && testLowerCase.toLowerCase().includes(item.toLowerCase())
+      ) &&
+
       !Cypress.env(CONSTANTS.INTENT_TEMPLATES) &&
       !Cypress.env(CONSTANTS.APP_METADATA)
     ) {
@@ -138,6 +149,7 @@ Given(
     }
   }
 );
+
 
 /**
  * @module TestSetupGlue
@@ -162,6 +174,7 @@ Given(/'(.+)' is (setup|loaded|running) successfully/, async (testName, state) =
   };
   cy.sendMessagetoPlatforms(requestMap);
 });
+
 
 /**
  * @module TestSetupGlue
