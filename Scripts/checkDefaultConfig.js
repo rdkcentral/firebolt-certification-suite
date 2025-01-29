@@ -65,7 +65,6 @@ const ensureConfigModule = async () => {
 
         const defaultIndexExists = await fs.pathExists(defaultIndexPath);
         const targetIndexExists = await fs.pathExists(targetIndexPath);
-
         if (defaultIndexExists) {
           const defaultContent = await fs.readFile(defaultIndexPath, 'utf8');
           const targetContent = targetIndexExists ? await fs.readFile(targetIndexPath, 'utf8') : '';
@@ -73,39 +72,43 @@ const ensureConfigModule = async () => {
           // Regular expression to remove comments (single-line and multi-line)
           const commentRegex = /\/\/.*|\/\*[\s\S]*?\*\//g;
 
-          // Remove comments from default content
-          const cleanedDefaultContent = defaultContent.replace(commentRegex, '');
+          // Clean and split the content into lines
+          const cleanAndSplit = (content) =>
+            content
+              .replace(commentRegex, '')
+              .trim()
+              .split('\n')
+              .map((line) => line.trim())
+              .filter(Boolean);
 
-          const targetLines = targetContent
-            .split('\n')
-            .map((line) => line.trim())
-            .filter((line) => line);
-          const defaultLines = cleanedDefaultContent
-            .split('\n')
-            .map((line) => line.trim())
-            .filter((line) => line);
+          const targetLines = cleanAndSplit(targetContent);
+          const defaultLines = cleanAndSplit(defaultContent);
 
-          // Create a Set of keys from the target content
+          // Extract variable names from lines
+          const extractVariableName = (line) =>
+            line
+              .replace(/^(var|let|const)\s+/, '')
+              .split('=')[0]
+              .trim();
+
+          // Create a Set of variable names from the target content
           const targetKeys = new Set(
-            targetLines
-              .filter((line) => line.includes('='))
-              .map((line) => line.split('=')[0].trim())
+            targetLines.filter((line) => /=/.test(line)).map(extractVariableName)
           );
 
-          // Merge default lines only if the key does not exist in the target
+          // Add default lines only if the variable name does not exist in the target
           const mergedLines = [...targetLines];
-          for (const line of defaultLines) {
-            if (line.includes('=')) {
-              const key = line.split('=')[0].trim();
-              if (!targetKeys.has(key)) {
+          defaultLines.forEach((line) => {
+            if (/=/.test(line)) {
+              const variableName = extractVariableName(line);
+              if (!targetKeys.has(variableName)) {
                 mergedLines.push(line);
               }
             }
-          }
+          });
 
-          // Join merged lines and write back to target index.js
-          const mergedContent = mergedLines.join('\n');
-          await fs.writeFile(targetIndexPath, mergedContent, 'utf8');
+          // Write merged content back to target index.js
+          await fs.writeFile(targetIndexPath, mergedLines.join('\n'), 'utf8');
           console.log(
             `Merged 'index.js' content from defaultModule/requestModule to configModule/requestModule.`
           );

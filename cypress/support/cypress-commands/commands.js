@@ -1209,6 +1209,12 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
       fireLog.assert(false, `Invalid ${target} target, it should be either app or platfrom`);
     }
   }).then((response) => {
+    if (method.startsWith(CONSTANTS.FCS_SETTER)) {
+      console.log(
+        `Schema validation skipped for the ${method} method as it is already handled by fcsSetters.`
+      );
+      return;
+    }
     if (response === CONSTANTS.NO_RESPONSE) {
       assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
     }
