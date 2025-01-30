@@ -1,3 +1,10 @@
+# [1.7.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.4...v1.7.0-dev.5) (2025-01-29)
+
+
+### Features
+
+* Added Implementation for FcsSetter ([#315](https://github.com/rdkcentral/firebolt-certification-suite/issues/315)) ([542de03](https://github.com/rdkcentral/firebolt-certification-suite/commit/542de03ca11a8ce28882c00965dc2c18573708fe))
+
 # [1.7.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.3...v1.7.0-dev.4) (2025-01-28)
 
 
