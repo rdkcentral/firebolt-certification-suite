@@ -34,7 +34,7 @@ global.setterNotImplemented = (message) => {
     : `Setter Method ${methodName} does not have an implementation`;
   const docLink = `Please see the ${methodName} documentation for implementation details: https://github.com/rdkcentral/firebolt-certification-suite/blob/main/defaultModule/requestModules/fcsSetters.md#${methodName}`;
   const errorMessage = `${userMessage}\n${docLink}`;
-  // Ensure message appears in the Cucumber report
+  // Ensure error message appears in the Cucumber report
   cy.log(errorMessage);
   // Allow the log to complete before failing the test
   cy.wrap(null).then(() => {
