@@ -1,19 +1,19 @@
 # sdkResources
-The sdkResources directory in the Firebolt Certification Suite (FCS) contains version-specific test cases and fixtures for multiple SDK versions. These resources are organized in subfolders for each SDK version (e.g., /1.4.1, /1.3.1), and they are used during test execution.
+The sdkResources directory in the Firebolt Certification Suite (FCS) contains version-specific test cases and fixtures for multiple SDK versions. These resources are organized in subfolders for each SDK version (e.g., /1.4.1, /1.3.0), and they are used during test execution.
 
 ## Directory Structure
 - **Initial Structure (after cloning):** When you first clone the repository, the `sdkResources` directory will contain subfolders for each SDK version.
   ```bash 
   sdkResources
     ├── 1.4.1
-    ├── 1.3.1
+    ├── 1.3.0
     ├── 0.8.1
     ...
-- **After Installing Dependencies:**  Once dependencies are installed (yarn install), the test cases and fixtures for all SDK versions from the configModule are copied into FCS’s `sdkResources/external/ `directory.
+- **After Installing Dependencies:**  Once dependencies are installed (yarn install), the test cases and fixtures for all SDK versions from the configModule are copied into FCS’s `sdkResources/external/` directory.
   ```bash
   sdkResources
     ├── 1.4.1
-    ├── 1.3.1
+    ├── 1.3.0
     ├── 0.8.1
     ├── external
         ├── 1.4.1
@@ -56,10 +56,10 @@ Example of copied folder structure:
     |   |    ├── Distributor/          # Contains external test cases (populated during execution)
     ├── sdkResources/                  # Contains versioned SDK resources (test cases & fixtures)
     │   ├── 1.4.1/                     # SDK resources for version 1.4.1
-    │   ├── 1.3.1/                     # SDK resources for version 1.3.1
+    │   ├── 1.3.0/                     # SDK resources for version 1.3.0
     │   ├── external/                  # External SDK resources (test cases & fixtures)
     │   │   ├── 1.4.1/                 # External resources for version 1.4.1
-    │   │   └── 1.3.1/                 # External resources for version 1.3.1
+    │   │   └── 1.3.0/                 # External resources for version 1.3.0
     
 ```
 ## Important Guidelines
@@ -72,8 +72,8 @@ Here’s an example to illustrate the flow of resource copying:
 
 - **Scenario 1:** You pass an SDK version in the CLI:
 
-    Command: `cy:run --env sdkVersion=1.3.1`
-    The test suite will use version 1.3.1. Resources will be copied from `sdkResources/1.3.1` and/or `sdkResources/external/1.3.1`  to cypress/ directories.
+    Command: `cy:run --env sdkVersion=1.3.0`
+    The test suite will use version 1.3.0. Resources will be copied from `sdkResources/1.3.0` and/or `sdkResources/external/1.3.0`  to cypress/ directories.
     
 - **Scenario 2:** No SDK version is passed in the CLI, but a version is defined in the config:
 

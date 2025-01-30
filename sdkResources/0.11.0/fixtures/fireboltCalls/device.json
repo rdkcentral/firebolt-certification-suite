@@ -1,0 +1,115 @@
+{
+    "INVALID_REQUEST_FOR_DEVICE_MODEL": {
+        "method": "device.model",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "SET_DEVICE_NAME_TO_LIVING_HALL": {
+        "method": "manage_device.setName",
+        "params": "Living hall"
+    },
+    "GET_DEVICE_NAME": {
+        "method": "device.name"
+    },
+    "LIVING_HALL_FOR_DEVICE_NAME": {
+        "method": "device.name",
+        "validationJsonPath": "result",
+        "content": "Living hall",
+        "expectingError": false
+    },
+    "ONDEVICENAMECHANGED_WITH_LIVING_HALL": {
+        "event": "device.onNameChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "Living hall",
+        "expectingError": false
+    },
+    "SET_DEVICE_NAME_TO_BEDROOM": {
+        "method": "manage_device.setName",
+        "params": "Bedroom"
+    },
+    "GET_MANAGE_DEVICE_NAME": {
+        "method": "manage_device.name"
+    },
+    "BEDROOM_FOR_DEVICE_NAME": {
+        "method": "device.name",
+        "validationJsonPath": "result",
+        "content": "DEVICE_BEDROOM_NAME"
+    },
+    "ONNAMECHANGED_FOR_DEVICE_WITH_BEDROOM": {
+        "event": "device.onNameChanged",
+        "validationJsonPath": "eventResponse",
+        "content": "DEVICE_BEDROOM_NAME"
+    },
+    "DEFAULT_VALUES_FOR_DEVICE_PROVISION": {
+        "method": "device.provision",
+        "validationJsonPath": "result",
+        "content": "DEVICE_PROVISION_DEFAULT_CONTENT"
+    },
+    "EXPECT_ERROR_FOR_DEVICE_DISTRIBUTOR": {
+        "method": "device.distributor",
+        "expected": "error"
+    },
+    "GET_DEVICE_PROVISION_DISTRIBUTOR_ID": {
+        "method": "device.distributor",
+        "validationJsonPath": "result",
+        "content": "DEVICE_DISTRIBUTOR"
+    },
+    "SET_DEVICE_NAME_WITH_INTEGER": {
+        "method": "manage_device.setName",
+        "params": "INTEGER123",
+        "expected": "error"
+    },
+    "SET_DEVICE_NAME_WITH_BOOLEAN": {
+        "method": "manage_device.setName",
+        "params": "TRUE",
+        "expected": "error"
+    },
+    "INVALID_PARAMETERS_FOR_DEVICE": {
+        "method": "device.setName",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_REQUEST_FOR_DEVICE_DISTRIBUTOR": {
+        "method": "device.distributor",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "SET_DEVICE_NAME_WITHOUT_PARAMETERS": {
+        "method": "manage_device.setName"
+    },
+    "EXPECTED_DEVICE_NAME": {
+        "method": "device.setName",
+        "validationJsonPath": "result",
+        "content": "Bedroom",
+        "expectingError": false
+    },
+    "INVALID_REQUEST_FOR_DEVICE_NAME": {
+        "method": "device.name",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "EXPECT_ERROR_FOR_DEVICE_ID": {
+        "method": "device.id",
+        "expected": "error"
+    },
+    "INVALID_REQUEST_FOR_DEVICE_ID": {
+        "method": "device.id",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "EXPECT_ERROR_FOR_DEVICE_MODEL": {
+        "method": "device.model",
+        "expected": "error"
+    },
+    "EXPECTED_VALUE_FOR_DEVICE_NAME": {
+        "method": "device.name",
+        "validationJsonPath": "result",
+        "content": "Living hall",
+        "expectingError": false
+    }
+}
