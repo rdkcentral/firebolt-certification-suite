@@ -200,7 +200,7 @@ export default class Config {
     if (typeof fireboltResponse === 'string') {
       fireboltResponse = fireboltResponse.replace(/\r?\n|\s{3,}/g, '');
     }
-  // If we've gotten to this point, we have a config override. Call it and return its response
+    // If we've gotten to this point, we have a config override. Call it and return its response
     return methodConfig(fireboltResponse);
   }
 }
