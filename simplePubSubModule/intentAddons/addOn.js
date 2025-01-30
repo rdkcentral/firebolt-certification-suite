@@ -16,29 +16,33 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-
 /**
-* @module addon
-* @function launchApp
-* @description Function to add additional details(Ex: platform specific) for the passed message.
-* @example
-* @request launchApp()
-* @returns
-*/
+ * @module addon
+ * @function launchApp
+ * @description Function to add additional details(Ex: platform specific) for the passed message.
+ * @example
+ * @request launchApp()
+ * @returns
+ */
 
 function launchApp(message) {
-    if(message.params && message.params.intent && message.params.intent.data && message.params.intent.data.query) {
-        let queryModifier = JSON.parse(message.params.intent.data.query)
-        console.log("query Modifier"+JSON.stringify(queryModifier))
-         if (queryModifier.params) {
-            queryModifier.params['testtoken'] = Cypress.env("testToken")
-            queryModifier.params['macaddress'] = Cypress.env("deviceMac");
-            message.params.intent.data.query = JSON.stringify(queryModifier);
-        } else {
-            console.log("params property is missing in the queryModifier object");
-        }
+  if (
+    message.params &&
+    message.params.intent &&
+    message.params.intent.data &&
+    message.params.intent.data.query
+  ) {
+    let queryModifier = JSON.parse(message.params.intent.data.query);
+    console.log('query Modifier' + JSON.stringify(queryModifier));
+    if (queryModifier.params) {
+      queryModifier.params['testtoken'] = Cypress.env('testToken');
+      queryModifier.params['macaddress'] = Cypress.env('deviceMac');
+      message.params.intent.data.query = JSON.stringify(queryModifier);
+    } else {
+      console.log('params property is missing in the queryModifier object');
     }
-    return message
+  }
+  return message;
 }
 
-export { launchApp }
+export { launchApp };
