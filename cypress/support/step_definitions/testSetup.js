@@ -27,15 +27,16 @@ const { _ } = Cypress;
  * @function Given the environment has been set up for {string} tests
  * @description Sets up the environment for the specified test.
  * @param {String} test - The name of the test.
+ * @param {String} scenarioType - The name of the scenario which is optional.
  * @example
  * Given the environment has been set up for 'Firebolt Sanity' tests
+ * Given the environment has been set up for 'Firebolt Sanity' tests for 'sample scenario type'
  */
 Given(
   /^the environment has been set up for '([^']+)' tests(?: (for|with) '([^']+)')?$/,
 
   async (test, type, scenarioType) => {
     const runtime = {};
-
     // Check if the test parameter is provided
     if (test) {
       let fireboltCallKey;
@@ -60,6 +61,7 @@ Given(
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
+    Cypress.env('detailed', false);
 
     if (
       UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
@@ -125,6 +127,7 @@ Given(
         fireLog.fail('Marker creation failed');
       }
     }
+
     const testLowerCase = test.toLowerCase();
     const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
 
@@ -144,6 +147,30 @@ Given(
     }
   }
 );
+
+/**
+ * @module TestSetupGlue
+ * @function Given '(.+)' is '(setupsetup|loaded|running)' successfully
+ * @description
+ * @param {String} testName - The name of the test.
+ * @param {String} state - The state of the test.
+ * @example
+ * Given 'app' is setup|loaded|running successfully
+ */
+Given(/'(.+)' is (setup|loaded|running) successfully/, async (testName, state) => {
+  Cypress.env('detailed', true);
+
+  const requestMap = {
+    method: 'fcs.validateInitializeIntPlayer',
+    params: {
+      appId: Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID),
+      scenarioType: Cypress.env(CONSTANTS.SCENARIO_TYPE),
+      detailed: Cypress.env('detailed'),
+      certification: Cypress.env(CONSTANTS.CERTIFICATION),
+    },
+  };
+  cy.sendMessagetoPlatforms(requestMap);
+});
 
 /**
  * @module TestSetupGlue
