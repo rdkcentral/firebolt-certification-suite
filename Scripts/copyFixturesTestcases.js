@@ -42,25 +42,31 @@ const configFixturesDir = path.join(
   'fixtures'
 );
 
+// Clear existing directories
 deleteDirectory(fcsTestCasesDir);
+deleteDirectory(fcsFixturesDir);
+
+// Copy TestCases
 if (fs.existsSync(sdkTestCasesDir)) {
   copyFiles(sdkTestCasesDir, fcsTestCasesDir);
-} else if (fs.existsSync(configTestCasesDir)) {
-  const distributorDir = path.join(fcsTestCasesDir, 'Distributor');
-  copyFiles(configTestCasesDir, distributorDir);
-} else {
+}
+if (fs.existsSync(configTestCasesDir)) {
+  const distributorTestCasesDir = path.join(fcsTestCasesDir, 'Distributor');
+  copyFiles(configTestCasesDir, distributorTestCasesDir);
+} else if (!fs.existsSync(sdkTestCasesDir)) {
   console.log(
     `No TestCases found for sdkVersion '${sdkVersion}' in either sdkResources or external directory`
   );
 }
 
-deleteDirectory(fcsFixturesDir);
+// Copy Fixtures
 if (fs.existsSync(sdkFixturesDir)) {
   copyFiles(sdkFixturesDir, fcsFixturesDir);
-} else if (fs.existsSync(configFixturesDir)) {
+}
+if (fs.existsSync(configFixturesDir)) {
   const distributorFixturesDir = path.join(fcsFixturesDir, 'external');
   copyFiles(configFixturesDir, distributorFixturesDir);
-} else {
+} else if (!fs.existsSync(sdkFixturesDir)) {
   console.log(
     `No Fixtures found for sdkVersion '${sdkVersion}' in either sdkResources or external directory`
   );

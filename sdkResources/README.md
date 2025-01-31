@@ -1,6 +1,9 @@
 # sdkResources
 The sdkResources directory in the Firebolt Certification Suite (FCS) contains version-specific test cases and fixtures for multiple SDK versions. These resources are organized in subfolders for each SDK version (e.g., /1.4.1, /1.3.0), and they are used during test execution.
 
+## Flowchart of folder structure and resource copying process
+![alt text](sdkResources_flowDiagram.png)
+
 ## Directory Structure
 - **Initial Structure (after cloning):** When you first clone the repository, the `sdkResources` directory will contain subfolders for each SDK version.
   ```bash 
@@ -17,7 +20,8 @@ The sdkResources directory in the Firebolt Certification Suite (FCS) contains ve
     ├── 0.8.1
     ├── external
         ├── 1.4.1
-        ├── 0.8.1   
+        ├── 0.8.1  
+
 ## Test Execution
 When you run tests using `cy:run or cy:open`, the script will dynamically copy the test case and fixture files from `sdkResources` to `cypress/fixtures` and `cypress/TestCases`.
 
@@ -65,7 +69,7 @@ Example of copied folder structure:
 ## Important Guidelines
 - The contents of the `cypress/fixtures` and `cypress/TestCases` directories **should not be edited** directly, as they will be **overwritten** and **deleted** each time tests are executed.
 - These directories are repopulated dynamically based on the SDK version selected (either passed via CLI or defaulted in the configuration).
-- You can edit files inside the `sdkResources` directory to update or modify test cases and fixtures for a specific SDK version. However, any changes made directly in the `cypress/fixtures` and c`ypress/TestCases` folders will be lost during the next test execution.
+- You can edit files inside the `sdkResources` directory to update or modify test cases and fixtures for a specific SDK version. However, any changes made directly in the `cypress/fixtures` and `cypress/TestCases` folders will be lost during the next test execution.
 
 ## Example Flow
 Here’s an example to illustrate the flow of resource copying:
