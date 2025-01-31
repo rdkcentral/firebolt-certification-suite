@@ -362,7 +362,7 @@ function isScenarioExempted(method, param) {
   if (!exceptionMethods) {
     return false;
   }
-  
+
   for (const [type, list] of Object.entries(exceptionMethods)) {
     // Looking for the method and params in each list, if matched returning that exception method.
     methodInExceptionList = list.find((object) => {
