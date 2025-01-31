@@ -47,8 +47,6 @@ const ensureConfigModule = async () => {
         console.log(`Default subdirectory '${dir}' created.`);
       } else if (dir === 'requestModules') {
         // Special handling for requestModule to look for missing setter files.
-
-// ----------- New code for specific copying files ------------
         const settersFile = 'fcsSetters.js';
         const settersReadMe = 'fcsSetters.md';
         const settersExample = 'fcsSetters_firebolt.js';
@@ -77,93 +75,6 @@ const ensureConfigModule = async () => {
             }
           }
         }
-
-// ----------- Old code for copying files ------------
-//        const defaultFiles = await fs.readdir(defaultSubDirPath);
-//
-//        for (const file of defaultFiles) {
-//          const defaultFilePath = path.join(defaultSubDirPath, file);
-//          const targetFilePath = path.join(targetSubDirPath, file);
-//
-//          const fileExists = await fs.pathExists(targetFilePath);
-//          if (!fileExists && file.startsWith('fcsSetters')) {
-//            await fs.copy(defaultFilePath, targetFilePath);
-//            console.log(`Copied '${file}' to 'requestModule'.`);
-//          }
-//        }
-//
-//        const defaultIndexPath = path.join(defaultSubDirPath, 'index.js');
-//        const targetIndexPath = path.join(targetSubDirPath, 'index.js');
-//
-//        const defaultIndexExists = await fs.pathExists(defaultIndexPath);
-//        const targetIndexExists = await fs.pathExists(targetIndexPath);
-
-// ----------- New code for merging index.js files (more questionable solution) ------------
-//        // Check if index.js exists in both defaultModule and configModule
-//        // If it exists in configModule, append fcsSetters import and export statements to it.
-//        if (targetIndexExists) {
-//            // Append import and export to target index file
-//            const appendContent = `\nconst fcsSetters = require('./fcsSetters');\nexports.fcsSetters = fcsSetters;\n`;
-//            await fs.appendFile(targetIndexPath, appendContent);
-//        } else if (defaultIndexExists) {
-//            // does this situation make sense?
-//            // This means there was a requestModule folder in configModule but no index.js file.
-//            // And copying the whole index.js file means we are including discovery.js and fcs.js as well which may or may not actually be there.
-//            // Should/can we just assume if configModule/requestModules exists, then index.js should exist as well?
-//
-//            // Copy default index file to target location
-//            await fs.copy(defaultIndexPath, targetIndexPath);
-//        }
-
-// ----------- Old code for merging index.js files ------------
-//        if (defaultIndexExists) {
-//          const defaultContent = await fs.readFile(defaultIndexPath, 'utf8');
-//          const targetContent = targetIndexExists ? await fs.readFile(targetIndexPath, 'utf8') : '';
-//
-//          // Regular expression to remove comments (single-line and multi-line)
-//          const commentRegex = /\/\/.*|\/\*[\s\S]*?\*\//g;
-//
-//          // Clean and split the content into lines
-//          const cleanAndSplit = (content) =>
-//            content
-//              .replace(commentRegex, '')
-//              .trim()
-//              .split('\n')
-//              .map((line) => line.trim())
-//              .filter(Boolean);
-//
-//          const targetLines = cleanAndSplit(targetContent);
-//          const defaultLines = cleanAndSplit(defaultContent);
-//
-//          // Extract variable names from lines
-//          const extractVariableName = (line) =>
-//            line
-//              .replace(/^(var|let|const)\s+/, '')
-//              .split('=')[0]
-//              .trim();
-//
-//          // Create a Set of variable names from the target content
-//          const targetKeys = new Set(
-//            targetLines.filter((line) => /=/.test(line)).map(extractVariableName)
-//          );
-//
-//          // Add default lines only if the variable name does not exist in the target
-//          const mergedLines = [...targetLines];
-//          defaultLines.forEach((line) => {
-//            if (/=/.test(line)) {
-//              const variableName = extractVariableName(line);
-//              if (!targetKeys.has(variableName)) {
-//                mergedLines.push(line);
-//              }
-//            }
-//          });
-//
-//          // Write merged content back to target index.js
-//          await fs.writeFile(targetIndexPath, mergedLines.join('\n'), 'utf8');
-//          console.log(
-//            `Merged 'index.js' content from defaultModule/requestModule to configModule/requestModule.`
-//          );
-//        }
       }
     }
   } catch (err) {
