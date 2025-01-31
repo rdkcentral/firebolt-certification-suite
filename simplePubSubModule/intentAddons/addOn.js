@@ -32,7 +32,7 @@ function launchApp(message) {
     message.params.intent.data &&
     message.params.intent.data.query
   ) {
-    let queryModifier = JSON.parse(message.params.intent.data.query);
+    const queryModifier = JSON.parse(message.params.intent.data.query);
     console.log('query Modifier' + JSON.stringify(queryModifier));
     if (queryModifier.params) {
       queryModifier.params['testtoken'] = Cypress.env('testToken');
