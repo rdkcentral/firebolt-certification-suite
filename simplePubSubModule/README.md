@@ -40,6 +40,14 @@ simplePubSubModule/cypress/fixtures
 
 Organize the data in a way that aligns with your test scenarios.
 
+## 5. Handle Package Installation
+
+ - If working with a fresh clone of the repository, follow the setup instructions in the [main README](../README.md#setup) to install the necessary packages.
+ - If packages have already been installed, it is recommended to clear the yarn cache, lockfile, node_modules and run a fresh install.
+
+
+```bash
+
 ## Notes
 - Ensure all file paths and configurations are correctly set up before running your tests.
 - Refer to the Cypress documentation for additional details on writing and structuring test cases and fixtures.
