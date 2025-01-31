@@ -302,7 +302,6 @@ Cypress.Commands.add('updateRunInfo', () => {
               });
             cy.readFile(reportEnvFile).then((reportEnv) => {
               if (reportEnv) {
-                const isPlatformRipple = false;
                 if (
                   reportEnv.customData &&
                   reportEnv.customData.data &&
