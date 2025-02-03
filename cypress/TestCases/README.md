@@ -1,20 +1,15 @@
 # Test Cases
 
-This directory contains the test cases that are used during the execution of the Firebolt Certification Suite (FCS).
+This directory contains the test cases used during the execution of the Firebolt Certification Suite (FCS). These test cases are dynamically copied into this folder based on the selected SDK version.
 
 ## Structure of the Directory
 
-- Test cases are dynamically copied from the `sdkResources` directory based on the selected SDK version.
-- Depending on the SDK version specified (via CLI or default), the corresponding test cases are placed here for test execution.
+- The `cypress/TestCases` directory will **be empty initially** in the repository because it is **cleared** at the start of each test run. It is then **dynamically populated** from the corresponding SDK version folder in `sdkResources`.
+- Once the tests are executed, the relevant test cases are copied over from:
+  - `sdkResources/<version>/TestCases`
+  - `sdkResources/external/<version>/TestCases`
+- If no SDK version is passed via CLI, the suite defaults to the version specified in `package.json` and copies test cases from the corresponding folder.
 
-## Important Notes
-
-- **Do not modify** the files inside this directory directly, as they will be overwritten with each test execution.
-- Test cases are copied from `sdkResources/<version>/TestCases` or `sdkResources/external/<version>/TestCases`.
-- If no SDK version is passed in the CLI, the suite will use the default version, copying test cases from the relevant folders in `sdkResources`.
+> **Important Note**: Do not modify files directly in this directory, as they will be overwritten during each test run. The directory will only contain test cases **after** the tests are executed.
 
 For more information about how test cases are managed, please refer to the main documentation in the [sdkResources directory](../../sdkResources/README.md).
-
-## Folder Contents
-
-This folder will only contain test cases once the tests are executed. Before running the tests, this folder will be empty.

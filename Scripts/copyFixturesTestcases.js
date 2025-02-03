@@ -84,6 +84,11 @@ function copyFiles(configDir, externalDir) {
     const srcPath = path.join(configDir, entry.name);
     const destPath = path.join(externalDir, entry.name);
 
+    // Skip copying README.md if it already exists in fcsTestCasesDir
+    if (entry.name === 'README.md' && fs.existsSync(destPath)) {
+      console.log(`Skipping copying README.md as it already exists in ${externalDir}`);
+      continue;
+    }
     entry.isDirectory() ? copyFiles(srcPath, destPath) : fs.copyFileSync(srcPath, destPath);
   }
   console.log(`Copied contents from ${configDir} to ${externalDir}`);
