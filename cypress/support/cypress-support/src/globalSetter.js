@@ -56,7 +56,7 @@ const validateResponse = async (params, response) => {
   const methodName = fcsSetterStack.getCurrentMethod();
   const appId = UTILS.fetchAppIdentifierFromEnv(CONSTANTS.FIRST_PARTY_APP);
   fcsSetterStack.popMethod();
-  const setterMethod = fcsSetterStack.getCurrentMethod();;
+  const setterMethod = fcsSetterStack.getCurrentMethod();
   cy.updateResponseForFCS(methodName, params, response).then((updatedResponse) => {
     const apiOrEventAppObject = new apiObject(
       setterMethod, // Use the dynamically retrieved function name
