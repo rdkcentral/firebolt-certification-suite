@@ -252,17 +252,14 @@ export default function (module) {
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
    */
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
-    console.log('Inside sendMessagetoPlatforms requestMap:', JSON.stringify(requestMap));
     cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
       return new Promise(async (resolve, reject) => {
         const [moduleName, methodName] = requestMap.method.split('.');
+        // Push method onto the stack to keep track of the current method
         fcsSetterStack.pushMethod(requestMap.method);
-
-        // Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, requestMap.method);
         Cypress.env(CONSTANTS.REQUEST_OVERRIDE_PARAMS, requestMap.params);
         // Check if request is for FCS setters
         if (moduleName === CONSTANTS.FCS_SETTER) {
-          // Push method onto the stack
           const method = config.getRequestOverride(moduleName, methodName);
           if (typeof method === 'function') {
             const params = requestMap.params || {};

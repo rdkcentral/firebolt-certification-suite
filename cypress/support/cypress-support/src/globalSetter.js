@@ -1,7 +1,6 @@
 const UTILS = require('./utils');
 const CONSTANTS = require('../../constants/constants');
 const fcsSetterStack = require('./fcsSetterStack');
-import { fcs } from 'configModule/requestModules/index.js';
 import { apiObject } from '../../appObjectConfigs.js';
 
 global.setterSuccess = async (message = 'Setter Method is success') => {
@@ -30,7 +29,6 @@ global.setterFailure = (message, error) => {
 };
 
 global.setterNotImplemented = (message) => {
-  fcsSetterStack.popMethod();
   const methodName = fcsSetterStack.getCurrentMethod();
   const userMessage = message
     ? `Setter Method ${methodName} ${message}`
