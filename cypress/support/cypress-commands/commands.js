@@ -1160,7 +1160,8 @@ Cypress.Commands.add('clearCache', () => {
  * cy.sendMessageToPlatformOrApp('App', {method: 'accessibility.onClosedCaptionsSettingsChanged', params: {}, context: {}, action: 'core', expected: 'result', appId: 'test.test', 'registerEvent'}
  */
 Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) => {
-  const { method, params, context, action, expected, appId } = requestData;
+  const { method, params, action, expected, appId } = requestData;
+  const context = requestData?.context ? requestData.context : {};
   const deviceIdentifier = requestData.deviceIdentifier;
   task = task ? task : CONSTANTS.TASK.CALLMETHOD;
   let isNotSupportedApi = false;
