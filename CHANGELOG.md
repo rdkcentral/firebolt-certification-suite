@@ -1,3 +1,10 @@
+# [1.7.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.6...v1.7.0-dev.7) (2025-02-04)
+
+
+### Bug Fixes
+
+* updated default value of context ([#317](https://github.com/rdkcentral/firebolt-certification-suite/issues/317)) ([a932ee7](https://github.com/rdkcentral/firebolt-certification-suite/commit/a932ee7c28ac68dc60eaf702a7f19801fc9208ea))
+
 # [1.7.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.5...v1.7.0-dev.6) (2025-02-04)
 
 
