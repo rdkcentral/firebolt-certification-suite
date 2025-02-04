@@ -1,3 +1,10 @@
+# [1.7.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.5...v1.7.0-dev.6) (2025-02-04)
+
+
+### Bug Fixes
+
+* Cuke report log changes  ([#325](https://github.com/rdkcentral/firebolt-certification-suite/issues/325)) ([dd178f0](https://github.com/rdkcentral/firebolt-certification-suite/commit/dd178f0d04ad15f5218bcf833859a0cec38f7784))
+
 # [1.7.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.4...v1.7.0-dev.5) (2025-01-29)
 
 
