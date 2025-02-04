@@ -29,13 +29,17 @@ global.setterFailure = (message, error) => {
 
 global.setterNotImplemented = (message) => {
   const methodName = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_METHOD);
-  const userMessage = `Setter Method ${methodName} ${
-    message || `Setter Method ${methodName} does not have an implementation`
-  }`;
+  const userMessage = message
+    ? `Setter Method ${methodName} ${message}`
+    : `Setter Method ${methodName} does not have an implementation`;
   const docLink = `Please see the ${methodName} documentation for implementation details: https://github.com/rdkcentral/firebolt-certification-suite/blob/main/defaultModule/requestModules/fcsSetters.md#${methodName}`;
   const errorMessage = `${userMessage}\n${docLink}`;
-  // Return the error message for proper rejection handling
-  throw new Error(errorMessage);
+  // Ensure error message appears in the Cucumber report
+  cy.log(errorMessage);
+  // Allow the log to complete before failing the test
+  cy.wrap(null).then(() => {
+    throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+  });
 };
 
 /**
