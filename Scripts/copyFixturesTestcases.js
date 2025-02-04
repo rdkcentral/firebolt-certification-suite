@@ -96,6 +96,12 @@ function copyFiles(configDir, externalDir) {
 
 function deleteDirectory(directory) {
   if (fs.existsSync(directory)) {
-    fs.rmSync(directory, { recursive: true, force: true });
+    const files = fs.readdirSync(directory);
+    files.forEach((file) => {
+      if (file !== 'README.md') {
+        const filePath = path.join(directory, file);
+        fs.rmSync(filePath, { recursive: true, force: true });
+      }
+    });
   }
 }
