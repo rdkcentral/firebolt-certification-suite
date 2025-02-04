@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "appId": {
+      "type": "string"
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "string"
+              }
+            },
+            "required": ["state"]
+          }
+        },
+        "required": ["event"]
+      }
+    }
+  },
+  "required": ["appId", "history"]
+}

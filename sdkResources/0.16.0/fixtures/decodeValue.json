@@ -1,0 +1,18 @@
+{
+    "advertising.config": [
+        "privacyData",
+        "ifa"
+    ],
+    "authentication.token": [
+        "value"
+    ],
+    "authentication.device": [
+        "value"
+    ],
+    "authentication.session": [
+        "value"
+    ],
+    "authentication.root": [
+        "value"
+    ]
+}

@@ -94,6 +94,29 @@ By default, the project uses a predefined configuration module referred to as th
 
 Once complete, continue following the rest of the [Setup Instructions](#setup).
 
+#### Config Variables
+
+The Firebolt Certification Suite (FCS) uses configuration variables to manage the behavior of the suite during runtime. These variables are defined in the `package.json`.
+
+##### SDK Version
+- **Variable Name**: `supportedSDKVersion `
+- **Purpose**: Specifies the SDK version that FCS should use during tests.
+- **Default Value**: A specific version, such as `1.3.0`, `1.4.1`, etc.
+- **Location**: Defined in `package.json` under the `config` section.
+
+#### Example:
+
+In the `package.json` file, you will find the following entry:
+
+```json
+"config": {
+  "supportedSDKVersion ": "1.4.1"
+}
+```
+**Note:** It is recommended that this value **not** be modified unless necessary for a specific SDK version. This value will change whenever a newer SDK version becomes available (e.g., 1.2.0, 1.4.1, 1.3.0, etc.).
+
+The `supportedSDKVersion` in the `package.json` is different from other environment variables in `cypress.config.js` because it only exists in the package.json under the config section. While other Cypress-related configurations to manage test environments, reporters, or test-specific settings in `cypress.config.js`. It controls the SDK version used during testing and determines which test cases and fixtures to apply, making it the only configuration variable in `package.json`.
+
 ## Execution
 
 Following are the supported runtime environments -
@@ -109,11 +132,11 @@ Following are the supported runtime environments -
 
 ### Run the certification suite with the browser
 
-`npx cypress open --browser electron -- env testSuite = <runtime-environment>
+`npm run cy:open -- --env testSuite = <runtime-environment>
 
 ### Run the certification suite in cli
 
-`npx cypress run -- env testSuite = <runtime-environment>
+`npm run cy:run -- --env testSuite = <runtime-environment>
 
 ### Run the certification suite in cli with overriding reporter-options
 
@@ -137,7 +160,7 @@ Other cypress command line can also be passed
 
 ### Helpful Information
 
-- setup is used to load all the fixture files from node-modules/configModule to cypress/fixtures/external/. This setup is done automatically in postInstall.
+- setup is used to load all sdk resources folders from node-modules/configModule to sdkResources/external/. This setup is done automatically in postInstall.
 
   `npm run setup`
 

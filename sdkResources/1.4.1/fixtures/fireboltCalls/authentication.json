@@ -1,0 +1,20 @@
+{
+    "GET_THE_AUTHENTICATION_TOKEN_FOR_DEVICE": {
+        "method": "authentication.token",
+        "params": "AUTHENTICATION_DEVICE"
+    },
+    "GET_THE_AUTHENTICATION_TOKEN_FOR_DISTRIBUTOR": {
+        "method": "authentication.token",
+        "params": "AUTHENTICATION_DISTRIBUTOR"
+    },
+    "EXPECT_ERROR_FOR_DEVICE_TOKEN": {
+        "method": "authentication.device",
+        "expected": "error"
+    },
+    "INVALID_REQUEST_FOR_AUTHENTICATION_DEVICE": {
+        "method": "authentication.device",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    }
+}
