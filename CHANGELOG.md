@@ -1,3 +1,11 @@
+# [1.7.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.7...v1.7.0-dev.8) (2025-02-04)
+
+
+### Bug Fixes
+
+* ExitApp should have appId as an object ([#326](https://github.com/rdkcentral/firebolt-certification-suite/issues/326)) ([f658c25](https://github.com/rdkcentral/firebolt-certification-suite/commit/f658c252e2c4da7f47ccbb0c52ac44989ef0361b))
+* minor errors in SecureStorage.feature ([#314](https://github.com/rdkcentral/firebolt-certification-suite/issues/314)) ([33ad5b1](https://github.com/rdkcentral/firebolt-certification-suite/commit/33ad5b1e1e1dd92a5f57a46cc4ceee04b568711f))
+
 # [1.7.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.6...v1.7.0-dev.7) (2025-02-04)
 
 
