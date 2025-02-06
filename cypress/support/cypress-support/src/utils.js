@@ -609,9 +609,11 @@ function subscribeResults(data, metaData) {
  * interactionResults("{"method": "account.id", "response": "123", "tt": 12}")
  **/
 function interactionResults(interactionLog) {
-  interactionLog = JSON.parse(interactionLog);
-  if (interactionLog && interactionLog.hasOwnProperty(CONSTANTS.METHOD)) {
-    getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
+  if (interactionLog) {
+    interactionLog = JSON.parse(interactionLog);
+    if (interactionLog.hasOwnProperty(CONSTANTS.METHOD)) {
+      getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
+    }
   }
 }
 
