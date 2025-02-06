@@ -223,7 +223,7 @@ Given(/Test runner waits for (.+) '(minutes|seconds)'/, (time, minuteOrSecond) =
       let currentTime = Math.floor(Date.now() / 1000);
 
       while (currentTime < timeToValidate) {
-        cy.wait(10000);
+        cy.wait(5000);
 
         currentTime = Math.floor(Date.now() / 1000);
       }
