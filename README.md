@@ -70,7 +70,6 @@ To execute the certification suite against any platform, the following setup mus
 | healthCheckRetries                  | number  | 8                                 | Health check retry count                                                                                                                                                                                            |
 | communicationMode                   | string  | 'SDK' or 'Transport'              | Set communicationMode as SDK/transport. Default mode is SDK                                                                                                                                                         |
 | performanceMetrics                  | boolean | true                              | Makes a call to platform to start/stop the recording of performance metrics based on action passed   |
-|interactionsMetrics                      | boolean | true                           | Makes a call to platform to start/stop listening to firebolt interactions based on action passed |
 | pubSubUrl                           | string  | ws://127.0.0.1:8081               | Sets the the url to use for a PubSub server which will be used for 3rd party app communication.                                                                                                                     |
 | fcaAppList                  | array | ['default3rdPartyAppId']     | Holds the list of fca app identifiers |
 |suiteCommunicationMode       | string | 'SDK' or 'Transport'                        | Set communicationMode as SDK/Transport for suite feature files. Default mode is Transport                                                                                                                                                         |
@@ -308,11 +307,6 @@ Skip a specific test:<br/>
 ## Request overrides
 
 Documentation added in [Request_Overrides.md](/Docs/Request_Overrides.md)
-
-
-## Interaction Log service
-
-See [Interaction_Logs,md](/Docs//Interaction_Logs.md)
 
 ## Data in fixture folder is segregated as per below configurations
 
