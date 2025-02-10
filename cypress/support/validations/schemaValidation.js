@@ -176,6 +176,9 @@ Cypress.Commands.add('getSchema', (methodOrEvent, params, schemaType) => {
       cy.fixture(CONSTANTS.OPENRPC_ERROR_SCHEMA_PATH).then((errorSchemaObject) => {
         return errorSchemaObject.errorSchema;
       });
+    } else if (methodOrEvent.startsWith(CONSTANTS.FCS_SETTER)) {
+      schemaMap = { type: 'null' };
+      return schemaMap;
     } else {
       if (
         methodOrEvent.includes('set') &&

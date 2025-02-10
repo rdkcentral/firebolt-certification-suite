@@ -257,7 +257,6 @@ export default function (module) {
         const [moduleName, methodName] = requestMap.method.split('.');
         // Push method onto the stack to keep track of the current method
         fcsSetterStack.pushMethod(requestMap.method);
-        Cypress.env(CONSTANTS.REQUEST_OVERRIDE_PARAMS, requestMap.params);
         // Check if request is for FCS setters
         if (moduleName === CONSTANTS.FCS_SETTER) {
           const method = config.getRequestOverride(moduleName, methodName);
@@ -300,6 +299,7 @@ export default function (module) {
           } else {
             resolve(null);
           }
+          fcsSetterStack.popMethod();
         }
       });
     });

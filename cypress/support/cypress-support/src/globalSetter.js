@@ -4,16 +4,14 @@ const fcsSetterStack = require('./fcsSetterStack');
 import { apiObject } from '../../appObjectConfigs.js';
 
 global.setterSuccess = async (message = 'Setter Method is success') => {
-  const params = UTILS.getEnvVariable(CONSTANTS.REQUEST_OVERRIDE_PARAMS);
   const response = { jsonrpc: '2.0', result: null, id: 0 };
   // Validating the response
-  await validateResponse(params, response);
+  await validateResponse(response);
   cy.log(`${message}`);
   return response;
 };
 
 global.setterFailure = (message, error) => {
-  fcsSetterStack.popMethod();
   const methodName = fcsSetterStack.getCurrentMethod();
   const errorMessage = `Setter Method ${methodName} ${message || `Setter Method ${methodName} failed`}`;
 
@@ -50,15 +48,14 @@ global.setterNotImplemented = (message) => {
  *  @param {string} response - The response object.
  */
 
-const validateResponse = async (params, response) => {
-  const methodName = fcsSetterStack.getCurrentMethod();
+const validateResponse = async (response) => {
   const appId = UTILS.fetchAppIdentifierFromEnv(CONSTANTS.FIRST_PARTY_APP);
-  fcsSetterStack.popMethod();
   const setterMethod = fcsSetterStack.getCurrentMethod();
-  cy.updateResponseForFCS(methodName, params, response).then((updatedResponse) => {
+  // updating the response with dummy schemaMap for the setter method and pushing to the API object list
+  cy.updateResponseForFCS(setterMethod, {}, response).then((updatedResponse) => {
     const apiOrEventAppObject = new apiObject(
-      setterMethod, // Use the dynamically retrieved function name
-      params,
+      setterMethod,
+      {},
       {},
       updatedResponse,
       CONSTANTS.RESULT,
