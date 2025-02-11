@@ -1,16 +1,35 @@
 {
     "defaultKeyPressSequence": {
-        "dismiss": ["exit", "exit", "exit"]
+        "dismiss": {
+            "loggedIn":{
+                "dismiss": ["exit", "exit", "exit"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit", "exit", "exit"]
+            }
+        },
+        "playbackDismiss": {
+            "loggedIn":{
+                "dismiss": ["exit"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit"]
+            }
+        }
     },
     "appId": {
         "intentName": {
             "entityId": "<entityId>",
             "keyPressSequence": {
-                 "dismiss": ["exit", "exit", "exit"]
+                "loggedOut": {
+                    "dismiss": ["exit", "right", "enter"]
+                },
+                "loggedIn": {
+                    "dismiss": ["exit", "right", "enter"]
+                }
+
+
             }
-        },
-        "defaultKeyPressSequence": {
-             "dismiss": ["exit", "exit", "exit"]
         }
     }
     
