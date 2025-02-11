@@ -884,17 +884,6 @@ exports.NOTIFY_THAT_PLAYBACK_HAS_STOPPED_WITH_NUMERIC_ENTITYID = {
   params: this.STATIC_METRICS_VARIABLES.INTEGER_12,
   expected: 'error',
 };
-exports.INFORM_THE_PLATFORM_ABOUT_APP_WITH_NUMERIC_BUILD = {
-  method: 'metrics.appInfo',
-  params: this.STATIC_METRICS_VARIABLES.INTEGER_12,
-  expected: 'error',
-};
-exports.INVALID_PARAMS_FOR_METRICS_APPINFO = {
-  method: 'metrics.appInfo',
-  validationJsonPath: 'result',
-  content: errorContent.INVALID_PARAMS,
-  expectingError: true,
-};
 exports.SEND_METRICS_EVENT_WITH_SCHEMA_AND_FOO_DATA = {
   method: 'manage_metrics.event',
   params: this.METRICS_VARIABLES.FOO_DATA_AND_SCHEMA,
