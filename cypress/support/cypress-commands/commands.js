@@ -1252,7 +1252,6 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
       if (task == CONSTANTS.TASK.REGISTEREVENT) {
         if (response && response.result && response.result.hasOwnProperty(CONSTANTS.LISTENING)) {
           const eventResponse = {
-            eventListenerId: response.result.event + '-' + response.id,
             eventListenerResponse: response.result,
           };
           response.result = eventResponse;
@@ -1407,7 +1406,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
     } else {
       cy.then(() => {
         if (validationType == CONSTANTS.EVENT) {
-          const eventName = methodOrEventObject.eventObjectId;
+          const eventName = methodOrEventObject.eventName;
           let eventResponse;
           if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
             const requestMap = {

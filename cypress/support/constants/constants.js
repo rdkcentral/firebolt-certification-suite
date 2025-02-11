@@ -456,6 +456,7 @@ module.exports = {
     PERFORMANCETESTHANDLER: 'performanceTestHandler',
     VISIBILITYSTATE: 'visibilityState',
     REGISTERPROVIDERHANDLER: 'registerProviderHandler',
+    CLEAR_ALL_LISTENERS: 'clearAllListeners',
   },
   INTERACTIONS_SERVICE_ENABLED:
     'Firebolt interactions collection service is already enabled in before hook',
@@ -536,6 +537,8 @@ module.exports = {
   LOGGEDOUT: 'loggedOut',
   SCENARIO_TYPE: 'scenarioType',
   DISMISS: 'dismiss',
+  FIRST_PARTY_EVENT_TYPE: 'firstPartyEventType',
+  THIRD_PARTY_EVENT_TYPE: 'thirdPartyEventType',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

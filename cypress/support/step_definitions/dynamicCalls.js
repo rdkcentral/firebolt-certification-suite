@@ -231,6 +231,8 @@ Given(/'(.+)' registers for(?: the '(.+)')? event$/, async (appId, sdk) => {
       appId: appId,
     };
     if (appId == UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
+      // Set the first party event type to true, this flag will be used in afterEach block, for clearing event listeners
+      Cypress.env(CONSTANTS.FIRST_PARTY_EVENT_TYPE, true);
       fireLog.info(
         `Registering for the ${event} event using 1st party App with params : ${JSON.stringify(
           eventParams
@@ -242,6 +244,8 @@ Given(/'(.+)' registers for(?: the '(.+)')? event$/, async (appId, sdk) => {
         CONSTANTS.TASK.REGISTEREVENT
       );
     } else {
+      // Set the third party event type to true, this flag will be used in afterEach block, for clearing event listeners
+      Cypress.env(CONSTANTS.THIRD_PARTY_EVENT_TYPE, true);
       fireLog.info(
         `Registering for the ${event} event using ${appId} with params : ${JSON.stringify(eventParams)}`
       );
