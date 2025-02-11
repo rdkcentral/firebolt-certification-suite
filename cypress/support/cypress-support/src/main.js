@@ -126,6 +126,21 @@ export default function (module) {
     const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
     const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
     Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
+
+    // Check if the incoming SDK version is 2.0.0 or above and replace the widget in device with 2.0 changes.
+    // const pattern = /(2|\d{2,})\.\d+\.\d+/;
+    // if (
+    //   UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false) &&
+    //   pattern.test(UTILS.getEnvVariable(CONSTANTS.SDK_VERSION))
+    // ) {
+    //   const requestMap = {
+    //     method: 'fcs.<function>',
+    //     params: null,
+    //   };
+    //   cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    //     console.log('response------------------', response);
+    //   });
+    // }
   });
 
   // beforeEach
@@ -206,6 +221,29 @@ export default function (module) {
         }
       );
     });
+  });
+
+  afterEach(() => {
+    // Make a clear all event listeners call and clear the deregister the events
+    // UTILS.fireLog.info("Call to first party app to clear all event listeners");
+    // Need to see what method name can be passed here, instead of device.name.
+    const requestMap = { method: 'call.clearEvent', params: null, task: 'clearAllListeners' };
+    cy.sendMessagetoPlatforms(requestMap)
+      .then((response) => {
+        fireLog.info(`Response from firstParty app: ${JSON.stringify(response)}`);
+      })
+      .then(() => {
+        const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
+        const requestTopic = UTILS.getTopic(appId);
+        const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+        const intent = UTILS.createIntentMessage('clearAllListeners', {});
+        cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
+          fireLog.info(
+            `Response from ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(response)}`
+          );
+        });
+      });
+    Cypress.env(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST, []);
   });
 
   // after All
