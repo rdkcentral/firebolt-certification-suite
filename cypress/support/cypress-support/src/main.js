@@ -56,33 +56,8 @@ export default function (module) {
       } else {
         cy.log('Unable to establish a pub/sub connection.');
       }
-      // Creating a topic with _fbinteractions suffix to listen for interaction logs
-      try {
-        const topic = UTILS.getTopic(
-          UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
-          CONSTANTS.SUBSCRIBE,
-          null,
-          CONSTANTS.TOPIC_FBINTERACTIONS
-        );
-        appTransport.subscribe(topic, UTILS.interactionResults);
-      } catch (err) {
-        UTILS.fireLog.info(
-          `Unable to subscribe to ${CONSTANTS.TOPIC_FBINTERACTIONS} suffixed topic`
-        );
-      }
-      // Initiating the Interaction service to listening for interaction logs when interactionsMetrics flag set to true.
-      if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS, false) == true) {
-        cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
-          if (response) {
-            Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
-          }
-        });
-      } else {
-        cy.log(CONSTANTS.INTERACTIONS_SERVICE_NOT_ACTIVE);
-      }
+      cy.startAdditionalServices(null, appTransport);
     });
-
-    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
 
     // Create an instance of global queue
     const messageQueue = new Queue();
@@ -130,7 +105,6 @@ export default function (module) {
 
   // beforeEach
   beforeEach(() => {
-    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
     cy.getBeforeOperationObject();
     cy.initiatePerformanceMetrics();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
@@ -216,14 +190,6 @@ export default function (module) {
           cy.startOrStopPerformanceService(CONSTANTS.STOPPED).then((response) => {
             if (response) {
               Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false);
-            }
-          });
-        }
-        // Stoping the Interaction service if Interaction service is enabled.
-        if (UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) == true) {
-          cy.startOrStopInteractionsService(CONSTANTS.STOPPED).then((response) => {
-            if (response) {
-              Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false);
             }
           });
         }
