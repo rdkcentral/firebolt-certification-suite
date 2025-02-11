@@ -756,8 +756,7 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
-  }
-  else {
+  } else {
     cy.startAdditionalServices(beforeOperation);
   }
 });
@@ -1581,7 +1580,6 @@ Cypress.Commands.add('getRuntimeFireboltCallObject', () => {
   }
 });
 
-
 /**
  * @module commands
  * @function envConfigSetup
@@ -1593,7 +1591,6 @@ Cypress.Commands.add('getRuntimeFireboltCallObject', () => {
 Cypress.Commands.add('envConfigSetup', () => {
   fireLog.info('No additional config module environment setup');
 });
-
 
 /**
  * @module commands
