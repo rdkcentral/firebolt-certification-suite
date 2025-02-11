@@ -2,9 +2,9 @@
 
 ### Getting Started
 
-App Transport in the `defaultModule` of FCS uses WebSockets and a PubSub pattern to communicate. The provided pubSub client logic inside of [index.js](./index.js) is configured to work with a simple PubSub server. It allows for initializing a connection, publishing messages to topics, subscribing to topics, and unsubscribing from topics.
+App Transport in the `simplePubSubModule` of FCS uses WebSockets and a PubSub pattern to communicate. The provided pubSub client logic inside of [index.js](./index.js) is configured to work with a simple PubSub server. It allows for initializing a connection, publishing messages to topics, subscribing to topics, and unsubscribing from topics.
 
-**NOTE1**: Users **MUST** update the URL within the `init()` function to point to their PubSub server for proper functionality.
+**NOTE1**: Users can update the URL within the `init()` function or pass the `pubSubUrl` env variable in the command line to point to their PubSub server for proper functionality.
 
 **NOTE2**: Modify the `getTopic()` function in `./cypress/support/cypress-support/src/utils.js` if you would like to control the name of the PubSub topic FCS subscribes to. The MAC address of the device you are testing with is used as the default topic name.
 
