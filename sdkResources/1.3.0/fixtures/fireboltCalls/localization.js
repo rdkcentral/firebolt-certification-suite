@@ -425,4 +425,3 @@ exports.SET_LOCALIZATION_TIMEZONE_WITH_AMERICA_LOSANGELES = {
   method: 'manage_localization.setTimeZone',
   params: { value: 'America/Los_Angeles' },
 };
-

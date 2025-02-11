@@ -162,20 +162,19 @@ function destroyAppInstance(testType) {
     testType
   );
   const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
-  const params = {};
-  params.appId = appId;
+  
   // If the current test type is present inside the closeAppTestTypes array then close the app.
   if (isCloseTestType) {
     fireLog.info(
       'Closing app since either Test Type is specified in closeAppTestTypes or is different from previous Test Type.'
     );
-    cy.exitAppSession('closeApp', params);
+    cy.exitAppSession('closeApp', appId);
   }
 
   // If the current test type is present inside the unloadAppTestTypes array then unload the app.
   if (isUnloadTestType) {
     fireLog.info('Unloading app since Test Type is specified in unloadAppTestTypes.');
-    cy.exitAppSession('unloadApp', params);
+    cy.exitAppSession('unloadApp', appId);
   }
 }
 
