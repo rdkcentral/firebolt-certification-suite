@@ -145,6 +145,10 @@ export default function (module) {
 
   // beforeEach
   beforeEach(() => {
+    // Set the firstPartyEvent and thirdPartyEvent to false by default and reset after each testcase.
+    Cypress.env(CONSTANTS.FIRST_PARTY_EVENT_TYPE, false);
+    Cypress.env(CONSTANTS.THIRD_PARTY_EVENT_TYPE, false);
+
     UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
     cy.getBeforeOperationObject();
     cy.initiatePerformanceMetrics();
@@ -225,24 +229,25 @@ export default function (module) {
 
   afterEach(() => {
     // Make a clear all event listeners call and clear the deregister the events
-    // UTILS.fireLog.info("Call to first party app to clear all event listeners");
     // Need to see what method name can be passed here, instead of device.name.
     const requestMap = { method: 'call.clearEvent', params: null, task: 'clearAllListeners' };
-    cy.sendMessagetoPlatforms(requestMap)
-      .then((response) => {
+    if (UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_EVENT_TYPE)) {
+      cy.sendMessagetoPlatforms(requestMap).then((response) => {
         fireLog.info(`Response from firstParty app: ${JSON.stringify(response)}`);
-      })
-      .then(() => {
-        const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
-        const requestTopic = UTILS.getTopic(appId);
-        const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
-        const intent = UTILS.createIntentMessage('clearAllListeners', {});
-        cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
-          fireLog.info(
-            `Response from ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(response)}`
-          );
-        });
       });
+    }
+
+    if (UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_EVENT_TYPE)) {
+      const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
+      const requestTopic = UTILS.getTopic(appId);
+      const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+      const intent = UTILS.createIntentMessage(CONSTANTS.TASK.CLEAR_ALL_LISTENERS, {});
+      cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
+        fireLog.info(
+          `Response from ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(response)}`
+        );
+      });
+    }
     Cypress.env(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST, []);
   });
 
