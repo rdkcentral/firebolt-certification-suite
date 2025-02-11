@@ -7,7 +7,7 @@ Follow these steps to set up and use the `simplePubSubModule` for your testing a
 In your [`package.json`](../package.json), update the `configModule` field to point to `./simplePubSubModule`.
 
 ```json
-"configModule": "simplePubSubModule"
+"configModule": "./simplePubSubModule"
 ```
 
 ## 2. Configure Environment Variables
@@ -45,8 +45,6 @@ Organize the data in a way that aligns with your test scenarios.
  - If working with a fresh clone of the repository, follow the setup instructions in the [main README](../README.md#setup) to install the necessary packages.
  - If packages have already been installed, it is recommended to clear the yarn cache, lockfile, node_modules and run a fresh install.
 
-
-```bash
 
 ## Notes
 - Ensure all file paths and configurations are correctly set up before running your tests.
