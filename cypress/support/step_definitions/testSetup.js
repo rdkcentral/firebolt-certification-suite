@@ -216,24 +216,16 @@ function destroyAppInstance(testType) {
  * Given Test runner waits for 2 'seconds'
  */
 Given(/Test runner waits for (.+) '(minutes|seconds)'/, (time, minuteOrSecond) => {
+  // TODO removed timeSecondsToValidate logic in other places
   const timeToValidate = Cypress.env('timeSecondsToValidate');
-
-  if (timeToValidate > 0) {
-    cy.wait(time * 1000).then(() => {
-      let currentTime = Math.floor(Date.now() / 1000);
-
-      while (currentTime < timeToValidate) {
-        cy.wait(5000);
-
-        currentTime = Math.floor(Date.now() / 1000);
-      }
-    });
+  const playerObject = Cypress.env('playerObject');
+  if (playerObject && playerObject.IPAbuffertime) {
+    time = parseInt(time) + playerObject.IPAbuffertime;
+  }
+  if (minuteOrSecond == 'minutes') {
+    cy.wait(time * 60 * 1000);
   } else {
-    if (minuteOrSecond == 'minutes') {
-      cy.wait(time * 60 * 1000);
-    } else {
-      cy.wait(time * 1000);
-    }
+    cy.wait(time * 1000);
   }
 });
 
