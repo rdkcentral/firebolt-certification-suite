@@ -97,14 +97,12 @@ Given(
           fireboltCallObject.setParams &&
           typeof fireboltCallObject.setParams === CONSTANTS.TYPE_OBJECT
         ) {
-          setParams = fireboltCallObject.setParams;
-
-          // Iterating through the object and invoke if it is a function
-          for (const key in setParams) {
-            if (typeof setParams[key] === CONSTANTS.TYPE_FUNCTION) {
-              setParams[key] = setParams[key]();
-            }
-          }
+          // Deep clone setParams while resolving functions to their return values
+          setParams = JSON.parse(
+            JSON.stringify(fireboltCallObject.setParams, (key, value) => {
+              return typeof value === CONSTANTS.TYPE_FUNCTION ? value() : value;
+            })
+          );
         } else {
           setParams = { value: UTILS.resolveRecursiveValues(fireboltCallObject.setParams) };
         }

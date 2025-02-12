@@ -171,11 +171,14 @@ Cypress.Commands.add('getSchema', (methodOrEvent, params, schemaType) => {
   cy.wrap().then(async () => {
     const schemaList = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, true);
     let schemaMap = null;
-
+    // Return dummy schema response for fcs setters inorder to pass schema validation
     if (schemaType == CONSTANTS.ERROR) {
       cy.fixture(CONSTANTS.OPENRPC_ERROR_SCHEMA_PATH).then((errorSchemaObject) => {
         return errorSchemaObject.errorSchema;
       });
+    } else if (methodOrEvent.startsWith(CONSTANTS.FCS_SETTER)) {
+      schemaMap = { type: 'null' };
+      return schemaMap;
     } else {
       if (
         methodOrEvent.includes('set') &&
