@@ -47,7 +47,9 @@ Cypress.Commands.add(
     if (!fireboltData) {
       fireLog.fail(CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
-    return fireboltData;
+    const fireboltCallObject = UTILS.applyOverrides(fireboltData);
+    console.log("Getting FireBolt Data: ", JSON.stringify(fireboltCallObject));
+    return fireboltCallObject;
   }
 );
 
