@@ -1,3 +1,10 @@
+# [1.8.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0...v1.8.0-dev.1) (2025-02-12)
+
+
+### Features
+
+* Adding SPS default config mod ([#323](https://github.com/rdkcentral/firebolt-certification-suite/issues/323)) ([38434ea](https://github.com/rdkcentral/firebolt-certification-suite/commit/38434ea8035c3f2d227780d542dd729e9a0505c1))
+
 # [1.7.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0...v1.7.0) (2025-02-11)
 
 
