@@ -299,7 +299,7 @@ export default function (module) {
             }
           );
         }
-        // Ensure Cypress waits for responsePromise before resolving and cleaning up the stack
+        // Ensure Cypress waits for responsePromise before resolving and remove method from stack
         responsePromise
           .then((response) => {
             resolve(response);
