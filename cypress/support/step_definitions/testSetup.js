@@ -51,10 +51,12 @@ Given(
       // Retrieve the firebolt object from environment variables using the fireboltCallKey
       const fireboltObject = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[fireboltCallKey];
       if (fireboltObject) {
+        const fireboltCallObject = UTILS.applyOverrides(fireboltObject);
         // Update the runtime environment variable with the firebolt object
-        runtime.fireboltCall = fireboltObject;
+        runtime.fireboltCall = fireboltCallObject;
         Cypress.env(CONSTANTS.RUNTIME, runtime);
-        fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
+        console.log("Firebolt object successfully updated in runtime environment variable in testSetup"+JSON.stringify(runtime.fireboltCall));
+        fireLog.info(`Firebolt updated in runtime environment variable ${JSON.stringify(runtime.fireboltCall)}`);
       }
     }
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
