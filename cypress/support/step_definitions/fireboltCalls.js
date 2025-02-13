@@ -503,28 +503,36 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
   );
   cy.sendMessagetoPlatforms(requestMapForGetAppState)
     .then((response) => {
+      // Interaction logs validation
+      const app_type = Cypress.env(CONSTANTS.APP_TYPE);
+      console.log("App type---------------:", app_type);
+      const validationData = Cypress.env(CONSTANTS.RUNTIME).fireboltCall[app_type];
+      if (validationData && validationData.fireboltInteraction) {
+        console.log("validationData---------------:", validationData);
+        cy.customValidation(validationData);
+      }
       const responseString = JSON.stringify(response);
       if (
         // Check if response exists and contains  the dismissed app's appState, visibilityState of launcher screen
         // and if the dismissed app's appState is INACTIVE and launcher screen's visibilityState is VISIBLE
         response &&
         response.appState &&
-        response.visibilityState &&
+        response.IUIVisibilityState &&
         response.appState.toUpperCase() === CONSTANTS.LIFECYCLE_STATES.INACTIVE &&
-        response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
+        response.IUIVisibilityState.toUpperCase() === CONSTANTS.VISIBLE
       ) {
         fireLog.info(
-          `State validation successful: Current state of ${appId} app is ${response.appState} and launcher screen's visibility state is ${response.visibilityState} `
+          `State validation successful: Current state of ${appId} app is ${response.appState} and launcher screen's visibility state is ${response.IUIVisibilityState} `
         );
       } else if (
         // Check if the dismissed app's appState is missing, and launcher screen's visibilityState is VISIBLE
         response &&
         !response.appState &&
-        response.visibilityState &&
-        response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
+        response.IUIVisibilityState &&
+        response.IUIVisibilityState.toUpperCase() === CONSTANTS.VISIBLE
       ) {
         fireLog.info(
-          `State validation successful: ${appId} app is dismissed and launcher screen's visibility state is ${response.visibilityState}`
+          `State validation successful: ${appId} app is dismissed and launcher screen's visibility state is ${response.IUIVisibilityState}`
         );
       } else {
         // Log failure message if none of the above conditions are met

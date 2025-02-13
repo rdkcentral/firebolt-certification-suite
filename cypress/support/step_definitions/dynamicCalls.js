@@ -422,6 +422,13 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
     Cypress.env(CONSTANTS.RUNTIME, { page });
   }
 
+  const app_type = Cypress.env(CONSTANTS.APP_TYPE);
+  const validationData = Cypress.env(CONSTANTS.RUNTIME).fireboltCall[app_type];
+  console.log('validationData---------------:', validationData);
+  if (validationData && validationData.fireboltInteraction) {
+    cy.customValidation(validationData.fireboltInteraction);
+  }
+
   validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   cy.getFireboltData(validationObjectKey).then((fireboltData) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
