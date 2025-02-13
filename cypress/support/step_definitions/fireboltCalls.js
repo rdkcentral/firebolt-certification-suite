@@ -509,7 +509,7 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
       const validationData = Cypress.env(CONSTANTS.RUNTIME).fireboltCall[app_type];
       if (validationData && validationData.fireboltInteraction) {
         console.log("validationData---------------:", validationData);
-        cy.customValidation(validationData);
+        cy.customValidation(validationData.fireboltInteraction);
       }
       const responseString = JSON.stringify(response);
       if (
