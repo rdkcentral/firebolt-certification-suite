@@ -55,8 +55,11 @@ exports.LOCALIZATION = {
   method: resolveAtRuntime('{{module}}.{{method}}'),
   params: {},
   validationJsonPath: 'result',
-  setMethod: resolveAtRuntime('manage_{{module}}.set{{attribute.uppercaseFirstChar}}'),
-  setParams: resolveAtRuntime('value'),
+  setMethod: resolveAtRuntime('fcsSetters.setLanguage'),
+  setParams: {
+    attribute: resolveAtRuntime('{{attribute}}'),
+    value: resolveAtRuntime('value'),
+  },
   setValidationJsonPath: 'result',
   setContent: null,
   event: resolveAtRuntime('{{module}}.on{{method.uppercaseFirstChar}}Changed'),
