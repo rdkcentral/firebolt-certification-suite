@@ -28,6 +28,8 @@ Cypress.Commands.add('screenshotValidation', (object) => {
             const failedOne = response.validations.find((valObject) => valObject.status === 'fail');
             fireLog.fail(`Screenshot Validation Failed: ${failedOne.message}`);
           }
+        } else if (object.validations.length == 0) {
+          cy.log('ScreenshotValidation : No validations found for screenshot.');
         }
       });
     } else {
