@@ -1803,6 +1803,8 @@ Cypress.Commands.add('softAssert', (actual, expected, message) => {
         message: diff.error.message,
       });
     });
+  } else{
+      cy.log(`Soft assertion passed : ${message}`);
   }
 });
 
