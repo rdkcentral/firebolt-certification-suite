@@ -356,7 +356,13 @@ function unsubscribe(webSocketClient = null) {
  **/
 function isScenarioExempted(method, param) {
   let exceptionType;
-  const exceptionMethods = getEnvVariable(CONSTANTS.EXCEPTION_METHODS);
+  const exceptionMethods = getEnvVariable(CONSTANTS.EXCEPTION_METHODS, false);
+
+  // If no exceptionMethods defined, it is not exempted.
+  if (!exceptionMethods) {
+    return false;
+  }
+
   for (const [type, list] of Object.entries(exceptionMethods)) {
     // Looking for the method and params in each list, if matched returning that exception method.
     methodInExceptionList = list.find((object) => {
@@ -603,9 +609,11 @@ function subscribeResults(data, metaData) {
  * interactionResults("{"method": "account.id", "response": "123", "tt": 12}")
  **/
 function interactionResults(interactionLog) {
-  interactionLog = JSON.parse(interactionLog);
-  if (interactionLog && interactionLog.hasOwnProperty(CONSTANTS.METHOD)) {
-    getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
+  if (interactionLog) {
+    interactionLog = JSON.parse(interactionLog);
+    if (interactionLog.hasOwnProperty(CONSTANTS.METHOD)) {
+      getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
+    }
   }
 }
 
