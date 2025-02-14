@@ -266,6 +266,7 @@ export default function (module) {
             const params = requestMap.params || {};
             const argCount = method.length;
             const paramsCount = Object.keys(params).length;
+            // Validate number of request parameters matches the fcsSetter argument count
             if (paramsCount > argCount || (argCount > 0 && paramsCount === 0)) {
               reject(
                 new Error(
@@ -273,11 +274,13 @@ export default function (module) {
                 )
               );
             }
+            // Based on the fcsSetter method params,resolve the arguments
             const argResolvers = {
               0: () => [], // No arguments expected
               1: () => [params.value], // Single argument: use params.value
               2: () => [params.attribute ?? null, params.value], // Two arguments: use params.attribute and params.value
             };
+            // Dynamically resolve arguments using the resolver
             const args = argResolvers[argCount]?.() || [];
             // Dynamically call the method with the params to store the promise and to ensure waiting
             responsePromise = Promise.resolve(method(...args));
