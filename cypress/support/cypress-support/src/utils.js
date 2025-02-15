@@ -1210,24 +1210,26 @@ function censorPubSubToken(data) {
 }
 
 function applyOverrides(fireboltCallObject) {
-  console.log("Inside applyOverrides");
+  console.log('Inside applyOverrides');
   if (!fireboltCallObject.overrides) return fireboltCallObject;
 
   // Ensure overrides is an array
-  const overrides = Array.isArray(fireboltCallObject.overrides) ? fireboltCallObject.overrides : [fireboltCallObject.overrides];
+  const overrides = Array.isArray(fireboltCallObject.overrides)
+    ? fireboltCallObject.overrides
+    : [fireboltCallObject.overrides];
 
   for (const override of overrides) {
     if (typeof override.applyWhen !== 'function') {
-        console.log("Ignoring override: Missing 'applyWhen()' function", override);
-        continue;
+      console.log("Ignoring override: Missing 'applyWhen()' function", override);
+      continue;
     }
 
     if (!override.applyWhen()) {
-        console.warn("Ignoring override: 'applyWhen()' returned false", override);
-        continue;
+      console.warn("Ignoring override: 'applyWhen()' returned false", override);
+      continue;
     }
 
-    Object.assign(fireboltCallObject, override); 
+    Object.assign(fireboltCallObject, override);
   }
   return fireboltCallObject;
 }

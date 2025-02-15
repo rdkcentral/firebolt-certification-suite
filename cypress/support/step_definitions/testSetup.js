@@ -48,16 +48,17 @@ Given(
         // Replace spaces with underscores and convert to uppercase for the fireboltCallKey
         fireboltCallKey = test.replace(/\s+/g, '_').toUpperCase();
       }
-      // Retrieve the firebolt object from environment variables using the fireboltCallKey
-      const fireboltObject = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[fireboltCallKey];
-      if (fireboltObject) {
-        const fireboltCallObject = UTILS.applyOverrides(fireboltObject);
-        // Update the runtime environment variable with the firebolt object
-        runtime.fireboltCall = fireboltCallObject;
-        Cypress.env(CONSTANTS.RUNTIME, runtime);
-        console.log("Firebolt object successfully updated in runtime environment variable in testSetup"+JSON.stringify(runtime.fireboltCall));
-        fireLog.info(`Firebolt updated in runtime environment variable ${JSON.stringify(runtime.fireboltCall)}`);
-      }
+      // Retrieve the firebolt object from the fireboltCalls fixture
+      cy.getFireboltData(fireboltCallKey, CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS, false).then(
+        (fireboltObject) => {
+          if (fireboltObject) {
+            //Save the object as env.runtime.fireboltCall
+            const runtime = { fireboltCall: fireboltObject };
+            Cypress.env(CONSTANTS.RUNTIME, runtime);
+            fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
+          }
+        }
+      );
     }
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
