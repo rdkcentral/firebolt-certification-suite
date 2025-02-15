@@ -52,7 +52,7 @@ Given(
       cy.getFireboltData(fireboltCallKey, CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS, false).then(
         (fireboltObject) => {
           if (fireboltObject) {
-            //Save the object as env.runtime.fireboltCall
+            // Save the object as env.runtime.fireboltCall
             const runtime = { fireboltCall: fireboltObject };
             Cypress.env(CONSTANTS.RUNTIME, runtime);
             fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
