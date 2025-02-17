@@ -48,7 +48,7 @@ Cypress.Commands.add(
     if (!fireboltData && failOnError) {
       fireLog.fail(CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
-    // To check if the fireboltData has override key and applyWhen() function is present.
+    // To check for Override data,if exist append overrida data to the fireboltData,Otherwise return fireboltData as is.
     if (fireboltData) {
       const fireboltCallObject = UTILS.applyOverrides(fireboltData);
       return fireboltCallObject;

@@ -1217,6 +1217,15 @@ function censorPubSubToken(data) {
   return JSON.stringify(data);
 }
 
+/**
+ * @module utils
+ * @function applyOverrides
+ * @description A function to check Override Object,if exist append overrida data to the fireboltData,Otherwise return fireboltData as is.
+ * @param {*} fireboltCallObject - fireboltObject to which overrides needs to be applied
+ * @example
+ * applyOverrides(fireboltCallObject)
+ */
+
 function applyOverrides(fireboltCallObject) {
   if (!fireboltCallObject.overrides) return fireboltCallObject;
 
