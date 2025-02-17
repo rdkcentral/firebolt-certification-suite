@@ -216,11 +216,9 @@ function destroyAppInstance(testType) {
  * Given Test runner waits for 2 'seconds'
  */
 Given(/Test runner waits for (.+) '(minutes|seconds)'/, (time, minuteOrSecond) => {
-  // TODO removed timeSecondsToValidate logic in other places
-  const timeToValidate = Cypress.env('timeSecondsToValidate');
-  const playerObject = Cypress.env('playerObject');
-  if (playerObject && playerObject.IPAbuffertime) {
-    time = parseInt(time) + playerObject.IPAbuffertime;
+  const timeToValidate = Cypress.env('waitTime');
+  if (timeToValidate) {
+    time = timeToValidate;
   }
   if (minuteOrSecond == 'minutes') {
     cy.wait(time * 60 * 1000);
