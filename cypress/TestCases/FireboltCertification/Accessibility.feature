@@ -103,9 +103,12 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Scenario               | Method  | Value |
-            | disable voiceguidance  | enabled | false |
-            | enabling voiceguidance | enabled | true  |
+            | Scenario                 | Method          | Value |
+            | disable voiceguidance    | enabled         | false |
+            | enabling voiceguidance   | enabled         | true  |
+            # setters?
+            | disable navigationHints  | navigationHints | false |
+            | enabling navigationHints | navigationHints | true  |
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.voiceGuidanceSettings - Validating API and Event Responses for <Method> change to <Value>
@@ -119,10 +122,14 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Method  | Value |
-            | speed   | 1     |
-            | speed   | 0.5   |
-            | speed   | 2     |
+            | Method | Value |
+            | speed  | 1.0   |
+            | speed  | 0.5   |
+            | speed  | 2.0   |
+            # setters?
+            | rate   | 0.1   |
+            | rate   | 1.0   |
+            | rate   | 10    |
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.audioDescriptionSettings - Validating API and Event Responses for <Scenario>
