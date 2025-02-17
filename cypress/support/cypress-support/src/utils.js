@@ -1227,27 +1227,34 @@ function censorPubSubToken(data) {
  */
 
 function applyOverrides(fireboltCallObject) {
-  if (!fireboltCallObject.overrides) return fireboltCallObject;
+  try {
+    if (!fireboltCallObject.overrides) return fireboltCallObject;
 
-  // Ensure overrides is an array
-  const overrides = Array.isArray(fireboltCallObject.overrides)
-    ? fireboltCallObject.overrides
-    : [fireboltCallObject.overrides];
+    // Ensure overrides is an array
+    const overrides = Array.isArray(fireboltCallObject.overrides)
+      ? fireboltCallObject.overrides
+      : [fireboltCallObject.overrides];
 
-  for (const override of overrides) {
-    if (typeof override.applyWhen !== 'function') {
-      console.log("Ignoring override: Missing 'applyWhen()' function", override);
-      continue;
+    for (const override of overrides) {
+      if (typeof override.applyWhen !== 'function') {
+        console.log("Ignoring override: Missing 'applyWhen()' function", override);
+        continue;
+      }
+
+      if (!override.applyWhen()) {
+        console.log("Ignoring override: 'applyWhen()' returned false", override);
+        continue;
+      }
+      // Appending Override content to the fireboltCallObject if applyWhen() returns true
+      Object.assign(fireboltCallObject, override);
     }
-
-    if (!override.applyWhen()) {
-      console.log("Ignoring override: 'applyWhen()' returned false", override);
-      continue;
-    }
-    // Appending Override content to the fireboltCallObject if applyWhen() returns true
-    Object.assign(fireboltCallObject, override);
+  } catch (error) {
+    console.log(
+      'Error in applyOverrides - Override key in the fireboltObject was not as expected::',
+      error
+    );
   }
-  return fireboltCallObject;
+  return fireboltCallObject; // Return the original or modified object based on the override
 }
 
 module.exports = {
