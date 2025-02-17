@@ -1,3 +1,10 @@
+# [1.8.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.1...v1.8.0-dev.2) (2025-02-17)
+
+
+### Bug Fixes
+
+* fcsSetter logic change from env to stack ([#324](https://github.com/rdkcentral/firebolt-certification-suite/issues/324)) ([adeea99](https://github.com/rdkcentral/firebolt-certification-suite/commit/adeea9909f7aca68d3f3694acdd2f48fe023cff6))
+
 # [1.8.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0...v1.8.0-dev.1) (2025-02-12)
 
 
