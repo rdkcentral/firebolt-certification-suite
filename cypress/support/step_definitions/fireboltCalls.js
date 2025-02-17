@@ -384,7 +384,10 @@ Given(
     const test = Cypress.env(CONSTANTS.TEST_TYPE);
     const testLowerCase = test.toLowerCase();
     const scenarioType = Cypress.env(CONSTANTS.SCENARIO_TYPE);
-    const scenarioTypeLowerCase = scenarioType.toLowerCase();
+    let scenarioTypeLowerCase;
+    if (scenarioType != null) {
+      scenarioTypeLowerCase = scenarioType.toLowerCase();
+    }
 
     if (testLowerCase.includes(CONSTANTS.DISMISS)) {
       if (Cypress.env(CONSTANTS.SCENARIO_TYPE)) {
