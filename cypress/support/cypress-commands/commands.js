@@ -302,7 +302,6 @@ Cypress.Commands.add('updateRunInfo', () => {
               });
             cy.readFile(reportEnvFile).then((reportEnv) => {
               if (reportEnv) {
-                const isPlatformRipple = false;
                 if (
                   reportEnv.customData &&
                   reportEnv.customData.data &&
@@ -1160,7 +1159,8 @@ Cypress.Commands.add('clearCache', () => {
  * cy.sendMessageToPlatformOrApp('App', {method: 'accessibility.onClosedCaptionsSettingsChanged', params: {}, context: {}, action: 'core', expected: 'result', appId: 'test.test', 'registerEvent'}
  */
 Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) => {
-  const { method, params, context, action, expected, appId } = requestData;
+  const { method, params, action, expected, appId } = requestData;
+  const context = requestData?.context ? requestData.context : {};
   const deviceIdentifier = requestData.deviceIdentifier;
   task = task ? task : CONSTANTS.TASK.CALLMETHOD;
   let isNotSupportedApi = false;
@@ -1209,6 +1209,12 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
       fireLog.assert(false, `Invalid ${target} target, it should be either app or platfrom`);
     }
   }).then((response) => {
+    if (method.startsWith(CONSTANTS.FCS_SETTER)) {
+      console.log(
+        `Schema validation skipped for the ${method} method as it is already handled by fcsSetters.`
+      );
+      return;
+    }
     if (response === CONSTANTS.NO_RESPONSE) {
       assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
     }

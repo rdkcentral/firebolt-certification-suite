@@ -15,10 +15,16 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
+const requestModules = require('./requestModules/index');
+const responseModules = require('./responseModules/index');
+const intentAddons = require('./intentAddons/index');
+const appTransport = require('./appTransport/index');
+const cypressAddons = require('./cypress/index');
+const externalTransport = require('./transportLayers/index');
 
-const discovery = require('./discovery');
-const fcs = require('./fcs');
-const fcsSetters = require('./fcsSetters');
-exports.fcs = fcs;
-exports.discovery = discovery;
-exports.fcsSetters = fcsSetters;
+exports.requestModules = requestModules;
+exports.responseModules = responseModules;
+exports.intentAddons = intentAddons;
+exports.appTransport = appTransport;
+exports.cypressAddons = cypressAddons;
+exports.externalTransport = externalTransport;
