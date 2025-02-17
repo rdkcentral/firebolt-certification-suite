@@ -35,7 +35,6 @@ const path = require('path');
 Cypress.Commands.add(
   'getFireboltData',
   (key, callType = CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS, failOnError = true) => {
-    console.log('*****Getting FireBolt Data: ', key, callType);
     // Reading the data from combinedJson based on key.
     let fireboltData;
     if (callType == CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS) {
@@ -45,6 +44,7 @@ Cypress.Commands.add(
     } else {
       fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
+    // FailOnError was set to false,for environment setup for background scenarios.
     if (!fireboltData && failOnError) {
       fireLog.fail(CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }

@@ -1218,7 +1218,6 @@ function censorPubSubToken(data) {
 }
 
 function applyOverrides(fireboltCallObject) {
-  console.log('Inside applyOverrides');
   if (!fireboltCallObject.overrides) return fireboltCallObject;
 
   // Ensure overrides is an array
@@ -1233,10 +1232,10 @@ function applyOverrides(fireboltCallObject) {
     }
 
     if (!override.applyWhen()) {
-      console.warn("Ignoring override: 'applyWhen()' returned false", override);
+      console.log("Ignoring override: 'applyWhen()' returned false", override);
       continue;
     }
-
+    // Appending Override content to the fireboltCallObject if applyWhen() returns true
     Object.assign(fireboltCallObject, override);
   }
   return fireboltCallObject;
