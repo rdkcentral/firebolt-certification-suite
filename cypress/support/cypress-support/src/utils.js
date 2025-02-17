@@ -1237,19 +1237,19 @@ function applyOverrides(fireboltCallObject) {
 
     for (const override of overrides) {
       if (typeof override.applyWhen !== 'function') {
-        console.log("Ignoring override: Missing 'applyWhen()' function", override);
+        fireLog.info('Ignoring override: Missing applyWhen() function', override);
         continue;
       }
 
       if (!override.applyWhen()) {
-        console.log("Ignoring override: 'applyWhen()' returned false", override);
+        fireLog.info('Ignoring override: applyWhen() returned false', override);
         continue;
       }
       // Appending Override content to the fireboltCallObject if applyWhen() returns true
       Object.assign(fireboltCallObject, override);
     }
   } catch (error) {
-    console.log(
+    fireLog.info(
       'Error in applyOverrides - Override key in the fireboltObject was not as expected::',
       error
     );
