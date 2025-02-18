@@ -106,8 +106,7 @@ Feature: Accessibility
             | Scenario                 | Method          | Value |
             | disable voiceguidance    | enabled         | false |
             | enabling voiceguidance   | enabled         | true  |
-            # setters?
-            | disable navigationHints  | navigationHints | false |
+            | disabling navigationHints  | navigationHints | false |
             | enabling navigationHints | navigationHints | true  |
 
     @sdk @transport @Sev1
@@ -123,12 +122,11 @@ Feature: Accessibility
 
         Examples:
             | Method | Value |
-            | speed  | 1.0   |
+            | speed  | 1     |
             | speed  | 0.5   |
-            | speed  | 2.0   |
-            # setters?
+            | speed  | 2     |
             | rate   | 0.1   |
-            | rate   | 1.0   |
+            | rate   | 1     |
             | rate   | 10    |
 
     @sdk @transport @Sev1
@@ -213,9 +211,11 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Scenario                | Method  | Value |
-            | disabling voiceguidance | enabled | false |
-            | enabling voiceguidance  | enabled | true  |
+            | Scenario                  | Method          | Value |
+            | disabling voiceguidance   | enabled         | false |
+            | enabling voiceguidance    | enabled         | true  |
+            | disabling navigationHints | navigationHints | false |
+            | enabling navigationHints  | navigationHints | true  |
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.voiceGuidance - Validating API and Event Responses for <Method> change to <Value>
@@ -229,5 +229,6 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Method  | Value |
-            | speed   | 1     |
+            | Method | Value |
+            | speed  | 1     |
+            | rate   | 2     |
