@@ -1,3 +1,10 @@
+# [1.8.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.4...v1.8.0-dev.5) (2025-02-18)
+
+
+### Features
+
+* Pass elk env variable to reporting ([#339](https://github.com/rdkcentral/firebolt-certification-suite/issues/339)) ([9e05525](https://github.com/rdkcentral/firebolt-certification-suite/commit/9e05525662091445622090546da5a12f0d19f60d))
+
 # [1.8.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.3...v1.8.0-dev.4) (2025-02-18)
 
 
