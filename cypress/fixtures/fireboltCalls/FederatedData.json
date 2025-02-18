@@ -1,0 +1,355 @@
+{
+    "PUSH_ENTITYINFO":{
+        "method": "discovery.entityInfo",
+        "params": "FEDERATEDDATA_ENTITYINFO"
+    },
+    "PUSH_PURCHASEDCONTENT":{
+        "method": "discovery.purchasedContent",
+        "params": "FEDERATEDDATA_PURCHASEDCONTENT"
+    },
+    "PUSH_ENTITY_DETAILS_DATA":{
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_DETAILS"
+    },
+    "EXPECTED_ENTITY_DETAILS":{
+        "method": "discovery.details",
+		"validationJsonPath": "result",
+		"expected": "NULL"
+    },
+    "PUSH_PURCHASES":{
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASES"
+    },
+    "EXPECTED_PURCHASES_LIST":{
+        "method": "discovery.purchases",
+		"validationJsonPath": "result",
+		"expected": "NULL"
+    },
+    "GET_ENTITY_DETAILS_WITH_WAY_TO_WATCH":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WAY_TO_WATCH"
+    },
+    "EXPECTED_WAY_TO_WATCH_DATA":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_ENTITY_DETAILS_INFOWATCH"
+    },
+    "GET_ENTITY_DETAILS_WITH_CONTENT_RATINGS":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_RATINGS"
+    },
+    "EXPECTED_CONTENT_RATINGS":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_ENTITY_DETAILS_CONTENTRATING"
+    },
+    "GET_WAY_TO_WATCH_DATA_WITH_TWO_ENTIRES":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WAY_TO_WATCH_WITHTWOENTRIES"
+    },
+    "EXPECTED_WAY_TO_WATCH_DATA_WITH_TWO_ENTIRES":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_ENTITY_DETAILS_WAYTOWATCH"
+    },
+    "GET_ENTITY_DETAILS_WITH_ASSETID":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITY_WITH_ASSETID"
+    },
+    "EXPECTED_IDENTIFIERS_ASSETID":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_ENTITY_DETAILS_ASSETID"
+    },    
+    "GET_ENTITY_DETAILS_WITH_SEASONID":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITY_WITH_SEASONID"
+    },
+    "EXPECTED_IDENTIFIERS_SEASONID":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_ENTITY_DETAILS_SEASONID"
+    },
+    "GET_ENTITY_DETAILS_WITH_SERIESID":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITY_WITH_SERIESID"
+    },
+    "EXPECTED_IDENTIFIERS_SERIESID":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_ENTITY_DETAILS_SERIESID"
+    },
+    "GET_ENTITY_DETAILS_WITH_APPCONTENTDATA":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITY_WITH_APPCONTENTDATA"
+    },
+    "EXPECTED_IDENTIFIERS_APPCONTENTDATA":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_ENTITY_DETAILS_APPCONTENTDATA"
+    },
+    "GET_ENTITY_DETAILS_WITH_EPISODENUMBER":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITY_WITH_EPISODENUMBER"
+    },
+    "EXPECTED_ENTITY_EPISODENUMBER":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_ENTITY_DETAILS_EPISODENUMBER"
+    },
+    "GET_ENTITY_DETAILS_WITH_SEASONNUMBER":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITY_WITH_SEASONNUMBER"
+    },
+    "EXPECTED_ENTITY_SEASONNUMBER":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_ENTITY_DETAILS_SEASONNUMBER"
+    },
+    "GET_ENTITY_DETAILS_WITH_SYNOPSIS":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITY_WITH_SYNOPSIS"
+    },
+    "EXPECTED_ENTITY_SYNOPSIS":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_ENTITY_DETAILS_SYNOPSIS"
+    },
+    "GET_ENTITY_DETAILS_WITH_RELEASEDATE":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITY_WITH_RELEASEDATE"
+    },
+    "EXPECTED_ENTITY_RELEASEDATE":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_ENTITY_DETAILS_RELEASEDATE"
+    },
+    "GET_ENTITY_DETAILS_WITH_ALL_VALUES":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITY_WITH_ALL_VALUES"
+    },
+    "EXPECTED_ENTITY_DETAILS_WITH_ALL_VALUES":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_ENTITY_DETAILS_ALL_VALUES"
+    },
+    "GET_ENTITY_DETAILS_WITHOUT_ENTITY_TYPE":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITHOUT_ENTITY_TYPE"
+    },
+    "EXPECTED_ENTITY_DETAILS_WITHOUT_ENTITY_TYPE":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_WITHOUT_ENTITY_TYPE"
+    },
+    "GET_ENTITY_DETAILS_WITH_ENTITY_TYPE":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_ENTITY_TYPE"
+    },
+    "EXPECTED_ENTITY_DETAILS_WITH_ENTITY_TYPE":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_WITH_ENTITY_TYPE"
+    },
+    "GET_ENTITY_DETAILS_WITHOUT_PROGRAM_TYPE":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITHOUT_PROGRAM_TYPE"
+    },
+    "EXPECTED_ENTITY_DETAILS_WITHOUT_PROGRAM_TYPE":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_WITHOUT_PROGRAM_TYPE"
+    },
+    "GET_LIST_OF_PURCHASES":{
+        "method": "discovery_content.requestPurchases"
+    },
+    "EXPECTED_PURCHASES":{
+        "method": "content.requestPurchases",
+		"validationJsonPath": "result",
+		"expected": "FEDERATEDDATA_REQUEST_PURCHASES"
+    },
+    "GET_LIST_OF_PURCHASES_WITH_INTEGER":{
+        "method": "discovery_content.requestPurchases",
+        "params": "FEDERATEDDATA_PURCHASES_WITH_INTEGER",
+        "expected": "error"
+    },
+    "INVALID_PARAMETERS_FOR_PURCHASES":{
+        "method": "content.requestPurchases",
+		"validationJsonPath": "result",
+		"expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "GET_ENTITY_DETAILS_WITHOUT_EXPIRES":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITY_WITHOUT_EXPIRES",
+        "expected": "error"
+    },
+    "CUSTOM_ERROR_FOR_CONTENT_REQUESTDETAILS":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "CUSTOM_ERROR",
+        "expectingError": true
+    },
+    "GET_ENTITY_DETAILS_WITH_INVALID_ENTITYID":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITY_INVALID_ENTITYID",
+        "expected": "error"
+    },
+    "INVALID_PARAMETERS_FOR_CONTENT_REQUESTDETAILS":{
+        "method": "content.requestDetails",
+		"validationJsonPath": "result",
+		"expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "GET_ENTITY_DETAILS_WITH_INVALID_PARAMETERS":{
+        "method": "discovery_content.requestDetails",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITY_INVALID_PARAMETERS",
+        "expected": "error"
+    },
+    "INVALID_PARAMETERS_FOR_DISCOVERY_DETAILS":{
+        "method": "discovery.details",
+		"validationJsonPath": "result",
+		"expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "PUSH_ENTITY_DETAILS_WITHOUT_PARAMETERS": {
+        "method": "discovery.details",
+        "expected": "error"
+    },
+    "PUSH_ENTITY_DETAILS_WITHOUT_ENTITYID": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITHOUT_ENTITYID",
+        "expected": "error"
+    },
+    "PUSH_ENTITY_DETAILS_ENTITYID_WITH_INTEGER": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITYID_WITH_INTEGER",
+        "expected": "error"
+    },
+    "PUSH_ENTITY_DETAILS_ENTITYID_WITH_BOOLEAN": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_ENTITYID_WITH_BOOLEAN",
+        "expected": "error"
+    },
+    "PUSH_ENTITY_DETAILS_WITHOUT_EXPIRES": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITHOUT_EXPIRES",
+        "expected": "error"
+    },
+    "PUSH_ENTITY_DETAILS_WITHOUT_DETAILS": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITHOUT_DETAILS",
+        "expected": "error"
+    },
+    "PUSH_ENTITY_DETAILS_WITHOUT_INFO": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITHOUT_INFO",
+        "expected": "error"
+    },
+    "PUSH_ENTITY_DETAILS_WITHOUT_IDENTIFIERS": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITHOUT_IDENTIFIERS",
+        "expected": "error"
+    },
+    "PUSH_ENTITY_DETAILS_WITHOUT_IDENTIFIERS_ENTITYTYPE": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITHOUT_IDENTIFIERS_ENTITYTYPE",
+        "expected": "error"
+    },
+    "PUSH_ENTITY_DETAILS_WITHOUT_IDENTIFIERS_PROGRAMTYPE": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITHOUT_IDENTIFIERS_PROGRAMTYPE",
+        "expected": "error"
+    },
+    "PUSH_ENTITY_DETAILS_WITH_INVALID_TITLE": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_INVALID_TITLE",
+        "expected": "error"
+    },
+    "PUSH_ENTITY_DETAILS_WITH_INVALID_IDENTIFIERS_ENTITYTYPE": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_INVALID_IDENTIFIERS_ENTITYTYPE",
+        "expected": "error"
+    },
+    "INVALID_PARAMETERS_FOR_DISCOVERY_PURCHASES":{
+        "method": "discovery.purchases",
+		"validationJsonPath": "result",
+		"expected": "INVALID_TYPE_PARAMS",
+        "expectingError": true
+    },
+    "PUSH_PURCHASES_WITHOUT_PARAMETERS": {
+        "method": "discovery.purchases",
+        "expected": "error"
+    },
+    "PUSH_PURCHASES_WITHOUT_EXPIRES": {
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASES_WITHOUT_EXPIRES",
+        "expected": "error"
+    },
+    "PUSH_PURCHASES_WITHOUT_TOTALCOUNT": {
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASES_WITHOUT_TOTALCOUNT",
+        "expected": "error"
+    },
+    "PUSH_PURCHASES_WITHOUT_ENTRIES": {
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASES_WITHOUT_ENTRIES",
+        "expected": "error"
+    },
+    "PUSH_ENTITY_DETAILS_WITH_WAYSTOWATCH": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_WAYSTOWATCH"
+    },
+    "PUSH_ENTITY_DETAILS_WITH_CONTENTRATINGS": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_CONTENTRATINGS"
+    },
+    "PUSH_ENTITY_DETAILS_WITH_IDENTIFIERS_ASSETID": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_IDENTIFIERS_ASSETID"
+    },
+    "PUSH_ENTITY_DETAILS_WITH_IDENTIFIERS_APPCONTENTDATA": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_IDENTIFIERS_APPCONTENTDATA"
+    },
+    "PUSH_ENTITY_DETAILS_WITH_INFO_RELEASEDATE": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_INFO_RELEASEDATE"
+    },
+    "PUSH_ENTITY_DETAILS_WITH_INFO_SEASONNUMBER": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_INFO_SEASONNUMBER"
+    },
+    "PUSH_ENTITY_DETAILS_WITH_INFO_EPISODENUMBER": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_INFO_EPISODENUMBER"
+    },
+    "PUSH_ENTITY_DETAILS_WITH_INFO_SEASONCOUNT": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_INFO_SEASONCOUNT"
+    },
+    "PUSH_ENTITY_DETAILS_WITH_INFO_EPISODECOUNT": {
+        "method": "discovery.details",
+        "params": "FEDERATEDDATA_ENTITY_DETAILS_WITH_INFO_EPISODECOUNT"
+    },
+    "PUSH_PURCHASES_WITH_IDENTIFIERS_ASSETID": {
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASES_WITH_IDENTIFIERS_ASSETID"
+    },
+    "PUSH_PURCHASES_WITH_IDENTIFIERS_APPCONTENTDATA": {
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASES_WITH_IDENTIFIERS_APPCONTENTDATA"
+    },
+    "PUSH_PURCHASES_WITH_WAYSTOWATCH": {
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASES_WITH_WAYSTOWATCH"
+    },
+    "PUSH_PURCHASES_WITH_CONTENTRATINGS": {
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASES_WITH_CONTENTRATINGS"
+    },
+    "PUSH_PURCHASES_WITH_RELEASEDATE": {
+        "method": "discovery.purchases",
+        "params": "FEDERATEDDATA_PURCHASES_WITH_RELEASEDATE"
+    }
+}
