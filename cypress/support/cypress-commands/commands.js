@@ -34,7 +34,7 @@ const path = require('path');
  */
 Cypress.Commands.add(
   'getFireboltData',
-  (key, callType = CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS) => {
+  (key, callType = CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS, failOnError = true) => {
     // Reading the data from combinedJson based on key.
     let fireboltData;
     if (callType == CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS) {
@@ -44,10 +44,15 @@ Cypress.Commands.add(
     } else {
       fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
-    if (!fireboltData) {
+    // FailOnError was set to false,for environment setup for background scenarios.
+    if (!fireboltData && failOnError) {
       fireLog.fail(CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
-    return fireboltData;
+    // To check for Override data,if exist append overrida data to the fireboltData,Otherwise return fireboltData as is.
+    if (fireboltData) {
+      const fireboltCallObject = UTILS.applyOverrides(fireboltData);
+      return fireboltCallObject;
+    }
   }
 );
 

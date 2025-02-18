@@ -1217,6 +1217,46 @@ function censorPubSubToken(data) {
   return JSON.stringify(data);
 }
 
+/**
+ * @module utils
+ * @function applyOverrides
+ * @description A function to check Override Object,if exist append overrida data to the fireboltData,Otherwise return fireboltData as is.
+ * @param {*} fireboltCallObject - fireboltObject to which overrides needs to be applied
+ * @example
+ * applyOverrides(fireboltCallObject)
+ */
+
+function applyOverrides(fireboltCallObject) {
+  try {
+    if (!fireboltCallObject.overrides) return fireboltCallObject;
+
+    // Ensure overrides is an array
+    const overrides = Array.isArray(fireboltCallObject.overrides)
+      ? fireboltCallObject.overrides
+      : [fireboltCallObject.overrides];
+
+    for (const override of overrides) {
+      if (typeof override.applyWhen !== 'function') {
+        fireLog.info('Ignoring override: Missing applyWhen() function', override);
+        continue;
+      }
+
+      if (!override.applyWhen()) {
+        fireLog.info('Ignoring override: applyWhen() returned false', override);
+        continue;
+      }
+      // Appending Override content to the fireboltCallObject if applyWhen() returns true
+      Object.assign(fireboltCallObject, override);
+    }
+  } catch (error) {
+    fireLog.info(
+      'Error in applyOverrides - Override key in the fireboltObject was not as expected::',
+      error
+    );
+  }
+  return fireboltCallObject; // Return the original or modified object based on the override
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -1247,4 +1287,5 @@ module.exports = {
   fetchAppIdentifierFromEnv,
   skipCurrentTest,
   censorPubSubToken,
+  applyOverrides,
 };
