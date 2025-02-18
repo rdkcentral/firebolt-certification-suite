@@ -251,13 +251,14 @@ export default function (module) {
    * @example
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
    */
+
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
-    cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
-      return new Promise(async (resolve, reject) => {
+    return cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(() => {
+      return new Promise((resolve, reject) => {
+        let responsePromise;
         const [moduleName, methodName] = requestMap.method.split('.');
-        // Push method onto the stack to keep track of the current method
+        // Push method onto the stack
         fcsSetterStack.pushMethod(requestMap.method);
-        Cypress.env(CONSTANTS.REQUEST_OVERRIDE_PARAMS, requestMap.params);
         // Check if request is for FCS setters
         if (moduleName === CONSTANTS.FCS_SETTER) {
           const method = config.getRequestOverride(moduleName, methodName);
@@ -265,7 +266,6 @@ export default function (module) {
             const params = requestMap.params || {};
             const argCount = method.length;
             const paramsCount = Object.keys(params).length;
-
             // Validate number of request parameters matches the fcsSetter argument count
             if (paramsCount > argCount || (argCount > 0 && paramsCount === 0)) {
               reject(
@@ -280,27 +280,37 @@ export default function (module) {
               1: () => [params.value], // Single argument: use params.value
               2: () => [params.attribute ?? null, params.value], // Two arguments: use params.attribute and params.value
             };
-
             // Dynamically resolve arguments using the resolver
             const args = argResolvers[argCount]?.() || [];
-            // Dynamically call the method with the params
-            const response = await method(...args);
-            resolve(response);
+            // Dynamically call the method with the params to store the promise and to ensure waiting
+            responsePromise = Promise.resolve(method(...args));
           } else {
             reject(setterNotImplemented('not implemented'));
           }
         } else {
-          // Default logic for other methods
-          const message = await config.invokeRequestOverride(requestMap);
-          // Perform MTC/FB call only if the message is not null
-          if (message != null) {
-            const response = await transport.sendMessage(message);
-            const result = config.invokeResponseOverride(response);
-            resolve(result);
-          } else {
-            resolve(null);
-          }
+          // Default logic for other methods and wrap `invokeRequestOverride` to ensure it's always a Promise
+          responsePromise = Promise.resolve(config.invokeRequestOverride(requestMap)).then(
+            (message) => {
+              // Perform MTC/FB call only if the message is not null
+              if (message != null) {
+                return transport
+                  .sendMessage(message)
+                  .then((res) => config.invokeResponseOverride(res));
+              } else {
+                return null;
+              }
+            }
+          );
         }
+        // Ensure Cypress waits for responsePromise before resolving and remove method from stack
+        responsePromise
+          .then((response) => {
+            resolve(response);
+          })
+          .catch(reject)
+          .finally(() => {
+            fcsSetterStack.popMethod(); // Pop method from the stack
+          });
       });
     });
   });
