@@ -15,10 +15,5 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-
-const discovery = require('./discovery');
-const fcs = require('./fcs');
-const fcsSetters = require('./fcsSetters');
-exports.fcs = fcs;
-exports.discovery = discovery;
-exports.fcsSetters = fcsSetters;
+const { launchApp } = require('./addOn');
+module.exports = { launchApp };

@@ -30,6 +30,7 @@ const setimmediate = require('setimmediate');
 let appTransport;
 const flatted = require('flatted');
 const _ = require('lodash');
+const fcsSetterStack = require('./fcsSetterStack');
 const internalV2FireboltCallsData = require('../../../fixtures/fireboltCalls/index');
 const externalV2FireboltCallsData = require('../../../fixtures/external/fireboltCalls/index');
 const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/index');
@@ -250,52 +251,66 @@ export default function (module) {
    * @example
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
    */
+
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
-    cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
-      return new Promise(async (resolve, reject) => {
+    return cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(() => {
+      return new Promise((resolve, reject) => {
+        let responsePromise;
         const [moduleName, methodName] = requestMap.method.split('.');
-        Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, methodName);
-        // Check if request is for fcs setters
+        // Push method onto the stack
+        fcsSetterStack.pushMethod(requestMap.method);
+        // Check if request is for FCS setters
         if (moduleName === CONSTANTS.FCS_SETTER) {
           const method = config.getRequestOverride(moduleName, methodName);
           if (typeof method === 'function') {
             const params = requestMap.params || {};
             const argCount = method.length;
-            // If the number of parameters does not match the expected argument count, reject
             const paramsCount = Object.keys(params).length;
-            if (paramsCount !== argCount) {
+            // Validate number of request parameters matches the fcsSetter argument count
+            if (paramsCount > argCount || (argCount > 0 && paramsCount === 0)) {
               reject(
                 new Error(
-                  `${requestMap.method} Expectes ${argCount} arguments, but got ${paramsCount} params`
+                  `${requestMap.method} expects ${argCount} arguments, but got ${paramsCount} params`
                 )
               );
             }
-            const attribute = params.attribute ?? null; // Set to null if not exist
-            const value = params.value ?? null; // Set to null if not exist
-            let args = [];
-            if (attribute !== null && value !== null) {
-              args = [attribute, value]; // If both attribute and value are provided
-            } else if (value !== null) {
-              args = [value]; // If only value is provided
-            }
-            // Dynamically call the method with the params
-            const response = await method(...args);
-            resolve(response);
+            // Based on the fcsSetter method params,resolve the arguments
+            const argResolvers = {
+              0: () => [], // No arguments expected
+              1: () => [params.value], // Single argument: use params.value
+              2: () => [params.attribute ?? null, params.value], // Two arguments: use params.attribute and params.value
+            };
+            // Dynamically resolve arguments using the resolver
+            const args = argResolvers[argCount]?.() || [];
+            // Dynamically call the method with the params to store the promise and to ensure waiting
+            responsePromise = Promise.resolve(method(...args));
           } else {
             reject(setterNotImplemented('not implemented'));
           }
         } else {
-          // Default logic for other methods
-          const message = await config.invokeRequestOverride(requestMap);
-          // Perform MTC/FB call only if the message is not null
-          if (message != null) {
-            const response = await transport.sendMessage(message);
-            const result = config.invokeResponseOverride(response);
-            resolve(result);
-          } else {
-            resolve(null);
-          }
+          // Default logic for other methods and wrap `invokeRequestOverride` to ensure it's always a Promise
+          responsePromise = Promise.resolve(config.invokeRequestOverride(requestMap)).then(
+            (message) => {
+              // Perform MTC/FB call only if the message is not null
+              if (message != null) {
+                return transport
+                  .sendMessage(message)
+                  .then((res) => config.invokeResponseOverride(res));
+              } else {
+                return null;
+              }
+            }
+          );
         }
+        // Ensure Cypress waits for responsePromise before resolving and remove method from stack
+        responsePromise
+          .then((response) => {
+            resolve(response);
+          })
+          .catch(reject)
+          .finally(() => {
+            fcsSetterStack.popMethod(); // Pop method from the stack
+          });
       });
     });
   });

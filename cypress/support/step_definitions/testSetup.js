@@ -48,14 +48,17 @@ Given(
         // Replace spaces with underscores and convert to uppercase for the fireboltCallKey
         fireboltCallKey = test.replace(/\s+/g, '_').toUpperCase();
       }
-      // Retrieve the firebolt object from environment variables using the fireboltCallKey
-      const fireboltObject = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[fireboltCallKey];
-      if (fireboltObject) {
-        // Update the runtime environment variable with the firebolt object
-        runtime.fireboltCall = fireboltObject;
-        Cypress.env(CONSTANTS.RUNTIME, runtime);
-        fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
-      }
+      // Retrieve the firebolt object from the fireboltCalls fixture
+      cy.getFireboltData(fireboltCallKey, CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS, false).then(
+        (fireboltObject) => {
+          if (fireboltObject) {
+            // Save the object as env.runtime.fireboltCall
+            const runtime = { fireboltCall: fireboltObject };
+            Cypress.env(CONSTANTS.RUNTIME, runtime);
+            fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
+          }
+        }
+      );
     }
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
@@ -162,19 +165,21 @@ function destroyAppInstance(testType) {
     testType
   );
   const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
-  
+  const params = {};
+  params.appId = appId;
+
   // If the current test type is present inside the closeAppTestTypes array then close the app.
   if (isCloseTestType) {
     fireLog.info(
       'Closing app since either Test Type is specified in closeAppTestTypes or is different from previous Test Type.'
     );
-    cy.exitAppSession('closeApp', appId);
+    cy.exitAppSession('closeApp', params);
   }
 
   // If the current test type is present inside the unloadAppTestTypes array then unload the app.
   if (isUnloadTestType) {
     fireLog.info('Unloading app since Test Type is specified in unloadAppTestTypes.');
-    cy.exitAppSession('unloadApp', appId);
+    cy.exitAppSession('unloadApp', params);
   }
 }
 

@@ -34,7 +34,7 @@ const path = require('path');
  */
 Cypress.Commands.add(
   'getFireboltData',
-  (key, callType = CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS) => {
+  (key, callType = CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS, failOnError = true) => {
     // Reading the data from combinedJson based on key.
     let fireboltData;
     if (callType == CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS) {
@@ -44,10 +44,15 @@ Cypress.Commands.add(
     } else {
       fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
-    if (!fireboltData) {
+    // FailOnError was set to false,for environment setup for background scenarios.
+    if (!fireboltData && failOnError) {
       fireLog.fail(CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
-    return fireboltData;
+    // To check for Override data,if exist append overrida data to the fireboltData,Otherwise return fireboltData as is.
+    if (fireboltData) {
+      const fireboltCallObject = UTILS.applyOverrides(fireboltData);
+      return fireboltCallObject;
+    }
   }
 );
 
@@ -302,7 +307,6 @@ Cypress.Commands.add('updateRunInfo', () => {
               });
             cy.readFile(reportEnvFile).then((reportEnv) => {
               if (reportEnv) {
-                const isPlatformRipple = false;
                 if (
                   reportEnv.customData &&
                   reportEnv.customData.data &&
@@ -1160,7 +1164,8 @@ Cypress.Commands.add('clearCache', () => {
  * cy.sendMessageToPlatformOrApp('App', {method: 'accessibility.onClosedCaptionsSettingsChanged', params: {}, context: {}, action: 'core', expected: 'result', appId: 'test.test', 'registerEvent'}
  */
 Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) => {
-  const { method, params, context, action, expected, appId } = requestData;
+  const { method, params, action, expected, appId } = requestData;
+  const context = requestData?.context ? requestData.context : {};
   const deviceIdentifier = requestData.deviceIdentifier;
   task = task ? task : CONSTANTS.TASK.CALLMETHOD;
   let isNotSupportedApi = false;
@@ -1209,6 +1214,12 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
       fireLog.assert(false, `Invalid ${target} target, it should be either app or platfrom`);
     }
   }).then((response) => {
+    if (method.startsWith(CONSTANTS.FCS_SETTER)) {
+      console.log(
+        `Schema validation skipped for the ${method} method as it is already handled by fcsSetters.`
+      );
+      return;
+    }
     if (response === CONSTANTS.NO_RESPONSE) {
       assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
     }

@@ -15,10 +15,10 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
+// The default function to expose new Cypress commands, before/after functions, etc.
+const cypressAddons = () => {
+  // Add your custom Cypress commands, before/after functions, etc.
+};
 
-const discovery = require('./discovery');
-const fcs = require('./fcs');
-const fcsSetters = require('./fcsSetters');
-exports.fcs = fcs;
-exports.discovery = discovery;
-exports.fcsSetters = fcsSetters;
+// Expose the default function
+export default cypressAddons;

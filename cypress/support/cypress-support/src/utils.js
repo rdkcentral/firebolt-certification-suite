@@ -356,7 +356,13 @@ function unsubscribe(webSocketClient = null) {
  **/
 function isScenarioExempted(method, param) {
   let exceptionType;
-  const exceptionMethods = getEnvVariable(CONSTANTS.EXCEPTION_METHODS);
+  const exceptionMethods = getEnvVariable(CONSTANTS.EXCEPTION_METHODS, false);
+
+  // If no exceptionMethods defined, it is not exempted.
+  if (!exceptionMethods) {
+    return false;
+  }
+
   for (const [type, list] of Object.entries(exceptionMethods)) {
     // Looking for the method and params in each list, if matched returning that exception method.
     methodInExceptionList = list.find((object) => {
@@ -603,9 +609,11 @@ function subscribeResults(data, metaData) {
  * interactionResults("{"method": "account.id", "response": "123", "tt": 12}")
  **/
 function interactionResults(interactionLog) {
-  interactionLog = JSON.parse(interactionLog);
-  if (interactionLog && interactionLog.hasOwnProperty(CONSTANTS.METHOD)) {
-    getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
+  if (interactionLog) {
+    interactionLog = JSON.parse(interactionLog);
+    if (interactionLog.hasOwnProperty(CONSTANTS.METHOD)) {
+      getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
+    }
   }
 }
 
@@ -1209,6 +1217,46 @@ function censorPubSubToken(data) {
   return JSON.stringify(data);
 }
 
+/**
+ * @module utils
+ * @function applyOverrides
+ * @description A function to check Override Object,if exist append overrida data to the fireboltData,Otherwise return fireboltData as is.
+ * @param {*} fireboltCallObject - fireboltObject to which overrides needs to be applied
+ * @example
+ * applyOverrides(fireboltCallObject)
+ */
+
+function applyOverrides(fireboltCallObject) {
+  try {
+    if (!fireboltCallObject.overrides) return fireboltCallObject;
+
+    // Ensure overrides is an array
+    const overrides = Array.isArray(fireboltCallObject.overrides)
+      ? fireboltCallObject.overrides
+      : [fireboltCallObject.overrides];
+
+    for (const override of overrides) {
+      if (typeof override.applyWhen !== 'function') {
+        fireLog.info('Ignoring override: Missing applyWhen() function', override);
+        continue;
+      }
+
+      if (!override.applyWhen()) {
+        fireLog.info('Ignoring override: applyWhen() returned false', override);
+        continue;
+      }
+      // Appending Override content to the fireboltCallObject if applyWhen() returns true
+      Object.assign(fireboltCallObject, override);
+    }
+  } catch (error) {
+    fireLog.info(
+      'Error in applyOverrides - Override key in the fireboltObject was not as expected::',
+      error
+    );
+  }
+  return fireboltCallObject; // Return the original or modified object based on the override
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -1239,4 +1287,5 @@ module.exports = {
   fetchAppIdentifierFromEnv,
   skipCurrentTest,
   censorPubSubToken,
+  applyOverrides,
 };
