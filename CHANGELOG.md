@@ -1,3 +1,10 @@
+# [1.8.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.2...v1.8.0-dev.3) (2025-02-18)
+
+
+### Features
+
+* test case versioning changes ([#307](https://github.com/rdkcentral/firebolt-certification-suite/issues/307)) ([b88e0be](https://github.com/rdkcentral/firebolt-certification-suite/commit/b88e0be9cef3daf02da57aa2461b344d55c351ab))
+
 # [1.8.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.1...v1.8.0-dev.2) (2025-02-17)
 
 
