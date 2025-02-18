@@ -1,0 +1,44 @@
+{
+  "jsonDir": "cypress/cucumber-json",
+  "reportPath": "./reports/cucumber-htmlreport.html",
+  "displayDuration": true,
+  "pageFooter": "<div></div>",
+  "customMetadata": true,
+  "customData": {
+    "title": "Run info",
+    "data": [
+      {
+        "label": "Product",
+        "value": "XUMO"
+      },
+      {
+        "label": "SDK Version",
+        "value": "1.4.1"
+      },
+      {
+        "label": "Firebolt Version",
+        "value": "N/A"
+      },
+      {
+        "label": "Platform",
+        "value": "WPE"
+      },
+      {
+        "label": "Release",
+        "value": "N/A"
+      },
+      {
+        "label": "Device",
+        "value": "XiOne-SCB"
+      },
+      {
+        "label": "Device Firmware",
+        "value": "N/A"
+      },
+      {
+        "label": "Partner",
+        "value": "xglobal"
+      }
+    ]
+  }
+}

@@ -596,8 +596,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
   }
   Cypress.env(CONSTANTS.SCENARIO_NAME, scenarioName);
   Cypress.env(CONSTANTS.FEATURE_NAME, featureFileName);
-  console.log('Feature Name: ' + featureFileName);
-  console.log('Scenario Name: ' + scenarioName);
+
   // Fetching current feature name
   const moduleReqIdJson = Cypress.env(CONSTANTS.MODULEREQIDJSON);
   const scenarioList = moduleReqIdJson.scenarioNames[featureFileName];
