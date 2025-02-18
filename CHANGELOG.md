@@ -1,3 +1,10 @@
+# [1.8.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.3...v1.8.0-dev.4) (2025-02-18)
+
+
+### Features
+
+* Added logic to override the fcsSetter methods ([#333](https://github.com/rdkcentral/firebolt-certification-suite/issues/333)) ([53080eb](https://github.com/rdkcentral/firebolt-certification-suite/commit/53080eb8b623d97120b6b60165c774df8221e60d))
+
 # [1.8.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.2...v1.8.0-dev.3) (2025-02-18)
 
 
