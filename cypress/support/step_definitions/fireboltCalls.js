@@ -385,11 +385,12 @@ Given(
     const testLowerCase = test.toLowerCase();
     const scenarioType = Cypress.env(CONSTANTS.SCENARIO_TYPE);
     let scenarioTypeLowerCase;
+    const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
     if (scenarioType != null) {
       scenarioTypeLowerCase = scenarioType.toLowerCase();
     }
 
-    if (testLowerCase.includes(CONSTANTS.DISMISS)) {
+    if (externalModuleTestTypes.includes(test)) {
       if (Cypress.env(CONSTANTS.SCENARIO_TYPE)) {
         // playback dismiss
         if (testLowerCase.includes(CONSTANTS.PLAYBACK)) {
