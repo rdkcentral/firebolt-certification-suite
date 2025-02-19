@@ -103,11 +103,11 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Scenario                 | Method          | Value |
-            | disable voiceguidance    | enabled         | false |
-            | enabling voiceguidance   | enabled         | true  |
-            | disabling navigationHints  | navigationHints | false |
-            | enabling navigationHints | navigationHints | true  |
+            | Scenario                  | Method          | Value |
+            | disable voiceguidance     | enabled         | false |
+            | enabling voiceguidance    | enabled         | true  |
+            | disabling navigationHints | navigationHints | false |
+            | enabling navigationHints  | navigationHints | true  |
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.voiceGuidanceSettings - Validating API and Event Responses for <Method> change to <Value>
@@ -232,3 +232,9 @@ Feature: Accessibility
             | Method | Value |
             | speed  | 1     |
             | rate   | 2     |
+
+    @sdk @transport @Sev1
+    Scenario: Accessibility.highContrastUI - Validate API Method Response Content
+        Given the environment has been set up for 'Accessibility highContrastUI' tests
+        When '3rd party app' invokes the 'Firebolt' get API
+        Then 'Firebolt' platform responds to '3rd party app' get API
