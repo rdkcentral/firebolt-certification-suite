@@ -216,6 +216,10 @@ function destroyAppInstance(testType) {
  * Given Test runner waits for 2 'seconds'
  */
 Given(/Test runner waits for (.+) '(minutes|seconds)'/, (time, minuteOrSecond) => {
+  const waitTime = Cypress.env('waitTime');
+  if (waitTime) {
+    time = parseInt(time) + waitTime;
+  }
   if (minuteOrSecond == 'minutes') {
     cy.wait(time * 60 * 1000);
   } else {
