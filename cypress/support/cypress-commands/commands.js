@@ -1789,7 +1789,7 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
 /**
  * @module commands
  * @function softAssert
- * @description soft assertion to compare actual and expected values
+ * @description soft assertion to compare actual and expected values.
  * @example
  * cy.softAssert(actual, expected, message)
  */
