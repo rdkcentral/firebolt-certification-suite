@@ -1800,7 +1800,7 @@ Cypress.Commands.add('softAssert', (actual, expected, message) => {
       const log = Cypress.log({
         name: 'Soft assertion error',
         displayName: 'softAssert',
-        message: diff.error.message,
+        message: `Soft assertion failed : ${message}`,
       });
     });
   } else{
