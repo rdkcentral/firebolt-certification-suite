@@ -760,16 +760,8 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
   }
-  // Initiating the Interaction service to listening for interaction logs when interactionsMetrics is set to true in beforeOperation object.
-  else if (
-    beforeOperation.hasOwnProperty(CONSTANTS.INTERACTIONS_METRICS) &&
-    beforeOperation.interactionsMetrics === true
-  ) {
-    cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
-      if (response) {
-        Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
-      }
-    });
+  else {
+    cy.startAdditionalServices(beforeOperation);
   }
 });
 
@@ -1593,46 +1585,6 @@ Cypress.Commands.add('getRuntimeFireboltCallObject', () => {
 
 /**
  * @module commands
- * @function startOrStopInteractionsService
- * @description To start or stop firebolt interactions collection service in device by passing appropriate intent to designated handler
- * @param {String} action - initiated or stopped
- * @example
- * cy.startOrStopInteractionsService('initiated)
- * cy.startOrStopInteractionsService('stopped')
- */
-Cypress.Commands.add('startOrStopInteractionsService', (action) => {
-  const requestMap = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETFIREBOLTINTERACTIONSHANDLER,
-    params: {
-      trigger: action == CONSTANTS.INITIATED ? CONSTANTS.START : CONSTANTS.STOP,
-      optionalParams: '',
-    },
-    task: CONSTANTS.TASK.FIREBOLTINTERACTIONSHANDLER,
-  };
-  fireLog.info(CONSTANTS.REQUEST_MAP_INTERACTIONS_SERVICE + JSON.stringify(requestMap));
-  // Sending message to the platform to call designated handler
-  cy.sendMessagetoPlatforms(requestMap).then((result) => {
-    if (result?.success) {
-      fireLog
-        .assert(true, `Firebolt interactions collection service ${action} successfully`)
-        .then(() => {
-          return true;
-        });
-    } else {
-      fireLog
-        .assert(
-          false,
-          `Firebolt interactions collection service with action as ${action} has failed with error ${JSON.stringify(result.message)}`
-        )
-        .then(() => {
-          return false;
-        });
-    }
-  });
-});
-
-/**
- * @module commands
  * @function envConfigSetup
  * @description Gives additional functionality to add necessary setup from the config module.
  * @example
@@ -1641,6 +1593,18 @@ Cypress.Commands.add('startOrStopInteractionsService', (action) => {
  */
 Cypress.Commands.add('envConfigSetup', () => {
   fireLog.info('No additional config module environment setup');
+});
+
+/**
+ * @module commands
+ * @function startAdditionalServices
+ * @description Gives additional functionality to add necessary services from the config module.
+ * @example
+ * cy.startAdditionalServices()
+ * @Note Add or overwrite startAdditionalServices cypress command in the config module to add additional services.
+ */
+Cypress.Commands.add('startAdditionalServices', (request, pubSubClient) => {
+  fireLog.info('No additional service to start');
 });
 
 /**
@@ -1808,85 +1772,9 @@ Cypress.Commands.add('softAssert', (actual, expected, message) => {
 
 /**
  * @module commands
- * @function softAssertInArray
- * @description soft assertion to compare methods in array
- * @example
- * cy.softAssertInArray(array1, array2)
- */
-Cypress.Commands.add('softAssertInArray', (methodArray, interactionLogs, messageFromFunction) => {
-  const methodNotFound = [];
-  if (methodArray.length > 0) {
-    const message = `The following methods are missing in interactionLogs: [${methodNotFound}].`;
-    jsonAssertion.softAssert(false, true, messageFromFunction);
-    Cypress.log({
-      name: 'Soft assertion error',
-      displayName: 'softAssertMethodsInLogs',
-      message: messageFromFunction,
-    });
-  }
-});
-
-/**
- * @module commands
- * @function softAssertFormat
- * @description soft assertion to check if the value matches the regex format
- * @example
- * cy.softAssertFormat(value, regexFormat, message)
- */
-Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
-  if (regex.test(value)) {
-    fireLog.info(message);
-  } else {
-    jsonAssertion.softAssert(false, true, message);
-    Cypress.log({
-      name: 'Soft assertion error',
-      displayName: 'softAssertStringFormat',
-      message: message,
-    });
-  }
-});
-
-/**
- * @module commands
  * @function softAssertAll
  * @description soft assertion to check all the assertions
  * @example
  * cy.softAssertAll()
  */
 Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
-
-/**
- * @module commands
- * @function getPlayerMethodInteractions
- * @description To filter the fireboltInteraction logs
- * @example
- * cy.getPlayerMethodInteractions()
- */
-Cypress.Commands.add('getPlayerMethodInteractions', (appId, method) => {
-  const fireboltInteractionLogs = Cypress.env(CONSTANTS.FB_INTERACTIONLOGS);
-  const startTime = Cypress.env(CONSTANTS.INTERACTION_LOGS_START_TIME);
-  const endTime = Date.now();
-  const filteredLogs = [];
-
-  for (const key in fireboltInteractionLogs) {
-    if (fireboltInteractionLogs.hasOwnProperty(key)) {
-      fireboltInteractionLogs[key].forEach((logArray) => {
-        logArray.forEach((log) => {
-          try {
-            if (
-              log.app_id === appId &&
-              log.method === method &&
-              log.time_stamp >= startTime &&
-              log.time_stamp <= endTime
-            ) {
-              filteredLogs.push(log);
-            }
-          } catch (error) {
-            console.error('Firebolt interactions logs filtering failed:', error);
-          }
-        });
-      });
-    }
-  }
-  return filteredLogs;
-});
