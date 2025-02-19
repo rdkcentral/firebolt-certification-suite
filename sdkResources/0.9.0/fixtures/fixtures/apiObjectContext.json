@@ -1,0 +1,16 @@
+{
+    "noContext" : {},
+    "DISCOVERY_LAUNCH_NULL" : {"type":"null"},
+    "DISCOVERY_LAUNCH_HOME" : {"type":"home"},
+    "DISCOVERY_LAUNCH_PLAYBACK" : {"type":"playback"},
+    "DISCOVERY_LAUNCH_ENTITY" : {"type":"entity"},
+    "DISCOVERY_LAUNCH" : {"type":"launch"},
+    "DISCOVERY_LAUNCH_SEARCH" : {"type":"search"},
+    "DISCOVERY_LAUNCH_SECTION" : {"type":"section"},
+    "DISCOVERY_LAUNCH_TUNE" : {"type":"tune"},
+    "DISCOVERY_LAUNCH_PLAYENTITY" : {"type":"play-entity"},
+    "DISCOVERY_LAUNCH_PLAYQUERY" : {"type":"play-query"},
+    "CAPABILITIES_GRANTED_USE": {"role": "use"},
+    "CAPABILITIES_GRANTED_MANAGE": {"role": "manage"},
+    "CAPABILITIES_GRANTED_PROVIDE": {"role": "provide"}
+}

@@ -1,0 +1,304 @@
+{
+    "GET_DEVICE": {
+        "scope": "device",
+        "key": "authTestTokenDevice"
+    },
+    "GET_ACCOUNT": {
+        "scope": "account",
+        "key": "authTestTokenAccount"
+    },
+    "GET_ACCOUNT_DEVICE_KEY": {
+        "scope": "account",
+        "key": "authTestTokenDevice"
+    },
+    "GET_DEVICE_ACCOUNT_KEY": {
+        "scope": "device",
+        "key": "authTestTokenAccount"
+    },
+    "GET_ACCOUNT_KEY1": {
+        "scope": "account",
+        "key": "authTestTokenAccount1"
+    },
+    "SET_DEVICE": {
+        "scope": "device",
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SET_ACCOUNT": {
+        "scope": "account",
+        "key": "authTestTokenAccount",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SET_DEVICE_OPTIONAL": {
+        "scope": "device",
+        "key": "authTestTokenDevice1",
+        "value": "authTestTokenValue1",
+        "options": {
+            "ttl": 2000
+        }
+    },
+    "SET_ACCOUNT_OPTIONAL": {
+        "scope": "account",
+        "key": "authTestTokenAccount1",
+        "value": "authTestTokenValue1",
+        "options": {
+            "ttl": 2000
+        }
+    },
+    "DEFAULT_VALUE": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo=",
+    "VALUE1": "authTestTokenValue1",
+    "SET_DEVICE_VALUE2": {
+        "scope": "device",
+        "key": "authTestTokenDevice1",
+        "value": "authTestTokenValue2"
+    },
+    "SET_ACCOUNT_VALUE2": {
+        "scope": "account",
+        "key": "authTestTokenAccount1",
+        "value": "authTestTokenValue2"
+    },
+    "SET_DEVICE_TO_ACCOUNT": {
+        "scope": "account",
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBpcyBub3QgYSByZWFsIHRva2VuLg=="
+    },
+    "SET_ACCOUNT_TO_DEVICE": {
+        "scope": "device",
+        "key": "authTestTokenAccount",
+        "value": "VGhpcyBpcyBub3QgYSByZWFsIHRva2VuLg=="
+    },
+    "SCOPE_UPDATED_VALUE": "VGhpcyBpcyBub3QgYSByZWFsIHRva2VuLg==",
+    "VALUE2": "authTestTokenValue2",
+    "SET_DEVICE1": {
+        "scope": "device",
+        "key": "authTestTokenDevice1",
+        "value": "authTestTokenDevice1"
+    },
+    "SET_DEVICE2": {
+        "scope": "device",
+        "key": "authTestTokenDevice2",
+        "value": "authTestTokenDevice2"
+    },
+    "SET_ACCOUNT1": {
+        "scope": "account",
+        "key": "authTestTokenAccount1",
+        "value": "authTestTokenAccount1"
+    },
+    "SET_ACCOUNT2": {
+        "scope": "account",
+        "key": "authTestTokenAccount2",
+        "value": "authTestTokenAccount2"
+    },
+    "REMOVE_DEVICE1": {
+        "scope": "device",
+        "key": "authTestTokenDevice1"
+    },
+    "REMOVE_ACCOUNT1": {
+        "scope": "account",
+        "key": "authTestTokenAccount1"
+    },
+    "REMOVE_DEVICE": {
+        "scope": "device",
+        "key": "authTestTokenDevice"
+    },
+    "REMOVE_ACCOUNT": {
+        "scope": "account",
+        "key": "authTestTokenAccount"
+    },
+    "GET_DEVICE_KEY2": {
+        "scope": "device",
+        "key": "authTestTokenDevice2"
+    },
+    "GET_DEVICE_KEY1": {
+        "scope": "device",
+        "key": "authTestTokenDevice1"
+    },
+    "GET_ACCOUNT_KEY2": {
+        "scope": "account",
+        "key": "authTestTokenAccount2"
+    },
+    "GET_DEVICE2": "authTestTokenDevice2",
+    "GET_ACCOUNT2": "authTestTokenValue2",
+    "GET_DEVICE1": "authTestTokenDevice1",
+    "GET_ACCOUNT1": "authTestTokenAccount1",
+    "INVALID_SCOPE": {
+        "scope": "test",
+        "key": "authTestTokenDevice"
+    },
+    "SCOPE_EMPTY": {
+        "scope": "",
+        "key": "authTestTokenDevice"
+    },
+    "SCOPE_NUM": {
+        "scope": 1234,
+        "key": "authTestTokenDevice"
+    },
+    "SCOPE_NULL": {
+        "scope": null,
+        "key": "authTestTokenDevice"
+    },
+    "SCOPE_BOOL": {
+        "scope": false,
+        "key": "authTestTokenDevice"
+    },
+    "WITHOUT_SCOPE": {
+        "key": "authTestTokenDevice"
+    },
+    "KEY_NUM": {
+        "scope": "device",
+        "key": 1234
+    },
+    "KEY_NULL": {
+        "scope": "device",
+        "key": null
+    },
+    "KEY_BOOL": {
+        "scope": "device",
+        "key": false
+    },
+    "WITHOUT_KEY": {
+        "scope": "device"
+    },
+    "SET_INVALID_SCOPE": {
+        "scope": "test",
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SET_SCOPE_NUM": {
+        "scope": 1234,
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SET_SCOPE_NULL": {
+        "scope": null,
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SET_SCOPE_BOOL": {
+        "scope": false,
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SET_SCOPE_EMPTY": {
+        "scope": "",
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SET_WITHOUT_SCOPE": {
+        "key": "authTestTokenDevice",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SET_KEY_NUM": {
+        "scope": "device",
+        "key": 1234,
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SET_KEY_NULL": {
+        "scope": "device",
+        "key": null,
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SET_KEY_BOOL": {
+        "scope": "device",
+        "key": false,
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SET_WITHOUT_KEY": {
+        "scope": "device",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    },
+    "SET_VALUE_NUM": {
+        "scope": "device",
+        "key": "authTestTokenDevice",
+        "value": 1234
+    },
+    "SET_VALUE_NULL": {
+        "scope": "device",
+        "key": "authTestTokenDevice",
+        "value": null
+    },
+    "SET_VALUE_BOOL": {
+        "scope": "device",
+        "key": "authTestTokenDevice",
+        "value": false
+    },
+    "SET_WITHOUT_VALUE": {
+        "scope": "device",
+        "key": "authTestTokenDevice"
+    },
+    "SET_INVALID_OPTIONS": {
+        "scope": "account",
+        "key": "authTestTokenAccount",
+        "value": "authTestTokenValue1",
+        "options": {
+            "test": 600
+        }
+    },
+    "SET_OPTIONS_EMPTY_OBJ": {
+        "scope": "account",
+        "key": "authTestTokenAccount",
+        "value": "authTestTokenValue1",
+        "options": {}
+    },
+    "SET_OPTIONS_EMPTY_STRING": {
+        "scope": "account",
+        "key": "authTestTokenAccount",
+        "value": "authTestTokenValue1",
+        "options": ""
+    },
+    "DEVICE_TTL": {
+        "scope": "device",
+        "key": "authTestTokenDeviceTTL"
+    },
+    "ACCOUNT_TTL": {
+        "scope": "account",
+        "key": "authTestTokenAccountTTL"
+    },
+    "SET_DEVICE_TTL": {
+        "scope": "device",
+        "key": "authTestTokenDeviceTTL",
+        "value": "authTestTokenValueTTL",
+        "options": {
+            "ttl": 50
+        }
+    },
+    "SET_ACCOUNT_TTL": {
+        "scope": "account",
+        "key": "authTestTokenAccountTTL",
+        "value": "authTestTokenValueTTL",
+        "options": {
+            "ttl": 50
+        }
+    },
+    "VALUE_TTL": "authTestTokenValueTTL",
+    "CLEAR_DEVICE": {
+        "scope": "device"
+    },
+    "CLEAR_ACCOUNT": {
+        "scope": "account"
+    },
+    "CLEAR_INVALID_SCOPE": {
+        "scope": "test"
+    },
+    "CLEAR_SCOPE_EMPTY": {
+        "scope": ""
+    },
+    "CLEAR_SCOPE_NUM": {
+        "scope": 1234
+    },
+    "CLEAR_SCOPE_NULL": {
+        "scope": null
+    },
+    "CLEAR_SCOPE_BOOLEAN": {
+        "scope": false
+    },
+    "KEY_EMPTY": {
+        "scope": "device",
+        "key": ""
+    },
+    "SET_KEY_EMPTY": {
+        "scope": "device",
+        "key": "",
+        "value": "VGhpcyBub3QgYSByZWFsIHRva2VuLgo="
+    }
+}

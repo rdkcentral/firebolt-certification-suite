@@ -1,0 +1,2529 @@
+{
+    "scenarioNames": {
+        "Accessibility": {
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Disable closedcaptions": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.1",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Enable closedcaptions": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.2",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontFamily-monospaced_sanserif": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.3",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontFamily-cursive": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.4",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontFamily-proportional_serif": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.5",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontFamily-monospaced_serif": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.6",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontFamily-proportional_sanserif": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.7",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontFamily-smallcaps": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.8",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontFamily-casual": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.9",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set smallcaps": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.10",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontSize-1": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.11",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontSize-0.5": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.12",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontSize-1.5": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.13",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontColor-#ff00ff": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.14",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontEdge-raised": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.15",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontEdge-none": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.16",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontEdge-depressed": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.17",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontEdge-uniform": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.18",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontEdge-dropShadow-left": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.19",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontEdge-dropShadow-right": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.20",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontEdgeColor-#FFFFFF": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.21",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set backgroundColor-#7f7f7f": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.22",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set fontOpacity-75": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.23",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set backgroundOpacity-75": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.24",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set textAlign-left": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.25",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set textAlign-center": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.26",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set textAlign-right": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.27",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set textAlignVertical-top": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.28",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set textAlignVertical-middle": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.29",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set textAlignVertical-bottom": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.30",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set windowColor-white": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.31",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set windowOpacity-50": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.32",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: Set preferredLanguages": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.33",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: fontFamily with 'null' params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.34",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: fontSize with 'null' params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.35",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: fontColor with 'null' params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.36",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: fontEdge with 'null' params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.37",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: fontEdgeColor with 'null' params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.38",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: backgroundColor with 'null' params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.39",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: backgroundOpacity with 'null' params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.40",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: textAlign with 'null' params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.41",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: textAlignVertical with 'null' params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.42",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: windowColor with 'null' params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.43",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptionsSettings - Positive Scenario: windowOpacity with 'null' params": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.44",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.voiceGuidanceSettings - Positive Scenario: Disable voiceguidance": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.45",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.voiceGuidanceSettings - Positive Scenario: Enable voiceguidance": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.46",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.voiceGuidanceSettings - Positive Scenario: Set speed-1": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.47",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.voiceGuidanceSettings - Positive Scenario: Set speed-0.5": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.48",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.voiceGuidanceSettings - Positive Scenario: Set speed-2": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.49",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.audioDescriptionSettings - Positive Scenario: Disable audioDescriptionSettings": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.50",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.audioDescriptionSettings - Positive Scenario: Enable audioDescriptionSettings": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.51",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptionsSettings"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.onClosedCaptionsSettingsChanged event - Positive Scenario: Clear listeners": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.52",
+                            "description": "Clearing accessibility.onClosedCaptionsSettingsChanged event listener"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Disable closedcaptions": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.53",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Set fontFamily-monospaced_sanserif": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.54",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Set fontSize-1": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.55",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Set fontColor-#ffffff": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.56",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Set fontEdge-raised": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.57",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Set fontEdgeColor-#7f7f7f": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.58",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Set backgroundColor-#000000": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.59",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Set fontOpacity-100": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.60",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Set backgroundOpacity-100": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.61",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Set textAlign-left": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.62",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Set textAlignVertical-top": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.63",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Set windowColor-#7f7f7f": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.64",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.closedCaptions - Positive Scenario: Set windowOpacity-40": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.65",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.voiceGuidance - Positive Scenario: Disable voiceguidance": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.66",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.voiceGuidance - Positive Scenario: Enable voiceguidance": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.66",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            },
+            "Accessibility.voiceGuidance - Positive Scenario: Set speed-1": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Accessibility 1.66",
+                            "description": "Positive Scenario: Validating accessibility.closedCaptions"
+                        }
+                    }
+                ]
+            }
+        },
+        "UserGrants": {
+            "UserGrants.Grant R*2.2.2.1 - Positive Scenario: Validate Capabilities with denied (pinChallenge) and lifespan once": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.1, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R.2.1.1 - Positive Scenario: Validate Capability Grant access with one step option(only acknowledgeChallenge)": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.2.1.1, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.2.2 - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan forever": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.2, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.2.2 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan forever": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.2, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.2.3 - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan appActive": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.3, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.2.3 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan appActive": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.3, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.2.5 - Positive Scenario: Validate Capabilities with granted (ackchallenge) and lifespan:seconds lifespanTtl:60 sec": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.5, R.1.1, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.2.5 - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60 sec": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.5, R.1.2, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.2.5 - Positive Scenario: Validate Capabilities with grant(pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl it should not ask for grant": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.5, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.2.5 - Positive Scenario: Validate Capabilities with grant(ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.5, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.2.5 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl and it should not ask grant": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.5, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.2.5 - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.5, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.4 - Positive Scenario: privacySetting - autoApplyPolicy:always property-getter:true silently grant": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.4, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.4 - Positive Scenario: Validate Capability autoApplyPolicy:always property-getter:false silently denied": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.4, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.6 - Positive Scenario: Validate Capability autoApplyPolicy:disallowed property-getter:false silently denied": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.6, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.5 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:true silently grant": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.5, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.5 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false grant": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.5, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.5 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false deny": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.5, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.6 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true grant": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.6, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.6 - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true deny": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.6, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:true grant": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.7, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:false grant": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.7, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:true deny": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.7, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.7 - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:false deny": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.7, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:true deny property should be set to false": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.9, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.10 - Positive Scenario:privacySetting - Validate Capability updateProperty:false - property-getter:true deny property should not be updated": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.10, R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:false grant property should be set to false": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.9, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:true grant property should not be changed": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.9, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.3.9 - Positive Scenario:privacySetting - Validate Capability updateProperty:false - property-getter:false grant property should not be changed": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.3.9, R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.2.4 - Positive Scenario: Validate Capabilities with grant (pinChallenge) and lifespan powerActive - after reboot deny and validate": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.4",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capabilities R*2.2.2.4 - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan powerActive - after reboot grant and validate": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R*2.2.2.4",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.request R.1.1 - Positive Scenario: Validate userGrants.request by granting for role use": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.request R.1.1 - Positive Scenario: Validate userGrants.request by granting for role manage": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.request R.1.2 - Negative Scenario: Validate userGrants.request by denying for role use": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.request R.1.2 - Negative Scenario: Validate userGrants.request by denying for role manage": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.request R.1.1 - Negative Scenario: Validate userGrants.request call with role use, but grantpolicy having manage capability": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.request R.1.2 - Positive Scenario: Validate UserGrants.request which grantpolicy is not present in manifest": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.request - Positive Scenario: Validate userGrants.request by deferring": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants 1.40",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.request - Positive Scenario: Validate userGrants.request by deferring with timeout": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants 1.41",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.request R.1.1 - Positive Scenario: Validate usergrants.request by granting for role provide": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.request R.1.2 - Negative Scenario: Validate usergrants.request by denying for role provide": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            }
+        },
+        "CapabilitiesRequest": {
+            "Capabilities.request - Positive Scenario: Validate capabilities.request by granting for role use which has grantpolicy in manifest": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "CapabilitiesRequest 1.1",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.request - Negative Scenario: Validate capabilities.request by denying for role use which has grantpolicy in manifest": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "CapabilitiesRequest 1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.request - Positive Scenario: Validate capabilities.request by granting for role manage": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "CapabilitiesRequest 1.3",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.request - Negative Scenario: Validate capabilities.request by denying for role manage": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "CapabilitiesRequest 1.4",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.request - Positive Scenario: Validate capabilities.request by granting for role provide": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "CapabilitiesRequest 1.5",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.request - Negative Scenario: Validate capabilities.request by denying for role provide": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "CapabilitiesRequest 1.6",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.request - Positive Scenario: Validate capabilities.request call with role use, but grantpolicy having manage capability": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "CapabilitiesRequest 1.7",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.request - Positive Scenario: Validate capabilities.request which grantpolicy is not present in manifest": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "CapabilitiesRequest 1.8",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.request - Negative Scenario: Validate capabilities.request by deferring for role use which has grantpolicy in manifest": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "CapabilitiesRequest 1.9",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.request - Negative Scenario: Validate capabilities.request by deferring with timeout for role use which has grantpolicy in manifest": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "CapabilitiesRequest 1.10",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            }
+        },
+        "Capabilities": {
+            "Capabilities.permitted - Positive Scenario:  Validate authentication token device capability": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Capabilities 1.1",
+                            "description": "Positive Scenario: Validate authentication token device capability"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.permitted - Positive Scenario:  Validate authentication token platform capability": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Capabilities 1.2",
+                            "description": "Positive Scenario: Validate authentication token platform capability"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.permitted - Positive Scenario:  Validate authentication token root capability": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Capabilities 1.3",
+                            "description": "Positive Scenario: Validate authentication token root capability"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.permitted - Positive Scenario:  Validate authentication token session capability": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Capabilities 1.4",
+                            "description": "Positive Scenario: Validate authentication token session capability"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.permitted - Positive Scenario:  Validate device make capability": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Capabilities 1.5",
+                            "description": "Positive Scenario: Validate authentication device make capability"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.permitted - Positive Scenario:  Validate device model capability": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Capabilities 1.6",
+                            "description": "Positive Scenario: Validate authentication device model capability"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.permitted - Positive Scenario:  Validate device sku capability": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Capabilities 1.7",
+                            "description": "Positive Scenario: Validate authentication device sku capability"
+                        }
+                    }
+                ]
+            },
+            "Capabilities.permitted - Positive Scenario:  Validate device uid capability": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "Capabilities 1.8",
+                            "description": "Positive Scenario: Validate authentication device uid capability"
+                        }
+                    }
+                ]
+            }
+        },
+        "UserGrants_Manage": {
+            "Usergrants.app R.5.1.2 - Positive Scenario: with grant(ackchallenge)": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.5.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Usergrants.device R.5.1.3 - Positive Scenario: with grant(ackchallenge)": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.5.1.3",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Usergrants.capability R.5.1.4 - Positive Scenario: with grant(ackchallenge)": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.5.1.4",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Usergrants.grant R.5.1.5 - Positive Scenario: grant capability at device level": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.5.1.5",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Usergrants.grant R.5.1.5 - Positive Scenario: grant capability at app level": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.5.1.5",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Usergrants.deny R.5.1.6 - Positive Scenario: deny capability at device level": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.5.1.6",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Usergrants.deny R.5.1.6 - Positive Scenario: deny capability at app level": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.5.1.6",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Usergrants.clear R.5.1.7 - Positive Scenario: clear grant at device level for role use": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.5.1.7",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Usergrants.clear R.5.1.7 - Positive Scenario: clear grant at app level for role use": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.5.1.7",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Usergrants.request - Positive Scenario: requesting for grant without force params, with force=true": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants 1.10",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Usergrants.request - Positive Scenario: requesting for grant without force params, with force=true and force=false": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants 1.11",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "Usergrants.app R.5.1.2 - Positive Scenario: with grant(pinChallenge)": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.5.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.Capability R.5.1.4 - Positive Scenario: by clearing the grant and validating usergrants.capability as empty": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.5.1.7, R.5.1.4",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            },
+            "UserGrants.app R.5.1.2 - Positive Scenario: by clearing the grant and validating usergrants.app as empty": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserGrants R.5.1.7, R.5.1.2",
+                            "description": "Should not be null"
+                        }
+                    }
+                ]
+            }
+        },
+        "Lifecycle_Inactive": {
+            
+          "Lifecycle R*3.3 Close an app from foreground": {
+            "req": [
+              {
+                "state": {
+                  "id": "R*4.6, R*2.2.5, R*2.2.6"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": "R*2.2.2 ['onInactive' event triggered]"
+                }
+              },
+              {
+                "visible_check": {
+                    "id": "R.2.2.1"
+                }
+              }
+            ]
+          },
+          "Lifecycle R*3.3 Close an app from background": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R*2.2.5, R*2.2.6"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*2.2.2 ['onInactive' event triggered]"
+                  }
+                },
+                {
+                  "visible_check": {
+                      "id": "R.2.2.1"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R*3.3.3 No impact on closing app from inactive state": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.3.3"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*3.3.3"
+                  }
+                },
+                {
+                  "visible_check": {
+                      "id": "R.2.2.1"
+                  }
+                }
+              ]
+          }
+        },
+        "Lifecycle_Foreground": {
+          "Lifecycle R*3.2 Loading & Launching an App (initializing -> foreground)": {
+            "req": [
+              {
+                "state": {
+                  "id": "R*4.6, R*3.2.7"
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": ["R*2.3.6 ['onForeground' event triggered]", "R*2.2.2 ['onInactive' event triggered]"]
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "R*2.3.2"
+                }
+              }
+            ]
+          },
+          "Lifecycle R*3.2.3 Relaunch foreground app": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.2.3"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*3.2.3"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.3.2"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R.3.2.1 App Launching another app": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.2.7"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*2.4.6 ['onBackground' event triggered]"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.3.2"
+                  }
+                }
+              ]
+          }
+        },
+        "Lifecycle_Initializing": {
+            "Lifecycle R.3.3.4 Cannot Close an app from initializing": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*2.1.1"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.1.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.3.3.4"
+                        }
+                    }
+                ]
+            }
+        },
+        "Lifecycle_Terminated": {
+            "Lifecycle R*3.8 Terminate app in foreground State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.8"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.8"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.8 Terminate app in background State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.8"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.8"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.8 Terminate app in initializing State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.8"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.8"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.8 Terminate app in inactive State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.8"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.8"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.8 Terminate app in suspended State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.8"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.8"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.8 Terminate app in unloading State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.8"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.8"
+                        }
+                    }
+                ]
+            }
+        },
+        "Lifecycle_Unloading": {
+            "Lifecycle R.4.5.4 No impact of multiple Finished events while unloading": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R.4.5.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.5.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.4.5.4"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.7 Unloading from Inactive state": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*2.5.1, R*3.7.5"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.5.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.7.5, R*2.5.1"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R.3.3.4 Cannot Close an Unloading App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R.3.3.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.5.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.3.3.4"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*4.5.3 finished from unloading state": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*4.5.3"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.5.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*4.5.3"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.7.2 Should not unload from active state (foreground)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.7.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.5.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.7.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*2.6.5 Cannot Suspend Unloaded app": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*2.6.5"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.5.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*2.6.5"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (initializing)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R.4.5.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.5.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.4.5.4"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (foreground)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R.4.5.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.5.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.4.5.4"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (background)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R.4.5.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.5.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.4.5.4"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (inactive)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R.4.5.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.5.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.4.5.4"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R.4.5.4 Should not finish from state other than unloading (suspended)": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R.4.5.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.5.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.4.5.4"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R.3.3.4 Cannot Close an app that is not loaded": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R.3.3.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": "R*2.5.3"
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.3.3.4"
+                        }
+                    }
+                ]
+            }
+        },
+        "Lifecycle_Background": {
+          "Lifecycle R*3.4 Background an app from foreground": {
+            "req": [
+              {
+                "state": {
+                  "id": 
+                    "R*4.6, R*3.4.6"
+                
+                }
+              },
+              {
+                "history": {
+                  "id": ""
+                }
+              },
+              {
+                "event": {
+                  "id": "R*2.4.6 ['onBackground' event triggered]"
+                }
+              },
+              {
+                "visible_check": {
+                  "id": "R*2.4.2"
+                }
+              }
+            ]
+          },
+          "Lifecycle R*3.4 Background an app from inactive": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.4.6"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*2.4.6 ['onBackground' event triggered]"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R.3.4.4 Cannot Background app that is not loaded": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R.3.4.4"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R.3.4.4"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R*3.4.3 Cannot Background a Backgrounded App": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R*3.4.3"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R*3.4.3"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R.3.4.4 Cannot Background app in Unloading state": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R.3.4.4"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R.3.4.4"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R.3.4.4 Cannot background app from suspended state": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R.3.4.4"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R.3.4.4"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
+                }
+              ]
+          },
+          "Lifecycle R.3.4.4 Should not Background app in initializing state": {
+            "req": [
+                {
+                  "state": {
+                    "id": "R*4.6, R.3.4.4"
+                  }
+                },
+                {
+                  "history": {
+                    "id": ""
+                  }
+                },
+                {
+                  "event": {
+                    "id": "R.3.4.4"
+                  }
+                },
+                {
+                  "visible_check": {
+                    "id": "R*2.4.2"
+                  }
+                }
+              ]
+          }
+        },
+        "Lifecycle_Suspended": {
+            "Lifecycle R*1.6.1 App should subscribe to onSuspended listener regardless of capability": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*2.6.1"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*2.6.1"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*2.6.5 Suspend App from Inactive state": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*2.6.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*2.6.6 ['onSuspended' event triggered]"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.2.5, R*3.2.6, R*3.2.7 Relaunch a previously Suspended app after Unsuspend": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.2.7, R*2.2.8"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*2.3.6, R*2.2.8"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.5.2 Cannot Suspend a suspended App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.5.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.5.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*2.6.5 Cannot Suspend a unloaded App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*2.6.5"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*2.6.5"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.2.5 Cannot relaunch Suspended App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.2.5"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.2.5"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*2.6.5 Cannot Suspend foreground app": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*2.6.5"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*2.6.5"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*2.6.5 Cannot Suspend background app": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*2.6.5"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*2.6.5"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R.3.3.4 Cannot Close Suspended App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R.3.3.4"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.3.3.4"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6 Unsuspending App": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*2.2.8, R*3.6.7"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*2.2.8"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6.2 Cannot Unsuspend in initializing State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.6.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.6.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6.3 Cannot Unsuspend in foreground State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.6.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.6.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6.3 Cannot Unsuspend in background State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.6.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.6.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6.3 Cannot Unsuspend in inactive State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.6.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.6.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6.3 Cannot Unsuspend in unloading State": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.6.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.6.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R*3.6.2 Unsuspend unloaded app": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R*3.6.2"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R*3.6.2"
+                        }
+                    }
+                ]
+            },
+            "Lifecycle R.3.5.3 Try to suspend an app that doesn't exist": {
+                "req": [
+                    {
+                        "state": {
+                            "id": "R*4.6, R.3.5.3"
+                        }
+                    },
+                    {
+                        "history": {
+                            "id": ""
+                        }
+                    },
+                    {
+                        "event": {
+                            "id": "R.3.5.3"
+                        }
+                    }
+                ]
+            }
+        },
+        "UserInterest": {
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type interest and reason playlist": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.1",
+                            "description": "Positive Scenario: with type interest and reason playlist"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type interest and reason reaction": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.2",
+                            "description": "Positive Scenario: with type interest and reason reaction"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type interest and reason recording": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.3",
+                            "description": "Positive Scenario: with type interest and reason recording"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type disinterest and reason playlist": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.4",
+                            "description": "Positive Scenario: with type disinterest and reason playlist"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type disinterest and reason reaction": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.5",
+                            "description": "Positive Scenario: with type disinterest and reason reaction"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Positive Scenario: Platform-UX - Notify requestUserInterest with type disinterest and reason recording": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.6",
+                            "description": "Positive Scenario: with type disinterest and reason recording"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but platform timeout without sending response": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.7",
+                            "description": "Positive Scenario: with type disinterest and reason recording"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest but 3rd party app return error": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.8",
+                            "description": "Negative Scenario: Notify requestUserInterest without registering for providers"
+                        }
+                    }
+                ]
+            },
+            "Content.requestUserInterest - Negative Scenario: Platform-UX - Notify requestUserInterest without registering for providers": {
+                "req": [
+                    {
+                        "method": {
+                            "id": "UserInterest 4.9",
+                            "description": "Negative Scenario: Notify requestUserInterest without registering for providers"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

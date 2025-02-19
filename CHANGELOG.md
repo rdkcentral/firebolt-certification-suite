@@ -1,3 +1,57 @@
+# [1.8.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.4...v1.8.0-dev.5) (2025-02-18)
+
+
+### Features
+
+* Pass elk env variable to reporting ([#339](https://github.com/rdkcentral/firebolt-certification-suite/issues/339)) ([9e05525](https://github.com/rdkcentral/firebolt-certification-suite/commit/9e05525662091445622090546da5a12f0d19f60d))
+
+# [1.8.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.3...v1.8.0-dev.4) (2025-02-18)
+
+
+### Features
+
+* Added logic to override the fcsSetter methods ([#333](https://github.com/rdkcentral/firebolt-certification-suite/issues/333)) ([53080eb](https://github.com/rdkcentral/firebolt-certification-suite/commit/53080eb8b623d97120b6b60165c774df8221e60d))
+
+# [1.8.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.2...v1.8.0-dev.3) (2025-02-18)
+
+
+### Features
+
+* test case versioning changes ([#307](https://github.com/rdkcentral/firebolt-certification-suite/issues/307)) ([b88e0be](https://github.com/rdkcentral/firebolt-certification-suite/commit/b88e0be9cef3daf02da57aa2461b344d55c351ab))
+
+# [1.8.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.1...v1.8.0-dev.2) (2025-02-17)
+
+
+### Bug Fixes
+
+* fcsSetter logic change from env to stack ([#324](https://github.com/rdkcentral/firebolt-certification-suite/issues/324)) ([adeea99](https://github.com/rdkcentral/firebolt-certification-suite/commit/adeea9909f7aca68d3f3694acdd2f48fe023cff6))
+
+# [1.8.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0...v1.8.0-dev.1) (2025-02-12)
+
+
+### Features
+
+* Adding SPS default config mod ([#323](https://github.com/rdkcentral/firebolt-certification-suite/issues/323)) ([38434ea](https://github.com/rdkcentral/firebolt-certification-suite/commit/38434ea8035c3f2d227780d542dd729e9a0505c1))
+
+# [1.7.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.6.0...v1.7.0) (2025-02-11)
+
+
+### Bug Fixes
+
+* Cuke report log changes  ([#325](https://github.com/rdkcentral/firebolt-certification-suite/issues/325)) ([dd178f0](https://github.com/rdkcentral/firebolt-certification-suite/commit/dd178f0d04ad15f5218bcf833859a0cec38f7784))
+* error handling and null check for source of truth ([#301](https://github.com/rdkcentral/firebolt-certification-suite/issues/301)) ([b4b46ee](https://github.com/rdkcentral/firebolt-certification-suite/commit/b4b46eec055f09993529e7614f6128fa6029a3b0))
+* ExitApp should have appId as an object ([#326](https://github.com/rdkcentral/firebolt-certification-suite/issues/326)) ([f658c25](https://github.com/rdkcentral/firebolt-certification-suite/commit/f658c252e2c4da7f47ccbb0c52ac44989ef0361b))
+* minor errors in SecureStorage.feature ([#314](https://github.com/rdkcentral/firebolt-certification-suite/issues/314)) ([33ad5b1](https://github.com/rdkcentral/firebolt-certification-suite/commit/33ad5b1e1e1dd92a5f57a46cc4ceee04b568711f))
+* updated default value of context ([#317](https://github.com/rdkcentral/firebolt-certification-suite/issues/317)) ([a932ee7](https://github.com/rdkcentral/firebolt-certification-suite/commit/a932ee7c28ac68dc60eaf702a7f19801fc9208ea))
+
+
+### Features
+
+* Added Implementation for FcsSetter ([#315](https://github.com/rdkcentral/firebolt-certification-suite/issues/315)) ([542de03](https://github.com/rdkcentral/firebolt-certification-suite/commit/542de03ca11a8ce28882c00965dc2c18573708fe))
+* close and unload in dismiss glue code ([#316](https://github.com/rdkcentral/firebolt-certification-suite/issues/316)) ([236ddf6](https://github.com/rdkcentral/firebolt-certification-suite/commit/236ddf6ef19cfcfd3613191f5804e9e7d22c62be))
+* Dismiss implementation for logged in and logged out apps ([#298](https://github.com/rdkcentral/firebolt-certification-suite/issues/298)) ([74cbe76](https://github.com/rdkcentral/firebolt-certification-suite/commit/74cbe7609f3d47d7300acfb07004e65f0b894c4a))
+* ReadMe for fcsSetters ([#300](https://github.com/rdkcentral/firebolt-certification-suite/issues/300)) ([7950884](https://github.com/rdkcentral/firebolt-certification-suite/commit/7950884d13d7c078fc0f40a27ac79b92f41c3164))
+
 # [1.7.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0-dev.7...v1.7.0-dev.8) (2025-02-04)
 
 
