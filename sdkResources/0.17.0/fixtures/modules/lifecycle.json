@@ -1,0 +1,23 @@
+{
+    "CLOSE_INTEGER_REASON_PARAM":{
+        "reason":123
+    },
+    "CLOSE_BOOLEAN_REASON_PARAM":{
+        "reason":true
+    },
+    "CLOSE_INVALID_REASON_PARAM":{
+        "reason":"test"
+    },
+    "CLOSE_WITH_REMOTE_BUTTON":{
+        "reason": "remoteButton"
+    },
+    "CLOSE_WITH_USER_EXIT":{
+        "reason": "userExit"
+    },
+    "CLOSE_WITH_ERROR":{
+        "reason": "error"
+    },
+    "CLOSE_WITH_DONE":{
+        "reason": "done"
+    }
+}

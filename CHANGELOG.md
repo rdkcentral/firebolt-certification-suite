@@ -1,3 +1,31 @@
+# [1.8.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.4...v1.8.0-dev.5) (2025-02-18)
+
+
+### Features
+
+* Pass elk env variable to reporting ([#339](https://github.com/rdkcentral/firebolt-certification-suite/issues/339)) ([9e05525](https://github.com/rdkcentral/firebolt-certification-suite/commit/9e05525662091445622090546da5a12f0d19f60d))
+
+# [1.8.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.3...v1.8.0-dev.4) (2025-02-18)
+
+
+### Features
+
+* Added logic to override the fcsSetter methods ([#333](https://github.com/rdkcentral/firebolt-certification-suite/issues/333)) ([53080eb](https://github.com/rdkcentral/firebolt-certification-suite/commit/53080eb8b623d97120b6b60165c774df8221e60d))
+
+# [1.8.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.2...v1.8.0-dev.3) (2025-02-18)
+
+
+### Features
+
+* test case versioning changes ([#307](https://github.com/rdkcentral/firebolt-certification-suite/issues/307)) ([b88e0be](https://github.com/rdkcentral/firebolt-certification-suite/commit/b88e0be9cef3daf02da57aa2461b344d55c351ab))
+
+# [1.8.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.1...v1.8.0-dev.2) (2025-02-17)
+
+
+### Bug Fixes
+
+* fcsSetter logic change from env to stack ([#324](https://github.com/rdkcentral/firebolt-certification-suite/issues/324)) ([adeea99](https://github.com/rdkcentral/firebolt-certification-suite/commit/adeea9909f7aca68d3f3694acdd2f48fe023cff6))
+
 # [1.8.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0...v1.8.0-dev.1) (2025-02-12)
 
 
