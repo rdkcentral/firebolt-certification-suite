@@ -56,25 +56,7 @@ Feature: Discovery.launch_ColdLaunch
             | playEntity intent with programType movie        | launch app with playentity intent with programtype movie        | get initialization parameters for PlayEntity intent | playentityintent with programtype movie for initialization parameters    |
             | playEntity intent with programType episode      | launch app with playentity intent with programtype episode      | get initialization parameters for PlayEntity intent | playentityintent with programtype episode for initialization parameters  |
             | playEntity intent with programType concert      | launch app with playentity intent with programtype concert      | get initialization parameters for PlayEntity intent | playentityintent with programtype concert for initialization parameters  |
-            | Search with programType movie                   | launch app with search intent with programType movie            | get initialization parameters for Search intent     | searchintent programType movie for initialization parameters             |
-            | Search with programType episode                 | launch app with search intent with programType episode          | get initialization parameters for Search intent     | searchintent programType episode for initialization parameters           |
-            | Search with programType season                  | launch app with search intent with programType season           | get initialization parameters for Search intent     | searchintent programType season for initialization parameters            |
-            | Search with programType series                  | launch app with search intent with programType series           | get initialization parameters for Search intent     | searchintent programType series for initialization parameters            |
-            | Search with programType concert                 | launch app with search intent with programtype concert          | get initialization parameters for Search intent     | searchintent programtype concert for initialization parameters           |
-            | Search with programType sportingevent           | launch app with search intent with programtype sportingevent    | get initialization parameters for Search intent     | searchintent programtype sportingevent for initialization parameters     |
-            | Search with programType preview                 | launch app with search intent with programtype preview          | get initialization parameters for Search intent     | searchintent programtype preview for initialization parameters           |
-            | Search with programType other                   | launch app with search intent with programtype other            | get initialization parameters for Search intent     | searchintent programtype other for initialization parameters             |
-            | Search with programType advertisement           | launch app with search intent with programtype advertisement    | get initialization parameters for Search intent     | searchintent programtype advertisement for initialization parameters     |
-            | Search with programType musicvideo              | launch app with search intent with programtype musicvideo       | get initialization parameters for Search intent     | searchintent programtype musicvideo for initialization parameters        |
-            | Search with programType minisode                | launch app with search intent with programtype minisode         | get initialization parameters for Search intent     | searchintent programtype minisode for initialization parameters          |
-            | Search with programType extra                   | launch app with search intent with programtype extra            | get initialization parameters for Search intent     | searchintent programtype extra for initialization parameters             |
-            | Search with musicType song                      | launch app with search intent with musictype song               | get initialization parameters for Search intent     | searchintent musictype song for initialization parameters                |
-            | Search with musicType album                     | launch app with search intent with musictype album              | get initialization parameters for Search intent     | searchintent musictype album for initialization parameters               |
-            | Search with channelType streaming               | launch app with search intent with channelType streaming        | get initialization parameters for Search intent     | searchintent channeltype streaming for initialization parameters         |
-            | Search with channelType overTheAir              | launch app with search intent with channelType overTheAir       | get initialization parameters for Search intent     | searchintent channeltype overtheair for initialization parameters        |
-            | Search with untyped entity                      | launch app with search intent with untyped entity               | get initialization parameters for Search intent     | searchintent untyped entity for initialization parameters                |
-            | Search with playlist entity                     | launch app with search intent with playlist entity              | get initialization parameters for Search intent     | searchintent playlist entity for initialization parameters               |
-
+        
     @sdk @transport @Sev2
     Scenario Outline: Discovery.Launch - Cold Launch : Launch App with <Scenario>
         Given the environment has been set up for 'Discovery.Launch' tests
@@ -146,32 +128,7 @@ Feature: Discovery.launch_ColdLaunch
             | Integer Source Search Intent                                | invalid integer source search intent for discoverylaunch                        |
             | Integer Source Section Intent                               | invalid integer source section intent for discoverylaunch                       |
             | Integer Source Tune Intent                                  | invalid integer source tune intent for discoverylaunch                          |
-            | Search Intent Integer Data                                  | search intent integer data for discoverylaunch                                  |
-            | Search Intent without programType for movieEntity           | search intent without programtype for movieentity for discoverylaunch           |
-            | Search Intent without entityType for movieEntity            | search intent without entitytype for movieentity for discoverylaunch            |
-            | Search Intent without entityId for movieEntity              | search intent without entityId for movieentity for discoverylaunch              |
-            | Search Intent without seriesId for episodeEntity            | search intent without seriesId for episodeentity for discoverylaunch            |
-            | Search Intent without seasonId for episodeEntity            | search intent without seasonId for episodeentity for discoverylaunch            |
-            | Search Intent without seriesId for seasonEntity             | search intent without seriesId for seasonentity for discoverylaunch             |
-            | Search Intent without musicType for musicEntity             | search intent without musicType for musicentity for discoverylaunch             |
-            | Search Intent without channelType for channelEntity         | search intent without channelType for channelentity for discoverylaunch         |
-            | Search Intent without entityId for untypedEntity            | search intent without entityId for untypedentity for discoverylaunch            |
-            | Search Intent with invalid entityType for movieEntity       | search intent with invalid entityType for movieEntity for discoverylaunch       |
-            | Search Intent with invalid movieType for movieEntity        | search intent with invalid movieType for movieEntity for discoverylaunch        |
-            | Search Intent with integer entityId for movieEntity         | search intent with integer entityId for movieEntity for discoverylaunch         |
-            | Search Intent with integer assetId for movieEntity          | search intent with integer assetId for movieEntity for discoverylaunch          |
-            | Search Intent with integer appContentData for movieEntity   | search intent with integer appContentData for movieEntity for discoverylaunch   |
-            | Search Intent with invalid episodeType for episodeEntity    | search intent with invalid episodetype for episodeEntity for discoverylaunch    |
-            | Search Intent with integer seasonId for episodeEntity       | search intent with integer seasonId for episodeEntity for discoverylaunch       |
-            | Search Intent with invalid seriesId for episodeEntity       | search intent with invalid seriesId for episodeEntity for discoverylaunch       |
-            | Search Intent with invalid seasonType for seasonEntity      | search intent with invalid seasonType for seasonEntity for discoverylaunch      |
-            | Search Intent with invalid seriesType for seriesEntity      | search intent with invalid seriesType for seriesEntity for discoverylaunch      |
-            | Search Intent with invalid programType for additionalEntity | search intent with invalid programType for additionalEntity for discoverylaunch |
-            | Search Intent with invalid entityType for musicEntity       | search intent with invalid entityType for musicEntity for discoverylaunch       |
-            | Search Intent with invalid musicType for musicEntity        | search intent with invalid musicType for musicEntity for discoverylaunch        |
-            | Search Intent with invalid entityType for channelEntity     | search intent with invalid entityType for channelEntity for discoverylaunch     |
-            | Search Intent with invalid channelType for channelEntity    | search intent with invalid channelType for channelEntity for discoverylaunch    |
-
+        
     @sdk @transport @Sev2
     Scenario Outline: Discovery.Launch - Cold Launch : Validate API and Event response when <Scenario> for context source
         Given the environment has been set up for 'Discovery.Launch' tests

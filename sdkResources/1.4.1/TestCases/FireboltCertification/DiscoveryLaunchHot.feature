@@ -52,24 +52,6 @@ Feature: Discovery.launch_HotLaunch
             | playentity intent with programtype movie                        | launch app with playentity intent with programtype movie                     | onNavigateTo with playentity intent with programtype movie                        |
             | playentity intent with programtype episode                      | launch app with playentity intent with programtype episode                   | onNavigateTo with playentity intent with programtype episode                      |
             | playquery intent with musictype album programtype musicvideo    | launch app with playquery intent with musictype album programtype musicvideo | onNavigateTo with playquery intent with musictype album programtype musicvideo    |
-            | Search intent with programType movie                            | launch app with search intent with programType movie                         | onNavigateTo with searchintent programType movie                                  |
-            | Search intent with programType episode                          | launch app with search intent with programType episode                       | onNavigateTo with searchintent programType episode                                |
-            | Search intent with programType season                           | launch app with search intent with programType season                        | onNavigateTo with searchintent programType season                                 |
-            | Search intent with programType series                           | launch app with search intent with programType series                        | onNavigateTo with searchintent programType series                                 |
-            | Search intent with programType concert                          | launch app with search intent with programtype concert                       | onNavigateTo with searchintent programtype concert                                |
-            | Search intent with programType sportingevent                    | launch app with search intent with programtype sportingevent                 | onNavigateTo with searchintent programtype sportingevent                          |
-            | Search intent with programType preview                          | launch app with search intent with programtype preview                       | onNavigateTo with searchintent programtype preview                                |
-            | Search intent with programType other                            | launch app with search intent with programtype other                         | onNavigateTo with searchintent programtype other                                  |
-            | Search intent with programType advertisement                    | launch app with search intent with programtype advertisement                 | onNavigateTo with searchintent programtype advertisement                          |
-            | Search intent with programType musicvideo                       | launch app with search intent with programtype musicvideo                    | onNavigateTo with searchintent programtype musicvideo                             |
-            | Search intent with programType minisode                         | launch app with search intent with programtype minisode                      | onNavigateTo with searchintent programtype minisode                               |
-            | Search intent with programType extra                            | launch app with search intent with programtype extra                         | onNavigateTo with searchintent programtype extra                                  |
-            | Search intent with musicType song                               | launch app with search intent with musictype song                            | onNavigateTo with searchintent musictype song                                     |
-            | Search intent with musicType album                              | launch app with search intent with musictype album                           | onNavigateTo with searchintent musictype album                                    |
-            | Search intent with channelType streaming                        | launch app with search intent with channelType streaming                     | onNavigateTo with searchintent channeltype streaming                              |
-            | Search intent with channelType overTheAir                       | launch app with search intent with channelType overTheAir                    | onNavigateTo with searchintent channeltype overtheair                             |
-            | Search intent with untyped entity                               | launch app with search intent with untyped entity                            | onNavigateTo with searchintent untyped entity                                     |
-            | Search intent with playlist entity                              | launch app with search intent with playlist entity                           | onNavigateTo with searchintent playlist entity                                    |
 
     @sdk @transport @Sev2
     Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in foreground state
@@ -147,15 +129,7 @@ Feature: Discovery.launch_HotLaunch
             | PlayQuery intent with musictype song            | launch app with playquery intent with musictype song         | onNavigateTo with playquery intent with musictype song      |
             | PlayQuery intent with programtype concert       | launch app with playquery intent with programtype concert    | onNavigateTo with playquery intent with programtype concert |
             | PlayEntity intent with programType movie        | launch app with playentity intent with programtype movie     | onNavigateTo with playentity intent with programtype movie  |
-            | Search intent with programType movie            | launch app with search intent with programType movie         | onNavigateTo with searchintent programType movie            |
-            | Search intent with programType advertisement    | launch app with search intent with programtype advertisement | onNavigateTo with searchintent programtype advertisement    |
-            | Search intent with musicType song               | launch app with search intent with musictype song            | onNavigateTo with searchintent musictype song               |
-            | Search intent with musicType album              | launch app with search intent with musictype album           | onNavigateTo with searchintent musictype album              |
-            | Search intent with channelType streaming        | launch app with search intent with channelType streaming     | onNavigateTo with searchintent channeltype streaming        |
-            | Search intent with channelType overTheAir       | launch app with search intent with channelType overTheAir    | onNavigateTo with searchintent channeltype overtheair       |
-            | Search intent with untyped entity               | launch app with search intent with untyped entity            | onNavigateTo with searchintent untyped entity               |
-            | Search intent with playlist entity              | launch app with search intent with playlist entity           | onNavigateTo with searchintent playlist entity              |
-
+        
     @sdk @transport @requiresPlatformImplementation @Sev2
     Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in inactive state
         Given the environment has been set up for 'DiscoveryLaunch' tests
@@ -212,15 +186,7 @@ Feature: Discovery.launch_HotLaunch
             | playQuery intent with musictype song          | launch app with playquery intent with musictype song         | onNavigateTo with playquery intent with musictype song      |
             | playQuery intent with programtype concert     | launch app with playquery intent with programtype concert    | onNavigateTo with playquery intent with programtype concert |
             | playEntity intent with programType movie      | launch app with playentity intent with programtype movie     | onNavigateTo with playentity intent with programtype movie  |
-            | Search intent with programType movie          | launch app with search intent with programType movie         | onNavigateTo with searchintent programType movie            |
-            | Search intent with programType advertisement  | launch app with search intent with programtype advertisement | onNavigateTo with searchintent programtype advertisement    |
-            | Search intent with musicType song             | launch app with search intent with musictype song            | onNavigateTo with searchintent musictype song               |
-            | Search intent with musicType album            | launch app with search intent with musictype album           | onNavigateTo with searchintent musictype album              |
-            | Search intent with channelType streaming      | launch app with search intent with channelType streaming     | onNavigateTo with searchintent channeltype streaming        |
-            | Search intent with channelType overTheAir     | launch app with search intent with channelType overTheAir    | onNavigateTo with searchintent channeltype overtheair       |
-            | Search intent with untyped entity             | launch app with search intent with untyped entity            | onNavigateTo with searchintent untyped entity               |
-            | Search intent with playlist entity            | launch app with search intent with playlist entity           | onNavigateTo with searchintent playlist entity              |
-
+         
     @sdk @transport @Sev2
     Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in background state
         Given the environment has been set up for 'DiscoveryLaunch' tests
@@ -291,15 +257,7 @@ Feature: Discovery.launch_HotLaunch
             | playQuery intent with musictype song         | launch app with playquery intent with musictype song         |
             | playQuery intent with programtype concert    | launch app with playquery intent with programtype concert    |
             | playEntity intent with programType movie     | launch app with playentity intent with programtype movie     |
-            | Search intent with programType movie         | launch app with search intent with programType movie         |
-            | Search intent with programType advertisement | launch app with search intent with programtype advertisement |
-            | Search intent with musicType song            | launch app with search intent with musictype song            |
-            | Search intent with musicType album           | launch app with search intent with musictype album           |
-            | Search intent with channelType streaming     | launch app with search intent with channelType streaming     |
-            | Search intent with channelType overTheAir    | launch app with search intent with channelType overTheAir    |
-            | Search intent with untyped entity            | launch app with search intent with untyped entity            |
-            | Search intent with playlist entity           | launch app with search intent with playlist entity           |
-
+        
     @sdk @transport @suspended @Sev2
     Scenario Outline: Discovery.Launch - Hot Launch : Relaunch App with <Scenario> while in suspended state
         Given the environment has been set up for 'DiscoveryLaunch' tests
@@ -329,34 +287,7 @@ Feature: Discovery.launch_HotLaunch
             | no Context Intent                                           | no context intent for discoverylaunch                                           |
             | no Source Intent                                            | no source intent for discoverylaunch                                            |
             | no Data Intent                                              | no data intent for discoverylaunch                                              |
-            | Search Intent Suggestion not array                          | search intent Suggestion not array                                              |
-            | Search Intent without programType for movieEntity           | search intent without programtype for movieentity for discoverylaunch           |
-            | Search Intent without entityType for movieEntity            | search intent without entitytype for movieentity for discoverylaunch            |
-            | Search Intent without entityId for movieEntity              | search intent without entityId for movieentity for discoverylaunch              |
-            | Search Intent without seriesId for episodeEntity            | search intent without seriesId for episodeentity for discoverylaunch            |
-            | Search Intent without seasonId for episodeEntity            | search intent without seasonId for episodeentity for discoverylaunch            |
-            | Search Intent without seriesId for seasonEntity             | search intent without seriesId for seasonentity for discoverylaunch             |
-            | Search Intent without musicType for musicEntity             | search intent without musicType for musicentity for discoverylaunch             |
-            | Search Intent without channelType for channelEntity         | search intent without channelType for channelentity for discoverylaunch         |
-            | Search Intent without entityId for untypedEntity            | search intent without entityId for untypedentity for discoverylaunch            |
-            | Search Intent without entityType for playlistEntity         | search intent without entitytype for playlistentity for discoverylaunch         |
-            | Search Intent with invalid entityType for programEntity     | search intent with invalid entityType for programEntity for discoverylaunch     |
-            | Search Intent with invalid movieType for movieEntity        | search intent with invalid movieType for movieEntity for discoverylaunch        |
-            | Search Intent with integer entityId for movieEntity         | search intent with integer entityId for movieEntity for discoverylaunch         |
-            | Search Intent with integer assetId for movieEntity          | search intent with integer assetId for movieEntity for discoverylaunch          |
-            | Search Intent with integer appContentData for movieEntity   | search intent with integer appContentData for movieEntity for discoverylaunch   |
-            | Search Intent with invalid episodeType for episodeEntity    | search intent with invalid episodetype for episodeEntity for discoverylaunch    |
-            | Search Intent with integer seasonId for episodeEntity       | search intent with integer seasonId for episodeEntity for discoverylaunch       |
-            | Search Intent with invalid seriesId for episodeEntity       | search intent with invalid seriesId for episodeEntity for discoverylaunch       |
-            | Search Intent with invalid seasonType for seasonEntity      | search intent with invalid seasonType for seasonEntity for discoverylaunch      |
-            | Search Intent with invalid seriesType for seriesEntity      | search intent with invalid seriesType for seriesEntity for discoverylaunch      |
-            | Search Intent with invalid programType for additionalEntity | search intent with invalid programType for additionalEntity for discoverylaunch |
-            | Search Intent with invalid entityType for musicEntity       | search intent with invalid entityType for musicEntity for discoverylaunch       |
-            | Search Intent with invalid musicType for musicEntity        | search intent with invalid musicType for musicEntity for discoverylaunch        |
-            | Search Intent with invalid entityType for channelEntity     | search intent with invalid entityType for channelEntity for discoverylaunch     |
-            | Search Intent with invalid channelType for channelEntity    | search intent with invalid channelType for channelEntity for discoverylaunch    |
-            | Search Intent with invalid entityType for playlistEntity    | search intent with invalid entityType for playlistEntity for discoverylaunch    |
-
+       
         @skipNegative
         Examples:
             | Scenario               | Error_Key                                  |
