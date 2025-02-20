@@ -175,3 +175,23 @@ exports.ACCESSIBILITY_VARIABLES = {
     },
   },
 };
+
+exports.ACCESSIBILITY_HIGHCONTRASTUI = {
+  method: 'accessibility.highContrastUI',
+  params: {},
+  validationJsonPath: 'result',
+  content: {
+    data: [
+      {
+        type: 'fixture',
+        validations: [
+          {
+            mode: 'staticContentValidation',
+            type: true,
+            description: resolveAtRuntime('Validating that accessibility.highContrastUI is true'),
+          },
+        ],
+      },
+    ],
+  },
+};
