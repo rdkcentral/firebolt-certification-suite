@@ -175,4 +175,3 @@ exports.ACCESSIBILITY_VARIABLES = {
     },
   },
 };
-
