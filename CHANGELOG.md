@@ -1,3 +1,10 @@
+# [1.8.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.5...v1.8.0-dev.6) (2025-02-21)
+
+
+### Bug Fixes
+
+* correct method names ([#344](https://github.com/rdkcentral/firebolt-certification-suite/issues/344)) ([17ebe20](https://github.com/rdkcentral/firebolt-certification-suite/commit/17ebe2068da8b2e84836189adae9b0c86cac1a4a))
+
 # [1.8.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.4...v1.8.0-dev.5) (2025-02-18)
 
 
