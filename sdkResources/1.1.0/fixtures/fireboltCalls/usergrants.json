@@ -79,28 +79,6 @@
         "method": "manage_usergrants.clear",
         "params": "USERGRANTS_CLEAR_APP_LEVEL_DATA_APP_USAGE_ROLE_USE"     
     },
-    "SET_USERGRANTS_ACKNOWLEDGECHALLENGE_GRANTED_RESPONSE":{
-        "method": "manage_usergrants.clear",
-        "params": "USERGRANTS_CLEAR_APP_LEVEL_DATA_APP_USAGE_ROLE_USE"     
-    },
-    "ACKNOWLEDGECHALLENGE_ONREQUESTCHALLENGE_MANAGE":{
-        "method": "manage_acknowledgeChallenge.onRequestChallenge"
-    },
-    "ACKNOWLEDGECHALLENGE_ONREQUESTCHALLENGE":{
-        "method": "acknowledgeChallenge.onRequestChallenge"
-    },
-    "REQUEST_FOCUS_FOR_CHALLENGE_PROVIDER":{
-        "method": "acknowledgeChallenge.challengeFocus",
-        "params": "USERGRANTS_CHALLENGEFOCUS_PARAMS"
-    },
-    "SEND_RESPONSE_FROM_CHALLENGE_PROVIDER":{
-        "method": "acknowledgeChallenge.challengeResponse",
-        "params": "USERGRANTS_CHALLENGERESPONSE_PARAMS"
-    },
-    "SEND_ERROR_FROM_CHALLENGE_PROVIDER":{
-        "method": "acknowledgeChallenge.challengeError",
-        "params": "USERGRANTS_CHALLENGEERROR_PARAMS"
-    },
     "GET_USERGRANTS_FOR_3RD_PARTY_APP": {
         "method": "manage_usergrants.app",
 		"params": "USERGRANTS_3RD_PARTY_APP"
