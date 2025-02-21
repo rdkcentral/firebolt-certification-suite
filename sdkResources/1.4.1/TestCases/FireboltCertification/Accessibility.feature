@@ -103,9 +103,11 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Scenario               | Method  | Value |
-            | disable voiceguidance  | enabled | false |
-            | enabling voiceguidance | enabled | true  |
+            | Scenario                  | Method          | Value |
+            | disable voiceguidance     | enabled         | false |
+            | enabling voiceguidance    | enabled         | true  |
+            | disabling navigationHints | navigationHints | false |
+            | enabling navigationHints  | navigationHints | true  |
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.voiceGuidanceSettings - Validating API and Event Responses for <Method> change to <Value>
@@ -119,10 +121,13 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Method  | Value |
-            | speed   | 1     |
-            | speed   | 0.5   |
-            | speed   | 2     |
+            | Method | Value |
+            | speed  | 1     |
+            | speed  | 0.5   |
+            | speed  | 2     |
+            | rate   | 0.1   |
+            | rate   | 1     |
+            | rate   | 10    |
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.audioDescriptionSettings - Validating API and Event Responses for <Scenario>
@@ -206,9 +211,11 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Scenario                | Method  | Value |
-            | disabling voiceguidance | enabled | false |
-            | enabling voiceguidance  | enabled | true  |
+            | Scenario                  | Method          | Value |
+            | disabling voiceguidance   | enabled         | false |
+            | enabling voiceguidance    | enabled         | true  |
+            | disabling navigationHints | navigationHints | false |
+            | enabling navigationHints  | navigationHints | true  |
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.voiceGuidance - Validating API and Event Responses for <Method> change to <Value>
@@ -222,5 +229,14 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Method  | Value |
-            | speed   | 1     |
+            | Method | Value |
+            | speed  | 1     |
+            | rate   | 2     |
+
+    @sdk @transport @requiresPlatformImplementation @notSupported @Sev2
+    Scenario: Accessibility.highContrastUI - Validating API Method and Event Response
+        Given '3rd party app' registers for the 'accessibility onHighContrastUIChanged' event using the 'Firebolt' API
+        When '3rd party app' invokes the 'Firebolt' API to 'get accessibility highContrastUI'
+        Then 'Firebolt' platform responds with 'accessibility highContrastUI with true'
+        And User triggers event with value as 'onHighContrastUIChanged'
+        Then 'Firebolt' platform triggers event 'onHighContrastUIChanged with true'
