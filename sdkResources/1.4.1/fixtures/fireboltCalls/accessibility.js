@@ -179,29 +179,29 @@ exports.ACCESSIBILITY_VARIABLES = {
 exports.ACCESSIBILITY_ONHIGHCONTRASTUICHANGED = {
   method: 'accessibility.onHighContrastUIChanged',
   params: {},
-}
+};
 
 exports.GET_ACCESSIBILITY_HIGHCONTRASTUI = {
   method: 'accessibility.highContrastUI',
   params: {},
-}
+};
 
 exports.ACCESSIBILITY_HIGHCONTRASTUI_WITH_TRUE = {
   method: 'accessibility.highContrastUI',
   validationJsonPath: 'result',
   content: true,
-}
+};
 
 exports.ONHIGHCONTRASTUICHANGED = {
   method: 'accessibility.onHighContrastUIChanged',
   params: {
     method: 'accessibility.onHighContrastUIChanged',
-    result: true
+    result: true,
   },
-}
+};
 
 exports.ONHIGHCONTRASTUICHANGED_WITH_TRUE = {
   event: 'accessibility.onHighContrastUIChanged',
   validationJsonPath: 'eventResponse',
   content: true,
-}
+};
