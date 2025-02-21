@@ -233,8 +233,10 @@ Feature: Accessibility
             | speed  | 1     |
             | rate   | 2     |
 
-    @sdk @transport @Sev1
-    Scenario: Accessibility.highContrastUI - Validate API Method Response Content
-        Given the environment has been set up for 'Accessibility highContrastUI' tests
-        When '3rd party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '3rd party app' get API
+    @sdk @transport @requiresPlatformImplementation @notSupported @Sev2
+    Scenario: Accessibility.highContrastUI - Validating API Method and Event Response
+        Given '3rd party app' registers for the 'accessibility onHighContrastUIChanged' event using the 'Firebolt' API
+        When '3rd party app' invokes the 'Firebolt' API to 'get accessibility highContrastUI'
+        Then 'Firebolt' platform responds with 'accessibility highContrastUI with true'
+        And User triggers event with value as 'onHighContrastUIChanged'
+        Then 'Firebolt' platform triggers event 'onHighContrastUIChanged with true'

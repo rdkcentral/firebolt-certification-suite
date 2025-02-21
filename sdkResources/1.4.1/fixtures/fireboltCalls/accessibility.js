@@ -176,22 +176,32 @@ exports.ACCESSIBILITY_VARIABLES = {
   },
 };
 
-exports.ACCESSIBILITY_HIGHCONTRASTUI = {
+exports.ACCESSIBILITY_ONHIGHCONTRASTUICHANGED = {
+  method: 'accessibility.onHighContrastUIChanged',
+  params: {},
+}
+
+exports.GET_ACCESSIBILITY_HIGHCONTRASTUI = {
   method: 'accessibility.highContrastUI',
   params: {},
+}
+
+exports.ACCESSIBILITY_HIGHCONTRASTUI_WITH_TRUE = {
+  method: 'accessibility.highContrastUI',
   validationJsonPath: 'result',
-  content: {
-    data: [
-      {
-        type: 'fixture',
-        validations: [
-          {
-            mode: 'staticContentValidation',
-            type: true,
-            description: resolveAtRuntime('Validating that accessibility.highContrastUI is true'),
-          },
-        ],
-      },
-    ],
+  content: true,
+}
+
+exports.ONHIGHCONTRASTUICHANGED = {
+  method: 'accessibility.onHighContrastUIChanged',
+  params: {
+    method: 'accessibility.onHighContrastUIChanged',
+    result: true
   },
-};
+}
+
+exports.ONHIGHCONTRASTUICHANGED_WITH_TRUE = {
+  event: 'accessibility.onHighContrastUIChanged',
+  validationJsonPath: 'eventResponse',
+  content: true,
+}
