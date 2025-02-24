@@ -1789,7 +1789,7 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
 /**
  * @module commands
  * @function softAssert
- * @description soft assertion to compare actual and expected values
+ * @description soft assertion to compare actual and expected values.
  * @example
  * cy.softAssert(actual, expected, message)
  */
@@ -1800,9 +1800,11 @@ Cypress.Commands.add('softAssert', (actual, expected, message) => {
       const log = Cypress.log({
         name: 'Soft assertion error',
         displayName: 'softAssert',
-        message: diff.error.message,
+        message: `Soft assertion failed : ${message}`,
       });
     });
+  } else{
+      cy.log(`Soft assertion passed : ${message}`);
   }
 });
 
