@@ -91,14 +91,14 @@ function copyFiles(configDir, externalDir) {
     }
     entry.isDirectory() ? copyFiles(srcPath, destPath) : fs.copyFileSync(srcPath, destPath);
   }
-  console.log(`Copied contents from ${configDir} to ${externalDir}`);
+  // console.log(`Copied contents from ${configDir} to ${externalDir}`);
 }
 
 function deleteDirectory(directory, skipfolder) {
   if (fs.existsSync(directory)) {
     const files = fs.readdirSync(directory);
     files.forEach((file) => {
-      if (file !== 'README.md' || file !== skipfolder) {
+      if (file !== 'README.md' && file !== skipfolder) {
         const filePath = path.join(directory, file);
         fs.rmSync(filePath, { recursive: true, force: true });
       }
