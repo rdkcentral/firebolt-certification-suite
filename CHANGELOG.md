@@ -1,3 +1,10 @@
+# [1.8.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.6...v1.8.0-dev.7) (2025-02-24)
+
+
+### Features
+
+* Add featureName to env ([#342](https://github.com/rdkcentral/firebolt-certification-suite/issues/342)) ([f585ba9](https://github.com/rdkcentral/firebolt-certification-suite/commit/f585ba9e7c8a00fadafba4fba097f44d63f01931))
+
 # [1.8.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.5...v1.8.0-dev.6) (2025-02-21)
 
 
