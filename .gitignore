@@ -16,6 +16,7 @@ cypress/fixtures/external
 sdkResources/external
 
 # fixtures
+cypress/fixtures
 
 # Testcases
 cypress/TestCases
