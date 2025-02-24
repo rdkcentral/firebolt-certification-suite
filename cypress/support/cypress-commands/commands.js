@@ -1318,6 +1318,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
   // Helper function to handle switch case validation
   const handleValidation = (object, methodOrEventObject, methodOrEventResponse = null) => {
     const scenario = object.type;
+    console.log(`============Beginning ${scenario} validation for the object============`);
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
     switch (scenario) {
       case CONSTANTS.REGEX:
@@ -1374,6 +1375,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
         assert(false, 'Unsupported validation type');
         break;
     }
+    console.log(`============Ending ${scenario} validation for the object============`);
   };
 
   // Check if method or event field is present in requestData
