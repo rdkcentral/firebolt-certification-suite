@@ -1,3 +1,10 @@
+# [1.8.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.7...v1.8.0-dev.8) (2025-02-25)
+
+
+### Features
+
+* Adding sanity test cases to version folders ([#343](https://github.com/rdkcentral/firebolt-certification-suite/issues/343)) ([ff1c91f](https://github.com/rdkcentral/firebolt-certification-suite/commit/ff1c91f3e6e3892b8452233a331a785ff4cebe92))
+
 # [1.8.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.6...v1.8.0-dev.7) (2025-02-24)
 
 
