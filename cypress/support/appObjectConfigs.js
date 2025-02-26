@@ -49,7 +49,7 @@ class eventObject {
   }
 
   // Function to update the event response in event object.
-  setEventResponseData(response, isNullCase) {
+  setEventResponseData(response, isNullCase, eventName) {
     if (
       (response && response.eventResponse && response.eventResponse[this.eventObjectId] != null) ||
       (response &&
@@ -61,7 +61,7 @@ class eventObject {
       this.eventSchemaResult = response.eventSchemaResult;
       this.eventTime = response.eventTime;
     } else {
-      assert(false, 'Platform does not trigger event');
+      assert(false, `Platform does not trigger ${eventName} event`);
     }
   }
 }
