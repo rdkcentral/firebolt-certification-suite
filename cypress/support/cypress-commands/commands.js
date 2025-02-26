@@ -21,6 +21,7 @@ import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
+const jsonAssertion = require('soft-assert');
 
 /**
  * @module commands
@@ -1787,3 +1788,34 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
     });
   });
 });
+
+/**
+ * @module commands
+ * @function softAssert
+ * @description soft assertion to compare actual and expected values
+ * @example
+ * cy.softAssert(actual, expected, message)
+ */
+Cypress.Commands.add('softAssert', (actual, expected, message) => {
+  jsonAssertion.softAssert(actual, expected, message);
+  if (jsonAssertion.jsonDiffArray.length) {
+    jsonAssertion.jsonDiffArray.forEach((diff) => {
+      Cypress.log({
+        name: 'Soft assertion error',
+        displayName: 'softAssert',
+        message: diff.error.message,
+      });
+    });
+  } else {
+    cy.log(`Soft assertion passed : ${message}`);
+  }
+});
+
+/**
+ * @module commands
+ * @function softAssertAll
+ * @description soft assertion to check all the assertions
+ * @example
+ * cy.softAssertAll()
+ */
+Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
