@@ -91,7 +91,7 @@ function copyFiles(configDir, externalDir) {
     }
     entry.isDirectory() ? copyFiles(srcPath, destPath) : fs.copyFileSync(srcPath, destPath);
   }
-  // console.log(`Copied contents from ${configDir} to ${externalDir}`);
+  console.log(`Copied contents from ${configDir} to ${externalDir}`);
 }
 
 function deleteDirectory(directory, skipfolder) {
