@@ -1,3 +1,10 @@
+# [1.8.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.9...v1.8.0-dev.10) (2025-02-26)
+
+
+### Features
+
+* SDK Versioning changes from 1.3.0 - 1.0.0 ([#345](https://github.com/rdkcentral/firebolt-certification-suite/issues/345)) ([abdcd03](https://github.com/rdkcentral/firebolt-certification-suite/commit/abdcd03d50ab743eff4bece4944e46995aeaa844))
+
 # [1.8.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.8...v1.8.0-dev.9) (2025-02-26)
 
 
