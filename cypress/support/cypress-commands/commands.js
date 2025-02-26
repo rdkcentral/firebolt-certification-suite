@@ -1310,6 +1310,8 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
  * cy.methodOrEventResponseValidation('event', {method: 'accessibility.onClosedCaptionsSettingsChanged', context: {}, contentObject: {}, expectingError: false, appId: 'test.test', eventExpected: 'triggers'})
  */
 Cypress.Commands.add('methodOrEventResponseValidation', (validationType, requestData) => {
+  // To check whether the method/event validation should be performed or not based on the include/exclude valiodation object
+  if (!shouldPerformValidation("transactionTypes", validationType)) return;
   const { context, expectingError, appId, eventExpected, isNullCase } = requestData;
   const method = requestData?.event ? requestData.event : requestData.method;
   const contentObject = requestData.content ? requestData.content : requestData.contentObject;
@@ -1317,7 +1319,12 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
   // Helper function to handle switch case validation
   const handleValidation = (object, methodOrEventObject, methodOrEventResponse = null) => {
-    const scenario = object.type;
+    const scenario = object.type; 
+    const tags = object.tags;
+    // To check whether the validation should be performed or not based on the include/exclude valiodation object
+    if (!shouldPerformValidation("validationTypes", scenario)) return;
+    if (!shouldPerformValidation("validationTags", tags)) return;
+    console.log(`=====Beginning of the ${scenario} validation=====`);
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
     switch (scenario) {
       case CONSTANTS.REGEX:
@@ -1374,13 +1381,16 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
         assert(false, 'Unsupported validation type');
         break;
     }
+    console.log(`=====Ending of the ${scenario} validation=====`);
   };
 
   // Check if method or event field is present in requestData
   if (!requestData.method && !requestData.event) {
+    console.log("YESSSSS requestData.method &&requestData.event not exist");
     if (contentObject && contentObject.data) {
       contentObject.data.forEach((object) => handleValidation(object));
     } else {
+      console.log("*******Inside else validateContent*******");
       cy.validateContent(method, context, validationJsonPath, contentObject, validationType, appId);
     }
     return;
@@ -1395,6 +1405,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
   );
 
   cy.validateResponseErrorAndSchemaResult(methodOrEventObject, validationType).then(() => {
+    console.log("*******Inside validateResponseErrorAndSchemaResult*******");
     const param = methodOrEventObject.params;
     // If passed method is exception method or expecting a error in response, doing error content validation.
     if (UTILS.isScenarioExempted(method, param) || expectingError) {
@@ -1456,6 +1467,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
       }).then(() => {
         try {
           if (contentObject && contentObject.data) {
+            console.log("After updating response for FCS found contentObject.data,handle validation is called from here");
             contentObject.data.forEach((object) => {
               const scenario = object.type;
 
@@ -1492,6 +1504,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
               }
             });
           } else {
+            console.log("After updating response for FCS inside else because contentObject not found");
             cy.validateContent(
               method,
               context,
@@ -1788,3 +1801,29 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
     });
   });
 });
+
+const shouldPerformValidation = (key, value) => {
+ // excludeValidations or includeValidations is not defined in the environment, assign {} to continue normal validations.
+   const excludeValidations = UTILS.getEnvVariable(CONSTANTS.EXCLUDE_VALIDATIONS, false) || {};
+   const includeValidations = UTILS.getEnvVariable(CONSTANTS.INCLUDE_VALIDATIONS, false) || {};
+   /*const includeValidations =  {
+    "transactionTypes": ["method", "event"],
+    "validationTypes": ["fixture","decode"],
+    "validationTags": ["uiValidation"]
+  };*/ 
+
+  // Check if excludeValidations exists and contains the key-value pair
+  if (excludeValidations[key]?.includes(value)) {
+    console.log("*** Yes excludeValidations exists and contains the key-value pair", value);
+    console.log(`Skipping validation: ${value} as it is in excludeValidations under ${key}`);
+    return false;
+  }
+
+  // Check if includeValidations exists and ensure validation is allowed
+  if (Object.keys(includeValidations).length > 0 && !includeValidations[key]?.includes(value)){
+      console.log(`Skipping validation: ${value} as it is NOT in includeValidations under ${key}`);
+      return false;
+  }
+  
+  return true; // Proceed with the normal validation
+};
