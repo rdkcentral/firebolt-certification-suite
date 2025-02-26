@@ -1,3 +1,10 @@
+# [1.8.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.8...v1.8.0-dev.9) (2025-02-26)
+
+
+### Bug Fixes
+
+* Uncomment console log ([#348](https://github.com/rdkcentral/firebolt-certification-suite/issues/348)) ([9081ba3](https://github.com/rdkcentral/firebolt-certification-suite/commit/9081ba35a74cae5448f6185724e0e7b33644a521))
+
 # [1.8.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.7...v1.8.0-dev.8) (2025-02-25)
 
 
