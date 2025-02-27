@@ -63,6 +63,7 @@ Given(
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
+    cy.updateRunInfo();
 
     if (
       UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(

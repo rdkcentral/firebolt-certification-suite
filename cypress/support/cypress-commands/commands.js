@@ -240,13 +240,38 @@ Cypress.Commands.add('updateRunInfo', () => {
   let deviceModel = '';
   let deviceDistributor = '';
   let devicePlatform = '';
+  const fireboltVersion = '';
   // function to set env variable for run info data
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
     if (deviceData === '') {
-      // Fetch data from the third-party app
-      cy.getDeviceDataFromThirdPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
-        // Set environment variable with the response
-        Cypress.env(envVarName, JSON.stringify(response.result).replace(/"/g, ''));
+      // Fetch data from the first-party app
+      cy.getDeviceData(deviceType, {}, action.toLowerCase()).then((response) => {
+        if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
+          if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
+            let deviceFirmware = JSON.stringify(response.firmware.readable);
+            deviceFirmware = deviceFirmware.replace(/"/g, '');
+            Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+          }
+          if (!Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION) && response?.api?.readable) {
+            const fireboltVersion =
+              `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
+                /"/g,
+                ''
+              );
+            Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
+          }
+          if (!Cypress.env(CONSTANTS.ENV_SDK_VERSION) && response?.sdk?.readable) {
+            const responseResultSDK =
+              `${response?.sdk?.major}.${response?.sdk?.minor}.${response?.sdk?.patch}`.replace(
+                /"/g,
+                ''
+              );
+            Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+          }
+        } else {
+          // Set environment variable with the response
+          Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
+        }
       });
     } else {
       // Set environment variable with the value from json file
@@ -298,6 +323,16 @@ Cypress.Commands.add('updateRunInfo', () => {
                 );
               })
               .then(() => {
+                if (Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION)) return;
+                else
+                  return setEnvRunInfo(
+                    fireboltVersion,
+                    CONSTANTS.DEVICE_VERSION,
+                    CONSTANTS.ACTION_CORE,
+                    {}
+                  );
+              })
+              .then(() => {
                 return setEnvRunInfo(
                   devicePlatform,
                   CONSTANTS.DEVICE_PLATFORM,
@@ -322,7 +357,6 @@ Cypress.Commands.add('updateRunInfo', () => {
                     [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                     [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
                   };
-
                   reportEnv.customData.data.forEach((item) => {
                     if (item.label === CONSTANTS.PRODUCT) {
                       item.value = configModuleConst.PRODUCT ? configModuleConst.PRODUCT : 'N/A';
