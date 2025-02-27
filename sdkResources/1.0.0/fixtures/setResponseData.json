@@ -14,9 +14,5 @@
   "SET_PINCHALLENGE_CORRECT_PIN": {
     "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
     "firstParty": true
-  },
-  "GRANTING_ACKNOWLEDGE_CHALLENGE": {
-    "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
-    "firstParty": true
   }
 }

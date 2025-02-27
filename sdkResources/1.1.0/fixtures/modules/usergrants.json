@@ -68,25 +68,6 @@
     "DEVICE_ID": {
         "capability": "xrn:firebolt:capability:device:id"
     },
-    "CHALLENGEFOCUS_PARAMS": {
-        "CYPRESSENV-correlationId": "123"
-    },
-    "CHALLENGERESPONSE_PARAMS": {
-        "CYPRESSENV-correlationId": "123",
-        "result": {
-            "granted": true,
-            "reason": "correctPin"
-        }
-    },
-    "CHALLENGEERROR_PARAMS": {
-        "error": {
-            "CYPRESSENV-correlationId": "123",
-            "result": {
-                "code": 1,
-                "message": "Error"
-            }
-        }
-    },
     "GRANT_DEVICE_LEVEL_DEVICE_DISTRIBUTOR_ROLE_USE": {"role": "use", "capability": "xrn:firebolt:capability:device:distributor"},
     "DENY_DEVICE_LEVEL_DEVICE_DISTRIBUTOR_ROLE_USE": {"role": "use", "capability": "xrn:firebolt:capability:device:distributor"},
     "APP_INTEGER_VALUE": {
