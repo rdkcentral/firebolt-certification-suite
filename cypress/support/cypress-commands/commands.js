@@ -1814,6 +1814,20 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
   });
 });
 
+/**
+ * @module commands
+ * @function shouldPerformValidation
+ * @description Determines whether validation should be performed for a given key-value pair based on include and exclude validation.
+ * - If `value` is `undefined` or `null`, validation is performed (`true`).
+ * - If `excludeValidations[key]` contains `value`, validation is skipped (`false`).
+ * - If `includeValidations[key]` is an empty array (`[]`), validation is skipped (`false`).
+ * - If `includeValidations[key]` exists and does not contain `value`, validation is skipped (`false`).
+ * - Otherwise, validation is performed (`true`).
+ * @param {string} key - The key representing the type of validation.
+ * @param {any} value - The value to validate.
+ * @returns {boolean} `true` if validation should proceed, `false` should be skipped.
+ */
+
 const shouldPerformValidation = (key, value) => {
   // excludeValidations or includeValidations is not defined in the environment, assign {} to continue normal validations.
   const excludeValidations = UTILS.getEnvVariable(CONSTANTS.EXCLUDE_VALIDATIONS, false) || {};
@@ -1839,6 +1853,5 @@ const shouldPerformValidation = (key, value) => {
     fireLog.info(`Skipping validation: ${value} as it is NOT in includeValidations under ${key}`);
     return false;
   }
-
   return true;
 };
