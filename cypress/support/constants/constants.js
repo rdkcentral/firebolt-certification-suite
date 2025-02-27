@@ -177,8 +177,8 @@ module.exports = {
   FCS: 'fcs',
   FCS_MODULEREQID_PATH: 'cypress/fixtures/objects/moduleReqId/moduleReqId.json',
   FCS_SETRESPONSE_PATH: 'cypress/fixtures/setResponseData.json',
-  FCS_SETTER_REQUEST_OVERRIDE_METHOD: 'fcsSetterRequestOverride',
   FCS_VALIDATION_JSON: 'fCSValidationjson',
+  FEATURE_NAME: 'featureName',
   FIREBOLT: 'firebolt',
   FIREBOLTCALL: 'fireboltCall',
   FIREBOLT_OBJECT_DOC_PATH:
@@ -360,8 +360,6 @@ module.exports = {
   REGEX_EVENT_VALIDATION: 'regexEventValidation',
   REPORT_COMMUNICATION_MODE: 'Communication Mode',
   REPORT_DATE: 'Date',
-  REQUEST_OVERRIDE_METHOD: 'requestOverrideMethods',
-  REQUEST_OVERRIDE_PARAMS: 'requestOverrideParams',
   REQUEST_OVERRIDE_CALLS: {
     SETRESPONSE: 'fcs.setResponse',
     CLEARLISTENER: 'fcs.clearEventListeners',

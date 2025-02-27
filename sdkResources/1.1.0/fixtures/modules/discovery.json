@@ -1,0 +1,442 @@
+{
+    "WATCHED_ONLY_ENTITY_ID": {
+        "entityId": "partner.com/entity/123"
+    },
+    "WATCHED_ENTITY_ID_PROGRESS": {
+        "entityId": "partner.com/entity/123",
+        "progress": 0.95
+    },
+    "WATCHED_ENTITY_ID_PROGRESS_STATUS": {
+        "entityId": "partner.com/entity/123",
+        "progress": 0.95,
+        "completed": true
+    },
+    "WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE": {
+        "entityId": "partner.com/entity/123",
+        "progress": 0.95,
+        "completed": true,
+        "watchedOn": "2021-04-23T18:25:43.511Z"
+    },
+    "WATCHNEXT_ONLY_TITLE_IDENTIFIERS_ENTITYID": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567"
+        }
+    },
+    "WATCHNEXT_ONLY_TITLE_IDENTIFIERS_ENTITYID_ASSETID": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567",
+            "assetId": "123bjs13"
+        }
+    },
+    "WATCHNEXT_ONLY_TITLE_IDENTIFIERS_ENTITYID_ASSETID_SESSIONID": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567",
+            "assetId": "123bjs13",
+            "seasonId": "SE02"
+        }
+    },
+    "WATCHNEXT_ONLY_TITLE_IDENTIFIERS_ENTITYID_ASSETID_SESSIONID_SERIESID": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567",
+            "assetId": "123bjs13",
+            "seasonId": "SE02",
+            "seriesId": "GOT"
+        }
+    },
+    "WATCHNEXT_ONLY_TITLE_IDENTIFIERS_ENTITYID_ASSETID_SESSIONID_SERIESID_APPCONTENTDATA": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567",
+            "assetId": "123bjs13",
+            "seasonId": "SE02",
+            "seriesId": "GOT",
+            "appContentData": "HBOMAX"
+        }
+    },
+    "WATCHNEXT_ONLY_TITLE_IDENTIFIERS_EXPIRES": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567"
+        },
+        "expires": "2021-04-23T18:25:43.511Z"
+    },
+    "WATCHNEXT_ONLY_TITLE_IDENTIFIERS_EXPIRES_IMAGES": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567"
+        },
+        "expires": "2021-04-23T18:25:43.511Z",
+        "images": {
+            "3x4": {
+                "en-US": "https://i.ytimg.com/vi/4r7wHMg5Yjg/maxresdefault.jpg",
+                "es": "https://i.ytimg.com/vi/4r7wHMg5Yjg/maxresdefault.jpg"
+            },
+            "16x9": {
+                "en": "https://i.ytimg.com/vi/4r7wHMg5Yjg/maxresdefault.jpg"
+            }
+        }
+    },
+    "ENTITLEMENTS": {
+        "entitlements": [
+            {
+                "entitlementId": "test-entitlement-firecert-1",
+                "startTime": "2025-01-01T00:00:00.000Z",
+                "endTime": "2025-01-01T00:00:00.000Z"
+            }
+        ]
+    },
+    "ENTITLEMENTS_ENTITLEMENTID_ONLY": {
+        "entitlements": [
+            {
+                "entitlementId": "test-entitlement-firecert-1"
+            }
+        ]
+    },
+    "SIGNIN_ENTITLEMENTS": {
+        "entitlements": [
+            {
+                "entitlementId": "test-entitlement-firecert-1",
+                "startTime": "2025-01-01T00:00:00.000Z",
+                "endTime": "2025-01-01T00:00:00.000Z"
+            }
+        ]
+    },
+    "EMPTY_PARAM": {},
+    "WATCHED_INVALID_ENTITY_ID_NUMBER": {
+        "entityId": 123
+    },
+    "WATCHED_INVALID_PROGRESS": {
+        "entityId": "partner.com/entity/123",
+        "progress": -0.95
+    },
+    "WATCHED_INVALID_PROGRESS_STRING": {
+        "entityId": "partner.com/entity/123",
+        "progress": "0.95"
+    },
+    "WATCHED_INVALID_COMPLETED": {
+        "entityId": "partner.com/entity/123",
+        "progress": 0.95,
+        "completed": "invalid value"
+    },
+    "WATCHED_INVALID_WATCHEDON": {
+        "entityId": "partner.com/entity/123",
+        "progress": 0.95,
+        "completed": true,
+        "watchedOn": 123
+    },
+    "WATCHNEXT_INVALID_IDENTIFIERS": {
+        "title": "A Cool Show",
+        "identifiers": "entityId"
+    },
+    "WATCHNEXT_INVALID_IDENTIFIERS_ENTITYID": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": true
+        }
+    },
+    "WATCHNEXT_INVALID_IDENTIFIERS_ASSETID": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567",
+            "assetId": 21
+        }
+    },
+    "WATCHNEXT_INVALID_IDENTIFIERS_SESSIONID": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567",
+            "assetId": "123bjs13",
+            "seasonId": 4
+        }
+    },
+    "WATCHNEXT_INVALID_IDENTIFIERS_SERIESID": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567",
+            "assetId": "123bjs13",
+            "seasonId": "SE02",
+            "seriesId": false
+        }
+    },
+    "WATCHNEXT_INVALID_IDENTIFIERS_APPCONTENTDATA": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567",
+            "assetId": "123bjs13",
+            "seasonId": "SE02",
+            "seriesId": "GOT",
+            "appContentData": 10
+        }
+    },
+    "WATCHNEXT_INVALID_EXPIRES": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567"
+        },
+        "expires": "True"
+    },
+    "WATCHNEXT_INVALID_EXPIRES_INTEGER": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567"
+        },
+        "expires": 123
+    },
+    "WATCHNEXT_INVALID_IMAGES": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567"
+        },
+        "expires": "2021-04-23T18:25:43.511Z",
+        "3X4": "INVALID image"
+    },
+    "WATCHNEXT_INVALID_IMAGE_INTEGER": {
+        "title": "A Cool Show",
+        "identifiers": {
+            "entityId": "partner.com/entity/567"
+        },
+        "expires": "2021-04-23T18:25:43.511Z",
+        "images": 123
+    },
+    "WATCHNEXT_ONLY_TITLE": {
+        "title": "A Cool Show"
+    },
+    "INVALID_ENTITLEMENTS_ENTITLEMENTID": {
+        "entitlements": [
+            {
+                "startTime": "2025-01-01T00:00:00.000Z",
+                "endTime": "2025-01-01T00:00:00.000Z"
+            }
+        ]
+    },
+    "INVALID_ENTITLEMENTS_INTEGER_PARAMS": {
+        "entitlements": [
+            {
+                "entitlementId": 123,
+                "startTime": 123,
+                "endTime": 123
+            }
+        ]
+    },
+    "SIGNIN_INVALID_ENTITLEMENTS": {
+        "entitlements": [
+            {
+                "startTime": "2025-01-01T00:00:00.000Z",
+                "endTime": "2025-01-01T00:00:00.000Z"
+            }
+        ]
+    },
+    "CONTENTACCESS_AVAILABILITIES_ONLY_TYPE_ID": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "program-lineup",
+                    "id": "chmap-lineup-a-firecert"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_WITH_AVAILABILITIES_AND_ENTITLEMENTS": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "channel-lineup",
+                    "id": "chmap-lineup-a-firecert",
+                    "startTime": "2021-04-23T18:25:43.511Z",
+                    "endTime": "2021-04-23T18:25:43.511Z"
+                },
+                {
+                    "type": "channel-lineup",
+                    "id": "chmap-lineup-a-firecert",
+                    "startTime": "2021-04-23T18:25:43.511Z",
+                    "endTime": "2021-04-23T18:25:43.511Z"
+                }
+            ],
+            "entitlements": [
+                {
+                    "entitlementId": "test-entitlement-firecert-1",
+                    "startTime": "2025-01-01T00:00:00.000Z",
+                    "endTime": "2025-01-01T00:00:00.000Z"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_WITH_ONLY_ENTITLEMENTS": {
+        "ids": {
+            "entitlements": [
+                {
+                    "entitlementId": "test-entitlement-firecert-1",
+                    "startTime": "2025-01-01T00:00:00.000Z",
+                    "endTime": "2025-01-01T00:00:00.000Z"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_AS_EMPTY": {
+        "ids": {
+            "availabilities": []
+        }
+    },
+    "CONTENTACCESS_ENTITLEMENTS_AS_EMPTY": {
+        "ids": {
+            "entitlements": []
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_WITHOUT_TYPE": {
+        "ids": {
+            "availabilities": [
+                {
+                    "id": "partner.com/availability/123",
+                    "catalogId": "app1",
+                    "startTime": "2021-04-23T18:25:43.511Z",
+                    "endTime": "2021-04-23T18:25:43.511Z"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_WITHOUT_ID": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "program-lineup",
+                    "catalogId": "app1",
+                    "startTime": "2021-04-23T18:25:43.511Z",
+                    "endTime": "2021-04-23T18:25:43.511Z"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_INVALID_TYPE_VALUE": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "device-lineup",
+                    "id": "partner.com/availability/123",
+                    "catalogId": "app1",
+                    "startTime": "2021-04-23T18:25:43.511Z",
+                    "endTime": "2021-04-23T18:25:43.511Z"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_INVALID_DATATYPE_TYPE": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": false,
+                    "id": "partner.com/availability/123",
+                    "catalogId": "app1",
+                    "startTime": "2021-04-23T18:25:43.511Z",
+                    "endTime": "2021-04-23T18:25:43.511Z"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_INVALID_DATATYPE_ID": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "program-lineup",
+                    "id": false,
+                    "catalogId": "app1",
+                    "startTime": "2021-04-23T18:25:43.511Z",
+                    "endTime": "2021-04-23T18:25:43.511Z"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_INVALID_DATATYPE_CATALOG_ID": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "program-lineup",
+                    "id": "partner.com/availability/123",
+                    "catalogId": 123,
+                    "startTime": "2021-04-23T18:25:43.511Z",
+                    "endTime": "2021-04-23T18:25:43.511Z"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_INVALID_DATATYPE_START_TIME": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "program-lineup",
+                    "id": "partner.com/availability/123",
+                    "catalogId": "app1",
+                    "startTime": true,
+                    "endTime": "2021-04-23T18:25:43.511Z"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_INVALID_DATATYPE_END_TIME": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "program-lineup",
+                    "id": "partner.com/availability/123",
+                    "catalogId": "app1",
+                    "startTime": "2021-04-23T18:25:43.511Z",
+                    "endTime": false
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_ENTITLEMENTS_INVALID_ENTITLEMENTID_TRUE": {
+        "ids": {
+            "entitlements": [
+                {
+                    "entitlementId": true,
+                    "startTime": "2025-01-01T00:00:00.000Z",
+                    "endTime": "2025-01-01T00:00:00.000Z"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_ENTITLEMENTS_INVALID_ENTITLEMENTID_INTEGER": {
+        "ids": {
+            "entitlements": [
+                {
+                    "entitlementId": 123,
+                    "startTime": "2025-01-01T00:00:00.000Z",
+                    "endTime": "2025-01-01T00:00:00.000Z"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_ENTITLEMENTS_INVALID_START_TIME": {
+        "ids": {
+            "entitlements": [
+                {
+                    "entitlementId": "123",
+                    "startTime": "01022023"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_ENTITLEMENTS_INVALID_END_TIME": {
+        "ids": {
+            "entitlements": [
+                {
+                    "entitlementId": "123",
+                    "endTime": "01022023"
+                }
+            ]
+        }
+    },
+    "HOME_INTENT": {
+        "appId": "foo",
+        "intent": {
+            "action": "home",
+            "context": {
+                "source": "voice"
+            }
+        }
+    }
+}

@@ -35,7 +35,7 @@ const jsonAssertion = require('soft-assert');
  */
 Cypress.Commands.add(
   'getFireboltData',
-  (key, callType = CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS) => {
+  (key, callType = CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTCALLS, failOnError = true) => {
     // Reading the data from combinedJson based on key.
     let fireboltData;
     if (callType == CONSTANTS.SUPPORTED_CALLTYPES.FIREBOLTMOCKS) {
@@ -45,10 +45,15 @@ Cypress.Commands.add(
     } else {
       fireboltData = UTILS.getEnvVariable(CONSTANTS.COMBINEDFIREBOLTCALLS)[key];
     }
-    if (!fireboltData) {
+    // FailOnError was set to false,for environment setup for background scenarios.
+    if (!fireboltData && failOnError) {
       fireLog.fail(CONSTANTS.NO_DATA_FOR_THE_KEY + key);
     }
-    return fireboltData;
+    // To check for Override data,if exist append overrida data to the fireboltData,Otherwise return fireboltData as is.
+    if (fireboltData) {
+      const fireboltCallObject = UTILS.applyOverrides(fireboltData);
+      return fireboltCallObject;
+    }
   }
 );
 
@@ -303,7 +308,6 @@ Cypress.Commands.add('updateRunInfo', () => {
               });
             cy.readFile(reportEnvFile).then((reportEnv) => {
               if (reportEnv) {
-                const isPlatformRipple = false;
                 if (
                   reportEnv.customData &&
                   reportEnv.customData.data &&
@@ -431,12 +435,12 @@ Cypress.Commands.add('getDeviceDataFromThirdPartyApp', (method, params, action) 
 /**
  * @module commands
  * @function getLatestFireboltJsonFromFixtures
- * @description Get the firebolt.json folder names from fixtures/versions and return the latest file
+ * @description Get the firebolt.json folder names from fixtures/fireboltJsonVersion and return the latest file
  * @example
  * cy.getLatestFireboltJsonFromFixtures()
  */
 Cypress.Commands.add('getLatestFireboltJsonFromFixtures', () => {
-  cy.task('readFilesFromDir', 'cypress/fixtures/versions/').then((filesData) => {
+  cy.task('readFilesFromDir', 'cypress/fixtures/fireboltJsonVersion/').then((filesData) => {
     try {
       // Reading a greater version value from the versions folder.
       const version = filesData
@@ -495,9 +499,9 @@ Cypress.Commands.add('getFireboltJsonData', () => {
       return data;
     }
 
-    //  If cy.request fails, get specific firebolt.json from -cypress/fixtures/versions/${Cypress.env(CONSTANTS.SDK_VERSION)}/firebolt.json
+    //  If cy.request fails, get specific firebolt.json from -cypress/fixtures/fireboltJsonVersion/${Cypress.env(CONSTANTS.SDK_VERSION)}/firebolt.json
     else {
-      const configImportPath = `cypress/fixtures/versions/${UTILS.getEnvVariable(
+      const configImportPath = `cypress/fixtures/fireboltJsonVersion/${UTILS.getEnvVariable(
         CONSTANTS.SDK_VERSION
       )}/firebolt.json`;
 
@@ -507,7 +511,7 @@ Cypress.Commands.add('getFireboltJsonData', () => {
         } else {
           // Get the latest firebolt.json from fixtures if all other options fail
           cy.getLatestFireboltJsonFromFixtures().then((latestSDKversion) => {
-            cy.fixture(`versions/${latestSDKversion}/firebolt.json`).then((data) => {
+            cy.fixture(`fireboltJsonVersion/${latestSDKversion}/firebolt.json`).then((data) => {
               return data;
             });
           });
@@ -592,6 +596,7 @@ Cypress.Commands.add('getBeforeOperationObject', () => {
     scenarioName = scenarioName.split('(example')[0].trim();
   }
   Cypress.env(CONSTANTS.SCENARIO_NAME, scenarioName);
+  Cypress.env(CONSTANTS.FEATURE_NAME, featureFileName);
   // Fetching current feature name
   const moduleReqIdJson = Cypress.env(CONSTANTS.MODULEREQIDJSON);
   const scenarioList = moduleReqIdJson.scenarioNames[featureFileName];
