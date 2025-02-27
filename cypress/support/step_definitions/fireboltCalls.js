@@ -466,6 +466,7 @@ Given(
     let actionType;
     switch (action) {
       case 'dismissed':
+        fireLog.info(`Dismissing the app using the keyPressSequence: ${KeyPressSequence.dismiss}`);
         params.keyPressSequence = KeyPressSequence.dismiss;
         actionType = 'dismissApp';
         break;
