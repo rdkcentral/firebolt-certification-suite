@@ -1318,64 +1318,71 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
   // Helper function to handle switch case validation
   const handleValidation = (object, methodOrEventObject, methodOrEventResponse = null) => {
     const scenario = object.type;
-    console.log(`============Beginning ${scenario} validation for the object============`);
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
-    switch (scenario) {
-      case CONSTANTS.REGEX:
-        cy.regExValidation(
-          method,
-          object.validations[0].type,
-          validationJsonPath,
-          methodOrEventResponse
-        );
-        break;
-      case CONSTANTS.MISC:
-        cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
-        break;
-      case CONSTANTS.DECODE:
-        const decodeType = object.specialCase;
-        const responseForDecodeValidation =
-          validationType == CONSTANTS.EVENT
-            ? methodOrEventResponse.eventResponse
-            : validationType == CONSTANTS.METHOD
-              ? methodOrEventResponse.result
-              : null;
 
-        cy.decodeValidation(
-          method,
-          decodeType,
-          responseForDecodeValidation,
-          object.validations[0],
-          null
-        );
-        break;
-      case CONSTANTS.FIXTURE:
-        cy.validateContent(
-          method,
-          context,
-          validationJsonPath,
-          object.validations[0].type,
-          validationType,
-          appId
-        );
-        break;
-      case CONSTANTS.CUSTOM:
-        cy.customValidation(object, methodOrEventObject);
-        break;
-      case CONSTANTS.UNDEFINED:
-        cy.undefinedValidation(object, methodOrEventObject, validationType);
-        break;
-      case CONSTANTS.SCREENSHOT_VALIDATION:
-        cy.screenshotValidation(object);
-        break;
-      case CONSTANTS.PERFORMANCE_VALIDATION:
-        cy.performanceValidation(object);
-        break;
-      default:
-        assert(false, 'Unsupported validation type');
-        break;
-    }
-    console.log(`============Ending ${scenario} validation for the object============`);
+    // ensure each Cypress command is properly awaited before return
+    cy.wrap(null)
+      .then(() => {
+        fireLog.info(`============Beginning ${scenario} validation for the object============`);
+        switch (scenario) {
+          case CONSTANTS.REGEX:
+            cy.regExValidation(
+              method,
+              object.validations[0].type,
+              validationJsonPath,
+              methodOrEventResponse
+            );
+            break;
+          case CONSTANTS.MISC:
+            cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
+            break;
+          case CONSTANTS.DECODE:
+            const decodeType = object.specialCase;
+            const responseForDecodeValidation =
+              validationType == CONSTANTS.EVENT
+                ? methodOrEventResponse.eventResponse
+                : validationType == CONSTANTS.METHOD
+                  ? methodOrEventResponse.result
+                  : null;
+
+            cy.decodeValidation(
+              method,
+              decodeType,
+              responseForDecodeValidation,
+              object.validations[0],
+              null
+            );
+            break;
+          case CONSTANTS.FIXTURE:
+            cy.validateContent(
+              method,
+              context,
+              validationJsonPath,
+              object.validations[0].type,
+              validationType,
+              appId
+            );
+            break;
+          case CONSTANTS.CUSTOM:
+            cy.customValidation(object, methodOrEventObject);
+            break;
+          case CONSTANTS.UNDEFINED:
+            cy.undefinedValidation(object, methodOrEventObject, validationType);
+            break;
+          case CONSTANTS.SCREENSHOT_VALIDATION:
+            cy.screenshotValidation(object);
+            break;
+          case CONSTANTS.PERFORMANCE_VALIDATION:
+            cy.performanceValidation(object);
+            break;
+          default:
+            assert(false, 'Unsupported validation type');
+            break;
+        }
+      })
+      .then(() => {
+        fireLog.info(`=====Ending of the ${scenario} validation=====`);
+      });
   };
 
   // Check if method or event field is present in requestData
