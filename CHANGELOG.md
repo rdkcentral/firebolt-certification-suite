@@ -1,3 +1,10 @@
+# [1.8.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.11...v1.8.0-dev.12) (2025-02-27)
+
+
+### Bug Fixes
+
+* Versioning documentation ([#350](https://github.com/rdkcentral/firebolt-certification-suite/issues/350)) ([515097f](https://github.com/rdkcentral/firebolt-certification-suite/commit/515097f82e00fb3b8dfb52f906c51481185dbb5b))
+
 # [1.8.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.10...v1.8.0-dev.11) (2025-02-27)
 
 
