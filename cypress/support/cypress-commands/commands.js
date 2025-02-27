@@ -1320,10 +1320,10 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
     const scenario = object.type;
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
 
-    // ensure each Cypress command is properly awaited before return
+    // cy.wrap() to ensure each Cypress command is properly awaited before return
     cy.wrap(null)
       .then(() => {
-        fireLog.info(`============Beginning ${scenario} validation for the object============`);
+        fireLog.info(`======Beginning of the ${scenario} validation======`);
         switch (scenario) {
           case CONSTANTS.REGEX:
             cy.regExValidation(
