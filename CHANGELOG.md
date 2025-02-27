@@ -1,3 +1,10 @@
+# [1.8.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.10...v1.8.0-dev.11) (2025-02-27)
+
+
+### Bug Fixes
+
+* Correct the mistakes in Testcase folder structure for 0.8.1 and 0.10.0 ([#351](https://github.com/rdkcentral/firebolt-certification-suite/issues/351)) ([f7f8c31](https://github.com/rdkcentral/firebolt-certification-suite/commit/f7f8c318e1d7a5e6ad8a01794efc4b3e2601bbdb))
+
 # [1.8.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.9...v1.8.0-dev.10) (2025-02-26)
 
 
