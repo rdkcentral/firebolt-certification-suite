@@ -1,8 +1,11 @@
 {
   "name": "firebolt-certification-suite",
-  "version": "1.7.0",
+  "version": "1.8.0-dev.12",
   "description": "Firebolt Certification Test Suite",
   "main": "index.js",
+  "config": {
+    "supportedSDKVersion": "1.4.1"
+  },
   "scripts": {
     "cy:open": "npm run checkDefaultConfig && yarn cache clean && node ./Scripts/run.js open",
     "cy:run": "npm run checkDefaultConfig && yarn cache clean && node ./Scripts/run.js run",

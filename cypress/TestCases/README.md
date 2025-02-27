@@ -1,33 +1,15 @@
-# Firebolt Certification
+# Test Cases
 
-Feature files for Firebolt Certification Modules.
+This directory contains the test cases used during the execution of the Firebolt Certification Suite (FCS). These test cases are dynamically copied into this folder based on the selected SDK version.
 
-## Setup
+## Structure of the Directory
 
-Refer [setup instructions](../../README.md#setup) to complete the required setup and execute test cases against any platform.
+- The `cypress/TestCases` directory will **be empty initially** in the repository because it is **cleared** at the start of each test run. It is then **dynamically populated** from the corresponding SDK version folder in `sdkResources`.
+- Once the tests are executed, the relevant test cases are copied over from:
+  - `sdkResources/<version>/TestCases`
+  - `sdkResources/external/<version>/TestCases`
+- If no SDK version is passed via CLI, the suite defaults to the version specified in `package.json` and copies test cases from the corresponding folder.
 
-## General Instruction
+> **Important Note**: Do not modify files directly in this directory, as they will be overwritten during each test run. The directory will only contain test cases **after** the tests are executed. For any test case changes, edit files inside the `sdkResources` directory to update or modify test cases for a specific SDK version. Any changes made directly in the `cypress/TestCases` folders will be lost during the next test execution.
 
-Testcase should adhere to proper Gherkin format to maintain consistency and clarity across glue codes.
-```
-Given the environment has been set up for 'Accessibility' tests
-And '3rd party app' invokes the 'Firebolt' API to 'get closedCaptions settings'
-Then Firebolt platform responds for 'accessibility.closedCaptionsSettings' method and '<Method_JSON_Path>' is '<Content>'
-```
-* [Location of glue](../support/step_definitions/)
-* [Location of fixtures](../fixtures/README.md)
-* [Location of cypress commands](../support/cypress-commands)
-## Tagging
-
-Tagging is implemented to effectively categorize the test cases and indicate the set of commands supported by test cases. We suggest the following pattern when adding tags:
-**@module @sdk @communicationMode-1 @communicationMode-2**
-
-Here are some examples of tags for different categories:
-* Tags for module: @accessibility
-* Tags for sdk: @coreSDK, @manageSDK
-* Tags for communicationModes: @sdk, @transport
-
-## Directory strucute:
-Within the `cypress/TestCases` folder we have the following sub-folders:
-- FireboltCertification: Contains core and manage feature files.
-- Sanity: Contains core and manage sanity tests.
+For more information about how test cases are managed, please refer to the main documentation in the [sdkResources directory](../../sdkResources/README.md).

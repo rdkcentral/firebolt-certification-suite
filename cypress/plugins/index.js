@@ -247,11 +247,17 @@ module.exports = async (on, config) => {
     let filePath = './reports/cucumber-json/';
     let suiteName = 'cucumber' + '_' + timestamp;
     let jobId;
+    let elk = false;
 
     // Creating uuid folder under reports
     if (results.config.env.jobId) {
       jobId = results.config.env.jobId;
       filePath = `./reports/${jobId}/`;
+    }
+
+    // Send elk variable to report processor if env variable is set to true
+    if (results.config.env.elk) {
+      elk = results.config.env.elk;
     }
 
     if (!fs.existsSync(filePath)) {
@@ -336,7 +342,7 @@ module.exports = async (on, config) => {
       // Emit the 'reports' event once after the loop and reportObj is populated.
       await new Promise((resolve) => {
         eventEmitter.once('reportProcessed', () => resolve());
-        eventEmitter.emit('reports', reportObj, jobId);
+        eventEmitter.emit('reports', reportObj, jobId, elk);
       });
     }
 
