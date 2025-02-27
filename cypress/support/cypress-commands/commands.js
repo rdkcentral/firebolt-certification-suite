@@ -1325,66 +1325,68 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
     cy.log(`Inside switch case scenario ${scenario}`);
     // To check whether the validation should be performed or not based on the include/exclude valiodation object
     if (!shouldPerformValidation('validationTypes', scenario)) return;
-    // if (!shouldPerformValidation("validationTags", tags)) return;
-    console.log(`=====Beginning of the ${scenario} validation=====`);
+    if (!shouldPerformValidation('validationTags', tags)) return;
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
-    cy.log(`Inside switch case scenario ${scenario}`);
-    switch (scenario) {
-      case CONSTANTS.REGEX:
-        cy.regExValidation(
-          method,
-          object.validations[0].type,
-          validationJsonPath,
-          methodOrEventResponse
-        );
-        break;
-      case CONSTANTS.MISC:
-        cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
-        break;
-      case CONSTANTS.DECODE:
-        const decodeType = object.specialCase;
-        const responseForDecodeValidation =
-          validationType == CONSTANTS.EVENT
-            ? methodOrEventResponse.eventResponse
-            : validationType == CONSTANTS.METHOD
-              ? methodOrEventResponse.result
-              : null;
+    cy.then(() => {
+      console.log(`=====Beginning of the ${scenario} validation=====`);
+      switch (scenario) {
+        case CONSTANTS.REGEX:
+          cy.regExValidation(
+            method,
+            object.validations[0].type,
+            validationJsonPath,
+            methodOrEventResponse
+          );
+          break;
+        case CONSTANTS.MISC:
+          cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
+          break;
+        case CONSTANTS.DECODE:
+          const decodeType = object.specialCase;
+          const responseForDecodeValidation =
+            validationType == CONSTANTS.EVENT
+              ? methodOrEventResponse.eventResponse
+              : validationType == CONSTANTS.METHOD
+                ? methodOrEventResponse.result
+                : null;
 
-        cy.decodeValidation(
-          method,
-          decodeType,
-          responseForDecodeValidation,
-          object.validations[0],
-          null
-        );
-        break;
-      case CONSTANTS.FIXTURE:
-        cy.validateContent(
-          method,
-          context,
-          validationJsonPath,
-          object.validations[0].type,
-          validationType,
-          appId
-        );
-        break;
-      case CONSTANTS.CUSTOM:
-        cy.customValidation(object, methodOrEventObject);
-        break;
-      case CONSTANTS.UNDEFINED:
-        cy.undefinedValidation(object, methodOrEventObject, validationType);
-        break;
-      case CONSTANTS.SCREENSHOT_VALIDATION:
-        cy.screenshotValidation(object);
-        break;
-      case CONSTANTS.PERFORMANCE_VALIDATION:
-        cy.performanceValidation(object);
-        break;
-      default:
-        assert(false, 'Unsupported validation type');
-        break;
-    }
-    console.log(`=====Ending of the ${scenario} validation=====`);
+          cy.decodeValidation(
+            method,
+            decodeType,
+            responseForDecodeValidation,
+            object.validations[0],
+            null
+          );
+          break;
+        case CONSTANTS.FIXTURE:
+          cy.validateContent(
+            method,
+            context,
+            validationJsonPath,
+            object.validations[0].type,
+            validationType,
+            appId
+          );
+          break;
+        case CONSTANTS.CUSTOM:
+          cy.customValidation(object, methodOrEventObject);
+          break;
+        case CONSTANTS.UNDEFINED:
+          cy.undefinedValidation(object, methodOrEventObject, validationType);
+          break;
+        case CONSTANTS.SCREENSHOT_VALIDATION:
+          cy.screenshotValidation(object);
+          break;
+        case CONSTANTS.PERFORMANCE_VALIDATION:
+          cy.performanceValidation(object);
+          break;
+        default:
+          assert(false, 'Unsupported validation type');
+          break;
+      }
+    }).then(() => {
+      console.log(`=====Ending of the ${scenario} validation=====`);
+    });
   };
 
   // Check if method or event field is present in requestData
@@ -1817,22 +1819,26 @@ const shouldPerformValidation = (key, value) => {
   const excludeValidations = UTILS.getEnvVariable(CONSTANTS.EXCLUDE_VALIDATIONS, false) || {};
   //  const includeValidations = UTILS.getEnvVariable(CONSTANTS.INCLUDE_VALIDATIONS, false) || {};
   const includeValidations = {
-    transactionTypes: ['event'],
     validationTypes: [],
   };
 
-  // Check if excludeValidations exists and contains the key-value pair
-  if (excludeValidations[key]?.includes(value)) {
-    console.log('*** Yes excludeValidations exists and contains the key-value pair', value);
-    cy.log(`Skipping validation: ${value} as it is in excludeValidations under ${key}`);
+  // Return true if value is undefined, null, or includeValidations is empty
+  if (value === undefined || value === null) {
+    fireLog.info('value is undefined, null, or includeValidations is empty' + key);
+    return true;
+  }
+
+  // Check if key exist in excludeValidation and includes the value
+  if (excludeValidations[key] && excludeValidations[key].includes(value)) {
+    fireLog.info(`Skipping validation: ${value} as it is in excludeValidations under ${key}`);
     return false;
   }
 
-  // Check if includeValidations exists and ensure validation is allowed
-  if (Object.keys(includeValidations).length > 0 && !includeValidations[key]?.includes(value)) {
-    cy.log(`Skipping validation: ${value} as it is NOT in includeValidations under ${key}`);
+  // Check if key exist in includeValidations exists includes the value
+  if (includeValidations[key] && !includeValidations[key].includes(value)) {
+    fireLog.info(`Skipping validation: ${value} as it is NOT in includeValidations under ${key}`);
     return false;
   }
 
-  return true; // Proceed with the normal validation
+  return true;
 };
