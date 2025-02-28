@@ -420,7 +420,8 @@ Cypress.Commands.add('getDeviceDataFromFirstPartyApp', (method, param, action) =
       fireLog.info('Failed to fetch device.version', error);
     }
   });
-}); /**
+});
+/**
  * @module commands
  * @function getDeviceDataFromThirdPartyApp
  * @description Making API call from third party app.
