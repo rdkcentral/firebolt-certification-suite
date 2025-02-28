@@ -419,11 +419,26 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
   } else {
     Cypress.env(CONSTANTS.RUNTIME, { page });
   }
-
+  if(UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) && Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) == 1){
+    // cold launch interaction logs validation
+    cy.getFireboltData(CONSTANTS.COLD_LAUNCH).then((fireboltData) => {
+      const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+      const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+      cy.methodOrEventResponseValidation(type, validationObject);
+    });
+  }else if(UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) && Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) > 1){
+    // hot launch interaction logs validation
+    cy.getFireboltData(CONSTANTS.HOT_LAUNCH).then((fireboltData) => {
+      const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+      const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+      cy.methodOrEventResponseValidation(type, validationObject);
+    });
+  }
   validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   cy.getFireboltData(validationObjectKey).then((fireboltData) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     const validationObject = UTILS.resolveRecursiveValues(fireboltData);
     cy.methodOrEventResponseValidation(type, validationObject);
   });
+  cy.softAssertAll();
 });

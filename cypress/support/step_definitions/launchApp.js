@@ -37,6 +37,7 @@ Given(
   /3rd party '(.+)' app is launched(?: with '(.+)' appId)?(?: with '(.+)' state)?(?: with '(.+)' intent)?$/,
   (appType, appCallSign, state, intent) => {
     Cypress.env(CONSTANTS.APP_TYPE, appType);
+    Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) || 0);
     if (
       !UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) ||
       UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(
@@ -52,9 +53,22 @@ Given(
       cy.launchApp(appType, appCallSign, null, intent);
       cy.lifecycleSetup(appCallSign, state);
       Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, true);
+      // Incremental launch count for cold launch
+      Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, (Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) + 1));
+    } else if (UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) && Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) >= 1) {
+      if (!state) {
+        state = CONSTANTS.LIFECYCLE_STATES.FOREGROUND;
+      }
+      const clearInteractionLogs = Cypress.env('fbInteractionLogs').logs.set(Cypress.env(CONSTANTS.SCENARIO_NAME), []);
+      Cypress.env('fbInteractionLogs', clearInteractionLogs)
+      cy.launchApp(appType, appCallSign, null, intent);
+      cy.lifecycleSetup(appCallSign, state);
+      // Incremental launch count for hot launch
+      Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, (Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) + 1));
     }
   }
 );
+
 
 /**
  * @function {string} transitions to state {string}
