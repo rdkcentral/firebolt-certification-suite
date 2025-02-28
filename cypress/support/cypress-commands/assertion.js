@@ -630,7 +630,7 @@ Cypress.Commands.add(
     }
 
     if (eventExpected) {
-      methodOrEventObject.setEventResponseData(response, isNullCase);
+      methodOrEventObject.setEventResponseData(response, isNullCase, eventNameForLog);
     } else {
       fireLog.isNull(response.eventResponse[eventName], CONSTANTS.NO_EVENT_TRIGGERED);
     }
