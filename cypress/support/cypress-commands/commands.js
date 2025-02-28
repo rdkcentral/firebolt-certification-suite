@@ -246,7 +246,6 @@ Cypress.Commands.add('updateRunInfo', () => {
     if (deviceData === '') {
       // Fetch data from the first-party app
       cy.getDeviceDataFromFirstPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
-        response = response.result;
         if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
           if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
             let deviceFirmware = JSON.stringify(response.firmware.readable);
@@ -410,19 +409,18 @@ Cypress.Commands.add('getDeviceDataFromFirstPartyApp', (method, param, action) =
       ' params: ' +
       JSON.stringify(requestMap.param)
   );
-  Cypress.Promise.resolve(cy.sendMessagetoPlatforms(requestMap))
-    .then((response) => {
+  cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    try {
       if (response && response.result) {
-        return response;
+        return response.result;
       } else {
-        throw new Error('Obtained response is null|undefined');
+        throw 'Obtained response is null|undefined';
       }
-    })
-    .catch((error) => {
-      fireLog.info('Failed to fetch device data from first party', error);
-    });
-});
-/**
+    } catch (error) {
+      fireLog.info('Failed to fetch device.version', error);
+    }
+  });
+}); /**
  * @module commands
  * @function getDeviceDataFromThirdPartyApp
  * @description Making API call from third party app.
