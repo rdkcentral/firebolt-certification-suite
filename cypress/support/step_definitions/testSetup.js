@@ -100,18 +100,21 @@ Given(
           const dynamicModules = UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES);
           const testType = Cypress.env(CONSTANTS.TEST_TYPE);
           if (dynamicModules && dynamicModules.includes(testType)) {
-            cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-              (response) => {
-                if (response) {
-                  const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
-                  const requestMap = {
-                    method: method,
-                    params: response,
-                  };
-                  cy.sendMessagetoPlatforms(requestMap);
-                }
+            cy.getDeviceDataFromFirstPartyApp(
+              CONSTANTS.DEVICE_ID,
+              {},
+              CONSTANTS.ACTION_CORE.toLowerCase()
+            ).then((response) => {
+              response = response.result;
+              if (response) {
+                const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
+                const requestMap = {
+                  method: method,
+                  params: response,
+                };
+                cy.sendMessagetoPlatforms(requestMap);
               }
-            );
+            });
           }
         }
       } catch (error) {

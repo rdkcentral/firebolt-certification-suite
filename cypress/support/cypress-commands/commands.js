@@ -245,7 +245,8 @@ Cypress.Commands.add('updateRunInfo', () => {
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
     if (deviceData === '') {
       // Fetch data from the first-party app
-      cy.getDeviceData(deviceType, {}, action.toLowerCase()).then((response) => {
+      cy.getDeviceDataFromFirstPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
+        response = response.result;
         if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
           if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
             let deviceFirmware = JSON.stringify(response.firmware.readable);
@@ -392,12 +393,12 @@ Cypress.Commands.add('updateRunInfo', () => {
 
 /**
  * @module commands
- * @function getDeviceData
+ * @function getDeviceDataFromFirstPartyApp
  * @description Making API call.
  * @example
  * cy.getDeviceData(method, param, action)
  */
-Cypress.Commands.add('getDeviceData', (method, param, action) => {
+Cypress.Commands.add('getDeviceDataFromFirstPartyApp', (method, param, action) => {
   const requestMap = {
     method: method,
     param: param,
@@ -409,17 +410,17 @@ Cypress.Commands.add('getDeviceData', (method, param, action) => {
       ' params: ' +
       JSON.stringify(requestMap.param)
   );
-  cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    try {
+  Cypress.Promise.resolve(cy.sendMessagetoPlatforms(requestMap))
+    .then((response) => {
       if (response && response.result) {
-        return response.result;
+        return response;
       } else {
-        throw 'Obtained response is null|undefined';
+        throw new Error('Obtained response is null|undefined');
       }
-    } catch (error) {
-      fireLog.info('Failed to fetch device.version', error);
-    }
-  });
+    })
+    .catch((error) => {
+      fireLog.info('Failed to fetch device data from first party', error);
+    });
 });
 /**
  * @module commands
