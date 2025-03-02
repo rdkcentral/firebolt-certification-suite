@@ -534,6 +534,9 @@ module.exports = {
   LOGGEDOUT: 'loggedOut',
   SCENARIO_TYPE: 'scenarioType',
   DISMISS: 'dismiss',
+  APP_LAUNCH_COUNT: 'appLaunchCount',
+  HOT_LAUNCH: 'HOT_LAUNCH',
+  COLD_LAUNCH: 'COLD_LAUNCH'
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
