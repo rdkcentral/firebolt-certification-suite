@@ -514,28 +514,26 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
     cy.getFireboltData(validationObjectKey).then((fireboltData) => {
       const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
       validationObject = UTILS.resolveRecursiveValues(fireboltData);
-      cy.methodOrEventResponseValidation(type, validationObject)
-        .then((response) => {})
-        .then(() => {
-          // screenShot validation
-          fireLog.info('Started Screenshot validation');
-          const requestMapForScreenShotValidation = {
-            method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
-            params: {
-              validations: validationObject.screenshot.validations,
-            },
-          };
-          fireLog.info(
-            `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
-          );
-          cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
-            fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
-            if (response.status != 'pass') {
-              fireLog.info(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
-            }
-          });
+      cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
+        // screenShot validation
+        fireLog.info('Started Screenshot validation');
+        const requestMapForScreenShotValidation = {
+          method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
+          params: {
+            validations: validationObject.screenshot.validations,
+          },
+        };
+        fireLog.info(
+          `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
+        );
+        cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
+          fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
+          if (response.status != 'pass') {
+            fireLog.info(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
+          }
           cy.softAssertAll();
         });
+      });
     });
   });
 });
