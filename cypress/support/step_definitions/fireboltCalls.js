@@ -521,16 +521,15 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
           `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
         );
         cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
-          if (response && response != 'undefined') {
-            fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
+          fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
+
+          if (response && response !== 'undefined') {
             if (response.status != 'pass') {
               fireLog.info(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
             }
+            cy.softAssertAll();
           }
         });
-      })
-      .then(() => {
-        cy.softAssertAll();
       });
   });
 });
