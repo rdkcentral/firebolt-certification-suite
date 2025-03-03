@@ -292,6 +292,7 @@ Cypress.Commands.add('updateRunInfo', () => {
             }
             const deviceMac = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC).replace(/:/g, '');
             const deviceMacJson = `./cypress/fixtures/devices/${deviceMac}.json`;
+            const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             // Check if mac json file exists
             cy.task('checkFileExists', deviceMacJson)
               .then((exists) => {
@@ -314,6 +315,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                   CONSTANTS.ENV_DEVICE_MODEL
                 );
               })
+              .then(() => delay(2000))
               .then(() => {
                 return setEnvRunInfo(
                   deviceDistributor,
@@ -322,6 +324,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                   CONSTANTS.ENV_DEVICE_DISTRIBUTOR
                 );
               })
+              .then(() => delay(2000))
               .then(() => {
                 if (Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION)) return;
                 else
@@ -332,6 +335,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                     {}
                   );
               })
+              .then(() => delay(2000))
               .then(() => {
                 return setEnvRunInfo(
                   devicePlatform,
