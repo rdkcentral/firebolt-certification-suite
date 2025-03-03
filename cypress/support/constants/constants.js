@@ -534,7 +534,7 @@ module.exports = {
   LOGGEDOUT: 'loggedOut',
   SCENARIO_TYPE: 'scenarioType',
   DISMISS: 'dismiss',
-  APP_ASSURANCE_ID: 'appAssuranceId'
+  APP_ASSURANCE_ID: 'appAssuranceId',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
