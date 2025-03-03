@@ -912,11 +912,18 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
     // Check if intentTemplates are defined for the given appType
     let intentTemplate;
     const intentTemplates = UTILS.getEnvVariable(CONSTANTS.INTENT_TEMPLATES, false);
-    if (intentTemplates && intentTemplates[appType]) {
-      if (intentTemplates[appType][appId] && intentTemplates[appType][appId][intent]) {
-        intentTemplate = intentTemplates[appType][appId][intent];
-      } else if (intentTemplates[appType][intent]) {
-        intentTemplate = intentTemplates[appType][intent];
+    if (intentTemplates) {
+      if (intentTemplates[appType]) {
+        if (intentTemplates[appType][appId] && intentTemplates[appType][appId][intent]) {
+          intentTemplate = intentTemplates[appType][appId][intent];
+        } else if (intentTemplates[appType][intent]) {
+          intentTemplate = intentTemplates[appType][intent];
+        }
+      } else if (intentTemplates[appId] && intentTemplates[appId][intent]) {
+        intentTemplate = intentTemplates[appId][intent];
+        if (intentTemplates[appId]?.metadata?.type) {
+          Cypress.env(CONSTANTS.APP_TYPE, intentTemplates[appId].metadata.type);
+        }
       }
       // Log failure if intentTemplate is not found
       else {
@@ -1737,21 +1744,36 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
  * cy.fetchAppMetaData()
  */
 Cypress.Commands.add('fetchAppMetaData', () => {
-  // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
-  const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
-  const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
+  if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
+    const requestParams = {
+      method: 'fcs.getAppData',
+      params: {
+        deviceMac: Cypress.env(CONSTANTS.DEVICE_MAC),
+        appAssuranceId: Cypress.env(CONSTANTS.APP_ASSURANCE_ID),
+      },
+    };
+    cy.sendMessagetoPlatforms(requestParams).then((result) => {
+      return result.data;
+    });
+  } else {
+    // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
+    const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
+    const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
 
-  const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
-  const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
+    const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
+    const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
-  cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then((fcsAppMetaData) => {
-    cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
-      (configModuleAppMetaData) => {
-        // Combine the app metadata from the fcs and configModule appData directories.
-        _.merge(fcsAppMetaData, configModuleAppMetaData);
+    cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
+      (fcsAppMetaData) => {
+        cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
+          (configModuleAppMetaData) => {
+            // Combine the app metadata from the fcs and configModule appData directories.
+            _.merge(fcsAppMetaData, configModuleAppMetaData);
+          }
+        );
       }
     );
-  });
+  }
 });
 
 /**
