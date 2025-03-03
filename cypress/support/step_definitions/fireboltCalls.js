@@ -498,41 +498,30 @@ Given(
  */
 Given(/3rd party '(.+)' app should be exited$/, async (app) => {
   // getAppState validation
-  const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
-  const requestMapForGetAppState = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
-    params: appId,
-  };
-  fireLog.info(
-    `Sending request to fetch ${appId} app state: ${JSON.stringify(requestMapForGetAppState)}`
-  );
-  cy.sendMessagetoPlatforms(requestMapForGetAppState).then((response) => {
-    const responseString = JSON.stringify(response);
-    let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);
-    validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
-    let validationObject;
-    cy.getFireboltData(validationObjectKey).then((fireboltData) => {
-      const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
-      validationObject = UTILS.resolveRecursiveValues(fireboltData);
-      cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
-        // screenShot validation
-        fireLog.info('Started Screenshot validation');
-        const requestMapForScreenShotValidation = {
-          method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
-          params: {
-            validations: validationObject.screenshot.validations,
-          },
-        };
-        fireLog.info(
-          `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
-        );
-        cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
-          fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
-          if (response.status != 'pass') {
-            fireLog.info(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
-          }
-          cy.softAssertAll();
-        });
+  let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);
+  validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  let validationObject;
+  cy.getFireboltData(validationObjectKey).then((fireboltData) => {
+    const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+    validationObject = UTILS.resolveRecursiveValues(fireboltData);
+    cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
+      // screenShot validation
+      fireLog.info('Started Screenshot validation');
+      const requestMapForScreenShotValidation = {
+        method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
+        params: {
+          validations: validationObject.screenshot.validations,
+        },
+      };
+      fireLog.info(
+        `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
+      );
+      cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
+        fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
+        if (response.status != 'pass') {
+          fireLog.info(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
+        }
+        cy.softAssertAll();
       });
     });
   });
