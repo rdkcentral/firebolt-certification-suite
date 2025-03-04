@@ -1810,25 +1810,37 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
  */
 
 const shouldPerformValidation = (key, value) => {
+  const parseJSON = (data) => {
+    if (typeof data === 'string') {
+      try {
+        return JSON.parse(data);
+      } catch (error) {
+        console.log(`Failed to parse JSON: ${error.message}`);
+        return {}; // Return an empty object if parsing fails
+      }
+    }
+    return data || {}; // Ensure it's an object or fallback to empty
+  };
   // excludeValidations or includeValidations is not defined in the environment, assign {} to continue normal validations.
-  const excludeValidations = UTILS.getEnvVariable(CONSTANTS.EXCLUDE_VALIDATIONS, false) || {};
-  const includeValidations = UTILS.getEnvVariable(CONSTANTS.INCLUDE_VALIDATIONS, false) || {};
+  const excludeValidations = parseJSON(UTILS.getEnvVariable(CONSTANTS.EXCLUDE_VALIDATIONS, false));
+  const includeValidations = parseJSON(UTILS.getEnvVariable(CONSTANTS.INCLUDE_VALIDATIONS, false));
 
-  // Return true if value is undefined, null, or includeValidations is empty to continue normal validations.
-  if (value === undefined || value === null) {
+  // Allow normal validation if value is null, undefined, or an empty string
+  if (value == null || value === '') {
     return true;
   }
 
-  // Check if key exist in excludeValidation and includes the value
-  if (excludeValidations[key] && excludeValidations[key].includes(value)) {
+  // If excludeValidations contains key and value, skip validation
+  if (Array.isArray(excludeValidations[key]) && excludeValidations[key].includes(value)) {
     fireLog.info(`Skipping validation: ${value} as it is in excludeValidations under ${key}`);
     return false;
   }
 
-  // Check if key exist in includeValidations exists includes the value
-  if (includeValidations[key] && !includeValidations[key].includes(value)) {
+  // If includeValidations exists for the key but does NOT include the value, skip validation
+  if (Array.isArray(includeValidations[key]) && !includeValidations[key].includes(value)) {
     fireLog.info(`Skipping validation: ${value} as it is NOT in includeValidations under ${key}`);
     return false;
   }
+
   return true;
 };
