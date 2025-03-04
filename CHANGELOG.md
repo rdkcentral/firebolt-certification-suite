@@ -1,3 +1,10 @@
+# [1.9.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0...v1.9.0-dev.1) (2025-03-04)
+
+
+### Features
+
+* filtering validation logic ([#349](https://github.com/rdkcentral/firebolt-certification-suite/issues/349)) ([aaf869e](https://github.com/rdkcentral/firebolt-certification-suite/commit/aaf869ec98e1c3b3bd46dbec4683ae41f4470d43))
+
 # [1.8.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0...v1.8.0) (2025-02-27)
 
 
