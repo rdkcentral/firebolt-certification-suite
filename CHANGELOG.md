@@ -1,3 +1,74 @@
+# [1.8.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0...v1.8.0) (2025-02-27)
+
+
+### Bug Fixes
+
+* correct method names ([#344](https://github.com/rdkcentral/firebolt-certification-suite/issues/344)) ([17ebe20](https://github.com/rdkcentral/firebolt-certification-suite/commit/17ebe2068da8b2e84836189adae9b0c86cac1a4a))
+* Correct the mistakes in Testcase folder structure for 0.8.1 and 0.10.0 ([#351](https://github.com/rdkcentral/firebolt-certification-suite/issues/351)) ([f7f8c31](https://github.com/rdkcentral/firebolt-certification-suite/commit/f7f8c318e1d7a5e6ad8a01794efc4b3e2601bbdb))
+* fcsSetter logic change from env to stack ([#324](https://github.com/rdkcentral/firebolt-certification-suite/issues/324)) ([adeea99](https://github.com/rdkcentral/firebolt-certification-suite/commit/adeea9909f7aca68d3f3694acdd2f48fe023cff6))
+* Uncomment console log ([#348](https://github.com/rdkcentral/firebolt-certification-suite/issues/348)) ([9081ba3](https://github.com/rdkcentral/firebolt-certification-suite/commit/9081ba35a74cae5448f6185724e0e7b33644a521))
+* Versioning documentation ([#350](https://github.com/rdkcentral/firebolt-certification-suite/issues/350)) ([515097f](https://github.com/rdkcentral/firebolt-certification-suite/commit/515097f82e00fb3b8dfb52f906c51481185dbb5b))
+
+
+### Features
+
+* Add featureName to env ([#342](https://github.com/rdkcentral/firebolt-certification-suite/issues/342)) ([f585ba9](https://github.com/rdkcentral/firebolt-certification-suite/commit/f585ba9e7c8a00fadafba4fba097f44d63f01931))
+* Added logic to override the fcsSetter methods ([#333](https://github.com/rdkcentral/firebolt-certification-suite/issues/333)) ([53080eb](https://github.com/rdkcentral/firebolt-certification-suite/commit/53080eb8b623d97120b6b60165c774df8221e60d))
+* Adding sanity test cases to version folders ([#343](https://github.com/rdkcentral/firebolt-certification-suite/issues/343)) ([ff1c91f](https://github.com/rdkcentral/firebolt-certification-suite/commit/ff1c91f3e6e3892b8452233a331a785ff4cebe92))
+* Adding SPS default config mod ([#323](https://github.com/rdkcentral/firebolt-certification-suite/issues/323)) ([38434ea](https://github.com/rdkcentral/firebolt-certification-suite/commit/38434ea8035c3f2d227780d542dd729e9a0505c1))
+* Pass elk env variable to reporting ([#339](https://github.com/rdkcentral/firebolt-certification-suite/issues/339)) ([9e05525](https://github.com/rdkcentral/firebolt-certification-suite/commit/9e05525662091445622090546da5a12f0d19f60d))
+* SDK Versioning changes from 1.3.0 - 1.0.0 ([#345](https://github.com/rdkcentral/firebolt-certification-suite/issues/345)) ([abdcd03](https://github.com/rdkcentral/firebolt-certification-suite/commit/abdcd03d50ab743eff4bece4944e46995aeaa844))
+* test case versioning changes ([#307](https://github.com/rdkcentral/firebolt-certification-suite/issues/307)) ([b88e0be](https://github.com/rdkcentral/firebolt-certification-suite/commit/b88e0be9cef3daf02da57aa2461b344d55c351ab))
+
+# [1.8.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.11...v1.8.0-dev.12) (2025-02-27)
+
+
+### Bug Fixes
+
+* Versioning documentation ([#350](https://github.com/rdkcentral/firebolt-certification-suite/issues/350)) ([515097f](https://github.com/rdkcentral/firebolt-certification-suite/commit/515097f82e00fb3b8dfb52f906c51481185dbb5b))
+
+# [1.8.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.10...v1.8.0-dev.11) (2025-02-27)
+
+
+### Bug Fixes
+
+* Correct the mistakes in Testcase folder structure for 0.8.1 and 0.10.0 ([#351](https://github.com/rdkcentral/firebolt-certification-suite/issues/351)) ([f7f8c31](https://github.com/rdkcentral/firebolt-certification-suite/commit/f7f8c318e1d7a5e6ad8a01794efc4b3e2601bbdb))
+
+# [1.8.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.9...v1.8.0-dev.10) (2025-02-26)
+
+
+### Features
+
+* SDK Versioning changes from 1.3.0 - 1.0.0 ([#345](https://github.com/rdkcentral/firebolt-certification-suite/issues/345)) ([abdcd03](https://github.com/rdkcentral/firebolt-certification-suite/commit/abdcd03d50ab743eff4bece4944e46995aeaa844))
+
+# [1.8.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.8...v1.8.0-dev.9) (2025-02-26)
+
+
+### Bug Fixes
+
+* Uncomment console log ([#348](https://github.com/rdkcentral/firebolt-certification-suite/issues/348)) ([9081ba3](https://github.com/rdkcentral/firebolt-certification-suite/commit/9081ba35a74cae5448f6185724e0e7b33644a521))
+
+# [1.8.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.7...v1.8.0-dev.8) (2025-02-25)
+
+
+### Features
+
+* Adding sanity test cases to version folders ([#343](https://github.com/rdkcentral/firebolt-certification-suite/issues/343)) ([ff1c91f](https://github.com/rdkcentral/firebolt-certification-suite/commit/ff1c91f3e6e3892b8452233a331a785ff4cebe92))
+
+# [1.8.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.6...v1.8.0-dev.7) (2025-02-24)
+
+
+### Features
+
+* Add featureName to env ([#342](https://github.com/rdkcentral/firebolt-certification-suite/issues/342)) ([f585ba9](https://github.com/rdkcentral/firebolt-certification-suite/commit/f585ba9e7c8a00fadafba4fba097f44d63f01931))
+
+# [1.8.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.5...v1.8.0-dev.6) (2025-02-21)
+
+
+### Bug Fixes
+
+* correct method names ([#344](https://github.com/rdkcentral/firebolt-certification-suite/issues/344)) ([17ebe20](https://github.com/rdkcentral/firebolt-certification-suite/commit/17ebe2068da8b2e84836189adae9b0c86cac1a4a))
+
 # [1.8.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0-dev.4...v1.8.0-dev.5) (2025-02-18)
 
 

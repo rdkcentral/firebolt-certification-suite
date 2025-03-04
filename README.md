@@ -214,7 +214,9 @@ additionalLaunchParams = {
     To override the default response for a firebolt call.
     Set pre-requisite values for UI operations like automating the UI actions.
 
-3. To manually specify that a test should be skipped during execution. Useful in the case where a specific test case may be supported by both the framework and the platform but running the test causes undesired behavior which impacts the ability of the device to function as intended.
+3. Retrieves currently running feature file name and its corresponding scenario name and stored them in the environment variables 'featureName' and 'scenarioName'. These values can later be used in the glue code.
+
+4. To manually specify that a test should be skipped during execution. Useful in the case where a specific test case may be supported by both the framework and the platform but running the test causes undesired behavior which impacts the ability of the device to function as intended.
 
 - Before operation also works based on tags provided in cli. This tags can be send as env values from cli command using the key **beforeOperationTags**. Based on the tags specified in cli and the beforeOperation, corresponding configModule would perform necessary action steps. We can send the tags in below format.<br/>
   **--env beforeOperationTags='tag'**

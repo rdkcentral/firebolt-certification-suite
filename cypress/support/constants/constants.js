@@ -174,6 +174,7 @@ module.exports = {
   FCS_MODULEREQID_PATH: 'cypress/fixtures/objects/moduleReqId/moduleReqId.json',
   FCS_SETRESPONSE_PATH: 'cypress/fixtures/setResponseData.json',
   FCS_VALIDATION_JSON: 'fCSValidationjson',
+  FEATURE_NAME: 'featureName',
   FIREBOLT: 'firebolt',
   FIREBOLTCALL: 'fireboltCall',
   FIREBOLT_OBJECT_DOC_PATH:
