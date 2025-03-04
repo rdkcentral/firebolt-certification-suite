@@ -1800,7 +1800,8 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
  */
 Cypress.Commands.add('softAssert', (actual, expected, message) => {
   jsonAssertion.softAssert(actual, expected, message);
-  if (jsonAssertion.jsonDiffArray.length) {
+
+  if (jsonAssertion && jsonAssertion.jsonDiffArray && jsonAssertion.jsonDiffArray.length) {
     jsonAssertion.jsonDiffArray.forEach((diff) => {
       Cypress.log({
         name: 'Soft assertion error',
@@ -1821,3 +1822,18 @@ Cypress.Commands.add('softAssert', (actual, expected, message) => {
  * cy.softAssertAll()
  */
 Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
+
+/**
+ * @module commands
+ * @function clearSoftAssertArray
+ * @description To clear all the soft assertions
+ * @example
+ * cy.clearSoftAssertArray()
+ */
+Cypress.Commands.add('clearSoftAssertArray', () => {
+  cy.log(`Clearing soft assertion array`);
+
+  // Reset relevant properties
+  jsonAssertion.softAssertJson = null;
+  jsonAssertion.softAssertCount = 0;
+});
