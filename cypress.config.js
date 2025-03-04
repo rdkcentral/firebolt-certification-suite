@@ -94,7 +94,7 @@ const env = {
   externalModuleTestTypes: [],
   dynamicDeviceDetailsModules: ['Device'],
   elk: false,
-  objective: {},
+  objective: '',
 };
 
 module.exports = {
