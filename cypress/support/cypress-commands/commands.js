@@ -1319,7 +1319,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
   // Helper function to handle switch case validation
   const handleValidation = (object, methodOrEventObject, methodOrEventResponse = null) => {
     const scenario = object.type;
-    console.log('2708 commands.js object >>> ', object);
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
     switch (scenario) {
       case CONSTANTS.REGEX:
