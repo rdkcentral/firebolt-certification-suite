@@ -889,13 +889,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
   // if appType is certification, the appLaunch is for certification purposes. In such a case, discovery.launch should go with a basic intent that has the appId and the certification app role.
   // Creating data for basic intent to be sent to the app on launch
   let appCategory;
-  
+
   if (
     Cypress.env(CONSTANTS.APP_METADATA) &&
     Cypress.env(CONSTANTS.APP_METADATA)[appId]?.metadata?.type
   ) {
     Cypress.env(CONSTANTS.APP_TYPE, Cypress.env(CONSTANTS.APP_METADATA)[appId].metadata.type);
-    console.log('appType-----:', Cypress.env(CONSTANTS.APP_TYPE));
     appType = Cypress.env(CONSTANTS.APP_TYPE);
   }
   // Storing the appId in runtime environment variable
@@ -921,10 +920,10 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
     let intentTemplate;
     const intentTemplates = UTILS.getEnvVariable(CONSTANTS.INTENT_TEMPLATES, false);
     if (intentTemplates && intentTemplates[appType]) {
-        if (intentTemplates[appType][appId] && intentTemplates[appType][appId][intent]) {
-          intentTemplate = intentTemplates[appType][appId][intent];
-        } else if (intentTemplates[appType][intent]) {
-          intentTemplate = intentTemplates[appType][intent];
+      if (intentTemplates[appType][appId] && intentTemplates[appType][appId][intent]) {
+        intentTemplate = intentTemplates[appType][appId][intent];
+      } else if (intentTemplates[appType][intent]) {
+        intentTemplate = intentTemplates[appType][intent];
       }
       // Log failure if intentTemplate is not found
       else {
