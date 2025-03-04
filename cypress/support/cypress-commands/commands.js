@@ -179,7 +179,6 @@ Cypress.Commands.add('getSdkVersion', () => {
           {},
           CONSTANTS.ACTION_CORE.toLowerCase()
         ).then((response) => {
-          console.log(JSON.stringify(response) + ' RESP111111');
           cy.log(`Response from app: ${appId} - ${JSON.stringify(response)}`);
           // If the response is invalid, assign the latest SDK version to the environment variable.
           if (response?.result?.api?.readable && response?.result.sdk?.readable) {
@@ -207,7 +206,6 @@ Cypress.Commands.add('getSdkVersion', () => {
             let deviceFirmware = JSON.stringify(response.result.firmware.readable);
             deviceFirmware = deviceFirmware.replace(/"/g, '');
             Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
-            console.log('FIRMWARE44444 ' + Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE));
           }
           if (response?.result?.api?.readable) {
             const fireboltVersion =
@@ -221,9 +219,6 @@ Cypress.Commands.add('getSdkVersion', () => {
             const release = response.result.debug;
             Cypress.env(CONSTANTS.ENV_RELEASE, release);
           }
-          console.log(
-            JSON.stringify(response.result.sdk.readable) + ' response?.result?.sdk?.readable'
-          );
           if (response?.result?.sdk?.readable) {
             const responseResultSDK =
               `${response?.result?.sdk?.major}.${response?.result?.sdk?.minor}.${response?.result?.sdk?.patch}`.replace(
@@ -231,7 +226,6 @@ Cypress.Commands.add('getSdkVersion', () => {
                 ''
               );
             Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
-            console.log('SDKVERS11111 ' + Cypress.env(CONSTANTS.ENV_SDK_VERSION));
           }
         });
       });
