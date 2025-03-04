@@ -63,7 +63,6 @@ Given(
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
-    cy.updateRunInfo();
 
     if (
       UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
@@ -94,7 +93,7 @@ Given(
       if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
         Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
       }
-      // fetch device details dynamically
+      // fetch device details dynamically and update run info
       try {
         if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
           const dynamicModules = UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES);
@@ -116,6 +115,7 @@ Given(
             });
           }
         }
+        cy.updateRunInfo();
       } catch (error) {
         cy.log(
           `Following error occurred while trying to fetch device details dynamically: ${error}`

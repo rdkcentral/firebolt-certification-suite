@@ -179,6 +179,7 @@ Cypress.Commands.add('getSdkVersion', () => {
           {},
           CONSTANTS.ACTION_CORE.toLowerCase()
         ).then((response) => {
+          console.log(JSON.stringify(response) + ' RESP111111');
           cy.log(`Response from app: ${appId} - ${JSON.stringify(response)}`);
           // If the response is invalid, assign the latest SDK version to the environment variable.
           if (response?.result?.api?.readable && response?.result.sdk?.readable) {
@@ -206,6 +207,7 @@ Cypress.Commands.add('getSdkVersion', () => {
             let deviceFirmware = JSON.stringify(response.result.firmware.readable);
             deviceFirmware = deviceFirmware.replace(/"/g, '');
             Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+            console.log('FIRMWARE44444 ' + Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE));
           }
           if (response?.result?.api?.readable) {
             const fireboltVersion =
@@ -215,6 +217,13 @@ Cypress.Commands.add('getSdkVersion', () => {
               );
             Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
           }
+          if (response?.result?.debug) {
+            const release = response.result.debug;
+            Cypress.env(CONSTANTS.ENV_RELEASE, release);
+          }
+          console.log(
+            JSON.stringify(response.result.sdk.readable) + ' response?.result?.sdk?.readable'
+          );
           if (response?.result?.sdk?.readable) {
             const responseResultSDK =
               `${response?.result?.sdk?.major}.${response?.result?.sdk?.minor}.${response?.result?.sdk?.patch}`.replace(
@@ -222,6 +231,7 @@ Cypress.Commands.add('getSdkVersion', () => {
                 ''
               );
             Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+            console.log('SDKVERS11111 ' + Cypress.env(CONSTANTS.ENV_SDK_VERSION));
           }
         });
       });
@@ -241,6 +251,7 @@ Cypress.Commands.add('updateRunInfo', () => {
   let deviceDistributor = '';
   let devicePlatform = '';
   const fireboltVersion = '';
+
   // function to set env variable for run info data
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
     if (deviceData === '') {
@@ -260,13 +271,9 @@ Cypress.Commands.add('updateRunInfo', () => {
               );
             Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
           }
-          if (!Cypress.env(CONSTANTS.ENV_SDK_VERSION) && response?.sdk?.readable) {
-            const responseResultSDK =
-              `${response?.sdk?.major}.${response?.sdk?.minor}.${response?.sdk?.patch}`.replace(
-                /"/g,
-                ''
-              );
-            Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+          if (!Cypress.env(CONSTANTS.ENV_RELEASE) && response?.debug) {
+            const release = response.debug;
+            Cypress.env(CONSTANTS.ENV_RELEASE, release);
           }
         } else {
           // Set environment variable with the response
@@ -326,6 +333,7 @@ Cypress.Commands.add('updateRunInfo', () => {
               })
               .then(() => delay(2000))
               .then(() => {
+                console.log('FIRMWARE22222 ' + Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE));
                 if (Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION)) return;
                 else
                   return setEnvRunInfo(
@@ -343,43 +351,68 @@ Cypress.Commands.add('updateRunInfo', () => {
                   CONSTANTS.ACTION_CORE,
                   CONSTANTS.ENV_PLATFORM
                 );
-              });
-            cy.readFile(reportEnvFile).then((reportEnv) => {
-              if (reportEnv) {
-                if (
-                  reportEnv.customData &&
-                  reportEnv.customData.data &&
-                  reportEnv.customData.data.length > 0
-                ) {
-                  const labelToEnvMap = {
-                    [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
-                    [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
-                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
-                    [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
-                    [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
-                    [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
-                    [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
-                    [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
-                  };
-                  reportEnv.customData.data.forEach((item) => {
-                    if (item.label === CONSTANTS.PRODUCT) {
-                      item.value = configModuleConst.PRODUCT ? configModuleConst.PRODUCT : 'N/A';
-                    } else if (labelToEnvMap[item.label]) {
-                      item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+              })
+              .then(() => {
+                cy.readFile(reportEnvFile).then((reportEnv) => {
+                  if (reportEnv) {
+                    if (
+                      reportEnv.customData &&
+                      reportEnv.customData.data &&
+                      reportEnv.customData.data.length > 0
+                    ) {
+                      const labelToEnvMap = {
+                        [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
+                        [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
+                        [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
+                        [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
+                        [CONSTANTS.RELEASE]: CONSTANTS.ENV_RELEASE,
+                        [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
+                        [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
+                        [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                      };
+                      reportEnv.customData.data.forEach((item) => {
+                        if (item.label === CONSTANTS.PRODUCT) {
+                          item.value = configModuleConst.PRODUCT
+                            ? configModuleConst.PRODUCT
+                            : 'N/A';
+                        } else if (labelToEnvMap[item.label]) {
+                          item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+                        }
+                      });
                     }
-                  });
-                }
-                // write the merged object
-                cy.writeFile(tempReportEnvFile, reportEnv);
-              } else {
-                logger.info('Unable to read from reportEnv json file');
-                return false;
-              }
-            });
+                    // write the merged object
+                    cy.writeFile(tempReportEnvFile, reportEnv);
+                  } else {
+                    logger.info('Unable to read from reportEnv json file');
+                    return false;
+                  }
+                });
+              });
           } catch (err) {
             logger.info('Error in updating Run Info in cucumber report', err);
             return false;
           }
+        } else if (tempFileExists && Cypress.env(CONSTANTS.ENV_SDK_VERSION)) {
+          cy.readFile(tempReportEnvFile).then((reportEnv) => {
+            if (reportEnv) {
+              if (
+                reportEnv.customData &&
+                reportEnv.customData.data &&
+                reportEnv.customData.data.length > 0 &&
+                reportEnv.customData.data.some(
+                  (item) => item.label === CONSTANTS.SDK_REPORT_VERSION && item.value === 'N/A'
+                )
+              ) {
+                reportEnv.customData.data.forEach((item) => {
+                  if (item.label === CONSTANTS.SDK_REPORT_VERSION) {
+                    item.value = Cypress.env(CONSTANTS.ENV_SDK_VERSION);
+                  }
+                });
+              }
+              // write the merged object
+              cy.writeFile(tempReportEnvFile, reportEnv);
+            }
+          });
         } else {
           logger.info(
             'Unable to update Run Info in cucumber report, tempReportEnv file already exists'
