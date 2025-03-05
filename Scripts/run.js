@@ -64,6 +64,7 @@ function generateUUID() {
 
 // Function to extract value of params that contain spaces
 function modifyParams(params) {
+  params = params.replace(/\^/g, '');
   const envSectionMatch = params.match(/--env\s+(.*?)(?=\s+--|$)/);
   const envSection = envSectionMatch ? envSectionMatch[1] : '';
   const paramValuePairs = envSection.split(',');
