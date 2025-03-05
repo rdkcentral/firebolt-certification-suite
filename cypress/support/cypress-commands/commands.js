@@ -1364,9 +1364,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
       case CONSTANTS.UNDEFINED:
         cy.undefinedValidation(object, methodOrEventObject, validationType);
         break;
-      case CONSTANTS.SCREENSHOT_VALIDATION:
-        cy.screenshotValidation(object);
-        break;
       case CONSTANTS.PERFORMANCE_VALIDATION:
         cy.performanceValidation(object);
         break;

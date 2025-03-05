@@ -532,7 +532,11 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
       }
     })
     .then(() => {
-      // screenShot validation
+      // Only take a screenshot if the enableScreenshots environment variable is set to true
+      if (UTILS.getEnvVariable('enableScreenshots')) {
+        // TODO: call function to make fcs.screenshot call
+      }
+
       fireLog.info('Started Screenshot validation');
       const requestMapForScreenShotValidation = {
         method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
@@ -544,6 +548,9 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
         `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
       );
       cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
+        // this will go to custom validation
+        //
+
         fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
         if (response.status != 'pass') {
           fireLog.fail(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
