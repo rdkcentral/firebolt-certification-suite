@@ -38,15 +38,18 @@ Given(
   (appType, appCallSign, state, intent) => {
     Cypress.env(CONSTANTS.APP_TYPE, appType);
     Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) || 0);
-    if (
-      !UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) ||
-      UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(
-        UTILS.getEnvVariable(CONSTANTS.TEST_TYPE)
-      ) ||
-      UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(
-        UTILS.getEnvVariable(CONSTANTS.TEST_TYPE)
-      )
-    ) {
+      if (
+        Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) == 0 &&
+        (
+          !UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) ||
+          UTILS.getEnvVariable(CONSTANTS.LIFECYCLE_CLOSE_TEST_TYPES).includes(
+            UTILS.getEnvVariable(CONSTANTS.TEST_TYPE)
+          ) ||
+          UTILS.getEnvVariable(CONSTANTS.UNLOADING_APP_TEST_TYPES).includes(
+            UTILS.getEnvVariable(CONSTANTS.TEST_TYPE)
+          )
+        )
+      ) {
       if (!state) {
         state = CONSTANTS.LIFECYCLE_STATES.FOREGROUND;
       }
@@ -55,12 +58,11 @@ Given(
       Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, true);
       // Incremental launch count for cold launch
       Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, (Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) + 1));
-    } else if (UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) && Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) >= 1) {
+    } else if (UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) || Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) >= 1) {
       if (!state) {
         state = CONSTANTS.LIFECYCLE_STATES.FOREGROUND;
       }
-      const clearInteractionLogs = Cypress.env('fbInteractionLogs').logs.set(Cypress.env(CONSTANTS.SCENARIO_NAME), []);
-      Cypress.env('fbInteractionLogs', clearInteractionLogs)
+      Cypress.env('fbInteractionLogs').logs.clear();
       cy.launchApp(appType, appCallSign, null, intent);
       cy.lifecycleSetup(appCallSign, state);
       // Incremental launch count for hot launch
