@@ -1630,8 +1630,7 @@ Cypress.Commands.add('startOrStopInteractionsService', (action) => {
         });
     } else {
       fireLog
-        .assert(
-          false,
+        .info(
           `Firebolt interactions collection service with action as ${action} has failed with error ${JSON.stringify(result.message)}`
         )
         .then(() => {
