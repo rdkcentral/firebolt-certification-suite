@@ -384,9 +384,13 @@ Given(
     const test = Cypress.env(CONSTANTS.TEST_TYPE);
     const testLowerCase = test.toLowerCase();
     const scenarioType = Cypress.env(CONSTANTS.SCENARIO_TYPE);
-    const scenarioTypeLowerCase = scenarioType.toLowerCase();
+    let scenarioTypeLowerCase;
+    const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
+    if (scenarioType != null) {
+      scenarioTypeLowerCase = scenarioType.toLowerCase();
+    }
 
-    if (testLowerCase.includes(CONSTANTS.DISMISS)) {
+    if (externalModuleTestTypes.includes(test)) {
       if (Cypress.env(CONSTANTS.SCENARIO_TYPE)) {
         // playback dismiss
         if (testLowerCase.includes(CONSTANTS.PLAYBACK)) {
@@ -462,6 +466,7 @@ Given(
     let actionType;
     switch (action) {
       case 'dismissed':
+        fireLog.info(`Dismissing the app using the keyPressSequence: ${KeyPressSequence.dismiss}`);
         params.keyPressSequence = KeyPressSequence.dismiss;
         actionType = 'dismissApp';
         break;
@@ -493,61 +498,38 @@ Given(
  */
 Given(/3rd party '(.+)' app should be exited$/, async (app) => {
   // getAppState validation
-  const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
-  const requestMapForGetAppState = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
-    params: appId,
-  };
-  fireLog.info(
-    `Sending request to fetch ${appId} app state: ${JSON.stringify(requestMapForGetAppState)}`
-  );
-  cy.sendMessagetoPlatforms(requestMapForGetAppState)
-    .then((response) => {
-      const responseString = JSON.stringify(response);
-      if (
-        // Check if response exists and contains  the dismissed app's appState, visibilityState of launcher screen
-        // and if the dismissed app's appState is INACTIVE and launcher screen's visibilityState is VISIBLE
-        response &&
-        response.appState &&
-        response.visibilityState &&
-        response.appState.toUpperCase() === CONSTANTS.LIFECYCLE_STATES.INACTIVE &&
-        response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
-      ) {
+  let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);
+  validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  let validationObject;
+  cy.getFireboltData(validationObjectKey).then((fireboltData) => {
+    const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+    validationObject = UTILS.resolveRecursiveValues(fireboltData);
+    cy.methodOrEventResponseValidation(type, validationObject)
+      .then((response) => {
+        fireLog.info('State validation of app is completed');
+      })
+      .then(() => {
+        // screenShot validation
+        fireLog.info('Started Screenshot validation');
+        const requestMapForScreenShotValidation = {
+          method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
+          params: {
+            validations: validationObject.screenshot.validations,
+          },
+        };
         fireLog.info(
-          `State validation successful: Current state of ${appId} app is ${response.appState} and launcher screen's visibility state is ${response.visibilityState} `
+          `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
         );
-      } else if (
-        // Check if the dismissed app's appState is missing, and launcher screen's visibilityState is VISIBLE
-        response &&
-        !response.appState &&
-        response.visibilityState &&
-        response.visibilityState.toUpperCase() === CONSTANTS.VISIBLE
-      ) {
-        fireLog.info(
-          `State validation successful: ${appId} app is dismissed and launcher screen's visibility state is ${response.visibilityState}`
-        );
-      } else {
-        // Log failure message if none of the above conditions are met
-        fireLog.fail(`${appId} app is not dismissed. Response : ${responseString}`);
-      }
-    })
-    .then(() => {
-      // screenShot validation
-      fireLog.info('Started Screenshot validation');
-      const requestMapForScreenShotValidation = {
-        method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
-        params: {
-          validations: Cypress.env(CONSTANTS.RUNTIME).fireboltCall.screenshot.validations,
-        },
-      };
-      fireLog.info(
-        `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
-      );
-      cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
-        fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
-        if (response.status != 'pass') {
-          fireLog.info(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
-        }
+        cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
+          fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
+
+          if (response && response !== 'undefined') {
+            if (response.status != 'pass') {
+              fireLog.info(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
+            }
+            cy.softAssertAll();
+          }
+        });
       });
-    });
+  });
 });
