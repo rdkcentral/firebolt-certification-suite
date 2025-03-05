@@ -1677,7 +1677,8 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
         method: exitMethod,
         params: params.appId,
       };
-
+      Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, false)
+      Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, 0)
       break;
     case 'unloadApp':
       exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP;
@@ -1685,7 +1686,8 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
         method: exitMethod,
         params: params.appId,
       };
-
+      Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, false)
+      Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, 0)
       break;
     case 'dismissApp':
       exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.DISMISSAPP;

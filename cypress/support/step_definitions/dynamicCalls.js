@@ -402,7 +402,8 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
 
   // Sending the request to the platform to retrieve the app state.
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    if (response && response.currentApp_fireboltState.toUpperCase() === CONSTANTS.FOREGROUND) {
+    if(response){
+    if (response.currentApp_fireboltState && response.currentApp_fireboltState.toUpperCase() === CONSTANTS.FOREGROUND) {
       fireLog.info(
         `State validation successful: Current state of ${appId} app is ${JSON.stringify(response)} as expected`
       );
@@ -411,6 +412,11 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
         `State validation failed: Current state of ${appId} app is ${JSON.stringify(response)}, expected to be ${CONSTANTS.FOREGROUND}.`
       );
     }
+  } else{
+    fireLog.fail(
+      `State validation failed: Did not get response when retrieving app state`
+    );
+  }
   });
 
   // Storing the page name in runtime environment variable to use it in the validations.
