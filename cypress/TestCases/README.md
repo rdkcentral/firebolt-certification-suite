@@ -10,6 +10,6 @@ This directory contains the test cases used during the execution of the Firebolt
   - `sdkResources/external/<version>/TestCases`
 - If no SDK version is passed via CLI, the suite defaults to the version specified in `package.json` and copies test cases from the corresponding folder.
 
-> **Important Note**: Do not modify files directly in this directory, as they will be overwritten during each test run. The directory will only contain test cases **after** the tests are executed.
+> **Important Note**: Do not modify files directly in this directory, as they will be overwritten during each test run. The directory will only contain test cases **after** the tests are executed. For any test case changes, edit files inside the `sdkResources` directory to update or modify test cases for a specific SDK version. Any changes made directly in the `cypress/TestCases` folders will be lost during the next test execution.
 
 For more information about how test cases are managed, please refer to the main documentation in the [sdkResources directory](../../sdkResources/README.md).

@@ -33,14 +33,14 @@ Feature: Localization_Manage
         Then 'Firebolt' platform responds to '1st party app' set API with 'INVALID_PARAMS'
 
         Examples:
-            | Scenario            | Method   | Value |
-            | Locality-integer    | locality | 123   |
-            | Locality-boolean    | locality | true  |
-            | Locale-integer      | locale   | 123   |
-            | Postal Code-integer | locality | 123   |
-            | Postal Code-boolean | locality | true  |
-            | TimeZone-integer    | locality | 123   |
-            | TimeZone-boolean    | locality | true  |
+            | Scenario            | Method     | Value |
+            | Locality-integer    | locality   | 123   |
+            | Locality-boolean    | locality   | true  |
+            | Locale-integer      | locale     | 123   |
+            | Postal Code-integer | postalCode | 123   |
+            | Postal Code-boolean | postalCode | true  |
+            | TimeZone-integer    | timeZone   | 123   |
+            | TimeZone-boolean    | timeZone   | true  |
 
     @sdk @transport
     Scenario Outline: Localization.<Method> - Negative Scenario: <Scenario> expecting error

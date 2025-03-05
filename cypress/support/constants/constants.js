@@ -143,6 +143,7 @@ module.exports = {
   EXCEPTION_METHODS: 'exceptionMethods',
   EXCLUDED_METHODS: ['Lifecycle.close'],
   EXCLUDED_MODULES: [],
+  EXCLUDE_VALIDATIONS: 'excludeValidations',
   EXCLUDED_VALUES: [null, undefined],
   EXECUTE_SHELL: 'executeShell',
   EXPECTED_DATA_NOT_FOUND_IN_MODULE_JSONS:
@@ -178,6 +179,7 @@ module.exports = {
   FCS_MODULEREQID_PATH: 'cypress/fixtures/objects/moduleReqId/moduleReqId.json',
   FCS_SETRESPONSE_PATH: 'cypress/fixtures/setResponseData.json',
   FCS_VALIDATION_JSON: 'fCSValidationjson',
+  FEATURE_NAME: 'featureName',
   FIREBOLT: 'firebolt',
   FIREBOLTCALL: 'fireboltCall',
   FIREBOLT_OBJECT_DOC_PATH:
@@ -211,6 +213,7 @@ module.exports = {
   HEXADECIMAL: 'hexaDecimal',
   HISTORY_VALIDATION_REQ: 'Lifecycle history validation ',
   ID: 'id',
+  INCLUDE_VALIDATIONS: 'includeValidations',
   INPUT: 'INPUT',
   INTENT: 'intent',
   INTENT_TEMPLATES: 'intentTemplates',
