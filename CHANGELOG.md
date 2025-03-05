@@ -1,3 +1,10 @@
+# [1.9.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.1...v1.9.0-dev.2) (2025-03-05)
+
+
+### Features
+
+* Support lifecycle validation for App Assurance ([#336](https://github.com/rdkcentral/firebolt-certification-suite/issues/336)) ([cbe198c](https://github.com/rdkcentral/firebolt-certification-suite/commit/cbe198ce566e5fdf05591993e9eb12bc44223c75))
+
 # [1.9.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0...v1.9.0-dev.1) (2025-03-04)
 
 
