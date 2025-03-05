@@ -1,3 +1,10 @@
+# [1.9.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.2...v1.9.0-dev.3) (2025-03-05)
+
+
+### Features
+
+* Validation filter variable ([#356](https://github.com/rdkcentral/firebolt-certification-suite/issues/356)) ([5dfa71b](https://github.com/rdkcentral/firebolt-certification-suite/commit/5dfa71beacc8bdd95633d0de5568f238443d4d7b))
+
 # [1.9.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.1...v1.9.0-dev.2) (2025-03-05)
 
 
