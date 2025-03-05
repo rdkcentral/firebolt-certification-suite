@@ -244,7 +244,6 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
       throw new Error(`Error occurred during validation: ${JSON.stringify(error)}`);
     }
   } else {
-    // 2708
     let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);
     validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
     cy.getFireboltData(validationObjectKey).then((fireboltData) => {
