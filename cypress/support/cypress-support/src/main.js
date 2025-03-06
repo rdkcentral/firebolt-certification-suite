@@ -574,7 +574,6 @@ export default function (module) {
           module.customValidations[functionName] &&
           typeof module.customValidations[functionName] === 'function'
         ) {
-          message = module.customValidations[functionName](apiOrEventObject, fcsValidationObjectData);
           message = module.customValidations[functionName](
             apiOrEventObject,
             fcsValidationObjectData
