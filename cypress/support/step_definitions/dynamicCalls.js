@@ -402,21 +402,22 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
 
   // Sending the request to the platform to retrieve the app state.
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    if(response){
-    if (response.currentApp_fireboltState && response.currentApp_fireboltState.toUpperCase() === CONSTANTS.FOREGROUND) {
-      fireLog.info(
-        `State validation successful: Current state of ${appId} app is ${JSON.stringify(response)} as expected`
-      );
+    if (response) {
+      if (
+        response.currentApp_fireboltState &&
+        response.currentApp_fireboltState.toUpperCase() === CONSTANTS.FOREGROUND
+      ) {
+        fireLog.info(
+          `State validation successful: Current state of ${appId} app is ${JSON.stringify(response)} as expected`
+        );
+      } else {
+        fireLog.fail(
+          `State validation failed: Current state of ${appId} app is ${JSON.stringify(response)}, expected to be ${CONSTANTS.FOREGROUND}.`
+        );
+      }
     } else {
-      fireLog.fail(
-        `State validation failed: Current state of ${appId} app is ${JSON.stringify(response)}, expected to be ${CONSTANTS.FOREGROUND}.`
-      );
+      fireLog.fail(`State validation failed: Did not get response when retrieving app state`);
     }
-  } else{
-    fireLog.fail(
-      `State validation failed: Did not get response when retrieving app state`
-    );
-  }
   });
 
   // Storing the page name in runtime environment variable to use it in the validations.
@@ -425,14 +426,20 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
   } else {
     Cypress.env(CONSTANTS.RUNTIME, { page });
   }
-  if(UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) && Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) == 1){
+  if (
+    UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) &&
+    Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) == 1
+  ) {
     // cold launch interaction logs validation
     cy.getFireboltData(CONSTANTS.COLD_LAUNCH).then((fireboltData) => {
       const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
       const validationObject = UTILS.resolveRecursiveValues(fireboltData);
       cy.methodOrEventResponseValidation(type, validationObject);
     });
-  }else if(UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) && Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) > 1){
+  } else if (
+    UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) &&
+    Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) > 1
+  ) {
     // hot launch interaction logs validation
     cy.getFireboltData(CONSTANTS.HOT_LAUNCH).then((fireboltData) => {
       const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
