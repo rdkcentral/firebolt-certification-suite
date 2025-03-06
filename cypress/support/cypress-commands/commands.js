@@ -1326,61 +1326,68 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
     if (!shouldPerformValidation('validationTypes', scenario)) return;
     if (!shouldPerformValidation('validationTags', tags)) return;
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
-    switch (scenario) {
-      case CONSTANTS.REGEX:
-        cy.regExValidation(
-          method,
-          object.validations[0].type,
-          validationJsonPath,
-          methodOrEventResponse
-        );
-        break;
-      case CONSTANTS.MISC:
-        cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
-        break;
-      case CONSTANTS.DECODE:
-        const decodeType = object.specialCase;
-        const responseForDecodeValidation =
-          validationType == CONSTANTS.EVENT
-            ? methodOrEventResponse.eventResponse
-            : validationType == CONSTANTS.METHOD
-              ? methodOrEventResponse.result
-              : null;
 
-        cy.decodeValidation(
-          method,
-          decodeType,
-          responseForDecodeValidation,
-          object.validations[0],
-          null
-        );
-        break;
-      case CONSTANTS.FIXTURE:
-        cy.validateContent(
-          method,
-          context,
-          validationJsonPath,
-          object.validations[0].type,
-          validationType,
-          appId
-        );
-        break;
-      case CONSTANTS.CUSTOM:
-        cy.customValidation(object, methodOrEventObject);
-        break;
-      case CONSTANTS.UNDEFINED:
-        cy.undefinedValidation(object, methodOrEventObject, validationType);
-        break;
-      case CONSTANTS.SCREENSHOT_VALIDATION:
-        cy.screenshotValidation(object);
-        break;
-      case CONSTANTS.PERFORMANCE_VALIDATION:
-        cy.performanceValidation(object);
-        break;
-      default:
-        assert(false, 'Unsupported validation type');
-        break;
-    }
+    // cy.then() to ensure each Cypress command is properly awaited before return
+    cy.then(() => {
+      console.log(`======Beginning of the ${scenario} validation======`);
+      switch (scenario) {
+        case CONSTANTS.REGEX:
+          cy.regExValidation(
+            method,
+            object.validations[0].type,
+            validationJsonPath,
+            methodOrEventResponse
+          );
+          break;
+        case CONSTANTS.MISC:
+          cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
+          break;
+        case CONSTANTS.DECODE:
+          const decodeType = object.specialCase;
+          const responseForDecodeValidation =
+            validationType == CONSTANTS.EVENT
+              ? methodOrEventResponse.eventResponse
+              : validationType == CONSTANTS.METHOD
+                ? methodOrEventResponse.result
+                : null;
+
+          cy.decodeValidation(
+            method,
+            decodeType,
+            responseForDecodeValidation,
+            object.validations[0],
+            null
+          );
+          break;
+        case CONSTANTS.FIXTURE:
+          cy.validateContent(
+            method,
+            context,
+            validationJsonPath,
+            object.validations[0].type,
+            validationType,
+            appId
+          );
+          break;
+        case CONSTANTS.CUSTOM:
+          cy.customValidation(object, methodOrEventObject);
+          break;
+        case CONSTANTS.UNDEFINED:
+          cy.undefinedValidation(object, methodOrEventObject, validationType);
+          break;
+        case CONSTANTS.SCREENSHOT_VALIDATION:
+          cy.screenshotValidation(object);
+          break;
+        case CONSTANTS.PERFORMANCE_VALIDATION:
+          cy.performanceValidation(object);
+          break;
+        default:
+          assert(false, 'Unsupported validation type');
+          break;
+      }
+    }).then(() => {
+      console.log(`=====Ending of the ${scenario} validation=====`);
+    });
   };
 
   // Check if method or event field is present in requestData
