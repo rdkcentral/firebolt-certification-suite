@@ -62,6 +62,11 @@ Given(
     }
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
+    if (!scenarioType) {
+      fireLog.info(`ScenarioType is not provided, defaulting to ${CONSTANTS.LOGGEDOUT}`);
+    }
+    scenarioType = scenarioType || CONSTANTS.LOGGEDOUT;
+
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
 
     if (
