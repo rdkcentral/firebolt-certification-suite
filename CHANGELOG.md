@@ -1,3 +1,10 @@
+# [1.9.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.3...v1.9.0-dev.4) (2025-03-06)
+
+
+### Bug Fixes
+
+* Added validation logs for the debugging pupose ([#346](https://github.com/rdkcentral/firebolt-certification-suite/issues/346)) ([714b13a](https://github.com/rdkcentral/firebolt-certification-suite/commit/714b13a9de2ea872450a4ff2140a33fd36927799))
+
 # [1.9.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.2...v1.9.0-dev.3) (2025-03-05)
 
 
