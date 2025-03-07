@@ -596,21 +596,6 @@ function subscribeResults(data, metaData) {
 
 /**
  * @module utils
- * @function interactionResults
- * @description Callback function to fetch the interaction logs from subscribe function and storing in a list.
- * @param {object} interactionLog - interaction logs
- * @example
- * interactionResults("{"method": "account.id", "response": "123", "tt": 12}")
- **/
-function interactionResults(interactionLog) {
-  interactionLog = JSON.parse(interactionLog);
-  if (interactionLog && interactionLog.hasOwnProperty(CONSTANTS.METHOD)) {
-    getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
-  }
-}
-
-/**
- * @module utils
  * @function destroyGlobalObjects
  * @description Destroy global objects and recursively clear the environment variables whose name is stored in the list if present, before test execution. List of names of global object to be cleared can be passed
  *  @param {object} objectNameList - list of objects to be cleared
@@ -1144,43 +1129,6 @@ function fetchAppIdentifierFromEnv(appId) {
 }
 
 /**
- * InteractionsLogs class provides function to add and get interaction logs.
- * @class
- *
- * @example
- * interactionLogs.addLog({});
- * interactionLogs.getLogs();
- * interactionLogs.isFalse();
- */
-class InteractionsLogs {
-  constructor() {
-    this.logs = new Map();
-  }
-
-  addLog(message) {
-    const scenarioName = Cypress.env(CONSTANTS.SCENARIO_NAME);
-    if (this.logs.size > 0 && this.logs.has(scenarioName)) {
-      this.logs.get(scenarioName).push(message);
-    } else {
-      this.logs.set(scenarioName, [message]);
-    }
-  }
-
-  getLogs(scenarioName) {
-    if (scenarioName) {
-      return this.logs.get(scenarioName);
-    }
-    return this.logs;
-  }
-
-  clearLogs() {
-    this.logs.clear();
-  }
-}
-const interactionLogs = new InteractionsLogs();
-Cypress.env(CONSTANTS.FB_INTERACTIONLOGS, interactionLogs);
-
-/**
  * @module utils
  * @function censorPubSubToken
  * @description A Function to sensor the pubSubToken from the launch intent.
@@ -1233,7 +1181,6 @@ module.exports = {
   fireLog,
   parseValue,
   checkForSecondaryAppId,
-  interactionResults,
   resolveRecursiveValues,
   fireboltCallObjectHasField,
   fetchAppIdentifierFromEnv,

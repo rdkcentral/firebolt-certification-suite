@@ -71,26 +71,3 @@ For the validation part, for the states when the app is not reachable for us to 
 ### Examples:
  * Then '3rd party app' will stay in 'foreground' state
  * Then '3rd party app' will be in 'background' state
-
-## Interactions collection process is '(initiated|stopped)'
-### Purpose: To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
-
-### Params:
-| Param | Definition |
-| --- | --- |
-| action | initiated or stopped |
-
-### Examples:
- * `Given Interactions collection process is 'initiated'`
- * `Given Interactions collection process is 'stopped'`
-
-## verify Firebolt Interactions for '(.+)'
-### Purpose: Validating the firebolt interaction logs
-
-### Params:
-| Param | Definition |
-| --- | --- |
-| key | validation object key name |
-
-### Examples:
- * `verify Firebolt Interactions for 'account id method'`
