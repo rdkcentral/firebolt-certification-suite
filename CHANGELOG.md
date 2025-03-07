@@ -1,3 +1,10 @@
+# [1.9.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.5...v1.9.0-dev.6) (2025-03-07)
+
+
+### Bug Fixes
+
+* sdk version fix for fetching openrpc ([#358](https://github.com/rdkcentral/firebolt-certification-suite/issues/358)) ([63bb9a9](https://github.com/rdkcentral/firebolt-certification-suite/commit/63bb9a98f5e1c2d7f58632b544146c8ad8ab26cf))
+
 # [1.9.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.4...v1.9.0-dev.5) (2025-03-07)
 
 
