@@ -4,7 +4,7 @@
   "description": "Firebolt Certification Test Suite",
   "main": "index.js",
   "config": {
-    "supportedSDKVersion": "1.4.1"
+    "supportedSDKVersion": "1.5.0"
   },
   "scripts": {
     "cy:open": "npm run checkDefaultConfig && yarn cache clean && node ./Scripts/run.js open",
