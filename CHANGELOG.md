@@ -1,3 +1,10 @@
+# [1.9.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.4...v1.9.0-dev.5) (2025-03-07)
+
+
+### Features
+
+* appOnBoarding implementation ([#355](https://github.com/rdkcentral/firebolt-certification-suite/issues/355)) ([2b2169e](https://github.com/rdkcentral/firebolt-certification-suite/commit/2b2169e3268e1b58e2b6b77e1394414206480614))
+
 # [1.9.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.3...v1.9.0-dev.4) (2025-03-06)
 
 
