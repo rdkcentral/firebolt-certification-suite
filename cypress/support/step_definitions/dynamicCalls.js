@@ -424,6 +424,8 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
   cy.getFireboltData(validationObjectKey).then((fireboltData) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     const validationObject = UTILS.resolveRecursiveValues(fireboltData);
-    cy.methodOrEventResponseValidation(type, validationObject);
+    cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
+      cy.softAssertAll();
+    });
   });
 });
