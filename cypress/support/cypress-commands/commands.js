@@ -21,6 +21,7 @@ import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
+const jsonAssertion = require('soft-assert');
 
 /**
  * @module commands
@@ -1301,6 +1302,8 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
  * cy.methodOrEventResponseValidation('event', {method: 'accessibility.onClosedCaptionsSettingsChanged', context: {}, contentObject: {}, expectingError: false, appId: 'test.test', eventExpected: 'triggers'})
  */
 Cypress.Commands.add('methodOrEventResponseValidation', (validationType, requestData) => {
+  // To check whether the method/event validation should be performed or not based on the include/exclude valiodation object
+  if (!shouldPerformValidation('transactionTypes', validationType)) return;
   const { context, expectingError, appId, eventExpected, isNullCase } = requestData;
   const method = requestData?.event ? requestData.event : requestData.method;
   const contentObject = requestData.content ? requestData.content : requestData.contentObject;
@@ -1309,62 +1312,73 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
   // Helper function to handle switch case validation
   const handleValidation = (object, methodOrEventObject, methodOrEventResponse = null) => {
     const scenario = object.type;
+    const tags = object.tags;
+    // To check whether the validation should be performed or not based on the include/exclude valiodation object
+    if (!shouldPerformValidation('validationTypes', scenario)) return;
+    if (!shouldPerformValidation('validationTags', tags)) return;
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
-    switch (scenario) {
-      case CONSTANTS.REGEX:
-        cy.regExValidation(
-          method,
-          object.validations[0].type,
-          validationJsonPath,
-          methodOrEventResponse
-        );
-        break;
-      case CONSTANTS.MISC:
-        cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
-        break;
-      case CONSTANTS.DECODE:
-        const decodeType = object.specialCase;
-        const responseForDecodeValidation =
-          validationType == CONSTANTS.EVENT
-            ? methodOrEventResponse.eventResponse
-            : validationType == CONSTANTS.METHOD
-              ? methodOrEventResponse.result
-              : null;
 
-        cy.decodeValidation(
-          method,
-          decodeType,
-          responseForDecodeValidation,
-          object.validations[0],
-          null
-        );
-        break;
-      case CONSTANTS.FIXTURE:
-        cy.validateContent(
-          method,
-          context,
-          validationJsonPath,
-          object.validations[0].type,
-          validationType,
-          appId
-        );
-        break;
-      case CONSTANTS.CUSTOM:
-        cy.customValidation(object, methodOrEventObject);
-        break;
-      case CONSTANTS.UNDEFINED:
-        cy.undefinedValidation(object, methodOrEventObject, validationType);
-        break;
-      case CONSTANTS.SCREENSHOT_VALIDATION:
-        cy.screenshotValidation(object);
-        break;
-      case CONSTANTS.PERFORMANCE_VALIDATION:
-        cy.performanceValidation(object);
-        break;
-      default:
-        assert(false, 'Unsupported validation type');
-        break;
-    }
+    // cy.then() to ensure each Cypress command is properly awaited before return
+    cy.then(() => {
+      console.log(`======Beginning of the ${scenario} validation======`);
+      switch (scenario) {
+        case CONSTANTS.REGEX:
+          cy.regExValidation(
+            method,
+            object.validations[0].type,
+            validationJsonPath,
+            methodOrEventResponse
+          );
+          break;
+        case CONSTANTS.MISC:
+          cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
+          break;
+        case CONSTANTS.DECODE:
+          const decodeType = object.specialCase;
+          const responseForDecodeValidation =
+            validationType == CONSTANTS.EVENT
+              ? methodOrEventResponse.eventResponse
+              : validationType == CONSTANTS.METHOD
+                ? methodOrEventResponse.result
+                : null;
+
+          cy.decodeValidation(
+            method,
+            decodeType,
+            responseForDecodeValidation,
+            object.validations[0],
+            null
+          );
+          break;
+        case CONSTANTS.FIXTURE:
+          cy.validateContent(
+            method,
+            context,
+            validationJsonPath,
+            object.validations[0].type,
+            validationType,
+            appId
+          );
+          break;
+        case CONSTANTS.CUSTOM:
+          cy.customValidation(object, methodOrEventObject);
+          break;
+        case CONSTANTS.UNDEFINED:
+          cy.undefinedValidation(object, methodOrEventObject, validationType);
+          break;
+        case CONSTANTS.SCREENSHOT_VALIDATION:
+          cy.screenshotValidation(object);
+          break;
+        case CONSTANTS.PERFORMANCE_VALIDATION:
+          cy.performanceValidation(object);
+          break;
+        default:
+          assert(false, 'Unsupported validation type');
+          break;
+      }
+    }).then(() => {
+      console.log(`=====Ending of the ${scenario} validation=====`);
+    });
   };
 
   // Check if method or event field is present in requestData
@@ -1751,3 +1765,100 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
     });
   });
 });
+
+/**
+ * @module commands
+ * @function softAssert
+ * @description soft assertion to compare actual and expected values
+ * @example
+ * cy.softAssert(actual, expected, message)
+ */
+Cypress.Commands.add('softAssert', (actual, expected, message) => {
+  jsonAssertion.softAssert(actual, expected, message);
+
+  if (jsonAssertion && jsonAssertion.jsonDiffArray && jsonAssertion.jsonDiffArray.length) {
+    jsonAssertion.jsonDiffArray.forEach((diff) => {
+      Cypress.log({
+        name: 'Soft assertion error',
+        displayName: 'softAssert',
+        message: diff.error.message,
+      });
+    });
+  } else {
+    cy.log(`Soft assertion passed : ${message}`);
+  }
+});
+
+/**
+ * @module commands
+ * @function softAssertAll
+ * @description soft assertion to check all the assertions
+ * @example
+ * cy.softAssertAll()
+ */
+Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
+
+/**
+ * @module commands
+ * @function clearSoftAssertArray
+ * @description To clear all the soft assertions
+ * @example
+ * cy.clearSoftAssertArray()
+ */
+Cypress.Commands.add('clearSoftAssertArray', () => {
+  cy.log(`Clearing soft assertion array`);
+
+  // Reset relevant properties
+  jsonAssertion.softAssertJson = null;
+  jsonAssertion.softAssertCount = 0;
+});
+
+/**
+ * @module commands
+ * @function shouldPerformValidation
+ * @description Determines whether validation should be performed for a given key-value pair based on include and exclude validation.
+ * - If 'value' is 'undefined' or 'null', validation is performed ('true').
+ * - If 'excludeValidations[key]' contains 'value', validation is skipped ('false').
+ * - If 'includeValidations[key]' is an empty array ('[]'), validation is skipped ('false').
+ * - If 'includeValidations[key]' exists and does not contain 'value', validation is skipped ('false').
+ * - Otherwise, validation is performed ('true').
+ * @param {string} key - The key representing the type of validation.
+ * @param {any} value - The value to validate.
+ * @returns {boolean} 'true' if validation should proceed, 'false' for validation to skip.
+ */
+
+const shouldPerformValidation = (key, value) => {
+  const parseJSON = (data) => {
+    if (typeof data === 'string') {
+      try {
+        return JSON.parse(data);
+      } catch (error) {
+        console.log(`Failed to parse JSON: ${error.message}`);
+        return {}; // Return an empty object if parsing fails
+      }
+    }
+    return data || {}; // Ensure it's an object or fallback to empty
+  };
+  // excludeValidations or includeValidations is not defined in the environment, assign {} to continue normal validations.
+  const excludeValidations = parseJSON(UTILS.getEnvVariable(CONSTANTS.EXCLUDE_VALIDATIONS, false));
+  const includeValidations = parseJSON(UTILS.getEnvVariable(CONSTANTS.INCLUDE_VALIDATIONS, false));
+
+  // Allow normal validation if value is null, undefined, or an empty string
+  if (value == null || value === '') {
+    return true;
+  }
+
+  // If excludeValidations contains key and value, skip validation
+  if (Array.isArray(excludeValidations[key]) && excludeValidations[key].includes(value)) {
+    fireLog.info(`Skipping validation: ${value} as it is in excludeValidations under ${key}`);
+    return false;
+  }
+
+  // If includeValidations exists for the key but does NOT include the value, skip validation
+  if (Array.isArray(includeValidations[key]) && !includeValidations[key].includes(value)) {
+    fireLog.info(`Skipping validation: ${value} as it is NOT in includeValidations under ${key}`);
+    return false;
+  }
+
+  return true;
+};

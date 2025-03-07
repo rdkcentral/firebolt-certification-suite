@@ -143,6 +143,7 @@ module.exports = {
   EXCEPTION_METHODS: 'exceptionMethods',
   EXCLUDED_METHODS: ['Lifecycle.close'],
   EXCLUDED_MODULES: [],
+  EXCLUDE_VALIDATIONS: 'excludeValidations',
   EXCLUDED_VALUES: [null, undefined],
   EXECUTE_SHELL: 'executeShell',
   EXPECTED_DATA_NOT_FOUND_IN_MODULE_JSONS:
@@ -208,6 +209,7 @@ module.exports = {
   HEXADECIMAL: 'hexaDecimal',
   HISTORY_VALIDATION_REQ: 'Lifecycle history validation ',
   ID: 'id',
+  INCLUDE_VALIDATIONS: 'includeValidations',
   INPUT: 'INPUT',
   INTENT: 'intent',
   INTENT_TEMPLATES: 'intentTemplates',
