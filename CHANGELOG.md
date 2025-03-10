@@ -1,3 +1,10 @@
+# [1.9.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.6...v1.9.0-dev.7) (2025-03-10)
+
+
+### Features
+
+* deeplink modification change ([#352](https://github.com/rdkcentral/firebolt-certification-suite/issues/352)) ([acf2e47](https://github.com/rdkcentral/firebolt-certification-suite/commit/acf2e476a8ac18ca8b41c345196290e6abad49e7))
+
 # [1.9.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.5...v1.9.0-dev.6) (2025-03-07)
 
 
