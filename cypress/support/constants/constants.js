@@ -537,6 +537,9 @@ module.exports = {
   LOGGEDOUT: 'loggedOut',
   SCENARIO_TYPE: 'scenarioType',
   DISMISS: 'dismiss',
+  APP_LAUNCH_COUNT: 'appLaunchCount',
+  HOT_LAUNCH: 'HOT_LAUNCH',
+  COLD_LAUNCH: 'COLD_LAUNCH',
   APP_ASSURANCE_ID: 'appAssuranceId',
 };
 function getSanityReportPath() {
