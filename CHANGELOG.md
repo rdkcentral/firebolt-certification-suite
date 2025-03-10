@@ -1,3 +1,10 @@
+# [1.9.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.9...v1.9.0-dev.10) (2025-03-10)
+
+
+### Features
+
+* Add runInfo to reports for non FCA app testing ([6c5d000](https://github.com/rdkcentral/firebolt-certification-suite/commit/6c5d000634360989ad6b7cb9874b19d3abed386c))
+
 # [1.9.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.8...v1.9.0-dev.9) (2025-03-10)
 
 
