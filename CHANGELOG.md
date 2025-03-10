@@ -1,3 +1,38 @@
+# [1.9.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.6...v1.9.0-dev.7) (2025-03-10)
+
+
+### Features
+
+* deeplink modification change ([#352](https://github.com/rdkcentral/firebolt-certification-suite/issues/352)) ([acf2e47](https://github.com/rdkcentral/firebolt-certification-suite/commit/acf2e476a8ac18ca8b41c345196290e6abad49e7))
+
+# [1.9.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.5...v1.9.0-dev.6) (2025-03-07)
+
+
+### Bug Fixes
+
+* sdk version fix for fetching openrpc ([#358](https://github.com/rdkcentral/firebolt-certification-suite/issues/358)) ([63bb9a9](https://github.com/rdkcentral/firebolt-certification-suite/commit/63bb9a98f5e1c2d7f58632b544146c8ad8ab26cf))
+
+# [1.9.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.4...v1.9.0-dev.5) (2025-03-07)
+
+
+### Features
+
+* appOnBoarding implementation ([#355](https://github.com/rdkcentral/firebolt-certification-suite/issues/355)) ([2b2169e](https://github.com/rdkcentral/firebolt-certification-suite/commit/2b2169e3268e1b58e2b6b77e1394414206480614))
+
+# [1.9.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.3...v1.9.0-dev.4) (2025-03-06)
+
+
+### Bug Fixes
+
+* Added validation logs for the debugging pupose ([#346](https://github.com/rdkcentral/firebolt-certification-suite/issues/346)) ([714b13a](https://github.com/rdkcentral/firebolt-certification-suite/commit/714b13a9de2ea872450a4ff2140a33fd36927799))
+
+# [1.9.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.2...v1.9.0-dev.3) (2025-03-05)
+
+
+### Features
+
+* Validation filter variable ([#356](https://github.com/rdkcentral/firebolt-certification-suite/issues/356)) ([5dfa71b](https://github.com/rdkcentral/firebolt-certification-suite/commit/5dfa71beacc8bdd95633d0de5568f238443d4d7b))
+
 # [1.9.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.1...v1.9.0-dev.2) (2025-03-05)
 
 

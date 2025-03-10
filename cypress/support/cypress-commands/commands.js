@@ -891,6 +891,13 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
   // Creating data for basic intent to be sent to the app on launch
   let appCategory;
 
+  if (
+    Cypress.env(CONSTANTS.APP_METADATA) &&
+    Cypress.env(CONSTANTS.APP_METADATA)[appId]?.metadata?.type
+  ) {
+    Cypress.env(CONSTANTS.APP_TYPE, Cypress.env(CONSTANTS.APP_METADATA)[appId].metadata.type);
+    appType = Cypress.env(CONSTANTS.APP_TYPE);
+  }
   // Storing the appId in runtime environment variable
   if (Cypress.env(CONSTANTS.RUNTIME)) {
     Cypress.env(CONSTANTS.RUNTIME).appId = appId;
@@ -1326,61 +1333,68 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
     if (!shouldPerformValidation('validationTypes', scenario)) return;
     if (!shouldPerformValidation('validationTags', tags)) return;
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
-    switch (scenario) {
-      case CONSTANTS.REGEX:
-        cy.regExValidation(
-          method,
-          object.validations[0].type,
-          validationJsonPath,
-          methodOrEventResponse
-        );
-        break;
-      case CONSTANTS.MISC:
-        cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
-        break;
-      case CONSTANTS.DECODE:
-        const decodeType = object.specialCase;
-        const responseForDecodeValidation =
-          validationType == CONSTANTS.EVENT
-            ? methodOrEventResponse.eventResponse
-            : validationType == CONSTANTS.METHOD
-              ? methodOrEventResponse.result
-              : null;
 
-        cy.decodeValidation(
-          method,
-          decodeType,
-          responseForDecodeValidation,
-          object.validations[0],
-          null
-        );
-        break;
-      case CONSTANTS.FIXTURE:
-        cy.validateContent(
-          method,
-          context,
-          validationJsonPath,
-          object.validations[0].type,
-          validationType,
-          appId
-        );
-        break;
-      case CONSTANTS.CUSTOM:
-        cy.customValidation(object, methodOrEventObject);
-        break;
-      case CONSTANTS.UNDEFINED:
-        cy.undefinedValidation(object, methodOrEventObject, validationType);
-        break;
-      case CONSTANTS.SCREENSHOT_VALIDATION:
-        cy.screenshotValidation(object);
-        break;
-      case CONSTANTS.PERFORMANCE_VALIDATION:
-        cy.performanceValidation(object);
-        break;
-      default:
-        assert(false, 'Unsupported validation type');
-        break;
-    }
+    // cy.then() to ensure each Cypress command is properly awaited before return
+    cy.then(() => {
+      console.log(`======Beginning of the ${scenario} validation======`);
+      switch (scenario) {
+        case CONSTANTS.REGEX:
+          cy.regExValidation(
+            method,
+            object.validations[0].type,
+            validationJsonPath,
+            methodOrEventResponse
+          );
+          break;
+        case CONSTANTS.MISC:
+          cy.miscellaneousValidation(method, object.validations[0], methodOrEventObject);
+          break;
+        case CONSTANTS.DECODE:
+          const decodeType = object.specialCase;
+          const responseForDecodeValidation =
+            validationType == CONSTANTS.EVENT
+              ? methodOrEventResponse.eventResponse
+              : validationType == CONSTANTS.METHOD
+                ? methodOrEventResponse.result
+                : null;
+
+          cy.decodeValidation(
+            method,
+            decodeType,
+            responseForDecodeValidation,
+            object.validations[0],
+            null
+          );
+          break;
+        case CONSTANTS.FIXTURE:
+          cy.validateContent(
+            method,
+            context,
+            validationJsonPath,
+            object.validations[0].type,
+            validationType,
+            appId
+          );
+          break;
+        case CONSTANTS.CUSTOM:
+          cy.customValidation(object, methodOrEventObject);
+          break;
+        case CONSTANTS.UNDEFINED:
+          cy.undefinedValidation(object, methodOrEventObject, validationType);
+          break;
+        case CONSTANTS.SCREENSHOT_VALIDATION:
+          cy.screenshotValidation(object);
+          break;
+        case CONSTANTS.PERFORMANCE_VALIDATION:
+          cy.performanceValidation(object);
+          break;
+        default:
+          assert(false, 'Unsupported validation type');
+          break;
+      }
+    }).then(() => {
+      console.log(`=====Ending of the ${scenario} validation=====`);
+    });
   };
 
   // Check if method or event field is present in requestData
@@ -1676,7 +1690,8 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
         method: exitMethod,
         params: params.appId,
       };
-
+      Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, false);
+      Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, 0);
       break;
     case 'unloadApp':
       exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP;
@@ -1684,7 +1699,8 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
         method: exitMethod,
         params: params.appId,
       };
-
+      Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, false);
+      Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, 0);
       break;
     case 'dismissApp':
       exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.DISMISSAPP;
@@ -1743,21 +1759,36 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
  * cy.fetchAppMetaData()
  */
 Cypress.Commands.add('fetchAppMetaData', () => {
-  // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
-  const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
-  const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
+  if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
+    const requestParams = {
+      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPDATA,
+      params: {
+        deviceMac: Cypress.env(CONSTANTS.DEVICE_MAC),
+        appAssuranceId: Cypress.env(CONSTANTS.APP_ASSURANCE_ID),
+      },
+    };
+    cy.sendMessagetoPlatforms(requestParams).then((result) => {
+      return result.data;
+    });
+  } else {
+    // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
+    const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
+    const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
 
-  const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
-  const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
+    const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
+    const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
-  cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then((fcsAppMetaData) => {
-    cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
-      (configModuleAppMetaData) => {
-        // Combine the app metadata from the fcs and configModule appData directories.
-        _.merge(fcsAppMetaData, configModuleAppMetaData);
+    cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
+      (fcsAppMetaData) => {
+        cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
+          (configModuleAppMetaData) => {
+            // Combine the app metadata from the fcs and configModule appData directories.
+            _.merge(fcsAppMetaData, configModuleAppMetaData);
+          }
+        );
       }
     );
-  });
+  }
 });
 
 /**
