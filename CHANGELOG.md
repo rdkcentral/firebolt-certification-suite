@@ -1,3 +1,10 @@
+# [1.9.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.7...v1.9.0-dev.8) (2025-03-10)
+
+
+### Bug Fixes
+
+* AppAssurance Review Comments Fix ([#357](https://github.com/rdkcentral/firebolt-certification-suite/issues/357)) ([47579a6](https://github.com/rdkcentral/firebolt-certification-suite/commit/47579a68fedae2a9c6dd98000cde2fb4d40bfa81))
+
 # [1.9.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.6...v1.9.0-dev.7) (2025-03-10)
 
 
