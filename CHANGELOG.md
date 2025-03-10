@@ -1,3 +1,10 @@
+# [1.9.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.8...v1.9.0-dev.9) (2025-03-10)
+
+
+### Features
+
+* Author test cases for Accessibility and Voice Guidance changes ([#340](https://github.com/rdkcentral/firebolt-certification-suite/issues/340)) ([ed3dc59](https://github.com/rdkcentral/firebolt-certification-suite/commit/ed3dc59990443d19a1c75e36972261a99df89c46))
+
 # [1.9.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.7...v1.9.0-dev.8) (2025-03-10)
 
 
