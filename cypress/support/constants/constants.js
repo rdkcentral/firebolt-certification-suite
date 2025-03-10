@@ -381,6 +381,7 @@ module.exports = {
     SCREENSHOT: 'fcs.screenshot',
     GETAPPSTATE: 'fcs.getAppState',
     DISMISS: 'fcs.dismissApp',
+    GETAPPDATA: 'fcs.getAppData',
   },
   REQUEST_MAP_INTERACTIONS_SERVICE: 'Request map for firebolt interactions service : ',
   RESPONSE: 'Response: ',
@@ -539,6 +540,7 @@ module.exports = {
   APP_LAUNCH_COUNT: 'appLaunchCount',
   HOT_LAUNCH: 'HOT_LAUNCH',
   COLD_LAUNCH: 'COLD_LAUNCH',
+  APP_ASSURANCE_ID: 'appAssuranceId',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

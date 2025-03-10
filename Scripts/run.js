@@ -56,6 +56,7 @@ function determineSdkVersion() {
 
 // Get sdkVersion
 const sdkVersion = determineSdkVersion();
+process.env.SDK_VERSION = sdkVersion;
 
 // Creating UUID
 function generateUUID() {
