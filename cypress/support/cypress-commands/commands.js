@@ -327,7 +327,6 @@ Cypress.Commands.add('updateRunInfo', () => {
               })
               .then(() => delay(2000))
               .then(() => {
-                console.log('FIRMWARE22222 ' + Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE));
                 if (Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION)) return;
                 else
                   return setEnvRunInfo(
