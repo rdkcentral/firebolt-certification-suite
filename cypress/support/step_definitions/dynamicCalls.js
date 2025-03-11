@@ -393,6 +393,8 @@ Given(
  * Given 'third party app is launched' with 'auth' page
  */
 Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
+  UTILS.captureScreenshot();
+
   const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
@@ -420,22 +422,6 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
     Cypress.env(CONSTANTS.RUNTIME, { page });
   }
 
-
-
-  // Only take a screenshot if the enableScreenshots environment variable is set to true
-  if (UTILS.getEnvVariable('enableScreenshots')) {
-    // TODO: call function to make fcs.screenshot call
-
-    const screenshotRequest = {
-      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
-      params: {},
-    };
-    fireLog.info(`Sending request to capture screenshot: ${JSON.stringify(screenshotRequest)}`);
-
-    cy.sendMessagetoPlatforms(screenshotRequest).then((response) => {
-      firelog.info(`Screenshot capture response: ${JSON.stringify(response)}`);
-    });
-  }
 
   validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   cy.getFireboltData(validationObjectKey).then((fireboltData) => {

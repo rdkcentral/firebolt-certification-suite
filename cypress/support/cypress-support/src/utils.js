@@ -18,6 +18,7 @@
 const CONSTANTS = require('../../constants/constants');
 const logger = require('../../Logger')('utils.js');
 const { _ } = Cypress;
+import { apiObject } from '../../appObjectConfigs';
 const MESSAGE = 'message';
 const Validator = require('jsonschema').Validator;
 const validator = new Validator();
@@ -1257,6 +1258,52 @@ function applyOverrides(fireboltCallObject) {
   return fireboltCallObject; // Return the original or modified object based on the override
 }
 
+function captureScreenshot() {
+  console.log('DEBUG: about to check for screenshots: ' + getEnvVariable('enableScreenshots'));
+
+  // Only take a screenshot if the enableScreenshots environment variable is set to true
+  if (getEnvVariable('enableScreenshots')) {
+
+    const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT;
+    const param = {};
+    const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
+
+    const screenshotRequest = {
+      method: method,
+      params: param,
+    };
+    fireLog.info(`Sending request to capture screenshot: ${JSON.stringify(screenshotRequest)}`);
+    console.log('DEBUG: about to call fcs.screenshot: ' + JSON.stringify(screenshotRequest));
+
+    try {
+        cy.sendMessagetoPlatforms(screenshotRequest).then((response) => {
+          fireLog.info(`Screenshot capture response: ${JSON.stringify(response)}`);
+
+          const apiResponse = {
+            response: response
+          }
+
+          const apiAppObject = new apiObject(
+            method,
+            param,
+            {},
+            apiResponse,
+            {},
+            appId
+          );
+
+          console.log('DEBUG: apiAppObject: ', apiAppObject);
+
+          getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
+
+          console.log('DEBUG: after call to fcs.screenshot, global api list: ', getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST));
+        });
+    } catch (error) {
+      console.error('Error handling response:', error);
+    }
+  }
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -1288,4 +1335,5 @@ module.exports = {
   skipCurrentTest,
   censorPubSubToken,
   applyOverrides,
+  captureScreenshot,
 };
