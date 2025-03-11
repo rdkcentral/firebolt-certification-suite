@@ -1,3 +1,73 @@
+# [1.9.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.9...v1.9.0-dev.10) (2025-03-10)
+
+
+### Features
+
+* Add runInfo to reports for non FCA app testing ([6c5d000](https://github.com/rdkcentral/firebolt-certification-suite/commit/6c5d000634360989ad6b7cb9874b19d3abed386c))
+
+# [1.9.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.8...v1.9.0-dev.9) (2025-03-10)
+
+
+### Features
+
+* Author test cases for Accessibility and Voice Guidance changes ([#340](https://github.com/rdkcentral/firebolt-certification-suite/issues/340)) ([ed3dc59](https://github.com/rdkcentral/firebolt-certification-suite/commit/ed3dc59990443d19a1c75e36972261a99df89c46))
+
+# [1.9.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.7...v1.9.0-dev.8) (2025-03-10)
+
+
+### Bug Fixes
+
+* AppAssurance Review Comments Fix ([#357](https://github.com/rdkcentral/firebolt-certification-suite/issues/357)) ([47579a6](https://github.com/rdkcentral/firebolt-certification-suite/commit/47579a68fedae2a9c6dd98000cde2fb4d40bfa81))
+
+# [1.9.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.6...v1.9.0-dev.7) (2025-03-10)
+
+
+### Features
+
+* deeplink modification change ([#352](https://github.com/rdkcentral/firebolt-certification-suite/issues/352)) ([acf2e47](https://github.com/rdkcentral/firebolt-certification-suite/commit/acf2e476a8ac18ca8b41c345196290e6abad49e7))
+
+# [1.9.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.5...v1.9.0-dev.6) (2025-03-07)
+
+
+### Bug Fixes
+
+* sdk version fix for fetching openrpc ([#358](https://github.com/rdkcentral/firebolt-certification-suite/issues/358)) ([63bb9a9](https://github.com/rdkcentral/firebolt-certification-suite/commit/63bb9a98f5e1c2d7f58632b544146c8ad8ab26cf))
+
+# [1.9.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.4...v1.9.0-dev.5) (2025-03-07)
+
+
+### Features
+
+* appOnBoarding implementation ([#355](https://github.com/rdkcentral/firebolt-certification-suite/issues/355)) ([2b2169e](https://github.com/rdkcentral/firebolt-certification-suite/commit/2b2169e3268e1b58e2b6b77e1394414206480614))
+
+# [1.9.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.3...v1.9.0-dev.4) (2025-03-06)
+
+
+### Bug Fixes
+
+* Added validation logs for the debugging pupose ([#346](https://github.com/rdkcentral/firebolt-certification-suite/issues/346)) ([714b13a](https://github.com/rdkcentral/firebolt-certification-suite/commit/714b13a9de2ea872450a4ff2140a33fd36927799))
+
+# [1.9.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.2...v1.9.0-dev.3) (2025-03-05)
+
+
+### Features
+
+* Validation filter variable ([#356](https://github.com/rdkcentral/firebolt-certification-suite/issues/356)) ([5dfa71b](https://github.com/rdkcentral/firebolt-certification-suite/commit/5dfa71beacc8bdd95633d0de5568f238443d4d7b))
+
+# [1.9.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.1...v1.9.0-dev.2) (2025-03-05)
+
+
+### Features
+
+* Support lifecycle validation for App Assurance ([#336](https://github.com/rdkcentral/firebolt-certification-suite/issues/336)) ([cbe198c](https://github.com/rdkcentral/firebolt-certification-suite/commit/cbe198ce566e5fdf05591993e9eb12bc44223c75))
+
+# [1.9.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0...v1.9.0-dev.1) (2025-03-04)
+
+
+### Features
+
+* filtering validation logic ([#349](https://github.com/rdkcentral/firebolt-certification-suite/issues/349)) ([aaf869e](https://github.com/rdkcentral/firebolt-certification-suite/commit/aaf869ec98e1c3b3bd46dbec4683ae41f4470d43))
+
 # [1.8.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.7.0...v1.8.0) (2025-02-27)
 
 

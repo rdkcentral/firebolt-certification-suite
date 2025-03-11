@@ -110,6 +110,7 @@ module.exports = {
   ENV_PLATFORM_RELEASE: 'platform release',
   ENV_PRODUCT: 'product',
   ENV_FIREBOLT_VERSION: 'fireboltVersion',
+  ENV_RELEASE: 'release',
   ENV_DEVICE_FIRMWARE: 'deviceFirmware',
   ENV_DEVICE_MODEL: 'deviceModel',
   ENV_DEVICE_DISTRIBUTOR: 'deviceDistributor',
@@ -143,6 +144,7 @@ module.exports = {
   EXCEPTION_METHODS: 'exceptionMethods',
   EXCLUDED_METHODS: ['Lifecycle.close'],
   EXCLUDED_MODULES: [],
+  EXCLUDE_VALIDATIONS: 'excludeValidations',
   EXCLUDED_VALUES: [null, undefined],
   EXECUTE_SHELL: 'executeShell',
   EXPECTED_DATA_NOT_FOUND_IN_MODULE_JSONS:
@@ -212,6 +214,7 @@ module.exports = {
   HEXADECIMAL: 'hexaDecimal',
   HISTORY_VALIDATION_REQ: 'Lifecycle history validation ',
   ID: 'id',
+  INCLUDE_VALIDATIONS: 'includeValidations',
   INPUT: 'INPUT',
   INTENT: 'intent',
   INTENT_TEMPLATES: 'intentTemplates',
@@ -337,7 +340,7 @@ module.exports = {
   PLATFORM_NOT_SUPPORT_LOG: 'Platform does not support method',
   PLATFORM_NOT_TRIGGER_EVENT: 'Platform MUST not trigger event ',
   PLATFORM_TRIGGER_EVENT: 'Platform MUST trigger event ',
-  PLATFORM_RELEASE: 'Release',
+  RELEASE: 'Release',
   PARTNER: 'Partner',
   PRODUCT: 'Product',
   PREREQUISITE_DATA: 'PreRequisiteData.json',
@@ -379,6 +382,7 @@ module.exports = {
     SCREENSHOT: 'fcs.screenshot',
     GETAPPSTATE: 'fcs.getAppState',
     DISMISS: 'fcs.dismissApp',
+    GETAPPDATA: 'fcs.getAppData',
   },
   REQUEST_MAP_INTERACTIONS_SERVICE: 'Request map for firebolt interactions service : ',
   RESPONSE: 'Response: ',
@@ -534,6 +538,10 @@ module.exports = {
   LOGGEDOUT: 'loggedOut',
   SCENARIO_TYPE: 'scenarioType',
   DISMISS: 'dismiss',
+  APP_LAUNCH_COUNT: 'appLaunchCount',
+  HOT_LAUNCH: 'HOT_LAUNCH',
+  COLD_LAUNCH: 'COLD_LAUNCH',
+  APP_ASSURANCE_ID: 'appAssuranceId',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
