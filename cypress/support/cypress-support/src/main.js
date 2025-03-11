@@ -49,7 +49,7 @@ export default function (module) {
     // Added below custom commands to clear cache and to reload browser
     cy.clearCache();
     cy.wrap(UTILS.pubSubClientCreation(appTransport), {
-      timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT,
+      timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT,
     }).then((result) => {
       if (result) {
         cy.log('Successfully established a pub/sub connection.');
@@ -265,7 +265,7 @@ export default function (module) {
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
    */
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
-    cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(async (requestMap) => {
+    cy.wrap(requestMap, { timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT }).then(async (requestMap) => {
       return new Promise(async (resolve, reject) => {
         const [moduleName, methodName] = requestMap.method.split('.');
         Cypress.env(CONSTANTS.REQUEST_OVERRIDE_METHOD, requestMap.method);
