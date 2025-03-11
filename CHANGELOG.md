@@ -1,3 +1,10 @@
+# [1.9.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.11...v1.9.0-dev.12) (2025-03-11)
+
+
+### Bug Fixes
+
+* Increase pubsub comm timeout for stability ([#359](https://github.com/rdkcentral/firebolt-certification-suite/issues/359)) ([076395a](https://github.com/rdkcentral/firebolt-certification-suite/commit/076395ad57742749e10160805e0d68fab163b176))
+
 # [1.9.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.10...v1.9.0-dev.11) (2025-03-11)
 
 
