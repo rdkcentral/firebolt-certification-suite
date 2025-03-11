@@ -1,3 +1,10 @@
+# [1.9.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.10...v1.9.0-dev.11) (2025-03-11)
+
+
+### Bug Fixes
+
+* npm run command failing when tags are passed in cli ([#353](https://github.com/rdkcentral/firebolt-certification-suite/issues/353)) ([fc385ba](https://github.com/rdkcentral/firebolt-certification-suite/commit/fc385ba0891d8a77e2a320a8420c95ae0cd78943))
+
 # [1.9.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.9...v1.9.0-dev.10) (2025-03-10)
 
 
