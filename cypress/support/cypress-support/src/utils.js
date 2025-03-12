@@ -1263,7 +1263,6 @@ function captureScreenshot() {
 
   // Only take a screenshot if the enableScreenshots environment variable is set to true
   if (getEnvVariable('enableScreenshots')) {
-
     const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT;
     const param = {};
     const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
@@ -1276,28 +1275,24 @@ function captureScreenshot() {
     console.log('DEBUG: about to call fcs.screenshot: ' + JSON.stringify(screenshotRequest));
 
     try {
-        cy.sendMessagetoPlatforms(screenshotRequest).then((response) => {
-          fireLog.info(`Screenshot capture response: ${JSON.stringify(response)}`);
+      cy.sendMessagetoPlatforms(screenshotRequest).then((response) => {
+        fireLog.info(`Screenshot capture response: ${JSON.stringify(response)}`);
 
-          const apiResponse = {
-            response: response
-          }
+        const apiResponse = {
+          response: response,
+        };
 
-          const apiAppObject = new apiObject(
-            method,
-            param,
-            {},
-            apiResponse,
-            {},
-            appId
-          );
+        const apiAppObject = new apiObject(method, param, {}, apiResponse, {}, appId);
 
-          console.log('DEBUG: apiAppObject: ', apiAppObject);
+        console.log('DEBUG: apiAppObject: ', apiAppObject);
 
-          getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
+        getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
 
-          console.log('DEBUG: after call to fcs.screenshot, global api list: ', getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST));
-        });
+        console.log(
+          'DEBUG: after call to fcs.screenshot, global api list: ',
+          getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST)
+        );
+      });
     } catch (error) {
       console.error('Error handling response:', error);
     }
