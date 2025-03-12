@@ -1,3 +1,10 @@
+# [1.9.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.12...v1.9.0-dev.13) (2025-03-12)
+
+
+### Bug Fixes
+
+* update package.json to remediate security finding ([#362](https://github.com/rdkcentral/firebolt-certification-suite/issues/362)) ([457dde8](https://github.com/rdkcentral/firebolt-certification-suite/commit/457dde8b17acb9b1376462daa712d6f5094ff808))
+
 # [1.9.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.11...v1.9.0-dev.12) (2025-03-11)
 
 
