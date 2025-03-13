@@ -64,7 +64,5 @@ Cypress.Commands.add('performanceValidation', (object) => {
         });
       fireLog.info('Performance validation has stopped');
     });
-  } else {
-    fireLog.info('PerformanceMetrics are disabled.');
   }
 });
