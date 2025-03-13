@@ -194,6 +194,8 @@ Given(
  * Then '3rd party app' will be in 'background' state
  */
 Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
+  UTILS.captureScreenshot();
+
   const appId =
     app === CONSTANTS.THIRD_PARTY_APP
       ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
