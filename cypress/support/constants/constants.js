@@ -542,6 +542,7 @@ module.exports = {
   HOT_LAUNCH: 'HOT_LAUNCH',
   COLD_LAUNCH: 'COLD_LAUNCH',
   APP_ASSURANCE_ID: 'appAssuranceId',
+  SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

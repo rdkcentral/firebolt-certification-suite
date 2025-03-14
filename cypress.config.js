@@ -95,6 +95,7 @@ const env = {
   dynamicDeviceDetailsModules: ['Device'],
   elk: false,
   objective: '',
+  supportsPlatformCommunication: false,
 };
 
 module.exports = {
