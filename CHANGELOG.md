@@ -1,3 +1,10 @@
+# [1.9.0-dev.15](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.14...v1.9.0-dev.15) (2025-03-17)
+
+
+### Features
+
+* Handle capture screenshot and validate ([#360](https://github.com/rdkcentral/firebolt-certification-suite/issues/360)) ([b319421](https://github.com/rdkcentral/firebolt-certification-suite/commit/b31942146b5c0b1e8d69e7ab7c1262530bc9a209))
+
 # [1.9.0-dev.14](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.13...v1.9.0-dev.14) (2025-03-17)
 
 
