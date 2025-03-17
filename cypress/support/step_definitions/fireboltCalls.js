@@ -506,9 +506,8 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
   cy.getFireboltData(validationObjectKey).then((fireboltData) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     validationObject = UTILS.resolveRecursiveValues(fireboltData);
-    cy.methodOrEventResponseValidation(type, validationObject)
-      .then(() => {
-        cy.softAssertAll();
-      });
+    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
+      cy.softAssertAll();
+    });
   });
 });

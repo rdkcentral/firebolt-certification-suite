@@ -1226,7 +1226,6 @@ function censorPubSubToken(data) {
  * @example
  * applyOverrides(fireboltCallObject)
  */
-
 function applyOverrides(fireboltCallObject) {
   try {
     if (!fireboltCallObject.overrides) return fireboltCallObject;
@@ -1258,6 +1257,13 @@ function applyOverrides(fireboltCallObject) {
   return fireboltCallObject; // Return the original or modified object based on the override
 }
 
+/**
+ * @module utils
+ * @function captureScreenshot
+ * @description A function to capture the screenshot of the device screen.
+ * @example
+ * captureScreenshot()
+ */
 function captureScreenshot() {
   // Only take a screenshot if the enableScreenshots environment variable is set to true
   if (getEnvVariable('enableScreenshots')) {
