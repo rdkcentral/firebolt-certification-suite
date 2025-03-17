@@ -394,6 +394,13 @@ Given(
  */
 Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
   const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
+  // Ensure appId is available before proceeding
+  if (!appId) {
+    fireLog.error(
+      'appId is missing. Cannot fetch app state to perform state validation without proper current appId.'
+    );
+    return;
+  }
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
     params: appId,
@@ -403,20 +410,19 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
   // Sending the request to the platform to retrieve the app state.
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     if (response) {
-      if (
-        response.currentApp_fireboltState &&
-        response.currentApp_fireboltState.toUpperCase() === CONSTANTS.FOREGROUND
-      ) {
+      if (response?.currentApp_fireboltState?.toUpperCase() === CONSTANTS.FOREGROUND) {
         fireLog.info(
           `State validation successful: Current state of ${appId} app is ${JSON.stringify(response)} as expected`
         );
       } else {
-        fireLog.fail(
+        fireLog.error(
           `State validation failed: Current state of ${appId} app is ${JSON.stringify(response)}, expected to be ${CONSTANTS.FOREGROUND}.`
         );
       }
     } else {
-      fireLog.fail(`State validation failed: Did not get response when retrieving app state`);
+      fireLog.error(
+        `State validation failed: Did not get valid response for retrieving app state for ${appId}`
+      );
     }
   });
 
@@ -426,34 +432,54 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
   } else {
     Cypress.env(CONSTANTS.RUNTIME, { page });
   }
-  if (
-    UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) &&
-    Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) == 1
-  ) {
-    // cold launch interaction logs validation
-    cy.getFireboltData(CONSTANTS.COLD_LAUNCH).then((fireboltData) => {
-      const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
-      const validationObject = UTILS.resolveRecursiveValues(fireboltData);
-      cy.methodOrEventResponseValidation(type, validationObject);
-    });
-  } else if (
-    UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) &&
-    Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) > 1
-  ) {
-    // hot launch interaction logs validation
-    cy.getFireboltData(CONSTANTS.HOT_LAUNCH).then((fireboltData) => {
-      const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
-      const validationObject = UTILS.resolveRecursiveValues(fireboltData);
-      cy.methodOrEventResponseValidation(type, validationObject);
-    });
+
+  // Checking app launch status and validation based on launch count
+  if (UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false)) {
+    const launchCount = Cypress.env(CONSTANTS.APP_LAUNCH_COUNT);
+    if (launchCount == 1) {
+      // cold launch interaction logs validation
+      cy.getFireboltData(CONSTANTS.COLD_LAUNCH).then((fireboltData) => {
+        if (fireboltData) {
+          const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+          const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+          cy.methodOrEventResponseValidation(type, validationObject);
+        } else {
+          fireLog.error(
+            `Received following error while getting firebolt data for performing required validations for ${appId}`
+          );
+        }
+      });
+    } else if (launchCount > 1) {
+      // hot launch interaction logs validation
+      cy.getFireboltData(CONSTANTS.HOT_LAUNCH).then((fireboltData) => {
+        if (fireboltData) {
+          const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+          const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+          cy.methodOrEventResponseValidation(type, validationObject);
+        } else {
+          fireLog.error(
+            `Received following error while getting firebolt data for performing required validations for ${appId}`
+          );
+        }
+      });
+    }
   }
+
+  // Handling validation based on the provided validationObjectKey
   validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   cy.getFireboltData(validationObjectKey).then((fireboltData) => {
-    const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
-    const validationObject = UTILS.resolveRecursiveValues(fireboltData);
-    cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
-      cy.softAssertAll();
-    });
+    if (fireboltData) {
+      const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+      const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+      cy.methodOrEventResponseValidation(type, validationObject).then(() => {
+        cy.softAssertAll(); // Ensure all assertions are checked
+      });
+    } else {
+      fireLog.error(
+        `Received following error while getting firebolt data for performing required validations for ${appId}`
+      );
+    }
   });
+  // Ensure all soft assertions are executed
   cy.softAssertAll();
 });

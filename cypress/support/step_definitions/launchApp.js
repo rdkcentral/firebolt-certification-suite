@@ -63,7 +63,7 @@ Given(
       if (!state) {
         state = CONSTANTS.LIFECYCLE_STATES.FOREGROUND;
       }
-      Cypress.env('fbInteractionLogs').logs.clear();
+      Cypress.env('fbInteractionLogs')?.logs.clear();
       cy.launchApp(appType, appCallSign, null, intent);
       cy.lifecycleSetup(appCallSign, state);
       // Incremental launch count for hot launch
