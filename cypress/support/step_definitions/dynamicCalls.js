@@ -393,6 +393,8 @@ Given(
  * Given 'third party app is launched' with 'auth' page
  */
 Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
+  UTILS.captureScreenshot();
+
   const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
@@ -451,7 +453,7 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
   cy.getFireboltData(validationObjectKey).then((fireboltData) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     const validationObject = UTILS.resolveRecursiveValues(fireboltData);
-    cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
+    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
       cy.softAssertAll();
     });
   });
