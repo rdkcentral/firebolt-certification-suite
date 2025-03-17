@@ -1,3 +1,10 @@
+# [1.9.0-dev.14](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.13...v1.9.0-dev.14) (2025-03-17)
+
+
+### Bug Fixes
+
+* Supports platform communication flag ([#365](https://github.com/rdkcentral/firebolt-certification-suite/issues/365)) ([c7ee08c](https://github.com/rdkcentral/firebolt-certification-suite/commit/c7ee08c0512b0d90fe1313dbf34493cbb1660c0c))
+
 # [1.9.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.12...v1.9.0-dev.13) (2025-03-12)
 
 
