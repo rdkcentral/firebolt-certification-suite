@@ -65,6 +65,20 @@ export default class Transport {
     }
   }
 
+  async unsubscribe() {
+    try {
+      if (process.env.transportObject) {
+        const transportObjectArray = process.env.transportObject;
+        transportObjectArray.forEach(transportClient => {
+          transportClient.unsubscribe();
+        });
+      }
+    }
+    catch(error) {
+      console.log("Error while unsubscribing: ", error);
+    }
+  }
+
   // Object contains a "method" field in the format "<Module>.<Method>" (Ex: "closedCaptions.setEnabled"). Consider it as Firebolt call.
   isFireboltSDK(messageObject) {
     if (messageObject.method && messageObject.method.includes('.')) {
