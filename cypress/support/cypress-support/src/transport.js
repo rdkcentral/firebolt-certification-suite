@@ -73,8 +73,7 @@ export default class Transport {
           transportClient.unsubscribe();
         });
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.log('Error while unsubscribing: ', error);
     }
   }
