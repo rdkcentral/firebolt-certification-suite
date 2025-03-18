@@ -454,18 +454,18 @@ Given(
     const params = {};
     let actionType;
     switch (action) {
-      case 'dismissed':
+      case CONSTANTS.DISMISSED:
         fireLog.info(`Dismissing the app using the keyPressSequence: ${KeyPressSequence?.dismiss}`);
         params.keyPressSequence = KeyPressSequence?.dismiss;
-        actionType = 'dismissApp';
+        actionType = CONSTANTS.ACTIONTYPE.DISMISS_APP;
         break;
-      case 'closed':
+      case CONSTANTS.CLOSED:
         params.appId = appId;
-        actionType = 'closeApp';
+        actionType = CONSTANTS.ACTIONTYPE.CLOSE_APP;
         break;
-      case 'unloaded':
+      case CONSTANTS.UNLOADED:
         params.appId = appId;
-        actionType = 'unloadApp';
+        actionType = CONSTANTS.ACTIONTYPE.UNLOAD_APP;
         break;
       default:
         fireLog.error('Invalid action type');

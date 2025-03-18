@@ -542,6 +542,14 @@ module.exports = {
   HOT_LAUNCH: 'HOT_LAUNCH',
   COLD_LAUNCH: 'COLD_LAUNCH',
   APP_ASSURANCE_ID: 'appAssuranceId',
+  DISMISSED: 'dismissed',
+  CLOSED: 'closed',
+  UNLOADED: 'unloaded',
+  ACTIONTYPE: {
+    DISMISS_APP: 'dismissApp',
+    CLOSE_APP: 'closeApp',
+    UNLOAD_APP: 'unloadApp'
+  }
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
