@@ -69,13 +69,13 @@ export default class Transport {
     try {
       if (process.env.transportObject) {
         const transportObjectArray = process.env.transportObject;
-        transportObjectArray.forEach(transportClient => {
+        transportObjectArray.forEach((transportClient) => {
           transportClient.unsubscribe();
         });
       }
     }
-    catch(error) {
-      console.log("Error while unsubscribing: ", error);
+    catch (error) {
+      console.log('Error while unsubscribing: ', error);
     }
   }
 
