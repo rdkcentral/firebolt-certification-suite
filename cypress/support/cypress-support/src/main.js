@@ -50,7 +50,7 @@ export default function (module) {
     // Added below custom commands to clear cache and to reload browser
     cy.clearCache();
     cy.wrap(UTILS.pubSubClientCreation(appTransport), {
-      timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT,
+      timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT,
     }).then((result) => {
       if (result) {
         cy.log('Successfully established a pub/sub connection.');
@@ -253,7 +253,7 @@ export default function (module) {
    */
 
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
-    return cy.wrap(requestMap, { timeout: CONSTANTS.SEVEN_SECONDS_TIMEOUT }).then(() => {
+    return cy.wrap(requestMap, { timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT }).then(() => {
       return new Promise((resolve, reject) => {
         let responsePromise;
         const [moduleName, methodName] = requestMap.method.split('.');
@@ -574,7 +574,10 @@ export default function (module) {
           module.customValidations[functionName] &&
           typeof module.customValidations[functionName] === 'function'
         ) {
-          message = module.customValidations[functionName](apiOrEventObject);
+          message = module.customValidations[functionName](
+            apiOrEventObject,
+            fcsValidationObjectData
+          );
         } else if (
           // if customValidations doesn't have a function as the functionName passed
           !module.customValidations[functionName] ||

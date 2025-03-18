@@ -194,6 +194,8 @@ Given(
  * Then '3rd party app' will be in 'background' state
  */
 Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
+  UTILS.captureScreenshot();
+
   const appId =
     app === CONSTANTS.THIRD_PARTY_APP
       ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
@@ -201,44 +203,57 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
         ? UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)
         : app;
   const isEventsExpected = condition == CONSTANTS.STAY ? false : true;
-  const appObject = UTILS.getEnvVariable(appId);
-  const scenarioName = cy.state().test.title;
-  const moduleReqIdJson = Cypress.env(CONSTANTS.MODULEREQIDJSON);
-  const featureFileName = cy.state().test.parent.title;
-  const scenarioList = moduleReqIdJson?.scenarioNames[featureFileName];
-  const validationObject = scenarioList[scenarioName]?.validationObject;
-  // custom validation in case of lifecycle test cases where app is not reachable
-  // if validationObject is present in the modReqId for the specific TC, we have to validate based on that value
-  try {
-    if (validationObject) {
-      if (Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON).hasOwnProperty(validationObject)) {
-        // the validation type is expected to be "custom"
-        if (
-          Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject]?.data[0]?.type ==
-          'custom'
-        ) {
-          const validationObjectData = Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[
-            validationObject
-          ].data[0];
-          // passing the validationObject to perform customValidation
-          cy.customValidation(validationObjectData);
-        } else {
-          assert(
-            false,
-            `Expected validationObject to be of "custom" type. Current value : ${Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject].data[0].type}`
-          );
+  let appObject = null;
+  if (Cypress.env(CONSTANTS.TEST_TYPE) == CONSTANTS.MODULE_NAMES.LIFECYCLE) {
+    appObject = UTILS.getEnvVariable(appId);
+
+    const scenarioName = cy.state().test.title;
+    const moduleReqIdJson = Cypress.env(CONSTANTS.MODULEREQIDJSON);
+    const featureFileName = cy.state().test.parent.title;
+    const scenarioList = moduleReqIdJson?.scenarioNames[featureFileName];
+    const validationObject = scenarioList[scenarioName]?.validationObject;
+    // custom validation in case of lifecycle test cases where app is not reachable
+    // if validationObject is present in the modReqId for the specific TC, we have to validate based on that value
+    try {
+      if (validationObject) {
+        if (Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON).hasOwnProperty(validationObject)) {
+          // the validation type is expected to be "custom"
+          if (
+            Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject]?.data[0]?.type ==
+            'custom'
+          ) {
+            const validationObjectData = Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[
+              validationObject
+            ].data[0];
+            // passing the validationObject to perform customValidation
+            cy.customValidation(validationObjectData);
+          } else {
+            assert(
+              false,
+              `Expected validationObject to be of "custom" type. Current value : ${Cypress.env(CONSTANTS.COMBINEVALIDATIONOBJECTSJSON)[validationObject].data[0].type}`
+            );
+          }
         }
+      } else {
+        cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
+        cy.validateLifecycleHistoryAndEvents(
+          appObject.getAppObjectState().state,
+          appId,
+          isEventsExpected
+        );
       }
-    } else {
-      cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
-      cy.validateLifecycleHistoryAndEvents(
-        appObject.getAppObjectState().state,
-        appId,
-        isEventsExpected
-      );
+    } catch (error) {
+      throw new Error(`Error occurred during validation: ${JSON.stringify(error)}`);
     }
-  } catch (error) {
-    throw new Error(`Error occurred during validation: ${JSON.stringify(error)}`);
+  } else {
+    const validationObjectKey = `${state.replaceAll(' ', '_').toUpperCase()}_STATE_VALIDATION`;
+    cy.getFireboltData(validationObjectKey).then((fireboltData) => {
+      const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+      const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+      cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
+        cy.softAssertAll();
+      });
+    });
   }
 });
 
