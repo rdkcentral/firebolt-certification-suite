@@ -1,3 +1,24 @@
+# [1.9.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.12...v1.9.0-dev.13) (2025-03-12)
+
+
+### Bug Fixes
+
+* update package.json to remediate security finding ([#362](https://github.com/rdkcentral/firebolt-certification-suite/issues/362)) ([457dde8](https://github.com/rdkcentral/firebolt-certification-suite/commit/457dde8b17acb9b1376462daa712d6f5094ff808))
+
+# [1.9.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.11...v1.9.0-dev.12) (2025-03-11)
+
+
+### Bug Fixes
+
+* Increase pubsub comm timeout for stability ([#359](https://github.com/rdkcentral/firebolt-certification-suite/issues/359)) ([076395a](https://github.com/rdkcentral/firebolt-certification-suite/commit/076395ad57742749e10160805e0d68fab163b176))
+
+# [1.9.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.10...v1.9.0-dev.11) (2025-03-11)
+
+
+### Bug Fixes
+
+* npm run command failing when tags are passed in cli ([#353](https://github.com/rdkcentral/firebolt-certification-suite/issues/353)) ([fc385ba](https://github.com/rdkcentral/firebolt-certification-suite/commit/fc385ba0891d8a77e2a320a8420c95ae0cd78943))
+
 # [1.9.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0-dev.9...v1.9.0-dev.10) (2025-03-10)
 
 
