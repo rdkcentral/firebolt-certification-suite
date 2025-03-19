@@ -1090,6 +1090,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
     if (Cypress.env(CONSTANTS.TEST_TYPE).toLowerCase() == CONSTANTS.USERINTERESTPROVIDER) {
       data.query.params[CONSTANTS.REGISTERPROVIDER] = false;
     }
+    if(getEnvVariable('fireboltVersion', false)){
+      data.query.params.fireboltVersion = getEnvVariable('fireboltVersion');
+    }
 
     // Stringify the query (The intent requires it be a string)
     data.query = JSON.stringify(data.query);
@@ -1496,7 +1499,10 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
     } else {
       cy.then(() => {
         if (validationType == CONSTANTS.EVENT) {
-          const eventName = methodOrEventObject.eventObjectId;
+          const eventName =
+            getEnvVariable('fireboltVersion', false) == '2.0'
+              ? methodOrEventObject.eventName
+              : methodOrEventObject.eventObjectId;
           let eventResponse;
           if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
             const requestMap = {
