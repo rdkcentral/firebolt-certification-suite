@@ -62,6 +62,11 @@ Given(
     }
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
+    if (!scenarioType) {
+      fireLog.info(`ScenarioType is not provided, defaulting to ${CONSTANTS.LOGGEDOUT}`);
+    }
+    scenarioType = scenarioType || CONSTANTS.LOGGEDOUT;
+
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
 
     if (
@@ -93,26 +98,29 @@ Given(
       if (Cypress.env(CONSTANTS.TEST_TYPE).includes('rpc-Only')) {
         Cypress.env(CONSTANTS.IS_RPC_ONLY, true);
       }
-      // fetch device details dynamically
+      // fetch device details dynamically and update run info
       try {
         if (Cypress.env(CONSTANTS.FETCH_DEVICE_DETAILS_DYNAMICALLY_FLAG)) {
           const dynamicModules = UTILS.getEnvVariable(CONSTANTS.DYNAMIC_DEVICE_DETAILS_MODULES);
           const testType = Cypress.env(CONSTANTS.TEST_TYPE);
           if (dynamicModules && dynamicModules.includes(testType)) {
-            cy.getDeviceData(CONSTANTS.DEVICE_ID, {}, CONSTANTS.ACTION_CORE.toLowerCase()).then(
-              (response) => {
-                if (response) {
-                  const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
-                  const requestMap = {
-                    method: method,
-                    params: response,
-                  };
-                  cy.sendMessagetoPlatforms(requestMap);
-                }
+            cy.getDeviceDataFromFirstPartyApp(
+              CONSTANTS.DEVICE_ID,
+              {},
+              CONSTANTS.ACTION_CORE.toLowerCase()
+            ).then((response) => {
+              if (response) {
+                const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
+                const requestMap = {
+                  method: method,
+                  params: response,
+                };
+                cy.sendMessagetoPlatforms(requestMap);
               }
-            );
+            });
           }
         }
+        cy.updateRunInfo();
       } catch (error) {
         cy.log(
           `Following error occurred while trying to fetch device details dynamically: ${error}`
@@ -141,9 +149,9 @@ Given(
     ) {
       cy.fetchAppMetaData().then((appMetaData) => {
         Cypress.env(CONSTANTS.APP_METADATA, appMetaData);
+        const combinedIntentTemplates = _.merge(internalIntentTemplates, externalIntentTemplates);
+        Cypress.env(CONSTANTS.INTENT_TEMPLATES, combinedIntentTemplates);
       });
-      const combinedIntentTemplates = _.merge(internalIntentTemplates, externalIntentTemplates);
-      Cypress.env(CONSTANTS.INTENT_TEMPLATES, combinedIntentTemplates);
     }
   }
 );

@@ -56,6 +56,7 @@ function determineSdkVersion() {
 
 // Get sdkVersion
 const sdkVersion = determineSdkVersion();
+process.env.SDK_VERSION = sdkVersion;
 
 // Creating UUID
 function generateUUID() {
@@ -100,6 +101,7 @@ function parseEnvSection(envSection) {
 
 // Function to extract value of params that contain spaces
 function modifyParams(params) {
+  params = params.replace(/\^/g, '');
   const envSectionMatch = params.match(/--env\s+(.*?)(?=\s+--|$)/);
   const envSection = envSectionMatch ? envSectionMatch[1] : '';
   const paramValuePairs = parseEnvSection(envSection);

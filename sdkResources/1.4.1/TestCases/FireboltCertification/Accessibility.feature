@@ -103,9 +103,9 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Scenario               | Method  | Value |
-            | disable voiceguidance  | enabled | false |
-            | enabling voiceguidance | enabled | true  |
+            | Scenario                  | Method          | Value |
+            | disable voiceguidance     | enabled         | false |
+            | enabling voiceguidance    | enabled         | true  |
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.voiceGuidanceSettings - Validating API and Event Responses for <Method> change to <Value>
@@ -119,10 +119,10 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Method  | Value |
-            | speed   | 1     |
-            | speed   | 0.5   |
-            | speed   | 2     |
+            | Method | Value |
+            | speed  | 1     |
+            | speed  | 0.5   |
+            | speed  | 2     |
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.audioDescriptionSettings - Validating API and Event Responses for <Scenario>
@@ -206,9 +206,9 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Scenario                | Method  | Value |
-            | disabling voiceguidance | enabled | false |
-            | enabling voiceguidance  | enabled | true  |
+            | Scenario                  | Method          | Value |
+            | disabling voiceguidance   | enabled         | false |
+            | enabling voiceguidance    | enabled         | true  |
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.voiceGuidance - Validating API and Event Responses for <Method> change to <Value>
@@ -222,5 +222,5 @@ Feature: Accessibility
         And 'Firebolt' platform triggers '3rd party app' event
 
         Examples:
-            | Method  | Value |
-            | speed   | 1     |
+            | Method | Value |
+            | speed  | 1     |
