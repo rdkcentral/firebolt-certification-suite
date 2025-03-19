@@ -15,4 +15,4 @@ This directory contains the fixture files that are used during the execution of 
 
 > **Important Note**: Do not modify files directly in this directory, as they will be overwritten during each test run. The directory will only contain fixtures **after** the tests are executed. For any fixture changes, edit files inside the `sdkResources` or `commonResources` directory to update or modify fixtures for a specific SDK version or non-SDK-dependent resources, respectively. Any changes made directly in the `cypress/fixtures` folders will be lost during the next test execution.
 
-For more information about how test cases are managed, please refer to the main documentation in the [sdkResources directory](../../sdkResources/README.md) and the [commonResources directory](../../commonResources/README.md).
+For more information about how fixtures are managed, please refer to the main documentation in the [sdkResources directory](../../sdkResources/README.md) and the [commonResources directory](../../commonResources/README.md).
