@@ -15,6 +15,9 @@ cypress/fixtures/external
 # External sdk Resources
 sdkResources/external
 
+# External common Resources
+commonResources/external
+
 # fixtures
 cypress/fixtures
 

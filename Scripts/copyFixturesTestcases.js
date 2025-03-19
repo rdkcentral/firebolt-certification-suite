@@ -91,9 +91,7 @@ function processCommonResources(sourceDir, externalMode = false) {
     if (entry.isDirectory()) {
       // Handle subdirectories
       if (entry.name === 'commonFixtures' || entry.name === 'fixtures') {
-        const targetDir = externalMode
-          ? path.join(fcsFixturesDir, 'external')
-          : fcsFixturesDir;
+        const targetDir = externalMode ? path.join(fcsFixturesDir, 'external') : fcsFixturesDir;
         fs.mkdirSync(targetDir, { recursive: true });
         copyFiles(entryPath, targetDir);
         console.log(`Processed directory contents of: ${entryPath} to ${targetDir}`);
@@ -112,9 +110,7 @@ function processCommonResources(sourceDir, externalMode = false) {
     } else if (entry.isFile()) {
       // Copy files directly
       if (entryPath.includes('fixtures') || entryPath.includes('commonFixtures')) {
-        const targetDir = externalMode
-          ? path.join(fcsFixturesDir, 'external')
-          : fcsFixturesDir;
+        const targetDir = externalMode ? path.join(fcsFixturesDir, 'external') : fcsFixturesDir;
         fs.mkdirSync(targetDir, { recursive: true });
         const targetPath = path.join(targetDir, entry.name);
         fs.copyFileSync(entryPath, targetPath);
