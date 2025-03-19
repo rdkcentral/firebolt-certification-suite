@@ -230,6 +230,7 @@ export default function (module) {
         }
         // unsubscribing the list of topics
         appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
+        await transport.unsubscribe();
 
         // Unsubscribe from WebSocket if the client is available
         const webSocketClient = UTILS.getEnvVariable('webSocketClient', false);
