@@ -110,6 +110,7 @@ module.exports = {
   ENV_PLATFORM_RELEASE: 'platform release',
   ENV_PRODUCT: 'product',
   ENV_FIREBOLT_VERSION: 'fireboltVersion',
+  ENV_RELEASE: 'release',
   ENV_DEVICE_FIRMWARE: 'deviceFirmware',
   ENV_DEVICE_MODEL: 'deviceModel',
   ENV_DEVICE_DISTRIBUTOR: 'deviceDistributor',
@@ -333,7 +334,7 @@ module.exports = {
   PLATFORM_NOT_SUPPORT_LOG: 'Platform does not support method',
   PLATFORM_NOT_TRIGGER_EVENT: 'Platform MUST not trigger event ',
   PLATFORM_TRIGGER_EVENT: 'Platform MUST trigger event ',
-  PLATFORM_RELEASE: 'Release',
+  RELEASE: 'Release',
   PARTNER: 'Partner',
   PRODUCT: 'Product',
   PREREQUISITE_DATA: 'PreRequisiteData.json',
@@ -374,6 +375,7 @@ module.exports = {
     SCREENSHOT: 'fcs.screenshot',
     GETAPPSTATE: 'fcs.getAppState',
     DISMISS: 'fcs.dismissApp',
+    GETAPPDATA: 'fcs.getAppData',
   },
   RESPONSE: 'Response: ',
   RESPONSE_INVALID_RESPONSE_LOG:
@@ -411,7 +413,7 @@ module.exports = {
   SET_METHOD: 'setMethod',
   FCS_SETTER: 'fcsSetters',
   SET_VALIDATIONPATH: 'setValidationJsonPath',
-  SEVEN_SECONDS_TIMEOUT: 7000,
+  COMMUNICATION_INIT_TIMEOUT: 15000,
   SKIPCONTENTVALIDATION: 'skipContentValidation',
   SKIPPED: 'SKIPPED',
   SOURCE: 'source',
@@ -520,6 +522,11 @@ module.exports = {
   LOGGEDOUT: 'loggedOut',
   SCENARIO_TYPE: 'scenarioType',
   DISMISS: 'dismiss',
+  APP_LAUNCH_COUNT: 'appLaunchCount',
+  HOT_LAUNCH: 'HOT_LAUNCH',
+  COLD_LAUNCH: 'COLD_LAUNCH',
+  APP_ASSURANCE_ID: 'appAssuranceId',
+  SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

@@ -497,6 +497,8 @@ Given(
  * Then 3rd party 'firebolt' app should be exited
  */
 Given(/3rd party '(.+)' app should be exited$/, async (app) => {
+  UTILS.captureScreenshot();
+
   // getAppState validation
   let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);
   validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
@@ -504,32 +506,8 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
   cy.getFireboltData(validationObjectKey).then((fireboltData) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     validationObject = UTILS.resolveRecursiveValues(fireboltData);
-    cy.methodOrEventResponseValidation(type, validationObject)
-      .then((response) => {
-        fireLog.info('State validation of app is completed');
-      })
-      .then(() => {
-        // screenShot validation
-        fireLog.info('Started Screenshot validation');
-        const requestMapForScreenShotValidation = {
-          method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
-          params: {
-            validations: validationObject.screenshot.validations,
-          },
-        };
-        fireLog.info(
-          `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
-        );
-        cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
-          fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
-
-          if (response && response !== 'undefined') {
-            if (response.status != 'pass') {
-              fireLog.info(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
-            }
-            cy.softAssertAll();
-          }
-        });
-      });
+    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
+      cy.softAssertAll();
+    });
   });
 });

@@ -216,6 +216,10 @@ Cypress.Commands.add('getSdkVersion', () => {
               );
             Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
           }
+          if (response?.result?.debug) {
+            const release = response.result.debug;
+            Cypress.env(CONSTANTS.ENV_RELEASE, release);
+          }
           if (response?.result?.sdk?.readable) {
             const responseResultSDK =
               `${response?.result?.sdk?.major}.${response?.result?.sdk?.minor}.${response?.result?.sdk?.patch}`.replace(
@@ -241,14 +245,38 @@ Cypress.Commands.add('updateRunInfo', () => {
   let deviceModel = '';
   let deviceDistributor = '';
   let devicePlatform = '';
+  const fireboltVersion = '';
+
   // function to set env variable for run info data
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
     if (deviceData === '') {
-      // Fetch data from the third-party app
-      cy.getDeviceDataFromThirdPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
-        // Set environment variable with the response
-        Cypress.env(envVarName, JSON.stringify(response.result).replace(/"/g, ''));
-      });
+      // Fetch data from the first-party app
+      if (Cypress.env(CONSTANTS.SUPPORTS_PLATFORM_COMMUNICATION)) {
+        cy.getDeviceDataFromFirstPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
+          if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
+            if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
+              let deviceFirmware = JSON.stringify(response.firmware.readable);
+              deviceFirmware = deviceFirmware.replace(/"/g, '');
+              Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+            }
+            if (!Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION) && response?.api?.readable) {
+              const fireboltVersion =
+                `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
+                  /"/g,
+                  ''
+                );
+              Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
+            }
+            if (!Cypress.env(CONSTANTS.ENV_RELEASE) && response?.debug) {
+              const release = response.debug;
+              Cypress.env(CONSTANTS.ENV_RELEASE, release);
+            }
+          } else {
+            // Set environment variable with the response
+            Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
+          }
+        });
+      }
     } else {
       // Set environment variable with the value from json file
       Cypress.env(envVarName, JSON.stringify(deviceData).replace(/"/g, ''));
@@ -268,6 +296,7 @@ Cypress.Commands.add('updateRunInfo', () => {
             }
             const deviceMac = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC).replace(/:/g, '');
             const deviceMacJson = `./cypress/fixtures/devices/${deviceMac}.json`;
+            const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             // Check if mac json file exists
             cy.task('checkFileExists', deviceMacJson)
               .then((exists) => {
@@ -290,6 +319,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                   CONSTANTS.ENV_DEVICE_MODEL
                 );
               })
+              .then(() => delay(2000))
               .then(() => {
                 return setEnvRunInfo(
                   deviceDistributor,
@@ -298,6 +328,18 @@ Cypress.Commands.add('updateRunInfo', () => {
                   CONSTANTS.ENV_DEVICE_DISTRIBUTOR
                 );
               })
+              .then(() => delay(2000))
+              .then(() => {
+                if (Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION)) return;
+                else
+                  return setEnvRunInfo(
+                    fireboltVersion,
+                    CONSTANTS.DEVICE_VERSION,
+                    CONSTANTS.ACTION_CORE,
+                    {}
+                  );
+              })
+              .then(() => delay(2000))
               .then(() => {
                 return setEnvRunInfo(
                   devicePlatform,
@@ -305,44 +347,68 @@ Cypress.Commands.add('updateRunInfo', () => {
                   CONSTANTS.ACTION_CORE,
                   CONSTANTS.ENV_PLATFORM
                 );
-              });
-            cy.readFile(reportEnvFile).then((reportEnv) => {
-              if (reportEnv) {
-                if (
-                  reportEnv.customData &&
-                  reportEnv.customData.data &&
-                  reportEnv.customData.data.length > 0
-                ) {
-                  const labelToEnvMap = {
-                    [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
-                    [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
-                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
-                    [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
-                    [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
-                    [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
-                    [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
-                    [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
-                  };
-
-                  reportEnv.customData.data.forEach((item) => {
-                    if (item.label === CONSTANTS.PRODUCT) {
-                      item.value = configModuleConst.PRODUCT ? configModuleConst.PRODUCT : 'N/A';
-                    } else if (labelToEnvMap[item.label]) {
-                      item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+              })
+              .then(() => {
+                cy.readFile(reportEnvFile).then((reportEnv) => {
+                  if (reportEnv) {
+                    if (
+                      reportEnv.customData &&
+                      reportEnv.customData.data &&
+                      reportEnv.customData.data.length > 0
+                    ) {
+                      const labelToEnvMap = {
+                        [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
+                        [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
+                        [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
+                        [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
+                        [CONSTANTS.RELEASE]: CONSTANTS.ENV_RELEASE,
+                        [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
+                        [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
+                        [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                      };
+                      reportEnv.customData.data.forEach((item) => {
+                        if (item.label === CONSTANTS.PRODUCT) {
+                          item.value = configModuleConst.PRODUCT
+                            ? configModuleConst.PRODUCT
+                            : 'N/A';
+                        } else if (labelToEnvMap[item.label]) {
+                          item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+                        }
+                      });
                     }
-                  });
-                }
-                // write the merged object
-                cy.writeFile(tempReportEnvFile, reportEnv);
-              } else {
-                logger.info('Unable to read from reportEnv json file');
-                return false;
-              }
-            });
+                    // write the merged object
+                    cy.writeFile(tempReportEnvFile, reportEnv);
+                  } else {
+                    logger.info('Unable to read from reportEnv json file');
+                    return false;
+                  }
+                });
+              });
           } catch (err) {
             logger.info('Error in updating Run Info in cucumber report', err);
             return false;
           }
+        } else if (tempFileExists && Cypress.env(CONSTANTS.ENV_SDK_VERSION)) {
+          cy.readFile(tempReportEnvFile).then((reportEnv) => {
+            if (reportEnv) {
+              if (
+                reportEnv.customData &&
+                reportEnv.customData.data &&
+                reportEnv.customData.data.length > 0 &&
+                reportEnv.customData.data.some(
+                  (item) => item.label === CONSTANTS.SDK_REPORT_VERSION && item.value === 'N/A'
+                )
+              ) {
+                reportEnv.customData.data.forEach((item) => {
+                  if (item.label === CONSTANTS.SDK_REPORT_VERSION) {
+                    item.value = Cypress.env(CONSTANTS.ENV_SDK_VERSION);
+                  }
+                });
+              }
+              // write the merged object
+              cy.writeFile(tempReportEnvFile, reportEnv);
+            }
+          });
         } else {
           logger.info(
             'Unable to update Run Info in cucumber report, tempReportEnv file already exists'
@@ -359,12 +425,12 @@ Cypress.Commands.add('updateRunInfo', () => {
 
 /**
  * @module commands
- * @function getDeviceData
+ * @function getDeviceDataFromFirstPartyApp
  * @description Making API call.
  * @example
  * cy.getDeviceData(method, param, action)
  */
-Cypress.Commands.add('getDeviceData', (method, param, action) => {
+Cypress.Commands.add('getDeviceDataFromFirstPartyApp', (method, param, action) => {
   const requestMap = {
     method: method,
     param: param,
@@ -882,6 +948,13 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
   // Creating data for basic intent to be sent to the app on launch
   let appCategory;
 
+  if (
+    Cypress.env(CONSTANTS.APP_METADATA) &&
+    Cypress.env(CONSTANTS.APP_METADATA)[appId]?.metadata?.type
+  ) {
+    Cypress.env(CONSTANTS.APP_TYPE, Cypress.env(CONSTANTS.APP_METADATA)[appId].metadata.type);
+    appType = Cypress.env(CONSTANTS.APP_TYPE);
+  }
   // Storing the appId in runtime environment variable
   if (Cypress.env(CONSTANTS.RUNTIME)) {
     Cypress.env(CONSTANTS.RUNTIME).appId = appId;
@@ -1366,9 +1439,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
         case CONSTANTS.UNDEFINED:
           cy.undefinedValidation(object, methodOrEventObject, validationType);
           break;
-        case CONSTANTS.SCREENSHOT_VALIDATION:
-          cy.screenshotValidation(object);
-          break;
         case CONSTANTS.PERFORMANCE_VALIDATION:
           cy.performanceValidation(object);
           break;
@@ -1647,7 +1717,8 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
         method: exitMethod,
         params: params.appId,
       };
-
+      Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, false);
+      Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, 0);
       break;
     case 'unloadApp':
       exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.UNLOADAPP;
@@ -1655,7 +1726,8 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
         method: exitMethod,
         params: params.appId,
       };
-
+      Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, false);
+      Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, 0);
       break;
     case 'dismissApp':
       exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.DISMISSAPP;
@@ -1714,21 +1786,36 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
  * cy.fetchAppMetaData()
  */
 Cypress.Commands.add('fetchAppMetaData', () => {
-  // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
-  const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
-  const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
+  if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
+    const requestParams = {
+      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPDATA,
+      params: {
+        deviceMac: Cypress.env(CONSTANTS.DEVICE_MAC),
+        appAssuranceId: Cypress.env(CONSTANTS.APP_ASSURANCE_ID),
+      },
+    };
+    cy.sendMessagetoPlatforms(requestParams).then((result) => {
+      return result.data;
+    });
+  } else {
+    // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
+    const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
+    const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
 
-  const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
-  const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
+    const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
+    const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
-  cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then((fcsAppMetaData) => {
-    cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
-      (configModuleAppMetaData) => {
-        // Combine the app metadata from the fcs and configModule appData directories.
-        _.merge(fcsAppMetaData, configModuleAppMetaData);
+    cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
+      (fcsAppMetaData) => {
+        cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
+          (configModuleAppMetaData) => {
+            // Combine the app metadata from the fcs and configModule appData directories.
+            _.merge(fcsAppMetaData, configModuleAppMetaData);
+          }
+        );
       }
     );
-  });
+  }
 });
 
 /**

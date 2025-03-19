@@ -194,6 +194,8 @@ Given(
  * Then '3rd party app' will be in 'background' state
  */
 Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
+  UTILS.captureScreenshot();
+
   const appId =
     app === CONSTANTS.THIRD_PARTY_APP
       ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
@@ -244,8 +246,7 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
       throw new Error(`Error occurred during validation: ${JSON.stringify(error)}`);
     }
   } else {
-    let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);
-    validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+    const validationObjectKey = `${state.replaceAll(' ', '_').toUpperCase()}_STATE_VALIDATION`;
     cy.getFireboltData(validationObjectKey).then((fireboltData) => {
       const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
       const validationObject = UTILS.resolveRecursiveValues(fireboltData);
