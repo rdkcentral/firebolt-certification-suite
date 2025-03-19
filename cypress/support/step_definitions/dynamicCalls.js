@@ -97,14 +97,12 @@ Given(
           fireboltCallObject.setParams &&
           typeof fireboltCallObject.setParams === CONSTANTS.TYPE_OBJECT
         ) {
-          setParams = fireboltCallObject.setParams;
-
-          // Iterating through the object and invoke if it is a function
-          for (const key in setParams) {
-            if (typeof setParams[key] === CONSTANTS.TYPE_FUNCTION) {
-              setParams[key] = setParams[key]();
-            }
-          }
+          // Deep clone setParams while resolving functions to their return values
+          setParams = JSON.parse(
+            JSON.stringify(fireboltCallObject.setParams, (key, value) => {
+              return typeof value === CONSTANTS.TYPE_FUNCTION ? value() : value;
+            })
+          );
         } else {
           setParams = { value: UTILS.resolveRecursiveValues(fireboltCallObject.setParams) };
         }
@@ -399,6 +397,8 @@ Given(
  * Given 'third party app is launched' with 'auth' page
  */
 Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
+  UTILS.captureScreenshot();
+
   const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
@@ -408,14 +408,21 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
 
   // Sending the request to the platform to retrieve the app state.
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    if (response.appState.toUpperCase() === CONSTANTS.FOREGROUND) {
-      fireLog.info(
-        `State validation successful: Current state of ${appId} app is ${JSON.stringify(response)} as expected`
-      );
+    if (response) {
+      if (
+        response.currentApp_fireboltState &&
+        response.currentApp_fireboltState.toUpperCase() === CONSTANTS.FOREGROUND
+      ) {
+        fireLog.info(
+          `State validation successful: Current state of ${appId} app is ${JSON.stringify(response)} as expected`
+        );
+      } else {
+        fireLog.fail(
+          `State validation failed: Current state of ${appId} app is ${JSON.stringify(response)}, expected to be ${CONSTANTS.FOREGROUND}.`
+        );
+      }
     } else {
-      fireLog.fail(
-        `State validation failed: Current state of ${appId} app is ${JSON.stringify(response)}, expected to be ${CONSTANTS.FOREGROUND}.`
-      );
+      fireLog.fail(`State validation failed: Did not get response when retrieving app state`);
     }
   });
 
@@ -425,11 +432,34 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
   } else {
     Cypress.env(CONSTANTS.RUNTIME, { page });
   }
-
+  if (
+    UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) &&
+    Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) == 1
+  ) {
+    // cold launch interaction logs validation
+    cy.getFireboltData(CONSTANTS.COLD_LAUNCH).then((fireboltData) => {
+      const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+      const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+      cy.methodOrEventResponseValidation(type, validationObject);
+    });
+  } else if (
+    UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_STATUS, false) &&
+    Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) > 1
+  ) {
+    // hot launch interaction logs validation
+    cy.getFireboltData(CONSTANTS.HOT_LAUNCH).then((fireboltData) => {
+      const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+      const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+      cy.methodOrEventResponseValidation(type, validationObject);
+    });
+  }
   validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   cy.getFireboltData(validationObjectKey).then((fireboltData) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     const validationObject = UTILS.resolveRecursiveValues(fireboltData);
-    cy.methodOrEventResponseValidation(type, validationObject);
+    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
+      cy.softAssertAll();
+    });
   });
+  cy.softAssertAll();
 });

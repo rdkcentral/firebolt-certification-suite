@@ -1,0 +1,60 @@
+{
+    "HDMIINPUT_PORTS": {
+        "method": "hdmiinput.ports",
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "object",
+                        "description": "Validation of the HdmiInput ports format"
+                    }
+                ]
+            }
+        ]
+    },
+    "HDMIINPUT_PORT": {
+        "method": "hdmiinput.port",
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "type": "object",
+                        "description": "Validation of the HdmiInput port format"
+                    }
+                ]
+            }
+        ]
+    },
+    "HDMIINPUT_EDIDVERSION_1_4": {
+        "method": "hdmiinput.port",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "HDMIINPUT_EDIDVERSION_1_4",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of the HdmiInput port format"
+                    }
+                ]
+            }
+        ]
+    },
+    "HDMIINPUT_EDIDVERSION_2_0": {
+        "method": "hdmiinput.port",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "type": "HDMIINPUT_EDIDVERSION_2_0",
+                        "mode": "staticContentValidation",
+                        "description": "Validation of the HdmiInput port format"
+                    }
+                ]
+            }
+        ]
+    }
+}

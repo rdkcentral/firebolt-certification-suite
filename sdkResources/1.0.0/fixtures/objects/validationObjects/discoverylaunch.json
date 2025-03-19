@@ -1,0 +1,647 @@
+{
+    "DISCOVERYLAUNCH_HOME_INTENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYBACK_INTENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYBACK_INTENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for playback intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for playback intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_ENTITY_INTENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_ENTITY_INTENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for entity intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_ENTITY_INTENT_WITHOUT_ENTITYTYPE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_ENTITY_INTENT_WITHOUT_ENTITYTYPE_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for entity intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_INTENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_INTENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_SEARCH_INTENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_SEARCH_INTENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for search intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_SECTION_INTENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_SECTION_INTENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for section intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_TUNE_INTENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_TUNE_INTENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for tune intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYENTITY_INTENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-entity intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_CONCERT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_CONCERT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_SPORTINGEVENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_SPORTINGEVENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_PREVIEW": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_PREVIEW_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_OTHER": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_OTHER_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_ADVERTISEMENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_ADVERTISEMENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MUSICVIDEO": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MUSICVIDEO_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MINISODE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_MINISODE_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_EXTRA": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_PROGRAMTYPE_EXTRA_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_CONCERT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_CONCERT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_SPORTINGEVENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_SPORTINGEVENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_PREVIEW": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_PREVIEW_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_OTHER": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_OTHER_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_ADVERTISEMENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_ADVERTISEMENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MUSICVIDEO": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MUSICVIDEO_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MINISODE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_MINISODE_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_CONCERT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_CONCERT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_SPORTINGEVENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_SPORTINGEVENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_PREVIEW": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_PREVIEW_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_OTHER": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_OTHER_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_ADVERTISEMENT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_ADVERTISEMENT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MUSICVIDEO": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MUSICVIDEO_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MINISODE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_MINISODE_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_EXTRA": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_ALBUM_PROGRAMTYPE_EXTRA_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-query intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_OPTIONS": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITHOUT_OPTIONS_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-entity intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_MOVIE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_MOVIE_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-entity intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_EPISODE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_EPISODE_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-entity intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_CONCERT": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYENTITY_INTENT_WITH_PROGRAMTYPE_CONCERT_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for play-entity intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_INTENT_RANDOM_STRING": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_INTENT_RANDOM_STRING_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for random string source"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_SEARCH_INTENT_SOURCE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_SEARCH_INTENT_SOURCE_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for search intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for search intent"
+                    }
+                ]
+            }
+        ]
+    }
+  }

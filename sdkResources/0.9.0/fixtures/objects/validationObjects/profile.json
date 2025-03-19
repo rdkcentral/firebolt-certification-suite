@@ -1,0 +1,17 @@
+{
+    "PROFILE_FLAGS": {
+        "method": "profile.flags",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "PROFILE_FLAGS",
+                        "description": "Validation of the Profile flags Format"
+                    }
+                ]
+            }
+        ]
+    }
+}

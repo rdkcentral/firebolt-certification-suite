@@ -46,6 +46,7 @@ let metaDataArr = [];
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
   const testsuite = config.env.testSuite;
+  const sdkVersion = process.env.SDK_VERSION;
   const specPattern = getSpecPattern(testsuite);
   if (specPattern !== undefined) {
     config.specPattern = specPattern;
@@ -62,10 +63,7 @@ module.exports = async (on, config) => {
   config.reporterOptions.reportDir = `./reports/${config.env.jobId}`;
 
   // Get and dereference OpenRPC
-  const openRpcs = await getAndDereferenceOpenRpc(
-    config.env.externalOpenRpcUrls,
-    config.env.sdkVersion
-  );
+  const openRpcs = await getAndDereferenceOpenRpc(config.env.externalOpenRpcUrls, sdkVersion);
   // Set env equal to strigified openRpcs due to circular references
   config.env.dereferenceOpenRPC = flatted.stringify(openRpcs);
 
@@ -247,11 +245,17 @@ module.exports = async (on, config) => {
     let filePath = './reports/cucumber-json/';
     let suiteName = 'cucumber' + '_' + timestamp;
     let jobId;
+    let elk = false;
 
     // Creating uuid folder under reports
     if (results.config.env.jobId) {
       jobId = results.config.env.jobId;
       filePath = `./reports/${jobId}/`;
+    }
+
+    // Send elk variable to report processor if env variable is set to true
+    if (results.config.env.elk) {
+      elk = results.config.env.elk;
     }
 
     if (!fs.existsSync(filePath)) {
@@ -336,7 +340,7 @@ module.exports = async (on, config) => {
       // Emit the 'reports' event once after the loop and reportObj is populated.
       await new Promise((resolve) => {
         eventEmitter.once('reportProcessed', () => resolve());
-        eventEmitter.emit('reports', reportObj, jobId);
+        eventEmitter.emit('reports', reportObj, jobId, elk);
       });
     }
 
