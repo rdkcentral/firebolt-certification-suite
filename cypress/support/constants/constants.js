@@ -458,6 +458,7 @@ module.exports = {
     PERFORMANCETESTHANDLER: 'performanceTestHandler',
     VISIBILITYSTATE: 'visibilityState',
     REGISTERPROVIDERHANDLER: 'registerProviderHandler',
+    CLEAR_ALL_LISTENERS: 'clearAllListeners',
   },
   INTERACTIONS_SERVICE_ENABLED:
     'Firebolt interactions collection service is already enabled in before hook',
@@ -538,6 +539,8 @@ module.exports = {
   LOGGEDOUT: 'loggedOut',
   SCENARIO_TYPE: 'scenarioType',
   DISMISS: 'dismiss',
+  FIRST_PARTY_EVENT_TYPE: 'firstPartyEventType',
+  THIRD_PARTY_EVENT_TYPE: 'thirdPartyEventType',
   APP_LAUNCH_COUNT: 'appLaunchCount',
   HOT_LAUNCH: 'HOT_LAUNCH',
   COLD_LAUNCH: 'COLD_LAUNCH',
