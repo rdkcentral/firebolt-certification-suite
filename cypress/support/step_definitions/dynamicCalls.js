@@ -393,6 +393,7 @@ Given(
  * Given 'third party app is launched' with 'auth' page
  */
 Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
+  UTILS.captureScreenshot();
   const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
   // Ensure appId is available before proceeding
   if (!appId) {

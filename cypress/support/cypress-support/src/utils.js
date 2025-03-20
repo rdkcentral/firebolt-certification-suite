@@ -18,6 +18,7 @@
 const CONSTANTS = require('../../constants/constants');
 const logger = require('../../Logger')('utils.js');
 const { _ } = Cypress;
+import { apiObject } from '../../appObjectConfigs';
 const MESSAGE = 'message';
 const Validator = require('jsonschema').Validator;
 const validator = new Validator();
@@ -1225,7 +1226,6 @@ function censorPubSubToken(data) {
  * @example
  * applyOverrides(fireboltCallObject)
  */
-
 function applyOverrides(fireboltCallObject) {
   try {
     if (!fireboltCallObject.overrides) return fireboltCallObject;
@@ -1255,6 +1255,43 @@ function applyOverrides(fireboltCallObject) {
     );
   }
   return fireboltCallObject; // Return the original or modified object based on the override
+}
+
+/**
+ * @module utils
+ * @function captureScreenshot
+ * @description A function to capture the screenshot of the device screen.
+ * @example
+ * captureScreenshot()
+ */
+function captureScreenshot() {
+  // Only take a screenshot if the enableScreenshots environment variable is set to true
+  if (getEnvVariable('enableScreenshots')) {
+    const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT;
+    const param = {};
+    const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
+
+    const screenshotRequest = {
+      method: method,
+      params: param,
+    };
+    fireLog.info(`Sending request to capture screenshot: ${JSON.stringify(screenshotRequest)}`);
+
+    try {
+      cy.sendMessagetoPlatforms(screenshotRequest).then((response) => {
+        fireLog.info(`Screenshot capture response: ${JSON.stringify(response)}`);
+
+        const apiResponse = {
+          response: response,
+        };
+
+        const apiAppObject = new apiObject(method, param, {}, apiResponse, {}, appId);
+        getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
+      });
+    } catch (error) {
+      console.error('Error handling screenshot capture request:', error);
+    }
+  }
 }
 
 module.exports = {
@@ -1288,4 +1325,5 @@ module.exports = {
   skipCurrentTest,
   censorPubSubToken,
   applyOverrides,
+  captureScreenshot,
 };

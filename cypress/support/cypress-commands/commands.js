@@ -251,30 +251,32 @@ Cypress.Commands.add('updateRunInfo', () => {
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
     if (deviceData === '') {
       // Fetch data from the first-party app
-      cy.getDeviceDataFromFirstPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
-        if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
-          if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
-            let deviceFirmware = JSON.stringify(response.firmware.readable);
-            deviceFirmware = deviceFirmware.replace(/"/g, '');
-            Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+      if (Cypress.env(CONSTANTS.SUPPORTS_PLATFORM_COMMUNICATION)) {
+        cy.getDeviceDataFromFirstPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
+          if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
+            if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
+              let deviceFirmware = JSON.stringify(response.firmware.readable);
+              deviceFirmware = deviceFirmware.replace(/"/g, '');
+              Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+            }
+            if (!Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION) && response?.api?.readable) {
+              const fireboltVersion =
+                `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
+                  /"/g,
+                  ''
+                );
+              Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
+            }
+            if (!Cypress.env(CONSTANTS.ENV_RELEASE) && response?.debug) {
+              const release = response.debug;
+              Cypress.env(CONSTANTS.ENV_RELEASE, release);
+            }
+          } else {
+            // Set environment variable with the response
+            Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
           }
-          if (!Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION) && response?.api?.readable) {
-            const fireboltVersion =
-              `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
-                /"/g,
-                ''
-              );
-            Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
-          }
-          if (!Cypress.env(CONSTANTS.ENV_RELEASE) && response?.debug) {
-            const release = response.debug;
-            Cypress.env(CONSTANTS.ENV_RELEASE, release);
-          }
-        } else {
-          // Set environment variable with the response
-          Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
-        }
-      });
+        });
+      }
     } else {
       // Set environment variable with the value from json file
       Cypress.env(envVarName, JSON.stringify(deviceData).replace(/"/g, ''));
@@ -1445,9 +1447,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
           break;
         case CONSTANTS.UNDEFINED:
           cy.undefinedValidation(object, methodOrEventObject, validationType);
-          break;
-        case CONSTANTS.SCREENSHOT_VALIDATION:
-          cy.screenshotValidation(object);
           break;
         case CONSTANTS.PERFORMANCE_VALIDATION:
           cy.performanceValidation(object);

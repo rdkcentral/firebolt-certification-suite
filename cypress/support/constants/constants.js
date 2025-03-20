@@ -548,8 +548,9 @@ module.exports = {
   ACTIONTYPE: {
     DISMISS_APP: 'dismissApp',
     CLOSE_APP: 'closeApp',
-    UNLOAD_APP: 'unloadApp'
-  }
+    UNLOAD_APP: 'unloadApp',
+  },
+  SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
