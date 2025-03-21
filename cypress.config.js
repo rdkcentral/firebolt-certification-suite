@@ -96,6 +96,7 @@ const env = {
   elk: false,
   objective: '',
   supportsPlatformCommunication: false,
+  supportedSDK: ['Firebolt'],
 };
 
 module.exports = {

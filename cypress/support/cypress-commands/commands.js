@@ -68,73 +68,76 @@ Cypress.Commands.add(
  * @Result
  * { method: 'device.id', param: {}, context: {}, action: 'core', expected: 'result'}
  */
-Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0]) => {
-  const results = [];
-  Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, false);
-  if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
-    key = key.replaceAll(' ', '_').toUpperCase();
+Cypress.Commands.add(
+  'fireboltDataParser',
+  (key, sdk = UTILS.getEnvVariable(CONSTANTS.SUPPORTED_SDK)[0]) => {
+    const results = [];
+    Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, false);
+    if (UTILS.getEnvVariable(CONSTANTS.SUPPORTED_SDK).includes(sdk)) {
+      key = key.replaceAll(' ', '_').toUpperCase();
 
-    // Fetching the firebolt Data based on key value.
-    return cy.getFireboltData(key).then((fireboltData) => {
-      // Check if fireboltData is an array or an object
-      const fireboltItems = Array.isArray(fireboltData) ? fireboltData : [fireboltData];
+      // Fetching the firebolt Data based on key value.
+      return cy.getFireboltData(key).then((fireboltData) => {
+        // Check if fireboltData is an array or an object
+        const fireboltItems = Array.isArray(fireboltData) ? fireboltData : [fireboltData];
 
-      // Process each firebolt call item
-      const promises = fireboltItems.map((item) => {
-        let params = item.params;
-        let method, action;
-        // Fetching the value of environment variable based on dataIdentifier
-        if (/CYPRESSENV/.test(params)) {
-          const envParam = params.split('-')[1];
-          params = UTILS.getEnvVariable(envParam, false);
-        }
-        // If params contain CYPRESSENV in any parameter assigning corresponding env value
-        if (Array.isArray(params)) {
-          params.forEach((item) => {
-            const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
+        // Process each firebolt call item
+        const promises = fireboltItems.map((item) => {
+          let params = item.params;
+          let method, action;
+          // Fetching the value of environment variable based on dataIdentifier
+          if (/CYPRESSENV/.test(params)) {
+            const envParam = params.split('-')[1];
+            params = UTILS.getEnvVariable(envParam, false);
+          }
+          // If params contain CYPRESSENV in any parameter assigning corresponding env value
+          if (Array.isArray(params)) {
+            params.forEach((item) => {
+              const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
 
+              if (containEnv) {
+                const envParam = containEnv.split('-')[1];
+                item[envParam] = Cypress.env(envParam);
+                delete item[containEnv];
+              }
+            });
+          } else {
+            const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
             if (containEnv) {
               const envParam = containEnv.split('-')[1];
-              item[envParam] = Cypress.env(envParam);
-              delete item[containEnv];
+              params[envParam] = Cypress.env(envParam);
+              delete params[containEnv];
             }
-          });
-        } else {
-          const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
-          if (containEnv) {
-            const envParam = containEnv.split('-')[1];
-            params[envParam] = Cypress.env(envParam);
-            delete params[containEnv];
           }
-        }
 
-        method = item.method;
-        const expected = item.expected ? item.expected : CONSTANTS.RESULT;
-        action = CONSTANTS.ACTION_CORE.toLowerCase();
+          method = item.method;
+          const expected = item.expected ? item.expected : CONSTANTS.RESULT;
+          action = CONSTANTS.ACTION_CORE.toLowerCase();
 
-        // If a method has prefix with an underscore, the value is taken as the action.
-        if (method && method.includes('_')) {
-          action = method.split('_')[0];
-          method = method.split('_')[1];
-        }
+          // If a method has prefix with an underscore, the value is taken as the action.
+          if (method && method.includes('_')) {
+            action = method.split('_')[0];
+            method = method.split('_')[1];
+          }
 
-        return results.push({
-          method: method,
-          params: params,
-          context: item.context,
-          action: action,
-          expected: expected,
+          return results.push({
+            method: method,
+            params: params,
+            context: item.context,
+            action: action,
+            expected: expected,
+          });
+        });
+
+        return Cypress.Promise.all(promises).then(() => {
+          return results;
         });
       });
-
-      return Cypress.Promise.all(promises).then(() => {
-        return results;
-      });
-    });
-  } else {
-    fireLog.fail(`${sdk} SDK not Supported`);
+    } else {
+      fireLog.fail(`${sdk} SDK not Supported`);
+    }
   }
-});
+);
 
 /**
  * @module commands
