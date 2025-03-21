@@ -1985,3 +1985,21 @@ const shouldPerformValidation = (key, value) => {
 
   return true;
 };
+
+/**
+ * @module commands
+ * @function sendVoiceCommand
+ * @description To send a voice command to the platform
+ * @param {String} voiceCommand - The transcription (voice command) to be sent.
+ * @example
+ * cy.sendVoiceCommand('Open settings');
+ */
+Cypress.Commands.add('sendVoiceCommand', (voiceCommand) => {
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDVOICECOMMAND,
+    params: voiceCommand,
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    fireLog.info(`Response from 1st party app: ${JSON.stringify(response)}`);
+  });
+});
