@@ -25,7 +25,17 @@ function loadConfigPackageJson() {
     return null;
   }
 }
-
+// Remove tempReportEnv.json before every execution
+function removeTempReportJson() {
+  const filePath = 'tempReportEnv.json';
+  if (fs.existsSync(filePath)) {
+    try {
+      fs.unlinkSync(filePath);
+    } catch (err) {
+      console.error(`Error removing file: ${err.message}`);
+    }
+  }
+}
 // Determine sdkVersion
 function determineSdkVersion() {
   // 1. If sdkVersion is passed in CLI, prioritize it.
@@ -56,6 +66,7 @@ function determineSdkVersion() {
 
 // Get sdkVersion
 const sdkVersion = determineSdkVersion();
+process.env.SDK_VERSION = sdkVersion;
 
 // Creating UUID
 function generateUUID() {
@@ -64,6 +75,7 @@ function generateUUID() {
 
 // Function to extract value of params that contain spaces
 function modifyParams(params) {
+  params = params.replace(/\^/g, '');
   const envSectionMatch = params.match(/--env\s+(.*?)(?=\s+--|$)/);
   const envSection = envSectionMatch ? envSectionMatch[1] : '';
   const paramValuePairs = envSection.split(',');
@@ -120,6 +132,7 @@ function runPreprocessorScript() {
 
 // Function to execute cypress run
 function run() {
+  removeTempReportJson();
   runPreprocessorScript();
 
   const args = ['run', '--e2e', ...modifyParams(params).split(' ')];
@@ -140,6 +153,7 @@ function run() {
 
 // Function to open Cypress without report options
 function open() {
+  removeTempReportJson();
   runPreprocessorScript();
 
   const command = 'cypress';
