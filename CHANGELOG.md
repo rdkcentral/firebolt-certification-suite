@@ -1,3 +1,10 @@
+# [1.10.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0...v1.10.0-dev.1) (2025-03-24)
+
+
+### Features
+
+* Remove tempReportEnv.json before every execution ([#371](https://github.com/rdkcentral/firebolt-certification-suite/issues/371)) ([58459bb](https://github.com/rdkcentral/firebolt-certification-suite/commit/58459bbfd0eb7dd79265abbbd19e7f14e32a35d6))
+
 # [1.9.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0...v1.9.0) (2025-03-18)
 
 
