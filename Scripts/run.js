@@ -25,7 +25,17 @@ function loadConfigPackageJson() {
     return null;
   }
 }
-
+// Remove tempReportEnv.json before every execution
+function removeTempReportJson() {
+  const filePath = 'tempReportEnv.json';
+  if (fs.existsSync(filePath)) {
+    try {
+      fs.unlinkSync(filePath);
+    } catch (err) {
+      console.error(`Error removing file: ${err.message}`);
+    }
+  }
+}
 // Determine sdkVersion
 function determineSdkVersion() {
   // 1. If sdkVersion is passed in CLI, prioritize it.
@@ -122,6 +132,7 @@ function runPreprocessorScript() {
 
 // Function to execute cypress run
 function run() {
+  removeTempReportJson();
   runPreprocessorScript();
 
   const args = ['run', '--e2e', ...modifyParams(params).split(' ')];
@@ -142,6 +153,7 @@ function run() {
 
 // Function to open Cypress without report options
 function open() {
+  removeTempReportJson();
   runPreprocessorScript();
 
   const command = 'cypress';
