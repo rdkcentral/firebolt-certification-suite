@@ -102,7 +102,9 @@ attachScreenshotLinks = () => {
     if (urlPattern.test(preHTML)) {
       // Replace plain text URLs with clickable hyperlinks
       const updatedHTML = preHTML.replace(urlPattern, (url) => {
-        return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
+        let cleanedUrl = url;
+        cleanedUrl = cleanedUrl.split(']')[0];
+        return '<a href="' + cleanedUrl + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';;
       });
       pre.innerHTML = updatedHTML;
     }
