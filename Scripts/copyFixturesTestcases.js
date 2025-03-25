@@ -42,7 +42,7 @@ const configFixturesDir = path.join(
   'fixtures'
 );
 
-const commonResourcesDir = path.join(__dirname, '..', 'commonResources');
+const ResourcesDir = path.join(__dirname, '..', 'Resources');
 
 // Clear existing directories
 deleteDirectory(fcsTestCasesDir);
@@ -74,15 +74,15 @@ if (fs.existsSync(configFixturesDir)) {
   );
 }
 
-// Process commonResources
-if (fs.existsSync(commonResourcesDir)) {
-  processCommonResources(commonResourcesDir);
+// Process Resources
+if (fs.existsSync(ResourcesDir)) {
+  processResources(ResourcesDir);
 } else {
-  console.log(`No commonResources directory found.`);
+  console.log(`No Resources directory found.`);
 }
 
-// Function to process commonResources directory
-function processCommonResources(sourceDir, externalMode = false) {
+// Function to process Resources directory
+function processResources(sourceDir, externalMode = false) {
   const entries = fs.readdirSync(sourceDir, { withFileTypes: true });
 
   for (const entry of entries) {
@@ -90,12 +90,12 @@ function processCommonResources(sourceDir, externalMode = false) {
 
     if (entry.isDirectory()) {
       // Handle subdirectories
-      if (entry.name === 'commonFixtures' || entry.name === 'fixtures') {
+      if (entry.name === 'fixtures') {
         const targetDir = externalMode ? path.join(fcsFixturesDir, 'external') : fcsFixturesDir;
         fs.mkdirSync(targetDir, { recursive: true });
         copyFiles(entryPath, targetDir);
         console.log(`Processed directory contents of: ${entryPath} to ${targetDir}`);
-      } else if (entry.name === 'commonTestCases' || entry.name === 'TestCases') {
+      } else if (entry.name === 'TestCases') {
         const targetDir = externalMode
           ? path.join(fcsTestCasesDir, 'Distributor')
           : fcsTestCasesDir;
@@ -103,19 +103,19 @@ function processCommonResources(sourceDir, externalMode = false) {
         copyFiles(entryPath, targetDir);
         console.log(`Processed directory contents of: ${entryPath} to ${targetDir}`);
       } else if (entry.name === 'external') {
-        processCommonResources(entryPath, true); // Process externalMode
+        processResources(entryPath, true); // Process externalMode
       } else {
-        processCommonResources(entryPath, externalMode); // Process other subdirectories
+        processResources(entryPath, externalMode); // Process other subdirectories
       }
     } else if (entry.isFile()) {
       // Copy files directly
-      if (entryPath.includes('fixtures') || entryPath.includes('commonFixtures')) {
+      if (entryPath.includes('fixtures')) {
         const targetDir = externalMode ? path.join(fcsFixturesDir, 'external') : fcsFixturesDir;
         fs.mkdirSync(targetDir, { recursive: true });
         const targetPath = path.join(targetDir, entry.name);
         fs.copyFileSync(entryPath, targetPath);
         console.log(`Copied fixture file: ${entryPath} to ${targetPath}`);
-      } else if (entryPath.includes('TestCases') || entryPath.includes('commonTestCases')) {
+      } else if (entryPath.includes('TestCases')) {
         const targetDir = externalMode
           ? path.join(fcsTestCasesDir, 'Distributor')
           : fcsTestCasesDir;
@@ -141,6 +141,9 @@ function copyFiles(configDir, externalDir) {
     if (entry.name === 'README.md' && fs.existsSync(destPath)) {
       console.log(`Skipping copying README.md as it already exists in ${externalDir}`);
       continue;
+    }
+    if (fs.existsSync(destPath)) {
+      console.error(`File override warning: ${destPath} will be overwritten by ${srcPath}`);
     }
     entry.isDirectory() ? copyFiles(srcPath, destPath) : fs.copyFileSync(srcPath, destPath);
   }

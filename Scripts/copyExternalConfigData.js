@@ -24,8 +24,8 @@ logger.info('Copying Config fixtures and Testcases into sdkResources/external');
 // Config for sdk resources folder
 const EXTERNAL_DIR = path.join(__dirname, '..', 'sdkResources', 'external');
 const CONFIG_DIR = path.join(__dirname, '..', 'node_modules', 'configModule', 'sdkResources');
-const DEFAULT_DIR = path.join(__dirname, '..', 'node_modules', 'configModule', 'commonResources');
-const EXTERNAL_DEFAULT_DIR = path.join(__dirname, '..', 'commonResources', 'external');
+const DEFAULT_DIR = path.join(__dirname, '..', 'node_modules', 'configModule', 'Resources');
+const EXTERNAL_DEFAULT_DIR = path.join(__dirname, '..', 'Resources', 'external');
 
 // Config for config.json
 const SOURCE_CONFIG_FILE = path.join(
