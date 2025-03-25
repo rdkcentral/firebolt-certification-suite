@@ -246,6 +246,7 @@ Cypress.Commands.add('getSdkVersion', () => {
 Cypress.Commands.add('updateRunInfo', () => {
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
+  let deviceId = '';
   let deviceModel = '';
   let deviceDistributor = '';
   let devicePlatform = '';
@@ -276,6 +277,7 @@ Cypress.Commands.add('updateRunInfo', () => {
               Cypress.env(CONSTANTS.ENV_RELEASE, release);
             }
           } else {
+      
             // Set environment variable with the response
             Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
           }
@@ -307,6 +309,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                 if (exists) {
                   // File exists, read the file
                   return cy.readFile(deviceMacJson).then((macJson) => {
+                    deviceId= macJson?.DEVICEID ?? '';
                     deviceModel = macJson?.DEVICE_MODEL ?? '';
                     deviceDistributor = macJson?.DEVICE_DISTRIBUTOR ?? '';
                     devicePlatform = macJson?.DEVICE_PLATFORM ?? '';
@@ -330,6 +333,16 @@ Cypress.Commands.add('updateRunInfo', () => {
                   CONSTANTS.DEVICE_DISTRIBUTOR,
                   CONSTANTS.ACTION_CORE,
                   CONSTANTS.ENV_DEVICE_DISTRIBUTOR
+                );
+              })
+              .then(() => delay(2000))
+              .then(() => {
+                console.log('*****DeviceId',JSON.stringify(deviceId));
+                return setEnvRunInfo(
+                  deviceId,
+                  CONSTANTS.DEVICE_ID,
+                  CONSTANTS.ACTION_CORE,
+                  CONSTANTS.ENV_DEVICE_ID
                 );
               })
               .then(() => delay(2000))
@@ -369,6 +382,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
                         [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                         [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                        [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
                       };
                       reportEnv.customData.data.forEach((item) => {
                         if (item.label === CONSTANTS.PRODUCT) {
