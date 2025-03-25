@@ -1,6 +1,9 @@
 # Resources
 The `Resources` folder in the Firebolt Certification Suite (FCS) contains all test cases and fixtures that are independent of any specific SDK version.
 
+## Flowchart of folder structure and resource copying process
+![alt text](Resources_flowChart.png)
+
 ## Directory Structure
 - **Initial Structure (after cloning):** When you first clone the repository, the `Resources` directory will contain subfolders for TestCases and Fixtures.
   ```bash 
