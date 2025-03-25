@@ -277,7 +277,6 @@ Cypress.Commands.add('updateRunInfo', () => {
               Cypress.env(CONSTANTS.ENV_RELEASE, release);
             }
           } else {
-      
             // Set environment variable with the response
             Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
           }
@@ -309,7 +308,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                 if (exists) {
                   // File exists, read the file
                   return cy.readFile(deviceMacJson).then((macJson) => {
-                    deviceId= macJson?.DEVICEID ?? '';
+                    deviceId = macJson?.DEVICEID ?? '';
                     deviceModel = macJson?.DEVICE_MODEL ?? '';
                     deviceDistributor = macJson?.DEVICE_DISTRIBUTOR ?? '';
                     devicePlatform = macJson?.DEVICE_PLATFORM ?? '';
@@ -337,7 +336,6 @@ Cypress.Commands.add('updateRunInfo', () => {
               })
               .then(() => delay(2000))
               .then(() => {
-                console.log('*****DeviceId',JSON.stringify(deviceId));
                 return setEnvRunInfo(
                   deviceId,
                   CONSTANTS.DEVICE_ID,
