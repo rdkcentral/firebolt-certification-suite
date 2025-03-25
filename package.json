@@ -1,8 +1,11 @@
 {
   "name": "firebolt-certification-suite",
-  "version": "1.7.0-dev.5",
+  "version": "1.10.0-dev.1",
   "description": "Firebolt Certification Test Suite",
   "main": "index.js",
+  "config": {
+    "supportedSDKVersion": "1.5.0"
+  },
   "scripts": {
     "cy:open": "npm run checkDefaultConfig && yarn cache clean && node ./Scripts/run.js open",
     "cy:run": "npm run checkDefaultConfig && yarn cache clean && node ./Scripts/run.js run",
@@ -30,7 +33,7 @@
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@firebolt-js/manage-sdk": "1.0.0",
     "@firebolt-js/sdk": "1.0.0",
-    "axios": "^1.3.4",
+    "axios": "^1.7.9",
     "configModule": "./defaultModule",
     "cucumber-json-report-formatter": "^0.1.4",
     "cross-spawn": "^7.0.3",

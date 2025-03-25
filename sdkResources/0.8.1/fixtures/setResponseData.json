@@ -1,0 +1,22 @@
+{
+  "SET_KEYBOARD_RESPONSE_IN_PLATFORM": {
+    "fireboltMock": "KEYBOARD_EMAIL_WITHOUT_UI",
+    "firstParty": true
+  },
+  "SET_ACKNOWLEDGE_GRANTED": {
+    "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+    "firstParty": true
+  },
+  "SET_PINCHALLENGE_WRONG_PIN": {
+    "fireboltMock": "PINCHALLENGE_WRONG_PIN_WITH_UI",
+    "firstParty": true
+  },
+  "SET_PINCHALLENGE_CORRECT_PIN": {
+    "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+    "firstParty": true
+  },
+  "GRANTING_ACKNOWLEDGE_CHALLENGE": {
+    "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+    "firstParty": true
+  }
+}

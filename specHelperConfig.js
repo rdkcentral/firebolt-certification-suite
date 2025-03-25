@@ -28,14 +28,14 @@ const logger = require('./cypress/support/Logger')('specHelperConfig.js');
 function getSpecPattern(testSuite) {
   const patterns = {
     module: [
-      '**/FireboltCertification/*.feature',
-      '**/FireboltCertification/*/*.feature',
-      '**/Distributor/*.feature',
-      '**/Distributor/*/*.feature',
+      'cypress/TestCases/FireboltCertification/*.feature',
+      'cypress/TestCases/Distributor/*.feature',
+      'cypress/TestCases/*.feature',
+      'cypress/TestCases/**/*/*.feature',
     ],
-    certification: '**/Sanity/*.feature',
-    sample: '**/Sample/*.feature',
-    all: '**/*.feature',
+    certification: 'cypress/TestCases/Sanity/*.feature',
+    sample: 'cypress/TestCases/Sample/*.feature',
+    all: 'cypress/TestCases/**/*.feature',
   };
   // Convert testSuite to lowercase and trim whitespace
   const trimmedTestSuite = testSuite ? testSuite.trim().toLowerCase() : null;
