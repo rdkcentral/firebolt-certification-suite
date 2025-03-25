@@ -1,3 +1,10 @@
+# [1.10.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.1...v1.10.0-dev.2) (2025-03-25)
+
+
+### Bug Fixes
+
+* print the Validationlog in the report ([#372](https://github.com/rdkcentral/firebolt-certification-suite/issues/372)) ([bc8abff](https://github.com/rdkcentral/firebolt-certification-suite/commit/bc8abff8d31002bb955c5ab97a46822293c7e3bb))
+
 # [1.10.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0...v1.10.0-dev.1) (2025-03-24)
 
 
