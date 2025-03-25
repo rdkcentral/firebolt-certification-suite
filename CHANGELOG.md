@@ -1,3 +1,10 @@
+# [1.10.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.2...v1.10.0-dev.3) (2025-03-25)
+
+
+### Bug Fixes
+
+* To support external sdk ([#375](https://github.com/rdkcentral/firebolt-certification-suite/issues/375)) ([fae00d3](https://github.com/rdkcentral/firebolt-certification-suite/commit/fae00d3558d8e558a6908972243c28ab47d5ad64))
+
 # [1.10.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.1...v1.10.0-dev.2) (2025-03-25)
 
 
