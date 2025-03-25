@@ -104,7 +104,9 @@ attachScreenshotLinks = () => {
       const updatedHTML = preHTML.replace(urlPattern, (url) => {
         let cleanedUrl = url;
         cleanedUrl = cleanedUrl.split(']')[0];
-        return '<a href="' + cleanedUrl + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';;
+        return (
+          '<a href="' + cleanedUrl + '" target="_blank" rel="noopener noreferrer">' + url + '</a>'
+        );
       });
       pre.innerHTML = updatedHTML;
     }
