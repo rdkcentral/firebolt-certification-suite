@@ -72,8 +72,9 @@ Cypress.Commands.add(
   'fireboltDataParser',
   (key, sdk = UTILS.getEnvVariable(CONSTANTS.SUPPORTED_SDK)[0]) => {
     const results = [];
+    const supportedSDK = UTILS.getEnvVariable(CONSTANTS.SUPPORTED_SDK);
     Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, false);
-    if (UTILS.getEnvVariable(CONSTANTS.SUPPORTED_SDK).includes(sdk)) {
+    if (Array.isArray(supportedSDK) && supportedSDK.includes(sdk)) {
       key = key.replaceAll(' ', '_').toUpperCase();
 
       // Fetching the firebolt Data based on key value.
