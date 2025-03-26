@@ -96,6 +96,7 @@ const env = {
   elk: false,
   objective: '',
   supportsPlatformCommunication: false,
+  customValidationTimeout: 60000,
 };
 
 module.exports = {
