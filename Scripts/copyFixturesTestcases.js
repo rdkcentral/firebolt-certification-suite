@@ -142,8 +142,11 @@ function copyFiles(configDir, externalDir) {
       console.log(`Skipping copying README.md as it already exists in ${externalDir}`);
       continue;
     }
-    if (fs.existsSync(destPath)) {
-      console.error(`File override warning: ${destPath} will be overwritten by ${srcPath}`);
+    if (fs.existsSync(destPath) && fs.statSync(destPath).isFile()) {
+      console.log(
+        '\x1b[41m%s\x1b[0m',
+        `File override warning: ${destPath} will be overwritten by ${srcPath}`
+      );
     }
     entry.isDirectory() ? copyFiles(srcPath, destPath) : fs.copyFileSync(srcPath, destPath);
   }
