@@ -1,3 +1,10 @@
+# [1.10.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.3...v1.10.0-dev.4) (2025-03-26)
+
+
+### Bug Fixes
+
+* Adding unsub operation to transport layer for improved reliability ([#369](https://github.com/rdkcentral/firebolt-certification-suite/issues/369)) ([ef42434](https://github.com/rdkcentral/firebolt-certification-suite/commit/ef42434f15a9848fb225e2fa8c95bf394dc4242c))
+
 # [1.10.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.2...v1.10.0-dev.3) (2025-03-25)
 
 
