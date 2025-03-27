@@ -178,6 +178,12 @@ Cypress.Commands.add('getSdkVersion', () => {
           CONSTANTS.ACTION_CORE.toLowerCase()
         ).then((response) => {
           cy.log(`Response from app: ${appId} - ${JSON.stringify(response)}`);
+
+          // 2834 - platformRelease
+          if (response?.result?.debug) {
+            cy.log(`Platform Release :  ${response.result.debug}`);
+            Cypress.env('platformRelease', response.result.debug);
+          }
           // If the response is invalid, assign the latest SDK version to the environment variable.
           if (response?.result?.api?.readable && response?.result.sdk?.readable) {
             // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
@@ -238,6 +244,8 @@ Cypress.Commands.add('updateRunInfo', () => {
   let deviceModel = '';
   let deviceDistributor = '';
   let devicePlatform = '';
+
+  console.log('entered updateRunInfo >>> ');
   // function to set env variable for run info data
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
     if (deviceData === '') {
@@ -252,8 +260,12 @@ Cypress.Commands.add('updateRunInfo', () => {
     }
   };
   cy.task('checkFileExists', reportEnvFile).then((exists) => {
+    console.log('entered updateRunInfo line 264 >>> ');
+
     if (exists) {
       cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
+        console.log('entered updateRunInfo line 268 >>> ', tempFileExists);
+
         if (!tempFileExists) {
           try {
             let configModuleConst;
@@ -321,6 +333,9 @@ Cypress.Commands.add('updateRunInfo', () => {
                     [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                     [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
                   };
+
+                  console.log('inside updateRunInfo labelToEnvMap >>> ', labelToEnvMap);
+                  console.log('inside updateRunInfo reportEnv >>> ', reportEnv);
 
                   reportEnv.customData.data.forEach((item) => {
                     if (item.label === CONSTANTS.PRODUCT) {
@@ -1803,8 +1818,8 @@ Cypress.Commands.add('softAssert', (actual, expected, message) => {
         message: `Soft assertion failed : ${message}`,
       });
     });
-  } else{
-      cy.log(`Soft assertion passed : ${message}`);
+  } else {
+    cy.log(`Soft assertion passed : ${message}`);
   }
 });
 
