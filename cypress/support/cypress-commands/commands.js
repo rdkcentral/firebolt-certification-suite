@@ -2000,6 +2000,6 @@ Cypress.Commands.add('sendVoiceCommand', (voiceCommand) => {
     params: voiceCommand,
   };
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    fireLog.info(`Response from 1st party app: ${JSON.stringify(response)}`);
+    return response;
   });
 });
