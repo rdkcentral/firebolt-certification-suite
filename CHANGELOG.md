@@ -1,3 +1,10 @@
+# [1.10.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.4...v1.10.0-dev.5) (2025-03-27)
+
+
+### Features
+
+* Add Additional Information to Mochawesome report header ([#368](https://github.com/rdkcentral/firebolt-certification-suite/issues/368)) ([0156b60](https://github.com/rdkcentral/firebolt-certification-suite/commit/0156b60e4c06bccf4cd7fe4bc4e1c458460eb96e))
+
 # [1.10.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.3...v1.10.0-dev.4) (2025-03-26)
 
 
