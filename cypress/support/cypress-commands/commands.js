@@ -1920,8 +1920,6 @@ Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
  * cy.clearSoftAssertArray()
  */
 Cypress.Commands.add('clearSoftAssertArray', () => {
-  cy.log(`Clearing soft assertion array`);
-
   // Reset relevant properties
   jsonAssertion.softAssertJson = null;
   jsonAssertion.softAssertCount = 0;
