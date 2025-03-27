@@ -1683,18 +1683,6 @@ Cypress.Commands.add('envConfigSetup', () => {
 
 /**
  * @module commands
- * @function startAdditionalServices
- * @description Gives additional functionality to add necessary services from the config module.
- * @example
- * cy.startAdditionalServices()
- * @Note Add or overwrite startAdditionalServices cypress command in the config module to add additional services.
- */
-Cypress.Commands.add('startAdditionalServices', (request, pubSubClient) => {
-  fireLog.info('No additional service to start');
-});
-
-/**
- * @module commands
  * @function exitAppSession
  * @description Function to provide the test runner with various methods to end the current app session
  * @param {String} exitType - Type of close operation to be performed.

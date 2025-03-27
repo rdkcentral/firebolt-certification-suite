@@ -57,7 +57,8 @@ export default function (module) {
       } else {
         cy.log('Unable to establish a pub/sub connection.');
       }
-      cy.startAdditionalServices(null, appTransport);
+      Cypress.env('pubSubClient', appTransport);
+      cy.startAdditionalServices();
     });
 
     // Create an instance of global queue
@@ -435,6 +436,27 @@ export default function (module) {
     }
     // Add-ons not there, returning intent without changes
     return message;
+  });
+
+  /**
+   * @module main
+   * @function runIntentAddon
+   * @description  If there was an add-on function in our config module it will be invoked and added additional fields else it will return the passed intent back.
+   * @param {string} input - Add-on function name present in config module.
+   * @example
+   * startAdditionalServices({})
+   */
+  Cypress.Commands.add('startAdditionalServices', (input) => {
+    const serviceName = Cypress.env('startAdditionalServices')
+      ? Cypress.env('startAdditionalServices')
+      : 'startAdditionalServices';
+    if (
+      module &&
+      module.additionalServices &&
+      typeof module.additionalServices[serviceName] === 'function'
+    ) {
+      module.additionalServices[serviceName](input);
+    }
   });
 
   /**
