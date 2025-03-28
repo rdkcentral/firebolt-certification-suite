@@ -291,6 +291,7 @@ Cypress.Commands.add('updateRunInfo', () => {
     if (exists) {
       cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
         if (!tempFileExists) {
+          console.log('No temp  file exist');
           try {
             let configModuleConst;
             try {
@@ -308,6 +309,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                 if (exists) {
                   // File exists, read the file
                   return cy.readFile(deviceMacJson).then((macJson) => {
+                    console.log('Reading macJson', JSON.stringify(macJson));
                     deviceId = macJson?.DEVICEID ?? '';
                     deviceModel = macJson?.DEVICE_MODEL ?? '';
                     deviceDistributor = macJson?.DEVICE_DISTRIBUTOR ?? '';
