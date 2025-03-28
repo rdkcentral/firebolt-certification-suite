@@ -1,3 +1,10 @@
+# [1.10.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.5...v1.10.0-dev.6) (2025-03-28)
+
+
+### Bug Fixes
+
+* app assurance error handling changes ([#367](https://github.com/rdkcentral/firebolt-certification-suite/issues/367)) ([24bbfd2](https://github.com/rdkcentral/firebolt-certification-suite/commit/24bbfd26929e0ac9ecbc3074cbc641813e3864d8))
+
 # [1.10.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.4...v1.10.0-dev.5) (2025-03-27)
 
 
