@@ -124,7 +124,7 @@ Given(/I send '([^']+)' voice command/, (command) => {
         `Platform has successfully sent and processed the voice command: '${command}'`
       );
     } else {
-      fireLog.assert(false, `Platform failed to send or process the voice command: '${command}'`);
+      fireLog.assert(false, `Failed to send or process the voice command: '${command}'`);
     }
   });
 });
