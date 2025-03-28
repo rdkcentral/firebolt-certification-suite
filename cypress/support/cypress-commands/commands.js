@@ -1834,23 +1834,45 @@ Cypress.Commands.add('fetchAppMetaData', () => {
         appAssuranceId: Cypress.env(CONSTANTS.APP_ASSURANCE_ID),
       },
     };
+    // Send the request to fetch app data from platforms
     cy.sendMessagetoPlatforms(requestParams).then((result) => {
-      return result.data;
+      if (result && result.data) {
+        return result.data;
+      } else {
+        throw new Error('Unable to get valid response for fetching app metadata');
+      }
     });
   } else {
-    // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
+    // If app assurance id is not available, extract app metadata from local directories
+
     const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
     const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
 
     const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
     const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
+    // Extract internal app metadata
     cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
       (fcsAppMetaData) => {
+        // Check if internal app metadata extraction was successful
+        if (!fcsAppMetaData) {
+          throw new Error('Failed to extract internal app metadata.');
+        }
+
+        // Extract external app metadata
         cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
           (configModuleAppMetaData) => {
-            // Combine the app metadata from the fcs and configModule appData directories.
-            _.merge(fcsAppMetaData, configModuleAppMetaData);
+            // Check if external app metadata extraction was successful
+            if (!configModuleAppMetaData) {
+              throw new Error('Failed to extract external app metadata.');
+            }
+
+            // Merge internal and external app metadata
+            try {
+              _.merge(fcsAppMetaData, configModuleAppMetaData);
+            } catch (mergeError) {
+              throw new Error(`Error merging app metadata: ${mergeError.message}`);
+            }
           }
         );
       }

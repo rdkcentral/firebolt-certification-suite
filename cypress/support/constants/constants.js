@@ -543,6 +543,14 @@ module.exports = {
   HOT_LAUNCH: 'HOT_LAUNCH',
   COLD_LAUNCH: 'COLD_LAUNCH',
   APP_ASSURANCE_ID: 'appAssuranceId',
+  DISMISSED: 'dismissed',
+  CLOSED: 'closed',
+  UNLOADED: 'unloaded',
+  ACTIONTYPE: {
+    DISMISS_APP: 'dismissApp',
+    CLOSE_APP: 'closeApp',
+    UNLOAD_APP: 'unloadApp',
+  },
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
 };
 function getSanityReportPath() {
