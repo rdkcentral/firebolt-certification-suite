@@ -1,0 +1,71 @@
+{
+    "LAUNCH_APP_WITH_APPID_APPLE_INC_APPLE_TV": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_APPLE_TV_PLUS"
+    },
+    "LAUNCH_APP_WITH_APPID_CHARTER_SPECTRUM_TV": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_SPECTRUM_TV"
+    },
+    "LAUNCH_APP_WITH_APPID_DISNEYPLUS": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_DISNEYPLUS"
+    },
+    "LAUNCH_APP_WITH_APPID_SPOTIFY": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_SPOTIFY"
+    },
+    "LAUNCH_APP_WITH_APPID_TUBI": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_TUBI"
+    },
+    "LAUNCH_APP_WITH_APPID_PLUTO":{
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_PLUTO"
+    },
+    "LAUNCH_APP_WITH_APPID_SLING": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_SLING"
+    },
+    "LAUNCH_APP_WITH_APPID_ESPNPLUS": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_ESPNPLUS"
+    },
+    "LAUNCH_APP_WITH_APPID_HULU": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_HULU"
+    },
+    "LAUNCH_APP_WITH_APPID_PARAMOUNTPLUS": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_PARAMOUNTPLUS"
+    },
+    "LAUNCH_APP_WITH_APPID_COMCAST_STREAMAPP": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_COMCAST_STREAMAPP"
+    },
+    "LAUNCH_APP_WITH_APPID_XUMO": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_XUMO"
+    },
+    "LAUNCH_APP_WITH_APPID_HBO_HBOMAX": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_HBOMAX"
+    },
+    "LAUNCH_APP_WITH_APPID_PEACOCK": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_PEACOCK"
+    },
+    "LAUNCH_APP_WITH_APPID_AMAZONPRIME": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_AMAZONPRIME"
+    },
+    "LAUNCH_APP_WITH_APPID_DISCOVERYPLUS": {
+        "method": "discovery.launch",
+        "params": "DISCOVERY_LAUNCH_DISCOVERYPLUS"
+    },
+    "TRUE_FOR_LAUNCH_APP_WITH_APPID": {
+        "method": "discovery.launch",
+		"validationJsonPath": "result",
+		"content": "TRUE"
+    }
+}

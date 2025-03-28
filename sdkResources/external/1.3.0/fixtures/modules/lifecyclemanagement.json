@@ -1,0 +1,91 @@
+{
+    "ACTIVE_SESSION_PARAMS": {
+        "session": {
+            "app": {
+                "id": "comcast.test.firecert",
+                "url": "https://some-app.firebolt.rdkcentral.com"
+            },
+            "runtime": {
+                "id": "WebBrowser-1"
+            },
+            "launch": {
+                "inactive": false,
+                "intent": {
+                    "action": "search",
+                    "data": {
+                        "query": "Dog videos"
+                    },
+                    "context": {
+                        "source": "voice"
+                    }
+                }
+            }
+        }
+    },
+    "INACTIVE_SESSION_PARAMS": {
+        "session": {
+            "app": {
+                "id": "comcast.test.firecert",
+                "url": "https://some-app.firebolt.rdkcentral.com"
+            },
+            "runtime": {
+                "id": "WebBrowser-1"
+            },
+            "launch": {
+                "inactive": true,
+                "intent": {
+                    "action": "search",
+                    "data": {
+                        "query": "Dog videos"
+                    },
+                    "context": {
+                        "source": "voice"
+                    }
+                }
+            }
+        }
+    },
+    "SESSION_WITH_NO_INTENT_PARAMS": {
+        "session": {
+            "app": {
+                "id": "someApp",
+                "url": "https://some-app.firebolt.rdkcentral.com"
+            },
+            "runtime": {
+                "id": "WebBrowser-1"
+            },
+            "launch": {}
+        }
+    },
+    "ACTIVE_SESSION_TESTAPPID_PARAMS": {
+        "session": {
+            "app": {
+                "id": "testAppId",
+                "url": "https://some-app.firebolt.rdkcentral.com"
+            },
+            "runtime": {
+                "id": "WebBrowser-1"
+            },
+            "launch": {
+                "inactive": false,
+                "intent": {
+                    "action": "search",
+                    "data": {
+                        "query": "Dog videos"
+                    },
+                    "context": {
+                        "source": "voice"
+                    }
+                }
+            }
+        }
+    },
+    "TESTAPPID_SETSTATE_INACTIVE_PARAMS": {
+        "appId": "testAppId",
+        "state": "inactive"
+    },
+    "TESTAPPID_SETSTATE_FOREGROUND_PARAMS": {
+        "appId": "testAppId",
+        "state": "foreground"
+    }
+}

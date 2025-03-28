@@ -1,0 +1,194 @@
+{
+    "3RD_PARTY_APP": "comcast.test.firecert",
+    "GRANT_WITH_APP_ID_DEVICE_ID_ROLE_USE": {"role": "use", "capability": "xrn:firebolt:capability:device:id", "options": {"appId": "comcast.test.firecert"}},
+    "DENY_WITH_APP_ID_DEVICE_ID_ROLE_USE": {"role": "use", "capability": "xrn:firebolt:capability:device:id", "options": {"appId": "comcast.test.firecert"}},
+    "CLEAR_WITH_APP_ID_DEVICE_ID_ROLE_USE": {"role": "use", "capability": "xrn:firebolt:capability:device:id", "options": {"appId": "comcast.test.firecert"}},
+    "REQUEST_DISCOVERY_WATCHED_ROLE_USE": {"appId": "comcast.test.firecert", "permissions":[{"role": "use", "capability": "xrn:firebolt:capability:discovery:watched"}]},
+    "REQUEST_DISCOVERY_WATCHED_ROLE_USE_FORCE_TRUE": {"appId": "comcast.test.firecert", "permissions":[{"role": "use", "capability": "xrn:firebolt:capability:discovery:watched"}], "options": {"force": true}},
+    "APP_COUNTRY_CODE":{"appId": "comcast.test.firecert"},
+    "REQUEST_INVALID_ROLE": {"appId": "comcast.test.firecert", "permissions": [{"role": "test", "capability": "xrn:firebolt:capability:localization:country-code"}]},
+    "REQUEST_INTEGER_CAPABILITY": {"appId": "comcast.test.firecert", "permissions": [{"role": "use", "capability": 1234}]},
+    "REQUEST_LOCALIZATION_COUNTRYCODE_ROLE_USE": {"appId": "comcast.test.firecert", "permissions":[{"role": "use", "capability": "xrn:firebolt:capability:localization:country-code"}]},
+    "REQUEST_LOCALIZATION_COUNTRYCODE_ROLE_USE_FORCE_TRUE": {"appId": "comcast.test.firecert", "permissions":[{"role": "use", "capability": "xrn:firebolt:capability:localization:country-code"}], "options": {"force": true}},
+    "REQUEST_LOCALIZATION_COUNTRYCODE_ROLE_USE_FORCE_FALSE": {"appId": "comcast.test.firecert", "permissions":[{"role": "use", "capability": "xrn:firebolt:capability:localization:country-code"}], "options": {"force": false}},
+    "CLEAR_WITH_APP_LEVEL_DISCOVERY_WATCHED_ROLE_USE_METHOD": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:discovery:watched",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "REQUEST_ACCOUNT_UID_ROLE_USE": {"appId": "comcast.test.firecert", "permissions":[{"role": "use", "capability": "xrn:firebolt:capability:account:uid"}]},
+    "REQUEST_ACCOUNT_UID_ROLE_MANAGE": {"appId": "comcast.test.firecert", "permissions":[{"role": "manage", "capability": "xrn:firebolt:capability:account:uid"}]},
+    "REQUEST_SECURESTORAGE_SET_ROLE_USE": {"appId": "comcast.test.firecert", "permissions":[{"role": "use", "capability": "xrn:firebolt:capability:storage:secure"}]},
+    "REQUEST_DEVICE_INFO": {"appId": "comcast.test.firecert", "permissions":[{"role": "use", "capability": "xrn:firebolt:capability:device:info"}]},
+    "REQUEST_ACCOUNT_UID_ROLE_PROVIDE": {"appId": "comcast.test.firecert", "permissions":[{"role": "provide", "capability": "xrn:firebolt:capability:account:uid"}]},
+    "CLEAR_APP_LEVEL_DATA_APP_USAGE_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:data:app-usage",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_APP_DEVICE_NAME_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:device:name",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:device:id",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_APP_LEVEL_DEVICE_MODEL_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:device:model",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_APP_LOCALIZATION_LANGUAGE_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:localization:language",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_APP_LOCALIZATION_LATLON_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:localization:latlon",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+   "CLEAR_WITH_APP_ID_CLOSEDCAPTIONS": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:accessibility:closedcaptions",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_WITH_APP_ID_AUTHENTICATION_DEVICE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:token:device",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_WITH_APP_ID_SECONDSCREEN_DEVICE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:protocol:dial",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_WITH_APP_ID_PROTOCOL_DIAL": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:protocol:dial",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_APP_DATA_APP_USAGE_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:data:app-usage",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_WITH_APP_ID_VOICEGUIDANCE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:accessibility:voiceguidance",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_APP_DEVICE_MAKE_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:device:make",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_APP_POSTALCODE_ROLE_MANAGE": {
+        "role": "manage",
+        "capability": "xrn:firebolt:capability:localization:postal-code",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_APP_POSTALCODE_ROLE_PROVIDE": {
+        "role": "provide",
+        "capability": "xrn:firebolt:capability:localization:postal-code",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_APP_POSTALCODE_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:localization:postal-code",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_APP_COUNTRY_CODE_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:localization:country-code",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:account:uid",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_MANAGE": {
+        "role": "manage",
+        "capability": "xrn:firebolt:capability:account:uid",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_PROVIDE": {
+        "role": "provide",
+        "capability": "xrn:firebolt:capability:account:uid",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_LIFESPAN_APPACTIVE_SECURESTORAGE_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:storage:secure",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_LIFESPAN_APPACTIVE_SECURESTORAGE_ROLE_MANAGE": {
+        "role": "manage",
+        "capability": "xrn:firebolt:capability:storage:secure",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_APP_LOCALIZATION_LOCALITY_ROLE_USE": {
+        "role": "use",
+        "capability": "xrn:firebolt:capability:localization:locality",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    },
+    "CLEAR_LOCALIZATION_LOCALE_ROLE_USE": {
+        "role": "provide",
+        "capability": "xrn:firebolt:capability:localization:locale",
+        "options": {
+            "appId": "comcast.test.firecert"
+        }
+    }
+}

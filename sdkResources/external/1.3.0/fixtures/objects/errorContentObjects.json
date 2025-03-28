@@ -1,0 +1,224 @@
+{
+    "INVALID_TYPE_PARAMS": {
+        "type": "errorValidationFunction",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -32602,
+                        -32400,
+                        -40300
+                    ]
+                }
+            }
+        ]
+    },
+    "NOT_SUPPORTED": {
+        "type": "errorValidationFunction",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -50100,
+                        -40300
+                    ]
+                }
+            }
+        ]
+    },
+    "INVALID_REQUEST": {
+        "type": "errorValidationFunction",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -32600,
+                        -40300
+                    ]
+                }
+            }
+        ]
+    },
+    "CUSTOM_ERROR": {
+        "type": "errorValidationFunction",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -32001,
+                        -32602,
+                        -40400
+                    ]
+                }
+            }
+        ]
+    },
+    "NOT_AVAILABLE": {
+        "type": "errorValidationFunction",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -50300
+                    ]
+                }
+            }
+        ]
+    },
+    "NOT_PERMITTED": {
+        "type": "errorValidationFunction",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -40300
+                    ]
+                }
+            }
+        ]
+    },
+    "NO_INTENT_ERROR": {
+        "type": "custom",
+        "assertionDef" : "commonErrorMessageValidation",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -40000
+                    ],
+                    "errorMessage": [
+                        "An intent must be provided for new app running sessions"
+                    ]
+                }
+            }
+        ]
+    },
+    "PLAYER_INVALID_URI": {
+        "type": "custom",
+        "assertionDef" : "commonErrorMessageValidation",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -60002
+                    ],
+                    "errorMessage": [
+                        "Invalid uri"
+                    ]
+                }
+            }
+        ]
+    },
+    "PLAYER_NOT_FOUND": {
+        "type": "custom",
+        "assertionDef" : "commonErrorMessageValidation",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -60001
+                    ],
+                    "errorMessage": [
+                        "Player not found"
+                    ]
+                }
+            }
+        ]
+    },
+    "PLAYER_POSITION_OUT_OF_RANGE": {
+        "type": "custom",
+        "assertionDef" : "commonErrorMessageValidation",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -60004
+                    ],
+                    "errorMessage": [
+                        "Position out of range"
+                    ]
+                }
+            }
+        ]
+    },
+    "PLAYER_POSITION_CANNOT_BE_SET": {
+        "type": "custom",
+        "assertionDef" : "commonErrorMessageValidation",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -60005
+                    ],
+                    "errorMessage": [
+                        "Position cannot be set"
+                    ]
+                }
+            }
+        ]
+    },
+    "PLAYER_SPEED_CANNOT_BE_SET": {
+        "type": "custom",
+        "assertionDef" : "commonErrorMessageValidation",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -60006
+                    ],
+                    "errorMessage": [
+                        "Speed cannot be set"
+                    ]
+                }
+            }
+        ]
+    },
+    "PLAYER_TRACKID_NOT_FOUND": {
+        "type": "custom",
+        "assertionDef" : "commonErrorMessageValidation",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -60007
+                    ],
+                    "errorMessage": [
+                        "TrackId not found"
+                    ]
+                }
+            }
+        ]
+    },
+    "PLAYER_GENERIC_ERROR": {
+        "type": "custom",
+        "assertionDef" : "commonErrorMessageValidation",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -60000
+                    ],
+                    "errorMessage": [
+                        "Integrated player unspecified error"
+                    ]
+                }
+            }
+        ]
+    },
+    "PLAYER_NO_MEDIA": {
+        "type": "custom",
+        "assertionDef" : "commonErrorMessageValidation",
+        "validations": [
+            {
+                "type": {
+                    "errorCode": [
+                        -60003
+                    ],
+                    "errorMessage": [
+                        "No media"
+                    ]
+                }
+            }
+        ]
+    }
+}

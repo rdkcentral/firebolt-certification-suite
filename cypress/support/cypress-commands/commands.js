@@ -269,8 +269,10 @@ Cypress.Commands.add('updateRunInfo', () => {
             cy.task('checkFileExists', deviceMacJson)
               .then((exists) => {
                 if (exists) {
+                  console.log('**Device Mac Json file exists');
                   // File exists, read the file
                   return cy.readFile(deviceMacJson).then((macJson) => {
+                    console.log('Reading deviceMacJson file', JSON.stringify(macJson));
                     deviceModel = macJson?.DEVICE_MODEL ?? '';
                     deviceDistributor = macJson?.DEVICE_DISTRIBUTOR ?? '';
                     devicePlatform = macJson?.DEVICE_PLATFORM ?? '';
@@ -311,6 +313,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                   reportEnv.customData.data &&
                   reportEnv.customData.data.length > 0
                 ) {
+                  console.log('**ReportEnv-CustomData file exists');
                   const labelToEnvMap = {
                     [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                     [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
@@ -330,6 +333,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                     }
                   });
                 }
+                console.log('Writting into tempReportEnv file', JSON.stringify(reportEnv));
                 // write the merged object
                 cy.writeFile(tempReportEnvFile, reportEnv);
               } else {
@@ -1803,8 +1807,8 @@ Cypress.Commands.add('softAssert', (actual, expected, message) => {
         message: `Soft assertion failed : ${message}`,
       });
     });
-  } else{
-      cy.log(`Soft assertion passed : ${message}`);
+  } else {
+    cy.log(`Soft assertion passed : ${message}`);
   }
 });
 

@@ -1,0 +1,170 @@
+{
+    "ACCESSIBILITY_FONTFAMILY_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontFamily",
+                        "description": "Validation of accessibility fontFamily undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTSIZE_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontSize",
+                        "description": "Validation of accessibility fontSize undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTCOLOR_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontColor",
+                        "description": "Validation of accessibility fontColor undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTEDGE_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontEdge",
+                        "description": "Validation of accessibility fontEdge undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTEDGECOLOR_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontEdgeColor",
+                        "description": "Validation of accessibility fontEdgeColor undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTOPACITY_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontOpacity",
+                        "description": "Validation of accessibility fontOpacity undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_BACKGROUNDCOLOR_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.backgroundColor",
+                        "description": "Validation of accessibility backgroundColor undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_BACKGROUNDOPACITY_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.backgroundOpacity",
+                        "description": "Validation of accessibility backgroundOpacity undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_TEXTALIGN_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.textAlign",
+                        "description": "Validation of accessibility textAlign undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_TEXTALIGNVERTICAL_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.textAlignVertical",
+                        "description": "Validation of accessibility textAlignVertical undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_WINDOWCOLOR_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.windowColor",
+                        "description": "Validation of accessibility windowColor undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_WINDOWOPACITY_UNDEFINED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.windowOpacity",
+                        "description": "Validation of accessibility windowOpacity undefined"
+                    }
+                ]
+            }
+        ]
+    }
+}

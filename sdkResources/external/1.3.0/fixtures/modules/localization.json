@@ -1,0 +1,12 @@
+{
+    "ADDITIONALINFO": {
+        "subBouquet" : "0"
+    },
+    "ADD_ADDITIONALINFO_RESPONSE_AS_STRING": {"subBouquet" : "0","defaultKey":"defaultValue="},
+    "ADD_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING": {"":"","defaultKey":"defaultValue=","subBouquet" : "0"},
+    "REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING": {"subBouquet": "0","":""},
+    "REMOVE_ADDITIONALINFO_EMPTY_RESPONSE": {"subBouquet": "0"},
+    "REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING_WITH_SUBBOUQUET": {"subBouquet": "0","":""},
+    "ADD_ADDITIONALINFO_RESPONSE_AS_INTEGER": {"subBouquet" : "0","defaultKey":123},
+    "ADD_ADDITIONALINFO_RESPONSE_AS_BOOLEAN": {"subBouquet" : "0","defaultKey":true}
+}

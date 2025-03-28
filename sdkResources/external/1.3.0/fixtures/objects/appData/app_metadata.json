@@ -1,0 +1,334 @@
+{
+    "defaultKeyPressSequence": {
+        "dismiss": {
+            "loggedIn": {
+                "dismiss": ["exit", "exit", "exit"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit", "exit", "exit"]
+            } 
+        },
+        "playbackDismiss": {
+            "loggedIn":{
+                "dismiss": ["exit"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit"]
+            }
+        }
+    },
+    "apple_inc_apple_tv": {
+        "movie": {
+            "entityId": "https://tv.apple.com/us/movie/argylle/umc.cmc.3qy6j44hfqtekx6fx3yzh9w8i"
+        },
+        "series": {
+            "entityId": "https://tv.apple.com/us/episode/pilot/umc.cmc.zb0yksqtym68hasbq8mj4jwp"
+        },
+        "defaultKeyPressSequence" : {
+            "loggedIn": {
+                "dismiss": ["exit", "exit", "right", "select"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit", "exit", "right", "select"]
+            }
+        }
+    },
+    "disneyPlus": {
+        "movie": {
+            "entityId": "movie_details|2SngByljXESE",
+            "keyPressSequence": {
+                "loggedIn": {
+                    "dismiss": ["exit", "right", "select"]
+                },
+                "loggedOut": {
+                    "dismiss": ["exit", "right", "select"]
+                }
+           }
+
+        },
+        "series": {
+            "entityId": "series_details|3jLIGMDYINqD",
+            "keyPressSequence": {
+                "loggedIn": {
+                    "dismiss": ["exit", "right", "select"]
+                },
+                "loggedOut": {
+                    "dismiss": ["exit", "right", "select"]
+                }
+           }
+        },
+        "defaultKeyPressSequence" : {
+            "loggedIn": {
+                "dismiss": ["exit", "select"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit", "select"]
+            }
+        }
+    },
+    "Tubi": {
+        "movie": {
+            "entityId": "522090"
+        },
+        "series": {
+            "entityId": "633112",
+            "validationText": "Bernie Mac Show",
+            "keyPressSequence": {
+                "loggedOut": {
+                    "dismiss": ["exit", "exit", "exit"]
+                }
+           }
+        },
+        "defaultKeyPressSequence": {
+            "loggedOut": {
+                "dismiss": ["exit", "exit", "exit"]
+            }
+        }
+    },
+    "pluto": {
+        "movie": {
+            "entityId": "gladiator-2000-1-1"
+        },
+        "series": {
+            "entityId": "hack-prine-1956-1-26",
+            "validationText": "Gunsmoke",
+            "keyPressSequence": {
+                "loggedOut": {
+                    "dismiss": ["exit", "exit", "exit"]
+                }
+           }
+        },
+        "defaultKeyPressSequence": {
+            "loggedOut": {
+                "dismiss": ["exit", "exit", "exit"]
+            }
+        }
+    },
+    "ESPNPlus": {
+        "series": {
+            "entityId": "Replay-9bf18347-2d49-4bc8-9207-496bad615648"
+        },
+        "defaultKeyPressSequence" : {
+            "loggedIn": {
+                "dismiss": ["exit", "exit", "select"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit", "exit", "select"]
+            }
+        }
+    },
+    "ParamountPlus": {
+        "movie": {
+            "entityId": "tQk_Qooh5wUlxQqzj_4LiBO2m4iMrcPD"
+        },
+        "series": {
+            "entityId": "p_F16OmokbFpnKJC64lcdoP9_MdR1I7D",
+            "validationText": "Star Trek: Picard",
+            "keyPressSequence": {
+                "loggedOut": {
+                    "dismiss": ["exit", "exit", "exit"]
+                }
+           }
+        },
+        "defaultKeyPressSequence": {
+            "loggedOut": {
+                "dismiss": ["exit", "exit", "right"]
+            }
+        }
+    },
+    "Hulu": {
+        "movie": {
+            "entityId": "2fdebccc-8092-4fe8-9d33-853b1c7732ba"
+        },
+        "series": {
+            "entityId": "a262550f-b93e-4f37-bd69-c10a63cbcbfe"
+        },
+        "defaultKeyPressSequence" : {
+            "loggedIn": {
+                "dismiss": ["exit", "right", "select"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit", "right", "select"]
+            }
+        }
+    },
+    "xumo": {
+        "movie": {
+            "entityId": "XM0IM9A6O71YU4"
+        },
+        "series": {
+            "entityId": "XM01JK6IMXWMZ1",
+            "validationText": "Anger Management",
+            "keyPressSequence": {
+                "loggedOut": {
+                    "dismiss": ["exit", "exit", "exit"]
+                }
+           }
+        },
+        "defaultKeyPressSequence": {
+            "loggedOut": {
+                "dismiss": ["exit", "exit", "exit", "down", "down", "down", "down", "down", "down", "enter", "down", "enter"]
+            }
+        }
+    },
+    "hbo_hbomax": {
+        "movie": {
+            "entityId": "c34d4c23-39eb-4eb8-95dd-209fa0cb3fb4"
+        },
+        "series": {
+            "entityId": "urn:hbo:episode:GXkRkPgoDro7CZgEAABqh",
+            "validationText": "Rick and Morty",
+            "keyPressSequence": {
+                "loggedOut": {
+                    "dismiss": ["exit", "exit", "exit"]
+                }
+           }
+        },
+        "defaultKeyPressSequence" : {
+            "loggedIn": {
+                "dismiss": ["exit", "enter"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit", "enter"]
+            }
+        }
+    },
+    "Peacock": {
+        "movie": {
+            "entityId": "GMO_00000000230836_02_HDSDR"
+        },
+        "series": {
+            "entityId": "GMO_00000000210322_02_HDSDR",
+            "validationText": "Twisted Metal",
+            "keyPressSequence": {
+                "loggedOut": {
+                    "dismiss": ["exit", "exit", "exit"]
+                }
+           }
+        },
+        "defaultKeyPressSequence" : {
+            "loggedIn": {
+                "dismiss": ["exit", "right", "enter"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit", "right", "enter"]
+            }
+        }
+    },
+    "amazonPrime": {
+        "movie": {
+            "assetId": "amzn1.dv.gti.20a64ffb-a216-40ac-9294-8cc16f209dfc",
+            "entityId": "amzn1.dv.gti.20a64ffb-a216-40ac-9294-8cc16f209dfc"
+        },
+        "series": {
+            "entityId": "amzn1.dv.gti.eedf35c9-fa32-4c9f-8516-bfa78ab759de",
+            "validationText": "The Lord of the Rings: The Rings of Power",
+            "keyPressSequence": {
+                "loggedIn":{
+                    "dismiss": ["exit", "exit", "exit"]
+                },
+                "loggedOut": {
+                    "dismiss": ["exit", "exit", "exit"]
+                }
+           }
+        },
+        "defaultKeyPressSequence": {
+            "loggedOut": {
+                "dismiss": ["exit", "exit", "exit", "exit"]
+            }
+        }
+    },
+    "Spotify": {
+        "music": {
+            "entityId": "spotify:user:spotify:playlist:37i9dQZF1DX6VDO8a6cQME",
+            "keyPressSequence": {
+                "loggedIn":{
+                    "dismiss": ["exit", "exit", "exit"]
+                },
+                "loggedOut": {
+                    "dismiss": ["exit", "exit", "exit"]
+                }
+           }
+        },
+        "song": {
+            "entityId": "spotify:user:spotify:playlist:37i9dQZF1DX6VDO8a6cQME",
+            "key": "XgHygJKq"
+        },
+        "defaultKeyPressSequence" : {
+            "loggedIn": {
+                "dismiss": ["exit", "right", "select"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit", "right", "select"]
+            }
+        }
+    },
+    "DiscoveryPlus": {
+        "series": {
+            "entityId": "5343659",
+            "validationText": "Taylor Swift vs Scooter Braun",
+            "keyPressSequence": {
+                "loggedOut": {
+                    "dismiss": ["exit", "exit", "exit"]
+                }
+           }
+        },
+        "defaultKeyPressSequence" : {
+            "loggedIn": {
+                "dismiss": ["exit", "up", "enter"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit", "up", "enter"]   
+            }
+        }
+    },
+    "YouTube": {
+        "video": {
+            "videoId": "7KvxOuC7Bhc"
+        },
+        "defaultKeyPressSequence" : {
+            "loggedIn": {
+                "dismiss": ["exit", "exit", "down", "select"]
+            },
+            "loggedOut": {
+                "dismiss": ["exit", "exit", "down", "select"]
+            }
+        }
+    },
+    "NetflixApp": {
+        "movie": {
+            "iid": "9bZkp7q10f0",
+            "keyPressSequence": {
+                "loggedOut": {
+                    "dismiss": ["exit", "exit", "exit"]
+                }
+           }
+        },
+        "defaultKeyPressSequence": {
+            "loggedOut": {
+                "dismiss": ["exit", "exit", "exit"]
+            }
+        }
+    },
+    "Sling":{
+        "defaultKeyPressSequence": {
+            "loggedOut": {
+                "dismiss": ["exit", "exit", "right", "select"]
+            }
+        }
+    },
+    "charter_spectrum_tv": {
+        "defaultKeyPressSequence": {
+            "loggedOut": {
+                "dismiss": ["exit", "right", "enter"]
+            }
+        }
+    },
+    "Comcast_StreamApp": {
+        "defaultKeyPressSequence": {
+            "loggedOut": {
+                "dismiss": ["exit"]
+            }
+        }
+    }
+}

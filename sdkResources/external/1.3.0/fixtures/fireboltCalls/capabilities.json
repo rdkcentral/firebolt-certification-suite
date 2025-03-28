@@ -1,0 +1,7 @@
+{
+    "EXPECTED_VALUE_FOR_KEYBOARD_CAPABILITY_AVAILABILITY":{
+        "method": "capabilities.available",
+		"validationJsonPath": "result",
+		"content": "FALSE"
+    }
+}

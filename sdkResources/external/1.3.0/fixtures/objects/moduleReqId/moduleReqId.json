@@ -1,0 +1,846 @@
+{
+  "scenarioNames": {
+    "SecureStorage_Manage": {
+      "SecureStorage.setForApp - Positive Scenario: setForApp with device scope with 2 apps": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      },
+      "SecureStorage.removeForApp - Positive Scenario: removeForApp with device scope with 2 apps": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      },
+      "SecureStorage.clearForApp - Positive Scenario: clearForApp with device scope": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      }
+    },
+    "Localization": {
+      "Localization.additionalInfo - Adding string as key and integer as value for localization additional info": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      },
+      "Localization.additionalInfo - Adding string as key and boolean as value for localization additional info": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      }
+    },
+    "IntegratedPlayer": {
+      "Positive Scenario : Create integratedPlayer, load, play and register for event": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "INTEGRATEDPLAYER_LOAD_PLAYERINSTANCE",
+            "firstParty": false
+          }
+        ]
+      },
+      "Positive Scenario : Create and validate player APIs": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "INTEGRATEDPLAYER_LOAD_PLAYERINSTANCE",
+            "firstParty": false
+          }
+        ]
+      },
+      "Positive Scenario : Get status of player instance with provideStatus and validate onStatus event": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "INTEGRATEDPLAYER_LOAD_PLAYERINSTANCE",
+            "firstParty": false
+          }
+        ]
+      },
+      "Positive Scenario : Validate player API 'load' for player instance": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "INTEGRATEDPLAYER_LOAD_PLAYERINSTANCE",
+            "firstParty": false
+          }
+        ]
+      },
+      "Positive Scenario : Validate player API 'load autoplay true' for player instance": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "INTEGRATEDPLAYER_LOAD_PLAYERINSTANCE",
+            "firstParty": false
+          }
+        ]
+      },
+      "Positive Scenario : Validate player API 'load autoplay false' for player instance": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "INTEGRATEDPLAYER_LOAD_PLAYERINSTANCE",
+            "firstParty": false
+          }
+        ]
+      },
+      "Positive Scenario : Validate player API 'load metadata' for player instance": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "INTEGRATEDPLAYER_LOAD_PLAYERINSTANCE",
+            "firstParty": false
+          }
+        ]
+      }
+    },
+    "SecureStorage": {
+      "SecureStorage.set - Positive Scenario: Validate Adding scope as device in 2 apps": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      },
+      "SecureStorage.remove - Positive Scenario: Validate Removing device scope in 2 apps": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      },
+      "SecureStorage.clear - Positive Scenario: Clears all the data values with device scope in 2 apps": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      }
+    },
+    "Discovery.launch_HotLaunch": {
+      "Discovery.Launch Hot Launch - Positive Scenario: Event validation where one app is in inactive and one is in foreground": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      },
+      "Discovery.Launch Hot Launch - Positive Scenario: Event validation where one app is in background and one is in foreground": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      }
+    },
+    "Device_Manage": {
+      "Device.provision - Positive Scenario: default params including device.id and account.id": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      },
+      "Device.provision - Positive Scenario: with distributor id including device.id account.id and device.distributor": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      },
+      "Device.provision - Positive Scenario: set device provision with default params": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      },
+      "Device.provision - Positive Scenario: set device provision with distributor id": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      }
+    },
+    "Privacy_Manage": {
+      "Privacy.allowRemoteDiagnostics - Positive Scenario: Disable allowRemoteDiagnostics": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      },
+      "Privacy.allowRemoteDiagnostics - Positive Scenario: Enable allowRemoteDiagnostics": {
+        "beforeOperation": [
+          {
+            "skipTest": true
+          }
+        ]
+      }
+    },
+    "UserGrants": {
+      "UserGrants.Grant - Positive Scenario: Validate Capabilities with denied (pinChallenge) and lifespan once": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capability Grant access with one step option(only acknowledgeChallenge)": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_APP_POSTALCODE_ROLE_USE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan forever": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_DEVICE_LEVEL_DIVICE_DISTRIBUTOR_ROLE_USE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan forever": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_WRONG_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_APP_LOCALIZATION_LOCALITY_ROLE_USE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (pinChallenge) and lifespan appActive": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_APP_LOCALIZATION_LOCALITY_ROLE_USE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan appActive": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_WRONG_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_APP_DEVICE_NAME_ROLE_USE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with granted (ackchallenge) and lifespan:seconds lifespanTtl:60 sec": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_APP_DEVICE_NAME_ROLE_USE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60 sec": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_DENY",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with grant(pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl it should not ask for grant": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with grant(ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_APP_LOCALIZATION_LANGUAGE_ROLE_USE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan:seconds lifespanTtl:800sec - after reboot within ttl and it should not ask grant": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_WRONG_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (ackchallenge) and lifespan:seconds lifespanTtl:60sec - reboot after ttl and it should ask grant": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_DENY",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_APP_LOCALIZATION_LANGUAGE_ROLE_USE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: privacySetting - autoApplyPolicy:always property-getter:true silently grant": {
+        "beforeOperation": [
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capability autoApplyPolicy:always property-getter:false silently denied": {
+        "beforeOperation": [
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_CLOSEDCAPTIONS",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capability autoApplyPolicy:disallowed property-getter:false silently denied": {
+        "beforeOperation": [
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_CLOSEDCAPTIONS",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:true silently grant": {
+        "beforeOperation": [
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_VOICEGUIDANCE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false grant": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_AUTHENTICATION_DEVICE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:allowed property-getter:false deny": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_WRONG_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_AUTHENTICATION_DEVICE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true grant": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_AUTHENTICATION_DEVICE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with privacySetting - autoApplyPolicy:disallowed property-getter:true deny": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_WRONG_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_VOICEGUIDANCE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:true grant": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_VOICEGUIDANCE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:false grant": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_SECONDSCREEN_DEVICE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:true deny": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_WRONG_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_SECONDSCREEN_DEVICE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: with privacySetting - Validate Capability autoApplyPolicy:never property-getter:false deny": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_WRONG_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_SECONDSCREEN_DEVICE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:true deny property should be set to false": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_WRONG_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_SECONDSCREEN_DEVICE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:false - property-getter:true deny property should not be updated": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_WRONG_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_SECONDSCREEN_DEVICE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:false grant property should be set to false": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_PROTOCOL_DIAL",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:true - property-getter:true grant property should not be changed": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_SECONDSCREEN_DEVICE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario:privacySetting - Validate Capability updateProperty:false - property-getter:false grant property should not be changed": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_SECONDSCREEN_DEVICE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Positive Scenario: Validate Capabilities with grant (pinChallenge) and lifespan powerActive - after reboot deny and validate": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_ID_PROTOCOL_DIAL",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capabilities - Negative Scenario: Validate Capabilities with denied (pinChallenge) and lifespan powerActive - after reboot grant and validate": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_APP_LEVEL_DEVICE_MODEL_ROLE_USE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.request - Positive Scenario: Validate userGrants.request by granting for role use": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_USE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_MANAGE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_PROVIDE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.request - Positive Scenario: Validate userGrants.request by granting for role manage": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_USE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_MANAGE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.request - Negative Scenario: Validate userGrants.request by denying for role use": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_DENY",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_USE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_MANAGE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.request - Negative Scenario: Validate userGrants.request by denying for role manage": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_DENY",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_USE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_MANAGE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.request - Negative Scenario: Validate userGrants.request call with role use, but grantpolicy having manage capability": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_USE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_MANAGE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_PROVIDE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.request - Positive Scenario: Validate UserGrants.request which grantpolicy is not present in manifest": {
+        "beforeOperation": [
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_APPACTIVE_SECURESTORAGE_ROLE_USE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_APPACTIVE_SECURESTORAGE_ROLE_MANAGE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.request - Positive Scenario: Validate userGrants.request by deferring": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_DEFERRED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_USE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_MANAGE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.request - Positive Scenario: Validate userGrants.request by deferring with timeout": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_TIMEOUT",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_USE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_MANAGE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.request - Positive Scenario: Validate usergrants.request by granting for role provide": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_USE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_MANAGE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_PROVIDE",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.request - Negative Scenario: Validate usergrants.request by denying for role provide": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_DENY",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_USE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_MANAGE",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_LIFESPAN_FOREVER_ACCOUNT_UID_ROLE_PROVIDE",
+            "firstParty": true
+          }
+        ]
+      }
+    },
+    "UserGrants_Manage": {
+      "Usergrants.app - Positive Scenario: with grant(ackchallenge)": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "Usergrants.device - Positive Scenario: with grant(ackchallenge)": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "Usergrants.capability - Positive Scenario: with grant(ackchallenge)": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_DEVICE_LEVEL_DEVICE_DISTRIBUTOR_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "Usergrants.grant - Positive Scenario: grant capability at device level": {
+        "beforeOperation": [
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "Usergrants.grant - Positive Scenario: grant capability at app level": {
+        "beforeOperation": [
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_DEVICE_LEVEL_DEVICE_DISTRIBUTOR_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "Usergrants.deny - Positive Scenario: deny capability at device level": {
+        "beforeOperation": [
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "Usergrants.deny - Positive Scenario: deny capability at app level": {
+        "beforeOperation": [
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_DEVICE_LEVEL_DEVICE_DISTRIBUTOR_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "Usergrants.clear - Positive Scenario: clear grant at device level for role use": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "Usergrants.clear - Positive Scenario: clear grant at app level for role use": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_DEVICE_LEVEL_DEVICE_DISTRIBUTOR_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "Usergrants.request - Positive Scenario: requesting for grant without force params, with force=true": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "PINCHALLENGE_CORRECT_PIN_WITH_UI",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_LEVEL_DEVICE_ID_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "Usergrants.request - Positive Scenario: requesting for grant without force params, with force=true and force=false": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          },
+          {
+            "fireboltCall": "USERGRANTS_CLEAR_WITH_APP_LEVEL_DISCOVERY_WATCHED_ROLE_USE_METHOD",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capability - Positive Scenario: by clearing the grant and validating usergrants.capability as empty": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          }
+        ]
+      },
+      "UserGrants.Capability - Positive Scenario: by clearing the grant and validating usergrants.app as empty": {
+        "beforeOperation": [
+          {
+            "fireboltMock": "ACKNOWLEDGE_CHALLENGE_GRANTED",
+            "firstParty": true
+          }
+        ]
+      }
+    }
+  }
+}

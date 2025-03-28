@@ -1,0 +1,7 @@
+{
+    "EXPECTED_LOCALIZATION_ADDITIONALINFO": {
+        "method": "localization.additionalInfo",
+        "validationJsonPath": "result",
+        "content": "LOCALIZATION_ADDITIONALINFO"
+    }
+}

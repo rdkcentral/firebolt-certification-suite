@@ -1,0 +1,115 @@
+{
+    "CONTENTACCESS_AVAILABILITIES_WITH_CATALOG_ID": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "program-lineup",
+                    "id": "chmap-lineup-a-firecert",
+                    "catalogId": "comcast:merlin:ProductContext:5546018607842556174"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_TYPE_CHANNEL_LINEUP": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "channel-lineup",
+                    "id": "chmap-lineup-a-firecert",
+                    "startTime": "2021-04-23T18:25:43.511Z",
+                    "endTime": "2021-04-23T18:25:43.511Z",
+                    "catalogId": "comcast:merlin:ProductContext:4773206437396866174"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_TYPE_PROGRAM_LINEUP": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "program-lineup",
+                    "id": "chmap-lineup-a-firecert",
+                    "startTime": "2021-04-23T18:25:43.511Z",
+                    "endTime": "2021-04-23T18:25:43.511Z",
+                    "catalogId": "comcast:merlin:ProductContext:5546018607842556174"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_WITH_CATALOG_ID_START_TIME": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "program-lineup",
+                    "id": "chmap-lineup-a-firecert",
+                    "catalogId": "comcast:merlin:ProductContext:5546018607842556174",
+                    "startTime": "2021-04-23T18:25:43.511Z"
+                }
+            ]
+        }
+    },
+    "CONTENTACCESS_AVAILABILITIES_WITH_CATALOG_ID_START_TIME_END_TIME": {
+        "ids": {
+            "availabilities": [
+                {
+                    "type": "program-lineup",
+                    "id": "chmap-lineup-a-firecert",
+                    "catalogId": "comcast:merlin:ProductContext:5546018607842556174",
+                    "startTime": "2021-04-23T18:25:43.511Z",
+                    "endTime": "2021-04-23T18:25:43.511Z"
+                }
+            ]
+        }
+    },
+    "ONSIGNIN_ONSIGNOUT_APPID": {
+        "appId": "comcast.test.firecert"
+    },
+    "LAUNCH_APPLE_TV_PLUS": {
+        "appId": "apple_inc_apple_tv"
+    },
+    "LAUNCH_SPECTRUM_TV": {
+        "appId": "charter_spectrum_tv"
+    },
+    "LAUNCH_DISNEYPLUS": {
+        "appId": "disneyPlus"
+    },
+    "LAUNCH_SPOTIFY": {
+        "appId": "Spotify"
+    },
+    "LAUNCH_TUBI": {
+        "appId": "Tubi"
+    },
+    "LAUNCH_PLUTO": {
+        "appId": "pluto"
+    },
+    "LAUNCH_SLING": {
+        "appId": "Sling"
+    },
+    "LAUNCH_ESPNPLUS": {
+        "appId": "ESPNPlus"
+    },
+    "LAUNCH_HULU": {
+        "appId": "Hulu"
+    },
+    "LAUNCH_PARAMOUNTPLUS": {
+        "appId": "ParamountPlus"
+    },
+    "LAUNCH_COMCAST_STREAMAPP": {
+        "appId": "Comcast_StreamApp"
+    },
+    "LAUNCH_XUMO": {
+        "appId": "xumo"
+    },
+    "LAUNCH_HBOMAX": {
+        "appId": "hbo_hbomax"
+    },
+    "LAUNCH_PEACOCK": {
+        "appId": "Peacock"
+    },
+    "LAUNCH_AMAZONPRIME": {
+        "appId": "amazonPrime"
+    },
+    "LAUNCH_DISCOVERYPLUS": {
+        "appId": "DiscoveryPlus"
+    }
+}
