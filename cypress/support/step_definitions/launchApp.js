@@ -109,3 +109,14 @@ When('AppObject state for {string} is set to {string}', (app, state) => {
     cy.log('Setting ' + appId + ' appObject state to ' + state);
   });
 });
+
+Given(/I send '([^']+)' voice command/, (command) => {
+  cy.sendVoiceCommand(command).then((result) => {
+    if (result && result.success === true) {
+      fireLog.assert(true, `Voice command '${command}' was sent successfully.`);
+      cy.wait(5000);
+    } else {
+      fireLog.assert(false, `Voice command '${command}' failed.`);
+    }
+  });
+});

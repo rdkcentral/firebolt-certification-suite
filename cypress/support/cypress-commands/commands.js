@@ -1989,3 +1989,218 @@ const shouldPerformValidation = (key, value) => {
 
   return true;
 };
+
+// IUI Settings command
+Cypress.Commands.add('sendKeyPress', (key, delay) => {
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
+    params: { key: key },
+  };
+  delay ? (requestMap.params.delay = delay) : null;
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    fireLog.info(`Key press Response: ${JSON.stringify(result)}`);
+  });
+});
+
+Cypress.Commands.add('scrollToTile', (targetElement, tileName, scrollDirection) => {
+  cy.wrap(targetElement).then(async () => {
+    if (!targetElement || !tileName) {
+      return;
+    }
+
+    // Scroll based on the specified scroll direction
+    switch (scrollDirection) {
+      case 'horizontal':
+        await findElementInHorizontal(targetElement, tileName);
+        break;
+      case 'vertical':
+        await findElementInVertical(targetElement, tileName);
+        break;
+      case 'grid':
+        await findElementInGrid(targetElement, tileName);
+        break;
+      default:
+        console.error('Invalid scroll direction');
+    }
+  });
+});
+
+function findElementInHorizontal(targetElement, expectedTile) {
+  let previousTileName = '';
+  let currentTileName = '';
+  let scrollDirection = 'right';
+  let elementFound = false;
+
+  function scrollAndCheck() {
+    if (elementFound) {
+      return; // Exit if the element is found
+    }
+
+    if (currentTileName === expectedTile) {
+      elementFound = true;
+      return; // Exit the recursion
+    }
+
+    // Save the current tile name for comparison
+    previousTileName = currentTileName;
+    // Scroll based on the current direction
+    if (scrollDirection === 'right') {
+      cy.sendKeyPress('right');
+    } else {
+      cy.sendKeyPress('left');
+    }
+
+    // Get the next tile and check again
+    cy.getEntOsElement(targetElement).then((tileName) => {
+      currentTileName = tileName.result;
+
+      if (currentTileName === previousTileName) {
+        // Change direction if reached the end
+        scrollDirection = 'left';
+      }
+
+      // Recursively call the function to continue scrolling
+      scrollAndCheck();
+    });
+  }
+
+  // Start the process by getting the initial tile
+  cy.getEntOsElement(targetElement).then((tileName) => {
+    currentTileName = tileName.result;
+
+    // Start the recursive scrolling
+    scrollAndCheck();
+  });
+
+  // Return a promise-like structure for Cypress chaining
+  return cy.wrap(null).then(() => elementFound);
+}
+
+function findElementInVertical(targetElement, expectedTile) {
+  let previousTileName = '';
+  let currentTileName = '';
+  let scrollDirection = 'down';
+  let elementFound = false;
+
+  function scrollAndCheck() {
+    if (elementFound) {
+      return; // Exit if the element is found
+    }
+
+    if (currentTileName === expectedTile) {
+      elementFound = true;
+      return; // Exit the recursion
+    }
+
+    // Save the current tile name for comparison
+    previousTileName = currentTileName;
+
+    // Scroll based on the current direction
+    if (scrollDirection === 'down') {
+      cy.sendKeyPress('down');
+    } else {
+      cy.sendKeyPress('up');
+    }
+
+    // Get the next tile and check again
+    cy.getEntOsElement(targetElement).then((tileName) => {
+      currentTileName = tileName.result;
+
+      if (currentTileName === previousTileName) {
+        // Change direction if reached the end
+        scrollDirection = 'up';
+      }
+
+      // Recursively call the function to continue scrolling
+      scrollAndCheck();
+    });
+  }
+
+  // Start the process by getting the initial tile
+  cy.getEntOsElement(targetElement).then((tileName) => {
+    currentTileName = tileName.result;
+
+    // Start the recursive scrolling
+    scrollAndCheck();
+  });
+
+  // Return a promise-like structure for Cypress chaining
+  return cy.wrap(null).then(() => elementFound);
+}
+
+function findElementInGrid(targetElement, expectedTile) {
+  let previousTileName = '';
+  let currentTileName = '';
+  let scrollDirection = 'right';
+  let elementFound = false;
+
+  function scrollAndCheck() {
+    if (elementFound) {
+      return; // Exit if the element is found
+    }
+
+    if (currentTileName === expectedTile) {
+      elementFound = true;
+      return; // Exit the recursion
+    }
+
+    // Save the current tile name for comparison
+    previousTileName = currentTileName;
+
+    // Scroll based on the current direction
+    if (scrollDirection === 'right') {
+      cy.sendKeyPress('right');
+    } else if (scrollDirection === 'left') {
+      cy.sendKeyPress('left');
+    } else if (scrollDirection === 'down') {
+      cy.sendKeyPress('down');
+      scrollDirection = 'right';
+    }
+
+    // Get the next tile and check again
+    cy.getEntOsElement(targetElement).then((tileName) => {
+      currentTileName = tileName.result;
+
+      if (currentTileName === previousTileName) {
+        // Change direction if reached the end
+        if (scrollDirection === 'right') {
+          scrollDirection = 'left';
+        } else if (scrollDirection === 'left') {
+          scrollDirection = 'down';
+        }
+      }
+
+      // Recursively call the function to continue scrolling
+      scrollAndCheck();
+    });
+  }
+
+  // Start the process by getting the initial tile
+  cy.getEntOsElement(targetElement).then((tileName) => {
+    currentTileName = tileName.result;
+
+    // Start the recursive scrolling
+    scrollAndCheck();
+  });
+
+  // Return a promise-like structure for Cypress chaining
+  return cy.wrap(null).then(() => elementFound);
+}
+
+/**
+ * @module commands
+ * @function sendVoiceCommand
+ * @description To send a voice command to the platform
+ * @param {String} voiceCommand - The transcription (voice command) to be sent.
+ * @example
+ * cy.sendVoiceCommand('Open settings');
+ */
+Cypress.Commands.add('sendVoiceCommand', (voiceCommand) => {
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDVOICECOMMAND,
+    params: voiceCommand,
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    return response;
+  });
+});
