@@ -122,12 +122,21 @@ Given(
     // 2834
     if (Cypress.env(CONSTANTS.TEST_TYPE) === 'IntegratedPlayer') {
       console.log('entered env setup glue 2834 testType match >>>>    ');
-      cy.sendMessagetoPlatforms({ method: 'fcs.getIPAHash' }).then((response) => {
-        if (response && response.success) {
-          cy.log('Response of getIPAHash : ' + response.result);
-          Cypress.env('IPAHash', response.result);
-        }
-      });
+      cy.sendMessagetoPlatforms({ method: 'fcs.getIPAHash' })
+        .then((response) => {
+          if (response && response.success) {
+            cy.log('Response of getIPAHash : ' + response.result);
+            Cypress.env('IPAHash', response.result);
+          }
+        })
+        .then(() => {
+          cy.sendMessagetoPlatforms({ method: 'fcs.getPlayerSDKVersion' }).then((response) => {
+            if (response && response.success) {
+              cy.log('Response of player version : ' + response.result);
+              Cypress.env('playerSDKVersion', response.result);
+            }
+          });
+        });
     }
 
     // Check the marker creation status
