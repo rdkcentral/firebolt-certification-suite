@@ -1990,6 +1990,45 @@ const shouldPerformValidation = (key, value) => {
   return true;
 };
 
+Cypress.Commands.add('toggleUIElement', (element, value, keypress) => {
+  cy.getEntOsElement(element).then((result) => {
+    // Check the initial value and if they are equal we need to send the keypress to toggle the value twice.
+    if (result.result == value) {
+      // Send the keypress and verify the value again
+      cy.sendKeyPress(keypress).then(() => {
+        cy.getEntOsElement(element).then((updatedResult) => {
+          if (updatedResult.result != value) {
+            cy.sendKeyPress(keypress).then(() => {
+              cy.getEntOsElement(element).then((finalResult) => {
+                if (finalResult.result !== value) {
+                  assert(
+                    false,
+                    `Value did not change as expected after toggling. Expected: ${value}, Got: ${finalResult.result}`
+                  );
+                } else {
+                  fireLog.info(`Successfully toggled the value to: ${value}`);
+                }
+              });
+            });
+          }
+        });
+      });
+    } else {
+      // Send the keypress and verify the value again
+      cy.sendKeyPress(keypress).then(() => {
+        cy.getEntOsElement(element).then((updatedResult) => {
+          if (updatedResult.result !== value) {
+            assert(
+              false,
+              `Value did not change as expected after keypress. Expected: ${value}, Got: ${updatedResult.result}`
+            );
+          }
+        });
+      });
+    }
+  });
+});
+
 // IUI Settings command
 Cypress.Commands.add('sendKeyPress', (key, delay) => {
   const requestMap = {
@@ -1998,7 +2037,9 @@ Cypress.Commands.add('sendKeyPress', (key, delay) => {
   };
   delay ? (requestMap.params.delay = delay) : null;
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
-    fireLog.info(`Key press Response: ${JSON.stringify(result)}`);
+    fireLog.info(
+      `Sent key press: ${key} with delay: ${delay}. Response: ${JSON.stringify(result)}`
+    );
   });
 });
 
@@ -2028,12 +2069,22 @@ Cypress.Commands.add('scrollToTile', (targetElement, tileName, scrollDirection) 
 function findElementInHorizontal(targetElement, expectedTile) {
   let previousTileName = '';
   let currentTileName = '';
+  let initialTileName = '';
   let scrollDirection = 'right';
   let elementFound = false;
 
   function scrollAndCheck() {
     if (elementFound) {
       return; // Exit if the element is found
+    }
+
+    if (currentTileName === initialTileName && previousTileName !== '') {
+      // If we have cycled back to the initial tile without finding the expected tile,
+      // it means we have scrolled through all available tiles.
+      // This indicates that the expected tile is not present in the available tiles.
+      throw new Error(
+        `Unable to find the expected tile "${expectedTile}" when scrolling horizontally.`
+      );
     }
 
     if (currentTileName === expectedTile) {
@@ -2066,7 +2117,8 @@ function findElementInHorizontal(targetElement, expectedTile) {
 
   // Start the process by getting the initial tile
   cy.getEntOsElement(targetElement).then((tileName) => {
-    currentTileName = tileName.result;
+    initialTileName = tileName.result;
+    currentTileName = initialTileName;
 
     // Start the recursive scrolling
     scrollAndCheck();
@@ -2079,12 +2131,19 @@ function findElementInHorizontal(targetElement, expectedTile) {
 function findElementInVertical(targetElement, expectedTile) {
   let previousTileName = '';
   let currentTileName = '';
+  let initialTileName = '';
   let scrollDirection = 'down';
   let elementFound = false;
 
   function scrollAndCheck() {
     if (elementFound) {
       return; // Exit if the element is found
+    }
+
+    if (currentTileName === initialTileName && previousTileName !== '') {
+      throw new Error(
+        `Unable to find the expected tile "${expectedTile}" when scrolling horizontally.`
+      );
     }
 
     if (currentTileName === expectedTile) {
@@ -2118,7 +2177,8 @@ function findElementInVertical(targetElement, expectedTile) {
 
   // Start the process by getting the initial tile
   cy.getEntOsElement(targetElement).then((tileName) => {
-    currentTileName = tileName.result;
+    initialTileName = tileName.result;
+    currentTileName = initialTileName;
 
     // Start the recursive scrolling
     scrollAndCheck();
@@ -2131,12 +2191,19 @@ function findElementInVertical(targetElement, expectedTile) {
 function findElementInGrid(targetElement, expectedTile) {
   let previousTileName = '';
   let currentTileName = '';
+  let initialTileName = '';
   let scrollDirection = 'right';
   let elementFound = false;
 
   function scrollAndCheck() {
     if (elementFound) {
       return; // Exit if the element is found
+    }
+
+    if (currentTileName === initialTileName && previousTileName !== '') {
+      throw new Error(
+        `Unable to find the expected tile "${expectedTile}" when scrolling through a grid.`
+      );
     }
 
     if (currentTileName === expectedTile) {
@@ -2177,7 +2244,8 @@ function findElementInGrid(targetElement, expectedTile) {
 
   // Start the process by getting the initial tile
   cy.getEntOsElement(targetElement).then((tileName) => {
-    currentTileName = tileName.result;
+    initialTileName = tileName.result;
+    currentTileName = initialTileName;
 
     // Start the recursive scrolling
     scrollAndCheck();
