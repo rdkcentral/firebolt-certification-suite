@@ -298,3 +298,51 @@ Example:
 ```javascript
   'FOREGROUND'
 ```
+
+## sendVoiceCommand:
+
+### Request override
+- The `sendVoiceCommand` request override sends a voice command to the platform. This function should be added in config module `requestModules/fcs.js` file.
+
+#### Request Format for sendVoiceCommand:
+
+```javascript
+{
+  method: 'fcs.sendVoiceCommand',
+  params: {
+    command: <'command'>
+  }
+}
+```
+
+**Example:**
+
+```javascript
+{
+  method: 'fcs.sendVoiceCommand',
+  params: {
+    command: 'open settings' 
+    }
+}
+```
+### Response override
+
+- The `sendVoiceCommand` returns a response with success and sessionId. This function should be added in config module `responseModules/fcs.js` file.
+
+#### Response Format for sendVoiceCommand:
+
+```javascript
+  {
+    "success": <boolean>,
+    "sessionId": <string>
+  }
+```
+
+**Example:**
+
+```javascript
+  {
+    "success": true,
+    "sessionId": "01000-09377-898905"
+  }
+```
