@@ -427,7 +427,6 @@ export default function (module) {
       const requestTopic = UTILS.getTopic(appId);
       const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
 
-      // TODO add logging to below
       if (!UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)) {
         cy.log(CONSTANTS.DEVICE_MAC_UNAVAILABLE).then(() => {
           logger.error(
