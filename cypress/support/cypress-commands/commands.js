@@ -2046,9 +2046,7 @@ Cypress.Commands.add('sendKeyPress', (key, delay) => {
   };
 
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
-    fireLog.info(
-      `Sent key press: ${key} with delay: ${delay}. Response: ${JSON.stringify(result)}`
-    );
+    logger.debug(`Sent key press: ${key} with delay: ${delay}.`);
   });
 });
 
@@ -2096,6 +2094,29 @@ function findElement(targetElement, expectedTile, scrollDirection) {
     return;
   }
 
+  function resetPosition() {
+    const resetDirection = scrollDirection === 'horizontal' ? 'left' : 'up';
+
+    fireLog.info(`Resetting position by scrolling ${resetDirection}...`);
+    previousTileName = '';
+    cy.getDomElement(targetElement).then((tileName) => {
+      currentTileName = tileName.result;
+
+      // If the current tile equals the previous tile, stop resetting
+      if (currentTileName === previousTileName) {
+        fireLog.info(`Reset complete. Starting from tile: "${currentTileName}"`);
+        return;
+      }
+
+      previousTileName = currentTileName;
+
+      // Scroll in the reset direction and check again
+      cy.sendKeyPress(resetDirection).then(() => {
+        resetPosition();
+      });
+    });
+  }
+
   function scrollAndCheck() {
     if (elementFound) {
       fireLog.info(`Expected tile "${expectedTile}" has been located successfully.`);
@@ -2116,6 +2137,12 @@ function findElement(targetElement, expectedTile, scrollDirection) {
         } else {
           // Move down after completing the right-left cycle
           directions.push(directions.shift()); // Move "down" to the front of the directions array
+          // Check if element is same and we are back to the initial tile after a full cycle
+          if (currentTileName === previousTileName) {
+            fireLog.fail(
+              `Unable to find the expected tile "${expectedTile}" after scrolling through all available tiles.`
+            );
+          }
         }
       } else {
         fireLog.fail(
@@ -2133,6 +2160,7 @@ function findElement(targetElement, expectedTile, scrollDirection) {
     // Get the next tile and check again
     cy.getDomElement(targetElement).then((tileName) => {
       currentTileName = tileName.result;
+      fireLog.info(`Current tile after scrolling ${currentDirection}: "${currentTileName}"`);
 
       if (scrollDirection === 'grid' && currentDirection === 'down') {
         directions.splice(0, directions.length, 'right', 'left', 'down');
@@ -2149,7 +2177,10 @@ function findElement(targetElement, expectedTile, scrollDirection) {
 
   // Start the process by getting the initial tile
   cy.getDomElement(targetElement).then((tileName) => {
+    resetPosition();
     initialTileName = tileName.result;
+    fireLog.info(`Initial tile name: "${initialTileName}"`);
+
     currentTileName = initialTileName;
     scrollAndCheck();
   });
