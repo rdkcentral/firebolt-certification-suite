@@ -1991,15 +1991,15 @@ const shouldPerformValidation = (key, value) => {
 };
 
 Cypress.Commands.add('toggleUIElement', (element, value, keypress) => {
-  cy.getEntOsElement(element).then((result) => {
+  cy.getDomElement(element).then((result) => {
     // Check the initial value and if they are equal we need to send the keypress to toggle the value twice.
     if (result.result == value) {
       // Send the keypress and verify the value again
       cy.sendKeyPress(keypress).then(() => {
-        cy.getEntOsElement(element).then((updatedResult) => {
+        cy.getDomElement(element).then((updatedResult) => {
           if (updatedResult.result != value) {
             cy.sendKeyPress(keypress).then(() => {
-              cy.getEntOsElement(element).then((finalResult) => {
+              cy.getDomElement(element).then((finalResult) => {
                 if (finalResult.result !== value) {
                   assert(
                     false,
@@ -2016,7 +2016,7 @@ Cypress.Commands.add('toggleUIElement', (element, value, keypress) => {
     } else {
       // Send the keypress and verify the value again
       cy.sendKeyPress(keypress).then(() => {
-        cy.getEntOsElement(element).then((updatedResult) => {
+        cy.getDomElement(element).then((updatedResult) => {
           if (updatedResult.result !== value) {
             assert(
               false,
@@ -2046,208 +2046,90 @@ Cypress.Commands.add('sendKeyPress', (key, delay) => {
 Cypress.Commands.add('scrollToTile', (targetElement, tileName, scrollDirection) => {
   cy.wrap(targetElement).then(async () => {
     if (!targetElement || !tileName) {
+      fireLog.fail('Target element or tile name is missing.');
       return;
     }
 
-    // Scroll based on the specified scroll direction
-    switch (scrollDirection) {
-      case 'horizontal':
-        await findElementInHorizontal(targetElement, tileName);
-        break;
-      case 'vertical':
-        await findElementInVertical(targetElement, tileName);
-        break;
-      case 'grid':
-        await findElementInGrid(targetElement, tileName);
-        break;
-      default:
-        console.error('Invalid scroll direction');
-    }
+    // Call the generic scroll function
+    await findElement(targetElement, tileName, scrollDirection);
   });
 });
 
-function findElementInHorizontal(targetElement, expectedTile) {
+function findElement(targetElement, expectedTile, scrollDirection) {
   let previousTileName = '';
   let currentTileName = '';
   let initialTileName = '';
-  let scrollDirection = 'right';
   let elementFound = false;
 
-  function scrollAndCheck() {
-    if (elementFound) {
-      return; // Exit if the element is found
-    }
+  const directionMap = {
+    horizontal: ['right', 'left'],
+    vertical: ['down', 'up'],
+    grid: ['right', 'left', 'down'],
+  };
 
-    if (currentTileName === initialTileName && previousTileName !== '') {
-      // If we have cycled back to the initial tile without finding the expected tile,
-      // it means we have scrolled through all available tiles.
-      // This indicates that the expected tile is not present in the available tiles.
-      throw new Error(
-        `Unable to find the expected tile "${expectedTile}" when scrolling horizontally.`
-      );
-    }
-
-    if (currentTileName === expectedTile) {
-      elementFound = true;
-      return; // Exit the recursion
-    }
-
-    // Save the current tile name for comparison
-    previousTileName = currentTileName;
-    // Scroll based on the current direction
-    if (scrollDirection === 'right') {
-      cy.sendKeyPress('right');
-    } else {
-      cy.sendKeyPress('left');
-    }
-
-    // Get the next tile and check again
-    cy.getEntOsElement(targetElement).then((tileName) => {
-      currentTileName = tileName.result;
-
-      if (currentTileName === previousTileName) {
-        // Change direction if reached the end
-        scrollDirection = 'left';
-      }
-
-      // Recursively call the function to continue scrolling
-      scrollAndCheck();
-    });
+  const directions = directionMap[scrollDirection];
+  if (!directions) {
+    fireLog.fail(`Invalid scroll direction: ${scrollDirection}`);
+    return;
   }
 
-  // Start the process by getting the initial tile
-  cy.getEntOsElement(targetElement).then((tileName) => {
-    initialTileName = tileName.result;
-    currentTileName = initialTileName;
-
-    // Start the recursive scrolling
-    scrollAndCheck();
-  });
-
-  // Return a promise-like structure for Cypress chaining
-  return cy.wrap(null).then(() => elementFound);
-}
-
-function findElementInVertical(targetElement, expectedTile) {
-  let previousTileName = '';
-  let currentTileName = '';
-  let initialTileName = '';
-  let scrollDirection = 'down';
-  let elementFound = false;
-
   function scrollAndCheck() {
     if (elementFound) {
-      return; // Exit if the element is found
-    }
-
-    if (currentTileName === initialTileName && previousTileName !== '') {
-      throw new Error(
-        `Unable to find the expected tile "${expectedTile}" when scrolling horizontally.`
-      );
+      fireLog.info(`The exepected tile is found: ${expectedTile}`);
+      return;
     }
 
     if (currentTileName === expectedTile) {
       elementFound = true;
-      return; // Exit the recursion
-    }
-
-    // Save the current tile name for comparison
-    previousTileName = currentTileName;
-
-    // Scroll based on the current direction
-    if (scrollDirection === 'down') {
-      cy.sendKeyPress('down');
-    } else {
-      cy.sendKeyPress('up');
-    }
-
-    // Get the next tile and check again
-    cy.getEntOsElement(targetElement).then((tileName) => {
-      currentTileName = tileName.result;
-
-      if (currentTileName === previousTileName) {
-        // Change direction if reached the end
-        scrollDirection = 'up';
-      }
-
-      // Recursively call the function to continue scrolling
-      scrollAndCheck();
-    });
-  }
-
-  // Start the process by getting the initial tile
-  cy.getEntOsElement(targetElement).then((tileName) => {
-    initialTileName = tileName.result;
-    currentTileName = initialTileName;
-
-    // Start the recursive scrolling
-    scrollAndCheck();
-  });
-
-  // Return a promise-like structure for Cypress chaining
-  return cy.wrap(null).then(() => elementFound);
-}
-
-function findElementInGrid(targetElement, expectedTile) {
-  let previousTileName = '';
-  let currentTileName = '';
-  let initialTileName = '';
-  let scrollDirection = 'right';
-  let elementFound = false;
-
-  function scrollAndCheck() {
-    if (elementFound) {
-      return; // Exit if the element is found
+      fireLog.info(`The exepected tile is found: ${expectedTile}`);
+      return;
     }
 
     if (currentTileName === initialTileName && previousTileName !== '') {
-      throw new Error(
-        `Unable to find the expected tile "${expectedTile}" when scrolling through a grid.`
-      );
-    }
-
-    if (currentTileName === expectedTile) {
-      elementFound = true;
-      return; // Exit the recursion
-    }
-
-    // Save the current tile name for comparison
-    previousTileName = currentTileName;
-
-    // Scroll based on the current direction
-    if (scrollDirection === 'right') {
-      cy.sendKeyPress('right');
-    } else if (scrollDirection === 'left') {
-      cy.sendKeyPress('left');
-    } else if (scrollDirection === 'down') {
-      cy.sendKeyPress('down');
-      scrollDirection = 'right';
-    }
-
-    // Get the next tile and check again
-    cy.getEntOsElement(targetElement).then((tileName) => {
-      currentTileName = tileName.result;
-
-      if (currentTileName === previousTileName) {
-        // Change direction if reached the end
-        if (scrollDirection === 'right') {
-          scrollDirection = 'left';
-        } else if (scrollDirection === 'left') {
-          scrollDirection = 'down';
+      if (scrollDirection === 'grid') {
+        if (directions[0] === 'down') {
+          // Reset the horizontal scroll cycle after moving down
+          directions.splice(0, directions.length, 'right', 'left', 'down');
+        } else {
+          // Move down after completing the right-left cycle
+          directions.push(directions.shift()); // Move "down" to the front of the directions array
         }
+        
+      } else {
+        fireLog.fail(
+          `Unable to find the expected tile "${expectedTile}" after scrolling through all available tiles.`
+        );
+        throw new Error(`Tile "${expectedTile}" not found.`);
+      }
+    }
+
+    previousTileName = currentTileName;
+
+    // Scroll in the current direction
+    const currentDirection = directions[0];
+    cy.sendKeyPress(currentDirection);
+
+    // Get the next tile and check again
+    cy.getDomElement(targetElement).then((tileName) => {
+      currentTileName = tileName.result;
+
+      if (scrollDirection === 'grid' && currentDirection === 'down') {
+        directions.splice(0, directions.length, 'right', 'left', 'down');
+        initialTileName = currentTileName; // Reset the initial tile name after moving down
       }
 
-      // Recursively call the function to continue scrolling
+      if (currentTileName === previousTileName) {
+        // Rotate the direction if reached the end
+        directions.push(directions.shift());
+      }
       scrollAndCheck();
     });
   }
 
   // Start the process by getting the initial tile
-  cy.getEntOsElement(targetElement).then((tileName) => {
+  cy.getDomElement(targetElement).then((tileName) => {
     initialTileName = tileName.result;
     currentTileName = initialTileName;
-
-    // Start the recursive scrolling
     scrollAndCheck();
   });
 
