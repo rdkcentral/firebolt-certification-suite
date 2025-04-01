@@ -58,7 +58,7 @@ showAll = () => {
 attachScreenshotLinks = () => {
   // Define regular expression to match the img URL pattern
   const imgPattern = /Screenshot:\s*(https:\/\/[^\s]+\.jpg)/g;
-  const urlPattern = /(https:\/\/[^\s]+)/g; // For general URLs
+  const urlPattern = /(https:\/\/[^\s]+\.jpg)/g; // For general URLs
   // Get all the div elements in the document
   const divElements = document.querySelectorAll('div');
 
@@ -102,11 +102,7 @@ attachScreenshotLinks = () => {
     if (urlPattern.test(preHTML)) {
       // Replace plain text URLs with clickable hyperlinks
       const updatedHTML = preHTML.replace(urlPattern, (url) => {
-        let cleanedUrl = url;
-        cleanedUrl = cleanedUrl.split(']')[0];
-        return (
-          '<a href="' + cleanedUrl + '" target="_blank" rel="noopener noreferrer">' + url + '</a>'
-        );
+        return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
       });
       pre.innerHTML = updatedHTML;
     }
