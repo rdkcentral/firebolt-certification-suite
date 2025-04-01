@@ -2029,13 +2029,22 @@ Cypress.Commands.add('toggleUIElement', (element, value, keypress) => {
   });
 });
 
-// IUI Settings command
+/**
+ * @module commands
+ * @function sendKeyPress
+ * @description Command to send key press to the platform.
+ * @param {String} key - The key to be pressed.
+ * @param {Number} delay - The delay in seconds before sending the key press.
+ * @example
+ * cy.sendKeyPress()
+ */
 Cypress.Commands.add('sendKeyPress', (key, delay) => {
+  delay = delay ? delay : 5;
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
-    params: { key: key },
+    params: { key: key, delay: delay },
   };
-  delay ? (requestMap.params.delay = delay) : null;
+
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     fireLog.info(
       `Sent key press: ${key} with delay: ${delay}. Response: ${JSON.stringify(result)}`
@@ -2043,10 +2052,21 @@ Cypress.Commands.add('sendKeyPress', (key, delay) => {
   });
 });
 
+/**
+ * @module commands
+ * @function scrollToTile
+ * @description Command to scroll to a specific tile in the UI.
+ * @param {String} targetElement - The element to scroll within.
+ * @param {String} tileName - The name of the tile to scroll to.
+ * @param {String} scrollDirection - The direction to scroll (horizontal, vertical, grid).
+ * @example
+ * cy.scrollToTile()
+ */
 Cypress.Commands.add('scrollToTile', (targetElement, tileName, scrollDirection) => {
+  fireLog.info(`Started searching for the element: ${tileName} in a ${scrollDirection} direction.`);
   cy.wrap(targetElement).then(async () => {
     if (!targetElement || !tileName) {
-      fireLog.fail('Target element or tile name is missing.');
+      fireLog.fail('Provide valid targetElement and tileName to search for the element.');
       return;
     }
 
@@ -2055,6 +2075,7 @@ Cypress.Commands.add('scrollToTile', (targetElement, tileName, scrollDirection) 
   });
 });
 
+// Helper function to find the element by scrolling
 function findElement(targetElement, expectedTile, scrollDirection) {
   let previousTileName = '';
   let currentTileName = '';
@@ -2069,19 +2090,21 @@ function findElement(targetElement, expectedTile, scrollDirection) {
 
   const directions = directionMap[scrollDirection];
   if (!directions) {
-    fireLog.fail(`Invalid scroll direction: ${scrollDirection}`);
+    fireLog.fail(
+      `Invalid scroll direction: ${scrollDirection}, Expected: ${Object.keys(directionMap)}`
+    );
     return;
   }
 
   function scrollAndCheck() {
     if (elementFound) {
-      fireLog.info(`The exepected tile is found: ${expectedTile}`);
+      fireLog.info(`Expected tile "${expectedTile}" has been located successfully.`);
       return;
     }
 
     if (currentTileName === expectedTile) {
       elementFound = true;
-      fireLog.info(`The exepected tile is found: ${expectedTile}`);
+      fireLog.info(`Expected tile "${expectedTile}" has been located successfully.`);
       return;
     }
 
@@ -2094,12 +2117,10 @@ function findElement(targetElement, expectedTile, scrollDirection) {
           // Move down after completing the right-left cycle
           directions.push(directions.shift()); // Move "down" to the front of the directions array
         }
-        
       } else {
         fireLog.fail(
           `Unable to find the expected tile "${expectedTile}" after scrolling through all available tiles.`
         );
-        throw new Error(`Tile "${expectedTile}" not found.`);
       }
     }
 
