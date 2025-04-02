@@ -178,12 +178,6 @@ Cypress.Commands.add('getSdkVersion', () => {
           CONSTANTS.ACTION_CORE.toLowerCase()
         ).then((response) => {
           cy.log(`Response from app: ${appId} - ${JSON.stringify(response)}`);
-
-          // 2834 - platformRelease
-          if (response?.result?.debug) {
-            cy.log(`Platform Release :  ${response.result.debug}`);
-            Cypress.env('platformRelease', response.result.debug);
-          }
           // If the response is invalid, assign the latest SDK version to the environment variable.
           if (response?.result?.api?.readable && response?.result.sdk?.readable) {
             // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
@@ -219,13 +213,19 @@ Cypress.Commands.add('getSdkVersion', () => {
               );
             Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
           }
+          if (response?.result?.debug) {
+            const release = response.result.debug;
+            Cypress.env(CONSTANTS.ENV_RELEASE, release);
+          }
           if (response?.result?.sdk?.readable) {
             const responseResultSDK =
               `${response?.result?.sdk?.major}.${response?.result?.sdk?.minor}.${response?.result?.sdk?.patch}`.replace(
                 /"/g,
                 ''
               );
-            Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+            if (!Cypress.env(CONSTANTS.ENV_SDK_VERSION)) {
+              Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+            }
           }
         });
       });
@@ -323,7 +323,10 @@ Cypress.Commands.add('updateRunInfo', () => {
                   reportEnv.customData.data &&
                   reportEnv.customData.data.length > 0
                 ) {
-                  const labelToEnvMap = {
+                  // Retrieve the current labelToEnvMap
+                  let labelToEnvMap = Cypress.env('labelToEnvMap') || {};
+
+                  const newLabelToEnvMap = {
                     [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                     [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
                     [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
@@ -333,9 +336,11 @@ Cypress.Commands.add('updateRunInfo', () => {
                     [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                     [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
                   };
+                  // Append the new values to the existing labelToEnvMap
+                  labelToEnvMap = { ...labelToEnvMap, ...newLabelToEnvMap };
 
-                  console.log('inside updateRunInfo labelToEnvMap >>> ', labelToEnvMap);
-                  console.log('inside updateRunInfo reportEnv >>> ', reportEnv);
+                  // Set the updated labelToEnvMap back to Cypress env
+                  Cypress.env('labelToEnvMap', labelToEnvMap);
 
                   reportEnv.customData.data.forEach((item) => {
                     if (item.label === CONSTANTS.PRODUCT) {
@@ -1052,6 +1057,8 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
 
   const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
   const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
+  Cypress.env('startAdditionalServices', 'getReportData');
+  cy.startAdditionalServices();
 
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
     fireLog.info(
