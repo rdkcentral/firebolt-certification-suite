@@ -571,13 +571,12 @@ export default function (module) {
       if (module && module.customValidations) {
         const configCustomValidation = module.customValidations[functionName];
         // to check whether customValidations has a function as the functionName passed
-        if (
-          configCustomValidation &&
-          typeof configCustomValidation === 'function'
-        ) {
+        if (configCustomValidation && typeof configCustomValidation === 'function') {
           const waitForCustom = fcsValidationObjectData.waitForCompletion;
           if (waitForCustom && waitForCustom === true) {
-            const customTimeout = fcsValidationObjectData.waitLimit ? fcsValidationObjectData.waitLimit : UTILS.getEnvVariable(CONSTANTS.CUSTOM_VALIDATION_TIMEOUT);
+            const customTimeout = fcsValidationObjectData.waitLimit
+              ? fcsValidationObjectData.waitLimit
+              : UTILS.getEnvVariable(CONSTANTS.CUSTOM_VALIDATION_TIMEOUT);
             cy.then({ timeout: customTimeout }, async () => {
               message = await configCustomValidation(apiOrEventObject, fcsValidationObjectData);
             });
