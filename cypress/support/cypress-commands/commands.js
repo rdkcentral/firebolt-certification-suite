@@ -245,7 +245,6 @@ Cypress.Commands.add('updateRunInfo', () => {
   let deviceDistributor = '';
   let devicePlatform = '';
 
-  console.log('entered updateRunInfo >>> ');
   // function to set env variable for run info data
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
     if (deviceData === '') {
@@ -260,11 +259,9 @@ Cypress.Commands.add('updateRunInfo', () => {
     }
   };
   cy.task('checkFileExists', reportEnvFile).then((exists) => {
-    console.log('entered updateRunInfo line 264 >>> ');
 
     if (exists) {
       cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
-        console.log('entered updateRunInfo line 268 >>> ', tempFileExists);
 
         if (!tempFileExists) {
           try {
