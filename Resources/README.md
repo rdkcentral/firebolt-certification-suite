@@ -1,25 +1,25 @@
 # Resources
 The `Resources` folder in the Firebolt Certification Suite (FCS) contains all test cases and fixtures that are independent of any specific SDK version.
 
-## Flowchart of folder structure and resource copying process
+## Flowchart of folder structure and resources copying process
 ![alt text](Resources_flowChart.png)
 
 ## Directory Structure
 - **Initial Structure (after cloning):** When you first clone the repository, the `Resources` directory will contain subfolders for TestCases and Fixtures.
   ```bash 
   Resources
-    ├── common
+    ├── <subFolder>
     │   ├── fixtures      # SDK-independent fixture files
     │   ├── TestCases     # SDK-independent test case files
     ...
 - **After Installing Dependencies:**  Once dependencies are installed (yarn install), the common test cases and fixtures from the configModule are copied into FCS’s `Resources/external/` directory.
   ```bash 
   Resources
-    ├── common
+    ├── <subFolder>
     │   ├── fixtures      # SDK-independent fixture files
     │   ├── TestCases     # SDK-independent test case files
     ├── external
-    │   ├── common
+    │   ├── <subFolder>
     │       ├── fixtures      # config module SDK-independent fixture files
     │       ├── TestCases     # config module SDK-independent test case files
     ...
@@ -45,4 +45,16 @@ Resources
 ├── <folderName>          # Folder for the specific certification or resource type (e.g., fireboltCertification)
 │   ├── fixtures          # Certification-specific fixture files
 │   ├── testCases         # Certification-specific test case files
-...
+```
+
+## Note on File Overrides
+During the copying process, if two files with the **same name** exist in different source directories, one file will override the other in the target location.
+
+### Example:
+When processing the `fixtures` directory, if both `Resources/<subfolder1>/fixtures/data.json` and `Resources/<subfolder2>/fixtures/data.json` exist, the second file (`Resources/<subfolder2>/fixtures/data.json`) will override the first file in the target location (`cypress/fixtures/data.json`).
+
+The console log will display a warning in **red** text to alert users:
+
+```bash
+File override warning: /cypress/fixtures/data.json will be overwritten by /Resources/<subfolder2>/fixtures/data.json
+```
