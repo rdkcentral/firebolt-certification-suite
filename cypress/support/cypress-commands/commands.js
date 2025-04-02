@@ -259,10 +259,8 @@ Cypress.Commands.add('updateRunInfo', () => {
     }
   };
   cy.task('checkFileExists', reportEnvFile).then((exists) => {
-
     if (exists) {
       cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
-
         if (!tempFileExists) {
           try {
             let configModuleConst;
@@ -346,9 +344,25 @@ Cypress.Commands.add('updateRunInfo', () => {
                       item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
                     }
                   });
+
+                  // Ensure all values from labelToEnvMap are present in reportEnv
+                  labelToEnvMap = {
+                    ...labelToEnvMap,
+                    ...reportEnv.customData.data.reduce((acc, item) => {
+                      acc[item.label] = item.value;
+                      return acc;
+                    }, {}),
+                  };
+
+                  reportEnv.customData.data = Object.keys(labelToEnvMap).map((label) => ({
+                    label,
+                    value: Cypress.env(labelToEnvMap[label]) || 'N/A',
+                  }));
                 }
+
                 // write the merged object
                 cy.writeFile(tempReportEnvFile, reportEnv);
+                cy.writeFile(reportEnvFile, reportEnv);
               } else {
                 logger.info('Unable to read from reportEnv json file');
                 return false;

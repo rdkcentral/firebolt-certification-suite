@@ -112,6 +112,9 @@ Given(
             );
           }
         }
+        Cypress.env('startAdditionalServices', 'getReportData');
+        cy.startAdditionalServices();
+        cy.updateRunInfo();
       } catch (error) {
         cy.log(
           `Following error occurred while trying to fetch device details dynamically: ${error}`
