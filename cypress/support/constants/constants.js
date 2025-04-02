@@ -420,7 +420,7 @@ module.exports = {
   SET_METHOD: 'setMethod',
   FCS_SETTER: 'fcsSetters',
   SET_VALIDATIONPATH: 'setValidationJsonPath',
-  COMMUNICATION_INIT_TIMEOUT: 30000,
+  COMMUNICATION_INIT_TIMEOUT: 15000,
   SKIPCONTENTVALIDATION: 'skipContentValidation',
   SKIPPED: 'SKIPPED',
   SOURCE: 'source',
