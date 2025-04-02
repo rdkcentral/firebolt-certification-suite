@@ -1990,45 +1990,6 @@ const shouldPerformValidation = (key, value) => {
   return true;
 };
 
-Cypress.Commands.add('toggleUIElement', (element, value, keypress) => {
-  cy.getDomElement(element).then((result) => {
-    // Check the initial value and if they are equal we need to send the keypress to toggle the value twice.
-    if (result.result == value) {
-      // Send the keypress and verify the value again
-      cy.sendKeyPress(keypress).then(() => {
-        cy.getDomElement(element).then((updatedResult) => {
-          if (updatedResult.result != value) {
-            cy.sendKeyPress(keypress).then(() => {
-              cy.getDomElement(element).then((finalResult) => {
-                if (finalResult.result !== value) {
-                  assert(
-                    false,
-                    `Value did not change as expected after toggling. Expected: ${value}, Got: ${finalResult.result}`
-                  );
-                } else {
-                  fireLog.info(`Successfully toggled the value to: ${value}`);
-                }
-              });
-            });
-          }
-        });
-      });
-    } else {
-      // Send the keypress and verify the value again
-      cy.sendKeyPress(keypress).then(() => {
-        cy.getDomElement(element).then((updatedResult) => {
-          if (updatedResult.result !== value) {
-            assert(
-              false,
-              `Value did not change as expected after keypress. Expected: ${value}, Got: ${updatedResult.result}`
-            );
-          }
-        });
-      });
-    }
-  });
-});
-
 /**
  * @module commands
  * @function sendKeyPress
@@ -2036,7 +1997,8 @@ Cypress.Commands.add('toggleUIElement', (element, value, keypress) => {
  * @param {String} key - The key to be pressed.
  * @param {Number} delay - The delay in seconds before sending the key press.
  * @example
- * cy.sendKeyPress()
+ * cy.sendKeyPress('right')
+ * cy.sendKeyPress('right', 10)
  */
 Cypress.Commands.add('sendKeyPress', (key, delay) => {
   delay = delay ? delay : 5;
@@ -2051,112 +2013,6 @@ Cypress.Commands.add('sendKeyPress', (key, delay) => {
     );
   });
 });
-
-/**
- * @module commands
- * @function scrollToTile
- * @description Command to scroll to a specific tile in the UI.
- * @param {String} targetElement - The element to scroll within.
- * @param {String} tileName - The name of the tile to scroll to.
- * @param {String} scrollDirection - The direction to scroll (horizontal, vertical, grid).
- * @example
- * cy.scrollToTile()
- */
-Cypress.Commands.add('scrollToTile', (targetElement, tileName, scrollDirection) => {
-  fireLog.info(`Started searching for the element: ${tileName} in a ${scrollDirection} direction.`);
-  cy.wrap(targetElement).then(async () => {
-    if (!targetElement || !tileName) {
-      fireLog.fail('Provide valid targetElement and tileName to search for the element.');
-      return;
-    }
-
-    // Call the generic scroll function
-    await findElement(targetElement, tileName, scrollDirection);
-  });
-});
-
-// Helper function to find the element by scrolling
-function findElement(targetElement, expectedTile, scrollDirection) {
-  let previousTileName = '';
-  let currentTileName = '';
-  let initialTileName = '';
-  let elementFound = false;
-
-  const directionMap = {
-    horizontal: ['right', 'left'],
-    vertical: ['down', 'up'],
-    grid: ['right', 'left', 'down'],
-  };
-
-  const directions = directionMap[scrollDirection];
-  if (!directions) {
-    fireLog.fail(
-      `Invalid scroll direction: ${scrollDirection}, Expected: ${Object.keys(directionMap)}`
-    );
-    return;
-  }
-
-  function scrollAndCheck() {
-    if (elementFound) {
-      fireLog.info(`Expected tile "${expectedTile}" has been located successfully.`);
-      return;
-    }
-
-    if (currentTileName === expectedTile) {
-      elementFound = true;
-      fireLog.info(`Expected tile "${expectedTile}" has been located successfully.`);
-      return;
-    }
-
-    if (currentTileName === initialTileName && previousTileName !== '') {
-      if (scrollDirection === 'grid') {
-        if (directions[0] === 'down') {
-          // Reset the horizontal scroll cycle after moving down
-          directions.splice(0, directions.length, 'right', 'left', 'down');
-        } else {
-          // Move down after completing the right-left cycle
-          directions.push(directions.shift()); // Move "down" to the front of the directions array
-        }
-      } else {
-        fireLog.fail(
-          `Unable to find the expected tile "${expectedTile}" after scrolling through all available tiles.`
-        );
-      }
-    }
-
-    previousTileName = currentTileName;
-
-    // Scroll in the current direction
-    const currentDirection = directions[0];
-    cy.sendKeyPress(currentDirection);
-
-    // Get the next tile and check again
-    cy.getDomElement(targetElement).then((tileName) => {
-      currentTileName = tileName.result;
-
-      if (scrollDirection === 'grid' && currentDirection === 'down') {
-        directions.splice(0, directions.length, 'right', 'left', 'down');
-        initialTileName = currentTileName; // Reset the initial tile name after moving down
-      }
-
-      if (currentTileName === previousTileName) {
-        // Rotate the direction if reached the end
-        directions.push(directions.shift());
-      }
-      scrollAndCheck();
-    });
-  }
-
-  // Start the process by getting the initial tile
-  cy.getDomElement(targetElement).then((tileName) => {
-    initialTileName = tileName.result;
-    currentTileName = initialTileName;
-    scrollAndCheck();
-  });
-
-  // Return a promise-like structure for Cypress chaining
-  return cy.wrap(null).then(() => elementFound);
-}
 
 /**
  * @module commands
