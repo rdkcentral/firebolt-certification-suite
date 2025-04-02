@@ -230,6 +230,7 @@ export default function (module) {
         }
         // unsubscribing the list of topics
         appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
+        await transport.unsubscribe();
 
         // Unsubscribe from WebSocket if the client is available
         const webSocketClient = UTILS.getEnvVariable('webSocketClient', false);
@@ -398,7 +399,7 @@ export default function (module) {
 
     overrideParams.certification = UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false);
     overrideParams.exceptionMethods = UTILS.generateCombinedExceptionList();
-
+    overrideParams.additionalContext = UTILS.getEnvVariable(CONSTANTS.ADDITIONAL_CONTEXT, false);
     // If certification is true override excluded methods and modules from config module if it is present else use the default lists in constants.
     if (overrideParams.certification == true) {
       overrideParams = UTILS.overideParamsFromConfigModule(overrideParams);

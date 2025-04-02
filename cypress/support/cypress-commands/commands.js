@@ -68,73 +68,77 @@ Cypress.Commands.add(
  * @Result
  * { method: 'device.id', param: {}, context: {}, action: 'core', expected: 'result'}
  */
-Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0]) => {
-  const results = [];
-  Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, false);
-  if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
-    key = key.replaceAll(' ', '_').toUpperCase();
+Cypress.Commands.add(
+  'fireboltDataParser',
+  (key, sdk = UTILS.getEnvVariable(CONSTANTS.SUPPORTED_SDK)[0]) => {
+    const results = [];
+    const supportedSDK = UTILS.getEnvVariable(CONSTANTS.SUPPORTED_SDK);
+    Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, false);
+    if (Array.isArray(supportedSDK) && supportedSDK.includes(sdk)) {
+      key = key.replaceAll(' ', '_').toUpperCase();
 
-    // Fetching the firebolt Data based on key value.
-    return cy.getFireboltData(key).then((fireboltData) => {
-      // Check if fireboltData is an array or an object
-      const fireboltItems = Array.isArray(fireboltData) ? fireboltData : [fireboltData];
+      // Fetching the firebolt Data based on key value.
+      return cy.getFireboltData(key).then((fireboltData) => {
+        // Check if fireboltData is an array or an object
+        const fireboltItems = Array.isArray(fireboltData) ? fireboltData : [fireboltData];
 
-      // Process each firebolt call item
-      const promises = fireboltItems.map((item) => {
-        let params = item.params;
-        let method, action;
-        // Fetching the value of environment variable based on dataIdentifier
-        if (/CYPRESSENV/.test(params)) {
-          const envParam = params.split('-')[1];
-          params = UTILS.getEnvVariable(envParam, false);
-        }
-        // If params contain CYPRESSENV in any parameter assigning corresponding env value
-        if (Array.isArray(params)) {
-          params.forEach((item) => {
-            const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
+        // Process each firebolt call item
+        const promises = fireboltItems.map((item) => {
+          let params = item.params;
+          let method, action;
+          // Fetching the value of environment variable based on dataIdentifier
+          if (/CYPRESSENV/.test(params)) {
+            const envParam = params.split('-')[1];
+            params = UTILS.getEnvVariable(envParam, false);
+          }
+          // If params contain CYPRESSENV in any parameter assigning corresponding env value
+          if (Array.isArray(params)) {
+            params.forEach((item) => {
+              const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
 
+              if (containEnv) {
+                const envParam = containEnv.split('-')[1];
+                item[envParam] = Cypress.env(envParam);
+                delete item[containEnv];
+              }
+            });
+          } else {
+            const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
             if (containEnv) {
               const envParam = containEnv.split('-')[1];
-              item[envParam] = Cypress.env(envParam);
-              delete item[containEnv];
+              params[envParam] = Cypress.env(envParam);
+              delete params[containEnv];
             }
-          });
-        } else {
-          const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
-          if (containEnv) {
-            const envParam = containEnv.split('-')[1];
-            params[envParam] = Cypress.env(envParam);
-            delete params[containEnv];
           }
-        }
 
-        method = item.method;
-        const expected = item.expected ? item.expected : CONSTANTS.RESULT;
-        action = CONSTANTS.ACTION_CORE.toLowerCase();
+          method = item.method;
+          const expected = item.expected ? item.expected : CONSTANTS.RESULT;
+          action = CONSTANTS.ACTION_CORE.toLowerCase();
 
-        // If a method has prefix with an underscore, the value is taken as the action.
-        if (method && method.includes('_')) {
-          action = method.split('_')[0];
-          method = method.split('_')[1];
-        }
+          // If a method has prefix with an underscore, the value is taken as the action.
+          if (method && method.includes('_')) {
+            action = method.split('_')[0];
+            method = method.split('_')[1];
+          }
 
-        return results.push({
-          method: method,
-          params: params,
-          context: item.context,
-          action: action,
-          expected: expected,
+          return results.push({
+            method: method,
+            params: params,
+            context: item.context,
+            action: action,
+            expected: expected,
+          });
+        });
+
+        return Cypress.Promise.all(promises).then(() => {
+          return results;
         });
       });
-
-      return Cypress.Promise.all(promises).then(() => {
-        return results;
-      });
-    });
-  } else {
-    fireLog.fail(`${sdk} SDK not Supported`);
+    } else {
+      fireLog.fail(`${sdk} SDK not Supported`);
+    }
   }
-});
+);
 
 /**
  * @module commands
@@ -1402,7 +1406,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
     // cy.then() to ensure each Cypress command is properly awaited before return
     cy.then(() => {
-      console.log(`======Beginning of the ${scenario} validation======`);
+      fireLog.info(`======Beginning of the ${scenario} validation======`);
       switch (scenario) {
         case CONSTANTS.REGEX:
           cy.regExValidation(
@@ -1456,7 +1460,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
           break;
       }
     }).then(() => {
-      console.log(`=====Ending of the ${scenario} validation=====`);
+      fireLog.info(`=====Ending of the ${scenario} validation=====`);
     });
   };
 
@@ -1830,23 +1834,45 @@ Cypress.Commands.add('fetchAppMetaData', () => {
         appAssuranceId: Cypress.env(CONSTANTS.APP_ASSURANCE_ID),
       },
     };
+    // Send the request to fetch app data from platforms
     cy.sendMessagetoPlatforms(requestParams).then((result) => {
-      return result.data;
+      if (result && result.data) {
+        return result.data;
+      } else {
+        throw new Error('Unable to get valid response for fetching app metadata');
+      }
     });
   } else {
-    // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
+    // If app assurance id is not available, extract app metadata from local directories
+
     const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
     const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
 
     const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
     const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
+    // Extract internal app metadata
     cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
       (fcsAppMetaData) => {
+        // Check if internal app metadata extraction was successful
+        if (!fcsAppMetaData) {
+          throw new Error('Failed to extract internal app metadata.');
+        }
+
+        // Extract external app metadata
         cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
           (configModuleAppMetaData) => {
-            // Combine the app metadata from the fcs and configModule appData directories.
-            _.merge(fcsAppMetaData, configModuleAppMetaData);
+            // Check if external app metadata extraction was successful
+            if (!configModuleAppMetaData) {
+              throw new Error('Failed to extract external app metadata.');
+            }
+
+            // Merge internal and external app metadata
+            try {
+              _.merge(fcsAppMetaData, configModuleAppMetaData);
+            } catch (mergeError) {
+              throw new Error(`Error merging app metadata: ${mergeError.message}`);
+            }
           }
         );
       }

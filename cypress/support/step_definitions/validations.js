@@ -42,7 +42,8 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
 Given(
   /'(.+)' platform (responds|triggers|does not trigger)(?: to '(.+)')? (with|for|event)(?: for)? '(.+)'$/,
   async (sdk, eventExpected, appId, event, key) => {
-    if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
+    const supportedSDK = UTILS.getEnvVariable(CONSTANTS.SUPPORTED_SDK);
+    if (Array.isArray(supportedSDK) && supportedSDK.includes(sdk)) {
       key = key.replaceAll(' ', '_').toUpperCase();
 
       // Fetching the required data for validation.

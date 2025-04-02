@@ -96,6 +96,7 @@ const env = {
   elk: false,
   objective: '',
   supportsPlatformCommunication: false,
+  supportedSDK: ['Firebolt'],
   customValidationTimeout: 60000,
 };
 
