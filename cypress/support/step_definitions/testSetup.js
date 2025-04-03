@@ -112,6 +112,8 @@ Given(
             );
           }
         }
+        console.log('Fetching device details dynamically');
+        cy.updateRunInfo();
       } catch (error) {
         cy.log(
           `Following error occurred while trying to fetch device details dynamically: ${error}`

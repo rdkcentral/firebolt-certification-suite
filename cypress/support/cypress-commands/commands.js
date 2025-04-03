@@ -233,6 +233,7 @@ Cypress.Commands.add('getSdkVersion', () => {
  * updateRunInfo()
  */
 Cypress.Commands.add('updateRunInfo', () => {
+  console.log('**Inside Update Run Info in cucumber report');
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
   let deviceModel = '';
