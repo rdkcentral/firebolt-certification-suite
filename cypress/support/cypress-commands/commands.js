@@ -273,6 +273,11 @@ Cypress.Commands.add('updateRunInfo', () => {
                 );
               Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
             }
+            if (!Cypress.env(CONSTANTS.ENV_RELEASE) && response?.debug) {
+              const release = response.debug;
+              Cypress.env(CONSTANTS.ENV_RELEASE, release);
+            }
+          } else if (deviceType.includes(CONSTANTS.DEVICE_ID)) {
             if (!Cypress.env(CONSTANTS.ENV_SDK_VERSION) && response?.sdk?.readable) {
               sdkVersion =
                 `${response?.sdk?.major}.${response?.sdk?.minor}.${response?.sdk?.patch}`.replace(
@@ -280,10 +285,6 @@ Cypress.Commands.add('updateRunInfo', () => {
                   ''
                 );
               Cypress.env(CONSTANTS.ENV_SDK_VERSION, sdkVersion);
-            }
-            if (!Cypress.env(CONSTANTS.ENV_RELEASE) && response?.debug) {
-              const release = response.debug;
-              Cypress.env(CONSTANTS.ENV_RELEASE, release);
             }
           } else {
             // Set environment variable with the response
@@ -370,12 +371,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                   Cypress.env(CONSTANTS.ENV_SDK_VERSION) == 'N/A' ||
                   !Cypress.env(CONSTANTS.ENV_SDK_VERSION)
                 ) {
-                  return setEnvRunInfo(
-                    sdkVersion,
-                    CONSTANTS.DEVICE_VERSION,
-                    CONSTANTS.ACTION_CORE,
-                    {}
-                  );
+                  return setEnvRunInfo(sdkVersion, CONSTANTS.DEVICE_ID, CONSTANTS.ACTION_CORE, {});
                 }
               })
               .then(() => delay(2000))
