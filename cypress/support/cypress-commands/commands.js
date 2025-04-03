@@ -319,45 +319,39 @@ Cypress.Commands.add('updateRunInfo', () => {
                   reportEnv.customData.data.length > 0
                 ) {
                   // Retrieve the current labelToEnvMap
-                  let labelToEnvMap = Cypress.env('labelToEnvMap') || {};
+                  // let labelToEnvMap = Cypress.env('labelToEnvMap') || {};
+                  let labelToEnvMap = {};
+                  if (Cypress.env('labelToEnvMap')) {
+                    labelToEnvMap = Cypress.env('labelToEnvMap');
+                    // Clear the existing customData.data array
+                    reportEnv.customData.data = [];
 
-                  const newLabelToEnvMap = {
-                    [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
-                    [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
-                    [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
-                    [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
-                    [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
-                    [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
-                    [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
-                    [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
-                  };
-                  // Append the new values to the existing labelToEnvMap
-                  labelToEnvMap = { ...labelToEnvMap, ...newLabelToEnvMap };
-
-                  // Set the updated labelToEnvMap back to Cypress env
-                  Cypress.env('labelToEnvMap', labelToEnvMap);
-
-                  reportEnv.customData.data.forEach((item) => {
-                    if (item.label === CONSTANTS.PRODUCT) {
-                      item.value = configModuleConst.PRODUCT ? configModuleConst.PRODUCT : 'N/A';
-                    } else if (labelToEnvMap[item.label]) {
-                      item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
-                    }
-                  });
-
-                  // Ensure all values from labelToEnvMap are present in reportEnv
-                  labelToEnvMap = {
-                    ...labelToEnvMap,
-                    ...reportEnv.customData.data.reduce((acc, item) => {
-                      acc[item.label] = item.value;
-                      return acc;
-                    }, {}),
-                  };
-
-                  reportEnv.customData.data = Object.keys(labelToEnvMap).map((label) => ({
-                    label,
-                    value: Cypress.env(labelToEnvMap[label]) || 'N/A',
-                  }));
+                    // Populate customData.data with values from the environment
+                    Object.keys(labelToEnvMap).forEach((key) => {
+                      reportEnv.customData.data.push({
+                        label: key,
+                        value: Cypress.env(labelToEnvMap[key]) || 'N/A',
+                      });
+                    });
+                  } else {
+                    labelToEnvMap = {
+                      [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
+                      [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
+                      [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
+                      [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
+                      [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
+                      [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
+                      [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
+                      [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                    };
+                    reportEnv.customData.data.forEach((item) => {
+                      if (item.label === CONSTANTS.PRODUCT) {
+                        item.value = configModuleConst.PRODUCT ? configModuleConst.PRODUCT : 'N/A';
+                      } else if (labelToEnvMap[item.label]) {
+                        item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+                      }
+                    });
+                  }
                 }
 
                 // write the merged object
