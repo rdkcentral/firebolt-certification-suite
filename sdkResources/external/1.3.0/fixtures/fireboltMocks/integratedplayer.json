@@ -1,0 +1,10 @@
+{
+  "INTEGRATEDPLAYER_LOAD_PLAYERINSTANCE": {
+    "method": "external",
+    "response": [
+      {
+        "playerId": "com.comcast.viper_ipa:1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+    "DEVICE_DISTRIBUTOR": {
+        "data": [
+            {
+                "type": "fixture",
+                "override": 0,
+                "validations": [
+                    {
+                        "mode": "deviceContentValidation",
+                        "type": "DEVICE_DISTRIBUTOR",
+                        "description": "Validation of the Device Distributor Format"
+                    }
+                ]
+            }
+        ]
+    }
+}

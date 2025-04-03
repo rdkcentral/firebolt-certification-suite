@@ -1,0 +1,13 @@
+{
+  "customFooter": {
+    "PageFooter": "<div id=\"pagefooter\"><p><b>The following module exclusions apply:</b><ul><li>Discovery.launch (Due to launch crashes in Ripple 1 gateway with launcher builds)</li><li>Federated Data (Not currently supported as a rippleRPC only method)</li><li>Secure Storage( Test cases which involves passing empty string for key comes under distributorCertification and not under fireboltCertification)</li><li>Any test case which requires thunder events (denoted by @thunderproxy tag)</li><li>Any test case which requires a test step that is not possible with the methods we have available (denoted by @notSupported tag)</li><li>Lifecycle Visibility state validation fix :  Add the expected value in configModule file ( cypress.config.js) in the format &quot;visibilityState&quot; : { &quot;state&quot; : &quot;expectedValue&quot;}</li></ul></p></div>",
+    "Account": "<div><p><b>Custom for Account pages</b></p></div>",
+    "Device": "<div><p><b>Custom for Device pages</b></p></div>",
+    "AS_Call_HotLaunch": "<div><h3><span style=\"text-decoration: underline;\">Considerations:</h3><p><b><ul><li>The AS service does not perform any validation on requests to launch an app. Testing any behavior where the expectation is to receive an error when trying to launch an app is not applicable to XSB using the AS service.</li></b></p></div>",
+    "AS_Call_ColdLaunch": "<div><h3><span style=\"text-decoration: underline;\">Considerations:</h3><p><b><ul><li>The AS service does not perform any validation on requests to launch an app. Testing any behavior where the expectation is to receive an error when trying to launch an app is not applicable to XSB using the AS service.</li></b></p></div>"
+  },
+  "customMetadata": {
+    "Account": "SetupAccount1</br>SetupAccount2",
+    "Device": "SetupDevice1</br>SetupDevice2"
+  }
+}

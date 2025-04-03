@@ -1,0 +1,410 @@
+{
+    "INITIALIZATION_TRUE": {
+        "us_privacy": "1-Y-",
+        "lmt": 1,
+        "discovery": {
+            "navigateTo": {
+                "action": "search",
+                "data": {
+                    "query": "{\"params\":{\"appId\":\"comcast.test.firecert\"}}"
+                },
+                "context": {
+                    "source": "voice"
+                }
+            }
+        }
+    },
+    "HOME_INTENT": {
+        "appId": "comcast.test.firecert",
+        "intent": {
+            "action": "home",
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "INITIALIZATION": {
+        "us_privacy": "1-Y-",
+        "lmt": 1,
+        "discovery": {
+            "navigateTo": {
+                "action": "home",
+                "context": {
+                    "source": "voice"
+                }
+            }
+        }
+    },
+    "HOMEINTENT": {
+        "navigateTo": {
+            "action": "home",
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "PLAYBACKINTENT": {
+        "navigateTo": {
+            "action": "playback",
+            "data": {
+                "entityType": "program",
+                "programType": "movie",
+                "entityId": "example-movie-id"
+            },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_MOVIEENTITY": {
+        "navigateTo":     {
+            "action": "play-entity",
+            "data": {
+                "entity": {
+                    "programType": "movie",
+                    "entityType": "program",
+                    "entityId": "el-camino"
+                }
+            },
+            "context": {
+                "source": "voice"
+            }
+        }    
+    },
+    "PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_TVEPISODEENTITY": {
+        "navigateTo": {
+            "action": "play-entity",
+            "data": {
+                "entity": {
+                    "programType": "episode",
+                    "entityType": "program",
+                    "entityId": "breaking-bad-pilot",
+                    "seriesId": "breaking-bad",
+                    "seasonId": "breaking-bad-season-1"
+                  }
+            },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "ENTITYINTENT": {
+        "navigateTo": {
+            "action": "entity",
+            "data": {
+                "entityType": "program",
+                "programType": "movie",
+                "entityId": "example-movie-id"
+            },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "LAUNCHINTENT": {
+        "navigateTo": {
+            "action": "launch",
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "SEARCHINTENT": {
+        "navigateTo": {
+            "action": "search",
+            "context": {
+                "source": "voice"
+            },
+            "data": {
+                "query": "walter white"
+            }
+        }
+    },
+    "SECTIONINTENT": {
+        "navigateTo": {
+            "action": "section",
+            "data": {
+                "sectionName": "settings"
+            },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "TUNEINTENT": {
+        "navigateTo": {
+            "action": "tune",
+            "data": {
+                "entity": {
+                    "channelType": "streaming",
+                    "entityId": "an-ott-channel",
+                    "entityType": "channel"
+                },
+                "options": {
+                    "restartCurrentProgram": true
+                }
+            },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "PLAYENTITYINTENT": {
+        "navigateTo": {
+            "action": "play-entity",
+            "data": {
+                "entity": {
+                    "entityType": "playlist",
+                    "entityId": "playlist/xyz"
+                },
+                "options": {
+                    "playFirstId": "song/xyz"
+                }
+            },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "PLAYQUERYINTENT": {
+        "navigateTo": {
+            "action": "play-query",
+            "data": {
+                "query": "Ed Sheeran"
+            },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "INITIALIZATION_PLAYQUERYINTENT_MUSICTYPE_SONG": {
+        "navigateTo": {
+            "action": "play-query",
+            "data": {
+                "query": "Ed Sheeran",
+                "options": {
+                    "musicTypes": ["song"]
+                    }
+                },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "INITIALIZATION_PLAYQUERYINTENT_MUSICTYPE_ALBUM": {
+        "navigateTo": {
+            "action": "play-query",
+            "data": {
+                "query": "Ed Sheeran",
+                "options": {
+                    "musicTypes": ["album"]
+                    }
+                },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_CONCERT": {
+        "navigateTo": {
+            "action": "play-query",
+            "data": {
+                "query": "Ed Sheeran",
+                "options": {
+                    "programTypes": ["concert"]
+                    }
+                },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_SPORTINGEVENT": {
+        "navigateTo": {
+            "action": "play-query",
+            "data": {
+                "query": "Ed Sheeran",
+                "options": {
+                    "programTypes": ["sportingEvent"]
+                    }
+                },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_PREVIEW": {
+        "navigateTo": {
+            "action": "play-query",
+            "data": {
+                "query": "Ed Sheeran",
+                "options": {
+                    "programTypes": ["preview"]
+                    }
+                },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_OTHER": {
+        "navigateTo": {
+            "action": "play-query",
+            "data": {
+                "query": "Ed Sheeran",
+                "options": {
+                    "programTypes": ["other"]
+                    }
+                },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_ADVERTISEMENT": {
+        "navigateTo": {
+            "action": "play-query",
+            "data": {
+                "query": "Ed Sheeran",
+                "options": {
+                    "programTypes": ["advertisement"]
+                    }
+                },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_MUSICVIDEO": {
+        "navigateTo": {
+            "action": "play-query",
+            "data": {
+                "query": "Ed Sheeran",
+                "options": {
+                    "programTypes": ["musicVideo"]
+                    }
+                },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_MINISODE": {
+        "navigateTo": {
+            "action": "play-query",
+            "data": {
+                "query": "Ed Sheeran",
+                "options": {
+                    "programTypes": ["minisode"]
+                    }
+                },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_EXTRA": {
+        "navigateTo": {
+            "action": "play-query",
+            "data": {
+                "query": "Ed Sheeran",
+                "options": {
+                    "programTypes": ["extra"]
+                    }
+                },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "PLAYENTITYINTENT_MOVIE": {
+        "navigateTo": {
+            "action": "play-entity",
+            "data": {
+                "entity": {
+                    "programType": "movie",
+                    "entityType": "program",
+                    "entityId": "el-camino"
+                }
+            },
+                "context": {
+                    "source": "voice"
+            }
+        }
+    },
+    "PLAYENTITYINTENT_EPISODE": {
+        "navigateTo": {
+            "action": "play-entity",
+            "data": {
+                "entity": {
+                    "programType": "episode",
+                    "entityType": "program",
+                    "entityId": "breaking-bad-pilot",
+                    "seriesId": "breaking-bad",
+                    "seasonId": "breaking-bad-season-1"
+                }
+            },
+                "context": {
+                    "source": "voice"
+            }
+        }
+    },
+    "PLAYENTITYINTENT_CONCERT": {
+        "navigateTo": {
+            "action": "play-entity",
+            "data": {
+                "entity": {
+                    "programType": "concert",
+                    "entityType": "program",
+                    "entityId": "live-aid"
+                }
+            },
+                "context": {
+                    "source": "voice"
+            }
+        }
+    },
+    "PLAYENTITYINTENT_WITHOUT_OPTIONS": {
+        "navigateTo": {
+            "action": "play-entity",
+            "data": {
+                "entity": {
+                    "entityType": "playlist",
+                    "entityId": "playlist/xyz"
+                }
+            },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "HOMEINTENT_SOURCE": {
+        "navigateTo": {
+            "action": "home",
+            "context": {
+                "source": "TestingString"
+            }
+        }
+    },
+    "PLAYBACKINTENT_SOURCE": {
+        "navigateTo": {
+            "action": "playback",
+            "data": {
+                "programType": "movie",
+                "entityType": "program",
+                "entityId": "example-movie-id"
+            },
+            "context": {
+                "source": "voice"
+            }
+        }
+    },
+    "NULLINTENT": {
+        "navigateTo": {
+            "action": "launch",
+            "context": {
+                "source": "device"
+            }
+        }
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "ADVERTISING_ONSKIPRESTRICTIONCHANGED_EVENT":{
+        "event": "manage_advertising.onSkipRestrictionChanged",
+        "firstParty": false
+    }
+}

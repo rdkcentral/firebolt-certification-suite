@@ -1,0 +1,17 @@
+{
+    "CAPABILITIES_PERMITTED": {
+        "method": "capabilities.permitted",
+        "data": [
+            {
+                "type": "custom",
+                "assertionDef": "validateCapabilitiesPermitted",
+                "validations": [
+                    {
+                        "type": "permitted",
+                        "description": "Validation of capabilities.permitted to check if the capabilities are permitted"
+                    }
+                ]
+            }
+        ]
+    }
+}

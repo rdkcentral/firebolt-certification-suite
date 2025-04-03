@@ -1,0 +1,50 @@
+{
+    "LIFECYCLEMANAGEMENT_RESPONSE_INCLUDING_3_SESSION_IDS": {
+        "method": "lifecyclemanagement.session",
+        "data": [
+            {
+                "type": "custom",
+                "override": 0,
+                "assertionDef": "validateActiveSession",
+                "validations": [
+                    {
+                        "type": "activeSession",
+                        "description": "Validate if the response has 3 Session Ids (sessionId, loadedSessionId and activeSessionId) in UUID format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LIFECYCLEMANAGEMENT_RESPONSE_INCLUDING_2_SESSION_IDS": {
+        "method": "lifecyclemanagement.session",
+        "data": [
+            {
+                "type": "custom",
+                "override": 0,
+                "assertionDef": "validateInactiveSession",
+                "validations": [
+                    {
+                        "type": "inactiveSession",
+                        "description": "Validate if the response has 2 Session Ids (sessionId and loadedSessionId) in UUID format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LIFECYCLEMANAGEMENT_RESPONSE_INCLUDING_A_NEW_ACTIVESESSIONID": {
+        "method": "lifecyclemanagement.session",
+        "data": [
+            {
+                "type": "custom",
+                "override": 0,
+                "assertionDef": "validateNewActiveSession",
+                "validations": [
+                    {
+                        "type": "newActiveSession",
+                        "description": "Validate if the response has a new activeSessionId but sessionId & loadedSessionId are the same in UUID format"
+                    }
+                ]
+            }
+        ]
+    }
+}

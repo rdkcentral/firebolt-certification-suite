@@ -1,0 +1,431 @@
+{
+  "CUSTOM_ERROR_FOR_INTEGRATEDPLAYER_LOAD": {
+      "method": "IntegratedPlayer.load",
+      "validationJsonPath": "result",
+      "content": "CUSTOM_ERROR",
+      "expectingError": true
+    },
+    "CUSTOM_ERROR_FOR_PLAYER_NOT_FOUND": {
+      "method": "IntegratedPlayer.play",
+      "validationJsonPath": "result",
+      "content": "PLAYER_NOT_FOUND",
+      "expectingError": true
+    },
+    "CUSTOM_ERROR_WHEN_POSITION_CANNOT_BE_SET": {
+      "method": "IntegratedPlayer.seekTo",
+      "validationJsonPath": "result",
+      "content": "PLAYER_POSITION_CANNOT_BE_SET",
+      "expectingError": true
+    },
+    "CUSTOM_ERROR_FOR_NO_MEDIA": {
+      "method": "IntegratedPlayer.setSpeed",
+      "validationJsonPath": "result",
+      "content": "PLAYER_NO_MEDIA",
+      "expectingError": true
+    },
+    "CUSTOM_ERROR_WHEN_AUDIO_TRACK_CANNOT_BE_SET": {
+      "method": "IntegratedPlayer.setAudioTrack",
+      "validationJsonPath": "result",
+      "content": "PLAYER_TRACKID_NOT_FOUND",
+      "expectingError": true
+    },
+    "CUSTOM_ERROR_WHEN_CAPTIONS_TRACK_CANNOT_BE_SET": {
+      "method": "IntegratedPlayer.setCaptionsTrack",
+      "validationJsonPath": "result",
+      "content": "PLAYER_TRACKID_NOT_FOUND",
+      "expectingError": true
+    },
+    "CUSTOM_ERROR_WHEN_SPEED_CANNOT_BE_SET": {
+      "method": "IntegratedPlayer.setSpeed",
+      "validationJsonPath": "result",
+      "content": "PLAYER_SPEED_CANNOT_BE_SET",
+      "expectingError": true
+    },
+    "CUSTOM_UNSPECIFIED_ERROR": {
+      "method": "IntegratedPlayer.load",
+      "validationJsonPath": "result",
+      "content": "PLAYER_GENERIC_ERROR",
+      "expectingError": true
+    },
+    "CUSTOM_ERROR_FOR_INTEGRATEDPLAYER_GET_AUDIO_TRACKS": {
+      "method": "IntegratedPlayer.getAudioTracks",
+      "validationJsonPath": "result",
+      "content": "CUSTOM_ERROR",
+      "expectingError": true
+    },
+    "CUSTOM_ERROR_FOR_INTEGRATEDPLAYER_PROVIDE_STATUS": {
+      "method": "IntegratedPlayer.provideStatus",
+      "validationJsonPath": "result",
+      "content": "CUSTOM_ERROR",
+      "expectingError": true
+    },
+  
+    "INVALID_PARAMS_FOR_PLAYER_LOAD": {
+      "method": "IntegratedPlayer.load",
+      "validationJsonPath": "result",
+      "content": "INVALID_TYPE_PARAMS",
+      "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_PLAYER_PLAY": {
+      "method": "IntegratedPlayer.play",
+      "validationJsonPath": "result",
+      "content": "INVALID_TYPE_PARAMS",
+      "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_PLAYER_STATUS": {
+      "method": "IntegratedPlayer.status",
+      "validationJsonPath": "result",
+      "content": "INVALID_TYPE_PARAMS",
+      "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_PLAYER_GET_AUDIO_TRACKS": {
+      "method": "IntegratedPlayer.getAudioTracks",
+      "validationJsonPath": "result",
+      "content": "INVALID_TYPE_PARAMS",
+      "expectingError": true
+    },
+    "INVALID_PARAMS_FOR_PLAYER_GET_CAPTIONS_TRACKS": {
+      "method": "IntegratedPlayer.getCaptionsTracks",
+      "validationJsonPath": "result",
+      "content": "INVALID_TYPE_PARAMS",
+      "expectingError": true
+    },
+    "LOAD_PLAYER_WITH_REQUEST_AS_STRING": {
+      "method": "IntegratedPlayer.load",
+      "params": "INTEGRATEDPLAYER_PLAYER_LOAD_WITH_REQUEST_AS_STRING",
+      "expected": "error"
+    },
+    "LOAD_PLAYER_WITH_INVALID_URI": {
+      "method": "IntegratedPlayer.load",
+      "params": "INTEGRATEDPLAYER_PLAYER_LOAD_WITH_INVALID_URI",
+      "expected": "error"
+    },
+    "CUSTOM_ERROR_FOR_INVALID_URI": {
+      "method": "IntegratedPlayer.load",
+      "validationJsonPath": "result",
+      "content": "PLAYER_INVALID_URI",
+      "expectingError": true
+    },
+    "SET_POSITION_OF_PLAYER_OUT_OF_RANGE": {
+      "method": "IntegratedPlayer.seekTo",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETPOSITION_WITH_NEGATIVE_POSITION",
+      "expected": "error"
+    },
+    "CUSTOM_ERROR_FOR_POSITION_OUT_OF_RANGE": {
+      "method": "IntegratedPlayer.seekTo",
+      "validationJsonPath": "result",
+      "content": "PLAYER_POSITION_OUT_OF_RANGE",
+      "expectingError": true
+    },
+    "LOAD_PLAYER_WITH_BOOLEAN_APPID": {
+      "method": "IntegratedPlayer.load",
+      "params": "INTEGRATEDPLAYER_PLAYER_LOAD_WITH_BOOLEAN_APPID",
+      "expected": "error"
+    },
+    "LOAD_PLAYER_WITH_BOOLEAN_PLAYERID": {
+      "method": "IntegratedPlayer.load",
+      "params": "INTEGRATEDPLAYER_PLAYER_LOAD_WITH_BOOLEAN_PLAYERID",
+      "expected": "error"
+    },
+    "PLAY_PLAYER_WITH_BOOLEAN_APPID": {
+      "method": "IntegratedPlayer.play",
+      "params": "INTEGRATEDPLAYER_PLAYER_PLAY_WITH_BOOLEAN_APPID",
+      "expected": "error"
+    },
+    "PLAY_PLAYER_WITH_BOOLEAN_PLAYERID": {
+      "method": "IntegratedPlayer.play",
+      "params": "INTEGRATEDPLAYER_PLAYER_PLAY_WITH_BOOLEAN_PLAYERID",
+      "expected": "error"
+    },
+    "SET_POSITION_WITH_APPID_AND_PLAYERID_AS_BOOLEAN": {
+      "method": "IntegratedPlayer.seekTo",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETPOSITION_WITH_BOOLEAN_APPID",
+      "expected": "error"
+    },
+    "SET_POSITION_WITH_PLAYERID_AS_BOOLEAN": {
+      "method": "IntegratedPlayer.seekTo",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETPOSITION_WITH_BOOLEAN_PLAYERID",
+      "expected": "error"
+    },
+    "SET_SPEED_WITH_APPID_AS_BOOLEAN": {
+      "method": "IntegratedPlayer.setSpeed",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETSPEED_WITH_BOOLEAN_APPID",
+      "expected": "error"
+    },
+    "SET_SPEED_WITH_PLAYERID_AS_BOOLEAN": {
+      "method": "IntegratedPlayer.setSpeed",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETSPEED_WITH_BOOLEAN_PLAYERID",
+      "expected": "error"
+    },
+    "SET_SPEED_WITH_SPEED_AS_STRING": {
+      "method": "IntegratedPlayer.setSpeed",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETSPEED_WITH_STRING_SPEED",
+      "expected": "error"
+    },
+    "SET_SPEED_WITH_SPEED_AS_ZERO": {
+      "method": "IntegratedPlayer.setSpeed",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETSPEED_WITH_ZERO_SPEED",
+      "expected": "error"
+    },
+    "PLAYER_STATUS_WITH_BOOLEAN_APPID": {
+      "method": "IntegratedPlayer.status",
+      "params": "INTEGRATEDPLAYER_PLAYER_STATUS_WITH_BOOLEAN_APPID",
+      "expected": "error"
+    },
+    "PLAYER_STATUS_WITH_BOOLEAN_PLAYERID": {
+      "method": "IntegratedPlayer.status",
+      "params": "INTEGRATEDPLAYER_PLAYER_STATUS_WITH_BOOLEAN_PLAYERID",
+      "expected": "error"
+    },
+    "PLAYER_GET_AUDIO_TRACKS_WITH_BOOLEAN_APPID": {
+      "method": "IntegratedPlayer.getAudioTracks",
+      "params": "INTEGRATEDPLAYER_PLAYER_TRACKS_WITH_BOOLEAN_APPID",
+      "expected": "error"
+    },
+    "PLAYER_GET_AUDIO_TRACKS_WITH_BOOLEAN_PLAYERID": {
+      "method": "IntegratedPlayer.getAudioTracks",
+      "params": "INTEGRATEDPLAYER_PLAYER_TRACKS_WITH_BOOLEAN_PLAYERID",
+      "expected": "error"
+    },
+    "PLAYER_GET_CAPTIONS_TRACKS_WITH_BOOLEAN_APPID": {
+      "method": "IntegratedPlayer.getCaptionsTracks",
+      "params": "INTEGRATEDPLAYER_PLAYER_TRACKS_WITH_BOOLEAN_APPID",
+      "expected": "error"
+    },
+    "PLAYER_GET_CAPTIONS_TRACKS_WITH_BOOLEAN_PLAYERID": {
+      "method": "IntegratedPlayer.getCaptionsTracks",
+      "params": "INTEGRATEDPLAYER_PLAYER_TRACKS_WITH_BOOLEAN_PLAYERID",
+      "expected": "error"
+    },
+    "SET_AUDIO_TRACK_WITH_BOOLEAN_APPID": {
+      "method": "IntegratedPlayer.setAudioTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETAUDIOTRACK_WITH_BOOLEAN_APPID",
+      "expected": "error"
+    },
+    "SET_AUDIO_TRACK_WITH_BOOLEAN_PLAYERID": {
+      "method": "IntegratedPlayer.setAudioTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETAUDIOTRACK_WITH_BOOLEAN_PLAYERID",
+      "expected": "error"
+    },
+    "SET_AUDIO_TRACK_WITH_BOOLEAN_TRACKID": {
+      "method": "IntegratedPlayer.setAudioTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETAUDIOTRACK_WITH_BOOLEAN_TRACKID",
+      "expected": "error"
+    },
+    "SET_AUDIO_TRACK_WITH_INTEGER_TRACKID": {
+      "method": "IntegratedPlayer.setAudioTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETAUDIOTRACK_WITH_INTEGER_TRACKID",
+      "expected": "error"
+    },
+    "SET_CAPTIONS_TRACK_WITH_BOOLEAN_APPID": {
+      "method": "IntegratedPlayer.setCaptionsTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETCAPTIONSTRACK_WITH_BOOLEAN_APPID",
+      "expected": "error"
+    },
+    "SET_CAPTIONS_TRACK_WITH_BOOLEAN_PLAYERID": {
+      "method": "IntegratedPlayer.setCaptionsTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETCAPTIONSTRACK_WITH_BOOLEAN_PLAYERID",
+      "expected": "error"
+    },
+    "SET_CAPTIONS_TRACK_WITH_BOOLEAN_TRACKID": {
+      "method": "IntegratedPlayer.setCaptionsTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETCAPTIONSTRACK_WITH_BOOLEAN_TRACKID",
+      "expected": "error"
+    },
+    "SET_CAPTIONS_TRACK_WITH_INTEGER_TRACKID": {
+      "method": "IntegratedPlayer.setCaptionsTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETCAPTIONSTRACK_WITH_INTEGER_TRACKID",
+      "expected": "error"
+    },
+    "SET_POSITION_WITH_POSITION_AS_NEGATIVE_VALUE": {
+      "method": "IntegratedPlayer.seekTo",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETPOSITION_WITH_NEGATIVE_POSITION",
+      "expected": "error"
+    },
+    "SET_POSITION_WITH_POSITION_AS_STRING": {
+      "method": "IntegratedPlayer.seekTo",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETPOSITION_WITH_STRING",
+      "expected": "error"
+    },
+    "LOAD_PLAYER_WITH_NO_APPID": {
+      "method": "IntegratedPlayer.load",
+      "params": "INTEGRATEDPLAYER_PLAYER_LOAD_WITH_NO_APPID",
+      "expected": "error"
+    },
+    
+    "LOAD_PLAYER_WITH_NO_PLAYERID": {
+      "method": "IntegratedPlayer.load",
+      "params": "INTEGRATEDPLAYER_PLAYER_LOAD_WITH_NO_PLAYERID",
+      "expected": "error"
+    },
+    "LOAD_PLAYER_WITH_NO_REQUEST": {
+      "method": "IntegratedPlayer.load",
+      "params": "INTEGRATEDPLAYER_PLAYER_LOAD_WITH_NO_REQUEST",
+      "expected": "error"
+    },
+    "PLAY_PLAYER_WITH_NO_APPID": {
+      "method": "IntegratedPlayer.play",
+      "params": "INTEGRATEDPLAYER_PLAYER_PLAY_WITH_NO_APPID",
+      "expected": "error"
+    },
+    "PLAY_PLAYER_WITH_NO_PLAYERID": {
+      "method": "IntegratedPlayer.play",
+      "params": "INTEGRATEDPLAYER_PLAYER_PLAY_WITH_NO_PLAYERID",
+      "expected": "error"
+    },
+    
+    "SET_POSITION_WITH_NO_APPID": {
+      "method": "IntegratedPlayer.seekTo",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETPOSITION_WITH_NO_APPID",
+      "expected": "error"
+    },
+    "SET_POSITION_WITH_NO_PLAYERID": {
+      "method": "IntegratedPlayer.seekTo",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETPOSITION_WITH_NO_PLAYERID",
+      "expected": "error"
+    },
+    "SET_POSITION_WITH_NO_POSITION": {
+      "method": "IntegratedPlayer.seekTo",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETPOSITION_WITH_NO_POSITION",
+      "expected": "error"
+    },
+    "SET_SPEED_WITH_NO_APPID": {
+      "method": "IntegratedPlayer.setSpeed",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETSPEED_WITH_NO_APPID",
+      "expected": "error"
+    },
+    "SET_SPEED_WITH_NO_PLAYERID": {
+      "method": "IntegratedPlayer.setSpeed",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETSPEED_WITH_NO_PLAYERID",
+      "expected": "error"
+    },
+    "SET_SPEED_WITH_NO_SPEED": {
+      "method": "IntegratedPlayer.setSpeed",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETSPEED_WITH_NO_SPEED",
+      "expected": "error"
+    },
+   
+    "PLAYER_STATUS_WITH_NO_APPID": {
+      "method": "IntegratedPlayer.status",
+      "params": "INTEGRATEDPLAYER_PLAYER_STATUS_WITH_NO_APPID",
+      "expected": "error"
+    },
+    "PLAYER_STATUS_WITH_NO_PLAYERID": {
+      "method": "IntegratedPlayer.status",
+      "params": "INTEGRATEDPLAYER_PLAYER_STATUS_WITH_NO_PLAYERID",
+      "expected": "error"
+    },
+    
+    "PLAYER_GET_AUDIO_TRACKS_WITH_NO_APPID": {
+      "method": "IntegratedPlayer.getAudioTracks",
+      "params": "INTEGRATEDPLAYER_PLAYER_TRACKS_WITH_NO_APPID",
+      "expected": "error"
+    },
+    "PLAYER_GET_AUDIO_TRACKS_WITH_NO_PLAYERID": {
+      "method": "IntegratedPlayer.getAudioTracks",
+      "params": "INTEGRATEDPLAYER_PLAYER_TRACKS_WITH_NO_PLAYERID",
+      "expected": "error"
+    },
+    "PLAYER_GET_CAPTIONS_TRACKS_WITH_NO_APPID": {
+      "method": "IntegratedPlayer.getCaptionsTracks",
+      "params": "INTEGRATEDPLAYER_PLAYER_TRACKS_WITH_NO_APPID",
+      "expected": "error"
+    },
+    "PLAYER_GET_CAPTIONS_TRACKS_WITH_NO_PLAYERID": {
+      "method": "IntegratedPlayer.getCaptionsTracks",
+      "params": "INTEGRATEDPLAYER_PLAYER_TRACKS_WITH_NO_PLAYERID",
+      "expected": "error"
+    },
+    
+    "SET_AUDIO_TRACK_WITH_NO_APPID": {
+      "method": "IntegratedPlayer.setAudioTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETAUDIOTRACK_WITH_NO_APPID",
+      "expected": "error"
+    },
+    "SET_AUDIO_TRACK_WITH_NO_PLAYERID": {
+      "method": "IntegratedPlayer.setAudioTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETAUDIOTRACK_WITH_NO_PLAYERID",
+      "expected": "error"
+    },
+    "SET_AUDIO_TRACK_WITH_NO_TRACKID": {
+      "method": "IntegratedPlayer.setAudioTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETAUDIOTRACK_WITH_NO_TRACKID",
+      "expected": "error"
+    },
+   
+    "SET_CAPTIONS_TRACK_WITH_NO_APPID": {
+      "method": "IntegratedPlayer.setCaptionsTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETCAPTIONSTRACK_WITH_NO_APPID",
+      "expected": "error"
+    },
+    "SET_CAPTIONS_TRACK_WITH_NO_PLAYERID": {
+      "method": "IntegratedPlayer.setCaptionsTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETCAPTIONSTRACK_WITH_NO_PLAYERID",
+      "expected": "error"
+    },
+    "SET_CAPTIONS_TRACK_WITH_NO_TRACKID": {
+      "method": "IntegratedPlayer.setCaptionsTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SETCAPTIONSTRACK_WITH_NO_TRACKID",
+      "expected": "error"
+    },
+    "LOAD_PLAYER_BEFORE_PLAYER_CREATION": {
+      "method": "IntegratedPlayer.load",
+      "params": "INTEGRATEDPLAYER_PLAYER_LOAD_BEFORE_PLAYER_CREATION",
+      "expected": "error"
+    },
+    "START_PLAYING_THE_CONTENT_BEFORE_PLAYER_CREATION": {
+      "method": "IntegratedPlayer.play",
+      "params": "INTEGRATEDPLAYER_PLAYER_APPID_PLAYERID_BEFORE_PLAYER_CREATION",
+      "expected": "error"
+    },
+    "GET_PLAYER_STATUS_BEFORE_PLAYER_CREATION": {
+      "method": "IntegratedPlayer.status",
+      "params": "INTEGRATEDPLAYER_PLAYER_APPID_PLAYERID_BEFORE_PLAYER_CREATION",
+      "expected": "error"
+    },
+    "GET_AUDIO_TRACKS_BEFORE_PLAYER_CREATION": {
+      "method": "IntegratedPlayer.getCaptionsTracks",
+      "params": "INTEGRATEDPLAYER_PLAYER_APPID_PLAYERID_BEFORE_PLAYER_CREATION",
+      "expected": "error"
+    },
+    "GET_THE_SUPPORTED_CAPTIONS_TRACK_BEFORE_PLAYER_CREATION": {
+      "method": "IntegratedPlayer.getCaptionsTracks",
+      "params": "INTEGRATEDPLAYER_PLAYER_APPID_PLAYERID_BEFORE_PLAYER_CREATION",
+      "expected": "error"
+    },
+    "SELECT_THE_GIVEN_AUDIO_TRACK_BEFORE_PLAYER_CREATION": {
+      "method": "IntegratedPlayer.setAudioTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SET_TRACK_BEFORE_PLAYER_CREATION",
+      "expected": "error"
+    },
+    "SELECT_THE_GIVEN_CAPTIONS_TRACK_BEFORE_PLAYER_CREATION": {
+      "method": "IntegratedPlayer.setCaptionsTrack",
+      "params": "INTEGRATEDPLAYER_PLAYER_SET_TRACK_BEFORE_PLAYER_CREATION",
+      "expected": "error"
+    },
+    "SET_POSITION_OF_PLAYER_IN_SECONDS_FOR_THE_MEDIA_BEFORE_PLAYER_CREATION": {
+      "method": "IntegratedPlayer.seekTo",
+      "params": "INTEGRATEDPLAYER_PLAYER_SET_POSITION_BEFORE_PLAYER_CREATION",
+      "expected": "error"
+    },
+    "SET_SPEED_OF_PLAYER_BEFORE_PLAYER_CREATION": {
+      "method": "IntegratedPlayer.setSpeed",
+      "params": "INTEGRATEDPLAYER_PLAYER_SET_SPEED_BEFORE_PLAYER_CREATION",
+      "expected": "error"
+    },
+    "PROVIDE_STATUS_BEFORE_PLAYER_CREATION": {
+      "method": "IntegratedPlayer.provideStatus",
+      "params": "INTEGRATEDPLAYER_PLAYER_PROVIDE_STATUS_BEFORE_PLAYER_CREATION",
+      "expected": "error"
+    },
+    "STOP_PLAYING_THE_CONTENT_THAT_WAS_LAST_LOADED_BEFORE_PLAYER_CREATION": {
+      "method": "IntegratedPlayer.stop",
+      "params": "INTEGRATEDPLAYER_PLAYER_APPID_PLAYERID_BEFORE_PLAYER_CREATION",
+      "expected": "error"
+    },
+    "DESTROY_THE_PLAYER_GIVEN_BY_THE_ID_BEFORE_PLAYER_CREATION": {
+      "method": "IntegratedPlayer.destroy",
+      "params": "INTEGRATEDPLAYER_PLAYER_APPID_PLAYERID_BEFORE_PLAYER_CREATION",
+      "expected": "error"
+    }
+  }

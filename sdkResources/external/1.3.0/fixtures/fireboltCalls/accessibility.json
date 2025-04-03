@@ -1,0 +1,99 @@
+{
+    "UNDEFINED_FONTFAMILY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontFamily",
+        "content": "ACCESSIBILITY_FONTFAMILY_UNDEFINED",
+        "expectingError": false
+    },
+    "UNDEFINED_FONTCOLOR_IN_CLOSEDCAPTIONS_SETTINGS":{
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontFamily",
+        "content": "ACCESSIBILITY_FONTCOLOR_UNDEFINED",
+        "expectingError": false
+    },
+    "UNDEFINED_FONTSIZE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontSize",
+        "content": "ACCESSIBILITY_FONTSIZE_UNDEFINED",
+        "expectingError": false
+    },
+    "UNDEFINED_FONTEDGE_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontEdge",
+        "content": "ACCESSIBILITY_FONTEDGE_UNDEFINED",
+        "expectingError": false
+    },
+    "UNDEFINED_TEXTALIGN_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.textAlign",
+        "content": "ACCESSIBILITY_TEXTALIGN_UNDEFINED",
+        "expectingError": false
+    },
+    "UNDEFINED_TEXTALIGNVERTICAL_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.textAlignVertical",
+        "content": "ACCESSIBILITY_TEXTALIGNVERTICAL_UNDEFINED",
+        "expectingError": false
+    },
+    "UNDEFINED_FONTEDGECOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontEdgeColor",
+        "content": "ACCESSIBILITY_FONTEDGECOLOR_UNDEFINED",
+        "expectingError": false
+    },
+    "UNDEFINED_FONTOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.fontOpacity",
+        "content": "ACCESSIBILITY_FONTOPACITY_UNDEFINED",
+        "expectingError": false
+    },
+    "UNDEFINED_BACKGROUNDOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.backgroundOpacity",
+        "content": "ACCESSIBILITY_BACKGROUNDOPACITY_UNDEFINED",
+        "expectingError": false
+    },
+    "UNDEFINED_BACKGROUNDCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.backgroundColor",
+        "content": "ACCESSIBILITY_BACKGROUNDCOLOR_UNDEFINED",
+        "expectingError": false
+    },
+    "UNDEFINED_WINDOWCOLOR_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.windowColor",
+        "content": "ACCESSIBILITY_WINDOWCOLOR_UNDEFINED",
+        "expectingError": false
+    },
+    "UNDEFINED_WINDOWOPACITY_IN_CLOSEDCAPTIONS_SETTINGS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "event": null,
+        "context": "noContext",
+        "validationJsonPath": "result.styles.windowOpacity",
+        "content": "ACCESSIBILITY_WINDOWOPACITY_UNDEFINED",
+        "expectingError": false
+    }
+
+}

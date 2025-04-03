@@ -1,0 +1,227 @@
+
+{
+  "PLAYER_LOAD_WITH_REQUEST_AS_STRING": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "request": "abc"
+},
+"PLAYER_LOAD_WITH_INVALID_URI": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "request": {
+    "uri": 123
+  }
+},
+"PLAYER_SETPOSITION_WITH_NEGATIVE_POSITION": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "positionSeconds": -10
+},
+"PLAYER_SETPOSITION_WITH_STRING": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "positionSeconds": "abc"
+},
+"PLAYER_LOAD_WITH_NO_APPID": {
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "uri": "https://cdn.rdkcentral.com/media/assets/asset.hls"
+},
+"PLAYER_LOAD_WITH_NO_PLAYERID": {
+  "appId": "app1",
+  "uri": "https://cdn.rdkcentral.com/media/assets/asset.hls"
+},
+"PLAYER_LOAD_WITH_NO_REQUEST": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1"
+},
+"PLAYER_PLAY_WITH_NO_APPID": {
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1"
+},
+"PLAYER_PLAY_WITH_NO_PLAYERID": {
+  "appId": "app1"
+},
+"PLAYER_SETPOSITION_WITH_NO_APPID": {
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "positionSeconds": 10000
+},
+"PLAYER_SETPOSITION_WITH_NO_PLAYERID": {
+  "appId": "app1",
+  "positionSeconds": 10000
+},
+"PLAYER_SETPOSITION_WITH_NO_POSITION": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1"
+},
+"PLAYER_SETSPEED_WITH_NO_APPID": {
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "speed": 2
+},
+"PLAYER_SETSPEED_WITH_NO_PLAYERID": {
+  "appId": "app1",
+  "speed": 10000
+},
+"PLAYER_SETSPEED_WITH_NO_SPEED": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1"
+},
+"PLAYER_STATUS_WITH_NO_APPID": {
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1"
+},
+"PLAYER_STATUS_WITH_NO_PLAYERID": {
+  "appId": "app1"
+},
+"PLAYER_TRACKS_WITH_NO_APPID": {
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1"
+},
+"PLAYER_TRACKS_WITH_NO_PLAYERID": {
+  "appId": "app1"
+},
+"PLAYER_SETAUDIOTRACK_WITH_NO_APPID": {
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "trackId": "Audio1"
+},
+"PLAYER_SETAUDIOTRACK_WITH_NO_PLAYERID": {
+  "appId": "app1",
+  "trackId": "Audio1"
+},
+"PLAYER_SETAUDIOTRACK_WITH_NO_TRACKID": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1"
+},
+"PLAYER_LOAD_WITH_BOOLEAN_APPID": {
+  "appId": true,
+  "playerId": true,
+  "uri": "https://cdn.rdkcentral.com/media/assets/asset.hls"
+},
+"PLAYER_LOAD_WITH_BOOLEAN_PLAYERID": {
+  "appId": "app1",
+  "playerId": true,
+  "uri": "https://cdn.rdkcentral.com/media/assets/asset.hls"
+},
+"PLAYER_PLAY_WITH_BOOLEAN_APPID": {
+  "appId": true,
+  "playerId": true
+},
+"PLAYER_PLAY_WITH_BOOLEAN_PLAYERID": {
+  "appId": "app1",
+  "playerId": true
+},
+"PLAYER_SETPOSITION_WITH_BOOLEAN_APPID": {
+  "appId": true,
+  "playerId": true,
+  "positionSeconds": 10000
+},
+"PLAYER_SETPOSITION_WITH_BOOLEAN_PLAYERID": {
+  "appId": "app1",
+  "playerId": true,
+  "positionSeconds": 10000
+},
+"PLAYER_SETSPEED_WITH_BOOLEAN_APPID": {
+  "appId": true,
+  "playerId": true,
+  "speed": 2
+},
+"PLAYER_SETSPEED_WITH_BOOLEAN_PLAYERID": {
+  "appId": "app1",
+  "playerId": true,
+  "speed": 2
+},
+"PLAYER_SETSPEED_WITH_STRING_SPEED": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "speed": "abc"
+},
+"PLAYER_SETSPEED_WITH_ZERO_SPEED": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "speed": 0
+},
+"PLAYER_STATUS_WITH_BOOLEAN_APPID": {
+  "appId": true,
+  "playerId": true
+},
+"PLAYER_STATUS_WITH_BOOLEAN_PLAYERID": {
+  "appId": "app1",
+  "playerId": true
+},
+"PLAYER_TRACKS_WITH_BOOLEAN_APPID": {
+  "appId": true,
+  "playerId": true
+},
+"PLAYER_TRACKS_WITH_BOOLEAN_PLAYERID": {
+  "appId": "app1",
+  "playerId": true
+},
+"PLAYER_SETAUDIOTRACK_WITH_BOOLEAN_APPID": {
+  "appId": true,
+  "playerId": true,
+  "trackId": "Audio1"
+},
+"PLAYER_SETAUDIOTRACK_WITH_BOOLEAN_PLAYERID": {
+  "appId": "app1",
+  "playerId": true,
+  "trackId": "Audio1"
+},
+"PLAYER_SETAUDIOTRACK_WITH_BOOLEAN_TRACKID": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "trackId": true
+},
+"PLAYER_SETAUDIOTRACK_WITH_INTEGER_TRACKID": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "trackId": 123
+},
+"PLAYER_SETCAPTIONSTRACK_WITH_BOOLEAN_APPID": {
+  "appId": true,
+  "playerId": true,
+  "trackId": "Audio1"
+},
+"PLAYER_SETCAPTIONSTRACK_WITH_BOOLEAN_PLAYERID": {
+  "appId": "app1",
+  "playerId": true,
+  "trackId": "Audio1"
+},
+"PLAYER_SETCAPTIONSTRACK_WITH_BOOLEAN_TRACKID": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "trackId": true
+},
+"PLAYER_SETCAPTIONSTRACK_WITH_INTEGER_TRACKID": {
+  "appId": "app1",
+  "CYPRESSENV-playerId": "com.comcast.viper_ipa:1",
+  "trackId": 123
+},
+"PLAYER_LOAD_BEFORE_PLAYER_CREATION": {
+  "appId": "app1",
+  "playerId": "abc",
+  "uri": "https://cdn.rdkcentral.com/media/assets/asset.hls"
+},
+"PLAYER_APPID_PLAYERID_BEFORE_PLAYER_CREATION": {
+  "appId": "app1",
+  "playerId": "abc"
+},
+"PLAYER_SET_TRACK_BEFORE_PLAYER_CREATION": {
+  "appId": "app1",
+  "playerId": "abc",
+  "trackId": "abc999"
+},
+"PLAYER_SET_POSITION_BEFORE_PLAYER_CREATION": {
+  "appId": "app1",
+  "playerId": "abc",
+  "positionSeconds": 15000
+},
+"PLAYER_SET_SPEED_BEFORE_PLAYER_CREATION": {
+  "appId": "app1",
+  "playerId": "abc",
+  "speed": 3
+},
+"PLAYER_PROVIDE_STATUS_BEFORE_PLAYER_CREATION": {
+  "playerId": "abc",
+  "status": {
+    "mediaSessionId": "sessabc",
+    "state": "PLAYING",
+    "blockedReason": "CONTENT_NOT_FOUND"
+  }
+}
+}

@@ -1,0 +1,35 @@
+{
+    "LOCALIZATION_REMOVE_ADDITIONALINFO_EMPTY_RESPONSE": {
+        "method": "localization.additionalInfo",
+        "data": [
+            {
+                "type": "fixture",
+                "override": 0,
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_REMOVE_ADDITIONALINFO_EMPTY_RESPONSE",
+                        "description": "Validation of the Localization additionalInfo key as empty string Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "LOCALIZATION_REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING": {
+        "method": "localization.additionalInfo",
+        "data": [
+            {
+                "type": "fixture",
+                "override": 0,
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "LOCALIZATION_REMOVE_ADDITIONALINFO_RESPONSE_AS_EMPTY_STRING_WITH_SUBBOUQUET",
+                        "description": "Validation of the Localization additionalInfo key as empty string Format"
+                    }
+                ]
+            }
+        ]
+    }
+
+}

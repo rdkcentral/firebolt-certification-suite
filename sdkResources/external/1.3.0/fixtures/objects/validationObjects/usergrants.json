@@ -1,0 +1,516 @@
+{
+    "USERGRANTS_APP_DEVICE_ID_GRANTED_ROLE_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.app",
+                        "capability": "xrn:firebolt:capability:device:id",
+                        "type": "app",
+                        "state": "granted",
+                        "role": "use",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_DEVICE_DISTRIBUTOR_GRANTED_ROLE_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.device",
+                        "capability": "xrn:firebolt:capability:device:distributor",
+                        "type": "device",
+                        "state": "granted",
+                        "role": "use",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_CAPABILITY_DEVICE_ID_GRANTED_ROLE_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.capability",
+                        "capability": "xrn:firebolt:capability:device:id",
+                        "type": "capability",
+                        "state": "granted",
+                        "role": "use",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_DEVICE_DISTRIBUTOR_DENIED_ROLE_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.device",
+                        "capability": "xrn:firebolt:capability:device:distributor",
+                        "type": "device",
+                        "state": "denied",
+                        "role": "use",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_APP_DEVICE_ID_DENIED_ROLE_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.capability",
+                        "capability": "xrn:firebolt:capability:device:id",
+                        "type": "capability",
+                        "state": "denied",
+                        "role": "use",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_REQUEST_DISCOVERY_WATCHED_GRANTED_ROLE_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "capability": "xrn:firebolt:capability:capability:discovery:watched",
+                        "type": "request",
+                        "state": "granted",
+                        "role": "use",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_WATCHED_CODE_GRANTED_ROLE_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.app",
+                        "capability": "xrn:firebolt:capability:capability:discovery:watched",
+                        "type": "app",
+                        "state": "granted",
+                        "role": "use",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_REQUEST_DISCOVERY_WATCHED_DENY_ROLE_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "capability": "xrn:firebolt:capability:capability:discovery:watched",
+                        "type": "request",
+                        "state": "deny",
+                        "role": "use",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_COUNTRY_CODE_DENY_ROLE_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.app",
+                        "capability": "xrn:firebolt:capability:capability:discovery:watched",
+                        "type": "app",
+                        "state": "deny",
+                        "role": "use",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_REQUEST_LOCALIZATION_COUNTRYCODE_GRANTED_ROLE_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "capability": "xrn:firebolt:capability:capability:localization:country-code",
+                        "type": "request",
+                        "state": "deny",
+                        "role": "use",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_REQUEST_INFO_GRANTED_USE_GRANT": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "capability": "xrn:firebolt:capability:account:uid",
+                        "type": "request",
+                        "state": "granted",
+                        "role": "use",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            },
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].use.granted",
+                                "expected": true
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": null,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": true,
+                                "context": "CAPABILITIES_GRANTED_USE"
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_MANAGE",
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+        ]
+    },
+    "USERGRANTS_REQUEST_INFO_GRANTED_MANAGE_GRANT": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "capability": "xrn:firebolt:capability:account:uid",
+                        "type": "request",
+                        "state": "granted",
+                        "role": "manage",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            },
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].use.granted",
+                                "expected": null
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": true,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_USE"
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": true,
+                                "context": "CAPABILITIES_GRANTED_MANAGE",
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+        ]
+    },
+    "USERGRANTS_REQUEST_INFO_GRANTED_USE_DENY": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "capability": "xrn:firebolt:capability:account:uid",
+                        "type": "request",
+                        "state": "denied",
+                        "role": "use",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            },
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].use.granted",
+                                "expected": false
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": null,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": false,
+                                "context": "CAPABILITIES_GRANTED_USE"
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_MANAGE",
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+        ]
+    },
+    "USERGRANTS_REQUEST_INFO_GRANTED_MANAGE_DENY": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "capability": "xrn:firebolt:capability:account:uid",
+                        "type": "request",
+                        "state": "denied",
+                        "role": "manage",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            },
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].use.granted",
+                                "expected": null
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": false,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_USE"
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": false,
+                                "context": "CAPABILITIES_GRANTED_MANAGE",
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+        ]
+    },
+    "USERGRANTS_REQUEST_INFO_GRANTED_ACCOUNT_UID_PROVIDE_GRANT": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "capability": "xrn:firebolt:capability:account:uid",
+                        "type": "request",
+                        "state": "granted",
+                        "role": "provide",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            },
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].use.granted",
+                                "expected": null
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": null,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].provide.granted",
+                                "expected": true,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_USE"
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_MANAGE",
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": true,
+                                "context": "CAPABILITIES_GRANTED_PROVIDE",
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+        ]
+    },
+    "USERGRANTS_REQUEST_INFO_GRANTED_ACCOUNT_UID_PROVIDE_DENY": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "capability": "xrn:firebolt:capability:account:uid",
+                        "type": "request",
+                        "state": "denied",
+                        "role": "provide",
+                        "appId": "comcast.test.firecert"
+                    }
+                ]
+            },
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].use.granted",
+                                "expected": null
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": null,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].provide.granted",
+                                "expected": false,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_USE"
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_MANAGE",
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": false,
+                                "context": "CAPABILITIES_GRANTED_PROVIDE",
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+        ]
+    }
+}
