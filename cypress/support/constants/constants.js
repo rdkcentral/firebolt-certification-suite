@@ -385,6 +385,7 @@ module.exports = {
     GETAPPSTATE: 'fcs.getAppState',
     DISMISS: 'fcs.dismissApp',
     GETAPPDATA: 'fcs.getAppData',
+    SENDKEYPRESS: 'fcs.sendKeyPress',
   },
   REQUEST_MAP_INTERACTIONS_SERVICE: 'Request map for firebolt interactions service : ',
   RESPONSE: 'Response: ',

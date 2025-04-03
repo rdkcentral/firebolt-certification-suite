@@ -2011,3 +2011,25 @@ const shouldPerformValidation = (key, value) => {
 
   return true;
 };
+
+/**
+ * @module commands
+ * @function sendKeyPress
+ * @description Command to send key press to the platform.
+ * @param {String} key - The key to be pressed.
+ * @param {Number} delay - The delay in seconds before sending the key press.
+ * @example
+ * cy.sendKeyPress('right')
+ * cy.sendKeyPress('right', 10)
+ */
+Cypress.Commands.add('sendKeyPress', (key, delay) => {
+  delay = delay ? delay : 5;
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
+    params: { key: key, delay: delay },
+  };
+
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    logger.debug(`Sent key press: ${key} with delay: ${delay}.`);
+  });
+});
