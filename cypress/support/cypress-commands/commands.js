@@ -318,7 +318,6 @@ Cypress.Commands.add('updateRunInfo', () => {
                 if (exists) {
                   // File exists, read the file
                   return cy.readFile(deviceMacJson).then((macJson) => {
-                    console.log('Reading macJson', JSON.stringify(macJson));
                     deviceId = macJson?.DEVICEID ?? '';
                     deviceModel = macJson?.DEVICE_MODEL ?? '';
                     deviceDistributor = macJson?.DEVICE_DISTRIBUTOR ?? '';
@@ -367,14 +366,17 @@ Cypress.Commands.add('updateRunInfo', () => {
               })
               .then(() => delay(2000))
               .then(() => {
-                if (Cypress.env(CONSTANTS.ENV_SDK_VERSION)) return;
-                else
+                if (
+                  Cypress.env(CONSTANTS.ENV_SDK_VERSION) == 'N/A' ||
+                  !Cypress.env(CONSTANTS.ENV_SDK_VERSION)
+                ) {
                   return setEnvRunInfo(
                     sdkVersion,
                     CONSTANTS.DEVICE_VERSION,
                     CONSTANTS.ACTION_CORE,
                     {}
                   );
+                }
               })
               .then(() => delay(2000))
               .then(() => {
