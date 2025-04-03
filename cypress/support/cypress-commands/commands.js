@@ -251,6 +251,7 @@ Cypress.Commands.add('updateRunInfo', () => {
   let deviceDistributor = '';
   let devicePlatform = '';
   const fireboltVersion = '';
+  let sdkVersion = '';
 
   // function to set env variable for run info data
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
@@ -271,6 +272,14 @@ Cypress.Commands.add('updateRunInfo', () => {
                   ''
                 );
               Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
+            }
+            if (!Cypress.env(CONSTANTS.ENV_SDK_VERSION) && response?.sdk?.readable) {
+              sdkVersion =
+                `${response?.sdk?.major}.${response?.sdk?.minor}.${response?.sdk?.patch}`.replace(
+                  /"/g,
+                  ''
+                );
+              Cypress.env(CONSTANTS.ENV_SDK_VERSION, sdkVersion);
             }
             if (!Cypress.env(CONSTANTS.ENV_RELEASE) && response?.debug) {
               const release = response.debug;
@@ -351,6 +360,17 @@ Cypress.Commands.add('updateRunInfo', () => {
                 else
                   return setEnvRunInfo(
                     fireboltVersion,
+                    CONSTANTS.DEVICE_VERSION,
+                    CONSTANTS.ACTION_CORE,
+                    {}
+                  );
+              })
+              .then(() => delay(2000))
+              .then(() => {
+                if (Cypress.env(CONSTANTS.ENV_SDK_VERSION)) return;
+                else
+                  return setEnvRunInfo(
+                    sdkVersion,
                     CONSTANTS.DEVICE_VERSION,
                     CONSTANTS.ACTION_CORE,
                     {}
