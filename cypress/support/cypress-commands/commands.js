@@ -259,6 +259,8 @@ Cypress.Commands.add('updateRunInfo', () => {
       // Fetch data from the first-party app
       if (Cypress.env(CONSTANTS.SUPPORTS_PLATFORM_COMMUNICATION)) {
         cy.getDeviceDataFromFirstPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
+          console.log('Divya Device Type:', deviceType);
+          console.log('Divya Response:', response);
           if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
             if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
               let deviceFirmware = JSON.stringify(response.firmware.readable);
@@ -273,7 +275,11 @@ Cypress.Commands.add('updateRunInfo', () => {
                 );
               Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
             }
-            if (!Cypress.env(CONSTANTS.ENV_SDK_VERSION) && response?.sdk?.readable) {
+            if (
+              (Cypress.env(CONSTANTS.ENV_SDK_VERSION) == 'N/A' ||
+                !Cypress.env(CONSTANTS.ENV_SDK_VERSION)) &&
+              response?.sdk?.readable
+            ) {
               sdkVersion =
                 `${response?.sdk?.major}.${response?.sdk?.minor}.${response?.sdk?.patch}`.replace(
                   /"/g,
@@ -366,17 +372,12 @@ Cypress.Commands.add('updateRunInfo', () => {
               })
               .then(() => delay(2000))
               .then(() => {
-                if (
-                  Cypress.env(CONSTANTS.ENV_SDK_VERSION) == 'N/A' ||
-                  !Cypress.env(CONSTANTS.ENV_SDK_VERSION)
-                ) {
-                  return setEnvRunInfo(
-                    sdkVersion,
-                    CONSTANTS.DEVICE_VERSION,
-                    CONSTANTS.ACTION_CORE,
-                    {}
-                  );
-                }
+                return setEnvRunInfo(
+                  sdkVersion,
+                  CONSTANTS.DEVICE_VERSION,
+                  CONSTANTS.ACTION_CORE,
+                  {}
+                );
               })
               .then(() => delay(2000))
               .then(() => {
