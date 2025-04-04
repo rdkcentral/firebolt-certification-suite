@@ -303,3 +303,7 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
     cy.log(`Firebolt Certification Suite failed to communicate with the ${appType}: ${error}`);
   }
 });
+
+Given(/I search text '(.+)' is found in the wpeframework log/, (logKey) => {
+  cy.findLogPattern();
+});

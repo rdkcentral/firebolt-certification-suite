@@ -2011,3 +2011,10 @@ const shouldPerformValidation = (key, value) => {
 
   return true;
 };
+
+Cypress.Commands.add('findLogPattern', () => {
+  console.log('Inside findLogPattern command ');
+  cy.sendMessagetoPlatforms({ method: 'fcs.findLogPattern' }).then((response) => {
+    console.log('Respose in findLogPattern ', response);
+  });
+});
