@@ -275,11 +275,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                 );
               Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
             }
-            if (
-              (Cypress.env(CONSTANTS.ENV_SDK_VERSION) == 'N/A' ||
-                !Cypress.env(CONSTANTS.ENV_SDK_VERSION)) &&
-              response?.sdk?.readable
-            ) {
+            if (response?.sdk?.readable) {
               sdkVersion =
                 `${response?.sdk?.major}.${response?.sdk?.minor}.${response?.sdk?.patch}`.replace(
                   /"/g,
