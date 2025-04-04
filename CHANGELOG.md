@@ -1,3 +1,10 @@
+# [1.10.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.6...v1.10.0-dev.7) (2025-04-04)
+
+
+### Bug Fixes
+
+* Removed null content validation for negative scenarios ([#376](https://github.com/rdkcentral/firebolt-certification-suite/issues/376)) ([3ba8e94](https://github.com/rdkcentral/firebolt-certification-suite/commit/3ba8e944a73bf7c67c88469ce2298eb489dc791e))
+
 # [1.10.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.5...v1.10.0-dev.6) (2025-03-28)
 
 
