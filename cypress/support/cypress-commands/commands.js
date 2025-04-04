@@ -246,10 +246,12 @@ Cypress.Commands.add('getSdkVersion', () => {
 Cypress.Commands.add('updateRunInfo', () => {
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
+  let deviceId = '';
   let deviceModel = '';
   let deviceDistributor = '';
   let devicePlatform = '';
   const fireboltVersion = '';
+  let sdkVersion = '';
 
   // function to set env variable for run info data
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
@@ -270,6 +272,14 @@ Cypress.Commands.add('updateRunInfo', () => {
                   ''
                 );
               Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
+            }
+            if (!Cypress.env(CONSTANTS.ENV_SDK_VERSION) && response?.sdk?.readable) {
+              sdkVersion =
+                `${response?.sdk?.major}.${response?.sdk?.minor}.${response?.sdk?.patch}`.replace(
+                  /"/g,
+                  ''
+                );
+              Cypress.env(CONSTANTS.ENV_SDK_VERSION, sdkVersion);
             }
             if (!Cypress.env(CONSTANTS.ENV_RELEASE) && response?.debug) {
               const release = response.debug;
@@ -307,6 +317,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                 if (exists) {
                   // File exists, read the file
                   return cy.readFile(deviceMacJson).then((macJson) => {
+                    deviceId = macJson?.DEVICEID ?? '';
                     deviceModel = macJson?.DEVICE_MODEL ?? '';
                     deviceDistributor = macJson?.DEVICE_DISTRIBUTOR ?? '';
                     devicePlatform = macJson?.DEVICE_PLATFORM ?? '';
@@ -334,6 +345,15 @@ Cypress.Commands.add('updateRunInfo', () => {
               })
               .then(() => delay(2000))
               .then(() => {
+                return setEnvRunInfo(
+                  deviceId,
+                  CONSTANTS.DEVICE_ID,
+                  CONSTANTS.ACTION_CORE,
+                  CONSTANTS.ENV_DEVICE_ID
+                );
+              })
+              .then(() => delay(2000))
+              .then(() => {
                 if (Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION)) return;
                 else
                   return setEnvRunInfo(
@@ -342,6 +362,15 @@ Cypress.Commands.add('updateRunInfo', () => {
                     CONSTANTS.ACTION_CORE,
                     {}
                   );
+              })
+              .then(() => delay(2000))
+              .then(() => {
+                return setEnvRunInfo(
+                  sdkVersion,
+                  CONSTANTS.DEVICE_VERSION,
+                  CONSTANTS.ACTION_CORE,
+                  {}
+                );
               })
               .then(() => delay(2000))
               .then(() => {
@@ -369,6 +398,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
                         [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                         [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                        [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
                       };
                       reportEnv.customData.data.forEach((item) => {
                         if (item.label === CONSTANTS.PRODUCT) {
