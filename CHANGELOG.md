@@ -1,3 +1,10 @@
+# [1.10.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.8...v1.10.0-dev.9) (2025-04-04)
+
+
+### Bug Fixes
+
+* Update RunInfo with deviceId ([#378](https://github.com/rdkcentral/firebolt-certification-suite/issues/378)) ([e3b72d2](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3b72d278e0ccfdfe1e56a6f2893ac7529b39bbb))
+
 # [1.10.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.7...v1.10.0-dev.8) (2025-04-04)
 
 
