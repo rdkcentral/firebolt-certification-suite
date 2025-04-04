@@ -259,8 +259,6 @@ Cypress.Commands.add('updateRunInfo', () => {
       // Fetch data from the first-party app
       if (Cypress.env(CONSTANTS.SUPPORTS_PLATFORM_COMMUNICATION)) {
         cy.getDeviceDataFromFirstPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
-          console.log('Divya Device Type:', deviceType);
-          console.log('Divya Response:', response);
           if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
             if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
               let deviceFirmware = JSON.stringify(response.firmware.readable);
@@ -275,7 +273,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                 );
               Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
             }
-            if (response?.sdk?.readable) {
+            if (!Cypress.env(CONSTANTS.ENV_SDK_VERSION) && response?.sdk?.readable) {
               sdkVersion =
                 `${response?.sdk?.major}.${response?.sdk?.minor}.${response?.sdk?.patch}`.replace(
                   /"/g,
@@ -302,7 +300,6 @@ Cypress.Commands.add('updateRunInfo', () => {
     if (exists) {
       cy.task('checkFileExists', tempReportEnvFile).then((tempFileExists) => {
         if (!tempFileExists) {
-          console.log('No temp  file exist');
           try {
             let configModuleConst;
             try {
