@@ -1,3 +1,10 @@
+# [1.10.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.7...v1.10.0-dev.8) (2025-04-04)
+
+
+### Bug Fixes
+
+* Screenshot link provided in report opens to 'Resource not found' ([#377](https://github.com/rdkcentral/firebolt-certification-suite/issues/377)) ([82e3db0](https://github.com/rdkcentral/firebolt-certification-suite/commit/82e3db05aaccbc3bf00bb9a0294f88e5988dceb8))
+
 # [1.10.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.6...v1.10.0-dev.7) (2025-04-04)
 
 
