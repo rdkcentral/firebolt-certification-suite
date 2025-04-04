@@ -339,7 +339,6 @@ module.exports = async (on, config) => {
 
       // Emit the 'reports' event once after the loop and reportObj is populated.
       await new Promise((resolve) => {
-        console.log('Emitting reports event:::' + JSON.stringify(reportObj));
         eventEmitter.once('reportProcessed', () => resolve());
         eventEmitter.emit('reports', reportObj, jobId, elk);
       });
