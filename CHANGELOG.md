@@ -1,3 +1,45 @@
+# [1.10.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.5...v1.10.0-dev.6) (2025-03-28)
+
+
+### Bug Fixes
+
+* app assurance error handling changes ([#367](https://github.com/rdkcentral/firebolt-certification-suite/issues/367)) ([24bbfd2](https://github.com/rdkcentral/firebolt-certification-suite/commit/24bbfd26929e0ac9ecbc3074cbc641813e3864d8))
+
+# [1.10.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.4...v1.10.0-dev.5) (2025-03-27)
+
+
+### Features
+
+* Add Additional Information to Mochawesome report header ([#368](https://github.com/rdkcentral/firebolt-certification-suite/issues/368)) ([0156b60](https://github.com/rdkcentral/firebolt-certification-suite/commit/0156b60e4c06bccf4cd7fe4bc4e1c458460eb96e))
+
+# [1.10.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.3...v1.10.0-dev.4) (2025-03-26)
+
+
+### Bug Fixes
+
+* Adding unsub operation to transport layer for improved reliability ([#369](https://github.com/rdkcentral/firebolt-certification-suite/issues/369)) ([ef42434](https://github.com/rdkcentral/firebolt-certification-suite/commit/ef42434f15a9848fb225e2fa8c95bf394dc4242c))
+
+# [1.10.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.2...v1.10.0-dev.3) (2025-03-25)
+
+
+### Bug Fixes
+
+* To support external sdk ([#375](https://github.com/rdkcentral/firebolt-certification-suite/issues/375)) ([fae00d3](https://github.com/rdkcentral/firebolt-certification-suite/commit/fae00d3558d8e558a6908972243c28ab47d5ad64))
+
+# [1.10.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.1...v1.10.0-dev.2) (2025-03-25)
+
+
+### Bug Fixes
+
+* print the Validationlog in the report ([#372](https://github.com/rdkcentral/firebolt-certification-suite/issues/372)) ([bc8abff](https://github.com/rdkcentral/firebolt-certification-suite/commit/bc8abff8d31002bb955c5ab97a46822293c7e3bb))
+
+# [1.10.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0...v1.10.0-dev.1) (2025-03-24)
+
+
+### Features
+
+* Remove tempReportEnv.json before every execution ([#371](https://github.com/rdkcentral/firebolt-certification-suite/issues/371)) ([58459bb](https://github.com/rdkcentral/firebolt-certification-suite/commit/58459bbfd0eb7dd79265abbbd19e7f14e32a35d6))
+
 # [1.9.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.8.0...v1.9.0) (2025-03-18)
 
 

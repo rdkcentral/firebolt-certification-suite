@@ -20,6 +20,7 @@ module.exports = {
   ACTION_CORE: 'CORE',
   ACCOUNT_ID: 'account.id',
   ACCOUNT_UID: 'account.uid',
+  ADDITIONAL_CONTEXT: 'additionalContext',
   ADVERTISINGID_LIMITIADTRACKING_OFF_IFA_TYPE: 'sessionId',
   ADVERTISINGID_LIMITIADTRACKING_OFF_US_PRIVACY: '1-N-',
   ADVERTISINGID_LIMITIADTRACKING_ON_IFA_TYPE: 'sessionId',
@@ -433,7 +434,7 @@ module.exports = {
     FIREBOLTMOCKS: 'fireboltMocks',
     SET_RESPONSE_JSON: 'setResponseJson',
   },
-  SUPPORTED_SDK: ['Firebolt'],
+  SUPPORTED_SDK: 'supportedSDK',
   TASK: {
     CALLLIFECYCLE: 'callLifecycle',
     CALLMETHOD: 'callMethod',
@@ -526,6 +527,14 @@ module.exports = {
   HOT_LAUNCH: 'HOT_LAUNCH',
   COLD_LAUNCH: 'COLD_LAUNCH',
   APP_ASSURANCE_ID: 'appAssuranceId',
+  DISMISSED: 'dismissed',
+  CLOSED: 'closed',
+  UNLOADED: 'unloaded',
+  ACTIONTYPE: {
+    DISMISS_APP: 'dismissApp',
+    CLOSE_APP: 'closeApp',
+    UNLOAD_APP: 'unloadApp',
+  },
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
 };
 function getSanityReportPath() {

@@ -25,7 +25,17 @@ function loadConfigPackageJson() {
     return null;
   }
 }
-
+// Remove tempReportEnv.json before every execution
+function removeTempReportJson() {
+  const filePath = 'tempReportEnv.json';
+  if (fs.existsSync(filePath)) {
+    try {
+      fs.unlinkSync(filePath);
+    } catch (err) {
+      console.error(`Error removing file: ${err.message}`);
+    }
+  }
+}
 // Determine sdkVersion
 function determineSdkVersion() {
   // 1. If sdkVersion is passed in CLI, prioritize it.
@@ -63,15 +73,51 @@ function generateUUID() {
   return uuidv4();
 }
 
+// Parse Env Section
+function parseEnvSection(envSection) {
+  const result = {};
+
+  // Find all parameter keys (words followed by equals sign)
+  const keys = [];
+  const keyRegex = /(\w+)=/g;
+  let match;
+
+  while ((match = keyRegex.exec(envSection)) !== null) {
+    keys.push({
+      key: match[1],
+      startIndex: match.index,
+      valueStartIndex: match.index + match[0].length,
+    });
+  }
+
+  for (let i = 0; i < keys.length; i++) {
+    const currentKey = keys[i];
+    const nextKey = keys[i + 1];
+
+    // Value extends from after the equals sign to the next key or end of string
+    const valueEndIndex = nextKey ? nextKey.startIndex - 1 : envSection.length;
+    let value = envSection.substring(currentKey.valueStartIndex, valueEndIndex);
+
+    // Remove trailing comma if present
+    if (value.endsWith(',')) {
+      value = value.slice(0, -1);
+    }
+
+    result[currentKey.key] = value;
+  }
+
+  return result;
+}
+
 // Function to extract value of params that contain spaces
 function modifyParams(params) {
   params = params.replace(/\^/g, '');
   const envSectionMatch = params.match(/--env\s+(.*?)(?=\s+--|$)/);
   const envSection = envSectionMatch ? envSectionMatch[1] : '';
-  const paramValuePairs = envSection.split(',');
-
+  const paramValuePairs = parseEnvSection(envSection);
   let modifiedParams = params;
-  for (const pair of paramValuePairs) {
+  for (const [key, value] of Object.entries(paramValuePairs)) {
+    const pair = `${key}=${value}`;
     if (pair.includes(' ')) {
       const [key, value] = pair.split('=');
       process.env[`CYPRESS_${key}`] = value;
@@ -122,11 +168,11 @@ function runPreprocessorScript() {
 
 // Function to execute cypress run
 function run() {
+  removeTempReportJson();
   runPreprocessorScript();
 
   const args = ['run', '--e2e', ...modifyParams(params).split(' ')];
   console.log(`[Running cypress command: cypress ${args.join(' ')}]`);
-
   const cypressProcess = spawn('cypress', args, { stdio: 'inherit' });
 
   cypressProcess.on('error', (error) => {
@@ -142,12 +188,12 @@ function run() {
 
 // Function to open Cypress without report options
 function open() {
+  removeTempReportJson();
   runPreprocessorScript();
 
   const command = 'cypress';
   const args = ['open', '--e2e', ...modifyParams(params).split(' ')];
   console.log(`[Running cypress command: ${command} ${args.join(' ')}]`);
-
   const cypressProcess = spawn(command, args, { stdio: 'inherit' });
 
   cypressProcess.on('error', (error) => {
