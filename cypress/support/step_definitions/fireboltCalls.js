@@ -515,3 +515,31 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
     });
   });
 });
+
+/**
+ * @module fireboltCalls
+ * @function And User reboot device
+ * @description To reboot the device and do health check whether device is up and running.
+ * @example
+ * Then User reboot device
+ */
+Given(/User reboot device/, () => {
+  const requestMap = {
+    method: 'fcs.rebootDevice',
+    params: null
+  }
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    if (result.success) {
+      fireLog.info("Device is rebooting");
+    } else {
+      fireLog.assert(false, result.message);
+    }
+    cy.wait(120000).then(() => {
+      cy.firstPartyAppHealthcheck(null).then((healthCheckResponse) => {
+        expect(healthCheckResponse.status).to.be.oneOf([
+          CONSTANTS.RESPONSE_STATUS.OK,
+        ]);
+      })
+    })
+  })
+})
