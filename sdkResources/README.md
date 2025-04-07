@@ -22,6 +22,9 @@ The sdkResources directory in the Firebolt Certification Suite (FCS) contains ve
         ├── 1.4.1
         ├── 0.8.1  
 
+## Guidelines for Placing Files in SDK Resources
+![alt text](sdkResources_filesFlowDiagram.png)
+
 ## Test Execution
 When you run tests using `cy:run or cy:open`, the script will dynamically copy the test case and fixture files from `sdkResources` to `cypress/fixtures` and `cypress/TestCases`.
 
