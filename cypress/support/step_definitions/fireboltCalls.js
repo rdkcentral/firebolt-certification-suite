@@ -526,20 +526,20 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
 Given(/User reboot device/, () => {
   const requestMap = {
     method: 'fcs.rebootDevice',
-    params: null
-  }
+    params: null,
+  };
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     if (result.success) {
-      fireLog.info("Device is rebooting");
+      fireLog.info('Device is rebooting');
     } else {
       fireLog.assert(false, result.message);
     }
+    // Waiting till the device got rebooted
     cy.wait(120000).then(() => {
+      // Health check request to bolt see whether the device is up or not
       cy.firstPartyAppHealthcheck(null).then((healthCheckResponse) => {
-        expect(healthCheckResponse.status).to.be.oneOf([
-          CONSTANTS.RESPONSE_STATUS.OK,
-        ]);
-      })
-    })
-  })
-})
+        expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
+      });
+    });
+  });
+});
