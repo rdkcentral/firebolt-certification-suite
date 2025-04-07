@@ -30,6 +30,7 @@ const setimmediate = require('setimmediate');
 let appTransport;
 const flatted = require('flatted');
 const _ = require('lodash');
+const fcsSetterStack = require('./fcsSetterStack');
 const internalV2FireboltCallsData = require('../../../fixtures/fireboltCalls/index');
 const externalV2FireboltCallsData = require('../../../fixtures/external/fireboltCalls/index');
 const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/index');
@@ -264,6 +265,7 @@ export default function (module) {
    * @example
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
    */
+
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
     cy.wrap(requestMap, { timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT }).then(
       async (requestMap) => {
@@ -579,7 +581,10 @@ export default function (module) {
           module.customValidations[functionName] &&
           typeof module.customValidations[functionName] === 'function'
         ) {
-          message = module.customValidations[functionName](apiOrEventObject);
+          message = module.customValidations[functionName](
+            apiOrEventObject,
+            fcsValidationObjectData
+          );
         } else if (
           // if customValidations doesn't have a function as the functionName passed
           !module.customValidations[functionName] ||

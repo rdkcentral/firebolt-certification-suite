@@ -1,0 +1,500 @@
+{
+    "ACCESSIBILITY_FONTFAMILY_MONOSPACE": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTFAMILY_MONOSPACE",
+                        "description": "Validation of the accessibility fontfamily monospace"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTFAMILY_CURSIVE": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTFAMILY_CURSIVE",
+                        "description": "Validation of the accessibility fontfamily cursive"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SERIF": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SERIF",
+                        "description": "Validation of the accessibility fontfamily proportional serif"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTFAMILY_VALUE_FOR_NULL_PARAMS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontFamily",
+                        "description": "Validation of the accessibility fontfamily undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTFAMILY_MONOSPACED_SERIF",
+                        "description": "Validation of the accessibility fontfamily monospaced serif"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SANSERIF": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTFAMILY_PROPORTIONAL_SANSERIF",
+                        "description": "Validation of the accessibility fontfamily proportional sanserif"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTSIZE_VALUE_FOR_NULL_PARAMS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontSize",
+                        "description": "Validation of the accessibility fontSize undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTFAMILY_SMALLCAPS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTFAMILY_SMALLCAPS",
+                        "description": "Validation of the accessibility fontfamily smallcaps"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTFAMILY_CASUAL": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTFAMILY_CASUAL",
+                        "description": "Validation of the accessibility fontfamily casual"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTFAMILY_SANSERIF": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTFAMILY_SANS_SERIF",
+                        "description": "Validation of the accessibility fontfamily sanserif"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTCOLOR": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTCOLOR",
+                        "description": "Validation of the accessibility fontColor"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTEDGE_RAISED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTEDGE_RAISED",
+                        "description": "Validation of the accessibility fontEdge raised"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTEDGE_VALUE_FOR_NULL_PARAMS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontEdge",
+                        "description": "Validation of the accessibility fontEdge undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTEDGE_NONE": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTEDGE_NONE",
+                        "description": "Validation of the accessibility fontEdge none"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTEDGE_DEPRESSED": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTEDGE_DEPRESSED",
+                        "description": "Validation of the accessibility fontEdge depressed"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTEDGE_UNIFORM": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTEDGE_UNIFORM",
+                        "description": "Validation of the accessibility fontEdge uniform"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTEDGE_DROPSHADOW_LEFT": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_LEFT",
+                        "description": "Validation of the accessibility fontEdge dropshadow left"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTEDGE_DROPSHADOW_RIGHT": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTEDGE_DROPSHADOW_RIGHT",
+                        "description": "Validation of the accessibility fontEdge dropshadow right"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTEDGE_COLOR": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTEDGE_COLOR",
+                        "description": "Validation of the accessibility fontEdgeColor"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_BACKGROUNDCOLOR": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_BACKGROUNDCOLOR",
+                        "description": "Validation of the accessibility backgroundColor"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_PREFERREDLANGUAGES_ENGLISH": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_PREFERREDLANGUAGES_ENGLISH",
+                        "description": "Validation of the accessibility preferredLanguages English"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTCOLOR_VALUE_FOR_NULL_PARAMS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontColor",
+                        "description": "Validation of the accessibility fontColor undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTEDGECOLOR_VALUE_FOR_NULL_PARAMS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontEdgeColor",
+                        "description": "Validation of the accessibility fontEdgeColor undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTOPACITY_VALUE_FOR_NULL_PARAMS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.fontOpacity",
+                        "description": "Validation of the accessibility fontEdgeOpacity undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_BACKGROUNDCOLOR_VALUE_FOR_NULL_PARAMS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.backgroundColor",
+                        "description": "Validation of the accessibility backgroundColor undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_BACKGROUNDOPACITY_VALUE_FOR_NULL_PARAMS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.backgroundOpacity",
+                        "description": "Validation of the accessibility backgroundOpacity undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_TEXTALIGN_VALUE_FOR_NULL_PARAMS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.textAlign",
+                        "description": "Validation of the accessibility textAlign undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTCOLOR_FFFFFF": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTCOLOR_FFFFFF",
+                        "description": "Validation of the accessibility fontColor ffffff"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_TEXTALIGNVERTICAL_VALUE_FOR_NULL_PARAMS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.textAlignVertical",
+                        "description": "Validation of the accessibility textAlignVertical undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_FONTEDGECOLOR_7F7F7F",
+                        "description": "Validation of the accessibility fontEdgeColor 7f7f7f"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_WINDOWCOLOR_VALUE_FOR_NULL_PARAMS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.windowColor",
+                        "description": "Validation of the accessibility windowcolor undefined"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_BACKGROUNDCOLOR_000000": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_BACKGROUNDCOLOR_000000",
+                        "description": "Validation of the accessibility backgroundColor 000000"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_WINDOWCOLOR_000000": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ACCESSIBILITY_WINDOWCOLOR_000000",
+                        "description": "Validation of the accessibility windowColor 000000"
+                    }
+                ]
+            }
+        ]
+    },
+    "ACCESSIBILITY_WINDOWOPACITY_VALUE_FOR_NULL_PARAMS": {
+        "method": "accessibility.closedCaptionsSettings",
+        "data": [
+            {
+                "type": "undefined",
+                "validations": [
+                    {
+                        "field": "result.styles.windowOpacity",
+                        "description": "Validation of the accessibility windowopacity undefined"
+                    }
+                ]
+            }
+        ]
+    }
+}

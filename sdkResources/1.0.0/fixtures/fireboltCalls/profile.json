@@ -1,0 +1,46 @@
+{
+    "VERIFY_IF_CURRENT_PROFILE_HAVE_ACCESS_TO_CONTENT": {
+        "method": "profile.approveContentRating"
+    },
+    "TRUE_FOR_PROFILE_APPROVECONTENTRATING": {
+        "method": "profile.approveContentRating",
+        "validationJsonPath": "result",
+        "content": "TRUE"
+    },
+    "FALSE_FOR_PROFILE_APPROVECONTENTRATING": {
+        "method": "profile.approveContentRating",
+        "validationJsonPath": "result",
+        "content": "FALSE"
+    },
+    "VERIFY_IF_CURRENT_PROFILE_HAVE_ACCESS_TO_PURCHASE": {
+        "method": "profile.approvePurchase"
+    },
+    "TRUE_FOR_PROFILE_APPROVEPURCHASE": {
+        "method": "profile.approvePurchase",
+        "validationJsonPath": "result",
+        "content": "TRUE"
+    },
+    "FALSE_FOR_PROFILE_APPROVEPURCHASE": {
+        "method": "profile.approvePurchase",
+        "validationJsonPath": "result",
+        "content": "FALSE"
+    },
+    "ALLOW_PROFILE_FLAGS": {
+        "method": "profile.flags"
+    },
+    "EXPECTED_PROFILE_FLAGS_FOR_THE_CURRENT_SESSION": {
+        "method": "profile.flags",
+        "validationJsonPath": "result",
+        "content": "PROFILE_FLAGS"
+    },
+    "EXPECT_ERROR_FOR_ALLOW_PROFILE_FLAGS": {
+        "method": "profile.flags",
+        "expected": "error"
+    },
+    "INVALID_REQUEST_FOR_PROFILE_FLAGS": {
+        "method": "profile.flags",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    }
+}

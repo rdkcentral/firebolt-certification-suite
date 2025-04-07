@@ -1,0 +1,106 @@
+{
+    "PROMPT_THE_USER_FOR_THEIR_EMAIL_ADDRESS_WITH_SIGNIN_TYPE": {
+        "method": "keyboard.email",
+        "params": "KEYBOARD_EMAIL_SIGNIN_PARAMS"
+    },
+    "THE_ENTERED_EMAIL_ADDRESS": {
+        "method": "keyboard.email",
+        "validationJsonPath": "result",
+        "content": "KEYBOARD_EMAIL"
+    },
+    "PROMPT_THE_USER_FOR_THEIR_EMAIL_ADDRESS_WITH_SIGNUP_TYPE": {
+        "method": "keyboard.email",
+        "params": "KEYBOARD_EMAIL_PARAMS_WITH_SIGNUP"
+    },
+    "PROMPT_THE_USER_FOR_THEIR_EMAIL_ADDRESS_WITH_SIGNIN_TYPE_ALONE": {
+        "method": "keyboard.email",
+        "params": "KEYBOARD_EMAIL_PARAMS_WITH_TYPE_ALONE"
+    },
+    "PROMPT_THE_USER_FOR_THEIR_PASSWORD": {
+        "method": "keyboard.password",
+        "params": "KEYBOARD_PASSWORD_PARAMS"
+    },
+    "PROMPT_THE_USER_FOR_THEIR_USERNAME": {
+        "method": "keyboard.standard",
+        "params": "KEYBOARD_STANDARD_PARAMS"
+    },
+    "PROMPT_THE_USER_FOR_THEIR_PASSWORD_AS_EMPTY": {
+        "method": "keyboard.password"
+    },
+    "THE_ENTERED_USER_PASSWORD": {
+        "method": "keyboard.password",
+        "validationJsonPath": "result",
+        "content": "KEYBOARD_PASSWORD"
+    },
+    "PROMPT_THE_USER_FOR_THEIR_STANDARD_PLATFORM": {
+        "method": "keyboard.standard",
+        "params": "KEYBOARD_STANDARD_PARAMS"
+    },
+    "THE_ENTERED_STANDARD_USER_VALUE": {
+        "method": "keyboard.standard",
+        "validationJsonPath": "result",
+        "content": "KEYBOARD_STANDARD"
+    },
+    "SIGNIN_EMAIL_PARAM_FROM_KEYBOARD": {
+        "method": "keyboard.email",
+        "params": "KEYBOARD_EMAIL_SIGNIN_PARAMS"
+    },
+    "PASSWORD_VALUE_FROM_KEYBOARD": {
+        "method": "keyboard.password",
+        "params": "KEYBOARD_PASSWORD_PARAMS"
+    },
+    "STANDARD_PLATFORM_VALUE_FROM_KEYBOARD": {
+        "method": "keyboard.standard",
+        "params": "KEYBOARD_STANDARD_PARAMS"
+    },
+    "PROMPT_THE_USER_FOR_THEIR_EMAIL_WITH_INVALID_TYPE_AS_STRING": {
+        "method": "keyboard.email",
+        "params": "KEYBOARD_INVALIDSTRING_EMAILUSAGE_AND_MESSAGE",
+        "expected": "error"
+    },
+    "PROMPT_THE_USER_FOR_THEIR_EMAIL_WITH_INVALID_TYPE_AS_INTEGER": {
+        "method": "keyboard.email",
+        "params": "KEYBOARD_INTEGER_EMAILUSAGE_AND_MESSAGE",
+        "expected": "error"
+    },
+    "PROMPT_THE_USER_FOR_THEIR_EMAIL_WITH_TYPE_AS_EMPTY": {
+        "method": "keyboard.email",
+        "expected": "error"
+    },
+    "PROMPT_THE_USER_FOR_THEIR_INVALID_PASSWORD_AS_INTEGER": {
+        "method": "keyboard.password",
+        "params": "KEYBOARD_PASSWORD_INTEGER_MESSAGE",
+        "expected": "error"
+    },
+    "PROMPT_THE_USER_FOR_THEIR_INVALID_STANDARD_AS_INTEGER": {
+        "method": "keyboard.standard",
+        "params": "KEYBOARD_STANDARD_INTEGER_MESSAGE",
+        "expected": "error"
+    },
+    "PROMPT_THE_USER_FOR_THEIR_STANDARD_AS_EMPTY": {
+        "method": "keyboard.standard",
+        "expected": "error"
+    },
+    "INVALID_PARAMETER_FOR_EMAIL": {
+        "method": "keyboard.email",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMETER_PASSWORD": {
+        "method": "keyboard.password",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "INVALID_PARAMETER_STANDARD": {
+        "method": "keyboard.standard",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "KEYBOARD_EMAIL": {
+        "method": "keyboard.email",
+        "params": "KEYBOARD_EMAIL"
+    }
+}

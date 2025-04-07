@@ -93,6 +93,9 @@ const env = {
   pendingFeatures: [],
   externalModuleTestTypes: [],
   dynamicDeviceDetailsModules: ['Device'],
+  elk: false,
+  objective: '',
+  supportsPlatformCommunication: false,
 };
 
 module.exports = {

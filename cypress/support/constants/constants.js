@@ -110,6 +110,7 @@ module.exports = {
   ENV_PLATFORM_RELEASE: 'platform release',
   ENV_PRODUCT: 'product',
   ENV_FIREBOLT_VERSION: 'fireboltVersion',
+  ENV_RELEASE: 'release',
   ENV_DEVICE_FIRMWARE: 'deviceFirmware',
   ENV_DEVICE_MODEL: 'deviceModel',
   ENV_DEVICE_DISTRIBUTOR: 'deviceDistributor',
@@ -144,6 +145,7 @@ module.exports = {
   EXCEPTION_METHODS: 'exceptionMethods',
   EXCLUDED_METHODS: ['Lifecycle.close'],
   EXCLUDED_MODULES: [],
+  EXCLUDE_VALIDATIONS: 'excludeValidations',
   EXCLUDED_VALUES: [null, undefined],
   EXECUTE_SHELL: 'executeShell',
   EXPECTED_DATA_NOT_FOUND_IN_MODULE_JSONS:
@@ -178,8 +180,8 @@ module.exports = {
   FCS: 'fcs',
   FCS_MODULEREQID_PATH: 'cypress/fixtures/objects/moduleReqId/moduleReqId.json',
   FCS_SETRESPONSE_PATH: 'cypress/fixtures/setResponseData.json',
-  FCS_SETTER_REQUEST_OVERRIDE_METHOD: 'fcsSetterRequestOverride',
   FCS_VALIDATION_JSON: 'fCSValidationjson',
+  FEATURE_NAME: 'featureName',
   FIREBOLT: 'firebolt',
   FIREBOLTCALL: 'fireboltCall',
   FIREBOLT_OBJECT_DOC_PATH:
@@ -213,6 +215,7 @@ module.exports = {
   HEXADECIMAL: 'hexaDecimal',
   HISTORY_VALIDATION_REQ: 'Lifecycle history validation ',
   ID: 'id',
+  INCLUDE_VALIDATIONS: 'includeValidations',
   INPUT: 'INPUT',
   INTENT: 'intent',
   INTENT_TEMPLATES: 'intentTemplates',
@@ -338,7 +341,7 @@ module.exports = {
   PLATFORM_NOT_SUPPORT_LOG: 'Platform does not support method',
   PLATFORM_NOT_TRIGGER_EVENT: 'Platform MUST not trigger event ',
   PLATFORM_TRIGGER_EVENT: 'Platform MUST trigger event ',
-  PLATFORM_RELEASE: 'Release',
+  RELEASE: 'Release',
   PARTNER: 'Partner',
   PRODUCT: 'Product',
   PREREQUISITE_DATA: 'PreRequisiteData.json',
@@ -361,8 +364,6 @@ module.exports = {
   REGEX_EVENT_VALIDATION: 'regexEventValidation',
   REPORT_COMMUNICATION_MODE: 'Communication Mode',
   REPORT_DATE: 'Date',
-  REQUEST_OVERRIDE_METHOD: 'requestOverrideMethods',
-  REQUEST_OVERRIDE_PARAMS: 'requestOverrideParams',
   REQUEST_OVERRIDE_CALLS: {
     SETRESPONSE: 'fcs.setResponse',
     CLEARLISTENER: 'fcs.clearEventListeners',
@@ -382,6 +383,7 @@ module.exports = {
     SCREENSHOT: 'fcs.screenshot',
     GETAPPSTATE: 'fcs.getAppState',
     DISMISS: 'fcs.dismissApp',
+    GETAPPDATA: 'fcs.getAppData',
   },
   REQUEST_MAP_INTERACTIONS_SERVICE: 'Request map for firebolt interactions service : ',
   RESPONSE: 'Response: ',
@@ -538,6 +540,11 @@ module.exports = {
   LOGGEDIN: 'loggedIn',
   LOGGEDOUT: 'loggedOut',
   DISMISS: 'dismiss',
+  APP_LAUNCH_COUNT: 'appLaunchCount',
+  HOT_LAUNCH: 'HOT_LAUNCH',
+  COLD_LAUNCH: 'COLD_LAUNCH',
+  APP_ASSURANCE_ID: 'appAssuranceId',
+  SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
