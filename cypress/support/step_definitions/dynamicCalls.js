@@ -209,7 +209,7 @@ Given(/'(.+)' registers for(?: the '(.+)')? event$/, async (appId, sdk) => {
     if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.EVENT)) {
       event = UTILS.resolveRecursiveValues(fireboltCallObject.event);
     }
-    const eventParams = {};
+    const eventParams = UTILS.resolveRecursiveValues(fireboltCallObject.eventParams) || {};
     const context = {};
     appId = UTILS.fetchAppIdentifierFromEnv(appId);
     let action = CONSTANTS.ACTION_CORE.toLowerCase();
