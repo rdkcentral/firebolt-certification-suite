@@ -327,14 +327,13 @@ Example:
 ```
 ### Response override
 
-- The `sendVoiceCommand` returns a response with success and sessionId. This function should be added in config module `responseModules/fcs.js` file.
+- The `sendVoiceCommand` returns a response with success as `true`. This function should be added in config module `responseModules/fcs.js` file.
 
 #### Response Format for sendVoiceCommand:
 
 ```javascript
   {
-    "success": <boolean>,
-    "sessionId": <string>
+    "success": <boolean>
   }
 ```
 
@@ -342,7 +341,6 @@ Example:
 
 ```javascript
   {
-    "success": true,
-    "sessionId": "01000-09377-898905"
+    "success": true
   }
 ```
