@@ -429,10 +429,10 @@ export default function (module) {
 
       if (!UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)) {
         cy.log(CONSTANTS.DEVICE_MAC_UNAVAILABLE).then(() => {
-          logger.error(
+          assert(
+            false,
             `Device MAC address is not available. Make sure this value is added in cypress.config.js or passed as an environment variable with the cli.`
           );
-          assert(false, CONSTANTS.DEVICE_MAC_UNAVAILABLE);
         });
       }
 
