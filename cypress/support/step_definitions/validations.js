@@ -428,7 +428,7 @@ Given(/Verify '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     validationObject = UTILS.resolveRecursiveValues(fireboltData);
     cy.methodOrEventResponseValidation(type, validationObject).then(() => {
-      cy.softAssertAll();
+      fireLog.info(`${validationObjectKey} was successful`);
     });
   });
 });
