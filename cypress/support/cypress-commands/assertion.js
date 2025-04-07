@@ -558,9 +558,10 @@ Cypress.Commands.add(
     const actualValue = typeof actual === 'object' ? JSON.stringify(actual) : actual;
 
     // Construct the log message
-    const logMessage = pretext == undefined
-      ? `Event Content validation ${status.toLowerCase()}ed for ${extractEventObject.eventObjectId}: expected ${actualValue} to be ${expectedValue}`
-      : pretext;
+    const logMessage =
+      pretext == undefined
+        ? `Event Content validation ${status.toLowerCase()}ed for ${extractEventObject.eventObjectId}: expected ${actualValue} to be ${expectedValue}`
+        : pretext;
 
     // Log or assert based on the status
     if (status === CONSTANTS.PASS || status === CONSTANTS.SKIPPED) {
