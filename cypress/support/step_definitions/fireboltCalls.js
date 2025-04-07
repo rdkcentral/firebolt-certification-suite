@@ -525,7 +525,7 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
  * Then Send 'enter' keypress
  * Then Send 'enter' keypress with a delay of '20' seconds
  */
-Then(/Send (.+) keypress(?: with a delay of '(.+)' seconds)?/, (keypress, delay) => {
+Then(/Send '(.+)' keypress(?: with a delay of '(.+)' seconds)?/, (keypress, delay) => {
   cy.sendKeyPress(keypress, delay).then(() => {
     console.log('Keypress done successfully for ', keypress);
   });
