@@ -1,3 +1,10 @@
+# [1.10.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.9...v1.10.0-dev.10) (2025-04-07)
+
+
+### Bug Fixes
+
+* Remove SDKVersion from runInfo ([#389](https://github.com/rdkcentral/firebolt-certification-suite/issues/389)) ([9e9f280](https://github.com/rdkcentral/firebolt-certification-suite/commit/9e9f280f54903b5d4bc38fcae0b71e185d8a8696))
+
 # [1.10.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.8...v1.10.0-dev.9) (2025-04-04)
 
 
