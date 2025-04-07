@@ -251,7 +251,6 @@ Cypress.Commands.add('updateRunInfo', () => {
   let deviceDistributor = '';
   let devicePlatform = '';
   const fireboltVersion = '';
-  let sdkVersion = '';
 
   // function to set env variable for run info data
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
