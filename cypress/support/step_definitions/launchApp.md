@@ -42,3 +42,15 @@
 
 ### Examples:
  * `When AppObject state for '3rd party App' is set to 'foreground'`
+  
+## I send '([^']+)' voice command
+
+### Purpose: Sends a voice command to the platform and validates the response.
+
+### Params:
+| Param | Definition|
+| --- | --- |
+| command | The voice command to be sent |
+
+### Examples:
+ * `When I send 'open settings' voice command'`
