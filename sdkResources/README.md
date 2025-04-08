@@ -23,6 +23,8 @@ The sdkResources directory in the Firebolt Certification Suite (FCS) contains ve
         ├── 0.8.1  
 
 ## Guidelines for Placing Files in SDK Resources
+**Note**: In `Cypress` directory, the `TestCases` and `fixtures` folders exist but are typically empty. Files for these folders should be organized in the `sdkResources` Directory as shown in the diagram below. Follow the diagram to understand where to place files for different purposes.
+
 ![alt text](sdkResources_filesFlowDiagram.png)
 
 ## Test Execution

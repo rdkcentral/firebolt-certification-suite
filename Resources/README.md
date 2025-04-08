@@ -2,6 +2,8 @@
 The `Resources` folder in the Firebolt Certification Suite (FCS) contains all test cases and fixtures that are independent of any specific SDK version.
 
 ## Guidelines for Placing Files in Resources
+**Note**: In `Cypress` directory, the `TestCases` and `fixtures` folders exist but are typically empty. Files for these folders should be organized in the `Resources` Directory as shown in the diagram below. Follow the diagram to understand where to place files for different purposes.
+
 ![alt text](Resources_filesFlowChart.png)
 
 ## Directory Structure
