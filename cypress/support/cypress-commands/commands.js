@@ -2046,7 +2046,7 @@ Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
  * @example
  * cy.getPlayerMethodInteractions()
  */
-Cypress.Commands.add('getPlayerMethodInteractions', (appId, method) => {
+Cypress.Commands.add('getPlayerMethodInteractions', (appIdList, method) => {
   const fireboltInteractionLogs = Cypress.env(CONSTANTS.FB_INTERACTIONLOGS);
   const startTime = Cypress.env(CONSTANTS.INTERACTION_LOGS_START_TIME);
   const endTime = Date.now();
@@ -2058,7 +2058,7 @@ Cypress.Commands.add('getPlayerMethodInteractions', (appId, method) => {
         logArray.forEach((log) => {
           try {
             if (
-              log.app_id === appId &&
+              appIdList.includes(log.app_id) &&
               log.method === method &&
               log.time_stamp >= startTime &&
               log.time_stamp <= endTime
