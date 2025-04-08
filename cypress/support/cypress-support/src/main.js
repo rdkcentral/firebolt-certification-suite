@@ -135,6 +135,9 @@ export default function (module) {
     cy.getBeforeOperationObject();
     cy.initiatePerformanceMetrics();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+    const startTime = new Date().toISOString();
+    Cypress.env('start_time', startTime);
+    cy.log('2940 start time ', startTime);
   });
 
   /**
