@@ -1418,7 +1418,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
     // cy.then() to ensure each Cypress command is properly awaited before return
     cy.then(() => {
-      fireLog.info(`======Beginning of the ${scenario} validation======`);
+      fireLog.info(`====== Beginning of the ${scenario} validation ======`);
       switch (scenario) {
         case CONSTANTS.REGEX:
           cy.regExValidation(
@@ -1472,7 +1472,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
           break;
       }
     }).then(() => {
-      fireLog.info(`=====Ending of the ${scenario} validation=====`);
+      fireLog.info(`====== Ending of the ${scenario} validation ======`);
     });
   };
 
