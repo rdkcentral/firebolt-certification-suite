@@ -246,6 +246,7 @@ Cypress.Commands.add('getSdkVersion', () => {
 Cypress.Commands.add('updateRunInfo', () => {
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
+  let deviceId = '';
   let deviceModel = '';
   let deviceDistributor = '';
   let devicePlatform = '';
@@ -307,6 +308,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                 if (exists) {
                   // File exists, read the file
                   return cy.readFile(deviceMacJson).then((macJson) => {
+                    deviceId = macJson?.DEVICEID ?? '';
                     deviceModel = macJson?.DEVICE_MODEL ?? '';
                     deviceDistributor = macJson?.DEVICE_DISTRIBUTOR ?? '';
                     devicePlatform = macJson?.DEVICE_PLATFORM ?? '';
@@ -330,6 +332,15 @@ Cypress.Commands.add('updateRunInfo', () => {
                   CONSTANTS.DEVICE_DISTRIBUTOR,
                   CONSTANTS.ACTION_CORE,
                   CONSTANTS.ENV_DEVICE_DISTRIBUTOR
+                );
+              })
+              .then(() => delay(2000))
+              .then(() => {
+                return setEnvRunInfo(
+                  deviceId,
+                  CONSTANTS.DEVICE_ID,
+                  CONSTANTS.ACTION_CORE,
+                  CONSTANTS.ENV_DEVICE_ID
                 );
               })
               .then(() => delay(2000))
@@ -369,6 +380,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
                         [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                         [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                        [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
                       };
                       reportEnv.customData.data.forEach((item) => {
                         if (item.label === CONSTANTS.PRODUCT) {
@@ -1406,7 +1418,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
     // cy.then() to ensure each Cypress command is properly awaited before return
     cy.then(() => {
-      fireLog.info(`======Beginning of the ${scenario} validation======`);
+      fireLog.info(`====== Beginning of the ${scenario} validation ======`);
       switch (scenario) {
         case CONSTANTS.REGEX:
           cy.regExValidation(
@@ -1460,7 +1472,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
           break;
       }
     }).then(() => {
-      fireLog.info(`=====Ending of the ${scenario} validation=====`);
+      fireLog.info(`====== Ending of the ${scenario} validation ======`);
     });
   };
 
@@ -1579,15 +1591,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                 }
               }
             });
-          } else {
-            cy.validateContent(
-              method,
-              context,
-              validationJsonPath,
-              contentObject,
-              validationType,
-              appId
-            );
           }
         } catch (error) {
           assert(false, `Unable to validate the response: ${error}`);
@@ -1955,8 +1958,6 @@ Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
  * cy.clearSoftAssertArray()
  */
 Cypress.Commands.add('clearSoftAssertArray', () => {
-  cy.log(`Clearing soft assertion array`);
-
   // Reset relevant properties
   jsonAssertion.softAssertJson = null;
   jsonAssertion.softAssertCount = 0;
