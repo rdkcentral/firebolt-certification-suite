@@ -13,6 +13,7 @@
       { "label": "Platform", "value": "N/A" },
       { "label": "Release", "value": "N/A" },
       { "label": "Device", "value": "N/A" },
+      { "label": "DeviceId", "value": "N/A" },
       { "label": "Device Firmware", "value": "N/A" },
       { "label": "Partner", "value": "N/A" }
     ]

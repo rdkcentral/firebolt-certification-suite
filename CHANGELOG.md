@@ -1,3 +1,38 @@
+# [1.10.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.9...v1.10.0-dev.10) (2025-04-07)
+
+
+### Bug Fixes
+
+* Remove SDKVersion from runInfo ([#389](https://github.com/rdkcentral/firebolt-certification-suite/issues/389)) ([9e9f280](https://github.com/rdkcentral/firebolt-certification-suite/commit/9e9f280f54903b5d4bc38fcae0b71e185d8a8696))
+
+# [1.10.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.8...v1.10.0-dev.9) (2025-04-04)
+
+
+### Bug Fixes
+
+* Update RunInfo with deviceId ([#378](https://github.com/rdkcentral/firebolt-certification-suite/issues/378)) ([e3b72d2](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3b72d278e0ccfdfe1e56a6f2893ac7529b39bbb))
+
+# [1.10.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.7...v1.10.0-dev.8) (2025-04-04)
+
+
+### Bug Fixes
+
+* Screenshot link provided in report opens to 'Resource not found' ([#377](https://github.com/rdkcentral/firebolt-certification-suite/issues/377)) ([82e3db0](https://github.com/rdkcentral/firebolt-certification-suite/commit/82e3db05aaccbc3bf00bb9a0294f88e5988dceb8))
+
+# [1.10.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.6...v1.10.0-dev.7) (2025-04-04)
+
+
+### Bug Fixes
+
+* Removed null content validation for negative scenarios ([#376](https://github.com/rdkcentral/firebolt-certification-suite/issues/376)) ([3ba8e94](https://github.com/rdkcentral/firebolt-certification-suite/commit/3ba8e944a73bf7c67c88469ce2298eb489dc791e))
+
+# [1.10.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.5...v1.10.0-dev.6) (2025-03-28)
+
+
+### Bug Fixes
+
+* app assurance error handling changes ([#367](https://github.com/rdkcentral/firebolt-certification-suite/issues/367)) ([24bbfd2](https://github.com/rdkcentral/firebolt-certification-suite/commit/24bbfd26929e0ac9ecbc3074cbc641813e3864d8))
+
 # [1.10.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.4...v1.10.0-dev.5) (2025-03-27)
 
 

@@ -246,6 +246,7 @@ Cypress.Commands.add('getSdkVersion', () => {
 Cypress.Commands.add('updateRunInfo', () => {
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
+  let deviceId = '';
   let deviceModel = '';
   let deviceDistributor = '';
   let devicePlatform = '';
@@ -307,6 +308,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                 if (exists) {
                   // File exists, read the file
                   return cy.readFile(deviceMacJson).then((macJson) => {
+                    deviceId = macJson?.DEVICEID ?? '';
                     deviceModel = macJson?.DEVICE_MODEL ?? '';
                     deviceDistributor = macJson?.DEVICE_DISTRIBUTOR ?? '';
                     devicePlatform = macJson?.DEVICE_PLATFORM ?? '';
@@ -330,6 +332,15 @@ Cypress.Commands.add('updateRunInfo', () => {
                   CONSTANTS.DEVICE_DISTRIBUTOR,
                   CONSTANTS.ACTION_CORE,
                   CONSTANTS.ENV_DEVICE_DISTRIBUTOR
+                );
+              })
+              .then(() => delay(2000))
+              .then(() => {
+                return setEnvRunInfo(
+                  deviceId,
+                  CONSTANTS.DEVICE_ID,
+                  CONSTANTS.ACTION_CORE,
+                  CONSTANTS.ENV_DEVICE_ID
                 );
               })
               .then(() => delay(2000))
@@ -369,6 +380,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
                         [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                         [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                        [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
                       };
                       reportEnv.customData.data.forEach((item) => {
                         if (item.label === CONSTANTS.PRODUCT) {
@@ -1579,15 +1591,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                 }
               }
             });
-          } else {
-            cy.validateContent(
-              method,
-              context,
-              validationJsonPath,
-              contentObject,
-              validationType,
-              appId
-            );
           }
         } catch (error) {
           assert(false, `Unable to validate the response: ${error}`);
@@ -1834,23 +1837,45 @@ Cypress.Commands.add('fetchAppMetaData', () => {
         appAssuranceId: Cypress.env(CONSTANTS.APP_ASSURANCE_ID),
       },
     };
+    // Send the request to fetch app data from platforms
     cy.sendMessagetoPlatforms(requestParams).then((result) => {
-      return result.data;
+      if (result && result.data) {
+        return result.data;
+      } else {
+        throw new Error('Unable to get valid response for fetching app metadata');
+      }
     });
   } else {
-    // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
+    // If app assurance id is not available, extract app metadata from local directories
+
     const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
     const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
 
     const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
     const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
+    // Extract internal app metadata
     cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
       (fcsAppMetaData) => {
+        // Check if internal app metadata extraction was successful
+        if (!fcsAppMetaData) {
+          throw new Error('Failed to extract internal app metadata.');
+        }
+
+        // Extract external app metadata
         cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
           (configModuleAppMetaData) => {
-            // Combine the app metadata from the fcs and configModule appData directories.
-            _.merge(fcsAppMetaData, configModuleAppMetaData);
+            // Check if external app metadata extraction was successful
+            if (!configModuleAppMetaData) {
+              throw new Error('Failed to extract external app metadata.');
+            }
+
+            // Merge internal and external app metadata
+            try {
+              _.merge(fcsAppMetaData, configModuleAppMetaData);
+            } catch (mergeError) {
+              throw new Error(`Error merging app metadata: ${mergeError.message}`);
+            }
           }
         );
       }
@@ -1933,8 +1958,6 @@ Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
  * cy.clearSoftAssertArray()
  */
 Cypress.Commands.add('clearSoftAssertArray', () => {
-  cy.log(`Clearing soft assertion array`);
-
   // Reset relevant properties
   jsonAssertion.softAssertJson = null;
   jsonAssertion.softAssertCount = 0;
