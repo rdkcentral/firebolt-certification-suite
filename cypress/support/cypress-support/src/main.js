@@ -443,14 +443,16 @@ export default function (module) {
    * @module main
    * @function startAdditionalServices
    * @description Executes external services defined in the config module, if available.
+   *  - This command will look for the `startAdditionalServices` function present in the `additionalServices/index.js` file. If present, it will be invoked; otherwise, nothing will happen.
+   *  - By default, this will look for the `startAdditionalServices` function in the config module. If we want to execute another function instead of `startAdditionalServices`, we can override the default function by passing the function name from the command line for the parameter `externalService`.
    * @param {string} input - parameters passing to external function
    * @example
    * startAdditionalServices({})
    */
   Cypress.Commands.add('startAdditionalServices', (input) => {
     // This defaults to checking for the startAdditionalServices function in the config module, but it can be overridden via the command.
-    const serviceName = Cypress.env('externalService')
-      ? Cypress.env('externalService')
+    const serviceName = Cypress.env(CONSTANTS.EXTERNAL_SERVICE_FUNCTION)
+      ? Cypress.env(CONSTANTS.EXTERNAL_SERVICE_FUNCTION)
       : 'startAdditionalServices';
     if (
       module &&

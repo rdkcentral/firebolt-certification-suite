@@ -165,6 +165,7 @@ module.exports = {
   EXTERNAL_MODULEREQID_PATH: 'cypress/fixtures/external/objects/moduleReqId/moduleReqId.json',
   EXTERNAL_PATH: 'cypress/fixtures/external/modules/',
   EXTERNAL_PREREQUISITE_DATA: './cypress/fixtures/external/PreRequisiteData.json',
+  EXTERNAL_SERVICE_FUNCTION: 'externalService',
   EXTRACTEDAPI_PATH: 'extractedApiObject.apiResponse.',
   FAIL: 'FAIL',
   FAIL_ON_PUBSUB_CONNECTION_ERROR: 'failOnPubSubConnectionError',
