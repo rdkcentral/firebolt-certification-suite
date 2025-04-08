@@ -94,3 +94,19 @@ For the validation part, for the states when the app is not reachable for us to 
 
 ### Examples:
  * `verify Firebolt Interactions for 'account id method'`
+
+* `When AppObject state for '3rd party App' is set to 'foreground'`
+
+## Verify '(.+)' app is '(.+)'
+
+### Purpose: To perform content validation using an object matching the validation object key name.
+
+### Params:
+| Param               | Definition                                                                                                                              |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| app                 | app type                                                                                                                                |
+| validationObjectKey | The name of an object coming from fireboltCalls fixtures (the object can include firebolt call info but may just have validation data). |
+
+### Examples:
+* `Then Verify 'Youtube' app is 'playing entity'`
+* `Then Verify 'Netfliz' app is 'dismissed from foreground'`

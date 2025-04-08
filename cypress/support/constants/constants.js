@@ -72,6 +72,7 @@ module.exports = {
   CUSTOM_METHOD_PATH:
     'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/fixtures/docs/validations.md#custom',
   CYPRESS_MODULES_PATH: 'cypress/fixtures/external/modules',
+  CUSTOM_VALIDATION_TIMEOUT: 'customValidationTimeout',
   DATE: 'date',
   DECIMAL: 'decimal',
   DECODE: 'decode',
@@ -386,6 +387,7 @@ module.exports = {
     GETAPPSTATE: 'fcs.getAppState',
     DISMISS: 'fcs.dismissApp',
     GETAPPDATA: 'fcs.getAppData',
+    SENDKEYPRESS: 'fcs.sendKeyPress',
   },
   REQUEST_MAP_INTERACTIONS_SERVICE: 'Request map for firebolt interactions service : ',
   RESPONSE: 'Response: ',

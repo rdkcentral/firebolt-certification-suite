@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-import { Given } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
 const _ = require('lodash');
 import { apiObject } from '../appObjectConfigs';
@@ -513,5 +513,20 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
     cy.methodOrEventResponseValidation(type, validationObject).then(() => {
       cy.softAssertAll();
     });
+  });
+});
+
+/**
+ * @module fireboltCalls
+ * @function Then /Send (.+) keypress(?: with a delay of '(.+)' seconds)?/
+ * @description Sends a keypress event to the platform.
+ * @param {String} keypress - The key to be pressed
+ * @example
+ * Then Send 'enter' keypress
+ * Then Send 'enter' keypress with a delay of '20' seconds
+ */
+Then(/Send '(.+)' keypress(?: with a delay of '(.+)' seconds)?/, (keypress, delay) => {
+  cy.sendKeyPress(keypress, delay).then(() => {
+    console.log('Keypress done successfully for ', keypress);
   });
 });
