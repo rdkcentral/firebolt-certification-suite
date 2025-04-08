@@ -422,9 +422,9 @@ Given(/verify Firebolt Interactions for '(.+)'/, (key) => {
 Given(/Verify '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
   UTILS.captureScreenshot();
 
-  validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  const objectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   let validationObject;
-  cy.getFireboltData(validationObjectKey).then((fireboltData) => {
+  cy.getFireboltData(objectKey).then((fireboltData) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     validationObject = UTILS.resolveRecursiveValues(fireboltData);
     cy.methodOrEventResponseValidation(type, validationObject).then(() => {

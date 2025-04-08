@@ -573,6 +573,7 @@ export default function (module) {
         const configCustomValidation = module.customValidations[functionName];
         // to check whether customValidations has a function as the functionName passed
         if (configCustomValidation && typeof configCustomValidation === 'function') {
+          // when the validation states FCS needs to wait before proceeding with the test
           const waitForCustom = fcsValidationObjectData.waitForCompletion;
           if (waitForCustom && waitForCustom === true) {
             const customTimeout = fcsValidationObjectData.waitLimit
