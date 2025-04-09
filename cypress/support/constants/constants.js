@@ -380,6 +380,8 @@ module.exports = {
     GETAPPSTATE: 'fcs.getAppState',
     DISMISS: 'fcs.dismissApp',
     GETAPPDATA: 'fcs.getAppData',
+    SENDKEYPRESS: 'fcs.sendKeyPress',
+    SENDVOICECOMMAND: 'fcs.sendVoiceCommand',
   },
   RESPONSE: 'Response: ',
   RESPONSE_INVALID_RESPONSE_LOG:

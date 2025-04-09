@@ -108,3 +108,23 @@ When('AppObject state for {string} is set to {string}', (app, state) => {
     cy.log('Setting ' + appId + ' appObject state to ' + state);
   });
 });
+
+/**
+ * @module launchapp
+ * @function I send '([^']+)' voice command
+ * @description Sends a voice command to the platform and validates the response.
+ * @param {String} command - The voice command to be sent (e.g., "open settings").
+ * When I send 'open settings' voice command
+ */
+Given(/I send '([^']+)' voice command/, (command) => {
+  cy.sendVoiceCommand(command).then((result) => {
+    if (result && result.success === true) {
+      fireLog.assert(
+        true,
+        `Platform has successfully sent and processed the voice command: '${command}'`
+      );
+    } else {
+      fireLog.assert(false, `Failed to send or process the voice command: '${command}'`);
+    }
+  });
+});
