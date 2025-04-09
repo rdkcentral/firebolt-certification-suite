@@ -1,3 +1,10 @@
+# [1.10.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.12...v1.10.0-dev.13) (2025-04-09)
+
+
+### Features
+
+* IUI settings selection ([#381](https://github.com/rdkcentral/firebolt-certification-suite/issues/381)) ([91d5a83](https://github.com/rdkcentral/firebolt-certification-suite/commit/91d5a83dc317c23d5b5369d3255fc285ac8c734d))
+
 # [1.10.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.11...v1.10.0-dev.12) (2025-04-09)
 
 
