@@ -363,8 +363,8 @@ Cypress.Commands.add('updateRunInfo', () => {
                   // Retrieve the current labelToEnvMap
                   // let labelToEnvMap = Cypress.env('labelToEnvMap') || {};
                   let labelToEnvMap = {};
-                  if (Cypress.env('labelToEnvMap')) {
-                    labelToEnvMap = Cypress.env('labelToEnvMap');
+                  if (Cypress.env(CONSTANTS.LABEL_TO_ENVMAP)) {
+                    labelToEnvMap = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP);
                     // Clear the existing customData.data array
                     reportEnv.customData.data = [];
 
@@ -375,6 +375,8 @@ Cypress.Commands.add('updateRunInfo', () => {
                         value: Cypress.env(labelToEnvMap[key]) || 'N/A',
                       });
                     });
+                    // write the merged object
+                    cy.writeFile(reportEnvFile, reportEnv);
                   } else {
                     labelToEnvMap = {
                       [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
@@ -393,12 +395,9 @@ Cypress.Commands.add('updateRunInfo', () => {
                         item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
                       }
                     });
+                    cy.writeFile(tempReportEnvFile, reportEnv);
                   }
                 }
-
-                // write the merged object
-                cy.writeFile(tempReportEnvFile, reportEnv);
-                cy.writeFile(reportEnvFile, reportEnv);
               } else {
                 logger.info('Unable to read from reportEnv json file');
                 return false;
@@ -2007,8 +2006,6 @@ const shouldPerformValidation = (key, value) => {
 
   return true;
 };
-
-
 
 /**
  * @module commands
