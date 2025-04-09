@@ -60,7 +60,6 @@ const env = {
   communicationMode: 'SDK',
   suiteCommunicationMode: 'Transport',
   performanceMetrics: false,
-  interactionsMetrics: false,
   generateLocalReport: true,
   loggerLevel: 'debug',
   testSuite: '',

@@ -844,17 +844,8 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
-  }
-  // Initiating the Interaction service to listening for interaction logs when interactionsMetrics is set to true in beforeOperation object.
-  else if (
-    beforeOperation.hasOwnProperty(CONSTANTS.INTERACTIONS_METRICS) &&
-    beforeOperation.interactionsMetrics === true
-  ) {
-    cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
-      if (response) {
-        Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
-      }
-    });
+  } else {
+    cy.startAdditionalServices(beforeOperation);
   }
 });
 
@@ -1683,45 +1674,6 @@ Cypress.Commands.add('getRuntimeFireboltCallObject', () => {
       `The firebolt call object was not found in the runtime environment variable. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key. Refer here - ${CONSTANTS.FIREBOLT_OBJECT_DOC_PATH}`
     );
   }
-});
-
-/**
- * @module commands
- * @function startOrStopInteractionsService
- * @description To start or stop firebolt interactions collection service in device by passing appropriate intent to designated handler
- * @param {String} action - initiated or stopped
- * @example
- * cy.startOrStopInteractionsService('initiated)
- * cy.startOrStopInteractionsService('stopped')
- */
-Cypress.Commands.add('startOrStopInteractionsService', (action) => {
-  const requestMap = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETFIREBOLTINTERACTIONSHANDLER,
-    params: {
-      trigger: action == CONSTANTS.INITIATED ? CONSTANTS.START : CONSTANTS.STOP,
-      optionalParams: '',
-    },
-    task: CONSTANTS.TASK.FIREBOLTINTERACTIONSHANDLER,
-  };
-  fireLog.info(CONSTANTS.REQUEST_MAP_INTERACTIONS_SERVICE + JSON.stringify(requestMap));
-  // Sending message to the platform to call designated handler
-  cy.sendMessagetoPlatforms(requestMap).then((result) => {
-    if (result?.success) {
-      fireLog
-        .assert(true, `Firebolt interactions collection service ${action} successfully`)
-        .then(() => {
-          return true;
-        });
-    } else {
-      fireLog
-        .info(
-          `Firebolt interactions collection service with action as ${action} has failed with error ${JSON.stringify(result.message)}`
-        )
-        .then(() => {
-          return false;
-        });
-    }
-  });
 });
 
 /**
