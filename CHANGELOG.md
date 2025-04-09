@@ -1,3 +1,10 @@
+# [1.10.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.11...v1.10.0-dev.12) (2025-04-09)
+
+
+### Bug Fixes
+
+* Moved interaction service changes to config helper ([#329](https://github.com/rdkcentral/firebolt-certification-suite/issues/329)) ([8fcbf56](https://github.com/rdkcentral/firebolt-certification-suite/commit/8fcbf56d1ef36d262e3da6f3ecf20b53642bd70e))
+
 # [1.10.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0-dev.10...v1.10.0-dev.11) (2025-04-08)
 
 
