@@ -303,3 +303,24 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
     cy.log(`Firebolt Certification Suite failed to communicate with the ${appType}: ${error}`);
   }
 });
+
+Given(/I search text '(.+)' is found in the 'wpeframework' log/, (logKey) => {
+  console.log('inside new glue code 2940', logKey);
+  Cypress.env('logKey', logKey);
+  let validationObjectKey = 'LOG_PATTERNS';
+  if (validationObjectKey) {
+    validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  }
+  console.log('2940 validationObjectKey', validationObjectKey);
+  let validationObject;
+  cy.getFireboltData(validationObjectKey).then((fireboltData) => {
+    console.log('2940 fireboltData', fireboltData);
+    const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+    validationObject = UTILS.resolveRecursiveValues(fireboltData);
+    validationObject.logKey = logKey;
+    console.log('2940 validationObject', validationObject);
+    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
+      cy.softAssertAll();
+    });
+  });
+});

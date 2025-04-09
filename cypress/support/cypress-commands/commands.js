@@ -1964,3 +1964,14 @@ const shouldPerformValidation = (key, value) => {
 
   return true;
 };
+
+Cypress.Commands.add('findLogPattern', (logPatterns) => {
+  console.log('inside findLogPattern command 2940');
+  const requestMap = {
+    method: 'fcs.findLogPattern',
+    logPattern: logPatterns,
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    console.log('2940 result', result);
+  });
+});
