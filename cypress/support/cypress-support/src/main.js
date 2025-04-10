@@ -266,7 +266,7 @@ export default function (module) {
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
    */
 
-    Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
+  Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
     return cy.wrap(requestMap, { timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT }).then(() => {
       return new Promise((resolve, reject) => {
         let responsePromise;
