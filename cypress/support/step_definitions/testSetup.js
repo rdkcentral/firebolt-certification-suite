@@ -120,7 +120,13 @@ Given(
             });
           }
         }
-        cy.updateRunInfo();
+        cy.then(() => {
+          console.log("Divya Calling the getReportData as external service");
+          Cypress.env(CONSTANTS.EXTERNAL_SERVICE_FUNCTION, "getReportData");
+        }).then(() => {
+          cy.startAdditionalServices();
+          cy.updateRunInfo();
+        });
       } catch (error) {
         cy.log(
           `Following error occurred while trying to fetch device details dynamically: ${error}`

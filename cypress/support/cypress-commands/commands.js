@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
+import UTILS, { fireLog, getEnvVariable, addToEnvLabelMap } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
@@ -244,6 +244,7 @@ Cypress.Commands.add('getSdkVersion', () => {
  * updateRunInfo()
  */
 Cypress.Commands.add('updateRunInfo', () => {
+  console.log('Divya Inside RunInfo');
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
   let deviceId = '';
@@ -371,7 +372,8 @@ Cypress.Commands.add('updateRunInfo', () => {
                       reportEnv.customData.data &&
                       reportEnv.customData.data.length > 0
                     ) {
-                      const labelToEnvMap = {
+                      console.log("Divya Inside customData");
+                      addToEnvLabelMap({
                         [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                         [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
                         [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
@@ -381,14 +383,31 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                         [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
                         [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
-                      };
-                      reportEnv.customData.data.forEach((item) => {
-                        if (item.label === CONSTANTS.PRODUCT) {
-                          item.value = configModuleConst.PRODUCT
-                            ? configModuleConst.PRODUCT
-                            : 'N/A';
-                        } else if (labelToEnvMap[item.label]) {
-                          item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+                      });
+                      const envLabelMap = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP);
+                      console.log('Divya envLabelMap:',JSON.stringify(envLabelMap));
+
+                      Object.keys(envLabelMap).forEach((label) => {
+                        const labelExists = reportEnv.customData.data.some(item => item.label === label);
+                        
+                        if (!labelExists) {
+                          console.log("Divya Label doesn't exist");
+                          // Add the label if it doesn't exist
+                          const value = envLabelMap[label];
+                          reportEnv.customData.data.push({
+                            label: label,
+                            value: value || 'N/A',
+                          });
+                        } else {
+                          reportEnv.customData.data.forEach((item) => {
+                            if (item.label === CONSTANTS.PRODUCT) {
+                              item.value = configModuleConst.PRODUCT
+                                ? configModuleConst.PRODUCT
+                                : 'N/A';
+                            } else if (envLabelMap[item.label]) {
+                              item.value = Cypress.env(envLabelMap[item.label]) || 'N/A';
+                            }
+                          });
                         }
                       });
                     }

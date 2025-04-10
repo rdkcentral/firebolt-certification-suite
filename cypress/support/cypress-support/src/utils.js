@@ -1248,6 +1248,13 @@ function captureScreenshot() {
   }
 }
 
+
+global.addToEnvLabelMap = (partialMap) => {
+  const existing = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP) || {};
+  Cypress.env(CONSTANTS.LABEL_TO_ENVMAP, { ...existing, ...partialMap });
+  console.log('Divya ENV_LABEL_MAP::', JSON.stringify(Cypress.env(CONSTANTS.LABEL_TO_ENVMAP)));
+};
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -1279,4 +1286,5 @@ module.exports = {
   censorPubSubToken,
   applyOverrides,
   captureScreenshot,
+  addToEnvLabelMap,
 };
