@@ -59,36 +59,9 @@ export default function (module) {
       } else {
         cy.log('Unable to establish a pub/sub connection.');
       }
-      // Creating a topic with _fbinteractions suffix to listen for interaction logs
-      try {
-        const topic = UTILS.getTopic(
-          UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
-          CONSTANTS.SUBSCRIBE,
-          null,
-          CONSTANTS.TOPIC_FBINTERACTIONS
-        );
-        appTransport.subscribe(topic, UTILS.interactionResults);
-      } catch (err) {
-        logger.error(
-          `Unable to subscribe to ${CONSTANTS.TOPIC_FBINTERACTIONS} suffixed topic. ${err}`
-        );
-        UTILS.fireLog.info(
-          `Unable to subscribe to ${CONSTANTS.TOPIC_FBINTERACTIONS} suffixed topic`
-        );
-      }
-      // Initiating the Interaction service to listening for interaction logs when interactionsMetrics flag set to true.
-      if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS, false) == true) {
-        cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
-          if (response) {
-            Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
-          }
-        });
-      } else {
-        cy.log(CONSTANTS.INTERACTIONS_SERVICE_NOT_ACTIVE);
-      }
+      Cypress.env('pubSubClient', appTransport);
+      cy.startAdditionalServices();
     });
-
-    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
 
     // Create an instance of global queue
     const messageQueue = new Queue();
@@ -136,7 +109,6 @@ export default function (module) {
 
   // beforeEach
   beforeEach(() => {
-    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
     cy.getBeforeOperationObject();
     cy.initiatePerformanceMetrics();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
@@ -225,16 +197,9 @@ export default function (module) {
             }
           });
         }
-        // Stoping the Interaction service if Interaction service is enabled.
-        if (UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) == true) {
-          cy.startOrStopInteractionsService(CONSTANTS.STOPPED).then((response) => {
-            if (response) {
-              Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false);
-            }
-          });
-        }
         // unsubscribing the list of topics
         appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
+        await transport.unsubscribe();
 
         // Unsubscribe from WebSocket if the client is available
         const webSocketClient = UTILS.getEnvVariable('webSocketClient', false);
@@ -406,7 +371,7 @@ export default function (module) {
 
     overrideParams.certification = UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false);
     overrideParams.exceptionMethods = UTILS.generateCombinedExceptionList();
-
+    overrideParams.additionalContext = UTILS.getEnvVariable(CONSTANTS.ADDITIONAL_CONTEXT, false);
     // If certification is true override excluded methods and modules from config module if it is present else use the default lists in constants.
     if (overrideParams.certification == true) {
       overrideParams = UTILS.overideParamsFromConfigModule(overrideParams);
@@ -488,6 +453,30 @@ export default function (module) {
     }
     // Add-ons not there, returning intent without changes
     return message;
+  });
+
+  /**
+   * @module main
+   * @function startAdditionalServices
+   * @description Executes external services defined in the config module, if available.
+   *  - This command will look for the `startAdditionalServices` function present in the `additionalServices/index.js` file. If present, it will be invoked; otherwise, nothing will happen.
+   *  - By default, this will look for the `startAdditionalServices` function in the config module. If we want to execute another function instead of `startAdditionalServices`, we can override the default function by passing the function name from the command line for the parameter `externalService`.
+   * @param {string} input - parameters passing to external function
+   * @example
+   * startAdditionalServices({})
+   */
+  Cypress.Commands.add('startAdditionalServices', (input) => {
+    // This defaults to checking for the startAdditionalServices function in the config module, but it can be overridden via the command.
+    const serviceName = Cypress.env(CONSTANTS.EXTERNAL_SERVICE_FUNCTION)
+      ? Cypress.env(CONSTANTS.EXTERNAL_SERVICE_FUNCTION)
+      : 'startAdditionalServices';
+    if (
+      module &&
+      module.additionalServices &&
+      typeof module.additionalServices[serviceName] === 'function'
+    ) {
+      module.additionalServices[serviceName](input);
+    }
   });
 
   /**
