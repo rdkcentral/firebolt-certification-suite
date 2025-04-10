@@ -1,3 +1,10 @@
+# [1.11.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.1...v1.11.0-dev.2) (2025-04-10)
+
+
+### Bug Fixes
+
+* logic added to optionally send eventParams in the object ([#387](https://github.com/rdkcentral/firebolt-certification-suite/issues/387)) ([010e83b](https://github.com/rdkcentral/firebolt-certification-suite/commit/010e83b4bccf0f5f7814f508ea83a9ffac0b5fdc))
+
 # [1.11.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0...v1.11.0-dev.1) (2025-04-10)
 
 
