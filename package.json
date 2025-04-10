@@ -43,7 +43,7 @@
     "jsdom": "^24.0.0",
     "json-merger": "1.1.10",
     "jsonpath": "^1.1.1",
-    "jsonschema": "1.4.1",
+    "jsonschema": "^1.4.0",
     "lint": "^0.8.19",
     "lodash": "^4.17.21",
     "luxon": "^3.4.4",
