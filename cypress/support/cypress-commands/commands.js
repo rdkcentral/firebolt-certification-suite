@@ -251,7 +251,6 @@ Cypress.Commands.add('updateRunInfo', () => {
   let deviceDistributor = '';
   let devicePlatform = '';
   const fireboltVersion = '';
-  let sdkVersion = '';
 
   // function to set env variable for run info data
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
@@ -272,14 +271,6 @@ Cypress.Commands.add('updateRunInfo', () => {
                   ''
                 );
               Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
-            }
-            if (!Cypress.env(CONSTANTS.ENV_SDK_VERSION) && response?.sdk?.readable) {
-              sdkVersion =
-                `${response?.sdk?.major}.${response?.sdk?.minor}.${response?.sdk?.patch}`.replace(
-                  /"/g,
-                  ''
-                );
-              Cypress.env(CONSTANTS.ENV_SDK_VERSION, sdkVersion);
             }
             if (!Cypress.env(CONSTANTS.ENV_RELEASE) && response?.debug) {
               const release = response.debug;
@@ -362,15 +353,6 @@ Cypress.Commands.add('updateRunInfo', () => {
                     CONSTANTS.ACTION_CORE,
                     {}
                   );
-              })
-              .then(() => delay(2000))
-              .then(() => {
-                return setEnvRunInfo(
-                  sdkVersion,
-                  CONSTANTS.DEVICE_VERSION,
-                  CONSTANTS.ACTION_CORE,
-                  {}
-                );
               })
               .then(() => delay(2000))
               .then(() => {
@@ -862,17 +844,8 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
-  }
-  // Initiating the Interaction service to listening for interaction logs when interactionsMetrics is set to true in beforeOperation object.
-  else if (
-    beforeOperation.hasOwnProperty(CONSTANTS.INTERACTIONS_METRICS) &&
-    beforeOperation.interactionsMetrics === true
-  ) {
-    cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
-      if (response) {
-        Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
-      }
-    });
+  } else {
+    cy.startAdditionalServices(beforeOperation);
   }
 });
 
@@ -1436,7 +1409,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
     // cy.then() to ensure each Cypress command is properly awaited before return
     cy.then(() => {
-      fireLog.info(`======Beginning of the ${scenario} validation======`);
+      fireLog.info(`====== Beginning of the ${scenario} validation ======`);
       switch (scenario) {
         case CONSTANTS.REGEX:
           cy.regExValidation(
@@ -1490,7 +1463,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
           break;
       }
     }).then(() => {
-      fireLog.info(`=====Ending of the ${scenario} validation=====`);
+      fireLog.info(`====== Ending of the ${scenario} validation ======`);
     });
   };
 
@@ -1701,45 +1674,6 @@ Cypress.Commands.add('getRuntimeFireboltCallObject', () => {
       `The firebolt call object was not found in the runtime environment variable. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key. Refer here - ${CONSTANTS.FIREBOLT_OBJECT_DOC_PATH}`
     );
   }
-});
-
-/**
- * @module commands
- * @function startOrStopInteractionsService
- * @description To start or stop firebolt interactions collection service in device by passing appropriate intent to designated handler
- * @param {String} action - initiated or stopped
- * @example
- * cy.startOrStopInteractionsService('initiated)
- * cy.startOrStopInteractionsService('stopped')
- */
-Cypress.Commands.add('startOrStopInteractionsService', (action) => {
-  const requestMap = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETFIREBOLTINTERACTIONSHANDLER,
-    params: {
-      trigger: action == CONSTANTS.INITIATED ? CONSTANTS.START : CONSTANTS.STOP,
-      optionalParams: '',
-    },
-    task: CONSTANTS.TASK.FIREBOLTINTERACTIONSHANDLER,
-  };
-  fireLog.info(CONSTANTS.REQUEST_MAP_INTERACTIONS_SERVICE + JSON.stringify(requestMap));
-  // Sending message to the platform to call designated handler
-  cy.sendMessagetoPlatforms(requestMap).then((result) => {
-    if (result?.success) {
-      fireLog
-        .assert(true, `Firebolt interactions collection service ${action} successfully`)
-        .then(() => {
-          return true;
-        });
-    } else {
-      fireLog
-        .info(
-          `Firebolt interactions collection service with action as ${action} has failed with error ${JSON.stringify(result.message)}`
-        )
-        .then(() => {
-          return false;
-        });
-    }
-  });
 });
 
 /**
@@ -2030,3 +1964,43 @@ const shouldPerformValidation = (key, value) => {
 
   return true;
 };
+
+/**
+ * @module commands
+ * @function sendKeyPress
+ * @description Command to send key press to the platform.
+ * @param {String} key - The key to be pressed.
+ * @param {Number} delay - The delay in seconds before sending the key press.
+ * @example
+ * cy.sendKeyPress('right')
+ * cy.sendKeyPress('right', 10)
+ */
+Cypress.Commands.add('sendKeyPress', (key, delay) => {
+  delay = delay ? delay : 5;
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
+    params: { key: key, delay: delay },
+  };
+
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    logger.debug(`Sent key press: ${key} with delay: ${delay}.`);
+  });
+});
+
+/**
+ * @module commands
+ * @function sendVoiceCommand
+ * @description To send a voice command to the platform
+ * @param {String} voiceCommand - The transcription (voice command) to be sent.
+ * @example
+ * cy.sendVoiceCommand('Open settings');
+ */
+Cypress.Commands.add('sendVoiceCommand', (voiceCommand) => {
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDVOICECOMMAND,
+    params: voiceCommand,
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    return response;
+  });
+});

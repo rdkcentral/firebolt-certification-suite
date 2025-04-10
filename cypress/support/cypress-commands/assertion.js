@@ -453,7 +453,8 @@ Cypress.Commands.add(
           extractEventObject,
           verifyPath,
           content,
-          'Event Schema Validation failed'
+          `Event Schema Validation failed for ${extractEventObject.eventObjectId}`,
+          CONSTANTS.FAIL
         );
       } else if (eventSchemaStatus && eventSchemaStatus.status === 'PASS') {
         // Doing event content validation
@@ -468,7 +469,8 @@ Cypress.Commands.add(
             extractEventObject,
             verifyPath,
             content,
-            'Event Content validation'
+            null,
+            CONSTANTS.PASS
           );
         } else {
           cy.logValidationResult(
@@ -484,7 +486,8 @@ Cypress.Commands.add(
             extractEventObject,
             verifyPath,
             content,
-            'Event Content validation failed'
+            null,
+            CONSTANTS.FAIL
           );
         }
       } else {
@@ -540,39 +543,31 @@ Cypress.Commands.add(
  */
 Cypress.Commands.add(
   'assertValidationsForEvent',
-  (extractEventObject, verifyPath, expected, pretext) => {
-    let actual = undefined;
-    const verifyEventResponse = verifyPath.split('.')[0];
-    const verifyInnerObject = verifyPath.split('.')[1];
-    const verifyOuterObject = verifyPath.split('.')[2];
-    // Checks for multi level object structure and does the event content validation
-    if (verifyOuterObject) {
-      const eventResponseInnerObject = verifyEventResponse + '.' + verifyInnerObject;
-      if (eval('extractEventObject.' + eventResponseInnerObject)) {
-        actual = eval('extractEventObject.' + verifyPath);
-      }
-    } else {
-      actual = eval('extractEventObject.' + verifyPath);
+  (extractEventObject, verifyPath, expected, pretext, status = CONSTANTS.FAIL) => {
+    let actual;
+
+    // Extract the value from the nested object using the verifyPath
+    try {
+      actual = verifyPath.split('.').reduce((obj, key) => obj?.[key], extractEventObject);
+    } catch (error) {
+      actual = undefined;
     }
-    const expectedValue = expected;
-    const actualValue = actual;
-    typeof expected == 'object' ? (expected = JSON.stringify(expected)) : expected;
-    typeof actual == 'object' ? (actual = JSON.stringify(actual)) : actual;
 
-    pretext =
-      pretext +
-      ' for ' +
-      extractEventObject.eventObjectId +
-      ':' +
-      ' expected ' +
-      actual +
-      ' to be ' +
-      expected;
+    // Convert objects to strings for comparison
+    const expectedValue = typeof expected === 'object' ? JSON.stringify(expected) : expected;
+    const actualValue = typeof actual === 'object' ? JSON.stringify(actual) : actual;
 
-    if (_.isEqual(expectedValue, actualValue)) {
-      fireLog.info(`${pretext}`);
+    // Construct the log message
+    const logMessage =
+      pretext == undefined
+        ? `Event Content validation ${status.toLowerCase()}ed for ${extractEventObject.eventObjectId}: expected ${actualValue} to be ${expectedValue}`
+        : pretext;
+
+    // Log or assert based on the status
+    if (status === CONSTANTS.PASS || status === CONSTANTS.SKIPPED) {
+      fireLog.info(logMessage);
     } else {
-      fireLog.assert(false, `${pretext}`);
+      fireLog.assert(false, logMessage);
     }
   }
 );

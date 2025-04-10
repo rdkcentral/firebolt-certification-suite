@@ -52,3 +52,22 @@ request: cy.sendMessagetoApp('mac_appId_FCS',mac_appId_FCA,{"communicationMode":
 ```
 
 Note: Response can vary depending on the execution.
+
+
+#### > cy.startAdditionalServices(input)
+
+**Description** Executes external services defined in the config module, if available.
+- This command will look for the `startAdditionalServices` function present in the `additionalServices/index.js` file. If present, it will be invoked; otherwise, nothing will happen.
+- By default, this will look for the `startAdditionalServices` function in the config module. If we want to execute another function instead of `startAdditionalServices`, we can override the default function by passing the function name from the command line for the parameter `externalService`.
+
+**Note**: To include additional services, ensure the function is implemented in the `additionalServices/index.js` file.
+
+**Params**: 
+| Param | Definition |
+| --- | --- |
+| input | Currently, `startAdditionalServices` accepts one input, and this input is passed to the external function added in the config module. |
+
+Ex:
+```
+request: cy.startAdditionalServices(input)
+```
