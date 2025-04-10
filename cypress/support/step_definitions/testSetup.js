@@ -304,21 +304,19 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
   }
 });
 
-Given(/I search text '(.+)' is found in the 'wpeframework' log/, (logKey) => {
+Given(/I search text '(.+)' is found in the '(.+)' log/, (logKey, fileIdentifier) => {
   console.log('inside new glue code 2940', logKey);
   Cypress.env('logKey', logKey);
-  let validationObjectKey = 'LOG_PATTERNS';
+  Cypress.env('fileIdentifier', fileIdentifier);
+
+  let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);
   if (validationObjectKey) {
     validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   }
-  console.log('2940 validationObjectKey', validationObjectKey);
   let validationObject;
   cy.getFireboltData(validationObjectKey).then((fireboltData) => {
-    console.log('2940 fireboltData', fireboltData);
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     validationObject = UTILS.resolveRecursiveValues(fireboltData);
-    validationObject.logKey = logKey;
-    console.log('2940 validationObject', validationObject);
     cy.methodOrEventResponseValidation(type, validationObject).then(() => {
       cy.softAssertAll();
     });
