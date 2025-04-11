@@ -43,7 +43,6 @@ export default class PubSub extends AsyncTransportClient {
     this.listener = null;
     this.topicList = [];
     this.queueItems = [];
-    this.responseCallbacks = new Map(); // Map to track messages expecting responses
 
     // Configure options with defaults
     this.options = {
@@ -109,9 +108,6 @@ export default class PubSub extends AsyncTransportClient {
           reject(event.data || new Error('WebSocket connection closed during initialization'));
         };
 
-        // Add main message handler
-        this.ws.addEventListener('message', this._handleMessage.bind(this));
-
         // Add lifecycle handlers
         this.ws.addEventListener('open', openHandler);
         this.ws.addEventListener('error', errorHandler);
@@ -126,9 +122,10 @@ export default class PubSub extends AsyncTransportClient {
   /**
    * Handles incoming WebSocket messages
    * @param {Event} event - WebSocket message event
+   * @param {Function} callback - Callback function to handle messages
    * @private
    */
-  _handleMessage(event) {
+  _handleIncomingMessage(event, callback) {
     if (!event.data) {
       logger.warn('Received empty message');
       return;
@@ -167,21 +164,19 @@ export default class PubSub extends AsyncTransportClient {
       }
     }
 
-    // If we get here, either there was no filter or the message passed the filter
-    // Add message to queue
-    try {
-      const queueInput = {};
-      queueInput.data = data.payload;
-      queueInput.metaData = data.headers;
-      this.enqueue(queueInput);
+    // Add to queue
+    const queueInput = {
+      data: data.payload,
+      metaData: data.headers,
+    };
 
-      // Call the listener if registered
-      if (this.listener) {
-        this.listener(JSON.stringify(data));
-      }
-    } catch (error) {
-      logger.error(`Error processing message: ${error}`);
+    this.enqueue(queueInput);
+
+    // Call the provided callback function
+    if (callback && typeof callback === 'function') {
+      callback(queueInput);
     }
+    logger.debug(`Processed message: ${JSON.stringify(data)}`);
   }
 
   /**
@@ -257,6 +252,7 @@ export default class PubSub extends AsyncTransportClient {
             `Did not receive response in ${this.options.timeout}ms at topic ${responseTopic} for header ID: ${messageId}`
           );
         } else {
+          console.log('KEATON CALL AND RESPONSE', response);
           resolve(response);
         }
       });
@@ -292,10 +288,6 @@ export default class PubSub extends AsyncTransportClient {
       throw new Error('PubSub not connected. Call initialize() first.');
     }
 
-    if (this.listener && !this.topicList.includes(topic)) {
-      logger.warn('Multiple callbacks detected. Consider creating another client instance.');
-    }
-
     const message = {
       requestId: uuidv4(),
       operation: 'subscribe',
@@ -303,9 +295,14 @@ export default class PubSub extends AsyncTransportClient {
       timestamp: new Date().getTime(),
     };
 
-    logger.info(`Subscribing to topic "${topic}"`);
-
     this.listener = callback;
+
+    this.ws.addEventListener('message', (event) => {
+      logger.info(`Received incoming notification on topic "${topic}"`);
+      this._handleIncomingMessage(event, callback);
+    });
+
+    logger.info(`Subscribing to topic "${topic}"`);
     this.ws.send(JSON.stringify(message));
   }
 

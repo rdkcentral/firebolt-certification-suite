@@ -44,6 +44,7 @@ export default function (module) {
 
   // Fetch the required appTransport from config module
   appTransport = module.appTransport;
+  let pubSubClient = null;
 
   // before All
   before(() => {
@@ -53,11 +54,12 @@ export default function (module) {
       timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT,
     }).then((result) => {
       if (result) {
+        pubSubClient = result;
         cy.log('Successfully established a pub/sub connection.');
       } else {
         cy.log('Unable to establish a pub/sub connection.');
       }
-      Cypress.env('pubSubClient', appTransport);
+      Cypress.env('pubSubClient', result);
       cy.startAdditionalServices();
     });
 
@@ -196,7 +198,7 @@ export default function (module) {
           });
         }
         // unsubscribing the list of topics
-        appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
+        pubSubClient.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
         await transport.unsubscribe();
 
         // Unsubscribe from WebSocket if the client is available
@@ -474,34 +476,29 @@ export default function (module) {
    * cy.sendMessagetoApp('mac_appId_FCS',mac_appId_FCA,{"communicationMode": "SDK","action": "search"}, 1000)
    */
   Cypress.Commands.add('sendMessagetoApp', async (requestTopic, responseTopic, intent) => {
-    // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
-    const longPollTimeout = UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, false)
-      ? UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT)
-      : CONSTANTS.LONGPOLL_TIMEOUT;
-
-    if (!appTransport) {
+    if (!pubSubClient) {
       cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
         assert(false, CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
       });
       return;
     }
-
     // Subscribe to topic if not already subscribed
     if (
       responseTopic != undefined &&
       !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
     ) {
-      appTransport.subscribe(responseTopic, (data, headers) => {
-        logger.debug(`Message received on topic ${responseTopic}`);
+      pubSubClient.subscribe(responseTopic, (data, headers) => {
+        logger.debug(`Calling callback and adding data to queue: ${data} with headers: ${headers}`);
       });
       UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
     }
 
     // Use the PubSub.send method which now handles message sending and response polling internally
-    return appTransport
+    return pubSubClient
       .send(JSON.stringify(intent), requestTopic)
       .then((results) => {
         if (results) {
+          console.log('Results from sendMessagetoApp:', results);
           return results;
         } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
           return true;

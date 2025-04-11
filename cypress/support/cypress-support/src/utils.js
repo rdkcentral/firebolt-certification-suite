@@ -553,23 +553,27 @@ function getSetupDetails() {
  */
 function pubSubClientCreation(appTransport) {
   return new Promise(async (resolve, reject) => {
-    if (!clientCreated && appTransport.init) {
+    if (!clientCreated && appTransport.createPubSubClient) {
       try {
         const responseTopic = getTopic(null, CONSTANTS.SUBSCRIBE);
 
         // Initialize required client
-        await appTransport.init();
+        const pubSubClient = await appTransport.createPubSubClient();
 
         if (
           responseTopic != undefined &&
           !getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
         ) {
           // Subscribe to topic and pass the results to the callback function
-          appTransport.subscribe(responseTopic, subscribeResults);
+          pubSubClient.subscribe(responseTopic, (data, headers) => {
+            logger.debug(
+              'Received data from PubSub: ' + JSON.stringify(data) + ' with headers: ' + headers
+            );
+          });
           getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
         }
         clientCreated = true;
-        resolve(true);
+        resolve(pubSubClient);
       } catch (error) {
         if (getEnvVariable(CONSTANTS.FAIL_ON_PUBSUB_CONNECTION_ERROR, false)) {
           // If an error occurs, reject the promise with the error
@@ -582,23 +586,6 @@ function pubSubClientCreation(appTransport) {
       resolve(false);
     }
   });
-}
-
-/**
- * @module utils
- * @function subscribeResults
- * @description Callback function to fetch the required response from subscribe and push it to a global queue
- * @param {object} data - Response payload from subscribe call
- * @param {object} metaData - Response headers from subscribe call
- * @example
- * subscribeResults('{ "result": { "type": "device", "value": "PD54331.." } }', headers:{id:1232435, client:fca})
- **/
-function subscribeResults(data, metaData) {
-  const queueInput = {};
-  queueInput.data = data;
-  queueInput.metaData = metaData;
-  // Push the data and metadata as an object to queue
-  getEnvVariable(CONSTANTS.MESSAGE_QUEUE).enqueue(queueInput);
 }
 
 /**
