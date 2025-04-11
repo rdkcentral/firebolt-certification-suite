@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
+import UTILS, { fireLog, getEnvVariable, addToEnvLabelMap } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
@@ -244,6 +244,7 @@ Cypress.Commands.add('getSdkVersion', () => {
  * updateRunInfo()
  */
 Cypress.Commands.add('updateRunInfo', () => {
+  console.log('Divya Inside RunInfo');
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
   let deviceId = '';
@@ -257,7 +258,9 @@ Cypress.Commands.add('updateRunInfo', () => {
     if (deviceData === '') {
       // Fetch data from the first-party app
       if (Cypress.env(CONSTANTS.SUPPORTS_PLATFORM_COMMUNICATION)) {
+        console.log('Divya DeviceType:', deviceType);
         cy.getDeviceDataFromFirstPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
+          console.log('Divya Response:', JSON.stringify(response));
           if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
             if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
               let deviceFirmware = JSON.stringify(response.firmware.readable);
@@ -371,7 +374,8 @@ Cypress.Commands.add('updateRunInfo', () => {
                       reportEnv.customData.data &&
                       reportEnv.customData.data.length > 0
                     ) {
-                      const labelToEnvMap = {
+                      console.log('Divya Inside customData');
+                      addToEnvLabelMap({
                         [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                         [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
                         [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
@@ -381,14 +385,31 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                         [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
                         [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
-                      };
-                      reportEnv.customData.data.forEach((item) => {
-                        if (item.label === CONSTANTS.PRODUCT) {
-                          item.value = configModuleConst.PRODUCT
-                            ? configModuleConst.PRODUCT
-                            : 'N/A';
-                        } else if (labelToEnvMap[item.label]) {
-                          item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+                      });
+                      const envLabelMap = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP);
+                      console.log('Divya envLabelMap:', JSON.stringify(envLabelMap));
+
+                      Object.keys(envLabelMap).forEach((label) => {
+                        const value = envLabelMap[label];
+
+                        const existingItem = reportEnv.customData.data.find(
+                          (item) => item.label === label
+                        );
+                        if (existingItem) {
+                          // Update existing value
+                          if (label === CONSTANTS.PRODUCT) {
+                            existingItem.value = configModuleConst.PRODUCT || 'N/A';
+                          } else {
+                            // Use Cypress.env only if value is supposed to be a key
+                            const envValue = Cypress.env(value);
+                            existingItem.value = envValue || value || 'N/A';
+                          }
+                        } else {
+                          // Label not found — add it with the actual value directly
+                          reportEnv.customData.data.push({
+                            label: label,
+                            value: value || 'N/A',
+                          });
                         }
                       });
                     }
@@ -466,7 +487,8 @@ Cypress.Commands.add('getDeviceDataFromFirstPartyApp', (method, param, action) =
         throw 'Obtained response is null|undefined';
       }
     } catch (error) {
-      fireLog.info('Failed to fetch device.version', error);
+      fireLog.info('Failed to do device call', error);
+      return cy.wrap('N/A');
     }
   });
 });
