@@ -474,43 +474,43 @@ export default function (module) {
    * cy.sendMessagetoApp('mac_appId_FCS',mac_appId_FCA,{"communicationMode": "SDK","action": "search"}, 1000)
    */
   Cypress.Commands.add('sendMessagetoApp', async (requestTopic, responseTopic, intent) => {
-    const headers = { id: uuidv4() };
-
     // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
     const longPollTimeout = UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, false)
       ? UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT)
       : CONSTANTS.LONGPOLL_TIMEOUT;
 
-    // Subscribing to the topic when the topic is not subscribed.
+    if (!appTransport) {
+      cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
+        assert(false, CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
+      });
+      return;
+    }
+
+    // Subscribe to topic if not already subscribed
     if (
       responseTopic != undefined &&
       !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
     ) {
-      // Subscribe to topic and pass the results to the callback function
-      appTransport.subscribe(responseTopic, UTILS.subscribeResults);
+      appTransport.subscribe(responseTopic, (data, headers) => {
+        logger.debug(`Message received on topic ${responseTopic}`);
+      });
       UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
     }
 
-    if (appTransport) {
-      // Publish the message on topic
-      appTransport.publish(requestTopic, JSON.stringify(intent), headers);
-
-      // Returns the response after polling when data is available in queue
-      return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
-        .LongPollQueue(headers.id, longPollTimeout)
-        .then((results) => {
-          if (results) {
-            // Response recieved from queue
-            return results;
-          } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
-            return true;
-          }
-        });
-    } else {
-      cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
-        assert(false, CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
+    // Use the PubSub.send method which now handles message sending and response polling internally
+    return appTransport
+      .send(JSON.stringify(intent), requestTopic)
+      .then((results) => {
+        if (results) {
+          return results;
+        } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
+          return true;
+        }
+      })
+      .catch((error) => {
+        cy.log(`Error in sendMessagetoApp: ${error.message}`);
+        assert(false, `Failed to send message: ${error.message}`);
       });
-    }
   });
 
   /**
