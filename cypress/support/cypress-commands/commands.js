@@ -258,9 +258,7 @@ Cypress.Commands.add('updateRunInfo', () => {
     if (deviceData === '') {
       // Fetch data from the first-party app
       if (Cypress.env(CONSTANTS.SUPPORTS_PLATFORM_COMMUNICATION)) {
-        console.log('Divya DeviceType:', deviceType);
         cy.getDeviceDataFromFirstPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
-          console.log('Divya Response:', JSON.stringify(response));
           if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
             if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
               let deviceFirmware = JSON.stringify(response.firmware.readable);
@@ -488,7 +486,7 @@ Cypress.Commands.add('getDeviceDataFromFirstPartyApp', (method, param, action) =
       }
     } catch (error) {
       fireLog.info('Failed to do device call', error);
-      return cy.wrap('N/A');
+      return cy.wrap('Not Available');
     }
   });
 });
