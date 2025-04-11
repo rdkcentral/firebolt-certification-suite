@@ -125,6 +125,8 @@ Given(
             });
           }
         }
+        Cypress.env('startAdditionalServices', 'getReportData');
+        cy.startAdditionalServices();
         cy.updateRunInfo();
       } catch (error) {
         cy.log(
@@ -132,6 +134,7 @@ Given(
         );
       }
     }
+
     // Check the marker creation status
     if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS)) {
       const markerCreated = Cypress.env(CONSTANTS.MARKER_CREATION_STATUS);
