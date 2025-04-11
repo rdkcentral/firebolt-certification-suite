@@ -95,23 +95,22 @@ Cypress.Commands.add(
           if (Array.isArray(params)) {
             params.forEach((item) => {
               const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
-
-            if (containEnv) {
-              const envParam = containEnv.split('-')[1];
-              item[envParam] = Cypress.env(envParam);
-              delete item[containEnv];
-            }
-          });
-        } else {
-          const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
-          if (envList.length > 0) {
-            envList.forEach((item) => {
-              const envParam = item.split('-')[1];
-              params[envParam] = Cypress.env(envParam);
-              delete params[item];
+              if (containEnv) {
+                const envParam = containEnv.split('-')[1];
+                item[envParam] = Cypress.env(envParam);
+                delete item[containEnv];
+              }
             });
+          } else {
+            const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
+            if (envList.length > 0) {
+              envList.forEach((item) => {
+                const envParam = item.split('-')[1];
+                params[envParam] = Cypress.env(envParam);
+                delete params[item];
+              });
+            }
           }
-        }
 
           method = item.method;
           const expected = item.expected ? item.expected : CONSTANTS.RESULT;
@@ -1966,8 +1965,6 @@ const shouldPerformValidation = (key, value) => {
 
   return true;
 };
-
-
 
 /**
  * @module commands
