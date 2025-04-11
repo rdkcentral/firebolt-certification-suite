@@ -1211,6 +1211,12 @@ function applyOverrides(fireboltCallObject) {
   return fireboltCallObject; // Return the original or modified object based on the override
 }
 
+global.addToEnvLabelMap = (partialMap) => {
+  const existing = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP) || {};
+  Cypress.env(CONSTANTS.LABEL_TO_ENVMAP, { ...existing, ...partialMap });
+  console.log('Divya ENV_LABEL_MAP::', JSON.stringify(Cypress.env(CONSTANTS.LABEL_TO_ENVMAP)));
+};
+
 /**
  * @module utils
  * @function captureScreenshot
@@ -1247,13 +1253,6 @@ function captureScreenshot() {
     }
   }
 }
-
-
-global.addToEnvLabelMap = (partialMap) => {
-  const existing = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP) || {};
-  Cypress.env(CONSTANTS.LABEL_TO_ENVMAP, { ...existing, ...partialMap });
-  console.log('Divya ENV_LABEL_MAP::', JSON.stringify(Cypress.env(CONSTANTS.LABEL_TO_ENVMAP)));
-};
 
 module.exports = {
   replaceJsonStringWithEnvVar,
