@@ -258,7 +258,9 @@ Cypress.Commands.add('updateRunInfo', () => {
     if (deviceData === '') {
       // Fetch data from the first-party app
       if (Cypress.env(CONSTANTS.SUPPORTS_PLATFORM_COMMUNICATION)) {
+        console.log('Divya DeviceType:', deviceType);
         cy.getDeviceDataFromFirstPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
+          console.log('Divya Response:', JSON.stringify(response));
           if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
             if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
               let deviceFirmware = JSON.stringify(response.firmware.readable);
@@ -372,7 +374,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                       reportEnv.customData.data &&
                       reportEnv.customData.data.length > 0
                     ) {
-                      console.log("Divya Inside customData");
+                      console.log('Divya Inside customData');
                       addToEnvLabelMap({
                         [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                         [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
@@ -385,28 +387,28 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
                       });
                       const envLabelMap = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP);
-                      console.log('Divya envLabelMap:',JSON.stringify(envLabelMap));
+                      console.log('Divya envLabelMap:', JSON.stringify(envLabelMap));
 
                       Object.keys(envLabelMap).forEach((label) => {
-                        const labelExists = reportEnv.customData.data.some(item => item.label === label);
-                        
-                        if (!labelExists) {
-                          console.log("Divya Label doesn't exist");
-                          // Add the label if it doesn't exist
-                          const value = envLabelMap[label];
+                        const value = envLabelMap[label];
+
+                        const existingItem = reportEnv.customData.data.find(
+                          (item) => item.label === label
+                        );
+                        if (existingItem) {
+                          // Update existing value
+                          if (label === CONSTANTS.PRODUCT) {
+                            existingItem.value = configModuleConst.PRODUCT || 'N/A';
+                          } else {
+                            // Use Cypress.env only if value is supposed to be a key
+                            const envValue = Cypress.env(value);
+                            existingItem.value = envValue || value || 'N/A';
+                          }
+                        } else {
+                          // Label not found — add it with the actual value directly
                           reportEnv.customData.data.push({
                             label: label,
                             value: value || 'N/A',
-                          });
-                        } else {
-                          reportEnv.customData.data.forEach((item) => {
-                            if (item.label === CONSTANTS.PRODUCT) {
-                              item.value = configModuleConst.PRODUCT
-                                ? configModuleConst.PRODUCT
-                                : 'N/A';
-                            } else if (envLabelMap[item.label]) {
-                              item.value = Cypress.env(envLabelMap[item.label]) || 'N/A';
-                            }
                           });
                         }
                       });
@@ -485,7 +487,8 @@ Cypress.Commands.add('getDeviceDataFromFirstPartyApp', (method, param, action) =
         throw 'Obtained response is null|undefined';
       }
     } catch (error) {
-      fireLog.info('Failed to fetch device.version', error);
+      fireLog.info('Failed to do device call', error);
+      return cy.wrap('N/A');
     }
   });
 });

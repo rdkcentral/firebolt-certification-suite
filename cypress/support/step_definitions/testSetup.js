@@ -121,8 +121,8 @@ Given(
           }
         }
         cy.then(() => {
-          console.log("Divya Calling the getReportData as external service");
-          Cypress.env(CONSTANTS.EXTERNAL_SERVICE_FUNCTION, "getReportData");
+          console.log('Divya Calling the getReportData as external service');
+          Cypress.env(CONSTANTS.EXTERNAL_SERVICE_FUNCTION, 'getReportData');
         }).then(() => {
           cy.startAdditionalServices();
           cy.updateRunInfo();
