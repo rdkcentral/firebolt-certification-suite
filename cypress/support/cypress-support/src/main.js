@@ -582,15 +582,21 @@ export default function (module) {
       const functionName = fcsValidationObjectData.assertionDef;
       // to check whether config module has customValidations function
       if (module && module.customValidations) {
+        const configCustomValidation = module.customValidations[functionName];
         // to check whether customValidations has a function as the functionName passed
-        if (
-          module.customValidations[functionName] &&
-          typeof module.customValidations[functionName] === 'function'
-        ) {
-          message = module.customValidations[functionName](
-            apiOrEventObject,
-            fcsValidationObjectData
-          );
+        if (configCustomValidation && typeof configCustomValidation === 'function') {
+          // when the validation states FCS needs to wait before proceeding with the test
+          const waitForCustom = fcsValidationObjectData.waitForCompletion;
+          if (waitForCustom && waitForCustom === true) {
+            const customTimeout = fcsValidationObjectData.waitLimit
+              ? fcsValidationObjectData.waitLimit
+              : UTILS.getEnvVariable(CONSTANTS.CUSTOM_VALIDATION_TIMEOUT);
+            cy.then({ timeout: customTimeout }, async () => {
+              message = await configCustomValidation(apiOrEventObject, fcsValidationObjectData);
+            });
+          } else {
+            message = configCustomValidation(apiOrEventObject, fcsValidationObjectData);
+          }
         } else if (
           // if customValidations doesn't have a function as the functionName passed
           !module.customValidations[functionName] ||

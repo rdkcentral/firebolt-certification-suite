@@ -336,3 +336,26 @@ Given(
     });
   }
 );
+
+/**
+ * @module validations
+ * @function Verify '(.+)' app is '(.+)'
+ * @description To call validation function with the validation object associated with the validation key
+ * @param {String} app - app name.
+ * @param {String} validationObjectKey - key name of the validation object.
+ * @example
+ * Verify <appId> app is 'playing entity'
+ */
+Given(/Verify '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
+  UTILS.captureScreenshot();
+
+  const objectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  let validationObject;
+  cy.getFireboltData(objectKey).then((fireboltData) => {
+    const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+    validationObject = UTILS.resolveRecursiveValues(fireboltData);
+    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
+      fireLog.info(`${validationObjectKey} was successful`);
+    });
+  });
+});
