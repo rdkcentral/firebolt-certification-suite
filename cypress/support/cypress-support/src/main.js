@@ -47,6 +47,8 @@ export default function (module) {
 
   // before All
   before(() => {
+    logger.debug('Entering before() - cypress-support/src/main.js');
+
     // Added below custom commands to clear cache and to reload browser
     cy.clearCache();
     cy.wrap(UTILS.pubSubClientCreation(appTransport), {
@@ -57,33 +59,9 @@ export default function (module) {
       } else {
         cy.log('Unable to establish a pub/sub connection.');
       }
-      // Creating a topic with _fbinteractions suffix to listen for interaction logs
-      try {
-        const topic = UTILS.getTopic(
-          UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
-          CONSTANTS.SUBSCRIBE,
-          null,
-          CONSTANTS.TOPIC_FBINTERACTIONS
-        );
-        appTransport.subscribe(topic, UTILS.interactionResults);
-      } catch (err) {
-        UTILS.fireLog.info(
-          `Unable to subscribe to ${CONSTANTS.TOPIC_FBINTERACTIONS} suffixed topic`
-        );
-      }
-      // Initiating the Interaction service to listening for interaction logs when interactionsMetrics flag set to true.
-      if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS, false) == true) {
-        cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
-          if (response) {
-            Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
-          }
-        });
-      } else {
-        cy.log(CONSTANTS.INTERACTIONS_SERVICE_NOT_ACTIVE);
-      }
+      Cypress.env('pubSubClient', appTransport);
+      cy.startAdditionalServices();
     });
-
-    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
 
     // Create an instance of global queue
     const messageQueue = new Queue();
@@ -131,7 +109,6 @@ export default function (module) {
 
   // beforeEach
   beforeEach(() => {
-    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
     cy.getBeforeOperationObject();
     cy.initiatePerformanceMetrics();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
@@ -220,14 +197,6 @@ export default function (module) {
             }
           });
         }
-        // Stoping the Interaction service if Interaction service is enabled.
-        if (UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) == true) {
-          cy.startOrStopInteractionsService(CONSTANTS.STOPPED).then((response) => {
-            if (response) {
-              Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false);
-            }
-          });
-        }
         // unsubscribing the list of topics
         appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
         await transport.unsubscribe();
@@ -239,6 +208,7 @@ export default function (module) {
           Cypress.env('webSocketClient', null); // Clear the WebSocket client from Cypress environment
         }
       } catch (err) {
+        logger.error(`Something went wrong when attempting to unsubscribe: ${err}`);
         cy.log(`Something went wrong when attempting to unsubscribe: ${err}`);
       }
     })();
@@ -352,6 +322,8 @@ export default function (module) {
    * startTest({"rawTable": [ ["paramType","variableName","value"]]})
    */
   Cypress.Commands.add('startTest', (datatables) => {
+    logger.debug('Entering startTest() - cypress-support/src/main.js');
+
     const additionalParams = {};
     let overrideParams = {};
     let appId;
@@ -422,7 +394,10 @@ export default function (module) {
 
       if (!UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)) {
         cy.log(CONSTANTS.DEVICE_MAC_UNAVAILABLE).then(() => {
-          assert(false, CONSTANTS.DEVICE_MAC_UNAVAILABLE);
+          assert(
+            false,
+            `Device MAC address is not available. Make sure this value is added in cypress.config.js or passed as an environment variable with the cli.`
+          );
         });
       }
 
@@ -435,9 +410,17 @@ export default function (module) {
           try {
             response = JSON.parse(response);
           } catch (error) {
-            assert(false, error);
+            logger.error('Failed to parse JSON response. Response: ', JSON.stringify(response));
+            assert(
+              false,
+              'Failed to parse JSON response from Firebolt implementation. Please check the response format.'
+            );
           }
-          assert.exists(response.report, CONSTANTS.INVALID_RESPONSE);
+
+          assert.exists(
+            response.report,
+            'The response does not contain the expected "report" object. Ensure the Firebolt implementation returns a valid response with a "report" field.'
+          );
 
           // Writing sanity mochawesome json to file when jobId is present.
           if (UTILS.getEnvVariable(CONSTANTS.JOBID, false)) {
@@ -474,6 +457,30 @@ export default function (module) {
 
   /**
    * @module main
+   * @function startAdditionalServices
+   * @description Executes external services defined in the config module, if available.
+   *  - This command will look for the `startAdditionalServices` function present in the `additionalServices/index.js` file. If present, it will be invoked; otherwise, nothing will happen.
+   *  - By default, this will look for the `startAdditionalServices` function in the config module. If we want to execute another function instead of `startAdditionalServices`, we can override the default function by passing the function name from the command line for the parameter `externalService`.
+   * @param {string} input - parameters passing to external function
+   * @example
+   * startAdditionalServices({})
+   */
+  Cypress.Commands.add('startAdditionalServices', (input) => {
+    // This defaults to checking for the startAdditionalServices function in the config module, but it can be overridden via the command.
+    const serviceName = Cypress.env(CONSTANTS.EXTERNAL_SERVICE_FUNCTION)
+      ? Cypress.env(CONSTANTS.EXTERNAL_SERVICE_FUNCTION)
+      : 'startAdditionalServices';
+    if (
+      module &&
+      module.additionalServices &&
+      typeof module.additionalServices[serviceName] === 'function'
+    ) {
+      module.additionalServices[serviceName](input);
+    }
+  });
+
+  /**
+   * @module main
    * @function sendMessagetoApp
    * @description Publish a message and fetch response from app based on arguments
    * @param {string} requestTopic - Topic used to publish message
@@ -483,6 +490,10 @@ export default function (module) {
    * cy.sendMessagetoApp('mac_appId_FCS',mac_appId_FCA,{"communicationMode": "SDK","action": "search"}, 1000)
    */
   Cypress.Commands.add('sendMessagetoApp', async (requestTopic, responseTopic, intent) => {
+    logger.debug(
+      `Entering sendMessagetoApp() - cypress-support/src/main.js with params: requestTopic=${requestTopic}, responseTopic=${responseTopic}, intent=${JSON.stringify(intent)}`
+    );
+
     const headers = { id: uuidv4() };
 
     // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
@@ -510,6 +521,7 @@ export default function (module) {
         .then((results) => {
           if (results) {
             // Response recieved from queue
+            logger.debug(`Response received from queue: ${JSON.stringify(results)}`);
             return results;
           } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
             return true;
