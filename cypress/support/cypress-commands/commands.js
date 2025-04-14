@@ -244,7 +244,6 @@ Cypress.Commands.add('getSdkVersion', () => {
  * updateRunInfo()
  */
 Cypress.Commands.add('updateRunInfo', () => {
-  console.log('Divya Inside RunInfo');
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
   let deviceId = '';
@@ -372,7 +371,6 @@ Cypress.Commands.add('updateRunInfo', () => {
                       reportEnv.customData.data &&
                       reportEnv.customData.data.length > 0
                     ) {
-                      console.log('Divya Inside customData');
                       addToEnvLabelMap({
                         [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                         [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
@@ -385,7 +383,6 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
                       });
                       const envLabelMap = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP);
-                      console.log('Divya envLabelMap:', JSON.stringify(envLabelMap));
 
                       Object.keys(envLabelMap).forEach((label) => {
                         const value = envLabelMap[label];
