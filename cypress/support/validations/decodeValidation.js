@@ -18,6 +18,7 @@
 const REGEXFORMATS = require('../../fixtures/regexformats');
 const CONSTANTS = require('../constants/constants');
 const RegexParser = require('regex-parser');
+const UTILS = require('../cypress-support/src/utils');
 
 /**
  * @module decodeValidation
@@ -49,54 +50,53 @@ Cypress.Commands.add('decodeValidation', (method, decodeType, result, contentDat
 
   // Checks for the extracted api object
   if (result) {
-    cy.fixture(CONSTANTS.DECODEVALUE_JSON_PATH).then((data) => {
-      const responseObject = data[method];
+    const decodeFiedldMapping = UTILS.getEnvVariable('decodeValue');
+    const responseObject = decodeFiedldMapping[method];
 
-      // Checks for field to validate exact field in response
-      if (field) {
-        decodeExpressionValidation.decodeBase64AndJwtToken(
-          result[field],
-          fieldName,
-          regexType,
-          decodeType
-        );
-      } else {
-        // Validate multiple fields in a response by looping through the data fetched from decodeValue.json.
-        for (let i = 0; i < responseObject.length; i++) {
-          let validationResult;
+    // Checks for field to validate exact field in response
+    if (field) {
+      decodeExpressionValidation.decodeBase64AndJwtToken(
+        result[field],
+        fieldName,
+        regexType,
+        decodeType
+      );
+    } else {
+      // Validate multiple fields in a response by looping through the data fetched from decodeValue.json.
+      for (let i = 0; i < responseObject.length; i++) {
+        let validationResult;
 
-          if (result[responseObject[i]]) {
-            validationResult = REGEXFORMATS[regexTokenFormat].test(result[responseObject[i]]);
+        if (result[responseObject[i]]) {
+          validationResult = REGEXFORMATS[regexTokenFormat].test(result[responseObject[i]]);
 
-            cy.log('Decode Validation' + `: expected ******* to be in a ${decodeType} format`).then(
-              () => {
-                assert.equal(true, validationResult, 'Decode Validation');
-              }
-            );
-            decodeExpressionValidation.decodeBase64AndJwtToken(
-              result[responseObject[i]],
-              fieldName,
-              regexType,
-              decodeType
-            );
-          } else {
-            // If extracted response object has single response field, validating that response
-            validationResult = REGEXFORMATS[regexTokenFormat].test(result);
-            cy.log('Decode Validation' + `: expected ******* to be in a ${decodeType} format`).then(
-              () => {
-                assert.equal(true, validationResult, 'Decode Validation');
-              }
-            );
-            decodeExpressionValidation.decodeBase64AndJwtToken(
-              result,
-              fieldName,
-              regexType,
-              decodeType
-            );
-          }
+          cy.log('Decode Validation' + `: expected ******* to be in a ${decodeType} format`).then(
+            () => {
+              assert.equal(true, validationResult, 'Decode Validation');
+            }
+          );
+          decodeExpressionValidation.decodeBase64AndJwtToken(
+            result[responseObject[i]],
+            fieldName,
+            regexType,
+            decodeType
+          );
+        } else {
+          // If extracted response object has single response field, validating that response
+          validationResult = REGEXFORMATS[regexTokenFormat].test(result);
+          cy.log('Decode Validation' + `: expected ******* to be in a ${decodeType} format`).then(
+            () => {
+              assert.equal(true, validationResult, 'Decode Validation');
+            }
+          );
+          decodeExpressionValidation.decodeBase64AndJwtToken(
+            result,
+            fieldName,
+            regexType,
+            decodeType
+          );
         }
       }
-    });
+    }
   } else {
     // Fail if response is not found in the global object list for the validating method
     assert(false, `Decode Validation: Expected response Not found for ${method} to decode`);

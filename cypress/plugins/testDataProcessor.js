@@ -302,6 +302,59 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
 }
 
 /**
+ * @function mergeFixturesWithExternal
+ * This function merges JSON and JS files from the fixtures directory with corresponding files in the externalFixtures directory.
+ * If a file exists in both directories, only the matching keys or exports are overridden.
+ *
+ * @returns {object} Merged data.
+ */
+function mergeFixturesWithExternal() {
+  const mergedData = {};
+
+  try {
+    const fixtures = 'cypress/fixtures/';
+    const externalFixtures = 'cypress/fixtures/external/';
+
+    // Get list of files in the fixtures directory
+    const fixtureFiles = fs.readdirSync(fixtures);
+
+    fixtureFiles.forEach((file) => {
+      const fixtureFilePath = path.join(fixtures, file);
+      const externalFilePath = path.join(externalFixtures, file);
+
+      // Remove the file extension to use as the key
+      const fileKey = path.basename(file, path.extname(file));
+
+      try {
+        // Check if the file is a JSON or JS file
+        if (path.extname(file) === '.json' && fs.existsSync(fixtureFilePath)) {
+          // Read the data from the fixtures file
+          const fixtureData = fetchDataFromFile(fixtureFilePath);
+
+          // Check if the same file exists in the externalFixtures directory
+          if (fs.existsSync(externalFilePath)) {
+            // Read the data from the external file
+            const externalData = fetchDataFromFile(externalFilePath);
+
+            // Merge the data, overriding only matching keys or exports
+            mergedData[fileKey] = { ...fixtureData, ...externalData };
+          } else {
+            // If no external file exists, use the fixture data as is
+            mergedData[fileKey] = fixtureData;
+          }
+        }
+      } catch (fileError) {
+        logger.warn(`Error processing file ${file}:`, fileError);
+      }
+    });
+  } catch (error) {
+    logger.error('Error while merging fixtures with external data:', error);
+  }
+
+  return mergedData;
+}
+
+/**
  * @function testDataParser
  *  testDataParser will fetch data from json files based on priority as shown below
  *    - External <module>.json from configModule (If applicable)
@@ -579,4 +632,5 @@ function fetchMergedJsonFromDirectory(directoryPath) {
 
 module.exports = {
   testDataProcessor,
+  mergeFixturesWithExternal,
 };
