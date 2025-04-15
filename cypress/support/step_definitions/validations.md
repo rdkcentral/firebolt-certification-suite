@@ -72,25 +72,18 @@ For the validation part, for the states when the app is not reachable for us to 
  * Then '3rd party app' will stay in 'foreground' state
  * Then '3rd party app' will be in 'background' state
 
-## Interactions collection process is '(initiated|stopped)'
-### Purpose: To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
+* `When AppObject state for '3rd party App' is set to 'foreground'`
+
+## Verify '(.+)' app is '(.+)'
+
+### Purpose: To perform content validation using an object matching the validation object key name.
 
 ### Params:
-| Param | Definition |
-| --- | --- |
-| action | initiated or stopped |
+| Param               | Definition                                                                                                                              |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| app                 | app type                                                                                                                                |
+| validationObjectKey | The name of an object coming from fireboltCalls fixtures (the object can include firebolt call info but may just have validation data). |
 
 ### Examples:
- * `Given Interactions collection process is 'initiated'`
- * `Given Interactions collection process is 'stopped'`
-
-## verify Firebolt Interactions for '(.+)'
-### Purpose: Validating the firebolt interaction logs
-
-### Params:
-| Param | Definition |
-| --- | --- |
-| key | validation object key name |
-
-### Examples:
- * `verify Firebolt Interactions for 'account id method'`
+* `Then Verify 'Youtube' app is 'playing entity'`
+* `Then Verify 'Netfliz' app is 'dismissed from foreground'`

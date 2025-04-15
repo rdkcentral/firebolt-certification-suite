@@ -68,73 +68,77 @@ Cypress.Commands.add(
  * @Result
  * { method: 'device.id', param: {}, context: {}, action: 'core', expected: 'result'}
  */
-Cypress.Commands.add('fireboltDataParser', (key, sdk = CONSTANTS.SUPPORTED_SDK[0]) => {
-  const results = [];
-  Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, false);
-  if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
-    key = key.replaceAll(' ', '_').toUpperCase();
+Cypress.Commands.add(
+  'fireboltDataParser',
+  (key, sdk = UTILS.getEnvVariable(CONSTANTS.SUPPORTED_SDK)[0]) => {
+    const results = [];
+    const supportedSDK = UTILS.getEnvVariable(CONSTANTS.SUPPORTED_SDK);
+    Cypress.env(CONSTANTS.IS_SCENARIO_EXEMPTED, false);
+    if (Array.isArray(supportedSDK) && supportedSDK.includes(sdk)) {
+      key = key.replaceAll(' ', '_').toUpperCase();
 
-    // Fetching the firebolt Data based on key value.
-    return cy.getFireboltData(key).then((fireboltData) => {
-      // Check if fireboltData is an array or an object
-      const fireboltItems = Array.isArray(fireboltData) ? fireboltData : [fireboltData];
+      // Fetching the firebolt Data based on key value.
+      return cy.getFireboltData(key).then((fireboltData) => {
+        // Check if fireboltData is an array or an object
+        const fireboltItems = Array.isArray(fireboltData) ? fireboltData : [fireboltData];
 
-      // Process each firebolt call item
-      const promises = fireboltItems.map((item) => {
-        let params = item.params;
-        let method, action;
-        // Fetching the value of environment variable based on dataIdentifier
-        if (/CYPRESSENV/.test(params)) {
-          const envParam = params.split('-')[1];
-          params = UTILS.getEnvVariable(envParam, false);
-        }
-        // If params contain CYPRESSENV in any parameter assigning corresponding env value
-        if (Array.isArray(params)) {
-          params.forEach((item) => {
-            const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
+        // Process each firebolt call item
+        const promises = fireboltItems.map((item) => {
+          let params = item.params;
+          let method, action;
+          // Fetching the value of environment variable based on dataIdentifier
+          if (/CYPRESSENV/.test(params)) {
+            const envParam = params.split('-')[1];
+            params = UTILS.getEnvVariable(envParam, false);
+          }
+          // If params contain CYPRESSENV in any parameter assigning corresponding env value
+          if (Array.isArray(params)) {
+            params.forEach((item) => {
+              const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
 
+              if (containEnv) {
+                const envParam = containEnv.split('-')[1];
+                item[envParam] = Cypress.env(envParam);
+                delete item[containEnv];
+              }
+            });
+          } else {
+            const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
             if (containEnv) {
               const envParam = containEnv.split('-')[1];
-              item[envParam] = Cypress.env(envParam);
-              delete item[containEnv];
+              params[envParam] = Cypress.env(envParam);
+              delete params[containEnv];
             }
-          });
-        } else {
-          const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
-          if (containEnv) {
-            const envParam = containEnv.split('-')[1];
-            params[envParam] = Cypress.env(envParam);
-            delete params[containEnv];
           }
-        }
 
-        method = item.method;
-        const expected = item.expected ? item.expected : CONSTANTS.RESULT;
-        action = CONSTANTS.ACTION_CORE.toLowerCase();
+          method = item.method;
+          const expected = item.expected ? item.expected : CONSTANTS.RESULT;
+          action = CONSTANTS.ACTION_CORE.toLowerCase();
 
-        // If a method has prefix with an underscore, the value is taken as the action.
-        if (method && method.includes('_')) {
-          action = method.split('_')[0];
-          method = method.split('_')[1];
-        }
+          // If a method has prefix with an underscore, the value is taken as the action.
+          if (method && method.includes('_')) {
+            action = method.split('_')[0];
+            method = method.split('_')[1];
+          }
 
-        return results.push({
-          method: method,
-          params: params,
-          context: item.context,
-          action: action,
-          expected: expected,
+          return results.push({
+            method: method,
+            params: params,
+            context: item.context,
+            action: action,
+            expected: expected,
+          });
+        });
+
+        return Cypress.Promise.all(promises).then(() => {
+          return results;
         });
       });
-
-      return Cypress.Promise.all(promises).then(() => {
-        return results;
-      });
-    });
-  } else {
-    fireLog.fail(`${sdk} SDK not Supported`);
+    } else {
+      fireLog.fail(`${sdk} SDK not Supported`);
+    }
   }
-});
+);
 
 /**
  * @module commands
@@ -242,6 +246,7 @@ Cypress.Commands.add('getSdkVersion', () => {
 Cypress.Commands.add('updateRunInfo', () => {
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
+  let deviceId = '';
   let deviceModel = '';
   let deviceDistributor = '';
   let devicePlatform = '';
@@ -251,30 +256,32 @@ Cypress.Commands.add('updateRunInfo', () => {
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
     if (deviceData === '') {
       // Fetch data from the first-party app
-      cy.getDeviceDataFromFirstPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
-        if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
-          if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
-            let deviceFirmware = JSON.stringify(response.firmware.readable);
-            deviceFirmware = deviceFirmware.replace(/"/g, '');
-            Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+      if (Cypress.env(CONSTANTS.SUPPORTS_PLATFORM_COMMUNICATION)) {
+        cy.getDeviceDataFromFirstPartyApp(deviceType, {}, action.toLowerCase()).then((response) => {
+          if (deviceType.includes(CONSTANTS.DEVICE_VERSION)) {
+            if (!Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE) && response?.firmware?.readable) {
+              let deviceFirmware = JSON.stringify(response.firmware.readable);
+              deviceFirmware = deviceFirmware.replace(/"/g, '');
+              Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+            }
+            if (!Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION) && response?.api?.readable) {
+              const fireboltVersion =
+                `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
+                  /"/g,
+                  ''
+                );
+              Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
+            }
+            if (!Cypress.env(CONSTANTS.ENV_RELEASE) && response?.debug) {
+              const release = response.debug;
+              Cypress.env(CONSTANTS.ENV_RELEASE, release);
+            }
+          } else {
+            // Set environment variable with the response
+            Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
           }
-          if (!Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION) && response?.api?.readable) {
-            const fireboltVersion =
-              `${response?.api?.major}.${response?.api?.minor}.${response?.api?.patch}`.replace(
-                /"/g,
-                ''
-              );
-            Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
-          }
-          if (!Cypress.env(CONSTANTS.ENV_RELEASE) && response?.debug) {
-            const release = response.debug;
-            Cypress.env(CONSTANTS.ENV_RELEASE, release);
-          }
-        } else {
-          // Set environment variable with the response
-          Cypress.env(envVarName, JSON.stringify(response).replace(/"/g, ''));
-        }
-      });
+        });
+      }
     } else {
       // Set environment variable with the value from json file
       Cypress.env(envVarName, JSON.stringify(deviceData).replace(/"/g, ''));
@@ -301,6 +308,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                 if (exists) {
                   // File exists, read the file
                   return cy.readFile(deviceMacJson).then((macJson) => {
+                    deviceId = macJson?.DEVICEID ?? '';
                     deviceModel = macJson?.DEVICE_MODEL ?? '';
                     deviceDistributor = macJson?.DEVICE_DISTRIBUTOR ?? '';
                     devicePlatform = macJson?.DEVICE_PLATFORM ?? '';
@@ -324,6 +332,15 @@ Cypress.Commands.add('updateRunInfo', () => {
                   CONSTANTS.DEVICE_DISTRIBUTOR,
                   CONSTANTS.ACTION_CORE,
                   CONSTANTS.ENV_DEVICE_DISTRIBUTOR
+                );
+              })
+              .then(() => delay(2000))
+              .then(() => {
+                return setEnvRunInfo(
+                  deviceId,
+                  CONSTANTS.DEVICE_ID,
+                  CONSTANTS.ACTION_CORE,
+                  CONSTANTS.ENV_DEVICE_ID
                 );
               })
               .then(() => delay(2000))
@@ -363,6 +380,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
                         [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                         [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                        [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
                       };
                       reportEnv.customData.data.forEach((item) => {
                         if (item.label === CONSTANTS.PRODUCT) {
@@ -826,17 +844,8 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
-  }
-  // Initiating the Interaction service to listening for interaction logs when interactionsMetrics is set to true in beforeOperation object.
-  else if (
-    beforeOperation.hasOwnProperty(CONSTANTS.INTERACTIONS_METRICS) &&
-    beforeOperation.interactionsMetrics === true
-  ) {
-    cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
-      if (response) {
-        Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
-      }
-    });
+  } else {
+    cy.startAdditionalServices(beforeOperation);
   }
 });
 
@@ -1400,7 +1409,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
     // cy.then() to ensure each Cypress command is properly awaited before return
     cy.then(() => {
-      console.log(`======Beginning of the ${scenario} validation======`);
+      fireLog.info(`====== Beginning of the ${scenario} validation ======`);
       switch (scenario) {
         case CONSTANTS.REGEX:
           cy.regExValidation(
@@ -1446,9 +1455,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
         case CONSTANTS.UNDEFINED:
           cy.undefinedValidation(object, methodOrEventObject, validationType);
           break;
-        case CONSTANTS.SCREENSHOT_VALIDATION:
-          cy.screenshotValidation(object);
-          break;
         case CONSTANTS.PERFORMANCE_VALIDATION:
           cy.performanceValidation(object);
           break;
@@ -1457,7 +1463,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
           break;
       }
     }).then(() => {
-      console.log(`=====Ending of the ${scenario} validation=====`);
+      fireLog.info(`====== Ending of the ${scenario} validation ======`);
     });
   };
 
@@ -1576,15 +1582,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                 }
               }
             });
-          } else {
-            cy.validateContent(
-              method,
-              context,
-              validationJsonPath,
-              contentObject,
-              validationType,
-              appId
-            );
           }
         } catch (error) {
           assert(false, `Unable to validate the response: ${error}`);
@@ -1677,45 +1674,6 @@ Cypress.Commands.add('getRuntimeFireboltCallObject', () => {
       `The firebolt call object was not found in the runtime environment variable. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key. Refer here - ${CONSTANTS.FIREBOLT_OBJECT_DOC_PATH}`
     );
   }
-});
-
-/**
- * @module commands
- * @function startOrStopInteractionsService
- * @description To start or stop firebolt interactions collection service in device by passing appropriate intent to designated handler
- * @param {String} action - initiated or stopped
- * @example
- * cy.startOrStopInteractionsService('initiated)
- * cy.startOrStopInteractionsService('stopped')
- */
-Cypress.Commands.add('startOrStopInteractionsService', (action) => {
-  const requestMap = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETFIREBOLTINTERACTIONSHANDLER,
-    params: {
-      trigger: action == CONSTANTS.INITIATED ? CONSTANTS.START : CONSTANTS.STOP,
-      optionalParams: '',
-    },
-    task: CONSTANTS.TASK.FIREBOLTINTERACTIONSHANDLER,
-  };
-  fireLog.info(CONSTANTS.REQUEST_MAP_INTERACTIONS_SERVICE + JSON.stringify(requestMap));
-  // Sending message to the platform to call designated handler
-  cy.sendMessagetoPlatforms(requestMap).then((result) => {
-    if (result?.success) {
-      fireLog
-        .assert(true, `Firebolt interactions collection service ${action} successfully`)
-        .then(() => {
-          return true;
-        });
-    } else {
-      fireLog
-        .info(
-          `Firebolt interactions collection service with action as ${action} has failed with error ${JSON.stringify(result.message)}`
-        )
-        .then(() => {
-          return false;
-        });
-    }
-  });
 });
 
 /**
@@ -1831,23 +1789,45 @@ Cypress.Commands.add('fetchAppMetaData', () => {
         appAssuranceId: Cypress.env(CONSTANTS.APP_ASSURANCE_ID),
       },
     };
+    // Send the request to fetch app data from platforms
     cy.sendMessagetoPlatforms(requestParams).then((result) => {
-      return result.data;
+      if (result && result.data) {
+        return result.data;
+      } else {
+        throw new Error('Unable to get valid response for fetching app metadata');
+      }
     });
   } else {
-    // Function to extract app metadata from the appData directory and merge it with the app_metadata.json file
+    // If app assurance id is not available, extract app metadata from local directories
+
     const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
     const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
 
     const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
     const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
+    // Extract internal app metadata
     cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
       (fcsAppMetaData) => {
+        // Check if internal app metadata extraction was successful
+        if (!fcsAppMetaData) {
+          throw new Error('Failed to extract internal app metadata.');
+        }
+
+        // Extract external app metadata
         cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
           (configModuleAppMetaData) => {
-            // Combine the app metadata from the fcs and configModule appData directories.
-            _.merge(fcsAppMetaData, configModuleAppMetaData);
+            // Check if external app metadata extraction was successful
+            if (!configModuleAppMetaData) {
+              throw new Error('Failed to extract external app metadata.');
+            }
+
+            // Merge internal and external app metadata
+            try {
+              _.merge(fcsAppMetaData, configModuleAppMetaData);
+            } catch (mergeError) {
+              throw new Error(`Error merging app metadata: ${mergeError.message}`);
+            }
           }
         );
       }
@@ -1930,8 +1910,6 @@ Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
  * cy.clearSoftAssertArray()
  */
 Cypress.Commands.add('clearSoftAssertArray', () => {
-  cy.log(`Clearing soft assertion array`);
-
   // Reset relevant properties
   jsonAssertion.softAssertJson = null;
   jsonAssertion.softAssertCount = 0;
@@ -1986,3 +1964,43 @@ const shouldPerformValidation = (key, value) => {
 
   return true;
 };
+
+/**
+ * @module commands
+ * @function sendKeyPress
+ * @description Command to send key press to the platform.
+ * @param {String} key - The key to be pressed.
+ * @param {Number} delay - The delay in seconds before sending the key press.
+ * @example
+ * cy.sendKeyPress('right')
+ * cy.sendKeyPress('right', 10)
+ */
+Cypress.Commands.add('sendKeyPress', (key, delay) => {
+  delay = delay ? delay : 5;
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
+    params: { key: key, delay: delay },
+  };
+
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    cy.log(`Sent key press: ${key} with delay: ${delay}.`);
+  });
+});
+
+/**
+ * @module commands
+ * @function sendVoiceCommand
+ * @description To send a voice command to the platform
+ * @param {String} voiceCommand - The transcription (voice command) to be sent.
+ * @example
+ * cy.sendVoiceCommand('Open settings');
+ */
+Cypress.Commands.add('sendVoiceCommand', (voiceCommand) => {
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDVOICECOMMAND,
+    params: voiceCommand,
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    return response;
+  });
+});

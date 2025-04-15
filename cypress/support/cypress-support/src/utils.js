@@ -18,6 +18,7 @@
 const CONSTANTS = require('../../constants/constants');
 const logger = require('../../Logger')('utils.js');
 const { _ } = Cypress;
+import { apiObject } from '../../appObjectConfigs';
 const MESSAGE = 'message';
 const Validator = require('jsonschema').Validator;
 const validator = new Validator();
@@ -189,10 +190,18 @@ function getTopic(
 ) {
   let topic;
   let deviceMac = deviceIdentifier ? deviceIdentifier : getEnvVariable(CONSTANTS.DEVICE_MAC);
-  if (deviceMac.length <= 5 || !deviceMac || deviceMac == undefined) {
+  if (!deviceMac || deviceMac == undefined) {
     assert(
       false,
-      `Provided deviceMac ${deviceMac} is in improper format. Expected format : F046XXXXXXXX.`
+      'deviceMac was not provided. Please make sure to add this to your cypress.config.js file or in the env section of your cli arguments when running a test.'
+    );
+  }
+  // DeviceMac should be in proper format either XX:XX:XX:XX:XX:XX or XXXXXXXXXXXX
+  const deviceMacRegex = new RegExp(/^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$|^[0-9A-Fa-f]{12}$/);
+  if (!deviceMacRegex.test(deviceMac)) {
+    assert(
+      false,
+      `Provided deviceMac ${deviceMac} is in improper format. Expected format: XX:XX:XX:XX:XX:XX or XXXXXXXXXXXX.`
     );
   }
   // Remove colons from mac address if not removed
@@ -598,23 +607,6 @@ function subscribeResults(data, metaData) {
   queueInput.metaData = metaData;
   // Push the data and metadata as an object to queue
   getEnvVariable(CONSTANTS.MESSAGE_QUEUE).enqueue(queueInput);
-}
-
-/**
- * @module utils
- * @function interactionResults
- * @description Callback function to fetch the interaction logs from subscribe function and storing in a list.
- * @param {object} interactionLog - interaction logs
- * @example
- * interactionResults("{"method": "account.id", "response": "123", "tt": 12}")
- **/
-function interactionResults(interactionLog) {
-  if (interactionLog) {
-    interactionLog = JSON.parse(interactionLog);
-    if (interactionLog.hasOwnProperty(CONSTANTS.METHOD)) {
-      getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).addLog(interactionLog);
-    }
-  }
 }
 
 /**
@@ -1152,43 +1144,6 @@ function fetchAppIdentifierFromEnv(appId) {
 }
 
 /**
- * InteractionsLogs class provides function to add and get interaction logs.
- * @class
- *
- * @example
- * interactionLogs.addLog({});
- * interactionLogs.getLogs();
- * interactionLogs.isFalse();
- */
-class InteractionsLogs {
-  constructor() {
-    this.logs = new Map();
-  }
-
-  addLog(message) {
-    const scenarioName = Cypress.env(CONSTANTS.SCENARIO_NAME);
-    if (this.logs.size > 0 && this.logs.has(scenarioName)) {
-      this.logs.get(scenarioName).push(message);
-    } else {
-      this.logs.set(scenarioName, [message]);
-    }
-  }
-
-  getLogs(scenarioName) {
-    if (scenarioName) {
-      return this.logs.get(scenarioName);
-    }
-    return this.logs;
-  }
-
-  clearLogs() {
-    this.logs.clear();
-  }
-}
-const interactionLogs = new InteractionsLogs();
-Cypress.env(CONSTANTS.FB_INTERACTIONLOGS, interactionLogs);
-
-/**
  * @module utils
  * @function censorPubSubToken
  * @description A Function to sensor the pubSubToken from the launch intent.
@@ -1225,7 +1180,6 @@ function censorPubSubToken(data) {
  * @example
  * applyOverrides(fireboltCallObject)
  */
-
 function applyOverrides(fireboltCallObject) {
   try {
     if (!fireboltCallObject.overrides) return fireboltCallObject;
@@ -1257,6 +1211,43 @@ function applyOverrides(fireboltCallObject) {
   return fireboltCallObject; // Return the original or modified object based on the override
 }
 
+/**
+ * @module utils
+ * @function captureScreenshot
+ * @description A function to capture the screenshot of the device screen.
+ * @example
+ * captureScreenshot()
+ */
+function captureScreenshot() {
+  // Only take a screenshot if the enableScreenshots environment variable is set to true
+  if (getEnvVariable('enableScreenshots')) {
+    const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT;
+    const param = {};
+    const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
+
+    const screenshotRequest = {
+      method: method,
+      params: param,
+    };
+    fireLog.info(`Sending request to capture screenshot: ${JSON.stringify(screenshotRequest)}`);
+
+    try {
+      cy.sendMessagetoPlatforms(screenshotRequest).then((response) => {
+        fireLog.info(`Screenshot capture response: ${JSON.stringify(response)}`);
+
+        const apiResponse = {
+          response: response,
+        };
+
+        const apiAppObject = new apiObject(method, param, {}, apiResponse, {}, appId);
+        getEnvVariable(CONSTANTS.GLOBAL_API_OBJECT_LIST).push(apiAppObject);
+      });
+    } catch (error) {
+      console.error('Error handling screenshot capture request:', error);
+    }
+  }
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -1281,11 +1272,11 @@ module.exports = {
   fireLog,
   parseValue,
   checkForSecondaryAppId,
-  interactionResults,
   resolveRecursiveValues,
   fireboltCallObjectHasField,
   fetchAppIdentifierFromEnv,
   skipCurrentTest,
   censorPubSubToken,
   applyOverrides,
+  captureScreenshot,
 };

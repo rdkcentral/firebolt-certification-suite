@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-import { Given } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
 const _ = require('lodash');
 import { apiObject } from '../appObjectConfigs';
@@ -377,33 +377,31 @@ Given('device is rebooted', () => {
 Given(
   /3rd party '(.+)' app(?: '(.+)')? is (dismissed|closed|unloaded)$/,
   async (appType, appId, action) => {
-    appId = appId ? appId : Cypress.env(CONSTANTS.RUNTIME).appId;
+    appId = appId ? appId : Cypress.env(CONSTANTS.RUNTIME)?.appId;
+
     let KeyPressSequence;
     let loggedType;
 
     const test = Cypress.env(CONSTANTS.TEST_TYPE);
-    const testLowerCase = test.toLowerCase();
+    const testLowerCase = test?.toLowerCase();
     const scenarioType = Cypress.env(CONSTANTS.SCENARIO_TYPE);
     let scenarioTypeLowerCase;
     const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
-    if (scenarioType != null) {
+
+    if (scenarioType) {
       scenarioTypeLowerCase = scenarioType.toLowerCase();
     }
 
-    if (externalModuleTestTypes.includes(test)) {
+    if (externalModuleTestTypes?.includes(test)) {
       if (Cypress.env(CONSTANTS.SCENARIO_TYPE)) {
         // playback dismiss
-        if (testLowerCase.includes(CONSTANTS.PLAYBACK)) {
-          if (
-            Cypress.env(CONSTANTS.APP_METADATA) &&
-            Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence &&
-            Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.playbackDismiss
-          ) {
-            playbackDismiss = Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence
+        if (testLowerCase?.includes(CONSTANTS.PLAYBACK)) {
+          if (Cypress.env(CONSTANTS.APP_METADATA)?.defaultKeyPressSequence?.playbackDismiss) {
+            const playbackDismiss = Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence
               .playbackDismiss;
-            if (playbackDismiss.loggedIn) {
+            if (playbackDismiss?.loggedIn) {
               KeyPressSequence = playbackDismiss.loggedIn;
-            } else if (playbackDismiss.loggedOut) {
+            } else if (playbackDismiss?.loggedOut) {
               KeyPressSequence = playbackDismiss.loggedOut;
             }
           }
@@ -411,28 +409,22 @@ Given(
           // other dismiss cases
 
           // check whether app is loggedIn or loggedOut
-          if (scenarioTypeLowerCase.includes(CONSTANTS.LOGGEDIN.toLowerCase())) {
+          if (scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDIN.toLowerCase())) {
             loggedType = CONSTANTS.LOGGEDIN;
-          } else if (scenarioTypeLowerCase.includes(CONSTANTS.LOGGEDOUT.toLowerCase())) {
+          } else if (scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDOUT.toLowerCase())) {
             loggedType = CONSTANTS.LOGGEDOUT;
           }
 
           if (
             // Check if keyPressSequence is defined in the runtime environment variables for the specific intent
             !KeyPressSequence &&
-            Cypress.env(CONSTANTS.RUNTIME) &&
-            Cypress.env(CONSTANTS.RUNTIME).intent &&
-            Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence &&
-            Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence[loggedType]
+            Cypress.env(CONSTANTS.RUNTIME)?.intent?.keyPressSequence?.[loggedType]
           ) {
             KeyPressSequence = Cypress.env(CONSTANTS.RUNTIME).intent.keyPressSequence[loggedType];
           } else if (
             // Check if defaultKeyPressSequence is defined for the specific appId in app_metadata
             !KeyPressSequence &&
-            Cypress.env(CONSTANTS.APP_METADATA) &&
-            Cypress.env(CONSTANTS.APP_METADATA)[appId] &&
-            Cypress.env(CONSTANTS.APP_METADATA)[appId].defaultKeyPressSequence &&
-            Cypress.env(CONSTANTS.APP_METADATA)[appId].defaultKeyPressSequence[loggedType]
+            Cypress.env(CONSTANTS.APP_METADATA)?.[appId]?.defaultKeyPressSequence?.[loggedType]
           ) {
             KeyPressSequence = Cypress.env(CONSTANTS.APP_METADATA)[appId].defaultKeyPressSequence[
               loggedType
@@ -440,10 +432,7 @@ Given(
           } else if (
             // Check if defaultKeyPressSequence is defined in the app_metadata globally
             !KeyPressSequence &&
-            Cypress.env(CONSTANTS.APP_METADATA) &&
-            Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence &&
-            Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss &&
-            Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss[loggedType]
+            Cypress.env(CONSTANTS.APP_METADATA)?.defaultKeyPressSequence?.dismiss?.[loggedType]
           ) {
             KeyPressSequence = Cypress.env(CONSTANTS.APP_METADATA).defaultKeyPressSequence.dismiss[
               loggedType
@@ -465,26 +454,39 @@ Given(
     const params = {};
     let actionType;
     switch (action) {
-      case 'dismissed':
-        fireLog.info(`Dismissing the app using the keyPressSequence: ${KeyPressSequence.dismiss}`);
-        params.keyPressSequence = KeyPressSequence.dismiss;
-        actionType = 'dismissApp';
+      case CONSTANTS.DISMISSED:
+        fireLog.info(`Dismissing the app using the keyPressSequence: ${KeyPressSequence?.dismiss}`);
+        params.keyPressSequence = KeyPressSequence?.dismiss;
+        actionType = CONSTANTS.ACTIONTYPE.DISMISS_APP;
         break;
-      case 'closed':
+      case CONSTANTS.CLOSED:
         params.appId = appId;
-        actionType = 'closeApp';
+        actionType = CONSTANTS.ACTIONTYPE.CLOSE_APP;
         break;
-      case 'unloaded':
+      case CONSTANTS.UNLOADED:
         params.appId = appId;
-        actionType = 'unloadApp';
+        actionType = CONSTANTS.ACTIONTYPE.UNLOAD_APP;
         break;
       default:
         fireLog.error('Invalid action type');
-        break;
+        return;
     }
-    cy.exitAppSession(actionType, params).then((response) => {
-      fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
-    });
+
+    try {
+      cy.exitAppSession(actionType, params).then((response) => {
+        if (response) {
+          fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
+        } else {
+          fireLog.fail(
+            `Failed to get a valid response from platform when attempting to exit app session for appId ${appId} using keypress sequence ${KeyPressSequence?.dismiss}`
+          );
+        }
+      });
+    } catch (error) {
+      fireLog.fail(
+        `Following error occurred while attempting to exit app session for appId ${appId} using keypress sequence ${KeyPressSequence?.dismiss}: ${error.message}`
+      );
+    }
   }
 );
 
@@ -497,39 +499,34 @@ Given(
  * Then 3rd party 'firebolt' app should be exited
  */
 Given(/3rd party '(.+)' app should be exited$/, async (app) => {
+  UTILS.captureScreenshot();
+
   // getAppState validation
   let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);
-  validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  if (validationObjectKey) {
+    validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  }
   let validationObject;
   cy.getFireboltData(validationObjectKey).then((fireboltData) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     validationObject = UTILS.resolveRecursiveValues(fireboltData);
-    cy.methodOrEventResponseValidation(type, validationObject)
-      .then((response) => {
-        fireLog.info('State validation of app is completed');
-      })
-      .then(() => {
-        // screenShot validation
-        fireLog.info('Started Screenshot validation');
-        const requestMapForScreenShotValidation = {
-          method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT,
-          params: {
-            validations: validationObject.screenshot.validations,
-          },
-        };
-        fireLog.info(
-          `Sending request to get screenshot : ${JSON.stringify(requestMapForScreenShotValidation)}`
-        );
-        cy.sendMessagetoPlatforms(requestMapForScreenShotValidation).then((response) => {
-          fireLog.info('Screenshot Validation Response: ' + JSON.stringify(response));
+    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
+      cy.softAssertAll();
+    });
+  });
+});
 
-          if (response && response !== 'undefined') {
-            if (response.status != 'pass') {
-              fireLog.info(`Screenshot validation failed ${JSON.stringify(response.validations)}`);
-            }
-            cy.softAssertAll();
-          }
-        });
-      });
+/**
+ * @module fireboltCalls
+ * @function Then /Send (.+) keypress(?: with a delay of '(.+)' seconds)?/
+ * @description Sends a keypress event to the platform.
+ * @param {String} keypress - The key to be pressed
+ * @example
+ * Then Send 'enter' keypress
+ * Then Send 'enter' keypress with a delay of '20' seconds
+ */
+Then(/Send '(.+)' keypress(?: with a delay of '(.+)' seconds)?/, (keypress, delay) => {
+  cy.sendKeyPress(keypress, delay).then(() => {
+    console.log('Keypress done successfully for ', keypress);
   });
 });
