@@ -120,7 +120,7 @@ Given(
             });
           }
         }
-        // Calling the config function to fetch the report data
+        // Calling the configModule function to fetch the report data
         cy.callConfigModule('getReportData').then(() => {
           cy.updateRunInfo();
         });
