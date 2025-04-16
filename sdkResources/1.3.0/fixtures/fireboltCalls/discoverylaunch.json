@@ -7,6 +7,18 @@
     "method": "discovery.launch",
     "params": "DISCOVERYLAUNCH_HOME_INTENT"
   },
+  "LAUNCH_APP_WITH_HOME_INTENT_SOURCE_VOICE": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_VOICE"
+  },
+  "LAUNCH_APP_WITH_HOME_INTENT_SOURCE_EDITORIAL-MERCHANDISING": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_EDITORIAL-MERCHANDISING"
+  },
+  "LAUNCH_APP_WITH_HOME_INTENT_SOURCE_SEARCH": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_SEARCH"
+  },
   "LAUNCH_APP_WITH_PLAYBACK_INTENT": {
     "method": "discovery.launch",
     "params": "DISCOVERYLAUNCH_PLAYBACK_INTENT"
