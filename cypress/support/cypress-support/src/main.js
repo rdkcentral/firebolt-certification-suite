@@ -476,8 +476,6 @@ export default function (module) {
       typeof module.additionalServices[serviceName] === 'function'
     ) {
       module.additionalServices[serviceName](input);
-    } else {
-      logger.info(`Service function "${serviceName}" not found in config module.`);
     }
   });
 
