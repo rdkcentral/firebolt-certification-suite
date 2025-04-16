@@ -125,6 +125,8 @@ Given(
             });
           }
         }
+        Cypress.env('startAdditionalServices', 'getReportData');
+        cy.startAdditionalServices();
         cy.updateRunInfo();
       } catch (error) {
         cy.log(
