@@ -397,6 +397,21 @@
     "validationJsonPath": "eventResponse",
     "content": "DISCOVERYLAUNCH_HOME_INTENT"
   },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_VOICE": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_VOICE"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_EDITORIAL-MERCHANDISING": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_EDITORIAL-MERCHANDISING"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_SEARCH": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_SEARCH"
+  },
   "LAUNCH_APP_WITH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE": {
     "method": "discovery.launch",
     "params": "DISCOVERYLAUNCH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE"

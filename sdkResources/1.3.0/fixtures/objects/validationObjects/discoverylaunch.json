@@ -14,6 +14,51 @@
             }
         ]
     },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_VOICE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_SOURCE_VOICE",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_EDITORIAL-MERCHANDISING": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_SOURCE_EDITORIAL-MERCHANDISING",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_SEARCH": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_SOURCE_SEARCH",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
     "DISCOVERYLAUNCH_PLAYBACK_INTENT": {
         "method": "discovery.onNavigateTo",
         "data": [
