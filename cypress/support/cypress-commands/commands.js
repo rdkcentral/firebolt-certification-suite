@@ -231,7 +231,9 @@ Cypress.Commands.add('getSdkVersion', () => {
                 /"/g,
                 ''
               );
-            Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+            if (!Cypress.env(CONSTANTS.ENV_SDK_VERSION)) {
+              Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+            }
           }
         });
       });
@@ -401,6 +403,58 @@ Cypress.Commands.add('updateRunInfo', () => {
                   }
                 });
               });
+            cy.readFile(reportEnvFile).then((reportEnv) => {
+              if (reportEnv) {
+                const isPlatformRipple = false;
+                if (
+                  reportEnv.customData &&
+                  reportEnv.customData.data &&
+                  reportEnv.customData.data.length > 0
+                ) {
+                  // Retrieve the current labelToEnvMap
+                  // let labelToEnvMap = Cypress.env('labelToEnvMap') || {};
+                  let labelToEnvMap = {};
+                  if (Cypress.env(CONSTANTS.LABEL_TO_ENVMAP)) {
+                    labelToEnvMap = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP);
+                    // Clear the existing customData.data array
+                    reportEnv.customData.data = [];
+
+                    // Populate customData.data with values from the environment
+                    Object.keys(labelToEnvMap).forEach((key) => {
+                      reportEnv.customData.data.push({
+                        label: key,
+                        value: Cypress.env(labelToEnvMap[key]) || 'N/A',
+                      });
+                    });
+                    // write the merged object
+                    cy.writeFile(reportEnvFile, reportEnv);
+                    cy.writeFile(tempReportEnvFile, reportEnv);
+                  } else {
+                    labelToEnvMap = {
+                      [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
+                      [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
+                      [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
+                      [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
+                      [CONSTANTS.PLATFORM_RELEASE]: CONSTANTS.ENV_PLATFORM_RELEASE,
+                      [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
+                      [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
+                      [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
+                    };
+                    reportEnv.customData.data.forEach((item) => {
+                      if (item.label === CONSTANTS.PRODUCT) {
+                        item.value = configModuleConst.PRODUCT ? configModuleConst.PRODUCT : 'N/A';
+                      } else if (labelToEnvMap[item.label]) {
+                        item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+                      }
+                    });
+                    cy.writeFile(tempReportEnvFile, reportEnv);
+                  }
+                }
+              } else {
+                logger.info('Unable to read from reportEnv json file');
+                return false;
+              }
+            });
           } catch (err) {
             logger.info('Error in updating Run Info in cucumber report', err);
             return false;
@@ -1121,7 +1175,8 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
 
   const requestTopic = UTILS.getTopic(appId, null, deviceIdentifier);
   const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE, deviceIdentifier);
-
+  Cypress.env('startAdditionalServices', 'getReportData');
+  cy.startAdditionalServices();
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
     fireLog.info(
       'Discovery launch intent: ' + UTILS.censorPubSubToken(JSON.stringify(parsedIntent))
