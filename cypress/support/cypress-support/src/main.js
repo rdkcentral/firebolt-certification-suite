@@ -19,7 +19,6 @@ import Config from './config';
 import Validation from './validation';
 import TransportLayer from './transport';
 import Queue from './queue';
-import { additionalServices } from 'configModule';
 const { v4: uuidv4 } = require('uuid');
 const CONSTANTS = require('../../constants/constants');
 const defaultDirectory = CONSTANTS.DEFAULT_DIRECTORY;
@@ -568,6 +567,16 @@ export default function (module) {
       );
     }
   });
+
+  /**
+   * @module commands
+   * @function callConfigModule
+   * @description Check the configModule for the function and call it with the params.
+   * @param {String} methodName - Name of the function to be called from the config module.
+   * @param {...*} params - The parameters required to perform the function.
+   * @example
+   * cy.callConfigModule('getReportData', param1, param2)
+   */
 
   Cypress.Commands.add('callConfigModule', (methodName, ...params) => {
     console.log(`Divya: Calling "${methodName}" from configModule...`);
