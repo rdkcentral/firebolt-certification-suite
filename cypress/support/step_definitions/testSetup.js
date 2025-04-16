@@ -120,10 +120,8 @@ Given(
             });
           }
         }
-        cy.then(() => {
-          Cypress.env(CONSTANTS.EXTERNAL_SERVICE_FUNCTION, 'getReportData');
-        }).then(() => {
-          cy.startAdditionalServices();
+        // Calling the config function to fetch the report data
+        cy.callConfigModule('getReportData').then(() => {
           cy.updateRunInfo();
         });
       } catch (error) {
