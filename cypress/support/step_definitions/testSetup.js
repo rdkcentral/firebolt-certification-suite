@@ -304,8 +304,19 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
   }
 });
 
+/**
+ * @module TestSetupGlue
+ * @function I search text {String} is found in the {String} log
+ * @description Searches for a specific text pattern in a given log file.
+ * @param {String} logKey - The specific log text pattern to search for.
+ * @param {String} fileIdentifier - The log file identifier where the search will be performed.
+ *
+ * @example
+ * Given I search text 'SignIn' is found in the 'app' log
+ * Given I search text 'PlaybackStarted' is found in the 'player' log
+ */
+
 Given(/I search text '(.+)' is found in the '(.+)' log/, (logKey, fileIdentifier) => {
-  console.log('inside new glue code 2940', logKey);
   Cypress.env('logKey', logKey);
   Cypress.env('fileIdentifier', fileIdentifier);
 
