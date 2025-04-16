@@ -19,6 +19,7 @@ import Config from './config';
 import Validation from './validation';
 import TransportLayer from './transport';
 import Queue from './queue';
+import { additionalServices } from 'configModule';
 const { v4: uuidv4 } = require('uuid');
 const CONSTANTS = require('../../constants/constants');
 const defaultDirectory = CONSTANTS.DEFAULT_DIRECTORY;
@@ -566,6 +567,23 @@ export default function (module) {
         'generateAndPushReports'
       );
     }
+  });
+
+  Cypress.Commands.add('callConfigModule', (methodName, ...params) => {
+    console.log(`Divya: Calling "${methodName}" from configModule...`);
+
+    return cy.then(() => {
+      // Check if additionalServices exists inside configModule and function exists
+      const configFunction = module?.additionalServices?.[methodName];
+
+      if (typeof configFunction !== 'function') {
+        console.log(`additionalServices or function not found in the configModule`);
+        return null;
+      }
+
+      // Call the function with parameters
+      return configFunction(...params);
+    });
   });
 
   /**

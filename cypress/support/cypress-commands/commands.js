@@ -1707,18 +1707,6 @@ Cypress.Commands.add('envConfigSetup', () => {
 
 /**
  * @module commands
- * @function callConfigModule
- * @description Gives additional functionality to call function from the config module.
- * @example
- * cy.callConfigModule()
- * @Note Add or overwrite callConfigModule cypress command in the config module.
- */
-Cypress.Commands.add('callConfigModule', (functionName, param = null) => {
-  fireLog.info('No function in the callConfigModule');
-});
-
-/**
- * @module commands
  * @function exitAppSession
  * @description Function to provide the test runner with various methods to end the current app session
  * @param {String} exitType - Type of close operation to be performed.
