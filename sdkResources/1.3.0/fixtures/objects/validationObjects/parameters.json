@@ -59,6 +59,51 @@
       }
     ]
   },
+  "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_VOICE": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_HOMEINTENT_WITH_SOURCE_VOICE",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_EDITORIAL-MERCHANDISING": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_HOMEINTENT_WITH_SOURCE_EDITORIAL-MERCHANDISING",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
+  "ARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_SEARCH": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_HOMEINTENT_WITH_SOURCE_SEARCH",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
   "PARAMETERS_INITIALIZATION_PLAYBACKINTENT": {
     "method": "parameters.initialization",
     "data": [

@@ -59,6 +59,24 @@
         "validationJsonPath": "result.discovery",
         "content": "PARAMETERS_INITIALIZATION_HOMEINTENT"
     },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_VOICE": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_VOICE"
+    },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_EDITORIAL-MERCHANDISING": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_EDITORIAL-MERCHANDISING"
+    },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_SEARCH": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_SEARCH"
+    },
     "PLAYBACKINTENT_FOR_INITIALIZATION_PARAMETERS": {
         "method": "parameters.initialization",
         "context": "DISCOVERY_LAUNCH_PLAYBACK",
