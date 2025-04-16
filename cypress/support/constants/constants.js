@@ -231,6 +231,7 @@ module.exports = {
   JSON_FILE_EXTENSION: '_CoreSuiteReport.json',
   JWT: 'jwt',
   LAUNCHAPP: 'launchApp',
+  LABEL_TO_ENVMAP: 'labelToEnvMap',
   LATEST: 'latest',
   LEVEL_LIST: ['should', 'could'],
   LEVEL_MUST: ['must'],

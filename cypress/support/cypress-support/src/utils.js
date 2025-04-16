@@ -1213,6 +1213,23 @@ function applyOverrides(fireboltCallObject) {
 
 /**
  * @module utils
+ * @function addToEnvLabelMap
+ * @description Merges a given partial label-to-environment map into the existing LABEL_TO_ENVMAP stored in Cypress environment.
+ * @param {Object} partialMap - An object containing key-value pairs where the key is the label and the value is either a direct string value or a Cypress.env key.
+ * @example
+ * addToEnvLabelMap({
+ *   DEVICE: 'DEVICE_IP',
+ *   PARTNER: 'DEVICE_MODEL',
+ * });
+ */
+
+global.addToEnvLabelMap = (partialMap) => {
+  const existing = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP) || {};
+  Cypress.env(CONSTANTS.LABEL_TO_ENVMAP, { ...existing, ...partialMap });
+};
+
+/**
+ * @module utils
  * @function captureScreenshot
  * @description A function to capture the screenshot of the device screen.
  * @example
@@ -1279,4 +1296,5 @@ module.exports = {
   censorPubSubToken,
   applyOverrides,
   captureScreenshot,
+  addToEnvLabelMap,
 };

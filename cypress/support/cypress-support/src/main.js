@@ -567,6 +567,33 @@ export default function (module) {
   });
 
   /**
+   * @module commands
+   * @function callConfigModule
+   * @description Check the configModule for the function and call it with the params.
+   * @param {String} methodName - Name of the function to be called from the config module.
+   * @param {...*} params - The parameters required to perform the function.
+   * @example
+   * cy.callConfigModule('getReportData', param1, param2)
+   */
+
+  Cypress.Commands.add('callConfigModule', (methodName, ...params) => {
+    console.log(`Divya: Calling "${methodName}" from configModule...`);
+
+    return cy.then(() => {
+      // Check if additionalServices exists inside configModule and function exists
+      const configFunction = module?.additionalServices?.[methodName];
+
+      if (typeof configFunction !== 'function') {
+        console.log(`additionalServices or function not found in the configModule`);
+        return null;
+      }
+
+      // Call the function with parameters
+      return configFunction(...params);
+    });
+  });
+
+  /**
    * @module customValidation
    * @function customValidation
    * @description Command to execute the custom validations in configModule
