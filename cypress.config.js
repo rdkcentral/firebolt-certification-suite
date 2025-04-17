@@ -96,6 +96,7 @@ const env = {
   objective: '',
   supportsPlatformCommunication: false,
   supportedSDK: ['Firebolt'],
+  deviceVersionCallEnable: true,
 };
 
 module.exports = {
