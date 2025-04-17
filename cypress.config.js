@@ -96,6 +96,7 @@ const env = {
   objective: '',
   supportsPlatformCommunication: false,
   supportedSDK: ['Firebolt'],
+  customValidationTimeout: 60000,
 };
 
 module.exports = {
