@@ -436,6 +436,36 @@
     "validationJsonPath": "eventResponse",
     "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_SEARCH"
   },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_AUTOMATED-RAIL": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_AUTOMATED-RAIL"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_PLAY-NOW-RAIL": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_PLAY-NOW-RAIL"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_PLAYLIST-RAIL": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_PLAYLIST-RAIL"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_SHOWPAGE": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_SHOWPAGE"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_APPS-RAIL-LAUNCH": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_APPS-RAIL-LAUNCH"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_LINEAR-TRIGGER": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_LINEAR-TRIGGER"
+  },
   "LAUNCH_APP_WITH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE": {
     "method": "discovery.launch",
     "params": "DISCOVERYLAUNCH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE"
