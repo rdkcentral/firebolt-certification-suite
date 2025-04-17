@@ -336,3 +336,34 @@ Given(
     });
   }
 );
+
+/**
+ * @module ValidationGlue
+ * @function I verify '(.+)' rail is(?: (.+))? visible '(.+)'
+ * @description 
+ * @param {String} testType - 
+ * @param {String} notVisible -
+ * @param {String} input -
+ * @example
+ * Then '3rd party app' will stay in 'foreground' state
+ * Then '3rd party app' will be in 'background' state
+ */
+Then(/I verify '(.+)' rail is(?: (.+))? visible '(.+)'/, (testType, notVisible, input) => {
+  if (Cypress.env(CONSTANTS.RUNTIME)) {
+    Cypress.env(CONSTANTS.RUNTIME).expectingElement = notVisible ? false : true;
+  }
+  // UTILS.captureScreenshot();
+  let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);
+  if (validationObjectKey) {
+    validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  }
+  let validationObject;
+  cy.getFireboltData(validationObjectKey).then((fireboltData) => {
+    const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+    validationObject = UTILS.resolveRecursiveValues(fireboltData);
+    validationObject = UTILS.resolveRecursiveValues(validationObject);
+    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
+      cy.softAssertAll();
+    });
+  });
+});

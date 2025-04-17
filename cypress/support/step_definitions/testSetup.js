@@ -303,3 +303,40 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
     cy.log(`Firebolt Certification Suite failed to communicate with the ${appType}: ${error}`);
   }
 });
+
+Given(/Send '(.+)' keypress(?: with a delay of '(.+)' seconds)?/, (keypress, delay) => {
+  cy.sendKeyPress(keypress, delay).then(() => {
+    console.log('Keypress done successfully for ', keypress);
+  });
+});
+
+
+/**
+ * @module TestSetupGlue
+ * @function I search text {String} is found in the {String} log
+ * @description Searches for a specific text pattern in a given log file.
+ * @param {String} logKey - The specific log text pattern to search for.
+ * @param {String} fileIdentifier - The log file identifier where the search will be performed.
+ *
+ * @example
+ * Given I search text 'SignIn' is found in the 'app' log
+ * Given I search text 'PlaybackStarted' is found in the 'player' log
+ */
+
+Given(/I search text '(.+)' is found in the '(.+)' log/, (logKey, fileIdentifier) => {
+  Cypress.env('logKey', logKey);
+  Cypress.env('fileIdentifier', fileIdentifier);
+
+  let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);
+  if (validationObjectKey) {
+    validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  }
+  let validationObject;
+  cy.getFireboltData(validationObjectKey).then((fireboltData) => {
+    const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+    validationObject = UTILS.resolveRecursiveValues(fireboltData);
+    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
+      cy.softAssertAll();
+    });
+  });
+});
