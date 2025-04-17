@@ -352,7 +352,7 @@ Then(/I verify '(.+)' rail is(?: (.+))? visible '(.+)'/, (testType, notVisible, 
   if (Cypress.env(CONSTANTS.RUNTIME)) {
     Cypress.env(CONSTANTS.RUNTIME).expectingElement = notVisible ? false : true;
   }
-  // UTILS.captureScreenshot();
+  UTILS.captureScreenshot();
   let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);
   if (validationObjectKey) {
     validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
