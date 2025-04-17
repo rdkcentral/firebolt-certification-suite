@@ -1705,6 +1705,7 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
   const appIdForLog = params.appId ? params.appId : Cypress.env(CONSTANTS.RUNTIME).appId;
   fireLog.info(`Invoking platform implementation to end session for appId: ${appIdForLog}`);
 
+  let timeout = CONSTANTS.COMMUNICATION_INIT_TIMEOUT;
   switch (exitType) {
     case 'closeApp':
       exitMethod = CONSTANTS.REQUEST_OVERRIDE_CALLS.CLOSEAPP;
@@ -1730,7 +1731,7 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
         method: exitMethod,
         params: params.keyPressSequence,
       };
-
+      timeout = 75000;
       break;
     default:
       fireLog.info(
@@ -1739,7 +1740,7 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
       fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
   }
   cy.log(`Session for appId: ${appIdForLog} will be ended with type: ${exitType}`);
-  cy.sendMessagetoPlatforms(requestMap).then((response) => {
+  cy.sendMessagetoPlatforms(requestMap, timeout).then((response) => {
     cy.log(`Platform has successfully ended app Session for appId: ${appIdForLog}`);
   });
 });
