@@ -47,6 +47,8 @@ export default function (module) {
 
   // before All
   before(() => {
+    logger.debug('Entering before() - cypress-support/src/main.js');
+
     // Added below custom commands to clear cache and to reload browser
     cy.clearCache();
     cy.wrap(UTILS.pubSubClientCreation(appTransport), {
@@ -206,6 +208,7 @@ export default function (module) {
           Cypress.env('webSocketClient', null); // Clear the WebSocket client from Cypress environment
         }
       } catch (err) {
+        logger.error(`Something went wrong when attempting to unsubscribe: ${err}`);
         cy.log(`Something went wrong when attempting to unsubscribe: ${err}`);
       }
     })();
@@ -319,6 +322,8 @@ export default function (module) {
    * startTest({"rawTable": [ ["paramType","variableName","value"]]})
    */
   Cypress.Commands.add('startTest', (datatables) => {
+    logger.debug('Entering startTest() - cypress-support/src/main.js');
+
     const additionalParams = {};
     let overrideParams = {};
     let appId;
@@ -389,7 +394,10 @@ export default function (module) {
 
       if (!UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)) {
         cy.log(CONSTANTS.DEVICE_MAC_UNAVAILABLE).then(() => {
-          assert(false, CONSTANTS.DEVICE_MAC_UNAVAILABLE);
+          assert(
+            false,
+            `Device MAC address is not available. Make sure this value is added in cypress.config.js or passed as an environment variable with the cli.`
+          );
         });
       }
 
@@ -402,9 +410,17 @@ export default function (module) {
           try {
             response = JSON.parse(response);
           } catch (error) {
-            assert(false, error);
+            logger.error('Failed to parse JSON response. Response: ', JSON.stringify(response));
+            assert(
+              false,
+              'Failed to parse JSON response from Firebolt implementation. Please check the response format.'
+            );
           }
-          assert.exists(response.report, CONSTANTS.INVALID_RESPONSE);
+
+          assert.exists(
+            response.report,
+            'The response does not contain the expected "report" object. Ensure the Firebolt implementation returns a valid response with a "report" field.'
+          );
 
           // Writing sanity mochawesome json to file when jobId is present.
           if (UTILS.getEnvVariable(CONSTANTS.JOBID, false)) {
@@ -474,6 +490,10 @@ export default function (module) {
    * cy.sendMessagetoApp('mac_appId_FCS',mac_appId_FCA,{"communicationMode": "SDK","action": "search"}, 1000)
    */
   Cypress.Commands.add('sendMessagetoApp', async (requestTopic, responseTopic, intent) => {
+    logger.debug(
+      `Entering sendMessagetoApp() - cypress-support/src/main.js with params: requestTopic=${requestTopic}, responseTopic=${responseTopic}, intent=${JSON.stringify(intent)}`
+    );
+
     const headers = { id: uuidv4() };
 
     // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
@@ -501,6 +521,7 @@ export default function (module) {
         .then((results) => {
           if (results) {
             // Response recieved from queue
+            logger.debug(`Response received from queue: ${JSON.stringify(results)}`);
             return results;
           } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
             return true;
@@ -561,15 +582,21 @@ export default function (module) {
       const functionName = fcsValidationObjectData.assertionDef;
       // to check whether config module has customValidations function
       if (module && module.customValidations) {
+        const configCustomValidation = module.customValidations[functionName];
         // to check whether customValidations has a function as the functionName passed
-        if (
-          module.customValidations[functionName] &&
-          typeof module.customValidations[functionName] === 'function'
-        ) {
-          message = module.customValidations[functionName](
-            apiOrEventObject,
-            fcsValidationObjectData
-          );
+        if (configCustomValidation && typeof configCustomValidation === 'function') {
+          // when the validation states FCS needs to wait before proceeding with the test
+          const waitForCustom = fcsValidationObjectData.waitForCompletion;
+          if (waitForCustom && waitForCustom === true) {
+            const customTimeout = fcsValidationObjectData.waitLimit
+              ? fcsValidationObjectData.waitLimit
+              : UTILS.getEnvVariable(CONSTANTS.CUSTOM_VALIDATION_TIMEOUT);
+            cy.then({ timeout: customTimeout }, async () => {
+              message = await configCustomValidation(apiOrEventObject, fcsValidationObjectData);
+            });
+          } else {
+            message = configCustomValidation(apiOrEventObject, fcsValidationObjectData);
+          }
         } else if (
           // if customValidations doesn't have a function as the functionName passed
           !module.customValidations[functionName] ||
