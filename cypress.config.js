@@ -96,6 +96,7 @@ const env = {
   objective: '',
   supportsPlatformCommunication: false,
   supportedSDK: ['Firebolt'],
+  deviceVersionCallEnable: true,
   customValidationTimeout: 60000,
 };
 
