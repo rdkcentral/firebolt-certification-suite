@@ -63,14 +63,11 @@ Given(
     }
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
-    Cypress.env(CONSTANTS.TEST_TYPE, test);
     const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
     if (!scenarioType && externalModuleTestTypes.includes(test)) {
       fireLog.info(`ScenarioType is not provided, defaulting to ${CONSTANTS.LOGGEDOUT}`);
       scenarioType = CONSTANTS.LOGGEDOUT;
     }
-    Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
-
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
     Cypress.env('detailed', false);
 

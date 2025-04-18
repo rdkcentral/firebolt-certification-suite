@@ -2008,15 +2008,6 @@ Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
 
 /**
  * @module commands
- * @function softAssertAll
- * @description soft assertion to check all the assertions
- * @example
- * cy.softAssertAll()
- */
-Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
-
-/**
- * @module commands
  * @function getPlayerMethodInteractions
  * @description To filter the fireboltInteraction logs
  * @example
