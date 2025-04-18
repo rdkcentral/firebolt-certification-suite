@@ -177,7 +177,7 @@ Given(/'(.+)' is (setup|loaded|running) successfully/, async (testName, state) =
       appId: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID),
       scenarioType: UTILS.getEnvVariable(CONSTANTS.SCENARIO_TYPE),
       detailed: UTILS.getEnvVariable(CONSTANTS.DETAILED),
-      certification: UTILS.getEnvVariable(CONSTANTS.CERTIFICATION)
+      certification: UTILS.getEnvVariable(CONSTANTS.CERTIFICATION),
     },
   };
   cy.sendMessagetoPlatforms(requestMap);
