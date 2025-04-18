@@ -1968,26 +1968,6 @@ const shouldPerformValidation = (key, value) => {
 
 /**
  * @module commands
- * @function softAssertInArray
- * @description soft assertion to compare methods in array
- * @example
- * cy.softAssertInArray(array1, array2)
- */
-Cypress.Commands.add('softAssertInArray', (methodArray, interactionLogs, messageFromFunction) => {
-  const methodNotFound = [];
-  if (methodArray.length > 0) {
-    const message = `The following methods are missing in interactionLogs: [${methodNotFound}].`;
-    jsonAssertion.softAssert(false, true, messageFromFunction);
-    Cypress.log({
-      name: 'Soft assertion error',
-      displayName: 'softAssertMethodsInLogs',
-      message: messageFromFunction,
-    });
-  }
-});
-
-/**
- * @module commands
  * @function softAssertFormat
  * @description soft assertion to check if the value matches the regex format
  * @example
@@ -2001,7 +1981,7 @@ Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
     Cypress.log({
       name: 'Soft assertion error',
       displayName: 'softAssertStringFormat',
-      message: message,
+      message: 'Error: ' + message,
     });
   }
 });
