@@ -27,15 +27,16 @@ const { _ } = Cypress;
  * @function Given the environment has been set up for {string} tests
  * @description Sets up the environment for the specified test.
  * @param {String} test - The name of the test.
+ * @param {String} scenarioType - The name of the scenario which is optional.
  * @example
  * Given the environment has been set up for 'Firebolt Sanity' tests
+ * Given the environment has been set up for 'Firebolt Sanity' tests for 'sample scenario type'
  */
 Given(
   /^the environment has been set up for '([^']+)' tests(?: (for|with) '([^']+)')?$/,
 
   async (test, type, scenarioType) => {
     const runtime = {};
-
     // Check if the test parameter is provided
     if (test) {
       let fireboltCallKey;
@@ -62,12 +63,13 @@ Given(
     }
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
-    if (!scenarioType) {
+    const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
+    if (!scenarioType && externalModuleTestTypes.includes(test)) {
       fireLog.info(`ScenarioType is not provided, defaulting to ${CONSTANTS.LOGGEDOUT}`);
+      scenarioType = CONSTANTS.LOGGEDOUT;
     }
-    scenarioType = scenarioType || CONSTANTS.LOGGEDOUT;
-
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
+    Cypress.env('detailed', false);
 
     if (
       UTILS.getEnvVariable(CONSTANTS.PENDING_FEATURES).includes(
@@ -136,8 +138,8 @@ Given(
         fireLog.fail('Marker creation failed');
       }
     }
+
     const testLowerCase = test.toLowerCase();
-    const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
 
     if (
       externalModuleTestTypes.some(
@@ -153,8 +155,33 @@ Given(
         Cypress.env(CONSTANTS.INTENT_TEMPLATES, combinedIntentTemplates);
       });
     }
+    cy.softAssertAll();
   }
 );
+
+/**
+ * @module TestSetupGlue
+ * @function Given '(.+)' is '(setupsetup|loaded|running)' successfully
+ * @description
+ * @param {String} testName - The name of the test.
+ * @param {String} state - The state of the test.
+ * @example
+ * Given 'app' is setup|loaded|running successfully
+ */
+Given(/'(.+)' is (setup|loaded|running) successfully/, async (testName, state) => {
+  Cypress.env('detailed', true);
+
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.VALIDATEINITIALIZEINTPLAYER,
+    params: {
+      appId: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID),
+      scenarioType: UTILS.getEnvVariable(CONSTANTS.SCENARIO_TYPE),
+      detailed: UTILS.getEnvVariable(CONSTANTS.DETAILED),
+      certification: UTILS.getEnvVariable(CONSTANTS.CERTIFICATION),
+    },
+  };
+  cy.sendMessagetoPlatforms(requestMap);
+});
 
 /**
  * @module TestSetupGlue
@@ -202,6 +229,10 @@ function destroyAppInstance(testType) {
  * Given Test runner waits for 2 'seconds'
  */
 Given(/Test runner waits for (.+) '(minutes|seconds)'/, (time, minuteOrSecond) => {
+  const waitTime = Cypress.env('waitTime');
+  if (waitTime) {
+    time = parseInt(time) + waitTime;
+  }
   if (minuteOrSecond == 'minutes') {
     cy.wait(time * 60 * 1000);
   } else {

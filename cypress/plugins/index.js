@@ -210,6 +210,14 @@ module.exports = async (on, config) => {
     checkFileExists(filePath) {
       return fs.existsSync(filePath);
     },
+    loadJSFile(filePath) {
+      try {
+        const resolvedPath = path.resolve(__dirname, '..', filePath);
+        return require(resolvedPath);
+      } catch (error) {
+        return null;
+      }
+    },
   });
 
   on('before:run', async () => {
