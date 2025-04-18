@@ -1988,42 +1988,6 @@ Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
 
 /**
  * @module commands
- * @function getPlayerMethodInteractions
- * @description To filter the fireboltInteraction logs
- * @example
- * cy.getPlayerMethodInteractions()
- */
-Cypress.Commands.add('getPlayerMethodInteractions', (appIdList, method) => {
-  const fireboltInteractionLogs = Cypress.env(CONSTANTS.FB_INTERACTIONLOGS);
-  const startTime = Cypress.env(CONSTANTS.INTERACTION_LOGS_START_TIME);
-  const endTime = Date.now();
-  const filteredLogs = [];
-
-  for (const key in fireboltInteractionLogs) {
-    if (fireboltInteractionLogs.hasOwnProperty(key)) {
-      fireboltInteractionLogs[key].forEach((logArray) => {
-        logArray.forEach((log) => {
-          try {
-            if (
-              appIdList.includes(log.app_id) &&
-              log.method === method &&
-              log.time_stamp >= startTime &&
-              log.time_stamp <= endTime
-            ) {
-              filteredLogs.push(log);
-            }
-          } catch (error) {
-            console.error('Firebolt interactions logs filtering failed:', error);
-          }
-        });
-      });
-    }
-  }
-  return filteredLogs;
-});
-
-/**
- * @module commands
  * @function sendKeyPress
  * @description Command to send key press to the platform.
  * @param {String} key - The key to be pressed.
