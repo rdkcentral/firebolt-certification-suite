@@ -97,7 +97,7 @@ Cypress.Commands.add(
               const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
               if (containEnv) {
                 const envParam = containEnv.split('-')[1];
-                item[envParam] = Cypress.env(envParam);
+                item[envParam] = UTILS.getEnvVariable(envParam);
                 delete item[containEnv];
               }
             });

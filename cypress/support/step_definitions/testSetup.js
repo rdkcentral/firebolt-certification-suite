@@ -172,12 +172,12 @@ Given(/'(.+)' is (setup|loaded|running) successfully/, async (testName, state) =
   Cypress.env('detailed', true);
 
   const requestMap = {
-    method: 'fcs.validateInitializeIntPlayer',
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.VALIDATEINITIALIZEINTPLAYER,
     params: {
-      appId: Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID),
-      scenarioType: Cypress.env(CONSTANTS.SCENARIO_TYPE),
-      detailed: Cypress.env('detailed'),
-      certification: Cypress.env(CONSTANTS.CERTIFICATION),
+      appId: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID),
+      scenarioType: UTILS.getEnvVariable(CONSTANTS.SCENARIO_TYPE),
+      detailed: UTILS.getEnvVariable(CONSTANTS.DETAILED),
+      certification: UTILS.getEnvVariable(CONSTANTS.CERTIFICATION)
     },
   };
   cy.sendMessagetoPlatforms(requestMap);

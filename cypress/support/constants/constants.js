@@ -389,6 +389,7 @@ module.exports = {
     GETAPPDATA: 'fcs.getAppData',
     SENDKEYPRESS: 'fcs.sendKeyPress',
     SENDVOICECOMMAND: 'fcs.sendVoiceCommand',
+    VALIDATEINITIALIZEINTPLAYER: 'fcs.validateInitializeIntPlayer'
   },
   REQUEST_MAP_INTERACTIONS_SERVICE: 'Request map for firebolt interactions service : ',
   RESPONSE: 'Response: ',
@@ -545,6 +546,7 @@ module.exports = {
   LOGGEDIN: 'loggedIn',
   LOGGEDOUT: 'loggedOut',
   DISMISS: 'dismiss',
+  DETAILED: 'detailed',
   APP_LAUNCH_COUNT: 'appLaunchCount',
   HOT_LAUNCH: 'HOT_LAUNCH',
   COLD_LAUNCH: 'COLD_LAUNCH',
