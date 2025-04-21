@@ -106,7 +106,7 @@ Cypress.Commands.add(
             if (envList.length > 0) {
               envList.forEach((item) => {
                 const envParam = item.split('-')[1];
-                params[envParam] = Cypress.env(envParam);
+                params[envParam] = UTILS.getEnvVariable(envParam);
                 delete params[item];
               });
             }

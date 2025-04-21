@@ -175,7 +175,7 @@ Given(/'(.+)' is (setup|loaded|running) successfully/, async (testName, state) =
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.VALIDATEINITIALIZEINTPLAYER,
     params: {
       appId: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID),
-      scenarioType: UTILS.getEnvVariable(CONSTANTS.SCENARIO_TYPE),
+      scenarioType: Cypress.env(CONSTANTS.SCENARIO_TYPE),
       detailed: UTILS.getEnvVariable(CONSTANTS.DETAILED),
       certification: UTILS.getEnvVariable(CONSTANTS.CERTIFICATION),
     },
