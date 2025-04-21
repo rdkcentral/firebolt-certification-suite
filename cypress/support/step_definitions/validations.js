@@ -345,8 +345,8 @@ Given(
  * @param {String} notVisible -
  * @param {String} input -
  * @example
- * Then '3rd party app' will stay in 'foreground' state
- * Then '3rd party app' will be in 'background' state
+ * Then I Verify 'movies' rail is visible 'with entity played' 
+ * Then I Verify 'movies' rail is not visible 'with entity played' 
  */
 Then(/I verify '(.+)' rail is(?: (.+))? visible '(.+)'/, (testType, notVisible, input) => {
   if (Cypress.env(CONSTANTS.RUNTIME)) {
