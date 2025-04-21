@@ -981,16 +981,6 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
   let messageIntent;
 
   if (intent) {
-    // split the intent with "-"
-    let context = null;
-    if (intent.includes('-')) {
-      [intent, context] = intent.split('-', 2);
-      Cypress.env('context', context);
-    }
-
-    console.log('Intent: >>> ', intent);
-    console.log('Context: >>> ', context);
-
     // Clearing the intent from the runtime environment variable
     Cypress.env(CONSTANTS.RUNTIME).intent = {};
     const appMetadata = UTILS.getEnvVariable(CONSTANTS.APP_METADATA, false);

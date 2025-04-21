@@ -59,6 +59,21 @@
       }
     ]
   },
+  "PARAMETERS_INITIALIZATION_LAUNCHINTENT_SOURCE_DEVICE": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_LAUNCHINTENT_WITH_SOURCE_DEVICE",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
   "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_VOICE": {
     "method": "parameters.initialization",
     "data": [

@@ -421,6 +421,11 @@
     "validationJsonPath": "eventResponse",
     "content": "DISCOVERYLAUNCH_HOME_INTENT"
   },
+  "ONNAVIGATETO_WITH_LAUNCH_INTENT_SOURCE_DEVICE": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_LAUNCH_INTENT_SOURCE_DEVICE"
+  },
   "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_VOICE": {
     "event": "discovery.onNavigateTo",
     "validationJsonPath": "eventResponse",
