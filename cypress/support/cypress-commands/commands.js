@@ -2019,10 +2019,13 @@ const shouldPerformValidation = (key, value) => {
  * @example
  * cy.findLogPattern({ logPattern: "SignIn", fileName: "/logs/app.log" })
  */
-Cypress.Commands.add('findLogPattern', (param) => {
+Cypress.Commands.add('findLogPattern', (logKey, fileName) => {
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FINDLOGPATTERN,
-    params: param,
+    params: {
+      logPattern: logKey,
+      fileName: fileName
+    },
   };
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
     return result;
