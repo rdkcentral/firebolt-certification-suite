@@ -64,7 +64,7 @@ Given(
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
     const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
-    if (!scenarioType && externalModuleTestTypes.includes(test)) {
+    if (!scenarioType && (externalModuleTestTypes && externalModuleTestTypes.includes(test))) {
       fireLog.info(`ScenarioType is not provided, defaulting to ${CONSTANTS.LOGGEDOUT}`);
       scenarioType = CONSTANTS.LOGGEDOUT;
     }
@@ -158,30 +158,6 @@ Given(
     cy.softAssertAll();
   }
 );
-
-/**
- * @module TestSetupGlue
- * @function Given '(.+)' is '(setupsetup|loaded|running)' successfully
- * @description
- * @param {String} testName - The name of the test.
- * @param {String} state - The state of the test.
- * @example
- * Given 'app' is setup|loaded|running successfully
- */
-Given(/'(.+)' is (setup|loaded|running) successfully/, async (testName, state) => {
-  Cypress.env('detailed', true);
-
-  const requestMap = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.VALIDATEINITIALIZEINTPLAYER,
-    params: {
-      appId: UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID),
-      scenarioType: Cypress.env(CONSTANTS.SCENARIO_TYPE),
-      detailed: UTILS.getEnvVariable(CONSTANTS.DETAILED),
-      certification: UTILS.getEnvVariable(CONSTANTS.CERTIFICATION),
-    },
-  };
-  cy.sendMessagetoPlatforms(requestMap);
-});
 
 /**
  * @module TestSetupGlue
