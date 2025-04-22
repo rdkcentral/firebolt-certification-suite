@@ -226,7 +226,7 @@ export default function (module) {
   Cypress.Commands.add(
     'sendMessagetoPlatforms',
     (requestMap, timeout = CONSTANTS.COMMUNICATION_INIT_TIMEOUT) => {
-      return cy.wrap(requestMap, { timeout: timeout }).then(() => {
+      return cy.wrap(requestMap, { timeout: 75000 }).then({ timeout: 75000 }, () => {
         return new Promise((resolve, reject) => {
           let responsePromise;
           const [moduleName, methodName] = requestMap.method.split('.');
