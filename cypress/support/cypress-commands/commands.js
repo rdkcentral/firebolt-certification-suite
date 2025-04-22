@@ -2004,7 +2004,7 @@ Cypress.Commands.add('sendKeyPress', (key, delay) => {
   };
 
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
-    logger.debug(`Sent key press: ${key} with delay: ${delay}.`);
+    cy.log(`Sent key press: ${key} with delay: ${delay}.`);
   });
 });
 

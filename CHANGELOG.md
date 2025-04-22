@@ -1,3 +1,17 @@
+# [1.11.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.3...v1.11.0-dev.4) (2025-04-15)
+
+
+### Features
+
+* Add default test case folder for non-sdk based feature files ([#366](https://github.com/rdkcentral/firebolt-certification-suite/issues/366)) ([6623a78](https://github.com/rdkcentral/firebolt-certification-suite/commit/6623a788be3bb5632d1e1026bbdc4457a0bf494e))
+
+# [1.11.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.2...v1.11.0-dev.3) (2025-04-14)
+
+
+### Features
+
+* Playback support ([#379](https://github.com/rdkcentral/firebolt-certification-suite/issues/379)) ([e150b37](https://github.com/rdkcentral/firebolt-certification-suite/commit/e150b377f64c0d575eb2227157299be55d54c08d))
+
 # [1.11.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.1...v1.11.0-dev.2) (2025-04-10)
 
 
