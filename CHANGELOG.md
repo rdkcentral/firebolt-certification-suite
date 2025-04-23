@@ -1,3 +1,10 @@
+# [1.11.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.5...v1.11.0-dev.6) (2025-04-23)
+
+
+### Bug Fixes
+
+* Test pubsub changes ([#402](https://github.com/rdkcentral/firebolt-certification-suite/issues/402)) ([ee2c66b](https://github.com/rdkcentral/firebolt-certification-suite/commit/ee2c66b974f0938b5ca59867d1d4529dd2929e50))
+
 # [1.11.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.4...v1.11.0-dev.5) (2025-04-23)
 
 
