@@ -1730,6 +1730,7 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
         method: exitMethod,
         params: params.keyPressSequence,
       };
+
       break;
     default:
       fireLog.info(
