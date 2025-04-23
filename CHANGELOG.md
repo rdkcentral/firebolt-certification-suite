@@ -1,3 +1,38 @@
+# [1.11.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.4...v1.11.0-dev.5) (2025-04-23)
+
+
+### Features
+
+* Ipa version2 squashed ([#395](https://github.com/rdkcentral/firebolt-certification-suite/issues/395)) ([0c01306](https://github.com/rdkcentral/firebolt-certification-suite/commit/0c01306038f1d6875c24538afb03bec2cd7b64b5))
+
+# [1.11.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.3...v1.11.0-dev.4) (2025-04-15)
+
+
+### Features
+
+* Add default test case folder for non-sdk based feature files ([#366](https://github.com/rdkcentral/firebolt-certification-suite/issues/366)) ([6623a78](https://github.com/rdkcentral/firebolt-certification-suite/commit/6623a788be3bb5632d1e1026bbdc4457a0bf494e))
+
+# [1.11.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.2...v1.11.0-dev.3) (2025-04-14)
+
+
+### Features
+
+* Playback support ([#379](https://github.com/rdkcentral/firebolt-certification-suite/issues/379)) ([e150b37](https://github.com/rdkcentral/firebolt-certification-suite/commit/e150b377f64c0d575eb2227157299be55d54c08d))
+
+# [1.11.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.1...v1.11.0-dev.2) (2025-04-10)
+
+
+### Bug Fixes
+
+* logic added to optionally send eventParams in the object ([#387](https://github.com/rdkcentral/firebolt-certification-suite/issues/387)) ([010e83b](https://github.com/rdkcentral/firebolt-certification-suite/commit/010e83b4bccf0f5f7814f508ea83a9ffac0b5fdc))
+
+# [1.11.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0...v1.11.0-dev.1) (2025-04-10)
+
+
+### Features
+
+* Improve logging ([#383](https://github.com/rdkcentral/firebolt-certification-suite/issues/383)) ([f0df4fe](https://github.com/rdkcentral/firebolt-certification-suite/commit/f0df4fee4cf611f4cbd108ae7a84c657132f645c))
+
 # [1.10.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.9.0...v1.10.0) (2025-04-09)
 
 
