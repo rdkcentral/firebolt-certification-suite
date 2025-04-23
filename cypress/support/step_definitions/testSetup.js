@@ -317,7 +317,6 @@ Given(/Send '(.+)' keypress(?: with a delay of '(.+)' seconds)?/, (keypress, del
   });
 });
 
-
 /**
  * @module TestSetupGlue
  * @function I search text {String} is found in the {String} log

@@ -340,13 +340,13 @@ Given(
 /**
  * @module validations
  * @function I verify '(.+)' rail is(?: (.+))? visible '(.+)'
- * @description 
- * @param {String} testType - 
+ * @description
+ * @param {String} testType -
  * @param {String} notVisible -
  * @param {String} input -
  * @example
- * Then I Verify 'movies' rail is visible 'with entity played' 
- * Then I Verify 'movies' rail is not visible 'with entity played' 
+ * Then I Verify 'movies' rail is visible 'with entity played'
+ * Then I Verify 'movies' rail is not visible 'with entity played'
  */
 Then(/I verify '(.+)' rail is(?: (.+))? visible '(.+)'/, (testType, notVisible, input) => {
   if (Cypress.env(CONSTANTS.RUNTIME)) {
