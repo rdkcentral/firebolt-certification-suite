@@ -77,19 +77,19 @@ export default function (module) {
     } else {
       cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
     }
-    // Merge fireboltCalls
-    const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
-    const v2FireboltCallsData = _.merge(
-      {},
-      internalV2FireboltCallsData,
-      externalV2FireboltCallsData
-    );
+    // Merge fireboltCalls - Commented temporarily. Moved to beforeEach
+    // const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
+    // const v2FireboltCallsData = _.merge(
+    //   {},
+    //   internalV2FireboltCallsData,
+    //   externalV2FireboltCallsData
+    // );
 
-    cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
-      (mergedFireboltCalls) => {
-        Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
-      }
-    );
+    // cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
+    //   (mergedFireboltCalls) => {
+    //     Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
+    //   }
+    // );
 
     // Merge fireboltMocks
     const v1FireboltMockData = UTILS.getEnvVariable('fireboltMocksJson');
@@ -112,6 +112,20 @@ export default function (module) {
     cy.getBeforeOperationObject();
     cy.initiatePerformanceMetrics();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+
+    // Merge fireboltCalls - Temporary fix to populate env variable between steps
+    const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
+    const v2FireboltCallsData = _.merge(
+      {},
+      internalV2FireboltCallsData,
+      externalV2FireboltCallsData
+    );
+
+    cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
+      (mergedFireboltCalls) => {
+        Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
+      }
+    );
   });
 
   /**

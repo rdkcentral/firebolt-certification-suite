@@ -95,19 +95,20 @@ Cypress.Commands.add(
           if (Array.isArray(params)) {
             params.forEach((item) => {
               const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
-
               if (containEnv) {
                 const envParam = containEnv.split('-')[1];
-                item[envParam] = Cypress.env(envParam);
+                item[envParam] = UTILS.getEnvVariable(envParam);
                 delete item[containEnv];
               }
             });
           } else {
-            const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
-            if (containEnv) {
-              const envParam = containEnv.split('-')[1];
-              params[envParam] = Cypress.env(envParam);
-              delete params[containEnv];
+            const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
+            if (envList.length > 0) {
+              envList.forEach((item) => {
+                const envParam = item.split('-')[1];
+                params[envParam] = UTILS.getEnvVariable(envParam);
+                delete params[item];
+              });
             }
           }
 
@@ -1964,6 +1965,26 @@ const shouldPerformValidation = (key, value) => {
 
   return true;
 };
+
+/**
+ * @module commands
+ * @function softAssertFormat
+ * @description soft assertion to check if the value matches the regex format
+ * @example
+ * cy.softAssertFormat(value, regexFormat, message)
+ */
+Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
+  if (regex.test(value)) {
+    fireLog.info(message);
+  } else {
+    jsonAssertion.softAssert(false, true, message);
+    Cypress.log({
+      name: 'Soft assertion error',
+      displayName: 'softAssertStringFormat',
+      message: 'Error: ' + message,
+    });
+  }
+});
 
 /**
  * @module commands
