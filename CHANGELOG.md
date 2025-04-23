@@ -1,3 +1,10 @@
+# [1.11.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.4...v1.11.0-dev.5) (2025-04-23)
+
+
+### Features
+
+* Ipa version2 squashed ([#395](https://github.com/rdkcentral/firebolt-certification-suite/issues/395)) ([0c01306](https://github.com/rdkcentral/firebolt-certification-suite/commit/0c01306038f1d6875c24538afb03bec2cd7b64b5))
+
 # [1.11.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.3...v1.11.0-dev.4) (2025-04-15)
 
 
