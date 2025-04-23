@@ -34,7 +34,7 @@
     "@firebolt-js/manage-sdk": "1.0.0",
     "@firebolt-js/sdk": "1.0.0",
     "axios": "^1.7.9",
-    "configModule": "./defaultModule",
+    "configModule": "git+ssh://git@github.com-ghec:comcast-firebolt/sky-config-module#poc/ui-validation",
     "cucumber-json-report-formatter": "^0.1.4",
     "cross-spawn": "^7.0.3",
     "cypress": "^12.0.0",
