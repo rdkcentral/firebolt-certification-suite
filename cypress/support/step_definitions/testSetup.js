@@ -311,12 +311,6 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
   }
 });
 
-Given(/Send '(.+)' keypress(?: with a delay of '(.+)' seconds)?/, (keypress, delay) => {
-  cy.sendKeyPress(keypress, delay).then(() => {
-    console.log('Keypress done successfully for ', keypress);
-  });
-});
-
 /**
  * @module TestSetupGlue
  * @function I search text {String} is found in the {String} log

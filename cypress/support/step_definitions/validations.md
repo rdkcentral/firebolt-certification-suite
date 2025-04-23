@@ -87,3 +87,16 @@ For the validation part, for the states when the app is not reachable for us to 
 ### Examples:
 * `Then Verify 'Youtube' app is 'playing entity'`
 * `Then Verify 'Netfliz' app is 'dismissed from foreground'`
+
+## I verify '(.+)' rail is(?: (.+))? visible '(.+)'
+
+### Purpose: Validates the visibility of the rail based on the scenario.
+
+### Params:
+| Param               | Definition                                                                                                                              |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| notVisible | decides whether the rail is visible or not. |
+
+### Examples:
+* `Then I Verify 'movies' rail is visible 'with entity played'`
+* `Then I Verify 'movies' rail is not visible 'with entity played'`

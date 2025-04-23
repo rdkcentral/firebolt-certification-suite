@@ -340,10 +340,10 @@ Given(
 /**
  * @module validations
  * @function I verify '(.+)' rail is(?: (.+))? visible '(.+)'
- * @description
- * @param {String} testType -
- * @param {String} notVisible -
- * @param {String} input -
+ * @description Validates the visibility of the rail based on the scenario.
+ * @param {String} testType - not used
+ * @param {String} notVisible - decides whether the rail is visible or not.
+ * @param {String} input - Not used
  * @example
  * Then I Verify 'movies' rail is visible 'with entity played'
  * Then I Verify 'movies' rail is not visible 'with entity played'
