@@ -97,7 +97,7 @@ Cypress.Commands.add(
               const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
               if (containEnv) {
                 const envParam = containEnv.split('-')[1];
-                item[envParam] = Cypress.env(envParam);
+                item[envParam] = UTILS.getEnvVariable(envParam);
                 delete item[containEnv];
               }
             });
@@ -106,7 +106,7 @@ Cypress.Commands.add(
             if (envList.length > 0) {
               envList.forEach((item) => {
                 const envParam = item.split('-')[1];
-                params[envParam] = Cypress.env(envParam);
+                params[envParam] = UTILS.getEnvVariable(envParam);
                 delete params[item];
               });
             }
@@ -2023,26 +2023,6 @@ const shouldPerformValidation = (key, value) => {
 
 /**
  * @module commands
- * @function softAssertInArray
- * @description soft assertion to compare methods in array
- * @example
- * cy.softAssertInArray(array1, array2)
- */
-Cypress.Commands.add('softAssertInArray', (methodArray, interactionLogs, messageFromFunction) => {
-  const methodNotFound = [];
-  if (methodArray.length > 0) {
-    const message = `The following methods are missing in interactionLogs: [${methodNotFound}].`;
-    jsonAssertion.softAssert(false, true, messageFromFunction);
-    Cypress.log({
-      name: 'Soft assertion error',
-      displayName: 'softAssertMethodsInLogs',
-      message: messageFromFunction,
-    });
-  }
-});
-
-/**
- * @module commands
  * @function softAssertFormat
  * @description soft assertion to check if the value matches the regex format
  * @example
@@ -2056,54 +2036,9 @@ Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
     Cypress.log({
       name: 'Soft assertion error',
       displayName: 'softAssertStringFormat',
-      message: message,
+      message: 'Error: ' + message,
     });
   }
-});
-
-/**
- * @module commands
- * @function softAssertAll
- * @description soft assertion to check all the assertions
- * @example
- * cy.softAssertAll()
- */
-Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
-
-/**
- * @module commands
- * @function getPlayerMethodInteractions
- * @description To filter the fireboltInteraction logs
- * @example
- * cy.getPlayerMethodInteractions()
- */
-Cypress.Commands.add('getPlayerMethodInteractions', (appIdList, method) => {
-  const fireboltInteractionLogs = Cypress.env(CONSTANTS.FB_INTERACTIONLOGS);
-  const startTime = Cypress.env(CONSTANTS.INTERACTION_LOGS_START_TIME);
-  const endTime = Date.now();
-  const filteredLogs = [];
-
-  for (const key in fireboltInteractionLogs) {
-    if (fireboltInteractionLogs.hasOwnProperty(key)) {
-      fireboltInteractionLogs[key].forEach((logArray) => {
-        logArray.forEach((log) => {
-          try {
-            if (
-              appIdList.includes(log.app_id) &&
-              log.method === method &&
-              log.time_stamp >= startTime &&
-              log.time_stamp <= endTime
-            ) {
-              filteredLogs.push(log);
-            }
-          } catch (error) {
-            console.error('Firebolt interactions logs filtering failed:', error);
-          }
-        });
-      });
-    }
-  }
-  return filteredLogs;
 });
 
 /**
@@ -2124,7 +2059,7 @@ Cypress.Commands.add('sendKeyPress', (key, delay) => {
   };
 
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
-    logger.debug(`Sent key press: ${key} with delay: ${delay}.`);
+    cy.log(`Sent key press: ${key} with delay: ${delay}.`);
   });
 });
 
