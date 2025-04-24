@@ -324,19 +324,25 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
  */
 
 Given(/I search text '(.+)' is found in the '(.+)' log/, (logKey, fileIdentifier) => {
-  Cypress.env('logKey', logKey);
-  Cypress.env('fileIdentifier', fileIdentifier);
+  const fileName = [`/opt/logs/${fileIdentifier}.log`];
 
-  let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);
-  if (validationObjectKey) {
-    validationObjectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
-  }
-  let validationObject;
-  cy.getFireboltData(validationObjectKey).then((fireboltData) => {
-    const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
-    validationObject = UTILS.resolveRecursiveValues(fireboltData);
-    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
-      cy.softAssertAll();
+  cy.findLogPattern(logKey, fileName).then((response) => {
+    if (response.error) {
+      cy.softAssert(false, true, `Search command failed: ${response.error}`);
+      return;
+    }
+    if (!response.response || response.response.length === 0) {
+      cy.softAssert(false, true, 'No response received or response is empty.');
+      return;
+    }
+    response.response.forEach((responseText, index) => {
+      fireLog.info(`Received Response from the platform: ${responseText}`);
+      const isPatternFound = responseText.includes(logKey);
+      cy.softAssert(
+        isPatternFound,
+        true,
+        `Log pattern "${pattern}" ${isPatternFound ? 'found' : 'not found'} in response.`
+      );
     });
   });
 });
