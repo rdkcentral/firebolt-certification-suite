@@ -1,3 +1,20 @@
+# [1.11.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0...v1.11.0) (2025-04-24)
+
+
+### Bug Fixes
+
+* logic added to optionally send eventParams in the object ([#387](https://github.com/rdkcentral/firebolt-certification-suite/issues/387)) ([010e83b](https://github.com/rdkcentral/firebolt-certification-suite/commit/010e83b4bccf0f5f7814f508ea83a9ffac0b5fdc))
+* Resources folder rename ([#404](https://github.com/rdkcentral/firebolt-certification-suite/issues/404)) ([cb533aa](https://github.com/rdkcentral/firebolt-certification-suite/commit/cb533aaa36b88c505a1a02c762cf61069db9a96e))
+* Test pubsub changes ([#402](https://github.com/rdkcentral/firebolt-certification-suite/issues/402)) ([ee2c66b](https://github.com/rdkcentral/firebolt-certification-suite/commit/ee2c66b974f0938b5ca59867d1d4529dd2929e50))
+
+
+### Features
+
+* Add default test case folder for non-sdk based feature files ([#366](https://github.com/rdkcentral/firebolt-certification-suite/issues/366)) ([6623a78](https://github.com/rdkcentral/firebolt-certification-suite/commit/6623a788be3bb5632d1e1026bbdc4457a0bf494e))
+* Improve logging ([#383](https://github.com/rdkcentral/firebolt-certification-suite/issues/383)) ([f0df4fe](https://github.com/rdkcentral/firebolt-certification-suite/commit/f0df4fee4cf611f4cbd108ae7a84c657132f645c))
+* Ipa version2 squashed ([#395](https://github.com/rdkcentral/firebolt-certification-suite/issues/395)) ([0c01306](https://github.com/rdkcentral/firebolt-certification-suite/commit/0c01306038f1d6875c24538afb03bec2cd7b64b5))
+* Playback support ([#379](https://github.com/rdkcentral/firebolt-certification-suite/issues/379)) ([e150b37](https://github.com/rdkcentral/firebolt-certification-suite/commit/e150b377f64c0d575eb2227157299be55d54c08d))
+
 # [1.11.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.6...v1.11.0-dev.7) (2025-04-24)
 
 
