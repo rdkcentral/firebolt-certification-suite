@@ -1,3 +1,10 @@
+# [1.11.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.6...v1.11.0-dev.7) (2025-04-24)
+
+
+### Bug Fixes
+
+* Resources folder rename ([#404](https://github.com/rdkcentral/firebolt-certification-suite/issues/404)) ([cb533aa](https://github.com/rdkcentral/firebolt-certification-suite/commit/cb533aaa36b88c505a1a02c762cf61069db9a96e))
+
 # [1.11.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.5...v1.11.0-dev.6) (2025-04-23)
 
 
