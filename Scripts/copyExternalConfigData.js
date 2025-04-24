@@ -22,7 +22,9 @@ const logger = require('../cypress/support/Logger')('copyExternalConfigData.js')
 logger.info('Copying Config fixtures and Testcases into sdkResources/external');
 
 // Check which folder exists: 'resources' or 'Resources' in node_modules/configModule
-const CONFIG_RESOURCES_DIR = fs.existsSync(path.join(__dirname, '..', 'node_modules', 'configModule', 'resources'))
+const CONFIG_RESOURCES_DIR = fs.existsSync(
+  path.join(__dirname, '..', 'node_modules', 'configModule', 'resources')
+)
   ? path.join(__dirname, '..', 'node_modules', 'configModule', 'resources')
   : path.join(__dirname, '..', 'node_modules', 'configModule', 'Resources');
 
