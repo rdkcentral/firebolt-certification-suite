@@ -571,8 +571,8 @@ export default function (module) {
    * @function callConfigModule
    * @description Check the configModule for the function and call it with the params.
    * @param {String} methodName - Name of the function to be called from the config module.
-   * @param {Array} [params=[]] - Optional array of parameters to pass to the method.
-   * @param {string} [moduleName='additionalServices'] - Optional module name from which to retrieve the method.
+   * @param {Array} params=[] - Optional array of parameters to pass to the method.
+   * @param {string} moduleName - Name of the module from which method has to be retrieved,by default additionalServices.
    * @example
    * cy.callConfigModule('methodName', ['arg1', 'arg2'], 'moduleName');
    */
