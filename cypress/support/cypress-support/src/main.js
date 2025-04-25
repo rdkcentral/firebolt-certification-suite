@@ -571,27 +571,27 @@ export default function (module) {
    * @function callConfigModule
    * @description Check the configModule for the function and call it with the params.
    * @param {String} methodName - Name of the function to be called from the config module.
-   * @param {...*} params - The parameters required to perform the function.
+   * @param {Array} [params=[]] - Optional array of parameters to pass to the method.
+   * @param {string} [moduleName='additionalServices'] - Optional module name from which to retrieve the method.
    * @example
-   * cy.callConfigModule('getReportData', param1, param2)
+   * cy.callConfigModule('methodName', ['arg1', 'arg2'], 'moduleName');
    */
 
-  Cypress.Commands.add('callConfigModule', (methodName, ...params) => {
-    console.log(`Divya: Calling "${methodName}" from configModule...`);
+  Cypress.Commands.add(
+    'callConfigModule',
+    (methodName, params = [], moduleName = 'additionalServices') => {
+      console.log(`Calling "${methodName}" from configModule.${moduleName} with params:`, params);
 
-    return cy.then(() => {
-      // Check if additionalServices exists inside configModule and function exists
-      const configFunction = module?.additionalServices?.[methodName];
-
-      if (typeof configFunction !== 'function') {
-        console.log(`additionalServices or function not found in the configModule`);
-        return null;
-      }
-
-      // Call the function with parameters
-      return configFunction(...params);
-    });
-  });
+      return cy.then(() => {
+        const configFunction = module?.[moduleName]?.[methodName];
+        if (typeof configFunction !== 'function') {
+          console.log(`${moduleName}.${methodName} not found in the config module.`);
+          return null;
+        }
+        return configFunction(...params);
+      });
+    }
+  );
 
   /**
    * @module customValidation
