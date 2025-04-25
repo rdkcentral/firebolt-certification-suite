@@ -237,8 +237,8 @@ export default function (module) {
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
    */
 
-  Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
-    return cy.wrap(requestMap, { timeout: 75000 }).then({ timeout: 75000 }, () => {
+  Cypress.Commands.add('sendMessagetoPlatforms', (requestMap, responseWaitTime) => {
+    return cy.wrap(requestMap).then({ timeout: responseWaitTime + 10000 }, () => {
       return new Promise((resolve, reject) => {
         let responsePromise;
         const [moduleName, methodName] = requestMap.method.split('.');
@@ -279,7 +279,7 @@ export default function (module) {
               // Perform MTC/FB call only if the message is not null
               if (message != null) {
                 return transport
-                  .sendMessage(message)
+                  .sendMessage(message, responseWaitTime)
                   .then((res) => config.invokeResponseOverride(res));
               } else {
                 return null;
