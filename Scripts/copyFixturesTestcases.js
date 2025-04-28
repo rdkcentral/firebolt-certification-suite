@@ -42,7 +42,7 @@ const configFixturesDir = path.join(
   'fixtures'
 );
 
-const ResourcesDir = path.join(__dirname, '..', 'Resources');
+const ResourcesDir = path.join(__dirname, '..', 'resources');
 
 // Clear existing directories
 deleteDirectory(fcsTestCasesDir);
