@@ -232,14 +232,18 @@ export default function (module) {
    * @module main
    * @function sendMessagetoPlatforms
    * @description send message based on platform which will be pulled from config manager.
-   * @param {*} requestMap - requestMap should contain method and param
+   * @param {*} requestMap - requestMap should contain method and param etc.
+   * @param {Number} responseWaitTime - responseWaitTime is the time to wait for the response from the platform.
    * @example
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
+   * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}}, 20000)
    */
 
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap, responseWaitTime) => {
     const validResponseWaitTime =
-      typeof responseWaitTime === 'number' && responseWaitTime > 0 ? responseWaitTime : 15000;
+      typeof responseWaitTime === 'number' && responseWaitTime > 0
+        ? responseWaitTime
+        : CONSTANTS.LONGPOLL_TIMEOUT;
     return cy.wrap(requestMap).then({ timeout: validResponseWaitTime + 10000 }, () => {
       return new Promise((resolve, reject) => {
         let responsePromise;
@@ -506,12 +510,13 @@ export default function (module) {
    * @param {string} requestTopic - Topic used to publish message
    * @param {string} responseTopic - Topic used to subscribe message
    * @param {Object} intent - Basic intent message that will applicable to ALL platforms to start the test on FCA.
+   * @param {Number} longPollTimeout -  longPollTimeout is the time to wait for the response from the app.
    * @example
    * cy.sendMessagetoApp('mac_appId_FCS',mac_appId_FCA,{"communicationMode": "SDK","action": "search"}, 1000)
    */
   Cypress.Commands.add(
     'sendMessagetoApp',
-    async (requestTopic, responseTopic, intent, responseWaitTime) => {
+    async (requestTopic, responseTopic, intent, longPollTimeout) => {
       logger.debug(
         `Entering sendMessagetoApp() - cypress-support/src/main.js with params: requestTopic=${requestTopic}, responseTopic=${responseTopic}, intent=${JSON.stringify(intent)}`
       );
@@ -519,7 +524,7 @@ export default function (module) {
       const headers = { id: uuidv4() };
 
       // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
-      const longPollTimeout = responseWaitTime ? responseWaitTime : 15000;
+      longPollTimeout = longPollTimeout ? longPollTimeout : CONSTANTS.LONGPOLL_TIMEOUT;
       // Subscribing to the topic when the topic is not subscribed.
       if (
         responseTopic != undefined &&

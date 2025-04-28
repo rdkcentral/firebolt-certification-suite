@@ -2002,8 +2002,7 @@ Cypress.Commands.add('sendKeyPress', (key, delay) => {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
     params: { key: key, delay: delay },
   };
-  const keyCode = Array.isArray(key) ? key : [key];
-  const timeout = keyCode.length * delay * 1000 + 10000; // Calculate timeout based on key press sequence and delay
+  const timeout = (Array.isArray(key) ? key.length : 1) * delay * 1000 + 10000; // Calculate timeout based on key press sequence and delay
   cy.sendMessagetoPlatforms(requestMap, timeout).then((result) => {
     cy.log(`Sent key press: ${key} with delay: ${delay}.`);
   });
