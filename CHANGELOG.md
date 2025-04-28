@@ -1,3 +1,10 @@
+# [1.12.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.1...v1.12.0-dev.2) (2025-04-28)
+
+
+### Bug Fixes
+
+* change in the constants to support External SDK ([#406](https://github.com/rdkcentral/firebolt-certification-suite/issues/406)) ([dbc694a](https://github.com/rdkcentral/firebolt-certification-suite/commit/dbc694a74f95377f12f64ed40d2fd4c7a61a3f0e))
+
 # [1.12.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0...v1.12.0-dev.1) (2025-04-28)
 
 
