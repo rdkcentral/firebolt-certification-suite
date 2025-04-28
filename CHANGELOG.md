@@ -1,3 +1,10 @@
+# [1.12.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0...v1.12.0-dev.1) (2025-04-28)
+
+
+### Features
+
+* To update runInfo for AppAssurance ([#393](https://github.com/rdkcentral/firebolt-certification-suite/issues/393)) ([59e07a4](https://github.com/rdkcentral/firebolt-certification-suite/commit/59e07a45af3749e31a131f21e07a320b9a5ed78e))
+
 # [1.11.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0...v1.11.0) (2025-04-24)
 
 
