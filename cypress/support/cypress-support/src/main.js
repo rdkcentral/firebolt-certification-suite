@@ -238,7 +238,9 @@ export default function (module) {
    */
 
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap, responseWaitTime) => {
-    return cy.wrap(requestMap).then({ timeout: responseWaitTime + 10000 }, () => {
+    const validResponseWaitTime =
+      typeof responseWaitTime === 'number' && responseWaitTime > 0 ? responseWaitTime : 15000;
+    return cy.wrap(requestMap).then({ timeout: validResponseWaitTime + 10000 }, () => {
       return new Promise((resolve, reject) => {
         let responsePromise;
         const [moduleName, methodName] = requestMap.method.split('.');
@@ -342,7 +344,9 @@ export default function (module) {
     let overrideParams = {};
     let appId;
 
-    Cypress.env(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, CONSTANTS.SANITY_REPORT_LONGPOLL_TIMEOUT);
+    const sanityTimeout = UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, false)
+      ? UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT)
+      : CONSTANTS.SANITY_REPORT_LONGPOLL_TIMEOUT;
 
     // Iterating through the datatables and updating the values to additionalParams object.
     if (datatables) {
@@ -415,11 +419,14 @@ export default function (module) {
         });
       }
 
-      cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
+      cy.sendMessagetoApp(requestTopic, responseTopic, intent, sanityTimeout).then((response) => {
         cy.log('Response from Firebolt Implementation: ' + response);
 
         if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
-          assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+          assert(
+            false,
+            `Did not receive response in ${sanityTimeout}ms. at topic ${responseTopic}`
+          );
         } else {
           try {
             response = JSON.parse(response);
@@ -446,7 +453,6 @@ export default function (module) {
           }
 
           cy.generateAndPushReports(response.report);
-          Cypress.env(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, null);
         }
       });
     });
@@ -503,50 +509,50 @@ export default function (module) {
    * @example
    * cy.sendMessagetoApp('mac_appId_FCS',mac_appId_FCA,{"communicationMode": "SDK","action": "search"}, 1000)
    */
-  Cypress.Commands.add('sendMessagetoApp', async (requestTopic, responseTopic, intent) => {
-    logger.debug(
-      `Entering sendMessagetoApp() - cypress-support/src/main.js with params: requestTopic=${requestTopic}, responseTopic=${responseTopic}, intent=${JSON.stringify(intent)}`
-    );
+  Cypress.Commands.add(
+    'sendMessagetoApp',
+    async (requestTopic, responseTopic, intent, responseWaitTime) => {
+      logger.debug(
+        `Entering sendMessagetoApp() - cypress-support/src/main.js with params: requestTopic=${requestTopic}, responseTopic=${responseTopic}, intent=${JSON.stringify(intent)}`
+      );
 
-    const headers = { id: uuidv4() };
+      const headers = { id: uuidv4() };
 
-    // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
-    const longPollTimeout = UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, false)
-      ? UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT)
-      : CONSTANTS.LONGPOLL_TIMEOUT;
+      // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
+      const longPollTimeout = responseWaitTime ? responseWaitTime : 15000;
+      // Subscribing to the topic when the topic is not subscribed.
+      if (
+        responseTopic != undefined &&
+        !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
+      ) {
+        // Subscribe to topic and pass the results to the callback function
+        appTransport.subscribe(responseTopic, UTILS.subscribeResults);
+        UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
+      }
 
-    // Subscribing to the topic when the topic is not subscribed.
-    if (
-      responseTopic != undefined &&
-      !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
-    ) {
-      // Subscribe to topic and pass the results to the callback function
-      appTransport.subscribe(responseTopic, UTILS.subscribeResults);
-      UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
-    }
+      if (appTransport) {
+        // Publish the message on topic
+        appTransport.publish(requestTopic, JSON.stringify(intent), headers);
 
-    if (appTransport) {
-      // Publish the message on topic
-      appTransport.publish(requestTopic, JSON.stringify(intent), headers);
-
-      // Returns the response after polling when data is available in queue
-      return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
-        .LongPollQueue(headers.id, longPollTimeout)
-        .then((results) => {
-          if (results) {
-            // Response recieved from queue
-            logger.debug(`Response received from queue: ${JSON.stringify(results)}`);
-            return results;
-          } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
-            return true;
-          }
+        // Returns the response after polling when data is available in queue
+        return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
+          .LongPollQueue(headers.id, longPollTimeout)
+          .then((results) => {
+            if (results) {
+              // Response recieved from queue
+              logger.debug(`Response received from queue: ${JSON.stringify(results)}`);
+              return results;
+            } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
+              return true;
+            }
+          });
+      } else {
+        cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
+          assert(false, CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
         });
-    } else {
-      cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
-        assert(false, CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
-      });
+      }
     }
-  });
+  );
 
   /**
    * @module main
