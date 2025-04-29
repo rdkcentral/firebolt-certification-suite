@@ -114,7 +114,7 @@ function validateCapabilitiesInfo(method, validationTypeObject, apiOrEventObject
 // TODO: Planning to move it out of FCS and keep it in configModule
 function validateCapabilitiesSupported(method, validationTypeObject, apiOrEventObject) {
   const capabilityResponse = apiOrEventObject.apiResponse.result;
-  const capabilityParam = apiOrEventObject.params.value;
+  const capabilityParam = apiOrEventObject.params.capability || apiOrEventObject.params.value;
   const notSupportedCapabilitiesList = UTILS.getEnvVariable(
     CONSTANTS.NOT_SUPPORTED_CAPABILITIES_LIST
   );
