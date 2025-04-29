@@ -238,7 +238,6 @@ module.exports = {
   JWT: 'jwt',
   LABEL_TO_ENVMAP: 'labelToEnvMap',
   LAUNCHAPP: 'launchApp',
-  LABEL_TO_ENVMAP: 'labelToEnvMap',
   LATEST: 'latest',
   LEVEL_LIST: ['should', 'could'],
   LEVEL_MUST: ['must'],
