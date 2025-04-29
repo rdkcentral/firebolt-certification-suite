@@ -210,9 +210,19 @@ module.exports = async (on, config) => {
     checkFileExists(filePath) {
       return fs.existsSync(filePath);
     },
+    loadJSFile(filePath) {
+      try {
+        const resolvedPath = path.resolve(__dirname, '..', filePath);
+        return require(resolvedPath);
+      } catch (error) {
+        return null;
+      }
+    },
   });
 
   on('before:run', async () => {
+    logger.debug('Entering before:run in cypress/plugins/index.js');
+
     // Calling reportProcessor default function with instance of event
     const reportProcessor = importReportProcessor();
     reportProcessor.defaultMethod(eventEmitter);
@@ -235,7 +245,7 @@ module.exports = async (on, config) => {
       - generate the html report (TBD)
   */
   on('after:run', async (results) => {
-    logger.info('override after:run');
+    logger.debug('Entering after :run in cypress/plugins/index.js');
 
     const reportObj = {};
     const formatter = new Formatter();

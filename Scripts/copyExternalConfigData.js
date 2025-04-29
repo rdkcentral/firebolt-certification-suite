@@ -21,9 +21,18 @@ const logger = require('../cypress/support/Logger')('copyExternalConfigData.js')
 
 logger.info('Copying Config fixtures and Testcases into sdkResources/external');
 
+// Check which folder exists: 'resources' or 'Resources' in node_modules/configModule
+const CONFIG_RESOURCES_DIR = fs.existsSync(
+  path.join(__dirname, '..', 'node_modules', 'configModule', 'resources')
+)
+  ? path.join(__dirname, '..', 'node_modules', 'configModule', 'resources')
+  : path.join(__dirname, '..', 'node_modules', 'configModule', 'Resources');
+
 // Config for sdk resources folder
 const EXTERNAL_DIR = path.join(__dirname, '..', 'sdkResources', 'external');
 const CONFIG_DIR = path.join(__dirname, '..', 'node_modules', 'configModule', 'sdkResources');
+const DEFAULT_DIR = CONFIG_RESOURCES_DIR;
+const EXTERNAL_DEFAULT_DIR = path.join(__dirname, '..', 'resources', 'external');
 
 // Config for config.json
 const SOURCE_CONFIG_FILE = path.join(
@@ -60,7 +69,14 @@ function copyFiles(configDir, externalDir) {
   }
 }
 
-// Copy testCase files
+// Copy common resources
+if (fs.existsSync(DEFAULT_DIR)) {
+  copyFiles(DEFAULT_DIR, EXTERNAL_DEFAULT_DIR);
+} else {
+  logger.info('common resources are not available in configModule');
+}
+
+// Copy sdk resources
 if (fs.existsSync(CONFIG_DIR)) {
   copyFiles(CONFIG_DIR, EXTERNAL_DIR);
 } else {

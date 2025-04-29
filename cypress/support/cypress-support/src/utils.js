@@ -190,10 +190,18 @@ function getTopic(
 ) {
   let topic;
   let deviceMac = deviceIdentifier ? deviceIdentifier : getEnvVariable(CONSTANTS.DEVICE_MAC);
-  if (deviceMac.length <= 5 || !deviceMac || deviceMac == undefined) {
+  if (!deviceMac || deviceMac == undefined) {
     assert(
       false,
-      `Provided deviceMac ${deviceMac} is in improper format. Expected format : F046XXXXXXXX.`
+      'deviceMac was not provided. Please make sure to add this to your cypress.config.js file or in the env section of your cli arguments when running a test.'
+    );
+  }
+  // DeviceMac should be in proper format either XX:XX:XX:XX:XX:XX or XXXXXXXXXXXX
+  const deviceMacRegex = new RegExp(/^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$|^[0-9A-Fa-f]{12}$/);
+  if (!deviceMacRegex.test(deviceMac)) {
+    assert(
+      false,
+      `Provided deviceMac ${deviceMac} is in improper format. Expected format: XX:XX:XX:XX:XX:XX or XXXXXXXXXXXX.`
     );
   }
   // Remove colons from mac address if not removed
@@ -1205,6 +1213,23 @@ function applyOverrides(fireboltCallObject) {
 
 /**
  * @module utils
+ * @function addToEnvLabelMap
+ * @description Merges a given partial label-to-environment map into the existing LABEL_TO_ENVMAP stored in Cypress environment.
+ * @param {Object} partialMap - An object containing key-value pairs where the key is the label and the value is either a direct string value or a Cypress.env key.
+ * @example
+ * addToEnvLabelMap({
+ *   DEVICE: 'DEVICE_IP',
+ *   PARTNER: 'DEVICE_MODEL',
+ * });
+ */
+
+global.addToEnvLabelMap = (partialMap) => {
+  const existing = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP) || {};
+  Cypress.env(CONSTANTS.LABEL_TO_ENVMAP, { ...existing, ...partialMap });
+};
+
+/**
+ * @module utils
  * @function captureScreenshot
  * @description A function to capture the screenshot of the device screen.
  * @example
@@ -1271,4 +1296,5 @@ module.exports = {
   censorPubSubToken,
   applyOverrides,
   captureScreenshot,
+  addToEnvLabelMap,
 };
