@@ -1583,6 +1583,15 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                 }
               }
             });
+          } else {
+            cy.validateContent(
+              method,
+              context,
+              validationJsonPath,
+              contentObject,
+              validationType,
+              appId
+            );
           }
         } catch (error) {
           assert(false, `Unable to validate the response: ${error}`);
