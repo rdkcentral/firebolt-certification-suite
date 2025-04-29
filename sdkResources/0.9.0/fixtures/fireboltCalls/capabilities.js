@@ -66,10 +66,14 @@ exports.CAPABILITIES_VARIABLES = {
       capabilities: ['xrn:firebolt:capability:usergrant:acknowledgechallenge'],
     },
     INFO_GRANTS_STATE: { capabilities: ['xrn:firebolt:capability:grants:state'] },
-    SUPPORTED_USERGRANT_PINCHALLENGE: { capability: 'xrn:firebolt:capability:usergrant:pinchallenge' },
+    SUPPORTED_USERGRANT_PINCHALLENGE: {
+      capability: 'xrn:firebolt:capability:usergrant:pinchallenge',
+    },
     SUPPORTED_DEVICE_DISTRIBUTOR: { capability: 'xrn:firebolt:capability:device:distributor' },
     SUPPORTED_NETWORK_STATUS: { capability: 'xrn:firebolt:capability:network:status' },
-    SUPPORTED_LOCALIZATION_TIMEZONE: { capability: 'xrn:firebolt:capability:localization:time-zone' },
+    SUPPORTED_LOCALIZATION_TIMEZONE: {
+      capability: 'xrn:firebolt:capability:localization:time-zone',
+    },
     SUPPORTED_PRIVACY_SETTINGS: { capability: 'xrn:firebolt:capability:privacy:settings' },
     SUPPORTED_PROTOCOL_WIFI: { capability: 'xrn:firebolt:capability:protocol:wifi' },
     SUPPORTED_USERGRANT_ACKNOWLEDGECHALLENGE: {
@@ -363,7 +367,9 @@ exports.CAPABILITIES_VARIABLES = {
     },
     INFO_ACCOUNT_ID: { capabilities: ['xrn:firebolt:capability:account:id'] },
     INFO_ACCOUNT_UID: { capabilities: ['xrn:firebolt:capability:account:uid'] },
-    SUPPORTED_ADVERTISING_IDENTIFIER: { capability: 'xrn:firebolt:capability:advertising:identifier' },
+    SUPPORTED_ADVERTISING_IDENTIFIER: {
+      capability: 'xrn:firebolt:capability:advertising:identifier',
+    },
     SUPPORTED_ACCOUNT_ID: { capability: 'xrn:firebolt:capability:account:id' },
     SUPPORTED_ACCOUNT_UID: { capability: 'xrn:firebolt:capability:account:uid' },
     SUPPORTED_DISCOVERY_ENTITLEMENTS: {
@@ -425,7 +431,9 @@ exports.CAPABILITIES_VARIABLES = {
     SUPPORTED_DEVICE_UID: { capability: 'xrn:firebolt:capability:device:uid' },
     SUPPORTED_PROFILE_FLAGS: { capability: 'xrn:firebolt:capability:profile:flags' },
     SUPPORTED_APPROVE_PURCHASE: { capability: 'xrn:firebolt:capability:approve:purchase' },
-    SUPPORTED_LOCALIZATION_LOCATION: { capability: 'xrn:firebolt:capability:localization:location' },
+    SUPPORTED_LOCALIZATION_LOCATION: {
+      capability: 'xrn:firebolt:capability:localization:location',
+    },
     SUPPORTED_APPROVE_CONTENT: { capability: 'xrn:firebolt:capability:approve:content' },
     SUPPORTED_TOKEN_DEVICE: { capability: 'xrn:firebolt:capability:token:device' },
     SUPPORTED_TOKEN_PLATFORM: { capability: 'xrn:firebolt:capability:token:platform' },
@@ -483,14 +491,18 @@ exports.CAPABILITIES_VARIABLES = {
     SUPPORTED_ADVERTISING_CONFIGURATION: {
       capability: 'xrn:firebolt:capability:advertising:configuration',
     },
-    SUPPORTED_LOCALIZATION_LOCALITY: { capability: 'xrn:firebolt:capability:localization:locality' },
+    SUPPORTED_LOCALIZATION_LOCALITY: {
+      capability: 'xrn:firebolt:capability:localization:locality',
+    },
     SUPPORTED_LOCALIZATION_POSTALCODE: {
       capability: 'xrn:firebolt:capability:localization:postal-code',
     },
     SUPPORTED_LOCALIZATION_COUNTRYCODE: {
       capability: 'xrn:firebolt:capability:localization:country-code',
     },
-    SUPPORTED_LOCALIZATION_LANGUAGE: { capability: 'xrn:firebolt:capability:localization:language' },
+    SUPPORTED_LOCALIZATION_LANGUAGE: {
+      capability: 'xrn:firebolt:capability:localization:language',
+    },
     SUPPORTED_LOCALIZATION_LOCALE: { capability: 'xrn:firebolt:capability:localization:locale' },
     SUPPORTED_ACCESSIBILITY_CLOSEDCAPTIONS: {
       capability: 'xrn:firebolt:capability:accessibility:closedcaptions',
