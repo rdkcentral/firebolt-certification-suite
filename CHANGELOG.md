@@ -1,3 +1,10 @@
+# [1.12.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.2...v1.12.0-dev.3) (2025-04-29)
+
+
+### Bug Fixes
+
+* Added support to override fixture files ([#397](https://github.com/rdkcentral/firebolt-certification-suite/issues/397)) ([638710e](https://github.com/rdkcentral/firebolt-certification-suite/commit/638710e3a232a83b46b62baea7eace52ef299149))
+
 # [1.12.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.1...v1.12.0-dev.2) (2025-04-28)
 
 
