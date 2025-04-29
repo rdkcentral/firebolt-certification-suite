@@ -122,8 +122,6 @@ Given(
             });
           }
         }
-        // Cypress.env('startAdditionalServices', 'getReportData');
-        // cy.startAdditionalServices();
         // Calling the configModule function to fetch the report data
         cy.callConfigModule('getReportData').then(() => {
           cy.updateRunInfo();
