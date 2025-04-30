@@ -319,8 +319,8 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
 Given(/I search text '(.+)' is found in the '(.+)' log/, (logKey, fileIdentifier) => {
   const fileName = [`/opt/logs/${fileIdentifier}.log`];
   const logPattern = [logKey];
-
-  cy.findLogPattern(logPattern, fileName).then((response) => {
+  const params = { logPattern, fileName };
+  cy.findLogPattern(params).then((response) => {
     if (response.error) {
       fireLog.assert(false, `Search command failed: ${response.error}`);
       return;
