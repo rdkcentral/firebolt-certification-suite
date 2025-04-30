@@ -240,11 +240,11 @@ export default function (module) {
    */
 
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap, responseWaitTime) => {
-    const validResponseWaitTime =
+    const requestTimeout =
       typeof responseWaitTime === 'number' && responseWaitTime > 0
         ? responseWaitTime
         : CONSTANTS.LONGPOLL_TIMEOUT;
-    return cy.wrap(requestMap).then({ timeout: validResponseWaitTime + 10000 }, () => {
+    return cy.wrap(requestMap).then({ timeout: requestTimeout + 10000 }, () => {
       return new Promise((resolve, reject) => {
         let responsePromise;
         const [moduleName, methodName] = requestMap.method.split('.');
@@ -427,10 +427,7 @@ export default function (module) {
         cy.log('Response from Firebolt Implementation: ' + response);
 
         if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
-          assert(
-            false,
-            `Did not receive response in ${sanityTimeout}ms. at topic ${responseTopic}`
-          );
+          fireLog.fail(`Did not receive response in ${sanityTimeout}ms. at topic ${responseTopic}`);
         } else {
           try {
             response = JSON.parse(response);
@@ -553,7 +550,7 @@ export default function (module) {
           });
       } else {
         cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
-          assert(false, CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
+          fireLog.fail(CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
         });
       }
     }
