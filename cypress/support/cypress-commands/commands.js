@@ -303,7 +303,7 @@ Cypress.Commands.add('updateRunInfo', () => {
               return false;
             }
             const deviceMac = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC).replace(/:/g, '');
-            const deviceMacJson = `./cypress/fixtures/devices/${deviceMac}.json`;
+            const deviceMacJson = `./cypress/fixtures/external/devices/${deviceMac}.json`;
             const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             // Check if mac json file exists
             cy.task('checkFileExists', deviceMacJson)
