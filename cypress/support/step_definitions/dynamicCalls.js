@@ -205,11 +205,12 @@ Given(/'(.+)' invokes(?: the '(.+)')? get API$/, async (appId, sdk) => {
  */
 Given(/'(.+)' registers for(?: the '(.+)')? event$/, async (appId, sdk) => {
   cy.getRuntimeFireboltCallObject().then((fireboltCallObject) => {
+    fireboltCallObject = UTILS.resolveRecursiveValues(fireboltCallObject);
     let event;
     if (UTILS.fireboltCallObjectHasField(fireboltCallObject, CONSTANTS.EVENT)) {
-      event = UTILS.resolveRecursiveValues(fireboltCallObject.event);
+      event = fireboltCallObject.event;
     }
-    const eventParams = {};
+    const eventParams = fireboltCallObject.eventParams || {};
     const context = {};
     appId = UTILS.fetchAppIdentifierFromEnv(appId);
     let action = CONSTANTS.ACTION_CORE.toLowerCase();

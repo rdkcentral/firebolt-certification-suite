@@ -66,6 +66,4 @@
 | fileIdentifier| The identifier for the specific log file to search within. If not provided, the search will be conducted across all relevant log files. |
 
 ### Examples:
-* `I search text 'call returning' is found in the 'wpeframework' log`
-* `I search text 'call returning' is found in the 'ripple' log`
-* `I search text 'call returning' is found in the 'sky-message' log`
+* `I search text 'call returning' is found in the 'logFile' log`

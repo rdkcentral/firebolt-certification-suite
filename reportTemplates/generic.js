@@ -58,7 +58,7 @@ showAll = () => {
 attachScreenshotLinks = () => {
   // Define regular expression to match the img URL pattern
   const imgPattern = /Screenshot:\s*(https:\/\/[^\s]+\.jpg)/g;
-  const urlPattern = /(https:\/\/[^\s]+)/g; // For general URLs
+  const urlPattern = /(https:\/\/[^\s]+\.jpg)/g; // For general URLs
   // Get all the div elements in the document
   const divElements = document.querySelectorAll('div');
 

@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
+import UTILS, { fireLog, getEnvVariable, addToEnvLabelMap } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
@@ -95,19 +95,20 @@ Cypress.Commands.add(
           if (Array.isArray(params)) {
             params.forEach((item) => {
               const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
-
               if (containEnv) {
                 const envParam = containEnv.split('-')[1];
-                item[envParam] = Cypress.env(envParam);
+                item[envParam] = UTILS.getEnvVariable(envParam);
                 delete item[containEnv];
               }
             });
           } else {
-            const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
-            if (containEnv) {
-              const envParam = containEnv.split('-')[1];
-              params[envParam] = Cypress.env(envParam);
-              delete params[containEnv];
+            const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
+            if (envList.length > 0) {
+              envList.forEach((item) => {
+                const envParam = item.split('-')[1];
+                params[envParam] = UTILS.getEnvVariable(envParam);
+                delete params[item];
+              });
             }
           }
 
@@ -246,6 +247,7 @@ Cypress.Commands.add('getSdkVersion', () => {
 Cypress.Commands.add('updateRunInfo', () => {
   const reportEnvFile = './reportEnv.json';
   const tempReportEnvFile = './tempReportEnv.json';
+  let deviceId = '';
   let deviceModel = '';
   let deviceDistributor = '';
   let devicePlatform = '';
@@ -307,6 +309,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                 if (exists) {
                   // File exists, read the file
                   return cy.readFile(deviceMacJson).then((macJson) => {
+                    deviceId = macJson?.DEVICEID ?? '';
                     deviceModel = macJson?.DEVICE_MODEL ?? '';
                     deviceDistributor = macJson?.DEVICE_DISTRIBUTOR ?? '';
                     devicePlatform = macJson?.DEVICE_PLATFORM ?? '';
@@ -330,6 +333,15 @@ Cypress.Commands.add('updateRunInfo', () => {
                   CONSTANTS.DEVICE_DISTRIBUTOR,
                   CONSTANTS.ACTION_CORE,
                   CONSTANTS.ENV_DEVICE_DISTRIBUTOR
+                );
+              })
+              .then(() => delay(2000))
+              .then(() => {
+                return setEnvRunInfo(
+                  deviceId,
+                  CONSTANTS.DEVICE_ID,
+                  CONSTANTS.ACTION_CORE,
+                  CONSTANTS.ENV_DEVICE_ID
                 );
               })
               .then(() => delay(2000))
@@ -360,7 +372,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                       reportEnv.customData.data &&
                       reportEnv.customData.data.length > 0
                     ) {
-                      const labelToEnvMap = {
+                      addToEnvLabelMap({
                         [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                         [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
                         [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
@@ -369,14 +381,31 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
                         [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                         [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
-                      };
-                      reportEnv.customData.data.forEach((item) => {
-                        if (item.label === CONSTANTS.PRODUCT) {
-                          item.value = configModuleConst.PRODUCT
-                            ? configModuleConst.PRODUCT
-                            : 'N/A';
-                        } else if (labelToEnvMap[item.label]) {
-                          item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+                        [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
+                      });
+                      const envLabelMap = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP);
+
+                      Object.keys(envLabelMap).forEach((label) => {
+                        const value = envLabelMap[label];
+
+                        const existingItem = reportEnv.customData.data.find(
+                          (item) => item.label === label
+                        );
+                        if (existingItem) {
+                          // Update existing value
+                          if (label === CONSTANTS.PRODUCT) {
+                            existingItem.value = configModuleConst.PRODUCT || 'N/A';
+                          } else {
+                            // Use Cypress.env only if value is supposed to be a key
+                            const envValue = Cypress.env(value);
+                            existingItem.value = envValue || value || 'N/A';
+                          }
+                        } else {
+                          // Label not found — add it with the actual value directly
+                          reportEnv.customData.data.push({
+                            label: label,
+                            value: value || 'N/A',
+                          });
                         }
                       });
                     }
@@ -454,7 +483,8 @@ Cypress.Commands.add('getDeviceDataFromFirstPartyApp', (method, param, action) =
         throw 'Obtained response is null|undefined';
       }
     } catch (error) {
-      fireLog.info('Failed to fetch device.version', error);
+      fireLog.info('Failed to do device call', error);
+      return cy.wrap('Not Available');
     }
   });
 });
@@ -832,17 +862,8 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
     });
-  }
-  // Initiating the Interaction service to listening for interaction logs when interactionsMetrics is set to true in beforeOperation object.
-  else if (
-    beforeOperation.hasOwnProperty(CONSTANTS.INTERACTIONS_METRICS) &&
-    beforeOperation.interactionsMetrics === true
-  ) {
-    cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
-      if (response) {
-        Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
-      }
-    });
+  } else {
+    cy.startAdditionalServices(beforeOperation);
   }
 });
 
@@ -1406,7 +1427,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
     // cy.then() to ensure each Cypress command is properly awaited before return
     cy.then(() => {
-      fireLog.info(`======Beginning of the ${scenario} validation======`);
+      fireLog.info(`====== Beginning of the ${scenario} validation ======`);
       switch (scenario) {
         case CONSTANTS.REGEX:
           cy.regExValidation(
@@ -1460,7 +1481,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
           break;
       }
     }).then(() => {
-      fireLog.info(`=====Ending of the ${scenario} validation=====`);
+      fireLog.info(`====== Ending of the ${scenario} validation ======`);
     });
   };
 
@@ -1579,15 +1600,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                 }
               }
             });
-          } else {
-            cy.validateContent(
-              method,
-              context,
-              validationJsonPath,
-              contentObject,
-              validationType,
-              appId
-            );
           }
         } catch (error) {
           assert(false, `Unable to validate the response: ${error}`);
@@ -1680,45 +1692,6 @@ Cypress.Commands.add('getRuntimeFireboltCallObject', () => {
       `The firebolt call object was not found in the runtime environment variable. Please ensure it is initialized in the step "the environment has been set up" with the appropriate firebolt object key. Refer here - ${CONSTANTS.FIREBOLT_OBJECT_DOC_PATH}`
     );
   }
-});
-
-/**
- * @module commands
- * @function startOrStopInteractionsService
- * @description To start or stop firebolt interactions collection service in device by passing appropriate intent to designated handler
- * @param {String} action - initiated or stopped
- * @example
- * cy.startOrStopInteractionsService('initiated)
- * cy.startOrStopInteractionsService('stopped')
- */
-Cypress.Commands.add('startOrStopInteractionsService', (action) => {
-  const requestMap = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETFIREBOLTINTERACTIONSHANDLER,
-    params: {
-      trigger: action == CONSTANTS.INITIATED ? CONSTANTS.START : CONSTANTS.STOP,
-      optionalParams: '',
-    },
-    task: CONSTANTS.TASK.FIREBOLTINTERACTIONSHANDLER,
-  };
-  fireLog.info(CONSTANTS.REQUEST_MAP_INTERACTIONS_SERVICE + JSON.stringify(requestMap));
-  // Sending message to the platform to call designated handler
-  cy.sendMessagetoPlatforms(requestMap).then((result) => {
-    if (result?.success) {
-      fireLog
-        .assert(true, `Firebolt interactions collection service ${action} successfully`)
-        .then(() => {
-          return true;
-        });
-    } else {
-      fireLog
-        .info(
-          `Firebolt interactions collection service with action as ${action} has failed with error ${JSON.stringify(result.message)}`
-        )
-        .then(() => {
-          return false;
-        });
-    }
-  });
 });
 
 /**
@@ -1955,8 +1928,6 @@ Cypress.Commands.add('softAssertAll', () => jsonAssertion.softAssertAll());
  * cy.clearSoftAssertArray()
  */
 Cypress.Commands.add('clearSoftAssertArray', () => {
-  cy.log(`Clearing soft assertion array`);
-
   // Reset relevant properties
   jsonAssertion.softAssertJson = null;
   jsonAssertion.softAssertCount = 0;
@@ -2014,6 +1985,66 @@ const shouldPerformValidation = (key, value) => {
 
 /**
  * @module commands
+ * @function softAssertFormat
+ * @description soft assertion to check if the value matches the regex format
+ * @example
+ * cy.softAssertFormat(value, regexFormat, message)
+ */
+Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
+  if (regex.test(value)) {
+    fireLog.info(message);
+  } else {
+    jsonAssertion.softAssert(false, true, message);
+    Cypress.log({
+      name: 'Soft assertion error',
+      displayName: 'softAssertStringFormat',
+      message: 'Error: ' + message,
+    });
+  }
+});
+
+/**
+ * @module commands
+ * @function sendKeyPress
+ * @description Command to send key press to the platform.
+ * @param {String} key - The key to be pressed.
+ * @param {Number} delay - The delay in seconds before sending the key press.
+ * @example
+ * cy.sendKeyPress('right')
+ * cy.sendKeyPress('right', 10)
+ */
+Cypress.Commands.add('sendKeyPress', (key, delay) => {
+  delay = delay ? delay : 5;
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
+    params: { key: key, delay: delay },
+  };
+
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    cy.log(`Sent key press: ${key} with delay: ${delay}.`);
+  });
+});
+
+/**
+ * @module commands
+ * @function sendVoiceCommand
+ * @description To send a voice command to the platform
+ * @param {String} voiceCommand - The transcription (voice command) to be sent.
+ * @example
+ * cy.sendVoiceCommand('Open settings');
+ */
+Cypress.Commands.add('sendVoiceCommand', (voiceCommand) => {
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDVOICECOMMAND,
+    params: voiceCommand,
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    return response;
+  });
+});
+
+/**
+ * @module commands
  * @function findLogPattern
  * @description Sends a request to search for specific log patterns
  * @example
@@ -2024,7 +2055,7 @@ Cypress.Commands.add('findLogPattern', (logKey, fileName) => {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FINDLOGPATTERN,
     params: {
       logPattern: logKey,
-      fileName: fileName
+      fileName: fileName,
     },
   };
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
