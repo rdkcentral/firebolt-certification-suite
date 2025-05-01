@@ -1,3 +1,10 @@
+# [1.12.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.3...v1.12.0-dev.4) (2025-05-01)
+
+
+### Features
+
+* Add support for certification in reporting plugin ([#409](https://github.com/rdkcentral/firebolt-certification-suite/issues/409)) ([f1d3082](https://github.com/rdkcentral/firebolt-certification-suite/commit/f1d3082fe9a23f4f47214b8af67d81bd769d6812))
+
 # [1.12.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.2...v1.12.0-dev.3) (2025-04-29)
 
 
