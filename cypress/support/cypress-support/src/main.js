@@ -241,7 +241,7 @@ export default function (module) {
 
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap, responseWaitTime) => {
     // The requestTimeout is calculated to ensure a valid timeout value is passed to the wrap function.
-    // However, the responseWaitTime is undefined, it is handled by the transport layer.
+    // However, if the responseWaitTime is undefined, it is handled by the transport layer.
     const requestTimeout =
       typeof responseWaitTime === 'number' && responseWaitTime > 0
         ? responseWaitTime
