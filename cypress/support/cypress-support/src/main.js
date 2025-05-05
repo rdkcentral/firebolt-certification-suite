@@ -77,19 +77,19 @@ export default function (module) {
     } else {
       cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
     }
-    // Merge fireboltCalls
-    const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
-    const v2FireboltCallsData = _.merge(
-      {},
-      internalV2FireboltCallsData,
-      externalV2FireboltCallsData
-    );
+    // Merge fireboltCalls - Commented temporarily. Moved to beforeEach
+    // const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
+    // const v2FireboltCallsData = _.merge(
+    //   {},
+    //   internalV2FireboltCallsData,
+    //   externalV2FireboltCallsData
+    // );
 
-    cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
-      (mergedFireboltCalls) => {
-        Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
-      }
-    );
+    // cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
+    //   (mergedFireboltCalls) => {
+    //     Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
+    //   }
+    // );
 
     // Merge fireboltMocks
     const v1FireboltMockData = UTILS.getEnvVariable('fireboltMocksJson');
@@ -112,6 +112,20 @@ export default function (module) {
     cy.getBeforeOperationObject();
     cy.initiatePerformanceMetrics();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+
+    // Merge fireboltCalls - Temporary fix to populate env variable between steps
+    const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
+    const v2FireboltCallsData = _.merge(
+      {},
+      internalV2FireboltCallsData,
+      externalV2FireboltCallsData
+    );
+
+    cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
+      (mergedFireboltCalls) => {
+        Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
+      }
+    );
   });
 
   /**
@@ -224,7 +238,7 @@ export default function (module) {
    */
 
   Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
-    return cy.wrap(requestMap, { timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT }).then(() => {
+    return cy.wrap(requestMap, { timeout: 75000 }).then({ timeout: 75000 }, () => {
       return new Promise((resolve, reject) => {
         let responsePromise;
         const [moduleName, methodName] = requestMap.method.split('.');
@@ -565,6 +579,33 @@ export default function (module) {
       );
     }
   });
+
+  /**
+   * @module commands
+   * @function callConfigModule
+   * @description Check the configModule for the function and call it with the params.
+   * @param {String} methodName - Name of the function to be called from the config module.
+   * @param {Array} params=[] - Optional array of parameters to pass to the method.
+   * @param {string} moduleName - Name of the module from which method has to be retrieved,by default additionalServices.
+   * @example
+   * cy.callConfigModule('methodName', ['arg1', 'arg2'], 'moduleName');
+   */
+
+  Cypress.Commands.add(
+    'callConfigModule',
+    (methodName, params = [], moduleName = 'additionalServices') => {
+      console.log(`Calling "${methodName}" from configModule.${moduleName} with params:`, params);
+
+      return cy.then(() => {
+        const configFunction = module?.[moduleName]?.[methodName];
+        if (typeof configFunction !== 'function') {
+          console.log(`${moduleName}.${methodName} not found in the config module.`);
+          return null;
+        }
+        return configFunction(...params);
+      });
+    }
+  );
 
   /**
    * @module customValidation

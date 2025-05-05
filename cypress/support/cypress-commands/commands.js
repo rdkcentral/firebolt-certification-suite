@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
+import UTILS, { fireLog, getEnvVariable, addToEnvLabelMap } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
@@ -95,19 +95,20 @@ Cypress.Commands.add(
           if (Array.isArray(params)) {
             params.forEach((item) => {
               const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
-
               if (containEnv) {
                 const envParam = containEnv.split('-')[1];
-                item[envParam] = Cypress.env(envParam);
+                item[envParam] = UTILS.getEnvVariable(envParam);
                 delete item[containEnv];
               }
             });
           } else {
-            const containEnv = Object.keys(params).find((key) => key.includes('CYPRESSENV'));
-            if (containEnv) {
-              const envParam = containEnv.split('-')[1];
-              params[envParam] = Cypress.env(envParam);
-              delete params[containEnv];
+            const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
+            if (envList.length > 0) {
+              envList.forEach((item) => {
+                const envParam = item.split('-')[1];
+                params[envParam] = UTILS.getEnvVariable(envParam);
+                delete params[item];
+              });
             }
           }
 
@@ -371,7 +372,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                       reportEnv.customData.data &&
                       reportEnv.customData.data.length > 0
                     ) {
-                      const labelToEnvMap = {
+                      addToEnvLabelMap({
                         [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                         [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
                         [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
@@ -381,14 +382,30 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                         [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
                         [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
-                      };
-                      reportEnv.customData.data.forEach((item) => {
-                        if (item.label === CONSTANTS.PRODUCT) {
-                          item.value = configModuleConst.PRODUCT
-                            ? configModuleConst.PRODUCT
-                            : 'N/A';
-                        } else if (labelToEnvMap[item.label]) {
-                          item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+                      });
+                      const envLabelMap = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP);
+
+                      Object.keys(envLabelMap).forEach((label) => {
+                        const value = envLabelMap[label];
+
+                        const existingItem = reportEnv.customData.data.find(
+                          (item) => item.label === label
+                        );
+                        if (existingItem) {
+                          // Update existing value
+                          if (label === CONSTANTS.PRODUCT) {
+                            existingItem.value = configModuleConst.PRODUCT || 'N/A';
+                          } else {
+                            // Use Cypress.env only if value is supposed to be a key
+                            const envValue = Cypress.env(value);
+                            existingItem.value = envValue || value || 'N/A';
+                          }
+                        } else {
+                          // Label not found — add it with the actual value directly
+                          reportEnv.customData.data.push({
+                            label: label,
+                            value: value || 'N/A',
+                          });
                         }
                       });
                     }
@@ -466,7 +483,8 @@ Cypress.Commands.add('getDeviceDataFromFirstPartyApp', (method, param, action) =
         throw 'Obtained response is null|undefined';
       }
     } catch (error) {
-      fireLog.info('Failed to fetch device.version', error);
+      fireLog.info('Failed to do device call', error);
+      return cy.wrap('Not Available');
     }
   });
 });
@@ -1964,6 +1982,26 @@ const shouldPerformValidation = (key, value) => {
 
   return true;
 };
+
+/**
+ * @module commands
+ * @function softAssertFormat
+ * @description soft assertion to check if the value matches the regex format
+ * @example
+ * cy.softAssertFormat(value, regexFormat, message)
+ */
+Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
+  if (regex.test(value)) {
+    fireLog.info(message);
+  } else {
+    jsonAssertion.softAssert(false, true, message);
+    Cypress.log({
+      name: 'Soft assertion error',
+      displayName: 'softAssertStringFormat',
+      message: 'Error: ' + message,
+    });
+  }
+});
 
 /**
  * @module commands

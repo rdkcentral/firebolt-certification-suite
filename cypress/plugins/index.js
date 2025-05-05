@@ -210,6 +210,14 @@ module.exports = async (on, config) => {
     checkFileExists(filePath) {
       return fs.existsSync(filePath);
     },
+    loadJSFile(filePath) {
+      try {
+        const resolvedPath = path.resolve(__dirname, '..', filePath);
+        return require(resolvedPath);
+      } catch (error) {
+        return null;
+      }
+    },
   });
 
   on('before:run', async () => {
@@ -248,6 +256,7 @@ module.exports = async (on, config) => {
     let suiteName = 'cucumber' + '_' + timestamp;
     let jobId;
     let elk = false;
+    let certification = false;
 
     // Creating uuid folder under reports
     if (results.config.env.jobId) {
@@ -258,6 +267,11 @@ module.exports = async (on, config) => {
     // Send elk variable to report processor if env variable is set to true
     if (results.config.env.elk) {
       elk = results.config.env.elk;
+    }
+
+    // Send certification variable to report properties if env variable is set to true
+    if (results.config.env.certification) {
+      certification = results.config.env.certification;
     }
 
     if (!fs.existsSync(filePath)) {
@@ -322,6 +336,7 @@ module.exports = async (on, config) => {
           }
           reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
           reportProperties.customReportData = customReportData;
+          reportProperties.certification = certification;
           // Add the report to the reportObj
           if (reportType === CONSTANTS.CUCUMBER) {
             reportObj.cucumberReport = jsonReport;
