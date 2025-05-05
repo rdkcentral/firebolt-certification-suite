@@ -99,6 +99,7 @@ module.exports = {
   DEVICE_MAC_UNAVAILABLE: 'Device MAC unavailable',
   DEVICE_RESOLUTION: 'DEVICERESOLUTION',
   DEVICE_SCREENRESOLUTION: 'device.screenResolution',
+  DEVICE_VERSION_CALL_ENABLED: 'deviceVersionCallEnable',
   DEVICE_VERSION: 'device.version',
   DEVICE_MODEL: 'device.model',
   DEVICE_DISTRIBUTOR: 'device.distributor',
