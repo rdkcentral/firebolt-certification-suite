@@ -1,3 +1,10 @@
+# [1.12.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.4...v1.12.0-dev.5) (2025-05-05)
+
+
+### Bug Fixes
+
+* bug fix for content validation and testcase param data fix  ([#408](https://github.com/rdkcentral/firebolt-certification-suite/issues/408)) ([4bdf693](https://github.com/rdkcentral/firebolt-certification-suite/commit/4bdf6935c43bdf1f27f8a69444775e2e929c17b6))
+
 # [1.12.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.3...v1.12.0-dev.4) (2025-05-01)
 
 
