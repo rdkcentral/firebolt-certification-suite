@@ -1,3 +1,10 @@
+# [1.12.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.5...v1.12.0-dev.6) (2025-05-05)
+
+
+### Bug Fixes
+
+* run.js doesn't handle reports correctly when using wildcards ([#410](https://github.com/rdkcentral/firebolt-certification-suite/issues/410)) ([c539180](https://github.com/rdkcentral/firebolt-certification-suite/commit/c5391803c579a7fc892ee8452a36f3c6c806b459))
+
 # [1.12.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.4...v1.12.0-dev.5) (2025-05-05)
 
 
