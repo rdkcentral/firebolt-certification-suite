@@ -231,6 +231,7 @@ module.exports = {
   JSON_FILE_EXTENSION: '_CoreSuiteReport.json',
   JWT: 'jwt',
   LAUNCHAPP: 'launchApp',
+  LABEL_TO_ENVMAP: 'labelToEnvMap',
   LATEST: 'latest',
   LEVEL_LIST: ['should', 'could'],
   LEVEL_MUST: ['must'],
@@ -440,7 +441,7 @@ module.exports = {
     FIREBOLTMOCKS: 'fireboltMocks',
     SET_RESPONSE_JSON: 'setResponseJson',
   },
-  SUPPORTED_SDK: ['Firebolt'],
+  SUPPORTED_SDK: 'supportedSDK',
   TASK: {
     CALLLIFECYCLE: 'callLifecycle',
     CALLMETHOD: 'callMethod',
