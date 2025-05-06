@@ -1,3 +1,10 @@
+# [1.12.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.7...v1.12.0-dev.8) (2025-05-06)
+
+
+### Bug Fixes
+
+* capabilities TCs fix ([#407](https://github.com/rdkcentral/firebolt-certification-suite/issues/407)) ([f097a01](https://github.com/rdkcentral/firebolt-certification-suite/commit/f097a01a5751a7af8db03694032053e8a44ea783))
+
 # [1.12.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.6...v1.12.0-dev.7) (2025-05-06)
 
 
