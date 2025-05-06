@@ -583,6 +583,33 @@ export default function (module) {
   });
 
   /**
+   * @module commands
+   * @function callConfigModule
+   * @description Check the configModule for the function and call it with the params.
+   * @param {String} methodName - Name of the function to be called from the config module.
+   * @param {Array} params=[] - Optional array of parameters to pass to the method.
+   * @param {string} moduleName - Name of the module from which method has to be retrieved,by default additionalServices.
+   * @example
+   * cy.callConfigModule('methodName', ['arg1', 'arg2'], 'moduleName');
+   */
+
+  Cypress.Commands.add(
+    'callConfigModule',
+    (methodName, params = [], moduleName = 'additionalServices') => {
+      console.log(`Calling "${methodName}" from configModule.${moduleName} with params:`, params);
+
+      return cy.then(() => {
+        const configFunction = module?.[moduleName]?.[methodName];
+        if (typeof configFunction !== 'function') {
+          console.log(`${moduleName}.${methodName} not found in the config module.`);
+          return null;
+        }
+        return configFunction(...params);
+      });
+    }
+  );
+
+  /**
    * @module customValidation
    * @function customValidation
    * @description Command to execute the custom validations in configModule

@@ -131,7 +131,7 @@ function modifyParams(params) {
 function isCombinedTestRun(params) {
   const specValueMatch = params.match(/--spec\s+([^ ]*)/);
   const specValue = specValueMatch ? specValueMatch[1] : '';
-  return specValue === '*' || specValue.includes(',');
+  return specValue.includes('*') || specValue.includes(',');
 }
 
 const isCombinedTest = isCombinedTestRun(params);
