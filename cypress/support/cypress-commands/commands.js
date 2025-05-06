@@ -232,9 +232,9 @@ Cypress.Commands.add('getSdkVersion', () => {
                   /"/g,
                   ''
                 );
-                if (!Cypress.env(CONSTANTS.ENV_SDK_VERSION)) {
-                  Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
-                }
+              if (!Cypress.env(CONSTANTS.ENV_SDK_VERSION)) {
+                Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+              }
             }
           });
         } else {
