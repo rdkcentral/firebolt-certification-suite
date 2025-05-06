@@ -1,3 +1,11 @@
+# [1.12.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.6...v1.12.0-dev.7) (2025-05-06)
+
+
+### Features
+
+* Auto-detect action ([#414](https://github.com/rdkcentral/firebolt-certification-suite/issues/414)) ([6d33510](https://github.com/rdkcentral/firebolt-certification-suite/commit/6d33510c7ee02918f595b633b243c3d6018ca367))
+* Option to skip device.version call ([#413](https://github.com/rdkcentral/firebolt-certification-suite/issues/413)) ([91124b5](https://github.com/rdkcentral/firebolt-certification-suite/commit/91124b5a734a90fb5902c3480dc10f803c8563f6))
+
 # [1.12.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.5...v1.12.0-dev.6) (2025-05-05)
 
 
