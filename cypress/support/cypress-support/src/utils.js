@@ -1265,6 +1265,29 @@ function captureScreenshot() {
   }
 }
 
+/**
+ * Determines the SDK action type based on the feature file name
+ * from the current test's title path.
+ *
+ * @param {Object} testRunnable - The current test context from Cypress (e.g., cy.state("runnable")).
+ * @returns {string|null} The action type: "CORE", "MANAGE", "DISCOVERY", or null if no match is found.
+ */
+function determineActionFromFeatureFile(testRunnable) {
+  const testTitlePath = testRunnable.titlePath();
+  const featureFile = testTitlePath[0] || '';
+
+  if (/Firebolt Certification Manage-SDK validation/i.test(featureFile)) {
+    console.log("Matched Manage-SDK suite. Action: 'MANAGE'");
+    return 'MANAGE';
+  } else if (/Firebolt Certification Discovery-SDK validation/i.test(featureFile)) {
+    console.log("Matched Discovery-SDK suite. Action: 'DISCOVERY'");
+    return 'DISCOVERY';
+  }
+
+  console.log('Return default Action: CORE');
+  return 'CORE';
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -1297,4 +1320,5 @@ module.exports = {
   applyOverrides,
   captureScreenshot,
   addToEnvLabelMap,
+  determineActionFromFeatureFile,
 };
