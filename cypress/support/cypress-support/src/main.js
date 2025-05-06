@@ -373,7 +373,9 @@ export default function (module) {
     }
 
     // Overriding default value for action, if input is not there from feature file or cli.
-    const action = CONSTANTS.ACTION_CORE; // default to CORE
+    const testRunnable = cy.state('runnable');
+    const action = UTILS.determineActionFromFeatureFile(testRunnable);
+
     if (!additionalParams[CONSTANTS.ACTION] && !UTILS.getEnvVariable(CONSTANTS.ACTION, false)) {
       additionalParams[CONSTANTS.ACTION] = action;
     } else if (
