@@ -183,6 +183,7 @@ function run() {
     if (code !== 0) {
       console.error(`Cypress process exited with code ${code}`);
     }
+    process.exit(code);
   });
 }
 
@@ -204,6 +205,7 @@ function open() {
     if (code !== 0) {
       console.error(`Cypress process exited with code ${code}`);
     }
+    process.exit(code);
   });
 }
 
