@@ -1,3 +1,10 @@
+# [1.12.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.9...v1.12.0-dev.10) (2025-05-07)
+
+
+### Features
+
+* Propagate cypress exit code ([#415](https://github.com/rdkcentral/firebolt-certification-suite/issues/415)) ([afb4c09](https://github.com/rdkcentral/firebolt-certification-suite/commit/afb4c097f10f2c2f6b3043b0f89ad6522745c654))
+
 # [1.12.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.8...v1.12.0-dev.9) (2025-05-07)
 
 
