@@ -25,7 +25,7 @@ export default class Transport {
     this.fireboltInvoker = new FireboltInvoker();
   }
 
-  async sendMessage(messageObject) {
+  async sendMessage(messageObject, responseWaitTime) {
     logger.info(`Printing the message object: ${JSON.stringify(messageObject)}`, `sendMessage`);
     if (this.isFireboltSDK(messageObject)) {
       if (!messageObject.action) {
@@ -40,6 +40,7 @@ export default class Transport {
       return methodResponse;
     } else if (this.isMTC(messageObject)) {
       // Object contains "transport" and "options" fields, consider it as MTC call.
+      messageObject.options.timeout = responseWaitTime;
       const transportClient = await modularTransportClient(messageObject.transport, {
         ...messageObject.options,
       });
