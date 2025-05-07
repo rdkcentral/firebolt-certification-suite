@@ -122,7 +122,10 @@ Given(
             });
           }
         }
-        cy.updateRunInfo();
+        // Calling the configModule function to fetch the report data
+        cy.callConfigModule('getReportData').then(() => {
+          cy.updateRunInfo();
+        });
       } catch (error) {
         cy.log(
           `Following error occurred while trying to fetch device details dynamically: ${error}`

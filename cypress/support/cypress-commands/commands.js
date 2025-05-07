@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS, { fireLog, getEnvVariable } from '../cypress-support/src/utils';
+import UTILS, { fireLog, getEnvVariable, addToEnvLabelMap } from '../cypress-support/src/utils';
 const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
@@ -180,63 +180,69 @@ Cypress.Commands.add('getSdkVersion', () => {
       .then((latestSDKversion) => {
         // Calling device.version API
         cy.log(`Call from app: ${appId} - method: ${CONSTANTS.DEVICE_VERSION} params: {}`);
-        cy.getDeviceDataFromThirdPartyApp(
-          CONSTANTS.DEVICE_VERSION,
-          {},
-          CONSTANTS.ACTION_CORE.toLowerCase()
-        ).then((response) => {
-          cy.log(`Response from app: ${appId} - ${JSON.stringify(response)}`);
-          // If the response is invalid, assign the latest SDK version to the environment variable.
-          if (response?.result?.api?.readable && response?.result.sdk?.readable) {
-            // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
-            // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
-            // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
-            const deviceSDKversionJson =
-              UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
-                ? response.result.api
-                : response.result.sdk;
-            const readableSDKVersion = deviceSDKversionJson.readable;
+        if (UTILS.getEnvVariable(CONSTANTS.DEVICE_VERSION_CALL_ENABLED, true)) {
+          cy.getDeviceDataFromThirdPartyApp(
+            CONSTANTS.DEVICE_VERSION,
+            {},
+            CONSTANTS.ACTION_CORE.toLowerCase()
+          ).then((response) => {
+            cy.log(`Response from app: ${appId} - ${JSON.stringify(response)}`);
+            // If the response is invalid, assign the latest SDK version to the environment variable.
+            if (response?.result?.api?.readable && response?.result.sdk?.readable) {
+              // Obtaining the api version from the response when certification is true, otherwise taking the sdk version.
+              // When certification is true, certifying the platform. Hence the platform version is used which is returned by device.version.api
+              // When certification is false, trying to test the platform. Hence the SDK Version is used which is returned by device.version.sdk
+              const deviceSDKversionJson =
+                UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false) == true
+                  ? response.result.api
+                  : response.result.sdk;
+              const readableSDKVersion = deviceSDKversionJson.readable;
 
-            // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
-            Cypress.env(
-              CONSTANTS.SDK_VERSION,
-              readableSDKVersion.includes(CONSTANTS.NEXT) ||
-                readableSDKVersion.includes(CONSTANTS.PROPOSED)
-                ? readableSDKVersion
-                : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
-            );
-          } else {
-            Cypress.env(CONSTANTS.SDK_VERSION, latestSDKversion);
-          }
-          if (response?.result?.firmware?.readable) {
-            let deviceFirmware = JSON.stringify(response.result.firmware.readable);
-            deviceFirmware = deviceFirmware.replace(/"/g, '');
-            Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
-          }
-          if (response?.result?.api?.readable) {
-            const fireboltVersion =
-              `${response?.result?.api?.major}.${response?.result?.api?.minor}.${response?.result?.api?.patch}`.replace(
-                /"/g,
-                ''
+              // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
+              Cypress.env(
+                CONSTANTS.SDK_VERSION,
+                readableSDKVersion.includes(CONSTANTS.NEXT) ||
+                  readableSDKVersion.includes(CONSTANTS.PROPOSED)
+                  ? readableSDKVersion
+                  : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
               );
-            Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
-          }
-          if (response?.result?.debug) {
-            const release = response.result.debug;
-            Cypress.env(CONSTANTS.ENV_RELEASE, release);
-          }
-          if (response?.result?.sdk?.readable) {
-            const responseResultSDK =
-              `${response?.result?.sdk?.major}.${response?.result?.sdk?.minor}.${response?.result?.sdk?.patch}`.replace(
-                /"/g,
-                ''
-              );
-            Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
-          }
-        });
+            } else {
+              Cypress.env(CONSTANTS.SDK_VERSION, latestSDKversion);
+            }
+            if (response?.result?.firmware?.readable) {
+              let deviceFirmware = JSON.stringify(response.result.firmware.readable);
+              deviceFirmware = deviceFirmware.replace(/"/g, '');
+              Cypress.env(CONSTANTS.ENV_DEVICE_FIRMWARE, deviceFirmware);
+            }
+            if (response?.result?.api?.readable) {
+              const fireboltVersion =
+                `${response?.result?.api?.major}.${response?.result?.api?.minor}.${response?.result?.api?.patch}`.replace(
+                  /"/g,
+                  ''
+                );
+              Cypress.env(CONSTANTS.ENV_FIREBOLT_VERSION, fireboltVersion);
+            }
+            if (response?.result?.debug) {
+              const release = response.result.debug;
+              Cypress.env(CONSTANTS.ENV_RELEASE, release);
+            }
+            if (response?.result?.sdk?.readable) {
+              const responseResultSDK =
+                `${response?.result?.sdk?.major}.${response?.result?.sdk?.minor}.${response?.result?.sdk?.patch}`.replace(
+                  /"/g,
+                  ''
+                );
+              Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+            }
+          });
+        } else {
+          cy.log(`Skipping device.version call due to DEVICE_VERSION_CALL_ENABLED=false`);
+          Cypress.env(CONSTANTS.SDK_VERSION, latestSDKversion);
+        }
       });
   }
 });
+
 /**
  * @module commands
  * @function updateRunInfo
@@ -372,7 +378,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                       reportEnv.customData.data &&
                       reportEnv.customData.data.length > 0
                     ) {
-                      const labelToEnvMap = {
+                      addToEnvLabelMap({
                         [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                         [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
                         [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
@@ -382,14 +388,30 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                         [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
                         [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
-                      };
-                      reportEnv.customData.data.forEach((item) => {
-                        if (item.label === CONSTANTS.PRODUCT) {
-                          item.value = configModuleConst.PRODUCT
-                            ? configModuleConst.PRODUCT
-                            : 'N/A';
-                        } else if (labelToEnvMap[item.label]) {
-                          item.value = Cypress.env(labelToEnvMap[item.label]) || 'N/A';
+                      });
+                      const envLabelMap = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP);
+
+                      Object.keys(envLabelMap).forEach((label) => {
+                        const value = envLabelMap[label];
+
+                        const existingItem = reportEnv.customData.data.find(
+                          (item) => item.label === label
+                        );
+                        if (existingItem) {
+                          // Update existing value
+                          if (label === CONSTANTS.PRODUCT) {
+                            existingItem.value = configModuleConst.PRODUCT || 'N/A';
+                          } else {
+                            // Use Cypress.env only if value is supposed to be a key
+                            const envValue = Cypress.env(value);
+                            existingItem.value = envValue || value || 'N/A';
+                          }
+                        } else {
+                          // Label not found — add it with the actual value directly
+                          reportEnv.customData.data.push({
+                            label: label,
+                            value: value || 'N/A',
+                          });
                         }
                       });
                     }
@@ -467,7 +489,8 @@ Cypress.Commands.add('getDeviceDataFromFirstPartyApp', (method, param, action) =
         throw 'Obtained response is null|undefined';
       }
     } catch (error) {
-      fireLog.info('Failed to fetch device.version', error);
+      fireLog.info('Failed to do device call', error);
+      return cy.wrap('Not Available');
     }
   });
 });
@@ -1583,6 +1606,15 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                 }
               }
             });
+          } else {
+            cy.validateContent(
+              method,
+              context,
+              validationJsonPath,
+              contentObject,
+              validationType,
+              appId
+            );
           }
         } catch (error) {
           assert(false, `Unable to validate the response: ${error}`);

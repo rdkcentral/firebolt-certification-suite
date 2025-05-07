@@ -1,3 +1,91 @@
+# [1.12.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.7...v1.12.0-dev.8) (2025-05-06)
+
+
+### Bug Fixes
+
+* capabilities TCs fix ([#407](https://github.com/rdkcentral/firebolt-certification-suite/issues/407)) ([f097a01](https://github.com/rdkcentral/firebolt-certification-suite/commit/f097a01a5751a7af8db03694032053e8a44ea783))
+
+# [1.12.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.6...v1.12.0-dev.7) (2025-05-06)
+
+
+### Features
+
+* Auto-detect action ([#414](https://github.com/rdkcentral/firebolt-certification-suite/issues/414)) ([6d33510](https://github.com/rdkcentral/firebolt-certification-suite/commit/6d33510c7ee02918f595b633b243c3d6018ca367))
+* Option to skip device.version call ([#413](https://github.com/rdkcentral/firebolt-certification-suite/issues/413)) ([91124b5](https://github.com/rdkcentral/firebolt-certification-suite/commit/91124b5a734a90fb5902c3480dc10f803c8563f6))
+
+# [1.12.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.5...v1.12.0-dev.6) (2025-05-05)
+
+
+### Bug Fixes
+
+* run.js doesn't handle reports correctly when using wildcards ([#410](https://github.com/rdkcentral/firebolt-certification-suite/issues/410)) ([c539180](https://github.com/rdkcentral/firebolt-certification-suite/commit/c5391803c579a7fc892ee8452a36f3c6c806b459))
+
+# [1.12.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.4...v1.12.0-dev.5) (2025-05-05)
+
+
+### Bug Fixes
+
+* bug fix for content validation and testcase param data fix  ([#408](https://github.com/rdkcentral/firebolt-certification-suite/issues/408)) ([4bdf693](https://github.com/rdkcentral/firebolt-certification-suite/commit/4bdf6935c43bdf1f27f8a69444775e2e929c17b6))
+
+# [1.12.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.3...v1.12.0-dev.4) (2025-05-01)
+
+
+### Features
+
+* Add support for certification in reporting plugin ([#409](https://github.com/rdkcentral/firebolt-certification-suite/issues/409)) ([f1d3082](https://github.com/rdkcentral/firebolt-certification-suite/commit/f1d3082fe9a23f4f47214b8af67d81bd769d6812))
+
+# [1.12.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.2...v1.12.0-dev.3) (2025-04-29)
+
+
+### Bug Fixes
+
+* Added support to override fixture files ([#397](https://github.com/rdkcentral/firebolt-certification-suite/issues/397)) ([638710e](https://github.com/rdkcentral/firebolt-certification-suite/commit/638710e3a232a83b46b62baea7eace52ef299149))
+
+# [1.12.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.1...v1.12.0-dev.2) (2025-04-28)
+
+
+### Bug Fixes
+
+* change in the constants to support External SDK ([#406](https://github.com/rdkcentral/firebolt-certification-suite/issues/406)) ([dbc694a](https://github.com/rdkcentral/firebolt-certification-suite/commit/dbc694a74f95377f12f64ed40d2fd4c7a61a3f0e))
+
+# [1.12.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0...v1.12.0-dev.1) (2025-04-28)
+
+
+### Features
+
+* To update runInfo for AppAssurance ([#393](https://github.com/rdkcentral/firebolt-certification-suite/issues/393)) ([59e07a4](https://github.com/rdkcentral/firebolt-certification-suite/commit/59e07a45af3749e31a131f21e07a320b9a5ed78e))
+
+# [1.11.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.10.0...v1.11.0) (2025-04-24)
+
+
+### Bug Fixes
+
+* logic added to optionally send eventParams in the object ([#387](https://github.com/rdkcentral/firebolt-certification-suite/issues/387)) ([010e83b](https://github.com/rdkcentral/firebolt-certification-suite/commit/010e83b4bccf0f5f7814f508ea83a9ffac0b5fdc))
+* Resources folder rename ([#404](https://github.com/rdkcentral/firebolt-certification-suite/issues/404)) ([cb533aa](https://github.com/rdkcentral/firebolt-certification-suite/commit/cb533aaa36b88c505a1a02c762cf61069db9a96e))
+* Test pubsub changes ([#402](https://github.com/rdkcentral/firebolt-certification-suite/issues/402)) ([ee2c66b](https://github.com/rdkcentral/firebolt-certification-suite/commit/ee2c66b974f0938b5ca59867d1d4529dd2929e50))
+
+
+### Features
+
+* Add default test case folder for non-sdk based feature files ([#366](https://github.com/rdkcentral/firebolt-certification-suite/issues/366)) ([6623a78](https://github.com/rdkcentral/firebolt-certification-suite/commit/6623a788be3bb5632d1e1026bbdc4457a0bf494e))
+* Improve logging ([#383](https://github.com/rdkcentral/firebolt-certification-suite/issues/383)) ([f0df4fe](https://github.com/rdkcentral/firebolt-certification-suite/commit/f0df4fee4cf611f4cbd108ae7a84c657132f645c))
+* Ipa version2 squashed ([#395](https://github.com/rdkcentral/firebolt-certification-suite/issues/395)) ([0c01306](https://github.com/rdkcentral/firebolt-certification-suite/commit/0c01306038f1d6875c24538afb03bec2cd7b64b5))
+* Playback support ([#379](https://github.com/rdkcentral/firebolt-certification-suite/issues/379)) ([e150b37](https://github.com/rdkcentral/firebolt-certification-suite/commit/e150b377f64c0d575eb2227157299be55d54c08d))
+
+# [1.11.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.6...v1.11.0-dev.7) (2025-04-24)
+
+
+### Bug Fixes
+
+* Resources folder rename ([#404](https://github.com/rdkcentral/firebolt-certification-suite/issues/404)) ([cb533aa](https://github.com/rdkcentral/firebolt-certification-suite/commit/cb533aaa36b88c505a1a02c762cf61069db9a96e))
+
+# [1.11.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.5...v1.11.0-dev.6) (2025-04-23)
+
+
+### Bug Fixes
+
+* Test pubsub changes ([#402](https://github.com/rdkcentral/firebolt-certification-suite/issues/402)) ([ee2c66b](https://github.com/rdkcentral/firebolt-certification-suite/commit/ee2c66b974f0938b5ca59867d1d4529dd2929e50))
+
 # [1.11.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0-dev.4...v1.11.0-dev.5) (2025-04-23)
 
 
