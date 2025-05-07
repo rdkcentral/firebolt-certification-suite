@@ -1,3 +1,10 @@
+# [1.12.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.8...v1.12.0-dev.9) (2025-05-07)
+
+
+### Features
+
+* Added configuarable time out ([#405](https://github.com/rdkcentral/firebolt-certification-suite/issues/405)) ([b0089d9](https://github.com/rdkcentral/firebolt-certification-suite/commit/b0089d9a00a9264c8518d6f89f92323a9ec279cf))
+
 # [1.12.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.7...v1.12.0-dev.8) (2025-05-06)
 
 

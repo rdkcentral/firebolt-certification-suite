@@ -234,13 +234,21 @@ export default function (module) {
    * @module main
    * @function sendMessagetoPlatforms
    * @description send message based on platform which will be pulled from config manager.
-   * @param {*} requestMap - requestMap should contain method and param
+   * @param {*} requestMap - requestMap should contain method and param etc.
+   * @param {Number} responseWaitTime - responseWaitTime is the time to wait for the response from the platform.
    * @example
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
+   * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}}, 20000)
    */
 
-  Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
-    return cy.wrap(requestMap, { timeout: 75000 }).then({ timeout: 75000 }, () => {
+  Cypress.Commands.add('sendMessagetoPlatforms', (requestMap, responseWaitTime) => {
+    // The requestTimeout is calculated to ensure a valid timeout value is passed to the wrap function.
+    // However, if the responseWaitTime is undefined, it is handled by the transport layer.
+    const requestTimeout =
+      typeof responseWaitTime === 'number' && responseWaitTime > 0
+        ? responseWaitTime
+        : CONSTANTS.LONGPOLL_TIMEOUT;
+    return cy.wrap(requestMap).then({ timeout: requestTimeout + 10000 }, () => {
       return new Promise((resolve, reject) => {
         let responsePromise;
         const [moduleName, methodName] = requestMap.method.split('.');
@@ -281,7 +289,7 @@ export default function (module) {
               // Perform MTC/FB call only if the message is not null
               if (message != null) {
                 return transport
-                  .sendMessage(message)
+                  .sendMessage(message, responseWaitTime)
                   .then((res) => config.invokeResponseOverride(res));
               } else {
                 return null;
@@ -344,7 +352,9 @@ export default function (module) {
     let overrideParams = {};
     let appId;
 
-    Cypress.env(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, CONSTANTS.SANITY_REPORT_LONGPOLL_TIMEOUT);
+    const sanityTimeout = UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, false)
+      ? UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT)
+      : CONSTANTS.SANITY_REPORT_LONGPOLL_TIMEOUT;
 
     // Iterating through the datatables and updating the values to additionalParams object.
     if (datatables) {
@@ -419,11 +429,11 @@ export default function (module) {
         });
       }
 
-      cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
+      cy.sendMessagetoApp(requestTopic, responseTopic, intent, sanityTimeout).then((response) => {
         cy.log('Response from Firebolt Implementation: ' + response);
 
         if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
-          assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+          fireLog.fail(`Did not receive response in ${sanityTimeout}ms. at topic ${responseTopic}`);
         } else {
           try {
             response = JSON.parse(response);
@@ -450,7 +460,6 @@ export default function (module) {
           }
 
           cy.generateAndPushReports(response.report);
-          Cypress.env(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, null);
         }
       });
     });
@@ -504,53 +513,54 @@ export default function (module) {
    * @param {string} requestTopic - Topic used to publish message
    * @param {string} responseTopic - Topic used to subscribe message
    * @param {Object} intent - Basic intent message that will applicable to ALL platforms to start the test on FCA.
+   * @param {Number} longPollTimeout -  longPollTimeout is the time to wait for the response from the app.
    * @example
    * cy.sendMessagetoApp('mac_appId_FCS',mac_appId_FCA,{"communicationMode": "SDK","action": "search"}, 1000)
    */
-  Cypress.Commands.add('sendMessagetoApp', async (requestTopic, responseTopic, intent) => {
-    logger.debug(
-      `Entering sendMessagetoApp() - cypress-support/src/main.js with params: requestTopic=${requestTopic}, responseTopic=${responseTopic}, intent=${JSON.stringify(intent)}`
-    );
+  Cypress.Commands.add(
+    'sendMessagetoApp',
+    async (requestTopic, responseTopic, intent, longPollTimeout) => {
+      logger.debug(
+        `Entering sendMessagetoApp() - cypress-support/src/main.js with params: requestTopic=${requestTopic}, responseTopic=${responseTopic}, intent=${JSON.stringify(intent)}`
+      );
 
-    const headers = { id: uuidv4() };
+      const headers = { id: uuidv4() };
 
-    // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
-    const longPollTimeout = UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, false)
-      ? UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT)
-      : CONSTANTS.LONGPOLL_TIMEOUT;
+      // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
+      longPollTimeout = longPollTimeout ? longPollTimeout : CONSTANTS.LONGPOLL_TIMEOUT;
+      // Subscribing to the topic when the topic is not subscribed.
+      if (
+        responseTopic != undefined &&
+        !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
+      ) {
+        // Subscribe to topic and pass the results to the callback function
+        appTransport.subscribe(responseTopic, UTILS.subscribeResults);
+        UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
+      }
 
-    // Subscribing to the topic when the topic is not subscribed.
-    if (
-      responseTopic != undefined &&
-      !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
-    ) {
-      // Subscribe to topic and pass the results to the callback function
-      appTransport.subscribe(responseTopic, UTILS.subscribeResults);
-      UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
-    }
+      if (appTransport) {
+        // Publish the message on topic
+        appTransport.publish(requestTopic, JSON.stringify(intent), headers);
 
-    if (appTransport) {
-      // Publish the message on topic
-      appTransport.publish(requestTopic, JSON.stringify(intent), headers);
-
-      // Returns the response after polling when data is available in queue
-      return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
-        .LongPollQueue(headers.id, longPollTimeout)
-        .then((results) => {
-          if (results) {
-            // Response recieved from queue
-            logger.debug(`Response received from queue: ${JSON.stringify(results)}`);
-            return results;
-          } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
-            return true;
-          }
+        // Returns the response after polling when data is available in queue
+        return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
+          .LongPollQueue(headers.id, longPollTimeout)
+          .then((results) => {
+            if (results) {
+              // Response recieved from queue
+              logger.debug(`Response received from queue: ${JSON.stringify(results)}`);
+              return results;
+            } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
+              return true;
+            }
+          });
+      } else {
+        cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
+          fireLog.fail(CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
         });
-    } else {
-      cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
-        assert(false, CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
-      });
+      }
     }
-  });
+  );
 
   /**
    * @module main
