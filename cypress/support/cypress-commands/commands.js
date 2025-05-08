@@ -84,7 +84,7 @@ Cypress.Commands.add(
 
         // Process each firebolt call item
         const promises = fireboltItems.map((item) => {
-          let params = item.params;
+          let params = item.params ? item.params : {};
           let method, action;
           // Fetching the value of environment variable based on dataIdentifier
           if (/CYPRESSENV/.test(params)) {
@@ -101,6 +101,8 @@ Cypress.Commands.add(
                 delete item[containEnv];
               }
             });
+          } else if (!params) {
+            params = {};
           } else {
             if (params && typeof params === 'object') {
               const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
