@@ -339,16 +339,16 @@ Given(
 
 /**
  * @module validations
- * @function I verify '(.+)' rail is(?: (.+))? visible '(.+)'
+ * @function Verify '(.+)' rail is(?: (.+))? visible '(.+)'
  * @description Validates the visibility of the rail based on the scenario.
  * @param {String} testType - not used
  * @param {String} notVisible - decides whether the rail is visible or not.
  * @param {String} input - Not used
  * @example
- * Then I Verify 'movies' rail is visible 'with entity played'
- * Then I Verify 'movies' rail is not visible 'with entity played'
+ * Then Verify 'movies' rail is visible 'with entity played'
+ * Then Verify 'movies' rail is not visible 'with entity played'
  */
-Then(/I verify '(.+)' rail is(?: (.+))? visible '(.+)'/, (testType, notVisible, input) => {
+Then(/Verify '(.+)' rail is(?: (.+))? visible '(.+)'/, (testType, notVisible, input) => {
   if (Cypress.env(CONSTANTS.RUNTIME)) {
     Cypress.env(CONSTANTS.RUNTIME).expectingElement = notVisible ? false : true;
   }
