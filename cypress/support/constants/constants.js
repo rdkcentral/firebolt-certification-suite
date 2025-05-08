@@ -383,6 +383,7 @@ module.exports = {
     GETAPPSTATE: 'fcs.getAppState',
     DISMISS: 'fcs.dismissApp',
     GETAPPDATA: 'fcs.getAppData',
+    FINDLOGPATTERN: 'fcs.findLogPattern',
     SENDKEYPRESS: 'fcs.sendKeyPress',
     SENDVOICECOMMAND: 'fcs.sendVoiceCommand',
   },
