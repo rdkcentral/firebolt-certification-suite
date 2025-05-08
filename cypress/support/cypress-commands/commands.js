@@ -102,13 +102,15 @@ Cypress.Commands.add(
               }
             });
           } else {
-            const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
-            if (envList.length > 0) {
-              envList.forEach((item) => {
-                const envParam = item.split('-')[1];
-                params[envParam] = UTILS.getEnvVariable(envParam);
-                delete params[item];
-              });
+            if (params && typeof params === 'object') {
+              const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
+              if (envList.length > 0) {
+                envList.forEach((item) => {
+                  const envParam = item.split('-')[1];
+                  params[envParam] = UTILS.getEnvVariable(envParam);
+                  delete params[item];
+                });
+              }
             }
           }
 
