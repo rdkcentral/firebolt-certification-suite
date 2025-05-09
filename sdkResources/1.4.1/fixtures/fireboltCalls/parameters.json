@@ -59,6 +59,12 @@
         "validationJsonPath": "result.discovery",
         "content": "PARAMETERS_INITIALIZATION_HOMEINTENT"
     },
+    "LAUNCHINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_DEVICE": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_LAUNCHINTENT_SOURCE_DEVICE"
+    },
     "PLAYBACKINTENT_FOR_INITIALIZATION_PARAMETERS": {
         "method": "parameters.initialization",
         "context": "DISCOVERY_LAUNCH_PLAYBACK",
