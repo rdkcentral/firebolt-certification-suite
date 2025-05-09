@@ -379,7 +379,6 @@ Then(/Verify '(.+)' rail is(?: (.+))? visible '(.+)'/, (testType, notVisible, in
  */
 Given(/Verify '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
   UTILS.captureScreenshot();
-  
   const objectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   let validationObject;
   cy.getFireboltData(objectKey).then((fireboltData) => {
