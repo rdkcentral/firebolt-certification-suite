@@ -313,3 +313,39 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
     cy.log(`Firebolt Certification Suite failed to communicate with the ${appType}: ${error}`);
   }
 });
+
+/**
+ * @module TestSetupGlue
+ * @function I search text {String} is found in the {String} log
+ * @description Searches for a specific text pattern in a given log file.
+ * @param {String} logKey - The specific log text pattern to search for.
+ * @param {String} fileIdentifier - The log file identifier where the search will be performed.
+ *
+ * @example
+ * Given I search text 'SignIn' is found in the 'app' log
+ * Given I search text 'PlaybackStarted' is found in the 'player' log
+ */
+
+Given(/I search text '(.+)' is found in the '(.+)' log/, (logKey, fileIdentifier) => {
+  const fileName = [`/opt/logs/${fileIdentifier}.log`];
+
+  cy.findLogPattern(logKey, fileName).then((response) => {
+    if (response.error) {
+      cy.softAssert(false, true, `Search command failed: ${response.error}`);
+      return;
+    }
+    if (!response.response || response.response.length === 0) {
+      cy.softAssert(false, true, 'No response received or response is empty.');
+      return;
+    }
+    response.response.forEach((responseText, index) => {
+      fireLog.info(`Received Response from the platform: ${responseText}`);
+      const isPatternFound = responseText.includes(logKey);
+      cy.softAssert(
+        isPatternFound,
+        true,
+        `Log pattern "${pattern}" ${isPatternFound ? 'found' : 'not found'} in response.`
+      );
+    });
+  });
+});
