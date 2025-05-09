@@ -379,14 +379,23 @@ Then(/Verify '(.+)' rail is(?: (.+))? visible '(.+)'/, (testType, notVisible, in
  */
 Given(/Verify '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
   UTILS.captureScreenshot();
-
+  
   const objectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   let validationObject;
   cy.getFireboltData(objectKey).then((fireboltData) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     validationObject = UTILS.resolveRecursiveValues(fireboltData);
-    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
-      fireLog.info(`${validationObjectKey} was successful`);
+    validationObject?.content?.data.forEach((item) => {
+      if (item?.enableVideoChecker === false) {
+        cy.log(
+          'Skipping TMagiQ videoChecker validation as enableVideoChecker flag is set to false. Please set enableVideoChecker flag to true inside validation object to perform TMagiQ videoChecker validation'
+        );
+        return;
+      } else {
+        cy.methodOrEventResponseValidation(type, validationObject).then(() => {
+          fireLog.info(`${validationObjectKey} was successful`);
+        });
+      }
     });
   });
 });
