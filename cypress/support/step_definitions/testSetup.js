@@ -316,17 +316,17 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
 
 /**
  * @module TestSetupGlue
- * @function I search text {String} is found in the {String} log
+ * @function text {String} is found in the {String} log
  * @description Searches for a specific text pattern in a given log file.
  * @param {String} logKey - The specific log text pattern to search for.
  * @param {String} fileIdentifier - The log file identifier where the search will be performed.
  *
  * @example
- * Given I search text 'SignIn' is found in the 'app' log
- * Given I search text 'PlaybackStarted' is found in the 'player' log
+ * Given text 'SignIn' is found in the 'app' log
+ * Given text 'PlaybackStarted' is found in the 'player' log
  */
 
-Given(/I search text '(.+)' is found in the '(.+)' log/, (logKey, fileIdentifier) => {
+Given(/text '(.+)' is found in the '(.+)' log/, (logKey, fileIdentifier) => {
   const fileName = [`/opt/logs/${fileIdentifier}.log`];
 
   cy.findLogPattern(logKey, fileName).then((response) => {
