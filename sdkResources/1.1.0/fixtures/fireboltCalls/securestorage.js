@@ -638,6 +638,11 @@ exports.NULL_FOR_CLEARING_STORED_VALUE = {
   validationJsonPath: 'result',
   content: null,
 };
+exports.NULL_FOR_REMOVING_STORED_VALUE = {
+  method: 'securestorage.clear',
+  validationJsonPath: 'result',
+  content: null,
+};
 exports.UPDATE_STORED_VALUE_FOR_KEY_AUTHTESTTOKENDEVICE = {
   method: 'securestorage.set',
   params: this.STATIC_VARIABLES.SECURESTORAGE_VARIABLES.SET_DEVICE,

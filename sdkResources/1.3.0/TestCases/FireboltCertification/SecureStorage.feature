@@ -184,6 +184,17 @@ Feature: SecureStorage
             | Scenario                      | API_Key                                        | Validation_Key                              |
             | without scope                 | remove stored value without scope              | invalid parameters for securestorage remove |
             | without key                   | remove stored value without key                | invalid parameters for securestorage remove |
+    
+    @sdk @transport @Sev2
+    Scenario: SecureStorage.remove - Validating API when passing key as empty string
+        Given '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenDevice'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
+        And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
+        And 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
+        When '3rd party app' invokes the 'Firebolt' API to 'remove stored value with empty key'
+        Then 'Firebolt' platform responds with 'null for removing stored value'
+        When '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
+        Then 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
 
     @sdk @transport @Sev2
     Scenario Outline: SecureStorage.remove - Validating API error handling when <Scenario>
@@ -206,7 +217,6 @@ Feature: SecureStorage
             | Passing key as number         | remove stored value with key as number         | invalid parameters for securestorage remove |
             | Passing key as null           | remove stored value with key as null           | invalid parameters for securestorage remove |
             | Passing key as boolean        | remove stored value with key as boolean        | invalid parameters for securestorage remove |
-            | Passing key as empty string   | remove stored value with empty key             | custom error for securestorage remove       |
 
     @sdk @transport @Sev2
     Scenario Outline: SecureStorage.remove - Validate secure data content <Scenario> after TTL
