@@ -518,14 +518,14 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
 
 /**
  * @module fireboltCalls
- * @function Then /TestRunner sends (.+) keypress(?: with a delay of '(.+)' seconds)?/
+ * @function Then /Test runner sends (.+) keypress(?: with a delay of '(.+)' seconds)?/
  * @description Sends a keypress event to the platform.
  * @param {String} keypress - The key to be pressed
  * @example
- * Then TestRunner sends 'enter' keypress
- * Then TestRunner sends 'enter' keypress with a delay of '20' seconds
+ * Then Test runner sends 'enter' keypress
+ * Then Test runner sends 'enter' keypress with a delay of '20' seconds
  */
-Then(/TestRunner sends '(.+)' keypress(?: with a delay of '(.+)' seconds)?/, (keypress, delay) => {
+Then(/Test runner sends '(.+)' keypress(?: with a delay of '(.+)' seconds)?/, (keypress, delay) => {
   cy.sendKeyPress(keypress, delay).then(() => {
     console.log('Keypress done successfully for ', keypress);
   });
