@@ -1048,7 +1048,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
     } catch (error) {
       // Check if the intent is not found in the appMetadata
       if (Object.keys(Cypress.env(CONSTANTS.RUNTIME).intent).length == 0) {
-        fireLog.fail(`Intent ${intent} not found in appMetadata for appId ${appId}. Please check the appMetadata.`);
+        fireLog.fail(
+          `Intent ${intent} not found in appMetadata for appId ${appId}. Please check the appMetadata.`
+        );
       }
       fireLog.fail('Could not resolve intentTemplate: ' + error.message);
     }
