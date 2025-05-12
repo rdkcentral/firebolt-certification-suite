@@ -104,7 +104,11 @@ Feature: SecureStorage
             | missing value | get stored value without scope | invalid parameters for securestorage get |
             | missing key   | get stored value without key   | invalid parameters for securestorage get |
 
-
+    @sdk @transport @Sev2
+    Scenario: SecureStorage.get - Validating API when scope key is an empty string
+        When '3rd party app' invokes the 'Firebolt' API to 'get stored value with key as empty'
+        Then 'Firebolt' platform responds with 'null for getting stored value'
+    
     @sdk @transport @Sev2
     Scenario Outline: SecureStorage.get - Validating API error handling when <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
@@ -120,7 +124,6 @@ Feature: SecureStorage
             | scope key is a number           | get stored value with key as number         | invalid parameters for securestorage get |
             | scope key is null               | get stored value with key as null           | invalid parameters for securestorage get |
             | scope key is a boolean          | get stored value with key as boolean        | invalid parameters for securestorage get |
-            | scope key is an empty string    | get stored value with key as empty          | custom error for securestorage get       |
 
 
     @sdk @transport @Sev1
