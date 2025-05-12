@@ -1772,7 +1772,9 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
         method: exitMethod,
         params: params.keyPressSequence,
       };
-      timeout = (Array.isArray(params.keyPressSequence) ? params.keyPressSequence.length : 1) * 5000 + 10000; // Calculate timeout based on key press sequence and delay
+      timeout =
+        (Array.isArray(params.keyPressSequence) ? params.keyPressSequence.length : 1) * 5000 +
+        10000; // Calculate timeout based on key press sequence and delay
 
       break;
     default:
