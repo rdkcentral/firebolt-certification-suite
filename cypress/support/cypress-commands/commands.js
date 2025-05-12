@@ -1010,7 +1010,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
     const appMetadata = UTILS.getEnvVariable(CONSTANTS.APP_METADATA, false);
 
     // If the intent is present in the appMetadata, set the intent in the runtime environment variable
-    if (appMetadata && appMetadata[appId] && appMetadata[appId][intent]) {
+    if (appMetadata && appMetadata.apps?.[0]?.[appId] && appMetadata.apps?.[0]?.[appId][intent]) {
+      Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata.apps[0][appId][intent];
+    } else if (appMetadata && appMetadata[appId] && appMetadata[appId][intent]) {
       Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId][intent];
     }
 
@@ -1044,6 +1046,10 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
       };
     } catch (error) {
+      // Check if the intent is not found in the appMetadata
+      if (Object.keys(Cypress.env(CONSTANTS.RUNTIME).intent).length == 0) {
+        fireLog.fail(`Intent ${intent} not found in appMetadata for appId ${appId}. Please check the appMetadata.`);
+      }
       fireLog.fail('Could not resolve intentTemplate: ' + error.message);
     }
   } else {
