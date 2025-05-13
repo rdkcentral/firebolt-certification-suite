@@ -1249,7 +1249,7 @@ function captureScreenshot() {
     fireLog.info(`Sending request to capture screenshot: ${JSON.stringify(screenshotRequest)}`);
 
     try {
-      cy.sendMessagetoPlatforms(screenshotRequest).then((response) => {
+      cy.sendMessagetoPlatforms(screenshotRequest, 70000).then((response) => {
         fireLog.info(`Screenshot capture response: ${JSON.stringify(response)}`);
 
         const apiResponse = {

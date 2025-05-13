@@ -1,3 +1,24 @@
+# [1.12.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.10...v1.12.0-dev.11) (2025-05-12)
+
+
+### Bug Fixes
+
+* Fix SDK Version in run info ([#417](https://github.com/rdkcentral/firebolt-certification-suite/issues/417)) ([d67a3b9](https://github.com/rdkcentral/firebolt-certification-suite/commit/d67a3b948d57758914f9eadfe4788a44ce57dd10))
+
+# [1.12.0-dev.10](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.9...v1.12.0-dev.10) (2025-05-07)
+
+
+### Features
+
+* Propagate cypress exit code ([#415](https://github.com/rdkcentral/firebolt-certification-suite/issues/415)) ([afb4c09](https://github.com/rdkcentral/firebolt-certification-suite/commit/afb4c097f10f2c2f6b3043b0f89ad6522745c654))
+
+# [1.12.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.8...v1.12.0-dev.9) (2025-05-07)
+
+
+### Features
+
+* Added configuarable time out ([#405](https://github.com/rdkcentral/firebolt-certification-suite/issues/405)) ([b0089d9](https://github.com/rdkcentral/firebolt-certification-suite/commit/b0089d9a00a9264c8518d6f89f92323a9ec279cf))
+
 # [1.12.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.7...v1.12.0-dev.8) (2025-05-06)
 
 
