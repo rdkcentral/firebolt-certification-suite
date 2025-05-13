@@ -382,7 +382,7 @@ Feature: SecureStorage
         And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice1'
         And 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
         And 'secondary 3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
-        And 'Firebolt' platform responds to 'secondary 3rd party app' with '<VauthTestTokenValue2 for stored value in securestorage'
+        And 'Firebolt' platform responds to 'secondary 3rd party app' with 'authTestTokenValue2 for stored value in securestorage'
         And 'secondary 3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice1'
         And 'Firebolt' platform responds to 'secondary 3rd party app' with 'expected value for authTestTokenDevice stored data in securestorage'
         When '3rd party app' invokes the 'Firebolt' API to 'clear stored value with scope as device '
