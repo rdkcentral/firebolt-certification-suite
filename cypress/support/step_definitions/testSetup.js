@@ -328,23 +328,24 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
 
 Given(/text '(.+)' is found in the '(.+)' log/, (logKey, fileIdentifier) => {
   const fileName = [`/opt/logs/${fileIdentifier}.log`];
-
-  cy.findLogPattern(logKey, fileName).then((response) => {
+  const logPattern = [logKey];
+  const params = { logPattern, fileName };
+  cy.findLogPattern(params).then((response) => {
     if (response.error) {
-      cy.softAssert(false, true, `Search command failed: ${response.error}`);
+      fireLog.assert(false, `Search command failed: ${response.error}`);
       return;
     }
     if (!response.response || response.response.length === 0) {
-      cy.softAssert(false, true, 'No response received or response is empty.');
+      fireLog.assert(false, 'No response received or response is empty.');
       return;
     }
     response.response.forEach((responseText, index) => {
       fireLog.info(`Received Response from the platform: ${responseText}`);
       const isPatternFound = responseText.includes(logKey);
-      cy.softAssert(
+      fireLog.equal(
         isPatternFound,
         true,
-        `Log pattern "${pattern}" ${isPatternFound ? 'found' : 'not found'} in response.`
+        `Log pattern "${logKey}" ${isPatternFound ? 'found' : 'not found'} in response.`
       );
     });
   });
