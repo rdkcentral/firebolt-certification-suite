@@ -1,3 +1,10 @@
+# [1.12.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.12...v1.12.0-dev.13) (2025-05-13)
+
+
+### Bug Fixes
+
+* Params fix 2 ([#420](https://github.com/rdkcentral/firebolt-certification-suite/issues/420)) ([16ea7c3](https://github.com/rdkcentral/firebolt-certification-suite/commit/16ea7c3b430734c341695ec1fc31fbe17347aad5))
+
 # [1.12.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.11...v1.12.0-dev.12) (2025-05-13)
 
 
