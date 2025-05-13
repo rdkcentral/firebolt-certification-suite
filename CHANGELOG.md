@@ -1,3 +1,10 @@
+# [1.12.0-dev.12](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.11...v1.12.0-dev.12) (2025-05-13)
+
+
+### Features
+
+* runInfo update ([#398](https://github.com/rdkcentral/firebolt-certification-suite/issues/398)) ([61e2b2d](https://github.com/rdkcentral/firebolt-certification-suite/commit/61e2b2d3d2fa1581d98463fe3832226abe66edc2))
+
 # [1.12.0-dev.11](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.10...v1.12.0-dev.11) (2025-05-12)
 
 
