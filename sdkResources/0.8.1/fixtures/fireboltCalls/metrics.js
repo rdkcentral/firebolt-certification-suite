@@ -464,7 +464,7 @@ exports.STATIC_METRICS_VARIABLES = {
     height: 1080,
     profile: 12,
   },
-  INTEGER_12: { value: 12 },
+  INTEGER_12: { entityId: 12 },
   ERROR_PARAM_NESTED_OBJECT_ERROR: {
     type: 'media',
     code: 'MEDIA-STALLED',
