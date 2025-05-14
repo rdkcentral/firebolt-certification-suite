@@ -1,3 +1,10 @@
+# [1.12.0-dev.14](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.13...v1.12.0-dev.14) (2025-05-14)
+
+
+### Bug Fixes
+
+* Discovery and Metrics params ([#423](https://github.com/rdkcentral/firebolt-certification-suite/issues/423)) ([e405c03](https://github.com/rdkcentral/firebolt-certification-suite/commit/e405c03514e3580e19ba9e3e4d16005b52326f35))
+
 # [1.12.0-dev.13](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.12...v1.12.0-dev.13) (2025-05-13)
 
 
