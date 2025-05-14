@@ -288,7 +288,9 @@ exports.DISCOVERY_COMMON_VARIABLES = {
         entityId: 'partner.com/entity/567',
       },
       expires: '2021-04-23T18:25:43.511Z',
-      '3X4': 'INVALID image',
+      images: {
+        '3X4': 'INVALID image'
+      }
     },
     WATCHNEXT_INVALID_IMAGE_INTEGER: {
       title: 'A Cool Show',
