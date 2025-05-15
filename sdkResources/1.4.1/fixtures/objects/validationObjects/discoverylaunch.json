@@ -29,6 +29,21 @@
             }
         ]
     },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_VOICE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_SOURCE_VOICE",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
     "DISCOVERYLAUNCH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE": {
         "method": "discovery.onNavigateTo",
         "data": [
