@@ -42,6 +42,8 @@ const configFixturesDir = path.join(
   'fixtures'
 );
 
+const ResourcesDir = path.join(__dirname, '..', 'resources');
+
 // Clear existing directories
 deleteDirectory(fcsTestCasesDir);
 deleteDirectory(fcsFixturesDir, 'fireboltJsonVersion');
@@ -72,28 +74,86 @@ if (fs.existsSync(configFixturesDir)) {
   );
 }
 
+// Process Resources
+if (fs.existsSync(ResourcesDir)) {
+  processResources(ResourcesDir);
+} else {
+  console.log(`No Resources directory found.`);
+}
+
+// Function to process Resources directory
+function processResources(sourceDir, externalMode = false) {
+  const entries = fs.readdirSync(sourceDir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const entryPath = path.join(sourceDir, entry.name);
+
+    if (entry.isDirectory()) {
+      // Handle subdirectories
+      if (entry.name === 'fixtures') {
+        const targetDir = externalMode ? path.join(fcsFixturesDir, 'external') : fcsFixturesDir;
+        fs.mkdirSync(targetDir, { recursive: true });
+        copyFiles(entryPath, targetDir);
+        console.log(`Processed directory contents of: ${entryPath} to ${targetDir}`);
+      } else if (entry.name === 'TestCases') {
+        const targetDir = externalMode
+          ? path.join(fcsTestCasesDir, 'Distributor')
+          : fcsTestCasesDir;
+        fs.mkdirSync(targetDir, { recursive: true });
+        copyFiles(entryPath, targetDir);
+        console.log(`Processed directory contents of: ${entryPath} to ${targetDir}`);
+      } else if (entry.name === 'external') {
+        processResources(entryPath, true); // Process externalMode
+      } else {
+        processResources(entryPath, externalMode); // Process other subdirectories
+      }
+    } else if (entry.isFile()) {
+      // Copy files directly
+      if (entryPath.includes('fixtures')) {
+        const targetDir = externalMode ? path.join(fcsFixturesDir, 'external') : fcsFixturesDir;
+        fs.mkdirSync(targetDir, { recursive: true });
+        const targetPath = path.join(targetDir, entry.name);
+        fs.copyFileSync(entryPath, targetPath);
+        console.log(`Copied fixture file: ${entryPath} to ${targetPath}`);
+      } else if (entryPath.includes('TestCases')) {
+        const targetDir = externalMode
+          ? path.join(fcsTestCasesDir, 'Distributor')
+          : fcsTestCasesDir;
+        fs.mkdirSync(targetDir, { recursive: true });
+        const targetPath = path.join(targetDir, entry.name);
+        fs.copyFileSync(entryPath, targetPath);
+        console.log(`Copied TestCase file: ${entryPath} to ${targetPath}`);
+      }
+    }
+  }
+}
+
 // Function to copy files and directories
 function copyFiles(configDir, externalDir) {
-  // Ensure the directory is fresh
   fs.mkdirSync(externalDir, { recursive: true });
 
   const entries = fs.readdirSync(configDir, { withFileTypes: true });
 
-  // Copy files from sdkDir to fcsDir
   for (const entry of entries) {
     const srcPath = path.join(configDir, entry.name);
     const destPath = path.join(externalDir, entry.name);
 
-    // Skip copying README.md if it already exists in fcsTestCasesDir
     if (entry.name === 'README.md' && fs.existsSync(destPath)) {
       console.log(`Skipping copying README.md as it already exists in ${externalDir}`);
       continue;
+    }
+    if (fs.existsSync(destPath) && fs.statSync(destPath).isFile()) {
+      console.log(
+        '\x1b[41m%s\x1b[0m',
+        `File override warning: ${destPath} will be overwritten by ${srcPath}`
+      );
     }
     entry.isDirectory() ? copyFiles(srcPath, destPath) : fs.copyFileSync(srcPath, destPath);
   }
   console.log(`Copied contents from ${configDir} to ${externalDir}`);
 }
 
+// Function to delete directories (with exclusions)
 function deleteDirectory(directory, skipfolder) {
   if (fs.existsSync(directory)) {
     const files = fs.readdirSync(directory);

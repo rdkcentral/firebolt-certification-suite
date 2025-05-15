@@ -298,3 +298,88 @@ Example:
 ```javascript
   'FOREGROUND'
 ```
+
+## sendVoiceCommand:
+
+### Request override
+- The `sendVoiceCommand` request override sends a voice command to the platform. This function should be added in config module `requestModules/fcs.js` file.
+
+#### Request Format for sendVoiceCommand:
+
+```javascript
+{
+  method: 'fcs.sendVoiceCommand',
+  params: {
+    command: <'command'>
+  }
+}
+```
+
+**Example:**
+
+```javascript
+{
+  method: 'fcs.sendVoiceCommand',
+  params: {
+    command: 'open settings' 
+    }
+}
+```
+### Response override
+
+- The `sendVoiceCommand` returns a response with success as `true` or `false`. This function should be added in config module `responseModules/fcs.js` file.
+
+#### Response Format for sendVoiceCommand:
+
+```javascript
+  {
+    "success": <boolean>
+  }
+```
+
+**Example:**
+
+```javascript
+  {
+    "success": true
+  }
+```
+
+## sendKeyPress:
+
+### Request override
+- The `sendVoiceCommand` request override sends a key code along with the delay(in seconds) to the platform. This function should be added in config module `requestModules/fcs.js` file.
+- This command is used to simulate a key press on the device.
+
+#### Request Format for sendKeyPress:
+
+```javascript
+{
+  method: 'fcs.sendKeyPress',
+  params: { 
+    key: <keyCode>, 
+    delay: <delay in seconds> }
+}
+```
+
+**Example:**
+
+```javascript
+{
+  method: 'fcs.sendKeyPress',
+  params: { 
+    key: 'enter',
+    delay: 5 }
+}
+```
+### Response override
+
+- The `sendKeyPress` function handles the obtained response. This function should be added in config module `responseModules/fcs.js` file.
+
+#### Response Format for sendKeyPress:
+
+```javascript
+  {
+    "report":"Successfully executed keySimulator -k"
+  }
+```

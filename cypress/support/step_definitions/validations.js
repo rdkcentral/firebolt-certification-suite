@@ -42,7 +42,8 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
 Given(
   /'(.+)' platform (responds|triggers|does not trigger)(?: to '(.+)')? (with|for|event)(?: for)? '(.+)'$/,
   async (sdk, eventExpected, appId, event, key) => {
-    if (CONSTANTS.SUPPORTED_SDK.includes(sdk)) {
+    const supportedSDK = UTILS.getEnvVariable(CONSTANTS.SUPPORTED_SDK);
+    if (Array.isArray(supportedSDK) && supportedSDK.includes(sdk)) {
       key = key.replaceAll(' ', '_').toUpperCase();
 
       // Fetching the required data for validation.
@@ -338,73 +339,23 @@ Given(
 
 /**
  * @module validations
- * @function Given Interactions collection process is (initiated|stopped)
- * @description To start or stop listening to firebolt interactions in device by passing appropriate intent to designated handler
- * @param {String} action - initiated or stopped
+ * @function Verify '(.+)' app is '(.+)'
+ * @description To call validation function with the validation object associated with the validation key
+ * @param {String} app - app name.
+ * @param {String} validationObjectKey - key name of the validation object.
  * @example
- * Given Interactions collection process is initiated
- * Given Interactions collection process is stopped
+ * Verify <appId> app is 'playing entity'
  */
-Given(/Interactions collection process is (initiated|stopped)/, (action) => {
-  if (
-    (action == CONSTANTS.INITIATED &&
-      UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) != true) ||
-    (action == CONSTANTS.STOPPED &&
-      UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED) == true)
-  ) {
-    // clearing the logs before starting the service
-    if (action === CONSTANTS.INITIATED) {
-      UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
-    }
-    cy.startOrStopInteractionsService(action).then((response) => {
-      if (response) {
-        Cypress.env(
-          CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED,
-          action == CONSTANTS.INITIATED ? true : false
-        );
-      } else {
-        const message =
-          action == CONSTANTS.INITIATED
-            ? CONSTANTS.FAILED_TO_INITIATE_INTERACTIONS_SERVICE
-            : CONSTANTS.FAILED_TO_STOP_INTERACTIONS_SERVICE;
-        UTILS.fireLog.assert(false, message);
-      }
-    });
-  } else {
-    cy.log(CONSTANTS.INTERACTIONS_SERVICE_ENABLED);
-  }
-});
+Given(/Verify '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
+  UTILS.captureScreenshot();
 
-/**
- * @module validations
- * @function verify Firebolt Interactions for '(.+)'
- * @description Validating the firebolt interaction logs
- * @param {String} key - Validation object key name
- * @example
- * verify Firebolt Interactions for 'account id method'
- */
-Given(/verify Firebolt Interactions for '(.+)'/, (key) => {
-  if (
-    (!UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) ||
-      UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) === false) &&
-    (!UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).size ||
-      UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).size === 0)
-  ) {
-    cy.log(`Interactions log service is not enabled`);
-  } else {
-    key = key.replaceAll(' ', '_').toUpperCase();
-    cy.getFireboltData(key).then((fireboltData) => {
-      const logs = UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).getLogs(
-        Cypress.env(CONSTANTS.SCENARIO_NAME)
-      );
-      if (!logs) {
-        UTILS.fireLog.assert(
-          false,
-          `No interaction logs found for the scenario - ${Cypress.env(CONSTANTS.SCENARIO_NAME)}`
-        );
-      }
-      const contentObject = { logs: logs, content: fireboltData.content.data[0].validations };
-      cy.customValidation(fireboltData.content.data[0], contentObject);
+  const objectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
+  let validationObject;
+  cy.getFireboltData(objectKey).then((fireboltData) => {
+    const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+    validationObject = UTILS.resolveRecursiveValues(fireboltData);
+    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
+      fireLog.info(`${validationObjectKey} was successful`);
     });
-  }
+  });
 });

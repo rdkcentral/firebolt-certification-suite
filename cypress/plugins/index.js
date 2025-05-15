@@ -210,9 +210,19 @@ module.exports = async (on, config) => {
     checkFileExists(filePath) {
       return fs.existsSync(filePath);
     },
+    loadJSFile(filePath) {
+      try {
+        const resolvedPath = path.resolve(__dirname, '..', filePath);
+        return require(resolvedPath);
+      } catch (error) {
+        return null;
+      }
+    },
   });
 
   on('before:run', async () => {
+    logger.debug('Entering before:run in cypress/plugins/index.js');
+
     // Calling reportProcessor default function with instance of event
     const reportProcessor = importReportProcessor();
     reportProcessor.defaultMethod(eventEmitter);
@@ -235,7 +245,7 @@ module.exports = async (on, config) => {
       - generate the html report (TBD)
   */
   on('after:run', async (results) => {
-    logger.info('override after:run');
+    logger.debug('Entering after :run in cypress/plugins/index.js');
 
     const reportObj = {};
     const formatter = new Formatter();
@@ -246,6 +256,7 @@ module.exports = async (on, config) => {
     let suiteName = 'cucumber' + '_' + timestamp;
     let jobId;
     let elk = false;
+    let certification = false;
 
     // Creating uuid folder under reports
     if (results.config.env.jobId) {
@@ -256,6 +267,11 @@ module.exports = async (on, config) => {
     // Send elk variable to report processor if env variable is set to true
     if (results.config.env.elk) {
       elk = results.config.env.elk;
+    }
+
+    // Send certification variable to report properties if env variable is set to true
+    if (results.config.env.certification) {
+      certification = results.config.env.certification;
     }
 
     if (!fs.existsSync(filePath)) {
@@ -320,6 +336,7 @@ module.exports = async (on, config) => {
           }
           reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
           reportProperties.customReportData = customReportData;
+          reportProperties.certification = certification;
           // Add the report to the reportObj
           if (reportType === CONSTANTS.CUCUMBER) {
             reportObj.cucumberReport = jsonReport;

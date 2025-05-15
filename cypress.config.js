@@ -60,7 +60,6 @@ const env = {
   communicationMode: 'SDK',
   suiteCommunicationMode: 'Transport',
   performanceMetrics: false,
-  interactionsMetrics: false,
   generateLocalReport: true,
   loggerLevel: 'debug',
   testSuite: '',
@@ -96,6 +95,9 @@ const env = {
   elk: false,
   objective: '',
   supportsPlatformCommunication: false,
+  supportedSDK: ['Firebolt'],
+  customValidationTimeout: 60000,
+  deviceVersionCallEnable: true,
 };
 
 module.exports = {

@@ -1,6 +1,6 @@
 {
   "name": "firebolt-certification-suite",
-  "version": "1.9.0",
+  "version": "1.12.0-dev.14",
   "description": "Firebolt Certification Test Suite",
   "main": "index.js",
   "config": {
@@ -75,6 +75,13 @@
   "cypress-cucumber-preprocessor": {
     "json": {
       "enabled": true
-    }
+    },
+    "stepDefinitions": [
+      "cypress/e2e/[filepath]/**/*.{js,ts}",
+      "cypress/e2e/[filepath].{js,ts}",
+      "cypress/support/step_definitions/**/*.{js,ts}",
+      "node_modules/configModule/cypress/support/step_definitions/**/*.{js,ts}",
+      "node_modules/fcs-config-helper/cypress/support/step_definitions/**/*.{js,ts}"
+    ]
   }
 }

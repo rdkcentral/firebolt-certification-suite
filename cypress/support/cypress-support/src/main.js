@@ -47,6 +47,8 @@ export default function (module) {
 
   // before All
   before(() => {
+    logger.debug('Entering before() - cypress-support/src/main.js');
+
     // Added below custom commands to clear cache and to reload browser
     cy.clearCache();
     cy.wrap(UTILS.pubSubClientCreation(appTransport), {
@@ -57,33 +59,9 @@ export default function (module) {
       } else {
         cy.log('Unable to establish a pub/sub connection.');
       }
-      // Creating a topic with _fbinteractions suffix to listen for interaction logs
-      try {
-        const topic = UTILS.getTopic(
-          UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID),
-          CONSTANTS.SUBSCRIBE,
-          null,
-          CONSTANTS.TOPIC_FBINTERACTIONS
-        );
-        appTransport.subscribe(topic, UTILS.interactionResults);
-      } catch (err) {
-        UTILS.fireLog.info(
-          `Unable to subscribe to ${CONSTANTS.TOPIC_FBINTERACTIONS} suffixed topic`
-        );
-      }
-      // Initiating the Interaction service to listening for interaction logs when interactionsMetrics flag set to true.
-      if (UTILS.getEnvVariable(CONSTANTS.INTERACTIONS_METRICS, false) == true) {
-        cy.startOrStopInteractionsService(CONSTANTS.INITIATED).then((response) => {
-          if (response) {
-            Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, true);
-          }
-        });
-      } else {
-        cy.log(CONSTANTS.INTERACTIONS_SERVICE_NOT_ACTIVE);
-      }
+      Cypress.env('pubSubClient', appTransport);
+      cy.startAdditionalServices();
     });
-
-    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
 
     // Create an instance of global queue
     const messageQueue = new Queue();
@@ -99,19 +77,19 @@ export default function (module) {
     } else {
       cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
     }
-    // Merge fireboltCalls
-    const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
-    const v2FireboltCallsData = _.merge(
-      {},
-      internalV2FireboltCallsData,
-      externalV2FireboltCallsData
-    );
+    // Merge fireboltCalls - Commented temporarily. Moved to beforeEach
+    // const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
+    // const v2FireboltCallsData = _.merge(
+    //   {},
+    //   internalV2FireboltCallsData,
+    //   externalV2FireboltCallsData
+    // );
 
-    cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
-      (mergedFireboltCalls) => {
-        Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
-      }
-    );
+    // cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
+    //   (mergedFireboltCalls) => {
+    //     Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
+    //   }
+    // );
 
     // Merge fireboltMocks
     const v1FireboltMockData = UTILS.getEnvVariable('fireboltMocksJson');
@@ -150,10 +128,23 @@ export default function (module) {
     Cypress.env(CONSTANTS.FIRST_PARTY_EVENT_TYPE, false);
     Cypress.env(CONSTANTS.THIRD_PARTY_EVENT_TYPE, false);
 
-    UTILS.getEnvVariable(CONSTANTS.FB_INTERACTIONLOGS).clearLogs();
     cy.getBeforeOperationObject();
     cy.initiatePerformanceMetrics();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+
+    // Merge fireboltCalls - Temporary fix to populate env variable between steps
+    const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
+    const v2FireboltCallsData = _.merge(
+      {},
+      internalV2FireboltCallsData,
+      externalV2FireboltCallsData
+    );
+
+    cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
+      (mergedFireboltCalls) => {
+        Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
+      }
+    );
   });
 
   /**
@@ -263,16 +254,9 @@ export default function (module) {
             }
           });
         }
-        // Stoping the Interaction service if Interaction service is enabled.
-        if (UTILS.getEnvVariable(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false) == true) {
-          cy.startOrStopInteractionsService(CONSTANTS.STOPPED).then((response) => {
-            if (response) {
-              Cypress.env(CONSTANTS.IS_INTERACTIONS_SERVICE_ENABLED, false);
-            }
-          });
-        }
         // unsubscribing the list of topics
         appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
+        await transport.unsubscribe();
 
         // Unsubscribe from WebSocket if the client is available
         const webSocketClient = UTILS.getEnvVariable('webSocketClient', false);
@@ -281,6 +265,7 @@ export default function (module) {
           Cypress.env('webSocketClient', null); // Clear the WebSocket client from Cypress environment
         }
       } catch (err) {
+        logger.error(`Something went wrong when attempting to unsubscribe: ${err}`);
         cy.log(`Something went wrong when attempting to unsubscribe: ${err}`);
       }
     })();
@@ -290,13 +275,21 @@ export default function (module) {
    * @module main
    * @function sendMessagetoPlatforms
    * @description send message based on platform which will be pulled from config manager.
-   * @param {*} requestMap - requestMap should contain method and param
+   * @param {*} requestMap - requestMap should contain method and param etc.
+   * @param {Number} responseWaitTime - responseWaitTime is the time to wait for the response from the platform.
    * @example
    * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}})
+   * cy.sendMessagetoPlatforms({"method": "closedCaptioning", "param": {}}, 20000)
    */
 
-  Cypress.Commands.add('sendMessagetoPlatforms', (requestMap) => {
-    return cy.wrap(requestMap, { timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT }).then(() => {
+  Cypress.Commands.add('sendMessagetoPlatforms', (requestMap, responseWaitTime) => {
+    // The requestTimeout is calculated to ensure a valid timeout value is passed to the wrap function.
+    // However, if the responseWaitTime is undefined, it is handled by the transport layer.
+    const requestTimeout =
+      typeof responseWaitTime === 'number' && responseWaitTime > 0
+        ? responseWaitTime
+        : CONSTANTS.LONGPOLL_TIMEOUT;
+    return cy.wrap(requestMap).then({ timeout: requestTimeout + 10000 }, () => {
       return new Promise((resolve, reject) => {
         let responsePromise;
         const [moduleName, methodName] = requestMap.method.split('.');
@@ -337,7 +330,7 @@ export default function (module) {
               // Perform MTC/FB call only if the message is not null
               if (message != null) {
                 return transport
-                  .sendMessage(message)
+                  .sendMessage(message, responseWaitTime)
                   .then((res) => config.invokeResponseOverride(res));
               } else {
                 return null;
@@ -394,11 +387,15 @@ export default function (module) {
    * startTest({"rawTable": [ ["paramType","variableName","value"]]})
    */
   Cypress.Commands.add('startTest', (datatables) => {
+    logger.debug('Entering startTest() - cypress-support/src/main.js');
+
     const additionalParams = {};
     let overrideParams = {};
     let appId;
 
-    Cypress.env(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, CONSTANTS.SANITY_REPORT_LONGPOLL_TIMEOUT);
+    const sanityTimeout = UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, false)
+      ? UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT)
+      : CONSTANTS.SANITY_REPORT_LONGPOLL_TIMEOUT;
 
     // Iterating through the datatables and updating the values to additionalParams object.
     if (datatables) {
@@ -429,7 +426,9 @@ export default function (module) {
     }
 
     // Overriding default value for action, if input is not there from feature file or cli.
-    const action = CONSTANTS.ACTION_CORE; // default to CORE
+    const testRunnable = cy.state('runnable');
+    const action = UTILS.determineActionFromFeatureFile(testRunnable);
+
     if (!additionalParams[CONSTANTS.ACTION] && !UTILS.getEnvVariable(CONSTANTS.ACTION, false)) {
       additionalParams[CONSTANTS.ACTION] = action;
     } else if (
@@ -441,7 +440,7 @@ export default function (module) {
 
     overrideParams.certification = UTILS.getEnvVariable(CONSTANTS.CERTIFICATION, false);
     overrideParams.exceptionMethods = UTILS.generateCombinedExceptionList();
-
+    overrideParams.additionalContext = UTILS.getEnvVariable(CONSTANTS.ADDITIONAL_CONTEXT, false);
     // If certification is true override excluded methods and modules from config module if it is present else use the default lists in constants.
     if (overrideParams.certification == true) {
       overrideParams = UTILS.overideParamsFromConfigModule(overrideParams);
@@ -464,22 +463,33 @@ export default function (module) {
 
       if (!UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)) {
         cy.log(CONSTANTS.DEVICE_MAC_UNAVAILABLE).then(() => {
-          assert(false, CONSTANTS.DEVICE_MAC_UNAVAILABLE);
+          assert(
+            false,
+            `Device MAC address is not available. Make sure this value is added in cypress.config.js or passed as an environment variable with the cli.`
+          );
         });
       }
 
-      cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
+      cy.sendMessagetoApp(requestTopic, responseTopic, intent, sanityTimeout).then((response) => {
         cy.log('Response from Firebolt Implementation: ' + response);
 
         if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
-          assert(false, CONSTANTS.NO_MATCHED_RESPONSE);
+          fireLog.fail(`Did not receive response in ${sanityTimeout}ms. at topic ${responseTopic}`);
         } else {
           try {
             response = JSON.parse(response);
           } catch (error) {
-            assert(false, error);
+            logger.error('Failed to parse JSON response. Response: ', JSON.stringify(response));
+            assert(
+              false,
+              'Failed to parse JSON response from Firebolt implementation. Please check the response format.'
+            );
           }
-          assert.exists(response.report, CONSTANTS.INVALID_RESPONSE);
+
+          assert.exists(
+            response.report,
+            'The response does not contain the expected "report" object. Ensure the Firebolt implementation returns a valid response with a "report" field.'
+          );
 
           // Writing sanity mochawesome json to file when jobId is present.
           if (UTILS.getEnvVariable(CONSTANTS.JOBID, false)) {
@@ -491,7 +501,6 @@ export default function (module) {
           }
 
           cy.generateAndPushReports(response.report);
-          Cypress.env(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, null);
         }
       });
     });
@@ -516,53 +525,83 @@ export default function (module) {
 
   /**
    * @module main
+   * @function startAdditionalServices
+   * @description Executes external services defined in the config module, if available.
+   *  - This command will look for the `startAdditionalServices` function present in the `additionalServices/index.js` file. If present, it will be invoked; otherwise, nothing will happen.
+   *  - By default, this will look for the `startAdditionalServices` function in the config module. If we want to execute another function instead of `startAdditionalServices`, we can override the default function by passing the function name from the command line for the parameter `externalService`.
+   * @param {string} input - parameters passing to external function
+   * @example
+   * startAdditionalServices({})
+   */
+  Cypress.Commands.add('startAdditionalServices', (input) => {
+    // This defaults to checking for the startAdditionalServices function in the config module, but it can be overridden via the command.
+    const serviceName = Cypress.env(CONSTANTS.EXTERNAL_SERVICE_FUNCTION)
+      ? Cypress.env(CONSTANTS.EXTERNAL_SERVICE_FUNCTION)
+      : 'startAdditionalServices';
+    if (
+      module &&
+      module.additionalServices &&
+      typeof module.additionalServices[serviceName] === 'function'
+    ) {
+      module.additionalServices[serviceName](input);
+    }
+  });
+
+  /**
+   * @module main
    * @function sendMessagetoApp
    * @description Publish a message and fetch response from app based on arguments
    * @param {string} requestTopic - Topic used to publish message
    * @param {string} responseTopic - Topic used to subscribe message
    * @param {Object} intent - Basic intent message that will applicable to ALL platforms to start the test on FCA.
+   * @param {Number} longPollTimeout -  longPollTimeout is the time to wait for the response from the app.
    * @example
    * cy.sendMessagetoApp('mac_appId_FCS',mac_appId_FCA,{"communicationMode": "SDK","action": "search"}, 1000)
    */
-  Cypress.Commands.add('sendMessagetoApp', async (requestTopic, responseTopic, intent) => {
-    const headers = { id: uuidv4() };
+  Cypress.Commands.add(
+    'sendMessagetoApp',
+    async (requestTopic, responseTopic, intent, longPollTimeout) => {
+      logger.debug(
+        `Entering sendMessagetoApp() - cypress-support/src/main.js with params: requestTopic=${requestTopic}, responseTopic=${responseTopic}, intent=${JSON.stringify(intent)}`
+      );
 
-    // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
-    const longPollTimeout = UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT, false)
-      ? UTILS.getEnvVariable(CONSTANTS.SANITY_REPORT_POLLING_TIMEOUT)
-      : CONSTANTS.LONGPOLL_TIMEOUT;
+      const headers = { id: uuidv4() };
 
-    // Subscribing to the topic when the topic is not subscribed.
-    if (
-      responseTopic != undefined &&
-      !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
-    ) {
-      // Subscribe to topic and pass the results to the callback function
-      appTransport.subscribe(responseTopic, UTILS.subscribeResults);
-      UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
-    }
+      // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
+      longPollTimeout = longPollTimeout ? longPollTimeout : CONSTANTS.LONGPOLL_TIMEOUT;
+      // Subscribing to the topic when the topic is not subscribed.
+      if (
+        responseTopic != undefined &&
+        !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
+      ) {
+        // Subscribe to topic and pass the results to the callback function
+        appTransport.subscribe(responseTopic, UTILS.subscribeResults);
+        UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
+      }
 
-    if (appTransport) {
-      // Publish the message on topic
-      appTransport.publish(requestTopic, JSON.stringify(intent), headers);
+      if (appTransport) {
+        // Publish the message on topic
+        appTransport.publish(requestTopic, JSON.stringify(intent), headers);
 
-      // Returns the response after polling when data is available in queue
-      return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
-        .LongPollQueue(headers.id, longPollTimeout)
-        .then((results) => {
-          if (results) {
-            // Response recieved from queue
-            return results;
-          } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
-            return true;
-          }
+        // Returns the response after polling when data is available in queue
+        return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
+          .LongPollQueue(headers.id, longPollTimeout)
+          .then((results) => {
+            if (results) {
+              // Response recieved from queue
+              logger.debug(`Response received from queue: ${JSON.stringify(results)}`);
+              return results;
+            } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
+              return true;
+            }
+          });
+      } else {
+        cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
+          fireLog.fail(CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
         });
-    } else {
-      cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
-        assert(false, CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
-      });
+      }
     }
-  });
+  );
 
   /**
    * @module main
@@ -597,6 +636,33 @@ export default function (module) {
   });
 
   /**
+   * @module commands
+   * @function callConfigModule
+   * @description Check the configModule for the function and call it with the params.
+   * @param {String} methodName - Name of the function to be called from the config module.
+   * @param {Array} params=[] - Optional array of parameters to pass to the method.
+   * @param {string} moduleName - Name of the module from which method has to be retrieved,by default additionalServices.
+   * @example
+   * cy.callConfigModule('methodName', ['arg1', 'arg2'], 'moduleName');
+   */
+
+  Cypress.Commands.add(
+    'callConfigModule',
+    (methodName, params = [], moduleName = 'additionalServices') => {
+      console.log(`Calling "${methodName}" from configModule.${moduleName} with params:`, params);
+
+      return cy.then(() => {
+        const configFunction = module?.[moduleName]?.[methodName];
+        if (typeof configFunction !== 'function') {
+          console.log(`${moduleName}.${methodName} not found in the config module.`);
+          return null;
+        }
+        return configFunction(...params);
+      });
+    }
+  );
+
+  /**
    * @module customValidation
    * @function customValidation
    * @description Command to execute the custom validations in configModule
@@ -612,15 +678,21 @@ export default function (module) {
       const functionName = fcsValidationObjectData.assertionDef;
       // to check whether config module has customValidations function
       if (module && module.customValidations) {
+        const configCustomValidation = module.customValidations[functionName];
         // to check whether customValidations has a function as the functionName passed
-        if (
-          module.customValidations[functionName] &&
-          typeof module.customValidations[functionName] === 'function'
-        ) {
-          message = module.customValidations[functionName](
-            apiOrEventObject,
-            fcsValidationObjectData
-          );
+        if (configCustomValidation && typeof configCustomValidation === 'function') {
+          // when the validation states FCS needs to wait before proceeding with the test
+          const waitForCustom = fcsValidationObjectData.waitForCompletion;
+          if (waitForCustom && waitForCustom === true) {
+            const customTimeout = fcsValidationObjectData.waitLimit
+              ? fcsValidationObjectData.waitLimit
+              : UTILS.getEnvVariable(CONSTANTS.CUSTOM_VALIDATION_TIMEOUT);
+            cy.then({ timeout: customTimeout }, async () => {
+              message = await configCustomValidation(apiOrEventObject, fcsValidationObjectData);
+            });
+          } else {
+            message = configCustomValidation(apiOrEventObject, fcsValidationObjectData);
+          }
         } else if (
           // if customValidations doesn't have a function as the functionName passed
           !module.customValidations[functionName] ||
