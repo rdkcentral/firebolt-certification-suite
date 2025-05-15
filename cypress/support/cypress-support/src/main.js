@@ -105,10 +105,29 @@ export default function (module) {
     const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
     const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
     Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
+
+    // Check if the incoming SDK version is 2.0.0 or above and replace the widget in device with 2.0 changes.
+    // const pattern = /(2|\d{2,})\.\d+\.\d+/;
+    // if (
+    //   UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false) &&
+    //   pattern.test(UTILS.getEnvVariable(CONSTANTS.SDK_VERSION))
+    // ) {
+    //   const requestMap = {
+    //     method: 'fcs.<function>',
+    //     params: null,
+    //   };
+    //   cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    //     console.log('response------------------', response);
+    //   });
+    // }
   });
 
   // beforeEach
   beforeEach(() => {
+    // Set the firstPartyEvent and thirdPartyEvent to false by default and reset after each testcase.
+    Cypress.env(CONSTANTS.FIRST_PARTY_EVENT_TYPE, false);
+    Cypress.env(CONSTANTS.THIRD_PARTY_EVENT_TYPE, false);
+
     cy.getBeforeOperationObject();
     cy.initiatePerformanceMetrics();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
@@ -198,6 +217,30 @@ export default function (module) {
         }
       );
     });
+  });
+
+  afterEach(() => {
+    // Make a clear all event listeners call and clear the deregister the events
+    // Need to see what method name can be passed here, instead of device.name.
+    const requestMap = { method: 'call.clearEvent', params: null, task: 'clearAllListeners' };
+    if (UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_EVENT_TYPE)) {
+      cy.sendMessagetoPlatforms(requestMap).then((response) => {
+        fireLog.info(`Response from firstParty app: ${JSON.stringify(response)}`);
+      });
+    }
+
+    if (UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_EVENT_TYPE)) {
+      const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
+      const requestTopic = UTILS.getTopic(appId);
+      const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+      const intent = UTILS.createIntentMessage(CONSTANTS.TASK.CLEAR_ALL_LISTENERS, {});
+      cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
+        fireLog.info(
+          `Response from ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(response)}`
+        );
+      });
+    }
+    Cypress.env(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST, []);
   });
 
   // after All
