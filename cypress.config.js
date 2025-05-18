@@ -97,6 +97,7 @@ const env = {
   supportsPlatformCommunication: false,
   supportedSDK: ['Firebolt'],
   customValidationTimeout: 60000,
+  deviceVersionCallEnable: true,
 };
 
 module.exports = {

@@ -181,13 +181,13 @@ exports.GET_TOKEN_WITH_PLATFORM1_PARAMETER = {
 
 exports.GET_TOKEN_WITH_TRUE_PARAMETER = {
   method: 'authentication.token',
-  params: { value: true },
+  params: { type: true },
   expected: 'error',
 };
 
 exports.GET_TOKEN_WITH_INTEGER_PARAMETER = {
   method: 'authentication.token',
-  params: { value: 123 },
+  params: { type: 123 },
   expected: 'error',
 };
 

@@ -154,32 +154,30 @@ Cypress.Commands.add('getSdkVersion', () => {
   let latestSDKversion;
   const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
   const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false);
-  if (sdkVersion) {
-    return sdkVersion;
-  } else {
-    // fetching latestSDKversion from Firebolt-specificaiton URL
-    cy.request({
-      url: UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_URL),
-      failOnStatusCode: false,
-    })
-      .then((fireboltSpecJson) => {
-        // If there is a version in fireboltSpecJson response, using it, otherwise taking the latest version from the fixtures.
-        if (
-          fireboltSpecJson.status == 200 &&
-          fireboltSpecJson?.body?.apis &&
-          Object.values(fireboltSpecJson.body.apis)[0]?.info?.version
-        ) {
-          latestSDKversion = Object.values(fireboltSpecJson.body.apis)[0].info.version;
+  // fetching latestSDKversion from Firebolt-specificaiton URL
+  cy.request({
+    url: UTILS.getEnvVariable(CONSTANTS.FIREBOLT_SPECIFICATION_URL),
+    failOnStatusCode: false,
+  })
+    .then((fireboltSpecJson) => {
+      // If there is a version in fireboltSpecJson response, using it, otherwise taking the latest version from the fixtures.
+      if (
+        fireboltSpecJson.status == 200 &&
+        fireboltSpecJson?.body?.apis &&
+        Object.values(fireboltSpecJson.body.apis)[0]?.info?.version
+      ) {
+        latestSDKversion = Object.values(fireboltSpecJson.body.apis)[0].info.version;
+        return latestSDKversion;
+      } else {
+        cy.getLatestFireboltJsonFromFixtures().then((latestSDKversion) => {
           return latestSDKversion;
-        } else {
-          cy.getLatestFireboltJsonFromFixtures().then((latestSDKversion) => {
-            return latestSDKversion;
-          });
-        }
-      })
-      .then((latestSDKversion) => {
-        // Calling device.version API
-        cy.log(`Call from app: ${appId} - method: ${CONSTANTS.DEVICE_VERSION} params: {}`);
+        });
+      }
+    })
+    .then((latestSDKversion) => {
+      // Calling device.version API
+      cy.log(`Call from app: ${appId} - method: ${CONSTANTS.DEVICE_VERSION} params: {}`);
+      if (UTILS.getEnvVariable(CONSTANTS.DEVICE_VERSION_CALL_ENABLED, true)) {
         cy.getDeviceDataFromThirdPartyApp(
           CONSTANTS.DEVICE_VERSION,
           {},
@@ -231,12 +229,18 @@ Cypress.Commands.add('getSdkVersion', () => {
                 /"/g,
                 ''
               );
-            Cypress.env(CONSTANTS.ENV_SDK_VERSION, responseResultSDK);
+            if (!Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION)) {
+              Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION, responseResultSDK);
+            }
           }
         });
-      });
-  }
+      } else {
+        cy.log(`Skipping device.version call due to DEVICE_VERSION_CALL_ENABLED=false`);
+        Cypress.env(CONSTANTS.SDK_VERSION, latestSDKversion);
+      }
+    });
 });
+
 /**
  * @module commands
  * @function updateRunInfo
@@ -252,7 +256,6 @@ Cypress.Commands.add('updateRunInfo', () => {
   let deviceDistributor = '';
   let devicePlatform = '';
   const fireboltVersion = '';
-
   // function to set env variable for run info data
   const setEnvRunInfo = (deviceData, deviceType, action, envVarName) => {
     if (deviceData === '') {
@@ -301,7 +304,7 @@ Cypress.Commands.add('updateRunInfo', () => {
               return false;
             }
             const deviceMac = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC).replace(/:/g, '');
-            const deviceMacJson = `./cypress/fixtures/devices/${deviceMac}.json`;
+            const deviceMacJson = `./cypress/fixtures/external/devices/${deviceMac}.json`;
             const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             // Check if mac json file exists
             cy.task('checkFileExists', deviceMacJson)
@@ -375,7 +378,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                       addToEnvLabelMap({
                         [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                         [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
-                        [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_SDK_VERSION,
+                        [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_PLATFORM_SDK_VERSION,
                         [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
                         [CONSTANTS.RELEASE]: CONSTANTS.ENV_RELEASE,
                         [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
@@ -395,6 +398,12 @@ Cypress.Commands.add('updateRunInfo', () => {
                           // Update existing value
                           if (label === CONSTANTS.PRODUCT) {
                             existingItem.value = configModuleConst.PRODUCT || 'N/A';
+                          } else if (label === CONSTANTS.SDK_REPORT_VERSION) {
+                            existingItem.value = /^\d+\.\d+\.\d+$/.test(
+                              Cypress.env(Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION))
+                            )
+                              ? Cypress.env(Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION))
+                              : 'N/A';
                           } else {
                             // Use Cypress.env only if value is supposed to be a key
                             const envValue = Cypress.env(value);
@@ -421,20 +430,17 @@ Cypress.Commands.add('updateRunInfo', () => {
             logger.info('Error in updating Run Info in cucumber report', err);
             return false;
           }
-        } else if (tempFileExists && Cypress.env(CONSTANTS.ENV_SDK_VERSION)) {
+        } else if (tempFileExists && Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION)) {
           cy.readFile(tempReportEnvFile).then((reportEnv) => {
             if (reportEnv) {
               if (
                 reportEnv.customData &&
                 reportEnv.customData.data &&
-                reportEnv.customData.data.length > 0 &&
-                reportEnv.customData.data.some(
-                  (item) => item.label === CONSTANTS.SDK_REPORT_VERSION && item.value === 'N/A'
-                )
+                reportEnv.customData.data.length > 0
               ) {
                 reportEnv.customData.data.forEach((item) => {
                   if (item.label === CONSTANTS.SDK_REPORT_VERSION) {
-                    item.value = Cypress.env(CONSTANTS.ENV_SDK_VERSION);
+                    item.value = Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION);
                   }
                 });
               }
@@ -1600,6 +1606,15 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
                 }
               }
             });
+          } else {
+            cy.validateContent(
+              method,
+              context,
+              validationJsonPath,
+              contentObject,
+              validationType,
+              appId
+            );
           }
         } catch (error) {
           assert(false, `Unable to validate the response: ${error}`);
@@ -2019,8 +2034,8 @@ Cypress.Commands.add('sendKeyPress', (key, delay) => {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
     params: { key: key, delay: delay },
   };
-
-  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+  const timeout = (Array.isArray(key) ? key.length : 1) * delay * 1000 + 10000; // Calculate timeout based on key press sequence and delay
+  cy.sendMessagetoPlatforms(requestMap, timeout).then((result) => {
     cy.log(`Sent key press: ${key} with delay: ${delay}.`);
   });
 });

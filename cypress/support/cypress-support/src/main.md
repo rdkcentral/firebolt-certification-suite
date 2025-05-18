@@ -4,15 +4,32 @@ The main.js is where all cypress-support Cypress commands are defined.
 
 ### Supported Commands
 
-#### > cy.sendMessagetoPlatforms(messageObject)
+#### > cy.sendMessagetoPlatforms(messageObject, responseWaitTime)
 
 This command will look for any request override config present for given firebolt module/method.if not present,it will calls the transport manager with requestMap as originally passed.Once a response is recieved the config module checks for a response override,if not present will return response from transport manager.
 
-Ex:
+##### Params:
 
+| Param            | Definition                                                               |
+| ---------------- | ------------------------------------------------------------------------ |
+| requestMap       | requestMap should contain method and param etc.                          |
+| responseWaitTime | responseWaitTime is the time to wait for the response from the platform. |
+
+**Note**: The responseTimeout is set to 15000ms by default. If the response is not received within this time, it will throw an error. You can override this value by passing a different value in the `responseWaitTime` parameter.
+
+**Example:**
+
+```javascript
+request: cy.sendMessagetoPlatforms({
+  method: 'closedcaptions.setEnabled',
+  params: { value: true },
+});
 ```
-request: cy.sendMessagetoPlatforms( {"method": "closedcaptions.setEnabled", "params": { "value": true }} )
+
+```javascript
+request: cy.sendMessagetoPlatforms({ method: 'fcs.setEnabled', params: {} });
 ```
+
 Note: Response can vary depending on the configuration module being used.
 
 #### > cy.startTest(datatables)
@@ -41,14 +58,29 @@ request: cy.runIntentAddon("RunTest", {"communicationMode": "SDK","action": "COR
 
 response: {"communicationMode": "SDK","action": "CORE", metadata:{...}}
 ```
+
 #### > cy.sendMessagetoApp(requestTopic, responseTopic, intent, longPollTimeout)
 
 This command will initialize a transport client, publish a message on a topic, subscribe to a message on the same topic, pushes the results to a global queue, polls the queue for a particular time period and returns the response fetched from queue based on id matching
 
-Ex:
+##### Params:
 
-```
-request: cy.sendMessagetoApp('mac_appId_FCS',mac_appId_FCA,{"communicationMode": "SDK","action": "search"}, 1000)
+| Param           | Description                                                                        |
+| --------------- | ---------------------------------------------------------------------------------- |
+| requestTopic    | The topic used to publish the message.                                              |
+| responseTopic   | The topic used to subscribe to the message.                                         |
+| intent          | A basic intent message applicable to all platforms to initiate the test on FCA.    |
+| longPollTimeout | The duration to wait for a response from the app.                                   |
+
+**Example:**
+
+```javascript
+request: cy.sendMessagetoApp(
+  'mac_appId_FCS',
+  mac_appId_FCA,
+  { communicationMode: 'SDK', action: 'search' },
+  15000
+);
 ```
 
 Note: Response can vary depending on the execution.
