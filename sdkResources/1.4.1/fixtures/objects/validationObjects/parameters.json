@@ -74,6 +74,141 @@
       }
     ]
   },
+  "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_VOICE": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_HOMEINTENT_WITH_SOURCE_VOICE",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_EDITORIAL-MERCHANDISING": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_HOMEINTENT_WITH_SOURCE_EDITORIAL-MERCHANDISING",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_SEARCH": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_HOMEINTENT_WITH_SOURCE_SEARCH",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_AUTOMATED-RAIL": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_HOMEINTENT_WITH_SOURCE_AUTOMATED-RAIL",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_PLAY-NOW-RAIL": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_HOMEINTENT_WITH_SOURCE_PLAY-NOW-RAIL",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_PLAYLIST-RAIL": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_HOMEINTENT_WITH_SOURCE_PLAYLIST-RAIL",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_SHOWPAGE": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_HOMEINTENT_WITH_SOURCE_SHOWPAGE",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_APPS-RAIL-LAUNCH": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_HOMEINTENT_WITH_SOURCE_APPS-RAIL-LAUNCH",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_LINEAR-TRIGGER": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_HOMEINTENT_WITH_SOURCE_LINEAR-TRIGGER",
+            "description": "Validation of the Parameters initialization for homeIntent Format"
+          }
+        ]
+      }
+    ]
+  },
   "PARAMETERS_INITIALIZATION_PLAYBACKINTENT": {
     "method": "parameters.initialization",
     "data": [
