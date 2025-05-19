@@ -1,3 +1,10 @@
+# [1.12.0-dev.15](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.14...v1.12.0-dev.15) (2025-05-19)
+
+
+### Features
+
+* App assurance data format change ([#421](https://github.com/rdkcentral/firebolt-certification-suite/issues/421)) ([d3c69f0](https://github.com/rdkcentral/firebolt-certification-suite/commit/d3c69f0ade0fdd796959b0f16a87a24f8138138c))
+
 # [1.12.0-dev.14](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.13...v1.12.0-dev.14) (2025-05-14)
 
 
