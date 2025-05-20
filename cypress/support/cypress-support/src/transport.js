@@ -27,42 +27,50 @@ export default class Transport {
 
   async sendMessage(messageObject, responseWaitTime) {
     logger.info(`Printing the message object: ${JSON.stringify(messageObject)}`, `sendMessage`);
-    if (this.isFireboltSDK(messageObject)) {
-      if (!messageObject.action) {
-        messageObject.action = CONSTANTS.CORE;
-      }
-      // Object contains a "method" field in the format "<Module>.<Method>". Consider it as Firebolt call.
-      // Expected format: {"action": "CORE", "method": "closedCaptions.setEnabled", "params": "", "paramsArray": ""}
-      const methodResponse = await this.fireboltInvoker.invoke(
-        messageObject.method,
-        messageObject.params
-      );
-      return methodResponse;
-    } else if (this.isMTC(messageObject)) {
-      // Object contains "transport" and "options" fields, consider it as MTC call.
-      messageObject.options.timeout = responseWaitTime;
-      const transportClient = await modularTransportClient(messageObject.transport, {
-        ...messageObject.options,
-      });
-      // If given transportClient exists, initialize the client else throw error.
-      if (transportClient) {
-        if (messageObject.payload) {
-          return transportClient.send(messageObject.payload);
+    try {
+      if (this.isFireboltSDK(messageObject)) {
+        if (!messageObject.action) {
+          messageObject.action = CONSTANTS.CORE;
         }
-        return transportClient.send();
+
+        // Object contains a "method" field in the format "<Module>.<Method>". Consider it as Firebolt call.
+        // Expected format: {"action": "CORE", "method": "closedCaptions.setEnabled", "params": "", "paramsArray": ""}
+        const methodResponse = await this.fireboltInvoker.invoke(
+          messageObject.method,
+          messageObject.params
+        );
+        return methodResponse;
+      } else if (this.isMTC(messageObject)) {
+        // Object contains "transport" and "options" fields, consider it as MTC call.
+        messageObject.options.timeout = responseWaitTime;
+        const transportClient = await modularTransportClient(messageObject.transport, {
+          ...messageObject.options,
+        });
+
+        // If given transportClient exists, initialize the client else throw error.
+        if (transportClient) {
+          const response = messageObject.payload
+            ? await transportClient.send(messageObject.payload)
+            : await transportClient.send();
+  
+          return response;
+        }
+  
+        const errorResponse = {
+          error: {
+            code: -32602,
+            message: 'Invalid params',
+            data: 'Failed to initialize transport client. Invalid Inputs!',
+          },
+        };
+        return errorResponse;
+      } else {
+        logger.info(`Neither MTC or firebolt object.`, `sendMessage`);
+        return messageObject;
       }
-      return {
-        error: {
-          code: -32602,
-          message: 'Invalid params',
-          data: 'Failed to initialize transport client. Invalid Inputs!',
-        },
-      };
-    } else {
-      // TO DO: Update this logic to a better solution
-      // return { error: { code: -32602, message: "Invalid params", data: "Neither MTC or firebolt object." } }
-      logger.info(`Neither MTC or firebolt object.`, `sendMessage`);
-      return messageObject;
+    } catch (err) {
+      console.error('Error in sendMessage:', err);
+      throw err;
     }
   }
 

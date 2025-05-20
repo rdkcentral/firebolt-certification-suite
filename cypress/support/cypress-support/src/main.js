@@ -37,13 +37,14 @@ const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/inde
 const externalV2FireboltMockData = require('../../../fixtures/external/fireboltCalls/index');
 
 export default function (module) {
+  let pubSubClient = null;
   const config = new Config(module);
   const validationModule = new Validation(module);
   const transport = new TransportLayer();
   Cypress.env(CONSTANTS.RESPONSE_TOPIC_LIST, []);
 
   // Fetch the required appTransport from config module
-  appTransport = module.appTransport;
+  appTransport = module.externalTransport.Linchpin.default;
 
   // before All
   before(() => {
@@ -55,11 +56,12 @@ export default function (module) {
       timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT,
     }).then((result) => {
       if (result) {
+        pubSubClient = result;
         cy.log('Successfully established a pub/sub connection.');
       } else {
         cy.log('Unable to establish a pub/sub connection.');
       }
-      Cypress.env('pubSubClient', appTransport);
+      Cypress.env('pubSubClient', pubSubClient);
       cy.startAdditionalServices();
     });
 
@@ -212,7 +214,7 @@ export default function (module) {
           });
         }
         // unsubscribing the list of topics
-        appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
+        pubSubClient.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
         await transport.unsubscribe();
 
         // Unsubscribe from WebSocket if the client is available
@@ -433,8 +435,10 @@ export default function (module) {
         if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
           fireLog.fail(`Did not receive response in ${sanityTimeout}ms. at topic ${responseTopic}`);
         } else {
+          let payload;
           try {
-            response = JSON.parse(response);
+            parsedResponse = JSON.parse(response);
+            payload = JSON.parse(parsedResponse.payload); 
           } catch (error) {
             logger.error('Failed to parse JSON response. Response: ', JSON.stringify(response));
             assert(
@@ -442,9 +446,9 @@ export default function (module) {
               'Failed to parse JSON response from Firebolt implementation. Please check the response format.'
             );
           }
-
+          const { report } = payload;
           assert.exists(
-            response.report,
+            report,
             'The response does not contain the expected "report" object. Ensure the Firebolt implementation returns a valid response with a "report" field.'
           );
 
@@ -453,11 +457,11 @@ export default function (module) {
             const reportPath = CONSTANTS.SANITY_REPORT_FILE_PATH;
             cy.task(CONSTANTS.WRITE_TO_FILE, {
               fileName: reportPath,
-              data: JSON.stringify(response.report),
+              data: JSON.stringify(report),
             });
           }
 
-          cy.generateAndPushReports(response.report);
+          cy.generateAndPushReports(report);
         }
       });
     });
@@ -522,8 +526,14 @@ export default function (module) {
         `Entering sendMessagetoApp() - cypress-support/src/main.js with params: requestTopic=${requestTopic}, responseTopic=${responseTopic}, intent=${JSON.stringify(intent)}`
       );
 
+      if (!pubSubClient) {
+        cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
+          assert(false, CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
+        });
+        return;
+      }
+  
       const headers = { id: uuidv4() };
-
       // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
       longPollTimeout = longPollTimeout ? longPollTimeout : CONSTANTS.LONGPOLL_TIMEOUT;
       // Subscribing to the topic when the topic is not subscribed.
@@ -532,14 +542,14 @@ export default function (module) {
         !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
       ) {
         // Subscribe to topic and pass the results to the callback function
-        appTransport.subscribe(responseTopic, UTILS.subscribeResults);
+        pubSubClient.subscribe(responseTopic, UTILS.subscribeResults);
         UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
       }
-
-      if (appTransport) {
+  
+      if (pubSubClient) {
         // Publish the message on topic
-        appTransport.publish(requestTopic, JSON.stringify(intent), headers);
-
+        pubSubClient.publish(requestTopic, JSON.stringify(intent), headers);
+  
         // Returns the response after polling when data is available in queue
         return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
           .LongPollQueue(headers.id, longPollTimeout)
@@ -554,7 +564,7 @@ export default function (module) {
           });
       } else {
         cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
-          fireLog.fail(CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
+          assert(false, CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
         });
       }
     }
