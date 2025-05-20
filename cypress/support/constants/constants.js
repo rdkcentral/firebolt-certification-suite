@@ -458,6 +458,7 @@ module.exports = {
     PERFORMANCETESTHANDLER: 'performanceTestHandler',
     VISIBILITYSTATE: 'visibilityState',
     REGISTERPROVIDERHANDLER: 'registerProviderHandler',
+    CLEAR_ALL_LISTENERS: 'clearAllListeners',
   },
   TEST_TYPE: 'testType',
   THIRD_PARTY_APP: '3rd party app',

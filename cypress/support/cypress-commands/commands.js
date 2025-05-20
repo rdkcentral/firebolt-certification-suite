@@ -1362,15 +1362,14 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
       if (task == CONSTANTS.TASK.REGISTEREVENT) {
         if (response && response.result && response.result.hasOwnProperty(CONSTANTS.LISTENING)) {
           const eventResponse = {
-            eventListenerId: response.result.event + '-' + response.id,
             eventListenerResponse: response.result,
           };
           response.result = eventResponse;
         }
-        if (response && response.error && response.error.message) {
+        if (response && response.error) {
           fireLog.assert(
             false,
-            `Event registration failed for event ${method} with error message: ${response.error.message} `
+            `Event registration failed for event ${method} with error message: ${JSON.stringify(response.error)} `
           );
         }
       }
@@ -1527,7 +1526,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
     } else {
       cy.then(() => {
         if (validationType == CONSTANTS.EVENT) {
-          const eventName = methodOrEventObject.eventObjectId;
+          const eventName = methodOrEventObject.eventName;
           let eventResponse;
           if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
             const requestMap = {
@@ -1554,6 +1553,10 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
               response.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
             ) {
               response.result = response.result.eventResponse;
+            }
+            // Parse v2 events for first party events
+            if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
+              response.result = Object.values(response.result)[0];
             }
             cy.updateResponseForFCS(method, null, response, true, isNullCase).then(
               (updatedResponse) => {

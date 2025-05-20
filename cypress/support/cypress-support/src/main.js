@@ -105,6 +105,21 @@ export default function (module) {
     const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
     const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
     Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
+
+    // Check if the incoming SDK version is 2.0.0 or above and replace the widget in device with 2.0 changes.
+    // const pattern = /(2|\d{2,})\.\d+\.\d+/;
+    // if (
+    //   UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false) &&
+    //   pattern.test(UTILS.getEnvVariable(CONSTANTS.SDK_VERSION))
+    // ) {
+    //   const requestMap = {
+    //     method: 'fcs.<function>',
+    //     params: null,
+    //   };
+    //   cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    //     console.log('response------------------', response);
+    //   });
+    // }
   });
 
   // beforeEach
@@ -198,6 +213,36 @@ export default function (module) {
         }
       );
     });
+  });
+
+  afterEach(() => {
+    // Make a clear all event listeners call and clear the deregister the events
+    // Need to see what method name can be passed here, instead of device.name.
+    const requestMap = {
+      method: 'call.clearAllListeners',
+      params: null,
+      action: 'core',
+      task: 'clearAllListeners',
+    };
+    cy.sendMessagetoPlatforms(requestMap).then((response) => {
+      fireLog.info(
+        `Response from firstParty app for clearAllListeners: ${JSON.stringify(response)}`
+      );
+    });
+
+    // Check the appLaunch count, if count is greater than 0, then 3rd party app is launched and clear all listeners
+    if (UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_COUNT, false) > 0) {
+      const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
+      const requestTopic = UTILS.getTopic(appId);
+      const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+      const intent = UTILS.createIntentMessage(CONSTANTS.TASK.CLEAR_ALL_LISTENERS, {});
+      cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
+        fireLog.info(
+          `Response from ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)} for clearAllListeners: ${JSON.stringify(response)}`
+        );
+      });
+    }
+    Cypress.env(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST, []);
   });
 
   // after All
