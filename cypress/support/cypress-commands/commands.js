@@ -1176,8 +1176,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
             ${requestTopic} topic.`
             );
           }
-          healthCheckResponse = JSON.parse(healthCheckResponse);
-          expect(healthCheckResponse.status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
+          const { payload } = JSON.parse(healthCheckResponse);
+          const { status } = JSON.parse(payload);
+          expect(status).to.be.oneOf([CONSTANTS.RESPONSE_STATUS.OK]);
         });
         cy.getSdkVersion().then(() => {
           cy.getFireboltJsonData().then((data) => {
