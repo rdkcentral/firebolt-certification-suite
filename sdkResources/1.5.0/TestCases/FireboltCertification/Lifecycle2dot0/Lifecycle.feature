@@ -2,7 +2,7 @@
 Feature: Lifecycle_Initializing
 
     # Need to remove
-    # Scenario: Launching an App (initializing -> paused)
+    # Scenario: Launching an App with initializing state and moving to paused state
     #     Given the environment has been set up for 'lifecycle' tests
     #     # Launching app using AppManager.launchApp or preloadApp method
     #     And 3rd party 'certification' app is launched with 'initializing' state
@@ -30,7 +30,7 @@ Feature: Lifecycle_Initializing
 
     Scenario: Launching an App with paused state and moving to active state
         Given the environment has been set up for 'lifecycle' tests
-        #launching app using AppManager.launchApp or preloadApp method, may require separate glue code
+        #launching app using AppManager.launchApp
         And 3rd party 'certification' app is launched with 'paused' state
         # LifecycleManager.setTargetAppState to 'active' state
         When '3rd party app' transitions to state 'active'
@@ -38,7 +38,7 @@ Feature: Lifecycle_Initializing
 
     Scenario: Launching an App with paused state and moving to suspended state
         Given the environment has been set up for 'lifecycle' tests
-        #launching app using AppManager.launchApp or preloadApp method, may require separate glue code
+        #launching app using AppManager.launchApp
         And 3rd party 'certification' app is launched with 'paused' state
         # LifecycleManager.setTargetAppState to 'suspended' state
         When '3rd party app' transitions to state 'suspended'
@@ -46,7 +46,7 @@ Feature: Lifecycle_Initializing
 
     Scenario: Launching an App with hibernated state and moving to suspended state
         Given the environment has been set up for 'lifecycle' tests
-        #launching app using AppManager.launchApp or preloadApp method, may require separate glue code
+        #launching app using AppManager.launchApp
         And 3rd party 'certification' app is launched with 'hibernated' state
         # LifecycleManager.setTargetAppState to 'suspended' state
         When '3rd party app' transitions to state 'suspended'
@@ -54,19 +54,19 @@ Feature: Lifecycle_Initializing
 
     Scenario: Launching an App with suspended state and moving to hibernated state
         Given the environment has been set up for 'lifecycle' tests
-        #launching app using AppManager.launchApp or preloadApp method, may require separate glue code
+        #launching app using AppManager.launchApp
         And 3rd party 'certification' app is launched with 'suspended' state
         # LifecycleManager.setTargetAppState to 'hibernated' state
         When '3rd party app' transitions to state 'hibernated'
         And '3rd party app' will stay in 'hibernated' state
 
-
     # Need to remove
-    # Scenario: Launching an App (initializing -> active) expecting error
+    # Scenario: Launching an App with initializing state and moving to active state
     #     Given the environment has been set up for 'lifecycle' tests
     #     # Launching app using AppManager.launchApp
     #     And 3rd party 'certification' app is launched with 'initializing' state
     #     # LifecycleManager.setTargetAppState to 'ACTIVE' state
+    #     # state transition is not possible so expecting error
     #     When '3rd party app' transitions to state 'active'
     #     And '3rd party app' will stay in 'active' state
 
@@ -75,6 +75,7 @@ Feature: Lifecycle_Initializing
         #launching app using AppManager.launchApp
         And 3rd party 'certification' app is launched with 'suspended' state
         # LifecycleManager.setTargetAppState to 'active' state
+        # state transition is not possible so expecting error
         When '3rd party app' transitions to state 'active'
         And '3rd party app' will stay in 'active' state
 
@@ -83,6 +84,7 @@ Feature: Lifecycle_Initializing
         #launching app using AppManager.launchApp
         And 3rd party 'certification' app is launched with 'hibernated' state
         # LifecycleManager.setTargetAppState to 'active' state
+        # state transition is not possible so expecting error
         When '3rd party app' transitions to state 'active'
         And '3rd party app' will stay in 'active' state
 
@@ -92,6 +94,7 @@ Feature: Lifecycle_Initializing
         #launching app using AppManager.launchApp
         And 3rd party 'certification' app is launched with 'hibernated' state
         # LifecycleManager.setTargetAppState to 'RUNNING' state
+        # state transition is not possible so expecting error
         When '3rd party app' transitions to state 'paused'
         And '3rd party app' will stay in 'paused' state
 
@@ -100,6 +103,7 @@ Feature: Lifecycle_Initializing
     #     #launching app using AppManager.launchApp
     #     And 3rd party 'certification' app is launched with 'initializing' state
     #     # LifecycleManager.setTargetAppState to 'suspended' state
+    #     # state transition is not possible so expecting error
     #     When '3rd party app' transitions to state 'suspended'
     #     And '3rd party app' will stay in 'suspended' state
 
@@ -108,6 +112,7 @@ Feature: Lifecycle_Initializing
         #launching app using AppManager.launchApp
         And 3rd party 'certification' app is launched with 'active' state
         # LifecycleManager.setTargetAppState to 'suspended' state
+        # state transition is not possible so expecting error
         When '3rd party app' transitions to state 'suspended'
         And '3rd party app' will stay in 'suspended' state
 
@@ -117,6 +122,7 @@ Feature: Lifecycle_Initializing
     #     #launching app using AppManager.launchApp
     #     And 3rd party 'certification' app is launched with 'initializing' state
     #     # LifecycleManager.setTargetAppState to 'hibernated' state
+    #     # state transition is not possible so expecting error
     #     When '3rd party app' transitions to state 'hibernated'
     #     And '3rd party app' will stay in 'hibernated' state
 
@@ -125,6 +131,7 @@ Feature: Lifecycle_Initializing
         #launching app using AppManager.launchApp
         And 3rd party 'certification' app is launched with 'paused' state
         # LifecycleManager.setTargetAppState to 'hibernated' state
+        # state transition is not possible so expecting error
         When '3rd party app' transitions to state 'hibernated'
         And '3rd party app' will stay in 'hibernated' state
 
@@ -133,16 +140,9 @@ Feature: Lifecycle_Initializing
         #launching app using AppManager.launchApp
         And 3rd party 'certification' app is launched with 'active' state
         # LifecycleManager.setTargetAppState to 'hibernated' state
+        # state transition is not possible so expecting error
         When '3rd party app' transitions to state 'hibernated'
         And '3rd party app' will stay in 'hibernated' state
-
-    Scenario: Launching an App (active -> hibernated) expecting error
-        Given the environment has been set up for 'lifecycle' tests
-        #launching app using AppManager.launchApp
-        And 3rd party 'certification' app is launched with 'initializing' state
-        # LifecycleManager.setTargetAppState to 'ACTIVE' state
-        When '3rd party app' transitions to state 'active'
-        And '3rd party app' will stay in 'active' state
 
     Scenario: Launching an App with paused state and unloading app
         Given the environment has been set up for 'lifecycle' tests
@@ -167,3 +167,52 @@ Feature: Lifecycle_Initializing
         # Calling lifecycle.close or closeApp
         When '3rd party app' transitions to state 'unload'
         And '3rd party app' will stay in 'unload' state
+
+
+
+    # Scenarios for seeting the same state is required?
+
+    # Scenario: Launching an App with initializing state and moving to initializing state.
+    #     Given the environment has been set up for 'lifecycle' tests
+    #     #launching app using AppManager.launchApp
+    #     And 3rd party 'certification' app is launched with 'initializing' state
+    #     # LifecycleManager.setTargetAppState to 'initializing' state
+    #     # No firebolt interaction logs
+    #     When '3rd party app' transitions to state 'initializing'
+    #     And '3rd party app' will stay in 'initializing' state
+
+    Scenario: Launching an App with paused state and moving to paused state.
+        Given the environment has been set up for 'lifecycle' tests
+        #launching app using AppManager.launchApp
+        And 3rd party 'certification' app is launched with 'paused' state
+        # LifecycleManager.setTargetAppState to 'paused' state
+        # No firebolt interaction logs
+        When '3rd party app' transitions to state 'paused'
+        And '3rd party app' will stay in 'paused' state
+
+    Scenario: Launching an App with active state and moving to active state.
+        Given the environment has been set up for 'lifecycle' tests
+        #launching app using AppManager.launchApp
+        And 3rd party 'certification' app is launched with 'active' state
+        # LifecycleManager.setTargetAppState to 'active' state
+        # No firebolt interaction logs
+        When '3rd party app' transitions to state 'active'
+        And '3rd party app' will stay in 'active' state
+
+    Scenario: Launching an App with suspended state and moving to suspended state.
+        Given the environment has been set up for 'lifecycle' tests
+        #launching app using AppManager.launchApp
+        And 3rd party 'certification' app is launched with 'suspended' state
+        # LifecycleManager.setTargetAppState to 'suspended' state
+        # No firebolt interaction logs
+        When '3rd party app' transitions to state 'suspended'
+        And '3rd party app' will stay in 'suspended' state
+
+    Scenario: Launching an App with hibernated state and moving to hibernated state.
+        Given the environment has been set up for 'lifecycle' tests
+        #launching app using AppManager.launchApp
+        And 3rd party 'certification' app is launched with 'hibernated' state
+        # LifecycleManager.setTargetAppState to 'hibernated' state
+        # No firebolt interaction logs
+        When '3rd party app' transitions to state 'hibernated'
+        And '3rd party app' will stay in 'hibernated' state
