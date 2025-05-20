@@ -124,10 +124,6 @@ export default function (module) {
 
   // beforeEach
   beforeEach(() => {
-    // Set the firstPartyEvent and thirdPartyEvent to false by default and reset after each testcase.
-    Cypress.env(CONSTANTS.FIRST_PARTY_EVENT_TYPE, false);
-    Cypress.env(CONSTANTS.THIRD_PARTY_EVENT_TYPE, false);
-
     cy.getBeforeOperationObject();
     cy.initiatePerformanceMetrics();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);

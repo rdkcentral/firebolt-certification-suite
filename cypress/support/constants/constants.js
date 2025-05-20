@@ -532,8 +532,6 @@ module.exports = {
   LOGGEDIN: 'loggedIn',
   LOGGEDOUT: 'loggedOut',
   DISMISS: 'dismiss',
-  FIRST_PARTY_EVENT_TYPE: 'firstPartyEventType',
-  THIRD_PARTY_EVENT_TYPE: 'thirdPartyEventType',
   DETAILED: 'detailed',
   APP_LAUNCH_COUNT: 'appLaunchCount',
   HOT_LAUNCH: 'HOT_LAUNCH',
