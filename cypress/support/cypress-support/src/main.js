@@ -222,21 +222,27 @@ export default function (module) {
   afterEach(() => {
     // Make a clear all event listeners call and clear the deregister the events
     // Need to see what method name can be passed here, instead of device.name.
-    const requestMap = { method: 'call.clearEvent', params: null, task: 'clearAllListeners' };
-    if (UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_EVENT_TYPE)) {
-      cy.sendMessagetoPlatforms(requestMap).then((response) => {
-        fireLog.info(`Response from firstParty app: ${JSON.stringify(response)}`);
-      });
-    }
+    const requestMap = {
+      method: 'call.clearAllListeners',
+      params: null,
+      action: 'core',
+      task: 'clearAllListeners',
+    };
+    cy.sendMessagetoPlatforms(requestMap).then((response) => {
+      fireLog.info(
+        `Response from firstParty app for clearAllListeners: ${JSON.stringify(response)}`
+      );
+    });
 
-    if (UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_EVENT_TYPE)) {
+    // Check the appLaunch count, if count is greater than 0, then 3rd party app is launched and clear all listeners
+    if (UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_COUNT, false) > 0) {
       const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
       const requestTopic = UTILS.getTopic(appId);
       const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
       const intent = UTILS.createIntentMessage(CONSTANTS.TASK.CLEAR_ALL_LISTENERS, {});
       cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
         fireLog.info(
-          `Response from ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(response)}`
+          `Response from ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)} for clearAllListeners: ${JSON.stringify(response)}`
         );
       });
     }
