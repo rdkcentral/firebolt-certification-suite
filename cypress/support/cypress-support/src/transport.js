@@ -42,6 +42,7 @@ export default class Transport {
         return methodResponse;
       } else if (this.isMTC(messageObject)) {
         // Object contains "transport" and "options" fields, consider it as MTC call.
+        messageObject.transport = 'PubSub';  // ToDo: Is there a better way to achive this?
         messageObject.options.timeout = responseWaitTime;
         const transportClient = await modularTransportClient(messageObject.transport, {
           ...messageObject.options,

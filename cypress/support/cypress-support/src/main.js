@@ -44,7 +44,7 @@ export default function (module) {
   Cypress.env(CONSTANTS.RESPONSE_TOPIC_LIST, []);
 
   // Fetch the required appTransport from config module
-  appTransport = module.externalTransport.Linchpin.default;
+  appTransport = module.externalTransport.PubSub.default;
 
   // before All
   before(() => {
@@ -528,7 +528,7 @@ export default function (module) {
 
       if (!pubSubClient) {
         cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
-          assert(false, CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
+          fireLog.fail(CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
         });
         return;
       }
@@ -546,27 +546,21 @@ export default function (module) {
         UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
       }
 
-      if (pubSubClient) {
-        // Publish the message on topic
-        pubSubClient.publish(requestTopic, JSON.stringify(intent), headers);
+      // Publish the message on topic
+      pubSubClient.publish(requestTopic, JSON.stringify(intent), headers);
 
-        // Returns the response after polling when data is available in queue
-        return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
-          .LongPollQueue(headers.id, longPollTimeout)
-          .then((results) => {
-            if (results) {
-              // Response recieved from queue
-              logger.debug(`Response received from queue: ${JSON.stringify(results)}`);
-              return results;
-            } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
-              return true;
-            }
-          });
-      } else {
-        cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
-          assert(false, CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
+      // Returns the response after polling when data is available in queue
+      return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
+        .LongPollQueue(headers.id, longPollTimeout)
+        .then((results) => {
+          if (results) {
+            // Response recieved from queue
+            logger.debug(`Response received from queue: ${JSON.stringify(results)}`);
+            return results;
+          } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
+            return true;
+          }
         });
-      }
     }
   );
 
