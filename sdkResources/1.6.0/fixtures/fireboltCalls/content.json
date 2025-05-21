@@ -1,0 +1,5 @@
+{
+    "CONTENT_ONUSERINTEREST":{
+        "method": "discovery_content.onUserInterest"
+    }
+}
