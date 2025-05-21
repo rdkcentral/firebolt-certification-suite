@@ -44,12 +44,12 @@ export default function (module) {
   Cypress.env(CONSTANTS.RESPONSE_TOPIC_LIST, []);
 
   // Fetch the required appTransport from config module
-  appTransport = module.externalTransport.PubSub.default;
+  const firstExternalTransportKey = Object.keys(module.externalTransport)[0];
+  appTransport = module.externalTransport[firstExternalTransportKey].default;
 
   // before All
   before(() => {
     logger.debug('Entering before() - cypress-support/src/main.js');
-
     // Added below custom commands to clear cache and to reload browser
     cy.clearCache();
     cy.wrap(UTILS.pubSubClientCreation(appTransport), {
