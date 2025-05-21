@@ -54,3 +54,16 @@
 ### Examples:
 * `And Firebolt Certification Suite communicates successfully with the '1st party app'`
 * `And Firebolt Certification Suite communicates successfully with the '3rd party app'`
+
+## I search text {String} is found in the {String} log
+
+### Purpose: This function is used to search for a specific log pattern within log files. It helps in identifying particular text strings in the logs.
+
+### Params:
+| Param | Definition|
+| --- | --- |
+| logKey | The specific pattern or string that you want to search for within the log files |
+| fileIdentifier| The identifier for the specific log file to search within. If not provided, the search will be conducted across all relevant log files. |
+
+### Examples:
+* `I search text 'call returning' is found in the 'logFile' log`
