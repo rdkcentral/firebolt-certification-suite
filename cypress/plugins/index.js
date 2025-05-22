@@ -46,7 +46,7 @@ let metaDataArr = [];
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
   const testsuite = config.env.testSuite;
-  const sdkVersion = process.env.SDK_VERSION;
+  const sdkVersion = config.env.sdkVersion;
   const specPattern = getSpecPattern(testsuite);
   if (specPattern !== undefined) {
     config.specPattern = specPattern;
@@ -256,6 +256,7 @@ module.exports = async (on, config) => {
     let suiteName = 'cucumber' + '_' + timestamp;
     let jobId;
     let elk = false;
+    let certification = false;
 
     // Creating uuid folder under reports
     if (results.config.env.jobId) {
@@ -266,6 +267,11 @@ module.exports = async (on, config) => {
     // Send elk variable to report processor if env variable is set to true
     if (results.config.env.elk) {
       elk = results.config.env.elk;
+    }
+
+    // Send certification variable to report properties if env variable is set to true
+    if (results.config.env.certification) {
+      certification = results.config.env.certification;
     }
 
     if (!fs.existsSync(filePath)) {
@@ -330,6 +336,7 @@ module.exports = async (on, config) => {
           }
           reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
           reportProperties.customReportData = customReportData;
+          reportProperties.certification = certification;
           // Add the report to the reportObj
           if (reportType === CONSTANTS.CUCUMBER) {
             reportObj.cucumberReport = jsonReport;

@@ -66,7 +66,7 @@ function determineSdkVersion() {
 
 // Get sdkVersion
 const sdkVersion = determineSdkVersion();
-process.env.SDK_VERSION = sdkVersion;
+process.env.CYPRESS_sdkVersion = sdkVersion;
 
 // Creating UUID
 function generateUUID() {
@@ -131,7 +131,7 @@ function modifyParams(params) {
 function isCombinedTestRun(params) {
   const specValueMatch = params.match(/--spec\s+([^ ]*)/);
   const specValue = specValueMatch ? specValueMatch[1] : '';
-  return specValue === '*' || specValue.includes(',');
+  return specValue.includes('*') || specValue.includes(',');
 }
 
 const isCombinedTest = isCombinedTestRun(params);
@@ -183,6 +183,7 @@ function run() {
     if (code !== 0) {
       console.error(`Cypress process exited with code ${code}`);
     }
+    process.exit(code);
   });
 }
 
@@ -204,6 +205,7 @@ function open() {
     if (code !== 0) {
       console.error(`Cypress process exited with code ${code}`);
     }
+    process.exit(code);
   });
 }
 

@@ -424,6 +424,15 @@ Given(
           } else if (
             // Check if defaultKeyPressSequence is defined for the specific appId in app_metadata
             !KeyPressSequence &&
+            Cypress.env(CONSTANTS.APP_METADATA)?.apps?.[0]?.[appId]?.defaultKeyPressSequence?.[
+              loggedType
+            ]
+          ) {
+            KeyPressSequence = Cypress.env(CONSTANTS.APP_METADATA).apps[0][appId]
+              .defaultKeyPressSequence[loggedType];
+          } else if (
+            // Check if defaultKeyPressSequence is defined for the specific appId in app_metadata
+            !KeyPressSequence &&
             Cypress.env(CONSTANTS.APP_METADATA)?.[appId]?.defaultKeyPressSequence?.[loggedType]
           ) {
             KeyPressSequence = Cypress.env(CONSTANTS.APP_METADATA)[appId].defaultKeyPressSequence[
