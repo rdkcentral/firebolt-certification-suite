@@ -435,10 +435,8 @@ export default function (module) {
         if (response === CONSTANTS.RESPONSE_NOT_FOUND) {
           fireLog.fail(`Did not receive response in ${sanityTimeout}ms. at topic ${responseTopic}`);
         } else {
-          let payload;
           try {
-            parsedResponse = JSON.parse(response);
-            payload = JSON.parse(parsedResponse.payload);
+            response = JSON.parse(response);
           } catch (error) {
             logger.error('Failed to parse JSON response. Response: ', JSON.stringify(response));
             assert(
@@ -446,9 +444,8 @@ export default function (module) {
               'Failed to parse JSON response from Firebolt implementation. Please check the response format.'
             );
           }
-          const { report } = payload;
           assert.exists(
-            report,
+            response.report,
             'The response does not contain the expected "report" object. Ensure the Firebolt implementation returns a valid response with a "report" field.'
           );
 
@@ -457,11 +454,11 @@ export default function (module) {
             const reportPath = CONSTANTS.SANITY_REPORT_FILE_PATH;
             cy.task(CONSTANTS.WRITE_TO_FILE, {
               fileName: reportPath,
-              data: JSON.stringify(report),
+              data: JSON.stringify(response.report),
             });
           }
 
-          cy.generateAndPushReports(report);
+          cy.generateAndPushReports(response.report);
         }
       });
     });
