@@ -1,3 +1,10 @@
+# [1.12.0-dev.17](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.16...v1.12.0-dev.17) (2025-05-22)
+
+
+### Bug Fixes
+
+* Added a fix for entos default sdk version ([#429](https://github.com/rdkcentral/firebolt-certification-suite/issues/429)) ([f283708](https://github.com/rdkcentral/firebolt-certification-suite/commit/f283708810afe0e7106b658e77cd9f90f94e4f17))
+
 # [1.12.0-dev.16](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.15...v1.12.0-dev.16) (2025-05-22)
 
 
