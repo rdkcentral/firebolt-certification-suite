@@ -1,3 +1,10 @@
+# [1.12.0-dev.16](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.15...v1.12.0-dev.16) (2025-05-22)
+
+
+### Features
+
+* launchpoint scenarios with different sources ([#399](https://github.com/rdkcentral/firebolt-certification-suite/issues/399)) ([f98509e](https://github.com/rdkcentral/firebolt-certification-suite/commit/f98509e645aee22ccdd8005e8e25530fefef8b48))
+
 # [1.12.0-dev.15](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.14...v1.12.0-dev.15) (2025-05-19)
 
 
