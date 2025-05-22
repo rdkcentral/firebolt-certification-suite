@@ -66,7 +66,7 @@ function determineSdkVersion() {
 
 // Get sdkVersion
 const sdkVersion = determineSdkVersion();
-process.env.SDK_VERSION = sdkVersion;
+process.env.CYPRESS_sdkVersion = sdkVersion;
 
 // Creating UUID
 function generateUUID() {
