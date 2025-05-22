@@ -194,17 +194,20 @@ Cypress.Commands.add('getSdkVersion', () => {
                 ? response.result.api
                 : response.result.sdk;
             const readableSDKVersion = deviceSDKversionJson.readable;
-
-            // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
-            Cypress.env(
-              CONSTANTS.SDK_VERSION,
-              readableSDKVersion.includes(CONSTANTS.NEXT) ||
-                readableSDKVersion.includes(CONSTANTS.PROPOSED)
-                ? readableSDKVersion
-                : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
-            );
+            if (!sdkVersion) {
+              // If the readable SDK version contains a next|proposed, assigning the readable version to the environment variable, otherwise taking the device SDK version.
+              Cypress.env(
+                CONSTANTS.SDK_VERSION,
+                readableSDKVersion.includes(CONSTANTS.NEXT) ||
+                  readableSDKVersion.includes(CONSTANTS.PROPOSED)
+                  ? readableSDKVersion
+                  : `${deviceSDKversionJson.major}.${deviceSDKversionJson.minor}.${deviceSDKversionJson.patch}`
+              );
+            }
           } else {
-            Cypress.env(CONSTANTS.SDK_VERSION, latestSDKversion);
+            if (!sdkVersion) {
+              Cypress.env(CONSTANTS.SDK_VERSION, latestSDKversion);
+            }
           }
           if (response?.result?.firmware?.readable) {
             let deviceFirmware = JSON.stringify(response.result.firmware.readable);
@@ -236,7 +239,9 @@ Cypress.Commands.add('getSdkVersion', () => {
         });
       } else {
         cy.log(`Skipping device.version call due to DEVICE_VERSION_CALL_ENABLED=false`);
-        Cypress.env(CONSTANTS.SDK_VERSION, latestSDKversion);
+        if (!sdkVersion) {
+          Cypress.env(CONSTANTS.SDK_VERSION, latestSDKversion);
+        }
       }
     });
 });
