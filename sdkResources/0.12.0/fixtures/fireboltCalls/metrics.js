@@ -464,7 +464,8 @@ exports.STATIC_METRICS_VARIABLES = {
     height: 1080,
     profile: 12,
   },
-  INTEGER_12: { value: 12 },
+  INTEGER_12: { entityId: 12 },
+  INTEGER_BUILD: { build: 12 },
   ERROR_PARAM_NESTED_OBJECT_ERROR: {
     type: 'media',
     code: 'MEDIA-STALLED',
@@ -886,7 +887,7 @@ exports.NOTIFY_THAT_PLAYBACK_HAS_STOPPED_WITH_NUMERIC_ENTITYID = {
 };
 exports.INFORM_THE_PLATFORM_ABOUT_APP_WITH_NUMERIC_BUILD = {
   method: 'metrics.appInfo',
-  params: this.STATIC_METRICS_VARIABLES.INTEGER_12,
+  params: this.STATIC_METRICS_VARIABLES.INTEGER_BUILD,
   expected: 'error',
 };
 exports.INVALID_PARAMS_FOR_METRICS_APPINFO = {
@@ -955,6 +956,6 @@ exports.INVALID_PARAMS_FOR_METRICS_MEDIAENDED = {
 };
 exports.INFORM_THE_PLATFORM_ABOUT_APP_WITH_BOOLEAN_BUILD = {
   method: 'metrics.appInfo',
-  params: { value: true },
+  params: { build: true },
   expected: 'error',
 };
