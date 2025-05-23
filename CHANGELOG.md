@@ -1,3 +1,45 @@
+# [1.12.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0...v1.12.0) (2025-05-22)
+
+
+### Bug Fixes
+
+* Added a fix for entos default sdk version ([#429](https://github.com/rdkcentral/firebolt-certification-suite/issues/429)) ([f283708](https://github.com/rdkcentral/firebolt-certification-suite/commit/f283708810afe0e7106b658e77cd9f90f94e4f17))
+* Added support to override fixture files ([#397](https://github.com/rdkcentral/firebolt-certification-suite/issues/397)) ([638710e](https://github.com/rdkcentral/firebolt-certification-suite/commit/638710e3a232a83b46b62baea7eace52ef299149))
+* bug fix for content validation and testcase param data fix  ([#408](https://github.com/rdkcentral/firebolt-certification-suite/issues/408)) ([4bdf693](https://github.com/rdkcentral/firebolt-certification-suite/commit/4bdf6935c43bdf1f27f8a69444775e2e929c17b6))
+* capabilities TCs fix ([#407](https://github.com/rdkcentral/firebolt-certification-suite/issues/407)) ([f097a01](https://github.com/rdkcentral/firebolt-certification-suite/commit/f097a01a5751a7af8db03694032053e8a44ea783))
+* change in the constants to support External SDK ([#406](https://github.com/rdkcentral/firebolt-certification-suite/issues/406)) ([dbc694a](https://github.com/rdkcentral/firebolt-certification-suite/commit/dbc694a74f95377f12f64ed40d2fd4c7a61a3f0e))
+* Discovery and Metrics params ([#423](https://github.com/rdkcentral/firebolt-certification-suite/issues/423)) ([e405c03](https://github.com/rdkcentral/firebolt-certification-suite/commit/e405c03514e3580e19ba9e3e4d16005b52326f35))
+* Fix SDK Version in run info ([#417](https://github.com/rdkcentral/firebolt-certification-suite/issues/417)) ([d67a3b9](https://github.com/rdkcentral/firebolt-certification-suite/commit/d67a3b948d57758914f9eadfe4788a44ce57dd10))
+* Params fix 2 ([#420](https://github.com/rdkcentral/firebolt-certification-suite/issues/420)) ([16ea7c3](https://github.com/rdkcentral/firebolt-certification-suite/commit/16ea7c3b430734c341695ec1fc31fbe17347aad5))
+* run.js doesn't handle reports correctly when using wildcards ([#410](https://github.com/rdkcentral/firebolt-certification-suite/issues/410)) ([c539180](https://github.com/rdkcentral/firebolt-certification-suite/commit/c5391803c579a7fc892ee8452a36f3c6c806b459))
+
+
+### Features
+
+* Add support for certification in reporting plugin ([#409](https://github.com/rdkcentral/firebolt-certification-suite/issues/409)) ([f1d3082](https://github.com/rdkcentral/firebolt-certification-suite/commit/f1d3082fe9a23f4f47214b8af67d81bd769d6812))
+* Added configuarable time out ([#405](https://github.com/rdkcentral/firebolt-certification-suite/issues/405)) ([b0089d9](https://github.com/rdkcentral/firebolt-certification-suite/commit/b0089d9a00a9264c8518d6f89f92323a9ec279cf))
+* App assurance data format change ([#421](https://github.com/rdkcentral/firebolt-certification-suite/issues/421)) ([d3c69f0](https://github.com/rdkcentral/firebolt-certification-suite/commit/d3c69f0ade0fdd796959b0f16a87a24f8138138c))
+* Auto-detect action ([#414](https://github.com/rdkcentral/firebolt-certification-suite/issues/414)) ([6d33510](https://github.com/rdkcentral/firebolt-certification-suite/commit/6d33510c7ee02918f595b633b243c3d6018ca367))
+* launchpoint scenarios with different sources ([#399](https://github.com/rdkcentral/firebolt-certification-suite/issues/399)) ([f98509e](https://github.com/rdkcentral/firebolt-certification-suite/commit/f98509e645aee22ccdd8005e8e25530fefef8b48))
+* Option to skip device.version call ([#413](https://github.com/rdkcentral/firebolt-certification-suite/issues/413)) ([91124b5](https://github.com/rdkcentral/firebolt-certification-suite/commit/91124b5a734a90fb5902c3480dc10f803c8563f6))
+* Propagate cypress exit code ([#415](https://github.com/rdkcentral/firebolt-certification-suite/issues/415)) ([afb4c09](https://github.com/rdkcentral/firebolt-certification-suite/commit/afb4c097f10f2c2f6b3043b0f89ad6522745c654))
+* runInfo update ([#398](https://github.com/rdkcentral/firebolt-certification-suite/issues/398)) ([61e2b2d](https://github.com/rdkcentral/firebolt-certification-suite/commit/61e2b2d3d2fa1581d98463fe3832226abe66edc2))
+* To update runInfo for AppAssurance ([#393](https://github.com/rdkcentral/firebolt-certification-suite/issues/393)) ([59e07a4](https://github.com/rdkcentral/firebolt-certification-suite/commit/59e07a45af3749e31a131f21e07a320b9a5ed78e))
+
+# [1.12.0-dev.17](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.16...v1.12.0-dev.17) (2025-05-22)
+
+
+### Bug Fixes
+
+* Added a fix for entos default sdk version ([#429](https://github.com/rdkcentral/firebolt-certification-suite/issues/429)) ([f283708](https://github.com/rdkcentral/firebolt-certification-suite/commit/f283708810afe0e7106b658e77cd9f90f94e4f17))
+
+# [1.12.0-dev.16](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.15...v1.12.0-dev.16) (2025-05-22)
+
+
+### Features
+
+* launchpoint scenarios with different sources ([#399](https://github.com/rdkcentral/firebolt-certification-suite/issues/399)) ([f98509e](https://github.com/rdkcentral/firebolt-certification-suite/commit/f98509e645aee22ccdd8005e8e25530fefef8b48))
+
 # [1.12.0-dev.15](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0-dev.14...v1.12.0-dev.15) (2025-05-19)
 
 
