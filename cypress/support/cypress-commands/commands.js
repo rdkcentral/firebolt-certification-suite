@@ -2087,7 +2087,7 @@ Cypress.Commands.add('findLogPattern', (logKey, fileName) => {
       fileName: fileName,
     },
   };
-  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+  cy.sendMessagetoPlatforms(requestMap, 20000).then((result) => {
     return result;
   });
 });
