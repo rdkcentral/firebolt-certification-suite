@@ -54,3 +54,16 @@
 ### Examples:
 * `And Firebolt Certification Suite communicates successfully with the '1st party app'`
 * `And Firebolt Certification Suite communicates successfully with the '3rd party app'`
+
+## text '(.+)' is found in the '(.+)' log
+
+### Purpose: Searches for a specific text pattern in a given log file.
+
+### Params:
+| Param | Definition|
+| --- | --- |
+| logKey | The specific log text pattern to search for. |
+| fileIdentifier| The log file identifier where the search will be performed. |
+
+### Examples:
+* `Given text 'SignIn' is found in the 'app' log`
