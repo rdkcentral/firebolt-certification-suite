@@ -544,7 +544,7 @@ export default function (module) {
       }
 
       // Publish the message on topic
-      pubSubClient.publish(requestTopic, JSON.stringify(intent), headers);
+      pubSubClient.send(JSON.stringify(intent), requestTopic, headers, false);
 
       // Returns the response after polling when data is available in queue
       return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
