@@ -46,7 +46,7 @@ let metaDataArr = [];
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
   const testsuite = config.env.testSuite;
-  const sdkVersion = process.env.SDK_VERSION;
+  const sdkVersion = config.env.sdkVersion;
   const specPattern = getSpecPattern(testsuite);
   if (specPattern !== undefined) {
     config.specPattern = specPattern;

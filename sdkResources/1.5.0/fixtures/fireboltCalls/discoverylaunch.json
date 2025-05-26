@@ -7,6 +7,42 @@
     "method": "discovery.launch",
     "params": "DISCOVERYLAUNCH_HOME_INTENT"
   },
+    "LAUNCH_APP_WITH_HOME_INTENT_SOURCE_VOICE": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_VOICE"
+  },
+  "LAUNCH_APP_WITH_HOME_INTENT_SOURCE_EDITORIAL-MERCHANDISING": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_EDITORIAL-MERCHANDISING"
+  },
+  "LAUNCH_APP_WITH_HOME_INTENT_SOURCE_SEARCH": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_SEARCH"
+  },
+  "LAUNCH_APP_WITH_HOME_INTENT_SOURCE_AUTOMATED-RAIL": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_AUTOMATED-RAIL"
+  },
+  "LAUNCH_APP_WITH_HOME_INTENT_SOURCE_PLAY-NOW-RAIL": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_PLAY-NOW-RAIL"
+  },
+  "LAUNCH_APP_WITH_HOME_INTENT_SOURCE_PLAYLIST-RAIL": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_PLAYLIST-RAIL"
+  },
+  "LAUNCH_APP_WITH_HOME_INTENT_SOURCE_SHOWPAGE": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_SHOWPAGE"
+  },
+  "LAUNCH_APP_WITH_HOME_INTENT_SOURCE_APPS-RAIL-LAUNCH": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_APPS-RAIL-LAUNCH"
+  },
+  "LAUNCH_APP_WITH_HOME_INTENT_SOURCE_LINEAR-TRIGGER": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_LINEAR-TRIGGER"
+  },
   "LAUNCH_APP_WITH_PLAYBACK_INTENT": {
     "method": "discovery.launch",
     "params": "DISCOVERYLAUNCH_PLAYBACK_INTENT"
@@ -384,6 +420,56 @@
     "event": "discovery.onNavigateTo",
     "validationJsonPath": "eventResponse",
     "content": "DISCOVERYLAUNCH_HOME_INTENT"
+  },
+   "ONNAVIGATETO_WITH_LAUNCH_INTENT_SOURCE_DEVICE": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_LAUNCH_INTENT_SOURCE_DEVICE"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_VOICE": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_VOICE"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_EDITORIAL-MERCHANDISING": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_EDITORIAL-MERCHANDISING"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_SEARCH": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_SEARCH"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_AUTOMATED-RAIL": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_AUTOMATED-RAIL"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_PLAY-NOW-RAIL": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_PLAY-NOW-RAIL"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_PLAYLIST-RAIL": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_PLAYLIST-RAIL"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_SHOWPAGE": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_SHOWPAGE"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_APPS-RAIL-LAUNCH": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_APPS-RAIL-LAUNCH"
+  },
+  "ONNAVIGATETO_WITH_HOME_INTENT_SOURCE_LINEAR-TRIGGER": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_LINEAR-TRIGGER"
   },
   "LAUNCH_APP_WITH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE": {
     "method": "discovery.launch",
