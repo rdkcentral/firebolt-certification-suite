@@ -1,3 +1,10 @@
+## [1.12.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0...v1.12.1-dev.1) (2025-05-27)
+
+
+### Bug Fixes
+
+* Correctly provide default spec pattern ([#432](https://github.com/rdkcentral/firebolt-certification-suite/issues/432)) ([b4f3b17](https://github.com/rdkcentral/firebolt-certification-suite/commit/b4f3b1753afcb4f927dba1b6afe55507549ea491))
+
 # [1.12.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0...v1.12.0) (2025-05-22)
 
 
