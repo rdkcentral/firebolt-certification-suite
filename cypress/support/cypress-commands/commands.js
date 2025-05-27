@@ -121,7 +121,9 @@ Cypress.Commands.add(
             action = method.split('_')[0];
             method = method.split('_')[1];
           }
-
+          action = UTILS.getEnvVariable(CONSTANTS.ACTION, false)
+            ? UTILS.getEnvVariable(CONSTANTS.ACTION, false)
+            : action;
           return results.push({
             method: method,
             params: params,
