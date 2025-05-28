@@ -1788,9 +1788,13 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
       );
       fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
   }
-  cy.log(`Session for appId: ${appIdForLog} will be ended with type: ${exitType}`);
+  cy.log(
+    `Session for ${params.entity ? params.entity + ' with' : ''} appId ${appIdForLog} will be ended with type: ${exitType}`
+  );
   cy.sendMessagetoPlatforms(requestMap, timeout).then((response) => {
-    cy.log(`Platform has successfully ended app Session for appId: ${appIdForLog}`);
+    cy.log(
+      `Platform has successfully ended app Session for ${params.entity ? params.entity : 'appId'} : ${appIdForLog}`
+    );
   });
 });
 
