@@ -43,7 +43,7 @@ function getSpecPattern(testSuite) {
   // If testSuite is null or empty, do nothing, return undefined
   if (!trimmedTestSuite || !patterns[trimmedTestSuite]) {
     logger.error(`Test suite '${testSuite}' not found in patterns. Defaulting to '**/*.feature'.`);
-    return undefined;
+    return patterns.all;
   }
 
   // Otherwise, return the corresponding pattern

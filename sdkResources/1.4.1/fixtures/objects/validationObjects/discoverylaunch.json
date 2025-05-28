@@ -29,6 +29,156 @@
             }
         ]
     },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_VOICE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_SOURCE_VOICE",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_LAUNCH_INTENT_SOURCE_DEVICE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_LAUNCH_INTENT_CONTENT_WITH_SOURCE_DEVICE",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_EDITORIAL-MERCHANDISING": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_SOURCE_EDITORIAL-MERCHANDISING",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_SEARCH": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_SOURCE_SEARCH",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_AUTOMATED-RAIL": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_AUTOMATED-RAIL",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_PLAY-NOW-RAIL": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_PLAY-NOW-RAIL",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_PLAYLIST-RAIL": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_PLAYLIST-RAIL",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_SHOWPAGE": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_SHOWPAGE",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_APPS-RAIL-LAUNCH": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_APPS-RAIL-LAUNCH",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_HOME_INTENT_SOURCE_LINEAR-TRIGGER": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_HOME_INTENT_CONTENT_WITH_LINEAR-TRIGGER",
+                        "description": "Validation of the DiscoveryLaunch for home intent"
+                    }
+                ]
+            }
+        ]
+    },
     "DISCOVERYLAUNCH_PLAYBACK_INTENT_WITHOUT_ENTITYTYPE": {
         "method": "discovery.onNavigateTo",
         "data": [
