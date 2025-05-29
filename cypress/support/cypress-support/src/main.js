@@ -108,17 +108,17 @@ export default function (module) {
 
     // Check if the incoming SDK version is 2.0.0 or above and replace the widget in device with 2.0 changes.
     // const pattern = /(2|\d{2,})\.\d+\.\d+/;
-    // if (
-    //   UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false) &&
-    //   pattern.test(UTILS.getEnvVariable(CONSTANTS.SDK_VERSION))
-    // ) {
-    //   const requestMap = {
-    //     method: 'fcs.<function>',
-    //     params: null,
-    //   };
-    //   cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    //     console.log('response------------------', response);
-    //   });
+    
+    // console.log('SDK Version------:', UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false));
+    // if (UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false)) {
+      // const requestMap = {
+      //   method: 'fcs.notifyFireboltVersion',
+      //   params: { version: '2.0.0' },
+      // };
+      // cy.sendMessagetoPlatforms(requestMap).then((response) => {
+      //   console.log('response------------------', response);
+      //   cy.wait(10000);
+      // });
     // }
   });
 
