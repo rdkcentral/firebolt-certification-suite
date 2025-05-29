@@ -33,7 +33,6 @@ export default async (transportClient, options) => {
   };
 
   // Check for external transport client
-  transportClient = Object.keys(externalTransport)[0];
   if (externalTransport?.[transportClient]) {
     return createAndInitializeObject(externalTransport);
   }

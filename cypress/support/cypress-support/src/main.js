@@ -44,8 +44,7 @@ export default function (module) {
   Cypress.env(CONSTANTS.RESPONSE_TOPIC_LIST, []);
 
   // Fetch the required appTransport from config module
-  const firstExternalTransportKey = Object.keys(module.externalTransport)[0];
-  appTransport = module.externalTransport[firstExternalTransportKey].default;
+  appTransport = module.appTransport.PubSub.default;
 
   // before All
   before(() => {
