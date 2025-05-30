@@ -140,63 +140,17 @@ Feature: Profile
         When '3rd party app' invokes the 'Firebolt' API to 'allow profile flags'
         Then 'Firebolt' platform responds with 'expected profile flags for the current session'
 
-    @sdk @transport @requiresPlatformImplementation @Sev0
+    @sdk @transport @requiresPlatformImplementation @Sev0 @notSupported
     Scenario Outline: Profile.viewingRestrictions - Validating API response for <Scenario>
         Given the environment has been set up for 'Profile' tests
         When 3rd party 'certification' app is launched
         And '3rd party app' registers for the 'profile onViewingRestrictionsChanged' event using the 'Firebolt' API
-        # # TODO: Need to add the set call after getting the details
-        # And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
+        And User triggers event with value as '<Set_API_Key>'
         When '3rd party app' invokes the 'Firebolt' API to 'get profile viewingRestrictions'
-        Then 'Firebolt' platform responds with '<Response>'
-        And 'Firebolt' platform triggers event '<Response>'
+        Then 'Firebolt' platform responds with '<Content>'
+        And 'Firebolt' platform triggers event '<Content>'
 
         Examples:
             | Scenario              | Set_API_Key                 | Content                         |
-            | Restrictions enabled  | enable viewingRestrictions  | viewingRestrictions is enabled  |
-            | Restrictions disabled | disable viewingRestrictions | viewingRestrictions is disabled |
-
-
-    @sdk @transport @requiresPlatformImplementation @Sev0
-    Scenario Outline: Profile.viewingRestrictions - Validating API response for <Scenario>
-        Given the environment has been set up for 'Profile' tests
-        When 3rd party 'certification' app is launched
-        And '3rd party app' registers for the 'profile onViewingRestrictionsChanged' event using the 'Firebolt' API
-        # # TODO: Need to add the set call after getting the details
-        # And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-        When '3rd party app' invokes the 'Firebolt' API to 'get profile viewingRestrictions'
-        Then 'Firebolt' platform responds with '<Response>'
-        And 'Firebolt' platform triggers event '<Response>'
-
-        Examples:
-            | Scenario                             | Set_API_Key                             | Content                                      |
-            | Restrictions for MPAA with PG rating | set Restriction for MPAA with PG rating | expected restriction with PG rating for MPAA |
-
-
-    @sdk @transport @requiresPlatformImplementation @Sev0
-    Scenario Outline: Profile.viewingRestrictions - Validating API response for <Scenario>
-        Given the environment has been set up for 'Profile' tests
-        When 3rd party 'certification' app is launched
-        And '3rd party app' registers for the 'profile onViewingRestrictionsChanged' event using the 'Firebolt' API
-        # # TODO: Need to add the set call after getting the details
-        # And 1st party app invokes the 'Firebolt' API to '<Set_API_Key>'
-        When '3rd party app' invokes the 'Firebolt' API to 'get profile viewingRestrictions'
-        Then 'Firebolt' platform responds with '<Response>'
-        And 'Firebolt' platform triggers event '<Response>'
-
-        Examples:
-            | Scenario                                                  | Set_API_Key                                                  | Content                                                           |
-            | Restrictions for US_TV with TV 14 rating and V sub rating | set Restriction for US_TV with TV 14 rating and V sub rating | expected restriction with TV 14 rating for US_TV and V sub rating |
-
-
-    @sdk @transport @requiresPlatformImplementation @Sev0
-    Scenario Outline: Profile.viewingRestrictions - Negative Scenario: <Scenario> expecting error
-        When 1st party app invokes the 'Firebolt' API to '<Scenario>'
-        Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for profile viewingRestrictions'
-
-        Examples:
-            | Scenario                                                           |
-            | set profile viewingRestrictions with integer                       |
-            | set profile viewingRestrictions with string                        |
-            | set viewingRestrictions with ABC rating for MPAA                   |
-            | set viewingRestrictions with V sub rating without rating for US_TV |
+            | Restrictions enabled  | enabling viewingRestrictions  | viewingRestrictions is enabled  |
+            | Restrictions disabled | disabling viewingRestrictions | viewingRestrictions is disabled |
