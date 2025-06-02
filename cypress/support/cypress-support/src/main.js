@@ -106,15 +106,12 @@ export default function (module) {
     const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
     Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
 
-    // Check if the incoming SDK version is 2.0.0 or above and replace the widget in device with 2.0 changes.
-    // const pattern = /(2|\d{2,})\.\d+\.\d+/;
+    const pattern = /(2|\d{2,})\.\d+\.\d+/;
     const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false);
-    console.log('SDK Version------:', sdkVersion);
-    // Cypress.env('is_sdkVersion_2_0', pattern.test(sdkVersion));
-    Cypress.env(CONSTANTS.IS_BIDIRECTIONAL_SDK, true);
+    Cypress.env(CONSTANTS.IS_BIDIRECTIONAL_SDK, pattern.test(sdkVersion));
     const requestMap = {
       method: CONSTANTS.REQUEST_OVERRIDE_CALLS.NOTIFY_FIREBOLT_VERSION,
-      params: { version: '2.0.0' },
+      params: { version: UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false) },
     };
     cy.sendMessagetoPlatforms(requestMap).then((response) => {
       fireLog.info(JSON.stringify(response));
