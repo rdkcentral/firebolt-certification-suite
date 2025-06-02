@@ -271,7 +271,7 @@ Given(
           const extractedEvent = UTILS.getEnvVariable(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST).filter(
             (element) => element.eventName == method
           );
-          eventName = extractedEvent[extractedEvent.length - 1].eventObjectId;
+          eventName = extractedEvent[extractedEvent.length - 1].eventName;
           const requestMap = {
             method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCH_EVENT_RESPONSE,
             params: eventName,

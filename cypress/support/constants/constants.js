@@ -385,6 +385,8 @@ module.exports = {
     GETAPPDATA: 'fcs.getAppData',
     SENDKEYPRESS: 'fcs.sendKeyPress',
     SENDVOICECOMMAND: 'fcs.sendVoiceCommand',
+    NOTIFY_FIREBOLT_VERSION: 'fcs.notifyFireboltVersion',
+    CLEAR_ALL_LISTENERS: 'fcs.clearAllListeners',
   },
   RESPONSE: 'Response: ',
   RESPONSE_INVALID_RESPONSE_LOG:
@@ -546,6 +548,7 @@ module.exports = {
     UNLOAD_APP: 'unloadApp',
   },
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
+  IS_BIDIRECTIONAL_SDK: 'is_biDirectional_sdk'
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

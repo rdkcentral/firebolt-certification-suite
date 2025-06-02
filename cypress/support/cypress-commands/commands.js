@@ -1568,7 +1568,9 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
               response.result = response.result.eventResponse;
             }
             // Parse v2 events for first party events
-            if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
+            if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID) && UTILS.getEnvVariable(CONSTANTS.IS_BIDIRECTIONAL_SDK)) {
+              // "result": {"key": "new value"}
+              // parse the v2 event response from {"key": "new value"} to "new value"
               response.result = Object.values(response.result)[0];
             }
             cy.updateResponseForFCS(method, null, response, true, isNullCase).then(

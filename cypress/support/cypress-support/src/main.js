@@ -108,18 +108,18 @@ export default function (module) {
 
     // Check if the incoming SDK version is 2.0.0 or above and replace the widget in device with 2.0 changes.
     // const pattern = /(2|\d{2,})\.\d+\.\d+/;
-    
-    // console.log('SDK Version------:', UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false));
-    // if (UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false)) {
-      // const requestMap = {
-      //   method: 'fcs.notifyFireboltVersion',
-      //   params: { version: '2.0.0' },
-      // };
-      // cy.sendMessagetoPlatforms(requestMap).then((response) => {
-      //   console.log('response------------------', response);
-      //   cy.wait(10000);
-      // });
-    // }
+    const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false);
+    console.log('SDK Version------:', sdkVersion);
+    // Cypress.env('is_sdkVersion_2_0', pattern.test(sdkVersion));
+    Cypress.env(CONSTANTS.IS_BIDIRECTIONAL_SDK, true);
+    const requestMap = {
+      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.NOTIFY_FIREBOLT_VERSION,
+      params: { version: '2.3.0' },
+    };
+    cy.sendMessagetoPlatforms(requestMap).then((response) => {
+      fireLog.info(JSON.stringify(response));
+      cy.wait(5000);
+    });
   });
 
   // beforeEach
@@ -219,10 +219,8 @@ export default function (module) {
     // Make a clear all event listeners call and clear the deregister the events
     // Need to see what method name can be passed here, instead of device.name.
     const requestMap = {
-      method: 'call.clearAllListeners',
+      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.CLEAR_ALL_LISTENERS,
       params: null,
-      action: 'core',
-      task: 'clearAllListeners',
     };
     cy.sendMessagetoPlatforms(requestMap).then((response) => {
       fireLog.info(
