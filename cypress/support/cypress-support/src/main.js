@@ -114,7 +114,7 @@ export default function (module) {
     Cypress.env(CONSTANTS.IS_BIDIRECTIONAL_SDK, true);
     const requestMap = {
       method: CONSTANTS.REQUEST_OVERRIDE_CALLS.NOTIFY_FIREBOLT_VERSION,
-      params: { version: '2.3.0' },
+      params: { version: '2.0.0' },
     };
     cy.sendMessagetoPlatforms(requestMap).then((response) => {
       fireLog.info(JSON.stringify(response));
