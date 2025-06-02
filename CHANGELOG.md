@@ -1,3 +1,10 @@
+# [1.13.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.1-dev.1...v1.13.0-dev.1) (2025-06-02)
+
+
+### Features
+
+* content validation for events when triggered in interaction logs ([#430](https://github.com/rdkcentral/firebolt-certification-suite/issues/430)) ([0d7d0da](https://github.com/rdkcentral/firebolt-certification-suite/commit/0d7d0dabf4059ade2793b242b2eeca62da7aac56))
+
 ## [1.12.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0...v1.12.1-dev.1) (2025-05-27)
 
 
