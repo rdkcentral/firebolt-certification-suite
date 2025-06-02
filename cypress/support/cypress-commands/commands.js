@@ -2074,3 +2074,15 @@ Cypress.Commands.add('sendVoiceCommand', (voiceCommand) => {
     return response;
   });
 });
+
+/**
+ * @module commands
+ * @function captureScreenshot
+ * @description Sends a request to capture a screenshot of the device screen
+ * @example
+ * cy.captureScreenshot()
+ */
+Cypress.Commands.add('captureScreenshot', () => {
+  // Only take a screenshot if the enableScreenshots environment variable is set to true
+  UTILS.captureScreenshot();
+});
