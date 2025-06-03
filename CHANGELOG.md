@@ -1,3 +1,10 @@
+# [1.13.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.1...v1.13.0-dev.2) (2025-06-03)
+
+
+### Features
+
+* playback dismiss scenarios ([#433](https://github.com/rdkcentral/firebolt-certification-suite/issues/433)) ([3bd17dd](https://github.com/rdkcentral/firebolt-certification-suite/commit/3bd17dd55e8513c00a61ec980bd7658909abb73f))
+
 # [1.13.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.1-dev.1...v1.13.0-dev.1) (2025-06-02)
 
 
