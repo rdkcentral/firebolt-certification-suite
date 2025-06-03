@@ -1045,7 +1045,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         `No intentTemplates found for ${appType}, make sure the intentTemplates are defined as per the appType`
       );
     }
-
+    Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
     // Attempt to resolve the intentTemplate and create messageIntent
     try {
       messageIntent = {
