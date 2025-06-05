@@ -1,3 +1,10 @@
+# [1.13.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.2...v1.13.0-dev.3) (2025-06-05)
+
+
+### Features
+
+* Authoring Profile view restrication scenarios ([#428](https://github.com/rdkcentral/firebolt-certification-suite/issues/428)) ([6f27f81](https://github.com/rdkcentral/firebolt-certification-suite/commit/6f27f819cb9b73c046bbcf7fd427e167bb97a8bd))
+
 # [1.13.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.1...v1.13.0-dev.2) (2025-06-03)
 
 
