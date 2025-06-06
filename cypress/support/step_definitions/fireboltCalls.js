@@ -493,7 +493,7 @@ Given(
 
     try {
       if (actionType == CONSTANTS.ACTIONTYPE.PLAYBACK) {
-        if (params.keyPressSequence.length > 0) {
+        if (params.keyPressSequence && params.keyPressSequence.length > 0) {
           cy.sendKeyPress(params.keyPressSequence);
         } else {
           fireLog.info(`No additional keypress required to start playback for app ${appId}`);
