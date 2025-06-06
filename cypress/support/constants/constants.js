@@ -540,10 +540,12 @@ module.exports = {
   DISMISSED: 'dismissed',
   CLOSED: 'closed',
   UNLOADED: 'unloaded',
+  PLAYBACKED: 'playbacked',
   ACTIONTYPE: {
     DISMISS_APP: 'dismissApp',
     CLOSE_APP: 'closeApp',
     UNLOAD_APP: 'unloadApp',
+    PLAYBACK: 'playback'
   },
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
 };

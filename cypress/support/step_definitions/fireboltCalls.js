@@ -376,7 +376,7 @@ Given('device is rebooted', () => {
  * And 3rd party 'firebolt' playback is dismissed
  */
 Given(
-  /3rd party '(.+)' (app|playback)(?: '(.+)')? is (dismissed|closed|unloaded)$/,
+  /3rd party '(.+)' (app|playback)(?: '(.+)')? is (dismissed|closed|unloaded|playbacked)$/,
   async (appType, entity, appId, action) => {
     appId = appId ? appId : Cypress.env(CONSTANTS.RUNTIME)?.appId;
 
@@ -414,6 +414,8 @@ Given(
             loggedType = CONSTANTS.LOGGEDIN;
           } else if (scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDOUT.toLowerCase())) {
             loggedType = CONSTANTS.LOGGEDOUT;
+          } else if (action == CONSTANTS.PLAYBACKED) {
+            loggedType = CONSTANTS.LOGGEDIN;
           }
 
           if (
@@ -480,21 +482,33 @@ Given(
         params.appId = appId;
         actionType = CONSTANTS.ACTIONTYPE.UNLOAD_APP;
         break;
+      case CONSTANTS.PLAYBACKED:
+        params.keyPressSequence = KeyPressSequence?.play;
+        actionType = CONSTANTS.ACTIONTYPE.PLAYBACK;
+        break;
       default:
         fireLog.error('Invalid action type');
         return;
     }
 
     try {
-      cy.exitAppSession(actionType, params).then((response) => {
-        if (response) {
-          fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
+      if (actionType == CONSTANTS.ACTIONTYPE.PLAYBACK) {
+        if (params.keyPressSequence.length > 0) {
+          cy.sendKeyPress(params.keyPressSequence);
         } else {
-          fireLog.fail(
-            `Failed to get a valid response from platform when attempting to exit app session for appId ${appId} using keypress sequence ${KeyPressSequence?.dismiss}`
-          );
+          fireLog.info(`No additional keypress required to start playback for app ${appId}`);
         }
-      });
+      } else {
+        cy.exitAppSession(actionType, params).then((response) => {
+          if (response) {
+            fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
+          } else {
+            fireLog.fail(
+              `Failed to get a valid response from platform when attempting to exit app session for appId ${appId} using keypress sequence ${KeyPressSequence?.dismiss}`
+            );
+          }
+        });
+      }
     } catch (error) {
       fireLog.fail(
         `Following error occurred while attempting to exit app session for appId ${appId} using keypress sequence ${KeyPressSequence?.dismiss}: ${error.message}`
