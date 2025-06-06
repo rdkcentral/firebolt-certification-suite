@@ -545,7 +545,7 @@ module.exports = {
     DISMISS_APP: 'dismissApp',
     CLOSE_APP: 'closeApp',
     UNLOAD_APP: 'unloadApp',
-    PLAYBACK: 'playback'
+    PLAYBACK: 'playback',
   },
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
 };
