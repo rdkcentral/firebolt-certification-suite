@@ -376,7 +376,7 @@ Given('device is rebooted', () => {
  * And 3rd party 'firebolt' playback is dismissed
  */
 Given(
-  /3rd party '(.+)' (app|playback)(?: '(.+)')? is (dismissed|closed|unloaded|playbacked)$/,
+  /3rd party '(.+)' (app|playback)(?: '(.+)')? is (dismissed|closed|unloaded|streaming)$/,
   async (appType, entity, appId, action) => {
     appId = appId ? appId : Cypress.env(CONSTANTS.RUNTIME)?.appId;
 
@@ -414,7 +414,7 @@ Given(
             loggedType = CONSTANTS.LOGGEDIN;
           } else if (scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDOUT.toLowerCase())) {
             loggedType = CONSTANTS.LOGGEDOUT;
-          } else if (action == CONSTANTS.PLAYBACKED) {
+          } else if (action == CONSTANTS.STREAMING) {
             loggedType = CONSTANTS.LOGGEDIN;
           }
 
@@ -482,7 +482,7 @@ Given(
         params.appId = appId;
         actionType = CONSTANTS.ACTIONTYPE.UNLOAD_APP;
         break;
-      case CONSTANTS.PLAYBACKED:
+      case CONSTANTS.STREAMING:
         params.keyPressSequence = KeyPressSequence?.play;
         actionType = CONSTANTS.ACTIONTYPE.PLAYBACK;
         break;

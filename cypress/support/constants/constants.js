@@ -540,7 +540,7 @@ module.exports = {
   DISMISSED: 'dismissed',
   CLOSED: 'closed',
   UNLOADED: 'unloaded',
-  PLAYBACKED: 'playbacked',
+  STREAMING: 'streaming',
   ACTIONTYPE: {
     DISMISS_APP: 'dismissApp',
     CLOSE_APP: 'closeApp',
