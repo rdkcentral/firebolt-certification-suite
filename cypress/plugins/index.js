@@ -376,7 +376,7 @@ module.exports = async (on, config) => {
         }
       }
 
-      if( results.totalFailed != 0 ) {
+      if (results.totalFailed != 0) {
         throw new Error(`FCS_EXIT_CODE: ${CONSTANTS.FCS_EXIT_CODE.FAILURE}`);
       }
 
