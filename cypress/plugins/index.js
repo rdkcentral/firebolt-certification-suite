@@ -385,7 +385,7 @@ module.exports = async (on, config) => {
     } catch (err) {
       logger.error('Error occurred in after:run hook:', err);
       if (err.message.startsWith('FCS_EXIT_CODE:')) {
-        process.exitCode = err.message.replace('FCS_EXIT_CODE:', "").trim();
+        process.exitCode = err.message.replace('FCS_EXIT_CODE:', '').trim();
         console.log(`FCS_EXIT_CODE: ${process.exitCode}`);
       }
     }
