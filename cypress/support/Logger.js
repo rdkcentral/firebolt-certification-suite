@@ -21,7 +21,7 @@ const logConfiguration = {
   transports: [
     new winston.transports.Console({
       level: 'debug',
-      stderrLevels: [], // Send all levels to stdout
+      stderrLevels: ['error'], // Only 'error' goes to stderr, rest all goes to stdout
       consoleWarnLevels: [], // Avoid sending warn to stderr too
     }),
   ],
