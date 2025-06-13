@@ -326,7 +326,7 @@ module.exports = async (on, config) => {
             jsonReport = readDataFromFile(filePath + fileName);
             // to remove the wait time step from html report
             const bufferString = jsonReport.toString();
-            const parsedJson = JSON.parse(bufferString);            
+            const parsedJson = JSON.parse(bufferString);
             parsedJson.forEach((obj) => {
               obj.elements = obj.elements.map((element) => {
                 const filteredSteps = [];
@@ -334,11 +334,11 @@ module.exports = async (on, config) => {
                   if (/^Test runner waits for/.test(step.name)) {
                     console.log(`Removing step ${index} from html report:`, step.name);
                   } else {
-                    filteredSteps.push(step); 
+                    filteredSteps.push(step);
                   }
                 });
-                element.steps = filteredSteps; 
-                return element; 
+                element.steps = filteredSteps;
+                return element;
               });
             });
             const updatedJsonReport = JSON.stringify(parsedJson, null, 2);
