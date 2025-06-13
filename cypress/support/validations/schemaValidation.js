@@ -242,6 +242,7 @@ Cypress.Commands.add('getSchemaFromOpenRpc', (methodName, type) => {
             return referencedMethod.result.schema;
           }
         }
+        fireLog.info('No "x-subscriber-for" found for event:', methodName);
         return null;
       } else {
         return method.result && method.result.schema ? method.result.schema : null;
