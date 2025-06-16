@@ -738,7 +738,7 @@ class FireLog extends Function {
       }
     `;
     super('...args', functionBody);
-
+    this.assertions = [];
     const handler = {
       apply: function (target, thisArg, argumentsList) {
         let message;
@@ -801,62 +801,184 @@ class FireLog extends Function {
     return cy.log(message);
   }
 
-  isNull(value, message) {
+  isNull(value, message, assertionType) {
+    this.assertions.push({functionName: 'isNull', value, message });
+    if(assertionType ==='soft'){
+      cy.log(message);
+    }
+    else{
     assert.isNull(value, message);
+    }
   }
 
-  isNotNull(value, message) {
+  isNotNull(value, message, assertionType) {
+    this.assertions.push({functionName: 'isNotNull', value, message });
+    if(assertionType ==='soft'){
+      cy.log(message);
+    }
+    else{
     assert.isNotNull(value, message);
+    }
   }
 
-  isUndefined(value, message) {
+  isUndefined(value, message, assertionType) {
+    this.assertions.push({functionName: 'isUndefined', value, message });
+    if(assertionType ==='soft'){
+      cy.log(message);
+    }
+    else{
     assert.isUndefined(value, message);
+    }
   }
 
-  isTrue(value, message) {
+  isTrue(value, message, assertionType) {
+    this.assertions.push({functionName: 'isTrue', value, message });
+    if(assertionType ==='soft'){
+      cy.log(message);
+    }
+    else{
     assert.isTrue(value, message);
+    }
   }
 
-  isFalse(value, message) {
+  isFalse(value, message, assertionType) {
+    this.assertions.push({functionName: 'isFalse', value, message });
+    if(assertionType ==='soft'){
+      cy.log(message);
+    }
+    else{
     assert.isFalse(value, message);
+    }
   }
 
-  isOk(value, message) {
+  isOk(value, message, assertionType) {
+    this.assertions.push({functionName: 'isOk', value, message });
+    if(assertionType ==='soft'){
+      cy.log(message);
+    }
+    else{
     assert.isOk(value, message);
+    }
   }
 
-  isNotEmpty(object, message) {
+  isNotEmpty(object, message, assertionType) {
+    this.assertions.push({functionName: 'isNotEmpty', object, message });
+    if(assertionType ==='soft'){
+      cy.log(message);
+    }
+    else{
     assert.isNotEmpty(object, message);
+    }
   }
 
-  isBoolean(value, message) {
+  isBoolean(value, message, assertionType) {
+    this.assertions.push({functionName: 'isBoolean', value, message });
+    if(assertionType ==='soft'){
+      cy.log(message);
+    }
+    else{
     assert.isBoolean(value, message);
+    }
   }
 
-  deepEqual(actual, expected, message) {
-    assert.deepEqual(actual, expected, message);
+  deepEqual(actual, expected, message, assertionType) {
+    this.assertions.push({functionName: 'deepEqual', actual, expected, message });
+    if(assertionType ==='soft'){
+      cy.log(message);
+    }
+    else{
+      assert.deepEqual(actual, expected, message);
+    }
   }
 
-  equal(actual, expected, message) {
-    assert.equal(actual, expected, message);
+  equal(actual, expected, message, assertionType) {
+    this.assertions.push({functionName: 'equal', actual, expected, message });
+    if(assertionType === 'soft'){
+      cy.log(message);
+    }
+    else{
+      assert.equal(actual, expected, message);
+    }
   }
 
-  strictEqual(actual, expected, message) {
-    assert.strictEqual(actual, expected, message);
+  strictEqual(actual, expected, message, assertionType) {
+    this.assertions.push({functionName: 'strictEqual', actual, expected, message });
+    if(assertionType === 'soft'){
+      cy.log(message);
+    }
+    else{
+      assert.strictEqual(actual, expected, message);
+    }
   }
 
-  include(haystack, needle, message) {
+  include(haystack, needle, message, assertionType) {
+    this.assertions.push({functionName: 'include', haystack, needle, message });
+    if(assertionType === 'soft'){
+      cy.log(message);
+    }
+    else{
     cy.log(
       message + ' ' + JSON.stringify(needle) + ' expected to be in ' + JSON.stringify(haystack)
     );
     assert.include(haystack, needle, message);
   }
-  exists(value, message) {
+  }
+  exists(value, message, assertionType) {
+    this.assertions.push({functionName: 'exists', value, message });
+    if(assertionType === 'soft'){
+      cy.log(message);
+    }
+    else{
     assert.exists(value, message);
+    }
   }
 
-  assert(expression, message) {
-    assert(expression, message);
+  assert(expression, message, assertionType) {
+    this.assertions.push({functionName: 'assert', expression, message, assertionType });
+    if(assertionType ==='soft'){
+      cy.log(message);
+    }
+    else{
+      assert(expression,message);
+    }
+  }
+
+  assertAll() {
+    this.assertions.forEach(({ functionName, actual, expected, object, haystack, needle, value, expression, message}) => {
+      if (functionName === 'isNull') {
+        fireLog.isNull(value, message);
+      } else if (functionName === 'isNotNull') {
+        fireLog.isNotNull(value, message);
+      } else if (functionName === 'isUndefined') {
+        fireLog.isUndefined(value, message);
+      } else if (functionName === 'isTrue') {
+        fireLog.isTrue(value, message);
+      } else if (functionName === 'isFalse') {
+        fireLog.isFalse(value, message);
+      } else if (functionName === 'isOk') {
+        fireLog.isOk(value, message);
+      } else if (functionName === 'exists') {
+        fireLog.exists(value, message);
+      } else if (functionName === 'isNotEmpty') {
+        fireLog.isNotEmpty(object, message);
+      } else if (functionName === 'isBoolean') {
+        fireLog.isBoolean(value, message);
+      } else if (functionName === 'deepEqual') {
+        fireLog.deepEqual(actual, expected, message);
+      } else if (functionName === 'equal') {
+        fireLog.equal(actual, expected, message);
+      } else if (functionName === 'strictEqual') {
+        fireLog.strictEqual(actual, expected, message);
+      } else if (functionName === 'assert') {
+        fireLog.assert(expression,message);
+      } else if (functionName === 'include') {
+        fireLog.include(haystack, needle, message);
+      }
+     
+            
+    });
+    // Clear the assertions after processing
+    this.assertions = [];
   }
 
   fail(message) {
