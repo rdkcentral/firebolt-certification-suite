@@ -738,7 +738,7 @@ class FireLog extends Function {
       }
     `;
     super('...args', functionBody);
-    this.assertions = [];
+    this.errors = [];
     const handler = {
       apply: function (target, thisArg, argumentsList) {
         let message;
@@ -802,19 +802,26 @@ class FireLog extends Function {
   }
 
   isNull(value, message, assertionType) {
-    this.assertions.push({functionName: 'isNull', value, message });
-    if(assertionType ==='soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
-    }
-    else{
-    assert.isNull(value, message);
+      try {
+        assert.isNull(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    }else {
+      assert.isNull(value, message);
     }
   }
 
   isNotNull(value, message, assertionType) {
-    this.assertions.push({functionName: 'isNotNull', value, message });
     if(assertionType ==='soft'){
       cy.log(message);
+      try {
+        assert.isNotNull(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
     assert.isNotNull(value, message);
@@ -822,9 +829,13 @@ class FireLog extends Function {
   }
 
   isUndefined(value, message, assertionType) {
-    this.assertions.push({functionName: 'isUndefined', value, message });
     if(assertionType ==='soft'){
       cy.log(message);
+      try {
+        assert.isUndefined(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
     assert.isUndefined(value, message);
@@ -832,9 +843,13 @@ class FireLog extends Function {
   }
 
   isTrue(value, message, assertionType) {
-    this.assertions.push({functionName: 'isTrue', value, message });
     if(assertionType ==='soft'){
       cy.log(message);
+      try {
+        assert.isTrue(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
     assert.isTrue(value, message);
@@ -842,9 +857,13 @@ class FireLog extends Function {
   }
 
   isFalse(value, message, assertionType) {
-    this.assertions.push({functionName: 'isFalse', value, message });
     if(assertionType ==='soft'){
       cy.log(message);
+      try {
+        assert.isFalse(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
     assert.isFalse(value, message);
@@ -852,9 +871,13 @@ class FireLog extends Function {
   }
 
   isOk(value, message, assertionType) {
-    this.assertions.push({functionName: 'isOk', value, message });
     if(assertionType ==='soft'){
       cy.log(message);
+      try {
+        assert.isOk(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
     assert.isOk(value, message);
@@ -862,9 +885,13 @@ class FireLog extends Function {
   }
 
   isNotEmpty(object, message, assertionType) {
-    this.assertions.push({functionName: 'isNotEmpty', object, message });
     if(assertionType ==='soft'){
       cy.log(message);
+      try {
+        assert.isNotEmpty(object, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
     assert.isNotEmpty(object, message);
@@ -872,9 +899,13 @@ class FireLog extends Function {
   }
 
   isBoolean(value, message, assertionType) {
-    this.assertions.push({functionName: 'isBoolean', value, message });
     if(assertionType ==='soft'){
       cy.log(message);
+      try {
+        assert.isBoolean(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
     assert.isBoolean(value, message);
@@ -882,9 +913,13 @@ class FireLog extends Function {
   }
 
   deepEqual(actual, expected, message, assertionType) {
-    this.assertions.push({functionName: 'deepEqual', actual, expected, message });
     if(assertionType ==='soft'){
       cy.log(message);
+      try {
+        assert.deepEqual(actual, expected, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
       assert.deepEqual(actual, expected, message);
@@ -892,9 +927,13 @@ class FireLog extends Function {
   }
 
   equal(actual, expected, message, assertionType) {
-    this.assertions.push({functionName: 'equal', actual, expected, message });
     if(assertionType === 'soft'){
       cy.log(message);
+      try {
+        assert.equal(actual, expected, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
       assert.equal(actual, expected, message);
@@ -902,9 +941,13 @@ class FireLog extends Function {
   }
 
   strictEqual(actual, expected, message, assertionType) {
-    this.assertions.push({functionName: 'strictEqual', actual, expected, message });
     if(assertionType === 'soft'){
       cy.log(message);
+       try {
+        assert.strictEqual(actual, expected, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
       assert.strictEqual(actual, expected, message);
@@ -912,9 +955,13 @@ class FireLog extends Function {
   }
 
   include(haystack, needle, message, assertionType) {
-    this.assertions.push({functionName: 'include', haystack, needle, message });
     if(assertionType === 'soft'){
       cy.log(message);
+      try {
+        assert.include(haystack, needle, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
     cy.log(
@@ -923,10 +970,15 @@ class FireLog extends Function {
     assert.include(haystack, needle, message);
   }
   }
+
   exists(value, message, assertionType) {
-    this.assertions.push({functionName: 'exists', value, message });
     if(assertionType === 'soft'){
       cy.log(message);
+      try {
+        assert.exists(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
     assert.exists(value, message);
@@ -934,9 +986,13 @@ class FireLog extends Function {
   }
 
   assert(expression, message, assertionType) {
-    this.assertions.push({functionName: 'assert', expression, message, assertionType });
     if(assertionType ==='soft'){
       cy.log(message);
+      try {
+        assert(expression,message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
     }
     else{
       assert(expression,message);
@@ -944,41 +1000,14 @@ class FireLog extends Function {
   }
 
   assertAll() {
-    this.assertions.forEach(({ functionName, actual, expected, object, haystack, needle, value, expression, message}) => {
-      if (functionName === 'isNull') {
-        fireLog.isNull(value, message);
-      } else if (functionName === 'isNotNull') {
-        fireLog.isNotNull(value, message);
-      } else if (functionName === 'isUndefined') {
-        fireLog.isUndefined(value, message);
-      } else if (functionName === 'isTrue') {
-        fireLog.isTrue(value, message);
-      } else if (functionName === 'isFalse') {
-        fireLog.isFalse(value, message);
-      } else if (functionName === 'isOk') {
-        fireLog.isOk(value, message);
-      } else if (functionName === 'exists') {
-        fireLog.exists(value, message);
-      } else if (functionName === 'isNotEmpty') {
-        fireLog.isNotEmpty(object, message);
-      } else if (functionName === 'isBoolean') {
-        fireLog.isBoolean(value, message);
-      } else if (functionName === 'deepEqual') {
-        fireLog.deepEqual(actual, expected, message);
-      } else if (functionName === 'equal') {
-        fireLog.equal(actual, expected, message);
-      } else if (functionName === 'strictEqual') {
-        fireLog.strictEqual(actual, expected, message);
-      } else if (functionName === 'assert') {
-        fireLog.assert(expression,message);
-      } else if (functionName === 'include') {
-        fireLog.include(haystack, needle, message);
-      }
-     
-            
-    });
+    
+    if (this.errors.length > 0) {
+      throw new Error(`Assertion failed with ${this.errors.length} errors: \n${this.errors.join('\n')}`);
+    }
+    
     // Clear the assertions after processing
-    this.assertions = [];
+     this.errors = [];
+
   }
 
   fail(message) {
@@ -995,6 +1024,7 @@ class FireLog extends Function {
 
 const fireLog = new FireLog();
 global.fireLog = fireLog;
+
 
 /**
  * @module utils
