@@ -809,205 +809,192 @@ class FireLog extends Function {
       } catch (error) {
         this.errors.push(error.message);
       }
-    }else {
+    } else {
       assert.isNull(value, message);
     }
   }
 
   isNotNull(value, message, assertionType) {
-    if(assertionType ==='soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
       try {
         assert.isNotNull(value, message);
       } catch (error) {
         this.errors.push(error.message);
       }
-    }
-    else{
-    assert.isNotNull(value, message);
+    } else {
+      assert.isNotNull(value, message);
     }
   }
 
   isUndefined(value, message, assertionType) {
-    if(assertionType ==='soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
       try {
         assert.isUndefined(value, message);
       } catch (error) {
         this.errors.push(error.message);
       }
-    }
-    else{
-    assert.isUndefined(value, message);
+    } else {
+      assert.isUndefined(value, message);
     }
   }
 
   isTrue(value, message, assertionType) {
-    if(assertionType ==='soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
       try {
         assert.isTrue(value, message);
       } catch (error) {
         this.errors.push(error.message);
       }
-    }
-    else{
-    assert.isTrue(value, message);
+    } else {
+      assert.isTrue(value, message);
     }
   }
 
   isFalse(value, message, assertionType) {
-    if(assertionType ==='soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
       try {
         assert.isFalse(value, message);
       } catch (error) {
         this.errors.push(error.message);
       }
-    }
-    else{
-    assert.isFalse(value, message);
+    } else {
+      assert.isFalse(value, message);
     }
   }
 
   isOk(value, message, assertionType) {
-    if(assertionType ==='soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
       try {
         assert.isOk(value, message);
       } catch (error) {
         this.errors.push(error.message);
       }
-    }
-    else{
-    assert.isOk(value, message);
+    } else {
+      assert.isOk(value, message);
     }
   }
 
   isNotEmpty(object, message, assertionType) {
-    if(assertionType ==='soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
       try {
         assert.isNotEmpty(object, message);
       } catch (error) {
         this.errors.push(error.message);
       }
-    }
-    else{
-    assert.isNotEmpty(object, message);
+    } else {
+      assert.isNotEmpty(object, message);
     }
   }
 
   isBoolean(value, message, assertionType) {
-    if(assertionType ==='soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
       try {
         assert.isBoolean(value, message);
       } catch (error) {
         this.errors.push(error.message);
       }
-    }
-    else{
-    assert.isBoolean(value, message);
+    } else {
+      assert.isBoolean(value, message);
     }
   }
 
   deepEqual(actual, expected, message, assertionType) {
-    if(assertionType ==='soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
       try {
         assert.deepEqual(actual, expected, message);
       } catch (error) {
         this.errors.push(error.message);
       }
-    }
-    else{
+    } else {
       assert.deepEqual(actual, expected, message);
     }
   }
 
   equal(actual, expected, message, assertionType) {
-    if(assertionType === 'soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
       try {
         assert.equal(actual, expected, message);
       } catch (error) {
         this.errors.push(error.message);
       }
-    }
-    else{
+    } else {
       assert.equal(actual, expected, message);
     }
   }
 
   strictEqual(actual, expected, message, assertionType) {
-    if(assertionType === 'soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
-       try {
+      try {
         assert.strictEqual(actual, expected, message);
       } catch (error) {
         this.errors.push(error.message);
       }
-    }
-    else{
+    } else {
       assert.strictEqual(actual, expected, message);
     }
   }
 
   include(haystack, needle, message, assertionType) {
-    if(assertionType === 'soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
       try {
         assert.include(haystack, needle, message);
       } catch (error) {
         this.errors.push(error.message);
       }
+    } else {
+      cy.log(
+        message + ' ' + JSON.stringify(needle) + ' expected to be in ' + JSON.stringify(haystack)
+      );
+      assert.include(haystack, needle, message);
     }
-    else{
-    cy.log(
-      message + ' ' + JSON.stringify(needle) + ' expected to be in ' + JSON.stringify(haystack)
-    );
-    assert.include(haystack, needle, message);
-  }
   }
 
   exists(value, message, assertionType) {
-    if(assertionType === 'soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
       try {
         assert.exists(value, message);
       } catch (error) {
         this.errors.push(error.message);
       }
-    }
-    else{
-    assert.exists(value, message);
+    } else {
+      assert.exists(value, message);
     }
   }
 
   assert(expression, message, assertionType) {
-    if(assertionType ==='soft'){
+    if (assertionType === 'soft') {
       cy.log(message);
       try {
-        assert(expression,message);
+        assert(expression, message);
       } catch (error) {
         this.errors.push(error.message);
       }
-    }
-    else{
-      assert(expression,message);
+    } else {
+      assert(expression, message);
     }
   }
 
   assertAll() {
-    
     if (this.errors.length > 0) {
-      throw new Error(`Assertion failed with ${this.errors.length} errors: \n${this.errors.join('\n')}`);
+      throw new Error(
+        `Assertion failed with ${this.errors.length} errors: \n${this.errors.join('\n')}`
+      );
     }
-    
-    // Clear the assertions after processing
-     this.errors = [];
 
+    // Clear the assertions after processing
+    this.errors = [];
   }
 
   fail(message) {
@@ -1024,7 +1011,6 @@ class FireLog extends Function {
 
 const fireLog = new FireLog();
 global.fireLog = fireLog;
-
 
 /**
  * @module utils
