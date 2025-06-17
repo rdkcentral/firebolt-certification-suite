@@ -373,10 +373,11 @@ Given('device is rebooted', () => {
  * @param {String} app - app name.
  * @example
  * And 3rd party 'firebolt' app is dismissed
+ * And 3rd party 'firebolt' playback is dismissed
  */
 Given(
-  /3rd party '(.+)' app(?: '(.+)')? is (dismissed|closed|unloaded)$/,
-  async (appType, appId, action) => {
+  /3rd party '(.+)' (app|playback)(?: '(.+)')? is (dismissed|closed|unloaded)$/,
+  async (appType, entity, appId, action) => {
     appId = appId ? appId : Cypress.env(CONSTANTS.RUNTIME)?.appId;
 
     let KeyPressSequence;
@@ -464,7 +465,10 @@ Given(
     let actionType;
     switch (action) {
       case CONSTANTS.DISMISSED:
-        fireLog.info(`Dismissing the app using the keyPressSequence: ${KeyPressSequence?.dismiss}`);
+        params.entity = entity;
+        fireLog.info(
+          `Dismissing the ${params.entity ? params.entity : 'app'} using the keyPressSequence: ${KeyPressSequence?.dismiss}`
+        );
         params.keyPressSequence = KeyPressSequence?.dismiss;
         actionType = CONSTANTS.ACTIONTYPE.DISMISS_APP;
         break;
