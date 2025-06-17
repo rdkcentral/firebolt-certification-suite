@@ -377,18 +377,16 @@ module.exports = async (on, config) => {
       }
 
       if (results.totalFailed != 0) {
-        throw new Error(`FCS_EXIT_CODE: ${CONSTANTS.FCS_EXIT_CODE.FAILURE}`);
+        process.exitCode = CONSTANTS.FCS_EXIT_CODE.FAILURE;
+      } else {
+        process.exitCode = CONSTANTS.FCS_EXIT_CODE.SUCCESS;
       }
-
-      process.exitCode = CONSTANTS.FCS_EXIT_CODE.SUCCESS;
-      console.log(`FCS_EXIT_CODE: ${process.exitCode}`);
     } catch (err) {
       logger.error('Error occurred in after:run hook:', err);
-      if (err.message.startsWith('FCS_EXIT_CODE:')) {
-        process.exitCode = err.message.replace('FCS_EXIT_CODE:', '').trim();
-        console.log(`FCS_EXIT_CODE: ${process.exitCode}`);
-      }
+      process.exitCode = CONSTANTS.FCS_EXIT_CODE.FAILURE;
     }
+
+    console.log(`FCS_EXIT_CODE: ${process.exitCode}`);
   });
   return config;
 };

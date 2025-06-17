@@ -2074,17 +2074,3 @@ Cypress.Commands.add('sendVoiceCommand', (voiceCommand) => {
     return response;
   });
 });
-
-/**
- * Fails the test with a custom FCS exit code and error message.
- *
- * Logs the exit code in a format that can be detected by cy:run,
- * then throws an error to stop the test run.
- *
- * @param {number} code - The custom exit code to log.
- * @param {string} message - The error message to display.
- */
-Cypress.Commands.add('failWithExitCode', (code, message) => {
-  console.log(`FCS_Error: ${code} , ${message}`);
-  throw new Error(`FCS_EXIT_CODE: ${code}`);
-});
