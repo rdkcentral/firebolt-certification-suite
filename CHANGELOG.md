@@ -1,3 +1,10 @@
+# [1.13.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.4...v1.13.0-dev.5) (2025-06-18)
+
+
+### Features
+
+* FCS exit codes for cy:run ([#434](https://github.com/rdkcentral/firebolt-certification-suite/issues/434)) ([4030c04](https://github.com/rdkcentral/firebolt-certification-suite/commit/4030c04c2b74b7d549508041b48f3af46908742d))
+
 # [1.13.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.3...v1.13.0-dev.4) (2025-06-11)
 
 
