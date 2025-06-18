@@ -258,122 +258,135 @@ module.exports = async (on, config) => {
     let elk = false;
     let certification = false;
 
-    // Creating uuid folder under reports
-    if (results.config.env.jobId) {
-      jobId = results.config.env.jobId;
-      filePath = `./reports/${jobId}/`;
-    }
-
-    // Send elk variable to report processor if env variable is set to true
-    if (results.config.env.elk) {
-      elk = results.config.env.elk;
-    }
-
-    // Send certification variable to report properties if env variable is set to true
-    if (results.config.env.certification) {
-      certification = results.config.env.certification;
-    }
-
-    if (!fs.existsSync(filePath)) {
-      try {
-        fs.mkdirSync(filePath);
-        logger.debug('Cucumber-json folder created successfully.');
-      } catch (error) {
-        logger.error(error);
+    try {
+      // Creating uuid folder under reports
+      if (results.config.env.jobId) {
+        jobId = results.config.env.jobId;
+        filePath = `./reports/${jobId}/`;
       }
-    }
 
-    // get the testsuite name results (this has the environment variables used.). if not undefined use that as the suiteName instead of default.
-    if (results.config.env.testSuiteName) {
-      suiteName = results.config.env.testSuiteName + '_' + timestamp;
-    }
+      // Send elk variable to report processor if env variable is set to true
+      if (results.config.env.elk) {
+        elk = results.config.env.elk;
+      }
 
-    // generate the output file name
-    const outputFile = filePath + suiteName + '.json';
-    // convert the messages file to json file
-    await formatter.parseCucumberJson(sourceFile, outputFile);
+      // Send certification variable to report properties if env variable is set to true
+      if (results.config.env.certification) {
+        certification = results.config.env.certification;
+      }
 
-    // delete the messages.ndjson file.
-    fs.unlink(sourceFile, (err) => {
-      if (err) throw err;
-      logger.debug('The file has been deleted!');
-    });
-
-    const reportType = config.env.reportType;
-    // Reading sanity suite file name.
-    if (reportType !== undefined) {
-      // Reading sanity report file name.
-      const sanityReportFileName = readFileName(filePath, CONSTANTS.SANITY_REPORT_FILENAME);
-      const requiredReports =
-        reportType.length === 0 ? [CONSTANTS.MOCHAWESOME, CONSTANTS.CUCUMBER] : [reportType];
-
-      for (const reportType of requiredReports) {
-        const fileName = readFileName(filePath, reportType);
-        if (fileName) {
-          let jsonReport;
-          // If reportType is mochawesome and sanity report is present inside jobId(uuid) folder combining both report before pushing to config module.
-          if (reportType === CONSTANTS.MOCHAWESOME && sanityReportFileName) {
-            const mergedJson = await combineMochawesomeJson([
-              filePath + sanityReportFileName,
-              filePath + fileName,
-            ]);
-            // Convert merged json object to a buffer
-            jsonReport = Buffer.from(JSON.stringify(mergedJson));
-          } else {
-            // To add custom metadata to the generated cucumber JSON
-            await addCustomMetaData(outputFile, metaDataArr);
-            // Reading data from mochawesome or cucumber json file as a buffer
-            jsonReport = readDataFromFile(filePath + fileName);
-          }
-          const reportProperties = {};
-          const tempReportEnv = path.resolve(__dirname, tempReportEnvJson);
-          if (fs.existsSync(tempReportEnv)) reportProperties.reportEnv = require(tempReportEnv);
-          let customReportData;
-          try {
-            customReportData = require('../fixtures/external/objects/customReportData.json');
-          } catch (error) {
-            customReportData = require('../fixtures/customReportData.json');
-          }
-          reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
-          reportProperties.customReportData = customReportData;
-          reportProperties.certification = certification;
-          // Add the report to the reportObj
-          if (reportType === CONSTANTS.CUCUMBER) {
-            reportObj.cucumberReport = jsonReport;
-            // Pass fileName and filePath as well for local report generation
-            reportObj.cucumberReportFilePath = filePath;
-          } else if (reportType === CONSTANTS.MOCHAWESOME) {
-            reportObj.mochawesomeReport = jsonReport;
-          }
-          reportObj.reportProperties = reportProperties;
+      if (!fs.existsSync(filePath)) {
+        try {
+          fs.mkdirSync(filePath);
+          logger.debug('Cucumber-json folder created successfully.');
+        } catch (error) {
+          logger.error(error);
         }
       }
 
-      // Genereate local report if generateLocalReport is set to true
-      if (config.env.generateLocalReport) {
-        await generateLocalReport(reportObj, jobId);
+      // get the testsuite name results (this has the environment variables used.). if not undefined use that as the suiteName instead of default.
+      if (results.config.env.testSuiteName) {
+        suiteName = results.config.env.testSuiteName + '_' + timestamp;
       }
 
-      // Emit the 'reports' event once after the loop and reportObj is populated.
-      await new Promise((resolve) => {
-        eventEmitter.once('reportProcessed', () => resolve());
-        eventEmitter.emit('reports', reportObj, jobId, elk);
+      // generate the output file name
+      const outputFile = filePath + suiteName + '.json';
+      // convert the messages file to json file
+      await formatter.parseCucumberJson(sourceFile, outputFile);
+
+      // delete the messages.ndjson file.
+      fs.unlink(sourceFile, (err) => {
+        if (err) throw err;
+        logger.debug('The file has been deleted!');
       });
-    }
 
-    // Delete the json files after emitting
-    if (config.env.deleteReport) {
-      const files = readFileName(filePath);
-      if (files) {
-        for (const file of files) {
-          const fullPath = filePath + file;
-          // Check if the path is not a directory
-          if (!fs.statSync(fullPath).isDirectory()) {
-            deleteFile(filePath + file);
+      const reportType = config.env.reportType;
+      // Reading sanity suite file name.
+      if (reportType !== undefined) {
+        // Reading sanity report file name.
+        const sanityReportFileName = readFileName(filePath, CONSTANTS.SANITY_REPORT_FILENAME);
+        const requiredReports =
+          reportType.length === 0 ? [CONSTANTS.MOCHAWESOME, CONSTANTS.CUCUMBER] : [reportType];
+
+        for (const reportType of requiredReports) {
+          const fileName = readFileName(filePath, reportType);
+          if (fileName) {
+            let jsonReport;
+            // If reportType is mochawesome and sanity report is present inside jobId(uuid) folder combining both report before pushing to config module.
+            if (reportType === CONSTANTS.MOCHAWESOME && sanityReportFileName) {
+              const mergedJson = await combineMochawesomeJson([
+                filePath + sanityReportFileName,
+                filePath + fileName,
+              ]);
+              // Convert merged json object to a buffer
+              jsonReport = Buffer.from(JSON.stringify(mergedJson));
+            } else {
+              // To add custom metadata to the generated cucumber JSON
+              await addCustomMetaData(outputFile, metaDataArr);
+              // Reading data from mochawesome or cucumber json file as a buffer
+              jsonReport = readDataFromFile(filePath + fileName);
+            }
+            const reportProperties = {};
+            const tempReportEnv = path.resolve(__dirname, tempReportEnvJson);
+            if (fs.existsSync(tempReportEnv)) reportProperties.reportEnv = require(tempReportEnv);
+            let customReportData;
+            try {
+              customReportData = require('../fixtures/external/objects/customReportData.json');
+            } catch (error) {
+              customReportData = require('../fixtures/customReportData.json');
+            }
+            reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
+            reportProperties.customReportData = customReportData;
+            reportProperties.certification = certification;
+            // Add the report to the reportObj
+            if (reportType === CONSTANTS.CUCUMBER) {
+              reportObj.cucumberReport = jsonReport;
+              // Pass fileName and filePath as well for local report generation
+              reportObj.cucumberReportFilePath = filePath;
+            } else if (reportType === CONSTANTS.MOCHAWESOME) {
+              reportObj.mochawesomeReport = jsonReport;
+            }
+            reportObj.reportProperties = reportProperties;
+          }
+        }
+
+        // Genereate local report if generateLocalReport is set to true
+        if (config.env.generateLocalReport) {
+          await generateLocalReport(reportObj, jobId);
+        }
+
+        // Emit the 'reports' event once after the loop and reportObj is populated.
+        await new Promise((resolve) => {
+          eventEmitter.once('reportProcessed', () => resolve());
+          eventEmitter.emit('reports', reportObj, jobId, elk);
+        });
+      }
+
+      // Delete the json files after emitting
+      if (config.env.deleteReport) {
+        const files = readFileName(filePath);
+        if (files) {
+          for (const file of files) {
+            const fullPath = filePath + file;
+            // Check if the path is not a directory
+            if (!fs.statSync(fullPath).isDirectory()) {
+              deleteFile(filePath + file);
+            }
           }
         }
       }
+
+      if (results.totalFailed != 0) {
+        process.exitCode = CONSTANTS.FCS_EXIT_CODE.FAILURE;
+      } else {
+        process.exitCode = CONSTANTS.FCS_EXIT_CODE.SUCCESS;
+      }
+    } catch (err) {
+      logger.error('Error occurred in after:run hook:', err);
+      process.exitCode = CONSTANTS.FCS_EXIT_CODE.FAILURE;
     }
+
+    console.log(`FCS_EXIT_CODE: ${process.exitCode}`);
   });
   return config;
 };
