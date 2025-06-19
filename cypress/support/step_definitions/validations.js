@@ -347,7 +347,7 @@ Given(
  * 3rd party 'test' app is 'playing entity'
  */
 Given(/3rd party '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
-  const objectKey = validationObjectKey.replaceAll(" ", "_").toUpperCase();
+  const objectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   let validationObject;
   cy.getFireboltData(objectKey).then((fireboltData) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;

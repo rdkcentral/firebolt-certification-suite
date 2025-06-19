@@ -376,7 +376,7 @@ Given('device is rebooted', () => {
  * And 3rd party 'firebolt' playback is dismissed
  */
 Given(
-   /3rd party '(.+)' (app|playback)(?: '(.+)')? is (dismissed|closed|unloaded|streaming)$/,
+  /3rd party '(.+)' (app|playback)(?: '(.+)')? is (dismissed|closed|unloaded|streaming)$/,
   async (appType, entity, appId, action) => {
     appId = appId ? appId : Cypress.env(CONSTANTS.RUNTIME)?.appId;
 
@@ -414,9 +414,9 @@ Given(
             loggedType = CONSTANTS.LOGGEDIN;
           } else if (scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDOUT.toLowerCase())) {
             loggedType = CONSTANTS.LOGGEDOUT;
-           } else if (action == CONSTANTS.STREAMING) {
+          } else if (action == CONSTANTS.STREAMING) {
             loggedType = CONSTANTS.LOGGEDIN;
-           }
+          }
 
           if (
             // Check if keyPressSequence is defined in the runtime environment variables for the specific intent
@@ -491,7 +491,7 @@ Given(
         return;
     }
 
-      try {
+    try {
       if (actionType == CONSTANTS.ACTIONTYPE.PLAYBACK) {
         if (params.keyPressSequence && params.keyPressSequence.length > 0) {
           cy.sendKeyPress(params.keyPressSequence);
@@ -509,7 +509,7 @@ Given(
           }
         });
       }
-    }catch (error) {
+    } catch (error) {
       fireLog.fail(
         `Following error occurred while attempting to exit app session for appId ${appId} using keypress sequence ${KeyPressSequence?.dismiss}: ${error.message}`
       );
