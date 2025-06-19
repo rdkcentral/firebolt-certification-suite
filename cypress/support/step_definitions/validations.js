@@ -336,3 +336,24 @@ Given(
     });
   }
 );
+
+/**
+ * @module validations
+ * @function 3rd party '(.+)' app is '(.+)'
+ * @description To call validation function with the validation object associated with the validation key
+ * @param {String} app - app name.
+ * @param {String} validationObjectKey - key name of the validation object.
+ * @example
+ * 3rd party 'test' app is 'playing entity'
+ */
+Given(/3rd party '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
+  const objectKey = validationObjectKey.replaceAll(" ", "_").toUpperCase();
+  let validationObject;
+  cy.getFireboltData(objectKey).then((fireboltData) => {
+    const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+    validationObject = UTILS.resolveRecursiveValues(fireboltData);
+    cy.methodOrEventResponseValidation(type, validationObject).then(() => {
+      fireLog.info(`${validationObjectKey} was successful`);
+    });
+  });
+});
