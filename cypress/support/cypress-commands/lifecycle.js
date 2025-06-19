@@ -18,7 +18,7 @@
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS from '../cypress-support/src/utils';
-import lifeCycleAppConfig from '../../../Scripts/lifeCycleAppObject.js';
+import { createLifeCycleAppConfig } from '../../../resources/common/lifecycleAppConfig';
 const logger = require('../Logger')('lifecycle.js');
 
 /**
@@ -37,7 +37,7 @@ Cypress.Commands.add('lifecycleSetup', (appCallSign, state) => {
   if (Cypress.env(CONSTANTS.TEST_TYPE) == CONSTANTS.MODULE_NAMES.LIFECYCLE) {
     // create lifecycleAppObject to mimic all the state transition for an app and also go through the same state histories
     if (!Cypress.env(CONSTANTS.LIFECYCLE_APP_OBJECT_LIST).includes(appId)) {
-      const lifeCycleAppObject = new lifeCycleAppConfig(appId);
+      const lifeCycleAppObject = createLifeCycleAppConfig();
       // set the state to initialising
       lifeCycleAppObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INITIALIZING);
       // store the lifecycleAppObject in global object and push it to a global list
@@ -108,7 +108,7 @@ Cypress.Commands.add('validateLifecycleState', (state, appId) => {
         UTILS.assertWithRequirementLogs(
           pretext,
           response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE].instance,
-          appObject.getAppObjectState().state
+          appObject.getCurrentState().state
         );
         validateVisibilityState(state);
       } catch (error) {
@@ -350,7 +350,7 @@ Cypress.Commands.add('setAppState', (state, appId) => {
   cy.fetchLifecycleHistory(appId);
 
   // Get current application state
-  const currentAppState = appObject.getAppObjectState() || {};
+  const currentAppState = appObject.getCurrentState() || {};
   if (currentAppState == {}) {
     currentAppState.state = null;
   }
@@ -546,9 +546,9 @@ Cypress.Commands.add('setAppObjectStateFromMethod', (method, appId) => {
     case CONSTANTS.LIFECYCLE_APIS.CLOSE.toLowerCase():
       const appObject = Cypress.env(appId);
       if (
-        appObject.getAppObjectState().state !== CONSTANTS.LIFECYCLE_STATES.UNLOADING &&
-        appObject.getAppObjectState().state !== CONSTANTS.LIFECYCLE_STATES.SUSPENDED &&
-        appObject.getAppObjectState().state !== CONSTANTS.LIFECYCLE_STATES.INITIALIZING
+        appObject.getCurrentState().state !== CONSTANTS.LIFECYCLE_STATES.UNLOADING &&
+        appObject.getCurrentState().state !== CONSTANTS.LIFECYCLE_STATES.SUSPENDED &&
+        appObject.getCurrentState().state !== CONSTANTS.LIFECYCLE_STATES.INITIALIZING
       ) {
         appObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INACTIVE);
       }
