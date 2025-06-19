@@ -2080,3 +2080,23 @@ Cypress.Commands.add('sendVoiceCommand', (voiceCommand) => {
     return response;
   });
 });
+
+/**
+ * @module commands
+ * @function findLogPattern
+ * @description Sends a request to search for specific log patterns
+ * @example
+ * cy.findLogPattern({ logPattern: "SignIn", fileName: "/logs/app.log" })
+ */
+Cypress.Commands.add('findLogPattern', (logKey, fileName) => {
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FINDLOGPATTERN,
+    params: {
+      logPattern: logKey,
+      fileName: fileName,
+    },
+  };
+  cy.sendMessagetoPlatforms(requestMap).then((result) => {
+    return result;
+  });
+});
