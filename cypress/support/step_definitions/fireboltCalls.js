@@ -376,7 +376,7 @@ Given('device is rebooted', () => {
  * And 3rd party 'firebolt' playback is dismissed
  */
 Given(
-  /3rd party '(.+)' (app|playback)(?: '(.+)')? is (dismissed|closed|unloaded)$/,
+   /3rd party '(.+)' (app|playback)(?: '(.+)')? is (dismissed|closed|unloaded|streaming)$/,
   async (appType, entity, appId, action) => {
     appId = appId ? appId : Cypress.env(CONSTANTS.RUNTIME)?.appId;
 
@@ -414,7 +414,9 @@ Given(
             loggedType = CONSTANTS.LOGGEDIN;
           } else if (scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDOUT.toLowerCase())) {
             loggedType = CONSTANTS.LOGGEDOUT;
-          }
+           } else if (action == CONSTANTS.STREAMING) {
+            loggedType = CONSTANTS.LOGGEDIN;
+           }
 
           if (
             // Check if keyPressSequence is defined in the runtime environment variables for the specific intent
@@ -480,22 +482,34 @@ Given(
         params.appId = appId;
         actionType = CONSTANTS.ACTIONTYPE.UNLOAD_APP;
         break;
+      case CONSTANTS.STREAMING:
+        params.keyPressSequence = KeyPressSequence?.play;
+        actionType = CONSTANTS.ACTIONTYPE.PLAYBACK;
+        break;
       default:
         fireLog.error('Invalid action type');
         return;
     }
 
-    try {
-      cy.exitAppSession(actionType, params).then((response) => {
-        if (response) {
-          fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
+      try {
+      if (actionType == CONSTANTS.ACTIONTYPE.PLAYBACK) {
+        if (params.keyPressSequence && params.keyPressSequence.length > 0) {
+          cy.sendKeyPress(params.keyPressSequence);
         } else {
-          fireLog.fail(
-            `Failed to get a valid response from platform when attempting to exit app session for appId ${appId} using keypress sequence ${KeyPressSequence?.dismiss}`
-          );
+          fireLog.info(`No additional keypress required to start playback for app ${appId}`);
         }
-      });
-    } catch (error) {
+      } else {
+        cy.exitAppSession(actionType, params).then((response) => {
+          if (response) {
+            fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
+          } else {
+            fireLog.fail(
+              `Failed to get a valid response from platform when attempting to exit app session for appId ${appId} using keypress sequence ${KeyPressSequence?.dismiss}`
+            );
+          }
+        });
+      }
+    }catch (error) {
       fireLog.fail(
         `Following error occurred while attempting to exit app session for appId ${appId} using keypress sequence ${KeyPressSequence?.dismiss}: ${error.message}`
       );
@@ -531,14 +545,14 @@ Given(/3rd party '(.+)' app should be exited$/, async (app) => {
 
 /**
  * @module fireboltCalls
- * @function Then /Send (.+) keypress(?: with a delay of '(.+)' seconds)?/
+ * @function Then /Test runner sends (.+) keypress(?: with a delay of '(.+)' seconds)?/
  * @description Sends a keypress event to the platform.
  * @param {String} keypress - The key to be pressed
  * @example
- * Then Send 'enter' keypress
- * Then Send 'enter' keypress with a delay of '20' seconds
+ * Then Test runner sends 'enter' keypress
+ * Then Test runner sends 'enter' keypress with a delay of '20' seconds
  */
-Then(/Send '(.+)' keypress(?: with a delay of '(.+)' seconds)?/, (keypress, delay) => {
+Then(/Test runner sends '(.+)' keypress(?: with a delay of '(.+)' seconds)?/, (keypress, delay) => {
   cy.sendKeyPress(keypress, delay).then(() => {
     console.log('Keypress done successfully for ', keypress);
   });
