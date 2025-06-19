@@ -545,6 +545,7 @@ module.exports = {
     UNLOAD_APP: 'unloadApp',
   },
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
+  SOFT: 'soft',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

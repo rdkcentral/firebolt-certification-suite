@@ -802,7 +802,7 @@ class FireLog extends Function {
   }
 
   isNull(value, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.isNull(value, message);
@@ -815,7 +815,7 @@ class FireLog extends Function {
   }
 
   isNotNull(value, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.isNotNull(value, message);
@@ -828,7 +828,7 @@ class FireLog extends Function {
   }
 
   isUndefined(value, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.isUndefined(value, message);
@@ -841,7 +841,7 @@ class FireLog extends Function {
   }
 
   isTrue(value, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.isTrue(value, message);
@@ -854,7 +854,7 @@ class FireLog extends Function {
   }
 
   isFalse(value, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.isFalse(value, message);
@@ -867,7 +867,7 @@ class FireLog extends Function {
   }
 
   isOk(value, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.isOk(value, message);
@@ -880,7 +880,7 @@ class FireLog extends Function {
   }
 
   isNotEmpty(object, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.isNotEmpty(object, message);
@@ -893,7 +893,7 @@ class FireLog extends Function {
   }
 
   isBoolean(value, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.isBoolean(value, message);
@@ -906,7 +906,7 @@ class FireLog extends Function {
   }
 
   deepEqual(actual, expected, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.deepEqual(actual, expected, message);
@@ -919,7 +919,7 @@ class FireLog extends Function {
   }
 
   equal(actual, expected, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.equal(actual, expected, message);
@@ -932,7 +932,7 @@ class FireLog extends Function {
   }
 
   strictEqual(actual, expected, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.strictEqual(actual, expected, message);
@@ -945,7 +945,7 @@ class FireLog extends Function {
   }
 
   include(haystack, needle, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.include(haystack, needle, message);
@@ -961,7 +961,7 @@ class FireLog extends Function {
   }
 
   exists(value, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert.exists(value, message);
@@ -974,7 +974,7 @@ class FireLog extends Function {
   }
 
   assert(expression, message, assertionType) {
-    if (assertionType === 'soft') {
+    if (assertionType === CONSTANTS.SOFT) {
       cy.log(message);
       try {
         assert(expression, message);
