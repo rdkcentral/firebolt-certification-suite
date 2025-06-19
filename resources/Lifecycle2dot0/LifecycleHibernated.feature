@@ -16,7 +16,7 @@ Feature: Lifecycle_Hibernated
         # LifecycleManager.setTargetAppState to 'hibernated' state
         # state transition is not possible so expecting error
         When '3rd party app' transitions to state 'hibernated'
-        And '3rd party app' will stay in 'hibernated' state
+        And '3rd party app' will stay in 'paused' state
 
     Scenario: Launching an App with active state and moving to hibernated state expecting error
         Given the environment has been set up for 'lifecycle' tests
@@ -25,7 +25,7 @@ Feature: Lifecycle_Hibernated
         # LifecycleManager.setTargetAppState to 'hibernated' state
         # state transition is not possible so expecting error
         When '3rd party app' transitions to state 'hibernated'
-        And '3rd party app' will stay in 'hibernated' state
+        And '3rd party app' will stay in 'active' state
 
 
     Scenario: Launching an App with hibernated state and moving to hibernated state.

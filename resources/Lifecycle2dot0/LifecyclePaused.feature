@@ -24,7 +24,7 @@ Feature: Lifecycle_Paused
         # LifecycleManager.setTargetAppState to 'RUNNING' state
         # state transition is not possible so expecting error
         When '3rd party app' transitions to state 'paused'
-        And '3rd party app' will stay in 'paused' state
+        And '3rd party app' will stay in 'hibernated' state
 
     Scenario: Launching an App with paused state and moving to paused state.
         Given the environment has been set up for 'lifecycle' tests

@@ -24,7 +24,7 @@ Feature: Lifecycle_Suspended
         # LifecycleManager.setTargetAppState to 'suspended' state
         # state transition is not possible so expecting error
         When '3rd party app' transitions to state 'suspended'
-        And '3rd party app' will stay in 'suspended' state
+        And '3rd party app' will stay in 'active' state
 
     Scenario: Launching an App with suspended state and moving to suspended state.
         Given the environment has been set up for 'lifecycle' tests
