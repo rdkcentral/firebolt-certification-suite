@@ -1,6 +1,6 @@
-const CONSTANTS = require('../../cypress/support/constants/constants');
-import lifecycle_v1 from '../../sdkResources/Lifecycle/1.x/lifecycle_v1';
-import lifecycle_v2 from '../../sdkResources/Lifecycle/2.x/lifecycle_v2';
+const CONSTANTS = require('../constants/constants');
+import lifecycle_v1 from './1.x/lifecycle_v1';
+import lifecycle_v2 from './2.x/lifecycle_v2';
 
 const version = Cypress.env(CONSTANTS.SDK_VERSION) || '1.0'; // Default to version 1.0 if not set
 
