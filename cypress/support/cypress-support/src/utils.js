@@ -1312,7 +1312,7 @@ function buildAndResolveIntent(appId, programType) {
     runtime: {},
   };
 
-  return cy.callConfigModule('resolveIntent', [programType, intentEnv,]);
+  return cy.callConfigModule('resolveIntent', [programType, intentEnv]);
 }
 
 module.exports = {
