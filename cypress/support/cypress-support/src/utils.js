@@ -1288,6 +1288,34 @@ function determineActionFromFeatureFile(testRunnable) {
   return 'CORE';
 }
 
+/**
+ * Builds intent environment and resolves intent using Cypress config module.
+ * @param {string} appId - The durable app ID.
+ * @param {string} programType - The type of program (e.g., 'movie', 'episode').
+ * @returns {Chainable<any>} Cypress chainable for resolved intent.
+ */
+function buildAndResolveIntent(appId, programType) {
+  const runtimeEnv = Cypress.env();
+  const intentEnv = {
+    platform: 'xumo',
+    satClient: runtimeEnv.satClientId,
+    satSecret: runtimeEnv.satClientSecret,
+    queryString: false,
+    contentCatalogTypes: 'vod',
+    customFilters: {
+      durableAppId: appId,
+      vodShowings: 'all',
+      numShowings: 'all'
+    },
+    knownEntities: {},
+    app_metadata: {},
+    runtime: {}
+  };
+
+  return cy.callConfigModule('resolveIntent', [programType, intentEnv]);
+}
+
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -1321,4 +1349,5 @@ module.exports = {
   captureScreenshot,
   addToEnvLabelMap,
   determineActionFromFeatureFile,
+  buildAndResolveIntent
 };

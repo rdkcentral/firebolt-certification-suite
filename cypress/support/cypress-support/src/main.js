@@ -606,15 +606,13 @@ export default function (module) {
   Cypress.Commands.add(
     'callConfigModule',
     (methodName, params = [], moduleName = 'additionalServices') => {
-      console.log(`Calling "${methodName}" from configModule.${moduleName} with params:`, params);
-
-      return cy.then(() => {
+      return cy.then(async () => {
         const configFunction = module?.[moduleName]?.[methodName];
         if (typeof configFunction !== 'function') {
           console.log(`${moduleName}.${methodName} not found in the config module.`);
           return null;
         }
-        return configFunction(...params);
+        return await configFunction(...params);
       });
     }
   );
