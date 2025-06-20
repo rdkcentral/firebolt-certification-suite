@@ -1305,16 +1305,15 @@ function buildAndResolveIntent(appId, programType) {
     customFilters: {
       durableAppId: appId,
       vodShowings: 'all',
-      numShowings: 'all'
+      numShowings: 'all',
     },
     knownEntities: {},
     app_metadata: {},
-    runtime: {}
+    runtime: {},
   };
 
   return cy.callConfigModule('resolveIntent', [programType, intentEnv]);
 }
-
 
 module.exports = {
   replaceJsonStringWithEnvVar,
