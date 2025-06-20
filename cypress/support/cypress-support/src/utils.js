@@ -1315,6 +1315,7 @@ function buildAndResolveIntent(appId, programType) {
   return cy.callConfigModule('resolveIntent', [programType, intentEnv]);
 }
 
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
