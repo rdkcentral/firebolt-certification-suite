@@ -22,7 +22,6 @@ const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
 const jsonAssertion = require('soft-assert');
-const resolveIntent = require('configModule').resolveIntent;
 
 /**
  * @module commands
@@ -983,7 +982,6 @@ Cypress.Commands.add('censorData', (method, response) => {
  * cy.launchApp('certification', 'foo')
  */
 Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, intent) => {
-  console.log("[A] ~ Cypress.Commands.add ~ launchApp:");
   // use the firebolt command Discovery.launch to launch the app. If app id given, use the app id
   // else get the default app id from environment variable.
 
@@ -1021,18 +1019,6 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
       Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata.apps[0][appId][intent];
     } else if (appMetadata && appMetadata[appId] && appMetadata[appId][intent]) {
       Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId][intent];
-    }
-
-    if(Cypress.env(CONSTANTS.RUNTIME).intentTemplate){
-      const programType = Cypress.env(CONSTANTS.RUNTIME).intentTemplate.data.programType;
-      cy.then(async () => {
-        const dynamicIntent = await resolveIntent(appId, programType, Cypress.env());
-        console.log("[A] ~ cy.then ~ dynamicIntent:", dynamicIntent)
-        Cypress.env(CONSTANTS.RUNTIME).intent = {
-          ...Cypress.env(CONSTANTS.RUNTIME).intent,
-          ...dynamicIntent,
-        }
-      });   
     }
 
     // Check if intentTemplates are defined for the given appType
