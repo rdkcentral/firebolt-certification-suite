@@ -739,6 +739,16 @@ class FireLog extends Function {
     `;
     super('...args', functionBody);
 
+    const logLevels = ['debug', 'info', 'warn', 'error', 'critical'];
+    const levelPriority = {
+      error: 0,
+      warn: 1,
+      info: 2,
+      debug: 3,
+      critical: 4,
+    };
+    this.currentLevel = logger.level; // log level to display
+
     const handler = {
       apply: function (target, thisArg, argumentsList) {
         let message;
@@ -793,7 +803,28 @@ class FireLog extends Function {
       }
     });
 
+    // Create logger-level methods
+    logLevels.forEach((level) => {
+      instanceProxy[level] = (message) => {
+        if (levelPriority[level] <= levelPriority[this.currentLevel]) {
+          const prefix = `[${level}]`;
+          const fullMessage = `${prefix} ${message}`;
+          if (level === 'critical') {
+            cy.log(fullMessage);
+            throw new Error(fullMessage);
+          } else {
+            cy.log(fullMessage);
+            console[level === 'debug' ? 'log' : level](fullMessage);
+          }
+        }
+      };
+    });
+
     return fireLogProxy;
+  }
+
+  setLevel(level) {
+    this.currentLevel = level;
   }
 
   // Method to log a message without any assertion
