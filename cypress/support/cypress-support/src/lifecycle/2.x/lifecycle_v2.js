@@ -1,7 +1,7 @@
 const lifecycleConfig = require('./lifecycleConfig.json');
 const { LifeCycleAppConfigBase } = require('../LifeCycleAppConfigBase');
-const logger = require('../../Logger')('lifecycle_v2.js');
-const CONSTANTS = require('../../constants/constants');
+const logger = require('../../../../Logger')('lifecycle_v2.js');
+const CONSTANTS = require('../../../../constants/constants');
 
 class notificationConfig {
   constructor(message) {

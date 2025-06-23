@@ -1,4 +1,4 @@
-const CONSTANTS = require('../constants/constants');
+const CONSTANTS = require('../../../constants/constants');
 import lifecycle_v1 from './1.x/lifecycle_v1';
 import lifecycle_v2 from './2.x/lifecycle_v2';
 
