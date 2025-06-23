@@ -279,7 +279,7 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
  */
 Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) => {
   const appObject = Cypress.env(appId);
-  return appObject.invokeLifecycleApi(method, methodParams);
+  return appObject.invokeLifecycleApi(appId, method, methodParams);
 });
 
 
@@ -288,13 +288,13 @@ Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) 
  * @function setAppState
  * @description Set state of 3rd party app as well as state inside appObject to use as source of truth
  * @param {String} state - State to be set
- * @param {Object} appId - The appId used to launch the app which is identified by the firebolt platform servicing the request
+ * @param {String} appId - The appId used to launch the app which is identified by the firebolt platform servicing the request
  * @example
  * cy.setAppState('foreground', 'foo')
  */
 Cypress.Commands.add('setAppState', (state, appId) => {
   const appObject = Cypress.env(appId);
-  appObject.setAppState(state);
+  appObject.setAppState(state, appId);
 });
 
 
@@ -302,13 +302,13 @@ Cypress.Commands.add('setAppState', (state, appId) => {
  * @module  lifecycle
  * @function fetchLifecycleHistory
  * @description Fetch lifecycle history on demand for 3rd party app and store in environment variable if present, for lifecycle history validation
- * @param {String} appObject - appObject in environment
+ * @param {String} appId - The appId used to launch the app which is identified by the firebolt platform servicing the request
  * @example
  * cy.fetchLifecycleHistory('foo')
  */
 Cypress.Commands.add('fetchLifecycleHistory', (appId) => {
   const appObject = Cypress.env(appId);
-  appObject.fetchLifecycleHistory();
+  appObject.fetchLifecycleHistory(appId);
 });
 
 /**
@@ -362,15 +362,15 @@ Cypress.Commands.add('setAppObjectStateFromMethod', (method, appId) => {
 /**
  * @module lifecycle
  * @function lifecycleSchemaChecks
- * @description To Validate the status of response and schema
+ * @description To Validate the status of lifecycle response and schema
  * @param {String} response - ApiResponse
- * @param {Object} appId - The appId used to launch the app which is identified by the firebolt platform servicing the request
+ * @param {String} appId - The appId used to launch the app which is identified by the firebolt platform servicing the request
  * @example
- * cy.lifecycleSchemaChecks({"result":null,"error":null,"schemaResult":{"status":"PASS","schemaValidationResult":{"instance":null,"schema":{"const":null}}, 'foreground');
+ * cy.lifecycleSchemaChecks({"result":null,"error":null,"schemaResult":{"status":"PASS","schemaValidationResult":{"instance":null,"schema":{"const":null}}, 'foo');
  */
 Cypress.Commands.add('lifecycleSchemaChecks', (response, appId) => {
   const appObject = Cypress.env(appId);
-  appObject.lifecycleSchemaChecks(response);
+  appObject.lifecycleSchemaChecks(response, appId);
 });
 
 /**

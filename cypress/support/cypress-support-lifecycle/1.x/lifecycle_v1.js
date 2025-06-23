@@ -41,10 +41,10 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
    /**
    * Send message to 3rd party app to invoke lifecycle API
    */
-  invokeLifecycleApi(method, methodParams = null) {
+  invokeLifecycleApi(appId, method, methodParams = null) {
     try {
-      const requestTopic = UTILS.getTopic(this.appId);
-      const responseTopic = UTILS.getTopic(this.appId, CONSTANTS.SUBSCRIBE);
+      const requestTopic = UTILS.getTopic(appId);
+      const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
 
       const params = {
         [CONSTANTS.METHOD_NAME]: method,
@@ -124,8 +124,8 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
    * Fetches and logs the app's lifecycle history.
    * Stores it in Cypress environment variable if found.
    */
-  fetchLifecycleHistory() {
-    this.invokeLifecycleApi(CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}')
+  fetchLifecycleHistory(appId) {
+    this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}')
       .then((response) => {
         try {
           const historyValue = _.get(JSON.parse(response), CONSTANTS.LIFECYCLE_HISTORY_FIELD, null);
@@ -147,9 +147,9 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
   /**
    * Validates lifecycle response schema.
    */
-  lifecycleSchemaChecks(response) {
+  lifecycleSchemaChecks(response, appId) {
     try {
-      if (typeof response !== 'object') {
+      if (typeof response !== CONSTANTS.OBJECT) {
         response = JSON.parse(response);
       }
 
@@ -166,19 +166,19 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
   }
 
   /**
-   * Sets the app lifecycle state and handles all necessary transitions and validations.
+   * Sets the app and app object lifecycle state and handles all necessary transitions and validations.
    */
-  setAppState(state) {
-    this.fetchLifecycleHistory();
+  setAppState(state, appId) {
+    this.fetchLifecycleHistory(appId);
 
     const currentAppState = this.getCurrentState() || { state: null };
     const setAppObjectState = (newState) => this.setAppObjectState(newState);
 
     const invokeLifecycleAndUpdateStateWithValidation = (api, params = '{}') => {
-      return this.invokeLifecycleApi(api, params).then((response) => {
+      return this.invokeLifecycleApi(appId, api, params).then((response) => {
         if (response) cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
         setAppObjectState(state);
-        this.lifecycleSchemaChecks(response);
+        this.lifecycleSchemaChecks(response, appId);
       });
     };
 
@@ -194,7 +194,7 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
               CONSTANTS.LIFECYCLE_STATES.FOREGROUND,
             ].includes(currentAppState.state)
           ) {
-            cy.launchApp((appType = CONSTANTS.CERTIFICATION), this.appId);
+            cy.launchApp((appType = CONSTANTS.CERTIFICATION), appId);
             setAppObjectState(state);
           } else {
             setAppObjectState(state);
@@ -203,7 +203,7 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
 
         case CONSTANTS.LIFECYCLE_STATES.BACKGROUND:
           if (![CONSTANTS.LIFECYCLE_STATES.BACKGROUND, CONSTANTS.LIFECYCLE_STATES.INITIALIZING].includes(currentAppState.state)) {
-            this.setLifecycleState(state, this.appId).then(() => setAppObjectState(state));
+            this.setLifecycleState(state, appId).then(() => setAppObjectState(state));
           }
           break;
 
@@ -212,16 +212,16 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
             invokeLifecycleAndUpdateStateWithValidation(CONSTANTS.LIFECYCLE_APIS.UNSUSPEND);
           } else {
             if (![CONSTANTS.LIFECYCLE_STATES.FOREGROUND, CONSTANTS.LIFECYCLE_STATES.BACKGROUND].includes(currentAppState.state)) {
-              cy.setAppState(CONSTANTS.LIFECYCLE_STATES.FOREGROUND, this.appId);
+              cy.setAppState(CONSTANTS.LIFECYCLE_STATES.FOREGROUND, appId);
             }
-            this.setLifecycleState(state, this.appId).then(() => setAppObjectState(state));
+            this.setLifecycleState(state, appId).then(() => setAppObjectState(state));
           }
           break;
 
         case CONSTANTS.LIFECYCLE_STATES.SUSPENDED:
           if (currentAppState.state !== CONSTANTS.LIFECYCLE_STATES.SUSPENDED) {
             if (currentAppState.state !== CONSTANTS.LIFECYCLE_STATES.INACTIVE) {
-              cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, this.appId);
+              cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, appId);
             }
             invokeLifecycleAndUpdateStateWithValidation(CONSTANTS.LIFECYCLE_APIS.SUSPEND, {});
           }
@@ -229,7 +229,7 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
 
         case CONSTANTS.LIFECYCLE_STATES.UNLOADING:
           if (currentAppState.state !== CONSTANTS.LIFECYCLE_STATES.INACTIVE) {
-            cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, this.appId);
+            cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, appId);
           }
           invokeLifecycleAndUpdateStateWithValidation(CONSTANTS.LIFECYCLE_APIS.CLOSE, { reason: CONSTANTS.ERROR });
           break;
@@ -237,8 +237,8 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
         case CONSTANTS.LIFECYCLE_STATES.UNLOADED:
         case CONSTANTS.LIFECYCLE_STATES.TERMINATED:
           if ([CONSTANTS.LIFECYCLE_STATES.INITIALIZING, CONSTANTS.NULL].includes(currentAppState.state)) {
-            cy.setAppState(CONSTANTS.LIFECYCLE_STATES.UNLOADING, this.appId);
-            this.invokeLifecycleApi(CONSTANTS.LIFECYCLE_APIS.FINISHED, {}).then((response) => {
+            cy.setAppState(CONSTANTS.LIFECYCLE_STATES.UNLOADING, appId);
+            this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.FINISHED, {}).then((response) => {
               if (response) cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
               setAppObjectState(state);
             });
