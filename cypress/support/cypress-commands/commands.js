@@ -1571,24 +1571,37 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
             }
             // Parse v2 events for first party events and if it is bidirectional SDK
             // Skipping if the event response is null, it will be checked and action of pass/fail will be taken in content validation
-            if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID) && UTILS.getEnvVariable(CONSTANTS.IS_BIDIRECTIONAL_SDK)) {
+            if (
+              appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID) &&
+              UTILS.getEnvVariable(CONSTANTS.IS_BIDIRECTIONAL_SDK)
+            ) {
               if (Object.values(response.result)[0] !== null) {
                 // Check if the response is an object and has method and params properties
                 // eg: {method: "event.onMethodName", params: {key: "new value"}}
-                if (Object.prototype.toString.call(response.result) === '[object Object]' && response.result.params) {
+                if (
+                  Object.prototype.toString.call(response.result) === '[object Object]' &&
+                  response.result.params
+                ) {
                   // Check if params is an object with a single key-value pair
                   // eg: {param: {"key": "new value"}}
                   // Here, "new value" is the expected event response
-                  if (Object.prototype.toString.call(response.result.params) === '[object Object]' && Object.keys(response.result.params).length === 1) {
+                  if (
+                    Object.prototype.toString.call(response.result.params) === '[object Object]' &&
+                    Object.keys(response.result.params).length === 1
+                  ) {
                     /*
                     parse the v2 event response from {param: {"key": "new value"}} to "new value"
                     */
                     response.result = Object.values(response.result.params)[0];
                   } else {
-                    fireLog.fail(`Expected event response to be in firebolt v2 format {"key": "new value"}, received response as "new value" format - ${JSON.stringify(response.result)}`)
+                    fireLog.fail(
+                      `Expected event response to be in firebolt v2 format {"key": "new value"}, received response as "new value" format - ${JSON.stringify(response.result)}`
+                    );
                   }
                 } else {
-                  fireLog.fail(`Expected event response to be in firebolt v2 format {method: "event.onMethodName", params: {key: "new value"}}, received response- ${JSON.stringify(response.result)}`);
+                  fireLog.fail(
+                    `Expected event response to be in firebolt v2 format {method: "event.onMethodName", params: {key: "new value"}}, received response- ${JSON.stringify(response.result)}`
+                  );
                 }
               }
             }
