@@ -1,3 +1,38 @@
+# [1.13.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.4...v1.13.0-dev.5) (2025-06-18)
+
+
+### Features
+
+* FCS exit codes for cy:run ([#434](https://github.com/rdkcentral/firebolt-certification-suite/issues/434)) ([4030c04](https://github.com/rdkcentral/firebolt-certification-suite/commit/4030c04c2b74b7d549508041b48f3af46908742d))
+
+# [1.13.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.3...v1.13.0-dev.4) (2025-06-11)
+
+
+### Features
+
+* change to get action from CLI for module method invocation ([#431](https://github.com/rdkcentral/firebolt-certification-suite/issues/431)) ([68db9c7](https://github.com/rdkcentral/firebolt-certification-suite/commit/68db9c76c2fc5687927337f10125b7c8ec301259))
+
+# [1.13.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.2...v1.13.0-dev.3) (2025-06-05)
+
+
+### Features
+
+* Authoring Profile view restrication scenarios ([#428](https://github.com/rdkcentral/firebolt-certification-suite/issues/428)) ([6f27f81](https://github.com/rdkcentral/firebolt-certification-suite/commit/6f27f819cb9b73c046bbcf7fd427e167bb97a8bd))
+
+# [1.13.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.1...v1.13.0-dev.2) (2025-06-03)
+
+
+### Features
+
+* playback dismiss scenarios ([#433](https://github.com/rdkcentral/firebolt-certification-suite/issues/433)) ([3bd17dd](https://github.com/rdkcentral/firebolt-certification-suite/commit/3bd17dd55e8513c00a61ec980bd7658909abb73f))
+
+# [1.13.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.1-dev.1...v1.13.0-dev.1) (2025-06-02)
+
+
+### Features
+
+* content validation for events when triggered in interaction logs ([#430](https://github.com/rdkcentral/firebolt-certification-suite/issues/430)) ([0d7d0da](https://github.com/rdkcentral/firebolt-certification-suite/commit/0d7d0dabf4059ade2793b242b2eeca62da7aac56))
+
 ## [1.12.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0...v1.12.1-dev.1) (2025-05-27)
 
 

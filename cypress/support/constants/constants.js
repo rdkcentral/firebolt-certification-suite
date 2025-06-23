@@ -546,6 +546,10 @@ module.exports = {
     UNLOAD_APP: 'unloadApp',
   },
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
+  FCS_EXIT_CODE: {
+    SUCCESS: 0,
+    FAILURE: 1,
+  },
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

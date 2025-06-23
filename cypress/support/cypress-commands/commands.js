@@ -121,7 +121,9 @@ Cypress.Commands.add(
             action = method.split('_')[0];
             method = method.split('_')[1];
           }
-
+          action = UTILS.getEnvVariable(CONSTANTS.ACTION, false)
+            ? UTILS.getEnvVariable(CONSTANTS.ACTION, false)
+            : action;
           return results.push({
             method: method,
             params: params,
@@ -1043,7 +1045,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         `No intentTemplates found for ${appType}, make sure the intentTemplates are defined as per the appType`
       );
     }
-
+    Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
     // Attempt to resolve the intentTemplate and create messageIntent
     try {
       messageIntent = {
@@ -1791,9 +1793,13 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
       );
       fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
   }
-  cy.log(`Session for appId: ${appIdForLog} will be ended with type: ${exitType}`);
+  cy.log(
+    `Session for ${params.entity ? params.entity + ' with' : ''} appId ${appIdForLog} will be ended with type: ${exitType}`
+  );
   cy.sendMessagetoPlatforms(requestMap, timeout).then((response) => {
-    cy.log(`Platform has successfully ended app Session for appId: ${appIdForLog}`);
+    cy.log(
+      `Platform has successfully ended app Session for ${params.entity ? params.entity : 'appId'} : ${appIdForLog}`
+    );
   });
 });
 
