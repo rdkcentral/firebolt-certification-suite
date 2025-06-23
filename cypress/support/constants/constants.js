@@ -385,6 +385,8 @@ module.exports = {
     GETAPPDATA: 'fcs.getAppData',
     SENDKEYPRESS: 'fcs.sendKeyPress',
     SENDVOICECOMMAND: 'fcs.sendVoiceCommand',
+    NOTIFY_FIREBOLT_VERSION: 'fcs.notifyFireboltVersion',
+    CLEAR_ALL_LISTENERS: 'fcs.clearAllListeners',
   },
   RESPONSE: 'Response: ',
   RESPONSE_INVALID_RESPONSE_LOG:
@@ -458,6 +460,7 @@ module.exports = {
     PERFORMANCETESTHANDLER: 'performanceTestHandler',
     VISIBILITYSTATE: 'visibilityState',
     REGISTERPROVIDERHANDLER: 'registerProviderHandler',
+    CLEAR_ALL_LISTENERS: 'clearAllListeners',
   },
   TEST_TYPE: 'testType',
   THIRD_PARTY_APP: '3rd party app',
@@ -549,6 +552,7 @@ module.exports = {
     SUCCESS: 0,
     FAILURE: 1,
   },
+  IS_BIDIRECTIONAL_SDK: 'is_biDirectional_sdk',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

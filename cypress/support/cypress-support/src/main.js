@@ -105,6 +105,18 @@ export default function (module) {
     const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
     const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
     Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
+
+    const pattern = /(2|\d{2,})\.\d+\.\d+/;
+    const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false);
+    Cypress.env(CONSTANTS.IS_BIDIRECTIONAL_SDK, pattern.test(sdkVersion));
+    const requestMap = {
+      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.NOTIFY_FIREBOLT_VERSION,
+      params: { version: UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false) },
+    };
+    cy.sendMessagetoPlatforms(requestMap).then((response) => {
+      fireLog.info(JSON.stringify(response));
+      cy.wait(5000);
+    });
   });
 
   // beforeEach
@@ -198,6 +210,34 @@ export default function (module) {
         }
       );
     });
+  });
+
+  afterEach(() => {
+    // Make a clear all event listeners call and clear the deregister the events
+    // Need to see what method name can be passed here, instead of device.name.
+    const requestMap = {
+      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.CLEAR_ALL_LISTENERS,
+      params: null,
+    };
+    cy.sendMessagetoPlatforms(requestMap).then((response) => {
+      fireLog.info(
+        `Response from firstParty app for clearAllListeners: ${JSON.stringify(response)}`
+      );
+    });
+
+    // Check the appLaunch count, if count is greater than 0, then 3rd party app is launched and clear all listeners
+    if (UTILS.getEnvVariable(CONSTANTS.APP_LAUNCH_COUNT, false) > 0) {
+      const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
+      const requestTopic = UTILS.getTopic(appId);
+      const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
+      const intent = UTILS.createIntentMessage(CONSTANTS.TASK.CLEAR_ALL_LISTENERS, {});
+      cy.sendMessagetoApp(requestTopic, responseTopic, intent).then((response) => {
+        fireLog.info(
+          `Response from ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)} for clearAllListeners: ${JSON.stringify(response)}`
+        );
+      });
+    }
+    Cypress.env(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST, []);
   });
 
   // after All
