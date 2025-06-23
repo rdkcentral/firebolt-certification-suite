@@ -1,9 +1,8 @@
-const lifecycleConfig = require('./lifecycleConfig');
+const lifecycleConfig = require('./lifecycleConfig.json');
 const { LifeCycleAppConfigBase } = require('../LifeCycleAppConfigBase');
-const logger = require('../../Logger')('lifecycle_v1.js');
-const CONSTANTS = require('../../constants/constants');
-const UTILS = require('../../cypress-support/src/utils');
-
+const logger = require('../../../../Logger')('lifecycle_v1.js');
+const CONSTANTS = require('../../../../constants/constants');
+const UTILS = require('../../../../cypress-support/src/utils')
 
 class notificationConfig {
   constructor(message) {

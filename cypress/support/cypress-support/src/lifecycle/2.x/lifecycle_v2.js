@@ -1,7 +1,7 @@
 const lifecycleConfig = require('./lifecycleConfig.json');
 const { LifeCycleAppConfigBase } = require('../LifeCycleAppConfigBase');
-const logger = require('../../Logger')('lifecycle_v2.js');
-const CONSTANTS = require('../../constants/constants');
+const logger = require('../../../../Logger')('lifecycle_v2.js');
+const CONSTANTS = require('../../../../constants/constants');
 
 class notificationConfig {
   constructor(message) {
@@ -40,7 +40,7 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     // TODO: Implement V2 specific flow for setting app state
   }
 
-  setAppObjectState() {
+  setAppObjectState(newState) {
     const currentState = this.state;
     this.state = new stateConfig(newState);
     const stateTransition = lifecycleConfig.allowedStateTransitions[currentState.state];
@@ -73,6 +73,11 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
         cy.log('Requested state transition for application is not supported');
         this.state = currentState;
       }
+    }
+
+    // If app object history is not empty, set notification object using current and new states
+    if (this.history.length > 1) {
+      this.state.setNotification(newState, currentState.state);
     }
   }
 }
