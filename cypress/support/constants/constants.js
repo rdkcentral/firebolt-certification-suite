@@ -548,7 +548,11 @@ module.exports = {
     UNLOAD_APP: 'unloadApp',
   },
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
-  IS_BIDIRECTIONAL_SDK: 'is_biDirectional_sdk'
+  FCS_EXIT_CODE: {
+    SUCCESS: 0,
+    FAILURE: 1,
+  },
+  IS_BIDIRECTIONAL_SDK: 'is_biDirectional_sdk',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
