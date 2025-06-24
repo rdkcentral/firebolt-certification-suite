@@ -1045,9 +1045,10 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
     }
     Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
 
-    if (intentTemplate?.data?.programType) {
-      UTILS.buildAndResolveIntent(appId, intentTemplate?.data?.programType).then(
+    if (intentTemplate?.data?.programType) {    
+      cy.callConfigModule('resolveIntent', [appId, intentTemplate?.data?.programType]).then(
         (dynamicIntent) => {
+          console.log("Resolved dynamicIntent:", dynamicIntent);
           Cypress.env(CONSTANTS.RUNTIME).intent = {
             ...Cypress.env(CONSTANTS.RUNTIME).intent,
             ...dynamicIntent,
