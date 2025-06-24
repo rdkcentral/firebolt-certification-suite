@@ -608,15 +608,7 @@ export default function (module) {
     (methodName, params = [], moduleName = 'additionalServices') => {
       console.log(`Calling "${methodName}" from configModule.${moduleName} with params:`, params);
 
-      // return cy.then(async () => {
-      //   const configFunction = module?.[moduleName]?.[methodName];
-      //   if (typeof configFunction !== 'function') {
-      //     console.log(`${moduleName}.${methodName} not found in the config module.`);
-      //     return null;
-      //   }
-      //   return await configFunction(...params);
-      // });
-      return cy.then( () => {
+      return cy.then(() => {
         const configFunction = module?.[moduleName]?.[methodName];
         if (typeof configFunction !== 'function') {
           console.log(`${moduleName}.${methodName} not found in the config module.`);
