@@ -109,9 +109,15 @@ export default function (module) {
     const pattern = /(2|\d{2,})\.\d+\.\d+/;
     const sdkVersion = UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false);
     Cypress.env(CONSTANTS.IS_BIDIRECTIONAL_SDK, pattern.test(sdkVersion));
+    // test code, this will be removed once testing is done.
+    //----------------------------------------
+    if (sdkVersion == '2.0.0') {
+      Cypress.env(CONSTANTS.SDK_VERSION, '1.3.0');
+    }
+    //----------------------------------------
     const requestMap = {
       method: CONSTANTS.REQUEST_OVERRIDE_CALLS.NOTIFY_FIREBOLT_VERSION,
-      params: { version: UTILS.getEnvVariable(CONSTANTS.SDK_VERSION, false) },
+      params: { version: sdkVersion },
     };
     cy.sendMessagetoPlatforms(requestMap).then((response) => {
       fireLog.info(JSON.stringify(response));
