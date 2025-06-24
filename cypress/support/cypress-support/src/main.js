@@ -115,14 +115,14 @@ export default function (module) {
       Cypress.env(CONSTANTS.SDK_VERSION, '1.3.0');
     }
     // ----------------------------------------
-    const requestMap = {
-      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.NOTIFY_FIREBOLT_VERSION,
-      params: { version: sdkVersion },
-    };
-    cy.sendMessagetoPlatforms(requestMap).then((response) => {
-      fireLog.info(JSON.stringify(response));
-      cy.wait(5000);
-    });
+    // const requestMap = {
+    //   method: CONSTANTS.REQUEST_OVERRIDE_CALLS.NOTIFY_FIREBOLT_VERSION,
+    //   params: { version: sdkVersion },
+    // };
+    // cy.sendMessagetoPlatforms(requestMap).then((response) => {
+    //   fireLog.info(JSON.stringify(response));
+    //   cy.wait(5000);
+    // });
   });
 
   // beforeEach
