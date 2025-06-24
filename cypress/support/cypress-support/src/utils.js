@@ -1288,7 +1288,6 @@ function determineActionFromFeatureFile(testRunnable) {
   return 'CORE';
 }
 
-
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,

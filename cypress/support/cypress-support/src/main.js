@@ -606,6 +606,8 @@ export default function (module) {
   Cypress.Commands.add(
     'callConfigModule',
     (methodName, params = [], moduleName = 'additionalServices') => {
+      console.log(`Calling "${methodName}" from configModule.${moduleName} with params:`, params);
+      
       return cy.then(async () => {
         const configFunction = module?.[moduleName]?.[methodName];
         if (typeof configFunction !== 'function') {
