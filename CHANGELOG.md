@@ -1,3 +1,10 @@
+# [1.13.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.5...v1.13.0-dev.6) (2025-06-24)
+
+
+### Features
+
+* Added capture screenshot command ([#435](https://github.com/rdkcentral/firebolt-certification-suite/issues/435)) ([fad9297](https://github.com/rdkcentral/firebolt-certification-suite/commit/fad9297fc130f512daca29ba0124e26475c1a4c8))
+
 # [1.13.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.4...v1.13.0-dev.5) (2025-06-18)
 
 
