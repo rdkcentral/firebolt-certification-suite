@@ -1045,14 +1045,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
     }
     Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
 
-    cy.callConfigModule('resolveIntent', [appId, intent]).then(
-      (dynamicIntent) => {
-        Cypress.env(CONSTANTS.RUNTIME).intent = {
-          ...Cypress.env(CONSTANTS.RUNTIME).intent,
-          ...JSON.stringify(dynamicIntent),
-        };
-      }
-    );
+    cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
+      Cypress.env(CONSTANTS.RUNTIME).intent = {
+        ...Cypress.env(CONSTANTS.RUNTIME).intent,
+        ...JSON.stringify(dynamicIntent),
+      };
+    });
 
     // Attempt to resolve the intentTemplate and create messageIntent
     try {
