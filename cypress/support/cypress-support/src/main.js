@@ -37,29 +37,30 @@ const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/inde
 const externalV2FireboltMockData = require('../../../fixtures/external/fireboltCalls/index');
 
 export default function (module) {
+  let pubSubClient = null;
   const config = new Config(module);
   const validationModule = new Validation(module);
   const transport = new TransportLayer();
   Cypress.env(CONSTANTS.RESPONSE_TOPIC_LIST, []);
 
   // Fetch the required appTransport from config module
-  appTransport = module.appTransport;
+  appTransport = module.appTransport.PubSub.default;
 
   // before All
   before(() => {
     logger.debug('Entering before() - cypress-support/src/main.js');
-
     // Added below custom commands to clear cache and to reload browser
     cy.clearCache();
     cy.wrap(UTILS.pubSubClientCreation(appTransport), {
       timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT,
     }).then((result) => {
       if (result) {
+        pubSubClient = result;
         cy.log('Successfully established a pub/sub connection.');
       } else {
         cy.log('Unable to establish a pub/sub connection.');
       }
-      Cypress.env('pubSubClient', appTransport);
+      Cypress.env('pubSubClient', pubSubClient);
       cy.startAdditionalServices();
     });
 
@@ -214,7 +215,7 @@ export default function (module) {
           });
         }
         // unsubscribing the list of topics
-        appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
+        pubSubClient.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
         await transport.unsubscribe();
 
         // Unsubscribe from WebSocket if the client is available
@@ -444,7 +445,6 @@ export default function (module) {
               'Failed to parse JSON response from Firebolt implementation. Please check the response format.'
             );
           }
-
           assert.exists(
             response.report,
             'The response does not contain the expected "report" object. Ensure the Firebolt implementation returns a valid response with a "report" field.'
@@ -524,8 +524,14 @@ export default function (module) {
         `Entering sendMessagetoApp() - cypress-support/src/main.js with params: requestTopic=${requestTopic}, responseTopic=${responseTopic}, intent=${JSON.stringify(intent)}`
       );
 
-      const headers = { id: uuidv4() };
+      if (!pubSubClient) {
+        cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
+          fireLog.fail(CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
+        });
+        return;
+      }
 
+      const headers = { id: uuidv4() };
       // If 'sanityReportPollingTimeout' is undefined taking default timeout as 15 seconds.
       longPollTimeout = longPollTimeout ? longPollTimeout : CONSTANTS.LONGPOLL_TIMEOUT;
       // Subscribing to the topic when the topic is not subscribed.
@@ -534,31 +540,25 @@ export default function (module) {
         !UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
       ) {
         // Subscribe to topic and pass the results to the callback function
-        appTransport.subscribe(responseTopic, UTILS.subscribeResults);
+        pubSubClient.subscribe(responseTopic, UTILS.subscribeResults);
         UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
       }
 
-      if (appTransport) {
-        // Publish the message on topic
-        appTransport.publish(requestTopic, JSON.stringify(intent), headers);
+      // Publish the message on topic
+      pubSubClient.send(JSON.stringify(intent), requestTopic, headers, false);
 
-        // Returns the response after polling when data is available in queue
-        return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
-          .LongPollQueue(headers.id, longPollTimeout)
-          .then((results) => {
-            if (results) {
-              // Response recieved from queue
-              logger.debug(`Response received from queue: ${JSON.stringify(results)}`);
-              return results;
-            } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
-              return true;
-            }
-          });
-      } else {
-        cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
-          fireLog.fail(CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
+      // Returns the response after polling when data is available in queue
+      return UTILS.getEnvVariable(CONSTANTS.MESSAGE_QUEUE)
+        .LongPollQueue(headers.id, longPollTimeout)
+        .then((results) => {
+          if (results) {
+            // Response recieved from queue
+            logger.debug(`Response received from queue: ${JSON.stringify(results)}`);
+            return results;
+          } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
+            return true;
+          }
         });
-      }
     }
   );
 
