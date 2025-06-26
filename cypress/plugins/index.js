@@ -38,7 +38,9 @@ const flatted = require('flatted');
 const { generateLocalReport } = require('./localReportGenerator');
 const getSpecPattern = require('../../specHelperConfig.js');
 const logger = require('../support/Logger')('index.js');
-const updateLoggerLevel = require('../support/Logger').updateLoggerLevel;
+// const updateLoggerLevel = require('../support/Logger').updateLoggerLevel;
+// const promoteTempLog = require('../support/Logger').promoteTempLog;
+const baseLogger = require('../support/Logger');
 const tempReportEnvJson = '../../tempReportEnv.json';
 const { getAndDereferenceOpenRpc } = require('./pluginUtils');
 let metaDataArr = [];
@@ -53,7 +55,8 @@ module.exports = async (on, config) => {
   }
   const loggerLevel = config.env.loggerLevel;
   // Update logger level dynamically
-  updateLoggerLevel(loggerLevel);
+  baseLogger.updateLoggerLevel(loggerLevel);
+  baseLogger.promoteTempLog('ADITYA-123')
 
   // Set certification to true for the appropriate test suite
   if (testsuite == CONSTANTS.CERTIFICATION) {

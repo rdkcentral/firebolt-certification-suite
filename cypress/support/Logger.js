@@ -16,19 +16,38 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const winston = require('winston');
+const fs = require('fs');
+const path = require('path');
+
+const LOG_PATH_PREFIX = './opt/logs/fca';
+const TEMP_LOG_PATH = path.join(LOG_PATH_PREFIX, 'logstemp.log');
+
+console.log("[A] ~ TEMP_LOG_PATH:", TEMP_LOG_PATH);
+
+const transports = [
+  new winston.transports.Console({
+    level: 'debug',
+    stderrLevels: ['error'],
+    consoleWarnLevels: [],
+  }),
+];
+
+let fileTransport = null;
+
+// Enable file logging
+try {
+  fs.mkdirSync(LOG_PATH_PREFIX, { recursive: true });
+  fs.writeFileSync(TEMP_LOG_PATH, '', { flag: 'a' }); // Touch temp file
+  fileTransport = new winston.transports.File({ filename: TEMP_LOG_PATH, level: 'debug' });
+  transports.push(fileTransport);
+} catch (err) {
+  console.warn('[A] File system not writable, using console-only logs.');
+}
 
 const logConfiguration = {
-  transports: [
-    new winston.transports.Console({
-      level: 'debug',
-      stderrLevels: ['error'], // Only 'error' goes to stderr, rest all goes to stdout
-      consoleWarnLevels: [], // Avoid sending warn to stderr too
-    }),
-  ],
+  transports,
   format: winston.format.combine(
-    winston.format.timestamp({
-      format: 'MMM-DD-YYYY HH:mm:ss',
-    }),
+    winston.format.timestamp({ format: 'MMM-DD-YYYY HH:mm:ss' }),
     winston.format.printf((options) => {
       const args = options[Symbol.for('splat')];
       const argsString = args ? ` [${args}]` : '';
@@ -37,15 +56,50 @@ const logConfiguration = {
     })
   ),
 };
+
 const logger = winston.createLogger(logConfiguration);
 
-// Export the logger function
-module.exports = function (name) {
+// Exported logger function
+const getLogger = function (name) {
   return logger.child({ moduleName: name });
 };
 
-// Export the function to update the logger level
-module.exports.updateLoggerLevel = function (level) {
-  logConfiguration.transports[0].level = level;
-  logger.configure(logConfiguration);
+// Add updateLoggerLevel to export
+getLogger.updateLoggerLevel = function (level) {
+  for (const t of logger.transports) {
+    t.level = level;
+  }
+  console.log(`[A] Log level updated to ${level}`);
 };
+
+// Add promoteTempLog to export
+getLogger.promoteTempLog = function (jobId) {
+  console.log("[A] ~ promoteTempLog:", promoteTempLog)
+  // const tempFile = logger.transports.find(
+  //   t => t instanceof winston.transports.File && t.filename === TEMP_LOG_PATH
+  // );
+
+  // if (!tempFile) {
+  //   console.warn('[A] No temp file transport found.');
+  //   return;
+  // }
+
+  // logger.remove(tempFile);
+
+  // const finalDir = path.join(LOG_PATH_PREFIX, jobId);
+  // console.log("[A] ~ finalDir:", finalDir)
+  // const finalPath = path.join(finalDir, 'fca.log');
+  // console.log("[A] ~ finalPath:", finalPath);
+
+  // try {
+  //   fs.mkdirSync(finalDir, { recursive: true });
+  //   fs.renameSync(TEMP_LOG_PATH, finalPath);
+  //   const newFileTransport = new winston.transports.File({ filename: finalPath, level: 'debug' });
+  //   logger.add(newFileTransport);
+  //   console.log(`[A] Promoted logs to ${finalPath}`);
+  // } catch (err) {
+  //   console.warn(`[A] Failed to promote temp log file: ${err.message}`);
+  // }
+};
+
+module.exports = getLogger;
