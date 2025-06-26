@@ -2,7 +2,6 @@ const lifecycleConfig = require('./lifecycleConfig.json');
 const { LifeCycleAppConfigBase } = require('../LifeCycleAppConfigBase');
 const logger = require('../../../../Logger')('lifecycle_v1.js');
 const CONSTANTS = require('../../../../constants/constants');
-const UTILS = require('../../../../cypress-support/src/utils')
 
 class notificationConfig {
   constructor(message) {
@@ -36,111 +35,6 @@ class stateConfig {
 class lifecycle_v1 extends LifeCycleAppConfigBase {
   constructor() {
     super();
-  }
-   /**
-   * Send message to 3rd party app to invoke lifecycle API
-   */
-  invokeLifecycleApi(appId, method, methodParams = null) {
-    try {
-      const requestTopic = UTILS.getTopic(appId);
-      const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
-
-      const params = {
-        [CONSTANTS.METHOD_NAME]: method,
-        [CONSTANTS.APP_TYPE]: [CONSTANTS.FIREBOLT],
-        ...(methodParams && { methodParams }),
-      };
-
-      const additionalParams = {
-        [CONSTANTS.COMMUNICATION_MODE]: UTILS.getCommunicationMode(),
-      };
-
-      const publishMessage = UTILS.createIntentMessage(
-        CONSTANTS.TASK.CALLLIFECYCLE,
-        params,
-        additionalParams
-      );
-
-      if (!publishMessage) {
-        throw new Error(CONSTANTS.INVALID_PUBLISH_MESSAGE);
-      }
-
-      // Logging the intent
-      if (publishMessage?.data?.query) {
-        let logPayload = publishMessage.data.query;
-        if (typeof logPayload === CONSTANTS.STRING) logPayload = JSON.parse(logPayload);
-
-        const logIntent =
-          logPayload.params.methodName === CONSTANTS.LIFECYCLE_APIS.HISTORY
-            ? CONSTANTS.LIFECYCLE_HISTORY_INTENT
-            : CONSTANTS.LIFECYCLE_INTENT;
-
-        cy.log(logIntent + JSON.stringify(publishMessage));
-      }
-
-      return cy.sendMessagetoApp(requestTopic, responseTopic, publishMessage).then((response) => {
-        if (!response) {
-          cy.log(CONSTANTS.LIFECYCLE_EMPTY_RESPONSE);
-          assert(false, CONSTANTS.LIFECYCLE_EMPTY_RESPONSE);
-          return false;
-        }
-
-        let parsed;
-        try {
-          parsed = JSON.parse(response);
-        } catch (err) {
-          cy.log(CONSTANTS.FAILED_TO_PARSE_LIEFECYCLE_ERROR + response);
-          assert(false, CONSTANTS.FAILED_TO_PARSE_LIEFECYCLE_ERROR + response);
-          return false;
-        }
-
-        if (parsed.error) {
-          UTILS.assertWithRequirementLogs(
-            CONSTANTS.FAILED_TO_SET_LIFECYCLE_STATE,
-            null,
-            null,
-            null,
-            parsed.error
-          );
-          return false;
-        }
-
-        if (CONSTANTS.LIFECYCLE_METHOD_LIST.includes(method)) {
-      cy.updateResponseForFCS(method, '', parsed).then((updatedResponse) => {
-        return updatedResponse;
-      });
-    }
-      })
-
-    } catch (err) {
-      cy.log(CONSTANTS.LIFECYCLE_API_INVOCATION_FAILED + ': ' + err.message);
-      assert(false, CONSTANTS.LIFECYCLE_API_INVOCATION_FAILED + ': ' + err.message);
-      return false;
-    }
-  }
-
-  /**
-   * Fetches and logs the app's lifecycle history.
-   * Stores it in Cypress environment variable if found.
-   */
-  fetchLifecycleHistory(appId) {
-    this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}')
-      .then((response) => {
-        try {
-          const historyValue = _.get(JSON.parse(response), CONSTANTS.LIFECYCLE_HISTORY_FIELD, null);
-
-          if (_.isEmpty(historyValue)) {
-            logger.info(CONSTANTS.APP_HISTORY_EMPTY);
-          } else {
-            Cypress.env(CONSTANTS.APP_LIFECYCLE_HISTORY, historyValue);
-          }
-
-          cy.log(CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + JSON.stringify(historyValue));
-        } catch (err) {
-          cy.log(CONSTANTS.LIFECYCLE_HISTORY_FAILED + err.message);
-          assert(false, CONSTANTS.LIFECYCLE_HISTORY_FAILED + err.message);
-        }
-      })
   }
 
   /**
@@ -201,7 +95,12 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
           break;
 
         case CONSTANTS.LIFECYCLE_STATES.BACKGROUND:
-          if (![CONSTANTS.LIFECYCLE_STATES.BACKGROUND, CONSTANTS.LIFECYCLE_STATES.INITIALIZING].includes(currentAppState.state)) {
+          if (
+            ![
+              CONSTANTS.LIFECYCLE_STATES.BACKGROUND,
+              CONSTANTS.LIFECYCLE_STATES.INITIALIZING,
+            ].includes(currentAppState.state)
+          ) {
             this.setLifecycleState(state, appId).then(() => setAppObjectState(state));
           }
           break;
@@ -210,7 +109,12 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
           if (currentAppState.state === CONSTANTS.LIFECYCLE_STATES.SUSPENDED) {
             invokeLifecycleAndUpdateStateWithValidation(CONSTANTS.LIFECYCLE_APIS.UNSUSPEND);
           } else {
-            if (![CONSTANTS.LIFECYCLE_STATES.FOREGROUND, CONSTANTS.LIFECYCLE_STATES.BACKGROUND].includes(currentAppState.state)) {
+            if (
+              ![
+                CONSTANTS.LIFECYCLE_STATES.FOREGROUND,
+                CONSTANTS.LIFECYCLE_STATES.BACKGROUND,
+              ].includes(currentAppState.state)
+            ) {
               cy.setAppState(CONSTANTS.LIFECYCLE_STATES.FOREGROUND, appId);
             }
             this.setLifecycleState(state, appId).then(() => setAppObjectState(state));
@@ -230,17 +134,25 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
           if (currentAppState.state !== CONSTANTS.LIFECYCLE_STATES.INACTIVE) {
             cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, appId);
           }
-          invokeLifecycleAndUpdateStateWithValidation(CONSTANTS.LIFECYCLE_APIS.CLOSE, { reason: CONSTANTS.ERROR });
+          invokeLifecycleAndUpdateStateWithValidation(CONSTANTS.LIFECYCLE_APIS.CLOSE, {
+            reason: CONSTANTS.ERROR,
+          });
           break;
 
         case CONSTANTS.LIFECYCLE_STATES.UNLOADED:
         case CONSTANTS.LIFECYCLE_STATES.TERMINATED:
-          if ([CONSTANTS.LIFECYCLE_STATES.INITIALIZING, CONSTANTS.NULL].includes(currentAppState.state)) {
+          if (
+            [CONSTANTS.LIFECYCLE_STATES.INITIALIZING, CONSTANTS.NULL].includes(
+              currentAppState.state
+            )
+          ) {
             cy.setAppState(CONSTANTS.LIFECYCLE_STATES.UNLOADING, appId);
-            this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.FINISHED, {}).then((response) => {
-              if (response) cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
-              setAppObjectState(state);
-            });
+            this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.FINISHED, {}).then(
+              (response) => {
+                if (response) cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
+                setAppObjectState(state);
+              }
+            );
           }
           break;
 

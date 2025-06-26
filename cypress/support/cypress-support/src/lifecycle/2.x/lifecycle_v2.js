@@ -36,8 +36,35 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
   constructor() {
     super();
   }
-  setAppState() {
-    // TODO: Implement V2 specific flow for setting app state
+  /**
+   * Sets the app and app object lifecycle state and handles all necessary transitions and validations.
+   */
+  setAppState(state, appId) {
+    this.fetchLifecycleHistory(appId);
+    const currentAppState = this.getCurrentState() || { state: null };
+    const setAppObjectState = (newState) => this.setAppObjectState(newState);
+    try {
+      switch (state) {
+        case CONSTANTS.LIFECYCLE_STATES.PAUSED:
+          // TBD
+          break;
+        case CONSTANTS.LIFECYCLE_STATES.ACTIVE:
+          // TBD
+          break;
+        case CONSTANTS.LIFECYCLE_STATES.SUSPENDED:
+          // TBD
+          break;
+        case CONSTANTS.LIFECYCLE_STATES.HIBERNATED:
+          // TBD
+          break;
+        default:
+          cy.log(CONSTANTS.INVALID_LIFECYCLE_STATE + state);
+          break;
+      }
+    } catch (err) {
+      cy.log(CONSTANTS.LIFECYCLE_SET_STATE_FAILED + err.message);
+      assert(false, CONSTANTS.LIFECYCLE_SET_STATE_FAILED + err.message);
+    }
   }
 
   setAppObjectState(newState) {

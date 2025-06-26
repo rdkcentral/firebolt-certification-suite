@@ -132,17 +132,8 @@ Cypress.Commands.add('validateLifecycleState', (state, appId) => {
  * setLifecycleState('foreground', 'foo')
  */
 Cypress.Commands.add('setLifecycleState', (state, appId) => {
-  const requestMap = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETLIFECYCLESTATE,
-    params: { state: state, appId: appId },
-  };
-  cy.log(CONSTANTS.SET_LIFECYCLE_STATE_REQUEST + JSON.stringify(requestMap)).then(() => {
-    cy.sendMessagetoPlatforms(requestMap).then((result) => {
-      if (result) {
-        logger.info(CONSTANTS.SET_APP_STATE + state);
-      }
-    });
-  });
+  const appObject = Cypress.env(appId);
+  appObject.setLifecycleState(state, appId);
 });
 
 /**
@@ -282,7 +273,6 @@ Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) 
   return appObject.invokeLifecycleApi(appId, method, methodParams);
 });
 
-
 /**
  * @module lifecycle
  * @function setAppState
@@ -296,7 +286,6 @@ Cypress.Commands.add('setAppState', (state, appId) => {
   const appObject = Cypress.env(appId);
   appObject.setAppState(state, appId);
 });
-
 
 /**
  * @module  lifecycle

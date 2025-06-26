@@ -264,6 +264,9 @@ module.exports = {
     UNLOADED: 'unloaded',
     SUSPENDED: 'suspended',
     TERMINATED: 'terminated',
+    PAUSED: 'paused',
+    ACTIVE: 'active',
+    HIBERNATED: 'hibernated'
   },
   LIFECYCLE_VALIDATION: 'lifecycle_validation',
   LIFECYCLE_VALIDATION_METHOD: 'Lifecycle.validation',
@@ -385,6 +388,8 @@ module.exports = {
     GETAPPDATA: 'fcs.getAppData',
     SENDKEYPRESS: 'fcs.sendKeyPress',
     SENDVOICECOMMAND: 'fcs.sendVoiceCommand',
+    SETLIFECYCLESTATEV1: 'fcs.setLifecycleStateV1',
+    SETLIFECYCLESTATEV2: 'fcs.setLifecycleStateV2',
   },
   RESPONSE: 'Response: ',
   RESPONSE_INVALID_RESPONSE_LOG:
@@ -549,9 +554,10 @@ module.exports = {
   LIFECYCLE_EMPTY_RESPONSE: 'Received empty response while invoking lifecycle API',
   LIFECYCLE_API_INVOCATION_FAILED: 'Failed to invoke lifecycle API due to following error - ',
   LIFECYCLE_HISTORY_FIELD: 'result._history._value',
-  LIFECYCLE_SCHEMA_VALIDATION_FAILED: 'Schema validation failed for lifecycle API response with following error - ',
+  LIFECYCLE_SCHEMA_VALIDATION_FAILED:
+    'Schema validation failed for lifecycle API response with following error - ',
   INVALID_LIFECYCLE_STATE: 'Provided lifecycle state is invalid - ',
-  LIFECYCLE_SET_STATE_FAILED: 'Request to set lifecycle state failed with following error - '
+  LIFECYCLE_SET_STATE_FAILED: 'Request to set lifecycle state failed with following error - ',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
