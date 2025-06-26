@@ -40,7 +40,6 @@ class eventObject {
     this.context = context;
     this.eventListenerResponse = response.eventListenerResponse;
     this.eventListenerSchemaResponse = response.eventListenerSchemaResult;
-    this.eventObjectId = response.eventListenerId;
     this.expectedResult = expectedResult;
     this.eventResponse = null;
     this.eventSchemaResult = null;
@@ -51,10 +50,10 @@ class eventObject {
   // Function to update the event response in event object.
   setEventResponseData(response, isNullCase, eventName) {
     if (
-      (response && response.eventResponse && response.eventResponse[this.eventObjectId] != null) ||
+      (response && response.eventResponse && response.eventResponse[this.eventName] != null) ||
       (response &&
         response.eventResponse != null &&
-        !response.eventResponse.hasOwnProperty(this.eventObjectId)) ||
+        !response.eventResponse.hasOwnProperty(this.eventName)) ||
       isNullCase === true
     ) {
       this.eventResponse = response.eventResponse;
