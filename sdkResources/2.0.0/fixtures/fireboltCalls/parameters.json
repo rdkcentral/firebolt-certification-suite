@@ -119,7 +119,6 @@
         "validationJsonPath": "result.discovery",
         "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_LINEAR-TRIGGER"
     },
-
     "PLAYBACKINTENT_FOR_INITIALIZATION_PARAMETERS": {
         "method": "parameters.initialization",
         "context": "DISCOVERY_LAUNCH_PLAYBACK",

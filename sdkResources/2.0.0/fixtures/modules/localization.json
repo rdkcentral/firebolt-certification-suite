@@ -8,6 +8,7 @@
     "ADD_ADDITIONALINFO_VALUE_AS_NULL": {"key": "info","value": null},
     "ADD_ADDITIONALINFO_KEY_AS_NULL": {"key": null ,"value": "value1"},
     "ADD_ADDITIONALINFO_AS_NULL": {"key": null ,"value": null},
+    "ADD_ADDITIONALINFO_AS_INTEGER": {"key": 123,"value": 123},
     "ADD_ADDITIONALINFO_AS_OBJECT": {"key": {},"value": {}},
     "ADD_ADDITIONALINFO_EMPTY_OBJECT": {},
     "LATLON": [39.9549,75.1699],
@@ -30,5 +31,9 @@
     "SET_LANGUAGE_ENGLISH": "english",
     "COUNTRYCODE_US": "US",
     "LOCALITY_PHILADELPHIA": "Philadelphia",
-    "SETTIMEZONE_AMERICA_LOSANGELES": "America/Los_Angeles"
+    "SETTIMEZONE_AMERICA_LOSANGELES": "America/Los_Angeles",
+    "ADD_ADDITIONALINFO_VALUE_AS_INTEGER": {"key": "defaultKey","value": 123},
+    "ADD_ADDITIONALINFO_VALUE_AS_BOOLEAN": {"key": "defaultKey","value": true},
+    "ADD_ADDITIONALINFO_RESPONSE_AS_INTEGER": {"defaultKey":123},
+    "ADD_ADDITIONALINFO_RESPONSE_AS_BOOLEAN": {"defaultKey":true}
 }
