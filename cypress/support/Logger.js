@@ -22,8 +22,6 @@ const path = require('path');
 const LOG_PATH_PREFIX = './opt/logs/fca';
 const TEMP_LOG_PATH = path.join(LOG_PATH_PREFIX, 'logstemp.log');
 
-console.log("[A] ~ TEMP_LOG_PATH:", TEMP_LOG_PATH);
-
 const transports = [
   new winston.transports.Console({
     level: 'debug',
@@ -74,32 +72,37 @@ getLogger.updateLoggerLevel = function (level) {
 
 // Add promoteTempLog to export
 getLogger.promoteTempLog = function (jobId) {
-  console.log("[A] ~ promoteTempLog:", promoteTempLog)
-  // const tempFile = logger.transports.find(
-  //   t => t instanceof winston.transports.File && t.filename === TEMP_LOG_PATH
-  // );
+  console.log("[A] ~ promoteTempLog:" )
+  logger.transports.forEach((t, index) => {
+    if (t instanceof winston.transports.File) {
+      console.log(`[A] Transport[${index}] is a File transport:`, t.filename);
+    } else {
+      console.log(`[A] Transport[${index}] is NOT a File transport`);
+    }
+  });
+  const tempFile = logger.transports.find(
+    t => t instanceof winston.transports.File && t.filename === 'logstemp.log'
+  );
 
-  // if (!tempFile) {
-  //   console.warn('[A] No temp file transport found.');
-  //   return;
-  // }
+  if (!tempFile) {
+    console.warn('[A] No temp file transport found.');
+    return;
+  }
 
-  // logger.remove(tempFile);
+  logger.remove(tempFile);
 
-  // const finalDir = path.join(LOG_PATH_PREFIX, jobId);
-  // console.log("[A] ~ finalDir:", finalDir)
-  // const finalPath = path.join(finalDir, 'fca.log');
-  // console.log("[A] ~ finalPath:", finalPath);
+  const finalDir = path.join(LOG_PATH_PREFIX, jobId);
+  const finalPath = path.join(finalDir, 'fca.log');
 
-  // try {
-  //   fs.mkdirSync(finalDir, { recursive: true });
-  //   fs.renameSync(TEMP_LOG_PATH, finalPath);
-  //   const newFileTransport = new winston.transports.File({ filename: finalPath, level: 'debug' });
-  //   logger.add(newFileTransport);
-  //   console.log(`[A] Promoted logs to ${finalPath}`);
-  // } catch (err) {
-  //   console.warn(`[A] Failed to promote temp log file: ${err.message}`);
-  // }
+  try {
+    fs.mkdirSync(finalDir, { recursive: true });
+    fs.renameSync(TEMP_LOG_PATH, finalPath);
+    const newFileTransport = new winston.transports.File({ filename: finalPath, level: 'debug' });
+    logger.add(newFileTransport);
+    console.log(`[A] Promoted logs to ${finalPath}`);
+  } catch (err) {
+    console.warn(`[A] Failed to promote temp log file: ${err.message}`);
+  }
 };
 
 module.exports = getLogger;

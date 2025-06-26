@@ -56,7 +56,7 @@ module.exports = async (on, config) => {
   const loggerLevel = config.env.loggerLevel;
   // Update logger level dynamically
   baseLogger.updateLoggerLevel(loggerLevel);
-  baseLogger.promoteTempLog('ADITYA-123')
+  baseLogger.promoteTempLog(config.env.jobId)
 
   // Set certification to true for the appropriate test suite
   if (testsuite == CONSTANTS.CERTIFICATION) {
