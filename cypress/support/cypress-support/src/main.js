@@ -114,6 +114,8 @@ export default function (module) {
     cy.getBeforeOperationObject();
     cy.initiatePerformanceMetrics();
     UTILS.destroyGlobalObjects([CONSTANTS.LIFECYCLE_APP_OBJECT_LIST]);
+    const startTime = new Date().toISOString();
+    Cypress.env('start_time', startTime);
 
     // Merge fireboltCalls - Temporary fix to populate env variable between steps
     const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
