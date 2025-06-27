@@ -1,3 +1,10 @@
+# [1.13.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.7...v1.13.0-dev.8) (2025-06-27)
+
+
+### Bug Fixes
+
+* SecondScreen.feature ([#446](https://github.com/rdkcentral/firebolt-certification-suite/issues/446)) ([3a2f86a](https://github.com/rdkcentral/firebolt-certification-suite/commit/3a2f86a57d8a045ad72474e5e7eb0279f1b11e74))
+
 # [1.13.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.6...v1.13.0-dev.7) (2025-06-25)
 
 
