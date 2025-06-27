@@ -5,7 +5,6 @@ const CONSTANTS = require('../../../../constants/constants');
 
 class notificationConfig {
   constructor(message) {
-    this.time = Date.now();
     this.message = message;
   }
 }
@@ -13,7 +12,6 @@ class notificationConfig {
 class stateConfig {
   constructor(state) {
     this.state = state;
-    this.tStartTime = Date.now();
     this.notification = [];
   }
 
