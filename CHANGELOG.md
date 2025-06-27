@@ -1,3 +1,10 @@
+# [1.13.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.8...v1.13.0-dev.9) (2025-06-27)
+
+
+### Features
+
+* Dynamic intent fetching from XVP asset generator ([#442](https://github.com/rdkcentral/firebolt-certification-suite/issues/442)) ([1b1b2fa](https://github.com/rdkcentral/firebolt-certification-suite/commit/1b1b2fa5373e2b504984ed2f6289a98af09c37af))
+
 # [1.13.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.7...v1.13.0-dev.8) (2025-06-27)
 
 
