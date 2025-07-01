@@ -1,3 +1,38 @@
+# [1.13.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.8...v1.13.0-dev.9) (2025-06-27)
+
+
+### Features
+
+* Dynamic intent fetching from XVP asset generator ([#442](https://github.com/rdkcentral/firebolt-certification-suite/issues/442)) ([1b1b2fa](https://github.com/rdkcentral/firebolt-certification-suite/commit/1b1b2fa5373e2b504984ed2f6289a98af09c37af))
+
+# [1.13.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.7...v1.13.0-dev.8) (2025-06-27)
+
+
+### Bug Fixes
+
+* SecondScreen.feature ([#446](https://github.com/rdkcentral/firebolt-certification-suite/issues/446)) ([3a2f86a](https://github.com/rdkcentral/firebolt-certification-suite/commit/3a2f86a57d8a045ad72474e5e7eb0279f1b11e74))
+
+# [1.13.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.6...v1.13.0-dev.7) (2025-06-25)
+
+
+### Features
+
+* Continue watching implementation-new ([#440](https://github.com/rdkcentral/firebolt-certification-suite/issues/440)) ([4ef4d01](https://github.com/rdkcentral/firebolt-certification-suite/commit/4ef4d015136c84acf39cf1b736a66c0d0c9872cd))
+
+# [1.13.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.5...v1.13.0-dev.6) (2025-06-24)
+
+
+### Features
+
+* Added capture screenshot command ([#435](https://github.com/rdkcentral/firebolt-certification-suite/issues/435)) ([fad9297](https://github.com/rdkcentral/firebolt-certification-suite/commit/fad9297fc130f512daca29ba0124e26475c1a4c8))
+
+# [1.13.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.4...v1.13.0-dev.5) (2025-06-18)
+
+
+### Features
+
+* FCS exit codes for cy:run ([#434](https://github.com/rdkcentral/firebolt-certification-suite/issues/434)) ([4030c04](https://github.com/rdkcentral/firebolt-certification-suite/commit/4030c04c2b74b7d549508041b48f3af46908742d))
+
 # [1.13.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.3...v1.13.0-dev.4) (2025-06-11)
 
 

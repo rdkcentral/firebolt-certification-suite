@@ -1046,6 +1046,14 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
       );
     }
     Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
+
+    cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
+      Cypress.env(CONSTANTS.RUNTIME).intent = {
+        ...Cypress.env(CONSTANTS.RUNTIME).intent,
+        ...JSON.stringify(dynamicIntent),
+      };
+    });
+
     // Attempt to resolve the intentTemplate and create messageIntent
     try {
       messageIntent = {
@@ -2059,7 +2067,9 @@ Cypress.Commands.add('sendKeyPress', (key, delay) => {
   };
   const timeout = (Array.isArray(key) ? key.length : 1) * delay * 1000 + 10000; // Calculate timeout based on key press sequence and delay
   cy.sendMessagetoPlatforms(requestMap, timeout).then((result) => {
-    cy.log(`Sent key press: ${key} with delay: ${delay}.`);
+    fireLog.info(
+      `Sent key press: ${key} with delay: ${delay}. Response: ${JSON.stringify(result)}`
+    );
   });
 });
 
@@ -2079,4 +2089,36 @@ Cypress.Commands.add('sendVoiceCommand', (voiceCommand) => {
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     return response;
   });
+});
+
+/**
+ * @module commands
+ * @function findLogPattern
+ * @description Sends a request to search for specific log patterns
+ * @example
+ * cy.findLogPattern({ logPattern: "SignIn", fileName: "/logs/app.log" })
+ */
+Cypress.Commands.add('findLogPattern', (logKey, fileName) => {
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FINDLOGPATTERN,
+    params: {
+      logPattern: logKey,
+      fileName: fileName,
+    },
+  };
+  cy.sendMessagetoPlatforms(requestMap, 20000).then((result) => {
+    return result;
+  });
+});
+
+/**
+ * @module commands
+ * @function captureScreenshot
+ * @description Sends a request to capture a screenshot of the device screen
+ * @example
+ * cy.captureScreenshot()
+ */
+Cypress.Commands.add('captureScreenshot', () => {
+  // Only take a screenshot if the enableScreenshots environment variable is set to true
+  UTILS.captureScreenshot();
 });
