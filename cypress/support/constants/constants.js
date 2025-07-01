@@ -388,8 +388,8 @@ module.exports = {
     GETAPPDATA: 'fcs.getAppData',
     SENDKEYPRESS: 'fcs.sendKeyPress',
     SENDVOICECOMMAND: 'fcs.sendVoiceCommand',
-    SETLIFECYCLESTATEV1: 'fcs.setLifecycleStateV1',
-    SETLIFECYCLESTATEV2: 'fcs.setLifecycleStateV2',
+    SETLIFECYCLESTATEV1: 'fcsV1.setLifecycleState',
+    SETLIFECYCLESTATEV2: 'fcsV2.setLifecycleState',
   },
   RESPONSE: 'Response: ',
   RESPONSE_INVALID_RESPONSE_LOG:

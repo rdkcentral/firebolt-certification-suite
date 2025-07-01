@@ -7,17 +7,28 @@ class notificationConfig {
   constructor(message) {
     this.time = Date.now();
     this.message = message;
+    this.fbEvents = [];
+    this.thunderEvents = [];
   }
 }
 
 class stateConfig {
+   static visibilityState = {
+    initializing: 'hidden',
+    paused: 'hidden',
+    active: 'visible',
+    suspended: '',
+    hibernated: ''
+  };
+
   constructor(state) {
     this.state = state;
     this.tStartTime = Date.now();
     this.notification = [];
+    this.visibilityState = stateConfig.visibilityState[state] || '';
   }
 
-  setNotification(currentState, previousState) {
+  setNotification(currentState, previousState, fbEvents, thunderEvents) {
     const allowedStateTransitions = lifecycleConfig.allowedStateTransitions;
     console.log('Allowed State Transitions:', allowedStateTransitions);
     const stateTransition = allowedStateTransitions[previousState];
@@ -27,6 +38,13 @@ class stateConfig {
       const message = { previous: previousState, state: currentState };
       logger.info('Lifecycle appObject transition: ' + JSON.stringify(message));
       const tempNotification = new notificationConfig(message);
+      if (Array.isArray(fbEvents) && fbEvents.length > 0) {
+        tempNotification.fbEvents.push(...fbEvents);
+      }
+
+      if (Array.isArray(thunderEvents) && thunderEvents.length > 0) {
+        tempNotification.thunderEvents.push(...thunderEvents);
+      }
       this.notification.push(tempNotification);
     }
   }
@@ -42,21 +60,29 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
   setAppState(state, appId) {
     this.fetchLifecycleHistory(appId);
     const currentAppState = this.getCurrentState() || { state: null };
-    const setAppObjectState = (newState) => this.setAppObjectState(newState);
+    const stateTransition = lifecycleConfig.allowedStateTransitions[currentAppState.state] || [];
+    const fireboltEventMap = lifecycleConfig.expectedFireboltEvents?.[state.toLowerCase()] || {};
+    const thunderEventMap = lifecycleConfig.expectedThunderEvents?.[state.toLowerCase()] || {};
+
     try {
       switch (state) {
         case CONSTANTS.LIFECYCLE_STATES.PAUSED:
-          // TBD
-          break;
         case CONSTANTS.LIFECYCLE_STATES.ACTIVE:
-          // TBD
-          break;
         case CONSTANTS.LIFECYCLE_STATES.SUSPENDED:
-          // TBD
+        case CONSTANTS.LIFECYCLE_STATES.INITIALIZING:
+        case CONSTANTS.LIFECYCLE_STATES.HIBERNATED: {
+          if (stateTransition.includes(state) && currentAppState.state !== state) {
+            const fbEvents = fireboltEventMap?.[currentAppState.state] || [];
+            const thunderEvents = thunderEventMap?.[currentAppState.state] || [];
+            this.setLifecycleState(state, appId)
+              .then(() => this.setAppObjectState(state, fbEvents, thunderEvents))
+          } else {
+            cy.log(`Requested state transition for application from ${currentAppState.state} to ${state} is not supported`);
+          }
           break;
-        case CONSTANTS.LIFECYCLE_STATES.HIBERNATED:
+        }
+        case CONSTANTS.LIFECYCLE_STATES.UNLOADED:
           // TBD
-          break;
         default:
           cy.log(CONSTANTS.INVALID_LIFECYCLE_STATE + state);
           break;
@@ -67,7 +93,7 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     }
   }
 
-  setAppObjectState(newState) {
+  setAppObjectState(newState, fbEvents, thunderEvents) {
     const currentState = this.state;
     this.state = new stateConfig(newState);
     const stateTransition = lifecycleConfig.allowedStateTransitions[currentState.state];
@@ -104,7 +130,7 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
 
     // If app object history is not empty, set notification object using current and new states
     if (this.history.length > 1) {
-      this.state.setNotification(newState, currentState.state);
+      this.state.setNotification(newState, currentState.state, fbEvents, thunderEvents);
     }
   }
 }
