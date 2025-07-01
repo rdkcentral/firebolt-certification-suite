@@ -16,9 +16,7 @@ class stateConfig {
    static visibilityState = {
     initializing: 'hidden',
     paused: 'hidden',
-    active: 'visible',
-    suspended: '',
-    hibernated: ''
+    active: 'visible'
   };
 
   constructor(state) {
