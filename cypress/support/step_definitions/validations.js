@@ -339,16 +339,14 @@ Given(
 
 /**
  * @module validations
- * @function Verify '(.+)' app is '(.+)'
+ * @function 3rd party '(.+)' app is '(.+)'
  * @description To call validation function with the validation object associated with the validation key
  * @param {String} app - app name.
  * @param {String} validationObjectKey - key name of the validation object.
  * @example
- * Verify <appId> app is 'playing entity'
+ * 3rd party 'test' app is 'playing entity'
  */
-Given(/Verify '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
-  UTILS.captureScreenshot();
-
+Given(/3rd party '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
   const objectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   let validationObject;
   cy.getFireboltData(objectKey).then((fireboltData) => {
