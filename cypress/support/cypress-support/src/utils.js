@@ -739,13 +739,12 @@ class FireLog extends Function {
     `;
     super('...args', functionBody);
 
-    const logLevels = ['debug', 'info', 'warn', 'error', 'critical'];
+    const logLevels = ['debug', 'info', 'warn', 'error'];
     const levelPriority = {
       error: 0,
       warn: 1,
       info: 2,
       debug: 3,
-      critical: 4,
     };
     this.currentLevel = logger.level; // log level to display
 
