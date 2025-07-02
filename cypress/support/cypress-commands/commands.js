@@ -121,7 +121,9 @@ Cypress.Commands.add(
             action = method.split('_')[0];
             method = method.split('_')[1];
           }
-
+          action = UTILS.getEnvVariable(CONSTANTS.ACTION, false)
+            ? UTILS.getEnvVariable(CONSTANTS.ACTION, false)
+            : action;
           return results.push({
             method: method,
             params: params,
@@ -1043,6 +1045,14 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         `No intentTemplates found for ${appType}, make sure the intentTemplates are defined as per the appType`
       );
     }
+    Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
+
+    cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
+      Cypress.env(CONSTANTS.RUNTIME).intent = {
+        ...Cypress.env(CONSTANTS.RUNTIME).intent,
+        ...JSON.stringify(dynamicIntent),
+      };
+    });
 
     // Attempt to resolve the intentTemplate and create messageIntent
     try {
@@ -1788,9 +1798,13 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
       );
       fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
   }
-  cy.log(`Session for appId: ${appIdForLog} will be ended with type: ${exitType}`);
+  cy.log(
+    `Session for ${params.entity ? params.entity + ' with' : ''} appId ${appIdForLog} will be ended with type: ${exitType}`
+  );
   cy.sendMessagetoPlatforms(requestMap, timeout).then((response) => {
-    cy.log(`Platform has successfully ended app Session for appId: ${appIdForLog}`);
+    cy.log(
+      `Platform has successfully ended app Session for ${params.entity ? params.entity : 'appId'} : ${appIdForLog}`
+    );
   });
 });
 
@@ -2053,7 +2067,9 @@ Cypress.Commands.add('sendKeyPress', (key, delay) => {
   };
   const timeout = (Array.isArray(key) ? key.length : 1) * delay * 1000 + 10000; // Calculate timeout based on key press sequence and delay
   cy.sendMessagetoPlatforms(requestMap, timeout).then((result) => {
-    cy.log(`Sent key press: ${key} with delay: ${delay}.`);
+    fireLog.info(
+      `Sent key press: ${key} with delay: ${delay}. Response: ${JSON.stringify(result)}`
+    );
   });
 });
 
@@ -2073,4 +2089,36 @@ Cypress.Commands.add('sendVoiceCommand', (voiceCommand) => {
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     return response;
   });
+});
+
+/**
+ * @module commands
+ * @function findLogPattern
+ * @description Sends a request to search for specific log patterns
+ * @example
+ * cy.findLogPattern({ logPattern: "SignIn", fileName: "/logs/app.log" })
+ */
+Cypress.Commands.add('findLogPattern', (logKey, fileName) => {
+  const requestMap = {
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.FINDLOGPATTERN,
+    params: {
+      logPattern: logKey,
+      fileName: fileName,
+    },
+  };
+  cy.sendMessagetoPlatforms(requestMap, 20000).then((result) => {
+    return result;
+  });
+});
+
+/**
+ * @module commands
+ * @function captureScreenshot
+ * @description Sends a request to capture a screenshot of the device screen
+ * @example
+ * cy.captureScreenshot()
+ */
+Cypress.Commands.add('captureScreenshot', () => {
+  // Only take a screenshot if the enableScreenshots environment variable is set to true
+  UTILS.captureScreenshot();
 });

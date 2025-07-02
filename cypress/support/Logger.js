@@ -18,7 +18,13 @@
 const winston = require('winston');
 
 const logConfiguration = {
-  transports: [new winston.transports.Console({ level: 'debug' })],
+  transports: [
+    new winston.transports.Console({
+      level: 'debug',
+      stderrLevels: ['error'], // Only 'error' goes to stderr, rest all goes to stdout
+      consoleWarnLevels: [], // Avoid sending warn to stderr too
+    }),
+  ],
   format: winston.format.combine(
     winston.format.timestamp({
       format: 'MMM-DD-YYYY HH:mm:ss',
