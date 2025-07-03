@@ -1,0 +1,81 @@
+const lifecycleConfig = require('./lifecycleConfig.json');
+const { LifeCycleAppConfigBase } = require('../LifeCycleAppConfigBase');
+const logger = require('../../../../Logger')('lifecycle_v2.js');
+const CONSTANTS = require('../../../../constants/constants');
+
+class notificationConfig {
+  constructor(message) {
+    this.message = message;
+  }
+}
+
+class stateConfig {
+  constructor(state) {
+    this.state = state;
+    this.notification = [];
+  }
+
+  setNotification(currentState, previousState) {
+    const allowedStateTransitions = lifecycleConfig.allowedStateTransitions;
+    console.log('Allowed State Transitions:', allowedStateTransitions);
+    const stateTransition = allowedStateTransitions[previousState];
+
+    // If currentState and previousState are not equal and allowed state transition supports currentState, generate an event and push to notification list
+    if (stateTransition.includes(currentState) && currentState != previousState) {
+      const message = { previous: previousState, state: currentState };
+      logger.info('Lifecycle appObject transition: ' + JSON.stringify(message));
+      const tempNotification = new notificationConfig(message);
+      this.notification.push(tempNotification);
+    }
+  }
+}
+
+export default class lifecycle_v2 extends LifeCycleAppConfigBase {
+  constructor() {
+    super();
+  }
+  setAppState() {
+    // TODO: Implement V2 specific flow for setting app state
+  }
+
+  setAppObjectState(newState) {
+    const currentState = this.state;
+    this.state = new stateConfig(newState);
+    const stateTransition = lifecycleConfig.allowedStateTransitions[currentState.state];
+
+    // If newState is initializing and app object history is empty, the state is not pushed to history
+    if (newState == CONSTANTS.LIFECYCLE_STATES.INITIALIZING && this.history.length === 0) {
+      logger.info(
+        'New appState ' +
+          newState +
+          ' not pushed to history. If history list is empty and app tries to transition to initializing state, the state will not be pushed to history',
+        'setAppObjectState'
+      );
+    } else {
+      // If newState and currentState are not equal and allowed state transition supports newState, perform below logic
+      if (stateTransition.includes(newState) && currentState.state != newState) {
+        this.state = new stateConfig(newState);
+        // If currentState is initializing and app object history is empty, the state is then pushed to history
+        if (
+          currentState.state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING &&
+          this.history.length === 0
+        ) {
+          logger.info('Current appState ' + currentState.state + ' pushed to history');
+          this.history.push(currentState);
+        }
+        // Next push the new state object to app object history
+        this.history.push(this.state);
+        logger.info('New appState pushed to history: ' + newState);
+      }
+      if (!stateTransition.includes(newState)) {
+        cy.log('Requested state transition for application is not supported');
+        this.state = currentState;
+      }
+    }
+
+    // If app object history is not empty, set notification object using current and new states
+    if (this.history.length > 1) {
+      this.state.setNotification(newState, currentState.state);
+    }
+  }
+}

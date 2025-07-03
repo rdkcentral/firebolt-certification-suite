@@ -1,0 +1,9 @@
+{
+  "allowedStateTransitions": {
+    "initializing": ["paused"],
+    "paused": ["active", "suspended"],
+    "active": ["paused"],
+    "suspended": ["paused", "hibernated"],
+    "hibernated": ["suspended"]
+  }
+}
