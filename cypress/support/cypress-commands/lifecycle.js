@@ -48,6 +48,7 @@ Cypress.Commands.add('lifecycleSetup', (appCallSign, state) => {
     if (state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
       Cypress.env(CONSTANTS.APP_LIFECYCLE_HISTORY, []);
     } else {
+      // TODO: Make call to move app to foreground or active based on version.
       if (
         state != CONSTANTS.LIFECYCLE_STATES.UNLOADED &&
         state != CONSTANTS.LIFECYCLE_STATES.FOREGROUND &&
