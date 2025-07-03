@@ -13,10 +13,10 @@ class notificationConfig {
 }
 
 class stateConfig {
-   static visibilityState = {
+  static visibilityState = {
     initializing: 'hidden',
     paused: 'hidden',
-    active: 'visible'
+    active: 'visible',
   };
 
   constructor(state) {
@@ -59,28 +59,72 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     this.fetchLifecycleHistory(appId);
     const currentAppState = this.getCurrentState() || { state: null };
     const stateTransition = lifecycleConfig.allowedStateTransitions[currentAppState.state] || [];
-    const fireboltEventMap = lifecycleConfig.expectedFireboltEvents?.[state.toLowerCase()] || {};
-    const thunderEventMap = lifecycleConfig.expectedThunderEvents?.[state.toLowerCase()] || {};
 
     try {
       switch (state) {
         case CONSTANTS.LIFECYCLE_STATES.PAUSED:
         case CONSTANTS.LIFECYCLE_STATES.ACTIVE:
         case CONSTANTS.LIFECYCLE_STATES.SUSPENDED:
-        case CONSTANTS.LIFECYCLE_STATES.INITIALIZING:
-        case CONSTANTS.LIFECYCLE_STATES.HIBERNATED: {
+        case CONSTANTS.LIFECYCLE_STATES.INITIALIZING: {
           if (stateTransition.includes(state) && currentAppState.state !== state) {
+            const fireboltEventMap =
+              lifecycleConfig.expectedFireboltEvents?.[state.toLowerCase()] || {};
+            const thunderEventMap =
+              lifecycleConfig.expectedThunderEvents?.[state.toLowerCase()] || {};
             const fbEvents = fireboltEventMap?.[currentAppState.state] || [];
             const thunderEvents = thunderEventMap?.[currentAppState.state] || [];
-            this.setLifecycleState(state, appId)
-              .then(() => this.setAppObjectState(state, fbEvents, thunderEvents))
+            this.setLifecycleState(state, appId).then(() =>
+              this.setAppObjectState(state, fbEvents, thunderEvents)
+            );
           } else {
-            cy.log(`Requested state transition for application from ${currentAppState.state} to ${state} is not supported`);
+            cy.log(
+              `Requested state transition from ${currentAppState.state} to ${state} is not supported`
+            );
+          }
+          break;
+        }
+
+        case CONSTANTS.LIFECYCLE_STATES.HIBERNATED: {
+          if (currentAppState.state === CONSTANTS.LIFECYCLE_STATES.PAUSED) {
+            const fireboltEventMap =
+              lifecycleConfig.expectedFireboltEvents?.[
+                CONSTANTS.LIFECYCLE_STATES.SUSPENDED.toLowerCase()
+              ] || {};
+            const thunderEventMap =
+              lifecycleConfig.expectedThunderEvents?.[
+                CONSTANTS.LIFECYCLE_STATES.SUSPENDED.toLowerCase()
+              ] || {};
+            const fbEvents = fireboltEventMap?.[currentAppState.state] || [];
+            const thunderEvents = thunderEventMap?.[currentAppState.state] || [];
+            this.setLifecycleState(CONSTANTS.LIFECYCLE_STATES.SUSPENDED, appId)
+              .then(() =>
+                this.setAppObjectState(
+                  CONSTANTS.LIFECYCLE_STATES.SUSPENDED,
+                  fbEvents,
+                  thunderEvents
+                )
+              )
+              .then(() => this.setAppState(CONSTANTS.LIFECYCLE_STATES.HIBERNATED, appId));
+          } else if (stateTransition.includes(state) && currentAppState.state !== state) {
+            const fireboltEventMap =
+              lifecycleConfig.expectedFireboltEvents?.[state.toLowerCase()] || {};
+            const thunderEventMap =
+              lifecycleConfig.expectedThunderEvents?.[state.toLowerCase()] || {};
+            const fbEvents = fireboltEventMap?.[currentAppState.state] || [];
+            const thunderEvents = thunderEventMap?.[currentAppState.state] || [];
+            this.setLifecycleState(state, appId).then(() =>
+              this.setAppObjectState(state, fbEvents, thunderEvents)
+            );
+          } else {
+            cy.log(
+              `Requested state transition from ${currentAppState.state} to ${state} is not supported`
+            );
           }
           break;
         }
         case CONSTANTS.LIFECYCLE_STATES.UNLOADED:
           // TBD
+          break;
         default:
           cy.log(CONSTANTS.INVALID_LIFECYCLE_STATE + state);
           break;
@@ -130,5 +174,17 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     if (this.history.length > 1) {
       this.state.setNotification(newState, currentState.state, fbEvents, thunderEvents);
     }
+  }
+  // Initializes the app object state
+  setupInitialState() {
+    this.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INITIALIZING);
+    this.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.PAUSED);
+  }
+  // performs required intermediate transitions (e.g. to ACTIVE) before setting the app to the target state.
+  lifecycleSetup(state, appId) {
+    if (state !== CONSTANTS.LIFECYCLE_STATES.ACTIVE) {
+      this.setAppState(CONSTANTS.LIFECYCLE_STATES.ACTIVE, appId);
+    }
+    return this.setAppState(state, appId);
   }
 }

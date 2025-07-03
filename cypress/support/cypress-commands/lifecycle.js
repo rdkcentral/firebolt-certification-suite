@@ -32,30 +32,23 @@ const logger = require('../Logger')('lifecycle.js');
  */
 Cypress.Commands.add('lifecycleSetup', (appCallSign, state) => {
   const appId =
-    appCallSign == undefined ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) : appCallSign;
+    appCallSign === undefined ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) : appCallSign;
 
-  if (Cypress.env(CONSTANTS.TEST_TYPE) == CONSTANTS.MODULE_NAMES.LIFECYCLE) {
+  if (Cypress.env(CONSTANTS.TEST_TYPE) === CONSTANTS.MODULE_NAMES.LIFECYCLE) {
     // create lifecycleAppObject to mimic all the state transition for an app and also go through the same state histories
     if (!Cypress.env(CONSTANTS.LIFECYCLE_APP_OBJECT_LIST).includes(appId)) {
       const lifeCycleAppObject = createLifeCycleAppConfig();
-      // set the state to initialising
-      lifeCycleAppObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INITIALIZING);
-      // store the lifecycleAppObject in global object and push it to a global list
+      // Initial setup logic for setting initial state(s) of app object
+      lifeCycleAppObject.setupInitialState();
       Cypress.env(appId, lifeCycleAppObject);
       Cypress.env(CONSTANTS.LIFECYCLE_APP_OBJECT_LIST).push(appId);
     }
 
-    if (state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
+    if (state === CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
       Cypress.env(CONSTANTS.APP_LIFECYCLE_HISTORY, []);
     } else {
-      if (
-        state != CONSTANTS.LIFECYCLE_STATES.UNLOADED &&
-        state != CONSTANTS.LIFECYCLE_STATES.FOREGROUND &&
-        state != CONSTANTS.LIFECYCLE_STATES.UNLOADING
-      ) {
-        cy.setAppState(CONSTANTS.LIFECYCLE_STATES.FOREGROUND, appId);
-      }
-      return cy.setAppState(state, appId);
+      const appObject = Cypress.env(appId);
+      return appObject.lifecycleSetup(state, appId);
     }
   } else {
     // if not a lifecycle test, simply return
@@ -147,6 +140,7 @@ Cypress.Commands.add('setLifecycleState', (state, appId) => {
  * @example
  * cy.validateLifecycleHistoryAndEvents('foreground', 'foo', true)
  */
+
 Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEventsExpected) => {
   // Extract appObject based on appId
   const appObject = UTILS.getEnvVariable(appId);

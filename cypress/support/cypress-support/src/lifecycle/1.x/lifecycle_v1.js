@@ -2,6 +2,7 @@ const lifecycleConfig = require('./lifecycleConfig.json');
 const { LifeCycleAppConfigBase } = require('../LifeCycleAppConfigBase');
 const logger = require('../../../../Logger')('lifecycle_v1.js');
 const CONSTANTS = require('../../../../constants/constants');
+const UTILS = require('../../../src/utils');
 
 class notificationConfig {
   constructor(message) {
@@ -210,6 +211,22 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
     if (this.history.length > 1) {
       this.state.setNotification(newState, currentState.state);
     }
+  }
+
+  // Initializes the app object state
+  setupInitialState() {
+    this.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INITIALIZING);
+  }
+  // performs required intermediate transitions (e.g. to FOREGROUND) before setting the app to the target state.
+  lifecycleSetup(state, appId) {
+    if (
+      state !== CONSTANTS.LIFECYCLE_STATES.UNLOADED &&
+      state !== CONSTANTS.LIFECYCLE_STATES.FOREGROUND &&
+      state !== CONSTANTS.LIFECYCLE_STATES.UNLOADING
+    ) {
+      this.setAppState(CONSTANTS.LIFECYCLE_STATES.FOREGROUND, appId);
+    }
+    return this.setAppState(state, appId);
   }
 }
 
