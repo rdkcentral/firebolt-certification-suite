@@ -2,6 +2,7 @@ const lifecycleConfig = require('./lifecycleConfig.json');
 const { LifeCycleAppConfigBase } = require('../LifeCycleAppConfigBase');
 const logger = require('../../../../Logger')('lifecycle_v1.js');
 const CONSTANTS = require('../../../../constants/constants');
+const UTILS = require('../../utils');
 
 class notificationConfig {
   constructor(message) {
@@ -35,6 +36,11 @@ class stateConfig {
 class lifecycle_v1 extends LifeCycleAppConfigBase {
   constructor() {
     super();
+    this.visibilityStates = {
+      foreground: 'visible',
+      background: 'visible',
+      inactive: 'hidden',
+    };
   }
   setAppState() {
     // TODO: Implement V1 specific flow for setting app state
@@ -48,6 +54,7 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
   setAppObjectState(newState) {
     const currentState = this.state;
     this.state = new stateConfig(newState);
+    this.visibilityState = this.visibilityStates[newState];
     const stateTransition = lifecycleConfig.allowedStateTransitions[currentState.state];
 
     // If newState is initializing and app object history is empty, the state is not pushed to history
@@ -84,6 +91,103 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
     if (this.history.length > 1) {
       this.state.setNotification(newState, currentState.state);
     }
+  }
+
+  validateState(appId) {
+    const currentState = this.getCurrentState().state;
+    // Get validation requirements for the current scenario from the moduleReqId JSON
+    const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
+
+    // Fetching the requirement IDs for the "state" from the scenarioRequirement.
+    const lifecycleStateRequirementId = scenarioRequirement.find((req) =>
+      req.hasOwnProperty('state')
+    );
+
+    if (lifecycleStateRequirementId && lifecycleStateRequirementId.state) {
+      // Send message to 3rd party app to invoke lifecycle API to get state response
+      cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
+        // this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
+        try {
+          const result = response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE].instance ?? null;
+          if (result == null) {
+            cy.log(CONSTANTS.INVALID_LIFECYCLE_STATE_RESPONSE).then(() => {
+              assert(false, CONSTANTS.INVALID_LIFECYCLE_STATE_RESPONSE);
+            });
+          }
+          cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
+          // Perform schema and content validation of state response against appObject state
+          let pretext =
+            lifecycleStateRequirementId.state.id + CONSTANTS.STATE_SCHEMA_VALIDATION_REQ;
+          if (response[CONSTANTS.SCHEMA_VALIDATION_STATUS] == CONSTANTS.PASS) {
+            cy.log(pretext + ' : ' + CONSTANTS.PASS);
+          } else {
+            fireLog.assert(false, pretext + ' : ' + CONSTANTS.FAIL);
+          }
+
+          pretext = lifecycleStateRequirementId.state.id + CONSTANTS.STATE_CONTENT_VALIDATION_REQ;
+          UTILS.assertWithRequirementLogs(
+            pretext,
+            response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE].instance,
+            currentState
+          );
+          this.validateVisibilityState(currentState);
+        } catch (error) {
+          cy.log(CONSTANTS.ERROR_LIFECYCLE_STATE_VALIDATION + error).then(() => {
+            assert(false, CONSTANTS.ERROR_LIFECYCLE_STATE_VALIDATION + error);
+          });
+        }
+      });
+    } else {
+      cy.log('Skipping lifecycle state validation');
+    }
+  }
+
+  validateHistory(appId) {
+    // Get validation requirements for the current scenario from the moduleReqId JSON
+    const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
+
+    // Fetching the requirement IDs for the "history" from the scenarioRequirement.
+    const lifecycleHistoryRequirementId = scenarioRequirement.find((req) =>
+      req.hasOwnProperty('history')
+    );
+
+    // Send message to 3rd party app to invoke lifecycle history API to get history response
+    cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}').then((response) => {
+      // this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
+      // Perform a null check on history response and check if response has nested properties result, _history, _value
+      response = JSON.parse(response ?? '{}');
+      if (
+        response &&
+        response.result &&
+        response.result._history &&
+        response.result._history._value
+      ) {
+        const pretext = CONSTANTS.HISTORY_VALIDATION_REQ + lifecycleHistoryRequirementId.history.id;
+        cy.log(
+          CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + JSON.stringify(response.result._history._value)
+        );
+        // Extract app history value
+        const appHistory = response.result._history._value;
+        // Lifecycle history validation
+        if (appHistory.length > 0) {
+          // Construct an appHistoryList from app history data
+          const appHistoryList = appHistory.map((historyItem) => historyItem.event.state);
+          appHistoryList.splice(0, 0, appHistory[0].event.previous);
+          // Construct an appObjectHistory list from app object history data
+          let appObjectHistory = this.getHistory();
+          appObjectHistory = appObjectHistory.map((historyItem) => historyItem.state);
+          // Validate both history data with logs
+          UTILS.assertWithRequirementLogs(pretext, appHistoryList, appObjectHistory, true);
+        } else {
+          // If app history value is empty, validate the empty history lists
+          const appObjectHistory = this.getHistory();
+          UTILS.assertWithRequirementLogs(pretext, appHistory, appObjectHistory, true);
+        }
+      } else {
+        // Fail test if no valid history response received from 3rd party application
+        assert(false, CONSTANTS.INVALID_HISTORY_RESPONSE);
+      }
+    });
   }
 }
 
