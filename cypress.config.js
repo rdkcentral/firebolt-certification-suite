@@ -98,6 +98,7 @@ const env = {
   supportedSDK: ['Firebolt'],
   customValidationTimeout: 60000,
   deviceVersionCallEnable: true,
+  rebootTimeout: 180000,
 };
 
 module.exports = {
