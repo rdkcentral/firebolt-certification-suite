@@ -61,6 +61,7 @@ module.exports = {
   CONFIG: 'CONFIG',
   CONFIG_IMPLEMENTATION_MISSING: 'Config module implementation missing',
   CONFIG_MODULE_SETRESPONSE_PATH: 'cypress/fixtures/external/setResponseData.json',
+  CONSOLE_LOGGER_LEVEL: 'consoleLoggerLevel',
   CONTENT: 'Content',
   CONTEXT: 'Context',
   CONTEXT_FILE_PATH: 'cypress/fixtures/apiObjectContext.json',
