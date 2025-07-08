@@ -52,9 +52,7 @@ Given(
         state = CONSTANTS.LIFECYCLE_STATES.FOREGROUND;
       }
       cy.launchApp(appType, appCallSign, null, intent);
-      if (Cypress.env(CONSTANTS.ENV_SDK_VERSION).startsWith('1')) {
-        cy.lifecycleSetup(appCallSign, state);
-      }
+      cy.lifecycleSetup(appCallSign, state);
       Cypress.env(CONSTANTS.APP_LAUNCH_STATUS, true);
       // Incremental launch count for cold launch
       Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) + 1);
@@ -66,9 +64,7 @@ Given(
         state = CONSTANTS.LIFECYCLE_STATES.FOREGROUND;
       }
       cy.launchApp(appType, appCallSign, null, intent);
-      if (Cypress.env(CONSTANTS.ENV_SDK_VERSION).startsWith('1')) {
-        cy.lifecycleSetup(appCallSign, state);
-      }
+      cy.lifecycleSetup(appCallSign, state);
       // Incremental launch count for hot launch
       Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) + 1);
     }
