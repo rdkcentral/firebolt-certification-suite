@@ -246,7 +246,7 @@ function getCommunicationMode() {
  * skipCurrentTest()
  */
 function skipCurrentTest() {
-  fireLog.info('The current test has been intentionally skipped by the test runner');
+  fireLog.info('The current test has been intentionally skipped by the test runner', 'report');
   mocha.suite.ctx.test?.skip();
 }
 
@@ -313,7 +313,7 @@ function getApiOrEventObjectFromGlobalList(method, context, appId, validationTyp
 
   // Failing when the filteredObjectList is empty.
   if (filteredObjectList.length < 1) {
-    fireLog.info('Could not find the api response in api list');
+    fireLog.info('Could not find the api response in api list', 'report');
     fireLog.isNotEmpty(filteredObjectList, 'filteredObjectList is not to be empty');
   }
 
@@ -332,7 +332,7 @@ function getApiOrEventObjectFromGlobalList(method, context, appId, validationTyp
 
   // If no response is found, fail with no appObject found.
   if (!extractedObject) {
-    fireLog.info(CONSTANTS.NO_APP_OR_EVENT_OBJECT);
+    fireLog.info(CONSTANTS.NO_APP_OR_EVENT_OBJECT, 'report');
     fireLog.assert(false, CONSTANTS.NO_APP_OR_EVENT_OBJECT);
   }
   return extractedObject;
@@ -686,7 +686,7 @@ function checkForSecondaryAppId(appId) {
       return appId;
     }
   } catch (err) {
-    fireLog.info(eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR)).then(() => {
+    fireLog.info(eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR), 'report').then(() => {
       throw new Error(eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR));
     });
   }
@@ -722,7 +722,7 @@ global.resolveDeviceVariable = function (key) {
  * fireLog.isFalse(isFalseValue, "False message");
  * fireLog.deepEqual(actual, expected, "deepEqual message");
  *
- * fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent));
+ * fireLog.info('Discovery launch intent: ' + JSON.stringify(parsedIntent), 'report');
  * fireLog.info() is being used to log the message without any assertion.
  * Removing cy.log and replacing with fireLog.info() to get a cleaner report.
  *
@@ -812,7 +812,6 @@ class FireLog extends Function {
       ) => {
         const prefix = `[${level}]`;
         const fullMessage = `${prefix} ${message}`;
-        if (level === 'info') logOutputLocation = 'report';
         if (level === 'error') throw new Error(fullMessage);
         // Check if logOutputLocation is 'report' and log using cy.log based on logger.level
         if (logOutputLocation === 'report') {
@@ -1226,12 +1225,12 @@ function applyOverrides(fireboltCallObject) {
 
     for (const override of overrides) {
       if (typeof override.applyWhen !== 'function') {
-        fireLog.info('Ignoring override: Missing applyWhen() function', override);
+        fireLog.info('Ignoring override: Missing applyWhen() function', 'report');
         continue;
       }
 
       if (!override.applyWhen()) {
-        fireLog.info('Ignoring override: applyWhen() returned false', override);
+        fireLog.info('Ignoring override: applyWhen() returned false', 'report');
         continue;
       }
       // Appending Override content to the fireboltCallObject if applyWhen() returns true
@@ -1240,7 +1239,7 @@ function applyOverrides(fireboltCallObject) {
   } catch (error) {
     fireLog.info(
       'Error in applyOverrides - Override key in the fireboltObject was not as expected::',
-      error
+      'report'
     );
   }
   return fireboltCallObject; // Return the original or modified object based on the override
@@ -1281,11 +1280,14 @@ function captureScreenshot() {
       method: method,
       params: param,
     };
-    fireLog.info(`Sending request to capture screenshot: ${JSON.stringify(screenshotRequest)}`);
+    fireLog.info(
+      `Sending request to capture screenshot: ${JSON.stringify(screenshotRequest)}`,
+      'report'
+    );
 
     try {
       cy.sendMessagetoPlatforms(screenshotRequest, 70000).then((response) => {
-        fireLog.info(`Screenshot capture response: ${JSON.stringify(response)}`);
+        fireLog.info(`Screenshot capture response: ${JSON.stringify(response)}`, 'report');
 
         const apiResponse = {
           response: response,

@@ -56,7 +56,10 @@ Given(
             // Save the object as env.runtime.fireboltCall
             const runtime = { fireboltCall: fireboltObject };
             Cypress.env(CONSTANTS.RUNTIME, runtime);
-            fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
+            fireLog.info(
+              `Firebolt object successfully updated in runtime environment variable`,
+              'report'
+            );
           }
         }
       );
@@ -65,7 +68,7 @@ Given(
     Cypress.env(CONSTANTS.TEST_TYPE, test);
     const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
     if (!scenarioType && externalModuleTestTypes && externalModuleTestTypes.includes(test)) {
-      fireLog.info(`ScenarioType is not provided, defaulting to ${CONSTANTS.LOGGEDOUT}`);
+      fireLog.info(`ScenarioType is not provided, defaulting to ${CONSTANTS.LOGGEDOUT}`, 'report');
       scenarioType = CONSTANTS.LOGGEDOUT;
     }
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
@@ -136,7 +139,7 @@ Given(
     if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS)) {
       const markerCreated = Cypress.env(CONSTANTS.MARKER_CREATION_STATUS);
       if (markerCreated) {
-        fireLog.info('Marker has been created successfully');
+        fireLog.info('Marker has been created successfully', 'report');
       } else {
         fireLog.fail('Marker creation failed');
       }
@@ -185,14 +188,15 @@ function destroyAppInstance(testType) {
   // If the current test type is present inside the closeAppTestTypes array then close the app.
   if (isCloseTestType) {
     fireLog.info(
-      'Closing app since either Test Type is specified in closeAppTestTypes or is different from previous Test Type.'
+      'Closing app since either Test Type is specified in closeAppTestTypes or is different from previous Test Type.',
+      'report'
     );
     cy.exitAppSession('closeApp', params);
   }
 
   // If the current test type is present inside the unloadAppTestTypes array then unload the app.
   if (isUnloadTestType) {
-    fireLog.info('Unloading app since Test Type is specified in unloadAppTestTypes.');
+    fireLog.info('Unloading app since Test Type is specified in unloadAppTestTypes.', 'report');
     cy.exitAppSession('unloadApp', params);
   }
 }
@@ -340,7 +344,7 @@ Given(/text '(.+)' is found in the '(.+)' log/, (logKey, fileIdentifier) => {
       return;
     }
     response.response.forEach((responseText, index) => {
-      fireLog.info(`Received Response from the platform: ${responseText}`);
+      fireLog.info(`Received Response from the platform: ${responseText}`, 'report');
       const isPatternFound = responseText.includes(logKey);
       fireLog.equal(
         isPatternFound,
