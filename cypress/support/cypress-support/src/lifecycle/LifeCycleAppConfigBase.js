@@ -28,14 +28,12 @@ export class LifeCycleAppConfigBase {
       cy.log(CONSTANTS.LIFECYCLE_VISIBILITYSTATE_SKIP_MESSAGE);
       return;
     }
-
+    // Note: The requirement ID is currently unused, but may be utilized in future updates.
     const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
     const lifecycleStateRequirementId = scenarioRequirement.find((req) =>
       req.hasOwnProperty(CONSTANTS.VISIBLE_CHECK)
     );
-    const pretext = lifecycleStateRequirementId?.visible_check?.id
-      ? lifecycleStateRequirementId.visible_check.id + CONSTANTS.VISIBILITYSTATE_VALIDATION_REQ
-      : CONSTANTS.VISIBILITYSTATE_VALIDATION_REQ;
+    const pretext = CONSTANTS.VISIBILITYSTATE_VALIDATION_REQ;
     const intentMessage = UTILS.createIntentMessage(CONSTANTS.TASK.VISIBILITYSTATE, {
       params: CONSTANTS.VISIBILITYSTATE,
     });

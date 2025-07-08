@@ -86,6 +86,14 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
   }
 
   validateState(appId) {
+    // Note: The requirement ID is currently unused, but may be utilized in future updates.
+    // Get validation requirements for the current scenario from the moduleReqId JSON
+    const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
+    // Fetching the requirement IDs for the "state" from the scenarioRequirement.
+    const lifecycleStateRequirementId = scenarioRequirement.find((req) =>
+      req.hasOwnProperty('state')
+    );
+
     const currentState = this.getCurrentState().state;
     const requestMap = {
       method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETLIFECYCLESTATE,
@@ -106,6 +114,15 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
   }
 
   validateHistory(appId) {
+    // Note: The requirement ID is currently unused, but may be utilized in future updates.
+    // Get validation requirements for the current scenario from the moduleReqId JSON
+    const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
+
+    // Fetching the requirement IDs for the "history" from the scenarioRequirement.
+    const lifecycleHistoryRequirementId = scenarioRequirement.find((req) =>
+      req.hasOwnProperty('history')
+    );
+
     // Send message to 3rd party app to invoke lifecycle history API to get history response
     cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}').then((response) => {
       // this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
@@ -139,7 +156,7 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
         }
       } else {
         // Fail test if no valid history response received from 3rd party application
-        assert(false, CONSTANTS.INVALID_HISTORY_RESPONSE);
+        fireLog.fail(CONSTANTS.INVALID_HISTORY_RESPONSE);
       }
     });
   }
