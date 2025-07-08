@@ -746,8 +746,9 @@ class FireLog extends Function {
       info: 2,
       debug: 3,
     };
-    this.currentLevel = logger.level; // log level to display
-
+    const currentLevel = logger.level; // log level to display
+    let consoleLevel = getEnvVariable(CONSTANTS.CONSOLE_LOGGER_LEVEL, false);
+    if (!consoleLevel) consoleLevel = currentLevel;
     const handler = {
       apply: function (target, thisArg, argumentsList) {
         let message;
@@ -804,15 +805,24 @@ class FireLog extends Function {
 
     // Create logger-level methods
     logLevels.forEach((level) => {
-      instanceProxy[level] = (message) => {
-        if (levelPriority[level] <= levelPriority[this.currentLevel]) {
-          const prefix = `[${level}]`;
-          const fullMessage = `${prefix} ${message}`;
-          if (level === 'critical') {
+      instanceProxy[level] = (
+        message,
+        logOutputLocation = 'console',
+        consoleLoggerLevel = consoleLevel
+      ) => {
+        const prefix = `[${level}]`;
+        const fullMessage = `${prefix} ${message}`;
+        if (level === 'info') logOutputLocation = 'report';
+        // Check if logOutputLocation is 'report' and log using cy.log based on logger.level
+        if (logOutputLocation === 'report') {
+          if (levelPriority[level] <= levelPriority[logger.level]) {
             cy.log(fullMessage);
-            throw new Error(fullMessage);
-          } else {
-            cy.log(fullMessage);
+          }
+        }
+
+        // Check if logOutputLocation is 'console' and log using console based on consoleLoggerLevel
+        if (logOutputLocation === 'console') {
+          if (levelPriority[level] <= levelPriority[consoleLoggerLevel]) {
             console[level === 'debug' ? 'log' : level](fullMessage);
           }
         }
@@ -893,8 +903,6 @@ class FireLog extends Function {
     cy.log(message);
     assert.fail(message);
   }
-
-  info(message) {}
 
   error(message) {
     throw new Error(message);
