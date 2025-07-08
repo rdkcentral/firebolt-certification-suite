@@ -816,7 +816,7 @@ class FireLog extends Function {
         if (level === 'error') throw new Error(fullMessage);
         // Check if logOutputLocation is 'report' and log using cy.log based on logger.level
         if (logOutputLocation === 'report') {
-          if (levelPriority[level] <= levelPriority[logger.level]) {
+          if (levelPriority[level] <= levelPriority[currentLevel]) {
             cy.log(fullMessage);
           }
         }
