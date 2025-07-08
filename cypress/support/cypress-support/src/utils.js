@@ -813,6 +813,7 @@ class FireLog extends Function {
         const prefix = `[${level}]`;
         const fullMessage = `${prefix} ${message}`;
         if (level === 'info') logOutputLocation = 'report';
+        if (level === 'error') throw new Error(fullMessage);
         // Check if logOutputLocation is 'report' and log using cy.log based on logger.level
         if (logOutputLocation === 'report') {
           if (levelPriority[level] <= levelPriority[logger.level]) {
@@ -902,10 +903,6 @@ class FireLog extends Function {
   fail(message) {
     cy.log(message);
     assert.fail(message);
-  }
-
-  error(message) {
-    throw new Error(message);
   }
 }
 
