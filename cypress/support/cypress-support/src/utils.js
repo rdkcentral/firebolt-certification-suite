@@ -743,9 +743,18 @@ class FireLog extends Function {
       apply: function (target, thisArg, argumentsList) {
         let message;
         const methodName = target.name;
+        let exitCode = 1;
+        if (methodName.includes('assert')) exitCode = 2;
+        else exitCode = 1;
         if (target.hasOwnLog) {
           // If the method has its own logging, just apply it
-          return Reflect.apply(target, thisArg, argumentsList);
+          try {
+            return Reflect.apply(target, thisArg, argumentsList);
+          } catch (e) {
+            return cy.task('setExitCode', exitCode).then(() => {
+              throw e;
+            });
+          }
         } else {
           if (argumentsList.length > 3)
             message =
@@ -765,7 +774,13 @@ class FireLog extends Function {
               ' Actual: ' +
               JSON.stringify(argumentsList[0]);
           return cy.log(message).then(() => {
-            return Reflect.apply(target, thisArg, argumentsList);
+            try {
+              return Reflect.apply(target, thisArg, argumentsList);
+            } catch (e) {
+              return cy.task('setExitCode', exitCode).then(() => {
+                throw e;
+              });
+            }
           });
         }
       },

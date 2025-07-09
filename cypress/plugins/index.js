@@ -42,6 +42,8 @@ const updateLoggerLevel = require('../support/Logger').updateLoggerLevel;
 const tempReportEnvJson = '../../tempReportEnv.json';
 const { getAndDereferenceOpenRpc } = require('./pluginUtils');
 let metaDataArr = [];
+let currentExitCode = 0;
+const exitCodeHierarchy = [2, 1, 0];
 
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
@@ -218,6 +220,19 @@ module.exports = async (on, config) => {
         return null;
       }
     },
+    setExitCode(newCode) {
+      const currentPriority = exitCodeHierarchy.indexOf(currentExitCode);
+      const newPriority = exitCodeHierarchy.indexOf(newCode);
+
+      // Update only if new code is higher priority
+      if (newPriority !== -1 && (currentPriority === -1 || newPriority < currentPriority)) {
+        currentExitCode = newCode;
+      }
+      return null;
+    },
+    getExitCode() {
+      return currentExitCode;
+    },
   });
 
   on('before:run', async () => {
@@ -257,7 +272,7 @@ module.exports = async (on, config) => {
     let jobId;
     let elk = false;
     let certification = false;
-
+    process.exitCode = currentExitCode;
     try {
       // Creating uuid folder under reports
       if (results.config.env.jobId) {
@@ -374,12 +389,6 @@ module.exports = async (on, config) => {
             }
           }
         }
-      }
-
-      if (results.totalFailed != 0) {
-        process.exitCode = CONSTANTS.FCS_EXIT_CODE.FAILURE;
-      } else {
-        process.exitCode = CONSTANTS.FCS_EXIT_CODE.SUCCESS;
       }
     } catch (err) {
       logger.error('Error occurred in after:run hook:', err);
