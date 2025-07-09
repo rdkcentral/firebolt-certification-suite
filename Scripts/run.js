@@ -173,17 +173,39 @@ function run() {
 
   const args = ['run', '--e2e', ...modifyParams(params).split(' ')];
   console.log(`[Running cypress command: cypress ${args.join(' ')}]`);
-  const cypressProcess = spawn('cypress', args, { stdio: 'inherit' });
+
+  let output = '';
+  const cypressProcess = spawn('npx', ['cypress', ...args], { stdio: 'pipe', shell: true });
+
+  cypressProcess.stdout.on('data', (data) => {
+    process.stdout.write(data);
+    output += data.toString();
+  });
+
+  cypressProcess.stderr.on('data', (data) => {
+    process.stderr.write(data);
+    output += data.toString();
+  });
 
   cypressProcess.on('error', (error) => {
     console.error(`Error: ${error.message}`);
   });
 
   cypressProcess.on('close', (code) => {
-    if (code !== 0) {
-      console.error(`Cypress process exited with code ${code}`);
+    try {
+      const match = output.match(/FCS_EXIT_CODE:\s*(\d+)/);
+      if (match) {
+        const customCode = Number(match[1]);
+        console.log(`[Detected custom FCS exit code: ${customCode}]`);
+        process.exit(customCode);
+      } else {
+        console.log(`[No FCS code found. Using Cypress exit code: ${code}]`);
+        process.exit(code);
+      }
+    } catch (err) {
+      console.error('Error processing exit code:', err);
+      process.exit(1);
     }
-    process.exit(code);
   });
 }
 

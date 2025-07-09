@@ -390,6 +390,7 @@ module.exports = {
     SENDVOICECOMMAND: 'fcs.sendVoiceCommand',
     SETLIFECYCLESTATEV1: 'fcsV1.setLifecycleState',
     SETLIFECYCLESTATEV2: 'fcsV2.setLifecycleState',
+    FINDLOGPATTERN: 'fcs.findLogPattern',
   },
   RESPONSE: 'Response: ',
   RESPONSE_INVALID_RESPONSE_LOG:
@@ -544,10 +545,12 @@ module.exports = {
   DISMISSED: 'dismissed',
   CLOSED: 'closed',
   UNLOADED: 'unloaded',
+  STREAMING: 'streaming',
   ACTIONTYPE: {
     DISMISS_APP: 'dismissApp',
     CLOSE_APP: 'closeApp',
     UNLOAD_APP: 'unloadApp',
+    PLAYBACK: 'playback',
   },
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
   INVALID_PUBLISH_MESSAGE: 'Publish message to invoke lifecycle API is invalid',
@@ -558,6 +561,10 @@ module.exports = {
     'Schema validation failed for lifecycle API response with following error - ',
   INVALID_LIFECYCLE_STATE: 'Provided lifecycle state is invalid - ',
   LIFECYCLE_SET_STATE_FAILED: 'Request to set lifecycle state failed with following error - ',
+  FCS_EXIT_CODE: {
+    SUCCESS: 0,
+    FAILURE: 1,
+  },
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
