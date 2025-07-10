@@ -550,7 +550,8 @@ module.exports = {
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
   FCS_EXIT_CODE: {
     SUCCESS: 0,
-    FAILURE: 1,
+    GENERAL_FAILURE: 1,
+    CRITICAL_FAILURE: 2,
   },
 };
 function getSanityReportPath() {
