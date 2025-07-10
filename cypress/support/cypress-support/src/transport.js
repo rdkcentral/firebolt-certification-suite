@@ -18,7 +18,6 @@
 import FireboltInvoker from './FireboltInvoker.js';
 import modularTransportClient from '../../modularTransportClient';
 const CONSTANTS = require('../../constants/constants');
-const logger = require('../../Logger')('transport.js');
 export default class Transport {
   constructor() {
     // Initialize FireboltInvoker once
@@ -26,7 +25,7 @@ export default class Transport {
   }
 
   async sendMessage(messageObject, responseWaitTime) {
-    logger.info(`Printing the message object: ${JSON.stringify(messageObject)}`, `sendMessage`);
+    fireLog.info(`Printing the message object: ${JSON.stringify(messageObject)}`);
     if (this.isFireboltSDK(messageObject)) {
       if (!messageObject.action) {
         messageObject.action = CONSTANTS.CORE;
@@ -61,7 +60,7 @@ export default class Transport {
     } else {
       // TO DO: Update this logic to a better solution
       // return { error: { code: -32602, message: "Invalid params", data: "Neither MTC or firebolt object." } }
-      logger.info(`Neither MTC or firebolt object.`, `sendMessage`);
+      fireLog.info(`Neither MTC or firebolt object.`);
       return messageObject;
     }
   }
@@ -90,13 +89,11 @@ export default class Transport {
   }
   // Object contains "transport" and "options" fields, consider it as MTC call.
   isMTC(messageObject) {
-    logger.info(
-      'Printing the message object transport: ' + messageObject.hasOwnProperty(CONSTANTS.TRANSPORT),
-      'isMTC'
+    fireLog.info(
+      'Printing the message object transport: ' + messageObject.hasOwnProperty(CONSTANTS.TRANSPORT)
     );
-    logger.info(
-      'Printing the message object options: ' + messageObject.hasOwnProperty(CONSTANTS.OPTIONS),
-      'isMTC'
+    fireLog.info(
+      'Printing the message object options: ' + messageObject.hasOwnProperty(CONSTANTS.OPTIONS)
     );
     return (
       messageObject.hasOwnProperty(CONSTANTS.TRANSPORT) &&

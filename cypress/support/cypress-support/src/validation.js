@@ -16,7 +16,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const JSON_PATH_VALIDATOR = require('jsonpath');
-const logger = require('../../Logger')('validation.js');
 
 class Validation {
   constructor(validationModule) {
@@ -41,7 +40,7 @@ class Validation {
       return response;
     }
     const queryResponseArray = JSON_PATH_VALIDATOR.query(jsonString, jsonPath);
-    logger.debug('jsonpath response: ', queryResponseArray, 'validateJSON');
+    fireLog.debug('jsonpath response: ' + queryResponseArray);
     if (queryResponseArray.length === 0) {
       response.status = false;
       response.message = 'Invalid JSON Path: ' + jsonPath;

@@ -90,7 +90,10 @@ Given(
               }
             }
           } else {
-            fireLog.info('deviceData environment variable does not have the required data');
+            fireLog.info(
+              'deviceData environment variable does not have the required data',
+              'report'
+            );
           }
 
           // If the app ID is not passed from the feature, the default app ID will be retrieved.
@@ -318,15 +321,17 @@ Given(
         .then((response) => {
           if (response && Array.isArray(response)) {
             response.map((res) => {
-              fireLog.info(JSON.stringify(res));
+              fireLog.info(JSON.stringify(res), 'report');
             });
           }
         })
         .then(() => {
           if (result.error) {
-            fireLog.info('Failed to fetch and validate the performance metrics').then(() => {
-              fireLog.assert(false, result.error);
-            });
+            fireLog
+              .info('Failed to fetch and validate the performance metrics', 'report')
+              .then(() => {
+                fireLog.assert(false, result.error);
+              });
           } else {
             result.map((response) => {
               fireLog.equal(true, response?.success, response?.message);
@@ -353,7 +358,7 @@ Given(/3rd party '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     validationObject = UTILS.resolveRecursiveValues(fireboltData);
     cy.methodOrEventResponseValidation(type, validationObject).then(() => {
-      fireLog.info(`${validationObjectKey} was successful`);
+      fireLog.info(`${validationObjectKey} was successful`, 'report');
     });
   });
 });

@@ -136,7 +136,10 @@ function unloadApp(request) {
   // Generic error message due to missing implementation.
   const appId = request.params;
   fireLog.info(
-    'App unload requires platform implementation. AppId: ' + appId + ' was not able to be unloaded.'
+    'App unload requires platform implementation. AppId: ' +
+      appId +
+      ' was not able to be unloaded.',
+    'report'
   );
   fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
 }
@@ -154,7 +157,8 @@ function dismissApp(request) {
   fireLog.info(
     'App dismiss requires platform implementation. AppId: ' +
       appId +
-      ' was not able to be dismissed.'
+      ' was not able to be dismissed.',
+    'report'
   );
   fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
 }
@@ -187,7 +191,8 @@ function closeApp(request) {
     'Sending lifecycle close method to close app, method: ' +
       params.methodName +
       ' params: ' +
-      JSON.stringify(params.methodParams)
+      JSON.stringify(params.methodParams),
+    'report'
   );
   try {
     cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((response) => {
@@ -197,20 +202,21 @@ function closeApp(request) {
         result = response.report.result;
         fireLog.info(
           'Received response from app to acknowledge close request. Response: ' +
-            JSON.stringify(response)
+            JSON.stringify(response),
+          'report'
         );
       } catch {
         result = response;
       }
       if (result === CONSTANTS.NO_RESPONSE || result === null) {
-        fireLog.info('App closed successfully');
+        fireLog.info('App closed successfully', 'report');
       } else {
-        fireLog.info(false, 'App may have failed to close.');
+        fireLog.info(false, 'App may have failed to close.', 'report');
       }
       cy.wait(5000);
     });
   } catch (error) {
-    fireLog.info('Failed to close the 3rd party app: ', error);
+    fireLog.info('Failed to close the 3rd party app: ', 'report');
   }
 }
 

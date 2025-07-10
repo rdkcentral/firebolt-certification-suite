@@ -16,7 +16,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import { TransportClient } from './parent';
-const logger = require('../../Logger')('httpClient.js');
 const axios = require('axios');
 
 const defaultTimeout = Cypress.env('httpTransportTimeout')
@@ -73,7 +72,7 @@ export default class HttpClient extends TransportClient {
           axios
             .get(url, options)
             .then((response) => {
-              logger.info(`GET statusCode: ${response.status}`);
+              fireLog.info(`GET statusCode: ${response.status}`);
               res(response);
             })
             .catch(function (error) {
@@ -92,7 +91,7 @@ export default class HttpClient extends TransportClient {
           axios
             .post(url, payload, options)
             .then((response) => {
-              logger.info(`POST statusCode: ${response.status}`);
+              fireLog.info(`POST statusCode: ${response.status}`);
               res(response);
             })
             .catch(function (error) {
@@ -105,7 +104,7 @@ export default class HttpClient extends TransportClient {
             });
         }
       } catch (err) {
-        logger.error('Error: ', err.response);
+        fireLog.error('Error: ' + err.response);
         rej('Request returned a non 2xx status code: ' + err.response.status);
       }
     });

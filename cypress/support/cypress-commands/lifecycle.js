@@ -19,7 +19,6 @@ const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS from '../cypress-support/src/utils';
 import lifeCycleAppConfig from '../../../Scripts/lifeCycleAppObject.js';
-const logger = require('../Logger')('lifecycle.js');
 
 /**
  * @module lifecycle
@@ -139,7 +138,7 @@ Cypress.Commands.add('setLifecycleState', (state, appId) => {
   cy.log(CONSTANTS.SET_LIFECYCLE_STATE_REQUEST + JSON.stringify(requestMap)).then(() => {
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       if (result) {
-        logger.info(CONSTANTS.SET_APP_STATE + state);
+        fireLog.info(CONSTANTS.SET_APP_STATE + state);
       }
     });
   });
@@ -501,9 +500,9 @@ Cypress.Commands.add('fetchLifecycleHistory', (appId) => {
     cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}').then((response) => {
       const historyValue = _.get(JSON.parse(response), 'result._history._value', null);
       _.isEmpty(historyValue)
-        ? logger.info(CONSTANTS.APP_HISTORY_EMPTY)
+        ? fireLog.info(CONSTANTS.APP_HISTORY_EMPTY)
         : Cypress.env(CONSTANTS.APP_LIFECYCLE_HISTORY, historyValue);
-      cy.log(CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + JSON.stringify(historyValue));
+      fireLog.info(CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + JSON.stringify(historyValue));
     });
   } catch (error) {
     assert(false, CONSTANTS.LIFECYCLE_HISTORY_FAILED + error);
