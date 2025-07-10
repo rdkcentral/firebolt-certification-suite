@@ -386,6 +386,7 @@ module.exports = {
     SENDKEYPRESS: 'fcs.sendKeyPress',
     SENDVOICECOMMAND: 'fcs.sendVoiceCommand',
     FINDLOGPATTERN: 'fcs.findLogPattern',
+    GET_LIFECYCLEV2_STATE: 'fcsV2.getState',
   },
   RESPONSE: 'Response: ',
   RESPONSE_INVALID_RESPONSE_LOG:

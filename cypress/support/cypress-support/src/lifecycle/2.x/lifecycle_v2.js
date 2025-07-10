@@ -96,7 +96,7 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
 
     const currentState = this.getCurrentState().state;
     const requestMap = {
-      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETLIFECYCLESTATE,
+      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GET_LIFECYCLEV2_STATE,
       params: { appId: appId },
     };
     cy.sendMessagetoPlatforms(requestMap).then((response) => {
