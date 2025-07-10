@@ -18,7 +18,6 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-
 // Paths to the relevant package.json files and original package versions file
 const fcsPackagePath = path.join(__dirname, '..', 'package.json');
 const configModulePath = path.join(__dirname, '..', 'node_modules', 'configModule', 'package.json');
@@ -27,13 +26,13 @@ const originalVersions = {};
 function readOrInitializeOriginalVersionsFile() {
   if (!fs.existsSync(originalVersionsFile)) {
     fs.writeFileSync(originalVersionsFile, JSON.stringify(originalVersions, null, 2));
-    fireLog.debug('Original package versions file created.');
+    console.debug('Original package versions file created.');
   }
   try {
     const data = fs.readFileSync(originalVersionsFile, 'utf8');
     Object.assign(originalVersions, JSON.parse(data));
   } catch (error) {
-    fireLog.error('Error reading original versions file: ' + error.message);
+    console.error('Error reading original versions file: ' + error.message);
   }
   return originalVersions;
 }
@@ -43,7 +42,7 @@ function applyDependencyOverrides() {
     const configModulePackage = require(configModulePath);
 
     if (configModulePackage.dependencyOverrides) {
-      fireLog.info('Applying dependency overrides...');
+      console.log('Applying dependency overrides...');
 
       const originalVersions = readOrInitializeOriginalVersionsFile();
       const fcsPackage = JSON.parse(fs.readFileSync(fcsPackagePath, 'utf8'));
@@ -51,7 +50,7 @@ function applyDependencyOverrides() {
 
       for (const [pkg, version] of Object.entries(configModulePackage.dependencyOverrides)) {
         if (fcsPackage.dependencies && fcsPackage.dependencies[pkg]) {
-          fireLog.info(`Overriding ${pkg} to version ${version}...`);
+          console.log(`Overriding ${pkg} to version ${version}...`);
           if (!originalVersions[pkg] && !(pkg in originalVersions)) {
             originalVersions[pkg] = fcsPackage.dependencies[pkg];
             fs.writeFileSync(originalVersionsFile, JSON.stringify(originalVersions, null, 2));
@@ -63,18 +62,18 @@ function applyDependencyOverrides() {
 
       if (hasOverrides) {
         fs.writeFileSync(fcsPackagePath, JSON.stringify(fcsPackage, null, 2));
-        fireLog.info('Updated package.json with dependency overrides.');
+        console.log('Updated package.json with dependency overrides.');
         // Run yarn install with the updated package.json
         execSync(`yarn install --ignore-scripts`, { stdio: 'inherit' });
-        fireLog.debug('Dependency overrides applied.');
+        console.debug('Dependency overrides applied.');
       } else {
-        fireLog.info('No relevant dependency overrides found.');
+        console.log('No relevant dependency overrides found.');
       }
     } else {
-      fireLog.info('No dependency overrides found.');
+      console.log('No dependency overrides found.');
     }
   } else {
-    fireLog.warn(
+    console.warn(
       '\x1b[32m%s\x1b[0m',
       'configModule is set to default module. Please add it to your dependencies in package.json if required.'
     );

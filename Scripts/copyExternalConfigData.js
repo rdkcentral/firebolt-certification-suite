@@ -18,7 +18,7 @@
 const fs = require('fs');
 const path = require('path');
 
-fireLog.info('Copying Config fixtures and Testcases into sdkResources/external');
+console.log('Copying Config fixtures and Testcases into sdkResources/external');
 
 // Check which folder exists: 'resources' or 'Resources' in node_modules/configModule
 const CONFIG_RESOURCES_DIR = fs.existsSync(
@@ -72,21 +72,21 @@ function copyFiles(configDir, externalDir) {
 if (fs.existsSync(DEFAULT_DIR)) {
   copyFiles(DEFAULT_DIR, EXTERNAL_DEFAULT_DIR);
 } else {
-  fireLog.info('common resources are not available in configModule');
+  console.log('common resources are not available in configModule');
 }
 
 // Copy sdk resources
 if (fs.existsSync(CONFIG_DIR)) {
   copyFiles(CONFIG_DIR, EXTERNAL_DIR);
 } else {
-  fireLog.info('sdk resources is not available in configModule');
+  console.log('sdk resources is not available in configModule');
 }
 
 // Copy config.json file
 if (fs.existsSync(SOURCE_CONFIG_FILE)) {
   fs.copyFileSync(SOURCE_CONFIG_FILE, DEST_CONFIG_FILE);
-  fireLog.info(`Copied config json from ${SOURCE_CONFIG_FILE} to ${DEST_CONFIG_FILE}`);
+  console.log(`Copied config json from ${SOURCE_CONFIG_FILE} to ${DEST_CONFIG_FILE}`);
 } else {
   // Source file does not exist, do nothing
-  fireLog.info(`${SOURCE_CONFIG_FILE} config file doesn't exist`);
+  console.log(`${SOURCE_CONFIG_FILE} config file doesn't exist`);
 }

@@ -72,9 +72,9 @@ function copyFileIfExist(source, destination) {
     }
     // Copy the source file to the destination
     fs.copyFileSync(source, destination);
-    fireLog.info(`Copied  Report template from "${source}" to "${destination}"`);
+    console.log(`Copied  Report template from "${source}" to "${destination}"`);
   } catch (error) {
-    fireLog.info('Error: ' + error.message);
+    console.log('Error: ' + error.message);
   }
 }
 
