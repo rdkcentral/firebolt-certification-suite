@@ -23,7 +23,6 @@
  */
 const fs = require('fs');
 const path = require('path');
-const logger = require('../cypress/support/Logger')('copyCukeReportTemplate.js');
 
 // Define the array of template files to be copied with source and destination paths
 const FILES_TO_COPY = [
@@ -73,9 +72,9 @@ function copyFileIfExist(source, destination) {
     }
     // Copy the source file to the destination
     fs.copyFileSync(source, destination);
-    logger.info(`Copied  Report template from "${source}" to "${destination}"`);
+    fireLog.info(`Copied  Report template from "${source}" to "${destination}"`);
   } catch (error) {
-    logger.info('Error:', error.message);
+    fireLog.info('Error: ' + error.message);
   }
 }
 

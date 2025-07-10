@@ -37,8 +37,6 @@ const { DateTime } = require('luxon');
 const flatted = require('flatted');
 const { generateLocalReport } = require('./localReportGenerator');
 const getSpecPattern = require('../../specHelperConfig.js');
-const logger = require('../support/Logger')('index.js');
-const updateLoggerLevel = require('../support/Logger').updateLoggerLevel;
 const tempReportEnvJson = '../../tempReportEnv.json';
 const { getAndDereferenceOpenRpc } = require('./pluginUtils');
 let metaDataArr = [];
@@ -51,9 +49,6 @@ module.exports = async (on, config) => {
   if (specPattern !== undefined) {
     config.specPattern = specPattern;
   }
-  const loggerLevel = config.env.loggerLevel;
-  // Update logger level dynamically
-  updateLoggerLevel(loggerLevel);
 
   // Set certification to true for the appropriate test suite
   if (testsuite == CONSTANTS.CERTIFICATION) {
@@ -88,7 +83,7 @@ module.exports = async (on, config) => {
 
   on('task', {
     log(message) {
-      logger.info(message);
+      fireLog.info(message);
       return null;
     },
     /* write json or string to file
@@ -107,7 +102,7 @@ module.exports = async (on, config) => {
           }
           fs.writeFile(fileName, data, 'utf-8', function (err) {
             if (err) {
-              logger.error('An error occured while writing content to File.', 'writeToFile');
+              fireLog.error('An error occured while writing content to File.');
               reject(false);
             }
             resolve(true);
@@ -158,7 +153,7 @@ module.exports = async (on, config) => {
           try {
             combinedJson = jsonMerger.mergeFiles(files);
           } catch (err) {
-            logger.error('Error in merging the multiple JSON', err);
+            fireLog.error('Error in merging the multiple JSON' + err);
             resolve(null);
           }
           resolve(combinedJson);
@@ -221,7 +216,7 @@ module.exports = async (on, config) => {
   });
 
   on('before:run', async () => {
-    logger.debug('Entering before:run in cypress/plugins/index.js');
+    fireLog.debug('Entering before:run in cypress/plugins/index.js');
 
     // Calling reportProcessor default function with instance of event
     const reportProcessor = importReportProcessor();
@@ -245,7 +240,7 @@ module.exports = async (on, config) => {
       - generate the html report (TBD)
   */
   on('after:run', async (results) => {
-    logger.debug('Entering after :run in cypress/plugins/index.js');
+    fireLog.debug('Entering after :run in cypress/plugins/index.js');
 
     const reportObj = {};
     const formatter = new Formatter();
@@ -278,9 +273,9 @@ module.exports = async (on, config) => {
       if (!fs.existsSync(filePath)) {
         try {
           fs.mkdirSync(filePath);
-          logger.debug('Cucumber-json folder created successfully.');
+          fireLog.debug('Cucumber-json folder created successfully.');
         } catch (error) {
-          logger.error(error);
+          fireLog.error(error);
         }
       }
 
@@ -297,7 +292,7 @@ module.exports = async (on, config) => {
       // delete the messages.ndjson file.
       fs.unlink(sourceFile, (err) => {
         if (err) throw err;
-        logger.debug('The file has been deleted!');
+        fireLog.debug('The file has been deleted!');
       });
 
       const reportType = config.env.reportType;
@@ -382,7 +377,7 @@ module.exports = async (on, config) => {
         process.exitCode = CONSTANTS.FCS_EXIT_CODE.SUCCESS;
       }
     } catch (err) {
-      logger.error('Error occurred in after:run hook:', err);
+      fireLog.error('Error occurred in after:run hook:' + err);
       process.exitCode = CONSTANTS.FCS_EXIT_CODE.FAILURE;
     }
 
@@ -410,7 +405,7 @@ function importReportProcessor() {
     const reportProcessor = require('../../node_modules/configModule/reportProcessor/index');
     return reportProcessor;
   } catch (error) {
-    logger.error(error);
+    fireLog.error(error);
   }
 }
 
@@ -429,7 +424,7 @@ function readFileName(filePath, fileName) {
       files = files.find((name) => name.includes(fileName));
     }
   } catch (err) {
-    logger.info(`${filePath} Path does not exist`, `readFileName`);
+    fireLog.info(`${filePath} Path does not exist`);
   }
   return files;
 }
@@ -443,7 +438,7 @@ function readDataFromFile(filePath) {
   try {
     return fs.readFileSync(filePath);
   } catch (err) {
-    logger.error(`Unable to read data from ${filePath}`, `readDataFromFile`);
+    fireLog.error(`Unable to read data from ${filePath}`);
   }
 }
 
@@ -456,9 +451,9 @@ function readDataFromFile(filePath) {
 function deleteFile(sourceFile) {
   fs.unlink(sourceFile, (err) => {
     if (err) {
-      logger.error(`Error while deleting the file ${err}`, `deleteFile`);
+      fireLog.error(`Error while deleting the file ${err}`, `deleteFile`);
     }
-    logger.info(`The ${sourceFile} file has been deleted`, `deleteFile`);
+    fireLog.info(`The ${sourceFile} file has been deleted`);
   });
 }
 
@@ -481,14 +476,10 @@ async function addCustomMetaData(outputFile, metaDataArr) {
 
     // Write the updated JSON data back to the file
     await writeFileAsync(outputFile, updatedJsonData, 'utf8');
-    logger.debug('Metadata array appended to existing JSON successfully.', 'addCustomMetaData');
+    fireLog.debug('Metadata array appended to existing JSON successfully.');
 
     return Promise.resolve();
   } catch (err) {
-    logger.error(
-      'Error in appending the metadata to the existing JSON:',
-      err.message,
-      'addCustomMetaData'
-    );
+    fireLog.error('Error in appending the metadata to the existing JSON:' + err.message);
   }
 }

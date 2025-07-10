@@ -271,6 +271,7 @@ module.exports = {
   LIMITADTRACKING_OFF: 'limitAdTrackingOFF',
   LIMITADTRACKING_ON: 'limitAdTrackingON',
   LISTENING: 'listening',
+  LOGGER_LEVEL: 'loggerLevel',
   LONGPOLL_TIMEOUT: 15000,
   MACADDRESS_PARAM: 'macaddress',
   MESSAGE_QUEUE: 'messageQueue',

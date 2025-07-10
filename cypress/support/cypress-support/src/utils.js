@@ -16,7 +16,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const CONSTANTS = require('../../constants/constants');
-const logger = require('../../Logger')('utils.js');
 const { _ } = Cypress;
 import { apiObject } from '../../appObjectConfigs';
 const MESSAGE = 'message';
@@ -352,7 +351,7 @@ function unsubscribe(webSocketClient = null) {
     throw new Error('Websocket client not established');
   }
   webSocketClient.unsubscribe(MESSAGE);
-  logger.info('Websocket connection closed Successfully', 'unsubscribe');
+  fireLog.info('Websocket connection closed Successfully');
 }
 
 /**
@@ -419,9 +418,9 @@ function getEnvVariable(variable, isRequired = true) {
 
   if (isRequired) {
     const errorMessage = `Required environment variable "${variable}" is missing or undefined.`;
-    logger.error(errorMessage, 'getEnvVariable');
+    fireLog.error(errorMessage);
     // To include stackTrace in the console
-    logger.error(stackTrace());
+    fireLog.error(stackTrace());
     throw new Error(errorMessage);
   }
   return envValue;
@@ -703,10 +702,10 @@ function checkForSecondaryAppId(appId) {
 global.resolveDeviceVariable = function (key) {
   const resolvedDeviceData = Cypress.env('resolvedDeviceData');
   if (!(key in resolvedDeviceData)) {
-    logger.error(`Key ${key} not found in preprocessed data.`);
+    fireLog.error(`Key ${key} not found in preprocessed data.`);
     return null;
   }
-  logger.debug(`Resolved value for key ${key} is ${resolvedDeviceData[key]}`);
+  fireLog.debug(`Resolved value for key ${key} is ${resolvedDeviceData[key]}`);
   return resolvedDeviceData[key];
 };
 
@@ -746,7 +745,7 @@ class FireLog extends Function {
       info: 2,
       debug: 3,
     };
-    const currentLevel = logger.level; // log level to display
+    const currentLevel = getEnvVariable(CONSTANTS.LOGGER_LEVEL, false); // log level to display
     let consoleLevel = getEnvVariable(CONSTANTS.CONSOLE_LOGGER_LEVEL, false);
     if (!consoleLevel) consoleLevel = currentLevel;
     const handler = {
@@ -813,7 +812,7 @@ class FireLog extends Function {
         const prefix = `[${level}]`;
         const fullMessage = `${prefix} ${message}`;
         if (level === 'error') throw new Error(fullMessage);
-        // Check if logOutputLocation is 'report' and log using cy.log based on logger.level
+        // Check if logOutputLocation is 'report' and log using cy.log based on loggerLevel
         if (logOutputLocation === 'report') {
           if (levelPriority[level] <= levelPriority[currentLevel]) {
             cy.log(fullMessage);
@@ -957,7 +956,7 @@ global.extractEnvValue = function (attribute) {
   // Get the device data from env variable
   const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA);
   if (!deviceData) {
-    logger.info('deviceData environment variable is not found');
+    fireLog.info('deviceData environment variable is not found');
   }
 
   // If the attribute starts with 'CYPRESSENV', extract nested property from env variable.
@@ -977,7 +976,7 @@ global.extractEnvValue = function (attribute) {
     if (envValue !== undefined) {
       attribute = envValue;
     } else {
-      logger.info(`Cypress env variable '${attribute}' does not exist`);
+      fireLog.info(`Cypress env variable '${attribute}' does not exist`);
     }
   }
   // Return the extracted value from device data or environment variable
@@ -1106,7 +1105,7 @@ global.resolveAtRuntime = function (input) {
         element.includes('{{') ? replacingPatternOccurrenceWithValue(element) : element
       );
     } else {
-      logger.info(`Passed input - ${input} must be an array or a string.`);
+      fireLog.info(`Passed input - ${input} must be an array or a string.`);
     }
   };
 };

@@ -18,7 +18,6 @@
 
 import modularTransportClient from '../../modularTransportClient';
 import { getEnvVariable } from './utils';
-const logger = require('../../Logger')('FireboltInvoker.js');
 const CONSTANTS = require('../../constants/constants');
 const responseMap = new Map();
 Cypress.env(CONSTANTS.EVENT_RESPONSE_MAP, responseMap);
@@ -33,7 +32,7 @@ let singletonInstance = null;
 export default class FireboltInvoker {
   constructor() {
     if (singletonInstance) {
-      logger.debug('Singleton instance already exists');
+      fireLog.debug('Singleton instance already exists');
       return singletonInstance;
     }
 
@@ -59,13 +58,13 @@ export default class FireboltInvoker {
         getEnvVariable('wsPort', false),
         getEnvVariable('wsUrlPath', false)
       );
-      logger.info('Creating WebSocket connection for URL: ' + JSON.stringify(wsUrl), 'get');
+      fireLog.info('Creating WebSocket connection for URL: ' + JSON.stringify(wsUrl));
       try {
         this.instance = await modularTransportClient(WEBSOCKET, {
           url: wsUrl,
         });
         await this.instance.initialize();
-        logger.info('WebSocket client initialized', 'get');
+        fireLog.info('WebSocket client initialized');
         if (this.instance) {
           Cypress.env('webSocketClient', this.instance);
           return this.instance;
@@ -73,7 +72,7 @@ export default class FireboltInvoker {
           Cypress.env('webSocketClient', null);
         }
       } catch (err) {
-        logger.error('Error occurred during initializing WebSocket client:', err, 'get');
+        fireLog.error('Error occurred during initializing WebSocket client:' + err);
         throw new Error('WebSocket initialization failed.');
       }
     }
@@ -91,7 +90,7 @@ export default class FireboltInvoker {
       fireboltMessage.params = params;
     }
 
-    logger.info('Firebolt Message in the invoke:' + JSON.stringify(fireboltMessage), 'invoke');
+    fireLog.info('Firebolt Message in the invoke:' + JSON.stringify(fireboltMessage));
 
     try {
       // Saving firebolt event to an env map with the event name and listener id
@@ -116,7 +115,7 @@ export default class FireboltInvoker {
         return response;
       }
     } catch (error) {
-      logger.error('Error occurred during invoking Firebolt:', error, 'invoke');
+      fireLog.error('Error occurred during invoking Firebolt:' + error);
       throw error;
     }
   }

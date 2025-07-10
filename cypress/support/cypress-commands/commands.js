@@ -18,7 +18,6 @@
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS, { fireLog, getEnvVariable, addToEnvLabelMap } from '../cypress-support/src/utils';
-const logger = require('../Logger')('command.js');
 import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
 const jsonAssertion = require('soft-assert');
@@ -307,7 +306,7 @@ Cypress.Commands.add('updateRunInfo', () => {
             try {
               configModuleConst = require('../../../node_modules/configModule/constants/constants');
             } catch (error) {
-              logger.info('Unable to read from configModule constants');
+              fireLog.info('Unable to read from configModule constants');
               return false;
             }
             const deviceMac = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC).replace(/:/g, '');
@@ -428,13 +427,13 @@ Cypress.Commands.add('updateRunInfo', () => {
                     // write the merged object
                     cy.writeFile(tempReportEnvFile, reportEnv);
                   } else {
-                    logger.info('Unable to read from reportEnv json file');
+                    fireLog.info('Unable to read from reportEnv json file');
                     return false;
                   }
                 });
               });
           } catch (err) {
-            logger.info('Error in updating Run Info in cucumber report', err);
+            fireLog.info('Error in updating Run Info in cucumber report', err);
             return false;
           }
         } else if (tempFileExists && Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION)) {
@@ -456,14 +455,14 @@ Cypress.Commands.add('updateRunInfo', () => {
             }
           });
         } else {
-          logger.info(
+          fireLog.info(
             'Unable to update Run Info in cucumber report, tempReportEnv file already exists'
           );
           return false;
         }
       });
     } else {
-      logger.info('Unable to update Run Info in cucumber report, reportEnv file doesnt exist');
+      fireLog.info('Unable to update Run Info in cucumber report, reportEnv file doesnt exist');
       return false;
     }
   });
@@ -1244,11 +1243,11 @@ Cypress.Commands.add('convertJsonToHTML', (defaultDirectory, fileName) => {
       if (response.stdout.includes('Reports saved')) {
         return true;
       }
-      logger.info(response);
+      fireLog.info(response);
       return false;
     });
   } catch (err) {
-    logger.error(err);
+    fireLog.error(err);
     return false;
   }
 });
