@@ -31,6 +31,7 @@ module.exports = {
   STATE_TRANSITION_AND_VALIDATION_CONFIG_LOCATION: 'objects/lifecycleAppObject.json',
   ALPHANUMERIC: 'alphanumeric',
   API_NAME: 'apiName',
+  API_RESPONSE: 'apiResponse',
   API_VERSION: 'apiVersion',
   APP: 'App',
   APP_HISTORY_EMPTY: 'App history is empty',

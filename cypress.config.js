@@ -95,7 +95,7 @@ const env = {
   elk: false,
   objective: '',
   supportsPlatformCommunication: false,
-  supportedSDK: ['Firebolt'],
+  supportedSDK: ['Firebolt', "Thunder"],
   customValidationTimeout: 60000,
   deviceVersionCallEnable: true,
 };

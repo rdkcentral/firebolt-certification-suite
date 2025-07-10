@@ -357,3 +357,23 @@ Given(/3rd party '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
     });
   });
 });
+
+
+Given(
+  /'(.+)' platform (responds|triggers|does not trigger)(?: to the '(.+)')? (with|for|event)(?: for)? '(.+)'$/,
+  async (sdk, eventExpected, appId, event, key) => {
+    console.log('eventExpected', sdk, key);
+    const supportedSDK = UTILS.getEnvVariable(CONSTANTS.SUPPORTED_SDK);
+    if (Array.isArray(supportedSDK) && supportedSDK.includes(sdk)) {
+      key = key.replaceAll(' ', '_').toUpperCase();
+
+      // Fetching the required data for validation.
+      cy.getFireboltData(key).then((fireboltData) => {
+        console.log('fireboltData', fireboltData);
+        cy.validateApiResponse(fireboltData, true);
+      });
+    } else {
+      assert(false, `${sdk} SDK not Supported`);
+    }
+  }
+);

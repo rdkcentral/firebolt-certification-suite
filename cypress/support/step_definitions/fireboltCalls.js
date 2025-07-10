@@ -20,6 +20,7 @@ const CONSTANTS = require('../constants/constants');
 const _ = require('lodash');
 import { apiObject } from '../appObjectConfigs';
 import UTILS, { fireLog } from '../cypress-support/src/utils';
+const CONFIGCONSTANTS = require('../../../node_modules/configModule/constants/constants');
 
 /**
  * @module fireboltCalls
@@ -32,20 +33,59 @@ import UTILS, { fireLog } from '../cypress-support/src/utils';
  * Given 1st party app invokes the API to 'get device id
  */
 Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) => {
-  // Fetching the data like method, param, context and action etc.
-  cy.fireboltDataParser(key, sdk).then((parsedDataArr) => {
-    parsedDataArr.forEach((parsedData) => {
-      parsedData.appId = Cypress.env(CONSTANTS.FIRST_PARTY_APPID);
+  console.log('sdkkkk', sdk, key);
+  if (sdk === 'Thunder') {
+    const pluginResults = Cypress.env(CONFIGCONSTANTS.PLUGIN_RESULT);
+    console.log('pluginResults:', pluginResults);
+    if (pluginResults.includes('DeviceInfo.json')) {
+      console.log('Thunder SDK is used ');
 
+      cy.fireboltDataParser(key, sdk).then((parsedDataArr) => {
+        parsedDataArr.forEach((parsedData) => {
+          parsedData.appId = Cypress.env(CONSTANTS.FIRST_PARTY_APPID);
+
+          fireLog.info(
+            'Call from 1st party App, method: ' +
+              parsedData.method +
+              ' params: ' +
+              JSON.stringify(parsedData.params)
+          );
+          console.log('parsedData.method:', parsedData.method);
+          const requestMap = {
+            method: 'fcs.callHttpMethodHandler',
+            params: {
+              method: parsedData.method,
+            },
+          };
+          cy.sendMessagetoPlatforms(requestMap).then((response) => {
+            // const currentList = Cypress.env(CONSTANTS.GLOBAL_API_OBJECT_LIST) || [];
+            // currentList.push(response);
+            Cypress.env(CONSTANTS.API_RESPONSE, response);
+            fireLog.info('Response from the callHttpMethodHandler: ' + JSON.stringify(response));
+          });
+        });
+      });
+    } else {
+      console.log('json file is not present in plugin result');
       fireLog.info(
-        'Call from 1st party App, method: ' +
-          parsedData.method +
-          ' params: ' +
-          JSON.stringify(parsedData.params)
+        `json file is not present in plugin result, so skipping the callHttpMethodHandler`
       );
-      cy.sendMessageToPlatformOrApp(CONSTANTS.PLATFORM, parsedData);
+    }
+  } else {
+    cy.fireboltDataParser(key, sdk).then((parsedDataArr) => {
+      parsedDataArr.forEach((parsedData) => {
+        parsedData.appId = Cypress.env(CONSTANTS.FIRST_PARTY_APPID);
+
+        fireLog.info(
+          'Call from 1st party App, method: ' +
+            parsedData.method +
+            ' params: ' +
+            JSON.stringify(parsedData.params)
+        );
+        cy.sendMessageToPlatformOrApp(CONSTANTS.PLATFORM, parsedData);
+      });
     });
-  });
+  }
 });
 
 /**
