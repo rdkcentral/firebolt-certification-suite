@@ -32,31 +32,23 @@ const logger = require('../Logger')('lifecycle.js');
  */
 Cypress.Commands.add('lifecycleSetup', (appCallSign, state) => {
   const appId =
-    appCallSign == undefined ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) : appCallSign;
+    appCallSign === undefined ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) : appCallSign;
 
-  if (Cypress.env(CONSTANTS.TEST_TYPE) == CONSTANTS.MODULE_NAMES.LIFECYCLE) {
+  if (Cypress.env(CONSTANTS.TEST_TYPE) === CONSTANTS.MODULE_NAMES.LIFECYCLE) {
     // create lifecycleAppObject to mimic all the state transition for an app and also go through the same state histories
     if (!Cypress.env(CONSTANTS.LIFECYCLE_APP_OBJECT_LIST).includes(appId)) {
       const lifeCycleAppObject = createLifeCycleAppConfig();
-      // set the state to initialising
-      lifeCycleAppObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INITIALIZING);
-      // store the lifecycleAppObject in global object and push it to a global list
+      // Initial setup logic for setting initial state(s) of app object
+      lifeCycleAppObject.setupInitialState();
       Cypress.env(appId, lifeCycleAppObject);
       Cypress.env(CONSTANTS.LIFECYCLE_APP_OBJECT_LIST).push(appId);
     }
 
-    if (state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
+    if (state === CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
       Cypress.env(CONSTANTS.APP_LIFECYCLE_HISTORY, []);
     } else {
-      // TODO: Make call to move app to foreground or active based on version.
-      if (
-        state != CONSTANTS.LIFECYCLE_STATES.UNLOADED &&
-        state != CONSTANTS.LIFECYCLE_STATES.FOREGROUND &&
-        state != CONSTANTS.LIFECYCLE_STATES.UNLOADING
-      ) {
-        cy.setAppState(CONSTANTS.LIFECYCLE_STATES.FOREGROUND, appId);
-      }
-      return cy.setAppState(state, appId);
+      const appObject = Cypress.env(appId);
+      return appObject.lifecycleSetup(state, appId);
     }
   } else {
     // if not a lifecycle test, simply return
@@ -133,17 +125,8 @@ Cypress.Commands.add('validateLifecycleState', (state, appId) => {
  * setLifecycleState('foreground', 'foo')
  */
 Cypress.Commands.add('setLifecycleState', (state, appId) => {
-  const requestMap = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETLIFECYCLESTATE,
-    params: { state: state, appId: appId },
-  };
-  cy.log(CONSTANTS.SET_LIFECYCLE_STATE_REQUEST + JSON.stringify(requestMap)).then(() => {
-    cy.sendMessagetoPlatforms(requestMap).then((result) => {
-      if (result) {
-        logger.info(CONSTANTS.SET_APP_STATE + state);
-      }
-    });
-  });
+  const appObject = Cypress.env(appId);
+  appObject.setLifecycleState(state, appId);
 });
 
 /**
@@ -157,6 +140,7 @@ Cypress.Commands.add('setLifecycleState', (state, appId) => {
  * @example
  * cy.validateLifecycleHistoryAndEvents('foreground', 'foo', true)
  */
+
 Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEventsExpected) => {
   // Extract appObject based on appId
   const appObject = UTILS.getEnvVariable(appId);
@@ -279,59 +263,8 @@ Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEvent
  * invokeLifecycleApi('foo', 'lifecycle.ready')
  */
 Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) => {
-  const requestTopic = UTILS.getTopic(appId);
-  const responseTopic = UTILS.getTopic(appId, CONSTANTS.SUBSCRIBE);
-  params = {
-    [CONSTANTS.METHOD_NAME]: method,
-    [CONSTANTS.APP_TYPE]: [CONSTANTS.FIREBOLT],
-  };
-  if (methodParams) {
-    params.methodParams = methodParams;
-  }
-  additionalParams = { [CONSTANTS.COMMUNICATION_MODE]: UTILS.getCommunicationMode() };
-  publishMessage = UTILS.createIntentMessage(
-    CONSTANTS.TASK.CALLLIFECYCLE,
-    params,
-    additionalParams
-  );
-
-  let publishMessageForLog;
-  if (publishMessage && publishMessage.data && publishMessage.data.query) {
-    publishMessageForLog = publishMessage.data.query;
-    if (typeof publishMessageForLog == 'string') {
-      publishMessageForLog = JSON.parse(publishMessageForLog);
-    }
-    if (publishMessageForLog.params.methodName == CONSTANTS.LIFECYCLE_APIS.HISTORY) {
-      cy.log(CONSTANTS.LIFECYCLE_HISTORY_INTENT + JSON.stringify(publishMessage));
-    } else {
-      cy.log(CONSTANTS.LIFECYCLE_INTENT + JSON.stringify(publishMessage));
-    }
-  }
-  cy.sendMessagetoApp(requestTopic, responseTopic, publishMessage).then((response) => {
-    try {
-      errorObject = JSON.parse(response).error;
-    } catch (error) {
-      cy.log(CONSTANTS.FAILED_TO_PARSE_LIEFECYCLE_ERROR + response).then(() => {
-        assert(false, CONSTANTS.FAILED_TO_PARSE_LIEFECYCLE_ERROR + response);
-      });
-      return false;
-    }
-    if (errorObject) {
-      UTILS.assertWithRequirementLogs(
-        CONSTANTS.FAILED_TO_SET_LIFECYCLE_STATE,
-        null,
-        null,
-        null,
-        errorObject
-      );
-      return false;
-    }
-    if (CONSTANTS.LIFECYCLE_METHOD_LIST.includes(method)) {
-      cy.updateResponseForFCS(method, '', JSON.parse(response)).then((updatedResponse) => {
-        return updatedResponse;
-      });
-    }
-  });
+  const appObject = Cypress.env(appId);
+  return appObject.invokeLifecycleApi(appId, method, methodParams);
 });
 
 /**
@@ -339,176 +272,26 @@ Cypress.Commands.add('invokeLifecycleApi', (appId, method, methodParams = null) 
  * @function setAppState
  * @description Set state of 3rd party app as well as state inside appObject to use as source of truth
  * @param {String} state - State to be set
- * @param {Object} appId - The appId used to launch the app which is identified by the firebolt platform servicing the request
+ * @param {String} appId - The appId used to launch the app which is identified by the firebolt platform servicing the request
  * @example
  * cy.setAppState('foreground', 'foo')
  */
 Cypress.Commands.add('setAppState', (state, appId) => {
-  // Get the app object corresponding to the appID
   const appObject = Cypress.env(appId);
-
-  // Fetch app history and store in environment variable
-  cy.fetchLifecycleHistory(appId);
-
-  // Get current application state
-  const currentAppState = appObject.getCurrentState() || {};
-  if (currentAppState == {}) {
-    currentAppState.state = null;
-  }
-
-  // Set app and app object state
-  switch (state) {
-    // Set state to foreground
-    case CONSTANTS.LIFECYCLE_STATES.FOREGROUND:
-      // TODO: Checks for platform support
-      // If current app state is initialising, send lifecycle.ready API call to 3rd party app to bring app to foreground
-      if (currentAppState.state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
-        appObject.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INACTIVE);
-        cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.READY, '{}').then((response) => {
-          if (response) {
-            cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
-          }
-          appObject.setAppObjectState(state);
-          cy.lifecycleSchemaChecks(response, state);
-          // TODO: Checks for platform support
-        });
-      } else if (
-        // Else, send a discovery.launch call to platform to bring app to foreground
-        currentAppState.state != CONSTANTS.LIFECYCLE_STATES.INITIALIZING &&
-        currentAppState.state != CONSTANTS.LIFECYCLE_STATES.FOREGROUND
-      ) {
-        cy.launchApp((appType = CONSTANTS.CERTIFICATION), appId);
-        appObject.setAppObjectState(state);
-      } else {
-        appObject.setAppObjectState(state);
-      }
-      break;
-
-    // Set state to background
-    case CONSTANTS.LIFECYCLE_STATES.BACKGROUND:
-      // TODO: Checks for platform support
-      if (
-        currentAppState.state != CONSTANTS.LIFECYCLE_STATES.BACKGROUND &&
-        currentAppState.state != CONSTANTS.LIFECYCLE_STATES.INITIALIZING
-      ) {
-        // If current app state is not background, send message to platform to set app state to background
-        cy.setLifecycleState(state, appId).then(() => {
-          appObject.setAppObjectState(state);
-        });
-      }
-      break;
-
-    // Set state to inactive
-    case CONSTANTS.LIFECYCLE_STATES.INACTIVE:
-      // If current app state is suspended, send lifecycle.unsuspend API call to 3rd party app
-      if (currentAppState.state == CONSTANTS.LIFECYCLE_STATES.SUSPENDED) {
-        // TODO: Checks for platform support
-        cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.UNSUSPEND, '{}').then((response) => {
-          if (response) {
-            cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
-          }
-          appObject.setAppObjectState(state);
-          cy.lifecycleSchemaChecks(response, state);
-          // TODO: Checks for platform support
-        });
-      } else {
-        // Else if current app state is not foreground/background, set app state to foreground first to comply with allowed transitions
-        if (
-          currentAppState.state != CONSTANTS.LIFECYCLE_STATES.FOREGROUND &&
-          currentAppState.state != CONSTANTS.LIFECYCLE_STATES.BACKGROUND
-        ) {
-          cy.setAppState(CONSTANTS.LIFECYCLE_STATES.FOREGROUND, appId);
-        }
-        // Finally, send message to platform to set app state to inactive
-        cy.setLifecycleState(state, appId).then(() => {
-          appObject.setAppObjectState(state);
-        });
-      }
-      break;
-
-    // Set state to suspended
-    case CONSTANTS.LIFECYCLE_STATES.SUSPENDED:
-      // If current app state is not suspended or inactive,  set app state to inactive first to comply with allowed transitions
-      if (currentAppState.state != CONSTANTS.LIFECYCLE_STATES.SUSPENDED) {
-        if (currentAppState.state != CONSTANTS.LIFECYCLE_STATES.INACTIVE) {
-          cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, appId);
-        }
-        // Send lifecycle.suspend API call to 3rd party app
-        cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.SUSPEND, {}).then((response) => {
-          if (response) {
-            cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
-          }
-          appObject.setAppObjectState(state);
-          cy.lifecycleSchemaChecks(response, state);
-          // TODO: Checks for platform support
-        });
-      }
-      break;
-
-    // Set state to unloading
-    case CONSTANTS.LIFECYCLE_STATES.UNLOADING:
-      // If current app state is initializing or null,  set app state to inactive first
-      if (currentAppState.state !== CONSTANTS.LIFECYCLE_STATES.INACTIVE) {
-        cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, appId);
-      }
-      // Send lifecycle.close API call to 3rd party app
-      cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.CLOSE, {
-        reason: CONSTANTS.ERROR,
-      }).then((response) => {
-        if (response) {
-          cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
-        }
-        appObject.setAppObjectState(state);
-        cy.lifecycleSchemaChecks(response, state);
-        // TODO: Checks for platform support
-        // cy.fireBoltApi(LifecycleManagement.unload())
-      });
-      break;
-
-    // Set state to unloaded/terminated
-    case CONSTANTS.LIFECYCLE_STATES.UNLOADED:
-    case CONSTANTS.LIFECYCLE_STATES.TERMINATED:
-      // If current app state is initializing or null,  set app state to unloading first
-      if (
-        currentAppState.state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING ||
-        currentAppState.state == CONSTANTS.NULL
-      ) {
-        cy.setAppState(CONSTANTS.LIFECYCLE_STATES.UNLOADING, appId);
-        // Send lifecycle.finished API call to 3rd party app
-        cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.FINISHED, {}).then((response) => {
-          if (response) {
-            cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
-          }
-          appObject.setAppObjectState(state);
-        });
-      }
-      break;
-
-    default:
-      break;
-  }
+  appObject.setAppState(state, appId);
 });
 
 /**
  * @module  lifecycle
  * @function fetchLifecycleHistory
  * @description Fetch lifecycle history on demand for 3rd party app and store in environment variable if present, for lifecycle history validation
- * @param {String} appObject - appObject in environment
+ * @param {String} appId - The appId used to launch the app which is identified by the firebolt platform servicing the request
  * @example
  * cy.fetchLifecycleHistory('foo')
  */
 Cypress.Commands.add('fetchLifecycleHistory', (appId) => {
-  try {
-    cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}').then((response) => {
-      const historyValue = _.get(JSON.parse(response), 'result._history._value', null);
-      _.isEmpty(historyValue)
-        ? logger.info(CONSTANTS.APP_HISTORY_EMPTY)
-        : Cypress.env(CONSTANTS.APP_LIFECYCLE_HISTORY, historyValue);
-      cy.log(CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + JSON.stringify(historyValue));
-    });
-  } catch (error) {
-    assert(false, CONSTANTS.LIFECYCLE_HISTORY_FAILED + error);
-  }
+  const appObject = Cypress.env(appId);
+  appObject.fetchLifecycleHistory(appId);
 });
 
 /**
@@ -559,23 +342,18 @@ Cypress.Commands.add('setAppObjectStateFromMethod', (method, appId) => {
       break;
   }
 });
-
 /**
  * @module lifecycle
  * @function lifecycleSchemaChecks
- * @description To Validate the status of response and schema
+ * @description To Validate the status of lifecycle response and schema
  * @param {String} response - ApiResponse
- * @param {String} state - State to be set
+ * @param {String} appId - The appId used to launch the app which is identified by the firebolt platform servicing the request
  * @example
- * cy.lifecycleSchemaChecks({"result":null,"error":null,"schemaResult":{"status":"PASS","schemaValidationResult":{"instance":null,"schema":{"const":null}}, 'foreground');
+ * cy.lifecycleSchemaChecks({"result":null,"error":null,"schemaResult":{"status":"PASS","schemaValidationResult":{"instance":null,"schema":{"const":null}}, 'foo');
  */
-Cypress.Commands.add('lifecycleSchemaChecks', (response, state) => {
-  typeof response == 'object' ? response : (response = JSON.parse(response));
-  apiSchemaResult = {
-    validationStatus: response[CONSTANTS.SCHEMA_VALIDATION_STATUS],
-    validationResponse: response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE],
-  };
-  cy.validationChecksForResponseAndSchemaResult(response, false, apiSchemaResult, false);
+Cypress.Commands.add('lifecycleSchemaChecks', (response, appId) => {
+  const appObject = Cypress.env(appId);
+  appObject.lifecycleSchemaChecks(response, appId);
 });
 
 /**
