@@ -387,8 +387,10 @@ module.exports = async (on, config) => {
         }
       }
 
-      if(!maxExitCode){
-        process.exitCode = results.totalFailed ? CONSTANTS.FCS_EXIT_CODE.GENERAL_FAILURE : CONSTANTS.FCS_EXIT_CODE.SUCCESS;
+      if (!maxExitCode) {
+        process.exitCode = results.totalFailed
+          ? CONSTANTS.FCS_EXIT_CODE.GENERAL_FAILURE
+          : CONSTANTS.FCS_EXIT_CODE.SUCCESS;
       } else {
         process.exitCode = maxExitCode;
       }
