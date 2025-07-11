@@ -212,6 +212,49 @@ Cypress.Commands.add('getSchema', (methodOrEvent, params, schemaType) => {
   });
 });
 
+/**
+ * @module schemaValidation
+ * @function getSchemaFromOpenRpc
+ * @description get the schema from OpenRPC based on method name and type.
+ * @param {string} methodName - The name of the method to search in OpenRPC.
+ * @param {string} type - The type of schema to return, either "result" or "listen".
+ * getSchemaFromOpenRpc("accessibility.closedCaptionsSettings")
+ */
+Cypress.Commands.add('getSchemaFromOpenRpc', (methodName, type) => {
+  const schemaList = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, true);
+  for (let i = 0; i < schemaList.length; i++) {
+    const openrpcData = schemaList[i];
+    if (!openrpcData || !openrpcData.methods) continue;
+    const method = openrpcData.methods.find((m) => m.name === methodName);
+    if (!method) continue;
+
+    // Check if method is an event (has a tag with name 'event')
+    const isEvent = Array.isArray(method.tags) && method.tags.some((tag) => tag.name === 'event');
+
+    if (isEvent) {
+      if (type === CONSTANTS.RESULT) {
+        // For events, find x-subscriber-for and return referenced method's result.schema
+        const eventTag = method.tags.find((tag) => tag.name === 'event' && tag['x-subscriber-for']);
+        if (eventTag) {
+          const subscribeForName = eventTag['x-subscriber-for'];
+          const referencedMethod = openrpcData.methods.find((m) => m.name === subscribeForName);
+          if (referencedMethod && referencedMethod.result && referencedMethod.result.schema) {
+            return referencedMethod.result.schema;
+          }
+        }
+        fireLog.info('No "x-subscriber-for" found for event:', methodName);
+        return null;
+      } else {
+        return method.result && method.result.schema ? method.result.schema : null;
+      }
+    }
+
+    // For regular methods, always return their result.schema
+    return method.result && method.result.schema ? method.result.schema : null;
+  }
+  return null;
+});
+
 // Function to remmove set in api name
 function removeSetInMethodName(apiName) {
   const method = apiName.split('.')[1];
