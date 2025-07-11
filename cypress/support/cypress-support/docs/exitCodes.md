@@ -29,4 +29,5 @@ Only the highest-priority failure is used when exiting the test runner.
 ## Example
 
 ```js
-fireLog.fail("Token validation failed", 2); // Critical failure
+fireLog.fail("Token validation failed", CONSTANTS.FCS_EXIT_CODE.CRITICAL_FAILURE); // Critical failure
+fireLog.assert(!response, 'Could not resolve intentTemplate: ', CONSTANTS.FCS_EXIT_CODE.GENERAL_FAILURE); // General failure
