@@ -855,13 +855,19 @@ class FireLog extends Function {
     assert.exists(value, message);
   }
 
-  assert(expression, message) {
-    assert(expression, message);
+  assert(expression, message, failureCode = 1) {
+    if (!expression) {
+      cy.task('setExitCode', failureCode).then(() => {
+        assert.fail(message);
+      });
+    }
   }
 
-  fail(message) {
-    cy.log(message);
-    assert.fail(message);
+  fail(message, failureCode = 1) {
+    cy.task('setExitCode', failureCode).then(() => {
+      cy.log(message);
+      assert.fail(message);
+    });
   }
 
   info(message) {}
