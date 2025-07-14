@@ -42,6 +42,7 @@ const updateLoggerLevel = require('../support/Logger').updateLoggerLevel;
 const tempReportEnvJson = '../../tempReportEnv.json';
 const { getAndDereferenceOpenRpc } = require('./pluginUtils');
 let metaDataArr = [];
+let maxExitCode = 0;
 
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
@@ -218,6 +219,16 @@ module.exports = async (on, config) => {
         return null;
       }
     },
+    setExitCode(code) {
+      const hierarchy = [2, 1, 0];
+      const currentPriority = hierarchy.indexOf(maxExitCode);
+      const newPriority = hierarchy.indexOf(code);
+
+      if (newPriority !== -1 && (currentPriority === -1 || newPriority < currentPriority)) {
+        maxExitCode = code;
+      }
+      return null;
+    },
   });
 
   on('before:run', async () => {
@@ -376,10 +387,12 @@ module.exports = async (on, config) => {
         }
       }
 
-      if (results.totalFailed != 0) {
-        process.exitCode = CONSTANTS.FCS_EXIT_CODE.FAILURE;
+      if (!maxExitCode) {
+        process.exitCode = results.totalFailed
+          ? CONSTANTS.FCS_EXIT_CODE.GENERAL_FAILURE
+          : CONSTANTS.FCS_EXIT_CODE.SUCCESS;
       } else {
-        process.exitCode = CONSTANTS.FCS_EXIT_CODE.SUCCESS;
+        process.exitCode = maxExitCode;
       }
     } catch (err) {
       logger.error('Error occurred in after:run hook:', err);
