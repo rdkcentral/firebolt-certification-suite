@@ -1,3 +1,10 @@
+# [1.14.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0...v1.14.0-dev.1) (2025-07-14)
+
+
+### Features
+
+* FCS specific exit codes ([#455](https://github.com/rdkcentral/firebolt-certification-suite/issues/455)) ([1ad64e7](https://github.com/rdkcentral/firebolt-certification-suite/commit/1ad64e7049396bc9bf2aa72706b652dec54c50ab))
+
 # [1.13.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0...v1.13.0) (2025-07-02)
 
 
