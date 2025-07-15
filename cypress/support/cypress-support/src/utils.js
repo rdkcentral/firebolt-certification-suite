@@ -747,7 +747,8 @@ class FireLog extends Function {
           // If the method has its own logging, just apply it
           return Reflect.apply(target, thisArg, argumentsList);
         } else {
-          if (argumentsList.length > 3)
+          if (methodName.includes('info')) message = argumentsList[0];
+          else if (argumentsList.length > 3)
             message =
               'Expected: ' +
               JSON.stringify(argumentsList[0]) +
@@ -870,7 +871,11 @@ class FireLog extends Function {
     });
   }
 
-  info(message) {}
+  info(message, failureCode = 0) {
+    if (failureCode > 0) {
+      cy.task('setExitCode', failureCode);
+    }
+  }
 
   error(message) {
     throw new Error(message);

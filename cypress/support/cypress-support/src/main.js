@@ -55,9 +55,12 @@ export default function (module) {
       timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT,
     }).then((result) => {
       if (result) {
-        cy.log('Successfully established a pub/sub connection.');
+        fireLog.info('Successfully established a pub/sub connection.');
       } else {
-        cy.log('Unable to establish a pub/sub connection.');
+        fireLog.info(
+          'Unable to establish a pub/sub connection.',
+          CONSTANTS.FCS_EXIT_CODE.CRITICAL_FAILURE
+        );
       }
       Cypress.env('pubSubClient', appTransport);
       cy.startAdditionalServices();
