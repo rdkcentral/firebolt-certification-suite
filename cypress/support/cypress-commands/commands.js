@@ -2122,3 +2122,77 @@ Cypress.Commands.add('captureScreenshot', () => {
   // Only take a screenshot if the enableScreenshots environment variable is set to true
   UTILS.captureScreenshot();
 });
+
+/**
+ * Utility to compare the schema (keys and types) of two objects.
+ */
+function compareSchema(expected, actual) {
+  if (Array.isArray(expected)) {
+    if (!Array.isArray(actual)) return false;
+    if (expected.length === 0) return true;
+    return compareSchema(expected[0], actual[0]);
+  }
+  if (typeof expected !== typeof actual) return false;
+  if (typeof expected === 'object' && expected !== null) {
+    // For each expected key, find a matching actual key (case-insensitive)
+    const actualKeys = Object.keys(actual).map((k) => k.toLowerCase());
+    for (const key of Object.keys(expected)) {
+      const matchIdx = actualKeys.indexOf(key.toLowerCase());
+      if (matchIdx === -1) return false;
+      const actualKey = Object.keys(actual)[matchIdx];
+      if (!compareSchema(expected[key], actual[actualKey])) return false;
+    }
+    return true;
+  }
+  return true;
+}
+
+/**
+ * @module commands
+ * @function validateApiResponse
+ * @description Validates API response. If schemaOnly is true, only validates the structure.
+ * @param {Object} expectedResponse - The expected response object.
+ * @param {Boolean} schemaOnly - If true, only validates the schema.
+ */
+Cypress.Commands.add('validateApiResponse', (expectedResponse, schemaOnly = false) => {
+  const apiResponse = Cypress.env(CONSTANTS.API_RESPONSE);
+
+  if (!expectedResponse) {
+    assert(false, `No expected response found in the validation object for API validation`);
+  }
+
+  let apiexpected = apiResponse;
+  if (Array.isArray(apiResponse) && apiResponse.length > 0 && apiResponse[0].message) {
+    apiexpected = apiResponse[0].message;
+  } else if (
+    typeof apiResponse === 'object' &&
+    apiResponse.success === true &&
+    apiResponse.message
+  ) {
+    apiexpected = apiResponse.message;
+  }
+
+  if (schemaOnly) {
+    const schemaMatch = compareSchema(expectedResponse, apiexpected);
+    if (schemaMatch) {
+      fireLog.info(
+        `Schema validation passed Expected:${JSON.stringify(expectedResponse)} with APIResponse:${JSON.stringify(apiexpected)}`
+      );
+      Cypress.log({
+        name: 'Schema Validation',
+        displayName: 'validateApiResponse',
+        message: 'API schema validation passed.',
+      });
+    } else {
+      assert(
+        false,
+        `API schema mismatch:\nExpected schema: ${JSON.stringify(expectedResponse)}\nActual: ${JSON.stringify(apiexpected)}`
+      );
+    }
+  } else {
+    assert(
+      false,
+      'Full value comparison is not supported in this version of validateApiResponse. Use schemaOnly=true.'
+    );
+  }
+});
