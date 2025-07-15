@@ -5,5 +5,187 @@
     "active": ["paused"],
     "suspended": ["paused", "hibernated"],
     "hibernated": ["suspended"]
+  },
+  "expectedFireboltEvents": {
+    "paused": {
+      "active": [
+        {
+          "event": "onPause",
+          "payload": {}
+        }
+      ],
+      "suspended": [
+        {
+          "event": "onResume",
+          "payload": {}
+        }
+      ],
+      "initializing": [
+        {
+          "event": "onStart",
+          "payload": {}
+        }
+      ]
+    },
+    "active": {
+      "paused": [
+        {
+          "event": "onActivate",
+          "payload": {}
+        }
+      ]
+    },
+    "suspended": {
+      "paused": [
+        {
+          "event": "onSuspend",
+          "payload": {}
+        }
+      ],
+      "hibernated": [
+        {
+          "event": "onRestore",
+          "payload": {}
+        }
+      ]
+    },
+    "hibernated": {
+      "suspended": [
+        {
+          "event": "onHibernate",
+          "payload": {}
+        }
+      ]
+    }
+  },
+  "expectedThunderEvents": {
+    "paused": {
+      "active": [
+        {
+          "event": "onAppLifecycleStateChanged",
+          "payload": {
+            "appId": "",
+            "appInstanceId": "",
+            "oldLifecycleState": "ACTIVE",
+            "newLifecycleState": "PAUSED"
+          }
+        },
+        {
+          "event": "onBlur",
+          "payload": {
+            "appInstanceId": ""
+          }
+        },
+        {
+          "event": "onHidden",
+          "payload": {
+            "appInstanceId": ""
+          }
+        }
+      ],
+      "suspended": [
+        {
+          "event": "onAppLifecycleStateChanged",
+          "payload": {
+            "appId": "",
+            "appInstanceId": "",
+            "oldLifecycleState": "SUSPENDED",
+            "newLifecycleState": "PAUSED"
+          }
+        }
+      ],
+
+      "initializing": [
+        {
+          "event": "onAppLifecycleStateChanged",
+          "payload": {
+            "appId": "",
+            "appInstanceId": "",
+            "oldLifecycleState": "",
+            "newLifecycleState": "LOADING"
+          }
+        },
+        {
+          "event": "onAppLifecycleStateChanged",
+          "payload": {
+            "appId": "",
+            "appInstanceId": "",
+            "oldLifecycleState": "LOADING",
+            "newLifecycleState": "INITIALIZING"
+          }
+        },
+        {
+          "event": "onAppLifecycleStateChanged",
+          "payload": {
+            "appId": "",
+            "appInstanceId": "",
+            "oldLifecycleState": "INITIALIZING",
+            "newLifecycleState": "PAUSED"
+          }
+        },
+        {
+          "event": "onStateChanged",
+          "payload": {
+            "appInstanceId": "",
+            "state": "STARTING"
+          }
+        },
+        {
+          "event": "onStateChanged",
+          "payload": {
+            "appInstanceId": "",
+            "state": "RUNNING"
+          }
+        }
+      ]
+    },
+    "active": {
+      "paused": [
+        {
+          "event": "onAppLifecycleStateChanged",
+          "payload": {
+            "appId": "",
+            "appInstanceId": "",
+            "oldLifecycleState": "PAUSED",
+            "newLifecycleState": "ACTIVE"
+          }
+        },
+        {
+          "event": "onReady",
+          "payload": {
+            "appInstanceId": ""
+          }
+        },
+        {
+          "event": "onFocus",
+          "payload": {
+            "appInstanceId": ""
+          }
+        },
+        {
+          "event": "onVisible",
+          "payload": {
+            "appInstanceId": ""
+          }
+        }
+      ]
+    },
+    "suspended": {
+      "paused": [
+        {
+          "event": "onAppLifecycleStateChanged",
+          "payload": {
+            "appId": "",
+            "appInstanceId": "",
+            "oldLifecycleState": "PAUSED",
+            "newLifecycleState": "SUSPENDED"
+          }
+        }
+      ],
+      "hibernated": []
+    },
+    "hibernated": {
+      "suspended": []
+    }
   }
 }

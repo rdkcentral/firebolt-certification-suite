@@ -42,8 +42,134 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
       inactive: 'hidden',
     };
   }
-  setAppState() {
-    // TODO: Implement V1 specific flow for setting app state
+
+  /**
+   * Validates lifecycle response schema.
+   */
+  lifecycleSchemaChecks(response, appId) {
+    try {
+      if (typeof response !== CONSTANTS.OBJECT) {
+        response = JSON.parse(response);
+      }
+
+      const apiSchemaResult = {
+        validationStatus: response[CONSTANTS.SCHEMA_VALIDATION_STATUS],
+        validationResponse: response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE],
+      };
+
+      cy.validationChecksForResponseAndSchemaResult(response, false, apiSchemaResult, false);
+    } catch (err) {
+      cy.log(CONSTANTS.LIFECYCLE_SCHEMA_VALIDATION_FAILED + err.message);
+      assert(false, CONSTANTS.LIFECYCLE_SCHEMA_VALIDATION_FAILED + err.message);
+    }
+  }
+
+  /**
+   * Sets the app and app object lifecycle state and handles all necessary transitions and validations.
+   */
+  setAppState(state, appId) {
+    this.fetchLifecycleHistory(appId);
+
+    const currentAppState = this.getCurrentState() || { state: null };
+    const setAppObjectState = (newState) => this.setAppObjectState(newState);
+
+    const invokeLifecycleAndUpdateStateWithValidation = (api, params = '{}') => {
+      return this.invokeLifecycleApi(appId, api, params).then((response) => {
+        if (response) cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
+        setAppObjectState(state);
+        this.lifecycleSchemaChecks(response, appId);
+      });
+    };
+
+    try {
+      switch (state) {
+        case CONSTANTS.LIFECYCLE_STATES.FOREGROUND:
+          if (currentAppState.state === CONSTANTS.LIFECYCLE_STATES.INITIALIZING) {
+            setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INACTIVE);
+            invokeLifecycleAndUpdateStateWithValidation(CONSTANTS.LIFECYCLE_APIS.READY);
+          } else if (
+            ![
+              CONSTANTS.LIFECYCLE_STATES.INITIALIZING,
+              CONSTANTS.LIFECYCLE_STATES.FOREGROUND,
+            ].includes(currentAppState.state)
+          ) {
+            cy.launchApp((appType = CONSTANTS.CERTIFICATION), appId);
+            setAppObjectState(state);
+          } else {
+            setAppObjectState(state);
+          }
+          break;
+
+        case CONSTANTS.LIFECYCLE_STATES.BACKGROUND:
+          if (
+            ![
+              CONSTANTS.LIFECYCLE_STATES.BACKGROUND,
+              CONSTANTS.LIFECYCLE_STATES.INITIALIZING,
+            ].includes(currentAppState.state)
+          ) {
+            this.setLifecycleState(state, appId).then(() => setAppObjectState(state));
+          }
+          break;
+
+        case CONSTANTS.LIFECYCLE_STATES.INACTIVE:
+          if (currentAppState.state === CONSTANTS.LIFECYCLE_STATES.SUSPENDED) {
+            invokeLifecycleAndUpdateStateWithValidation(CONSTANTS.LIFECYCLE_APIS.UNSUSPEND);
+          } else {
+            if (
+              ![
+                CONSTANTS.LIFECYCLE_STATES.FOREGROUND,
+                CONSTANTS.LIFECYCLE_STATES.BACKGROUND,
+              ].includes(currentAppState.state)
+            ) {
+              cy.setAppState(CONSTANTS.LIFECYCLE_STATES.FOREGROUND, appId);
+            }
+            this.setLifecycleState(state, appId).then(() => setAppObjectState(state));
+          }
+          break;
+
+        case CONSTANTS.LIFECYCLE_STATES.SUSPENDED:
+          if (currentAppState.state !== CONSTANTS.LIFECYCLE_STATES.SUSPENDED) {
+            if (currentAppState.state !== CONSTANTS.LIFECYCLE_STATES.INACTIVE) {
+              cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, appId);
+            }
+            invokeLifecycleAndUpdateStateWithValidation(CONSTANTS.LIFECYCLE_APIS.SUSPEND, {});
+          }
+          break;
+
+        case CONSTANTS.LIFECYCLE_STATES.UNLOADING:
+          if (currentAppState.state !== CONSTANTS.LIFECYCLE_STATES.INACTIVE) {
+            cy.setAppState(CONSTANTS.LIFECYCLE_STATES.INACTIVE, appId);
+          }
+          invokeLifecycleAndUpdateStateWithValidation(CONSTANTS.LIFECYCLE_APIS.CLOSE, {
+            reason: CONSTANTS.ERROR,
+          });
+          break;
+
+        case CONSTANTS.LIFECYCLE_STATES.UNLOADED:
+        case CONSTANTS.LIFECYCLE_STATES.TERMINATED:
+          if (
+            [CONSTANTS.LIFECYCLE_STATES.INITIALIZING, CONSTANTS.NULL].includes(
+              currentAppState.state
+            )
+          ) {
+            cy.setAppState(CONSTANTS.LIFECYCLE_STATES.UNLOADING, appId);
+            this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.FINISHED, {}).then(
+              (response) => {
+                if (response) cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
+                setAppObjectState(state);
+              }
+            );
+          }
+          break;
+
+        default:
+          cy.log(CONSTANTS.INVALID_LIFECYCLE_STATE + state);
+          break;
+      }
+    } catch (err) {
+      cy.log(CONSTANTS.LIFECYCLE_SET_STATE_FAILED + err.message);
+      assert(false, CONSTANTS.LIFECYCLE_SET_STATE_FAILED + err.message);
+    }
   }
 
   // Function to set a new state for the appObject following below rules:
@@ -152,8 +278,7 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
     );
 
     // Send message to 3rd party app to invoke lifecycle history API to get history response
-    cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}').then((response) => {
-      // this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
+    this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
       // Perform a null check on history response and check if response has nested properties result, _history, _value
       response = JSON.parse(response ?? '{}');
       if (
@@ -188,6 +313,22 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
         assert(false, CONSTANTS.INVALID_HISTORY_RESPONSE);
       }
     });
+  }
+
+  // Initializes the app object state
+  setupInitialState() {
+    this.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INITIALIZING);
+  }
+  // performs required intermediate transitions (e.g. to FOREGROUND) before setting the app to the target state.
+  lifecycleSetup(state, appId) {
+    if (
+      state !== CONSTANTS.LIFECYCLE_STATES.UNLOADED &&
+      state !== CONSTANTS.LIFECYCLE_STATES.FOREGROUND &&
+      state !== CONSTANTS.LIFECYCLE_STATES.UNLOADING
+    ) {
+      this.setAppState(CONSTANTS.LIFECYCLE_STATES.FOREGROUND, appId);
+    }
+    return this.setAppState(state, appId);
   }
 }
 

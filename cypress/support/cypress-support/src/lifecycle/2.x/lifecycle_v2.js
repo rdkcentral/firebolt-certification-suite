@@ -5,17 +5,22 @@ const CONSTANTS = require('../../../../constants/constants');
 
 class notificationConfig {
   constructor(message) {
+    this.time = Date.now();
     this.message = message;
+    this.fbEvents = [];
+    this.thunderEvents = [];
   }
 }
 
 class stateConfig {
   constructor(state) {
     this.state = state;
+    this.tStartTime = Date.now();
     this.notification = [];
+    this.visibilityState = stateConfig.visibilityState[state] || '';
   }
 
-  setNotification(currentState, previousState) {
+  setNotification(currentState, previousState, fbEvents, thunderEvents) {
     const allowedStateTransitions = lifecycleConfig.allowedStateTransitions;
     console.log('Allowed State Transitions:', allowedStateTransitions);
     const stateTransition = allowedStateTransitions[previousState];
@@ -25,6 +30,13 @@ class stateConfig {
       const message = { previous: previousState, state: currentState };
       logger.info('Lifecycle appObject transition: ' + JSON.stringify(message));
       const tempNotification = new notificationConfig(message);
+      if (Array.isArray(fbEvents) && fbEvents.length > 0) {
+        tempNotification.fbEvents.push(...fbEvents);
+      }
+
+      if (Array.isArray(thunderEvents) && thunderEvents.length > 0) {
+        tempNotification.thunderEvents.push(...thunderEvents);
+      }
       this.notification.push(tempNotification);
     }
   }
@@ -39,11 +51,90 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
       active: 'visible',
     };
   }
-  setAppState() {
-    // TODO: Implement V2 specific flow for setting app state
+  /**
+   * Sets the app and app object lifecycle state and handles all necessary transitions and validations.
+   */
+  setAppState(state, appId) {
+    this.fetchLifecycleHistory(appId);
+    const currentAppState = this.getCurrentState() || { state: null };
+    const stateTransition = lifecycleConfig.allowedStateTransitions[currentAppState.state] || [];
+
+    try {
+      switch (state) {
+        case CONSTANTS.LIFECYCLE_STATES.PAUSED:
+        case CONSTANTS.LIFECYCLE_STATES.ACTIVE:
+        case CONSTANTS.LIFECYCLE_STATES.SUSPENDED:
+        case CONSTANTS.LIFECYCLE_STATES.INITIALIZING: {
+          if (stateTransition.includes(state) && currentAppState.state !== state) {
+            const fireboltEventMap =
+              lifecycleConfig.expectedFireboltEvents?.[state.toLowerCase()] || {};
+            const thunderEventMap =
+              lifecycleConfig.expectedThunderEvents?.[state.toLowerCase()] || {};
+            const fbEvents = fireboltEventMap?.[currentAppState.state] || [];
+            const thunderEvents = thunderEventMap?.[currentAppState.state] || [];
+            this.setLifecycleState(state, appId).then(() =>
+              this.setAppObjectState(state, fbEvents, thunderEvents)
+            );
+          } else {
+            cy.log(
+              `Requested state transition from ${currentAppState.state} to ${state} is not supported`
+            );
+          }
+          break;
+        }
+
+        case CONSTANTS.LIFECYCLE_STATES.HIBERNATED: {
+          if (currentAppState.state === CONSTANTS.LIFECYCLE_STATES.PAUSED) {
+            const fireboltEventMap =
+              lifecycleConfig.expectedFireboltEvents?.[
+                CONSTANTS.LIFECYCLE_STATES.SUSPENDED.toLowerCase()
+              ] || {};
+            const thunderEventMap =
+              lifecycleConfig.expectedThunderEvents?.[
+                CONSTANTS.LIFECYCLE_STATES.SUSPENDED.toLowerCase()
+              ] || {};
+            const fbEvents = fireboltEventMap?.[currentAppState.state] || [];
+            const thunderEvents = thunderEventMap?.[currentAppState.state] || [];
+            this.setLifecycleState(CONSTANTS.LIFECYCLE_STATES.SUSPENDED, appId)
+              .then(() =>
+                this.setAppObjectState(
+                  CONSTANTS.LIFECYCLE_STATES.SUSPENDED,
+                  fbEvents,
+                  thunderEvents
+                )
+              )
+              .then(() => this.setAppState(CONSTANTS.LIFECYCLE_STATES.HIBERNATED, appId));
+          } else if (stateTransition.includes(state) && currentAppState.state !== state) {
+            const fireboltEventMap =
+              lifecycleConfig.expectedFireboltEvents?.[state.toLowerCase()] || {};
+            const thunderEventMap =
+              lifecycleConfig.expectedThunderEvents?.[state.toLowerCase()] || {};
+            const fbEvents = fireboltEventMap?.[currentAppState.state] || [];
+            const thunderEvents = thunderEventMap?.[currentAppState.state] || [];
+            this.setLifecycleState(state, appId).then(() =>
+              this.setAppObjectState(state, fbEvents, thunderEvents)
+            );
+          } else {
+            cy.log(
+              `Requested state transition from ${currentAppState.state} to ${state} is not supported`
+            );
+          }
+          break;
+        }
+        case CONSTANTS.LIFECYCLE_STATES.UNLOADED:
+          // TBD
+          break;
+        default:
+          cy.log(CONSTANTS.INVALID_LIFECYCLE_STATE + state);
+          break;
+      }
+    } catch (err) {
+      cy.log(CONSTANTS.LIFECYCLE_SET_STATE_FAILED + err.message);
+      assert(false, CONSTANTS.LIFECYCLE_SET_STATE_FAILED + err.message);
+    }
   }
 
-  setAppObjectState(newState) {
+  setAppObjectState(newState, fbEvents, thunderEvents) {
     const currentState = this.state;
     this.state = new stateConfig(newState);
     this.visibilityState = this.visibilityStates[newState];
@@ -81,8 +172,20 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
 
     // If app object history is not empty, set notification object using current and new states
     if (this.history.length > 1) {
-      this.state.setNotification(newState, currentState.state);
+      this.state.setNotification(newState, currentState.state, fbEvents, thunderEvents);
     }
+  }
+  // Initializes the app object state
+  setupInitialState() {
+    this.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.INITIALIZING);
+    this.setAppObjectState(CONSTANTS.LIFECYCLE_STATES.PAUSED);
+  }
+  // performs required intermediate transitions (e.g. to ACTIVE) before setting the app to the target state.
+  lifecycleSetup(state, appId) {
+    if (state !== CONSTANTS.LIFECYCLE_STATES.ACTIVE) {
+      this.setAppState(CONSTANTS.LIFECYCLE_STATES.ACTIVE, appId);
+    }
+    return this.setAppState(state, appId);
   }
 
   validateState(appId) {
