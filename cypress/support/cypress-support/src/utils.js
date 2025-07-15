@@ -906,7 +906,12 @@ function parseValue(str) {
 
     // If the string contains comma, split it into an array
     if (str.includes(',')) {
-      return str.split(',');
+      const strArray = str.split(',');
+      // Check if all elements in the array are numbers
+      if (strArray.every(item => !isNaN(item))) {
+        return strArray.map(Number); // Convert array of strings to array of numbers
+      }
+      return strArray; // Return the array of strings as is
     }
   }
 
