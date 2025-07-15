@@ -392,6 +392,7 @@ module.exports = {
     SENDVOICECOMMAND: 'fcs.sendVoiceCommand',
     SETLIFECYCLESTATEV1: 'fcsV1.setLifecycleState',
     SETLIFECYCLESTATEV2: 'fcsV2.setLifecycleState',
+    FINDLOGPATTERN: 'fcs.findLogPattern',
     VALIDATELIFECYCLEFIREBOLTLOGS: 'fcs.validateLifecycleFireboltLogs',
     THUNDEREVENTHANDLER: 'fcs.thunderEventHandler'
   },
