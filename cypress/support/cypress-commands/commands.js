@@ -1431,7 +1431,7 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
  */
 Cypress.Commands.add('methodOrEventResponseValidation', (validationType, requestData) => {
   // To check whether the method/event validation should be performed or not based on the include/exclude valiodation object
-  if (!shouldPerformValidation('transactionTypes', validationType)) return;
+  if (!UTILS.shouldPerformValidation('transactionTypes', validationType)) return;
   const { context, expectingError, appId, eventExpected, isNullCase } = requestData;
   const method = requestData?.event ? requestData.event : requestData.method;
   const contentObject = requestData.content ? requestData.content : requestData.contentObject;
@@ -1442,8 +1442,8 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
     const scenario = object.type;
     const tags = object.tags;
     // To check whether the validation should be performed or not based on the include/exclude valiodation object
-    if (!shouldPerformValidation('validationTypes', scenario)) return;
-    if (!shouldPerformValidation('validationTags', tags)) return;
+    if (!UTILS.shouldPerformValidation('validationTypes', scenario)) return;
+    if (!UTILS.shouldPerformValidation('validationTags', tags)) return;
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
 
     // cy.then() to ensure each Cypress command is properly awaited before return
@@ -1970,56 +1970,6 @@ Cypress.Commands.add('clearSoftAssertArray', () => {
   jsonAssertion.softAssertJson = null;
   jsonAssertion.softAssertCount = 0;
 });
-
-/**
- * @module commands
- * @function shouldPerformValidation
- * @description Determines whether validation should be performed for a given key-value pair based on include and exclude validation.
- * - If 'value' is 'undefined' or 'null', validation is performed ('true').
- * - If 'excludeValidations[key]' contains 'value', validation is skipped ('false').
- * - If 'includeValidations[key]' is an empty array ('[]'), validation is skipped ('false').
- * - If 'includeValidations[key]' exists and does not contain 'value', validation is skipped ('false').
- * - Otherwise, validation is performed ('true').
- * @param {string} key - The key representing the type of validation.
- * @param {any} value - The value to validate.
- * @returns {boolean} 'true' if validation should proceed, 'false' for validation to skip.
- */
-
-const shouldPerformValidation = (key, value) => {
-  const parseJSON = (data) => {
-    if (typeof data === 'string') {
-      try {
-        return JSON.parse(data);
-      } catch (error) {
-        console.log(`Failed to parse JSON: ${error.message}`);
-        return {}; // Return an empty object if parsing fails
-      }
-    }
-    return data || {}; // Ensure it's an object or fallback to empty
-  };
-  // excludeValidations or includeValidations is not defined in the environment, assign {} to continue normal validations.
-  const excludeValidations = parseJSON(UTILS.getEnvVariable(CONSTANTS.EXCLUDE_VALIDATIONS, false));
-  const includeValidations = parseJSON(UTILS.getEnvVariable(CONSTANTS.INCLUDE_VALIDATIONS, false));
-
-  // Allow normal validation if value is null, undefined, or an empty string
-  if (value == null || value === '') {
-    return true;
-  }
-
-  // If excludeValidations contains key and value, skip validation
-  if (Array.isArray(excludeValidations[key]) && excludeValidations[key].includes(value)) {
-    fireLog.info(`Skipping validation: ${value} as it is in excludeValidations under ${key}`);
-    return false;
-  }
-
-  // If includeValidations exists for the key but does NOT include the value, skip validation
-  if (Array.isArray(includeValidations[key]) && !includeValidations[key].includes(value)) {
-    fireLog.info(`Skipping validation: ${value} as it is NOT in includeValidations under ${key}`);
-    return false;
-  }
-
-  return true;
-};
 
 /**
  * @module commands

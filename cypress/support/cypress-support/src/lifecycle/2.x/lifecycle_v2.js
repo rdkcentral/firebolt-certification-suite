@@ -2,6 +2,7 @@ const lifecycleConfig = require('./lifecycleConfig.json');
 const { LifeCycleAppConfigBase } = require('../LifeCycleAppConfigBase');
 const logger = require('../../../../Logger')('lifecycle_v2.js');
 const CONSTANTS = require('../../../../constants/constants');
+const UTILS = require('../../../src/utils');
 
 class notificationConfig {
   constructor(message) {
@@ -190,27 +191,32 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
 
  // Validate lifecycle firebolt and thunder events
 validateEvents(state, appId, isEventsExpected) {
-  Cypress.env(CONSTANTS.IS_EVENTS_EXPECTED, isEventsExpected)
-  const requestMaps = [
-    {
-      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.VALIDATELIFECYCLEFIREBOLTLOGS,
-      params: {
-        appId: appId,
-        state: state
-      },
+  Cypress.env(CONSTANTS.IS_EVENTS_EXPECTED, isEventsExpected);
+
+  const requestMaps = [];
+
+  requestMaps.push({
+    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.VALIDATELIFECYCLEFIREBOLTLOGS,
+    params: {
+      appId: appId,
+      state: state
     },
-    {
+  });
+
+  // Conditionally exclude the thunder event validation based on validation filtering
+  if (UTILS.shouldPerformValidation('validationTypes', 'excludeThunderValidation')) {
+    requestMaps.push({
       method: CONSTANTS.REQUEST_OVERRIDE_CALLS.THUNDEREVENTHANDLER,
       params: {},
       task: CONSTANTS.TASK.THUNDEREVENTHANDLER,
-    },
-  ];
+    });
+  }
 
   let chain = Promise.resolve();
 
   requestMaps.forEach((requestMap) => {
     chain = chain.then(() => {
-      return cy.sendMessagetoPlatforms(requestMap)
+      return cy.sendMessagetoPlatforms(requestMap);
     });
   });
 
