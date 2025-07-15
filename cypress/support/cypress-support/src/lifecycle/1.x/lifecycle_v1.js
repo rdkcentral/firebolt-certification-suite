@@ -231,8 +231,7 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
 
     if (lifecycleStateRequirementId && lifecycleStateRequirementId.state) {
       // Send message to 3rd party app to invoke lifecycle API to get state response
-      cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
-        // this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
+      this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
         try {
           const result = response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE].instance ?? null;
           if (result == null) {

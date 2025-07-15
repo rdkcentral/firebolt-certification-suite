@@ -227,8 +227,7 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     );
 
     // Send message to 3rd party app to invoke lifecycle history API to get history response
-    cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}').then((response) => {
-      // this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
+    this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
       // Perform a null check on history response and check if response has nested properties result, _history, _value
       response = JSON.parse(response ?? '{}');
       if (
