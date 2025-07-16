@@ -190,33 +190,14 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
 
  // Validate lifecycle firebolt and thunder events
 validateEvents(state, appId, isEventsExpected) {
-  Cypress.env(CONSTANTS.IS_EVENTS_EXPECTED, isEventsExpected)
-  const requestMaps = [
-    {
-      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.VALIDATELIFECYCLEFIREBOLTLOGS,
-      params: {
-        appId: appId,
-        state: state
-      },
-    },
-    {
-      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.THUNDEREVENTHANDLER,
-      params: {},
-      task: CONSTANTS.TASK.THUNDEREVENTHANDLER,
-    },
-  ];
+  Cypress.env(CONSTANTS.IS_EVENTS_EXPECTED, isEventsExpected);
 
-  let chain = Promise.resolve();
-
-  requestMaps.forEach((requestMap) => {
-    chain = chain.then(() => {
-      return cy.sendMessagetoPlatforms(requestMap)
-    });
-  });
-
-  return chain.catch((error) => {
-    fireLog.fail(`Received following error in lifecycle event validation: ${error.message}`);
-    throw error;
+  return cy.callConfigModule('lifecycleFireboltLogsValidation', [appId, state]).then((firstResult) => {
+      return cy.callConfigModule('thundeEventValidation', [CONSTANTS.REQUEST_OVERRIDE_CALLS.THUNDEREVENTHANDLER, {appId: appId}, CONSTANTS.TASK.THUNDEREVENTHANDLER])
+        .then((secondResult) => {
+          logger.info('Lifecycle event validation completed');
+          return { firstResult, secondResult };
+        })
   });
 }
 }
