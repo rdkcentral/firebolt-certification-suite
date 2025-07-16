@@ -798,8 +798,12 @@ class FireLog extends Function {
   }
 
   // Method to log a message without any assertion
-  log(message) {
-    return cy.log(message);
+  log(message, failureCode = 0) {
+    if (failureCode > 0) {
+      return cy.task('setExitCode', failureCode).then((result) => {
+        cy.log(message);
+      });
+    } else return cy.log(message);
   }
 
   isNull(value, message) {
@@ -871,11 +875,7 @@ class FireLog extends Function {
     });
   }
 
-  info(message, failureCode = 0) {
-    if (failureCode > 0) {
-      cy.task('setExitCode', failureCode);
-    }
-  }
+  info(message) {}
 
   error(message) {
     throw new Error(message);

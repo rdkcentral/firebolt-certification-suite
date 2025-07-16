@@ -57,7 +57,7 @@ export default function (module) {
       if (result) {
         fireLog.info('Successfully established a pub/sub connection.');
       } else {
-        fireLog.info(
+        fireLog.log(
           'Unable to establish a pub/sub connection.',
           CONSTANTS.FCS_EXIT_CODE.CRITICAL_FAILURE
         );
