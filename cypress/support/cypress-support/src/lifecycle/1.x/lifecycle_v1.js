@@ -36,11 +36,6 @@ class stateConfig {
 class lifecycle_v1 extends LifeCycleAppConfigBase {
   constructor() {
     super();
-    this.visibilityStates = {
-      foreground: 'visible',
-      background: 'visible',
-      inactive: 'hidden',
-    };
   }
 
   /**
@@ -180,7 +175,7 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
   setAppObjectState(newState) {
     const currentState = this.state;
     this.state = new stateConfig(newState);
-    this.visibilityState = this.visibilityStates[newState];
+    this.visibilityState = Cypress.env(CONSTANTS.VISIBILITYSTATE)[newState];
     const stateTransition = lifecycleConfig.allowedStateTransitions[currentState.state];
 
     // If newState is initializing and app object history is empty, the state is not pushed to history

@@ -1,6 +1,6 @@
 const CONSTANTS = require('../../../constants/constants');
 const UTILS = require('../utils');
-class LifeCycleAppConfigBase {
+export class LifeCycleAppConfigBase {
   constructor() {
     this.state = {};
     this.history = [];
@@ -201,4 +201,3 @@ class LifeCycleAppConfigBase {
     });
   }
 }
-module.exports = LifeCycleAppConfigBase;
