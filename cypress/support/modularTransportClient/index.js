@@ -20,35 +20,15 @@ const externalTransport = require('configModule').externalTransport;
 
 export default async (transportClient, options) => {
   const createAndInitializeObject = async (transportType) => {
-    if (!process.env.transportObject) {
-      const object = new transportType[transportClient].default(options);
-      await object.initialize();
-      const transportObjectArray = [object];
-      process.env.transportObject = transportObjectArray;
-      return process.env.transportObject[0];
-    } else {
-      const transportObjectArray = process.env.transportObject;
-
-      const existingObjectIndex = transportObjectArray.findIndex(
-        (obj) => Object.getPrototypeOf(obj).constructor.name === transportClient
-      );
-      // Check if the transportObjectArray already contains incoming transportClient object based on the options
-
-      if (existingObjectIndex !== -1) {
-        // Set new options
-        if (process.env.transportObject[existingObjectIndex].updateOptions) {
-          process.env.transportObject[existingObjectIndex].updateOptions(options);
-        }
-        return process.env.transportObject[existingObjectIndex];
-      } else {
-        // Create the object and push it to process.env.transportObject array
-        const object = new transportType[transportClient].default(options);
-        await object.initialize();
-        transportObjectArray.push(object);
-        process.env.transportObject = transportObjectArray;
-
-        return process.env.transportObject[process.env.transportObject.length - 1];
-      }
+    try {
+      const transportClass = transportType[transportClient].default;
+      const instance = transportClass.getInstance(options); // singleton getter
+      await instance.updateOptions(options); //  To override the options set by appTransport
+      await instance.initialize();
+      return instance;
+    } catch (error) {
+      console.error('Error in createAndInitializeObject:', error);
+      throw error;
     }
   };
 

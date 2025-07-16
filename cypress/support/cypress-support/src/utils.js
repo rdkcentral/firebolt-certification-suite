@@ -561,23 +561,24 @@ function getSetupDetails() {
  */
 function pubSubClientCreation(appTransport) {
   return new Promise(async (resolve, reject) => {
-    if (!clientCreated && appTransport.init) {
+    if (!clientCreated) {
       try {
         const responseTopic = getTopic(null, CONSTANTS.SUBSCRIBE);
 
         // Initialize required client
-        await appTransport.init();
+        const instance = appTransport.getInstance();
+        await instance.initialize();
 
         if (
           responseTopic != undefined &&
           !getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).includes(responseTopic)
         ) {
           // Subscribe to topic and pass the results to the callback function
-          appTransport.subscribe(responseTopic, subscribeResults);
+          instance.subscribe(responseTopic, subscribeResults);
           getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST).push(responseTopic);
         }
         clientCreated = true;
-        resolve(true);
+        resolve(instance);
       } catch (error) {
         if (getEnvVariable(CONSTANTS.FAIL_ON_PUBSUB_CONNECTION_ERROR, false)) {
           // If an error occurs, reject the promise with the error
