@@ -1449,9 +1449,11 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
   const handleValidation = (object, methodOrEventObject, methodOrEventResponse = null) => {
     const scenario = object.type;
     const tags = object.tags;
+    const assertionDef = object.assertionDef;
     // To check whether the validation should be performed or not based on the include/exclude valiodation object
     if (!shouldPerformValidation('validationTypes', scenario)) return;
     if (!shouldPerformValidation('validationTags', tags)) return;
+    if (!shouldPerformValidation('customAssertionDefs', assertionDef)) return;
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
 
     // cy.then() to ensure each Cypress command is properly awaited before return
