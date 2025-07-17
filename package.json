@@ -57,7 +57,6 @@
     "uuid": "^8.3.1",
     "soft-assert": "^0.2.7",
     "fireLog": "file:./cypress/support/cypress-support/src/fireLog"
-    "soft-assert": "^0.2.7"
   },
   "devDependencies": {
     "babel-jest": "^27.4.5",
