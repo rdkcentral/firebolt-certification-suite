@@ -17,7 +17,6 @@
  */
 const CONSTANTS = require('../../constants/constants');
 const UTILS = require('./utils.js');
-const logger = require('../../Logger')('queue.js');
 const timestamp = new Date();
 
 export default class Queue {
@@ -32,7 +31,7 @@ export default class Queue {
     if (this.items.length >= CONSTANTS.MESSAGE_QUEUE_SIZE) {
       this.dequeue();
     }
-    logger.info(JSON.stringify(element) + 'pushed to the queue at' + timestamp.toDateString());
+    fireLog.info(JSON.stringify(element) + 'pushed to the queue at' + timestamp.toDateString());
     element.time = Math.round(timestamp.getTime() / 1000);
     return this.items.push(element);
   }
@@ -40,7 +39,7 @@ export default class Queue {
   // Pops the items from queue based on given conditions
   dequeue() {
     if (this.items.length > 0) {
-      logger.info(
+      fireLog.info(
         this.items[this.items.length - 1] + 'popped from the queue at' + timestamp.toDateString()
       );
       return this.items.shift();
