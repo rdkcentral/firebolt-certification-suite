@@ -46,7 +46,7 @@ export default function (module) {
 
   // before All
   before(() => {
-    fireLog.debug('Entering before() - cypress-support/src/main.js');
+    console.debug('Entering before() - cypress-support/src/main.js');
 
     // Added below custom commands to clear cache and to reload browser
     cy.clearCache();
@@ -223,7 +223,7 @@ export default function (module) {
           Cypress.env('webSocketClient', null); // Clear the WebSocket client from Cypress environment
         }
       } catch (err) {
-        fireLog.error(`Something went wrong when attempting to unsubscribe: ${err}`);
+        console.error(`Something went wrong when attempting to unsubscribe: ${err}`);
       }
     })();
   });
@@ -586,8 +586,7 @@ export default function (module) {
       }
     } else {
       fireLog.info(
-        'CONSTANTS.GENERATE_HTML_REPORT should be set to true in order to generate html report',
-        'generateAndPushReports'
+        'CONSTANTS.GENERATE_HTML_REPORT should be set to true in order to generate html report'
       );
     }
   });

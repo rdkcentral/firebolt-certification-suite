@@ -61,9 +61,8 @@ async function generateLocalReport(reportObj, jobId) {
 
     await mochawesomeReportGenerator.create(reportData, options);
 
-    fireLog.info(
-      `A local report has been generated and can be accessed at ./reports/${jobId}/mochawesome/mochawesome-report.html`,
-      `generateLocalReport`
+    console.log(
+      `A local report has been generated and can be accessed at ./reports/${jobId}/mochawesome/mochawesome-report.html`
     );
   }
 
@@ -94,9 +93,8 @@ async function generateLocalReport(reportObj, jobId) {
     if (customReportData.customMetadata)
       await processFeaturesFiles(featuresDir, customReportData.customMetadata, 'customMetadata');
 
-    fireLog.info(
-      `A local report has been generated and can be accessed at ./reports/${jobId}/cucumber-html-report/index.html`,
-      `generateLocalReport`
+    console.log(
+      `A local report has been generated and can be accessed at ./reports/${jobId}/cucumber-html-report/index.html`
     );
   }
 }
@@ -174,10 +172,7 @@ function removeTagsFromCukeHtml(htmlReportPath) {
     // Write the modified HTML content back to a file
     fs.writeFileSync(htmlReportPath, modifiedHtml, 'utf8');
   } else {
-    fireLog.error(
-      `Table with id "features-table" not found in the HTML.`,
-      `removeTagsFromCukeHtml`
-    );
+    console.error(`Table with id "features-table" not found in the HTML.`);
   }
 }
 
