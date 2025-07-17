@@ -155,7 +155,7 @@ class decodeValidations {
             if (resultSet == false) {
               throw new Error(`RegEx Validation failed for ${param} value`);
             } else {
-              fireLog.info(`RegEx Validation passed for ${param} value`);
+              fireLog.info(`RegEx Validation passed for ${param} value`, 'report');
             }
           });
         } else {
@@ -178,7 +178,7 @@ class decodeValidations {
             if (resultSet == false) {
               throw new Error(`RegEx Validation failed for ${param} value`);
             } else {
-              fireLog.info(`RegEx Validation passed for ${param} value`);
+              fireLog.info(`RegEx Validation passed for ${param} value`, 'report');
             }
           });
         } else {

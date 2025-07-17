@@ -97,7 +97,8 @@ function validateDeviceVersion(method, validationTypeObject, apiOrEventObject) {
         '.' +
         response.api.minor +
         '.' +
-        response.api.patch
+        response.api.patch,
+      'report'
     );
   } else {
     // Validating the current response against the default value.
@@ -115,7 +116,8 @@ function validateDeviceVersion(method, validationTypeObject, apiOrEventObject) {
         '.' +
         response.api.minor +
         '.' +
-        response.api.patch
+        response.api.patch,
+      'report'
     );
   }
 }
