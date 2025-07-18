@@ -23,6 +23,7 @@ const { JSDOM } = require('jsdom');
 const mochawesomeReportGenerator = require('mochawesome-report-generator');
 const cucumberReportGenerator = require('multiple-cucumber-html-reporter');
 const reportEnv = require('../../reportEnv.json');
+const fireLog = require('fireLog');
 
 const rename = util.promisify(fs.rename);
 const readdir = util.promisify(fs.readdir);
@@ -172,7 +173,7 @@ function removeTagsFromCukeHtml(htmlReportPath) {
     // Write the modified HTML content back to a file
     fs.writeFileSync(htmlReportPath, modifiedHtml, 'utf8');
   } else {
-    console.error(`Table with id "features-table" not found in the HTML.`);
+    fireLog.info(`Table with id "features-table" not found in the HTML.`);
   }
 }
 
@@ -211,7 +212,7 @@ async function processFeaturesFiles(reportDir, customData, customFlag) {
       }
     }
   } catch (err) {
-    console.error('Error reading report directory:', err);
+    fireLog.info('Error reading report directory:', err);
   }
 }
 
