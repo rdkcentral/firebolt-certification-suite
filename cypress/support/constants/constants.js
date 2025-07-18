@@ -570,6 +570,7 @@ module.exports = {
     SUCCESS: 0,
     FAILURE: 1,
   },
+  LIFECYCLE_EVENT_VALIDATION: 'LIFECYCLE_EVENT_VALIDATION',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
