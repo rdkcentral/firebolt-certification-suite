@@ -34,6 +34,7 @@ const internalV2FireboltCallsData = require('../../../fixtures/fireboltCalls/ind
 const externalV2FireboltCallsData = require('../../../fixtures/external/fireboltCalls/index');
 const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/index');
 const externalV2FireboltMockData = require('../../../fixtures/external/fireboltCalls/index');
+const fireLog = require('fireLog');
 
 export default function (module) {
   const config = new Config(module);
@@ -46,7 +47,7 @@ export default function (module) {
 
   // before All
   before(() => {
-    console.debug('Entering before() - cypress-support/src/main.js');
+    fireLog.info('Entering before() - cypress-support/src/main.js');
 
     // Added below custom commands to clear cache and to reload browser
     cy.clearCache();
@@ -223,7 +224,7 @@ export default function (module) {
           Cypress.env('webSocketClient', null); // Clear the WebSocket client from Cypress environment
         }
       } catch (err) {
-        console.error(`Something went wrong when attempting to unsubscribe: ${err}`);
+        fireLog.info(`Something went wrong when attempting to unsubscribe: ${err}`);
       }
     })();
   });
@@ -436,7 +437,7 @@ export default function (module) {
           try {
             response = JSON.parse(response);
           } catch (error) {
-            fireLog.error('Failed to parse JSON response. Response: ' + JSON.stringify(response));
+            fireLog.info('Failed to parse JSON response. Response: ' + JSON.stringify(response));
             fireLog.assert(
               false,
               'Failed to parse JSON response from Firebolt implementation. Please check the response format.'
@@ -605,12 +606,12 @@ export default function (module) {
   Cypress.Commands.add(
     'callConfigModule',
     (methodName, params = [], moduleName = 'additionalServices') => {
-      console.log(`Calling "${methodName}" from configModule.${moduleName} with params:`, params);
+      fireLog.info(`Calling "${methodName}" from configModule.${moduleName} with params:`, params);
 
       return cy.then(() => {
         const configFunction = module?.[moduleName]?.[methodName];
         if (typeof configFunction !== 'function') {
-          console.log(`${moduleName}.${methodName} not found in the config module.`);
+          fireLog.info(`${moduleName}.${methodName} not found in the config module.`);
           return null;
         }
         return configFunction(...params);
