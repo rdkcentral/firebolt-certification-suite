@@ -189,24 +189,20 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     return this.setAppState(state, appId);
   }
 
- // Validate lifecycle firebolt and thunder events
-validateEvents(state, appId, isEventsExpected) {
+// Validate lifecycle firebolt and thunder events
+validateEvents(isEventsExpected) {
   Cypress.env(CONSTANTS.IS_EVENTS_EXPECTED, isEventsExpected);
-
-  return cy.callConfigModule('lifecycleFireboltLogsValidation', [appId, state]).then((firstResult) => {
-    if (UTILS.shouldPerformValidation('validationTypes', 'excludeThunderEventValidation')) {
-      return cy.callConfigModule('thundeEventValidation', [CONSTANTS.TASK.THUNDEREVENTHANDLER])
-        .then((secondResult) => {
-          logger.info('Lifecycle firebolt and thunder event validation completed');
-          return { firstResult, secondResult };
+      cy.getFireboltData(CONSTANTS.LIFECYCLE_EVENT_VALIDATION).then((fireboltData) => {
+        const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+        const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+        // selective validation for custom validation already handled inside methodOrEventResponseValidation as part of SYSTEST-10137
+        cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
+          cy.softAssertAll();
         });
-    } else {
-      logger.info('Lifecycle firebolt event validation completed');
-      return { firstResult };
-    }
-  });
+      });
 }
 
+// Validate lifecycle state
 validateState(appId) {
   const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
   const lifecycleStateRequirementId = scenarioRequirement.find((req) =>
@@ -222,7 +218,7 @@ validateState(appId) {
     },
   ];
 
-  if (UTILS.shouldPerformValidation('validationTypes', 'excludeThunderStateValidation')) {
+  if (UTILS.shouldPerformValidation('validationTypes', 'thunderStateValidation')) {
     requestMaps.push({
       method: CONSTANTS.REQUEST_OVERRIDE_CALLS.THUNDEREVENTHANDLER,
       params: {},
