@@ -187,4 +187,17 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     }
     return this.setAppState(state, appId);
   }
+
+ // Validate lifecycle firebolt and thunder events
+validateEvents(isEventsExpected) {
+  Cypress.env(CONSTANTS.IS_EVENTS_EXPECTED, isEventsExpected);
+      cy.getFireboltData(CONSTANTS.LIFECYCLE_EVENT_VALIDATION).then((fireboltData) => {
+        const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+        const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+        cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
+          cy.softAssertAll();
+        });
+      });
 }
+}
+
