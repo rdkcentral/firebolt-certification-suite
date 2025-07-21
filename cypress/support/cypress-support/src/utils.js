@@ -811,20 +811,27 @@ class FireLog extends Function {
       ) => {
         const prefix = `[${level}]`;
         const fullMessage = `${prefix} ${message}`;
-        if (level === 'error') throw new Error(fullMessage);
+
+        if (level === 'error') {
+          throw new Error(fullMessage);
+        }
+
+        let cypressLogPromise = null;
+
         // Check if logOutputLocation is 'report' and log using cy.log based on loggerLevel
-        if (logOutputLocation === 'report') {
-          if (levelPriority[level] <= levelPriority[currentLevel]) {
-            cy.log(fullMessage);
-          }
+        if (logOutputLocation === 'report' && levelPriority[level] <= levelPriority[currentLevel]) {
+          cypressLogPromise = cy.log(fullMessage);
         }
 
         // Check if logOutputLocation is 'console' and log using console based on consoleLoggerLevel
-        if (logOutputLocation === 'console') {
-          if (levelPriority[level] <= levelPriority[consoleLoggerLevel]) {
-            console[level === 'debug' ? 'log' : level](fullMessage);
-          }
+        if (
+          logOutputLocation === 'console' &&
+          levelPriority[level] <= levelPriority[consoleLoggerLevel]
+        ) {
+          console[level === 'debug' ? 'log' : level](fullMessage);
         }
+
+        return cypressLogPromise || Promise.resolve();
       };
     });
 
