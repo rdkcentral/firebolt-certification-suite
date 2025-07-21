@@ -1,3 +1,10 @@
+# [1.14.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.1...v1.14.0-dev.2) (2025-07-21)
+
+
+### Features
+
+* Added support for custom validation filter ([#461](https://github.com/rdkcentral/firebolt-certification-suite/issues/461)) ([84b875c](https://github.com/rdkcentral/firebolt-certification-suite/commit/84b875cf2fda01a1bfd86acbe1b662b74cbb3b4a))
+
 # [1.14.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0...v1.14.0-dev.1) (2025-07-14)
 
 
