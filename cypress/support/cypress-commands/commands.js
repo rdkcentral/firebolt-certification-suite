@@ -1202,7 +1202,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         cy.getCapabilities();
         cy.updateRunInfo();
       } else if (result && result.error) {
-        fireLog.fail(`App launch failed for ${result.error.message}. Please check the app configuration`);
+        fireLog.fail(`App launch failed: ${result.error.message}`);
       }
     });
   });
