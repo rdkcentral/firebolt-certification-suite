@@ -381,14 +381,7 @@ module.exports = async (on, config) => {
           }
         }
       }
-
-      if (!maxExitCode) {
-        process.exitCode = results.totalFailed
-          ? CONSTANTS.FCS_EXIT_CODE.GENERAL_FAILURE
-          : CONSTANTS.FCS_EXIT_CODE.SUCCESS;
-      } else {
-        process.exitCode = maxExitCode;
-      }
+      process.exitCode = maxExitCode;
     } catch (err) {
       console.error('Error occurred in after:run hook:' + err);
       process.exitCode = CONSTANTS.FCS_EXIT_CODE.FAILURE;

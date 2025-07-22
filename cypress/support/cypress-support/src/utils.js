@@ -756,7 +756,8 @@ class FireLog extends Function {
           // If the method has its own logging, just apply it
           return Reflect.apply(target, thisArg, argumentsList);
         } else {
-          if (argumentsList.length > 3)
+          if (methodName.includes('log')) message = argumentsList[0];
+          else if (argumentsList.length > 3)
             message =
               'Expected: ' +
               JSON.stringify(argumentsList[0]) +
@@ -843,8 +844,12 @@ class FireLog extends Function {
   }
 
   // Method to log a message without any assertion
-  log(message) {
-    return cy.log(message);
+  log(message, failureCode = 0) {
+    if (failureCode > 0) {
+      return cy.task('setExitCode', failureCode).then((result) => {
+        cy.log(message);
+      });
+    } else return cy.log(message);
   }
 
   isNull(value, message) {

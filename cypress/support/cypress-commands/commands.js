@@ -1197,6 +1197,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
           // checking whether valid healthCheck response is received
           // if not received, throwing error with corresponding topic and retry count.
           if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
+            cy.task('setExitCode', CONSTANTS.FCS_EXIT_CODE.CRITICAL_FAILURE);
             throw Error(
               `Unable to get healthCheck response from App in ${getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES)} retries. Failed to launch the 3rd party app on ${deviceIdentifier || getEnvVariable(CONSTANTS.DEVICE_MAC)} or not subscribed to
             ${requestTopic} topic.`
