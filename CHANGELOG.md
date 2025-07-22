@@ -1,3 +1,10 @@
+# [1.14.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.2...v1.14.0-dev.3) (2025-07-22)
+
+
+### Features
+
+* Implement logging type ([#452](https://github.com/rdkcentral/firebolt-certification-suite/issues/452)) ([81d0880](https://github.com/rdkcentral/firebolt-certification-suite/commit/81d08805e3f8accce2f673ba9e0d76b71ed04de9))
+
 # [1.14.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.1...v1.14.0-dev.2) (2025-07-21)
 
 
