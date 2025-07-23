@@ -331,6 +331,25 @@ module.exports = async (on, config) => {
               await addCustomMetaData(outputFile, metaDataArr);
               // Reading data from mochawesome or cucumber json file as a buffer
               jsonReport = readDataFromFile(filePath + fileName);
+              // to remove the wait time step from html report
+              const bufferString = jsonReport.toString();
+              const parsedJson = JSON.parse(bufferString);
+              parsedJson.forEach((obj) => {
+                obj.elements = obj.elements.map((element) => {
+                  const filteredSteps = [];
+                  element.steps.forEach((step, index) => {
+                    if (/^Test runner waits for/.test(step.name)) {
+                      console.log(`Removing step ${index} from html report:`, step.name);
+                    } else {
+                      filteredSteps.push(step);
+                    }
+                  });
+                  element.steps = filteredSteps;
+                  return element;
+                });
+              });
+              const updatedJsonReport = JSON.stringify(parsedJson, null, 2);
+              jsonReport = Buffer.from(updatedJsonReport);
             }
             const reportProperties = {};
             const tempReportEnv = path.resolve(__dirname, tempReportEnvJson);
