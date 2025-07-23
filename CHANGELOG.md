@@ -1,3 +1,11 @@
+# [1.14.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.3...v1.14.0-dev.4) (2025-07-23)
+
+
+### Features
+
+* Hide wait step from html report ([#437](https://github.com/rdkcentral/firebolt-certification-suite/issues/437)) ([9f590db](https://github.com/rdkcentral/firebolt-certification-suite/commit/9f590dbdcddb694a526d7bd5f81c5eca59c1a9fe))
+* Tag All PubSub errors with exitCode '2' ([#458](https://github.com/rdkcentral/firebolt-certification-suite/issues/458)) ([f7492df](https://github.com/rdkcentral/firebolt-certification-suite/commit/f7492df53f9fdf1dd9d6aeb848b6a0366db41968))
+
 # [1.14.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.2...v1.14.0-dev.3) (2025-07-22)
 
 
