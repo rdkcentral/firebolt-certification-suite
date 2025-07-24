@@ -6,7 +6,7 @@ try {
   try {
     CONSTANTS = require('../../../constants/constants.js');
   } catch (err2) {
-    console.log('Unable to load CONSTANTS')
+    console.log('Unable to load CONSTANTS');
   }
 }
 
@@ -49,14 +49,13 @@ class FireLog extends Function {
     let currentLevel;
     let consoleLevel;
 
-    if (typeof getEnvVariable === 'function'){
+    if (typeof getEnvVariable === 'function') {
       currentLevel = getEnvVariable(CONSTANTS.LOGGER_LEVEL, false); // log level to display
       consoleLevel = getEnvVariable(CONSTANTS.CONSOLE_LOGGER_LEVEL, false);
-    }
-    else{
-        // TODO: Make an arrangement to set this log level from command line env variable
-        currentLevel =  'info'; // log level to display
-        consoleLevel = 'info';    
+    } else {
+      // TODO: Make an arrangement to set this log level from command line env variable
+      currentLevel = 'info'; // log level to display
+      consoleLevel = 'info';
     }
 
     if (!consoleLevel) consoleLevel = currentLevel;
@@ -156,7 +155,6 @@ class FireLog extends Function {
 
   // Method to log a message without any assertion
   log(message) {
-    console.log('fireLog log()')
     return cy.log(message);
   }
 
