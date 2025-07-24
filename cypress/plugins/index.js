@@ -43,7 +43,6 @@ let metaDataArr = [];
 let maxExitCode = 0;
 const { fireLog } = require('../support/cypress-support/src/fireLog');
 
-
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
   const testsuite = config.env.testSuite;

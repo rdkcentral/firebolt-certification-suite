@@ -5,7 +5,6 @@ const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const _ = require('lodash');
 const { fireLog } = require('../support/cypress-support/src/fireLog');
 
-
 /**
  * Fetches and dereferences OpenRPC documents from various sources including a Firebolt URL, local files, and external URLs.
  *
