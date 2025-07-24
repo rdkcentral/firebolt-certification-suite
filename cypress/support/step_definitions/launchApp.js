@@ -35,7 +35,7 @@ import UTILS from '../cypress-support/src/utils';
  */
 Given(
   /3rd party '(.+)' app is launched(?: with '(.+)' appId)?(?: with '(.+)' state)?(?: with '(.+)' intent)?$/,
-  (appType, appCallSign, state, intent) => {
+  function (appType, appCallSign, state, intent) {
     Cypress.env(CONSTANTS.APP_TYPE, appType);
     Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) || 0);
  
@@ -88,7 +88,7 @@ Given(
         Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) + 1);
       }
     } else {
-      return 'pending';
+      return this.skip();
     }
   }
 );
