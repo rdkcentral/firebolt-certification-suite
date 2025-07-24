@@ -229,4 +229,5 @@ class FireLog extends Function {
 }
 
 const fireLog = new FireLog();
+global.fireLog = fireLog;
 module.exports = { fireLog };

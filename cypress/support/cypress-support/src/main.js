@@ -34,6 +34,7 @@ const internalV2FireboltCallsData = require('../../../fixtures/fireboltCalls/ind
 const externalV2FireboltCallsData = require('../../../fixtures/external/fireboltCalls/index');
 const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/index');
 const externalV2FireboltMockData = require('../../../fixtures/external/fireboltCalls/index');
+const { fireLog } = require('./fireLog')
 
 export default function (module) {
   const config = new Config(module);

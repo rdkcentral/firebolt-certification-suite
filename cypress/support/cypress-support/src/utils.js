@@ -23,6 +23,7 @@ const Validator = require('jsonschema').Validator;
 const validator = new Validator();
 const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 let clientCreated = false;
+const { fireLog } = require('./fireLog')
 
 /**
  * @module utils
@@ -728,202 +729,202 @@ global.resolveDeviceVariable = function (key) {
  *
  */
 
-class FireLog extends Function {
-  constructor() {
-    // Creating the function body dynamically
-    const functionBody = `
-      return function (...args) {
-        return this.log(...args);
-      }
-    `;
-    super('...args', functionBody);
+// class FireLog extends Function {
+//   constructor() {
+//     // Creating the function body dynamically
+//     const functionBody = `
+//       return function (...args) {
+//         return this.log(...args);
+//       }
+//     `;
+//     super('...args', functionBody);
 
-    const logLevels = ['debug', 'info', 'warn', 'error'];
-    const levelPriority = {
-      error: 0,
-      warn: 1,
-      info: 2,
-      debug: 3,
-    };
-    const currentLevel = getEnvVariable(CONSTANTS.LOGGER_LEVEL, false); // log level to display
-    let consoleLevel = getEnvVariable(CONSTANTS.CONSOLE_LOGGER_LEVEL, false);
-    if (!consoleLevel) consoleLevel = currentLevel;
-    const handler = {
-      apply: function (target, thisArg, argumentsList) {
-        let message;
-        const methodName = target.name;
-        if (target.hasOwnLog) {
-          // If the method has its own logging, just apply it
-          return Reflect.apply(target, thisArg, argumentsList);
-        } else {
-          if (methodName.includes('log')) message = argumentsList[0];
-          else if (argumentsList.length > 3)
-            message =
-              'Expected: ' +
-              JSON.stringify(argumentsList[0]) +
-              ' Actual: ' +
-              'Expected : ' +
-              JSON.stringify(argumentsList[2]) +
-              ' Actual : ' +
-              JSON.stringify(argumentsList[1]);
-          else if (argumentsList.length == 3) message = argumentsList[2];
-          else if (argumentsList.length == 1) message = argumentsList[0];
-          else if (argumentsList.length == 2) message = argumentsList[1];
-          else
-            message =
-              argumentsList[argumentsList.length - 1] +
-              ' Actual: ' +
-              JSON.stringify(argumentsList[0]);
-          return cy.log(message).then(() => {
-            return Reflect.apply(target, thisArg, argumentsList);
-          });
-        }
-      },
-    };
-    // Proxy for the fireLog method
-    const instanceProxy = new Proxy(this, handler);
-    const fireLogProxy = new Proxy(instanceProxy, {
-      apply: function (target, thisArg, argumentsList) {
-        const message = argumentsList[argumentsList.length - 1];
-        return cy.log(message);
-      },
-    });
+//     const logLevels = ['debug', 'info', 'warn', 'error'];
+//     const levelPriority = {
+//       error: 0,
+//       warn: 1,
+//       info: 2,
+//       debug: 3,
+//     };
+//     const currentLevel = getEnvVariable(CONSTANTS.LOGGER_LEVEL, false); // log level to display
+//     let consoleLevel = getEnvVariable(CONSTANTS.CONSOLE_LOGGER_LEVEL, false);
+//     if (!consoleLevel) consoleLevel = currentLevel;
+//     const handler = {
+//       apply: function (target, thisArg, argumentsList) {
+//         let message;
+//         const methodName = target.name;
+//         if (target.hasOwnLog) {
+//           // If the method has its own logging, just apply it
+//           return Reflect.apply(target, thisArg, argumentsList);
+//         } else {
+//           if (methodName.includes('log')) message = argumentsList[0];
+//           else if (argumentsList.length > 3)
+//             message =
+//               'Expected: ' +
+//               JSON.stringify(argumentsList[0]) +
+//               ' Actual: ' +
+//               'Expected : ' +
+//               JSON.stringify(argumentsList[2]) +
+//               ' Actual : ' +
+//               JSON.stringify(argumentsList[1]);
+//           else if (argumentsList.length == 3) message = argumentsList[2];
+//           else if (argumentsList.length == 1) message = argumentsList[0];
+//           else if (argumentsList.length == 2) message = argumentsList[1];
+//           else
+//             message =
+//               argumentsList[argumentsList.length - 1] +
+//               ' Actual: ' +
+//               JSON.stringify(argumentsList[0]);
+//           return cy.log(message).then(() => {
+//             return Reflect.apply(target, thisArg, argumentsList);
+//           });
+//         }
+//       },
+//     };
+//     // Proxy for the fireLog method
+//     const instanceProxy = new Proxy(this, handler);
+//     const fireLogProxy = new Proxy(instanceProxy, {
+//       apply: function (target, thisArg, argumentsList) {
+//         const message = argumentsList[argumentsList.length - 1];
+//         return cy.log(message);
+//       },
+//     });
 
-    // Use cy.log(message) for every method in the class
-    const prototype = Object.getPrototypeOf(instanceProxy);
-    Object.getOwnPropertyNames(prototype).forEach((method) => {
-      if (
-        method !== 'constructor' &&
-        method !== 'fireLog' &&
-        typeof instanceProxy[method] === 'function'
-      ) {
-        instanceProxy[method] = new Proxy(instanceProxy[method], handler);
-        const methodSource = instanceProxy[method].toString();
-        instanceProxy[method].hasOwnLog = methodSource.includes('cy.log');
-      }
-    });
+//     // Use cy.log(message) for every method in the class
+//     const prototype = Object.getPrototypeOf(instanceProxy);
+//     Object.getOwnPropertyNames(prototype).forEach((method) => {
+//       if (
+//         method !== 'constructor' &&
+//         method !== 'fireLog' &&
+//         typeof instanceProxy[method] === 'function'
+//       ) {
+//         instanceProxy[method] = new Proxy(instanceProxy[method], handler);
+//         const methodSource = instanceProxy[method].toString();
+//         instanceProxy[method].hasOwnLog = methodSource.includes('cy.log');
+//       }
+//     });
 
-    // Create logger-level methods
-    logLevels.forEach((level) => {
-      instanceProxy[level] = (
-        message,
-        logOutputLocation = 'console',
-        consoleLoggerLevel = consoleLevel
-      ) => {
-        const prefix = `[${level}]`;
-        const fullMessage = `${prefix} ${message}`;
+//     // Create logger-level methods
+//     logLevels.forEach((level) => {
+//       instanceProxy[level] = (
+//         message,
+//         logOutputLocation = 'console',
+//         consoleLoggerLevel = consoleLevel
+//       ) => {
+//         const prefix = `[${level}]`;
+//         const fullMessage = `${prefix} ${message}`;
 
-        if (level === 'error') {
-          throw new Error(fullMessage);
-        }
+//         if (level === 'error') {
+//           throw new Error(fullMessage);
+//         }
 
-        let cypressLogPromise = null;
+//         let cypressLogPromise = null;
 
-        // Check if logOutputLocation is 'report' and log using cy.log based on loggerLevel
-        if (logOutputLocation === 'report' && levelPriority[level] <= levelPriority[currentLevel]) {
-          cypressLogPromise = cy.log(fullMessage);
-        }
+//         // Check if logOutputLocation is 'report' and log using cy.log based on loggerLevel
+//         if (logOutputLocation === 'report' && levelPriority[level] <= levelPriority[currentLevel]) {
+//           cypressLogPromise = cy.log(fullMessage);
+//         }
 
-        // Check if logOutputLocation is 'console' and log using console based on consoleLoggerLevel
-        if (
-          logOutputLocation === 'console' &&
-          levelPriority[level] <= levelPriority[consoleLoggerLevel]
-        ) {
-          console[level === 'debug' ? 'log' : level](fullMessage);
-        }
+//         // Check if logOutputLocation is 'console' and log using console based on consoleLoggerLevel
+//         if (
+//           logOutputLocation === 'console' &&
+//           levelPriority[level] <= levelPriority[consoleLoggerLevel]
+//         ) {
+//           console[level === 'debug' ? 'log' : level](fullMessage);
+//         }
 
-        return cypressLogPromise || Promise.resolve();
-      };
-    });
+//         return cypressLogPromise || Promise.resolve();
+//       };
+//     });
 
-    return fireLogProxy;
-  }
+//     return fireLogProxy;
+//   }
 
-  setLevel(level) {
-    this.currentLevel = level;
-  }
+//   setLevel(level) {
+//     this.currentLevel = level;
+//   }
 
-  // Method to log a message without any assertion
-  log(message, failureCode = 0) {
-    if (failureCode > 0) {
-      return cy.task('setExitCode', failureCode).then((result) => {
-        cy.log(message);
-      });
-    } else return cy.log(message);
-  }
+//   // Method to log a message without any assertion
+//   log(message, failureCode = 0) {
+//     if (failureCode > 0) {
+//       return cy.task('setExitCode', failureCode).then((result) => {
+//         cy.log(message);
+//       });
+//     } else return cy.log(message);
+//   }
 
-  isNull(value, message) {
-    assert.isNull(value, message);
-  }
+//   isNull(value, message) {
+//     assert.isNull(value, message);
+//   }
 
-  isNotNull(value, message) {
-    assert.isNotNull(value, message);
-  }
+//   isNotNull(value, message) {
+//     assert.isNotNull(value, message);
+//   }
 
-  isUndefined(value, message) {
-    assert.isUndefined(value, message);
-  }
+//   isUndefined(value, message) {
+//     assert.isUndefined(value, message);
+//   }
 
-  isTrue(value, message) {
-    assert.isTrue(value, message);
-  }
+//   isTrue(value, message) {
+//     assert.isTrue(value, message);
+//   }
 
-  isFalse(value, message) {
-    assert.isFalse(value, message);
-  }
+//   isFalse(value, message) {
+//     assert.isFalse(value, message);
+//   }
 
-  isOk(value, message) {
-    assert.isOk(value, message);
-  }
+//   isOk(value, message) {
+//     assert.isOk(value, message);
+//   }
 
-  isNotEmpty(object, message) {
-    assert.isNotEmpty(object, message);
-  }
+//   isNotEmpty(object, message) {
+//     assert.isNotEmpty(object, message);
+//   }
 
-  isBoolean(value, message) {
-    assert.isBoolean(value, message);
-  }
+//   isBoolean(value, message) {
+//     assert.isBoolean(value, message);
+//   }
 
-  deepEqual(actual, expected, message) {
-    assert.deepEqual(actual, expected, message);
-  }
+//   deepEqual(actual, expected, message) {
+//     assert.deepEqual(actual, expected, message);
+//   }
 
-  equal(actual, expected, message) {
-    assert.equal(actual, expected, message);
-  }
+//   equal(actual, expected, message) {
+//     assert.equal(actual, expected, message);
+//   }
 
-  strictEqual(actual, expected, message) {
-    assert.strictEqual(actual, expected, message);
-  }
+//   strictEqual(actual, expected, message) {
+//     assert.strictEqual(actual, expected, message);
+//   }
 
-  include(haystack, needle, message) {
-    cy.log(
-      message + ' ' + JSON.stringify(needle) + ' expected to be in ' + JSON.stringify(haystack)
-    );
-    assert.include(haystack, needle, message);
-  }
-  exists(value, message) {
-    assert.exists(value, message);
-  }
+//   include(haystack, needle, message) {
+//     cy.log(
+//       message + ' ' + JSON.stringify(needle) + ' expected to be in ' + JSON.stringify(haystack)
+//     );
+//     assert.include(haystack, needle, message);
+//   }
+//   exists(value, message) {
+//     assert.exists(value, message);
+//   }
 
-  assert(expression, message, failureCode = 1) {
-    if (!expression) {
-      cy.task('setExitCode', failureCode).then(() => {
-        assert.fail(message);
-      });
-    }
-  }
+//   assert(expression, message, failureCode = 1) {
+//     if (!expression) {
+//       cy.task('setExitCode', failureCode).then(() => {
+//         assert.fail(message);
+//       });
+//     }
+//   }
 
-  fail(message, failureCode = 1) {
-    cy.task('setExitCode', failureCode).then(() => {
-      cy.log(message);
-      assert.fail(message);
-    });
-  }
-}
+//   fail(message, failureCode = 1) {
+//     cy.task('setExitCode', failureCode).then(() => {
+//       cy.log(message);
+//       assert.fail(message);
+//     });
+//   }
+// }
 
-const fireLog = new FireLog();
-global.fireLog = fireLog;
+// const fireLog = new FireLog();
+// global.fireLog = fireLog;
 
 /**
  * @module utils
@@ -1363,7 +1364,7 @@ module.exports = {
   destroyGlobalObjects,
   writeJsonToFileForReporting,
   checkForTags,
-  fireLog,
+  // fireLog,
   parseValue,
   checkForSecondaryAppId,
   resolveRecursiveValues,
