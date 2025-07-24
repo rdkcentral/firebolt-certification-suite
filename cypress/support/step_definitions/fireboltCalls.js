@@ -22,7 +22,6 @@ import { apiObject } from '../appObjectConfigs';
 import UTILS from '../cypress-support/src/utils';
 const { fireLog } = require('../cypress-support/src/fireLog');
 
-
 /**
  * @module fireboltCalls
  * @function And 1st party app invokes the (?:'(.+)' )?API to '(.+)'
