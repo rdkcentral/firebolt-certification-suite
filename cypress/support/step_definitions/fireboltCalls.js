@@ -414,13 +414,20 @@ Given(
           }
         } else {
           // other dismiss cases
+          const tags = Cypress.env('TAGS');
 
           // check whether app is loggedIn or loggedOut
-          if (scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDIN.toLowerCase())) {
+          if (
+            scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDIN.toLowerCase()) ||
+            tags?.includes(CONSTANTS.SUBSCRIBED_APPS)
+          ) {
             loggedType = CONSTANTS.LOGGEDIN;
-          } else if (scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDOUT.toLowerCase())) {
+          } else if (
+            scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDOUT.toLowerCase()) ||
+            tags?.includes(CONSTANTS.FREE_APPS)
+          ) {
             loggedType = CONSTANTS.LOGGEDOUT;
-          } else if (action == CONSTANTS.STREAMING) {
+          } else if (action == CONSTANTS.STREAMING || tags?.includes(CONSTANTS.SUBSCRIBED_APPS)) {
             loggedType = CONSTANTS.LOGGEDIN;
           }
 

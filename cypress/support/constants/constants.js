@@ -533,6 +533,8 @@ module.exports = {
   PLAYBACK: 'playback',
   LOGGEDIN: 'loggedIn',
   LOGGEDOUT: 'loggedOut',
+  FREE_APPS: 'freemiumapps',
+  SUBSCRIBED_APPS: 'subscribedapps',
   DISMISS: 'dismiss',
   DETAILED: 'detailed',
   APP_LAUNCH_COUNT: 'appLaunchCount',
