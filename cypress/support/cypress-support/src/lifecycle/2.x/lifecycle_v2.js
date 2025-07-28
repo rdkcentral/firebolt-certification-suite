@@ -218,7 +218,7 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
       },
     ];
 
-    if (UTILS.shouldPerformValidation('validationTypes', 'thunderStateValidation')) {
+    if (UTILS.shouldPerformValidation('validationTypes', 'lifecyelThunderStateValidation')) {
       requestMaps.push({
         method: CONSTANTS.REQUEST_OVERRIDE_CALLS.THUNDEREVENTHANDLER,
         params: {},
