@@ -42,15 +42,13 @@ Given(
     const app_metadata = Cypress.env(CONSTANTS.APP_METADATA);
     let supportedIntents = [];
     if (app_metadata && app_metadata.apps) {
-      // To handle AppAssurance metadata structure
       const app = app_metadata.apps.find((app) => app[appCallSign]);
       supportedIntents = supportedIntents.concat(Object.keys(app[appCallSign]));
     } else if (app_metadata) {
-      // To handle s3 metadata structure
       const metadataKeys = Object.keys(app_metadata);
-      metadataKeys.forEach((key) => {
-        if (app_metadata[key] && typeof app_metadata[key] === 'object') {
-          supportedIntents = supportedIntents.concat(Object.keys(app_metadata[key]));
+      metadataKeys.forEach((appId) => {
+        if (app_metadata[appId] && typeof app_metadata[appId] === 'object') {
+          supportedIntents = supportedIntents.concat(Object.keys(app_metadata[appId]));
         }
       });
     }
