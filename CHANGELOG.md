@@ -1,3 +1,10 @@
+# [1.14.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.4...v1.14.0-dev.5) (2025-07-28)
+
+
+### Bug Fixes
+
+* Invalid/error AS response fix ([#459](https://github.com/rdkcentral/firebolt-certification-suite/issues/459)) ([5ab8dc8](https://github.com/rdkcentral/firebolt-certification-suite/commit/5ab8dc8b55ce3ee7d4a33f6623a77b6fed819f8c))
+
 # [1.14.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.3...v1.14.0-dev.4) (2025-07-23)
 
 
