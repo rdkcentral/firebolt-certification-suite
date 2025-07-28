@@ -9,6 +9,7 @@ class notificationConfig {
     this.message = message;
     this.fbEvents = [];
     this.thunderEvents = [];
+    this.fbEventsNotExpected = [];
   }
 }
 
@@ -26,7 +27,7 @@ class stateConfig {
     this.visibilityState = stateConfig.visibilityState[state] || '';
   }
 
-  setNotification(currentState, previousState, fbEvents, thunderEvents) {
+  setNotification(currentState, previousState, fbEvents, thunderEvents, fbEventsNotExpected = []) {
     const allowedStateTransitions = lifecycleConfig.allowedStateTransitions;
     console.log('Allowed State Transitions:', allowedStateTransitions);
     const stateTransition = allowedStateTransitions[previousState];
@@ -44,6 +45,10 @@ class stateConfig {
         tempNotification.thunderEvents.push(...thunderEvents);
       }
       this.notification.push(tempNotification);
+    } else {
+      if (Array.isArray(fbEventsNotExpected) && fbEventsNotExpected.length > 0) {
+        tempNotification.fbEventsNotExpected.push(...fbEventsNotExpected);
+      }
     }
   }
 }
@@ -80,6 +85,9 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
             cy.log(
               `Requested state transition from ${currentAppState.state} to ${state} is not supported`
             );
+            const fbEventsNotExpected =
+              lifecycleConfig.invalidTransitionFireboltEvents?.[state.toLowerCase()] || [];
+            this.setAppObjectState(state, [], [], fbEventsNotExpected);
           }
           break;
         }
@@ -119,6 +127,9 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
             cy.log(
               `Requested state transition from ${currentAppState.state} to ${state} is not supported`
             );
+            const fbEventsNotExpected =
+              lifecycleConfig.invalidTransitionFireboltEvents?.[state.toLowerCase()] || [];
+            this.setAppObjectState(state, [], [], fbEventsNotExpected);
           }
           break;
         }
@@ -135,7 +146,7 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     }
   }
 
-  setAppObjectState(newState, fbEvents, thunderEvents) {
+  setAppObjectState(newState, fbEvents, thunderEvents, fbEventsNotExpected = []) {
     const currentState = this.state;
     this.state = new stateConfig(newState);
     const stateTransition = lifecycleConfig.allowedStateTransitions[currentState.state];
@@ -167,6 +178,7 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
       if (!stateTransition.includes(newState)) {
         cy.log('Requested state transition for application is not supported');
         this.state = currentState;
+        this.state.setNotification(newState, currentState.state, [], [], fbEventsNotExpected)
       }
     }
 
