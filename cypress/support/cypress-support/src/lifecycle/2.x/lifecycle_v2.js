@@ -195,7 +195,6 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     cy.getFireboltData(CONSTANTS.LIFECYCLE_EVENT_VALIDATION).then((fireboltData) => {
       const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
       const validationObject = UTILS.resolveRecursiveValues(fireboltData);
-      // selective validation for custom validation already handled inside methodOrEventResponseValidation as part of SYSTEST-10137
       cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
         cy.softAssertAll();
       });
