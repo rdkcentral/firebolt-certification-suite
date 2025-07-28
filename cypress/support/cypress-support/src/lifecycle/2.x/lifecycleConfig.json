@@ -6,6 +6,13 @@
     "suspended": ["paused", "hibernated"],
     "hibernated": ["suspended"]
   },
+  "invalidTransitionFireboltEvents": {
+    "initializing": [],
+    "paused": ["onResume", "onPause"],
+    "active": ["onActivate"],
+    "suspended": ["onSuspend", "onRestore"],
+    "hibernated": ["onHibernate"]
+  },
   "expectedFireboltEvents": {
     "paused": {
       "active": [
