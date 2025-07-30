@@ -17,10 +17,11 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS, { fireLog, getEnvVariable, addToEnvLabelMap } from '../cypress-support/src/utils';
+import UTILS, { getEnvVariable, addToEnvLabelMap } from '../cypress-support/src/utils';
 import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
 const jsonAssertion = require('soft-assert');
+const { fireLog } = require('../cypress-support/src/fireLog');
 
 /**
  * @module commands

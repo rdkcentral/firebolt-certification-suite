@@ -41,6 +41,7 @@ const tempReportEnvJson = '../../tempReportEnv.json';
 const { getAndDereferenceOpenRpc } = require('./pluginUtils');
 let metaDataArr = [];
 let maxExitCode = 0;
+const { fireLog } = require('../support/cypress-support/src/fireLog');
 
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
@@ -227,7 +228,7 @@ module.exports = async (on, config) => {
   });
 
   on('before:run', async () => {
-    console.debug('Entering before:run in cypress/plugins/index.js');
+    fireLog.info('Entering before:run in cypress/plugins/index.js');
 
     // Calling reportProcessor default function with instance of event
     const reportProcessor = importReportProcessor();
@@ -251,7 +252,7 @@ module.exports = async (on, config) => {
       - generate the html report (TBD)
   */
   on('after:run', async (results) => {
-    console.debug('Entering after :run in cypress/plugins/index.js');
+    fireLog.info('Entering after :run in cypress/plugins/index.js');
 
     const reportObj = {};
     const formatter = new Formatter();
@@ -284,9 +285,9 @@ module.exports = async (on, config) => {
       if (!fs.existsSync(filePath)) {
         try {
           fs.mkdirSync(filePath);
-          console.debug('Cucumber-json folder created successfully.');
+          fireLog.info('Cucumber-json folder created successfully.');
         } catch (error) {
-          console.error(error);
+          fireLog.info(error);
         }
       }
 
@@ -303,7 +304,7 @@ module.exports = async (on, config) => {
       // delete the messages.ndjson file.
       fs.unlink(sourceFile, (err) => {
         if (err) throw err;
-        console.debug('The file has been deleted!');
+        fireLog.info('The file has been deleted!');
       });
 
       const reportType = config.env.reportType;
@@ -339,7 +340,7 @@ module.exports = async (on, config) => {
                   const filteredSteps = [];
                   element.steps.forEach((step, index) => {
                     if (/^Test runner waits for/.test(step.name)) {
-                      console.log(`Removing step ${index} from html report:`, step.name);
+                      fireLog.info(`Removing step ${index} from html report:`, step.name);
                     } else {
                       filteredSteps.push(step);
                     }
@@ -402,11 +403,11 @@ module.exports = async (on, config) => {
       }
       process.exitCode = maxExitCode;
     } catch (err) {
-      console.error('Error occurred in after:run hook:' + err);
+      fireLog.info('Error occurred in after:run hook:' + err);
       process.exitCode = CONSTANTS.FCS_EXIT_CODE.FAILURE;
     }
 
-    console.log(`FCS_EXIT_CODE: ${process.exitCode}`);
+    fireLog.info(`FCS_EXIT_CODE: ${process.exitCode}`);
   });
   return config;
 };

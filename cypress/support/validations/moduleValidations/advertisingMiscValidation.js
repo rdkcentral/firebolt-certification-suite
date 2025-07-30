@@ -1,4 +1,4 @@
-import { fireLog } from '../../cypress-support/src/utils';
+import { fireLog } from '../../cypress-support/src/fireLog';
 
 /**
  * Copyright 2024 Comcast Cable Communications Management, LLC
