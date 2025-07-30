@@ -1,3 +1,10 @@
+# [1.14.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.5...v1.14.0-dev.6) (2025-07-30)
+
+
+### Features
+
+* firelog support in before-after runs ([#465](https://github.com/rdkcentral/firebolt-certification-suite/issues/465)) ([08dd81f](https://github.com/rdkcentral/firebolt-certification-suite/commit/08dd81f1c1a73566d114b3c9a5f6fcf402c4105e))
+
 # [1.14.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.4...v1.14.0-dev.5) (2025-07-28)
 
 
