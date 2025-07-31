@@ -1032,6 +1032,10 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
       Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata.apps[0][appId][intent];
     } else if (appMetadata && appMetadata[appId] && appMetadata[appId][intent]) {
       Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId][intent];
+    } else if(appMetadata && appMetadata.apps?.[0]?.[appId] && !appMetadata.apps?.[0]?.[appId][intent]) {
+      fireLog.fail(`Intent ${intent} not found in appMetadata for appId ${appId}`);
+    }else if(appMetadata && !appMetadata.apps?.[0]?.[appId]){
+      fireLog.fail(`App Id ${appId} not found in appMetadata`);
     }
 
     // Check if intentTemplates are defined for the given appType
