@@ -1,3 +1,10 @@
+# [1.14.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.6...v1.14.0-dev.7) (2025-08-01)
+
+
+### Bug Fixes
+
+* "parsedJson.forEach is not a function" Report issue ([#469](https://github.com/rdkcentral/firebolt-certification-suite/issues/469)) ([678d63b](https://github.com/rdkcentral/firebolt-certification-suite/commit/678d63b9c5f5134204bccc7fc96fe623e50f358a))
+
 # [1.14.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.5...v1.14.0-dev.6) (2025-07-30)
 
 
