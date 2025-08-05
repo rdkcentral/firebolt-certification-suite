@@ -86,6 +86,7 @@ Given(
         Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) + 1);
       }
     } else {
+      cy.log('Test case skipped: The target application does not support the specified intent. Skipping execution.');
       return this.skip();
     }
   }
