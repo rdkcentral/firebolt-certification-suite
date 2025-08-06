@@ -1089,7 +1089,6 @@ function captureScreenshot() {
 
     try {
       cy.sendMessagetoPlatforms(screenshotRequest, 70000).then((response) => {
-        fireLog.info(`Screenshot capture response: ${JSON.stringify(response)}`, 'report');
 
         const apiResponse = {
           response: response,
