@@ -1,3 +1,53 @@
+# [1.14.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.6...v1.14.0-dev.7) (2025-08-01)
+
+
+### Bug Fixes
+
+* "parsedJson.forEach is not a function" Report issue ([#469](https://github.com/rdkcentral/firebolt-certification-suite/issues/469)) ([678d63b](https://github.com/rdkcentral/firebolt-certification-suite/commit/678d63b9c5f5134204bccc7fc96fe623e50f358a))
+
+# [1.14.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.5...v1.14.0-dev.6) (2025-07-30)
+
+
+### Features
+
+* firelog support in before-after runs ([#465](https://github.com/rdkcentral/firebolt-certification-suite/issues/465)) ([08dd81f](https://github.com/rdkcentral/firebolt-certification-suite/commit/08dd81f1c1a73566d114b3c9a5f6fcf402c4105e))
+
+# [1.14.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.4...v1.14.0-dev.5) (2025-07-28)
+
+
+### Bug Fixes
+
+* Invalid/error AS response fix ([#459](https://github.com/rdkcentral/firebolt-certification-suite/issues/459)) ([5ab8dc8](https://github.com/rdkcentral/firebolt-certification-suite/commit/5ab8dc8b55ce3ee7d4a33f6623a77b6fed819f8c))
+
+# [1.14.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.3...v1.14.0-dev.4) (2025-07-23)
+
+
+### Features
+
+* Hide wait step from html report ([#437](https://github.com/rdkcentral/firebolt-certification-suite/issues/437)) ([9f590db](https://github.com/rdkcentral/firebolt-certification-suite/commit/9f590dbdcddb694a526d7bd5f81c5eca59c1a9fe))
+* Tag All PubSub errors with exitCode '2' ([#458](https://github.com/rdkcentral/firebolt-certification-suite/issues/458)) ([f7492df](https://github.com/rdkcentral/firebolt-certification-suite/commit/f7492df53f9fdf1dd9d6aeb848b6a0366db41968))
+
+# [1.14.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.2...v1.14.0-dev.3) (2025-07-22)
+
+
+### Features
+
+* Implement logging type ([#452](https://github.com/rdkcentral/firebolt-certification-suite/issues/452)) ([81d0880](https://github.com/rdkcentral/firebolt-certification-suite/commit/81d08805e3f8accce2f673ba9e0d76b71ed04de9))
+
+# [1.14.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.1...v1.14.0-dev.2) (2025-07-21)
+
+
+### Features
+
+* Added support for custom validation filter ([#461](https://github.com/rdkcentral/firebolt-certification-suite/issues/461)) ([84b875c](https://github.com/rdkcentral/firebolt-certification-suite/commit/84b875cf2fda01a1bfd86acbe1b662b74cbb3b4a))
+
+# [1.14.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0...v1.14.0-dev.1) (2025-07-14)
+
+
+### Features
+
+* FCS specific exit codes ([#455](https://github.com/rdkcentral/firebolt-certification-suite/issues/455)) ([1ad64e7](https://github.com/rdkcentral/firebolt-certification-suite/commit/1ad64e7049396bc9bf2aa72706b652dec54c50ab))
+
 # [1.13.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0...v1.13.0) (2025-07-02)
 
 
