@@ -1089,7 +1089,6 @@ function captureScreenshot() {
 
     try {
       cy.sendMessagetoPlatforms(screenshotRequest, 70000).then((response) => {
-
         const apiResponse = {
           response: response,
         };
