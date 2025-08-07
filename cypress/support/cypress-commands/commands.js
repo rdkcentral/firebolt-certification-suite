@@ -1030,7 +1030,11 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         const appMetadata = UTILS.getEnvVariable(CONSTANTS.APP_METADATA, false);
 
         // If the intent is present in the appMetadata, set the intent in the runtime environment variable
-        if (appMetadata && appMetadata.apps?.[0]?.[appId] && appMetadata.apps?.[0]?.[appId][intent]) {
+        if (
+          appMetadata &&
+          appMetadata.apps?.[0]?.[appId] &&
+          appMetadata.apps?.[0]?.[appId][intent]
+        ) {
           Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata.apps[0][appId][intent];
         } else if (appMetadata && appMetadata[appId] && appMetadata[appId][intent]) {
           Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId][intent];
@@ -1065,7 +1069,6 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
           Cypress.env(CONSTANTS.RUNTIME)?.intent
         ) {
           cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
-            console.log('[A] ~ dynamicIntent:', dynamicIntent.entityId);
             Cypress.env(CONSTANTS.RUNTIME).intent = {
               ...dynamicIntent,
             };
