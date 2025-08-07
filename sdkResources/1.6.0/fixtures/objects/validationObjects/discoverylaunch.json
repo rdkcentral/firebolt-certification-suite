@@ -629,6 +629,81 @@
             }
         ]
     },
+    "DISCOVERYLAUNCH_CHILD_AGE_POLICY": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_CHILD_AGE_POLICY_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for child age policy case"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_TEEN_AGE_POLICY": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_TEEN_AGE_POLICY_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for teen age policy case"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_ADULT_AGE_POLICY": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_ADULT_AGE_POLICY_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for adult age policy case"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_CUSTOM_AGE_POLICY": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_CUSTOM_AGE_POLICY_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for custom age policy case"
+                    }
+                ]
+            }
+        ]
+    },
+    "DISCOVERYLAUNCH_EMPTY_AGE_POLICY": {
+        "method": "discovery.onNavigateTo",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "DISCOVERYLAUNCH_EMPTY_AGE_POLICY_CONTENT",
+                        "description": "Validation of the DiscoveryLaunch for empty age policy case"
+                    }
+                ]
+            }
+        ]
+    },
     "DISCOVERYLAUNCH_PLAYQUERY_INTENT_WITH_MUSICTYPE_SONG_PROGRAMTYPE_EXTRA": {
         "method": "discovery.onNavigateTo",
         "data": [

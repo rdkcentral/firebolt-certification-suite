@@ -44,6 +44,81 @@
       }
     ]
   },
+  "PARAMETERS_INITIALIZATION_AGEPOLICY_CHILD": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_AGEPOLICY_CHILD",
+            "description": "Validation of the Parameters initialization for agePolicy child Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_AGEPOLICY_TEEN": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_AGEPOLICY_TEEN",
+            "description": "Validation of the Parameters initialization for agePolicy teen Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_AGEPOLICY_ADULT": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_AGEPOLICY_ADULT",
+            "description": "Validation of the Parameters initialization for agePolicy adult Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_AGEPOLICY_CUSTOM": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_AGEPOLICY_CUSTOM",
+            "description": "Validation of the Parameters initialization for agePolicy custom Format"
+          }
+        ]
+      }
+    ]
+  },
+  "PARAMETERS_INITIALIZATION_AGEPOLICY_EMPTY": {
+    "method": "parameters.initialization",
+    "data": [
+      {
+        "type": "fixture",
+        "validations": [
+          {
+            "mode": "staticContentValidation",
+            "type": "PARAMETERS_AGEPOLICY_EMPTY",
+            "description": "Validation of the Parameters initialization for agePolicy empty Format"
+          }
+        ]
+      }
+    ]
+  },
   "PARAMETERS_INITIALIZATION_HOMEINTENT": {
     "method": "parameters.initialization",
     "data": [
