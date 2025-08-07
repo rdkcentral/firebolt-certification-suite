@@ -1066,7 +1066,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
 
         if (
           getEnvVariable('giveDynamicAssetsPrecedence') &&
-          Cypress.env(CONSTANTS.RUNTIME)?.intent
+          !Cypress.env(CONSTANTS.RUNTIME)?.intent
         ) {
           cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
             Cypress.env(CONSTANTS.RUNTIME).intent = {
