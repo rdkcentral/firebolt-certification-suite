@@ -1061,7 +1061,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
     cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
       Cypress.env(CONSTANTS.RUNTIME).intent = {
         ...Cypress.env(CONSTANTS.RUNTIME).intent,
-        ...JSON.stringify(dynamicIntent),
+        ...dynamicIntent,
       };
     });
 
@@ -1071,7 +1071,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         [CONSTANTS.APP_ID]: appId,
         [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
       };
+      console.log('messageIntent', messageIntent)
     } catch (error) {
+      console.log('error', error)
       // Check if the intent is not found in the appMetadata
       if (Object.keys(Cypress.env(CONSTANTS.RUNTIME).intent).length == 0) {
         fireLog.fail(
