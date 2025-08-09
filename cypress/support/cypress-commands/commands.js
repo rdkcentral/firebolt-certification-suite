@@ -84,33 +84,57 @@ Cypress.Commands.add(
 
         // Process each firebolt call item
         const promises = fireboltItems.map((item) => {
-          let params = item.params;
           let method, action;
-          // Fetching the value of environment variable based on dataIdentifier
-          if (/CYPRESSENV/.test(params)) {
-            const envParam = params.split('-')[1];
-            params = UTILS.getEnvVariable(envParam, false);
-          }
-          // If params contain CYPRESSENV in any parameter assigning corresponding env value
-          if (Array.isArray(params)) {
-            params.forEach((item) => {
-              const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
-              if (containEnv) {
-                const envParam = containEnv.split('-')[1];
-                item[envParam] = UTILS.getEnvVariable(envParam);
-                delete item[containEnv];
-              }
+          let params = item.param;
+          if (params === undefined || params === null) {
+            console.log('reaching');
+            method = item.method;
+            const expected = item.expected ? item.expected : CONSTANTS.RESULT;
+            action = CONSTANTS.ACTION_CORE.toLowerCase();
+
+            // If a method has prefix with an underscore, the value is taken as the action.
+            if (method && method.includes('_')) {
+              action = method.split('_')[0];
+              method = method.split('_')[1];
+            }
+            action = UTILS.getEnvVariable(CONSTANTS.ACTION, false)
+            ? UTILS.getEnvVariable(CONSTANTS.ACTION, false)
+            : action;
+
+            return results.push({
+              method: method,
+              context: item.context,
+              action: action,
+              expected: expected,
             });
           } else {
-            const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
-            if (envList.length > 0) {
-              envList.forEach((item) => {
-                const envParam = item.split('-')[1];
-                params[envParam] = UTILS.getEnvVariable(envParam);
-                delete params[item];
-              });
+            console.log('params3045', params);
+
+            // Fetching the value of environment variable based on dataIdentifier
+            if (/CYPRESSENV/.test(params)) {
+              const envParam = params.split('-')[1];
+              params = UTILS.getEnvVariable(envParam, false);
             }
-          }
+            // If params contain CYPRESSENV in any parameter assigning corresponding env value
+            if (Array.isArray(params)) {
+              params.forEach((item) => {
+                const containEnv = Object.keys(item).find((key) => key.includes('CYPRESSENV'));
+                if (containEnv) {
+                  const envParam = containEnv.split('-')[1];
+                  item[envParam] = UTILS.getEnvVariable(envParam);
+                  delete item[containEnv];
+                }
+              });
+            } else {
+              const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
+              if (envList.length > 0) {
+                envList.forEach((item) => {
+                  const envParam = item.split('-')[1];
+                  params[envParam] = UTILS.getEnvVariable(envParam);
+                  delete params[item];
+                });
+              }
+            }
 
           method = item.method;
           const expected = item.expected ? item.expected : CONSTANTS.RESULT;
@@ -131,6 +155,7 @@ Cypress.Commands.add(
             action: action,
             expected: expected,
           });
+          }
         });
 
         return Cypress.Promise.all(promises).then(() => {
