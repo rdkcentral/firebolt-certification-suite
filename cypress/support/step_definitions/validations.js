@@ -240,9 +240,9 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
           }
         }
       } else {
-        cy.validateLifecycleState(appObject.getAppObjectState().state, appId);
+        cy.validateLifecycleState(appObject.getCurrentState().state, appId);
         cy.validateLifecycleHistoryAndEvents(
-          appObject.getAppObjectState().state,
+          appObject.getCurrentState().state,
           appId,
           isEventsExpected
         );
