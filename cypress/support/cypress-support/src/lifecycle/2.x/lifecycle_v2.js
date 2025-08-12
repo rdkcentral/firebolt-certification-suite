@@ -2,6 +2,7 @@ const lifecycleConfig = require('./lifecycleConfig.json');
 const { LifeCycleAppConfigBase } = require('../LifeCycleAppConfigBase');
 const logger = require('../../../../Logger')('lifecycle_v2.js');
 const CONSTANTS = require('../../../../constants/constants');
+const UTILS = require('../../../src/utils');
 
 class notificationConfig {
   constructor(message) {
@@ -188,26 +189,107 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     return this.setAppState(state, appId);
   }
 
+
+  // Validate lifecycle firebolt and thunder events
+  validateEvents(isEventsExpected) {
+    Cypress.env(CONSTANTS.IS_EVENTS_EXPECTED, isEventsExpected);
+    cy.getFireboltData(CONSTANTS.LIFECYCLE_EVENT_VALIDATION).then((fireboltData) => {
+      const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+      const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+      cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
+        cy.softAssertAll();
+      });
+    });
+  }
+
+  // Validate lifecycle state
   validateState(appId) {
-    // Note: The requirement ID is currently unused, but may be utilized in future updates.
-    // Get validation requirements for the current scenario from the moduleReqId JSON
     const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
-    // Fetching the requirement IDs for the "state" from the scenarioRequirement.
     const lifecycleStateRequirementId = scenarioRequirement.find((req) =>
       req.hasOwnProperty('state')
     );
 
     const currentState = this.getCurrentState().state;
-    const requestMap = {
-      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GET_LIFECYCLEV2_STATE,
-      params: { appId: appId },
-    };
-    cy.sendMessagetoPlatforms(requestMap).then((response) => {
-      try {
-        const result = response?.state;
-        fireLog.equal(result, currentState, 'Lifecycle state validation');
 
-        this.validateVisibilityState(currentState);
+    const requestMaps = [
+      {
+        method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GET_LIFECYCLEV2_STATE,
+        params: { appId: appId },
+      },
+    ];
+
+    if (UTILS.shouldPerformValidation('validationTypes', 'lifecyelThunderStateValidation')) {
+      requestMaps.push({
+        method: CONSTANTS.REQUEST_OVERRIDE_CALLS.THUNDEREVENTHANDLER,
+        params: {},
+        task: CONSTANTS.TASK.THUNDEREVENTHANDLER,
+      });
+    }
+
+    const responses = [];
+
+    let chain = Promise.resolve();
+
+    requestMaps.forEach((requestMap) => {
+      chain = chain
+        .then(() => cy.sendMessagetoPlatforms(requestMap))
+        .then((response) => {
+          responses.push({ method: requestMap.method, response });
+        });
+    });
+
+    return chain.then(() => {
+      try {
+        responses.forEach(({ method, response }) => {
+          if (method === CONSTANTS.REQUEST_OVERRIDE_CALLS.GET_LIFECYCLEV2_STATE) {
+            const result = response?.state;
+            fireLog.equal(result, currentState, 'Lifecycle state validation');
+            this.validateVisibilityState(currentState);
+          } else if (method === CONSTANTS.REQUEST_OVERRIDE_CALLS.THUNDEREVENTHANDLER) {
+            const events = response || {};
+
+            // Collect all event logs from all top-level keys that have a "result" array after parsing
+            const allEventLogs = Object.values(events)
+              .map((jsonStr) => {
+                try {
+                  const parsed = JSON.parse(jsonStr);
+
+                  if ('error' in parsed) {
+                    throw new Error(
+                      `Received error inside trigger event response for thunder state validation: ${JSON.stringify(parsed.error)}`
+                    );
+                  }
+
+                  return Array.isArray(parsed.result) ? parsed.result : [];
+                } catch (error) {
+                  throw new Error(
+                    `Received following error while parsing triggered event response  for thunder state validation - ${error.message}`
+                  );
+                }
+              })
+              .flat();
+
+            // Find the last occurrence of the onAppLifecycleStateChanged event
+            const latestThunderEvent = [...allEventLogs].reverse().find((log) => {
+              return log.eventResponse?.method === 'onAppLifecycleStateChanged';
+            });
+            // Get the latest triggered event resposne of onAppLifecycleStateChanged event
+
+            const triggerEventResponse = latestThunderEvent?.eventResponse?.params;
+
+            if (triggerEventResponse) {
+              const thunderState = triggerEventResponse.newLifecycleState;
+
+              fireLog.equal(thunderState, currentState, `Thunder state validation`);
+
+              this.validateVisibilityState(currentState);
+            } else {
+              fireLog.fail(
+                `No valid onAppLifecycleStateChanged event response found in ThunderEventHandler response`
+              );
+            }
+          }
+        });
       } catch (error) {
         cy.log(CONSTANTS.ERROR_LIFECYCLE_STATE_VALIDATION + error).then(() => {
           assert(false, CONSTANTS.ERROR_LIFECYCLE_STATE_VALIDATION + error);

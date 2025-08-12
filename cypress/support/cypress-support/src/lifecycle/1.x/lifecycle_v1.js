@@ -324,6 +324,92 @@ class lifecycle_v1 extends LifeCycleAppConfigBase {
     }
     return this.setAppState(state, appId);
   }
+
+  /**
+   * Validates lifecycle event data.
+   */
+  
+  validateEvents(state, appId, isEventsExpected) {
+    const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
+    const appObject = UTILS.getEnvVariable(appId);
+
+    const lifecycleEventRequirementId = scenarioRequirement.find((req) =>
+      req.hasOwnProperty(CONSTANTS.EVENT)
+    );
+
+    if (lifecycleEventRequirementId && lifecycleEventRequirementId.event) {
+      return this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.HISTORY, '{}').then(
+        (response) => {
+          response = JSON.parse(response ?? '{}');
+
+          if (
+            response &&
+            response.result &&
+            response.result._history &&
+            response.result._history._value
+          ) {
+            const appHistory = response.result._history._value;
+            cy.log(CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + JSON.stringify(appHistory));
+
+            const appHistoryPrevious = UTILS.getEnvVariable(CONSTANTS.APP_LIFECYCLE_HISTORY);
+            const appHistoryCount = appHistory.length - appHistoryPrevious.length;
+            // If events are not expected and not received
+            if (
+              (isEventsExpected == false && appHistoryCount == 0) ||
+              state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING
+            ) {
+              cy.log(CONSTANTS.PLATFORM_NOT_TRIGGER_EVENT + ' : ' + CONSTANTS.PASS);
+              // If events are not expected but received
+            } else if (isEventsExpected == false && appHistoryCount > 0) {
+              fireLog.assert(false, CONSTANTS.PLATFORM_NOT_TRIGGER_EVENT + ' : ' + CONSTANTS.FAIL);
+            } else {
+              // If events are expected and received
+              if (isEventsExpected == true && appHistoryCount > 0) {
+                cy.log(CONSTANTS.PLATFORM_TRIGGER_EVENT + ' : ' + CONSTANTS.PASS);
+                // If events are expected and not received
+              } else if (isEventsExpected == true && appHistoryCount == 0) {
+                fireLog.assert(false, CONSTANTS.PLATFORM_TRIGGER_EVENT + ' : ' + CONSTANTS.FAIL);
+              }
+
+              const eventId = lifecycleEventRequirementId?.event?.id;
+              for (let eventIndex = 1; eventIndex <= appHistoryCount; eventIndex++) {
+                const newAppEvent = appHistory[appHistory.length - eventIndex];
+                let appObjectEvent;
+                if (eventIndex == 1) {
+                  appObjectEvent = appObject.state.notification[0];
+                } else {
+                  const appObjectStateItem =
+                    appObject.history[appObject.history.length - eventIndex];
+                  appObjectEvent = appObjectStateItem.notification[0];
+                }
+                // Perform schema and content validation of app event data against app object event data
+                const id = Array.isArray(eventId) ? eventId[eventIndex - 1] : eventId;
+                let pretext = id === undefined ? ' : Schema ' : id + ' : Schema ';
+
+                if (newAppEvent.schemaValidationStatus == CONSTANTS.PASS) {
+                  cy.log(pretext + ' : ' + CONSTANTS.PASS);
+                } else {
+                  fireLog.assert(false, pretext + ' : ' + CONSTANTS.FAIL);
+                }
+
+                pretext = id === undefined ? ' : Content ' : id + ' : Content ';
+                UTILS.assertWithRequirementLogs(
+                  pretext,
+                  JSON.stringify(newAppEvent.event),
+                  JSON.stringify(appObjectEvent.message)
+                );
+              }
+            }
+          } else {
+            assert(false, CONSTANTS.INVALID_HISTORY_RESPONSE);
+          }
+        }
+      );
+    } else {
+      cy.log(CONSTANTS.SKIP_LIFECYCLE_EVENT_VALIDATION);
+      return cy.wrap(null);
+    }
+  }
 }
 
 export default lifecycle_v1;

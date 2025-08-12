@@ -228,6 +228,7 @@ module.exports = {
   IS_RPC_ONLY: 'isRpcOnlyValidation',
   IS_SAME_APP_TRANSITION: 'isSameAppTransition',
   IS_SCENARIO_EXEMPTED: 'isScenarioExempted',
+  IS_EVENTS_EXPECTED: 'isEventsExpected',
   JOBID: 'jobId',
   JSON_FILE_EXTENSION: '_CoreSuiteReport.json',
   JWT: 'jwt',
@@ -254,6 +255,7 @@ module.exports = {
   LIFECYCLE_HISTORY_INTENT: 'Lifecycle intent sent to application to fetch App history: ',
   LIFECYCLE_METHOD_LIST: ['Lifecycle.ready', 'Lifecycle.state', 'Lifecycle.close'],
   LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle events generated ',
+  SKIP_LIFECYCLE_EVENT_VALIDATION: 'Skipping lifecycle event validation',
   LIFECYCLE_STATE: 'Lifecycle.state',
   LIFECYCLE_STATES: {
     FOREGROUND: 'foreground',
@@ -391,6 +393,8 @@ module.exports = {
     SETLIFECYCLESTATEV1: 'fcsV1.setLifecycleState',
     SETLIFECYCLESTATEV2: 'fcsV2.setLifecycleState',
     FINDLOGPATTERN: 'fcs.findLogPattern',
+    VALIDATELIFECYCLEFIREBOLTLOGS: 'fcs.validateLifecycleFireboltLogs',
+    THUNDEREVENTHANDLER: 'fcs.thunderEventHandler',
     GET_LIFECYCLEV2_STATE: 'fcsV2.getState',
   },
   RESPONSE: 'Response: ',
@@ -465,6 +469,7 @@ module.exports = {
     PERFORMANCETESTHANDLER: 'performanceTestHandler',
     VISIBILITYSTATE: 'visibilityState',
     REGISTERPROVIDERHANDLER: 'registerProviderHandler',
+    THUNDEREVENTHANDLER: 'thunderEventHandler'
   },
   TEST_TYPE: 'testType',
   THIRD_PARTY_APP: '3rd party app',
@@ -566,6 +571,7 @@ module.exports = {
     SUCCESS: 0,
     FAILURE: 1,
   },
+  LIFECYCLE_EVENT_VALIDATION: 'LIFECYCLE_EVENT_VALIDATION',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

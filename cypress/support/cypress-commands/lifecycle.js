@@ -99,10 +99,9 @@ Cypress.Commands.add('setLifecycleState', (state, appId) => {
  */
 
 Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEventsExpected) => {
-  // Extract appObject based on appId
-  const appObject = UTILS.getEnvVariable(appId);
-  appObject.validateHistory(appId);
-  // TODO: Event validation handled in diff ticket
+   const appObject = Cypress.env(appId);
+   appObject.validateHistory(state, appId, isEventsExpected);
+   appObject.validateEvents(isEventsExpected);
 });
 
 /**
