@@ -17,7 +17,6 @@
  */
 const fs = require('fs');
 const testDataProcessor = require('./testDataProcessor');
-const logger = require('../support/Logger')('common.js');
 const { generateIndexFile, preprocessDeviceData, fetchAppMetaData } = require('./pluginUtils');
 const CONSTANTS = require('../support/constants/constants');
 
@@ -28,7 +27,7 @@ function genericSupport(config) {
   try {
     data = JSON.parse(fs.readFileSync('supportConfig.json'));
   } catch (error) {
-    logger.info('Received following error while trying to read supportConfig json', error);
+    fireLog.info('Received following error while trying to read supportConfig json', error);
   }
 
   // Get the arguments passed from command line during run time.

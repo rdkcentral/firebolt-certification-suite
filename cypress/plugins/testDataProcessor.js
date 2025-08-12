@@ -5,7 +5,6 @@ const REGEXFORMATS = require('../fixtures/regexformats');
 let envVariables;
 const path = require('path');
 const _ = require('lodash');
-const logger = require('../support/Logger')('testDataProcessor.js');
 
 // Combining validation objects from FCS and config module into single JSON
 const validationObjects = combineValidationObjectsJson();
@@ -114,7 +113,7 @@ function getErrorContentObjectJson() {
   if (combinedErrorContentJson) {
     return combinedErrorContentJson;
   } else {
-    logger.error('Unable to find Error content JSON in configModule', 'getErrorContentObjectJson');
+    fireLog.error('Unable to find Error content JSON in configModule');
   }
 }
 
@@ -241,7 +240,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                       if (envValue !== undefined) {
                         data.type = envValue;
                       } else {
-                        logger.info(`Cypress env variable '${envKey}' does not exist`);
+                        fireLog.info(`Cypress env variable '${envKey}' does not exist`);
                       }
                     } else {
                       const envKey = envSegments[0];
@@ -249,7 +248,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                       if (envValue !== undefined) {
                         data.type = envValue;
                       } else {
-                        logger.info(`Cypress env variable '${envKey}' does not exist`);
+                        fireLog.info(`Cypress env variable '${envKey}' does not exist`);
                       }
                     }
                   }
@@ -278,7 +277,7 @@ function testDataHandler(requestType, dataIdentifier, fireboltObject) {
                         : CONSTANTS.DEFAULT_DEVICE_DATA_PATH;
 
                       if (!deviceMac) {
-                        logger.info('Falling back to default device data path');
+                        fireLog.info('Falling back to default device data path');
                       }
                       const deviceData = fetchDataFromFile(deviceDataPath);
                       envVariables[CONSTANTS.DEVICE_DATA] = deviceData;
@@ -344,11 +343,11 @@ function mergeFixturesWithExternal() {
           }
         }
       } catch (fileError) {
-        logger.warn(`Error processing file ${file}:`, fileError);
+        fireLog.warn(`Error processing file ${file}:` + fileError);
       }
     });
   } catch (error) {
-    logger.error('Error while merging fixtures with external data:', error);
+    fireLog.error('Error while merging fixtures with external data:' + error);
   }
 
   return mergedData;
