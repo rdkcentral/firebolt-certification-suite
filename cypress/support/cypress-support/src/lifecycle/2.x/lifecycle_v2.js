@@ -2,6 +2,7 @@ const lifecycleConfig = require('./lifecycleConfig.json');
 const { LifeCycleAppConfigBase } = require('../LifeCycleAppConfigBase');
 const logger = require('../../../../Logger')('lifecycle_v2.js');
 const CONSTANTS = require('../../../../constants/constants');
+const UTILS = require('../../../src/utils');
 
 class notificationConfig {
   constructor(message) {
@@ -9,7 +10,6 @@ class notificationConfig {
     this.message = message;
     this.fbEvents = [];
     this.thunderEvents = [];
-    this.fbEventsNotExpected = [];
   }
 }
 
@@ -27,7 +27,7 @@ class stateConfig {
     this.visibilityState = stateConfig.visibilityState[state] || '';
   }
 
-  setNotification(currentState, previousState, fbEvents, thunderEvents, fbEventsNotExpected = []) {
+  setNotification(currentState, previousState, fbEvents, thunderEvents) {
     const allowedStateTransitions = lifecycleConfig.allowedStateTransitions;
     console.log('Allowed State Transitions:', allowedStateTransitions);
     const stateTransition = allowedStateTransitions[previousState];
@@ -45,10 +45,6 @@ class stateConfig {
         tempNotification.thunderEvents.push(...thunderEvents);
       }
       this.notification.push(tempNotification);
-    } else {
-      if (Array.isArray(fbEventsNotExpected) && fbEventsNotExpected.length > 0) {
-        tempNotification.fbEventsNotExpected.push(...fbEventsNotExpected);
-      }
     }
   }
 }
@@ -85,9 +81,6 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
             cy.log(
               `Requested state transition from ${currentAppState.state} to ${state} is not supported`
             );
-            const fbEventsNotExpected =
-              lifecycleConfig.invalidTransitionFireboltEvents?.[state.toLowerCase()] || [];
-            this.setAppObjectState(state, [], [], fbEventsNotExpected);
           }
           break;
         }
@@ -127,9 +120,6 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
             cy.log(
               `Requested state transition from ${currentAppState.state} to ${state} is not supported`
             );
-            const fbEventsNotExpected =
-              lifecycleConfig.invalidTransitionFireboltEvents?.[state.toLowerCase()] || [];
-            this.setAppObjectState(state, [], [], fbEventsNotExpected);
           }
           break;
         }
@@ -146,7 +136,7 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     }
   }
 
-  setAppObjectState(newState, fbEvents, thunderEvents, fbEventsNotExpected = []) {
+  setAppObjectState(newState, fbEvents, thunderEvents) {
     const currentState = this.state;
     this.state = new stateConfig(newState);
     const stateTransition = lifecycleConfig.allowedStateTransitions[currentState.state];
@@ -178,7 +168,6 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
       if (!stateTransition.includes(newState)) {
         cy.log('Requested state transition for application is not supported');
         this.state = currentState;
-        this.state.setNotification(newState, currentState.state, [], [], fbEventsNotExpected)
       }
     }
 
@@ -200,16 +189,111 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     return this.setAppState(state, appId);
   }
 
- // Validate lifecycle firebolt and thunder events
-validateEvents(isEventsExpected) {
-  Cypress.env(CONSTANTS.IS_EVENTS_EXPECTED, isEventsExpected);
-      cy.getFireboltData(CONSTANTS.LIFECYCLE_EVENT_VALIDATION).then((fireboltData) => {
-        const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
-        const validationObject = UTILS.resolveRecursiveValues(fireboltData);
-        cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
-          cy.softAssertAll();
-        });
+  // Validate lifecycle firebolt and thunder events
+  validateEvents(isEventsExpected) {
+    Cypress.env(CONSTANTS.IS_EVENTS_EXPECTED, isEventsExpected);
+    cy.getFireboltData(CONSTANTS.LIFECYCLE_EVENT_VALIDATION).then((fireboltData) => {
+      const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+      const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+      cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
+        cy.softAssertAll();
       });
-}
-}
+    });
+  }
 
+  // Validate lifecycle state
+  validateState(appId) {
+    const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
+    const lifecycleStateRequirementId = scenarioRequirement.find((req) =>
+      req.hasOwnProperty('state')
+    );
+
+    const currentState = this.getCurrentState().state;
+
+    const requestMaps = [
+      {
+        method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GET_LIFECYCLEV2_STATE,
+        params: { appId: appId },
+      },
+    ];
+
+    if (UTILS.shouldPerformValidation('validationTypes', 'lifecyelThunderStateValidation')) {
+      requestMaps.push({
+        method: CONSTANTS.REQUEST_OVERRIDE_CALLS.THUNDEREVENTHANDLER,
+        params: {},
+        task: CONSTANTS.TASK.THUNDEREVENTHANDLER,
+      });
+    }
+
+    const responses = [];
+
+    let chain = Promise.resolve();
+
+    requestMaps.forEach((requestMap) => {
+      chain = chain
+        .then(() => cy.sendMessagetoPlatforms(requestMap))
+        .then((response) => {
+          responses.push({ method: requestMap.method, response });
+        });
+    });
+
+    return chain.then(() => {
+      try {
+        responses.forEach(({ method, response }) => {
+          if (method === CONSTANTS.REQUEST_OVERRIDE_CALLS.GET_LIFECYCLEV2_STATE) {
+            const result = response?.state;
+            fireLog.equal(result, currentState, 'Lifecycle state validation');
+            this.validateVisibilityState(currentState);
+          } else if (method === CONSTANTS.REQUEST_OVERRIDE_CALLS.THUNDEREVENTHANDLER) {
+            const events = response || {};
+
+            // Collect all event logs from all top-level keys that have a "result" array after parsing
+            const allEventLogs = Object.values(events)
+              .map((jsonStr) => {
+                try {
+                  const parsed = JSON.parse(jsonStr);
+
+                  if ('error' in parsed) {
+                    throw new Error(
+                      `Received error inside trigger event response for thunder state validation: ${JSON.stringify(parsed.error)}`
+                    );
+                  }
+
+                  return Array.isArray(parsed.result) ? parsed.result : [];
+                } catch (error) {
+                  throw new Error(
+                    `Received following error while parsing triggered event response  for thunder state validation - ${error.message}`
+                  );
+                }
+              })
+              .flat();
+
+            // Find the last occurrence of the onAppLifecycleStateChanged event
+            const latestThunderEvent = [...allEventLogs].reverse().find((log) => {
+              return log.eventResponse?.method === 'onAppLifecycleStateChanged';
+            });
+            // Get the latest triggered event resposne of onAppLifecycleStateChanged event
+
+            const triggerEventResponse = latestThunderEvent?.eventResponse?.params;
+
+            if (triggerEventResponse) {
+              const thunderState = triggerEventResponse.newLifecycleState;
+
+              fireLog.equal(thunderState, currentState, `Thunder state validation`);
+
+              this.validateVisibilityState(currentState);
+            } else {
+              fireLog.fail(
+                `No valid onAppLifecycleStateChanged event response found in ThunderEventHandler response`
+              );
+            }
+          }
+        });
+      } catch (error) {
+        cy.log(CONSTANTS.ERROR_LIFECYCLE_STATE_VALIDATION + error).then(() => {
+          assert(false, CONSTANTS.ERROR_LIFECYCLE_STATE_VALIDATION + error);
+        });
+      }
+    });
+  }
+}
