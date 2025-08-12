@@ -394,7 +394,8 @@ module.exports = {
     SETLIFECYCLESTATEV2: 'fcsV2.setLifecycleState',
     FINDLOGPATTERN: 'fcs.findLogPattern',
     VALIDATELIFECYCLEFIREBOLTLOGS: 'fcs.validateLifecycleFireboltLogs',
-    THUNDEREVENTHANDLER: 'fcs.thunderEventHandler'
+    THUNDEREVENTHANDLER: 'fcs.thunderEventHandler',
+    GET_LIFECYCLEV2_STATE: 'fcsV2.getState',
   },
   RESPONSE: 'Response: ',
   RESPONSE_INVALID_RESPONSE_LOG:

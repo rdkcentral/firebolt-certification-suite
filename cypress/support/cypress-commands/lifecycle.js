@@ -69,50 +69,7 @@ Cypress.Commands.add('lifecycleSetup', (appCallSign, state) => {
 Cypress.Commands.add('validateLifecycleState', (state, appId) => {
   // Extract appObject based on appId
   const appObject = UTILS.getEnvVariable(appId);
-
-  // Get validation requirements for the current scenario from the moduleReqId JSON
-  const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
-
-  // Fetching the requirement IDs for the "state" from the scenarioRequirement.
-  const lifecycleStateRequirementId = scenarioRequirement.find((req) =>
-    req.hasOwnProperty('state')
-  );
-
-  if (lifecycleStateRequirementId && lifecycleStateRequirementId.state) {
-    // Send message to 3rd party app to invoke lifecycle API to get state response
-    cy.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
-      try {
-        const result = response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE].instance ?? null;
-        if (result == null) {
-          cy.log(CONSTANTS.INVALID_LIFECYCLE_STATE_RESPONSE).then(() => {
-            assert(false, CONSTANTS.INVALID_LIFECYCLE_STATE_RESPONSE);
-          });
-        }
-        cy.log(CONSTANTS.APP_RESPONSE + JSON.stringify(response));
-        // Perform schema and content validation of state response against appObject state
-        let pretext = lifecycleStateRequirementId.state.id + CONSTANTS.STATE_SCHEMA_VALIDATION_REQ;
-        if (response[CONSTANTS.SCHEMA_VALIDATION_STATUS] == CONSTANTS.PASS) {
-          cy.log(pretext + ' : ' + CONSTANTS.PASS);
-        } else {
-          fireLog.assert(false, pretext + ' : ' + CONSTANTS.FAIL);
-        }
-
-        pretext = lifecycleStateRequirementId.state.id + CONSTANTS.STATE_CONTENT_VALIDATION_REQ;
-        UTILS.assertWithRequirementLogs(
-          pretext,
-          response[CONSTANTS.SCHEMA_VALIDATION_RESPONSE].instance,
-          appObject.getCurrentState().state
-        );
-        validateVisibilityState(state);
-      } catch (error) {
-        cy.log(CONSTANTS.ERROR_LIFECYCLE_STATE_VALIDATION + error).then(() => {
-          assert(false, CONSTANTS.ERROR_LIFECYCLE_STATE_VALIDATION + error);
-        });
-      }
-    });
-  } else {
-    cy.log('Skipping lifecycle state validation');
-  }
+  appObject.validateState(appId);
 });
 
 /**
