@@ -391,6 +391,7 @@ module.exports = {
     SETLIFECYCLESTATEV1: 'fcsV1.setLifecycleState',
     SETLIFECYCLESTATEV2: 'fcsV2.setLifecycleState',
     FINDLOGPATTERN: 'fcs.findLogPattern',
+    GET_LIFECYCLEV2_STATE: 'fcsV2.getState',
   },
   RESPONSE: 'Response: ',
   RESPONSE_INVALID_RESPONSE_LOG:
