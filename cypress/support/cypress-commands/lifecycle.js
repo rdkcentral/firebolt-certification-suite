@@ -19,7 +19,6 @@ const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
 import UTILS from '../cypress-support/src/utils';
 import { createLifeCycleAppConfig } from '../cypress-support/src/lifecycle/lifecycleAppConfig';
-const logger = require('../Logger')('lifecycle.js');
 
 /**
  * @module lifecycle
