@@ -144,7 +144,7 @@ Cypress.Commands.add('setLifecycleState', (state, appId) => {
 Cypress.Commands.add('validateLifecycleHistoryAndEvents', (state, appId, isEventsExpected) => {
    const appObject = Cypress.env(appId);
    appObject.validateHistory(state, appId, isEventsExpected);
-   appObject.validateEvents(state, appId, isEventsExpected);
+   appObject.validateEvents(isEventsExpected);
 });
 
 /**
