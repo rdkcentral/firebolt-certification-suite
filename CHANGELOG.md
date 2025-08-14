@@ -1,3 +1,10 @@
+## [1.14.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0...v1.14.1-dev.1) (2025-08-13)
+
+
+### Bug Fixes
+
+* Warn if test suite is not found ([#475](https://github.com/rdkcentral/firebolt-certification-suite/issues/475)) ([f443654](https://github.com/rdkcentral/firebolt-certification-suite/commit/f4436546d1519f9abbaf6f35bd38c83e67453006))
+
 # [1.14.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0...v1.14.0) (2025-08-06)
 
 
