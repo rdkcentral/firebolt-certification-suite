@@ -1068,31 +1068,19 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
 
         if (giveDynamicAssetsPrecedence || !Cypress.env(CONSTANTS.RUNTIME)?.intent) {
           cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
-            Cypress.env(CONSTANTS.RUNTIME).intent = {
-              ...dynamicIntent,
-            };
-
-            messageIntent = {
-              [CONSTANTS.APP_ID]: appId,
-              [CONSTANTS.INTENT]: dynamicIntent.entityId,
-            };
+            if (dynamicIntent && Object.keys(dynamicIntent).length > 0) {
+              Cypress.env(CONSTANTS.RUNTIME).intent = { ...dynamicIntent };
+              messageIntent = {
+                [CONSTANTS.APP_ID]: appId,
+                [CONSTANTS.INTENT]: dynamicIntent.entityId,
+              };
+            } else {
+              messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
+            }
           });
         } else {
           // Attempt to resolve the intentTemplate and create messageIntent
-          try {
-            messageIntent = {
-              [CONSTANTS.APP_ID]: appId,
-              [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
-            };
-          } catch (error) {
-            // Check if the intent is not found in the appMetadata
-            if (Object.keys(Cypress.env(CONSTANTS.RUNTIME).intent).length == 0) {
-              fireLog.fail(
-                `Intent ${intent} not found in appMetadata for appId ${appId}. Please check the appMetadata.`
-              );
-            }
-            fireLog.fail('Could not resolve intentTemplate: ' + error.message);
-          }
+          messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
         }
       } else {
         const data = {
