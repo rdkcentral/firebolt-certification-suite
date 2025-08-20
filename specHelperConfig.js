@@ -40,7 +40,7 @@ function getSpecPattern(testSuite) {
 
   // If testSuite is null or empty, do nothing, return undefined
   if (!trimmedTestSuite || !patterns[trimmedTestSuite]) {
-    fireLog.error(`Test suite '${testSuite}' not found in patterns. Defaulting to '**/*.feature'.`);
+    fireLog.warn(`Test suite '${testSuite}' not found in patterns. Defaulting to '**/*.feature'.`);
     return patterns.all;
   }
 

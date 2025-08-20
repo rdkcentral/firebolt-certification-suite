@@ -1,3 +1,17 @@
+# [1.15.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.1-dev.1...v1.15.0-dev.1) (2025-08-18)
+
+
+### Features
+
+* Removed screenshot response log ([#471](https://github.com/rdkcentral/firebolt-certification-suite/issues/471)) ([0952da1](https://github.com/rdkcentral/firebolt-certification-suite/commit/0952da11f21d21209a67996a28ba3de307bea406))
+
+## [1.14.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0...v1.14.1-dev.1) (2025-08-13)
+
+
+### Bug Fixes
+
+* Warn if test suite is not found ([#475](https://github.com/rdkcentral/firebolt-certification-suite/issues/475)) ([f443654](https://github.com/rdkcentral/firebolt-certification-suite/commit/f4436546d1519f9abbaf6f35bd38c83e67453006))
+
 # [1.14.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0...v1.14.0) (2025-08-06)
 
 
