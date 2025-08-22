@@ -87,7 +87,7 @@
 | pubSubSubscribeSuffix | true | Suffix appended to topic names when subscribing (e.g., _fca). |
 | pubSubUrl | false | Defines the Pub/Sub service endpoint URL. |
 | pubsubUuid | false | PubSub UUID. |
-| regexEventValidation | true | Regex pattern for event detection. `default: "/(\\.on|\\.subscribeTo)\\S*/"` |
+| regexEventValidation | true | Regex pattern for event detection. `default: "/(\\.on\|\\.subscribeTo)\\S*/"` |
 | responseTopicList | true | List of subscribed response topics. |
 | RippleProcessPerformancePercentile | false | Performance percentile threshold for ripple processes. `default: 70` |
 | RippleProcessRSSPSSThreshold | false | RSS/PSS threshold for ripple processes. `default: 1073741824` |
