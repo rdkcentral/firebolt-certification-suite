@@ -229,6 +229,7 @@ module.exports = {
   IS_RPC_ONLY: 'isRpcOnlyValidation',
   IS_SAME_APP_TRANSITION: 'isSameAppTransition',
   IS_SCENARIO_EXEMPTED: 'isScenarioExempted',
+  IS_EVENTS_EXPECTED: 'isEventsExpected',
   JOBID: 'jobId',
   JSON_FILE_EXTENSION: '_CoreSuiteReport.json',
   JWT: 'jwt',
@@ -255,6 +256,7 @@ module.exports = {
   LIFECYCLE_HISTORY_INTENT: 'Lifecycle intent sent to application to fetch App history: ',
   LIFECYCLE_METHOD_LIST: ['Lifecycle.ready', 'Lifecycle.state', 'Lifecycle.close'],
   LIFECYCLE_NOTIFICATION_GENERATED: 'Lifecycle events generated ',
+  SKIP_LIFECYCLE_EVENT_VALIDATION: 'Skipping lifecycle event validation',
   LIFECYCLE_STATE: 'Lifecycle.state',
   LIFECYCLE_STATES: {
     FOREGROUND: 'foreground',
@@ -265,6 +267,9 @@ module.exports = {
     UNLOADED: 'unloaded',
     SUSPENDED: 'suspended',
     TERMINATED: 'terminated',
+    PAUSED: 'paused',
+    ACTIVE: 'active',
+    HIBERNATED: 'hibernated'
   },
   LIFECYCLE_VALIDATION: 'lifecycle_validation',
   LIFECYCLE_VALIDATION_METHOD: 'Lifecycle.validation',
@@ -387,7 +392,12 @@ module.exports = {
     GETAPPDATA: 'fcs.getAppData',
     SENDKEYPRESS: 'fcs.sendKeyPress',
     SENDVOICECOMMAND: 'fcs.sendVoiceCommand',
+    SETLIFECYCLESTATEV1: 'fcsV1.setLifecycleState',
+    SETLIFECYCLESTATEV2: 'fcsV2.setLifecycleState',
     FINDLOGPATTERN: 'fcs.findLogPattern',
+    VALIDATELIFECYCLEFIREBOLTLOGS: 'fcs.validateLifecycleFireboltLogs',
+    THUNDEREVENTHANDLER: 'fcs.thunderEventHandler',
+    GET_LIFECYCLEV2_STATE: 'fcsV2.getState',
   },
   RESPONSE: 'Response: ',
   RESPONSE_INVALID_RESPONSE_LOG:
@@ -461,6 +471,7 @@ module.exports = {
     PERFORMANCETESTHANDLER: 'performanceTestHandler',
     VISIBILITYSTATE: 'visibilityState',
     REGISTERPROVIDERHANDLER: 'registerProviderHandler',
+    THUNDEREVENTHANDLER: 'thunderEventHandler'
   },
   TEST_TYPE: 'testType',
   THIRD_PARTY_APP: '3rd party app',
@@ -552,11 +563,20 @@ module.exports = {
     PLAYBACK: 'playback',
   },
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
+  INVALID_PUBLISH_MESSAGE: 'Publish message to invoke lifecycle API is invalid',
+  LIFECYCLE_EMPTY_RESPONSE: 'Received empty response while invoking lifecycle API',
+  LIFECYCLE_API_INVOCATION_FAILED: 'Failed to invoke lifecycle API due to following error - ',
+  LIFECYCLE_HISTORY_FIELD: 'result._history._value',
+  LIFECYCLE_SCHEMA_VALIDATION_FAILED:
+    'Schema validation failed for lifecycle API response with following error - ',
+  INVALID_LIFECYCLE_STATE: 'Provided lifecycle state is invalid - ',
+  LIFECYCLE_SET_STATE_FAILED: 'Request to set lifecycle state failed with following error - ',
   FCS_EXIT_CODE: {
     SUCCESS: 0,
     GENERAL_FAILURE: 1,
     CRITICAL_FAILURE: 2,
   },
+  LIFECYCLE_EVENT_VALIDATION: 'LIFECYCLE_EVENT_VALIDATION',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
