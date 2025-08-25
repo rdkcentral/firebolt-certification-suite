@@ -88,7 +88,7 @@ Feature: Discovery
          | invalid completed status         | notify watched content with invalid completed                |
          | invalid watched on               | notify watched content with invalid watchedon                |
          | invalid integer age policy value | notify watched content with invalid integer age policy value |
-         | invalid boolean age policy value | notify watched content with boolean integer age policy value |
+         | invalid boolean age policy value | notify watched content with invalid boolean age policy value |
 
    @sdk @transport @Sev2
    Scenario Outline: Discovery.watchNext - Validating API Error handling when given <Scenario>

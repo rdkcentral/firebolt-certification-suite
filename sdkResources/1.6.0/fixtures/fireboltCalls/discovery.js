@@ -271,18 +271,14 @@ exports.DISCOVERY_COMMON_VARIABLES = {
       progress: 0.95,
       completed: true,
       watchedOn: '2021-04-23T18:25:43.511Z',
-      options: {
-        agePolicy: 123,
-      },
+      agePolicy: 123,
     },
     WATCHED_INVALID_BOOLEAN_AGE_POLICY_VALUE: {
       entityId: 'partner.com/entity/123',
       progress: 0.95,
       completed: true,
       watchedOn: '2021-04-23T18:25:43.511Z',
-      options: {
-        agePolicy: true,
-      },
+      agePolicy: true,
     },
     WATCHNEXT_ONLY_TITLE: {
       title: 'A Cool Show',
