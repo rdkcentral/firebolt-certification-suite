@@ -365,6 +365,7 @@ module.exports = async (on, config) => {
             reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
             reportProperties.customReportData = customReportData;
             reportProperties.certification = certification;
+            // team
             reportProperties.team = config.env.team ? config.env.team : 'N/A';
             reportProperties.goal = config.env.goal ? config.env.goal : 'N/A';
             // Add the report to the reportObj
