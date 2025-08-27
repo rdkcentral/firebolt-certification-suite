@@ -1477,7 +1477,11 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
     // cy.then() to ensure each Cypress command is properly awaited before return
     cy.then(() => {
-      fireLog.info(`====== Beginning of the ${scenario} validation ======`, 'report');
+      // Log custom validation name via assertionDef otherwise log the scenario name
+      scenario === CONSTANTS.CUSTOM
+        ? fireLog.info(`====== Beginning of the ${assertionDef} validation ======`, 'report')
+        : fireLog.info(`====== Beginning of the ${scenario} validation ======`, 'report');
+
       switch (scenario) {
         case CONSTANTS.REGEX:
           cy.regExValidation(
