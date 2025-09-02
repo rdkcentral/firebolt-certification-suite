@@ -1,3 +1,10 @@
+## [1.15.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.15.0...v1.15.1-dev.1) (2025-09-02)
+
+
+### Bug Fixes
+
+* Wait for dynamicIntent to resolve ([#478](https://github.com/rdkcentral/firebolt-certification-suite/issues/478)) ([53be3ca](https://github.com/rdkcentral/firebolt-certification-suite/commit/53be3ca1842b503d1adf29d6f04d00bf3659897c))
+
 # [1.15.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0...v1.15.0) (2025-08-20)
 
 
