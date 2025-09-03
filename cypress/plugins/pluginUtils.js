@@ -24,9 +24,9 @@ async function getAndDereferenceOpenRpc(externalUrls, version = null) {
 
   try {
     // Get firebolt openRPC & dereference
-    // const fireboltRes = await axios.get(fireboltUrl);
-    // const deSchemaList = await $RefParser.dereference(fireboltRes.data);
-    // openRpcDocs.push(deSchemaList);
+    const fireboltRes = await axios.get(fireboltUrl);
+    const deSchemaList = await $RefParser.dereference(fireboltRes.data);
+    openRpcDocs.push(deSchemaList);
 
     // Check if the local openRPC directory exists
     const localOpenRpcDirExists = fs.existsSync(localOpenRpcDir);
