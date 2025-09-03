@@ -17,7 +17,9 @@ const _ = require('lodash');
 async function getAndDereferenceOpenRpc(externalUrls, version = null) {
   // Define constants
   const openRpcDocs = [];
-  const fireboltUrl = version
+  const fireboltUrl = version && sdkSignOff
+  ? 'https://rdkcentral.github.io/firebolt/requirements/next/specifications/firebolt-open-rpc.json'
+  : version
     ? `https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json`
     : 'https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json';
   const localOpenRpcDir = path.join('node_modules', 'configModule', 'constants', 'openRPC');
