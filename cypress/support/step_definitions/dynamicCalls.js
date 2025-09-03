@@ -16,7 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
-import UTILS, { fireLog } from '../cypress-support/src/utils';
+import UTILS from '../cypress-support/src/utils';
+const { fireLog } = require('../cypress-support/src/fireLog');
+
 const CONSTANTS = require('../constants/constants');
 
 /**

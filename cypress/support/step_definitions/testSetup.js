@@ -17,7 +17,8 @@
  */
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
-import UTILS, { fireLog } from '../cypress-support/src/utils';
+import UTILS from '../cypress-support/src/utils';
+const { fireLog } = require('../cypress-support/src/fireLog');
 const internalIntentTemplates = require('../../fixtures/intentTemplates');
 const externalIntentTemplates = require('../../fixtures/external/intentTemplates/index');
 const { _ } = Cypress;

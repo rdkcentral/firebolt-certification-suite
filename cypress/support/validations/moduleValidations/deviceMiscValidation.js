@@ -17,7 +17,7 @@
  */
 const CONSTANTS = require('../../constants/constants');
 const UTILS = require('../../cypress-support/src/utils');
-import { fireLog } from '../../cypress-support/src/utils';
+import { fireLog } from '../../cypress-support/src/fireLog';
 
 /**
  * @module deviceMiscValidation
