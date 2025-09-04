@@ -1125,6 +1125,32 @@ function determineActionFromFeatureFile(testRunnable) {
   return 'CORE';
 }
 
+/**
+ * Builds a fallback intent object when dynamic intent resolution from asset gere fails
+ * or is not available.
+ *
+ * @param {string} appId - The application ID.
+ * @param {string} intent - The name of the intent to resolve.
+ * @param {object} intentTemplate - The intent template from app metadata.
+ * @returns {object} Intent object containing appId and resolved intent value.
+ * @throws Logs failure and stops execution if the intentTemplate cannot be resolved.
+ */
+function buildFallbackIntent(appId, intent, intentTemplate) {
+  try {
+    return {
+      [CONSTANTS.APP_ID]: appId,
+      [CONSTANTS.INTENT]: resolveRecursiveValues(intentTemplate),
+    };
+  } catch (error) {
+    if (Object.keys(Cypress.env(CONSTANTS.RUNTIME).intent || {}).length === 0) {
+      fireLog.fail(
+        `Intent ${intent} not found in appMetadata for appId ${appId}. Please check the appMetadata.`
+      );
+    }
+    fireLog.fail('Could not resolve intentTemplate: ' + error.message);
+  }
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -1157,4 +1183,5 @@ module.exports = {
   captureScreenshot,
   addToEnvLabelMap,
   determineActionFromFeatureFile,
+  buildFallbackIntent,
 };
