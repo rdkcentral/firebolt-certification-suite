@@ -445,6 +445,7 @@ module.exports = {
     FIREBOLTMOCKS: 'fireboltMocks',
     SET_RESPONSE_JSON: 'setResponseJson',
   },
+  SUPPORTED_INTENTS: 'supportedIntents',
   SUPPORTED_SDK: 'supportedSDK',
   TASK: {
     CALLLIFECYCLE: 'callLifecycle',
