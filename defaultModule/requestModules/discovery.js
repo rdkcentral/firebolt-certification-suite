@@ -21,7 +21,6 @@
 import modularTransportClient from '../../../cypress/support/modularTransportClient';
 const CONSTANTS = require('../../../cypress/support/constants/constants');
 const UTILS = require('../../../cypress/support/cypress-support/src/utils');
-const logger = require('../../../cypress/support/Logger')('discovery.js');
 const MESSAGE = 'message';
 const WEBSOCKET = 'WebSocket';
 
@@ -35,7 +34,7 @@ const WEBSOCKET = 'WebSocket';
 **/
 
 async function initWSClient(wsUrl = null) {
-  logger.info('Initialising the websocket client', 'initWSClient');
+  fireLog.info('Initialising the websocket client');
   try {
     let url = wsUrl;
     if (!wsUrl) {
@@ -54,13 +53,10 @@ async function initWSClient(wsUrl = null) {
       });
     }
     await webSocketClient.initialize();
-    logger.info('Websocket client initialized', 'initWSClient');
+    fireLog.info('Websocket client initialized');
     return webSocketClient;
   } catch (err) {
-    logger.error(
-      'Following error occured during initialising websocket client -' + err,
-      'initWSClient'
-    );
+    fireLog.error('Following error occured during initialising websocket client -' + err);
     return err;
   }
 }

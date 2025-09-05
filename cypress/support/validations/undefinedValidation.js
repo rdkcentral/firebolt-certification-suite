@@ -10,7 +10,7 @@
  */
 
 const CONSTANTS = require('../constants/constants');
-const { fireLog } = require('../cypress-support/src/utils');
+const { fireLog } = require('../cypress-support/src/fireLog');
 
 Cypress.Commands.add(
   'undefinedValidation',

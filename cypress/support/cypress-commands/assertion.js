@@ -17,7 +17,8 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS, { fireLog } from '../cypress-support/src/utils';
+import UTILS from '../cypress-support/src/utils';
+const { fireLog } = require('../cypress-support/src/fireLog');
 
 /**
  * @module assertion
@@ -126,7 +127,7 @@ Cypress.Commands.add(
         ' to be ' +
         JSON.stringify(expected);
       if (_.isEqual(apiResponseContent, expected)) {
-        fireLog.info(`${pretext}`);
+        fireLog.info(`${pretext}`, 'report');
       } else {
         fireLog.assert(false, pretext);
       }
@@ -565,7 +566,7 @@ Cypress.Commands.add(
 
     // Log or assert based on the status
     if (status === CONSTANTS.PASS || status === CONSTANTS.SKIPPED) {
-      fireLog.info(logMessage);
+      fireLog.info(logMessage, 'report');
     } else {
       fireLog.assert(false, logMessage);
     }
@@ -590,14 +591,14 @@ Cypress.Commands.add(
     if (eventReceived) {
       try {
         eventReceived = JSON.parse(eventReceived);
-        fireLog.info('Event Response: ' + JSON.stringify(eventReceived.eventResponse));
+        fireLog.info('Event Response: ' + JSON.stringify(eventReceived.eventResponse), 'report');
       } catch (e) {
         fireLog.info('Event Response: ' + eventReceived);
       }
     }
 
-    fireLog.info('Event Received Check : ' + eventReceivedCheck);
-    fireLog.info('Event Schema Check : ' + schemaCheck);
+    fireLog.info('Event Received Check : ' + eventReceivedCheck, 'report');
+    fireLog.info('Event Schema Check : ' + schemaCheck, 'report');
   }
 );
 

@@ -1,6 +1,6 @@
 {
   "name": "firebolt-certification-suite",
-  "version": "1.13.0",
+  "version": "1.16.0",
   "description": "Firebolt Certification Test Suite",
   "main": "index.js",
   "config": {
@@ -55,8 +55,8 @@
     "setimmediate": "^1.0.5",
     "shell-exec": "1.0.2",
     "uuid": "^8.3.1",
-    "winston": "^3.8.2",
-    "soft-assert": "^0.2.7"
+    "soft-assert": "^0.2.7",
+    "fireLog": "file:./cypress/support/cypress-support/src/fireLog"
   },
   "devDependencies": {
     "babel-jest": "^27.4.5",

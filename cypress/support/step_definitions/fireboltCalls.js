@@ -19,7 +19,8 @@ import { Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
 const _ = require('lodash');
 import { apiObject } from '../appObjectConfigs';
-import UTILS, { fireLog } from '../cypress-support/src/utils';
+import UTILS from '../cypress-support/src/utils';
+const { fireLog } = require('../cypress-support/src/fireLog');
 
 /**
  * @module fireboltCalls
@@ -41,7 +42,8 @@ Given(/1st party app invokes the (?:'(.+)' )?API to '(.+)'$/, async (sdk, key) =
         'Call from 1st party App, method: ' +
           parsedData.method +
           ' params: ' +
-          JSON.stringify(parsedData.params)
+          JSON.stringify(parsedData.params),
+        'report'
       );
       cy.sendMessageToPlatformOrApp(CONSTANTS.PLATFORM, parsedData);
     });
@@ -107,7 +109,8 @@ Given(
           parsedData.deviceIdentifier = deviceIdentifier;
 
           fireLog.info(
-            `Call from app: ${appId}, device: ${deviceIdentifier || UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)} - method: ${parsedData.method} params: ${JSON.stringify(parsedData.params)}`
+            `Call from app: ${appId}, device: ${deviceIdentifier || UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC)} - method: ${parsedData.method} params: ${JSON.stringify(parsedData.params)}`,
+            'report'
           );
 
           cy.sendMessageToPlatformOrApp(CONSTANTS.APP, parsedData);
@@ -142,7 +145,8 @@ Given(/'(.+)' registers for the '(.+)' event using the '(.+)' API$/, async (appI
 
       parsedData.appId = appId;
       fireLog.info(
-        `Registering for the ${parsedData.method} event using ${appId} with params : ${JSON.stringify(parsedData.params)}`
+        `Registering for the ${parsedData.method} event using ${appId} with params : ${JSON.stringify(parsedData.params)}`,
+        'report'
       );
       cy.sendMessageToPlatformOrApp(CONSTANTS.APP, parsedData, CONSTANTS.TASK.REGISTEREVENT);
     });
@@ -166,7 +170,8 @@ Given(/1st party app registers for the '(.+)' event using the '(.+)' API$/, asyn
       fireLog.info(
         `Registering for the ${parsedData.method} event using 1st party App with params : ${JSON.stringify(
           parsedData.params
-        )}`
+        )}`,
+        'report'
       );
       cy.sendMessageToPlatformOrApp(CONSTANTS.PLATFORM, parsedData, CONSTANTS.TASK.REGISTEREVENT);
     });
@@ -208,10 +213,11 @@ Given(/(3rd party|1st party) stops listening to the event '(.+)'$/, async (app, 
         };
 
         fireLog.info(
-          'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params)
+          'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(params),
+          'report'
         );
         cy.sendMessagetoPlatforms(requestMap).then((result) => {
-          fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
+          fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result), 'report');
         });
       } else {
         const appId = fireboltItem.appId
@@ -233,7 +239,8 @@ Given(/(3rd party|1st party) stops listening to the event '(.+)'$/, async (app, 
         // Sending message to 3rd party app.
         cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
           fireLog.info(
-            `Response from ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(result)}`
+            `Response from ${Cypress.env(CONSTANTS.THIRD_PARTY_APP_ID)}: ${JSON.stringify(result)}`,
+            'report'
           );
         });
       }
@@ -361,7 +368,7 @@ Given(/User triggers event with value as '(.+)'/, (key) => {
  * When device is rebooted
  */
 Given('device is rebooted', () => {
-  fireLog.info(CONSTANTS.STEP_DEFINITION_NEEDS_TO_IMPLEMENT).then(() => {
+  fireLog.info(CONSTANTS.STEP_DEFINITION_NEEDS_TO_IMPLEMENT, 'report').then(() => {
     throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
   });
 });
@@ -408,13 +415,20 @@ Given(
           }
         } else {
           // other dismiss cases
+          const tags = Cypress.env('TAGS');
 
           // check whether app is loggedIn or loggedOut
-          if (scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDIN.toLowerCase())) {
+          if (
+            scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDIN.toLowerCase()) ||
+            tags?.includes(CONSTANTS.SUBSCRIBED_APPS)
+          ) {
             loggedType = CONSTANTS.LOGGEDIN;
-          } else if (scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDOUT.toLowerCase())) {
+          } else if (
+            scenarioTypeLowerCase?.includes(CONSTANTS.LOGGEDOUT.toLowerCase()) ||
+            tags?.includes(CONSTANTS.FREE_APPS)
+          ) {
             loggedType = CONSTANTS.LOGGEDOUT;
-          } else if (action == CONSTANTS.STREAMING) {
+          } else if (action == CONSTANTS.STREAMING || tags?.includes(CONSTANTS.SUBSCRIBED_APPS)) {
             loggedType = CONSTANTS.LOGGEDIN;
           }
 
@@ -469,7 +483,8 @@ Given(
       case CONSTANTS.DISMISSED:
         params.entity = entity;
         fireLog.info(
-          `Dismissing the ${params.entity ? params.entity : 'app'} using the keyPressSequence: ${KeyPressSequence?.dismiss}`
+          `Dismissing the ${params.entity ? params.entity : 'app'} using the keyPressSequence: ${KeyPressSequence?.dismiss}`,
+          'report'
         );
         params.keyPressSequence = KeyPressSequence?.dismiss;
         actionType = CONSTANTS.ACTIONTYPE.DISMISS_APP;
@@ -496,12 +511,15 @@ Given(
         if (params.keyPressSequence && params.keyPressSequence.length > 0) {
           cy.sendKeyPress(params.keyPressSequence);
         } else {
-          fireLog.info(`No additional keypress required to start playback for app ${appId}`);
+          fireLog.info(
+            `No additional keypress required to start playback for app ${appId}`,
+            'report'
+          );
         }
       } else {
         cy.exitAppSession(actionType, params).then((response) => {
           if (response) {
-            fireLog.info(`Response from platform: ${JSON.stringify(response)}`);
+            fireLog.info(`Response from platform: ${JSON.stringify(response)}`, 'report');
           } else {
             fireLog.fail(
               `Failed to get a valid response from platform when attempting to exit app session for appId ${appId} using keypress sequence ${KeyPressSequence?.dismiss}`
