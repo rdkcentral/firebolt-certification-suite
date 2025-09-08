@@ -61,6 +61,7 @@ module.exports = {
   CONFIG: 'CONFIG',
   CONFIG_IMPLEMENTATION_MISSING: 'Config module implementation missing',
   CONFIG_MODULE_SETRESPONSE_PATH: 'cypress/fixtures/external/setResponseData.json',
+  CONSOLE_LOGGER_LEVEL: 'consoleLoggerLevel',
   CONTENT: 'Content',
   CONTEXT: 'Context',
   CONTEXT_FILE_PATH: 'cypress/fixtures/apiObjectContext.json',
@@ -270,6 +271,7 @@ module.exports = {
   LIMITADTRACKING_OFF: 'limitAdTrackingOFF',
   LIMITADTRACKING_ON: 'limitAdTrackingON',
   LISTENING: 'listening',
+  LOGGER_LEVEL: 'loggerLevel',
   LONGPOLL_TIMEOUT: 15000,
   MACADDRESS_PARAM: 'macaddress',
   MESSAGE_QUEUE: 'messageQueue',
@@ -532,6 +534,8 @@ module.exports = {
   PLAYBACK: 'playback',
   LOGGEDIN: 'loggedIn',
   LOGGEDOUT: 'loggedOut',
+  FREE_APPS: 'freemiumapps',
+  SUBSCRIBED_APPS: 'subscribedapps',
   DISMISS: 'dismiss',
   DETAILED: 'detailed',
   APP_LAUNCH_COUNT: 'appLaunchCount',
@@ -551,7 +555,8 @@ module.exports = {
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
   FCS_EXIT_CODE: {
     SUCCESS: 0,
-    FAILURE: 1,
+    GENERAL_FAILURE: 1,
+    CRITICAL_FAILURE: 2,
   },
 };
 function getSanityReportPath() {

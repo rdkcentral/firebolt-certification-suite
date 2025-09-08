@@ -17,7 +17,8 @@
  */
 
 const CONSTANTS = require('../constants/constants');
-import UTILS, { fireLog } from '../cypress-support/src/utils';
+import UTILS from '../cypress-support/src/utils';
+const { fireLog } = require('../cypress-support/src/fireLog');
 
 /**
  * @module performanceValidation
@@ -41,21 +42,23 @@ Cypress.Commands.add('performanceValidation', (object) => {
       params: { type, process, percentile, threshold },
     };
 
-    fireLog.info('Performance validation has started');
+    fireLog.info('Performance validation has started', 'report');
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       cy.wrap(result)
         .then((response) => {
           if (response && Array.isArray(response)) {
             response.map((res) => {
-              fireLog.info(JSON.stringify(res));
+              fireLog.info(JSON.stringify(res), 'report');
             });
           }
         })
         .then(() => {
           if (result.error) {
-            fireLog.info('Failed to fetch and validate the performance metrics').then(() => {
-              fireLog.assert(false, result.error);
-            });
+            fireLog
+              .info('Failed to fetch and validate the performance metrics', 'report')
+              .then(() => {
+                fireLog.assert(false, result.error);
+              });
           } else {
             result.map((response) => {
               fireLog.equal(true, response?.success, response?.message);
