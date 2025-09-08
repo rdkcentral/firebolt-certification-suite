@@ -43,7 +43,9 @@ Given(
     let supportedIntents = [];
     if (app_metadata && app_metadata.apps) {
       const app = app_metadata.apps.find((app) => app[appCallSign]);
-      supportedIntents = supportedIntents.concat(Object.keys(app[appCallSign]));
+      if (app && app[appCallSign]) {
+        supportedIntents = supportedIntents.concat(Object.keys(app[appCallSign]));
+      }
     } else if (app_metadata) {
       const metadataKeys = Object.keys(app_metadata);
       metadataKeys.forEach((appId) => {
