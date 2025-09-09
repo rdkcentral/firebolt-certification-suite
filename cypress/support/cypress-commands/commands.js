@@ -1068,6 +1068,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
 
         if (giveDynamicAssetsPrecedence || !Cypress.env(CONSTANTS.RUNTIME)?.intent) {
           cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
+            console.log('*****Divya Attempting to resolve dynamic intent via AssetGenerator');
             if (dynamicIntent && Object.keys(dynamicIntent).length > 0) {
               Cypress.env(CONSTANTS.RUNTIME).intent = { ...dynamicIntent };
               messageIntent = {
@@ -1075,6 +1076,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
                 [CONSTANTS.INTENT]: dynamicIntent.entityId,
               };
             } else {
+              console.log('*****Divya Attempting to build Fallabck');
               messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
             }
           });
