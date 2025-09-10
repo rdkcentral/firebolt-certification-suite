@@ -47,6 +47,7 @@ module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
   const testsuite = config.env.testSuite;
   const sdkVersion = config.env.sdkVersion;
+  const sdkSignOff = config.env.sdkSignOff;
   const specPattern = getSpecPattern(testsuite);
   if (specPattern !== undefined) {
     config.specPattern = specPattern;
@@ -60,7 +61,11 @@ module.exports = async (on, config) => {
   config.reporterOptions.reportDir = `./reports/${config.env.jobId}`;
 
   // Get and dereference OpenRPC
-  const openRpcs = await getAndDereferenceOpenRpc(config.env.externalOpenRpcUrls, sdkVersion);
+  const openRpcs = await getAndDereferenceOpenRpc(
+    config.env.externalOpenRpcUrls,
+    sdkVersion,
+    sdkSignOff
+  );
   // Set env equal to strigified openRpcs due to circular references
   config.env.dereferenceOpenRPC = flatted.stringify(openRpcs);
 

@@ -372,7 +372,7 @@ Feature: Discovery.launch_HotLaunch
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch - Hot Launch : Validate API and Event response for <Scenario> for context source
+    Scenario Outline: Discovery.Launch - Hot Launch : Validate API and Event response for <Scenario> for context
         Given the environment has been set up for 'DiscoveryLaunch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -382,16 +382,27 @@ Feature: Discovery.launch_HotLaunch
         And 'Firebolt' platform triggers event '<Event_Content>'
 
         Examples:
-            | Scenario              | Discovery_Launch_Key                 | Event_Content                          |
-            | passing random string | launch app with random string source | onNavigateTo with random string source |
-            | passing valid string  | launch app with search intent source | onNavigateTo with search intent source |
+            | Scenario                        | Discovery_Launch_Key                 | Event_Content                          |
+            | passing random string source    | launch app with random string source | onNavigateTo with random string source |
+            | passing valid string source     | launch app with search intent source | onNavigateTo with search intent source |
+            | passing child agePolicy string  | launch app with child agePolicy      | onNavigateTo with child agePolicy      |
+            | passing teen agePolicy string   | launch app with teen agePolicy       | onNavigateTo with teen agePolicy       |
+            | passing adult agePolicy string  | launch app with adult agePolicy      | onNavigateTo with adult agePolicy      |
+            | passing empty agePolicy string  | launch app with empty agePolicy      | onNavigateTo with adult agePolicy      |
+            | passing custom agePolicy string | launch app with custom agePolicy     | onNavigateTo with custom agePolicy     |
 
     @sdk @transport @Sev2
-    Scenario: Discovery.Launch - Hot Launch : Validating API error handling given an Invalid context source
+    Scenario Outline: Discovery.Launch - Hot Launch : Validating API error handling given <Scenario> for context
         Given the environment has been set up for 'DiscoveryLaunch' tests
         And '3rd party app' transitions to state 'foreground'
-        When 1st party app invokes the 'Firebolt' API to 'launch app with search intent int source'
+        When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'invalid parameters for discovery launch'
+
+        Examples:
+            | Scenario                        | Discovery_Launch_Key                     |
+            | invalid integer agePolicy value | launch app with int agePolicy            |
+            | invalid boolean agePolicy value | launch app with boolean agePolicy        |
+            | passing integer source          | launch app with search intent int source |
 
     @sdk @transport @requiresPlatformImplementation @Sev2
     Scenario Outline: Discovery.Launch - Hot Launch : Validate API and Event response when one app is in <state> state and one is in foreground state

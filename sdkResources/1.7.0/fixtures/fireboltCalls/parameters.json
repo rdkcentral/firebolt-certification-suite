@@ -11,6 +11,10 @@
         "method": "parameters.initialization",
         "context": "DISCOVERY_LAUNCH_NULL"
     },
+    "GET_INITIALIZATION_PARAMETERS_FOR_AGEPOLICY": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SEARCH"
+    },
     "GET_INITIALIZATION_PARAMETERS_FOR_HOME_INTENT": {
         "method": "parameters.initialization",
         "context": "DISCOVERY_LAUNCH_HOME"
@@ -52,6 +56,36 @@
         "context": "DISCOVERY_LAUNCH_NULL",
         "validationJsonPath": "result.discovery",
         "content": "PARAMETERS_INITIALIZATION_NULLINTENT"
+    },
+    "AGEPOLICY_CHILD_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SEARCH",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_AGEPOLICY_CHILD"
+    },
+    "AGEPOLICY_TEEN_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SEARCH",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_AGEPOLICY_TEEN"
+    },
+    "AGEPOLICY_ADULT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SEARCH",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_AGEPOLICY_ADULT"
+    },
+    "AGEPOLICY_CUSTOM_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SEARCH",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_AGEPOLICY_CUSTOM"
+    },
+    "AGEPOLICY_EMPTY_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SEARCH",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_AGEPOLICY_EMPTY"
     },
     "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS": {
         "method": "parameters.initialization",
