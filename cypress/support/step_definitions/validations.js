@@ -363,3 +363,44 @@ Given(/3rd party '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
     });
   });
 });
+
+/**
+ * @module validations
+ * @function I should see '(.+)' as channel name
+ * @description Takes a screenshot of the screen and validates that the expected channel name appears in the OCR result.
+ * @param {String} expectedChannelName - Name of the channel expected to be visible on screen.
+ * @example
+ * Then I should see 'Great British Menu' as channel name
+ */
+Then(/I should see '(.+)' as channel name$/, (expectedChannelName) => {
+  // UTILS.captureScreenshot();
+
+  cy.validateTextInOCR(expectedChannelName);
+  cy.sendKeyPress('enter');
+});
+
+/**
+ * @module validations
+ * @function I surf and see the following channel names:
+ * @description Navigates through multiple channels using navigation button + enter(to bring Channel info) keypresses
+ * and validates that each expected channel name appears in the OCR result.
+ * @param {DataTable} dataTable - Gherkin table listing expected channel names in order.
+ * @example
+ * Then I surf 'down' and see the following channel names:
+ *   | Home Under the Hammer |
+ *   | Great British Menu    |
+ *   | Billards              |
+ */
+Then(/I surf '(.+)' and see the following channel names:/, (keypress, dataTable) => {
+  const channelNames = dataTable.rawTable.flat();
+
+  cy.wrap(channelNames).each((channel) => {
+    cy.sendKeyPress(keypress);
+    cy.wait(45000); // Wait 45 sec for if error overlay appears
+    cy.log(`Keypress done successfully for ${keypress}`);
+    cy.sendKeyPress('enter');
+    cy.log(`Keypress done successfully for enter`);
+    cy.validateTextInOCR(channel);
+    cy.sendKeyPress('enter');
+  });
+});
