@@ -38,7 +38,7 @@ Given(
   function (appType, appCallSign, state, intent) {
     Cypress.env(CONSTANTS.APP_TYPE, appType);
     Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) || 0);
- 
+
     const app_metadata = Cypress.env(CONSTANTS.APP_METADATA);
     let supportedIntents = [];
     if (app_metadata && app_metadata.apps) {
@@ -54,7 +54,7 @@ Given(
         }
       });
     }
- 
+
     Cypress.env(CONSTANTS.SUPPORTED_INTENTS, supportedIntents);
     if (supportedIntents.includes(intent) || intent === 'appLaunch' || intent === null) {
       if (
