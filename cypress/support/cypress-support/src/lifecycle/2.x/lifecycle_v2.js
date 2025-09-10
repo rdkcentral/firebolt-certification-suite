@@ -61,10 +61,11 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
 
     try {
       switch (state) {
+        case CONSTANTS.LIFECYCLE_STATES.INITIALIZING:
+          break;
         case CONSTANTS.LIFECYCLE_STATES.PAUSED:
         case CONSTANTS.LIFECYCLE_STATES.ACTIVE:
         case CONSTANTS.LIFECYCLE_STATES.SUSPENDED:
-        case CONSTANTS.LIFECYCLE_STATES.INITIALIZING: {
           if (stateTransition.includes(state) && currentAppState.state !== state) {
             const fireboltEventMap =
               lifecycleConfig.expectedFireboltEvents?.[state.toLowerCase()] || {};
@@ -72,18 +73,18 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
               lifecycleConfig.expectedThunderEvents?.[state.toLowerCase()] || {};
             const fbEvents = fireboltEventMap?.[currentAppState.state] || [];
             const thunderEvents = thunderEventMap?.[currentAppState.state] || [];
-            this.setLifecycleState(state, appId).then(() =>
-              this.setAppObjectState(state, fbEvents, thunderEvents)
-            );
+
+            this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_APIS.READY, {})
+              .then(() => this.setLifecycleState(state, appId))
+              .then(() => this.setAppObjectState(state, fbEvents, thunderEvents));
           } else {
             cy.log(
               `Requested state transition from ${currentAppState.state} to ${state} is not supported`
             );
           }
           break;
-        }
 
-        case CONSTANTS.LIFECYCLE_STATES.HIBERNATED: {
+        case CONSTANTS.LIFECYCLE_STATES.HIBERNATED:
           if (currentAppState.state === CONSTANTS.LIFECYCLE_STATES.PAUSED) {
             const fireboltEventMap =
               lifecycleConfig.expectedFireboltEvents?.[
@@ -120,7 +121,7 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
             );
           }
           break;
-        }
+
         case CONSTANTS.LIFECYCLE_STATES.UNLOADED:
           // TBD
           break;
@@ -187,7 +188,6 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
     }
     return this.setAppState(state, appId);
   }
-
 
   // Validate lifecycle firebolt and thunder events
   validateEvents(isEventsExpected) {
