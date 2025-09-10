@@ -1,7 +1,7 @@
 const lifecycleConfig = require('./lifecycleConfig.json');
 const { LifeCycleAppConfigBase } = require('../LifeCycleAppConfigBase');
-const logger = require('../../../../Logger')('lifecycle_v2.js');
 const CONSTANTS = require('../../../../constants/constants');
+const UTILS = require('../../../src/utils');
 
 class notificationConfig {
   constructor(message) {
@@ -13,12 +13,6 @@ class notificationConfig {
 }
 
 class stateConfig {
-  static visibilityState = {
-    initializing: 'hidden',
-    paused: 'hidden',
-    active: 'visible',
-  };
-
   constructor(state) {
     this.state = state;
     this.tStartTime = Date.now();
@@ -34,7 +28,7 @@ class stateConfig {
     // If currentState and previousState are not equal and allowed state transition supports currentState, generate an event and push to notification list
     if (stateTransition.includes(currentState) && currentState != previousState) {
       const message = { previous: previousState, state: currentState };
-      logger.info('Lifecycle appObject transition: ' + JSON.stringify(message));
+      console.log('Lifecycle appObject transition: ' + JSON.stringify(message));
       const tempNotification = new notificationConfig(message);
       if (Array.isArray(fbEvents) && fbEvents.length > 0) {
         tempNotification.fbEvents.push(...fbEvents);
@@ -51,6 +45,11 @@ class stateConfig {
 export default class lifecycle_v2 extends LifeCycleAppConfigBase {
   constructor() {
     super();
+    this.visibilityStates = {
+      initializing: 'hidden',
+      paused: 'hidden',
+      active: 'visible',
+    };
   }
   /**
    * Sets the app and app object lifecycle state and handles all necessary transitions and validations.
@@ -139,11 +138,12 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
   setAppObjectState(newState, fbEvents, thunderEvents) {
     const currentState = this.state;
     this.state = new stateConfig(newState);
+    this.visibilityState = this.visibilityStates[newState];
     const stateTransition = lifecycleConfig.allowedStateTransitions[currentState.state];
 
     // If newState is initializing and app object history is empty, the state is not pushed to history
     if (newState == CONSTANTS.LIFECYCLE_STATES.INITIALIZING && this.history.length === 0) {
-      logger.info(
+      console.log(
         'New appState ' +
           newState +
           ' not pushed to history. If history list is empty and app tries to transition to initializing state, the state will not be pushed to history',
@@ -158,12 +158,12 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
           currentState.state == CONSTANTS.LIFECYCLE_STATES.INITIALIZING &&
           this.history.length === 0
         ) {
-          logger.info('Current appState ' + currentState.state + ' pushed to history');
+          console.log('Current appState ' + currentState.state + ' pushed to history');
           this.history.push(currentState);
         }
         // Next push the new state object to app object history
         this.history.push(this.state);
-        logger.info('New appState pushed to history: ' + newState);
+        console.log('New appState pushed to history: ' + newState);
       }
       if (!stateTransition.includes(newState)) {
         cy.log('Requested state transition for application is not supported');
@@ -187,5 +187,160 @@ export default class lifecycle_v2 extends LifeCycleAppConfigBase {
       this.setAppState(CONSTANTS.LIFECYCLE_STATES.ACTIVE, appId);
     }
     return this.setAppState(state, appId);
+  }
+
+  // Validate lifecycle firebolt and thunder events
+  validateEvents(isEventsExpected) {
+    Cypress.env(CONSTANTS.IS_EVENTS_EXPECTED, isEventsExpected);
+    cy.getFireboltData(CONSTANTS.LIFECYCLE_EVENT_VALIDATION).then((fireboltData) => {
+      const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
+      const validationObject = UTILS.resolveRecursiveValues(fireboltData);
+      cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
+        cy.softAssertAll();
+      });
+    });
+  }
+
+  // Validate lifecycle state
+  validateState(appId) {
+    const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
+    const lifecycleStateRequirementId = scenarioRequirement.find((req) =>
+      req.hasOwnProperty('state')
+    );
+
+    const currentState = this.getCurrentState().state;
+
+    const requestMaps = [
+      {
+        method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GET_LIFECYCLEV2_STATE,
+        params: { appId: appId },
+      },
+    ];
+
+    if (UTILS.shouldPerformValidation('validationTypes', 'lifecyelThunderStateValidation')) {
+      requestMaps.push({
+        method: CONSTANTS.REQUEST_OVERRIDE_CALLS.THUNDEREVENTHANDLER,
+        params: {},
+        task: CONSTANTS.TASK.THUNDEREVENTHANDLER,
+      });
+    }
+
+    const responses = [];
+
+    let chain = Promise.resolve();
+
+    requestMaps.forEach((requestMap) => {
+      chain = chain
+        .then(() => cy.sendMessagetoPlatforms(requestMap))
+        .then((response) => {
+          responses.push({ method: requestMap.method, response });
+        });
+    });
+
+    return chain.then(() => {
+      try {
+        responses.forEach(({ method, response }) => {
+          if (method === CONSTANTS.REQUEST_OVERRIDE_CALLS.GET_LIFECYCLEV2_STATE) {
+            const result = response?.state;
+            fireLog.equal(result, currentState, 'Lifecycle state validation');
+            this.validateVisibilityState(currentState);
+          } else if (method === CONSTANTS.REQUEST_OVERRIDE_CALLS.THUNDEREVENTHANDLER) {
+            const events = response || {};
+
+            // Collect all event logs from all top-level keys that have a "result" array after parsing
+            const allEventLogs = Object.values(events)
+              .map((jsonStr) => {
+                try {
+                  const parsed = JSON.parse(jsonStr);
+
+                  if ('error' in parsed) {
+                    throw new Error(
+                      `Received error inside trigger event response for thunder state validation: ${JSON.stringify(parsed.error)}`
+                    );
+                  }
+
+                  return Array.isArray(parsed.result) ? parsed.result : [];
+                } catch (error) {
+                  throw new Error(
+                    `Received following error while parsing triggered event response  for thunder state validation - ${error.message}`
+                  );
+                }
+              })
+              .flat();
+
+            // Find the last occurrence of the onAppLifecycleStateChanged event
+            const latestThunderEvent = [...allEventLogs].reverse().find((log) => {
+              return log.eventResponse?.method === 'onAppLifecycleStateChanged';
+            });
+            // Get the latest triggered event resposne of onAppLifecycleStateChanged event
+
+            const triggerEventResponse = latestThunderEvent?.eventResponse?.params;
+
+            if (triggerEventResponse) {
+              const thunderState = triggerEventResponse.newLifecycleState;
+
+              fireLog.equal(thunderState, currentState, `Thunder state validation`);
+
+              this.validateVisibilityState(currentState);
+            } else {
+              fireLog.fail(
+                `No valid onAppLifecycleStateChanged event response found in ThunderEventHandler response`
+              );
+            }
+          }
+        });
+      } catch (error) {
+        cy.log(CONSTANTS.ERROR_LIFECYCLE_STATE_VALIDATION + error).then(() => {
+          assert(false, CONSTANTS.ERROR_LIFECYCLE_STATE_VALIDATION + error);
+        });
+      }
+    });
+  }
+
+  validateHistory(appId) {
+    // Note: The requirement ID is currently unused, but may be utilized in future updates.
+    // Get validation requirements for the current scenario from the moduleReqId JSON
+    const scenarioRequirement = UTILS.getEnvVariable(CONSTANTS.SCENARIO_REQUIREMENTS);
+
+    // Fetching the requirement IDs for the "history" from the scenarioRequirement.
+    const lifecycleHistoryRequirementId = scenarioRequirement.find((req) =>
+      req.hasOwnProperty('history')
+    );
+
+    // Send message to 3rd party app to invoke lifecycle history API to get history response
+    this.invokeLifecycleApi(appId, CONSTANTS.LIFECYCLE_STATE, '{}').then((response) => {
+      // Perform a null check on history response and check if response has nested properties result, _history, _value
+      response = JSON.parse(response ?? '{}');
+      if (
+        response &&
+        response.result &&
+        response.result._history &&
+        response.result._history._value
+      ) {
+        const pretext = CONSTANTS.HISTORY_VALIDATION_REQ;
+        cy.log(
+          CONSTANTS.LIFECYCLE_HISTORY_RESPONSE + JSON.stringify(response.result._history._value)
+        );
+        // Extract app history value
+        const appHistory = response.result._history._value;
+        // Lifecycle history validation
+        if (appHistory.length > 0) {
+          // Construct an appHistoryList from app history data
+          const appHistoryList = appHistory.map((historyItem) => historyItem.event.state);
+          appHistoryList.splice(0, 0, appHistory[0].event.previous);
+          // Construct an appObjectHistory list from app object history data
+          let appObjectHistory = this.getHistory();
+          appObjectHistory = appObjectHistory.map((historyItem) => historyItem.state);
+          fireLog.deepEqual(appHistoryList, appObjectHistory, pretext);
+        } else {
+          // If app history value is empty, validate the empty history lists
+          const appObjectHistory = this.getHistory();
+          fireLog.deepEqual(appHistory, appObjectHistory, pretext);
+        }
+      } else {
+        // Fail test if no valid history response received from 3rd party application
+        fireLog.fail(CONSTANTS.INVALID_HISTORY_RESPONSE);
+      }
+    });
   }
 }

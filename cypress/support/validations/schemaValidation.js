@@ -18,7 +18,8 @@
 const CONSTANTS = require('../constants/constants');
 const Validator = require('jsonschema').Validator;
 const validator = new Validator();
-import UTILS, { fireLog } from '../cypress-support/src/utils';
+import UTILS from '../cypress-support/src/utils';
+const { fireLog } = require('../cypress-support/src/fireLog');
 
 /**
  * @module schemaValidation

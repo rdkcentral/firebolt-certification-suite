@@ -25,7 +25,6 @@ const defaultDirectory = CONSTANTS.DEFAULT_DIRECTORY;
 const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 const UTILS = require('./utils');
 const path = require('path');
-const logger = require('../../Logger')('main.js');
 const setimmediate = require('setimmediate');
 let appTransport;
 const flatted = require('flatted');
@@ -35,6 +34,7 @@ const internalV2FireboltCallsData = require('../../../fixtures/fireboltCalls/ind
 const externalV2FireboltCallsData = require('../../../fixtures/external/fireboltCalls/index');
 const internalV2FireboltMockData = require('../../../fixtures/fireboltCalls/index');
 const externalV2FireboltMockData = require('../../../fixtures/external/fireboltCalls/index');
+const { fireLog } = require('./fireLog');
 
 export default function (module) {
   const config = new Config(module);
@@ -47,7 +47,7 @@ export default function (module) {
 
   // before All
   before(() => {
-    logger.debug('Entering before() - cypress-support/src/main.js');
+    console.debug('Entering before() - cypress-support/src/main.js');
 
     // Added below custom commands to clear cache and to reload browser
     cy.clearCache();
@@ -55,9 +55,12 @@ export default function (module) {
       timeout: CONSTANTS.COMMUNICATION_INIT_TIMEOUT,
     }).then((result) => {
       if (result) {
-        cy.log('Successfully established a pub/sub connection.');
+        fireLog.info('Successfully established a pub/sub connection.', 'report');
       } else {
-        cy.log('Unable to establish a pub/sub connection.');
+        fireLog.log(
+          'Unable to establish a pub/sub connection.',
+          CONSTANTS.FCS_EXIT_CODE.CRITICAL_FAILURE
+        );
       }
       Cypress.env('pubSubClient', appTransport);
       cy.startAdditionalServices();
@@ -105,6 +108,7 @@ export default function (module) {
     const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
     const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
     Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
+    cy.callConfigModule('setupFireboltConnectionBasedOnVersion');
   });
 
   // beforeEach
@@ -224,8 +228,7 @@ export default function (module) {
           Cypress.env('webSocketClient', null); // Clear the WebSocket client from Cypress environment
         }
       } catch (err) {
-        logger.error(`Something went wrong when attempting to unsubscribe: ${err}`);
-        cy.log(`Something went wrong when attempting to unsubscribe: ${err}`);
+        console.error(`Something went wrong when attempting to unsubscribe: ${err}`);
       }
     })();
   });
@@ -346,7 +349,7 @@ export default function (module) {
    * startTest({"rawTable": [ ["paramType","variableName","value"]]})
    */
   Cypress.Commands.add('startTest', (datatables) => {
-    logger.debug('Entering startTest() - cypress-support/src/main.js');
+    fireLog.debug('Entering startTest() - cypress-support/src/main.js');
 
     const additionalParams = {};
     let overrideParams = {};
@@ -438,8 +441,8 @@ export default function (module) {
           try {
             response = JSON.parse(response);
           } catch (error) {
-            logger.error('Failed to parse JSON response. Response: ', JSON.stringify(response));
-            assert(
+            fireLog.error('Failed to parse JSON response. Response: ' + JSON.stringify(response));
+            fireLog.assert(
               false,
               'Failed to parse JSON response from Firebolt implementation. Please check the response format.'
             );
@@ -520,7 +523,7 @@ export default function (module) {
   Cypress.Commands.add(
     'sendMessagetoApp',
     async (requestTopic, responseTopic, intent, longPollTimeout) => {
-      logger.debug(
+      fireLog.debug(
         `Entering sendMessagetoApp() - cypress-support/src/main.js with params: requestTopic=${requestTopic}, responseTopic=${responseTopic}, intent=${JSON.stringify(intent)}`
       );
 
@@ -548,14 +551,14 @@ export default function (module) {
           .then((results) => {
             if (results) {
               // Response recieved from queue
-              logger.debug(`Response received from queue: ${JSON.stringify(results)}`);
+              fireLog.debug(`Response received from queue: ${JSON.stringify(results)}`);
               return results;
             } else if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
               return true;
             }
           });
       } else {
-        cy.log(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
+        fireLog.info(CONSTANTS.APP_TRANSPORT_UNAVAILABLE).then(() => {
           fireLog.fail(CONSTANTS.APP_TRANSPORT_UNAVAILABLE);
         });
       }
@@ -587,9 +590,8 @@ export default function (module) {
         });
       }
     } else {
-      logger.info(
-        'CONSTANTS.GENERATE_HTML_REPORT should be set to true in order to generate html report',
-        'generateAndPushReports'
+      fireLog.info(
+        'CONSTANTS.GENERATE_HTML_REPORT should be set to true in order to generate html report'
       );
     }
   });

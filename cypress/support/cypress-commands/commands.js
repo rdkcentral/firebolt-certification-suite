@@ -17,11 +17,11 @@
  */
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS, { fireLog, getEnvVariable, addToEnvLabelMap } from '../cypress-support/src/utils';
-const logger = require('../Logger')('command.js');
+import UTILS, { getEnvVariable, addToEnvLabelMap } from '../cypress-support/src/utils';
 import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
 const jsonAssertion = require('soft-assert');
+const { fireLog } = require('../cypress-support/src/fireLog');
 
 /**
  * @module commands
@@ -307,7 +307,7 @@ Cypress.Commands.add('updateRunInfo', () => {
             try {
               configModuleConst = require('../../../node_modules/configModule/constants/constants');
             } catch (error) {
-              logger.info('Unable to read from configModule constants');
+              fireLog.info('Unable to read from configModule constants');
               return false;
             }
             const deviceMac = UTILS.getEnvVariable(CONSTANTS.DEVICE_MAC).replace(/:/g, '');
@@ -428,13 +428,13 @@ Cypress.Commands.add('updateRunInfo', () => {
                     // write the merged object
                     cy.writeFile(tempReportEnvFile, reportEnv);
                   } else {
-                    logger.info('Unable to read from reportEnv json file');
+                    fireLog.info('Unable to read from reportEnv json file');
                     return false;
                   }
                 });
               });
           } catch (err) {
-            logger.info('Error in updating Run Info in cucumber report', err);
+            fireLog.info('Error in updating Run Info in cucumber report', err);
             return false;
           }
         } else if (tempFileExists && Cypress.env(CONSTANTS.ENV_PLATFORM_SDK_VERSION)) {
@@ -456,14 +456,14 @@ Cypress.Commands.add('updateRunInfo', () => {
             }
           });
         } else {
-          logger.info(
+          fireLog.info(
             'Unable to update Run Info in cucumber report, tempReportEnv file already exists'
           );
           return false;
         }
       });
     } else {
-      logger.info('Unable to update Run Info in cucumber report, reportEnv file doesnt exist');
+      fireLog.info('Unable to update Run Info in cucumber report, reportEnv file doesnt exist');
       return false;
     }
   });
@@ -496,7 +496,7 @@ Cypress.Commands.add('getDeviceDataFromFirstPartyApp', (method, param, action) =
         throw 'Obtained response is null|undefined';
       }
     } catch (error) {
-      fireLog.info('Failed to do device call', error);
+      fireLog.info('Failed to do device call', 'report');
       return cy.wrap('Not Available');
     }
   });
@@ -539,7 +539,7 @@ Cypress.Commands.add('getDeviceDataFromThirdPartyApp', (method, params, action) 
           throw 'Obtained response is null|undefined';
         }
       } catch (error) {
-        fireLog.info('Failed to obtain a response', error);
+        fireLog.info('Failed to obtain a response', 'report');
       }
     });
   });
@@ -657,7 +657,7 @@ Cypress.Commands.add('getCapabilities', () => {
       Cypress.env('capabilitiesList', capabilityObject);
     }
   } catch (error) {
-    fireLog.info('Error while getting capabilities from firebolt config: ', error);
+    fireLog.info('Error while getting capabilities from firebolt config: ', 'report');
   }
 });
 
@@ -764,7 +764,8 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
   } else {
     firstParty = false;
     fireLog.info(
-      'firstParty property is missing in beforeOperation block, so using default as firstParty=false'
+      'firstParty property is missing in beforeOperation block, so using default as firstParty=false',
+      'report'
     );
   }
   if (beforeOperation.hasOwnProperty(CONSTANTS.FIREBOLTCALL)) {
@@ -778,9 +779,9 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
             action: action,
           };
 
-          fireLog.info(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
+          fireLog.info(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `, 'report');
           cy.sendMessagetoPlatforms(requestMap).then((result) => {
-            fireLog.info('Response from 1st party App: ' + JSON.stringify(result));
+            fireLog.info('Response from 1st party App: ' + JSON.stringify(result), 'report');
           });
         } else {
           const communicationMode = UTILS.getCommunicationMode();
@@ -804,13 +805,17 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
           );
 
           // Sending message to 3rd party app.
-          fireLog.info(`Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `);
+          fireLog.info(
+            `Set mock call to 3rd party App: ${JSON.stringify(intentMessage)} `,
+            'report'
+          );
           cy.sendMessagetoApp(requestTopic, responseTopic, intentMessage).then((result) => {
             result = JSON.parse(result);
             fireLog.info(
               `Response from 3rd party App ${Cypress.env(
                 CONSTANTS.THIRD_PARTY_APP_ID
-              )}: ${JSON.stringify(result)}`
+              )}: ${JSON.stringify(result)}`,
+              'report'
             );
           });
         }
@@ -825,9 +830,9 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
           method: method,
           params: parsedData,
         };
-        fireLog.info(`Set mock call to 1st party App: ${JSON.stringify(requestMap)} `);
+        fireLog.info(`Set mock call to 1st party App: ${JSON.stringify(requestMap)} `, 'report');
         cy.sendMessagetoPlatforms(requestMap).then((result) => {
-          fireLog.info('Response from 1st party App: ' + JSON.stringify(result));
+          fireLog.info('Response from 1st party App: ' + JSON.stringify(result), 'report');
         });
       } else {
         const params = {
@@ -857,7 +862,8 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
           fireLog.info(
             `Response from 3rd party App ${Cypress.env(
               CONSTANTS.THIRD_PARTY_APP_ID
-            )}: ${JSON.stringify(result)}`
+            )}: ${JSON.stringify(result)}`,
+            'report'
           );
         });
       }
@@ -873,7 +879,11 @@ Cypress.Commands.add('setResponse', (beforeOperation, scenarioName) => {
 
     fireLog.info(`Firebolt Call to 1st party App: ${JSON.stringify(requestMap)} `);
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
-      fireLog.isTrue(result.success, 'Response for marker creation: ' + JSON.stringify(result));
+      fireLog.isTrue(
+        result.success,
+        'Response for marker creation: ' + JSON.stringify(result),
+        'report'
+      );
     });
   } else {
     cy.startAdditionalServices(beforeOperation);
@@ -914,7 +924,8 @@ Cypress.Commands.add('startOrStopPerformanceService', (action) => {
     task: CONSTANTS.TASK.PERFORMANCETESTHANDLER,
   };
   fireLog.info(
-    'Request map to send intent to performance test handler: ' + JSON.stringify(requestMap)
+    'Request map to send intent to performance test handler: ' + JSON.stringify(requestMap),
+    'report'
   );
   // Sending message to the platform to call performance test handler
   cy.sendMessagetoPlatforms(requestMap).then((result) => {
@@ -969,7 +980,7 @@ Cypress.Commands.add('censorData', (method, response) => {
     });
   } catch (err) {
     // Log an error if the censorData JSON file is missing.
-    fireLog.info('Error occurred while loading censorData: ', err);
+    fireLog.info('Error occurred while loading censorData: ', 'report');
   }
 });
 
@@ -1170,10 +1181,11 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
 
   cy.runIntentAddon(CONSTANTS.LAUNCHAPP, requestMap).then((parsedIntent) => {
     fireLog.info(
-      'Discovery launch intent: ' + UTILS.censorPubSubToken(JSON.stringify(parsedIntent))
+      'Discovery launch intent: ' + UTILS.censorPubSubToken(JSON.stringify(parsedIntent)),
+      'report'
     );
     cy.sendMessagetoPlatforms(parsedIntent).then((result) => {
-      fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result));
+      fireLog.info('Response from Firebolt platform: ' + JSON.stringify(result), 'report');
 
       if (
         UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID) === appId ||
@@ -1186,6 +1198,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
           // checking whether valid healthCheck response is received
           // if not received, throwing error with corresponding topic and retry count.
           if (healthCheckResponse == CONSTANTS.NO_RESPONSE) {
+            cy.task('setExitCode', CONSTANTS.FCS_EXIT_CODE.CRITICAL_FAILURE);
             throw Error(
               `Unable to get healthCheck response from App in ${getEnvVariable(CONSTANTS.HEALTH_CHECK_RETRIES)} retries. Failed to launch the 3rd party app on ${deviceIdentifier || getEnvVariable(CONSTANTS.DEVICE_MAC)} or not subscribed to
             ${requestTopic} topic.`
@@ -1201,6 +1214,8 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         });
         cy.getCapabilities();
         cy.updateRunInfo();
+      } else if (result && result.error) {
+        fireLog.fail(`App launch failed: ${result.error.message}`);
       }
     });
   });
@@ -1232,11 +1247,11 @@ Cypress.Commands.add('convertJsonToHTML', (defaultDirectory, fileName) => {
       if (response.stdout.includes('Reports saved')) {
         return true;
       }
-      logger.info(response);
+      fireLog.info(response);
       return false;
     });
   } catch (err) {
-    logger.error(err);
+    fireLog.error(err);
     return false;
   }
 });
@@ -1355,7 +1370,8 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
 
     if (Cypress.env(CONSTANTS.IS_RPC_ONLY)) {
       fireLog.info(
-        `${method} response will be retrieved in subsequent steps and validated when the rpc-only methods are invoked. Proceeding to the next step.`
+        `${method} response will be retrieved in subsequent steps and validated when the rpc-only methods are invoked. Proceeding to the next step.`,
+        'report'
       );
       return;
     }
@@ -1376,9 +1392,11 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
         if (UTILS.getEnvVariable(CONSTANTS.CERTIFICATION) == true) {
           fireLog.assert(false, `${target} does not support method: ${method}`);
         } else {
-          fireLog.info(`NotSupported: ${target} does not support method: ${method}`).then(() => {
-            throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
-          });
+          fireLog
+            .info(`NotSupported: ${target} does not support method: ${method}`, 'report')
+            .then(() => {
+              throw new Error(CONSTANTS.STEP_IMPLEMENTATION_MISSING);
+            });
         }
       }
 
@@ -1405,7 +1423,7 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
         // Call the 'censorData' command to hide sensitive data
         cy.censorData(method, dataToBeCensored).then((maskedResult) => {
           const appLog = target === CONSTANTS.PLATFORM ? 'Firebolt platform' : `app: ${appId}`;
-          fireLog.info(`Response from ${appLog}: ${JSON.stringify(maskedResult)}`);
+          fireLog.info(`Response from ${appLog}: ${JSON.stringify(maskedResult)}`, 'report');
         });
         // Creating object with event name, params, and response etc and storing it in a global list for further validation.
         const apiOrEventAppObject =
@@ -1421,7 +1439,8 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
       });
     } else {
       fireLog.info(
-        `${target} returned response in invalid format, which could lead to failures in validations. Response must be in JSON RPC format - ${response}`
+        `${target} returned response in invalid format, which could lead to failures in validations. Response must be in JSON RPC format - ${response}`,
+        'report'
       );
     }
   });
@@ -1439,7 +1458,7 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
  */
 Cypress.Commands.add('methodOrEventResponseValidation', (validationType, requestData) => {
   // To check whether the method/event validation should be performed or not based on the include/exclude valiodation object
-  if (!shouldPerformValidation('transactionTypes', validationType)) return;
+  if (!UTILS.shouldPerformValidation('transactionTypes', validationType)) return;
   const { context, expectingError, appId, eventExpected, isNullCase } = requestData;
   const method = requestData?.event ? requestData.event : requestData.method;
   const contentObject = requestData.content ? requestData.content : requestData.contentObject;
@@ -1449,14 +1468,16 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
   const handleValidation = (object, methodOrEventObject, methodOrEventResponse = null) => {
     const scenario = object.type;
     const tags = object.tags;
+    const assertionDef = object.assertionDef;
     // To check whether the validation should be performed or not based on the include/exclude valiodation object
-    if (!shouldPerformValidation('validationTypes', scenario)) return;
-    if (!shouldPerformValidation('validationTags', tags)) return;
+    if (!UTILS.shouldPerformValidation('validationTypes', scenario)) return;
+    if (!UTILS.shouldPerformValidation('validationTags', tags)) return;
+    if (!UTILS.shouldPerformValidation('customAssertionDefs', assertionDef)) return;
     if (scenario === CONSTANTS.SCHEMA_ONLY || !object.validations) return;
 
     // cy.then() to ensure each Cypress command is properly awaited before return
     cy.then(() => {
-      fireLog.info(`====== Beginning of the ${scenario} validation ======`);
+      fireLog.info(`====== Beginning of the ${scenario} validation ======`, 'report');
       switch (scenario) {
         case CONSTANTS.REGEX:
           cy.regExValidation(
@@ -1510,7 +1531,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
           break;
       }
     }).then(() => {
-      fireLog.info(`====== Ending of the ${scenario} validation ======`);
+      fireLog.info(`====== Ending of the ${scenario} validation ======`, 'report');
     });
   };
 
@@ -1741,7 +1762,7 @@ Cypress.Commands.add('getRuntimeFireboltCallObject', () => {
  * @Note Add or overwrite envConfigSetup cypress command in the config module to add necessary setup.
  */
 Cypress.Commands.add('envConfigSetup', () => {
-  fireLog.info('No additional config module environment setup');
+  fireLog.info('No additional config module environment setup', 'report');
 });
 
 /**
@@ -1760,7 +1781,10 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
   let requestMap;
   let timeout;
   const appIdForLog = params.appId ? params.appId : Cypress.env(CONSTANTS.RUNTIME).appId;
-  fireLog.info(`Invoking platform implementation to end session for appId: ${appIdForLog}`);
+  fireLog.info(
+    `Invoking platform implementation to end session for appId: ${appIdForLog}`,
+    'report'
+  );
 
   switch (exitType) {
     case 'closeApp':
@@ -1794,7 +1818,8 @@ Cypress.Commands.add('exitAppSession', (exitType, params) => {
       break;
     default:
       fireLog.info(
-        `Session for appId: ${appIdForLog} will not be ended due to invalid exitType ${exitType}`
+        `Session for appId: ${appIdForLog} will not be ended due to invalid exitType ${exitType}`,
+        'report'
       );
       fireLog.error(CONSTANTS.CONFIG_IMPLEMENTATION_MISSING);
   }
@@ -1979,55 +2004,6 @@ Cypress.Commands.add('clearSoftAssertArray', () => {
   jsonAssertion.softAssertCount = 0;
 });
 
-/**
- * @module commands
- * @function shouldPerformValidation
- * @description Determines whether validation should be performed for a given key-value pair based on include and exclude validation.
- * - If 'value' is 'undefined' or 'null', validation is performed ('true').
- * - If 'excludeValidations[key]' contains 'value', validation is skipped ('false').
- * - If 'includeValidations[key]' is an empty array ('[]'), validation is skipped ('false').
- * - If 'includeValidations[key]' exists and does not contain 'value', validation is skipped ('false').
- * - Otherwise, validation is performed ('true').
- * @param {string} key - The key representing the type of validation.
- * @param {any} value - The value to validate.
- * @returns {boolean} 'true' if validation should proceed, 'false' for validation to skip.
- */
-
-const shouldPerformValidation = (key, value) => {
-  const parseJSON = (data) => {
-    if (typeof data === 'string') {
-      try {
-        return JSON.parse(data);
-      } catch (error) {
-        console.log(`Failed to parse JSON: ${error.message}`);
-        return {}; // Return an empty object if parsing fails
-      }
-    }
-    return data || {}; // Ensure it's an object or fallback to empty
-  };
-  // excludeValidations or includeValidations is not defined in the environment, assign {} to continue normal validations.
-  const excludeValidations = parseJSON(UTILS.getEnvVariable(CONSTANTS.EXCLUDE_VALIDATIONS, false));
-  const includeValidations = parseJSON(UTILS.getEnvVariable(CONSTANTS.INCLUDE_VALIDATIONS, false));
-
-  // Allow normal validation if value is null, undefined, or an empty string
-  if (value == null || value === '') {
-    return true;
-  }
-
-  // If excludeValidations contains key and value, skip validation
-  if (Array.isArray(excludeValidations[key]) && excludeValidations[key].includes(value)) {
-    fireLog.info(`Skipping validation: ${value} as it is in excludeValidations under ${key}`);
-    return false;
-  }
-
-  // If includeValidations exists for the key but does NOT include the value, skip validation
-  if (Array.isArray(includeValidations[key]) && !includeValidations[key].includes(value)) {
-    fireLog.info(`Skipping validation: ${value} as it is NOT in includeValidations under ${key}`);
-    return false;
-  }
-
-  return true;
-};
 
 /**
  * @module commands
@@ -2038,7 +2014,7 @@ const shouldPerformValidation = (key, value) => {
  */
 Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
   if (regex.test(value)) {
-    fireLog.info(message);
+    fireLog.info(message, 'report');
   } else {
     jsonAssertion.softAssert(false, true, message);
     Cypress.log({
@@ -2068,7 +2044,8 @@ Cypress.Commands.add('sendKeyPress', (key, delay) => {
   const timeout = (Array.isArray(key) ? key.length : 1) * delay * 1000 + 10000; // Calculate timeout based on key press sequence and delay
   cy.sendMessagetoPlatforms(requestMap, timeout).then((result) => {
     fireLog.info(
-      `Sent key press: ${key} with delay: ${delay}. Response: ${JSON.stringify(result)}`
+      `Sent key press: ${key} with delay: ${delay}. Response: ${JSON.stringify(result)}`,
+      'report'
     );
   });
 });
