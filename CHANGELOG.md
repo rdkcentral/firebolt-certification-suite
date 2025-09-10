@@ -1,3 +1,10 @@
+## [1.16.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.0...v1.16.1-dev.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* skip testcase if intent not supported ([#480](https://github.com/rdkcentral/firebolt-certification-suite/issues/480)) ([55d8259](https://github.com/rdkcentral/firebolt-certification-suite/commit/55d8259de13bb072473f07d9b4d1a0834db4be69))
+
 # [1.16.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.15.0...v1.16.0) (2025-09-04)
 
 
