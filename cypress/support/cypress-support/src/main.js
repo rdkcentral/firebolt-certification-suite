@@ -679,3 +679,42 @@ export default function (module) {
     }
   });
 }
+
+/**
+ * @module main
+ * @function validateTextInOCR
+ * @description Takes a screenshot and checks if the expected text appears in the OCR result.
+ * @param {string} expectedText - The text to look for in the OCR output.
+ * @example
+ * cy.validateTextInOCR('Great British Menu');
+ */
+Cypress.Commands.add('validateTextInOCR', (expectedText) => {
+  const screenshotRequest = {
+    method: 'fcs.screenshot',
+    params: {},
+  };
+
+  return cy.sendMessagetoPlatforms(screenshotRequest).then((response) => {
+    const ocrText = response?.text || '';
+    const screenshotUrl = response?.presignedUrl;
+
+    // Fail immediately if connection overlay is detected
+    if (
+      ocrText.toLowerCase().includes('please wait for your programme to load') ||
+      ocrText.toLowerCase().includes('issue with your connection')
+    ) {
+      throw new Error(
+        `Issue overlay detected: "${ocrText.trim()}"\n` +
+          `Screenshot: ${screenshotUrl}\nOCR Text:\n${ocrText}`
+      );
+    }
+
+    const normalizedOCR = ocrText.toLowerCase().replace(/\s+/g, '');
+    const normalizedExpected = expectedText.toLowerCase().replace(/\s+/g, '');
+
+    expect(
+      normalizedOCR.includes(normalizedExpected),
+      `OCR check: expected to find: "${expectedText}"\nScreenshot: ${screenshotUrl}\nOCR Text:\n${ocrText}`
+    ).to.be.true;
+  });
+});

@@ -128,3 +128,19 @@ Given(/I send '([^']+)' voice command/, (command) => {
     }
   });
 });
+
+/**
+ * @module navigation
+ * @function I navigate to '(.+)' XIPA channel
+ * @description Navigates from Home screen into the TV Guide
+ *              then finds the designated channel via voice command.
+ * @param {string} channelNumber - Channel number to tune ('1024')
+ * @example
+ * When I navigate to '1024' XIPA channel
+ */
+When(/I navigate to '(.+)' XIPA channel$/, (channelNumber) => {
+  // From Home → TV guide
+  const homeToGuide = ['down', 'down', 'enter', 'enter', 'down'];
+  cy.sendKeyPress(homeToGuide);
+  cy.sendVoiceCommand(channelNumber);
+});
