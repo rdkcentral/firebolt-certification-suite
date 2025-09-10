@@ -125,45 +125,35 @@ exports.DISCOVERY_COMMON_VARIABLES = {
       progress: 0.95,
       completed: true,
       watchedOn: '2021-04-23T18:25:43.511Z',
-      options: {
-        agePolicy: 'app:child',
-      },
+      agePolicy: 'app:child',
     },
     WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_TEEN_POLICY: {
       entityId: 'partner.com/entity/123',
       progress: 0.95,
       completed: true,
       watchedOn: '2021-04-23T18:25:43.511Z',
-      options: {
-        agePolicy: 'app:teen',
-      },
+      agePolicy: 'app:teen',
     },
     WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_ADULT_POLICY: {
       entityId: 'partner.com/entity/123',
       progress: 0.95,
       completed: true,
       watchedOn: '2021-04-23T18:25:43.511Z',
-      options: {
-        agePolicy: 'app:adult',
-      },
+      agePolicy: 'app:adult',
     },
     WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_CUSTOM_POLICY: {
       entityId: 'partner.com/entity/123',
       progress: 0.95,
       completed: true,
       watchedOn: '2021-04-23T18:25:43.511Z',
-      options: {
-        agePolicy: 'test',
-      },
+      agePolicy: 'test',
     },
     WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_EMPTY_POLICY: {
       entityId: 'partner.com/entity/123',
       progress: 0.95,
       completed: true,
       watchedOn: '2021-04-23T18:25:43.511Z',
-      options: {
-        agePolicy: '',
-      },
+      agePolicy: '',
     },
     WATCHNEXT_ONLY_TITLE_IDENTIFIERS_ENTITYID: {
       title: 'A Cool Show',
