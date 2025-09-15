@@ -365,6 +365,8 @@ module.exports = async (on, config) => {
             reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
             reportProperties.customReportData = customReportData;
             reportProperties.certification = certification;
+            reportProperties.team = config.env.team ? config.env.team : 'N/A';
+            reportProperties.goal = config.env.goal ? config.env.goal : 'N/A';
             // Add the report to the reportObj
             if (reportType === CONSTANTS.CUCUMBER) {
               reportObj.cucumberReport = jsonReport;
