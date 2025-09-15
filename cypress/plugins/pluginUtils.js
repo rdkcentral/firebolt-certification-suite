@@ -15,15 +15,21 @@ const { fireLog } = require('../support/cypress-support/src/fireLog');
  * @returns {Promise<Object[]>} A Promise that resolves with an array of dereferenced OpenRPC documents.
  * @throws {Error} Throws an error if there's a problem fetching or dereferencing any of the OpenRPC documents.
  */
-async function getAndDereferenceOpenRpc(externalUrls, version = null, sdkSignOff = false) {
+async function getAndDereferenceOpenRpc(externalUrls, version = null) {
   // Define constants
   const openRpcDocs = [];
-  const fireboltUrl =
-    version && sdkSignOff
-      ? 'https://rdkcentral.github.io/firebolt/requirements/next/specifications/firebolt-open-rpc.json'
-      : version
-        ? `https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json`
-        : 'https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json';
+  let fireboltUrl;
+  if (version) {
+    if (version.toLowerCase().includes('next')) {
+      fireboltUrl =
+        'https://rdkcentral.github.io/firebolt/requirements/next/specifications/firebolt-open-rpc.json';
+    } else {
+      fireboltUrl = `https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json`;
+    }
+  } else {
+    fireboltUrl =
+      'https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json';
+  }
   const localOpenRpcDir = path.join('node_modules', 'configModule', 'constants', 'openRPC');
 
   try {
