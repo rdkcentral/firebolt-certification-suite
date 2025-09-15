@@ -1535,7 +1535,10 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
           break;
       }
     }).then(() => {
-      fireLog.info(`====== Ending of the ${scenario} validation ======`, 'report');
+      // Log custom validation name via assertionDef otherwise log the scenario name
+      scenario === CONSTANTS.CUSTOM
+        ? fireLog.info(`====== Ending of the ${assertionDef} validation ======`, 'report')
+        : fireLog.info(`====== Ending of the ${scenario} validation ======`, 'report');
     });
   };
 
