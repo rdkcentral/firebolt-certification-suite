@@ -19,16 +19,22 @@ async function getAndDereferenceOpenRpc(externalUrls, version = null) {
   // Define constants
   const openRpcDocs = [];
   let fireboltUrl;
-  if (version) {
-    if (version.toLowerCase().includes('next')) {
+  switch (true) {
+    case !!version && version.toLowerCase().includes('next-major'):
+      fireboltUrl =
+        'https://rdkcentral.github.io/firebolt/requirements/next-major/specifications/firebolt-open-rpc.json';
+      break;
+    case !!version && version.toLowerCase().includes('next'):
       fireboltUrl =
         'https://rdkcentral.github.io/firebolt/requirements/next/specifications/firebolt-open-rpc.json';
-    } else {
+      break;
+    case !!version:
       fireboltUrl = `https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json`;
-    }
-  } else {
-    fireboltUrl =
-      'https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json';
+      break;
+    default:
+      fireboltUrl =
+        'https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json';
+      break;
   }
   const localOpenRpcDir = path.join('node_modules', 'configModule', 'constants', 'openRPC');
 
