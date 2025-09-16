@@ -252,6 +252,7 @@ module.exports = async (on, config) => {
       - generate the html report (TBD)
   */
   on('after:run', async (results) => {
+    console.log('Inside test branch');
     fireLog.info('Entering after :run in cypress/plugins/index.js');
 
     const reportObj = {};
