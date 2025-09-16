@@ -24,10 +24,7 @@ if (sdkVersionRaw) {
   // Match major, minor, patch at the start of the string
   const match = sdkVersionRaw.match(/^(\d+)(?:\.(\d+))?(?:\.(\d+))?/);
   if (match) {
-    const major = match[1] || '0';
-    const minor = match[2] || '0';
-    const patch = match[3] || '0';
-    sdkVersion = `${major}.${minor}.${patch}`;
+    sdkVersion = match[0];
   }
 }
 
