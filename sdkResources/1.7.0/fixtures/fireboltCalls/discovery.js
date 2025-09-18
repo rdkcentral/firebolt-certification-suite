@@ -120,6 +120,41 @@ exports.DISCOVERY_COMMON_VARIABLES = {
       completed: true,
       watchedOn: '2021-04-23T18:25:43.511Z',
     },
+    WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_CHILD_POLICY: {
+      entityId: 'partner.com/entity/123',
+      progress: 0.95,
+      completed: true,
+      watchedOn: '2021-04-23T18:25:43.511Z',
+      agePolicy: 'app:child',
+    },
+    WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_TEEN_POLICY: {
+      entityId: 'partner.com/entity/123',
+      progress: 0.95,
+      completed: true,
+      watchedOn: '2021-04-23T18:25:43.511Z',
+      agePolicy: 'app:teen',
+    },
+    WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_ADULT_POLICY: {
+      entityId: 'partner.com/entity/123',
+      progress: 0.95,
+      completed: true,
+      watchedOn: '2021-04-23T18:25:43.511Z',
+      agePolicy: 'app:adult',
+    },
+    WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_CUSTOM_POLICY: {
+      entityId: 'partner.com/entity/123',
+      progress: 0.95,
+      completed: true,
+      watchedOn: '2021-04-23T18:25:43.511Z',
+      agePolicy: 'test',
+    },
+    WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_EMPTY_POLICY: {
+      entityId: 'partner.com/entity/123',
+      progress: 0.95,
+      completed: true,
+      watchedOn: '2021-04-23T18:25:43.511Z',
+      agePolicy: '',
+    },
     WATCHNEXT_ONLY_TITLE_IDENTIFIERS_ENTITYID: {
       title: 'A Cool Show',
       identifiers: {
@@ -220,6 +255,20 @@ exports.DISCOVERY_COMMON_VARIABLES = {
       progress: 0.95,
       completed: true,
       watchedOn: 123,
+    },
+    WATCHED_INVALID_INTEGER_AGE_POLICY_VALUE: {
+      entityId: 'partner.com/entity/123',
+      progress: 0.95,
+      completed: true,
+      watchedOn: '2021-04-23T18:25:43.511Z',
+      agePolicy: 123,
+    },
+    WATCHED_INVALID_BOOLEAN_AGE_POLICY_VALUE: {
+      entityId: 'partner.com/entity/123',
+      progress: 0.95,
+      completed: true,
+      watchedOn: '2021-04-23T18:25:43.511Z',
+      agePolicy: true,
     },
     WATCHNEXT_ONLY_TITLE: {
       title: 'A Cool Show',
@@ -584,6 +633,32 @@ exports.NOTIFY_WATCHED_CONTENT_WITH_ENTITYID_PROGRESS_STATUS_DATE = {
   params: this.DISCOVERY_COMMON_VARIABLES.DISCOVERY.WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE,
 };
 
+exports.NOTIFY_WATCHED_CONTENT_WITH_ENTITYID_PROGRESS_STATUS_DATE_CHILD_POLICY = {
+  method: 'discovery.watched',
+  params:
+    this.DISCOVERY_COMMON_VARIABLES.DISCOVERY.WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_CHILD_POLICY,
+};
+exports.NOTIFY_WATCHED_CONTENT_WITH_ENTITYID_PROGRESS_STATUS_DATE_TEEN_POLICY = {
+  method: 'discovery.watched',
+  params:
+    this.DISCOVERY_COMMON_VARIABLES.DISCOVERY.WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_TEEN_POLICY,
+};
+exports.NOTIFY_WATCHED_CONTENT_WITH_ENTITYID_PROGRESS_STATUS_DATE_ADULT_POLICY = {
+  method: 'discovery.watched',
+  params:
+    this.DISCOVERY_COMMON_VARIABLES.DISCOVERY.WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_ADULT_POLICY,
+};
+exports.NOTIFY_WATCHED_CONTENT_WITH_ENTITYID_PROGRESS_STATUS_DATE_CUSTOM_POLICY = {
+  method: 'discovery.watched',
+  params:
+    this.DISCOVERY_COMMON_VARIABLES.DISCOVERY.WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_CUSTOM_POLICY,
+};
+exports.NOTIFY_WATCHED_CONTENT_WITH_ENTITYID_PROGRESS_STATUS_DATE_EMPTY_POLICY = {
+  method: 'discovery.watched',
+  params:
+    this.DISCOVERY_COMMON_VARIABLES.DISCOVERY.WATCHED_ENTITY_ID_PROGRESS_STATUS_DATE_EMPTY_POLICY,
+};
+
 exports.TRUE_FOR_WATCHED_CONTENT_IN_DISCOVERY = {
   method: 'discovery.watched',
   validationJsonPath: 'result',
@@ -679,6 +754,16 @@ exports.NOTIFY_WATCHED_CONTENT_WITH_INVALID_COMPLETED = {
 exports.NOTIFY_WATCHED_CONTENT_WITH_INVALID_WATCHEDON = {
   method: 'discovery.watched',
   params: this.DISCOVERY_COMMON_VARIABLES.DISCOVERY.WATCHED_INVALID_WATCHEDON,
+  expected: 'error',
+};
+exports.NOTIFY_WATCHED_CONTENT_WITH_INVALID_INTEGER_AGE_POLICY_VALUE = {
+  method: 'discovery.watched',
+  params: this.DISCOVERY_COMMON_VARIABLES.DISCOVERY.WATCHED_INVALID_INTEGER_AGE_POLICY_VALUE,
+  expected: 'error',
+};
+exports.NOTIFY_WATCHED_CONTENT_WITH_INVALID_BOOLEAN_AGE_POLICY_VALUE = {
+  method: 'discovery.watched',
+  params: this.DISCOVERY_COMMON_VARIABLES.DISCOVERY.WATCHED_INVALID_BOOLEAN_AGE_POLICY_VALUE,
   expected: 'error',
 };
 

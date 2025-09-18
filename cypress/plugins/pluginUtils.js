@@ -18,9 +18,24 @@ const { fireLog } = require('../support/cypress-support/src/fireLog');
 async function getAndDereferenceOpenRpc(externalUrls, version = null) {
   // Define constants
   const openRpcDocs = [];
-  const fireboltUrl = version
-    ? `https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json`
-    : 'https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json';
+  let fireboltUrl;
+  switch (true) {
+    case !!version && version.toLowerCase().includes('next-major'):
+      fireboltUrl =
+        'https://rdkcentral.github.io/firebolt/requirements/next-major/specifications/firebolt-open-rpc.json';
+      break;
+    case !!version && version.toLowerCase().includes('next'):
+      fireboltUrl =
+        'https://rdkcentral.github.io/firebolt/requirements/next/specifications/firebolt-open-rpc.json';
+      break;
+    case !!version:
+      fireboltUrl = `https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json`;
+      break;
+    default:
+      fireboltUrl =
+        'https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json';
+      break;
+  }
   const localOpenRpcDir = path.join('node_modules', 'configModule', 'constants', 'openRPC');
 
   try {

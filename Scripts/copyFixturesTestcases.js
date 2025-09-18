@@ -18,7 +18,15 @@
 const fs = require('fs');
 const path = require('path');
 
-const sdkVersion = process.env.sdkVersion;
+const sdkVersionRaw = process.env.sdkVersion;
+let sdkVersion = '0.0.0';
+if (sdkVersionRaw) {
+  // Match major, minor, patch at the start of the string
+  const match = sdkVersionRaw.match(/^(\d+)(?:\.(\d+))?(?:\.(\d+))?/);
+  if (match) {
+    sdkVersion = match[0];
+  }
+}
 
 const fcsTestCasesDir = path.join(__dirname, '..', 'cypress', 'TestCases');
 const sdkTestCasesDir = path.join(__dirname, '..', 'sdkResources', sdkVersion, 'TestCases');
