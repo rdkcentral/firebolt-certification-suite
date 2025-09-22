@@ -19,6 +19,7 @@
 const CONSTANTS = require('../constants/constants');
 import UTILS from '../cypress-support/src/utils';
 const { fireLog } = require('../cypress-support/src/fireLog');
+const { createValidationSkipResponse } = require('../cypress-support/src/validationSkipUtils');
 
 /**
  * @module performanceValidation
@@ -67,5 +68,10 @@ Cypress.Commands.add('performanceValidation', (object) => {
         });
       fireLog.info('Performance validation has stopped');
     });
+  } else {
+    // Performance metrics are disabled
+    return createValidationSkipResponse(
+      CONSTANTS.VALIDATION_SKIP_CODES.PERFORMANCE_METRICS_DISABLED
+    );
   }
 });

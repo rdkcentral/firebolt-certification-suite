@@ -26,6 +26,7 @@ const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 const UTILS = require('./utils');
 const path = require('path');
 const setimmediate = require('setimmediate');
+const { isValidationSkipped } = require('./validationSkipUtils');
 let appTransport;
 const flatted = require('flatted');
 const _ = require('lodash');
@@ -649,9 +650,17 @@ export default function (module) {
               : UTILS.getEnvVariable(CONSTANTS.CUSTOM_VALIDATION_TIMEOUT);
             cy.then({ timeout: customTimeout }, async () => {
               message = await configCustomValidation(apiOrEventObject, fcsValidationObjectData);
+              // Check if the validation was skipped and handle accordingly
+              if (isValidationSkipped(message)) {
+                return message; // Return the skip response to be handled by the calling function
+              }
             });
           } else {
             message = configCustomValidation(apiOrEventObject, fcsValidationObjectData);
+            // Check if the validation was skipped and handle accordingly
+            if (isValidationSkipped(message)) {
+              return message; // Return the skip response to be handled by the calling function
+            }
           }
         } else if (
           // if customValidations doesn't have a function as the functionName passed
