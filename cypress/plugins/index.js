@@ -387,6 +387,7 @@ module.exports = async (on, config) => {
 
         // Emit the 'reports' event once after the loop and reportObj is populated.
         await new Promise((resolve) => {
+          console.log('Divya Reports are resolved');
           eventEmitter.once('reportProcessed', () => resolve());
           eventEmitter.emit('reports', reportObj, jobId, elk);
         });
