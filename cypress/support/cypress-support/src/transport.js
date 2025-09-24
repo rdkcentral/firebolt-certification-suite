@@ -25,7 +25,7 @@ export default class Transport {
   }
 
   async sendMessage(messageObject, responseWaitTime) {
-    fireLog.info(`Printing the message object: ${JSON.stringify(messageObject)}`);
+    fireLog.info(`Divya Printing the message object: ${JSON.stringify(messageObject)}`);
     if (this.isFireboltSDK(messageObject)) {
       if (!messageObject.action) {
         messageObject.action = CONSTANTS.CORE;
