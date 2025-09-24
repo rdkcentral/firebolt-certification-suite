@@ -1,6 +1,6 @@
-const CONSTANTS = require('../constants/constants');
+const CONSTANTS = require('../../constants/constants');
 const { fireLog } = require('./fireLog');
-const skipCodes = require('../constants/validationSkipCodes.json');
+const skipCodes = require('../../constants/validationSkipCodes.json');
 
 /**
  * @module validationSkipUtils
