@@ -1,0 +1,12 @@
+{
+  "1": "Screenshots are disabled",
+  "2": "Performance metrics flag is disabled", 
+  "3": "Performance flag is disabled",
+  "4": "Log pattern validation skipped - no valid log patterns available",
+  "5": "Validation not applicable for current test type",
+  "6": "Required configuration missing",
+  "7": "Feature flag disabled",
+  "8": "Platform not supported",
+  "9": "Custom validation method not found",
+  "10": "Validation prerequisites not met"
+}
