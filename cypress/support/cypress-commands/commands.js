@@ -1482,9 +1482,6 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
     // cy.then() to ensure each Cypress command is properly awaited before return
     cy.then(() => {
-      // Initialize validation skip status
-      Cypress.env('currentValidationSkipped', false);
-
       // Log custom validation name via assertionDef otherwise log the scenario name
       scenario === CONSTANTS.CUSTOM
         ? fireLog.info(`====== Beginning of the ${assertionDef} validation ======`, 'report')
@@ -1530,45 +1527,23 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
           );
           break;
         case CONSTANTS.CUSTOM:
-          cy.customValidation(object, methodOrEventObject).then((result) => {
-            // Check if the custom validation returned a skip response
-            if (isValidationSkipped(result)) {
-              // Store the skip status for the ending log (logging is handled in createValidationSkipResponse)
-              Cypress.env('currentValidationSkipped', true);
-            } else {
-              Cypress.env('currentValidationSkipped', false);
-            }
-          });
+          cy.customValidation(object, methodOrEventObject);
           break;
         case CONSTANTS.UNDEFINED:
           cy.undefinedValidation(object, methodOrEventObject, validationType);
           break;
         case CONSTANTS.PERFORMANCE_VALIDATION:
-          cy.performanceValidation(object).then((result) => {
-            // Check if the performance validation returned a skip response
-            if (isValidationSkipped(result)) {
-              // Store the skip status for the ending log (logging is handled in createValidationSkipResponse)
-              Cypress.env('currentValidationSkipped', true);
-            } else {
-              Cypress.env('currentValidationSkipped', false);
-            }
-          });
+          cy.performanceValidation(object);
           break;
         default:
           assert(false, 'Unsupported validation type');
           break;
       }
     }).then(() => {
-      // Check if the current validation was skipped
-      const wasSkipped = Cypress.env('currentValidationSkipped');
-      if (!wasSkipped) {
-        // Log custom validation name via assertionDef otherwise log the scenario name
-        scenario === CONSTANTS.CUSTOM
-          ? fireLog.info(`====== Ending of the ${assertionDef} validation ======`, 'report')
-          : fireLog.info(`====== Ending of the ${scenario} validation ======`, 'report');
-      }
-      // Reset the skip status
-      Cypress.env('currentValidationSkipped', false);
+      // Log custom validation name via assertionDef otherwise log the scenario name
+      scenario === CONSTANTS.CUSTOM
+        ? fireLog.info(`====== Ending of the ${assertionDef} validation ======`, 'report')
+        : fireLog.info(`====== Ending of the ${scenario} validation ======`, 'report');
     });
   };
 

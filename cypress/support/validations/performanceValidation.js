@@ -70,6 +70,10 @@ Cypress.Commands.add('performanceValidation', (object) => {
     });
   } else {
     // Performance metrics are disabled
-    createValidationSkipResponse(CONSTANTS.VALIDATION_SKIP_CODES.PERFORMANCE_METRICS_DISABLED);
+    const skipResponse = createValidationSkipResponse(
+      CONSTANTS.VALIDATION_SKIP_CODES.PERFORMANCE_METRICS_DISABLED
+    );
+    // Returns skipped response object in case we want to do something with it later
+    cy.wrap(skipResponse);
   }
 });
