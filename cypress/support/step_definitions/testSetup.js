@@ -17,7 +17,8 @@
  */
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
-import UTILS, { fireLog } from '../cypress-support/src/utils';
+import UTILS from '../cypress-support/src/utils';
+const { fireLog } = require('../cypress-support/src/fireLog');
 const internalIntentTemplates = require('../../fixtures/intentTemplates');
 const externalIntentTemplates = require('../../fixtures/external/intentTemplates/index');
 const { _ } = Cypress;
@@ -56,7 +57,10 @@ Given(
             // Save the object as env.runtime.fireboltCall
             const runtime = { fireboltCall: fireboltObject };
             Cypress.env(CONSTANTS.RUNTIME, runtime);
-            fireLog.info(`Firebolt object successfully updated in runtime environment variable`);
+            fireLog.info(
+              `Firebolt object successfully updated in runtime environment variable`,
+              'report'
+            );
           }
         }
       );
@@ -65,7 +69,7 @@ Given(
     Cypress.env(CONSTANTS.TEST_TYPE, test);
     const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
     if (!scenarioType && externalModuleTestTypes && externalModuleTestTypes.includes(test)) {
-      fireLog.info(`ScenarioType is not provided, defaulting to ${CONSTANTS.LOGGEDOUT}`);
+      fireLog.info(`ScenarioType is not provided, defaulting to ${CONSTANTS.LOGGEDOUT}`, 'report');
       scenarioType = CONSTANTS.LOGGEDOUT;
     }
     Cypress.env(CONSTANTS.SCENARIO_TYPE, scenarioType);
@@ -136,7 +140,7 @@ Given(
     if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS)) {
       const markerCreated = Cypress.env(CONSTANTS.MARKER_CREATION_STATUS);
       if (markerCreated) {
-        fireLog.info('Marker has been created successfully');
+        fireLog.info('Marker has been created successfully', 'report');
       } else {
         fireLog.fail('Marker creation failed');
       }
@@ -185,14 +189,15 @@ function destroyAppInstance(testType) {
   // If the current test type is present inside the closeAppTestTypes array then close the app.
   if (isCloseTestType) {
     fireLog.info(
-      'Closing app since either Test Type is specified in closeAppTestTypes or is different from previous Test Type.'
+      'Closing app since either Test Type is specified in closeAppTestTypes or is different from previous Test Type.',
+      'report'
     );
     cy.exitAppSession('closeApp', params);
   }
 
   // If the current test type is present inside the unloadAppTestTypes array then unload the app.
   if (isUnloadTestType) {
-    fireLog.info('Unloading app since Test Type is specified in unloadAppTestTypes.');
+    fireLog.info('Unloading app since Test Type is specified in unloadAppTestTypes.', 'report');
     cy.exitAppSession('unloadApp', params);
   }
 }
@@ -312,4 +317,41 @@ Given(/Firebolt Certification Suite communicates successfully with the '(.+)'/, 
   } catch (error) {
     cy.log(`Firebolt Certification Suite failed to communicate with the ${appType}: ${error}`);
   }
+});
+
+/**
+ * @module TestSetupGlue
+ * @function text {String} is found in the {String} log
+ * @description Searches for a specific text pattern in a given log file.
+ * @param {String} logKey - The specific log text pattern to search for.
+ * @param {String} fileIdentifier - The log file identifier where the search will be performed.
+ *
+ * @example
+ * Given text 'SignIn' is found in the 'app' log
+ * Given text 'PlaybackStarted' is found in the 'player' log
+ */
+
+Given(/text '(.+)' is found in the '(.+)' log/, (logKey, fileIdentifier) => {
+  const fileName = [`/opt/logs/${fileIdentifier}.log`];
+  const logPattern = [logKey];
+  const params = { logPattern, fileName };
+  cy.findLogPattern(params).then((response) => {
+    if (response.error) {
+      fireLog.assert(false, `Search command failed: ${response.error}`);
+      return;
+    }
+    if (!response.response || response.response.length === 0) {
+      fireLog.assert(false, 'No response received or response is empty.');
+      return;
+    }
+    response.response.forEach((responseText, index) => {
+      fireLog.info(`Received Response from the platform: ${responseText}`, 'report');
+      const isPatternFound = responseText.includes(logKey);
+      fireLog.equal(
+        isPatternFound,
+        true,
+        `Log pattern "${logKey}" ${isPatternFound ? 'found' : 'not found'} in response.`
+      );
+    });
+  });
 });

@@ -20,7 +20,6 @@ const responseModules = 'responseModules';
 const defaultModule = 'defaultModule';
 const defaultMethod = 'defaultMethod';
 const CONSTANTS = require('../../constants/constants');
-const logger = require('../../Logger')('config.js');
 export default class Config {
   constructor(configModule) {
     this.configModule = configModule;
@@ -66,21 +65,18 @@ export default class Config {
   invokeRequestOverride(fireboltObject) {
     // If config module is invalid or absent
     if (this.configModule === null || this.configModule === undefined || !this.configModule) {
-      logger.info(`config module is not provided`, `invokeRequestOverride`);
+      fireLog.info(`config module is not provided`);
       return fireboltObject;
     }
     if (!fireboltObject || !fireboltObject.method) {
-      logger.info(`firebolt object does not contain method param`, `invokeRequestOverride`);
+      fireLog.info(`firebolt object does not contain method param`);
       return fireboltObject;
     }
     // firebolt method format <module>.<method>
     const moduleMethodArray = fireboltObject.method.split('.');
 
     if (moduleMethodArray.length !== 2) {
-      logger.info(
-        `Invalid module/method. Expected format '<Module.Method>'`,
-        `invokeRequestOverride`
-      );
+      fireLog.info(`Invalid module/method. Expected format '<Module.Method>'`);
       return fireboltObject;
     }
 
@@ -106,7 +102,7 @@ export default class Config {
           : null;
     }
 
-    logger.info(
+    fireLog.info(
       'Firebolt Method: ' +
         moduleName +
         '.' +
@@ -134,7 +130,7 @@ export default class Config {
           : null;
       // If we STILL don't, return the firebolt object
       if (methodConfig === null) {
-        logger.info(
+        fireLog.info(
           'No config request override found for ' +
             fireboltObject.method +
             '. Using unmodified firebolt command'
@@ -185,7 +181,7 @@ export default class Config {
     }
     if (methodConfig === null) {
       // If none existed return response
-      logger.info(
+      fireLog.info(
         'No config response override found for ' +
           moduleName +
           '.' +

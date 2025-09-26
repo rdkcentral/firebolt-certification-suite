@@ -15,7 +15,6 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-const logger = require('../../../cypress/support/Logger')('index.js');
 const constants = require('../../../cypress/support/constants/constants');
 const { getEnvVariable } = require('../../../cypress/support/cypress-support/src/utils');
 
@@ -31,13 +30,13 @@ const client = {
  * @returns {Promise} Returns a promise that resolves with the event data if the WebSocket client establishes a connection, or rejects with the event data if an error occurs or the connection is closed.
  * @example
  * init().then(data => {
- *   logger.info('Connection established', data);
+ *   fireLog.info('Connection established'+ data);
  * }).catch(error => {
- *   logger.error('Failed to establish connection', error);
+ *   fireLog.error('Failed to establish connection'+ error);
  * });
  */
 function init() {
-  logger.info('Establishing pubsub connection');
+  fireLog.info('Establishing pubsub connection');
 
   return new Promise((resolve) => {
     // Enter a valid WebSocket URL
@@ -55,7 +54,7 @@ function init() {
     };
     // if WebSocket connection fails (error or close event), the errorHandler logs the error and resolves the promise with a default message instead of rejecting it.
     const errorHandler = function (event) {
-      logger.info('WebSocket connection failed. Continuing execution...', event.data);
+      fireLog.info('WebSocket connection failed. Continuing execution...' + event.data);
       reject('Default: Connection could not be established');
     };
 
@@ -79,7 +78,7 @@ function init() {
  */
 function publish(topic, message, headers) {
   if (!topic) {
-    logger.error('No topic provided...');
+    fireLog.error('No topic provided...');
     return false;
   }
 
@@ -102,7 +101,7 @@ function publish(topic, message, headers) {
     client.ws.send(JSON.stringify(publishMsg));
     return true;
   } catch (err) {
-    logger.error('Failed to publish message...', err);
+    fireLog.error('Failed to publish message...' + err);
     return false;
   }
 }
@@ -127,7 +126,7 @@ function subscribe(topic, callback) {
 
   // Listen for incoming messages
   client.ws.addEventListener('message', (event) => {
-    logger.info('Received notification on topic "' + topic + '"', 'subscribe');
+    fireLog.info('Received notification on topic "' + topic + '"');
     const data = JSON.parse(event.data);
 
     // Format received message by removing headers from payload object
@@ -143,10 +142,7 @@ function subscribe(topic, callback) {
     }
     // If a callback function is provided, call it with the formattedMsg payload and headers
     if (typeof callback == 'function') {
-      logger.info(
-        'Incoming notification is valid. Calling callback:' + JSON.stringify(data),
-        'subscribe'
-      );
+      fireLog.info('Incoming notification is valid. Calling callback:' + JSON.stringify(data));
       callback(formattedMsg.payload, formattedMsg.headers);
     }
   });

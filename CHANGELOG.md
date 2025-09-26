@@ -1,3 +1,247 @@
+## [1.16.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.0...v1.16.1) (2025-09-17)
+
+
+### Bug Fixes
+
+* skip testcase if intent not supported ([#480](https://github.com/rdkcentral/firebolt-certification-suite/issues/480)) ([55d8259](https://github.com/rdkcentral/firebolt-certification-suite/commit/55d8259de13bb072473f07d9b4d1a0834db4be69))
+
+## [1.16.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.0...v1.16.1-dev.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* skip testcase if intent not supported ([#480](https://github.com/rdkcentral/firebolt-certification-suite/issues/480)) ([55d8259](https://github.com/rdkcentral/firebolt-certification-suite/commit/55d8259de13bb072473f07d9b4d1a0834db4be69))
+
+# [1.16.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.15.0...v1.16.0) (2025-09-04)
+
+
+### Bug Fixes
+
+* Wait for dynamicIntent to resolve ([#478](https://github.com/rdkcentral/firebolt-certification-suite/issues/478)) ([53be3ca](https://github.com/rdkcentral/firebolt-certification-suite/commit/53be3ca1842b503d1adf29d6f04d00bf3659897c))
+
+
+### Features
+
+* Add additional es fields ([#477](https://github.com/rdkcentral/firebolt-certification-suite/issues/477)) ([8caf4af](https://github.com/rdkcentral/firebolt-certification-suite/commit/8caf4af4deae23f5f6b3cb625060af9ef1eb34b4))
+
+# [1.16.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.15.1-dev.1...v1.16.0-dev.1) (2025-09-03)
+
+
+### Features
+
+* Add additional es fields ([#477](https://github.com/rdkcentral/firebolt-certification-suite/issues/477)) ([8caf4af](https://github.com/rdkcentral/firebolt-certification-suite/commit/8caf4af4deae23f5f6b3cb625060af9ef1eb34b4))
+
+## [1.15.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.15.0...v1.15.1-dev.1) (2025-09-02)
+
+
+### Bug Fixes
+
+* Wait for dynamicIntent to resolve ([#478](https://github.com/rdkcentral/firebolt-certification-suite/issues/478)) ([53be3ca](https://github.com/rdkcentral/firebolt-certification-suite/commit/53be3ca1842b503d1adf29d6f04d00bf3659897c))
+
+# [1.15.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0...v1.15.0) (2025-08-20)
+
+
+### Bug Fixes
+
+* Warn if test suite is not found ([#475](https://github.com/rdkcentral/firebolt-certification-suite/issues/475)) ([f443654](https://github.com/rdkcentral/firebolt-certification-suite/commit/f4436546d1519f9abbaf6f35bd38c83e67453006))
+
+
+### Features
+
+* Removed screenshot response log ([#471](https://github.com/rdkcentral/firebolt-certification-suite/issues/471)) ([0952da1](https://github.com/rdkcentral/firebolt-certification-suite/commit/0952da11f21d21209a67996a28ba3de307bea406))
+
+# [1.15.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.1-dev.1...v1.15.0-dev.1) (2025-08-18)
+
+
+### Features
+
+* Removed screenshot response log ([#471](https://github.com/rdkcentral/firebolt-certification-suite/issues/471)) ([0952da1](https://github.com/rdkcentral/firebolt-certification-suite/commit/0952da11f21d21209a67996a28ba3de307bea406))
+
+## [1.14.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0...v1.14.1-dev.1) (2025-08-13)
+
+
+### Bug Fixes
+
+* Warn if test suite is not found ([#475](https://github.com/rdkcentral/firebolt-certification-suite/issues/475)) ([f443654](https://github.com/rdkcentral/firebolt-certification-suite/commit/f4436546d1519f9abbaf6f35bd38c83e67453006))
+
+# [1.14.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0...v1.14.0) (2025-08-06)
+
+
+### Bug Fixes
+
+* "parsedJson.forEach is not a function" Report issue ([#469](https://github.com/rdkcentral/firebolt-certification-suite/issues/469)) ([678d63b](https://github.com/rdkcentral/firebolt-certification-suite/commit/678d63b9c5f5134204bccc7fc96fe623e50f358a))
+* Invalid/error AS response fix ([#459](https://github.com/rdkcentral/firebolt-certification-suite/issues/459)) ([5ab8dc8](https://github.com/rdkcentral/firebolt-certification-suite/commit/5ab8dc8b55ce3ee7d4a33f6623a77b6fed819f8c))
+
+
+### Features
+
+* Added support for custom validation filter ([#461](https://github.com/rdkcentral/firebolt-certification-suite/issues/461)) ([84b875c](https://github.com/rdkcentral/firebolt-certification-suite/commit/84b875cf2fda01a1bfd86acbe1b662b74cbb3b4a))
+* FCS specific exit codes ([#455](https://github.com/rdkcentral/firebolt-certification-suite/issues/455)) ([1ad64e7](https://github.com/rdkcentral/firebolt-certification-suite/commit/1ad64e7049396bc9bf2aa72706b652dec54c50ab))
+* firelog support in before-after runs ([#465](https://github.com/rdkcentral/firebolt-certification-suite/issues/465)) ([08dd81f](https://github.com/rdkcentral/firebolt-certification-suite/commit/08dd81f1c1a73566d114b3c9a5f6fcf402c4105e))
+* Hide wait step from html report ([#437](https://github.com/rdkcentral/firebolt-certification-suite/issues/437)) ([9f590db](https://github.com/rdkcentral/firebolt-certification-suite/commit/9f590dbdcddb694a526d7bd5f81c5eca59c1a9fe))
+* Implement logging type ([#452](https://github.com/rdkcentral/firebolt-certification-suite/issues/452)) ([81d0880](https://github.com/rdkcentral/firebolt-certification-suite/commit/81d08805e3f8accce2f673ba9e0d76b71ed04de9))
+* Tag All PubSub errors with exitCode '2' ([#458](https://github.com/rdkcentral/firebolt-certification-suite/issues/458)) ([f7492df](https://github.com/rdkcentral/firebolt-certification-suite/commit/f7492df53f9fdf1dd9d6aeb848b6a0366db41968))
+
+# [1.14.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.6...v1.14.0-dev.7) (2025-08-01)
+
+
+### Bug Fixes
+
+* "parsedJson.forEach is not a function" Report issue ([#469](https://github.com/rdkcentral/firebolt-certification-suite/issues/469)) ([678d63b](https://github.com/rdkcentral/firebolt-certification-suite/commit/678d63b9c5f5134204bccc7fc96fe623e50f358a))
+
+# [1.14.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.5...v1.14.0-dev.6) (2025-07-30)
+
+
+### Features
+
+* firelog support in before-after runs ([#465](https://github.com/rdkcentral/firebolt-certification-suite/issues/465)) ([08dd81f](https://github.com/rdkcentral/firebolt-certification-suite/commit/08dd81f1c1a73566d114b3c9a5f6fcf402c4105e))
+
+# [1.14.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.4...v1.14.0-dev.5) (2025-07-28)
+
+
+### Bug Fixes
+
+* Invalid/error AS response fix ([#459](https://github.com/rdkcentral/firebolt-certification-suite/issues/459)) ([5ab8dc8](https://github.com/rdkcentral/firebolt-certification-suite/commit/5ab8dc8b55ce3ee7d4a33f6623a77b6fed819f8c))
+
+# [1.14.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.3...v1.14.0-dev.4) (2025-07-23)
+
+
+### Features
+
+* Hide wait step from html report ([#437](https://github.com/rdkcentral/firebolt-certification-suite/issues/437)) ([9f590db](https://github.com/rdkcentral/firebolt-certification-suite/commit/9f590dbdcddb694a526d7bd5f81c5eca59c1a9fe))
+* Tag All PubSub errors with exitCode '2' ([#458](https://github.com/rdkcentral/firebolt-certification-suite/issues/458)) ([f7492df](https://github.com/rdkcentral/firebolt-certification-suite/commit/f7492df53f9fdf1dd9d6aeb848b6a0366db41968))
+
+# [1.14.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.2...v1.14.0-dev.3) (2025-07-22)
+
+
+### Features
+
+* Implement logging type ([#452](https://github.com/rdkcentral/firebolt-certification-suite/issues/452)) ([81d0880](https://github.com/rdkcentral/firebolt-certification-suite/commit/81d08805e3f8accce2f673ba9e0d76b71ed04de9))
+
+# [1.14.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.14.0-dev.1...v1.14.0-dev.2) (2025-07-21)
+
+
+### Features
+
+* Added support for custom validation filter ([#461](https://github.com/rdkcentral/firebolt-certification-suite/issues/461)) ([84b875c](https://github.com/rdkcentral/firebolt-certification-suite/commit/84b875cf2fda01a1bfd86acbe1b662b74cbb3b4a))
+
+# [1.14.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0...v1.14.0-dev.1) (2025-07-14)
+
+
+### Features
+
+* FCS specific exit codes ([#455](https://github.com/rdkcentral/firebolt-certification-suite/issues/455)) ([1ad64e7](https://github.com/rdkcentral/firebolt-certification-suite/commit/1ad64e7049396bc9bf2aa72706b652dec54c50ab))
+
+# [1.13.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0...v1.13.0) (2025-07-02)
+
+
+### Bug Fixes
+
+* Correctly provide default spec pattern ([#432](https://github.com/rdkcentral/firebolt-certification-suite/issues/432)) ([b4f3b17](https://github.com/rdkcentral/firebolt-certification-suite/commit/b4f3b1753afcb4f927dba1b6afe55507549ea491))
+* SecondScreen.feature ([#446](https://github.com/rdkcentral/firebolt-certification-suite/issues/446)) ([3a2f86a](https://github.com/rdkcentral/firebolt-certification-suite/commit/3a2f86a57d8a045ad72474e5e7eb0279f1b11e74))
+
+
+### Features
+
+* Added capture screenshot command ([#435](https://github.com/rdkcentral/firebolt-certification-suite/issues/435)) ([fad9297](https://github.com/rdkcentral/firebolt-certification-suite/commit/fad9297fc130f512daca29ba0124e26475c1a4c8))
+* Authoring Profile view restrication scenarios ([#428](https://github.com/rdkcentral/firebolt-certification-suite/issues/428)) ([6f27f81](https://github.com/rdkcentral/firebolt-certification-suite/commit/6f27f819cb9b73c046bbcf7fd427e167bb97a8bd))
+* change to get action from CLI for module method invocation ([#431](https://github.com/rdkcentral/firebolt-certification-suite/issues/431)) ([68db9c7](https://github.com/rdkcentral/firebolt-certification-suite/commit/68db9c76c2fc5687927337f10125b7c8ec301259))
+* content validation for events when triggered in interaction logs ([#430](https://github.com/rdkcentral/firebolt-certification-suite/issues/430)) ([0d7d0da](https://github.com/rdkcentral/firebolt-certification-suite/commit/0d7d0dabf4059ade2793b242b2eeca62da7aac56))
+* Continue watching implementation-new ([#440](https://github.com/rdkcentral/firebolt-certification-suite/issues/440)) ([4ef4d01](https://github.com/rdkcentral/firebolt-certification-suite/commit/4ef4d015136c84acf39cf1b736a66c0d0c9872cd))
+* Dynamic intent fetching from XVP asset generator ([#442](https://github.com/rdkcentral/firebolt-certification-suite/issues/442)) ([1b1b2fa](https://github.com/rdkcentral/firebolt-certification-suite/commit/1b1b2fa5373e2b504984ed2f6289a98af09c37af))
+* FCS exit codes for cy:run ([#434](https://github.com/rdkcentral/firebolt-certification-suite/issues/434)) ([4030c04](https://github.com/rdkcentral/firebolt-certification-suite/commit/4030c04c2b74b7d549508041b48f3af46908742d))
+* playback dismiss scenarios ([#433](https://github.com/rdkcentral/firebolt-certification-suite/issues/433)) ([3bd17dd](https://github.com/rdkcentral/firebolt-certification-suite/commit/3bd17dd55e8513c00a61ec980bd7658909abb73f))
+
+# [1.13.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0...v1.13.0) (2025-07-02)
+
+
+### Bug Fixes
+
+* Correctly provide default spec pattern ([#432](https://github.com/rdkcentral/firebolt-certification-suite/issues/432)) ([b4f3b17](https://github.com/rdkcentral/firebolt-certification-suite/commit/b4f3b1753afcb4f927dba1b6afe55507549ea491))
+* SecondScreen.feature ([#446](https://github.com/rdkcentral/firebolt-certification-suite/issues/446)) ([3a2f86a](https://github.com/rdkcentral/firebolt-certification-suite/commit/3a2f86a57d8a045ad72474e5e7eb0279f1b11e74))
+
+
+### Features
+
+* Added capture screenshot command ([#435](https://github.com/rdkcentral/firebolt-certification-suite/issues/435)) ([fad9297](https://github.com/rdkcentral/firebolt-certification-suite/commit/fad9297fc130f512daca29ba0124e26475c1a4c8))
+* Authoring Profile view restrication scenarios ([#428](https://github.com/rdkcentral/firebolt-certification-suite/issues/428)) ([6f27f81](https://github.com/rdkcentral/firebolt-certification-suite/commit/6f27f819cb9b73c046bbcf7fd427e167bb97a8bd))
+* change to get action from CLI for module method invocation ([#431](https://github.com/rdkcentral/firebolt-certification-suite/issues/431)) ([68db9c7](https://github.com/rdkcentral/firebolt-certification-suite/commit/68db9c76c2fc5687927337f10125b7c8ec301259))
+* content validation for events when triggered in interaction logs ([#430](https://github.com/rdkcentral/firebolt-certification-suite/issues/430)) ([0d7d0da](https://github.com/rdkcentral/firebolt-certification-suite/commit/0d7d0dabf4059ade2793b242b2eeca62da7aac56))
+* Continue watching implementation-new ([#440](https://github.com/rdkcentral/firebolt-certification-suite/issues/440)) ([4ef4d01](https://github.com/rdkcentral/firebolt-certification-suite/commit/4ef4d015136c84acf39cf1b736a66c0d0c9872cd))
+* Dynamic intent fetching from XVP asset generator ([#442](https://github.com/rdkcentral/firebolt-certification-suite/issues/442)) ([1b1b2fa](https://github.com/rdkcentral/firebolt-certification-suite/commit/1b1b2fa5373e2b504984ed2f6289a98af09c37af))
+* FCS exit codes for cy:run ([#434](https://github.com/rdkcentral/firebolt-certification-suite/issues/434)) ([4030c04](https://github.com/rdkcentral/firebolt-certification-suite/commit/4030c04c2b74b7d549508041b48f3af46908742d))
+* playback dismiss scenarios ([#433](https://github.com/rdkcentral/firebolt-certification-suite/issues/433)) ([3bd17dd](https://github.com/rdkcentral/firebolt-certification-suite/commit/3bd17dd55e8513c00a61ec980bd7658909abb73f))
+
+# [1.13.0-dev.9](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.8...v1.13.0-dev.9) (2025-06-27)
+
+
+### Features
+
+* Dynamic intent fetching from XVP asset generator ([#442](https://github.com/rdkcentral/firebolt-certification-suite/issues/442)) ([1b1b2fa](https://github.com/rdkcentral/firebolt-certification-suite/commit/1b1b2fa5373e2b504984ed2f6289a98af09c37af))
+
+# [1.13.0-dev.8](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.7...v1.13.0-dev.8) (2025-06-27)
+
+
+### Bug Fixes
+
+* SecondScreen.feature ([#446](https://github.com/rdkcentral/firebolt-certification-suite/issues/446)) ([3a2f86a](https://github.com/rdkcentral/firebolt-certification-suite/commit/3a2f86a57d8a045ad72474e5e7eb0279f1b11e74))
+
+# [1.13.0-dev.7](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.6...v1.13.0-dev.7) (2025-06-25)
+
+
+### Features
+
+* Continue watching implementation-new ([#440](https://github.com/rdkcentral/firebolt-certification-suite/issues/440)) ([4ef4d01](https://github.com/rdkcentral/firebolt-certification-suite/commit/4ef4d015136c84acf39cf1b736a66c0d0c9872cd))
+
+# [1.13.0-dev.6](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.5...v1.13.0-dev.6) (2025-06-24)
+
+
+### Features
+
+* Added capture screenshot command ([#435](https://github.com/rdkcentral/firebolt-certification-suite/issues/435)) ([fad9297](https://github.com/rdkcentral/firebolt-certification-suite/commit/fad9297fc130f512daca29ba0124e26475c1a4c8))
+
+# [1.13.0-dev.5](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.4...v1.13.0-dev.5) (2025-06-18)
+
+
+### Features
+
+* FCS exit codes for cy:run ([#434](https://github.com/rdkcentral/firebolt-certification-suite/issues/434)) ([4030c04](https://github.com/rdkcentral/firebolt-certification-suite/commit/4030c04c2b74b7d549508041b48f3af46908742d))
+
+# [1.13.0-dev.4](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.3...v1.13.0-dev.4) (2025-06-11)
+
+
+### Features
+
+* change to get action from CLI for module method invocation ([#431](https://github.com/rdkcentral/firebolt-certification-suite/issues/431)) ([68db9c7](https://github.com/rdkcentral/firebolt-certification-suite/commit/68db9c76c2fc5687927337f10125b7c8ec301259))
+
+# [1.13.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.2...v1.13.0-dev.3) (2025-06-05)
+
+
+### Features
+
+* Authoring Profile view restrication scenarios ([#428](https://github.com/rdkcentral/firebolt-certification-suite/issues/428)) ([6f27f81](https://github.com/rdkcentral/firebolt-certification-suite/commit/6f27f819cb9b73c046bbcf7fd427e167bb97a8bd))
+
+# [1.13.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.13.0-dev.1...v1.13.0-dev.2) (2025-06-03)
+
+
+### Features
+
+* playback dismiss scenarios ([#433](https://github.com/rdkcentral/firebolt-certification-suite/issues/433)) ([3bd17dd](https://github.com/rdkcentral/firebolt-certification-suite/commit/3bd17dd55e8513c00a61ec980bd7658909abb73f))
+
+# [1.13.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.1-dev.1...v1.13.0-dev.1) (2025-06-02)
+
+
+### Features
+
+* content validation for events when triggered in interaction logs ([#430](https://github.com/rdkcentral/firebolt-certification-suite/issues/430)) ([0d7d0da](https://github.com/rdkcentral/firebolt-certification-suite/commit/0d7d0dabf4059ade2793b242b2eeca62da7aac56))
+
+## [1.12.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.12.0...v1.12.1-dev.1) (2025-05-27)
+
+
+### Bug Fixes
+
+* Correctly provide default spec pattern ([#432](https://github.com/rdkcentral/firebolt-certification-suite/issues/432)) ([b4f3b17](https://github.com/rdkcentral/firebolt-certification-suite/commit/b4f3b1753afcb4f927dba1b6afe55507549ea491))
+
 # [1.12.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.11.0...v1.12.0) (2025-05-22)
 
 
