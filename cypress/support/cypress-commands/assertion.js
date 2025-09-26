@@ -252,7 +252,7 @@ Cypress.Commands.add('errorNotUndefinedCheck', (response) => {
   let validationStatus = CONSTANTS.PASS;
 
   // Checks whether the response has a error property and its value is undefined. If the value is undefined, the status is failed, as the error should always be null or another type.
-   if (
+  if (
     response &&
     typeof response === 'object' &&
     response.hasOwnProperty('error') &&
