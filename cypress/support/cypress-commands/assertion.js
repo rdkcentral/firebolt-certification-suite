@@ -252,7 +252,12 @@ Cypress.Commands.add('errorNotUndefinedCheck', (response) => {
   let validationStatus = CONSTANTS.PASS;
 
   // Checks whether the response has a error property and its value is undefined. If the value is undefined, the status is failed, as the error should always be null or another type.
-  if (response.hasOwnProperty('error') && response.error === undefined) {
+  if (
+    response &&
+    typeof response === 'object' &&
+    response.hasOwnProperty('error') &&
+    response.error === undefined
+  ) {
     message = CONSTANTS.ERROR_EXPECTED_DEFINED;
     validationStatus = CONSTANTS.FAIL;
   }
@@ -281,20 +286,23 @@ Cypress.Commands.add('errorNullCheck', (response, errorExpected, isNullCheckSkip
   if (isNullCheckSkipped) {
     message = CONSTANTS.NULL_CHECK;
     validationStatus = CONSTANTS.SKIPPED;
-  } else if (response.error != null && errorExpected != CONSTANTS.ERROR) {
+  } else if (
+    response &&
+    typeof response === 'object' &&
+    response.error != null &&
+    errorExpected != CONSTANTS.ERROR
+  ) {
     let failureMessage = CONSTANTS.ERROR_EXPECTED_NULL;
-
-    if (response.error.message) {
+    if (response.error && response.error.message) {
       failureMessage = response.error.message;
     }
-
     message = failureMessage;
     validationStatus = CONSTANTS.FAIL;
   } else if (errorExpected == CONSTANTS.ERROR) {
-    if (response.error == null) {
+    if (response && typeof response === 'object' && response.error == null) {
       message = CONSTANTS.ERROR_EXPECTED;
       validationStatus = CONSTANTS.FAIL;
-    } else if (response.error) {
+    } else if (response && typeof response === 'object' && response.error) {
       message = response.error.message
         ? `${CONSTANTS.EXPECTED_ERROR_RESPONSE} ${response.error.message}`
         : `${CONSTANTS.EXPECTED_ERROR_RESPONSE} ${response.error}`;
