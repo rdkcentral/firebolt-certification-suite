@@ -1,3 +1,10 @@
+## [1.16.2-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.1...v1.16.2-dev.1) (2025-09-26)
+
+
+### Bug Fixes
+
+* mfos module fixes ([#482](https://github.com/rdkcentral/firebolt-certification-suite/issues/482)) ([99fc433](https://github.com/rdkcentral/firebolt-certification-suite/commit/99fc43320e3528fc94c9cd392b066a2ee1a89a24))
+
 ## [1.16.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.0...v1.16.1) (2025-09-17)
 
 
