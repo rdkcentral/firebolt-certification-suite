@@ -1,3 +1,10 @@
+# [1.17.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.2-dev.1...v1.17.0-dev.1) (2025-09-26)
+
+
+### Features
+
+* Coppa changes ([#470](https://github.com/rdkcentral/firebolt-certification-suite/issues/470)) ([36fa035](https://github.com/rdkcentral/firebolt-certification-suite/commit/36fa035b03e024df9725acde2f3e9d5847128498))
+
 ## [1.16.2-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.1...v1.16.2-dev.1) (2025-09-26)
 
 
