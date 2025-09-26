@@ -29,11 +29,17 @@ Feature: Discovery
       Then 'Firebolt' platform responds with 'true for watched content in discovery'
 
       Examples:
-         | Scenario                                              | API_Key                                                   |
-         | EntityId only                                         | notify watched content with only entityid                 |
-         | EntityId and Progress                                 | notify watched content with entityid progress             |
-         | EntityId, Progress & completed status                 | notify watched content with entityid progress status      |
-         | EntityId, Progress, completed Status & watchedon date | notify watched content with entityid progress status date |
+         | Scenario                                                                        | API_Key                                                                |
+         | EntityId only                                                                   | notify watched content with only entityid                              |
+         | EntityId and Progress                                                           | notify watched content with entityid progress                          |
+         | EntityId, Progress & completed status                                           | notify watched content with entityid progress status                   |
+         | EntityId, Progress, completed Status & watchedon date                           | notify watched content with entityid progress status date              |
+         | EntityId, Progress, completed Status, watchedon date and child age policy       | notify watched content with entityid progress status date child policy |
+         | EntityId, Progress, completed Status, watchedon date and teen age policy        | notify watched content with entityid progress status date teen policy  |
+         | EntityId, Progress, completed Status, watchedon date and adult age policy       | notify watched content with entityid progress status date adult policy |
+         | EntityId, Progress, completed Status, watchedon date and empty agepolicy string | notify watched content with entityid progress status date empty policy |
+         | EntityId, Progress, completed Status, watchedon date and custom agepolicy       | notify watched content with entityid progress status date custom policy|
+
 
    @sdk @transport @Sev1
    Scenario Outline: Discovery.watchNext - Validate Method success with parameter configuration: <Scenario>
@@ -56,8 +62,8 @@ Feature: Discovery
          | Title & identifiers with entityID, assetID & sessionId                           | suggest watchnext tile with entityid assetid sessionid                         |
          | Title & identifiers with entityID, assetID, sessionId, seriesId & appContentData | suggest watchnext tile with entityid assetid sessionid seriesid appcontentdata |
          | Title, identifiers & expires                                                     | suggest watchnext tile with expires                                            |
-         | Title, identfiers, expires & images                                              | suggest watchnext tile with expires images                                     |    
-   
+         | Title, identfiers, expires & images                                              | suggest watchnext tile with expires images                                     |
+
    @sdk @transport @Sev0
    Scenario Outline: Discovery.entitlements - Validate Method success with <Scenario>
       When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
@@ -74,13 +80,15 @@ Feature: Discovery
       Then 'Firebolt' platform responds with 'invalid params for discovery watched'
 
       Examples:
-         | Scenario                 | API_Key                                             |
-         | empty params             | notify watched content with empty parameter         |
-         | invalid EntityID number  | notify watched content with invalid entityid number |
-         | invalid progress         | notify watched content with invalid progress        |
-         | invalid progress string  | notify watched content with invalid progress string |
-         | invalid completed status | notify watched content with invalid completed       |
-         | invalid watched on       | notify watched content with invalid watchedon       |
+         | Scenario                         | API_Key                                                      |
+         | empty params                     | notify watched content with empty parameter                  |
+         | invalid EntityID number          | notify watched content with invalid entityid number          |
+         | invalid progress                 | notify watched content with invalid progress                 |
+         | invalid progress string          | notify watched content with invalid progress string          |
+         | invalid completed status         | notify watched content with invalid completed                |
+         | invalid watched on               | notify watched content with invalid watchedon                |
+         | invalid integer age policy value | notify watched content with invalid integer age policy value |
+         | invalid boolean age policy value | notify watched content with invalid boolean age policy value |
 
    @sdk @transport @Sev2
    Scenario Outline: Discovery.watchNext - Validating API Error handling when given <Scenario>
@@ -166,7 +174,7 @@ Feature: Discovery
          | invalid entitlements invalid startTime     | notify content access with invalid entitlements invalid startTime     |
          | invalid entitlements invalid endTime       | notify content access with invalid entitlements invalid endTime       |
 
-   @regression @sdk @requiresPlatformImplementation @Sev2   
+   @regression @sdk @requiresPlatformImplementation @Sev2
    Scenario: Discovery.onPolicyChanged - Clearing event listeners
       Given '3rd party app' registers for the 'discovery onPolicyChanged' event using the 'Firebolt' API
       And 3rd party stops listening to the event 'discovery onPolicyChanged event'
