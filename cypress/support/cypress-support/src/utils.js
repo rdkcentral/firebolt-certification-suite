@@ -1068,14 +1068,16 @@ global.addToEnvLabelMap = (partialMap) => {
  * @module utils
  * @function captureScreenshot
  * @description A function to capture the screenshot of the device screen.
+ * @params
+ * processScreenshot - A boolean parameter to indicate whether to do OCR validation or not.
  * @example
  * captureScreenshot()
  */
-function captureScreenshot() {
+function captureScreenshot(processScreenshot= false) {
   // Only take a screenshot if the enableScreenshots environment variable is set to true
   if (getEnvVariable('enableScreenshots')) {
     const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT;
-    const param = {};
+    const param = { 'processScreenshot': processScreenshot };
     const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
 
     const screenshotRequest = {
