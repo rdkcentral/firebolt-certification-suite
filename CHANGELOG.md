@@ -1,3 +1,10 @@
+# [1.17.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.17.0-dev.1...v1.17.0-dev.2) (2025-09-29)
+
+
+### Features
+
+* Dynamic feature file generation ([#485](https://github.com/rdkcentral/firebolt-certification-suite/issues/485)) ([fe3e1f2](https://github.com/rdkcentral/firebolt-certification-suite/commit/fe3e1f2d71167597d6a06186fc3a4811af802cd1))
+
 # [1.17.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.2-dev.1...v1.17.0-dev.1) (2025-09-26)
 
 
