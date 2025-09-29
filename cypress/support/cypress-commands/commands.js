@@ -2151,10 +2151,12 @@ Cypress.Commands.add('findLogPattern', (logKey, fileName) => {
  * @module commands
  * @function captureScreenshot
  * @description Sends a request to capture a screenshot of the device screen
+ * @params
+ * processScreenshot - A boolean parameter to indicate whether to do OCR validation or not.
  * @example
- * cy.captureScreenshot()
+ * cy.captureScreenshot(processScreenshot)
  */
-Cypress.Commands.add('captureScreenshot', () => {
+Cypress.Commands.add('captureScreenshot', (processScreenshot) => {
   // Only take a screenshot if the enableScreenshots environment variable is set to true
-  UTILS.captureScreenshot();
+  UTILS.captureScreenshot(processScreenshot);
 });
