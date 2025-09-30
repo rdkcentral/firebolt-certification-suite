@@ -1,3 +1,10 @@
+# [1.17.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.17.0-dev.2...v1.17.0-dev.3) (2025-09-30)
+
+
+### Bug Fixes
+
+* Relative path change for feature generation script ([#490](https://github.com/rdkcentral/firebolt-certification-suite/issues/490)) ([586a7f7](https://github.com/rdkcentral/firebolt-certification-suite/commit/586a7f7565ea371a086a3f8c0d748bac52ed2ce8))
+
 # [1.17.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.17.0-dev.1...v1.17.0-dev.2) (2025-09-29)
 
 
