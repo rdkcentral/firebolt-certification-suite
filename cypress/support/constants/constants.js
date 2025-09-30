@@ -448,6 +448,7 @@ module.exports = {
     SET_RESPONSE_JSON: 'setResponseJson',
   },
   SUPPORTED_SDK: 'supportedSDK',
+  SUPPORTED_INTENTS: 'supportedIntents',
   TASK: {
     CALLLIFECYCLE: 'callLifecycle',
     CALLMETHOD: 'callMethod',
