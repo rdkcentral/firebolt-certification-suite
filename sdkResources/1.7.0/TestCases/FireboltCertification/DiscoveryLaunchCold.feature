@@ -107,6 +107,8 @@ Feature: Discovery.launch_ColdLaunch
             | missing Data Intent                                         | no data intent for discoverylaunch                                              |
             | Invalid Action Intent                                       | invalid action intent for discoverylaunch                                       |
             | Invalid Context Intent                                      | invalid context intent for discoverylaunch                                      |
+            | invalid integer age policy value                            | invalid integer agepolicy in context for discoverylaunch                        |
+            | invalid boolean age policy value                            | invalid boolean agepolicy in context for discoverylaunch                        |
             | Playback Intent with only action                            | playback intent only action for discoverylaunch                                 |
             | Playback Intent Integer Data                                | playback intent int data for discoverylaunch                                    |
             | Entity Intent Integer Data                                  | entity intent int data for discoverylaunch                                      |
@@ -173,7 +175,7 @@ Feature: Discovery.launch_ColdLaunch
             | Search Intent with invalid channelType for channelEntity    | search intent with invalid channelType for channelEntity for discoverylaunch    |
 
     @sdk @transport @Sev2
-    Scenario Outline: Discovery.Launch - Cold Launch : Validate API and Event response when <Scenario> for context source
+    Scenario Outline: Discovery.Launch - Cold Launch : Validate API and Event response when <Scenario> for context
         Given the environment has been set up for 'Discovery.Launch' tests
         When 1st party app invokes the 'Firebolt' API to '<Discovery_Launch_Key>'
         Then 'Firebolt' platform responds to '1st party app' with 'true for discoverylaunch'
@@ -184,6 +186,11 @@ Feature: Discovery.launch_ColdLaunch
         And 'Firebolt' platform responds with 'foreground for lifecycle state'
 
         Examples:
-            | Scenario              | Discovery_Launch_Key                   | Call_Parameters_Initialization_With_Context_Key   | Validation_Key_For_Parameters_Initialization_With_Intent |
-            | passing random string | launch app with null intent source     | get initialization parameters for null intent     | nullintent source for initialization parameters          |
-            | passing valid string  | launch app with playback intent source | get initialization parameters for playback intent | playbackintent source for initialization parameters      |
+            | Scenario                        | Discovery_Launch_Key                   | Call_Parameters_Initialization_With_Context_Key   | Validation_Key_For_Parameters_Initialization_With_Intent |
+            | passing random string           | launch app with null intent source     | get initialization parameters for null intent     | nullintent source for initialization parameters          |
+            | passing valid string            | launch app with playback intent source | get initialization parameters for playback intent | playbackintent source for initialization parameters      |
+            | passing child agepolicy string  | launch app with child agePolicy        | get initialization parameters for agepolicy       | agepolicy child for initialization parameters            |
+            | passing teen agepolicy string   | launch app with teen agePolicy         | get initialization parameters for agepolicy       | agepolicy teen for initialization parameters             |
+            | passing adult agepolicy string  | launch app with adult agePolicy        | get initialization parameters for agepolicy       | agepolicy adult for initialization parameters            |
+            | passing empty agepolicy string  | launch app with empty agepolicy        | get initialization parameters for agePolicy       | agepolicy empty for initialization parameters            |
+            | passing custom agepolicy string | launch app with custom agepolicy       | get initialization parameters for agepolicy       | agepolicy custom for initialization parameters           |

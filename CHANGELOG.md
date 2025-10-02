@@ -1,3 +1,31 @@
+# [1.17.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.17.0-dev.2...v1.17.0-dev.3) (2025-09-30)
+
+
+### Bug Fixes
+
+* Relative path change for feature generation script ([#490](https://github.com/rdkcentral/firebolt-certification-suite/issues/490)) ([586a7f7](https://github.com/rdkcentral/firebolt-certification-suite/commit/586a7f7565ea371a086a3f8c0d748bac52ed2ce8))
+
+# [1.17.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.17.0-dev.1...v1.17.0-dev.2) (2025-09-29)
+
+
+### Features
+
+* Dynamic feature file generation ([#485](https://github.com/rdkcentral/firebolt-certification-suite/issues/485)) ([fe3e1f2](https://github.com/rdkcentral/firebolt-certification-suite/commit/fe3e1f2d71167597d6a06186fc3a4811af802cd1))
+
+# [1.17.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.2-dev.1...v1.17.0-dev.1) (2025-09-26)
+
+
+### Features
+
+* Coppa changes ([#470](https://github.com/rdkcentral/firebolt-certification-suite/issues/470)) ([36fa035](https://github.com/rdkcentral/firebolt-certification-suite/commit/36fa035b03e024df9725acde2f3e9d5847128498))
+
+## [1.16.2-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.1...v1.16.2-dev.1) (2025-09-26)
+
+
+### Bug Fixes
+
+* mfos module fixes ([#482](https://github.com/rdkcentral/firebolt-certification-suite/issues/482)) ([99fc433](https://github.com/rdkcentral/firebolt-certification-suite/commit/99fc43320e3528fc94c9cd392b066a2ee1a89a24))
+
 ## [1.16.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.0...v1.16.1) (2025-09-17)
 
 
