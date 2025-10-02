@@ -570,6 +570,7 @@ module.exports = {
     PLATFORM_NOT_SUPPORTED: 8,
     CUSTOM_METHOD_NOT_FOUND: 9,
     PREREQUISITES_NOT_MET: 10,
+    SKIP_VALIDATION: 11,
   },
   VALIDATION_NOT_PERFORMED_MESSAGE: 'Validation not performed',
 };

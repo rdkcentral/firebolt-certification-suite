@@ -8,5 +8,6 @@
   "7": "Feature flag disabled",
   "8": "Platform not supported",
   "9": "Custom validation method not found",
-  "10": "Validation prerequisites not met"
+  "10": "Validation prerequisites not met",
+  "11": "Validation skipped"
 }
