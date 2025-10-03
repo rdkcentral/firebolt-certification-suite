@@ -22,6 +22,7 @@ import { apiObject, eventObject } from '../appObjectConfigs';
 const path = require('path');
 const jsonAssertion = require('soft-assert');
 const { fireLog } = require('../cypress-support/src/fireLog');
+const { isValidationSkipped } = require('../cypress-support/src/validationSkipUtils');
 
 /**
  * @module commands
@@ -1481,7 +1482,11 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
 
     // cy.then() to ensure each Cypress command is properly awaited before return
     cy.then(() => {
-      fireLog.info(`====== Beginning of the ${scenario} validation ======`, 'report');
+      // Log custom validation name via assertionDef otherwise log the scenario name
+      scenario === CONSTANTS.CUSTOM
+        ? fireLog.info(`====== Beginning of the ${assertionDef} validation ======`, 'report')
+        : fireLog.info(`====== Beginning of the ${scenario} validation ======`, 'report');
+
       switch (scenario) {
         case CONSTANTS.REGEX:
           cy.regExValidation(
@@ -1535,7 +1540,10 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
           break;
       }
     }).then(() => {
-      fireLog.info(`====== Ending of the ${scenario} validation ======`, 'report');
+      // Log custom validation name via assertionDef otherwise log the scenario name
+      scenario === CONSTANTS.CUSTOM
+        ? fireLog.info(`====== Ending of the ${assertionDef} validation ======`, 'report')
+        : fireLog.info(`====== Ending of the ${scenario} validation ======`, 'report');
     });
   };
 
