@@ -1,3 +1,10 @@
+# [1.18.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.17.0...v1.18.0-dev.1) (2025-10-06)
+
+
+### Features
+
+* Improve skipped validation logging ([#487](https://github.com/rdkcentral/firebolt-certification-suite/issues/487)) ([2e7ca40](https://github.com/rdkcentral/firebolt-certification-suite/commit/2e7ca40b4cab6e70d0af033ac8054c8522c2e5d1))
+
 # [1.17.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.1...v1.17.0) (2025-10-02)
 
 
