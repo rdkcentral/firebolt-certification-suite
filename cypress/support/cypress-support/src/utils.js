@@ -1129,6 +1129,7 @@ function selectProfile() {
         response.text &&
         profilePageTexts.some((text) => response.text.toLowerCase().includes(text.toLowerCase()))
       ) {
+        fireLog.info('App launched on profile page; triggered Enter key to proceed.', 'report');
         cy.sendKeyPress('enter');
         cy.wait(10000); // wait for 10 seconds
       }
