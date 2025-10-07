@@ -1,14 +1,15 @@
 {
   "name": "firebolt-certification-suite",
-  "version": "1.16.1-dev.1",
+  "version": "1.18.0-dev.1",
   "description": "Firebolt Certification Test Suite",
   "main": "index.js",
   "config": {
     "supportedSDKVersion": "1.5.0"
   },
   "scripts": {
-    "cy:open": "npm run checkDefaultConfig && yarn cache clean && node ./Scripts/run.js open",
-    "cy:run": "npm run checkDefaultConfig && yarn cache clean && node ./Scripts/run.js run",
+    "generate:feature": "node ./Scripts/generateFeature.js",
+    "cy:open": "npm run checkDefaultConfig && npm run generate:feature && yarn cache clean && node ./Scripts/run.js open",
+    "cy:run": "npm run checkDefaultConfig && npm run generate:feature && yarn cache clean && node ./Scripts/run.js run",
     "softRefresh": "yarn install && yarn upgrade",
     "hardRefresh": "rm -rf node_modules && yarn cache clean && yarn softRefresh",
     "checkDefaultConfig": "node ./Scripts/checkDefaultConfig.js",
