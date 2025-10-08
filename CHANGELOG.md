@@ -1,3 +1,10 @@
+# [1.18.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2025-10-08)
+
+
+### Bug Fixes
+
+* updated import statement in generateFeature ([#491](https://github.com/rdkcentral/firebolt-certification-suite/issues/491)) ([df9d852](https://github.com/rdkcentral/firebolt-certification-suite/commit/df9d8521d0c6e9b46dbcb98892b2ba88ceb8e31a))
+
 # [1.18.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.17.0...v1.18.0-dev.1) (2025-10-06)
 
 
