@@ -36,19 +36,24 @@ if (fs.existsSync(CONFIG_SCRIPTS_DIR)) {
   fs.copyFileSync(CONFIG_SCRIPTS_DIR, EXTERNAL_SCRIPTS_FILE);
   console.log(`External script copied to ${EXTERNAL_SCRIPTS_FILE}`);
 
-  const externalScript = require(EXTERNAL_SCRIPTS_FILE);
-  if (externalScript) {
-    const flags = process.env.DYNAMIC_FEATURE_FILE_FLAGS || '';
-    if (flags) {
-      externalScript.dispatcher(flags);
-    } else {
-      console.log(
-        'No FEATURE_FLAGS provided in environment variables. Skipping dynamic feature generation.'
-      );
-    }
-  } else {
-    console.log('No executable functions found in external runtime scripts.');
-  }
+  import(EXTERNAL_SCRIPTS_FILE)
+    .then((externalScript) => {
+      if (externalScript && externalScript.dispatcher) {
+        const flags = process.env.DYNAMIC_FEATURE_FILE_FLAGS || '';
+        if (flags) {
+          externalScript.dispatcher(flags);
+        } else {
+          console.log(
+            'No FEATURE_FLAGS provided in environment variables. Skipping dynamic feature generation.'
+          );
+        }
+      } else {
+        console.log('No executable functions found in external runtime scripts.');
+      }
+    })
+    .catch((err) => {
+      console.error('Failed to import external runtime script:', err);
+    });
 } else {
   console.log('No external runtime scripts found.');
 }
