@@ -1102,6 +1102,42 @@ function captureScreenshot() {
   }
 }
 
+// TODO: Need to decide the place to kepp this function
+function selectProfile() {
+  const tags = Cypress.env('TAGS');
+  const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT;
+  const param = {};
+  if (
+    Cypress.env(CONSTANTS.SCENARIO_TYPE).includes(CONSTANTS.LOGGEDIN) ||
+    tags?.includes(CONSTANTS.SUBSCRIBED_APPS)
+  ) {
+    const screenshotRequest = {
+      method: method,
+      params: param,
+    };
+    // TODO: move to constants file
+    const profilePageTexts = [
+      'Profile',
+      'Choose a profile',
+      "Who's watching",
+      // Add more profile page texts as needed
+    ];
+    cy.sendMessagetoPlatforms(screenshotRequest, 70000).then((response) => {
+      // Check if response.text contains any of the profilePageTexts
+      if (
+        response &&
+        response.text &&
+        profilePageTexts.some((text) => response.text.toLowerCase().includes(text.toLowerCase()))
+      ) {
+        fireLog.info('App launched on profile page; triggered Enter key to proceed.', 'report');
+        cy.sendKeyPress('enter');
+        cy.wait(10000); // wait for 10 seconds
+      }
+      console.log('responseresponse', response);
+    });
+  }
+}
+
 /**
  * Determines the SDK action type based on the feature file name
  * from the current test's title path.
@@ -1184,4 +1220,5 @@ module.exports = {
   addToEnvLabelMap,
   determineActionFromFeatureFile,
   buildFallbackIntent,
+  selectProfile
 };
