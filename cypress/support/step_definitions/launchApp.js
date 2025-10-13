@@ -36,6 +36,9 @@ import UTILS from '../cypress-support/src/utils';
 Given(
   /3rd party '(.+)' app is launched(?: with '(.+)' appId)?(?: with '(.+)' state)?(?: with '(.+)' intent)?$/,
   function (appType, appCallSign, state, intent) {
+    const runtime = {};
+    runtime.programType = intent;
+    Cypress.env(CONSTANTS.RUNTIME, runtime);
     Cypress.env(CONSTANTS.APP_TYPE, appType);
     Cypress.env(CONSTANTS.APP_LAUNCH_COUNT, Cypress.env(CONSTANTS.APP_LAUNCH_COUNT) || 0);
 
