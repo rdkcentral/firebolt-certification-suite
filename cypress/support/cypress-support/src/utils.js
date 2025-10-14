@@ -1185,5 +1185,5 @@ module.exports = {
   captureScreenshot,
   addToEnvLabelMap,
   determineActionFromFeatureFile,
-  buildFallbackIntent
+  buildFallbackIntent,
 };
