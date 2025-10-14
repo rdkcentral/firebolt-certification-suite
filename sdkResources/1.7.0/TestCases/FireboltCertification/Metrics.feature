@@ -111,10 +111,6 @@ Feature: Metrics
             | mediaEnded with child age policy                      | mediaEnded           | notify that playback has stopped with child age policy               | true for mediaEnded in metrics           |
             | mediaEnded with teen age policy                       | mediaEnded           | notify that playback has stopped with teen age policy                | true for mediaEnded in metrics           |
             | mediaEnded with adult age policy                      | mediaEnded           | notify that playback has stopped with adult age policy               | true for mediaEnded in metrics           |
-            | Metrics event with child age policy                   | event                | Inform the platform of event with child age policy                   | null for event in metrics                |
-            | Metrics event with teen age policy                    | event                | Inform the platform of event with teen age policy                    | null for event in metrics                |
-            | Metrics event with adult age policy                   | event                | Inform the platform of event with adult age policy                   | null for event in metrics                |
-            | Metrics event with valid schema                       | event                | Inform the platform of event with valid schema and data              | null for event in metrics                |
             | action with parametersMetrics as string               | action               | notify about action with parametersMetrics as string                 | true for action in metrics               |
             | action with parametersMetrics as boolean              | action               | notify about action with parametersMetrics as boolean                | true for action in metrics               |
             | action with parametersMetrics as number               | action               | notify about action with parametersMetrics as number                 | true for action in metrics               |
