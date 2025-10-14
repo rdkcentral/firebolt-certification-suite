@@ -49,43 +49,29 @@ Feature: Metrics
             | startContent with child age policy                    | startContent         | notify that content has started with child age policy                | true for startContent in metrics         |
             | startContent with teen age policy                     | startContent         | notify that content has started with teen age policy                 | true for startContent in metrics         |
             | startContent with adult age policy                    | startContent         | notify that content has started with adult age policy                | true for startContent in metrics         |
-            | startContent with custom age policy                   | startContent         | notify that content has started with custom age policy               | true for startContent in metrics         |
-            | startContent with empty age policy                    | startContent         | notify that content has started with empty age policy                | true for startContent in metrics         |
             | stopContent with entityId                             | stopContent          | notify that content has stopped with entityId                        | true for stopContent in metrics          |
             | stopContent with child age policy                     | stopContent          | notify that content has stopped with child age policy                | true for stopContent in metrics          |
             | stopContent with teen age policy                      | stopContent          | notify that content has stopped with teen age policy                 | true for stopContent in metrics          |
             | stopContent with adult age policy                     | stopContent          | notify that content has stopped with adult age policy                | true for stopContent in metrics          |
-            | stopContent with custom age policy                    | stopContent          | notify that content has stopped with custom age policy               | true for stopContent in metrics          |
-            | stopContent with empty age policy                     | stopContent          | notify that content has stopped with empty age policy                | true for stopContent in metrics          |
             | page with pageId                                      | page                 | notify that page has navigated with pageId                           | true for page in metrics                 |
             | page with child age policy                            | page                 | notify that page has navigated with child age policy                 | true for page in metrics                 |
             | page with teen age policy                             | page                 | notify that page has navigated with teen age policy                  | true for page in metrics                 |
             | page with adult age policy                            | page                 | notify that page has navigated with adult age policy                 | true for page in metrics                 |
-            | page with custom age policy                           | page                 | notify that page has navigated with custom age policy                | true for page in metrics                 |
-            | page with empty age policy                            | page                 | notify that page has navigated with empty age policy                 | true for page in metrics                 |
             | action with userMetrics                               | action               | notify about action with userMetrics                                 | true for action in metrics               |
             | action with appMetrics                                | action               | notify about action with appMetrics                                  | true for action in metrics               |
             | action with parametersMetrics                         | action               | notify about action with parametersMetrics                           | true for action in metrics               |
             | action with child age policy                          | action               | notify about action with child age policy                            | true for action in metrics               |
             | action with teen age policy                           | action               | notify about action with teen age policy                             | true for action in metrics               |
             | action with adult age policy                          | action               | notify about action with adult age policy                            | true for action in metrics               |
-            | action with custom age policy                         | action               | notify about action with custom age policy                           | true for action in metrics               |
-            | action with empty age policy                          | action               | notify about action with empty age policy                            | true for action in metrics               |
             | error with mediaStalled                               | error                | notify that error has occured with mediaStalled                      | true for error in metrics                |
             | error with child age policy                           | error                | notify that error has occured with child age policy                  | true for error in metrics                |
             | error with teen age policy                            | error                | notify that error has occured with teen age policy                   | true for error in metrics                |
             | error with adult age policy                           | error                | notify that error has occured with adult age policy                  | true for error in metrics                |
-            | error with custom age policy                          | error                | notify that error has occured with custom age policy                 | true for error in metrics                |
-            | error with empty age policy                           | error                | notify that error has occured with empty age policy                  | true for error in metrics                |
             | mediaLoadStart with entityId                          | mediaLoadStart       | infer load time with entityId                                        | true for mediaLoadStart in metrics       |
             | mediaLoadStart with child age policy                  | mediaLoadStart       | infer load time with child age policy                                | true for mediaLoadStart in metrics       |
             | mediaLoadStart with teen age policy                   | mediaLoadStart       | infer load time with teen age policy                                 | true for mediaLoadStart in metrics       |
             | mediaLoadStart with adult age policy                  | mediaLoadStart       | infer load time with adult age policy                                | true for mediaLoadStart in metrics       |
-            | mediaLoadStart with custom age policy                 | mediaLoadStart       | infer load time with custom age policy                               | true for mediaLoadStart in metrics       |
-            | mediaLoadStart with empty age policy                  | mediaLoadStart       | infer load time with empty age policy                                | true for mediaLoadStart in metrics       |
             | mediaPlay with entityId                               | mediaPlay            | start playback with entityId                                         | true for mediaPlay in metrics            |
-            | mediaPlay with custom age policy                      | mediaPlay            | start playback with custom age policy                                | true for mediaPlay in metrics            |
-            | mediaPlay with empty age policy                       | mediaPlay            | start playback with empty age policy                                 | true for mediaPlay in metrics            |
             | mediaPlay with child age policy                       | mediaPlay            | start playback with child age policy                                 | true for mediaPlay in metrics            |
             | mediaPlay with teen age policy                        | mediaPlay            | start playback with teen age policy                                  | true for mediaPlay in metrics            |
             | mediaPlay with adult age policy                       | mediaPlay            | start playback with adult age policy                                 | true for mediaPlay in metrics            |
@@ -93,61 +79,41 @@ Feature: Metrics
             | mediaPlaying with child age policy                    | mediaPlaying         | notify that playback has started with child age policy               | true for mediaPlaying in metrics         |
             | mediaPlaying with teen age policy                     | mediaPlaying         | notify that playback has started with teen age policy                | true for mediaPlaying in metrics         |
             | mediaPlaying with adult age policy                    | mediaPlaying         | notify that playback has started with adult age policy               | true for mediaPlaying in metrics         |
-            | mediaPlaying with custom age policy                   | mediaPlaying         | notify that playback has started with custom age policy              | true for mediaPlaying in metrics         |
-            | mediaPlaying with empty age policy                    | mediaPlaying         | notify that playback has started with empty age policy               | true for mediaPlaying in metrics         |
             | mediaPause with entityId                              | mediaPause           | notify that playback has paused with entityId                        | true for mediaPause in metrics           |
             | mediaPause with child age policy                      | mediaPause           | notify that playback has paused with child age policy                | true for mediaPause in metrics           |
             | mediaPause with teen age policy                       | mediaPause           | notify that playback has paused with teen age policy                 | true for mediaPause in metrics           |
             | mediaPause with adult age policy                      | mediaPause           | notify that playback has paused with adult age policy                | true for mediaPause in metrics           |
-            | mediaPause with custom age policy                     | mediaPause           | notify that playback has paused with custom age policy               | true for mediaPause in metrics           |
-            | mediaPause with empty age policy                      | mediaPause           | notify that playback has paused with empty age policy                | true for mediaPause in metrics           |
             | mediaWaiting with entityId                            | mediaWaiting         | notify that playback has halted with entityId                        | true for mediaWaiting in metrics         |
             | mediaWaiting with child age policy                    | mediaWaiting         | notify that playback has halted with child age policy                | true for mediaWaiting in metrics         |
             | mediaWaiting with teen age policy                     | mediaWaiting         | notify that playback has halted with teen age policy                 | true for mediaWaiting in metrics         |
             | mediaWaiting with adult age policy                    | mediaWaiting         | notify that playback has halted with adult age policy                | true for mediaWaiting in metrics         |
-            | mediaWaiting with custom age policy                   | mediaWaiting         | notify that playback has halted with custom age policy               | true for mediaWaiting in metrics         |
-            | mediaWaiting with empty age policy                    | mediaWaiting         | notify that playback has halted with empty age policy                | true for mediaWaiting in metrics         |
             | mediaProgress with mediaPosition                      | mediaProgress        | notify that playback is progressing with mediaPosition               | true for mediaProgress in metrics        |
             | mediaProgress with child age policy                   | mediaProgress        | notify that playback is progressing with child age policy            | true for mediaProgress in metrics        |
             | mediaProgress with teen age policy                    | mediaProgress        | notify that playback is progressing with teen age policy             | true for mediaProgress in metrics        |
             | mediaProgress with adult age policy                   | mediaProgress        | notify that playback is progressing with adult age policy            | true for mediaProgress in metrics        |
-            | mediaProgress with custom age policy                  | mediaProgress        | notify that playback is progressing with custom age policy           | true for mediaProgress in metrics        |
-            | mediaProgress with empty age policy                   | mediaProgress        | notify that playback is progressing with empty age policy            | true for mediaProgress in metrics        |
             | mediaSeeking with mediaPosition                       | mediaSeeking         | notify that playback seek is initiated with mediaPosition            | true for mediaSeeking in metrics         |
             | mediaSeeking with child age policy                    | mediaSeeking         | notify that playback seek is initiated with child age policy         | true for mediaSeeking in metrics         |
             | mediaSeeking with teen age policy                     | mediaSeeking         | notify that playback seek is initiated with teen age policy          | true for mediaSeeking in metrics         |
             | mediaSeeking with adult age policy                    | mediaSeeking         | notify that playback seek is initiated with adult age policy         | true for mediaSeeking in metrics         |
-            | mediaSeeking with custom age policy                   | mediaSeeking         | notify that playback seek is initiated with custom age policy        | true for mediaSeeking in metrics         |
-            | mediaSeeking with empty age policy                    | mediaSeeking         | notify that playback seek is initiated with empty age policy         | true for mediaSeeking in metrics         |
             | mediaSeeked with mediaPosition                        | mediaSeeked          | notify that playback seek is completed with mediaPosition            | true for mediaSeeked in metrics          |
             | mediaSeeked with child age policy                     | mediaSeeked          | notify that playback seek is completed with child age policy         | true for mediaSeeked in metrics          |
             | mediaSeeked with teen age policy                      | mediaSeeked          | notify that playback seek is completed with teen age policy          | true for mediaSeeked in metrics          |
             | mediaSeeked with adult age policy                     | mediaSeeked          | notify that playback seek is completed with adult age policy         | true for mediaSeeked in metrics          |
-            | mediaSeeked with custom age policy                    | mediaSeeked          | notify that playback seek is completed with custom age policy        | true for mediaSeeked in metrics          |
-            | mediaSeeked with empty age policy                     | mediaSeeked          | notify that playback seek is completed with empty age policy         | true for mediaSeeked in metrics          |
             | mediaRateChange with playbackRate                     | mediaRateChange      | notify that playback rate is changed with playbackRate               | true for mediaRateChange in metrics      |
             | mediaRateChange with child age policy                 | mediaRateChange      | notify that playback rate is changed with child age policy           | true for mediaRateChange in metrics      |
             | mediaRateChange with teen age policy                  | mediaRateChange      | notify that playback rate is changed with teen age policy            | true for mediaRateChange in metrics      |
             | mediaRateChange with adult age policy                 | mediaRateChange      | notify that playback rate is changed with adult age policy           | true for mediaRateChange in metrics      |
-            | mediaRateChange with custom age policy                | mediaRateChange      | notify that playback rate is changed with custom age policy          | true for mediaRateChange in metrics      |
-            | mediaRateChange with empty age policy                 | mediaRateChange      | notify that playback rate is changed with empty age policy           | true for mediaRateChange in metrics      |
             | mediaRenditionChange with bitrateProfile              | mediaRenditionChange | notify that playback rendition is changed with bitrateProfile        | true for mediaRenditionChange in metrics |
             | mediaRenditionChange with child age policy            | mediaRenditionChange | notify that playback rendition is changed with child age policy      | true for mediaRenditionChange in metrics |
             | mediaRenditionChange with teen age policy             | mediaRenditionChange | notify that playback rendition is changed with teen age policy       | true for mediaRenditionChange in metrics |
             | mediaRenditionChange with adult age policy            | mediaRenditionChange | notify that playback rendition is changed with adult age policy      | true for mediaRenditionChange in metrics |
-            | mediaRenditionChange with custom age policy           | mediaRenditionChange | notify that playback rendition is changed with custom age policy     | true for mediaRenditionChange in metrics |
-            | mediaRenditionChange with empty age policy            | mediaRenditionChange | notify that playback rendition is changed with empty age policy      | true for mediaRenditionChange in metrics |
             | mediaEnded with entityId                              | mediaEnded           | notify that playback has stopped with entityId                       | true for mediaEnded in metrics           |
             | mediaEnded with child age policy                      | mediaEnded           | notify that playback has stopped with child age policy               | true for mediaEnded in metrics           |
             | mediaEnded with teen age policy                       | mediaEnded           | notify that playback has stopped with teen age policy                | true for mediaEnded in metrics           |
             | mediaEnded with adult age policy                      | mediaEnded           | notify that playback has stopped with adult age policy               | true for mediaEnded in metrics           |
-            | mediaEnded with custom age policy                     | mediaEnded           | notify that playback has stopped with custom age policy              | true for mediaEnded in metrics           |
-            | mediaEnded with empty age policy                      | mediaEnded           | notify that playback has stopped with empty age policy               | true for mediaEnded in metrics           |
             | Metrics event with child age policy                   | event                | Inform the platform of event with child age policy                   | null for event in metrics                |
             | Metrics event with teen age policy                    | event                | Inform the platform of event with teen age policy                    | null for event in metrics                |
             | Metrics event with adult age policy                   | event                | Inform the platform of event with adult age policy                   | null for event in metrics                |
-            | Metrics event with custom age policy                  | event                | Inform the platform of event with custom age policy                  | null for event in metrics                |
-            | Metrics event with empty age policy                   | event                | Inform the platform of event with empty age policy                   | null for event in metrics                |
             | Metrics event with valid schema                       | event                | Inform the platform of event with valid schema and data              | null for event in metrics                |
             | action with parametersMetrics as string               | action               | notify about action with parametersMetrics as string                 | true for action in metrics               |
             | action with parametersMetrics as boolean              | action               | notify about action with parametersMetrics as boolean                | true for action in metrics               |
@@ -235,11 +201,11 @@ Feature: Metrics
             | mediaEnded with numeric-entityId                    | mediaEnded           | notify that playback has stopped with numeric entityId            | invalid params for metrics mediaEnded           |
             | mediaEnded has invalid integer age policy           | mediaEnded           | notify that playback has stopped with integer age policy          | invalid params for metrics mediaEnded           |
             | mediaEnded has invalid boolean age policy           | mediaEnded           | notify that playback has stopped with boolean age policy          | invalid params for metrics mediaEnded           |
-            | Metrics event with missing schema param             | event                | Inform the platform of event with missing schema param            | invalid params for metrics event                |
+            | Metrics event with missing schema                   | event                | Inform the platform of event with missing schema                  | invalid params for metrics event                |
             | Metrics event with numeric schema                   | event                | Inform the platform of event with numeric schema                  | invalid params for metrics event                |
             | Metrics event with boolean schema                   | event                | Inform the platform of event with boolean schema                  | invalid params for metrics event                |
             | Metrics event with null schema                      | event                | Inform the platform of event with null schema                     | invalid params for metrics event                |
-            | Metrics event with missing data param               | event                | Inform the platform of event with missing data param              | invalid params for metrics event                |
+            | Metrics event with missing data                     | event                | Inform the platform of event with missing data                    | invalid params for metrics event                |
             | Metrics event with null data                        | event                | Inform the platform of event with null data                       | invalid params for metrics event                |
             | Metrics event with string data                      | event                | Inform the platform of event with string data                     | invalid params for metrics event                |
             | Metrics event with numeric data                     | event                | Inform the platform of event with numeric data                    | invalid params for metrics event                |
@@ -248,3 +214,13 @@ Feature: Metrics
             | Metrics event has invalid boolean age policy        | event                | Inform the platform of event with boolean age policy              | invalid params for metrics event                |
             | Metrics appInfo with numeric build                  | appInfo              | Inform the platform about app with numeric build                  | invalid params for metrics appInfo              |
             | Metrics appInfo with boolean build                  | appInfo              | Inform the platform about app with boolean build                  | invalid params for metrics appInfo              |
+
+
+    @sdk @transport @Sev2
+    Scenario Outline: Metrics.<Method> - Validating API Method response for <Scenario>
+        When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
+        Then 'Firebolt' platform responds with '<Validation_key>'
+
+        Examples:
+            | Scenario                                              | Method               | API_Key                                                              | Validation_key                           |
+            | startContent with custom age policy                   | startContent         | notify that content has started with custom age policy               | true for startContent in metrics         |

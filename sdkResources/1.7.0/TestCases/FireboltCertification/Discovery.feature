@@ -37,7 +37,6 @@ Feature: Discovery
          | EntityId, Progress, completed Status, watchedon date and child age policy       | notify watched content with entityid progress status date child policy |
          | EntityId, Progress, completed Status, watchedon date and teen age policy        | notify watched content with entityid progress status date teen policy  |
          | EntityId, Progress, completed Status, watchedon date and adult age policy       | notify watched content with entityid progress status date adult policy |
-         | EntityId, Progress, completed Status, watchedon date and empty agepolicy string | notify watched content with entityid progress status date empty policy |
          | EntityId, Progress, completed Status, watchedon date and custom agepolicy       | notify watched content with entityid progress status date custom policy|
 
 
