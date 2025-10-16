@@ -1089,6 +1089,8 @@ function captureScreenshot() {
 
     try {
       cy.sendMessagetoPlatforms(screenshotRequest, 70000).then((response) => {
+        const presignedUrl = response?.presignedUrl;
+        fireLog.info(`Screenshot: ${presignedUrl}`, 'report');
         const apiResponse = {
           response: response,
         };
