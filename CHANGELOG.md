@@ -1,3 +1,15 @@
+# [1.18.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2025-10-21)
+
+
+### Bug Fixes
+
+* updated import statement in generateFeature ([#491](https://github.com/rdkcentral/firebolt-certification-suite/issues/491)) ([df9d852](https://github.com/rdkcentral/firebolt-certification-suite/commit/df9d8521d0c6e9b46dbcb98892b2ba88ceb8e31a))
+
+
+### Features
+
+* Removed wait time env dependency ([#488](https://github.com/rdkcentral/firebolt-certification-suite/issues/488)) ([e3759ac](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3759ac1e08c9f550ae8e3d0992c866b7a9c5b00))
+
 # [1.18.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2025-10-15)
 
 
