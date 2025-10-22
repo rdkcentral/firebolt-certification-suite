@@ -147,6 +147,16 @@
     "params": "DISCOVERYLAUNCH_INVALID_CONTEXT_INTENT",
     "expected": "error"
   },
+  "INVALID_INTEGER_AGEPOLICY_FOR_DISCOVERYLAUNCH": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_INT_AGE_POLICY",
+    "expected": "error"
+  },
+  "INVALID_BOOLEAN_AGEPOLICY_FOR_DISCOVERYLAUNCH": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH__BOOLEAN_AGE_POLICY",
+    "expected": "error"
+  },
   "PLAYBACK_INTENT_ONLY_ACTION_FOR_DISCOVERYLAUNCH": {
     "method": "discovery.launch",
     "params": "DISCOVERYLAUNCH_PLAYBACK_INTENT_ONLY_ACTION",
@@ -474,10 +484,38 @@
     "method": "discovery.launch",
     "params": "DISCOVERYLAUNCH_LAUNCH_APP_WITH_SEARCH_INTENT_SOURCE"
   },
+  "LAUNCH_APP_WITH_CHILD_AGE_POLICY": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_CHILD_AGE_POLICY"
+  },
+  "LAUNCH_APP_WITH_TEEN_AGE_POLICY": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_TEEN_AGE_POLICY"
+  },
+  "LAUNCH_APP_WITH_ADULT_AGE_POLICY": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_ADULT_AGE_POLICY"
+  },
+  "LAUNCH_APP_WITH_CUSTOM_AGE_POLICY": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_CUSTOM_AGE_POLICY"
+  },
+  "LAUNCH_APP_WITH_EMPTY_AGE_POLICY": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_EMPTY_AGE_POLICY"
+  },
   "LAUNCH_APP_WITH_SEARCH_INTENT_INT_SOURCE": {
     "method": "discovery.launch",
     "params": "DISCOVERYLAUNCH_LAUNCH_APP_WITH_SEARCH_INTENT_INT_SOURCE",
     "expected": "error"
+  },
+  "LAUNCH_APP_WITH_INT_AGE_POLICY": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_INT_AGE_POLICY"
+  },
+  "LAUNCH_APP_WITH_BOOLEAN_AGE_POLICY": {
+    "method": "discovery.launch",
+    "params": "DISCOVERYLAUNCH_BOOLEAN_AGE_POLICY"
   },
   "FALSE_FOR_DISCOVERYLAUNCH": {
     "method": "discovery.launch",
@@ -718,6 +756,31 @@
     "event": "discovery.onNavigateTo",
     "validationJsonPath": "eventResponse",
     "content": "DISCOVERYLAUNCH_SEARCH_INTENT_SOURCE"
+  },
+  "ONNAVIGATETO_WITH_CHILD_AGE_POLICY": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_CHILD_AGE_POLICY"
+  },
+  "ONNAVIGATETO_WITH_TEEN_AGE_POLICY": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_TEEN_AGE_POLICY"
+  },
+  "ONNAVIGATETO_WITH_ADULT_AGE_POLICY": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_ADULT_AGE_POLICY"
+  },
+  "ONNAVIGATETO_WITH_CUSTOM_AGE_POLICY": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_CUSTOM_AGE_POLICY"
+  },
+  "ONNAVIGATETO_WITH_EMPTY_AGE_POLICY": {
+    "event": "discovery.onNavigateTo",
+    "validationJsonPath": "eventResponse",
+    "content": "DISCOVERYLAUNCH_EMPTY_AGE_POLICY"
   },
   "ONNAVIGATETO_WITH_NULL_RESPONSE": {
     "event": "discovery.onNavigateTo",
