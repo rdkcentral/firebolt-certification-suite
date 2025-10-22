@@ -127,9 +127,26 @@ Given(
           }
         }
         // Calling the configModule function to fetch the report data
-        cy.callConfigModule('getReportData').then(() => {
-          cy.updateRunInfo();
-        });
+        cy.callConfigModule('getReportData')
+          .then(() => {
+            const tags = Cypress.env(CONSTANTS.TAGS);
+            console.log('tags', tags);
+            let parsedTags = tags ? tags : 'Not Available';
+            let tagArray =
+              typeof parsedTags === 'string'
+                ? parsedTags
+                    .split(/\s+(and|or)\s+/)
+                    .filter((tag) => tag !== 'and' && tag !== 'or')
+                    .map((tag) => tag.trim())
+                : parsedTags;
+            console.log('tagArray', tagArray);
+            addToEnvLabelMap({
+              [CONSTANTS.TAGS]: `[ ${Array.isArray(tagArray) ? tagArray.join(', ') : tagArray} ]`,
+            });
+          })
+          .then(() => {
+            cy.updateRunInfo();
+          });
       } catch (error) {
         cy.log(
           `Following error occurred while trying to fetch device details dynamically: ${error}`

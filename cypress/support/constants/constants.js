@@ -447,6 +447,7 @@ module.exports = {
   },
   SUPPORTED_SDK: 'supportedSDK',
   SUPPORTED_INTENTS: 'supportedIntents',
+  TAGS: 'TAGS',
   TASK: {
     CALLLIFECYCLE: 'callLifecycle',
     CALLMETHOD: 'callMethod',
