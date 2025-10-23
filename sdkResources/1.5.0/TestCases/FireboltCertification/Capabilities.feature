@@ -220,7 +220,7 @@ Feature: Capabilities
       | device sku capability                   | check if device sku capability is permitted with role use                   | fetch device sku    | expected device sku    |
       | device uid capability                   | check if device uid capability is permitted with role use                   | fetch device uid    | expected device uid    |
 
-  @sdk @transport @requiresPlatformImplementation @Sev2
+  @sdk @transport @requiresPlatformImplementation @notSupported @Sev2
   Scenario: Capabilities.OnAvailable - Validate Event trigger
     Given 1st party app registers for the 'capabilities onAvailable' event using the 'Firebolt' API
     And User set response for 'set keyboard response in platform'
@@ -238,7 +238,7 @@ Feature: Capabilities
     Then 'Firebolt' platform responds to '1st party app' with 'false for keyboard capability availability'
     And 'Firebolt' platform triggers to '1st party app' event 'expected value for capabilities onUnAvailable'
 
-  @sdk @transport @requiresPlatformImplementation @Sev2
+  @sdk @transport @requiresPlatformImplementation @notSupported @Sev2
   Scenario: Capabilities.OnGranted - Validate Event trigger
     Given '3rd party app' registers for the 'capabilities onGranted' event using the 'Firebolt' API
     And User set response for 'set pinchallenge correct pin'
@@ -251,7 +251,7 @@ Feature: Capabilities
     Then 'Firebolt' platform responds with 'true for granted capability with passed role'
     And 'Firebolt' platform triggers event 'expected value for capabilities OnGranted'
 
-  @sdk @transport @requiresPlatformImplementation @Sev2
+  @sdk @transport @requiresPlatformImplementation @notSupported @Sev2
   Scenario: Capabilities.OnRevoked - Validate Event trigger and Error reponse
     Given '3rd party app' registers for the 'capabilities onRevoked' event using the 'Firebolt' API
     And User set response for 'set pinchallenge wrong pin'
