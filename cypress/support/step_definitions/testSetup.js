@@ -131,8 +131,8 @@ Given(
           .then(() => {
             const tags = Cypress.env(CONSTANTS.TAGS);
             console.log('tags', tags);
-            let parsedTags = tags ? tags : 'Not Available';
-            let tagArray =
+            const parsedTags = tags ? tags : 'Not Available';
+            const tagArray =
               typeof parsedTags === 'string'
                 ? parsedTags
                     .split(/\s+(and|or)\s+/)
