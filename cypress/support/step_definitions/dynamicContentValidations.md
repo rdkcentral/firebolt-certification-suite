@@ -72,7 +72,7 @@ From FCS, the override function is invoked in the following format:
 Format:
   ```
    {
-    "method": "fcs.fetchDeviceDetails",
+    "method": "fetchDeviceDetails",
     "params": <deviceId>
   }
 

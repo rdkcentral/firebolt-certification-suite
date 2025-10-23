@@ -1891,7 +1891,10 @@ Cypress.Commands.add('fetchAppMetaData', () => {
       },
     };
     // Send the request to fetch app data from platforms
-    cy.sendMessagetoPlatforms(requestParams).then((result) => {
+    cy.callConfigModule(CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPDATA, {
+      deviceMac: Cypress.env(CONSTANTS.DEVICE_MAC),
+      appAssuranceId: Cypress.env(CONSTANTS.APP_ASSURANCE_ID),
+    }).then((result) => {
       if (result && result.data) {
         return result.data;
       } else {
