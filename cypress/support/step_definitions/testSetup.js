@@ -130,8 +130,7 @@ Given(
         cy.callConfigModule('getReportData')
           .then(() => {
             const tags = Cypress.env(CONSTANTS.TAGS);
-            console.log('tags', tags);
-            const parsedTags = tags ? tags : 'Not Available';
+            const parsedTags = tags ? tags : 'None';
             const tagArray =
               typeof parsedTags === 'string'
                 ? parsedTags
@@ -139,7 +138,6 @@ Given(
                     .filter((tag) => tag !== 'and' && tag !== 'or')
                     .map((tag) => tag.trim())
                 : parsedTags;
-            console.log('tagArray', tagArray);
             addToEnvLabelMap({
               [CONSTANTS.TAGS]: `[ ${Array.isArray(tagArray) ? tagArray.join(', ') : tagArray} ]`,
             });
