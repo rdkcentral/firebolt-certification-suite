@@ -404,7 +404,7 @@ Given(
  */
 Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
   cy.callConfigModule('checkAndSelectProfile');
-  UTILS.captureScreenshot();
+  UTILS.captureScreenshot(true);
   const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
   // Ensure appId is available before proceeding
   if (!appId) {
