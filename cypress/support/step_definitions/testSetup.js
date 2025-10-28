@@ -116,7 +116,9 @@ Given(
               CONSTANTS.ACTION_CORE.toLowerCase()
             ).then((response) => {
               if (response) {
-                cy.callConfigModule(CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS, { response })
+                cy.callConfigModule(CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS, {
+                  response,
+                });
               }
             });
           }
