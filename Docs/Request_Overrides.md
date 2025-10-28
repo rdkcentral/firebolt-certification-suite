@@ -156,7 +156,7 @@
   Format:
   ```
    {
-    "method": "fcs.fetchDeviceDetails",
+    "method": "fetchDeviceDetails",
     "params": <deviceId>
   }
 
@@ -165,7 +165,7 @@
   ```
    {
 
-    "method": "fcs.fetchDeviceDetails",
+    "method": "fetchDeviceDetails",
     "params": "354444327"
   }
    ```
