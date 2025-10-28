@@ -1064,6 +1064,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
           );
         }
         Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
+        Cypress.env(CONSTANTS.RUNTIME).programType = intent;
 
         const giveDynamicAssetsPrecedence = getEnvVariable('giveDynamicAssetsPrecedence', false);
 
