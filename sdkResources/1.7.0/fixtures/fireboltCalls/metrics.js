@@ -1727,6 +1727,12 @@ exports.NULL_FOR_METRICS_APPINFO = {
   validationJsonPath: 'result',
   content: null,
 };
+exports.NULL_FOR_EVENT_IN_METRICS = {
+  method: 'metrics.event',
+  validationJsonPath: 'result',
+  content: null,
+};
+
 exports.INVALID_PARAMS_FOR_METRICS_MEDIAENDED = {
   method: 'metrics.mediaEnded',
   validationJsonPath: 'result',

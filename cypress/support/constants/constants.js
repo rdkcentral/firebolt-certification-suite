@@ -447,6 +447,7 @@ module.exports = {
   },
   SUPPORTED_SDK: 'supportedSDK',
   SUPPORTED_INTENTS: 'supportedIntents',
+  TAGS: 'TAGS',
   TASK: {
     CALLLIFECYCLE: 'callLifecycle',
     CALLMETHOD: 'callMethod',
@@ -534,7 +535,7 @@ module.exports = {
   PLAYBACK: 'playback',
   LOGGEDIN: 'loggedIn',
   LOGGEDOUT: 'loggedOut',
-  FREE_APPS: 'freemiumapps',
+  FREE_APPS: 'freeapps',
   SUBSCRIBED_APPS: 'subscribedapps',
   DISMISS: 'dismiss',
   DETAILED: 'detailed',
@@ -558,6 +559,21 @@ module.exports = {
     GENERAL_FAILURE: 1,
     CRITICAL_FAILURE: 2,
   },
+  // Validation skip codes and related constants
+  VALIDATION_SKIP_CODES: {
+    SCREENSHOTS_DISABLED: 1,
+    PERFORMANCE_METRICS_DISABLED: 2,
+    PERFORMANCE_FLAG_DISABLED: 3,
+    NO_VALID_LOG_PATTERNS: 4,
+    VALIDATION_NOT_APPLICABLE: 5,
+    REQUIRED_CONFIG_MISSING: 6,
+    FEATURE_FLAG_DISABLED: 7,
+    PLATFORM_NOT_SUPPORTED: 8,
+    CUSTOM_METHOD_NOT_FOUND: 9,
+    PREREQUISITES_NOT_MET: 10,
+    SKIP_VALIDATION: 11,
+  },
+  VALIDATION_NOT_PERFORMED_MESSAGE: 'Validation not performed',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
