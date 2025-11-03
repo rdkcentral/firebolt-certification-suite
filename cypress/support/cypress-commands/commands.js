@@ -911,16 +911,18 @@ Cypress.Commands.add('parsedMockData', (beforeOperation) => {
  * @function startOrStopPerformanceService
  * @description To start or stop performance metrics service in device by passing appropriate intent to performance test handler
  * @param {String} action - start or stop
+ * @param {String} optionalParams - Additional arguments to be passed to performance test handler
  * @example
- * cy.startOrStopPerformanceService('initiated)
+ * cy.startOrStopPerformanceService('initiated')
  * cy.startOrStopPerformanceService('stopped')
  */
-Cypress.Commands.add('startOrStopPerformanceService', (action) => {
+Cypress.Commands.add('startOrStopPerformanceService', (action, optionalParams = '') => {
+  optionalParams == 'null' ? optionalParams = null : optionalParams;
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETPERFORMANCETESTHANDLER,
     params: {
       trigger: action == CONSTANTS.INITIATED ? CONSTANTS.START : CONSTANTS.STOP,
-      optionalParams: '',
+      optionalParams: optionalParams,
     },
     task: CONSTANTS.TASK.PERFORMANCETESTHANDLER,
   };
