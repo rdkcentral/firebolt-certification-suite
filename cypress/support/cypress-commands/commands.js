@@ -917,7 +917,6 @@ Cypress.Commands.add('parsedMockData', (beforeOperation) => {
  * cy.startOrStopPerformanceService('stopped')
  */
 Cypress.Commands.add('startOrStopPerformanceService', (action, optionalParams = '') => {
-  optionalParams == 'null' ? optionalParams = null : optionalParams;
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETPERFORMANCETESTHANDLER,
     params: {
