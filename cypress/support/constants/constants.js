@@ -447,6 +447,7 @@ module.exports = {
   },
   SUPPORTED_SDK: 'supportedSDK',
   SUPPORTED_INTENTS: 'supportedIntents',
+  TAGS: 'TAGS',
   TASK: {
     CALLLIFECYCLE: 'callLifecycle',
     CALLMETHOD: 'callMethod',
@@ -534,7 +535,7 @@ module.exports = {
   PLAYBACK: 'playback',
   LOGGEDIN: 'loggedIn',
   LOGGEDOUT: 'loggedOut',
-  FREE_APPS: 'freemiumapps',
+  FREE_APPS: 'freeapps',
   SUBSCRIBED_APPS: 'subscribedapps',
   DISMISS: 'dismiss',
   DETAILED: 'detailed',
