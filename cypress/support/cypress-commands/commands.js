@@ -911,16 +911,17 @@ Cypress.Commands.add('parsedMockData', (beforeOperation) => {
  * @function startOrStopPerformanceService
  * @description To start or stop performance metrics service in device by passing appropriate intent to performance test handler
  * @param {String} action - start or stop
+ * @param {String} optionalParams - Additional arguments to be passed to performance test handler
  * @example
- * cy.startOrStopPerformanceService('initiated)
+ * cy.startOrStopPerformanceService('initiated')
  * cy.startOrStopPerformanceService('stopped')
  */
-Cypress.Commands.add('startOrStopPerformanceService', (action) => {
+Cypress.Commands.add('startOrStopPerformanceService', (action, optionalParams = '') => {
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SETPERFORMANCETESTHANDLER,
     params: {
       trigger: action == CONSTANTS.INITIATED ? CONSTANTS.START : CONSTANTS.STOP,
-      optionalParams: '',
+      optionalParams: optionalParams,
     },
     task: CONSTANTS.TASK.PERFORMANCETESTHANDLER,
   };
@@ -1064,6 +1065,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
           );
         }
         Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
+        Cypress.env(CONSTANTS.RUNTIME).programType = intent;
 
         const giveDynamicAssetsPrecedence = getEnvVariable('giveDynamicAssetsPrecedence', false);
 
@@ -2162,10 +2164,12 @@ Cypress.Commands.add('findLogPattern', (logKey, fileName) => {
  * @module commands
  * @function captureScreenshot
  * @description Sends a request to capture a screenshot of the device screen
+ * @params
+ * processScreenshot - A boolean parameter to indicate whether to do OCR validation or not.
  * @example
- * cy.captureScreenshot()
+ * cy.captureScreenshot(processScreenshot)
  */
-Cypress.Commands.add('captureScreenshot', () => {
+Cypress.Commands.add('captureScreenshot', (processScreenshot) => {
   // Only take a screenshot if the enableScreenshots environment variable is set to true
-  UTILS.captureScreenshot();
+  UTILS.captureScreenshot(processScreenshot);
 });
