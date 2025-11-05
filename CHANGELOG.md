@@ -1,3 +1,10 @@
+# [1.19.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0...v1.19.0-dev.1) (2025-11-05)
+
+
+### Features
+
+* Adding optional parameters to performance handler command ([#503](https://github.com/rdkcentral/firebolt-certification-suite/issues/503)) ([5b101ec](https://github.com/rdkcentral/firebolt-certification-suite/commit/5b101ec002aa6970e4fc88146c655fbb1ddabde3))
+
 # [1.18.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.17.0...v1.18.0) (2025-10-29)
 
 
