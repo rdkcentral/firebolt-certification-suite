@@ -1886,10 +1886,7 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
 Cypress.Commands.add('fetchAppMetaData', () => {
   if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
     // Send the request to fetch app data from platforms
-    cy.callConfigModule(CONSTANTS.GETAPPDATA, {
-      deviceMac: Cypress.env(CONSTANTS.DEVICE_MAC),
-      appAssuranceId: Cypress.env(CONSTANTS.APP_ASSURANCE_ID),
-    }).then((result) => {
+    cy.callConfigModule(CONSTANTS.GETAPPDATA).then((result) => {
       if (result && result.data) {
         return result.data;
       } else {
