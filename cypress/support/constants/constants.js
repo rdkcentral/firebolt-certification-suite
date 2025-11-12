@@ -380,11 +380,9 @@ module.exports = {
     UNLOADAPP: 'fcs.unloadApp',
     CLOSEAPP: 'fcs.closeApp',
     DISMISSAPP: 'fcs.dismissApp',
-    FETCHDEVICEDETAILS: 'fetchDeviceDetails',
     SCREENSHOT: 'fcs.screenshot',
     GETAPPSTATE: 'fcs.getAppState',
     DISMISS: 'fcs.dismissApp',
-    GETAPPDATA: 'getAppData',
     SENDKEYPRESS: 'fcs.sendKeyPress',
     SENDVOICECOMMAND: 'fcs.sendVoiceCommand',
     FINDLOGPATTERN: 'fcs.findLogPattern',
@@ -574,6 +572,8 @@ module.exports = {
     SKIP_VALIDATION: 11,
   },
   VALIDATION_NOT_PERFORMED_MESSAGE: 'Validation not performed',
+  FETCHDEVICEDETAILS: 'fetchDeviceDetails',
+  GETAPPDATA: 'getAppData',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

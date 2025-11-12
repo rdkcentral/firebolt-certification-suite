@@ -1885,15 +1885,8 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
  */
 Cypress.Commands.add('fetchAppMetaData', () => {
   if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
-    const requestParams = {
-      method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPDATA,
-      params: {
-        deviceMac: Cypress.env(CONSTANTS.DEVICE_MAC),
-        appAssuranceId: Cypress.env(CONSTANTS.APP_ASSURANCE_ID),
-      },
-    };
     // Send the request to fetch app data from platforms
-    cy.callConfigModule(CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPDATA, {
+    cy.callConfigModule(CONSTANTS.GETAPPDATA, {
       deviceMac: Cypress.env(CONSTANTS.DEVICE_MAC),
       appAssuranceId: Cypress.env(CONSTANTS.APP_ASSURANCE_ID),
     }).then((result) => {
