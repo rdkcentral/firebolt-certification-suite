@@ -39,10 +39,6 @@ Feature: Localization
             | string as key and value            | set localization removeAdditionalInfo with string       | empty key value for localization additionalInfo |
             | empty string as key and value      | set localization removeAdditionalInfo with empty string | empty response for localization additionalInfo  |
        
-    @sdk @transport @Sev2
-    Scenario: Localization.latlon - Get Latitude and Longitude localization info
-        When '3rd party app' invokes the 'Firebolt' API to 'get localization latlon'
-        Then 'Firebolt' platform responds with 'expected localization latlon'
 
     # @sdk @transport @Sev0
     # Scenario Outline: Localization.locale - Validate Locale Response to <Methods> change
@@ -98,6 +94,11 @@ Feature: Localization
             | English       | preferredAudioLanguages | eng,spa    |
             # | 12345         | postalCode              | "12345"    |
             # | PH            | countryCode             | PH         |
+
+    @sdk @transport @Sev2
+    Scenario: Localization.latlon - Get Latitude and Longitude localization info
+        Given '3rd party app' invokes the 'Firebolt' API to 'get localization latlon'
+        Then 'Firebolt' platform responds with 'expected localization latlon'
 
     @regression @sdk @requiresPlatformImplementation @Sev2
     Scenario Outline: Localization.<Method_Name> - Clearing event listeners
