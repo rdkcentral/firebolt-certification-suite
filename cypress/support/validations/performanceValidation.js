@@ -17,7 +17,9 @@
  */
 
 const CONSTANTS = require('../constants/constants');
-import UTILS, { fireLog } from '../cypress-support/src/utils';
+import UTILS from '../cypress-support/src/utils';
+const { fireLog } = require('../cypress-support/src/fireLog');
+const { createValidationSkipResponse } = require('../cypress-support/src/validationSkipUtils');
 
 /**
  * @module performanceValidation
@@ -41,21 +43,23 @@ Cypress.Commands.add('performanceValidation', (object) => {
       params: { type, process, percentile, threshold },
     };
 
-    fireLog.info('Performance validation has started');
+    fireLog.info('Performance validation has started', 'report');
     cy.sendMessagetoPlatforms(requestMap).then((result) => {
       cy.wrap(result)
         .then((response) => {
           if (response && Array.isArray(response)) {
             response.map((res) => {
-              fireLog.info(JSON.stringify(res));
+              fireLog.info(JSON.stringify(res), 'report');
             });
           }
         })
         .then(() => {
           if (result.error) {
-            fireLog.info('Failed to fetch and validate the performance metrics').then(() => {
-              fireLog.assert(false, result.error);
-            });
+            fireLog
+              .info('Failed to fetch and validate the performance metrics', 'report')
+              .then(() => {
+                fireLog.assert(false, result.error);
+              });
           } else {
             result.map((response) => {
               fireLog.equal(true, response?.success, response?.message);
@@ -64,5 +68,12 @@ Cypress.Commands.add('performanceValidation', (object) => {
         });
       fireLog.info('Performance validation has stopped');
     });
+  } else {
+    // Performance metrics are disabled
+    const skipResponse = createValidationSkipResponse(
+      CONSTANTS.VALIDATION_SKIP_CODES.PERFORMANCE_METRICS_DISABLED
+    );
+    // Returns skipped response object in case we want to do something with it later
+    cy.wrap(skipResponse);
   }
 });

@@ -16,8 +16,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-const logger = require('./cypress/support/Logger')('specHelperConfig.js');
-
 /**
 @function getSpecPattern
 @description Retrieves the appropriate spec pattern based on the provided testSuite.
@@ -42,8 +40,8 @@ function getSpecPattern(testSuite) {
 
   // If testSuite is null or empty, do nothing, return undefined
   if (!trimmedTestSuite || !patterns[trimmedTestSuite]) {
-    logger.error(`Test suite '${testSuite}' not found in patterns. Defaulting to '**/*.feature'.`);
-    return undefined;
+    fireLog.warn(`Test suite '${testSuite}' not found in patterns. Defaulting to '**/*.feature'.`);
+    return patterns.all;
   }
 
   // Otherwise, return the corresponding pattern

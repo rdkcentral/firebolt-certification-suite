@@ -1,14 +1,15 @@
 {
   "name": "firebolt-certification-suite",
-  "version": "1.12.0",
+  "version": "1.19.0-dev.1",
   "description": "Firebolt Certification Test Suite",
   "main": "index.js",
   "config": {
     "supportedSDKVersion": "1.5.0"
   },
   "scripts": {
-    "cy:open": "npm run checkDefaultConfig && yarn cache clean && node ./Scripts/run.js open",
-    "cy:run": "npm run checkDefaultConfig && yarn cache clean && node ./Scripts/run.js run",
+    "generate:feature": "node ./Scripts/generateFeature.js",
+    "cy:open": "npm run checkDefaultConfig && npm run generate:feature && yarn cache clean && node ./Scripts/run.js open",
+    "cy:run": "npm run checkDefaultConfig && npm run generate:feature && yarn cache clean && node ./Scripts/run.js run",
     "softRefresh": "yarn install && yarn upgrade",
     "hardRefresh": "rm -rf node_modules && yarn cache clean && yarn softRefresh",
     "checkDefaultConfig": "node ./Scripts/checkDefaultConfig.js",
@@ -37,7 +38,7 @@
     "configModule": "./defaultModule",
     "cucumber-json-report-formatter": "^0.1.4",
     "cross-spawn": "^7.0.3",
-    "cypress": "^12.0.0",
+    "cypress": "^15.4.0",
     "esbuild": "^0.17.0",
     "flatted": "^3.3.1",
     "jsdom": "^24.0.0",
@@ -55,8 +56,8 @@
     "setimmediate": "^1.0.5",
     "shell-exec": "1.0.2",
     "uuid": "^8.3.1",
-    "winston": "^3.8.2",
-    "soft-assert": "^0.2.7"
+    "soft-assert": "^0.2.7",
+    "fireLog": "file:./cypress/support/cypress-support/src/fireLog"
   },
   "devDependencies": {
     "babel-jest": "^27.4.5",

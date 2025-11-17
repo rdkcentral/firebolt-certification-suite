@@ -2,8 +2,8 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
-const logger = require('../support/Logger')('pluginUtils.js');
 const _ = require('lodash');
+const { fireLog } = require('../support/cypress-support/src/fireLog');
 
 /**
  * Fetches and dereferences OpenRPC documents from various sources including a Firebolt URL, local files, and external URLs.
@@ -18,9 +18,24 @@ const _ = require('lodash');
 async function getAndDereferenceOpenRpc(externalUrls, version = null) {
   // Define constants
   const openRpcDocs = [];
-  const fireboltUrl = version
-    ? `https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json`
-    : 'https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json';
+  let fireboltUrl;
+  switch (true) {
+    case !!version && version.toLowerCase().includes('next-major'):
+      fireboltUrl =
+        'https://rdkcentral.github.io/firebolt/requirements/next-major/specifications/firebolt-open-rpc.json';
+      break;
+    case !!version && version.toLowerCase().includes('next'):
+      fireboltUrl =
+        'https://rdkcentral.github.io/firebolt/requirements/next/specifications/firebolt-open-rpc.json';
+      break;
+    case !!version:
+      fireboltUrl = `https://rdkcentral.github.io/firebolt/requirements/${version}/specifications/firebolt-open-rpc.json`;
+      break;
+    default:
+      fireboltUrl =
+        'https://rdkcentral.github.io/firebolt/requirements/latest/specifications/firebolt-open-rpc.json';
+      break;
+  }
   const localOpenRpcDir = path.join('node_modules', 'configModule', 'constants', 'openRPC');
 
   try {
@@ -60,7 +75,7 @@ async function getAndDereferenceOpenRpc(externalUrls, version = null) {
     }
     return openRpcDocs;
   } catch (err) {
-    logger.error(err, 'getAndDereferenceOpenRpc');
+    fireLog.info(err, 'getAndDereferenceOpenRpc');
   }
 }
 
@@ -115,10 +130,7 @@ function generateIndexFile(path, outputObj) {
     // Write to the new index.js file
     fs.writeFileSync(indexFilePath, indexFileContent);
   } catch (error) {
-    logger.error(
-      `An error occurred while generating the index file: ${error}`,
-      'generateIndexFile'
-    );
+    fireLog.info(`An error occurred while generating the index file: ${error}`);
     throw error;
   }
 }
@@ -135,7 +147,7 @@ function preprocessDeviceData(config) {
   const deviceMac = config.env.deviceMac;
   try {
     if (!deviceMac) {
-      logger.error('Device MAC address is required.');
+      fireLog.info('Device MAC address is required.');
     }
     const formattedDeviceMac = deviceMac.replace(/:/g, '').toUpperCase();
     const jsonFilePath = `cypress/fixtures/external/devices/${formattedDeviceMac}.json`;
@@ -144,7 +156,7 @@ function preprocessDeviceData(config) {
     try {
       deviceData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
     } catch (readError) {
-      logger.error(
+      fireLog.info(
         `Error reading or parsing the JSON file at ${jsonFilePath}: ${readError.message}`
       );
     }
@@ -152,7 +164,7 @@ function preprocessDeviceData(config) {
     const resolvedDeviceData = { ...deviceData };
     config.env = Object.assign({}, config.env, { resolvedDeviceData });
   } catch (error) {
-    logger.error(`Error in preprocessDeviceData: ${error.message}`);
+    fireLog.info(`Error in preprocessDeviceData: ${error.message}`);
   }
 }
 

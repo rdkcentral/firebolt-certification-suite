@@ -16,7 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import { Given } from '@badeball/cypress-cucumber-preprocessor';
-import UTILS, { fireLog } from '../cypress-support/src/utils';
+import UTILS from '../cypress-support/src/utils';
+const { fireLog } = require('../cypress-support/src/fireLog');
+
 const CONSTANTS = require('../constants/constants');
 
 /**
@@ -126,7 +128,8 @@ Given(
       };
 
       fireLog.info(
-        'Call from 1st party App, method: ' + setMethod + ' params: ' + JSON.stringify(setParams)
+        'Call from 1st party App, method: ' + setMethod + ' params: ' + JSON.stringify(setParams),
+        'report'
       );
       cy.sendMessageToPlatformOrApp(CONSTANTS.PLATFORM, additionalParams);
     });
@@ -176,7 +179,8 @@ Given(/'(.+)' invokes(?: the '(.+)')? get API$/, async (appId, sdk) => {
 
     if (appId == UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
       fireLog.info(
-        'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(param)
+        'Call from 1st party App, method: ' + method + ' params: ' + JSON.stringify(param),
+        'report'
       );
       cy.sendMessageToPlatformOrApp(CONSTANTS.PLATFORM, additionalParams);
     } else {
@@ -186,7 +190,10 @@ Given(/'(.+)' invokes(?: the '(.+)')? get API$/, async (appId, sdk) => {
       ) {
         cy.fetchLifecycleHistory(appId);
       }
-      fireLog.info(`Call from app: ${appId} - method: ${method} params: ${JSON.stringify(param)}`);
+      fireLog.info(
+        `Call from app: ${appId} - method: ${method} params: ${JSON.stringify(param)}`,
+        'report'
+      );
       cy.sendMessageToPlatformOrApp(CONSTANTS.APP, additionalParams);
     }
   });
@@ -233,7 +240,8 @@ Given(/'(.+)' registers for(?: the '(.+)')? event$/, async (appId, sdk) => {
       fireLog.info(
         `Registering for the ${event} event using 1st party App with params : ${JSON.stringify(
           eventParams
-        )}`
+        )}`,
+        'report'
       );
       cy.sendMessageToPlatformOrApp(
         CONSTANTS.PLATFORM,
@@ -242,7 +250,8 @@ Given(/'(.+)' registers for(?: the '(.+)')? event$/, async (appId, sdk) => {
       );
     } else {
       fireLog.info(
-        `Registering for the ${event} event using ${appId} with params : ${JSON.stringify(eventParams)}`
+        `Registering for the ${event} event using ${appId} with params : ${JSON.stringify(eventParams)}`,
+        'report'
       );
       cy.sendMessageToPlatformOrApp(CONSTANTS.APP, additionalParams, CONSTANTS.TASK.REGISTEREVENT);
     }
@@ -394,7 +403,8 @@ Given(
  * Given 'third party app is launched' with 'auth' page
  */
 Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
-  UTILS.captureScreenshot();
+  cy.callConfigModule('checkAndSelectProfile');
+  UTILS.captureScreenshot(true);
   const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
   // Ensure appId is available before proceeding
   if (!appId) {
@@ -407,14 +417,15 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
     params: appId,
   };
-  fireLog.info(`Sending request to fetch app state: ${JSON.stringify(requestMap)}`);
+  fireLog.info(`Sending request to fetch app state: ${JSON.stringify(requestMap)}`, 'report');
 
   // Sending the request to the platform to retrieve the app state.
   cy.sendMessagetoPlatforms(requestMap).then((response) => {
     if (response) {
       if (response?.currentApp_fireboltState?.toUpperCase() === CONSTANTS.FOREGROUND) {
         fireLog.info(
-          `State validation successful: Current state of ${appId} app is ${JSON.stringify(response)} as expected`
+          `State validation successful: Current state of ${appId} app is ${JSON.stringify(response)} as expected`,
+          'report'
         );
       } else {
         fireLog.error(

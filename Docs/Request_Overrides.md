@@ -383,3 +383,79 @@ Example:
     "report":"Successfully executed keySimulator -k"
   }
 ```
+## findLogPattern:
+
+### Request Override
+
+- The `findLogPattern` request override is used to search for a specific `logPattern` or text within log files. This function must be added to the `requestModules/fcs.js` file in the configuration module.
+
+#### Request Format for the `findLogPattern` Request Override Function:
+
+```javascript
+{
+  method: 'fcs.findLogPattern',
+  params: {
+    validations: []
+  }
+}
+```
+
+**Examples:**
+
+**Example 1:** Passing validation objects to the request override to search for a `logPattern` in the WPEFramework `logFile`.
+
+```javascript
+{
+  method: 'fcs.findLogPattern',
+  params: {
+    validations: [
+      {
+        "signin": ['<logPattern>']
+      }
+    ] ,
+    "fileName": ['<logFile>']
+  }
+}
+```
+
+### Response Override
+
+- The `findLogPattern` response override is used to validate the response of the `findLogPattern` function against the validation object passed in the request override. This function must be added to the `responseModules/fcs.js` file in the configuration module.
+
+#### Return Response Format of the `findLogPattern` Response Override Function:
+
+- In the response, the `status` key indicates the overall status of the `findLogPattern` validation. The `validations` key is an array of objects that holds the status of each validation object.
+- The `status` field is required to determine the validation's overall result.
+
+```javascript
+{
+  status: "true/false",
+  validations: [
+    {status: "true/false"}
+  ]
+}
+```
+
+**Examples:** The response override function returns the following responses after validating the `findLogPattern` response against the validation object passed in the request override.
+
+**Example 1:** Validation of the `findLogPattern` response succeeds against the validation object.
+
+```javascript
+{
+  status: "pass",
+  validations: [
+    {status: "pass"}
+  ]
+}
+```
+
+**Example 2:** Validation of the `findLogPattern` response fails against the validation object.
+
+```javascript
+{
+  status: "fail",
+  validations: [
+    {status: "fail"}
+  ]
+}
+```

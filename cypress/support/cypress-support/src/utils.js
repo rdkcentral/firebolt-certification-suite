@@ -16,7 +16,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 const CONSTANTS = require('../../constants/constants');
-const logger = require('../../Logger')('utils.js');
 const { _ } = Cypress;
 import { apiObject } from '../../appObjectConfigs';
 const MESSAGE = 'message';
@@ -24,6 +23,7 @@ const Validator = require('jsonschema').Validator;
 const validator = new Validator();
 const jsonFile = CONSTANTS.JSON_FILE_EXTENSION;
 let clientCreated = false;
+const { fireLog } = require('./fireLog');
 
 /**
  * @module utils
@@ -246,7 +246,7 @@ function getCommunicationMode() {
  * skipCurrentTest()
  */
 function skipCurrentTest() {
-  fireLog.info('The current test has been intentionally skipped by the test runner');
+  fireLog.info('The current test has been intentionally skipped by the test runner', 'report');
   mocha.suite.ctx.test?.skip();
 }
 
@@ -313,7 +313,7 @@ function getApiOrEventObjectFromGlobalList(method, context, appId, validationTyp
 
   // Failing when the filteredObjectList is empty.
   if (filteredObjectList.length < 1) {
-    fireLog.info('Could not find the api response in api list');
+    fireLog.info('Could not find the api response in api list', 'report');
     fireLog.isNotEmpty(filteredObjectList, 'filteredObjectList is not to be empty');
   }
 
@@ -332,7 +332,7 @@ function getApiOrEventObjectFromGlobalList(method, context, appId, validationTyp
 
   // If no response is found, fail with no appObject found.
   if (!extractedObject) {
-    fireLog.info(CONSTANTS.NO_APP_OR_EVENT_OBJECT);
+    fireLog.info(CONSTANTS.NO_APP_OR_EVENT_OBJECT, 'report');
     fireLog.assert(false, CONSTANTS.NO_APP_OR_EVENT_OBJECT);
   }
   return extractedObject;
@@ -352,7 +352,7 @@ function unsubscribe(webSocketClient = null) {
     throw new Error('Websocket client not established');
   }
   webSocketClient.unsubscribe(MESSAGE);
-  logger.info('Websocket connection closed Successfully', 'unsubscribe');
+  fireLog.info('Websocket connection closed Successfully');
 }
 
 /**
@@ -419,9 +419,9 @@ function getEnvVariable(variable, isRequired = true) {
 
   if (isRequired) {
     const errorMessage = `Required environment variable "${variable}" is missing or undefined.`;
-    logger.error(errorMessage, 'getEnvVariable');
+    fireLog.error(errorMessage);
     // To include stackTrace in the console
-    logger.error(stackTrace());
+    fireLog.error(stackTrace());
     throw new Error(errorMessage);
   }
   return envValue;
@@ -686,7 +686,7 @@ function checkForSecondaryAppId(appId) {
       return appId;
     }
   } catch (err) {
-    fireLog.info(eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR)).then(() => {
+    fireLog.info(eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR), 'report').then(() => {
       throw new Error(eval(CONSTANTS.SECONDARY_APPID_MISSING_ERROR));
     });
   }
@@ -703,13 +703,12 @@ function checkForSecondaryAppId(appId) {
 global.resolveDeviceVariable = function (key) {
   const resolvedDeviceData = Cypress.env('resolvedDeviceData');
   if (!(key in resolvedDeviceData)) {
-    logger.error(`Key ${key} not found in preprocessed data.`);
+    fireLog.error(`Key ${key} not found in preprocessed data.`);
     return null;
   }
-  logger.debug(`Resolved value for key ${key} is ${resolvedDeviceData[key]}`);
+  fireLog.debug(`Resolved value for key ${key} is ${resolvedDeviceData[key]}`);
   return resolvedDeviceData[key];
 };
-
 /**
  * FireLog class provides assertion methods with logging using Cypress's cy.log().
  * It wraps Cypress's assertion methods, allowing logging of messages for each assertion.
@@ -1061,7 +1060,7 @@ global.extractEnvValue = function (attribute) {
   // Get the device data from env variable
   const deviceData = Cypress.env(CONSTANTS.DEVICE_DATA);
   if (!deviceData) {
-    logger.info('deviceData environment variable is not found');
+    fireLog.info('deviceData environment variable is not found');
   }
 
   // If the attribute starts with 'CYPRESSENV', extract nested property from env variable.
@@ -1081,7 +1080,7 @@ global.extractEnvValue = function (attribute) {
     if (envValue !== undefined) {
       attribute = envValue;
     } else {
-      logger.info(`Cypress env variable '${attribute}' does not exist`);
+      fireLog.info(`Cypress env variable '${attribute}' does not exist`);
     }
   }
   // Return the extracted value from device data or environment variable
@@ -1210,7 +1209,7 @@ global.resolveAtRuntime = function (input) {
         element.includes('{{') ? replacingPatternOccurrenceWithValue(element) : element
       );
     } else {
-      logger.info(`Passed input - ${input} must be an array or a string.`);
+      fireLog.info(`Passed input - ${input} must be an array or a string.`);
     }
   };
 };
@@ -1329,12 +1328,12 @@ function applyOverrides(fireboltCallObject) {
 
     for (const override of overrides) {
       if (typeof override.applyWhen !== 'function') {
-        fireLog.info('Ignoring override: Missing applyWhen() function', override);
+        fireLog.info('Ignoring override: Missing applyWhen() function', 'report');
         continue;
       }
 
       if (!override.applyWhen()) {
-        fireLog.info('Ignoring override: applyWhen() returned false', override);
+        fireLog.info('Ignoring override: applyWhen() returned false', 'report');
         continue;
       }
       // Appending Override content to the fireboltCallObject if applyWhen() returns true
@@ -1343,7 +1342,7 @@ function applyOverrides(fireboltCallObject) {
   } catch (error) {
     fireLog.info(
       'Error in applyOverrides - Override key in the fireboltObject was not as expected::',
-      error
+      'report'
     );
   }
   return fireboltCallObject; // Return the original or modified object based on the override
@@ -1370,26 +1369,31 @@ global.addToEnvLabelMap = (partialMap) => {
  * @module utils
  * @function captureScreenshot
  * @description A function to capture the screenshot of the device screen.
+ * @params
+ * processScreenshot - A boolean parameter to indicate whether to do OCR validation or not.
  * @example
  * captureScreenshot()
  */
-function captureScreenshot() {
+function captureScreenshot(processScreenshot = false) {
   // Only take a screenshot if the enableScreenshots environment variable is set to true
   if (getEnvVariable('enableScreenshots')) {
     const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT;
-    const param = {};
+    const param = { processScreenshot: processScreenshot };
     const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
 
     const screenshotRequest = {
       method: method,
       params: param,
     };
-    fireLog.info(`Sending request to capture screenshot: ${JSON.stringify(screenshotRequest)}`);
+    fireLog.info(
+      `Sending request to capture screenshot: ${JSON.stringify(screenshotRequest)}`,
+      'report'
+    );
 
     try {
       cy.sendMessagetoPlatforms(screenshotRequest, 70000).then((response) => {
-        fireLog.info(`Screenshot capture response: ${JSON.stringify(response)}`);
-
+        const presignedUrl = response?.presignedUrl;
+        fireLog.info(`Screenshot: ${presignedUrl}`, 'report');
         const apiResponse = {
           response: response,
         };
@@ -1426,6 +1430,32 @@ function determineActionFromFeatureFile(testRunnable) {
   return 'CORE';
 }
 
+/**
+ * Builds a fallback intent object when dynamic intent resolution from asset gere fails
+ * or is not available.
+ *
+ * @param {string} appId - The application ID.
+ * @param {string} intent - The name of the intent to resolve.
+ * @param {object} intentTemplate - The intent template from app metadata.
+ * @returns {object} Intent object containing appId and resolved intent value.
+ * @throws Logs failure and stops execution if the intentTemplate cannot be resolved.
+ */
+function buildFallbackIntent(appId, intent, intentTemplate) {
+  try {
+    return {
+      [CONSTANTS.APP_ID]: appId,
+      [CONSTANTS.INTENT]: resolveRecursiveValues(intentTemplate),
+    };
+  } catch (error) {
+    if (Object.keys(Cypress.env(CONSTANTS.RUNTIME).intent || {}).length === 0) {
+      fireLog.fail(
+        `Intent ${intent} not found in appMetadata for appId ${appId}. Please check the appMetadata.`
+      );
+    }
+    fireLog.fail('Could not resolve intentTemplate: ' + error.message);
+  }
+}
+
 module.exports = {
   replaceJsonStringWithEnvVar,
   createIntentMessage,
@@ -1447,7 +1477,6 @@ module.exports = {
   destroyGlobalObjects,
   writeJsonToFileForReporting,
   checkForTags,
-  fireLog,
   parseValue,
   checkForSecondaryAppId,
   resolveRecursiveValues,
@@ -1459,4 +1488,5 @@ module.exports = {
   captureScreenshot,
   addToEnvLabelMap,
   determineActionFromFeatureFile,
+  buildFallbackIntent,
 };

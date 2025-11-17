@@ -37,11 +37,11 @@ const { DateTime } = require('luxon');
 const flatted = require('flatted');
 const { generateLocalReport } = require('./localReportGenerator');
 const getSpecPattern = require('../../specHelperConfig.js');
-const logger = require('../support/Logger')('index.js');
-const updateLoggerLevel = require('../support/Logger').updateLoggerLevel;
 const tempReportEnvJson = '../../tempReportEnv.json';
 const { getAndDereferenceOpenRpc } = require('./pluginUtils');
 let metaDataArr = [];
+let maxExitCode = 0;
+const { fireLog } = require('../support/cypress-support/src/fireLog');
 
 module.exports = async (on, config) => {
   // To set the specPattern dynamically based on the testSuite
@@ -51,9 +51,6 @@ module.exports = async (on, config) => {
   if (specPattern !== undefined) {
     config.specPattern = specPattern;
   }
-  const loggerLevel = config.env.loggerLevel;
-  // Update logger level dynamically
-  updateLoggerLevel(loggerLevel);
 
   // Set certification to true for the appropriate test suite
   if (testsuite == CONSTANTS.CERTIFICATION) {
@@ -88,7 +85,7 @@ module.exports = async (on, config) => {
 
   on('task', {
     log(message) {
-      logger.info(message);
+      console.log(message);
       return null;
     },
     /* write json or string to file
@@ -107,7 +104,7 @@ module.exports = async (on, config) => {
           }
           fs.writeFile(fileName, data, 'utf-8', function (err) {
             if (err) {
-              logger.error('An error occured while writing content to File.', 'writeToFile');
+              console.error('An error occured while writing content to File.');
               reject(false);
             }
             resolve(true);
@@ -158,7 +155,7 @@ module.exports = async (on, config) => {
           try {
             combinedJson = jsonMerger.mergeFiles(files);
           } catch (err) {
-            logger.error('Error in merging the multiple JSON', err);
+            console.error('Error in merging the multiple JSON' + err);
             resolve(null);
           }
           resolve(combinedJson);
@@ -218,10 +215,20 @@ module.exports = async (on, config) => {
         return null;
       }
     },
+    setExitCode(code) {
+      const hierarchy = [2, 1, 0];
+      const currentPriority = hierarchy.indexOf(maxExitCode);
+      const newPriority = hierarchy.indexOf(code);
+
+      if (newPriority !== -1 && (currentPriority === -1 || newPriority < currentPriority)) {
+        maxExitCode = code;
+      }
+      return null;
+    },
   });
 
   on('before:run', async () => {
-    logger.debug('Entering before:run in cypress/plugins/index.js');
+    fireLog.info('Entering before:run in cypress/plugins/index.js');
 
     // Calling reportProcessor default function with instance of event
     const reportProcessor = importReportProcessor();
@@ -245,7 +252,7 @@ module.exports = async (on, config) => {
       - generate the html report (TBD)
   */
   on('after:run', async (results) => {
-    logger.debug('Entering after :run in cypress/plugins/index.js');
+    fireLog.info('Entering after :run in cypress/plugins/index.js');
 
     const reportObj = {};
     const formatter = new Formatter();
@@ -258,122 +265,152 @@ module.exports = async (on, config) => {
     let elk = false;
     let certification = false;
 
-    // Creating uuid folder under reports
-    if (results.config.env.jobId) {
-      jobId = results.config.env.jobId;
-      filePath = `./reports/${jobId}/`;
-    }
-
-    // Send elk variable to report processor if env variable is set to true
-    if (results.config.env.elk) {
-      elk = results.config.env.elk;
-    }
-
-    // Send certification variable to report properties if env variable is set to true
-    if (results.config.env.certification) {
-      certification = results.config.env.certification;
-    }
-
-    if (!fs.existsSync(filePath)) {
-      try {
-        fs.mkdirSync(filePath);
-        logger.debug('Cucumber-json folder created successfully.');
-      } catch (error) {
-        logger.error(error);
+    try {
+      // Creating uuid folder under reports
+      if (results.config.env.jobId) {
+        jobId = results.config.env.jobId;
+        filePath = `./reports/${jobId}/`;
       }
-    }
 
-    // get the testsuite name results (this has the environment variables used.). if not undefined use that as the suiteName instead of default.
-    if (results.config.env.testSuiteName) {
-      suiteName = results.config.env.testSuiteName + '_' + timestamp;
-    }
+      // Send elk variable to report processor if env variable is set to true
+      if (results.config.env.elk) {
+        elk = results.config.env.elk;
+      }
 
-    // generate the output file name
-    const outputFile = filePath + suiteName + '.json';
-    // convert the messages file to json file
-    await formatter.parseCucumberJson(sourceFile, outputFile);
+      // Send certification variable to report properties if env variable is set to true
+      if (results.config.env.certification) {
+        certification = results.config.env.certification;
+      }
 
-    // delete the messages.ndjson file.
-    fs.unlink(sourceFile, (err) => {
-      if (err) throw err;
-      logger.debug('The file has been deleted!');
-    });
-
-    const reportType = config.env.reportType;
-    // Reading sanity suite file name.
-    if (reportType !== undefined) {
-      // Reading sanity report file name.
-      const sanityReportFileName = readFileName(filePath, CONSTANTS.SANITY_REPORT_FILENAME);
-      const requiredReports =
-        reportType.length === 0 ? [CONSTANTS.MOCHAWESOME, CONSTANTS.CUCUMBER] : [reportType];
-
-      for (const reportType of requiredReports) {
-        const fileName = readFileName(filePath, reportType);
-        if (fileName) {
-          let jsonReport;
-          // If reportType is mochawesome and sanity report is present inside jobId(uuid) folder combining both report before pushing to config module.
-          if (reportType === CONSTANTS.MOCHAWESOME && sanityReportFileName) {
-            const mergedJson = await combineMochawesomeJson([
-              filePath + sanityReportFileName,
-              filePath + fileName,
-            ]);
-            // Convert merged json object to a buffer
-            jsonReport = Buffer.from(JSON.stringify(mergedJson));
-          } else {
-            // To add custom metadata to the generated cucumber JSON
-            await addCustomMetaData(outputFile, metaDataArr);
-            // Reading data from mochawesome or cucumber json file as a buffer
-            jsonReport = readDataFromFile(filePath + fileName);
-          }
-          const reportProperties = {};
-          const tempReportEnv = path.resolve(__dirname, tempReportEnvJson);
-          if (fs.existsSync(tempReportEnv)) reportProperties.reportEnv = require(tempReportEnv);
-          let customReportData;
-          try {
-            customReportData = require('../fixtures/external/objects/customReportData.json');
-          } catch (error) {
-            customReportData = require('../fixtures/customReportData.json');
-          }
-          reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
-          reportProperties.customReportData = customReportData;
-          reportProperties.certification = certification;
-          // Add the report to the reportObj
-          if (reportType === CONSTANTS.CUCUMBER) {
-            reportObj.cucumberReport = jsonReport;
-            // Pass fileName and filePath as well for local report generation
-            reportObj.cucumberReportFilePath = filePath;
-          } else if (reportType === CONSTANTS.MOCHAWESOME) {
-            reportObj.mochawesomeReport = jsonReport;
-          }
-          reportObj.reportProperties = reportProperties;
+      if (!fs.existsSync(filePath)) {
+        try {
+          fs.mkdirSync(filePath);
+          fireLog.info('Cucumber-json folder created successfully.');
+        } catch (error) {
+          fireLog.info(error);
         }
       }
 
-      // Genereate local report if generateLocalReport is set to true
-      if (config.env.generateLocalReport) {
-        await generateLocalReport(reportObj, jobId);
+      // get the testsuite name results (this has the environment variables used.). if not undefined use that as the suiteName instead of default.
+      if (results.config.env.testSuiteName) {
+        suiteName = results.config.env.testSuiteName + '_' + timestamp;
       }
 
-      // Emit the 'reports' event once after the loop and reportObj is populated.
-      await new Promise((resolve) => {
-        eventEmitter.once('reportProcessed', () => resolve());
-        eventEmitter.emit('reports', reportObj, jobId, elk);
+      // generate the output file name
+      const outputFile = filePath + suiteName + '.json';
+      // convert the messages file to json file
+      await formatter.parseCucumberJson(sourceFile, outputFile);
+
+      // delete the messages.ndjson file.
+      fs.unlink(sourceFile, (err) => {
+        if (err) throw err;
+        fireLog.info('The file has been deleted!');
       });
-    }
 
-    // Delete the json files after emitting
-    if (config.env.deleteReport) {
-      const files = readFileName(filePath);
-      if (files) {
-        for (const file of files) {
-          const fullPath = filePath + file;
-          // Check if the path is not a directory
-          if (!fs.statSync(fullPath).isDirectory()) {
-            deleteFile(filePath + file);
+      const reportType = config.env.reportType;
+      // Reading sanity suite file name.
+      if (reportType !== undefined) {
+        // Reading sanity report file name.
+        const sanityReportFileName = readFileName(filePath, CONSTANTS.SANITY_REPORT_FILENAME);
+        const requiredReports =
+          reportType.length === 0 ? [CONSTANTS.MOCHAWESOME, CONSTANTS.CUCUMBER] : [reportType];
+
+        for (const reportType of requiredReports) {
+          const fileName = readFileName(filePath, reportType);
+          if (fileName) {
+            let jsonReport;
+            // If reportType is mochawesome and sanity report is present inside jobId(uuid) folder combining both report before pushing to config module.
+            if (reportType === CONSTANTS.MOCHAWESOME && sanityReportFileName) {
+              const mergedJson = await combineMochawesomeJson([
+                filePath + sanityReportFileName,
+                filePath + fileName,
+              ]);
+              // Convert merged json object to a buffer
+              jsonReport = Buffer.from(JSON.stringify(mergedJson));
+            } else {
+              // To add custom metadata to the generated cucumber JSON
+              await addCustomMetaData(outputFile, metaDataArr);
+              // Reading data from mochawesome or cucumber json file as a buffer
+              jsonReport = readDataFromFile(filePath + fileName);
+              // to remove the wait time step from html report
+              const bufferString = jsonReport.toString();
+              const parsedJson = JSON.parse(bufferString);
+              Array.isArray(parsedJson) &&
+                parsedJson.forEach((obj) => {
+                  obj.elements = obj.elements.map((element) => {
+                    const filteredSteps = [];
+                    element.steps.forEach((step, index) => {
+                      if (/^Test runner waits for/.test(step.name)) {
+                        fireLog.info(`Removing step ${index} from html report:`, step.name);
+                      } else {
+                        filteredSteps.push(step);
+                      }
+                    });
+                    element.steps = filteredSteps;
+                    return element;
+                  });
+                });
+              const updatedJsonReport = JSON.stringify(parsedJson, null, 2);
+              jsonReport = Buffer.from(updatedJsonReport);
+            }
+            const reportProperties = {};
+            const tempReportEnv = path.resolve(__dirname, tempReportEnvJson);
+            if (fs.existsSync(tempReportEnv)) reportProperties.reportEnv = require(tempReportEnv);
+            let customReportData;
+            try {
+              customReportData = require('../fixtures/external/objects/customReportData.json');
+            } catch (error) {
+              customReportData = require('../fixtures/customReportData.json');
+            }
+            reportProperties.isCombinedTestRun = process.env.CYPRESS_isCombinedTestRun;
+            reportProperties.customReportData = customReportData;
+            reportProperties.certification = certification;
+            reportProperties.team = config.env.team ? config.env.team : 'N/A';
+            reportProperties.goal = config.env.goal ? config.env.goal : 'N/A';
+            // Add the report to the reportObj
+            if (reportType === CONSTANTS.CUCUMBER) {
+              reportObj.cucumberReport = jsonReport;
+              // Pass fileName and filePath as well for local report generation
+              reportObj.cucumberReportFilePath = filePath;
+            } else if (reportType === CONSTANTS.MOCHAWESOME) {
+              reportObj.mochawesomeReport = jsonReport;
+            }
+            reportObj.reportProperties = reportProperties;
+          }
+        }
+
+        // Genereate local report if generateLocalReport is set to true
+        if (config.env.generateLocalReport) {
+          await generateLocalReport(reportObj, jobId);
+        }
+
+        // Emit the 'reports' event once after the loop and reportObj is populated.
+        await new Promise((resolve) => {
+          eventEmitter.once('reportProcessed', () => resolve());
+          eventEmitter.emit('reports', reportObj, jobId, elk);
+        });
+      }
+
+      // Delete the json files after emitting
+      if (config.env.deleteReport) {
+        const files = readFileName(filePath);
+        if (files) {
+          for (const file of files) {
+            const fullPath = filePath + file;
+            // Check if the path is not a directory
+            if (!fs.statSync(fullPath).isDirectory()) {
+              deleteFile(filePath + file);
+            }
           }
         }
       }
+      process.exitCode = maxExitCode;
+    } catch (err) {
+      fireLog.info('Error occurred in after:run hook:' + err);
+      process.exitCode = CONSTANTS.FCS_EXIT_CODE.FAILURE;
     }
+
+    fireLog.info(`FCS_EXIT_CODE: ${process.exitCode}`);
   });
   return config;
 };
@@ -397,7 +434,7 @@ function importReportProcessor() {
     const reportProcessor = require('../../node_modules/configModule/reportProcessor/index');
     return reportProcessor;
   } catch (error) {
-    logger.error(error);
+    console.error(error);
   }
 }
 
@@ -416,7 +453,7 @@ function readFileName(filePath, fileName) {
       files = files.find((name) => name.includes(fileName));
     }
   } catch (err) {
-    logger.info(`${filePath} Path does not exist`, `readFileName`);
+    console.info(`${filePath} Path does not exist`);
   }
   return files;
 }
@@ -430,7 +467,7 @@ function readDataFromFile(filePath) {
   try {
     return fs.readFileSync(filePath);
   } catch (err) {
-    logger.error(`Unable to read data from ${filePath}`, `readDataFromFile`);
+    console.error(`Unable to read data from ${filePath}`);
   }
 }
 
@@ -443,9 +480,9 @@ function readDataFromFile(filePath) {
 function deleteFile(sourceFile) {
   fs.unlink(sourceFile, (err) => {
     if (err) {
-      logger.error(`Error while deleting the file ${err}`, `deleteFile`);
+      console.error(`Error while deleting the file ${err}`, `deleteFile`);
     }
-    logger.info(`The ${sourceFile} file has been deleted`, `deleteFile`);
+    console.info(`The ${sourceFile} file has been deleted`);
   });
 }
 
@@ -468,14 +505,10 @@ async function addCustomMetaData(outputFile, metaDataArr) {
 
     // Write the updated JSON data back to the file
     await writeFileAsync(outputFile, updatedJsonData, 'utf8');
-    logger.debug('Metadata array appended to existing JSON successfully.', 'addCustomMetaData');
+    console.debug('Metadata array appended to existing JSON successfully.');
 
     return Promise.resolve();
   } catch (err) {
-    logger.error(
-      'Error in appending the metadata to the existing JSON:',
-      err.message,
-      'addCustomMetaData'
-    );
+    console.error('Error in appending the metadata to the existing JSON:' + err.message);
   }
 }

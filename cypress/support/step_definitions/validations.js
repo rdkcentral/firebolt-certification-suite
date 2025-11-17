@@ -18,7 +18,8 @@
 import { Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 const CONSTANTS = require('../constants/constants');
 const { _ } = Cypress;
-import UTILS, { fireLog } from '../cypress-support/src/utils';
+import UTILS from '../cypress-support/src/utils';
+const { fireLog } = require('../cypress-support/src/fireLog');
 
 /**
  * @module validations
@@ -90,7 +91,10 @@ Given(
               }
             }
           } else {
-            fireLog.info('deviceData environment variable does not have the required data');
+            fireLog.info(
+              'deviceData environment variable does not have the required data',
+              'report'
+            );
           }
 
           // If the app ID is not passed from the feature, the default app ID will be retrieved.
@@ -195,7 +199,7 @@ Given(
  * Then '3rd party app' will be in 'background' state
  */
 Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
-  UTILS.captureScreenshot();
+  UTILS.captureScreenshot(true);
 
   const appId =
     app === CONSTANTS.THIRD_PARTY_APP
@@ -318,15 +322,17 @@ Given(
         .then((response) => {
           if (response && Array.isArray(response)) {
             response.map((res) => {
-              fireLog.info(JSON.stringify(res));
+              fireLog.info(JSON.stringify(res), 'report');
             });
           }
         })
         .then(() => {
           if (result.error) {
-            fireLog.info('Failed to fetch and validate the performance metrics').then(() => {
-              fireLog.assert(false, result.error);
-            });
+            fireLog
+              .info('Failed to fetch and validate the performance metrics', 'report')
+              .then(() => {
+                fireLog.assert(false, result.error);
+              });
           } else {
             result.map((response) => {
               fireLog.equal(true, response?.success, response?.message);
@@ -339,23 +345,21 @@ Given(
 
 /**
  * @module validations
- * @function Verify '(.+)' app is '(.+)'
+ * @function 3rd party '(.+)' app is '(.+)'
  * @description To call validation function with the validation object associated with the validation key
  * @param {String} app - app name.
  * @param {String} validationObjectKey - key name of the validation object.
  * @example
- * Verify <appId> app is 'playing entity'
+ * 3rd party 'test' app is 'playing entity'
  */
-Given(/Verify '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
-  UTILS.captureScreenshot();
-
+Given(/3rd party '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
   const objectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   let validationObject;
   cy.getFireboltData(objectKey).then((fireboltData) => {
     const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
     validationObject = UTILS.resolveRecursiveValues(fireboltData);
     cy.methodOrEventResponseValidation(type, validationObject).then(() => {
-      fireLog.info(`${validationObjectKey} was successful`);
+      fireLog.info(`${validationObjectKey} was successful`, 'report');
     });
   });
 });
