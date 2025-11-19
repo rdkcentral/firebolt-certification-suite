@@ -143,6 +143,7 @@ Given(
             });
           })
           .then(() => {
+            cy.callConfigModule('updateCliArgumentsReportMetadata');
             cy.updateRunInfo();
           });
       } catch (error) {
