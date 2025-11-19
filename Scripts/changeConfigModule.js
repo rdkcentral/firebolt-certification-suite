@@ -19,7 +19,7 @@
 /*
     Helper script to change the configModule in ../package.json
 
-    Ex Usage: 'node ./changeConfigModule.js "git+ssh://git@github.com:myOrg/myConfigModule'
+    Ex Usage: 'node ./changeConfigModule.js "git+ssh://git@github.com/myOrg/myConfigModule'
 */
 
 const { execSync } = require('child_process');
@@ -52,7 +52,7 @@ function addOrChangeConfigModule(configModuleUrl) {
 if (process.argv.length != 3) {
   console.log(
     'Invalid format. Required script format: "node ./changeConfigModule.js <configModuleUrl>"\n' +
-      'Ex: "node ./changeConfigModule.js "git+ssh://git@github.com:myOrg/myConfigModule"'
+      'Ex: "node ./changeConfigModule.js "git+ssh://git@github.com/myOrg/myConfigModule"'
   );
   process.exit(1);
 }
