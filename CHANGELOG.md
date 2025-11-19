@@ -1,3 +1,10 @@
+# [1.19.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.19.0-dev.1...v1.19.0-dev.2) (2025-11-19)
+
+
+### Bug Fixes
+
+* commented out testcases ([#504](https://github.com/rdkcentral/firebolt-certification-suite/issues/504)) ([f15013e](https://github.com/rdkcentral/firebolt-certification-suite/commit/f15013e421defbd6be4490042ebacf73e55d7fbe))
+
 # [1.19.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0...v1.19.0-dev.1) (2025-11-05)
 
 
