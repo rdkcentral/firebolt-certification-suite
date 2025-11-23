@@ -1068,16 +1068,21 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         Cypress.env(CONSTANTS.RUNTIME).programType = intent;
 
         const giveDynamicAssetsPrecedence = getEnvVariable('giveDynamicAssetsPrecedence', false);
-
+        fireLog.info(`*giveDynamicAssetsPrecedence  :: ${giveDynamicAssetsPrecedence}`);
         if (giveDynamicAssetsPrecedence || !Cypress.env(CONSTANTS.RUNTIME)?.intent) {
           cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
+            console.log('*****Divya Attempting to resolve dynamic intent via AssetGenerator');
+            fireLog.info(`*Divya Attempting to resolve dynamic intent via AssetGenerator`);
             if (dynamicIntent && Object.keys(dynamicIntent).length > 0) {
+              console.log('Divya Dynamic intent resolved: ' + JSON.stringify(dynamicIntent));
+              fireLog.info(`*Divya Dynamic Intent::: $ {dynamicIntent}`);
               Cypress.env(CONSTANTS.RUNTIME).intent = { ...dynamicIntent };
               messageIntent = {
                 [CONSTANTS.APP_ID]: appId,
                 [CONSTANTS.INTENT]: dynamicIntent.entityId,
               };
             } else {
+              console.log('*****Divya Attempting to build Fallabck');
               messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
             }
           });
