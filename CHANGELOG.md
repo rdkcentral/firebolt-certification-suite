@@ -1,3 +1,16 @@
+# [1.19.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0...v1.19.0) (2025-11-19)
+
+
+### Bug Fixes
+
+* Add fix for module issues ([#484](https://github.com/rdkcentral/firebolt-certification-suite/issues/484)) ([a7a3529](https://github.com/rdkcentral/firebolt-certification-suite/commit/a7a35299dbc5f870795889721450cafdf12b6a43))
+* commented out testcases ([#504](https://github.com/rdkcentral/firebolt-certification-suite/issues/504)) ([f15013e](https://github.com/rdkcentral/firebolt-certification-suite/commit/f15013e421defbd6be4490042ebacf73e55d7fbe))
+
+
+### Features
+
+* Adding optional parameters to performance handler command ([#503](https://github.com/rdkcentral/firebolt-certification-suite/issues/503)) ([5b101ec](https://github.com/rdkcentral/firebolt-certification-suite/commit/5b101ec002aa6970e4fc88146c655fbb1ddabde3))
+
 # [1.19.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.19.0-dev.2...v1.19.0-dev.3) (2025-11-19)
 
 
