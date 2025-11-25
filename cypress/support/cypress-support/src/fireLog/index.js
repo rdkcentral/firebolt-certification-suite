@@ -212,12 +212,57 @@ class FireLog extends Function {
     assert.exists(value, message);
   }
 
-  assert(expression, message, failureCode = 1) {
-    if (!expression) {
+  /**
+   * Perform assertion with optional soft assert support.
+   * Supports both hard assertions (test fails immediately) and soft assertions (failures are collected and reported later).
+   *
+   * @param {*} actual - The actual value or boolean expression to be evaluated
+   * @param {*} expected - The expected value to compare against (or message for backward compatibility)
+   * @param {string} message - The assertion message to display on failure
+   * @param {boolean} softAssert - If true, performs soft assertion (collects failures); if false/undefined, performs hard assertion (fails immediately)
+   * @param {number} failureCode - Exit code to set on hard assertion failure (default: 1). Only used when softAssert is false
+   *
+   * @example
+   * // Backward compatible - Hard assertion with boolean expression
+   * fireLog.assert(false, 'Error message');
+   *
+   * // Soft assertion with boolean - failure is collected but test continues
+   * fireLog.assert(false, true, 'Validation failed', true);
+   *
+   * // Soft assertion with string comparison
+   * fireLog.assert('fail', 'pass', 'Screenshot validation failed via OCR', true);
+   */
+  assert(actual, expected, message, softAssert, failureCode = 1) {
+    // Handle backward compatibility: if first param is boolean and second is string
+    if (typeof actual === 'boolean' && typeof expected === 'string') {
+      // assert(expression, message) - Hard assertion
+      message = expected;
+    }
+
+    if (softAssert === true) {
+      cy.softAssert(actual, expected, message);
+    } else if (!actual) {
       cy.task('setExitCode', failureCode).then(() => {
         assert.fail(message);
       });
     }
+  }
+
+  /**
+   * Validates all collected soft assertions and fails the test if any soft assertions failed.
+   * This method should be called after performing one or more soft assertions using fireLog.assert() with softAssert=true.
+   * If any soft assertions have failed, this will cause the test to fail and display all collected failure messages.
+   *
+   * @example
+   * // Perform multiple soft assertions
+   * fireLog.assert('fail', 'pass', 'First validation failed', true);
+   * fireLog.assert(false, true, 'Second validation failed', true);
+   *
+   * // Validate all soft assertions at the end
+   * fireLog.assertAll(); // Test will fail if any of the above soft assertions failed
+   */
+  assertAll() {
+    cy.softAssertAll();
   }
 
   fail(message, failureCode = 1) {
