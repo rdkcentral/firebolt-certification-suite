@@ -442,7 +442,7 @@ Cypress.Commands.add(
         CONSTANTS.SKIPPED,
         CONSTANTS.SKIPPED
       ).then(() => {
-        const pretext = `Event Not Received for ${extractEventObject.eventObjectId}: `;
+        const pretext = `Event Not Received for ${extractEventObject.eventName}: `;
 
         fireLog.strictEqual(eventResponse, content, pretext);
       });
@@ -462,7 +462,7 @@ Cypress.Commands.add(
           extractEventObject,
           verifyPath,
           content,
-          `Event Schema Validation failed for ${extractEventObject.eventObjectId}`,
+          `Event Schema Validation failed for ${extractEventObject.eventName}`,
           CONSTANTS.FAIL
         );
       } else if (eventSchemaStatus && eventSchemaStatus.status === 'PASS') {
@@ -516,21 +516,21 @@ Cypress.Commands.add(
           CONSTANTS.SKIPPED,
           CONSTANTS.SKIPPED
         ).then(() => {
-          const pretext = `Event Not Received for ${extractEventObject.eventObjectId}: `;
+          const pretext = `Event Not Received for ${extractEventObject.eventName}: `;
 
           fireLog.equal(eventResponse, content, pretext);
         });
       } else if (content === null) {
         cy.logValidationResult(
           'Expected eventResponse for ' +
-            extractEventObject.eventObjectId +
+            extractEventObject.eventName +
             ' is null , Actual: ' +
             eventResponse,
           CONSTANTS.PASS,
           CONSTANTS.SKIPPED,
           CONSTANTS.SKIPPED
         ).then(() => {
-          const pretext = `Event Not Received for ${extractEventObject.eventObjectId}: `;
+          const pretext = `Event Not Received for ${extractEventObject.eventName}: `;
 
           fireLog.strictEqual(eventResponse, content, pretext);
         });
@@ -569,7 +569,7 @@ Cypress.Commands.add(
     // Construct the log message
     const logMessage =
       pretext == undefined
-        ? `Event Content validation ${status.toLowerCase()}ed for ${extractEventObject.eventObjectId}: expected ${actualValue} to be ${expectedValue}`
+        ? `Event Content validation ${status.toLowerCase()}ed for ${extractEventObject.eventName}: expected ${actualValue} to be ${expectedValue}`
         : pretext;
 
     // Log or assert based on the status

@@ -1,0 +1,202 @@
+{
+    "SCAN_LIST": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_SCAN_LIST",
+                "description": "Validation of the wifi scan"
+            }
+        ]
+    },
+    "CONNECT_SECURITY_WPA2PSK": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA2PSK",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_SECURITY_NONE": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_NONE",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD_WEP128": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WEP128",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD_WPAPSKTKIP": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPAPSKTKIP",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD_WPAPSKAES": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPAPSKAES",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD_WPA2PSKTKIP": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA2PSKTKIP",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD_WPA2PSKAES": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA2PSKAES",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD_WPA_ENTERPRISETKIP": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA_ENTERPRISETKIP",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD_WPA_ENTERPRISEAES": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA_ENTERPRISEAES",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD_WPA2_ENTERPRISETKIP": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA2_ENTERPRISETKIP",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD_WPA2_ENTERPRISEAES": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA2_ENTERPRISEAES",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD_WPA2_ENTERPRISE": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA2_ENTERPRISE",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD_WPA3_PSKAES": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA3_PSKAES",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD_WPA3_SAE": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA3_SAE",
+                "description": "Validation of the wifi connect"
+            }
+        ]
+    },
+    "DISCONNECT_METHOD": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "NULL",
+                "description": "Validation of the wifi disconnect"
+            }
+        ]
+    },
+    "WPS": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "NULL",
+                "description": "Validation of the wifi wps"
+            }
+        ]
+    },
+    "CONNECT_WITH_PASSWORD": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA2PSK",
+                "description": "Validation of the wifi wps"
+            }
+        ]
+    },
+    "DISCONNECT_WITH_PASSWORD": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA2PSK",
+                "description": "Validation of the wifi wps"
+            }
+        ]
+    },
+    "WPS_WITH_PASSWORD": {
+        "type": "fixture",
+        "validations": [
+            {
+                "mode": "staticContentValidation",
+                "type": "WIFI_CONNECT_SECURITY_WPA2PSK",
+                "description": "Validation of the wifi wps"
+            }
+        ]
+    }
+}
