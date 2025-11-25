@@ -116,20 +116,32 @@ Given(
               CONSTANTS.ACTION_CORE.toLowerCase()
             ).then((response) => {
               if (response) {
-                const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
-                const requestMap = {
-                  method: method,
-                  params: response,
-                };
-                cy.sendMessagetoPlatforms(requestMap);
+                cy.callConfigModule(CONSTANTS.FETCHDEVICEDETAILS, {
+                  response,
+                });
               }
             });
           }
         }
         // Calling the configModule function to fetch the report data
-        cy.callConfigModule('getReportData').then(() => {
-          cy.updateRunInfo();
-        });
+        cy.callConfigModule('getReportData')
+          .then(() => {
+            const tags = Cypress.env(CONSTANTS.TAGS);
+            const parsedTags = tags ? tags : 'None';
+            const tagArray =
+              typeof parsedTags === 'string'
+                ? parsedTags
+                    .split(/\s+(and|or)\s+/)
+                    .filter((tag) => tag !== 'and' && tag !== 'or')
+                    .map((tag) => tag.trim())
+                : parsedTags;
+            addToEnvLabelMap({
+              [CONSTANTS.TAGS]: `[ ${Array.isArray(tagArray) ? tagArray.join(', ') : tagArray} ]`,
+            });
+          })
+          .then(() => {
+            cy.updateRunInfo();
+          });
       } catch (error) {
         cy.log(
           `Following error occurred while trying to fetch device details dynamically: ${error}`
@@ -213,10 +225,6 @@ function destroyAppInstance(testType) {
  * Given Test runner waits for 2 'seconds'
  */
 Given(/Test runner waits for (.+) '(minutes|seconds)'/, (time, minuteOrSecond) => {
-  const waitTime = Cypress.env('waitTime');
-  if (waitTime) {
-    time = parseInt(time) + waitTime;
-  }
   if (minuteOrSecond == 'minutes') {
     cy.wait(time * 60 * 1000);
   } else {

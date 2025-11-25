@@ -544,7 +544,7 @@ Given(
  * Then 3rd party 'firebolt' app should be exited
  */
 Given(/3rd party '(.+)' app should be exited$/, async (app) => {
-  UTILS.captureScreenshot();
+  UTILS.captureScreenshot(true);
 
   // getAppState validation
   let validationObjectKey = Cypress.env(CONSTANTS.TEST_TYPE);

@@ -1,3 +1,185 @@
+# [1.20.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.19.0...v1.20.0-dev.1) (2025-11-24)
+
+
+### Features
+
+* Move relevant `fcs.xyz` functions to `cy.callConfigModule` ([4f2e30c](https://github.com/rdkcentral/firebolt-certification-suite/commit/4f2e30c7d05310491c204fffd749ed90052a34e1))
+
+# [1.19.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0...v1.19.0) (2025-11-19)
+
+
+### Bug Fixes
+
+* Add fix for module issues ([#484](https://github.com/rdkcentral/firebolt-certification-suite/issues/484)) ([a7a3529](https://github.com/rdkcentral/firebolt-certification-suite/commit/a7a35299dbc5f870795889721450cafdf12b6a43))
+* commented out testcases ([#504](https://github.com/rdkcentral/firebolt-certification-suite/issues/504)) ([f15013e](https://github.com/rdkcentral/firebolt-certification-suite/commit/f15013e421defbd6be4490042ebacf73e55d7fbe))
+
+
+### Features
+
+* Adding optional parameters to performance handler command ([#503](https://github.com/rdkcentral/firebolt-certification-suite/issues/503)) ([5b101ec](https://github.com/rdkcentral/firebolt-certification-suite/commit/5b101ec002aa6970e4fc88146c655fbb1ddabde3))
+
+# [1.19.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.19.0-dev.2...v1.19.0-dev.3) (2025-11-19)
+
+
+### Bug Fixes
+
+* Add fix for module issues ([#484](https://github.com/rdkcentral/firebolt-certification-suite/issues/484)) ([a7a3529](https://github.com/rdkcentral/firebolt-certification-suite/commit/a7a35299dbc5f870795889721450cafdf12b6a43))
+
+# [1.19.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.19.0-dev.1...v1.19.0-dev.2) (2025-11-19)
+
+
+### Bug Fixes
+
+* commented out testcases ([#504](https://github.com/rdkcentral/firebolt-certification-suite/issues/504)) ([f15013e](https://github.com/rdkcentral/firebolt-certification-suite/commit/f15013e421defbd6be4490042ebacf73e55d7fbe))
+
+# [1.19.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0...v1.19.0-dev.1) (2025-11-05)
+
+
+### Features
+
+* Adding optional parameters to performance handler command ([#503](https://github.com/rdkcentral/firebolt-certification-suite/issues/503)) ([5b101ec](https://github.com/rdkcentral/firebolt-certification-suite/commit/5b101ec002aa6970e4fc88146c655fbb1ddabde3))
+
+# [1.18.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.17.0...v1.18.0) (2025-10-29)
+
+
+### Bug Fixes
+
+* Fixed coppa negative TC issue ([#496](https://github.com/rdkcentral/firebolt-certification-suite/issues/496)) ([d6aadde](https://github.com/rdkcentral/firebolt-certification-suite/commit/d6aadde16967cf05fdb55027db3500642a757d4e))
+* updated import statement in generateFeature ([#491](https://github.com/rdkcentral/firebolt-certification-suite/issues/491)) ([df9d852](https://github.com/rdkcentral/firebolt-certification-suite/commit/df9d8521d0c6e9b46dbcb98892b2ba88ceb8e31a))
+
+
+### Features
+
+* Improve skipped validation logging ([#487](https://github.com/rdkcentral/firebolt-certification-suite/issues/487)) ([2e7ca40](https://github.com/rdkcentral/firebolt-certification-suite/commit/2e7ca40b4cab6e70d0af033ac8054c8522c2e5d1))
+* Removed wait time env dependency ([#488](https://github.com/rdkcentral/firebolt-certification-suite/issues/488)) ([e3759ac](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3759ac1e08c9f550ae8e3d0992c866b7a9c5b00))
+* Screen capture without extra processing ([#489](https://github.com/rdkcentral/firebolt-certification-suite/issues/489)) ([5b52631](https://github.com/rdkcentral/firebolt-certification-suite/commit/5b526315fb268618f3f1a20b35c3aff5dc6b0ea7))
+* Selecting the profile for 3rd party apps ([#483](https://github.com/rdkcentral/firebolt-certification-suite/issues/483)) ([e90424d](https://github.com/rdkcentral/firebolt-certification-suite/commit/e90424de63849910b046a1815f7ab3866835a81b))
+
+# [1.18.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2025-10-28)
+
+
+### Bug Fixes
+
+* Fixed coppa negative TC issue ([#496](https://github.com/rdkcentral/firebolt-certification-suite/issues/496)) ([d6aadde](https://github.com/rdkcentral/firebolt-certification-suite/commit/d6aadde16967cf05fdb55027db3500642a757d4e))
+* updated import statement in generateFeature ([#491](https://github.com/rdkcentral/firebolt-certification-suite/issues/491)) ([df9d852](https://github.com/rdkcentral/firebolt-certification-suite/commit/df9d8521d0c6e9b46dbcb98892b2ba88ceb8e31a))
+
+
+### Features
+
+* Removed wait time env dependency ([#488](https://github.com/rdkcentral/firebolt-certification-suite/issues/488)) ([e3759ac](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3759ac1e08c9f550ae8e3d0992c866b7a9c5b00))
+* Screen capture without extra processing ([#489](https://github.com/rdkcentral/firebolt-certification-suite/issues/489)) ([5b52631](https://github.com/rdkcentral/firebolt-certification-suite/commit/5b526315fb268618f3f1a20b35c3aff5dc6b0ea7))
+* Selecting the profile for 3rd party apps ([#483](https://github.com/rdkcentral/firebolt-certification-suite/issues/483)) ([e90424d](https://github.com/rdkcentral/firebolt-certification-suite/commit/e90424de63849910b046a1815f7ab3866835a81b))
+
+# [1.18.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2025-10-23)
+
+
+### Bug Fixes
+
+* Fixed coppa negative TC issue ([#496](https://github.com/rdkcentral/firebolt-certification-suite/issues/496)) ([d6aadde](https://github.com/rdkcentral/firebolt-certification-suite/commit/d6aadde16967cf05fdb55027db3500642a757d4e))
+* updated import statement in generateFeature ([#491](https://github.com/rdkcentral/firebolt-certification-suite/issues/491)) ([df9d852](https://github.com/rdkcentral/firebolt-certification-suite/commit/df9d8521d0c6e9b46dbcb98892b2ba88ceb8e31a))
+
+
+### Features
+
+* Removed wait time env dependency ([#488](https://github.com/rdkcentral/firebolt-certification-suite/issues/488)) ([e3759ac](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3759ac1e08c9f550ae8e3d0992c866b7a9c5b00))
+* Screen capture without extra processing ([#489](https://github.com/rdkcentral/firebolt-certification-suite/issues/489)) ([5b52631](https://github.com/rdkcentral/firebolt-certification-suite/commit/5b526315fb268618f3f1a20b35c3aff5dc6b0ea7))
+
+# [1.18.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2025-10-23)
+
+
+### Bug Fixes
+
+* Fixed coppa negative TC issue ([#496](https://github.com/rdkcentral/firebolt-certification-suite/issues/496)) ([d6aadde](https://github.com/rdkcentral/firebolt-certification-suite/commit/d6aadde16967cf05fdb55027db3500642a757d4e))
+* updated import statement in generateFeature ([#491](https://github.com/rdkcentral/firebolt-certification-suite/issues/491)) ([df9d852](https://github.com/rdkcentral/firebolt-certification-suite/commit/df9d8521d0c6e9b46dbcb98892b2ba88ceb8e31a))
+
+
+### Features
+
+* Removed wait time env dependency ([#488](https://github.com/rdkcentral/firebolt-certification-suite/issues/488)) ([e3759ac](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3759ac1e08c9f550ae8e3d0992c866b7a9c5b00))
+
+# [1.18.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2025-10-21)
+
+
+### Bug Fixes
+
+* updated import statement in generateFeature ([#491](https://github.com/rdkcentral/firebolt-certification-suite/issues/491)) ([df9d852](https://github.com/rdkcentral/firebolt-certification-suite/commit/df9d8521d0c6e9b46dbcb98892b2ba88ceb8e31a))
+
+
+### Features
+
+* Removed wait time env dependency ([#488](https://github.com/rdkcentral/firebolt-certification-suite/issues/488)) ([e3759ac](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3759ac1e08c9f550ae8e3d0992c866b7a9c5b00))
+
+# [1.18.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2025-10-15)
+
+
+### Bug Fixes
+
+* updated import statement in generateFeature ([#491](https://github.com/rdkcentral/firebolt-certification-suite/issues/491)) ([df9d852](https://github.com/rdkcentral/firebolt-certification-suite/commit/df9d8521d0c6e9b46dbcb98892b2ba88ceb8e31a))
+
+
+### Features
+
+* Removed wait time env dependency ([#488](https://github.com/rdkcentral/firebolt-certification-suite/issues/488)) ([e3759ac](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3759ac1e08c9f550ae8e3d0992c866b7a9c5b00))
+
+# [1.18.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2025-10-13)
+
+
+### Bug Fixes
+
+* updated import statement in generateFeature ([#491](https://github.com/rdkcentral/firebolt-certification-suite/issues/491)) ([df9d852](https://github.com/rdkcentral/firebolt-certification-suite/commit/df9d8521d0c6e9b46dbcb98892b2ba88ceb8e31a))
+
+
+### Features
+
+* Removed wait time env dependency ([#488](https://github.com/rdkcentral/firebolt-certification-suite/issues/488)) ([e3759ac](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3759ac1e08c9f550ae8e3d0992c866b7a9c5b00))
+
+# [1.18.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2025-10-10)
+
+
+### Bug Fixes
+
+* updated import statement in generateFeature ([#491](https://github.com/rdkcentral/firebolt-certification-suite/issues/491)) ([df9d852](https://github.com/rdkcentral/firebolt-certification-suite/commit/df9d8521d0c6e9b46dbcb98892b2ba88ceb8e31a))
+
+
+### Features
+
+* Removed wait time env dependency ([#488](https://github.com/rdkcentral/firebolt-certification-suite/issues/488)) ([e3759ac](https://github.com/rdkcentral/firebolt-certification-suite/commit/e3759ac1e08c9f550ae8e3d0992c866b7a9c5b00))
+
+# [1.18.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.18.0-dev.1...v1.18.0-dev.2) (2025-10-08)
+
+
+### Bug Fixes
+
+* updated import statement in generateFeature ([#491](https://github.com/rdkcentral/firebolt-certification-suite/issues/491)) ([df9d852](https://github.com/rdkcentral/firebolt-certification-suite/commit/df9d8521d0c6e9b46dbcb98892b2ba88ceb8e31a))
+
+# [1.18.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.17.0...v1.18.0-dev.1) (2025-10-06)
+
+
+### Features
+
+* Improve skipped validation logging ([#487](https://github.com/rdkcentral/firebolt-certification-suite/issues/487)) ([2e7ca40](https://github.com/rdkcentral/firebolt-certification-suite/commit/2e7ca40b4cab6e70d0af033ac8054c8522c2e5d1))
+
+# [1.17.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.16.1...v1.17.0) (2025-10-02)
+
+
+### Bug Fixes
+
+* mfos module fixes ([#482](https://github.com/rdkcentral/firebolt-certification-suite/issues/482)) ([99fc433](https://github.com/rdkcentral/firebolt-certification-suite/commit/99fc43320e3528fc94c9cd392b066a2ee1a89a24))
+* Relative path change for feature generation script ([#490](https://github.com/rdkcentral/firebolt-certification-suite/issues/490)) ([586a7f7](https://github.com/rdkcentral/firebolt-certification-suite/commit/586a7f7565ea371a086a3f8c0d748bac52ed2ce8))
+
+
+### Features
+
+* Coppa changes ([#470](https://github.com/rdkcentral/firebolt-certification-suite/issues/470)) ([36fa035](https://github.com/rdkcentral/firebolt-certification-suite/commit/36fa035b03e024df9725acde2f3e9d5847128498))
+* Dynamic feature file generation ([#485](https://github.com/rdkcentral/firebolt-certification-suite/issues/485)) ([fe3e1f2](https://github.com/rdkcentral/firebolt-certification-suite/commit/fe3e1f2d71167597d6a06186fc3a4811af802cd1))
+
+# [1.17.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.17.0-dev.2...v1.17.0-dev.3) (2025-09-30)
+
+
+### Bug Fixes
+
+* Relative path change for feature generation script ([#490](https://github.com/rdkcentral/firebolt-certification-suite/issues/490)) ([586a7f7](https://github.com/rdkcentral/firebolt-certification-suite/commit/586a7f7565ea371a086a3f8c0d748bac52ed2ce8))
+
 # [1.17.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.17.0-dev.1...v1.17.0-dev.2) (2025-09-29)
 
 
