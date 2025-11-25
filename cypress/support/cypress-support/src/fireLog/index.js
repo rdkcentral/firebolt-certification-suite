@@ -233,8 +233,8 @@ class FireLog extends Function {
    * fireLog.assert('fail', 'pass', 'Screenshot validation failed via OCR', true);
    */
   assert(actual, expected, message, softAssert, failureCode = 1) {
-    // Handle backward compatibility: if first param is boolean and second is string
-    if (typeof actual === 'boolean' && typeof expected === 'string') {
+    // Handle backward compatibility: if only 2 params provided and first is boolean
+    if (arguments.length === 2 && typeof actual === 'boolean') {
       // assert(expression, message) - Hard assertion
       message = expected;
     }
