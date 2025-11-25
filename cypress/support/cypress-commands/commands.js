@@ -1978,11 +1978,7 @@ Cypress.Commands.add('softAssert', (actual, expected, message) => {
 
   if (jsonAssertion && jsonAssertion.jsonDiffArray && jsonAssertion.jsonDiffArray.length) {
     jsonAssertion.jsonDiffArray.forEach((diff) => {
-      Cypress.log({
-        name: 'Soft assertion error',
-        displayName: 'softAssert',
-        message: diff.error.message,
-      });
+      fireLog.info(diff.error.message);
     });
   } else {
     cy.log(`Soft assertion passed : ${message}`);
