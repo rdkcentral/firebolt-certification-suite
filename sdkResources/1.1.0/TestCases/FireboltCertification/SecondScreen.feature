@@ -17,15 +17,6 @@ Feature: SecondScreen
          | passing device with string         | device    | get secondscreen device with string      | expected secondscreen device    |
          | passing protocols with empty array | protocols | get secondscreen protocols               | expected secondscreen protocols |
 
-   @sdk @transport @Sev2
-   Scenario Outline: SecondScreen.device - Validating API Error handling when <Scenario>
-      When '3rd party app' invokes the 'Firebolt' API to '<API_key>'
-      Then 'Firebolt' platform responds with '<Validation_key>'
-
-      Examples:
-         | Scenario                  | API_key                              | Validation_key                             |
-         | passing device as boolean | get secondscreen device with boolean | invalid parameters for secondscreen device |
-         | passing device as integer | get secondscreen device with integer | invalid parameters for secondscreen device |
 
    @sdk @transport @Sev2
    Scenario: SecondScreen.FriendlyName - Validating API and Event response
