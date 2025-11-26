@@ -256,7 +256,7 @@ Then(/'(.+)' will (be|stay) in '(.+)' state/, (app, condition, state) => {
       const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
       const validationObject = UTILS.resolveRecursiveValues(fireboltData);
       cy.methodOrEventResponseValidation(type, validationObject).then((response) => {
-        cy.softAssertAll();
+        fireLog.assertAll();
       });
     });
   }
