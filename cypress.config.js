@@ -17,7 +17,7 @@
  */
 
 const { defineConfig } = require('cypress');
-// const { createFirelogInstance } = require('./cypress/support/cypress-support/src/fireLog');
+const setupNodeEvents = require('./cypress/plugins/index.js');
 const reporter = 'mochawesome';
 
 const reporterOptions = {
@@ -99,9 +99,6 @@ const env = {
   customValidationTimeout: 60000,
   deviceVersionCallEnable: true,
 };
-
-// createFirelogInstance(env.loggerLevel || 'info');
-const setupNodeEvents = require('./cypress/plugins/index.js');
 
 module.exports = {
   e2e: {
