@@ -301,6 +301,8 @@ Required log level should be passed in the run command as an env variable (logge
 `fireLog.isTrue(isTrueValue, "True message");`
 `fireLog.isFalse(isFalseValue, "False message");`
 `fireLog.deepEqual(actual, expected, "deepEqual message");`
+`fireLog.info('Info level log message');`
+`fireLog.debug('Debug level log message');`
 
 ## parseValue
 
