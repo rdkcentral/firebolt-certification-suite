@@ -145,7 +145,10 @@ if (processingEnvArgs) {
   for (const envArg of envArgs) {
     if (envArg.startsWith('jobId=')) {
       jobId = envArg.split('=')[1];
-      break;
+    }
+    if (envArg.startsWith('loggerLevel=')) {
+      const loggerLevelFromEnv = envArg.split('=')[1];
+      process.env.loggerLevel = loggerLevelFromEnv;
     }
   }
 }

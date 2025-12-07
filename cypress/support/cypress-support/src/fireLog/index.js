@@ -30,7 +30,9 @@ try {
  */
 
 class FireLog extends Function {
-  constructor() {
+  constructor(currentLevel) {
+    console.log(">>> Firelog constructor called with level: ", currentLevel);
+    
     // Creating the function body dynamically
     const functionBody = `
       return function (...args) {
@@ -46,19 +48,10 @@ class FireLog extends Function {
       info: 2,
       debug: 3,
     };
-    let currentLevel;
-    let consoleLevel;
 
-    if (typeof getEnvVariable === 'function') {
-      currentLevel = getEnvVariable(CONSTANTS.LOGGER_LEVEL, false); // log level to display
-      consoleLevel = getEnvVariable(CONSTANTS.CONSOLE_LOGGER_LEVEL, false);
-    } else {
-      // TODO: Make an arrangement to set this log level from command line env variable
-      currentLevel = 'info'; // log level to display
-      consoleLevel = 'info';
-    }
+    this.currentLevel = currentLevel;
+    this.consoleLevel = currentLevel;
 
-    if (!consoleLevel) consoleLevel = currentLevel;
     const handler = {
       apply: function (target, thisArg, argumentsList) {
         let message;
@@ -118,7 +111,7 @@ class FireLog extends Function {
       instanceProxy[level] = (
         message,
         logOutputLocation = 'console',
-        consoleLoggerLevel = consoleLevel
+        consoleLoggerLevel = this.consoleLevel
       ) => {
         const prefix = `[${level}]`;
         const fullMessage = `${prefix} ${message}`;
@@ -130,7 +123,7 @@ class FireLog extends Function {
         let cypressLogPromise = null;
 
         // Check if logOutputLocation is 'report' and log using cy.log based on loggerLevel
-        if (logOutputLocation === 'report' && levelPriority[level] <= levelPriority[currentLevel]) {
+        if (logOutputLocation === 'report' && levelPriority[level] <= levelPriority[this.currentLevel]) {
           cypressLogPromise = cy.log(fullMessage);
         }
 
@@ -147,10 +140,6 @@ class FireLog extends Function {
     });
 
     return fireLogProxy;
-  }
-
-  setLevel(level) {
-    this.currentLevel = level;
   }
 
   // Method to log a message without any assertion
@@ -228,6 +217,26 @@ class FireLog extends Function {
   }
 }
 
-const fireLog = new FireLog();
+const loggerLevelFromEnv = process.env.loggerLevel || 'info';
+const fireLog = new FireLog(loggerLevelFromEnv);
 global.fireLog = fireLog;
 module.exports = { fireLog };
+
+
+// let fireLogObj;
+
+// function createFirelogInstance(level) {
+//   console.log("Creating firelog with logger level: ", level);
+//   fireLogObj = new FireLog(level);
+//   global.fireLog = fireLogObj;
+// }
+
+// module.exports = {
+//   get fireLog() {
+//     // const err = new Error();
+//     // const stack = err.stack.split("\n");
+//     // console.log("Get fireLog called by:", stack[2].trim());
+//     return fireLogObj;
+//   },
+//   createFirelogInstance
+// };
