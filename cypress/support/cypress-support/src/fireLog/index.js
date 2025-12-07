@@ -31,7 +31,7 @@ try {
 
 class FireLog extends Function {
   constructor(currentLevel) {
-    console.log("Firelog constructor called with level: ", currentLevel);
+    console.log("Firelog level set to: ", currentLevel);
     
     // Creating the function body dynamically
     const functionBody = `
