@@ -31,7 +31,7 @@ try {
 
 class FireLog extends Function {
   constructor(currentLevel) {
-    console.log(">>> Firelog constructor called with level: ", currentLevel);
+    console.log("Firelog constructor called with level: ", currentLevel);
     
     // Creating the function body dynamically
     const functionBody = `
@@ -221,22 +221,3 @@ const loggerLevelFromEnv = process.env.loggerLevel || 'info';
 const fireLog = new FireLog(loggerLevelFromEnv);
 global.fireLog = fireLog;
 module.exports = { fireLog };
-
-
-// let fireLogObj;
-
-// function createFirelogInstance(level) {
-//   console.log("Creating firelog with logger level: ", level);
-//   fireLogObj = new FireLog(level);
-//   global.fireLog = fireLogObj;
-// }
-
-// module.exports = {
-//   get fireLog() {
-//     // const err = new Error();
-//     // const stack = err.stack.split("\n");
-//     // console.log("Get fireLog called by:", stack[2].trim());
-//     return fireLogObj;
-//   },
-//   createFirelogInstance
-// };
