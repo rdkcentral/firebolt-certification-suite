@@ -137,7 +137,7 @@ function isCombinedTestRun(params) {
 const isCombinedTest = isCombinedTestRun(params);
 process.env.CYPRESS_isCombinedTestRun = isCombinedTest;
 
-// Extract jobId from the parameters
+// Extract jobId and logger level from the parameters
 let jobId = '';
 const processingEnvArgs = params.includes('--env');
 if (processingEnvArgs) {
