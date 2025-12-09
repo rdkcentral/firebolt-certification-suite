@@ -1029,62 +1029,64 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
       if (intent) {
         // Clearing the intent from the runtime environment variable
         Cypress.env(CONSTANTS.RUNTIME).intent = {};
-        const appMetadata = UTILS.getEnvVariable(CONSTANTS.APP_METADATA, false);
-
-        // If the intent is present in the appMetadata, set the intent in the runtime environment variable
-        if (
-          appMetadata &&
-          appMetadata.apps?.[0]?.[appId] &&
-          appMetadata.apps?.[0]?.[appId][intent]
-        ) {
-          Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata.apps[0][appId][intent];
-        } else if (appMetadata && appMetadata[appId] && appMetadata[appId][intent]) {
-          Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId][intent];
-        }
-
-        // Check if intentTemplates are defined for the given appType
-        let intentTemplate;
-        const intentTemplates = UTILS.getEnvVariable(CONSTANTS.INTENT_TEMPLATES, false);
-        if (intentTemplates && intentTemplates[appType]) {
-          if (intentTemplates[appType][appId] && intentTemplates[appType][appId][intent]) {
-            intentTemplate = intentTemplates[appType][appId][intent];
-          } else if (intentTemplates[appType][intent]) {
-            intentTemplate = intentTemplates[appType][intent];
+        let appMetadata = UTILS.getEnvVariable(CONSTANTS.APP_METADATA, false);
+        cy.callConfigModule('checkForMetadataOverride', [appMetadata]).then((updatedMetadata) => {
+          // If the intent is present in the appMetadata, set the intent in the runtime environment variable
+          appMetadata = updatedMetadata || appMetadata;
+          if (
+            appMetadata &&
+            appMetadata.apps?.[0]?.[appId] &&
+            appMetadata.apps?.[0]?.[appId][intent]
+          ) {
+            Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata.apps[0][appId][intent];
+          } else if (appMetadata && appMetadata[appId] && appMetadata[appId][intent]) {
+            Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId][intent];
           }
-          // Log failure if intentTemplate is not found
+
+          // Check if intentTemplates are defined for the given appType
+          let intentTemplate;
+          const intentTemplates = UTILS.getEnvVariable(CONSTANTS.INTENT_TEMPLATES, false);
+          if (intentTemplates && intentTemplates[appType]) {
+            if (intentTemplates[appType][appId] && intentTemplates[appType][appId][intent]) {
+              intentTemplate = intentTemplates[appType][appId][intent];
+            } else if (intentTemplates[appType][intent]) {
+              intentTemplate = intentTemplates[appType][intent];
+            }
+            // Log failure if intentTemplate is not found
+            else {
+              fireLog.fail(
+                `Intent template for the ${intent} intent not found in ${appType} intentTemplates`
+              );
+            }
+          }
+          // Log failure if intentTemplates are not defined for the given appType
           else {
             fireLog.fail(
-              `Intent template for the ${intent} intent not found in ${appType} intentTemplates`
+              `No intentTemplates found for ${appType}, make sure the intentTemplates are defined as per the appType`
             );
           }
-        }
-        // Log failure if intentTemplates are not defined for the given appType
-        else {
-          fireLog.fail(
-            `No intentTemplates found for ${appType}, make sure the intentTemplates are defined as per the appType`
-          );
-        }
-        Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
-        Cypress.env(CONSTANTS.RUNTIME).programType = intent;
+          Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
+          Cypress.env(CONSTANTS.RUNTIME).programType = intent;
 
-        const giveDynamicAssetsPrecedence = getEnvVariable('giveDynamicAssetsPrecedence', false);
+          const giveDynamicAssetsPrecedence = getEnvVariable('giveDynamicAssetsPrecedence', false);
 
-        if (giveDynamicAssetsPrecedence || !Cypress.env(CONSTANTS.RUNTIME)?.intent) {
-          cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
-            if (dynamicIntent && Object.keys(dynamicIntent).length > 0) {
-              Cypress.env(CONSTANTS.RUNTIME).intent = { ...dynamicIntent };
-              messageIntent = {
-                [CONSTANTS.APP_ID]: appId,
-                [CONSTANTS.INTENT]: dynamicIntent.entityId,
-              };
-            } else {
-              messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
-            }
-          });
-        } else {
-          // Attempt to resolve the intentTemplate and create messageIntent
-          messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
-        }
+          if (giveDynamicAssetsPrecedence || !Cypress.env(CONSTANTS.RUNTIME)?.intent) {
+            cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
+              if (dynamicIntent && Object.keys(dynamicIntent).length > 0) {
+                Cypress.env(CONSTANTS.RUNTIME).intent = { ...dynamicIntent };
+                messageIntent = {
+                  [CONSTANTS.APP_ID]: appId,
+                  [CONSTANTS.INTENT]: dynamicIntent.entityId,
+                };
+              } else {
+                messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
+              }
+            });
+          } else {
+            // Attempt to resolve the intentTemplate and create messageIntent
+            messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
+          }
+        });
       } else {
         const data = {
           query: {
@@ -2097,11 +2099,11 @@ Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
  * cy.sendKeyPress('right')
  * cy.sendKeyPress('right', 10)
  */
-Cypress.Commands.add('sendKeyPress', (key, delay) => {
+Cypress.Commands.add('sendKeyPress', (key, delay, optionalParams) => {
   delay = delay ? delay : 5;
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
-    params: { key: key, delay: delay },
+    params: { key: key, delay: delay, ...optionalParams },
   };
   const timeout = (Array.isArray(key) ? key.length : 1) * delay * 1000 + 10000; // Calculate timeout based on key press sequence and delay
   cy.sendMessagetoPlatforms(requestMap, timeout).then((result) => {
