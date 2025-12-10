@@ -2112,7 +2112,7 @@ Cypress.Commands.add('sendKeyPress', (key, delay, optionalParams, additionalWait
   const timeout = (Array.isArray(key) ? key.length : 1) * delay * 1000 + additionalWaitTime; // Calculate timeout based on key press sequence and delay
   cy.sendMessagetoPlatforms(requestMap, timeout).then((result) => {
     fireLog.info(
-      `Sent key press: ${key} with delay: ${delay}. Response: ${JSON.stringify(result)}`,
+      `Sent key press: ${key} with params: ${JSON.stringify(requestMap.params)}. Response: ${JSON.stringify(result)}`,
       'report'
     );
   });
