@@ -1030,7 +1030,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         // Clearing the intent from the runtime environment variable
         Cypress.env(CONSTANTS.RUNTIME).intent = {};
         let appMetadata = UTILS.getEnvVariable(CONSTANTS.APP_METADATA, false);
-        cy.callConfigModule('checkForMetadataOverride', [appMetadata]).then((updatedMetadata) => {
+        cy.callConfigModule(CONSTANTS.CHECK_METADATA_OVERRIDES, [appMetadata]).then((updatedMetadata) => {
           // If the intent is present in the appMetadata, set the intent in the runtime environment variable
           appMetadata = updatedMetadata || appMetadata;
           if (
@@ -2095,17 +2095,21 @@ Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
  * @description Command to send key press to the platform.
  * @param {String} key - The key to be pressed.
  * @param {Number} delay - The delay in seconds before sending the key press.
+ * @param {Object} optionalParams - Pass optional parameters for keypress
  * @example
  * cy.sendKeyPress('right')
  * cy.sendKeyPress('right', 10)
+ * cy.sendKeyPress('right', 10, {duration: 5})
+ * cy.sendKeyPress('right', 10, {repeat: 5})
  */
-Cypress.Commands.add('sendKeyPress', (key, delay, optionalParams) => {
+Cypress.Commands.add('sendKeyPress', (key, delay, optionalParams, additionalWaitTime) => {
   delay = delay ? delay : 5;
+  additionalWaitTime = additionalWaitTime ? additionalWaitTime + 10000 : 10000;
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
     params: { key: key, delay: delay, ...optionalParams },
   };
-  const timeout = (Array.isArray(key) ? key.length : 1) * delay * 1000 + 10000; // Calculate timeout based on key press sequence and delay
+  const timeout = (Array.isArray(key) ? key.length : 1) * delay * 1000 + additionalWaitTime; // Calculate timeout based on key press sequence and delay
   cy.sendMessagetoPlatforms(requestMap, timeout).then((result) => {
     fireLog.info(
       `Sent key press: ${key} with delay: ${delay}. Response: ${JSON.stringify(result)}`,

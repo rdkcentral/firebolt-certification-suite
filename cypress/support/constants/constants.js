@@ -36,6 +36,7 @@ module.exports = {
   APP_HISTORY_EMPTY: 'App history is empty',
   APP_ID: 'appId',
   APP_METADATA: 'app_metadata',
+  CHECK_METADATA_OVERRIDES: 'checkForMetadataOverride',
   APP_LIFECYCLE_HISTORY: 'appLifeCycleHistory',
   APP_RESPONSE: 'Response from third party app: ',
   APP_TRANSPORT_UNAVAILABLE: 'App Transport unavailable',
