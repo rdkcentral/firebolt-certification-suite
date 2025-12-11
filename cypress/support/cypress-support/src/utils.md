@@ -288,10 +288,21 @@ resolveDeviceVariable("deviceId")
 
 ### Purpose: Provides assertion methods with logging using Cypress's cy.log(). It wraps Cypress's assertion methods, allowing logging of messages for each assertion.
 
+### Log levels:
+Required log level should be passed in the run command as an env variable (loggerLevel="debug" or loggerLevel="info")
+| Log levels | 
+| --- | 
+| debug |
+| info |
+| warn |
+| error |
+
 ### Examples:
 `fireLog.isTrue(isTrueValue, "True message");`
 `fireLog.isFalse(isFalseValue, "False message");`
 `fireLog.deepEqual(actual, expected, "deepEqual message");`
+`fireLog.info('Info level log message');`
+`fireLog.debug('Debug level log message');`
 
 ## parseValue
 
