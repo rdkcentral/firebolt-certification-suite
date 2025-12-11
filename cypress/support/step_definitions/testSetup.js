@@ -116,12 +116,9 @@ Given(
               CONSTANTS.ACTION_CORE.toLowerCase()
             ).then((response) => {
               if (response) {
-                const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.FETCHDEVICEDETAILS;
-                const requestMap = {
-                  method: method,
-                  params: response,
-                };
-                cy.sendMessagetoPlatforms(requestMap);
+                cy.callConfigModule(CONSTANTS.FETCHDEVICEDETAILS, {
+                  response,
+                });
               }
             });
           }
