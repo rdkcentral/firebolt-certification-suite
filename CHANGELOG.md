@@ -1,3 +1,10 @@
+## [1.20.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.20.0...v1.20.1-dev.1) (2025-12-11)
+
+
+### Bug Fixes
+
+* Log levels from CLI args ([#510](https://github.com/rdkcentral/firebolt-certification-suite/issues/510)) ([f9e6769](https://github.com/rdkcentral/firebolt-certification-suite/commit/f9e676978a432bec59a7c98bf23dbf3e84069028))
+
 # [1.20.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.19.0...v1.20.0) (2025-12-11)
 
 
