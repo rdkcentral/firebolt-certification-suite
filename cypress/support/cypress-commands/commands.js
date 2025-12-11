@@ -1029,64 +1029,62 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
       if (intent) {
         // Clearing the intent from the runtime environment variable
         Cypress.env(CONSTANTS.RUNTIME).intent = {};
-        let appMetadata = UTILS.getEnvVariable(CONSTANTS.APP_METADATA, false);
-        cy.callConfigModule(CONSTANTS.CHECK_METADATA_OVERRIDES, [appMetadata]).then((updatedMetadata) => {
-          // If the intent is present in the appMetadata, set the intent in the runtime environment variable
-          appMetadata = updatedMetadata || appMetadata;
-          if (
-            appMetadata &&
-            appMetadata.apps?.[0]?.[appId] &&
-            appMetadata.apps?.[0]?.[appId][intent]
-          ) {
-            Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata.apps[0][appId][intent];
-          } else if (appMetadata && appMetadata[appId] && appMetadata[appId][intent]) {
-            Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId][intent];
-          }
+        const appMetadata = UTILS.getEnvVariable(CONSTANTS.APP_METADATA, false);
 
-          // Check if intentTemplates are defined for the given appType
-          let intentTemplate;
-          const intentTemplates = UTILS.getEnvVariable(CONSTANTS.INTENT_TEMPLATES, false);
-          if (intentTemplates && intentTemplates[appType]) {
-            if (intentTemplates[appType][appId] && intentTemplates[appType][appId][intent]) {
-              intentTemplate = intentTemplates[appType][appId][intent];
-            } else if (intentTemplates[appType][intent]) {
-              intentTemplate = intentTemplates[appType][intent];
-            }
-            // Log failure if intentTemplate is not found
-            else {
-              fireLog.fail(
-                `Intent template for the ${intent} intent not found in ${appType} intentTemplates`
-              );
-            }
+        // If the intent is present in the appMetadata, set the intent in the runtime environment variable
+        if (
+          appMetadata &&
+          appMetadata.apps?.[0]?.[appId] &&
+          appMetadata.apps?.[0]?.[appId][intent]
+        ) {
+          Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata.apps[0][appId][intent];
+        } else if (appMetadata && appMetadata[appId] && appMetadata[appId][intent]) {
+          Cypress.env(CONSTANTS.RUNTIME).intent = appMetadata[appId][intent];
+        }
+
+        // Check if intentTemplates are defined for the given appType
+        let intentTemplate;
+        const intentTemplates = UTILS.getEnvVariable(CONSTANTS.INTENT_TEMPLATES, false);
+        if (intentTemplates && intentTemplates[appType]) {
+          if (intentTemplates[appType][appId] && intentTemplates[appType][appId][intent]) {
+            intentTemplate = intentTemplates[appType][appId][intent];
+          } else if (intentTemplates[appType][intent]) {
+            intentTemplate = intentTemplates[appType][intent];
           }
-          // Log failure if intentTemplates are not defined for the given appType
+          // Log failure if intentTemplate is not found
           else {
             fireLog.fail(
-              `No intentTemplates found for ${appType}, make sure the intentTemplates are defined as per the appType`
+              `Intent template for the ${intent} intent not found in ${appType} intentTemplates`
             );
           }
-          Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
-          Cypress.env(CONSTANTS.RUNTIME).programType = intent;
+        }
+        // Log failure if intentTemplates are not defined for the given appType
+        else {
+          fireLog.fail(
+            `No intentTemplates found for ${appType}, make sure the intentTemplates are defined as per the appType`
+          );
+        }
+        Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
+        Cypress.env(CONSTANTS.RUNTIME).programType = intent;
 
-          const giveDynamicAssetsPrecedence = getEnvVariable('giveDynamicAssetsPrecedence', false);
+        const giveDynamicAssetsPrecedence = getEnvVariable('giveDynamicAssetsPrecedence', false);
 
-          if (giveDynamicAssetsPrecedence || !Cypress.env(CONSTANTS.RUNTIME)?.intent) {
-            cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
-              if (dynamicIntent && Object.keys(dynamicIntent).length > 0) {
-                Cypress.env(CONSTANTS.RUNTIME).intent = { ...dynamicIntent };
-                messageIntent = {
-                  [CONSTANTS.APP_ID]: appId,
-                  [CONSTANTS.INTENT]: dynamicIntent.entityId,
-                };
-              } else {
-                messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
-              }
-            });
-          } else {
-            // Attempt to resolve the intentTemplate and create messageIntent
-            messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
-          }
-        });
+        if (giveDynamicAssetsPrecedence || !Cypress.env(CONSTANTS.RUNTIME)?.intent) {
+          cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
+            if (dynamicIntent && Object.keys(dynamicIntent).length > 0) {
+              Cypress.env(CONSTANTS.RUNTIME).intent = { ...dynamicIntent };
+              messageIntent = {
+                [CONSTANTS.APP_ID]: appId,
+                [CONSTANTS.INTENT]: dynamicIntent.entityId,
+              };
+            } else {
+              messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
+            }
+          });
+        } else {
+          // Attempt to resolve the intentTemplate and create messageIntent
+          messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
+        }
       } else {
         const data = {
           query: {
@@ -1886,51 +1884,57 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
  * cy.fetchAppMetaData()
  */
 Cypress.Commands.add('fetchAppMetaData', () => {
-  if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
-    // Send the request to fetch app data from platforms
-    cy.callConfigModule(CONSTANTS.GETAPPDATA).then((result) => {
-      if (result && result.data) {
-        return result.data;
+  cy.callConfigModule(CONSTANTS.CHECK_METADATA_OVERRIDES).then((updatedMetadata) => {
+    if (updatedMetadata) {
+      return updatedMetadata;
+    } else {
+      if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
+        // Send the request to fetch app data from platforms
+        cy.callConfigModule(CONSTANTS.GETAPPDATA).then((result) => {
+          if (result && result.data) {
+            return result.data;
+          } else {
+            throw new Error('Unable to get valid response for fetching app metadata');
+          }
+        });
       } else {
-        throw new Error('Unable to get valid response for fetching app metadata');
-      }
-    });
-  } else {
-    // If app assurance id is not available, extract app metadata from local directories
+        // If app assurance id is not available, extract app metadata from local directories
 
-    const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
-    const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
+        const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
+        const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
 
-    const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
-    const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
+        const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
+        const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
-    // Extract internal app metadata
-    cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
-      (fcsAppMetaData) => {
-        // Check if internal app metadata extraction was successful
-        if (!fcsAppMetaData) {
-          throw new Error('Failed to extract internal app metadata.');
-        }
-
-        // Extract external app metadata
-        cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
-          (configModuleAppMetaData) => {
-            // Check if external app metadata extraction was successful
-            if (!configModuleAppMetaData) {
-              throw new Error('Failed to extract external app metadata.');
+        // Extract internal app metadata
+        cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
+          (fcsAppMetaData) => {
+            // Check if internal app metadata extraction was successful
+            if (!fcsAppMetaData) {
+              throw new Error('Failed to extract internal app metadata.');
             }
 
-            // Merge internal and external app metadata
-            try {
-              _.merge(fcsAppMetaData, configModuleAppMetaData);
-            } catch (mergeError) {
-              throw new Error(`Error merging app metadata: ${mergeError.message}`);
-            }
+            // Extract external app metadata
+            cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
+              (configModuleAppMetaData) => {
+                // Check if external app metadata extraction was successful
+                if (!configModuleAppMetaData) {
+                  throw new Error('Failed to extract external app metadata.');
+                }
+
+                // Merge internal and external app metadata
+                try {
+                  _.merge(fcsAppMetaData, configModuleAppMetaData);
+                } catch (mergeError) {
+                  throw new Error(`Error merging app metadata: ${mergeError.message}`);
+                }
+              }
+            );
           }
         );
       }
-    );
-  }
+    }
+  });
 });
 
 /**
