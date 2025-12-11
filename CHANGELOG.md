@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.19.0...v1.20.0) (2025-12-11)
+
+
+### Features
+
+* Move relevant `fcs.xyz` functions to `cy.callConfigModule` ([4f2e30c](https://github.com/rdkcentral/firebolt-certification-suite/commit/4f2e30c7d05310491c204fffd749ed90052a34e1))
+
 # [1.20.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.19.0...v1.20.0-dev.1) (2025-11-24)
 
 
