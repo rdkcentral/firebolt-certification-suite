@@ -1222,6 +1222,10 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
             cy.updateRunInfo();
           } else if (result && result.error) {
             fireLog.fail(`App launch failed: ${result.error.message}`);
+          } else if (Cypress.env(CONSTANTS.TEST_TYPE) === 'MetricsCapture') {
+            cy.wait(35000).then(() => {
+              cy.captureScreenshot(false);
+            });
           }
         });
       });
