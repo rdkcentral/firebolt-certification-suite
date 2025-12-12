@@ -36,6 +36,7 @@ module.exports = {
   APP_HISTORY_EMPTY: 'App history is empty',
   APP_ID: 'appId',
   APP_METADATA: 'app_metadata',
+  CHECK_METADATA_OVERRIDES: 'checkForMetadataOverride',
   APP_LIFECYCLE_HISTORY: 'appLifeCycleHistory',
   APP_RESPONSE: 'Response from third party app: ',
   APP_TRANSPORT_UNAVAILABLE: 'App Transport unavailable',
@@ -187,7 +188,7 @@ module.exports = {
   FIREBOLTCALL: 'fireboltCall',
   FIREBOLT_OBJECT_DOC_PATH:
     'https://github.com/rdkcentral/firebolt-certification-suite/blob/main/cypress/fixtures/docs/dynamicObjects.md#firebolt-object',
-  FIREBOLT_VERSION: 'Firebolt Version',
+  FIREBOLT_VERSION: 'Platform Firebolt Version',
   FIREBOLTCALLS_FROM_CONFIGMODULE: 'cypress/fixtures/external/fireboltCalls/',
   FIREBOLTCALLS_FROM_FCS: 'cypress/fixtures/fireboltCalls/',
   FIREBOLTCONFIG: 'fireboltConfig',
@@ -346,6 +347,7 @@ module.exports = {
   PARTNER: 'Partner',
   PRODUCT: 'Product',
   DEVICEID_ENV: 'DeviceId',
+  APP_ASSURANCE_ID_LABEL: 'App Name',
   PREREQUISITE_DATA: 'PreRequisiteData.json',
   PUB_SUB_URL: 'pubSubUrl', // Env Var for the URL for the Default Module's pubSub implementation
   PUB_SUB_UUID: 'pubsub_uuid',
@@ -412,7 +414,7 @@ module.exports = {
   SCHEMA_VALIDATION_STATUS_CODE: ['PASS', 'FAIL', 'SKIPPED', 'PENDING'],
   SCREENSHOT_VALIDATION: 'screenshotValidation',
   SDK_VERSION: 'sdkVersion',
-  SDK_REPORT_VERSION: 'SDK Version',
+  SDK_REPORT_VERSION: 'App SDK Version',
   SEARCH: 'search',
   SET: 'set',
   SET_APP_STATE: 'Application state set to ',
@@ -574,6 +576,7 @@ module.exports = {
   VALIDATION_NOT_PERFORMED_MESSAGE: 'Validation not performed',
   FETCHDEVICEDETAILS: 'fetchDeviceDetails',
   GETAPPDATA: 'getAppData',
+  INTERNAL_WAITTIME_TESTTYPES :'internalWaitTimeTestTypes'
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
