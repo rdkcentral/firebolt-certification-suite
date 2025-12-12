@@ -343,7 +343,7 @@ module.exports = {
   PLATFORM_NOT_SUPPORT_LOG: 'Platform does not support method',
   PLATFORM_NOT_TRIGGER_EVENT: 'Platform MUST not trigger event ',
   PLATFORM_TRIGGER_EVENT: 'Platform MUST trigger event ',
-  RELEASE: 'Ripple Release',
+  RELEASE: 'Release',
   PARTNER: 'Partner',
   PRODUCT: 'Product',
   DEVICEID_ENV: 'DeviceId',
@@ -576,6 +576,7 @@ module.exports = {
   VALIDATION_NOT_PERFORMED_MESSAGE: 'Validation not performed',
   FETCHDEVICEDETAILS: 'fetchDeviceDetails',
   GETAPPDATA: 'getAppData',
+  INTERNAL_WAITTIME_TESTTYPES :'internalWaitTimeTestTypes'
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
