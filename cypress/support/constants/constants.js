@@ -527,7 +527,6 @@ module.exports = {
   SCENARIO_NAME: 'scenarioName',
   SCENARIO_TYPE: 'scenarioType',
   PENDING_FEATURES: 'pendingFeatures',
-  FOREGROUND: 'FOREGROUND',
   PERFORMANCE_VALIDATION: 'performanceValidation',
   MARKER_CREATION_STATUS: 'markerCreationStatus',
   PLAYBACK: 'playback',
