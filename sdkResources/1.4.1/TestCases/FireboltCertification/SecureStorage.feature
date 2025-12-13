@@ -106,6 +106,11 @@ Feature: SecureStorage
 
 
     @sdk @transport @Sev2
+    Scenario: SecureStorage.get - Validating API when scope key is an empty string
+        When '3rd party app' invokes the 'Firebolt' API to 'get stored value with key as empty'
+        Then 'Firebolt' platform responds with 'null for getting stored value'
+
+    @sdk @transport @Sev2
     Scenario Outline: SecureStorage.get - Validating API error handling when <Scenario>
         When '3rd party app' invokes the 'Firebolt' API to '<API_Key>'
         Then 'Firebolt' platform responds with '<Validation_Key>'
@@ -120,7 +125,6 @@ Feature: SecureStorage
             | scope key is a number           | get stored value with key as number         | invalid parameters for securestorage get |
             | scope key is null               | get stored value with key as null           | invalid parameters for securestorage get |
             | scope key is a boolean          | get stored value with key as boolean        | invalid parameters for securestorage get |
-            | scope key is an empty string    | get stored value with key as empty          | custom error for securestorage get       |
 
 
     @sdk @transport @Sev1
@@ -186,6 +190,17 @@ Feature: SecureStorage
             | without key                   | remove stored value without key                | invalid parameters for securestorage remove |
 
     @sdk @transport @Sev2
+    Scenario: SecureStorage.remove - Validating API when passing key as empty string
+        Given '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenDevice'
+        And 'Firebolt' platform responds with 'null for updating a secure data value'
+        And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
+        And 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
+        When '3rd party app' invokes the 'Firebolt' API to 'remove stored value with empty key'
+        Then 'Firebolt' platform responds with 'null for removing stored value'
+        When '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
+        Then 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
+
+    @sdk @transport @Sev2
     Scenario Outline: SecureStorage.remove - Validating API error handling when <Scenario>
         Given '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenDevice'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
@@ -206,7 +221,6 @@ Feature: SecureStorage
             | Passing key as number         | remove stored value with key as number         | invalid parameters for securestorage remove |
             | Passing key as null           | remove stored value with key as null           | invalid parameters for securestorage remove |
             | Passing key as boolean        | remove stored value with key as boolean        | invalid parameters for securestorage remove |
-            | Passing key as empty string   | remove stored value with empty key             | custom error for securestorage remove       |
 
     @sdk @transport @Sev2
     Scenario Outline: SecureStorage.remove - Validate secure data content <Scenario> after TTL
@@ -378,14 +392,14 @@ Feature: SecureStorage
         And '3rd party app' invokes the 'Firebolt' API to 'update stored value for key authTestTokenDevice1'
         And 'Firebolt' platform responds with 'null for updating a secure data value'
         And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
-        And 'Firebolt' platform responds with 'authTestTokenValue2 for stored value in securestorage'
-        And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice1'
         And 'Firebolt' platform responds with 'expected value for authTestTokenDevice stored data in securestorage'
+        And '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice1'
+        And 'Firebolt' platform responds with 'authTestTokenValue2 for stored value in securestorage'
         And 'secondary 3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
-        And 'Firebolt' platform responds to 'secondary 3rd party app' with 'authTestTokenValue2 for stored value in securestorage'
-        And 'secondary 3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice1'
         And 'Firebolt' platform responds to 'secondary 3rd party app' with 'expected value for authTestTokenDevice stored data in securestorage'
-        When '3rd party app' invokes the 'Firebolt' API to 'clear stored value with scope as device '
+        And 'secondary 3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice1'
+        And 'Firebolt' platform responds to 'secondary 3rd party app' with 'authTestTokenValue2 for stored value in securestorage'
+        When '3rd party app' invokes the 'Firebolt' API to 'clear stored value with scope as device'
         Then 'Firebolt' platform responds with 'null for clearing stored value'
         When '3rd party app' invokes the 'Firebolt' API to 'get stored value with scope as device and key as authTestTokenDevice'
         Then 'Firebolt' platform responds with 'null for getting stored value'
