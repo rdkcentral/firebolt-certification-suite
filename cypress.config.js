@@ -98,6 +98,7 @@ const env = {
   supportedSDK: ['Firebolt'],
   customValidationTimeout: 60000,
   deviceVersionCallEnable: true,
+  giveDynamicAssetsPrecedence: true,
 };
 
 module.exports = {
