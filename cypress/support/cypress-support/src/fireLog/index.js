@@ -40,7 +40,7 @@ class FireLog extends Function {
       }
     `;
     super('...args', functionBody);
-
+    this.errors = [];
     const logLevels = ['debug', 'info', 'warn', 'error'];
     const levelPriority = {
       error: 0,
@@ -147,66 +147,200 @@ class FireLog extends Function {
     return cy.log(message);
   }
 
-  isNull(value, message) {
-    assert.isNull(value, message);
-  }
-
-  isNotNull(value, message) {
-    assert.isNotNull(value, message);
-  }
-
-  isUndefined(value, message) {
-    assert.isUndefined(value, message);
-  }
-
-  isTrue(value, message) {
-    assert.isTrue(value, message);
-  }
-
-  isFalse(value, message) {
-    assert.isFalse(value, message);
-  }
-
-  isOk(value, message) {
-    assert.isOk(value, message);
-  }
-
-  isNotEmpty(object, message) {
-    assert.isNotEmpty(object, message);
-  }
-
-  isBoolean(value, message) {
-    assert.isBoolean(value, message);
-  }
-
-  deepEqual(actual, expected, message) {
-    assert.deepEqual(actual, expected, message);
-  }
-
-  equal(actual, expected, message) {
-    assert.equal(actual, expected, message);
-  }
-
-  strictEqual(actual, expected, message) {
-    assert.strictEqual(actual, expected, message);
-  }
-
-  include(haystack, needle, message) {
-    cy.log(
-      message + ' ' + JSON.stringify(needle) + ' expected to be in ' + JSON.stringify(haystack)
-    );
-    assert.include(haystack, needle, message);
-  }
-  exists(value, message) {
-    assert.exists(value, message);
-  }
-
-  assert(expression, message, failureCode = 1) {
-    if (!expression) {
-      cy.task('setExitCode', failureCode).then(() => {
-        assert.fail(message);
-      });
+  isNull(value, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.isNull(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert.isNull(value, message);
     }
+  }
+
+  isNotNull(value, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.isNotNull(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert.isNotNull(value, message);
+    }
+  }
+
+  isUndefined(value, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.isUndefined(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert.isUndefined(value, message);
+    }
+  }
+
+  isTrue(value, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.isTrue(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert.isTrue(value, message);
+    }
+  }
+
+  isFalse(value, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.isFalse(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert.isFalse(value, message);
+    }
+  }
+
+  isOk(value, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.isOk(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert.isOk(value, message);
+    }
+  }
+
+  isNotEmpty(object, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.isNotEmpty(object, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert.isNotEmpty(object, message);
+    }
+  }
+
+  isBoolean(value, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.isBoolean(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert.isBoolean(value, message);
+    }
+  }
+
+  deepEqual(actual, expected, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.deepEqual(actual, expected, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert.deepEqual(actual, expected, message);
+    }
+  }
+
+  equal(actual, expected, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.equal(actual, expected, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert.equal(actual, expected, message);
+    }
+  }
+
+  strictEqual(actual, expected, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.strictEqual(actual, expected, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert.strictEqual(actual, expected, message);
+    }
+  }
+
+  include(haystack, needle, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.include(haystack, needle, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      cy.log(
+        message + ' ' + JSON.stringify(needle) + ' expected to be in ' + JSON.stringify(haystack)
+      );
+      assert.include(haystack, needle, message);
+    }
+  }
+
+  exists(value, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert.exists(value, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert.exists(value, message);
+    }
+  }
+
+  assert(expression, message, assertionType) {
+    if (assertionType === CONSTANTS.SOFT) {
+      cy.log(message);
+      try {
+        assert(expression, message);
+      } catch (error) {
+        this.errors.push(error.message);
+      }
+    } else {
+      assert(expression, message);
+    }
+  }
+
+  assertAll() {
+    if (this.errors.length > 0) {
+      throw new Error(
+        `Assertion failed with ${this.errors.length} errors: \n${this.errors.join('\n')}`
+      );
+    }
+
+    // Clear the assertions after processing
+    this.errors = [];
   }
 
   fail(message, failureCode = 1) {
