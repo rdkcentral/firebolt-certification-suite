@@ -543,6 +543,8 @@ module.exports = {
   HOT_LAUNCH: 'HOT_LAUNCH',
   COLD_LAUNCH: 'COLD_LAUNCH',
   APP_ASSURANCE_ID: 'appAssuranceId',
+  APP_VERSION: 'appVersion',
+  APP_VERSION_LABEL: 'App Version',
   DISMISSED: 'dismissed',
   CLOSED: 'closed',
   UNLOADED: 'unloaded',

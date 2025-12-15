@@ -383,7 +383,7 @@ Cypress.Commands.add('updateRunInfo', () => {
                       reportEnv.customData.data &&
                       reportEnv.customData.data.length > 0
                     ) {
-                      const envLabelMapping = {
+                      let envLabelMapping = {
                         [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                         [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
                         [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_PLATFORM_SDK_VERSION,
@@ -396,10 +396,24 @@ Cypress.Commands.add('updateRunInfo', () => {
 
                       // Add APP_ASSURANCE_ID to the mapping if it has a value
                       if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
-                        envLabelMapping[CONSTANTS.APP_ASSURANCE_ID_LABEL] = Cypress.env(
-                          CONSTANTS.APP_ASSURANCE_ID
-                        );
+                        envLabelMapping = {
+                          [CONSTANTS.APP_ASSURANCE_ID_LABEL]: Cypress.env(
+                            CONSTANTS.APP_ASSURANCE_ID
+                          ),
+                          ...envLabelMapping
+                        };
                       }
+
+                      // Add APP_VERSION_LABEL to the mapping if it has a value
+                      if (Cypress.env(CONSTANTS.APP_VERSION)) {
+                        envLabelMapping = {
+                          [CONSTANTS.APP_VERSION_LABEL]: Cypress.env(
+                            CONSTANTS.APP_VERSION
+                          ),
+                          ...envLabelMapping
+                        };
+                      }
+
                       addToEnvLabelMap(envLabelMapping);
                       const envLabelMap = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP);
 
