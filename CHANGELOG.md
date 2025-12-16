@@ -1,3 +1,10 @@
+## [1.20.1-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.20.1-dev.1...v1.20.1-dev.2) (2025-12-16)
+
+
+### Bug Fixes
+
+* update appstate validation logic ([#505](https://github.com/rdkcentral/firebolt-certification-suite/issues/505)) ([996465c](https://github.com/rdkcentral/firebolt-certification-suite/commit/996465cd012302604ae12fbfca9fd6c0a146c2ea))
+
 ## [1.20.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.20.0...v1.20.1-dev.1) (2025-12-11)
 
 
