@@ -400,17 +400,15 @@ Cypress.Commands.add('updateRunInfo', () => {
                           [CONSTANTS.APP_ASSURANCE_ID_LABEL]: Cypress.env(
                             CONSTANTS.APP_ASSURANCE_ID
                           ),
-                          ...envLabelMapping
+                          ...envLabelMapping,
                         };
                       }
 
                       // Add APP_VERSION_LABEL to the mapping if it has a value
                       if (Cypress.env(CONSTANTS.APP_VERSION)) {
                         envLabelMapping = {
-                          [CONSTANTS.APP_VERSION_LABEL]: Cypress.env(
-                            CONSTANTS.APP_VERSION
-                          ),
-                          ...envLabelMapping
+                          [CONSTANTS.APP_VERSION_LABEL]: Cypress.env(CONSTANTS.APP_VERSION),
+                          ...envLabelMapping,
                         };
                       }
 
@@ -446,6 +444,16 @@ Cypress.Commands.add('updateRunInfo', () => {
                           });
                         }
                       });
+                    }
+                    if (
+                      Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES) &&
+                      Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(
+                        Cypress.env(CONSTANTS.TEST_TYPE)
+                      )
+                    ) {
+                      reportEnv.customData.data = reportEnv?.customData?.data.filter(
+                        (item) => item && item.label !== CONSTANTS.SDK_REPORT_VERSION
+                      );
                     }
                     // write the merged object
                     cy.writeFile(tempReportEnvFile, reportEnv);
