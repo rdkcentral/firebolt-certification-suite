@@ -83,7 +83,7 @@ attachRecordingLinks = () => {
             const newLink = document.createElement('a');
             newLink.href = cleanUrl;
             newLink.target = '_blank';
-            newLink.textContent = '+ Show Video Recording';
+            newLink.textContent = '+ Show Video';
             newLink.style.margin = '0px 7px';
 
             // Insert link just after toggleLink
