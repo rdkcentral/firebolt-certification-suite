@@ -1,3 +1,24 @@
+## [1.20.1-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.20.1-dev.1...v1.20.1-dev.2) (2025-12-16)
+
+
+### Bug Fixes
+
+* update appstate validation logic ([#505](https://github.com/rdkcentral/firebolt-certification-suite/issues/505)) ([996465c](https://github.com/rdkcentral/firebolt-certification-suite/commit/996465cd012302604ae12fbfca9fd6c0a146c2ea))
+
+## [1.20.1-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.20.0...v1.20.1-dev.1) (2025-12-11)
+
+
+### Bug Fixes
+
+* Log levels from CLI args ([#510](https://github.com/rdkcentral/firebolt-certification-suite/issues/510)) ([f9e6769](https://github.com/rdkcentral/firebolt-certification-suite/commit/f9e676978a432bec59a7c98bf23dbf3e84069028))
+
+# [1.20.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.19.0...v1.20.0) (2025-12-11)
+
+
+### Features
+
+* Move relevant `fcs.xyz` functions to `cy.callConfigModule` ([4f2e30c](https://github.com/rdkcentral/firebolt-certification-suite/commit/4f2e30c7d05310491c204fffd749ed90052a34e1))
+
 # [1.20.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.19.0...v1.20.0-dev.1) (2025-11-24)
 
 

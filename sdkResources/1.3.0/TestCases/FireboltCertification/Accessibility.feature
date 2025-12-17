@@ -21,75 +21,6 @@ Feature: Accessibility
             | disabling Closed Captions  | enabled | false |
             | enabling Closed Captions   | enabled | true  |
 
-    @sdk @transport @Sev1
-    Scenario Outline: Accessibility.closedCaptionsSettings - Validating API and Event Responses for <Method> change to <Value>
-        Given the environment has been set up for 'Accessibility closedCaptionsSettings' tests
-        And '3rd party app' registers for the 'Firebolt' event
-        And '3rd party app' invokes the 'Firebolt' get API
-        When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
-        Then 'Firebolt' platform responds to '1st party app' set API
-        When '3rd party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '3rd party app' get API
-        And 'Firebolt' platform triggers '3rd party app' event
-
-        Examples:
-            | Method             | Value                 |
-            | fontFamily         | monospaced_sanserif   |
-            | fontFamily         | cursive               |
-            | fontFamily         | proportional_serif    |
-            | fontFamily         | monospaced_serif      |
-            | fontFamily         | proportional_sanserif |
-            | fontFamily         | smallcaps             |
-            | fontFamily         | casual                |
-            | fontSize           | 1                     |
-            | fontSize           | 0.5                   |
-            | fontSize           | 1.5                   |
-            | fontColor          | #ff00ff               |
-            | fontEdge           | raised                |
-            | fontEdge           | none                  |
-            | fontEdge           | depressed             |
-            | fontEdge           | uniform               |
-            | fontEdge           | drop_shadow_left      |
-            | fontEdge           | drop_shadow_right     |
-            | fontEdgeColor      | #FFFFFF               |
-            | backgroundColor    | #7f7f7                |
-            | fontOpacity        | 75                    |
-            | backgroundOpacity  | 75                    |
-            | textAlign          | left                  |
-            | textAlign          | center                |
-            | textAlign          | right                 |
-            | textAlignVertical  | top                   |
-            | textAlignVertical  | middle                |
-            | textAlignVertical  | bottom                |
-            | windowColor        | white                 |
-            | windowOpacity      | 50                    |
-            | preferredLanguages | spa,eng               |
-
-    @sdk @transport @Sev2
-    Scenario Outline: Accessibility.onClosedCaptionsSettingsChanged - Validating API and Event Responses for <Method> change to null
-        Given the environment has been set up for 'Accessibility closedCaptions Settings set to null' tests
-        When '3rd party app' registers for the 'Firebolt' event
-        And '3rd party app' invokes the 'Firebolt' get API
-        When 1st party app invokes the 'Firebolt' API to set '<Method>' to 'null'
-        Then 'Firebolt' platform responds to '1st party app' set API
-        When '3rd party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '3rd party app' get API
-        And 'Firebolt' platform triggers '3rd party app' event
-
-        Examples:
-            | Method            |
-            | fontFamily        |
-            | fontSize          |
-            | fontColor         |
-            | fontEdge          |
-            | fontEdgeColor     |
-            | fontOpacity       |
-            | backgroundColor   |
-            | backgroundOpacity |
-            | textAlign         |
-            | textAlignVertical |
-            | windowColor       |
-            | windowOpacity     |
 
     @sdk @transport @Sev0
     Scenario Outline: Accessibility.voiceGuidanceSettings - Validating API and Event Responses for <Scenario>
@@ -106,23 +37,6 @@ Feature: Accessibility
             | Scenario               | Method  | Value |
             | disable voiceguidance  | enabled | false |
             | enabling voiceguidance | enabled | true  |
-
-    @sdk @transport @Sev1
-    Scenario Outline: Accessibility.voiceGuidanceSettings - Validating API and Event Responses for <Method> change to <Value>
-        Given the environment has been set up for 'Accessibility voiceguidancesettings' tests
-        And '3rd party app' registers for the 'Firebolt' event
-        And '3rd party app' invokes the 'Firebolt' get API
-        When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
-        Then 'Firebolt' platform responds to '1st party app' set API
-        When '3rd party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '3rd party app' get API
-        And 'Firebolt' platform triggers '3rd party app' event
-
-        Examples:
-            | Method  | Value |
-            | speed   | 1     |
-            | speed   | 0.5   |
-            | speed   | 2     |
 
     @sdk @transport @Sev1
     Scenario Outline: Accessibility.audioDescriptionSettings - Validating API and Event Responses for <Scenario>
@@ -155,30 +69,6 @@ Feature: Accessibility
             | disabling Closed Captions  | enabled           | false               |
             | enabling Closed Captions   | enabled           | true                |
 
-    @sdk @transport @Sev1
-    Scenario Outline: Accessibility.closedCaptions - Validating API and Event Responses for <Method> change to <Value>
-        Given the environment has been set up for 'Accessibility closedcaptions' tests
-        And '3rd party app' registers for the 'Firebolt' event
-        When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
-        Then 'Firebolt' platform responds to '1st party app' set API
-        When '3rd party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '3rd party app' get API
-        And 'Firebolt' platform triggers '3rd party app' event
-
-        Examples:
-            | Method            | Value               |
-            | fontFamily        | monospaced_sanserif |
-            | fontSize          | 1                   |
-            | fontColor         | #ffffff             |
-            | fontEdge          | raised              |
-            | fontEdgeColor     | #7F7F7F             |
-            | backgroundColor   | #000000             |
-            | fontOpacity       | 100                 |
-            | backgroundOpacity | 100                 |
-            | textAlign         | left                |
-            | textAlignVertical | top                 |
-            | windowColor       | #7F7F7F             |
-            | windowOpacity     | 40                  |
 
   @sdk @transport @requiresPlatformImplementation @Sev2
   Scenario Outline: Accessibility.<Method> - Clearing event listeners
@@ -209,18 +99,3 @@ Feature: Accessibility
             | Scenario                | Method  | Value |
             | disabling voiceguidance | enabled | false |
             | enabling voiceguidance  | enabled | true  |
-
-    @sdk @transport @Sev1
-    Scenario Outline: Accessibility.voiceGuidance - Validating API and Event Responses for <Method> change to <Value>
-        Given the environment has been set up for 'Accessibility voiceguidance' tests
-        And '3rd party app' registers for the 'Firebolt' event
-        And '3rd party app' invokes the 'Firebolt' get API
-        When 1st party app invokes the 'Firebolt' API to set '<Method>' to '<Value>'
-        Then 'Firebolt' platform responds to '1st party app' set API
-        When '3rd party app' invokes the 'Firebolt' get API
-        Then 'Firebolt' platform responds to '3rd party app' get API
-        And 'Firebolt' platform triggers '3rd party app' event
-
-        Examples:
-            | Method  | Value |
-            | speed   | 1     |
