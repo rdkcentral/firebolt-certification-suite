@@ -9,6 +9,7 @@
     "data": [
       { "label": "App Name", "value": "N/A" },
       { "label": "App Version", "value": "N/A" },
+      { "label": "Device Mac", "value": "N/A" },
       { "label": "Product", "value": "N/A" },
       { "label": "App SDK Version", "value": "N/A" },
       { "label": "Platform Firebolt Version", "value": "N/A" },

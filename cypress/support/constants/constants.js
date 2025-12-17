@@ -118,6 +118,7 @@ module.exports = {
   ENV_RELEASE: 'release',
   ENV_DEVICE_FIRMWARE: 'deviceFirmware',
   ENV_DEVICE_ID: 'deviceId',
+  ENV_DEVICE_MAC: 'deviceMac',
   ENV_DEVICE_MODEL: 'deviceModel',
   ENV_DEVICE_DISTRIBUTOR: 'deviceDistributor',
   ENV_PARTNER: 'partner',
@@ -347,6 +348,7 @@ module.exports = {
   PARTNER: 'Partner',
   PRODUCT: 'Product',
   DEVICEID_ENV: 'DeviceId',
+  DEVICE_MAC_LABEL: 'Device Mac',
   APP_ASSURANCE_ID_LABEL: 'App Name',
   PREREQUISITE_DATA: 'PreRequisiteData.json',
   PUB_SUB_URL: 'pubSubUrl', // Env Var for the URL for the Default Module's pubSub implementation

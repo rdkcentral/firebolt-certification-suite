@@ -392,6 +392,8 @@ Cypress.Commands.add('updateRunInfo', () => {
                         [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                         [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
                         [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
+                        [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
+                        [CONSTANTS.DEVICE_MAC_LABEL]: CONSTANTS.ENV_DEVICE_MAC,
                       };
 
                       // Add APP_ASSURANCE_ID to the mapping if it has a value
