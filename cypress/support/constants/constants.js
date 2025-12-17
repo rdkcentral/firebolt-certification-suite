@@ -551,6 +551,7 @@ module.exports = {
     PLAYBACK: 'playback',
   },
   SUPPORTS_PLATFORM_COMMUNICATION: 'supportsPlatformCommunication',
+  SOFT: 'soft',
   FCS_EXIT_CODE: {
     SUCCESS: 0,
     GENERAL_FAILURE: 1,
