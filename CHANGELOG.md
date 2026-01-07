@@ -1,3 +1,10 @@
+# [1.21.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.21.0-dev.1...v1.21.0-dev.2) (2026-01-07)
+
+
+### Features
+
+* Add firelog-softassert support ([#509](https://github.com/rdkcentral/firebolt-certification-suite/issues/509)) ([187c4fa](https://github.com/rdkcentral/firebolt-certification-suite/commit/187c4faa95ee4aeaf0aeed574af670ccf14b9b02))
+
 # [1.21.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.20.1-dev.2...v1.21.0-dev.1) (2026-01-07)
 
 
