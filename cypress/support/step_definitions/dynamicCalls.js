@@ -452,7 +452,7 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
       const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
       const validationObject = UTILS.resolveRecursiveValues(fireboltData);
       cy.methodOrEventResponseValidation(type, validationObject).then(() => {
-        cy.softAssertAll(); // Ensure all assertions are checked
+        fireLog.assertAll(); // Ensure all assertions are checked
       });
     } else {
       fireLog.error(
@@ -461,5 +461,5 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
     }
   });
   // Ensure all soft assertions are executed
-  cy.softAssertAll();
+  fireLog.assertAll();
 });

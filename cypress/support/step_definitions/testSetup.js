@@ -175,7 +175,7 @@ Given(
         Cypress.env(CONSTANTS.INTENT_TEMPLATES, combinedIntentTemplates);
       });
     }
-    cy.softAssertAll();
+    fireLog.assertAll();
   }
 );
 
