@@ -1,3 +1,15 @@
+# [1.21.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.20.1-dev.2...v1.21.0-dev.1) (2026-01-07)
+
+
+### Bug Fixes
+
+* Remove testcases ([#507](https://github.com/rdkcentral/firebolt-certification-suite/issues/507)) ([2f977dc](https://github.com/rdkcentral/firebolt-certification-suite/commit/2f977dc51d43f2bfbe7900199453eb86f3c57462))
+
+
+### Features
+
+* Update all cli arguments in Report metadata ([#506](https://github.com/rdkcentral/firebolt-certification-suite/issues/506)) ([b8bbca1](https://github.com/rdkcentral/firebolt-certification-suite/commit/b8bbca1f1aad69856f7c8b4c8b1b8c9cc60b7a76))
+
 ## [1.20.1-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.20.1-dev.1...v1.20.1-dev.2) (2025-12-16)
 
 
