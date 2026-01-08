@@ -67,48 +67,50 @@ export default function (module) {
       cy.startAdditionalServices();
     });
 
-    // Create an instance of global queue
-    const messageQueue = new Queue();
-    Cypress.env(CONSTANTS.MESSAGE_QUEUE, messageQueue);
-    UTILS.parseExceptionList();
-    cy.getModuleReqIdJson();
-    if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) == true) {
-      cy.startOrStopPerformanceService(CONSTANTS.INITIATED).then((response) => {
-        if (response) {
-          Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, true);
-        }
-      });
-    } else {
-      cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
-    }
-    // Merge fireboltCalls - Commented temporarily. Moved to beforeEach
-    // const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
-    // const v2FireboltCallsData = _.merge(
-    //   {},
-    //   internalV2FireboltCallsData,
-    //   externalV2FireboltCallsData
-    // );
+    cy.then(async () => {
+      // Create an instance of global queue
+      const messageQueue = new Queue();
+      Cypress.env(CONSTANTS.MESSAGE_QUEUE, messageQueue);
+      UTILS.parseExceptionList();
+      cy.getModuleReqIdJson();
+      if (UTILS.getEnvVariable(CONSTANTS.PERFORMANCE_METRICS) == true) {
+        cy.startOrStopPerformanceService(CONSTANTS.INITIATED).then((response) => {
+          if (response) {
+            Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, true);
+          }
+        });
+      } else {
+        cy.log(CONSTANTS.PERFORMANCE_METRICS_NOT_ACTIVE);
+      }
+      // Merge fireboltCalls - Commented temporarily. Moved to beforeEach
+      // const v1FireboltCallsData = UTILS.getEnvVariable('fireboltCallsJson');
+      // const v2FireboltCallsData = _.merge(
+      //   {},
+      //   internalV2FireboltCallsData,
+      //   externalV2FireboltCallsData
+      // );
 
-    // cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
-    //   (mergedFireboltCalls) => {
-    //     Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
-    //   }
-    // );
+      // cy.mergeFireboltCallJsons(v1FireboltCallsData, v2FireboltCallsData).then(
+      //   (mergedFireboltCalls) => {
+      //     Cypress.env(CONSTANTS.COMBINEDFIREBOLTCALLS, mergedFireboltCalls);
+      //   }
+      // );
 
-    // Merge fireboltMocks
-    const v1FireboltMockData = UTILS.getEnvVariable('fireboltMocksJson');
-    const combinedFireboltMockData = {
-      ...v1FireboltMockData,
-      ...internalV2FireboltMockData,
-      ...externalV2FireboltMockData,
-    };
+      // Merge fireboltMocks
+      const v1FireboltMockData = UTILS.getEnvVariable('fireboltMocksJson');
+      const combinedFireboltMockData = {
+        ...v1FireboltMockData,
+        ...internalV2FireboltMockData,
+        ...externalV2FireboltMockData,
+      };
 
-    Cypress.env(CONSTANTS.COMBINEDFIREBOLTMOCKS, combinedFireboltMockData);
+      Cypress.env(CONSTANTS.COMBINEDFIREBOLTMOCKS, combinedFireboltMockData);
 
-    // Unflatten the openRPC data
-    const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
-    const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
-    Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
+      // Unflatten the openRPC data
+      const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
+      const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
+      Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
+    });
   });
 
   // beforeEach
