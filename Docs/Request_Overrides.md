@@ -358,7 +358,9 @@ Example:
   method: 'fcs.sendKeyPress',
   params: { 
     key: <keyCode>, 
-    delay: <delay in seconds> }
+    delay: <delay in seconds> 
+    optionalParams: {}
+  }
 }
 ```
 
@@ -369,7 +371,9 @@ Example:
   method: 'fcs.sendKeyPress',
   params: { 
     key: 'enter',
-    delay: 5 }
+    delay: 5,
+    {duration: 5}
+  }
 }
 ```
 ### Response override
