@@ -1975,13 +1975,18 @@ Cypress.Commands.add('extractAppMetadata', (appDataDir, appMetaDataFile) => {
  */
 Cypress.Commands.add('softAssert', (actual, expected, message) => {
   jsonAssertion.softAssert(actual, expected, message);
-
   if (jsonAssertion && jsonAssertion.jsonDiffArray && jsonAssertion.jsonDiffArray.length) {
     jsonAssertion.jsonDiffArray.forEach((diff) => {
+      console.log('Soft assertion error:::', diff.error.message);
+      // Extract message that contains "Custom Message:" and "Soft assertion failed:"
+      const filteredMessage = error?.message
+        .split('\n')
+        .find((line) => line.includes('Custom Message:'));
+
       Cypress.log({
         name: 'Soft assertion error',
         displayName: 'softAssert',
-        message: diff.error.message,
+        message: filteredMessage || diff.error.message,
       });
     });
   } else {
