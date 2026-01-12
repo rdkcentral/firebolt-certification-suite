@@ -51,8 +51,8 @@ function addOrChangeConfigModule(configModuleUrl) {
 // argv[0] is "node". argv[1] is the path to this file
 if (process.argv.length != 3) {
   console.log(
-    'Invalid format. Required script format: "node ./changeConfigModule.js <configModuleUrl>"\n' +
-      'Ex: "node ./changeConfigModule.js "git+ssh://git@github.com/myOrg/myConfigModule"'
+    'Invalid format. Required script format: "node ./Scripts/changeConfigModule.js <configModuleUrl>"\n' +
+      'Ex: "node ./Scripts/changeConfigModule.js "git+ssh://git@github.com/myOrg/myConfigModule"'
   );
   process.exit(1);
 }

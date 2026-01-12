@@ -21,7 +21,8 @@
     "postinstall": "npm run setup",
     "format": "prettier --write \"**/*.js\"",
     "lint": "eslint .",
-    "test": "jest --config ./cypress/support/cypress-support/test/jest.config.js"
+    "test": "jest --config ./cypress/support/cypress-support/test/jest.config.js",
+    "install": "node ./Scripts/installDependencies.js"
   },
   "keywords": [],
   "author": "Comcast Firebolt Certification Team",
