@@ -16,6 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+// Ignore all console logs, will be removed before final review
 console.log(">>>>> Install dependencies script");
 
 const fs = require('fs');
