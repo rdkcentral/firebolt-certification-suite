@@ -37,8 +37,6 @@ try {
         if (dependencies) {
             const extractedUrl = dependencies.configModule;
             const [configModuleUrl, configModulebranch] = extractedUrl.split('#');
-            const fcsBranch = execSync('git branch --show-current', {encoding: 'utf8'}).trim();
-            console.log(">>> fcsBranch: ", fcsBranch);
             !configModulebranch ? configModulebranch = 'dev' : null;
             if (configModuleUrl != "./defaultModule") {
                 const cloneCmd = `git clone --branch ${configModulebranch} --single-branch ${configModuleUrl} ${TEMP_CONFIG_DIR}`;
@@ -64,7 +62,7 @@ try {
                 }
             } else {
                 console.info('Using default configModule. Proceeding with regular installation.');
-                execSync('npm ci', { stdio: [0, 1, 2] })
+                execSync('yarn install --ignore-scripts', { stdio: [0, 1, 2] })
             }
         } else {
             throw new Error('Dependencies not found in package.json');
@@ -72,5 +70,5 @@ try {
     }
 } catch (error) {
     console.warn('Error installing locked dependencies. Reverting to regular installation: ', error);
-    execSync('yarn install', { stdio: [0, 1, 2] })
+    execSync('yarn install --ignore-scripts', { stdio: [0, 1, 2] })
 }
