@@ -30,7 +30,9 @@ try {
  */
 
 class FireLog extends Function {
-  constructor() {
+  constructor(currentLevel) {
+    console.log("Firelog level set to: ", currentLevel);
+    
     // Creating the function body dynamically
     const functionBody = `
       return function (...args) {
@@ -46,19 +48,10 @@ class FireLog extends Function {
       info: 2,
       debug: 3,
     };
-    let currentLevel;
-    let consoleLevel;
 
-    if (typeof getEnvVariable === 'function') {
-      currentLevel = getEnvVariable(CONSTANTS.LOGGER_LEVEL, false); // log level to display
-      consoleLevel = getEnvVariable(CONSTANTS.CONSOLE_LOGGER_LEVEL, false);
-    } else {
-      // TODO: Make an arrangement to set this log level from command line env variable
-      currentLevel = 'info'; // log level to display
-      consoleLevel = 'info';
-    }
+    this.currentLevel = currentLevel;
+    this.consoleLevel = currentLevel;
 
-    if (!consoleLevel) consoleLevel = currentLevel;
     const handler = {
       apply: function (target, thisArg, argumentsList) {
         let message;
@@ -67,23 +60,19 @@ class FireLog extends Function {
           // If the method has its own logging, just apply it
           return Reflect.apply(target, thisArg, argumentsList);
         } else {
-          if (argumentsList.length > 3)
+          if (argumentsList.length === 0) {
+            // No arguments, skip logging and just execute the method
+            return Reflect.apply(target, thisArg, argumentsList);
+          } else if (argumentsList.length > 3)
             message =
-              'Expected: ' +
-              JSON.stringify(argumentsList[0]) +
+              argumentsList[2] +
+              ' Expected: ' +
+              JSON.stringify(argumentsList[1]) +
               ' Actual: ' +
-              'Expected : ' +
-              JSON.stringify(argumentsList[2]) +
-              ' Actual : ' +
-              JSON.stringify(argumentsList[1]);
+              JSON.stringify(argumentsList[0]);
           else if (argumentsList.length == 3) message = argumentsList[2];
           else if (argumentsList.length == 1) message = argumentsList[0];
           else if (argumentsList.length == 2) message = argumentsList[1];
-          else
-            message =
-              argumentsList[argumentsList.length - 1] +
-              ' Actual: ' +
-              JSON.stringify(argumentsList[0]);
           return cy.log(message).then(() => {
             return Reflect.apply(target, thisArg, argumentsList);
           });
@@ -118,7 +107,7 @@ class FireLog extends Function {
       instanceProxy[level] = (
         message,
         logOutputLocation = 'console',
-        consoleLoggerLevel = consoleLevel
+        consoleLoggerLevel = this.consoleLevel
       ) => {
         const prefix = `[${level}]`;
         const fullMessage = `${prefix} ${message}`;
@@ -130,7 +119,7 @@ class FireLog extends Function {
         let cypressLogPromise = null;
 
         // Check if logOutputLocation is 'report' and log using cy.log based on loggerLevel
-        if (logOutputLocation === 'report' && levelPriority[level] <= levelPriority[currentLevel]) {
+        if (logOutputLocation === 'report' && levelPriority[level] <= levelPriority[this.currentLevel]) {
           cypressLogPromise = cy.log(fullMessage);
         }
 
@@ -147,10 +136,6 @@ class FireLog extends Function {
     });
 
     return fireLogProxy;
-  }
-
-  setLevel(level) {
-    this.currentLevel = level;
   }
 
   // Method to log a message without any assertion
@@ -212,12 +197,57 @@ class FireLog extends Function {
     assert.exists(value, message);
   }
 
-  assert(expression, message, failureCode = 1) {
-    if (!expression) {
+  /**
+   * Perform assertion with optional soft assert support.
+   * Supports both hard assertions (test fails immediately) and soft assertions (failures are collected and reported later).
+   *
+   * @param {*} actual - The actual value or boolean expression to be evaluated
+   * @param {*} expected - The expected value to compare against (or message for backward compatibility)
+   * @param {string} message - The assertion message to display on failure
+   * @param {boolean} softAssert - If true, performs soft assertion (collects failures); if false/undefined, performs hard assertion (fails immediately)
+   * @param {number} failureCode - Exit code to set on hard assertion failure (default: 1). Only used when softAssert is false
+   *
+   * @example
+   * // Backward compatible - Hard assertion with boolean expression
+   * fireLog.assert(false, 'Error message');
+   *
+   * // Soft assertion with boolean - failure is collected but test continues
+   * fireLog.assert(false, true, 'Validation failed', true);
+   *
+   * // Soft assertion with string comparison
+   * fireLog.assert('fail', 'pass', 'Screenshot validation failed via OCR', true);
+   */
+  assert(actual, expected, message, softAssert, failureCode = 1) {
+    // Handle backward compatibility: if only 2 params provided and first is boolean
+    if (arguments.length === 2 && typeof actual === 'boolean') {
+      // assert(expression, message) - Hard assertion
+      message = expected;
+    }
+
+    if (softAssert === true) {
+      cy.softAssert(actual, expected, message);
+    } else if (!actual) {
       cy.task('setExitCode', failureCode).then(() => {
         assert.fail(message);
       });
     }
+  }
+
+  /**
+   * Validates all collected soft assertions and fails the test if any soft assertions failed.
+   * This method should be called after performing one or more soft assertions using fireLog.assert() with softAssert=true.
+   * If any soft assertions have failed, this will cause the test to fail and display all collected failure messages.
+   *
+   * @example
+   * // Perform multiple soft assertions
+   * fireLog.assert('fail', 'pass', 'First validation failed', true);
+   * fireLog.assert(false, true, 'Second validation failed', true);
+   *
+   * // Validate all soft assertions at the end
+   * fireLog.assertAll(); // Test will fail if any of the above soft assertions failed
+   */
+  assertAll() {
+    cy.softAssertAll();
   }
 
   fail(message, failureCode = 1) {
@@ -228,6 +258,7 @@ class FireLog extends Function {
   }
 }
 
-const fireLog = new FireLog();
+const loggerLevelFromEnv = process.env.loggerLevel || 'info';
+const fireLog = new FireLog(loggerLevelFromEnv);
 global.fireLog = fireLog;
 module.exports = { fireLog };

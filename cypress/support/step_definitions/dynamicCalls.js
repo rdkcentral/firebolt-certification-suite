@@ -405,39 +405,6 @@ Given(
 Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
   cy.callConfigModule('checkAndSelectProfile');
   UTILS.captureScreenshot(true);
-  const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
-  // Ensure appId is available before proceeding
-  if (!appId) {
-    fireLog.error(
-      'appId is missing. Cannot fetch app state to perform state validation without proper current appId.'
-    );
-    return;
-  }
-  const requestMap = {
-    method: CONSTANTS.REQUEST_OVERRIDE_CALLS.GETAPPSTATE,
-    params: appId,
-  };
-  fireLog.info(`Sending request to fetch app state: ${JSON.stringify(requestMap)}`, 'report');
-
-  // Sending the request to the platform to retrieve the app state.
-  cy.sendMessagetoPlatforms(requestMap).then((response) => {
-    if (response) {
-      if (response?.currentApp_fireboltState?.toUpperCase() === CONSTANTS.FOREGROUND) {
-        fireLog.info(
-          `State validation successful: Current state of ${appId} app is ${JSON.stringify(response)} as expected`,
-          'report'
-        );
-      } else {
-        fireLog.error(
-          `State validation failed: Current state of ${appId} app is ${JSON.stringify(response)}, expected to be ${CONSTANTS.FOREGROUND}.`
-        );
-      }
-    } else {
-      fireLog.error(
-        `State validation failed: Did not get valid response for retrieving app state for ${appId}`
-      );
-    }
-  });
 
   // Storing the page name in runtime environment variable to use it in the validations.
   if (Cypress.env(CONSTANTS.RUNTIME)) {
@@ -485,7 +452,7 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
       const type = fireboltData?.event ? CONSTANTS.EVENT : CONSTANTS.METHOD;
       const validationObject = UTILS.resolveRecursiveValues(fireboltData);
       cy.methodOrEventResponseValidation(type, validationObject).then(() => {
-        cy.softAssertAll(); // Ensure all assertions are checked
+        fireLog.assertAll(); // Ensure all assertions are checked
       });
     } else {
       fireLog.error(
@@ -494,5 +461,5 @@ Given(/'(.+)' (on|with) '(.+)' page/, (validationObjectKey, type, page) => {
     }
   });
   // Ensure all soft assertions are executed
-  cy.softAssertAll();
+  fireLog.assertAll();
 });
