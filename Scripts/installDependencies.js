@@ -45,13 +45,13 @@ try {
                 if (fs.existsSync(CONFIG_DEPENDENCIES_DIR)) {
                     if (fs.existsSync(EXTERNAL_NPM_LOCK_FILE)) {
                         fs.copyFileSync(EXTERNAL_NPM_LOCK_FILE, PROJECT_ROOT_DIR + '/package-lock.json');
-                        execSync('rm', ['-rf', TEMP_CONFIG_DIR], { stdio: [0, 1, 2] });
+                        execSync('rm -rf ' + TEMP_CONFIG_DIR, { stdio: [0, 1, 2] });
                         console.info('Installing dependencies using npm ci');
                         execSync('npm ci', { stdio: [0, 1, 2] })
                     }
                     else if (fs.existsSync(EXTERNAL_YARN_LOCK_FILE)) {
                         fs.copyFileSync(EXTERNAL_YARN_LOCK_FILE, PROJECT_ROOT_DIR + '/yarn.lock');
-                        execSync('rm', ['-rf', TEMP_CONFIG_DIR], { stdio: [0, 1, 2] });
+                        execSync('rm -rf ' + TEMP_CONFIG_DIR, { stdio: [0, 1, 2] });
                         console.info('Installing dependencies using yarn install --frozen-lockfile');
                         execSync('yarn install --frozen-lockfile', { stdio: [0, 1, 2] })
                     }
