@@ -1618,7 +1618,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
               appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID) &&
               UTILS.getEnvVariable(CONSTANTS.IS_BIDIRECTIONAL_SDK)
             ) {
-              if (Object.values(response.result)[0] !== null) {
+              if (Object.values(response?.result)[0] !== null) {
                 // Check if the response is an object and has method and params properties
                 // eg: {method: "event.onMethodName", params: {key: "new value"}}
                 if (
