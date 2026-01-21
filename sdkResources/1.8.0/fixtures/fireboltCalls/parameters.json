@@ -1,0 +1,294 @@
+{
+    "SET_PRIVACY_ALLOWAPPCONTENTADTARGETING_WITH_TRUE": {
+        "method": "manage_privacy.setAllowAppContentAdTargeting",
+        "params": "TRUE"
+    },
+    "SET_PRIVACY_ALLOWAPPCONTENTADTARGETING_WITH_FALSE": {
+        "method": "manage_privacy.setAllowAppContentAdTargeting",
+        "params": "FALSE"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_NULL_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_NULL"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_HOME_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_PLAYBACK_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYBACK"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_ENTITY_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_ENTITY"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_LAUNCH_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_SEARCH_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SEARCH"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_SECTION_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SECTION"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_TUNE_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_TUNE"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_PLAYENTITY_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYENTITY"
+    },
+    "GET_INITIALIZATION_PARAMETERS_FOR_PLAYQUERY_INTENT": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYQUERY"
+    },
+    "NULLINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_NULL",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_NULLINTENT"
+    },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT"
+    },
+    "LAUNCHINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_DEVICE": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_LAUNCHINTENT_SOURCE_DEVICE"
+    },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_VOICE": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_VOICE"
+    },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_EDITORIAL-MERCHANDISING": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_EDITORIAL-MERCHANDISING"
+    },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_SEARCH": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_SEARCH"
+    },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_AUTOMATED-RAIL": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_AUTOMATED-RAIL"
+    },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_PLAY-NOW-RAIL": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_PLAY-NOW-RAIL"
+    },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_PLAYLIST-RAIL": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_PLAYLIST-RAIL"
+    },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_SHOWPAGE": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_SHOWPAGE"
+    },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_APPS-RAIL-LAUNCH": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_APPS-RAIL-LAUNCH"
+    },
+    "HOMEINTENT_FOR_INITIALIZATION_PARAMETERS_SOURCE_LINEAR-TRIGGER": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_HOME",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_HOMEINTENT_SOURCE_LINEAR-TRIGGER"
+    },
+    "PLAYBACKINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYBACK",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYBACKINTENT"
+    },
+    "PLAYBACKINTENT_FOR_INITIALIZATION_PARAMETERS_WITHOUT_ENTITYTYPE": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYBACK",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYBACKINTENT_WITHOUT_ENTITYTYPE"
+    },
+    "PLAYENTITY_FOR_INITIALIZATION_PARAMETERS_WITHOUT_ENTITYTYPE_FOR_MOVIEENTITY": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYENTITY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_MOVIEENTITY"
+    },
+    "PLAYENTITY_FOR_INITIALIZATION_PARAMETERS_WITHOUT_ENTITYTYPE_FOR_TVEPISODEENTITY": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYENTITY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYENTITY_WITHOUT_ENTITYTYPE_FOR_TVEPISODEENTITY"
+    },
+    "ENTITYINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_ENTITY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_ENTITYINTENT"
+    },
+    "LAUNCHINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_LAUNCHINTENT"
+    },
+    "SEARCHINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SEARCH",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_SEARCHINTENT"
+    },
+    "SECTIONINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_SECTION",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_SECTIONINTENT"
+    },
+    "TUNEINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_TUNE",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_TUNEINTENT"
+    },
+    "PLAYENTITYINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYENTITY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT"
+    },
+    "PLAYQUERYINTENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYQUERY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT"
+    },
+    "PLAYQUERYINTENT_MUSICTYPE_SONG_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYQUERY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_MUSICTYPE_SONG"
+    },
+    "PLAYQUERYINTENT_MUSICTYPE_ALBUM_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYQUERY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_MUSICTYPE_ALBUM"
+    },
+    "PLAYQUERYINTENT_PROGRAMTYPE_CONCERT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYQUERY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_CONCERT"
+    },
+    "PLAYQUERYINTENT_PROGRAMTYPE_SPORTINGEVENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYQUERY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_SPORTINGEVENT"
+    },
+    "PLAYQUERYINTENT_PROGRAMTYPE_PREVIEW_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYQUERY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_PREVIEW"
+    },
+    "PLAYQUERYINTENT_PROGRAMTYPE_OTHER_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYQUERY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_OTHER"
+    },
+    "PLAYQUERYINTENT_PROGRAMTYPE_ADVERTISEMENT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYQUERY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_ADVERTISEMENT"
+    },
+    "PLAYQUERYINTENT_PROGRAMTYPE_MUSICVIDEO_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYQUERY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_MUSICVIDEO"
+    },
+    "PLAYQUERYINTENT_PROGRAMTYPE_MINISODE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYQUERY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_MINISODE"
+    },
+    "PLAYQUERYINTENT_PROGRAMTYPE_EXTRA_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYQUERY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYQUERYINTENT_PROGRAMTYPE_EXTRA"
+    },
+    "PLAYENTITYINTENT_WITH_PROGRAMTYPE_MOVIE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYENTITY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITH_PROGRAMTYPE_MOVIE"
+    },
+    "PLAYENTITYINTENT_WITH_PROGRAMTYPE_EPISODE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYENTITY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITH_PROGRAMTYPE_EPISODE"
+    },
+    "PLAYENTITYINTENT_WITH_PROGRAMTYPE_CONCERT_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYENTITY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITH_PROGRAMTYPE_CONCERT"
+    },
+    "PLAYENTITYINTENT_WITHOUT_OPTIONS_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYENTITY",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_INITIALIZATION_PLAYENTITYINTENT_WITHOUT_OPTIONS"
+    },
+    "PARAMETERS_INITIALIZATION_ADVERTISINGID_AD_OFF": {
+		"method": "parameters.initialization",
+		"validationJsonPath": "result",
+		"content": "ADVERTISING_ADVERTISINGID_ADOFF"
+	},
+    "PARAMETERS_INITIALIZATION_ADVERTISINGID_AD_ON": {
+		"method": "parameters.initialization",
+		"validationJsonPath": "result",
+		"content": "ADVERTISING_ADVERTISINGID_ADON"
+	},
+    "NULLINTENT_SOURCE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_NULL",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_HOMEINTENT_SOURCE"
+    },
+    "PLAYBACKINTENT_SOURCE_FOR_INITIALIZATION_PARAMETERS": {
+        "method": "parameters.initialization",
+        "context": "DISCOVERY_LAUNCH_PLAYBACK",
+        "validationJsonPath": "result.discovery",
+        "content": "PARAMETERS_PLAYBACKINTENT_SOURCE"
+    }
+}
