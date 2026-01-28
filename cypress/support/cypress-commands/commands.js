@@ -2148,6 +2148,7 @@ Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
 Cypress.Commands.add('sendKeyPress', (key, delay, optionalParams, additionalWaitTime) => {
   delay = delay ? delay : 5;
   additionalWaitTime = additionalWaitTime ? additionalWaitTime + 10000 : 10000;
+  optionalParams = optionalParams ? optionalParams : {};
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
     params: { key: key, delay: delay, ...optionalParams },
