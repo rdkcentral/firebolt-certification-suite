@@ -85,6 +85,7 @@ attachRecordingLinks = () => {
             newLink.target = '_blank';
             newLink.textContent = '+ Show Video';
             newLink.style.margin = '0px 7px';
+            newLink.rel = 'noopener noreferrer';
 
             // Insert link just after toggleLink
             toggleLink.parentNode.insertBefore(newLink, toggleLink.nextSibling);

@@ -1928,7 +1928,7 @@ Cypress.Commands.add('fetchAppMetaData', () => {
     } else {
       if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
         // Send the request to fetch app data from platforms
-        cy.callConfigModule(CONSTANTS.GETAPPDATA).then((result) => {
+        return cy.callConfigModule(CONSTANTS.GETAPPDATA).then((result) => {
           if (result && result.data) {
             return result.data;
           } else {
@@ -1945,7 +1945,7 @@ Cypress.Commands.add('fetchAppMetaData', () => {
         const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
         // Extract internal app metadata
-        cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
+        return cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
           (fcsAppMetaData) => {
             // Check if internal app metadata extraction was successful
             if (!fcsAppMetaData) {
@@ -1953,7 +1953,7 @@ Cypress.Commands.add('fetchAppMetaData', () => {
             }
 
             // Extract external app metadata
-            cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
+            return cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
               (configModuleAppMetaData) => {
                 // Check if external app metadata extraction was successful
                 if (!configModuleAppMetaData) {
@@ -1963,6 +1963,7 @@ Cypress.Commands.add('fetchAppMetaData', () => {
                 // Merge internal and external app metadata
                 try {
                   _.merge(fcsAppMetaData, configModuleAppMetaData);
+                  return fcsAppMetaData;
                 } catch (mergeError) {
                   throw new Error(`Error merging app metadata: ${mergeError.message}`);
                 }
