@@ -43,7 +43,7 @@ Given(
     let supportedIntents = [];
     if (app_metadata && app_metadata.apps) {
       const appId =
-        appCallSign == undefined
+        appCallSign === undefined || appCallSign === null
           ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
           : UTILS.checkForSecondaryAppId(appCallSign);
       const app = app_metadata.apps.find((app) => app[appId]);

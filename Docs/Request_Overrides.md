@@ -358,7 +358,7 @@ Example:
   method: 'fcs.sendKeyPress',
   params: { 
     key: <keyCode>, 
-    delay: <delay in seconds> 
+    delay: <delay in seconds>,
     optionalParams: {}
   }
 }

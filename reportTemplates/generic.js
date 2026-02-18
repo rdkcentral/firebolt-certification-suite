@@ -56,7 +56,7 @@ showAll = () => {
 };
 
 attachRecordingLinks = () => {
-  // Define regular expression to match the img URL pattern
+  // Define regular expression to match the video URL pattern
   const videoPattern = /Video Recording:\s*(https:\/\/[^\s]+\.mp4(?:\?[^\s]*)?)/g;
   const videoUrlPattern = /(https:\/\/[^\s]+\.mp4(?:\?[^\s]*)?)/g;
   // Get all the div elements in the document
