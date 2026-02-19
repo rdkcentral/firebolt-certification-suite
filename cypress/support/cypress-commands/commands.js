@@ -2139,11 +2139,13 @@ Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
  * @param {String} key - The key to be pressed.
  * @param {Number} delay - The delay in seconds before sending the key press.
  * @param {Object} optionalParams - Pass optional parameters for keypress
+ * @param {Number} additionalWaitTime - Additional wait time in milliseconds to be added to the calculated timeout.
  * @example
  * cy.sendKeyPress('right')
  * cy.sendKeyPress('right', 10)
  * cy.sendKeyPress('right', 10, {duration: 5})
  * cy.sendKeyPress('right', 10, {repeat: 5})
+ * cy.sendKeyPress('right', 10, {repeat: 5}, 5000)
  */
 Cypress.Commands.add('sendKeyPress', (key, delay, optionalParams, additionalWaitTime) => {
   delay = delay ? delay : 5;
