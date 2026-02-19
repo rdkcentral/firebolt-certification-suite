@@ -42,9 +42,13 @@ Given(
     const app_metadata = Cypress.env(CONSTANTS.APP_METADATA);
     let supportedIntents = [];
     if (app_metadata && app_metadata.apps) {
-      const app = app_metadata.apps.find((app) => app[appCallSign]);
-      if (app && app[appCallSign]) {
-        supportedIntents = supportedIntents.concat(Object.keys(app[appCallSign]));
+      const appId =
+        appCallSign === undefined || appCallSign === null
+          ? UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID)
+          : UTILS.checkForSecondaryAppId(appCallSign);
+      const app = app_metadata.apps.find((app) => app[appId]);
+      if (app && app[appId]) {
+        supportedIntents = supportedIntents.concat(Object.keys(app[appId]));
       }
     } else if (app_metadata) {
       const metadataKeys = Object.keys(app_metadata);
