@@ -41,6 +41,7 @@ module.exports = {
   APP_RESPONSE: 'Response from third party app: ',
   APP_TRANSPORT_UNAVAILABLE: 'App Transport unavailable',
   APP_TYPE: 'appType',
+  APP_LAUNCH_TIMEOUT: 35000,
   ARRAY: 'array',
   ASYNCHRONOUS: 'asynchronous',
   BASE64: 'base64',

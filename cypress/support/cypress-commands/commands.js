@@ -1257,7 +1257,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
               Cypress.env(CONSTANTS.TEST_TYPE)
             )
           ) {
-            cy.wait(35000).then(() => {
+            cy.wait(CONSTANTS.APP_LAUNCH_TIMEOUT).then(() => {
               cy.captureScreenshot(false);
             });
           }
@@ -2147,7 +2147,7 @@ Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
  */
 Cypress.Commands.add('sendKeyPress', (key, delay, optionalParams, additionalWaitTime) => {
   delay = delay ? delay : 5;
-  additionalWaitTime = additionalWaitTime ? additionalWaitTime + 10000 : 10000;
+  additionalWaitTime = additionalWaitTime !== undefined ? additionalWaitTime : 10000;
   optionalParams = optionalParams ? optionalParams : {};
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
