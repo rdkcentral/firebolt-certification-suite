@@ -55,61 +55,6 @@ showAll = () => {
   $('span[class*=step]').closest('div.x_panel[style]').show();
 };
 
-attachRecordingLinks = () => {
-  // Define regular expression to match the video URL pattern
-  const videoPattern = /Video Recording:\s*(https:\/\/[^\s]+\.mp4(?:\?[^\s]*)?)/g;
-  const videoUrlPattern = /(https:\/\/[^\s]+\.mp4(?:\?[^\s]*)?)/g;
-  // Get all the div elements in the document
-  const divElements = document.querySelectorAll('div');
-
-  // Loop through the div elements to find any that contain the videoPattern
-  divElements.forEach((div) => {
-    const divHTML = div.innerHTML;
-    const matches = divHTML.match(videoPattern);
-
-    // If there's a match, get the id of the div
-    if (matches) {
-      const parentDivId = div.id;
-
-      if (parentDivId) {
-        // Find the <a> tag that references this div via the href attribute
-        const toggleLink = document.querySelector(`a[href="#${parentDivId}"]`);
-
-        if (toggleLink) {
-          // Loop through each matching URL
-          matches.forEach((url) => {
-            const cleanUrl = url.replace('Video Recording: ', '');
-            // Create new <a> tag
-            const newLink = document.createElement('a');
-            newLink.href = cleanUrl;
-            newLink.target = '_blank';
-            newLink.textContent = '+ Show Video';
-            newLink.style.margin = '0px 7px';
-            newLink.rel = 'noopener noreferrer';
-
-            // Insert link just after toggleLink
-            toggleLink.parentNode.insertBefore(newLink, toggleLink.nextSibling);
-          });
-        }
-      }
-    }
-  });
-  // Process <pre> elements nested inside <div> for plain text URLs
-  const preElements = document.querySelectorAll('div pre');
-
-  // Loop through the div elements to find text that contain urlPattern
-  preElements.forEach((pre) => {
-    const preHTML = pre.innerHTML;
-    if (videoUrlPattern.test(preHTML)) {
-      // Replace plain text URLs with clickable hyperlinks
-      const updatedHTML = preHTML.replace(videoUrlPattern, (url) => {
-        return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a>';
-      });
-      pre.innerHTML = updatedHTML;
-    }
-  });
-};
-
 attachScreenshotLinks = () => {
   // Define regular expression to match the img URL pattern
   const imgPattern = /Screenshot:\s*(https:\/\/[^\s]+\.jpg)/g;
@@ -174,6 +119,5 @@ $(document).ready(() => {
         .addClass('disabled');
     }
   });
-  attachRecordingLinks();
   attachScreenshotLinks();
 });
