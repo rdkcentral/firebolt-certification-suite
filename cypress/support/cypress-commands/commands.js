@@ -1072,7 +1072,10 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         if (giveDynamicAssetsPrecedence || !Cypress.env(CONSTANTS.RUNTIME)?.intent) {
           cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
             if (dynamicIntent && Object.keys(dynamicIntent).length > 0) {
-              Cypress.env(CONSTANTS.RUNTIME).intent = { ...dynamicIntent };
+              Cypress.env(CONSTANTS.RUNTIME).intent = {
+                ...Cypress.env(CONSTANTS.RUNTIME).intent,
+                ...dynamicIntent,
+              };
               messageIntent = {
                     [CONSTANTS.APP_ID]: appId,
                     [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
