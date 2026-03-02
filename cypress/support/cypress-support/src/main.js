@@ -217,16 +217,19 @@ export default function (module) {
             }
           });
         }
-        // unsubscribing the list of topics
-        appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
-        await transport.unsubscribe();
 
-        // Unsubscribe from WebSocket if the client is available
-        const webSocketClient = UTILS.getEnvVariable('webSocketClient', false);
-        if (webSocketClient) {
-          UTILS.unsubscribe(webSocketClient);
-          Cypress.env('webSocketClient', null); // Clear the WebSocket client from Cypress environment
-        }
+        cy.callConfigModule('uploadLogs').then(async () => {
+          // unsubscribing the list of topics
+          appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
+          await transport.unsubscribe();
+
+          // Unsubscribe from WebSocket if the client is available
+          const webSocketClient = UTILS.getEnvVariable('webSocketClient', false);
+          if (webSocketClient) {
+            UTILS.unsubscribe(webSocketClient);
+            Cypress.env('webSocketClient', null); // Clear the WebSocket client from Cypress environment
+          }
+        });
       } catch (err) {
         console.error(`Something went wrong when attempting to unsubscribe: ${err}`);
       }
