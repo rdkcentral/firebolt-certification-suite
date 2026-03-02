@@ -580,7 +580,7 @@ module.exports = {
   VALIDATION_NOT_PERFORMED_MESSAGE: 'Validation not performed',
   FETCHDEVICEDETAILS: 'fetchDeviceDetails',
   GETAPPDATA: 'getAppData',
-  INTERNAL_WAITTIME_TESTTYPES: 'internalWaitTimeTestTypes'
+  INTERNAL_WAITTIME_TESTTYPES: 'internalWaitTimeTestTypes',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context
