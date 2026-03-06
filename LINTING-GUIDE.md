@@ -11,7 +11,7 @@ It's recommended to configure your code editor, such as VSCode, to format on sav
 To manually format your code, run the command:
 
 ```
-npm run format
+npm run format 
 ```
 
 Current prettier config:
