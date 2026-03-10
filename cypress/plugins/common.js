@@ -53,6 +53,7 @@ function genericSupport(config) {
     ...data,
     ...commandLineArgs,
   };
+  config.env.commandLineArgs = commandLineArgs;
   // To read device data JSON
   preprocessDeviceData(config);
   const testDataEnv = testDataProcessor.testDataProcessor(config.env);
