@@ -1,3 +1,10 @@
+# [1.21.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.21.0-dev.2...v1.21.0-dev.3) (2026-03-10)
+
+
+### Bug Fixes
+
+* Fix format issue ([#518](https://github.com/rdkcentral/firebolt-certification-suite/issues/518)) ([5dbba15](https://github.com/rdkcentral/firebolt-certification-suite/commit/5dbba150be256b30fc8d605c2f48653662ddcac7))
+
 # [1.21.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.21.0-dev.1...v1.21.0-dev.2) (2026-01-07)
 
 
