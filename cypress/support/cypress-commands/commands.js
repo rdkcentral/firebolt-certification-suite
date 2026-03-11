@@ -383,17 +383,37 @@ Cypress.Commands.add('updateRunInfo', () => {
                       reportEnv.customData.data &&
                       reportEnv.customData.data.length > 0
                     ) {
-                      addToEnvLabelMap({
+                      let envLabelMapping = {
                         [CONSTANTS.PRODUCT]: CONSTANTS.ENV_PRODUCT,
                         [CONSTANTS.FIREBOLT_VERSION]: CONSTANTS.ENV_FIREBOLT_VERSION,
                         [CONSTANTS.SDK_REPORT_VERSION]: CONSTANTS.ENV_PLATFORM_SDK_VERSION,
                         [CONSTANTS.PLATFORM]: CONSTANTS.ENV_PLATFORM,
-                        [CONSTANTS.RELEASE]: CONSTANTS.ENV_RELEASE,
                         [CONSTANTS.DEVICE_ENV]: CONSTANTS.ENV_DEVICE_MODEL,
                         [CONSTANTS.DEVICE_FIRMWARE]: CONSTANTS.ENV_DEVICE_FIRMWARE,
                         [CONSTANTS.PARTNER]: CONSTANTS.ENV_DEVICE_DISTRIBUTOR,
                         [CONSTANTS.DEVICEID_ENV]: CONSTANTS.ENV_DEVICE_ID,
-                      });
+                        [CONSTANTS.DEVICE_MAC_LABEL]: CONSTANTS.ENV_DEVICE_MAC,
+                      };
+
+                      // Add APP_ASSURANCE_ID to the mapping if it has a value
+                      if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
+                        envLabelMapping = {
+                          [CONSTANTS.APP_ASSURANCE_ID_LABEL]: Cypress.env(
+                            CONSTANTS.APP_ASSURANCE_ID
+                          ),
+                          ...envLabelMapping,
+                        };
+                      }
+
+                      // Add APP_VERSION_LABEL to the mapping if it has a value
+                      if (Cypress.env(CONSTANTS.APP_VERSION)) {
+                        envLabelMapping = {
+                          [CONSTANTS.APP_VERSION_LABEL]: Cypress.env(CONSTANTS.APP_VERSION),
+                          ...envLabelMapping,
+                        };
+                      }
+
+                      addToEnvLabelMap(envLabelMapping);
                       const envLabelMap = Cypress.env(CONSTANTS.LABEL_TO_ENVMAP);
 
                       Object.keys(envLabelMap).forEach((label) => {
@@ -425,6 +445,16 @@ Cypress.Commands.add('updateRunInfo', () => {
                           });
                         }
                       });
+                    }
+                    if (
+                      Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES) &&
+                      Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES).includes(
+                        Cypress.env(CONSTANTS.TEST_TYPE)
+                      )
+                    ) {
+                      reportEnv.customData.data = reportEnv?.customData?.data.filter(
+                        (item) => item && item.label !== CONSTANTS.SDK_REPORT_VERSION
+                      );
                     }
                     // write the merged object
                     cy.writeFile(tempReportEnvFile, reportEnv);
@@ -1222,6 +1252,14 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
             cy.updateRunInfo();
           } else if (result && result.error) {
             fireLog.fail(`App launch failed: ${result.error.message}`);
+          } else if (
+            Cypress.env(CONSTANTS.INTERNAL_WAITTIME_TESTTYPES)?.includes(
+              Cypress.env(CONSTANTS.TEST_TYPE)
+            )
+          ) {
+            cy.wait(CONSTANTS.APP_LAUNCH_TIMEOUT).then(() => {
+              cy.captureScreenshot(false);
+            });
           }
         });
       });
@@ -1884,51 +1922,58 @@ Cypress.Commands.add('initiatePerformanceMetrics', () => {
  * cy.fetchAppMetaData()
  */
 Cypress.Commands.add('fetchAppMetaData', () => {
-  if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
-    // Send the request to fetch app data from platforms
-    cy.callConfigModule(CONSTANTS.GETAPPDATA).then((result) => {
-      if (result && result.data) {
-        return result.data;
+  cy.callConfigModule(CONSTANTS.CHECK_METADATA_OVERRIDES).then((updatedMetadata) => {
+    if (updatedMetadata) {
+      return updatedMetadata;
+    } else {
+      if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
+        // Send the request to fetch app data from platforms
+        return cy.callConfigModule(CONSTANTS.GETAPPDATA).then((result) => {
+          if (result && result.data) {
+            return result.data;
+          } else {
+            throw new Error('Unable to get valid response for fetching app metadata');
+          }
+        });
       } else {
-        throw new Error('Unable to get valid response for fetching app metadata');
-      }
-    });
-  } else {
-    // If app assurance id is not available, extract app metadata from local directories
+        // If app assurance id is not available, extract app metadata from local directories
 
-    const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
-    const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
+        const internalAppMetaDataPath = CONSTANTS.INTERNAL_APPMETADATA_PATH;
+        const internalAppMetaDataDir = CONSTANTS.INTERNAL_APPMETADATA_DIRECTORY;
 
-    const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
-    const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
+        const externalAppMetaDataPath = CONSTANTS.EXTERNAL_APPMETADATA_PATH;
+        const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
-    // Extract internal app metadata
-    cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
-      (fcsAppMetaData) => {
-        // Check if internal app metadata extraction was successful
-        if (!fcsAppMetaData) {
-          throw new Error('Failed to extract internal app metadata.');
-        }
-
-        // Extract external app metadata
-        cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
-          (configModuleAppMetaData) => {
-            // Check if external app metadata extraction was successful
-            if (!configModuleAppMetaData) {
-              throw new Error('Failed to extract external app metadata.');
+        // Extract internal app metadata
+        return cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
+          (fcsAppMetaData) => {
+            // Check if internal app metadata extraction was successful
+            if (!fcsAppMetaData) {
+              throw new Error('Failed to extract internal app metadata.');
             }
 
-            // Merge internal and external app metadata
-            try {
-              _.merge(fcsAppMetaData, configModuleAppMetaData);
-            } catch (mergeError) {
-              throw new Error(`Error merging app metadata: ${mergeError.message}`);
-            }
+            // Extract external app metadata
+            return cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
+              (configModuleAppMetaData) => {
+                // Check if external app metadata extraction was successful
+                if (!configModuleAppMetaData) {
+                  throw new Error('Failed to extract external app metadata.');
+                }
+
+                // Merge internal and external app metadata
+                try {
+                  _.merge(fcsAppMetaData, configModuleAppMetaData);
+                  return fcsAppMetaData;
+                } catch (mergeError) {
+                  throw new Error(`Error merging app metadata: ${mergeError.message}`);
+                }
+              }
+            );
           }
         );
       }
-    );
-  }
+    }
+  });
 });
 
 /**
@@ -2093,20 +2138,27 @@ Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
  * @description Command to send key press to the platform.
  * @param {String} key - The key to be pressed.
  * @param {Number} delay - The delay in seconds before sending the key press.
+ * @param {Object} optionalParams - Pass optional parameters for keypress
+ * @param {Number} additionalWaitTime - Additional wait time in milliseconds to be added to the calculated timeout.
  * @example
  * cy.sendKeyPress('right')
  * cy.sendKeyPress('right', 10)
+ * cy.sendKeyPress('right', 10, {duration: 5})
+ * cy.sendKeyPress('right', 10, {repeat: 5})
+ * cy.sendKeyPress('right', 10, {repeat: 5}, 5000)
  */
-Cypress.Commands.add('sendKeyPress', (key, delay) => {
+Cypress.Commands.add('sendKeyPress', (key, delay, optionalParams, additionalWaitTime) => {
   delay = delay ? delay : 5;
+  additionalWaitTime = additionalWaitTime !== undefined ? additionalWaitTime : 10000;
+  optionalParams = optionalParams ? optionalParams : {};
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
-    params: { key: key, delay: delay },
+    params: { key: key, delay: delay, ...optionalParams },
   };
-  const timeout = (Array.isArray(key) ? key.length : 1) * delay * 1000 + 10000; // Calculate timeout based on key press sequence and delay
+  const timeout = (Array.isArray(key) ? key.length : 1) * delay * 1000 + additionalWaitTime; // Calculate timeout based on key press sequence and delay
   cy.sendMessagetoPlatforms(requestMap, timeout).then((result) => {
     fireLog.info(
-      `Sent key press: ${key} with delay: ${delay}. Response: ${JSON.stringify(result)}`,
+      `Sent key press: ${key} with params: ${JSON.stringify(requestMap.params)}. Response: ${JSON.stringify(result)}`,
       'report'
     );
   });

@@ -385,7 +385,11 @@ Given('device is rebooted', () => {
 Given(
   /3rd party '(.+)' (app|playback)(?: '(.+)')? is (dismissed|closed|unloaded|streaming)$/,
   async (appType, entity, appId, action) => {
-    appId = appId ? appId : Cypress.env(CONSTANTS.RUNTIME)?.appId;
+    appId = UTILS.checkForSecondaryAppId(appId)
+      ? UTILS.checkForSecondaryAppId(appId)
+      : Cypress.env(CONSTANTS.RUNTIME)?.appId
+        ? Cypress.env(CONSTANTS.RUNTIME)?.appId
+        : appId;
 
     let KeyPressSequence;
     let loggedType;
@@ -464,11 +468,13 @@ Given(
               loggedType
             ];
           } else {
-            // If no keyPressSequence is found, throw an error with details from the app_metadata file
-            const appMetadataJSON = require('../../fixtures/docs/app_metadata.json');
-            throw new Error(
-              `Expected KeyPressSequence was not found for ${appId} in app_metadata.json. More details on app_metadata present in: ${JSON.stringify(appMetadataJSON)}`
-            );
+            if (action !== CONSTANTS.UNLOADED && action !== CONSTANTS.CLOSED) {
+              // If no keyPressSequence is found, throw an error with details from the app_metadata file
+              const appMetadataJSON = require('../../fixtures/docs/app_metadata.json');
+              throw new Error(
+                `Expected KeyPressSequence was not found for ${appId} in app_metadata.json. More details on app_metadata present in: ${JSON.stringify(appMetadataJSON)}`
+              );
+            }
           }
         }
       } else {
