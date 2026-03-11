@@ -1410,15 +1410,14 @@ Cypress.Commands.add('sendMessageToPlatformOrApp', (target, requestData, task) =
       if (task == CONSTANTS.TASK.REGISTEREVENT) {
         if (response && response.result && response.result.hasOwnProperty(CONSTANTS.LISTENING)) {
           const eventResponse = {
-            eventListenerId: response.result.event + '-' + response.id,
             eventListenerResponse: response.result,
           };
           response.result = eventResponse;
         }
-        if (response && response.error && response.error.message) {
+        if (response && response.error) {
           fireLog.assert(
             false,
-            `Event registration failed for event ${method} with error message: ${response.error.message} `
+            `Event registration failed for event ${method} with error message: ${JSON.stringify(response.error)} `
           );
         }
       }
@@ -1585,7 +1584,7 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
     } else {
       cy.then(() => {
         if (validationType == CONSTANTS.EVENT) {
-          const eventName = methodOrEventObject.eventObjectId;
+          const eventName = methodOrEventObject.eventName;
           let eventResponse;
           if (appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID)) {
             const requestMap = {
@@ -1612,6 +1611,42 @@ Cypress.Commands.add('methodOrEventResponseValidation', (validationType, request
               response.result.hasOwnProperty(CONSTANTS.EVENT_RESPONSE)
             ) {
               response.result = response.result.eventResponse;
+            }
+            // Parse v2 events for first party events and if it is bidirectional SDK
+            // Skipping if the event response is null, it will be checked and action of pass/fail will be taken in content validation
+            if (
+              appId === UTILS.getEnvVariable(CONSTANTS.FIRST_PARTY_APPID) &&
+              UTILS.getEnvVariable(CONSTANTS.IS_BIDIRECTIONAL_SDK)
+            ) {
+              if (Object.values(response?.result)[0] !== null) {
+                // Check if the response is an object and has method and params properties
+                // eg: {method: "event.onMethodName", params: {key: "new value"}}
+                if (
+                  Object.prototype.toString.call(response.result) === '[object Object]' &&
+                  response.result.params
+                ) {
+                  // Check if params is an object with a single key-value pair
+                  // eg: {param: {"key": "new value"}}
+                  // Here, "new value" is the expected event response
+                  if (
+                    Object.prototype.toString.call(response.result.params) === '[object Object]' &&
+                    Object.keys(response.result.params).length === 1
+                  ) {
+                    /*
+                    parse the v2 event response from {param: {"key": "new value"}} to "new value"
+                    */
+                    response.result = Object.values(response.result.params)[0];
+                  } else {
+                    fireLog.fail(
+                      `Expected event response to be in firebolt v2 format {"key": "new value"}, received response as "new value" format - ${JSON.stringify(response.result)}`
+                    );
+                  }
+                } else {
+                  fireLog.fail(
+                    `Expected event response to be in firebolt v2 format {method: "event.onMethodName", params: {key: "new value"}}, received response- ${JSON.stringify(response.result)}`
+                  );
+                }
+              }
             }
             cy.updateResponseForFCS(method, null, response, true, isNullCase).then(
               (updatedResponse) => {
