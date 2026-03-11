@@ -365,6 +365,7 @@ module.exports = {
   REGEX: 'regEx',
   REGEX_EVENT_VALIDATION: 'regexEventValidation',
   REPORT_COMMUNICATION_MODE: 'Communication Mode',
+  REPORT_APP_NAME: 'App name',
   REPORT_DATE: 'Date',
   REQUEST_OVERRIDE_CALLS: {
     SETRESPONSE: 'fcs.setResponse',

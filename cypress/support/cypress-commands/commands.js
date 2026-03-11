@@ -1072,11 +1072,14 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         if (giveDynamicAssetsPrecedence || !Cypress.env(CONSTANTS.RUNTIME)?.intent) {
           cy.callConfigModule('resolveIntent', [appId, intent]).then((dynamicIntent) => {
             if (dynamicIntent && Object.keys(dynamicIntent).length > 0) {
-              Cypress.env(CONSTANTS.RUNTIME).intent = { ...dynamicIntent };
-              messageIntent = {
-                [CONSTANTS.APP_ID]: appId,
-                [CONSTANTS.INTENT]: dynamicIntent.entityId,
+              Cypress.env(CONSTANTS.RUNTIME).intent = {
+                ...Cypress.env(CONSTANTS.RUNTIME).intent,
+                ...dynamicIntent,
               };
+              messageIntent = {
+                    [CONSTANTS.APP_ID]: appId,
+                    [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
+                  };
             } else {
               messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
             }
@@ -2145,7 +2148,7 @@ Cypress.Commands.add('findLogPattern', (logKey, fileName) => {
       fileName: fileName,
     },
   };
-  cy.sendMessagetoPlatforms(requestMap, 20000).then((result) => {
+  cy.sendMessagetoPlatforms(requestMap, 30000).then((result) => {
     return result;
   });
 });
