@@ -359,7 +359,8 @@ Example:
   params: { 
     key: <keyCode>, 
     delay: <delay in seconds>,
-    optionalParams: {}
+    duration: <optional duration in seconds>,
+    repeat: <optional repeat count>
   }
 }
 ```
@@ -372,7 +373,7 @@ Example:
   params: { 
     key: 'enter',
     delay: 5,
-    {duration: 5}
+    duration: 5,
   }
 }
 ```

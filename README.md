@@ -131,7 +131,7 @@ To execute the certification suite against any platform, the following setup mus
 | wsPort                              | string  | '3474'                            | Port number for the WebSocket connection. `default: '3474'`                                                                 |
 | wsUrlPath                           | string  | '?appId=testApp'                  | Path for the WebSocket connection appended to the URL. `default: '?appId=testApp'`                                          |
 | wsUrlProtocol                       | string  | 'ws' or 'wss'                     | Protocol for the WebSocket connection.                                                                                      |
-| internalWaitTimeTestTypes           | array  | ['testType']                     | Test will wait for app to launch, if current test type is present in this list                         |
+| internalWaitTimeTestTypes           | array   | ['testType']                      | Tests will wait for the app to launch if the current test's `testType` string identifier (for example, 'lifecycle' or 'Discovery.Launch') is present in this list. |
 
 - Provide the specPattern mapping details. 
 Update the specHelperConfig.js with the specPattern mapping details.

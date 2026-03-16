@@ -385,11 +385,8 @@ Given('device is rebooted', () => {
 Given(
   /3rd party '(.+)' (app|playback)(?: '(.+)')? is (dismissed|closed|unloaded|streaming)$/,
   async (appType, entity, appId, action) => {
-    appId = UTILS.checkForSecondaryAppId(appId)
-      ? UTILS.checkForSecondaryAppId(appId)
-      : Cypress.env(CONSTANTS.RUNTIME)?.appId
-        ? Cypress.env(CONSTANTS.RUNTIME)?.appId
-        : appId;
+    const secondaryAppId = UTILS.checkForSecondaryAppId(appId);
+    appId = secondaryAppId || Cypress.env(CONSTANTS.RUNTIME)?.appId || appId;
 
     let KeyPressSequence;
     let loggedType;

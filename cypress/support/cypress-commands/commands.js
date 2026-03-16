@@ -1945,16 +1945,18 @@ Cypress.Commands.add('fetchAppMetaData', () => {
         const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
         // Extract internal app metadata
-        return cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
-          (fcsAppMetaData) => {
+        return cy
+          .extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath)
+          .then((fcsAppMetaData) => {
             // Check if internal app metadata extraction was successful
             if (!fcsAppMetaData) {
               throw new Error('Failed to extract internal app metadata.');
             }
 
             // Extract external app metadata
-            return cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
-              (configModuleAppMetaData) => {
+            return cy
+              .extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath)
+              .then((configModuleAppMetaData) => {
                 // Check if external app metadata extraction was successful
                 if (!configModuleAppMetaData) {
                   throw new Error('Failed to extract external app metadata.');
@@ -1967,10 +1969,8 @@ Cypress.Commands.add('fetchAppMetaData', () => {
                 } catch (mergeError) {
                   throw new Error(`Error merging app metadata: ${mergeError.message}`);
                 }
-              }
-            );
-          }
-        );
+              });
+          });
       }
     }
   });
