@@ -371,6 +371,7 @@ module.exports = {
   REGEX_EVENT_VALIDATION: 'regexEventValidation',
   REPORT_COMMUNICATION_MODE: 'Communication Mode',
   REPORT_DATE: 'Date',
+  REPORT_APP_NAME: 'App name',
   REQUEST_OVERRIDE_CALLS: {
     SETRESPONSE: 'fcs.setResponse',
     CLEARLISTENER: 'fcs.clearEventListeners',

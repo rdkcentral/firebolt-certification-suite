@@ -238,6 +238,10 @@ module.exports = async (on, config) => {
     const updatedMetadata = [
       { name: CONSTANTS.REPORT_COMMUNICATION_MODE, value: config.env.communicationMode },
       {
+        name: CONSTANTS.REPORT_APP_NAME,
+        value: config.env[CONSTANTS.APP_ASSURANCE_ID] || 'N/A',
+      },
+      {
         name: CONSTANTS.REPORT_DATE,
         value: DateTime.utc().toFormat('yyyy-MM-dd HH:mm:ss') + ' UTC',
       },
@@ -367,6 +371,7 @@ module.exports = async (on, config) => {
             reportProperties.certification = certification;
             reportProperties.team = config.env.team ? config.env.team : 'N/A';
             reportProperties.goal = config.env.goal ? config.env.goal : 'N/A';
+            reportProperties.appName = config.env[CONSTANTS.APP_ASSURANCE_ID] || 'N/A';
             // Add the report to the reportObj
             if (reportType === CONSTANTS.CUCUMBER) {
               reportObj.cucumberReport = jsonReport;
