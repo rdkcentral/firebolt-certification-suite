@@ -1,3 +1,10 @@
+# [1.22.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.21.0...v1.22.0-dev.1) (2026-03-17)
+
+
+### Features
+
+* Metrics Feature ([#511](https://github.com/rdkcentral/firebolt-certification-suite/issues/511)) ([7f3f1b0](https://github.com/rdkcentral/firebolt-certification-suite/commit/7f3f1b06585c1c9d06ef6d09379d30ffc70bfd2b))
+
 # [1.21.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.20.0...v1.21.0) (2026-03-10)
 
 
