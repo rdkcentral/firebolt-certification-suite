@@ -31,8 +31,8 @@ try {
 
 class FireLog extends Function {
   constructor(currentLevel) {
-    console.log("Firelog level set to: ", currentLevel);
-    
+    console.log('Firelog level set to: ', currentLevel);
+
     // Creating the function body dynamically
     const functionBody = `
       return function (...args) {
@@ -119,7 +119,10 @@ class FireLog extends Function {
         let cypressLogPromise = null;
 
         // Check if logOutputLocation is 'report' and log using cy.log based on loggerLevel
-        if (logOutputLocation === 'report' && levelPriority[level] <= levelPriority[this.currentLevel]) {
+        if (
+          logOutputLocation === 'report' &&
+          levelPriority[level] <= levelPriority[this.currentLevel]
+        ) {
           cypressLogPromise = cy.log(fullMessage);
         }
 
