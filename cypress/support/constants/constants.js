@@ -41,6 +41,7 @@ module.exports = {
   APP_RESPONSE: 'Response from third party app: ',
   APP_TRANSPORT_UNAVAILABLE: 'App Transport unavailable',
   APP_TYPE: 'appType',
+  APP_LAUNCH_TIMEOUT: 35000,
   ARRAY: 'array',
   ASYNCHRONOUS: 'asynchronous',
   BASE64: 'base64',
@@ -370,6 +371,7 @@ module.exports = {
   REGEX_EVENT_VALIDATION: 'regexEventValidation',
   REPORT_COMMUNICATION_MODE: 'Communication Mode',
   REPORT_DATE: 'Date',
+  REPORT_APP_NAME: 'App name',
   REQUEST_OVERRIDE_CALLS: {
     SETRESPONSE: 'fcs.setResponse',
     CLEARLISTENER: 'fcs.clearEventListeners',
@@ -579,7 +581,7 @@ module.exports = {
   VALIDATION_NOT_PERFORMED_MESSAGE: 'Validation not performed',
   FETCHDEVICEDETAILS: 'fetchDeviceDetails',
   GETAPPDATA: 'getAppData',
-  INTERNAL_WAITTIME_TESTTYPES:'internalWaitTimeTestTypes'
+  INTERNAL_WAITTIME_TESTTYPES: 'internalWaitTimeTestTypes',
 };
 function getSanityReportPath() {
   // Check if Cypress is defined, for cypress test context

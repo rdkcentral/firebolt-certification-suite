@@ -1257,7 +1257,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
               Cypress.env(CONSTANTS.TEST_TYPE)
             )
           ) {
-            cy.wait(35000).then(() => {
+            cy.wait(CONSTANTS.APP_LAUNCH_TIMEOUT).then(() => {
               cy.captureScreenshot(false);
             });
           }
@@ -1928,7 +1928,7 @@ Cypress.Commands.add('fetchAppMetaData', () => {
     } else {
       if (Cypress.env(CONSTANTS.APP_ASSURANCE_ID)) {
         // Send the request to fetch app data from platforms
-        cy.callConfigModule(CONSTANTS.GETAPPDATA).then((result) => {
+        return cy.callConfigModule(CONSTANTS.GETAPPDATA).then((result) => {
           if (result && result.data) {
             return result.data;
           } else {
@@ -1945,16 +1945,18 @@ Cypress.Commands.add('fetchAppMetaData', () => {
         const externalAppMetaDataDir = CONSTANTS.EXTERNAL_APPMETADATA_DIRECTORY;
 
         // Extract internal app metadata
-        cy.extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath).then(
-          (fcsAppMetaData) => {
+        return cy
+          .extractAppMetadata(internalAppMetaDataDir, internalAppMetaDataPath)
+          .then((fcsAppMetaData) => {
             // Check if internal app metadata extraction was successful
             if (!fcsAppMetaData) {
               throw new Error('Failed to extract internal app metadata.');
             }
 
             // Extract external app metadata
-            cy.extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath).then(
-              (configModuleAppMetaData) => {
+            return cy
+              .extractAppMetadata(externalAppMetaDataDir, externalAppMetaDataPath)
+              .then((configModuleAppMetaData) => {
                 // Check if external app metadata extraction was successful
                 if (!configModuleAppMetaData) {
                   throw new Error('Failed to extract external app metadata.');
@@ -1963,13 +1965,12 @@ Cypress.Commands.add('fetchAppMetaData', () => {
                 // Merge internal and external app metadata
                 try {
                   _.merge(fcsAppMetaData, configModuleAppMetaData);
+                  return fcsAppMetaData;
                 } catch (mergeError) {
                   throw new Error(`Error merging app metadata: ${mergeError.message}`);
                 }
-              }
-            );
-          }
-        );
+              });
+          });
       }
     }
   });
@@ -2138,15 +2139,17 @@ Cypress.Commands.add('softAssertFormat', (value, regex, message) => {
  * @param {String} key - The key to be pressed.
  * @param {Number} delay - The delay in seconds before sending the key press.
  * @param {Object} optionalParams - Pass optional parameters for keypress
+ * @param {Number} additionalWaitTime - Additional wait time in milliseconds to be added to the calculated timeout.
  * @example
  * cy.sendKeyPress('right')
  * cy.sendKeyPress('right', 10)
  * cy.sendKeyPress('right', 10, {duration: 5})
  * cy.sendKeyPress('right', 10, {repeat: 5})
+ * cy.sendKeyPress('right', 10, {repeat: 5}, 5000)
  */
 Cypress.Commands.add('sendKeyPress', (key, delay, optionalParams, additionalWaitTime) => {
   delay = delay ? delay : 5;
-  additionalWaitTime = additionalWaitTime ? additionalWaitTime + 10000 : 10000;
+  additionalWaitTime = additionalWaitTime !== undefined ? additionalWaitTime : 10000;
   optionalParams = optionalParams ? optionalParams : {};
   const requestMap = {
     method: CONSTANTS.REQUEST_OVERRIDE_CALLS.SENDKEYPRESS,
