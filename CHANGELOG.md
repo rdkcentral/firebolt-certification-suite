@@ -1,3 +1,10 @@
+# [1.22.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.22.0-dev.2...v1.22.0-dev.3) (2026-03-23)
+
+
+### Features
+
+* App launch intent fix ([#514](https://github.com/rdkcentral/firebolt-certification-suite/issues/514)) ([56c2558](https://github.com/rdkcentral/firebolt-certification-suite/commit/56c2558411a4578a5636e5e8af9b1ab9756dc978))
+
 # [1.22.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.22.0-dev.1...v1.22.0-dev.2) (2026-03-23)
 
 
