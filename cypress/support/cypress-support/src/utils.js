@@ -1070,8 +1070,10 @@ global.addToEnvLabelMap = (partialMap) => {
  * @description A function to capture the screenshot of the device screen.
  * @params
  * processScreenshot - A boolean parameter to indicate whether to do OCR validation or not.
+ * @param {string} [screenshotType] - Optional type or label describing the screenshot category or usage (for example, "playback").
  * @example
  * captureScreenshot()
+ * captureScreenshot(false, 'playback')
  */
 function captureScreenshot(processScreenshot = false, screenshotType) {
   // Only take a screenshot if the enableScreenshots environment variable is set to true
