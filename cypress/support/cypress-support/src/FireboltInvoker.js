@@ -47,7 +47,12 @@ export default class FireboltInvoker {
     const wsPort = port || DEFAULT_WS_PORT;
     const wsPath = path || DEFAULT_WS_URL_PATH;
 
-    return `${protocol}${deviceIp}:${wsPort}/${wsPath}`;
+    let wsUrl = `${protocol}${deviceIp}:${wsPort}/${wsPath}`;
+    if (Cypress.env(CONSTANTS.IS_BIDIRECTIONAL_SDK)) {
+      wsUrl += '?RPCv2=true';
+    }
+
+    return wsUrl;
   }
 
   async get() {
