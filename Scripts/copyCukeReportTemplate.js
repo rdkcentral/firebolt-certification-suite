@@ -49,6 +49,17 @@ const FILES_TO_COPY = [
       'generic.js'
     ),
   },
+  {
+    source: path.join(__dirname, '..', 'reportTemplates', 'feature-overview.index.tmpl'),
+    destination: path.join(
+      __dirname,
+      '..',
+      'node_modules',
+      'multiple-cucumber-html-reporter',
+      'templates',
+      'feature-overview.index.tmpl'
+    ),
+  },
 ];
 
 /**
