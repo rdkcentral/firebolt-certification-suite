@@ -1107,9 +1107,9 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
                 ...dynamicIntent,
               };
               messageIntent = {
-                    [CONSTANTS.APP_ID]: appId,
-                    [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
-                  };
+                [CONSTANTS.APP_ID]: appId,
+                [CONSTANTS.INTENT]: UTILS.resolveRecursiveValues(intentTemplate),
+              };
             } else {
               messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
             }

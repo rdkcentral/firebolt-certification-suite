@@ -372,7 +372,6 @@ module.exports = {
   REPORT_COMMUNICATION_MODE: 'Communication Mode',
   REPORT_APP_NAME: 'App name',
   REPORT_DATE: 'Date',
-  REPORT_APP_NAME: 'App name',
   REQUEST_OVERRIDE_CALLS: {
     SETRESPONSE: 'fcs.setResponse',
     CLEARLISTENER: 'fcs.clearEventListeners',
