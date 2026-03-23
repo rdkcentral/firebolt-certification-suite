@@ -1,3 +1,40 @@
+# [1.22.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.22.0-dev.1...v1.22.0-dev.2) (2026-03-23)
+
+
+### Features
+
+* Store log files after each feature file execution ([#515](https://github.com/rdkcentral/firebolt-certification-suite/issues/515)) ([40744af](https://github.com/rdkcentral/firebolt-certification-suite/commit/40744af20db85b528360d4bc526b83c530ab0dc2))
+
+# [1.22.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.21.0...v1.22.0-dev.1) (2026-03-17)
+
+
+### Features
+
+* Metrics Feature ([#511](https://github.com/rdkcentral/firebolt-certification-suite/issues/511)) ([7f3f1b0](https://github.com/rdkcentral/firebolt-certification-suite/commit/7f3f1b06585c1c9d06ef6d09379d30ffc70bfd2b))
+
+# [1.21.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.20.0...v1.21.0) (2026-03-10)
+
+
+### Bug Fixes
+
+* Fix format issue ([#518](https://github.com/rdkcentral/firebolt-certification-suite/issues/518)) ([5dbba15](https://github.com/rdkcentral/firebolt-certification-suite/commit/5dbba150be256b30fc8d605c2f48653662ddcac7))
+* Log levels from CLI args ([#510](https://github.com/rdkcentral/firebolt-certification-suite/issues/510)) ([f9e6769](https://github.com/rdkcentral/firebolt-certification-suite/commit/f9e676978a432bec59a7c98bf23dbf3e84069028))
+* Remove testcases ([#507](https://github.com/rdkcentral/firebolt-certification-suite/issues/507)) ([2f977dc](https://github.com/rdkcentral/firebolt-certification-suite/commit/2f977dc51d43f2bfbe7900199453eb86f3c57462))
+* update appstate validation logic ([#505](https://github.com/rdkcentral/firebolt-certification-suite/issues/505)) ([996465c](https://github.com/rdkcentral/firebolt-certification-suite/commit/996465cd012302604ae12fbfca9fd6c0a146c2ea))
+
+
+### Features
+
+* Add firelog-softassert support ([#509](https://github.com/rdkcentral/firebolt-certification-suite/issues/509)) ([187c4fa](https://github.com/rdkcentral/firebolt-certification-suite/commit/187c4faa95ee4aeaf0aeed574af670ccf14b9b02))
+* Update all cli arguments in Report metadata ([#506](https://github.com/rdkcentral/firebolt-certification-suite/issues/506)) ([b8bbca1](https://github.com/rdkcentral/firebolt-certification-suite/commit/b8bbca1f1aad69856f7c8b4c8b1b8c9cc60b7a76))
+
+# [1.21.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.21.0-dev.2...v1.21.0-dev.3) (2026-03-10)
+
+
+### Bug Fixes
+
+* Fix format issue ([#518](https://github.com/rdkcentral/firebolt-certification-suite/issues/518)) ([5dbba15](https://github.com/rdkcentral/firebolt-certification-suite/commit/5dbba150be256b30fc8d605c2f48653662ddcac7))
+
 # [1.21.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.21.0-dev.1...v1.21.0-dev.2) (2026-01-07)
 
 
