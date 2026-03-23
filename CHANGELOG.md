@@ -1,3 +1,10 @@
+# [1.22.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.22.0-dev.1...v1.22.0-dev.2) (2026-03-23)
+
+
+### Features
+
+* Store log files after each feature file execution ([#515](https://github.com/rdkcentral/firebolt-certification-suite/issues/515)) ([40744af](https://github.com/rdkcentral/firebolt-certification-suite/commit/40744af20db85b528360d4bc526b83c530ab0dc2))
+
 # [1.22.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.21.0...v1.22.0-dev.1) (2026-03-17)
 
 
