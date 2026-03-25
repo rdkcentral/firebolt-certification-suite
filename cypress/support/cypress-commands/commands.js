@@ -85,7 +85,7 @@ Cypress.Commands.add(
 
         // Process each firebolt call item
         const promises = fireboltItems.map((item) => {
-          let params = item.params;
+          let params = item.params ? item.params : {};
           let method, action;
           // Fetching the value of environment variable based on dataIdentifier
           if (/CYPRESSENV/.test(params)) {
@@ -102,14 +102,18 @@ Cypress.Commands.add(
                 delete item[containEnv];
               }
             });
+          } else if (!params) {
+            params = {};
           } else {
-            const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
-            if (envList.length > 0) {
-              envList.forEach((item) => {
-                const envParam = item.split('-')[1];
-                params[envParam] = UTILS.getEnvVariable(envParam);
-                delete params[item];
-              });
+            if (params && typeof params === 'object') {
+              const envList = Object.keys(params).filter((key) => key.includes('CYPRESSENV'));
+              if (envList.length > 0) {
+                envList.forEach((item) => {
+                  const envParam = item.split('-')[1];
+                  params[envParam] = UTILS.getEnvVariable(envParam);
+                  delete params[item];
+                });
+              }
             }
           }
 
