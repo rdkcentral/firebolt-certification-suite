@@ -1068,8 +1068,7 @@ global.addToEnvLabelMap = (partialMap) => {
  * @module utils
  * @function captureScreenshot
  * @description A function to capture the screenshot of the device screen.
- * @params
- * processScreenshot - A boolean parameter to indicate whether to do OCR validation or not.
+ * @param {boolean} [processScreenshot=false] - Indicates whether to perform OCR validation on the captured screenshot.
  * @param {string} [screenshotType] - Optional type or label describing the screenshot category or usage (for example, "playback").
  * @example
  * captureScreenshot()
