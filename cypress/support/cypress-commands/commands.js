@@ -1118,6 +1118,16 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
           // Attempt to resolve the intentTemplate and create messageIntent
           messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
         }
+        if (
+          Cypress.env(CONSTANTS.RUNTIME)?.intent &&
+          Cypress.env(CONSTANTS.RUNTIME)?.intent.hasOwnProperty('isPlaybackSupported')
+        ) {
+          if (Cypress.env(CONSTANTS.RUNTIME).intent.isPlaybackSupported === false) {
+            if (messageIntent && messageIntent.intent) {
+              messageIntent.intent.action = 'entity';
+            }
+          }
+        }
       } else {
         const data = {
           query: {
