@@ -209,30 +209,30 @@ export default function (module) {
   // after All
   after(() => {
     (async () => {
-      try {
-        if (UTILS.getEnvVariable(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false) == true) {
-          cy.startOrStopPerformanceService(CONSTANTS.STOPPED).then((response) => {
-            if (response) {
-              Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false);
-            }
-          });
-        }
+      cy.callConfigModule('uploadLogs').then(async () => {
+        try {
+          if (UTILS.getEnvVariable(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false) == true) {
+            cy.startOrStopPerformanceService(CONSTANTS.STOPPED).then((response) => {
+              if (response) {
+                Cypress.env(CONSTANTS.IS_PERFORMANCE_METRICS_ENABLED, false);
+              }
+            });
+          }
 
-        // cy.callConfigModule('uploadLogs').then(async () => {
-        // unsubscribing the list of topics
-        appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
-        await transport.unsubscribe();
+          // unsubscribing the list of topics
+          appTransport.unsubscribe(UTILS.getEnvVariable(CONSTANTS.RESPONSE_TOPIC_LIST));
+          await transport.unsubscribe();
 
-        // Unsubscribe from WebSocket if the client is available
-        const webSocketClient = UTILS.getEnvVariable('webSocketClient', false);
-        if (webSocketClient) {
-          UTILS.unsubscribe(webSocketClient);
-          Cypress.env('webSocketClient', null); // Clear the WebSocket client from Cypress environment
+          // Unsubscribe from WebSocket if the client is available
+          const webSocketClient = UTILS.getEnvVariable('webSocketClient', false);
+          if (webSocketClient) {
+            UTILS.unsubscribe(webSocketClient);
+            Cypress.env('webSocketClient', null); // Clear the WebSocket client from Cypress environment
+          }
+        } catch (err) {
+          console.error(`Something went wrong when attempting to unsubscribe: ${err}`);
         }
-        // });
-      } catch (err) {
-        console.error(`Something went wrong when attempting to unsubscribe: ${err}`);
-      }
+      });
     })();
   });
 

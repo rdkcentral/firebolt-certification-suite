@@ -1,3 +1,26 @@
+# [1.22.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.21.0...v1.22.0) (2026-03-24)
+
+
+### Features
+
+* App launch intent fix ([#514](https://github.com/rdkcentral/firebolt-certification-suite/issues/514)) ([56c2558](https://github.com/rdkcentral/firebolt-certification-suite/commit/56c2558411a4578a5636e5e8af9b1ab9756dc978))
+* Metrics Feature ([#511](https://github.com/rdkcentral/firebolt-certification-suite/issues/511)) ([7f3f1b0](https://github.com/rdkcentral/firebolt-certification-suite/commit/7f3f1b06585c1c9d06ef6d09379d30ffc70bfd2b))
+* Store log files after each feature file execution ([#515](https://github.com/rdkcentral/firebolt-certification-suite/issues/515)) ([40744af](https://github.com/rdkcentral/firebolt-certification-suite/commit/40744af20db85b528360d4bc526b83c530ab0dc2))
+
+# [1.22.0-dev.3](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.22.0-dev.2...v1.22.0-dev.3) (2026-03-23)
+
+
+### Features
+
+* App launch intent fix ([#514](https://github.com/rdkcentral/firebolt-certification-suite/issues/514)) ([56c2558](https://github.com/rdkcentral/firebolt-certification-suite/commit/56c2558411a4578a5636e5e8af9b1ab9756dc978))
+
+# [1.22.0-dev.2](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.22.0-dev.1...v1.22.0-dev.2) (2026-03-23)
+
+
+### Features
+
+* Store log files after each feature file execution ([#515](https://github.com/rdkcentral/firebolt-certification-suite/issues/515)) ([40744af](https://github.com/rdkcentral/firebolt-certification-suite/commit/40744af20db85b528360d4bc526b83c530ab0dc2))
+
 # [1.22.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.21.0...v1.22.0-dev.1) (2026-03-17)
 
 
