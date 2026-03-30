@@ -1097,6 +1097,18 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
         Cypress.env(CONSTANTS.RUNTIME).intentTemplate = intentTemplate;
         Cypress.env(CONSTANTS.RUNTIME).programType = intent;
 
+        const applyPlaybackActionOverride = () => {
+          if (
+            Cypress.env(CONSTANTS.RUNTIME)?.intent &&
+            Cypress.env(CONSTANTS.RUNTIME)?.intent.hasOwnProperty('isPlaybackSupported') &&
+            Cypress.env(CONSTANTS.RUNTIME).intent.isPlaybackSupported === false &&
+            messageIntent &&
+            messageIntent.intent
+          ) {
+            messageIntent.intent.action = 'entity';
+          }
+        };
+
         const giveDynamicAssetsPrecedence = getEnvVariable('giveDynamicAssetsPrecedence', false);
 
         if (giveDynamicAssetsPrecedence || !Cypress.env(CONSTANTS.RUNTIME)?.intent) {
@@ -1113,10 +1125,12 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
             } else {
               messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
             }
+            applyPlaybackActionOverride();
           });
         } else {
           // Attempt to resolve the intentTemplate and create messageIntent
           messageIntent = UTILS.buildFallbackIntent(appId, intent, intentTemplate);
+          applyPlaybackActionOverride();
         }
       } else {
         const data = {
