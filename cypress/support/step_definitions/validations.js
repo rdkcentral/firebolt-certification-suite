@@ -353,6 +353,7 @@ Given(
  * 3rd party 'test' app is 'playing entity'
  */
 Given(/3rd party '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
+  cy.callConfigModule('checkAndSelectProfile');
   UTILS.captureScreenshot(true, CONSTANTS.PLAYBACK);
   const objectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   let validationObject;
