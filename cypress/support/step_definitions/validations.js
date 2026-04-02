@@ -361,6 +361,7 @@ Given(/3rd party '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
     validationObject = UTILS.resolveRecursiveValues(fireboltData);
     cy.methodOrEventResponseValidation(type, validationObject).then(() => {
       fireLog.info(`${validationObjectKey} was successful`, 'report');
+      fireLog.assertAll();
     });
   });
 });
