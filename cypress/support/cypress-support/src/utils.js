@@ -1078,7 +1078,10 @@ function captureScreenshot(processScreenshot = false, screenshotType) {
   // Only take a screenshot if the enableScreenshots environment variable is set to true
   if (getEnvVariable('enableScreenshots')) {
     const method = CONSTANTS.REQUEST_OVERRIDE_CALLS.SCREENSHOT;
-    const param = { processScreenshot: processScreenshot, screenshotType: screenshotType };
+    const param = { processScreenshot: processScreenshot };
+    if (screenshotType !== undefined) {
+      param.screenshotType = screenshotType;
+    }
     const appId = Cypress.env(CONSTANTS.CURRENT_APP_ID);
 
     const screenshotRequest = {

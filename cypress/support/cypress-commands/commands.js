@@ -1105,7 +1105,7 @@ Cypress.Commands.add('launchApp', (appType, appCallSign, deviceIdentifier, inten
             messageIntent &&
             messageIntent.intent
           ) {
-            messageIntent.intent.action = 'entity';
+            messageIntent.intent.action = CONSTANTS.ENTITY;
           }
         };
 
