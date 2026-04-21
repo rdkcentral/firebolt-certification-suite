@@ -514,10 +514,17 @@ Given(
         if (params.keyPressSequence && params.keyPressSequence.length > 0) {
           cy.sendKeyPress(params.keyPressSequence);
         } else {
-          fireLog.info(
-            `No additional keypress required to start playback for app ${appId}`,
-            'report'
-          );
+          const isPlaybackSupported = Cypress.env(CONSTANTS.RUNTIME)?.intent?.isPlaybackSupported;
+          if (isPlaybackSupported === false) {
+            cy.sendKeyPress('enter');
+            const playbackWaitMs = Cypress.env('playback_start_wait_ms') || 10000;
+            cy.wait(playbackWaitMs);
+          } else {
+            fireLog.info(
+              `No additional keypress required to start playback for app ${appId}`,
+              'report'
+            );
+          }
         }
       } else {
         cy.exitAppSession(actionType, params).then((response) => {
