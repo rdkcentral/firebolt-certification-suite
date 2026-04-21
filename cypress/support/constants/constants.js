@@ -420,6 +420,7 @@ module.exports = {
   SDK_VERSION: 'sdkVersion',
   SDK_REPORT_VERSION: 'App SDK Version',
   SEARCH: 'search',
+  ENTITY: 'entity',
   SET: 'set',
   SET_APP_STATE: 'Application state set to ',
   SET_CONTENT: 'setContent',

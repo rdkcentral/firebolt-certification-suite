@@ -353,7 +353,8 @@ Given(
  * 3rd party 'test' app is 'playing entity'
  */
 Given(/3rd party '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
-  UTILS.captureScreenshot(false);
+  cy.callConfigModule('checkAndSelectProfile');
+  UTILS.captureScreenshot(true, CONSTANTS.PLAYBACK);
   const objectKey = validationObjectKey.replaceAll(' ', '_').toUpperCase();
   let validationObject;
   cy.getFireboltData(objectKey).then((fireboltData) => {
@@ -361,6 +362,7 @@ Given(/3rd party '(.+)' app is '(.+)'$/, async (app, validationObjectKey) => {
     validationObject = UTILS.resolveRecursiveValues(fireboltData);
     cy.methodOrEventResponseValidation(type, validationObject).then(() => {
       fireLog.info(`${validationObjectKey} was successful`, 'report');
+      fireLog.assertAll();
     });
   });
 });
