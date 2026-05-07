@@ -1,6 +1,8 @@
 name: Release Workflow
 
+
 on:
+  workflow_dispatch:
   workflow_call:
     inputs:
       branch:
@@ -9,7 +11,7 @@ on:
     secrets:
       SEMANTIC_RELEASE_BOT_PAT:
         required: true
-
+     
 jobs:
   release:
     name: Release
