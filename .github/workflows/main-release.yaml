@@ -34,8 +34,13 @@ jobs:
       - name: Fetch changes in main
         uses: ./.github/actions/fetch-latest-main
 
+      - name: Fetch all branches
+        run: git fetch origin
+
+      - name: Checkout dev branch
+        run: git checkout -b dev origin/dev
+
       - name: Merge main into dev
         run: |
-          git checkout dev
-          git merge main --no-ff
+          git merge origin/main --no-ff
           git push origin dev
