@@ -1,3 +1,10 @@
+# [1.23.0-dev.1](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.22.0...v1.23.0-dev.1) (2026-04-21)
+
+
+### Features
+
+* Playback Validation using screenshot ([#519](https://github.com/rdkcentral/firebolt-certification-suite/issues/519)) ([529f428](https://github.com/rdkcentral/firebolt-certification-suite/commit/529f42869529a7559c963578687d0a3ce348be32))
+
 # [1.22.0](https://github.com/rdkcentral/firebolt-certification-suite/compare/v1.21.0...v1.22.0) (2026-03-24)
 
 
