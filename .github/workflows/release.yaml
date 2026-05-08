@@ -1,4 +1,4 @@
-name: Release Workflow
+name: Release Workflows
 
 on:
   workflow_call:
@@ -37,6 +37,7 @@ jobs:
       - name: Install dependencies
         shell: bash
         run: yarn install
+
 
       - name: Release to GitHub
         shell: bash
