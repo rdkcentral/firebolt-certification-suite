@@ -38,8 +38,6 @@ jobs:
         shell: bash
         run: yarn install
 
-      - name: Create package artifact
-        run: npm pack
 
       - name: Release to GitHub
         shell: bash
