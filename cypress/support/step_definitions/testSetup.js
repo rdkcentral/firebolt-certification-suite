@@ -65,6 +65,51 @@ Given(
         }
       );
     }
+    // Get scenario tags from the current test context
+    const scenarioTags = window.testState?.pickle?.tags?.map((tag) => tag.name) || [];
+
+    // Check if scenario has @freeapps or @subscribedapps tags
+    const scenarioHasFreeApps = scenarioTags.some((tag) => tag === '@freeapps');
+    const scenarioHasSubscribedApps = scenarioTags.some((tag) => tag === '@subscribedapps');
+
+    // Only validate if scenario has app-specific tags
+    if (scenarioHasFreeApps || scenarioHasSubscribedApps) {
+      const tags = Cypress.env('TAGS');
+
+      if (!tags) {
+        const errorMessage =
+          'Please pass either @freeapps or @subscribedapps tag in the CLI as these testcases support tag based execution';
+        fireLog.fail(errorMessage);
+      }
+
+      const parsedTags = tags;
+      const tagArray =
+        typeof parsedTags === 'string'
+          ? parsedTags
+              .split(/\s+(and|or)\s+/)
+              .filter((tag) => tag !== 'and' && tag !== 'or')
+              .map((tag) => tag.trim())
+          : parsedTags;
+
+      if (!Array.isArray(tagArray) || tagArray.length === 0) {
+        const errorMessage =
+          'Please pass either @freeapps or @subscribedapps tag in the CLI as these testcases support tag based execution';
+        fireLog.fail(errorMessage);
+      }
+
+      // Check if CLI tags have either @freeapps or @subscribedapps
+      const cliHasFreeApps = tagArray.some((tag) => tag === '@freeapps');
+      const cliHasSubscribedApps = tagArray.some((tag) => tag === '@subscribedapps');
+
+      // If CLI has either app tag, validation passes
+      if (cliHasFreeApps || cliHasSubscribedApps) {
+        fireLog.info('Tag validation passed', 'report');
+      } else {
+        const errorMessage =
+          'Please pass either @freeapps or @subscribedapps tag in the CLI as these testcases support tag based execution';
+        fireLog.fail(errorMessage);
+      }
+    }
     Cypress.env(CONSTANTS.PREVIOUS_TEST_TYPE, Cypress.env(CONSTANTS.TEST_TYPE));
     Cypress.env(CONSTANTS.TEST_TYPE, test);
     const externalModuleTestTypes = Cypress.env(CONSTANTS.EXTERNAL_MODULE_TESTTYPES);
