@@ -144,18 +144,72 @@ Cypress.Commands.add(
 Cypress.Commands.add(
   'validateSchema',
   (response, methodOrEvent, params, schemaType, isValidation) => {
-    cy.getSchema(methodOrEvent, params, schemaType).then((schemaMap) => {
+    const getSchema = UTILS.getEnvVariable(CONSTANTS.IS_BIDIRECTIONAL_SDK)
+      ? cy.getSchemaFromOpenRpc(methodOrEvent, schemaType)
+      : cy.getSchema(methodOrEvent, params, schemaType);
+
+    return getSchema.then((schemaMap) => {
       if (schemaMap) {
         return validator.validate(response, schemaMap);
-      } else {
-        if (isValidation) {
-          // Normal calls need to go through and response needs to get stored in global list even if they don't adhere to the schema. Schema failure should only be thrown during validation step
-          fireLog.assert(false, 'Failed to fetch schema, validateSchema');
-        }
+      } else if (isValidation) {
+        // Normal calls need to go through and response needs to get stored in global list even if they don't adhere to the schema. Schema failure should only be thrown during validation step
+        fireLog.assert(false, 'Failed to fetch schema, validateSchema');
       }
+      // If schema is not found and it's not a validation step, we can return a resolved promise so it does not fail.
+      return Promise.resolve();
     });
   }
 );
+
+/**
+ * @module schemaValidation
+ * @function getSchemaFromOpenRpc
+ * @description get the schema from OpenRPC based on method name and type.
+ * @param {string} methodName - The name of the method to search in OpenRPC.
+ * @param {string} type - The type of schema to return, either "result" or "listen".
+ * getSchemaFromOpenRpc("accessibility.closedCaptionsSettings")
+ */
+Cypress.Commands.add('getSchemaFromOpenRpc', (methodName, type) => {
+  const schemaList = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC, true);
+  for (let i = 0; i < schemaList.length; i++) {
+    const openrpcData = schemaList[i];
+    if (!openrpcData || !openrpcData.methods) continue;
+    const method = openrpcData.methods.find(
+      (m) => m.name.toLowerCase() === methodName.toLowerCase()
+    );
+    if (!method) continue;
+
+    // Check if method is an event (has a tag with name 'event')
+    const isEvent =
+      Array.isArray(method.tags) && method.tags.some((tag) => tag.name.toLowerCase() === 'event');
+
+    if (isEvent) {
+      if (type === CONSTANTS.RESULT) {
+        // For events, find x-subscriber-for and return referenced method's result.schema
+        const eventTag = method.tags.find(
+          (tag) => tag.name.toLowerCase() === 'event' && tag['x-subscriber-for']
+        );
+        if (eventTag) {
+          const subscribeForName = eventTag['x-subscriber-for'];
+          const referencedMethod = openrpcData.methods.find(
+            (m) => m.name.toLowerCase() === subscribeForName.toLowerCase()
+          );
+          if (referencedMethod && referencedMethod.result && referencedMethod.result.schema) {
+            return referencedMethod.result.schema;
+          }
+        }
+        fireLog.info('No "x-subscriber-for" found for event:', methodName);
+        return null;
+      } else {
+        return method.result && method.result.schema ? method.result.schema : null;
+      }
+    }
+
+    // For regular methods, always return their result.schema
+    return method.result && method.result.schema ? method.result.schema : null;
+  }
+  return null;
+});
 
 /**
  * @module schemaValidation

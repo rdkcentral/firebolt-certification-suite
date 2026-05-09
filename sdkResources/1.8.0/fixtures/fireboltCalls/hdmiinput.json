@@ -1,0 +1,61 @@
+{
+    "GET_HDMIINPUT_PORT_WITH_PORTID_HDMI2":{
+        "method": "manage_hdmiinput.port",
+        "params": "HDMIINPUT_PORT_HDMI2"
+    },
+    "EXPECTED_HDMIINPUT_PORT":{
+        "method": "hdmiinput.port",
+        "validationJsonPath": "result",
+        "expected": "HDMIINPUT_PORT"
+    },
+    "1.4_FOR_EDIDVERSION_PORT":{
+        "method": "hdmiinput.port",
+        "validationJsonPath": "result.edidVersion",
+        "expected": "HDMIINPUT_EDIDVERSION_1_4"
+    },
+    "2.0_FOR_EDIDVERSION_PORT":{
+        "method": "hdmiinput.port",
+        "validationJsonPath": "result.edidVersion",
+        "expected": "HDMIINPUT_EDIDVERSION_2_0"
+    },
+    "1.4_FOR_EDIDVERSION_PORTS":{
+        "method": "hdmiinput.ports",
+        "validationJsonPath": "result[0].edidVersion",
+        "expected": "HDMIINPUT_EDIDVERSION_1_4"
+    },
+    "2.0_FOR_EDIDVERSION_PORTS":{
+        "method": "hdmiinput.ports",
+        "validationJsonPath": "result[0].edidVersion",
+        "expected": "HDMIINPUT_EDIDVERSION_2_0"
+    },
+    "1.4_FOR_EDIDVERSION_HDMI1_PORT":{
+        "method": "hdmiinput.edidVersion",
+        "validationJsonPath": "result",
+        "expected": "HDMIINPUT_EDIDVERSION_1_4"
+    },
+    "2.0_FOR_EDIDVERSION_HDMI1_PORT":{
+        "method": "hdmiinput.edidVersion",
+        "validationJsonPath": "result",
+        "expected": "HDMIINPUT_EDIDVERSION_2_0"
+    },
+    "1.4_FOR_ONEDIDVERSIONCHANGED":{
+        "event": "hdmiinput.onEdidVersionChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_EDIDVERSION_1_4"
+    },
+    "2.0_FOR_ONEDIDVERSIONCHANGED":{
+        "event": "hdmiinput.onEdidVersionChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_EDIDVERSION_2_0"
+    },
+    "TRUE_FOR_HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_EVENT":{
+        "event": "manage_hdmiinput.onAutoLowLatencyModeSignalChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_TRUE"
+    },
+    "FALSE_FOR_HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_EVENT":{
+        "event": "manage_hdmiinput.onAutoLowLatencyModeSignalChanged",
+        "validationJsonPath": "eventResponse",
+        "expected": "HDMIINPUT_ONAUTOLOWLATENCYMODESIGNALCHANGED_FALSE"
+    }
+}

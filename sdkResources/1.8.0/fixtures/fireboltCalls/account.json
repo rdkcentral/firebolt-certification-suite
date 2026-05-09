@@ -1,0 +1,26 @@
+{
+    "FETCH_ACCOUNT_ID": {
+        "method": "account.id"
+    },
+    "FETCH_ACCOUNT_UID": {
+        "method": "account.uid"
+    },
+    "GET_ACCOUNT_ID": {
+        "method": "account.id",
+        "expected": "error"
+    },
+    "INVALID_REQUEST_ERROR_FOR_ACCOUNT_UID": {
+        "method": "account.uid",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "FETCH_ACCOUNT_ID_WHEN_ACCOUNT_IS_NOT_PROVISIONED": {
+        "method": "account.id",
+        "expected": "error"
+    },
+    "FETCH_ACCOUNT_UID_WHEN_ACCOUNT_IS_NOT_PROVISIONED": {
+        "method": "account.uid",
+        "expected": "error"
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "KEYBOARD_EMAIL": {
+        "method": "keyboard.email",
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "mode": "regex",
+                        "type": "EMAIL",
+                        "description": "Validation of the Keyboard email Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "KEYBOARD_PASSWORD": {
+        "method": "keyboard.password",
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "mode": "regex",
+                        "type": "PASSWORD",
+                        "description": "Validation of the Keyboard password Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "KEYBOARD_STANDARD": {
+        "method": "keyboard.standard",
+        "data": [
+            {
+                "type": "regEx",
+                "validations": [
+                    {
+                        "mode": "regex",
+                        "type": "EMAIL",
+                        "description": "Validation of the Keyboard Standard Format"
+                    }
+                ]
+            }
+        ]
+    }
+}

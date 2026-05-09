@@ -109,6 +109,8 @@ export default function (module) {
     const flattedOpenRpc = UTILS.getEnvVariable(CONSTANTS.DEREFERENCE_OPENRPC);
     const unflattedOpenRpc = flatted.parse(flattedOpenRpc);
     Cypress.env(CONSTANTS.DEREFERENCE_OPENRPC, unflattedOpenRpc);
+
+    cy.callConfigModule('setupFireboltConnectionBasedOnVersion');
   });
 
   // beforeEach
@@ -204,6 +206,12 @@ export default function (module) {
         }
       );
     });
+  });
+
+  afterEach(() => {
+    cy.callConfigModule('clearEventListeners');
+    // Clean the event global list after execution of each test scenario.
+    Cypress.env(CONSTANTS.GLOBAL_EVENT_OBJECT_LIST, []);
   });
 
   // after All

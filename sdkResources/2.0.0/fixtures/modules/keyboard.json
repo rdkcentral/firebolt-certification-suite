@@ -1,0 +1,90 @@
+{
+  "EMAIL_SIGNIN_PARAMS": {
+    "type": "signIn",
+    "message": "Enter your email to sign into this app"
+  },
+  "EMAIL_PARAMS_WITH_SIGNUP": {
+    "type": "signUp",
+    "message": "Enter your email to sign into this app"
+  },
+  "EMAIL_PARAMS_WITH_TYPE_ALONE": {
+    "type": "signIn"
+  },
+  "PASSWORD_PARAMS": {
+    "message": "Enter your password"
+  },
+  "STANDARD_PARAMS": {
+    "message": "Enter the name you'd like to associate with this device"
+  },
+  "INVALIDSTRING_EMAILUSAGE_AND_MESSAGE": {
+    "type": "testing",
+    "message": "Enter email to sing into app"
+  },
+  "INTEGER_EMAILUSAGE_AND_MESSAGE": {
+    "type": 123,
+    "message": 123
+  },
+  "PASSWORD_INTEGER_MESSAGE": {
+    "message": 123
+  },
+  "STANDARD_INTEGER_MESSAGE": {
+    "message": 456
+  },
+  "EMAIL": {
+    "result": "john@doe.com"
+  },
+  "PASSWORD": {
+    "result": "Abc##123"
+  },
+  "EMAILFOCUS": {
+    "CYPRESSENV-correlationId": "123"
+  },
+  "STANDARDFOCUS": {
+    "CYPRESSENV-correlationId": "123"
+  },
+  "PASSWORDFOCUS": {
+    "CYPRESSENV-correlationId": "123"
+  },
+  "EMAILRESPONSE": {
+    "CYPRESSENV-correlationId": "123",
+    "result": {
+      "text": "email@address.com",
+      "canceled": false
+    }
+  },
+  "STANDARDRESPONSE": {
+    "CYPRESSENV-correlationId": "123",
+    "result": {
+      "text": "email@address.com",
+      "canceled": false
+    }
+  },
+  "PASSWORDRESPONSE": {
+    "CYPRESSENV-correlationId": "123",
+    "result": {
+      "text": "Abc##123",
+      "canceled": false
+    }
+  },
+  "EMAILERROR": {
+    "CYPRESSENV-correlationId": "123",
+    "error": {
+      "code": 1,
+      "message": "Error"
+    }
+  },
+  "STANDARDERROR": {
+    "CYPRESSENV-correlationId": "123",
+    "error": {
+      "code": 1,
+      "message": "Error"
+    }
+  },
+  "PASSWORDERROR": {
+      "CYPRESSENV-correlationId": "123",
+      "error": {
+        "code": 1,
+        "message": "Error"
+      }
+    }
+}

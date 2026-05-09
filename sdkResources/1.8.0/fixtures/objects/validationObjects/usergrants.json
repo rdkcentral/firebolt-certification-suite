@@ -1,0 +1,236 @@
+{
+    "USERGRANTS_GRANT": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "NULL",
+                        "description": "Validation of the usergrants.grant"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_DENY": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "NULL",
+                        "description": "Validation of the usergrants.deny"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_CLEAR": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "NULL",
+                        "description": "Validation of the usergrants.clear"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_DEVICE_EMPTY_LIST": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "EMPTYARRAY",
+                        "description": "Validation of the usergrants.device"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_APP_EMPTY_LIST": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "EMPTYARRAY",
+                        "description": "Validation of the usergrants.app"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_EMPTY_ARRAY": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "EMPTYARRAY",
+                        "description": "Validation of the usergrants.capability"
+                    }
+                ]
+            }
+        ]
+    },
+    "USERGRANTS_REQUEST_SECURESTORAGE_SET_GRANTED_ROLE_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "type": "request",
+                        "expected": []
+                    }
+                ]
+            },
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].use.granted",
+                                "expected": null
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": null,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": true,
+                                "context": "CAPABILITIES_GRANTED_USE"
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_MANAGE",
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+        ]
+    },
+    "USERGRANTS_REQUEST_INFO_GRANTED_DEVICE_INFO": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "type": "request",
+                        "expected": []
+                    }
+                ]
+            },
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].use.granted",
+                                "expected": null
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": null,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": true,
+                                "context": "CAPABILITIES_GRANTED_USE"
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": true,
+                                "context": "CAPABILITIES_GRANTED_MANAGE",
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+        ]
+    },
+    "USERGRANTS_REQUEST_INFO_GRANTED_DEFERRED_USE": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "method": "usergrants.request",
+                        "type": "request",
+                        "expected": []
+                    }
+                ]
+            },
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "request",
+                        "specialValidationObject": [
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].use.granted",
+                                "expected": null
+                            },
+                            {
+                                "method": "capabilities.info",
+                                "validationPath": "result[0].manage.granted",
+                                "expected": null,
+                                "skipChecks": true
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_USE"
+                            },
+                            {
+                                "method": "capabilities.granted",
+                                "validationPath": "result",
+                                "expected": null,
+                                "context": "CAPABILITIES_GRANTED_MANAGE",
+                                "skipChecks": true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+
+        ]
+    }
+}

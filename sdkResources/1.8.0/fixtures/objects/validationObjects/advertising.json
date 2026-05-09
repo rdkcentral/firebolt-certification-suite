@@ -1,0 +1,209 @@
+{
+    "ADVERTISING_POLICY_TRUE": {
+        "method": "advertising.policy",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "TRUE",
+                        "description": "Validation of the Advertising Policy for Param equal to True Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_POLICY_FALSE": {
+        "method": "advertising.policy",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "FALSE",
+                        "description": "Validation of the Advertising Policy for Param equal to False Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_POLICY_NONE": {
+        "method": "advertising.policy",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "NONE",
+                        "description": "Validation of the Advertising Policy for Param equal to None Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_POLICY_ADSUNWATCHED": {
+        "method": "advertising.policy",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ADSUNWATCHED",
+                        "description": "Validation of the Advertising Policy for Ads Unwatched Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_POLICY_ADSALL": {
+        "method": "advertising.policy",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ADSALL",
+                        "description": "Validation of the Advertising Policy for All Ads Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_POLICY_ALL": {
+        "method": "advertising.policy",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ALL",
+                        "description": "Validation of the Advertising Policy for Param All Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_DEVICEATTRIBUTES": {
+        "method": "advertising.deviceAttributes",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ADVERTISING_DEVICEATTRIBUTES",
+                        "description": "Validation of the Advertising DeviceAttributes Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_APPBUNDLEID": {
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ADVERTISING_APPBUNDLEID",
+                        "description": "Validation of the Advertising appBundleId Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_CONFIG_ZERO": {
+        "method": "advertising.config",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "INTEGER0",
+                        "description": "Validation of the Advertising Config when Coppa equals O Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_CONFIG_ONE": {
+        "method": "advertising.config",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "INTEGER1",
+                        "description": "Validation of the Advertising Config when Coppa equals 1 Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_SKIPRESTRICTION": {
+        "method": "advertising.setSkipRestriction",
+        "data": [
+            {
+                "type": "fixture",
+                "validations": [
+                    {
+                        "mode": "staticContentValidation",
+                        "type": "ALL",
+                        "description": "Validation of the Advertising skipRestriction Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_CONFIGURATION": {
+        "data": [
+            {
+                "type": "decode",
+                "specialCase": "base64",
+                "validations": [
+                    {
+                        "format": "TOKEN_REGEXP",
+                        "field": "lmt",
+                        "mode": "regex",
+                        "type": "NUMERIC_REGEXP",
+                        "description": "Validation of the advertising.config privacyData Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_ADVERTISINGID_ADOFF": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "limitAdTrackingOFF",
+                        "description": "Validation of the Advertising AdvertisingId When LimitAdTracking OFF Format"
+                    }
+                ]
+            }
+        ]
+    },
+    "ADVERTISING_ADVERTISINGID_ADON": {
+        "data": [
+            {
+                "type": "miscellaneous",
+                "validations": [
+                    {
+                        "type": "limitAdTrackingON",
+                        "description": "Validation of the Advertising AdvertisingId When LimitAdTracking ON Format"
+                    }
+                ]
+            }
+        ]
+    }
+}

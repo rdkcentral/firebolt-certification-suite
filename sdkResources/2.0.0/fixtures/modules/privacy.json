@@ -1,0 +1,17 @@
+{
+    "SETTINGS": {
+        "allowACRCollection": true,
+        "allowResumePoints": true,
+        "allowAppContentAdTargeting": true,
+        "allowBusinessAnalytics":true,
+        "allowCameraAnalytics": true,
+        "allowPersonalization": true,
+        "allowPrimaryBrowseAdTargeting": true,
+        "allowPrimaryContentAdTargeting": true,
+        "allowProductAnalytics": true,
+        "allowRemoteDiagnostics": true,
+        "allowUnentitledPersonalization": true,
+        "allowUnentitledResumePoints": true,
+        "allowWatchHistory": true
+    }
+}

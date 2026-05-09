@@ -1,0 +1,8 @@
+{
+    "xrn:firebolt:capability:privacy:advertising": [
+        "xrn:firebolt:capability:data:app-usage"
+    ],
+    "xrn:firebolt:capability:discovery:watch-next": [
+        "xrn:firebolt:capability:data:app-usage"
+    ]
+}

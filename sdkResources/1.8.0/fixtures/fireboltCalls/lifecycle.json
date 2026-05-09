@@ -1,0 +1,120 @@
+{
+    "FETCH_LIFECYCLE_STATE": {
+        "method": "lifecycle.state"
+    },
+    "EXPECTED_LIFECYCLE_STATE_AS_FOREGROUND": {
+        "method": "lifecycle.state",
+        "validationJsonPath": "result",
+        "content": "FOREGROUND"
+    },
+    "CUSTOM_ERROR_FOR_LIFECYCLE_READY_CAPABILITY": {
+        "method": "lifecycle.ready",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "NOTIFY_THAT_THE_APP_IS_READY": {
+        "method": "lifecycle.ready"
+    },
+    "NULL_FOR_LIFECYCLE_READY": {
+        "method": "lifecycle.ready",
+        "validationJsonPath": "result",
+        "content": "NULL"
+    },
+    "CHECK_IF_LIFECYCLE_READY_EXPECTING_ERROR": {
+        "method": "lifecycle.ready",
+        "expected": "error"
+    },
+    "CUSTOM_ERROR_FOR_LIFECYCLE_READY": {
+        "method": "lifecycle.ready",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "CLOSE_APP_WITH_EMPTY_PARAMETER": {
+        "method": "lifecycle.close",
+        "params": "EMPTYPARAM",
+        "expected": "error"
+    },
+    "CLOSE_APP_WITH_INTEGER_PARAMETER": {
+        "method": "lifecycle.close",
+        "params": "LIFECYCLE_CLOSE_INTEGER_REASON_PARAM",
+        "expected": "error"
+    },
+    "CLOSE_APP_WITH_BOOLEAN_PARAMETER": {
+        "method": "lifecycle.close",
+        "params": "LIFECYCLE_CLOSE_BOOLEAN_REASON_PARAM",
+        "expected": "error"
+    },
+    "CLOSE_APP_WITH_INVALID_PARAMETER": {
+        "method": "lifecycle.close",
+        "params": "LIFECYCLE_CLOSE_INVALID_REASON_PARAM",
+        "expected": "error"
+    },
+    "INVALID_PARAMETER_ERROR_FOR_LIFECYCLE_CLOSE": {
+        "method": "lifecycle.close",
+        "validationJsonPath": "result",
+        "content": "INVALID_PARAMS",
+        "expectingError": true
+    },
+    "CLOSE_APP_WITH_REMOTE_BUTTON": {
+        "method": "lifecycle.close",
+        "params": "LIFECYCLE_CLOSE_WITH_REMOTE_BUTTON"
+    },
+    "CLOSE_APP_WITH_USER_EXIT": {
+        "method": "lifecycle.close",
+        "params": "LIFECYCLE_CLOSE_WITH_USER_EXIT"
+    },
+    "CLOSE_APP_WITH_ERROR": {
+        "method": "lifecycle.close",
+        "params": "LIFECYCLE_CLOSE_WITH_ERROR"
+    },
+    "CLOSE_APP_WITH_DONE": {
+        "method": "lifecycle.close",
+        "params": "LIFECYCLE_CLOSE_WITH_DONE"
+    },
+    "NULL_FOR_LIFECYCLE_CLOSE": {
+        "method": "lifecycle.close",
+        "context": "noContext",
+        "validationJsonPath": "result",
+        "content": "NULL"
+    },
+    "NOTIFY_THAT_THE_APP_IS_DONE_UNLOADING": {
+        "method": "lifecycle.finished",
+        "expected": "error"
+    },
+    "ERROR_FOR_LIFECYCLE_FINISHED": {
+        "method": "lifecycle.finished",
+        "validationJsonPath": "result",
+        "content": "LIFECYCLE_FINISHED_ERROR"
+    },
+    "FETCH_LIFECYCLE_BACKGROUND_EXPECTING_ERROR": {
+        "method": "lifecycle.background",
+        "expected": "error"
+    },
+    "CALL_LIFECYCLE_TERMINATE": {
+        "method": "lifecycle.terminate"
+    },
+    "CALL_LIFECYCLE_FINISHED": {
+        "method": "lifecycle.finished"
+    },
+    "CALL_LIFECYCLE_FINISHED_AND_EXPECTS_ERROR": {
+        "method": "lifecycle.finished",
+        "expected": "error"
+    },
+    "CALL_LIFECYCLE_SUSPEND_AND_EXPECTS_ERROR": {
+        "method": "lifecycle.suspend",
+        "expected": "error"
+    },
+    "LIFECYCLE_ONSUSPENDED": {
+        "method": "lifecycle.onSuspended"
+    },
+    "SUSPEND_AN_APP_THAT_DOES_NOT_EXIST": {
+        "method": "lifecycle.suspend",
+        "expected": "error"
+    },
+    "UNSUSPEND_APP": {
+        "method": "lifecycle.unsuspend",
+        "expected": "error"
+    }
+}

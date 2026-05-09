@@ -1,0 +1,7 @@
+{
+    "SESSION": {"token": "RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ==","expiresIn": 84000},
+    "SESSION_INVALID_TOKEN": {"token": 736843276434827468,"expiresIn": 84000},
+    "SESSION_INVALID_EXPIRESIN" : {"token": "RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ==","expiresIn": "BJGHhjbdcJKSW"},
+    "EXPIRESIN_INVALID_VALUE" : {"token": "RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ==","expiresIn": 0},
+    "ACCOUNTID": "123"
+}
