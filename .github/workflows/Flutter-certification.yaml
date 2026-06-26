@@ -45,8 +45,19 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Verify configModule repo access
+        run: |
+          git ls-remote git@github.com-ghec:comcast-firebolt/xumo-remote-config-module HEAD > /dev/null
+
       - name: Install dependencies
         run: yarn install
+
+      - name: Verify configModule package install
+        run: |
+          if [ ! -f node_modules/configModule/package.json ]; then
+            echo "::error::configModule package was not installed into node_modules/configModule"
+            exit 1
+          fi
 
       - name: Refresh configModule assets
         run: yarn run setup
