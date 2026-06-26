@@ -28,6 +28,18 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Configure git auth for GHEC dependencies
+        env:
+          GHEC_GIT_TOKEN: ${{ secrets.GHEC_GIT_TOKEN }}
+        run: |
+          if [ -z "$GHEC_GIT_TOKEN" ]; then
+            echo "::error::Missing GHEC_GIT_TOKEN secret required to fetch configModule from github.com-ghec"
+            exit 1
+          fi
+
+          git config --global url."https://x-access-token:${GHEC_GIT_TOKEN}@github.com/".insteadOf "git@github.com-ghec:"
+          git config --global url."https://x-access-token:${GHEC_GIT_TOKEN}@github.com/".insteadOf "ssh://git@github.com-ghec/"
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
