@@ -39,6 +39,12 @@ jobs:
       - name: Refresh configModule assets
         run: yarn run setup
 
+      - name: Diagnose config files
+        run: |
+          pwd
+          ls -la
+          ls -la node_modules/configModule/constants || true
+
       - name: Patch Poncho runtime config
         env:
           NA_SERVER_URL: ${{ secrets.NA_SERVER_URL }}
@@ -48,9 +54,21 @@ jobs:
         run: |
           node - <<'NODE'
           const fs = require('fs');
+          const path = require('path');
 
           const configPath = 'supportConfig.json';
-          const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+          const moduleConfigPath = path.join('node_modules', 'configModule', 'constants', 'config.json');
+          let config = {};
+
+          if (fs.existsSync(configPath)) {
+            config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+            console.log('Loaded existing supportConfig.json');
+          } else if (fs.existsSync(moduleConfigPath)) {
+            config = JSON.parse(fs.readFileSync(moduleConfigPath, 'utf8'));
+            console.log('supportConfig.json missing, bootstrapped from configModule/constants/config.json');
+          } else {
+            console.log('supportConfig.json and configModule/constants/config.json missing, starting with empty config');
+          }
 
           Object.assign(config, {
             linchpinUrl: process.env.NA_SERVER_URL,
@@ -64,6 +82,7 @@ jobs:
           });
 
           fs.writeFileSync(configPath, `${JSON.stringify(config, null, 2)}\n`);
+          console.log('Wrote supportConfig.json');
           NODE
 
       - name: Run Poncho Flutter sanity
