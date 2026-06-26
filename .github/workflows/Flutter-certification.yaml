@@ -1,0 +1,131 @@
+name: Poncho Flutter Sanity Validation
+
+on:
+  workflow_dispatch:
+    inputs:
+      installIUI:
+        description: Install IUI version for Poncho runtime config
+        required: false
+        default: latest
+        type: string
+      installFLCA:
+        description: Install FLCA version for Poncho runtime config
+        required: false
+        default: latest
+        type: string
+  push:
+  schedule:
+    - cron: '0 7 * * *'
+
+jobs:
+  poncho_flutter_sanity:
+    runs-on: comcast-ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [24.x]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Refresh configModule assets
+        run: yarn run setup
+
+      - name: Patch Poncho runtime config
+        env:
+          NA_SERVER_URL: ${{ secrets.NA_SERVER_URL }}
+          NA_SAT_URL: ${{ secrets.NA_SAT_URL }}
+          INSTALL_IUI: ${{ inputs.installIUI || 'latest' }}
+          INSTALL_FLCA: ${{ inputs.installFLCA || 'latest' }}
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+
+          const configPath = 'supportConfig.json';
+          const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+
+          Object.assign(config, {
+            linchpinUrl: process.env.NA_SERVER_URL,
+            satTokenUrl: process.env.NA_SAT_URL,
+            installIUI: process.env.INSTALL_IUI,
+            installFLCA: process.env.INSTALL_FLCA,
+            sanityReportPollingTimeout: 1500000,
+            default3rdPartyAppId: 'com.entos.flutter_ui_certification',
+            secondary3rdPartyAppId: 'com.entos.flutter_ui_certification',
+            player: 'com.entos.flutter_ui_certification',
+          });
+
+          fs.writeFileSync(configPath, `${JSON.stringify(config, null, 2)}\n`);
+          NODE
+
+      - name: Run Poncho Flutter sanity
+        env:
+          SAT_CLIENT_ID: ${{ secrets.NA_SAT_CLIENT_ID }}
+          SAT_CLIENT_SECRET: ${{ secrets.NA_SAT_CLIENT_SECRET }}
+          TEST_TOKEN: ${{ secrets.TEST_TOKEN }}
+          DEVICE_MAC: ${{ secrets.XFINITY_PONCHO_MAC }}
+          DEVICE_IP: localhost
+          FIRST_PARTY_APP_ID: boltextn
+          PLATFORM_COMMUNICATION: Linchpin
+          SUITE_COMMUNICATION_MODE: Transport
+          CERTIFICATION_TYPE: flutter
+          REPORT_TYPE: mochawesome
+          TEST_SUITE: all
+          LOGGER_LEVEL: debug
+          GENERATE_LOCAL_REPORT: false
+        run: |
+          set +e
+          yarn run cy:run -- --spec "cypress/TestCases/Distributor/Flutter/Flutter.feature" --env "satClientId=${SAT_CLIENT_ID},satClientSecret=${SAT_CLIENT_SECRET},deviceMac=${DEVICE_MAC},deviceIp=${DEVICE_IP},firstPartyAppId=${FIRST_PARTY_APP_ID},platformCommunication=${PLATFORM_COMMUNICATION},suiteCommunicationMode=${SUITE_COMMUNICATION_MODE},certification=${CERTIFICATION_TYPE},reportType=${REPORT_TYPE},testSuite=${TEST_SUITE},loggerLevel=${LOGGER_LEVEL},testToken=${TEST_TOKEN},generateLocalReport=${GENERATE_LOCAL_REPORT}" > ponchoRunOutput.txt 2>&1
+          echo "PONCHO_EXIT_CODE=$?" >> "$GITHUB_ENV"
+
+      - name: Remove ANSI escape codes from Poncho output
+        run: sed -i "s/\x1B\[[0-9;]*[JKmsu]//g" ponchoRunOutput.txt
+
+      - name: Determine Poncho run result
+        run: |
+          cat ponchoRunOutput.txt
+
+          if grep -q "Build failed" ponchoRunOutput.txt; then
+            grep -A 20 "Build failed" ponchoRunOutput.txt > ponchoFailureSummary.txt || true
+            cat ponchoFailureSummary.txt
+            exit 1
+          fi
+
+          if [ "${PONCHO_EXIT_CODE}" != "0" ]; then
+            if grep -q "1 failing" ponchoRunOutput.txt; then
+              sed -n '/1 failing/,/\[mochawesome\]/ {
+                /1 failing/b
+                /\[mochawesome\]/b
+                p
+              }' ponchoRunOutput.txt > ponchoFailureSummary.txt
+            else
+              tail -n 100 ponchoRunOutput.txt > ponchoFailureSummary.txt
+            fi
+
+            cat ponchoFailureSummary.txt
+            exit 1
+          fi
+
+          echo "Poncho Flutter sanity run succeeded."
+
+      - name: Upload Poncho artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: poncho-flutter-sanity-${{ github.run_id }}
+          if-no-files-found: warn
+          path: |
+            ponchoRunOutput.txt
+            ponchoFailureSummary.txt
+            supportConfig.json
+            tempReportEnv.json
+            reports
+            cypress/reports
