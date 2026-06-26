@@ -19,7 +19,7 @@ on:
 
 jobs:
   poncho_flutter_sanity:
-    runs-on: comcast-ubuntu-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [24.x]
