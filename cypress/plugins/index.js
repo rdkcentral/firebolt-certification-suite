@@ -26,6 +26,7 @@ const GlobalsPolyfills =
 const Formatter = require('cucumber-json-report-formatter').Formatter;
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 const shell = require('shell-exec');
 const jsonMerger = require('json-merger');
 const { merge } = require('mochawesome-merge');
@@ -87,6 +88,48 @@ module.exports = async (on, config) => {
     log(message) {
       console.log(message);
       return null;
+    },
+    async launchAppViaThunder({ deviceIp, thunderPort, appId }) {
+      const url = `http://${deviceIp}:${thunderPort}/jsonrpc`;
+      const requestOptions = {
+        headers: { 'content-type': 'text/plain' },
+        timeout: 15000,
+      };
+      const loadedAppsResponse = await axios.post(
+        url,
+        {
+          jsonrpc: '2.0',
+          id: '123456',
+          method: 'org.rdk.AppManager.getLoadedApps',
+        },
+        requestOptions
+      );
+      if (loadedAppsResponse.data?.error) {
+        throw new Error(
+          `AppManager getLoadedApps failed: ${JSON.stringify(loadedAppsResponse.data.error)}`
+        );
+      }
+      const isLoaded = loadedAppsResponse.data?.result?.some(
+        (loadedApp) => loadedApp.appId === appId
+      );
+      if (isLoaded) {
+        return { result: null, alreadyLaunched: true };
+      }
+
+      const response = await axios.post(
+        url,
+        {
+          jsonrpc: '2.0',
+          id: '12345',
+          method: 'org.rdk.AppManager.launchApp',
+          params: { 'appId': appId,'intent': '', 'launchArgs': '' },
+        },
+        requestOptions
+      );
+      if (response.data?.error) {
+        throw new Error(`AppManager launch failed: ${JSON.stringify(response.data.error)}`);
+      }
+      return response.data;
     },
     /* write json or string to file
     @param fileName - complete file name with path
