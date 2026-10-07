@@ -89,26 +89,10 @@ function buildWSUrl() {
  * @example launch()
  **/
 
-async function launch() {
-  // Check if the WebSocket client already exists in Cypress.env
-  const existingWebSocketClient = UTILS.getEnvVariable('webSocketClient', false);
-
-  if (!existingWebSocketClient) {
-    // WebSocket client doesn't exist
-    await initWSClient().then((webSocketClient) => {
-      // Use the websocketClient to subscribe to topic or send a message
-      // ex: cy.sendFireboltCommand("Health.health", {}, webSocketClient)
-      // If websocketClient is a valid websocket object, store it in Cypress.env("webSocketClient") to be passed as a param
-      if (webSocketClient.hasOwnProperty('ws')) {
-        Cypress.env('webSocketClient', webSocketClient);
-      }
-      // else if websocketClient is an invalid/error object, throw an error and fail
-      else {
-        Cypress.env('webSocketClient', null);
-        throw new Error(webSocketClient);
-      }
-    });
-  }
+function launch() {
+  const appId = UTILS.getEnvVariable(CONSTANTS.THIRD_PARTY_APP_ID);
+  const deviceIp = UTILS.getEnvVariable('deviceIp');
+  const thunderPort = UTILS.getEnvVariable('thunderPort', false) || 9998;
 
   // If the mock environment variable is set to true, launch the web application using the specified URL
   if (UTILS.getEnvVariable('mock', false)) {
@@ -128,7 +112,17 @@ async function launch() {
     cy.wait(4000);
     cy.title().should('include', 'Firebolt Certification');
     // Do not return anything or return null within the function.
+    return null;
   }
+
+  return cy
+    .task('launchAppViaThunder', { deviceIp, thunderPort, appId })
+    .then((launchResponse) => {
+      fireLog.info(
+        'org.rdk.AppManager.launchApp response: ' + JSON.stringify(launchResponse)
+      );
+      return null;
+    });
 }
 
 exports.launch = launch;
