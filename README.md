@@ -59,13 +59,13 @@ The `default3rdPartyAppId` value must exactly match the FCA application ID insta
 Install FCA application in the device with an entry point in this format:
 
 ```text
-http://<FCA_HOST>:<FCA_PORT>/?pubSubUrl=<URL_ENCODED_PUBSUB_URL>&appId=<FCA_APP_ID>&&macaddress=<URL_ENCODED_DEVICE_MAC>&x=0.1
+http://<FCA_HOST>:<FCA_PORT>/?pubSubUrl=<PUBSUB_URL>&appId=<FCA_APP_ID>&&macaddress=<DEVICE_MAC>&x=0.1
 ```
 
 Example:
 
 ```text
-http://192.168.160.146:8081/?pubSubUrl=ws%3A%2F%2F192.168.160.146%3A8082&appId=com.rdkcentral.fca&&macaddress=E4%3A5F%3A01%3AF5%3A58%3AD1&x=0.1
+http://192.168.160.146:8081/?pubSubUrl=ws://192.168.160.146:8082&appId=com.rdkcentral.fca&&macaddress=E4:5F:01:F5:58:D1&x=0.1
 ```
 
 The entry-point values must correspond to the values configured in `cypress.config.js`. 
@@ -84,6 +84,12 @@ npm run cy:run -- --spec "cypress/TestCases/FireboltCertification/Accessibility.
 ```
 
 Replace `Accessibility.feature` with another feature file when running a different module.
+
+Or you can run full suite using below command
+
+```bash
+npm run cy:run -- --spec "cypress/TestCases/FireboltCertification/*.feature" --env reportType=cucumber,testSuite=module,loggerLevel=debug,TAGS="not @notSupported"
+```
 
 
 ## Execution
