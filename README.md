@@ -30,7 +30,7 @@ By default, the server listens on port `8080`. Keep this process running while e
 ### 3. Host the Firebolt Certification App
 
 Host FCA by following the instructions in the
-[firebolt-certification-app ](https://github.com/rdkcentral/firebolt-certification-app) repository.
+[firebolt-certification-app ](https://github.com/rdkcentral/firebolt-certification-app/tree/support/fca-rdk) repository.
 Ensure that the hosted FCA URL is accessible from the RDK8 device.
 
 ### 4. Configure FCS
