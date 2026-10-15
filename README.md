@@ -37,6 +37,7 @@ Ensure that the hosted FCA URL is accessible from the RDK8 device.
 
 In `cypress.config.js`, update these values in the `env` object:
 
+
 ```javascript
 const env = {
   deviceIp: '<RDK8_DEVICE_IP>',
